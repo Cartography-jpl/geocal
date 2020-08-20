@@ -6836,6 +6836,112 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RayCasterResampler_final_rad_step(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
+  GeoCal::RasterImage *arg2 = 0 ;
+  SwigValueWrapper< blitz::Array< int,6 > > arg3 ;
+  SwigValueWrapper< blitz::Array< int,2 > > arg4 ;
+  SwigValueWrapper< blitz::Array< int,2 > > arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > tempshared1 ;
+  boost::shared_ptr< GeoCal::RayCasterResampler > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::RasterImage const > tempshared2 ;
+  PythonObject numpy3 ;
+  PythonObject numpy4 ;
+  PythonObject numpy5 ;
+  PyObject *swig_obj[5] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RayCasterResampler_final_rad_step",5,5,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RayCasterResampler_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RayCasterResampler_final_rad_step" "', argument " "1"" of type '" "GeoCal::RayCasterResampler *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RayCasterResampler > * >(argp1);
+      arg1 = const_cast< GeoCal::RayCasterResampler * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::RasterImage *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__RasterImage,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RayCasterResampler_final_rad_step" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RayCasterResampler_final_rad_step" "', argument " "2"" of type '" "GeoCal::RasterImage const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2);
+        arg2 = const_cast< GeoCal::RasterImage * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::RasterImage * >(reinterpret_cast< boost::shared_ptr< const GeoCal::RasterImage > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    numpy3.obj = to_numpy<int >(swig_obj[2]);
+    if(!numpy3.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_final_rad_step', expecting type  Array<int,6>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=6) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_final_rad_step', expecting type  Array<int,6>");
+    }
+    arg3 = to_blitz_array<int, 6>(numpy3);
+  }
+  {
+    numpy4.obj = to_numpy<int >(swig_obj[3]);
+    if(!numpy4.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_final_rad_step', expecting type  Array<int,2>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_final_rad_step', expecting type  Array<int,2>");
+    }
+    arg4 = to_blitz_array<int, 2>(numpy4);
+  }
+  {
+    numpy5.obj = to_numpy<int >(swig_obj[4]);
+    if(!numpy5.obj) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_final_rad_step', expecting type  Array<int,2>");
+    }
+    if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+      SWIG_Error(SWIG_TypeError, "in method 'RayCasterResampler_final_rad_step', expecting type  Array<int,2>");
+    }
+    arg5 = to_blitz_array<int, 2>(numpy5);
+  }
+  {
+    try {
+      (arg1)->final_rad_step((GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RayCasterResampler__v_ray_caster(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RayCasterResampler *arg1 = (GeoCal::RayCasterResampler *) 0 ;
@@ -7007,7 +7113,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RayCasterResampler_ray_cast_step", _wrap_RayCasterResampler_ray_cast_step, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RayCasterResampler::ray_cast_step(blitz::Array< int, 6 > Res)\n"
+		"void RayCasterResampler::ray_cast_step(blitz::Array< int, 6 > Ray_cast_res)\n"
 		"Do ray cast step.\n"
 		"\n"
 		"We fill in Res, which should be number_line x number_sample x\n"
@@ -7026,6 +7132,23 @@ static PyMethodDef SwigMethods[] = {
 		"from python. In this case, we really do want to change. But we don't\n"
 		"want a nonconst version of Array& in SWIG because this is almost\n"
 		"always an error (just in this case it isn't). \n"
+		""},
+	 { (char *)"RayCasterResampler_final_rad_step", _wrap_RayCasterResampler_final_rad_step, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void RayCasterResampler::final_rad_step(const RasterImage &Input_img, blitz::Array< int, 6 > Ray_cast_res,\n"
+		"blitz::Array< int, 2 > Rad_res, blitz::Array< int, 2 > Scratch_count)\n"
+		"Final step, taking all the ray caster results and resampling data.\n"
+		"\n"
+		"We have the final output in Rad_res, which should be the size from the\n"
+		"map_info(). We also need a scratch variable for holding the count. We\n"
+		"don't actually generate a RasterImage, since there might be a type\n"
+		"change (e.g., int32 for Rad_res and output int16).\n"
+		"\n"
+		"Rad_res and Scratch_count should be initialized to zero, we don't do\n"
+		"that in this function.\n"
+		"\n"
+		"This is a clumsy function, but this should be looked at as a low level\n"
+		"step used by the python wrapper. \n"
 		""},
 	 { (char *)"RayCasterResampler__v_ray_caster", (PyCFunction)_wrap_RayCasterResampler__v_ray_caster, METH_O, (char *)"\n"
 		"\n"

@@ -37,7 +37,11 @@ public:
   RayCasterResampler(const boost::shared_ptr<RayCaster>& Ray_caster,
 		     const boost::shared_ptr<MapInfo>& Map_info);
   virtual ~RayCasterResampler() {}
-  void ray_cast_step(blitz::Array<int, 6> Res);
+  void ray_cast_step(blitz::Array<int, 6> Ray_cast_res);
+  void final_rad_step(const RasterImage& Input_img,
+		      blitz::Array<int, 6> Ray_cast_res,
+		      blitz::Array<int, 2> Rad_res,
+		      blitz::Array<int, 2> Scratch_count);
   const boost::shared_ptr<RayCaster>& ray_caster() const  { return ray_caster_;}
   const boost::shared_ptr<MapInfo>& map_info() const  { return mi_;}
   virtual void print(std::ostream& Os) const

@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import tempfile
 
-version = "July 10, 2020"
+version = "August 20, 2020"
 usage='''Usage:
   mars_generate_rsm [options] <pds_image> <output_base_name>
   mars_generate_rsm [options] <pds_image> <pds_image_2> <output_base_name>
@@ -125,6 +125,7 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
                        "pds_image_2" : "pdsimg2",
                        "output_base_name" : "outbase",
                        "full_igc" : "fulligc",
+                       "glas_gfm": "glas",
                        "min_height" : "minh",
                        "max_height" : "maxh",
                        "subset" : "subset",
@@ -154,7 +155,9 @@ def write_vicar_file(igc, fin_name, output_base_name, rsm=None,
     # I believe this is fixed, so we'll try the NITF version for now
     #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
     if(rsm):
-        f.set_rsm(rsm)
+        # There are a number of size constraints here. Major pain, for
+        # now skip trying to cram RSM into NITF
+        f.set_rsm(rsm, geocal.VicarFile.RSM_XML_FILE)
     if(igc_glas_gfm):
         f.set_igc_glas_gfm(igc_glas_gfm)
     f.close()
@@ -163,9 +166,16 @@ def write_vicar_file(igc, fin_name, output_base_name, rsm=None,
 lbl = geocal.pds_label(args.pds_image)
 subset = None
 if args.subset:
-    subset = eval(args.subset)
+    if(args.subset == -999):
+        subset = None
+    elif(isinstance(args.subset, tuple)):
+        subset = args.subset
+    else:        
+        subset = eval(args.subset)
+        
 if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
-    if(args.pds_image_2 is not None and args.pds_image_2 != ""):
+    if(args.pds_image_2 is not None and args.pds_image_2 != "" and
+       args.pds_image_2 is not False):
         raise RuntimeError("Only supply one image for CTX images")
     igc = geocal.igc_mro_context(args.pds_image, lbl=lbl, 
                                  kernel_file=args.kernel_file,
@@ -181,7 +191,8 @@ if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
     write_vicar_file(igc, args.pds_image, args.output_base_name, rsm=r,
                      igc_glas_gfm=igc_glas_gfm)    
 elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
-    if(args.pds_image_2 is not None and args.pds_image_2 != ""):
+    if(args.pds_image_2 is not None and args.pds_image_2 != "" and
+       args.pds_image_2 is not False):
         raise RuntimeError("Only supply one image for HRSC images")
     igc = geocal.igc_mex_hrsc(args.pds_image, lbl=lbl, 
                               kernel_file=args.kernel_file,
@@ -190,7 +201,8 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION STEREO CAMERA'):
     r = geocal.rsm_hrsc(igc, min_height=args.min_height, max_height=args.max_height)
     write_vicar_file(igc, args.pds_image, args.output_base_name, rsm=r)    
 elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
-    if(args.pds_image_2 is None or args.pds_image_2 == ""):
+    if(args.pds_image_2 is None or args.pds_image_2 == "" or
+       args.pds_image_2 is False):
         raise RuntimeError("Need to supply both channels of the HiRISE image")
     # For right now, we use ISIS for creating the input data
     f1 = os.path.abspath(args.pds_image)

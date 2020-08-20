@@ -102,8 +102,10 @@ IgcRayCaster::IgcRayCaster
   // the igc raster image).
   double line_res, samp_res;
   igc->footprint_resolution(0, 0, line_res, samp_res);
-  nsub_line = (int) ceil(line_res / Resolution);
-  nsub_sample = (int) ceil(samp_res / Resolution);
+  // We shrink the resolution a small amount. Empirically we end up
+  // with holes in the data in some cases if we use the resolution
+  nsub_line = (int) ceil(line_res / (0.7 * Resolution));
+  nsub_sample = (int) ceil(samp_res / (0.7 * Resolution));
   result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
 		      nintegration_step,(include_path_distance ? 4 : 3));
 }

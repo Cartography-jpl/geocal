@@ -1,5 +1,6 @@
 from geocal_swig import *
 from geocal.sqlite_shelf import *
+from geocal.mmap_file import *
 from test_support import *
 
 def test_ray_caster_resampler(isolated_dir):
@@ -35,8 +36,11 @@ def test_ray_caster_resampler(isolated_dir):
     rcast_data = np.empty((igc.number_line, rcast.shape(1), rcast.shape(2),
                            rcast.shape(3), rcast.shape(4), 2), dtype = np.int32)
     rsamp = RayCasterResampler(rcast, mi)
-    np.save("rcast_data_trash", rcast_data)
     rsamp.ray_cast_step(rcast_data)
-    np.save("rcast_data", rcast_data)
-    print(rcast_data)
+    res = np.zeros((mi.number_y_pixel, mi.number_x_pixel), dtype=np.int32)
+    scratch_count = np.zeros_like(res)
+    rsamp.final_rad_step(igc.image, rcast_data, res, scratch_count)
+    out = mmap_file("resample.img", mi, dtype=np.int16)
+    out[:,:] = res[:,:]
+
     

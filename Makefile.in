@@ -3144,6 +3144,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/geocal_nitf_misc.py \
 	@srcpythonlib@/geocal_test.py \
 	@srcpythonlib@/geoeye1_reflectance_test.py \
+	@srcpythonlib@/ray_caster_resampler_test.py \
 	@srcpythonlib@/hdf_orbit_test.py \
 	@srcpythonlib@/ibis_file_extension_test.py \
 	@srcpythonlib@/igc_collection_extension_test.py \
@@ -4263,6 +4264,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \
+	@srcpythonlib@/ray_caster_resampler_extension.py \
 	@srcpythonlib@/orbit_extension.py \
 	@srcpythonlib@/map_info_extension.py \
 	@srcpythonlib@/tie_point_extension.py \

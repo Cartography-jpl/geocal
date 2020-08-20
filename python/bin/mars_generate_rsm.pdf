@@ -1,12 +1,14 @@
 PROCESS       HELP=*
+
 parm pdsimg type=(string,99) count=1
 parm outbase type=(string,99) count=1
 parm pdsimg2 type=(string,99) count=1 default=""
 parm fulligc type=(string,99) count=1 default=""
+parm glas type=(string,4) count=(0:1) valid=(n,y) default=n
 parm minh type=real count=1 default=-5000.0
 parm maxh type=real count=1 default=-1500.0
 parm plot type=(string,99) count=1 default=""
-parm subset type=(string,99) count=1 default=""
+parm subset type=int count=0:4 default=-999
 parm kfile type=(string,250) count=1 default=""
 parm kpfile type=(string,250) count=1 default=""
 parm kjson type=(string,250) count=1 default=""
@@ -79,6 +81,13 @@ camera model, spice kernel,
 etc.). This is what we
 are approximating with the
 RSM.
+.variable glas
+If set to "y" use a GLAS/GFM
+model rather than a RSM.
+For push-broom instruments
+this tends to be more
+accurate. Default is
+"n"
 .variable kfile
 If supplied, override the
 kernel file used. If not

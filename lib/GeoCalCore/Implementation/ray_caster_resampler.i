@@ -17,7 +17,11 @@ class RayCasterResampler: public GenericObject {
 public:
   RayCasterResampler(const boost::shared_ptr<RayCaster>& Ray_caster,
 		     const boost::shared_ptr<MapInfo>& Map_info);
-  void ray_cast_step(blitz::Array<int, 6> Res);
+  void ray_cast_step(blitz::Array<int, 6> Ray_cast_res);
+  void final_rad_step(const RasterImage& Input_img,
+		      blitz::Array<int, 6> Ray_cast_res,
+		      blitz::Array<int, 2> Rad_res,
+		      blitz::Array<int, 2> Scratch_count);
   %python_attribute(ray_caster, boost::shared_ptr<RayCaster>);
   %python_attribute(map_info, boost::shared_ptr<MapInfo>);
   %pickle_serialization();

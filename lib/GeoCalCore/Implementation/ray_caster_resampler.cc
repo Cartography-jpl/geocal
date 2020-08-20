@@ -81,3 +81,46 @@ void RayCasterResampler::ray_cast_step(blitz::Array<int, 6> Res)
   }
 }
 
+//-----------------------------------------------------------------------
+/// Final step, taking all the ray caster results and resampling data.
+/// We have the final output in Rad_res, which should be the size from
+/// the map_info(). We also need a scratch variable for holding the
+/// count. We don't actually generate a RasterImage, since there might
+/// be a type change (e.g., int32 for Rad_res and output int16).
+///
+/// Rad_res and Scratch_count should be initialized to zero, we don't
+/// do that in this function.
+///
+/// This is a clumsy function, but this should be looked at as a low
+/// level step used by the python wrapper.
+//-----------------------------------------------------------------------
+
+void RayCasterResampler::final_rad_step
+(const RasterImage& Input_img,
+ blitz::Array<int, 6> Ray_cast_res,
+ blitz::Array<int, 2> Rad_res,
+ blitz::Array<int, 2> Scratch_count)
+{
+  if(Rad_res.rows() != mi_->number_y_pixel() ||
+     Rad_res.cols() != mi_->number_x_pixel() ||
+     Scratch_count.rows() != mi_->number_y_pixel() ||
+     Scratch_count.cols() != mi_->number_x_pixel())
+    throw Exception("Rad_res or Scratch_count is the wrong size");
+  for(int i = 0; i < Ray_cast_res.extent(0); ++i)
+    for(int j = 0; j < Ray_cast_res.extent(1); ++j)
+      for(int k1 = 0; k1 < Ray_cast_res.extent(2); ++k1)
+	for(int k2 = 0; k2 < Ray_cast_res.extent(3); ++k2)
+	  for(int k3 = 0; k3 < Ray_cast_res.extent(4); ++k3) {
+	    int ln = Ray_cast_res(i,j,k1,k2,k3,0);
+	    int smp = Ray_cast_res(i,j,k1,k2,k3,1);
+	    if(ln >=0 && ln < Rad_res.rows() &&
+	       smp >= 0 && smp < Rad_res.cols()) {
+	      Rad_res(ln, smp) += Input_img(i, j);
+	      Scratch_count(ln, smp) += 1;
+	    }
+	  }
+  for(int i = 0; i < Rad_res.rows(); ++i)
+    for(int j = 0; j < Rad_res.cols(); ++j)
+      if(Scratch_count(i,j) >0)
+	Rad_res(i, j) /= Scratch_count(i, j);
+}

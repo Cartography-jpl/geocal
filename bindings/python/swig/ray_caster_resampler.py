@@ -228,10 +228,10 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
         """
         _ray_caster_resampler.RayCasterResampler_swiginit(self, _ray_caster_resampler.new_RayCasterResampler(Ray_caster, Map_info))
 
-    def ray_cast_step(self, Res):
+    def ray_cast_step(self, Ray_cast_res):
         """
 
-        void RayCasterResampler::ray_cast_step(blitz::Array< int, 6 > Res)
+        void RayCasterResampler::ray_cast_step(blitz::Array< int, 6 > Ray_cast_res)
         Do ray cast step.
 
         We fill in Res, which should be number_line x number_sample x
@@ -251,7 +251,28 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
         want a nonconst version of Array& in SWIG because this is almost
         always an error (just in this case it isn't). 
         """
-        return _ray_caster_resampler.RayCasterResampler_ray_cast_step(self, Res)
+        return _ray_caster_resampler.RayCasterResampler_ray_cast_step(self, Ray_cast_res)
+
+
+    def final_rad_step(self, Input_img, Ray_cast_res, Rad_res, Scratch_count):
+        """
+
+        void RayCasterResampler::final_rad_step(const RasterImage &Input_img, blitz::Array< int, 6 > Ray_cast_res,
+        blitz::Array< int, 2 > Rad_res, blitz::Array< int, 2 > Scratch_count)
+        Final step, taking all the ray caster results and resampling data.
+
+        We have the final output in Rad_res, which should be the size from the
+        map_info(). We also need a scratch variable for holding the count. We
+        don't actually generate a RasterImage, since there might be a type
+        change (e.g., int32 for Rad_res and output int16).
+
+        Rad_res and Scratch_count should be initialized to zero, we don't do
+        that in this function.
+
+        This is a clumsy function, but this should be looked at as a low level
+        step used by the python wrapper. 
+        """
+        return _ray_caster_resampler.RayCasterResampler_final_rad_step(self, Input_img, Ray_cast_res, Rad_res, Scratch_count)
 
 
     def _v_ray_caster(self):
@@ -287,6 +308,7 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _ray_caster_resampler.delete_RayCasterResampler
 RayCasterResampler.ray_cast_step = new_instancemethod(_ray_caster_resampler.RayCasterResampler_ray_cast_step, None, RayCasterResampler)
+RayCasterResampler.final_rad_step = new_instancemethod(_ray_caster_resampler.RayCasterResampler_final_rad_step, None, RayCasterResampler)
 RayCasterResampler._v_ray_caster = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_ray_caster, None, RayCasterResampler)
 RayCasterResampler._v_map_info = new_instancemethod(_ray_caster_resampler.RayCasterResampler__v_map_info, None, RayCasterResampler)
 RayCasterResampler_swigregister = _ray_caster_resampler.RayCasterResampler_swigregister

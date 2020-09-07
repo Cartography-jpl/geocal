@@ -5,6 +5,7 @@ from geocal.ray_caster_resampler_extension import *
 from test_support import *
 from multiprocessing import Pool
 
+@skip
 def test_ray_caster_resampler(isolated_dir):
     '''Because of the nature of these tests, we can't really do this well
     at the unit level. We really need a fairly large amount of data along
@@ -15,7 +16,6 @@ def test_ray_caster_resampler(isolated_dir):
     
     This requires an existing igc as input, we originally used one of the
     mars test cases.'''
-    # This blob is the head of rsm_project 
     igc = read_shelve("/bigdata/smyth/GlasTest/run_glas/ctx1_full_igc.xml")
     mibase = GdalRasterImage("/bigdata/smyth/MiplMarsTest/run/ctx1_full_6m.img").map_info
     dem = read_shelve("/bigdata/smyth/GlasTest/run_glas/dem.xml")

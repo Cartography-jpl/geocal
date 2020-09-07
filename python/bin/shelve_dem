@@ -64,6 +64,7 @@ long_name_to_vicar = {
     "output" : "out",
     "outside_dem_not_error" : "outok",
     "constant_dem" : "cdem",
+    "egm96_datum" : "edatum",
     "dem_band" : "banddem",
     "datum_band" : "banddatum",
     "constant_datum" : "cdatum",

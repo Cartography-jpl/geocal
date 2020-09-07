@@ -5,6 +5,7 @@ parm out type=(string,99) count=1
 parm outok type=(string,4) count=(0:1) valid=(n,y) default=n
 parm srtm type=(string,4) count=(0:1) valid=(n,y) default=n
 parm usgs type=(string,4) count=(0:1) valid=(n,y) default=n
+parm edatum type=(string,4) count=(0:1) valid=(n,y) default=n
 parm banddem type=int count=1 default=1
 parm banddatum type=int count=1 default=1
 parm cdem type=real count=1 default=-99999
@@ -43,6 +44,8 @@ supplying a DEM file.
 Use the USGS rather than
 supplying a DEM file
 (10m data over US)
+.variable edatum
+Use the EGS96 datum
 .variable banddem
 The band of the DEM file to
 use. Default is 1.

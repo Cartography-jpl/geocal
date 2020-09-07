@@ -3,10 +3,10 @@ from geocal.mmap_file import *
 import numpy as np
 from tempfile import NamedTemporaryFile
 from functools import partial
+import logging
 
 def _ray_caster_project_subset(igc, nline_process, nintegration_step,
                                map_info, scratch_file_name,
-                               verbose,
                                start_line):
     nline = min(nline_process, igc.number_line - start_line)
     rcast = IgcRayCaster(igc, start_line, nline, nintegration_step,
@@ -16,8 +16,8 @@ def _ray_caster_project_subset(igc, nline_process, nintegration_step,
                                     rcast.shape(2),
                                     rcast.shape(3), rcast.shape(4), 2),
                            dtype = np.int32)
-    if(verbose):
-        print("Starting ray cast %d" % start_line)
+    log = logging.getLogger("geocal-python.ray_caster_resampler")
+    log.info("Processing %d to %d" % (start_line, start_line+nline))
     rsamp = RayCasterResampler(rcast, map_info)
     rsamp.ray_cast_step(rcast_data)
     
@@ -25,7 +25,7 @@ def _ray_caster_project_subset(igc, nline_process, nintegration_step,
 # TODO Add support for parallel runs
 def ray_caster_project(out_fname, igc, map_info, dtype=np.int16,
                        mmap_scratch=False, pool = None,
-                       nline_process=100, verbose=True):
+                       nline_process=100):
     '''This puts together everything to generate map projected data.
     We write the output to the given file, as a VICAR file of given
     dtype.
@@ -63,13 +63,13 @@ def ray_caster_project(out_fname, igc, map_info, dtype=np.int16,
         else:
             f = partial(_ray_caster_project_subset,
                         igc, nline_process, nintegration_step,
-                        map_info, fh.name, verbose)
+                        map_info, fh.name)
             pool.map(f, range(0, igc.number_line, nline_process))
         res = np.zeros((map_info.number_y_pixel,
                         map_info.number_x_pixel), dtype=np.int32)
         scratch_count = np.zeros_like(res)
-        if(verbose):
-            print("Starting final rad step")
+        log = logging.getLogger("geocal-python.ray_caster_resampler")
+        log.info("Starting final rad step")
         rsamp.final_rad_step(igc.image, rcast_data, res, scratch_count)
     out = mmap_file(out_fname, map_info, dtype=dtype)
     out[:,:] = res[:,:]

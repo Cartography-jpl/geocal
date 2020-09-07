@@ -1,7 +1,9 @@
 from geocal_swig import *
 from geocal.sqlite_shelf import *
 from geocal.mmap_file import *
+from geocal.ray_caster_resampler_extension import *
 from test_support import *
+from multiprocessing import Pool
 
 def test_ray_caster_resampler(isolated_dir):
     '''Because of the nature of these tests, we can't really do this well
@@ -26,21 +28,7 @@ def test_ray_caster_resampler(isolated_dir):
     mp = IgcMapProjected(miscale, igc, 1, -1, False)
     mi = mp.map_info
     mp = None
-    # Common special case it to not have an integration time. In that case,
-    # no reason to include multiple integration times
-    if(igc.ipi.camera.integration_time(igc.ipi.band) == 0):
-        nintegration_step = 1
-    else:
-        nintegration_step = 2
-    rcast = IgcRayCaster(igc, 0, -1, nintegration_step, mi.resolution_meter)
-    rcast_data = np.empty((igc.number_line, rcast.shape(1), rcast.shape(2),
-                           rcast.shape(3), rcast.shape(4), 2), dtype = np.int32)
-    rsamp = RayCasterResampler(rcast, mi)
-    rsamp.ray_cast_step(rcast_data)
-    res = np.zeros((mi.number_y_pixel, mi.number_x_pixel), dtype=np.int32)
-    scratch_count = np.zeros_like(res)
-    rsamp.final_rad_step(igc.image, rcast_data, res, scratch_count)
-    out = mmap_file("resample.img", mi, dtype=np.int16)
-    out[:,:] = res[:,:]
+    pool = Pool(10)
+    ray_caster_project("resample.img", igc, mi, pool=pool)
 
     

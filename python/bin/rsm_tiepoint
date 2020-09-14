@@ -9,15 +9,16 @@ import subprocess
 import os
 import logging
 
-version = "September 26, 2019"
+version = "September 14, 2020"
 usage='''Usage:
   rsm_tiepoint [options] <image> <dem_file> <reference_image> <output>
   rsm_tiepoint -h | --help
   rsm_tiepoint -v | --version
 
-rsm_tiepoint takes a VICAR file with a RSM and projects it to the surface, and
-then collects tiepoints. By default the projected image is the base image
-name with "_proj" added. But you can specify any name you would like.
+rsm_tiepoint takes a VICAR file with a RSM or GLAS/GFM and projects it to 
+the surface, and then collects tiepoints. By default the projected image 
+is the base image name with "_proj" added. But you can specify any name 
+you would like.
 
 The image and reference_image should be VICAR files. The dem_file should be
 the output of shelve_dem (e.g., a ".xml" file).
@@ -154,11 +155,17 @@ if(not args.skip_projection):
 dem = geocal.read_shelve(args.dem_file)
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)
-    rsm = img.rsm
 else:
     img = geocal.GdalRasterImage(args.image)
-    rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
-igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+
+if(img.has_igc_glas_gfm):
+    igc = img.igc_glas_gfm
+    igc.image = img
+elif(img.has_rsm):
+    igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+else:
+    raise RuntimeError("Image %s doesn't have GLAS or RSM" % args.image)
+    
 igccol = geocal.IgcArray([igc,])
 tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],
                             ref_image_fname=args.reference_image,

@@ -5,6 +5,7 @@ parm outbase type=(string,99) count=1
 parm pdsimg2 type=(string,99) count=1 default=""
 parm fulligc type=(string,99) count=1 default=""
 parm glas type=(string,4) count=(0:1) valid=(n,y) default=n
+parm ktemp type=(string,4) count=(0:1) valid=(n,y) default=n
 parm minh type=real count=1 default=-5000.0
 parm maxh type=real count=1 default=-1500.0
 parm plot type=(string,99) count=1 default=""
@@ -88,6 +89,11 @@ For push-broom instruments
 this tends to be more
 accurate. Default is
 "n"
+.variable ktemp
+If set to "y" keep temporary
+directories used in processing,
+otherwise remove them when done.
+Default is "n"
 .variable kfile
 If supplied, override the
 kernel file used. If not

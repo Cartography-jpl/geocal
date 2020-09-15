@@ -124,6 +124,7 @@ long_name_to_vicar = { "image" : "img",
 		       "proj_file_name" : "pname",
                        "process_number_line" : "pline",
                        "process_number_sample" : "psamp",
+                       "skip_projection" : "skproj",
                        "verbose" : "verbose"
                        }
 

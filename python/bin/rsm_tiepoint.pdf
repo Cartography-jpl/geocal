@@ -18,6 +18,7 @@ parm search type=int default=-1
 parm seed type=int default=562
 parm thr_res type=real count=1 default=10.0
 parm toler type=real count=1 default=1.5 valid=(0.0:20.0)
+parm skproj type=(string,4) count=(0:1) valid=(n,y) default=n
 parm verbose type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE
@@ -116,7 +117,12 @@ the (lower) resolution of the
 Reference image.
 .variable toler
 Tolerance used to reject matched
-points as blunders. 
+points as blunders.
+.variable skproj
+Assume the _proj file is already
+present. Useful for running
+rsm_tiepoint repeatedly with different
+fitting parameters.
 .variable verbose
 Print more information as we run.
 .END

@@ -123,6 +123,7 @@ Options:
 # Mapping between long name and shorter vicar name
 long_name_to_vicar = { "pds_image" : "pdsimg",
                        "pds_image_2" : "pdsimg2",
+                       "keep_temp_dir" : "ktemp",
                        "output_base_name" : "outbase",
                        "full_igc" : "fulligc",
                        "glas_gfm": "glas",

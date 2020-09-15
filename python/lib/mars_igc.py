@@ -5,6 +5,8 @@ from .pds_label import pds_label
 from .sqlite_shelf import read_shelve
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
 import struct
+import subprocess
+import os
 
 # Note, when adding a new instrument there are a few good sanity things to
 # check:
@@ -331,6 +333,75 @@ def igc_mro_hirise_to_glas(igc_r):
     igc_g.sensor_id = "HiRISE"
     return igc_g
 
+def igc_mro_hirise_to_glas(igc_r):
+    '''Create a igc that can be used with GLAS from the results of 
+    igc_mro_hirise'''
+    tspace = igc_r.ipi.time_table.time_space
+    porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                     igc_r.ipi.time_table.min_time - 10 * tspace,
+                     igc_r.ipi.time_table.max_time + 10 * tspace,
+                     tspace,
+                     PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                     igc_r.ipi.time_table.min_time - 10 * tspace,
+                     igc_r.ipi.time_table.max_time + 10 * tspace,
+                     tspace,
+                     AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+    band = 0
+    delta_sample = 2048 / 16
+    cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+    ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+    igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
+    igc_g.platform_id = "MRO"
+    igc_g.payload_id = "MRO"
+    igc_g.sensor_id = "HiRISE"
+    return igc_g
+
+
+# Not sure if this actually fits here or not, but not an obvious other place
+# for this
+def vicar_update_glas(fin, fout, orbit_updated):
+    '''Copy an existing VICAR file with a GLAS igc, and update the orbit
+    used in the file (e.g., after doing a OrbitOffsetCorrection or something
+    like that)'''
+    try:
+        os.remove(fout)
+    except FileNotFoundError:
+        pass
+    subprocess.run(["cp", fin, fout], check=True)
+    f = VicarRasterImage(fout, 1, VicarFile.UPDATE)
+    igc = f.igc_glas_gfm
+    porb_original = igc.ipi.orbit.pos_csephb
+    porb = PosCsephb(orbit_updated,
+                     porb_original.min_time,
+                     porb_original.max_time,
+                     porb_original.time_step,
+                     PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb_original = igc.ipi.orbit.att_csattb
+    aorb = AttCsattb(orbit_updated,
+                     aorb_original.min_time,
+                     aorb_original.max_time,
+                     aorb_original.time_step,
+                     AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb_g = OrbitDes(porb, aorb, igc.ipi.orbit.naif_code)
+    igc.ipi.orbit = orb_g
+    f.set_igc_glas_gfm(igc)
+
+    
+    
+    
+    
+
 
 __all__ = ["igc_mro_context", "igc_mro_context_to_glas", "igc_mex_hrsc",
-           "igc_mro_hirise", "igc_mro_hirise_to_glas"]
+           "igc_mro_hirise", "igc_mro_hirise_to_glas", "vicar_update_glas"]

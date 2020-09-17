@@ -1,6 +1,7 @@
 import re
 import bisect
 from geocal_swig import *
+import subprocess
 
 def pds_label_text(fname):
     '''While GDAL can read PDS format, it doesn't read most of the metadata.
@@ -46,8 +47,15 @@ class SpiceKernelByTime(object):
 
     This class can be saved (e.g., use json or pickling pickling through 
     write_shelve) so we don't need to parse the directory every time.
+
+    The class use to just use the PDS labels, but the SPICE data directory
+    seems to have dropped creating the ".lbl" files. Not sure why, but
+    we now accept ".lbl", ".bc" or ".bsp" files using the appropriate code
+    to support each files. Note that the ".bc" and ".bsp" require a additional
+    kernel file to convert space craft time to utc, so for example 
+    mro_create_json.ker
     '''
-    def __init__(self, lbl_file_list):
+    def __init__(self, lbl_or_binary_file_list, kernel_file = None):
         '''Parse each PDS label file. Note that we assume the spice kernel is
         in the same directory as each PDS label.
 
@@ -55,20 +63,61 @@ class SpiceKernelByTime(object):
 
         Often the label list can be created by a glob, e.g. 
         glob.glob("/raid26/mars_kernels/mro_kernels/spk/mro_*_ssd_mro95a.lbl")
+
+        We also support directly reading .bc or .bsp files, since SPICE seems
+        to have dropped creating the .lbl files.
         '''
         self.data = []
-        for f in lbl_file_list:
-            d = pds_label(f)
-            self.data.append((Time.parse_time(d["START_TIME"]).et,
-                              Time.parse_time(d["STOP_TIME"]).et,
-                              os.path.abspath(os.path.dirname(f) + "/" +
-                                              d["PRODUCT_ID"])))
+        for f in lbl_or_binary_file_list:
+            ext = os.path.splitext(f)[1]
+            if(ext == ".lbl"):
+                self.process_lbl(f)
+            elif(ext == ".bsp"):
+                self.process_bsp(f, kernel_file)
+            elif(ext == ".bc"):
+                self.process_bc(f, kernel_file)
+            else:
+                raise RuntimeError("Unrecognized file extension %s" % ext)
+                
         # Sort by start time
         self.data.sort(key=lambda v : v[0])
         self.tstart_et = [v[0] for v in self.data]
         self.tend_et = [v[1] for v in self.data]
         self.kernel_file = [v[2] for v in self.data]
 
+    def process_lbl(self, f):
+        d = pds_label(f)
+        self.data.append((Time.parse_time(d["START_TIME"]).et,
+                          Time.parse_time(d["STOP_TIME"]).et,
+                          os.path.abspath(os.path.dirname(f) + "/" +
+                                          d["PRODUCT_ID"])))
+        
+    def process_bsp(self, f, kernel_file):
+        res = subprocess.run(["brief", f, kernel_file], check=True,
+                             capture_output=True)
+        # From looking at the output, this is the string with start and
+        # end time"
+        tm_line = res.stdout.split(b"\n")[-3]
+        # There is a good deal of separation between the two times, character
+        # 40 is in the middle of this
+        tstart = Time.parse_time(tm_line[:40].decode('utf-8'))
+        tend = Time.parse_time(tm_line[40:].decode('utf-8'))
+        self.data.append((tstart.et,
+                          tend.et,
+                          os.path.abspath(f)))
+    
+    def process_bc(self, f, kernel_file):
+        res = subprocess.run(["ckbrief", f, kernel_file], check=True,
+                             capture_output=True)
+        # Note this parsing may be fragile to changes in spice, so if this
+        # starts fails check this.
+        tm_line = res.stdout.split(b"\n")[-3]
+        tstart = Time.parse_time(b' '.join(tm_line.lstrip().split(b' ')[0:2]).decode('utf-8'))
+        tend = Time.parse_time(b' '.join(tm_line.lstrip().split(b' ')[2:4]).decode('utf-8'))
+        self.data.append((tstart.et,
+                          tend.et,
+                          os.path.abspath(f)))
+        
     def __getstate__(self):
         return { "data" : self.data }
 
@@ -89,7 +138,7 @@ class SpiceKernelByTime(object):
         # Check that this matches the upper range (since there may be
         # gaps in the data)
         if(tm_et > self.tend_et[i-1]):
-            raise ValueError
+            raise ValueError("Kernel file %s time %f" % (self.kernel_file[i-1], tm_et))
         return self.kernel_file[i-1]
 
 __all__ = ["pds_label_text", "pds_label", "SpiceKernelByTime"]    

@@ -22,6 +22,10 @@ a map projected image. The igc_collection should be in the normal
 this is -0-based. The output is also "file:key". To actually generate
 a file, use "write_image" program.
 
+Note that this generally goes from the ground to the spacecraft. For some
+instruments (e.g., pushbroom) it can be much faster to go the other 
+direction. See igc_raycast_project for going the other direction.
+
 Note that it is very common to create a igc_project xml object, run 
 write_image immediately, and then throw away the xml object. To 
 support this, we have the optional --write-image option. This is entirely

@@ -51,6 +51,23 @@ def test_spice_kernel_by_time():
     tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
     assert kdata.kernel(tstart) == bdir + "mro_psp6_ssd_mro110c.bsp"
 
+@require_mars_spice
+def test_spice_kernel_by_time_binary():
+    '''Test that works with actual mars spice kernel data'''
+    kfile = os.environ["MARS_KERNEL"] + "/mro_kernel/mro_create_json.ker"
+    flist = [os.environ["MARS_KERNEL"] + "/mro_kernel/spk/mro_psp6_ssd_mro95a.bsp"]
+    if(not os.path.exists(flist[0]) or not os.path.exists(kfile)):
+        raise SkipTest
+    kdata = SpiceKernelByTime(flist, kernel_file=kfile)
+    tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
+    assert kdata.kernel(tstart) == flist[0]
+    flist = [os.environ["MARS_KERNEL"] + "/mro_kernel/ck/mro_sc_psp_080219_080225.bc"]
+    kdata = SpiceKernelByTime(flist, kernel_file=kfile)
+    tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
+    assert kdata.kernel(tstart) == flist[0]
+    
+    
+    
 # Depends on data we don't want to assume is available
 @skip
 def test_pds_label_isis():

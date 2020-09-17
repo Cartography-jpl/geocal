@@ -1,0 +1,125 @@
+#! /usr/bin/env python
+#
+# This map projects a ImageGroundConnection to the surface, generating
+# a map projected image.
+
+import geocal
+from multiprocessing import Pool
+import numpy as np
+import math
+import logging
+
+version = "September 16, 2020"
+usage='''Usage: 
+  igc_raycast_project [options] <igc> <vicar_output>
+  igc_raycast_project -h | --help
+  igc_raycat_project -v | --version
+
+This map projects a ImageGroundConnection to the surface, generating
+a map projected image using ray casting.
+
+Options:
+  -h --help         
+       Print this message
+
+  --bounding-box=mi
+       Use the given image to supply the bounding box for the output. 
+       Note that we use the projection and bounding box, but not the
+       resolution of the map info (unlike --map-info). This can be useful
+       to for example cover the area of a generated DEM, even if the DEM
+       is lower resolution than what we want to project here.
+
+  --dem=shelve
+       DEM to use, specified as file:key. If not specified, we use the 
+       DEM from the IGC.
+
+  --map-info=f
+       Rather than generating a image to cover the full area, match exactly
+       the supplied shelve image or MapInfo. This is useful to when 
+       comparing against an existing image/DEM.
+
+  --number-process=n
+       Number of processors to use. [default: 1]
+
+  --process-number-line=n
+       Number of lines to include in each tile that we work on. This 
+       controls how long each torque/parallel job takes to run. If
+       not supplied, we just divide the total image size by the number
+       of processes we are using.
+
+  --resolution=r
+       Resolution in meters of output. [default: 1.0]
+
+  --vicar-type=type
+       Type of file to generate. This should by BYTE, HALF, FULL, REAL, or
+       DOUB. [default: HALF]
+
+  --verbose
+       Print more information as we run.
+
+  -v --version      
+       Print program version
+'''
+
+args = geocal.docopt_simple(usage, version=version)
+
+if(args.verbose):
+    logging.basicConfig(level = logging.INFO)
+logger = logging.getLogger("geocal-python.igc_raycat_project")
+if(args.vicar_type == "DOUB"):
+    dtype = np.float64
+elif(args.vicar_type == "REAL"):
+    dtype = np.float32
+elif(args.vicar_type == "BYTE"):
+    dtype = np.int8
+elif(args.vicar_type == "HALF"):
+    dtype = np.int16
+elif(args.vicar_type == "FULL"):
+    dtype = np.int32
+else:
+    raise RuntimeError("Unknown vicar type %s" % args.vicar_type)
+
+igc = geocal.read_shelve(args.igc)
+
+if(args.dem):
+    igc.dem = geocal.read_shelve(args.dem)
+
+# Create the map projection object, and the output object
+
+if(args.map_info):
+    mi = geocal.read_shelve(args.map_info)
+    if(not isinstance(mi, geocal.MapInfo)):
+        mi = mi.map_info
+elif(args.bounding_box):
+    mibase = geocal.read_shelve(args.bounding_box).map_info
+    resbase = mibase.resolution_meter
+    miscale = mibase.scale(args.resolution / resbase, args.resolution / resbase)
+    if(igc.image):
+        mp = geocal.IgcMapProjected(miscale, igc, 1, -1, False)
+        mi = mp.map_info
+    else:
+        mp = geocal.IgcMapProjectedMultiBand(miscale, igc, 1, -1, False)
+        mi = mp.raster_image(0).map_info
+    mp = None
+else:
+    mibase = geocal.cib01_mapinfo(desired_resolution = args.resolution)
+    mi = igc.cover(mibase)
+    if(igc.image):
+        mp = geocal.IgcMapProjected(mi, igc, 1, -1, False)
+        mi = mp.map_info
+    else:
+        mp = geocal.IgcMapProjectedMultiBand(mi, igc, 1, -1, False)
+        mi = mp.raster_image(0).map_info
+    mp = None
+
+if(args.number_process > 1):
+    pool = Pool(args.number_process)
+else:
+    pool = None
+if(args.process_number_line is not None):
+    process_nline = args.process_number_line
+else:
+    process_nline = int(math.ceil(float(igc.number_line) / args.number_process))
+geocal.ray_caster_project(args.vicar_output, igc, mi, pool=pool,
+                          dtype=dtype,
+                          nline_process = process_nline)

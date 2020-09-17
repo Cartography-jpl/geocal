@@ -2931,6 +2931,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
 	$(srcdir)/$(srcpythonbin)/shelve_igccol \
 	$(srcdir)/$(srcpythonbin)/igc_project \
+	$(srcdir)/$(srcpythonbin)/igc_raycast_project \
 	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
 	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
 	$(srcdir)/$(srcpythonbin)/nitf_to_vicar \

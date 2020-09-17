@@ -151,13 +151,10 @@ def write_vicar_file(igc, fin_name, output_base_name, rsm=None,
         if(not fin[k] == "") :
             f[k] = fin[k]
     geocal.copy_raster(igc.image, f, True, -1, igc.number_sample)
-    # We have a bug in the RSM NITF code. We'll need to fix that, but for
-    # now just use XML instead
-    # I believe this is fixed, so we'll try the NITF version for now
-    #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
     if(rsm):
         # There are a number of size constraints here. Major pain, for
         # now skip trying to cram RSM into NITF
+        #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
         f.set_rsm(rsm, geocal.VicarFile.RSM_XML_FILE)
     if(igc_glas_gfm):
         f.set_igc_glas_gfm(igc_glas_gfm)
@@ -239,9 +236,9 @@ elif(lbl['INSTRUMENT_NAME'] == 'HIGH RESOLUTION IMAGING SCIENCE EXPERIMENT'):
                                   max_height=args.max_height)
         write_vicar_file(igc, fin_fname, fout_base_name, rsm=r,
                          igc_glas_gfm=igc_glas_gfm)
-        # Since fin_fname will go away, we set igc.image to None before
-        # optionally saving it out
-        igc.image = None
+        # Since fin_fname will go away, we set igc.image to the new image
+        # we just created before optionally saving it out
+        igc.image = geocal.VicarLiteRasterImage(fout_base_name + ".img")
     finally:
         if(curdir):
             os.chdir(curdir)

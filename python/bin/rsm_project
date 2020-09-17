@@ -219,6 +219,7 @@ if(args.mosaic):
             raise RuntimeError("We don't currently support mosaic with GLAS/GFM. This can be added, we just haven't done so yet")
             igc = img.igc_glas_gfm
             igc.image = img
+            igc.dem = dem
             do_raycast = True
             igclist.append(igc)
         elif(img.has_rsm):
@@ -234,6 +235,7 @@ else:
     if(img.has_igc_glas_gfm):
         igc = img.igc_glas_gfm
         igc.image = img
+        igc.dem = dem
         do_raycast = True
     elif(img.has_rsm):
         igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")

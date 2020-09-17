@@ -22,7 +22,6 @@ def _ray_caster_project_subset(igc, nline_process, nintegration_step,
     rsamp.ray_cast_step(rcast_data)
     
     
-# TODO Add support for parallel runs
 def ray_caster_project(out_fname, igc, map_info, dtype=np.int16,
                        mmap_scratch=False, pool = None,
                        nline_process=100):

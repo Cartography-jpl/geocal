@@ -7,14 +7,14 @@ import geocal
 import subprocess
 import os
 
-version = "September 26, 2019"
+version = "September 21, 2020"
 usage='''Usage:
   rsm_improve [options] <image> <dem_file> <tiepoint_file> <output>
   rsm_improve -h | --help
   rsm_improve -v | --version
 
-This takes a VICAR file with a RSM and a set of tiepoints, and uses this
-to produce a improved RSM.
+This takes a VICAR file with a RSM or GLAS/GFM and a set of tiepoints,
+and uses this to produce a improved RSM or GLAS/GFM.
 
 The image should be a VICAR file with a associated RSM (e.g, output from
 mars_generate_rsm). The dem_file should be the output of shelve_dem 
@@ -38,6 +38,12 @@ Options:
   --ground-correction
        Use the ground correction.
 
+  --number-position-breakpoint=d
+       Number of position breakpoints for GLAS/GFM. [default: 1]
+
+  --number-attitude-breakpoint=d
+       Number of attitude breakpoints for GLAS/GFM. [default: 0]
+
   --verbose
        Print more information as we run.
 
@@ -53,6 +59,8 @@ long_name_to_vicar = { "image" : "img",
                        "image_correction" : "icor",
                        "ground_rotation" : "grot",
                        "ground_correction" : "gcor",
+                       "number_position_breakpoint" : "npos",
+                       "number_attitude_breakpoint" : "natt",
                        "verbose" : "verbose"
                        }
 
@@ -64,21 +72,62 @@ dem = geocal.read_shelve(args.dem_file)
 tpcol = geocal.read_shelve(args.tiepoint_file)
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)
-    rsm = img.rsm
 else:
     img = geocal.GdalRasterImage(args.image)
     rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
-igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+if(img.has_igc_glas_gfm):
+    igc = img.igc_glas_gfm
+    igc.image = img
+    igc.dem = dem
+elif(img.has_rsm):
+    rsm = img.rsm
+    igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
 igccol = geocal.IgcArray([igc,])
-icorr = args.image_correction
-if((not args.image_correction) and (not args.ground_correction) and
-   (not args.ground_rotation)):
-    # Default is image correction, if nothing else specified
-    icorr = True
-adj = geocal.RsmAdjustableParameterA(igc, rsm.rsm_id, "Triangulation_1",
-                                     icorr, args.ground_rotation,
-                                     args.ground_correction)
-rsm.rsm_adjustable_parameter = adj
+if(img.has_rsm):
+    icorr = args.image_correction
+    if((not args.image_correction) and (not args.ground_correction) and
+       (not args.ground_rotation)):
+        # Default is image correction, if nothing else specified
+        icorr = True
+    adj = geocal.RsmAdjustableParameterA(igc, rsm.rsm_id, "Triangulation_1",
+                                         icorr, args.ground_rotation,
+                                         args.ground_correction)
+    rsm.rsm_adjustable_parameter = adj
+else:
+    orb_corr = geocal.OrbitOffsetCorrection(igc.ipi.orbit)
+    igc.ipi.orbit = orb_corr
+    if(args.number_position_breakpoint == 0):
+        orb_corr.fit_position_x = False
+        orb_corr.fit_position_y = False
+        orb_corr.fit_position_z = False
+    if(args.number_attitude_breakpoint == 0):
+        orb_corr.fit_yaw = False
+        orb_corr.fit_pitch = False
+        orb_corr.fit_roll = False
+    if(args.number_position_breakpoint >= 1):
+        orb_corr.insert_position_time_point(igc.ipi.time_table.min_time)
+    if(args.number_attitude_breakpoint >= 1):
+        orb_corr.insert_attitude_time_point(igc.ipi.time_table.min_time)
+    if(args.number_position_breakpoint >= 2):
+        orb_corr.insert_position_time_point(igc.ipi.time_table.max_time)
+    if(args.number_attitude_breakpoint >= 2):
+        orb_corr.insert_attitude_time_point(igc.ipi.time_table.max_time)
+    if(args.number_position_breakpoint > 2):
+        nspace = args.number_position_breakpoint - 1
+        tspace = (igc.ipi.time_table.max_time -
+                  igc.ipi.time_table.min_time) / nspace
+        for i in range(args.number_position_breakpoint - 2):
+            orb_corr.insert_position_time_point(igc.ipi.time_table.min_time +
+                                                (i+1) * tspace)
+    if(args.number_attitude_breakpoint > 2):
+        nspace = args.number_attitude_breakpoint - 1
+        tspace = (igc.ipi.time_table.max_time -
+                  igc.ipi.time_table.min_time) / nspace
+        for i in range(args.number_attitude_breakpoint - 2):
+            orb_corr.insert_attitude_time_point(igc.ipi.time_table.min_time +
+                                                (i+1) * tspace)
+    igccol.add_object(orb_corr)
+    igccol.assume_igc_independent = False
 print("Initial data:")
 print("----------------------------------")
 print(igccol)
@@ -96,19 +145,24 @@ try:
     os.remove(args.output)
 except FileNotFoundError:
     pass
-subprocess.run(["cp", args.image, args.output], check=True)
-f = geocal.VicarRasterImage(args.output, 1, geocal.VicarFile.UPDATE)
-# NITF file doesn't work yet, so use XML file
-f.set_rsm(igccol_sba.image_ground_connection(0).rsm,
-          geocal.VicarFile.RSM_XML_FILE)
+if(img.has_rsm):
+    subprocess.run(["cp", args.image, args.output], check=True)
+    f = geocal.VicarRasterImage(args.output, 1, geocal.VicarFile.UPDATE)
+    # NITF file doesn't work yet, so use XML file
+    f.set_rsm(igccol_sba.image_ground_connection(0).rsm,
+              geocal.VicarFile.RSM_XML_FILE)
+else:
+    geocal.vicar_update_glas(args.image, args.output, igccol_sba.image_ground_connection(0).ipi.orbit)
 print("Improved data:")
 print("----------------------------------")
 print(igccol_sba)
 print("----------------------------------")
-df = tpcol.data_frame(igccol, 0)
-print("Initial distance %f m" % df.ground_2d_distance.quantile(.68))
-df_sba = tpcol.data_frame(igccol_sba, 0)
-print("Improved distance %f m" % df_sba.ground_2d_distance.quantile(.68))
+# This doesn't give useful output for GLAS/GFM, so comment this out.
+# We should probably come up with a a better measure
+#df = tpcol.data_frame(igccol, 0)
+#print("Initial distance %f m" % df.ground_2d_distance.quantile(.68))
+#df_sba = tpcol.data_frame(igccol_sba, 0)
+#print("Improved distance %f m" % df_sba.ground_2d_distance.quantile(.68))
 
 
                             

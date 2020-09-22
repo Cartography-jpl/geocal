@@ -6,6 +6,8 @@ parm out type=(string,99) count=1
 parm icor type=(string,4) count=(0:1) valid=(n,y) default=n
 parm grot type=(string,4) count=(0:1) valid=(n,y) default=n
 parm gcor type=(string,4) count=(0:1) valid=(n,y) default=n
+parm npos type=int count=1 default=1
+parm natt type=int count=1 default=0
 parm verbose type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE
@@ -41,6 +43,12 @@ is selected
 Use the ground rotation correction
 .variable  gcor
 Use the ground correction
+.variable npos
+Number of position breakpoints
+for GLAS/GFM.
+.variable natt
+Number of attitude breakpoints
+for GLAS/GFM.
 .variable verbose
 Print more information as we run.
 .END

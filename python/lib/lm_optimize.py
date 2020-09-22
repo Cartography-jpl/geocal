@@ -65,6 +65,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
                 break
             else:
                 lam *= boost
+                log.info("Rejected Chisq: %f" % chisq)
                 log.info("Redoing iteration with lambda boosted to %f" % lam)
         else:
             raise RuntimeError("Exceeded maximum number of iterators")

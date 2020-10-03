@@ -296,8 +296,16 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
   };
 
   IpiEq eq(cam, orb, Gp.convert_to_cf(), min_time_, band_);
+  double min_eq_t = std::max(0.0, orb->min_time() - min_time_);
+  // The time_tolerance / 2 is because we usually use a range 
+  // min <= x < max, but root_list uses min <= x <= max. We move off
+  // a small amount from the end point so we don't run into any
+  // problems with it.
+  double max_eq_t = std::min(max_time_ - min_time_,
+			     orb->max_time() - min_time_ - time_tolerance_ / 2);
   std::vector<double> sol = 
-    root_list(eq, min_time_guess() - min_time_, max_time_guess() - min_time_,
+    root_list(eq, std::max(min_time_guess() - min_time_, min_eq_t),
+	      std::min(max_time_guess() - min_time_, max_eq_t),
 	      root_min_separation_, time_tolerance_);
 
 //-----------------------------------------------------------------------
@@ -325,12 +333,8 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 //-----------------------------------------------------------------------
   
   if(num_sol ==0) {
-    // The time_tolerance / 2 is because we usually use a range 
-    // min <= x < max, but root_list uses min <= x <= max. We move off
-    // a small amount from the end point so we don't run into any
-    // problems with it.
-    sol = root_list(eq, 0.0, max_time_ - min_time_ - time_tolerance_ / 2,
-		    root_min_separation_, time_tolerance_);
+    sol = root_list(eq, min_eq_t, max_eq_t, root_min_separation_,
+		    time_tolerance_);
     BOOST_FOREACH(double x, sol) {
       if(!eq.false_root(x)) {
 	FrameCoordinate fc = eq.frame_coordinate(x);
@@ -469,8 +473,16 @@ void Ipi::time_with_derivative
   };
 
   IpiEq eq(cam, orb, Gp.convert_to_cf(), Gp_with_der, min_time_, band_);
+  double min_eq_t = std::max(0.0, orb->min_time() - min_time_);
+  // The time_tolerance / 2 is because we usually use a range 
+  // min <= x < max, but root_list uses min <= x <= max. We move off
+  // a small amount from the end point so we don't run into any
+  // problems with it.
+  double max_eq_t = std::min(max_time_ - min_time_,
+			     orb->max_time() - min_time_ - time_tolerance_ / 2);
   std::vector<AutoDerivative<double> > sol = 
-    root_list(eq, min_time_guess() - min_time_, max_time_guess() - min_time_,
+    root_list(eq, std::max(min_time_guess() - min_time_, min_eq_t),
+	      std::min(max_time_guess() - min_time_, max_eq_t),
 	      root_min_separation_, time_tolerance_);
 
 //-----------------------------------------------------------------------
@@ -492,12 +504,8 @@ void Ipi::time_with_derivative
 //-----------------------------------------------------------------------
   
   if(num_sol ==0) {
-    // The time_tolerance / 2 is because we usually use a range 
-    // min <= x < max, but root_list uses min <= x <= max. We move off
-    // a small amount from the end point so we don't run into any
-    // problems with it.
-    sol = root_list(eq, 0.0, max_time_ - min_time_ - time_tolerance_ / 2,
-		    root_min_separation_, time_tolerance_);
+    sol = root_list(eq, min_eq_t, max_eq_t, root_min_separation_,
+		    time_tolerance_);
     BOOST_FOREACH(AutoDerivative<double> x, sol) {
       if(!eq.false_root(x.value())) {
 	num_sol++;

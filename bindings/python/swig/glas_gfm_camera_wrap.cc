@@ -11541,13 +11541,21 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera__v_delta_sample_pair", _wrap_GlasGfmCamera__v_delta_sample_pair, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::delta_sample_pair(double V)\n"
+		"void GlasGfmCamera::delta_sample_pair(double V)\n"
+		"Set delta Sample Pair. This is applicable for sensor type \"S\" only.\n"
 		"\n"
 		""},
 	 { (char *)"GlasGfmCamera__v_field_alignment", _wrap_GlasGfmCamera__v_field_alignment, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::GlasGfmCamera::field_alignment(const blitz::Array< double, 2 > &V)\n"
+		"Set Field Alignment.\n"
 		"\n"
+		"This is n x 4. The columns are start_x, start_y, end_x, end_y. This is\n"
+		"applicable for sensor type \"S\" only.\n"
+		"\n"
+		"Note this does not change delta_sample_pair. If you alter the size of\n"
+		"field_alignment you almost certainly want to also set\n"
+		"delta_sample_pair, which is a separate step. \n"
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_fit", _wrap_GlasGfmCamera_field_alignment_fit, METH_VARARGS, (char *)"\n"
 		"\n"

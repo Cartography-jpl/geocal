@@ -201,7 +201,7 @@ public:
     y_0 = fa(0,1);
     x_end = fa(fa.rows() - 1, 2);
     y_end = fa(fa.rows() - 1, 3);
-    // We assume sample direction is mostly in x or y direction
+    // We assume sample direction is mostly in x or y direction. .
     double x_space = (x_end - x_0)/nsamp;
     double y_space = (y_end - y_0)/nsamp;
     if(fabs(x_space) > fabs(y_space)) {
@@ -210,7 +210,31 @@ public:
     } else {
       p_space = y_space;
       line_is_y = false;
-    }      
+    }
+    // Sanity check on data, we assume sample direction isn't zero
+    // size. Note it is not uncommon and ok for the line direction to
+    // be zero size, and that is ok. But we divide by spacing in
+    // sample space for xy_to_fc, so make sure we don't have zeros there.
+    for(int i = 0; i < fa.rows(); ++i)
+      if(line_is_y) {
+	if(fa(i,0) == fa(i,2)) {
+	  Exception e;
+	  e << "field_alignment has zero size in sample direction:\n"
+	    << "  Index: " << i << "\n"
+	    << "  Values: " << fa(i,0) << ", " << fa(i,1) << ", "
+	    << fa(i,2) << ", " << fa(i,3) << "\n";
+	  throw e;
+	}
+      } else {
+	if(fa(i,1) == fa(i,3)) {
+	  Exception e;
+	  e << "field_alignment has zero size in sample direction:\n"
+	    << "  Index: " << i << "\n"
+	    << "  Values: " << fa(i,0) << ", " << fa(i,1) << ", "
+	    << fa(i,2) << ", " << fa(i,3) << "\n";
+	  throw e;
+	}
+      }	
     cache_stale = false;
   }
   mutable double x_0, x_end, p_space, y_0, y_end;
@@ -389,14 +413,14 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
   nline_(Cam.number_line(Band)),
   nsamp_(Cam.number_sample(Band)),
   frame_to_sc_(Cam.frame_to_sc()),
-  field_alignment_block_(9),
   band_type_(Band_type),
   band_wavelength_(Band_wavelength),
   focal_length_time_(Focal_length_time),
   sample_number_first_(0),
   delta_sample_pair_(Delta_sample),
   field_angle_type_(0),
-  field_angle_interpolation_type_(1)
+  field_angle_interpolation_type_(1),
+  field_alignment_block_(9)
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
@@ -422,14 +446,14 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
   nline_(Cam.number_line(Band)),
   nsamp_(Cam.number_sample(Band)),
   frame_to_sc_(Cam.frame_to_sc()),
-  field_alignment_block_(9),
   band_type_(Band_type),
   band_wavelength_(Band_wavelength),
   focal_length_time_(Focal_length_time),
   sample_number_first_(0),
   delta_sample_pair_(Delta_sample),
   field_angle_type_(0),
-  field_angle_interpolation_type_(1)
+  field_angle_interpolation_type_(1),
+  field_alignment_block_(9)
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
@@ -670,3 +694,16 @@ void GlasGfmCamera::field_alignment_fit
   }
   notify_update();
 }
+
+//-----------------------------------------------------------------------
+/// Set delta Sample Pair. This is applicable for sensor type "S" only.
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::delta_sample_pair(double V)
+{
+  if(!(V > 0))
+    throw Exception("delta_sample_pair must be > 0");
+  delta_sample_pair_ = V;
+  notify_update();
+}
+

@@ -471,7 +471,8 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     def _v_delta_sample_pair(self, *args):
         """
 
-        void GeoCal::GlasGfmCamera::delta_sample_pair(double V)
+        void GlasGfmCamera::delta_sample_pair(double V)
+        Set delta Sample Pair. This is applicable for sensor type "S" only.
 
         """
         return _glas_gfm_camera.GlasGfmCamera__v_delta_sample_pair(self, *args)
@@ -490,7 +491,14 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
         """
 
         void GeoCal::GlasGfmCamera::field_alignment(const blitz::Array< double, 2 > &V)
+        Set Field Alignment.
 
+        This is n x 4. The columns are start_x, start_y, end_x, end_y. This is
+        applicable for sensor type "S" only.
+
+        Note this does not change delta_sample_pair. If you alter the size of
+        field_alignment you almost certainly want to also set
+        delta_sample_pair, which is a separate step. 
         """
         return _glas_gfm_camera.GlasGfmCamera__v_field_alignment(self, *args)
 

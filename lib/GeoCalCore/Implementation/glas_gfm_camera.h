@@ -227,8 +227,7 @@ public:
 //-----------------------------------------------------------------------
 
   double delta_sample_pair() const {return delta_sample_pair_; }
-  void delta_sample_pair(double V)
-  {delta_sample_pair_ = V; notify_update();}
+  void delta_sample_pair(double V);
 
 //-----------------------------------------------------------------------
 /// Field Alignment. This is n x 4. The columns are start_x, start_y,
@@ -237,6 +236,16 @@ public:
 
   const blitz::Array<double, 2>& field_alignment() const
   {return field_alignment_;}
+
+//-----------------------------------------------------------------------
+/// Set Field Alignment. This is n x 4. The columns are start_x, start_y,
+/// end_x, end_y. This is applicable for sensor type "S" only.
+///
+/// Note this does *not* change delta_sample_pair. If you alter the
+/// size of field_alignment you almost certainly want to also set
+/// delta_sample_pair, which is a separate step.  
+//-----------------------------------------------------------------------
+  
   void field_alignment(const blitz::Array<double, 2>& V)
   { field_alignment_.reference(V.copy()); notify_update();}
   void field_alignment_fit(const Camera& Cam, double Delta_sample,

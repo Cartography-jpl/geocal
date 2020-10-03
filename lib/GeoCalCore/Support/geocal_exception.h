@@ -5,6 +5,7 @@
 #include "backtrace.hpp"
 #include <sstream>		// Definition of ostringstream.
 #include <gsl/gsl_errno.h>
+#include <cmath>
 
 namespace GeoCal {
 
@@ -268,6 +269,34 @@ public:
 
 /** \defgroup Error Error checking routines */
 /*@{*/
+
+//-----------------------------------------------------------------------
+/// We can have range check fail because the value is something like a
+/// nan. We still want to consider this an invalid number, so add a test.
+/// This only applies to floating point number, so for simplicity we
+/// have a dummy function for other types.
+//-----------------------------------------------------------------------
+
+template<class T> inline bool nancheck(const T& Val)
+{
+  return false;
+}
+
+template<> inline bool nancheck(const double& Val)
+{
+  return std::isnan(Val);
+}
+
+template<> inline bool nancheck(const float& Val)
+{
+  return std::isnan(Val);
+}
+
+template<> inline bool nancheck(const long double& Val)
+{
+  return std::isnan(Val);
+}
+
 //-----------------------------------------------------------------------
 /// Range check
 //-----------------------------------------------------------------------
@@ -281,7 +310,8 @@ int                Line
 )
 {
   if(Val < Min ||
-     !(Val < Max)) {
+     !(Val < Max) ||
+     nancheck(Val)) {
     Exception e;
     e << "Out of range error in file " << File << " at line " << Line << "\n"
       << "Value:           " << Val << "\n"
@@ -300,7 +330,8 @@ int                Line
 )
 {
   if(Val < Min ||
-     Val > Max) {
+     Val > Max ||
+     nancheck(Val)) {
     Exception e;
     e << "Out of range error in file " << File << " at line " << Line << "\n"
       << "Value:           " << Val << "\n"
@@ -330,7 +361,7 @@ const char*        File,
 int                Line
 )
 {
-  if(Val < Min) {
+  if(Val < Min || nancheck(Val)) {
     Exception e;
     e << "Out of range error in file " << File << " at line " << Line << "\n"
       << "Value:           " << Val << "\n"
@@ -357,7 +388,7 @@ const char*        File,
 int                Line
 )
 {
-  if(!(Val < Max)) {
+  if(!(Val < Max) || nancheck(Val)) {
     Exception e;
     e << "Out of range error in file " << File << " at line " << Line << "\n"
       << "Value:           " << Val << "\n"

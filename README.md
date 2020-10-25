@@ -77,7 +77,7 @@ projects, such as:
 * [ECOSTRESS](https://github.jpl.nasa.gov/ecostress/ecostress-level1)
 * [OCO-3](https://github.jpl.nasa.gov/OCO/oco3-level1)
 
-Because this has been a few times, we've created a skeleton that can be used
+Because this has been done a few times, we've created a skeleton that can be used
 to get started. This skeleton has some placeholder code that can be removed
 when you have other examples (e.g., example C++ code).
 

@@ -65,6 +65,24 @@ Replace -j 20 with whatever is reasonable on your system. Also note that
 the install step can't be done in parallel, again this is pretty standard
 GNU build.
 
+## Extending geocal
+
+In addition to just using geocal, you may want to extend it. If you are just
+using this as a python library, nothing special needs to be done. If on the
+other hand you are extending the C++ (e.g., add a instrument specific camera
+model) and want to access it through python,
+there is some cookie cutter set up to use. We have a number of examples of
+projects, such as:
+
+* [ECOSTRESS](https://github.jpl.nasa.gov/ecostress/ecostress-level1)
+* [OCO-3](https://github.jpl.nasa.gov/OCO/oco3-level1)
+
+Because this has been a few times, we've created a skeleton that can be used
+to get started. This skeleton has some placeholder code that can be removed
+when you have other examples (e.g., example C++ code).
+
+* [use-geocal-skeleton](https://github.jpl.nasa.gov/Cartography/use-geocal-skeleton)
+
 ## Dependencies
 
 The GeoCal library has a few required library dependencies, and a number

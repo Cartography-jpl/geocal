@@ -44,11 +44,13 @@ class LinearGradientBadPixelDetection(object):
 
     '''
     def __init__(self, window_size = 7, percentile = 90.0, thresh_fact = 2,
-                 nfail_thresh_percentage = 75.0):
+                 nfail_thresh_percentage = 75.0,
+                 edge_handle = geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE):
         self.window_size = window_size
         self.percentile = percentile
         self.thresh_fact = thresh_fact
         self.nfail_thresh_percentage = nfail_thresh_percentage
+        self.edge_handle = edge_handle
 
     def bad_pixel_detection(self, img):
         '''Take the given image as a 2d numpy array. Return a boolean array
@@ -72,13 +74,17 @@ class LinearGradientBadPixelDetection(object):
         #    scipy.ndimage.generic_filter(down_diff, np.nanmedian,
         #       (1, window_size), mode='constant', cval=np.nan)
         down_diff_local_med = np.abs(down_diff -
-                     geocal.array_local_median(down_diff, 1, self.window_size))
+                     geocal.array_local_median(down_diff, 1, self.window_size,
+                                               self.edge_handle))
         up_diff_local_med = np.abs(up_diff -
-                     geocal.array_local_median(up_diff, 1, self.window_size))
+                     geocal.array_local_median(up_diff, 1, self.window_size,
+                                               self.edge_handle))
         right_diff_local_med = np.abs(right_diff -
-                     geocal.array_local_median(right_diff, self.window_size, 1))
+                     geocal.array_local_median(right_diff, self.window_size, 1,
+                                               self.edge_handle))
         left_diff_local_med = np.abs(left_diff -
-                     geocal.array_local_median(left_diff, self.window_size, 1))
+                     geocal.array_local_median(left_diff, self.window_size, 1,
+                                               self.edge_handle))
 
         # Calculate thresholds
         down_thresh = np.percentile(down_diff_local_med,

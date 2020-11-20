@@ -6572,7 +6572,93 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_array_local_median(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_array_local_median__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  GeoCal::array_local_edge_handle arg4 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'array_local_median', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'array_local_median', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "array_local_median" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "array_local_median" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "array_local_median" "', argument " "4"" of type '" "GeoCal::array_local_edge_handle""'");
+  } 
+  arg4 = static_cast< GeoCal::array_local_edge_handle >(val4);
+  {
+    try {
+      result = GeoCal::array_local_median((blitz::Array< double,2 > const &)*arg1,arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_array_local_median__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -6583,10 +6669,9 @@ SWIGINTERN PyObject *_wrap_array_local_median(PyObject *SWIGUNUSEDPARM(self), Py
   int ecode2 = 0 ;
   int val3 ;
   int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
   SwigValueWrapper< blitz::Array< double,2 > > result;
   
-  if (!SWIG_Python_UnpackTuple(args,"array_local_median",3,3,swig_obj)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
   {
     int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
       0 );
@@ -6651,6 +6736,30 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_array_local_median(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"array_local_median",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_array_local_median__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_array_local_median__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'array_local_median'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::array_local_median(blitz::Array< double,2 > const &,int,int,GeoCal::array_local_edge_handle)\n"
+    "    GeoCal::array_local_median(blitz::Array< double,2 > const &,int,int)\n");
+  return 0;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -6674,13 +6783,26 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"array_local_median", _wrap_array_local_median, METH_VARARGS, (char *)"\n"
 		"\n"
 		"blitz::Array< double, 2 > GeoCal::array_local_median(const blitz::Array< double, 2 > &In, int Window_nrow, int\n"
-		"Window_ncol)\n"
+		"Window_ncol, array_local_edge_handle\n"
+		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE)\n"
 		"This calculates the local median of a 2d array, using a filter of the\n"
 		"given number of rows and cols.\n"
 		"\n"
 		"The number of rows and columns should be an odd number. At the edges\n"
 		"of the array, we just go as far as we can - so the window is a smaller\n"
 		"size at the edges.\n"
+		"\n"
+		"Edge handling describes how to handle data at the edges of the array.\n"
+		"For ARRAY_LOCAL_MEDIAN_TRUNCATE (the default), then at the edges of\n"
+		"the array we just go as far as we can - so the window is a smaller\n"
+		"size at the edges. For ARRAY_LOCAL_MEDIAN_ZEROPAD, we instead zero\n"
+		"fill the edges (this matches the behavior of the matlab routine\n"
+		"medfilt_1d.\n"
+		"\n"
+		"For ARRAY_LOCAL_MEDIAN_REPEAT we repeat the first/last median value\n"
+		"for the truncated windows. So for example with a window size of 7 the\n"
+		"first 3 lines ((7-1)/2 = 3) are set to the same value as the fourth\n"
+		"line.\n"
 		"\n"
 		"This is the sort of thing that we would normally do in python, but it\n"
 		"turns out there is no efficient code in python that I could find to do\n"
@@ -7784,6 +7906,9 @@ SWIG_init(void) {
   SWIG_InstallConstants(d,swig_const_table);
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
+  SWIG_Python_SetConstant(d, "ARRAY_LOCAL_MEDIAN_TRUNCATE",SWIG_From_int(static_cast< int >(GeoCal::ARRAY_LOCAL_MEDIAN_TRUNCATE)));
+  SWIG_Python_SetConstant(d, "ARRAY_LOCAL_MEDIAN_ZEROPAD",SWIG_From_int(static_cast< int >(GeoCal::ARRAY_LOCAL_MEDIAN_ZEROPAD)));
+  SWIG_Python_SetConstant(d, "ARRAY_LOCAL_MEDIAN_REPEAT",SWIG_From_int(static_cast< int >(GeoCal::ARRAY_LOCAL_MEDIAN_REPEAT)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

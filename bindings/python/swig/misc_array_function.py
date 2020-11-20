@@ -180,12 +180,16 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+ARRAY_LOCAL_MEDIAN_TRUNCATE = _misc_array_function.ARRAY_LOCAL_MEDIAN_TRUNCATE
+ARRAY_LOCAL_MEDIAN_ZEROPAD = _misc_array_function.ARRAY_LOCAL_MEDIAN_ZEROPAD
+ARRAY_LOCAL_MEDIAN_REPEAT = _misc_array_function.ARRAY_LOCAL_MEDIAN_REPEAT
 
-def array_local_median(In, Window_nrow, Window_ncol):
+def array_local_median(*args):
     """
 
     blitz::Array< double, 2 > GeoCal::array_local_median(const blitz::Array< double, 2 > &In, int Window_nrow, int
-    Window_ncol)
+    Window_ncol, array_local_edge_handle
+    Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE)
     This calculates the local median of a 2d array, using a filter of the
     given number of rows and cols.
 
@@ -193,13 +197,25 @@ def array_local_median(In, Window_nrow, Window_ncol):
     of the array, we just go as far as we can - so the window is a smaller
     size at the edges.
 
+    Edge handling describes how to handle data at the edges of the array.
+    For ARRAY_LOCAL_MEDIAN_TRUNCATE (the default), then at the edges of
+    the array we just go as far as we can - so the window is a smaller
+    size at the edges. For ARRAY_LOCAL_MEDIAN_ZEROPAD, we instead zero
+    fill the edges (this matches the behavior of the matlab routine
+    medfilt_1d.
+
+    For ARRAY_LOCAL_MEDIAN_REPEAT we repeat the first/last median value
+    for the truncated windows. So for example with a window size of 7 the
+    first 3 lines ((7-1)/2 = 3) are set to the same value as the fourth
+    line.
+
     This is the sort of thing that we would normally do in python, but it
     turns out there is no efficient code in python that I could find to do
     this. So we have the function in C++ where it runs much faster. 
     """
-    return _misc_array_function.array_local_median(In, Window_nrow, Window_ncol)
+    return _misc_array_function.array_local_median(*args)
 
-__all__ = ["array_local_median"]
+__all__ = ["array_local_median","ARRAY_LOCAL_MEDIAN_TRUNCATE","ARRAY_LOCAL_MEDIAN_ZEROPAD","ARRAY_LOCAL_MEDIAN_REPEAT"]
 
 
 

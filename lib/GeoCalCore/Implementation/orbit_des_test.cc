@@ -85,6 +85,56 @@ BOOST_AUTO_TEST_CASE(orbit_des)
     BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
      				 *kigc.ground_coordinate(ic)) < 1e-2);
   }
+  // Check that initially CartesianInertial
+  BOOST_CHECK(!orb.pos_csephb()->is_cf());
+  BOOST_CHECK(!orb.att_csattb()->is_cf());
+  // Should be a noop
+  orb.convert_to_ci();
+  BOOST_CHECK(!orb.pos_csephb()->is_cf());
+  BOOST_CHECK(!orb.att_csattb()->is_cf());
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
+  }
+
+  // Convert to cf
+  orb.convert_to_cf();
+  BOOST_CHECK(orb.pos_csephb()->is_cf());
+  BOOST_CHECK(orb.att_csattb()->is_cf());
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
+  }
+
+  // Convert back
+  orb.convert_to_ci();
+  BOOST_CHECK(!orb.pos_csephb()->is_cf());
+  BOOST_CHECK(!orb.att_csattb()->is_cf());
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
+  }
 }
 
 BOOST_AUTO_TEST_CASE(serialization_pos_csephb)

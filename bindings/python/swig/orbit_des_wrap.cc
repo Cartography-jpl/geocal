@@ -14083,6 +14083,90 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitDes_convert_to_ci(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDes > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDes > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDes_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDes_convert_to_ci" "', argument " "1"" of type '" "GeoCal::OrbitDes *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->convert_to_ci();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitDes_convert_to_cf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitDes > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitDes > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitDes_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitDes_convert_to_cf" "', argument " "1"" of type '" "GeoCal::OrbitDes *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitDes > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitDes * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->convert_to_cf();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_OrbitDes__v_pos_csephb(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitDes *arg1 = (GeoCal::OrbitDes *) 0 ;
@@ -14557,6 +14641,20 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(const TimeWithDerivative &T) const\n"
 		"\n"
+		""},
+	 { (char *)"OrbitDes_convert_to_ci", (PyCFunction)_wrap_OrbitDes_convert_to_ci, METH_O, (char *)"\n"
+		"\n"
+		"void GeoCal::OrbitDes::convert_to_ci()\n"
+		"Convert PosCsephb and AttCsattb to use CartesianInertial.\n"
+		"\n"
+		"If they already do this, then this doesn't do anything. \n"
+		""},
+	 { (char *)"OrbitDes_convert_to_cf", (PyCFunction)_wrap_OrbitDes_convert_to_cf, METH_O, (char *)"\n"
+		"\n"
+		"void GeoCal::OrbitDes::convert_to_cf()\n"
+		"Convert PosCsephb and AttCsattb to use CartesianFixed.\n"
+		"\n"
+		"If they already do this, then this doesn't do anything. \n"
 		""},
 	 { (char *)"OrbitDes__v_pos_csephb", (PyCFunction)_wrap_OrbitDes__v_pos_csephb, METH_O, (char *)"\n"
 		"\n"

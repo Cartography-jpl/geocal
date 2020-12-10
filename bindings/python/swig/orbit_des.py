@@ -909,6 +909,28 @@ class OrbitDes(geocal_swig.orbit.Orbit):
         return _orbit_des.OrbitDes_orbit_data(self, *args)
 
 
+    def convert_to_ci(self):
+        """
+
+        void GeoCal::OrbitDes::convert_to_ci()
+        Convert PosCsephb and AttCsattb to use CartesianInertial.
+
+        If they already do this, then this doesn't do anything. 
+        """
+        return _orbit_des.OrbitDes_convert_to_ci(self)
+
+
+    def convert_to_cf(self):
+        """
+
+        void GeoCal::OrbitDes::convert_to_cf()
+        Convert PosCsephb and AttCsattb to use CartesianFixed.
+
+        If they already do this, then this doesn't do anything. 
+        """
+        return _orbit_des.OrbitDes_convert_to_cf(self)
+
+
     def _v_pos_csephb(self):
         """
 
@@ -960,6 +982,8 @@ class OrbitDes(geocal_swig.orbit.Orbit):
 
     __swig_destroy__ = _orbit_des.delete_OrbitDes
 OrbitDes.orbit_data = new_instancemethod(_orbit_des.OrbitDes_orbit_data, None, OrbitDes)
+OrbitDes.convert_to_ci = new_instancemethod(_orbit_des.OrbitDes_convert_to_ci, None, OrbitDes)
+OrbitDes.convert_to_cf = new_instancemethod(_orbit_des.OrbitDes_convert_to_cf, None, OrbitDes)
 OrbitDes._v_pos_csephb = new_instancemethod(_orbit_des.OrbitDes__v_pos_csephb, None, OrbitDes)
 OrbitDes._v_att_csattb = new_instancemethod(_orbit_des.OrbitDes__v_att_csattb, None, OrbitDes)
 OrbitDes._v_naif_code = new_instancemethod(_orbit_des.OrbitDes__v_naif_code, None, OrbitDes)

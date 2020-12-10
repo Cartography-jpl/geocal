@@ -744,3 +744,73 @@ void OrbitDes::print(std::ostream& Os) const
   opad << *att_csattb() << "\n";
   opad.strict_sync();
 }
+
+//-----------------------------------------------------------------------
+/// Switch from CartesianInertial to CartesianFixed or vice versa.
+//-----------------------------------------------------------------------
+
+void AttCsattb::convert_cf_and_ci(const OrbitDes& orb)
+{
+  blitz::Range ra = blitz::Range::all();
+  blitz::Array<double, 2> att_new(att.shape());
+  for(int i = 0; i < att.rows(); ++i) {
+    Time t = min_time_ + tstep_ * i;
+    boost::shared_ptr<QuaternionOrbitData> od =
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t));
+    boost::math::quaternion<double> attq = nitf_to_quaternion(att(i, ra));
+    normalize(attq);
+    if(is_cf_) {
+      QuaternionOrbitData od2(od->time(), od->position_cf(),
+			      od->velocity_cf(), attq);
+      att_new(i, ra) = quaternion_to_nitf(od2.sc_to_ci());
+    } else {
+      QuaternionOrbitData od2(od->time(), od->position_ci(),
+			      od->velocity_ci(), attq);
+      att_new(i, ra) = quaternion_to_nitf(od2.sc_to_cf());
+    }
+  }
+  att.reference(att_new);
+  // We lie briefly. OrbitDes which is a friend of this class sets
+  // this once PosCsephb is also converted
+  // if(is_cf_)
+  //   is_cf_ = false;
+  // else
+  //   is_cf_ = true;
+}
+
+//-----------------------------------------------------------------------
+/// Switch from CartesianInertial to CartesianFixed or vice versa.
+//-----------------------------------------------------------------------
+
+void PosCsephb::convert_cf_and_ci(const OrbitDes& orb)
+{
+  blitz::Array<double, 2> pos_new(pos.shape());
+  for(int i = 0; i < pos.rows(); ++i) {
+    Time t = min_time_ + tstep_ * i;
+    boost::shared_ptr<QuaternionOrbitData> od =
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t));
+    boost::array<double, 3> p;
+    p[0] = pos(i,0);
+    p[1] = pos(i,1);
+    p[2] = pos(i,2);
+    if(is_cf_) {
+      QuaternionOrbitData od2(od->time(), od->position_cf()->create(p),
+			      od->velocity_cf(), od->sc_to_cf());
+      pos_new(i, 0) = od2.position_ci()->position[0];
+      pos_new(i, 1) = od2.position_ci()->position[1];
+      pos_new(i, 2) = od2.position_ci()->position[2];
+    } else {
+      QuaternionOrbitData od2(od->time(), od->position_ci()->create(p),
+			      od->velocity_ci(), od->sc_to_ci());
+      pos_new(i, 0) = od2.position_cf()->position[0];
+      pos_new(i, 1) = od2.position_cf()->position[1];
+      pos_new(i, 2) = od2.position_cf()->position[2];
+    }
+  }
+  pos.reference(pos_new);
+  if(is_cf_)
+    is_cf_ = false;
+  else
+    is_cf_ = true;
+}
+

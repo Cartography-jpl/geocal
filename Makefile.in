@@ -531,7 +531,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/material_detect_wrap.cc @swigsrc@/ibis_file_wrap.cc \
 	@swigsrc@/vicar_file_wrap.cc @swigsrc@/vicar_argument_wrap.cc \
 	@swigsrc@/vicar_dem_wrap.cc @swigsrc@/datum_geoid96_wrap.cc \
-	@swigsrc@/srtm_dem_wrap.cc \
+	@swigsrc@/srtm_dem_wrap.cc @swigsrc@/trex_dem_wrap.cc \
 	@swigsrc@/vicar_raster_image_wrap.cc \
 	@swigsrc@/mspi_config_file_wrap.cc \
 	@swigsrc@/mspi_paraxial_transform_wrap.cc \
@@ -734,6 +734,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_dem_wrap.lo \
 	@swigsrc@/_swig_wrap_la-datum_geoid96_wrap.lo \
 	@swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo \
+	@swigsrc@/_swig_wrap_la-trex_dem_wrap.lo \
 	@swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-mspi_config_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-mspi_paraxial_transform_wrap.lo \
@@ -939,8 +940,9 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srccartlab@/vicar_argument.cc @srccartlab@/vicar_dem.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/datum_geoid96.cc @srccartlab@/srtm_dem.cc \
-	@srccartlab@/vicar_ogr.cc @srcmspi@/ifstream_cs.cc \
-	@srcmspi@/air_mspi_file.cc @srcmspi@/mspi_config_file.cc \
+	@srccartlab@/trex_dem.cc @srccartlab@/vicar_ogr.cc \
+	@srcmspi@/ifstream_cs.cc @srcmspi@/air_mspi_file.cc \
+	@srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
 	@srcmspi@/ground_mspi_orbit.cc @srcmspi@/ground_mspi_igc.cc \
@@ -1138,7 +1140,8 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srccartlab@/libgeocal_la-vicar_file.lo \
 	@srccartlab@/libgeocal_la-vicar_raster_image.lo \
 	@srccartlab@/libgeocal_la-datum_geoid96.lo \
-	@srccartlab@/libgeocal_la-srtm_dem.lo $(am__objects_11) \
+	@srccartlab@/libgeocal_la-srtm_dem.lo \
+	@srccartlab@/libgeocal_la-trex_dem.lo $(am__objects_11) \
 	@srcmspi@/libgeocal_la-ifstream_cs.lo \
 	@srcmspi@/libgeocal_la-air_mspi_file.lo \
 	@srcmspi@/libgeocal_la-mspi_config_file.lo \
@@ -1319,6 +1322,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srccartlab@/vicar_raster_image_test.cc \
 	@srccartlab@/vicar_tiled_file_test.cc \
 	@srccartlab@/datum_geoid96_test.cc \
+	@srccartlab@/srtm_dem_test.cc @srccartlab@/trex_dem_test.cc \
 	@srcmspi@/ifstream_cs_test.cc \
 	@srcmspi@/mspi_config_file_test.cc \
 	@srcmspi@/mspi_paraxial_transform_test.cc \
@@ -1486,6 +1490,8 @@ am_geocal_test_all_OBJECTS =  \
 	@srccartlab@/geocal_test_all-vicar_raster_image_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-vicar_tiled_file_test.$(OBJEXT) \
 	@srccartlab@/geocal_test_all-datum_geoid96_test.$(OBJEXT) \
+	@srccartlab@/geocal_test_all-srtm_dem_test.$(OBJEXT) \
+	@srccartlab@/geocal_test_all-trex_dem_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-ifstream_cs_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-mspi_config_file_test.$(OBJEXT) \
 	@srcmspi@/geocal_test_all-mspi_paraxial_transform_test.$(OBJEXT) \
@@ -1562,6 +1568,8 @@ am__depfiles_remade =  \
 	@srccartlab@/$(DEPDIR)/geocal_test_all-quickbird_time_table_test.Po \
 	@srccartlab@/$(DEPDIR)/geocal_test_all-spot_camera_test.Po \
 	@srccartlab@/$(DEPDIR)/geocal_test_all-spot_orbit_test.Po \
+	@srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Po \
+	@srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Po \
 	@srccartlab@/$(DEPDIR)/geocal_test_all-vicar_dem_test.Po \
 	@srccartlab@/$(DEPDIR)/geocal_test_all-vicar_file_test.Po \
 	@srccartlab@/$(DEPDIR)/geocal_test_all-vicar_lite_file_test.Po \
@@ -1585,6 +1593,7 @@ am__depfiles_remade =  \
 	@srccartlab@/$(DEPDIR)/libgeocal_la-spot_camera.Plo \
 	@srccartlab@/$(DEPDIR)/libgeocal_la-spot_orbit.Plo \
 	@srccartlab@/$(DEPDIR)/libgeocal_la-srtm_dem.Plo \
+	@srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Plo \
 	@srccartlab@/$(DEPDIR)/libgeocal_la-vicar_argument.Plo \
 	@srccartlab@/$(DEPDIR)/libgeocal_la-vicar_dem.Plo \
 	@srccartlab@/$(DEPDIR)/libgeocal_la-vicar_file.Plo \
@@ -2122,6 +2131,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-tiled_file_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-time_table_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo \
@@ -2377,9 +2387,10 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srccartlab@/vicar_dem.h @srccartlab@/vicar_file.h \
 	@srccartlab@/vicar_tiled_file.h \
 	@srccartlab@/vicar_raster_image.h @srccartlab@/datum_geoid96.h \
-	@srccartlab@/srtm_dem.h @srccartlab@/vicar_ogr.h \
-	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
-	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
+	@srccartlab@/srtm_dem.h @srccartlab@/trex_dem.h \
+	@srccartlab@/vicar_ogr.h @srcmspi@/filtering_fstream.h \
+	@srcmspi@/ifstream_cs.h @srcmspi@/air_mspi_file.h \
+	@srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/mspi_gimbal.h @srcmspi@/air_mspi_orbit.h \
 	@srcmspi@/ground_mspi_orbit.h @srcmspi@/ground_mspi_igc.h \
@@ -3400,8 +3411,9 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srccartlab@/vicar_argument.cc @srccartlab@/vicar_dem.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/datum_geoid96.cc @srccartlab@/srtm_dem.cc \
-	$(am__append_31) @srcmspi@/ifstream_cs.cc \
-	@srcmspi@/air_mspi_file.cc @srcmspi@/mspi_config_file.cc \
+	@srccartlab@/trex_dem.cc $(am__append_31) \
+	@srcmspi@/ifstream_cs.cc @srcmspi@/air_mspi_file.cc \
+	@srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
 	@srcmspi@/ground_mspi_orbit.cc @srcmspi@/ground_mspi_igc.cc \
@@ -3562,7 +3574,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/material_detect_wrap.cc @swigsrc@/ibis_file_wrap.cc \
 	@swigsrc@/vicar_file_wrap.cc @swigsrc@/vicar_argument_wrap.cc \
 	@swigsrc@/vicar_dem_wrap.cc @swigsrc@/datum_geoid96_wrap.cc \
-	@swigsrc@/srtm_dem_wrap.cc \
+	@swigsrc@/srtm_dem_wrap.cc @swigsrc@/trex_dem_wrap.cc \
 	@swigsrc@/vicar_raster_image_wrap.cc \
 	@swigsrc@/mspi_config_file_wrap.cc \
 	@swigsrc@/mspi_paraxial_transform_wrap.cc \
@@ -3795,9 +3807,10 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srccartlab@/vicar_dem.h @srccartlab@/vicar_file.h \
 	@srccartlab@/vicar_tiled_file.h \
 	@srccartlab@/vicar_raster_image.h @srccartlab@/datum_geoid96.h \
-	@srccartlab@/srtm_dem.h $(am__append_30) \
-	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
-	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
+	@srccartlab@/srtm_dem.h @srccartlab@/trex_dem.h \
+	$(am__append_30) @srcmspi@/filtering_fstream.h \
+	@srcmspi@/ifstream_cs.h @srcmspi@/air_mspi_file.h \
+	@srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
 	@srcmspi@/mspi_gimbal.h @srcmspi@/air_mspi_orbit.h \
 	@srcmspi@/ground_mspi_orbit.h @srcmspi@/ground_mspi_igc.h \
@@ -3971,8 +3984,8 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srccartlab@/ibis_file.i @srccartlab@/vicar_file.i \
 	@srccartlab@/vicar_argument.i @srccartlab@/vicar_dem.i \
 	@srccartlab@/datum_geoid96.i @srccartlab@/srtm_dem.i \
-	@srccartlab@/vicar_raster_image.i @srccartlab@/vicar_ogr.i \
-	@srcmspi@/mspi_config_file.i \
+	@srccartlab@/trex_dem.i @srccartlab@/vicar_raster_image.i \
+	@srccartlab@/vicar_ogr.i @srcmspi@/mspi_config_file.i \
 	@srcmspi@/mspi_paraxial_transform.i @srcmspi@/mspi_camera.i \
 	@srcmspi@/mspi_gimbal.i @srcmspi@/air_mspi_orbit.i \
 	@srcmspi@/ground_mspi_orbit.i @srcmspi@/ground_mspi_igc.i \
@@ -4113,6 +4126,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srccartlab@/vicar_raster_image_test.cc \
 	@srccartlab@/vicar_tiled_file_test.cc \
 	@srccartlab@/datum_geoid96_test.cc \
+	@srccartlab@/srtm_dem_test.cc @srccartlab@/trex_dem_test.cc \
 	@srcmspi@/ifstream_cs_test.cc \
 	@srcmspi@/mspi_config_file_test.cc \
 	@srcmspi@/mspi_paraxial_transform_test.cc \
@@ -4964,6 +4978,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-trex_dem_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-mspi_config_file_wrap.lo:  \
@@ -5591,6 +5607,8 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/libgeocal_la-srtm_dem.lo: @srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
+@srccartlab@/libgeocal_la-trex_dem.lo: @srccartlab@/$(am__dirstamp) \
+	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
 @srccartlab@/libgeocal_la-vicar_ogr.lo: @srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/$(am__dirstamp):
@@ -6133,6 +6151,12 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srccartlab@/geocal_test_all-datum_geoid96_test.$(OBJEXT):  \
 	@srccartlab@/$(am__dirstamp) \
 	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
+@srccartlab@/geocal_test_all-srtm_dem_test.$(OBJEXT):  \
+	@srccartlab@/$(am__dirstamp) \
+	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
+@srccartlab@/geocal_test_all-trex_dem_test.$(OBJEXT):  \
+	@srccartlab@/$(am__dirstamp) \
+	@srccartlab@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-ifstream_cs_test.$(OBJEXT):  \
 	@srcmspi@/$(am__dirstamp) @srcmspi@/$(DEPDIR)/$(am__dirstamp)
 @srcmspi@/geocal_test_all-mspi_config_file_test.$(OBJEXT):  \
@@ -6331,6 +6355,8 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-quickbird_time_table_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-spot_camera_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-spot_orbit_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-vicar_dem_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-vicar_file_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/geocal_test_all-vicar_lite_file_test.Po@am__quote@ # am--include-marker
@@ -6354,6 +6380,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-spot_camera.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-spot_orbit.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-srtm_dem.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-vicar_argument.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-vicar_dem.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srccartlab@/$(DEPDIR)/libgeocal_la-vicar_file.Plo@am__quote@ # am--include-marker
@@ -6891,6 +6918,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tiled_file_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-time_table_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo@am__quote@ # am--include-marker
@@ -8185,6 +8213,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/srtm_dem_wrap.cc' object='@swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-srtm_dem_wrap.lo `test -f '@swigsrc@/srtm_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/srtm_dem_wrap.cc
+
+@swigsrc@/_swig_wrap_la-trex_dem_wrap.lo: @swigsrc@/trex_dem_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-trex_dem_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-trex_dem_wrap.lo `test -f '@swigsrc@/trex_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/trex_dem_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/trex_dem_wrap.cc' object='@swigsrc@/_swig_wrap_la-trex_dem_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-trex_dem_wrap.lo `test -f '@swigsrc@/trex_dem_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/trex_dem_wrap.cc
 
 @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo: @swigsrc@/vicar_raster_image_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-vicar_raster_image_wrap.lo `test -f '@swigsrc@/vicar_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/vicar_raster_image_wrap.cc
@@ -9683,6 +9718,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srccartlab@/srtm_dem.cc' object='@srccartlab@/libgeocal_la-srtm_dem.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/libgeocal_la-srtm_dem.lo `test -f '@srccartlab@/srtm_dem.cc' || echo '$(srcdir)/'`@srccartlab@/srtm_dem.cc
+
+@srccartlab@/libgeocal_la-trex_dem.lo: @srccartlab@/trex_dem.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/libgeocal_la-trex_dem.lo -MD -MP -MF @srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Tpo -c -o @srccartlab@/libgeocal_la-trex_dem.lo `test -f '@srccartlab@/trex_dem.cc' || echo '$(srcdir)/'`@srccartlab@/trex_dem.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Tpo @srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srccartlab@/trex_dem.cc' object='@srccartlab@/libgeocal_la-trex_dem.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/libgeocal_la-trex_dem.lo `test -f '@srccartlab@/trex_dem.cc' || echo '$(srcdir)/'`@srccartlab@/trex_dem.cc
 
 @srccartlab@/libgeocal_la-vicar_ogr.lo: @srccartlab@/vicar_ogr.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/libgeocal_la-vicar_ogr.lo -MD -MP -MF @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_ogr.Tpo -c -o @srccartlab@/libgeocal_la-vicar_ogr.lo `test -f '@srccartlab@/vicar_ogr.cc' || echo '$(srcdir)/'`@srccartlab@/vicar_ogr.cc
@@ -11973,6 +12015,34 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-datum_geoid96_test.obj `if test -f '@srccartlab@/datum_geoid96_test.cc'; then $(CYGPATH_W) '@srccartlab@/datum_geoid96_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/datum_geoid96_test.cc'; fi`
 
+@srccartlab@/geocal_test_all-srtm_dem_test.o: @srccartlab@/srtm_dem_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-srtm_dem_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Tpo -c -o @srccartlab@/geocal_test_all-srtm_dem_test.o `test -f '@srccartlab@/srtm_dem_test.cc' || echo '$(srcdir)/'`@srccartlab@/srtm_dem_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Tpo @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srccartlab@/srtm_dem_test.cc' object='@srccartlab@/geocal_test_all-srtm_dem_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-srtm_dem_test.o `test -f '@srccartlab@/srtm_dem_test.cc' || echo '$(srcdir)/'`@srccartlab@/srtm_dem_test.cc
+
+@srccartlab@/geocal_test_all-srtm_dem_test.obj: @srccartlab@/srtm_dem_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-srtm_dem_test.obj -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Tpo -c -o @srccartlab@/geocal_test_all-srtm_dem_test.obj `if test -f '@srccartlab@/srtm_dem_test.cc'; then $(CYGPATH_W) '@srccartlab@/srtm_dem_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/srtm_dem_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Tpo @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srccartlab@/srtm_dem_test.cc' object='@srccartlab@/geocal_test_all-srtm_dem_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-srtm_dem_test.obj `if test -f '@srccartlab@/srtm_dem_test.cc'; then $(CYGPATH_W) '@srccartlab@/srtm_dem_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/srtm_dem_test.cc'; fi`
+
+@srccartlab@/geocal_test_all-trex_dem_test.o: @srccartlab@/trex_dem_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-trex_dem_test.o -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Tpo -c -o @srccartlab@/geocal_test_all-trex_dem_test.o `test -f '@srccartlab@/trex_dem_test.cc' || echo '$(srcdir)/'`@srccartlab@/trex_dem_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Tpo @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srccartlab@/trex_dem_test.cc' object='@srccartlab@/geocal_test_all-trex_dem_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-trex_dem_test.o `test -f '@srccartlab@/trex_dem_test.cc' || echo '$(srcdir)/'`@srccartlab@/trex_dem_test.cc
+
+@srccartlab@/geocal_test_all-trex_dem_test.obj: @srccartlab@/trex_dem_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srccartlab@/geocal_test_all-trex_dem_test.obj -MD -MP -MF @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Tpo -c -o @srccartlab@/geocal_test_all-trex_dem_test.obj `if test -f '@srccartlab@/trex_dem_test.cc'; then $(CYGPATH_W) '@srccartlab@/trex_dem_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/trex_dem_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Tpo @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srccartlab@/trex_dem_test.cc' object='@srccartlab@/geocal_test_all-trex_dem_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srccartlab@/geocal_test_all-trex_dem_test.obj `if test -f '@srccartlab@/trex_dem_test.cc'; then $(CYGPATH_W) '@srccartlab@/trex_dem_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srccartlab@/trex_dem_test.cc'; fi`
+
 @srcmspi@/geocal_test_all-ifstream_cs_test.o: @srcmspi@/ifstream_cs_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcmspi@/geocal_test_all-ifstream_cs_test.o -MD -MP -MF @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Tpo -c -o @srcmspi@/geocal_test_all-ifstream_cs_test.o `test -f '@srcmspi@/ifstream_cs_test.cc' || echo '$(srcdir)/'`@srcmspi@/ifstream_cs_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Tpo @srcmspi@/$(DEPDIR)/geocal_test_all-ifstream_cs_test.Po
@@ -13143,6 +13213,8 @@ distclean: distclean-am
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-quickbird_time_table_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-spot_camera_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-spot_orbit_test.Po
+	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Po
+	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_dem_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_file_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_lite_file_test.Po
@@ -13166,6 +13238,7 @@ distclean: distclean-am
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-spot_camera.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-spot_orbit.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-srtm_dem.Plo
+	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_argument.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_dem.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_file.Plo
@@ -13703,6 +13776,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-tiled_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-time_table_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo
@@ -13790,6 +13864,8 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-quickbird_time_table_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-spot_camera_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-spot_orbit_test.Po
+	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-srtm_dem_test.Po
+	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-trex_dem_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_dem_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_file_test.Po
 	-rm -f @srccartlab@/$(DEPDIR)/geocal_test_all-vicar_lite_file_test.Po
@@ -13813,6 +13889,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-spot_camera.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-spot_orbit.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-srtm_dem.Plo
+	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-trex_dem.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_argument.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_dem.Plo
 	-rm -f @srccartlab@/$(DEPDIR)/libgeocal_la-vicar_file.Plo
@@ -14350,6 +14427,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-tiled_file_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-time_table_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo

@@ -45,6 +45,8 @@ geocalinc_HEADERS+= @srccartlab@/datum_geoid96.h
 libgeocal_la_SOURCES+= @srccartlab@/datum_geoid96.cc
 geocalinc_HEADERS+= @srccartlab@/srtm_dem.h
 libgeocal_la_SOURCES+= @srccartlab@/srtm_dem.cc
+geocalinc_HEADERS+= @srccartlab@/trex_dem.h
+libgeocal_la_SOURCES+= @srccartlab@/trex_dem.cc
 if HAVE_GDAL
   geocalinc_HEADERS+= @srccartlab@/vicar_ogr.h
   libgeocal_la_SOURCES+= @srccartlab@/vicar_ogr.cc
@@ -95,6 +97,8 @@ SWIG_SRC += @swigsrc@/datum_geoid96_wrap.cc
 geocalswiginc_HEADERS += @srccartlab@/datum_geoid96.i
 SWIG_SRC += @swigsrc@/srtm_dem_wrap.cc
 geocalswiginc_HEADERS += @srccartlab@/srtm_dem.i
+SWIG_SRC += @swigsrc@/trex_dem_wrap.cc
+geocalswiginc_HEADERS += @srccartlab@/trex_dem.i
 SWIG_SRC += @swigsrc@/vicar_raster_image_wrap.cc
 geocalswiginc_HEADERS += @srccartlab@/vicar_raster_image.i
 SWIG_SRC_GDAL += @swigsrc@/vicar_ogr_wrap.cc
@@ -119,6 +123,8 @@ geocal_test_all_SOURCES+= @srccartlab@/vicar_file_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/vicar_raster_image_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/vicar_tiled_file_test.cc
 geocal_test_all_SOURCES+= @srccartlab@/datum_geoid96_test.cc
+geocal_test_all_SOURCES+= @srccartlab@/srtm_dem_test.cc
+geocal_test_all_SOURCES+= @srccartlab@/trex_dem_test.cc
 
 AM_CPPFLAGS+= -I$(srcdir)/@srccartlab@
 

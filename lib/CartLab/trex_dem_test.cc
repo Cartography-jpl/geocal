@@ -17,7 +17,10 @@ BOOST_AUTO_TEST_CASE(basic_test)
     return;
   try {
       TrexDem d;
-      // Compared with google earth, using a datum undulation of -33.3435
+      // Compared with google earth, using a datum undulation of
+      // -33.3435.
+      // Google Earth is 926 m. Add undulation to get
+      // 892.6565. Google earth is height above sea level
       BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(34.2,-118.03)),
 			891.6565, 1e-4);
   } catch(const Exception&) {

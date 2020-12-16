@@ -1,5 +1,5 @@
 from builtins import range
-from geocal.world_view2_reflectance import *
+from .world_view2_reflectance import *
 from test_support import *
 
 def test_print():

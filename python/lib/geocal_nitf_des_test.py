@@ -5,7 +5,7 @@ except ImportError:
 from test_support import *
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes, Time, KeplerOrbit,
                          GlasGfmCamera)
-from geocal.geocal_nitf_des import *
+from .geocal_nitf_des import *
 try:
     import pynitf
     have_pynitf = True

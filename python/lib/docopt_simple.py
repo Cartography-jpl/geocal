@@ -1,5 +1,5 @@
 from builtins import object
-from geocal.docopt import *
+from .docopt import *
 from geocal_swig import VicarArgument
 import sys
 import re

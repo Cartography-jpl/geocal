@@ -1,4 +1,4 @@
-from geocal.linear_gradient_bad_pixel_detection import *
+from .linear_gradient_bad_pixel_detection import *
 from geocal_swig import IterativeMorphologicalDilation
 import matplotlib.pyplot as plt
 from test_support import *

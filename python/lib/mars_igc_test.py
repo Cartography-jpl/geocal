@@ -3,7 +3,7 @@ try:
 except ImportError:
     pass
 from test_support import *
-from geocal.mars_igc import *
+from .mars_igc import *
 
 @require_spice
 @require_mars_spice

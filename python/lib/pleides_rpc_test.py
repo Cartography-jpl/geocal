@@ -1,6 +1,6 @@
 from builtins import str
 from builtins import range
-from pleides_rpc import *
+from .pleides_rpc import *
 from test_support import *
 
 def test_pleides_rpc():

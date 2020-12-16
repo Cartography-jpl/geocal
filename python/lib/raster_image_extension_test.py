@@ -1,7 +1,7 @@
 from builtins import range
-from geocal.raster_image_extension import *
+from .raster_image_extension import *
 from test_support import *
-import geocal.safe_matplotlib_import
+from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 
 img = VicarLiteRasterImage(unit_test_data + "vicar.img")

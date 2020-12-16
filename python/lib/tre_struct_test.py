@@ -1,6 +1,6 @@
 from builtins import str
 from builtins import range
-from tre_struct import *
+from .tre_struct import *
 import subprocess
 from test_support import *
 import sys

@@ -1,6 +1,6 @@
 from test_support import *
-from geocal.dem_generate import *
-from geocal.image_ground_connection import *
+from .dem_generate import *
+from .image_ground_connection import *
 from geocal_swig import VicarLiteRasterImage
 import multiprocessing
 from multiprocessing import Pool

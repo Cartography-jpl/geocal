@@ -1,4 +1,4 @@
-from geocal.image_to_image_connection import *
+from .image_to_image_connection import *
 import pickle
 from test_support import *
 

@@ -1,4 +1,4 @@
-from geocal.pds_label import *
+from .pds_label import *
 from test_support import *
 import os
 import glob

@@ -1,4 +1,4 @@
-from geocal.vicar_interface import *
+from .vicar_interface import *
 from test_support import *
 
 @require_vicarb

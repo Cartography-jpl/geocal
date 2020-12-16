@@ -1,5 +1,5 @@
-from geocal.job_database import *
-from geocal.misc import *
+from .job_database import *
+from .misc import *
 import logging
 from test_support import *
 

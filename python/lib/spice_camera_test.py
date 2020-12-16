@@ -1,6 +1,6 @@
 from test_support import *
-from geocal.spice_camera import *
-from geocal.sqlite_shelf import write_shelve
+from .spice_camera import *
+from .sqlite_shelf import write_shelve
 
 @require_spice
 @require_mars_spice

@@ -1,4 +1,4 @@
-from geocal.ikonos_reflectance import *
+from .ikonos_reflectance import *
 from test_support import *
 
 def test_print():

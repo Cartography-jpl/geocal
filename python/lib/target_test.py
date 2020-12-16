@@ -1,4 +1,4 @@
-from geocal.target import *
+from .target import *
 from test_support import *
 
 @require_rsync

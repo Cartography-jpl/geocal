@@ -1,4 +1,4 @@
-from orbit_extension import *
+from .orbit_extension import *
 from test_support import *
 
 def test_orbit_from_tle():

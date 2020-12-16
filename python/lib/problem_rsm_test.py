@@ -3,10 +3,10 @@ try:
 except ImportError:
     pass
 from test_support import *
-import geocal.geocal_nitf_rsm
-from geocal.geocal_nitf_rsm import *
-from geocal.geocal_nitf_des import *
-from geocal.glas_gfm import *
+from .geocal_nitf_rsm import *
+from .geocal_nitf_rsm import *
+from .geocal_nitf_des import *
+from .glas_gfm import *
 from geocal_swig import *
 
 def create_image_seg(f):

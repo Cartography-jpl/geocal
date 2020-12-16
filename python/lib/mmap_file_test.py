@@ -1,5 +1,5 @@
 from builtins import range
-from geocal.mmap_file import *
+from .mmap_file import *
 from test_support import *
 import pickle
 

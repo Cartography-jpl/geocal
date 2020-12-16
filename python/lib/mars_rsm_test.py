@@ -1,6 +1,6 @@
 from test_support import *
-from geocal.mars_igc import *
-from geocal.mars_rsm import *
+from .mars_igc import *
+from .mars_rsm import *
 
 @long_test
 @require_spice

@@ -1,6 +1,6 @@
 import geocal_swig
 from test_support import *
-from geocal.geocal_nitf_misc import *
+from .geocal_nitf_misc import *
 
 def test_time_conversion():
     '''Tests going from geocal Time to and from various NITF representations'''

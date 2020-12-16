@@ -3,7 +3,7 @@ try:
 except ImportError:
     pass
 from test_support import *
-from geocal.geocal_nitf_rpc import *
+from .geocal_nitf_rpc import *
 import geocal_swig
 from geocal_swig import ImageCoordinate, IgcMsp
 

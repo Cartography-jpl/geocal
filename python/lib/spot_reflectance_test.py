@@ -1,4 +1,4 @@
-from geocal.spot_reflectance import *
+from .spot_reflectance import *
 from test_support import *
 
 

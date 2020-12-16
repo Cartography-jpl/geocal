@@ -1,4 +1,4 @@
-from geocal.vicar_wrap import *
+from .vicar_wrap import *
 import math
 from test_support import *
 

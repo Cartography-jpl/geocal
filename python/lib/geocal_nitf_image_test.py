@@ -3,7 +3,7 @@ try:
 except ImportError:
     pass
 from test_support import *
-from geocal.geocal_nitf_image import *
+from .geocal_nitf_image import *
 
 # This requires hard coded data, so don't normally run.
 @require_pynitf

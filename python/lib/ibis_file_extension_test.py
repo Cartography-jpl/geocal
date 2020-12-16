@@ -1,4 +1,4 @@
-from geocal.ibis_file_extension import *
+from .ibis_file_extension import *
 from test_support import *
 
 @require_vicar

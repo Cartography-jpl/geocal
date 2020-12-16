@@ -1,6 +1,6 @@
-from geocal.output_cache import *
-from geocal.local_target import *
-from geocal.misc import makedirs_p
+from .output_cache import *
+from .local_target import *
+from .misc import makedirs_p
 from test_support import *
 import shutil
 

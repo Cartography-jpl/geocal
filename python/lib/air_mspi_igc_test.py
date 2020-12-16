@@ -1,5 +1,5 @@
 from test_support import *
-from geocal.air_mspi_igc import *
+from .air_mspi_igc import *
 import pickle
 
 test_data = "/raid3/test_data/AirMSPI_ER2_Hanford_GRP_ELLIPSOID_20130118_174900Z_286F_F01_V001.hdf"

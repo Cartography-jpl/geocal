@@ -1,10 +1,10 @@
 from builtins import range
 from test_support import *
-from geocal.image_ground_connection import *
-from geocal.igc_collection_extension import *
+from .image_ground_connection import *
+from .igc_collection_extension import *
 import scipy
 import scipy.optimize
-from sqlite_shelf import write_shelve, read_shelve
+from .sqlite_shelf import write_shelve, read_shelve
 from multiprocessing import Pool
 
 # Some test data we have on pistol, along with a point of 

@@ -1,4 +1,4 @@
-from geocal.misc import *
+from .misc import *
 from test_support import *
 import json
 

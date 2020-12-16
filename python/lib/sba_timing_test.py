@@ -1,9 +1,9 @@
 from builtins import range
-from geocal.tie_point_extension import *
-from geocal.image_ground_connection import *
-from geocal.igc_collection_extension import *
-from geocal.simultaneous_bundle_adjustment import *
-from geocal.lm_optimize import *
+from .tie_point_extension import *
+from .image_ground_connection import *
+from .igc_collection_extension import *
+from .simultaneous_bundle_adjustment import *
+from .lm_optimize import *
 from test_support import *
 import logging
 import sys

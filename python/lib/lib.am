@@ -64,6 +64,7 @@ else
 # Used to short circuit tests that would otherwise run.
 export NO_VICAR_GDALPLUGIN=t
 endif
+EXTRA_DIST+=@srcpythonlib@/__init__.py
 EXTRA_DIST+=@srcpythonlib@/air_mspi_igc_test.py
 EXTRA_DIST+=@srcpythonlib@/dem_generate_test.py
 EXTRA_DIST+=@srcpythonlib@/docopt_simple_test.py

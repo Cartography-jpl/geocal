@@ -4,8 +4,8 @@ except ImportError:
     pass
 
 from test_support import *
-from geocal.geocal_nitf_des import *
-from geocal.glas_gfm import *
+from .geocal_nitf_des import *
+from .glas_gfm import *
 from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
                          KeplerOrbit, Time, OrbitDes, Ecr)

@@ -1,4 +1,4 @@
-from geocal.image_ground_connection import *
+from .image_ground_connection import *
 from test_support import *
 
 @require_vicar

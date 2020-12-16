@@ -3134,7 +3134,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti \
 	@srcpython@/pynitf @srcpython@/pytest.ini \
 	@srcpython@/setup.cfg @srcpython@/conftest.py \
-	@srcpython@/README_test \
+	@srcpython@/README_test @srcpython@/test.sh \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \
@@ -3145,7 +3145,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonbin@/shelve_igccol_test.py \
 	@srcpythonbin@/shelve_image_test.py \
 	@srcpythonbin@/tp_collect_test.py \
-	@srcpythonbin@/write_image_test.py \
+	@srcpythonbin@/write_image_test.py @srcpythonlib@/__init__.py \
 	@srcpythonlib@/air_mspi_igc_test.py \
 	@srcpythonlib@/dem_generate_test.py \
 	@srcpythonlib@/docopt_simple_test.py \

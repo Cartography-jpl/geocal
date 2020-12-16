@@ -1,7 +1,7 @@
-from geocal.igc_collection_extension import *
-from geocal.ray_intersect import *
-from geocal.image_ground_connection import *
-from geocal.tie_point_extension import *
+from .igc_collection_extension import *
+from .ray_intersect import *
+from .image_ground_connection import *
+from .tie_point_extension import *
 from test_support import *
 
 def test_ray_intersect():

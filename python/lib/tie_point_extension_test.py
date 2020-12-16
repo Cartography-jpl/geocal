@@ -1,9 +1,9 @@
 from builtins import range
-from geocal.tie_point_extension import *
-from geocal.image_ground_connection import *
-from geocal.ray_intersect import *
-from geocal.feature_detector_extension import *
-from geocal.sqlite_shelf import *
+from .tie_point_extension import *
+from .image_ground_connection import *
+from .ray_intersect import *
+from .feature_detector_extension import *
+from .sqlite_shelf import *
 from test_support import *
 import shutil
 

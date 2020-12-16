@@ -1,5 +1,5 @@
-from geocal.vicar_interface import VicarInterface
-from geocal.mmap_file import mmap_file
+from .vicar_interface import VicarInterface
+from .mmap_file import mmap_file
 from geocal_swig import (IbisFile, ImageCoordinate, VicarImageCoordinate,
                          TiePoint, IgcMapProjected, VicarRasterImage,
                          TiePointCollection, VicarLiteRasterImage)

@@ -1,5 +1,5 @@
-from map_info_extension import *
-from misc import cib01_mapinfo
+from .map_info_extension import *
+from .misc import cib01_mapinfo
 from test_support import *
 
 @require_serialize

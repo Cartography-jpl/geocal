@@ -1,4 +1,4 @@
-from geocal.ply_file import *
+from .ply_file import *
 from test_support import *
 
 def test_ply_file(isolated_dir):

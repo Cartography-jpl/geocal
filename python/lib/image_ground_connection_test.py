@@ -1,5 +1,5 @@
-from geocal.image_ground_connection import *
-from geocal.shape_file import have_shape_file
+from .image_ground_connection import *
+from .shape_file import have_shape_file
 import pickle
 from test_support import *
 

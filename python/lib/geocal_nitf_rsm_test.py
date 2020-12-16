@@ -3,8 +3,9 @@ try:
 except ImportError:
     pass
 from test_support import *
-import geocal.geocal_nitf_rsm
-from geocal.geocal_nitf_rsm import *
+from .geocal_nitf_rsm import *
+from .geocal_nitf_rsm import TreRSMIDA, TreRSMPIA, TreRSMGGA, TreRSMPCA
+from .sqlite_shelf import *
 from geocal_swig import (GdalRasterImage, VicarRasterImage,
                          VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
                          Rsm, ImageCoordinate, IgcMsp)
@@ -241,14 +242,14 @@ def test_rsm_ms_g(isolated_dir, rsm_ms_g):
 # Test the raw TREs
 @require_pynitf
 def test_tre_rsmpca(rsm_rational_polynomial):
-    t = geocal.geocal_nitf_rsm.TreRSMPCA()
+    t = TreRSMPCA()
     t.rsm_rational_polynomial = rsm_rational_polynomial
     t.update_raw_field()
     fh = io.BytesIO()
     t.write_to_file(fh)
     print(fh.getvalue())
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMPCA()
+    t2 = TreRSMPCA()
     t2.read_from_file(fh2)
     print(t2)
     # Check that we can't the field values.
@@ -272,7 +273,7 @@ def test_tre_rsmpca(rsm_rational_polynomial):
 
 @require_pynitf
 def test_tre_rsmgga(rsm_grid):
-    t = geocal.geocal_nitf_rsm.TreRSMGGA()
+    t = TreRSMGGA()
     t.rsm_grid = rsm_grid
     t.update_raw_field()
     fh = io.BytesIO()
@@ -280,7 +281,7 @@ def test_tre_rsmgga(rsm_grid):
     # This is way too large to check, so skip this
     #assert fh.getvalue() == b'blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMGGA()
+    t2 = TreRSMGGA()
     t2.read_from_file(fh2)
     print(t2)
     # Check that we can't the field values.
@@ -294,7 +295,7 @@ def test_tre_rsmgga(rsm_grid):
     
 @require_pynitf
 def test_tre_rsmpia(rsm_ms_polynomial):
-    t = geocal.geocal_nitf_rsm.TreRSMGIA()
+    t = TreRSMGIA()
     t.rsm_multi_section = rsm_ms_polynomial
     t.update_raw_field()
     fh = io.BytesIO()
@@ -302,7 +303,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMGIA()
+    t2 = TreRSMGIA()
     t2.read_from_file(fh2)
     print(t2)
     assert t2.rsm_multi_section.number_row_section == 3
@@ -311,7 +312,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
 
 @require_pynitf
 def test_tre_rsmpia(rsm_ms_polynomial):
-    t = geocal.geocal_nitf_rsm.TreRSMPIA()
+    t = TreRSMPIA()
     t.rsm_multi_section = rsm_ms_polynomial
     t.update_raw_field()
     fh = io.BytesIO()
@@ -319,7 +320,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMPIA()
+    t2 = TreRSMPIA()
     t2.read_from_file(fh2)
     print(t2)
     assert t2.rsm_multi_section.number_row_section == 3
@@ -328,7 +329,7 @@ def test_tre_rsmpia(rsm_ms_polynomial):
 
 @require_pynitf
 def test_tre_rsmida(rsm):
-    t = geocal.geocal_nitf_rsm.TreRSMIDA()
+    t = TreRSMIDA()
     t.rsm_id = rsm.rsm_id
     t.update_raw_field()
     fh = io.BytesIO()
@@ -336,7 +337,7 @@ def test_tre_rsmida(rsm):
     # This can vary depending on roundoff, so don't compare.
     #assert fh.getvalue() == b'Blah'
     fh2 = io.BytesIO(fh.getvalue())
-    t2 = geocal.geocal_nitf_rsm.TreRSMIDA()
+    t2 = TreRSMIDA()
     t2.read_from_file(fh2)
     print(t2)
     assert t2.rsm_id.rsm_suport_data_edition == "fake-1"
@@ -943,4 +944,13 @@ def test_rsm_sample_file_g(isolated_dir):
     assert rsm.rsm_id.tre_string() == texpect
     # This also as RSMECA (the indirect
     # covariance). We don't currently read these
+
+@require_pynitf
+def test_create_staring_rsm(isolated_dir, igc_staring):
+    ''' This variation uses a "staring" mode, which gives a strong bow-tie 
+    on the surface. Want to make sure we handle this correctly, and in 
+    particular the RSM handles this'''
+    igc = igc_staring
+    write_shelve("igc.xml", igc)
     
+

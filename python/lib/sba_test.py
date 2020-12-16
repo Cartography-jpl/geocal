@@ -1,9 +1,9 @@
 from builtins import range
-from geocal.tie_point_collect import *
-from geocal.image_ground_connection import *
-from geocal.simultaneous_bundle_adjustment import *
-from geocal.sqlite_shelf import *
-from geocal.lm_optimize import *
+from .tie_point_collect import *
+from .image_ground_connection import *
+from .simultaneous_bundle_adjustment import *
+from .sqlite_shelf import *
+from .lm_optimize import *
 import scipy.optimize
 import scipy.sparse as sp
 import scipy.sparse.linalg

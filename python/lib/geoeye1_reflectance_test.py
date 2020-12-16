@@ -1,4 +1,4 @@
-from geocal.geoeye1_reflectance import *
+from .geoeye1_reflectance import *
 from test_support import *
 
 

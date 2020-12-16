@@ -1,7 +1,7 @@
 from geocal_swig import *
-from geocal.sqlite_shelf import *
-from geocal.mmap_file import *
-from geocal.ray_caster_resampler_extension import *
+from .sqlite_shelf import *
+from .mmap_file import *
+from .ray_caster_resampler_extension import *
 from test_support import *
 from multiprocessing import Pool
 

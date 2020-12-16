@@ -1,5 +1,5 @@
 from geocal_swig import *
-from geocal.feature_detector_extension import *
+from .feature_detector_extension import *
 from test_support import *
 from multiprocessing import Pool
 

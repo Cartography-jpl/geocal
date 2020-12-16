@@ -47,7 +47,7 @@ geocal_test_tpcol = geocal_test_data + "tpcol.xml"
 # RSM sample data. This is too big to carry in our source, so we have a
 # separate directory.
 # This comes from http://www.gwg.nga.mil/ntb/baseline/software/testfile/rsm/samples.htm
-rsm_sample_data = "/data/smyth/SampleRsm/"
+rsm_sample_data = "/bigdata/smyth/SampleRsm/"
 
 # Have tests that require NITF sample files be available. We skip these if not
 # available, tests are nice to make sure things don't break but not essential.

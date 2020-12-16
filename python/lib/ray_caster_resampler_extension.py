@@ -1,5 +1,5 @@
 from geocal_swig import *
-from geocal.mmap_file import *
+from .mmap_file import *
 import numpy as np
 from tempfile import NamedTemporaryFile
 from functools import partial

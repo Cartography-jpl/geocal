@@ -1,4 +1,4 @@
-from raster_tile import *
+from .raster_tile import *
 from test_support import *
 
 # Nothing special about this data, it is just a reasonable size for

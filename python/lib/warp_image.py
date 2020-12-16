@@ -1,5 +1,5 @@
-from geocal.vicar_interface import VicarInterface
-from geocal.sqlite_shelf import write_shelve
+from .vicar_interface import VicarInterface
+from .sqlite_shelf import write_shelve
 from geocal_swig import (IbisFile, ImageCoordinate, VicarImageCoordinate,
                          TiePoint,
                          TiePointCollection, VicarLiteRasterImage)

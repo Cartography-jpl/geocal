@@ -1,4 +1,4 @@
-from geocal.docopt_simple import *
+from .docopt_simple import *
 import pickle
 
 usage= '''

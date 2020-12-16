@@ -1,12 +1,12 @@
 from builtins import range
-from geocal.igc_collection_extension import *
-from geocal.tie_point_extension import *
-from geocal.image_ground_connection import *
-from geocal.igc_collection_extension import *
-from geocal.simultaneous_bundle_adjustment import *
-from geocal.lm_optimize import *
+from .igc_collection_extension import *
+from .tie_point_extension import *
+from .image_ground_connection import *
+from .igc_collection_extension import *
+from .simultaneous_bundle_adjustment import *
+from .lm_optimize import *
 from test_support import *
-from sqlite_shelf import write_shelve, read_shelve
+from .sqlite_shelf import write_shelve, read_shelve
 import logging
 import sys
 

@@ -1,5 +1,5 @@
-from geocal.task import *
-from geocal.local_target import *
+from .task import *
+from .local_target import *
 from test_support import *
 import shutil
 from multiprocessing import Pool

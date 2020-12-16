@@ -45,6 +45,7 @@ EXTRA_DIST+=@srcpython@/pytest.ini
 EXTRA_DIST+=@srcpython@/setup.cfg
 EXTRA_DIST+=@srcpython@/conftest.py
 EXTRA_DIST+=@srcpython@/README_test
+EXTRA_DIST+=@srcpython@/test.sh
 
 # Make sure we don't have any pyc or pycache files floating around
 DIST_HOOK += dist-clean-up-python

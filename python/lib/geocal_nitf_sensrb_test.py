@@ -7,7 +7,7 @@ from geocal_swig import (Time, KeplerOrbit, SimpleCamera,
                          FrameCoordinate, SimpleDem, Quaternion_double,
                          SensrbCamera, AircraftOrbitData, deg_to_rad,
                          quaternion_to_matrix)
-from geocal.geocal_nitf_sensrb import *
+from .geocal_nitf_sensrb import *
 import numpy as np
 import numpy.testing as npt
 import io

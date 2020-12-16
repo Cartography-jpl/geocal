@@ -1,4 +1,4 @@
-from geocal.quick_bird_reflectance import *
+from .quick_bird_reflectance import *
 from test_support import *
 
 

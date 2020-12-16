@@ -1,8 +1,8 @@
 from geocal_swig import *
-from geocal.image_ground_connection import *
-from geocal.tie_point_collect_picmtch import *
-from geocal.warp_image import *
-from geocal.sqlite_shelf import *
+from .image_ground_connection import *
+from .tie_point_collect_picmtch import *
+from .warp_image import *
+from .sqlite_shelf import *
 from test_support import *
 import subprocess
 

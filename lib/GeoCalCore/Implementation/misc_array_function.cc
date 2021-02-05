@@ -1,5 +1,6 @@
 #include "misc_array_function.h"
 #include "geocal_exception.h"
+#include "igc_ray_caster.h"
 #include <vector>
 #include <algorithm>
 
@@ -85,6 +86,40 @@ blitz::Array<double, 2> GeoCal::array_local_median
 	if(j+hnc >= res.cols())
 	  res(i,j) = res(i,res.cols()-hnc-1);
       }
+  }
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// This use a IgcRayCaster to determine the ground location of every
+/// point in a Igc, and the convert it to the coordinate given by a
+/// Cconv. We return an array that has 5 columns, the image line,
+/// image sample, coordinate x, coordinate y and coordinate z.
+///
+/// This is little more than a loop, but we have this because this is
+/// useful in python but slow to generate there.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
+(const boost::shared_ptr<ImageGroundConnection>& Igc,
+ const CoordinateConverter& Cconv)
+{
+  blitz::Array<double, 2> res(Igc->number_line() * Igc->number_sample(),
+			      5);
+  // We use a really large resolution, to force the number of
+  // subpixels to to 1.
+  IgcRayCaster rcast(Igc, 0, -1, 1, 1e6);
+  int resind = 0;
+  while(!rcast.last_position()) {
+    blitz::Array<double, 6> d = rcast.next_position();
+    for(int s = 0; s < d.cols(); ++s) {
+      Ecr pt(d(0,s,0,0,0,0), d(0,s,0,0,0,1), d(0,s,0,0,0,2));
+      res(resind,0) = rcast.current_position();
+      res(resind,1) = s;
+      Cconv.convert_to_coordinate(pt, res(resind,2), res(resind,3),
+				  res(resind,4));
+      ++resind;
+    }
   }
   return res;
 }

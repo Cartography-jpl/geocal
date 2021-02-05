@@ -180,6 +180,9 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.generic_object
+import geocal_swig.with_parameter
+import geocal_swig.geocal_exception
 ARRAY_LOCAL_MEDIAN_TRUNCATE = _misc_array_function.ARRAY_LOCAL_MEDIAN_TRUNCATE
 ARRAY_LOCAL_MEDIAN_ZEROPAD = _misc_array_function.ARRAY_LOCAL_MEDIAN_ZEROPAD
 ARRAY_LOCAL_MEDIAN_REPEAT = _misc_array_function.ARRAY_LOCAL_MEDIAN_REPEAT
@@ -215,7 +218,23 @@ def array_local_median(*args):
     """
     return _misc_array_function.array_local_median(*args)
 
-__all__ = ["array_local_median","ARRAY_LOCAL_MEDIAN_TRUNCATE","ARRAY_LOCAL_MEDIAN_ZEROPAD","ARRAY_LOCAL_MEDIAN_REPEAT"]
+def ray_cast_ground_coordinate(Igc, Cconv):
+    """
+
+    blitz::Array< double, 2 > GeoCal::ray_cast_ground_coordinate(const boost::shared_ptr< ImageGroundConnection > &Igc, const
+    CoordinateConverter &Cconv)
+    This use a IgcRayCaster to determine the ground location of every
+    point in a Igc, and the convert it to the coordinate given by a Cconv.
+
+    We return an array that has 5 columns, the image line, image sample,
+    coordinate x, coordinate y and coordinate z.
+
+    This is little more than a loop, but we have this because this is
+    useful in python but slow to generate there. 
+    """
+    return _misc_array_function.ray_cast_ground_coordinate(Igc, Cconv)
+
+__all__ = ["array_local_median","ARRAY_LOCAL_MEDIAN_TRUNCATE","ARRAY_LOCAL_MEDIAN_ZEROPAD","ARRAY_LOCAL_MEDIAN_REPEAT","ray_cast_ground_coordinate"]
 
 
 

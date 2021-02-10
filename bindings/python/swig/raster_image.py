@@ -362,7 +362,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def overview(self, Min_number_sample):
         """
 
-        virtual boost::shared_ptr<RasterImage> GeoCal::RasterImage::overview(int Min_number_sample) const
+        virtual boost::shared_ptr<RasterImage> GeoCal::RasterImage::overview(int UNUSED(Min_number_sample)) const
         Some RasterImage may have overviews which are lower resolution images.
 
         If we do have these, then this will return the lower resolution
@@ -376,9 +376,13 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def interpolate(self, *args):
         """
 
-        double GeoCal::RasterImage::interpolate(const ImageCoordinate &Ic) const
-        This does a bilinear interpolation of the data for fractional Line and
-        Sample. 
+        blitz::Array< double, 2 > RasterImage::interpolate(double Line, double Sample, int Number_line, int Number_sample,
+        double Fill_value=0.0) const
+        Interpolate a region, starting with the given fractional line and
+        sample.
+
+        This is a bilinear interpolation. This does padding with the given
+        fill value. 
         """
         return _raster_image.RasterImage_interpolate(self, *args)
 
@@ -516,7 +520,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def read(self, *args):
         """
 
-        blitz::Array< int, 2 > RasterImage::read(const RasterImageTileIterator &Ti) const
+        blitz::Array< int, 2 > RasterImage::read(int Lstart, int Sstart, int Number_line, int Number_sample) const
         Return a subset of the image. 
         """
         return _raster_image.RasterImage_read(self, *args)
@@ -525,7 +529,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def write(self, *args):
         """
 
-        void RasterImage::write(int Lstart, int Sstart, const blitz::Array< double, 2 > &A)
+        void RasterImage::write(int Lstart, int Sstart, const blitz::Array< int, 2 > &A)
 
         """
         return _raster_image.RasterImage_write(self, *args)
@@ -535,10 +539,11 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         """
 
         virtual bool GeoCal::RasterImage::has_map_info() const
+        Indicate if we have MapInfo.
+
         Functions available if we have MapInfo data.
 
-        Indicate if we have MapInfo. The default is false, but derived classes
-        can override this. 
+        The default is false, but derived classes can override this. 
         """
         return _raster_image.RasterImage__v_has_map_info(self)
 
@@ -574,12 +579,8 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
     def coordinate(self, *args):
         """
 
-        blitz::Array< double, 2 > RasterImage::coordinate(const blitz::Array< double, 1 > &Lat, const blitz::Array< double, 1 >
-        &Lon) const
-        Translate a number of points at once.
-
-        This is really meant for use with python, where this is faster than
-        the normal interface. 
+        ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const
+        Shortcut to calling mapinfo().coordinate. 
         """
         return _raster_image.RasterImage_coordinate(self, *args)
 
@@ -626,10 +627,11 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         """
 
         virtual bool GeoCal::RasterImage::has_rpc() const
+        Indicate if we have Rpc.
+
         Functions available if we have RPC
 
-        Indicate if we have Rpc. The default is false, but derived classes can
-        override this. 
+        The default is false, but derived classes can override this. 
         """
         return _raster_image.RasterImage__v_has_rpc(self)
 
@@ -643,9 +645,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         """
 
         boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const
-        Pointer version of rpc().
-
-        This makes python happier. 
+        Pointer version of rpc(). This makes python happier. 
         """
         return _raster_image.RasterImage__v_rpc(self)
 
@@ -659,10 +659,11 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         """
 
         virtual bool GeoCal::RasterImage::has_rsm() const
+        Indicate if we have Rsm.
+
         Functions available if we have RSM
 
-        Indicate if we have Rsm. The default is false, but derived classes can
-        override this. 
+        The default is false, but derived classes can override this. 
         """
         return _raster_image.RasterImage__v_has_rsm(self)
 

@@ -19,14 +19,14 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Time::serialize(Archive & ar, const unsigned int version)
+void Time::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Time);
   ar & GEOCAL_NVP_(time_pgs);
 }
 
 template<class Archive>
-void TimeWithDerivative::serialize(Archive & ar, const unsigned int version)
+void TimeWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeWithDerivative);
   ar & GEOCAL_NVP_(time_pgs);

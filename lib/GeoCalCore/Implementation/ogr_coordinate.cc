@@ -13,7 +13,9 @@ void OgrWrapper::save(Archive & ar, const unsigned int version) const
 {
   GEOCAL_GENERIC_BASE(OgrWrapper);
   std::string wkt_s = wkt();
-  ar & GEOCAL_NVP2("wkt", wkt_s);
+  bool u = use_traditional_gis_order();
+  ar & GEOCAL_NVP2("wkt", wkt_s)
+    & GEOCAL_NVP2("use_traditional_gis_order", u);
 }
 
 template<class Archive>
@@ -22,7 +24,12 @@ void OgrWrapper::load(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(OgrWrapper);
   std::string wkt_s;
   ar & GEOCAL_NVP2("wkt", wkt_s);
-  init(wkt_s);
+  // Older version assumed GDAL 2, which doesn't support axis
+  // reordering (so use_traditional_gis_order is always true)
+  bool u = true;
+  if(version > 0)
+    ar & GEOCAL_NVP2("use_traditional_gis_order", u);
+  init(wkt_s, u);
 }
 
 template<class Archive>
@@ -57,19 +64,38 @@ boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ceres_pc;
 
 //-----------------------------------------------------------------------
 /// Constructor that creates a OGRSpatialReference from a WKT (Well
-/// Known Text) string.
+/// Known Text) string. See class description for information about
+/// use_traditional_gis_order
 //-----------------------------------------------------------------------
 
-OgrWrapper::OgrWrapper(const std::string& Wkt)
+OgrWrapper::OgrWrapper(const std::string& Wkt, bool Use_traditional_gis_order)
 {
-  init(Wkt);
+  init(Wkt, Use_traditional_gis_order);
+}
+
+//-----------------------------------------------------------------------
+/// Handle Use_traditional_gis_order flag
+//-----------------------------------------------------------------------
+
+void OgrWrapper::handle_gis_order(OGRSpatialReference& Ogr,
+				  bool Use_traditional_gis_order)
+{
+#if(GDAL_VERSION_MAJOR <= 2)
+  if(!Use_traditional_gis_order)
+    throw Exception("GDAL doesn't support anything other than traditional GIS order before version 3.0.0. Your GDAL version is " GDAL_RELEASE_NAME);
+#else
+  if(Use_traditional_gis_order)
+    Ogr.SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
+  else
+    Ogr.SetAxisMappingStrategy(OAMS_AUTHORITY_COMPLIANT);
+#endif
 }
 
 //-----------------------------------------------------------------------
 /// Initialize, given a WKT (Well Known Text) string.
 //-----------------------------------------------------------------------
 
-void OgrWrapper::init(const std::string& Wkt)
+void OgrWrapper::init(const std::string& Wkt, bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr_create(new OGRSpatialReference);
   const char* wkt_str = Wkt.c_str();
@@ -81,6 +107,7 @@ void OgrWrapper::init(const std::string& Wkt)
       << Wkt;
     throw e;
   }
+  handle_gis_order(*ogr_create, Use_traditional_gis_order);
   init(ogr_create);
 }
 
@@ -105,6 +132,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     OGRErr status = ogr_geodetic->SetWellKnownGeogCS("WGS84");
     if(status != OGRERR_NONE)
       throw Exception("Call to SetWellKnownGeogCS failed");
+    handle_gis_order(*ogr_geodetic, true);
   }
   if(!ogr_ecr.get()) {
     // Look this up http://spatialreference.org/ref/epsg/4328/
@@ -112,6 +140,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
     OGRErr status = ogr_ecr->importFromEPSG(4328);
     if(status != OGRERR_NONE)
       throw Exception("Call to importFromEPSG failed");
+    handle_gis_order(*ogr_ecr, true);
   }
   if(!ogr_mars_pc.get()) {
     // Look this up http://spatialreference.org/ref/iau2000/49900/
@@ -129,6 +158,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
 	<< wkt;
       throw e;
     }
+    handle_gis_order(*ogr_mars_pc, true);
   }
   if(!ogr_ceres_pc.get()) {
     ogr_ceres_pc.reset(new OGRSpatialReference);
@@ -145,6 +175,7 @@ void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
 	<< wkt;
       throw e;
     }
+    handle_gis_order(*ogr_ceres_pc, true);
   }
   OGRSpatialReference * og;
   OGRSpatialReference * og_cf;
@@ -306,10 +337,12 @@ OgrCoordinate::OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 /// http://www.epsg-registry.org
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg(int Epsg_id)
+boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg
+(int Epsg_id, bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   ogr->importFromEPSG(Epsg_id);
+  handle_gis_order(*ogr, Use_traditional_gis_order);
   return boost::shared_ptr<OgrWrapper>(new OgrWrapper(ogr));
 }
 
@@ -317,11 +350,36 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg(int Epsg_id)
 /// Create a OgrWrapper for a coordinate system from a Proj 4 string.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4(const std::string& Proj4_string)
+boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4
+(const std::string& Proj4_string, bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   ogr->importFromProj4(Proj4_string.c_str());
+  handle_gis_order(*ogr, Use_traditional_gis_order);
   return boost::shared_ptr<OgrWrapper>(new OgrWrapper(ogr));
+}
+
+//-----------------------------------------------------------------------
+/// If true, then we have OAMS_TRADITIONAL_GIS_ORDER. If false, we
+/// have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as an error,
+/// because we don't support that with serialization.
+//-----------------------------------------------------------------------
+
+bool OgrWrapper::use_traditional_gis_order() const
+{
+#if(GDAL_VERSION_MAJOR <= 2)
+  return true;
+#else
+  OSRAxisMappingStrategy s = ogr_->GetAxisMappingStrategy();
+  switch(s) {
+  case OAMS_TRADITIONAL_GIS_ORDER:
+    return true;
+  case OAMS_AUTHORITY_COMPLIANT:
+    return false;
+  default:
+    throw Exception("OgrWrapper::use_traditional_gis_order() doesn't handle OAMS_CUSTOM");
+  }
+#endif  
 }
 
 //-----------------------------------------------------------------------
@@ -627,6 +685,9 @@ OgrCoordinateConverter::utm_converter(int Zone)
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
   ogr->SetWellKnownGeogCS("WGS84");
   ogr->SetUTM((Zone > 0 ? Zone  : -Zone), (Zone > 0));
+#if(GDAL_VERSION_MAJOR >= 3)
+  ogr->SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
+#endif  
   boost::shared_ptr<OgrWrapper> ogrw(new OgrWrapper(ogr));
   return boost::shared_ptr<OgrCoordinateConverter>
     (new OgrCoordinateConverter(ogrw));

@@ -4,13 +4,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Datum::serialize(Archive & ar, const unsigned int version)
+void Datum::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Datum);
 }
 
 template<class Archive>
-void SimpleDatum::serialize(Archive & ar, const unsigned int version)
+void SimpleDatum::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Datum);
   GEOCAL_BASE(SimpleDatum, Datum);

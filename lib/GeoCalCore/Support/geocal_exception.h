@@ -277,7 +277,7 @@ public:
 /// have a dummy function for other types.
 //-----------------------------------------------------------------------
 
-template<class T> inline bool nancheck(const T& Val)
+template<class T> inline bool nancheck(const T& UNUSED(Val))
 {
   return false;
 }

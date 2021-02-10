@@ -9,13 +9,14 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RasterImage::serialize(Archive & ar, const unsigned int version)
+void RasterImage::serialize
+(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(RasterImage);
 }
 
 template<class Archive>
-void ArrayRasterImage::serialize(Archive & ar, const unsigned int version)
+void ArrayRasterImage::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ArrayRasterImage);
   ar & GEOCAL_NVP_(img);

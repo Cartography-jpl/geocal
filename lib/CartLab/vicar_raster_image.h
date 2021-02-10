@@ -139,7 +139,7 @@ public:
 		   compression C = VicarFile::NONE)
     : vicar_file_(new VicarFile(Instance, M.number_y_pixel(), 
 				M.number_x_pixel(), Number_band,
-				Type, Name, "BSQ", C))
+				Type, Name, Org, C))
   {
     vicar_file_->map_info(M);
 

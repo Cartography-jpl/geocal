@@ -4,27 +4,27 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void CoordinateConverter::serialize(Archive & ar, const unsigned int version)
+void CoordinateConverter::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
 }
 
 template<class Archive>
-void GeodeticConverter::serialize(Archive & ar, const unsigned int version)
+void GeodeticConverter::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
   GEOCAL_BASE(GeodeticConverter, CoordinateConverter);
 }
 
 template<class Archive>
-void GeodeticRadianConverter::serialize(Archive & ar, const unsigned int version)
+void GeodeticRadianConverter::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
   GEOCAL_BASE(GeodeticRadianConverter, CoordinateConverter);
 }
 
 template<class Archive>
-void GeodeticRadian2piConverter::serialize(Archive & ar, const unsigned int version)
+void GeodeticRadian2piConverter::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
   GEOCAL_BASE(GeodeticRadian2piConverter, CoordinateConverter);

@@ -5,13 +5,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GeometricModel::serialize(Archive & ar, const unsigned int version)
+void GeometricModel::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GeometricModel);
 }
 
 template<class Archive>
-void GeometricTiePoints::serialize(Archive & ar, const unsigned int version)
+void GeometricTiePoints::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GeometricTiePoints);
   ar & GEOCAL_NVP(y_tie)

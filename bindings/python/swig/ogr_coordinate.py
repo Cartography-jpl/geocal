@@ -198,6 +198,30 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     OgrCoordinate because typically we'll have lots of OgrCoordinates that
     have the same OgrWrapper.
 
+    Note a complication in axis ordering. The WKT changed to include axis
+    ordering, seehttps://trac.osgeo.org/gdal/wiki/rfc20_srs_axes
+    andhttps://trac.osgeo.org/gdal/wiki/rfc73_proj6_wkt2_srsbarn (axis
+    ordering section). This change took place in GDAL 3. All our code was
+    written before this change, so in lots of places we assume the old
+    behavior. Our low level coordinate code doesn't actually care, but
+    anything using this likely makes assumptions about what the order is.
+    We also will need to support GDAL 2 for sometime in addition got GDAL
+    3.
+
+    So we don't break a lot of existing code, we take a
+    "use_traditional_gis_order" flag. If this is true, we use the
+    OAMS_TRADITIONAL_GIS_ORDER. false is an error if we are using gdal
+    older than version 3 (since it isn't supported with gdal 2), otherwise
+    we use OAMS_AUTHORITY_COMPLIANT. At some point we can just directly
+    take the GDAL enumeration, but since this is in GDAL 3 only we instead
+    take a boolean that can be use with 2.
+
+    We don't directly support OAMS_CUSTOM, although you can pass a
+    OGRSpatialReference directly with that. However, serialization isn't
+    currently supported for OAMS_CUSTOM. We could add that if needed, we
+    just need to think through how to save that. For now, I don't see much
+    of a need for that.
+
     C++ includes: ogr_coordinate.h 
     """
 
@@ -207,31 +231,35 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)
-        Constructor, from an existing OGRSpatialReference. 
+        OgrWrapper::OgrWrapper(const std::string &Wkt, bool Use_traditional_gis_order=true)
+        Constructor that creates a OGRSpatialReference from a WKT (Well Known
+        Text) string.
+
+        See class description for information about use_traditional_gis_order
+
         """
         _ogr_coordinate.OgrWrapper_swiginit(self, _ogr_coordinate.new_OgrWrapper(*args))
 
-    def from_epsg(Epsg_id):
+    def from_epsg(Epsg_id, Use_traditional_gis_order=True):
         """
 
-        boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id)
+        boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id, bool Use_traditional_gis_order=true)
         Create a OgrWrapper for a coordinate system given by the EPSG ID.
 
         You can look the EPSG code up for various coordinate systems
         athttp://www.epsg-registry.org 
         """
-        return _ogr_coordinate.OgrWrapper_from_epsg(Epsg_id)
+        return _ogr_coordinate.OgrWrapper_from_epsg(Epsg_id, Use_traditional_gis_order)
 
     from_epsg = staticmethod(from_epsg)
 
-    def from_proj4(Proj4_string):
+    def from_proj4(Proj4_string, Use_traditional_gis_order=True):
         """
 
-        boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string)
+        boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string, bool Use_traditional_gis_order=true)
         Create a OgrWrapper for a coordinate system from a Proj 4 string. 
         """
-        return _ogr_coordinate.OgrWrapper_from_proj4(Proj4_string)
+        return _ogr_coordinate.OgrWrapper_from_proj4(Proj4_string, Use_traditional_gis_order)
 
     from_proj4 = staticmethod(from_proj4)
 
@@ -348,6 +376,23 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         return self._v_pcs_citation_geo_key()
 
 
+    def _v_use_traditional_gis_order(self):
+        """
+
+        bool OgrWrapper::use_traditional_gis_order() const
+        If true, then we have OAMS_TRADITIONAL_GIS_ORDER.
+
+        If false, we have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as
+        an error, because we don't support that with serialization. 
+        """
+        return _ogr_coordinate.OgrWrapper__v_use_traditional_gis_order(self)
+
+
+    @property
+    def use_traditional_gis_order(self):
+        return self._v_use_traditional_gis_order()
+
+
     def _v_geogcs_name(self):
         """
 
@@ -415,6 +460,7 @@ OgrWrapper._v_cf_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_cf
 OgrWrapper._v_cf_inverse_transform = new_instancemethod(_ogr_coordinate.OgrWrapper__v_cf_inverse_transform, None, OgrWrapper)
 OgrWrapper._v_projected_cs_type_geo_key = new_instancemethod(_ogr_coordinate.OgrWrapper__v_projected_cs_type_geo_key, None, OgrWrapper)
 OgrWrapper._v_pcs_citation_geo_key = new_instancemethod(_ogr_coordinate.OgrWrapper__v_pcs_citation_geo_key, None, OgrWrapper)
+OgrWrapper._v_use_traditional_gis_order = new_instancemethod(_ogr_coordinate.OgrWrapper__v_use_traditional_gis_order, None, OgrWrapper)
 OgrWrapper._v_geogcs_name = new_instancemethod(_ogr_coordinate.OgrWrapper__v_geogcs_name, None, OgrWrapper)
 OgrWrapper._v_wkt = new_instancemethod(_ogr_coordinate.OgrWrapper__v_wkt, None, OgrWrapper)
 OgrWrapper._v_pretty_wkt = new_instancemethod(_ogr_coordinate.OgrWrapper__v_pretty_wkt, None, OgrWrapper)
@@ -423,24 +469,24 @@ OgrWrapper.__str__ = new_instancemethod(_ogr_coordinate.OgrWrapper___str__, None
 OgrWrapper_swigregister = _ogr_coordinate.OgrWrapper_swigregister
 OgrWrapper_swigregister(OgrWrapper)
 
-def OgrWrapper_from_epsg(Epsg_id):
+def OgrWrapper_from_epsg(Epsg_id, Use_traditional_gis_order=True):
     """
 
-    boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id)
+    boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id, bool Use_traditional_gis_order=true)
     Create a OgrWrapper for a coordinate system given by the EPSG ID.
 
     You can look the EPSG code up for various coordinate systems
     athttp://www.epsg-registry.org 
     """
-    return _ogr_coordinate.OgrWrapper_from_epsg(Epsg_id)
+    return _ogr_coordinate.OgrWrapper_from_epsg(Epsg_id, Use_traditional_gis_order)
 
-def OgrWrapper_from_proj4(Proj4_string):
+def OgrWrapper_from_proj4(Proj4_string, Use_traditional_gis_order=True):
     """
 
-    boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string)
+    boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string, bool Use_traditional_gis_order=true)
     Create a OgrWrapper for a coordinate system from a Proj 4 string. 
     """
-    return _ogr_coordinate.OgrWrapper_from_proj4(Proj4_string)
+    return _ogr_coordinate.OgrWrapper_from_proj4(Proj4_string, Use_traditional_gis_order)
 
 class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     """
@@ -459,6 +505,8 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     You can see the documentation for OGRSpatialReference
     athttp://www.gdal.org/ogr/osr_tutorial.html.
 
+    See note in OgrWrapper about axis order.
+
     C++ includes: ogr_coordinate.h 
     """
 
@@ -468,10 +516,9 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     def __init__(self, *args):
         """
 
-        OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const GroundCoordinate
-        &G)
-        Convert from GroundCoordinate to the coordinate system given by Ogr.
-
+        GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,
+        double z)
+        Constructor. X, Y, and Z are in whatever coordinates Ogr are in. 
         """
         _ogr_coordinate.OgrCoordinate_swiginit(self, _ogr_coordinate.new_OgrCoordinate(*args))
 
@@ -548,6 +595,8 @@ class OgrCoordinateConverter(geocal_swig.coordinate_converter.CoordinateConverte
     """
 
     This is a CoordinateConverter for working with OgrCoordinates.
+
+    See note in OgrWrap about axis order.
 
     C++ includes: ogr_coordinate.h 
     """

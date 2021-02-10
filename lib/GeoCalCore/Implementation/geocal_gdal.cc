@@ -106,10 +106,16 @@ MapInfo GdalBase::map_info() const
   boost::shared_ptr<CoordinateConverter> coor_conv;
   boost::shared_ptr<OGRSpatialReference> 
     ogr(new OGRSpatialReference(data_set_->GetProjectionRef()));
+#if(GDAL_VERSION_MAJOR >= 3)
+  ogr->SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
+#endif  
   OGRSpatialReference sr_wgs84;
   int status = sr_wgs84.SetWellKnownGeogCS("WGS84");
   if(status != OGRERR_NONE)
     throw Exception("Call to SetWellKnownGeogCS failed");
+#if(GDAL_VERSION_MAJOR >= 3)
+  sr_wgs84.SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
+#endif  
   // Treat WGS-84 as special
   if(sr_wgs84.IsSame(ogr.get()))
     coor_conv.reset(new GeodeticConverter());
@@ -237,8 +243,11 @@ void GdalRegister::gdal_register()
   static bool registered = false;
   if(!registered) {
     GDALAllRegister();
-    // Silence printing out error information
-    CPLSetErrorHandler(CPLQuietErrorHandler);
+    // Silence printing out error information. Note for debugging a
+    // specific problem it can be useful to turn this silencing off, although we
+    // generally don't want GDAL printing errors and warninings
+    if(true)
+      CPLSetErrorHandler(CPLQuietErrorHandler);
     registered = true;
   }
 }

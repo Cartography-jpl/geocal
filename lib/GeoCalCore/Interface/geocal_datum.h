@@ -78,8 +78,8 @@ public:
 /// meters. This is always 0 for this class.
 //-----------------------------------------------------------------------
 
-  virtual double undulation(const GroundCoordinate& Gc) const { return u_; }
-  virtual double undulation(const Geodetic& Gc) const { return u_; }
+  virtual double undulation(const GroundCoordinate& UNUSED(Gc)) const { return u_; }
+  virtual double undulation(const Geodetic& UNUSED(Gc)) const { return u_; }
 
 //-----------------------------------------------------------------------
 /// Print to stream.

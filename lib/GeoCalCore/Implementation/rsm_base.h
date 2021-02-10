@@ -45,7 +45,7 @@ public:
 /// an error if you try to set it, but derived classes override this.
 //-----------------------------------------------------------------------
   virtual int row_section_number() const { return 1; }
-  virtual void row_section_number(int V)
+  virtual void row_section_number(int UNUSED(V))
   { throw Exception("Not Implemented"); }
 
 //-----------------------------------------------------------------------
@@ -55,7 +55,7 @@ public:
 /// an error if you try to set it, but derived classes override this.
 //-----------------------------------------------------------------------
   virtual int col_section_number() const { return 1; }
-  virtual void col_section_number(int V)
+  virtual void col_section_number(int UNUSED(V))
   { throw Exception("Not Implemented"); }
   
 //-----------------------------------------------------------------------

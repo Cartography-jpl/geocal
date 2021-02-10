@@ -19,11 +19,13 @@
 namespace GeoCal {
 class OgrWrapper : public GenericObject {
 public:
-  OgrWrapper(const std::string& Wkt);
+  OgrWrapper(const std::string& Wkt, bool Use_traditional_gis_order = true);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
-  static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id);
+  static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id,
+			 bool Use_traditional_gis_order = true);
   static boost::shared_ptr<OgrWrapper> 
-  from_proj4(const std::string& Proj4_string);
+  from_proj4(const std::string& Proj4_string,
+	     bool Use_traditional_gis_order = true);
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OGRSpatialReference>)
   %python_attribute(transform, const OGRCoordinateTransformation*)
   %python_attribute(inverse_transform, const OGRCoordinateTransformation*)
@@ -31,6 +33,7 @@ public:
   %python_attribute(cf_inverse_transform, const OGRCoordinateTransformation*)
   %python_attribute(projected_cs_type_geo_key, std::string)
   %python_attribute(pcs_citation_geo_key, std::string)
+  %python_attribute(use_traditional_gis_order, bool)
   %python_attribute(geogcs_name, std::string)
   %python_attribute(wkt, std::string)
   %python_attribute(pretty_wkt, std::string)

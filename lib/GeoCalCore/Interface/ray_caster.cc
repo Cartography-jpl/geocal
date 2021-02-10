@@ -7,7 +7,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RayCaster::serialize(Archive & ar, const unsigned int version)
+void RayCaster::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(RayCaster);
   ar & GEOCAL_NVP(cf);

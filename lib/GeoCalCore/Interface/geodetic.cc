@@ -11,7 +11,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Geodetic::serialize(Archive & ar, const unsigned int version)
+void Geodetic::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(Geodetic, GroundCoordinate);
@@ -21,7 +21,7 @@ void Geodetic::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void Geocentric::serialize(Archive & ar, const unsigned int version)
+void Geocentric::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(Geocentric, GroundCoordinate);

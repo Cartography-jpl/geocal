@@ -106,8 +106,7 @@ protected:
   virtual double elevation(int Y_index, int X_index) const = 0;
 
   void initialize(const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-		  bool Outside_dem_is_error = false,
-		  int Naif_code = Geodetic::EARTH_NAIF_CODE);
+		  bool Outside_dem_is_error = false);
   friend class DemMapInfoOffset; // Allows this class access to the
 				 // protected member elevation.
   boost::shared_ptr<Datum> datum_; ///< Datum height is relative to.

@@ -8,7 +8,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Camera::serialize(Archive & ar, const unsigned int version)
+void Camera::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Camera);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -16,7 +16,7 @@ void Camera::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void SimpleCamera::serialize(Archive & ar, const unsigned int version)
+void SimpleCamera::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Camera);
   GEOCAL_GENERIC_BASE(WithParameter);

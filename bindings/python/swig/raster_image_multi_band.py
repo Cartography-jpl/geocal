@@ -247,8 +247,10 @@ class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     def write(self, Lstart, Sstart, Data):
         """
 
-        void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< double, 3 > &Data)
+        void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)
+        Write the data to the same location in each image.
 
+        Data should be number_band() x nline x nsamp. 
         """
         return _raster_image_multi_band.RasterImageMultiBand_write(self, Lstart, Sstart, Data)
 

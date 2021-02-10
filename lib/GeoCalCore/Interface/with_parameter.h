@@ -53,7 +53,7 @@ public:
 /// parameter. Useful for doing Jacobian calculations.
 //-----------------------------------------------------------------------
 
-  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& UNUSED(Parm))
    {
      // Default is do nothing
    }

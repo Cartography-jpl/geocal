@@ -204,8 +204,8 @@ class ImageCoordinate(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::ImageCoordinate::ImageCoordinate()
-        Default constructor, line and sample aren't initialized. 
+        GeoCal::ImageCoordinate::ImageCoordinate(double Line, double Sample)
+        Constructor. 
         """
         _image_coordinate.ImageCoordinate_swiginit(self, _image_coordinate.new_ImageCoordinate(*args))
     line = _swig_property(_image_coordinate.ImageCoordinate_line_get, _image_coordinate.ImageCoordinate_line_set)
@@ -239,8 +239,8 @@ class VicarImageCoordinate(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::VicarImageCoordinate::VicarImageCoordinate()
-        Default constructor, line and sample aren't initialized. 
+        GeoCal::VicarImageCoordinate::VicarImageCoordinate(double Line, double Sample)
+        Constructor. 
         """
         _image_coordinate.VicarImageCoordinate_swiginit(self, _image_coordinate.new_VicarImageCoordinate(*args))
     line = _swig_property(_image_coordinate.VicarImageCoordinate_line_get, _image_coordinate.VicarImageCoordinate_line_set)
@@ -269,8 +269,9 @@ class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative()
-        Default constructor, line and sample aren't initialized. 
+        GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative(const AutoDerivative< double > &Line, const AutoDerivative< double >
+        &Sample)
+        Constructor. 
         """
         _image_coordinate.ImageCoordinateWithDerivative_swiginit(self, _image_coordinate.new_ImageCoordinateWithDerivative(*args))
     line = _swig_property(_image_coordinate.ImageCoordinateWithDerivative_line_get, _image_coordinate.ImageCoordinateWithDerivative_line_set)

@@ -15,13 +15,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundCoordinate::serialize(Archive & ar, const unsigned int version)
+void GroundCoordinate::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
 }
 
 template<class Archive>
-void CartesianFixed::serialize(Archive & ar, const unsigned int version)
+void CartesianFixed::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(CartesianFixed, GroundCoordinate);
@@ -29,7 +29,7 @@ void CartesianFixed::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void CartesianInertial::serialize(Archive & ar, const unsigned int version)
+void CartesianInertial::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianInertial);
   ar & GEOCAL_NVP(position);
@@ -48,25 +48,25 @@ inline double sqr(double x) { return x * x; }
 class DummyToolkitCoordinateInterface : public ToolkitCoordinateInterface {
 public:
   virtual ~DummyToolkitCoordinateInterface() {}
-  virtual void to_inertial(int Body_id, const Time& T, 
-     const CartesianFixed& From, CartesianInertial& To)
+  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T), 
+   const CartesianFixed& UNUSED(From), CartesianInertial& UNUSED(To))
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
   }
-  virtual void to_inertial(int Body_id, const Time& T, 
-   const CartesianFixed& From, const boost::array<double, 3>& Vel_cf,
-   CartesianInertial& To, boost::array<double, 3>& Vel_ci)
+  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T), 
+			   const CartesianFixed& UNUSED(From), const boost::array<double, 3>& UNUSED(Vel_c),
+			   CartesianInertial& UNUSED(To), boost::array<double, 3>& UNUSED(Vel_ci))
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
   }
-  virtual void to_fixed(int Body_id, const Time& T,
-    const CartesianInertial& From, CartesianFixed& To) 
+  virtual void to_fixed(int UNUSED(Body_id), const Time& UNUSED(T),
+     const CartesianInertial& UNUSED(From), CartesianFixed& UNUSED(To)) 
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianInertial to CartesianFixed.");
   }
 
-  virtual void to_fixed(int Body_id, const Time& T,
-			double Ci_to_cf[3][3])
+  virtual void to_fixed(int UNUSED(Body_id), const Time& UNUSED(T),
+			double UNUSED(Ci_to_cf[3][3]))
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianInertial to CartesianFixed.");
   }

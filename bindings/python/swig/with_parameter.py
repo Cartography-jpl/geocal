@@ -217,7 +217,7 @@ class WithParameter(geocal_swig.generic_object.GenericObject):
     def _v_parameter_with_derivative(self, *args):
         """
 
-        virtual void GeoCal::WithParameter::parameter_with_derivative(const ArrayAd< double, 1 > &Parm)
+        virtual void GeoCal::WithParameter::parameter_with_derivative(const ArrayAd< double, 1 > &UNUSED(Parm))
         Set the value of the parameters, including derivatives of the
         parameter.
 

@@ -19,8 +19,8 @@ BOOST_AUTO_TEST_CASE(usgs_dem_data_real_database)
 {
   // Old unit test, requires that we have actual database. If we don't
   // then just skip this test.
-  if(boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database")) {
-    UsgsDemData usgs_data("/data/bank/anc/DEM/USA10M/database", false);
+  if(boost::filesystem::is_directory("/bigdata/bank/anc/DEM/USA10M/database")) {
+    UsgsDemData usgs_data("/bigdata/bank/anc/DEM/USA10M/database", false);
     double latitude = 34.904444;
     double longitude = -119.263411;
     double lat = (latitude + (1.0 / 10800.0));
@@ -86,12 +86,12 @@ BOOST_AUTO_TEST_CASE(usgs_dem_real_database)
 {
   // Old unit test, requires that we have actual database. If we don't
   // then just skip this test.
-  if(!boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database"))
+  if(!boost::filesystem::is_directory("/bigdata/bank/anc/DEM/USA10M/database"))
     return;
   // DatumGeoid96 might not be available, so for the test just use a
   // SimpleDatum.
   boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
-  UsgsDem d("/data/bank/anc/DEM/USA10M/database", false, datum);
+  UsgsDem d("/bigdata/bank/anc/DEM/USA10M/database", false, datum);
   double latitude = 34.904444;
   double longitude = -119.263411;
   double lat = (latitude + (1.0 / 10800.0));
@@ -104,16 +104,16 @@ BOOST_AUTO_TEST_CASE(create_subset_file)
 {
   // Don't normally run this test, it takes a bit of time to run
   return;
-  if(!boost::filesystem::is_directory("/data/bank/anc/DEM/USA10M/database"))
+  if(!boost::filesystem::is_directory("/bigdata/bank/anc/DEM/USA10M/database"))
     return;
-  UsgsDemData d("/data/bank/anc/DEM/USA10M/database");
+  UsgsDemData d("/bigdata/bank/anc/DEM/USA10M/database");
   std::vector<boost::shared_ptr<GroundCoordinate> > pt;
   pt.push_back(boost::shared_ptr<GroundCoordinate>(new Geodetic(40.5, -110.5)));
   pt.push_back(boost::shared_ptr<GroundCoordinate>(new Geodetic(37.5, -106.7)));
   d.create_subset_file("test_dem.tif", "gtiff", pt);
 
   boost::shared_ptr<Datum> datum(new SimpleDatum(10.0));
-  UsgsDem dtrue("/data/bank/anc/DEM/USA10M/database", false, datum);
+  UsgsDem dtrue("/bigdata/bank/anc/DEM/USA10M/database", false, datum);
   GdalRasterImage d2("test_dem.tif");
   GdalDem dcreated("test_dem.tif", datum);
   Geodetic g(38, -108);

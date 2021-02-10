@@ -7,13 +7,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ImageMask::serialize(Archive & ar, const unsigned int version)
+void ImageMask::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMask);
 }
 
 template<class Archive>
-void OffsetImageMask::serialize(Archive & ar, const unsigned int version)
+void OffsetImageMask::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMask);
   GEOCAL_BASE(OffsetImageMask, ImageMask);
@@ -21,7 +21,7 @@ void OffsetImageMask::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void CombinedImageMask::serialize(Archive & ar, const unsigned int version)
+void CombinedImageMask::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMask);
   GEOCAL_BASE(CombinedImageMask, ImageMask);

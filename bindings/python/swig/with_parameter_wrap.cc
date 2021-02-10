@@ -7389,7 +7389,7 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter__SWIG_0(PyObject *SWIGUNUS
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7775,7 +7775,7 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_subset__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8163,7 +8163,7 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_mask(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8574,7 +8574,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"WithParameter__v_parameter_with_derivative", _wrap_WithParameter__v_parameter_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::WithParameter::parameter_with_derivative(const ArrayAd< double, 1 > &Parm)\n"
+		"virtual void GeoCal::WithParameter::parameter_with_derivative(const ArrayAd< double, 1 > &UNUSED(Parm))\n"
 		"Set the value of the parameters, including derivatives of the\n"
 		"parameter.\n"
 		"\n"

@@ -127,7 +127,8 @@ public:
 /// the calling routine needs to be ready to handle.
 //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<RasterImage> overview(int Min_number_sample) const
+  virtual boost::shared_ptr<RasterImage> overview
+  (int UNUSED(Min_number_sample)) const
   { return boost::shared_ptr<RasterImage>(); }
 
 //-----------------------------------------------------------------------

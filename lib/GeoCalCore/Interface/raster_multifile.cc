@@ -6,7 +6,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RasterMultifile::save(Archive & ar, const unsigned int version) const
+void RasterMultifile::save(Archive & ar, const unsigned int UNUSED(version)) const
 {
   int number_tile = (int) tile.size();
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
@@ -16,7 +16,7 @@ void RasterMultifile::save(Archive & ar, const unsigned int version) const
 }
 
 template<class Archive>
-void RasterMultifile::load(Archive & ar, const unsigned int version)
+void RasterMultifile::load(Archive & ar, const unsigned int UNUSED(version))
 {
   int number_tile;
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)

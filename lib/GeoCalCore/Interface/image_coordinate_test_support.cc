@@ -26,7 +26,7 @@ private:
 GEOCAL_EXPORT_KEY(FakeClass);
 
 template<class Archive>
-void FakeClass::serialize(Archive & ar, const unsigned int version)
+void FakeClass::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(FakeClass);
   ar & GEOCAL_NVP(i1) & GEOCAL_NVP(i2);

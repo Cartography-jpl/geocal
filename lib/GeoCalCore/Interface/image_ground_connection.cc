@@ -7,7 +7,7 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ImageGroundConnection::serialize(Archive & ar, const unsigned int version)
+void ImageGroundConnection::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_BASE(ImageGroundConnection, WithParameter);
@@ -21,7 +21,7 @@ void ImageGroundConnection::serialize(Archive & ar, const unsigned int version)
 
 template<class Archive>
 void OffsetImageGroundConnection::serialize
-(Archive & ar, const unsigned int version)
+(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
   ar & GEOCAL_NVP2("original_image_ground_connection", ig_)
@@ -31,7 +31,7 @@ void OffsetImageGroundConnection::serialize
 
 template<class Archive>
 void ImageGroundConnectionCopy::serialize
-(Archive & ar, const unsigned int version)
+(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageGroundConnection);
   ar & GEOCAL_NVP2("original_image_ground_connection", igc);
@@ -148,7 +148,7 @@ ImageGroundConnection::collinearity_residual
 blitz::Array<double, 2> 
 ImageGroundConnection::collinearity_residual_jacobian
 (const GroundCoordinate& Gc,
- const ImageCoordinate& Ic_actual) const
+ const ImageCoordinate& UNUSED(Ic_actual)) const
 {
   Array<double, 2> res =
     image_coordinate_jac_parm(Gc);

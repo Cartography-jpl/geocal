@@ -55,7 +55,7 @@ public:
 /// The default version returns 0.0.
 //-----------------------------------------------------------------------
 
-  virtual double integration_time(int Band) const { return 0.0; }
+  virtual double integration_time(int UNUSED(Band)) const { return 0.0; }
 
 //-----------------------------------------------------------------------
 /// Number of bands in camera.
@@ -172,13 +172,13 @@ public:
 /// Number of lines in camera for given band.
 //-----------------------------------------------------------------------
 
-  virtual int number_line(int Band) const {return nline;}
+  virtual int number_line(int UNUSED(Band)) const {return nline;}
 
 //-----------------------------------------------------------------------
 /// Number of samples in camera for given band.
 //-----------------------------------------------------------------------
 
-  virtual int number_sample(int Band) const {return nsample;}
+  virtual int number_sample(int UNUSED(Band)) const {return nsample;}
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual FrameCoordinateWithDerivative 

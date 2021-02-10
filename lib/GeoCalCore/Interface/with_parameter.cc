@@ -7,14 +7,14 @@ using namespace blitz;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void WithParameter::serialize
-(Archive & ar, const unsigned int version)
+(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameter);
 }
 
 template<class Archive>
 void WithParameterNested::serialize
-(Archive & ar, const unsigned int version)
+(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(WithParameterNested);
   ar & GEOCAL_NVP(obj_list);

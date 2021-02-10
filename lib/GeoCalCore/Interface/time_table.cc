@@ -8,7 +8,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void TimeTable::serialize(Archive & ar, const unsigned int version)
+void TimeTable::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -16,7 +16,7 @@ void TimeTable::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void ConstantSpacingTimeTable::serialize(Archive & ar, const unsigned int version)
+void ConstantSpacingTimeTable::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(ConstantSpacingTimeTable, TimeTable);
@@ -24,7 +24,7 @@ void ConstantSpacingTimeTable::serialize(Archive & ar, const unsigned int versio
 }
 
 template<class Archive>
-void MeasuredTimeTable::serialize(Archive & ar, const unsigned int version)
+void MeasuredTimeTable::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(MeasuredTimeTable, TimeTable);

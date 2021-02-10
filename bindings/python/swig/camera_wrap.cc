@@ -11268,7 +11268,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ObserverCamera_swiginit", ObserverCamera_swiginit, METH_VARARGS, NULL},
 	 { (char *)"Camera_integration_time", _wrap_Camera_integration_time, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual double GeoCal::Camera::integration_time(int Band) const\n"
+		"virtual double GeoCal::Camera::integration_time(int UNUSED(Band)) const\n"
 		"This is the integration time in seconds.\n"
 		"\n"
 		"The integration time is how long it takes the camera to collect data.\n"

@@ -212,8 +212,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     def image_coordinate(self, *args):
         """
 
-        virtual blitz::Array<double, 4> GeoCal::RsmBase::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >
-        &Y, const blitz::Array< double, 3 > &Z) const =0
+        virtual ImageCoordinate GeoCal::RsmBase::image_coordinate(double X, double Y, double Z) const =0
 
         """
         return _rsm_base.RsmBase_image_coordinate(self, *args)
@@ -452,7 +451,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     def _v_row_section_number(self, *args):
         """
 
-        virtual void GeoCal::RsmBase::row_section_number(int V)
+        virtual void GeoCal::RsmBase::row_section_number(int UNUSED(V))
 
         """
         return _rsm_base.RsmBase__v_row_section_number(self, *args)
@@ -470,7 +469,7 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
     def _v_col_section_number(self, *args):
         """
 
-        virtual void GeoCal::RsmBase::col_section_number(int V)
+        virtual void GeoCal::RsmBase::col_section_number(int UNUSED(V))
 
         """
         return _rsm_base.RsmBase__v_col_section_number(self, *args)

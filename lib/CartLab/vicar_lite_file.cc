@@ -23,7 +23,7 @@ static VicarOgr vlogr;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void VicarLiteFile::save(Archive & ar, const unsigned int version) const
+void VicarLiteFile::save(Archive & ar, const unsigned int UNUSED(version)) const
 {
   GEOCAL_GENERIC_BASE(VicarLiteFile);
   ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
@@ -31,7 +31,7 @@ void VicarLiteFile::save(Archive & ar, const unsigned int version) const
 }
 
 template<class Archive>
-void VicarLiteFile::load(Archive & ar, const unsigned int version)
+void VicarLiteFile::load(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(VicarLiteFile);
   ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
@@ -40,7 +40,7 @@ void VicarLiteFile::load(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void VicarLiteRasterImage::save(Archive & ar, const unsigned int version) const
+void VicarLiteRasterImage::save(Archive & ar, const unsigned int UNUSED(version)) const
 {
   GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
   GEOCAL_GENERIC_BASE(RasterImage);
@@ -51,7 +51,7 @@ void VicarLiteRasterImage::save(Archive & ar, const unsigned int version) const
 }
 
 template<class Archive>
-void VicarLiteRasterImage::load(Archive & ar, const unsigned int version)
+void VicarLiteRasterImage::load(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
   GEOCAL_GENERIC_BASE(RasterImage);
@@ -63,7 +63,7 @@ void VicarLiteRasterImage::load(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void VicarLiteDem::serialize(Archive & ar, const unsigned int version)
+void VicarLiteDem::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
     & GEOCAL_NVP_(band)
@@ -251,7 +251,7 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
 //-----------------------------------------------------------------------
 
 VicarLiteFile::VicarLiteFile(const std::string& Fname, int Number_line, 
-		     int Number_sample, const std::string& Type)
+	     int Number_sample, const std::string& UNUSED(Type))
 : access_(VicarLiteFile::WRITE),
   fname_(Fname), force_area_pixel_(false),
   number_line_(Number_line), 
@@ -465,7 +465,7 @@ MapInfo VicarLiteFile::map_info() const
 /// Set metadata for MapInfo.
 //-----------------------------------------------------------------------
 
-void VicarLiteFile::map_info(const MapInfo& M)
+void VicarLiteFile::map_info(const MapInfo& UNUSED(M))
 {
   throw Exception("Not implemented yet");
 }

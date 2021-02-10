@@ -439,7 +439,7 @@ template<> int GeotiffFile::get_tiftag(tiftag_t K) const
 
 template<> blitz::Array<double, 1> GeotiffFile::get_tiftag(tiftag_t K) const
 {
-  uint32_t count;
+  uint16_t count;
   double *data;
   int status = TIFFGetField(tif, K, &count, &data);
   if(status != 1)

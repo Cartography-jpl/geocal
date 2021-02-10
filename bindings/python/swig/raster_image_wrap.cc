@@ -8126,7 +8126,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8228,7 +8228,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad__SWIG_0(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8322,7 +8322,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad__SWIG_1(PyObject *SWIGUNUSE
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8441,7 +8441,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_double(PyObject *SWIGUNUSEDPARM(self
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8543,7 +8543,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad__SWIG_0(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8637,7 +8637,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad__SWIG_1(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8752,7 +8752,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9626,7 +9626,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_1(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -13254,7 +13254,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RasterImageTileIterator_swiginit", RasterImageTileIterator_swiginit, METH_VARARGS, NULL},
 	 { (char *)"RasterImage_overview", _wrap_RasterImage_overview, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<RasterImage> GeoCal::RasterImage::overview(int Min_number_sample) const\n"
+		"virtual boost::shared_ptr<RasterImage> GeoCal::RasterImage::overview(int UNUSED(Min_number_sample)) const\n"
 		"Some RasterImage may have overviews which are lower resolution images.\n"
 		"\n"
 		"If we do have these, then this will return the lower resolution\n"
@@ -13264,9 +13264,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage_interpolate", _wrap_RasterImage_interpolate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double GeoCal::RasterImage::interpolate(const ImageCoordinate &Ic) const\n"
-		"This does a bilinear interpolation of the data for fractional Line and\n"
-		"Sample. \n"
+		"blitz::Array< double, 2 > RasterImage::interpolate(double Line, double Sample, int Number_line, int Number_sample,\n"
+		"double Fill_value=0.0) const\n"
+		"Interpolate a region, starting with the given fractional line and\n"
+		"sample.\n"
+		"\n"
+		"This is a bilinear interpolation. This does padding with the given\n"
+		"fill value. \n"
 		""},
 	 { (char *)"RasterImage__v_copy_needs_double", (PyCFunction)_wrap_RasterImage__v_copy_needs_double, METH_O, (char *)"\n"
 		"\n"
@@ -13339,22 +13343,23 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage_read", _wrap_RasterImage_read, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array< int, 2 > RasterImage::read(const RasterImageTileIterator &Ti) const\n"
+		"blitz::Array< int, 2 > RasterImage::read(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"Return a subset of the image. \n"
 		""},
 	 { (char *)"RasterImage_write", _wrap_RasterImage_write, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< double, 2 > &A)\n"
+		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< int, 2 > &A)\n"
 		"\n"
 		""},
 	 { (char *)"RasterImage___str__", (PyCFunction)_wrap_RasterImage___str__, METH_O, NULL},
 	 { (char *)"RasterImage__v_has_map_info", (PyCFunction)_wrap_RasterImage__v_has_map_info, METH_O, (char *)"\n"
 		"\n"
 		"virtual bool GeoCal::RasterImage::has_map_info() const\n"
+		"Indicate if we have MapInfo.\n"
+		"\n"
 		"Functions available if we have MapInfo data.\n"
 		"\n"
-		"Indicate if we have MapInfo. The default is false, but derived classes\n"
-		"can override this. \n"
+		"The default is false, but derived classes can override this. \n"
 		""},
 	 { (char *)"RasterImage__v_map_info", (PyCFunction)_wrap_RasterImage__v_map_info, METH_O, (char *)"\n"
 		"\n"
@@ -13368,12 +13373,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImage_coordinate", _wrap_RasterImage_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::coordinate(const blitz::Array< double, 1 > &Lat, const blitz::Array< double, 1 >\n"
-		"&Lon) const\n"
-		"Translate a number of points at once.\n"
-		"\n"
-		"This is really meant for use with python, where this is faster than\n"
-		"the normal interface. \n"
+		"ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const\n"
+		"Shortcut to calling mapinfo().coordinate. \n"
 		""},
 	 { (char *)"RasterImage__v_grid_center_line_resolution", (PyCFunction)_wrap_RasterImage__v_grid_center_line_resolution, METH_O, (char *)"\n"
 		"\n"
@@ -13398,25 +13399,25 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RasterImage__v_has_rpc", (PyCFunction)_wrap_RasterImage__v_has_rpc, METH_O, (char *)"\n"
 		"\n"
 		"virtual bool GeoCal::RasterImage::has_rpc() const\n"
+		"Indicate if we have Rpc.\n"
+		"\n"
 		"Functions available if we have RPC\n"
 		"\n"
-		"Indicate if we have Rpc. The default is false, but derived classes can\n"
-		"override this. \n"
+		"The default is false, but derived classes can override this. \n"
 		""},
 	 { (char *)"RasterImage__v_rpc", (PyCFunction)_wrap_RasterImage__v_rpc, METH_O, (char *)"\n"
 		"\n"
 		"boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const\n"
-		"Pointer version of rpc().\n"
-		"\n"
-		"This makes python happier. \n"
+		"Pointer version of rpc(). This makes python happier. \n"
 		""},
 	 { (char *)"RasterImage__v_has_rsm", (PyCFunction)_wrap_RasterImage__v_has_rsm, METH_O, (char *)"\n"
 		"\n"
 		"virtual bool GeoCal::RasterImage::has_rsm() const\n"
+		"Indicate if we have Rsm.\n"
+		"\n"
 		"Functions available if we have RSM\n"
 		"\n"
-		"Indicate if we have Rsm. The default is false, but derived classes can\n"
-		"override this. \n"
+		"The default is false, but derived classes can override this. \n"
 		""},
 	 { (char *)"RasterImage__v_rsm", (PyCFunction)_wrap_RasterImage__v_rsm, METH_O, (char *)"\n"
 		"\n"

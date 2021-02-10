@@ -4,13 +4,13 @@
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<> template<class Archive>
-void Functor<double, double>::serialize(Archive & ar, const unsigned int version)
+void Functor<double, double>::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(DFunctor);
 }
 
 template<> template<class Archive>
-void Functor<blitz::Array<double, 1>, blitz::Array<double, 1> >::serialize(Archive & ar, const unsigned int version)
+void Functor<blitz::Array<double, 1>, blitz::Array<double, 1> >::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(VFunctor);
 }

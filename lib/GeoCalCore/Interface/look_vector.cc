@@ -10,70 +10,70 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ScLookVector::serialize(Archive & ar, const unsigned int version)
+void ScLookVector::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ScLookVector);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void ScLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+void ScLookVectorWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ScLookVectorWithDerivative);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void CartesianInertialLookVector::serialize(Archive & ar, const unsigned int version)
+void CartesianInertialLookVector::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianInertialLookVector);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void CartesianInertialLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+void CartesianInertialLookVectorWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianInertialLookVectorWithDerivative);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void CartesianFixedLookVector::serialize(Archive & ar, const unsigned int version)
+void CartesianFixedLookVector::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianFixedLookVector);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void CartesianFixedLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+void CartesianFixedLookVectorWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianFixedLookVectorWithDerivative);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void LnLookVector::serialize(Archive & ar, const unsigned int version)
+void LnLookVector::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(LnLookVector);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void LnLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+void LnLookVectorWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(LnLookVectorWithDerivative);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void DcsLookVector::serialize(Archive & ar, const unsigned int version)
+void DcsLookVector::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(DcsLookVector);
   ar & GEOCAL_NVP(look_vector);
 }
 
 template<class Archive>
-void DcsLookVectorWithDerivative::serialize(Archive & ar, const unsigned int version)
+void DcsLookVectorWithDerivative::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(DcsLookVectorWithDerivative);
   ar & GEOCAL_NVP(look_vector);

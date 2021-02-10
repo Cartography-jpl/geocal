@@ -6040,6 +6040,20 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -6897,6 +6911,53 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 SWIGINTERN PyObject *_wrap_new_OgrWrapper__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
+  bool arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  GeoCal::OgrWrapper *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_OgrWrapper" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_OgrWrapper" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_OgrWrapper" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      result = (GeoCal::OgrWrapper *)new GeoCal::OgrWrapper((std::string const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OgrWrapper > *smartresult = result ? new boost::shared_ptr<  GeoCal::OgrWrapper >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OgrWrapper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   GeoCal::OgrWrapper *result = 0 ;
   
@@ -6933,7 +6994,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_OgrWrapper__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OgrWrapper__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< OGRSpatialReference > *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -6970,11 +7031,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_OgrWrapper(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[2] = {
+  PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OgrWrapper",0,1,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OgrWrapper",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
     int _v = 0;
@@ -6983,33 +7044,74 @@ SWIGINTERN PyObject *_wrap_new_OgrWrapper(PyObject *self, PyObject *args) {
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_new_OgrWrapper__SWIG_1(self, argc, argv);
+    return _wrap_new_OgrWrapper__SWIG_2(self, argc, argv);
   }
 check_1:
   
   if (argc == 1) {
+    return _wrap_new_OgrWrapper__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
     return _wrap_new_OgrWrapper__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OgrWrapper'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OgrWrapper::OgrWrapper(std::string const &,bool)\n"
     "    GeoCal::OgrWrapper::OgrWrapper(std::string const &)\n"
     "    GeoCal::OgrWrapper::OgrWrapper(boost::shared_ptr< OGRSpatialReference > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_OgrWrapper_from_epsg(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_OgrWrapper_from_epsg__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  bool arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "OgrWrapper_from_epsg" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OgrWrapper_from_epsg" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      result = GeoCal::OgrWrapper::from_epsg(arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper_from_epsg__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   int val1 ;
   int ecode1 = 0 ;
-  PyObject *swig_obj[1] ;
   boost::shared_ptr< GeoCal::OgrWrapper > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "OgrWrapper_from_epsg" "', argument " "1"" of type '" "int""'");
@@ -7033,15 +7135,83 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OgrWrapper_from_proj4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_OgrWrapper_from_epsg(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OgrWrapper_from_epsg",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_OgrWrapper_from_epsg__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_OgrWrapper_from_epsg__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OgrWrapper_from_epsg'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OgrWrapper::from_epsg(int,bool)\n"
+    "    GeoCal::OgrWrapper::from_epsg(int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper_from_proj4__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  bool arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper > result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper_from_proj4" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OgrWrapper_from_proj4" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OgrWrapper_from_proj4" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      result = GeoCal::OgrWrapper::from_proj4((std::string const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper_from_proj4__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
   boost::shared_ptr< GeoCal::OgrWrapper > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -7070,6 +7240,30 @@ SWIGINTERN PyObject *_wrap_OgrWrapper_from_proj4(PyObject *SWIGUNUSEDPARM(self),
 fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper_from_proj4(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OgrWrapper_from_proj4",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_OgrWrapper_from_proj4__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_OgrWrapper_from_proj4__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OgrWrapper_from_proj4'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OgrWrapper::from_proj4(std::string const &,bool)\n"
+    "    GeoCal::OgrWrapper::from_proj4(std::string const &)\n");
+  return 0;
 }
 
 
@@ -7368,6 +7562,49 @@ SWIGINTERN PyObject *_wrap_OgrWrapper__v_pcs_citation_geo_key(PyObject *SWIGUNUS
     }
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper__v_use_traditional_gis_order(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OgrWrapper *arg1 = (GeoCal::OgrWrapper *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OgrWrapper const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OgrWrapper_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper__v_use_traditional_gis_order" "', argument " "1"" of type '" "GeoCal::OgrWrapper const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OgrWrapper > * >(argp1);
+      arg1 = const_cast< GeoCal::OgrWrapper * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::OgrWrapper const *)arg1)->use_traditional_gis_order();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
   return NULL;
@@ -8880,20 +9117,24 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_OgrWrapper", _wrap_new_OgrWrapper, METH_VARARGS, (char *)"\n"
 		"\n"
-		"OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)\n"
-		"Constructor, from an existing OGRSpatialReference. \n"
-		""},
-	 { (char *)"OgrWrapper_from_epsg", (PyCFunction)_wrap_OgrWrapper_from_epsg, METH_O, (char *)"\n"
+		"OgrWrapper::OgrWrapper(const std::string &Wkt, bool Use_traditional_gis_order=true)\n"
+		"Constructor that creates a OGRSpatialReference from a WKT (Well Known\n"
+		"Text) string.\n"
 		"\n"
-		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id)\n"
+		"See class description for information about use_traditional_gis_order\n"
+		"\n"
+		""},
+	 { (char *)"OgrWrapper_from_epsg", _wrap_OgrWrapper_from_epsg, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id, bool Use_traditional_gis_order=true)\n"
 		"Create a OgrWrapper for a coordinate system given by the EPSG ID.\n"
 		"\n"
 		"You can look the EPSG code up for various coordinate systems\n"
 		"athttp://www.epsg-registry.org \n"
 		""},
-	 { (char *)"OgrWrapper_from_proj4", (PyCFunction)_wrap_OgrWrapper_from_proj4, METH_O, (char *)"\n"
+	 { (char *)"OgrWrapper_from_proj4", _wrap_OgrWrapper_from_proj4, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string)\n"
+		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string, bool Use_traditional_gis_order=true)\n"
 		"Create a OgrWrapper for a coordinate system from a Proj 4 string. \n"
 		""},
 	 { (char *)"OgrWrapper__v_ogr", (PyCFunction)_wrap_OgrWrapper__v_ogr, METH_O, (char *)"\n"
@@ -8946,6 +9187,14 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is a short text description of the projection. \n"
 		""},
+	 { (char *)"OgrWrapper__v_use_traditional_gis_order", (PyCFunction)_wrap_OgrWrapper__v_use_traditional_gis_order, METH_O, (char *)"\n"
+		"\n"
+		"bool OgrWrapper::use_traditional_gis_order() const\n"
+		"If true, then we have OAMS_TRADITIONAL_GIS_ORDER.\n"
+		"\n"
+		"If false, we have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as\n"
+		"an error, because we don't support that with serialization. \n"
+		""},
 	 { (char *)"OgrWrapper__v_geogcs_name", (PyCFunction)_wrap_OgrWrapper__v_geogcs_name, METH_O, (char *)"\n"
 		"\n"
 		"std::string OgrWrapper::geogcs_name() const\n"
@@ -8976,10 +9225,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OgrWrapper_swiginit", OgrWrapper_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_OgrCoordinate", _wrap_new_OgrCoordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const GroundCoordinate\n"
-		"&G)\n"
-		"Convert from GroundCoordinate to the coordinate system given by Ogr.\n"
-		"\n"
+		"GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,\n"
+		"double z)\n"
+		"Constructor. X, Y, and Z are in whatever coordinates Ogr are in. \n"
 		""},
 	 { (char *)"OgrCoordinate__v_ogr", (PyCFunction)_wrap_OgrCoordinate__v_ogr, METH_O, (char *)"\n"
 		"\n"

@@ -18,16 +18,42 @@ namespace GeoCal {
   handles the lifetime of these objects. This is separated out from
   OgrCoordinate because typically we'll have lots of OgrCoordinates
   that have the same OgrWrapper.
+
+  Note a complication in axis ordering. The WKT changed to include
+  axis ordering, see https://trac.osgeo.org/gdal/wiki/rfc20_srs_axes
+  and https://trac.osgeo.org/gdal/wiki/rfc73_proj6_wkt2_srsbarn
+  (axis ordering section). This change took place in GDAL 3. All
+  our code was written before this change, so in lots of places 
+  we assume the old behavior. Our low level coordinate code doesn't
+  actually care, but anything using this likely makes assumptions
+  about what the order is. We also will need to support GDAL 2 for
+  sometime in addition got GDAL 3.
+
+  So we don't break a lot of existing code, we take a 
+  "use_traditional_gis_order" flag. If this is true, we use the
+  OAMS_TRADITIONAL_GIS_ORDER. false is an error if we are using gdal
+  older than version 3 (since it isn't supported with gdal 2),
+  otherwise we use OAMS_AUTHORITY_COMPLIANT. At some point we can just
+  directly take the GDAL enumeration, but since this is in GDAL 3 only
+  we instead take a boolean that can be use with 2.
+
+  We don't directly support OAMS_CUSTOM, although you can pass a 
+  OGRSpatialReference directly with that. However, serialization isn't
+  currently supported for OAMS_CUSTOM. We could add that if needed, we
+  just need to think through how to save that. For now, I don't see
+  much of a need for that.
 *******************************************************************/
 
 class OgrWrapper : public boost::noncopyable,
 	           public Printable<OgrWrapper>  {
 public:
-  OgrWrapper(const std::string& Wkt);
+  OgrWrapper(const std::string& Wkt, bool Use_traditional_gis_order = true);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
-  static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id);
+  static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id,
+	 bool Use_traditional_gis_order = true);
   static boost::shared_ptr<OgrWrapper> 
-  from_proj4(const std::string& Proj4_string);
+  from_proj4(const std::string& Proj4_string,
+	     bool Use_traditional_gis_order = true);
   virtual ~OgrWrapper();
 
 //-----------------------------------------------------------------------
@@ -75,6 +101,7 @@ public:
   std::string pcs_citation_geo_key() const;
   std::string geogcs_name() const;
   std::string geoccs_name() const;
+  bool use_traditional_gis_order() const;
 
 //-----------------------------------------------------------------------
 /// Return the NAIF code for the planet this coordinate is for.
@@ -85,7 +112,9 @@ protected:
   OgrWrapper() {}
 private:
   void init(const boost::shared_ptr<OGRSpatialReference>& Ogr);
-  void init(const std::string& Wkt);
+  void init(const std::string& Wkt, bool use_traditional_gis_order);
+  static void handle_gis_order(OGRSpatialReference& Ogr,
+			bool Use_traditional_gis_order);
   boost::shared_ptr<OGRSpatialReference> ogr_;
   OGRCoordinateTransformation* ogr_transform_;
   OGRCoordinateTransformation* ogr_inverse_transform_;
@@ -118,6 +147,8 @@ private:
 
   You can see the documentation for OGRSpatialReference at
   http://www.gdal.org/ogr/osr_tutorial.html.
+
+  See note in OgrWrapper about axis order.
 *******************************************************************/
 
 class OgrCoordinate : public GroundCoordinate {
@@ -202,6 +233,8 @@ private:
 
 /****************************************************************//**
   This is a CoordinateConverter for working with OgrCoordinates.
+
+  See note in OgrWrap about axis order.
 *******************************************************************/
 
 class OgrCoordinateConverter : public CoordinateConverter {
@@ -293,6 +326,7 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(OgrWrapper);
+GEOCAL_CLASS_VERSION(OgrWrapper, 1);
 GEOCAL_EXPORT_KEY(OgrCoordinate);
 GEOCAL_EXPORT_KEY(OgrCoordinateConverter);
 #endif

@@ -254,7 +254,7 @@ public:
 /// if has_time is false.
 //-----------------------------------------------------------------------
 
-  virtual Time pixel_time(const ImageCoordinate& Ic) const
+  virtual Time pixel_time(const ImageCoordinate& UNUSED(Ic)) const
   { throw Exception("pixel_time is not implemented"); }
 
 //-----------------------------------------------------------------------
@@ -321,7 +321,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 2> 
-  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+  image_coordinate_jac_parm(const GroundCoordinate& UNUSED(Gc)) const
   { // Default is no parameters
     return blitz::Array<double, 2>(2, 0);
   }

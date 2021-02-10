@@ -185,9 +185,9 @@ public:
   MapInfo map_info() const;
   void map_info(const MapInfo& M);
   Rpc rpc() const;
-  void rpc(const Rpc& R) { throw Exception("Not yet implemented"); }
+  void rpc(const Rpc& UNUSED(R)) { throw Exception("Not yet implemented"); }
   boost::shared_ptr<Rsm> rsm() const;
-  void rsm(const boost::shared_ptr<Rsm>& R) { throw Exception("Not yet implemented"); }
+  void rsm(const boost::shared_ptr<Rsm>& UNUSED(R)) { throw Exception("Not yet implemented"); }
   boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const;
   int read_int(int B, int L, int S) const;
   double read_double(int B, int L, int S) const;
@@ -984,11 +984,10 @@ public:
 	       bool Outside_dem_is_error = false,
 	       const boost::shared_ptr<Datum>& D = 
 	       boost::shared_ptr<Datum>(new NoDatum()),
-	       int Band_id = 1,
-	       int Naif_code=Geodetic::EARTH_NAIF_CODE)
+	       int Band_id = 1)
     : band_(Band_id - 1), f_(new VicarLiteFile(Fname))
   {
-    initialize(D, f_->map_info(), Outside_dem_is_error, Naif_code);
+    initialize(D, f_->map_info(), Outside_dem_is_error);
     range_check(band_, 0, f_->number_band());
   }
   virtual ~VicarLiteDem() {}

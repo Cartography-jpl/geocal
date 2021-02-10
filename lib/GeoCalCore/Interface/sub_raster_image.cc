@@ -6,7 +6,7 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void SubRasterImage::serialize(Archive & ar, const unsigned int version)
+void SubRasterImage::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable)
     & GEOCAL_NVP_(data)

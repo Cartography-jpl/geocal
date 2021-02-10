@@ -133,11 +133,11 @@ void RpcImage::read_ptr(int Lstart, int Sstart, int Number_line,
 /// Write the pixel value to the given location.
 //-----------------------------------------------------------------------
 
-void RpcImage::unchecked_write(int Line, int Sample, int Val) 
+void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample), int UNUSED(Val))
 {
   throw Exception("write not implemented");
 }
-void RpcImage::unchecked_write(int Line, int Sample, double Val) 
+void RpcImage::unchecked_write(int UNUSED(Line), int UNUSED(Sample), double UNUSED(Val))
 {
   throw Exception("write not implemented");
 }

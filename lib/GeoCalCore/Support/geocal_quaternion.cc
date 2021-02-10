@@ -5,7 +5,7 @@
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive, class T>
 void boost::serialization::save
-(Archive& ar, const boost::math::quaternion<T>& q, const unsigned version) 
+(Archive& ar, const boost::math::quaternion<T>& q, const unsigned UNUSED(version)) 
 {
   // Note a subtle issue here. Since we are copying the data, the
   // object tracking boost does will be these *local* values, not the
@@ -24,7 +24,7 @@ void boost::serialization::save
 template<typename Archive, class T>
 void boost::serialization::load
 (Archive& ar, boost::math::quaternion<T>& q, 
- const unsigned version) 
+ const unsigned UNUSED(version)) 
 {
   // Note a subtle issue here. Since we are copying the data, the
   // object tracking boost does will be these *local* values, not the

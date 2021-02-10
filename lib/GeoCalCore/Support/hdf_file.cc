@@ -6,13 +6,13 @@ using namespace H5;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
 template<class Archive>
-void HdfFile::save(Archive & ar, const unsigned int version) const
+void HdfFile::save(Archive & UNUSED(ar), const unsigned int UNUSED(version)) const
 {
   // Nothing more to do
 }
 
 template<class Archive>
-void HdfFile::load(Archive & ar, const unsigned int version)
+void HdfFile::load(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   try {
     h.reset(new H5File(fname, flag));

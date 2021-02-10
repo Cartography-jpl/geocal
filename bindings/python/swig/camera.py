@@ -233,7 +233,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def integration_time(self, Band):
         """
 
-        virtual double GeoCal::Camera::integration_time(int Band) const
+        virtual double GeoCal::Camera::integration_time(int UNUSED(Band)) const
         This is the integration time in seconds.
 
         The integration time is how long it takes the camera to collect data.

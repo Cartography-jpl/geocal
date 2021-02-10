@@ -24,7 +24,7 @@ public:
 			  );
   virtual ~QuadraticGeometricModel() {}
   void fit_transformation(const GeometricTiePoints& Tp);
-  virtual void notify_update(const GeometricTiePoints& Tp)
+  virtual void notify_update(const GeometricTiePoints& UNUSED(Tp))
   { if(enough_tie_point_to_fit())
       fit_transformation(*tp);
   }

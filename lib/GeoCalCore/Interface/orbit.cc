@@ -12,13 +12,13 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void OrbitData::serialize(Archive & ar, const unsigned int version)
+void OrbitData::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(OrbitData);
 }
 
 template<class Archive>
-void Orbit::serialize(Archive & ar, const unsigned int version)
+void Orbit::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Orbit);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -27,7 +27,7 @@ void Orbit::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void KeplerOrbit::serialize(Archive & ar, const unsigned int version)
+void KeplerOrbit::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
     & GEOCAL_NVP_(epoch) & GEOCAL_NVP_(a) & GEOCAL_NVP_(ap)
@@ -36,7 +36,7 @@ void KeplerOrbit::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
+void QuaternionOrbitData::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(OrbitData);
   GEOCAL_BASE(QuaternionOrbitData, OrbitData);

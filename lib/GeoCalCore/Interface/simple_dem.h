@@ -30,7 +30,7 @@ public:
 /// in meters.
 //-----------------------------------------------------------------------
 
-  virtual double height_reference_surface(const GroundCoordinate& Gp) 
+  virtual double height_reference_surface(const GroundCoordinate& UNUSED(Gp))
     const {return h_;}
 
 //-----------------------------------------------------------------------

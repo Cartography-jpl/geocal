@@ -9,7 +9,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void TiePoint::serialize(Archive & ar, const unsigned int version)
+void TiePoint::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TiePoint);
   ar & GEOCAL_NVP_(id) & GEOCAL_NVP_(is_gcp) & GEOCAL_NVP_(ground_location)
@@ -17,7 +17,7 @@ void TiePoint::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void TiePointCollection::serialize(Archive & ar, const unsigned int version)
+void TiePointCollection::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TiePointCollection);
   GEOCAL_BASE(TiePointCollection, TiePointVector);

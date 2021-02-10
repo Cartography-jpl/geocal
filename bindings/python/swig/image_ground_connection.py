@@ -437,7 +437,7 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def image_coordinate_jac_parm(self, Gc):
         """
 
-        virtual blitz::Array<double, 2> GeoCal::ImageGroundConnection::image_coordinate_jac_parm(const GroundCoordinate &Gc) const
+        virtual blitz::Array<double, 2> GeoCal::ImageGroundConnection::image_coordinate_jac_parm(const GroundCoordinate &UNUSED(Gc)) const
         Return the Jacobian of the image coordinates with respect to the
         parameters. 
         """
@@ -654,7 +654,7 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def pixel_time(self, Ic):
         """
 
-        virtual Time GeoCal::ImageGroundConnection::pixel_time(const ImageCoordinate &Ic) const
+        virtual Time GeoCal::ImageGroundConnection::pixel_time(const ImageCoordinate &UNUSED(Ic)) const
         Time associated with the given pixel.
 
         This will throw an exception if has_time is false. 
@@ -665,9 +665,13 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def resolution_meter(self, *args):
         """
 
-        double ImageGroundConnection::resolution_meter() const
-        Variation of resolution_meter that find the resolution of the center
-        pixel. 
+        double ImageGroundConnection::resolution_meter(const ImageCoordinate &Ic) const
+        Calculate the approximate resolution on the ground of a given
+        ImageCoordinate.
+
+        This finds the intersection with the reference surface for the given
+        pixel, + 1 in the line and sample direction. We find the difference in
+        meters between these points, and select the maximum value. 
         """
         return _image_ground_connection.ImageGroundConnection_resolution_meter(self, *args)
 
@@ -821,8 +825,8 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     def __dem(self, D):
         """
 
-        const Dem& GeoCal::ImageGroundConnection::dem() const
-        Dem used by ground_coordinate. 
+        void GeoCal::ImageGroundConnection::dem(const boost::shared_ptr< Dem > &D)
+        Set the DEM to use in ground_coordinate. 
         """
         return _image_ground_connection.ImageGroundConnection___dem(self, D)
 

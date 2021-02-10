@@ -219,9 +219,9 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        VicarLiteFile::VicarLiteFile(const std::string &Fname, int Number_line, int Number_sample, const
+        GeoCal::VicarLiteFile::VicarLiteFile(const std::string &Fname, int Number_line, int Number_sample, const
         std::string &Type="BYTE")
-        Create a new VICAR file with the given size. 
+
         """
         _vicar_lite_file.VicarLiteFile_swiginit(self, _vicar_lite_file.new_VicarLiteFile(*args))
     __swig_destroy__ = _vicar_lite_file.delete_VicarLiteFile
@@ -421,8 +421,8 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     def _v_map_info(self, *args):
         """
 
-        void VicarLiteFile::map_info(const MapInfo &M)
-        Set metadata for MapInfo. 
+        void GeoCal::VicarLiteFile::map_info(const MapInfo &M)
+
         """
         return _vicar_lite_file.VicarLiteFile__v_map_info(self, *args)
 
@@ -439,7 +439,7 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     def _v_rpc(self, *args):
         """
 
-        void GeoCal::VicarLiteFile::rpc(const Rpc &R)
+        void GeoCal::VicarLiteFile::rpc(const Rpc &UNUSED(R))
 
         """
         return _vicar_lite_file.VicarLiteFile__v_rpc(self, *args)
@@ -457,7 +457,7 @@ class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     def _v_rsm(self, *args):
         """
 
-        void GeoCal::VicarLiteFile::rsm(const boost::shared_ptr< Rsm > &R)
+        void GeoCal::VicarLiteFile::rsm(const boost::shared_ptr< Rsm > &UNUSED(R))
 
         """
         return _vicar_lite_file.VicarLiteFile__v_rsm(self, *args)
@@ -550,13 +550,17 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     def __init__(self, *args):
         """
 
-        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, const MapInfo &Mi, int Band_id=1,
-        access_type Access=VicarLiteFile::READ, int Number_tile_line=-1, int
+        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type
+        Access=VicarLiteFile::READ, int Number_tile_line=-1, int
         Number_tile_sample=-1, bool Force_area_pixel=false)
         Constructor.
 
-        We force the given map info to apply to the image. This is a
-        workaround for pickling mapinfo that VICAR doesn't support yet. 
+        The Force_area_pixel forces the file to be treated as "pixel as
+        area" rather than "pixel as point". This is really just meant as a
+        work around for the SRTM data, which incorrectly labels the data as
+        "point" rather than "area". Since this is a 15 meter difference,
+        it matters for many applications. Most users should just ignore this
+        value. 
         """
         _vicar_lite_file.VicarLiteRasterImage_swiginit(self, _vicar_lite_file.new_VicarLiteRasterImage(*args))
 
@@ -681,7 +685,7 @@ class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
 
         GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const
         boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        NoDatum()), int Band_id=1, int Naif_code=Geodetic::EARTH_NAIF_CODE)
+        NoDatum()), int Band_id=1)
         Constructor.
 
         If Outside_dem_is_error is true, then calls for Dem data outside of

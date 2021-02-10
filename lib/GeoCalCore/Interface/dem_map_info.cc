@@ -169,8 +169,7 @@ DemMapInfo::surface_point(const GroundCoordinate& Gp) const
 
 void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D, 
 			    const MapInfo& M, 
-			    bool Outside_dem_is_error,
-			    int Naif_code)
+			    bool Outside_dem_is_error)
 {
   datum_ = D;
   map_info_ = M;

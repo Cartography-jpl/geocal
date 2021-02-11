@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "srtm_dem.h"
 #include <stdlib.h>
+#include <boost/filesystem/exception.hpp>
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(srtm_dem, GlobalFixture)
@@ -18,6 +19,9 @@ BOOST_AUTO_TEST_CASE(basic_test)
   } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
     // Don't worry if we can't find the data.
+  } catch(const boost::filesystem::filesystem_error&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    // Don't worry if we can't find the data.
   }
 }
 
@@ -31,6 +35,9 @@ BOOST_AUTO_TEST_CASE(serialization)
     dem->height_reference_surface(Geodetic(34.2,-118.03));
   } catch(const Exception&) {
     // Don't worry if we can't find the data, just skip test.
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    return;
+  } catch(const boost::filesystem::filesystem_error&) {
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
     return;
   } 

@@ -15768,7 +15768,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ArrayAd_double_1", _wrap_new_ArrayAd_double_1, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
+		"GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_1_resize_number_variable", _wrap_ArrayAd_double_1_resize_number_variable, METH_VARARGS, (char *)"\n"
@@ -15778,17 +15778,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ArrayAd_double_1_resize", _wrap_ArrayAd_double_1_resize, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
+		"void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_1__v_value", (PyCFunction)_wrap_ArrayAd_double_1__v_value, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const\n"
+		"blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_1__v_jacobian", (PyCFunction)_wrap_ArrayAd_double_1__v_jacobian, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const\n"
+		"blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_1__v_rows", (PyCFunction)_wrap_ArrayAd_double_1__v_rows, METH_O, (char *)"\n"
@@ -15834,7 +15834,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ArrayAd_double_1_swiginit", ArrayAd_double_1_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_ArrayAd_double_2", _wrap_new_ArrayAd_double_2, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
+		"GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_2_resize_number_variable", _wrap_ArrayAd_double_2_resize_number_variable, METH_VARARGS, (char *)"\n"
@@ -15844,17 +15844,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ArrayAd_double_2_resize", _wrap_ArrayAd_double_2_resize, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
+		"void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_2__v_value", (PyCFunction)_wrap_ArrayAd_double_2__v_value, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const\n"
+		"blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_2__v_jacobian", (PyCFunction)_wrap_ArrayAd_double_2__v_jacobian, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const\n"
+		"blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_2__v_rows", (PyCFunction)_wrap_ArrayAd_double_2__v_rows, METH_O, (char *)"\n"
@@ -15900,7 +15900,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ArrayAd_double_2_swiginit", ArrayAd_double_2_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_ArrayAd_double_3", _wrap_new_ArrayAd_double_3, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
+		"GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_3_resize_number_variable", _wrap_ArrayAd_double_3_resize_number_variable, METH_VARARGS, (char *)"\n"
@@ -15910,17 +15910,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ArrayAd_double_3_resize", _wrap_ArrayAd_double_3_resize, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
+		"void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_3__v_value", (PyCFunction)_wrap_ArrayAd_double_3__v_value, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const\n"
+		"blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_3__v_jacobian", (PyCFunction)_wrap_ArrayAd_double_3__v_jacobian, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const\n"
+		"blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_3__v_rows", (PyCFunction)_wrap_ArrayAd_double_3__v_rows, METH_O, (char *)"\n"
@@ -15966,7 +15966,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ArrayAd_double_3_swiginit", ArrayAd_double_3_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_ArrayAd_double_4", _wrap_new_ArrayAd_double_4, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
+		"GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_4_resize_number_variable", _wrap_ArrayAd_double_4_resize_number_variable, METH_VARARGS, (char *)"\n"
@@ -15976,17 +15976,17 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ArrayAd_double_4_resize", _wrap_ArrayAd_double_4_resize, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
+		"void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_4__v_value", (PyCFunction)_wrap_ArrayAd_double_4__v_value, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const\n"
+		"blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_4__v_jacobian", (PyCFunction)_wrap_ArrayAd_double_4__v_jacobian, METH_O, (char *)"\n"
 		"\n"
-		"const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const\n"
+		"blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()\n"
 		"\n"
 		""},
 	 { (char *)"ArrayAd_double_4__v_rows", (PyCFunction)_wrap_ArrayAd_double_4__v_rows, METH_O, (char *)"\n"

@@ -199,7 +199,7 @@ class Covariance(geocal_swig.generic_object.GenericObject):
         """
 
         GeoCal::Covariance::Covariance()
-        Constructor 
+        Constructor. 
         """
         _covariance.Covariance_swiginit(self, _covariance.new_Covariance())
 

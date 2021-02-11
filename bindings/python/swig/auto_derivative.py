@@ -224,11 +224,8 @@ class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::AutoDerivative< T >::AutoDerivative(const T &Val, int i_th, int nvars)
-        Constructor for a value of the i_th independent variable (0 based).
-
-        We create a gradient that is all 0, except for "1" in the i_th
-        location. 
+        GeoCal::AutoDerivative< T >::AutoDerivative(const AutoDerivative< T > &D)
+        Copy constructor. This does a deep copy. 
         """
         _auto_derivative.AutoDerivativeDouble_swiginit(self, _auto_derivative.new_AutoDerivativeDouble(*args))
 
@@ -327,7 +324,7 @@ class AutoDerivativeRefDouble(geocal_swig.generic_object.GenericObject):
     def __init__(self, V, FORCE_COPY):
         """
 
-        GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V, const blitz::Array< T, 1 > &G)
+        GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V)
 
         """
         _auto_derivative.AutoDerivativeRefDouble_swiginit(self, _auto_derivative.new_AutoDerivativeRefDouble(V, FORCE_COPY))

@@ -11794,8 +11794,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_TiePoint", _wrap_new_TiePoint, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::TiePoint::TiePoint(int Number_image)\n"
-		"Constructor. \n"
+		"TiePoint::TiePoint(const TiePoint &Tp)\n"
+		"Copy constructor. We make a deep copy of everything. \n"
 		""},
 	 { (char *)"TiePoint__v_id", _wrap_TiePoint__v_id, METH_VARARGS, (char *)"\n"
 		"\n"

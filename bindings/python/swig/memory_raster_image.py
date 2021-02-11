@@ -206,8 +206,8 @@ class MemoryRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     def __init__(self, *args):
         """
 
-        GeoCal::MemoryRasterImage::MemoryRasterImage(int Number_line=0, int Number_sample=0)
-        Construct a MemoryRasterImage of the given size. 
+        GeoCal::MemoryRasterImage::MemoryRasterImage(const MapInfo &Mi)
+        Construct a MemoryRasterImage of the given MapInfo. 
         """
         _memory_raster_image.MemoryRasterImage_swiginit(self, _memory_raster_image.new_MemoryRasterImage(*args))
 

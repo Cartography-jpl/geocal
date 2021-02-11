@@ -1,7 +1,7 @@
 #include "unit_test_support.h"
 #include "srtm_dem.h"
 #include <stdlib.h>
-#include <boost/filesystem/exception.hpp>
+#include <boost/filesystem.hpp>
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(srtm_dem, GlobalFixture)

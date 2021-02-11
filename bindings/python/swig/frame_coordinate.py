@@ -228,9 +228,8 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const FrameCoordinate &F)
-        Create FrameCoordinateWithDerivative from FrameCoordinate, so line and
-        sample are constants rather than having a gradient. 
+        GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)
+        Create a FrameCoordinateWithDerivative with the given coordinates. 
         """
         _frame_coordinate.FrameCoordinateWithDerivative_swiginit(self, _frame_coordinate.new_FrameCoordinateWithDerivative(*args))
     line = _swig_property(_frame_coordinate.FrameCoordinateWithDerivative_line_get, _frame_coordinate.FrameCoordinateWithDerivative_line_set)

@@ -9117,12 +9117,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_OgrWrapper", _wrap_new_OgrWrapper, METH_VARARGS, (char *)"\n"
 		"\n"
-		"OgrWrapper::OgrWrapper(const std::string &Wkt, bool Use_traditional_gis_order=true)\n"
-		"Constructor that creates a OGRSpatialReference from a WKT (Well Known\n"
-		"Text) string.\n"
-		"\n"
-		"See class description for information about use_traditional_gis_order\n"
-		"\n"
+		"OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)\n"
+		"Constructor, from an existing OGRSpatialReference. \n"
 		""},
 	 { (char *)"OgrWrapper_from_epsg", _wrap_OgrWrapper_from_epsg, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -9225,9 +9221,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OgrWrapper_swiginit", OgrWrapper_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_OgrCoordinate", _wrap_new_OgrCoordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,\n"
-		"double z)\n"
-		"Constructor. X, Y, and Z are in whatever coordinates Ogr are in. \n"
+		"OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, const GroundCoordinate\n"
+		"&G)\n"
+		"Convert from GroundCoordinate to the coordinate system given by Ogr.\n"
+		"\n"
 		""},
 	 { (char *)"OgrCoordinate__v_ogr", (PyCFunction)_wrap_OgrCoordinate__v_ogr, METH_O, (char *)"\n"
 		"\n"

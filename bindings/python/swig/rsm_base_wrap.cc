@@ -9048,7 +9048,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmBase_image_coordinate", _wrap_RsmBase_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::RsmBase::image_coordinate(double X, double Y, double Z) const =0\n"
+		"virtual blitz::Array<double, 4> GeoCal::RsmBase::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >\n"
+		"&Y, const blitz::Array< double, 3 > &Z) const =0\n"
 		"\n"
 		""},
 	 { (char *)"RsmBase_image_coordinate_jacobian", _wrap_RsmBase_image_coordinate_jacobian, METH_VARARGS, (char *)"\n"

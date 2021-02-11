@@ -13693,8 +13693,7 @@ static PyMethodDef SwigMethods[] = {
 		"boost::array< AutoDerivative< double >, 3 > &Vel_ci,\n"
 		"boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<\n"
 		"double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3\n"
-		"> &Vel_cf, boost::math::quaternion< AutoDerivative< double > >\n"
-		"&Ci_to_cf_q)\n"
+		"> &Vel_cf)\n"
 		"Convert including velocity. \n"
 		""},
 	 { (char *)"Vector_GroundCoordinate_iterator", (PyCFunction)_wrap_Vector_GroundCoordinate_iterator, METH_O, NULL},

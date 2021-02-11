@@ -198,10 +198,8 @@ class Exception(geocal_swig.generic_object.GenericObject):
     def __init__(self, W):
         """
 
-        GeoCal::Exception::Exception(const std::string &W="")
-        Default constructor.
-
-        Can give an optional string describing the error. 
+        GeoCal::Exception::Exception(const Exception &E)
+        Copy constructor. 
         """
         _geocal_exception.Exception_swiginit(self, _geocal_exception.new_Exception(W))
 

@@ -17760,13 +17760,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ImageGroundConnection___str__", (PyCFunction)_wrap_ImageGroundConnection___str__, METH_O, NULL},
 	 { (char *)"ImageGroundConnection_resolution_meter", _wrap_ImageGroundConnection_resolution_meter, METH_VARARGS, (char *)"\n"
 		"\n"
-		"double ImageGroundConnection::resolution_meter(const ImageCoordinate &Ic) const\n"
-		"Calculate the approximate resolution on the ground of a given\n"
-		"ImageCoordinate.\n"
-		"\n"
-		"This finds the intersection with the reference surface for the given\n"
-		"pixel, + 1 in the line and sample direction. We find the difference in\n"
-		"meters between these points, and select the maximum value. \n"
+		"double ImageGroundConnection::resolution_meter() const\n"
+		"Variation of resolution_meter that find the resolution of the center\n"
+		"pixel. \n"
 		""},
 	 { (char *)"ImageGroundConnection__v_parameter", _wrap_ImageGroundConnection__v_parameter, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -17841,8 +17837,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"ImageGroundConnection___dem", _wrap_ImageGroundConnection___dem, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::ImageGroundConnection::dem(const boost::shared_ptr< Dem > &D)\n"
-		"Set the DEM to use in ground_coordinate. \n"
+		"const Dem& GeoCal::ImageGroundConnection::dem() const\n"
+		"Dem used by ground_coordinate. \n"
 		""},
 	 { (char *)"disown_ImageGroundConnection", (PyCFunction)_wrap_disown_ImageGroundConnection, METH_O, NULL},
 	 { (char *)"ImageGroundConnection_swigregister", ImageGroundConnection_swigregister, METH_VARARGS, NULL},

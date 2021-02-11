@@ -217,7 +217,7 @@ class ArrayAd_double_1(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_1_swiginit(self, _array_ad.new_ArrayAd_double_1(*args))
@@ -234,7 +234,7 @@ class ArrayAd_double_1(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_1_resize(self, *args)
@@ -243,7 +243,7 @@ class ArrayAd_double_1(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_1__v_value(self)
@@ -257,7 +257,7 @@ class ArrayAd_double_1(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_1__v_jacobian(self)
@@ -440,7 +440,7 @@ class ArrayAd_double_2(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_2_swiginit(self, _array_ad.new_ArrayAd_double_2(*args))
@@ -457,7 +457,7 @@ class ArrayAd_double_2(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_2_resize(self, *args)
@@ -466,7 +466,7 @@ class ArrayAd_double_2(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_2__v_value(self)
@@ -480,7 +480,7 @@ class ArrayAd_double_2(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_2__v_jacobian(self)
@@ -663,7 +663,7 @@ class ArrayAd_double_3(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_3_swiginit(self, _array_ad.new_ArrayAd_double_3(*args))
@@ -680,7 +680,7 @@ class ArrayAd_double_3(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_3_resize(self, *args)
@@ -689,7 +689,7 @@ class ArrayAd_double_3(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_3__v_value(self)
@@ -703,7 +703,7 @@ class ArrayAd_double_3(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_3__v_jacobian(self)
@@ -886,7 +886,7 @@ class ArrayAd_double_4(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_4_swiginit(self, _array_ad.new_ArrayAd_double_4(*args))
@@ -903,7 +903,7 @@ class ArrayAd_double_4(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_4_resize(self, *args)
@@ -912,7 +912,7 @@ class ArrayAd_double_4(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_4__v_value(self)
@@ -926,7 +926,7 @@ class ArrayAd_double_4(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_4__v_jacobian(self)

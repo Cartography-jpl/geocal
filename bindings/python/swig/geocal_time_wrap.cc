@@ -9647,7 +9647,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Time_time_unix", (PyCFunction)_wrap_Time_time_unix, METH_O, (char *)"\n"
 		"\n"
-		"static Time GeoCal::Time::time_unix(std::time_t unix_time)\n"
+		"static Time GeoCal::Time::time_unix(double unix_time)\n"
 		"Return time from given Unix time (epoch of 1970-01-01). \n"
 		""},
 	 { (char *)"Time_time_acs", (PyCFunction)_wrap_Time_time_acs, METH_O, (char *)"\n"
@@ -9740,7 +9740,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Time_swiginit", Time_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_TimeWithDerivative", _wrap_new_TimeWithDerivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::TimeWithDerivative::TimeWithDerivative(const Time &T)\n"
+		"GeoCal::TimeWithDerivative::TimeWithDerivative()\n"
 		"\n"
 		""},
 	 { (char *)"TimeWithDerivative_time_pgs", (PyCFunction)_wrap_TimeWithDerivative_time_pgs, METH_O, (char *)"\n"

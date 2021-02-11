@@ -14522,8 +14522,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"LookVectorAutoDerivativeDouble_swigregister", LookVectorAutoDerivativeDouble_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ScLookVector", _wrap_new_ScLookVector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ScLookVector::ScLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::ScLookVector::ScLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"ScLookVector___str__", (PyCFunction)_wrap_ScLookVector___str__, METH_O, NULL},
 	 { (char *)"delete_ScLookVector", (PyCFunction)_wrap_delete_ScLookVector, METH_O, (char *)"\n"
@@ -14548,8 +14548,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ScLookVectorWithDerivative_swiginit", ScLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_CartesianInertialLookVector", _wrap_new_CartesianInertialLookVector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"CartesianInertialLookVector___str__", (PyCFunction)_wrap_CartesianInertialLookVector___str__, METH_O, NULL},
 	 { (char *)"delete_CartesianInertialLookVector", (PyCFunction)_wrap_delete_CartesianInertialLookVector, METH_O, (char *)"\n"
@@ -14574,7 +14574,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CartesianInertialLookVectorWithDerivative_swiginit", CartesianInertialLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_DcsLookVector", _wrap_new_DcsLookVector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)\n"
+		"GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"DcsLookVector___str__", (PyCFunction)_wrap_DcsLookVector___str__, METH_O, NULL},

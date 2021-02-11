@@ -203,11 +203,14 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
     def __init__(self, *args):
         """
 
-        GeoCal::VicarRasterImage::VicarRasterImage(int Instance, int Band_id=1, access_type Access=VicarFile::READ,
-        const std::string &Name="INP", int Number_line_per_tile=100, int
-        Number_tile=4)
-        Open a file, using the VICAR Name and Instance input (so for example,
-        "INP" and 2 is the second INP file passed to a VICAR program. 
+        GeoCal::VicarRasterImage::VicarRasterImage(int Instance, const MapInfo &M, const std::string &Type="BYTE", int
+        Number_band=1, const std::string &Org="BSQ", const std::string
+        &Name="OUT", int Number_line_per_tile=100, compression
+        C=VicarFile::NONE)
+        Create a new VICAR file with the given size.
+
+        Use the VICAR Name and Instance input (so for example, "INP" and 2
+        is the second INP file passed to a VICAR program. 
         """
         _vicar_raster_image.VicarRasterImage_swiginit(self, _vicar_raster_image.new_VicarRasterImage(*args))
 

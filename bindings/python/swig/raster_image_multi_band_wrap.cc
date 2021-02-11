@@ -7901,10 +7901,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RasterImageMultiBand_write", _wrap_RasterImageMultiBand_write, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)\n"
-		"Write the data to the same location in each image.\n"
+		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< double, 3 > &Data)\n"
 		"\n"
-		"Data should be number_band() x nline x nsamp. \n"
 		""},
 	 { (char *)"RasterImageMultiBand___str__", (PyCFunction)_wrap_RasterImageMultiBand___str__, METH_O, NULL},
 	 { (char *)"RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, (char *)"\n"

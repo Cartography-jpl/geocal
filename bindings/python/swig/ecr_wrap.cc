@@ -7354,8 +7354,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Ecr", _wrap_new_Ecr, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::Ecr::Ecr(double X, double Y, double Z)\n"
-		"Make an Ecr with the given position, in meters. \n"
+		"GeoCal::Ecr::Ecr()\n"
+		"Default constructor. \n"
 		""},
 	 { (char *)"Ecr_convert_to_geodetic", (PyCFunction)_wrap_Ecr_convert_to_geodetic, METH_O, (char *)"\n"
 		"\n"

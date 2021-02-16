@@ -502,6 +502,8 @@ def _zenith_angle(orb, tm, pt):
 def igc_staring(igc_half_meter_pushbroom):
     '''This is a pushbroom camera where we adjust the gimbal angle that we view
     at to stare near a fixed point (i.e., like Freebird)'''
+    if(not have_serialize_supported()):
+        raise SkipTest
     igc = igc_half_meter_pushbroom
     mi = cib01_mapinfo(0.5)
     mi = mi.rotated_map(igc)

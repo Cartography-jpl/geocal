@@ -3471,204 +3471,192 @@ namespace Swig {
 #define SWIGTYPE_p_GeoCal__Dem swig_types[16]
 #define SWIGTYPE_p_GeoCal__Eci swig_types[17]
 #define SWIGTYPE_p_GeoCal__EciTod swig_types[18]
-#define SWIGTYPE_p_GeoCal__EciTodBurl swig_types[19]
-#define SWIGTYPE_p_GeoCal__Ecr swig_types[20]
-#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[21]
-#define SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative swig_types[22]
-#define SWIGTYPE_p_GeoCal__GenericObject swig_types[23]
-#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[24]
-#define SWIGTYPE_p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t swig_types[25]
-#define SWIGTYPE_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t swig_types[26]
-#define SWIGTYPE_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t swig_types[27]
-#define SWIGTYPE_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t swig_types[28]
-#define SWIGTYPE_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t swig_types[29]
-#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[30]
-#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[31]
-#define SWIGTYPE_p_GeoCal__KeplerOrbit swig_types[32]
-#define SWIGTYPE_p_GeoCal__LnLookVector swig_types[33]
-#define SWIGTYPE_p_GeoCal__LnLookVectorWithDerivative swig_types[34]
-#define SWIGTYPE_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t swig_types[35]
-#define SWIGTYPE_p_GeoCal__LookVectorT_double_t swig_types[36]
-#define SWIGTYPE_p_GeoCal__MeasuredTimeTable swig_types[37]
-#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Camera_t swig_types[38]
-#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Orbit_t swig_types[39]
-#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Camera_t swig_types[40]
-#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Orbit_t swig_types[41]
-#define SWIGTYPE_p_GeoCal__Orbit swig_types[42]
-#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t swig_types[43]
-#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t swig_types[44]
-#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t swig_types[45]
-#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t swig_types[46]
-#define SWIGTYPE_p_GeoCal__OrbitData swig_types[47]
-#define SWIGTYPE_p_GeoCal__OrbitListCache swig_types[48]
-#define SWIGTYPE_p_GeoCal__OrbitQuaternionList swig_types[49]
-#define SWIGTYPE_p_GeoCal__QuaternionOrbitData swig_types[50]
-#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[51]
-#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[52]
-#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[53]
-#define SWIGTYPE_p_GeoCal__Time swig_types[54]
-#define SWIGTYPE_p_GeoCal__TimeTable swig_types[55]
-#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[56]
-#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[57]
-#define SWIGTYPE_p_GeoCal__WithParameter swig_types[58]
-#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[59]
-#define SWIGTYPE_p_allocator_type swig_types[60]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[61]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[62]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[63]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[64]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[65]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[66]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[67]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[68]
-#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[69]
-#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[70]
-#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[71]
-#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[72]
-#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[73]
-#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[74]
-#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[75]
-#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[76]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[77]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[78]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[79]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[80]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[81]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[82]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[83]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[84]
-#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[85]
-#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[86]
-#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[87]
-#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[88]
-#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[89]
-#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[90]
-#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[91]
-#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[92]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[93]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[94]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[95]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[96]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[97]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[98]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[99]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[100]
-#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[101]
-#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[102]
-#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[103]
-#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[104]
-#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[105]
-#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[106]
-#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[107]
-#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[108]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[109]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[110]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[111]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[112]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[113]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[114]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[115]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[116]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[117]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[118]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[119]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[120]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[121]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[122]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[123]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[124]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[125]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[126]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[127]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[128]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[129]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[130]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[131]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[132]
-#define SWIGTYPE_p_blitz__Range swig_types[133]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[134]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[135]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[136]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[137]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[138]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[139]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[140]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[141]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[142]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[143]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[144]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[145]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[146]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t swig_types[147]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[148]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[149]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[150]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__EciTodBurl_t swig_types[151]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__EciTod_t swig_types[152]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Eci_t swig_types[153]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t swig_types[154]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[155]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[156]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[157]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[158]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t swig_types[159]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t swig_types[160]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t swig_types[161]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t swig_types[162]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t swig_types[163]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[164]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[165]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[166]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[167]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[168]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[169]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[170]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t swig_types[171]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[172]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[173]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[174]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[175]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t swig_types[176]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t swig_types[177]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t swig_types[178]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t swig_types[179]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[180]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitListCache_t swig_types[181]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t swig_types[182]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[183]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[184]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[185]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[186]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[187]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t swig_types[188]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[189]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[190]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[191]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[192]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[193]
-#define SWIGTYPE_p_char swig_types[194]
-#define SWIGTYPE_p_char_type swig_types[195]
-#define SWIGTYPE_p_difference_type swig_types[196]
-#define SWIGTYPE_p_fmtflags swig_types[197]
-#define SWIGTYPE_p_int_type swig_types[198]
-#define SWIGTYPE_p_iostate swig_types[199]
-#define SWIGTYPE_p_off_type swig_types[200]
-#define SWIGTYPE_p_openmode swig_types[201]
-#define SWIGTYPE_p_pos_type swig_types[202]
-#define SWIGTYPE_p_seekdir swig_types[203]
-#define SWIGTYPE_p_size_t swig_types[204]
-#define SWIGTYPE_p_size_type swig_types[205]
-#define SWIGTYPE_p_state_type swig_types[206]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[207]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[208]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[209]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[210]
-#define SWIGTYPE_p_std__invalid_argument swig_types[211]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[212]
-#define SWIGTYPE_p_traits_type swig_types[213]
-#define SWIGTYPE_p_value_type swig_types[214]
-static swig_type_info *swig_types[216];
-static swig_module_info swig_module = {swig_types, 215, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__Ecr swig_types[19]
+#define SWIGTYPE_p_GeoCal__FrameCoordinate swig_types[20]
+#define SWIGTYPE_p_GeoCal__FrameCoordinateWithDerivative swig_types[21]
+#define SWIGTYPE_p_GeoCal__GenericObject swig_types[22]
+#define SWIGTYPE_p_GeoCal__GroundCoordinate swig_types[23]
+#define SWIGTYPE_p_GeoCal__ImageCoordinate swig_types[24]
+#define SWIGTYPE_p_GeoCal__ImageCoordinateWithDerivative swig_types[25]
+#define SWIGTYPE_p_GeoCal__KeplerOrbit swig_types[26]
+#define SWIGTYPE_p_GeoCal__LnLookVector swig_types[27]
+#define SWIGTYPE_p_GeoCal__LnLookVectorWithDerivative swig_types[28]
+#define SWIGTYPE_p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t swig_types[29]
+#define SWIGTYPE_p_GeoCal__LookVectorT_double_t swig_types[30]
+#define SWIGTYPE_p_GeoCal__MeasuredTimeTable swig_types[31]
+#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Camera_t swig_types[32]
+#define SWIGTYPE_p_GeoCal__ObservableT_GeoCal__Orbit_t swig_types[33]
+#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Camera_t swig_types[34]
+#define SWIGTYPE_p_GeoCal__ObserverT_GeoCal__Orbit_t swig_types[35]
+#define SWIGTYPE_p_GeoCal__Orbit swig_types[36]
+#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t swig_types[37]
+#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t swig_types[38]
+#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t swig_types[39]
+#define SWIGTYPE_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t swig_types[40]
+#define SWIGTYPE_p_GeoCal__OrbitData swig_types[41]
+#define SWIGTYPE_p_GeoCal__OrbitListCache swig_types[42]
+#define SWIGTYPE_p_GeoCal__OrbitQuaternionList swig_types[43]
+#define SWIGTYPE_p_GeoCal__QuaternionOrbitData swig_types[44]
+#define SWIGTYPE_p_GeoCal__ScLookVector swig_types[45]
+#define SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative swig_types[46]
+#define SWIGTYPE_p_GeoCal__SimpleCamera swig_types[47]
+#define SWIGTYPE_p_GeoCal__Time swig_types[48]
+#define SWIGTYPE_p_GeoCal__TimeTable swig_types[49]
+#define SWIGTYPE_p_GeoCal__TimeWithDerivative swig_types[50]
+#define SWIGTYPE_p_GeoCal__VicarImageCoordinate swig_types[51]
+#define SWIGTYPE_p_GeoCal__WithParameter swig_types[52]
+#define SWIGTYPE_p_GeoCal__WithParameterNested swig_types[53]
+#define SWIGTYPE_p_allocator_type swig_types[54]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[55]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[56]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[57]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[58]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[59]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[60]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[61]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[62]
+#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[63]
+#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[64]
+#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[65]
+#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[66]
+#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[67]
+#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[68]
+#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[69]
+#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[70]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[71]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[72]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[73]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[74]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[75]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[76]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[77]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[78]
+#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[79]
+#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[80]
+#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[81]
+#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[82]
+#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[83]
+#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[84]
+#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[85]
+#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[86]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[87]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[88]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[89]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[90]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[91]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[92]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[93]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[94]
+#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[95]
+#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[96]
+#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[97]
+#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[98]
+#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[99]
+#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[100]
+#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[101]
+#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[102]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[103]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[104]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[105]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[106]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[107]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[108]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[109]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[110]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[111]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[112]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[113]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[114]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[115]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[116]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[117]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[118]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[119]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[120]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[121]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[122]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[123]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[124]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[125]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[126]
+#define SWIGTYPE_p_blitz__Range swig_types[127]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t swig_types[128]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_2_t_t swig_types[129]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_3_t_t swig_types[130]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_4_t_t swig_types[131]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t swig_types[132]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t swig_types[133]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t swig_types[134]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t swig_types[135]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t swig_types[136]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t swig_types[137]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t swig_types[138]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t swig_types[139]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t swig_types[140]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t swig_types[141]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t swig_types[142]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t swig_types[143]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t swig_types[144]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__EciTod_t swig_types[145]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Eci_t swig_types[146]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t swig_types[147]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t swig_types[148]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t swig_types[149]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[150]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t swig_types[151]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t swig_types[152]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t swig_types[153]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t swig_types[154]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t swig_types[155]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LnLookVector_t swig_types[156]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t swig_types[157]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t swig_types[158]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t swig_types[159]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t swig_types[160]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t swig_types[161]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t swig_types[162]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t swig_types[163]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t swig_types[164]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t swig_types[165]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t swig_types[166]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t swig_types[167]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t swig_types[168]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitListCache_t swig_types[169]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t swig_types[170]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t swig_types[171]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t swig_types[172]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t swig_types[173]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t swig_types[174]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__SimpleCamera_t swig_types[175]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t swig_types[176]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t swig_types[177]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t swig_types[178]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t swig_types[179]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterNested_t swig_types[180]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameter_t swig_types[181]
+#define SWIGTYPE_p_char swig_types[182]
+#define SWIGTYPE_p_char_type swig_types[183]
+#define SWIGTYPE_p_difference_type swig_types[184]
+#define SWIGTYPE_p_fmtflags swig_types[185]
+#define SWIGTYPE_p_int_type swig_types[186]
+#define SWIGTYPE_p_iostate swig_types[187]
+#define SWIGTYPE_p_off_type swig_types[188]
+#define SWIGTYPE_p_openmode swig_types[189]
+#define SWIGTYPE_p_pos_type swig_types[190]
+#define SWIGTYPE_p_seekdir swig_types[191]
+#define SWIGTYPE_p_size_t swig_types[192]
+#define SWIGTYPE_p_size_type swig_types[193]
+#define SWIGTYPE_p_state_type swig_types[194]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[195]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[196]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[197]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[198]
+#define SWIGTYPE_p_std__invalid_argument swig_types[199]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[200]
+#define SWIGTYPE_p_traits_type swig_types[201]
+#define SWIGTYPE_p_value_type swig_types[202]
+static swig_type_info *swig_types[204];
+static swig_module_info swig_module = {swig_types, 203, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -3694,16 +3682,16 @@ static swig_module_info swig_module = {swig_types, 215, 0, 0, 0, 0};
 #define SWIG_TypeQuery SWIG_Python_TypeQuery
 
 /*-----------------------------------------------
-              @(target):= _hdf_orbit_carto.so
+              @(target):= _orbit_array.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__hdf_orbit_carto
+#  define SWIG_init    PyInit__orbit_array
 
 #else
-#  define SWIG_init    init_hdf_orbit_carto
+#  define SWIG_init    init_orbit_array
 
 #endif
-#define SWIG_name    "_hdf_orbit_carto"
+#define SWIG_name    "_orbit_array"
 
 #define SWIGVERSION 0x030012 
 #define SWIG_VERSION SWIGVERSION
@@ -5887,166 +5875,8 @@ namespace swig {
 }
 
 
-#include "hdf_orbit.h"
+#include "orbit_array.h"
 #include "eci_tod.h"
-#include "eci_tod_burl.h"
-
-
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
-
-
-SWIGINTERN int
-SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
-{
-#if PY_VERSION_HEX>=0x03000000
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-  if (PyBytes_Check(obj))
-#else
-  if (PyUnicode_Check(obj))
-#endif
-#else  
-  if (PyString_Check(obj))
-#endif
-  {
-    char *cstr; Py_ssize_t len;
-#if PY_VERSION_HEX>=0x03000000
-#if !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-    if (!alloc && cptr) {
-        /* We can't allow converting without allocation, since the internal
-           representation of string in Python 3 is UCS-2/UCS-4 but we require
-           a UTF-8 representation.
-           TODO(bhy) More detailed explanation */
-        return SWIG_RuntimeError;
-    }
-    obj = PyUnicode_AsUTF8String(obj);
-    if(alloc) *alloc = SWIG_NEWOBJ;
-#endif
-    PyBytes_AsStringAndSize(obj, &cstr, &len);
-#else
-    PyString_AsStringAndSize(obj, &cstr, &len);
-#endif
-    if (cptr) {
-      if (alloc) {
-	/* 
-	   In python the user should not be able to modify the inner
-	   string representation. To warranty that, if you define
-	   SWIG_PYTHON_SAFE_CSTRINGS, a new/copy of the python string
-	   buffer is always returned.
-
-	   The default behavior is just to return the pointer value,
-	   so, be careful.
-	*/ 
-#if defined(SWIG_PYTHON_SAFE_CSTRINGS)
-	if (*alloc != SWIG_OLDOBJ) 
-#else
-	if (*alloc == SWIG_NEWOBJ) 
-#endif
-	{
-	  *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
-	  *alloc = SWIG_NEWOBJ;
-	} else {
-	  *cptr = cstr;
-	  *alloc = SWIG_OLDOBJ;
-	}
-      } else {
-#if PY_VERSION_HEX>=0x03000000
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-	*cptr = PyBytes_AsString(obj);
-#else
-	assert(0); /* Should never reach here with Unicode strings in Python 3 */
-#endif
-#else
-	*cptr = SWIG_Python_str_AsChar(obj);
-#endif
-      }
-    }
-    if (psize) *psize = len + 1;
-#if PY_VERSION_HEX>=0x03000000 && !defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-    Py_XDECREF(obj);
-#endif
-    return SWIG_OK;
-  } else {
-#if defined(SWIG_PYTHON_2_UNICODE)
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-#error "Cannot use both SWIG_PYTHON_2_UNICODE and SWIG_PYTHON_STRICT_BYTE_CHAR at once"
-#endif
-#if PY_VERSION_HEX<0x03000000
-    if (PyUnicode_Check(obj)) {
-      char *cstr; Py_ssize_t len;
-      if (!alloc && cptr) {
-        return SWIG_RuntimeError;
-      }
-      obj = PyUnicode_AsUTF8String(obj);
-      if (PyString_AsStringAndSize(obj, &cstr, &len) != -1) {
-        if (cptr) {
-          if (alloc) *alloc = SWIG_NEWOBJ;
-          *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
-        }
-        if (psize) *psize = len + 1;
-
-        Py_XDECREF(obj);
-        return SWIG_OK;
-      } else {
-        Py_XDECREF(obj);
-      }
-    }
-#endif
-#endif
-
-    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-    if (pchar_descriptor) {
-      void* vptr = 0;
-      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
-	if (cptr) *cptr = (char *) vptr;
-	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
-	if (alloc) *alloc = SWIG_OLDOBJ;
-	return SWIG_OK;
-      }
-    }
-  }
-  return SWIG_TypeError;
-}
-
-
-SWIGINTERN int
-SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
-{
-  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
-  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
-    if (buf) {
-      if (val) *val = new std::string(buf, size - 1);
-      if (alloc == SWIG_NEWOBJ) delete[] buf;
-      return SWIG_NEWOBJ;
-    } else {
-      if (val) *val = 0;
-      return SWIG_OLDOBJ;
-    }
-  } else {
-    static int init = 0;
-    static swig_type_info* descriptor = 0;
-    if (!init) {
-      descriptor = SWIG_TypeQuery("std::string" " *");
-      init = 1;
-    }
-    if (descriptor) {
-      std::string *vptr;
-      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
-      if (SWIG_IsOK(res) && val) *val = vptr;
-      return res;
-    }
-  }
-  return SWIG_ERROR;
-}
 
 
 SWIGINTERN int
@@ -6076,48 +5906,12 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
-{
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#else
-#if PY_VERSION_HEX >= 0x03010000
-      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
-#else
-      return PyUnicode_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#endif
-#endif
-#else
-      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
-}
-
-
 
 /* ---------------------------------------------------
  * C++ director class methods
  * --------------------------------------------------- */
 
-#include "hdf_orbit_carto_wrap.h"
+#include "orbit_array_wrap.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -6898,242 +6692,130 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeAcs__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  std::string *arg6 = 0 ;
-  std::string *arg7 = 0 ;
-  bool arg8 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  int res5 = SWIG_OLDOBJ ;
-  int res6 = SWIG_OLDOBJ ;
-  int res7 = SWIG_OLDOBJ ;
-  bool val8 ;
-  int ecode8 = 0 ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
-  
-  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    arg5 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
-    if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
-    }
-    arg6 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
-    if (!SWIG_IsOK(res7)) {
-      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "7"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "7"" of type '" "std::string const &""'"); 
-    }
-    arg7 = ptr;
-  }
-  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
-  if (!SWIG_IsOK(ecode8)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "8"" of type '" "bool""'");
-  } 
-  arg8 = static_cast< bool >(val8);
-  {
-    try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res6)) delete arg6;
-  if (SWIG_IsNewObj(res7)) delete arg7;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res6)) delete arg6;
-  if (SWIG_IsNewObj(res7)) delete arg7;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  std::string *arg6 = 0 ;
-  std::string *arg7 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  int res5 = SWIG_OLDOBJ ;
-  int res6 = SWIG_OLDOBJ ;
-  int res7 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  bool arg7 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *result = 0 ;
   
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
   {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    arg5 = ptr;
   }
-  {
-    std::string *ptr = (std::string *)0;
-    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
-    if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
-    }
-    arg6 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res7 = SWIG_AsPtr_std_string(swig_obj[6], &ptr);
-    if (!SWIG_IsOK(res7)) {
-      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "7"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "7"" of type '" "std::string const &""'"); 
-    }
-    arg7 = ptr;
-  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_EciTod_TimeAcs" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_OrbitArray_EciTod_TimeAcs" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
   {
     try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7);
+      result = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *)new GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7141,115 +6823,131 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_1(PyObject *SWI
     }
   }
   {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res6)) delete arg6;
-  if (SWIG_IsNewObj(res7)) delete arg7;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res6)) delete arg6;
-  if (SWIG_IsNewObj(res7)) delete arg7;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeAcs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  std::string *arg6 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  int res5 = SWIG_OLDOBJ ;
-  int res6 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *result = 0 ;
   
   if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
   {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    arg5 = ptr;
   }
-  {
-    std::string *ptr = (std::string *)0;
-    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
-    if (!SWIG_IsOK(res6)) {
-      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "6"" of type '" "std::string const &""'"); 
-    }
-    arg6 = ptr;
-  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_EciTod_TimeAcs" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
   {
     try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6);
+      result = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *)new GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7257,100 +6955,123 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_2(PyObject *SWI
     }
   }
   {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res6)) delete arg6;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
-  if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeAcs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  std::string *arg5 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  int res5 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *result = 0 ;
   
   if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
   }
   {
-    std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeAcs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "5"" of type '" "std::string const &""'"); 
-    }
-    arg5 = ptr;
   }
   {
     try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
+      result = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *)new GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7358,429 +7079,67 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_3(PyObject *SWI
     }
   }
   {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  if (SWIG_IsNewObj(res5)) delete arg5;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  std::string *arg4 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  int res4 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  std::string *arg3 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  int res3 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
-    if (!SWIG_IsOK(res3)) {
-      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "3"" of type '" "std::string const &""'"); 
-    }
-    arg3 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  if (SWIG_IsNewObj(res3)) delete arg3;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  std::string *arg2 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  int res2 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "2"" of type '" "std::string const &""'"); 
-    }
-    arg2 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  if (SWIG_IsNewObj(res2)) delete arg2;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *result = 0 ;
-  
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "std::string const &""'"); 
-    }
-    arg1 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeAcs(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[9] = {
+  PyObject *argv[8] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_HdfOrbit_EciTodBurl_TimeAcs",0,8,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitArray_EciTod_TimeAcs",0,7,argv))) SWIG_fail;
   --argc;
-  if (argc == 1) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_7(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_6(self, argc, argv);
-  }
-  if (argc == 3) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_5(self, argc, argv);
-  }
-  if (argc == 4) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_4(self, argc, argv);
-  }
   if (argc == 5) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_3(self, argc, argv);
+    return _wrap_new_OrbitArray_EciTod_TimeAcs__SWIG_2(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_2(self, argc, argv);
+    return _wrap_new_OrbitArray_EciTod_TimeAcs__SWIG_1(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_1(self, argc, argv);
-  }
-  if (argc == 8) {
-    return _wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_0(self, argc, argv);
+    return _wrap_new_OrbitArray_EciTod_TimeAcs__SWIG_0(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_HdfOrbit_EciTodBurl_TimeAcs'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OrbitArray_EciTod_TimeAcs'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,bool)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &,std::string const &)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &,std::string const &)\n"
-    "    GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >::HdfOrbit(std::string const &)\n");
+    "    GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_HdfOrbit_EciTodBurl_TimeAcs__v_file_name(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_OrbitArray_EciTod_TimeAcs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *arg1 = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *) 0 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *arg1 = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const > tempshared1 ;
-  boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HdfOrbit_EciTodBurl_TimeAcs__v_file_name" "', argument " "1"" of type '" "GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      arg1 = const_cast< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      arg1 = const_cast< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const *)arg1)->file_name();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_HdfOrbit_EciTodBurl_TimeAcs__v_base_group(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *arg1 = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const > tempshared1 ;
-  boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "HdfOrbit_EciTodBurl_TimeAcs__v_base_group" "', argument " "1"" of type '" "GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      arg1 = const_cast< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      arg1 = const_cast< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const *)arg1)->base_group();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_HdfOrbit_EciTodBurl_TimeAcs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *arg1 = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > > tempshared1 ;
-  boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   {
     int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, 0 |  0 , &newmem);
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_HdfOrbit_EciTodBurl_TimeAcs" "', argument " "1"" of type '" "GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OrbitArray_EciTod_TimeAcs" "', argument " "1"" of type '" "GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      arg1 = const_cast< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > * >(tempshared1.get());
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > * >(argp1);
-      arg1 = const_cast< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > * >((smartarg1 ? smartarg1->get() : 0));
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
@@ -7799,14 +7158,1445 @@ fail:
 }
 
 
-SWIGINTERN PyObject *HdfOrbit_EciTodBurl_TimeAcs_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *OrbitArray_EciTod_TimeAcs_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *HdfOrbit_EciTodBurl_TimeAcs_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *OrbitArray_EciTod_TimeAcs_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimePgs__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  bool arg7 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_Eci_TimePgs" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_OrbitArray_Eci_TimePgs" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *)new GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimePgs__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_Eci_TimePgs" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *)new GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimePgs__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimePgs', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *)new GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimePgs(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[8] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitArray_Eci_TimePgs",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    return _wrap_new_OrbitArray_Eci_TimePgs__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_new_OrbitArray_Eci_TimePgs__SWIG_1(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_new_OrbitArray_Eci_TimePgs__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OrbitArray_Eci_TimePgs'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_OrbitArray_Eci_TimePgs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *arg1 = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OrbitArray_Eci_TimePgs" "', argument " "1"" of type '" "GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *OrbitArray_Eci_TimePgs_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *OrbitArray_Eci_TimePgs_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimeJ2000__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  bool arg7 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_Eci_TimeJ2000" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_OrbitArray_Eci_TimeJ2000" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *)new GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimeJ2000__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_Eci_TimeJ2000" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *)new GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimeJ2000__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_Eci_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *)new GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_Eci_TimeJ2000(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[8] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitArray_Eci_TimeJ2000",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    return _wrap_new_OrbitArray_Eci_TimeJ2000__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_new_OrbitArray_Eci_TimeJ2000__SWIG_1(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_new_OrbitArray_Eci_TimeJ2000__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OrbitArray_Eci_TimeJ2000'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_OrbitArray_Eci_TimeJ2000(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *arg1 = (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OrbitArray_Eci_TimeJ2000" "', argument " "1"" of type '" "GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *OrbitArray_Eci_TimeJ2000_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *OrbitArray_Eci_TimeJ2000_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeJ2000__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  bool arg7 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_EciTod_TimeJ2000" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_OrbitArray_EciTod_TimeJ2000" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *)new GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeJ2000__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  bool arg6 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_OrbitArray_EciTod_TimeJ2000" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *)new GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeJ2000__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  blitz::Array< double,1 > *arg4 = 0 ;
+  blitz::Array< double,2 > *arg5 = 0 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  blitz::Array< double,1 > a4 ;
+  PythonObject numpy4 ;
+  blitz::Array< double,2 > a5 ;
+  PythonObject numpy5 ;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 1>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[4], (void**)(&arg5), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy5.obj = to_numpy<double >(swig_obj[4]);
+      if(!numpy5.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy5.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_OrbitArray_EciTod_TimeJ2000', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a5.reference(to_blitz_array<double, 2>(numpy5));
+      arg5 = &a5;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *)new GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > *smartresult = result ? new boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTod_TimeJ2000(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[8] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_OrbitArray_EciTod_TimeJ2000",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    return _wrap_new_OrbitArray_EciTod_TimeJ2000__SWIG_2(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_new_OrbitArray_EciTod_TimeJ2000__SWIG_1(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_new_OrbitArray_EciTod_TimeJ2000__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_OrbitArray_EciTod_TimeJ2000'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,bool)\n"
+    "    GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator >::OrbitArray(blitz::Array< double,1 > const &,blitz::Array< double,2 > const &,blitz::Array< double,2 > const &,blitz::Array< double,1 > const &,blitz::Array< double,2 > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_OrbitArray_EciTod_TimeJ2000(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *arg1 = (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_OrbitArray_EciTod_TimeJ2000" "', argument " "1"" of type '" "GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (void)arg1; delete smartarg1;
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *OrbitArray_EciTod_TimeJ2000_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!SWIG_Python_UnpackTuple(args,(char *)"swigregister", 1, 1,&obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
+SWIGINTERN PyObject *OrbitArray_EciTod_TimeJ2000_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
@@ -7830,21 +8620,76 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_HdfOrbit_EciTodBurl_TimeAcs", _wrap_new_HdfOrbit_EciTodBurl_TimeAcs, METH_VARARGS, NULL},
-	 { (char *)"HdfOrbit_EciTodBurl_TimeAcs__v_file_name", (PyCFunction)_wrap_HdfOrbit_EciTodBurl_TimeAcs__v_file_name, METH_O, NULL},
-	 { (char *)"HdfOrbit_EciTodBurl_TimeAcs__v_base_group", (PyCFunction)_wrap_HdfOrbit_EciTodBurl_TimeAcs__v_base_group, METH_O, NULL},
-	 { (char *)"delete_HdfOrbit_EciTodBurl_TimeAcs", (PyCFunction)_wrap_delete_HdfOrbit_EciTodBurl_TimeAcs, METH_O, NULL},
-	 { (char *)"HdfOrbit_EciTodBurl_TimeAcs_swigregister", HdfOrbit_EciTodBurl_TimeAcs_swigregister, METH_VARARGS, NULL},
-	 { (char *)"HdfOrbit_EciTodBurl_TimeAcs_swiginit", HdfOrbit_EciTodBurl_TimeAcs_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_OrbitArray_EciTod_TimeAcs", _wrap_new_OrbitArray_EciTod_TimeAcs, METH_VARARGS, (char *)"\n"
+		"\n"
+		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
+		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
+		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
+		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
+		"Serialize_data=true)\n"
+		"\n"
+		""},
+	 { (char *)"delete_OrbitArray_EciTod_TimeAcs", (PyCFunction)_wrap_delete_OrbitArray_EciTod_TimeAcs, METH_O, (char *)"\n"
+		"\n"
+		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
+		"\n"
+		""},
+	 { (char *)"OrbitArray_EciTod_TimeAcs_swigregister", OrbitArray_EciTod_TimeAcs_swigregister, METH_VARARGS, NULL},
+	 { (char *)"OrbitArray_EciTod_TimeAcs_swiginit", OrbitArray_EciTod_TimeAcs_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_OrbitArray_Eci_TimePgs", _wrap_new_OrbitArray_Eci_TimePgs, METH_VARARGS, (char *)"\n"
+		"\n"
+		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
+		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
+		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
+		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
+		"Serialize_data=true)\n"
+		"\n"
+		""},
+	 { (char *)"delete_OrbitArray_Eci_TimePgs", (PyCFunction)_wrap_delete_OrbitArray_Eci_TimePgs, METH_O, (char *)"\n"
+		"\n"
+		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
+		"\n"
+		""},
+	 { (char *)"OrbitArray_Eci_TimePgs_swigregister", OrbitArray_Eci_TimePgs_swigregister, METH_VARARGS, NULL},
+	 { (char *)"OrbitArray_Eci_TimePgs_swiginit", OrbitArray_Eci_TimePgs_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_OrbitArray_Eci_TimeJ2000", _wrap_new_OrbitArray_Eci_TimeJ2000, METH_VARARGS, (char *)"\n"
+		"\n"
+		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
+		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
+		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
+		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
+		"Serialize_data=true)\n"
+		"\n"
+		""},
+	 { (char *)"delete_OrbitArray_Eci_TimeJ2000", (PyCFunction)_wrap_delete_OrbitArray_Eci_TimeJ2000, METH_O, (char *)"\n"
+		"\n"
+		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
+		"\n"
+		""},
+	 { (char *)"OrbitArray_Eci_TimeJ2000_swigregister", OrbitArray_Eci_TimeJ2000_swigregister, METH_VARARGS, NULL},
+	 { (char *)"OrbitArray_Eci_TimeJ2000_swiginit", OrbitArray_Eci_TimeJ2000_swiginit, METH_VARARGS, NULL},
+	 { (char *)"new_OrbitArray_EciTod_TimeJ2000", _wrap_new_OrbitArray_EciTod_TimeJ2000, METH_VARARGS, (char *)"\n"
+		"\n"
+		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
+		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
+		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
+		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
+		"Serialize_data=true)\n"
+		"\n"
+		""},
+	 { (char *)"delete_OrbitArray_EciTod_TimeJ2000", (PyCFunction)_wrap_delete_OrbitArray_EciTod_TimeJ2000, METH_O, (char *)"\n"
+		"\n"
+		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
+		"\n"
+		""},
+	 { (char *)"OrbitArray_EciTod_TimeJ2000_swigregister", OrbitArray_EciTod_TimeJ2000_swigregister, METH_VARARGS, NULL},
+	 { (char *)"OrbitArray_EciTod_TimeJ2000_swiginit", OrbitArray_EciTod_TimeJ2000_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static void *_p_GeoCal__EciTodBurlTo_p_GeoCal__CartesianInertial(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::CartesianInertial *)  ((GeoCal::EciTodBurl *) x));
-}
 static void *_p_GeoCal__EciTo_p_GeoCal__CartesianInertial(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::CartesianInertial *)  ((GeoCal::Eci *) x));
 }
@@ -7908,30 +8753,6 @@ static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Camera > >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > >(*(boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
@@ -7951,14 +8772,6 @@ static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__Ti
 static void *_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > >(*(boost::shared_ptr< GeoCal::OrbitQuaternionList > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Observable< GeoCal::Orbit > >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7987,14 +8800,6 @@ static void *_p_boost__shared_ptrT_GeoCal__Eci_tTo_p_boost__shared_ptrT_GeoCal__
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::CartesianInertial >(*(boost::shared_ptr< GeoCal::Eci > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__EciTodBurl_tTo_p_boost__shared_ptrT_GeoCal__CartesianInertial_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::CartesianInertial >(*(boost::shared_ptr< GeoCal::EciTodBurl > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__CartesianFixed_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::CartesianFixed >(*(boost::shared_ptr< GeoCal::Ecr > *)x);
-}
 static void *_p_GeoCal__OrbitListCacheTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::OrbitQuaternionList *)  ((GeoCal::OrbitListCache *) x));
 }
@@ -8007,26 +8812,15 @@ static void *_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_
 static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::OrbitQuaternionList *)  ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitQuaternionList *) (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
 static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::OrbitQuaternionList *)  ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitQuaternionList *) (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitQuaternionList *) (GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitQuaternionList *) (GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
+static void *_p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__CartesianFixed_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::CartesianFixed >(*(boost::shared_ptr< GeoCal::Ecr > *)x);
 }
 static void *_p_GeoCal__OrbitQuaternionListTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *)(GeoCal::Orbit *) ((GeoCal::OrbitQuaternionList *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *)(GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
 }
 static void *_p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::GroundCoordinate *) x));
@@ -8039,15 +8833,6 @@ static void *_p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *
 }
 static void *_p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::VicarImageCoordinate *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *)(GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *)(GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__EciTodBurlTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::CartesianInertial *) ((GeoCal::EciTodBurl *) x));
 }
 static void *_p_GeoCal__KeplerOrbitTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *)(GeoCal::Orbit *) ((GeoCal::KeplerOrbit *) x));
@@ -8181,9 +8966,6 @@ static void *_p_GeoCal__ObserverT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject(void
 static void *_p_GeoCal__ObservableT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *)  ((GeoCal::Observable< GeoCal::Orbit > *) x));
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *) (GeoCal::Observable< GeoCal::Orbit > *)(GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
 static void *_p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GroundCoordinate >(*(boost::shared_ptr< GeoCal::Ecr > *)x);
@@ -8192,25 +8974,8 @@ static void *_p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_pt
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GroundCoordinate >(*(boost::shared_ptr< GeoCal::CartesianFixed > *)x);
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *)  ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
 static void *_p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__OrbitData(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::OrbitData *)  ((GeoCal::QuaternionOrbitData *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *)  ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *)  ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8268,14 +9033,6 @@ static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__Ti
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::Observable< GeoCal::Camera > > *)x);
@@ -8283,10 +9040,6 @@ static void *_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_tTo_p_bo
 static void *_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::LookVector< double > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__EciTodBurl_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::EciTodBurl > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8452,14 +9205,6 @@ static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__Ti
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::SimpleCamera > *)x);
@@ -8480,14 +9225,6 @@ static void *_p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_Ge
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::TimeTable > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::WithParameter >(*(boost::shared_ptr< GeoCal::OrbitListCache > *)x);
@@ -8500,14 +9237,6 @@ static void *_p_std__basic_istreamT_char_std__char_traitsT_char_t_tTo_p_std__bas
 }
 static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_iosT_char_std__char_traitsT_char_t_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((std::basic_ios< char,std::char_traits< char > > *) (std::basic_istream< char > *) ((std::basic_iostream< char,std::char_traits< char > > *) x));
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitQuaternionList >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitQuaternionList >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8524,14 +9253,6 @@ static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ
 static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::OrbitQuaternionList >(*(boost::shared_ptr< GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitQuaternionList >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::OrbitQuaternionList >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8583,23 +9304,11 @@ static void *_p_GeoCal__KeplerOrbitTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPA
 static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Orbit *) (GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Orbit *) (GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
 static void *_p_GeoCal__OrbitQuaternionListTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Orbit *)  ((GeoCal::OrbitQuaternionList *) x));
 }
 static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::Orbit *) (GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Orbit *) (GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Orbit *) (GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Orbit *) (GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
 }
 static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
@@ -8607,14 +9316,8 @@ static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_G
 static void *_p_GeoCal__OrbitTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *)  ((GeoCal::Orbit *) x));
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
 static void *_p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Camera *) ((GeoCal::SimpleCamera *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
 }
 static void *_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
@@ -8640,17 +9343,11 @@ static void *_p_GeoCal__CameraTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSE
 static void *_p_GeoCal__OrbitQuaternionListTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *) ((GeoCal::OrbitQuaternionList *) x));
 }
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
 static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
 }
 static void *_p_GeoCal__OrbitListCacheTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitListCache *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::WithParameter *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
 }
 static void *_p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::WithParameter *)  ((GeoCal::WithParameterNested *) x));
@@ -8681,13 +9378,29 @@ static void *_p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__TimeTable(void *x, 
 static void *_p_GeoCal__MeasuredTimeTableTo_p_GeoCal__TimeTable(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::TimeTable *)  ((GeoCal::MeasuredTimeTable *) x));
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *)x);
+static void *_p_GeoCal__OrbitListCacheTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitListCache *) x));
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *)x);
+static void *_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
+}
+static void *_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
+}
+static void *_p_GeoCal__KeplerOrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *) ((GeoCal::KeplerOrbit *) x));
+}
+static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
+}
+static void *_p_GeoCal__OrbitQuaternionListTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *) ((GeoCal::OrbitQuaternionList *) x));
+}
+static void *_p_GeoCal__OrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *)  ((GeoCal::Orbit *) x));
+}
+static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
 }
 static void *_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -8709,14 +9422,6 @@ static void *_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shar
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::OrbitQuaternionList > *)x);
 }
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *)x);
-}
-static void *_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t(void *x, int *newmemory) {
-    *newmemory = SWIG_CAST_NEW_MEMORY;
-    return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *)x);
-}
 static void *_p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::KeplerOrbit > *)x);
@@ -8725,47 +9430,8 @@ static void *_p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_pt
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::Orbit >(*(boost::shared_ptr< GeoCal::OrbitListCache > *)x);
 }
-static void *_p_GeoCal__OrbitListCacheTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitListCache *) x));
-}
-static void *_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
-static void *_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__KeplerOrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *) ((GeoCal::KeplerOrbit *) x));
-}
-static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *) x));
-}
-static void *_p_GeoCal__OrbitQuaternionListTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *) ((GeoCal::OrbitQuaternionList *) x));
-}
-static void *_p_GeoCal__OrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *)  ((GeoCal::Orbit *) x));
-}
-static void *_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *) ((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *) ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::Observable< GeoCal::Orbit > *) (GeoCal::Orbit *)(GeoCal::OrbitQuaternionList *)(GeoCal::OrbitArray< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) ((GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *) x));
-}
 static void *_p_GeoCal__EcrTo_p_GeoCal__CartesianFixed(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::CartesianFixed *)  ((GeoCal::Ecr *) x));
-}
-static void *_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::OrbitArray< GeoCal::Eci,GeoCal::TimePgsCreator > *)  ((GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *) x));
 }
 static swig_type_info _swigt__p_GeoCal__ArrayAdT_double_1_t = {"_p_GeoCal__ArrayAdT_double_1_t", "GeoCal::ArrayAd< double,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ArrayAdT_double_2_t = {"_p_GeoCal__ArrayAdT_double_2_t", "GeoCal::ArrayAd< double,2 > *", 0, 0, (void*)0, 0};
@@ -8786,17 +9452,11 @@ static swig_type_info _swigt__p_GeoCal__DcsLookVectorWithDerivative = {"_p_GeoCa
 static swig_type_info _swigt__p_GeoCal__Dem = {"_p_GeoCal__Dem", "GeoCal::Dem *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Eci = {"_p_GeoCal__Eci", "GeoCal::Eci *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__EciTod = {"_p_GeoCal__EciTod", "GeoCal::EciTod *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__EciTodBurl = {"_p_GeoCal__EciTodBurl", "GeoCal::EciTodBurl *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__Ecr = {"_p_GeoCal__Ecr", "GeoCal::Ecr *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__FrameCoordinate = {"_p_GeoCal__FrameCoordinate", "GeoCal::FrameCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__FrameCoordinateWithDerivative = {"_p_GeoCal__FrameCoordinateWithDerivative", "GeoCal::FrameCoordinateWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__GroundCoordinate = {"_p_GeoCal__GroundCoordinate", "GeoCal::GroundCoordinate *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t = {"_p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t", "GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t = {"_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t", "GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t = {"_p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t", "GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t = {"_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t", "GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t = {"_p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t", "GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinate = {"_p_GeoCal__ImageCoordinate", "GeoCal::ImageCoordinate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__ImageCoordinateWithDerivative = {"_p_GeoCal__ImageCoordinateWithDerivative", "GeoCal::ImageCoordinateWithDerivative *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__KeplerOrbit = {"_p_GeoCal__KeplerOrbit", "GeoCal::KeplerOrbit *", 0, 0, (void*)0, 0};
@@ -8918,7 +9578,6 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTa
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t", "boost::shared_ptr< GeoCal::DcsLookVectorWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t = {"_p_boost__shared_ptrT_GeoCal__DcsLookVector_t", "boost::shared_ptr< GeoCal::DcsLookVector > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Dem_t = {"_p_boost__shared_ptrT_GeoCal__Dem_t", "boost::shared_ptr< GeoCal::Dem > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__EciTodBurl_t = {"_p_boost__shared_ptrT_GeoCal__EciTodBurl_t", "boost::shared_ptr< GeoCal::EciTodBurl > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__EciTod_t = {"_p_boost__shared_ptrT_GeoCal__EciTod_t", "boost::shared_ptr< GeoCal::EciTod > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Eci_t = {"_p_boost__shared_ptrT_GeoCal__Eci_t", "boost::shared_ptr< GeoCal::Eci > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Ecr_t = {"_p_boost__shared_ptrT_GeoCal__Ecr_t", "boost::shared_ptr< GeoCal::Ecr > *", 0, 0, (void*)0, 0};
@@ -8926,11 +9585,6 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDe
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t", "boost::shared_ptr< GeoCal::FrameCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t", "boost::shared_ptr< GeoCal::GroundCoordinate > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t = {"_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t", "boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t = {"_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t", "boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeAcsCreator > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t = {"_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t", "boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::EciTod,GeoCal::TimeJ2000Creator > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t = {"_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t", "boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimeJ2000Creator > > *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t = {"_p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t", "boost::shared_ptr< GeoCal::HdfOrbit< GeoCal::Eci,GeoCal::TimePgsCreator > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t", "boost::shared_ptr< GeoCal::ImageCoordinateWithDerivative > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t = {"_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t", "boost::shared_ptr< GeoCal::ImageCoordinate > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t = {"_p_boost__shared_ptrT_GeoCal__KeplerOrbit_t", "boost::shared_ptr< GeoCal::KeplerOrbit > *", 0, 0, (void*)0, 0};
@@ -9003,17 +9657,11 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__Dem,
   &_swigt__p_GeoCal__Eci,
   &_swigt__p_GeoCal__EciTod,
-  &_swigt__p_GeoCal__EciTodBurl,
   &_swigt__p_GeoCal__Ecr,
   &_swigt__p_GeoCal__FrameCoordinate,
   &_swigt__p_GeoCal__FrameCoordinateWithDerivative,
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__GroundCoordinate,
-  &_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t,
-  &_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t,
-  &_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t,
-  &_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t,
-  &_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t,
   &_swigt__p_GeoCal__ImageCoordinate,
   &_swigt__p_GeoCal__ImageCoordinateWithDerivative,
   &_swigt__p_GeoCal__KeplerOrbit,
@@ -9135,7 +9783,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Dem_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__EciTodBurl_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__EciTod_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Eci_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__Ecr_t,
@@ -9143,11 +9790,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t,
-  &_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t,
@@ -9211,7 +9853,7 @@ static swig_cast_info _swigc__p_GeoCal__Camera[] = {  {&_swigt__p_GeoCal__Camera
 static swig_cast_info _swigc__p_GeoCal__CartesianFixed[] = {  {&_swigt__p_GeoCal__CartesianFixed, 0, 0, 0},  {&_swigt__p_GeoCal__Ecr, _p_GeoCal__EcrTo_p_GeoCal__CartesianFixed, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVector[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianFixedLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__CartesianInertial[] = {  {&_swigt__p_GeoCal__EciTodBurl, _p_GeoCal__EciTodBurlTo_p_GeoCal__CartesianInertial, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, 0, 0, 0},  {&_swigt__p_GeoCal__Eci, _p_GeoCal__EciTo_p_GeoCal__CartesianInertial, 0, 0},  {&_swigt__p_GeoCal__EciTod, _p_GeoCal__EciTodTo_p_GeoCal__CartesianInertial, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__CartesianInertial[] = {  {&_swigt__p_GeoCal__CartesianInertial, 0, 0, 0},  {&_swigt__p_GeoCal__Eci, _p_GeoCal__EciTo_p_GeoCal__CartesianInertial, 0, 0},  {&_swigt__p_GeoCal__EciTod, _p_GeoCal__EciTodTo_p_GeoCal__CartesianInertial, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVector[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ConstantSpacingTimeTable[] = {  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, 0, 0, 0},{0, 0, 0, 0}};
@@ -9220,17 +9862,11 @@ static swig_cast_info _swigc__p_GeoCal__DcsLookVectorWithDerivative[] = {  {&_sw
 static swig_cast_info _swigc__p_GeoCal__Dem[] = {  {&_swigt__p_GeoCal__Dem, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Eci[] = {  {&_swigt__p_GeoCal__Eci, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__EciTod[] = {  {&_swigt__p_GeoCal__EciTod, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__EciTodBurl[] = {  {&_swigt__p_GeoCal__EciTodBurl, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Ecr[] = {  {&_swigt__p_GeoCal__Ecr, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinate[] = {  {&_swigt__p_GeoCal__FrameCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__FrameCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__EciTod, _p_GeoCal__EciTodTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, _p_GeoCal__ObservableT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t, _p_GeoCal__ObserverT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__EciTodBurl, _p_GeoCal__EciTodBurlTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, _p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Eci, _p_GeoCal__EciTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__QuaternionOrbitData, _p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitData, _p_GeoCal__OrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Ecr, _p_GeoCal__EcrTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameter, _p_GeoCal__WithParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Camera_t, _p_GeoCal__ObserverT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t, _p_GeoCal__ObservableT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__EciTod, _p_GeoCal__EciTodTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, _p_GeoCal__ObservableT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t, _p_GeoCal__ObserverT_GeoCal__Orbit_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinate, _p_GeoCal__FrameCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinate, _p_GeoCal__ImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__VicarImageCoordinate, _p_GeoCal__VicarImageCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__FrameCoordinateWithDerivative, _p_GeoCal__FrameCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, _p_GeoCal__ImageCoordinateWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Eci, _p_GeoCal__EciTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitData, _p_GeoCal__OrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__QuaternionOrbitData, _p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Dem, _p_GeoCal__DemTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Ecr, _p_GeoCal__EcrTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__WithParameter, _p_GeoCal__WithParameterTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObserverT_GeoCal__Camera_t, _p_GeoCal__ObserverT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t, _p_GeoCal__ObservableT_GeoCal__Camera_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GroundCoordinate[] = {  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, 0, 0, 0},  {&_swigt__p_GeoCal__Ecr, _p_GeoCal__EcrTo_p_GeoCal__GroundCoordinate, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinate[] = {  {&_swigt__p_GeoCal__ImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ImageCoordinateWithDerivative[] = {  {&_swigt__p_GeoCal__ImageCoordinateWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__KeplerOrbit[] = {  {&_swigt__p_GeoCal__KeplerOrbit, 0, 0, 0},{0, 0, 0, 0}};
@@ -9240,17 +9876,17 @@ static swig_cast_info _swigc__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_doub
 static swig_cast_info _swigc__p_GeoCal__LookVectorT_double_t[] = {  {&_swigt__p_GeoCal__LookVectorT_double_t, 0, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__LookVectorT_double_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__MeasuredTimeTable[] = {  {&_swigt__p_GeoCal__MeasuredTimeTable, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ObservableT_GeoCal__Camera_t[] = {  {&_swigt__p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__ObservableT_GeoCal__Camera_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__ObservableT_GeoCal__Orbit_t[] = {  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__ObservableT_GeoCal__Orbit_t[] = {  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__ObservableT_GeoCal__Orbit_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ObserverT_GeoCal__Camera_t[] = {  {&_swigt__p_GeoCal__ObserverT_GeoCal__Camera_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ObserverT_GeoCal__Orbit_t[] = {  {&_swigt__p_GeoCal__ObserverT_GeoCal__Orbit_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__Orbit[] = {  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__Orbit, 0, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t[] = {  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, 0, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t[] = {  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__Orbit[] = {  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__Orbit, 0, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__Orbit, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__Orbit, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t[] = {  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t[] = {  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t[] = {  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t[] = {  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__OrbitData[] = {  {&_swigt__p_GeoCal__OrbitData, 0, 0, 0},  {&_swigt__p_GeoCal__QuaternionOrbitData, _p_GeoCal__QuaternionOrbitDataTo_p_GeoCal__OrbitData, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__OrbitListCache[] = {  {&_swigt__p_GeoCal__OrbitListCache, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__OrbitQuaternionList[] = {  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, 0, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__OrbitQuaternionList[] = {  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, 0, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__OrbitQuaternionList, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__QuaternionOrbitData[] = {  {&_swigt__p_GeoCal__QuaternionOrbitData, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__ScLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__ScLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
@@ -9259,7 +9895,7 @@ static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0,
 static swig_cast_info _swigc__p_GeoCal__TimeTable[] = {  {&_swigt__p_GeoCal__TimeTable, 0, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__TimeTable, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__TimeTable, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__TimeWithDerivative[] = {  {&_swigt__p_GeoCal__TimeWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VicarImageCoordinate[] = {  {&_swigt__p_GeoCal__VicarImageCoordinate, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__WithParameter[] = {  {&_swigt__p_GeoCal__WithParameter, 0, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__WithParameter[] = {  {&_swigt__p_GeoCal__WithParameter, 0, 0, 0},  {&_swigt__p_GeoCal__Orbit, _p_GeoCal__OrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__SimpleCamera, _p_GeoCal__SimpleCameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__Camera, _p_GeoCal__CameraTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__MeasuredTimeTable, _p_GeoCal__MeasuredTimeTableTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__ConstantSpacingTimeTable, _p_GeoCal__ConstantSpacingTimeTableTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__TimeTable, _p_GeoCal__TimeTableTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t, _p_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_tTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__KeplerOrbit, _p_GeoCal__KeplerOrbitTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitQuaternionList, _p_GeoCal__OrbitQuaternionListTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__OrbitListCache, _p_GeoCal__OrbitListCacheTo_p_GeoCal__WithParameter, 0, 0},  {&_swigt__p_GeoCal__WithParameterNested, _p_GeoCal__WithParameterNestedTo_p_GeoCal__WithParameter, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__WithParameterNested[] = {  {&_swigt__p_GeoCal__WithParameterNested, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -9347,24 +9983,18 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVec
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianFixed_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Ecr_t, _p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertial_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Eci_t, _p_boost__shared_ptrT_GeoCal__Eci_tTo_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTodBurl_t, _p_boost__shared_ptrT_GeoCal__EciTodBurl_tTo_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTod_t, _p_boost__shared_ptrT_GeoCal__EciTod_tTo_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__CartesianInertial_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Eci_t, _p_boost__shared_ptrT_GeoCal__Eci_tTo_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTod_t, _p_boost__shared_ptrT_GeoCal__EciTod_tTo_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Dem_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__EciTodBurl_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTodBurl_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__EciTod_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTod_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Eci_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Eci_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Ecr_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Ecr_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, _p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTodBurl_t, _p_boost__shared_ptrT_GeoCal__EciTodBurl_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, _p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t, _p_boost__shared_ptrT_GeoCal__OrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTod_t, _p_boost__shared_ptrT_GeoCal__EciTod_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Eci_t, _p_boost__shared_ptrT_GeoCal__Eci_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Ecr_t, _p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, _p_boost__shared_ptrT_GeoCal__Time_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeRefT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, _p_boost__shared_ptrT_GeoCal__WithParameter_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertial_t, _p_boost__shared_ptrT_GeoCal__CartesianInertial_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, _p_boost__shared_ptrT_GeoCal__TimeWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__LnLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, _p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t, _p_boost__shared_ptrT_GeoCal__OrbitData_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__EciTod_t, _p_boost__shared_ptrT_GeoCal__EciTod_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, _p_boost__shared_ptrT_GeoCal__ImageCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, _p_boost__shared_ptrT_GeoCal__FrameCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, _p_boost__shared_ptrT_GeoCal__GroundCoordinate_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Eci_t, _p_boost__shared_ptrT_GeoCal__Eci_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Dem_t, _p_boost__shared_ptrT_GeoCal__Dem_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, _p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Ecr_t, _p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, _p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, _p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixed_t, _p_boost__shared_ptrT_GeoCal__CartesianFixed_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Ecr_t, _p_boost__shared_ptrT_GeoCal__Ecr_tTo_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -9374,17 +10004,17 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__A
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, _p_boost__shared_ptrT_GeoCal__ScLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__DcsLookVector_t, _p_boost__shared_ptrT_GeoCal__DcsLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__LnLookVector_t, _p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, _p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_tTo_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Camera_t_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__ObservableT_GeoCal__Orbit_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitData_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, _p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_tTo_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitData_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitListCache_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Orbit_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Orbit_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__Orbit_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__ScLookVector_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -9394,7 +10024,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t[
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VicarImageCoordinate_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameterNested_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__Eci_GeoCal__TimePgsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t, _p_boost__shared_ptrT_GeoCal__OrbitArrayT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__SimpleCamera_t, _p_boost__shared_ptrT_GeoCal__SimpleCamera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Camera_t, _p_boost__shared_ptrT_GeoCal__Camera_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameterNested_t, _p_boost__shared_ptrT_GeoCal__WithParameterNested_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_t, _p_boost__shared_ptrT_GeoCal__MeasuredTimeTable_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__TimeTable_t, _p_boost__shared_ptrT_GeoCal__TimeTable_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitListCache_t, _p_boost__shared_ptrT_GeoCal__OrbitListCache_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, _p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__Orbit_t, _p_boost__shared_ptrT_GeoCal__Orbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t, _p_boost__shared_ptrT_GeoCal__KeplerOrbit_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_t, _p_boost__shared_ptrT_GeoCal__ConstantSpacingTimeTable_tTo_p_boost__shared_ptrT_GeoCal__WithParameter_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -9437,17 +10067,11 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__Dem,
   _swigc__p_GeoCal__Eci,
   _swigc__p_GeoCal__EciTod,
-  _swigc__p_GeoCal__EciTodBurl,
   _swigc__p_GeoCal__Ecr,
   _swigc__p_GeoCal__FrameCoordinate,
   _swigc__p_GeoCal__FrameCoordinateWithDerivative,
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__GroundCoordinate,
-  _swigc__p_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t,
-  _swigc__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t,
-  _swigc__p_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t,
-  _swigc__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t,
-  _swigc__p_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t,
   _swigc__p_GeoCal__ImageCoordinate,
   _swigc__p_GeoCal__ImageCoordinateWithDerivative,
   _swigc__p_GeoCal__KeplerOrbit,
@@ -9569,7 +10193,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVectorWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__DcsLookVector_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Dem_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__EciTodBurl_t,
   _swigc__p_boost__shared_ptrT_GeoCal__EciTod_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Eci_t,
   _swigc__p_boost__shared_ptrT_GeoCal__Ecr_t,
@@ -9577,11 +10200,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
   _swigc__p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTodBurl_GeoCal__TimeAcsCreator_t_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeAcsCreator_t_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__EciTod_GeoCal__TimeJ2000Creator_t_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimeJ2000Creator_t_t,
-  _swigc__p_boost__shared_ptrT_GeoCal__HdfOrbitT_GeoCal__Eci_GeoCal__TimePgsCreator_t_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t,
   _swigc__p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,
   _swigc__p_boost__shared_ptrT_GeoCal__KeplerOrbit_t,
@@ -10325,7 +10943,16 @@ SWIG_init(void) {
   
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > > ("boost::shared_ptr< GeoCal::HdfOrbit<GeoCal::EciTodBurl,GeoCal::TimeAcsCreator> > *"));
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > > ("boost::shared_ptr< GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeAcsCreator> > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > > ("boost::shared_ptr< GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimePgsCreator> > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > > ("boost::shared_ptr< GeoCal::OrbitArray<GeoCal::Eci,GeoCal::TimeJ2000Creator> > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > > ("boost::shared_ptr< GeoCal::OrbitArray<GeoCal::EciTod,GeoCal::TimeJ2000Creator> > *"));
   
 #if PY_VERSION_HEX >= 0x03000000
   return m;

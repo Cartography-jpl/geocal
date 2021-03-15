@@ -544,7 +544,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
 	@swigsrc@/jia_sample_wrap.cc @swigsrc@/hdf_file_wrap.cc \
-	@swigsrc@/hdf_orbit_wrap.cc @swigsrc@/hdf_orbit_carto_wrap.cc \
+	@swigsrc@/hdf_orbit_wrap.cc @swigsrc@/orbit_array_wrap.cc \
+	@swigsrc@/hdf_orbit_carto_wrap.cc \
 	@swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
 	@swigsrc@/gdal_datum_wrap.cc @swigsrc@/gdal_dem_wrap.cc \
@@ -753,6 +754,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-hdf_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo \
+	@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo \
 	@swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo
 @HAVE_HDF5_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
@@ -886,6 +888,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
 	@srcimplementation@/geometric_model_image.cc \
 	@srcimplementation@/hdf_orbit.cc \
+	@srcimplementation@/orbit_array.cc \
 	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
@@ -1084,6 +1087,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-quadratic_geometric_model.lo \
 	@srcimplementation@/libgeocal_la-geometric_model_image.lo \
 	$(am__objects_9) \
+	@srcimplementation@/libgeocal_la-orbit_array.lo \
 	@srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo \
 	@srcimplementation@/libgeocal_la-orbit_correction.lo \
 	@srcimplementation@/libgeocal_la-orbit_offset_correction.lo \
@@ -1733,6 +1737,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-misc_array_function.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-mola_dem_file.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ogr_coordinate.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_correction.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_data_image_ground_connection.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_des.Plo \
@@ -2052,6 +2057,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_des_wrap.Plo \
@@ -2335,6 +2341,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/quadratic_geometric_model.h \
 	@srcimplementation@/geometric_model_image.h \
 	@srcimplementation@/hdf_orbit.h \
+	@srcimplementation@/orbit_array.h \
 	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
@@ -2784,6 +2791,7 @@ OGDI_PREFIX = @OGDI_PREFIX@
 OPENJPEG_CFLAGS = @OPENJPEG_CFLAGS@
 OPENJPEG_LIBS = @OPENJPEG_LIBS@
 OPENJPEG_PREFIX = @OPENJPEG_PREFIX@
+OPENMP_CFLAGS = @OPENMP_CFLAGS@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
@@ -3364,6 +3372,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
 	@srcimplementation@/geometric_model_image.cc $(am__append_25) \
+	@srcimplementation@/orbit_array.cc \
 	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
 	@srcimplementation@/orbit_offset_correction.cc \
@@ -3588,6 +3597,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
 	@swigsrc@/jia_sample_wrap.cc
 SWIG_SRC_HDF5 = @swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
+	@swigsrc@/orbit_array_wrap.cc \
 	@swigsrc@/hdf_orbit_carto_wrap.cc
 SWIG_SRC_GDAL = @swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
@@ -3597,7 +3607,6 @@ SWIG_SRC_GDAL = @swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/ogr_coordinate_wrap.cc @swigsrc@/vicar_ogr_wrap.cc
 
 # Include boost in builds
-
 # Include blitz in builds
 
 # Include gsl in builds
@@ -3608,9 +3617,10 @@ SWIG_SRC_GDAL = @swigsrc@/geocal_gdal_wrap.cc \
 libgeocal_la_LDFLAGS = $(am__append_1) -R $(BOOST_LIBDIR) \
 	-L$(BOOST_LIBDIR) $(BOOST_REGEX_LIB) $(BOOST_DATETIME_LIB) \
 	$(BOOST_IOSTREAMS_LIB) $(BOOST_FILESYSTEM_LIB) \
-	$(BOOST_SERIALIZATION_LIB) $(BLITZ_LIBS) $(am__append_3) \
-	$(am__append_5) $(am__append_7) $(am__append_9) $(GSL_LIBS) \
-	$(FFTW_LIBS) $(SDP_LDFLAGS) $(CODE_COVERAGE_LIBS)
+	$(BOOST_SERIALIZATION_LIB) $(OPENMP_CFLAGS) $(BLITZ_LIBS) \
+	$(am__append_3) $(am__append_5) $(am__append_7) \
+	$(am__append_9) $(GSL_LIBS) $(FFTW_LIBS) $(SDP_LDFLAGS) \
+	$(CODE_COVERAGE_LIBS)
 dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python \
 	$(srcdir)/$(srcpythonbin)/gtproj2 \
@@ -3762,6 +3772,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/quadratic_geometric_model.h \
 	@srcimplementation@/geometric_model_image.h $(am__append_24) \
+	@srcimplementation@/orbit_array.h \
 	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
 	@srcimplementation@/orbit_offset_correction.h \
@@ -3946,6 +3957,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/orbit_piecewise_correction.i \
 	@srcimplementation@/orbit_time_shift.i \
 	@srcimplementation@/hdf_orbit.i \
+	@srcimplementation@/orbit_array.i \
 	@srcimplementation@/orbit_quaternion_list_offset.i \
 	@srcimplementation@/hdf_orbit_carto.i \
 	@srcimplementation@/tle_orbit.i \
@@ -4144,9 +4156,10 @@ libgeocal_la_CFLAGS = $(AM_CFLAGS) $(CODE_COVERAGE_CFLAGS)
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
-	$(CODE_COVERAGE_CPPFLAGS) $(am__append_2) $(am__append_4) \
-	$(am__append_6) $(am__append_8) $(am__append_10) \
-	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_35)
+	$(CODE_COVERAGE_CPPFLAGS) $(OPENMP_CFLAGS) $(am__append_2) \
+	$(am__append_4) $(am__append_6) $(am__append_8) \
+	$(am__append_10) -DSWIG_MAPPER_NAMESPACE=GeoCal \
+	$(am__append_35)
 EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND) \
 	$(CARTO_BUILD_DEPEND)
 libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS) \
@@ -4159,11 +4172,12 @@ norm_sdbx = $(shell cd $(abs_srcdir)/@srcsdbx@; pwd)
 geocal_test_all_LDADD = libgeocal.la $(CARTO_LIBS) $(VICAR_RTL_LIBS) \
 	$(SPICE_LIBS) $(MSP_LIBS) $(am__append_12) $(GDAL_LIBS) \
 	$(CODE_COVERAGE_LIBS)
-geocal_test_all_LDFLAGS = -no-install 
+geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
-	$(VICAR_RTL_CFLAGS) $(MSP_CFLAGS) $(BOOST_CPPFLAGS) \
-	$(SPICE_CFLAGS) $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw) \
-	$(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
+	$(OPENMP_CFLAGS) $(VICAR_RTL_CFLAGS) $(MSP_CFLAGS) \
+	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
+	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
+	$(GDAL_CFLAGS) $(HDF5_CFLAGS)
 @BUILD_VICAR_GDALPLUGIN_TRUE@EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
 MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
@@ -5016,6 +5030,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo:  \
@@ -5415,6 +5431,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-hdf_orbit.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-orbit_array.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo:  \
@@ -6520,6 +6539,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-misc_array_function.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-mola_dem_file.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ogr_coordinate.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_correction.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_data_image_ground_connection.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_des.Plo@am__quote@ # am--include-marker
@@ -6839,6 +6859,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_des_wrap.Plo@am__quote@ # am--include-marker
@@ -8347,6 +8368,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo `test -f '@swigsrc@/hdf_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/hdf_orbit_wrap.cc
 
+@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo: @swigsrc@/orbit_array_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo `test -f '@swigsrc@/orbit_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_array_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_array_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo `test -f '@swigsrc@/orbit_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_array_wrap.cc
+
 @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo: @swigsrc@/hdf_orbit_carto_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-hdf_orbit_carto_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo `test -f '@swigsrc@/hdf_orbit_carto_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/hdf_orbit_carto_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-hdf_orbit_carto_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-hdf_orbit_carto_wrap.Plo
@@ -9277,6 +9305,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/hdf_orbit.cc' object='@srcimplementation@/libgeocal_la-hdf_orbit.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-hdf_orbit.lo `test -f '@srcimplementation@/hdf_orbit.cc' || echo '$(srcdir)/'`@srcimplementation@/hdf_orbit.cc
+
+@srcimplementation@/libgeocal_la-orbit_array.lo: @srcimplementation@/orbit_array.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_array.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_array.lo `test -f '@srcimplementation@/orbit_array.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_array.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/orbit_array.cc' object='@srcimplementation@/libgeocal_la-orbit_array.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-orbit_array.lo `test -f '@srcimplementation@/orbit_array.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_array.cc
 
 @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo: @srcimplementation@/orbit_quaternion_list_offset.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list_offset.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_quaternion_list_offset.lo `test -f '@srcimplementation@/orbit_quaternion_list_offset.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list_offset.cc
@@ -13378,6 +13413,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-misc_array_function.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-mola_dem_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ogr_coordinate.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_correction.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_data_image_ground_connection.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_des.Plo
@@ -13697,6 +13733,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_des_wrap.Plo
@@ -14029,6 +14066,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-misc_array_function.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-mola_dem_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ogr_coordinate.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_array.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_correction.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_data_image_ground_connection.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_des.Plo
@@ -14348,6 +14386,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-nitf_support_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-observer_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ogr_coordinate_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_correction_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_des_wrap.Plo

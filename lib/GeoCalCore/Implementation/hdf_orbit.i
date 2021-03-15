@@ -7,11 +7,11 @@
 #include "hdf_orbit.h"
 #include "eci_tod.h"
 %}
-%base_import(orbit_quaternion_list)
+%base_import(orbit_array)
 %import "eci_tod.i"
 namespace GeoCal {
 template<class PositionType, class TimeCreatorType> class HdfOrbit : 
-    public OrbitQuaternionList {
+    public OrbitArray<PositionType, TimeCreatorType> {
 public:
   HdfOrbit(const std::string& Fname, const std::string& Base_group = "Orbit",
 	   const std::string& Eph_time = "/Ephemeris/Time",

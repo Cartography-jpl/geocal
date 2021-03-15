@@ -207,5 +207,38 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK(fabs(orb->max_time() - orbr->max_time()) < 1e-3);
 }
 
+BOOST_AUTO_TEST_CASE(orbit_array_test)
+{
+  // OrbitArray gets tested through HdfOrbit, except to direct
+  // creation as serialization. So we add a test for this
+  if(!have_serialize_supported())
+    return;
+  std::string fname = test_data_dir() + "sample_orbit.h5";
+  HdfFile f(fname);
+  blitz::Array<double, 1> tdouble = 
+    f.read_field<double, 1>("Orbit/Ephemeris/Time");
+  blitz::Array<double, 2> pos = 
+    f.read_field<double, 2>("Orbit/Ephemeris/Position");
+  blitz::Array<double, 2> vel = 
+    f.read_field<double, 2>("Orbit/Ephemeris/Velocity");
+  blitz::Array<double, 1> tdouble2 = 
+    f.read_field<double, 1>("Orbit/Attitude/Time");
+  blitz::Array<double, 2> quat = 
+    f.read_field<double, 2>("Orbit/Attitude/Quaternion");
+  auto orb_arr =
+    boost::make_shared<OrbitArray<EciTod, TimeAcsCreator> >(tdouble,
+		    pos, vel, tdouble2, quat);
+  Geodetic gexpect(-59.6722, 45.2541, 661831);
+  BOOST_CHECK(distance(*orb_arr->position_cf(t), gexpect) < 10);
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Orbit> orbr = 
+    serialize_read_string<Orbit>(d);
+  BOOST_CHECK(fabs(orb_arr->min_time() - orbr->min_time()) < 1e-3);
+  BOOST_CHECK(fabs(orb_arr->max_time() - orbr->max_time()) < 1e-3);
+  BOOST_CHECK(distance(*orbr->position_cf(t), gexpect) < 10);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

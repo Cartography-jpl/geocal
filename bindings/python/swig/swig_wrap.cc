@@ -205,6 +205,7 @@ extern "C" {
 #ifdef HAVE_HDF5
   INIT_TYPE INIT_FUNC(_hdf_file)(void);
   INIT_TYPE INIT_FUNC(_hdf_orbit)(void);
+  INIT_TYPE INIT_FUNC(_orbit_array)(void);
   INIT_TYPE INIT_FUNC(_hdf_orbit_carto)(void);
 #endif
 #ifdef HAVE_GDAL
@@ -423,6 +424,7 @@ static void module_init(PyObject* module)
 #ifdef HAVE_HDF5
   INIT_MODULE(module, "_hdf_file", INIT_FUNC(_hdf_file));
   INIT_MODULE(module, "_hdf_orbit", INIT_FUNC(_hdf_orbit));
+  INIT_MODULE(module, "_orbit_array", INIT_FUNC(_orbit_array));
   INIT_MODULE(module, "_hdf_orbit_carto", INIT_FUNC(_hdf_orbit_carto));
 #endif
 #ifdef HAVE_GDAL

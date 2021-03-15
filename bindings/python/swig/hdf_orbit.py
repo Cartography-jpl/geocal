@@ -180,12 +180,13 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.orbit_array
 import geocal_swig.orbit_quaternion_list
 import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
-class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_array.OrbitArray_EciTod_TimeAcs):
     """
 
     This is an implementation of an Orbit that reads position, velocity,
@@ -277,7 +278,7 @@ HdfOrbit_EciTod_TimeAcs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_E
 HdfOrbit_EciTod_TimeAcs_swigregister = _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swigregister
 HdfOrbit_EciTod_TimeAcs_swigregister(HdfOrbit_EciTod_TimeAcs)
 
-class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_array.OrbitArray_Eci_TimePgs):
     """
 
     This is an implementation of an Orbit that reads position, velocity,
@@ -369,7 +370,7 @@ HdfOrbit_Eci_TimePgs._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_Eci_
 HdfOrbit_Eci_TimePgs_swigregister = _hdf_orbit.HdfOrbit_Eci_TimePgs_swigregister
 HdfOrbit_Eci_TimePgs_swigregister(HdfOrbit_Eci_TimePgs)
 
-class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_array.OrbitArray_Eci_TimeJ2000):
     """
 
     This is an implementation of an Orbit that reads position, velocity,
@@ -461,7 +462,7 @@ HdfOrbit_Eci_TimeJ2000._v_base_group = new_instancemethod(_hdf_orbit.HdfOrbit_Ec
 HdfOrbit_Eci_TimeJ2000_swigregister = _hdf_orbit.HdfOrbit_Eci_TimeJ2000_swigregister
 HdfOrbit_Eci_TimeJ2000_swigregister(HdfOrbit_Eci_TimeJ2000)
 
-class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_array.OrbitArray_EciTod_TimeJ2000):
     """
 
     This is an implementation of an Orbit that reads position, velocity,

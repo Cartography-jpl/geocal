@@ -120,18 +120,23 @@ GdalMultiFile::GdalMultiFile(const std::vector<std::string>& File_list,
 
 MapProjectedMultifileTile GdalMultiFile::get_file(int Line, int Sample) const
 {
-  std::string fname = loc_to_file.find(Line, Sample);
-  if(fname =="") {
-    return MapProjectedMultifileTile();
+  auto fname_list = loc_to_file.find_region(Line, Sample, 1, 1);
+  for(auto & fname: fname_list) {
+     boost::shared_ptr<GdalMapProjectedImage> f =
+       boost::make_shared<GdalMapProjectedImage>(fname, band_,
+			 number_tile_each_file, false, number_line_per_tile,
+			 number_sample_per_tile);
+     ImageCoordinate ic = 
+       coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+     ImageCoordinate ic2 = 
+       coordinate(*(f->ground_coordinate(ImageCoordinate(1,1))));
+     int ln = (int) round(ic.line);
+     int smp = (int) round(ic.sample);
+     MapProjectedMultifileTile res(f, ln, smp);     
+     if(res.in_tile(Line, Sample))
+       return res;
   }
-  boost::shared_ptr<GdalMapProjectedImage> f(new GdalMapProjectedImage(fname, band_, number_tile_each_file, false, number_line_per_tile, number_sample_per_tile));
-  ImageCoordinate ic = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
-  ImageCoordinate ic2 = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(1,1))));
-  int ln = (int) round(ic.line);
-  int smp = (int) round(ic.sample);
-  return MapProjectedMultifileTile(f, ln, smp);
+  return MapProjectedMultifileTile();
 }
 
 //-----------------------------------------------------------------------

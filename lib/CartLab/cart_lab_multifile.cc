@@ -179,52 +179,57 @@ void CartLabMultifile::init_loc_to_file()
 
 RasterMultifileTile GdalCartLabMultifile::get_file(int Line, int Sample) const
 {
-  std::string fname = loc_to_file.find(Line, Sample);
-  if(fname =="")
-    return RasterMultifileTile();
-  boost::shared_ptr<GdalRasterImage> f
-    (new GdalRasterImage(fname, 1, number_tile_each_file, false, 
-			 number_line_per_tile, number_sample_per_tile));
-  ImageCoordinate ic = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
-  int ln = (int) round(ic.line);
-  int smp = (int) round(ic.sample);
-  return RasterMultifileTile(f, ln, smp);
+  auto fname_list = loc_to_file.find_region(Line, Sample, 1, 1);
+  for(auto & fname: fname_list) {
+    boost::shared_ptr<GdalRasterImage> f =
+      boost::make_shared<GdalRasterImage>(fname, 1, number_tile_each_file,
+					  false, number_line_per_tile,
+					  number_sample_per_tile);
+    ImageCoordinate ic = 
+      coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+    int ln = (int) round(ic.line);
+    int smp = (int) round(ic.sample);
+    RasterMultifileTile res(f, ln, smp);
+    if(res.in_tile(Line, Sample))
+      return res;
+  }
+  return RasterMultifileTile();
 }
 
 RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
 {
-  std::string fname = loc_to_file.find(Line, Sample);
-  if(fname =="") {
-    if(!no_coverage_is_error_) {
-      boost::shared_ptr<RasterImage> cf
-	(new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
-				 no_coverage_fill_value_));
-      int ln = (Line / cf->number_line()) * cf->number_line();
-      int smp = (Sample / cf->number_sample()) * cf->number_sample();
-      return RasterMultifileTile(cf, ln, smp);
-    } else {
-      return RasterMultifileTile();
-    }
+  auto fname_list = loc_to_file.find_region(Line, Sample, 1, 1);
+  for(auto & fname: fname_list) {
+    //-----------------------------------------------------------------------
+    // If we are using memory mapped io by preference, try that first.
+    // We allow this to fail, the file might be too large to do memory
+    // mapped io (particular on the mac, which is limited to 2G).
+    //-----------------------------------------------------------------------
+    boost::shared_ptr<RasterImage> f = 
+      vicar_open(fname, 1, VicarFile::READ, favor_memory_mapped,
+		 number_line_per_tile, number_tile_each_file, force_area_pixel);
+    ImageCoordinate ic = 
+      coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+    ImageCoordinate ic2 = 
+      coordinate(*(f->ground_coordinate(ImageCoordinate(f->number_line() - 1,
+					      f->number_sample() - 1))));
+    int ln = (int) round(ic.line);
+    int smp = (int) round(ic.sample);
+    RasterMultifileTile res(f, ln, smp);
+    if(res.in_tile(Line, Sample))
+      return res;
+  }
+  if(!no_coverage_is_error_) {
+    boost::shared_ptr<RasterImage> cf
+      (new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
+			       no_coverage_fill_value_));
+    int ln = (Line / cf->number_line()) * cf->number_line();
+    int smp = (Sample / cf->number_sample()) * cf->number_sample();
+    return RasterMultifileTile(cf, ln, smp);
+  } else {
+    return RasterMultifileTile();
   }
 
-  //-----------------------------------------------------------------------
-  // If we are using memory mapped io by preference, try that first.
-  // We allow this to fail, the file might be too large to do memory
-  // mapped io (particular on the mac, which is limited to 2G).
-  //-----------------------------------------------------------------------
-
-  boost::shared_ptr<RasterImage> f = 
-    vicar_open(fname, 1, VicarFile::READ, favor_memory_mapped,
-	       number_line_per_tile, number_tile_each_file, force_area_pixel);
-  ImageCoordinate ic = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
-  ImageCoordinate ic2 = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(f->number_line() - 1,
-					      f->number_sample() - 1))));
-  int ln = (int) round(ic.line);
-  int smp = (int) round(ic.sample);
-  return RasterMultifileTile(f, ln, smp);
 }
 
 class TempFile {

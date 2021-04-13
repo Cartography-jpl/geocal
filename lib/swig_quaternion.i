@@ -37,7 +37,7 @@ namespace boost {
 	     return GeoCal::quaternion_to_matrix(*$self);
 	   }
 	 static quaternion<T > 
-	   from_matrix(const blitz::Array<T, 2>& Mat) const
+	   from_matrix(const blitz::Array<T, 2>& Mat)
 	 {
 	   return GeoCal::matrix_to_quaternion(Mat);
 	 }

@@ -184,16 +184,16 @@ def mars_fix_projection(fin, fout, band, hirise_correction=False):
     # user selected the --hirise-correction option
     if(hirise_correction and
        re.search("Equirectangular[_ ]MARS", p)):
-        m1 = re.search(r'PARAMETER\["latitude_of_origin",([\\d\\.]+)\]', p)
-        m2 = re.search(r'PARAMETER\["standard_parallel_1",([\\d\\.]+)\]', p)
+        m1 = re.search(r'PARAMETER\["latitude_of_origin",([\d.]+)\]', p)
+        m2 = re.search(r'PARAMETER\["standard_parallel_1",([\d.]+)\]', p)
         if(m1 and m2 and m1.group(1) != m2.group(1)):
             print("MSG:----------------------------------------------------\n")
             print("MSG: Doing HiRISE correction of swapping latitude_of_origin and standard_parallel_1 for the Equirectangular projection")
             sys.stdout.flush()
-            p = re.sub(r'PARAMETER\["latitude_of_origin",[\\d\\.]+\]',
+            p = re.sub(r'PARAMETER\["latitude_of_origin",[\d.]+\]',
                        'PARAMETER["latitude_of_origin",' + m2.group(1) + ']',
                        p)
-            p = re.sub(r'PARAMETER\["standard_parallel_1",[\\d\\.]+\]',
+            p = re.sub(r'PARAMETER\["standard_parallel_1",[\d.]+\]',
                        'PARAMETER["standard_parallel_1",' + m1.group(1) + ']',
                        p)
             f.SetProjection(p)

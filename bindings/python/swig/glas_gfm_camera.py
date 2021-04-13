@@ -522,7 +522,19 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
         Only applicable for sensor type "S".
 
         You may want to call compare_camera to check how accurate the
-        approximation is. 
+        approximation is.
+
+        Note that you should be careful not to double count any frame_t
+        quaternion. If you pass that in with the Cam, then this is already
+        accounted for in the field angle map (which has the effect of the
+        quaternion embedded in it). If you want to assign the frame_to_sc to
+        the GlasGfmCamera, then you should make sure to pass a Camera with a
+        identity frame_to_sc. So a reasonable process (in python) would be
+        something like:
+
+        q_original = cam.frame_to_sc cam.frame_to_sc =
+        Quaterion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)
+        gcam.frame_to_sc = q_original cam.frame_to_sc = q_original 
         """
         return _glas_gfm_camera.GlasGfmCamera_field_alignment_fit(self, Cam, Delta_sample, Band)
 

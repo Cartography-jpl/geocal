@@ -402,6 +402,9 @@ void GlasGfmCamera::init_model()
 /// camera. This does that in one step, taking a QuaternionCamera and
 /// fitting for the given Band. This version is for Pushbroom "S" type
 /// sensor.
+///
+/// See note in field_alignment_fit about handling frame_to_sc
+/// quaternion.
 //-----------------------------------------------------------------------
 
 GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
@@ -664,6 +667,20 @@ void GlasGfmCamera::compare_camera(const Camera& Cam, double& max_line_diff,
 ///
 /// You may want to call compare_camera to check how accurate the
 /// approximation is.
+///
+/// Note that you should be careful not to double count any
+/// frame_t quaternion. If you pass that in with the Cam, then
+/// this is already accounted for in the field angle map (which has
+/// the effect of the quaternion embedded in it). If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaterion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
 void GlasGfmCamera::field_alignment_fit

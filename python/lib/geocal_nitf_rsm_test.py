@@ -145,7 +145,7 @@ def test_rsm_grid(isolated_dir, rsm_g):
     print(f2)
 
 # Not working yet, we'll come back to this    
-@skip    
+#@skip    
 @require_msp
 @require_pynitf
 def test_rsm_grid_with_msp(isolated_dir, rsm_g):
@@ -162,11 +162,12 @@ def test_rsm_grid_with_msp(isolated_dir, rsm_g):
         for ln in np.linspace(0, rsm_g.rsm_id.max_line, 10):
             for smp in np.linspace(0, rsm_g.rsm_id.max_sample, 10):
                 ic = ImageCoordinate(ln+10,smp+10)
-                print(ic)
-                print(h)
-                p1 = igc_msp.ground_coordinate_approx_height(ic, h)
                 p2 = rsm_g.ground_coordinate_approx_height(ic, h)
-                assert(geocal_swig.distance(p1, p2) < 0.01)
+                ic1 = igc_msp.image_coordinate(p2)
+                print(p2)
+                print("IC: ", ic)
+                print("IC1: ", ic1)
+                #assert(geocal_swig.distance(p1, p2) < 0.01)
                 
 @require_pynitf
 def test_rsm_ms_rp(isolated_dir, rsm_ms_rp):

@@ -209,7 +209,7 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, N_x, N_y, N_z, Ignore_igc_error_in_fit=False):
+    def __init__(self, *args):
         """
 
         GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false, int
@@ -220,7 +220,7 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
         &Rsm_support_data_edition="fake-1")
 
         """
-        _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(N_x, N_y, N_z, Ignore_igc_error_in_fit))
+        _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(*args))
 
     def fit_corr(self, IGc, Cconv, Rb):
         """
@@ -511,6 +511,19 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
       self._v_number_fractional_col_digit(value)
 
 
+    def tre_size(self):
+        """
+
+        int GeoCal::RsmGrid::tre_size() const
+        Calculate the TRE size that we will try to write, so we can check if
+        it is too big.
+
+        This is the size that will go into the CEL field (so the total TRE
+        size - 11). 
+        """
+        return _rsm_grid.RsmGrid_tre_size(self)
+
+
     def tre_string(self):
         """
 
@@ -568,6 +581,7 @@ RsmGrid._v_total_number_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_tota
 RsmGrid._v_total_number_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_total_number_col_digit, None, RsmGrid)
 RsmGrid._v_number_fractional_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_row_digit, None, RsmGrid)
 RsmGrid._v_number_fractional_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_col_digit, None, RsmGrid)
+RsmGrid.tre_size = new_instancemethod(_rsm_grid.RsmGrid_tre_size, None, RsmGrid)
 RsmGrid.tre_string = new_instancemethod(_rsm_grid.RsmGrid_tre_string, None, RsmGrid)
 RsmGrid_swigregister = _rsm_grid.RsmGrid_swigregister
 RsmGrid_swigregister(RsmGrid)

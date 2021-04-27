@@ -119,6 +119,9 @@ public:
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
  					    ImageCoordinate& OUTPUT2,
  					    bool& OUTPUT) const;
+  virtual void image_coordinate_extended(const GroundCoordinate& Gc,
+					 ImageCoordinate& OUTPUT2,
+					 bool& OUTPUT) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf_fd(const CartesianFixed& Gc, double Step_size) const;

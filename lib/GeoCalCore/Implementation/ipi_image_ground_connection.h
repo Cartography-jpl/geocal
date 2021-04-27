@@ -109,7 +109,13 @@ public:
   {
     ipi_->image_coordinate_extended(Gc, Res, Success);
   }
-  virtual void print(std::ostream& Os) const \
+  virtual void image_coordinate_extended(const GroundCoordinate& Gc,
+					 ImageCoordinate& Res,
+					 bool& Success) const
+  {
+    ipi_->image_coordinate_extended(Gc, Res, Success);
+  }
+  virtual void print(std::ostream& Os) const	\
   {
     OstreamPad opad(Os, "    ");
     Os << "IpiImageGroundConnection" << "\n"

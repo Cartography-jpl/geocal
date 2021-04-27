@@ -53,7 +53,9 @@ public:
   virtual boost::shared_ptr<RsmBase> clone() const
   { return boost::shared_ptr<RsmBase>
       (new RsmGrid(line_.rows(), line_.cols(), line_.depth(),
-		   ignore_igc_error_in_fit_));
+		   ignore_igc_error_in_fit_, total_number_row_digit_,
+		   total_number_col_digit_, number_fractional_row_digit_,
+		   number_fractional_col_digit_));
   }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z,
 					   bool Extrapolate_ok) const;
@@ -246,6 +248,22 @@ public:
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>
   read_tre_string(const std::string& Tre_in);
+
+//-----------------------------------------------------------------------
+/// Calculate the TRE size that we will try to write, so we can check
+/// if it is too big. This is the size that will go into the CEL
+/// field (so the total TRE size - 11).  
+//-----------------------------------------------------------------------
+  int tre_size() const
+  { int res =  80 + 40 + 3 + 3 + 21 + 21 + 1 + 3 + 21 + 21 + 21 + 21
+      + 21 + 21 + 9 + 9 + 2 + 2 + 1 + 1 +
+      (number_z() - 1) * (4 + 4) +
+      (number_z()) * ( 3 + 3 );
+    for(int i = 0; i < number_z(); ++i)
+      res += number_x(i) * number_y(i) *
+	(total_number_row_digit_ + total_number_col_digit_);
+    return res;
+  }
 protected:
   RsmGrid() {}
 private:

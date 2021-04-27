@@ -43,6 +43,7 @@ public:
     virtual boost::shared_ptr< GeoCal::GroundCoordinate > ground_coordinate_approx_height(GeoCal::ImageCoordinate const &Ic, double H) const;
     virtual GeoCal::ImageCoordinate image_coordinate(GeoCal::GroundCoordinate const &Gc) const;
     virtual void image_coordinate_with_status(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate &OUTPUT2, bool &OUTPUT) const;
+    virtual void image_coordinate_extended(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate &OUTPUT2, bool &OUTPUT) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_cf(GeoCal::CartesianFixed const &Gc) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_cf_fd(GeoCal::CartesianFixed const &Gc, double Step_size) const;
     virtual blitz::Array< double,2 > image_coordinate_jac_parm(GeoCal::GroundCoordinate const &Gc) const;
@@ -87,7 +88,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[36];
+    mutable swig::SwigVar_PyObject vtable[37];
 #endif
 
 };

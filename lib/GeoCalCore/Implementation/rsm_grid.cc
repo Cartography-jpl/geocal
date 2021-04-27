@@ -340,6 +340,17 @@ void RsmGrid::fit
 	    throw;
 	}
       }
+  // The interpolation works better if we go a little past the edges
+  // in x and y.
+  const int pad = 2;
+  x_delta_ = (max_x - min_x) / (number_x(0) - 1);
+  y_delta_ = (max_y - min_y) / (number_y(0) - 1);
+  z_delta_ = (max_z - min_z) / (number_z() - 1);
+  min_x -= pad * x_delta_;
+  max_x += pad * x_delta_;
+  min_y -= pad * y_delta_;
+  max_y += pad * y_delta_;
+  
   x_start_ = min_x;
   y_start_ = min_y;
   z_start_ = min_z;
@@ -357,7 +368,7 @@ void RsmGrid::fit
 	ImageCoordinate ic;
 	bool success;
 	try {
-	  Igc.image_coordinate_with_status(*gc, ic, success);
+	  Igc.image_coordinate_extended(*gc, ic, success);
 	  if(success) {
 	    line_(i,j,k) = ic.line;
 	    sample_(i,j,k) = ic.sample;
@@ -408,7 +419,7 @@ void RsmGrid::fit_corr
 	ImageCoordinate ic;
 	bool success;
 	try {
-	  Igc.image_coordinate_with_status(*gc, ic, success);
+	  Igc.image_coordinate_extended(*gc, ic, success);
 	  ImageCoordinate ic_calc;
 	  ic_calc = Rb.image_coordinate(x,y,z);
 	  if(success) {
@@ -548,17 +559,25 @@ static boost::format szformat("%|1$03d|%|2$03d|");
 
 std::string RsmGrid::tre_string() const
 {
+  // Before starting, check that all the data will fit
+  if(tre_size() > 99999) {
+    Exception e;
+    e << "Maximimum size of TRE is 99999\n"
+      << "  TRE size: " << tre_size() << "\n";
+    throw e;
+  }
   std::string res = base_tre_string();
   // Don't fill in the row and column fit error
   std::string row_fit_error="";
   std::string col_fit_error="";
-  std::string int_ord = "";
+  // Linear interpolation
+  std::string int_ord = "1";
   res += str_check_size(secformat % row_section_number_ % col_section_number_
 			% row_fit_error % col_fit_error % int_ord,
 			3 + 3 + 21 + 21 + 1);
   // This is the value that the line/sample are recorded relative
   // to. The TRE *only* has positive values, so this number needs to
-  // be < the minimum value in the array so we don't need positive numbers.
+  // be < the minimum value in the array so we don't need negative numbers.
   int refrow = int(floor(min(where(blitz_isnan(line_), 0, line_))));
   int refcol = int(floor(min(where(blitz_isnan(sample_), 0, sample_))));
   res += str_check_size(gplaneformat % number_z() % z_delta_ % x_delta_
@@ -588,6 +607,14 @@ std::string RsmGrid::tre_string() const
   double lnscale = pow(10, number_fractional_row_digit_);
   double smpscale = pow(10, number_fractional_row_digit_);
   for(int i = 0; i < number_z(); ++i) {
+    // Give a better error message for too large size
+    if(number_x(i) > 999 || number_y(i) > 999) {
+      Exception e;
+      e << "The NITF TRE supports a maximum number_x and number_y of 999\n"
+	<< "  number_x(" << i << "): " << number_x(i) << "\n"
+	<< "  number_y(" << i << "): " << number_y(i) << "\n";
+      throw e;
+    }
     res += str_check_size(szformat % number_x(i) % number_y(i), 2 * 3);
     for(int i1 = 0; i1 < number_x(i); ++i1)
       for(int i2 = 0; i2 < number_y(i); ++i2) {

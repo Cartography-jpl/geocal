@@ -18,7 +18,15 @@
 namespace GeoCal {
 class RsmGrid : public RsmBase {
 public:
-  RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false);
+  RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false,
+	  int Total_number_row_digit = 11,
+	  int Total_number_col_digit = 11,
+	  int Number_fractional_row_digit = 2,
+	  int Number_fractional_col_digit = 2,
+	  int Row_section_number = 1,
+	  int Col_section_number = 1,
+	  const std::string& Image_identifier="",
+	  const std::string& Rsm_support_data_edition="fake-1");
   virtual void fit(const ImageGroundConnection& Igc,
 		   const CoordinateConverter& Cconv,
 		   double Min_height, double Max_height,
@@ -76,6 +84,7 @@ public:
   %python_attribute_with_set(total_number_col_digit, int);
   %python_attribute_with_set(number_fractional_row_digit, int);
   %python_attribute_with_set(number_fractional_col_digit, int);
+  int tre_size() const;
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>
   read_tre_string(const std::string& Tre_in);

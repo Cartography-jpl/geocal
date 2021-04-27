@@ -412,6 +412,26 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return _image_ground_connection.ImageGroundConnection_image_coordinate_with_status(self, Gc)
 
 
+    def image_coordinate_extended(self, Gc):
+        """
+
+        virtual void GeoCal::ImageGroundConnection::image_coordinate_extended(const GroundCoordinate &Gc, ImageCoordinate &Res, bool &Success)
+        const
+        Variation of image_coordinate, but we try to handle points out of the
+        time and sample range of the data (so this returns line and samples
+        outside of the range of the TimeTable and Camera).
+
+        In some cases this is more useful than having image_coordinate fail.
+        Note that we still might have Success false, if for example the point
+        is outside the range of the Orbit.
+
+        The default implementation just calls image_coordinate_with_status (so
+        no actual extension), but derived classes can supply a function if it
+        makes sense (e.g., IpiImageGroundConnection). 
+        """
+        return _image_ground_connection.ImageGroundConnection_image_coordinate_extended(self, Gc)
+
+
     def image_coordinate_jac_cf(self, Gc):
         """
 
@@ -861,6 +881,7 @@ ImageGroundConnection.ground_coordinate_dem = new_instancemethod(_image_ground_c
 ImageGroundConnection.ground_coordinate_approx_height = new_instancemethod(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_with_status = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_with_status, None, ImageGroundConnection)
+ImageGroundConnection.image_coordinate_extended = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_extended, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_cf_fd = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_cf_fd, None, ImageGroundConnection)
 ImageGroundConnection.image_coordinate_jac_parm = new_instancemethod(_image_ground_connection.ImageGroundConnection_image_coordinate_jac_parm, None, ImageGroundConnection)

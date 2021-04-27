@@ -6,6 +6,7 @@
 #include "ecr.h"
 #include <cstdlib>
 #include <dlfcn.h>
+#include <unistd.h>
 #include "boost/date_time/posix_time/posix_time.hpp"
 #ifdef HAVE_MSP
 #include "Plugin.h"
@@ -766,6 +767,9 @@ std::string IgcMsp::generate_rsm_tre
  const std::string& Rsm_config) const
 {
 #ifdef HAVE_MSP
+  // The report file gets appended to. Usually we just want "a report
+  // file", so we delete anything already there.
+  unlink(Report.c_str());
   return boost::dynamic_pointer_cast<IgcMspImp>(igc)->generate_rsm_tre(Report, Rsm_config);
 #else
   throw MspNotAvailableException();

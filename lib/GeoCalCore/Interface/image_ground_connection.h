@@ -310,6 +310,25 @@ public:
       Success = false;
     }
   }
+
+//-----------------------------------------------------------------------
+/// Variation of image_coordinate, but we try to handle points out of
+/// the time and sample range of the data (so this returns line and
+/// samples outside of the range of the TimeTable and Camera). In some
+/// cases this is more useful than having image_coordinate fail. Note
+/// that we still might have Success false, if for example the point
+/// is outside the range of the Orbit. 
+///
+/// The default implementation just calls image_coordinate_with_status
+/// (so no actual extension), but derived classes can supply a
+/// function if it makes sense (e.g., IpiImageGroundConnection).
+//-----------------------------------------------------------------------
+
+  virtual void image_coordinate_extended(const GroundCoordinate& Gc,
+					 ImageCoordinate& Res,
+					 bool& Success) const 
+  { image_coordinate_with_status(Gc, Res, Success); }
+  
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 

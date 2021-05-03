@@ -320,11 +320,11 @@ if(args.feature_match):
 else:
     tparr, diag = image_match_tp_collect(args, igc, mi, refimg, pool)
 
-if(args.outlier_reject_ransac):
+if(args.outlier_reject_ransac and len(tparr) > 0):
     tparr = geocal.outlier_reject_ransac(tparr, ref_image = refimg, 
                threshold = args.outlier_reject_ransac_threshold,
                diagnostic = diag)
-if(args.outlier_reject_ransac_surface_project):
+if(args.outlier_reject_ransac_surface_project and len(tparr) > 0):
     tparr = geocal.outlier_reject_ransac(tparr, ref_image = refimg, 
                igccol = igc, threshold = args.outlier_reject_ransac_threshold,
                diagnostic = diag)

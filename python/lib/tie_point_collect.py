@@ -313,7 +313,7 @@ class TiePointCollect(object):
         func = TiePointWrap(self)
         if(pool):
             res = pool.map(func, iplist, 
-                           len(iplist) // multiprocessing.cpu_count())
+                           max(len(iplist) // multiprocessing.cpu_count(), 1))
         else:
             res = list(map(func, iplist))
         log.info("Done with matching")

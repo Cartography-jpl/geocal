@@ -76,7 +76,7 @@ class RsmGridFixture : public RsmFixture {
 public:
   RsmGridFixture()
   {
-    rg_from_rpc = boost::make_shared<RsmGrid>(60,60,20);
+    rg_from_rpc = boost::make_shared<RsmGrid>(40,40,4, false, 7,7);
     double hmin = rpc.height_offset - rpc.height_scale;
     double hmax = rpc.height_offset + rpc.height_scale;
     double lmin = 0;

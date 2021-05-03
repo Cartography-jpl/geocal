@@ -10,7 +10,7 @@ def f(x):
 def test_basic():
     pool = Pool()
     print(multiprocessing.cpu_count())
-    print(pool.map(f, list(range(100)), 100 // multiprocessing.cpu_count()))
+    print(pool.map(f, list(range(100)), max(100 // multiprocessing.cpu_count(), 1)))
 
 def g(x, y):
     return x * y
@@ -23,4 +23,4 @@ def test_partial():
     # class, so this isn't too big of a deal
     pool = Pool()
     g2 = functools.partial(g, 10)
-    print(pool.map(g2, list(range(100)), 100 // multiprocessing.cpu_count()))
+    print(pool.map(g2, list(range(100)), max(100 // multiprocessing.cpu_count(), 1)))

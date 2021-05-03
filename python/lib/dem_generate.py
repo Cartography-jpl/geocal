@@ -265,22 +265,22 @@ class DemGenerate(object):
             numy = self.aoi.number_y_pixel
             numx = self.aoi.number_x_pixel
             if(numx > numy):
-                xstep = numx // multiprocessing.cpu_count()
+                xstep = max(numx // multiprocessing.cpu_count(), 1)
                 ystep = numy
             else:
                 xstep = numx
-                ystep = numy // multiprocessing.cpu_count()
+                ystep = max(numy // multiprocessing.cpu_count(), 1)
             for x in range(0, numx, xstep):
                 for y in range(0, numy, ystep):
                     arg.append([self.aoi.subset(x, y, xstep, ystep),
                                 include_image])
         else:
             if(lstart > sstart):
-                lstep = (lend - lstart) // multiprocessing.cpu_count()
+                lstep = max((lend - lstart) // multiprocessing.cpu_count(), 1)
                 sstep = send - sstart
             else:
                 lstep = lend - lstart
-                sstep = (send - sstart) // multiprocessing.cpu_count()
+                sstep = max((send - sstart) // multiprocessing.cpu_count(), 1)
             for ls in range(lstart, lend, lstep):
                 for ss in range(sstart, send, sstep):
                     arg.append([ls, ss, min(ls + lstep, lend),

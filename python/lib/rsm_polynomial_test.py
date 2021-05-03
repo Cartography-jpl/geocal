@@ -161,8 +161,8 @@ def test_grid_fit(rpc_data):
           int(rpc_data.smp.max()))
     lncalc, smpcalc = r.image_coordinate(rpc_data.lon,
                                          rpc_data.lat,rpc_data.h)
-    assert np.nanmax(abs(rpc_data.ln-lncalc)) < 0.003
-    assert np.nanmax(abs(rpc_data.smp-smpcalc)) < 0.06
+    assert np.nanmax(abs(rpc_data.ln-lncalc)) < 0.004
+    assert np.nanmax(abs(rpc_data.smp-smpcalc)) < 0.07
 
 @require_serialize
 def test_multi_section_grid(rpc_data):

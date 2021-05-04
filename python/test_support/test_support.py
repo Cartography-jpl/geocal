@@ -297,7 +297,7 @@ def rsm_rational_polynomial_lc(igc_rpc):
 @pytest.fixture(scope="function")
 def rsm_grid(igc_rpc):
     '''Create a RsmGrid that matches our rpc test fixture'''
-    r = RsmGrid(40,40,2)
+    r = RsmGrid(35,35,4)
     r.total_number_row_digit = 8
     r.total_number_col_digit = 8
     hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
@@ -492,6 +492,34 @@ def igc_half_meter_pushbroom():
         print("resolution sample dir: ", distance(gc1, gc3))
     return igc
 
+@pytest.fixture(scope="function")
+def igc_two_meter_pushbroom():
+    '''Pushbroom camera with a resolution of 2.0 m . 
+    This is 1024 x 1024 sized image'''
+    orb = KeplerOrbit()
+    tm = Time.parse_time("2015-02-03T10:00:00Z")
+    # Camera that has a roughly 0.5 meter resolution nadir looking, i.e.,
+    # about the resolution of WV-2
+    nline = 1024
+    nsamp = 1024
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 1, nsamp, 2e-3,
+                           2e-3, 2.85e3/4, FrameCoordinate(0,nsamp/2))
+    # Time delta that is roughly 0.5 meter apart
+    tdelta = 7.5e-5*4
+    dem = SimpleDem()
+    tt = ConstantSpacingTimeTable(tm, tm + tdelta * nline, tdelta)
+    # "Real" igc
+    ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
+    igc = IpiImageGroundConnection(ipi, dem, None)
+    if False:
+        ic = ImageCoordinate(igc.number_line / 2, igc.number_sample / 2)
+        gc1 = igc.ground_coordinate(ic)
+        gc2 = igc.ground_coordinate(ImageCoordinate(ic.line + 1, ic.sample))
+        gc3 = igc.ground_coordinate(ImageCoordinate(ic.line, ic.sample + 1))
+        print("resolution line dir: ", distance(gc1, gc2))
+        print("resolution sample dir: ", distance(gc1, gc3))
+    return igc
+
 def _zenith_angle(orb, tm, pt):
     '''Zenith angle, 180 degrees looks straight up'''
     clv = CartesianFixedLookVector(orb.position_cf(tm), pt)
@@ -552,4 +580,37 @@ def igc_staring(igc_half_meter_pushbroom):
         print("resolution bottom edge line dir: ", distance(gc1, gc2))
         print("resolution bottom edge sample dir: ", distance(gc1, gc3))
     return igc2
-       
+
+@pytest.fixture(scope="function")
+def igc_staring2(igc_two_meter_pushbroom):
+    '''This is a pushbroom camera where we adjust the gimbal angle that we view
+    at to stare near a fixed point (i.e., like Freebird)'''
+    if(not have_serialize_supported()):
+        raise SkipTest
+    igc = igc_two_meter_pushbroom
+    mi = cib01_mapinfo(2)
+    mi = mi.rotated_map(igc)
+    img = MemoryRasterImage(mi)
+    center = ImageCoordinate(img.number_line / 2, img.number_sample / 2)
+    uedge = ImageCoordinate(center.line - igc.number_line / 2, center.sample)
+    ledge = ImageCoordinate(center.line + igc.number_line / 2, center.sample)
+    orb = igc.ipi.orbit
+    # 90 seconds goes from roughly +- 45 degree angle with surface. This
+    # gives a pretty extreme bowtie, which is good for testing create a
+    # RSM to handle this
+    tstart = igc.ipi.min_time - 90
+    tend = igc.ipi.max_time + 90
+    tt = ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / (igc.number_line - 1))
+    odlist = []
+    # Little extra at ends, so orbit it larger than needed
+    for i in range(-100, igc.number_line + 100):
+        tm = tstart + (tend - tstart) / (igc.number_line - 1) * i
+        ic = ImageCoordinate(uedge.line + i, uedge.sample)
+        od = orb.orbit_data(tm)
+        od.quat_from_principal_gic(ic, img, igc.dem)
+        odlist.append(od)
+    orb2 = OrbitQuaternionList(odlist)
+    ipi = Ipi(orb2, igc.ipi.camera, 0, orb2.min_time, orb2.max_time, tt)
+    igc2 = IpiImageGroundConnection(ipi, igc.dem, None)
+    return igc2
+

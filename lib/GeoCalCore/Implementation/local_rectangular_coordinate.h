@@ -14,9 +14,12 @@ class ImageGroundConnection;
 
 class LocalRcParameter : public Printable<LocalRcParameter> {
 public:
+  enum CoordinateCreation {FOLLOW_SAMPLE_LOCAL, FOLLOW_LINE_LOCAL,
+    FOLLOW_SAMPLE_FULL, FOLLOW_LINE_FULL};
   LocalRcParameter() {}
   LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0,
-		   double Line = -1, double Sample = -1);
+		   double Line = -1, double Sample = -1,
+		   CoordinateCreation C = FOLLOW_SAMPLE_LOCAL);
   static void check_rc_assumption
   (const ImageGroundConnection& Igc, double Height = 0);
   virtual ~LocalRcParameter() {}

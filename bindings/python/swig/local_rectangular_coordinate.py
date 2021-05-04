@@ -196,12 +196,16 @@ class LocalRcParameter(geocal_swig.generic_object.GenericObject):
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    FOLLOW_SAMPLE_LOCAL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_SAMPLE_LOCAL
+    FOLLOW_LINE_LOCAL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_LINE_LOCAL
+    FOLLOW_SAMPLE_FULL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_SAMPLE_FULL
+    FOLLOW_LINE_FULL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_LINE_FULL
 
     def __init__(self, *args):
         """
 
         LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0, double Line=-1,
-        double Sample=-1)
+        double Sample=-1, CoordinateCreation C=FOLLOW_SAMPLE_LOCAL)
         Constructor.
 
         This sets up coordinates so the origin is at the given height on the
@@ -209,7 +213,16 @@ class LocalRcParameter(geocal_swig.generic_object.GenericObject):
 
         You can optionally override the line/sample used for the origin. Most
         of the time you don't want to do this, but this can be useful when
-        generating testing data. 
+        generating testing data.
+
+        There are a couple of reasonable ways to create this. The default is
+        to set Z in the look direction, X mostly in the image sample/scan
+        direction, and Y completing the right hand coordinate system. An
+        alternative is to have Y set to be in the image coordinate line/push
+        direction, and X completing the RHCS. Often these are similar, but we
+        may have difference if the image scan line isn't perpendicular to the
+        push direction. There is also a variation where we look local (+- 1
+        pixel) or over the whole image (+- number_line/number_sample). 
         """
         _local_rectangular_coordinate.LocalRcParameter_swiginit(self, _local_rectangular_coordinate.new_LocalRcParameter(*args))
 

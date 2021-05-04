@@ -64,30 +64,66 @@ template<class T> inline blitz::Array<T, 1> cross2
 /// You can optionally override the line/sample used for the
 /// origin. Most of the time you don't want to do this, but this can
 /// be useful when generating testing data.
+///
+/// There are a couple of reasonable ways to create this. The default
+/// is to set Z in the look direction, X mostly in the image
+/// sample/scan direction, and Y completing the right hand coordinate
+/// system. An alternative is to have Y set to be in the image
+/// coordinate line/push direction, and X completing the RHCS. Often these
+/// are similar, but we may have difference if the image scan line
+/// isn't perpendicular to the push direction. There is also a
+/// variation where we look local (+- 1 pixel) or over the whole image
+/// (+- number_line/number_sample).
 //-----------------------------------------------------------------------
 
 LocalRcParameter::LocalRcParameter
-(const ImageGroundConnection& Igc, double Height, double Line, double Sample)
+(const ImageGroundConnection& Igc, double Height, double Line, double Sample,
+ CoordinateCreation C)
 {
   ImageCoordinate ic(Igc.number_line() / 2, Igc.number_sample() / 2);
   if(Line >= 0)
     ic.line = Line;
   if(Sample >= 0)
     ic.sample = Sample;
-  ImageCoordinate ic_p1(ic.line, ic.sample + 1);
+  if(C != FOLLOW_SAMPLE_LOCAL && C != FOLLOW_LINE_LOCAL &&
+     C != FOLLOW_SAMPLE_FULL && C != FOLLOW_LINE_FULL)
+    throw Exception("Unrecognized CoordinateCreation");
+  ImageCoordinate ic_p1;
+  ImageCoordinate ic_p2;
+  if(C == FOLLOW_SAMPLE_LOCAL) {
+    ic_p1 = ImageCoordinate(ic.line, ic.sample);
+    ic_p2 = ImageCoordinate(ic.line, ic.sample + 1);
+  } else if(C == FOLLOW_LINE_LOCAL) {
+    ic_p1 = ImageCoordinate(ic.line, ic.sample);
+    ic_p2 = ImageCoordinate(ic.line+1, ic.sample);
+  } else if(C == FOLLOW_SAMPLE_FULL) {
+    ic_p1 = ImageCoordinate(ic.line, 0);
+    ic_p2 = ImageCoordinate(ic.line, Igc.number_sample()-1);
+  } else {
+    ic_p1 = ImageCoordinate(0, ic.sample);
+    ic_p2 = ImageCoordinate(Igc.number_line()-1, ic.sample);
+  }
   cf_prototype =
     Igc.ground_coordinate_approx_height(ic, Height)->convert_to_cf();
   boost::array<double, 3> p1 = cf_prototype->position;
   boost::array<double, 3> p2 = Igc.ground_coordinate_approx_height(ic, Height + 100)->convert_to_cf()->position;
-  boost::array<double, 3> p3 = Igc.ground_coordinate_approx_height(ic_p1, Height)->convert_to_cf()->position;
   blitz::Array<double, 1> z(3), x(3), y(3);
   z = p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2];
   z /= normb(z);
-  x = p3[0] - p1[0], p3[1] - p1[1], p3[2] - p1[2];
-  x -= z * dotb(x,z);
-  x /= normb(x);
-  y = cross2(z, x);
   cf_offset = p1;
+  p1 = Igc.ground_coordinate_approx_height(ic_p1, Height)->convert_to_cf()->position;
+  p2 = Igc.ground_coordinate_approx_height(ic_p2, Height)->convert_to_cf()->position;
+  if(C == FOLLOW_SAMPLE_LOCAL || C == FOLLOW_SAMPLE_FULL) {
+    x = p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2];
+    x -= z * dotb(x,z);
+    x /= normb(x);
+    y = cross2(z, x);
+  } else {
+    y = p2[0] - p1[0], p2[1] - p1[1], p2[2] - p1[2];
+    y -= z * dotb(y,z);
+    y /= normb(y);
+    x = cross2(y, z);
+  }
   cf_to_rc[0][0]=x(0);
   cf_to_rc[0][1]=x(1);
   cf_to_rc[0][2]=x(2);

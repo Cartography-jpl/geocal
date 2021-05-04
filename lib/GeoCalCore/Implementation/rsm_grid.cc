@@ -109,6 +109,68 @@ inline double interp_nan(double x1, double x2, double delta)
   return x1 + (x2 - x1) * delta;
 }
 
+inline AutoDerivative<double> interp_nan(double x1, double x2,
+			 const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1))
+    return x2;
+  if(std::isnan(x2))
+    return x1;
+  return x1 + (x2 - x1) * delta;
+}
+
+inline AutoDerivative<double> interp_nan
+(const AutoDerivative<double>& x1, const AutoDerivative<double>& x2,
+ const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1.value()))
+    return x2;
+  if(std::isnan(x2.value()))
+    return x1;
+  return x1 + (x2 - x1) * delta;
+}
+
+inline double lagrange_cubic_interp_nan(double x1, double x2,
+					double x3, double delta)
+{
+  // For nans, fall back onto the linear interpolation)
+  if(std::isnan(x1))
+    return interp_nan(x2, x3, delta);
+  if(std::isnan(x3))
+    return interp_nan(x1, x2, 1+delta);
+  if(std::isnan(x2))
+    return std::numeric_limits<double>::quiet_NaN();
+  return x1 * (-0.5 * delta + 0.5 * delta * delta) + x2 * (1 - delta * delta) +
+    x3 * (0.5 * delta + 0.5 * delta * delta);
+}
+
+inline AutoDerivative<double> lagrange_cubic_interp_nan
+(AutoDerivative<double>& x1, AutoDerivative<double>& x2,
+ AutoDerivative<double>& x3, const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1.value()))
+    return interp_nan(x2, x3, delta);
+  if(std::isnan(x3.value()))
+    return interp_nan(x1, x2, 1+delta);
+  if(std::isnan(x2.value()))
+    return std::numeric_limits<double>::quiet_NaN();
+  return x1 * (-0.5 * delta + 0.5 * delta * delta) + x2 * (1 - delta * delta) +
+    x3 * (0.5 * delta + 0.5 * delta * delta);
+}
+
+inline AutoDerivative<double> lagrange_cubic_interp_nan
+(double x1, double x2, double x3, const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1))
+    return interp_nan(x2, x3, delta);
+  if(std::isnan(x3))
+    return interp_nan(x1, x2, 1+delta);
+  if(std::isnan(x2))
+    return std::numeric_limits<double>::quiet_NaN();
+  return x1 * (-0.5 * delta + 0.5 * delta * delta) + x2 * (1 - delta * delta) +
+    x3 * (0.5 * delta + 0.5 * delta * delta);
+}
+
 //-----------------------------------------------------------------------
 /// Apply the grid to the given X, Y, and Z value.
 //-----------------------------------------------------------------------
@@ -151,46 +213,69 @@ ImageCoordinate RsmGrid::image_coordinate
       k_delta = 1;
     }
   }
-  if(i < 0 || i + 1 >= line_.rows() ||
-     j < 0 || j + 1 >= line_.cols() ||
-     k < 0 || k + 1 >= line_.depth())
+  if(i < 0 || i >= line_.rows() ||
+     j < 0 || j >= line_.cols() ||
+     k < 0 || k >= line_.depth())
     return ImageCoordinate(std::numeric_limits<double>::quiet_NaN(),
 			   std::numeric_limits<double>::quiet_NaN());
-  // Bilinear interpolation. Should add 3x3 lagrange interpolation at
-  // some point according to the RSM documentation
-  double xinter_line[2][2],
-    xinter_sample[2][2];
-  for(int i1 = 0; i1 < 2; ++i1)
-    for(int i2 = 0; i2 < 2; ++i2) {
+  // Lagrange cubit interpolation. 
+  double xinter_line[3][3],
+    xinter_sample[3][3];
+  for(int i1 = 0; i1 < 3; ++i1)
+    for(int i2 = 0; i2 < 3; ++i2) {
       xinter_line[i1][i2] =
-	interp_nan(line_(i,j+i1,k+i2), line_(i+1,j+i1,k+i2), i_delta);
+	lagrange_cubic_interp_nan(line_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  line_value_or_nan(i,j-1+i1,k-1+i2),
+				  line_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
       xinter_sample[i1][i2] =
-	interp_nan(sample_(i,j+i1,k+i2), sample_(i+1,j+i1,k+i2), i_delta);
+	lagrange_cubic_interp_nan(sample_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
     }
-  double yinter_line[2], yinter_sample[2];
-  for(int i1 = 0; i1 < 2; ++i1) {
+  double yinter_line[3], yinter_sample[3];
+  for(int i1 = 0; i1 < 3; ++i1) {
     yinter_line[i1] =
-      interp_nan(xinter_line[0][i1], xinter_line[1][i1], j_delta);
+      lagrange_cubic_interp_nan(xinter_line[0][i1],
+				xinter_line[1][i1],
+				xinter_line[2][i1],
+				j_delta);
     yinter_sample[i1] = 
-      interp_nan(xinter_sample[0][i1], xinter_sample[1][i1], j_delta);
+      lagrange_cubic_interp_nan(xinter_sample[0][i1],
+				xinter_sample[1][i1],
+				xinter_sample[2][i1],
+				j_delta);
   }
-  double ln = interp_nan(yinter_line[0], yinter_line[1], k_delta);
-  double smp = interp_nan(yinter_sample[0], yinter_sample[1], k_delta);
+  double ln = lagrange_cubic_interp_nan(yinter_line[0], yinter_line[1],
+					yinter_line[2], k_delta);
+  double smp = lagrange_cubic_interp_nan(yinter_sample[0], yinter_sample[1],
+					yinter_sample[2], k_delta);
 
   // Bunch of diagnostic messages. Leave stubbed out for now, we may
   // want this when we go to the lagrange interpolation to debug
   // problems.
   if(false) {
+    std::cerr << "Row section number: " << row_section_number() << "\n"
+	      << "Col section number: " << col_section_number() << "\n";
+    std::cerr << "X: " << X << "\n"
+	      << "Y: " << Y << "\n"
+	      << "Z: " << Z << "\n";
+    std::cerr << "i: " << i << "\n"
+	      << "j: " << j << "\n"
+	      << "k: " << k << "\n";
+    std::cerr << "line shape:   " << line_.shape() << "\n"
+	      << "sample shape: " << sample_.shape() << "\n";
     for(int i1 = 0; i1 < 2; ++i1)
       for(int i2 = 0; i2 < 2; ++i2) 
 	for(int i3 = 0; i3 < 2; ++i3)
 	  std::cerr << "line(" << i1 << ", " << i2 << ", " << i3 << "): "
-		    << line_(i,j+i1,k+i2) << "\n";
+		    << line_(i+i1,j+i2,k+i3) << "\n";
     for(int i1 = 0; i1 < 2; ++i1)
       for(int i2 = 0; i2 < 2; ++i2) 
 	for(int i3 = 0; i3 < 2; ++i3)
 	  std::cerr << "sample(" << i1 << ", " << i2 << ", " << i3 << "): "
-		    << sample_(i,j+i1,k+i2) << "\n";
+		    << sample_(i+i1,j+i2,k+i3) << "\n";
     for(int i1 = 0; i1 < 2; ++i1)
       for(int i2 = 0; i2 < 2; ++i2) 
 	std::cerr << "xinter_line(" << i1 << ", " << i2 << "): "
@@ -490,34 +575,49 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
       k_delta = 1;
     }
   }
-  if(i < 0 || i + 1 >= line_.rows() ||
-     j < 0 || j + 1 >= line_.cols() ||
-     k < 0 || k + 1 >= line_.depth()) {
+  if(i < 0 || i >= line_.rows() ||
+     j < 0 || j >= line_.cols() ||
+     k < 0 || k >= line_.depth()) {
     res = 0;
     return res;
   }
-  // Bilinear interpolation. Should add 3x3 lagrange interpolation at
-  // some point according to the RSM documentation
-  AutoDerivative<double> xinter_line[2][2],
-    xinter_sample[2][2];
-  for(int i1 = 0; i1 < 2; ++i1)
-    for(int i2 = 0; i2 < 2; ++i2) {
-      xinter_line[i1][i2] = line_(i,j+i1,k+i2) +
-	(line_(i+1,j+i1,k+i2)-line_(i,j+i1,k+i2)) * i_delta;
-      xinter_sample[i1][i2] = sample_(i,j+i1,k+i2) +
-	(sample_(i+1,j+i1,k+i2)-sample_(i,j+i1,k+i2)) * i_delta;
+  // Lagrange cubit interpolation. 
+  AutoDerivative<double> xinter_line[3][3],
+    xinter_sample[3][3];
+  for(int i1 = 0; i1 < 3; ++i1)
+    for(int i2 = 0; i2 < 3; ++i2) {
+      xinter_line[i1][i2] =
+	lagrange_cubic_interp_nan(line_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  line_value_or_nan(i,j-1+i1,k-1+i2),
+				  line_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
+      xinter_sample[i1][i2] =
+	lagrange_cubic_interp_nan(sample_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
     }
-  AutoDerivative<double> yinter_line[2], yinter_sample[2];
-  for(int i1 = 0; i1 < 2; ++i1) {
-    yinter_line[i1] = xinter_line[0][i1] +
-      (xinter_line[1][i1]-xinter_line[0][i1])*j_delta;
-    yinter_sample[i1] = xinter_sample[0][i1] +
-      (xinter_sample[1][i1]-xinter_sample[0][i1])*j_delta;
+  AutoDerivative<double> yinter_line[3], yinter_sample[3];
+  for(int i1 = 0; i1 < 3; ++i1) {
+    yinter_line[i1] =
+      lagrange_cubic_interp_nan(xinter_line[0][i1],
+				xinter_line[1][i1],
+				xinter_line[2][i1],
+				j_delta);
+    yinter_sample[i1] = 
+      lagrange_cubic_interp_nan(xinter_sample[0][i1],
+				xinter_sample[1][i1],
+				xinter_sample[2][i1],
+				j_delta);
   }
-  AutoDerivative<double> ln =
-    yinter_line[0] + (yinter_line[1]-yinter_line[0])*k_delta;
-  AutoDerivative<double> smp = yinter_sample[0] +
-    (yinter_sample[1]-yinter_sample[0])*k_delta;
+  AutoDerivative<double> ln = lagrange_cubic_interp_nan(yinter_line[0],
+							yinter_line[1],
+							yinter_line[2],
+							k_delta);
+  AutoDerivative<double> smp = lagrange_cubic_interp_nan(yinter_sample[0],
+							 yinter_sample[1],
+							 yinter_sample[2],
+							 k_delta);
   res(0,ra) = ln.gradient();
   res(1,ra) = smp.gradient();
   return res;
@@ -571,7 +671,8 @@ std::string RsmGrid::tre_string() const
   std::string row_fit_error="";
   std::string col_fit_error="";
   // Linear interpolation
-  std::string int_ord = "1";
+  //std::string int_ord = "1";
+  std::string int_ord = "2";
   res += str_check_size(secformat % row_section_number_ % col_section_number_
 			% row_fit_error % col_fit_error % int_ord,
 			3 + 3 + 21 + 21 + 1);

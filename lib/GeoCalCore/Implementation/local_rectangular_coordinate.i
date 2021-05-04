@@ -20,9 +20,12 @@
 namespace GeoCal {
 class LocalRcParameter : public GenericObject {
 public:
+  enum CoordinateCreation {FOLLOW_SAMPLE_LOCAL, FOLLOW_LINE_LOCAL,
+    FOLLOW_SAMPLE_FULL, FOLLOW_LINE_FULL};
   LocalRcParameter();
   LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0,
-		   double Line = -1, double Sample = -1);
+		   double Line = -1, double Sample = -1,
+		   CoordinateCreation C = FOLLOW_SAMPLE_LOCAL);
   static void check_rc_assumption
   (const ImageGroundConnection& Igc, double Height = 0);
   std::string print_to_string() const;

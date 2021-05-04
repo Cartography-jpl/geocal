@@ -275,6 +275,18 @@ private:
   // code. We can revisit this if needed, this is really just an
   // internal convention we use and we could change this if desired.
   blitz::Array<double, 3> line_, sample_;
+  double line_value_or_nan(int i, int j, int k) const
+  { if(i < 0 || j < 0 || k < 0 || i >= line_.rows() || j >= line_.cols() ||
+       k >= line_.depth())
+      return std::numeric_limits<double>::quiet_NaN();
+    return line_(i,j,k);
+  }
+  double sample_value_or_nan(int i, int j, int k) const
+  { if(i < 0 || j < 0 || k < 0 || i >= sample_.rows() || j >= sample_.cols() ||
+       k >= sample_.depth())
+      return std::numeric_limits<double>::quiet_NaN();
+    return sample_(i,j,k);
+  }
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;
   bool ignore_igc_error_in_fit_;

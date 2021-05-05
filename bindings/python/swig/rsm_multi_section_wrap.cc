@@ -7281,6 +7281,255 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_start(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  GeoCal::CoordinateConverter *arg3 = 0 ;
+  double arg4 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  PyObject *swig_obj[5] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmMultiSection_fit_start",5,5,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_fit_start" "', argument " "1"" of type '" "GeoCal::RsmMultiSection *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmMultiSection_fit_start" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmMultiSection_fit_start" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CoordinateConverter *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RsmMultiSection_fit_start" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmMultiSection_fit_start" "', argument " "3"" of type '" "GeoCal::CoordinateConverter const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3);
+        arg3 = const_cast< GeoCal::CoordinateConverter * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmMultiSection_fit_start" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmMultiSection_fit_start" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      (arg1)->fit_start((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  GeoCal::ImageGroundConnection *arg4 = 0 ;
+  GeoCal::CoordinateConverter *arg5 = 0 ;
+  double arg6 ;
+  double arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared4 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  boost::shared_ptr< GeoCal::CoordinateConverter const > tempshared5 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  PyObject *swig_obj[7] ;
+  boost::shared_ptr< GeoCal::RsmBase > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmMultiSection_fit_section",7,7,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_fit_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmMultiSection_fit_section" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmMultiSection_fit_section" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "RsmMultiSection_fit_section" "', argument " "4"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmMultiSection_fit_section" "', argument " "4"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp4);
+        arg4 = const_cast< GeoCal::ImageGroundConnection * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp4)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CoordinateConverter *ptr;
+    res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], (void**)(&ptr), SWIGTYPE_p_GeoCal__CoordinateConverter,  0 , &newmem);
+    if (SWIG_IsOK(res5)) {
+      arg5 = ptr;
+    } else {
+      res5 = SWIG_ConvertPtrAndOwn(swig_obj[4], &argp5, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CoordinateConverter_t,  0 , &newmem);
+      if (!SWIG_IsOK(res5)) {
+        SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "RsmMultiSection_fit_section" "', argument " "5"" of type '" "GeoCal::CoordinateConverter const &""'");
+      }
+      if (!argp5) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmMultiSection_fit_section" "', argument " "5"" of type '" "GeoCal::CoordinateConverter const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared5 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp5);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp5);
+        arg5 = const_cast< GeoCal::CoordinateConverter * >(tempshared5.get());
+      } else {
+        arg5 = const_cast< GeoCal::CoordinateConverter * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CoordinateConverter > * >(argp5)->get());
+      }
+    }
+  }
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmMultiSection_fit_section" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "RsmMultiSection_fit_section" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  {
+    try {
+      result = (boost::shared_ptr< GeoCal::RsmBase > *) &(arg1)->fit_section(arg2,arg3,(GeoCal::ImageGroundConnection const &)*arg4,(GeoCal::CoordinateConverter const &)*arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmMultiSection_section__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
@@ -7767,6 +8016,23 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"double GeoCal::RsmMultiSection::number_sample_per_section() const\n"
 		"\n"
+		""},
+	 { (char *)"RsmMultiSection_fit_start", _wrap_RsmMultiSection_fit_start, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
+		"double Min_height, double Max_height)\n"
+		"Fit just the low order polynomial.\n"
+		"\n"
+		"This is intended for doing parallel fitting of the sections in python.\n"
+		"\n"
+		""},
+	 { (char *)"RsmMultiSection_fit_section", _wrap_RsmMultiSection_fit_section, METH_VARARGS, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const\n"
+		"CoordinateConverter &Cconv, double Min_height, double Max_height)\n"
+		"Fit a single segment.\n"
+		"\n"
+		"This is intended for doing parallel fitting in python. \n"
 		""},
 	 { (char *)"RsmMultiSection_section", _wrap_RsmMultiSection_section, METH_VARARGS, (char *)"\n"
 		"\n"

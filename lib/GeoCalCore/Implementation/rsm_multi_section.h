@@ -87,6 +87,13 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
+  void fit_start(const ImageGroundConnection& Igc,
+		 const CoordinateConverter& Cconv,
+		 double Min_height, double Max_height);
+  const boost::shared_ptr<RsmBase>&
+  fit_section(int i, int j, const ImageGroundConnection& Igc,
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height);
   virtual int min_line() const {return lp.min_line();}
   virtual int max_line() const {return lp.max_line();}
   virtual int min_sample() const {return lp.min_sample();}

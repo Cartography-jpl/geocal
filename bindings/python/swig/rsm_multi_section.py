@@ -270,6 +270,31 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
         return self._v_number_sample_per_section()
 
 
+    def fit_start(self, Igc, Cconv, Min_height, Max_height):
+        """
+
+        void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
+        double Min_height, double Max_height)
+        Fit just the low order polynomial.
+
+        This is intended for doing parallel fitting of the sections in python.
+
+        """
+        return _rsm_multi_section.RsmMultiSection_fit_start(self, Igc, Cconv, Min_height, Max_height)
+
+
+    def fit_section(self, i, j, Igc, Cconv, Min_height, Max_height):
+        """
+
+        const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const
+        CoordinateConverter &Cconv, double Min_height, double Max_height)
+        Fit a single segment.
+
+        This is intended for doing parallel fitting in python. 
+        """
+        return _rsm_multi_section.RsmMultiSection_fit_section(self, i, j, Igc, Cconv, Min_height, Max_height)
+
+
     def section(self, *args):
         """
 
@@ -350,6 +375,8 @@ RsmMultiSection._v_number_row_section = new_instancemethod(_rsm_multi_section.Rs
 RsmMultiSection._v_number_col_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_col_section, None, RsmMultiSection)
 RsmMultiSection._v_number_line_per_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_line_per_section, None, RsmMultiSection)
 RsmMultiSection._v_number_sample_per_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_sample_per_section, None, RsmMultiSection)
+RsmMultiSection.fit_start = new_instancemethod(_rsm_multi_section.RsmMultiSection_fit_start, None, RsmMultiSection)
+RsmMultiSection.fit_section = new_instancemethod(_rsm_multi_section.RsmMultiSection_fit_section, None, RsmMultiSection)
 RsmMultiSection.section = new_instancemethod(_rsm_multi_section.RsmMultiSection_section, None, RsmMultiSection)
 RsmMultiSection.section_ls = new_instancemethod(_rsm_multi_section.RsmMultiSection_section_ls, None, RsmMultiSection)
 RsmMultiSection.section_xyz = new_instancemethod(_rsm_multi_section.RsmMultiSection_section_xyz, None, RsmMultiSection)

@@ -14,6 +14,8 @@ import io
 import numpy as np
 import pandas as pd
 import os, subprocess
+import itertools
+from multiprocessing import Pool
 
 def create_image_seg(f):
     img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
@@ -971,6 +973,36 @@ def setup_grid(igc, ccov, num_x, num_y, num_z, num_x_sec, total_number_row_digit
         raise RuntimeError("Exceeds maximum number of sections")
     return Rsm(RsmMultiSection(igc.number_line, igc.number_sample, n, num_x_sec, g),  ccov)
 
+# This code isn't all that slow, but run in parallel just to test out
+# that functionality.
+class RsmFitWrap:
+    def __init__(self, rsm, igc, min_h, max_h):
+        self.rsm = rsm
+        self.igc = igc
+        self.min_h = min_h
+        self.max_h = max_h
+    def __call__(self, sec_ind):
+        i, j = sec_ind
+        return self.rsm.rsm_base.fit_section(i, j, self.igc,
+                                             self.rsm.coordinate_converter,
+                                             self.min_h, self.max_h)
+
+def rsm_parallel_fit(rsm, igc, min_h, max_h, pool = None):
+    rsm.rsm_base.fit_start(igc, rsm.coordinate_converter, min_h, max_h)
+    func = RsmFitWrap(rsm, igc, min_h, max_h)
+    sec_index_it = itertools.product(range(rsm.rsm_base.number_row_section),
+                                     range(rsm.rsm_base.number_col_section))
+    if(pool):
+        print("Starting pool")
+        sec_list = pool.map(func, sec_index_it)
+    else:
+        sec_list = map(func, sec_index_it)
+    for sec in sec_list:
+        rsm.rsm_base.section(sec.row_section_number - 1,
+                             sec.col_section_number - 1, sec)
+    rsm.fill_in_ground_domain_vertex(min_h, max_h);
+    return rsm
+    
 @require_msp
 @require_pynitf
 def test_bowtie_grid(isolated_dir, igc_staring2):
@@ -978,7 +1010,8 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
                                   LocalRcParameter.FOLLOW_LINE_FULL))
     r = setup_grid(igc, ccov, 100,1000,4, 4)
-    r.fit(igc,-100,100)
+    pool = Pool(10)
+    rsm_parallel_fit(r, igc, -100, 100, pool=pool)
     f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = r

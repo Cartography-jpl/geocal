@@ -190,6 +190,41 @@ void RsmMultiSection::fit
 		    std::min(int(nsamp_sec * (j + 1)) + border_, Max_sample));
 }
 
+//-----------------------------------------------------------------------
+/// Fit just the low order polynomial. This is intended for doing
+/// parallel fitting of the sections in python.
+//-----------------------------------------------------------------------
+
+void RsmMultiSection::fit_start(const ImageGroundConnection& Igc,
+				const CoordinateConverter& Cconv,
+				double Min_height, double Max_height)
+{
+  lp.fit(Igc, Cconv, Min_height, Max_height, 0, Igc.number_line(),
+	 0, Igc.number_sample());
+}
+
+
+//-----------------------------------------------------------------------
+/// Fit a single segment. This is intended for doing parallel fitting
+/// in python.
+//-----------------------------------------------------------------------
+
+const boost::shared_ptr<RsmBase>&
+RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection& Igc,
+	    const CoordinateConverter& Cconv,
+	    double Min_height, double Max_height)
+{
+  range_check(i, 0, sec.rows());
+  range_check(j, 0, sec.cols());
+  sec(i,j)->fit(Igc, Cconv, Min_height, Max_height,
+		std::max(int(nline_sec * i) - border_, 0),
+		std::min(int(nline_sec * (i + 1)) + border_,
+			 Igc.number_line()),
+		std::max(int(nsamp_sec * j) - border_, 0),
+		std::min(int(nsamp_sec * (j + 1)) + border_,
+			 Igc.number_sample()));
+  return sec(i,j);
+}
 
 //-----------------------------------------------------------------------
 /// Print to stream.

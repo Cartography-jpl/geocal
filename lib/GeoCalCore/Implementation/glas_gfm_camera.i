@@ -43,7 +43,9 @@ public:
   virtual ScLookVectorWithDerivative 
   sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
 				 int Band) const;
-  
+
+  %python_attribute_with_set(frame_to_sc, boost::math::quaternion<double>);
+  %python_attribute_with_set(frame_to_sc_with_derivative, boost::math::quaternion<AutoDerivative<double> >);
   %python_attribute_with_set(id, std::string);
   %python_attribute(sensor_type, std::string);
   %python_attribute_with_set(band_type, std::string);

@@ -618,8 +618,15 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
 							 yinter_sample[1],
 							 yinter_sample[2],
 							 k_delta);
-  res(0,ra) = ln.gradient();
-  res(1,ra) = smp.gradient();
+  if(ln.is_constant())
+    res(0, ra) = 0;
+  else
+    res(0,ra) = ln.gradient();
+  
+  if(smp.is_constant())
+    res(1,ra) = 0;
+  else
+    res(1,ra) = smp.gradient();
   return res;
 }
 

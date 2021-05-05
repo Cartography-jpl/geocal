@@ -279,6 +279,26 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
         return _rsm_multi_section.RsmMultiSection_section(self, *args)
 
 
+    def section_ls(self, Line, Sample):
+        """
+
+        const boost::shared_ptr< RsmBase > & RsmMultiSection::section_ls(double Line, double Sample) const
+        Return the section that handles the given image coordinate line and
+        sample. 
+        """
+        return _rsm_multi_section.RsmMultiSection_section_ls(self, Line, Sample)
+
+
+    def section_xyz(self, X, Y, Z):
+        """
+
+        const boost::shared_ptr< RsmBase > & RsmMultiSection::section_xyz(double X, double Y, double Z) const
+        Use low order polynomial to determine section for a particular
+        coordinate. 
+        """
+        return _rsm_multi_section.RsmMultiSection_section_xyz(self, X, Y, Z)
+
+
     def tre_string(self):
         """
 
@@ -331,6 +351,8 @@ RsmMultiSection._v_number_col_section = new_instancemethod(_rsm_multi_section.Rs
 RsmMultiSection._v_number_line_per_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_line_per_section, None, RsmMultiSection)
 RsmMultiSection._v_number_sample_per_section = new_instancemethod(_rsm_multi_section.RsmMultiSection__v_number_sample_per_section, None, RsmMultiSection)
 RsmMultiSection.section = new_instancemethod(_rsm_multi_section.RsmMultiSection_section, None, RsmMultiSection)
+RsmMultiSection.section_ls = new_instancemethod(_rsm_multi_section.RsmMultiSection_section_ls, None, RsmMultiSection)
+RsmMultiSection.section_xyz = new_instancemethod(_rsm_multi_section.RsmMultiSection_section_xyz, None, RsmMultiSection)
 RsmMultiSection.tre_string = new_instancemethod(_rsm_multi_section.RsmMultiSection_tre_string, None, RsmMultiSection)
 RsmMultiSection_swigregister = _rsm_multi_section.RsmMultiSection_swigregister
 RsmMultiSection_swigregister(RsmMultiSection)

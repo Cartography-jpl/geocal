@@ -275,6 +275,43 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
       self._v_focal_length_with_derivative(value)
 
 
+    def _v_frame_to_sc(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::frame_to_sc(const boost::math::quaternion< double > &frame_to_sc_q)
+        Set frame to spacecraft quaternion. 
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_frame_to_sc(self, *args)
+
+
+    @property
+    def frame_to_sc(self):
+        return self._v_frame_to_sc()
+
+    @frame_to_sc.setter
+    def frame_to_sc(self, value):
+      self._v_frame_to_sc(value)
+
+
+    def _v_frame_to_sc_with_derivative(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::frame_to_sc_with_derivative(const boost::math::quaternion< AutoDerivative< double > >
+        &frame_to_sc_q)
+        Set frame to spacecraft quaternion. 
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_frame_to_sc_with_derivative(self, *args)
+
+
+    @property
+    def frame_to_sc_with_derivative(self):
+        return self._v_frame_to_sc_with_derivative()
+
+    @frame_to_sc_with_derivative.setter
+    def frame_to_sc_with_derivative(self, value):
+      self._v_frame_to_sc_with_derivative(value)
+
+
     def _v_id(self, *args):
         """
 
@@ -688,6 +725,8 @@ GlasGfmCamera.set_number_line = new_instancemethod(_glas_gfm_camera.GlasGfmCamer
 GlasGfmCamera.set_number_sample = new_instancemethod(_glas_gfm_camera.GlasGfmCamera_set_number_sample, None, GlasGfmCamera)
 GlasGfmCamera._v_focal_length = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_focal_length, None, GlasGfmCamera)
 GlasGfmCamera._v_focal_length_with_derivative = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_focal_length_with_derivative, None, GlasGfmCamera)
+GlasGfmCamera._v_frame_to_sc = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_frame_to_sc, None, GlasGfmCamera)
+GlasGfmCamera._v_frame_to_sc_with_derivative = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_frame_to_sc_with_derivative, None, GlasGfmCamera)
 GlasGfmCamera._v_id = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_id, None, GlasGfmCamera)
 GlasGfmCamera._v_sensor_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_sensor_type, None, GlasGfmCamera)
 GlasGfmCamera._v_band_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_band_type, None, GlasGfmCamera)

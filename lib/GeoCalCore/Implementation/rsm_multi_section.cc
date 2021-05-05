@@ -322,16 +322,28 @@ double RsmMultiSection::max_z() const
   return res;
 }
 
-const RsmBase& RsmMultiSection::section_ls(double Line, double Sample) const
+//-----------------------------------------------------------------------
+/// Return the section that handles the given image coordinate line
+/// and sample.
+//-----------------------------------------------------------------------
+
+const boost::shared_ptr<RsmBase>&
+RsmMultiSection::section_ls(double Line, double Sample) const
 {
   int i = floor(Line / nline_sec);
   int j = floor(Sample / nsamp_sec);
   i = std::min(std::max(i,0), sec.rows() - 1);
   j = std::min(std::max(j,0), sec.cols() - 1);
-  return *sec(i,j);
+  return sec(i,j);
 }
 
-const RsmBase& RsmMultiSection::section_xyz(double X, double Y, double Z) const
+//-----------------------------------------------------------------------
+/// Use low order polynomial to determine section for a particular
+/// coordinate.
+//-----------------------------------------------------------------------
+
+const boost::shared_ptr<RsmBase>&
+RsmMultiSection::section_xyz(double X, double Y, double Z) const
 {
   ImageCoordinate ic = lp.image_coordinate(X,Y,Z);
   return section_ls(ic.line,ic.sample);

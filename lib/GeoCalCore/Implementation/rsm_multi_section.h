@@ -26,7 +26,7 @@ public:
   }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z)
     const
-  { return section_xyz(X,Y,Z).image_coordinate(X,Y,Z);}
+  { return section_xyz(X,Y,Z)->image_coordinate(X,Y,Z);}
   virtual blitz::Array<double, 2> image_coordinate
   (const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
    const blitz::Array<double, 1>& Z) const;
@@ -39,7 +39,7 @@ public:
 
   virtual blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const 
-  { return section_xyz(X,Y,Z).image_coordinate_jacobian(X,Y,Z);}
+  { return section_xyz(X,Y,Z)->image_coordinate_jacobian(X,Y,Z);}
   
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image
@@ -48,15 +48,15 @@ public:
   
   virtual void initial_guess(double Line, double Sample, double Z,
 			     double& X_guess, double& Y_guess) const
-  { section_ls(Line,Sample).initial_guess(Line, Sample, Z, X_guess,
-					  Y_guess);} 
+  { section_ls(Line,Sample)->initial_guess(Line, Sample, Z, X_guess,
+					   Y_guess);} 
 
 //-----------------------------------------------------------------------
 /// Initial guess at Z, if we need to find that also.
 //-----------------------------------------------------------------------
 
   virtual double initial_guess_z(double Line, double Sample) const
-  { return section_ls(Line,Sample).initial_guess_z(Line, Sample); }
+  { return section_ls(Line,Sample)->initial_guess_z(Line, Sample); }
   
 //-----------------------------------------------------------------------
 /// Fit that approximates the calculation done by a ImageGroundConnection.
@@ -137,6 +137,10 @@ public:
       for(int j = 0; j < sec.cols(); ++j)
 	sec(i, j)->rsm_suport_data_edition(V);
   }
+  const boost::shared_ptr<RsmBase>&
+  section_ls(double Line, double Sample) const;
+  const boost::shared_ptr<RsmBase>&
+  section_xyz(double X, double Y, double Z) const;
 protected:
   RsmMultiSection() {}
 private:
@@ -144,8 +148,6 @@ private:
   double nline_sec, nsamp_sec;
   blitz::Array<boost::shared_ptr<RsmBase>, 2> sec;
   RsmLowOrderPolynomial lp;
-  const RsmBase& section_ls(double Line, double Sample) const;
-  const RsmBase& section_xyz(double X, double Y, double Z) const;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

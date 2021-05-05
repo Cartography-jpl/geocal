@@ -31,6 +31,10 @@ public:
   %python_attribute(number_sample_per_section, double);
   boost::shared_ptr<RsmBase> section(int i, int j) const;
   void section(int i, int j, const boost::shared_ptr<RsmBase>& V);
+  const boost::shared_ptr<RsmBase>&
+  section_ls(double Line, double Sample) const;
+  const boost::shared_ptr<RsmBase>&
+  section_xyz(double X, double Y, double Z) const;
   std::string tre_string() const;
   static boost::shared_ptr<RsmMultiSection>
   read_tre_string(const std::string& Tre_in);

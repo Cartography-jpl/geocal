@@ -7451,6 +7451,134 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmMultiSection_section_ls(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  boost::shared_ptr< GeoCal::RsmBase > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmMultiSection_section_ls",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_section_ls" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmMultiSection_section_ls" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmMultiSection_section_ls" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = (boost::shared_ptr< GeoCal::RsmBase > *) &((GeoCal::RsmMultiSection const *)arg1)->section_ls(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_section_xyz(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  boost::shared_ptr< GeoCal::RsmBase > *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmMultiSection_section_xyz",4,4,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_section_xyz" "', argument " "1"" of type '" "GeoCal::RsmMultiSection const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmMultiSection_section_xyz" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmMultiSection_section_xyz" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmMultiSection_section_xyz" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = (boost::shared_ptr< GeoCal::RsmBase > *) &((GeoCal::RsmMultiSection const *)arg1)->section_xyz(arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmMultiSection_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
@@ -7644,6 +7772,18 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"void GeoCal::RsmMultiSection::section(int i, int j, const boost::shared_ptr< RsmBase > &V)\n"
 		"\n"
+		""},
+	 { (char *)"RsmMultiSection_section_ls", _wrap_RsmMultiSection_section_ls, METH_VARARGS, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr< RsmBase > & RsmMultiSection::section_ls(double Line, double Sample) const\n"
+		"Return the section that handles the given image coordinate line and\n"
+		"sample. \n"
+		""},
+	 { (char *)"RsmMultiSection_section_xyz", _wrap_RsmMultiSection_section_xyz, METH_VARARGS, (char *)"\n"
+		"\n"
+		"const boost::shared_ptr< RsmBase > & RsmMultiSection::section_xyz(double X, double Y, double Z) const\n"
+		"Use low order polynomial to determine section for a particular\n"
+		"coordinate. \n"
 		""},
 	 { (char *)"RsmMultiSection_tre_string", (PyCFunction)_wrap_RsmMultiSection_tre_string, METH_O, (char *)"\n"
 		"\n"

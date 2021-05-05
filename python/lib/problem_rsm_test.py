@@ -53,7 +53,6 @@ def test_rsm_geodetic(isolated_dir, igc_test):
     rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
               GeodeticRadianConverter())
     rsm.fit(igc_test, -1000, 1000)
-    rsm.fill_in_ground_domain_vertex(-1000,1000)
     f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm
@@ -74,7 +73,6 @@ def test_rsm_local(isolated_dir, igc_test):
     rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
               LocalRcConverter(LocalRcParameter(igc_test)))
     rsm.fit(igc_test, -1000, 1000)
-    rsm.fill_in_ground_domain_vertex(-1000,1000)
     f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm
@@ -136,7 +134,6 @@ def test_gfm(isolated_dir, igc_test):
     rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
               GeodeticRadianConverter())
     rsm.fit(igc, -1000, 1000)
-    rsm.fill_in_ground_domain_vertex(-1000,1000)
     for i in range(0, igc.number_line, 20):
         for j in range (0, igc.number_sample, 20):
             ic = ImageCoordinate(i, j)

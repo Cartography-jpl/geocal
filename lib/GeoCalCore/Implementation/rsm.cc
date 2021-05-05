@@ -380,7 +380,7 @@ void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
 {
   rp->fit(Igc, *coordinate_converter(), Min_height, Max_height, 0, Igc.number_line(),
 	  0, Igc.number_sample());
-  fill_in_ground_domain_vertex(Min_height, Max_height);
+  fill_in_ground_domain_vertex(Igc, Min_height, Max_height);
 }
 
 //-----------------------------------------------------------------------
@@ -390,53 +390,42 @@ void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
 /// contexts to directly calculate this.
 ///
 /// There is specific requirements about the ordering the vertices (see
-/// the RSM documentation). We make sure the data is given in this order.
+/// the RSM documentation). We make sure the data is given in this
+/// order.
+///
+/// Note we use to generate this from the RSM itself, but for some
+/// types the very edges used by ground domain fails. Since we are
+/// usually doing this in a context of a fit anyways, we go ahead and
+/// just use the original Igc to calculate this.
 //-----------------------------------------------------------------------
 
-void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)
+void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
+				       double Min_height, double Max_height)
 {
   for(int hind = 0; hind < 2; ++hind) {
     std::deque<boost::array<double, 3> > pts;
-    // Temporary, we'll need to fix this
-    try {
-      boost::shared_ptr<GroundCoordinate> gc;
-      boost::array<double,3> p;
-      gc = ground_coordinate_approx_height(
+    boost::shared_ptr<GroundCoordinate> gc;
+    boost::array<double,3> p;
+    gc = Igc.ground_coordinate_approx_height(
 		   ImageCoordinate(rp->min_line(), rp->min_sample()),
 		   (hind == 0 ? Min_height : Max_height));
-      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-      pts.push_back(p);
-      gc = ground_coordinate_approx_height(
+    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+    pts.push_back(p);
+    gc = Igc.ground_coordinate_approx_height(
 		   ImageCoordinate(rp->max_line(), rp->min_sample()),
 		   (hind == 0 ? Min_height : Max_height));
-      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-      pts.push_back(p);
-      gc = ground_coordinate_approx_height(
+    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+    pts.push_back(p);
+    gc = Igc.ground_coordinate_approx_height(
 		   ImageCoordinate(rp->max_line(), rp->max_sample()),
 		   (hind == 0 ? Min_height : Max_height));
-      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-      pts.push_back(p);
-      gc = ground_coordinate_approx_height(
+    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+    pts.push_back(p);
+    gc = Igc.ground_coordinate_approx_height(
 		   ImageCoordinate(rp->min_line(), rp->max_sample()),
 		   (hind == 0 ? Min_height : Max_height));
-      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-      pts.push_back(p);
-    } catch(const std::exception& E) {
-      // Temporary, we'll need to fix this
-      std::cerr << "Warning, ground_coordinate_approx_height failed. Skipping error for now, and filling in with default data.\n";
-      pts.clear();
-      double h = (hind == 0 ? Min_height : Max_height);
-      boost::array<double,3> p;
-      p[2] = h;
-      p[0] = rp->min_x(); p[1] = rp->min_y();
-      pts.push_back(p);
-      p[0] = rp->min_x(); p[1] = rp->max_y();
-      pts.push_back(p);
-      p[0] = rp->max_x(); p[1] = rp->max_y();
-      pts.push_back(p);
-      p[0] = rp->max_x(); p[1] = rp->min_y();
-      pts.push_back(p);
-    }
+    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+    pts.push_back(p);
     // Check if linear ring is in a clockwise direction
     boost::array<double, 3> t;
     boost::array<double, 3> x1,x2;

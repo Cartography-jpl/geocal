@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 BOOST_AUTO_TEST_CASE(tre)
 {
   Rsm r(rp_from_rpc, cconv);
-  r.fill_in_ground_domain_vertex(rpc.height_offset - rpc.height_scale,
+  r.fill_in_ground_domain_vertex(*igc, rpc.height_offset - rpc.height_scale,
 				 rpc.height_offset + rpc.height_scale);
   boost::shared_ptr<RsmId> rid =
     RsmId::read_tre_string(r.rsm_id()->tre_string());

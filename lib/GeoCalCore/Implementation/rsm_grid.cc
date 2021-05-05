@@ -631,6 +631,26 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
 }
 
 //-----------------------------------------------------------------------
+/// Extrapolate data in the y/line direction
+//-----------------------------------------------------------------------
+
+void RsmGrid::extrapolate_y_direction()
+{
+  blitz::Range ra = blitz::Range::all();
+  for(int k = 0; k < line_.depth(); ++k)
+    for(int i = 0; i < line_.rows(); ++i) {
+      blitz::Array<double, 1> line_col(line_(i, ra, k));
+      blitz::Array<double, 1> sample_col(sample_(i, ra, k));
+      extrapolate_helper(line_col);
+      extrapolate_helper(sample_col);
+      line_col.reverseSelf(0);
+      sample_col.reverseSelf(0);
+      extrapolate_helper(line_col);
+      extrapolate_helper(sample_col);
+    }
+}
+
+//-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------
 

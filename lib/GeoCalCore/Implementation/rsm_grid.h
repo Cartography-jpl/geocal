@@ -115,6 +115,8 @@ public:
 		const CoordinateConverter& Cconv,
 		const RsmBase& Rb);
 
+  void extrapolate_y_direction();
+
 //-----------------------------------------------------------------------
 /// Number of X values in grid. This can potentially depend on the z
 /// axis value.
@@ -286,6 +288,12 @@ private:
        k >= sample_.depth())
       return std::numeric_limits<double>::quiet_NaN();
     return sample_(i,j,k);
+  }
+  void extrapolate_helper(blitz::Array<double, 1>& d)
+  {
+    for(int i = 2; i < d.rows(); ++i)
+      if(std::isnan(d(i)) && !std::isnan(d(i-2)) && ! std::isnan(d(i-1)))
+	d(i) = d(i-1) + (d(i-1) - d(i - 2));
   }
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;

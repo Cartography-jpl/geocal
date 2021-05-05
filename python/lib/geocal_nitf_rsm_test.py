@@ -983,9 +983,11 @@ class RsmFitWrap:
         self.max_h = max_h
     def __call__(self, sec_ind):
         i, j = sec_ind
-        return self.rsm.rsm_base.fit_section(i, j, self.igc,
-                                             self.rsm.coordinate_converter,
-                                             self.min_h, self.max_h)
+        res = self.rsm.rsm_base.fit_section(i, j, self.igc,
+                                            self.rsm.coordinate_converter,
+                                            self.min_h, self.max_h)
+        res.extrapolate_y_direction()
+        return res
 
 def rsm_parallel_fit(rsm, igc, min_h, max_h, pool = None):
     rsm.rsm_base.fit_start(igc, rsm.coordinate_converter, min_h, max_h)
@@ -1000,7 +1002,7 @@ def rsm_parallel_fit(rsm, igc, min_h, max_h, pool = None):
     for sec in sec_list:
         rsm.rsm_base.section(sec.row_section_number - 1,
                              sec.col_section_number - 1, sec)
-    rsm.fill_in_ground_domain_vertex(min_h, max_h);
+    rsm.fill_in_ground_domain_vertex(igc, min_h, max_h);
     return rsm
     
 @require_msp
@@ -1009,6 +1011,7 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     igc = igc_staring2
     ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
                                   LocalRcParameter.FOLLOW_LINE_FULL))
+    #ccov = LocalRcConverter(LocalRcParameter(igc))
     r = setup_grid(igc, ccov, 100,1000,4, 4)
     pool = Pool(10)
     rsm_parallel_fit(r, igc, -100, 100, pool=pool)
@@ -1017,6 +1020,7 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     f.image_segment[0].rsm = r
     f.write("nitf_rsm.ntf")
     igc_msp = IgcMsp("nitf_rsm.ntf")
+    #igc_msp = igc
     d = SimpleDem(0)
     ic = ImageCoordinate(1,10)
     print(igc_msp.image_coordinate(igc.ground_coordinate(ic,d)))

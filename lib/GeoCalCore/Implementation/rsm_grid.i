@@ -84,6 +84,7 @@ public:
   %python_attribute_with_set(total_number_col_digit, int);
   %python_attribute_with_set(number_fractional_row_digit, int);
   %python_attribute_with_set(number_fractional_col_digit, int);
+  void extrapolate_y_direction();
   int tre_size() const;
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>

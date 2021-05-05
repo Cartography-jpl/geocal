@@ -511,6 +511,15 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
       self._v_number_fractional_col_digit(value)
 
 
+    def extrapolate_y_direction(self):
+        """
+
+        void RsmGrid::extrapolate_y_direction()
+        Extrapolate data in the y/line direction. 
+        """
+        return _rsm_grid.RsmGrid_extrapolate_y_direction(self)
+
+
     def tre_size(self):
         """
 
@@ -581,6 +590,7 @@ RsmGrid._v_total_number_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_tota
 RsmGrid._v_total_number_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_total_number_col_digit, None, RsmGrid)
 RsmGrid._v_number_fractional_row_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_row_digit, None, RsmGrid)
 RsmGrid._v_number_fractional_col_digit = new_instancemethod(_rsm_grid.RsmGrid__v_number_fractional_col_digit, None, RsmGrid)
+RsmGrid.extrapolate_y_direction = new_instancemethod(_rsm_grid.RsmGrid_extrapolate_y_direction, None, RsmGrid)
 RsmGrid.tre_size = new_instancemethod(_rsm_grid.RsmGrid_tre_size, None, RsmGrid)
 RsmGrid.tre_string = new_instancemethod(_rsm_grid.RsmGrid_tre_string, None, RsmGrid)
 RsmGrid_swigregister = _rsm_grid.RsmGrid_swigregister

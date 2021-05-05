@@ -8129,19 +8129,23 @@ fail:
 SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
-  double arg2 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
   double arg3 ;
+  double arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
   boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
   double val3 ;
   int ecode3 = 0 ;
-  PyObject *swig_obj[3] ;
+  double val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Rsm_fill_in_ground_domain_vertex",3,3,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"Rsm_fill_in_ground_domain_vertex",4,4,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
@@ -8157,19 +8161,44 @@ SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *SWIGUNUSED
       arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
   ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
   if (!SWIG_IsOK(ecode3)) {
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
   {
     try {
-      (arg1)->fill_in_ground_domain_vertex(arg2,arg3);
+      (arg1)->fill_in_ground_domain_vertex((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -9625,7 +9654,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Rsm_fill_in_ground_domain_vertex", _wrap_Rsm_fill_in_ground_domain_vertex, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void Rsm::fill_in_ground_domain_vertex(double Min_height, double Max_height)\n"
+		"void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection &Igc, double Min_height, double\n"
+		"Max_height)\n"
 		"Fill in the ground domain vertex information.\n"
 		"\n"
 		"Note that you don't normally need to call this directly, the \"fit\"\n"
@@ -9635,6 +9665,10 @@ static PyMethodDef SwigMethods[] = {
 		"There is specific requirements about the ordering the vertices (see\n"
 		"the RSM documentation). We make sure the data is given in this order.\n"
 		"\n"
+		"Note we use to generate this from the RSM itself, but for some types\n"
+		"the very edges used by ground domain fails. Since we are usually doing\n"
+		"this in a context of a fit anyways, we go ahead and just use the\n"
+		"original Igc to calculate this. \n"
 		""},
 	 { (char *)"Rsm_compare_igc", _wrap_Rsm_compare_igc, METH_VARARGS, (char *)"\n"
 		"\n"

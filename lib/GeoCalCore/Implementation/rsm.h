@@ -49,7 +49,8 @@ public:
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
-  void fill_in_ground_domain_vertex(double Min_height, double Max_height);
+  void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
+				    double Min_height, double Max_height);
   void print(std::ostream& Os) const;
 
   const boost::shared_ptr<RsmId>& rsm_id() const {return rid;}

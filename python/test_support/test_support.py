@@ -359,29 +359,26 @@ def rsm_rp_cgrid(igc_rpc):
     r.fit(igc_rpc, GeodeticRadianConverter(), hmin, hmax, 0, igc_rpc.number_line,
           0, igc_rpc.number_sample)
     res = Rsm(r, GeodeticRadianConverter())
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc, 500, 1500)
     return res
 
 @pytest.fixture(scope="function")
-def rsm(rsm_rational_polynomial):
+def rsm(rsm_rational_polynomial, igc_rpc):
     res = Rsm(rsm_rational_polynomial, GeodeticRadianConverter())
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc, 500, 1500)
     return res
 
 @pytest.fixture(scope="function")
 def rsm_lc(rsm_rational_polynomial_lc, igc_rpc):
     res = Rsm(rsm_rational_polynomial_lc,
               LocalRcConverter(LocalRcParameter(igc_rpc)))
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc,500, 1500)
     return res
 
 @pytest.fixture(scope="function")
-def rsm_g(rsm_grid):
+def rsm_g(rsm_grid, igc_rpc):
     res = Rsm(rsm_grid, GeodeticRadianConverter())
-    # This fails. We'll have to figure out what the problem is and fix it,
-    # but in the mean time we put dummy data in so we can bypass this problem
-    # A warning will get printed out
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc, 500, 1500)
     res.rsm_id.min_line = rsm_grid.min_line
     res.rsm_id.max_line = rsm_grid.max_line
     res.rsm_id.min_sample = rsm_grid.min_sample
@@ -389,21 +386,21 @@ def rsm_g(rsm_grid):
     return res
 
 @pytest.fixture(scope="function")
-def rsm_ms_rp(rsm_ms_polynomial):
+def rsm_ms_rp(rsm_ms_polynomial, igc_rpc):
     res = Rsm(rsm_ms_polynomial, GeodeticRadianConverter())
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc, 500, 1500)
     return res
 
 @pytest.fixture(scope="function")
-def rsm_ms_rp_np(rsm_ms_polynomial_np):
+def rsm_ms_rp_np(rsm_ms_polynomial_np, igc_rpc):
     res = Rsm(rsm_ms_polynomial_np, GeodeticRadianConverter())
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc, 500, 1500)
     return res
 
 @pytest.fixture(scope="function")
-def rsm_ms_g(rsm_ms_grid):
+def rsm_ms_g(rsm_ms_grid, igc_rpc):
     res = Rsm(rsm_ms_grid, GeodeticRadianConverter())
-    res.fill_in_ground_domain_vertex(500, 1500)
+    res.fill_in_ground_domain_vertex(igc_rpc, 500, 1500)
     return res
 
 @pytest.fixture(scope="module")
@@ -611,6 +608,7 @@ def igc_staring2(igc_two_meter_pushbroom):
         odlist.append(od)
     orb2 = OrbitQuaternionList(odlist)
     ipi = Ipi(orb2, igc.ipi.camera, 0, orb2.min_time, orb2.max_time, tt)
+    #ipi = Ipi(orb2, igc.ipi.camera, 0, tt.min_time, tt.max_time, tt)
     igc2 = IpiImageGroundConnection(ipi, igc.dem, None)
     return igc2
 

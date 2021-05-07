@@ -10466,6 +10466,48 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_x_direction(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_extrapolate_x_direction" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->extrapolate_x_direction();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_y_direction(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
@@ -10495,6 +10537,48 @@ SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_y_direction(PyObject *SWIGUNUSEDP
   {
     try {
       (arg1)->extrapolate_y_direction();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_z_direction(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmGrid *arg1 = (GeoCal::RsmGrid *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmGrid > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmGrid > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmGrid_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmGrid_extrapolate_z_direction" "', argument " "1"" of type '" "GeoCal::RsmGrid *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmGrid > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmGrid * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->extrapolate_z_direction();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -10832,10 +10916,20 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::RsmGrid::number_fractional_col_digit(int v)\n"
 		"\n"
 		""},
+	 { (char *)"RsmGrid_extrapolate_x_direction", (PyCFunction)_wrap_RsmGrid_extrapolate_x_direction, METH_O, (char *)"\n"
+		"\n"
+		"void RsmGrid::extrapolate_x_direction()\n"
+		"Extrapolate data in the x/sample direction. \n"
+		""},
 	 { (char *)"RsmGrid_extrapolate_y_direction", (PyCFunction)_wrap_RsmGrid_extrapolate_y_direction, METH_O, (char *)"\n"
 		"\n"
 		"void RsmGrid::extrapolate_y_direction()\n"
 		"Extrapolate data in the y/line direction. \n"
+		""},
+	 { (char *)"RsmGrid_extrapolate_z_direction", (PyCFunction)_wrap_RsmGrid_extrapolate_z_direction, METH_O, (char *)"\n"
+		"\n"
+		"void RsmGrid::extrapolate_z_direction()\n"
+		"Extrapolate data in the z/height direction. \n"
 		""},
 	 { (char *)"RsmGrid_tre_size", (PyCFunction)_wrap_RsmGrid_tre_size, METH_O, (char *)"\n"
 		"\n"

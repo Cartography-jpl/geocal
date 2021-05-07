@@ -631,6 +631,26 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
 }
 
 //-----------------------------------------------------------------------
+/// Extrapolate data in the x/sample direction
+//-----------------------------------------------------------------------
+
+void RsmGrid::extrapolate_x_direction()
+{
+  blitz::Range ra = blitz::Range::all();
+  for(int k = 0; k < line_.depth(); ++k)
+    for(int j = 0; j < line_.cols(); ++j) {
+      blitz::Array<double, 1> line_col(line_(ra, j, k));
+      blitz::Array<double, 1> sample_col(sample_(ra, j, k));
+      extrapolate_helper(line_col);
+      extrapolate_helper(sample_col);
+      line_col.reverseSelf(0);
+      sample_col.reverseSelf(0);
+      extrapolate_helper(line_col);
+      extrapolate_helper(sample_col);
+    }
+}
+
+//-----------------------------------------------------------------------
 /// Extrapolate data in the y/line direction
 //-----------------------------------------------------------------------
 
@@ -641,6 +661,26 @@ void RsmGrid::extrapolate_y_direction()
     for(int i = 0; i < line_.rows(); ++i) {
       blitz::Array<double, 1> line_col(line_(i, ra, k));
       blitz::Array<double, 1> sample_col(sample_(i, ra, k));
+      extrapolate_helper(line_col);
+      extrapolate_helper(sample_col);
+      line_col.reverseSelf(0);
+      sample_col.reverseSelf(0);
+      extrapolate_helper(line_col);
+      extrapolate_helper(sample_col);
+    }
+}
+
+//-----------------------------------------------------------------------
+/// Extrapolate data in the z/height direction
+//-----------------------------------------------------------------------
+
+void RsmGrid::extrapolate_z_direction()
+{
+  blitz::Range ra = blitz::Range::all();
+  for(int j = 0; j < line_.cols(); ++j)
+    for(int i = 0; i < line_.rows(); ++i) {
+      blitz::Array<double, 1> line_col(line_(i, j, ra));
+      blitz::Array<double, 1> sample_col(sample_(i, j, ra));
       extrapolate_helper(line_col);
       extrapolate_helper(sample_col);
       line_col.reverseSelf(0);
@@ -705,9 +745,10 @@ std::string RsmGrid::tre_string() const
 			3 + 3 + 21 + 21 + 1);
   // This is the value that the line/sample are recorded relative
   // to. The TRE *only* has positive values, so this number needs to
-  // be < the minimum value in the array so we don't need negative numbers.
-  int refrow = int(floor(min(where(blitz_isnan(line_), 0, line_))));
-  int refcol = int(floor(min(where(blitz_isnan(sample_), 0, sample_))));
+  // be < the minimum value in the array so we don't need negative
+  // numbers.
+  int refrow = min_value_handle_nan(line_);
+  int refcol = min_value_handle_nan(sample_);
   res += str_check_size(gplaneformat % number_z() % z_delta_ % x_delta_
 			% y_delta_ % z_start_ % x_start_ % y_start_
 			% refrow % refcol % total_number_row_digit_
@@ -821,6 +862,12 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
   res->total_number_col_digit_ = read_size<int>(in, 2);
   res->number_fractional_row_digit_ = read_size<int>(in, 1);
   res->number_fractional_col_digit_ = read_size<int>(in, 1);
+  // Values are set by tre, so just put in dummy values here
+  res->min_line_ = 0;
+  res->max_line_ = 0;
+  res->min_sample_ = 0;
+  res->max_sample_ = 0;
+  res->ignore_igc_error_in_fit_ = true;
   for(int i = 1; i < num_z; ++i) {
     int xoff = read_size<int>(in, 4);
     int yoff = read_size<int>(in, 4);

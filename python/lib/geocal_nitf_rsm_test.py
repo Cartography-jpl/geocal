@@ -987,6 +987,8 @@ class RsmFitWrap:
                                             self.rsm.coordinate_converter,
                                             self.min_h, self.max_h)
         res.extrapolate_y_direction()
+        res.extrapolate_x_direction()
+        res.extrapolate_z_direction()
         return res
 
 def rsm_parallel_fit(rsm, igc, min_h, max_h, pool = None):

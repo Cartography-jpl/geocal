@@ -1,6 +1,7 @@
 #ifndef RSM_GRID_H
 #define RSM_GRID_H
 #include "rsm_base.h"
+#include <limits>
 
 namespace GeoCal {
   class ImageGroundConnection;
@@ -115,8 +116,10 @@ public:
 		const CoordinateConverter& Cconv,
 		const RsmBase& Rb);
 
+  void extrapolate_x_direction();
   void extrapolate_y_direction();
-
+  void extrapolate_z_direction();
+  
 //-----------------------------------------------------------------------
 /// Number of X values in grid. This can potentially depend on the z
 /// axis value.
@@ -277,6 +280,14 @@ private:
   // code. We can revisit this if needed, this is really just an
   // internal convention we use and we could change this if desired.
   blitz::Array<double, 3> line_, sample_;
+  int min_value_handle_nan(const blitz::Array<double, 3>& D) const
+  {
+    double r = blitz::min(blitz::where(blitz::blitz_isnan(D),
+				       std::numeric_limits<double>::max(), D));
+    if(r == std::numeric_limits<double>::max())
+      r = 0; //Handling for all nan data
+    return int(floor(r));
+  } 
   double line_value_or_nan(int i, int j, int k) const
   { if(i < 0 || j < 0 || k < 0 || i >= line_.rows() || j >= line_.cols() ||
        k >= line_.depth())

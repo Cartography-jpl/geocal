@@ -4,6 +4,7 @@
 #include "coordinate_converter.h"
 #include "geocal_matrix.h"
 #include "array_ad.h"
+#include "dem.h"
 #include <boost/make_shared.hpp>
 
 namespace GeoCal {
@@ -140,9 +141,88 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
+
+/****************************************************************//**
+  This is a Dem that is at a constant Z in a LocalRcConverter 
+  coordinate system.
+*******************************************************************/
   
+class LocalZDem: public Dem {
+public:
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+  LocalZDem(const boost::shared_ptr<LocalRcConverter>& Cconv,
+	    int Z)
+    : z_(Z), cconv(Cconv)
+  {
+  }
+
+  virtual ~LocalZDem() { }
+
+//-----------------------------------------------------------------------
+/// Return height of surface above/below the reference surface (e.g.,
+/// WGS-84 for the earth). Positive means above, negative below. This is 
+/// in meters.
+//-----------------------------------------------------------------------
+
+  virtual double height_reference_surface(const GroundCoordinate& Gp)
+    const
+  {
+    return surface_point(Gp)->height_reference_surface();
+  }
+
+//-----------------------------------------------------------------------
+/// Return distance to surface directly above/below the given point.
+/// Distance is in meters. Positive means Gp is above the surface, 
+/// negative means below.
+//-----------------------------------------------------------------------
+
+  virtual double distance_to_surface(const GroundCoordinate& Gp) 
+    const
+  {
+    double px,py,pz;
+    cconv->convert_to_coordinate(Gp, px, py, pz);
+    return pz - z_;
+  }
+  virtual boost::shared_ptr<GroundCoordinate> 
+    surface_point(const GroundCoordinate& Gp) const
+  {
+    double px,py,pz;
+    cconv->convert_to_coordinate(Gp, px, py, pz);
+    return cconv->convert_from_coordinate(px, py, z_);
+  }
+  
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const 
+  { Os << "Local RC Z Dem, Z " << z_ << "m \n"; }
+
+//-----------------------------------------------------------------------
+/// Return z value used by this object.
+//-----------------------------------------------------------------------
+
+  double z() const {return z_;}
+
+//-----------------------------------------------------------------------
+/// Return LocalRcConverter
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<LocalRcConverter>& coordinate_converter() const
+  { return cconv; }
+private:
+  double z_;
+  boost::shared_ptr<LocalRcConverter>  cconv;
+  LocalZDem() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 GEOCAL_EXPORT_KEY(LocalRcParameter);
 GEOCAL_EXPORT_KEY(LocalRectangularCoordinate);
 GEOCAL_EXPORT_KEY(LocalRcConverter);
+GEOCAL_EXPORT_KEY(LocalZDem);
 #endif

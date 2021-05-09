@@ -183,6 +183,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.rsm_adjustable_parameter
 import geocal_swig.generic_object
 import geocal_swig.with_parameter
+import geocal_swig.dem
 import geocal_swig.geocal_exception
 class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustableParameter):
     """

@@ -184,6 +184,7 @@ import geocal_swig.generic_object
 import geocal_swig.ground_coordinate
 import geocal_swig.look_vector
 import geocal_swig.coordinate_converter
+import geocal_swig.dem
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 class LocalRcParameter(geocal_swig.generic_object.GenericObject):
@@ -375,8 +376,65 @@ LocalRcConverter._v_parameter = new_instancemethod(_local_rectangular_coordinate
 LocalRcConverter_swigregister = _local_rectangular_coordinate.LocalRcConverter_swigregister
 LocalRcConverter_swigregister(LocalRcConverter)
 
+class LocalZDem(geocal_swig.dem.Dem):
+    """
 
-__all__ = ["LocalRcParameter","LocalRectangularCoordinate","LocalRcConverter"]
+    This is a Dem that is at a constant Z in a LocalRcConverter coordinate
+    system.
+
+    C++ includes: local_rectangular_coordinate.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Cconv, Z):
+        """
+
+        GeoCal::LocalZDem::LocalZDem(const boost::shared_ptr< LocalRcConverter > &Cconv, int Z)
+        Constructor. 
+        """
+        _local_rectangular_coordinate.LocalZDem_swiginit(self, _local_rectangular_coordinate.new_LocalZDem(Cconv, Z))
+
+    def _v_z(self):
+        """
+
+        double GeoCal::LocalZDem::z() const
+        Return z value used by this object. 
+        """
+        return _local_rectangular_coordinate.LocalZDem__v_z(self)
+
+
+    @property
+    def z(self):
+        return self._v_z()
+
+
+    def _v_coordinate_converter(self):
+        """
+
+        const boost::shared_ptr<LocalRcConverter>& GeoCal::LocalZDem::coordinate_converter() const
+        Return LocalRcConverter. 
+        """
+        return _local_rectangular_coordinate.LocalZDem__v_coordinate_converter(self)
+
+
+    @property
+    def coordinate_converter(self):
+        return self._v_coordinate_converter()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _local_rectangular_coordinate.delete_LocalZDem
+LocalZDem._v_z = new_instancemethod(_local_rectangular_coordinate.LocalZDem__v_z, None, LocalZDem)
+LocalZDem._v_coordinate_converter = new_instancemethod(_local_rectangular_coordinate.LocalZDem__v_coordinate_converter, None, LocalZDem)
+LocalZDem_swigregister = _local_rectangular_coordinate.LocalZDem_swigregister
+LocalZDem_swigregister(LocalZDem)
+
+
+__all__ = ["LocalRcParameter","LocalRectangularCoordinate","LocalRcConverter","LocalZDem"]
 
 
 

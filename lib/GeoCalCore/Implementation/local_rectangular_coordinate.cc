@@ -30,9 +30,20 @@ void LocalRcConverter::serialize
     & GEOCAL_NVP(p);
 }
 
+template<class Archive>
+void LocalZDem::serialize
+(Archive & ar, const unsigned int version)
+{
+  GEOCAL_GENERIC_BASE(Dem);
+  GEOCAL_BASE(LocalZDem, Dem);
+  ar & GEOCAL_NVP_(z)
+    & GEOCAL_NVP(cconv);
+}
+
 GEOCAL_IMPLEMENT(LocalRcParameter);
 GEOCAL_IMPLEMENT(LocalRectangularCoordinate);
 GEOCAL_IMPLEMENT(LocalRcConverter);
+GEOCAL_IMPLEMENT(LocalZDem);
 #endif
 
 template<class T> inline T dotb(const blitz::Array<T, 1>& x, 

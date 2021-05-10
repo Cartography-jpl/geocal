@@ -1035,3 +1035,6 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     print(ic)
     print(r.image_coordinate(igc.ground_coordinate(ic))[0])
     print(igc_msp.image_coordinate(igc.ground_coordinate(ic)))
+    if(True):
+        write_shelve("rsm.bin", r)
+        write_shelve("igc.bin", igc)

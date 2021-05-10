@@ -3,6 +3,7 @@
 #include "coordinate_converter.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
+#include "local_rectangular_coordinate.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -179,15 +180,10 @@ void RsmMultiSection::fit
  int Min_line, int Max_line, int Min_sample,
  int Max_sample)
 {
-  lp.fit(Igc, Cconv, Min_height, Max_height, Min_line, Max_line, Min_sample,
-	 Max_sample);
+  fit_start(Igc, Cconv, Min_height, Max_height);
   for(int i = 0; i < sec.rows(); ++i)
     for(int j = 0; j < sec.cols(); ++j)
-      sec(i,j)->fit(Igc, Cconv, Min_height, Max_height,
-		    std::max(int(nline_sec * i) - border_, Min_line),
-		    std::min(int(nline_sec * (i + 1)) + border_, Max_line),
-		    std::max(int(nsamp_sec * j) - border_, Min_sample),
-		    std::min(int(nsamp_sec * (j + 1)) + border_, Max_sample));
+      fit_section(i, j, Igc, Cconv, Min_height, Max_height);
 }
 
 //-----------------------------------------------------------------------
@@ -199,8 +195,49 @@ void RsmMultiSection::fit_start(const ImageGroundConnection& Igc,
 				const CoordinateConverter& Cconv,
 				double Min_height, double Max_height)
 {
-  lp.fit(Igc, Cconv, Min_height, Max_height, 0, Igc.number_line(),
-	 0, Igc.number_sample());
+  lp.fit(Igc, Cconv, Min_height, Max_height, 0, Igc.number_line() - 1,
+	 0, Igc.number_sample() - 1);
+  // Based on examples, the MSP library seems to prefer that all
+  // sections have the same z start and delta. This isn't actually
+  // required from the RSM standard, but seems to be one of the those
+  // "unstated" requirements. This gives access  for RsmMultiSection to
+  // pass the z values to use, rather than computing this in fit.
+  bool first = true;
+  double min_x=0, max_x=0, min_y=0, max_y=0, min_z=0, max_z=0;
+  for(double i = 0; i < 2; ++i)
+    for(double j = 0; j < 2; ++j)
+      for(double k = 0; k < 2; ++k) {
+	double ln = (i == 0 ? 0 : Igc.number_line() - 1);
+	double smp = (j == 0 ? 0 : Igc.number_sample() - 1);
+	double h = (k == 0 ? Min_height : Max_height);
+	boost::shared_ptr<GroundCoordinate> gc =
+	  Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+	double xv, yv, zv;
+	Cconv.convert_to_coordinate(*gc, xv, yv, zv);
+	if(first) {
+	  min_x = max_x = xv;
+	  min_y = max_y = yv;
+	  min_z = max_z = zv;
+	  first = false;
+	} else {
+	  min_x = std::min(min_x, xv);
+	  max_x = std::max(max_x, xv);
+	  min_y = std::min(min_y, yv);
+	  max_y = std::max(max_y, yv);
+	  min_z = std::min(min_z, zv);
+	  max_z = std::max(max_z, zv);
+	}
+      }
+  double pad = 0.05;
+  min_z -= (Max_height - Min_height) * pad;
+  max_z += (Max_height - Min_height) * pad;
+  // Right now, only works with LocalRcConverter. Should perhaps
+  // add handling for other cases, but for now require this.
+  if(dynamic_cast<const LocalRcConverter*>(&Cconv)) {
+    for(int i = 0; i < sec.rows(); ++i)
+      for(int j = 0; j < sec.cols(); ++j)
+	sec(i,j)->set_z_range(min_z, max_z);
+  }
 }
 
 
@@ -452,9 +489,9 @@ RsmMultiSection::read_tre_string(const std::string& Tre_in)
   res->nline_sec = read_size<double>(in, 21);
   res->nsamp_sec = read_size<double>(in, 21);
   res->lp.min_line(0);
-  res->lp.max_line((int) floor(res->nline_sec * nrow + 0.5));
+  res->lp.max_line((int) floor(res->nline_sec * nrow + 0.5) - 1);
   res->lp.min_sample(0);
-  res->lp.max_sample((int) floor(res->nsamp_sec * ncol + 0.5));
+  res->lp.max_sample((int) floor(res->nsamp_sec * ncol + 0.5) - 1);
   check_end_of_stream(in);
   return res;
 }

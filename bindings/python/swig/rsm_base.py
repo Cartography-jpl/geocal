@@ -273,6 +273,21 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
 
     generate_data = staticmethod(generate_data)
 
+    def set_z_range(self, Z_min, Z_max):
+        """
+
+        virtual void GeoCal::RsmBase::set_z_range(double Z_min, double Z_max)
+        Based on examples, the MSP library seems to prefer that all sections
+        have the same z start and delta.
+
+        This isn't actually required from the RSM standard, but seems to be
+        one of the those "unstated" requirements. This gives access for
+        RsmMultiSection to pass the z values to use, rather than computing
+        this in fit. 
+        """
+        return _rsm_base.RsmBase_set_z_range(self, Z_min, Z_max)
+
+
     def _v_min_line(self):
         """
 
@@ -496,6 +511,7 @@ RsmBase.image_coordinate_jacobian = new_instancemethod(_rsm_base.RsmBase_image_c
 RsmBase.initial_guess = new_instancemethod(_rsm_base.RsmBase_initial_guess, None, RsmBase)
 RsmBase.initial_guess_z = new_instancemethod(_rsm_base.RsmBase_initial_guess_z, None, RsmBase)
 RsmBase.fit = new_instancemethod(_rsm_base.RsmBase_fit, None, RsmBase)
+RsmBase.set_z_range = new_instancemethod(_rsm_base.RsmBase_set_z_range, None, RsmBase)
 RsmBase._v_min_line = new_instancemethod(_rsm_base.RsmBase__v_min_line, None, RsmBase)
 RsmBase._v_max_line = new_instancemethod(_rsm_base.RsmBase__v_max_line, None, RsmBase)
 RsmBase._v_min_sample = new_instancemethod(_rsm_base.RsmBase__v_min_sample, None, RsmBase)

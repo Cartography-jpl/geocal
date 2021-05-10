@@ -378,8 +378,8 @@ Rsm::image_coordinate_jac_parm(const GroundCoordinate& Gc) const
 void Rsm::fit(const ImageGroundConnection& Igc, double Min_height,
 	      double Max_height)
 {
-  rp->fit(Igc, *coordinate_converter(), Min_height, Max_height, 0, Igc.number_line(),
-	  0, Igc.number_sample());
+  rp->fit(Igc, *coordinate_converter(), Min_height, Max_height, 0,
+	  Igc.number_line() - 1, 0, Igc.number_sample() - 1);
   fill_in_ground_domain_vertex(Igc, Min_height, Max_height);
 }
 

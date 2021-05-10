@@ -39,6 +39,7 @@ public:
 	  const std::string& Image_identifier="",
 	  const std::string& Rsm_support_data_edition="fake-1")
     : RsmBase(Image_identifier, Rsm_support_data_edition),
+      have_z_range_(false),
       line_(N_x, N_y, N_z),
       sample_(N_x, N_y, N_z),
       ignore_igc_error_in_fit_(Ignore_igc_error_in_fit),
@@ -269,9 +270,25 @@ public:
 	(total_number_row_digit_ + total_number_col_digit_);
     return res;
   }
+
+//-----------------------------------------------------------------------
+/// Based on examples, the MSP library seems to prefer that all
+/// sections have the same z start and delta. This isn't actually
+/// required from the RSM standard, but seems to be one of the those
+/// "unstated" requirements. This gives access  for RsmMultiSection to
+/// pass the z values to use, rather than computing this in fit.
+//-----------------------------------------------------------------------
+
+  virtual void set_z_range(double Z_min, double Z_max)
+  {
+    z_start_ = Z_min;
+    z_delta_ = (Z_max - Z_min) / (number_z() - 1);
+    have_z_range_ = true;
+  }
 protected:
-  RsmGrid() {}
+  RsmGrid() : have_z_range_(false) {}
 private:
+  bool have_z_range_;
   // Note, by convention we *don't* include the x_offset, y_offset in
   // line_ and sample_. So we always have things relative to the
   // initial plane. The x_offset and y_offset is only used when we
@@ -322,5 +339,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(RsmGrid);
-GEOCAL_CLASS_VERSION(RsmGrid, 1);
+GEOCAL_CLASS_VERSION(RsmGrid, 2);
 #endif

@@ -8071,6 +8071,63 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmBase_set_z_range(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmBase_set_z_range",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase_set_z_range" "', argument " "1"" of type '" "GeoCal::RsmBase *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmBase_set_z_range" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmBase_set_z_range" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      (arg1)->set_z_range(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmBase__v_min_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
@@ -9084,6 +9141,17 @@ static PyMethodDef SwigMethods[] = {
 		"double Min_x, double Max_x, double Min_y, double Max_y, double Min_z,\n"
 		"double Max_z, int Numx, int Numy, int Numz)\n"
 		"\n"
+		""},
+	 { (char *)"RsmBase_set_z_range", _wrap_RsmBase_set_z_range, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual void GeoCal::RsmBase::set_z_range(double Z_min, double Z_max)\n"
+		"Based on examples, the MSP library seems to prefer that all sections\n"
+		"have the same z start and delta.\n"
+		"\n"
+		"This isn't actually required from the RSM standard, but seems to be\n"
+		"one of the those \"unstated\" requirements. This gives access for\n"
+		"RsmMultiSection to pass the z values to use, rather than computing\n"
+		"this in fit. \n"
 		""},
 	 { (char *)"RsmBase__v_min_line", (PyCFunction)_wrap_RsmBase__v_min_line, METH_O, (char *)"\n"
 		"\n"

@@ -4,6 +4,8 @@
 #include "geocal_serialize_support.h"
 #include "auto_derivative.h"
 #include "tre_support.h"
+#include "local_rectangular_coordinate.h"
+#include "simple_dem.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -42,21 +44,26 @@ void RsmGrid::load(Archive & ar, const unsigned int version)
 		  std::numeric_limits<double>::quiet_NaN(),
 		  sample_no_nan);
   // Older version didn't have number of digits
-  if(version == 0) {
-    total_number_row_digit_ = 11;
-    total_number_col_digit_ = 11;
-    number_fractional_row_digit_ = 11;
-    number_fractional_col_digit_ = 11;
-    row_section_number_ = 1;
-    col_section_number_ = 1;
-  } else {
+  if(version >= 1) {
     ar & GEOCAL_NVP_(total_number_row_digit)
       & GEOCAL_NVP_(total_number_col_digit)
       & GEOCAL_NVP_(number_fractional_row_digit)
       & GEOCAL_NVP_(number_fractional_col_digit)
       & GEOCAL_NVP_(row_section_number)
       & GEOCAL_NVP_(col_section_number);
-  }    
+  } else {
+    total_number_row_digit_ = 11;
+    total_number_col_digit_ = 11;
+    number_fractional_row_digit_ = 11;
+    number_fractional_col_digit_ = 11;
+    row_section_number_ = 1;
+    col_section_number_ = 1;
+  }  
+  if(version >= 2) {
+    ar & GEOCAL_NVP_(have_z_range);
+  } else {
+    have_z_range_ = false;
+  }
 }
 
 template<class Archive>
@@ -85,14 +92,18 @@ void RsmGrid::save(Archive & ar, const unsigned int version) const
     & GEOCAL_NVP_(min_sample)
     & GEOCAL_NVP_(max_sample)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
+    
   // Older version didn't have number of digits
-  if(version > 0) {
+  if(version >= 1) {
     ar & GEOCAL_NVP_(total_number_row_digit)
       & GEOCAL_NVP_(total_number_col_digit)
       & GEOCAL_NVP_(number_fractional_row_digit)
       & GEOCAL_NVP_(number_fractional_col_digit)
       & GEOCAL_NVP_(row_section_number)
       & GEOCAL_NVP_(col_section_number);
+  }
+  if(version >= 2) {
+    ar & GEOCAL_NVP_(have_z_range);
   }
 }
 
@@ -399,10 +410,19 @@ void RsmGrid::fit
       for(double k = 0; k < 2; ++k) {
 	double ln = (i == 0 ? Min_line : Max_line);
 	double smp = (j == 0 ? Min_sample : Max_sample);
-	double h = (k == 0 ? Min_height : Max_height);
+	boost::shared_ptr<Dem> dem;
+	if(have_z_range_) {
+	  double z = (k == 0 ? z_start_ : z_start_ + number_z() * z_delta_);
+	  auto lc_cconv = boost::make_shared<LocalRcConverter>
+	    (dynamic_cast<const LocalRcConverter&>(Cconv).parameter());
+	  dem = boost::make_shared<LocalZDem>(lc_cconv, z);
+	} else {
+	  double h = (k == 0 ? Min_height : Max_height);
+	  dem = boost::make_shared<SimpleDem>(h);
+	}
 	try {
 	  boost::shared_ptr<GroundCoordinate> gc =
-	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+	    Igc.ground_coordinate_dem(ImageCoordinate(ln, smp), *dem);
 	  double xv, yv, zv;
 	  Cconv.convert_to_coordinate(*gc, xv, yv, zv);
 	  if(first) {
@@ -438,10 +458,12 @@ void RsmGrid::fit
   
   x_start_ = min_x;
   y_start_ = min_y;
-  z_start_ = min_z;
   x_delta_ = (max_x - min_x) / (number_x(0) - 1);
   y_delta_ = (max_y - min_y) / (number_y(0) - 1);
-  z_delta_ = (max_z - min_z) / (number_z() - 1);
+  if(!have_z_range_) {
+    z_start_ = min_z;
+    z_delta_ = (max_z - min_z) / (number_z() - 1);
+  }
   for(int i = 0; i < line_.rows(); ++i)
     for(int j = 0; j < line_.cols(); ++j)
       for(int k = 0; k < line_.depth(); ++k) {

@@ -121,6 +121,16 @@ public:
   virtual double max_z() const = 0;
   std::string base_tre_string() const;
   void base_read_tre_string(std::istream& In);
+
+//-----------------------------------------------------------------------
+/// Based on examples, the MSP library seems to prefer that all
+/// sections have the same z start and delta. This isn't actually
+/// required from the RSM standard, but seems to be one of the those
+/// "unstated" requirements. This gives access  for RsmMultiSection to
+/// pass the z values to use, rather than computing this in fit.
+//-----------------------------------------------------------------------
+
+  virtual void set_z_range(double Z_min, double Z_max)  { } 
 protected:
   std::string image_identifier_, rsm_suport_data_edition_;
 private:

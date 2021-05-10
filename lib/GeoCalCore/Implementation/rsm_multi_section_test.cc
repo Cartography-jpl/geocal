@@ -13,8 +13,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
 		    rp);
   double hmin = rpc.height_offset - rpc.height_scale;
   double hmax = rpc.height_offset + rpc.height_scale;
-  r.fit(*igc, *cconv, hmin, hmax, 0, igc->number_line(), 0,
-	igc->number_sample());
+  r.fit(*igc, *cconv, hmin, hmax, 0, igc->number_line() - 1, 0,
+	igc->number_sample() - 1);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic = r.image_coordinate(gp.longitude(), gp.latitude(),
 					  gp.height_reference_surface());
@@ -29,8 +29,8 @@ BOOST_AUTO_TEST_CASE(tre)
 		    rp);
   double hmin = rpc.height_offset - rpc.height_scale;
   double hmax = rpc.height_offset + rpc.height_scale;
-  r.fit(*igc, *cconv, hmin, hmax, 0, igc->number_line(), 0,
-	igc->number_sample());
+  r.fit(*igc, *cconv, hmin, hmax, 0, igc->number_line() - 1, 0,
+	igc->number_sample() - 1);
   boost::shared_ptr<RsmMultiSection> r2 =
     RsmMultiSection::read_tre_string(r.tre_string());
   BOOST_CHECK_EQUAL(r.number_row_section(), r2->number_row_section());
@@ -54,8 +54,8 @@ BOOST_AUTO_TEST_CASE(serialize)
     (igc->number_line(), igc->number_sample(), 3, 2, rp);
   double hmin = rpc.height_offset - rpc.height_scale;
   double hmax = rpc.height_offset + rpc.height_scale;
-  r->fit(*igc, *cconv, hmin, hmax, 0, igc->number_line(), 0,
-	igc->number_sample());
+  r->fit(*igc, *cconv, hmin, hmax, 0, igc->number_line() - 1, 0,
+	igc->number_sample() - 1);
   std::string d = serialize_write_string(r);
   if(false)
     std::cerr << d;

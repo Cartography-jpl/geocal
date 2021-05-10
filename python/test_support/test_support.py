@@ -609,7 +609,8 @@ def igc_staring2(igc_two_meter_pushbroom):
     orb2 = OrbitQuaternionList(odlist)
     #ipi = Ipi(orb2, igc.ipi.camera, 0, orb2.min_time, orb2.max_time, tt)
     ipi = Ipi(orb2, igc.ipi.camera, 0, tt.min_time,
-              tt.max_time + tt.time_space * 2,
+#              tt.max_time + tt.time_space * 2,
+              tt.max_time,
               tt)
     igc2 = IpiImageGroundConnection(ipi, igc.dem, None)
     return igc2

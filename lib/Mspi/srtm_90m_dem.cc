@@ -73,7 +73,7 @@ Srtm90mData::Srtm90mData
 		       No_coverage_is_error,
 		       FILL_VALUE)
 {
-  file_name_end = "_L2.tif";
+  file_name_end = "_L1.tif";
 
   lat_ref = 47,
   lon_ref = -87;

@@ -3124,8 +3124,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mspi/3.l1b1_table \
 	@geocalunittestdata@/mspi/old_tie_point \
 	@geocalunittestdata@/image_coordinate_test.xml \
-	@geocalunittestdata@/srtm_90m_dem/n34w120_L2.tif \
-	@geocalunittestdata@/srtm_90m_dem/n43w69_L2.tif \
+	@geocalunittestdata@/srtm_90m_dem/n34w120_L1.tif \
+	@geocalunittestdata@/srtm_90m_dem/n43w69_L1.tif \
 	@geocalunittestdata@/sample.ntf \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp1_ssd_mro110c.lbl \
 	@geocalunittestdata@/mars_kernel/mro_kernel/spk/mro_psp2_ssd_mro110c.lbl \

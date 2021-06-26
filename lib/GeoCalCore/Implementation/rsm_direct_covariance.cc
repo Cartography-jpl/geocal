@@ -1,6 +1,7 @@
 #include "rsm_direct_covariance.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
+#include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
 #include <sstream>
 
@@ -13,39 +14,36 @@ void RsmDirectCovariance::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmDirectCovariance);
   ar & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_suport_data_edition);
+    & GEOCAL_NVP_(rsm_suport_data_edition)
+    & GEOCAL_NVP_(triangulation_id);
 }
 
 GEOCAL_IMPLEMENT(RsmDirectCovariance);
 #endif
 
+static boost::format f("%|1$-80s|%|2$-40s|%|3$-40s|");
+static boost::format numint("%|1$02d|");
+static boost::format numint_missing("%|1$2s|");
+static boost::format num("%|1$+21.14E|");
+
 //-----------------------------------------------------------------------
-/// Write to TRE string.
-///
-/// Note that this is all the fields *except* the CETAG and CEL (the
-/// front two). It is convenient to treat those special. (We can
-/// revisit this in the future if we need to).
+/// Write the part of the TRE string for the image identification,
+/// RSM support data edition, and triangulation_id.
 //-----------------------------------------------------------------------
 
-std::string RsmDirectCovariance::tre_string() const
+std::string RsmDirectCovariance::base_tre_string() const
 {
-  return "dummy";
+ return str_check_size(f % image_identifier_
+		       % rsm_suport_data_edition_
+		       % triangulation_id_, 80+40+40);
 }
 
-//-----------------------------------------------------------------------
-/// Read a TRE string. Note that the TRE does not contain all the
-/// fields we have in a RsmRationalPolynomial. However the fields that
-/// aren't contained are ones used for fitting the RSM, so in practice
-/// this doesn't matter. We just set the various fields to the default
-/// values found in the constructor.
-///
-/// This should have all the TRE *except* for the front CETAG and CEL.
-/// It is convenient to treat these fields as special. (We can
-/// revisit this in the future if we need to).
-//-----------------------------------------------------------------------
-
-boost::shared_ptr<RsmDirectCovariance>
-RsmDirectCovariance::read_tre_string(const std::string& Tre_in)
+void RsmDirectCovariance::base_read_tre_string(std::istream& In)
 {
-  return boost::make_shared<RsmDirectCovariance>();
+  image_identifier_ = read_size<std::string>(In, 80);
+  rsm_suport_data_edition_ = read_size<std::string>(In, 40);
+  triangulation_id_ = read_size<std::string>(In, 40);
+  boost::trim(image_identifier_);
+  boost::trim(rsm_suport_data_edition_);
+  boost::trim(triangulation_id_);
 }

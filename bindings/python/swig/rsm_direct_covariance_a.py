@@ -6,19 +6,19 @@
 
 from sys import version_info as _swig_python_version_info
 if _swig_python_version_info >= (3, 0, 0):
-    new_instancemethod = lambda func, inst, cls: _rsm_adjustable_parameter_a.SWIG_PyInstanceMethod_New(func)
+    new_instancemethod = lambda func, inst, cls: _rsm_direct_covariance_a.SWIG_PyInstanceMethod_New(func)
 else:
     from new import instancemethod as new_instancemethod
 if _swig_python_version_info >= (2, 7, 0):
     def swig_import_helper():
         import importlib
         pkg = __name__.rpartition('.')[0]
-        mname = '.'.join((pkg, '_rsm_adjustable_parameter_a')).lstrip('.')
+        mname = '.'.join((pkg, '_rsm_direct_covariance_a')).lstrip('.')
         try:
             return importlib.import_module(mname)
         except ImportError:
-            return importlib.import_module('_rsm_adjustable_parameter_a')
-    _rsm_adjustable_parameter_a = swig_import_helper()
+            return importlib.import_module('_rsm_direct_covariance_a')
+    _rsm_direct_covariance_a = swig_import_helper()
     del swig_import_helper
 elif _swig_python_version_info >= (2, 6, 0):
     def swig_import_helper():
@@ -26,20 +26,20 @@ elif _swig_python_version_info >= (2, 6, 0):
         import imp
         fp = None
         try:
-            fp, pathname, description = imp.find_module('_rsm_adjustable_parameter_a', [dirname(__file__)])
+            fp, pathname, description = imp.find_module('_rsm_direct_covariance_a', [dirname(__file__)])
         except ImportError:
-            import _rsm_adjustable_parameter_a
-            return _rsm_adjustable_parameter_a
+            import _rsm_direct_covariance_a
+            return _rsm_direct_covariance_a
         try:
-            _mod = imp.load_module('_rsm_adjustable_parameter_a', fp, pathname, description)
+            _mod = imp.load_module('_rsm_direct_covariance_a', fp, pathname, description)
         finally:
             if fp is not None:
                 fp.close()
         return _mod
-    _rsm_adjustable_parameter_a = swig_import_helper()
+    _rsm_direct_covariance_a = swig_import_helper()
     del swig_import_helper
 else:
-    import _rsm_adjustable_parameter_a
+    import _rsm_direct_covariance_a
 del _swig_python_version_info
 
 try:
@@ -113,29 +113,29 @@ class SwigPyIterator(object):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    __swig_destroy__ = _rsm_adjustable_parameter_a.delete_SwigPyIterator
+    __swig_destroy__ = _rsm_direct_covariance_a.delete_SwigPyIterator
     def __iter__(self):
         return self
-SwigPyIterator.value = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_value, None, SwigPyIterator)
-SwigPyIterator.incr = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_incr, None, SwigPyIterator)
-SwigPyIterator.decr = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_decr, None, SwigPyIterator)
-SwigPyIterator.distance = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_distance, None, SwigPyIterator)
-SwigPyIterator.equal = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_equal, None, SwigPyIterator)
-SwigPyIterator.copy = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_copy, None, SwigPyIterator)
-SwigPyIterator.next = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_next, None, SwigPyIterator)
-SwigPyIterator.__next__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___next__, None, SwigPyIterator)
-SwigPyIterator.previous = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_previous, None, SwigPyIterator)
-SwigPyIterator.advance = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator_advance, None, SwigPyIterator)
-SwigPyIterator.__eq__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___eq__, None, SwigPyIterator)
-SwigPyIterator.__ne__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___ne__, None, SwigPyIterator)
-SwigPyIterator.__iadd__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___iadd__, None, SwigPyIterator)
-SwigPyIterator.__isub__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___isub__, None, SwigPyIterator)
-SwigPyIterator.__add__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___add__, None, SwigPyIterator)
-SwigPyIterator.__sub__ = new_instancemethod(_rsm_adjustable_parameter_a.SwigPyIterator___sub__, None, SwigPyIterator)
-SwigPyIterator_swigregister = _rsm_adjustable_parameter_a.SwigPyIterator_swigregister
+SwigPyIterator.value = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_value, None, SwigPyIterator)
+SwigPyIterator.incr = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_incr, None, SwigPyIterator)
+SwigPyIterator.decr = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_decr, None, SwigPyIterator)
+SwigPyIterator.distance = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_distance, None, SwigPyIterator)
+SwigPyIterator.equal = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_equal, None, SwigPyIterator)
+SwigPyIterator.copy = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_copy, None, SwigPyIterator)
+SwigPyIterator.next = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_next, None, SwigPyIterator)
+SwigPyIterator.__next__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___next__, None, SwigPyIterator)
+SwigPyIterator.previous = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_previous, None, SwigPyIterator)
+SwigPyIterator.advance = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator_advance, None, SwigPyIterator)
+SwigPyIterator.__eq__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___eq__, None, SwigPyIterator)
+SwigPyIterator.__ne__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___ne__, None, SwigPyIterator)
+SwigPyIterator.__iadd__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___iadd__, None, SwigPyIterator)
+SwigPyIterator.__isub__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___isub__, None, SwigPyIterator)
+SwigPyIterator.__add__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___add__, None, SwigPyIterator)
+SwigPyIterator.__sub__ = new_instancemethod(_rsm_direct_covariance_a.SwigPyIterator___sub__, None, SwigPyIterator)
+SwigPyIterator_swigregister = _rsm_direct_covariance_a.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
-SHARED_PTR_DISOWN = _rsm_adjustable_parameter_a.SHARED_PTR_DISOWN
+SHARED_PTR_DISOWN = _rsm_direct_covariance_a.SHARED_PTR_DISOWN
 
 import os
 
@@ -180,19 +180,23 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.rsm_adjustable_parameter
+import geocal_swig.rsm_direct_covariance
 import geocal_swig.generic_object
-import geocal_swig.with_parameter
+import geocal_swig.ground_coordinate
+import geocal_swig.look_vector
+import geocal_swig.coordinate_converter
 import geocal_swig.dem
+import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustableParameter):
+class RsmDirectCovarianceA(geocal_swig.rsm_direct_covariance.RsmDirectCovariance):
     """
 
-    This is used to handle the RSM adjustable parameters.
+    This handles the direct error covariance for and RSM.
 
-    This supports RSMAPA.
+    There are two versions of this, RSMDCA and RSMDCB. This is the A
+    version.
 
-    C++ includes: rsm_adjustable_parameter_a.h 
+    C++ includes: rsm_direct_covariance_a.h 
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
@@ -201,32 +205,32 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     def __init__(self, *args):
         """
 
-        RsmAdjustableParameterA::RsmAdjustableParameterA(const ImageGroundConnection &Igc, const RsmId &Rsm_id, const
+        RsmDirectCovarianceA::RsmDirectCovarianceA(const ImageGroundConnection &Igc, const RsmId &Rsm_id, const
         std::string &Triangulation_id="", bool
         Activate_image_correction=false, bool Activate_ground_rotation=false,
         bool Activate_ground_correction=false)
-        Create a RsmAdjustableParameterA.
+        Create a RsmDirectCovarianceA.
 
         We create a LocalRcConverter that matches the given Igc, set the
         Image_identifier and Rsm_support_data_edition to match that of the
         given Rsm_id, and can optionally activate a set of the parameters for
         the correction. 
         """
-        _rsm_adjustable_parameter_a.RsmAdjustableParameterA_swiginit(self, _rsm_adjustable_parameter_a.new_RsmAdjustableParameterA(*args))
+        _rsm_direct_covariance_a.RsmDirectCovarianceA_swiginit(self, _rsm_direct_covariance_a.new_RsmDirectCovarianceA(*args))
 
     def tre_string(self):
         """
 
-        std::string RsmAdjustableParameterA::tre_string() const
+        std::string RsmDirectCovarianceA::tre_string() const
 
         """
-        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_tre_string(self)
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA_tre_string(self)
 
 
     def read_tre_string(Tre_in):
         """
 
-        boost::shared_ptr< RsmAdjustableParameterA > RsmAdjustableParameterA::read_tre_string(const std::string &Tre_in)
+        boost::shared_ptr< RsmDirectCovarianceA > RsmDirectCovarianceA::read_tre_string(const std::string &Tre_in)
         Read a TRE string.
 
         Note that the TRE does not contain all the fields we have in a
@@ -239,44 +243,71 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
         convenient to treat these fields as special. (We can revisit this in
         the future if we need to). 
         """
-        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_read_tre_string(Tre_in)
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA_read_tre_string(Tre_in)
 
     read_tre_string = staticmethod(read_tre_string)
 
     def activate_image_correction(self):
         """
 
-        void RsmAdjustableParameterA::activate_image_correction()
+        void RsmDirectCovarianceA::activate_image_correction()
         Any set of parameters can be activated, in any desired order.
 
         But we tend to activate them in groups. This function turns on all of
         image correction parameters. 
         """
-        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_image_correction(self)
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA_activate_image_correction(self)
 
 
     def activate_ground_rotation(self):
         """
 
-        void RsmAdjustableParameterA::activate_ground_rotation()
+        void RsmDirectCovarianceA::activate_ground_rotation()
         Any set of parameters can be activated, in any desired order.
 
         But we tend to activate them in groups. This function turns on all of
         ground rotation parameters. 
         """
-        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_rotation(self)
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA_activate_ground_rotation(self)
 
 
     def activate_ground_correction(self):
         """
 
-        void RsmAdjustableParameterA::activate_ground_correction()
+        void RsmDirectCovarianceA::activate_ground_correction()
         Any set of parameters can be activated, in any desired order.
 
         But we tend to activate them in groups. This function turns on all of
         ground correction parameters. 
         """
-        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_correction(self)
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA_activate_ground_correction(self)
+
+
+    def _v_covariance(self, *args):
+        """
+
+        void GeoCal::RsmDirectCovarianceA::covariance(const blitz::Array< double, 2 > &V)
+
+        """
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA__v_covariance(self, *args)
+
+
+    @property
+    def covariance(self):
+        return self._v_covariance()
+
+    @covariance.setter
+    def covariance(self, value):
+      self._v_covariance(value)
+
+
+    def _v_parameter_name(self):
+        """
+
+        std::vector< std::string > RsmDirectCovarianceA::parameter_name() const
+
+        """
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA__v_parameter_name(self)
 
 
     @property
@@ -287,10 +318,10 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     def _v_coordinate_converter(self, *args):
         """
 
-        void GeoCal::RsmAdjustableParameterA::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)
+        void GeoCal::RsmDirectCovarianceA::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)
 
         """
-        return _rsm_adjustable_parameter_a.RsmAdjustableParameterA__v_coordinate_converter(self, *args)
+        return _rsm_direct_covariance_a.RsmDirectCovarianceA__v_coordinate_converter(self, *args)
 
 
     @property
@@ -305,19 +336,21 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
-    __swig_destroy__ = _rsm_adjustable_parameter_a.delete_RsmAdjustableParameterA
-RsmAdjustableParameterA.tre_string = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_tre_string, None, RsmAdjustableParameterA)
-RsmAdjustableParameterA.activate_image_correction = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_image_correction, None, RsmAdjustableParameterA)
-RsmAdjustableParameterA.activate_ground_rotation = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_rotation, None, RsmAdjustableParameterA)
-RsmAdjustableParameterA.activate_ground_correction = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_activate_ground_correction, None, RsmAdjustableParameterA)
-RsmAdjustableParameterA._v_coordinate_converter = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA__v_coordinate_converter, None, RsmAdjustableParameterA)
-RsmAdjustableParameterA_swigregister = _rsm_adjustable_parameter_a.RsmAdjustableParameterA_swigregister
-RsmAdjustableParameterA_swigregister(RsmAdjustableParameterA)
+    __swig_destroy__ = _rsm_direct_covariance_a.delete_RsmDirectCovarianceA
+RsmDirectCovarianceA.tre_string = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA_tre_string, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA.activate_image_correction = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA_activate_image_correction, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA.activate_ground_rotation = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA_activate_ground_rotation, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA.activate_ground_correction = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA_activate_ground_correction, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA._v_covariance = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA__v_covariance, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA._v_parameter_name = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA__v_parameter_name, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA._v_coordinate_converter = new_instancemethod(_rsm_direct_covariance_a.RsmDirectCovarianceA__v_coordinate_converter, None, RsmDirectCovarianceA)
+RsmDirectCovarianceA_swigregister = _rsm_direct_covariance_a.RsmDirectCovarianceA_swigregister
+RsmDirectCovarianceA_swigregister(RsmDirectCovarianceA)
 
-def RsmAdjustableParameterA_read_tre_string(Tre_in):
+def RsmDirectCovarianceA_read_tre_string(Tre_in):
     """
 
-    boost::shared_ptr< RsmAdjustableParameterA > RsmAdjustableParameterA::read_tre_string(const std::string &Tre_in)
+    boost::shared_ptr< RsmDirectCovarianceA > RsmDirectCovarianceA::read_tre_string(const std::string &Tre_in)
     Read a TRE string.
 
     Note that the TRE does not contain all the fields we have in a
@@ -330,10 +363,10 @@ def RsmAdjustableParameterA_read_tre_string(Tre_in):
     convenient to treat these fields as special. (We can revisit this in
     the future if we need to). 
     """
-    return _rsm_adjustable_parameter_a.RsmAdjustableParameterA_read_tre_string(Tre_in)
+    return _rsm_direct_covariance_a.RsmDirectCovarianceA_read_tre_string(Tre_in)
 
 
-__all__ = ["RsmAdjustableParameterA"]
+__all__ = ["RsmDirectCovarianceA"]
 
 
 

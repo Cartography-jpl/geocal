@@ -10,14 +10,19 @@
 %geocal_shared_ptr(GeoCal::RsmIndirectCovariance);
 
 namespace GeoCal {
+%nodefaultctor RsmIndirectCovariance;
 class RsmIndirectCovariance : public GenericObject {
 public:
-  RsmIndirectCovariance();
-  std::string tre_string() const;
-  static boost::shared_ptr<RsmIndirectCovariance>
-  read_tre_string(const std::string& Tre_in);
+  // RsmIndirectCovariance(const std::string& Image_identifier="",
+  // 		      const std::string& Rsm_support_data_edition="fake-1",
+  // 		      const std::string& Triangulation_id="");
+  std::string base_tre_string() const;
+  void base_read_tre_string(std::istream& In);
   %python_attribute_with_set(image_identifier, std::string);
   %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(triangulation_id, std::string);
+  %python_attribute_with_set(naif_code, int);
+  virtual std::string print_to_string() const;
   %pickle_serialization()
 };
 }

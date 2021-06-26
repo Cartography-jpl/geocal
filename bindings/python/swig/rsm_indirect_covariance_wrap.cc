@@ -5774,19 +5774,6 @@ namespace swig {
 #include "rsm_indirect_covariance.h"
 
 
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -5977,6 +5964,22 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
     }
   }
   return SWIG_ERROR;
+}
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
 }
 
 
@@ -6766,31 +6769,7 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_RsmIndirectCovariance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::RsmIndirectCovariance *result = 0 ;
-  
-  if (!SWIG_Python_UnpackTuple(args,"new_RsmIndirectCovariance",0,0,0)) SWIG_fail;
-  {
-    try {
-      result = (GeoCal::RsmIndirectCovariance *)new GeoCal::RsmIndirectCovariance();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::RsmIndirectCovariance > *smartresult = result ? new boost::shared_ptr<  GeoCal::RsmIndirectCovariance >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_base_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
   void *argp1 = 0 ;
@@ -6806,7 +6785,7 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_tre_string(PyObject *SWIGUNUSED
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance_tre_string" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance_base_tre_string" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
@@ -6819,7 +6798,7 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_tre_string(PyObject *SWIGUNUSED
   }
   {
     try {
-      result = ((GeoCal::RsmIndirectCovariance const *)arg1)->tre_string();
+      result = ((GeoCal::RsmIndirectCovariance const *)arg1)->base_tre_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6833,42 +6812,55 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_read_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_base_read_tre_string(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  std::string *arg1 = 0 ;
-  int res1 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[1] ;
-  boost::shared_ptr< GeoCal::RsmIndirectCovariance > result;
+  GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
+  std::istream *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance > *smartarg1 = 0 ;
+  boost::iostreams::filtering_istream v2 ;
+  PyObject *swig_obj[2] ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"RsmIndirectCovariance_base_read_tre_string",2,2,swig_obj)) SWIG_fail;
   {
-    std::string *ptr = (std::string *)0;
-    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance_read_tre_string" "', argument " "1"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance_base_read_tre_string" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance *""'");
     }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmIndirectCovariance_read_tre_string" "', argument " "1"" of type '" "std::string const &""'"); 
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >((smartarg1 ? smartarg1->get() : 0));
     }
-    arg1 = ptr;
   }
+  
+  if(swig_obj[1] != Py_None)
+  // Don't hold any characters in buffer. We don't have an easy
+  // way to put the buffer back into the python stream. May
+  // revisit this if there is a performance reason, we are doing a
+  // python call now for each read. But for now, just have a
+  // simpler interface of not buffering.
+  v2.push(python_fh_inserter(swig_obj[1]), 1);
+  arg2 = &v2;
+  
   {
     try {
-      result = GeoCal::RsmIndirectCovariance::read_tre_string((std::string const &)*arg1);
+      (arg1)->base_read_tre_string(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  {
-    resultobj = GeoCal::swig_to_python(result);
-  }
-  if (SWIG_IsNewObj(res1)) delete arg1;
+  resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
 }
 
@@ -7113,6 +7105,284 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_triangulation_id__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance__v_triangulation_id" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmIndirectCovariance const *)arg1)->triangulation_id();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_triangulation_id__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance__v_triangulation_id" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmIndirectCovariance__v_triangulation_id" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmIndirectCovariance__v_triangulation_id" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->triangulation_id((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_triangulation_id(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmIndirectCovariance__v_triangulation_id",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmIndirectCovariance__v_triangulation_id__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmIndirectCovariance__v_triangulation_id__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmIndirectCovariance__v_triangulation_id'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmIndirectCovariance::triangulation_id() const\n"
+    "    GeoCal::RsmIndirectCovariance::triangulation_id(std::string const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_naif_code__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance const > *smartarg1 = 0 ;
+  int result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance__v_naif_code" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::RsmIndirectCovariance const *)arg1)->naif_code();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_naif_code__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
+  int *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance > *smartarg1 = 0 ;
+  int temp2 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance__v_naif_code" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmIndirectCovariance__v_naif_code" "', argument " "2"" of type '" "int""'");
+  } 
+  temp2 = static_cast< int >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->naif_code((int const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_naif_code(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmIndirectCovariance__v_naif_code",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmIndirectCovariance__v_naif_code__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmIndirectCovariance__v_naif_code__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmIndirectCovariance__v_naif_code'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmIndirectCovariance::naif_code() const\n"
+    "    GeoCal::RsmIndirectCovariance::naif_code(int const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmIndirectCovariance___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmIndirectCovariance const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmIndirectCovariance_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmIndirectCovariance___str__" "', argument " "1"" of type '" "GeoCal::RsmIndirectCovariance const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmIndirectCovariance > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmIndirectCovariance * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RsmIndirectCovariance const *)arg1)->print_to_string();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_RsmIndirectCovariance(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmIndirectCovariance *arg1 = (GeoCal::RsmIndirectCovariance *) 0 ;
@@ -7162,10 +7432,6 @@ SWIGINTERN PyObject *RsmIndirectCovariance_swigregister(PyObject *SWIGUNUSEDPARM
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *RsmIndirectCovariance_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  return SWIG_Python_InitShadowInstance(args);
-}
-
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -7186,34 +7452,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_RsmIndirectCovariance", (PyCFunction)_wrap_new_RsmIndirectCovariance, METH_NOARGS, (char *)"\n"
+	 { (char *)"RsmIndirectCovariance_base_tre_string", (PyCFunction)_wrap_RsmIndirectCovariance_base_tre_string, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::RsmIndirectCovariance::RsmIndirectCovariance()\n"
-		"\n"
+		"std::string RsmIndirectCovariance::base_tre_string() const\n"
+		"Write the part of the TRE string for the image identification, RSM\n"
+		"support data edition, and triangulation_id. \n"
 		""},
-	 { (char *)"RsmIndirectCovariance_tre_string", (PyCFunction)_wrap_RsmIndirectCovariance_tre_string, METH_O, (char *)"\n"
+	 { (char *)"RsmIndirectCovariance_base_read_tre_string", _wrap_RsmIndirectCovariance_base_read_tre_string, METH_VARARGS, (char *)"\n"
 		"\n"
-		"std::string RsmIndirectCovariance::tre_string() const\n"
-		"Write to TRE string.\n"
+		"void RsmIndirectCovariance::base_read_tre_string(std::istream &In)\n"
 		"\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to). \n"
-		""},
-	 { (char *)"RsmIndirectCovariance_read_tre_string", (PyCFunction)_wrap_RsmIndirectCovariance_read_tre_string, METH_O, (char *)"\n"
-		"\n"
-		"boost::shared_ptr< RsmIndirectCovariance > RsmIndirectCovariance::read_tre_string(const std::string &Tre_in)\n"
-		"Read a TRE string.\n"
-		"\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
-		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
 		""},
 	 { (char *)"RsmIndirectCovariance__v_image_identifier", _wrap_RsmIndirectCovariance__v_image_identifier, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -7225,13 +7473,31 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::RsmIndirectCovariance::rsm_suport_data_edition(const std::string &V)\n"
 		"\n"
 		""},
+	 { (char *)"RsmIndirectCovariance__v_triangulation_id", _wrap_RsmIndirectCovariance__v_triangulation_id, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::RsmIndirectCovariance::triangulation_id(const std::string &V)\n"
+		"\n"
+		""},
+	 { (char *)"RsmIndirectCovariance__v_naif_code", _wrap_RsmIndirectCovariance__v_naif_code, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual void GeoCal::RsmIndirectCovariance::naif_code(int Naif_code)=0\n"
+		"Set the NAIF code for the planet/body we are working with.\n"
+		"\n"
+		"Note that the NITF TRE structure does not have a place to store the\n"
+		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
+		"for something like Mars, we have the NAIF code set to earth. We need\n"
+		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF\n"
+		"code), just for NITF TRE. \n"
+		""},
+	 { (char *)"RsmIndirectCovariance___str__", (PyCFunction)_wrap_RsmIndirectCovariance___str__, METH_O, NULL},
 	 { (char *)"delete_RsmIndirectCovariance", (PyCFunction)_wrap_delete_RsmIndirectCovariance, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::RsmIndirectCovariance::~RsmIndirectCovariance()\n"
 		"\n"
 		""},
 	 { (char *)"RsmIndirectCovariance_swigregister", RsmIndirectCovariance_swigregister, METH_VARARGS, NULL},
-	 { (char *)"RsmIndirectCovariance_swiginit", RsmIndirectCovariance_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

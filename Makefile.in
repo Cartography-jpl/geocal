@@ -505,6 +505,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/rsm_rational_polynomial_wrap.cc \
 	@swigsrc@/rsm_id_wrap.cc \
 	@swigsrc@/rsm_direct_covariance_wrap.cc \
+	@swigsrc@/rsm_direct_covariance_a_wrap.cc \
 	@swigsrc@/rsm_indirect_covariance_wrap.cc \
 	@swigsrc@/rsm_adjustable_parameter_wrap.cc \
 	@swigsrc@/rsm_adjustable_parameter_a_wrap.cc \
@@ -702,6 +703,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_rational_polynomial_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_id_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_direct_covariance_wrap.lo \
+	@swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_indirect_covariance_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_adjustable_parameter_wrap.lo \
 	@swigsrc@/_swig_wrap_la-rsm_adjustable_parameter_a_wrap.lo \
@@ -909,6 +911,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rsm_rational_polynomial.cc \
 	@srcimplementation@/rsm_id.cc \
 	@srcimplementation@/rsm_direct_covariance.cc \
+	@srcimplementation@/rsm_direct_covariance_a.cc \
 	@srcimplementation@/rsm_indirect_covariance.cc \
 	@srcimplementation@/rsm_adjustable_parameter.cc \
 	@srcimplementation@/rsm_adjustable_parameter_a.cc \
@@ -1108,6 +1111,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-rsm_rational_polynomial.lo \
 	@srcimplementation@/libgeocal_la-rsm_id.lo \
 	@srcimplementation@/libgeocal_la-rsm_direct_covariance.lo \
+	@srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo \
 	@srcimplementation@/libgeocal_la-rsm_indirect_covariance.lo \
 	@srcimplementation@/libgeocal_la-rsm_adjustable_parameter.lo \
 	@srcimplementation@/libgeocal_la-rsm_adjustable_parameter_a.lo \
@@ -1295,6 +1299,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_low_order_polynomial_test.cc \
 	@srcimplementation@/rsm_id_test.cc \
 	@srcimplementation@/rsm_direct_covariance_test.cc \
+	@srcimplementation@/rsm_direct_covariance_a_test.cc \
 	@srcimplementation@/rsm_indirect_covariance_test.cc \
 	@srcimplementation@/rsm_adjustable_parameter_a_test.cc \
 	@srcimplementation@/rsm_multi_section_test.cc \
@@ -1462,6 +1467,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-rsm_low_order_polynomial_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-rsm_id_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-rsm_direct_covariance_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-rsm_indirect_covariance_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-rsm_adjustable_parameter_a_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-rsm_multi_section_test.$(OBJEXT) \
@@ -1669,6 +1675,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_grid_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_id_test.Po \
@@ -1768,6 +1775,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_adjustable_parameter_a.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_base.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_grid.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_id.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_image_ground_connection.Plo \
@@ -2098,6 +2106,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_a_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_base_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_grid_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_id_wrap.Plo \
@@ -2361,6 +2370,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_rational_polynomial.h \
 	@srcimplementation@/rsm_id.h \
 	@srcimplementation@/rsm_direct_covariance.h \
+	@srcimplementation@/rsm_direct_covariance_a.h \
 	@srcimplementation@/rsm_indirect_covariance.h \
 	@srcimplementation@/rsm_adjustable_parameter.h \
 	@srcimplementation@/rsm_adjustable_parameter_a.h \
@@ -3393,6 +3403,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/rsm_rational_polynomial.cc \
 	@srcimplementation@/rsm_id.cc \
 	@srcimplementation@/rsm_direct_covariance.cc \
+	@srcimplementation@/rsm_direct_covariance_a.cc \
 	@srcimplementation@/rsm_indirect_covariance.cc \
 	@srcimplementation@/rsm_adjustable_parameter.cc \
 	@srcimplementation@/rsm_adjustable_parameter_a.cc \
@@ -3557,6 +3568,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/rsm_rational_polynomial_wrap.cc \
 	@swigsrc@/rsm_id_wrap.cc \
 	@swigsrc@/rsm_direct_covariance_wrap.cc \
+	@swigsrc@/rsm_direct_covariance_a_wrap.cc \
 	@swigsrc@/rsm_indirect_covariance_wrap.cc \
 	@swigsrc@/rsm_adjustable_parameter_wrap.cc \
 	@swigsrc@/rsm_adjustable_parameter_a_wrap.cc \
@@ -3792,6 +3804,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_rational_polynomial.h \
 	@srcimplementation@/rsm_id.h \
 	@srcimplementation@/rsm_direct_covariance.h \
+	@srcimplementation@/rsm_direct_covariance_a.h \
 	@srcimplementation@/rsm_indirect_covariance.h \
 	@srcimplementation@/rsm_adjustable_parameter.h \
 	@srcimplementation@/rsm_adjustable_parameter_a.h \
@@ -3972,6 +3985,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/rsm_rational_polynomial.i \
 	@srcimplementation@/rsm_id.i \
 	@srcimplementation@/rsm_direct_covariance.i \
+	@srcimplementation@/rsm_direct_covariance_a.i \
 	@srcimplementation@/rsm_indirect_covariance.i \
 	@srcimplementation@/rsm_adjustable_parameter.i \
 	@srcimplementation@/rsm_adjustable_parameter_a.i \
@@ -4108,6 +4122,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/rsm_low_order_polynomial_test.cc \
 	@srcimplementation@/rsm_id_test.cc \
 	@srcimplementation@/rsm_direct_covariance_test.cc \
+	@srcimplementation@/rsm_direct_covariance_a_test.cc \
 	@srcimplementation@/rsm_indirect_covariance_test.cc \
 	@srcimplementation@/rsm_adjustable_parameter_a_test.cc \
 	@srcimplementation@/rsm_multi_section_test.cc \
@@ -4926,6 +4941,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-rsm_direct_covariance_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-rsm_indirect_covariance_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-rsm_adjustable_parameter_wrap.lo:  \
@@ -5494,6 +5511,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-rsm_direct_covariance.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-rsm_indirect_covariance.lo:  \
@@ -6074,6 +6094,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-rsm_direct_covariance_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-rsm_indirect_covariance_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -6471,6 +6494,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_grid_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_id_test.Po@am__quote@ # am--include-marker
@@ -6570,6 +6594,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_adjustable_parameter_a.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_base.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_grid.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_id.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_image_ground_connection.Plo@am__quote@ # am--include-marker
@@ -6900,6 +6925,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_a_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_base_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_grid_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_id_wrap.Plo@am__quote@ # am--include-marker
@@ -8003,6 +8029,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/rsm_direct_covariance_wrap.cc' object='@swigsrc@/_swig_wrap_la-rsm_direct_covariance_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-rsm_direct_covariance_wrap.lo `test -f '@swigsrc@/rsm_direct_covariance_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/rsm_direct_covariance_wrap.cc
+
+@swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo: @swigsrc@/rsm_direct_covariance_a_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo `test -f '@swigsrc@/rsm_direct_covariance_a_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/rsm_direct_covariance_a_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/rsm_direct_covariance_a_wrap.cc' object='@swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-rsm_direct_covariance_a_wrap.lo `test -f '@swigsrc@/rsm_direct_covariance_a_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/rsm_direct_covariance_a_wrap.cc
 
 @swigsrc@/_swig_wrap_la-rsm_indirect_covariance_wrap.lo: @swigsrc@/rsm_indirect_covariance_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-rsm_indirect_covariance_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_indirect_covariance_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-rsm_indirect_covariance_wrap.lo `test -f '@swigsrc@/rsm_indirect_covariance_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/rsm_indirect_covariance_wrap.cc
@@ -9452,6 +9485,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/rsm_direct_covariance.cc' object='@srcimplementation@/libgeocal_la-rsm_direct_covariance.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-rsm_direct_covariance.lo `test -f '@srcimplementation@/rsm_direct_covariance.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_direct_covariance.cc
+
+@srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo: @srcimplementation@/rsm_direct_covariance_a.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Tpo -c -o @srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo `test -f '@srcimplementation@/rsm_direct_covariance_a.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_direct_covariance_a.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/rsm_direct_covariance_a.cc' object='@srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-rsm_direct_covariance_a.lo `test -f '@srcimplementation@/rsm_direct_covariance_a.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_direct_covariance_a.cc
 
 @srcimplementation@/libgeocal_la-rsm_indirect_covariance.lo: @srcimplementation@/rsm_indirect_covariance.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-rsm_indirect_covariance.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_indirect_covariance.Tpo -c -o @srcimplementation@/libgeocal_la-rsm_indirect_covariance.lo `test -f '@srcimplementation@/rsm_indirect_covariance.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_indirect_covariance.cc
@@ -11602,6 +11642,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-rsm_direct_covariance_test.obj `if test -f '@srcimplementation@/rsm_direct_covariance_test.cc'; then $(CYGPATH_W) '@srcimplementation@/rsm_direct_covariance_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/rsm_direct_covariance_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.o: @srcimplementation@/rsm_direct_covariance_a_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Tpo -c -o @srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.o `test -f '@srcimplementation@/rsm_direct_covariance_a_test.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_direct_covariance_a_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/rsm_direct_covariance_a_test.cc' object='@srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.o `test -f '@srcimplementation@/rsm_direct_covariance_a_test.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_direct_covariance_a_test.cc
+
+@srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.obj: @srcimplementation@/rsm_direct_covariance_a_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Tpo -c -o @srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.obj `if test -f '@srcimplementation@/rsm_direct_covariance_a_test.cc'; then $(CYGPATH_W) '@srcimplementation@/rsm_direct_covariance_a_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/rsm_direct_covariance_a_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/rsm_direct_covariance_a_test.cc' object='@srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-rsm_direct_covariance_a_test.obj `if test -f '@srcimplementation@/rsm_direct_covariance_a_test.cc'; then $(CYGPATH_W) '@srcimplementation@/rsm_direct_covariance_a_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/rsm_direct_covariance_a_test.cc'; fi`
+
 @srcimplementation@/geocal_test_all-rsm_indirect_covariance_test.o: @srcimplementation@/rsm_indirect_covariance_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-rsm_indirect_covariance_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_indirect_covariance_test.Tpo -c -o @srcimplementation@/geocal_test_all-rsm_indirect_covariance_test.o `test -f '@srcimplementation@/rsm_indirect_covariance_test.cc' || echo '$(srcdir)/'`@srcimplementation@/rsm_indirect_covariance_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_indirect_covariance_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_indirect_covariance_test.Po
@@ -13345,6 +13399,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_grid_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_id_test.Po
@@ -13444,6 +13499,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_adjustable_parameter_a.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_base.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_grid.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_id.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_image_ground_connection.Plo
@@ -13774,6 +13830,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_a_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_base_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_grid_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_id_wrap.Plo
@@ -13998,6 +14055,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_a_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_direct_covariance_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_grid_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_id_test.Po
@@ -14097,6 +14155,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_adjustable_parameter_a.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_base.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_direct_covariance_a.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_grid.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_id.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm_image_ground_connection.Plo
@@ -14427,6 +14486,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_a_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_adjustable_parameter_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_base_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_a_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_direct_covariance_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_grid_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rsm_id_wrap.Plo

@@ -191,48 +191,29 @@ class RsmDirectCovariance(geocal_swig.generic_object.GenericObject):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
 
-    def __init__(self):
+    def base_tre_string(self):
         """
 
-        GeoCal::RsmDirectCovariance::RsmDirectCovariance()
-
+        std::string RsmDirectCovariance::base_tre_string() const
+        Write the part of the TRE string for the image identification, RSM
+        support data edition, and triangulation_id. 
         """
-        _rsm_direct_covariance.RsmDirectCovariance_swiginit(self, _rsm_direct_covariance.new_RsmDirectCovariance())
-
-    def tre_string(self):
-        """
-
-        std::string RsmDirectCovariance::tre_string() const
-        Write to TRE string.
-
-        Note that this is all the fields except the CETAG and CEL (the front
-        two). It is convenient to treat those special. (We can revisit this in
-        the future if we need to). 
-        """
-        return _rsm_direct_covariance.RsmDirectCovariance_tre_string(self)
+        return _rsm_direct_covariance.RsmDirectCovariance_base_tre_string(self)
 
 
-    def read_tre_string(Tre_in):
+    def base_read_tre_string(self, In):
         """
 
-        boost::shared_ptr< RsmDirectCovariance > RsmDirectCovariance::read_tre_string(const std::string &Tre_in)
-        Read a TRE string.
+        void RsmDirectCovariance::base_read_tre_string(std::istream &In)
 
-        Note that the TRE does not contain all the fields we have in a
-        RsmRationalPolynomial. However the fields that aren't contained are
-        ones used for fitting the RSM, so in practice this doesn't matter. We
-        just set the various fields to the default values found in the
-        constructor.
-
-        This should have all the TRE except for the front CETAG and CEL. It is
-        convenient to treat these fields as special. (We can revisit this in
-        the future if we need to). 
         """
-        return _rsm_direct_covariance.RsmDirectCovariance_read_tre_string(Tre_in)
+        return _rsm_direct_covariance.RsmDirectCovariance_base_read_tre_string(self, In)
 
-    read_tre_string = staticmethod(read_tre_string)
 
     def _v_image_identifier(self, *args):
         """
@@ -270,33 +251,63 @@ class RsmDirectCovariance(geocal_swig.generic_object.GenericObject):
       self._v_rsm_suport_data_edition(value)
 
 
+    def _v_triangulation_id(self, *args):
+        """
+
+        void GeoCal::RsmDirectCovariance::triangulation_id(const std::string &V)
+
+        """
+        return _rsm_direct_covariance.RsmDirectCovariance__v_triangulation_id(self, *args)
+
+
+    @property
+    def triangulation_id(self):
+        return self._v_triangulation_id()
+
+    @triangulation_id.setter
+    def triangulation_id(self, value):
+      self._v_triangulation_id(value)
+
+
+    def _v_naif_code(self, *args):
+        """
+
+        virtual void GeoCal::RsmDirectCovariance::naif_code(int Naif_code)=0
+        Set the NAIF code for the planet/body we are working with.
+
+        Note that the NITF TRE structure does not have a place to store the
+        NAIF code, it implicitly assumes earth. So when we read a TRE, even
+        for something like Mars, we have the NAIF code set to earth. We need
+        to update this with other metadata (e.g. TARGET_NAME in PDS label).
+
+        This is not a problem for boost serialization (which keeps the NAIF
+        code), just for NITF TRE. 
+        """
+        return _rsm_direct_covariance.RsmDirectCovariance__v_naif_code(self, *args)
+
+
+    @property
+    def naif_code(self):
+        return self._v_naif_code()
+
+    @naif_code.setter
+    def naif_code(self, value):
+      self._v_naif_code(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_direct_covariance.delete_RsmDirectCovariance
-RsmDirectCovariance.tre_string = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance_tre_string, None, RsmDirectCovariance)
+RsmDirectCovariance.base_tre_string = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance_base_tre_string, None, RsmDirectCovariance)
+RsmDirectCovariance.base_read_tre_string = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance_base_read_tre_string, None, RsmDirectCovariance)
 RsmDirectCovariance._v_image_identifier = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance__v_image_identifier, None, RsmDirectCovariance)
 RsmDirectCovariance._v_rsm_suport_data_edition = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance__v_rsm_suport_data_edition, None, RsmDirectCovariance)
+RsmDirectCovariance._v_triangulation_id = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance__v_triangulation_id, None, RsmDirectCovariance)
+RsmDirectCovariance._v_naif_code = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance__v_naif_code, None, RsmDirectCovariance)
+RsmDirectCovariance.__str__ = new_instancemethod(_rsm_direct_covariance.RsmDirectCovariance___str__, None, RsmDirectCovariance)
 RsmDirectCovariance_swigregister = _rsm_direct_covariance.RsmDirectCovariance_swigregister
 RsmDirectCovariance_swigregister(RsmDirectCovariance)
-
-def RsmDirectCovariance_read_tre_string(Tre_in):
-    """
-
-    boost::shared_ptr< RsmDirectCovariance > RsmDirectCovariance::read_tre_string(const std::string &Tre_in)
-    Read a TRE string.
-
-    Note that the TRE does not contain all the fields we have in a
-    RsmRationalPolynomial. However the fields that aren't contained are
-    ones used for fitting the RSM, so in practice this doesn't matter. We
-    just set the various fields to the default values found in the
-    constructor.
-
-    This should have all the TRE except for the front CETAG and CEL. It is
-    convenient to treat these fields as special. (We can revisit this in
-    the future if we need to). 
-    """
-    return _rsm_direct_covariance.RsmDirectCovariance_read_tre_string(Tre_in)
 
 
 __all__ = ["RsmDirectCovariance"]

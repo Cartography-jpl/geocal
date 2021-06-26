@@ -11,7 +11,12 @@ namespace GeoCal {
 
 class RsmDirectCovariance : public Printable<RsmDirectCovariance> {
 public:
-  RsmDirectCovariance()
+  RsmDirectCovariance(const std::string& Image_identifier="",
+		      const std::string& Rsm_support_data_edition="fake-1",
+		      const std::string& Triangulation_id="")
+    : image_identifier_(Image_identifier),
+      rsm_suport_data_edition_(Rsm_support_data_edition),
+      triangulation_id_(Triangulation_id)
   {
   }
   virtual ~RsmDirectCovariance() {}
@@ -29,11 +34,40 @@ public:
   void rsm_suport_data_edition(const std::string& V)
   { rsm_suport_data_edition_ = V; }
   
-  std::string tre_string() const;
-  static boost::shared_ptr<RsmDirectCovariance>
-  read_tre_string(const std::string& Tre_in);
+//-----------------------------------------------------------------------
+/// Triangulation ID
+//-----------------------------------------------------------------------
+
+  const std::string& triangulation_id() const { return triangulation_id_;}
+  void triangulation_id(const std::string& V) { triangulation_id_ = V;}
+
+//-----------------------------------------------------------------------
+/// Return the NAIF code for the planet/body we are working with.
+//-----------------------------------------------------------------------
+  
+  virtual int naif_code() const = 0;
+
+//-----------------------------------------------------------------------
+/// Set the NAIF code for the planet/body we are working with.
+///
+/// Note that the NITF TRE structure does not have a place to store
+/// the NAIF code, it implicitly assumes earth. So when we read a TRE,
+/// even for something like Mars, we have the NAIF code set to
+/// earth. We need to update this with other metadata
+/// (e.g. TARGET_NAME in PDS label).
+///
+/// This is not a problem for boost serialization (which keeps the
+/// NAIF code), just for NITF TRE.
+//-----------------------------------------------------------------------
+  
+  virtual void naif_code(int Naif_code) = 0;
+  
+  std::string base_tre_string() const;
+  void base_read_tre_string(std::istream& In);
+  virtual void print(std::ostream& Os) const
+  { Os << "RsmDirectCovariance"; }
 private:
-  std::string image_identifier_, rsm_suport_data_edition_;
+  std::string image_identifier_, rsm_suport_data_edition_, triangulation_id_;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

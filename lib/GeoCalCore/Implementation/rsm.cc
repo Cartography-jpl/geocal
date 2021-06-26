@@ -487,8 +487,23 @@ void Rsm::print(std::ostream& Os) const
   else
     opad << *rparm << "\n";
   opad.strict_sync();
+  Os << "  Rsm Direct Covariance:\n";
+  if(!rdcov)
+    opad << "None" << "\n"
+	 << "\n";
+  else
+    opad << *rdcov << "\n";
+  opad.strict_sync();
+  Os << "  Rsm Indirect Covariance:\n";
+  if(!ricov)
+    opad << "None" << "\n"
+	 << "\n";
+  else
+    opad << *ricov << "\n";
+  opad.strict_sync();
   Os << "  Rsm ID:\n";
   opad << *rid << "\n";
+  opad.strict_sync();
 }
 
 //-----------------------------------------------------------------------

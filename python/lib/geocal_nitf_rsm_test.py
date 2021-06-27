@@ -1038,3 +1038,22 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     if(True):
         write_shelve("rsm.bin", r)
         write_shelve("igc.bin", igc)
+
+def test_rsm_cov(isolated_dir):
+    '''Test a simple rsm covariance'''
+    orb = KeplerOrbit()
+    tm = Time.parse_time("2003-01-01T11:11:00Z")
+    od = orb.orbit_data(tm)
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 2048, 2048, 2e-3,
+                           2e-3, 2.85e3, FrameCoordinate(1024,1024))
+    dem = SimpleDem(100)
+    img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
+    hmin = 50
+    hmax = 150
+    igc = OrbitDataImageGroundConnection(od, cam, dem, img)
+    r = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
+              LocalRcConverter(LocalRcParameter(igc)))
+    r.fit(igc, hmin, hmax)
+    true_line, true_sample, calc_line, calc_sample = r.compare_igc(igc, 100, 100, 100)
+    print("Line:\n",  pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
+    print("Sample:\n",  pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())

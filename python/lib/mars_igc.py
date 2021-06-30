@@ -333,37 +333,6 @@ def igc_mro_hirise_to_glas(igc_r):
     igc_g.sensor_id = "HiRISE"
     return igc_g
 
-def igc_mro_hirise_to_glas(igc_r):
-    '''Create a igc that can be used with GLAS from the results of 
-    igc_mro_hirise'''
-    tspace = igc_r.ipi.time_table.time_space
-    porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
-                     igc_r.ipi.time_table.min_time - 10 * tspace,
-                     igc_r.ipi.time_table.max_time + 10 * tspace,
-                     tspace,
-                     PosCsephb.LAGRANGE,
-                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
-                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
-    aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
-                     igc_r.ipi.time_table.min_time - 10 * tspace,
-                     igc_r.ipi.time_table.max_time + 10 * tspace,
-                     tspace,
-                     AttCsattb.LAGRANGE,
-                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
-                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
-    orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
-    band = 0
-    delta_sample = 2048 / 16
-    cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
-    ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
-                igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
-    igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
-    igc_g.platform_id = "MRO"
-    igc_g.payload_id = "MRO"
-    igc_g.sensor_id = "HiRISE"
-    return igc_g
-
-
 # Not sure if this actually fits here or not, but not an obvious other place
 # for this
 def vicar_update_glas(fin, fout, orbit_updated):

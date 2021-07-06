@@ -1,13 +1,6 @@
 # Just import any files we find in this directory, rather than listing
 # everything.
 
-# ***** Note
-# This init is just used for local testing. In particular, it doesn't load the
-# cython stuff. There is another __init__ file found at ../init/__init__.py that
-# is used for the full installed library. The purpose of this init it to
-# be able to locally run tests and do development without installing the full
-# system.
-
 import os as _os
 import re as _re
 import glob as _glob

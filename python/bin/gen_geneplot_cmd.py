@@ -15,6 +15,6 @@ for inp in inps:
       cmdstr=cmdstr+","
 out=sys.argv[1]
 cmdstr=cmdstr+ " out="+out+"\""
-print cmdstr
+print(cmdstr)
 os.system(cmdstr)
 

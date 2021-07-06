@@ -1,0 +1,9 @@
+# For some reason, this doesn't seem to actually work. For now we'll just
+# punt, but we'll want to figure out why we have having this excluded
+global-exclude *_test.py
+exclude lib/*_test.py
+exclude geocal/*_test.py
+prune pynitf
+prune test_support
+prune lib
+prune init

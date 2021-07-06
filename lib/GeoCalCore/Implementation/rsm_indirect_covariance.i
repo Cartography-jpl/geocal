@@ -9,6 +9,8 @@
 %base_import(generic_object)
 %geocal_shared_ptr(GeoCal::RsmIndirectCovariance);
 
+%feature("director") RsmIndirectCovariance;
+
 namespace GeoCal {
 %nodefaultctor RsmIndirectCovariance;
 class RsmIndirectCovariance : public GenericObject {

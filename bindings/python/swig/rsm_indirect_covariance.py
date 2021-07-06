@@ -299,6 +299,10 @@ class RsmIndirectCovariance(geocal_swig.generic_object.GenericObject):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_indirect_covariance.delete_RsmIndirectCovariance
+    def __disown__(self):
+        self.this.disown()
+        _rsm_indirect_covariance.disown_RsmIndirectCovariance(self)
+        return weakref_proxy(self)
 RsmIndirectCovariance.base_tre_string = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance_base_tre_string, None, RsmIndirectCovariance)
 RsmIndirectCovariance.base_read_tre_string = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance_base_read_tre_string, None, RsmIndirectCovariance)
 RsmIndirectCovariance._v_image_identifier = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance__v_image_identifier, None, RsmIndirectCovariance)

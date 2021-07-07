@@ -1,5 +1,6 @@
 from geocal_swig import (Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial,
                          RsmGrid, RsmRpPlusGrid, RsmAdjustableParameterA,
+                         RsmAdjustableParameterB,
                          RsmDirectCovarianceA,
                          have_msp_supported)
 import re
@@ -7,7 +8,8 @@ try:
     from pynitf import (NitfSegmentHook,
                         NitfSegmentHookSet,
                         TreRSMIDA, TreRSMGGA, TreRSMGIA, TreRSMPCA,
-                        TreRSMPIA, TreRSMAPA, TreRSMDCA, read_tre_data)
+                        TreRSMPIA, TreRSMAPA, TreRSMDCA,
+                        TreRSMAPB, read_tre_data)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -45,6 +47,8 @@ if(have_pynitf and not suppress_rsm):
     TreRSMIDA.tre_implementation_class = RsmId
     TreRSMAPA.tre_implementation_field = "rsm_adjustable_parameter"
     TreRSMAPA.tre_implementation_class = RsmAdjustableParameterA
+    TreRSMAPB.tre_implementation_field = "rsm_adjustable_parameter"
+    TreRSMAPB.tre_implementation_class = RsmAdjustableParameterB
     TreRSMDCA.tre_implementation_field = "rsm_direct_covariance"
     TreRSMDCA.tre_implementation_class = RsmDirectCovarianceA
     
@@ -116,8 +120,12 @@ if(have_pynitf and not suppress_rsm):
                 t.rsm_id = seg.rsm.rsm_id
                 seg.tre_list.append(t)
                 if(seg.rsm.rsm_adjustable_parameter):
-                    t = TreRSMAPA()
-                    t.rsm_adjustable_parameter = seg.rsm_adjustable_parameter
+                    if(isinstance(seg.rsm.rsm_adjustable_parameter,
+                                  RsmAdjustableParameterA)):
+                        t = TreRSMAPA()
+                    else:
+                        t = TreRSMAPB()
+                    t.rsm_adjustable_parameter = seg.rsm.rsm_adjustable_parameter
                     seg.tre_list.append(t)
                 if(seg.rsm.rsm_direct_covariance):
                     t = TreRSMDCA()
@@ -152,6 +160,9 @@ if(have_pynitf and not suppress_rsm):
             r = Rsm(t.rsm_id)
             edition = t.edition
             t = self._rsm_find_tre(seg, 'RSMAPA')
+            if(t is not None):
+                r.rsm_adjustable_parameter = t.rsm_adjustable_parameter
+            t = self._rsm_find_tre(seg, 'RSMAPB')
             if(t is not None):
                 r.rsm_adjustable_parameter = t.rsm_adjustable_parameter
             t = self._rsm_find_tre(seg, 'RSMDCA')

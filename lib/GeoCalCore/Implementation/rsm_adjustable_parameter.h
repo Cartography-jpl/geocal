@@ -12,7 +12,7 @@ namespace GeoCal {
   overall interface.
 *******************************************************************/
 
-class RsmAdjustableParameter : public WithParameter,
+class RsmAdjustableParameter : public virtual WithParameter,
 			       public Printable<RsmAdjustableParameter> {
 public:
   RsmAdjustableParameter(const std::string& Image_identifier="",

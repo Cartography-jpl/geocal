@@ -185,7 +185,157 @@ import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.dem
 import geocal_swig.geocal_exception
-class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustableParameter):
+class RsmBParameterDesc(geocal_swig.with_parameter.WithParameter):
+    """
+
+    It turns out the block of data that described the parameter B
+    structure (e.g.
+
+    which parameters are used) is used in several places (RSMAPB, RSMECB,
+    RSMDCA). We pull this piece out so it can get reused.
+
+    C++ includes: rsm_adjustable_parameter_b.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        RsmBParameterDesc::RsmBParameterDesc(const ImageGroundConnection &Igc, double H_min, double H_max)
+        Create a RsmBParameterDesc.
+
+        We create a LocalRcConverter that matches the given Igc. 
+        """
+        _rsm_adjustable_parameter_b.RsmBParameterDesc_swiginit(self, _rsm_adjustable_parameter_b.new_RsmBParameterDesc(*args))
+
+    def _v_number_parameter(self):
+        """
+
+        int GeoCal::RsmBParameterDesc::number_parameter() const
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_number_parameter(self)
+
+
+    @property
+    def number_parameter(self):
+        return self._v_number_parameter()
+
+
+    def _v_coordinate_converter(self, *args):
+        """
+
+        void GeoCal::RsmBParameterDesc::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_coordinate_converter(self, *args)
+
+
+    @property
+    def coordinate_converter(self):
+        return self._v_coordinate_converter()
+
+    @coordinate_converter.setter
+    def coordinate_converter(self, value):
+      self._v_coordinate_converter(value)
+
+
+    def _v_normalization_scale(self):
+        """
+
+        const blitz::Array<double, 1>& GeoCal::RsmBParameterDesc::normalization_scale() const
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_normalization_scale(self)
+
+
+    @property
+    def normalization_scale(self):
+        return self._v_normalization_scale()
+
+
+    def _v_normalization_offset(self):
+        """
+
+        blitz::Array<double, 1> GeoCal::RsmBParameterDesc::normalization_offset() const
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_normalization_offset(self)
+
+
+    @property
+    def normalization_offset(self):
+        return self._v_normalization_offset()
+
+
+    def _v_using_basis(self):
+        """
+
+        bool GeoCal::RsmBParameterDesc::using_basis() const
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_using_basis(self)
+
+
+    @property
+    def using_basis(self):
+        return self._v_using_basis()
+
+
+    def _v_row_power(self, *args):
+        """
+
+        void GeoCal::RsmBParameterDesc::row_power(const blitz::Array< int, 2 > &V)
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_row_power(self, *args)
+
+
+    @property
+    def row_power(self):
+        return self._v_row_power()
+
+    @row_power.setter
+    def row_power(self, value):
+      self._v_row_power(value)
+
+
+    def _v_col_power(self, *args):
+        """
+
+        void GeoCal::RsmBParameterDesc::col_power(const blitz::Array< int, 2 > &V)
+
+        """
+        return _rsm_adjustable_parameter_b.RsmBParameterDesc__v_col_power(self, *args)
+
+
+    @property
+    def col_power(self):
+        return self._v_col_power()
+
+    @col_power.setter
+    def col_power(self, value):
+      self._v_col_power(value)
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _rsm_adjustable_parameter_b.delete_RsmBParameterDesc
+RsmBParameterDesc._v_number_parameter = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_number_parameter, None, RsmBParameterDesc)
+RsmBParameterDesc._v_coordinate_converter = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_coordinate_converter, None, RsmBParameterDesc)
+RsmBParameterDesc._v_normalization_scale = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_normalization_scale, None, RsmBParameterDesc)
+RsmBParameterDesc._v_normalization_offset = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_normalization_offset, None, RsmBParameterDesc)
+RsmBParameterDesc._v_using_basis = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_using_basis, None, RsmBParameterDesc)
+RsmBParameterDesc._v_row_power = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_row_power, None, RsmBParameterDesc)
+RsmBParameterDesc._v_col_power = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_col_power, None, RsmBParameterDesc)
+RsmBParameterDesc.__str__ = new_instancemethod(_rsm_adjustable_parameter_b.RsmBParameterDesc___str__, None, RsmBParameterDesc)
+RsmBParameterDesc_swigregister = _rsm_adjustable_parameter_b.RsmBParameterDesc_swigregister
+RsmBParameterDesc_swigregister(RsmBParameterDesc)
+
+class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustableParameter, RsmBParameterDesc):
     """
 
     This is used to handle the RSM adjustable parameters.
@@ -201,14 +351,13 @@ class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     def __init__(self, *args):
         """
 
-        RsmAdjustableParameterB::RsmAdjustableParameterB(const ImageGroundConnection &Igc, const RsmId &Rsm_id, const
-        std::string &Triangulation_id="")
+        RsmAdjustableParameterB::RsmAdjustableParameterB(const ImageGroundConnection &Igc, double H_min, double H_max, const
+        RsmId &Rsm_id, const std::string &Triangulation_id="")
         Create a RsmAdjustableParameterB.
 
         We create a LocalRcConverter that matches the given Igc, set the
         Image_identifier and Rsm_support_data_edition to match that of the
-        given Rsm_id, and can optionally activate a set of the parameters for
-        the correction. 
+        given Rsm_id. 
         """
         _rsm_adjustable_parameter_b.RsmAdjustableParameterB_swiginit(self, _rsm_adjustable_parameter_b.new_RsmAdjustableParameterB(*args))
 
@@ -241,35 +390,11 @@ class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
 
     read_tre_string = staticmethod(read_tre_string)
 
-    @property
-    def parameter_name(self):
-        return self._v_parameter_name()
-
-
-    def _v_coordinate_converter(self, *args):
-        """
-
-        void GeoCal::RsmAdjustableParameterB::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)
-
-        """
-        return _rsm_adjustable_parameter_b.RsmAdjustableParameterB__v_coordinate_converter(self, *args)
-
-
-    @property
-    def coordinate_converter(self):
-        return self._v_coordinate_converter()
-
-    @coordinate_converter.setter
-    def coordinate_converter(self, value):
-      self._v_coordinate_converter(value)
-
-
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_adjustable_parameter_b.delete_RsmAdjustableParameterB
 RsmAdjustableParameterB.tre_string = new_instancemethod(_rsm_adjustable_parameter_b.RsmAdjustableParameterB_tre_string, None, RsmAdjustableParameterB)
-RsmAdjustableParameterB._v_coordinate_converter = new_instancemethod(_rsm_adjustable_parameter_b.RsmAdjustableParameterB__v_coordinate_converter, None, RsmAdjustableParameterB)
 RsmAdjustableParameterB_swigregister = _rsm_adjustable_parameter_b.RsmAdjustableParameterB_swigregister
 RsmAdjustableParameterB_swigregister(RsmAdjustableParameterB)
 
@@ -292,7 +417,7 @@ def RsmAdjustableParameterB_read_tre_string(Tre_in):
     return _rsm_adjustable_parameter_b.RsmAdjustableParameterB_read_tre_string(Tre_in)
 
 
-__all__ = ["RsmAdjustableParameterB"]
+__all__ = ["RsmAdjustableParameterB","RsmBParameterDesc"]
 
 
 

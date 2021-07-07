@@ -154,6 +154,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_rsm_direct_covariance)(void);
   INIT_TYPE INIT_FUNC(_rsm_direct_covariance_a)(void);
   INIT_TYPE INIT_FUNC(_rsm_indirect_covariance)(void);
+  INIT_TYPE INIT_FUNC(_rsm_indirect_covariance_b)(void);
   INIT_TYPE INIT_FUNC(_rsm_adjustable_parameter)(void);
   INIT_TYPE INIT_FUNC(_rsm_adjustable_parameter_a)(void);
   INIT_TYPE INIT_FUNC(_rsm_adjustable_parameter_b)(void);
@@ -375,6 +376,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_rsm_direct_covariance", INIT_FUNC(_rsm_direct_covariance));
   INIT_MODULE(module, "_rsm_direct_covariance_a", INIT_FUNC(_rsm_direct_covariance_a));
   INIT_MODULE(module, "_rsm_indirect_covariance", INIT_FUNC(_rsm_indirect_covariance));
+  INIT_MODULE(module, "_rsm_indirect_covariance_b", INIT_FUNC(_rsm_indirect_covariance_b));
   INIT_MODULE(module, "_rsm_adjustable_parameter", INIT_FUNC(_rsm_adjustable_parameter));
   INIT_MODULE(module, "_rsm_adjustable_parameter_a", INIT_FUNC(_rsm_adjustable_parameter_a));
   INIT_MODULE(module, "_rsm_adjustable_parameter_b", INIT_FUNC(_rsm_adjustable_parameter_b));

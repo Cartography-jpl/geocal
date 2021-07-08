@@ -189,6 +189,11 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     res = att(i, ra);
   if(itype_ == LINEAR) {
     double f = (T - min_time_) / tstep_ - i;
+    blitz::Array<double, 1> a1 = att(i+1, ra).copy();
+    blitz::Array<double, 1> a0 = att(i, ra).copy();
+    // Handle sign change in attitude
+    if(a1(3) * a0(3) < 0)
+      a1 *= -1;
     res = f * att(i+1, ra) + (1 - f) * att(i, ra);
   }
   if(itype_ == LAGRANGE) {
@@ -199,9 +204,16 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     std::vector<blitz::Array<double, 1> > a;
     for(int j = istart; j < iend; ++j) {
       tm.push_back(min_time_ + j * tstep_);
-      a.push_back(att(j,ra));
+      blitz::Array<double, 1> av = att(j,ra).copy();
+      //  Handle sign flips by making sure all scalar parts are positive
+      if(av(3) < 0)
+	av *= -1;
+      a.push_back(av);
     }
     res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(), a.end());
+    //  Translate back to whatever sign the closest point has
+    if(att(i,ra)(3) < 0)
+      res *= -1;
   }
   boost::math::quaternion<double> resq = nitf_to_quaternion(res);
   normalize(resq);

@@ -11,7 +11,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 {
   Rsm r(rp_from_rpc, cconv);
   BOOST_CHECK_EQUAL(r.rsm_id()->image_identifier(), "");
-  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_suport_data_edition(), "fake-1");
+  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_support_data_edition(), "fake-1");
 }
 
 BOOST_AUTO_TEST_CASE(tre)
@@ -23,8 +23,8 @@ BOOST_AUTO_TEST_CASE(tre)
     RsmId::read_tre_string(r.rsm_id()->tre_string());
   BOOST_CHECK_EQUAL(r.rsm_id()->image_identifier(),
 		    rid->image_identifier());
-  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_suport_data_edition(),
-		    rid->rsm_suport_data_edition());
+  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_support_data_edition(),
+		    rid->rsm_support_data_edition());
   r.rsm_id()->timing(boost::make_shared<RsmIdTiming>(2,3,0.1,0.2));
   r.rsm_id()->image_sequence_identifier("iseq");
   r.rsm_id()->sensor_identifier("sena");
@@ -34,8 +34,8 @@ BOOST_AUTO_TEST_CASE(tre)
   rid = RsmId::read_tre_string(r.rsm_id()->tre_string());
   BOOST_CHECK_EQUAL(r.rsm_id()->image_identifier(),
 		    rid->image_identifier());
-  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_suport_data_edition(),
-		    rid->rsm_suport_data_edition());
+  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_support_data_edition(),
+		    rid->rsm_support_data_edition());
   BOOST_CHECK_EQUAL(r.rsm_id()->image_sequence_identifier(),
 		    rid->image_sequence_identifier());
   BOOST_CHECK_EQUAL(r.rsm_id()->sensor_identifier(),
@@ -72,8 +72,8 @@ BOOST_AUTO_TEST_CASE(serialize)
     serialize_read_string<RsmId>(d);
   BOOST_CHECK_EQUAL(r.rsm_id()->image_identifier(),
 		    rid->image_identifier());
-  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_suport_data_edition(),
-		    rid->rsm_suport_data_edition());
+  BOOST_CHECK_EQUAL(r.rsm_id()->rsm_support_data_edition(),
+		    rid->rsm_support_data_edition());
   BOOST_CHECK_EQUAL(r.rsm_id()->image_sequence_identifier(),
 		    rid->image_sequence_identifier());
   BOOST_CHECK_EQUAL(r.rsm_id()->sensor_identifier(),

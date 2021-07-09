@@ -37,7 +37,7 @@ public:
   virtual std::string print_to_string() const;
   %python_attribute_with_set(coordinate_converter, boost::shared_ptr<CoordinateConverter>);
   %python_attribute_with_set(image_identifier, std::string);
-  %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(rsm_support_data_edition, std::string);
   %python_attribute_with_set(image_sequence_identifier, std::string);
   %python_attribute_with_set(sensor_identifier, std::string);
   %python_attribute_with_set(sensor_type, std::string);

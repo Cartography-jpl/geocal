@@ -88,7 +88,7 @@ RsmDirectCovarianceA::RsmDirectCovarianceA
  bool Activate_ground_correction
  )
   : RsmDirectCovariance(Rsm_id.image_identifier(),
-			   Rsm_id.rsm_suport_data_edition(),
+			   Rsm_id.rsm_support_data_edition(),
 			   Triangulation_id),
     parm_index(36)
 {
@@ -170,7 +170,7 @@ void RsmDirectCovarianceA::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "RsmDirectCovarianceA:\n"
      << "  Image Identifier: " << image_identifier() << "\n"
-     << "  RSM Edition:      " << rsm_suport_data_edition() << "\n"
+     << "  RSM Edition:      " << rsm_support_data_edition() << "\n"
      << "  Triangulation ID: " << triangulation_id() << "\n"
      << "  Local Coordinate System:\n";
   opad << *cconv << "\n";

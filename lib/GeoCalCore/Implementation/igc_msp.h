@@ -49,6 +49,8 @@ public:
 	 int Image_index,
 	 const std::string& Plugin_name, const std::string& Model_name);
   virtual ~IgcMsp() {}
+  blitz::Array<double, 2> covariance() const;
+  blitz::Array<double, 2> joint_covariance(const IgcMsp& igc2) const;
   static void msp_print_plugin_list();
   static std::vector<std::string> msp_plugin_list();
   static void msp_register_plugin(const std::string& Plugin_name);

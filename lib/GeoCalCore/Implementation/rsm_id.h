@@ -62,7 +62,7 @@ public:
 	const boost::shared_ptr<CoordinateConverter> &Cconv)
     : cconv(Cconv),
       image_identifier_(Base->image_identifier()),
-      rsm_suport_data_edition_(Base->rsm_suport_data_edition()),
+      rsm_support_data_edition_(Base->rsm_support_data_edition()),
       ground_domain_vertex_(8),
       min_line_(-1), max_line_(-1), min_sample_(-1), max_sample_(-1)
   {
@@ -83,10 +83,10 @@ public:
 //-----------------------------------------------------------------------
 /// RSM Support Data Edition.
 //-----------------------------------------------------------------------
-  const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  void rsm_suport_data_edition(const std::string& V)
-  { rsm_suport_data_edition_ = V; }
+  const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  void rsm_support_data_edition(const std::string& V)
+  { rsm_support_data_edition_ = V; }
 
 //-----------------------------------------------------------------------
 /// Image Sequence Identifier
@@ -206,7 +206,7 @@ protected:
   RsmId() {}
 private:
   boost::shared_ptr<CoordinateConverter> cconv;
-  std::string image_identifier_, rsm_suport_data_edition_,
+  std::string image_identifier_, rsm_support_data_edition_,
     image_sequence_identifier_, sensor_identifier_,
     sensor_type_;
   boost::shared_ptr<Time> image_acquistion_time_;

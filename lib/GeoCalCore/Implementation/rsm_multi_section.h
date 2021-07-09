@@ -135,14 +135,14 @@ public:
       for(int j = 0; j < sec.cols(); ++j)
 	sec(i, j)->image_identifier(V);
   }
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  virtual void rsm_suport_data_edition(const std::string& V)
+  virtual const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  virtual void rsm_support_data_edition(const std::string& V)
   {
-    rsm_suport_data_edition_ = V;
+    rsm_support_data_edition_ = V;
     for(int i = 0; i < sec.rows(); ++i)
       for(int j = 0; j < sec.cols(); ++j)
-	sec(i, j)->rsm_suport_data_edition(V);
+	sec(i, j)->rsm_support_data_edition(V);
   }
   const boost::shared_ptr<RsmBase>&
   section_ls(double Line, double Sample) const;

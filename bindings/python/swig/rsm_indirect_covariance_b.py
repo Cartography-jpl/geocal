@@ -186,6 +186,197 @@ import geocal_swig.rsm_adjustable_parameter_b
 import geocal_swig.rsm_adjustable_parameter
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+class RsmBSubgroup(geocal_swig.generic_object.GenericObject):
+    """
+
+    This handles a single "independent subgroup", basically a set of
+    original parameters that has a given covariance and time behavior.
+
+    C++ includes: rsm_indirect_covariance_b.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        GeoCal::RsmBSubgroup::RsmBSubgroup()
+
+        """
+        _rsm_indirect_covariance_b.RsmBSubgroup_swiginit(self, _rsm_indirect_covariance_b.new_RsmBSubgroup(*args))
+
+    def _v_number_parameter(self):
+        """
+
+        int GeoCal::RsmBSubgroup::number_parameter() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBSubgroup__v_number_parameter(self)
+
+
+    @property
+    def number_parameter(self):
+        return self._v_number_parameter()
+
+
+    def _v_is_csm_correlation(self):
+        """
+
+        bool GeoCal::RsmBSubgroup::is_csm_correlation() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBSubgroup__v_is_csm_correlation(self)
+
+
+    @property
+    def is_csm_correlation(self):
+        return self._v_is_csm_correlation()
+
+
+    def _v_covariance(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::RsmBSubgroup::covariance() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBSubgroup__v_covariance(self)
+
+
+    @property
+    def covariance(self):
+        return self._v_covariance()
+
+
+    def _v_time_correlation(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::RsmBSubgroup::time_correlation() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBSubgroup__v_time_correlation(self)
+
+
+    @property
+    def time_correlation(self):
+        return self._v_time_correlation()
+
+
+    def _v_time_correlation_domain_flag(self):
+        """
+
+        int GeoCal::RsmBSubgroup::time_correlation_domain_flag() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBSubgroup__v_time_correlation_domain_flag(self)
+
+
+    @property
+    def time_correlation_domain_flag(self):
+        return self._v_time_correlation_domain_flag()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _rsm_indirect_covariance_b.delete_RsmBSubgroup
+RsmBSubgroup._v_number_parameter = new_instancemethod(_rsm_indirect_covariance_b.RsmBSubgroup__v_number_parameter, None, RsmBSubgroup)
+RsmBSubgroup._v_is_csm_correlation = new_instancemethod(_rsm_indirect_covariance_b.RsmBSubgroup__v_is_csm_correlation, None, RsmBSubgroup)
+RsmBSubgroup._v_covariance = new_instancemethod(_rsm_indirect_covariance_b.RsmBSubgroup__v_covariance, None, RsmBSubgroup)
+RsmBSubgroup._v_time_correlation = new_instancemethod(_rsm_indirect_covariance_b.RsmBSubgroup__v_time_correlation, None, RsmBSubgroup)
+RsmBSubgroup._v_time_correlation_domain_flag = new_instancemethod(_rsm_indirect_covariance_b.RsmBSubgroup__v_time_correlation_domain_flag, None, RsmBSubgroup)
+RsmBSubgroup.__str__ = new_instancemethod(_rsm_indirect_covariance_b.RsmBSubgroup___str__, None, RsmBSubgroup)
+RsmBSubgroup_swigregister = _rsm_indirect_covariance_b.RsmBSubgroup_swigregister
+RsmBSubgroup_swigregister(RsmBSubgroup)
+
+class RsmBUnmodeledCovariance(geocal_swig.generic_object.GenericObject):
+    """
+
+    This handles the unmodeled covariance, this is just complicated enough
+    to be worth pulling out.
+
+    C++ includes: rsm_indirect_covariance_b.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance()
+
+        """
+        _rsm_indirect_covariance_b.RsmBUnmodeledCovariance_swiginit(self, _rsm_indirect_covariance_b.new_RsmBUnmodeledCovariance(*args))
+
+    def _v_is_csm_correlation(self):
+        """
+
+        bool GeoCal::RsmBUnmodeledCovariance::is_csm_correlation() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_is_csm_correlation(self)
+
+
+    @property
+    def is_csm_correlation(self):
+        return self._v_is_csm_correlation()
+
+
+    def _v_covariance(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::RsmBUnmodeledCovariance::covariance() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_covariance(self)
+
+
+    @property
+    def covariance(self):
+        return self._v_covariance()
+
+
+    def _v_row_time_correlation(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::RsmBUnmodeledCovariance::row_time_correlation() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_row_time_correlation(self)
+
+
+    @property
+    def row_time_correlation(self):
+        return self._v_row_time_correlation()
+
+
+    def _v_col_time_correlation(self):
+        """
+
+        const blitz::Array<double, 2>& GeoCal::RsmBUnmodeledCovariance::col_time_correlation() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_col_time_correlation(self)
+
+
+    @property
+    def col_time_correlation(self):
+        return self._v_col_time_correlation()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _rsm_indirect_covariance_b.delete_RsmBUnmodeledCovariance
+RsmBUnmodeledCovariance._v_is_csm_correlation = new_instancemethod(_rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_is_csm_correlation, None, RsmBUnmodeledCovariance)
+RsmBUnmodeledCovariance._v_covariance = new_instancemethod(_rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_covariance, None, RsmBUnmodeledCovariance)
+RsmBUnmodeledCovariance._v_row_time_correlation = new_instancemethod(_rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_row_time_correlation, None, RsmBUnmodeledCovariance)
+RsmBUnmodeledCovariance._v_col_time_correlation = new_instancemethod(_rsm_indirect_covariance_b.RsmBUnmodeledCovariance__v_col_time_correlation, None, RsmBUnmodeledCovariance)
+RsmBUnmodeledCovariance.__str__ = new_instancemethod(_rsm_indirect_covariance_b.RsmBUnmodeledCovariance___str__, None, RsmBUnmodeledCovariance)
+RsmBUnmodeledCovariance_swigregister = _rsm_indirect_covariance_b.RsmBUnmodeledCovariance_swigregister
+RsmBUnmodeledCovariance_swigregister(RsmBUnmodeledCovariance)
+
 class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCovariance, geocal_swig.rsm_adjustable_parameter_b.RsmBParameterDesc):
     """
 
@@ -202,13 +393,8 @@ class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCova
     def __init__(self, *args):
         """
 
-        RsmIndirectCovarianceB::RsmIndirectCovarianceB(const ImageGroundConnection &Igc, double H_min, double H_max, const
-        RsmId &Rsm_id, const std::string &Triangulation_id="")
-        Create a RsmIndirectCovarianceB.
+        RsmIndirectCovarianceB::RsmIndirectCovarianceB(const RsmIndirectCovarianceB &V)
 
-        We create a LocalRcConverter that matches the given Igc, set the
-        Image_identifier and Rsm_support_data_edition to match that of the
-        given Rsm_id. 
         """
         _rsm_indirect_covariance_b.RsmIndirectCovarianceB_swiginit(self, _rsm_indirect_covariance_b.new_RsmIndirectCovarianceB(*args))
 
@@ -241,11 +427,168 @@ class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCova
 
     read_tre_string = staticmethod(read_tre_string)
 
+    def _v_covariance_version_date(self, *args):
+        """
+
+        void GeoCal::RsmIndirectCovarianceB::covariance_version_date(const std::string &V)
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_covariance_version_date(self, *args)
+
+
+    @property
+    def covariance_version_date(self):
+        return self._v_covariance_version_date()
+
+    @covariance_version_date.setter
+    def covariance_version_date(self, value):
+      self._v_covariance_version_date(value)
+
+
+    def _v_has_indirect_error_covariance(self):
+        """
+
+        bool GeoCal::RsmIndirectCovarianceB::has_indirect_error_covariance() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_has_indirect_error_covariance(self)
+
+
+    @property
+    def has_indirect_error_covariance(self):
+        return self._v_has_indirect_error_covariance()
+
+
+    def _v_has_unmodeled_error_covariance(self):
+        """
+
+        bool GeoCal::RsmIndirectCovarianceB::has_unmodeled_error_covariance() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_has_unmodeled_error_covariance(self)
+
+
+    @property
+    def has_unmodeled_error_covariance(self):
+        return self._v_has_unmodeled_error_covariance()
+
+
+    def _v_number_original_parameter(self):
+        """
+
+        int RsmIndirectCovarianceB::number_original_parameter() const
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_number_original_parameter(self)
+
+
+    @property
+    def number_original_parameter(self):
+        return self._v_number_original_parameter()
+
+
+    def _v_subgroup(self, *args):
+        """
+
+        void GeoCal::RsmIndirectCovarianceB::subgroup(const std::vector< boost::shared_ptr< RsmBSubgroup > > &V)
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_subgroup(self, *args)
+
+
+    @property
+    def subgroup(self):
+        return self._v_subgroup()
+
+    @subgroup.setter
+    def subgroup(self, value):
+      self._v_subgroup(value)
+
+
+    def _v_mapping_matrix(self, *args):
+        """
+
+        void GeoCal::RsmIndirectCovarianceB::mapping_matrix(const blitz::Array< double, 2 > &V)
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_mapping_matrix(self, *args)
+
+
+    @property
+    def mapping_matrix(self):
+        return self._v_mapping_matrix()
+
+    @mapping_matrix.setter
+    def mapping_matrix(self, value):
+      self._v_mapping_matrix(value)
+
+
+    def _v_unmodeled_covariance(self, *args):
+        """
+
+        void GeoCal::RsmIndirectCovarianceB::unmodeled_covariance(const boost::shared_ptr< RsmBUnmodeledCovariance > &V)
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_unmodeled_covariance(self, *args)
+
+
+    @property
+    def unmodeled_covariance(self):
+        return self._v_unmodeled_covariance()
+
+    @unmodeled_covariance.setter
+    def unmodeled_covariance(self, value):
+      self._v_unmodeled_covariance(value)
+
+
+    def subgroup_i(self, I):
+        """
+
+        const RsmBSubgroup& GeoCal::RsmIndirectCovarianceB::subgroup_i(int I) const
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB_subgroup_i(self, I)
+
+
+    def add_subgroup(self, V):
+        """
+
+        void GeoCal::RsmIndirectCovarianceB::add_subgroup(const boost::shared_ptr< RsmBSubgroup > &V)
+
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB_add_subgroup(self, V)
+
+
+    def check_consistent(self):
+        """
+
+        void RsmIndirectCovarianceB::check_consistent() const
+        We have a few different pieces that need to match sizes.
+
+        We don't check this as the object is created/modified because we may
+        be in an inconsistent state during construction (e.g., we have added
+        subgroups, but haven't yet modified the mapping_matrix). This routine
+        does that consistency check, and throws an exception if things aren't
+        consistent. Called before creating and after reading a TRE. 
+        """
+        return _rsm_indirect_covariance_b.RsmIndirectCovarianceB_check_consistent(self)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_indirect_covariance_b.delete_RsmIndirectCovarianceB
 RsmIndirectCovarianceB.tre_string = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB_tre_string, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_covariance_version_date = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_covariance_version_date, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_has_indirect_error_covariance = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_has_indirect_error_covariance, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_has_unmodeled_error_covariance = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_has_unmodeled_error_covariance, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_number_original_parameter = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_number_original_parameter, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_subgroup = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_subgroup, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_mapping_matrix = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_mapping_matrix, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB._v_unmodeled_covariance = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB__v_unmodeled_covariance, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB.subgroup_i = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB_subgroup_i, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB.add_subgroup = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB_add_subgroup, None, RsmIndirectCovarianceB)
+RsmIndirectCovarianceB.check_consistent = new_instancemethod(_rsm_indirect_covariance_b.RsmIndirectCovarianceB_check_consistent, None, RsmIndirectCovarianceB)
 RsmIndirectCovarianceB_swigregister = _rsm_indirect_covariance_b.RsmIndirectCovarianceB_swigregister
 RsmIndirectCovarianceB_swigregister(RsmIndirectCovarianceB)
 
@@ -267,8 +610,51 @@ def RsmIndirectCovarianceB_read_tre_string(Tre_in):
     """
     return _rsm_indirect_covariance_b.RsmIndirectCovarianceB_read_tre_string(Tre_in)
 
+class Vector_RsmBSubgroup(object):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+    def __iter__(self):
+        return self.iterator()
 
-__all__ = ["RsmIndirectCovarianceB"]
+    def __init__(self, *args):
+        _rsm_indirect_covariance_b.Vector_RsmBSubgroup_swiginit(self, _rsm_indirect_covariance_b.new_Vector_RsmBSubgroup(*args))
+    __swig_destroy__ = _rsm_indirect_covariance_b.delete_Vector_RsmBSubgroup
+Vector_RsmBSubgroup.iterator = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_iterator, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__nonzero__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___nonzero__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__bool__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___bool__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__len__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___len__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__getslice__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___getslice__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__setslice__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___setslice__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__delslice__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___delslice__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__delitem__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___delitem__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__getitem__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___getitem__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.__setitem__ = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup___setitem__, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.pop = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_pop, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.append = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_append, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.empty = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_empty, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.size = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_size, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.swap = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_swap, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.begin = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_begin, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.end = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_end, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.rbegin = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_rbegin, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.rend = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_rend, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.clear = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_clear, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.get_allocator = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_get_allocator, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.pop_back = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_pop_back, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.erase = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_erase, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.push_back = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_push_back, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.front = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_front, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.back = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_back, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.assign = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_assign, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.resize = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_resize, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.insert = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_insert, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.reserve = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_reserve, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup.capacity = new_instancemethod(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_capacity, None, Vector_RsmBSubgroup)
+Vector_RsmBSubgroup_swigregister = _rsm_indirect_covariance_b.Vector_RsmBSubgroup_swigregister
+Vector_RsmBSubgroup_swigregister(Vector_RsmBSubgroup)
+
+
+__all__ = ["RsmIndirectCovarianceB","RsmBSubgroup","Vector_RsmBSubgroup"]
 
 
 

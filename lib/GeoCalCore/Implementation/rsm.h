@@ -100,20 +100,20 @@ public:
     if(rparm)
       rparm->image_identifier(V);
   }
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rid->rsm_suport_data_edition();}
-  virtual void rsm_suport_data_edition(const std::string& V)
+  virtual const std::string& rsm_support_data_edition() const
+  { return rid->rsm_support_data_edition();}
+  virtual void rsm_support_data_edition(const std::string& V)
   {
     if(rp)
-      rp->rsm_suport_data_edition(V);
+      rp->rsm_support_data_edition(V);
     if(rid)
-      rid->rsm_suport_data_edition(V);
+      rid->rsm_support_data_edition(V);
     if(rdcov)
-      rdcov->rsm_suport_data_edition(V);
+      rdcov->rsm_support_data_edition(V);
     if(ricov)
-      ricov->rsm_suport_data_edition(V);
+      ricov->rsm_support_data_edition(V);
     if(rparm)
-      rparm->rsm_suport_data_edition(V);
+      rparm->rsm_support_data_edition(V);
   }
 
 //-----------------------------------------------------------------------

@@ -11,6 +11,7 @@
 #ifdef HAVE_MSP
 #include "Plugin.h"
 #include "GroundPoint.h"
+#include "CovarianceService.h"
 #include "ImagePoint.h"
 #include "PointExtractionService.h"
 #include "SensorModelService.h"
@@ -18,6 +19,7 @@
 #include "ImagingGeometryService.h"
 #include "MSPTime.h"
 #include "IWS_WarningTracker.h"
+#include "CsmSensorModelList.h"
 // Note these two include files were *not* part of MSP 1.6, although
 // the RsmGeneratorService library still is present. I'm assuming they
 // have just dropped the headers for now. We copied this over from MSP
@@ -85,10 +87,15 @@ public:
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
   std::string generate_rsm_tre(const std::string& Report = "",
 			       const std::string& Rsm_config = "") const;
+  blitz::Array<double, 2> covariance() const;
+  blitz::Array<double, 2> joint_covariance(const IgcMspImp& igc2) const;
 private:
   std::string fname_, plugin_name_, model_name_;
   int image_index_;
-  boost::shared_ptr<MSP::SMS::SensorModelService> sms;
+  static boost::shared_ptr<MSP::SDS::SupportDataService> sds;
+  static boost::shared_ptr<MSP::SMS::SensorModelService> sms;
+  static boost::shared_ptr<MSP::CS::CovarianceService> cs;
+  static bool initialized;
   boost::shared_ptr<csm::RasterGM> model;
   mutable MSP::PES::PointExtractionService pes;
   void init();
@@ -131,14 +138,23 @@ void IgcMspImp::load(Archive & ar, const unsigned int version)
 GEOCAL_IMPLEMENT(IgcMspImp);
 #endif
 
+bool IgcMspImp::initialized = false;
+boost::shared_ptr<MSP::SDS::SupportDataService> IgcMspImp::sds;
+boost::shared_ptr<MSP::SMS::SensorModelService> IgcMspImp::sms;
+boost::shared_ptr<MSP::CS::CovarianceService> IgcMspImp::cs;
+
 void IgcMspImp::init()
 {
 try {
   IgcMsp::msp_init();
-  MSP::SDS::SupportDataService sds;
-  sms = boost::make_shared<MSP::SMS::SensorModelService>();
-  boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(fname_.c_str()));
-  sds.setImageInIsd(image_index_, *isd);
+  if(!initialized) {
+    sds = boost::make_shared<MSP::SDS::SupportDataService>();
+    sms = boost::make_shared<MSP::SMS::SensorModelService>();
+    cs = boost::make_shared<MSP::CS::CovarianceService>();
+    initialized = true;
+  }
+  boost::shared_ptr<csm::Isd> isd(sds->createIsdFromFile(fname_.c_str()));
+  sds->setImageInIsd(image_index_, *isd);
   MSP::WarningListType msg;
   boost::shared_ptr<csm::Model> model_raw;
   if(plugin_name_ == "")
@@ -333,6 +349,36 @@ try {
     << "Function: " << error.getFunction() << "\n";
   throw e;
 }
+}
+
+blitz::Array<double, 2> IgcMspImp::covariance() const
+{
+  MSP::CsmSensorModelList slist;
+  slist.push_back(model.get());
+  MSP::Matrix m;
+  cs->getFullCovarianceMatrix(slist,m);
+  blitz::Array<double, 2> res(m.getRows(), m.getColumns());
+  for(int i = 0; i < res.rows(); ++i)
+    for(int j = 0; j < res.cols(); ++j)
+      res(i,j) = m.getElement(i,j);
+  return res;
+}
+
+blitz::Array<double, 2>
+IgcMspImp::joint_covariance(const IgcMspImp& igc2) const
+{
+  MSP::CsmSensorModelList slist;
+  slist.push_back(model.get());
+  slist.push_back(igc2.model.get());
+  MSP::Matrix m;
+  // Temp
+  //cs->getCrossCovarianceMatrix(slist,model.get(), igc2.model.get(), m);
+  cs->getFullCovarianceMatrix(slist,m);
+  blitz::Array<double, 2> res(m.getRows(), m.getColumns());
+  for(int i = 0; i < res.rows(); ++i)
+    for(int j = 0; j < res.cols(); ++j)
+      res(i,j) = m.getElement(i,j);
+  return res;
 }
 
 #endif // HAVE_MSP
@@ -814,4 +860,24 @@ void IgcMsp::print(std::ostream& Os) const
   Os << "  Ground mask:\n";
   opad << *ground_mask() << "\n";
   opad.strict_sync();
+}
+
+blitz::Array<double, 2> IgcMsp::covariance() const
+{
+#ifdef HAVE_MSP
+  return boost::dynamic_pointer_cast<IgcMspImp>(igc)->covariance();
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+blitz::Array<double, 2> IgcMsp::joint_covariance(const IgcMsp& igc2) const
+{
+#ifdef HAVE_MSP
+  auto igc2_p = boost::dynamic_pointer_cast<IgcMspImp>(igc2.igc);
+  auto igc_p = boost::dynamic_pointer_cast<IgcMspImp>(igc);
+  return igc_p->joint_covariance(*igc2_p);
+#else
+  throw MspNotAvailableException();
+#endif
 }

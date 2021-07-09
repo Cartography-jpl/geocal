@@ -233,22 +233,22 @@ class RsmIndirectCovariance(geocal_swig.generic_object.GenericObject):
       self._v_image_identifier(value)
 
 
-    def _v_rsm_suport_data_edition(self, *args):
+    def _v_rsm_support_data_edition(self, *args):
         """
 
-        void GeoCal::RsmIndirectCovariance::rsm_suport_data_edition(const std::string &V)
+        void GeoCal::RsmIndirectCovariance::rsm_support_data_edition(const std::string &V)
 
         """
-        return _rsm_indirect_covariance.RsmIndirectCovariance__v_rsm_suport_data_edition(self, *args)
+        return _rsm_indirect_covariance.RsmIndirectCovariance__v_rsm_support_data_edition(self, *args)
 
 
     @property
-    def rsm_suport_data_edition(self):
-        return self._v_rsm_suport_data_edition()
+    def rsm_support_data_edition(self):
+        return self._v_rsm_support_data_edition()
 
-    @rsm_suport_data_edition.setter
-    def rsm_suport_data_edition(self, value):
-      self._v_rsm_suport_data_edition(value)
+    @rsm_support_data_edition.setter
+    def rsm_support_data_edition(self, value):
+      self._v_rsm_support_data_edition(value)
 
 
     def _v_triangulation_id(self, *args):
@@ -306,7 +306,7 @@ class RsmIndirectCovariance(geocal_swig.generic_object.GenericObject):
 RsmIndirectCovariance.base_tre_string = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance_base_tre_string, None, RsmIndirectCovariance)
 RsmIndirectCovariance.base_read_tre_string = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance_base_read_tre_string, None, RsmIndirectCovariance)
 RsmIndirectCovariance._v_image_identifier = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance__v_image_identifier, None, RsmIndirectCovariance)
-RsmIndirectCovariance._v_rsm_suport_data_edition = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance__v_rsm_suport_data_edition, None, RsmIndirectCovariance)
+RsmIndirectCovariance._v_rsm_support_data_edition = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance__v_rsm_support_data_edition, None, RsmIndirectCovariance)
 RsmIndirectCovariance._v_triangulation_id = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance__v_triangulation_id, None, RsmIndirectCovariance)
 RsmIndirectCovariance._v_naif_code = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance__v_naif_code, None, RsmIndirectCovariance)
 RsmIndirectCovariance.__str__ = new_instancemethod(_rsm_indirect_covariance.RsmIndirectCovariance___str__, None, RsmIndirectCovariance)

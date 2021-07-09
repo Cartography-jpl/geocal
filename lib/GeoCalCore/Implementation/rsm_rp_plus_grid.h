@@ -70,13 +70,13 @@ public:
     rp->image_identifier(V);
     rgrid->image_identifier(V);
   }
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  virtual void rsm_suport_data_edition(const std::string& V)
+  virtual const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  virtual void rsm_support_data_edition(const std::string& V)
   {
-    rsm_suport_data_edition_ = V;
-    rp->rsm_suport_data_edition(V);
-    rgrid->rsm_suport_data_edition(V);
+    rsm_support_data_edition_ = V;
+    rp->rsm_support_data_edition(V);
+    rgrid->rsm_support_data_edition(V);
   }
   virtual int min_line() const {return rp->min_line();}
   virtual int max_line() const {return rp->max_line();}

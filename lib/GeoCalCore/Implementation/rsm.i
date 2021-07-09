@@ -64,7 +64,7 @@ public:
   %python_attribute_with_set(coordinate_converter,
 		    boost::shared_ptr<CoordinateConverter>);
   %python_attribute_with_set(image_identifier, std::string);
-  %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(rsm_support_data_edition, std::string);
   %python_attribute_with_set(naif_code, int);
   %pickle_serialization()
 };

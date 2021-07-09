@@ -229,6 +229,29 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
         """
         _igc_msp.IgcMsp_swiginit(self, _igc_msp.new_IgcMsp(*args))
 
+    def _v_covariance(self):
+        """
+
+        blitz::Array< double, 2 > IgcMsp::covariance() const
+
+        """
+        return _igc_msp.IgcMsp__v_covariance(self)
+
+
+    @property
+    def covariance(self):
+        return self._v_covariance()
+
+
+    def joint_covariance(self, igc2):
+        """
+
+        blitz::Array< double, 2 > IgcMsp::joint_covariance(const IgcMsp &igc2) const
+
+        """
+        return _igc_msp.IgcMsp_joint_covariance(self, igc2)
+
+
     def msp_print_plugin_list():
         """
 
@@ -514,6 +537,8 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_msp.delete_IgcMsp
+IgcMsp._v_covariance = new_instancemethod(_igc_msp.IgcMsp__v_covariance, None, IgcMsp)
+IgcMsp.joint_covariance = new_instancemethod(_igc_msp.IgcMsp_joint_covariance, None, IgcMsp)
 IgcMsp.sensor_velocity = new_instancemethod(_igc_msp.IgcMsp_sensor_velocity, None, IgcMsp)
 IgcMsp.generate_rsm_tre = new_instancemethod(_igc_msp.IgcMsp_generate_rsm_tre, None, IgcMsp)
 IgcMsp._v_family = new_instancemethod(_igc_msp.IgcMsp__v_family, None, IgcMsp)

@@ -6985,7 +6985,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_support_data_edition__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmDirectCovariance *arg1 = (GeoCal::RsmDirectCovariance *) 0 ;
   void *argp1 = 0 ;
@@ -6999,7 +6999,7 @@ SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmDirectCovariance__v_rsm_suport_data_edition" "', argument " "1"" of type '" "GeoCal::RsmDirectCovariance const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmDirectCovariance__v_rsm_support_data_edition" "', argument " "1"" of type '" "GeoCal::RsmDirectCovariance const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmDirectCovariance > * >(argp1);
@@ -7012,7 +7012,7 @@ SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_
   }
   {
     try {
-      result = ((GeoCal::RsmDirectCovariance const *)arg1)->rsm_suport_data_edition();
+      result = ((GeoCal::RsmDirectCovariance const *)arg1)->rsm_support_data_edition();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7026,7 +7026,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_support_data_edition__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmDirectCovariance *arg1 = (GeoCal::RsmDirectCovariance *) 0 ;
   std::string *arg2 = 0 ;
@@ -7041,7 +7041,7 @@ SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmDirectCovariance_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmDirectCovariance__v_rsm_suport_data_edition" "', argument " "1"" of type '" "GeoCal::RsmDirectCovariance *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmDirectCovariance__v_rsm_support_data_edition" "', argument " "1"" of type '" "GeoCal::RsmDirectCovariance *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmDirectCovariance > * >(argp1);
@@ -7056,16 +7056,16 @@ SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmDirectCovariance__v_rsm_suport_data_edition" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmDirectCovariance__v_rsm_support_data_edition" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmDirectCovariance__v_rsm_suport_data_edition" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmDirectCovariance__v_rsm_support_data_edition" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
   {
     try {
-      (arg1)->rsm_suport_data_edition((std::string const &)*arg2);
+      (arg1)->rsm_support_data_edition((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7081,26 +7081,26 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_suport_data_edition(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmDirectCovariance__v_rsm_support_data_edition(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmDirectCovariance__v_rsm_suport_data_edition",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmDirectCovariance__v_rsm_support_data_edition",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_0(self, argc, argv);
+    return _wrap_RsmDirectCovariance__v_rsm_support_data_edition__SWIG_0(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_RsmDirectCovariance__v_rsm_suport_data_edition__SWIG_1(self, argc, argv);
+    return _wrap_RsmDirectCovariance__v_rsm_support_data_edition__SWIG_1(self, argc, argv);
   }
   
 fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmDirectCovariance__v_rsm_suport_data_edition'.\n"
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmDirectCovariance__v_rsm_support_data_edition'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::RsmDirectCovariance::rsm_suport_data_edition() const\n"
-    "    GeoCal::RsmDirectCovariance::rsm_suport_data_edition(std::string const &)\n");
+    "    GeoCal::RsmDirectCovariance::rsm_support_data_edition() const\n"
+    "    GeoCal::RsmDirectCovariance::rsm_support_data_edition(std::string const &)\n");
   return 0;
 }
 
@@ -7468,9 +7468,9 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::RsmDirectCovariance::image_identifier(const std::string &V)\n"
 		"\n"
 		""},
-	 { (char *)"RsmDirectCovariance__v_rsm_suport_data_edition", _wrap_RsmDirectCovariance__v_rsm_suport_data_edition, METH_VARARGS, (char *)"\n"
+	 { (char *)"RsmDirectCovariance__v_rsm_support_data_edition", _wrap_RsmDirectCovariance__v_rsm_support_data_edition, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::rsm_suport_data_edition(const std::string &V)\n"
+		"void GeoCal::RsmDirectCovariance::rsm_support_data_edition(const std::string &V)\n"
 		"\n"
 		""},
 	 { (char *)"RsmDirectCovariance__v_triangulation_id", _wrap_RsmDirectCovariance__v_triangulation_id, METH_VARARGS, (char *)"\n"

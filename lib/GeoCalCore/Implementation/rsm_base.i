@@ -61,7 +61,7 @@ public:
   %python_attribute(min_z, double);
   %python_attribute(max_z, double);
   %python_attribute_with_set(image_identifier, std::string);
-  %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(rsm_support_data_edition, std::string);
   %python_attribute_with_set(row_section_number, int)
   %python_attribute_with_set(col_section_number, int)
   %pickle_serialization()

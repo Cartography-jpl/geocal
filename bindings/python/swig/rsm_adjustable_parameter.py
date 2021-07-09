@@ -258,22 +258,22 @@ class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
       self._v_image_identifier(value)
 
 
-    def _v_rsm_suport_data_edition(self, *args):
+    def _v_rsm_support_data_edition(self, *args):
         """
 
-        void GeoCal::RsmAdjustableParameter::rsm_suport_data_edition(const std::string &V)
+        void GeoCal::RsmAdjustableParameter::rsm_support_data_edition(const std::string &V)
 
         """
-        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition(self, *args)
+        return _rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_support_data_edition(self, *args)
 
 
     @property
-    def rsm_suport_data_edition(self):
-        return self._v_rsm_suport_data_edition()
+    def rsm_support_data_edition(self):
+        return self._v_rsm_support_data_edition()
 
-    @rsm_suport_data_edition.setter
-    def rsm_suport_data_edition(self, value):
-      self._v_rsm_suport_data_edition(value)
+    @rsm_support_data_edition.setter
+    def rsm_support_data_edition(self, value):
+      self._v_rsm_support_data_edition(value)
 
 
     def _v_triangulation_id(self, *args):
@@ -348,7 +348,7 @@ RsmAdjustableParameter.adjustment_with_derivative = new_instancemethod(_rsm_adju
 RsmAdjustableParameter.base_tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_base_tre_string, None, RsmAdjustableParameter)
 RsmAdjustableParameter.base_read_tre_string = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter_base_read_tre_string, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_image_identifier = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_image_identifier, None, RsmAdjustableParameter)
-RsmAdjustableParameter._v_rsm_suport_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_suport_data_edition, None, RsmAdjustableParameter)
+RsmAdjustableParameter._v_rsm_support_data_edition = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_rsm_support_data_edition, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_triangulation_id = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_triangulation_id, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_naif_code = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_naif_code, None, RsmAdjustableParameter)
 RsmAdjustableParameter._v_has_ground_coordinate_parameter = new_instancemethod(_rsm_adjustable_parameter.RsmAdjustableParameter__v_has_ground_coordinate_parameter, None, RsmAdjustableParameter)

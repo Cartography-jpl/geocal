@@ -30,7 +30,7 @@ void RsmId::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(RsmId);
   ar & GEOCAL_NVP(cconv)
     & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_suport_data_edition)
+    & GEOCAL_NVP_(rsm_support_data_edition)
     & GEOCAL_NVP_(image_sequence_identifier)
     & GEOCAL_NVP_(sensor_identifier)
     & GEOCAL_NVP_(sensor_type)
@@ -71,7 +71,7 @@ static boost::format timingf_missing("%|1$-58s|");
 std::string RsmId::tre_string() const
 {
   std::string res = "";
-  res += str_check_size(f % image_identifier_ % rsm_suport_data_edition_ %
+  res += str_check_size(f % image_identifier_ % rsm_support_data_edition_ %
 			image_sequence_identifier_ % sensor_identifier_ %
 			sensor_type_, 240);
   if(image_acquistion_time_) {
@@ -168,12 +168,12 @@ RsmId::read_tre_string(const std::string& Tre_in)
   std::stringstream in(Tre_in);
   boost::shared_ptr<RsmId> res(new RsmId);
   res->image_identifier_ = read_size<std::string>(in, 80);
-  res->rsm_suport_data_edition_ = read_size<std::string>(in, 40);
+  res->rsm_support_data_edition_ = read_size<std::string>(in, 40);
   res->image_sequence_identifier_ = read_size<std::string>(in, 40);
   res->sensor_identifier_ = read_size<std::string>(in, 40);
   res->sensor_type_ = read_size<std::string>(in, 40);
   boost::trim(res->image_identifier_);
-  boost::trim(res->rsm_suport_data_edition_);
+  boost::trim(res->rsm_support_data_edition_);
   boost::trim(res->image_sequence_identifier_);
   boost::trim(res->sensor_identifier_);
   boost::trim(res->sensor_type_);
@@ -277,7 +277,7 @@ void RsmId::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "RsmId:\n"
      << "  Image Identifier:          " << image_identifier_ << "\n"
-     << "  RSM Edition:               " << rsm_suport_data_edition_ << "\n"
+     << "  RSM Edition:               " << rsm_support_data_edition_ << "\n"
      << "  Image Sequence Identifier: " << image_sequence_identifier_ << "\n"
      << "  Sensor Identifier:         " << sensor_identifier_ << "\n"
      << "  Sensor type:               " << sensor_type_ << "\n"

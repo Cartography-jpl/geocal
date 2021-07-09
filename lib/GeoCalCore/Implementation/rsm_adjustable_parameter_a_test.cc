@@ -123,8 +123,8 @@ BOOST_AUTO_TEST_CASE(serialize)
   boost::shared_ptr<RsmAdjustableParameterA> radj =
     serialize_read_string<RsmAdjustableParameterA>(d);
   BOOST_CHECK_EQUAL(adj->image_identifier(), radj->image_identifier());
-  BOOST_CHECK_EQUAL(adj->rsm_suport_data_edition(),
-		    radj->rsm_suport_data_edition());
+  BOOST_CHECK_EQUAL(adj->rsm_support_data_edition(),
+		    radj->rsm_support_data_edition());
   BOOST_CHECK_EQUAL(adj->triangulation_id(),
 		    radj->triangulation_id());
   BOOST_CHECK_MATRIX_CLOSE(adj->parameter(),

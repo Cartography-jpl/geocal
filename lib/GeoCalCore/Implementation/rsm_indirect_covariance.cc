@@ -13,7 +13,7 @@ void RsmIndirectCovariance::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmIndirectCovariance);
   ar & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_suport_data_edition)
+    & GEOCAL_NVP_(rsm_support_data_edition)
     & GEOCAL_NVP_(triangulation_id);
 }
 
@@ -33,16 +33,16 @@ static boost::format num("%|1$+21.14E|");
 std::string RsmIndirectCovariance::base_tre_string() const
 {
  return str_check_size(f % image_identifier_
-		       % rsm_suport_data_edition_
+		       % rsm_support_data_edition_
 		       % triangulation_id_, 80+40+40);
 }
 
 void RsmIndirectCovariance::base_read_tre_string(std::istream& In)
 {
   image_identifier_ = read_size<std::string>(In, 80);
-  rsm_suport_data_edition_ = read_size<std::string>(In, 40);
+  rsm_support_data_edition_ = read_size<std::string>(In, 40);
   triangulation_id_ = read_size<std::string>(In, 40);
   boost::trim(image_identifier_);
-  boost::trim(rsm_suport_data_edition_);
+  boost::trim(rsm_support_data_edition_);
   boost::trim(triangulation_id_);
 }

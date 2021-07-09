@@ -187,7 +187,7 @@ RsmAdjustableParameterB::RsmAdjustableParameterB
  const std::string& Triangulation_id)
   : RsmBParameterDesc(Igc, H_min, H_max),
     RsmAdjustableParameter(Rsm_id.image_identifier(),
-			   Rsm_id.rsm_suport_data_edition(),
+			   Rsm_id.rsm_support_data_edition(),
 			   Triangulation_id)
 {
 }
@@ -254,7 +254,7 @@ void RsmAdjustableParameterB::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "RsmAdjustableParameterB:\n"
      << "  Image Identifier: " << image_identifier() << "\n"
-     << "  RSM Edition:      " << rsm_suport_data_edition() << "\n"
+     << "  RSM Edition:      " << rsm_support_data_edition() << "\n"
      << "  Triangulation ID: " << triangulation_id() << "\n";
   RsmBParameterDesc::print(opad);
   opad.strict_sync();

@@ -349,22 +349,22 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_image_identifier(value)
 
 
-    def _v_rsm_suport_data_edition(self, *args):
+    def _v_rsm_support_data_edition(self, *args):
         """
 
-        void GeoCal::RsmId::rsm_suport_data_edition(const std::string &V)
+        void GeoCal::RsmId::rsm_support_data_edition(const std::string &V)
 
         """
-        return _rsm_id.RsmId__v_rsm_suport_data_edition(self, *args)
+        return _rsm_id.RsmId__v_rsm_support_data_edition(self, *args)
 
 
     @property
-    def rsm_suport_data_edition(self):
-        return self._v_rsm_suport_data_edition()
+    def rsm_support_data_edition(self):
+        return self._v_rsm_support_data_edition()
 
-    @rsm_suport_data_edition.setter
-    def rsm_suport_data_edition(self, value):
-      self._v_rsm_suport_data_edition(value)
+    @rsm_support_data_edition.setter
+    def rsm_support_data_edition(self, value):
+      self._v_rsm_support_data_edition(value)
 
 
     def _v_image_sequence_identifier(self, *args):
@@ -669,7 +669,7 @@ class RsmId(geocal_swig.generic_object.GenericObject):
 RsmId.__str__ = new_instancemethod(_rsm_id.RsmId___str__, None, RsmId)
 RsmId._v_coordinate_converter = new_instancemethod(_rsm_id.RsmId__v_coordinate_converter, None, RsmId)
 RsmId._v_image_identifier = new_instancemethod(_rsm_id.RsmId__v_image_identifier, None, RsmId)
-RsmId._v_rsm_suport_data_edition = new_instancemethod(_rsm_id.RsmId__v_rsm_suport_data_edition, None, RsmId)
+RsmId._v_rsm_support_data_edition = new_instancemethod(_rsm_id.RsmId__v_rsm_support_data_edition, None, RsmId)
 RsmId._v_image_sequence_identifier = new_instancemethod(_rsm_id.RsmId__v_image_sequence_identifier, None, RsmId)
 RsmId._v_sensor_identifier = new_instancemethod(_rsm_id.RsmId__v_sensor_identifier, None, RsmId)
 RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, RsmId)

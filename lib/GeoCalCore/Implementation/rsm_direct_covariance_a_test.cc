@@ -35,7 +35,8 @@ BOOST_AUTO_TEST_CASE(tre)
   // Test reading this.
   std::string tre_in = "2_8                                                                             1101222272-2                            1101222272-1                            06001000062_8                                                                             06-2.42965895449297E+06-4.76049894293300E+06+3.46898407315533E+06+8.90698769551156E-01+2.48664813021570E-01-3.80554217799520E-01-4.54593996792805E-01+4.87215943350720E-01-7.45630553709282E-01+0.00000000000000E+00+8.37129879594448E-01+5.47004172461403E-01                                        010203040506                    +5.77388827727787E+04+2.60049315375747E+03+3.19928338117848E+03-1.31174811541913E+00+2.20596677933116E+01-2.84031890108660E+00+5.11824419774739E+04+1.11777635517993E+03-1.93235228164728E+01+1.74818259318562E+00+7.06800879909857E+00+1.75094830424667E+04-1.51827591855326E+00+2.88288601417383E+00-3.57854210117485E-01+9.21252244533737E-03-1.05784554995790E-03-3.62502042683891E-03+1.04702372207584E-02-1.05046419207449E-03+1.14369570920252E-02";
   auto rcov = RsmDirectCovarianceA::read_tre_string(tre_in);
-  std::cerr << *rcov;
+  if(false)
+    std::cerr << *rcov;
 }
 
 BOOST_AUTO_TEST_CASE(serialize)
@@ -50,8 +51,8 @@ BOOST_AUTO_TEST_CASE(serialize)
   // boost::shared_ptr<RsmAdjustableParameterA> radj =
   //   serialize_read_string<RsmAdjustableParameterA>(d);
   // BOOST_CHECK_EQUAL(adj->image_identifier(), radj->image_identifier());
-  // BOOST_CHECK_EQUAL(adj->rsm_suport_data_edition(),
-  // 		    radj->rsm_suport_data_edition());
+  // BOOST_CHECK_EQUAL(adj->rsm_support_data_edition(),
+  // 		    radj->rsm_support_data_edition());
   // BOOST_CHECK_EQUAL(adj->triangulation_id(),
   // 		    radj->triangulation_id());
   // BOOST_CHECK_MATRIX_CLOSE(adj->parameter(),

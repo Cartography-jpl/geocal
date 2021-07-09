@@ -83,7 +83,7 @@ RsmMultiSection::RsmMultiSection
     for(int j = 0; j < sec.cols(); ++j) {
       sec(i,j) = Rsm_prototype.clone();
       sec(i,j)->image_identifier(Image_identifier);
-      sec(i,j)->rsm_suport_data_edition(Rsm_support_data_edition);
+      sec(i,j)->rsm_support_data_edition(Rsm_support_data_edition);
       sec(i,j)->row_section_number(i + 1);
       sec(i,j)->col_section_number(j + 1);
     }

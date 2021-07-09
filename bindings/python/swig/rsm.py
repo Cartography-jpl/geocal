@@ -482,22 +482,22 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
       self._v_image_identifier(value)
 
 
-    def _v_rsm_suport_data_edition(self, *args):
+    def _v_rsm_support_data_edition(self, *args):
         """
 
-        virtual void GeoCal::Rsm::rsm_suport_data_edition(const std::string &V)
+        virtual void GeoCal::Rsm::rsm_support_data_edition(const std::string &V)
 
         """
-        return _rsm.Rsm__v_rsm_suport_data_edition(self, *args)
+        return _rsm.Rsm__v_rsm_support_data_edition(self, *args)
 
 
     @property
-    def rsm_suport_data_edition(self):
-        return self._v_rsm_suport_data_edition()
+    def rsm_support_data_edition(self):
+        return self._v_rsm_support_data_edition()
 
-    @rsm_suport_data_edition.setter
-    def rsm_suport_data_edition(self, value):
-      self._v_rsm_suport_data_edition(value)
+    @rsm_support_data_edition.setter
+    def rsm_support_data_edition(self, value):
+      self._v_rsm_support_data_edition(value)
 
 
     def _v_naif_code(self, *args):
@@ -548,7 +548,7 @@ Rsm._v_rsm_adjustable_parameter = new_instancemethod(_rsm.Rsm__v_rsm_adjustable_
 Rsm._v_rsm_base = new_instancemethod(_rsm.Rsm__v_rsm_base, None, Rsm)
 Rsm._v_coordinate_converter = new_instancemethod(_rsm.Rsm__v_coordinate_converter, None, Rsm)
 Rsm._v_image_identifier = new_instancemethod(_rsm.Rsm__v_image_identifier, None, Rsm)
-Rsm._v_rsm_suport_data_edition = new_instancemethod(_rsm.Rsm__v_rsm_suport_data_edition, None, Rsm)
+Rsm._v_rsm_support_data_edition = new_instancemethod(_rsm.Rsm__v_rsm_support_data_edition, None, Rsm)
 Rsm._v_naif_code = new_instancemethod(_rsm.Rsm__v_naif_code, None, Rsm)
 Rsm_swigregister = _rsm.Rsm_swigregister
 Rsm_swigregister(Rsm)

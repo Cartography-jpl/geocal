@@ -15,9 +15,8 @@ BOOST_AUTO_TEST_CASE(basic_test)
   auto adj = boost::make_shared<RsmAdjustableParameterB>
     (*igc, -100, 100, *r.rsm_id(), "Triangulation_1");
   r.rsm_adjustable_parameter(adj);
-  if(true)
+  if(false) 
     std::cerr << r << "\n";
-  std::cerr << adj->tre_string() << "\n";
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
   ImageCoordinate ic;
   bool in_valid_range;
@@ -125,8 +124,8 @@ BOOST_AUTO_TEST_CASE(serialize)
   boost::shared_ptr<RsmAdjustableParameterB> radj =
     serialize_read_string<RsmAdjustableParameterB>(d);
   BOOST_CHECK_EQUAL(adj->image_identifier(), radj->image_identifier());
-  BOOST_CHECK_EQUAL(adj->rsm_suport_data_edition(),
-		    radj->rsm_suport_data_edition());
+  BOOST_CHECK_EQUAL(adj->rsm_support_data_edition(),
+		    radj->rsm_support_data_edition());
   BOOST_CHECK_EQUAL(adj->triangulation_id(),
 		    radj->triangulation_id());
   BOOST_CHECK_MATRIX_CLOSE(adj->parameter(),

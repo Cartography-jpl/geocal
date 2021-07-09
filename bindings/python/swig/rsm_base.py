@@ -446,22 +446,22 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
       self._v_image_identifier(value)
 
 
-    def _v_rsm_suport_data_edition(self, *args):
+    def _v_rsm_support_data_edition(self, *args):
         """
 
-        virtual void GeoCal::RsmBase::rsm_suport_data_edition(const std::string &V)
+        virtual void GeoCal::RsmBase::rsm_support_data_edition(const std::string &V)
 
         """
-        return _rsm_base.RsmBase__v_rsm_suport_data_edition(self, *args)
+        return _rsm_base.RsmBase__v_rsm_support_data_edition(self, *args)
 
 
     @property
-    def rsm_suport_data_edition(self):
-        return self._v_rsm_suport_data_edition()
+    def rsm_support_data_edition(self):
+        return self._v_rsm_support_data_edition()
 
-    @rsm_suport_data_edition.setter
-    def rsm_suport_data_edition(self, value):
-      self._v_rsm_suport_data_edition(value)
+    @rsm_support_data_edition.setter
+    def rsm_support_data_edition(self, value):
+      self._v_rsm_support_data_edition(value)
 
 
     def _v_row_section_number(self, *args):
@@ -523,7 +523,7 @@ RsmBase._v_max_y = new_instancemethod(_rsm_base.RsmBase__v_max_y, None, RsmBase)
 RsmBase._v_min_z = new_instancemethod(_rsm_base.RsmBase__v_min_z, None, RsmBase)
 RsmBase._v_max_z = new_instancemethod(_rsm_base.RsmBase__v_max_z, None, RsmBase)
 RsmBase._v_image_identifier = new_instancemethod(_rsm_base.RsmBase__v_image_identifier, None, RsmBase)
-RsmBase._v_rsm_suport_data_edition = new_instancemethod(_rsm_base.RsmBase__v_rsm_suport_data_edition, None, RsmBase)
+RsmBase._v_rsm_support_data_edition = new_instancemethod(_rsm_base.RsmBase__v_rsm_support_data_edition, None, RsmBase)
 RsmBase._v_row_section_number = new_instancemethod(_rsm_base.RsmBase__v_row_section_number, None, RsmBase)
 RsmBase._v_col_section_number = new_instancemethod(_rsm_base.RsmBase__v_col_section_number, None, RsmBase)
 RsmBase_swigregister = _rsm_base.RsmBase_swigregister

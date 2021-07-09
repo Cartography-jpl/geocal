@@ -18,7 +18,7 @@ public:
   RsmBase(const std::string& Image_identifier="",
 	  const std::string& Rsm_support_data_edition="fake-1")
     : image_identifier_(Image_identifier),
-      rsm_suport_data_edition_(Rsm_support_data_edition){}
+      rsm_support_data_edition_(Rsm_support_data_edition){}
   virtual ~RsmBase() {}
   virtual void print(std::ostream& Os) const
   { Os << "RsmBase"; }
@@ -69,10 +69,10 @@ public:
 //-----------------------------------------------------------------------
 /// RSM Support Data Edition.
 //-----------------------------------------------------------------------
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  virtual void rsm_suport_data_edition(const std::string& V)
-  { rsm_suport_data_edition_ = V; }
+  virtual const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  virtual void rsm_support_data_edition(const std::string& V)
+  { rsm_support_data_edition_ = V; }
   
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image
@@ -132,7 +132,7 @@ public:
 
   virtual void set_z_range(double Z_min, double Z_max)  { } 
 protected:
-  std::string image_identifier_, rsm_suport_data_edition_;
+  std::string image_identifier_, rsm_support_data_edition_;
 private:
   friend class boost::serialization::access;
   template<class Archive>

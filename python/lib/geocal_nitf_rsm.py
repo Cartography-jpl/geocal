@@ -2,6 +2,8 @@ from geocal_swig import (Rsm, RsmId, RsmMultiSection, RsmRationalPolynomial,
                          RsmGrid, RsmRpPlusGrid, RsmAdjustableParameterA,
                          RsmAdjustableParameterB,
                          RsmDirectCovarianceA,
+                         RsmIndirectCovarianceB,
+                         RsmBSubgroup,
                          have_msp_supported)
 import re
 try:
@@ -9,7 +11,7 @@ try:
                         NitfSegmentHookSet,
                         TreRSMIDA, TreRSMGGA, TreRSMGIA, TreRSMPCA,
                         TreRSMPIA, TreRSMAPA, TreRSMDCA,
-                        TreRSMAPB, read_tre_data)
+                        TreRSMAPB, TreRSMECB, read_tre_data)
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
@@ -51,6 +53,8 @@ if(have_pynitf and not suppress_rsm):
     TreRSMAPB.tre_implementation_class = RsmAdjustableParameterB
     TreRSMDCA.tre_implementation_field = "rsm_direct_covariance"
     TreRSMDCA.tre_implementation_class = RsmDirectCovarianceA
+    TreRSMECB.tre_implementation_field = "rsm_indirect_covariance"
+    TreRSMECB.tre_implementation_class = RsmIndirectCovarianceB
     
 
 # ---------------------------------------------------------
@@ -68,6 +72,7 @@ if(have_pynitf and not suppress_rsm):
             #                          'RSMAPA', 'RSMAPB', 'RSMECA', 'RSMECB',
             #                          'RSMGIA', 'RSMGGA']
             self.rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA',
+                                      "RSMECB",
                                       'RSMAPA', 'RSMAPB', 
                                       'RSMGIA', 'RSMGGA']
         def after_init_hook(self, seg, nitf_file):
@@ -129,7 +134,11 @@ if(have_pynitf and not suppress_rsm):
                     seg.tre_list.append(t)
                 if(seg.rsm.rsm_direct_covariance):
                     t = TreRSMDCA()
-                    t.rsm_direct_covariance = seg.rsm_direct_covariance
+                    t.rsm_direct_covariance = seg.rsm.rsm_direct_covariance
+                    seg.tre_list.append(t)
+                if(seg.rsm.rsm_indirect_covariance):
+                    t = TreRSMECB()
+                    t.rsm_indirect_covariance = seg.rsm.rsm_indirect_covariance
                     seg.tre_list.append(t)
                 self._rsm_add_rec(seg, seg.rsm.rsm_base)
     
@@ -168,6 +177,9 @@ if(have_pynitf and not suppress_rsm):
             t = self._rsm_find_tre(seg, 'RSMDCA')
             if(t is not None):
                 r.rsm_direct_covariance = t.rsm_direct_covariance
+            t = self._rsm_find_tre(seg, 'RSMECB')
+            if(t is not None):
+                r.rsm_indirect_covariance = t.rsm_indirect_covariance
             rsm_rp = None
             rsm_g = None
             if(self._rsm_find_tre(seg, 'RSMPIA', edition) is not None):

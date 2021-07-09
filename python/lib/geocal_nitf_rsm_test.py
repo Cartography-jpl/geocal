@@ -9,7 +9,9 @@ from .sqlite_shelf import *
 from geocal_swig import (GdalRasterImage, VicarRasterImage,
                          VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
                          Rsm, ImageCoordinate, IgcMsp,
-                         RsmAdjustableParameterB)
+                         RsmBUnmodeledCovariance,
+                         RsmIndirectCovarianceB,
+                         RsmAdjustableParameterB, Time)
 import geocal_swig
 import io
 import numpy as np
@@ -156,7 +158,72 @@ def test_rsm_lc_rp_with_msp_with_adj(isolated_dir, rsm_lc, igc_rpc):
                 p3 = rsm_lc2.ground_coordinate_approx_height(ic, h)
                 assert(geocal_swig.distance(p1, p2) < 0.01)
                 assert(geocal_swig.distance(p2, p3) < 0.01)
-                
+
+@require_msp
+@require_pynitf
+def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
+    '''Compare the RSM we write to a NITF file with what the MSP library 
+    calculates. This verifies both the validity of our NITF and our RSM 
+    code'''    
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    create_image_seg(f)
+    rsm_lc.rsm_id.image_identifier = "image1"
+    rsm_lc.rsm_id.image_acquistion_time = Time.parse_time("2020-07-04T12:00:00Z")
+    rsm_lc.rsm_id.sensor_identifier = "fakesen"
+    cov = RsmIndirectCovarianceB(igc_rpc, 500, 1500, rsm_lc.rsm_id)
+    cov.row_power = np.array([[1,0,0],
+                              [0,1,0],
+                              [0,0,1]], dtype = np.int)
+    cov.add_subgroup(RsmBSubgroup(np.array([[1,0],[0,3]]), 1, 1, 0, 0, 10))
+    cov.add_subgroup(RsmBSubgroup(np.array([[4]]), 1, 1, 0, 0, 10))
+    cov.mapping_matrix = np.array([[1,0,0],
+                                   [0,2,0],
+                                   [0, 0,3]])
+    cov.unmodeled_covariance = RsmBUnmodeledCovariance(np.array([[0.25,0],[0,0.25]]), 1,0,0,10, 1,0,0,10)
+    rsm_lc.rsm_indirect_covariance = cov
+    f.image_segment[0].rsm = rsm_lc
+
+    # Duplicate RSM. Not clear that we really need everything regenerated,
+    # I'm just trying to make another image at a different time. But for
+    # now do this so we *know* everything is copied.
+    r = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
+    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
+    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
+    r.fit(igc_rpc, LocalRcConverter(LocalRcParameter(igc_rpc)), hmin, hmax, 0,
+          igc_rpc.number_line, 0, igc_rpc.number_sample)
+    rsm2 = Rsm(r, LocalRcConverter(LocalRcParameter(igc_rpc)))
+    rsm2.fill_in_ground_domain_vertex(igc_rpc,500, 1500)
+    rsm2.rsm_id.image_acquistion_time = rsm_lc.rsm_id.image_acquistion_time + 5.0
+    rsm2.rsm_id.image_identifier = "image2"
+    rsm2.rsm_id.sensor_identifier = "fakesen"
+    cov2 = RsmIndirectCovarianceB(igc_rpc, 500, 1500, rsm2.rsm_id)
+    cov2.row_power = np.array([[1,0,0],
+                              [0,1,0],
+                              [0,0,1]], dtype = np.int)
+    cov2.add_subgroup(RsmBSubgroup(np.array([[1,0],[0,3]]), 1, 1, 0, 0, 10))
+    cov2.add_subgroup(RsmBSubgroup(np.array([[4]]), 1, 1, 0, 0, 10))
+    cov2.mapping_matrix = np.array([[1,0,0],
+                                   [0,2,0],
+                                   [0, 0,3]])
+    rsm2.rsm_indirect_covariance = cov2
+    f.image_segment[1].rsm = rsm2
+    f.write("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
+    rsm_lc2 = f2.image_segment[0].rsm
+    print(rsm_lc2)
+    igc_msp = IgcMsp("nitf_rsm.ntf")
+    igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 0)
+    #igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 1)
+    print(igc_msp.covariance)
+    # TODO
+    # For some reason, we get a cross term with this
+    print(igc_msp.joint_covariance(igc_msp))
+    # But not this, even though they are identical. We'll
+    # need to play with this, something other other isn't
+    # right. We'll need to come back to this
+    print(igc_msp.joint_covariance(igc_msp2))
+    
 @require_pynitf
 @require_vicar
 @require_serialize

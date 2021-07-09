@@ -468,7 +468,7 @@ def test_tre_rsmida(rsm):
     t2 = TreRSMIDA()
     t2.read_from_file(fh2)
     print(t2)
-    assert t2.rsm_id.rsm_suport_data_edition == "fake-1"
+    assert t2.rsm_id.rsm_support_data_edition == "fake-1"
     
 # The RSM sample data has expected results as a spreadsheet. We grab these
 # values and put them here.

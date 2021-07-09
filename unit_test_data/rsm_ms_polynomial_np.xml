@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
-<boost_serialization signature="serialization::archive" version="13">
+<boost_serialization signature="serialization::archive" version="18">
 <geocal_object class_id="0" tracking_level="0" version="1">
 	<px class_id="2" class_name="GeoCal::RsmMultiSection" tracking_level="1" version="0" object_id="_0">
 		<RsmBase class_id="3" tracking_level="0" version="1">
 			<image_identifier></image_identifier>
-			<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+			<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 		</RsmBase>
 		<nline_sec>1.92066666666666674e+03</nline_sec>
 		<nsamp_sec>1.37630000000000000e+04</nsamp_sec>
@@ -18,7 +18,7 @@
 					<px class_id="6" class_name="GeoCal::RsmRationalPolynomial" tracking_level="1" version="1" object_id="_1">
 						<RsmBase>
 							<image_identifier></image_identifier>
-							<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+							<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 						</RsmBase>
 						<line_offset>9.62500000000000000e+02</line_offset>
 						<line_scale>9.62500000000000000e+02</line_scale>
@@ -387,7 +387,7 @@
 						<nheight_fit>20</nheight_fit>
 						<nsecond_pass_fit>20</nsecond_pass_fit>
 						<ignore_igc_error_in_fit>0</ignore_igc_error_in_fit>
-						<line_fit_error class_id="9" tracking_level="0" version="0">
+						<line_fit_error class_id="9" tracking_level="0" version="1">
 							<initialized>0</initialized>
 						</line_fit_error>
 						<sample_fit_error>
@@ -401,7 +401,7 @@
 					<px class_id_reference="6" object_id="_6">
 						<RsmBase>
 							<image_identifier></image_identifier>
-							<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+							<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 						</RsmBase>
 						<line_offset>9.62500000000000000e+02</line_offset>
 						<line_scale>9.62500000000000000e+02</line_scale>
@@ -784,7 +784,7 @@
 					<px class_id_reference="6" object_id="_11">
 						<RsmBase>
 							<image_identifier></image_identifier>
-							<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+							<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 						</RsmBase>
 						<line_offset>2.88050000000000000e+03</line_offset>
 						<line_scale>9.65500000000000000e+02</line_scale>
@@ -1167,7 +1167,7 @@
 					<px class_id_reference="6" object_id="_16">
 						<RsmBase>
 							<image_identifier></image_identifier>
-							<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+							<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 						</RsmBase>
 						<line_offset>2.88050000000000000e+03</line_offset>
 						<line_scale>9.65500000000000000e+02</line_scale>
@@ -1550,7 +1550,7 @@
 					<px class_id_reference="6" object_id="_21">
 						<RsmBase>
 							<image_identifier></image_identifier>
-							<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+							<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 						</RsmBase>
 						<line_offset>4.79900000000000000e+03</line_offset>
 						<line_scale>9.63000000000000000e+02</line_scale>
@@ -1933,7 +1933,7 @@
 					<px class_id_reference="6" object_id="_26">
 						<RsmBase>
 							<image_identifier></image_identifier>
-							<rsm_suport_data_edition>fake-1</rsm_suport_data_edition>
+							<rsm_support_data_edition>fake-1</rsm_support_data_edition>
 						</RsmBase>
 						<line_offset>4.79900000000000000e+03</line_offset>
 						<line_scale>9.63000000000000000e+02</line_scale>
@@ -2317,34 +2317,34 @@
 		<lp class_id="10" tracking_level="1" version="0" object_id="_31">
 			<pline>
 				<count>10</count>
-				<item>1.78494934318373166e+07</item>
-				<item>-1.50437347112648468e+07</item>
-				<item>-2.88256330077965260e+07</item>
-				<item>-4.86878222052620835e+00</item>
-				<item>-1.43523882792156283e+06</item>
-				<item>2.73152380578207597e+07</item>
-				<item>3.50229361641603898e-01</item>
-				<item>-1.35758345240288228e+06</item>
-				<item>7.23748054986021394e+00</item>
-				<item>5.78219172472737359e-08</item>
+				<item>1.78484747477372177e+07</item>
+				<item>-1.50436656503687687e+07</item>
+				<item>-2.88224648304299712e+07</item>
+				<item>-4.86874289780542657e+00</item>
+				<item>-1.43524649443193013e+06</item>
+				<item>2.73151469541450217e+07</item>
+				<item>3.50225596664369920e-01</item>
+				<item>-1.36005697491164878e+06</item>
+				<item>7.23742245131244566e+00</item>
+				<item>5.78220404969071200e-08</item>
 			</pline>
 			<psamp>
 				<count>10</count>
-				<item>3.46134811130124982e+06</item>
-				<item>-3.09409247781021707e+07</item>
-				<item>1.97989012307524979e+07</item>
-				<item>-5.07043298536278630e+00</item>
-				<item>3.36415211715054438e+07</item>
-				<item>-2.47274849810752496e+07</item>
-				<item>7.67963388010031256e+00</item>
-				<item>-3.29805865785637870e+05</item>
-				<item>-2.68817120949979893e+00</item>
-				<item>-1.22290035968778663e-06</item>
+				<item>3.46249283031287324e+06</item>
+				<item>-3.09409434562305734e+07</item>
+				<item>1.97952672377536744e+07</item>
+				<item>-5.07043184152221826e+00</item>
+				<item>3.36414892501885742e+07</item>
+				<item>-2.47273751428056769e+07</item>
+				<item>7.67961142721703283e+00</item>
+				<item>-3.26972015323003754e+05</item>
+				<item>-2.68814490760866187e+00</item>
+				<item>-1.22290484216516503e-06</item>
 			</psamp>
 			<min_line>0</min_line>
-			<max_line>5762</max_line>
+			<max_line>5761</max_line>
 			<min_sample>0</min_sample>
-			<max_sample>27526</max_sample>
+			<max_sample>27525</max_sample>
 			<nline_fit>10</nline_fit>
 			<nsample_fit>10</nsample_fit>
 			<nheight_fit>10</nheight_fit>

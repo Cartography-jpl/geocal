@@ -592,8 +592,14 @@ blitz::Array<double, 2> Rsm::mapping_matrix
 	    (Nheight_fit - 1.0) * k;
 	  boost::shared_ptr<GroundCoordinate> gc =
 	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
-	  igc_jacv.push_back(Igc.image_coordinate_jac_parm(*gc));
-	  rsm_jacv.push_back(image_coordinate_jac_parm(*gc));
+	  Array<double, 2> a1(Igc.image_coordinate_jac_parm(*gc));
+	  Array<double, 2> a2(image_coordinate_jac_parm(*gc));
+	  if(a1.cols() == 0)
+	    throw Exception("Need to have a nonempty jacobian for Igc");
+	  if(a2.cols() == 0)
+	    throw Exception("Need to have a nonempty jacobian image_coordinate_jac_parm. Did you forget and rsm_adjustable_parameter?");
+	  igc_jacv.push_back(a1.copy());
+	  rsm_jacv.push_back(a2.copy());
 	} catch(const ImageGroundConnectionFailed&) {
 	  // Ignore failures, just go to next point.
 	} catch(...) {
@@ -602,12 +608,10 @@ blitz::Array<double, 2> Rsm::mapping_matrix
 	}
       }
   blitz::Array<double, 2> igc_jac(2 * int(igc_jacv.size()),
-				  igc_jac[0].cols());
+				  igc_jacv[0].cols());
   blitz::Array<double, 2> rsm_jac(2 * int(rsm_jacv.size()),
-				  rsm_jac[0].cols());
-  std::cerr << igc_jac.shape() << "\n"
-	    << rsm_jac.shape() << "\n";
-  for(int i; i < int(igc_jacv.size()); ++i) {
+				  rsm_jacv[0].cols());
+  for(int i = 0; i < int(igc_jacv.size()); ++i) {
     igc_jac(2 * i, ra) = igc_jacv[i](0, ra);
     igc_jac(2 * i+1, ra) = igc_jacv[i](1, ra);
     rsm_jac(2 * i, ra) = rsm_jacv[i](0, ra);

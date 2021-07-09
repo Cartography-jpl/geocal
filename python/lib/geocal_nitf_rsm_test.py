@@ -159,8 +159,6 @@ def test_rsm_lc_rp_with_msp_with_adj(isolated_dir, rsm_lc, igc_rpc):
                 assert(geocal_swig.distance(p1, p2) < 0.01)
                 assert(geocal_swig.distance(p2, p3) < 0.01)
 
-# Temp, skip until we get mapping_matrix working.                
-@skip                
 @require_msp
 @require_pynitf
 def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
@@ -202,14 +200,30 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     cov.row_power = np.array([[1,0,0],
                               [0,1,0],
                               [0,0,1]], dtype = np.int)
+    cov.col_power = np.array([[1,0,0],
+                              [0,1,0],
+                              [0,0,1]], dtype = np.int)
     # Position has 10 m covariance
     cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2,10 ** 2 ,10 ** 2]),
                                   1, 1, 0, 0, 10))
     # Position has 10 arcsecond covariance
     cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2, 10 ** 2, 10 ** 2]),
                                   1, 1, 0, 0, 10))
+    # We need the adjustment in place to calculate mapping_matrix.
+    adj = RsmAdjustableParameterB(igc, hmin, hmax, rsm.rsm_id)
+    adj.row_power = np.array([[1,0,0],
+                              [0,1,0],
+                              [0,0,1]], dtype = np.int)
+    adj.col_power = np.array([[1,0,0],
+                              [0,1,0],
+                              [0,0,1]], dtype = np.int)
+    adj.parameter = np.array([0,0,0,0,0,0])
+    rsm.rsm_adjustable_parameter = adj
     cov.mapping_matrix = rsm.mapping_matrix(igccol.image_ground_connection(0),
                                             hmin, hmax)
+    # But by convention we don't store an all zero adjustment in
+    # the file.
+    rsm.rsm_adjustable_parameter = None
     cov.unmodeled_covariance = RsmBUnmodeledCovariance(np.array([[0.25,0],[0,0.25]]), 1,0,0,10, 1,0,0,10)
     rsm.rsm_indirect_covariance = cov
     f.image_segment[0].rsm = rsm

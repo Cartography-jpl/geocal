@@ -3,6 +3,7 @@
 #include "local_rectangular_coordinate.h"
 #include "ostream_pad.h"
 #include "geocal_gsl_root.h"
+#include "geocal_gsl_fit.h"
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
 #include "planet_coordinate.h"
@@ -559,4 +560,63 @@ void Rsm::compare_igc
       }
     }
   }
+}
+
+//-----------------------------------------------------------------------
+/// Generate mapping matrix. This could be done in python, but there
+/// is a bit of looping here that is much faster in C++.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> Rsm::mapping_matrix
+(const ImageGroundConnection& Igc,
+ double Min_height, double Max_height,
+ int Nline_fit,
+ int Nsample_fit,
+ int Nheight_fit,
+ bool Ignore_igc_error_in_fit)
+{
+  blitz::Range ra = blitz::Range::all();
+  blitz::firstIndex i1;
+  blitz::secondIndex i2;
+  blitz::thirdIndex i3;
+  blitz::fourthIndex i4;
+  std::vector<blitz::Array<double, 2> > igc_jacv;
+  std::vector<blitz::Array<double, 2> > rsm_jacv;
+  for(int i = 0; i < Nline_fit; ++i)
+    for(int j = 0; j < Nsample_fit; ++j)
+      for(int k = 0; k < Nheight_fit; ++k) {
+	try {
+	  double ln = Igc.number_line() / (Nline_fit - 1.0) * i;
+	  double smp = Igc.number_sample() / (Nsample_fit - 1.0) * j;
+	  double h = Min_height + (Max_height - Min_height) /
+	    (Nheight_fit - 1.0) * k;
+	  boost::shared_ptr<GroundCoordinate> gc =
+	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+	  igc_jacv.push_back(Igc.image_coordinate_jac_parm(*gc));
+	  rsm_jacv.push_back(image_coordinate_jac_parm(*gc));
+	} catch(const ImageGroundConnectionFailed&) {
+	  // Ignore failures, just go to next point.
+	} catch(...) {
+	  if(!Ignore_igc_error_in_fit)
+	    throw;
+	}
+      }
+  blitz::Array<double, 2> igc_jac(2 * int(igc_jacv.size()),
+				  igc_jac[0].cols());
+  blitz::Array<double, 2> rsm_jac(2 * int(rsm_jacv.size()),
+				  rsm_jac[0].cols());
+  std::cerr << igc_jac.shape() << "\n"
+	    << rsm_jac.shape() << "\n";
+  for(int i; i < int(igc_jacv.size()); ++i) {
+    igc_jac(2 * i, ra) = igc_jacv[i](0, ra);
+    igc_jac(2 * i+1, ra) = igc_jacv[i](1, ra);
+    rsm_jac(2 * i, ra) = rsm_jacv[i](0, ra);
+    rsm_jac(2 * i+1, ra) = rsm_jacv[i](1, ra);
+  }
+  blitz::Array<double, 2> t(rsm_jac.cols(), rsm_jac.cols());
+  t = blitz::sum(rsm_jac(i3, i1) * rsm_jac(i3, i2), i3);
+  blitz::Array<double, 2> tinv = gsl_invert(t);
+  blitz::Array<double, 2> res(rsm_jac.cols(), igc_jac.cols());
+  res = sum(sum(tinv(i1, i3) * rsm_jac(i4,i3) * igc_jac(i4, i2), i4), i3);
+  return res;
 }

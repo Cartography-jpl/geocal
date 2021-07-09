@@ -159,59 +159,76 @@ def test_rsm_lc_rp_with_msp_with_adj(isolated_dir, rsm_lc, igc_rpc):
                 assert(geocal_swig.distance(p1, p2) < 0.01)
                 assert(geocal_swig.distance(p2, p3) < 0.01)
 
+# Temp, skip until we get mapping_matrix working.                
+@skip                
 @require_msp
 @require_pynitf
 def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     '''Compare the RSM we write to a NITF file with what the MSP library 
     calculates. This verifies both the validity of our NITF and our RSM 
-    code'''    
+    code'''
+    orb = KeplerOrbit()
+    tm = Time.parse_time("2003-01-01T11:11:00Z")
+    orb_corr = OrbitOffsetCorrection(orb)
+    orb_corr.insert_position_time_point(tm)
+    orb_corr.insert_attitude_time_point(tm)
+    cam = QuaternionCamera(Quaternion_double(1,0,0,0), 2048, 2048, 2e-3,
+                           2e-3, 2.85e3, FrameCoordinate(1024,1024))
+    dem = SimpleDem(100)
+    img = MemoryRasterImage(cam.number_line(0), cam.number_sample(0))
+    hmin = 50
+    hmax = 150
+    igc = OrbitDataImageGroundConnection(orb_corr, tm, cam, dem, img)
+    # We don't have all the mechanism in place for jacobians with a
+    # ImageGroundConnection, but to do an IgcArray. So make a single
+    # image igccol, and then we can pull out the image_ground_connection
+    # for it. We could probably put this in place for ImageGroundConnection,
+    # be we generally want a collection when we need jacobians so we
+    # haven't.
+    igccol = IgcArray([igc,])
+    igccol.add_object(orb_corr)
+    igccol.add_identity_gradient()
+    rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
+              LocalRcConverter(LocalRcParameter(igc)))
+    rsm.fit(igc, hmin, hmax)
+    rsm.rsm_id.image_identifier = "image1"
+    rsm.rsm_base.image_identifier = "image1"
+    rsm.rsm_id.image_acquistion_time = tm
+    rsm.rsm_id.sensor_identifier = "fakesen"
     f = pynitf.NitfFile()
     create_image_seg(f)
     create_image_seg(f)
-    rsm_lc.rsm_id.image_identifier = "image1"
-    rsm_lc.rsm_id.image_acquistion_time = Time.parse_time("2020-07-04T12:00:00Z")
-    rsm_lc.rsm_id.sensor_identifier = "fakesen"
-    cov = RsmIndirectCovarianceB(igc_rpc, 500, 1500, rsm_lc.rsm_id)
+    cov = RsmIndirectCovarianceB(igc, hmin, hmax, rsm.rsm_id)
     cov.row_power = np.array([[1,0,0],
                               [0,1,0],
                               [0,0,1]], dtype = np.int)
-    cov.add_subgroup(RsmBSubgroup(np.array([[1,0],[0,3]]), 1, 1, 0, 0, 10))
-    cov.add_subgroup(RsmBSubgroup(np.array([[4]]), 1, 1, 0, 0, 10))
-    cov.mapping_matrix = np.array([[1,0,0],
-                                   [0,2,0],
-                                   [0, 0,3]])
+    # Position has 10 m covariance
+    cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2,10 ** 2 ,10 ** 2]),
+                                  1, 1, 0, 0, 10))
+    # Position has 10 arcsecond covariance
+    cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2, 10 ** 2, 10 ** 2]),
+                                  1, 1, 0, 0, 10))
+    cov.mapping_matrix = rsm.mapping_matrix(igccol.image_ground_connection(0),
+                                            hmin, hmax)
     cov.unmodeled_covariance = RsmBUnmodeledCovariance(np.array([[0.25,0],[0,0.25]]), 1,0,0,10, 1,0,0,10)
-    rsm_lc.rsm_indirect_covariance = cov
-    f.image_segment[0].rsm = rsm_lc
+    rsm.rsm_indirect_covariance = cov
+    f.image_segment[0].rsm = rsm
 
     # Duplicate RSM. Not clear that we really need everything regenerated,
     # I'm just trying to make another image at a different time. But for
     # now do this so we *know* everything is copied.
-    r = RsmRationalPolynomial(3,3,3,3,3,3,3,3)
-    hmin = igc_rpc.rpc.height_offset - igc_rpc.rpc.height_scale 
-    hmax = igc_rpc.rpc.height_offset + igc_rpc.rpc.height_scale
-    r.fit(igc_rpc, LocalRcConverter(LocalRcParameter(igc_rpc)), hmin, hmax, 0,
-          igc_rpc.number_line, 0, igc_rpc.number_sample)
-    rsm2 = Rsm(r, LocalRcConverter(LocalRcParameter(igc_rpc)))
-    rsm2.fill_in_ground_domain_vertex(igc_rpc,500, 1500)
-    rsm2.rsm_id.image_acquistion_time = rsm_lc.rsm_id.image_acquistion_time + 5.0
+    rsm2 = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
+              LocalRcConverter(LocalRcParameter(igc)))
+    rsm2.fit(igc, hmin, hmax)
     rsm2.rsm_id.image_identifier = "image2"
+    rsm.rsm_base.image_identifier = "image2"
+    rsm2.rsm_id.image_acquistion_time = tm + 5.0
     rsm2.rsm_id.sensor_identifier = "fakesen"
-    cov2 = RsmIndirectCovarianceB(igc_rpc, 500, 1500, rsm2.rsm_id)
-    cov2.row_power = np.array([[1,0,0],
-                              [0,1,0],
-                              [0,0,1]], dtype = np.int)
-    cov2.add_subgroup(RsmBSubgroup(np.array([[1,0],[0,3]]), 1, 1, 0, 0, 10))
-    cov2.add_subgroup(RsmBSubgroup(np.array([[4]]), 1, 1, 0, 0, 10))
-    cov2.mapping_matrix = np.array([[1,0,0],
-                                   [0,2,0],
-                                   [0, 0,3]])
-    rsm2.rsm_indirect_covariance = cov2
+    rsm2.rsm_indirect_covariance = cov
     f.image_segment[1].rsm = rsm2
     f.write("nitf_rsm.ntf")
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
-    rsm_lc2 = f2.image_segment[0].rsm
-    print(rsm_lc2)
+    print(f2.image_segment[0].rsm)
     igc_msp = IgcMsp("nitf_rsm.ntf")
     igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 0)
     #igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 1)

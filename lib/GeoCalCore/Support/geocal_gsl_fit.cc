@@ -1,6 +1,7 @@
 #include "geocal_gsl_fit.h"
 #include "geocal_exception.h"
 #include <gsl/gsl_multifit.h>
+#include <gsl/gsl_linalg.h>
 
 using namespace GeoCal;
 
@@ -70,4 +71,36 @@ void GeoCal::gsl_fit(const GslMatrix& X, const GslVector& Y,
   int status = gsl_multifit_linear(X.gsl(), Y.gsl(), C.gsl(), Cov.gsl(), 
 				   &Chisq, ws.work_space);
   gsl_check(status);
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup GSL
+/// Do a full inversion of a matrix.
+//-----------------------------------------------------------------------
+
+void GeoCal::gsl_invert(const GslMatrix& A, GslMatrix& Ainv)
+{
+  int size = A.blitz_array().rows();
+  if(A.blitz_array().cols() != size)
+    throw Exception("Matrix needs to be square");
+  gsl_permutation *p = gsl_permutation_alloc(size);
+  int s;
+  // Matrix gets destroyed, so create a copy
+  GslMatrix Acopy(A.blitz_array().copy());
+  int status = gsl_linalg_LU_decomp(Acopy.gsl(), p, &s);
+  gsl_check(status);
+  blitz::Array<double, 2> t(size, size);
+  Ainv.reset(t);
+  status = gsl_linalg_LU_invert(Acopy.gsl(), p, Ainv.gsl());
+  gsl_check(status);
+  gsl_permutation_free(p);
+}
+
+blitz::Array<double, 2>
+GeoCal::gsl_invert(const blitz::Array<double, 2>& A)
+{
+  GslMatrix agsl(A);
+  GslMatrix res;
+  gsl_invert(agsl, res);
+  return res.blitz_array().copy();
 }

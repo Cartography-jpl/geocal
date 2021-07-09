@@ -51,6 +51,12 @@ public:
 	   double Max_height);
   void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
 				    double Min_height, double Max_height);
+  blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,
+					 double Min_height, double Max_height,
+					 int Nline_fit = 20,
+					 int Nsample_fit = 20,
+					 int Nheight_fit = 20,
+					 bool Ignore_igc_error_in_fit = false);
   void print(std::ostream& Os) const;
 
   const boost::shared_ptr<RsmId>& rsm_id() const {return rid;}

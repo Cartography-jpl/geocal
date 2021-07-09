@@ -5973,6 +5973,20 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 
 
 SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
+SWIGINTERN int
 SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
 {
 #if PY_VERSION_HEX>=0x03000000
@@ -8418,6 +8432,657 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Rsm_mapping_matrix__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int arg7 ;
+  bool arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_mapping_matrix" "', argument " "1"" of type '" "GeoCal::Rsm *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_mapping_matrix" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_mapping_matrix" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_mapping_matrix" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_mapping_matrix" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Rsm_mapping_matrix" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "Rsm_mapping_matrix" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = (arg1)->mapping_matrix((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_mapping_matrix__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  int arg5 ;
+  int arg6 ;
+  int arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_mapping_matrix" "', argument " "1"" of type '" "GeoCal::Rsm *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_mapping_matrix" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_mapping_matrix" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_mapping_matrix" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_mapping_matrix" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "Rsm_mapping_matrix" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
+  {
+    try {
+      result = (arg1)->mapping_matrix((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_mapping_matrix__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_mapping_matrix" "', argument " "1"" of type '" "GeoCal::Rsm *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_mapping_matrix" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_mapping_matrix" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_mapping_matrix" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Rsm_mapping_matrix" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      result = (arg1)->mapping_matrix((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_mapping_matrix__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  int arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_mapping_matrix" "', argument " "1"" of type '" "GeoCal::Rsm *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_mapping_matrix" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_mapping_matrix" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Rsm_mapping_matrix" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      result = (arg1)->mapping_matrix((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_mapping_matrix__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  GeoCal::ImageGroundConnection *arg2 = 0 ;
+  double arg3 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_mapping_matrix" "', argument " "1"" of type '" "GeoCal::Rsm *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageGroundConnection *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageGroundConnection,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Rsm_mapping_matrix" "', argument " "2"" of type '" "GeoCal::ImageGroundConnection const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageGroundConnection * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageGroundConnection > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Rsm_mapping_matrix" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Rsm_mapping_matrix" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = (arg1)->mapping_matrix((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_mapping_matrix(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[9] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Rsm_mapping_matrix",0,8,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    return _wrap_Rsm_mapping_matrix__SWIG_4(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_Rsm_mapping_matrix__SWIG_3(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_Rsm_mapping_matrix__SWIG_2(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_Rsm_mapping_matrix__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
+    return _wrap_Rsm_mapping_matrix__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rsm_mapping_matrix'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Rsm::mapping_matrix(GeoCal::ImageGroundConnection const &,double,double,int,int,int,bool)\n"
+    "    GeoCal::Rsm::mapping_matrix(GeoCal::ImageGroundConnection const &,double,double,int,int,int)\n"
+    "    GeoCal::Rsm::mapping_matrix(GeoCal::ImageGroundConnection const &,double,double,int,int)\n"
+    "    GeoCal::Rsm::mapping_matrix(GeoCal::ImageGroundConnection const &,double,double,int)\n"
+    "    GeoCal::Rsm::mapping_matrix(GeoCal::ImageGroundConnection const &,double,double)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Rsm__v_rsm_id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
@@ -9692,6 +10357,16 @@ static PyMethodDef SwigMethods[] = {
 		"performance. We may want to adjust what we calculate as we get a\n"
 		"better feel for how to characterize a Rsm. But this is our initial\n"
 		"version of this. \n"
+		""},
+	 { (char *)"Rsm_mapping_matrix", _wrap_Rsm_mapping_matrix, METH_VARARGS, (char *)"\n"
+		"\n"
+		"blitz::Array< double, 2 > Rsm::mapping_matrix(const ImageGroundConnection &Igc, double Min_height, double\n"
+		"Max_height, int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=20,\n"
+		"bool Ignore_igc_error_in_fit=false)\n"
+		"Generate mapping matrix.\n"
+		"\n"
+		"This could be done in python, but there is a bit of looping here that\n"
+		"is much faster in C++. \n"
 		""},
 	 { (char *)"Rsm__v_rsm_id", (PyCFunction)_wrap_Rsm__v_rsm_id, METH_O, (char *)"\n"
 		"\n"

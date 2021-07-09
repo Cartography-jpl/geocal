@@ -53,6 +53,12 @@ public:
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT)
     const;
+  blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,
+					 double Min_height, double Max_height,
+					 int Nline_fit = 20,
+					 int Nsample_fit = 20,
+					 int Nheight_fit = 20,
+					 bool Ignore_igc_error_in_fit = false);
   %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
   %python_attribute_with_set(rsm_direct_covariance,
 		    boost::shared_ptr<RsmDirectCovariance>);

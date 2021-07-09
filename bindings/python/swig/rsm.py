@@ -360,6 +360,20 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         return _rsm.Rsm_compare_igc(self, Igc, Number_line_spacing, Number_sample_spacing, Height)
 
 
+    def mapping_matrix(self, Igc, Min_height, Max_height, Nline_fit=20, Nsample_fit=20, Nheight_fit=20, Ignore_igc_error_in_fit=False):
+        """
+
+        blitz::Array< double, 2 > Rsm::mapping_matrix(const ImageGroundConnection &Igc, double Min_height, double
+        Max_height, int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=20,
+        bool Ignore_igc_error_in_fit=false)
+        Generate mapping matrix.
+
+        This could be done in python, but there is a bit of looping here that
+        is much faster in C++. 
+        """
+        return _rsm.Rsm_mapping_matrix(self, Igc, Min_height, Max_height, Nline_fit, Nsample_fit, Nheight_fit, Ignore_igc_error_in_fit)
+
+
     def _v_rsm_id(self):
         """
 
@@ -541,6 +555,7 @@ Rsm.image_coordinate_jac_parm = new_instancemethod(_rsm.Rsm_image_coordinate_jac
 Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
 Rsm.fill_in_ground_domain_vertex = new_instancemethod(_rsm.Rsm_fill_in_ground_domain_vertex, None, Rsm)
 Rsm.compare_igc = new_instancemethod(_rsm.Rsm_compare_igc, None, Rsm)
+Rsm.mapping_matrix = new_instancemethod(_rsm.Rsm_mapping_matrix, None, Rsm)
 Rsm._v_rsm_id = new_instancemethod(_rsm.Rsm__v_rsm_id, None, Rsm)
 Rsm._v_rsm_direct_covariance = new_instancemethod(_rsm.Rsm__v_rsm_direct_covariance, None, Rsm)
 Rsm._v_rsm_indirect_covariance = new_instancemethod(_rsm.Rsm__v_rsm_indirect_covariance, None, Rsm)

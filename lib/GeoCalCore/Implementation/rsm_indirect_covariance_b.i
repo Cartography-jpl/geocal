@@ -84,4 +84,5 @@ public:
 %template(Vector_RsmBSubgroup) std::vector<boost::shared_ptr<GeoCal::RsmBSubgroup> >;
 
 // List of things "import *" will include
-%python_export("RsmIndirectCovarianceB", "RsmBSubgroup", "Vector_RsmBSubgroup")
+%python_export("RsmIndirectCovarianceB", "RsmBSubgroup", "Vector_RsmBSubgroup",
+	       "RsmBUnmodeledCovariance")

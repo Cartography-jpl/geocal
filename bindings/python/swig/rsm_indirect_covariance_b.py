@@ -654,7 +654,7 @@ Vector_RsmBSubgroup_swigregister = _rsm_indirect_covariance_b.Vector_RsmBSubgrou
 Vector_RsmBSubgroup_swigregister(Vector_RsmBSubgroup)
 
 
-__all__ = ["RsmIndirectCovarianceB","RsmBSubgroup","Vector_RsmBSubgroup"]
+__all__ = ["RsmIndirectCovarianceB","RsmBSubgroup","Vector_RsmBSubgroup","RsmBUnmodeledCovariance"]
 
 
 

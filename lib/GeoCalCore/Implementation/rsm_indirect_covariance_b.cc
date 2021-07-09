@@ -218,6 +218,13 @@ void RsmIndirectCovarianceB::print(std::ostream& Os) const
   } else {
     Os << "  Subgroups: None\n";
   }
+  if(has_unmodeled_error_covariance()) {
+    Os << "  Unmodeled covariance:\n";
+    opad << *ucov_;
+    opad.strict_sync();
+  } else {
+    Os << "  Unmodeled covariance: None\n";
+  }
 }
 
 //-----------------------------------------------------------------------

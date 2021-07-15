@@ -100,7 +100,7 @@ protected:
   supports RSMAPB.
 *******************************************************************/
 
-class RsmAdjustableParameterB : public RsmBParameterDesc,
+class RsmAdjustableParameterB : public virtual RsmBParameterDesc,
 				public RsmAdjustableParameter {
 public:
   RsmAdjustableParameterB(const std::string& Image_identifier="",

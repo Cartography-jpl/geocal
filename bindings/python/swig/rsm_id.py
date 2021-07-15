@@ -701,7 +701,7 @@ def RsmId_read_tre_string(Tre_in):
     return _rsm_id.RsmId_read_tre_string(Tre_in)
 
 
-__all__ = ["RsmId"]
+__all__ = ["RsmId","RsmIdTiming"]
 
 
 

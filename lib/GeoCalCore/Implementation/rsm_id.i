@@ -59,4 +59,4 @@ public:
 };
 }
 // List of things "import *" will include
-%python_export("RsmId")
+%python_export("RsmId", "RsmIdTiming")

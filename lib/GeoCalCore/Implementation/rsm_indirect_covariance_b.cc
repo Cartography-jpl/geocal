@@ -75,7 +75,7 @@ std::string RsmIndirectCovarianceB::tre_string() const
     for(int i = 0; i < num_subgroup; ++i)
       res += subgroup_[i]->tre_string();
     for(int i = 0; i < m_.rows(); ++i)
-      for(int j = 0; j < m_.rows(); ++j)
+      for(int j = 0; j < m_.cols(); ++j)
 	res += str_check_size(num % m_(i,j), 21);
   }
   if(has_unmodeled_error_covariance()) {

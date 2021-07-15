@@ -100,7 +100,7 @@ private:
   supports RSMECB.
 *******************************************************************/
 class RsmIndirectCovarianceB : public RsmIndirectCovariance,
-			       public RsmBParameterDesc {
+			       public virtual RsmBParameterDesc {
 public:
   RsmIndirectCovarianceB(const std::string& Image_identifier="",
 			const std::string& Rsm_support_data_edition="fake-1",

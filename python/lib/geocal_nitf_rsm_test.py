@@ -10,8 +10,9 @@ from geocal_swig import (GdalRasterImage, VicarRasterImage,
                          VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
                          Rsm, ImageCoordinate, IgcMsp,
                          RsmBUnmodeledCovariance,
-                         RsmIndirectCovarianceB,
-                         RsmAdjustableParameterB, Time)
+                         RsmIndirectCovarianceB, RsmIdTiming,
+                         RsmAdjustableParameterB, Time, WithParameter,
+                         ArrayAd_double_1, rad_to_arcsecond, arcsecond_to_rad)
 import geocal_swig
 import io
 import numpy as np
@@ -159,6 +160,41 @@ def test_rsm_lc_rp_with_msp_with_adj(isolated_dir, rsm_lc, igc_rpc):
                 assert(geocal_swig.distance(p1, p2) < 0.01)
                 assert(geocal_swig.distance(p2, p3) < 0.01)
 
+class IgcParameter(WithParameter):
+    '''Wrapper illustrating a parameter adapter.'''
+    def __init__(self, orbit, camera):
+        super().__init__()
+        self.cam = camera
+        self.orb = orbit
+    def _v_parameter_name(self):
+        return geocal_swig.vector_string(["X Offset (m)", "Y Offset (m)", "Z Offset (m)",
+                                          "Yaw Offset (rad)", "Pitch Offset (rad)",
+                                          "Roll Offset(rad)", "Focal length (m)"])
+    def _v_parameter_with_derivative(self, value=None):
+        if(value is None):
+            fl = self.cam.focal_length_with_derivative
+            res = ArrayAd_double_1(7, fl.number_variable)
+            # Vagaries of the interface, we can't use a slice here in assigment,
+            # so just do each value separately
+            res[0] = self.orb.parameter_with_derivative[0]
+            res[1] = self.orb.parameter_with_derivative[1]
+            res[2] = self.orb.parameter_with_derivative[2]
+            res[3] = self.orb.parameter_with_derivative[3] * arcsecond_to_rad
+            res[4] = self.orb.parameter_with_derivative[4] * arcsecond_to_rad
+            res[5] = self.orb.parameter_with_derivative[5] * arcsecond_to_rad
+            res[6] = fl
+            return res
+        orbp = ArrayAd_double_1(6, value.number_variable)
+        orbp[0] = value[0]
+        orbp[1] = value[1]
+        orbp[2] = value[2]
+        orbp[3] = value[3] * rad_to_arcsecond
+        orbp[4] = value[4] * rad_to_arcsecond
+        orbp[5] = value[5] * rad_to_arcsecond
+        self.orb.parameter_with_derivative = orbp
+        self.cam.focal_length_with_derivative = value[6]
+        
+
 @require_msp
 @require_pynitf
 def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
@@ -184,59 +220,75 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     # be we generally want a collection when we need jacobians so we
     # haven't.
     igccol = IgcArray([igc,])
-    igccol.add_object(orb_corr)
+    # Stash a copy of IgcParameter, just for lifetime issues
+    igccol.stash_parm = IgcParameter(orb_corr, igc.camera)
+    igccol.add_object(igccol.stash_parm)
+    igccol.parameter_subset = np.concatenate([[0] * 6, [igc.camera.focal_length]])
     igccol.add_identity_gradient()
-    rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
+    # The RPC version has poles, to a numerator only version
+    #rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
+    #          LocalRcConverter(LocalRcParameter(igc)))
+    rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
               LocalRcConverter(LocalRcParameter(igc)))
     rsm.fit(igc, hmin, hmax)
-    rsm.rsm_id.image_identifier = "image1"
-    rsm.rsm_base.image_identifier = "image1"
+    rsm.image_identifier = "image1"
+    rsm.rsm_support_data_edition = "support1"
     rsm.rsm_id.image_acquistion_time = tm
+    rsm.rsm_id.timing = RsmIdTiming(igc.camera.number_line(0),
+                                    igc.camera.number_sample(0),
+                                    0.0, 0.0)
     rsm.rsm_id.sensor_identifier = "fakesen"
     f = pynitf.NitfFile()
     create_image_seg(f)
     create_image_seg(f)
     cov = RsmIndirectCovarianceB(igc, hmin, hmax, rsm.rsm_id)
-    cov.row_power = np.array([[1,0,0],
-                              [0,1,0],
-                              [0,0,1]], dtype = np.int)
-    cov.col_power = np.array([[1,0,0],
-                              [0,1,0],
-                              [0,0,1]], dtype = np.int)
+    cov.row_power = np.array([[0,0,0],
+                              [1,0,0],
+                              [0,1,0]], dtype = np.int)
+    cov.col_power = cov.row_power
     # Position has 10 m covariance
-    cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2,10 ** 2 ,10 ** 2]),
+    cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2] * 3),
                                   1, 1, 0, 0, 10))
-    # Position has 10 arcsecond covariance
-    cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2, 10 ** 2, 10 ** 2]),
-                                  1, 1, 0, 0, 10))
+    # Attitude has 10 arcsecond covariance
+    cov.add_subgroup(RsmBSubgroup(np.diag([(10 * arcsecond_to_rad) ** 2] * 3),
+                                  1, 1, 0, 0, 100))
+    # Focal length is 10 mm covariance
+    cov.add_subgroup(RsmBSubgroup(np.diag([10 ** 2]),
+                                  1, 1, 0, 0, 1000))
     # We need the adjustment in place to calculate mapping_matrix.
     adj = RsmAdjustableParameterB(igc, hmin, hmax, rsm.rsm_id)
-    adj.row_power = np.array([[1,0,0],
-                              [0,1,0],
-                              [0,0,1]], dtype = np.int)
-    adj.col_power = np.array([[1,0,0],
-                              [0,1,0],
-                              [0,0,1]], dtype = np.int)
+    adj.row_power = cov.row_power
+    adj.col_power = cov.col_power
     adj.parameter = np.array([0,0,0,0,0,0])
     rsm.rsm_adjustable_parameter = adj
+    # Sanity check on jacobian calcuation
+    print(igccol.parameter_name)
+    gc = igc.ground_coordinate(ImageCoordinate(100,200))
+    print(igccol.image_coordinate_jac_parm(0,gc))
+    print(igccol.image_coordinate_jac_parm_fd(0,gc, [1e-3,1e-3,1e-3,1e-8,1e-8,1e-8,1e-3]))
+    igccol.add_identity_gradient()
+    
     cov.mapping_matrix = rsm.mapping_matrix(igccol.image_ground_connection(0),
                                             hmin, hmax)
     # But by convention we don't store an all zero adjustment in
     # the file.
     rsm.rsm_adjustable_parameter = None
-    cov.unmodeled_covariance = RsmBUnmodeledCovariance(np.array([[0.25,0],[0,0.25]]), 1,0,0,10, 1,0,0,10)
+    cov.unmodeled_covariance = RsmBUnmodeledCovariance(np.diag([0.25,0.25]), 1,0,0,10, 1,0,0,10)
     rsm.rsm_indirect_covariance = cov
     f.image_segment[0].rsm = rsm
 
     # Duplicate RSM. Not clear that we really need everything regenerated,
     # I'm just trying to make another image at a different time. But for
     # now do this so we *know* everything is copied.
-    rsm2 = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
-              LocalRcConverter(LocalRcParameter(igc)))
+    rsm2 = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+               LocalRcConverter(LocalRcParameter(igc)))
     rsm2.fit(igc, hmin, hmax)
-    rsm2.rsm_id.image_identifier = "image2"
-    rsm.rsm_base.image_identifier = "image2"
+    rsm2.image_identifier = "image2"
+    rsm2.rsm_support_data_edition = "support2"
     rsm2.rsm_id.image_acquistion_time = tm + 5.0
+    rsm.rsm_id.timing = RsmIdTiming(igc.camera.number_line(0),
+                                    igc.camera.number_sample(0),
+                                    0.0, 0.0)
     rsm2.rsm_id.sensor_identifier = "fakesen"
     rsm2.rsm_indirect_covariance = cov
     f.image_segment[1].rsm = rsm2
@@ -244,15 +296,8 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2.image_segment[0].rsm)
     igc_msp = IgcMsp("nitf_rsm.ntf")
-    igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 0)
-    #igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 1)
+    igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 1)
     print(igc_msp.covariance)
-    # TODO
-    # For some reason, we get a cross term with this
-    print(igc_msp.joint_covariance(igc_msp))
-    # But not this, even though they are identical. We'll
-    # need to play with this, something other other isn't
-    # right. We'll need to come back to this
     print(igc_msp.joint_covariance(igc_msp2))
     
 @require_pynitf

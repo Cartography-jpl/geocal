@@ -226,10 +226,10 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     igccol.parameter_subset = np.concatenate([[0] * 6, [igc.camera.focal_length]])
     igccol.add_identity_gradient()
     # The RPC version has poles, to a numerator only version
-    rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
-              LocalRcConverter(LocalRcParameter(igc)))
-    #rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+    #rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
     #          LocalRcConverter(LocalRcParameter(igc)))
+    rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+              LocalRcConverter(LocalRcParameter(igc)))
     rsm.fit(igc, hmin, hmax)
     print("Poles in fit: ", rsm.check_zero_crossing())
     rsm.image_identifier = "image1"

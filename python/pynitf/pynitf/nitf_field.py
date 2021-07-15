@@ -8,6 +8,7 @@ import math
 from struct import pack, unpack
 import logging
 import io
+import numpy as np
 
 # Add a bunch of debugging if you are diagnosing a problem
 DEBUG = False
@@ -642,14 +643,17 @@ class NitfLoop(object):
     @classmethod
     def is_shape_equal(cls, loop1, loop2, lead=()):
         '''Check if two loops have the same shape.'''
-        if(loop1.dim_size != loop2.dim_size):
-            return False
-        if(len(lead) == loop1.dim_size - 1):
-            return loop1.shape(lead) == loop2.shape(lead)
-        for k in loop1.key_subloop(lead):
-            if not cls.is_shape_equal(loop1, loop2, lead=k):
+        try:
+            if(loop1.dim_size != loop2.dim_size):
                 return False
-        return True
+            if(len(lead) == loop1.dim_size - 1):
+                return loop1.shape(lead) == loop2.shape(lead)
+            for k in loop1.key_subloop(lead):
+                if not cls.is_shape_equal(loop1, loop2, lead=k):
+                    return False
+            return True
+        except IndexError:
+            return False
 
     def print_to_fh(self, fh):
         '''Print a description of fields in this loop'''
@@ -991,7 +995,7 @@ class FieldStructDiff(NitfDiffHandle):
         total_count = 0
         for (ind, av1), av2 in itertools.zip_longest(v1.items(), v2.values()):
             total_count += 1
-            if(not cmp_func(av1, av2)):
+            if(not np.all(cmp_func(av1, av2))):
                 ind_str = ", ".join(str(i) for i in ind)
                 logger.difference_detail("%s[%s]: %s != %s", fn1, ind_str,
                                          av1, av2)

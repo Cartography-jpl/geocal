@@ -30,9 +30,10 @@ modules listed on NITF_PLUGIN environment variable list.
 If you need to supply special handlers, you can load arbitrary python code.
 The code should have the general format:
 
-   import __main__
-   __main__.nitf_info.handle_set.add_handle(my_handle)
-   __main__.nitf_info.config["My key"] = "My value"
+   from __main__ import nitf_diff
+
+   nitf_diff.handle_set.add_handle(my_handle)
+   nitf_diff.config["My key"] = "My value"
 
 Options:
   -h --help         
@@ -49,10 +50,15 @@ Options:
        Turn debugging information on
        
   --log-file=f
-       Give a path for the logs to be written to
+       Give a path for the logs to be written to. This goes to both the screen
+       an the log file, compare with --log-file-only
+
+  --log-file-only=f
+       Write logs only to the log file, not also to the screen.
 
   --no-color
-       Don't colorize output
+       Don't colorize output. Only applies to the screen, we never put
+       color into log files.
 
   --quiet
        Don't print any messages, just return an overall status code.
@@ -86,37 +92,6 @@ else:
     warnings.filterwarnings("ignore", "Trouble reading TRE MATESA",
                             category=pynitf.TreWarning)
             
-# TODO Remove this
-# Temporary kludge, some extra pieces for geocal that will get
-# added in the next geocal update
-try:
-    geocal.DesCSEPHB_geocal.uh_class = pynitf.DesCSEPHB.uh_class
-    geocal.DesCSATTB_geocal.uh_class = pynitf.DesCSATTB.uh_class
-
-    import logging
-    import numpy as np
-    logger = logging.getLogger('nitf_diff')
-    class ImageGdalDiff(pynitf.NitfDiffHandle):
-        def handle_diff(self, d1, d2, nitf_diff):
-            if(not isinstance(d1, geocal.NitfImageGdal) or
-               not isinstance(d2, geocal.NitfImageGdal)):
-                return (False, None)
-            is_same = True
-            t1 = d1[:,:,:]
-            t2 = d2[:,:,:]
-            # TODO Expose tolerance as configuration parameters
-            if(not np.allclose(t1, t2)):
-                logger.difference("Image '%s is different",
-                                  d1.image_subheader.iid1)
-                is_same = False
-            return (True, is_same)
-
-    pynitf.NitfDiffHandleSet.add_default_handle(ImageGdalDiff())
-    
-except NameError:
-    pass
-    
-
 nitf_diff = pynitf.NitfDiff()
 
 if(args.config_file_json):
@@ -130,30 +105,50 @@ if(args.config_file_python):
     sys.modules["config_file"] = module
 
 logger = logging.getLogger('nitf_diff')
-h = logging.StreamHandler()
+fh = None
+if(args.log_file_only or args.log_file):
+    fh = logging.FileHandler(args.log_file_only or args.log_file)
+    fh.setFormatter(pynitf.DifferenceFormatter(add_color = False))
+    fh.setLevel(logging.INFO)
+    logger.addHandler(fh)
 dformat = pynitf.DifferenceFormatter(add_color = not args.no_color)
-h.setFormatter(dformat)
-logger.addHandler(h)
+h = None
+if(not args.log_file_only):    
+    h = logging.StreamHandler()
+    h.setFormatter(dformat)
+    logger.addHandler(h)
 if(args.debug):
-    h.setLevel(logging.DEBUG)
+    if(h):
+        h.setLevel(logging.DEBUG)
     logger.setLevel(logging.DEBUG)
 elif(args.verbose):
-    h.setLevel(logging.INFO)
+    if(h):
+        h.setLevel(logging.INFO)
     logger.setLevel(logging.INFO)
 elif(args.quiet):
-    h.setLevel(1000)
+    if(h):
+        h.setLevel(1000)
     logger.setLevel(1000)
 else:    
-    h.setLevel(logging.WARNING)
+    if(h):
+        h.setLevel(logging.WARNING)
     logger.setLevel(logging.WARNING)
 
+if(fh):
+    print("Comparing file 1: %s" % os.path.abspath(args.file1), file=fh.stream)
+    print("Comparing file 2: %s" % os.path.abspath(args.file2), file=fh.stream)
+    
 is_same = nitf_diff.compare(args.file1, args.file2)
 
 if(not is_same):
+    if(fh):
+        print("Files are different", file=fh.stream)
     if(not args.quiet):
         print(dformat.color_text("Files are different", logging.ERROR))
     sys.exit(1)
     
 if(not args.quiet):
+    if(fh):
+        print("Files are the same", file=fh.stream)
     print(dformat.color_text("Files are the same", pynitf.DIFFERENCE_DETAIL))
     

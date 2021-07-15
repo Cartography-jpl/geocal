@@ -5,6 +5,7 @@ from .nitf_security import security_unclassified
 from .nitf_diff_handle import (NitfDiffHandle, NitfDiffHandleSet)
 from .weak_key_value_dict import WeakKeyValueDict
 import numpy as np
+import io
 import mmap
 import logging
 
@@ -137,12 +138,22 @@ class NitfImageReadNumpy(NitfImageWithSubset):
         ih = self.subheader
         if(ih.ic != "NC"):
             return False
-        if(ih.nbpr != 1 or ih.nbpc != 1):
-            return False
-        # We could add support here for pixel or row interleave here if
-        # needed, just need to work though juggling the data here.
-        if(ih.imode != "B" and ih.imode != "P"):
-            return False
+        # We have handling for IMAGE_GEN_MODE_ROW_P. We should be able to extend
+        # this over time, but for now just implement this one case.
+        strides = None
+        if(ih.imode == "P" and ih.nbpr == 1 and ih.nbpc == ih.shape[1] and
+           ih.nppbh == ih.shape[2]):
+            strides = np.array([1, ih.shape[0] * ih.shape[2], ih.shape[0]])
+            # strides is in bytes for ndarray, so we need to multiple
+            # by itemsize
+            strides *= ih.dtype.itemsize
+        else:
+            if(ih.nbpr != 1 or ih.nbpc != 1):
+                return False
+            # We could add support here for pixel or row interleave here if
+            # needed, just need to work though juggling the data here.
+            if(ih.imode != "B" and ih.imode != "P"):
+                return False
         # Likewise, we don't work with 1 bit data
         if(ih.nbpp == 1):
             return False
@@ -161,11 +172,15 @@ class NitfImageReadNumpy(NitfImageWithSubset):
             foff = fh.tell()
             self.data = np.ndarray(self.shape, dtype = ih.dtype,
                                    buffer = self.mm,
+                                   strides = strides,
                                    offset = foff)
             fh.seek(self.data.size * self.data.itemsize + foff, 0)
         else:
             self.data = np.fromfile(fh, dtype = ih.dtype,
                                     count=ih.nrows*ih.ncols*ih.number_band)
+            if(strides is not None):
+                self.data = np.lib.stride_tricks.as_strided(self.data,
+                                   shape=self.shape, strides=strides)
             self.data = np.reshape(self.data, self.shape)
         self.data_size = self.data.size * self.data.itemsize
         return True
@@ -208,9 +223,28 @@ class ImageReadNumpyDiff(NitfDiffHandle):
         return (True, is_same)
 
 NitfDiffHandleSet.add_default_handle(ImageReadNumpyDiff())
-                
 
 class NitfImageWriteDataOnDemand(NitfImageWithSubset):
+    '''This writes a NitfImage where we generate the data on demand when
+    we need to write the data out. A function should be registered to
+    generate this data, or alternatively a class that derives from this one
+    can override the data_to_write function.
+
+    Note that when we write the data out, we attach the numpy memmap
+    attribute 'data_written' to this object (before this it is set to
+    None). This can be used to either reread the data, or to update
+    the image after it has already been written. This is useful if the
+    underlying image isn't actually available until it has been
+    written (e.g., a data_callback hasn't been called to generate the
+    actual data), or if we need to delay the creation of and image
+    (e.g., we don't have the input data to generate the image until a
+    later portion of the file is generated).
+
+    I don't know that we have figured out the cleanest interface for this yet,
+    but we provide "flush_update". So you can modify self.data_written and then
+    call "flush_update" to update the image after it has been written. See
+    the nitf_image_test.py unit tests for an example of this.
+    '''
 
     IMAGE_GEN_MODE_ALL = 0 #Write out pixel-by-pixel, not recommended because it's going to be very slow
     IMAGE_GEN_MODE_BAND = 1 #Write out one band at a time
@@ -219,10 +253,12 @@ class NitfImageWriteDataOnDemand(NitfImageWithSubset):
     IMAGE_GEN_MODE_COL_B = 4 #Write out one column at a time, bands first
     IMAGE_GEN_MODE_COL_P = 5 # Write out one column at a time, pixel first
 
-    '''This writes a NitfImage where we generate the data on demand when
-    we need to write the data out. A function should be registered to
-    generate this data, or alternatively a class that derives from this one
-    can override the data_to_write function'''
+    
+    # Keep a list of mmap associated with a filehandle. If either the
+    # mmap or the filehandle disappears, this gets removed from this
+    # dict
+    mmap_cache = WeakKeyValueDict()
+
     def __init__(self, nrow, ncol, data_type, data_callback=None,
                  numbands=1,
                  iid1 = "Test data", iid2 = "This is sample data",
@@ -260,6 +296,34 @@ class NitfImageWriteDataOnDemand(NitfImageWithSubset):
         self.security = security
         self.data_callback = data_callback
         self.image_gen_mode = image_gen_mode
+        ih = self.subheader
+        self.data_written = None # We'll fill this in when we write the data
+        if(self.image_gen_mode == self.IMAGE_GEN_MODE_ALL):
+            # set_default_image_subheader already set the blocking stuff
+            # right for this mode
+            pass
+        elif(self.image_gen_mode == self.IMAGE_GEN_MODE_BAND):
+            # set_default_image_subheader already set the blocking stuff
+            # right for this mode
+            pass
+        elif(self.image_gen_mode == self.IMAGE_GEN_MODE_ROW_B):
+            raise NotImplemented()
+        elif(self.image_gen_mode == self.IMAGE_GEN_MODE_ROW_P):
+            # Note that we could have a row broken up into multiple blocks,
+            # plus the row doesn't have to be 1. But this is what is
+            # currently assumed while writing, so we need to use this.
+            ih.nbpr = 1
+            ih.nbpc = nrow
+            ih.nppbh = ncol
+            ih.nppbv = 1
+            ih.imode = "P"
+        elif(self.image_gen_mode == self.IMAGE_GEN_MODE_COL_B):
+            raise NotImplemented()
+        elif(self.image_gen_mode == self.IMAGE_GEN_MODE_COL_P):
+            raise NotImplemented()
+        else:
+            raise RuntimeError("Unrecognized image_gen_mode")
+
 
     def read_from_file(self, fh, segindex=None):
         '''Write an image to a file.'''
@@ -269,20 +333,32 @@ class NitfImageWriteDataOnDemand(NitfImageWithSubset):
     # override this if desired.
     def data_to_write(self, d, bstart, lstart, sstart):
         self.data_callback(d, bstart, lstart, sstart)
+
+    def __getitem__(self, ind):
+        if(self.data_written is None):
+            raise RuntimeError("Don't have data")
+        return self.data_written[ind]
         
     def write_to_file(self, fh):
         ih = self.subheader
 
+        foff = fh.tell()
+        strides = None
+        # We don't support all the data modes yet, so only allow read for things
+        # we have supported
+        can_have_data = False
         if (self.image_gen_mode == NitfImageWriteDataOnDemand.IMAGE_GEN_MODE_ALL):
             d = np.zeros((ih.number_band,ih.nrows, ih.ncols), dtype = ih.dtype)
             self.data_to_write(d, 0, 0, 0)
             fh.write(d.tobytes())
+            can_have_data = True
 
         elif(self.image_gen_mode == NitfImageWriteDataOnDemand.IMAGE_GEN_MODE_BAND):
             d = np.zeros((ih.nrows, ih.ncols), dtype = ih.dtype)
             for b in range(ih.number_band):
                 self.data_to_write(d, b, 0, 0)
                 fh.write(d.tobytes())
+            can_have_data = True
 
         elif (self.image_gen_mode == NitfImageWriteDataOnDemand.IMAGE_GEN_MODE_ROW_B):
             d = np.zeros((ih.number_band, ih.ncols), dtype=ih.dtype)
@@ -295,6 +371,9 @@ class NitfImageWriteDataOnDemand(NitfImageWithSubset):
             for r in range(ih.nrows):
                 self.data_to_write(d, 0, r, 0)
                 fh.write(d.tobytes())
+            strides = np.array([1, ih.shape[0] * ih.shape[2], ih.shape[0]])
+            strides *= ih.dtype.itemsize
+            can_have_data = True
 
         elif (self.image_gen_mode == NitfImageWriteDataOnDemand.IMAGE_GEN_MODE_COL_B):
             d = np.zeros((ih.number_band, ih.nrows), dtype=ih.dtype)
@@ -309,7 +388,30 @@ class NitfImageWriteDataOnDemand(NitfImageWithSubset):
                 fh.write(d.tobytes())
         else:
             raise RuntimeError("Incorrect Image Gen Mode %d" % self.image_gen_mode)
-    
+        # Set up to allow reading of data
+        if(can_have_data and fh not in self.mmap_cache):
+            try:
+                fh.flush()
+                self.mm = mmap.mmap(fh.fileno(), fh.tell())
+                self.mmap_cache[fh] = self.mm
+            except io.UnsupportedOperation:
+                # Ok if this fails, not all file handle types can handle
+                # being memorymapped
+                can_have_data = False
+        else:
+            self.mm = self.mmap_cache[fh]
+            self.mm.resize(fh.tell())
+        if(can_have_data):
+            self.data_written = np.ndarray(self.shape, dtype = ih.dtype,
+                                           buffer = self.mm,
+                                           strides = strides,
+                                           offset = foff)
+    def flush_update(self):
+        '''Flush any updates made to data_written'''
+        if(self.data_written is None):
+            raise RuntimeError("Can't update file")
+        self.mm.flush()
+
 class NitfImageWriteNumpy(NitfImageWriteDataOnDemand):
     '''This is a simple implementation of a NitfImage where we just use 
     a numpy array to hold the data, and write that out.'''
@@ -330,8 +432,7 @@ class NitfImageWriteNumpy(NitfImageWriteDataOnDemand):
 
     def data_to_write(self, d, bstart, lstart, sstart):
         d[:,:,:] = self._data[bstart:(bstart+d.shape[0]),lstart:(lstart+d.shape[1]),sstart:(sstart+d.shape[2])]
-
-
+        
 class NitfRadCalc(object):
     '''Sample calculation class, that shows how we can generate data on 
     demand. See unit test for an example of this.'''

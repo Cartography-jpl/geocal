@@ -56,6 +56,39 @@ RsmPolynomial::RsmPolynomial(const RsmPolynomial& Rp)
 }
 
 //-----------------------------------------------------------------------
+/// Determine if we have a zero crossing. We use a simple sufficient
+/// test, and if that fails we look directly for zero crossings using
+/// A spacing in X,Y,Z of the given spacing.
+//-----------------------------------------------------------------------
+
+bool RsmPolynomial::check_zero_crossing(double Grid_spacing) const
+{
+  // A sufficient condition is the sum of all the abs value of all
+  // coefficients excluding positive coefficients with all even powers
+  // if < 1. Failure of this condition doesn't mean we have a zero
+  // crossing, but we then need a more exhaustive check.
+  double sum_abs = 0.0;
+  for(int i = 0; i  < coefficient_.rows(); ++i)
+    for(int j = 0; j  < coefficient_.cols(); ++j)
+      for(int k = 0; k  < coefficient_.depth(); ++k) {
+	if(coefficient_(i,j,k) > 0 &&
+	   i % 2 == 0 && j % 2 == 0 && k % 2 == 0)
+	  sum_abs += 0;
+	else
+	  sum_abs += fabs(coefficient_(i,j,k));
+      }
+  if(sum_abs < 1)
+    return false;
+  int sign = ((*this)(-1,-1,-1) < 0 ? -1 : 1);
+  for(double x = -1.0; x <= 1.0; x += Grid_spacing)
+    for(double y = -1.0; y <= 1.0; y += Grid_spacing)
+      for(double z = -1.0; z <= 1.0; z += Grid_spacing)
+	if(sign * (*this)(x,y,z) < 0)
+	  return true;
+  return false;
+}
+
+//-----------------------------------------------------------------------
 /// Apply the polynomial to the given X, Y, and Z value.
 //-----------------------------------------------------------------------
 

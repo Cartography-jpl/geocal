@@ -15,6 +15,7 @@ public:
   RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false,
 		int Max_order=-1);
   std::string print_to_string() const;
+  bool check_zero_crossing(double Grid_spacing = 0.01) const;
   double operator()(double X, double Y, double Z) const;
   blitz::Array<double, 1> operator()(const blitz::Array<double, 1>& X,
     const blitz::Array<double, 1>& Y, const blitz::Array<double, 1>& Z) const;

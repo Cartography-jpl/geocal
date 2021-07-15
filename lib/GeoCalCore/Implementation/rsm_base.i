@@ -50,6 +50,7 @@ public:
    double Min_z, double Max_z,
    int Numx, int Numy, int Numz);
   void set_z_range(double Z_min, double Z_max);
+  bool check_zero_crossing(double Grid_spacing = 0.01) const;
   %python_attribute(min_line, int);
   %python_attribute(max_line, int);
   %python_attribute(min_sample, int);

@@ -20,6 +20,14 @@ public:
     : image_identifier_(Image_identifier),
       rsm_support_data_edition_(Rsm_support_data_edition){}
   virtual ~RsmBase() {}
+
+//-----------------------------------------------------------------------
+/// Check for zero crossing in the denominator, i.e., do we have poles
+/// in our fit.
+//-----------------------------------------------------------------------
+  
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const = 0;
+  
   virtual void print(std::ostream& Os) const
   { Os << "RsmBase"; }
   virtual boost::shared_ptr<RsmBase> clone() const = 0;

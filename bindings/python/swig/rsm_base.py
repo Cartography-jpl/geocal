@@ -288,6 +288,16 @@ class RsmBase(geocal_swig.generic_object.GenericObject):
         return _rsm_base.RsmBase_set_z_range(self, Z_min, Z_max)
 
 
+    def check_zero_crossing(self, Grid_spacing=0.01):
+        """
+
+        virtual bool GeoCal::RsmBase::check_zero_crossing(double Grid_spacing=0.01) const =0
+        Check for zero crossing in the denominator, i.e., do we have poles in
+        our fit. 
+        """
+        return _rsm_base.RsmBase_check_zero_crossing(self, Grid_spacing)
+
+
     def _v_min_line(self):
         """
 
@@ -512,6 +522,7 @@ RsmBase.initial_guess = new_instancemethod(_rsm_base.RsmBase_initial_guess, None
 RsmBase.initial_guess_z = new_instancemethod(_rsm_base.RsmBase_initial_guess_z, None, RsmBase)
 RsmBase.fit = new_instancemethod(_rsm_base.RsmBase_fit, None, RsmBase)
 RsmBase.set_z_range = new_instancemethod(_rsm_base.RsmBase_set_z_range, None, RsmBase)
+RsmBase.check_zero_crossing = new_instancemethod(_rsm_base.RsmBase_check_zero_crossing, None, RsmBase)
 RsmBase._v_min_line = new_instancemethod(_rsm_base.RsmBase__v_min_line, None, RsmBase)
 RsmBase._v_max_line = new_instancemethod(_rsm_base.RsmBase__v_max_line, None, RsmBase)
 RsmBase._v_min_sample = new_instancemethod(_rsm_base.RsmBase__v_min_sample, None, RsmBase)

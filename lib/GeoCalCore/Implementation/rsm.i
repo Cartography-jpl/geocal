@@ -59,6 +59,7 @@ public:
 					 int Nsample_fit = 20,
 					 int Nheight_fit = 20,
 					 bool Ignore_igc_error_in_fit = false);
+  bool check_zero_crossing(double Grid_spacing = 0.01) const;
   %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
   %python_attribute_with_set(rsm_direct_covariance,
 		    boost::shared_ptr<RsmDirectCovariance>);

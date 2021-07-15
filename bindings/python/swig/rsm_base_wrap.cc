@@ -8128,6 +8128,120 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmBase_check_zero_crossing__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase_check_zero_crossing" "', argument " "1"" of type '" "GeoCal::RsmBase const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmBase_check_zero_crossing" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      result = (bool)((GeoCal::RsmBase const *)arg1)->check_zero_crossing(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase_check_zero_crossing__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmBase const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmBase const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmBase_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmBase_check_zero_crossing" "', argument " "1"" of type '" "GeoCal::RsmBase const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmBase > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmBase * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::RsmBase const *)arg1)->check_zero_crossing();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmBase_check_zero_crossing(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmBase_check_zero_crossing",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmBase_check_zero_crossing__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmBase_check_zero_crossing__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmBase_check_zero_crossing'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmBase::check_zero_crossing(double) const\n"
+    "    GeoCal::RsmBase::check_zero_crossing() const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmBase__v_min_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RsmBase *arg1 = (GeoCal::RsmBase *) 0 ;
@@ -9152,6 +9266,12 @@ static PyMethodDef SwigMethods[] = {
 		"one of the those \"unstated\" requirements. This gives access for\n"
 		"RsmMultiSection to pass the z values to use, rather than computing\n"
 		"this in fit. \n"
+		""},
+	 { (char *)"RsmBase_check_zero_crossing", _wrap_RsmBase_check_zero_crossing, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual bool GeoCal::RsmBase::check_zero_crossing(double Grid_spacing=0.01) const =0\n"
+		"Check for zero crossing in the denominator, i.e., do we have poles in\n"
+		"our fit. \n"
 		""},
 	 { (char *)"RsmBase__v_min_line", (PyCFunction)_wrap_RsmBase__v_min_line, METH_O, (char *)"\n"
 		"\n"

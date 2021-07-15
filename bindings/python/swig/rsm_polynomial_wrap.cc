@@ -6894,6 +6894,120 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmPolynomial_check_zero_crossing__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > *smartarg1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  bool result;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial_check_zero_crossing" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmPolynomial_check_zero_crossing" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      result = (bool)((GeoCal::RsmPolynomial const *)arg1)->check_zero_crossing(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmPolynomial_check_zero_crossing__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmPolynomial const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmPolynomial_check_zero_crossing" "', argument " "1"" of type '" "GeoCal::RsmPolynomial const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::RsmPolynomial const *)arg1)->check_zero_crossing();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmPolynomial_check_zero_crossing(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmPolynomial_check_zero_crossing",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_RsmPolynomial_check_zero_crossing__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_RsmPolynomial_check_zero_crossing__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmPolynomial_check_zero_crossing'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmPolynomial::check_zero_crossing(double) const\n"
+    "    GeoCal::RsmPolynomial::check_zero_crossing() const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmPolynomial *arg1 = (GeoCal::RsmPolynomial *) 0 ;
@@ -7055,7 +7169,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_1(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7177,7 +7291,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_2(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7299,7 +7413,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_3(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7526,7 +7640,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian_fitted_coefficent(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7613,7 +7727,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7728,7 +7842,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_coefficient(PyObject *SWIGUNUSEDPARM
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7790,7 +7904,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_fitted_coefficent__SWIG_0(PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8065,6 +8179,14 @@ static PyMethodDef SwigMethods[] = {
 		"Copy constructor. \n"
 		""},
 	 { (char *)"RsmPolynomial___str__", (PyCFunction)_wrap_RsmPolynomial___str__, METH_O, NULL},
+	 { (char *)"RsmPolynomial_check_zero_crossing", _wrap_RsmPolynomial_check_zero_crossing, METH_VARARGS, (char *)"\n"
+		"\n"
+		"bool RsmPolynomial::check_zero_crossing(double Grid_spacing=0.01) const\n"
+		"Determine if we have a zero crossing.\n"
+		"\n"
+		"We use a simple sufficient test, and if that fails we look directly\n"
+		"for zero crossings using A spacing in X,Y,Z of the given spacing. \n"
+		""},
 	 { (char *)"RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, NULL},
 	 { (char *)"RsmPolynomial_jacobian_fitted_coefficent", _wrap_RsmPolynomial_jacobian_fitted_coefficent, METH_VARARGS, (char *)"\n"
 		"\n"

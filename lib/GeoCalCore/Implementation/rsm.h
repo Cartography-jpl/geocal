@@ -84,6 +84,17 @@ public:
   { return rid->coordinate_converter(); }
   void coordinate_converter(const boost::shared_ptr<CoordinateConverter>& V) 
   { rid->coordinate_converter(V); }
+
+//-----------------------------------------------------------------------
+/// Check for zero crossing in the denominator, i.e., do we have poles
+/// in our fit.
+//-----------------------------------------------------------------------
+
+  bool check_zero_crossing(double Grid_spacing = 0.01) const
+  {
+    return rp->check_zero_crossing(Grid_spacing);
+  }
+  
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& True_line,

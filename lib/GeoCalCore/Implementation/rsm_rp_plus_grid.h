@@ -78,6 +78,11 @@ public:
     rp->rsm_support_data_edition(V);
     rgrid->rsm_support_data_edition(V);
   }
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  {
+    return rp->check_zero_crossing(Grid_spacing) ||
+      rgrid->check_zero_crossing(Grid_spacing);
+  }
   virtual int min_line() const {return rp->min_line();}
   virtual int max_line() const {return rp->max_line();}
   virtual int min_sample() const {return rp->min_sample(); }

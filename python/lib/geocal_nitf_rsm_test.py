@@ -226,11 +226,12 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     igccol.parameter_subset = np.concatenate([[0] * 6, [igc.camera.focal_length]])
     igccol.add_identity_gradient()
     # The RPC version has poles, to a numerator only version
-    #rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
-    #          LocalRcConverter(LocalRcParameter(igc)))
-    rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+    rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
               LocalRcConverter(LocalRcParameter(igc)))
+    #rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+    #          LocalRcConverter(LocalRcParameter(igc)))
     rsm.fit(igc, hmin, hmax)
+    print("Poles in fit: ", rsm.check_zero_crossing())
     rsm.image_identifier = "image1"
     rsm.rsm_support_data_edition = "support1"
     rsm.rsm_id.image_acquistion_time = tm
@@ -1210,6 +1211,7 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     print(igc_msp.image_coordinate(igc.ground_coordinate(ic,d)))
     print(r.image_coordinate(igc.ground_coordinate(ic, d))[0])
     true_line, true_sample, calc_line, calc_sample = r.compare_igc(igc, igc.number_line, igc.number_sample, 0)
+    print("Poles in fit: ", r.check_zero_crossing())
     print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
     print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
     wp = np.unravel_index(np.nanargmax(np.abs(true_line - calc_line)), true_line.shape)
@@ -1237,5 +1239,6 @@ def test_rsm_cov(isolated_dir):
               LocalRcConverter(LocalRcParameter(igc)))
     r.fit(igc, hmin, hmax)
     true_line, true_sample, calc_line, calc_sample = r.compare_igc(igc, 100, 100, 100)
+    print("Poles in fit: ", r.check_zero_crossing())
     print("Line:\n",  pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
     print("Sample:\n",  pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())

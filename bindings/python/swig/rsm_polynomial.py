@@ -208,6 +208,18 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
         """
         _rsm_polynomial.RsmPolynomial_swiginit(self, _rsm_polynomial.new_RsmPolynomial(Np_x, Np_y, Np_z, Is_denominator, Max_order))
 
+    def check_zero_crossing(self, Grid_spacing=0.01):
+        """
+
+        bool RsmPolynomial::check_zero_crossing(double Grid_spacing=0.01) const
+        Determine if we have a zero crossing.
+
+        We use a simple sufficient test, and if that fails we look directly
+        for zero crossings using A spacing in X,Y,Z of the given spacing. 
+        """
+        return _rsm_polynomial.RsmPolynomial_check_zero_crossing(self, Grid_spacing)
+
+
     def jacobian_fitted_coefficent(self, X, Y, Z):
         """
 
@@ -309,6 +321,7 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _rsm_polynomial.delete_RsmPolynomial
 RsmPolynomial.__str__ = new_instancemethod(_rsm_polynomial.RsmPolynomial___str__, None, RsmPolynomial)
+RsmPolynomial.check_zero_crossing = new_instancemethod(_rsm_polynomial.RsmPolynomial_check_zero_crossing, None, RsmPolynomial)
 RsmPolynomial.__call__ = new_instancemethod(_rsm_polynomial.RsmPolynomial___call__, None, RsmPolynomial)
 RsmPolynomial.jacobian_fitted_coefficent = new_instancemethod(_rsm_polynomial.RsmPolynomial_jacobian_fitted_coefficent, None, RsmPolynomial)
 RsmPolynomial.jacobian = new_instancemethod(_rsm_polynomial.RsmPolynomial_jacobian, None, RsmPolynomial)

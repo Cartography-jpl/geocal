@@ -59,6 +59,10 @@ public:
 		   total_number_col_digit_, number_fractional_row_digit_,
 		   number_fractional_col_digit_));
   }
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  { 
+    return false;
+  }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z,
 					   bool Extrapolate_ok) const;
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z)

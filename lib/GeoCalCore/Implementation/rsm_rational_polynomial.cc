@@ -420,6 +420,13 @@ void RsmRationalPolynomial::fit
 	  }
 	}
   }
+  if(false) {
+    std::cerr << "# Line Sample X Y Z\n";
+    std::cerr << std::setprecision(20) << "\n";
+    for(int i = 0; i  < (int) line.size(); ++i)
+      std::cerr << line[i] << " " << sample[i] << " " << x[i] << " "
+		<< y[i] << " " << z[i] << "\n";
+  }
   fit_data(line, sample, x, y, z);
 }
 

@@ -144,6 +144,14 @@ public:
       for(int j = 0; j < sec.cols(); ++j)
 	sec(i, j)->rsm_support_data_edition(V);
   }
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  { 
+    for(int i = 0; i < sec.rows(); ++i)
+      for(int j = 0; j < sec.cols(); ++j)
+	if(sec(i, j)->check_zero_crossing(Grid_spacing))
+	  return true;
+    return false;
+  }
   const boost::shared_ptr<RsmBase>&
   section_ls(double Line, double Sample) const;
   const boost::shared_ptr<RsmBase>&

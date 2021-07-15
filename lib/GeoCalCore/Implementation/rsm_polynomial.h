@@ -38,6 +38,8 @@ public:
    const blitz::Array<double, 1>& Z) const;
   blitz::Array<double, 1> jacobian(double X, double Y, double Z) const;
 
+  bool check_zero_crossing(double Grid_spacing = 0.01) const;
+
 //-----------------------------------------------------------------------
 /// The full set of coefficients for the polynomial. 
 //-----------------------------------------------------------------------

@@ -374,6 +374,16 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         return _rsm.Rsm_mapping_matrix(self, Igc, Min_height, Max_height, Nline_fit, Nsample_fit, Nheight_fit, Ignore_igc_error_in_fit)
 
 
+    def check_zero_crossing(self, Grid_spacing=0.01):
+        """
+
+        bool GeoCal::Rsm::check_zero_crossing(double Grid_spacing=0.01) const
+        Check for zero crossing in the denominator, i.e., do we have poles in
+        our fit. 
+        """
+        return _rsm.Rsm_check_zero_crossing(self, Grid_spacing)
+
+
     def _v_rsm_id(self):
         """
 
@@ -556,6 +566,7 @@ Rsm.fit = new_instancemethod(_rsm.Rsm_fit, None, Rsm)
 Rsm.fill_in_ground_domain_vertex = new_instancemethod(_rsm.Rsm_fill_in_ground_domain_vertex, None, Rsm)
 Rsm.compare_igc = new_instancemethod(_rsm.Rsm_compare_igc, None, Rsm)
 Rsm.mapping_matrix = new_instancemethod(_rsm.Rsm_mapping_matrix, None, Rsm)
+Rsm.check_zero_crossing = new_instancemethod(_rsm.Rsm_check_zero_crossing, None, Rsm)
 Rsm._v_rsm_id = new_instancemethod(_rsm.Rsm__v_rsm_id, None, Rsm)
 Rsm._v_rsm_direct_covariance = new_instancemethod(_rsm.Rsm__v_rsm_direct_covariance, None, Rsm)
 Rsm._v_rsm_indirect_covariance = new_instancemethod(_rsm.Rsm__v_rsm_indirect_covariance, None, Rsm)

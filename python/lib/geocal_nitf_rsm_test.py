@@ -169,7 +169,7 @@ class IgcParameter(WithParameter):
     def _v_parameter_name(self):
         return geocal_swig.vector_string(["X Offset (m)", "Y Offset (m)", "Z Offset (m)",
                                           "Yaw Offset (rad)", "Pitch Offset (rad)",
-                                          "Roll Offset(rad)", "Focal length (m)"])
+                                          "Roll Offset(rad)", "Focal length (mm)"])
     def _v_parameter_with_derivative(self, value=None):
         if(value is None):
             fl = self.cam.focal_length_with_derivative

@@ -281,7 +281,7 @@ void RsmId::print(std::ostream& Os) const
      << "  Image Sequence Identifier: " << image_sequence_identifier_ << "\n"
      << "  Sensor Identifier:         " << sensor_identifier_ << "\n"
      << "  Sensor type:               " << sensor_type_ << "\n"
-     << "  Image acqusition time:     ";
+     << "  Image acquisition time:     ";
   if(image_acquistion_time_)
     Os << *image_acquistion_time_ << "\n";
   else

@@ -158,7 +158,7 @@ try {
   MSP::WarningListType msg;
   boost::shared_ptr<csm::Model> model_raw;
   if(plugin_name_ == "")
-    model_raw.reset(sms->createModelFromFile(fname_.c_str(),0,0,&msg));
+    model_raw.reset(sms->createModelFromISD(*isd,0,&msg));
   else {
     const csm::Plugin* t = csm::Plugin::findPlugin(plugin_name_);
     std::list<csm::Warning> msg2;

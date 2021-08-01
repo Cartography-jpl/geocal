@@ -40,14 +40,20 @@ example, explicit directions for building on a bare Centos 7 can be found
 in [Centos 7 Build](README_centos7_build.md)
 
 We can also get the dependencies through [Conda](https://conda.io/docs/).
-If you have a conda environment set up, (e.g., source activate <env_dir>).
+If you have a conda environment set up, (e.g., conda activate <env_dir>).
 Then you can do:
+
+    conda install --yes afids-development-tools
+
+This is a super set, to get just the tools needed by geocal without extra
+useful tools (e.g., afids-xvd):
 
     conda install --yes --file requirements.txt
     conda install --yes --file extra_anaconda_requirements.txt
 	
-In addition, there are conda packages available for things not available
-in anaconda (e.g., spice) at [afids-conda-package](https://github.jpl.nasa.gov/Cartography/afids-conda-package).
+For either of these, there are packages not available in the standard conda
+channels (e.g., spice). We have these available at [afids-conda-package](https://github.jpl.nasa.gov/Cartography/afids-conda-package), look there for directions
+on setting of the afids-conda-package channel.
 
 A note on the build. We have unit tests run with the standard GNU target
 "make check". There is also a standard GNU target "installcheck" that can

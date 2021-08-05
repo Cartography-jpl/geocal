@@ -86,7 +86,7 @@ def set_original_env(original_env):
             del os.environ['TAE_PATH']
 
 
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def vicarb_env(isolated_dir):
     '''This sets up for a test of our own pdf files. We make sure that we
     have the proper TAEPATH, and we also set up to run in an isolated 

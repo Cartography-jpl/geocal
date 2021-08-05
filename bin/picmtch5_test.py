@@ -9,7 +9,7 @@ require_picmtch5 = pytest.mark.skipif(not check_for_proc("picmtch5"),
 
 # Setup for picmtch5 tests. We do normal vicar setup, and then generate
 # some test data input files.
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def picmtch5_env(vicarb_env):
     vicarb_run("gen picmtch5_xxim0 nl=300 ns=310")
     vicarb_run("f2 inp=picmtch5_xxim0 out=picmtch5_xxim1 func=\"(line*327+samp*193+line*samp)%256\"")

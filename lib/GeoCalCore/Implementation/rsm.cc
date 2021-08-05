@@ -365,8 +365,10 @@ Rsm::image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   } else {
     jac = 0;
   }
-  jac(0, ra) += lndelta.gradient();
-  jac(1, ra) += smpdelta.gradient();
+  if(jac.cols() > 0) {
+    jac(0, ra) += lndelta.gradient();
+    jac(1, ra) += smpdelta.gradient();
+  }
   const_cast<RsmAdjustableParameter&>(*rparm).parameter_with_derivative(poriginal);
   return jac;
 }

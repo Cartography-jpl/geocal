@@ -3,7 +3,7 @@ from .misc import makedirs_p
 from test_support import *
 
 @require_rsync
-@pytest.yield_fixture(scope="function")
+@pytest.fixture(scope="function")
 def input_local_data(isolated_dir):
     '''Generate some input test data so we can check that it works.'''
     fname = os.path.abspath("./test_input/temp.txt")

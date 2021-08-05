@@ -314,26 +314,43 @@ void RsmRationalPolynomial::fit_data
 			  ln_num_jac.cols());
   Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
 			   smp_num_jac.cols());
-  ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
-  ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
-    -ln_lhs(i1) * ln_den_jac;
-  smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
-  smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
-    -smp_lhs(i1) * smp_den_jac;
+  if(ln_num_jac.cols() > 0)
+    ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
+  if(ln_den_jac.cols() > 0)
+    ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
+      -ln_lhs(i1) * ln_den_jac;
+  if(smp_num_jac.cols() > 0)
+    smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
+  if(smp_den_jac.cols() > 0)
+    smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
+      -smp_lhs(i1) * smp_den_jac;
   GslMatrix cov;
   GslVector ln_c;
   GslVector smp_c;
   double chisq;
   gsl_fit(ln_jac, ln_lhs, ln_c, cov, chisq);
   gsl_fit(smp_jac, smp_lhs, smp_c, cov, chisq);
-  line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
-						       ln_num_jac.cols()-1)));
-  line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
-						       toEnd)));
-  sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
+  blitz::Array<double, 1> empty_coeff;
+  if(ln_num_jac.cols() > 0)
+    line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
+							 ln_num_jac.cols()-1)));
+  else
+    line_num_.fitted_coefficent(empty_coeff);
+  if(ln_den_jac.cols() > 0)
+    line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
+							 toEnd)));
+  else
+    line_den_.fitted_coefficent(empty_coeff);
+  if(smp_num_jac.cols() > 0)
+    sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
 					       smp_num_jac.cols()-1)));
-  sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
-					       toEnd)));
+  else
+    sample_num_.fitted_coefficent(empty_coeff);
+  if(smp_den_jac.cols() > 0)
+    sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
+							    toEnd)));
+  else
+    sample_den_.fitted_coefficent(empty_coeff);
 }
 
 //-----------------------------------------------------------------------

@@ -228,7 +228,7 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     # The RPC version has poles, to a numerator only version
     #rsm = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
     #          LocalRcConverter(LocalRcParameter(igc)))
-    rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+    rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,4,0),
               LocalRcConverter(LocalRcParameter(igc)))
     rsm.fit(igc, hmin, hmax)
     print("Poles in fit: ", rsm.check_zero_crossing())
@@ -281,7 +281,7 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     # Duplicate RSM. Not clear that we really need everything regenerated,
     # I'm just trying to make another image at a different time. But for
     # now do this so we *know* everything is copied.
-    rsm2 = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,3,0),
+    rsm2 = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,4,0),
                LocalRcConverter(LocalRcParameter(igc)))
     rsm2.fit(igc, hmin, hmax)
     rsm2.image_identifier = "image2"

@@ -186,7 +186,7 @@ def gsl_root(F, Initial, Residual=1e-6):
     """
 
     blitz::Array< double, 1 > GeoCal::gsl_root(const VFunctorWithDerivative &F, const blitz::Array< double, 1 >
-    &Initial, double Residual=1e-6)
+    &Initial, double Residual=1e-8)
     This finds the root of a Vector -> Vector function, with a Jacobian
     available.
 
@@ -211,7 +211,7 @@ def root_with_derivative(F, Xmin, Xmax, Eps=1e-6, Eps_abs=1e-8):
     """
 
     AutoDerivative< double > GeoCal::root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double
-    Eps=1e-6, double Eps_abs=1e-8)
+    Eps=1e-8, double Eps_abs=1e-10)
     This finds the root of a function, and propagates the derivative of
     the solution with respect to any parameters in the function (i.e., we
     aren't talking about the derivative wrt X here). 
@@ -222,7 +222,7 @@ def root_list(F, Xmin, Xmax, Root_minimum_spacing, Residual=1e-6):
     """
 
     std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double
-    Root_minimum_spacing, double Eps=1e-6)
+    Root_minimum_spacing, double Eps=1e-8)
     This will find a (possible empty) list of roots of a function, where
     the roots have a seperation of at least the supplied minimum
     separation.

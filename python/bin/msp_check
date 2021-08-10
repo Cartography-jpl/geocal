@@ -1,0 +1,59 @@
+#! /usr/bin/env python
+import geocal
+import pynitf
+import re
+
+version = "August 9, 2021"
+usage='''Usage:
+  msp_check [options] <nitf_file> <iid1_regex>
+  msp_check  -h | --help
+  msp_check  -v | --version
+
+This does a basic check that the MSP library can handle a given NITF file.
+This takes the file, and a general regex to select the iid1 image segments.
+
+Options:
+  -h --help         
+       Print this message
+
+  --check-corner
+       Check that corners are close to CSCRNA tre
+
+  --corner-tolerance=f
+       Corner tolerance, in image coordinates [default: 2.0]
+
+  --glas
+       Check for GLAS
+
+  --gfm
+       Check for GFM
+
+  --rsm
+       Check for RSM
+
+  -v --version      
+       Print program version
+'''
+
+args = geocal.docopt_simple(usage, version=version)
+f = pynitf.NitfFile(args.nitf_file)
+iid1_list = [iseg.iid1 for iseg in f.image_segment if
+             re.match(args.iid1_regex, iseg.iid1)]
+succeed = True
+for iid1 in iid1_list:
+    for cond, plugin in [(args.rsm, "RSM"),
+                         (args.glas, "GLAS"),
+                         (args.gfm, "GFM")]:
+        if(cond):
+            print("---------------------------------------------")
+            print("IID1:   ", iid1)
+            print("Plugin: ", plugin)
+            t = geocal.IgcMsp.check_plugin(f, iid1, plugin,
+                                           check_corner=args.check_corner,
+                                           corner_tol=args.corner_tolerance)
+            succeed = succeed and t
+if(not succeed):
+    print("Check failed")
+    exit(1)
+print("Check succeed")
+

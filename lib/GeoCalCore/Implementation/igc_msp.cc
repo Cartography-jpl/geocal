@@ -161,6 +161,8 @@ try {
     model_raw.reset(sms->createModelFromISD(*isd,0,&msg));
   else {
     const csm::Plugin* t = csm::Plugin::findPlugin(plugin_name_);
+    if(!t)
+      throw Exception("Could not file plugin '" + plugin_name_ + "'");
     std::list<csm::Warning> msg2;
     bool can_do = t->canISDBeConvertedToModelState(*isd, model_name_, &msg2);
     if(can_do)
@@ -556,6 +558,12 @@ try {
   boost::shared_ptr<MSP::SMS::SensorModelService> sms =
     boost::make_shared<MSP::SMS::SensorModelService>();
   boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(Fname.c_str()));
+  int numImages = sds.getNumImages(*isd);
+  // For some reason, our test examples don't work with this. Like so
+  // much with MSP not clear why, we just get "Unrecognized support
+  // data" error. Leave this minor diagnostic in place for now, we can
+  // come back to this.
+  std::cerr << "nuImages: " << numImages << "\n";
   std::vector<std::string> res;
   sds.getImageIds(*isd, res);
   return res;

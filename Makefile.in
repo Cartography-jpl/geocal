@@ -2983,6 +2983,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/igc_raycast_project \
 	$(srcdir)/$(srcpythonbin)/gdal_to_erdas \
 	$(srcdir)/$(srcpythonbin)/gdal_to_nitf \
+	$(srcdir)/$(srcpythonbin)/msp_check \
 	$(srcdir)/$(srcpythonbin)/nitf_to_vicar \
 	$(srcdir)/$(srcpythonbin)/nitfinfo \
 	$(srcdir)/$(srcpythonbin)/dem_generate \
@@ -4338,6 +4339,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \
+	@srcpythonlib@/igc_msp_extension.py \
 	@srcpythonlib@/ray_caster_resampler_extension.py \
 	@srcpythonlib@/orbit_extension.py \
 	@srcpythonlib@/map_info_extension.py \

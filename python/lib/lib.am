@@ -11,6 +11,7 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/ipython.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_extension.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/igc_msp_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ray_caster_resampler_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/orbit_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/map_info_extension.py

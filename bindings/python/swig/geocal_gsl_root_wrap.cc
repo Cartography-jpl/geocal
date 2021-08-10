@@ -6778,7 +6778,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -6869,7 +6869,7 @@ SWIGINTERN PyObject *_wrap_gsl_root__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7631,7 +7631,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"gsl_root", _wrap_gsl_root, METH_VARARGS, (char *)"\n"
 		"\n"
 		"blitz::Array< double, 1 > GeoCal::gsl_root(const VFunctorWithDerivative &F, const blitz::Array< double, 1 >\n"
-		"&Initial, double Residual=1e-6)\n"
+		"&Initial, double Residual=1e-8)\n"
 		"This finds the root of a Vector -> Vector function, with a Jacobian\n"
 		"available.\n"
 		"\n"
@@ -7650,7 +7650,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"root_with_derivative", _wrap_root_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
 		"AutoDerivative< double > GeoCal::root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Eps=1e-6, double Eps_abs=1e-8)\n"
+		"Eps=1e-8, double Eps_abs=1e-10)\n"
 		"This finds the root of a function, and propagates the derivative of\n"
 		"the solution with respect to any parameters in the function (i.e., we\n"
 		"aren't talking about the derivative wrt X here). \n"
@@ -7658,7 +7658,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"root_list", _wrap_root_list, METH_VARARGS, (char *)"\n"
 		"\n"
 		"std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Root_minimum_spacing, double Eps=1e-6)\n"
+		"Root_minimum_spacing, double Eps=1e-8)\n"
 		"This will find a (possible empty) list of roots of a function, where\n"
 		"the roots have a seperation of at least the supplied minimum\n"
 		"separation.\n"

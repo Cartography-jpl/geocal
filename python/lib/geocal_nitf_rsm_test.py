@@ -5,6 +5,7 @@ except ImportError:
 from test_support import *
 from .geocal_nitf_rsm import *
 from .geocal_nitf_rsm import TreRSMIDA, TreRSMPIA, TreRSMGGA, TreRSMPCA
+from .glas_gfm import *
 from .sqlite_shelf import *
 from geocal_swig import (GdalRasterImage, VicarRasterImage,
                          VicarLiteRasterImage, RsmId, RsmRationalPolynomial,
@@ -28,11 +29,12 @@ import warnings
 if True:
     warnings.filterwarnings("error", category=pynitf.TreWarning)
 
-def create_image_seg(f):
-    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8)
+def create_image_seg(f, num_line=9, num_sample=10, iid1 = "Test data"):
+    img = pynitf.NitfImageWriteNumpy(num_line, num_sample, np.uint8)
     img.subheader.idlvl = 1
-    for i in range(9):
-        for j in range(10):
+    img.subheader.iid1 = iid1
+    for i in range(num_line):
+        for j in range(num_sample):
             img[0,i,j] = i + j
     f.image_segment.append(pynitf.NitfImageSegment(img))
 
@@ -240,8 +242,36 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
                                     0.0, 0.0)
     rsm.rsm_id.sensor_identifier = "fakesen"
     f = pynitf.NitfFile()
-    create_image_seg(f)
-    create_image_seg(f)
+    create_image_seg(f, num_line=igc.camera.number_line(0),
+                     num_sample=igc.camera.number_sample(0),
+                     iid1 = "image1")
+    create_image_seg(f, num_line=igc.camera.number_line(0),
+                     num_sample=igc.camera.number_sample(0),
+                     iid1 = "image2")
+    # Add in corners. Not strictly needed, but useful to testing other MSP
+    # functionality.
+    if True:
+        gc1 = igc.ground_coordinate(ImageCoordinate(0,0))
+        gc2 = igc.ground_coordinate(ImageCoordinate(0,igc.camera.number_sample(0)-1))
+        gc3 = igc.ground_coordinate(ImageCoordinate(igc.camera.number_line(0)-1,
+                                                igc.camera.number_sample(0)-1))
+        gc4 = igc.ground_coordinate(ImageCoordinate(igc.camera.number_line(0)-1,0))
+        t = pynitf.TreCSCRNA()
+        t.predict_corners = "N"
+        t.ulcnr_lat = gc1.latitude
+        t.ulcnr_long = gc1.longitude
+        t.ulcnr_ht = gc1.height_reference_surface
+        t.urcnr_lat = gc2.latitude
+        t.urcnr_long = gc2.longitude
+        t.urcnr_ht = gc2.height_reference_surface
+        t.lrcnr_lat = gc3.latitude
+        t.lrcnr_long = gc3.longitude
+        t.lrcnr_ht = gc3.height_reference_surface
+        t.llcnr_lat = gc4.latitude
+        t.llcnr_long = gc4.longitude
+        t.llcnr_ht = gc4.height_reference_surface
+        f.image_segment[0].tre_list.append(t)
+        f.image_segment[1].tre_list.append(t)
     cov = RsmIndirectCovarianceB(igc, hmin, hmax, rsm.rsm_id)
     cov.row_power = np.array([[0,0,0],
                               [1,0,0],
@@ -293,11 +323,41 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     rsm2.rsm_id.sensor_identifier = "fakesen"
     rsm2.rsm_indirect_covariance = cov
     f.image_segment[1].rsm = rsm2
+    # Add in GLAS. Don't actually need for this unit test, but this
+    # is an easy way to make a data set that we can do other MSP tests
+    # against
+    if True:
+        porb = PosCsephb(orb,
+                         tm - 10 * 1e-3,
+                         tm + 10 * 1e-3,
+                         1e-3,
+                         PosCsephb.LAGRANGE,
+                         PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                         PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+        aorb = AttCsattb(orb,
+                         tm - 10 * 1e-3,
+                         tm + 10 * 1e-3,
+                         1e-3,
+                         AttCsattb.LAGRANGE,
+                         AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                         AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+        orb_g = OrbitDes(porb,aorb)
+        cam_g = GlasGfmCamera(cam, 0, 256, 256)
+        igc_g = OrbitDataImageGroundConnection(orb_g, tm, cam_g, dem, img)
+        igc_g.platform_id = "FAKEPL"
+        igc_g.payload_id = "FAKEPY"
+        igc_g.sensor_id = "FAKESN"
+        f.image_segment[0].create_glas_gfm(igc_g)
+        true_line, true_sample, calc_line, calc_sample = rsm.compare_igc(igc_g, igc_g.number_line, igc_g.number_sample, 100)
+        print("Compare GFM")
+        print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
+        print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+
     f.write("nitf_rsm.ntf")
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2.image_segment[0].rsm)
-    igc_msp = IgcMsp("nitf_rsm.ntf")
-    igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 1)
+    igc_msp = IgcMsp("nitf_rsm.ntf", SimpleDem(), 0, "RSM", "RSM")
+    igc_msp2 = IgcMsp("nitf_rsm.ntf", SimpleDem(), 1, "RSM", "RSM")
     print(igc_msp.covariance)
     print(igc_msp.joint_covariance(igc_msp2))
     

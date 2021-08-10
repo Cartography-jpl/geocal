@@ -17,6 +17,13 @@ BOOST_AUTO_TEST_CASE(kepler_orbit_data)
   BOOST_CHECK_CLOSE(orb.position_ci(t)->position[0], -1788501.0, 1e-4);
   BOOST_CHECK_CLOSE(orb.position_ci(t)->position[1], -6854177.0, 1e-4);
   BOOST_CHECK_CLOSE(orb.position_ci(t)->position[2], -16811.0, 1e-3);
+  TimeWithDerivative t2(t);
+  BOOST_CHECK_CLOSE(orb.orbit_data(t)->position_ci()->position[0], -1788501.0, 1e-4);
+  BOOST_CHECK_CLOSE(orb.orbit_data(t)->position_ci()->position[1], -6854177.0, 1e-4);
+  BOOST_CHECK_CLOSE(orb.orbit_data(t)->position_ci()->position[2], -16811.0, 1e-3);
+  BOOST_CHECK_CLOSE(orb.orbit_data(t2)->position_ci()->position[0], -1788501.0, 1e-4);
+  BOOST_CHECK_CLOSE(orb.orbit_data(t2)->position_ci()->position[1], -6854177.0, 1e-4);
+  BOOST_CHECK_CLOSE(orb.orbit_data(t2)->position_ci()->position[2], -16811.0, 1e-3);
   try {
     orb.position_ci(t - 10);
     BOOST_FAIL("Should have thrown exception");

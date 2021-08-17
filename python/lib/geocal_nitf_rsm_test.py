@@ -1257,7 +1257,7 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
                                   LocalRcParameter.FOLLOW_LINE_FULL))
     #ccov = LocalRcConverter(LocalRcParameter(igc))
-    r = setup_grid(igc, ccov, 100,1000,4, 4)
+    r = setup_grid(igc, ccov, 200,1000,4, 4)
     pool = Pool(10)
     rsm_parallel_fit(r, igc, -100, 100, pool=pool)
     f = pynitf.NitfFile()
@@ -1283,6 +1283,46 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
         write_shelve("rsm.bin", r)
         write_shelve("igc.bin", igc)
 
+@require_msp
+@require_pynitf
+def test_bowtie_poly(isolated_dir, igc_staring2):
+    '''This won't work as well as the grid. But we may want to look at
+    having a polynomial with a correction grid, so start with just a 
+    polynomial'''
+    igc = igc_staring2
+    ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
+                                  LocalRcParameter.FOLLOW_LINE_FULL))
+    #rsm = Rsm(RsmRationalPolynomial(4,4,3,0,0,0,4,0), ccov)
+    rsm = Rsm(RsmRpPlusGrid(RsmRationalPolynomial(4,4,3,0,0,0,4,0),
+                            RsmGrid(10,100,4)),
+              ccov)
+    rsm.fit(igc, -100, 100)
+    rsm.rsm_base.correction_grid.extrapolate_y_direction()
+    rsm.rsm_base.correction_grid.extrapolate_x_direction()
+    rsm.rsm_base.correction_grid.extrapolate_z_direction()
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm
+    f.write("nitf_rsm.ntf")
+    igc_msp = IgcMsp("nitf_rsm.ntf")
+    #igc_msp = igc
+    d = SimpleDem(0)
+    ic = ImageCoordinate(1,10)
+    print(igc_msp.image_coordinate(igc.ground_coordinate(ic,d)))
+    print(rsm.image_coordinate(igc.ground_coordinate(ic, d))[0])
+    true_line, true_sample, calc_line, calc_sample = rsm.compare_igc(igc, igc.number_line, igc.number_sample, 0)
+    print("Poles in fit: ", rsm.check_zero_crossing())
+    print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
+    print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+    wp = np.unravel_index(np.nanargmax(np.abs(true_line - calc_line)), true_line.shape)
+    ic = ImageCoordinate(true_line[wp], true_sample[wp])
+    print(ic)
+    print(rsm.image_coordinate(igc.ground_coordinate(ic))[0])
+    print(igc_msp.image_coordinate(igc.ground_coordinate(ic)))
+    if(True):
+        write_shelve("rsm.bin", rsm)
+        write_shelve("igc.bin", igc)
+        
 def test_rsm_cov(isolated_dir):
     '''Test a simple rsm covariance'''
     orb = KeplerOrbit()

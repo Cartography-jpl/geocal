@@ -321,11 +321,45 @@ private:
       return std::numeric_limits<double>::quiet_NaN();
     return sample_(i,j,k);
   }
-  void extrapolate_helper(blitz::Array<double, 1>& d)
+  void extrapolate_line_helper(blitz::Array<double, 1>& d)
   {
+    const int max_diff = 1000;
     for(int i = 2; i < d.rows(); ++i)
-      if(std::isnan(d(i)) && !std::isnan(d(i-2)) && ! std::isnan(d(i-1)))
-	d(i) = d(i-1) + (d(i-1) - d(i - 2));
+      if(std::isnan(d(i)) && !std::isnan(d(i-2)) && ! std::isnan(d(i-1))) {
+	// For some cases we can get extreme behavior when
+	// extrapolating. Since anything outside of the line/sample
+	// range is invalid anyways, we switch to a single pixel
+	// spacing when we get too far out of the range.
+	if(d(i-1) < min_line_ - max_diff ||
+	   d(i-1) > max_line_ + max_diff) {
+	  if((d(i-1) - d(i - 2)) < 0)
+	    d(i) = d(i-1) - 1;
+	  else
+	    d(i) = d(i-1) + 1;
+	} else {
+	  d(i) = d(i-1) + (d(i-1) - d(i - 2));
+	}
+      }
+  }
+  void extrapolate_sample_helper(blitz::Array<double, 1>& d)
+  {
+    const int max_diff = 1000;
+    for(int i = 2; i < d.rows(); ++i)
+      if(std::isnan(d(i)) && !std::isnan(d(i-2)) && ! std::isnan(d(i-1))) {
+	// For some cases we can get extreme behavior when
+	// extrapolating. Since anything outside of the line/sample
+	// range is invalid anyways, we switch to a single pixel
+	// spacing when we get too far out of the range.
+	if(d(i-1) < min_sample_ - max_diff ||
+	   d(i-1) > max_sample_ + max_diff) {
+	  if((d(i-1) - d(i - 2)) < 0)
+	    d(i) = d(i-1) - 1;
+	  else
+	    d(i) = d(i-1) + 1;
+	} else {
+	  d(i) = d(i-1) + (d(i-1) - d(i - 2));
+	}
+      }
   }
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;

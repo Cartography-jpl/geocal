@@ -663,12 +663,12 @@ void RsmGrid::extrapolate_x_direction()
     for(int j = 0; j < line_.cols(); ++j) {
       blitz::Array<double, 1> line_col(line_(ra, j, k));
       blitz::Array<double, 1> sample_col(sample_(ra, j, k));
-      extrapolate_helper(line_col);
-      extrapolate_helper(sample_col);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
       line_col.reverseSelf(0);
       sample_col.reverseSelf(0);
-      extrapolate_helper(line_col);
-      extrapolate_helper(sample_col);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
     }
 }
 
@@ -683,12 +683,12 @@ void RsmGrid::extrapolate_y_direction()
     for(int i = 0; i < line_.rows(); ++i) {
       blitz::Array<double, 1> line_col(line_(i, ra, k));
       blitz::Array<double, 1> sample_col(sample_(i, ra, k));
-      extrapolate_helper(line_col);
-      extrapolate_helper(sample_col);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
       line_col.reverseSelf(0);
       sample_col.reverseSelf(0);
-      extrapolate_helper(line_col);
-      extrapolate_helper(sample_col);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
     }
 }
 
@@ -703,12 +703,12 @@ void RsmGrid::extrapolate_z_direction()
     for(int i = 0; i < line_.rows(); ++i) {
       blitz::Array<double, 1> line_col(line_(i, j, ra));
       blitz::Array<double, 1> sample_col(sample_(i, j, ra));
-      extrapolate_helper(line_col);
-      extrapolate_helper(sample_col);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
       line_col.reverseSelf(0);
       sample_col.reverseSelf(0);
-      extrapolate_helper(line_col);
-      extrapolate_helper(sample_col);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
     }
 }
 

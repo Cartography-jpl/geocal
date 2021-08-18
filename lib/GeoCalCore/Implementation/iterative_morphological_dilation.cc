@@ -233,9 +233,9 @@ double IterativeMorphologicalDilation::predicted_value(int i, int j) const
   double ksum = 0;
   int count = 0;
   for(int ii = -krhs; ii <= krhs; ++ii)
-    if(i + ii > 0 && i + ii < filled_mask_.rows())
+    if(i + ii >= 0 && i + ii < filled_mask_.rows())
       for(int jj = -kchs; jj <= kchs; ++jj)
-	if(j + jj > 0 && j + jj < filled_mask_.cols() &&
+	if(j + jj >= 0 && j + jj < filled_mask_.cols() &&
 	   !filled_mask_(i+ii,j+jj)) {
 	  ++count;
 	  if(prediction_type_ == NEIGBORHOOD_MEDIAN) {

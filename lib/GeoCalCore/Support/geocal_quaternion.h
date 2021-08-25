@@ -358,6 +358,25 @@ matrix_to_quaternion(const T m[3][3])
 }
 
 //-----------------------------------------------------------------------
+/// Give the angle between two quaternions. This can be used for a variety
+/// of purposes, such as determining an outlier quaternion.
+//-----------------------------------------------------------------------
+
+inline double quaternion_delta_angle(const boost::math::quaternion<double>& Q1, 
+			     const boost::math::quaternion<double>& Q2)
+{
+  boost::math::quaternion<double> delta_quat = Q2 * conj(Q1);
+  double t = delta_quat.R_component_1();
+  t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
+                                       // out of range due to round
+                                       // off.
+  if(t < 0)
+    t = -t;
+  double delta_ang = 2.0 * std::acos(t);
+  return delta_ang;
+}
+
+//-----------------------------------------------------------------------
 /// Interpolate between 2 quaternions rotations. This often goes by
 /// the name "Slerp". Note that the
 /// quaternion rotations are double values, a rotation with Q and -Q

@@ -16,7 +16,7 @@ except ImportError:
 # ****************************************************************************
 
 if(have_pynitf):
-    class RpcImageSegementHook(NitfSegmentHook):
+    class RpcImageSegmentHook(NitfSegmentHook):
         def __init__(self):
             self.rpc_tre_tag_list = ['RPC00A', 'RPC00B']
 
@@ -75,7 +75,7 @@ if(have_pynitf):
                 return True
             return False
             
-    NitfSegmentHookSet.add_default_hook(RpcImageSegementHook())
+    NitfSegmentHookSet.add_default_hook(RpcImageSegmentHook())
 
 __all__ = []
     

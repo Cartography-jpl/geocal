@@ -174,6 +174,23 @@ void PosCsephb::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Check if we need a sign flip.
+//-----------------------------------------------------------------------
+
+inline bool need_sign_flip(const blitz::Array<double, 1>& a1,
+			   const blitz::Array<double, 1>& a2)
+{
+  boost::math::quaternion<double> q1 = nitf_to_quaternion(a1);
+  boost::math::quaternion<double> q2 = nitf_to_quaternion(a2);
+  // See interpolate_quaternion_rotation for the logic here.
+  boost::math::quaternion<double> delta_quat = q2 * conj(q1);
+  double t = delta_quat.R_component_1();
+  if(t < 0)
+    return true;
+  return false;
+}
+
+//-----------------------------------------------------------------------
 /// Return attitude quaternion for the given time.
 //-----------------------------------------------------------------------
 
@@ -192,9 +209,9 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     blitz::Array<double, 1> a1 = att(i+1, ra).copy();
     blitz::Array<double, 1> a0 = att(i, ra).copy();
     // Handle sign change in attitude
-    if(a1(3) * a0(3) < 0)
+    if(need_sign_flip(a0,a1))
       a1 *= -1;
-    res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+    res = f * a1 + (1 - f) * a0;
   }
   if(itype_ == LAGRANGE) {
     int d = (lagrange_order_ - 1) / 2;
@@ -205,14 +222,14 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     for(int j = istart; j < iend; ++j) {
       tm.push_back(min_time_ + j * tstep_);
       blitz::Array<double, 1> av = att(j,ra).copy();
-      //  Handle sign flips by making sure all scalar parts are positive
-      if(av(3) < 0)
+      //  Handle sign flips
+      if(a.size() > 0 && need_sign_flip(a[0], av))
 	av *= -1;
       a.push_back(av);
     }
     res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(), a.end());
     //  Translate back to whatever sign the closest point has
-    if(att(i,ra)(3) < 0)
+    if(need_sign_flip(a[0], att(i,ra)))
       res *= -1;
   }
   boost::math::quaternion<double> resq = nitf_to_quaternion(res);

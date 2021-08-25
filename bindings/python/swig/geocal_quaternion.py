@@ -372,7 +372,36 @@ def quat_rot(*args):
     """
     return _geocal_quaternion.quat_rot(*args)
 
-__all__ = ["Quaternion_AutoDerivative_double","quat_rot_x","quat_rot_y","quat_rot_z","quat_rot","quaternion_to_matrix","matrix_to_quaternion","quaternion_to_array","array_to_quaternion","quat_to_ypr","quat_to_euler","determine_quat_rot","quat_normalize"]
+def quaternion_delta_angle(Q1, Q2):
+    """
+
+    double GeoCal::quaternion_delta_angle(const boost::math::quaternion< double > &Q1, const
+    boost::math::quaternion< double > &Q2)
+    Give the angle between two quaternions.
+
+    This can be used for a variety of purposes, such as determining an
+    outlier quaternion. 
+    """
+    return _geocal_quaternion.quaternion_delta_angle(Q1, Q2)
+
+def interpolate_quaternion_rotation(Q1, Q2, toffset, tspace):
+    """
+
+    boost::math::quaternion<double> GeoCal::interpolate_quaternion_rotation(const boost::math::quaternion< double > &Q1, const
+    boost::math::quaternion< double > &Q2, const double &toffset, double
+    tspace)
+    Interpolate between 2 quaternions rotations.
+
+    This often goes by the name "Slerp". Note that the quaternion
+    rotations are double values, a rotation with Q and -Q gives the same
+    rotation. However when we interpolate we want to rotate the smallest
+    angle. So if Q2 and Q1 have a larger angle than pi, we switch the sign
+    of Q2. You can see a discussion of this in
+    wikipediahttps://en.wikipedia.org/wiki/Slerp. 
+    """
+    return _geocal_quaternion.interpolate_quaternion_rotation(Q1, Q2, toffset, tspace)
+
+__all__ = ["Quaternion_AutoDerivative_double","quat_rot_x","quat_rot_y","quat_rot_z","quat_rot","quaternion_to_matrix","matrix_to_quaternion","quaternion_to_array","array_to_quaternion","quat_to_ypr","quat_to_euler","determine_quat_rot","quat_normalize","quaternion_delta_angle","interpolate_quaternion_rotation"]
 
 
 

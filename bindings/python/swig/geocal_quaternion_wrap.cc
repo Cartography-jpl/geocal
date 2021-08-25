@@ -8226,7 +8226,7 @@ SWIGINTERN PyObject *_wrap_quaternion_to_matrix(PyObject *SWIGUNUSEDPARM(self), 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8324,7 +8324,7 @@ SWIGINTERN PyObject *_wrap_quaternion_to_array(PyObject *SWIGUNUSEDPARM(self), P
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10137,6 +10137,112 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_quaternion_delta_angle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = 0 ;
+  boost::math::quaternion< double > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"quaternion_delta_angle",2,2,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "quaternion_delta_angle" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quaternion_delta_angle" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "quaternion_delta_angle" "', argument " "2"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "quaternion_delta_angle" "', argument " "2"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< double > * >(argp2);
+  {
+    try {
+      result = (double)GeoCal::quaternion_delta_angle((boost::math::quaternion< double > const &)*arg1,(boost::math::quaternion< double > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_interpolate_quaternion_rotation(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  boost::math::quaternion< double > *arg1 = 0 ;
+  boost::math::quaternion< double > *arg2 = 0 ;
+  double *arg3 = 0 ;
+  double arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  double temp3 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  PyObject *swig_obj[4] ;
+  SwigValueWrapper< boost::math::quaternion< double > > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"interpolate_quaternion_rotation",4,4,swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "interpolate_quaternion_rotation" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "interpolate_quaternion_rotation" "', argument " "1"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg1 = reinterpret_cast< boost::math::quaternion< double > * >(argp1);
+  res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_boost__math__quaternionT_double_t,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "interpolate_quaternion_rotation" "', argument " "2"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "interpolate_quaternion_rotation" "', argument " "2"" of type '" "boost::math::quaternion< double > const &""'"); 
+  }
+  arg2 = reinterpret_cast< boost::math::quaternion< double > * >(argp2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "interpolate_quaternion_rotation" "', argument " "3"" of type '" "double""'");
+  } 
+  temp3 = static_cast< double >(val3);
+  arg3 = &temp3;
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "interpolate_quaternion_rotation" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    try {
+      result = GeoCal::interpolate_quaternion_rotation((boost::math::quaternion< double > const &)*arg1,(boost::math::quaternion< double > const &)*arg2,(double const &)*arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj((new boost::math::quaternion< double >(static_cast< const boost::math::quaternion< double >& >(result))), SWIGTYPE_p_boost__math__quaternionT_double_t, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -10268,6 +10374,29 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"This is an \"active\" transformation. For \"passive\", just reverse\n"
 		"the sign of A \n"
+		""},
+	 { (char *)"quaternion_delta_angle", _wrap_quaternion_delta_angle, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double GeoCal::quaternion_delta_angle(const boost::math::quaternion< double > &Q1, const\n"
+		"boost::math::quaternion< double > &Q2)\n"
+		"Give the angle between two quaternions.\n"
+		"\n"
+		"This can be used for a variety of purposes, such as determining an\n"
+		"outlier quaternion. \n"
+		""},
+	 { (char *)"interpolate_quaternion_rotation", _wrap_interpolate_quaternion_rotation, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::math::quaternion<double> GeoCal::interpolate_quaternion_rotation(const boost::math::quaternion< double > &Q1, const\n"
+		"boost::math::quaternion< double > &Q2, const double &toffset, double\n"
+		"tspace)\n"
+		"Interpolate between 2 quaternions rotations.\n"
+		"\n"
+		"This often goes by the name \"Slerp\". Note that the quaternion\n"
+		"rotations are double values, a rotation with Q and -Q gives the same\n"
+		"rotation. However when we interpolate we want to rotate the smallest\n"
+		"angle. So if Q2 and Q1 have a larger angle than pi, we switch the sign\n"
+		"of Q2. You can see a discussion of this in\n"
+		"wikipediahttps://en.wikipedia.org/wiki/Slerp. \n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

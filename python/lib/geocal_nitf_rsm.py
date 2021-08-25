@@ -64,7 +64,7 @@ if(have_pynitf and not suppress_rsm):
 # ---------------------------------------------------------
 
 if(have_pynitf and not suppress_rsm):
-    class RsmImageSegementHook(NitfSegmentHook):
+    class RsmImageSegmentHook(NitfSegmentHook):
         def __init__(self):
             # Temporarily take out the direct and indirect error covariances
             #self.rsm_tre_tag_list =  ['RSMIDA', 'RSMPIA','RSMPCA', 'RSMDCA',
@@ -236,7 +236,7 @@ if(have_pynitf and not suppress_rsm):
                 return True
             return False
             
-    NitfSegmentHookSet.add_default_hook(RsmImageSegementHook())
+    NitfSegmentHookSet.add_default_hook(RsmImageSegmentHook())
 
     def tre_str_to_rsm(t):
         '''MSP dumps a RSM it generates out as a string that is a set of TREs.
@@ -247,7 +247,7 @@ if(have_pynitf and not suppress_rsm):
             pass
         fseg = FakeSeg()
         fseg.tre_list = read_tre_data(re.sub(r'\n','',t).encode('utf8'))
-        isegh = RsmImageSegementHook()
+        isegh = RsmImageSegmentHook()
         isegh.after_read_hook(fseg, None)
         return fseg.rsm
 

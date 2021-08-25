@@ -82,5 +82,19 @@ BOOST_AUTO_TEST_CASE(determine_quat_rot_test)
     BOOST_CHECK_CLOSE(v2_c[0], v2[0], 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(sign_change_test)
+{
+  boost::math::quaternion<double> q1(0.0007963267107332633, 0.0, 0.0,
+			       0.9999996829318346);
+  boost::math::quaternion<double> q2(0.009203543268808336, 0.0, 0.0,
+			       -0.9999576464987401);
+  boost::math::quaternion<double> q3 =
+    interpolate_quaternion_rotation(q1, q2, 0.5, 1.0);
+  if(false)
+    std::cerr << q3 << "\n"
+	      << quaternion_delta_angle(q1, q3) << "\n";
+  BOOST_CHECK(quaternion_delta_angle(q1, q3) < 0.02);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

@@ -100,8 +100,17 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
   lv.look_vector[1] = p->position[1] - p2->position[1];
   lv.look_vector[2] = p->position[2] - p2->position[2];
   double resolution = 1.0;
-  boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
-  return polish_intersection(Ic, D, *surfp);
+  try {
+    boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
+    return polish_intersection(Ic, D, *surfp);
+  } catch(const ConvergenceFailure& E) {
+    // DEM intersection will sometimes fail, particularly if the RSM
+    // doesn't have well defined look vectors. Fall back to just using
+    // the initial z0 guess (which may be pretty far off), and then
+    // use polish_intersection. Despite the name, polish_intersection
+    // is a general root finder - is is just slower than the DEM intersection.
+    return polish_intersection(Ic, D, *p);
+  }
 }
 
 //-----------------------------------------------------------------------
@@ -136,15 +145,19 @@ boost::shared_ptr<GroundCoordinate> Rsm::polish_intersection
   double zmin = z_guess;
   double zmax = z_guess;
   double step = 1.0;
-  while(eq(zmin) > 0) {
+  while(eq(zmin) < 0 && zmin > rp->min_z()) {
     zmin -= step;
     step *= 2;
   }
+  if(zmin < rp->min_z())
+    zmin = rp->min_z();
   step = 1.0;
-  while(eq(zmax) < 0) {
+  while(eq(zmax) > 0 && zmax < rp->max_z()) {
     zmax += step;
     step *= 2;
   };
+  if(zmax > rp->max_z())
+    zmax = rp->max_z();
   double z = root(eq, zmin, zmax, 1e-8, Z_accuracy);
   return ground_coordinate_z(Ic, z);
 }

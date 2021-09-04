@@ -50,6 +50,19 @@ RsmImageGroundConnection::cf_look_vector
   Lv.look_vector[2] = ec2->position[2] - P->position[2];
 }
 
+void RsmImageGroundConnection::image_coordinate_extended
+(const GroundCoordinate& Gc,
+ ImageCoordinate& Res,
+ bool& Success) const
+{
+  bool in_valid_range;
+  rsm_->image_coordinate(Gc, Res, in_valid_range);
+  if(std::isnan(Res.line) || std::isnan(Res.sample))
+    Success = false;
+  else
+    Success = true;
+}
+
 ImageCoordinate RsmImageGroundConnection::image_coordinate(const GroundCoordinate& Gc) const
 {
   ImageCoordinate res;

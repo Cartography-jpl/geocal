@@ -101,7 +101,8 @@ public:
 		   blitz::Array<double, 2>& True_line,
 		   blitz::Array<double, 2>& True_sample,
 		   blitz::Array<double, 2>& Calc_line,
-		   blitz::Array<double, 2>& Calc_sample)
+		   blitz::Array<double, 2>& Calc_sample,
+		   blitz::Array<double, 2>& Distance_true_vs_calc)
     const;
   virtual const std::string& image_identifier() const
   { return rid->image_identifier();}

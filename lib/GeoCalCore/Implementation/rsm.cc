@@ -281,9 +281,10 @@ Rsm::ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
 ///
 /// Note that the RSM is really only valid for Gc that fall in the
 /// range min_x, max_x, min_y, max_y, min_z, max_z in
-/// rsm_base. Numerically we can often calculate a value outside of
-/// this range, and that can be useful (e.g., points just a little
-/// outside of the valid range).
+/// rsm_base, and for the image coordinate in the range min_line,
+/// max_line, min_sample, max_sample. Numerically we can often
+/// calculate a value outside of this range, and that can be
+/// useful (e.g., points just a little outside of the valid range).
 ///
 /// This function will always calculate image coordinates if it
 /// can. But depending on the application, callers of this function
@@ -305,9 +306,6 @@ void Rsm::image_coordinate(const GroundCoordinate& Gc, ImageCoordinate& Res, boo
 void Rsm::image_coordinate(double X, double Y, double Z, ImageCoordinate& Res,
 			   bool& In_valid_range) const
 {
-  // Allow a little slop in the line/sample calculated, so value like
-  // -0.0001 don't get called out of range.
-  //const double tol = 0.01;
   if(rparm) {
     boost::shared_ptr<GroundCoordinate> gc =
       coordinate_converter()->convert_from_coordinate(X, Y, Z);
@@ -317,16 +315,6 @@ void Rsm::image_coordinate(double X, double Y, double Z, ImageCoordinate& Res,
     double xadj, yadj, zadj;
     coordinate_converter()->convert_to_coordinate(*gcadj, xadj, yadj, zadj);
     Res = rp->image_coordinate(xadj, yadj, zadj);
-    // Think we want to skip checking line/sample range. Seems to
-    // cause failures that aren't really real, so we'll just check the
-    // X,Y,Z range. We may want to come back to this at some point.
-    // In_valid_range = (xadj >= rp->min_x() && xadj <= rp->max_x() &&
-    // 		      yadj >= rp->min_y() && yadj <= rp->max_y() &&
-    // 		      zadj >= rp->min_z() && zadj <= rp->max_z() &&
-    // 		      Res.line >= rp->min_line() - tol &&
-    // 		      Res.line <= rp->max_line() + tol &&
-    // 		      Res.sample >= rp->min_sample() - tol &&
-    // 		      Res.sample <= rp->max_sample() + tol);
     In_valid_range = (xadj >= rp->min_x() && xadj <= rp->max_x() &&
 		      yadj >= rp->min_y() && yadj <= rp->max_y() &&
 		      zadj >= rp->min_z() && zadj <= rp->max_z());
@@ -334,20 +322,19 @@ void Rsm::image_coordinate(double X, double Y, double Z, ImageCoordinate& Res,
     Res.sample += smpdelta;
   } else {
     Res = rp->image_coordinate(X, Y, Z);
-    // Think we want to skip checking line/sample range. Seems to
-    // cause failures that aren't really real, so we'll just check the
-    // X,Y,Z range. We may want to come back to this at some point.
-    // In_valid_range = (X >= rp->min_x() && X <= rp->max_x() &&
-    // 		      Y >= rp->min_y() && Y <= rp->max_y() &&
-    // 		      Z >= rp->min_z() && Z <= rp->max_z() &&
-    // 		      Res.line >= rp->min_line() - tol &&
-    // 		      Res.line <= rp->max_line() + tol &&
-    // 		      Res.sample >= rp->min_sample() - tol &&
-    // 		      Res.sample <= rp->max_sample() + tol);
     In_valid_range = (X >= rp->min_x() && X <= rp->max_x() &&
 		      Y >= rp->min_y() && Y <= rp->max_y() &&
 		      Z >= rp->min_z() && Z <= rp->max_z());
   }
+  // Already checked that we were in the ground domain, now check that
+  // we are in the image domain. Allow a little slop, because round
+  // off may take us slightly out of range.
+  double tolerance = 0.2;
+  if(Res.line < rp->min_line() - tolerance
+     || Res.line > rp->max_line() + tolerance
+     || Res.sample < rp->min_sample() - tolerance
+     || Res.sample > rp->max_sample() + tolerance)
+    In_valid_range = false;
 }
 
 //-----------------------------------------------------------------------
@@ -558,6 +545,11 @@ void Rsm::print(std::ostream& Os) const
 /// Rsm to calculate the line sample. If the Rsm is perfect, it would
 /// give the same values as "True".
 ///
+/// The line/sample differences can sometimes be misleading, so we
+/// also include ground distance in meters. Sometimes a large line
+/// difference is actually a short distance on the ground, so isn't as
+/// bad as it may seem.
+///
 /// This returns Nan where we can't calculate this (e.g., Igc fails,
 /// or outside of our RsmGrid).
 ///
@@ -572,13 +564,15 @@ void Rsm::compare_igc
  blitz::Array<double, 2>& True_line,
  blitz::Array<double, 2>& True_sample,
  blitz::Array<double, 2>& Calc_line,
- blitz::Array<double, 2>& Calc_sample)
+ blitz::Array<double, 2>& Calc_sample,
+ blitz::Array<double, 2>& Distance_true_vs_calc)
   const
 {
   True_line.resize(Number_line_spacing, Number_sample_spacing);
   True_sample.resize(Number_line_spacing, Number_sample_spacing);
   Calc_line.resize(Number_line_spacing, Number_sample_spacing);
   Calc_sample.resize(Number_line_spacing, Number_sample_spacing);
+  Distance_true_vs_calc.resize(Number_line_spacing, Number_sample_spacing);
   for(int i = 0; i < Number_line_spacing; ++i) {
     int ln = (int) floor(Igc.number_line() / double(Number_line_spacing) * i);
     for(int j = 0; j < Number_sample_spacing; ++j) {
@@ -589,10 +583,22 @@ void Rsm::compare_igc
       try {
 	ImageCoordinate iccalc;
 	bool in_valid_range;
-	image_coordinate(*Igc.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height), iccalc, in_valid_range);
+	auto gp_true = Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), Height);
+	image_coordinate(*gp_true, iccalc, in_valid_range);
+	Distance_true_vs_calc(i, j) = std::numeric_limits<double>::quiet_NaN();
 	if(in_valid_range) {
 	  Calc_line(i,j) = iccalc.line;
 	  Calc_sample(i, j) = iccalc.sample;
+	  if(iccalc.line >=0 && iccalc.line < Igc.number_line() &&
+	     iccalc.sample >= 0 && iccalc.sample < Igc.number_sample()) {
+	    try {
+	      auto gp_calc = Igc.ground_coordinate_approx_height(iccalc, Height);
+	      Distance_true_vs_calc(i, j) = distance(*gp_true, *gp_calc);
+	    } catch(const ImageGroundConnectionFailed&) {
+	      // Ignore failure, we just don't update
+	      // Distance_true_vs_calc
+	    }
+	  }
 	} else {
 	  Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
 	  Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();

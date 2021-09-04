@@ -10349,6 +10349,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *SWIGUNUSE
   blitz::Array< double,2 > *arg7 = 0 ;
   blitz::Array< double,2 > *arg8 = 0 ;
   blitz::Array< double,2 > *arg9 = 0 ;
+  blitz::Array< double,2 > *arg10 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
@@ -10366,6 +10367,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *SWIGUNUSE
   blitz::Array< double,2 > temp7 ;
   blitz::Array< double,2 > temp8 ;
   blitz::Array< double,2 > temp9 ;
+  blitz::Array< double,2 > temp10 ;
   PyObject *swig_obj[5] ;
   
   {
@@ -10379,6 +10381,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *SWIGUNUSE
   }
   {
     arg9 = &temp9;
+  }
+  {
+    arg10 = &temp10;
   }
   if (!SWIG_Python_UnpackTuple(args,"ImageGroundConnection_compare_igc",5,5,swig_obj)) SWIG_fail;
   {
@@ -10438,7 +10443,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *SWIGUNUSE
   arg5 = static_cast< double >(val5);
   {
     try {
-      ((GeoCal::ImageGroundConnection const *)arg1)->compare_igc((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,*arg6,*arg7,*arg8,*arg9);
+      ((GeoCal::ImageGroundConnection const *)arg1)->compare_igc((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,*arg6,*arg7,*arg8,*arg9,*arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -10531,6 +10536,29 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *SWIGUNUSE
     res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, arg9->data(), 0, 0, 0);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg9);
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    PyObject *res;
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg10->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg10->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg10->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg10);
     // Stash pointer to original blitz array as detailed above
     PyArray_SetBaseObject((PyArrayObject*) res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -17709,7 +17737,8 @@ static PyMethodDef SwigMethods[] = {
 		"void ImageGroundConnection::compare_igc(const ImageGroundConnection &Igc_true, int Number_line_spacing, int\n"
 		"Number_sample_spacing, double Height, blitz::Array< double, 2 >\n"
 		"&True_line, blitz::Array< double, 2 > &True_sample, blitz::Array<\n"
-		"double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample) const\n"
+		"double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample,\n"
+		"blitz::Array< double, 2 > &Distance_true_vs_calc) const\n"
 		"After fitting an Igc, it is good to see how accurate the Igc captures\n"
 		"another Igc.\n"
 		"\n"
@@ -17718,6 +17747,11 @@ static PyMethodDef SwigMethods[] = {
 		"surface using the Igc, and then use the this Igc to calculate the line\n"
 		"sample. If the Igc is perfect, it would give the same values as\n"
 		"\"True\".\n"
+		"\n"
+		"The line/sample differences can sometimes be misleading, so we also\n"
+		"include ground distance in meters. Sometimes a large line difference\n"
+		"is actually a short distance on the ground, so isn't as bad as it may\n"
+		"seem.\n"
 		"\n"
 		"This returns Nan where we can't calculate this (e.g., Igc fails)\n"
 		"\n"

@@ -135,8 +135,9 @@ BOOST_AUTO_TEST_CASE(mars_example2)
      (boost::make_shared<LocalRcParameter>(*igc)));
   boost::shared_ptr<Rsm> r = r1;
   r->fit(*igc, -5000, -1500);
-  Array<double, 2> ln, smp, lncalc, smpcalc;
-  r->compare_igc(*igc, igc->number_line(), 5, -3000, ln, smp, lncalc, smpcalc);
+  Array<double, 2> ln, smp, lncalc, smpcalc, distance_true_vs_calc;
+  r->compare_igc(*igc, igc->number_line(), 5, -3000, ln, smp, lncalc, smpcalc,
+		 distance_true_vs_calc);
   std::cerr << max(abs(ln-lncalc)) << "\n";
   std::string d = serialize_write_string(r);
   if(true)

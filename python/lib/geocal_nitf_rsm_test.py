@@ -348,10 +348,12 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
         igc_g.payload_id = "FAKEPY"
         igc_g.sensor_id = "FAKESN"
         f.image_segment[0].create_glas_gfm(igc_g)
-        true_line, true_sample, calc_line, calc_sample = rsm.compare_igc(igc_g, igc_g.number_line, igc_g.number_sample, 100)
+        (true_line, true_sample, calc_line, calc_sample,
+         distance_true_vs_calc)= rsm.compare_igc(igc_g, igc_g.number_line, igc_g.number_sample, 100)
         print("Compare GFM")
         print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
         print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+        print(pd.DataFrame(distance_true_vs_calc.flatten()).describe())
 
     f.write("nitf_rsm.ntf")
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
@@ -1057,20 +1059,6 @@ def test_rsm_sample(isolated_dir):
         for ln, smp, h, lat, lon in pcalc[fname]:
             ic_expect = ImageCoordinate(ln, smp)
             ic_calc, in_valid_range = r.image_coordinate(Geodetic(lat, lon, h))
-            if(not in_valid_range):
-                print(fname)
-                print(ic_calc)
-                print(r.coordinate_converter.convert_to_coordinate(Geodetic(lat, lon, h)))
-                print(r.rsm_base.min_line)
-                print(r.rsm_base.max_line)
-                print(r.rsm_base.min_sample)
-                print(r.rsm_base.max_sample)
-                print(r.rsm_base.min_x)
-                print(r.rsm_base.max_x)
-                print(r.rsm_base.min_y)
-                print(r.rsm_base.max_y)
-                print(r.rsm_base.min_z)
-                print(r.rsm_base.max_z)
             if(abs(ic_expect.line - ic_calc.line) >= 0.2 or
                abs(ic_expect.sample - ic_calc.sample) >= 0.2):
                 print(fname)
@@ -1081,7 +1069,6 @@ def test_rsm_sample(isolated_dir):
             # no greater than 0.05. But it appears the lat/lon is lower
             # resolution than some of the other data, so this gives closer to
             # 0.2 pixel
-            assert(in_valid_range)
             assert(abs(ic_expect.line - ic_calc.line) < 0.2)
             assert(abs(ic_expect.sample - ic_calc.sample) < 0.2)
         # Should add tests to check against the expected value spreadsheet
@@ -1270,10 +1257,12 @@ def test_bowtie_grid(isolated_dir, igc_staring2):
     ic = ImageCoordinate(1,10)
     print(igc_msp.image_coordinate(igc.ground_coordinate(ic,d)))
     print(r.image_coordinate(igc.ground_coordinate(ic, d))[0])
-    true_line, true_sample, calc_line, calc_sample = r.compare_igc(igc, igc.number_line, igc.number_sample, 0)
+    (true_line, true_sample, calc_line, calc_sample,
+     distance_true_vs_calc) = r.compare_igc(igc, igc.number_line, igc.number_sample, 0)
     print("Poles in fit: ", r.check_zero_crossing())
     print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
     print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+    print(pd.DataFrame(distance_true_vs_calc.flatten()).describe())
     wp = np.unravel_index(np.nanargmax(np.abs(true_line - calc_line)), true_line.shape)
     ic = ImageCoordinate(true_line[wp], true_sample[wp])
     print(ic)
@@ -1310,10 +1299,12 @@ def test_bowtie_poly(isolated_dir, igc_staring2):
     ic = ImageCoordinate(1,10)
     print(igc_msp.image_coordinate(igc.ground_coordinate(ic,d)))
     print(rsm.image_coordinate(igc.ground_coordinate(ic, d))[0])
-    true_line, true_sample, calc_line, calc_sample = rsm.compare_igc(igc, igc.number_line, igc.number_sample, 0)
+    (true_line, true_sample, calc_line, calc_sample,
+     distance_true_vs_calc) = rsm.compare_igc(igc, igc.number_line, igc.number_sample, 0)
     print("Poles in fit: ", rsm.check_zero_crossing())
     print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
     print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+    print(pd.DataFrame(distance_true_vs_calc.flatten()).describe())
     wp = np.unravel_index(np.nanargmax(np.abs(true_line - calc_line)), true_line.shape)
     ic = ImageCoordinate(true_line[wp], true_sample[wp])
     print(ic)
@@ -1338,7 +1329,9 @@ def test_rsm_cov(isolated_dir):
     r = Rsm(RsmRationalPolynomial(3,3,3,3,3,3,3,3),
               LocalRcConverter(LocalRcParameter(igc)))
     r.fit(igc, hmin, hmax)
-    true_line, true_sample, calc_line, calc_sample = r.compare_igc(igc, 100, 100, 100)
+    (true_line, true_sample, calc_line, calc_sample,
+     distance_true_vs_calc)= r.compare_igc(igc, 100, 100, 100)
     print("Poles in fit: ", r.check_zero_crossing())
     print("Line:\n",  pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
     print("Sample:\n",  pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+    print("Distance:\n",  pd.DataFrame(distance_true_vs_calc.flatten()).describe())

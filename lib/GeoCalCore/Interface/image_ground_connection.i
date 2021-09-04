@@ -105,6 +105,7 @@ public:
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT)
     const;
   virtual boost::shared_ptr<GroundCoordinate> 

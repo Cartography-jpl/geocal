@@ -53,6 +53,7 @@ public:
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT)
     const;
   blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,

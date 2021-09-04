@@ -166,6 +166,11 @@ ImageGroundConnection::collinearity_residual_jacobian
 /// this Igc to calculate the line sample. If the Igc is perfect, it would
 /// give the same values as "True".
 ///
+/// The line/sample differences can sometimes be misleading, so we
+/// also include ground distance in meters. Sometimes a large line
+/// difference is actually a short distance on the ground, so isn't as
+/// bad as it may seem.
+///
 /// This returns Nan where we can't calculate this (e.g., Igc fails)
 ///
 /// This function could just be done in python, but we have it in C++
@@ -179,13 +184,15 @@ void ImageGroundConnection::compare_igc
  blitz::Array<double, 2>& True_line,
  blitz::Array<double, 2>& True_sample,
  blitz::Array<double, 2>& Calc_line,
- blitz::Array<double, 2>& Calc_sample)
+ blitz::Array<double, 2>& Calc_sample,
+ blitz::Array<double, 2>& Distance_true_vs_calc)
   const
 {
   True_line.resize(Number_line_spacing, Number_sample_spacing);
   True_sample.resize(Number_line_spacing, Number_sample_spacing);
   Calc_line.resize(Number_line_spacing, Number_sample_spacing);
   Calc_sample.resize(Number_line_spacing, Number_sample_spacing);
+  Distance_true_vs_calc.resize(Number_line_spacing, Number_sample_spacing);
   for(int i = 0; i < Number_line_spacing; ++i) {
     int ln = (int) floor(number_line() / double(Number_line_spacing) * i);
     for(int j = 0; j < Number_sample_spacing; ++j) {
@@ -196,10 +203,21 @@ void ImageGroundConnection::compare_igc
       try {
 	ImageCoordinate iccalc;
 	bool success;
-	image_coordinate_with_status(*Igc_true.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height), iccalc, success);
+	auto gp_true = Igc_true.ground_coordinate_approx_height(ImageCoordinate(ln,smp), Height);
+	image_coordinate_with_status(*gp_true, iccalc, success);
+	Distance_true_vs_calc(i,j) = std::numeric_limits<double>::quiet_NaN();
 	if(success) {
 	  Calc_line(i,j) = iccalc.line;
 	  Calc_sample(i, j) = iccalc.sample;
+	  if(iccalc.line >= 0 && iccalc.line < number_line() &&
+	     iccalc.sample >= 0 && iccalc.sample < number_sample()) {
+	    try {
+	      auto gp_calc = Igc_true.ground_coordinate_approx_height(iccalc, Height);
+	      Distance_true_vs_calc(i,j) = distance(*gp_true, *gp_calc);
+	    } catch(const ImageGroundConnectionFailed&) {
+	      // Ignore failure, we just don't update Distance_true_vs_calc.
+	    }
+	  }
 	} else {
 	  Calc_line(i,j) = std::numeric_limits<double>::quiet_NaN();
 	  Calc_sample(i, j) = std::numeric_limits<double>::quiet_NaN();
@@ -301,7 +319,11 @@ ImageGroundConnection::image_coordinate_jac_parm_fd
     Array<double, 1> p = p0.copy();
     p(i) += Eps(i);
     const_cast<ImageGroundConnection&>(*this).parameter_subset(p);
-    ImageCoordinate ic = image_coordinate(Gc);
+    ImageCoordinate ic;
+    bool success;
+    image_coordinate_extended(Gc, ic, success);
+    if(!success)
+      throw ImageGroundConnectionFailed();
     jac_fd(0,i) = (ic.line - ic0.line) / Eps(i);
     jac_fd(1,i) = (ic.sample - ic0.sample) / Eps(i);
   }

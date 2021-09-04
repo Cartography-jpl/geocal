@@ -16,7 +16,7 @@ def rsm_plot_diff(r, igc, fname=None, min_height = -5000,
     If a file is supplied, we also write out the cross section plots.'''
     
     dem_nominal = (max_height + min_height) / 2.0
-    ln, smp, lncalc, smpcalc = r.compare_igc(igc, igc.number_line, 5,
+    ln, smp, lncalc, smpcalc, distance_true_vs_calc = r.compare_igc(igc, igc.number_line, 5,
                                              dem_nominal)
     print("Max line diff:   ", np.nanmax(abs(ln-lncalc)), " at ",
           np.unravel_index(np.nanargmax(abs(ln-lncalc)), ln.shape))

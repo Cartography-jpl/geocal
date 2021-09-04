@@ -352,7 +352,8 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         void Rsm::compare_igc(const ImageGroundConnection &Igc, int Number_line_spacing, int
         Number_sample_spacing, double Height, blitz::Array< double, 2 >
         &True_line, blitz::Array< double, 2 > &True_sample, blitz::Array<
-        double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample) const
+        double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample,
+        blitz::Array< double, 2 > &Distance_true_vs_calc) const
         After fitting an Igc, it is good to see how accurate the Rsm captures
         the Igc.
 
@@ -361,6 +362,11 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         surface using the Igc, and then use the Rsm to calculate the line
         sample. If the Rsm is perfect, it would give the same values as
         "True".
+
+        The line/sample differences can sometimes be misleading, so we also
+        include ground distance in meters. Sometimes a large line difference
+        is actually a short distance on the ground, so isn't as bad as it may
+        seem.
 
         This returns Nan where we can't calculate this (e.g., Igc fails, or
         outside of our RsmGrid).

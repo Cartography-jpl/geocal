@@ -318,7 +318,8 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         void ImageGroundConnection::compare_igc(const ImageGroundConnection &Igc_true, int Number_line_spacing, int
         Number_sample_spacing, double Height, blitz::Array< double, 2 >
         &True_line, blitz::Array< double, 2 > &True_sample, blitz::Array<
-        double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample) const
+        double, 2 > &Calc_line, blitz::Array< double, 2 > &Calc_sample,
+        blitz::Array< double, 2 > &Distance_true_vs_calc) const
         After fitting an Igc, it is good to see how accurate the Igc captures
         another Igc.
 
@@ -327,6 +328,11 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         surface using the Igc, and then use the this Igc to calculate the line
         sample. If the Igc is perfect, it would give the same values as
         "True".
+
+        The line/sample differences can sometimes be misleading, so we also
+        include ground distance in meters. Sometimes a large line difference
+        is actually a short distance on the ground, so isn't as bad as it may
+        seem.
 
         This returns Nan where we can't calculate this (e.g., Igc fails)
 

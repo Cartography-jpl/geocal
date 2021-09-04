@@ -36,6 +36,7 @@ public:
   virtual ~Rsm() {}
 
   boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+  boost::shared_ptr<GroundCoordinate> ground_intersection(const ImageCoordinate& Ic, const Dem& D, double Z_accuracy=1e-2) const;
   boost::shared_ptr<GroundCoordinate> polish_intersection(const ImageCoordinate& Ic, const Dem& D, const GroundCoordinate& Surfp, double Z_accuracy=1e-2) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_z(const ImageCoordinate& Ic, double Z) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const;

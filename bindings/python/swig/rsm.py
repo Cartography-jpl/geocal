@@ -228,6 +228,19 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         return _rsm.Rsm_ground_coordinate(self, Ic, D)
 
 
+    def ground_intersection(self, Ic, D, Z_accuracy=1e-2):
+        """
+
+        boost::shared_ptr< GroundCoordinate > Rsm::ground_intersection(const ImageCoordinate &Ic, const Dem &D, double Z_accuracy=1e-2)
+        const
+        Calculate a ground intersection, without any assumptions about look
+        vectors being on a line.
+
+        This can only find data in the range of min_z to max_z. 
+        """
+        return _rsm.Rsm_ground_intersection(self, Ic, D, Z_accuracy)
+
+
     def polish_intersection(self, Ic, D, Surfp, Z_accuracy=1e-2):
         """
 
@@ -556,6 +569,7 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     __swig_destroy__ = _rsm.delete_Rsm
 Rsm.__str__ = new_instancemethod(_rsm.Rsm___str__, None, Rsm)
 Rsm.ground_coordinate = new_instancemethod(_rsm.Rsm_ground_coordinate, None, Rsm)
+Rsm.ground_intersection = new_instancemethod(_rsm.Rsm_ground_intersection, None, Rsm)
 Rsm.polish_intersection = new_instancemethod(_rsm.Rsm_polish_intersection, None, Rsm)
 Rsm.ground_coordinate_z = new_instancemethod(_rsm.Rsm_ground_coordinate_z, None, Rsm)
 Rsm.ground_coordinate_approx_height = new_instancemethod(_rsm.Rsm_ground_coordinate_approx_height, None, Rsm)

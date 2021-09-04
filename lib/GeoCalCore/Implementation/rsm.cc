@@ -105,12 +105,40 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
     return polish_intersection(Ic, D, *surfp);
   } catch(const ConvergenceFailure& E) {
     // DEM intersection will sometimes fail, particularly if the RSM
-    // doesn't have well defined look vectors. Fall back to just using
-    // the initial z0 guess (which may be pretty far off), and then
-    // use polish_intersection. Despite the name, polish_intersection
-    // is a general root finder - is is just slower than the DEM intersection.
-    return polish_intersection(Ic, D, *p);
+    // doesn't have well defined look vectors. Fall back to a full
+    // solution
+    return ground_intersection(Ic, D);
   }
+}
+
+//-----------------------------------------------------------------------
+/// Calculate a ground intersection, without any assumptions about
+/// look vectors being on a line. This can only find data in the
+/// range of min_z to max_z.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GroundCoordinate> Rsm::ground_intersection
+(const ImageCoordinate& Ic, const Dem& D, double Z_accuracy) const
+{
+  class Zeq: public DFunctor {
+  public:
+    Zeq(const Rsm& R, const ImageCoordinate& Ic, const Dem& D)
+      : r(R), ic(Ic), d(D)
+    {}
+    virtual ~Zeq() {}
+    virtual double operator()(const double& Z) const
+    {
+      return d.distance_to_surface(*r.ground_coordinate_z(ic, Z));
+    }
+    const Rsm& r;
+    const ImageCoordinate& ic;
+    const Dem& d;
+  };
+  Zeq eq(*this, Ic, D);
+  if(eq(rp->min_z()) * eq(rp->max_z()) > 0)
+    throw ConvergenceFailure("Surface is not found between min_z() and max_z()");
+  double z = root(eq, rp->min_z(), rp->max_z(), 1e-8, Z_accuracy);
+  return ground_coordinate_z(Ic, z);
 }
 
 //-----------------------------------------------------------------------
@@ -145,14 +173,14 @@ boost::shared_ptr<GroundCoordinate> Rsm::polish_intersection
   double zmin = z_guess;
   double zmax = z_guess;
   double step = 1.0;
-  while(eq(zmin) < 0 && zmin > rp->min_z()) {
+  while(eq(zmin) < 0) {
     zmin -= step;
     step *= 2;
   }
   if(zmin < rp->min_z())
     zmin = rp->min_z();
   step = 1.0;
-  while(eq(zmax) > 0 && zmax < rp->max_z()) {
+  while(eq(zmax) > 0) {
     zmax += step;
     step *= 2;
   };

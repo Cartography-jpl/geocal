@@ -95,11 +95,16 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate
     ground_coordinate_z(Ic, z0 + delta_z);
   boost::shared_ptr<CartesianFixed> p = gc1->convert_to_cf();
   boost::shared_ptr<CartesianFixed> p2 = gc2->convert_to_cf();
+  // Pick sign so stepping along lv gives lower heights
+  int sign = 1;
+  if(p->height_reference_surface() > p2->height_reference_surface())
+    sign = -1;
   CartesianFixedLookVector lv;
-  lv.look_vector[0] = p->position[0] - p2->position[0];
-  lv.look_vector[1] = p->position[1] - p2->position[1];
-  lv.look_vector[2] = p->position[2] - p2->position[2];
-  double resolution = 1.0;
+  lv.look_vector[0] = sign * (p->position[0] - p2->position[0]);
+  lv.look_vector[1] = sign * (p->position[1] - p2->position[1]);
+  lv.look_vector[2] = sign * (p->position[2] - p2->position[2]);
+  double resolution = 10.0; // Not sure how to get this. The resolution
+			    // here is the resolution of the DEM
   try {
     boost::shared_ptr<CartesianFixed> surfp = D.intersect(*p, lv, resolution);
     return polish_intersection(Ic, D, *surfp);
@@ -223,7 +228,6 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate_z
       blitz::Array<double, 1> res(2);
       res(0) = icres.line - ic_.line;
       res(1) = icres.sample - ic_.sample;
-      //      std::cerr << "X: " << X  << "  Res: " << res << "\n";
       return res;
     }
     virtual blitz::Array<double, 2> df

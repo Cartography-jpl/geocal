@@ -20,13 +20,25 @@ Options:
        Check that corners are close to CSCRNA tre
 
   --corner-tolerance=f
-       Corner tolerance, in image coordinates [default: 2.0]
+       Corner tolerance, in image coordinates. If <=0, we skip the tolerance 
+       test. This is in pixels. Note that for the four-corner calculation we
+       always skip this test since geolocation is really approximate for
+       four-corner. [default: 2.0]
+
+  --distance-tolerance=f
+       Corner distance tolerance, in meters. If <=0 we skip the tolerance
+       test. This is in meters. Note that for the four-corner calculation we
+       always skip this test since geolocation is really approximate for
+       four-corner. [default: -1.0]
 
   --glas
        Check for GLAS
 
   --gfm
        Check for GFM
+
+  --four-corner
+       Check for four corner geolocation.
 
   --rsm
        Check for RSM
@@ -43,14 +55,23 @@ succeed = True
 for iid1 in iid1_list:
     for cond, plugin in [(args.rsm, "RSM"),
                          (args.glas, "GLAS"),
-                         (args.gfm, "GFM")]:
+                         (args.gfm, "GFM"),
+                         (args.four_corner, "FOUR_CORNER")]:
         if(cond):
             print("---------------------------------------------")
             print("IID1:   ", iid1)
             print("Plugin: ", plugin)
-            t = geocal.IgcMsp.check_plugin(f, iid1, plugin,
-                                           check_corner=args.check_corner,
-                                           corner_tol=args.corner_tolerance)
+            # Never check that four corners match, it is pretty approximate
+            if(plugin == "FOUR_CORNER"):
+                t = geocal.IgcMsp.check_plugin(f, iid1, plugin,
+                                               check_corner=args.check_corner,
+                                               corner_tol=-1.0,
+                                               dist_tol=-1.0)
+            else:
+                t = geocal.IgcMsp.check_plugin(f, iid1, plugin,
+                                               check_corner=args.check_corner,
+                                               corner_tol=args.corner_tolerance,
+                                               dist_tol=args.distance_tolerance)
             succeed = succeed and t
 if(not succeed):
     print("Check failed")

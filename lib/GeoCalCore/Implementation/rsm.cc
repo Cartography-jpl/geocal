@@ -641,8 +641,15 @@ blitz::Array<double, 2> Rsm::mapping_matrix
 	try {
 	  double ln = Igc.number_line() / (Nline_fit - 1.0) * i;
 	  double smp = Igc.number_sample() / (Nsample_fit - 1.0) * j;
+	  // Round off can take ln/smp slightly out of range.
+	  if(ln >- Igc.number_line())
+	    ln = Igc.number_line() - 0.01;
+	  if(smp >- Igc.number_sample())
+	    smp = Igc.number_sample() - 0.01;
 	  double h = Min_height + (Max_height - Min_height) /
 	    (Nheight_fit - 1.0) * k;
+	  if(h > Max_height)
+	    h = Max_height - 0.01;
 	  boost::shared_ptr<GroundCoordinate> gc =
 	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
 	  Array<double, 2> a1(Igc.image_coordinate_jac_parm(*gc));

@@ -68,6 +68,7 @@ def test_rip_glas(nitf_sample_rip):
     igc1 = IgcMsp(nitf_sample_rip, SimpleDem(), iseg_index, "GLAS", "GLAS")
     f = pynitf.NitfFile(nitf_sample_rip)
     glas = f.image_segment[iseg_index].glas_gfm
+    print(glas)
     ref_pt = Ecr(glas.tre_csexrb.ground_ref_point_x,
                  glas.tre_csexrb.ground_ref_point_y,
                  glas.tre_csexrb.ground_ref_point_z)
@@ -142,6 +143,7 @@ def test_create_glas(nitf_sample_rip):
     print(f)
     f.write("glas_test.ntf")
     f2 = NitfFile("glas_test.ntf")
+    print(f2.image_segment[0].glas_gfm)
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
     igc2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")

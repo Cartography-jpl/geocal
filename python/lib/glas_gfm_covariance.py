@@ -1,6 +1,12 @@
 import textwrap
 import numpy as np
 import warnings
+try:
+    import pynitf
+    have_pynitf = True
+except ImportError:
+    # Ok if we don't have pynitf, we just can't execute this code
+    have_pynitf = False
 
 class GlasGfmCovariance(object):
     '''This is the GLAS/GFM Covariance object. We map this to and
@@ -10,13 +16,14 @@ class GlasGfmCovariance(object):
     but there isn't really any strong reason now to need something that
     tightly coupled.'''
     def __init__(self):
-        self.cov_version_date = "fakedate"
+        self.cov_version_date = "20000101"
         self.core_set = GlasGfmCoreSet()
         self.spdcf = GlasGfmSpdcfList()
         self.io = GlasGfmIO()
         self.ts = GlasGfmTS()
         self.unmodeled_error = GlasGfmUnmodeledError()
         self.direct_covariance = GlasGfmDirectCovariance()
+        self.id = None
 
     @classmethod
     def read_des(cls, cscsdb):
@@ -32,15 +39,19 @@ class GlasGfmCovariance(object):
         res.direct_covariance = GlasGfmDirectCovariance.read_des(cscsdb)
         return res
 
+    def write_des(self, cscsdb):
+        '''Write to an existing DesCSCSDB.'''
+        cscsdb.cov_version_date = self.cov_version_date
+        self.core_set.write_des(cscsdb)
+        self.io.write_des(cscsdb)
+        self.ts.write_des(cscsdb)
+        self.spdcf.write_des(cscsdb)
+        self.direct_covariance.write_des(cscsdb)
+
     def create_des(self):
         '''Create a pynitf.DesCSCSDB from the information in this object'''
         res = pynitf.DesCSCSDB()
-        res.cov_version_date = self.cov_version_date
-        self.core_set.write_des(res)
-        self.io.write_des(res)
-        self.ts.write_des(res)
-        self.spdcf.write_des(res)
-        self.direct_covariance.write_des(res)
+        self.write_des(res)
         return res
 
     def __str__(self):
@@ -368,6 +379,37 @@ class GlasGfmSpdcfComposite(GlasGfmSpdcf):
         cscsdb.spdcf_p[n] = len(self.spdcf_list)
         for j, s in enumerate(self.spdcf_list):
             s._write_des(cscsdb, n, j)
+
+def _glas_gfm_covariance(iseg):
+    '''Search for GlasGfmCovariance that goes with a image segment'''
+    lv = iseg.idlvl
+    f = iseg.nitf_file
+    if f is None:
+        raise RuntimeError("Need to have nitf_file set for image segment level %d" % lv)
+    possible = [d for d in f.des_segment if
+                d.subheader.desid == "CSCSDB" and
+                (d.des.user_subheader.numais == "ALL" or
+                 lv in d.des.user_subheader.aisdlvl)]
+    if(len(possible) == 0):
+        return None
+    if(len(possible) > 1):
+        raise RuntimeError("Found more than one possible covariance_cscsdb for image esegment level %d" % lv)
+    return GlasGfmCovariance().read_des(possible[0].des)
+
+def _glas_gfm_covariance_set(iseg, glas_gfm_cov):
+    f = iseg.nitf_file
+    if(f is None):
+        raise RuntimeError("Need to add NitfImageSegment to a NitfFile before we can add a pos_csephb to it")
+    d = f.find_des_by_uuid(glas_gfm_cov.id)
+    if(d is None):
+        d = glas_gfm_cov.create_des()
+        d.generate_uuid_if_needed()
+        glas_gfm_cov.id = d.id
+        f.des_segment.append(pynitf.NitfDesSegment(d))
+    d.add_display_level(iseg.idlvl)
+
+if(have_pynitf):    
+    pynitf.NitfImageSegment.glas_gfm_covariance = property(_glas_gfm_covariance, _glas_gfm_covariance_set)
     
 __all__ = ["GlasGfmCovariance", "GlasGfmSpdcfList",
            "GlasGfmSpdcf", "GlasGfmSpdcfCsm",

@@ -72,10 +72,10 @@ def _check_plugin(cls, f, iid1, plugin, check_corner=True,
                 if(abs(ic1.line - 0) > corner_tol or
                    abs(ic1.sample - 0) > corner_tol or
                    abs(ic2.line - 0) > corner_tol or
-                   abs(ic2.sample - (nsamp-1)) > corner_tol or
-                   abs(ic3.line - (nline-1)) > corner_tol or
-                   abs(ic3.sample - (nsamp-1)) > corner_tol or
-                   abs(ic4.line - (nline-1)) > corner_tol or
+                   abs(ic2.sample - nsamp) > corner_tol or
+                   abs(ic3.line - nline) > corner_tol or
+                   abs(ic3.sample - nsamp) > corner_tol or
+                   abs(ic4.line - nline) > corner_tol or
                    abs(ic4.sample - 0) > corner_tol):
                     print("Corner tolerance not met " + desc)
                     return False

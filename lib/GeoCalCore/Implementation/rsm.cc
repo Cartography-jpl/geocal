@@ -642,9 +642,9 @@ blitz::Array<double, 2> Rsm::mapping_matrix
 	  double ln = Igc.number_line() / (Nline_fit - 1.0) * i;
 	  double smp = Igc.number_sample() / (Nsample_fit - 1.0) * j;
 	  // Round off can take ln/smp slightly out of range.
-	  if(ln >- Igc.number_line())
+	  if(ln >= Igc.number_line())
 	    ln = Igc.number_line() - 0.01;
-	  if(smp >- Igc.number_sample())
+	  if(smp >= Igc.number_sample())
 	    smp = Igc.number_sample() - 0.01;
 	  double h = Min_height + (Max_height - Min_height) /
 	    (Nheight_fit - 1.0) * k;

@@ -1,12 +1,46 @@
 import textwrap
 import numpy as np
 import warnings
+from geocal_swig import Time
 try:
     import pynitf
     have_pynitf = True
 except ImportError:
     # Ok if we don't have pynitf, we just can't execute this code
     have_pynitf = False
+from functools import partial    
+
+class GlasGfmNitfTimeWrapper:
+    '''The GLAS stuff uses a particular format for the NITF time stamps.
+    This converts a geocal time to and from a date and time such as 
+    corr_ref_date and corr_ref_time. Not sure how general this class is, 
+    it seems every TRE uses a different format. For now, we'll just have 
+    this internal to this module but we could export it if this 
+    proves useful.'''
+    def __init__(self, field_base, cscsdb):
+        self.cscsdb = cscsdb
+        self.field_base = field_base
+    def __getitem__(self, key):
+        dt = self.cscsdb.get_raw_bytes(self.field_base +
+                                       "_date", key).decode("utf-8")
+        tm = self.cscsdb.get_raw_bytes(self.field_base + "_time",
+                                       key).decode("utf-8")
+        return Time.parse_time(
+            f"{dt[0:4]}-{dt[4:6]}-{dt[6:8]}T{tm[0:2]}:{tm[2:4]}:{tm[4:]}Z")
+    def __setitem__(self, key, val):
+        # Split between date and time
+        dt, tm = str(val).split("T")
+        # Remove "-" in date, giving a string like 20210203, and assign
+        getattr(self.cscsdb,
+                self.field_base + "_date")[key] = dt.replace("-", "")
+        # Put in HHMMSS.nnnnnnnnn format and assign
+        getattr(self.cscsdb, self.field_base + "_time")[key] = \
+        pynitf.NitfLiteral(("%016.9lf" % float(tm.replace("Z",
+                                    "").replace(":",""))).encode('utf-8'))
+
+if(have_pynitf):
+    # Add functions to map to and from geocal Time
+    pynitf.DesCSCSDB.corr_ref_geocal_time = property(partial(GlasGfmNitfTimeWrapper, "corr_ref"))
 
 class GlasGfmCovariance(object):
     '''This is the GLAS/GFM Covariance object. We map this to and
@@ -17,7 +51,7 @@ class GlasGfmCovariance(object):
     tightly coupled.'''
     def __init__(self):
         self.cov_version_date = "20000101"
-        self.core_set = GlasGfmCoreSet()
+        self.core_set = GlasGfmCoreSetList()
         self.spdcf = GlasGfmSpdcfList()
         self.io = GlasGfmIO()
         self.ts = GlasGfmTS()
@@ -31,7 +65,7 @@ class GlasGfmCovariance(object):
         pynitf.DesCSCSDB object.'''
         res = cls()
         res.cov_version_date = cscsdb.cov_version_date
-        res.core_set = GlasGfmCoreSet.read_des(cscsdb)
+        res.core_set = GlasGfmCoreSetList.read_des(cscsdb)
         res.io = GlasGfmIO.read_des(cscsdb)
         res.ts = GlasGfmTS.read_des(cscsdb)
         res.unmodeled_error = GlasGfmUnmodeledError.read_des(cscsdb)
@@ -144,26 +178,120 @@ class GlasGfmUnmodeledError(object):
     def __str__(self):
         return "No Unmodeled Error"
 
-class GlasGfmCoreSet(object):
-    '''Core set for covariance
+class GlasGfmGroupList(list):
+    '''The list of GlasGfmGroup. Adds a few extra functions'''
+    @classmethod
+    def _read_des(cls, cscsdb, i):
+        res = cls()
+        for j in range(cscsdb.num_groups[i]):
+            res.append(GlasGfmGroup._read_des(cscsdb, i, j))
+        return res
 
-    Note we haven't actually implemented this yet.'''
-    def __init__(self):
-        pass
-
+    def _write_des(self, cscsdb, i):
+        cscsdb.num_groups[i] = len(self)
+        for j, s in enumerate(self):
+            s._write_des(cscsdb, i, j)
+            
+    def __str__(self):
+        if(len(self) == 0):
+            return "Empty GlasGfmGroupList"
+        res = ""
+        for i, s in enumerate(self):
+            res += f"Group {i}\n"
+            res += textwrap.indent(str(s), "   ") + "\n"
+        return res
+    
+class GlasGfmCoreSetList(list):
+    '''The list of GlasGfmSpdcf in a GlasGfmCovariance. Adds a few extra
+    functions.'''
     @classmethod
     def read_des(cls, cscsdb):
-        if(cscsdb.core_sets != 0):
-            warnings.warn("Skipping Core Sets section of covariance, we don't support this yet")
-        return cls()
+        res = cls()
+        for i in range(cscsdb.core_sets):
+            t = GlasGfmCoreSet._read_des(cscsdb, i)
+            res.append(t)
+        return res
 
     def write_des(self, cscsdb):
-        # Not implemented, 
-        cscsdb.core_sets = 0
+        cscsdb.core_sets = len(self)
+        for i, s in enumerate(self):
+            s._write_des(cscsdb, i)
+            
+    def __str__(self):
+        if(len(self) == 0):
+            return "Empty GlasGfmCoreSetList"
+        res = f"GlasGfmCoreSetList of {len(self)} core sets\n"
+        for i, s in enumerate(self):
+            res += f"   Core set: {i}\n"
+            res += textwrap.indent(str(s), "       ") + "\n"
+        return res
+    
+class GlasGfmCoreSet(object):
+    '''Core set for covariance'''
+    # Reference frames
+    ECF = 1
+    SENSOR_FRAME = 2
+    ORBITAL_FRAME = 3
+    TARGET_CENTERED_EARTH_FIXED = 4
+    ECI = 5
+    SENSOR_CENTERED_EARTH_FIXED = 6
+    def __init__(self, ref_frame_position = ECF,
+                 ref_frame_attitude = ECF,
+                 group = GlasGfmGroupList()):
+        self.ref_frame_position = ref_frame_position
+        self.ref_frame_attitude = ref_frame_attitude
+        self.sensor_error_parameter_group = group
+    
+    def _frame_id_to_name(self, i):
+        if(i == self.ECF):
+            return "ECF"
+        if(i == self.SENSOR_FRAME):
+            return "SENSOR_FRAME"
+        if(i == self.ORBITAL_FRAME):
+            return "ORBITAL_FRAME"
+        if(i == self.TARGET_CENTERED_EARTH_FIXED):
+            return "TARGET_CENTERED_EARTH_FIXED"
+        if(i == self.ECI):
+            return "ECI"
+        if(i == self.SENSOR_CENTERED_EARTH_FIXED):
+            return "SENSOR_CENTERED_EARTH_FIXED"
+        return f"Unknown, ID={i}"
+    
+    @classmethod
+    def _read_des(cls, cscsdb, i):
+        res = cls(cscsdb.ref_frame_position[i],
+                  cscsdb.ref_frame_attitude[i],
+                  GlasGfmGroupList._read_des(cscsdb, i))
+        return res
+
+    def _write_des(self, cscsdb, i):
+        cscsdb.ref_frame_position[i] = self.ref_frame_position
+        cscsdb.ref_frame_attitude[i] = self.ref_frame_attitude
+        self.sensor_error_parameter_group._write_des(cscsdb, i)
 
     def __str__(self):
-        return "No Core Sets"
+        res = "GlasGfmCoreSet:\n"
+        res += f"   Reference frame position: {self._frame_id_to_name(self.ref_frame_position)}\n"
+        res += f"   Reference frame attitude: {self._frame_id_to_name(self.ref_frame_attitude)}\n"
+        res +=  "   Independent Sensor Error Parameter Group:\n"
+        res += textwrap.indent(str(self.sensor_error_parameter_group), "      ")
+        return res
     
+class GlasGfmGroup(list):
+    '''A Independent Sensor Error Parameter Group'''
+    def __init__(self, corr_ref_t=Time.parse_time("2000-01-01T00:00:00Z")):
+        self.corr_ref_t = corr_ref_t
+                 
+    @classmethod
+    def _read_des(cls, cscsdb, i, j):
+        return GlasGfmGroup(corr_ref_t = cscsdb.corr_ref_geocal_time[i,j])
+    
+    def _write_des(self, cscsdb, i, j):
+        cscsdb.corr_ref_geocal_time[i,j] = self.corr_ref_t
+            
+    def __str__(self):
+        res = f"Date of last De-Correlation event: {str(self.corr_ref_t)}"
+        return res
     
 class GlasGfmSpdcfList(list):
     '''The list of GlasGfmSpdcf in a GlasGfmCovariance. Adds a few extra
@@ -411,7 +539,12 @@ def _glas_gfm_covariance_set(iseg, glas_gfm_cov):
 if(have_pynitf):    
     pynitf.NitfImageSegment.glas_gfm_covariance = property(_glas_gfm_covariance, _glas_gfm_covariance_set)
     
-__all__ = ["GlasGfmCovariance", "GlasGfmSpdcfList",
+__all__ = ["GlasGfmCovariance",
+           "GlasGfmGroupList",
+           "GlasGfmGroup",
+           "GlasGfmCoreSet",
+           "GlasGfmCoreSetList",
+           "GlasGfmSpdcfList",
            "GlasGfmSpdcf", "GlasGfmSpdcfCsm",
            "GlasGfmSpdcfPiecwiseLinear", "GlasGfmSpdcfDampedCosine",
            "GlasGfmSpdcfComposite"]

@@ -6,6 +6,10 @@ except ImportError:
 from test_support import *
 from .glas_gfm_covariance import *
 
+if False:    
+    pynitf.nitf_field.DEBUG = True
+    pynitf.nitf_des.DEBUG = True
+
 @require_pynitf
 def test_rip_glas_covariance(nitf_sample_rip):
     '''Test reading the covariance part of the NITF RIP sample'''
@@ -17,6 +21,29 @@ def test_rip_glas_covariance(nitf_sample_rip):
     print(d)
     print(GlasGfmCovariance.read_des(d))
 
+@require_pynitf
+def test_create_cov():
+    cov = GlasGfmCovariance()
+    cov.cov_version_date = "20211019"
+    cov.core_set.append(GlasGfmCoreSet(GlasGfmCoreSet.ORBITAL_FRAME,
+                                       GlasGfmCoreSet.SENSOR_FRAME))
+    glist = cov.core_set[0].sensor_error_parameter_group
+    glist.append(GlasGfmGroup(corr_ref_t =
+                              Time.parse_time("2021-10-19T12:00:00Z")))
+    # SPDCFs
+    cov.spdcf.append(GlasGfmSpdcfCsm(1.0,2.0,3.0,4.0, id_number=1))
+    cov.spdcf.append(GlasGfmSpdcfPiecwiseLinear([1.0, 0.5], [0, 10.0], id_number=2))
+    cov.spdcf.append(GlasGfmSpdcfDampedCosine(0.5, 10.0, 5, id_number=3))
+    cov.spdcf.append(GlasGfmSpdcfComposite(
+        [GlasGfmSpdcfCsm(1.0,2.0,3.0,4.0, weight=0.5),
+         GlasGfmSpdcfPiecwiseLinear([1.0, 0.5], [0, 10.0], weight=0.25),
+         GlasGfmSpdcfDampedCosine(0.5, 10.0, 5, weight=0.25)],
+        id_number=4))
+    print(cov)
+    d = cov.create_des()
+    cov2 = GlasGfmCovariance.read_des(d)
+    print(cov2)
+    print(d)
 
 @require_pynitf
 def test_spdcf_list():

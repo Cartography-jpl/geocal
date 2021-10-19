@@ -38,9 +38,61 @@ class GlasGfmNitfTimeWrapper:
         pynitf.NitfLiteral(("%016.9lf" % float(tm.replace("Z",
                                     "").replace(":",""))).encode('utf-8'))
 
+class GlasGfmNitfArrayWrapper:
+    '''We have a number of places where the is an 1d array over the last index,
+    for example adj_parm_id. As a convenience, have a wrapper that translates
+    this to and from an array.
+
+    On assignment, the size field gets updated.'''
+    def __init__(self, field, size_field, cscsdb):
+        self.cscsdb = cscsdb
+        self.field = field
+        self.size_field = size_field
+    def __getitem__(self, key):
+        sz = getattr(self.cscsdb, self.size_field)[key]
+        return [getattr(self.cscsdb, self.field)[(*key,i)] for i in range(sz)]
+    def __setitem__(self, key, val):
+        getattr(self.cscsdb, self.size_field)[key] = len(val)
+        for i,v in enumerate(val):
+            getattr(self.cscsdb, self.field)[(*key,i)] = v
+
+class GlasGfmNitfCovWrapper:
+    '''We have a number of places where the is an covariance over the last 
+    index, for example errcov_c1. The data is stored row major, upper
+    triangle only.
+
+    On assignment, we check against the size field but don't update it.
+    This is because the covariance goes against something already in the 
+    file, so we just need to be consistent with it.'''
+    def __init__(self, field, size_field, cscsdb):
+        self.cscsdb = cscsdb
+        self.field = field
+        self.size_field = size_field
+    def __getitem__(self, key):
+        sz = getattr(self.cscsdb, self.size_field)[key]
+        res = np.empty((sz,sz))
+        k = 0
+        for i in range(sz):
+            for j in range(i, sz):
+                res[i, j] = getattr(self.cscsdb, self.field)[(*key,k)]
+                res[j, i] = res[i, j]
+                k += 1
+        return res
+    def __setitem__(self, key, val):
+        sz = getattr(self.cscsdb, self.size_field)[key]
+        if(val.shape[0] != sz or val.shape[1] != sz):
+            raise RuntimeError(f"Matrix needs to be {sz} x {sz}")
+        k = 0
+        for i in range(sz):
+            for j in range(i, sz):
+                getattr(self.cscsdb, self.field)[(*key,k)] = val[i, j]
+                k += 1
+            
 if(have_pynitf):
     # Add functions to map to and from geocal Time
     pynitf.DesCSCSDB.corr_ref_geocal_time = property(partial(GlasGfmNitfTimeWrapper, "corr_ref"))
+    pynitf.DesCSCSDB.adj_parm_id_array = property(partial(GlasGfmNitfArrayWrapper, "adj_parm_id", "num_adj_parm"))
+    pynitf.DesCSCSDB.errcov_c1_array = property(partial(GlasGfmNitfCovWrapper, "errcov_c1", "num_adj_parm"))
 
 class GlasGfmCovariance(object):
     '''This is the GLAS/GFM Covariance object. We map this to and
@@ -98,6 +150,7 @@ class GlasGfmCovariance(object):
         res += textwrap.indent(str(self.direct_covariance), "   ") + "\n"
         return res
 
+# TODO Implement GlasGfmIO    
 class GlasGfmIO(object):
     '''Interior orientation for covariance
 
@@ -118,6 +171,7 @@ class GlasGfmIO(object):
     def __str__(self):
         return "No IO"
 
+# TODO Implement GlasGfmDirectCovariance
 class GlasGfmDirectCovariance(object):
     '''Direct covariance for covariance
 
@@ -138,6 +192,7 @@ class GlasGfmDirectCovariance(object):
     def __str__(self):
         return "No Direct Covariance"
     
+# Implement GlasGfmTS        
 class GlasGfmTS(object):
     '''Time sync for covariance
 
@@ -276,21 +331,79 @@ class GlasGfmCoreSet(object):
         res +=  "   Independent Sensor Error Parameter Group:\n"
         res += textwrap.indent(str(self.sensor_error_parameter_group), "      ")
         return res
-    
+
+# TODO Implement PF handling
+# TODO Implement PL handling    
 class GlasGfmGroup(list):
     '''A Independent Sensor Error Parameter Group'''
-    def __init__(self, corr_ref_t=Time.parse_time("2000-01-01T00:00:00Z")):
+    def __init__(self, corr_ref_t=Time.parse_time("2000-01-01T00:00:00Z"),
+                 adjustable_parameter=[],
+                 basic_sub_alloc = True,
+                 post_sub_alloc = False,
+                 errcov_c1 = None,
+                 sr_spdcf_id = None):
         self.corr_ref_t = corr_ref_t
+        self.adjustable_parameter = adjustable_parameter
+        self.basic_sub_alloc = bool(basic_sub_alloc)
+        self.post_sub_alloc = bool(post_sub_alloc)
+        self.errcov_c1 = errcov_c1
+        self.sr_spdcf_id = sr_spdcf_id
                  
     @classmethod
     def _read_des(cls, cscsdb, i, j):
-        return GlasGfmGroup(corr_ref_t = cscsdb.corr_ref_geocal_time[i,j])
+# Warn about pieces we don't handle. Note that we don't need special handling
+# for basic_sub_alloc being False, both 0 and None map to False
+        if(cscsdb.basic_pf_flag[i,j]):
+            warnings.warn("Skipping PF section of group, we don't support this yet")
+        if(cscsdb.basic_pl_flag[i,j]):
+            warnings.warn("Skipping PL section of group, we don't support this yet")
+        if(cscsdb.post_pf_flag[i,j]):
+            warnings.warn("Skipping PF section of group, we don't support this yet")
+        if(cscsdb.post_pl_flag[i,j]):
+            warnings.warn("Skipping PL section of group, we don't support this yet")
+        res = GlasGfmGroup(corr_ref_t = cscsdb.corr_ref_geocal_time[i,j],
+                           adjustable_parameter = cscsdb.adj_parm_id_array[i,j],
+                           basic_sub_alloc = cscsdb.basic_sub_alloc[i,j],
+                           post_sub_alloc = cscsdb.post_sub_alloc[i,j],
+                           sr_spdcf_id = cscsdb.basic_sr_spdcf[i,j]
+                           )
+        if(cscsdb.basic_sub_alloc[i,j]):
+            res.errcov_c1 = cscsdb.errcov_c1_array[i,j]
+        return res
     
     def _write_des(self, cscsdb, i, j):
         cscsdb.corr_ref_geocal_time[i,j] = self.corr_ref_t
+        cscsdb.adj_parm_id_array[i,j] = self.adjustable_parameter
+        cscsdb.basic_sub_alloc[i,j] = int(self.basic_sub_alloc)
+        if(self.basic_sub_alloc):
+            # Right now PF and PL aren't handled, so always turn off
+            cscsdb.basic_pf_flag[i,j] = 0
+            cscsdb.basic_pl_flag[i,j] = 0
+            cscsdb.errcov_c1_array[i,j] = self.errcov_c1
+            if(self.sr_spdcf_id):
+                cscsdb.basic_sr_flag[i,j] = 1
+                cscsdb.basic_sr_spdcf[i, j] = self.sr_spdcf_id
+            else:
+                cscsdb.basic_sr_flag[i,j] = 0
+        cscsdb.post_sub_alloc[i,j] = int(self.post_sub_alloc)
+        if(self.post_sub_alloc):
+            # Right now PF and PL aren't handled, so always turn off
+            cscsdb.post_pf_flag[i,j] = 0
+            cscsdb.post_pl_flag[i,j] = 0
             
     def __str__(self):
-        res = f"Date of last De-Correlation event: {str(self.corr_ref_t)}"
+        res = f"Date of last De-Correlation event: {str(self.corr_ref_t)}\n"
+        res += "Adjustable parameter id:\n"
+        res += textwrap.indent(str(self.adjustable_parameter), "   ") + "\n"
+        if(self.basic_sub_alloc):
+            res += "Individual Error Covariance:\n"
+            res += textwrap.indent(str(self.errcov_c1), "   ") + "\n"
+            res += "No Platform type SPDCF\n"
+            res += "No Payload type SPDCF\n"
+            if(self.sr_spdcf_id):
+                res += f"Sensor type SPDCF id: {self.sr_spdcf_id}\n"
+            else:
+                res += "No Sensor type SPDCF\n"
         return res
     
 class GlasGfmSpdcfList(list):

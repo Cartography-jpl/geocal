@@ -29,11 +29,21 @@ def test_create_cov():
                                        GlasGfmCoreSet.SENSOR_FRAME))
     glist = cov.core_set[0].sensor_error_parameter_group
     cov_m = np.array([[1,0,0],[0,2,0],[0,0,3]])
+    post_cov_m = np.array([[5,0,0],[0,6,0],[0,0,7]])
     glist.append(GlasGfmGroup(corr_ref_t =
                               Time.parse_time("2021-10-19T12:00:00Z"),
                               adjustable_parameter=[1,2,3],
                               errcov_c1 = cov_m,
-                              sr_spdcf_id = 1))
+                              sr_spdcf_id = 1,
+                              post_sub_alloc = True,
+                              post_start_t =
+                              Time.parse_time("2021-10-19T12:01:00Z"),
+                              post_delta = 10.0,
+                              num_post = 3,
+                              post_interp = GlasGfmGroup.POST_INTERP_LINEAR,
+                              errcov_c2 = post_cov_m,
+                              post_sr_spdcf_id = 2,
+                              ))
     # SPDCFs
     cov.spdcf.append(GlasGfmSpdcfCsm(1.0,2.0,3.0,4.0, id_number=1))
     cov.spdcf.append(GlasGfmSpdcfPiecwiseLinear([1.0, 0.5], [0, 10.0], id_number=2))

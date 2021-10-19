@@ -38,6 +38,30 @@ class GlasGfmNitfTimeWrapper:
         pynitf.NitfLiteral(("%016.9lf" % float(tm.replace("Z",
                                     "").replace(":",""))).encode('utf-8'))
 
+class GlasGfmNitfTime2Wrapper:
+    '''For no obvious reason, there are other times in the file that use a 
+    date and time in seconds from midnight.'''
+    def __init__(self, field_base, cscsdb):
+        self.cscsdb = cscsdb
+        self.field_base = field_base
+    def __getitem__(self, key):
+        dt = self.cscsdb.get_raw_bytes(self.field_base +
+                                       "_date", key).decode("utf-8")
+        tm = self.cscsdb.get_raw_bytes(self.field_base + "_time",
+                                       key).decode("utf-8")
+        return Time.parse_time(
+            f"{dt[0:4]}-{dt[4:6]}-{dt[6:8]}T00:00:00Z") + float(tm)
+    def __setitem__(self, key, val):
+        # Split between date and time
+        dt, tm = str(val).split("T")
+        # Remove "-" in date, giving a string like 20210203, and assign
+        getattr(self.cscsdb,
+                self.field_base + "_date")[key] = dt.replace("-", "")
+        tmidnight = Time.parse_time(f"{dt}T00:00:00Z")
+        # Time in seconds from midnight
+        getattr(self.cscsdb, self.field_base + "_time")[key] = \
+        pynitf.NitfLiteral(("%015.9lf" % float(val - tmidnight)).encode('utf-8'))
+        
 class GlasGfmNitfArrayWrapper:
     '''We have a number of places where the is an 1d array over the last index,
     for example adj_parm_id. As a convenience, have a wrapper that translates
@@ -93,6 +117,9 @@ if(have_pynitf):
     pynitf.DesCSCSDB.corr_ref_geocal_time = property(partial(GlasGfmNitfTimeWrapper, "corr_ref"))
     pynitf.DesCSCSDB.adj_parm_id_array = property(partial(GlasGfmNitfArrayWrapper, "adj_parm_id", "num_adj_parm"))
     pynitf.DesCSCSDB.errcov_c1_array = property(partial(GlasGfmNitfCovWrapper, "errcov_c1", "num_adj_parm"))
+    pynitf.DesCSCSDB.post_start_geocal_time = property(partial(GlasGfmNitfTime2Wrapper, "post_start"))
+    pynitf.DesCSCSDB.errcov_c2_array = property(partial(GlasGfmNitfCovWrapper, "errcov_c2", "num_adj_parm"))
+    pynitf.DesCSCSDB.errcov_c2_1_array = property(partial(GlasGfmNitfCovWrapper, "errcov_c2_1", "num_adj_parm"))
 
 class GlasGfmCovariance(object):
     '''This is the GLAS/GFM Covariance object. We map this to and
@@ -334,20 +361,39 @@ class GlasGfmCoreSet(object):
 
 # TODO Implement PF handling
 # TODO Implement PL handling    
-class GlasGfmGroup(list):
+class GlasGfmGroup(object):
     '''A Independent Sensor Error Parameter Group'''
+    POST_INTERP_NEAREST_NEIGHBOR = 0
+    POST_INTERP_LINEAR = 1
     def __init__(self, corr_ref_t=Time.parse_time("2000-01-01T00:00:00Z"),
                  adjustable_parameter=[],
                  basic_sub_alloc = True,
-                 post_sub_alloc = False,
                  errcov_c1 = None,
-                 sr_spdcf_id = None):
+                 sr_spdcf_id = None,
+                 post_sub_alloc = False,
+                 post_start_t = Time.parse_time("2000-01-01T00:00:00Z"),
+                 num_post = 1,
+                 post_delta = None,
+                 errcov_c2 = None,
+                 post_interp = POST_INTERP_NEAREST_NEIGHBOR,
+                 post_sr_spdcf_id = None,
+                 post_corr_only = True,):
+        '''Note errcov_c2 for the posts can either be a 
+        num_adj_parm x num_adj_parm or num_post x num_adj_parm x num_adj_parm.
+        This changes the common_posts_cov flag'''
         self.corr_ref_t = corr_ref_t
         self.adjustable_parameter = adjustable_parameter
         self.basic_sub_alloc = bool(basic_sub_alloc)
         self.post_sub_alloc = bool(post_sub_alloc)
         self.errcov_c1 = errcov_c1
+        self.num_post = num_post
+        self.errcov_c2 = errcov_c2
         self.sr_spdcf_id = sr_spdcf_id
+        self.post_start_t = post_start_t
+        self.post_delta = post_delta
+        self.post_interp = post_interp
+        self.post_sr_spdcf_id = post_sr_spdcf_id
+        self.post_corr_only = bool(post_corr_only)
                  
     @classmethod
     def _read_des(cls, cscsdb, i, j):
@@ -364,11 +410,24 @@ class GlasGfmGroup(list):
         res = GlasGfmGroup(corr_ref_t = cscsdb.corr_ref_geocal_time[i,j],
                            adjustable_parameter = cscsdb.adj_parm_id_array[i,j],
                            basic_sub_alloc = cscsdb.basic_sub_alloc[i,j],
+                           sr_spdcf_id = cscsdb.basic_sr_spdcf[i,j],
                            post_sub_alloc = cscsdb.post_sub_alloc[i,j],
-                           sr_spdcf_id = cscsdb.basic_sr_spdcf[i,j]
+                           post_delta = cscsdb.post_dt[i,j],
+                           num_post = cscsdb.num_posts[i,j],
+                           post_interp = cscsdb.post_interp[i,j],
+                           post_sr_spdcf_id = cscsdb.post_sr_spdcf[i,j],
+                           post_corr_only = cscsdb.post_corr[i,j]
                            )
         if(cscsdb.basic_sub_alloc[i,j]):
             res.errcov_c1 = cscsdb.errcov_c1_array[i,j]
+        if(cscsdb.post_sub_alloc[i,j]):
+            res.post_start_t = cscsdb.post_start_geocal_time[i,j]
+            if(cscsdb.common_posts_cov[i,j] == 1):
+                res.errcov_c2 = cscsdb.errcov_c2_array[i,j]
+            else:
+                res.errcov_c2 = np.empty((res.num_post, cscsdb.num_adj_parm[i,j], cscsdb.num_adj_parm[i,j]))
+                for k in range(res.num_post):
+                    res.errcov_c2[k, :, :] = cscsdb.errcov_c2_1_array[i,j,k]
         return res
     
     def _write_des(self, cscsdb, i, j):
@@ -390,6 +449,27 @@ class GlasGfmGroup(list):
             # Right now PF and PL aren't handled, so always turn off
             cscsdb.post_pf_flag[i,j] = 0
             cscsdb.post_pl_flag[i,j] = 0
+            cscsdb.post_start_geocal_time[i,j] = self.post_start_t
+            cscsdb.post_dt[i,j] = self.post_delta
+            cscsdb.num_posts[i,j] = self.num_post
+            cscsdb.post_interp[i,j] = self.post_interp
+            if(self.post_sr_spdcf_id):
+                cscsdb.post_sr_flag[i,j] = 1
+                cscsdb.post_sr_spdcf[i, j] = self.post_sr_spdcf_id
+                cscsdb.post_corr[i,j] = int(self.post_corr_only)
+            else:
+                cscsdb.post_sr_flag[i,j] = 0
+            # self.errcov_c2 is either 2d or 3d, depending on if we
+            # have a common post covariance matrix
+            if(len(self.errcov_c2.shape) == 2):
+                cscsdb.common_posts_cov[i,j] = 1
+                cscsdb.errcov_c2_array[i,j] = self.errcov_c2
+            else:
+                if(self.errcov_c2.shape != 3 or
+                   self.errcov_c2.shape[0] != self.num_post):
+                    raise RuntimeError("errcov_c2 must have first dim of num_post")
+                for k in range(self.num_post):
+                    cscsdb.errcov_c2_array[i,j,k] = self.errcov_c2[k,:,:]
             
     def __str__(self):
         res = f"Date of last De-Correlation event: {str(self.corr_ref_t)}\n"
@@ -404,6 +484,26 @@ class GlasGfmGroup(list):
                 res += f"Sensor type SPDCF id: {self.sr_spdcf_id}\n"
             else:
                 res += "No Sensor type SPDCF\n"
+        if(self.post_sub_alloc):
+            res += f"First post time: {self.post_start_t}\n"
+            res += f"Time between posts: {self.post_delta}\n"
+            res += f"Number of posts: {self.num_post}\n"
+            res += "Post Error Covariance:\n"
+            res += textwrap.indent(str(self.errcov_c2), "   ") + "\n"
+            res += "No Post Platform type SPDCF\n"
+            res += "No Post Payload type SPDCF\n"
+            if(self.post_sr_spdcf_id):
+                res += f"Post Sensor type SPDCF id: {self.post_sr_spdcf_id}\n"
+            else:
+                res += "No Post Sensor type SPDCF\n"
+            if(self.post_interp == self.POST_INTERP_NEAREST_NEIGHBOR):
+                res += "Post interpolation: Nearest Neighbor\n"
+            elif(self.post_interp == self.POST_INTERP_LINEAR):
+                res += "Post interpolation: Linear\n"
+            else:
+                res += f"Post interpolation: Unknown type {self.post_interp}\n"
+            res += f"Intra-Image Correlation Only Flag: {self.post_corr_only}\n"
+
         return res
     
 class GlasGfmSpdcfList(list):

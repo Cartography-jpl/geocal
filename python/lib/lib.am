@@ -1,5 +1,6 @@
 geocalpkgpython_PYTHON+= @srcpythonlib@/job_handle.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/glas_gfm.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/glas_gfm_covariance.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/mars_igc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/mars_rsm.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/geocal_nitf_misc.py
@@ -71,6 +72,7 @@ EXTRA_DIST+=@srcpythonlib@/dem_generate_test.py
 EXTRA_DIST+=@srcpythonlib@/docopt_simple_test.py
 EXTRA_DIST+=@srcpythonlib@/feature_detector_extension_test.py
 EXTRA_DIST+=@srcpythonlib@/glas_gfm_test.py
+EXTRA_DIST+=@srcpythonlib@/glas_gfm_covariance_test.py
 EXTRA_DIST+=@srcpythonlib@/mars_igc_test.py
 EXTRA_DIST+=@srcpythonlib@/mars_rsm_test.py
 EXTRA_DIST+=@srcpythonlib@/geocal_nitf_misc.py

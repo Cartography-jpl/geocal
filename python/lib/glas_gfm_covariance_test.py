@@ -44,6 +44,17 @@ def test_create_cov():
                               errcov_c2 = post_cov_m,
                               post_sr_spdcf_id = 2,
                               ))
+    unmodeled_cov = np.empty((2,3,2,2))
+    unmodeled_cov[0,0,:,:] = np.array([[1,2],[2,3]])
+    unmodeled_cov[0,1,:,:] = np.array([[1,2],[2,3]])
+    unmodeled_cov[0,2,:,:] = np.array([[1,2],[2,3]])
+    unmodeled_cov[1,0,:,:] = np.array([[1,2],[2,3]])
+    unmodeled_cov[1,1,:,:] = np.array([[1,2],[2,3]])
+    unmodeled_cov[1,2,:,:] = np.array([[1,2],[2,3]])
+    cov.unmodeled_error.cov = unmodeled_cov
+    cov.unmodeled_error.line_spdcf_id = 3
+    cov.unmodeled_error.sample_spdcf_id = 4
+    
     # SPDCFs
     cov.spdcf.append(GlasGfmSpdcfCsm(1.0,2.0,3.0,4.0, id_number=1))
     cov.spdcf.append(GlasGfmSpdcfPiecwiseLinear([1.0, 0.5], [0, 10.0], id_number=2))

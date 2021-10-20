@@ -131,10 +131,10 @@ class GlasGfmCovariance(object):
     def __init__(self):
         self.cov_version_date = "20000101"
         self.core_set = GlasGfmCoreSetList()
-        self.spdcf = GlasGfmSpdcfList()
         self.io = GlasGfmIO()
         self.ts = GlasGfmTS()
         self.unmodeled_error = GlasGfmUnmodeledError()
+        self.spdcf = GlasGfmSpdcfList()
         self.direct_covariance = GlasGfmDirectCovariance()
         self.id = None
 
@@ -158,6 +158,7 @@ class GlasGfmCovariance(object):
         self.core_set.write_des(cscsdb)
         self.io.write_des(cscsdb)
         self.ts.write_des(cscsdb)
+        self.unmodeled_error.write_des(cscsdb)
         self.spdcf.write_des(cscsdb)
         self.direct_covariance.write_des(cscsdb)
 
@@ -173,6 +174,7 @@ class GlasGfmCovariance(object):
         res += textwrap.indent(str(self.core_set), "   ") + "\n"
         res += textwrap.indent(str(self.io), "   ") + "\n"
         res += textwrap.indent(str(self.ts), "   ") + "\n"
+        res += textwrap.indent(str(self.unmodeled_error), "   ") + "\n"
         res += textwrap.indent(str(self.spdcf), "   ") + "\n"
         res += textwrap.indent(str(self.direct_covariance), "   ") + "\n"
         return res
@@ -241,24 +243,52 @@ class GlasGfmTS(object):
         return "No TS"
 
 class GlasGfmUnmodeledError(object):
-    '''Unmodeled error for covariance
-
-    Note we haven't actually implemented this yet.'''
-    def __init__(self):
-        pass
+    '''Unmodeled error for covariance'''
+    def __init__(self, cov = None, line_spdcf_id = None,
+                 sample_spdcf_id = None):
+        '''The matrix is number_line x number_sample x 2 x 2.'''
+        self.cov = cov
+        self.line_spdcf_id = line_spdcf_id
+        self.sample_spdcf_id = sample_spdcf_id
 
     @classmethod
     def read_des(cls, cscsdb):
-        if(cscsdb.ue_flag != 0):
-            warnings.warn("Skipping UE section of covariance, we don't support this yet")
-        return cls()
+        res = cls(line_spdcf_id = cscsdb.line_spdcf,
+                  sample_spdcf_id = cscsdb.sample_spdcf)
+        if(cscsdb.ue_flag == 1):
+            res.cov = np.empty((cscsdb.line_dimension, cscsdb.sample_dimension,
+                                2, 2))
+            for i in range(res.cov.shape[0]):
+                for j in range(res.cov.shape[1]):
+                    res.cov[i,j,0,0] = cscsdb.urr[i,j]
+                    res.cov[i,j,0,1] = cscsdb.urc[i,j]
+                    res.cov[i,j,1,1] = cscsdb.ucc[i,j]
+                    res.cov[i,j,1,0] = res.cov[i,j,0,1]
+        return res
 
     def write_des(self, cscsdb):
-        # Not implemented, 
-        cscsdb.ue_flag = 0
+        if(self.cov is None):
+            cscsdb.ue_flag = 0
+            return
+        cscsdb.ue_flag = 1
+        cscsdb.line_spdcf = self.line_spdcf_id
+        cscsdb.sample_spdcf = self.sample_spdcf_id
+        cscsdb.line_dimension = self.cov.shape[0]
+        cscsdb.sample_dimension = self.cov.shape[1]
+        for i in range(self.cov.shape[0]):
+            for j in range(self.cov.shape[1]):
+                cscsdb.urr[i,j] = self.cov[i,j,0,0]
+                cscsdb.urc[i,j] = self.cov[i,j,0,1]
+                cscsdb.ucc[i,j] = self.cov[i,j,1,1]
 
     def __str__(self):
-        return "No Unmodeled Error"
+        if(self.cov is None):
+            return "No Unmodeled Error\n"
+        res = f"Unmodeled Error covariance matrix (shape {self.cov.shape}):\n"
+        res += textwrap.indent(str(self.cov), "   ") + "\n"
+        res += f"Line SPDCF ID: {self.line_spdcf_id}\n"
+        res += f"Sample SPDCF ID: {self.sample_spdcf_id}\n"
+        return res
 
 class GlasGfmGroupList(list):
     '''The list of GlasGfmGroup. Adds a few extra functions'''

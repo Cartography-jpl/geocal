@@ -30,6 +30,14 @@ public:
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
   std::string generate_rsm_tre(const std::string& Report = "",
 			       const std::string& Rsm_config = "") const;
+  void ground_coordinate_with_cov(const ImageCoordinate& Ic,
+				  const blitz::Array<double, 2>& Ic_cov,
+				  double H,
+				  double H_var,
+				  boost::shared_ptr<GroundCoordinate>& OUTPUT,
+				  blitz::Array<double, 2>& OUTPUT) const;
+  void ce90_le90(const ImageCoordinate& Ic, double H,
+		 double& OUTPUT, double& OUTPUT) const;
   %python_attribute(family, std::string);
   %python_attribute(version, std::string);
   %python_attribute(model_name, std::string);

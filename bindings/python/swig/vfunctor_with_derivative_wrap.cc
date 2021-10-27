@@ -6621,7 +6621,7 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_df(PyObject *SWIGUNUSEDPARM(se
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -6659,13 +6659,17 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_f_and_df(PyObject *SWIGUNUSEDP
   boost::shared_ptr< GeoCal::VFunctorWithDerivative const > *smartarg1 = 0 ;
   blitz::Array< double,1 > a2 ;
   PythonObject numpy2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  void *argp4 = 0 ;
-  int res4 = 0 ;
-  PyObject *swig_obj[4] ;
+  blitz::Array< double,1 > temp3 ;
+  blitz::Array< double,2 > temp4 ;
+  PyObject *swig_obj[2] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"VFunctorWithDerivative_f_and_df",4,4,swig_obj)) SWIG_fail;
+  {
+    arg3 = &temp3;
+  }
+  {
+    arg4 = &temp4;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"VFunctorWithDerivative_f_and_df",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VFunctorWithDerivative_t, 0 |  0 , &newmem);
@@ -6698,22 +6702,6 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_f_and_df(PyObject *SWIGUNUSEDP
       arg2 = &a2;
     }
   }
-  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_blitz__ArrayT_double_1_t,  0 );
-  if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VFunctorWithDerivative_f_and_df" "', argument " "3"" of type '" "blitz::Array< double,1 > &""'"); 
-  }
-  if (!argp3) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VFunctorWithDerivative_f_and_df" "', argument " "3"" of type '" "blitz::Array< double,1 > &""'"); 
-  }
-  arg3 = reinterpret_cast< blitz::Array< double,1 > * >(argp3);
-  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_blitz__ArrayT_double_2_t,  0 );
-  if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "VFunctorWithDerivative_f_and_df" "', argument " "4"" of type '" "blitz::Array< double,2 > &""'"); 
-  }
-  if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VFunctorWithDerivative_f_and_df" "', argument " "4"" of type '" "blitz::Array< double,2 > &""'"); 
-  }
-  arg4 = reinterpret_cast< blitz::Array< double,2 > * >(argp4);
   {
     try {
       ((GeoCal::VFunctorWithDerivative const *)arg1)->f_and_df((blitz::Array< double,1 > const &)*arg2,*arg3,*arg4);
@@ -6724,6 +6712,52 @@ SWIGINTERN PyObject *_wrap_VFunctorWithDerivative_f_and_df(PyObject *SWIGUNUSEDP
     }
   }
   resultobj = SWIG_Py_Void();
+  {
+    PyObject *res;
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = arg3->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg3->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    res = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, arg3->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*arg3);
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  {
+    PyObject *res;
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg4->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg4->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg4->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg4);
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
   return resultobj;
 fail:
   return NULL;

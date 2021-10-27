@@ -81,6 +81,7 @@ class GlasGfm(object):
             t.dt_size = 1
             t.number_frames = 1
             t.number_dt = 1
+            t.rolling_shutter_flag = 0
             t.dt[0] = 0
         else:
             raise RuntimeError("Unrecognized ImageGroundConnection type")

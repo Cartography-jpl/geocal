@@ -337,6 +337,33 @@ class IgcMsp(geocal_swig.image_ground_connection.ImageGroundConnectionCopy):
         return _igc_msp.IgcMsp_generate_rsm_tre(self, *args)
 
 
+    def ground_coordinate_with_cov(self, Ic, Ic_cov, H, H_var):
+        """
+
+        void IgcMsp::ground_coordinate_with_cov(const ImageCoordinate &Ic, const blitz::Array< double, 2 > &Ic_cov,
+        double H, double H_var, boost::shared_ptr< GroundCoordinate > &Gp,
+        blitz::Array< double, 2 > &Gp_cov) const
+        Ground coordinate, with a covariance.
+
+        This include the image coordinate covariance (a 2x2 matrix),
+        adjustable sensor parameter error covariance, and
+        unmodeled_covariance. For just the sensor covariance, set the Ic_cov
+        and H_var to zero (is this correct?) 
+        """
+        return _igc_msp.IgcMsp_ground_coordinate_with_cov(self, Ic, Ic_cov, H, H_var)
+
+
+    def ce90_le90(self, Ic, H):
+        """
+
+        void IgcMsp::ce90_le90(const ImageCoordinate &Ic, double H, double &Ce90, double &Le90)
+        const
+        Get the CE90 and LE90 from the adjustable sensor parameter error
+        covariance. 
+        """
+        return _igc_msp.IgcMsp_ce90_le90(self, Ic, H)
+
+
     def _v_family(self):
         """
 
@@ -541,6 +568,8 @@ IgcMsp._v_covariance = new_instancemethod(_igc_msp.IgcMsp__v_covariance, None, I
 IgcMsp.joint_covariance = new_instancemethod(_igc_msp.IgcMsp_joint_covariance, None, IgcMsp)
 IgcMsp.sensor_velocity = new_instancemethod(_igc_msp.IgcMsp_sensor_velocity, None, IgcMsp)
 IgcMsp.generate_rsm_tre = new_instancemethod(_igc_msp.IgcMsp_generate_rsm_tre, None, IgcMsp)
+IgcMsp.ground_coordinate_with_cov = new_instancemethod(_igc_msp.IgcMsp_ground_coordinate_with_cov, None, IgcMsp)
+IgcMsp.ce90_le90 = new_instancemethod(_igc_msp.IgcMsp_ce90_le90, None, IgcMsp)
 IgcMsp._v_family = new_instancemethod(_igc_msp.IgcMsp__v_family, None, IgcMsp)
 IgcMsp._v_version = new_instancemethod(_igc_msp.IgcMsp__v_version, None, IgcMsp)
 IgcMsp._v_model_name = new_instancemethod(_igc_msp.IgcMsp__v_model_name, None, IgcMsp)

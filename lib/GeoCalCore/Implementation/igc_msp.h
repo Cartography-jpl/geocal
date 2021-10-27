@@ -75,6 +75,14 @@ public:
   blitz::Array<double, 1> sensor_velocity(const ImageCoordinate& Ic) const;
   std::string generate_rsm_tre(const std::string& Report = "",
 			       const std::string& Rsm_config = "") const;
+  void ground_coordinate_with_cov(const ImageCoordinate& Ic,
+				  const blitz::Array<double, 2>& Ic_cov,
+				  double H,
+				  double H_var,
+				  boost::shared_ptr<GroundCoordinate>& Gp,
+				  blitz::Array<double, 2>& Gp_cov) const;
+  void ce90_le90(const ImageCoordinate& Ic, double H,
+		 double& Ce90, double& Le90) const;
 private:
   static void* lib_ptr;
   IgcMsp() {}

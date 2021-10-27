@@ -3653,26 +3653,27 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[198]
 #define SWIGTYPE_p_char_type swig_types[199]
 #define SWIGTYPE_p_difference_type swig_types[200]
-#define SWIGTYPE_p_fmtflags swig_types[201]
-#define SWIGTYPE_p_int_type swig_types[202]
-#define SWIGTYPE_p_iostate swig_types[203]
-#define SWIGTYPE_p_off_type swig_types[204]
-#define SWIGTYPE_p_openmode swig_types[205]
-#define SWIGTYPE_p_pos_type swig_types[206]
-#define SWIGTYPE_p_seekdir swig_types[207]
-#define SWIGTYPE_p_size_t swig_types[208]
-#define SWIGTYPE_p_size_type swig_types[209]
-#define SWIGTYPE_p_state_type swig_types[210]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[211]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[212]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[213]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[214]
-#define SWIGTYPE_p_std__invalid_argument swig_types[215]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[216]
-#define SWIGTYPE_p_traits_type swig_types[217]
-#define SWIGTYPE_p_value_type swig_types[218]
-static swig_type_info *swig_types[220];
-static swig_module_info swig_module = {swig_types, 219, 0, 0, 0, 0};
+#define SWIGTYPE_p_double swig_types[201]
+#define SWIGTYPE_p_fmtflags swig_types[202]
+#define SWIGTYPE_p_int_type swig_types[203]
+#define SWIGTYPE_p_iostate swig_types[204]
+#define SWIGTYPE_p_off_type swig_types[205]
+#define SWIGTYPE_p_openmode swig_types[206]
+#define SWIGTYPE_p_pos_type swig_types[207]
+#define SWIGTYPE_p_seekdir swig_types[208]
+#define SWIGTYPE_p_size_t swig_types[209]
+#define SWIGTYPE_p_size_type swig_types[210]
+#define SWIGTYPE_p_state_type swig_types[211]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[212]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[213]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[214]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[215]
+#define SWIGTYPE_p_std__invalid_argument swig_types[216]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[217]
+#define SWIGTYPE_p_traits_type swig_types[218]
+#define SWIGTYPE_p_value_type swig_types[219]
+static swig_type_info *swig_types[221];
+static swig_module_info swig_module = {swig_types, 220, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6268,6 +6269,9 @@ namespace swig {
       }
     
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -8000,6 +8004,247 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcMsp_ground_coordinate_with_cov(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  double arg4 ;
+  double arg5 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > *arg6 = 0 ;
+  blitz::Array< double,2 > *arg7 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  blitz::Array< double,2 > a3 ;
+  PythonObject numpy3 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > temp6 ;
+  blitz::Array< double,2 > temp7 ;
+  PyObject *swig_obj[5] ;
+  
+  {
+    arg6 = &temp6;
+  }
+  {
+    arg7 = &temp7;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"IgcMsp_ground_coordinate_with_cov",5,5,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_ground_coordinate_with_cov" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "IgcMsp_ground_coordinate_with_cov" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_ground_coordinate_with_cov" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[2], (void**)(&arg3), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy3.obj = to_numpy<double >(swig_obj[2]);
+      if(!numpy3.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'IgcMsp_ground_coordinate_with_cov', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy3.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'IgcMsp_ground_coordinate_with_cov', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a3.reference(to_blitz_array<double, 2>(numpy3));
+      arg3 = &a3;
+    }
+  }
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "IgcMsp_ground_coordinate_with_cov" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "IgcMsp_ground_coordinate_with_cov" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      ((GeoCal::IgcMsp const *)arg1)->ground_coordinate_with_cov((GeoCal::ImageCoordinate const &)*arg2,(blitz::Array< double,2 > const &)*arg3,arg4,arg5,*arg6,*arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<  GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::GroundCoordinate >(*arg6);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN));
+  }
+  {
+    PyObject *res;
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg7->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg7->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg7->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg7);
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+    resultobj = SWIG_Python_AppendOutput(resultobj, res);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_IgcMsp_ce90_le90(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
+  GeoCal::ImageCoordinate *arg2 = 0 ;
+  double arg3 ;
+  double *arg4 = 0 ;
+  double *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcMsp const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > tempshared2 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if (!SWIG_Python_UnpackTuple(args,"IgcMsp_ce90_le90",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcMsp_ce90_le90" "', argument " "1"" of type '" "GeoCal::IgcMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ImageCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ImageCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "IgcMsp_ce90_le90" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "IgcMsp_ce90_le90" "', argument " "2"" of type '" "GeoCal::ImageCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ImageCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ImageCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "IgcMsp_ce90_le90" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      ((GeoCal::IgcMsp const *)arg1)->ce90_le90((GeoCal::ImageCoordinate const &)*arg2,arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcMsp__v_family(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcMsp *arg1 = (GeoCal::IgcMsp *) 0 ;
@@ -8753,6 +8998,25 @@ static PyMethodDef SwigMethods[] = {
 		"Note the TRE string can be converted to an actual RSM. We add this\n"
 		"functionality in the python interface, it isn't all that easy to do in\n"
 		"C++ and we really only need this at the python level anyways. \n"
+		""},
+	 { (char *)"IgcMsp_ground_coordinate_with_cov", _wrap_IgcMsp_ground_coordinate_with_cov, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void IgcMsp::ground_coordinate_with_cov(const ImageCoordinate &Ic, const blitz::Array< double, 2 > &Ic_cov,\n"
+		"double H, double H_var, boost::shared_ptr< GroundCoordinate > &Gp,\n"
+		"blitz::Array< double, 2 > &Gp_cov) const\n"
+		"Ground coordinate, with a covariance.\n"
+		"\n"
+		"This include the image coordinate covariance (a 2x2 matrix),\n"
+		"adjustable sensor parameter error covariance, and\n"
+		"unmodeled_covariance. For just the sensor covariance, set the Ic_cov\n"
+		"and H_var to zero (is this correct?) \n"
+		""},
+	 { (char *)"IgcMsp_ce90_le90", _wrap_IgcMsp_ce90_le90, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void IgcMsp::ce90_le90(const ImageCoordinate &Ic, double H, double &Ce90, double &Le90)\n"
+		"const\n"
+		"Get the CE90 and LE90 from the adjustable sensor parameter error\n"
+		"covariance. \n"
 		""},
 	 { (char *)"IgcMsp__v_family", (PyCFunction)_wrap_IgcMsp__v_family, METH_O, (char *)"\n"
 		"\n"
@@ -9697,6 +9961,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t = {"_
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -9918,6 +10183,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
+  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -10139,6 +10405,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -10360,6 +10627,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
+  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,

@@ -63,6 +63,14 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic, 
 				  double H) const;
+  void ground_coordinate_with_cov(const ImageCoordinate& Ic,
+				  const blitz::Array<double, 2>& Ic_cov,
+				  double H,
+				  double H_var,
+				  boost::shared_ptr<GroundCoordinate>& Gp,
+				  blitz::Array<double, 2>& Gp_cov) const;
+  void ce90_le90(const ImageCoordinate& Ic, double H,
+		 double& Ce90, double& Le90) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   virtual void cf_look_vector(const ImageCoordinate& Ic, 
@@ -279,6 +287,50 @@ boost::shared_ptr<GroundCoordinate> IgcMspImp::ground_coordinate_dem
   if(!sd)
     throw Exception("Right now, IgcMsp only works with constant DEMs of SimpleDem");
   return ground_coordinate_approx_height(Ic, sd->h());
+}
+
+void IgcMspImp::ground_coordinate_with_cov
+(const ImageCoordinate& Ic,
+ const blitz::Array<double, 2>& Ic_cov,
+ double H,
+ double H_var,
+ boost::shared_ptr<GroundCoordinate>& Gp,
+ blitz::Array<double, 2>& Gp_cov) const
+{
+  csm::EcefCoordCovar gp =
+    model->imageToGround(csm::ImageCoordCovar(Ic.line, Ic.sample, Ic_cov(0,0),
+					      Ic_cov(0,1), Ic_cov(1,1)),
+			 H, H_var);
+  Gp = boost::make_shared<Ecr>(gp.x, gp.y, gp.z);
+  Gp_cov.resize(3,3);
+  Gp_cov(0,0) = gp.covar2d(0,0);
+  Gp_cov(0,1) = gp.covar2d(0,1);
+  Gp_cov(0,2) = gp.covar2d(0,2);
+  Gp_cov(1,0) = gp.covar2d(0,1);
+  Gp_cov(1,1) = gp.covar2d(1,1);
+  Gp_cov(1,2) = gp.covar2d(1,2);
+  Gp_cov(2,0) = gp.covar2d(0,2);
+  Gp_cov(2,1) = gp.covar2d(1,2);
+  Gp_cov(2,2) = gp.covar2d(2,2);
+}
+
+void IgcMspImp::ce90_le90
+(const ImageCoordinate& Ic, double H, double& Ce90, double& Le90) const
+{
+  boost::shared_ptr<GroundCoordinate> gc;
+  blitz::Array<double, 2> gc_cov;
+  blitz::Array<double, 2> ic_cov(2,2);
+  ic_cov = 0;
+  ground_coordinate_with_cov(Ic,ic_cov,H,0, gc, gc_cov);
+  auto gc_cf = gc->convert_to_cf();
+  MSP::GroundPoint gp(gc_cf->position[0], gc_cf->position[1],
+		      gc_cf->position[2]);
+  MSP::Matrix cov(3,3);
+  for(int i = 0; i < 3; ++i)
+    for(int j = 0; j < 3; ++j)
+      cov.setElement(i,j,gc_cov(i,j));
+  gp.setCovariance(cov);
+  cs->getCELE90(gp, Ce90, Le90);
 }
 
 Time IgcMspImp::pixel_time(const ImageCoordinate& Ic) const
@@ -885,6 +937,45 @@ blitz::Array<double, 2> IgcMsp::joint_covariance(const IgcMsp& igc2) const
   auto igc2_p = boost::dynamic_pointer_cast<IgcMspImp>(igc2.igc);
   auto igc_p = boost::dynamic_pointer_cast<IgcMspImp>(igc);
   return igc_p->joint_covariance(*igc2_p);
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Ground coordinate, with a covariance. This include the image
+/// coordinate covariance (a 2x2 matrix), adjustable sensor parameter
+/// error covariance, and unmodeled_covariance. For just the sensor
+/// covariance, set the Ic_cov and H_var to zero (is this correct?)
+//-----------------------------------------------------------------------
+
+void IgcMsp::ground_coordinate_with_cov
+(const ImageCoordinate& Ic,
+ const blitz::Array<double, 2>& Ic_cov,
+ double H,
+ double H_var,
+ boost::shared_ptr<GroundCoordinate>& Gp,
+ blitz::Array<double, 2>& Gp_cov) const
+{
+#ifdef HAVE_MSP
+  auto igc_p = boost::dynamic_pointer_cast<IgcMspImp>(igc);
+  return igc_p->ground_coordinate_with_cov(Ic, Ic_cov, H, H_var, Gp, Gp_cov);
+#else
+  throw MspNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
+/// Get the CE90 and LE90 from the adjustable sensor parameter error
+/// covariance.
+//-----------------------------------------------------------------------
+
+void IgcMsp::ce90_le90
+(const ImageCoordinate& Ic, double H, double& Ce90, double& Le90) const
+{
+#ifdef HAVE_MSP
+  auto igc_p = boost::dynamic_pointer_cast<IgcMspImp>(igc);
+  return igc_p->ce90_le90(Ic, H, Ce90, Le90);
 #else
   throw MspNotAvailableException();
 #endif

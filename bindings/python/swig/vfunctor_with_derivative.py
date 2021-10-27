@@ -204,7 +204,7 @@ class VFunctorWithDerivative(geocal_swig.functor.VFunctor):
         return _vfunctor_with_derivative.VFunctorWithDerivative_df(self, X)
 
 
-    def f_and_df(self, X, arg3, arg4):
+    def f_and_df(self, X):
         """
 
         virtual void GeoCal::VFunctorWithDerivative::f_and_df(const blitz::Array< double, 1 > &X, blitz::Array< double, 1 > &F,
@@ -214,7 +214,7 @@ class VFunctorWithDerivative(geocal_swig.functor.VFunctor):
         Often this can be calculated more quickly. The default implementation
         here just calls opererator() and df separately. 
         """
-        return _vfunctor_with_derivative.VFunctorWithDerivative_f_and_df(self, X, arg3, arg4)
+        return _vfunctor_with_derivative.VFunctorWithDerivative_f_and_df(self, X)
 
     __swig_destroy__ = _vfunctor_with_derivative.delete_VFunctorWithDerivative
 VFunctorWithDerivative.df = new_instancemethod(_vfunctor_with_derivative.VFunctorWithDerivative_df, None, VFunctorWithDerivative)

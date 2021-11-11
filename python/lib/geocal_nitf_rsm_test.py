@@ -44,11 +44,90 @@ def test_rsm_rp(isolated_dir, rsm):
     rational polynomial in it'''    
     f = pynitf.NitfFile()
     create_image_seg(f)
+    rsm.rsm_id.full_number_line = 100
+    rsm.rsm_id.full_number_sample = 200
     f.image_segment[0].rsm = rsm
     f.write("nitf_rsm.ntf")
     f2 = pynitf.NitfFile("nitf_rsm.ntf")
     print(f2)
 
+# This doesn't actually work. I don't think we can easily modify the RSM,
+# this pretty much needs to go through C++. But for now leave this in place
+# in case we need to come back to this.
+@skip    
+@require_pynitf
+def test_modify_rsm_tre(isolated_dir, rsm):
+    '''We can modify the format/content of TREs in pynitf in a number
+    of ways (see sample_format_test.py in pynitf). However modifying 
+    a RSM TRE has a particular complication.
+
+    Because the exact TREs needed for the RSM vary depending on the 
+    specifics of the RSM, we have all the TREs removed and recreated from
+    the Rsm object associated with a image segment. So any changes you make
+    *won't* show up when writing.
+
+    Changes should probably ultimately be handled by changing GeoCal, but
+    even then there may be special formatting issues (e.g., a specific
+    partner requires a specific format due to what a tool expects). So it 
+    is important to be able to modify this outside of GeoCal.
+
+    The replacement is handled with pynitf.NitfSegmentHookSet. So we can
+    add additional hooks to modify the RSM TREs after the RsmImageSegmentHook
+    creates them.
+    '''
+    # The initial stuff without change
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm
+    f.write("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
+    t = f2.image_segment[0].find_one_tre("RSMIDA")
+    # We don't fill in the sensor x-acceleration
+    print(t.sax)
+    assert t.sax is None
+
+    # Create a NitfImageHook to modify RSMIDA
+    from geocal.geocal_nitf_rsm import RsmImageSegmentHook
+    class ModifyRsmHook(RsmImageSegmentHook):
+        def __init__(self, sax_value):
+            super().__init__()
+            self.sax_value = sax_value
+        def before_write_hook(self, seg, nitf_file):
+            super().before_write_hook(seg, nitf_file)
+            # We don't normally allow classes with a tre_implementation_field
+            # to be written to, to prevent accidental overwriting. But in this
+            # case we specially want to allow this. So go ahead and
+            # override this
+            kp = pynitf.TreRSMIDA.tre_implementation_field
+            pynitf.TreRSMIDA.tre_implementation_field = None
+            t = seg.find_exactly_one_tre("RSMIDA")
+            if(t):
+                print(t)
+                t.sax = self.sax_value
+                print(t)
+            # And now put it back
+            pynitf.TreRSMIDA.tre_implementation_field = kp
+                    
+
+    # The hook can either be added to the default hook set to be used
+    # for all files, or we can use it just for a specific file. For this
+    # example, we just modify for a single file
+
+    f = pynitf.NitfFile()
+    # Remove existing RsmImageSegmentHook
+    f.segment_hook_set.hook_set = set()
+    # Replace with ours
+    f.segment_hook_set.add_hook(ModifyRsmHook(10))
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm
+    f.write("nitf_rsm.ntf")
+    f2 = pynitf.NitfFile("nitf_rsm.ntf")
+    t = f2.image_segment[0].find_one_tre("RSMIDA")
+    print(t)
+    # Filled in value
+    print(t.sax)
+    assert t.sax == 10
+    
 @require_msp
 @require_pynitf
 def test_rsm_generate_with_msp(isolated_dir, igc_rpc):

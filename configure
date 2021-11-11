@@ -729,7 +729,6 @@ BUILD_VICAR_GDALPLUGIN_FALSE
 BUILD_VICAR_GDALPLUGIN_TRUE
 HAVE_VICAR_GDALPLUGIN_FALSE
 HAVE_VICAR_GDALPLUGIN_TRUE
-HAVE_VICAR_GDALPLUGIN
 VICAR_GDALPLUGIN_HOME_ABS
 VICAR_GDALPLUGIN_HOME
 BUILD_ECW_PLUGIN_FALSE
@@ -2995,7 +2994,7 @@ ac_config_files="$ac_config_files lib/GeoCalCore/Support/global_fixture_default.
 
 ac_config_files="$ac_config_files geocal.pc"
 
-ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_internal_config.h"
+ac_config_headers="$ac_config_headers lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_external_config.h"
 
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
@@ -23450,6 +23449,8 @@ $as_echo "yes" >&6; }
 
 
 
+$as_echo "#define HAVE_VICAR_GDALPLUGIN /**/" >>confdefs.h
+
                 have_vicar_gdalplugin="yes"
         fi
 fi
@@ -27384,7 +27385,7 @@ do
     "lib/GeoCalCore/Support/global_fixture_default.cc") CONFIG_FILES="$CONFIG_FILES lib/GeoCalCore/Support/global_fixture_default.cc" ;;
     "geocal.pc") CONFIG_FILES="$CONFIG_FILES geocal.pc" ;;
     "lib/GeoCalCore/Support/geocal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_config.h" ;;
-    "lib/GeoCalCore/Support/geocal_internal_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_internal_config.h" ;;
+    "lib/GeoCalCore/Support/geocal_external_config.h") CONFIG_HEADERS="$CONFIG_HEADERS lib/GeoCalCore/Support/geocal_external_config.h" ;;
     "depfiles") CONFIG_COMMANDS="$CONFIG_COMMANDS depfiles" ;;
     "libtool") CONFIG_COMMANDS="$CONFIG_COMMANDS libtool" ;;
     "Makefile") CONFIG_FILES="$CONFIG_FILES Makefile" ;;

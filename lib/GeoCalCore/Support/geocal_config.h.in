@@ -97,6 +97,9 @@
 /* Define to 1 if you have the <unistd.h> header file. */
 #undef HAVE_UNISTD_H
 
+/* Defined if we have VICAR GDAL plugin */
+#undef HAVE_VICAR_GDALPLUGIN
+
 /* Defined if we have VICAR RTL */
 #undef HAVE_VICAR_RTL
 

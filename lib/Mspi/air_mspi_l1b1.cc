@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "air_mspi_l1b1.h"
 #include "geocal_serialize_support.h"
 #include "air_mspi_file.h"

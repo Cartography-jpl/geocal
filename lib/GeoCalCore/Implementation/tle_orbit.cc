@@ -2,7 +2,7 @@
 #include "eci.h"
 #include "ostream_pad.h"
 #include "geocal_serialize_support.h"
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "spice_helper.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/lexical_cast.hpp>

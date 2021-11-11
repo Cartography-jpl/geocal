@@ -1,7 +1,7 @@
 #ifndef GEOCAL_QUATERNION_H
 #define GEOCAL_QUATERNION_H
 #include "geocal_exception.h"
-#include "geocal_config.h"
+#include "geocal_external_config.h"
 #include "geocal_matrix.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>

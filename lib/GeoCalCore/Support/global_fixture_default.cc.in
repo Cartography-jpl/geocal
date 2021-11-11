@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "global_fixture.h"
 #include <boost/test/unit_test.hpp>
 #include <cstdlib>

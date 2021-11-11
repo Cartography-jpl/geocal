@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "ibis_file.h"
 #include "geocal_serialize_support.h"
 #ifdef HAVE_VICAR_RTL

@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "geodetic.h"
 #include "ecr.h"
 #include "constant.h"

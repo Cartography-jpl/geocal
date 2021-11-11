@@ -337,7 +337,7 @@ am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
 mkinstalldirs = $(install_sh) -d
 CONFIG_HEADER =  \
 	$(top_builddir)/lib/GeoCalCore/Support/geocal_config.h \
-	$(top_builddir)/lib/GeoCalCore/Support/geocal_internal_config.h
+	$(top_builddir)/lib/GeoCalCore/Support/geocal_external_config.h
 CONFIG_CLEAN_FILES = script/setup_afids_python.csh \
 	script/setup_afids_python.sh script/setup_geocal.csh \
 	script/setup_geocal.sh script/setup_afids_env.csh \
@@ -2249,6 +2249,7 @@ DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
 	$(dist_sdbxdoc_DATA) $(etcafidspython_DATA) \
 	$(installafidspython_DATA) $(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
+	@srcsupport@/geocal_external_config.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \
 	@srcsupport@/auto_derivative_before_blitz.h \
@@ -2669,7 +2670,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(top_srcdir)/config/missing $(top_srcdir)/config/py-compile \
 	$(top_srcdir)/config/test-driver \
 	$(top_srcdir)/lib/GeoCalCore/Support/geocal_config.h.in \
-	$(top_srcdir)/lib/GeoCalCore/Support/geocal_internal_config.h.in \
+	$(top_srcdir)/lib/GeoCalCore/Support/geocal_external_config.h.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in \
 	$(top_srcdir)/script/setup_afids_env.csh.in \
 	$(top_srcdir)/script/setup_afids_env.sh.in \
@@ -2778,7 +2779,6 @@ HAVE_CXX11 = @HAVE_CXX11@
 HAVE_M4 = @HAVE_M4@
 HAVE_PATCH = @HAVE_PATCH@
 HAVE_PERL = @HAVE_PERL@
-HAVE_VICAR_GDALPLUGIN = @HAVE_VICAR_GDALPLUGIN@
 HDF5HOME = @HDF5HOME@
 HDF5_BIN = @HDF5_BIN@
 HDF5_CFLAGS = @HDF5_CFLAGS@
@@ -3692,6 +3692,7 @@ geocalincdir = @includedir@/geocal
 
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/geocal_config.h \
+	@srcsupport@/geocal_external_config.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \
 	@srcsupport@/auto_derivative_before_blitz.h \
@@ -4461,16 +4462,16 @@ $(top_srcdir)/lib/GeoCalCore/Support/geocal_config.h.in: @MAINTAINER_MODE_TRUE@ 
 	rm -f lib/GeoCalCore/Support/stamp-h1
 	touch $@
 
-lib/GeoCalCore/Support/geocal_internal_config.h: lib/GeoCalCore/Support/stamp-h2
+lib/GeoCalCore/Support/geocal_external_config.h: lib/GeoCalCore/Support/stamp-h2
 	@test -f $@ || rm -f lib/GeoCalCore/Support/stamp-h2
 	@test -f $@ || $(MAKE) $(AM_MAKEFLAGS) lib/GeoCalCore/Support/stamp-h2
 
-lib/GeoCalCore/Support/stamp-h2: $(top_srcdir)/lib/GeoCalCore/Support/geocal_internal_config.h.in $(top_builddir)/config.status
+lib/GeoCalCore/Support/stamp-h2: $(top_srcdir)/lib/GeoCalCore/Support/geocal_external_config.h.in $(top_builddir)/config.status
 	@rm -f lib/GeoCalCore/Support/stamp-h2
-	cd $(top_builddir) && $(SHELL) ./config.status lib/GeoCalCore/Support/geocal_internal_config.h
+	cd $(top_builddir) && $(SHELL) ./config.status lib/GeoCalCore/Support/geocal_external_config.h
 
 distclean-hdr:
-	-rm -f lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/stamp-h1 lib/GeoCalCore/Support/geocal_internal_config.h lib/GeoCalCore/Support/stamp-h2
+	-rm -f lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/stamp-h1 lib/GeoCalCore/Support/geocal_external_config.h lib/GeoCalCore/Support/stamp-h2
 script/setup_afids_python.csh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_python.csh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 script/setup_afids_python.sh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_python.sh.in

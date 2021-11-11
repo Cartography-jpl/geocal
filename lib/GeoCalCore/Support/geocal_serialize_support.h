@@ -2,7 +2,7 @@
 #define GEOCAL_SERIALIZE_SUPPORT_H
 // This contains various support routines for *implementing* the boost
 // serialization (as opposed to *using*  the serialization
-#include "geocal_config.h"
+#include "geocal_external_config.h"
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 #include <boost/serialization/access.hpp>
 #include <boost/serialization/nvp.hpp>

@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "vicar_lite_file.h"
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>

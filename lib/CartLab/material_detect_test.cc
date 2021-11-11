@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "unit_test_support.h"
 #include "material_detect.h"
 #include "vicar_lite_file.h"

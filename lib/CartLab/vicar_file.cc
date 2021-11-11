@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "vicar_file.h"
 #ifdef HAVE_GDAL
 #include "vicar_ogr.h"

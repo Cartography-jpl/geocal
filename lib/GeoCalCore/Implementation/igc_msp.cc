@@ -1,5 +1,5 @@
 #include "igc_msp.h"
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "geocal_serialize_support.h"
 #include "simple_dem.h"
 #include "ostream_pad.h"

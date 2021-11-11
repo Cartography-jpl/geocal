@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "ground_coordinate.h"
 #include "geocal_matrix.h"
 #include "geocal_autoderivative_quaternion.h"

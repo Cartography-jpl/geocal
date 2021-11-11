@@ -1,0 +1,11 @@
+// Small amount of configuration that really does need to be visible
+// in our .h files. This is redundant with a stuff in
+// geocal_config.h.in, but we pull this small amount out to isolate
+// these pieces and 
+
+/* Defined if we have boost serialization */
+#undef GEOCAL_HAVE_BOOST_SERIALIZATION
+
+/* Define to 1 if you have the <boost/serialization/boost_array.hpp> header
+   file. */
+#undef HAVE_BOOST_SERIALIZATION_BOOST_ARRAY_HPP

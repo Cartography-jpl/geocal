@@ -1,14 +1,6 @@
 #ifndef GEOCAL_GENERIC_OBJECT_H
 #define GEOCAL_GENERIC_OBJECT_H
-// These get defined in geocal_config.h. Undef them to stop warnings
-// if we change these.
-#undef PACKAGE
-#undef PACKAGE_NAME
-#undef PACKAGE_STRING
-#undef PACKAGE_TARNAME
-#undef PACKAGE_VERSION
-#undef VERSION
-#include "geocal_config.h"
+#include "geocal_external_config.h"
 
 namespace boost {
   namespace serialization {

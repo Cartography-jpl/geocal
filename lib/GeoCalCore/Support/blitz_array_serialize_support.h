@@ -5,7 +5,7 @@
 
 // This contains various support routines for *implementing* the boost
 // serialization (as opposed to *using*  the serialization)
-#include "geocal_config.h"
+#include "geocal_external_config.h"
 // This adds serialization of blitz::Array.
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 

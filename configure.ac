@@ -9,7 +9,7 @@ AC_CONFIG_FILES([script/setup_geocal.csh script/setup_geocal.sh])
 AC_CONFIG_FILES([script/setup_afids_env.csh script/setup_afids_env.sh script/vicarb])
 AC_CONFIG_FILES([lib/GeoCalCore/Support/global_fixture_default.cc])
 AC_CONFIG_FILES([geocal.pc])
-AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_internal_config.h])
+AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_external_config.h])
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
 # build, this is just "." relative to srcdir.

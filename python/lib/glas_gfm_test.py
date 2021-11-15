@@ -494,16 +494,25 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     for i in range(9):
         for j in range(10):
             img[0, i,j] = i * 10 + j
+    img2 = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=3)
+    for i in range(9):
+        for j in range(10):
+            img2[0, i,j] = i * 10 + j
     f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment.append(pynitf.NitfImageSegment(img2))
     f.image_segment[0].create_glas_gfm(igc_g)
+    f.image_segment[1].create_glas_gfm(igc_g)
     # Turn off refraction in MSP calculation. Normally we want this on,
     # but we turn it off so we can get better agreement with our Igc.
     # We'll probably want to investigate this and include refraction in
     # our calculation, but punt on this for now.
     f.image_segment[0].glas_gfm.tre_csexrb.atm_refr_flag = 0
+    # Second image that does have refraction turned on, so we can compare
+    f.image_segment[1].glas_gfm.tre_csexrb.atm_refr_flag = 1
     f.write("glas_test.ntf")
     f2 = NitfFile("glas_test.ntf")
     igc_msp2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
+    igc_msp2_refr = IgcMsp("glas_test.ntf", SimpleDem(), 1, "GLAS", "GLAS")
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
     igc_g2 = f2.image_segment[0].glas_gfm.igc()
@@ -523,6 +532,8 @@ def test_create_staring_glas(isolated_dir, igc_staring):
             gc1 = igc_r.ground_coordinate(ImageCoordinate(i,j))
             gc2 = igc_g2.ground_coordinate(ImageCoordinate(i,j))
             gc3 = igc_msp2.ground_coordinate(ImageCoordinate(i,j))
+            gc4 = igc_msp2_refr.ground_coordinate(ImageCoordinate(i,j))
+            print("Distance refraction: ", distance(gc3, gc4))
             assert distance(gc1, gc2) < 0.05
             diff.append(distance(gc3, gc2))
             diff2.append(distance(gc3, gc1))

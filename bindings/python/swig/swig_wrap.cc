@@ -68,6 +68,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_ccorr_lsm_matcher)(void);
   INIT_TYPE INIT_FUNC(_geometric_model)(void);
   INIT_TYPE INIT_FUNC(_raster_multifile)(void);
+  INIT_TYPE INIT_FUNC(_refraction)(void);
   INIT_TYPE INIT_FUNC(_did_datum)(void);
   INIT_TYPE INIT_FUNC(_misc_array_function)(void);
   INIT_TYPE INIT_FUNC(_dem_map_info_offset)(void);
@@ -121,7 +122,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_camera_radial_distortion)(void);
   INIT_TYPE INIT_FUNC(_camera_radial_distortion_and_transform)(void);
   INIT_TYPE INIT_FUNC(_galileo_camera)(void);
-  INIT_TYPE INIT_FUNC(_refraction)(void);
+  INIT_TYPE INIT_FUNC(_refraction_sdp)(void);
   INIT_TYPE INIT_FUNC(_orbit_data_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_planet_coordinate)(void);
   INIT_TYPE INIT_FUNC(_iterative_morphological_dilation)(void);
@@ -290,6 +291,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_ccorr_lsm_matcher", INIT_FUNC(_ccorr_lsm_matcher));
   INIT_MODULE(module, "_geometric_model", INIT_FUNC(_geometric_model));
   INIT_MODULE(module, "_raster_multifile", INIT_FUNC(_raster_multifile));
+  INIT_MODULE(module, "_refraction", INIT_FUNC(_refraction));
   INIT_MODULE(module, "_did_datum", INIT_FUNC(_did_datum));
   INIT_MODULE(module, "_misc_array_function", INIT_FUNC(_misc_array_function));
   INIT_MODULE(module, "_dem_map_info_offset", INIT_FUNC(_dem_map_info_offset));
@@ -343,7 +345,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_camera_radial_distortion", INIT_FUNC(_camera_radial_distortion));
   INIT_MODULE(module, "_camera_radial_distortion_and_transform", INIT_FUNC(_camera_radial_distortion_and_transform));
   INIT_MODULE(module, "_galileo_camera", INIT_FUNC(_galileo_camera));
-  INIT_MODULE(module, "_refraction", INIT_FUNC(_refraction));
+  INIT_MODULE(module, "_refraction_sdp", INIT_FUNC(_refraction_sdp));
   INIT_MODULE(module, "_orbit_data_image_ground_connection", INIT_FUNC(_orbit_data_image_ground_connection));
   INIT_MODULE(module, "_planet_coordinate", INIT_FUNC(_planet_coordinate));
   INIT_MODULE(module, "_iterative_morphological_dilation", INIT_FUNC(_iterative_morphological_dilation));

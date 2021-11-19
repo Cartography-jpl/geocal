@@ -1,16 +1,16 @@
 #include "unit_test_support.h"
 #include "orbit.h"
-#include "refraction.h"
+#include "refraction_sdp.h"
 #include "simple_dem.h"
 #include "constant.h"
 
 using namespace GeoCal;
 
-BOOST_FIXTURE_TEST_SUITE(refraction, GlobalFixture)
+BOOST_FIXTURE_TEST_SUITE(refraction_sdp, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(displacement)
 {
-  Refraction r(0, 0);
+  RefractionSdp r(0, 0);
   // These expected results come from the original refraction
   // documentation.
   BOOST_CHECK_CLOSE(r.surface_zenith(10 * Constant::deg_to_rad) *
@@ -24,7 +24,7 @@ BOOST_AUTO_TEST_CASE(displacement)
 		    448.95736, 1e-4);
 }
 
-BOOST_AUTO_TEST_CASE(refraction)
+BOOST_AUTO_TEST_CASE(refraction_sdp)
 {
   // Nominal orbit, with a fairly steep angle (MISR DF camera)
   Time tmin = Time::parse_time("2003-01-01T11:11:00Z");
@@ -34,7 +34,7 @@ BOOST_AUTO_TEST_CASE(refraction)
   FrameCoordinate fc(0, 1504 / 2);
   SimpleDem dem;
   boost::shared_ptr<GroundCoordinate> gc = od->surface_intersect(cam, fc, dem);
-  Refraction ref(0.0, gc->latitude());
+  RefractionSdp ref(0.0, gc->latitude());
   boost::shared_ptr<GroundCoordinate> gc_corr = 
     ref.refraction_apply(*od->position_cf(), *gc);
 
@@ -58,12 +58,12 @@ BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
     return;
-  boost::shared_ptr<Refraction> r(new Refraction(0,0));
+  boost::shared_ptr<RefractionSdp> r(new RefractionSdp(0,0));
   std::string d = serialize_write_string(r);
   if(false)
     std::cerr << d;
-  boost::shared_ptr<Refraction> rr = 
-    serialize_read_string<Refraction>(d);
+  boost::shared_ptr<RefractionSdp> rr = 
+    serialize_read_string<RefractionSdp>(d);
   BOOST_CHECK_CLOSE(rr->surface_zenith(10 * Constant::deg_to_rad) *
 		    Constant::rad_to_deg, 9.997066, 1e-4);
   BOOST_CHECK_CLOSE(rr->surface_zenith(80 * Constant::deg_to_rad) *

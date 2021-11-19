@@ -238,7 +238,11 @@ class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnectio
         lines for a particular sample are acquired at the same time.
 
         You can optionally include a approximate refraction correction, the
-        default is not to. 
+        default is not to.
+
+        NOTE: refraction doesn't seem to actually be used. I think this was
+        something we started to add, but didn't actually complete. We can come
+        back to this. Usually the effect of refraction is pretty small. 
         """
         _igc_rolling_shutter.IgcRollingShutter_swiginit(self, _igc_rolling_shutter.new_IgcRollingShutter(*args))
 

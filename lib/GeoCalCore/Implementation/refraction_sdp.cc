@@ -1,5 +1,5 @@
 #include "geocal_config.h"
-#include "refraction.h"
+#include "refraction_sdp.h"
 #include "constant.h"
 #include "ecr.h"
 #include "geodetic.h"
@@ -10,15 +10,15 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Refraction::serialize
+void RefractionSdp::serialize
 (Archive & ar, const unsigned int version)
 {
-  GEOCAL_GENERIC_BASE(Refraction);
-  ar & GEOCAL_NVP(alt) & GEOCAL_NVP(lat) & GEOCAL_NVP(index_ref)
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Refraction)
+    & GEOCAL_NVP(alt) & GEOCAL_NVP(lat) & GEOCAL_NVP(index_ref)
     & GEOCAL_NVP(k1) &  GEOCAL_NVP(k2) & GEOCAL_NVP(dens_fac);
 }
 
-GEOCAL_IMPLEMENT(Refraction);
+GEOCAL_IMPLEMENT(RefractionSdp);
 #endif
 
 //-----------------------------------------------------------------------
@@ -31,7 +31,7 @@ GEOCAL_IMPLEMENT(Refraction);
 /// The index of refraction at the surface can be supplied if desired,
 /// otherwise we calculate an approximate value.
 //-----------------------------------------------------------------------
-Refraction::Refraction(double Altitude, double Latitude, 
+RefractionSdp::RefractionSdp(double Altitude, double Latitude, 
 		       double Index_refraction_surface)
   : alt(Altitude), lat(Latitude)
 {
@@ -91,7 +91,7 @@ Refraction::Refraction(double Altitude, double Latitude,
 /// Displacement in meters for given space zenith angle in radians.
 //-----------------------------------------------------------------------
 
-double Refraction::displacement(double Space_zenith) const
+double RefractionSdp::displacement(double Space_zenith) const
 {
   double surf_zen = surface_zenith(Space_zenith);
   double refrac;
@@ -133,7 +133,7 @@ double Refraction::displacement(double Space_zenith) const
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<GroundCoordinate>
-Refraction::refraction_apply(const GroundCoordinate& Spacecraft_pos,
+RefractionSdp::refraction_apply(const GroundCoordinate& Spacecraft_pos,
 			     const GroundCoordinate& Gc_no_refraction) const
 {
   firstIndex i1; secondIndex i2;
@@ -202,7 +202,7 @@ Refraction::refraction_apply(const GroundCoordinate& Spacecraft_pos,
 //-----------------------------------------------------------------------
   
 boost::shared_ptr<GroundCoordinate>
-Refraction::refraction_reverse(const GroundCoordinate& Spacecraft_pos,
+RefractionSdp::refraction_reverse(const GroundCoordinate& Spacecraft_pos,
 		       const GroundCoordinate& Gc_with_refraction) const
 {
   // Gc_with_refraction is pretty close to Gc_no_refraction, so we can

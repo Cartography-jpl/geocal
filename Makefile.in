@@ -433,7 +433,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/ccorr_matcher_wrap.cc @swigsrc@/lsm_matcher_wrap.cc \
 	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
 	@swigsrc@/geometric_model_wrap.cc \
-	@swigsrc@/raster_multifile_wrap.cc @swigsrc@/did_datum_wrap.cc \
+	@swigsrc@/raster_multifile_wrap.cc \
+	@swigsrc@/refraction_wrap.cc @swigsrc@/did_datum_wrap.cc \
 	@swigsrc@/misc_array_function_wrap.cc \
 	@swigsrc@/dem_map_info_offset_wrap.cc \
 	@swigsrc@/map_info_image_ground_connection_wrap.cc \
@@ -477,7 +478,8 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/camera_rational_polynomial_wrap.cc \
 	@swigsrc@/camera_radial_distortion_wrap.cc \
 	@swigsrc@/camera_radial_distortion_and_transform_wrap.cc \
-	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
+	@swigsrc@/galileo_camera_wrap.cc \
+	@swigsrc@/refraction_sdp_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
 	@swigsrc@/iterative_morphological_dilation_wrap.cc \
@@ -621,6 +623,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ccorr_lsm_matcher_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geometric_model_wrap.lo \
 	@swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo \
+	@swigsrc@/_swig_wrap_la-refraction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-did_datum_wrap.lo \
 	@swigsrc@/_swig_wrap_la-misc_array_function_wrap.lo \
 	@swigsrc@/_swig_wrap_la-dem_map_info_offset_wrap.lo \
@@ -674,7 +677,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-camera_radial_distortion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-camera_radial_distortion_and_transform_wrap.lo \
 	@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo \
-	@swigsrc@/_swig_wrap_la-refraction_wrap.lo \
+	@swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-iterative_morphological_dilation_wrap.lo \
@@ -834,7 +837,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcinterface@/ipi.cc @srcinterface@/raster_multifile.cc \
 	@srcinterface@/image_ground_connection.cc \
 	@srcinterface@/igc_collection.cc \
-	@srcinterface@/geometric_model.cc \
+	@srcinterface@/geometric_model.cc @srcinterface@/refraction.cc \
 	@srcimplementation@/did_datum.cc \
 	@srcimplementation@/misc_array_function.cc \
 	@srcimplementation@/dem_map_info_offset.cc \
@@ -879,7 +882,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/camera_radial_distortion.cc \
 	@srcimplementation@/camera_radial_distortion_and_transform.cc \
 	@srcimplementation@/galileo_camera.cc \
-	@srcimplementation@/refraction.cc \
+	@srcimplementation@/refraction_sdp.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
 	@srcimplementation@/ray_intersect.cc \
 	@srcimplementation@/dem_match.cc \
@@ -1037,6 +1040,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcinterface@/libgeocal_la-image_ground_connection.lo \
 	@srcinterface@/libgeocal_la-igc_collection.lo \
 	@srcinterface@/libgeocal_la-geometric_model.lo \
+	@srcinterface@/libgeocal_la-refraction.lo \
 	@srcimplementation@/libgeocal_la-did_datum.lo \
 	@srcimplementation@/libgeocal_la-misc_array_function.lo \
 	@srcimplementation@/libgeocal_la-dem_map_info_offset.lo \
@@ -1081,7 +1085,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-camera_radial_distortion.lo \
 	@srcimplementation@/libgeocal_la-camera_radial_distortion_and_transform.lo \
 	@srcimplementation@/libgeocal_la-galileo_camera.lo \
-	@srcimplementation@/libgeocal_la-refraction.lo \
+	@srcimplementation@/libgeocal_la-refraction_sdp.lo \
 	@srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo \
 	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 	@srcimplementation@/libgeocal_la-dem_match.lo \
@@ -1278,7 +1282,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/camera_rational_polynomial_test.cc \
 	@srcimplementation@/camera_radial_distortion_test.cc \
 	@srcimplementation@/galileo_camera_test.cc \
-	@srcimplementation@/refraction_test.cc \
+	@srcimplementation@/refraction_sdp_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
 	@srcimplementation@/ray_intersect_test.cc \
 	@srcimplementation@/igc_image_to_image_match_test.cc \
@@ -1448,7 +1452,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-camera_rational_polynomial_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-camera_radial_distortion_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT) \
-	@srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-refraction_sdp_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ray_intersect_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
@@ -1684,7 +1688,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po \
-	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po \
@@ -1781,7 +1785,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo \
-	@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rpc_image_ground_connection.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm.Plo \
@@ -1874,6 +1878,7 @@ am__depfiles_remade =  \
 	@srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_variable.Plo \
 	@srcinterface@/$(DEPDIR)/libgeocal_la-raster_multifile.Plo \
 	@srcinterface@/$(DEPDIR)/libgeocal_la-ray_caster.Plo \
+	@srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Plo \
 	@srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo \
 	@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo \
 	@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo \
@@ -2116,6 +2121,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-rpc_image_ground_connection_wrap.Plo \
@@ -2304,7 +2310,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcinterface@/raster_multifile.h \
 	@srcinterface@/image_ground_connection.h \
 	@srcinterface@/igc_collection.h \
-	@srcinterface@/geometric_model.h \
+	@srcinterface@/geometric_model.h @srcinterface@/refraction.h \
 	@srcimplementation@/did_datum.h \
 	@srcimplementation@/misc_array_function.h \
 	@srcimplementation@/dem_map_info_offset.h \
@@ -2354,7 +2360,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/camera_radial_distortion.h \
 	@srcimplementation@/camera_radial_distortion_and_transform.h \
 	@srcimplementation@/galileo_camera.h \
-	@srcimplementation@/refraction.h \
+	@srcimplementation@/refraction_sdp.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
 	@srcimplementation@/dem_match.h \
@@ -3345,7 +3351,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcinterface@/ipi.cc @srcinterface@/raster_multifile.cc \
 	@srcinterface@/image_ground_connection.cc \
 	@srcinterface@/igc_collection.cc \
-	@srcinterface@/geometric_model.cc \
+	@srcinterface@/geometric_model.cc @srcinterface@/refraction.cc \
 	@srcimplementation@/did_datum.cc \
 	@srcimplementation@/misc_array_function.cc \
 	@srcimplementation@/dem_map_info_offset.cc \
@@ -3390,7 +3396,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/camera_radial_distortion.cc \
 	@srcimplementation@/camera_radial_distortion_and_transform.cc \
 	@srcimplementation@/galileo_camera.cc \
-	@srcimplementation@/refraction.cc \
+	@srcimplementation@/refraction_sdp.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
 	@srcimplementation@/ray_intersect.cc \
 	@srcimplementation@/dem_match.cc \
@@ -3520,7 +3526,8 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/ccorr_matcher_wrap.cc @swigsrc@/lsm_matcher_wrap.cc \
 	@swigsrc@/ccorr_lsm_matcher_wrap.cc \
 	@swigsrc@/geometric_model_wrap.cc \
-	@swigsrc@/raster_multifile_wrap.cc @swigsrc@/did_datum_wrap.cc \
+	@swigsrc@/raster_multifile_wrap.cc \
+	@swigsrc@/refraction_wrap.cc @swigsrc@/did_datum_wrap.cc \
 	@swigsrc@/misc_array_function_wrap.cc \
 	@swigsrc@/dem_map_info_offset_wrap.cc \
 	@swigsrc@/map_info_image_ground_connection_wrap.cc \
@@ -3564,7 +3571,8 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/camera_rational_polynomial_wrap.cc \
 	@swigsrc@/camera_radial_distortion_wrap.cc \
 	@swigsrc@/camera_radial_distortion_and_transform_wrap.cc \
-	@swigsrc@/galileo_camera_wrap.cc @swigsrc@/refraction_wrap.cc \
+	@swigsrc@/galileo_camera_wrap.cc \
+	@swigsrc@/refraction_sdp_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
 	@swigsrc@/iterative_morphological_dilation_wrap.cc \
@@ -3747,7 +3755,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcinterface@/raster_multifile.h \
 	@srcinterface@/image_ground_connection.h \
 	@srcinterface@/igc_collection.h \
-	@srcinterface@/geometric_model.h \
+	@srcinterface@/geometric_model.h @srcinterface@/refraction.h \
 	@srcimplementation@/did_datum.h \
 	@srcimplementation@/misc_array_function.h \
 	@srcimplementation@/dem_map_info_offset.h \
@@ -3797,7 +3805,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/camera_radial_distortion.h \
 	@srcimplementation@/camera_radial_distortion_and_transform.h \
 	@srcimplementation@/galileo_camera.h \
-	@srcimplementation@/refraction.h \
+	@srcimplementation@/refraction_sdp.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
 	@srcimplementation@/dem_match.h \
@@ -3919,7 +3927,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcinterface@/ccorr_matcher.i @srcinterface@/lsm_matcher.i \
 	@srcinterface@/ccorr_lsm_matcher.i \
 	@srcinterface@/geometric_model.i \
-	@srcinterface@/raster_multifile.i \
+	@srcinterface@/raster_multifile.i @srcinterface@/refraction.i \
 	@srcimplementation@/did_datum.i \
 	@srcimplementation@/misc_array_function.i \
 	@srcimplementation@/dem_map_info_offset.i \
@@ -3981,7 +3989,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/camera_radial_distortion.i \
 	@srcimplementation@/camera_radial_distortion_and_transform.i \
 	@srcimplementation@/galileo_camera.i \
-	@srcimplementation@/refraction.i \
+	@srcimplementation@/refraction_sdp.i \
 	@srcimplementation@/orbit_data_image_ground_connection.i \
 	@srcimplementation@/planet_coordinate.i \
 	@srcimplementation@/iterative_morphological_dilation.i \
@@ -4124,7 +4132,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/camera_rational_polynomial_test.cc \
 	@srcimplementation@/camera_radial_distortion_test.cc \
 	@srcimplementation@/galileo_camera_test.cc \
-	@srcimplementation@/refraction_test.cc \
+	@srcimplementation@/refraction_sdp_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
 	@srcimplementation@/ray_intersect_test.cc \
 	@srcimplementation@/igc_image_to_image_match_test.cc \
@@ -4808,6 +4816,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/$(am__dirstamp) \
+	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-did_datum_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-misc_array_function_wrap.lo:  \
@@ -4914,8 +4924,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/$(am__dirstamp) \
-	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo:  \
@@ -5306,6 +5316,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcinterface@/libgeocal_la-geometric_model.lo:  \
 	@srcinterface@/$(am__dirstamp) \
 	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
+@srcinterface@/libgeocal_la-refraction.lo:  \
+	@srcinterface@/$(am__dirstamp) \
+	@srcinterface@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/$(am__dirstamp):
 	@$(MKDIR_P) @srcimplementation@
 	@: > @srcimplementation@/$(am__dirstamp)
@@ -5444,7 +5457,7 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-galileo_camera.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/libgeocal_la-refraction.lo:  \
+@srcimplementation@/libgeocal_la-refraction_sdp.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo:  \
@@ -6052,7 +6065,7 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/geocal_test_all-refraction_test.$(OBJEXT):  \
+@srcimplementation@/geocal_test_all-refraction_sdp_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT):  \
@@ -6542,7 +6555,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po@am__quote@ # am--include-marker
@@ -6639,7 +6652,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rpc_image_ground_connection.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-rsm.Plo@am__quote@ # am--include-marker
@@ -6732,6 +6745,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_variable.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-raster_multifile.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-ray_caster.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo@am__quote@ # am--include-marker
@@ -6974,6 +6988,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-rpc_image_ground_connection_wrap.Plo@am__quote@ # am--include-marker
@@ -7499,6 +7514,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-raster_multifile_wrap.lo `test -f '@swigsrc@/raster_multifile_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raster_multifile_wrap.cc
 
+@swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/refraction_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-refraction_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-refraction_wrap.lo `test -f '@swigsrc@/refraction_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/refraction_wrap.cc' object='@swigsrc@/_swig_wrap_la-refraction_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-refraction_wrap.lo `test -f '@swigsrc@/refraction_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_wrap.cc
+
 @swigsrc@/_swig_wrap_la-did_datum_wrap.lo: @swigsrc@/did_datum_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-did_datum_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-did_datum_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-did_datum_wrap.lo `test -f '@swigsrc@/did_datum_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/did_datum_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-did_datum_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-did_datum_wrap.Plo
@@ -7870,12 +7892,12 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo `test -f '@swigsrc@/galileo_camera_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/galileo_camera_wrap.cc
 
-@swigsrc@/_swig_wrap_la-refraction_wrap.lo: @swigsrc@/refraction_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-refraction_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-refraction_wrap.lo `test -f '@swigsrc@/refraction_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/refraction_wrap.cc' object='@swigsrc@/_swig_wrap_la-refraction_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo: @swigsrc@/refraction_sdp_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo `test -f '@swigsrc@/refraction_sdp_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_sdp_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/refraction_sdp_wrap.cc' object='@swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-refraction_wrap.lo `test -f '@swigsrc@/refraction_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_wrap.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo `test -f '@swigsrc@/refraction_sdp_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_sdp_wrap.cc
 
 @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo: @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo `test -f '@swigsrc@/orbit_data_image_ground_connection_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_data_image_ground_connection_wrap.cc
@@ -8997,6 +9019,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-geometric_model.lo `test -f '@srcinterface@/geometric_model.cc' || echo '$(srcdir)/'`@srcinterface@/geometric_model.cc
 
+@srcinterface@/libgeocal_la-refraction.lo: @srcinterface@/refraction.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcinterface@/libgeocal_la-refraction.lo -MD -MP -MF @srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Tpo -c -o @srcinterface@/libgeocal_la-refraction.lo `test -f '@srcinterface@/refraction.cc' || echo '$(srcdir)/'`@srcinterface@/refraction.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Tpo @srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcinterface@/refraction.cc' object='@srcinterface@/libgeocal_la-refraction.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcinterface@/libgeocal_la-refraction.lo `test -f '@srcinterface@/refraction.cc' || echo '$(srcdir)/'`@srcinterface@/refraction.cc
+
 @srcimplementation@/libgeocal_la-did_datum.lo: @srcimplementation@/did_datum.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-did_datum.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Tpo -c -o @srcimplementation@/libgeocal_la-did_datum.lo `test -f '@srcimplementation@/did_datum.cc' || echo '$(srcdir)/'`@srcimplementation@/did_datum.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-did_datum.Plo
@@ -9305,12 +9334,12 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-galileo_camera.lo `test -f '@srcimplementation@/galileo_camera.cc' || echo '$(srcdir)/'`@srcimplementation@/galileo_camera.cc
 
-@srcimplementation@/libgeocal_la-refraction.lo: @srcimplementation@/refraction.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-refraction.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Tpo -c -o @srcimplementation@/libgeocal_la-refraction.lo `test -f '@srcimplementation@/refraction.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction.cc' object='@srcimplementation@/libgeocal_la-refraction.lo' libtool=yes @AMDEPBACKSLASH@
+@srcimplementation@/libgeocal_la-refraction_sdp.lo: @srcimplementation@/refraction_sdp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-refraction_sdp.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Tpo -c -o @srcimplementation@/libgeocal_la-refraction_sdp.lo `test -f '@srcimplementation@/refraction_sdp.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_sdp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_sdp.cc' object='@srcimplementation@/libgeocal_la-refraction_sdp.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-refraction.lo `test -f '@srcimplementation@/refraction.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-refraction_sdp.lo `test -f '@srcimplementation@/refraction_sdp.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_sdp.cc
 
 @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo: @srcimplementation@/orbit_data_image_ground_connection.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_data_image_ground_connection.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo `test -f '@srcimplementation@/orbit_data_image_ground_connection.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_data_image_ground_connection.cc
@@ -11321,19 +11350,19 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-galileo_camera_test.obj `if test -f '@srcimplementation@/galileo_camera_test.cc'; then $(CYGPATH_W) '@srcimplementation@/galileo_camera_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/galileo_camera_test.cc'; fi`
 
-@srcimplementation@/geocal_test_all-refraction_test.o: @srcimplementation@/refraction_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-refraction_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Tpo -c -o @srcimplementation@/geocal_test_all-refraction_test.o `test -f '@srcimplementation@/refraction_test.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_test.cc' object='@srcimplementation@/geocal_test_all-refraction_test.o' libtool=no @AMDEPBACKSLASH@
+@srcimplementation@/geocal_test_all-refraction_sdp_test.o: @srcimplementation@/refraction_sdp_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-refraction_sdp_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Tpo -c -o @srcimplementation@/geocal_test_all-refraction_sdp_test.o `test -f '@srcimplementation@/refraction_sdp_test.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_sdp_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_sdp_test.cc' object='@srcimplementation@/geocal_test_all-refraction_sdp_test.o' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-refraction_test.o `test -f '@srcimplementation@/refraction_test.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_test.cc
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-refraction_sdp_test.o `test -f '@srcimplementation@/refraction_sdp_test.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_sdp_test.cc
 
-@srcimplementation@/geocal_test_all-refraction_test.obj: @srcimplementation@/refraction_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-refraction_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Tpo -c -o @srcimplementation@/geocal_test_all-refraction_test.obj `if test -f '@srcimplementation@/refraction_test.cc'; then $(CYGPATH_W) '@srcimplementation@/refraction_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/refraction_test.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_test.cc' object='@srcimplementation@/geocal_test_all-refraction_test.obj' libtool=no @AMDEPBACKSLASH@
+@srcimplementation@/geocal_test_all-refraction_sdp_test.obj: @srcimplementation@/refraction_sdp_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-refraction_sdp_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Tpo -c -o @srcimplementation@/geocal_test_all-refraction_sdp_test.obj `if test -f '@srcimplementation@/refraction_sdp_test.cc'; then $(CYGPATH_W) '@srcimplementation@/refraction_sdp_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/refraction_sdp_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_sdp_test.cc' object='@srcimplementation@/geocal_test_all-refraction_sdp_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-refraction_test.obj `if test -f '@srcimplementation@/refraction_test.cc'; then $(CYGPATH_W) '@srcimplementation@/refraction_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/refraction_test.cc'; fi`
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-refraction_sdp_test.obj `if test -f '@srcimplementation@/refraction_sdp_test.cc'; then $(CYGPATH_W) '@srcimplementation@/refraction_sdp_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/refraction_sdp_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.o: @srcimplementation@/orbit_data_image_ground_connection_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_data_image_ground_connection_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.o `test -f '@srcimplementation@/orbit_data_image_ground_connection_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_data_image_ground_connection_test.cc
@@ -13509,7 +13538,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po
-	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po
@@ -13606,7 +13635,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo
-	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rpc_image_ground_connection.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm.Plo
@@ -13699,6 +13728,7 @@ distclean: distclean-am
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_variable.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-raster_multifile.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-ray_caster.Plo
+	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo
@@ -13941,6 +13971,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rpc_image_ground_connection_wrap.Plo
@@ -14171,7 +14202,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po
-	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rpc_image_ground_connection_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_a_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-rsm_adjustable_parameter_b_test.Po
@@ -14268,7 +14299,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo
-	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_sdp.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rolling_shutter_constant_time_table.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rpc_image_ground_connection.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-rsm.Plo
@@ -14361,6 +14392,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-raster_image_variable.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-raster_multifile.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-ray_caster.Plo
+	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-refraction.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-rpc_image.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-simple_dem.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/libgeocal_la-sub_raster_image.Plo
@@ -14603,6 +14635,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_sdp_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-refraction_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rolling_shutter_constant_time_table_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-rpc_image_ground_connection_wrap.Plo

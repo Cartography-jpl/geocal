@@ -96,20 +96,22 @@ BOOST_AUTO_TEST_CASE(rsm_ce90)
   auto dem = boost::make_shared<SimpleDem>();
   IgcMsp igc_msp("/home/smyth/Local/geocal-repo/python/rsm_with_cov.ntf",
 		 dem, 0, "RSM", "RSM");
-  std::cerr << igc_msp.covariance() << "\n";
-  std::cerr << *igc_msp.ground_coordinate(ImageCoordinate(100,100)) << "\n";
   boost::shared_ptr<GroundCoordinate> gc;
   blitz::Array<double, 2> gc_cov;
   blitz::Array<double, 2> ic_cov(2,2);
   ic_cov = 0;
   igc_msp.ground_coordinate_with_cov(ImageCoordinate(100,100),ic_cov,0,0,
 				     gc, gc_cov);
-  std::cerr << *gc << "\n"
-	    << gc_cov << "\n";
   double ce90, le90;
   igc_msp.ce90_le90(ImageCoordinate(100,100), 0, ce90, le90);
-  std::cerr << "CE90: " << ce90 << "\n"
-	    << "LE90: " << le90 << "\n";
+  if(false) {
+    std::cerr << igc_msp.covariance() << "\n";
+    std::cerr << *igc_msp.ground_coordinate(ImageCoordinate(100,100)) << "\n";
+    std::cerr << *gc << "\n"
+	      << gc_cov << "\n";
+    std::cerr << "CE90: " << ce90 << "\n"
+	      << "LE90: " << le90 << "\n";
+  }
 }
   
 

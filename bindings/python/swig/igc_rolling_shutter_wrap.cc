@@ -9543,7 +9543,11 @@ static PyMethodDef SwigMethods[] = {
 		"lines for a particular sample are acquired at the same time.\n"
 		"\n"
 		"You can optionally include a approximate refraction correction, the\n"
-		"default is not to. \n"
+		"default is not to.\n"
+		"\n"
+		"NOTE: refraction doesn't seem to actually be used. I think this was\n"
+		"something we started to add, but didn't actually complete. We can come\n"
+		"back to this. Usually the effect of refraction is pretty small. \n"
 		""},
 	 { (char *)"IgcRollingShutter_cf_look_vector", _wrap_IgcRollingShutter_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"

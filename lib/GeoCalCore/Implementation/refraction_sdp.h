@@ -1,6 +1,6 @@
-#ifndef REFRACTION_H
-#define REFRACTION_H
-#include "ground_coordinate.h"
+#ifndef REFRACTION_SDP_H
+#define REFRACTION_SPD_H
+#include "refraction.h"
 #include <cmath>
 
 namespace GeoCal {
@@ -22,11 +22,11 @@ namespace GeoCal {
   values is something like 1.00026 to 1.00029, so you can vary from
   the initial prediction by a few 1e-5.
 *******************************************************************/
-class Refraction : public Printable<Refraction> {
+class RefractionSdp : public Refraction {
 public:
-  Refraction(double Altitude, double Latitude, 
+  RefractionSdp(double Altitude, double Latitude, 
 	     double Index_refraction_surface = -1);
-  virtual ~Refraction() {}
+  virtual ~RefractionSdp() {}
 
 //-----------------------------------------------------------------------
 /// Altitude of reference point, in meters.
@@ -61,10 +61,10 @@ public:
   { return asin(sin(Space_zenith) / index_ref); }
 
   double displacement(double Space_zenith) const;
-  boost::shared_ptr<GroundCoordinate>
+  virtual boost::shared_ptr<GroundCoordinate>
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
   		   const GroundCoordinate& Gc_no_refraction) const;
-  boost::shared_ptr<GroundCoordinate>
+  virtual boost::shared_ptr<GroundCoordinate>
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const;
 
@@ -73,14 +73,14 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "Refraction\n"
+  { Os << "RefractionSdp\n"
        << "  Altitude: " << altitude() << " m\n"
        << "  Latitude: " << latitude() << " deg\n"
        << "  Index refraction at surface: "
        << index_refraction_surface() << "\n";
   }
 protected:
-  Refraction() {}
+  RefractionSdp() {}
 private:
   double alt, lat, index_ref;
   double k1, k2, dens_fac;
@@ -90,5 +90,5 @@ private:
 };
 }
 
-GEOCAL_EXPORT_KEY(Refraction);
+GEOCAL_EXPORT_KEY(RefractionSdp);
 #endif

@@ -12,19 +12,13 @@
 namespace GeoCal {
 class Refraction : public GenericObject {
 public:
-  Refraction(double Altitude, double Latitude, 
-	     double Index_refraction_surface = -1);
-  %python_attribute(altitude, double)
-  %python_attribute(latitude, double)
-  %python_attribute_with_set(index_refraction_surface, double)
-  double surface_zenith(double Space_zenith) const;
-  double displacement(double Space_zenith) const;
-  boost::shared_ptr<GroundCoordinate>
+  Refraction();
+  virtual boost::shared_ptr<GroundCoordinate>
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
-  		   const GroundCoordinate& Gc_no_refraction) const;
-  boost::shared_ptr<GroundCoordinate>
+  		   const GroundCoordinate& Gc_no_refraction) const = 0;
+  virtual boost::shared_ptr<GroundCoordinate>
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
-  		     const GroundCoordinate& Gc_with_refraction) const;
+  		     const GroundCoordinate& Gc_with_refraction) const = 0;
   std::string print_to_string() const;
   %pickle_serialization()
 };

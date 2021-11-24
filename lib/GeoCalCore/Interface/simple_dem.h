@@ -43,6 +43,14 @@ public:
     const
   {   return Gp.height_reference_surface() - h_; }
 
+  virtual void height_range(const GroundCoordinate& Ulc,
+			    const GroundCoordinate& Lrc,
+			    double& Min_h, double& Max_h,
+			    double H_pad = 10.0) const
+  {
+    Min_h = h_ - H_pad;
+    Max_h = h_ + H_pad;
+  }
   virtual boost::shared_ptr<GroundCoordinate> 
     surface_point(const GroundCoordinate& Gp) const
   {

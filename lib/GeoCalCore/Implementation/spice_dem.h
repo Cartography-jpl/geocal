@@ -33,6 +33,17 @@ public:
   { return Planetocentric(*surface_point(Gp)).height_reference_surface(); }
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
+  virtual void height_range(const GroundCoordinate& Ulc,
+			      const GroundCoordinate& Lrc,
+			      double& Min_h, double& Max_h,
+			      double H_pad = 10.0) const
+  {
+    // Not real easy for us to implement. We could probably come up
+    // with something if this becomes an issue, but we don't use this
+    // DEM a lot. For now, just treat this as an error. We can revisit
+    // this if this becomes an issue
+    throw Exception("Not implemented");
+  }
   virtual void print(std::ostream& Os) const
   {
     Os << PlanetConstant::name(naif_code_) << " SpiceDem:\n"

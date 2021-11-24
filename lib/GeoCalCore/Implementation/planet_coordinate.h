@@ -476,6 +476,23 @@ public:
 
   virtual ~PlanetSimpleDem() {}
 
+  virtual void height_range(const GroundCoordinate& Ulc,
+			      const GroundCoordinate& Lrc,
+			      double& Min_h, double& Max_h,
+			      double H_pad = 10.0) const
+  {
+    if(Ulc.naif_code() != naif_code_ ||
+       Lrc.naif_code() != naif_code_) {
+      Exception e;
+      e << "Ulc or Lrc has the wrong naif_code(). Got " << Ulc.naif_code()
+	<< ", " << Lrc.naif_code() << " "
+	<< " but expected " << naif_code_;
+      throw e;
+    }
+    Min_h = h_ - H_pad;
+    Max_h = h_ + H_pad;
+  }
+  
 //-----------------------------------------------------------------------
 /// Return height of surface above/below the reference surface (e.g.,
 /// WGS-84 for the earth). Positive means above, negative below. This is 

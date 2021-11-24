@@ -185,3 +185,61 @@ void DemMapInfo::initialize(const boost::shared_ptr<Datum>& D,
 				     M.number_y_pixel() / 2)->naif_code();
   }
 }
+
+//-----------------------------------------------------------------------
+/// Height range, in meters relative to the reference surface. This is
+/// for the area covered by the ULC to LRC. Note that this might be a
+/// bit approximate, you might find a height out of this range. But
+/// this should give a reasonable range to use for things like
+/// generating an RSM etc. An optional "pad" can be given to extend
+/// the range a bit to make sure we cover the DEM height range.
+///
+/// Note that for values outside of the DEM range we handle this
+/// either as:
+/// 1. If outside_dem_is_error() is false, we just treat this a height
+///    of 0.
+/// 2. If outside_dem_is_error() is true, we ignore points outside of
+///    the range. This is because when creating the area we are
+///    working with if we are near the edge of the DEM we could end up
+///    going past the edge. In this case, we assume that the range
+///    desired is the range actually in the DEM.
+//-----------------------------------------------------------------------
+
+void DemMapInfo::height_range
+(const GroundCoordinate& Ulc,
+ const GroundCoordinate& Lrc,
+ double& Min_h, double& Max_h,
+ double H_pad) const
+{
+  double x1, y1, x2, y2;
+  map_info_.coordinate(Ulc, x1, y1);
+  map_info_.coordinate(Lrc, x2, y2);
+  int imin = floor(std::min(y1, y2));
+  int imax = ceil(std::max(y1, y2));
+  int jmin = floor(std::min(x1, x2));
+  int jmax = ceil(std::max(x1, x2));
+  Min_h = std::numeric_limits<double>::max();
+  Max_h = std::numeric_limits<double>::min();
+  bool had_point = false;
+  for(int i = imin; i <= imax; ++i)
+    for(int j = jmin; j <= jmax; ++j)
+      if(i < 0 || i >= map_info_.number_y_pixel() ||
+	 j < 0 || j >= map_info_.number_x_pixel()) {
+	if(!outside_dem_is_error_) {
+	  Min_h = std::min(0.0, Min_h);
+	  Max_h = std::max(0.0, Max_h);
+	  had_point = true;
+	}
+      } else {
+	double h = elevation(i,j) + datum().undulation(*map_info_.ground_coordinate(i,j));
+	Min_h = std::min(h, Min_h);
+	Max_h = std::max(h, Max_h);
+	had_point = true;
+      }
+  if(!had_point) {
+    Min_h = 0;
+    Max_h = 0;
+  }
+  Min_h -= H_pad;
+  Max_h += H_pad;
+}

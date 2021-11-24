@@ -263,8 +263,8 @@ RsmBSubgroup::RsmBSubgroup
  int Time_correlation_domain_flag,
  const blitz::Array<double, 2> Time_correlation)
   : cov_(Cov.copy()),
-    time_correlation_domain_flag_(Time_correlation_domain_flag),
-    time_correlation_(Time_correlation.copy())
+    time_correlation_(Time_correlation.copy()),
+    time_correlation_domain_flag_(Time_correlation_domain_flag)
 {
   if(Cov.rows() != Cov.cols())
     throw Exception("Cov needs to be square");
@@ -283,8 +283,8 @@ RsmBSubgroup::RsmBSubgroup
  int Time_correlation_domain_flag,
  double A, double alpha, double beta, double T)
   : cov_(Cov.copy()),
-    time_correlation_domain_flag_(Time_correlation_domain_flag),
-    time_correlation_(1, 4)
+    time_correlation_(1, 4),
+    time_correlation_domain_flag_(Time_correlation_domain_flag)
 {
   if(Cov.rows() != Cov.cols())
     throw Exception("Cov needs to be square");

@@ -3571,26 +3571,27 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[116]
 #define SWIGTYPE_p_char_type swig_types[117]
 #define SWIGTYPE_p_difference_type swig_types[118]
-#define SWIGTYPE_p_fmtflags swig_types[119]
-#define SWIGTYPE_p_int_type swig_types[120]
-#define SWIGTYPE_p_iostate swig_types[121]
-#define SWIGTYPE_p_off_type swig_types[122]
-#define SWIGTYPE_p_openmode swig_types[123]
-#define SWIGTYPE_p_pos_type swig_types[124]
-#define SWIGTYPE_p_seekdir swig_types[125]
-#define SWIGTYPE_p_size_t swig_types[126]
-#define SWIGTYPE_p_size_type swig_types[127]
-#define SWIGTYPE_p_state_type swig_types[128]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[129]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[130]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[131]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[132]
-#define SWIGTYPE_p_std__invalid_argument swig_types[133]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[134]
-#define SWIGTYPE_p_traits_type swig_types[135]
-#define SWIGTYPE_p_value_type swig_types[136]
-static swig_type_info *swig_types[138];
-static swig_module_info swig_module = {swig_types, 137, 0, 0, 0, 0};
+#define SWIGTYPE_p_double swig_types[119]
+#define SWIGTYPE_p_fmtflags swig_types[120]
+#define SWIGTYPE_p_int_type swig_types[121]
+#define SWIGTYPE_p_iostate swig_types[122]
+#define SWIGTYPE_p_off_type swig_types[123]
+#define SWIGTYPE_p_openmode swig_types[124]
+#define SWIGTYPE_p_pos_type swig_types[125]
+#define SWIGTYPE_p_seekdir swig_types[126]
+#define SWIGTYPE_p_size_t swig_types[127]
+#define SWIGTYPE_p_size_type swig_types[128]
+#define SWIGTYPE_p_state_type swig_types[129]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[130]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[131]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[132]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[133]
+#define SWIGTYPE_p_std__invalid_argument swig_types[134]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[135]
+#define SWIGTYPE_p_traits_type swig_types[136]
+#define SWIGTYPE_p_value_type swig_types[137]
+static swig_type_info *swig_types[139];
+static swig_module_info swig_module = {swig_types, 138, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -7160,6 +7161,274 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Dem_height_range__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Dem *arg1 = (GeoCal::Dem *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  double *arg4 = 0 ;
+  double *arg5 = 0 ;
+  double arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Dem const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  double val6 ;
+  int ecode6 = 0 ;
+  
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Dem_height_range" "', argument " "1"" of type '" "GeoCal::Dem const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      arg1 = const_cast< GeoCal::Dem * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      arg1 = const_cast< GeoCal::Dem * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Dem_height_range" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Dem_height_range" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Dem_height_range" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Dem_height_range" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  ecode6 = SWIG_AsVal_double(swig_obj[3], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Dem_height_range" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  {
+    try {
+      ((GeoCal::Dem const *)arg1)->height_range((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,*arg4,*arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Dem_height_range__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Dem *arg1 = (GeoCal::Dem *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  double *arg4 = 0 ;
+  double *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Dem const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Dem_height_range" "', argument " "1"" of type '" "GeoCal::Dem const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      arg1 = const_cast< GeoCal::Dem * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp1);
+      arg1 = const_cast< GeoCal::Dem * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Dem_height_range" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Dem_height_range" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Dem_height_range" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Dem_height_range" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::Dem const *)arg1)->height_range((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Dem_height_range(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Dem_height_range",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_Dem_height_range__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_Dem_height_range__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Dem_height_range'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Dem::height_range(GeoCal::GroundCoordinate const &,GeoCal::GroundCoordinate const &,double &,double &,double) const\n"
+    "    GeoCal::Dem::height_range(GeoCal::GroundCoordinate const &,GeoCal::GroundCoordinate const &,double &,double &) const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Dem_surface_point(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::Dem *arg1 = (GeoCal::Dem *) 0 ;
@@ -7389,6 +7658,18 @@ static PyMethodDef SwigMethods[] = {
 		"The starting length along the look vector is given. This might come\n"
 		"from ray casting code, or it might come from the intersect function of\n"
 		"this class. \n"
+		""},
+	 { (char *)"Dem_height_range", _wrap_Dem_height_range, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual void GeoCal::Dem::height_range(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc, double\n"
+		"&Min_h, double &Max_h, double H_pad=10.0) const =0\n"
+		"Height range, in meters relative to the reference surface.\n"
+		"\n"
+		"This is for the area covered by the ULC to LRC. Note that this might\n"
+		"be a bit approximate, you might find a height out of this range. But\n"
+		"this should give a reasonable range to use for things like generating\n"
+		"an RSM etc. An optional \"pad\" can be given to extend the range a bit\n"
+		"to make sure we cover the DEM height range. \n"
 		""},
 	 { (char *)"Dem_surface_point", _wrap_Dem_surface_point, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -7760,6 +8041,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -7899,6 +8181,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
+  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -8038,6 +8321,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swig
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -8177,6 +8461,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
+  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,

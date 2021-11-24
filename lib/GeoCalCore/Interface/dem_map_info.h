@@ -55,6 +55,10 @@ public:
 
   const MapInfo& map_info() const {return map_info_;}
 
+  virtual void height_range(const GroundCoordinate& Ulc,
+			      const GroundCoordinate& Lrc,
+			      double& Min_h, double& Max_h,
+			      double H_pad = 10.0) const;
   virtual double distance_to_surface(const GroundCoordinate& Gp) const;
   double height_datum(const GroundCoordinate& Gp) const;
   double height_datum(const Geodetic& Gp) const;

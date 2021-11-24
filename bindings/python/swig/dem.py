@@ -256,6 +256,22 @@ class Dem(geocal_swig.generic_object.GenericObject):
         return _dem.Dem_intersect_start_length(self, Cf, Lv, Resolution, Start_length)
 
 
+    def height_range(self, Ulc, Lrc, H_pad=10.0):
+        """
+
+        virtual void GeoCal::Dem::height_range(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc, double
+        &Min_h, double &Max_h, double H_pad=10.0) const =0
+        Height range, in meters relative to the reference surface.
+
+        This is for the area covered by the ULC to LRC. Note that this might
+        be a bit approximate, you might find a height out of this range. But
+        this should give a reasonable range to use for things like generating
+        an RSM etc. An optional "pad" can be given to extend the range a bit
+        to make sure we cover the DEM height range. 
+        """
+        return _dem.Dem_height_range(self, Ulc, Lrc, H_pad)
+
+
     def surface_point(self, Gp):
         """
 
@@ -270,6 +286,7 @@ Dem.distance_to_surface = new_instancemethod(_dem.Dem_distance_to_surface, None,
 Dem.height_reference_surface = new_instancemethod(_dem.Dem_height_reference_surface, None, Dem)
 Dem.intersect = new_instancemethod(_dem.Dem_intersect, None, Dem)
 Dem.intersect_start_length = new_instancemethod(_dem.Dem_intersect_start_length, None, Dem)
+Dem.height_range = new_instancemethod(_dem.Dem_height_range, None, Dem)
 Dem.surface_point = new_instancemethod(_dem.Dem_surface_point, None, Dem)
 Dem.__str__ = new_instancemethod(_dem.Dem___str__, None, Dem)
 Dem_swigregister = _dem.Dem_swigregister

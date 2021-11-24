@@ -55,6 +55,16 @@ const double gm_prime = 3.986000982e14;
 
 inline double sqr(double x) { return x * x; }
 
+namespace GeoCal {
+  
+double refraction_adapter(double x, void* params) 
+{
+  RefractionMsp* rmsp = static_cast<RefractionMsp*>(params);
+  return rmsp->f_r(x);
+}
+  
+}
+
 //-----------------------------------------------------------------------
 /// Constructor. You can supply the wavelength, temperature, and
 /// pressure of the ground point if you have that information. Otherwise
@@ -138,7 +148,32 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
   // troposphere to stratosphere. Save the value at r1
   d_r1 = d_rp * d_scale_factor_tropopause(r1, rp, t_rp);
   t_r1 = temperature_r(r1);
+
+  // Wrap f_r up so we can pass it to GSL library.
+  gsl_function gf;
+  gf.function = &refraction_adapter;
+  gf.params = static_cast<void*>(const_cast<RefractionMsp*>(this));
+
+  // Integration is divided up into 3 pieces
+  double w1 = s * gsl_integration_glfixed(&gf, rp, r1, quad_table);
+  double w2 = s * gsl_integration_glfixed(&gf, r1, r2, quad_table);
+  double w3 = asin(s/r2) - asin(s/ro);
+  double w = w1 + w2 + w3;
+  // Geometric zenith of the primary mirror vertex at the ground point P
+  double alpha_g = atan(ro * sin(w)/(ro*cos(w) - rp));
+
+  // Geometric zenith of the ground point p at the primary mirror vertex
+  double beta_g = alpha_g - w;
+
+  // Angle of refraction
+  double a_r = a_o - beta_g;
   
+  std::cerr << "w1: " << w1 << "\n"
+	    << "w2: " << w2 << "\n"
+	    << "w3: " << w3 << "\n"
+	    << "w: " << w << "\n"
+	    << "a_r: " << a_r << "\n";
+
   return lv;
 }
 
@@ -281,3 +316,4 @@ double RefractionMsp::f_r(double r) const
 {
   return 1 / (r * sqrt(sqr(r) * sqr(k_r(r)) - sqr(s)));
 }
+

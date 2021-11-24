@@ -50,6 +50,8 @@ public:
 //-----------------------------------------------------------------------
 
   double pressure() const { return pressure_;}
+  
+  double f_r(double r) const;
 private:
   double wavelength_, temperature_, pressure_;
   gsl_integration_glfixed_table *quad_table;
@@ -63,7 +65,6 @@ private:
   double temperature_r(double r) const;
   double d_r(double r) const;
   double k_r(double r) const;
-  double f_r(double r) const;
   
   // We use these in a few places, so as an optimization calculate
   // once and save

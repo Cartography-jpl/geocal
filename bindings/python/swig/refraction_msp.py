@@ -258,7 +258,7 @@ class RefractionMsp(geocal_swig.refraction.Refraction):
     def refraction_apply(self, Spacecraft_pos, Gc_no_refraction):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::RefractionMsp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
         &Gc_no_refraction) const
 
         """
@@ -268,7 +268,7 @@ class RefractionMsp(geocal_swig.refraction.Refraction):
     def refraction_reverse(self, Spacecraft_pos, Gc_with_refraction):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::RefractionMsp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
         &Gc_with_refraction) const
 
         """

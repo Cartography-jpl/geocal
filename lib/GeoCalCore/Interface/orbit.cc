@@ -146,11 +146,7 @@ double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
 FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate& Gc, 
 				 const Camera& C, int Band) const
 {
-  boost::shared_ptr<CartesianFixed> p1 = position_cf();
-  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
-  CartesianFixedLookVector lv;
-  for(int i = 0; i < 3; ++i)
-    lv.look_vector[i] = p2->position[i] - p1->position[i];
+  CartesianFixedLookVector lv(*position_cf(), Gc);
   ScLookVector sl = sc_look_vector(lv);
   return C.frame_coordinate(sl, Band);
 }

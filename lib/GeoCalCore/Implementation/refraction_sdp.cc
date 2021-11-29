@@ -132,7 +132,7 @@ double RefractionSdp::displacement(double Space_zenith) const
 /// coordinates accounting for refraction.
 //-----------------------------------------------------------------------
 
-boost::shared_ptr<GroundCoordinate>
+CartesianFixedLookVector
 RefractionSdp::refraction_apply(const GroundCoordinate& Spacecraft_pos,
 			     const GroundCoordinate& Gc_no_refraction) const
 {
@@ -180,10 +180,10 @@ RefractionSdp::refraction_apply(const GroundCoordinate& Spacecraft_pos,
   double delta_lat = disp * cos(azimuth) * Constant::rad_to_deg;
   double delta_lon = disp * sin(azimuth) / coslat * 
     Constant::rad_to_deg;
-  return boost::shared_ptr<GroundCoordinate>
-    (new Geodetic(gc_geodetic.latitude() + delta_lat,
-		  gc_geodetic.longitude() + delta_lon,
-		  gc_geodetic.height_reference_surface()));
+  return CartesianFixedLookVector(Spacecraft_pos,
+			  Geodetic(gc_geodetic.latitude() + delta_lat,
+				   gc_geodetic.longitude() + delta_lon,
+				   gc_geodetic.height_reference_surface()));
 }
 
 //-----------------------------------------------------------------------
@@ -201,7 +201,7 @@ RefractionSdp::refraction_apply(const GroundCoordinate& Spacecraft_pos,
 /// does, we'll want to replace this with a more exact calculation.
 //-----------------------------------------------------------------------
   
-boost::shared_ptr<GroundCoordinate>
+CartesianFixedLookVector
 RefractionSdp::refraction_reverse(const GroundCoordinate& Spacecraft_pos,
 		       const GroundCoordinate& Gc_with_refraction) const
 {
@@ -253,9 +253,9 @@ RefractionSdp::refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   double delta_lat = disp * cos(azimuth) * Constant::rad_to_deg;
   double delta_lon = disp * sin(azimuth) / coslat * 
     Constant::rad_to_deg;
-  return boost::shared_ptr<GroundCoordinate>
-    (new Geodetic(gc_geodetic.latitude() - delta_lat,
-		  gc_geodetic.longitude() - delta_lon,
-		  gc_geodetic.height_reference_surface()));
+  return CartesianFixedLookVector(Spacecraft_pos,
+			  Geodetic(gc_geodetic.latitude() - delta_lat,
+				   gc_geodetic.longitude() - delta_lon,
+				   gc_geodetic.height_reference_surface()));
 }
 

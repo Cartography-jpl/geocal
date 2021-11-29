@@ -19,10 +19,10 @@ public:
   %python_attribute_with_set(index_refraction_surface, double)
   double surface_zenith(double Space_zenith) const;
   double displacement(double Space_zenith) const;
-  virtual boost::shared_ptr<GroundCoordinate>
+  virtual CartesianFixedLookVector
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
   		   const GroundCoordinate& Gc_no_refraction) const;
-  virtual boost::shared_ptr<GroundCoordinate>
+  virtual CartesianFixedLookVector
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const;
   %pickle_serialization()

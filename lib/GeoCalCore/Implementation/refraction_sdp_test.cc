@@ -35,8 +35,9 @@ BOOST_AUTO_TEST_CASE(refraction_sdp)
   SimpleDem dem;
   boost::shared_ptr<GroundCoordinate> gc = od->surface_intersect(cam, fc, dem);
   RefractionSdp ref(0.0, gc->latitude());
-  boost::shared_ptr<GroundCoordinate> gc_corr = 
-    ref.refraction_apply(*od->position_cf(), *gc);
+  boost::shared_ptr<GroundCoordinate> gc_corr =
+    dem.intersect(*od->position_cf(), 
+		  ref.refraction_apply(*od->position_cf(), *gc), 10);
 
   // Simple check that we have signs correct. Refraction should bring
   // the ground point closer to the satellite.
@@ -49,8 +50,9 @@ BOOST_AUTO_TEST_CASE(refraction_sdp)
   // get a distance of 63.5987, which seems like a reasonable result.
   BOOST_CHECK_CLOSE(distance(*gc, *gc_corr), 63.65053687018144, 1e-2);
 
-  boost::shared_ptr<GroundCoordinate> gc_reverse = 
-    ref.refraction_reverse(*od->position_cf(), *gc_corr);
+  boost::shared_ptr<GroundCoordinate> gc_reverse =
+    dem.intersect(*od->position_cf(), 
+		  ref.refraction_reverse(*od->position_cf(), *gc_corr), 10);
   BOOST_CHECK(distance(*gc_reverse, *gc) < 0.02);
 }
 

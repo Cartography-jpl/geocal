@@ -198,10 +198,12 @@ class Refraction(geocal_swig.generic_object.GenericObject):
     def refraction_apply(self, Spacecraft_pos, Gc_no_refraction):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::Refraction::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        virtual CartesianFixedLookVector GeoCal::Refraction::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
         &Gc_no_refraction) const =0
         Apply a refraction correction, taking a ground coordinate w/o
-        refraction to one with refraction applied. 
+        refraction.
+
+        We return the CartesianFixedLookVector including refraction. 
         """
         return _refraction.Refraction_refraction_apply(self, Spacecraft_pos, Gc_no_refraction)
 
@@ -209,7 +211,7 @@ class Refraction(geocal_swig.generic_object.GenericObject):
     def refraction_reverse(self, Spacecraft_pos, Gc_with_refraction):
         """
 
-        virtual boost::shared_ptr<GroundCoordinate> GeoCal::Refraction::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        virtual CartesianFixedLookVector GeoCal::Refraction::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
         &Gc_with_refraction) const =0
         Reverse of refraction_apply. 
         """

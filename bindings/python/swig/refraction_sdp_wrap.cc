@@ -6920,7 +6920,7 @@ SWIGINTERN PyObject *_wrap_RefractionSdp_refraction_apply(PyObject *SWIGUNUSEDPA
   int res3 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
   PyObject *swig_obj[3] ;
-  boost::shared_ptr< GeoCal::GroundCoordinate > result;
+  GeoCal::CartesianFixedLookVector result;
   
   if (!SWIG_Python_UnpackTuple(args,"RefractionSdp_refraction_apply",3,3,swig_obj)) SWIG_fail;
   {
@@ -6998,7 +6998,8 @@ SWIGINTERN PyObject *_wrap_RefractionSdp_refraction_apply(PyObject *SWIGUNUSEDPA
     }
   }
   {
-    resultobj = GeoCal::swig_to_python(result);
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7022,7 +7023,7 @@ SWIGINTERN PyObject *_wrap_RefractionSdp_refraction_reverse(PyObject *SWIGUNUSED
   int res3 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
   PyObject *swig_obj[3] ;
-  boost::shared_ptr< GeoCal::GroundCoordinate > result;
+  GeoCal::CartesianFixedLookVector result;
   
   if (!SWIG_Python_UnpackTuple(args,"RefractionSdp_refraction_reverse",3,3,swig_obj)) SWIG_fail;
   {
@@ -7100,7 +7101,8 @@ SWIGINTERN PyObject *_wrap_RefractionSdp_refraction_reverse(PyObject *SWIGUNUSED
     }
   }
   {
-    resultobj = GeoCal::swig_to_python(result);
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
@@ -7204,7 +7206,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RefractionSdp_refraction_apply", _wrap_RefractionSdp_refraction_apply, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > RefractionSdp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
+		"CartesianFixedLookVector RefractionSdp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
 		"&Gc_no_refraction) const\n"
 		"Apply refraction.\n"
 		"\n"
@@ -7214,7 +7216,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RefractionSdp_refraction_reverse", _wrap_RefractionSdp_refraction_reverse, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > RefractionSdp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
+		"CartesianFixedLookVector RefractionSdp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
 		"&Gc_with_refraction) const\n"
 		"Reverse the refraction calculation.\n"
 		"\n"

@@ -22,10 +22,10 @@ public:
   CartesianFixedLookVector refraction_calc
   (const GroundCoordinate& Spacecraft_pos,
    const GroundCoordinate& Gc_no_refraction) const;
-  virtual boost::shared_ptr<GroundCoordinate>
+  virtual CartesianFixedLookVector
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
   		   const GroundCoordinate& Gc_no_refraction) const;
-  virtual boost::shared_ptr<GroundCoordinate>
+  virtual CartesianFixedLookVector
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const;
   %pickle_serialization()

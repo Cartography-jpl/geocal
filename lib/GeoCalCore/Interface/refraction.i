@@ -13,10 +13,10 @@ namespace GeoCal {
 class Refraction : public GenericObject {
 public:
   Refraction();
-  virtual boost::shared_ptr<GroundCoordinate>
+  virtual CartesianFixedLookVector
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
   		   const GroundCoordinate& Gc_no_refraction) const = 0;
-  virtual boost::shared_ptr<GroundCoordinate>
+  virtual CartesianFixedLookVector
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const = 0;
   std::string print_to_string() const;

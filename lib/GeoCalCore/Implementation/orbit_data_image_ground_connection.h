@@ -3,6 +3,7 @@
 #include "image_ground_connection.h"
 #include "orbit.h"
 #include "refraction.h"
+#include "simple_dem.h"
 #include "ostream_pad.h"
 
 namespace GeoCal {
@@ -96,13 +97,8 @@ public:
 			    D, res, b, max_h);
     if(!refraction_)
       return gc_uncorr;
-    boost::shared_ptr<GroundCoordinate> gc_corr =
+    CartesianFixedLookVector lv = 
       refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    boost::shared_ptr<CartesianFixed> gc_corr_cf = gc_corr->convert_to_cf();
-    CartesianFixedLookVector lv
-      (gc_corr_cf->position[0] - od->position_cf()->position[0],
-       gc_corr_cf->position[1] - od->position_cf()->position[1],
-       gc_corr_cf->position[2] - od->position_cf()->position[2]);
     return D.intersect(*od->position_cf(), lv, res, max_h);
   }
   virtual boost::shared_ptr<GroundCoordinate> 
@@ -113,13 +109,8 @@ public:
       (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H);
     if(!refraction_)
       return gc_uncorr;
-    boost::shared_ptr<GroundCoordinate> gc_corr =
+    CartesianFixedLookVector lv = 
       refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    boost::shared_ptr<CartesianFixed> gc_corr_cf = gc_corr->convert_to_cf();
-    CartesianFixedLookVector lv
-      (gc_corr_cf->position[0] - od->position_cf()->position[0],
-       gc_corr_cf->position[1] - od->position_cf()->position[1],
-       gc_corr_cf->position[2] - od->position_cf()->position[2]);
     return od->position_cf()->reference_surface_intersect_approximate(lv, H);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
@@ -127,9 +118,9 @@ public:
   { 
     FrameCoordinate fc;
     if(refraction_) {
-      boost::shared_ptr<GroundCoordinate> gc_uncorr =
+      CartesianFixedLookVector lv =
 	refraction_->refraction_reverse(*od->position_cf(), Gc);
-      fc = od->frame_coordinate(*gc_uncorr, *cam, b);
+      fc = cam->frame_coordinate(od->sc_look_vector(lv), b);
     } else
       fc = od->frame_coordinate(Gc, *cam, b);
     return ImageCoordinate(fc.line, fc.sample);
@@ -146,7 +137,9 @@ public:
     FrameCoordinateWithDerivative fc;
     if(refraction_) {
       boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	refraction_->refraction_reverse(*od->position_cf(), Gc);
+	SimpleDem().intersect(*od->position_cf(),
+	      refraction_->refraction_reverse(*od->position_cf(), Gc),
+	      1);
       fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
     } else
       fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
@@ -169,7 +162,9 @@ public:
     FrameCoordinateWithDerivative fc;
     if(refraction_) {
       boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	refraction_->refraction_reverse(*od->position_cf(), Gc);
+	SimpleDem().intersect(*od->position_cf(),
+	      refraction_->refraction_reverse(*od->position_cf(), Gc),
+	      1);
       fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
     } else
       fc = od->frame_coordinate_with_derivative(Gc, *cam, b);

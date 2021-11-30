@@ -337,7 +337,9 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     t.ground_ref_point_x = pt.position[0]
     t.ground_ref_point_y = pt.position[1]
     t.ground_ref_point_z = pt.position[2]
-    t.atm_refr_flag = 1
+#    t.vel_aber_flag = 0
+#    t.atm_refr_flag = 0
+#    igc_gfm.refraction = None
     print(f)
     f.write("gfm_test.ntf")
     f2 = NitfFile("gfm_test.ntf")
@@ -346,18 +348,35 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
 
     max_diff1 = -1e8
     max_diff2 = -1e8
+    max_diff3 = -1e8
     for i in range(0, igc_gfm.number_line, 20):
         for j in range (0, igc_gfm.number_sample, 20):
             ic = ImageCoordinate(i, j)
+            # Small difference, not sure what the source of that is.
+            # Determined this is a difference in velocity aberration
+            # correction, need to look into this. Might be that our
+            # CartesianFixed approximation is causing trouble here.
+            #
+            # With refraction and aberration turned off:
+            # Max igc3 to igc2 diff: 5.455754302081257e-05
+            # With just refraction turned off: 0.5862886820012689
+            # With everything on: 1.8598156553903584
+    
+            #print(igc3.ground_coordinate(ic).position)
+            #print(igc2.ground_coordinate(ic).position)
             d1 = distance(igc_gfm.ground_coordinate(ic),
                           igc2.ground_coordinate(ic))
             d2 = distance(igc_gfm.ground_coordinate(ic),
                           igc3.ground_coordinate(ic))
+            d3 = distance(igc2.ground_coordinate(ic),
+                          igc3.ground_coordinate(ic))
             max_diff1 = max(d1, max_diff1)
             max_diff2 = max(d2, max_diff2)
+            max_diff3 = max(d3, max_diff3)
     print(max_diff1)
     print(max_diff2)
-#    assert max_diff1 < 1.0
+    print(max_diff3)
+    assert max_diff1 < 2.0
     
 @long_test
 @require_msp    

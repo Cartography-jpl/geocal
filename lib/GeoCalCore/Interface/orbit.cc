@@ -10,6 +10,11 @@
 using namespace GeoCal;
 using namespace blitz;
 
+// Turn off aberration correction if needed, to do things like
+// compare against the MSP library. Could make an actual flag, but
+// we only occasionally need to do this so recompiling isn't too big
+// a deal
+// #define TURN_OFF_ABERRATION 1
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void OrbitData::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
@@ -867,6 +872,9 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
   // Do abberation of light correction.
   CartesianInertialLookVector res;
   double k = Sl.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   fill_in_ci_to_cf();
   boost::math::quaternion<double> ci = 
     conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf() - k * vel_ci;
@@ -884,6 +892,9 @@ QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
   // Do abberation of light correction.
   CartesianInertialLookVectorWithDerivative res;
   AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   fill_in_ci_to_cf();
   boost::math::quaternion<AutoDerivative<double> > ci = 
     conj(ci_to_cf_with_derivative()) * 
@@ -908,6 +919,9 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
   // really should be using vel_ci_with_der, but the difference is
   // really pretty small
   double k = Sl.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   boost::math::quaternion<double> cf = sc_to_cf_ * Sl.look_quaternion() * 
     conj(sc_to_cf_) - k * vel_cf;
   res.look_quaternion(cf);
@@ -928,6 +942,9 @@ QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
   // really should be using vel_ci_with_der, but the difference is
   // really pretty small
   AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   boost::math::quaternion<AutoDerivative<double> > cf = 
     sc_to_cf_with_der * Sl.look_quaternion() * 
     conj(sc_to_cf_with_der) - k * vel_cf_with_der;
@@ -946,6 +963,9 @@ const
   // Do abberation of light correction.
   ScLookVector res;
   double k = Ci.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   boost::math::quaternion<double> sc =
     conj(sc_to_cf_) * (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + 
 		      k * vel_cf) * sc_to_cf_;
@@ -964,6 +984,9 @@ const
   // Do abberation of light correction.
   ScLookVectorWithDerivative res;
   AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   boost::math::quaternion<AutoDerivative<double> > sc =
     conj(sc_to_cf_with_der) * 
     (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative()) + 
@@ -983,6 +1006,9 @@ const
   // Do abberation of light correction.
   ScLookVector res;
   double k = Cf.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   boost::math::quaternion<double> sc =
     conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
   res.look_quaternion(sc);
@@ -1000,6 +1026,9 @@ const
   // Do abberation of light correction.
   ScLookVectorWithDerivative res;
   AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
+#ifdef TURN_OFF_ABERRATION
+  k = 0;
+#endif    
   boost::math::quaternion<AutoDerivative<double> > sc =
     conj(sc_to_cf_with_der) * (Cf.look_quaternion() + k * vel_cf_with_der) * 
     sc_to_cf_with_der;

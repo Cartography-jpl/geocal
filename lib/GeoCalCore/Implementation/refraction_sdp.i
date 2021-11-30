@@ -10,6 +10,8 @@
 %import "ground_coordinate.i"
 %geocal_shared_ptr(GeoCal::RefractionSdp);
 namespace GeoCal {
+// Not sure why swig thinks this is abstract, but it does.
+%feature("notabstract") RefractionSdp;
 class RefractionSdp : public Refraction {
 public:
   RefractionSdp(double Altitude, double Latitude, 

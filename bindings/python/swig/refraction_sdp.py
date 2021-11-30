@@ -182,7 +182,6 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.refraction
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class RefractionSdp(geocal_swig.refraction.Refraction):
     """
 
@@ -209,10 +208,23 @@ class RefractionSdp(geocal_swig.refraction.Refraction):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Altitude, Latitude, Index_refraction_surface=-1):
+        """
+
+        RefractionSdp::RefractionSdp(double Altitude, double Latitude, double Index_refraction_surface=-1)
+        This sets up for a Refraction calculation.
+
+        A representative altitude (in meters) and latitude (in degrees) is
+        given. This doesn't depend very strongly on altitude and latitude, so
+        unless you using widely varying points just using the center of you
+        scene should be pretty much sufficient.
+
+        The index of refraction at the surface can be supplied if desired,
+        otherwise we calculate an approximate value. 
+        """
+        _refraction_sdp.RefractionSdp_swiginit(self, _refraction_sdp.new_RefractionSdp(Altitude, Latitude, Index_refraction_surface))
 
     def _v_altitude(self):
         """

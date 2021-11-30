@@ -8,6 +8,7 @@
 %}
 %base_import(generic_object)
 %import "ground_coordinate.i"
+%import "look_vector.i"
 %geocal_shared_ptr(GeoCal::Refraction);
 namespace GeoCal {
 class Refraction : public GenericObject {

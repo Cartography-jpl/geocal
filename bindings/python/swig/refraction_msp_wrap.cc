@@ -5814,7 +5814,34 @@ namespace swig {
 #include "refraction_msp.h"
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
   #define SWIG_From_double   PyFloat_FromDouble 
+
+
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
 
 
 
@@ -6603,222 +6630,134 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_RefractionMsp__v_wavelength(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_RefractionMsp__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
+  double arg1 ;
+  double arg2 ;
+  double arg3 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  GeoCal::RefractionMsp *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp__v_wavelength" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RefractionMsp" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RefractionMsp" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_RefractionMsp" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
   {
     try {
-      result = (double)((GeoCal::RefractionMsp const *)arg1)->wavelength();
+      result = (GeoCal::RefractionMsp *)new GeoCal::RefractionMsp(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  {
+    boost::shared_ptr<  GeoCal::RefractionMsp > *smartresult = result ? new boost::shared_ptr<  GeoCal::RefractionMsp >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_RefractionMsp__v_temperature(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_RefractionMsp__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
+  double arg1 ;
+  double arg2 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  GeoCal::RefractionMsp *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp__v_temperature" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RefractionMsp" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_RefractionMsp" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
   {
     try {
-      result = (double)((GeoCal::RefractionMsp const *)arg1)->temperature();
+      result = (GeoCal::RefractionMsp *)new GeoCal::RefractionMsp(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  {
+    boost::shared_ptr<  GeoCal::RefractionMsp > *smartresult = result ? new boost::shared_ptr<  GeoCal::RefractionMsp >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_RefractionMsp__v_pressure(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_RefractionMsp__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  double result;
+  double arg1 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  GeoCal::RefractionMsp *result = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp__v_pressure" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_RefractionMsp" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
   {
     try {
-      result = (double)((GeoCal::RefractionMsp const *)arg1)->pressure();
+      result = (GeoCal::RefractionMsp *)new GeoCal::RefractionMsp(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  {
+    boost::shared_ptr<  GeoCal::RefractionMsp > *smartresult = result ? new boost::shared_ptr<  GeoCal::RefractionMsp >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_RefractionMsp_refraction_calc(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_RefractionMsp__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
-  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
-  GeoCal::GroundCoordinate *arg2 = 0 ;
-  GeoCal::GroundCoordinate *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
-  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
-  PyObject *swig_obj[3] ;
-  GeoCal::CartesianFixedLookVector result;
+  GeoCal::RefractionMsp *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"RefractionMsp_refraction_calc",3,3,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp_refraction_calc" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
-      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RefractionMsp_refraction_calc" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RefractionMsp_refraction_calc" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RefractionMsp_refraction_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RefractionMsp_refraction_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
-      }
-    }
-  }
+  if ((nobjs < 0) || (nobjs > 0)) SWIG_fail;
   {
     try {
-      result = ((GeoCal::RefractionMsp const *)arg1)->refraction_calc((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+      result = (GeoCal::RefractionMsp *)new GeoCal::RefractionMsp();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6826,12 +6765,44 @@ SWIGINTERN PyObject *_wrap_RefractionMsp_refraction_calc(PyObject *SWIGUNUSEDPAR
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+    boost::shared_ptr<  GeoCal::RefractionMsp > *smartresult = result ? new boost::shared_ptr<  GeoCal::RefractionMsp >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
   }
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_RefractionMsp(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_RefractionMsp",0,3,argv))) SWIG_fail;
+  --argc;
+  if (argc == 0) {
+    return _wrap_new_RefractionMsp__SWIG_3(self, argc, argv);
+  }
+  if (argc == 1) {
+    return _wrap_new_RefractionMsp__SWIG_2(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_new_RefractionMsp__SWIG_1(self, argc, argv);
+  }
+  if (argc == 3) {
+    return _wrap_new_RefractionMsp__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_RefractionMsp'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RefractionMsp::RefractionMsp(double,double,double)\n"
+    "    GeoCal::RefractionMsp::RefractionMsp(double,double)\n"
+    "    GeoCal::RefractionMsp::RefractionMsp(double)\n"
+    "    GeoCal::RefractionMsp::RefractionMsp()\n");
+  return 0;
 }
 
 
@@ -7041,6 +7012,371 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RefractionMsp__v_wavelength(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp__v_wavelength" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::RefractionMsp const *)arg1)->wavelength();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RefractionMsp__v_temperature(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp__v_temperature" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::RefractionMsp const *)arg1)->temperature();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RefractionMsp__v_pressure(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp__v_pressure" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::RefractionMsp const *)arg1)->pressure();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RefractionMsp_refraction_calc__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  bool arg4 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  bool val4 ;
+  int ecode4 = 0 ;
+  GeoCal::CartesianFixedLookVector result;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp_refraction_calc" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RefractionMsp_refraction_calc" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RefractionMsp_refraction_calc" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RefractionMsp_refraction_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RefractionMsp_refraction_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RefractionMsp_refraction_calc" "', argument " "4"" of type '" "bool""'");
+  } 
+  arg4 = static_cast< bool >(val4);
+  {
+    try {
+      result = ((GeoCal::RefractionMsp const *)arg1)->refraction_calc((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RefractionMsp_refraction_calc__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  GeoCal::GroundCoordinate *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RefractionMsp const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
+  GeoCal::CartesianFixedLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RefractionMsp_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RefractionMsp_refraction_calc" "', argument " "1"" of type '" "GeoCal::RefractionMsp const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RefractionMsp > * >(argp1);
+      arg1 = const_cast< GeoCal::RefractionMsp * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RefractionMsp_refraction_calc" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RefractionMsp_refraction_calc" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "RefractionMsp_refraction_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RefractionMsp_refraction_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::RefractionMsp const *)arg1)->refraction_calc((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RefractionMsp_refraction_calc(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RefractionMsp_refraction_calc",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_RefractionMsp_refraction_calc__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_RefractionMsp_refraction_calc__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RefractionMsp_refraction_calc'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RefractionMsp::refraction_calc(GeoCal::GroundCoordinate const &,GeoCal::GroundCoordinate const &,bool) const\n"
+    "    GeoCal::RefractionMsp::refraction_calc(GeoCal::GroundCoordinate const &,GeoCal::GroundCoordinate const &) const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_RefractionMsp(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::RefractionMsp *arg1 = (GeoCal::RefractionMsp *) 0 ;
@@ -7090,6 +7426,10 @@ SWIGINTERN PyObject *RefractionMsp_swigregister(PyObject *SWIGUNUSEDPARM(self), 
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *RefractionMsp_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { (char *)"delete_SwigPyIterator", (PyCFunction)_wrap_delete_SwigPyIterator, METH_O, NULL},
@@ -7110,6 +7450,28 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
+	 { (char *)"new_RefractionMsp", _wrap_new_RefractionMsp, METH_VARARGS, (char *)"\n"
+		"\n"
+		"RefractionMsp::RefractionMsp(double Wavelength_micrometer=0.6, double Temperature_kelvin=-1,\n"
+		"double Pressure_millibar=-1)\n"
+		"Constructor.\n"
+		"\n"
+		"You can supply the wavelength, temperature, and pressure of the ground\n"
+		"point if you have that information. Otherwise the algorithm will use\n"
+		"defaults. \n"
+		""},
+	 { (char *)"RefractionMsp_refraction_apply", _wrap_RefractionMsp_refraction_apply, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
+		"&Gc_no_refraction) const\n"
+		"\n"
+		""},
+	 { (char *)"RefractionMsp_refraction_reverse", _wrap_RefractionMsp_refraction_reverse, METH_VARARGS, (char *)"\n"
+		"\n"
+		"virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
+		"&Gc_with_refraction) const\n"
+		"\n"
+		""},
 	 { (char *)"RefractionMsp__v_wavelength", (PyCFunction)_wrap_RefractionMsp__v_wavelength, METH_O, (char *)"\n"
 		"\n"
 		"double GeoCal::RefractionMsp::wavelength() const\n"
@@ -7132,20 +7494,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RefractionMsp_refraction_calc", _wrap_RefractionMsp_refraction_calc, METH_VARARGS, (char *)"\n"
 		"\n"
 		"CartesianFixedLookVector RefractionMsp::refraction_calc(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_no_refraction) const\n"
-		"Calculate a look vector, corrected for refraction. \n"
-		""},
-	 { (char *)"RefractionMsp_refraction_apply", _wrap_RefractionMsp_refraction_apply, METH_VARARGS, (char *)"\n"
+		"&Gc_before_correction, bool Forward_calc=true) const\n"
+		"Calculate a look vector, corrected for refraction.\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_no_refraction) const\n"
-		"\n"
-		""},
-	 { (char *)"RefractionMsp_refraction_reverse", _wrap_RefractionMsp_refraction_reverse, METH_VARARGS, (char *)"\n"
-		"\n"
-		"virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_with_refraction) const\n"
-		"\n"
+		"The calculation to add refraction is almost the same as the reverse,\n"
+		"so we just pass in a flag to indicate which direction we should go \n"
 		""},
 	 { (char *)"delete_RefractionMsp", (PyCFunction)_wrap_delete_RefractionMsp, METH_O, (char *)"\n"
 		"\n"
@@ -7153,6 +7506,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { (char *)"RefractionMsp_swigregister", RefractionMsp_swigregister, METH_VARARGS, NULL},
+	 { (char *)"RefractionMsp_swiginit", RefractionMsp_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -7265,9 +7619,6 @@ static void *_p_boost__shared_ptrT_GeoCal__LnLookVector_tTo_p_boost__shared_ptrT
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::GenericObject >(*(boost::shared_ptr< GeoCal::LnLookVector > *)x);
 }
-static void *_p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::TimeWithDerivative *) x));
-}
 static void *_p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) ((GeoCal::CartesianFixedLookVectorWithDerivative *) x));
 }
@@ -7279,6 +7630,9 @@ static void *_p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__Ge
 }
 static void *_p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) ((GeoCal::ScLookVectorWithDerivative *) x));
+}
+static void *_p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::GenericObject *)  ((GeoCal::TimeWithDerivative *) x));
 }
 static void *_p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) ((GeoCal::LnLookVectorWithDerivative *) x));
@@ -7697,7 +8051,7 @@ static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVector[] = {  {&_sw
 static swig_cast_info _swigc__p_GeoCal__CartesianInertialLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__DcsLookVector[] = {  {&_swigt__p_GeoCal__DcsLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__DcsLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Refraction, _p_GeoCal__RefractionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RefractionMsp, _p_GeoCal__RefractionMspTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t, _p_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVectorWithDerivative, _p_GeoCal__CartesianFixedLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVectorWithDerivative, _p_GeoCal__DcsLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, _p_GeoCal__ScLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__TimeWithDerivative, _p_GeoCal__TimeWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, _p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LookVectorT_double_t, _p_GeoCal__LookVectorT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeRefT_double_t, _p_GeoCal__AutoDerivativeRefT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__AutoDerivativeT_double_t, _p_GeoCal__AutoDerivativeT_double_tTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Time, _p_GeoCal__TimeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, _p_GeoCal__GroundCoordinateTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__Refraction, _p_GeoCal__RefractionTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__RefractionMsp, _p_GeoCal__RefractionMspTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertial, _p_GeoCal__CartesianInertialTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__DcsLookVector, _p_GeoCal__DcsLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVector, _p_GeoCal__CartesianInertialLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__ScLookVector, _p_GeoCal__ScLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianInertialLookVectorWithDerivative, _p_GeoCal__CartesianInertialLookVectorWithDerivativeTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__LnLookVector, _p_GeoCal__LnLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__CartesianFixedLookVector, _p_GeoCal__CartesianFixedLookVectorTo_p_GeoCal__GenericObject, 0, 0},  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__GroundCoordinate[] = {  {&_swigt__p_GeoCal__CartesianFixed, _p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate, 0, 0},  {&_swigt__p_GeoCal__GroundCoordinate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LnLookVector[] = {  {&_swigt__p_GeoCal__LnLookVector, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__LnLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__LnLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};

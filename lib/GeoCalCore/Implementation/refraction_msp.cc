@@ -96,34 +96,37 @@ RefractionMsp::~RefractionMsp()
 }
 
 //-----------------------------------------------------------------------
-/// Calculate a look vector, corrected for refraction.
+/// Calculate a look vector, corrected for refraction. The calculation
+/// to add refraction is almost the same as the reverse, so we just
+/// pass in a flag to indicate which direction we should go
 //-----------------------------------------------------------------------
 
 CartesianFixedLookVector RefractionMsp::refraction_calc
 (const GroundCoordinate& Spacecraft_pos,
- const GroundCoordinate& Gc_no_refraction) const
+ const GroundCoordinate& Gc_before_correction,
+ bool Forward_calc) const
 {
   // We use these in a few places, so as an optimization calculate
   // once and save
-  Gc_no_refraction.lat_lon_height(lat, lon ,hrefsurf);
+  Gc_before_correction.lat_lon_height(lat, lon ,hrefsurf);
   
   // The integration is split into target to tropopause, tropopause to
   // stratopause, stratopause to sensor. The documentation refers to
   // this as rp, r1, r2, ro (where r is radius from earth center in
   // meters).
 
-  rp = r_calc(Gc_no_refraction);
-  r1 = r_tropopause(Gc_no_refraction);
-  r2 = r_stratopause(Gc_no_refraction);
+  rp = r_calc(Gc_before_correction);
+  r1 = r_tropopause(Gc_before_correction);
+  r2 = r_stratopause(Gc_before_correction);
   ro = r_calc(Spacecraft_pos);
 
   // Also need the ellipsoid surface radius, to calculate temperature
   // and pressure (default values are at ellipsoid, need to translate
-  // to Gc_no_refraction
-  double re = r_ellipsoid(Gc_no_refraction);
+  // to Gc_before_correction
+  double re = r_ellipsoid(Gc_before_correction);
 
   // Snell's Law spherical symmetric structure.
-  CartesianFixedLookVector lv(Spacecraft_pos, Gc_no_refraction);
+  CartesianFixedLookVector lv(Spacecraft_pos, Gc_before_correction);
   auto ro_v = Spacecraft_pos.convert_to_cf();
   s = ro * sqrt(1 - sqr(dot(lv.direction(), ro_v->position) / ro));
   // Angle between light direction and ro_v.
@@ -167,14 +170,27 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
 
   // Angle of refraction
   double a_r = a_o - beta_g;
-  
-  std::cerr << "w1: " << w1 << "\n"
-	    << "w2: " << w2 << "\n"
-	    << "w3: " << w3 << "\n"
-	    << "w: " << w << "\n"
-	    << "a_r: " << a_r << "\n";
 
-  return lv;
+  // Switch direction if we are removing refraction. This isn't
+  // exactly right, but the differences should be very small from
+  // doing a full reversal.
+  if(!Forward_calc)
+    a_r *= -1;
+
+  double c1 = sin(a_r)/tan(a_o)-cos(a_r);
+  double c2 = sin(a_r) / sin(a_o);
+  CartesianFixedLookVector
+    lv2(-lv.direction()[0] * c1 - ro_v->position[0] / ro * c2,
+	-lv.direction()[1] * c1 - ro_v->position[1] / ro * c2,
+	-lv.direction()[2] * c1 - ro_v->position[2] / ro * c2);
+  if(false) 
+    std::cerr << "alpha_g: " << alpha_g * Constant::rad_to_deg << "\n"
+	      << "beta_g: " << beta_g * Constant::rad_to_deg << "\n"
+	      << "a_o: " << a_o * Constant::rad_to_deg << "\n"
+	      << "a_r: " << a_r * Constant::rad_to_deg << "\n"
+	      << lv << "\n"
+	      << lv2 << "\n";
+  return lv2;
 }
 
 void RefractionMsp::print(std::ostream& Os) const

@@ -19,15 +19,16 @@ public:
 
   CartesianFixedLookVector refraction_calc
   (const GroundCoordinate& Spacecraft_pos,
-   const GroundCoordinate& Gc_no_refraction) const;
+   const GroundCoordinate& Gc_before_correction,
+   bool Forward_calc = true) const;
   virtual CartesianFixedLookVector
   refraction_apply(const GroundCoordinate& Spacecraft_pos,
 		   const GroundCoordinate& Gc_no_refraction) const
-  { throw Exception("Not implemented yet"); }
+  { return refraction_calc(Spacecraft_pos, Gc_no_refraction, true); }
   virtual CartesianFixedLookVector
   refraction_reverse(const GroundCoordinate& Spacecraft_pos,
   		     const GroundCoordinate& Gc_with_refraction) const
-  { throw Exception("Not implemented yet"); }
+  { return refraction_calc(Spacecraft_pos, Gc_with_refraction, false); }
   virtual void print(std::ostream& Os) const;
   
 //-----------------------------------------------------------------------

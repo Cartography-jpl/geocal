@@ -450,10 +450,10 @@ def igc_gfm():
     cam.delta_line_block = [2048]
     cam.delta_sample_block = [2048]
     fa = np.empty((1,1,2,2,2))
-    fa[0,0,:,0,0] = -1024 * 21e-6
-    fa[0,0,:,1,0] = 1024 * 21e-6
-    fa[0,0,0,:,1] = 1024 * 21e-6
-    fa[0,0,1,:,1] = -1024 * 21e-6
+    fa[0,0,:,0,0] = -1024 * 21e-7
+    fa[0,0,:,1,0] = 1024 * 21e-7
+    fa[0,0,0,:,1] = 1024 * 21e-7
+    fa[0,0,1,:,1] = -1024 * 21e-7
     cam.field_alignment_block(0,fa)
     
     igc = OrbitDataImageGroundConnection(orb, tdata, cam, SimpleDem(),

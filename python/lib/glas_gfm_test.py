@@ -8,7 +8,8 @@ from .geocal_nitf_des import *
 from .glas_gfm import *
 from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
-                         KeplerOrbit, Time, OrbitDes, Ecr)
+                         KeplerOrbit, Time, OrbitDes, Ecr, RefractionMsp,
+                         quat_rot_x, quat_rot_y, deg_to_rad)
 import matplotlib.pylab as plt
 import matplotlib as mpl
 import seaborn as sns
@@ -312,6 +313,52 @@ def test_create_gfm(isolated_dir, igc_gfm):
     print(max_diff2)
     assert max_diff1 < 1.0
 
+@require_msp    
+@require_pynitf
+def test_refraction_gfm(isolated_dir, igc_gfm):
+    '''Repeat previous test, but with refraction turned on. Check that our
+    refraction is working correctly.'''
+    f = pynitf.NitfFile()
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    # Add a fairly steep angle, so we have a large refraction correction.
+    # This is the nominal angle for the MISR DF camera, but this is just
+    # "some steep angle" data
+    q = (quat_rot_x(0.0) * quat_rot_y(58.0 * deg_to_rad) *
+         quat_rot_x(-2.7 * deg_to_rad))
+    igc_gfm.camera.frame_to_sc = q
+    igc_gfm.refraction = RefractionMsp()
+    f.image_segment[0].create_glas_gfm(igc_gfm)
+    t = f.image_segment[0].glas_gfm.tre_csexrb
+    pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
+    t.ground_ref_point_x = pt.position[0]
+    t.ground_ref_point_y = pt.position[1]
+    t.ground_ref_point_z = pt.position[2]
+    t.atm_refr_flag = 1
+    print(f)
+    f.write("gfm_test.ntf")
+    f2 = NitfFile("gfm_test.ntf")
+    igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
+    igc3 = f2.image_segment[0].glas_gfm.igc()
+
+    max_diff1 = -1e8
+    max_diff2 = -1e8
+    for i in range(0, igc_gfm.number_line, 20):
+        for j in range (0, igc_gfm.number_sample, 20):
+            ic = ImageCoordinate(i, j)
+            d1 = distance(igc_gfm.ground_coordinate(ic),
+                          igc2.ground_coordinate(ic))
+            d2 = distance(igc_gfm.ground_coordinate(ic),
+                          igc3.ground_coordinate(ic))
+            max_diff1 = max(d1, max_diff1)
+            max_diff2 = max(d2, max_diff2)
+    print(max_diff1)
+    print(max_diff2)
+#    assert max_diff1 < 1.0
+    
 @long_test
 @require_msp    
 @require_pynitf

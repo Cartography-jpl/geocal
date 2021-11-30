@@ -1,7 +1,7 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera, Ecr,
                          QuaternionCamera, FrameCoordinate,
-                         ImageCoordinate,
+                         ImageCoordinate, RefractionMsp,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
@@ -147,6 +147,8 @@ class GlasGfm(object):
         orb = self.orbit
         cam = self.camera
         if(cam.sensor_type == "S"):
+            # TODO Ipi doesn't support refraction yet. When it does,
+            # put this in
             tt = self.time_table
             ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
             igc = IpiImageGroundConnection(ipi, dem, None,
@@ -156,7 +158,8 @@ class GlasGfm(object):
                 raise RuntimeError("We don't handle having the time stamps in a MTIMSA TRE")
             t = timestamp_to_geocal_time(self.tre_csexrb.base_timestamp) + self.tre_csexrb.dt_multiplier * 1e-9 * self.tre_csexrb.dt[0]
             igc = OrbitDataImageGroundConnection(orb, t, cam, dem, None,
-                                                 self.iseg.iid1)
+                                                 self.iseg.iid1,
+                                                 self.refraction)
         else:
             raise RuntimeError("Unrecognized camera sensor type")
         # Add some useful metadata
@@ -180,6 +183,14 @@ class GlasGfm(object):
         if(d is None):
             return None
         return d.camera
+
+    @property
+    def refraction(self):
+        '''Return the Refraction object if we are including refraction, None
+        otherwise'''
+        if(self.tre_csexrb.atm_refr_flag == 0):
+            return None
+        return RefractionMsp()
 
     @property
     def time_table(self):

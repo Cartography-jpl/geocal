@@ -182,7 +182,6 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.refraction
 import geocal_swig.generic_object
-import geocal_swig.look_vector
 class RefractionMsp(geocal_swig.refraction.Refraction):
     """
 
@@ -194,10 +193,40 @@ class RefractionMsp(geocal_swig.refraction.Refraction):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self, Wavelength_micrometer=0.6, Temperature_kelvin=-1, Pressure_millibar=-1):
+        """
+
+        RefractionMsp::RefractionMsp(double Wavelength_micrometer=0.6, double Temperature_kelvin=-1,
+        double Pressure_millibar=-1)
+        Constructor.
+
+        You can supply the wavelength, temperature, and pressure of the ground
+        point if you have that information. Otherwise the algorithm will use
+        defaults. 
+        """
+        _refraction_msp.RefractionMsp_swiginit(self, _refraction_msp.new_RefractionMsp(Wavelength_micrometer, Temperature_kelvin, Pressure_millibar))
+
+    def refraction_apply(self, Spacecraft_pos, Gc_no_refraction):
+        """
+
+        virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        &Gc_no_refraction) const
+
+        """
+        return _refraction_msp.RefractionMsp_refraction_apply(self, Spacecraft_pos, Gc_no_refraction)
+
+
+    def refraction_reverse(self, Spacecraft_pos, Gc_with_refraction):
+        """
+
+        virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        &Gc_with_refraction) const
+
+        """
+        return _refraction_msp.RefractionMsp_refraction_reverse(self, Spacecraft_pos, Gc_with_refraction)
+
 
     def _v_wavelength(self):
         """
@@ -245,46 +274,29 @@ class RefractionMsp(geocal_swig.refraction.Refraction):
         return self._v_pressure()
 
 
-    def refraction_calc(self, Spacecraft_pos, Gc_no_refraction):
+    def refraction_calc(self, Spacecraft_pos, Gc_no_refraction, Forward_calc=True):
         """
 
         CartesianFixedLookVector RefractionMsp::refraction_calc(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
-        &Gc_no_refraction) const
-        Calculate a look vector, corrected for refraction. 
+        &Gc_before_correction, bool Forward_calc=true) const
+        Calculate a look vector, corrected for refraction.
+
+        The calculation to add refraction is almost the same as the reverse,
+        so we just pass in a flag to indicate which direction we should go 
         """
-        return _refraction_msp.RefractionMsp_refraction_calc(self, Spacecraft_pos, Gc_no_refraction)
-
-
-    def refraction_apply(self, Spacecraft_pos, Gc_no_refraction):
-        """
-
-        virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
-        &Gc_no_refraction) const
-
-        """
-        return _refraction_msp.RefractionMsp_refraction_apply(self, Spacecraft_pos, Gc_no_refraction)
-
-
-    def refraction_reverse(self, Spacecraft_pos, Gc_with_refraction):
-        """
-
-        virtual CartesianFixedLookVector GeoCal::RefractionMsp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
-        &Gc_with_refraction) const
-
-        """
-        return _refraction_msp.RefractionMsp_refraction_reverse(self, Spacecraft_pos, Gc_with_refraction)
+        return _refraction_msp.RefractionMsp_refraction_calc(self, Spacecraft_pos, Gc_no_refraction, Forward_calc)
 
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _refraction_msp.delete_RefractionMsp
+RefractionMsp.refraction_apply = new_instancemethod(_refraction_msp.RefractionMsp_refraction_apply, None, RefractionMsp)
+RefractionMsp.refraction_reverse = new_instancemethod(_refraction_msp.RefractionMsp_refraction_reverse, None, RefractionMsp)
 RefractionMsp._v_wavelength = new_instancemethod(_refraction_msp.RefractionMsp__v_wavelength, None, RefractionMsp)
 RefractionMsp._v_temperature = new_instancemethod(_refraction_msp.RefractionMsp__v_temperature, None, RefractionMsp)
 RefractionMsp._v_pressure = new_instancemethod(_refraction_msp.RefractionMsp__v_pressure, None, RefractionMsp)
 RefractionMsp.refraction_calc = new_instancemethod(_refraction_msp.RefractionMsp_refraction_calc, None, RefractionMsp)
-RefractionMsp.refraction_apply = new_instancemethod(_refraction_msp.RefractionMsp_refraction_apply, None, RefractionMsp)
-RefractionMsp.refraction_reverse = new_instancemethod(_refraction_msp.RefractionMsp_refraction_reverse, None, RefractionMsp)
 RefractionMsp_swigregister = _refraction_msp.RefractionMsp_swigregister
 RefractionMsp_swigregister(RefractionMsp)
 

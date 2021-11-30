@@ -108,6 +108,11 @@ public:
 /// location you get from cf_look_vector_arr. This is intended, not a
 /// bug, and simple reflects that we are talking about 2 different
 /// things here.
+///
+/// For an ImageGroundConnection that include Refraction, these look
+/// vectors are *before* the Refraction correction has been
+/// applied. This is because in general we need to know the ground
+/// location before we can calculate refraction.
 //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 7> 
@@ -120,6 +125,11 @@ public:
 /// Return look vector for given coordinate, along with a position
 /// that lies along the direction of the look vector (so position of
 /// satellite, or a position on the surface.
+///
+/// For an ImageGroundConnection that include Refraction, these look
+/// vectors are *before* the Refraction correction has been
+/// applied. This is because in general we need to know the ground
+/// location before we can calculate refraction.
 //-----------------------------------------------------------------------
   
   virtual void cf_look_vector(const ImageCoordinate& Ic, 
@@ -132,7 +142,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// SWIG/python doesn't like returning 2 items through a director, so
-/// we implement cf_look_vector in 2 parts. In general, C++ to
+/// we implement cf_look_vector in 2 parts. In general, C++ should
 /// override cf_look_vector rather than these 2 functions (although it
 /// could do these 2 if useful for some reason.
 //-----------------------------------------------------------------------

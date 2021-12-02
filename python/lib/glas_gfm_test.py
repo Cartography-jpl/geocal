@@ -337,15 +337,20 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     t.ground_ref_point_x = pt.position[0]
     t.ground_ref_point_y = pt.position[1]
     t.ground_ref_point_z = pt.position[2]
-#    t.vel_aber_flag = 0
-#    t.atm_refr_flag = 0
-#    igc_gfm.refraction = None
+    if True:
+        # Compare without aberration correction
+        t.vel_aber_flag = 0
+        igc_gfm.orbit_data.aberration_correction = QuaternionOrbitData.NO_CORRECTION
+    if True:
+        # Compare without refraction
+        t.atm_refr_flag = 0
+        igc_gfm.refraction = None
     print(f)
     f.write("gfm_test.ntf")
     f2 = NitfFile("gfm_test.ntf")
     igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
     igc3 = f2.image_segment[0].glas_gfm.igc()
-
+    igc3.orbit_data.aberration_correction = igc_gfm.orbit_data.aberration_correction
     max_diff1 = -1e8
     max_diff2 = -1e8
     max_diff3 = -1e8

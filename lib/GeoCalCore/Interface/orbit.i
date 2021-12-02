@@ -128,6 +128,8 @@ def position_cf_with_derivative(self):
 
 class QuaternionOrbitData : public OrbitData {
 public:
+  enum AberrationCorrection { FULL_CORRECTION = 0,
+    IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = 1, NO_CORRECTION = 2 };
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
@@ -182,6 +184,7 @@ public:
   interpolate(const QuaternionOrbitData& t1, 
 	      const QuaternionOrbitData& t2, 
 	      const Time& tm, bool Extrapolation_ok = false);
+  %python_attribute_with_set(aberration_correction, AberrationCorrection);
   %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)

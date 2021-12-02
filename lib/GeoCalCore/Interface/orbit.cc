@@ -10,11 +10,6 @@
 using namespace GeoCal;
 using namespace blitz;
 
-// Turn off aberration correction if needed, to do things like
-// compare against the MSP library. Could make an actual flag, but
-// we only occasionally need to do this so recompiling isn't too big
-// a deal
-// #define TURN_OFF_ABERRATION 1
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void OrbitData::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
@@ -41,7 +36,7 @@ void KeplerOrbit::serialize(Archive & ar, const unsigned int UNUSED(version))
 }
 
 template<class Archive>
-void QuaternionOrbitData::serialize(Archive & ar, const unsigned int UNUSED(version))
+void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(OrbitData);
   GEOCAL_BASE(QuaternionOrbitData, OrbitData);
@@ -54,6 +49,10 @@ void QuaternionOrbitData::serialize(Archive & ar, const unsigned int UNUSED(vers
     & GEOCAL_NVP_(ci_to_cf_der)
     & GEOCAL_NVP(pos_ci) & GEOCAL_NVP(pos_ci_with_der) & GEOCAL_NVP(vel_ci)
     & GEOCAL_NVP(vel_ci_with_der);
+  // Older version didn't have aberration_correction, default wasn
+  // FULL_CORRECTION
+  if(version > 0)
+    ar & GEOCAL_NVP_(aberration_correction);
 }
 
 GEOCAL_IMPLEMENT(OrbitData);
@@ -503,6 +502,7 @@ QuaternionOrbitData::QuaternionOrbitData
   normalize(sc_to_cf_with_der);
   sc_to_cf_ = value(sc_to_cf_with_der);
   from_cf_ = Start.from_cf_;
+  aberration_correction_ = Start.aberration_correction_;
   have_ci_to_cf = Start.have_ci_to_cf;
   if(Start.have_ci_to_cf) {
     ci_to_cf_ = Start.ci_to_cf_;
@@ -560,6 +560,7 @@ QuaternionOrbitData::QuaternionOrbitData
   sc_to_cf_with_der = V.sc_to_cf_with_der;
   sc_to_cf_ = value(sc_to_cf_with_der);
   from_cf_ = V.from_cf_;
+  aberration_correction_ = V.aberration_correction_;
   have_ci_to_cf = V.have_ci_to_cf;
   if(V.have_ci_to_cf) {
     ci_to_cf_ = V.ci_to_cf_;
@@ -598,6 +599,7 @@ QuaternionOrbitData::QuaternionOrbitData
   normalize(sc_to_cf_);
   sc_to_cf_with_der = sc_to_cf_;
   from_cf_ = Start.from_cf_;
+  aberration_correction_ = Start.aberration_correction_;
   have_ci_to_cf = Start.have_ci_to_cf;
   if(have_ci_to_cf) {
     ci_to_cf_ = Start.ci_to_cf_;
@@ -652,7 +654,8 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
     vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
     sc_to_cf_(sc_to_cf_q), 
     sc_to_cf_with_der(sc_to_cf_q), 
-    from_cf_(true), have_ci_to_cf(false)
+    from_cf_(true), aberration_correction_(FULL_CORRECTION),
+    have_ci_to_cf(false)
 { 
   normalize(sc_to_cf_);
   normalize(sc_to_cf_with_der);
@@ -676,7 +679,8 @@ QuaternionOrbitData::QuaternionOrbitData
   vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
   sc_to_cf_(value(sc_to_cf_q)), 
   sc_to_cf_with_der(sc_to_cf_q), 
-  from_cf_(true), have_ci_to_cf(false)
+  from_cf_(true), aberration_correction_(FULL_CORRECTION),
+  have_ci_to_cf(false)
 { 
   normalize(sc_to_cf_);
   normalize(sc_to_cf_with_der);
@@ -744,7 +748,8 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
    const boost::shared_ptr<CartesianInertial>& pos_ci,
    const boost::array<double, 3>& vel_inertial,
    const boost::math::quaternion<double>& sc_to_ci_q)
-: have_ci_to_cf(false)
+: aberration_correction_(FULL_CORRECTION),
+  have_ci_to_cf(false)
 { 
   initialize(Tm, pos_ci, vel_inertial, sc_to_ci_q);
 }
@@ -761,7 +766,8 @@ QuaternionOrbitData::QuaternionOrbitData
  const boost::array<AutoDerivative<double>, 3>& vel_inertial,
  const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q
 )
-: have_ci_to_cf(false)
+: aberration_correction_(FULL_CORRECTION),
+  have_ci_to_cf(false)
 { 
   initialize(Tm, pos_ci, pos_ci_with_der, vel_inertial, sc_to_ci_q);
 }
@@ -869,15 +875,15 @@ void QuaternionOrbitData::initialize
 CartesianInertialLookVector 
 QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
 {
-  // Do abberation of light correction.
   CartesianInertialLookVector res;
-  double k = Sl.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
   fill_in_ci_to_cf();
   boost::math::quaternion<double> ci = 
-    conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf() - k * vel_ci;
+    conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf();
+  if(aberration_correction_ != NO_CORRECTION) {
+    // Do aberration of light correction.
+    double k = Sl.length() / Constant::speed_of_light;
+    ci -= k * vel_ci;
+  }
   res.look_quaternion(ci);
   return res;
 }
@@ -889,18 +895,17 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
 CartesianInertialLookVectorWithDerivative 
 QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
 {
-  // Do abberation of light correction.
   CartesianInertialLookVectorWithDerivative res;
-  AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
   fill_in_ci_to_cf();
   boost::math::quaternion<AutoDerivative<double> > ci = 
     conj(ci_to_cf_with_derivative()) * 
     sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der)
-    * ci_to_cf_with_derivative()
-    - k * vel_ci_with_der;
+    * ci_to_cf_with_derivative();
+  if(aberration_correction_ != NO_CORRECTION) {
+    // Do aberration of light correction.
+    AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+    ci -= k * vel_ci_with_der;
+  }
   res.look_quaternion(ci);
   return res;
 }
@@ -912,18 +917,14 @@ QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
 CartesianFixedLookVector
 QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
 {
-  // Do abberation of light correction.
   CartesianFixedLookVector res;
-  // Note that we ignore the motion of the earth here in the
-  // aberration correctoin. I think we
-  // really should be using vel_ci_with_der, but the difference is
-  // really pretty small
-  double k = Sl.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
   boost::math::quaternion<double> cf = sc_to_cf_ * Sl.look_quaternion() * 
-    conj(sc_to_cf_) - k * vel_cf;
+    conj(sc_to_cf_);
+  if(aberration_correction_ != NO_CORRECTION) {
+    // Do aberration of light correction, ignoring planet rotation
+    double k = Sl.length() / Constant::speed_of_light;
+    cf -= k * vel_cf;
+  }
   res.look_quaternion(cf);
   return res;
 }
@@ -935,19 +936,15 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
 CartesianFixedLookVectorWithDerivative
 QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
 {
-  // Do abberation of light correction.
   CartesianFixedLookVectorWithDerivative res;
-  // Note that we ignore the motion of the earth here in the
-  // aberration correctoin. I think we
-  // really should be using vel_ci_with_der, but the difference is
-  // really pretty small
-  AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
   boost::math::quaternion<AutoDerivative<double> > cf = 
     sc_to_cf_with_der * Sl.look_quaternion() * 
-    conj(sc_to_cf_with_der) - k * vel_cf_with_der;
+    conj(sc_to_cf_with_der);
+  if(aberration_correction_ != NO_CORRECTION) {
+    // Do aberration of light correction, ignoring planet rotation
+    AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+    cf -= k * vel_cf_with_der;
+  }
   res.look_quaternion(cf);
   return res;
 }
@@ -960,15 +957,18 @@ ScLookVector
 QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVector& Ci) 
 const
 {
-  // Do abberation of light correction.
   ScLookVector res;
-  double k = Ci.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
-  boost::math::quaternion<double> sc =
-    conj(sc_to_cf_) * (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + 
-		      k * vel_cf) * sc_to_cf_;
+  boost::math::quaternion<double> sc;
+  if(aberration_correction_ == NO_CORRECTION) {
+    sc = conj(sc_to_cf_) *
+      (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf())) * sc_to_cf_;
+  } else {
+    // Do aberration of light correction.
+    double k = Ci.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_) *
+      (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + k * vel_cf) *
+      sc_to_cf_;
+  }
   res.look_quaternion(sc);
   return res;
 }
@@ -981,16 +981,18 @@ ScLookVectorWithDerivative
 QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) 
 const
 {
-  // Do abberation of light correction.
   ScLookVectorWithDerivative res;
-  AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
-  boost::math::quaternion<AutoDerivative<double> > sc =
-    conj(sc_to_cf_with_der) * 
-    (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative()) + 
-     k * vel_cf_with_der) * sc_to_cf_with_der;
+  boost::math::quaternion<AutoDerivative<double> > sc;
+  if(aberration_correction_ == NO_CORRECTION) {
+    sc = conj(sc_to_cf_with_der) * 
+      (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
+  } else {
+    // Do aberration of light correction.
+    AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_with_der) * 
+      (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative()) + 
+       k * vel_cf_with_der) * sc_to_cf_with_der;
+  }
   res.look_quaternion(sc);
   return res;
 }
@@ -1003,14 +1005,15 @@ ScLookVector
 QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVector& Cf) 
 const
 {
-  // Do abberation of light correction.
   ScLookVector res;
-  double k = Cf.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
-  boost::math::quaternion<double> sc =
-    conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
+  boost::math::quaternion<double> sc;
+  if(aberration_correction_ == NO_CORRECTION) {
+    sc = conj(sc_to_cf_) * (Cf.look_quaternion()) * sc_to_cf_;
+  } else  {
+    // Do aberration of light correction.
+    double k = Cf.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
+  }
   res.look_quaternion(sc);
   return res;
 }
@@ -1023,15 +1026,16 @@ ScLookVectorWithDerivative
 QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) 
 const
 {
-  // Do abberation of light correction.
   ScLookVectorWithDerivative res;
-  AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
-#ifdef TURN_OFF_ABERRATION
-  k = 0;
-#endif    
-  boost::math::quaternion<AutoDerivative<double> > sc =
-    conj(sc_to_cf_with_der) * (Cf.look_quaternion() + k * vel_cf_with_der) * 
-    sc_to_cf_with_der;
+  boost::math::quaternion<AutoDerivative<double> > sc;
+  if(aberration_correction_ == NO_CORRECTION) {
+    sc = conj(sc_to_cf_with_der) * (Cf.look_quaternion()) * sc_to_cf_with_der;
+  } else {
+    // Do aberration of light correction.
+    AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_with_der) *
+      (Cf.look_quaternion() + k * vel_cf_with_der) * sc_to_cf_with_der;
+  }    
   res.look_quaternion(sc);
   return res;
 }
@@ -1076,7 +1080,14 @@ void QuaternionOrbitData::print(std::ostream& Os) const
      << "Velocity(CartesianFixed): (" << vel_cf.R_component_2() << " m/s, " 
      << vel_cf.R_component_3() <<  "m/s, "
      << vel_cf.R_component_4() << " m/s)\n"
-     << "Spacecraft cartesian fixed: " << sc_to_cf_ << "\n";
+     << "Spacecraft cartesian fixed: " << sc_to_cf_ << "\n"
+     << "Aberration correction: ";
+  if(aberration_correction_ == NO_CORRECTION)
+    Os << "No correction\n";
+  if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)
+    Os << "Ignore planet rotation for Cartesian fixed\n";
+  if(aberration_correction_ == FULL_CORRECTION)
+    Os << "Full correction\n";
 }
 
 //-----------------------------------------------------------------------

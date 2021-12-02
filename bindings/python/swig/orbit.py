@@ -442,8 +442,9 @@ class QuaternionOrbitData(OrbitData):
     displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is
     1.223 meters, and 30 degrees is 2.221.
 
-    We may want to add a atmospheric refraction correction in the future,
-    but this hasn't been done yet.
+    The refraction calculation can be handled by an instance of the
+    Refraction class (e.g., RefractionMsp). This is handled outside of the
+    class - so we return look vectors before correcting for refraction.
 
     We need to have one of the toolkit available if we want to convert for
     the CartesianFixed coordinates used by this class to
@@ -461,6 +462,9 @@ class QuaternionOrbitData(OrbitData):
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
+    FULL_CORRECTION = _orbit.QuaternionOrbitData_FULL_CORRECTION
+    IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = _orbit.QuaternionOrbitData_IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED
+    NO_CORRECTION = _orbit.QuaternionOrbitData_NO_CORRECTION
 
     def __init__(self, *args):
         """
@@ -508,6 +512,24 @@ class QuaternionOrbitData(OrbitData):
         return _orbit.QuaternionOrbitData_interpolate(*args)
 
     interpolate = staticmethod(interpolate)
+
+    def _v_aberration_correction(self, *args):
+        """
+
+        void GeoCal::QuaternionOrbitData::aberration_correction(AberrationCorrection V)
+
+        """
+        return _orbit.QuaternionOrbitData__v_aberration_correction(self, *args)
+
+
+    @property
+    def aberration_correction(self):
+        return self._v_aberration_correction()
+
+    @aberration_correction.setter
+    def aberration_correction(self, value):
+      self._v_aberration_correction(value)
+
 
     def _v_sc_to_ci(self, *args):
         """
@@ -616,6 +638,7 @@ class QuaternionOrbitData(OrbitData):
 QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_ci_look_vector, None, QuaternionOrbitData)
 QuaternionOrbitData.cf_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_cf_look_vector, None, QuaternionOrbitData)
 QuaternionOrbitData.sc_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_sc_look_vector, None, QuaternionOrbitData)
+QuaternionOrbitData._v_aberration_correction = new_instancemethod(_orbit.QuaternionOrbitData__v_aberration_correction, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf, None, QuaternionOrbitData)

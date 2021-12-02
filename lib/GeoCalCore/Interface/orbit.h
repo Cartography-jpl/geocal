@@ -205,8 +205,9 @@ private:
   linear displacement for a zenith angle of 10 is 0.549 meters, 20
   degrees is 1.223 meters, and 30 degrees is 2.221.
 
-  We may want to add a atmospheric refraction correction in the
-  future, but this hasn't been done yet.
+  The refraction calculation can be handled by an instance of the 
+  Refraction class (e.g., RefractionMsp). This is handled outside of
+  the class - so we return look vectors before correcting for refraction.
 
   We need to have one of the toolkit available if we want to convert
   for the CartesianFixed coordinates used by this class to 
@@ -222,6 +223,8 @@ private:
 
 class QuaternionOrbitData : public OrbitData {
 public:
+  enum AberrationCorrection { FULL_CORRECTION = 0,
+    IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = 1, NO_CORRECTION = 2 };
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
@@ -274,6 +277,34 @@ public:
   virtual ScLookVectorWithDerivative
   sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
 
+//-----------------------------------------------------------------------
+/// Velocity aberration correction applied.  Most of the time you will
+/// want to use FULL_CORRECTION (the default), which correctly uses
+/// the inertial velocity to correct for velocity aberration.
+///
+/// In some cases you may want to use
+/// IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED. This is nearly the
+/// same as FULL_CORRECTION, but it ignores the effect of the planet
+/// rotation when calculating the CartesianFixedLookVector.  This can
+/// be useful when you can tolerate the small inaccuracies and are
+/// working in CartesianFixed coordinates (e.g., aircraft data). This
+/// avoids doing a coordinate conversion to the inertial coordinates,
+/// which can give a performance advantage. For a long time this was
+/// the default behavior for this class. For
+/// CartesianInertialLookVector, there is no difference between this
+/// as FULL_CORRECTION
+///
+/// NO_CORRECTION skips the velocity aberration correction. This is
+/// mainly useful for debugging and comparisons with other tools (e.g.
+/// the MSP library). The aberration correction is large enough that
+/// you generally don't want to ignore it.
+//-----------------------------------------------------------------------
+
+  AberrationCorrection aberration_correction() const
+  { return aberration_correction_; }
+  void aberration_correction(AberrationCorrection V)
+  { aberration_correction_ = V; }
+  
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
 //-----------------------------------------------------------------------
@@ -399,7 +430,9 @@ protected:
 /// finishing their constructor.
 //-----------------------------------------------------------------------
 
-  QuaternionOrbitData() : have_ci_to_cf(false) {}
+  QuaternionOrbitData()
+    : aberration_correction_(FULL_CORRECTION), have_ci_to_cf(false)
+  {}
 
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<double, 3>& vel_fixed, const 
@@ -432,8 +465,8 @@ private:
 				///ScLookVector to
 				///CartesianFixed.
   boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_der;
-
   bool from_cf_;
+  AberrationCorrection aberration_correction_;
 
 //-----------------------------------------------------------------------
 /// We create ci_to_cf on demand. This means if we don't do any
@@ -962,6 +995,7 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(QuaternionOrbitData);
+GEOCAL_CLASS_VERSION(QuaternionOrbitData, 1);
 GEOCAL_EXPORT_KEY(OrbitData);
 GEOCAL_EXPORT_KEY(KeplerOrbit);
 GEOCAL_EXPORT_KEY(Orbit);

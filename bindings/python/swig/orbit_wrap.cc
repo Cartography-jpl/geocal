@@ -13720,6 +13720,122 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_aberration_correction__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
+  GeoCal::QuaternionOrbitData::AberrationCorrection result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_aberration_correction" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (GeoCal::QuaternionOrbitData::AberrationCorrection)((GeoCal::QuaternionOrbitData const *)arg1)->aberration_correction();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_aberration_correction__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
+  GeoCal::QuaternionOrbitData::AberrationCorrection *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 ;
+  GeoCal::QuaternionOrbitData::AberrationCorrection temp2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_aberration_correction" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int (swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "QuaternionOrbitData__v_aberration_correction" "', argument " "2"" of type '" "GeoCal::QuaternionOrbitData::AberrationCorrection const &""'");
+  } else {
+    temp2 = static_cast< GeoCal::QuaternionOrbitData::AberrationCorrection >(val2);
+    arg2 = &temp2;
+  }
+  {
+    try {
+      (arg1)->aberration_correction((GeoCal::QuaternionOrbitData::AberrationCorrection const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_aberration_correction(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData__v_aberration_correction",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_QuaternionOrbitData__v_aberration_correction__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_QuaternionOrbitData__v_aberration_correction__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData__v_aberration_correction'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuaternionOrbitData::aberration_correction() const\n"
+    "    GeoCal::QuaternionOrbitData::aberration_correction(GeoCal::QuaternionOrbitData::AberrationCorrection const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_sc_to_ci__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
@@ -23602,6 +23718,11 @@ static PyMethodDef SwigMethods[] = {
 		"Interpolate between two QuaternionOrbitData for the given time,\n"
 		"without interpolating the derivative stuff. \n"
 		""},
+	 { (char *)"QuaternionOrbitData__v_aberration_correction", _wrap_QuaternionOrbitData__v_aberration_correction, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::QuaternionOrbitData::aberration_correction(AberrationCorrection V)\n"
+		"\n"
+		""},
 	 { (char *)"QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion< double > &sc_to_ci_q)\n"
@@ -25730,6 +25851,9 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
   
+  SWIG_Python_SetConstant(d, "QuaternionOrbitData_FULL_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::FULL_CORRECTION)));
+  SWIG_Python_SetConstant(d, "QuaternionOrbitData_IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)));
+  SWIG_Python_SetConstant(d, "QuaternionOrbitData_NO_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::NO_CORRECTION)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

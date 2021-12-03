@@ -184,7 +184,12 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
 	-lv.direction()[1] * c1 - ro_v->position[1] / ro * c2,
 	-lv.direction()[2] * c1 - ro_v->position[2] / ro * c2);
   if(false) 
-    std::cerr << "alpha_g: " << alpha_g * Constant::rad_to_deg << "\n"
+    std::cerr << std::setprecision(20) << "rp: " << rp << "\n"
+	      << "r1: " << r1 << "\n"
+	      << "r2: " << r2 << "\n"
+	      << "ro: " << ro << "\n"
+	      << "re: " << re << "\n"
+	      << "alpha_g: " << alpha_g * Constant::rad_to_deg << "\n"
 	      << "beta_g: " << beta_g * Constant::rad_to_deg << "\n"
 	      << "a_o: " << a_o * Constant::rad_to_deg << "\n"
 	      << "a_r: " << a_r * Constant::rad_to_deg << "\n"

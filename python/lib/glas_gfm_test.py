@@ -16,6 +16,7 @@ import seaborn as sns
 from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 import subprocess
+import math
 
 # This also works with an igc.
 def rsm_plot_diff(r, igc, fname=None, min_height = -5000,
@@ -330,7 +331,7 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     q = (quat_rot_x(0.0) * quat_rot_y(58.0 * deg_to_rad) *
          quat_rot_x(-2.7 * deg_to_rad))
     igc_gfm.camera.frame_to_sc = q
-    igc_gfm.refraction = RefractionMsp()
+    igc_gfm.refraction = RefractionMsp(igc_gfm.camera.band_wavelength)
     f.image_segment[0].create_glas_gfm(igc_gfm)
     t = f.image_segment[0].glas_gfm.tre_csexrb
     pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
@@ -341,7 +342,7 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
         # Compare without aberration correction
         t.vel_aber_flag = 0
         igc_gfm.orbit_data.aberration_correction = QuaternionOrbitData.NO_CORRECTION
-    if True:
+    if False:
         # Compare without refraction
         t.atm_refr_flag = 0
         igc_gfm.refraction = None
@@ -354,21 +355,10 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     max_diff1 = -1e8
     max_diff2 = -1e8
     max_diff3 = -1e8
+    
     for i in range(0, igc_gfm.number_line, 20):
         for j in range (0, igc_gfm.number_sample, 20):
             ic = ImageCoordinate(i, j)
-            # Small difference, not sure what the source of that is.
-            # Determined this is a difference in velocity aberration
-            # correction, need to look into this. Might be that our
-            # CartesianFixed approximation is causing trouble here.
-            #
-            # With refraction and aberration turned off:
-            # Max igc3 to igc2 diff: 5.455754302081257e-05
-            # With just refraction turned off: 0.5862886820012689
-            # With everything on: 1.8598156553903584
-    
-            #print(igc3.ground_coordinate(ic).position)
-            #print(igc2.ground_coordinate(ic).position)
             d1 = distance(igc_gfm.ground_coordinate(ic),
                           igc2.ground_coordinate(ic))
             d2 = distance(igc_gfm.ground_coordinate(ic),
@@ -378,6 +368,10 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
             max_diff1 = max(d1, max_diff1)
             max_diff2 = max(d2, max_diff2)
             max_diff3 = max(d3, max_diff3)
+    # Difference is noise (5e-5 m difference for diff3) when we turn
+    # off aberration correction. We see 2m difference for aberration, which
+    # we still need to track down. Note that diff1 and diff2 is larger, like
+    # 0.04 m. This is due to roundoff when we write out the NITF file.
     print(max_diff1)
     print(max_diff2)
     print(max_diff3)

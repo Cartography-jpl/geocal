@@ -190,7 +190,7 @@ class GlasGfm(object):
         otherwise'''
         if(self.tre_csexrb.atm_refr_flag == 0):
             return None
-        return RefractionMsp()
+        return RefractionMsp(self.camera.band_wavelength)
 
     @property
     def time_table(self):

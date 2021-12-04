@@ -14,6 +14,9 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   boost::array<double, 3> vel_fixed = {{0.0, 0.0, 0.0}};
   AircraftOrbitData r(Time::time_pgs(100.0), Geodetic(0, 0, 100), vel_fixed, 
 		      0.0, 0.0, 0.0);
+  // Turn off small velocity aberration correction. We are doing our
+  // reasoning here ignoring this
+  r.aberration_correction(QuaternionOrbitData::NO_CORRECTION);
   typedef boost::math::quaternion<double> quat;
   ScLookVector body_x(1, 0, 0);
   ScLookVector body_y(0, 1, 0);
@@ -29,6 +32,9 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   // With true heading = 180, x and y should change sign
   AircraftOrbitData r2(Time::time_pgs(100.0), Geodetic(0, 0, 100), vel_fixed,
 		       0.0, 0.0, 180.0);
+  // Turn off small velocity aberration correction. We are doing our
+  // reasoning here ignoring this
+  r2.aberration_correction(QuaternionOrbitData::NO_CORRECTION);
   ecr_bx = r2.cf_look_vector(body_x);
   ecr_by = r2.cf_look_vector(body_y);
   ecr_bz = r2.cf_look_vector(body_z);
@@ -39,6 +45,7 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   // Check true heading = 90
   AircraftOrbitData r3(Time::time_pgs(100.0), Geodetic(0, 0, 100), vel_fixed,
 		       0.0, 0.0, 90.0);
+  r3.aberration_correction(QuaternionOrbitData::NO_CORRECTION);
   ecr_bx = r3.cf_look_vector(body_x);
   ecr_by = r3.cf_look_vector(body_y);
   ecr_bz = r3.cf_look_vector(body_z);
@@ -49,6 +56,7 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   // Roll of 90 rotates z and y
   AircraftOrbitData r4(Time::time_pgs(100.0), Geodetic(0, 0, 100), vel_fixed,
 		       90.0, 0.0, 0.0);
+  r4.aberration_correction(QuaternionOrbitData::NO_CORRECTION);
   ecr_bx = r4.cf_look_vector(body_x);
   ecr_by = r4.cf_look_vector(body_y);
   ecr_bz = r4.cf_look_vector(body_z);
@@ -59,6 +67,7 @@ BOOST_AUTO_TEST_CASE(aircraft_orbit_data)
   // Pitch of 90 rotates x and z
   AircraftOrbitData r5(Time::time_pgs(100.0), Geodetic(0, 0, 100), vel_fixed,
 		       0.0, 90.0, 0.0);
+  r5.aberration_correction(QuaternionOrbitData::NO_CORRECTION);
   ecr_bx = r5.cf_look_vector(body_x);
   ecr_by = r5.cf_look_vector(body_y);
   ecr_bz = r5.cf_look_vector(body_z);

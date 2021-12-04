@@ -195,7 +195,7 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     Note that we frequently don't have access to a direct measurement of
     the velocity. Rather than trying to do some clever estimate of the
     velocity, we just set it to 0. The velocity is only used for the
-    abberation of light calculation, which isn't important for aircraft
+    aberration of light calculation, which isn't important for aircraft
     speeds. We can revisit this choice if needed, it wouldn't be too hard
     to use a couple of position measurements at nearby times to estimate
     the velocity.

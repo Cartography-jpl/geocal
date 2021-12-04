@@ -920,11 +920,19 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
   CartesianFixedLookVector res;
   boost::math::quaternion<double> cf = sc_to_cf_ * Sl.look_quaternion() * 
     conj(sc_to_cf_);
-  if(aberration_correction_ != NO_CORRECTION) {
+  if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED) {
     // Do aberration of light correction, ignoring planet rotation
     double k = Sl.length() / Constant::speed_of_light;
     cf -= k * vel_cf;
+  } else if(aberration_correction_ == FULL_CORRECTION) {
+    // Do aberration of light correction
+    fill_in_ci_to_cf();
+    double k = Sl.length() / Constant::speed_of_light;
+    cf -= k * ci_to_cf() * vel_ci * conj(ci_to_cf());
+  } else if (aberration_correction_ != NO_CORRECTION) {
+    throw Exception("Unknown aberration_correction_ type");
   }
+  
   res.look_quaternion(cf);
   return res;
 }
@@ -940,10 +948,18 @@ QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
   boost::math::quaternion<AutoDerivative<double> > cf = 
     sc_to_cf_with_der * Sl.look_quaternion() * 
     conj(sc_to_cf_with_der);
-  if(aberration_correction_ != NO_CORRECTION) {
+  if(aberration_correction_ != IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED) {
     // Do aberration of light correction, ignoring planet rotation
     AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
     cf -= k * vel_cf_with_der;
+  } else if(aberration_correction_ != FULL_CORRECTION) {
+    // Do aberration of light correction, ignoring planet rotation
+    fill_in_ci_to_cf();
+    AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+    cf -= k * ci_to_cf_with_derivative() * vel_ci_with_der *
+      conj(ci_to_cf_with_derivative());
+  } else if(aberration_correction_ != NO_CORRECTION) {
+    throw Exception("Unknown aberration_correction_ type");
   }
   res.look_quaternion(cf);
   return res;
@@ -964,9 +980,10 @@ const
       (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf())) * sc_to_cf_;
   } else {
     // Do aberration of light correction.
+    fill_in_ci_to_cf();
     double k = Ci.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_) *
-      (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + k * vel_cf) *
+      (ci_to_cf() * (Ci.look_quaternion() + k * vel_ci) * conj(ci_to_cf())) *
       sc_to_cf_;
   }
   res.look_quaternion(sc);
@@ -988,11 +1005,12 @@ const
       (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
   } else {
     // Do aberration of light correction.
+    fill_in_ci_to_cf();
     AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_with_der) * 
-      (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative()) + 
-       k * vel_cf_with_der) * sc_to_cf_with_der;
+      (ci_to_cf_with_derivative() * (Ci.look_quaternion() + k * vel_ci_with_der) * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
   }
+  
   res.look_quaternion(sc);
   return res;
 }
@@ -1009,11 +1027,20 @@ const
   boost::math::quaternion<double> sc;
   if(aberration_correction_ == NO_CORRECTION) {
     sc = conj(sc_to_cf_) * (Cf.look_quaternion()) * sc_to_cf_;
-  } else  {
-    // Do aberration of light correction.
+  } else if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED) {
+    // Do aberration of light correction, ignoring planet rotation
     double k = Cf.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
-  }
+  } else if(aberration_correction_ == FULL_CORRECTION) {
+    // Do aberration of light correction
+    fill_in_ci_to_cf();
+    double k = Cf.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_) * (Cf.look_quaternion() +
+			    k * ci_to_cf() * vel_ci * conj(ci_to_cf())) *
+      sc_to_cf_;
+  } else {
+    throw Exception("Unknown aberration_correction_ type");
+  }    
   res.look_quaternion(sc);
   return res;
 }
@@ -1030,11 +1057,21 @@ const
   boost::math::quaternion<AutoDerivative<double> > sc;
   if(aberration_correction_ == NO_CORRECTION) {
     sc = conj(sc_to_cf_with_der) * (Cf.look_quaternion()) * sc_to_cf_with_der;
-  } else {
-    // Do aberration of light correction.
+  } else if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED) {
+    // Do aberration of light correction, ignoring planet rotation
     AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_with_der) *
       (Cf.look_quaternion() + k * vel_cf_with_der) * sc_to_cf_with_der;
+  } else if(aberration_correction_ == FULL_CORRECTION) {
+    // Do aberration of light correction
+    fill_in_ci_to_cf();
+    AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_with_der) *
+      (Cf.look_quaternion() + k *
+       ci_to_cf_with_derivative() * vel_ci_with_der *
+       conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
+  } else {
+    throw Exception("Unknown aberration_correction_ type");
   }    
   res.look_quaternion(sc);
   return res;
@@ -1084,10 +1121,12 @@ void QuaternionOrbitData::print(std::ostream& Os) const
      << "Aberration correction: ";
   if(aberration_correction_ == NO_CORRECTION)
     Os << "No correction\n";
-  if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)
+  else if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)
     Os << "Ignore planet rotation for Cartesian fixed\n";
-  if(aberration_correction_ == FULL_CORRECTION)
+  else if(aberration_correction_ == FULL_CORRECTION)
     Os << "Full correction\n";
+  else
+    Os << "Unknown\n";
 }
 
 //-----------------------------------------------------------------------

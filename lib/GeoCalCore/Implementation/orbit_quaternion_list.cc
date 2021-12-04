@@ -107,38 +107,11 @@ boost::shared_ptr<CartesianFixed> OrbitQuaternionList::position_cf(Time T) const
 ScLookVector OrbitQuaternionList::sc_look_vector
 (Time T, const CartesianFixed& Pt) const
 {
-  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
+  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2, q;
   interpolate_or_extrapolate_data(T, q1, q2);
-
-  double tspace = q2->time() - q1->time();
-  double toffset = T - q1->time();
-  boost::math::quaternion<double> sc_to_cf_ = 
-    interpolate_quaternion_rotation(q1->sc_to_cf(), 
-			   q2->sc_to_cf(), toffset, tspace);
-  boost::array<double, 3> pos1, pos2, vel_cf, pos_cf;
-  pos1[0] = q1->position_cf()->position[0];
-  pos1[1] = q1->position_cf()->position[1];
-  pos1[2] = q1->position_cf()->position[2];
-  pos2[0] = q2->position_cf()->position[0];
-  pos2[1] = q2->position_cf()->position[1];
-  pos2[2] = q2->position_cf()->position[2];
-  Orbit::interpolate(pos1, q1->velocity_cf(), pos2, q1->velocity_cf(), toffset,
-		     tspace, pos_cf, vel_cf);
-
-  boost::array<double, 3> p1 = Pt.position;
-  CartesianFixedLookVector lv;
-  lv.look_vector[0] = p1[0] - pos_cf[0];
-  lv.look_vector[1] = p1[1] - pos_cf[1];
-  lv.look_vector[2] = p1[2] - pos_cf[2];
-
-  // Do abberation of light correction.
-  ScLookVector res;
-  double k = lv.length() / Constant::speed_of_light;
-  boost::math::quaternion<double> vel_cf_q(0, vel_cf[0], vel_cf[1], vel_cf[2]);
-  boost::math::quaternion<double> sc =
-    conj(sc_to_cf_) * (lv.look_quaternion() + k * vel_cf_q) * sc_to_cf_;
-  res.look_quaternion(sc);
-  return res;
+  q = QuaternionOrbitData::interpolate(*q1, *q2, T, true);
+  CartesianFixedLookVector lv(*q->position_cf(), Pt);
+  return q->sc_look_vector(lv);
 }
 
 // See base class for description.

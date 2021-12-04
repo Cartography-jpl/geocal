@@ -235,14 +235,7 @@ public:
   }
   ScLookVector sc_look_vector(Time T) const
   {
-    CartesianFixedLookVector cf = look_vector(T);
-    ScLookVector res;
-    double k = cf.length() / Constant::speed_of_light;
-    boost::math::quaternion<double> sc =
-      conj(igc.sc_to_cf(T)) * (cf.look_quaternion() + k * igc.velocity_cf(T)) * 
-      igc.sc_to_cf(T);
-    res.look_quaternion(sc);
-    return res;
+    return igc.orbit_->sc_look_vector(T, look_vector(T));
   }
   ScLookVectorWithDerivative sc_look_vector_with_derivative
   (const TimeWithDerivative& T) const

@@ -462,7 +462,7 @@ class QuaternionOrbitData(OrbitData):
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    FULL_CORRECTION = _orbit.QuaternionOrbitData_FULL_CORRECTION
+    FIRST_ORDER_CORRECTION = _orbit.QuaternionOrbitData_FIRST_ORDER_CORRECTION
     IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = _orbit.QuaternionOrbitData_IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED
     NO_CORRECTION = _orbit.QuaternionOrbitData_NO_CORRECTION
 

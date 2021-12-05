@@ -25923,7 +25923,7 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
   
-  SWIG_Python_SetConstant(d, "QuaternionOrbitData_FULL_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::FULL_CORRECTION)));
+  SWIG_Python_SetConstant(d, "QuaternionOrbitData_FIRST_ORDER_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::FIRST_ORDER_CORRECTION)));
   SWIG_Python_SetConstant(d, "QuaternionOrbitData_IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)));
   SWIG_Python_SetConstant(d, "QuaternionOrbitData_NO_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::NO_CORRECTION)));
 #if PY_VERSION_HEX >= 0x03000000

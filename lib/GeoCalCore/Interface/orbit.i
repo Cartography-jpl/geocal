@@ -128,7 +128,7 @@ def position_cf_with_derivative(self):
 
 class QuaternionOrbitData : public OrbitData {
 public:
-  enum AberrationCorrection { FULL_CORRECTION = 0,
+  enum AberrationCorrection { FIRST_ORDER_CORRECTION = 0,
     IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = 1, NO_CORRECTION = 2 };
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,

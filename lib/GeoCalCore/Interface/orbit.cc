@@ -50,7 +50,7 @@ void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(pos_ci) & GEOCAL_NVP(pos_ci_with_der) & GEOCAL_NVP(vel_ci)
     & GEOCAL_NVP(vel_ci_with_der);
   // Older version didn't have aberration_correction, default wasn
-  // FULL_CORRECTION
+  // FIRST_ORDER_CORRECTION
   if(version > 0)
     ar & GEOCAL_NVP_(aberration_correction);
 }
@@ -654,7 +654,7 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
     vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
     sc_to_cf_(sc_to_cf_q), 
     sc_to_cf_with_der(sc_to_cf_q), 
-    from_cf_(true), aberration_correction_(FULL_CORRECTION),
+    from_cf_(true), aberration_correction_(FIRST_ORDER_CORRECTION),
     have_ci_to_cf(false)
 { 
   normalize(sc_to_cf_);
@@ -679,7 +679,7 @@ QuaternionOrbitData::QuaternionOrbitData
   vel_cf_with_der(0, vel_fixed[0], vel_fixed[1], vel_fixed[2]), 
   sc_to_cf_(value(sc_to_cf_q)), 
   sc_to_cf_with_der(sc_to_cf_q), 
-  from_cf_(true), aberration_correction_(FULL_CORRECTION),
+  from_cf_(true), aberration_correction_(FIRST_ORDER_CORRECTION),
   have_ci_to_cf(false)
 { 
   normalize(sc_to_cf_);
@@ -748,7 +748,7 @@ QuaternionOrbitData::QuaternionOrbitData(Time Tm,
    const boost::shared_ptr<CartesianInertial>& pos_ci,
    const boost::array<double, 3>& vel_inertial,
    const boost::math::quaternion<double>& sc_to_ci_q)
-: aberration_correction_(FULL_CORRECTION),
+: aberration_correction_(FIRST_ORDER_CORRECTION),
   have_ci_to_cf(false)
 { 
   initialize(Tm, pos_ci, vel_inertial, sc_to_ci_q);
@@ -766,7 +766,7 @@ QuaternionOrbitData::QuaternionOrbitData
  const boost::array<AutoDerivative<double>, 3>& vel_inertial,
  const boost::math::quaternion<AutoDerivative<double> >& sc_to_ci_q
 )
-: aberration_correction_(FULL_CORRECTION),
+: aberration_correction_(FIRST_ORDER_CORRECTION),
   have_ci_to_cf(false)
 { 
   initialize(Tm, pos_ci, pos_ci_with_der, vel_inertial, sc_to_ci_q);
@@ -924,7 +924,7 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
     // Do aberration of light correction, ignoring planet rotation
     double k = Sl.length() / Constant::speed_of_light;
     cf -= k * vel_cf;
-  } else if(aberration_correction_ == FULL_CORRECTION) {
+  } else if(aberration_correction_ == FIRST_ORDER_CORRECTION) {
     // Do aberration of light correction
     fill_in_ci_to_cf();
     double k = Sl.length() / Constant::speed_of_light;
@@ -952,7 +952,7 @@ QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
     // Do aberration of light correction, ignoring planet rotation
     AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
     cf -= k * vel_cf_with_der;
-  } else if(aberration_correction_ != FULL_CORRECTION) {
+  } else if(aberration_correction_ != FIRST_ORDER_CORRECTION) {
     // Do aberration of light correction, ignoring planet rotation
     fill_in_ci_to_cf();
     AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
@@ -1031,7 +1031,7 @@ const
     // Do aberration of light correction, ignoring planet rotation
     double k = Cf.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
-  } else if(aberration_correction_ == FULL_CORRECTION) {
+  } else if(aberration_correction_ == FIRST_ORDER_CORRECTION) {
     // Do aberration of light correction
     fill_in_ci_to_cf();
     double k = Cf.length() / Constant::speed_of_light;
@@ -1062,7 +1062,7 @@ const
     AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
     sc = conj(sc_to_cf_with_der) *
       (Cf.look_quaternion() + k * vel_cf_with_der) * sc_to_cf_with_der;
-  } else if(aberration_correction_ == FULL_CORRECTION) {
+  } else if(aberration_correction_ == FIRST_ORDER_CORRECTION) {
     // Do aberration of light correction
     fill_in_ci_to_cf();
     AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
@@ -1141,7 +1141,7 @@ void QuaternionOrbitData::print(std::ostream& Os) const
     Os << "No correction\n";
   else if(aberration_correction_ == IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)
     Os << "Ignore planet rotation for Cartesian fixed\n";
-  else if(aberration_correction_ == FULL_CORRECTION)
+  else if(aberration_correction_ == FIRST_ORDER_CORRECTION)
     Os << "Full correction\n";
   else
     Os << "Unknown\n";

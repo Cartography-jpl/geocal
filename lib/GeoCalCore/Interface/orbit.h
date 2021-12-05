@@ -223,7 +223,7 @@ private:
 
 class QuaternionOrbitData : public OrbitData {
 public:
-  enum AberrationCorrection { FULL_CORRECTION = 0,
+  enum AberrationCorrection { FIRST_ORDER_CORRECTION = 0,
     IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = 1, NO_CORRECTION = 2 };
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
@@ -279,12 +279,14 @@ public:
 
 //-----------------------------------------------------------------------
 /// Velocity aberration correction applied.  Most of the time you will
-/// want to use FULL_CORRECTION (the default), which correctly uses
-/// the inertial velocity to correct for velocity aberration.
+/// want to use FIRST_ORDER_CORRECTION (the default), which correctly uses
+/// the inertial velocity to correct for velocity aberration. This
+/// includes the first order in v/c term only, which is generally good
+/// so a few meters ground location for earth data.
 ///
 /// In some cases you may want to use
 /// IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED. This is nearly the
-/// same as FULL_CORRECTION, but it ignores the effect of the planet
+/// same as FIRST_ORDER_CORRECTION, but it ignores the effect of the planet
 /// rotation when calculating the CartesianFixedLookVector.  This can
 /// be useful when you can tolerate the small inaccuracies and are
 /// working in CartesianFixed coordinates (e.g., aircraft data). This
@@ -292,7 +294,7 @@ public:
 /// which can give a performance advantage. For a long time this was
 /// the default behavior for this class. For
 /// CartesianInertialLookVector, there is no difference between this
-/// as FULL_CORRECTION
+/// as FIRST_ORDER_CORRECTION
 ///
 /// NO_CORRECTION skips the velocity aberration correction. This is
 /// mainly useful for debugging and comparisons with other tools (e.g.
@@ -432,7 +434,7 @@ protected:
 //-----------------------------------------------------------------------
 
   QuaternionOrbitData()
-    : aberration_correction_(FULL_CORRECTION), have_ci_to_cf(false)
+    : aberration_correction_(FIRST_ORDER_CORRECTION), have_ci_to_cf(false)
   {}
 
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,

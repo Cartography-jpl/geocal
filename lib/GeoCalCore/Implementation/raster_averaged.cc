@@ -143,7 +143,7 @@ void RasterAveraged::calc(int Lstart, int Sstart) const
       blitz::Array<double, 2> res_high_sub(res_high(r1, r2));
       int cnt = (ignore_zero_ ? count(res_high_sub != 0) : 
 		   res_high_sub.size());
-      data(i,j) = (cnt == 0 ? 0 : (int) sum(res_high_sub) / cnt);
+      data(i,j) = (cnt == 0 ? 0 : sum(res_high_sub) / cnt);
     }
 }
 
@@ -164,7 +164,7 @@ void RasterAveragedMultiBand::calc(int Lstart, int Sstart) const
 	blitz::Array<double, 2> res_high_sub(res_high(k, r1, r2));
 	int cnt = (ignore_zero_ ? count(res_high_sub != 0) : 
 		   res_high_sub.size());
-	data(k,i,j) = (cnt == 0 ? 0 : (int) sum(res_high_sub) / cnt);
+	data(k,i,j) = (cnt == 0 ? 0 : sum(res_high_sub) / cnt);
       }
     }
 }

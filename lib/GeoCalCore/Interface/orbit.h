@@ -304,7 +304,8 @@ public:
   { return aberration_correction_; }
   void aberration_correction(AberrationCorrection V)
   { aberration_correction_ = V; }
-  
+  blitz::Array<double, 1> velocity_ab() const;
+
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
 //-----------------------------------------------------------------------

@@ -249,6 +249,6 @@ def test_igc_collection_rolling_shutter():
     igccol.determine_orbit_to_match(ic, 4)
     gp = igccol.ground_coordinate(4, ic)
     for i in range(10):
-        assert abs(igccol.image_coordinate(i, gp).line - ic.line) < 0.2
+        assert abs(igccol.image_coordinate(i, gp).line - ic.line) < 0.5
         assert abs(igccol.image_coordinate(i, gp).sample - ic.sample) < 25
 

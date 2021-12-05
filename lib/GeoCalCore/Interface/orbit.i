@@ -185,6 +185,7 @@ public:
 	      const QuaternionOrbitData& t2, 
 	      const Time& tm, bool Extrapolation_ok = false);
   %python_attribute_with_set(aberration_correction, AberrationCorrection);
+  %python_attribute(velocity_ab, blitz::Array<double, 1>);
   %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)

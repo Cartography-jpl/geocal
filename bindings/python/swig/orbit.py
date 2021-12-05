@@ -531,6 +531,23 @@ class QuaternionOrbitData(OrbitData):
       self._v_aberration_correction(value)
 
 
+    def _v_velocity_ab(self):
+        """
+
+        blitz::Array< double, 1 > QuaternionOrbitData::velocity_ab() const
+        We use this in a few places.
+
+        This is vel_ci converted to CartesianFixed. This is pretty similar to
+        vel_cf, the difference is this includes the rotation of the earth. 
+        """
+        return _orbit.QuaternionOrbitData__v_velocity_ab(self)
+
+
+    @property
+    def velocity_ab(self):
+        return self._v_velocity_ab()
+
+
     def _v_sc_to_ci(self, *args):
         """
 
@@ -639,6 +656,7 @@ QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitDa
 QuaternionOrbitData.cf_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_cf_look_vector, None, QuaternionOrbitData)
 QuaternionOrbitData.sc_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_sc_look_vector, None, QuaternionOrbitData)
 QuaternionOrbitData._v_aberration_correction = new_instancemethod(_orbit.QuaternionOrbitData__v_aberration_correction, None, QuaternionOrbitData)
+QuaternionOrbitData._v_velocity_ab = new_instancemethod(_orbit.QuaternionOrbitData__v_velocity_ab, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf, None, QuaternionOrbitData)

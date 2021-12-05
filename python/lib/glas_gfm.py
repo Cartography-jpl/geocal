@@ -34,7 +34,7 @@ class GlasGfm(object):
         else:
             self.des = []
             
-    def create(iseg, igc):
+    def create(iseg, igc, refraction_flag=None):
         '''Create a GlasGfm from a igc, and put into the given
         NitfImageSegment. We add DES data to the file f as needed.
         
@@ -53,6 +53,10 @@ class GlasGfm(object):
         igc.glas_gfm_covariance exists then we use that to populate the 
         covariance. Otherwise we create an empty one that can then be
         populated.
+
+        We set the refraction flag based on if the igc has Refraction or
+        not. Alternatively, you can pass the refraction_flag to force setting
+        this.
         '''
         res = GlasGfm(iseg, None)
         t = pynitf.TreCSEXRB()
@@ -88,7 +92,16 @@ class GlasGfm(object):
         # ground_ref_point
         t.num_lines = igc.number_line
         t.num_samples = igc.number_sample
-        t.atm_refr_flag = 1
+        if(refraction_flag is not None):
+            t.atm_refr_flag = 1 if refraction_flag else 0
+        else:
+            # Right now IPI doesn't support refraction. We'll add that,
+            # but for now just check OrbitDataImageGroundConnection
+            if(isinstance(igc, OrbitDataImageGroundConnection) and
+               igc.refraction is not None):
+                t.atm_refr_flag = 1
+            else:
+                t.atm_refr_flag = 0
         t.vel_aber_flag = 1
         res.tre_csexrb = t
         iseg.tre_list.append(res.tre_csexrb)

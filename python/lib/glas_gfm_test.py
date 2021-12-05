@@ -212,7 +212,7 @@ def test_create_rot_glas(nitf_sample_rip):
             max_diff2 = max(d2, max_diff2)
     print(max_diff1)
     print(max_diff2)
-    assert max_diff1 < 1.0
+    assert max_diff1 < 1.5
 
 @require_msp    
 @require_pynitf
@@ -312,7 +312,7 @@ def test_create_gfm(isolated_dir, igc_gfm):
             max_diff2 = max(d2, max_diff2)
     print(max_diff1)
     print(max_diff2)
-    assert max_diff1 < 1.0
+    assert max_diff1 < 1.5
 
 @require_msp    
 @require_pynitf

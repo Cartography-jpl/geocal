@@ -1078,6 +1078,24 @@ const
 }
 
 //-----------------------------------------------------------------------
+/// We use this in a few places. This is vel_ci converted to
+/// CartesianFixed. This is pretty similar to vel_cf, the difference
+/// is this includes the rotation of the earth.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> QuaternionOrbitData::velocity_ab() const
+{
+  fill_in_ci_to_cf();
+  boost::math::quaternion<double> v = ci_to_cf() * vel_ci * conj(ci_to_cf());
+  blitz::Array<double, 1> res(3);
+  res(0) = v.R_component_2();
+  res(1) = v.R_component_3();
+  res(2) = v.R_component_4();
+  return res;
+}
+    
+
+//-----------------------------------------------------------------------
 /// Return velocity.
 //-----------------------------------------------------------------------
 

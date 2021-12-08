@@ -178,19 +178,19 @@ boost::shared_ptr<GroundCoordinate> Rsm::polish_intersection
   double zmin = z_guess;
   double zmax = z_guess;
   double step = 1.0;
-  while(eq(zmin) < 0) {
+  const double tolerance = 1.0; // It can be useful to go outside of
+				 // the range allowed by the RSM,
+				 // although at a certain point we'll
+				 // just need to fail
+  while(eq(zmin) * eq(zmax) > 0 &&
+	(zmin >= rp->min_z()-tolerance * (rp->max_z() - rp->min_z())
+	 || zmax <= rp->max_z()+tolerance * (rp->max_z() - rp->min_z()))) {
     zmin -= step;
-    step *= 2;
-  }
-  if(zmin < rp->min_z())
-    zmin = rp->min_z();
-  step = 1.0;
-  while(eq(zmax) > 0) {
     zmax += step;
     step *= 2;
-  };
-  if(zmax > rp->max_z())
-    zmax = rp->max_z();
+  }
+  if(eq(zmin) * eq(zmax) > 0)
+    throw ConvergenceFailure("Surface is not found between min_z() and max_z()");
   double z = root(eq, zmin, zmax, 1e-8, Z_accuracy);
   return ground_coordinate_z(Ic, z);
 }
@@ -240,7 +240,7 @@ boost::shared_ptr<GroundCoordinate> Rsm::ground_coordinate_z
   private:
     const Rsm& r_;
     ImageCoordinate ic_;
-    double z_;
+     double z_;
   };
 
 //-----------------------------------------------------------------------

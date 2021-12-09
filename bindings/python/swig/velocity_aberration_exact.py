@@ -214,34 +214,34 @@ class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
         """
         _velocity_aberration_exact.VelocityAberrationExact_swiginit(self, _velocity_aberration_exact.new_VelocityAberrationExact())
 
-    def aberration_calc(self, Od, Gc_before_correction, Forward_calc=True):
+    def aberration_calc(self, Od, Sl, Gc_before_correction, Forward_calc=True):
         """
 
-        CartesianFixedLookVector VelocityAberrationExact::aberration_calc(const QuaternionOrbitData &Od, const GroundCoordinate
-        &Gc_before_correction, bool Forward_calc=true) const
+        CartesianFixedLookVector VelocityAberrationExact::aberration_calc(const QuaternionOrbitData &Od, const ScLookVector &Sl, const
+        GroundCoordinate &Gc_before_correction, bool Forward_calc=true) const
 
         """
-        return _velocity_aberration_exact.VelocityAberrationExact_aberration_calc(self, Od, Gc_before_correction, Forward_calc)
+        return _velocity_aberration_exact.VelocityAberrationExact_aberration_calc(self, Od, Sl, Gc_before_correction, Forward_calc)
 
 
-    def aberration_apply(self, Od, Gc_approx_aberration):
+    def aberration_apply(self, Od, Sl, Gc_approx_aberration):
         """
 
-        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_apply(const QuaternionOrbitData &Od, const GroundCoordinate
-        &Gc_approx_aberration) const
+        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_apply(const QuaternionOrbitData &Od, const ScLookVector &Sl, const
+        GroundCoordinate &Gc_approx_aberration) const
 
         """
-        return _velocity_aberration_exact.VelocityAberrationExact_aberration_apply(self, Od, Gc_approx_aberration)
+        return _velocity_aberration_exact.VelocityAberrationExact_aberration_apply(self, Od, Sl, Gc_approx_aberration)
 
 
-    def aberration_reverse(self, Od, Gc_full_aberration):
+    def aberration_reverse(self, Od, Sl, Gc_full_aberration):
         """
 
-        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_reverse(const QuaternionOrbitData &Od, const GroundCoordinate
-        &Gc_full_aberration) const
+        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_reverse(const QuaternionOrbitData &Od, const ScLookVector &Sl, const
+        GroundCoordinate &Gc_full_aberration) const
 
         """
-        return _velocity_aberration_exact.VelocityAberrationExact_aberration_reverse(self, Od, Gc_full_aberration)
+        return _velocity_aberration_exact.VelocityAberrationExact_aberration_reverse(self, Od, Sl, Gc_full_aberration)
 
 
     def __reduce__(self):

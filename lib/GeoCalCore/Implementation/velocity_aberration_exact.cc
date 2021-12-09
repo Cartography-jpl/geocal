@@ -25,9 +25,11 @@ GEOCAL_IMPLEMENT(VelocityAberrationExact);
 
 CartesianFixedLookVector VelocityAberrationExact::aberration_calc
 (const QuaternionOrbitData& Od,
+ const ScLookVector& Sl,
  const GroundCoordinate& Gc_before_correction,
  bool Forward_calc) const
 {
+  return Od.cf_look_vector(Sl);
 }
 
 void VelocityAberrationExact::print(std::ostream& Os) const

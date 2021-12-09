@@ -17,13 +17,16 @@ public:
   VelocityAberrationExact();
   CartesianFixedLookVector aberration_calc
   (const QuaternionOrbitData& Od,
+   const ScLookVector& Sl,
    const GroundCoordinate& Gc_before_correction,
    bool Forward_calc = true) const;
   virtual CartesianFixedLookVector
   aberration_apply(const QuaternionOrbitData& Od,
+		   const ScLookVector& Sl,
 		   const GroundCoordinate& Gc_approx_aberration) const;
   virtual CartesianFixedLookVector
   aberration_reverse(const QuaternionOrbitData& Od,
+		     const ScLookVector& Sl,
   		     const GroundCoordinate& Gc_full_aberration) const;
   %pickle_serialization()
 };

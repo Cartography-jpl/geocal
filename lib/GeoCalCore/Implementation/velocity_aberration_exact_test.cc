@@ -4,6 +4,7 @@
 #include "orbit_data_image_ground_connection.h"
 #include "simple_dem.h"
 #include "constant.h"
+#include "ecr.h"
 
 using namespace GeoCal;
 
@@ -16,7 +17,29 @@ BOOST_AUTO_TEST_CASE(velocity_aberration_exact)
   // test_create_steep_igc in glas_gfm_test.py
   auto igc = serialize_read<OrbitDataImageGroundConnection>
     (test_data_dir() + "steep_igc_gfm.xml");
-  std::cerr << *igc << "\n";
+  
+  // A sample point that we got the MSP calculation for
+  ImageCoordinate ic(100, 50);	// Not 100% sure about 1/2 pixel
+				// differences between GeoCal and MSP
+				// image coordinate definition
+  Ecr pt_msp(-6157942.08181512, 1596836.45707547, -457258.25167518);
+
+  // Starting point, using our first order aberration correction.
+  // This is pretty small, 0.434168 m. But at least as a reference we
+  // want our calculation identical to MSP. And for WV-2 like data
+  // this is about a pixel
+  double initial_distance = distance(*igc->ground_coordinate(ic), pt_msp);
+  if(true)
+    std::cerr << "Initial distance: " << initial_distance << "\n";
+
+  VelocityAberrationExact vabb;
+  auto pos = igc->orbit_data()->position_cf();
+  auto slv = igc->camera()->sc_look_vector(FrameCoordinate(100, 50), 0);
+  auto clv = vabb.aberration_apply(*boost::dynamic_pointer_cast<QuaternionOrbitData>(igc->orbit_data()), slv, *igc->ground_coordinate(ic));
+  auto pt_calc = igc->dem().intersect(*pos, clv, 30);
+  double corrected_distance = distance(*pt_calc, pt_msp);
+  if(true)
+    std::cerr << "corrected distance: " << corrected_distance << "\n";
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

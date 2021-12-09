@@ -6691,8 +6691,9 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_0(PyObj
   PyObject *resultobj = 0;
   GeoCal::VelocityAberrationExact *arg1 = (GeoCal::VelocityAberrationExact *) 0 ;
   GeoCal::QuaternionOrbitData *arg2 = 0 ;
-  GeoCal::GroundCoordinate *arg3 = 0 ;
-  bool arg4 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
+  bool arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
@@ -6702,9 +6703,148 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_0(PyObj
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared2 ;
   void *argp3 = 0 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
-  bool val4 ;
-  int ecode4 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
+  bool val5 ;
+  int ecode5 = 0 ;
+  GeoCal::CartesianFixedLookVector result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "1"" of type '" "GeoCal::VelocityAberrationExact const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
+      arg1 = const_cast< GeoCal::VelocityAberrationExact * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
+      arg1 = const_cast< GeoCal::VelocityAberrationExact * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::QuaternionOrbitData *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionOrbitData,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "2"" of type '" "GeoCal::QuaternionOrbitData const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "2"" of type '" "GeoCal::QuaternionOrbitData const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp2);
+        arg2 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::QuaternionOrbitData * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
+      }
+    }
+  }
+  ecode5 = SWIG_AsVal_bool(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "5"" of type '" "bool""'");
+  } 
+  arg5 = static_cast< bool >(val5);
+  {
+    try {
+      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_calc((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::ScLookVector const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::VelocityAberrationExact *arg1 = (GeoCal::VelocityAberrationExact *) 0 ;
+  GeoCal::QuaternionOrbitData *arg2 = 0 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VelocityAberrationExact const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
   GeoCal::CartesianFixedLookVector result;
   
   if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
@@ -6752,106 +6892,24 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_0(PyObj
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
     if (SWIG_IsOK(res3)) {
       arg3 = ptr;
     } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
       }
       if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
       } else {
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
-      }
-    }
-  }
-  ecode4 = SWIG_AsVal_bool(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "4"" of type '" "bool""'");
-  } 
-  arg4 = static_cast< bool >(val4);
-  {
-    try {
-      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_calc((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::VelocityAberrationExact *arg1 = (GeoCal::VelocityAberrationExact *) 0 ;
-  GeoCal::QuaternionOrbitData *arg2 = 0 ;
-  GeoCal::GroundCoordinate *arg3 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VelocityAberrationExact const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
-  GeoCal::CartesianFixedLookVector result;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "1"" of type '" "GeoCal::VelocityAberrationExact const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
-      arg1 = const_cast< GeoCal::VelocityAberrationExact * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
-      arg1 = const_cast< GeoCal::VelocityAberrationExact * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::QuaternionOrbitData *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionOrbitData,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "2"" of type '" "GeoCal::QuaternionOrbitData const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "2"" of type '" "GeoCal::QuaternionOrbitData const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp2);
-        arg2 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::QuaternionOrbitData * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp2)->get());
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
       }
     }
   }
@@ -6860,29 +6918,29 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_1(PyObj
     // Added mms
     // First check to see if all ready pointer type
     GeoCal::GroundCoordinate *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
     } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'");
       }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_calc" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
       } else {
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
       }
     }
   }
   {
     try {
-      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_calc((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_calc((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::ScLookVector const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6901,24 +6959,24 @@ fail:
 
 SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[5] = {
+  PyObject *argv[6] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_aberration_calc",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_aberration_calc",0,5,argv))) SWIG_fail;
   --argc;
-  if (argc == 3) {
+  if (argc == 4) {
     return _wrap_VelocityAberrationExact_aberration_calc__SWIG_1(self, argc, argv);
   }
-  if (argc == 4) {
+  if (argc == 5) {
     return _wrap_VelocityAberrationExact_aberration_calc__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'VelocityAberrationExact_aberration_calc'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::VelocityAberrationExact::aberration_calc(GeoCal::QuaternionOrbitData const &,GeoCal::GroundCoordinate const &,bool) const\n"
-    "    GeoCal::VelocityAberrationExact::aberration_calc(GeoCal::QuaternionOrbitData const &,GeoCal::GroundCoordinate const &) const\n");
+    "    GeoCal::VelocityAberrationExact::aberration_calc(GeoCal::QuaternionOrbitData const &,GeoCal::ScLookVector const &,GeoCal::GroundCoordinate const &,bool) const\n"
+    "    GeoCal::VelocityAberrationExact::aberration_calc(GeoCal::QuaternionOrbitData const &,GeoCal::ScLookVector const &,GeoCal::GroundCoordinate const &) const\n");
   return 0;
 }
 
@@ -6927,7 +6985,8 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_apply(PyObject *SW
   PyObject *resultobj = 0;
   GeoCal::VelocityAberrationExact *arg1 = (GeoCal::VelocityAberrationExact *) 0 ;
   GeoCal::QuaternionOrbitData *arg2 = 0 ;
-  GeoCal::GroundCoordinate *arg3 = 0 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
@@ -6937,11 +6996,14 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_apply(PyObject *SW
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared2 ;
   void *argp3 = 0 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
-  PyObject *swig_obj[3] ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
+  PyObject *swig_obj[4] ;
   GeoCal::CartesianFixedLookVector result;
   
-  if (!SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_aberration_apply",3,3,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_aberration_apply",4,4,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0 |  0 , &newmem);
@@ -6986,30 +7048,55 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_apply(PyObject *SW
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
     if (SWIG_IsOK(res3)) {
       arg3 = ptr;
     } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_apply" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_apply" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
       }
       if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_apply" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_apply" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
       } else {
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "VelocityAberrationExact_aberration_apply" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_apply" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
       }
     }
   }
   {
     try {
-      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_apply((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_apply((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::ScLookVector const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7030,7 +7117,8 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_reverse(PyObject *
   PyObject *resultobj = 0;
   GeoCal::VelocityAberrationExact *arg1 = (GeoCal::VelocityAberrationExact *) 0 ;
   GeoCal::QuaternionOrbitData *arg2 = 0 ;
-  GeoCal::GroundCoordinate *arg3 = 0 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  GeoCal::GroundCoordinate *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
@@ -7040,11 +7128,14 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_reverse(PyObject *
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared2 ;
   void *argp3 = 0 ;
   int res3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
-  PyObject *swig_obj[3] ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared4 ;
+  PyObject *swig_obj[4] ;
   GeoCal::CartesianFixedLookVector result;
   
-  if (!SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_aberration_reverse",3,3,swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_aberration_reverse",4,4,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0 |  0 , &newmem);
@@ -7089,30 +7180,55 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_reverse(PyObject *
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
     if (SWIG_IsOK(res3)) {
       arg3 = ptr;
     } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
       if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_reverse" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_aberration_reverse" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
       }
       if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_reverse" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_reverse" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
       } else {
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "VelocityAberrationExact_aberration_reverse" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_aberration_reverse" "', argument " "4"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4);
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp4)->get());
       }
     }
   }
   {
     try {
-      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_reverse((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
+      result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_reverse((GeoCal::QuaternionOrbitData const &)*arg2,(GeoCal::ScLookVector const &)*arg3,(GeoCal::GroundCoordinate const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7209,20 +7325,20 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"VelocityAberrationExact_aberration_calc", _wrap_VelocityAberrationExact_aberration_calc, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianFixedLookVector VelocityAberrationExact::aberration_calc(const QuaternionOrbitData &Od, const GroundCoordinate\n"
-		"&Gc_before_correction, bool Forward_calc=true) const\n"
+		"CartesianFixedLookVector VelocityAberrationExact::aberration_calc(const QuaternionOrbitData &Od, const ScLookVector &Sl, const\n"
+		"GroundCoordinate &Gc_before_correction, bool Forward_calc=true) const\n"
 		"\n"
 		""},
 	 { (char *)"VelocityAberrationExact_aberration_apply", _wrap_VelocityAberrationExact_aberration_apply, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_apply(const QuaternionOrbitData &Od, const GroundCoordinate\n"
-		"&Gc_approx_aberration) const\n"
+		"virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_apply(const QuaternionOrbitData &Od, const ScLookVector &Sl, const\n"
+		"GroundCoordinate &Gc_approx_aberration) const\n"
 		"\n"
 		""},
 	 { (char *)"VelocityAberrationExact_aberration_reverse", _wrap_VelocityAberrationExact_aberration_reverse, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_reverse(const QuaternionOrbitData &Od, const GroundCoordinate\n"
-		"&Gc_full_aberration) const\n"
+		"virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_reverse(const QuaternionOrbitData &Od, const ScLookVector &Sl, const\n"
+		"GroundCoordinate &Gc_full_aberration) const\n"
 		"\n"
 		""},
 	 { (char *)"delete_VelocityAberrationExact", (PyCFunction)_wrap_delete_VelocityAberrationExact, METH_O, (char *)"\n"

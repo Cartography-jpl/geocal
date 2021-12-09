@@ -325,7 +325,19 @@ def test_create_steep_igc(isolated_dir, igc_gfm):
     q = (quat_rot_x(0.0) * quat_rot_y(58.0 * deg_to_rad) *
          quat_rot_x(-2.7 * deg_to_rad))
     igc_gfm.camera.frame_to_sc = q
-    write_shelve(unit_test_data + "steep_igc_gfm.xml", igc_gfm)
+    # Write and read to Nitf file, to get any rounding into place
+    f = pynitf.NitfFile()
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment[0].create_glas_gfm(igc_gfm)
+    f.write("gfm_test.ntf")
+    f2 = NitfFile("gfm_test.ntf")
+    igc_gfm2 = f2.image_segment[0].glas_gfm.igc()
+    write_shelve(unit_test_data + "steep_igc_gfm.xml", igc_gfm2)
+    
                  
 @require_msp    
 @require_pynitf
@@ -370,7 +382,9 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     max_diff1 = -1e8
     max_diff2 = -1e8
     max_diff3 = -1e8
-    
+    ic = ImageCoordinate(100, 50)
+    print(igc2.ground_coordinate(ic).convert_to_cf().position)
+    print(distance(igc2.ground_coordinate(ic), igc3.ground_coordinate(ic)))
     for i in range(0, igc_gfm.number_line, 20):
         for j in range (0, igc_gfm.number_sample, 20):
             ic = ImageCoordinate(i, j)

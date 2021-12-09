@@ -24,16 +24,19 @@ public:
 
   CartesianFixedLookVector aberration_calc
   (const QuaternionOrbitData& Od,
+   const ScLookVector& Sl,
    const GroundCoordinate& Gc_before_correction,
    bool Forward_calc = true) const;
   virtual CartesianFixedLookVector
   aberration_apply(const QuaternionOrbitData& Od,
+		   const ScLookVector& Sl,
 		   const GroundCoordinate& Gc_approx_aberration) const
-  { return aberration_calc(Od, Gc_approx_aberration, true); }
+  { return aberration_calc(Od, Sl, Gc_approx_aberration, true); }
   virtual CartesianFixedLookVector
   aberration_reverse(const QuaternionOrbitData& Od,
+		     const ScLookVector& Sl,
   		     const GroundCoordinate& Gc_full_aberration) const
-  { return aberration_calc(Od, Gc_full_aberration, false); }
+  { return aberration_calc(Od, Sl, Gc_full_aberration, false); }
   virtual void print(std::ostream& Os) const;
 private:
   friend class boost::serialization::access;

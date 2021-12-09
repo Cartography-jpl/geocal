@@ -481,6 +481,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc \
 	@swigsrc@/refraction_sdp_wrap.cc \
 	@swigsrc@/refraction_msp_wrap.cc \
+	@swigsrc@/velocity_aberration_exact_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
 	@swigsrc@/iterative_morphological_dilation_wrap.cc \
@@ -680,6 +681,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-galileo_camera_wrap.lo \
 	@swigsrc@/_swig_wrap_la-refraction_sdp_wrap.lo \
 	@swigsrc@/_swig_wrap_la-refraction_msp_wrap.lo \
+	@swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo \
 	@swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo \
 	@swigsrc@/_swig_wrap_la-iterative_morphological_dilation_wrap.lo \
@@ -886,6 +888,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/generic_object.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction_sdp.cc \
 	@srcimplementation@/refraction_msp.cc \
+	@srcimplementation@/velocity_aberration_exact.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
 	@srcimplementation@/ray_intersect.cc \
 	@srcimplementation@/dem_match.cc \
@@ -1090,6 +1093,7 @@ am_libgeocal_la_OBJECTS = @srcsupport@/libgeocal_la-generic_object.lo \
 	@srcimplementation@/libgeocal_la-galileo_camera.lo \
 	@srcimplementation@/libgeocal_la-refraction_sdp.lo \
 	@srcimplementation@/libgeocal_la-refraction_msp.lo \
+	@srcimplementation@/libgeocal_la-velocity_aberration_exact.lo \
 	@srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo \
 	@srcimplementation@/libgeocal_la-ray_intersect.lo \
 	@srcimplementation@/libgeocal_la-dem_match.lo \
@@ -1288,6 +1292,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_sdp_test.cc \
 	@srcimplementation@/refraction_msp_test.cc \
+	@srcimplementation@/velocity_aberration_exact_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
 	@srcimplementation@/ray_intersect_test.cc \
 	@srcimplementation@/igc_image_to_image_match_test.cc \
@@ -1459,6 +1464,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-galileo_camera_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-refraction_sdp_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-refraction_msp_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-velocity_aberration_exact_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ray_intersect_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-igc_image_to_image_match_test.$(OBJEXT) \
@@ -1721,6 +1727,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-spice_planet_orbit_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo \
@@ -1825,6 +1832,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-spice_planet_orbit.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo \
 	@srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po \
 	@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po \
 	@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po \
@@ -2181,6 +2189,7 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo \
@@ -2371,6 +2380,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction_sdp.h \
 	@srcimplementation@/refraction_msp.h \
+	@srcimplementation@/velocity_aberration_exact.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
 	@srcimplementation@/dem_match.h \
@@ -3408,6 +3418,7 @@ libgeocal_la_SOURCES = @srcsupport@/generic_object.cc \
 	@srcimplementation@/galileo_camera.cc \
 	@srcimplementation@/refraction_sdp.cc \
 	@srcimplementation@/refraction_msp.cc \
+	@srcimplementation@/velocity_aberration_exact.cc \
 	@srcimplementation@/orbit_data_image_ground_connection.cc \
 	@srcimplementation@/ray_intersect.cc \
 	@srcimplementation@/dem_match.cc \
@@ -3585,6 +3596,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/galileo_camera_wrap.cc \
 	@swigsrc@/refraction_sdp_wrap.cc \
 	@swigsrc@/refraction_msp_wrap.cc \
+	@swigsrc@/velocity_aberration_exact_wrap.cc \
 	@swigsrc@/orbit_data_image_ground_connection_wrap.cc \
 	@swigsrc@/planet_coordinate_wrap.cc \
 	@swigsrc@/iterative_morphological_dilation_wrap.cc \
@@ -3819,6 +3831,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/galileo_camera.h \
 	@srcimplementation@/refraction_sdp.h \
 	@srcimplementation@/refraction_msp.h \
+	@srcimplementation@/velocity_aberration_exact.h \
 	@srcimplementation@/orbit_data_image_ground_connection.h \
 	@srcimplementation@/ray_intersect.h \
 	@srcimplementation@/dem_match.h \
@@ -4004,6 +4017,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/galileo_camera.i \
 	@srcimplementation@/refraction_sdp.i \
 	@srcimplementation@/refraction_msp.i \
+	@srcimplementation@/velocity_aberration_exact.i \
 	@srcimplementation@/orbit_data_image_ground_connection.i \
 	@srcimplementation@/planet_coordinate.i \
 	@srcimplementation@/iterative_morphological_dilation.i \
@@ -4148,6 +4162,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/galileo_camera_test.cc \
 	@srcimplementation@/refraction_sdp_test.cc \
 	@srcimplementation@/refraction_msp_test.cc \
+	@srcimplementation@/velocity_aberration_exact_test.cc \
 	@srcimplementation@/orbit_data_image_ground_connection_test.cc \
 	@srcimplementation@/ray_intersect_test.cc \
 	@srcimplementation@/igc_image_to_image_match_test.cc \
@@ -4943,6 +4958,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-refraction_msp_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-planet_coordinate_wrap.lo:  \
@@ -5478,6 +5495,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-refraction_msp.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-velocity_aberration_exact.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo:  \
@@ -6091,6 +6111,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-refraction_msp_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-velocity_aberration_exact_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -6605,6 +6628,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-spice_planet_orbit_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@ # am--include-marker
@@ -6709,6 +6733,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-spice_planet_orbit.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po@am__quote@ # am--include-marker
@@ -7065,6 +7090,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo@am__quote@ # am--include-marker
@@ -7931,6 +7957,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/refraction_msp_wrap.cc' object='@swigsrc@/_swig_wrap_la-refraction_msp_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-refraction_msp_wrap.lo `test -f '@swigsrc@/refraction_msp_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/refraction_msp_wrap.cc
+
+@swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo: @swigsrc@/velocity_aberration_exact_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo `test -f '@swigsrc@/velocity_aberration_exact_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/velocity_aberration_exact_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/velocity_aberration_exact_wrap.cc' object='@swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-velocity_aberration_exact_wrap.lo `test -f '@swigsrc@/velocity_aberration_exact_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/velocity_aberration_exact_wrap.cc
 
 @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo: @swigsrc@/orbit_data_image_ground_connection_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_data_image_ground_connection_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_data_image_ground_connection_wrap.lo `test -f '@swigsrc@/orbit_data_image_ground_connection_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_data_image_ground_connection_wrap.cc
@@ -9380,6 +9413,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_msp.cc' object='@srcimplementation@/libgeocal_la-refraction_msp.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-refraction_msp.lo `test -f '@srcimplementation@/refraction_msp.cc' || echo '$(srcdir)/'`@srcimplementation@/refraction_msp.cc
+
+@srcimplementation@/libgeocal_la-velocity_aberration_exact.lo: @srcimplementation@/velocity_aberration_exact.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-velocity_aberration_exact.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Tpo -c -o @srcimplementation@/libgeocal_la-velocity_aberration_exact.lo `test -f '@srcimplementation@/velocity_aberration_exact.cc' || echo '$(srcdir)/'`@srcimplementation@/velocity_aberration_exact.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/velocity_aberration_exact.cc' object='@srcimplementation@/libgeocal_la-velocity_aberration_exact.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-velocity_aberration_exact.lo `test -f '@srcimplementation@/velocity_aberration_exact.cc' || echo '$(srcdir)/'`@srcimplementation@/velocity_aberration_exact.cc
 
 @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo: @srcimplementation@/orbit_data_image_ground_connection.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_data_image_ground_connection.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_data_image_ground_connection.lo `test -f '@srcimplementation@/orbit_data_image_ground_connection.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_data_image_ground_connection.cc
@@ -11417,6 +11457,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/refraction_msp_test.cc' object='@srcimplementation@/geocal_test_all-refraction_msp_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-refraction_msp_test.obj `if test -f '@srcimplementation@/refraction_msp_test.cc'; then $(CYGPATH_W) '@srcimplementation@/refraction_msp_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/refraction_msp_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-velocity_aberration_exact_test.o: @srcimplementation@/velocity_aberration_exact_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-velocity_aberration_exact_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Tpo -c -o @srcimplementation@/geocal_test_all-velocity_aberration_exact_test.o `test -f '@srcimplementation@/velocity_aberration_exact_test.cc' || echo '$(srcdir)/'`@srcimplementation@/velocity_aberration_exact_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/velocity_aberration_exact_test.cc' object='@srcimplementation@/geocal_test_all-velocity_aberration_exact_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-velocity_aberration_exact_test.o `test -f '@srcimplementation@/velocity_aberration_exact_test.cc' || echo '$(srcdir)/'`@srcimplementation@/velocity_aberration_exact_test.cc
+
+@srcimplementation@/geocal_test_all-velocity_aberration_exact_test.obj: @srcimplementation@/velocity_aberration_exact_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-velocity_aberration_exact_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Tpo -c -o @srcimplementation@/geocal_test_all-velocity_aberration_exact_test.obj `if test -f '@srcimplementation@/velocity_aberration_exact_test.cc'; then $(CYGPATH_W) '@srcimplementation@/velocity_aberration_exact_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/velocity_aberration_exact_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/velocity_aberration_exact_test.cc' object='@srcimplementation@/geocal_test_all-velocity_aberration_exact_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-velocity_aberration_exact_test.obj `if test -f '@srcimplementation@/velocity_aberration_exact_test.cc'; then $(CYGPATH_W) '@srcimplementation@/velocity_aberration_exact_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/velocity_aberration_exact_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.o: @srcimplementation@/orbit_data_image_ground_connection_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_data_image_ground_connection_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_data_image_ground_connection_test.o `test -f '@srcimplementation@/orbit_data_image_ground_connection_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_data_image_ground_connection_test.cc
@@ -13619,6 +13673,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-spice_planet_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo
@@ -13723,6 +13778,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-spice_planet_orbit.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po
@@ -14079,6 +14135,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo
@@ -14286,6 +14343,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-spice_planet_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo
@@ -14390,6 +14448,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-spice_planet_orbit.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po
@@ -14746,6 +14805,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-tle_orbit_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-trex_dem_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-usgs_dem_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-velocity_aberration_exact_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vfunctor_with_derivative_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_argument_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_dem_wrap.Plo

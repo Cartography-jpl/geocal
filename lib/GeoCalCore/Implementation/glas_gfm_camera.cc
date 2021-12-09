@@ -602,7 +602,7 @@ void GlasGfmCamera::field_alignment_block
   field_angle_type_ = 0;
   nline_ = Cam.number_line(Band);
   nsamp_ = Cam.number_sample(Band);
-  field_angle_interpolation_type_ = 0;
+  field_angle_interpolation_type_ = 1;
   init_model();
   first_line_block_.resize(1);
   first_sample_block_.resize(1);
@@ -739,5 +739,21 @@ void GlasGfmCamera::delta_sample_pair(double V)
     throw Exception("delta_sample_pair must be > 0");
   delta_sample_pair_ = V;
   notify_update();
+}
+
+void GlasGfmCamera::print(std::ostream& Os) const
+{
+  Os << "GlasGfmCamera\n"
+     << "  Id:                " << id() << "\n"
+     << "  Band type:         " << band_type() << "\n"
+     << "  Band wavelength:   " << band_wavelength() << " micrometer\n"
+     << "  Number line:       " << number_line(0) << "\n"
+     << "  Number sample:     " << number_sample(0) << "\n"
+     << "  Focal length:      " << focal_length() << " m\n"
+     << "  Focal length time: " << focal_length_time() << "\n"
+     << "  Ppoff:              ("
+     << ppoff()(0) << ", " << ppoff()(1) << ", " << ppoff()(2) << ")\n"
+     << "  Angoff:             ("
+     << angoff()(0) << ", " << angoff()(1) << ", " << angoff()(2) << ")\n";
 }
 

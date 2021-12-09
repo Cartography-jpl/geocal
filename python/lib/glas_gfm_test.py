@@ -315,6 +315,18 @@ def test_create_gfm(isolated_dir, igc_gfm):
     print(max_diff2)
     assert max_diff1 < 1.5
 
+@skip    
+def test_create_steep_igc(isolated_dir, igc_gfm):
+    '''Test to generate a Steep angle OrbitDataImageGroundConnection suitable
+    for a GFM. We use this in C++ unit tests.'''
+    # Add a fairly steep angle, so we have a large refraction correction.
+    # This is the nominal angle for the MISR DF camera, but this is just
+    # "some steep angle" data
+    q = (quat_rot_x(0.0) * quat_rot_y(58.0 * deg_to_rad) *
+         quat_rot_x(-2.7 * deg_to_rad))
+    igc_gfm.camera.frame_to_sc = q
+    write_shelve(unit_test_data + "steep_igc_gfm.xml", igc_gfm)
+                 
 @require_msp    
 @require_pynitf
 def test_refraction_gfm(isolated_dir, igc_gfm):

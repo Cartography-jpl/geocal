@@ -124,6 +124,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_galileo_camera)(void);
   INIT_TYPE INIT_FUNC(_refraction_sdp)(void);
   INIT_TYPE INIT_FUNC(_refraction_msp)(void);
+  INIT_TYPE INIT_FUNC(_velocity_aberration_exact)(void);
   INIT_TYPE INIT_FUNC(_orbit_data_image_ground_connection)(void);
   INIT_TYPE INIT_FUNC(_planet_coordinate)(void);
   INIT_TYPE INIT_FUNC(_iterative_morphological_dilation)(void);
@@ -348,6 +349,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_galileo_camera", INIT_FUNC(_galileo_camera));
   INIT_MODULE(module, "_refraction_sdp", INIT_FUNC(_refraction_sdp));
   INIT_MODULE(module, "_refraction_msp", INIT_FUNC(_refraction_msp));
+  INIT_MODULE(module, "_velocity_aberration_exact", INIT_FUNC(_velocity_aberration_exact));
   INIT_MODULE(module, "_orbit_data_image_ground_connection", INIT_FUNC(_orbit_data_image_ground_connection));
   INIT_MODULE(module, "_planet_coordinate", INIT_FUNC(_planet_coordinate));
   INIT_MODULE(module, "_iterative_morphological_dilation", INIT_FUNC(_iterative_morphological_dilation));

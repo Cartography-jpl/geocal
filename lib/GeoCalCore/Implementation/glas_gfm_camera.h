@@ -39,8 +39,7 @@ public:
 		double Band_wavelength = 1.45,
 		const Time& Focal_length_time = Time::time_j2000(0));
   virtual ~GlasGfmCamera() {}
-  void print(std::ostream& Os) const
-  { Os << "GlasGfmCamera"; }
+  void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------
 /// Number of bands in camera.

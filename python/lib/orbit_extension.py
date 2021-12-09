@@ -41,7 +41,7 @@ def _quat_from_principal_gp(self, gp, twist = 0):
     v1 = [0,0,1]
     v2 = gp.convert_to_cf().position - self.position_cf.position
     # Inverse of aberration correction
-    v2 += np.linalg.norm(v2) / speed_of_light * self.velocity_ab
+    v2 += np.linalg.norm(v2) / speed_of_light * self.velocity_cf
     self.sc_to_cf = determine_quat_rot(v1, v2) * quat_rot_z(twist * deg_to_rad)
     quat_normalize(self.sc_to_cf)
 
@@ -66,7 +66,7 @@ def _principal_gp(self, dem, resolution=1, max_height=9000):
     v1 = [0,0,1]
     v2 = gp.convert_to_cf().position - self.position_cf.position
     # Inverse of aberration correction
-    v2 += np.linalg.norm(v2) / speed_of_light * self.velocity_ab
+    v2 += np.linalg.norm(v2) / speed_of_light * self.velocity_cf
     q = determine_quat_rot(v1, v2)
     q2 = q.conj() * self.sc_to_cf
     twist = math.atan2(q2.R_component_4, q2.R_component_1) * rad_to_deg * 2

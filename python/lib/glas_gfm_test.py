@@ -10,6 +10,7 @@ from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
                          KeplerOrbit, Time, OrbitDes, Ecr, RefractionMsp,
                          quat_rot_x, quat_rot_y, deg_to_rad)
+from .sqlite_shelf import write_shelve
 import matplotlib.pylab as plt
 import matplotlib as mpl
 import seaborn as sns
@@ -338,20 +339,22 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     t.ground_ref_point_x = pt.position[0]
     t.ground_ref_point_y = pt.position[1]
     t.ground_ref_point_z = pt.position[2]
-    if True:
+    if False:
         # Compare without aberration correction
         t.vel_aber_flag = 0
         igc_gfm.orbit_data.aberration_correction = QuaternionOrbitData.NO_CORRECTION
-    if False:
+    if True:
         # Compare without refraction
         t.atm_refr_flag = 0
         igc_gfm.refraction = None
     print(f)
     f.write("gfm_test.ntf")
     f2 = NitfFile("gfm_test.ntf")
+    print(f2)
     igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
     igc3 = f2.image_segment[0].glas_gfm.igc()
-    igc3.orbit_data.aberration_correction = igc_gfm.orbit_data.aberration_correction
+    write_shelve("igc_gfm.xml", igc_gfm)
+    write_shelve("igc3.xml", igc3)
     max_diff1 = -1e8
     max_diff2 = -1e8
     max_diff3 = -1e8
@@ -371,7 +374,10 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     # Difference is noise (5e-5 m difference for diff3) when we turn
     # off aberration correction. We see 2m difference for aberration, which
     # we still need to track down. Note that diff1 and diff2 is larger, like
-    # 0.04 m. This is due to roundoff when we write out the NITF file.
+    # 0.20 m. This is due to roundoff when we write out the NITF file (mostly
+    # in the camera orientation angles angoff). We use to get a extra digit
+    # or 2 of precision by using float_to_fixed_width from pynitf, but
+    # we got complaints from our partners. So we just live with the inaccuracy.
     print(max_diff1)
     print(max_diff2)
     print(max_diff3)

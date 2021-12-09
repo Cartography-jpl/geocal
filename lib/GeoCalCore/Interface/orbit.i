@@ -33,23 +33,29 @@ public:
   double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
 				     int Band) const;
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const = 0;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
   virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const = 0;
+  cf_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianFixedLookVectorWithDerivative
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  cf_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
+  sc_look_vector(const CartesianInertialLookVector& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+  sc_look_vector(const CartesianFixedLookVector& Cf,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
+		 bool Include_velocity_aberration = true) const;
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
   FrameCoordinateWithDerivative 
@@ -128,8 +134,6 @@ def position_cf_with_derivative(self):
 
 class QuaternionOrbitData : public OrbitData {
 public:
-  enum AberrationCorrection { FIRST_ORDER_CORRECTION = 0,
-    IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = 1, NO_CORRECTION = 2 };
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
@@ -161,21 +165,11 @@ public:
 		      const boost::math::quaternion<AutoDerivative<double> >& 
 		      sc_to_ci_q);
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) const;
-  virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const;
-  virtual CartesianFixedLookVectorWithDerivative 
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) const;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const;
-  virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const;
-  virtual ScLookVectorWithDerivative 
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   static boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
 	      const QuaternionOrbitData& t2, 
@@ -184,8 +178,6 @@ public:
   interpolate(const QuaternionOrbitData& t1, 
 	      const QuaternionOrbitData& t2, 
 	      const Time& tm, bool Extrapolation_ok = false);
-  %python_attribute_with_set(aberration_correction, AberrationCorrection);
-  %python_attribute(velocity_ab, blitz::Array<double, 1>);
   %python_attribute_with_set(sc_to_ci, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_ci_with_derivative, 
 		    boost::math::quaternion<AutoDerivative<double> >)

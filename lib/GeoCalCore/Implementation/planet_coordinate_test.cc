@@ -260,7 +260,7 @@ BOOST_AUTO_TEST_CASE(orbit_data)
 				// Convert to VicarImageCoordinate, so can
 				// more directly compare
   BOOST_CHECK_CLOSE(ic_planet_center.line, -3932.85756, 1e-4);
-  BOOST_CHECK_CLOSE(ic_planet_center.sample, 11478.399, 1e-4);
+  BOOST_CHECK_CLOSE(ic_planet_center.sample, 11478.387, 1e-4);
 }
 
 

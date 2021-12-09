@@ -5874,6 +5874,20 @@ SWIG_AsVal_int (PyObject * obj, int *val)
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
   namespace swig {
     template <>  struct traits< boost::shared_ptr< GeoCal::GroundCoordinate > > {
       typedef pointer_category category;
@@ -6084,20 +6098,6 @@ struct SWIG_null_deleter {
 
 
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
-SWIGINTERN int
-SWIG_AsVal_bool (PyObject *obj, bool *val)
-{
-  int r;
-  if (!PyBool_Check(obj))
-    return SWIG_ERROR;
-  r = PyObject_IsTrue(obj);
-  if (r == -1)
-    return SWIG_ERROR;
-  if (val) *val = r ? true : false;
-  return SWIG_OK;
-}
 
 SWIGINTERN blitz::Array< double,1 > GeoCal_QuaternionOrbitData__velocity_cf(GeoCal::QuaternionOrbitData const *self){
       blitz::Array<double, 1> res(3);
@@ -8754,6 +8754,87 @@ SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_0(PyObject *SWIGUNUSED
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::ScLookVector *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CartesianInertialLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_ci_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::ScLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_ci_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->ci_look_vector((GeoCal::ScLookVector const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::ScLookVector *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
@@ -8823,7 +8904,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CartesianInertialLookVectorWithDerivative result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_ci_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVectorWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_ci_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->ci_look_vector((GeoCal::ScLookVectorWithDerivative const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
@@ -8898,11 +9060,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[3] = {
+  PyObject *argv[4] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_ci_look_vector",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_ci_look_vector",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -8911,24 +9073,121 @@ SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector(PyObject *self, PyObject *ar
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_OrbitData_ci_look_vector__SWIG_0(self, argc, argv);
+    return _wrap_OrbitData_ci_look_vector__SWIG_1(self, argc, argv);
   }
 check_1:
   
   if (argc == 2) {
-    return _wrap_OrbitData_ci_look_vector__SWIG_1(self, argc, argv);
+    return _wrap_OrbitData_ci_look_vector__SWIG_3(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_OrbitData_ci_look_vector__SWIG_2(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_OrbitData_ci_look_vector__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitData_ci_look_vector'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitData::ci_look_vector(GeoCal::ScLookVector const &,bool) const\n"
     "    GeoCal::OrbitData::ci_look_vector(GeoCal::ScLookVector const &) const\n"
+    "    GeoCal::OrbitData::ci_look_vector(GeoCal::ScLookVectorWithDerivative const &,bool) const\n"
     "    GeoCal::OrbitData::ci_look_vector(GeoCal::ScLookVectorWithDerivative const &) const\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::ScLookVector *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CartesianFixedLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_cf_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::ScLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_cf_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->cf_look_vector((GeoCal::ScLookVector const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::ScLookVector *arg2 = 0 ;
@@ -9001,7 +9260,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CartesianFixedLookVectorWithDerivative result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_cf_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVectorWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_cf_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->cf_look_vector((GeoCal::ScLookVectorWithDerivative const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative((GeoCal::CartesianFixedLookVectorWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
@@ -9076,11 +9416,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[3] = {
+  PyObject *argv[4] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_cf_look_vector",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_cf_look_vector",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -9089,24 +9429,121 @@ SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector(PyObject *self, PyObject *ar
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_OrbitData_cf_look_vector__SWIG_0(self, argc, argv);
+    return _wrap_OrbitData_cf_look_vector__SWIG_1(self, argc, argv);
   }
 check_1:
   
   if (argc == 2) {
-    return _wrap_OrbitData_cf_look_vector__SWIG_1(self, argc, argv);
+    return _wrap_OrbitData_cf_look_vector__SWIG_3(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_OrbitData_cf_look_vector__SWIG_2(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_OrbitData_cf_look_vector__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitData_cf_look_vector'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitData::cf_look_vector(GeoCal::ScLookVector const &,bool) const\n"
     "    GeoCal::OrbitData::cf_look_vector(GeoCal::ScLookVector const &) const\n"
+    "    GeoCal::OrbitData::cf_look_vector(GeoCal::ScLookVectorWithDerivative const &,bool) const\n"
     "    GeoCal::OrbitData::cf_look_vector(GeoCal::ScLookVectorWithDerivative const &) const\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::CartesianInertialLookVector *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertialLookVector const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::ScLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianInertialLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertialLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianInertialLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianInertialLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_sc_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianInertialLookVector const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::CartesianInertialLookVector *arg2 = 0 ;
@@ -9179,7 +9616,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::CartesianInertialLookVectorWithDerivative *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertialLookVectorWithDerivative const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::ScLookVectorWithDerivative result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianInertialLookVectorWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertialLookVectorWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVectorWithDerivative const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVectorWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianInertialLookVectorWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianInertialLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_sc_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianInertialLookVectorWithDerivative const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::CartesianInertialLookVectorWithDerivative *arg2 = 0 ;
@@ -9252,7 +9770,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::CartesianFixedLookVector *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::ScLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixedLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixedLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianFixedLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianFixedLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_sc_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianFixedLookVector const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::CartesianFixedLookVector *arg2 = 0 ;
@@ -9325,7 +9924,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::CartesianFixedLookVectorWithDerivative *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVectorWithDerivative const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::ScLookVectorWithDerivative result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::CartesianFixedLookVectorWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixedLookVectorWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::CartesianFixedLookVectorWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::CartesianFixedLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "OrbitData_sc_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianFixedLookVectorWithDerivative const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::CartesianFixedLookVectorWithDerivative *arg2 = 0 ;
@@ -9400,11 +10080,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[3] = {
+  PyObject *argv[4] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_sc_look_vector",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_sc_look_vector",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -9413,7 +10093,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector(PyObject *self, PyObject *ar
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_OrbitData_sc_look_vector__SWIG_0(self, argc, argv);
+    return _wrap_OrbitData_sc_look_vector__SWIG_1(self, argc, argv);
   }
 check_1:
   
@@ -9424,7 +10104,7 @@ check_1:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_2;
-    return _wrap_OrbitData_sc_look_vector__SWIG_1(self, argc, argv);
+    return _wrap_OrbitData_sc_look_vector__SWIG_3(self, argc, argv);
   }
 check_2:
   
@@ -9435,20 +10115,60 @@ check_2:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_3;
-    return _wrap_OrbitData_sc_look_vector__SWIG_2(self, argc, argv);
+    return _wrap_OrbitData_sc_look_vector__SWIG_5(self, argc, argv);
   }
 check_3:
   
   if (argc == 2) {
-    return _wrap_OrbitData_sc_look_vector__SWIG_3(self, argc, argv);
+    return _wrap_OrbitData_sc_look_vector__SWIG_7(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_OrbitData_sc_look_vector__SWIG_4(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_6;
+    return _wrap_OrbitData_sc_look_vector__SWIG_2(self, argc, argv);
+  }
+check_6:
+  
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_7;
+    return _wrap_OrbitData_sc_look_vector__SWIG_6(self, argc, argv);
+  }
+check_7:
+  
+  if (argc == 3) {
+    return _wrap_OrbitData_sc_look_vector__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitData_sc_look_vector'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianInertialLookVector const &,bool) const\n"
     "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianInertialLookVector const &) const\n"
+    "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianInertialLookVectorWithDerivative const &,bool) const\n"
     "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianInertialLookVectorWithDerivative const &) const\n"
+    "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianFixedLookVector const &,bool) const\n"
     "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianFixedLookVector const &) const\n"
+    "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianFixedLookVectorWithDerivative const &,bool) const\n"
     "    GeoCal::OrbitData::sc_look_vector(GeoCal::CartesianFixedLookVectorWithDerivative const &) const\n");
   return 0;
 }
@@ -12516,6 +13236,87 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_0(PyObject *
   PyObject *resultobj = 0;
   GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
   GeoCal::ScLookVector *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CartesianInertialLookVector result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
+        arg2 = const_cast< GeoCal::ScLookVector * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::QuaternionOrbitData const *)arg1)->ci_look_vector((GeoCal::ScLookVector const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
+  GeoCal::ScLookVector *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
@@ -12585,7 +13386,88 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
+  GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
+  bool arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > tempshared2 ;
+  bool val3 ;
+  int ecode3 = 0 ;
+  GeoCal::CartesianInertialLookVectorWithDerivative result;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVectorWithDerivative *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
+        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2)->get());
+      }
+    }
+  }
+  ecode3 = SWIG_AsVal_bool(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "QuaternionOrbitData_ci_look_vector" "', argument " "3"" of type '" "bool""'");
+  } 
+  arg3 = static_cast< bool >(val3);
+  {
+    try {
+      result = ((GeoCal::QuaternionOrbitData const *)arg1)->ci_look_vector((GeoCal::ScLookVectorWithDerivative const &)*arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
   GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
@@ -12660,11 +13542,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[3] = {
+  PyObject *argv[4] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData_ci_look_vector",0,2,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData_ci_look_vector",0,3,argv))) SWIG_fail;
   --argc;
   if (argc == 2) {
     int _v = 0;
@@ -12673,545 +13555,35 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector(PyObject *self, Py
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_1;
-    return _wrap_QuaternionOrbitData_ci_look_vector__SWIG_0(self, argc, argv);
+    return _wrap_QuaternionOrbitData_ci_look_vector__SWIG_1(self, argc, argv);
   }
 check_1:
   
   if (argc == 2) {
-    return _wrap_QuaternionOrbitData_ci_look_vector__SWIG_1(self, argc, argv);
+    return _wrap_QuaternionOrbitData_ci_look_vector__SWIG_3(self, argc, argv);
+  }
+  if (argc == 3) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_QuaternionOrbitData_ci_look_vector__SWIG_2(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 3) {
+    return _wrap_QuaternionOrbitData_ci_look_vector__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData_ci_look_vector'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::QuaternionOrbitData::ci_look_vector(GeoCal::ScLookVector const &,bool) const\n"
     "    GeoCal::QuaternionOrbitData::ci_look_vector(GeoCal::ScLookVector const &) const\n"
+    "    GeoCal::QuaternionOrbitData::ci_look_vector(GeoCal::ScLookVectorWithDerivative const &,bool) const\n"
     "    GeoCal::QuaternionOrbitData::ci_look_vector(GeoCal::ScLookVectorWithDerivative const &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_cf_look_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::ScLookVector *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ScLookVector const > tempshared2 ;
-  GeoCal::CartesianFixedLookVector result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_cf_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ScLookVector *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVector const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2);
-        arg2 = const_cast< GeoCal::ScLookVector * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->cf_look_vector((GeoCal::ScLookVector const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_cf_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::ScLookVectorWithDerivative *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > tempshared2 ;
-  GeoCal::CartesianFixedLookVectorWithDerivative result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_cf_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::ScLookVectorWithDerivative *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVectorWithDerivative,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_cf_look_vector" "', argument " "2"" of type '" "GeoCal::ScLookVectorWithDerivative const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2);
-        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::ScLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->cf_look_vector((GeoCal::ScLookVectorWithDerivative const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative((GeoCal::CartesianFixedLookVectorWithDerivative &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_cf_look_vector(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData_cf_look_vector",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_1;
-    return _wrap_QuaternionOrbitData_cf_look_vector__SWIG_0(self, argc, argv);
-  }
-check_1:
-  
-  if (argc == 2) {
-    return _wrap_QuaternionOrbitData_cf_look_vector__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData_cf_look_vector'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::QuaternionOrbitData::cf_look_vector(GeoCal::ScLookVector const &) const\n"
-    "    GeoCal::QuaternionOrbitData::cf_look_vector(GeoCal::ScLookVectorWithDerivative const &) const\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_sc_look_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::CartesianInertialLookVector *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianInertialLookVector const > tempshared2 ;
-  GeoCal::ScLookVector result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CartesianInertialLookVector *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertialLookVector,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVector const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2);
-        arg2 = const_cast< GeoCal::CartesianInertialLookVector * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::CartesianInertialLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVector > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianInertialLookVector const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_sc_look_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::CartesianInertialLookVectorWithDerivative *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianInertialLookVectorWithDerivative const > tempshared2 ;
-  GeoCal::ScLookVectorWithDerivative result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CartesianInertialLookVectorWithDerivative *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianInertialLookVectorWithDerivative,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVectorWithDerivative const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianInertialLookVectorWithDerivative const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > * >(argp2);
-        arg2 = const_cast< GeoCal::CartesianInertialLookVectorWithDerivative * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::CartesianInertialLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianInertialLookVectorWithDerivative const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_sc_look_vector__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::CartesianFixedLookVector *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > tempshared2 ;
-  GeoCal::ScLookVector result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CartesianFixedLookVector *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixedLookVector,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVector const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2);
-        arg2 = const_cast< GeoCal::CartesianFixedLookVector * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::CartesianFixedLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVector > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianFixedLookVector const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_sc_look_vector__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::CartesianFixedLookVectorWithDerivative *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::CartesianFixedLookVectorWithDerivative const > tempshared2 ;
-  GeoCal::ScLookVectorWithDerivative result;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::CartesianFixedLookVectorWithDerivative *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__CartesianFixedLookVectorWithDerivative,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "QuaternionOrbitData_sc_look_vector" "', argument " "2"" of type '" "GeoCal::CartesianFixedLookVectorWithDerivative const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > * >(argp2);
-        arg2 = const_cast< GeoCal::CartesianFixedLookVectorWithDerivative * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::CartesianFixedLookVectorWithDerivative * >(reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->sc_look_vector((GeoCal::CartesianFixedLookVectorWithDerivative const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData_sc_look_vector(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData_sc_look_vector",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 2) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_1;
-    return _wrap_QuaternionOrbitData_sc_look_vector__SWIG_0(self, argc, argv);
-  }
-check_1:
-  
-  if (argc == 2) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_2;
-    return _wrap_QuaternionOrbitData_sc_look_vector__SWIG_1(self, argc, argv);
-  }
-check_2:
-  
-  if (argc == 2) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_3;
-    return _wrap_QuaternionOrbitData_sc_look_vector__SWIG_2(self, argc, argv);
-  }
-check_3:
-  
-  if (argc == 2) {
-    return _wrap_QuaternionOrbitData_sc_look_vector__SWIG_3(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData_sc_look_vector'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::QuaternionOrbitData::sc_look_vector(GeoCal::CartesianInertialLookVector const &) const\n"
-    "    GeoCal::QuaternionOrbitData::sc_look_vector(GeoCal::CartesianInertialLookVectorWithDerivative const &) const\n"
-    "    GeoCal::QuaternionOrbitData::sc_look_vector(GeoCal::CartesianFixedLookVector const &) const\n"
-    "    GeoCal::QuaternionOrbitData::sc_look_vector(GeoCal::CartesianFixedLookVectorWithDerivative const &) const\n");
   return 0;
 }
 
@@ -13717,186 +14089,6 @@ fail:
     "    GeoCal::QuaternionOrbitData::interpolate(GeoCal::QuaternionOrbitData const &,GeoCal::QuaternionOrbitData const &,GeoCal::Time const &,bool)\n"
     "    GeoCal::QuaternionOrbitData::interpolate(GeoCal::QuaternionOrbitData const &,GeoCal::QuaternionOrbitData const &,GeoCal::Time const &)\n");
   return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_aberration_correction__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  GeoCal::QuaternionOrbitData::AberrationCorrection result;
-  
-  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_aberration_correction" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = (GeoCal::QuaternionOrbitData::AberrationCorrection)((GeoCal::QuaternionOrbitData const *)arg1)->aberration_correction();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_aberration_correction__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  GeoCal::QuaternionOrbitData::AberrationCorrection *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData > *smartarg1 = 0 ;
-  int val2 ;
-  int ecode2 ;
-  GeoCal::QuaternionOrbitData::AberrationCorrection temp2 ;
-  
-  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_aberration_correction" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  ecode2 = SWIG_AsVal_int (swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "QuaternionOrbitData__v_aberration_correction" "', argument " "2"" of type '" "GeoCal::QuaternionOrbitData::AberrationCorrection const &""'");
-  } else {
-    temp2 = static_cast< GeoCal::QuaternionOrbitData::AberrationCorrection >(val2);
-    arg2 = &temp2;
-  }
-  {
-    try {
-      (arg1)->aberration_correction((GeoCal::QuaternionOrbitData::AberrationCorrection const &)*arg2);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_aberration_correction(PyObject *self, PyObject *args) {
-  Py_ssize_t argc;
-  PyObject *argv[3] = {
-    0
-  };
-  
-  if (!(argc = SWIG_Python_UnpackTuple(args,"QuaternionOrbitData__v_aberration_correction",0,2,argv))) SWIG_fail;
-  --argc;
-  if (argc == 1) {
-    return _wrap_QuaternionOrbitData__v_aberration_correction__SWIG_0(self, argc, argv);
-  }
-  if (argc == 2) {
-    return _wrap_QuaternionOrbitData__v_aberration_correction__SWIG_1(self, argc, argv);
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'QuaternionOrbitData__v_aberration_correction'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::QuaternionOrbitData::aberration_correction() const\n"
-    "    GeoCal::QuaternionOrbitData::aberration_correction(GeoCal::QuaternionOrbitData::AberrationCorrection const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_velocity_ab(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  SwigValueWrapper< blitz::Array< double,1 > > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__v_velocity_ab" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::QuaternionOrbitData const *)arg1)->velocity_ab();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[1], stride[1];
-    for(int i = 0; i < 1; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
 }
 
 
@@ -23661,17 +23853,20 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0\n"
+		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
+		"Include_velocity_aberration=true) const =0\n"
 		"Convert from ScLookVector to CartesianInertialLookVector. \n"
 		""},
 	 { (char *)"OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0\n"
+		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
+		"Include_velocity_aberration=true) const =0\n"
 		"Convert from ScLookVector to CartesianFixedLookVector. \n"
 		""},
 	 { (char *)"OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0\n"
+		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf, bool\n"
+		"Include_velocity_aberration=true) const =0\n"
 		"Convert from CartesianFixedLookVector to ScLookVector. \n"
 		""},
 	 { (char *)"OrbitData_frame_coordinate", _wrap_OrbitData_frame_coordinate, METH_VARARGS, (char *)"\n"
@@ -23762,18 +23957,9 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const\n"
+		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
+		"Include_velocity_aberration=true) const\n"
 		"Convert to CartesianInertialLookVector. \n"
-		""},
-	 { (char *)"QuaternionOrbitData_cf_look_vector", _wrap_QuaternionOrbitData_cf_look_vector, METH_VARARGS, (char *)"\n"
-		"\n"
-		"CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const\n"
-		"Convert to CartesianFixedLookVector. \n"
-		""},
-	 { (char *)"QuaternionOrbitData_sc_look_vector", _wrap_QuaternionOrbitData_sc_look_vector, METH_VARARGS, (char *)"\n"
-		"\n"
-		"ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const\n"
-		"Convert to ScLookVector. \n"
 		""},
 	 { (char *)"QuaternionOrbitData_interpolate", _wrap_QuaternionOrbitData_interpolate, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -23781,19 +23967,6 @@ static PyMethodDef SwigMethods[] = {
 		"Time &tm, bool Extrapolation_ok=false)\n"
 		"Interpolate between two QuaternionOrbitData for the given time,\n"
 		"without interpolating the derivative stuff. \n"
-		""},
-	 { (char *)"QuaternionOrbitData__v_aberration_correction", _wrap_QuaternionOrbitData__v_aberration_correction, METH_VARARGS, (char *)"\n"
-		"\n"
-		"void GeoCal::QuaternionOrbitData::aberration_correction(AberrationCorrection V)\n"
-		"\n"
-		""},
-	 { (char *)"QuaternionOrbitData__v_velocity_ab", (PyCFunction)_wrap_QuaternionOrbitData__v_velocity_ab, METH_O, (char *)"\n"
-		"\n"
-		"blitz::Array< double, 1 > QuaternionOrbitData::velocity_ab() const\n"
-		"We use this in a few places.\n"
-		"\n"
-		"This is vel_ci converted to CartesianFixed. This is pretty similar to\n"
-		"vel_cf, the difference is this includes the rotation of the earth. \n"
 		""},
 	 { (char *)"QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -25923,9 +26096,6 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::Observer<GeoCal::Orbit>), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::Observer<GeoCal::Orbit> > > ("boost::shared_ptr< GeoCal::Observer<GeoCal::Orbit> > *"));
   
-  SWIG_Python_SetConstant(d, "QuaternionOrbitData_FIRST_ORDER_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::FIRST_ORDER_CORRECTION)));
-  SWIG_Python_SetConstant(d, "QuaternionOrbitData_IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED)));
-  SWIG_Python_SetConstant(d, "QuaternionOrbitData_NO_CORRECTION",SWIG_From_int(static_cast< int >(GeoCal::QuaternionOrbitData::NO_CORRECTION)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

@@ -227,7 +227,8 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def ci_look_vector(self, *args):
         """
 
-        virtual CartesianInertialLookVector GeoCal::OrbitData::ci_look_vector(const ScLookVector &Sl) const =0
+        virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool
+        Include_velocity_aberration=true) const =0
         Convert from ScLookVector to CartesianInertialLookVector. 
         """
         return _orbit.OrbitData_ci_look_vector(self, *args)
@@ -236,7 +237,8 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def cf_look_vector(self, *args):
         """
 
-        virtual CartesianFixedLookVector GeoCal::OrbitData::cf_look_vector(const ScLookVector &Sl) const =0
+        virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl, bool
+        Include_velocity_aberration=true) const =0
         Convert from ScLookVector to CartesianFixedLookVector. 
         """
         return _orbit.OrbitData_cf_look_vector(self, *args)
@@ -245,7 +247,8 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def sc_look_vector(self, *args):
         """
 
-        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const =0
+        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf, bool
+        Include_velocity_aberration=true) const =0
         Convert from CartesianFixedLookVector to ScLookVector. 
         """
         return _orbit.OrbitData_sc_look_vector(self, *args)
@@ -446,6 +449,23 @@ class QuaternionOrbitData(OrbitData):
     Refraction class (e.g., RefractionMsp). This is handled outside of the
     class - so we return look vectors before correcting for refraction.
 
+    The velocity aberration includes a couple of approximations to enable
+    it to run faster:
+
+    We only include the first order terms in v/c.
+
+    We ignore the rotation of the planet for the CartesianFixedLookVector,
+    using the velocity_cf() as an approximation to the relative velocity
+    of the target.
+
+    This approximation is pretty good, it introduces small ~1m errors for
+    a typical orbit on the Earth.
+
+    For high precision work (e.g, 0.5 m pixels of WV-2) this might not be
+    sufficient. For those cases, you can request that the Orbit not
+    perform its approximate velocity aberration correction and then handle
+    this correction separately (similar to how Refraction is handled).
+
     We need to have one of the toolkit available if we want to convert for
     the CartesianFixed coordinates used by this class to
     CartesianInertial. If you stick to working with CartesianFixed only,
@@ -462,9 +482,6 @@ class QuaternionOrbitData(OrbitData):
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
-    FIRST_ORDER_CORRECTION = _orbit.QuaternionOrbitData_FIRST_ORDER_CORRECTION
-    IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = _orbit.QuaternionOrbitData_IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED
-    NO_CORRECTION = _orbit.QuaternionOrbitData_NO_CORRECTION
 
     def __init__(self, *args):
         """
@@ -477,28 +494,11 @@ class QuaternionOrbitData(OrbitData):
     def ci_look_vector(self, *args):
         """
 
-        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVector &Sl) const
+        CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool
+        Include_velocity_aberration=true) const
         Convert to CartesianInertialLookVector. 
         """
         return _orbit.QuaternionOrbitData_ci_look_vector(self, *args)
-
-
-    def cf_look_vector(self, *args):
-        """
-
-        CartesianFixedLookVectorWithDerivative QuaternionOrbitData::cf_look_vector(const ScLookVector &Sl) const
-        Convert to CartesianFixedLookVector. 
-        """
-        return _orbit.QuaternionOrbitData_cf_look_vector(self, *args)
-
-
-    def sc_look_vector(self, *args):
-        """
-
-        ScLookVectorWithDerivative QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf) const
-        Convert to ScLookVector. 
-        """
-        return _orbit.QuaternionOrbitData_sc_look_vector(self, *args)
 
 
     def interpolate(*args):
@@ -512,41 +512,6 @@ class QuaternionOrbitData(OrbitData):
         return _orbit.QuaternionOrbitData_interpolate(*args)
 
     interpolate = staticmethod(interpolate)
-
-    def _v_aberration_correction(self, *args):
-        """
-
-        void GeoCal::QuaternionOrbitData::aberration_correction(AberrationCorrection V)
-
-        """
-        return _orbit.QuaternionOrbitData__v_aberration_correction(self, *args)
-
-
-    @property
-    def aberration_correction(self):
-        return self._v_aberration_correction()
-
-    @aberration_correction.setter
-    def aberration_correction(self, value):
-      self._v_aberration_correction(value)
-
-
-    def _v_velocity_ab(self):
-        """
-
-        blitz::Array< double, 1 > QuaternionOrbitData::velocity_ab() const
-        We use this in a few places.
-
-        This is vel_ci converted to CartesianFixed. This is pretty similar to
-        vel_cf, the difference is this includes the rotation of the earth. 
-        """
-        return _orbit.QuaternionOrbitData__v_velocity_ab(self)
-
-
-    @property
-    def velocity_ab(self):
-        return self._v_velocity_ab()
-
 
     def _v_sc_to_ci(self, *args):
         """
@@ -653,10 +618,6 @@ class QuaternionOrbitData(OrbitData):
 
     __swig_destroy__ = _orbit.delete_QuaternionOrbitData
 QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_ci_look_vector, None, QuaternionOrbitData)
-QuaternionOrbitData.cf_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_cf_look_vector, None, QuaternionOrbitData)
-QuaternionOrbitData.sc_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_sc_look_vector, None, QuaternionOrbitData)
-QuaternionOrbitData._v_aberration_correction = new_instancemethod(_orbit.QuaternionOrbitData__v_aberration_correction, None, QuaternionOrbitData)
-QuaternionOrbitData._v_velocity_ab = new_instancemethod(_orbit.QuaternionOrbitData__v_velocity_ab, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_ci_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_ci_with_derivative, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf, None, QuaternionOrbitData)
@@ -720,6 +681,9 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     intermediate OrbitData classes, are supplied. The default methods just
     use the OrbitData methods, but derived classes can supply more
     optimized versions of these methods.
+
+    See QuaternionOrbitData for a discussion of Refraction and velocity
+    aberration corrections.
 
     An orbit has a min_time() and a max_time() that orbit data is
     available for. Requesting data outside of this range will cause an

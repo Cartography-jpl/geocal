@@ -41,30 +41,32 @@ public:
 //-----------------------------------------------------------------------
 
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const = 0;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianInertialLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const = 0;
+  cf_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianFixedLookVectorWithDerivative
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  cf_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
 				   const Camera& C, int Band = 0) const;
@@ -104,21 +106,24 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
+  sc_look_vector(const CartesianInertialLookVector& Ci,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from CartesianInertialLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from CartesianFixedLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+  sc_look_vector(const CartesianFixedLookVector& Cf,
+		 bool Include_velocity_aberration = true) const = 0;
 
 
 //-----------------------------------------------------------------------
@@ -126,7 +131,8 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Return position as a pointer.
@@ -207,7 +213,25 @@ private:
 
   The refraction calculation can be handled by an instance of the 
   Refraction class (e.g., RefractionMsp). This is handled outside of
-  the class - so we return look vectors before correcting for refraction.
+  the class - so we return look vectors before correcting for
+  refraction.
+
+  The velocity aberration includes a couple of approximations to
+  enable it to run faster:
+
+  1. We only include the first order terms in v/c.
+  2. We ignore the rotation of the planet for the
+     CartesianFixedLookVector, using the velocity_cf() as an
+     approximation to the relative velocity of the target.
+
+  This approximation is pretty good, it introduces small ~1m errors
+  for a typical orbit on the Earth.
+
+  For high precision work (e.g, 0.5 m pixels of WV-2) this might not
+  be sufficient. For those cases, you can request that the Orbit *not*
+  perform its approximate velocity aberration correction and then
+  handle this correction separately (similar to how Refraction is
+  handled).
 
   We need to have one of the toolkit available if we want to convert
   for the CartesianFixed coordinates used by this class to 
@@ -223,8 +247,6 @@ private:
 
 class QuaternionOrbitData : public OrbitData {
 public:
-  enum AberrationCorrection { FIRST_ORDER_CORRECTION = 0,
-    IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED = 1, NO_CORRECTION = 2 };
   QuaternionOrbitData(const QuaternionOrbitData& Start,
 		      const boost::array<AutoDerivative<double>, 3>& Pos_off,
 		      const boost::math::quaternion<AutoDerivative<double> >&
@@ -259,54 +281,29 @@ public:
   virtual ~QuaternionOrbitData() {}
 
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const;
+  cf_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianFixedLookVectorWithDerivative
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const;
+  cf_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  sc_look_vector(const CartesianInertialLookVector& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const;
+  sc_look_vector(const CartesianFixedLookVector& Cf,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
-
-//-----------------------------------------------------------------------
-/// Velocity aberration correction applied.  Most of the time you will
-/// want to use FIRST_ORDER_CORRECTION (the default), which correctly uses
-/// the inertial velocity to correct for velocity aberration. This
-/// includes the first order in v/c term only, which is generally good
-/// so a few meters ground location for earth data.
-///
-/// In some cases you may want to use
-/// IGNORE_PLANET_ROTATION_FOR_CARTESIAN_FIXED. This is nearly the
-/// same as FIRST_ORDER_CORRECTION, but it ignores the effect of the planet
-/// rotation when calculating the CartesianFixedLookVector.  This can
-/// be useful when you can tolerate the small inaccuracies and are
-/// working in CartesianFixed coordinates (e.g., aircraft data). This
-/// avoids doing a coordinate conversion to the inertial coordinates,
-/// which can give a performance advantage. For a long time this was
-/// the default behavior for this class. For
-/// CartesianInertialLookVector, there is no difference between this
-/// as FIRST_ORDER_CORRECTION
-///
-/// NO_CORRECTION skips the velocity aberration correction. This is
-/// mainly useful for debugging and comparisons with other tools (e.g.
-/// the MSP library). The aberration correction is large enough that
-/// you generally don't want to ignore it.
-//-----------------------------------------------------------------------
-
-  AberrationCorrection aberration_correction() const
-  { return aberration_correction_; }
-  void aberration_correction(AberrationCorrection V)
-  { aberration_correction_ = V; }
-  blitz::Array<double, 1> velocity_ab() const;
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
+		 bool Include_velocity_aberration = true) const;
 
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
@@ -433,9 +430,7 @@ protected:
 /// finishing their constructor.
 //-----------------------------------------------------------------------
 
-  QuaternionOrbitData()
-    : aberration_correction_(FIRST_ORDER_CORRECTION), have_ci_to_cf(false)
-  {}
+  QuaternionOrbitData() : have_ci_to_cf(false) {}
 
   void initialize(Time Tm, const boost::shared_ptr<CartesianFixed>& pos_cf,
     const boost::array<double, 3>& vel_fixed, const 
@@ -468,8 +463,8 @@ private:
 				///ScLookVector to
 				///CartesianFixed.
   boost::math::quaternion<AutoDerivative<double> > sc_to_cf_with_der;
+
   bool from_cf_;
-  AberrationCorrection aberration_correction_;
 
 //-----------------------------------------------------------------------
 /// We create ci_to_cf on demand. This means if we don't do any
@@ -521,6 +516,9 @@ private:
    don't use the intermediate OrbitData classes, are supplied.
    The default methods just use the OrbitData methods, but derived
    classes can supply more optimized versions of these methods.
+
+   See QuaternionOrbitData for a discussion of Refraction and velocity 
+   aberration corrections.
 
    An orbit has a min_time() and a max_time() that orbit data is
    available for. Requesting data outside of this range will cause an
@@ -998,7 +996,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(QuaternionOrbitData);
-GEOCAL_CLASS_VERSION(QuaternionOrbitData, 1);
 GEOCAL_EXPORT_KEY(OrbitData);
 GEOCAL_EXPORT_KEY(KeplerOrbit);
 GEOCAL_EXPORT_KEY(Orbit);

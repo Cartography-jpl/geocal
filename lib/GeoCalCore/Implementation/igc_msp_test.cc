@@ -89,6 +89,15 @@ BOOST_AUTO_TEST_CASE(serialize)
 
 BOOST_AUTO_TEST_CASE(rsm_ce90)
 {
+  // This depends on specific test data we don't in general have
+  // around. Skip the test, but leave in place in case we want to run
+  // again.
+  return;
+
+  // In all cases, need MSP support to run this unit test
+  if(!have_msp_supported())
+    return;
+    
   // Test data that has a RSM and covariance stuff. We'll use this to
   // figure the interface in IgcMsp to get CE90 and LE90.
   // This is the output from the test_rsm_indirect_cov_msp found in

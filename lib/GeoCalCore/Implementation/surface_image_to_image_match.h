@@ -48,7 +48,7 @@ public:
 		     double& Line_sigma, double& Sample_sigma,
 		     bool& Success, int* Diagnostic = 0) const;
   virtual void print(std::ostream& Os) const 
-  { Os << "SurfaceImageToImageMatcher"; }
+  { Os << "SurfaceImageToImageMatcher\n"; }
 
   void match_surf(const GroundCoordinate& Gc, 
 		  ImageCoordinate& Ic1, ImageCoordinate& Ic2,

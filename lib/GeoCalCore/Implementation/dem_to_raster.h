@@ -15,7 +15,7 @@ public:
   {
   }
   virtual ~DemToRaster() {}
-  virtual void print(std::ostream& Os) const { Os << "DemToRaster"; }
+  virtual void print(std::ostream& Os) const { Os << "DemToRaster\n"; }
 protected:
   virtual void calc(int Lstart, int Sstart) const
   {

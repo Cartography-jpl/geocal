@@ -104,7 +104,7 @@ public:
   virtual blitz::Array<double, 6> next_position();
   virtual void print(std::ostream& Os) const
   {
-    Os << "IgcRayCaster";
+    Os << "IgcRayCaster\n";
   }
   int start_sample() const {return start_sample_;}
   int number_sample() const {return number_sample_;}

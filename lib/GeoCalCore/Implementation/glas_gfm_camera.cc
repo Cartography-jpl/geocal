@@ -751,9 +751,9 @@ void GlasGfmCamera::print(std::ostream& Os) const
      << "  Number sample:     " << number_sample(0) << "\n"
      << "  Focal length:      " << focal_length() << " m\n"
      << "  Focal length time: " << focal_length_time() << "\n"
-     << "  Ppoff:              ("
+     << "  Ppoff:             ("
      << ppoff()(0) << ", " << ppoff()(1) << ", " << ppoff()(2) << ")\n"
-     << "  Angoff:             ("
+     << "  Angoff:            ("
      << angoff()(0) << ", " << angoff()(1) << ", " << angoff()(2) << ")\n";
 }
 

@@ -21,7 +21,7 @@ public:
   void kernel_list(const std::vector<std::string>& Klist)
   { kernel_list_ = Klist; }
   void print(std::ostream& Os) const
-  { Os << "SpiceKernelList"; }
+  { Os << "SpiceKernelList\n"; }
 private:
   std::vector<std::string> kernel_list_;
   void load_kernel();

@@ -45,7 +45,7 @@ public:
   const boost::shared_ptr<RayCaster>& ray_caster() const  { return ray_caster_;}
   const boost::shared_ptr<MapInfo>& map_info() const  { return mi_;}
   virtual void print(std::ostream& Os) const
-  { Os << "RayCasterResampler"; }
+  { Os << "RayCasterResampler\n"; }
 private:
   boost::shared_ptr<RayCaster> ray_caster_;
   boost::shared_ptr<MapInfo> mi_;

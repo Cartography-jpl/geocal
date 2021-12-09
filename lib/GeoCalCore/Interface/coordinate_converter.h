@@ -160,7 +160,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "Geodetic Coordinate Converter"; }
+  { Os << "Geodetic Coordinate Converter\n"; }
 private:
   friend class boost::serialization::access;
   template<class Archive>
@@ -229,7 +229,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "Geodetic Coordinate Converter (Radians)"; }
+  { Os << "Geodetic Coordinate Converter (Radians)\n"; }
 private:
   friend class boost::serialization::access;
   template<class Archive>
@@ -304,7 +304,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "Geodetic Coordinate Converter (Radians, 0 to 2pi)"; }
+  { Os << "Geodetic Coordinate Converter (Radians, 0 to 2pi)\n"; }
 private:
   friend class boost::serialization::access;
   template<class Archive>

@@ -29,7 +29,7 @@ public:
   virtual bool check_zero_crossing(double Grid_spacing = 0.01) const = 0;
   
   virtual void print(std::ostream& Os) const
-  { Os << "RsmBase"; }
+  { Os << "RsmBase\n"; }
   virtual boost::shared_ptr<RsmBase> clone() const = 0;
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z)
     const = 0;

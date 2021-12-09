@@ -31,7 +31,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const
-  { Os << "Refraction";}
+  { Os << "Refraction\n";}
 private:
   friend class boost::serialization::access;
   template<class Archive>

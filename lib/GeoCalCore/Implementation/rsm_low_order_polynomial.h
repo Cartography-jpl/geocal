@@ -65,7 +65,7 @@ public:
   blitz::Array<double, 1> parameter_sample() const
   { return blitz::Array<double, 1>(const_cast<double*>(psamp), blitz::shape(10), blitz::neverDeleteData); }
   void print(std::ostream& Os) const
-  { Os << "RsmLowOrderPolynomial"; }
+  { Os << "RsmLowOrderPolynomial\n"; }
   int min_line() const {return min_line_;}
   void min_line(int V) { min_line_ = V;}
   int max_line() const {return max_line_;}

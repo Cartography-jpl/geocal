@@ -94,7 +94,7 @@ public:
   std::string base_tre_string() const;
   void base_read_tre_string(std::istream& In);
   virtual void print(std::ostream& Os) const
-  { Os << "RsmAdjustableParameter"; }
+  { Os << "RsmAdjustableParameter\n"; }
 private:
   std::string image_identifier_, rsm_support_data_edition_,
     triangulation_id_;

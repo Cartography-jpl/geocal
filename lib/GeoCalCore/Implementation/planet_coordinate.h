@@ -448,7 +448,7 @@ public:
 
   virtual void print(std::ostream& Os) const
   { Os << PlanetConstant::name(naif_code_)
-       << "Planetocentric Converter"; }
+       << "Planetocentric Converter\n"; }
 private:
   int naif_code_;
   friend class boost::serialization::access;

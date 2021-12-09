@@ -25,7 +25,7 @@ public:
   (const ImageGroundConnection& Igc, double Height = 0);
   virtual ~LocalRcParameter() {}
   virtual void print(std::ostream& Os) const
-  { Os << "LocalRcParameter"; }
+  { Os << "LocalRcParameter\n"; }
   blitz::Array<double, 2> cf_to_rc_arr() const
   { blitz::Array<double, 2> res(3,3);
     for(int i = 0; i < 3; ++i)
@@ -78,7 +78,7 @@ public:
   virtual void print(std::ostream& Os) const
   { Os << "LocalRectangularCoordinate (" << position[0] << ", "
        << position[1] << ", "
-       << position[2] << ")"; }
+       << position[2] << ")\n"; }
 
 //-----------------------------------------------------------------------
 /// Parameters used to describe the LocalRectangularCoordinate system.
@@ -131,7 +131,7 @@ public:
   }
   virtual bool is_same(const CoordinateConverter& Conv) const;
   virtual void print(std::ostream& Os) const
-  { Os << "LocalRcConverter"; }
+  { Os << "LocalRcConverter\n"; }
   virtual int naif_code() const { return p->cf_prototype->naif_code(); }
   const boost::shared_ptr<LocalRcParameter>& parameter() const { return p; }
 private:

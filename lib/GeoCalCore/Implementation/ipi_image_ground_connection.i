@@ -27,7 +27,7 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  %python_attribute2(ipi, ipi_ptr, boost::shared_ptr<Ipi>)
+  %python_attribute(ipi, boost::shared_ptr<Ipi>)
   %python_attribute(resolution, double)
   %python_attribute(maximum_height, double)
   %pickle_serialization()

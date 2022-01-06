@@ -25,6 +25,9 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
   // not check this.
   if(version > 0)
     ar & GEOCAL_NVP_(max_frame_extend);
+  // Older version didn't have Refraction
+  if(version > 1)
+    ar & GEOCAL_NVP(ref);
 }
 
 GEOCAL_IMPLEMENT(Ipi);
@@ -45,6 +48,7 @@ GEOCAL_IMPLEMENT(Ipi);
 Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const 
 	 boost::shared_ptr<Camera>& Cam, int Band,
 	 Time Tmin, Time Tmax, const boost::shared_ptr<TimeTable>& Tt,
+	 const boost::shared_ptr<Refraction>& Ref,
 	 double Local_time_window_size,
 	 double Root_min_separation, 
 	 double Time_tolerance, double Max_frame_extend)
@@ -236,6 +240,10 @@ void Ipi::image_coordinate_with_derivative
 void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 	       bool& Success) const
 {
+  // TODO Include refraction
+  if(ref)
+    throw Exception("Don't yet work with refraction");
+
   class IpiEq: public DFunctor {
   public:
     IpiEq(const boost::shared_ptr<Camera>& Cam,
@@ -382,6 +390,9 @@ void Ipi::time_with_derivative
  FrameCoordinateWithDerivative& Fres,
  bool& Success) const
 {
+  // TODO Include refraction
+  if(ref)
+    throw Exception("Don't yet work with refraction");
   class IpiEq: public DFunctorWithDerivative {
   public:
     IpiEq(const boost::shared_ptr<Camera>& Cam,
@@ -550,6 +561,12 @@ void Ipi::print(std::ostream& Os) const
     opad.strict_sync();
   } else 
     Os << "  Time Table: None\n";
+  if(ref.get()) {
+    Os << "  Refraction:\n";
+    opad << *ref;
+    opad.strict_sync();
+  } else 
+    Os << "  Refraction: None\n";
 }
 
 //-----------------------------------------------------------------------
@@ -559,8 +576,9 @@ void Ipi::print(std::ostream& Os) const
 
 double Ipi::resolution_meter() const
 {
+  // Pretty sure we can ignore refraction here
   Time mt = min_time() + (max_time() - min_time()) / 2;
-  return orbit().orbit_data(mt)->resolution_meter(camera(), band());
+  return orbit()->orbit_data(mt)->resolution_meter(*camera(), band());
 }
 
 //-----------------------------------------------------------------------
@@ -571,10 +589,13 @@ double Ipi::resolution_meter() const
 std::vector<boost::shared_ptr<GroundCoordinate> > 
 Ipi::footprint(const Dem& D) const
 {
+  // TODO Include refraction
+  if(ref)
+    throw Exception("Don't yet work with refraction");
   std::vector<boost::shared_ptr<GroundCoordinate> > fp = 
-    orbit().orbit_data(min_time())->footprint(camera(), D, 30, band());
+    orbit()->orbit_data(min_time())->footprint(*camera(), D, 30, band());
   std::vector<boost::shared_ptr<GroundCoordinate> > fp2 =
-       orbit().orbit_data(max_time() - time_tolerance_)->footprint(camera(), 
+       orbit()->orbit_data(max_time() - time_tolerance_)->footprint(*camera(), 
 	     D, 30, band());
   fp.insert(fp.end(), fp2.begin(), fp2.end());
   return fp;

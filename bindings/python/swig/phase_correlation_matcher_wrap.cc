@@ -5926,6 +5926,9 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6922,6 +6925,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_PhaseCorrelationMatcher__v_correlation_last_match(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::PhaseCorrelationMatcher *arg1 = (GeoCal::PhaseCorrelationMatcher *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::PhaseCorrelationMatcher const > tempshared1 ;
+  boost::shared_ptr< GeoCal::PhaseCorrelationMatcher const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__PhaseCorrelationMatcher_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PhaseCorrelationMatcher__v_correlation_last_match" "', argument " "1"" of type '" "GeoCal::PhaseCorrelationMatcher const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::PhaseCorrelationMatcher > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::PhaseCorrelationMatcher > * >(argp1);
+      arg1 = const_cast< GeoCal::PhaseCorrelationMatcher * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::PhaseCorrelationMatcher > * >(argp1);
+      arg1 = const_cast< GeoCal::PhaseCorrelationMatcher * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::PhaseCorrelationMatcher const *)arg1)->correlation_last_match();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_PhaseCorrelationMatcher(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::PhaseCorrelationMatcher *arg1 = (GeoCal::PhaseCorrelationMatcher *) 0 ;
@@ -7025,6 +7071,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"int GeoCal::PhaseCorrelationMatcher::search_size() const\n"
 		"The search size. This should be >= template_size(). \n"
+		""},
+	 { (char *)"PhaseCorrelationMatcher__v_correlation_last_match", (PyCFunction)_wrap_PhaseCorrelationMatcher__v_correlation_last_match, METH_O, (char *)"\n"
+		"\n"
+		"double GeoCal::PhaseCorrelationMatcher::correlation_last_match() const\n"
+		"The maximum correlation of last match. \n"
 		""},
 	 { (char *)"delete_PhaseCorrelationMatcher", (PyCFunction)_wrap_delete_PhaseCorrelationMatcher, METH_O, (char *)"\n"
 		"\n"

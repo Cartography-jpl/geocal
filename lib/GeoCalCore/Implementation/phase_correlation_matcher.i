@@ -25,6 +25,7 @@ public:
 			  bool &OUTPUT, int *OUTPUT) const;
   %python_attribute(template_size, int)
   %python_attribute(search_size, int)
+  %python_attribute(correlation_last_match, double)
   %pickle_serialization();
 };
 }

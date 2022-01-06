@@ -10,6 +10,7 @@
 %import "orbit.i"
 %import "camera.i"
 %import "time_table.i"
+%import "refraction.i"
 %import "ground_coordinate.i"
 %import "image_coordinate.i"
 %import "frame_coordinate.i"
@@ -27,6 +28,8 @@ public:
       int Band,
       Time Tmin, Time Tmax, 
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
+      const boost::shared_ptr<Refraction>&
+      Ref = boost::shared_ptr<Refraction>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
       double Time_tolerance = 1e-6, double Max_frame_extend=1000);
@@ -63,9 +66,10 @@ public:
     const;
   %python_attribute(resolution_meter, double)
   std::string print_to_string() const;
-  %python_attribute2_with_set(orbit, orbit_ptr, boost::shared_ptr<Orbit>)
-  %python_attribute2_with_set(camera, camera_ptr, boost::shared_ptr<Camera>)
-  %python_attribute2(time_table, time_table_ptr, boost::shared_ptr<TimeTable>)
+  %python_attribute_with_set(orbit, boost::shared_ptr<Orbit>)
+  %python_attribute_with_set(camera, boost::shared_ptr<Camera>)
+  %python_attribute_with_set(time_table, boost::shared_ptr<TimeTable>)
+  %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
   %python_attribute_with_set(band, int)
   %python_attribute(min_time, Time)
   %python_attribute(max_time, Time)

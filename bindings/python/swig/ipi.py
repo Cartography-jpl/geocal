@@ -253,8 +253,10 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         Ipi::Ipi(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
         Camera > &Cam, int Band, Time Tmin, Time Tmax, const
         boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
-        double Local_time_window_size=5.0, double Root_min_separation=30.0,
-        double Time_tolerance=1e-6, double Max_frame_extend=1000)
+        const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
+        Refraction >(), double Local_time_window_size=5.0, double
+        Root_min_separation=30.0, double Time_tolerance=1e-6, double
+        Max_frame_extend=1000)
         Constructor.
 
         If you only want to get the Time from the Ipi and not ImageCoordinate,
@@ -369,7 +371,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     def _v_orbit(self, *args):
         """
 
-        void GeoCal::Ipi::orbit_ptr(const boost::shared_ptr< Orbit > &Orb)
+        void GeoCal::Ipi::orbit(const boost::shared_ptr< Orbit > &Orb)
 
         """
         return _ipi.Ipi__v_orbit(self, *args)
@@ -387,7 +389,7 @@ class Ipi(geocal_swig.generic_object.GenericObject):
     def _v_camera(self, *args):
         """
 
-        void GeoCal::Ipi::camera_ptr(const boost::shared_ptr< Camera > &Cam)
+        void GeoCal::Ipi::camera(const boost::shared_ptr< Camera > &Cam)
 
         """
         return _ipi.Ipi__v_camera(self, *args)
@@ -402,18 +404,40 @@ class Ipi(geocal_swig.generic_object.GenericObject):
       self._v_camera(value)
 
 
-    def _v_time_table(self):
+    def _v_time_table(self, *args):
         """
 
-        boost::shared_ptr<TimeTable> GeoCal::Ipi::time_table_ptr() const
+        void GeoCal::Ipi::time_table(const boost::shared_ptr< TimeTable > &Tt)
 
         """
-        return _ipi.Ipi__v_time_table(self)
+        return _ipi.Ipi__v_time_table(self, *args)
 
 
     @property
     def time_table(self):
         return self._v_time_table()
+
+    @time_table.setter
+    def time_table(self, value):
+      self._v_time_table(value)
+
+
+    def _v_refraction(self, *args):
+        """
+
+        void GeoCal::Ipi::refraction(const boost::shared_ptr< Refraction > &Ref)
+
+        """
+        return _ipi.Ipi__v_refraction(self, *args)
+
+
+    @property
+    def refraction(self):
+        return self._v_refraction()
+
+    @refraction.setter
+    def refraction(self, value):
+      self._v_refraction(value)
 
 
     def _v_band(self, *args):
@@ -537,6 +561,7 @@ Ipi.__str__ = new_instancemethod(_ipi.Ipi___str__, None, Ipi)
 Ipi._v_orbit = new_instancemethod(_ipi.Ipi__v_orbit, None, Ipi)
 Ipi._v_camera = new_instancemethod(_ipi.Ipi__v_camera, None, Ipi)
 Ipi._v_time_table = new_instancemethod(_ipi.Ipi__v_time_table, None, Ipi)
+Ipi._v_refraction = new_instancemethod(_ipi.Ipi__v_refraction, None, Ipi)
 Ipi._v_band = new_instancemethod(_ipi.Ipi__v_band, None, Ipi)
 Ipi._v_min_time = new_instancemethod(_ipi.Ipi__v_min_time, None, Ipi)
 Ipi._v_max_time = new_instancemethod(_ipi.Ipi__v_max_time, None, Ipi)

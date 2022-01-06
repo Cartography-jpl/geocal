@@ -219,7 +219,7 @@ class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
     def _v_ipi(self):
         """
 
-        const boost::shared_ptr<Ipi>& GeoCal::IpiImageGroundConnection::ipi_ptr() const
+        const boost::shared_ptr<Ipi>& GeoCal::IpiImageGroundConnection::ipi() const
         IPI that we are using. 
         """
         return _ipi_image_ground_connection.IpiImageGroundConnection__v_ipi(self)

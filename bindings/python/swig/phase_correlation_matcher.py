@@ -260,12 +260,27 @@ class PhaseCorrelationMatcher(geocal_swig.image_matcher.ImageMatcher):
         return self._v_search_size()
 
 
+    def _v_correlation_last_match(self):
+        """
+
+        double GeoCal::PhaseCorrelationMatcher::correlation_last_match() const
+        The maximum correlation of last match. 
+        """
+        return _phase_correlation_matcher.PhaseCorrelationMatcher__v_correlation_last_match(self)
+
+
+    @property
+    def correlation_last_match(self):
+        return self._v_correlation_last_match()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _phase_correlation_matcher.delete_PhaseCorrelationMatcher
 PhaseCorrelationMatcher._v_template_size = new_instancemethod(_phase_correlation_matcher.PhaseCorrelationMatcher__v_template_size, None, PhaseCorrelationMatcher)
 PhaseCorrelationMatcher._v_search_size = new_instancemethod(_phase_correlation_matcher.PhaseCorrelationMatcher__v_search_size, None, PhaseCorrelationMatcher)
+PhaseCorrelationMatcher._v_correlation_last_match = new_instancemethod(_phase_correlation_matcher.PhaseCorrelationMatcher__v_correlation_last_match, None, PhaseCorrelationMatcher)
 PhaseCorrelationMatcher_swigregister = _phase_correlation_matcher.PhaseCorrelationMatcher_swigregister
 PhaseCorrelationMatcher_swigregister(PhaseCorrelationMatcher)
 

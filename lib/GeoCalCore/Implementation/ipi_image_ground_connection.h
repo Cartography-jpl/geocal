@@ -28,7 +28,7 @@ public:
 			    Title), ipi_(I), res(Resolution), 
       max_h(Max_height) 
   {
-    ipi_->camera_ptr()->add_observer(*this);
+    ipi_->camera()->add_observer(*this);
   }
 
 
@@ -52,9 +52,9 @@ public:
   {
     Time t;
     FrameCoordinate f;
-    ipi_->time_table().time(Ic, t, f);
-    Lv = ipi_->orbit().cf_look_vector(t, ipi_->camera().sc_look_vector(f, ipi_->band()));
-    P = ipi_->orbit().position_cf(t);
+    ipi_->time_table()->time(Ic, t, f);
+    Lv = ipi_->orbit()->cf_look_vector(t, ipi_->camera()->sc_look_vector(f, ipi_->band()));
+    P = ipi_->orbit()->position_cf(t);
   }
   virtual blitz::Array<double, 7> 
   cf_look_vector_arr(int ln_start, int smp_start, int nline, int nsamp,
@@ -73,11 +73,11 @@ public:
   { 
     Time t;
     FrameCoordinate f;
-    ipi_->time_table().time(Ic, t, f);
-    if(t < ipi_->orbit().min_time() || t >= ipi_->orbit().max_time())
+    ipi_->time_table()->time(Ic, t, f);
+    if(t < ipi_->orbit()->min_time() || t >= ipi_->orbit()->max_time())
       throw ImageGroundConnectionFailed();
-    return ipi_->orbit().orbit_data(t)->
-      surface_intersect(ipi_->camera(), f, D, res, ipi_->band(), max_h);
+    return ipi_->orbit()->orbit_data(t)->
+      surface_intersect(*ipi_->camera(), f, D, res, ipi_->band(), max_h);
   }
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic,
@@ -85,11 +85,11 @@ public:
   { 
     Time t;
     FrameCoordinate f;
-    ipi_->time_table().time(Ic, t, f);
-    if(t < ipi_->orbit().min_time() || t >= ipi_->orbit().max_time())
+    ipi_->time_table()->time(Ic, t, f);
+    if(t < ipi_->orbit()->min_time() || t >= ipi_->orbit()->max_time())
       throw ImageGroundConnectionFailed();
-    return ipi_->orbit().orbit_data(t)->
-      reference_surface_intersect_approximate(ipi_->camera(), f, ipi_->band(), H);
+    return ipi_->orbit()->orbit_data(t)->
+      reference_surface_intersect_approximate(*ipi_->camera(), f, ipi_->band(), H);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
@@ -128,9 +128,7 @@ public:
 /// IPI that we are using
 //-----------------------------------------------------------------------
 
-  const boost::shared_ptr<Ipi>& ipi_ptr() const { return ipi_; }
-
-  const Ipi& ipi() const { return *ipi_; }
+  const boost::shared_ptr<Ipi>& ipi() const { return ipi_; }
 
 //-----------------------------------------------------------------------
 /// Resolution we step through Dem at, in meters.
@@ -147,16 +145,16 @@ public:
 //-----------------------------------------------------------------------
 
   double maximum_height() const {return max_h;}
-  virtual int number_line() const { return ipi_->time_table().max_line() + 1; }
+  virtual int number_line() const { return ipi_->time_table()->max_line() + 1; }
   virtual int number_sample() const 
-  { return ipi_->camera().number_sample(ipi_->band()); }
+  { return ipi_->camera()->number_sample(ipi_->band()); }
 
   virtual bool has_time() const {return true;}
   virtual Time pixel_time(const ImageCoordinate& Ic) const
   {
     Time res;
     FrameCoordinate fc;
-    ipi_->time_table().time(Ic, res, fc);
+    ipi_->time_table()->time(Ic, res, fc);
     return res;
   }
 protected:
@@ -172,7 +170,7 @@ protected:
     ipi_ = I;
     res = Resolution;
     max_h = Max_height;
-    ipi_->camera_ptr()->add_observer(*this);
+    ipi_->camera()->add_observer(*this);
   }
 private:
   boost::shared_ptr<Ipi> ipi_;

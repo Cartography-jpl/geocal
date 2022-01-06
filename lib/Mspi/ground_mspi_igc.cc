@@ -76,7 +76,7 @@ DcsLookVector GroundMspiIgc::solar_look(int Line_number) const
   Time t = pixel_time(ImageCoordinate(Line_number, 0));
   CartesianFixedLookVector lv = 
     CartesianFixedLookVector::solar_look_vector(t);
-  return mspi_cam->dcs_look_vector(ipi().orbit().sc_look_vector(t, lv));
+  return mspi_cam->dcs_look_vector(ipi()->orbit()->sc_look_vector(t, lv));
 }
 
 //-----------------------------------------------------------------------
@@ -87,8 +87,8 @@ DcsLookVector GroundMspiIgc::normal_look(int Line_number) const
 {
   Time t = pixel_time(ImageCoordinate(Line_number, 0));
   CartesianFixedLookVector lv = 
-    LnLookVector(0,0,1).to_cf(*ipi().orbit().position_cf(t));
-  return mspi_cam->dcs_look_vector(ipi().orbit().sc_look_vector(t, lv));
+    LnLookVector(0,0,1).to_cf(*ipi()->orbit()->position_cf(t));
+  return mspi_cam->dcs_look_vector(ipi()->orbit()->sc_look_vector(t, lv));
 }
 
 //-----------------------------------------------------------------------
@@ -98,6 +98,6 @@ DcsLookVector GroundMspiIgc::normal_look(int Line_number) const
 DcsLookVector GroundMspiIgc::pixel_look(int Sample_number) const
 {
   return mspi_cam->dcs_look_vector(FrameCoordinate(0, Sample_number), 
-				   ipi().band());
+				   ipi()->band());
 }
 

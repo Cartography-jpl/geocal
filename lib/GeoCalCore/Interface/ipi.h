@@ -6,6 +6,7 @@
 #include "orbit.h"
 #include "camera.h"
 #include "time_table.h"
+#include "refraction.h"
 #include <iostream>
 
 namespace GeoCal {
@@ -74,6 +75,8 @@ public:
       int Band,
       Time Tmin, Time Tmax, 
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
+      const boost::shared_ptr<Refraction>&
+      Ref = boost::shared_ptr<Refraction>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
       double Time_tolerance = 1e-6, double Max_frame_extend=1000);
@@ -118,28 +121,30 @@ public:
 /// Orbit that we are using.
 //-----------------------------------------------------------------------
   
-  const Orbit& orbit() const {return *orb;}
-
-  boost::shared_ptr<Orbit> orbit_ptr() const {return orb;}
-  void orbit_ptr(const boost::shared_ptr<Orbit>& Orb) {orb = Orb;}
+  const boost::shared_ptr<Orbit>& orbit() const {return orb;}
+  void orbit(const boost::shared_ptr<Orbit>& Orb) {orb = Orb;}
 
 //-----------------------------------------------------------------------
 /// Camera that we are using.
 //-----------------------------------------------------------------------
   
-  const Camera& camera() const {return *cam;}
-
-  boost::shared_ptr<Camera> camera_ptr() const {return cam;}
-  void camera_ptr(const boost::shared_ptr<Camera>& Cam) {cam = Cam;}
+  const boost::shared_ptr<Camera>& camera() const {return cam;}
+  void camera(const boost::shared_ptr<Camera>& Cam) {cam = Cam;}
 
 //-----------------------------------------------------------------------
 /// TimeTable that we are using.
 //-----------------------------------------------------------------------
   
-  const TimeTable& time_table() const {return *tt;}
+  const boost::shared_ptr<TimeTable>& time_table() const {return tt;}
+  void time_table(const boost::shared_ptr<TimeTable>& Tt) {tt = Tt;}
 
-  boost::shared_ptr<TimeTable> time_table_ptr() const {return tt;}
-
+//-----------------------------------------------------------------------
+/// Refraction that we are using.
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<Refraction>& refraction() const {return ref;}
+  void refraction(const boost::shared_ptr<Refraction>& Ref) {ref = Ref;}
+  
 //-----------------------------------------------------------------------
 /// Band that we are using.
 //-----------------------------------------------------------------------
@@ -194,6 +199,7 @@ private:
   boost::shared_ptr<Camera> cam;
   int band_;			 ///< Camera band to use.
   boost::shared_ptr<TimeTable> tt;
+  boost::shared_ptr<Refraction> ref;
   Time min_time_;		 ///< Minimum time we search around
   Time max_time_;		 ///< Maximum time we search around
   mutable Time last_time;	 ///< Time from last point we did IPI
@@ -239,6 +245,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Ipi);
-GEOCAL_CLASS_VERSION(Ipi, 1);
+GEOCAL_CLASS_VERSION(Ipi, 2);
 #endif
 

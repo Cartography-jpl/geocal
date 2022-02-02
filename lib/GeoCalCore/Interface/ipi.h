@@ -139,6 +139,15 @@ public:
   void time_table(const boost::shared_ptr<TimeTable>& Tt) {tt = Tt;}
 
 //-----------------------------------------------------------------------
+/// Synonym of orbit, for backwards compatibility. This is deprecated,
+/// you should use the new orbit() name.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Orbit>& orbit_ptr() const {return orb;}
+  const boost::shared_ptr<TimeTable>& time_table_ptr() const {return tt;}
+  const boost::shared_ptr<Camera>& camera_ptr() const {return cam;}
+  
+//-----------------------------------------------------------------------
 /// Refraction that we are using.
 //-----------------------------------------------------------------------
   

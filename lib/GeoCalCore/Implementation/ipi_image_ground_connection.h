@@ -131,6 +131,13 @@ public:
   const boost::shared_ptr<Ipi>& ipi() const { return ipi_; }
 
 //-----------------------------------------------------------------------
+/// Synonym of ipi, for backwards compatibility. This is deprecated,
+/// you should use the new ipi() name.
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<Ipi>& ipi_ptr() const { return ipi_; }
+
+//-----------------------------------------------------------------------
 /// Resolution we step through Dem at, in meters.
 //-----------------------------------------------------------------------
 

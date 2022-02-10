@@ -22,7 +22,7 @@ import os
 
 def igc_mro_context(fname, lbl = None, kernel_file = None,
                     kernel_file_post = None, kernel_json = None,
-                    subset=None):
+                    subset=None, left_mask=None, right_mask=None, 			    ctx_ns=None):
     '''Process for context camera. 
 
     Because we have often already processed the PDS labels, you can
@@ -65,14 +65,26 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
                            PlanetConstant.MARS_NAIF_CODE)
     img = GdalRasterImage(fname)
     # We have masked pixels in the L1 data, which we want to chop out
-    left_masked = 38
-    right_masked = 18
+    if(left_mask is not None):
+	    left_masked = left_mask
+    else:    
+	    left_masked = 38
+    if(right_mask is not None):
+	    right_masked = right_mask
+    else:    
+	    right_masked = 18
+    if(ctx_ns is not None):
+	    ctx_ns_value = ctx_ns
+    else:    
+	    ctx_ns_value = 5000
     sline = 0
     nline = img.number_line
     if(subset is not None):
         sline = subset[0]
         nline = subset[2]
-    img = SubRasterImage(img, sline, left_masked, nline, 5000)
+    # Make sure this is correct!
+    # img = SubRasterImage(img, sline, left_masked, nline, ctx_ns_value-left_masked)
+    img = SubRasterImage(img, sline, left_masked, nline, ctx_ns_value)  
     if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
         img = ContextSqrtDecodeImage(img)
     # The START_TIME is the commanded start time, the actual start time

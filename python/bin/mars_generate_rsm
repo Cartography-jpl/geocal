@@ -9,7 +9,7 @@ import subprocess
 import shutil
 import tempfile
 
-version = "August 20, 2020"
+version = "January 13, 2022"
 usage='''Usage:
   mars_generate_rsm [options] <pds_image> <output_base_name>
   mars_generate_rsm [options] <pds_image> <pds_image_2> <output_base_name>
@@ -116,6 +116,15 @@ Options:
        Subset the image. This should be the start line, start sample, number
        line and number sample.
  
+  --left-mask=d
+       Number of CTX masked pixels on the left side of the image [def: 38]
+
+  --right-mask=d
+       Number of CTX masked pixels on the right side of the image [def: 18] 
+
+  --ctx-ns=d
+       CTX focal plane width. Typical values: (2512, 4400, 5000)  [def: 5000]
+
   -v --version      
        Print program version
 '''
@@ -133,7 +142,10 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
                        "plot_cross_section" : "plot",
                        "kernel_file" : "kfile",
                        "kernel_file_post": "kpfile",
-                       "kernel_json" : "kjson"}
+                       "kernel_json" : "kjson",
+                       "left_mask" : "lmask",
+                       "right_mask" : "rmask",
+                       "ctx_ns" : "ctxns"}
 
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
@@ -178,7 +190,9 @@ if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
     igc = geocal.igc_mro_context(args.pds_image, lbl=lbl, 
                                  kernel_file=args.kernel_file,
                                  kernel_file_post=args.kernel_file_post,
-                                 kernel_json=args.kernel_json, subset=subset)
+                                 kernel_json=args.kernel_json, subset=subset,
+				 left_mask=args.left_mask,
+				 right_mask=args.right_mask, ctx_ns=args.ctx_ns)
     r = None
     igc_glas_gfm = None
     if(args.glas_gfm):

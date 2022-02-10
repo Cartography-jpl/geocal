@@ -15,7 +15,6 @@ parm kpfile type=(string,250) count=1 default=""
 parm kjson type=(string,250) count=1 default=""
 parm lmask type=int count=1 default=38
 parm rmask type=int count=1 default=18
-parm ctxns type=int count=1 default=5000
 END-PROC
 .TITLE
 Mars_Generate_Rsm
@@ -149,7 +148,4 @@ the image.
 Provides the number of masked
 CTX pixels on the right side of 
 the image.
-.variable ctxns
-Provides the CTX focal plane 
-width.
 .END

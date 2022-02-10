@@ -117,13 +117,10 @@ Options:
        line and number sample.
  
   --left-mask=d
-       Number of CTX masked pixels on the left side of the image [def: 38]
+       Number of CTX masked pixels on the left side of the image [default: 38]
 
   --right-mask=d
-       Number of CTX masked pixels on the right side of the image [def: 18] 
-
-  --ctx-ns=d
-       CTX focal plane width. Typical values: (2512, 4400, 5000)  [def: 5000]
+       Number of CTX masked pixels on the right side of the image [default: 18] 
 
   -v --version      
        Print program version
@@ -144,8 +141,7 @@ long_name_to_vicar = { "pds_image" : "pdsimg",
                        "kernel_file_post": "kpfile",
                        "kernel_json" : "kjson",
                        "left_mask" : "lmask",
-                       "right_mask" : "rmask",
-                       "ctx_ns" : "ctxns"}
+                       "right_mask" : "rmask"}
 
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
@@ -192,7 +188,7 @@ if(lbl['INSTRUMENT_NAME'] == 'CONTEXT CAMERA'):
                                  kernel_file_post=args.kernel_file_post,
                                  kernel_json=args.kernel_json, subset=subset,
 				 left_mask=args.left_mask,
-				 right_mask=args.right_mask, ctx_ns=args.ctx_ns)
+				 right_mask=args.right_mask)
     r = None
     igc_glas_gfm = None
     if(args.glas_gfm):

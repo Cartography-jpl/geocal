@@ -144,10 +144,10 @@ OrbitQuaternionList::quaternion_orbit_data() const
 std::vector<boost::shared_ptr<Time> >
 OrbitQuaternionList::quaternion_orbit_data_time() const
 {
-  std::vector<Time>  res;
+  std::vector<boost::shared_ptr<Time> >  res;
   res.reserve(orbit_data_map.size());
   BOOST_FOREACH(time_map::value_type i, orbit_data_map)
-    res.push_back(new Time(i.first));
+    res.push_back(boost::make_shared<Time>(i.first));
   return res;
 }
 

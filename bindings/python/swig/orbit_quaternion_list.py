@@ -265,9 +265,40 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     def quaternion_orbit_data(self):
         return self._v_quaternion_orbit_data()
 
+
+    def _v_quaternion_orbit_data_time(self):
+        """
+
+        std::vector< Time > OrbitQuaternionList::quaternion_orbit_data_time() const
+        Return the Times of QuaternionOrbitData. 
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data_time(self)
+
+
+    @property
+    def quaternion_orbit_data_time(self):
+        return self._v_quaternion_orbit_data_time()
+
+
+    def quaternion_orbit_data_i(self, I):
+        """
+
+        boost::shared_ptr<QuaternionOrbitData> GeoCal::OrbitQuaternionList::quaternion_orbit_data_i(int I) const
+        Python will sometime crash with quaternion_orbit_data if it is larger,
+        probably just a SWIG sort of bug.
+
+        But for use with python, supply a function that returns the data
+        directly for an index. This is redundant for C++, just call
+        quaternion_orbit_data and index the results. But this is useful for
+        python. 
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList_quaternion_orbit_data_i(self, I)
+
     __swig_destroy__ = _orbit_quaternion_list.delete_OrbitQuaternionList
 OrbitQuaternionList.orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList_orbit_data, None, OrbitQuaternionList)
 OrbitQuaternionList._v_quaternion_orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data, None, OrbitQuaternionList)
+OrbitQuaternionList._v_quaternion_orbit_data_time = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data_time, None, OrbitQuaternionList)
+OrbitQuaternionList.quaternion_orbit_data_i = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList_quaternion_orbit_data_i, None, OrbitQuaternionList)
 OrbitQuaternionList_swigregister = _orbit_quaternion_list.OrbitQuaternionList_swigregister
 OrbitQuaternionList_swigregister(OrbitQuaternionList)
 

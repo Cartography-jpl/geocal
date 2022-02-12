@@ -5999,6 +5999,40 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+  namespace swig {
+    template <>  struct traits< GeoCal::Time > {
+      typedef pointer_category category;
+      static const char* type_name() { return"GeoCal::Time"; }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector< GeoCal::Time, std::allocator< GeoCal::Time > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
+	  }
+	};
+      }
+    
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
@@ -7035,6 +7069,101 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_quaternion_orbit_data_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitQuaternionList__v_quaternion_orbit_data_time" "', argument " "1"" of type '" "GeoCal::OrbitQuaternionList const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::OrbitQuaternionList const *)arg1)->quaternion_orbit_data_time();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitQuaternionList_quaternion_orbit_data_i(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"OrbitQuaternionList_quaternion_orbit_data_i",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitQuaternionList_quaternion_orbit_data_i" "', argument " "1"" of type '" "GeoCal::OrbitQuaternionList const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OrbitQuaternionList_quaternion_orbit_data_i" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = ((GeoCal::OrbitQuaternionList const *)arg1)->quaternion_orbit_data_i(arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_OrbitQuaternionList(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
@@ -7518,6 +7647,22 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const\n"
 		"Return the list of QuaternionOrbitData. \n"
+		""},
+	 { (char *)"OrbitQuaternionList__v_quaternion_orbit_data_time", (PyCFunction)_wrap_OrbitQuaternionList__v_quaternion_orbit_data_time, METH_O, (char *)"\n"
+		"\n"
+		"std::vector< Time > OrbitQuaternionList::quaternion_orbit_data_time() const\n"
+		"Return the Times of QuaternionOrbitData. \n"
+		""},
+	 { (char *)"OrbitQuaternionList_quaternion_orbit_data_i", _wrap_OrbitQuaternionList_quaternion_orbit_data_i, METH_VARARGS, (char *)"\n"
+		"\n"
+		"boost::shared_ptr<QuaternionOrbitData> GeoCal::OrbitQuaternionList::quaternion_orbit_data_i(int I) const\n"
+		"Python will sometime crash with quaternion_orbit_data if it is larger,\n"
+		"probably just a SWIG sort of bug.\n"
+		"\n"
+		"But for use with python, supply a function that returns the data\n"
+		"directly for an index. This is redundant for C++, just call\n"
+		"quaternion_orbit_data and index the results. But this is useful for\n"
+		"python. \n"
 		""},
 	 { (char *)"delete_OrbitQuaternionList", (PyCFunction)_wrap_delete_OrbitQuaternionList, METH_O, (char *)"\n"
 		"\n"

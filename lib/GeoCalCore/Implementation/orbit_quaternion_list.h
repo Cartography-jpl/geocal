@@ -85,6 +85,24 @@ public:
 
   std::vector<boost::shared_ptr<QuaternionOrbitData> > 
   quaternion_orbit_data() const;
+  std::vector<Time> 
+  quaternion_orbit_data_time() const;
+
+//-----------------------------------------------------------------------
+/// Python will sometime crash with quaternion_orbit_data if it is
+/// larger, probably just a SWIG sort of bug. But for use with python,
+/// supply a function that returns the data directly for an
+/// index. This is redundant for C++, just call quaternion_orbit_data
+/// and index the results. But this is useful for python.
+//-----------------------------------------------------------------------
+  
+  boost::shared_ptr<QuaternionOrbitData>
+  quaternion_orbit_data_i(int I) const
+  { std::vector<boost::shared_ptr<QuaternionOrbitData> > res = quaternion_orbit_data();
+    range_check(I, 0, (int) res.size());
+    return res[I];
+  }
+  
   // Specialization of sc_look_vector, which turns out to be a bottle
   // neck in the Ipi code
   using Orbit::sc_look_vector; // Only override one of these functions

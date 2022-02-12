@@ -269,7 +269,7 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     def _v_quaternion_orbit_data_time(self):
         """
 
-        std::vector< Time > OrbitQuaternionList::quaternion_orbit_data_time() const
+        std::vector< boost::shared_ptr< Time > > OrbitQuaternionList::quaternion_orbit_data_time() const
         Return the Times of QuaternionOrbitData. 
         """
         return _orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data_time(self)

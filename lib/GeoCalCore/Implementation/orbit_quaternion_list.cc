@@ -141,13 +141,13 @@ OrbitQuaternionList::quaternion_orbit_data() const
 /// Return the Times of QuaternionOrbitData.
 //-----------------------------------------------------------------------
 
-std::vector<Time> 
+std::vector<boost::shared_ptr<Time> >
 OrbitQuaternionList::quaternion_orbit_data_time() const
 {
   std::vector<Time>  res;
   res.reserve(orbit_data_map.size());
   BOOST_FOREACH(time_map::value_type i, orbit_data_map)
-    res.push_back(i.first);
+    res.push_back(new Time(i.first));
   return res;
 }
 

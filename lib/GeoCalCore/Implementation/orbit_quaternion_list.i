@@ -20,7 +20,7 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
   %python_attribute(quaternion_orbit_data, std::vector<boost::shared_ptr<QuaternionOrbitData> >)
-  %python_attribute(quaternion_orbit_data_time, std::vector<Time>);
+  %python_attribute(quaternion_orbit_data_time, std::vector<boost::shared_ptr<Time> >);
   boost::shared_ptr<QuaternionOrbitData>
   quaternion_orbit_data_i(int I) const;
 protected:

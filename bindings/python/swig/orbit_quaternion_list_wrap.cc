@@ -6000,18 +6000,18 @@ struct SWIG_null_deleter {
 
 
   namespace swig {
-    template <>  struct traits< GeoCal::Time > {
+    template <>  struct traits< boost::shared_ptr< GeoCal::Time > > {
       typedef pointer_category category;
-      static const char* type_name() { return"GeoCal::Time"; }
+      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
     };
   }
 
 
       namespace swig {
-	template <>  struct traits<std::vector< GeoCal::Time, std::allocator< GeoCal::Time > > > {
+	template <>  struct traits<std::vector< boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
 	  typedef pointer_category category;
 	  static const char* type_name() {
-	    return "std::vector<" "GeoCal::Time" "," "std::allocator< GeoCal::Time >" " >";
+	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
 	  }
 	};
       }
@@ -7077,7 +7077,7 @@ SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_quaternion_orbit_data_time(PyO
   boost::shared_ptr< GeoCal::OrbitQuaternionList const > tempshared1 ;
   boost::shared_ptr< GeoCal::OrbitQuaternionList const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
-  std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > result;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > result;
   
   if (!args) SWIG_fail;
   swig_obj[0] = args;
@@ -7105,7 +7105,7 @@ SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_quaternion_orbit_data_time(PyO
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = swig::from(static_cast< std::vector< GeoCal::Time,std::allocator< GeoCal::Time > > >(result));
+  resultobj = swig::from(static_cast< std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > >(result));
   return resultobj;
 fail:
   return NULL;
@@ -7650,7 +7650,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitQuaternionList__v_quaternion_orbit_data_time", (PyCFunction)_wrap_OrbitQuaternionList__v_quaternion_orbit_data_time, METH_O, (char *)"\n"
 		"\n"
-		"std::vector< Time > OrbitQuaternionList::quaternion_orbit_data_time() const\n"
+		"std::vector< boost::shared_ptr< Time > > OrbitQuaternionList::quaternion_orbit_data_time() const\n"
 		"Return the Times of QuaternionOrbitData. \n"
 		""},
 	 { (char *)"OrbitQuaternionList_quaternion_orbit_data_i", _wrap_OrbitQuaternionList_quaternion_orbit_data_i, METH_VARARGS, (char *)"\n"

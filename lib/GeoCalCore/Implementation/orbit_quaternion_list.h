@@ -85,7 +85,7 @@ public:
 
   std::vector<boost::shared_ptr<QuaternionOrbitData> > 
   quaternion_orbit_data() const;
-  std::vector<Time> 
+  std::vector<boost::shared_ptr<Time> >
   quaternion_orbit_data_time() const;
 
 //-----------------------------------------------------------------------

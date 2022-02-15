@@ -18971,7 +18971,8 @@ fi
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncursesw via pkg-config" >&5
 $as_echo_n "checking for ncursesw via pkg-config... " >&6; }
 
-    AX_REQUIRE_DEFINED(PKG_CHECK_EXISTS)
+
+
     if test -n "$_ax_cv_ncursesw_libs"; then
     pkg_cv__ax_cv_ncursesw_libs="$_ax_cv_ncursesw_libs"
  elif test -n "$PKG_CONFIG"; then
@@ -19370,7 +19371,8 @@ fi
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncurses via pkg-config" >&5
 $as_echo_n "checking for ncurses via pkg-config... " >&6; }
 
-    AX_REQUIRE_DEFINED(PKG_CHECK_EXISTS)
+
+
     if test -n "$_ax_cv_ncurses_libs"; then
     pkg_cv__ax_cv_ncurses_libs="$_ax_cv_ncurses_libs"
  elif test -n "$PKG_CONFIG"; then

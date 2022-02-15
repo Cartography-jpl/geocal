@@ -859,8 +859,8 @@ THIRDPARTY
 OPENMP_CFLAGS
 HAVE_CURSES_FALSE
 HAVE_CURSES_TRUE
-CURSES_LIBS
 CURSES_CFLAGS
+CURSES_LIBS
 geocalsupportdir
 pkgconfigdir
 PKG_CONFIG_LIBDIR
@@ -1030,6 +1030,7 @@ with_gcov
 enable_code_coverage
 enable_debug
 with_ncurses
+with_ncursesw
 enable_openmp
 with_vicar_rtl
 with_afids_data
@@ -1077,8 +1078,8 @@ DEBUG_FLAGS
 PKG_CONFIG
 PKG_CONFIG_PATH
 PKG_CONFIG_LIBDIR
-CURSES_CFLAGS
 CURSES_LIBS
+CURSES_CFLAGS
 THIRDPARTY
 VICAR_RTL_CFLAGS
 VICAR_RTL_LIBS
@@ -1761,7 +1762,8 @@ Optional Packages:
   --with-sysroot[=DIR]    Search for dependent libraries within DIR (or the
                           compiler's sysroot if not specified).
   --with-gcov=GCOV        use given GCOV for coverage (GCOV=gcov).
-  --with-ncurses          Force the use of ncurses over curses
+  --with-ncurses          force the use of Ncurses or NcursesW
+  --without-ncursesw      do not use NcursesW (wide character support)
   --with-vicar-rtl[=DIR]  use VICAR RTL (default is yes if found) - it is
                           possible to specify the root directory for VICAR RTL
                           (optional).
@@ -1863,9 +1865,9 @@ Some influential environment variables:
               directories to add to pkg-config's search path
   PKG_CONFIG_LIBDIR
               path overriding pkg-config's built-in search path
+  CURSES_LIBS linker library for Curses, e.g. -lcurses
   CURSES_CFLAGS
-              C compiler flags for CURSES, overriding pkg-config
-  CURSES_LIBS linker flags for CURSES, overriding pkg-config
+              preprocessor flags for Curses, e.g. -I/usr/include/ncursesw
   THIRDPARTY  It is common that either 1) you want to build a local copy of
               all thirdparty software or 2) you have a central location not
               already searched for that you want to be searched. You can
@@ -18932,29 +18934,54 @@ fi
 
 
 
+
+
+
 # Check whether --with-ncurses was given.
 if test "${with_ncurses+set}" = set; then :
   withval=$with_ncurses;
+else
+  with_ncurses=check
 fi
 
-   have_curses="no"
-   mp_save_LIBS="$LIBS"
-   CURSES_LIBS=""
 
-pkg_failed=no
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for CURSES" >&5
-$as_echo_n "checking for CURSES... " >&6; }
+# Check whether --with-ncursesw was given.
+if test "${with_ncursesw+set}" = set; then :
+  withval=$with_ncursesw;
+else
+  with_ncursesw=check
+fi
 
-if test -n "$CURSES_CFLAGS"; then
-    pkg_cv_CURSES_CFLAGS="$CURSES_CFLAGS"
+
+    ax_saved_LIBS=$LIBS
+    ax_saved_CPPFLAGS=$CPPFLAGS
+
+    if test "x$with_ncurses" = xyes || test "x$with_ncursesw" = xyes; then :
+  ax_with_plaincurses=no
+else
+  ax_with_plaincurses=check
+fi
+
+    ax_cv_curses_which=no
+
+    # Test for NcursesW
+    if test "x$CURSES_LIBS" = x && test "x$with_ncursesw" != xno; then :
+
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncursesw via pkg-config" >&5
+$as_echo_n "checking for ncursesw via pkg-config... " >&6; }
+
+    AX_REQUIRE_DEFINED(PKG_CHECK_EXISTS)
+    if test -n "$_ax_cv_ncursesw_libs"; then
+    pkg_cv__ax_cv_ncursesw_libs="$_ax_cv_ncursesw_libs"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncurses\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "ncurses") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncursesw\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ncursesw") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_CURSES_CFLAGS=`$PKG_CONFIG --cflags "ncurses" 2>/dev/null`
+  pkg_cv__ax_cv_ncursesw_libs=`$PKG_CONFIG --libs "ncursesw" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
@@ -18962,16 +18989,16 @@ fi
  else
     pkg_failed=untried
 fi
-if test -n "$CURSES_LIBS"; then
-    pkg_cv_CURSES_LIBS="$CURSES_LIBS"
+    if test -n "$_ax_cv_ncursesw_cppflags"; then
+    pkg_cv__ax_cv_ncursesw_cppflags="$_ax_cv_ncursesw_cppflags"
  elif test -n "$PKG_CONFIG"; then
     if test -n "$PKG_CONFIG" && \
-    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncurses\""; } >&5
-  ($PKG_CONFIG --exists --print-errors "ncurses") 2>&5
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncursesw\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ncursesw") 2>&5
   ac_status=$?
   $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
   test $ac_status = 0; }; then
-  pkg_cv_CURSES_LIBS=`$PKG_CONFIG --libs "ncurses" 2>/dev/null`
+  pkg_cv__ax_cv_ncursesw_cppflags=`$PKG_CONFIG --cflags "ncursesw" 2>/dev/null`
 		      test "x$?" != "x0" && pkg_failed=yes
 else
   pkg_failed=yes
@@ -18980,118 +19007,971 @@ fi
     pkg_failed=untried
 fi
 
+    if test "x$pkg_failed" = "xyes" || test "x$pkg_failed" = "xuntried"; then :
 
-
-if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-
-if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
-        _pkg_short_errors_supported=yes
-else
-        _pkg_short_errors_supported=no
-fi
-        if test $_pkg_short_errors_supported = yes; then
-	        CURSES_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "ncurses" 2>&1`
-        else
-	        CURSES_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "ncurses" 2>&1`
-        fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$CURSES_PKG_ERRORS" >&5
-
-	succeeded=no
-elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-	succeeded=no
-else
-	CURSES_CFLAGS=$pkg_cv_CURSES_CFLAGS
-	CURSES_LIBS=$pkg_cv_CURSES_LIBS
-        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
-$as_echo "yes" >&6; }
-	succeeded=yes
-fi
-  if test "$succeeded" = "yes"; then
-
-$as_echo "#define HAVE_NCURSES_H 1" >>confdefs.h
-
-       have_curses="yes"
-   elif test "$with_ncurses" != yes; then
-     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working curses" >&5
-$as_echo_n "checking for working curses... " >&6; }
-if ${mp_cv_curses+:} false; then :
+        # No suitable .pc file found, have to find flags via fallback
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncursesw via fallback" >&5
+$as_echo_n "checking for ncursesw via fallback... " >&6; }
+if ${ax_cv_ncursesw+:} false; then :
   $as_echo_n "(cached) " >&6
 else
-  LIBS="$LIBS -lcurses"
-        cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+
+            $as_echo
+            pkg_cv__ax_cv_ncursesw_libs="-lncursesw"
+            pkg_cv__ax_cv_ncursesw_cppflags="-D_GNU_SOURCE $CURSES_CFLAGS"
+            LIBS="$ax_saved_LIBS $pkg_cv__ax_cv_ncursesw_libs"
+            CPPFLAGS="$ax_saved_CPPFLAGS $pkg_cv__ax_cv_ncursesw_cppflags"
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for initscr() with $pkg_cv__ax_cv_ncursesw_libs" >&5
+$as_echo_n "checking for initscr() with $pkg_cv__ax_cv_ncursesw_libs... " >&6; }
+            cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-#include <curses.h>
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char initscr ();
 int
 main ()
 {
-chtype a; int b=A_STANDOUT, c=KEY_LEFT; initscr();
+return initscr ();
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  mp_cv_curses=yes
+
+                    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+                    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for nodelay() with $pkg_cv__ax_cv_ncursesw_libs" >&5
+$as_echo_n "checking for nodelay() with $pkg_cv__ax_cv_ncursesw_libs... " >&6; }
+                    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char nodelay ();
+int
+main ()
+{
+return nodelay ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+
+                        ax_cv_ncursesw=yes
+
 else
-  mp_cv_curses=no
+
+                        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+                        pkg_cv__ax_cv_ncursesw_libs="$pkg_cv__ax_cv_ncursesw_libs -ltinfow"
+                        LIBS="$ax_saved_LIBS $pkg_cv__ax_cv_ncursesw_libs"
+
+                        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for nodelay() with $pkg_cv__ax_cv_ncursesw_libs" >&5
+$as_echo_n "checking for nodelay() with $pkg_cv__ax_cv_ncursesw_libs... " >&6; }
+                        cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char nodelay ();
+int
+main ()
+{
+return nodelay ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+
+                            ax_cv_ncursesw=yes
+
+else
+
+                            ax_cv_ncursesw=no
+
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
+
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $mp_cv_curses" >&5
-$as_echo "$mp_cv_curses" >&6; }
-     if test "$mp_cv_curses" = yes
-     then
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+else
+
+                    ax_cv_ncursesw=no
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_ncursesw" >&5
+$as_echo "$ax_cv_ncursesw" >&6; }
+
+else
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+        # Found .pc file, using its information
+        LIBS="$ax_saved_LIBS $pkg_cv__ax_cv_ncursesw_libs"
+        CPPFLAGS="$ax_saved_CPPFLAGS $pkg_cv__ax_cv_ncursesw_cppflags"
+        ax_cv_ncursesw=yes
+
+fi
+
+
+        if test "x$ax_cv_ncursesw" = xno && test "x$with_ncursesw" = xyes; then :
+
+            as_fn_error $? "--with-ncursesw specified but could not find NcursesW library" "$LINENO" 5
+
+fi
+
+        if test "x$ax_cv_ncursesw" = xyes; then :
+
+            ax_cv_curses=yes
+            ax_cv_curses_which=ncursesw
+            CURSES_LIBS="$pkg_cv__ax_cv_ncursesw_libs"
+            CURSES_CFLAGS="$pkg_cv__ax_cv_ncursesw_cppflags"
+
+$as_echo "#define HAVE_NCURSESW 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES 1" >>confdefs.h
+
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncursesw/curses.h" >&5
+$as_echo_n "checking for working ncursesw/curses.h... " >&6; }
+if ${ax_cv_header_ncursesw_curses_h+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #define _XOPEN_SOURCE_EXTENDED 1
+                        #include <ncursesw/curses.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        chtype c = COLOR_PAIR(1) & A_COLOR;
+                        attr_t d = WA_NORMAL;
+                        cchar_t e;
+                        wint_t f;
+                        int g = getattrs(stdscr);
+                        int h = getcurx(stdscr) + getmaxx(stdscr);
+                        initscr();
+                        init_pair(1, COLOR_WHITE, COLOR_RED);
+                        wattr_set(stdscr, d, 0, NULL);
+                        wget_wch(stdscr, &f);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_header_ncursesw_curses_h=yes
+else
+  ax_cv_header_ncursesw_curses_h=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_header_ncursesw_curses_h" >&5
+$as_echo "$ax_cv_header_ncursesw_curses_h" >&6; }
+            if test "x$ax_cv_header_ncursesw_curses_h" = xyes; then :
+
+                ax_cv_curses_enhanced=yes
+                ax_cv_curses_color=yes
+                ax_cv_curses_obsolete=yes
+
+$as_echo "#define HAVE_CURSES_ENHANCED 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_OBSOLETE 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_NCURSESW_CURSES_H 1" >>confdefs.h
+
+
+fi
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncursesw.h" >&5
+$as_echo_n "checking for working ncursesw.h... " >&6; }
+if ${ax_cv_header_ncursesw_h+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #define _XOPEN_SOURCE_EXTENDED 1
+                        #include <ncursesw.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        chtype c = COLOR_PAIR(1) & A_COLOR;
+                        attr_t d = WA_NORMAL;
+                        cchar_t e;
+                        wint_t f;
+                        int g = getattrs(stdscr);
+                        int h = getcurx(stdscr) + getmaxx(stdscr);
+                        initscr();
+                        init_pair(1, COLOR_WHITE, COLOR_RED);
+                        wattr_set(stdscr, d, 0, NULL);
+                        wget_wch(stdscr, &f);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_header_ncursesw_h=yes
+else
+  ax_cv_header_ncursesw_h=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_header_ncursesw_h" >&5
+$as_echo "$ax_cv_header_ncursesw_h" >&6; }
+            if test "x$ax_cv_header_ncursesw_h" = xyes; then :
+
+                ax_cv_curses_enhanced=yes
+                ax_cv_curses_color=yes
+                ax_cv_curses_obsolete=yes
+
+$as_echo "#define HAVE_CURSES_ENHANCED 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_OBSOLETE 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_NCURSESW_H 1" >>confdefs.h
+
+
+fi
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncurses.h" >&5
+$as_echo_n "checking for working ncurses.h... " >&6; }
+if ${ax_cv_header_ncurses_h_with_ncursesw+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #define _XOPEN_SOURCE_EXTENDED 1
+                        #include <ncurses.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        chtype c = COLOR_PAIR(1) & A_COLOR;
+                        attr_t d = WA_NORMAL;
+                        cchar_t e;
+                        wint_t f;
+                        int g = getattrs(stdscr);
+                        int h = getcurx(stdscr) + getmaxx(stdscr);
+                        initscr();
+                        init_pair(1, COLOR_WHITE, COLOR_RED);
+                        wattr_set(stdscr, d, 0, NULL);
+                        wget_wch(stdscr, &f);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_header_ncurses_h_with_ncursesw=yes
+else
+  ax_cv_header_ncurses_h_with_ncursesw=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_header_ncurses_h_with_ncursesw" >&5
+$as_echo "$ax_cv_header_ncurses_h_with_ncursesw" >&6; }
+            if test "x$ax_cv_header_ncurses_h_with_ncursesw" = xyes; then :
+
+                ax_cv_curses_enhanced=yes
+                ax_cv_curses_color=yes
+                ax_cv_curses_obsolete=yes
+
+$as_echo "#define HAVE_CURSES_ENHANCED 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_OBSOLETE 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_NCURSES_H 1" >>confdefs.h
+
+
+fi
+
+            if test "x$ax_cv_header_ncursesw_curses_h" = xno && test "x$ax_cv_header_ncursesw_h" = xno && test "x$ax_cv_header_ncurses_h_with_ncursesw" = xno; then :
+
+                { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: could not find a working ncursesw/curses.h, ncursesw.h or ncurses.h" >&5
+$as_echo "$as_me: WARNING: could not find a working ncursesw/curses.h, ncursesw.h or ncurses.h" >&2;}
+
+fi
+
+fi
+
+fi
+    unset pkg_cv__ax_cv_ncursesw_libs
+    unset pkg_cv__ax_cv_ncursesw_cppflags
+
+    # Test for Ncurses
+    if test "x$CURSES_LIBS" = x && test "x$with_ncurses" != xno && test "x$ax_cv_curses_which" = xno; then :
+
+
+    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncurses via pkg-config" >&5
+$as_echo_n "checking for ncurses via pkg-config... " >&6; }
+
+    AX_REQUIRE_DEFINED(PKG_CHECK_EXISTS)
+    if test -n "$_ax_cv_ncurses_libs"; then
+    pkg_cv__ax_cv_ncurses_libs="$_ax_cv_ncurses_libs"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncurses\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ncurses") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv__ax_cv_ncurses_libs=`$PKG_CONFIG --libs "ncurses" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+    if test -n "$_ax_cv_ncurses_cppflags"; then
+    pkg_cv__ax_cv_ncurses_cppflags="$_ax_cv_ncurses_cppflags"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ncurses\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ncurses") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv__ax_cv_ncurses_cppflags=`$PKG_CONFIG --cflags "ncurses" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
+
+    if test "x$pkg_failed" = "xyes" || test "x$pkg_failed" = "xuntried"; then :
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+        # No suitable .pc file found, have to find flags via fallback
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for ncurses via fallback" >&5
+$as_echo_n "checking for ncurses via fallback... " >&6; }
+if ${ax_cv_ncurses+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+            $as_echo
+            pkg_cv__ax_cv_ncurses_libs="-lncurses"
+            pkg_cv__ax_cv_ncurses_cppflags="-D_GNU_SOURCE $CURSES_CFLAGS"
+            LIBS="$ax_saved_LIBS $pkg_cv__ax_cv_ncurses_libs"
+            CPPFLAGS="$ax_saved_CPPFLAGS $pkg_cv__ax_cv_ncurses_cppflags"
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for initscr() with $pkg_cv__ax_cv_ncurses_libs" >&5
+$as_echo_n "checking for initscr() with $pkg_cv__ax_cv_ncurses_libs... " >&6; }
+            cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char initscr ();
+int
+main ()
+{
+return initscr ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+
+                    { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+                    { $as_echo "$as_me:${as_lineno-$LINENO}: checking for nodelay() with $pkg_cv__ax_cv_ncurses_libs" >&5
+$as_echo_n "checking for nodelay() with $pkg_cv__ax_cv_ncurses_libs... " >&6; }
+                    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char nodelay ();
+int
+main ()
+{
+return nodelay ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+
+                        ax_cv_ncurses=yes
+
+else
+
+                        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+$as_echo "no" >&6; }
+                        pkg_cv__ax_cv_ncurses_libs="$pkg_cv__ax_cv_ncurses_libs -ltinfo"
+
+                        LIBS="$ax_saved_LIBS $pkg_cv__ax_cv_ncurses_libs"
+
+                        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for nodelay() with $pkg_cv__ax_cv_ncurses_libs" >&5
+$as_echo_n "checking for nodelay() with $pkg_cv__ax_cv_ncurses_libs... " >&6; }
+                        cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char nodelay ();
+int
+main ()
+{
+return nodelay ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+
+                            ax_cv_ncurses=yes
+
+else
+
+                            ax_cv_ncurses=no
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+else
+
+                    ax_cv_ncurses=no
+
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_ncurses" >&5
+$as_echo "$ax_cv_ncurses" >&6; }
+
+else
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
+$as_echo "yes" >&6; }
+        # Found .pc file, using its information
+        LIBS="$ax_saved_LIBS $pkg_cv__ax_cv_ncurses_libs"
+        CPPFLAGS="$ax_saved_CPPFLAGS $pkg_cv__ax_cv_ncurses_cppflags"
+        ax_cv_ncurses=yes
+
+fi
+
+
+        if test "x$ax_cv_ncurses" = xno && test "x$with_ncurses" = xyes; then :
+
+            as_fn_error $? "--with-ncurses specified but could not find Ncurses library" "$LINENO" 5
+
+fi
+
+        if test "x$ax_cv_ncurses" = xyes; then :
+
+            ax_cv_curses=yes
+            ax_cv_curses_which=ncurses
+            CURSES_LIBS="$pkg_cv__ax_cv_ncurses_libs"
+            CURSES_CFLAGS="$pkg_cv__ax_cv_ncurses_cppflags"
+
+$as_echo "#define HAVE_NCURSES 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES 1" >>confdefs.h
+
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncurses/curses.h" >&5
+$as_echo_n "checking for working ncurses/curses.h... " >&6; }
+if ${ax_cv_header_ncurses_curses_h+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #include <ncurses/curses.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        chtype c = COLOR_PAIR(1) & A_COLOR;
+                        int g = getattrs(stdscr);
+                        int h = getcurx(stdscr) + getmaxx(stdscr);
+                        initscr();
+                        init_pair(1, COLOR_WHITE, COLOR_RED);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_header_ncurses_curses_h=yes
+else
+  ax_cv_header_ncurses_curses_h=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_header_ncurses_curses_h" >&5
+$as_echo "$ax_cv_header_ncurses_curses_h" >&6; }
+            if test "x$ax_cv_header_ncurses_curses_h" = xyes; then :
+
+                ax_cv_curses_color=yes
+                ax_cv_curses_obsolete=yes
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_OBSOLETE 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_NCURSES_CURSES_H 1" >>confdefs.h
+
+
+fi
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncurses.h" >&5
+$as_echo_n "checking for working ncurses.h... " >&6; }
+if ${ax_cv_header_ncurses_h+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #include <ncurses.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        chtype c = COLOR_PAIR(1) & A_COLOR;
+                        int g = getattrs(stdscr);
+                        int h = getcurx(stdscr) + getmaxx(stdscr);
+                        initscr();
+                        init_pair(1, COLOR_WHITE, COLOR_RED);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_header_ncurses_h=yes
+else
+  ax_cv_header_ncurses_h=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_header_ncurses_h" >&5
+$as_echo "$ax_cv_header_ncurses_h" >&6; }
+            if test "x$ax_cv_header_ncurses_h" = xyes; then :
+
+                ax_cv_curses_color=yes
+                ax_cv_curses_obsolete=yes
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_CURSES_OBSOLETE 1" >>confdefs.h
+
+
+$as_echo "#define HAVE_NCURSES_H 1" >>confdefs.h
+
+
+fi
+
+            if test "x$ax_cv_header_ncurses_curses_h" = xno && test "x$ax_cv_header_ncurses_h" = xno; then :
+
+                { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: could not find a working ncurses/curses.h or ncurses.h" >&5
+$as_echo "$as_me: WARNING: could not find a working ncurses/curses.h or ncurses.h" >&2;}
+
+fi
+
+fi
+
+fi
+    unset pkg_cv__ax_cv_ncurses_libs
+    unset pkg_cv__ax_cv_ncurses_cppflags
+
+    # Test for plain Curses (or if CURSES_LIBS was set by user)
+    if test "x$with_plaincurses" != xno && test "x$ax_cv_curses_which" = xno; then :
+
+        if test "x$CURSES_LIBS" != x; then :
+
+            LIBS="$ax_saved_LIBS $CURSES_LIBS"
+
+else
+
+            LIBS="$ax_saved_LIBS -lcurses"
+
+fi
+
+        { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Curses library" >&5
+$as_echo_n "checking for Curses library... " >&6; }
+if ${ax_cv_plaincurses+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+            cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+/* Override any GCC internal prototype to avoid an error.
+   Use char because int might match the return type of a GCC
+   builtin and then its argument prototype would still apply.  */
+#ifdef __cplusplus
+extern "C"
+#endif
+char initscr ();
+int
+main ()
+{
+return initscr ();
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_plaincurses=yes
+else
+  ax_cv_plaincurses=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_plaincurses" >&5
+$as_echo "$ax_cv_plaincurses" >&6; }
+
+        if test "x$ax_cv_plaincurses" = xyes; then :
+
+            ax_cv_curses=yes
+            ax_cv_curses_which=plaincurses
+            if test "x$CURSES_LIBS" = x; then :
+
+                CURSES_LIBS="-lcurses"
+
+fi
+
+$as_echo "#define HAVE_CURSES 1" >>confdefs.h
+
+
+            # Check for base conformance (and header file)
+
+            { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working curses.h" >&5
+$as_echo_n "checking for working curses.h... " >&6; }
+if ${ax_cv_header_curses_h+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #include <curses.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        initscr();
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_header_curses_h=yes
+else
+  ax_cv_header_curses_h=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_header_curses_h" >&5
+$as_echo "$ax_cv_header_curses_h" >&6; }
+            if test "x$ax_cv_header_curses_h" = xyes; then :
+
 
 $as_echo "#define HAVE_CURSES_H 1" >>confdefs.h
 
-       CURSES_LIBS="-lcurses"
-       have_curses="yes"
-     fi
-   fi
-   if test ! "$CURSES_LIBS"; then
-     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for working ncurses" >&5
-$as_echo_n "checking for working ncurses... " >&6; }
-if ${mp_cv_ncurses+:} false; then :
+
+                # Check for X/Open Enhanced conformance
+
+                { $as_echo "$as_me:${as_lineno-$LINENO}: checking for X/Open Enhanced Curses conformance" >&5
+$as_echo_n "checking for X/Open Enhanced Curses conformance... " >&6; }
+if ${ax_cv_plaincurses_enhanced+:} false; then :
   $as_echo_n "(cached) " >&6
 else
-  LIBS="$mp_save_LIBS -lncurses"
-        cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+
+                    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
 /* end confdefs.h.  */
-#include <ncurses.h>
+
+                            #define _XOPEN_SOURCE_EXTENDED 1
+                            #include <curses.h>
+                            #ifndef _XOPEN_CURSES
+                            #error "this Curses library is not enhanced"
+                            "this Curses library is not enhanced"
+                            #endif
+
 int
 main ()
 {
-chtype a; int b=A_STANDOUT, c=KEY_LEFT; initscr();
+
+                            chtype a = A_BOLD;
+                            int b = KEY_LEFT;
+                            chtype c = COLOR_PAIR(1) & A_COLOR;
+                            attr_t d = WA_NORMAL;
+                            cchar_t e;
+                            wint_t f;
+                            initscr();
+                            init_pair(1, COLOR_WHITE, COLOR_RED);
+                            wattr_set(stdscr, d, 0, NULL);
+                            wget_wch(stdscr, &f);
+
   ;
   return 0;
 }
 _ACEOF
 if ac_fn_c_try_link "$LINENO"; then :
-  mp_cv_ncurses=yes
+  ax_cv_plaincurses_enhanced=yes
 else
-  mp_cv_ncurses=no
+  ax_cv_plaincurses_enhanced=no
 fi
 rm -f core conftest.err conftest.$ac_objext \
     conftest$ac_exeext conftest.$ac_ext
+
 fi
-{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $mp_cv_ncurses" >&5
-$as_echo "$mp_cv_ncurses" >&6; }
-     if test "$mp_cv_ncurses" = yes; then
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_plaincurses_enhanced" >&5
+$as_echo "$ax_cv_plaincurses_enhanced" >&6; }
+                if test "x$ax_cv_plaincurses_enhanced" = xyes; then :
 
-$as_echo "#define HAVE_NCURSES_H 1" >>confdefs.h
+                    ax_cv_curses_enhanced=yes
+                    ax_cv_curses_color=yes
 
-       CURSES_LIBS="-lncurses"
-       have_curses="yes"
-     fi
-   fi
-   LIBS="$mp_save_LIBS"
+$as_echo "#define HAVE_CURSES_ENHANCED 1" >>confdefs.h
 
-    if test "$have_curses" = "yes"; then
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+fi
+
+                # Check for color functions
+
+                { $as_echo "$as_me:${as_lineno-$LINENO}: checking for Curses color functions" >&5
+$as_echo_n "checking for Curses color functions... " >&6; }
+if ${ax_cv_plaincurses_color+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #define _XOPEN_SOURCE_EXTENDED 1
+                        #include <curses.h>
+
+int
+main ()
+{
+
+                            chtype a = A_BOLD;
+                            int b = KEY_LEFT;
+                            chtype c = COLOR_PAIR(1) & A_COLOR;
+                            initscr();
+                            init_pair(1, COLOR_WHITE, COLOR_RED);
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_plaincurses_color=yes
+else
+  ax_cv_plaincurses_color=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_plaincurses_color" >&5
+$as_echo "$ax_cv_plaincurses_color" >&6; }
+                if test "x$ax_cv_plaincurses_color" = xyes; then :
+
+                    ax_cv_curses_color=yes
+
+$as_echo "#define HAVE_CURSES_COLOR 1" >>confdefs.h
+
+
+fi
+
+                # Check for obsolete functions
+
+                { $as_echo "$as_me:${as_lineno-$LINENO}: checking for obsolete Curses functions" >&5
+$as_echo_n "checking for obsolete Curses functions... " >&6; }
+if ${ax_cv_plaincurses_obsolete+:} false; then :
+  $as_echo_n "(cached) " >&6
+else
+
+                cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+
+                        #include <curses.h>
+
+int
+main ()
+{
+
+                        chtype a = A_BOLD;
+                        int b = KEY_LEFT;
+                        int g = getattrs(stdscr);
+                        int h = getcurx(stdscr) + getmaxx(stdscr);
+                        initscr();
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_c_try_link "$LINENO"; then :
+  ax_cv_plaincurses_obsolete=yes
+else
+  ax_cv_plaincurses_obsolete=no
+fi
+rm -f core conftest.err conftest.$ac_objext \
+    conftest$ac_exeext conftest.$ac_ext
+
+fi
+{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ax_cv_plaincurses_obsolete" >&5
+$as_echo "$ax_cv_plaincurses_obsolete" >&6; }
+                if test "x$ax_cv_plaincurses_obsolete" = xyes; then :
+
+                    ax_cv_curses_obsolete=yes
+
+$as_echo "#define HAVE_CURSES_OBSOLETE 1" >>confdefs.h
+
+
+fi
+
+fi
+
+            if test "x$ax_cv_header_curses_h" = xno; then :
+
+                { $as_echo "$as_me:${as_lineno-$LINENO}: WARNING: could not find a working curses.h" >&5
+$as_echo "$as_me: WARNING: could not find a working curses.h" >&2;}
+
+fi
+
+fi
+
+fi
+
+    if test "x$ax_cv_curses"          != xyes; then :
+  ax_cv_curses=no
+fi
+    if test "x$ax_cv_curses_enhanced" != xyes; then :
+  ax_cv_curses_enhanced=no
+fi
+    if test "x$ax_cv_curses_color"    != xyes; then :
+  ax_cv_curses_color=no
+fi
+    if test "x$ax_cv_curses_obsolete" != xyes; then :
+  ax_cv_curses_obsolete=no
+fi
+
+    LIBS=$ax_saved_LIBS
+    CPPFLAGS=$ax_saved_CPPFLAGS
+
+    unset ax_saved_LIBS
+    unset ax_saved_CPPFLAGS
+    # MMS added this
+     if test "$ax_cv_curses" = "yes"; then
   HAVE_CURSES_TRUE=
   HAVE_CURSES_FALSE='#'
 else
@@ -19286,11 +20166,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$VICAR_RTL_VERSION"; then
+    pkg_cv_VICAR_RTL_VERSION="$VICAR_RTL_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"vicar-rtl\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "vicar-rtl") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_VICAR_RTL_VERSION=`$PKG_CONFIG --modversion "vicar-rtl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19299,24 +20196,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
+                VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "vicar-rtl" 2>&1`
         else
-	        VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
+                VICAR_RTL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "vicar-rtl" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$VICAR_RTL_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$VICAR_RTL_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	VICAR_RTL_CFLAGS=$pkg_cv_VICAR_RTL_CFLAGS
-	VICAR_RTL_LIBS=$pkg_cv_VICAR_RTL_LIBS
+        VICAR_RTL_CFLAGS=$pkg_cv_VICAR_RTL_CFLAGS
+        VICAR_RTL_LIBS=$pkg_cv_VICAR_RTL_LIBS
+        VICAR_RTL_VERSION=$pkg_cv_VICAR_RTL_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$VICAR_RTL_PREFIX"; then
@@ -19697,11 +20595,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$HDF5_VERSION"; then
+    pkg_cv_HDF5_VERSION="$HDF5_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDF5_VERSION=`$PKG_CONFIG --modversion "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19710,24 +20625,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
+                HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
+                HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDF5_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$HDF5_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
-	HDF5_LIBS=$pkg_cv_HDF5_LIBS
+        HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
+        HDF5_LIBS=$pkg_cv_HDF5_LIBS
+        HDF5_VERSION=$pkg_cv_HDF5_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$HDF5_PREFIX"; then
@@ -19895,11 +20811,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$HDFEOS5_VERSION"; then
+    pkg_cv_HDFEOS5_VERSION="$HDFEOS5_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_VERSION=`$PKG_CONFIG --modversion "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -19908,24 +20841,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
+                HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
         else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
+                HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS5_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$HDFEOS5_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
-	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
+        HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        HDFEOS5_VERSION=$pkg_cv_HDFEOS5_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$HDFEOS5_PREFIX"; then
@@ -20000,11 +20934,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$HDFEOS5_VERSION"; then
+    pkg_cv_HDFEOS5_VERSION="$HDFEOS5_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdfeos5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdfeos5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDFEOS5_VERSION=`$PKG_CONFIG --modversion "hdfeos5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -20013,24 +20964,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
+                HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdfeos5" 2>&1`
         else
-	        HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
+                HDFEOS5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdfeos5" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDFEOS5_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$HDFEOS5_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
-	HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        HDFEOS5_CFLAGS=$pkg_cv_HDFEOS5_CFLAGS
+        HDFEOS5_LIBS=$pkg_cv_HDFEOS5_LIBS
+        HDFEOS5_VERSION=$pkg_cv_HDFEOS5_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$HDFEOS5_PREFIX"; then
@@ -20221,11 +21173,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$MSPI_SHARED_VERSION"; then
+    pkg_cv_MSPI_SHARED_VERSION="$MSPI_SHARED_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"MSPI-Shared\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "MSPI-Shared") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_MSPI_SHARED_VERSION=`$PKG_CONFIG --modversion "MSPI-Shared" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -20234,24 +21203,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        MSPI_SHARED_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "MSPI-Shared" 2>&1`
+                MSPI_SHARED_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "MSPI-Shared" 2>&1`
         else
-	        MSPI_SHARED_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "MSPI-Shared" 2>&1`
+                MSPI_SHARED_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "MSPI-Shared" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$MSPI_SHARED_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$MSPI_SHARED_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	MSPI_SHARED_CFLAGS=$pkg_cv_MSPI_SHARED_CFLAGS
-	MSPI_SHARED_LIBS=$pkg_cv_MSPI_SHARED_LIBS
+        MSPI_SHARED_CFLAGS=$pkg_cv_MSPI_SHARED_CFLAGS
+        MSPI_SHARED_LIBS=$pkg_cv_MSPI_SHARED_LIBS
+        MSPI_SHARED_VERSION=$pkg_cv_MSPI_SHARED_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
           if test "$succeeded" = "no"; then
 
@@ -20907,11 +21877,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$BLITZ_VERSION"; then
+    pkg_cv_BLITZ_VERSION="$BLITZ_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"blitz\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "blitz") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_BLITZ_VERSION=`$PKG_CONFIG --modversion "blitz" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -20920,24 +21907,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
+                BLITZ_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "blitz" 2>&1`
         else
-	        BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
+                BLITZ_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "blitz" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$BLITZ_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$BLITZ_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	BLITZ_CFLAGS=$pkg_cv_BLITZ_CFLAGS
-	BLITZ_LIBS=$pkg_cv_BLITZ_LIBS
+        BLITZ_CFLAGS=$pkg_cv_BLITZ_CFLAGS
+        BLITZ_LIBS=$pkg_cv_BLITZ_LIBS
+        BLITZ_VERSION=$pkg_cv_BLITZ_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$BLITZ_PREFIX"; then
@@ -21120,11 +22108,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$GSL_VERSION"; then
+    pkg_cv_GSL_VERSION="$GSL_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gsl\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "gsl") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GSL_VERSION=`$PKG_CONFIG --modversion "gsl" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21133,24 +22138,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
+                GSL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gsl" 2>&1`
         else
-	        GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
+                GSL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gsl" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GSL_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$GSL_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	GSL_CFLAGS=$pkg_cv_GSL_CFLAGS
-	GSL_LIBS=$pkg_cv_GSL_LIBS
+        GSL_CFLAGS=$pkg_cv_GSL_CFLAGS
+        GSL_LIBS=$pkg_cv_GSL_LIBS
+        GSL_VERSION=$pkg_cv_GSL_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$GSL_PREFIX"; then
@@ -21340,11 +22346,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$SPICE_VERSION"; then
+    pkg_cv_SPICE_VERSION="$SPICE_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"spice\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "spice") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_SPICE_VERSION=`$PKG_CONFIG --modversion "spice" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21353,24 +22376,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
+                SPICE_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "spice" 2>&1`
         else
-	        SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
+                SPICE_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "spice" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$SPICE_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$SPICE_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	SPICE_CFLAGS=$pkg_cv_SPICE_CFLAGS
-	SPICE_LIBS=$pkg_cv_SPICE_LIBS
+        SPICE_CFLAGS=$pkg_cv_SPICE_CFLAGS
+        SPICE_LIBS=$pkg_cv_SPICE_LIBS
+        SPICE_VERSION=$pkg_cv_SPICE_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$SPICE_PREFIX"; then
@@ -21555,11 +22579,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$HDF5_VERSION"; then
+    pkg_cv_HDF5_VERSION="$HDF5_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"hdf5\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "hdf5") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_HDF5_VERSION=`$PKG_CONFIG --modversion "hdf5" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21568,24 +22609,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
+                HDF5_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "hdf5" 2>&1`
         else
-	        HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
+                HDF5_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "hdf5" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$HDF5_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$HDF5_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
-	HDF5_LIBS=$pkg_cv_HDF5_LIBS
+        HDF5_CFLAGS=$pkg_cv_HDF5_CFLAGS
+        HDF5_LIBS=$pkg_cv_HDF5_LIBS
+        HDF5_VERSION=$pkg_cv_HDF5_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$HDF5_PREFIX"; then
@@ -21943,11 +22985,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$FFTW_VERSION"; then
+    pkg_cv_FFTW_VERSION="$FFTW_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"fftw3\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "fftw3") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_FFTW_VERSION=`$PKG_CONFIG --modversion "fftw3" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -21956,24 +23015,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
+                FFTW_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "fftw3" 2>&1`
         else
-	        FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
+                FFTW_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "fftw3" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$FFTW_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$FFTW_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	FFTW_CFLAGS=$pkg_cv_FFTW_CFLAGS
-	FFTW_LIBS=$pkg_cv_FFTW_LIBS
+        FFTW_CFLAGS=$pkg_cv_FFTW_CFLAGS
+        FFTW_LIBS=$pkg_cv_FFTW_LIBS
+        FFTW_VERSION=$pkg_cv_FFTW_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$FFTW_PREFIX"; then
@@ -22196,11 +23256,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$GDAL_VERSION"; then
+    pkg_cv_GDAL_VERSION="$GDAL_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"gdal\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "gdal") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GDAL_VERSION=`$PKG_CONFIG --modversion "gdal" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22209,24 +23286,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
+                GDAL_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "gdal" 2>&1`
         else
-	        GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
+                GDAL_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "gdal" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GDAL_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$GDAL_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	GDAL_CFLAGS=$pkg_cv_GDAL_CFLAGS
-	GDAL_LIBS=$pkg_cv_GDAL_LIBS
+        GDAL_CFLAGS=$pkg_cv_GDAL_CFLAGS
+        GDAL_LIBS=$pkg_cv_GDAL_LIBS
+        GDAL_VERSION=$pkg_cv_GDAL_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$GDAL_PREFIX"; then
@@ -22486,11 +23564,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$GEOS_VERSION"; then
+    pkg_cv_GEOS_VERSION="$GEOS_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"geos\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "geos") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_GEOS_VERSION=`$PKG_CONFIG --modversion "geos" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22499,24 +23594,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "geos" 2>&1`
+                GEOS_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "geos" 2>&1`
         else
-	        GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "geos" 2>&1`
+                GEOS_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "geos" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$GEOS_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$GEOS_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	GEOS_CFLAGS=$pkg_cv_GEOS_CFLAGS
-	GEOS_LIBS=$pkg_cv_GEOS_LIBS
+        GEOS_CFLAGS=$pkg_cv_GEOS_CFLAGS
+        GEOS_LIBS=$pkg_cv_GEOS_LIBS
+        GEOS_VERSION=$pkg_cv_GEOS_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$GEOS_PREFIX"; then
@@ -22700,11 +23796,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$OGDI_VERSION"; then
+    pkg_cv_OGDI_VERSION="$OGDI_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"ogdi\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "ogdi") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OGDI_VERSION=`$PKG_CONFIG --modversion "ogdi" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22713,24 +23826,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "ogdi" 2>&1`
+                OGDI_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "ogdi" 2>&1`
         else
-	        OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "ogdi" 2>&1`
+                OGDI_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "ogdi" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$OGDI_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$OGDI_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	OGDI_CFLAGS=$pkg_cv_OGDI_CFLAGS
-	OGDI_LIBS=$pkg_cv_OGDI_LIBS
+        OGDI_CFLAGS=$pkg_cv_OGDI_CFLAGS
+        OGDI_LIBS=$pkg_cv_OGDI_LIBS
+        OGDI_VERSION=$pkg_cv_OGDI_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$OGDI_PREFIX"; then
@@ -22916,11 +24030,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$EXPAT_VERSION"; then
+    pkg_cv_EXPAT_VERSION="$EXPAT_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"expat\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "expat") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_EXPAT_VERSION=`$PKG_CONFIG --modversion "expat" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -22929,24 +24060,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        EXPAT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "expat" 2>&1`
+                EXPAT_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "expat" 2>&1`
         else
-	        EXPAT_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "expat" 2>&1`
+                EXPAT_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "expat" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$EXPAT_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$EXPAT_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	EXPAT_CFLAGS=$pkg_cv_EXPAT_CFLAGS
-	EXPAT_LIBS=$pkg_cv_EXPAT_LIBS
+        EXPAT_CFLAGS=$pkg_cv_EXPAT_CFLAGS
+        EXPAT_LIBS=$pkg_cv_EXPAT_LIBS
+        EXPAT_VERSION=$pkg_cv_EXPAT_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$EXPAT_PREFIX"; then
@@ -23132,11 +24264,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$OPENJPEG_VERSION"; then
+    pkg_cv_OPENJPEG_VERSION="$OPENJPEG_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"libopenjp2\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "libopenjp2") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_OPENJPEG_VERSION=`$PKG_CONFIG --modversion "libopenjp2" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -23145,24 +24294,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libopenjp2" 2>&1`
+                OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "libopenjp2" 2>&1`
         else
-	        OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libopenjp2" 2>&1`
+                OPENJPEG_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "libopenjp2" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$OPENJPEG_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$OPENJPEG_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	OPENJPEG_CFLAGS=$pkg_cv_OPENJPEG_CFLAGS
-	OPENJPEG_LIBS=$pkg_cv_OPENJPEG_LIBS
+        OPENJPEG_CFLAGS=$pkg_cv_OPENJPEG_CFLAGS
+        OPENJPEG_LIBS=$pkg_cv_OPENJPEG_LIBS
+        OPENJPEG_VERSION=$pkg_cv_OPENJPEG_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$OPENJPEG_PREFIX"; then
@@ -23716,11 +24866,28 @@ fi
  else
     pkg_failed=untried
 fi
+if test -n "$CARTO_VERSION"; then
+    pkg_cv_CARTO_VERSION="$CARTO_VERSION"
+ elif test -n "$PKG_CONFIG"; then
+    if test -n "$PKG_CONFIG" && \
+    { { $as_echo "$as_me:${as_lineno-$LINENO}: \$PKG_CONFIG --exists --print-errors \"carto\""; } >&5
+  ($PKG_CONFIG --exists --print-errors "carto") 2>&5
+  ac_status=$?
+  $as_echo "$as_me:${as_lineno-$LINENO}: \$? = $ac_status" >&5
+  test $ac_status = 0; }; then
+  pkg_cv_CARTO_VERSION=`$PKG_CONFIG --modversion "carto" 2>/dev/null`
+		      test "x$?" != "x0" && pkg_failed=yes
+else
+  pkg_failed=yes
+fi
+ else
+    pkg_failed=untried
+fi
 
 
 
 if test $pkg_failed = yes; then
-   	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
 
 if $PKG_CONFIG --atleast-pkgconfig-version 0.20; then
@@ -23729,24 +24896,25 @@ else
         _pkg_short_errors_supported=no
 fi
         if test $_pkg_short_errors_supported = yes; then
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
+                CARTO_PKG_ERRORS=`$PKG_CONFIG --short-errors --print-errors --cflags --libs "carto" 2>&1`
         else
-	        CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
+                CARTO_PKG_ERRORS=`$PKG_CONFIG --print-errors --cflags --libs "carto" 2>&1`
         fi
-	# Put the nasty error message in config.log where it belongs
-	echo "$CARTO_PKG_ERRORS" >&5
+        # Put the nasty error message in config.log where it belongs
+        echo "$CARTO_PKG_ERRORS" >&5
 
-	succeeded=no
+        succeeded=no
 elif test $pkg_failed = untried; then
-     	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
+        { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-	succeeded=no
+        succeeded=no
 else
-	CARTO_CFLAGS=$pkg_cv_CARTO_CFLAGS
-	CARTO_LIBS=$pkg_cv_CARTO_LIBS
+        CARTO_CFLAGS=$pkg_cv_CARTO_CFLAGS
+        CARTO_LIBS=$pkg_cv_CARTO_LIBS
+        CARTO_VERSION=$pkg_cv_CARTO_VERSION
         { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
-	succeeded=yes
+        succeeded=yes
 fi
   if test "$succeeded" = "yes"; then
      if test -z "$CARTO_PREFIX"; then

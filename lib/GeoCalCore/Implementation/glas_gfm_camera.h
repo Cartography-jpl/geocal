@@ -203,12 +203,9 @@ public:
 /// nonzero values here.
 //-----------------------------------------------------------------------
 
-  blitz::Array<double, 1> ppoff() const
-  {
-    blitz::Array<double, 1> res(3);
-    res = 0;
-    return res;
-  }
+  const blitz::Array<double, 1>& ppoff() const
+  { return ppoff_; }
+  void ppoff(const blitz::Array<double, 1>& V);
 
   blitz::Array<double, 1> angoff() const;
   void angoff(const blitz::Array<double, 1>& V);
@@ -380,6 +377,7 @@ private:
   blitz::Array<double, 1> first_line_block_, first_sample_block_,
 	  delta_line_block_, delta_sample_block_;
   std::vector<blitz::Array<double, 5> > field_alignment_block_;
+  blitz::Array<double, 1> ppoff_;
   virtual void notify_update()
   {
     notify_update_do(*this);
@@ -395,4 +393,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(GlasGfmCamera);
+GEOCAL_CLASS_VERSION(GlasGfmCamera, 1)
 #endif

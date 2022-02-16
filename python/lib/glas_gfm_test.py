@@ -357,17 +357,19 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
          quat_rot_x(-2.7 * deg_to_rad))
     igc_gfm.camera.frame_to_sc = q
     igc_gfm.refraction = RefractionMsp(igc_gfm.camera.band_wavelength)
+    if False:
+        igc_gfm.camera.ppoff = [0,0,99]
     f.image_segment[0].create_glas_gfm(igc_gfm)
     t = f.image_segment[0].glas_gfm.tre_csexrb
     pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
     t.ground_ref_point_x = pt.position[0]
     t.ground_ref_point_y = pt.position[1]
     t.ground_ref_point_z = pt.position[2]
-    if False:
+    if True:
         # Compare without aberration correction
         t.vel_aber_flag = 0
         igc_gfm.velocity_aberration = NoVelocityAberration()
-    if False:
+    if True:
         # Compare without refraction
         t.atm_refr_flag = 0
         igc_gfm.refraction = None

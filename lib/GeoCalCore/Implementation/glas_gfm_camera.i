@@ -54,7 +54,7 @@ public:
   %python_attribute_with_set(irepband, std::vector<std::string>);
   %python_attribute_with_set(isubcat, std::vector<std::string>);
   %python_attribute_with_set(focal_length_time, Time);
-  %python_attribute(ppoff, blitz::Array<double, 1>);
+  %python_attribute_with_set(ppoff, blitz::Array<double, 1>);
   %python_attribute_with_set(angoff, blitz::Array<double, 1>);
   %python_attribute_with_set(sample_number_first, double);
   %python_attribute_with_set(delta_sample_pair, double);

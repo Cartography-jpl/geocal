@@ -44,6 +44,8 @@ void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(delta_line_block)
     & GEOCAL_NVP_(delta_sample_block)
     & GEOCAL_NVP_(field_alignment_block);
+  if(version > 1)
+    ar & GEOCAL_NVP_(ppoff);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -423,13 +425,15 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
   delta_sample_pair_(Delta_sample),
   field_angle_type_(0),
   field_angle_interpolation_type_(1),
-  field_alignment_block_(9)
+  field_alignment_block_(9),
+  ppoff_(3)
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
   field_alignment_fit(Cam, delta_sample_pair_, Band);
+  ppoff_ = 0,0,0;
 }
 
 //-----------------------------------------------------------------------
@@ -459,19 +463,22 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
   delta_sample_pair_(Delta_sample),
   field_angle_type_(0),
   field_angle_interpolation_type_(1),
-  field_alignment_block_(9)
+  field_alignment_block_(9),
+  ppoff_(3)
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
   field_alignment_block(Cam, Delta_line, Delta_sample, Band);
+  ppoff_ = 0,0,0;
 }
 
 GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
 : nline_(Number_line),
   nsamp_(Number_sample),
-  field_alignment_block_(9)
+  field_alignment_block_(9),
+  ppoff_(3)
 {
   // These default values come from the RIP sample NITF file for Hyperion.
   focal_length_ = 1.41009182;
@@ -491,6 +498,7 @@ GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
   // Not used for sensor "S", but set a value so this isn't undefined
   field_angle_type_ = 0;
   field_angle_interpolation_type_ = 1;
+  ppoff_ = 0,0,0;
   init_model();
 }
 
@@ -565,6 +573,14 @@ void GlasGfmCamera::angoff(const blitz::Array<double, 1>& V)
   if(V.rows() != 3)
     throw Exception("angoff must be size 3");
   frame_to_sc(quat_rot("zyx", V(2), V(1), V(0)));
+  notify_update();
+}
+
+void GlasGfmCamera::ppoff(const blitz::Array<double, 1>& V)
+{
+  if(V.rows() != 3)
+    throw Exception("ppoff must be size 3");
+  ppoff_ = V;
   notify_update();
 }
 

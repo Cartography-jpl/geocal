@@ -117,12 +117,9 @@ if(have_pynitf):
         cam.isubcat = list(d.isubcat)
         cam.focal_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
         cam.focal_length = d.foc_length[0]
-        # We currently can't set position offset. We could add this if
-        # this becomes an issue, but the current geocal code doesn't
-        # support a position offset in a camera model
         if(d.ppoff_x != 0 or d.ppoff_y != 0 or d.ppoff_z != 0):
-            raise RuntimeError("We don't support a nonzero position offset")
-        #cam.ppoff = [d.ppoff_x, d.ppoff_y, d.ppoff_z]
+            print("Warning, we don't support a nonzero position offset")
+        cam.ppoff = [d.ppoff_x, d.ppoff_y, d.ppoff_z]
         cam.angoff = [d.angoff_x, d.angoff_y, d.angoff_z]
         if(d.sensor_type == "S"):
             cam.set_number_line(1)

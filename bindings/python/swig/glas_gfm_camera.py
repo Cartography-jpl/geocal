@@ -455,21 +455,22 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
       self._v_focal_length_time(value)
 
 
-    def _v_ppoff(self):
+    def _v_ppoff(self, *args):
         """
 
-        blitz::Array<double, 1> GeoCal::GlasGfmCamera::ppoff() const
-        Primary mirror offset.
+        void GlasGfmCamera::ppoff(const blitz::Array< double, 1 > &V)
 
-        In meters. Not sure about the coordinate system, we'll need to track
-        this down if we add support for nonzero values here. 
         """
-        return _glas_gfm_camera.GlasGfmCamera__v_ppoff(self)
+        return _glas_gfm_camera.GlasGfmCamera__v_ppoff(self, *args)
 
 
     @property
     def ppoff(self):
         return self._v_ppoff()
+
+    @ppoff.setter
+    def ppoff(self, value):
+      self._v_ppoff(value)
 
 
     def _v_angoff(self, *args):

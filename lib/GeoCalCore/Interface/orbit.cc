@@ -89,14 +89,17 @@ OrbitData::footprint(const Camera& C, const Dem& D,
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<CartesianFixed>
-OrbitData::surface_intersect(const Camera& C, 
-		  const FrameCoordinate& Fc,
-		  const Dem& D,
-	          double Resolution,
-		  int Band, double Max_height) const
+OrbitData::surface_intersect
+(const Camera& C, 
+ const FrameCoordinate& Fc,
+ const Dem& D,
+ double Resolution,
+ int Band, double Max_height,
+ bool Include_velocity_aberration) const
 {
-  return D.intersect(*position_cf(), cf_look_vector(C.sc_look_vector(Fc, Band)),
-		     Resolution, Max_height);
+  return D.intersect(*position_cf(),
+     cf_look_vector(C.sc_look_vector(Fc, Band), Include_velocity_aberration),
+     Resolution, Max_height);
 }
 
 
@@ -177,11 +180,13 @@ OrbitData::frame_coordinate_with_derivative
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<CartesianFixed> 
-OrbitData::reference_surface_intersect_approximate(const Camera& C, 
-   const FrameCoordinate& Fc, int Band, double Height_reference_surface) const
+OrbitData::reference_surface_intersect_approximate
+(const Camera& C, 
+ const FrameCoordinate& Fc, int Band, double Height_reference_surface,
+ bool Include_velocity_aberration) const
 {
   ScLookVector sl = C.sc_look_vector(Fc, Band);
-  CartesianFixedLookVector lv = cf_look_vector(sl);
+  CartesianFixedLookVector lv = cf_look_vector(sl, Include_velocity_aberration);
   return position_cf()->reference_surface_intersect_approximate(lv, 
          Height_reference_surface);
 }

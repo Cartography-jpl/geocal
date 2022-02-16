@@ -204,8 +204,9 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
         boost::shared_ptr< Camera > &Cam, const boost::shared_ptr< Dem > &D,
         const boost::shared_ptr< RasterImage > &Img, const std::string
         Title="", const boost::shared_ptr< Refraction >
-        &Ref=boost::shared_ptr< Refraction >(), double Resolution=30, int
-        Band=0, double Max_height=9000)
+        &Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<
+        VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >(),
+        double Resolution=30, int Band=0, double Max_height=9000)
         Constructor that takes an Orbit and a time.
 
         We populate this using the OrbitData from the orbit for that time.
@@ -331,6 +332,26 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
       self._v_refraction(value)
 
 
+    def _v_velocity_aberration(self, *args):
+        """
+
+        void GeoCal::OrbitDataImageGroundConnection::velocity_aberration(const boost::shared_ptr< VelocityAberration > &Vabb)
+        Set the VelocityAberration object we are using.
+
+        May be null if we are using the default first order approximation. 
+        """
+        return _orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_velocity_aberration(self, *args)
+
+
+    @property
+    def velocity_aberration(self):
+        return self._v_velocity_aberration()
+
+    @velocity_aberration.setter
+    def velocity_aberration(self, value):
+      self._v_velocity_aberration(value)
+
+
     def _v_band(self, *args):
         """
 
@@ -378,6 +399,7 @@ OrbitDataImageGroundConnection._v_orbit_data = new_instancemethod(_orbit_data_im
 OrbitDataImageGroundConnection._v_camera = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_camera, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_resolution = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_resolution, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_refraction = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_refraction, None, OrbitDataImageGroundConnection)
+OrbitDataImageGroundConnection._v_velocity_aberration = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_velocity_aberration, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_band = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_band, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection._v_max_height = new_instancemethod(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection__v_max_height, None, OrbitDataImageGroundConnection)
 OrbitDataImageGroundConnection_swigregister = _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_swigregister

@@ -276,18 +276,19 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
         return _orbit.OrbitData_frame_coordinate_with_derivative(self, Gc, C, Band)
 
 
-    def reference_surface_intersect_approximate(self, C, Fc, Band=0, Height_reference_surface=0.0):
+    def reference_surface_intersect_approximate(self, C, Fc, Band=0, Height_reference_surface=0.0, Include_velocity_aberration=True):
         """
 
         boost::shared_ptr< CartesianFixed > OrbitData::reference_surface_intersect_approximate(const Camera &C, const FrameCoordinate &Fc, int Band=0, double
-        Height_reference_surface=0.0) const
+        Height_reference_surface=0.0, bool Include_velocity_aberration=true)
+        const
         Return location on the reference surface that a particular frame
         coordinate is seen.
 
         This is approximate, in the same way
         CartesianFixed::reference_intersect_approximate is approximate. 
         """
-        return _orbit.OrbitData_reference_surface_intersect_approximate(self, C, Fc, Band, Height_reference_surface)
+        return _orbit.OrbitData_reference_surface_intersect_approximate(self, C, Fc, Band, Height_reference_surface, Include_velocity_aberration)
 
 
     def _v_position_ci(self):
@@ -330,18 +331,19 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
         return _orbit.OrbitData_footprint(self, C, D, Resolution, Band, Max_height)
 
 
-    def surface_intersect(self, C, Fc, D, Resolution=30, Band=0, Max_height=9000):
+    def surface_intersect(self, C, Fc, D, Resolution=30, Band=0, Max_height=9000, Include_velocity_aberration=True):
         """
 
         boost::shared_ptr< CartesianFixed > OrbitData::surface_intersect(const Camera &C, const FrameCoordinate &Fc, const Dem &D, double
-        Resolution=30, int Band=0, double Max_height=9000) const
+        Resolution=30, int Band=0, double Max_height=9000, bool
+        Include_velocity_aberration=true) const
         Calculate the intersection with the surface.
 
         Resolution is the dem postings in meters, you usually don't want this
         much more accurate than the intrinsic accuracy of the Dem (e.g., the
         Did is 30 meter, so resolution shouldn't be better than 30). 
         """
-        return _orbit.OrbitData_surface_intersect(self, C, Fc, D, Resolution, Band, Max_height)
+        return _orbit.OrbitData_surface_intersect(self, C, Fc, D, Resolution, Band, Max_height, Include_velocity_aberration)
 
 
     @property

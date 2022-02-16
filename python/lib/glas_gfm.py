@@ -1,7 +1,7 @@
 from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera, Ecr,
                          QuaternionCamera, FrameCoordinate,
-                         ImageCoordinate, RefractionMsp,
+                         ImageCoordinate, RefractionMsp, NoVelocityAberration,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
@@ -34,7 +34,8 @@ class GlasGfm(object):
         else:
             self.des = []
             
-    def create(iseg, igc, refraction_flag=None):
+    def create(iseg, igc, refraction_flag=None,
+               velocity_aberration_flag=None):
         '''Create a GlasGfm from a igc, and put into the given
         NitfImageSegment. We add DES data to the file f as needed.
         
@@ -56,7 +57,7 @@ class GlasGfm(object):
 
         We set the refraction flag based on if the igc has Refraction or
         not. Alternatively, you can pass the refraction_flag to force setting
-        this.
+        this. Similarly for velocity_aberration.
         '''
         res = GlasGfm(iseg, None)
         t = pynitf.TreCSEXRB()
@@ -102,7 +103,17 @@ class GlasGfm(object):
                 t.atm_refr_flag = 1
             else:
                 t.atm_refr_flag = 0
-        t.vel_aber_flag = 1
+        if(velocity_aberration_flag is not None):
+            t.vel_aber_flag = 1 if velocity_aberration_flag else 0
+        else:
+            # Right now IPI doesn't support velocity_aberration. We'll add that,
+            # but for now just check OrbitDataImageGroundConnection
+            if(isinstance(igc, OrbitDataImageGroundConnection) and
+               igc.velocity_aberration is not None and
+               isinstance(igc.velocity_aberration, NoVelocityAberration)):
+                t.vel_aber_flag = 0
+            else:
+                t.vel_aber_flag = 1
         res.tre_csexrb = t
         iseg.tre_list.append(res.tre_csexrb)
         f = iseg.nitf_file
@@ -161,7 +172,7 @@ class GlasGfm(object):
         cam = self.camera
         if(cam.sensor_type == "S"):
             # TODO Ipi doesn't support refraction yet. When it does,
-            # put this in
+            # put this in. Same with VelocityAberration
             tt = self.time_table
             ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
             igc = IpiImageGroundConnection(ipi, dem, None,
@@ -172,7 +183,8 @@ class GlasGfm(object):
             t = timestamp_to_geocal_time(self.tre_csexrb.base_timestamp) + self.tre_csexrb.dt_multiplier * 1e-9 * self.tre_csexrb.dt[0]
             igc = OrbitDataImageGroundConnection(orb, t, cam, dem, None,
                                                  self.iseg.iid1,
-                                                 self.refraction)
+                                                 self.refraction,
+                                                 self.velocity_aberration)
         else:
             raise RuntimeError("Unrecognized camera sensor type")
         # Add some useful metadata
@@ -204,6 +216,15 @@ class GlasGfm(object):
         if(self.tre_csexrb.atm_refr_flag == 0):
             return None
         return RefractionMsp(self.camera.band_wavelength)
+    
+    @property
+    def velocity_aberration(self):
+        '''Return the NoVelocityAberration object if we are not including
+        velocity_aberration, None otherwise'''
+        # TODO Way to include full VelocityAberration?
+        if(self.tre_csexrb.vel_aber_flag == 0):
+            return NoVelocityAberration()
+        return None
 
     @property
     def time_table(self):

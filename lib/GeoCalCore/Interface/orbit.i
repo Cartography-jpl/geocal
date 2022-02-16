@@ -64,7 +64,8 @@ public:
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0, 
-                  double Height_reference_surface = 0.0) const;
+		  double Height_reference_surface = 0.0,
+		  bool Include_velocity_aberration = true) const;
   %python_attribute(position_ci, virtual boost::shared_ptr<CartesianInertial>)
   %python_attribute(position_cf, virtual boost::shared_ptr<CartesianFixed>)
   std::vector<boost::shared_ptr<GroundCoordinate> >
@@ -76,7 +77,8 @@ public:
 		    const FrameCoordinate& Fc,
 		    const Dem& D,
 		    double Resolution = 30,
-		    int Band = 0, double Max_height = 9000) const;
+		    int Band = 0, double Max_height = 9000,
+		    bool Include_velocity_aberration = true) const;
   %extend {
     blitz::Array<double, 1> _velocity_ci() const {
       blitz::Array<double, 1> res(3);

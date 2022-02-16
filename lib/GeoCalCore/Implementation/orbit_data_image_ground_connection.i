@@ -12,6 +12,7 @@
 %import "dem.i"
 %import "raster_image.i"
 %import "refraction.i"
+%import "velocity_aberration.i"
 %geocal_shared_ptr(GeoCal::OrbitDataImageGroundConnection);
 namespace GeoCal {
 class OrbitDataImageGroundConnection: public ImageGroundConnection {
@@ -20,30 +21,25 @@ public:
 				 const boost::shared_ptr<Camera>& Cam, 
 				 const boost::shared_ptr<Dem>& D,
 				 const boost::shared_ptr<RasterImage>& Img,
-				 const std::string Title = "");
-  OrbitDataImageGroundConnection(const boost::shared_ptr<OrbitData>& Od,
-				 const boost::shared_ptr<Camera>& Cam, 
-				 const boost::shared_ptr<Dem>& D,
-				 const boost::shared_ptr<RasterImage>& Img,
-				 const std::string Title,
-				 const boost::shared_ptr<Refraction>& Ref,
+				 const std::string Title = "",
+				 const boost::shared_ptr<Refraction>&
+				 Ref = boost::shared_ptr<Refraction>(),
+				 const boost::shared_ptr<VelocityAberration>&
+				 Vabb = boost::shared_ptr<VelocityAberration>(),
 				 double Resolution=30, int Band=0, 
 				 double Max_height=9000);
   OrbitDataImageGroundConnection(const boost::shared_ptr<Orbit>& Orb,
-				 const Time& Tm,
-				 const boost::shared_ptr<Camera>& Cam, 
-				 const boost::shared_ptr<Dem>& D,
-				 const boost::shared_ptr<RasterImage>& Img,
-				 const std::string Title = "");
-  OrbitDataImageGroundConnection(const boost::shared_ptr<Orbit>& Orb,
-				 const Time& Tm,
-				 const boost::shared_ptr<Camera>& Cam, 
-				 const boost::shared_ptr<Dem>& D,
-				 const boost::shared_ptr<RasterImage>& Img,
-				 const std::string Title,
-				 const boost::shared_ptr<Refraction>& Ref,
-				 double Resolution=30, int Band=0, 
-				 double Max_height=9000);
+  				 const Time& Tm,
+  				 const boost::shared_ptr<Camera>& Cam, 
+  				 const boost::shared_ptr<Dem>& D,
+  				 const boost::shared_ptr<RasterImage>& Img,
+  				 const std::string Title = "",
+  				 const boost::shared_ptr<Refraction>&
+  				 Ref = boost::shared_ptr<Refraction>(),
+				 const boost::shared_ptr<VelocityAberration>&
+				 Vabb = boost::shared_ptr<VelocityAberration>(),
+  				 double Resolution=30, int Band=0, 
+  				 double Max_height=9000);
 
   virtual void
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& OUTPUT,
@@ -60,6 +56,7 @@ public:
   %python_attribute_with_set(camera,boost::shared_ptr<Camera>)
   %python_attribute_with_set(resolution, double)
   %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
+  %python_attribute_with_set(velocity_aberration, boost::shared_ptr<VelocityAberration>)
   %python_attribute_with_set(band, int)
   %python_attribute_with_set(max_height, double)
   %pickle_serialization();

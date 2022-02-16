@@ -70,6 +70,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_geometric_model)(void);
   INIT_TYPE INIT_FUNC(_raster_multifile)(void);
   INIT_TYPE INIT_FUNC(_refraction)(void);
+  INIT_TYPE INIT_FUNC(_velocity_aberration)(void);
   INIT_TYPE INIT_FUNC(_did_datum)(void);
   INIT_TYPE INIT_FUNC(_misc_array_function)(void);
   INIT_TYPE INIT_FUNC(_dem_map_info_offset)(void);
@@ -296,6 +297,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_geometric_model", INIT_FUNC(_geometric_model));
   INIT_MODULE(module, "_raster_multifile", INIT_FUNC(_raster_multifile));
   INIT_MODULE(module, "_refraction", INIT_FUNC(_refraction));
+  INIT_MODULE(module, "_velocity_aberration", INIT_FUNC(_velocity_aberration));
   INIT_MODULE(module, "_did_datum", INIT_FUNC(_did_datum));
   INIT_MODULE(module, "_misc_array_function", INIT_FUNC(_misc_array_function));
   INIT_MODULE(module, "_dem_map_info_offset", INIT_FUNC(_dem_map_info_offset));

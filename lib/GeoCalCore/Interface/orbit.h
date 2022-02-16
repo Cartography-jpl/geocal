@@ -82,11 +82,13 @@ public:
 		    const FrameCoordinate& Fc,
 		    const Dem& D,
 		    double Resolution = 30,
-		    int Band = 0, double Max_height = 9000) const;
+		    int Band = 0, double Max_height = 9000,
+		    bool Include_velocity_aberration = true) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0,
-		  double Height_reference_surface = 0.0) const;
+		  double Height_reference_surface = 0.0,
+            	  bool Include_velocity_aberration = true) const;
 
   double resolution_meter(const Camera& C, int Band = 0) const;
   double resolution_meter(const Camera& C, const FrameCoordinate& Fc, 

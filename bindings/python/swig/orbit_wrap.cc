@@ -10653,6 +10653,131 @@ SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate__SW
   GeoCal::FrameCoordinate *arg3 = 0 ;
   int arg4 ;
   double arg5 ;
+  bool arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  bool val6 ;
+  int ecode6 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > result;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "2"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        arg2 = const_cast< GeoCal::Camera * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_bool(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "OrbitData_reference_surface_intersect_approximate" "', argument " "6"" of type '" "bool""'");
+  } 
+  arg6 = static_cast< bool >(val6);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->reference_surface_intersect_approximate((GeoCal::Camera const &)*arg2,(GeoCal::FrameCoordinate const &)*arg3,arg4,arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::Camera *arg2 = 0 ;
+  GeoCal::FrameCoordinate *arg3 = 0 ;
+  int arg4 ;
+  double arg5 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
@@ -10763,7 +10888,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::Camera *arg2 = 0 ;
@@ -10872,7 +10997,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::Camera *arg2 = 0 ;
@@ -10975,25 +11100,29 @@ fail:
 
 SWIGINTERN PyObject *_wrap_OrbitData_reference_surface_intersect_approximate(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[6] = {
+  PyObject *argv[7] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_reference_surface_intersect_approximate",0,5,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_reference_surface_intersect_approximate",0,6,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
-    return _wrap_OrbitData_reference_surface_intersect_approximate__SWIG_2(self, argc, argv);
+    return _wrap_OrbitData_reference_surface_intersect_approximate__SWIG_3(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_OrbitData_reference_surface_intersect_approximate__SWIG_1(self, argc, argv);
+    return _wrap_OrbitData_reference_surface_intersect_approximate__SWIG_2(self, argc, argv);
   }
   if (argc == 5) {
+    return _wrap_OrbitData_reference_surface_intersect_approximate__SWIG_1(self, argc, argv);
+  }
+  if (argc == 6) {
     return _wrap_OrbitData_reference_surface_intersect_approximate__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitData_reference_surface_intersect_approximate'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitData::reference_surface_intersect_approximate(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,int,double,bool) const\n"
     "    GeoCal::OrbitData::reference_surface_intersect_approximate(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,int,double) const\n"
     "    GeoCal::OrbitData::reference_surface_intersect_approximate(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,int) const\n"
     "    GeoCal::OrbitData::reference_surface_intersect_approximate(GeoCal::Camera const &,GeoCal::FrameCoordinate const &) const\n");
@@ -11576,6 +11705,168 @@ SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_0(PyObject *SWIGUNU
   double arg5 ;
   int arg6 ;
   double arg7 ;
+  bool arg8 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > tempshared4 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  bool val8 ;
+  int ecode8 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed > result;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData_surface_intersect" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitData_surface_intersect" "', argument " "2"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_surface_intersect" "', argument " "2"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2);
+        arg2 = const_cast< GeoCal::Camera * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "OrbitData_surface_intersect" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_surface_intersect" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Dem *ptr;
+    res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], (void**)(&ptr), SWIGTYPE_p_GeoCal__Dem,  0 , &newmem);
+    if (SWIG_IsOK(res4)) {
+      arg4 = ptr;
+    } else {
+      res4 = SWIG_ConvertPtrAndOwn(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
+      if (!SWIG_IsOK(res4)) {
+        SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "OrbitData_surface_intersect" "', argument " "4"" of type '" "GeoCal::Dem const &""'");
+      }
+      if (!argp4) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitData_surface_intersect" "', argument " "4"" of type '" "GeoCal::Dem const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared4 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp4);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp4);
+        arg4 = const_cast< GeoCal::Dem * >(tempshared4.get());
+      } else {
+        arg4 = const_cast< GeoCal::Dem * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Dem > * >(argp4)->get());
+      }
+    }
+  }
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "OrbitData_surface_intersect" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "OrbitData_surface_intersect" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "OrbitData_surface_intersect" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  ecode8 = SWIG_AsVal_bool(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "OrbitData_surface_intersect" "', argument " "8"" of type '" "bool""'");
+  } 
+  arg8 = static_cast< bool >(val8);
+  {
+    try {
+      result = ((GeoCal::OrbitData const *)arg1)->surface_intersect((GeoCal::Camera const &)*arg2,(GeoCal::FrameCoordinate const &)*arg3,(GeoCal::Dem const &)*arg4,arg5,arg6,arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  GeoCal::Camera *arg2 = 0 ;
+  GeoCal::FrameCoordinate *arg3 = 0 ;
+  GeoCal::Dem *arg4 = 0 ;
+  double arg5 ;
+  int arg6 ;
+  double arg7 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
@@ -11721,7 +12012,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::Camera *arg2 = 0 ;
@@ -11867,7 +12158,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::Camera *arg2 = 0 ;
@@ -12005,7 +12296,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
   GeoCal::Camera *arg2 = 0 ;
@@ -12137,28 +12428,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_OrbitData_surface_intersect(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_surface_intersect",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OrbitData_surface_intersect",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 4) {
-    return _wrap_OrbitData_surface_intersect__SWIG_3(self, argc, argv);
+    return _wrap_OrbitData_surface_intersect__SWIG_4(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_OrbitData_surface_intersect__SWIG_2(self, argc, argv);
+    return _wrap_OrbitData_surface_intersect__SWIG_3(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_OrbitData_surface_intersect__SWIG_1(self, argc, argv);
+    return _wrap_OrbitData_surface_intersect__SWIG_2(self, argc, argv);
   }
   if (argc == 7) {
+    return _wrap_OrbitData_surface_intersect__SWIG_1(self, argc, argv);
+  }
+  if (argc == 8) {
     return _wrap_OrbitData_surface_intersect__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OrbitData_surface_intersect'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OrbitData::surface_intersect(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,GeoCal::Dem const &,double,int,double,bool) const\n"
     "    GeoCal::OrbitData::surface_intersect(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,GeoCal::Dem const &,double,int,double) const\n"
     "    GeoCal::OrbitData::surface_intersect(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,GeoCal::Dem const &,double,int) const\n"
     "    GeoCal::OrbitData::surface_intersect(GeoCal::Camera const &,GeoCal::FrameCoordinate const &,GeoCal::Dem const &,double) const\n"
@@ -23886,7 +24181,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData_reference_surface_intersect_approximate", _wrap_OrbitData_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"
 		"boost::shared_ptr< CartesianFixed > OrbitData::reference_surface_intersect_approximate(const Camera &C, const FrameCoordinate &Fc, int Band=0, double\n"
-		"Height_reference_surface=0.0) const\n"
+		"Height_reference_surface=0.0, bool Include_velocity_aberration=true)\n"
+		"const\n"
 		"Return location on the reference surface that a particular frame\n"
 		"coordinate is seen.\n"
 		"\n"
@@ -23914,7 +24210,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData_surface_intersect", _wrap_OrbitData_surface_intersect, METH_VARARGS, (char *)"\n"
 		"\n"
 		"boost::shared_ptr< CartesianFixed > OrbitData::surface_intersect(const Camera &C, const FrameCoordinate &Fc, const Dem &D, double\n"
-		"Resolution=30, int Band=0, double Max_height=9000) const\n"
+		"Resolution=30, int Band=0, double Max_height=9000, bool\n"
+		"Include_velocity_aberration=true) const\n"
 		"Calculate the intersection with the surface.\n"
 		"\n"
 		"Resolution is the dem postings in meters, you usually don't want this\n"

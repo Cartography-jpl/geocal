@@ -14,6 +14,9 @@ void OrbitDataImageGroundConnection::serialize(Archive & ar, const unsigned int 
     & GEOCAL_NVP(res) & GEOCAL_NVP(b) & GEOCAL_NVP(max_h);
   if(orb)
     orb->add_observer(*this);
+  if(version >=1)
+    // Older versions didn't have this.
+    ar & GEOCAL_NVP_(velocity_aberration);
 }
 
 GEOCAL_IMPLEMENT(OrbitDataImageGroundConnection);

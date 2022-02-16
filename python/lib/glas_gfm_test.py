@@ -366,15 +366,13 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     if False:
         # Compare without aberration correction
         t.vel_aber_flag = 0
-        igc_gfm.orbit_data.aberration_correction = QuaternionOrbitData.NO_CORRECTION
-    if True:
+        igc_gfm.velocity_aberration = NoVelocityAberration()
+    if False:
         # Compare without refraction
         t.atm_refr_flag = 0
         igc_gfm.refraction = None
-    print(f)
     f.write("gfm_test.ntf")
     f2 = NitfFile("gfm_test.ntf")
-    print(f2)
     igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
     igc3 = f2.image_segment[0].glas_gfm.igc()
     write_shelve("igc_gfm.xml", igc_gfm)
@@ -383,8 +381,7 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     max_diff2 = -1e8
     max_diff3 = -1e8
     ic = ImageCoordinate(100, 50)
-    print(igc2.ground_coordinate(ic).convert_to_cf().position)
-    print(distance(igc2.ground_coordinate(ic), igc3.ground_coordinate(ic)))
+    print("Single point: ", distance(igc2.ground_coordinate(ic), igc3.ground_coordinate(ic)))
     for i in range(0, igc_gfm.number_line, 20):
         for j in range (0, igc_gfm.number_sample, 20):
             ic = ImageCoordinate(i, j)
@@ -397,16 +394,16 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
             max_diff1 = max(d1, max_diff1)
             max_diff2 = max(d2, max_diff2)
             max_diff3 = max(d3, max_diff3)
-    # Difference is noise (5e-5 m difference for diff3) when we turn
-    # off aberration correction. We see 2m difference for aberration, which
-    # we still need to track down. Note that diff1 and diff2 is larger, like
-    # 0.20 m. This is due to roundoff when we write out the NITF file (mostly
-    # in the camera orientation angles angoff). We use to get a extra digit
-    # or 2 of precision by using float_to_fixed_width from pynitf, but
-    # we got complaints from our partners. So we just live with the inaccuracy.
-    print(max_diff1)
-    print(max_diff2)
-    print(max_diff3)
+    # diff1 is the difference between original glas model, before saving
+    # to disk and MSP. This is a combination of MSP differences and 
+    # roundoff from saving to the NITF file format
+    # (mostly due to camera original angles in angoff being truncated).
+    # diff2 is difference with our glas model in memory, and on disk, this
+    # is exactly the error from roundoff. diff3 if difference between
+    # our code and MSP, and it what is different with our calculations.
+    print("max_diff1: ", max_diff1)
+    print("max_diff2: ", max_diff2)
+    print("max_diff3: ", max_diff3)
     assert max_diff1 < 2.0
     
 @long_test

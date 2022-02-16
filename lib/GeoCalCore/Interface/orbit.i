@@ -128,6 +128,31 @@ def position_ci_with_derivative(self):
 def position_cf_with_derivative(self):
     return self._position_cf_with_derivative()
   }
+  %extend {
+    blitz::Array<double, 1> _velocity_cf() const {
+      blitz::Array<double, 1> res(3);
+      boost::array<double, 3> v = $self->velocity_cf();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return res;
+    }
+    GeoCal::ArrayAd<double, 1> _velocity_cf_with_derivative() const {
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_cf_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
+  }
+  %pythoncode {
+@property
+def velocity_cf(self):
+    return self._velocity_cf()
+
+@property
+def velocity_cf_with_derivative(self):
+    return self._velocity_cf_with_derivative()
+  }
   %python_attribute(time, virtual Time)
   %python_attribute(time_with_derivative, virtual TimeWithDerivative)
   std::string print_to_string() const;
@@ -186,31 +211,6 @@ public:
   %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_cf_with_derivative, boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute(from_cf, bool)
-  %extend {
-    blitz::Array<double, 1> _velocity_cf() const {
-      blitz::Array<double, 1> res(3);
-      boost::array<double, 3> v = $self->velocity_cf();
-      for(int i = 0; i < 3; ++i)
-	res(i) = v[i];
-      return res;
-    }
-    GeoCal::ArrayAd<double, 1> _velocity_cf_with_derivative() const {
-      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
-      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_cf_with_derivative();
-      for(int i = 0; i < 3; ++i)
-	res(i) = v[i];
-      return GeoCal::ArrayAd<double, 1>(res);
-    }
-  }
-  %pythoncode {
-@property
-def velocity_cf(self):
-    return self._velocity_cf()
-
-@property
-def velocity_cf_with_derivative(self):
-    return self._velocity_cf_with_derivative()
-  }
   %pickle_serialization();
 };
 

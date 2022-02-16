@@ -180,9 +180,8 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+import geocal_swig.velocity_aberration
 import geocal_swig.generic_object
-import geocal_swig.observer
-import geocal_swig.with_parameter
 class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
     """
 
@@ -190,15 +189,6 @@ class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
     first order correction we do in QuaternionOrbitData.
 
     This matches what the MSP library does.
-
-    We may change this interface a bit an introduce other implementation,
-    this particular class is written to give a reference to compare other
-    things to and isn't written for speed at all. We may introduce a base
-    class like we have for Refraction, but since we don't really know what
-    interface we want here we'll have this as a stand alone class for now.
-    We may be able to combine this with Refraction into a some sort of
-    "PointingCorrection" class or something like that, but again for now
-    we'll keep these separate.
 
     C++ includes: velocity_aberration_exact.h 
     """
@@ -214,34 +204,36 @@ class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
         """
         _velocity_aberration_exact.VelocityAberrationExact_swiginit(self, _velocity_aberration_exact.new_VelocityAberrationExact())
 
-    def aberration_calc(self, Od, Sl, Gc_before_correction, Forward_calc=True):
+    def aberration_calc(self, Spacecraft_pos, Gc_uncorrected, Velocity_cf, Forward_calc=True):
         """
 
-        CartesianFixedLookVector VelocityAberrationExact::aberration_calc(const QuaternionOrbitData &Od, const ScLookVector &Sl, const
-        GroundCoordinate &Gc_before_correction, bool Forward_calc=true) const
+        CartesianFixedLookVector VelocityAberrationExact::aberration_calc(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        &Gc_uncorrected, const boost::array< double, 3 > &Velocity_cf, bool
+        Forward_calc=true) const
 
         """
-        return _velocity_aberration_exact.VelocityAberrationExact_aberration_calc(self, Od, Sl, Gc_before_correction, Forward_calc)
+        return _velocity_aberration_exact.VelocityAberrationExact_aberration_calc(self, Spacecraft_pos, Gc_uncorrected, Velocity_cf, Forward_calc)
 
 
-    def aberration_apply(self, Od, Sl, Gc_approx_aberration):
+    def velocity_aberration_apply(self, Spacecraft_pos, Gc_no_aberration, Velocity_cf):
         """
 
-        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_apply(const QuaternionOrbitData &Od, const ScLookVector &Sl, const
-        GroundCoordinate &Gc_approx_aberration) const
+        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::velocity_aberration_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        &Gc_no_aberration, const boost::array< double, 3 > &Velocity_cf) const
 
         """
-        return _velocity_aberration_exact.VelocityAberrationExact_aberration_apply(self, Od, Sl, Gc_approx_aberration)
+        return _velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_apply(self, Spacecraft_pos, Gc_no_aberration, Velocity_cf)
 
 
-    def aberration_reverse(self, Od, Sl, Gc_full_aberration):
+    def velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberration, Velocity_cf):
         """
 
-        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::aberration_reverse(const QuaternionOrbitData &Od, const ScLookVector &Sl, const
-        GroundCoordinate &Gc_full_aberration) const
+        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::velocity_aberration_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
+        &Gc_with_aberration, const boost::array< double, 3 > &Velocity_cf)
+        const
 
         """
-        return _velocity_aberration_exact.VelocityAberrationExact_aberration_reverse(self, Od, Sl, Gc_full_aberration)
+        return _velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberration, Velocity_cf)
 
 
     def __reduce__(self):
@@ -249,8 +241,8 @@ class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
 
     __swig_destroy__ = _velocity_aberration_exact.delete_VelocityAberrationExact
 VelocityAberrationExact.aberration_calc = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_aberration_calc, None, VelocityAberrationExact)
-VelocityAberrationExact.aberration_apply = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_aberration_apply, None, VelocityAberrationExact)
-VelocityAberrationExact.aberration_reverse = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_aberration_reverse, None, VelocityAberrationExact)
+VelocityAberrationExact.velocity_aberration_apply = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_apply, None, VelocityAberrationExact)
+VelocityAberrationExact.velocity_aberration_reverse = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_reverse, None, VelocityAberrationExact)
 VelocityAberrationExact_swigregister = _velocity_aberration_exact.VelocityAberrationExact_swigregister
 VelocityAberrationExact_swigregister(VelocityAberrationExact)
 

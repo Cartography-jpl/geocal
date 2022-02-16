@@ -6037,6 +6037,20 @@ SWIGINTERN GeoCal::ArrayAd< double,1 > GeoCal_OrbitData__position_cf_with_deriva
 	res(i) = v[i];
       return GeoCal::ArrayAd<double, 1>(res);
     }
+SWIGINTERN blitz::Array< double,1 > GeoCal_OrbitData__velocity_cf(GeoCal::OrbitData const *self){
+      blitz::Array<double, 1> res(3);
+      boost::array<double, 3> v = self->velocity_cf();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return res;
+    }
+SWIGINTERN GeoCal::ArrayAd< double,1 > GeoCal_OrbitData__velocity_cf_with_derivative(GeoCal::OrbitData const *self){
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = self->velocity_cf_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
 
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
@@ -6099,20 +6113,6 @@ struct SWIG_null_deleter {
 
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
-SWIGINTERN blitz::Array< double,1 > GeoCal_QuaternionOrbitData__velocity_cf(GeoCal::QuaternionOrbitData const *self){
-      blitz::Array<double, 1> res(3);
-      boost::array<double, 3> v = self->velocity_cf();
-      for(int i = 0; i < 3; ++i)
-	res(i) = v[i];
-      return res;
-    }
-SWIGINTERN GeoCal::ArrayAd< double,1 > GeoCal_QuaternionOrbitData__velocity_cf_with_derivative(GeoCal::QuaternionOrbitData const *self){
-      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
-      boost::array<GeoCal::AutoDerivative<double>, 3> v = self->velocity_cf_with_derivative();
-      for(int i = 0; i < 3; ++i)
-	res(i) = v[i];
-      return GeoCal::ArrayAd<double, 1>(res);
-    }
 
 SWIGINTERN int
 SWIG_AsCharPtrAndSize(PyObject *obj, char** cptr, size_t* psize, int *alloc)
@@ -12664,6 +12664,116 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitData__velocity_cf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData__velocity_cf" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = GeoCal_OrbitData__velocity_cf((GeoCal::OrbitData const *)arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitData__velocity_cf_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitData const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< GeoCal::ArrayAd< double,1 > > result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitData__velocity_cf_with_derivative" "', argument " "1"" of type '" "GeoCal::OrbitData const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitData * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = GeoCal_OrbitData__velocity_cf_with_derivative((GeoCal::OrbitData const *)arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_OrbitData__v_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitData *arg1 = (GeoCal::OrbitData *) 0 ;
@@ -14888,116 +14998,6 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData__v_from_cf(PyObject *SWIGUNUSEDPA
     }
   }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__velocity_cf(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  SwigValueWrapper< blitz::Array< double,1 > > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__velocity_cf" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = GeoCal_QuaternionOrbitData__velocity_cf((GeoCal::QuaternionOrbitData const *)arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[1], stride[1];
-    for(int i = 0; i < 1; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(double);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_QuaternionOrbitData__velocity_cf_with_derivative(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionOrbitData *arg1 = (GeoCal::QuaternionOrbitData *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > tempshared1 ;
-  boost::shared_ptr< GeoCal::QuaternionOrbitData const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  SwigValueWrapper< GeoCal::ArrayAd< double,1 > > result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionOrbitData_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "QuaternionOrbitData__velocity_cf_with_derivative" "', argument " "1"" of type '" "GeoCal::QuaternionOrbitData const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionOrbitData > * >(argp1);
-      arg1 = const_cast< GeoCal::QuaternionOrbitData * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = GeoCal_QuaternionOrbitData__velocity_cf_with_derivative((GeoCal::QuaternionOrbitData const *)arg1);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
   return resultobj;
 fail:
   return NULL;
@@ -24222,6 +24222,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"OrbitData__velocity_ci_with_derivative", (PyCFunction)_wrap_OrbitData__velocity_ci_with_derivative, METH_O, NULL},
 	 { (char *)"OrbitData__position_ci_with_derivative", (PyCFunction)_wrap_OrbitData__position_ci_with_derivative, METH_O, NULL},
 	 { (char *)"OrbitData__position_cf_with_derivative", (PyCFunction)_wrap_OrbitData__position_cf_with_derivative, METH_O, NULL},
+	 { (char *)"OrbitData__velocity_cf", (PyCFunction)_wrap_OrbitData__velocity_cf, METH_O, NULL},
+	 { (char *)"OrbitData__velocity_cf_with_derivative", (PyCFunction)_wrap_OrbitData__velocity_cf_with_derivative, METH_O, NULL},
 	 { (char *)"OrbitData__v_time", (PyCFunction)_wrap_OrbitData__v_time, METH_O, (char *)"\n"
 		"\n"
 		"virtual Time GeoCal::OrbitData::time() const =0\n"
@@ -24295,8 +24297,6 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"It probably isn't of interest to anything else. \n"
 		""},
-	 { (char *)"QuaternionOrbitData__velocity_cf", (PyCFunction)_wrap_QuaternionOrbitData__velocity_cf, METH_O, NULL},
-	 { (char *)"QuaternionOrbitData__velocity_cf_with_derivative", (PyCFunction)_wrap_QuaternionOrbitData__velocity_cf_with_derivative, METH_O, NULL},
 	 { (char *)"delete_QuaternionOrbitData", (PyCFunction)_wrap_delete_QuaternionOrbitData, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()\n"

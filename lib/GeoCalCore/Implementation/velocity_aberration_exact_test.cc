@@ -32,12 +32,8 @@ BOOST_AUTO_TEST_CASE(velocity_aberration_exact)
   if(true)
     std::cerr << "Initial distance: " << initial_distance << "\n";
 
-  VelocityAberrationExact vabb;
-  auto pos = igc->orbit_data()->position_cf();
-  auto slv = igc->camera()->sc_look_vector(FrameCoordinate(100, 50), 0);
-  auto clv = vabb.aberration_apply(*boost::dynamic_pointer_cast<QuaternionOrbitData>(igc->orbit_data()), slv, *igc->ground_coordinate(ic));
-  auto pt_calc = igc->dem().intersect(*pos, clv, 30);
-  double corrected_distance = distance(*pt_calc, pt_msp);
+  igc->velocity_aberration(boost::make_shared<VelocityAberrationExact>());
+  double corrected_distance = distance(*igc->ground_coordinate(ic), pt_msp);
   if(true)
     std::cerr << "corrected distance: " << corrected_distance << "\n";
 }

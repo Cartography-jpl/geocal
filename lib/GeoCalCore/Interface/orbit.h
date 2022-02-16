@@ -180,6 +180,21 @@ public:
   velocity_ci_with_derivative() const = 0;
 
 //-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianFixed coordinate system as position (e.g., ECR).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<double, 3> velocity_cf() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianFixed coordinate system as position (e.g., ECI).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_cf_with_derivative() const = 0;
+  
+//-----------------------------------------------------------------------
 /// Return Time of OrbitData.
 //-----------------------------------------------------------------------
   
@@ -356,7 +371,7 @@ public:
   virtual boost::array<double, 3> velocity_ci() const;
   virtual boost::array<AutoDerivative<double>, 3> 
   velocity_ci_with_derivative() const;
-  boost::array<double, 3> velocity_cf() const;
+  virtual boost::array<double, 3> velocity_cf() const;
   virtual boost::array<AutoDerivative<double>, 3> 
   velocity_cf_with_derivative() const;
 

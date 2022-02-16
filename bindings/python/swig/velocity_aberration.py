@@ -199,7 +199,7 @@ class VelocityAberration(geocal_swig.generic_object.GenericObject):
         """
 
         virtual CartesianFixedLookVector GeoCal::VelocityAberration::velocity_aberration_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
-        &Gc_no_aberation, const boost::array< double, 3 > &Velocity_cf) const
+        &Gc_no_aberration, const boost::array< double, 3 > &Velocity_cf) const
         =0
         Apply a velocity aberration correction, taking a ground coordinate w/o
         aberration.
@@ -209,15 +209,15 @@ class VelocityAberration(geocal_swig.generic_object.GenericObject):
         return _velocity_aberration.VelocityAberration_velocity_aberration_apply(self, Spacecraft_pos, Gc_no_aberration, Velocity_cf)
 
 
-    def velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberation, Velocity_cf):
+    def velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberration, Velocity_cf):
         """
 
         virtual CartesianFixedLookVector GeoCal::VelocityAberration::velocity_aberration_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
-        &Gc_with_aberation, const boost::array< double, 3 > &Velocity_cf)
+        &Gc_with_aberration, const boost::array< double, 3 > &Velocity_cf)
         const =0
         Reverse of velocity_aberration_apply. 
         """
-        return _velocity_aberration.VelocityAberration_velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberation, Velocity_cf)
+        return _velocity_aberration.VelocityAberration_velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberration, Velocity_cf)
 
 
     def __reduce__(self):
@@ -253,12 +253,45 @@ class NoVelocityAberration(VelocityAberration):
 
         """
         _velocity_aberration.NoVelocityAberration_swiginit(self, _velocity_aberration.new_NoVelocityAberration())
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _velocity_aberration.delete_NoVelocityAberration
 NoVelocityAberration_swigregister = _velocity_aberration.NoVelocityAberration_swigregister
 NoVelocityAberration_swigregister(NoVelocityAberration)
 
+class VelocityAberrationFirstOrder(VelocityAberration):
+    """
 
-__all__ = ["VelocityAberration","NoVelocityAberration"]
+    Implementation that just duplicates the first order velocity
+    aberration that is the default for OrbitData.
+
+    We have this in the same VelocityAberration framework.
+
+    C++ includes: velocity_aberration.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self):
+        """
+
+        GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder()
+
+        """
+        _velocity_aberration.VelocityAberrationFirstOrder_swiginit(self, _velocity_aberration.new_VelocityAberrationFirstOrder())
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _velocity_aberration.delete_VelocityAberrationFirstOrder
+VelocityAberrationFirstOrder_swigregister = _velocity_aberration.VelocityAberrationFirstOrder_swigregister
+VelocityAberrationFirstOrder_swigregister(VelocityAberrationFirstOrder)
+
+
+__all__ = ["VelocityAberration","NoVelocityAberration","VelocityAberrationFirstOrder"]
 
 
 

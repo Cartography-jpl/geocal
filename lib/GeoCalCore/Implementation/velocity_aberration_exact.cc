@@ -10,30 +10,28 @@ template<class Archive>
 void VelocityAberrationExact::serialize
 (Archive & ar, const unsigned int UNUSED(version))
 {
-  GEOCAL_GENERIC_BASE(VelocityAberrationExact);
-  // Dummy placeholder, just so we can have derived classes call
-  // serialization of this. We use to have derived classes "know"
-  // that the base class doesn't have anything. But seems better to
-  // *always* have base classes do something, so we can add stuff in
-  // the future w/o breaking a bunch of code.
-  std::string p = "empty";
-  ar & GEOCAL_NVP2("placeholder", p);
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
 }
 
 GEOCAL_IMPLEMENT(VelocityAberrationExact);
 #endif
 
 CartesianFixedLookVector VelocityAberrationExact::aberration_calc
-(const QuaternionOrbitData& Od,
- const ScLookVector& Sl,
- const GroundCoordinate& Gc_before_correction,
+(const GroundCoordinate& Spacecraft_pos,
+ const GroundCoordinate& Gc_uncorrected,
+ const boost::array<double, 3> &Velocity_cf,
  bool Forward_calc) const
 {
-  return Od.cf_look_vector(Sl);
+  boost::math::quaternion<double> vel_cf(0, Velocity_cf[0], Velocity_cf[1],
+					 Velocity_cf[2]);
+  CartesianFixedLookVector lv(Spacecraft_pos, Gc_uncorrected);
+  auto cf = lv.look_quaternion();
+  double k = lv.length() / Constant::speed_of_light;
+  if(Forward_calc)
+    cf -= k * vel_cf;
+  else
+    cf += k * vel_cf;
+  return CartesianFixedLookVector(cf);
 }
 
-void VelocityAberrationExact::print(std::ostream& Os) const
-{
-  Os << "VelocityAberrationExact";
-}
 

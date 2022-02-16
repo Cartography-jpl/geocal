@@ -103,6 +103,12 @@ public:
     boost::shared_ptr<GroundCoordinate> gc_uncorr = 
       od->surface_intersect(*cam, FrameCoordinate(Ic.line, Ic.sample),
 			    D, res, b, max_h, include_aberration);
+    if(velocity_aberration_) {
+      CartesianFixedLookVector lv_vabb = velocity_aberration_->
+	velocity_aberration_apply(*od->position_cf(), *gc_uncorr,
+				  od->velocity_cf());
+      gc_uncorr = D.intersect(*od->position_cf(), lv_vabb, res, max_h);
+    }
     if(!refraction_)
       return gc_uncorr;
     CartesianFixedLookVector lv = 
@@ -116,6 +122,12 @@ public:
     boost::shared_ptr<GroundCoordinate> gc_uncorr = 
       od->reference_surface_intersect_approximate
       (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H, include_aberration);
+    if(velocity_aberration_) {
+      CartesianFixedLookVector lv_vabb = velocity_aberration_->
+	velocity_aberration_apply(*od->position_cf(), *gc_uncorr,
+				  od->velocity_cf());
+      gc_uncorr = od->position_cf()->reference_surface_intersect_approximate(lv_vabb, H);
+    }
     if(!refraction_)
       return gc_uncorr;
     CartesianFixedLookVector lv = 

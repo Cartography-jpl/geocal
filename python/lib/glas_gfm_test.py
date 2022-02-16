@@ -365,7 +365,8 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
     t.ground_ref_point_x = pt.position[0]
     t.ground_ref_point_y = pt.position[1]
     t.ground_ref_point_z = pt.position[2]
-    if True:
+    igc_gfm.velocity_aberration = VelocityAberrationFirstOrder()
+    if False:
         # Compare without aberration correction
         t.vel_aber_flag = 0
         igc_gfm.velocity_aberration = NoVelocityAberration()

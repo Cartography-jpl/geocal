@@ -363,6 +363,15 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
         return self._position_cf_with_derivative()
 
 
+    @property
+    def velocity_cf(self):
+        return self._velocity_cf()
+
+    @property
+    def velocity_cf_with_derivative(self):
+        return self._velocity_cf_with_derivative()
+
+
     def _v_time(self):
         """
 
@@ -423,6 +432,8 @@ OrbitData._velocity_ci = new_instancemethod(_orbit.OrbitData__velocity_ci, None,
 OrbitData._velocity_ci_with_derivative = new_instancemethod(_orbit.OrbitData__velocity_ci_with_derivative, None, OrbitData)
 OrbitData._position_ci_with_derivative = new_instancemethod(_orbit.OrbitData__position_ci_with_derivative, None, OrbitData)
 OrbitData._position_cf_with_derivative = new_instancemethod(_orbit.OrbitData__position_cf_with_derivative, None, OrbitData)
+OrbitData._velocity_cf = new_instancemethod(_orbit.OrbitData__velocity_cf, None, OrbitData)
+OrbitData._velocity_cf_with_derivative = new_instancemethod(_orbit.OrbitData__velocity_cf_with_derivative, None, OrbitData)
 OrbitData._v_time = new_instancemethod(_orbit.OrbitData__v_time, None, OrbitData)
 OrbitData._v_time_with_derivative = new_instancemethod(_orbit.OrbitData__v_time_with_derivative, None, OrbitData)
 OrbitData.__str__ = new_instancemethod(_orbit.OrbitData___str__, None, OrbitData)
@@ -606,15 +617,6 @@ class QuaternionOrbitData(OrbitData):
         return self._v_from_cf()
 
 
-    @property
-    def velocity_cf(self):
-        return self._velocity_cf()
-
-    @property
-    def velocity_cf_with_derivative(self):
-        return self._velocity_cf_with_derivative()
-
-
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -625,8 +627,6 @@ QuaternionOrbitData._v_sc_to_ci_with_derivative = new_instancemethod(_orbit.Quat
 QuaternionOrbitData._v_sc_to_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf, None, QuaternionOrbitData)
 QuaternionOrbitData._v_sc_to_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__v_sc_to_cf_with_derivative, None, QuaternionOrbitData)
 QuaternionOrbitData._v_from_cf = new_instancemethod(_orbit.QuaternionOrbitData__v_from_cf, None, QuaternionOrbitData)
-QuaternionOrbitData._velocity_cf = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf, None, QuaternionOrbitData)
-QuaternionOrbitData._velocity_cf_with_derivative = new_instancemethod(_orbit.QuaternionOrbitData__velocity_cf_with_derivative, None, QuaternionOrbitData)
 QuaternionOrbitData_swigregister = _orbit.QuaternionOrbitData_swigregister
 QuaternionOrbitData_swigregister(QuaternionOrbitData)
 

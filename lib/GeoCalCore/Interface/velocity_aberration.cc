@@ -27,6 +27,14 @@ void NoVelocityAberration::serialize
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
 }
 
+template<class Archive>
+void VelocityAberrationFirstOrder::serialize
+(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VelocityAberration);
+}
+
 GEOCAL_IMPLEMENT(VelocityAberration);
 GEOCAL_IMPLEMENT(NoVelocityAberration);
+GEOCAL_IMPLEMENT(VelocityAberrationFirstOrder);
 #endif

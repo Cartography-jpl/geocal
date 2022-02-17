@@ -6672,8 +6672,8 @@ SWIGINTERN PyObject *_wrap_VelocityAberration_velocity_aberration_apply(PyObject
   boost::array< double,3 > *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VelocityAberration > tempshared1 ;
-  boost::shared_ptr< GeoCal::VelocityAberration > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::VelocityAberration const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VelocityAberration const > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
@@ -6690,14 +6690,14 @@ SWIGINTERN PyObject *_wrap_VelocityAberration_velocity_aberration_apply(PyObject
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberration_velocity_aberration_apply" "', argument " "1"" of type '" "GeoCal::VelocityAberration *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberration_velocity_aberration_apply" "', argument " "1"" of type '" "GeoCal::VelocityAberration const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VelocityAberration > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VelocityAberration > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberration > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberration > * >(argp1);
       arg1 = const_cast< GeoCal::VelocityAberration * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VelocityAberration > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberration > * >(argp1);
       arg1 = const_cast< GeoCal::VelocityAberration * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
@@ -6760,7 +6760,7 @@ SWIGINTERN PyObject *_wrap_VelocityAberration_velocity_aberration_apply(PyObject
   }
   {
     try {
-      result = (arg1)->velocity_aberration_apply((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
+      result = ((GeoCal::VelocityAberration const *)arg1)->velocity_aberration_apply((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {

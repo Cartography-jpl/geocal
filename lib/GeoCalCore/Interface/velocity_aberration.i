@@ -18,12 +18,12 @@ public:
   VelocityAberration();
   virtual CartesianFixedLookVector
   velocity_aberration_apply(const GroundCoordinate& Spacecraft_pos,
-			    const GroundCoordinate& Gc_no_aberration,
-			    const boost::array<double, 3> &Velocity_cf) = 0;
+		    const GroundCoordinate& Gc_no_aberration,
+		    const boost::array<double, 3> &Velocity_cf) const = 0;
   virtual CartesianFixedLookVector
   velocity_aberration_reverse(const GroundCoordinate& Spacecraft_pos,
 		      const GroundCoordinate& Gc_with_aberration,
-		      const boost::array<double, 3> &Velocity_cf) const = 0;
+		      const boost::array<double, 3> &Velocity_cf) const;
   std::string print_to_string() const;
   %pickle_serialization()
 };
@@ -34,11 +34,7 @@ public:
   virtual CartesianFixedLookVector
   velocity_aberration_apply(const GroundCoordinate& Spacecraft_pos,
 			    const GroundCoordinate& Gc_no_aberration,
-			    const boost::array<double, 3> &Velocity_cf);
-  virtual CartesianFixedLookVector
-  velocity_aberration_reverse(const GroundCoordinate& Spacecraft_pos,
-		      const GroundCoordinate& Gc_with_aberration,
-			      const boost::array<double, 3> &Velocity_cf) const;
+			    const boost::array<double, 3> &Velocity_cf) const;
   %pickle_serialization()
 };
 
@@ -48,11 +44,7 @@ public:
   virtual CartesianFixedLookVector
   velocity_aberration_apply(const GroundCoordinate& Spacecraft_pos,
 			    const GroundCoordinate& Gc_no_aberration,
-			    const boost::array<double, 3> &Velocity_cf);
-  virtual CartesianFixedLookVector
-  velocity_aberration_reverse(const GroundCoordinate& Spacecraft_pos,
-		      const GroundCoordinate& Gc_with_aberration,
-			      const boost::array<double, 3> &Velocity_cf) const;
+			    const boost::array<double, 3> &Velocity_cf) const;
   %pickle_serialization()
 };
 }

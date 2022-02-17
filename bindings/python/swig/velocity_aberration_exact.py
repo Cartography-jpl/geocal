@@ -182,7 +182,7 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.velocity_aberration
 import geocal_swig.generic_object
-class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
+class VelocityAberrationExact(geocal_swig.velocity_aberration.VelocityAberration):
     """
 
     This does an exact velocity aberration correction, rather than the
@@ -225,24 +225,12 @@ class VelocityAberrationExact(geocal_swig.generic_object.GenericObject):
         return _velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_apply(self, Spacecraft_pos, Gc_no_aberration, Velocity_cf)
 
 
-    def velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberration, Velocity_cf):
-        """
-
-        virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::velocity_aberration_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate
-        &Gc_with_aberration, const boost::array< double, 3 > &Velocity_cf)
-        const
-
-        """
-        return _velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_reverse(self, Spacecraft_pos, Gc_with_aberration, Velocity_cf)
-
-
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _velocity_aberration_exact.delete_VelocityAberrationExact
 VelocityAberrationExact.aberration_calc = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_aberration_calc, None, VelocityAberrationExact)
 VelocityAberrationExact.velocity_aberration_apply = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_apply, None, VelocityAberrationExact)
-VelocityAberrationExact.velocity_aberration_reverse = new_instancemethod(_velocity_aberration_exact.VelocityAberrationExact_velocity_aberration_reverse, None, VelocityAberrationExact)
 VelocityAberrationExact_swigregister = _velocity_aberration_exact.VelocityAberrationExact_swigregister
 VelocityAberrationExact_swigregister(VelocityAberrationExact)
 

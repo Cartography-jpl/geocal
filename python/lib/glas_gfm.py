@@ -2,6 +2,7 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera, Ecr,
                          QuaternionCamera, FrameCoordinate,
                          ImageCoordinate, RefractionMsp, NoVelocityAberration,
+                         VelocityAberrationExact,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
@@ -161,11 +162,18 @@ class GlasGfm(object):
         return res
 
     def igc(self, include_image = False, dem = SimpleDem(),
-            naif_code = None):
+            naif_code = None, velocity_aberration_exact = False):
         '''Return ImageGroundConnection for GLAS/GFM.
         You can either have the raster_image or raster_image_multi_band
         from the NitfFile included in the igc or not, based on the 
-        include_image.'''
+        include_image.
+        
+        By default, we use the velocity aberration first order model,
+        good usually for submeter accuracy. This ignores earth rotation
+        and only include the first order term in velocity. You can
+        select the exact model if desired, it is more accurate but 
+        slower.
+        '''
         if(naif_code is not None):
             self.naif_code = naif_code
         orb = self.orbit
@@ -182,9 +190,9 @@ class GlasGfm(object):
                 raise RuntimeError("We don't handle having the time stamps in a MTIMSA TRE")
             t = timestamp_to_geocal_time(self.tre_csexrb.base_timestamp) + self.tre_csexrb.dt_multiplier * 1e-9 * self.tre_csexrb.dt[0]
             igc = OrbitDataImageGroundConnection(orb, t, cam, dem, None,
-                                                 self.iseg.iid1,
-                                                 self.refraction,
-                                                 self.velocity_aberration)
+                     self.iseg.iid1,
+                     self.refraction,
+                     self.velocity_aberration(velocity_aberration_exact))
         else:
             raise RuntimeError("Unrecognized camera sensor type")
         # Add some useful metadata
@@ -217,13 +225,14 @@ class GlasGfm(object):
             return None
         return RefractionMsp(self.camera.band_wavelength)
     
-    @property
-    def velocity_aberration(self):
+    def velocity_aberration(self, velocity_aberration_exact = False):
         '''Return the NoVelocityAberration object if we are not including
-        velocity_aberration, None otherwise'''
+        velocity_aberration, VelocityAberrationExact or None otherwise'''
         # TODO Way to include full VelocityAberration?
         if(self.tre_csexrb.vel_aber_flag == 0):
             return NoVelocityAberration()
+        if(velocity_aberration_exact):
+            return VelocityAberrationExact()
         return None
 
     @property

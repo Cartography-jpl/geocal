@@ -357,34 +357,49 @@ def test_refraction_gfm(isolated_dir, igc_gfm):
          quat_rot_x(-2.7 * deg_to_rad))
     igc_gfm.camera.frame_to_sc = q
     igc_gfm.refraction = RefractionMsp(igc_gfm.camera.band_wavelength)
+    # We can put this in, but we don't use it in our igc. We'll need
+    # to figure out how this gets used, it isn't any of the things I
+    # thought here
     if False:
         igc_gfm.camera.ppoff = [0,0,99]
+        od = igc_gfm.orbit_data
+        sc_p = Quaternion_double(0,*igc_gfm.camera.ppoff)
+        q = od.sc_to_cf
+        poff = quaternion_to_array(q * sc_p * q.conj())[1:]
+        print(poff)
+        od2 = QuaternionOrbitData(od,[poff[0],poff[1],poff[2]],Quaternion_double(1,0,0,0))
+        print(igc_gfm.orbit_data)
+        print(igc_gfm.orbit_data.position_cf.position)
+        igc_gfm.orbit_data = od2
+        print(igc_gfm.orbit_data)
+        print(igc_gfm.orbit_data.position_cf.position)
     f.image_segment[0].create_glas_gfm(igc_gfm)
     t = f.image_segment[0].glas_gfm.tre_csexrb
     pt = igc_gfm.ground_coordinate(ImageCoordinate(1024, 1024))
     t.ground_ref_point_x = pt.position[0]
     t.ground_ref_point_y = pt.position[1]
     t.ground_ref_point_z = pt.position[2]
-    igc_gfm.velocity_aberration = VelocityAberrationFirstOrder()
+    igc_gfm.velocity_aberration = VelocityAberrationExact()
     if False:
         # Compare without aberration correction
         t.vel_aber_flag = 0
         igc_gfm.velocity_aberration = NoVelocityAberration()
-    if True:
+    if False:
         # Compare without refraction
         t.atm_refr_flag = 0
         igc_gfm.refraction = None
     f.write("gfm_test.ntf")
     f2 = NitfFile("gfm_test.ntf")
     igc2 = IgcMsp("gfm_test.ntf", SimpleDem(), 0, "GFM", "GFM")
-    igc3 = f2.image_segment[0].glas_gfm.igc()
+    igc3 = f2.image_segment[0].glas_gfm.igc(velocity_aberration_exact=True)
     write_shelve("igc_gfm.xml", igc_gfm)
     write_shelve("igc3.xml", igc3)
     max_diff1 = -1e8
     max_diff2 = -1e8
     max_diff3 = -1e8
     ic = ImageCoordinate(100, 50)
-    print("Single point: ", distance(igc2.ground_coordinate(ic), igc3.ground_coordinate(ic)))
+    print("Single point 1: ", distance(igc2.ground_coordinate(ic), igc_gfm.ground_coordinate(ic)))
+    print("Single point 2: ", distance(igc2.ground_coordinate(ic), igc3.ground_coordinate(ic)))
     for i in range(0, igc_gfm.number_line, 20):
         for j in range (0, igc_gfm.number_sample, 20):
             ic = ImageCoordinate(i, j)

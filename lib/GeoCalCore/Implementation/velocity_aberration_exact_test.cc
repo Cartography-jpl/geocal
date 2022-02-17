@@ -29,13 +29,15 @@ BOOST_AUTO_TEST_CASE(velocity_aberration_exact)
   // want our calculation identical to MSP. And for WV-2 like data
   // this is about a pixel
   double initial_distance = distance(*igc->ground_coordinate(ic), pt_msp);
-  if(true)
+  if(false)
     std::cerr << "Initial distance: " << initial_distance << "\n";
-
+  BOOST_CHECK(initial_distance > 0.43);
+  
   igc->velocity_aberration(boost::make_shared<VelocityAberrationExact>());
   double corrected_distance = distance(*igc->ground_coordinate(ic), pt_msp);
-  if(true)
+  if(false)
     std::cerr << "corrected distance: " << corrected_distance << "\n";
+  BOOST_CHECK(corrected_distance < 1e-3);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

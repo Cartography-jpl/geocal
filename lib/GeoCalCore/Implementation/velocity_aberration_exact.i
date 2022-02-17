@@ -11,7 +11,8 @@
 %import "look_vector.i"
 %geocal_shared_ptr(GeoCal::VelocityAberrationExact);
 namespace GeoCal {
-class VelocityAberrationExact : public GenericObject {
+%feature("notabstract") VelocityAberrationExact;
+class VelocityAberrationExact : public VelocityAberration {
 public:
   VelocityAberrationExact();
   CartesianFixedLookVector aberration_calc
@@ -22,11 +23,7 @@ public:
   virtual CartesianFixedLookVector
   velocity_aberration_apply(const GroundCoordinate& Spacecraft_pos,
 			    const GroundCoordinate& Gc_no_aberration,
-			    const boost::array<double, 3> &Velocity_cf);
-  virtual CartesianFixedLookVector
-  velocity_aberration_reverse(const GroundCoordinate& Spacecraft_pos,
-			      const GroundCoordinate& Gc_with_aberration,
-			      const boost::array<double, 3> &Velocity_cf) const;
+			    const boost::array<double, 3> &Velocity_cf) const;
   %pickle_serialization()
 };
 }

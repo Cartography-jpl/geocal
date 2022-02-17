@@ -117,8 +117,6 @@ if(have_pynitf):
         cam.isubcat = list(d.isubcat)
         cam.focal_length_time = nitf_date_second_field_to_geocal_time(d.foc_length_date, d.foc_length_time[0])
         cam.focal_length = d.foc_length[0]
-        if(d.ppoff_x != 0 or d.ppoff_y != 0 or d.ppoff_z != 0):
-            print("Warning, we don't support a nonzero position offset")
         cam.ppoff = [d.ppoff_x, d.ppoff_y, d.ppoff_z]
         cam.angoff = [d.angoff_x, d.angoff_y, d.angoff_z]
         if(d.sensor_type == "S"):

@@ -6919,8 +6919,8 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_velocity_aberration_apply(PyO
   boost::array< double,3 > *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VelocityAberrationExact > tempshared1 ;
-  boost::shared_ptr< GeoCal::VelocityAberrationExact > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
+  boost::shared_ptr< GeoCal::VelocityAberrationExact const > *smartarg1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
@@ -6937,14 +6937,14 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_velocity_aberration_apply(PyO
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberrationExact_velocity_aberration_apply" "', argument " "1"" of type '" "GeoCal::VelocityAberrationExact *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberrationExact_velocity_aberration_apply" "', argument " "1"" of type '" "GeoCal::VelocityAberrationExact const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::VelocityAberrationExact > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::VelocityAberrationExact > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
       arg1 = const_cast< GeoCal::VelocityAberrationExact * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::VelocityAberrationExact > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
       arg1 = const_cast< GeoCal::VelocityAberrationExact * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
@@ -7007,120 +7007,7 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_velocity_aberration_apply(PyO
   }
   {
     try {
-      result = (arg1)->velocity_aberration_apply((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &)result));
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_VelocityAberrationExact_velocity_aberration_reverse(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::VelocityAberrationExact *arg1 = (GeoCal::VelocityAberrationExact *) 0 ;
-  GeoCal::GroundCoordinate *arg2 = 0 ;
-  GeoCal::GroundCoordinate *arg3 = 0 ;
-  boost::array< double,3 > *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::VelocityAberrationExact const > tempshared1 ;
-  boost::shared_ptr< GeoCal::VelocityAberrationExact const > *smartarg1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
-  void *argp3 = 0 ;
-  int res3 = 0 ;
-  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared3 ;
-  boost::array< double,3 > a4 ;
-  PythonObject numpy4 ;
-  PyObject *swig_obj[4] ;
-  GeoCal::CartesianFixedLookVector result;
-  
-  if (!SWIG_Python_UnpackTuple(args,"VelocityAberrationExact_velocity_aberration_reverse",4,4,swig_obj)) SWIG_fail;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "VelocityAberrationExact_velocity_aberration_reverse" "', argument " "1"" of type '" "GeoCal::VelocityAberrationExact const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
-      arg1 = const_cast< GeoCal::VelocityAberrationExact * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::VelocityAberrationExact > * >(argp1);
-      arg1 = const_cast< GeoCal::VelocityAberrationExact * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res2)) {
-      arg2 = ptr;
-    } else {
-      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res2)) {
-        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "VelocityAberrationExact_velocity_aberration_reverse" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
-      }
-      if (!argp2) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_velocity_aberration_reverse" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
-        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
-      } else {
-        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
-      }
-    }
-  }
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::GroundCoordinate *ptr;
-    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
-    if (SWIG_IsOK(res3)) {
-      arg3 = ptr;
-    } else {
-      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
-      if (!SWIG_IsOK(res3)) {
-        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "VelocityAberrationExact_velocity_aberration_reverse" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'");
-      }
-      if (!argp3) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "VelocityAberrationExact_velocity_aberration_reverse" "', argument " "3"" of type '" "GeoCal::GroundCoordinate const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3);
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(tempshared3.get());
-      } else {
-        arg3 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp3)->get());
-      }
-    }
-  }
-  {
-    numpy4.obj = to_numpy<double >(swig_obj[3]);
-    if(!numpy4.obj)
-    return NULL;
-    a4 = to_boost_array<double, 3>(numpy4);
-    arg4 = &a4;
-  }
-  {
-    try {
-      result = ((GeoCal::VelocityAberrationExact const *)arg1)->velocity_aberration_reverse((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
+      result = ((GeoCal::VelocityAberrationExact const *)arg1)->velocity_aberration_apply((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7228,13 +7115,6 @@ static PyMethodDef SwigMethods[] = {
 		"&Gc_no_aberration, const boost::array< double, 3 > &Velocity_cf) const\n"
 		"\n"
 		""},
-	 { (char *)"VelocityAberrationExact_velocity_aberration_reverse", _wrap_VelocityAberrationExact_velocity_aberration_reverse, METH_VARARGS, (char *)"\n"
-		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberrationExact::velocity_aberration_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_with_aberration, const boost::array< double, 3 > &Velocity_cf)\n"
-		"const\n"
-		"\n"
-		""},
 	 { (char *)"delete_VelocityAberrationExact", (PyCFunction)_wrap_delete_VelocityAberrationExact, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::VelocityAberrationExact::~VelocityAberrationExact()\n"
@@ -7269,6 +7149,10 @@ static void *_p_GeoCal__CartesianFixedTo_p_GeoCal__GroundCoordinate(void *x, int
 static void *_p_boost__shared_ptrT_GeoCal__NoVelocityAberration_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
     return (void *) new boost::shared_ptr< GeoCal::VelocityAberration >(*(boost::shared_ptr< GeoCal::NoVelocityAberration > *)x);
+}
+static void *_p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t(void *x, int *newmemory) {
+    *newmemory = SWIG_CAST_NEW_MEMORY;
+    return (void *) new boost::shared_ptr< GeoCal::VelocityAberration >(*(boost::shared_ptr< GeoCal::VelocityAberrationExact > *)x);
 }
 static void *_p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t(void *x, int *newmemory) {
     *newmemory = SWIG_CAST_NEW_MEMORY;
@@ -7385,7 +7269,7 @@ static void *_p_GeoCal__LnLookVectorWithDerivativeTo_p_GeoCal__GenericObject(voi
     return (void *)((GeoCal::GenericObject *) (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) ((GeoCal::LnLookVectorWithDerivative *) x));
 }
 static void *_p_GeoCal__VelocityAberrationExactTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
-    return (void *)((GeoCal::GenericObject *)  ((GeoCal::VelocityAberrationExact *) x));
+    return (void *)((GeoCal::GenericObject *) (GeoCal::VelocityAberration *) ((GeoCal::VelocityAberrationExact *) x));
 }
 static void *_p_GeoCal__CartesianFixedTo_p_GeoCal__GenericObject(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::GenericObject *) (GeoCal::GroundCoordinate *) ((GeoCal::CartesianFixed *) x));
@@ -7491,6 +7375,9 @@ static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__ba
 }
 static void *_p_GeoCal__NoVelocityAberrationTo_p_GeoCal__VelocityAberration(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::VelocityAberration *)  ((GeoCal::NoVelocityAberration *) x));
+}
+static void *_p_GeoCal__VelocityAberrationExactTo_p_GeoCal__VelocityAberration(void *x, int *SWIGUNUSEDPARM(newmemory)) {
+    return (void *)((GeoCal::VelocityAberration *)  ((GeoCal::VelocityAberrationExact *) x));
 }
 static void *_p_GeoCal__VelocityAberrationFirstOrderTo_p_GeoCal__VelocityAberration(void *x, int *SWIGUNUSEDPARM(newmemory)) {
     return (void *)((GeoCal::VelocityAberration *)  ((GeoCal::VelocityAberrationFirstOrder *) x));
@@ -7826,7 +7713,7 @@ static swig_cast_info _swigc__p_GeoCal__ScLookVector[] = {  {&_swigt__p_GeoCal__
 static swig_cast_info _swigc__p_GeoCal__ScLookVectorWithDerivative[] = {  {&_swigt__p_GeoCal__ScLookVectorWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__Time[] = {  {&_swigt__p_GeoCal__Time, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__TimeWithDerivative[] = {  {&_swigt__p_GeoCal__TimeWithDerivative, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_GeoCal__VelocityAberration[] = {  {&_swigt__p_GeoCal__VelocityAberration, 0, 0, 0},  {&_swigt__p_GeoCal__NoVelocityAberration, _p_GeoCal__NoVelocityAberrationTo_p_GeoCal__VelocityAberration, 0, 0},  {&_swigt__p_GeoCal__VelocityAberrationFirstOrder, _p_GeoCal__VelocityAberrationFirstOrderTo_p_GeoCal__VelocityAberration, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__VelocityAberration[] = {  {&_swigt__p_GeoCal__VelocityAberration, 0, 0, 0},  {&_swigt__p_GeoCal__NoVelocityAberration, _p_GeoCal__NoVelocityAberrationTo_p_GeoCal__VelocityAberration, 0, 0},  {&_swigt__p_GeoCal__VelocityAberrationExact, _p_GeoCal__VelocityAberrationExactTo_p_GeoCal__VelocityAberration, 0, 0},  {&_swigt__p_GeoCal__VelocityAberrationFirstOrder, _p_GeoCal__VelocityAberrationFirstOrderTo_p_GeoCal__VelocityAberration, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VelocityAberrationExact[] = {  {&_swigt__p_GeoCal__VelocityAberrationExact, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__VelocityAberrationFirstOrder[] = {  {&_swigt__p_GeoCal__VelocityAberrationFirstOrder, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7926,7 +7813,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t[
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__Time_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_t, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VelocityAberration_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_t, _p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoVelocityAberration_t, _p_boost__shared_ptrT_GeoCal__NoVelocityAberration_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__VelocityAberration_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_t, _p_boost__shared_ptrT_GeoCal__VelocityAberrationFirstOrder_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__NoVelocityAberration_t, _p_boost__shared_ptrT_GeoCal__NoVelocityAberration_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_t, _p_boost__shared_ptrT_GeoCal__VelocityAberrationExact_tTo_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__VelocityAberration_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};

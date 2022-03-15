@@ -760,8 +760,10 @@ std::string RsmGrid::tre_string() const
   std::string row_fit_error="";
   std::string col_fit_error="";
   // Linear interpolation
-  //std::string int_ord = "1";
-  std::string int_ord = "2";
+  // Note: Looks like the value needs to be set to one regardless of what
+  // the interpolation type is.
+  std::string int_ord = "1";
+  // std::string int_ord = "2";
   res += str_check_size(secformat % row_section_number_ % col_section_number_
 			% row_fit_error % col_fit_error % int_ord,
 			3 + 3 + 21 + 21 + 1);

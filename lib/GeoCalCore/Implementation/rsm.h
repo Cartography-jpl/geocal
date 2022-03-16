@@ -79,6 +79,12 @@ public:
     if(rparm)
       add_object(rparm);
   }
+  blitz::Array<double, 2> generate_data(const ImageGroundConnection& Igc,
+	double Min_height, double Max_height,
+        int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=5,
+	int Nsecond_pass_fit=20, 					
+        int Min_line=0, int Max_line=-1, int Min_sample=0,
+	int Max_sample=-1, bool Ignore_igc_error = true) const;
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   void rsm_base(const boost::shared_ptr<RsmBase>& V) { rp = V;}
   const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const
@@ -95,6 +101,11 @@ public:
   {
     return rp->check_zero_crossing(Grid_spacing);
   }
+
+  blitz::Array<double, 2> compare_data(const blitz::Array<double, 2>& Data)
+    const;
+  blitz::Array<double, 1> compare_data_dist(const blitz::Array<double, 2>& Data)
+    const;
   
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,

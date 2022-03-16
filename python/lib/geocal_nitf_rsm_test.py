@@ -1392,6 +1392,53 @@ def test_bowtie_poly(isolated_dir, igc_staring2):
     if(True):
         write_shelve("rsm.bin", rsm)
         write_shelve("igc.bin", igc)
+
+@require_msp
+@require_pynitf
+def test_bowtie_multi_poly(isolated_dir, igc_staring2):
+    '''Multi-section polynomial grid'''
+    igc = igc_staring2
+    ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
+                                  LocalRcParameter.FOLLOW_LINE_FULL))
+    n = 3
+    rsm = Rsm(RsmMultiSection(igc.number_line, igc.number_sample, n, 1,
+                              RsmRationalPolynomial(4,4,3,0,0,0,4,0)), ccov)
+    d = rsm.generate_data(igc,-100,100, igc.number_line // 2,
+                          igc.number_sample // 2)
+    rsm.fit(igc, -100, 100)
+    dcomp = rsm.compare_data(d)
+    mln = np.nanargmax(np.abs(dcomp[:,0]))
+    print(mln)
+    print(dcomp[mln,:])
+    print(d[mln,:])
+    print(pd.DataFrame(np.abs(dcomp[:,0])).describe())
+    print(pd.DataFrame(np.abs(dcomp[:,1])).describe())
+    dcomp = rsm.compare_data_dist(d)
+    print(pd.DataFrame(dcomp).describe())
+    return
+    f = pynitf.NitfFile()
+    create_image_seg(f)
+    f.image_segment[0].rsm = rsm
+    f.write("nitf_rsm.ntf")
+    igc_msp = IgcMsp("nitf_rsm.ntf")
+    d = SimpleDem(0)
+    ic = ImageCoordinate(1,10)
+    print(igc_msp.image_coordinate(igc.ground_coordinate(ic,d)))
+    print(rsm.image_coordinate(igc.ground_coordinate(ic, d))[0])
+    (true_line, true_sample, calc_line, calc_sample,
+     distance_true_vs_calc) = rsm.compare_igc(igc, igc.number_line, igc.number_sample, 0)
+    print("Poles in fit: ", rsm.check_zero_crossing())
+    print(pd.DataFrame(np.abs(true_line - calc_line).flatten()).describe())
+    print(pd.DataFrame(np.abs(true_sample - calc_sample).flatten()).describe())
+    print(pd.DataFrame(distance_true_vs_calc.flatten()).describe())
+    wp = np.unravel_index(np.nanargmax(np.abs(true_line - calc_line)), true_line.shape)
+    ic = ImageCoordinate(true_line[wp], true_sample[wp])
+    print(ic)
+    print(rsm.image_coordinate(igc.ground_coordinate(ic))[0])
+    print(igc_msp.image_coordinate(igc.ground_coordinate(ic)))
+    if(True):
+        write_shelve("rsm.bin", rsm)
+        write_shelve("igc.bin", igc)
         
 def test_rsm_cov(isolated_dir):
     '''Test a simple rsm covariance'''

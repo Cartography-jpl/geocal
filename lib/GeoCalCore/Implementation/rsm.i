@@ -48,6 +48,10 @@ public:
 	   double Max_height);
   void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
 				    double Min_height, double Max_height);
+  blitz::Array<double, 2> compare_data(const blitz::Array<double, 2>& Data)
+    const;
+  blitz::Array<double, 1> compare_data_dist(const blitz::Array<double, 2>& Data)
+    const;
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& OUTPUT,
@@ -63,6 +67,12 @@ public:
 					 int Nheight_fit = 20,
 					 bool Ignore_igc_error_in_fit = false);
   bool check_zero_crossing(double Grid_spacing = 0.01) const;
+  blitz::Array<double, 2> generate_data(const ImageGroundConnection& Igc,
+	double Min_height, double Max_height,
+        int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=5,
+	int Nsecond_pass_fit=20, 					
+        int Min_line=0, int Max_line=-1, int Min_sample=0,
+	int Max_sample=-1, bool Ignore_igc_error = true) const;
   %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
   %python_attribute_with_set(rsm_direct_covariance,
 		    boost::shared_ptr<RsmDirectCovariance>);

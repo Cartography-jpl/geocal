@@ -190,7 +190,7 @@ if(have_pynitf):
             d.band_index[i] = cam.band_index[i]
             d.irepband[i] =  cam.irepband[i]
             d.isubcat[i] = cam.isubcat[i]
-        d.fl_interp = 1
+        d.fl_interp = 0
         d.num_fl_pts = 1
         d.foc_length_date, d.foc_length_time[0] = geocal_time_to_nitf_date_second_field(cam.focal_length_time)
         d.foc_length[0] = cam.focal_length

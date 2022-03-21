@@ -19,6 +19,10 @@ import io
 import numpy as np
 import pandas as pd
 import os, subprocess
+import matplotlib.pyplot as plt
+import matplotlib as mpl
+import seaborn as sns
+from matplotlib.backends.backend_pdf import PdfPages
 import itertools
 from multiprocessing import Pool
 import warnings
@@ -1398,6 +1402,7 @@ def test_bowtie_poly(isolated_dir, igc_staring2):
 def test_bowtie_multi_poly(isolated_dir, igc_staring2):
     '''Multi-section polynomial grid'''
     igc = igc_staring2
+    write_shelve("igc.xml", igc)
     ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
                                   LocalRcParameter.FOLLOW_LINE_FULL))
     n = 3
@@ -1415,7 +1420,6 @@ def test_bowtie_multi_poly(isolated_dir, igc_staring2):
     print(pd.DataFrame(np.abs(dcomp[:,1])).describe())
     dcomp = rsm.compare_data_dist(d)
     print(pd.DataFrame(dcomp).describe())
-    return
     f = pynitf.NitfFile()
     create_image_seg(f)
     f.image_segment[0].rsm = rsm
@@ -1436,6 +1440,22 @@ def test_bowtie_multi_poly(isolated_dir, igc_staring2):
     print(ic)
     print(rsm.image_coordinate(igc.ground_coordinate(ic))[0])
     print(igc_msp.image_coordinate(igc.ground_coordinate(ic)))
+    pdf = PdfPages("rsm_diff.pdf")
+    cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
+    fig, axs = plt.subplots(2,2)
+    t = axs[0,0].imshow(calc_line - true_line, cmap=cmap, vmin=-2, vmax=2)
+    fig.colorbar(t, ax=axs[0,0])
+    axs[0,0].set_title("Line error")
+    t = axs[0,1].imshow(calc_sample - true_sample, cmap=cmap, vmin=-2,vmax=2)
+    fig.colorbar(t, ax=axs[0,1])
+    axs[0,1].set_title("Sample error")
+    t = axs[1,0].imshow(distance_true_vs_calc, cmap=cmap, vmin=-3,vmax=3)
+    fig.colorbar(t, ax=axs[1,0])
+    axs[1,0].set_title("Error distance (m)")
+    axs[1,1].axis('off')
+    fig.tight_layout()
+    pdf.savefig()
+    pdf.close()
     if(True):
         write_shelve("rsm.bin", rsm)
         write_shelve("igc.bin", igc)

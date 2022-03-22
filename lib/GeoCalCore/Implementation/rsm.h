@@ -50,6 +50,8 @@ public:
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
+  void fit_data(const blitz::Array<double, 2>& Data,
+		int Nline, int Nsamp) const;
   void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
 				    double Min_height, double Max_height);
   blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,

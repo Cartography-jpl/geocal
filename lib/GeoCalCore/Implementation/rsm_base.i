@@ -42,6 +42,9 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample) = 0;
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample);
   static blitz::Array<double, 4> generate_data
   (const ImageGroundConnection& Igc,
    const CoordinateConverter& Cconv,

@@ -186,6 +186,19 @@ void RsmMultiSection::fit
       fit_section(i, j, Igc, Cconv, Min_height, Max_height);
 }
 
+void RsmMultiSection::fit_data(const blitz::Array<double, 2>& Data,
+	       int Min_line, int Max_line, int Min_sample, int Max_sample)
+{
+  fit_start(Data);
+  lp.min_line(0);
+  lp.max_line(Max_line);
+  lp.min_sample(0);
+  lp.max_sample(Max_sample);
+  for(int i = 0; i < sec.rows(); ++i)
+    for(int j = 0; j < sec.cols(); ++j)
+      fit_section(i, j, Data);
+}
+
 //-----------------------------------------------------------------------
 /// Fit just the low order polynomial. This is intended for doing
 /// parallel fitting of the sections in python.
@@ -240,6 +253,36 @@ void RsmMultiSection::fit_start(const ImageGroundConnection& Igc,
   }
 }
 
+void RsmMultiSection::fit_start(const blitz::Array<double, 2>& Data)
+{
+  blitz::Range ra = blitz::Range::all();
+  std::vector<double> ln, smp, x, y, z;
+  for(int i = 0; i < Data.rows(); ++i) {
+    ln.push_back(Data(i,0));
+    smp.push_back(Data(i,1));
+    x.push_back(Data(i,2));
+    y.push_back(Data(i,3));
+    z.push_back(Data(i,4));
+  }
+  lp.fit_data(ln, smp, x, y, z);
+  // Based on examples, the MSP library seems to prefer that all
+  // sections have the same z start and delta. This isn't actually
+  // required from the RSM standard, but seems to be one of the those
+  // "unstated" requirements. This gives access  for RsmMultiSection to
+  // pass the z values to use, rather than computing this in fit.
+  // Note this is only used by RsmGrid, RsmRationalPolynomial just
+  // ignores this.
+  double min_z = blitz::min(Data(ra,4));
+  double max_z = blitz::max(Data(ra,4));
+  double pad = 0.05;
+  double p = pad * (max_z - min_z);
+  min_z -= p;
+  max_z += p;
+  for(int i = 0; i < sec.rows(); ++i)
+    for(int j = 0; j < sec.cols(); ++j)
+      sec(i,j)->set_z_range(min_z, max_z);
+}
+
 
 //-----------------------------------------------------------------------
 /// Fit a single segment. This is intended for doing parallel fitting
@@ -256,10 +299,25 @@ RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection& Igc,
   sec(i,j)->fit(Igc, Cconv, Min_height, Max_height,
 		std::max(int(nline_sec * i) - border_, 0),
 		std::min(int(nline_sec * (i + 1)) + border_,
-			 Igc.number_line()),
+			 Igc.number_line()-1),
 		std::max(int(nsamp_sec * j) - border_, 0),
 		std::min(int(nsamp_sec * (j + 1)) + border_,
-			 Igc.number_sample()));
+			 Igc.number_sample()-1));
+  return sec(i,j);
+}
+
+const boost::shared_ptr<RsmBase>&
+RsmMultiSection::fit_section(int i, int j, const blitz::Array<double, 2>& Data)
+{
+  range_check(i, 0, sec.rows());
+  range_check(j, 0, sec.cols());
+  sec(i,j)->fit_data(Data,
+		std::max(int(nline_sec * i) - border_, 0),
+		std::min(int(nline_sec * (i + 1)) + border_,
+			 lp.max_line()),
+		std::max(int(nsamp_sec * j) - border_, 0),
+		std::min(int(nsamp_sec * (j + 1)) + border_,
+			 lp.max_sample()));
   return sec(i,j);
 }
 

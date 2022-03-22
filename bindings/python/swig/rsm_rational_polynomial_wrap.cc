@@ -9267,7 +9267,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit_data__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
   std::vector< double,std::allocator< double > > *arg2 = 0 ;
@@ -9284,9 +9284,8 @@ SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit_data(PyObject *SWIGUNUSEDPA
   int res4 = SWIG_OLDOBJ ;
   int res5 = SWIG_OLDOBJ ;
   int res6 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[6] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial_fit_data",6,6,swig_obj)) SWIG_fail;
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
@@ -9380,6 +9379,150 @@ fail:
   if (SWIG_IsNewObj(res5)) delete arg5;
   if (SWIG_IsNewObj(res6)) delete arg6;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit_data__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmRationalPolynomial *arg1 = (GeoCal::RsmRationalPolynomial *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  int arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmRationalPolynomial > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmRationalPolynomial_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmRationalPolynomial_fit_data" "', argument " "1"" of type '" "GeoCal::RsmRationalPolynomial *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmRationalPolynomial > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmRationalPolynomial * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmRationalPolynomial_fit_data', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmRationalPolynomial_fit_data', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmRationalPolynomial_fit_data" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "RsmRationalPolynomial_fit_data" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "RsmRationalPolynomial_fit_data" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "RsmRationalPolynomial_fit_data" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      (arg1)->fit_data((blitz::Array< double,2 > const &)*arg2,arg3,arg4,arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_fit_data(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[7] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmRationalPolynomial_fit_data",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = swig::asptr(argv[1], (std::vector< double,std::allocator< double > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    {
+      int res = swig::asptr(argv[2], (std::vector< double,std::allocator< double > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    {
+      int res = swig::asptr(argv[3], (std::vector< double,std::allocator< double > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    {
+      int res = swig::asptr(argv[4], (std::vector< double,std::allocator< double > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    {
+      int res = swig::asptr(argv[5], (std::vector< double,std::allocator< double > >**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_1;
+    return _wrap_RsmRationalPolynomial_fit_data__SWIG_0(self, argc, argv);
+  }
+check_1:
+  
+  if (argc == 6) {
+    return _wrap_RsmRationalPolynomial_fit_data__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmRationalPolynomial_fit_data'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmRationalPolynomial::fit_data(std::vector< double,std::allocator< double > > const &,std::vector< double,std::allocator< double > > const &,std::vector< double,std::allocator< double > > const &,std::vector< double,std::allocator< double > > const &,std::vector< double,std::allocator< double > > const &)\n"
+    "    GeoCal::RsmRationalPolynomial::fit_data(blitz::Array< double,2 > const &,int,int,int,int)\n");
+  return 0;
 }
 
 

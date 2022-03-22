@@ -48,6 +48,9 @@ public:
 		const std::vector<double>& X,
 		const std::vector<double>& Y,
 		const std::vector<double>& Z);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample);
   void fit(const ImageGroundConnection& Igc,
 	   const CoordinateConverter& Cconv,
 	   double Min_height, double Max_height,

@@ -267,7 +267,7 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
         return _rsm_rational_polynomial.RsmRationalPolynomial_fit_offset_and_scale(self, Min_line, Max_line, Min_sample, Max_sample, Min_x, Max_x, Min_y, Max_y, Min_z, Max_z)
 
 
-    def fit_data(self, Line, Sample, X, Y, Z):
+    def fit_data(self, *args):
         """
 
         void RsmRationalPolynomial::fit_data(const std::vector< double > &Line, const std::vector< double >
@@ -280,7 +280,7 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
         should make sure to set that first (e.g., call fit_offset_and_scale).
 
         """
-        return _rsm_rational_polynomial.RsmRationalPolynomial_fit_data(self, Line, Sample, X, Y, Z)
+        return _rsm_rational_polynomial.RsmRationalPolynomial_fit_data(self, *args)
 
 
     def tre_string(self):

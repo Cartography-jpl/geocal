@@ -53,6 +53,9 @@ public:
 			    double Max_sample, double Min_x, double Max_x,
 			    double Min_y, double Max_y, double Min_z,
 			    double Max_z);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample);
   void fit_data(const std::vector<double>& Line,
 		const std::vector<double>& Sample,
 		const std::vector<double>& X,

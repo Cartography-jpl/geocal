@@ -32,10 +32,13 @@ public:
   void fit_start(const ImageGroundConnection& Igc,
 		 const CoordinateConverter& Cconv,
 		 double Min_height, double Max_height);
+  void fit_start(const blitz::Array<double, 2>& Data);
   const boost::shared_ptr<RsmBase>&
   fit_section(int i, int j, const ImageGroundConnection& Igc,
 		   const CoordinateConverter& Cconv,
 		   double Min_height, double Max_height);
+  const boost::shared_ptr<RsmBase>&
+  fit_section(int i, int j, const blitz::Array<double, 2>& Data);
   boost::shared_ptr<RsmBase> section(int i, int j) const;
   void section(int i, int j, const boost::shared_ptr<RsmBase>& V);
   const boost::shared_ptr<RsmBase>&

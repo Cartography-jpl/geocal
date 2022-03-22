@@ -1397,6 +1397,9 @@ def test_bowtie_poly(isolated_dir, igc_staring2):
         write_shelve("rsm.bin", rsm)
         write_shelve("igc.bin", igc)
 
+# Currently a bit slow, so skip. We'll likely speed this up or otherwise
+# modify this
+@skip
 @require_msp
 @require_pynitf
 def test_bowtie_multi_poly(isolated_dir, igc_staring2):
@@ -1405,12 +1408,14 @@ def test_bowtie_multi_poly(isolated_dir, igc_staring2):
     write_shelve("igc.xml", igc)
     ccov = LocalRcConverter(LocalRcParameter(igc, 0, -1, -1,
                                   LocalRcParameter.FOLLOW_LINE_FULL))
-    n = 3
-    rsm = Rsm(RsmMultiSection(igc.number_line, igc.number_sample, n, 1,
+    nlsec = 3
+    nssec = 2
+    rsm = Rsm(RsmMultiSection(igc.number_line, igc.number_sample, nlsec, nssec,
                               RsmRationalPolynomial(4,4,3,0,0,0,4,0)), ccov)
     d = rsm.generate_data(igc,-100,100, igc.number_line // 2,
                           igc.number_sample // 2)
-    rsm.fit(igc, -100, 100)
+    rsm.fit_data(d, igc.number_line, igc.number_sample)
+    rsm.fill_in_ground_domain_vertex(igc, -100, 100)
     dcomp = rsm.compare_data(d)
     mln = np.nanargmax(np.abs(dcomp[:,0]))
     print(mln)

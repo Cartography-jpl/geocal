@@ -48,6 +48,10 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample)
+  { throw Exception("Not implemented"); }
 
 //-----------------------------------------------------------------------
 /// RsmRationalPolynomial we are using

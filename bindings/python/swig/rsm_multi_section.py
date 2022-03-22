@@ -270,29 +270,22 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
         return self._v_number_sample_per_section()
 
 
-    def fit_start(self, Igc, Cconv, Min_height, Max_height):
+    def fit_start(self, *args):
         """
 
-        void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
-        double Min_height, double Max_height)
-        Fit just the low order polynomial.
-
-        This is intended for doing parallel fitting of the sections in python.
+        void RsmMultiSection::fit_start(const blitz::Array< double, 2 > &Data)
 
         """
-        return _rsm_multi_section.RsmMultiSection_fit_start(self, Igc, Cconv, Min_height, Max_height)
+        return _rsm_multi_section.RsmMultiSection_fit_start(self, *args)
 
 
-    def fit_section(self, i, j, Igc, Cconv, Min_height, Max_height):
+    def fit_section(self, *args):
         """
 
-        const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const
-        CoordinateConverter &Cconv, double Min_height, double Max_height)
-        Fit a single segment.
+        const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const blitz::Array< double, 2 > &Data)
 
-        This is intended for doing parallel fitting in python. 
         """
-        return _rsm_multi_section.RsmMultiSection_fit_section(self, i, j, Igc, Cconv, Min_height, Max_height)
+        return _rsm_multi_section.RsmMultiSection_fit_section(self, *args)
 
 
     def section(self, *args):

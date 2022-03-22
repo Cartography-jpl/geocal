@@ -7281,7 +7281,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_start(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_start__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
   GeoCal::ImageGroundConnection *arg2 = 0 ;
@@ -7302,9 +7302,8 @@ SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_start(PyObject *SWIGUNUSEDPARM(se
   int ecode4 = 0 ;
   double val5 ;
   int ecode5 = 0 ;
-  PyObject *swig_obj[5] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"RsmMultiSection_fit_start",5,5,swig_obj)) SWIG_fail;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
@@ -7396,7 +7395,91 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_start__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  blitz::Array< double,2 > *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > *smartarg1 = 0 ;
+  blitz::Array< double,2 > a2 ;
+  PythonObject numpy2 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_fit_start" "', argument " "1"" of type '" "GeoCal::RsmMultiSection *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int res = SWIG_ConvertPtr(swig_obj[1], (void**)(&arg2), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy2.obj = to_numpy<double >(swig_obj[1]);
+      if(!numpy2.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmMultiSection_fit_start', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmMultiSection_fit_start', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a2.reference(to_blitz_array<double, 2>(numpy2));
+      arg2 = &a2;
+    }
+  }
+  {
+    try {
+      (arg1)->fit_start((blitz::Array< double,2 > const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_start(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmMultiSection_fit_start",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 2) {
+    return _wrap_RsmMultiSection_fit_start__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_RsmMultiSection_fit_start__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmMultiSection_fit_start'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmMultiSection::fit_start(GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double)\n"
+    "    GeoCal::RsmMultiSection::fit_start(blitz::Array< double,2 > const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
   int arg2 ;
@@ -7423,10 +7506,9 @@ SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section(PyObject *SWIGUNUSEDPARM(
   int ecode6 = 0 ;
   double val7 ;
   int ecode7 = 0 ;
-  PyObject *swig_obj[7] ;
   boost::shared_ptr< GeoCal::RsmBase > *result = 0 ;
   
-  if (!SWIG_Python_UnpackTuple(args,"RsmMultiSection_fit_section",7,7,swig_obj)) SWIG_fail;
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
@@ -7527,6 +7609,109 @@ SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section(PyObject *SWIGUNUSEDPARM(
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmMultiSection *arg1 = (GeoCal::RsmMultiSection *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  blitz::Array< double,2 > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmMultiSection > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  blitz::Array< double,2 > a4 ;
+  PythonObject numpy4 ;
+  boost::shared_ptr< GeoCal::RsmBase > *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmMultiSection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmMultiSection_fit_section" "', argument " "1"" of type '" "GeoCal::RsmMultiSection *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::RsmMultiSection > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmMultiSection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "RsmMultiSection_fit_section" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "RsmMultiSection_fit_section" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    int res = SWIG_ConvertPtr(swig_obj[3], (void**)(&arg4), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy4.obj = to_numpy<double >(swig_obj[3]);
+      if(!numpy4.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmMultiSection_fit_section', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy4.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'RsmMultiSection_fit_section', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a4.reference(to_blitz_array<double, 2>(numpy4));
+      arg4 = &a4;
+    }
+  }
+  {
+    try {
+      result = (boost::shared_ptr< GeoCal::RsmBase > *) &(arg1)->fit_section(arg2,arg3,(blitz::Array< double,2 > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_RsmMultiSection_fit_section(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[8] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"RsmMultiSection_fit_section",0,7,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    return _wrap_RsmMultiSection_fit_section__SWIG_1(self, argc, argv);
+  }
+  if (argc == 7) {
+    return _wrap_RsmMultiSection_fit_section__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'RsmMultiSection_fit_section'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::RsmMultiSection::fit_section(int,int,GeoCal::ImageGroundConnection const &,GeoCal::CoordinateConverter const &,double,double)\n"
+    "    GeoCal::RsmMultiSection::fit_section(int,int,blitz::Array< double,2 > const &)\n");
+  return 0;
 }
 
 
@@ -8019,20 +8204,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmMultiSection_fit_start", _wrap_RsmMultiSection_fit_start, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height)\n"
-		"Fit just the low order polynomial.\n"
-		"\n"
-		"This is intended for doing parallel fitting of the sections in python.\n"
+		"void RsmMultiSection::fit_start(const blitz::Array< double, 2 > &Data)\n"
 		"\n"
 		""},
 	 { (char *)"RsmMultiSection_fit_section", _wrap_RsmMultiSection_fit_section, METH_VARARGS, (char *)"\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const\n"
-		"CoordinateConverter &Cconv, double Min_height, double Max_height)\n"
-		"Fit a single segment.\n"
+		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const blitz::Array< double, 2 > &Data)\n"
 		"\n"
-		"This is intended for doing parallel fitting in python. \n"
 		""},
 	 { (char *)"RsmMultiSection_section", _wrap_RsmMultiSection_section, METH_VARARGS, (char *)"\n"
 		"\n"

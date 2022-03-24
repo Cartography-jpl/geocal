@@ -69,8 +69,7 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     if(subset is not None):
         sline = subset[0]
         nline = subset[2]
-    img = SubRasterImage(img, sline, left_mask, nline,
-                         img.number_sample-(left_mask+right_mask))
+    img = SubRasterImage(img, sline, left_mask, nline, img.number_sample-(left_mask+right_mask))
     if(lbl["SAMPLE_BIT_MODE_ID"] == "SQROOT"):
         img = ContextSqrtDecodeImage(img)
     # The START_TIME is the commanded start time, the actual start time
@@ -98,7 +97,7 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     orb_cache = OrbitListCache(orb, tt)
     cam = ctx_camera()
     if(img.number_sample != cam.number_sample(0)):
-        raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
+	    raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
     ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
     igc = IpiImageGroundConnection(ipi, dem, img)
     return igc

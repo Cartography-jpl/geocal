@@ -278,14 +278,92 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
         intersection with the DEM. The Max_height should be larger than the
         greatest height we will encounter in the Dem belonging to the Igc.
 
-        For larger cameras, it might be more convenient to pass in start
-        sample and number of samples to process, the default is to do the full
+        Note that in some cases you may want to control the exactly number of
+        subpixels. The easiest way to do this is to just first call this
+        constructor and let it figure out what it thinks the number of
+        subpixels should be, and then manually changing this (e.g., call
+        number_sub_line and number_sub_sample to set this).
+
+        For larger images, it might be more convenient to pass in start sample
+        and number of samples to process, the default is to do the full
         camera.
 
         If you have Include_path_distance set to true, then we return an extra
         entry in the result array that is the path distance. 
         """
         _igc_ray_caster.IgcRayCaster_swiginit(self, _igc_ray_caster.new_IgcRayCaster(Igc, Start_line, Number_line, Number_integration_step, Resolution, Max_height, Start_sample, Number_sample, Include_path_distance))
+
+    def _v_number_sub_line(self, *args):
+        """
+
+        void GeoCal::IgcRayCaster::number_sub_line(int v)
+        Set the number of subpixels in the line direction we calculate. 
+        """
+        return _igc_ray_caster.IgcRayCaster__v_number_sub_line(self, *args)
+
+
+    @property
+    def number_sub_line(self):
+        return self._v_number_sub_line()
+
+    @number_sub_line.setter
+    def number_sub_line(self, value):
+      self._v_number_sub_line(value)
+
+
+    def _v_number_sub_sample(self, *args):
+        """
+
+        void GeoCal::IgcRayCaster::number_sub_sample(int v)
+        Set the number of subpixels in the sample direction we calculate. 
+        """
+        return _igc_ray_caster.IgcRayCaster__v_number_sub_sample(self, *args)
+
+
+    @property
+    def number_sub_sample(self):
+        return self._v_number_sub_sample()
+
+    @number_sub_sample.setter
+    def number_sub_sample(self, value):
+      self._v_number_sub_sample(value)
+
+
+    def _v_number_integration_step(self, *args):
+        """
+
+        void GeoCal::IgcRayCaster::number_integration_step(int v)
+        Set the number of integration steps we use. 
+        """
+        return _igc_ray_caster.IgcRayCaster__v_number_integration_step(self, *args)
+
+
+    @property
+    def number_integration_step(self):
+        return self._v_number_integration_step()
+
+    @number_integration_step.setter
+    def number_integration_step(self, value):
+      self._v_number_integration_step(value)
+
+
+    def _v_include_path_distance(self, *args):
+        """
+
+        void GeoCal::IgcRayCaster::include_path_distance(bool v)
+        Set the value of the include_path_distance flag. 
+        """
+        return _igc_ray_caster.IgcRayCaster__v_include_path_distance(self, *args)
+
+
+    @property
+    def include_path_distance(self):
+        return self._v_include_path_distance()
+
+    @include_path_distance.setter
+    def include_path_distance(self, value):
+      self._v_include_path_distance(value)
+
 
     def _v_start_sample(self):
         """
@@ -319,6 +397,10 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_ray_caster.delete_IgcRayCaster
+IgcRayCaster._v_number_sub_line = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sub_line, None, IgcRayCaster)
+IgcRayCaster._v_number_sub_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sub_sample, None, IgcRayCaster)
+IgcRayCaster._v_number_integration_step = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_integration_step, None, IgcRayCaster)
+IgcRayCaster._v_include_path_distance = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_include_path_distance, None, IgcRayCaster)
 IgcRayCaster._v_start_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_start_sample, None, IgcRayCaster)
 IgcRayCaster._v_number_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sample, None, IgcRayCaster)
 IgcRayCaster_swigregister = _igc_ray_caster.IgcRayCaster_swigregister

@@ -16,7 +16,7 @@ template<class Archive>
 void IgcRayCaster::load(Archive & ar, const unsigned int version)
 {
   result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
-		      nintegration_step,(include_path_distance ? 4 : 3));
+		      nintegration_step,(include_path_distance_ ? 4 : 3));
 }
 
 template<class Archive>
@@ -28,7 +28,7 @@ void IgcRayCaster::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(nintegration_step) & GEOCAL_NVP(nsub_line)
     & GEOCAL_NVP(nsub_sample) & GEOCAL_NVP_(start_sample)
     & GEOCAL_NVP_(number_sample) & GEOCAL_NVP(is_forward)
-    & GEOCAL_NVP(include_path_distance) & GEOCAL_NVP(resolution)
+    & GEOCAL_NVP_(include_path_distance) & GEOCAL_NVP(resolution)
     & GEOCAL_NVP(max_height);
   boost::serialization::split_member(ar, *this, version);
 }
@@ -46,7 +46,13 @@ inline double sqr(double x) { return x * x; }
 /// larger than the greatest height we will encounter in the Dem
 /// belonging to the Igc.
 ///
-/// For larger cameras, it might be more convenient to pass in start
+/// Note that in some cases you may want to control the exactly number
+/// of subpixels. The easiest way to do this is to just first call
+/// this constructor and let it figure out what it thinks the number
+/// of subpixels should be, and then manually changing this (e.g.,
+/// call number_sub_line and number_sub_sample to set this).
+///
+/// For larger images, it might be more convenient to pass in start
 /// sample and number of samples to process, the default is to do the
 /// full camera.
 ///
@@ -74,7 +80,7 @@ IgcRayCaster::IgcRayCaster
   start_sample_(Start_sample),
   number_sample_(Number_sample > 0 ? Number_sample : 
 		 Igc->number_sample() - Start_sample),
-  include_path_distance(Include_path_distance),
+  include_path_distance_(Include_path_distance),
     resolution(Resolution),
   max_height(Max_height)
 {
@@ -107,7 +113,7 @@ IgcRayCaster::IgcRayCaster
   nsub_line = (int) ceil(line_res / (0.7 * Resolution));
   nsub_sample = (int) ceil(samp_res / (0.7 * Resolution));
   result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
-		      nintegration_step,(include_path_distance ? 4 : 3));
+		      nintegration_step,(include_path_distance_ ? 4 : 3));
 }
 
 //-----------------------------------------------------------------------
@@ -187,7 +193,7 @@ blitz::Array<double, 6> IgcRayCaster::next_position()
 	  result_cache(0,i1,i2,i3,i4, 0) = pt->position[0];
 	  result_cache(0,i1,i2,i3,i4, 1) = pt->position[1];
 	  result_cache(0,i1,i2,i3,i4, 2) = pt->position[2];
-	  if(include_path_distance)
+	  if(include_path_distance_)
 	    result_cache(0,i1,i2,i3,i4, 3) = dist(i1, i2, i3, i4);
 	}
     i2_last = i2;

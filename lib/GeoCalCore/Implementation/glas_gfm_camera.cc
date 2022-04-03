@@ -20,6 +20,10 @@ void GlasGfmCamera::load(Archive& Ar, const unsigned int version)
 {
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
+  if(version < 2) {
+    parameter_mask_.resize(4);
+    parameter_mask_ = true;
+  }
 }
 
 template<class Archive>
@@ -45,7 +49,8 @@ void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(delta_sample_block)
     & GEOCAL_NVP_(field_alignment_block);
   if(version > 1)
-    ar & GEOCAL_NVP_(ppoff);
+    ar & GEOCAL_NVP_(ppoff)
+      & GEOCAL_NVP_(parameter_mask);
   boost::serialization::split_member(ar, *this, version);
 }
 
@@ -434,6 +439,8 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
   init_model();
   field_alignment_fit(Cam, delta_sample_pair_, Band);
   ppoff_ = 0,0,0;
+  parameter_mask_.resize(4);
+  parameter_mask_ = true;
 }
 
 //-----------------------------------------------------------------------
@@ -472,6 +479,8 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
   init_model();
   field_alignment_block(Cam, Delta_line, Delta_sample, Band);
   ppoff_ = 0,0,0;
+  parameter_mask_.resize(4);
+  parameter_mask_ = true;
 }
 
 GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
@@ -500,6 +509,8 @@ GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
   field_angle_interpolation_type_ = 1;
   ppoff_ = 0,0,0;
   init_model();
+  parameter_mask_.resize(4);
+  parameter_mask_ = true;
 }
 
 FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl, 
@@ -558,7 +569,9 @@ ScLookVectorWithDerivative GlasGfmCamera::sc_look_vector_with_derivative
 
 //-----------------------------------------------------------------------
 /// Angular sensor frame offset. This is in radians, and is the order
-/// "xyz".
+/// "xyz". This is the same as delta, beta, epsilon for euler angles
+/// (so a reverse order than we often use, e.g. QuaternionCamera in
+/// epsilon, beta, delta order).
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 1> GlasGfmCamera::angoff() const
@@ -773,3 +786,51 @@ void GlasGfmCamera::print(std::ostream& Os) const
      << angoff()(0) << ", " << angoff()(1) << ", " << angoff()(2) << ")\n";
 }
 
+//-----------------------------------------------------------------------
+/// Set parameter. Right now this is Euler epsilon, beta, delta, focal
+/// length. 
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::parameter(const blitz::Array<double, 1>& Parm)
+{
+  if(Parm.rows() != 4)
+    throw Exception("Wrong sized parameter passed.");
+  focal_length_ = Parm(3);
+  frame_to_sc(quat_rot("zyx", Parm(0), Parm(1), Parm(2)));
+  notify_update();
+}
+
+void GlasGfmCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+{
+  if(Parm.rows() != 4)
+    throw Exception("Wrong sized parameter passed.");
+  focal_length_ = Parm(3);
+  frame_to_sc_with_derivative(quat_rot("zyx", Parm(0), Parm(1), Parm(2)));
+  notify_update();
+}
+
+blitz::Array<double, 1> GlasGfmCamera::parameter() const
+{
+  blitz::Array<double, 1> res(4);
+  quat_to_euler(frame_to_sc_nd_, res(0), res(1), res(2));
+  res(3) = focal_length();
+  return res;
+}
+
+ArrayAd<double, 1> GlasGfmCamera::parameter_with_derivative() const
+{
+  blitz::Array<AutoDerivative<double>, 1> res(4);
+  quat_to_euler(frame_to_sc_, res(0), res(1), res(2));
+  res(3) = focal_length_with_derivative();
+  return ArrayAd<double, 1>(res);
+}
+
+std::vector<std::string> GlasGfmCamera::parameter_name() const
+{
+  std::vector<std::string> res;
+  res.push_back("Camera Euler Epsilon");
+  res.push_back("Camera Euler Beta");
+  res.push_back("Camera Euler Delta");
+  res.push_back("Camera focal length");
+  return res;
+}

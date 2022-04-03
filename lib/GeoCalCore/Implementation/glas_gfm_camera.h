@@ -40,6 +40,48 @@ public:
 		const Time& Focal_length_time = Time::time_j2000(0));
   virtual ~GlasGfmCamera() {}
   void print(std::ostream& Os) const;
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative
+  (const ArrayAd<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
+
+//-----------------------------------------------------------------------
+/// Return the parameter subset mask, where "true" means include the
+/// parameter and "false" means don't.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<bool, 1> parameter_mask() const 
+  { return parameter_mask_; }
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler epsilon.
+//-----------------------------------------------------------------------
+
+  bool fit_epsilon() const { return parameter_mask_(0); }
+  void fit_epsilon(bool V) {parameter_mask_(0) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler beta.
+//-----------------------------------------------------------------------
+
+  bool fit_beta() const { return parameter_mask_(1); }
+  void fit_beta(bool V) {parameter_mask_(1) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler delta.
+//-----------------------------------------------------------------------
+
+  bool fit_delta() const { return parameter_mask_(2); }
+  void fit_delta(bool V) {parameter_mask_(2) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera focal length.
+//-----------------------------------------------------------------------
+
+  bool fit_focal_length() const { return parameter_mask_(3); }
+  void fit_focal_length(bool V) {parameter_mask_(3) = V;}
 
 //-----------------------------------------------------------------------
 /// Number of bands in camera.
@@ -378,6 +420,8 @@ private:
 	  delta_line_block_, delta_sample_block_;
   std::vector<blitz::Array<double, 5> > field_alignment_block_;
   blitz::Array<double, 1> ppoff_;
+  blitz::Array<bool, 1> parameter_mask_;
+				// Mask of parameters we are fitting for.
   virtual void notify_update()
   {
     notify_update_do(*this);
@@ -393,5 +437,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(GlasGfmCamera);
-GEOCAL_CLASS_VERSION(GlasGfmCamera, 1)
+GEOCAL_CLASS_VERSION(GlasGfmCamera, 2)
 #endif

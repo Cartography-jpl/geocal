@@ -347,6 +347,78 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
         return self._v_sensor_type()
 
 
+    def _v_fit_epsilon(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::fit_epsilon(bool V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_fit_epsilon(self, *args)
+
+
+    @property
+    def fit_epsilon(self):
+        return self._v_fit_epsilon()
+
+    @fit_epsilon.setter
+    def fit_epsilon(self, value):
+      self._v_fit_epsilon(value)
+
+
+    def _v_fit_beta(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::fit_beta(bool V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_fit_beta(self, *args)
+
+
+    @property
+    def fit_beta(self):
+        return self._v_fit_beta()
+
+    @fit_beta.setter
+    def fit_beta(self, value):
+      self._v_fit_beta(value)
+
+
+    def _v_fit_delta(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::fit_delta(bool V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_fit_delta(self, *args)
+
+
+    @property
+    def fit_delta(self):
+        return self._v_fit_delta()
+
+    @fit_delta.setter
+    def fit_delta(self, value):
+      self._v_fit_delta(value)
+
+
+    def _v_fit_focal_length(self, *args):
+        """
+
+        void GeoCal::GlasGfmCamera::fit_focal_length(bool V)
+
+        """
+        return _glas_gfm_camera.GlasGfmCamera__v_fit_focal_length(self, *args)
+
+
+    @property
+    def fit_focal_length(self):
+        return self._v_fit_focal_length()
+
+    @fit_focal_length.setter
+    def fit_focal_length(self, value):
+      self._v_fit_focal_length(value)
+
+
     def _v_band_type(self, *args):
         """
 
@@ -745,6 +817,10 @@ GlasGfmCamera._v_frame_to_sc = new_instancemethod(_glas_gfm_camera.GlasGfmCamera
 GlasGfmCamera._v_frame_to_sc_with_derivative = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_frame_to_sc_with_derivative, None, GlasGfmCamera)
 GlasGfmCamera._v_id = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_id, None, GlasGfmCamera)
 GlasGfmCamera._v_sensor_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_sensor_type, None, GlasGfmCamera)
+GlasGfmCamera._v_fit_epsilon = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_fit_epsilon, None, GlasGfmCamera)
+GlasGfmCamera._v_fit_beta = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_fit_beta, None, GlasGfmCamera)
+GlasGfmCamera._v_fit_delta = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_fit_delta, None, GlasGfmCamera)
+GlasGfmCamera._v_fit_focal_length = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_fit_focal_length, None, GlasGfmCamera)
 GlasGfmCamera._v_band_type = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_band_type, None, GlasGfmCamera)
 GlasGfmCamera._v_band_wavelength = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_band_wavelength, None, GlasGfmCamera)
 GlasGfmCamera._v_band_index = new_instancemethod(_glas_gfm_camera.GlasGfmCamera__v_band_index, None, GlasGfmCamera)

@@ -48,6 +48,10 @@ public:
   %python_attribute_with_set(frame_to_sc_with_derivative, boost::math::quaternion<AutoDerivative<double> >);
   %python_attribute_with_set(id, std::string);
   %python_attribute(sensor_type, std::string);
+  %python_attribute_with_set(fit_epsilon, bool);
+  %python_attribute_with_set(fit_beta, bool);
+  %python_attribute_with_set(fit_delta, bool);
+  %python_attribute_with_set(fit_focal_length, bool);
   %python_attribute_with_set(band_type, std::string);
   %python_attribute_with_set(band_wavelength, double);
   %python_attribute_with_set(band_index, std::vector<int>);

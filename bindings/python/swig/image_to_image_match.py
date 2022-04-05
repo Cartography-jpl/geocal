@@ -218,6 +218,10 @@ class ImageToImageMatch(geocal_swig.generic_object.GenericObject):
         """
         return _image_to_image_match.ImageToImageMatch_match(self, Ic1)
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _image_to_image_match.delete_ImageToImageMatch
 ImageToImageMatch.match = new_instancemethod(_image_to_image_match.ImageToImageMatch_match, None, ImageToImageMatch)
 ImageToImageMatch.__str__ = new_instancemethod(_image_to_image_match.ImageToImageMatch___str__, None, ImageToImageMatch)

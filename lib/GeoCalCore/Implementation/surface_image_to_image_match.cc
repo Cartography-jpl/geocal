@@ -1,7 +1,22 @@
 #include "surface_image_to_image_match.h"
 #include "image_ground_connection.h"
 #include "igc_map_projected.h"
+#include "geocal_serialize_support.h"
 using namespace GeoCal;
+
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+template<class Archive>
+void SurfaceImageToImageMatch::serialize(Archive & ar, const unsigned int UNUSED(version))
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(ImageToImageMatch)
+    & GEOCAL_NVP(igc1) & GEOCAL_NVP(igc2)
+    & GEOCAL_NVP_(matcher) & GEOCAL_NVP_(map_project_on_demand)
+    & GEOCAL_NVP(simg1) & GEOCAL_NVP(simg2) & GEOCAL_NVP(pix_fact);
+}
+
+
+GEOCAL_IMPLEMENT(SurfaceImageToImageMatch);
+#endif
 
 //-----------------------------------------------------------------------
 /// Constructor, where we set up for doing map projection on

@@ -219,7 +219,7 @@ class ShapeFeature(collections.abc.Mapping):
         self.layer = weakref.proxy(shape_layer)
         self.feature = ogr_feature
 
-    def keys():
+    def keys(self):
         res = ["Geometry"]
         res.extend(self.layer.field_list)
         return res

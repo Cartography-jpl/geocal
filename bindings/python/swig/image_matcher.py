@@ -246,6 +246,10 @@ class ImageMatcher(geocal_swig.generic_object.GenericObject):
         """
         return _image_matcher.ImageMatcher_match_mask(self, Ref, Ref_mask, New, New_mask, Ref_loc, New_guess)
 
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
     __swig_destroy__ = _image_matcher.delete_ImageMatcher
 ImageMatcher.match = new_instancemethod(_image_matcher.ImageMatcher_match, None, ImageMatcher)
 ImageMatcher.match_mask = new_instancemethod(_image_matcher.ImageMatcher_match_mask, None, ImageMatcher)

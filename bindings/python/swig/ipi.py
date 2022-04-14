@@ -254,9 +254,10 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         Camera > &Cam, int Band, Time Tmin, Time Tmax, const
         boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
         const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
-        Refraction >(), double Local_time_window_size=5.0, double
-        Root_min_separation=30.0, double Time_tolerance=1e-6, double
-        Max_frame_extend=1000)
+        Refraction >(), const boost::shared_ptr< VelocityAberration >
+        &Vabb=boost::shared_ptr< VelocityAberration >(), double
+        Local_time_window_size=5.0, double Root_min_separation=30.0, double
+        Time_tolerance=1e-6, double Max_frame_extend=1000)
         Constructor.
 
         If you only want to get the Time from the Ipi and not ImageCoordinate,
@@ -440,6 +441,24 @@ class Ipi(geocal_swig.generic_object.GenericObject):
       self._v_refraction(value)
 
 
+    def _v_velocity_aberration(self, *args):
+        """
+
+        void GeoCal::Ipi::velocity_aberration(const boost::shared_ptr< VelocityAberration > &V)
+
+        """
+        return _ipi.Ipi__v_velocity_aberration(self, *args)
+
+
+    @property
+    def velocity_aberration(self):
+        return self._v_velocity_aberration()
+
+    @velocity_aberration.setter
+    def velocity_aberration(self, value):
+      self._v_velocity_aberration(value)
+
+
     def _v_band(self, *args):
         """
 
@@ -562,6 +581,7 @@ Ipi._v_orbit = new_instancemethod(_ipi.Ipi__v_orbit, None, Ipi)
 Ipi._v_camera = new_instancemethod(_ipi.Ipi__v_camera, None, Ipi)
 Ipi._v_time_table = new_instancemethod(_ipi.Ipi__v_time_table, None, Ipi)
 Ipi._v_refraction = new_instancemethod(_ipi.Ipi__v_refraction, None, Ipi)
+Ipi._v_velocity_aberration = new_instancemethod(_ipi.Ipi__v_velocity_aberration, None, Ipi)
 Ipi._v_band = new_instancemethod(_ipi.Ipi__v_band, None, Ipi)
 Ipi._v_min_time = new_instancemethod(_ipi.Ipi__v_min_time, None, Ipi)
 Ipi._v_max_time = new_instancemethod(_ipi.Ipi__v_max_time, None, Ipi)

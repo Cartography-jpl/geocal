@@ -28,6 +28,9 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
   // Older version didn't have Refraction
   if(version > 1)
     ar & GEOCAL_NVP(ref);
+  // Older version didn't have VelocityAberration
+  if(version > 2)
+    ar & GEOCAL_NVP_(velocity_aberration);
 }
 
 GEOCAL_IMPLEMENT(Ipi);
@@ -49,10 +52,13 @@ Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const
 	 boost::shared_ptr<Camera>& Cam, int Band,
 	 Time Tmin, Time Tmax, const boost::shared_ptr<TimeTable>& Tt,
 	 const boost::shared_ptr<Refraction>& Ref,
+	 const boost::shared_ptr<VelocityAberration>& Vabb,
 	 double Local_time_window_size,
 	 double Root_min_separation, 
 	 double Time_tolerance, double Max_frame_extend)
-  : orb(Orb), cam(Cam), band_(Band), tt(Tt), min_time_(Tmin), max_time_(Tmax), 
+  : orb(Orb), cam(Cam), band_(Band), tt(Tt), ref(Ref),
+    velocity_aberration_(Vabb),
+    min_time_(Tmin), max_time_(Tmax), 
     last_time(Tmin), local_time_window_size_(Local_time_window_size),
     root_min_separation_(Root_min_separation), 
     time_tolerance_(Time_tolerance),

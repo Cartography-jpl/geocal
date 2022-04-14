@@ -7,6 +7,7 @@
 #include "camera.h"
 #include "time_table.h"
 #include "refraction.h"
+#include "velocity_aberration.h"
 #include <iostream>
 
 namespace GeoCal {
@@ -77,6 +78,8 @@ public:
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
       const boost::shared_ptr<Refraction>&
       Ref = boost::shared_ptr<Refraction>(),
+      const boost::shared_ptr<VelocityAberration>&
+      Vabb = boost::shared_ptr<VelocityAberration>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
       double Time_tolerance = 1e-6, double Max_frame_extend=1000);
@@ -153,6 +156,16 @@ public:
   
   const boost::shared_ptr<Refraction>& refraction() const {return ref;}
   void refraction(const boost::shared_ptr<Refraction>& Ref) {ref = Ref;}
+
+//-----------------------------------------------------------------------
+/// VelocityAberration object we are using. May be null if we are using
+/// the default first order approximation.
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<VelocityAberration>& velocity_aberration() const
+  {return velocity_aberration_;}
+  void velocity_aberration(const boost::shared_ptr<VelocityAberration>& V)
+  {velocity_aberration_ = V;}
   
 //-----------------------------------------------------------------------
 /// Band that we are using.
@@ -209,6 +222,7 @@ private:
   int band_;			 ///< Camera band to use.
   boost::shared_ptr<TimeTable> tt;
   boost::shared_ptr<Refraction> ref;
+  boost::shared_ptr<VelocityAberration> velocity_aberration_;
   Time min_time_;		 ///< Minimum time we search around
   Time max_time_;		 ///< Maximum time we search around
   mutable Time last_time;	 ///< Time from last point we did IPI
@@ -254,6 +268,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Ipi);
-GEOCAL_CLASS_VERSION(Ipi, 2);
+GEOCAL_CLASS_VERSION(Ipi, 3);
 #endif
 

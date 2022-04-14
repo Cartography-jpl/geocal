@@ -11,6 +11,7 @@
 %import "camera.i"
 %import "time_table.i"
 %import "refraction.i"
+%import "velocity_aberration.i"
 %import "ground_coordinate.i"
 %import "image_coordinate.i"
 %import "frame_coordinate.i"
@@ -30,6 +31,8 @@ public:
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
       const boost::shared_ptr<Refraction>&
       Ref = boost::shared_ptr<Refraction>(),
+      const boost::shared_ptr<VelocityAberration>&
+      Vabb = boost::shared_ptr<VelocityAberration>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
       double Time_tolerance = 1e-6, double Max_frame_extend=1000);
@@ -70,6 +73,7 @@ public:
   %python_attribute_with_set(camera, boost::shared_ptr<Camera>)
   %python_attribute_with_set(time_table, boost::shared_ptr<TimeTable>)
   %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
+  %python_attribute_with_set(velocity_aberration, boost::shared_ptr<VelocityAberration>)
   %python_attribute_with_set(band, int)
   %python_attribute(min_time, Time)
   %python_attribute(max_time, Time)

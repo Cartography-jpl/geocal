@@ -50,6 +50,8 @@ public:
   cf_look_vector(const ImageCoordinate& Ic, CartesianFixedLookVector& Lv,
 		 boost::shared_ptr<CartesianFixed>& P) const
   {
+    // We don't include refraction here. Not sure if this is important
+    // or not, we may need to revisit this
     Time t;
     FrameCoordinate f;
     ipi_->time_table()->time(Ic, t, f);
@@ -70,14 +72,15 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic,
 			const Dem& D) const
-  { 
+  {
     Time t;
     FrameCoordinate f;
     ipi_->time_table()->time(Ic, t, f);
     if(t < ipi_->orbit()->min_time() || t >= ipi_->orbit()->max_time())
       throw ImageGroundConnectionFailed();
     return ipi_->orbit()->orbit_data(t)->
-      surface_intersect(*ipi_->camera(), f, D, res, ipi_->band(), max_h);
+      surface_intersect(*ipi_->camera(), f, D, res, ipi_->band(), max_h,
+			ipi_->refraction(), ipi_->velocity_aberration());
   }
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic,
@@ -88,8 +91,9 @@ public:
     ipi_->time_table()->time(Ic, t, f);
     if(t < ipi_->orbit()->min_time() || t >= ipi_->orbit()->max_time())
       throw ImageGroundConnectionFailed();
-    return ipi_->orbit()->orbit_data(t)->
-      reference_surface_intersect_approximate(*ipi_->camera(), f, ipi_->band(), H);
+    return ipi_->orbit()->orbit_data(t)->reference_surface_intersect_approximate
+      (*ipi_->camera(), f, ipi_->band(), H, ipi_->refraction(),
+       ipi_->velocity_aberration());
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
@@ -124,6 +128,32 @@ public:
     opad.strict_sync();
   }
 
+//-----------------------------------------------------------------------
+/// VelocityAberration object we are using. May be null if we are using
+/// the default first order approximation. Note that this gets
+/// forwarded to the Ipi object we are using - we just have this
+/// interface so we don't need to treat IpiImageGroundConnection
+/// differently then e.g., OrbitDataImageGroundConnection
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<VelocityAberration>& velocity_aberration() const
+  {return ipi_->velocity_aberration();}
+  void velocity_aberration(const boost::shared_ptr<VelocityAberration>& V)
+  {ipi_->velocity_aberration(V);}
+
+//-----------------------------------------------------------------------
+/// Refraction that we are using. Note that this gets
+/// forwarded to the Ipi object we are using - we just have this
+/// interface so we don't need to treat IpiImageGroundConnection
+/// differently then e.g., OrbitDataImageGroundConnection.
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<Refraction>& refraction() const
+  {return ipi_->refraction();}
+  void refraction(const boost::shared_ptr<Refraction>& Ref)
+  {ipi_->refraction(Ref);}
+
+  
 //-----------------------------------------------------------------------
 /// IPI that we are using
 //-----------------------------------------------------------------------

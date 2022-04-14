@@ -99,40 +99,15 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
   {
-    bool include_aberration = (velocity_aberration_ ? false : true);
-    boost::shared_ptr<GroundCoordinate> gc_uncorr = 
-      od->surface_intersect(*cam, FrameCoordinate(Ic.line, Ic.sample),
-			    D, res, b, max_h, include_aberration);
-    if(velocity_aberration_) {
-      CartesianFixedLookVector lv_vabb = velocity_aberration_->
-	velocity_aberration_apply(*od->position_cf(), *gc_uncorr,
-				  od->velocity_cf());
-      gc_uncorr = D.intersect(*od->position_cf(), lv_vabb, res, max_h);
-    }
-    if(!refraction_)
-      return gc_uncorr;
-    CartesianFixedLookVector lv = 
-      refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    return D.intersect(*od->position_cf(), lv, res, max_h);
+    return od->surface_intersect(*cam, FrameCoordinate(Ic.line, Ic.sample),
+		 D, res, b, max_h, refraction_, velocity_aberration_);
   }
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
   { 
-    bool include_aberration = (velocity_aberration_ ? false : true);
-    boost::shared_ptr<GroundCoordinate> gc_uncorr = 
-      od->reference_surface_intersect_approximate
-      (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H, include_aberration);
-    if(velocity_aberration_) {
-      CartesianFixedLookVector lv_vabb = velocity_aberration_->
-	velocity_aberration_apply(*od->position_cf(), *gc_uncorr,
-				  od->velocity_cf());
-      gc_uncorr = od->position_cf()->reference_surface_intersect_approximate(lv_vabb, H);
-    }
-    if(!refraction_)
-      return gc_uncorr;
-    CartesianFixedLookVector lv = 
-      refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    return od->position_cf()->reference_surface_intersect_approximate(lv, H);
+    return od->reference_surface_intersect_approximate
+      (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H, refraction_,
+       velocity_aberration_);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 

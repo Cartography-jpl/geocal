@@ -184,6 +184,7 @@ import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
+import geocal_swig.look_vector
 class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
     """
 

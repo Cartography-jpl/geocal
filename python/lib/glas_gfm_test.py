@@ -18,6 +18,7 @@ from matplotlib.backends.backend_pdf import PdfPages
 import numpy as np
 import subprocess
 import math
+import pandas as pd
 
 # This also works with an igc.
 def rsm_plot_diff(r, igc, fname=None, min_height = -5000,
@@ -565,6 +566,7 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     RSM handles this'''
     # "Real" igc
     igc_r = igc_staring
+    igc_r.ipi.velocity_aberration = VelocityAberrationExact()
     tdelta = (igc_r.ipi.time_table.time(ImageCoordinate(1,0))[0] -
               igc_r.ipi.time_table.time(ImageCoordinate(0,0))[0])
     # Now, implement with stuff needed for GLAS
@@ -592,6 +594,7 @@ def test_create_staring_glas(isolated_dir, igc_staring):
                               igc_r.ipi.camera.number_sample(0))
     ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
                 igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+    ipi_g.velocity_aberration = VelocityAberrationExact()
     igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
     igc_g.platform_id = "FAKEPL"
     igc_g.payload_id = "FAKEPY"
@@ -614,10 +617,7 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     f.image_segment.append(pynitf.NitfImageSegment(img2))
     f.image_segment[0].create_glas_gfm(igc_g)
     f.image_segment[1].create_glas_gfm(igc_g)
-    # Turn off refraction in MSP calculation. Normally we want this on,
-    # but we turn it off so we can get better agreement with our Igc.
-    # We'll probably want to investigate this and include refraction in
-    # our calculation, but punt on this for now.
+    # First one without refraction
     f.image_segment[0].glas_gfm.tre_csexrb.atm_refr_flag = 0
     # Second image that does have refraction turned on, so we can compare
     f.image_segment[1].glas_gfm.tre_csexrb.atm_refr_flag = 1
@@ -627,7 +627,8 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     igc_msp2_refr = IgcMsp("glas_test.ntf", SimpleDem(), 1, "GLAS", "GLAS")
     with open("f2.txt", "w") as fh:
         print(f2,file=fh)
-    igc_g2 = f2.image_segment[0].glas_gfm.igc()
+    igc_g2 = f2.image_segment[0].glas_gfm.igc(velocity_aberration_exact=True)
+    igc_g2_refr = f2.image_segment[1].glas_gfm.igc(velocity_aberration_exact=True)
 
     if False:
         rsm = igc_msp2.generate_rsm("rsm_generate_report.txt")
@@ -637,27 +638,31 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     # we write the out.
     diff = []
     diff2 = []
+    diff3 = []
     h = []
     h2 = []
+    dist_ref = []
     for i in range(0,2048,100):
         for j in range(0,2048,100):
             gc1 = igc_r.ground_coordinate(ImageCoordinate(i,j))
             gc2 = igc_g2.ground_coordinate(ImageCoordinate(i,j))
             gc3 = igc_msp2.ground_coordinate(ImageCoordinate(i,j))
-            gc4 = igc_msp2_refr.ground_coordinate(ImageCoordinate(i,j))
-            print("Distance refraction: ", distance(gc3, gc4))
+            gc4 = igc_g2_refr.ground_coordinate(ImageCoordinate(i,j))
+            gc5 = igc_msp2_refr.ground_coordinate(ImageCoordinate(i,j))
             assert distance(gc1, gc2) < 0.05
+            dist_ref.append(distance(gc2,gc4))
             diff.append(distance(gc3, gc2))
             diff2.append(distance(gc3, gc1))
+            diff3.append(distance(gc4, gc5))
             h.append(gc3.height_reference_surface)
             h2.append(gc2.height_reference_surface)
     # Small differences, not clear what this is from. Maybe aberration of light?
     # Refraction is a much bigger effect here with the larger angles
-    print("max diff: ", max(diff))
-    print("max diff: ", max(diff2))
+    print("max diff geocal vs. MSP no refraction: ", max(diff))
+    print("max diff geocal vs. MSP with refraction: ", max(diff3))
+    print("max diff before save: ", max(diff2))
     print("max h: ", max(h))
     print("max h: ", max(h2))
-    print(diff)
-    print(diff2)
-    print(h)
-    print(h2)
+    print("Distance from refraction")
+    print(pd.DataFrame(dist_ref).describe())
+    

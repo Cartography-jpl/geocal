@@ -183,6 +183,7 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
+import geocal_swig.look_vector
 class Ipi(geocal_swig.generic_object.GenericObject):
     """
 

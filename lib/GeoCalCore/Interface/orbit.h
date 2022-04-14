@@ -7,6 +7,8 @@
 #include "camera.h"
 #include "dem.h"
 #include "geocal_autoderivative_quaternion.h"
+#include "velocity_aberration.h"
+#include "refraction.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <vector>
@@ -83,12 +85,18 @@ public:
 		    const Dem& D,
 		    double Resolution = 30,
 		    int Band = 0, double Max_height = 9000,
-		    bool Include_velocity_aberration = true) const;
+		    const boost::shared_ptr<Refraction>&
+		    Ref = boost::shared_ptr<Refraction>(),
+		    const boost::shared_ptr<VelocityAberration>&
+		    Vabb = boost::shared_ptr<VelocityAberration>()) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0,
 		  double Height_reference_surface = 0.0,
-            	  bool Include_velocity_aberration = true) const;
+   	          const boost::shared_ptr<Refraction>&
+		  Ref = boost::shared_ptr<Refraction>(),
+		  const boost::shared_ptr<VelocityAberration>&
+		  Vabb = boost::shared_ptr<VelocityAberration>()) const;
 
   double resolution_meter(const Camera& C, int Band = 0) const;
   double resolution_meter(const Camera& C, const FrameCoordinate& Fc, 

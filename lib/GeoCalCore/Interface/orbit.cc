@@ -95,11 +95,23 @@ OrbitData::surface_intersect
  const Dem& D,
  double Resolution,
  int Band, double Max_height,
- bool Include_velocity_aberration) const
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  return D.intersect(*position_cf(),
-     cf_look_vector(C.sc_look_vector(Fc, Band), Include_velocity_aberration),
-     Resolution, Max_height);
+  bool include_aberration = (Vabb ? false : true);
+  auto gc_uncorr = D.intersect(*position_cf(),
+		cf_look_vector(C.sc_look_vector(Fc, Band), include_aberration),
+		Resolution, Max_height);
+  if(Vabb) {
+    CartesianFixedLookVector lv_vabb = Vabb->
+      velocity_aberration_apply(*position_cf(), *gc_uncorr, velocity_cf());
+    gc_uncorr = D.intersect(*position_cf(), lv_vabb, Resolution, Max_height);
+  }
+  if(!Ref)
+    return gc_uncorr;
+  CartesianFixedLookVector lv = 
+    Ref->refraction_apply(*position_cf(), *gc_uncorr);
+  return D.intersect(*position_cf(), lv, Resolution, Max_height);
 }
 
 
@@ -183,12 +195,25 @@ boost::shared_ptr<CartesianFixed>
 OrbitData::reference_surface_intersect_approximate
 (const Camera& C, 
  const FrameCoordinate& Fc, int Band, double Height_reference_surface,
- bool Include_velocity_aberration) const
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
+  bool include_aberration = (Vabb ? false : true);
   ScLookVector sl = C.sc_look_vector(Fc, Band);
-  CartesianFixedLookVector lv = cf_look_vector(sl, Include_velocity_aberration);
-  return position_cf()->reference_surface_intersect_approximate(lv, 
+  CartesianFixedLookVector lv = cf_look_vector(sl, include_aberration);
+  auto gc_uncorr = position_cf()->reference_surface_intersect_approximate(lv, 
          Height_reference_surface);
+  if(Vabb) {
+    CartesianFixedLookVector lv_vabb = Vabb->
+      velocity_aberration_apply(*position_cf(), *gc_uncorr, velocity_cf());
+    gc_uncorr = position_cf()->reference_surface_intersect_approximate(lv_vabb,
+       Height_reference_surface);
+  }
+  if(!Ref)
+    return gc_uncorr;
+  lv = Ref->refraction_apply(*position_cf(), *gc_uncorr);
+  return position_cf()->reference_surface_intersect_approximate(lv,
+       Height_reference_surface);
 }
 
 //-----------------------------------------------------------------------

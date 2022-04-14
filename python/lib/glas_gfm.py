@@ -97,9 +97,7 @@ class GlasGfm(object):
         if(refraction_flag is not None):
             t.atm_refr_flag = 1 if refraction_flag else 0
         else:
-            # Right now IPI doesn't support refraction. We'll add that,
-            # but for now just check OrbitDataImageGroundConnection
-            if(isinstance(igc, OrbitDataImageGroundConnection) and
+            if(hasattr(igc, "refraction") and
                igc.refraction is not None):
                 t.atm_refr_flag = 1
             else:
@@ -107,10 +105,10 @@ class GlasGfm(object):
         if(velocity_aberration_flag is not None):
             t.vel_aber_flag = 1 if velocity_aberration_flag else 0
         else:
-            # Right now IPI doesn't support velocity_aberration. We'll add that,
-            # but for now just check OrbitDataImageGroundConnection
-            if(isinstance(igc, OrbitDataImageGroundConnection) and
-               igc.velocity_aberration is not None and
+            vabb = None
+            if(hasattr(igc, "velocity_aberration")):
+                vabb = igc.velocity_aberration
+            if(vabb is not None and
                isinstance(igc.velocity_aberration, NoVelocityAberration)):
                 t.vel_aber_flag = 0
             else:
@@ -179,10 +177,10 @@ class GlasGfm(object):
         orb = self.orbit
         cam = self.camera
         if(cam.sensor_type == "S"):
-            # TODO Ipi doesn't support refraction yet. When it does,
-            # put this in. Same with VelocityAberration
             tt = self.time_table
-            ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt)
+            ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt,
+                      self.refraction,
+                      self.velocity_aberration(velocity_aberration_exact))
             igc = IpiImageGroundConnection(ipi, dem, None,
                                            self.iseg.iid1)
         elif(cam.sensor_type == "F"):

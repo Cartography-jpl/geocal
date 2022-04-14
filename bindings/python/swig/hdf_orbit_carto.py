@@ -186,6 +186,7 @@ import geocal_swig.orbit
 import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
+import geocal_swig.look_vector
 class HdfOrbit_EciTodBurl_TimeAcs(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr

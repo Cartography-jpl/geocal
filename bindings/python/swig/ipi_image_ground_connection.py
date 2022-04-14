@@ -258,6 +258,42 @@ class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
         return self._v_maximum_height()
 
 
+    def _v_refraction(self, *args):
+        """
+
+        void GeoCal::IpiImageGroundConnection::refraction(const boost::shared_ptr< Refraction > &Ref)
+
+        """
+        return _ipi_image_ground_connection.IpiImageGroundConnection__v_refraction(self, *args)
+
+
+    @property
+    def refraction(self):
+        return self._v_refraction()
+
+    @refraction.setter
+    def refraction(self, value):
+      self._v_refraction(value)
+
+
+    def _v_velocity_aberration(self, *args):
+        """
+
+        void GeoCal::IpiImageGroundConnection::velocity_aberration(const boost::shared_ptr< VelocityAberration > &V)
+
+        """
+        return _ipi_image_ground_connection.IpiImageGroundConnection__v_velocity_aberration(self, *args)
+
+
+    @property
+    def velocity_aberration(self):
+        return self._v_velocity_aberration()
+
+    @velocity_aberration.setter
+    def velocity_aberration(self, value):
+      self._v_velocity_aberration(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -266,6 +302,8 @@ IpiImageGroundConnection.cf_look_vector = new_instancemethod(_ipi_image_ground_c
 IpiImageGroundConnection._v_ipi = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_ipi, None, IpiImageGroundConnection)
 IpiImageGroundConnection._v_resolution = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_resolution, None, IpiImageGroundConnection)
 IpiImageGroundConnection._v_maximum_height = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_maximum_height, None, IpiImageGroundConnection)
+IpiImageGroundConnection._v_refraction = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_refraction, None, IpiImageGroundConnection)
+IpiImageGroundConnection._v_velocity_aberration = new_instancemethod(_ipi_image_ground_connection.IpiImageGroundConnection__v_velocity_aberration, None, IpiImageGroundConnection)
 IpiImageGroundConnection_swigregister = _ipi_image_ground_connection.IpiImageGroundConnection_swigregister
 IpiImageGroundConnection_swigregister(IpiImageGroundConnection)
 

@@ -4,6 +4,7 @@
 #include "geocal_gsl_root.h"
 #include "constant.h"
 #include "geocal_serialize_support.h"
+#include "simple_dem.h"
 #include <blitz/array.h>
 #include <cmath>
 
@@ -158,11 +159,13 @@ double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
 /// is seen.
 //-----------------------------------------------------------------------
 
-FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate& Gc, 
-				 const Camera& C, int Band) const
+FrameCoordinate OrbitData::frame_coordinate
+(const GroundCoordinate& Gc, 
+ const Camera& C, int Band,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  CartesianFixedLookVector lv(*position_cf(), Gc);
-  ScLookVector sl = sc_look_vector(lv);
+  ScLookVector sl = sc_look_vector(*Gc.convert_to_cf(), Ref, Vabb);
   return C.frame_coordinate(sl, Band);
 }
 
@@ -174,14 +177,12 @@ FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate& Gc,
 
 FrameCoordinateWithDerivative 
 OrbitData::frame_coordinate_with_derivative
-(const GroundCoordinate& Gc, const Camera& C, int Band) const
+(const GroundCoordinate& Gc, const Camera& C, int Band,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  boost::array<AutoDerivative<double>, 3> p1 = position_cf_with_derivative();
-  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
-  CartesianFixedLookVectorWithDerivative lv;
-  for(int i = 0; i < 3; ++i)
-    lv.look_vector[i] = p2->position[i] - p1[i];
-  ScLookVectorWithDerivative sl = sc_look_vector(lv);
+  ScLookVectorWithDerivative sl = sc_look_vector_with_derivative
+    (*Gc.convert_to_cf(), Ref, Vabb);
   return C.frame_coordinate_with_derivative(sl, Band);
 }
 
@@ -966,6 +967,57 @@ QuaternionOrbitData::cf_look_vector
     cf -= k * vel_cf_with_der;
   }
   return CartesianFixedLookVectorWithDerivative(cf);
+}
+
+//-----------------------------------------------------------------------
+/// Find the ScLookVector that sees a given point.
+//-----------------------------------------------------------------------
+
+ScLookVector
+QuaternionOrbitData::sc_look_vector
+(const CartesianFixed& Gc,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
+{
+  // TODO add VelocityAberration
+  CartesianFixedLookVector lv;
+  if(Ref) {
+    lv = Ref->refraction_reverse(*position_cf(), Gc);
+  } else {
+    boost::array<double, 3> p1 = Gc.position;
+    boost::array<double, 3> p2 = position_cf()->position;
+    lv.look_vector[0] = p1[0] - p2[0];
+    lv.look_vector[1] = p1[1] - p2[1];
+    lv.look_vector[2] = p1[2] - p2[2];
+  }
+  return sc_look_vector(lv);
+}
+
+//-----------------------------------------------------------------------
+/// Find the ScLookVector that sees a given point.
+//-----------------------------------------------------------------------
+
+ScLookVectorWithDerivative
+QuaternionOrbitData::sc_look_vector_with_derivative
+(const CartesianFixed& Gc,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
+{
+  // TODO add refraction and VelocityAberration
+  boost::array<double, 3> p1 = Gc.position;
+  boost::array<AutoDerivative<double>, 3> p2 = position_cf_with_derivative();
+  if(Ref) {
+    auto gc_uncorr =
+      SimpleDem().intersect(*position_cf(),
+			    Ref->refraction_reverse(*position_cf(), Gc),
+			    1);
+    p1 = gc_uncorr->position;
+  }
+  CartesianFixedLookVectorWithDerivative lv;
+  lv.look_vector[0] = p1[0] - p2[0];
+  lv.look_vector[1] = p1[1] - p2[1];
+  lv.look_vector[2] = p1[2] - p2[2];
+  return sc_look_vector(lv);
 }
 
 //-----------------------------------------------------------------------

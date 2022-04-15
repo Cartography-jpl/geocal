@@ -245,6 +245,18 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
         return _orbit.OrbitData_cf_look_vector(self, *args)
 
 
+    def sc_look_vector_with_derivative(self, *args):
+        """
+
+        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector_with_derivative(const CartesianFixed &Gc, const boost::shared_ptr< Refraction >
+        &Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<
+        VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())
+        const =0
+
+        """
+        return _orbit.OrbitData_sc_look_vector_with_derivative(self, *args)
+
+
     def sc_look_vector(self, *args):
         """
 
@@ -255,26 +267,32 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
         return _orbit.OrbitData_sc_look_vector(self, *args)
 
 
-    def frame_coordinate(self, Gc, C, Band=0):
+    def frame_coordinate(self, *args):
         """
 
-        FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate &Gc, const Camera &C, int Band=0) const
+        FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate &Gc, const Camera &C, int Band=0, const
+        boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction
+        >(), const boost::shared_ptr< VelocityAberration >
+        &Vabb=boost::shared_ptr< VelocityAberration >()) const
         Give the frame coordinates that a particular point on the ground is
         seen. 
         """
-        return _orbit.OrbitData_frame_coordinate(self, Gc, C, Band)
+        return _orbit.OrbitData_frame_coordinate(self, *args)
 
 
-    def frame_coordinate_with_derivative(self, Gc, C, Band=0):
+    def frame_coordinate_with_derivative(self, *args):
         """
 
-        FrameCoordinateWithDerivative OrbitData::frame_coordinate_with_derivative(const GroundCoordinate &Gc, const Camera &C, int Band=0) const
+        FrameCoordinateWithDerivative OrbitData::frame_coordinate_with_derivative(const GroundCoordinate &Gc, const Camera &C, int Band=0, const
+        boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction
+        >(), const boost::shared_ptr< VelocityAberration >
+        &Vabb=boost::shared_ptr< VelocityAberration >()) const
         Give the frame coordinates that a particular point on the ground is
         seen, including derivatives wrt.
 
         the parameters of the Camera and this OrbitData. 
         """
-        return _orbit.OrbitData_frame_coordinate_with_derivative(self, Gc, C, Band)
+        return _orbit.OrbitData_frame_coordinate_with_derivative(self, *args)
 
 
     def reference_surface_intersect_approximate(self, *args):
@@ -425,6 +443,7 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
 OrbitData.resolution_meter = new_instancemethod(_orbit.OrbitData_resolution_meter, None, OrbitData)
 OrbitData.ci_look_vector = new_instancemethod(_orbit.OrbitData_ci_look_vector, None, OrbitData)
 OrbitData.cf_look_vector = new_instancemethod(_orbit.OrbitData_cf_look_vector, None, OrbitData)
+OrbitData.sc_look_vector_with_derivative = new_instancemethod(_orbit.OrbitData_sc_look_vector_with_derivative, None, OrbitData)
 OrbitData.sc_look_vector = new_instancemethod(_orbit.OrbitData_sc_look_vector, None, OrbitData)
 OrbitData.frame_coordinate = new_instancemethod(_orbit.OrbitData_frame_coordinate, None, OrbitData)
 OrbitData.frame_coordinate_with_derivative = new_instancemethod(_orbit.OrbitData_frame_coordinate_with_derivative, None, OrbitData)
@@ -757,26 +776,31 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
         return _orbit.Orbit_cf_look_vector(self, *args)
 
 
-    def frame_coordinate(self, T, Gc, C, Band=0):
+    def frame_coordinate(self, *args):
         """
 
-        FrameCoordinate GeoCal::Orbit::frame_coordinate(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0)
+        FrameCoordinate GeoCal::Orbit::frame_coordinate(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0,
+        const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
+        Refraction >(), const boost::shared_ptr< VelocityAberration >
+        &Vabb=boost::shared_ptr< VelocityAberration >()) const
+        Give the frame coordinates that a particular point on the ground is
+        seen. 
+        """
+        return _orbit.Orbit_frame_coordinate(self, *args)
+
+
+    def frame_coordinate_with_derivative(self, *args):
+        """
+
+        FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(const TimeWithDerivative &T, const GroundCoordinate &Gc, const Camera
+        &C, int Band=0, const boost::shared_ptr< Refraction >
+        &Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<
+        VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())
         const
         Give the frame coordinates that a particular point on the ground is
         seen. 
         """
-        return _orbit.Orbit_frame_coordinate(self, T, Gc, C, Band)
-
-
-    def frame_coordinate_with_derivative(self, T, Gc, C, Band=0):
-        """
-
-        FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(const TimeWithDerivative &T, const GroundCoordinate &Gc, const Camera
-        &C, int Band=0) const
-        Give the frame coordinates that a particular point on the ground is
-        seen. 
-        """
-        return _orbit.Orbit_frame_coordinate_with_derivative(self, T, Gc, C, Band)
+        return _orbit.Orbit_frame_coordinate_with_derivative(self, *args)
 
 
     def reference_surface_intersect_approximate(self, T, C, Fc, Band=0, Height_reference_surface=0.0):
@@ -796,7 +820,10 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def sc_look_vector(self, *args):
         """
 
-        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixed &Pt) const
+        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixed &Pt, const boost::shared_ptr< Refraction
+        > &Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<
+        VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())
+        const
         Return ScLookVector that sees a given point. 
         """
         return _orbit.Orbit_sc_look_vector(self, *args)

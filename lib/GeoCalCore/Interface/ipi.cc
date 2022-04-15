@@ -246,34 +246,37 @@ void Ipi::image_coordinate_with_derivative
 void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 	       bool& Success) const
 {
-  // TODO Include refraction
-  if(ref)
-    throw Exception("Don't yet work with refraction");
-
   class IpiEq: public DFunctor {
   public:
     IpiEq(const boost::shared_ptr<Camera>& Cam,
 	  const boost::shared_ptr<Orbit>& Orb,
-	  const boost::shared_ptr<CartesianFixed> P,
+	  const boost::shared_ptr<CartesianFixed>& P,
+	  const boost::shared_ptr<Refraction>& Ref,
+	  const boost::shared_ptr<VelocityAberration>& Vabb,
 	  Time Tmin,
 	  int Band)
-      : cam(Cam), orb(Orb), p(P), band(Band), tmin(Tmin)
+      : cam(Cam), orb(Orb), p(P), ref(Ref), vabb(Vabb),
+	band(Band), tmin(Tmin)
     {
       height = p->height_reference_surface();
     }
     virtual ~IpiEq() {}
     virtual double operator()(const double& Toffset) const
     {
-      return cam->frame_line_coordinate(orb->sc_look_vector(tmin+Toffset, *p), 
+      return cam->frame_line_coordinate(orb->sc_look_vector(tmin + Toffset,
+							    *p, ref, vabb), 
 					band);
     }
     FrameCoordinate frame_coordinate(const double& Toffset) const
     {
-      return cam->frame_coordinate(orb->sc_look_vector(tmin+Toffset, *p),
-				   band);
+      return orb->frame_coordinate(tmin + Toffset, *p, *cam, band, ref, vabb);
     }
     bool false_root(double Toffset) const
     {
+      // Note we don't need to worry about refraction or
+      // velocity_aberration here, this can be pretty rough to find
+      // a false root
+      
       boost::shared_ptr<CartesianFixed> p2 = orb->position_cf(tmin + Toffset);
       boost::array<double, 3> p1 = p->position;
       boost::array<double, 3> p3 = p2->position;
@@ -289,27 +292,19 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 			 reference_surface_intersect_approximate(lv, height)),
 			 *p) > allowed_intersection_error);
     }
-    CartesianFixedLookVector look_vector
-    (const boost::shared_ptr<OrbitData>& Od) const
-    {
-      boost::array<double, 3> p1 = p->position;
-      boost::array<double, 3> p2 = Od->position_cf()->position;
-      CartesianFixedLookVector lv;
-      lv.look_vector[0] = p1[0] - p2[0];
-      lv.look_vector[1] = p1[1] - p2[1];
-      lv.look_vector[2] = p1[2] - p2[2];
-      return lv;
-    }
   private:
     boost::shared_ptr<Camera> cam;
     boost::shared_ptr<Orbit> orb;
     boost::shared_ptr<CartesianFixed> p;
+    boost::shared_ptr<Refraction> ref;
+    boost::shared_ptr<VelocityAberration> vabb;
     int band;
     Time tmin;
     double height;
   };
 
-  IpiEq eq(cam, orb, Gp.convert_to_cf(), min_time_, band_);
+  IpiEq eq(cam, orb, Gp.convert_to_cf(), ref, velocity_aberration_,
+	   min_time_, band_);
   double min_eq_t = std::max(0.0, orb->min_time() - min_time_);
   // The time_tolerance / 2 is because we usually use a range 
   // min <= x < max, but root_list uses min <= x <= max. We move off
@@ -396,18 +391,18 @@ void Ipi::time_with_derivative
  FrameCoordinateWithDerivative& Fres,
  bool& Success) const
 {
-  // TODO Include refraction
-  if(ref)
-    throw Exception("Don't yet work with refraction");
   class IpiEq: public DFunctorWithDerivative {
   public:
     IpiEq(const boost::shared_ptr<Camera>& Cam,
 	  const boost::shared_ptr<Orbit>& Orb,
 	  const boost::shared_ptr<CartesianFixed> P,
 	  const boost::array<AutoDerivative<double>, 3>& P_with_der,
+	  const boost::shared_ptr<Refraction>& Ref,
+	  const boost::shared_ptr<VelocityAberration>& Vabb,
 	  Time Tmin,
 	  int Band)
       : cam(Cam), orb(Orb), p(P), p_with_der(P_with_der),
+	ref(Ref), vabb(Vabb),
 	band(Band), tmin(Tmin)
     {
       height = p->height_reference_surface();
@@ -416,7 +411,7 @@ void Ipi::time_with_derivative
     virtual double operator()(const double& Toffset) const
     {
       return cam->frame_line_coordinate(orb->sc_look_vector(tmin + Toffset,
-							    *p), 
+							    *p, ref, vabb), 
 					band);
     }
     virtual double df(double Toffset) const
@@ -433,63 +428,50 @@ void Ipi::time_with_derivative
     }
     virtual AutoDerivative<double> f_with_derivative(double Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = 
-	orb->orbit_data(TimeWithDerivative(tmin) + Toffset);
-      return cam->frame_coordinate_with_derivative
-	(od->sc_look_vector(look_vector_with_derivative(od)), 
-	 band).line;
+      return orb->frame_coordinate_with_derivative
+	(TimeWithDerivative(tmin) + Toffset, *p, *cam, band, ref, vabb).line;
     }
     FrameCoordinateWithDerivative frame_coordinate(const AutoDerivative<double>& Toffset) const
     {
-      boost::shared_ptr<OrbitData> od = 
-	orb->orbit_data(TimeWithDerivative(tmin) + Toffset);
-      return cam->frame_coordinate_with_derivative
-	(od->sc_look_vector(look_vector_with_derivative(od)), band);
+      return orb->frame_coordinate_with_derivative
+	(TimeWithDerivative(tmin) + Toffset, *p, *cam, band, ref, vabb);
     }
     bool false_root(double Toffset) const
     {
+      // Note we don't need to worry about refraction or
+      // velocity_aberration here, this can be pretty rough to find
+      // a false root
+      boost::shared_ptr<CartesianFixed> p2 = orb->position_cf(tmin + Toffset);
+      boost::array<double, 3> p1 = p->position;
+      boost::array<double, 3> p3 = p2->position;
+      CartesianFixedLookVector lv;
+      lv.look_vector[0] = p1[0] - p3[0];
+      lv.look_vector[1] = p1[1] - p3[1];
+      lv.look_vector[2] = p1[2] - p3[2];
       boost::shared_ptr<OrbitData> od = orb->orbit_data(tmin + Toffset);
       const double allowed_intersection_error = 50000;
 				// How far off we can be from actual position 
 				// of point and still call it a true
 				// solution.
       return (distance(*(od->position_cf()->
-		 reference_surface_intersect_approximate(look_vector(od), 
+		 reference_surface_intersect_approximate(lv, 
 					 height)),
 			 *p) > allowed_intersection_error);
-    }
-    CartesianFixedLookVector look_vector
-    (const boost::shared_ptr<OrbitData>& Od) const
-    {
-      boost::array<double, 3> p1 = p->position;
-      boost::array<double, 3> p2 = Od->position_cf()->position;
-      CartesianFixedLookVector lv;
-      lv.look_vector[0] = p1[0] - p2[0];
-      lv.look_vector[1] = p1[1] - p2[1];
-      lv.look_vector[2] = p1[2] - p2[2];
-      return lv;
-    }
-    CartesianFixedLookVectorWithDerivative look_vector_with_derivative
-    (const boost::shared_ptr<OrbitData>& Od) const
-    {
-      boost::array<AutoDerivative<double>, 3> p2 = Od->position_cf_with_derivative();
-      CartesianFixedLookVectorWithDerivative lv;
-      lv.look_vector[0] = p_with_der[0] - p2[0];
-      lv.look_vector[1] = p_with_der[1] - p2[1];
-      lv.look_vector[2] = p_with_der[2] - p2[2];
-      return lv;
     }
   private:
     boost::shared_ptr<Camera> cam;
     boost::shared_ptr<Orbit> orb;
     boost::shared_ptr<CartesianFixed> p;
     boost::array<AutoDerivative<double>, 3> p_with_der;
+    boost::shared_ptr<Refraction> ref;
+    boost::shared_ptr<VelocityAberration> vabb;
     int band;
     Time tmin;
     double height;
   };
 
-  IpiEq eq(cam, orb, Gp.convert_to_cf(), Gp_with_der, min_time_, band_);
+  IpiEq eq(cam, orb, Gp.convert_to_cf(), Gp_with_der, ref,
+	   velocity_aberration_, min_time_, band_);
   double min_eq_t = std::max(0.0, orb->min_time() - min_time_);
   // The time_tolerance / 2 is because we usually use a range 
   // min <= x < max, but root_list uses min <= x <= max. We move off
@@ -595,9 +577,7 @@ double Ipi::resolution_meter() const
 std::vector<boost::shared_ptr<GroundCoordinate> > 
 Ipi::footprint(const Dem& D) const
 {
-  // TODO Include refraction
-  if(ref)
-    throw Exception("Don't yet work with refraction");
+  // TODO Include refraction and velocity_aberration
   std::vector<boost::shared_ptr<GroundCoordinate> > fp = 
     orbit()->orbit_data(min_time())->footprint(*camera(), D, 30, band());
   std::vector<boost::shared_ptr<GroundCoordinate> > fp2 =

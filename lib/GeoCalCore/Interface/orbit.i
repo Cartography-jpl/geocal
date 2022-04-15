@@ -46,6 +46,18 @@ public:
   virtual CartesianFixedLookVectorWithDerivative
   cf_look_vector(const ScLookVectorWithDerivative& Sl,
 		 bool Include_velocity_aberration = true) const;
+  virtual ScLookVector
+  sc_look_vector(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector_with_derivative(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const;
   virtual ScLookVector 
   sc_look_vector(const CartesianInertialLookVector& Ci,
 		 bool Include_velocity_aberration = true) const;
@@ -59,10 +71,18 @@ public:
   sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
 		 bool Include_velocity_aberration = true) const;
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0, 
@@ -260,11 +280,20 @@ public:
   cf_look_vector(const TimeWithDerivative& T, 
 		 const ScLookVectorWithDerivative& Sl) const;
   FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const TimeWithDerivative& T, 
-				   const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+           const GroundCoordinate& Gc, 
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
+				   
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(Time T, const Camera& C, 
 			  const FrameCoordinate& Fc, int Band = 0,
@@ -280,7 +309,11 @@ public:
   (const TimeWithDerivative& T, 
    const CartesianFixedLookVectorWithDerivative& Cf) const;
   virtual ScLookVector sc_look_vector(Time T, 
-				      const CartesianFixed& Pt) const;
+           const CartesianFixed& Pt,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   %python_attribute(min_time, Time)

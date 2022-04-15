@@ -78,11 +78,9 @@ BOOST_AUTO_TEST_CASE(refraction_test)
 
   Time texpect = tmin + 1000 * 40.8e-3;
   FrameCoordinate fc(0, 30);
-  CartesianInertialLookVector lv = 
-    orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
-  boost::shared_ptr<CartesianFixed> pt = 
-    orb->position_ci(texpect)->reference_surface_intersect_approximate(lv)->
-    convert_to_cf(texpect);
+  auto od = orb->orbit_data(texpect);
+  auto pt = od->reference_surface_intersect_approximate(*cam, fc, band, 0,
+							ref, vabb);
   Time tres;
   FrameCoordinate fres;
   bool success;
@@ -98,9 +96,8 @@ BOOST_AUTO_TEST_CASE(refraction_test)
   BOOST_CHECK_EQUAL(ic, ic_expect);
 
   fc.sample = -30;
-  lv = orb->ci_look_vector(texpect, cam->sc_look_vector(fc, band));
-  pt = orb->position_ci(texpect)->reference_surface_intersect_approximate(lv)->
-    convert_to_cf(texpect);
+  pt = od->reference_surface_intersect_approximate(*cam, fc, band, 0,
+						   ref, vabb);
   ipi.time(*pt, tres, fres, success);
   BOOST_CHECK(success);
   BOOST_CHECK(fabs(tres - texpect) < 1.0 / 16 * 40.8e-3);

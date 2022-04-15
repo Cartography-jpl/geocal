@@ -112,14 +112,8 @@ public:
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
   {
-    // TODO include velocity_aberration_
-    FrameCoordinate fc;
-    if(refraction_) {
-      CartesianFixedLookVector lv =
-	refraction_->refraction_reverse(*od->position_cf(), Gc);
-      fc = cam->frame_coordinate(od->sc_look_vector(lv), b);
-    } else
-      fc = od->frame_coordinate(Gc, *cam, b);
+    FrameCoordinate fc = od->frame_coordinate(Gc, *cam, b, refraction_,
+					      velocity_aberration_);
     return ImageCoordinate(fc.line, fc.sample);
   }
 
@@ -131,16 +125,9 @@ public:
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { 
-    // TODO include velocity_aberration_
-    FrameCoordinateWithDerivative fc;
-    if(refraction_) {
-      boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	SimpleDem().intersect(*od->position_cf(),
-	      refraction_->refraction_reverse(*od->position_cf(), Gc),
-	      1);
-      fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
-    } else
-      fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
+    FrameCoordinateWithDerivative fc =
+      od->frame_coordinate_with_derivative(Gc, *cam, b, refraction_,
+					   velocity_aberration_);
     blitz::Array<double, 2> res(2, fc.line.gradient().rows());
     res(0, blitz::Range::all()) = fc.line.gradient();
     res(1, blitz::Range::all()) = fc.sample.gradient();
@@ -157,16 +144,9 @@ public:
   virtual ImageCoordinateWithDerivative 
   image_coordinate_with_derivative(const GroundCoordinate& Gc) const 
   { 
-    // TODO include velocity_aberration_
-    FrameCoordinateWithDerivative fc;
-    if(refraction_) {
-      boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	SimpleDem().intersect(*od->position_cf(),
-	      refraction_->refraction_reverse(*od->position_cf(), Gc),
-	      1);
-      fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
-    } else
-      fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
+    FrameCoordinateWithDerivative fc =
+      od->frame_coordinate_with_derivative(Gc, *cam, b, refraction_,
+					   velocity_aberration_);
     return ImageCoordinateWithDerivative(fc.line, fc.sample);
   }
   virtual void print(std::ostream& Os) const \

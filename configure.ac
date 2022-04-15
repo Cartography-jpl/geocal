@@ -191,7 +191,7 @@ AM_CONDITIONAL([BUILD_AFIDS], [false])
 # Put in setup_afids_env.csh/setup_afids_env.sh and vicarb that
 # uses the newer version of things in geocal
 
-AM_CONDITIONAL([GEOCAL_OVERRIDE_AFIDS], [test x$have_afids = xyes])
+AM_CONDITIONAL([GEOCAL_OVERRIDE_AFIDS], [test x$have_afids = xyes -a $AFIDS_PREFIX != $prefix])
 
 #=================================================================
 # We normally include pynitf installation (at least for the time being,

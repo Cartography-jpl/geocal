@@ -18,10 +18,9 @@ public:
 		     double &OUTPUT, double &OUTPUT,
 		     bool &OUTPUT, int *OUTPUT) const = 0;  
   std::string print_to_string() const;
+  %pickle_serialization();
 };
 }
-
-
 
 // List of things "import *" will include
 %python_export("ImageToImageMatch")

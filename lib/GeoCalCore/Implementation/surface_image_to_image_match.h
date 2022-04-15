@@ -48,7 +48,7 @@ public:
 		     double& Line_sigma, double& Sample_sigma,
 		     bool& Success, int* Diagnostic = 0) const;
   virtual void print(std::ostream& Os) const 
-  { Os << "SurfaceImageToImageMatcher\n"; }
+  { Os << "SurfaceImageToImageMatch\n"; }
 
   void match_surf(const GroundCoordinate& Gc, 
 		  ImageCoordinate& Ic1, ImageCoordinate& Ic2,
@@ -105,6 +105,12 @@ private:
   // How many image pixels go into a surface pixel. Used to scale line
   // and sample sigma in image matcher.
   double pix_fact;
+  SurfaceImageToImageMatch() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 }
+
+GEOCAL_EXPORT_KEY(SurfaceImageToImageMatch);
 #endif

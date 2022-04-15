@@ -7,6 +7,7 @@ def gdal_to_erdas_file(infname, outfname):
     statistics and an image pyramid'''
     subprocess.check_call(["gdal_translate", 
                            "-of", "hfa",
+                           "-a_nodata", "0",
                            "-co", "STATISTICS=YES",
                            "-co", "COMPRESSED=YES",
                            infname, outfname])

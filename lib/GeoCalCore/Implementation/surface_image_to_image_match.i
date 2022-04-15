@@ -45,28 +45,9 @@ public:
   %python_attribute(map_project_on_demand, bool)
   %python_attribute(surface_image1, boost::shared_ptr<RasterImage>)
   %python_attribute(surface_image2, boost::shared_ptr<RasterImage>)
-  %pythoncode {
-@classmethod
-def pickle_format_version(cls):
-  return 1
-
-def __reduce__(self):
-    if(self.map_project_on_demand):
-      return _new_from_init, (self.__class__, 1, self.image_ground_connection1,
-			      self.image_ground_connection2, 
-			      self.surface_image1.map_info(),
-			      self.matcher)
-    else:
-      return _new_from_init, (self.__class__, 1, self.image_ground_connection1,
-			      self.surface_image1,
-			      self.image_ground_connection2, 
-			      self.surface_image2,
-			      self.matcher)
-  }
+  %pickle_serialization();
 };
 }
-
-
 
 // List of things "import *" will include
 %python_export("SurfaceImageToImageMatch")

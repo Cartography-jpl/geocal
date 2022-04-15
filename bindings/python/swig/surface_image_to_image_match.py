@@ -332,22 +332,8 @@ class SurfaceImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatc
         return self._v_surface_image2()
 
 
-    @classmethod
-    def pickle_format_version(cls):
-      return 1
-
     def __reduce__(self):
-        if(self.map_project_on_demand):
-          return _new_from_init, (self.__class__, 1, self.image_ground_connection1,
-    			      self.image_ground_connection2, 
-    			      self.surface_image1.map_info(),
-    			      self.matcher)
-        else:
-          return _new_from_init, (self.__class__, 1, self.image_ground_connection1,
-    			      self.surface_image1,
-    			      self.image_ground_connection2, 
-    			      self.surface_image2,
-    			      self.matcher)
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _surface_image_to_image_match.delete_SurfaceImageToImageMatch
 SurfaceImageToImageMatch.match_surf = new_instancemethod(_surface_image_to_image_match.SurfaceImageToImageMatch_match_surf, None, SurfaceImageToImageMatch)

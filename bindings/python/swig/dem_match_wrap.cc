@@ -6968,7 +6968,7 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_0(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7078,7 +7078,7 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_1(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7180,7 +7180,7 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_2(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7274,7 +7274,7 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_3(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7373,7 +7373,7 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_4(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7464,7 +7464,7 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_5(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7873,7 +7873,7 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_diagnostic(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8071,26 +8071,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"DemMatch_surface_point", _wrap_DemMatch_surface_point, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array< double, 2 > DemMatch::surface_point(int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int\n"
-		"Sstride=1, bool Include_ic=false) const\n"
-		"Look through the given range in line and sample for the first image.\n"
+		"blitz::Array< double, 2 > DemMatch::surface_point(const MapInfo &Mi, bool Include_ic=false) const\n"
+		"Variation of surface_point where we go from the Surface.\n"
 		"\n"
-		"Try image matching, and where it succeeds look at the intersection of\n"
-		"the points. We allow a little slop, but the intersection need to be\n"
-		"close to where each image would put the point (e.g., epipolar\n"
-		"constraint), so we reject any point where the intersection is farther\n"
-		"than the maximum distance in meters that was passed to the\n"
-		"constructor.\n"
-		"\n"
-		"We return an array of points that we find. This is a N X 3 array, with\n"
-		"each row corresponding to a point. The columns are latitude,\n"
-		"longitude, and height (in degrees and meters). This is a bit odd way\n"
-		"to return this, but it works well with the python class that uses this\n"
-		"code.\n"
-		"\n"
-		"Note that you can optionally specify Include_ic as true. If this is\n"
-		"true, we return a N x (3 + 4) array, where the last four columns are\n"
-		"the image coordinate for the first and second images. \n"
+		"This requires that our image matcher is a SurfaceImageToImageMatch.\n"
+		"But this runs much faster for ImageGroundConnection where calculating\n"
+		"ground_coordinate is expensive. \n"
 		""},
 	 { (char *)"DemMatch___str__", (PyCFunction)_wrap_DemMatch___str__, METH_O, NULL},
 	 { (char *)"DemMatch__v_match", (PyCFunction)_wrap_DemMatch__v_match, METH_O, (char *)"\n"

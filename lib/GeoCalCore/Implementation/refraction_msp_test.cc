@@ -66,29 +66,35 @@ BOOST_AUTO_TEST_CASE(serialization)
 
 BOOST_AUTO_TEST_CASE(timing_refraction_glas)
 {
+  // Don't normally run, just run if we are looking at timing
+  return;
   if(!have_serialize_supported())
     return;
   auto igc = serialize_read<IpiImageGroundConnection>
     (test_data_dir() + "igc_refraction_glas.xml");
   // Run multiple times, just to make timing easier
   for(int i = 0; i < 1; ++i)
-    for(int ln = 0; ln < igc->number_line(); ++ln) {
+    for(int ln = 0; ln < igc->number_line(); ln+=2) {
       std::cerr << "Starting ln " << ln << "\n";
-      for(int smp = 0; smp < igc->number_sample(); ++smp)
+      for(int smp = 0; smp < igc->number_sample(); smp+=2)
 	auto gp = igc->ground_coordinate_approx_height(ImageCoordinate(ln, smp), 0);
     }
 }
 
 BOOST_AUTO_TEST_CASE(timing_refraction_gfm)
 {
+  // Don't normally run, just run if we are looking at timing
+  return;
   if(!have_serialize_supported())
     return;
   auto igc = serialize_read<OrbitDataImageGroundConnection>
     (test_data_dir() + "igc_refraction_gfm.xml");
+  //igc->velocity_aberration(boost::shared_ptr<VelocityAberration>(0));
+  //igc->refraction(boost::shared_ptr<Refraction>(0));
   for(int i = 0; i < 1; ++i)
-    for(int ln = 0; ln < igc->number_line(); ++ln) {
+    for(int ln = 0; ln < igc->number_line(); ln+=1) {
       std::cerr << "Starting ln " << ln << "\n";
-      for(int smp = 0; smp < igc->number_sample(); ++smp)
+      for(int smp = 0; smp < igc->number_sample(); smp+=1)
 	auto gp = igc->ground_coordinate_approx_height(ImageCoordinate(ln, smp), 0);
     }
 }

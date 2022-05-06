@@ -55,7 +55,7 @@ public:
 private:
   double wavelength_, temperature_, pressure_;
   gsl_integration_glfixed_table *quad_table;
-  double r_calc(const GroundCoordinate& Gc) const;
+  double r_calc(double lat, double h) const;
   double r_tropopause(const GroundCoordinate& Gc_target) const;
   double r_stratopause(const GroundCoordinate& Gc_target) const;
   double r_ellipsoid(const GroundCoordinate& Gc_target) const;

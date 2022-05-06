@@ -5,6 +5,7 @@
 #include "geodetic.h"
 #include "geocal_serialize_support.h"
 #include "geocal_matrix.h"
+#include "wgs84_constant.h"
 #include <blitz/array.h>
 #include <cmath>
 using namespace GeoCal;
@@ -115,10 +116,12 @@ CartesianFixedLookVector RefractionMsp::refraction_calc
   // this as rp, r1, r2, ro (where r is radius from earth center in
   // meters).
 
-  rp = r_calc(Gc_before_correction);
+  rp = r_calc(lat, hrefsurf);
   r1 = r_tropopause(Gc_before_correction);
   r2 = r_stratopause(Gc_before_correction);
-  ro = r_calc(Spacecraft_pos);
+  double lat_s, lon_s, h_s;
+  Spacecraft_pos.lat_lon_height(lat_s, lon_s, h_s);
+  ro = r_calc(lat_s, h_s);
 
   // Also need the ellipsoid surface radius, to calculate temperature
   // and pressure (default values are at ellipsoid, need to translate
@@ -210,10 +213,13 @@ void RefractionMsp::print(std::ostream& Os) const
 /// Distance from the earth center to the given point.
 //-----------------------------------------------------------------------
 
-double RefractionMsp::r_calc(const GroundCoordinate& Gc) const
+double RefractionMsp::r_calc(double Lat, double H) const
 {
-  auto cf = Gc.convert_to_cf();
-  return norm(cf->position);
+  double clat = cos(Lat * Constant::deg_to_rad);
+  double slat = sin(Lat * Constant::deg_to_rad);
+  return sqrt((sqr(sqr(Constant::wgs84_a) * clat) +
+	       sqr(sqr(Constant::wgs84_b) * slat)) /
+	      (sqr(Constant::wgs84_a * clat) + sqr(Constant::wgs84_b * slat))) + H;
 }
 
 //-----------------------------------------------------------------------
@@ -230,7 +236,7 @@ double RefractionMsp::r_tropopause(const GroundCoordinate& Gc_target) const
   // Different height depending on if we are between -60 to 60 or not.
   // This height is in meters, and above WGS-84
   double h1 = (fabs(lat) < 60 ? 11019 : 8000);
-  return r_calc(Geodetic(lat,lon,h1));
+  return r_calc(lat, h1);
 }
 
 //-----------------------------------------------------------------------
@@ -245,7 +251,7 @@ double RefractionMsp::r_stratopause(const GroundCoordinate& Gc_target) const
   // Gc_target.lat_lon_height(lat, lon ,hrefsurf);
   
   double h2 = 50000;
-  return r_calc(Geodetic(lat,lon,h2));
+  return r_calc(lat, h2);
 }
 
 //-----------------------------------------------------------------------
@@ -259,7 +265,7 @@ double RefractionMsp::r_ellipsoid(const GroundCoordinate& Gc_target) const
   // double lat, lon, hrefsurf;
   // Gc_target.lat_lon_height(lat, lon ,hrefsurf);
   
-  return r_calc(Geodetic(lat,lon,0));
+  return r_calc(lat, 0);
 }
 
 //-----------------------------------------------------------------------

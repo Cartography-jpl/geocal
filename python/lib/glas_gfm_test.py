@@ -665,4 +665,25 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     print("max h: ", max(h2))
     print("Distance from refraction")
     print(pd.DataFrame(dist_ref).describe())
+
+@skip    
+def test_create_dataset_refraction(igc_gfm, igc_staring):
+    # A couple of data sets we can use for looking at the timing
+    # of refraction. We want this spit out do we can do the timing test
+    # a the C++ level directly
+
+    # Add a fairly steep angle, so we have a large refraction correction.
+    # This is the nominal angle for the MISR DF camera, but this is just
+    # "some steep angle" data
+    q = (quat_rot_x(0.0) * quat_rot_y(58.0 * deg_to_rad) *
+         quat_rot_x(-2.7 * deg_to_rad))
+    igc_gfm.camera.frame_to_sc = q
+    igc_gfm.velocity_aberration = VelocityAberrationExact()
+    igc_gfm.refraction = RefractionMsp(igc_gfm.camera.band_wavelength)
+    write_shelve(unit_test_data + "igc_refraction_gfm.xml", igc_gfm)
+    igc_staring.velocity_aberration = VelocityAberrationExact()
+    igc_staring.refraction = RefractionMsp(igc_gfm.camera.band_wavelength)
+    write_shelve(unit_test_data + "igc_refraction_glas.xml", igc_staring)
+    
+
     

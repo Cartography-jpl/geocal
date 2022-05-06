@@ -3,6 +3,8 @@
 #include "refraction_msp.h"
 #include "simple_dem.h"
 #include "constant.h"
+#include "ipi_image_ground_connection.h"
+#include "orbit_data_image_ground_connection.h"
 
 using namespace GeoCal;
 
@@ -60,6 +62,35 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_CLOSE(rr->wavelength(), r->wavelength(), 1e-6);
   BOOST_CHECK_CLOSE(rr->temperature(), r->temperature(), 1e-6);
   BOOST_CHECK_CLOSE(rr->pressure(), r->pressure(), 1e-6);
+}
+
+BOOST_AUTO_TEST_CASE(timing_refraction_glas)
+{
+  if(!have_serialize_supported())
+    return;
+  auto igc = serialize_read<IpiImageGroundConnection>
+    (test_data_dir() + "igc_refraction_glas.xml");
+  // Run multiple times, just to make timing easier
+  for(int i = 0; i < 1; ++i)
+    for(int ln = 0; ln < igc->number_line(); ++ln) {
+      std::cerr << "Starting ln " << ln << "\n";
+      for(int smp = 0; smp < igc->number_sample(); ++smp)
+	auto gp = igc->ground_coordinate_approx_height(ImageCoordinate(ln, smp), 0);
+    }
+}
+
+BOOST_AUTO_TEST_CASE(timing_refraction_gfm)
+{
+  if(!have_serialize_supported())
+    return;
+  auto igc = serialize_read<OrbitDataImageGroundConnection>
+    (test_data_dir() + "igc_refraction_gfm.xml");
+  for(int i = 0; i < 1; ++i)
+    for(int ln = 0; ln < igc->number_line(); ++ln) {
+      std::cerr << "Starting ln " << ln << "\n";
+      for(int smp = 0; smp < igc->number_sample(); ++smp)
+	auto gp = igc->ground_coordinate_approx_height(ImageCoordinate(ln, smp), 0);
+    }
 }
 
 BOOST_AUTO_TEST_SUITE_END()

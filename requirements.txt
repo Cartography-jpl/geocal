@@ -26,6 +26,7 @@ pytest-xdist
 pytest-cov
 ipython
 jupyter
+jupyterlab
 scikit-umfpack
 seaborn
 pandas

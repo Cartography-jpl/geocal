@@ -40,6 +40,8 @@ MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
     is_point_(Is_point),
     number_x_pixel_(Number_x_pixel),
     number_y_pixel_(Number_y_pixel),
+    resolution_x_(-1),
+    resolution_y_(-1),
     param(6)
 {
   range_min_check(number_x_pixel_, 0);
@@ -73,6 +75,8 @@ MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
     is_point_(Is_point),
     number_x_pixel_(Number_x_pixel),
     number_y_pixel_(Number_y_pixel),
+    resolution_x_(-1),
+    resolution_y_(-1),
     param(Param.copy())
 {
   range_min_check(number_x_pixel_, 0);
@@ -236,15 +240,43 @@ MapInfo MapInfo::map_union(const MapInfo& Mi) const
 
 double MapInfo::resolution_meter() const
 {
-  boost::shared_ptr<GroundCoordinate> gc1 =
-    ground_coordinate(number_x_pixel() / 2, number_y_pixel() / 2);
-  boost::shared_ptr<GroundCoordinate> gc2 =
-    ground_coordinate(number_x_pixel() / 2 + 1, number_y_pixel() / 2);
-  boost::shared_ptr<GroundCoordinate> gc3 =
-    ground_coordinate(number_x_pixel() / 2, number_y_pixel() / 2 + 1);
-  double r1 = distance(*gc1, *gc2);
-  double r2 = distance(*gc1, *gc3);
-  return std::max(r1, r2);
+  return std::max(resolution_x(), resolution_y());
+}
+
+//-----------------------------------------------------------------------
+/// Return the approximate resolution of the MapInfo the X direction
+/// in meters. This looks at the center of the map, + 1 in the X
+/// direction. We determine the distance between these points.
+//-----------------------------------------------------------------------
+
+double MapInfo::resolution_x() const
+{
+  if(resolution_x_ < 0) {
+    boost::shared_ptr<GroundCoordinate> gc1 =
+      ground_coordinate(number_x_pixel() / 2, number_y_pixel() / 2);
+    boost::shared_ptr<GroundCoordinate> gc2 =
+      ground_coordinate(number_x_pixel() / 2 + 1, number_y_pixel() / 2);
+    resolution_x_ = distance(*gc1, *gc2);
+  }
+  return resolution_x_;
+}
+
+//-----------------------------------------------------------------------
+/// Return the approximate resolution of the MapInfo the Y direction
+/// in meters. This looks at the center of the map, + 1 in the Y
+/// direction. We determine the distance between these points.
+//-----------------------------------------------------------------------
+
+double MapInfo::resolution_y() const
+{
+  if(resolution_y_ < 0) {
+    boost::shared_ptr<GroundCoordinate> gc1 =
+      ground_coordinate(number_x_pixel() / 2, number_y_pixel() / 2);
+    boost::shared_ptr<GroundCoordinate> gc2 =
+      ground_coordinate(number_x_pixel() / 2, number_y_pixel() / 2 + 1);
+    resolution_y_ = distance(*gc1, *gc2);
+  }
+  return resolution_y_;
 }
 
 //-----------------------------------------------------------------------
@@ -279,6 +311,8 @@ MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel,
 		      res.param(3));
   res.number_x_pixel_ = nx_pixel;
   res.number_y_pixel_ = ny_pixel;
+  res.resolution_x_ = -1;
+  res.resolution_y_ = -1;
   return res;
 }
 
@@ -297,6 +331,8 @@ MapInfo MapInfo::subset(double x_index, double y_index, int nx_pixel,
 		      res.param(3));
   res.number_x_pixel_ = nx_pixel;
   res.number_y_pixel_ = ny_pixel;
+  res.resolution_x_ = -1;
+  res.resolution_y_ = -1;
   return res;
 }
 
@@ -320,6 +356,8 @@ MapInfo MapInfo::scale(double Number_x_per_pixel,
   res.param(2) *= Number_y_per_pixel;
   res.param(4) *= Number_x_per_pixel;
   res.param(5) *= Number_y_per_pixel;
+  res.resolution_x_ = -1;
+  res.resolution_y_ = -1;
   return res;
 }
 

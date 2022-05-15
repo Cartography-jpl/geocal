@@ -44,11 +44,14 @@ public:
 /// Default constructor.
 //-----------------------------------------------------------------------
 
-  MapInfo() : is_point_(false), param(6) {}
+  MapInfo() : is_point_(false),
+	      resolution_x_(-1), resolution_y_(-1), param(6) {}
   MapInfo(const MapInfo& Mi)
     : conv_(Mi.conv_), is_point_(Mi.is_point_),
       number_x_pixel_(Mi.number_x_pixel_),
-      number_y_pixel_(Mi.number_y_pixel_), param(Mi.param.copy()) {}
+      number_y_pixel_(Mi.number_y_pixel_),
+      resolution_x_(Mi.resolution_x_), resolution_y_(Mi.resolution_y_),
+      param(Mi.param.copy()) {}
 
   MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv, double Ulc_x, 
 	  double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel, 
@@ -213,6 +216,8 @@ public:
   int number_y_pixel() const {return number_y_pixel_; }
 
   double resolution_meter() const;
+  double resolution_x() const;
+  double resolution_y() const;
 
   MapInfo subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const;
   MapInfo subset(double x_index, double y_index, 
@@ -257,6 +262,7 @@ private:
                                 /// interpreted as a point
   int number_x_pixel_;          ///< Number of X pixels in image
   int number_y_pixel_;		///< Number of Y pixels in image
+  mutable double resolution_x_, resolution_y_;
   blitz::Array<double, 1> param; ///< Affine parameters.
   void latitude_range_correct();
   friend class boost::serialization::access;

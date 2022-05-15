@@ -27,6 +27,8 @@ BOOST_AUTO_TEST_CASE(basic)
   BOOST_CHECK_CLOSE(mi.ulc_x(), ulc_x, 1e-4);
   BOOST_CHECK_CLOSE(mi.ulc_y(), ulc_y, 1e-4);
   BOOST_CHECK_CLOSE(mi.resolution_meter(), 55302.0924, 1e-4);
+  BOOST_CHECK_CLOSE(mi.resolution_x(), 27430.5112, 1e-4);
+  BOOST_CHECK_CLOSE(mi.resolution_y(), 55302.0924, 1e-4);
   Geodetic ptexpect(ulc_y, ulc_x, 0);
   boost::shared_ptr<GroundCoordinate>
     pt(mi.coordinate_converter().convert_from_coordinate(ulc_x, ulc_y));

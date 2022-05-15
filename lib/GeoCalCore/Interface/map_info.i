@@ -61,6 +61,8 @@ public:
   %python_attribute(number_x_pixel, int)
   %python_attribute(number_y_pixel, int)
   %python_attribute(resolution_meter, double)
+  %python_attribute(resolution_x, double)
+  %python_attribute(resolution_y, double)
   MapInfo subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const;
   MapInfo subset(double x_index, double y_index, int nx_pixel, 
 		 int ny_pixel) const;

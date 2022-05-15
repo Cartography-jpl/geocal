@@ -8899,6 +8899,92 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MapInfo__v_resolution_x(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo__v_resolution_x" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::MapInfo const *)arg1)->resolution_x();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_MapInfo__v_resolution_y(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MapInfo const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MapInfo__v_resolution_y" "', argument " "1"" of type '" "GeoCal::MapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::MapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (double)((GeoCal::MapInfo const *)arg1)->resolution_y();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_MapInfo_subset__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::MapInfo *arg1 = (GeoCal::MapInfo *) 0 ;
@@ -9530,6 +9616,24 @@ static PyMethodDef SwigMethods[] = {
 		"This looks at the center of the map, + 1 in the X and Y direction. We\n"
 		"determine the distance between these points, and select the maximum of\n"
 		"them. \n"
+		""},
+	 { (char *)"MapInfo__v_resolution_x", (PyCFunction)_wrap_MapInfo__v_resolution_x, METH_O, (char *)"\n"
+		"\n"
+		"double MapInfo::resolution_x() const\n"
+		"Return the approximate resolution of the MapInfo the X direction in\n"
+		"meters.\n"
+		"\n"
+		"This looks at the center of the map, + 1 in the X direction. We\n"
+		"determine the distance between these points. \n"
+		""},
+	 { (char *)"MapInfo__v_resolution_y", (PyCFunction)_wrap_MapInfo__v_resolution_y, METH_O, (char *)"\n"
+		"\n"
+		"double MapInfo::resolution_y() const\n"
+		"Return the approximate resolution of the MapInfo the Y direction in\n"
+		"meters.\n"
+		"\n"
+		"This looks at the center of the map, + 1 in the Y direction. We\n"
+		"determine the distance between these points. \n"
 		""},
 	 { (char *)"MapInfo_subset", _wrap_MapInfo_subset, METH_VARARGS, (char *)"\n"
 		"\n"

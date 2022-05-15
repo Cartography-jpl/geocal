@@ -422,6 +422,42 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
         return self._v_resolution_meter()
 
 
+    def _v_resolution_x(self):
+        """
+
+        double MapInfo::resolution_x() const
+        Return the approximate resolution of the MapInfo the X direction in
+        meters.
+
+        This looks at the center of the map, + 1 in the X direction. We
+        determine the distance between these points. 
+        """
+        return _map_info.MapInfo__v_resolution_x(self)
+
+
+    @property
+    def resolution_x(self):
+        return self._v_resolution_x()
+
+
+    def _v_resolution_y(self):
+        """
+
+        double MapInfo::resolution_y() const
+        Return the approximate resolution of the MapInfo the Y direction in
+        meters.
+
+        This looks at the center of the map, + 1 in the Y direction. We
+        determine the distance between these points. 
+        """
+        return _map_info.MapInfo__v_resolution_y(self)
+
+
+    @property
+    def resolution_y(self):
+        return self._v_resolution_y()
+
+
     def subset(self, *args):
         """
 
@@ -518,6 +554,8 @@ MapInfo._v_lrc_y = new_instancemethod(_map_info.MapInfo__v_lrc_y, None, MapInfo)
 MapInfo._v_number_x_pixel = new_instancemethod(_map_info.MapInfo__v_number_x_pixel, None, MapInfo)
 MapInfo._v_number_y_pixel = new_instancemethod(_map_info.MapInfo__v_number_y_pixel, None, MapInfo)
 MapInfo._v_resolution_meter = new_instancemethod(_map_info.MapInfo__v_resolution_meter, None, MapInfo)
+MapInfo._v_resolution_x = new_instancemethod(_map_info.MapInfo__v_resolution_x, None, MapInfo)
+MapInfo._v_resolution_y = new_instancemethod(_map_info.MapInfo__v_resolution_y, None, MapInfo)
 MapInfo.subset = new_instancemethod(_map_info.MapInfo_subset, None, MapInfo)
 MapInfo.scale = new_instancemethod(_map_info.MapInfo_scale, None, MapInfo)
 MapInfo._v_ulc_x = new_instancemethod(_map_info.MapInfo__v_ulc_x, None, MapInfo)

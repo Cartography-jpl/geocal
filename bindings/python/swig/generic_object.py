@@ -180,6 +180,14 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
+
+def geocal_version():
+    """
+
+    std::string GeoCal::geocal_version()
+    Geocal library version number. 
+    """
+    return _generic_object.geocal_version()
 class GenericObject(object):
     """
 
@@ -202,7 +210,7 @@ GenericObject_swigregister = _generic_object.GenericObject_swigregister
 GenericObject_swigregister(GenericObject)
 
 
-__all__ = ["GenericObject"]
+__all__ = ["GenericObject","geocal_version"]
 
 
 

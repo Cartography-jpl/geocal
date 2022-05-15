@@ -4447,7 +4447,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/spice_camera.py \
 	@srcpythonlib@/tie_point_collect_picmtch.py \
 	@srcpythonlib@/warp_image.py \
-	@srcpythonlib@/linear_gradient_bad_pixel_detection.py
+	@srcpythonlib@/linear_gradient_bad_pixel_detection.py \
+	@srcpythonlib@/version.py
 @INSTALL_PYNITF_FALSE@EXTRA_PYTHON_TEST = 
 
 # Skip these tests. A number fail because stuff gets changed in geocal. Not

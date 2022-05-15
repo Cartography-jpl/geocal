@@ -1,6 +1,7 @@
 #ifndef GEOCAL_GENERIC_OBJECT_H
 #define GEOCAL_GENERIC_OBJECT_H
 #include "geocal_external_config.h"
+#include <string>
 
 namespace boost {
   namespace serialization {
@@ -42,6 +43,8 @@ namespace boost {
 #endif
 
 namespace GeoCal {
+std::string geocal_version();
+  
 /****************************************************************//**
   For use with SWIG, it is useful to have a base class that 
   everything can be cast to. This class doesn't provide any

@@ -79,6 +79,30 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
   int naif_code() const {return naif_code_;}
+
+
+  double slope_riserun(int Y_index, int X_index) const;
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as a percentage.
+//-----------------------------------------------------------------------
+  double slope_percentage(int Y_index, int X_index) const
+  { return slope_riserun(Y_index, X_index) * 100.0; }
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as radians.
+//-----------------------------------------------------------------------
+  double slope_radian(int Y_index, int X_index) const
+  { return atan(slope_riserun(Y_index, X_index)); }
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as degrees.
+//-----------------------------------------------------------------------
+  double slope_degree(int Y_index, int X_index) const
+  { return slope_radian(Y_index, X_index) * Constant::rad_to_deg; }
+  double aspect(int Y_index, int X_index) const;
+  
+  void dz(int Y_index, int X_index, double& dz_dx, double& dz_dy) const;
 protected:
 
 //-----------------------------------------------------------------------

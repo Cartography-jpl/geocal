@@ -34,6 +34,90 @@ double DemMapInfo::distance_to_surface(const GroundCoordinate& Gp) const
 }
 
 //-----------------------------------------------------------------------
+/// Calculate dz_dx and dz_dy, which is the first step in calculating
+/// slope and aspect of the DEM.
+///
+/// This uses the second order ARCINFO method. We handle the grid
+/// edges by just using the elevation as Y_index, X_index.
+///
+/// This is also the method used by richdem (a python package), which
+/// references Horn, B.K.P., 1981. Hill shading and the reflectance
+/// map. Proceedings of the IEEE 69,
+/// 14–47. doi:10.1109/PROC.1981.11918 as the original source of this 
+/// algorithm
+//-----------------------------------------------------------------------
+
+void DemMapInfo::dz(int Y_index, int X_index,
+		    double& dz_dx, double& dz_dy) const
+{
+  // Note that this isn't really too efficient. We can try to generate
+  // a more optimized version of this in a derived class if needed.
+  if(X_index < 0 || X_index + 1 >= map_info_.number_x_pixel() ||
+     Y_index < 0 || Y_index + 1 >= map_info_.number_y_pixel()) {
+    if(outside_dem_is_error_) {
+      Exception e;
+      e << "dz requested outside of the range of the Dem data "
+	<< "xindex: " << X_index << " (max " << map_info_.number_x_pixel() - 1
+	<< ") yindex: " << Y_index << " (max " << map_info_.number_y_pixel() - 1
+	<< ")";
+      throw e;
+    } else {
+      dz_dx = 0;
+      dz_dy = 0;
+      return;
+    }
+  }
+  double v[3][3];
+  for(int i = -1; i < 2; ++i)
+    for(int j = -1; j < 2; ++j) {
+      int yi = Y_index + i;
+      int xi = X_index + j;
+      if(xi < 0 || xi + 1 >= map_info_.number_x_pixel() ||
+	 yi < 0 || yi + 1 >= map_info_.number_y_pixel()) {
+	v[i+1][j+1] = elevation(Y_index, X_index);
+      } else {
+	v[i+1][j+1] = elevation(yi, xi);
+      }
+    }
+  double a = v[0][0];
+  double b = v[0][1];
+  double c = v[0][2];
+  double d = v[1][0];
+  // Unused, comment out just so we don't get a compiler warning
+  //double e = v[1][1];
+  double f = v[1][2];
+  double g = v[2][0];
+  double h = v[2][1];
+  double k = v[2][2];
+  dz_dx = ((c + 2*f + k) - (a + 2*d + g)) / 8 / map_info_.resolution_x();
+  dz_dy = ((g + 2*h + k) - (a + 2*b + c)) / 8 / map_info_.resolution_y();
+}
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as a Rise/Run
+//-----------------------------------------------------------------------
+double DemMapInfo::slope_riserun(int Y_index, int X_index) const
+{
+  double dz_dx, dz_dy;
+  dz(Y_index, X_index, dz_dx, dz_dy);
+  return sqrt(dz_dx * dz_dx + dz_dy * dz_dy);
+}
+
+//-----------------------------------------------------------------------
+/// Aspect angle. This uses the Horn 1981 definition, in degrees
+/// [0, 360). 0 is north, we increase in a clockwise fashion. Note for
+/// perfectly flat areas (slope_riserun is 0) this isn't really
+/// defined, but by convention we return BLAH
+/// TODO Figure out BLAH, atan2(0,0) is 0
+/// TODO Compare MISR calculation to terrain_attributes, which is
+/// different
+//-----------------------------------------------------------------------
+
+double DemMapInfo::aspect(int Y_index, int X_index) const
+{
+}
+
+//-----------------------------------------------------------------------
 /// Height relative to datum
 //-----------------------------------------------------------------------
 

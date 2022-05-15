@@ -232,6 +232,75 @@ class DemMapInfo(geocal_swig.dem.Dem):
         return _dem_map_info.DemMapInfo_height_datum(self, Gp)
 
 
+    def dz(self, Y_index, X_index):
+        """
+
+        void DemMapInfo::dz(int Y_index, int X_index, double &dz_dx, double &dz_dy) const
+        Calculate dz_dx and dz_dy, which is the first step in calculating
+        slope and aspect of the DEM.
+
+        This uses the second order ARCINFO method. We handle the grid edges by
+        just using the elevation as Y_index, X_index.
+
+        This is also the method used by richdem (a python package), which
+        references Horn, B.K.P., 1981. Hill shading and the reflectance map.
+        Proceedings of the IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the
+        original source of this algorithm 
+        """
+        return _dem_map_info.DemMapInfo_dz(self, Y_index, X_index)
+
+
+    def slope_riserun(self, Y_index, X_index):
+        """
+
+        double DemMapInfo::slope_riserun(int Y_index, int X_index) const
+        Slope for the given point, as a Rise/Run. 
+        """
+        return _dem_map_info.DemMapInfo_slope_riserun(self, Y_index, X_index)
+
+
+    def slope_percentage(self, Y_index, X_index):
+        """
+
+        double GeoCal::DemMapInfo::slope_percentage(int Y_index, int X_index) const
+        Slope for the given point, as a percentage. 
+        """
+        return _dem_map_info.DemMapInfo_slope_percentage(self, Y_index, X_index)
+
+
+    def slope_radian(self, Y_index, X_index):
+        """
+
+        double GeoCal::DemMapInfo::slope_radian(int Y_index, int X_index) const
+        Slope for the given point, as radians. 
+        """
+        return _dem_map_info.DemMapInfo_slope_radian(self, Y_index, X_index)
+
+
+    def slope_degree(self, Y_index, X_index):
+        """
+
+        double GeoCal::DemMapInfo::slope_degree(int Y_index, int X_index) const
+        Slope for the given point, as degrees. 
+        """
+        return _dem_map_info.DemMapInfo_slope_degree(self, Y_index, X_index)
+
+
+    def aspect(self, Y_index, X_index):
+        """
+
+        double DemMapInfo::aspect(int Y_index, int X_index) const
+        Aspect angle.
+
+        This uses the Horn 1981 definition, in degrees [0, 360). 0 is north,
+        we increase in a clockwise fashion. Note for perfectly flat areas
+        (slope_riserun is 0) this isn't really defined, but by convention we
+        return BLAH TODO Figure out BLAH, atan2(0,0) is 0 TODO Compare MISR
+        calculation to terrain_attributes, which is different 
+        """
+        return _dem_map_info.DemMapInfo_aspect(self, Y_index, X_index)
+
+
     def _v_outside_dem_is_error(self):
         """
 
@@ -264,6 +333,12 @@ class DemMapInfo(geocal_swig.dem.Dem):
 DemMapInfo._v_datum = new_instancemethod(_dem_map_info.DemMapInfo__v_datum, None, DemMapInfo)
 DemMapInfo._v_map_info = new_instancemethod(_dem_map_info.DemMapInfo__v_map_info, None, DemMapInfo)
 DemMapInfo.height_datum = new_instancemethod(_dem_map_info.DemMapInfo_height_datum, None, DemMapInfo)
+DemMapInfo.dz = new_instancemethod(_dem_map_info.DemMapInfo_dz, None, DemMapInfo)
+DemMapInfo.slope_riserun = new_instancemethod(_dem_map_info.DemMapInfo_slope_riserun, None, DemMapInfo)
+DemMapInfo.slope_percentage = new_instancemethod(_dem_map_info.DemMapInfo_slope_percentage, None, DemMapInfo)
+DemMapInfo.slope_radian = new_instancemethod(_dem_map_info.DemMapInfo_slope_radian, None, DemMapInfo)
+DemMapInfo.slope_degree = new_instancemethod(_dem_map_info.DemMapInfo_slope_degree, None, DemMapInfo)
+DemMapInfo.aspect = new_instancemethod(_dem_map_info.DemMapInfo_aspect, None, DemMapInfo)
 DemMapInfo._v_outside_dem_is_error = new_instancemethod(_dem_map_info.DemMapInfo__v_outside_dem_is_error, None, DemMapInfo)
 DemMapInfo._v_naif_code = new_instancemethod(_dem_map_info.DemMapInfo__v_naif_code, None, DemMapInfo)
 DemMapInfo_swigregister = _dem_map_info.DemMapInfo_swigregister

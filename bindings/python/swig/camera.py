@@ -362,6 +362,75 @@ Camera.__str__ = new_instancemethod(_camera.Camera___str__, None, Camera)
 Camera_swigregister = _camera.Camera_swigregister
 Camera_swigregister(Camera)
 
+class SubCamera(Camera):
+    """
+
+    This is an adapter of a Camera, that presents a subset of the full
+    camera as a smaller camera.
+
+    C++ includes: camera.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Cam, Start_line, Start_sample, Number_line, Number_sample):
+        """
+
+        GeoCal::SubCamera::SubCamera(const boost::shared_ptr< Camera > &Cam, int Start_line, int
+        Start_sample, int Number_line, int Number_sample)
+
+        """
+        _camera.SubCamera_swiginit(self, _camera.new_SubCamera(Cam, Start_line, Start_sample, Number_line, Number_sample))
+
+    def _v_full_camera(self):
+        """
+
+        const boost::shared_ptr<Camera>& GeoCal::SubCamera::full_camera() const
+
+        """
+        return _camera.SubCamera__v_full_camera(self)
+
+
+    @property
+    def full_camera(self):
+        return self._v_full_camera()
+
+
+    def _v_start_line(self):
+        """
+
+        int GeoCal::SubCamera::start_line() const
+
+        """
+        return _camera.SubCamera__v_start_line(self)
+
+
+    @property
+    def start_line(self):
+        return self._v_start_line()
+
+
+    def _v_start_sample(self):
+        """
+
+        int GeoCal::SubCamera::start_sample() const
+
+        """
+        return _camera.SubCamera__v_start_sample(self)
+
+
+    @property
+    def start_sample(self):
+        return self._v_start_sample()
+
+    __swig_destroy__ = _camera.delete_SubCamera
+SubCamera._v_full_camera = new_instancemethod(_camera.SubCamera__v_full_camera, None, SubCamera)
+SubCamera._v_start_line = new_instancemethod(_camera.SubCamera__v_start_line, None, SubCamera)
+SubCamera._v_start_sample = new_instancemethod(_camera.SubCamera__v_start_sample, None, SubCamera)
+SubCamera_swigregister = _camera.SubCamera_swigregister
+SubCamera_swigregister(SubCamera)
+
 class SimpleCamera(Camera):
     """
 

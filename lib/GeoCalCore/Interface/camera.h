@@ -147,6 +147,86 @@ private:
 };
 
 /****************************************************************//**
+  This is an adapter of a Camera, that presents a subset of the
+  full camera as a smaller camera.
+*******************************************************************/
+
+class SubCamera : public Camera {
+public:
+  SubCamera(const boost::shared_ptr<Camera>& Cam,
+	    int Start_line, int Start_sample, int Number_line,
+	    int Number_sample)
+    : cam_(Cam),
+      start_line_(Start_line),
+      start_sample_(Start_sample),
+      number_line_(Number_line),
+      number_sample_(Number_sample)
+  { }
+
+//-----------------------------------------------------------------------
+/// Destructor.
+//-----------------------------------------------------------------------
+
+  virtual ~SubCamera() {}
+  virtual double integration_time(int Band) const
+  { return cam_->integration_time(Band); }
+  virtual int number_band() const
+  { return cam_->number_band(); }
+  virtual int number_line(int UNUSED(Band)) const
+  { return number_line_;}
+  virtual int number_sample(int UNUSED(Band)) const
+  { return number_sample_; }
+  virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
+					   int Band) const
+  {
+    FrameCoordinate fc = cam_->frame_coordinate(Sl, Band);
+    fc.line -= start_line_;
+    fc.sample -= start_sample_;
+    return fc;
+  }
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const
+  {
+    FrameCoordinateWithDerivative fc =
+      cam_->frame_coordinate_with_derivative(Sl, Band);
+    fc.line -= start_line_;
+    fc.sample -= start_sample_;
+    return fc;
+  }
+  virtual double frame_line_coordinate(const ScLookVector& Sl, int Band) 
+    const { return cam_->frame_coordinate(Sl, Band).line - start_line_; }
+  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
+				      int Band) const
+  {
+    FrameCoordinate fc = F;
+    fc.line += start_line_;
+    fc.sample += start_sample_;
+    return cam_->sc_look_vector(fc, Band);
+  }
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const
+  {
+    FrameCoordinateWithDerivative fc = F;
+    fc.line += start_line_;
+    fc.sample += start_sample_;
+    return cam_->sc_look_vector_with_derivative(fc, Band);
+  }
+  virtual void print(std::ostream& Os) const;
+  const boost::shared_ptr<Camera>& full_camera() const { return cam_;}
+  int start_line() const { return start_line_;}
+  int start_sample() const { return start_sample_;}
+private:
+  boost::shared_ptr<Camera> cam_;
+  int start_line_, start_sample_, number_line_, number_sample_;
+  SubCamera() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+  
+/****************************************************************//**
   This is a simple Camera. It is not intended as a realistic
   camera model, but rather as supplying a simple class to use for
   testing. The defaults are for the nominal MISR DF camera, red band.
@@ -208,5 +288,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Camera);
+GEOCAL_EXPORT_KEY(SubCamera);
 GEOCAL_EXPORT_KEY(SimpleCamera);
 #endif

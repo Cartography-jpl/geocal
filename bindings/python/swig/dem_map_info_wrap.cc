@@ -3587,26 +3587,27 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[132]
 #define SWIGTYPE_p_char_type swig_types[133]
 #define SWIGTYPE_p_difference_type swig_types[134]
-#define SWIGTYPE_p_fmtflags swig_types[135]
-#define SWIGTYPE_p_int_type swig_types[136]
-#define SWIGTYPE_p_iostate swig_types[137]
-#define SWIGTYPE_p_off_type swig_types[138]
-#define SWIGTYPE_p_openmode swig_types[139]
-#define SWIGTYPE_p_pos_type swig_types[140]
-#define SWIGTYPE_p_seekdir swig_types[141]
-#define SWIGTYPE_p_size_t swig_types[142]
-#define SWIGTYPE_p_size_type swig_types[143]
-#define SWIGTYPE_p_state_type swig_types[144]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[145]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[146]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[147]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[148]
-#define SWIGTYPE_p_std__invalid_argument swig_types[149]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[150]
-#define SWIGTYPE_p_traits_type swig_types[151]
-#define SWIGTYPE_p_value_type swig_types[152]
-static swig_type_info *swig_types[154];
-static swig_module_info swig_module = {swig_types, 153, 0, 0, 0, 0};
+#define SWIGTYPE_p_double swig_types[135]
+#define SWIGTYPE_p_fmtflags swig_types[136]
+#define SWIGTYPE_p_int_type swig_types[137]
+#define SWIGTYPE_p_iostate swig_types[138]
+#define SWIGTYPE_p_off_type swig_types[139]
+#define SWIGTYPE_p_openmode swig_types[140]
+#define SWIGTYPE_p_pos_type swig_types[141]
+#define SWIGTYPE_p_seekdir swig_types[142]
+#define SWIGTYPE_p_size_t swig_types[143]
+#define SWIGTYPE_p_size_type swig_types[144]
+#define SWIGTYPE_p_state_type swig_types[145]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[146]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[147]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[148]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[149]
+#define SWIGTYPE_p_std__invalid_argument swig_types[150]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[151]
+#define SWIGTYPE_p_traits_type swig_types[152]
+#define SWIGTYPE_p_value_type swig_types[153]
+static swig_type_info *swig_types[155];
+static swig_module_info swig_module = {swig_types, 154, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5831,6 +5832,22 @@ namespace swig {
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6779,6 +6796,373 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DemMapInfo_dz(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  double *arg4 = 0 ;
+  double *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[3] ;
+  
+  arg4 = &temp4;
+  arg5 = &temp5;
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_dz",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_dz" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMapInfo_dz" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMapInfo_dz" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      ((GeoCal::DemMapInfo const *)arg1)->dz(arg2,arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo_slope_riserun(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_slope_riserun",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_slope_riserun" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMapInfo_slope_riserun" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMapInfo_slope_riserun" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_riserun(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo_slope_percentage(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_slope_percentage",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_slope_percentage" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMapInfo_slope_percentage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMapInfo_slope_percentage" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_percentage(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo_slope_radian(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_slope_radian",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_slope_radian" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMapInfo_slope_radian" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMapInfo_slope_radian" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_radian(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo_slope_degree(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_slope_degree",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_slope_degree" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMapInfo_slope_degree" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMapInfo_slope_degree" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_degree(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo_aspect(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  int arg2 ;
+  int arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_aspect",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_aspect" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "DemMapInfo_aspect" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "DemMapInfo_aspect" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    try {
+      result = (double)((GeoCal::DemMapInfo const *)arg1)->aspect(arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DemMapInfo__v_outside_dem_is_error(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
@@ -6948,6 +7332,51 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"double DemMapInfo::height_datum(const Geodetic &Gp) const\n"
 		"\n"
+		""},
+	 { (char *)"DemMapInfo_dz", _wrap_DemMapInfo_dz, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void DemMapInfo::dz(int Y_index, int X_index, double &dz_dx, double &dz_dy) const\n"
+		"Calculate dz_dx and dz_dy, which is the first step in calculating\n"
+		"slope and aspect of the DEM.\n"
+		"\n"
+		"This uses the second order ARCINFO method. We handle the grid edges by\n"
+		"just using the elevation as Y_index, X_index.\n"
+		"\n"
+		"This is also the method used by richdem (a python package), which\n"
+		"references Horn, B.K.P., 1981. Hill shading and the reflectance map.\n"
+		"Proceedings of the IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the\n"
+		"original source of this algorithm \n"
+		""},
+	 { (char *)"DemMapInfo_slope_riserun", _wrap_DemMapInfo_slope_riserun, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double DemMapInfo::slope_riserun(int Y_index, int X_index) const\n"
+		"Slope for the given point, as a Rise/Run. \n"
+		""},
+	 { (char *)"DemMapInfo_slope_percentage", _wrap_DemMapInfo_slope_percentage, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double GeoCal::DemMapInfo::slope_percentage(int Y_index, int X_index) const\n"
+		"Slope for the given point, as a percentage. \n"
+		""},
+	 { (char *)"DemMapInfo_slope_radian", _wrap_DemMapInfo_slope_radian, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double GeoCal::DemMapInfo::slope_radian(int Y_index, int X_index) const\n"
+		"Slope for the given point, as radians. \n"
+		""},
+	 { (char *)"DemMapInfo_slope_degree", _wrap_DemMapInfo_slope_degree, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double GeoCal::DemMapInfo::slope_degree(int Y_index, int X_index) const\n"
+		"Slope for the given point, as degrees. \n"
+		""},
+	 { (char *)"DemMapInfo_aspect", _wrap_DemMapInfo_aspect, METH_VARARGS, (char *)"\n"
+		"\n"
+		"double DemMapInfo::aspect(int Y_index, int X_index) const\n"
+		"Aspect angle.\n"
+		"\n"
+		"This uses the Horn 1981 definition, in degrees [0, 360). 0 is north,\n"
+		"we increase in a clockwise fashion. Note for perfectly flat areas\n"
+		"(slope_riserun is 0) this isn't really defined, but by convention we\n"
+		"return BLAH TODO Figure out BLAH, atan2(0,0) is 0 TODO Compare MISR\n"
+		"calculation to terrain_attributes, which is different \n"
 		""},
 	 { (char *)"DemMapInfo__v_outside_dem_is_error", (PyCFunction)_wrap_DemMapInfo__v_outside_dem_is_error, METH_O, (char *)"\n"
 		"\n"
@@ -7430,6 +7859,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -7585,6 +8015,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
+  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -7740,6 +8171,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swig
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -7895,6 +8327,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
+  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,

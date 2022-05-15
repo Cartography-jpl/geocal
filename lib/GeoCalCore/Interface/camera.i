@@ -16,6 +16,7 @@
 %include "geocal_time_include.i"
 %import "array_ad.i"
 %geocal_shared_ptr(GeoCal::Camera);
+%geocal_shared_ptr(GeoCal::SubCamera);
 %geocal_shared_ptr(GeoCal::SimpleCamera);
 namespace GeoCal {
   class Camera;
@@ -52,6 +53,28 @@ public:
   std::string print_to_string() const;
 };
 
+class SubCamera : public Camera {
+public:
+  SubCamera(const boost::shared_ptr<Camera>& Cam,
+	    int Start_line, int Start_sample, int Number_line,
+	    int Number_sample);
+  virtual int number_line(int Band) const;
+  virtual int number_sample(int Band) const;
+  virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
+					   int Band) const;
+  virtual FrameCoordinateWithDerivative 
+  frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
+		   int Band) const;
+  virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
+				      int Band) const;
+  virtual ScLookVectorWithDerivative 
+  sc_look_vector_with_derivative(const FrameCoordinateWithDerivative& F, 
+				 int Band) const;
+  %python_attribute(full_camera, boost::shared_ptr<Camera>);
+  %python_attribute(start_line, int);
+  %python_attribute(start_sample, int);
+};
+  
 class SimpleCamera : public Camera {
 public:
   // swig 3.0.7 doesn't seem to support expressions in the

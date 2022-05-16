@@ -232,10 +232,10 @@ class DemMapInfo(geocal_swig.dem.Dem):
         return _dem_map_info.DemMapInfo_height_datum(self, Gp)
 
 
-    def dz(self, Y_index, X_index):
+    def gradient(self, Y_index, X_index):
         """
 
-        void DemMapInfo::dz(int Y_index, int X_index, double &dz_dx, double &dz_dy) const
+        void DemMapInfo::gradient(int Y_index, int X_index, double &dz_dx, double &dz_dy) const
         Calculate dz_dx and dz_dy, which is the first step in calculating
         slope and aspect of the DEM.
 
@@ -247,7 +247,7 @@ class DemMapInfo(geocal_swig.dem.Dem):
         Proceedings of the IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the
         original source of this algorithm 
         """
-        return _dem_map_info.DemMapInfo_dz(self, Y_index, X_index)
+        return _dem_map_info.DemMapInfo_gradient(self, Y_index, X_index)
 
 
     def slope_riserun(self, Y_index, X_index):
@@ -295,10 +295,32 @@ class DemMapInfo(geocal_swig.dem.Dem):
         This uses the Horn 1981 definition, in degrees [0, 360). 0 is north,
         we increase in a clockwise fashion. Note for perfectly flat areas
         (slope_riserun is 0) this isn't really defined, but by convention we
-        return BLAH TODO Figure out BLAH, atan2(0,0) is 0 TODO Compare MISR
-        calculation to terrain_attributes, which is different 
+        return 270 (directly west).
+
+        Aspect is the downslope direction for the maximum rate of change in
+        value for each pixel. 
         """
         return _dem_map_info.DemMapInfo_aspect(self, Y_index, X_index)
+
+
+    def slope_and_aspect(self, Gc):
+        """
+
+        void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect) const
+        Frequently we want both the slope and aspect, this one function saves
+        a step and returns both.
+
+        There isn't really "one" way to handle slope and aspect for points
+        that don't lie on the DEM grid. MISR had a larger footprint and
+        calculated an average of slopes/aspect that fell in to the footprint.
+        Another approach is to do a bilinear interpolation.
+
+        This particular function just uses the nearest neighbor. Slope and
+        aspect are a bit approximate anyways, so this is probably as good as
+        any other approach if the DEM resolution is similar to your pixel
+        size. 
+        """
+        return _dem_map_info.DemMapInfo_slope_and_aspect(self, Gc)
 
 
     def _v_outside_dem_is_error(self):
@@ -333,12 +355,13 @@ class DemMapInfo(geocal_swig.dem.Dem):
 DemMapInfo._v_datum = new_instancemethod(_dem_map_info.DemMapInfo__v_datum, None, DemMapInfo)
 DemMapInfo._v_map_info = new_instancemethod(_dem_map_info.DemMapInfo__v_map_info, None, DemMapInfo)
 DemMapInfo.height_datum = new_instancemethod(_dem_map_info.DemMapInfo_height_datum, None, DemMapInfo)
-DemMapInfo.dz = new_instancemethod(_dem_map_info.DemMapInfo_dz, None, DemMapInfo)
+DemMapInfo.gradient = new_instancemethod(_dem_map_info.DemMapInfo_gradient, None, DemMapInfo)
 DemMapInfo.slope_riserun = new_instancemethod(_dem_map_info.DemMapInfo_slope_riserun, None, DemMapInfo)
 DemMapInfo.slope_percentage = new_instancemethod(_dem_map_info.DemMapInfo_slope_percentage, None, DemMapInfo)
 DemMapInfo.slope_radian = new_instancemethod(_dem_map_info.DemMapInfo_slope_radian, None, DemMapInfo)
 DemMapInfo.slope_degree = new_instancemethod(_dem_map_info.DemMapInfo_slope_degree, None, DemMapInfo)
 DemMapInfo.aspect = new_instancemethod(_dem_map_info.DemMapInfo_aspect, None, DemMapInfo)
+DemMapInfo.slope_and_aspect = new_instancemethod(_dem_map_info.DemMapInfo_slope_and_aspect, None, DemMapInfo)
 DemMapInfo._v_outside_dem_is_error = new_instancemethod(_dem_map_info.DemMapInfo__v_outside_dem_is_error, None, DemMapInfo)
 DemMapInfo._v_naif_code = new_instancemethod(_dem_map_info.DemMapInfo__v_naif_code, None, DemMapInfo)
 DemMapInfo_swigregister = _dem_map_info.DemMapInfo_swigregister

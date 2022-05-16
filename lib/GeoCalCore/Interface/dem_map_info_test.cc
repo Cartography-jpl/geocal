@@ -1,5 +1,7 @@
 #include "unit_test_support.h"
 #include "dem_map_info.h"
+#include "gdal_dem.h"
+#include "srtm_dem.h"
 #include <cmath>
 
 using namespace GeoCal;
@@ -41,6 +43,44 @@ BOOST_AUTO_TEST_CASE(dem_map_info_test)
   double max_h_expect = height_expect + 10 + pad;
   BOOST_CHECK_CLOSE(min_h, min_h_expect, 1e-4);
   BOOST_CHECK_CLOSE(max_h, max_h_expect, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(slope_aspect)
+{
+  // We calculated these values using the python library richdem to
+  // compare. Note there are slight differences, richdem uses float32
+  // while we use double, we also convert everything to meters (with
+  // slight round off) and richdem leaves in the native length (feet
+  // in this case). But we should mostly agree.
+  //
+  // Note I also compared to gdaldem
+  // (see https://gdal.org/programs/gdaldem.html)
+  // gdaldem aspect dem_foot.tif aspect.tif -alg Horn
+  // gdaldem slope dem_foot.tif slope.tif -alg Horn
+  // This gives the same values as richdem, and matches what we have here.
+  GdalDem d(test_data_dir() + "dem_foot.tif");
+  BOOST_CHECK_CLOSE(d.slope_riserun(20,19), 0.6217460352558923, 1e-4);
+  BOOST_CHECK_CLOSE(d.slope_percentage(20,19), 0.6217460352558923 * 100, 1e-4);
+  BOOST_CHECK_CLOSE(d.slope_radian(20,19), atan(0.6217460352558923), 1e-4);
+  BOOST_CHECK_CLOSE(d.slope_degree(20,19),
+		    atan(0.6217460352558923) * Constant::rad_to_deg, 1e-4);
+  // Check each quadrant, to make sure we handle correctly
+  BOOST_CHECK_CLOSE(d.aspect(20,19), 30.17352, 1e-4);
+  BOOST_CHECK_CLOSE(d.aspect(2,59), 138.81407, 1e-4);
+  BOOST_CHECK_CLOSE(d.aspect(3,33), 213.36636, 1e-4);
+  BOOST_CHECK_CLOSE(d.aspect(2,87), 326.30994, 1e-4);
+  double slope, aspect;
+  d.slope_and_aspect(*d.map_info().ground_coordinate(19,20), slope, aspect);
+  BOOST_CHECK_CLOSE(slope, atan(0.6217460352558923) * Constant::rad_to_deg,
+		    1e-4);
+  BOOST_CHECK_CLOSE(aspect, 30.17352, 1e-4);
+  
+  // Check handling of flat areas
+  std::string dbase = SrtmDem().directory_base();
+  GdalDem d2(dbase + "/n34e119_L2.hlf");
+  BOOST_CHECK_EQUAL(d2.slope_riserun(3555,3560),0.0);
+  BOOST_CHECK_EQUAL(d2.aspect(3555,3560),270.0);
+  
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -47,7 +47,7 @@ double DemMapInfo::distance_to_surface(const GroundCoordinate& Gp) const
 /// algorithm
 //-----------------------------------------------------------------------
 
-void DemMapInfo::dz(int Y_index, int X_index,
+void DemMapInfo::gradient(int Y_index, int X_index,
 		    double& dz_dx, double& dz_dy) const
 {
   // Note that this isn't really too efficient. We can try to generate
@@ -56,7 +56,7 @@ void DemMapInfo::dz(int Y_index, int X_index,
      Y_index < 0 || Y_index + 1 >= map_info_.number_y_pixel()) {
     if(outside_dem_is_error_) {
       Exception e;
-      e << "dz requested outside of the range of the Dem data "
+      e << "gradient requested outside of the range of the Dem data "
 	<< "xindex: " << X_index << " (max " << map_info_.number_x_pixel() - 1
 	<< ") yindex: " << Y_index << " (max " << map_info_.number_y_pixel() - 1
 	<< ")";
@@ -99,22 +99,58 @@ void DemMapInfo::dz(int Y_index, int X_index,
 double DemMapInfo::slope_riserun(int Y_index, int X_index) const
 {
   double dz_dx, dz_dy;
-  dz(Y_index, X_index, dz_dx, dz_dy);
-  return sqrt(dz_dx * dz_dx + dz_dy * dz_dy);
+  gradient(Y_index, X_index, dz_dx, dz_dy);
+  return hypot(dz_dx, dz_dy);
 }
 
 //-----------------------------------------------------------------------
 /// Aspect angle. This uses the Horn 1981 definition, in degrees
 /// [0, 360). 0 is north, we increase in a clockwise fashion. Note for
 /// perfectly flat areas (slope_riserun is 0) this isn't really
-/// defined, but by convention we return BLAH
-/// TODO Figure out BLAH, atan2(0,0) is 0
-/// TODO Compare MISR calculation to terrain_attributes, which is
-/// different
+/// defined, but by convention we return 270 (directly west).
+///
+/// Aspect is the downslope direction for the maximum rate of change
+/// in value for each pixel.
 //-----------------------------------------------------------------------
 
 double DemMapInfo::aspect(int Y_index, int X_index) const
 {
+  double dz_dx, dz_dy;
+  gradient(Y_index, X_index, dz_dx, dz_dy);
+  double d = 90 - atan2(dz_dy, -dz_dx) * Constant::rad_to_deg;
+  if(d < 0)
+    d += 360;
+  return d;
+}
+
+//-----------------------------------------------------------------------
+/// Frequently we want both the slope and aspect, this one function
+/// saves a step and returns both.
+///
+/// There isn't really "one" way to handle slope and aspect for points
+/// that don't lie on the DEM grid. MISR had a larger footprint and
+/// calculated an average of slopes/aspect that fell in to the
+/// footprint. Another approach is to do a bilinear interpolation.
+///
+/// This particular function just uses the nearest neighbor. Slope and
+/// aspect are a bit approximate anyways, so this is probably as good
+/// as any other approach if the DEM resolution is similar to your
+/// pixel size.
+//-----------------------------------------------------------------------
+
+void DemMapInfo::slope_and_aspect(const GroundCoordinate& Gc, double& Slope_deg,
+				  double& Aspect) const
+{
+  double x, y;
+  map_info_.coordinate(Gc, x, y);
+  int xi = (int) round(x);
+  int yi = (int) round(y);
+  double dz_dx, dz_dy;
+  gradient(yi, xi, dz_dx, dz_dy);
+  Slope_deg = atan(hypot(dz_dx, dz_dy)) * Constant::rad_to_deg;
+  Aspect = 90 - atan2(dz_dy, -dz_dx) * Constant::rad_to_deg;
+  if(Aspect < 0)
+    Aspect += 360;
 }
 
 //-----------------------------------------------------------------------

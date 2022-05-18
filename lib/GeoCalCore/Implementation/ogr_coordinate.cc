@@ -98,6 +98,16 @@ void OgrWrapper::init_naif()
     PRIMEM[\"Reference_Meridian\",0],\
     UNIT[\"Decimal_Degree\",0.0174532925199433]]";
   add_spatial_reference("ceres", PlanetConstant::CERES_NAIF_CODE, wkt);
+  wkt = "GEOGCS[\"Moon 2000\",\
+    DATUM[\"D_Moon_2000\",\
+        SPHEROID[\"Moon_2000_IAU_IAG\",1737400,0]],\
+    PRIMEM[\"Reference meridian 0\",0],\
+    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
+  add_spatial_reference("moon", PlanetConstant::MOON_NAIF_CODE, wkt);
+  
+  // Can add new planets here. Can also just call
+  // add_spatial_reference directly from C++ or python to add a planet
+  // without/before updating this code.
 }
 
 //-----------------------------------------------------------------------

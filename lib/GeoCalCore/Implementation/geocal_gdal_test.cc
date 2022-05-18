@@ -100,16 +100,21 @@ BOOST_AUTO_TEST_CASE(geocal_gdal_test)
   }
 }
 
-// Work through a lunar case. Depends on data we only have on rifle.
 BOOST_AUTO_TEST_CASE(lunar_test)
 {
+  // Work through a lunar case. Depends on data we only have on rifle,
+  // so don't normally run.
+  return;
   std::string fname = "/home/smyth/Local/TempMoon/NAC_PHO_E010N0230_M117338434L1M_map0.2";
-  std::string wkt = "GEOGCS[\"Moon 2000\",\
-        DATUM[\"D_Moon_2000\",\
+  if(false) {
+    // This is now in the default set we initialize in ogr_coordinate.cc
+    std::string wkt = "GEOGCS[\"Moon 2000\",\
+        DATUM[\"D_Moon_2000\",				\
             SPHEROID[\"Moon_2000_IAU_IAG\",1737400,0]],\
         PRIMEM[\"Reference meridian 0\",0],\
         UNIT[\"Decimal_Degree\",0.0174532925199433]]";
-  OgrWrapper::add_spatial_reference("moon", 301, wkt);
+    OgrWrapper::add_spatial_reference("moon", 301, wkt);
+  }
   BOOST_CHECK(gdal_has_map_info(fname));
   Gdal<GInt16> f(fname.c_str());
   std::cerr << f.map_info() << "\n";

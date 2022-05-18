@@ -2,6 +2,7 @@
 #include "dem_map_info.h"
 #include "gdal_dem.h"
 #include "srtm_dem.h"
+#include <boost/filesystem.hpp>
 #include <cmath>
 
 using namespace GeoCal;

@@ -295,13 +295,13 @@ bool GeoCal::gdal_has_map_info(const std::string& Fname)
   // Sometimes we have some map info, but not enough to set up the 
   // full map (for example, a projection of "unknown" type). In that
   // case, say we don't have map info.
-  try {
+       //  try {
     boost::shared_ptr<OGRSpatialReference> 
       ogr(new OGRSpatialReference(data_set->GetProjectionRef()));
     boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
     return true;
-  } catch(...) {
-  }
+  // } catch(...) {
+  // }
   return false;
 }
 

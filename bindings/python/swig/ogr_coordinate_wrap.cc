@@ -7075,6 +7075,153 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OgrWrapper_add_spatial_reference__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  boost::shared_ptr< OGRSpatialReference > *arg3 = 0 ;
+  boost::shared_ptr< OGRSpatialReference > *arg4 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OgrWrapper_add_spatial_reference" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  res3 = SWIG_ConvertPtr(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_OGRSpatialReference_t,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "3"" of type '" "boost::shared_ptr< OGRSpatialReference > &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OgrWrapper_add_spatial_reference" "', argument " "3"" of type '" "boost::shared_ptr< OGRSpatialReference > &""'"); 
+  }
+  arg3 = reinterpret_cast< boost::shared_ptr< OGRSpatialReference > * >(argp3);
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_boost__shared_ptrT_OGRSpatialReference_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "4"" of type '" "boost::shared_ptr< OGRSpatialReference > &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OgrWrapper_add_spatial_reference" "', argument " "4"" of type '" "boost::shared_ptr< OGRSpatialReference > &""'"); 
+  }
+  arg4 = reinterpret_cast< boost::shared_ptr< OGRSpatialReference > * >(argp4);
+  {
+    try {
+      GeoCal::OgrWrapper::add_spatial_reference((std::string const &)*arg1,arg2,*arg3,*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper_add_spatial_reference__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OgrWrapper_add_spatial_reference" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "OgrWrapper_add_spatial_reference" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OgrWrapper_add_spatial_reference" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      GeoCal::OgrWrapper::add_spatial_reference((std::string const &)*arg1,arg2,(std::string const &)*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OgrWrapper_add_spatial_reference(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"OgrWrapper_add_spatial_reference",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_OgrWrapper_add_spatial_reference__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_OgrWrapper_add_spatial_reference__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'OgrWrapper_add_spatial_reference'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::OgrWrapper::add_spatial_reference(std::string const &,int,boost::shared_ptr< OGRSpatialReference > &,boost::shared_ptr< OGRSpatialReference > &)\n"
+    "    GeoCal::OgrWrapper::add_spatial_reference(std::string const &,int,std::string const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_OgrWrapper_from_epsg__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
@@ -9129,6 +9276,19 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"OgrWrapper::OgrWrapper(const boost::shared_ptr< OGRSpatialReference > &Ogr)\n"
 		"Constructor, from an existing OGRSpatialReference. \n"
+		""},
+	 { (char *)"OgrWrapper_add_spatial_reference", _wrap_OgrWrapper_add_spatial_reference, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void OgrWrapper::add_spatial_reference(const std::string &Name, int Naif_code, const std::string\n"
+		"&Wkt_planet_centric)\n"
+		"For handling coordinate conversions, we need to have a sample of the\n"
+		"Geodetic or Planetocentric spatial reference, and for the earth the\n"
+		"ECR coordinates.\n"
+		"\n"
+		"We need to be able to map a string in the name (e.g., mars) to the\n"
+		"NAIF code and spatial references. We have a fixed set defined in\n"
+		"geocal, but you may need to add new ones if you are working on a\n"
+		"planet we didn't already add this for. \n"
 		""},
 	 { (char *)"OgrWrapper_from_epsg", _wrap_OgrWrapper_from_epsg, METH_VARARGS, (char *)"\n"
 		"\n"

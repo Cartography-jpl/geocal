@@ -1,6 +1,7 @@
 #include "unit_test_support.h"
 #include "geocal_gdal.h"
 #include "rpc_fixture.h"
+#include "ogr_coordinate.h"
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(geocal_gdal, RpcFixture)
@@ -97,6 +98,21 @@ BOOST_AUTO_TEST_CASE(geocal_gdal_test)
     BOOST_CHECK_CLOSE(rpc.sample_numerator[i], rpc2.sample_numerator[i], 
 		      1e-4);
   }
+}
+
+// Work through a lunar case. Depends on data we only have on rifle.
+BOOST_AUTO_TEST_CASE(lunar_test)
+{
+  std::string fname = "/home/smyth/Local/TempMoon/NAC_PHO_E010N0230_M117338434L1M_map0.2";
+  std::string wkt = "GEOGCS[\"Moon 2000\",\
+        DATUM[\"D_Moon_2000\",\
+            SPHEROID[\"Moon_2000_IAU_IAG\",1737400,0]],\
+        PRIMEM[\"Reference meridian 0\",0],\
+        UNIT[\"Decimal_Degree\",0.0174532925199433]]";
+  OgrWrapper::add_spatial_reference("moon", 301, wkt);
+  BOOST_CHECK(gdal_has_map_info(fname));
+  Gdal<GInt16> f(fname.c_str());
+  std::cerr << f.map_info() << "\n";
 }
 
 BOOST_AUTO_TEST_SUITE_END()

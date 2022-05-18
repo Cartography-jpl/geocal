@@ -57,10 +57,48 @@ GEOCAL_SPLIT_IMPLEMENT(OgrWrapper);
 /// Geodetic coordinate system, used as base for doing transformation.
 //-----------------------------------------------------------------------
 
-boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_geodetic;
-boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ecr;
-boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_mars_pc;
-boost::scoped_ptr<OGRSpatialReference> OgrWrapper::ogr_ceres_pc;
+std::map<std::string, int> OgrWrapper::name_to_naif;
+std::map<int, boost::shared_ptr<OGRSpatialReference> > OgrWrapper::naif_to_g_or_pc;
+std::map<int, boost::shared_ptr<OGRSpatialReference> > OgrWrapper::naif_to_cf;
+bool OgrWrapper::init_naif_done = false;
+
+//-----------------------------------------------------------------------
+/// Set of planets we initialize.
+//-----------------------------------------------------------------------
+
+void OgrWrapper::init_naif()
+{
+  if(init_naif_done)
+    return;
+  init_naif_done = true;
+  auto o1 = boost::make_shared<OGRSpatialReference>();
+  auto o2 = boost::make_shared<OGRSpatialReference>();
+  OGRErr status = o1->SetWellKnownGeogCS("WGS84");
+  if(status != OGRERR_NONE)
+    throw Exception("Call to SetWellKnownGeogCS failed");
+  handle_gis_order(*o1, true);
+  status = o2->importFromEPSG(4328);
+  if(status != OGRERR_NONE)
+    throw Exception("Call to importFromEPSG failed");
+  handle_gis_order(*o2, true);
+  add_spatial_reference("earth", Ecr::EARTH_NAIF_CODE, o1, o2);
+  std::string wkt = "GEOGCS[\"Mars 2000\",\
+    DATUM[\"D_Mars_2000\",\
+        SPHEROID[\"Mars_2000_IAU_IAG\",3396190.0,169.89444722361179]],\
+    PRIMEM[\"Greenwich\",0],\
+    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
+  // Note we use to have a mars cartesian fixed conversion. However,
+  // GDAL (version 2.0.2) seems to have trouble converting correctly
+  // we have a coordinate system with a spherical mars model. See
+  // Issue #19 in github for details on this.
+  add_spatial_reference("mars", PlanetConstant::MARS_NAIF_CODE, wkt);
+  wkt = "GEOGCS[\"GCS_CERES\",\
+    DATUM[\"D_CERES\",\
+        SPHEROID[\"CERES\",487300,0.0668992407141]],\
+    PRIMEM[\"Reference_Meridian\",0],\
+    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
+  add_spatial_reference("ceres", PlanetConstant::CERES_NAIF_CODE, wkt);
+}
 
 //-----------------------------------------------------------------------
 /// Constructor that creates a OGRSpatialReference from a WKT (Well
@@ -121,87 +159,73 @@ OgrWrapper::OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr)
 }
 
 //-----------------------------------------------------------------------
+/// For handling coordinate conversions, we need to have a sample of
+/// the Geodetic or Planetocentric spatial reference, and for the earth the
+/// ECR coordinates. We need to be able to map a string in the name
+/// (e.g., mars) to the NAIF code and spatial references. We have a
+/// fixed set defined in geocal, but you may need to add new ones if
+/// you are working on a planet we didn't already add this for.
+//-----------------------------------------------------------------------
+
+void OgrWrapper::add_spatial_reference
+(const std::string& Name,
+ int Naif_code,
+ boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
+ boost::shared_ptr<OGRSpatialReference>& Cf)
+{
+  init_naif();
+  name_to_naif[Name] = Naif_code;
+  naif_to_g_or_pc[Naif_code] = Geodetic_or_planetocentric;
+  naif_to_cf[Naif_code] = Cf;
+}
+
+//-----------------------------------------------------------------------
+/// For handling coordinate conversions, we need to have a sample of
+/// the Geodetic or Planetocentric spatial reference, and for the earth the
+/// ECR coordinates. We need to be able to map a string in the name
+/// (e.g., mars) to the NAIF code and spatial references. We have a
+/// fixed set defined in geocal, but you may need to add new ones if
+/// you are working on a planet we didn't already add this for.
+//-----------------------------------------------------------------------
+
+void OgrWrapper::add_spatial_reference
+(const std::string& Name,
+ int Naif_code,
+ const std::string& Wkt_planetocentric)
+{
+  auto o1 = boost::make_shared<OGRSpatialReference>();
+  boost::shared_ptr<OGRSpatialReference> o2;
+  OGRErr status = o1->importFromWkt(Wkt_planetocentric.c_str());
+  if(status != OGRERR_NONE)
+    throw Exception("Call to importFromWkt failed for " + Wkt_planetocentric);
+  handle_gis_order(*o1, true);
+  add_spatial_reference(Name, Naif_code, o1, o2);
+}
+
+//-----------------------------------------------------------------------
 /// Initialize, given a OGRSpatialReference
 //-----------------------------------------------------------------------
 
 void OgrWrapper::init(const boost::shared_ptr<OGRSpatialReference>& Ogr)
 {
   ogr_ = Ogr;
-  if(!ogr_geodetic.get()) {
-    ogr_geodetic.reset(new OGRSpatialReference);
-    OGRErr status = ogr_geodetic->SetWellKnownGeogCS("WGS84");
-    if(status != OGRERR_NONE)
-      throw Exception("Call to SetWellKnownGeogCS failed");
-    handle_gis_order(*ogr_geodetic, true);
-  }
-  if(!ogr_ecr.get()) {
-    // Look this up http://spatialreference.org/ref/epsg/4328/
-    ogr_ecr.reset(new OGRSpatialReference);
-    OGRErr status = ogr_ecr->importFromEPSG(4328);
-    if(status != OGRERR_NONE)
-      throw Exception("Call to importFromEPSG failed");
-    handle_gis_order(*ogr_ecr, true);
-  }
-  if(!ogr_mars_pc.get()) {
-    // Look this up http://spatialreference.org/ref/iau2000/49900/
-    ogr_mars_pc.reset(new OGRSpatialReference);
-    const char *wkt = "GEOGCS[\"Mars 2000\",\
-    DATUM[\"D_Mars_2000\",\
-        SPHEROID[\"Mars_2000_IAU_IAG\",3396190.0,169.89444722361179]],\
-    PRIMEM[\"Greenwich\",0],\
-    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
-    OGRErr status = ogr_mars_pc->importFromWkt(&wkt);
-    if(status != OGRERR_NONE) {
-      Exception e;
-      e << "Create of OGRSpatialReference failed. "
-	<< "The WKT (Well Known Text) was:\n"
-	<< wkt;
-      throw e;
-    }
-    handle_gis_order(*ogr_mars_pc, true);
-  }
-  if(!ogr_ceres_pc.get()) {
-    ogr_ceres_pc.reset(new OGRSpatialReference);
-    const char *wkt = "GEOGCS[\"GCS_CERES\",\
-    DATUM[\"D_CERES\",\
-        SPHEROID[\"CERES\",487300,0.0668992407141]],\
-    PRIMEM[\"Reference_Meridian\",0],\
-    UNIT[\"Decimal_Degree\",0.0174532925199433]]";
-    OGRErr status = ogr_ceres_pc->importFromWkt(&wkt);
-    if(status != OGRERR_NONE) {
-      Exception e;
-      e << "Create of OGRSpatialReference failed. "
-	<< "The WKT (Well Known Text) was:\n"
-	<< wkt;
-      throw e;
-    }
-    handle_gis_order(*ogr_ceres_pc, true);
-  }
-  OGRSpatialReference * og;
-  OGRSpatialReference * og_cf;
+  init_naif();
   std::string gname = geogcs_name();
   if(gname == "")
     gname = geoccs_name();
   boost::algorithm::to_lower(gname);
-  // We may need a more sophisticated way of handling this, but for
-  // now just search for "mars" in the GCS name
-  if(gname.find("mars") != std::string::npos) {
-    naif_code_ = PlanetConstant::MARS_NAIF_CODE;
-    og =  ogr_mars_pc.get();
-    // Note we use to have a mars cartesian fixed conversion. However,
-    // GDAL (version 2.0.2) seems to have trouble converting correctly
-    // we have a coordinate system with a spherical mars model. See
-    // Issue #19 in github for details on this.
-    og_cf = 0;
-  } else if(gname.find("ceres") != std::string::npos) {
-    naif_code_ = PlanetConstant::CERES_NAIF_CODE;
-    og =  ogr_ceres_pc.get();
-    og_cf = 0;
-  } else {
-    naif_code_ = Ecr::EARTH_NAIF_CODE;
-    og = ogr_geodetic.get();
-    og_cf = ogr_ecr.get();
-  }
+  naif_code_ = Ecr::EARTH_NAIF_CODE; // Default, if we don't find a
+				     // planet reference
+  for (const auto& i : name_to_naif)
+    if(gname.find(i.first) != std::string::npos) {
+      naif_code_ = i.second;
+      break;
+    }
+  OGRSpatialReference * og = naif_to_g_or_pc[naif_code_].get();
+  OGRSpatialReference * og_cf = naif_to_cf[naif_code_].get();
+  // Create and stash the converts to and from the
+  // geodetic/planetocentric and cartesian fixed coordinates. We use
+  // this to convert between other coordinate systems.
   ogr_transform_ = 0;
   ogr_inverse_transform_ = 0;
   ogr_cf_transform_ = 0;
@@ -341,7 +365,9 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_epsg
 (int Epsg_id, bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
-  ogr->importFromEPSG(Epsg_id);
+  OGRErr status = ogr->importFromEPSG(Epsg_id);
+  if(status != OGRERR_NONE)
+    throw Exception("Call to importFromEPSG failed");
   handle_gis_order(*ogr, Use_traditional_gis_order);
   return boost::shared_ptr<OgrWrapper>(new OgrWrapper(ogr));
 }
@@ -354,7 +380,9 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4
 (const std::string& Proj4_string, bool Use_traditional_gis_order)
 {
   boost::shared_ptr<OGRSpatialReference> ogr(new OGRSpatialReference);
-  ogr->importFromProj4(Proj4_string.c_str());
+  OGRErr status = ogr->importFromProj4(Proj4_string.c_str());
+  if(status != OGRERR_NONE)
+    throw Exception("Call to importFromProj4 failed");
   handle_gis_order(*ogr, Use_traditional_gis_order);
   return boost::shared_ptr<OgrWrapper>(new OgrWrapper(ogr));
 }

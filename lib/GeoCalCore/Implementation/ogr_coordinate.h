@@ -54,6 +54,13 @@ public:
   static boost::shared_ptr<OgrWrapper> 
   from_proj4(const std::string& Proj4_string,
 	     bool Use_traditional_gis_order = true);
+  static void add_spatial_reference(const std::string& Name,
+				    int Naif_code,
+				    boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
+				    boost::shared_ptr<OGRSpatialReference>& Cf);
+  static void add_spatial_reference(const std::string& Name,
+				    int Naif_code,
+				    const std::string& Wkt_planet_centric);
   virtual ~OgrWrapper();
 
 //-----------------------------------------------------------------------
@@ -121,12 +128,11 @@ private:
   OGRCoordinateTransformation* ogr_cf_transform_;
   OGRCoordinateTransformation* ogr_cf_inverse_transform_;
   int naif_code_;
-  // Right now we have a fixed list of planets. If this becomes and
-  // issue, we can come up with something more flexible.
-  static boost::scoped_ptr<OGRSpatialReference> ogr_geodetic;
-  static boost::scoped_ptr<OGRSpatialReference> ogr_ecr;
-  static boost::scoped_ptr<OGRSpatialReference> ogr_mars_pc;
-  static boost::scoped_ptr<OGRSpatialReference> ogr_ceres_pc;
+  static void init_naif();
+  static bool init_naif_done;
+  static std::map<std::string, int> name_to_naif;
+  static std::map<int, boost::shared_ptr<OGRSpatialReference> > naif_to_g_or_pc;
+  static std::map<int, boost::shared_ptr<OGRSpatialReference> > naif_to_cf;
   friend class boost::serialization::access;
   template<class Archive>
   void save(Archive& Ar, const unsigned int version) const;

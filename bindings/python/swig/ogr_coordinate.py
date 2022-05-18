@@ -236,6 +236,24 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
         """
         _ogr_coordinate.OgrWrapper_swiginit(self, _ogr_coordinate.new_OgrWrapper(*args))
 
+    def add_spatial_reference(*args):
+        """
+
+        void OgrWrapper::add_spatial_reference(const std::string &Name, int Naif_code, const std::string
+        &Wkt_planet_centric)
+        For handling coordinate conversions, we need to have a sample of the
+        Geodetic or Planetocentric spatial reference, and for the earth the
+        ECR coordinates.
+
+        We need to be able to map a string in the name (e.g., mars) to the
+        NAIF code and spatial references. We have a fixed set defined in
+        geocal, but you may need to add new ones if you are working on a
+        planet we didn't already add this for. 
+        """
+        return _ogr_coordinate.OgrWrapper_add_spatial_reference(*args)
+
+    add_spatial_reference = staticmethod(add_spatial_reference)
+
     def from_epsg(Epsg_id, Use_traditional_gis_order=True):
         """
 
@@ -464,6 +482,22 @@ OgrWrapper._v_naif_code = new_instancemethod(_ogr_coordinate.OgrWrapper__v_naif_
 OgrWrapper.__str__ = new_instancemethod(_ogr_coordinate.OgrWrapper___str__, None, OgrWrapper)
 OgrWrapper_swigregister = _ogr_coordinate.OgrWrapper_swigregister
 OgrWrapper_swigregister(OgrWrapper)
+
+def OgrWrapper_add_spatial_reference(*args):
+    """
+
+    void OgrWrapper::add_spatial_reference(const std::string &Name, int Naif_code, const std::string
+    &Wkt_planet_centric)
+    For handling coordinate conversions, we need to have a sample of the
+    Geodetic or Planetocentric spatial reference, and for the earth the
+    ECR coordinates.
+
+    We need to be able to map a string in the name (e.g., mars) to the
+    NAIF code and spatial references. We have a fixed set defined in
+    geocal, but you may need to add new ones if you are working on a
+    planet we didn't already add this for. 
+    """
+    return _ogr_coordinate.OgrWrapper_add_spatial_reference(*args)
 
 def OgrWrapper_from_epsg(Epsg_id, Use_traditional_gis_order=True):
     """

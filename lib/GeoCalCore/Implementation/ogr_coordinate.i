@@ -21,6 +21,13 @@ class OgrWrapper : public GenericObject {
 public:
   OgrWrapper(const std::string& Wkt, bool Use_traditional_gis_order = true);
   OgrWrapper(const boost::shared_ptr<OGRSpatialReference>& Ogr);
+  static void add_spatial_reference(const std::string& Name,
+				    int Naif_code,
+				    boost::shared_ptr<OGRSpatialReference>& Geodetic_or_planetocentric,
+				    boost::shared_ptr<OGRSpatialReference>& Cf);
+  static void add_spatial_reference(const std::string& Name,
+				    int Naif_code,
+				    const std::string& Wkt_planet_centric);
   static boost::shared_ptr<OgrWrapper> from_epsg(int Epsg_id,
 			 bool Use_traditional_gis_order = true);
   static boost::shared_ptr<OgrWrapper> 

@@ -437,5 +437,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(GlasGfmCamera);
-GEOCAL_CLASS_VERSION(GlasGfmCamera, 2)
+GEOCAL_CLASS_VERSION(GlasGfmCamera, 3)
 #endif

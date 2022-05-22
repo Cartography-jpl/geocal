@@ -174,6 +174,6 @@ void SubCamera::print(std::ostream& Os) const
      << "  Number line: " << number_line_ << "\n"
      << "  Number sample: " << number_sample_ << "\n"
      << "  Underlying Camera: \n";
-  opad << full_camera();
+  opad << *full_camera();
   opad.strict_sync();
 }

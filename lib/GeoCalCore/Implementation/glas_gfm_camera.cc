@@ -51,9 +51,10 @@ void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
   if(version > 1)
     ar & GEOCAL_NVP_(ppoff)
       & GEOCAL_NVP_(parameter_mask);
+  if(version > 2)
+    ar & GEOCAL_NVP_(focal_length_time);
   boost::serialization::split_member(ar, *this, version);
 }
-
 
 GEOCAL_IMPLEMENT(GlasGfmCamera);
 #endif

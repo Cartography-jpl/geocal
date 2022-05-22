@@ -600,7 +600,7 @@ Vector_Camera_swigregister = _camera.Vector_Camera_swigregister
 Vector_Camera_swigregister(Vector_Camera)
 
 
-__all__ = ["ObserverCamera","ObservableCamera","Camera","SimpleCamera","Vector_Camera"]
+__all__ = ["ObserverCamera","ObservableCamera","Camera","SimpleCamera","Vector_Camera","SubCamera"]
 
 
 

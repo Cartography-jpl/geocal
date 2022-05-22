@@ -116,4 +116,5 @@ public:
 %template(Vector_Camera) std::vector<boost::shared_ptr<GeoCal::Camera> >;
 
 // List of things "import *" will include
-%python_export("ObserverCamera", "ObservableCamera", "Camera", "SimpleCamera", "Vector_Camera")
+%python_export("ObserverCamera", "ObservableCamera", "Camera", "SimpleCamera", "Vector_Camera",
+	       "SubCamera")

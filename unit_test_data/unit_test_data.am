@@ -122,6 +122,7 @@ EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mex_kernel/mex.ker
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mex_kernel/ik/MEX_HRSC_V05.TI
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/mro.ker
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti
+EXTRA_DIST+= @geocalunittestdata@/steep_igc_gfm.xml
 
 
 

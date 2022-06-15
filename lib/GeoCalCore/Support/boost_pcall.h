@@ -51,16 +51,24 @@ template<class In>
 void boost_pcall_noret(const std::string& Command,
 		       const boost::shared_ptr<In>& Din)
 {
+  namespace bp = boost::process;
   std::string data = serialize_write_binary(Din);
-  FILE* f = popen(Command.c_str(), "w");
-  if(!f) {
-    Exception e;
-    e << "Trouble calling " << Command << " in boost_pcall";
-    throw e;
-  }
-  fwrite(data.c_str(), sizeof(char), data.size(), f);
-  int status = pclose(f);
-  if(status) {
+  bp::opstream pin;
+  // This is low level, so it doesn't search on the path. Determine
+  // the location of the executable
+  auto pos = Command.find(" ");
+  std::string exec = bp::search_path(Command.substr(0,pos)).string();
+  if(pos != std::string::npos)
+    exec += Command.substr(pos);
+  bp::child c(exec,  bp::std_in < pin);
+  pin << data;
+  pin.flush();
+  // Our various programs wait for stdin to have a EOF before running
+  // (since data is binary, no other marker). So explicitly close the
+  // pipe here.
+  pin.pipe().close();
+  c.wait();
+  if(c.exit_code() != 0) {
     Exception e;
     e << "Trouble calling " << Command << " in boost_pcall";
     throw e;

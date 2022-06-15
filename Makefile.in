@@ -2288,6 +2288,7 @@ DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
 	$(dist_sdbxdoc_DATA) $(etcafidspython_DATA) \
 	$(installafidspython_DATA) $(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
+	@srcsupport@/boost_pcall.h \
 	@srcsupport@/geocal_external_config.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \
@@ -3747,6 +3748,7 @@ geocalincdir = @includedir@/geocal
 
 # Source files for library
 geocalinc_HEADERS = @srcsupport@/geocal_config.h \
+	@srcsupport@/boost_pcall.h \
 	@srcsupport@/geocal_external_config.h \
 	@srcsupport@/geocal_serialize_support.h \
 	@srcsupport@/constant.h @srcsupport@/generic_object.h \

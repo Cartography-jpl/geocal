@@ -6,6 +6,7 @@
 
 # Source files for library
 geocalinc_HEADERS+= @srcsupport@/geocal_config.h
+geocalinc_HEADERS+= @srcsupport@/boost_pcall.h
 geocalinc_HEADERS+= @srcsupport@/geocal_external_config.h
 geocalinc_HEADERS+= @srcsupport@/geocal_serialize_support.h
 geocalinc_HEADERS+= @srcsupport@/constant.h

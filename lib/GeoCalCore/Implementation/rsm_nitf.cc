@@ -31,7 +31,6 @@ void GeoCal::rsm_write_nitf(const std::string& Fname,
 		    const boost::shared_ptr<Rsm>& R)
 {
   boost_pcall_noret("boost_nitf_rsm to_nitf " + Fname, R);
-  // boost_pcall_noret("/home/smyth/Local/geocal-build/install/bin/boost_nitf_rsm to_nitf " + Fname, R);
 }
 
 //-----------------------------------------------------------------------

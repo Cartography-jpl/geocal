@@ -12,7 +12,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   // it is really a installcheck test rather than a check test. Don't
   // normally run this, but leave in place so we can test this out if
   // desired.
-  return;
+  //  return;
   rsm_write_nitf("test_out/rsm_out.ntf", rsm);
   boost::shared_ptr<Rsm> rsmr = rsm_read_nitf("test_out/rsm_out.ntf",
 					      Ecr::EARTH_NAIF_CODE);

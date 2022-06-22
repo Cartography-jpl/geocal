@@ -139,10 +139,17 @@ void OrbitArray<PositionType, TimeCreatorType>::init
     else
       att_map[t] = boost::math::quaternion<double>(Att_quat(i, 0), -Att_quat(i, 1),
 						   -Att_quat(i, 2), -Att_quat(i, 3));
-    orbit_data_map[t] = nullptr;
   }
   min_tm = std::max(att_map.begin()->first, pos_map.begin()->first);
   max_tm = std::min(att_map.rbegin()->first, pos_map.rbegin()->first);
+  orbit_data_map[min_tm] = nullptr;
+  orbit_data_map[max_tm] = nullptr;
+  double tdelta = (max_tm - min_tm) / Att_time.rows();
+  for(int i = 0; i < Att_time.rows(); ++i) {
+    Time t = tc(Att_time(i));
+    if(t > min_tm + tdelta * 0.1 && t < max_tm - tdelta * 0.1)
+      orbit_data_map[t] = nullptr;
+  }
 }
 
 //-----------------------------------------------------------------------

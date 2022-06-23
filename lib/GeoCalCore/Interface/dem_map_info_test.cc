@@ -79,10 +79,12 @@ BOOST_AUTO_TEST_CASE(slope_aspect)
   // Check handling of flat areas
   try {
     std::string dbase = SrtmDem().directory_base();
-    GdalDem d2(dbase + "/n34e119_L2.hlf");
+    GdalDem d2(dbase + "/n34e119_L2foo.hlf");
     BOOST_CHECK_EQUAL(d2.slope_riserun(3555,3560),0.0);
     BOOST_CHECK_EQUAL(d2.aspect(3555,3560),270.0);
   } catch(const boost::filesystem::filesystem_error&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+  } catch(const Exception&) {
     BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
   }  
 }

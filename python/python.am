@@ -1,46 +1,7 @@
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py
 # Backdoor rule to do a quick install when we are just varying python
-install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS install-pynitf
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
-if INSTALL_PYNITF
-# Note the --single-version-externally-managed is because we don't yet have
-# the PYTHONPATH set, and an install complains. This is actually ok, because
-# we really do just have a single version externally managed here.
-# Chmod is needed to reinstall after doing an uninstall
-# 
-# Note that to install pynitf with changes, you usually need to
-# uninstall-pynitf first
-install-pynitf:
-	-chmod +w -R @geocalpkgpythondir@/../pynitf*
-	cd $(srcdir)/@srcpython@/pynitf && \
-        export LD_LIBRARY_PATH="$(PYTHON_LDPATH)$(LD_LIBRARY_PATH)" && \
-        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(DESTDIR)$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
-
-# Skip these tests. A number fail because stuff gets changed in geocal. Not
-# clear that we should be testing what we are trying to make a independent
-# library anyways. We should move away from having this part of geocal.
-EXTRA_PYTHON_TEST=
-#EXTRA_PYTHON_TEST=$(srcdir)/@srcpython@/pynitf
-# Skip a couple of tests. We just reorder the TREs in the file so RPC comes
-# last, don't actually fail the test but the comparision fails because it
-# isn't identical
-#EXTRA_PYTHON_TEST+= -k "not test_copy_quickbird and not test_copy_ikonos and not test_des_csattb_uuid_func and not test_copy_rip"
-INSTALL_DATA_HOOK += install-pynitf
-
-uninstall-pynitf:
-	-rm -rf `cat pynitf/files.txt`
-
-UNINSTALL_HOOK+= uninstall-pynitf
-
-clean-pynitf:
-	-rm -r pynitf
-
-CLEAN_HOOK += clean-pynitf
-else
-EXTRA_PYTHON_TEST=
-endif
-
-EXTRA_DIST+=@srcpython@/pynitf
 EXTRA_DIST+=@srcpython@/pytest.ini
 EXTRA_DIST+=@srcpython@/setup.cfg
 EXTRA_DIST+=@srcpython@/conftest.py
@@ -105,7 +66,7 @@ python-check:
 	export PATH="$(PYTHON_CHECK_PATH)" && \
         export PYTHONPATH="$(abs_srcdir)/$(srcpython):${PYTHONPATH}" && \
         $(setup_geocal) && \
-        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@ $(EXTRA_PYTHON_TEST)
+        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
 
 INSTALLCHECK_HOOK+= python_check
 

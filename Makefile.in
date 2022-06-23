@@ -198,7 +198,8 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@am__append_13 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	README.developer INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_14 = install_doxygen_doc
+@WITH_DOCUMENTATION_TRUE@am__append_14 = install_doxygen_doc \
+@WITH_DOCUMENTATION_TRUE@	install_python_doc
 @WITH_DOCUMENTATION_TRUE@am__append_15 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_16 = clean_doxygen_generate
 @BUILD_LIBRAW_TRUE@am__append_17 = libraw.la
@@ -256,20 +257,11 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @BUILD_AFIDS_FALSE@am__append_36 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
 @GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_37 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
 @GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_38 = @srcpythonscript@/vicarb
-#EXTRA_PYTHON_TEST=$(srcdir)/@srcpython@/pynitf
-# Skip a couple of tests. We just reorder the TREs in the file so RPC comes
-# last, don't actually fail the test but the comparision fails because it
-# isn't identical
-#EXTRA_PYTHON_TEST+= -k "not test_copy_quickbird and not test_copy_ikonos and not test_des_csattb_uuid_func and not test_copy_rip"
-@INSTALL_PYNITF_TRUE@am__append_39 = install-pynitf
-@INSTALL_PYNITF_TRUE@am__append_40 = uninstall-pynitf
-@INSTALL_PYNITF_TRUE@am__append_41 = clean-pynitf
-@CODE_COVERAGE_ENABLED_TRUE@am__append_42 = --cov-report term \
+@CODE_COVERAGE_ENABLED_TRUE@am__append_39 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_43 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_44 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_40 = $(srcdir)/$(srcpythonbin)/pan_sharpen
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps =  \
@@ -3215,10 +3207,9 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mars_kernel/mex_kernel/ik/MEX_HRSC_V05.TI \
 	@geocalunittestdata@/mars_kernel/mro_kernel/mro.ker \
 	@geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti \
-	@geocalunittestdata@/steep_igc_gfm.xml @srcpython@/pynitf \
-	@srcpython@/pytest.ini @srcpython@/setup.cfg \
-	@srcpython@/conftest.py @srcpython@/README_test \
-	@srcpython@/test.sh \
+	@geocalunittestdata@/steep_igc_gfm.xml @srcpython@/pytest.ini \
+	@srcpython@/setup.cfg @srcpython@/conftest.py \
+	@srcpython@/README_test @srcpython@/test.sh \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \
@@ -3323,10 +3314,9 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_14) $(am__append_39) $(am__append_44)
-UNINSTALL_HOOK = $(am__append_15) $(am__append_40) \
-	clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_16) $(am__append_41)
+INSTALL_DATA_HOOK = $(am__append_14)
+UNINSTALL_HOOK = $(am__append_15) clean_install_python_doc
+CLEAN_HOOK = clean_unit_test $(am__append_16)
 INSTALLCHECK_HOOK = python_check
 
 # Make sure we don't have any pyc or pycache files floating around
@@ -3726,7 +3716,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_43)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_40)
 dist_afidspythonvdev_DATA = $(am__append_20) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -4452,12 +4442,6 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/warp_image.py \
 	@srcpythonlib@/linear_gradient_bad_pixel_detection.py \
 	@srcpythonlib@/version.py
-@INSTALL_PYNITF_FALSE@EXTRA_PYTHON_TEST = 
-
-# Skip these tests. A number fail because stuff gets changed in geocal. Not
-# clear that we should be testing what we are trying to make a independent
-# library anyways. We should move away from having this part of geocal.
-@INSTALL_PYNITF_TRUE@EXTRA_PYTHON_TEST = 
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed
@@ -4477,7 +4461,7 @@ PYTEST_NJOB = 10
 # Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
 # PYTEST_EXTRAFLAGS="--timeout=20"
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_42)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_39)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -15190,26 +15174,7 @@ install-python-2: install-libLTLIBRARIES install-python-geocal install-pkgpython
 install-python: all
 	$(MAKE) -j 1 install-python-2 
 # Backdoor rule to do a quick install when we are just varying python
-install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS install-pynitf
-
-# Note the --single-version-externally-managed is because we don't yet have
-# the PYTHONPATH set, and an install complains. This is actually ok, because
-# we really do just have a single version externally managed here.
-# Chmod is needed to reinstall after doing an uninstall
-# 
-# Note that to install pynitf with changes, you usually need to
-# uninstall-pynitf first
-@INSTALL_PYNITF_TRUE@install-pynitf:
-@INSTALL_PYNITF_TRUE@	-chmod +w -R @geocalpkgpythondir@/../pynitf*
-@INSTALL_PYNITF_TRUE@	cd $(srcdir)/@srcpython@/pynitf && \
-@INSTALL_PYNITF_TRUE@        export LD_LIBRARY_PATH="$(PYTHON_LDPATH)$(LD_LIBRARY_PATH)" && \
-@INSTALL_PYNITF_TRUE@        $(PYTHON) setup.py build --build-base=@abs_builddir@/pynitf/build egg_info --egg-base=@abs_builddir@/pynitf install --prefix=$(DESTDIR)$(prefix) --single-version-externally-managed --record @abs_builddir@/pynitf/files.txt
-
-@INSTALL_PYNITF_TRUE@uninstall-pynitf:
-@INSTALL_PYNITF_TRUE@	-rm -rf `cat pynitf/files.txt`
-
-@INSTALL_PYNITF_TRUE@clean-pynitf:
-@INSTALL_PYNITF_TRUE@	-rm -r pynitf
+install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
 dist-clean-up-python:
 	rm -rf `find $(distdir) -name '__pycache__'`
@@ -15226,7 +15191,7 @@ python-check:
 	export PATH="$(PYTHON_CHECK_PATH)" && \
         export PYTHONPATH="$(abs_srcdir)/$(srcpython):${PYTHONPATH}" && \
         $(setup_geocal) && \
-        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@ $(EXTRA_PYTHON_TEST)
+        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
 
 # We don't actually replace the shebang, this was done for a short time
 # when we were porting to python 3. But go ahead and leave this in commented

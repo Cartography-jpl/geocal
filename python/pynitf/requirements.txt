@@ -1,7 +1,0 @@
-numpy
-docopt
-# h5py isn't strictly required, without this there is just a few
-# functions that aren't implemented
-h5py
-# Needed for testing only
-pytest

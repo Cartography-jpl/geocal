@@ -40,7 +40,4 @@ tabulate
 # ghp-import
 #
 # Not a strict requirement, but can't use the NITF code without this
-# pynitf
-# If we install our own pynitf, these packages are needed
-pytest-runner
-docopt
+pynitf

@@ -193,34 +193,6 @@ AM_CONDITIONAL([BUILD_AFIDS], [false])
 
 AM_CONDITIONAL([GEOCAL_OVERRIDE_AFIDS], [test x$have_afids = xyes -a $AFIDS_PREFIX != $prefix])
 
-#=================================================================
-# We normally include pynitf installation (at least for the time being,
-# see python/README_pynitf.md for discussion of this). But for testing
-# it is useful to have the option to disable this. That way in the long
-# term when pynitf is just handled like any other dependency, we know the
-# code will still work.
-
-AC_MSG_CHECKING([whether to disable installing pynitf])
-AC_ARG_ENABLE(pynitf,
-AS_HELP_STRING([--disable-pynitf],[Do not install pynitf]),
-[if test "$enableval" = no; then
-  AC_MSG_RESULT([yes])
-  install_pynitf="no"
-fi],
-[
-  # Regardless, only install if we have python 3.
-  ac_python3=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c "import sys; print(sys.version_info > (3,))"`
-  if test "$ac_python3" != "True"; then
-     install_pynitf="no"
-     AC_MSG_RESULT([yes])
-  else
-     AC_MSG_RESULT([no])
-     install_pynitf="yes"
-  fi
-]
-)
-AM_CONDITIONAL([INSTALL_PYNITF], [test "$install_pynitf" = "yes"])
-
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
 
@@ -252,4 +224,3 @@ LOC_MSG([  Have MSP:                      ${have_msp}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])
-LOC_MSG([  Install pynitf:                ${install_pynitf}])

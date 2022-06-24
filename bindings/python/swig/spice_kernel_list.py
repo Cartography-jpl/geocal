@@ -204,6 +204,15 @@ class SpiceKernelList(geocal_swig.generic_object.GenericObject):
         """
         _spice_kernel_list.SpiceKernelList_swiginit(self, _spice_kernel_list.new_SpiceKernelList(*args))
 
+    def load_kernel(self):
+        """
+
+        void SpiceKernelList::load_kernel()
+
+        """
+        return _spice_kernel_list.SpiceKernelList_load_kernel(self)
+
+
     def _v_kernel_list(self, *args):
         """
 
@@ -226,6 +235,7 @@ class SpiceKernelList(geocal_swig.generic_object.GenericObject):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _spice_kernel_list.delete_SpiceKernelList
+SpiceKernelList.load_kernel = new_instancemethod(_spice_kernel_list.SpiceKernelList_load_kernel, None, SpiceKernelList)
 SpiceKernelList._v_kernel_list = new_instancemethod(_spice_kernel_list.SpiceKernelList__v_kernel_list, None, SpiceKernelList)
 SpiceKernelList.__str__ = new_instancemethod(_spice_kernel_list.SpiceKernelList___str__, None, SpiceKernelList)
 SpiceKernelList_swigregister = _spice_kernel_list.SpiceKernelList_swigregister

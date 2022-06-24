@@ -2946,6 +2946,8 @@ includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
 installafidspythondir = @installafidspythondir@
+isisdata = @isisdata@
+isisroot = @isisroot@
 libdir = @libdir@
 libexecdir = @libexecdir@
 libgeocal = @libgeocal@
@@ -4396,7 +4398,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/geocal_nitf_misc.py \
 	@srcpythonlib@/output_cache.py @srcpythonlib@/target.py \
 	@srcpythonlib@/local_target.py @srcpythonlib@/task.py \
-	@srcpythonlib@/ipython.py \
+	@srcpythonlib@/ipython.py @srcpythonlib@/isis_support.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \

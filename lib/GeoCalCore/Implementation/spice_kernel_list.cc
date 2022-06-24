@@ -1,7 +1,7 @@
 #include "spice_kernel_list.h"
 #include "geocal_serialize_support.h"
 #include "spice_helper.h"
-#include <boost/foreach.hpp>
+#include <boost/filesystem.hpp>
 
 using namespace GeoCal;
 
@@ -32,8 +32,17 @@ GEOCAL_IMPLEMENT(SpiceKernelList);
 
 void SpiceKernelList::load_kernel()
 {
-  BOOST_FOREACH(const std::string& f, kernel_list_) {
+  std::vector<std::string> flist;
+  // Check to see if all the kernels are already on the system
+  bool need_kernel = false;
+  for(auto f : kernel_list_)
+    if(!boost::filesystem::exists(f))
+      need_kernel = true;
+  if(need_kernel)
+    throw Exception("Not implemented yet");
+  else
+    flist = kernel_list_;
+  for(auto f : kernel_list_)
     if(!SpiceHelper::kernel_loaded(f))
       SpiceHelper::add_kernel(f);
-  }
 }

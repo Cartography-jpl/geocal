@@ -9,6 +9,7 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/target.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/local_target.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/task.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ipython.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/isis_support.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_extension.py

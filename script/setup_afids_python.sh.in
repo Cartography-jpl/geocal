@@ -30,8 +30,8 @@ else
   export NITF_PLUGIN=geocal
 fi
 if [ -n "@isisroot@" ] ; then
-    ISISROOT="@isisroot@"
+  export ISISROOT="@isisroot@"
 fi
 if [ -n "@isisdata@" ] ; then
-    ISISDATA="@isisdata@"
+  export ISISDATA="@isisdata@"
 fi

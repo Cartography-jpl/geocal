@@ -6119,6 +6119,20 @@ namespace swig {
       }
     
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 struct SWIG_null_deleter {
   void operator() (void const *) const {
   }
@@ -6921,6 +6935,53 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
 SWIGINTERN PyObject *_wrap_new_SpiceKernelList__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::vector< std::string,std::allocator< std::string > > *arg1 = 0 ;
+  bool arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  GeoCal::SpiceKernelList *result = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::vector< std::string,std::allocator< std::string > > *ptr = (std::vector< std::string,std::allocator< std::string > > *)0;
+    res1 = swig::asptr(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SpiceKernelList" "', argument " "1"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpiceKernelList" "', argument " "1"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_SpiceKernelList" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  {
+    try {
+      result = (GeoCal::SpiceKernelList *)new GeoCal::SpiceKernelList((std::vector< std::string,std::allocator< std::string > > const &)*arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SpiceKernelList > *smartresult = result ? new boost::shared_ptr<  GeoCal::SpiceKernelList >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpiceKernelList__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::vector< std::string,std::allocator< std::string > > *arg1 = 0 ;
   int res1 = SWIG_OLDOBJ ;
   GeoCal::SpiceKernelList *result = 0 ;
   
@@ -6957,7 +7018,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SpiceKernelList__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
+SWIGINTERN PyObject *_wrap_new_SpiceKernelList__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **SWIGUNUSEDPARM(swig_obj)) {
   PyObject *resultobj = 0;
   GeoCal::SpiceKernelList *result = 0 ;
   
@@ -6983,25 +7044,71 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_SpiceKernelList(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[2] = {
+  PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SpiceKernelList",0,1,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SpiceKernelList",0,2,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
-    return _wrap_new_SpiceKernelList__SWIG_1(self, argc, argv);
+    return _wrap_new_SpiceKernelList__SWIG_2(self, argc, argv);
   }
   if (argc == 1) {
+    return _wrap_new_SpiceKernelList__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
     return _wrap_new_SpiceKernelList__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SpiceKernelList'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpiceKernelList::SpiceKernelList(std::vector< std::string,std::allocator< std::string > > const &,bool)\n"
     "    GeoCal::SpiceKernelList::SpiceKernelList(std::vector< std::string,std::allocator< std::string > > const &)\n"
     "    GeoCal::SpiceKernelList::SpiceKernelList()\n");
   return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceKernelList_load_kernel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::SpiceKernelList *arg1 = (GeoCal::SpiceKernelList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpiceKernelList > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpiceKernelList > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKernelList_load_kernel" "', argument " "1"" of type '" "GeoCal::SpiceKernelList *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SpiceKernelList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SpiceKernelList > * >(argp1);
+      arg1 = const_cast< GeoCal::SpiceKernelList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SpiceKernelList > * >(argp1);
+      arg1 = const_cast< GeoCal::SpiceKernelList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->load_kernel();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
 }
 
 
@@ -7244,6 +7351,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_SpiceKernelList", _wrap_new_SpiceKernelList, METH_VARARGS, (char *)"\n"
 		"\n"
 		"GeoCal::SpiceKernelList::SpiceKernelList()\n"
+		"\n"
+		""},
+	 { (char *)"SpiceKernelList_load_kernel", (PyCFunction)_wrap_SpiceKernelList_load_kernel, METH_O, (char *)"\n"
+		"\n"
+		"void SpiceKernelList::load_kernel()\n"
 		"\n"
 		""},
 	 { (char *)"SpiceKernelList__v_kernel_list", _wrap_SpiceKernelList__v_kernel_list, METH_VARARGS, (char *)"\n"

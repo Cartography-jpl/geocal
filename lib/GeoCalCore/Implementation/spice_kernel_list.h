@@ -12,19 +12,22 @@ namespace GeoCal {
 
 class SpiceKernelList: public Printable<SpiceKernelList> {
 public:
-  SpiceKernelList(const std::vector<std::string>& Kernel_list)
+  SpiceKernelList(const std::vector<std::string>& Kernel_list,
+		  bool Skip_load=false)
     : kernel_list_(Kernel_list)
-  { load_kernel(); }
+  { if(!Skip_load)
+      load_kernel();
+  }
   SpiceKernelList() {}
   virtual ~SpiceKernelList() {}
   const std::vector<std::string>& kernel_list() const { return kernel_list_;}
+  void load_kernel();
   void kernel_list(const std::vector<std::string>& Klist)
   { kernel_list_ = Klist; }
   void print(std::ostream& Os) const
   { Os << "SpiceKernelList\n"; }
 private:
   std::vector<std::string> kernel_list_;
-  void load_kernel();
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

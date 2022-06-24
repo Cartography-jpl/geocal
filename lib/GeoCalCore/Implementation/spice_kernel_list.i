@@ -11,8 +11,10 @@
 namespace GeoCal {
 class SpiceKernelList : public GenericObject {
 public:
-  SpiceKernelList(const std::vector<std::string>& Kernel_list);
+  SpiceKernelList(const std::vector<std::string>& Kernel_list,
+		  bool Skip_load=False);
   SpiceKernelList();
+  void load_kernel();
   %python_attribute_with_set(kernel_list, std::vector<std::string>);
   std::string print_to_string() const;
   %pickle_serialization();

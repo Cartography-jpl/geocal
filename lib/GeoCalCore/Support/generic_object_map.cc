@@ -3,6 +3,7 @@
 
 using namespace GeoCal;
 
+#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void GenericObjectMap::serialize(Archive & ar,
 			const unsigned int UNUSED(version))
@@ -14,3 +15,4 @@ void GenericObjectMap::serialize(Archive & ar,
 }
 
 GEOCAL_IMPLEMENT(GenericObjectMap);
+#endif

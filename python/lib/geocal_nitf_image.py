@@ -73,8 +73,11 @@ if(have_pynitf):
             
 
     # Try this after the classes in pynitf have been tried.
-    NitfSegmentDataHandleSet.add_default_handle(NitfImageGdal,
-                                                priority_order=-1)
+    # Guard against adding multiple times
+    if 'NitfImageGdal' not in [h[0].__name__ for
+                    h in NitfSegmentDataHandleSet.default_handle_set()]:
+        NitfSegmentDataHandleSet.add_default_handle(NitfImageGdal,
+                                                    priority_order=-1)
 
     logger = logging.getLogger('nitf_diff')
     class ImageGdalDiff(NitfDiffHandle):
@@ -92,7 +95,10 @@ if(have_pynitf):
                 is_same = False
             return (True, is_same)
 
-    NitfDiffHandleSet.add_default_handle(ImageGdalDiff())
+    # Guard against adding multiple times
+    if 'ImageGdalDiff' not in [h[0].__class__.__name__ for
+                    h in NitfDiffHandleSet.default_handle_set()]:
+        NitfDiffHandleSet.add_default_handle(ImageGdalDiff())
     
     # Alternative interface, access a nitf image segment as a GdalRasterImage
     def _gdal_multi_band(self):

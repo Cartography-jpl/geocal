@@ -29,5 +29,11 @@ if ($?NITF_PLUGIN) then
 else
   setenv NITF_PLUGIN geocal
 endif
+if("@isisroot@" != "") then
+    setenv ISISROOT "@isisroot@"
+endif
+if("@isisdata@" != "") then
+    setenv ISISDATA "@isisdata@"
+endif
 
 

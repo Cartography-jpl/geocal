@@ -188,6 +188,20 @@ fi
 AM_CONDITIONAL([BUILD_AFIDS], [false])
 
 #=================================================================
+# Location of ISIS. Note that we only use this through python, which
+# already checks for these in a few standard locations (e.g., /opt/isis).
+# This option here is used to add a specification to the setup files to
+# set these to particular values.
+AC_ARG_WITH([isis-root],
+AS_HELP_STRING([--with-isis-root@<:@=DIR@:>@], [give directory where ISIS executables can be found]), [ ac_isis_root="$withval" ], [ ac_isis_root=""] )
+AC_SUBST([isisroot], ["$ac_isis_root"])
+
+AC_ARG_WITH([isis-data],
+AS_HELP_STRING([--with-isis-data@<:@=DIR@:>@], [give directory where ISIS data can be found]), [ ac_isis_data="$withval" ], [ ac_isis_data=""] )
+AC_SUBST([isisdata], ["$ac_isis_data"])
+
+
+#=================================================================
 # Put in setup_afids_env.csh/setup_afids_env.sh and vicarb that
 # uses the newer version of things in geocal
 

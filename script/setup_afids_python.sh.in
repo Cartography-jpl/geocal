@@ -29,3 +29,9 @@ if [ -n "$NITF_PLUGIN" ]; then
 else
   export NITF_PLUGIN=geocal
 fi
+if [ -n "@isisroot@" ] ; then
+    ISISROOT="@isisroot@"
+fi
+if [ -n "@isisdata@" ] ; then
+    ISISDATA="@isisdata@"
+fi

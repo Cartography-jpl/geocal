@@ -14,7 +14,7 @@ public:
   SpiceKernelList(const std::vector<std::string>& Kernel_list,
 		  bool Skip_load=False);
   SpiceKernelList();
-  void load_kernel();
+  void load_kernel(bool Download_from_isis_web_if_needed=true) const;
   %python_attribute_with_set(kernel_list, std::vector<std::string>);
   std::string print_to_string() const;
   %pickle_serialization();

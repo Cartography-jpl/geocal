@@ -30,6 +30,7 @@ dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/doughnut_diff
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/abachd
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/boost_nitf_rsm
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/boost_nitf_glas_gfm
+dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/boost_spice_kernel_list
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/height_to_color
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/shelve_airmspi_igc
 dist_bin_SCRIPTS += $(srcdir)/$(srcpythonbin)/igc_to_rpc

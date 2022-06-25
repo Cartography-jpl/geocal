@@ -7070,35 +7070,41 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SpiceKernelList_load_kernel(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SpiceKernelList_load_kernel__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::SpiceKernelList *arg1 = (GeoCal::SpiceKernelList *) 0 ;
+  bool arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::SpiceKernelList > tempshared1 ;
-  boost::shared_ptr< GeoCal::SpiceKernelList > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
+  boost::shared_ptr< GeoCal::SpiceKernelList const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpiceKernelList const > *smartarg1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKernelList_load_kernel" "', argument " "1"" of type '" "GeoCal::SpiceKernelList *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKernelList_load_kernel" "', argument " "1"" of type '" "GeoCal::SpiceKernelList const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SpiceKernelList > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SpiceKernelList > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp1);
       arg1 = const_cast< GeoCal::SpiceKernelList * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SpiceKernelList > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp1);
       arg1 = const_cast< GeoCal::SpiceKernelList * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "SpiceKernelList_load_kernel" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
   {
     try {
-      (arg1)->load_kernel();
+      ((GeoCal::SpiceKernelList const *)arg1)->load_kernel(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7109,6 +7115,70 @@ SWIGINTERN PyObject *_wrap_SpiceKernelList_load_kernel(PyObject *SWIGUNUSEDPARM(
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceKernelList_load_kernel__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SpiceKernelList *arg1 = (GeoCal::SpiceKernelList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpiceKernelList const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpiceKernelList const > *smartarg1 = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKernelList_load_kernel" "', argument " "1"" of type '" "GeoCal::SpiceKernelList const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp1);
+      arg1 = const_cast< GeoCal::SpiceKernelList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp1);
+      arg1 = const_cast< GeoCal::SpiceKernelList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      ((GeoCal::SpiceKernelList const *)arg1)->load_kernel();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceKernelList_load_kernel(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SpiceKernelList_load_kernel",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_SpiceKernelList_load_kernel__SWIG_1(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_SpiceKernelList_load_kernel__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpiceKernelList_load_kernel'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpiceKernelList::load_kernel(bool) const\n"
+    "    GeoCal::SpiceKernelList::load_kernel() const\n");
+  return 0;
 }
 
 
@@ -7353,9 +7423,9 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::SpiceKernelList::SpiceKernelList()\n"
 		"\n"
 		""},
-	 { (char *)"SpiceKernelList_load_kernel", (PyCFunction)_wrap_SpiceKernelList_load_kernel, METH_O, (char *)"\n"
+	 { (char *)"SpiceKernelList_load_kernel", _wrap_SpiceKernelList_load_kernel, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void SpiceKernelList::load_kernel()\n"
+		"void SpiceKernelList::load_kernel(bool Download_from_isis_web_if_needed=true) const\n"
 		"\n"
 		""},
 	 { (char *)"SpiceKernelList__v_kernel_list", _wrap_SpiceKernelList__v_kernel_list, METH_VARARGS, (char *)"\n"

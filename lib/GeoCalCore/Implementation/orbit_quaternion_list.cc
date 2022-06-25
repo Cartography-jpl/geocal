@@ -2,6 +2,7 @@
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
 #include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION

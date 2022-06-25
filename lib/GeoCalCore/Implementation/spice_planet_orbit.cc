@@ -81,6 +81,7 @@ SpicePlanetOrbit::SpicePlanetOrbit
 // Return orbit data
 boost::shared_ptr<OrbitData> SpicePlanetOrbit::orbit_data(Time T) const
 {
+  kernel_list_.load_kernel();
   return PlanetFixed::orbit_data(target_name_, spacecraft_reference_frame_name_,
 				 T, naif_id_);
 }

@@ -3,6 +3,7 @@
 #include "spice_helper.h"
 #include "boost_pcall.h"
 #include <boost/filesystem.hpp>
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 

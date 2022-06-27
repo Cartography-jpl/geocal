@@ -103,8 +103,10 @@ public:
   double aspect(int Y_index, int X_index) const;
   
   void gradient(int Y_index, int X_index, double& dz_dx, double& dz_dy) const;
-  void slope_and_aspect(const GroundCoordinate& Gc, double& Slope_deg,
-			double& Aspect) const;
+  void slope_and_aspect(const GroundCoordinate& Gc,
+			double& Slope_deg, double& Aspect_deg) const;
+  void slope_and_aspect_nearest_neighbor(const GroundCoordinate& Gc,
+	 double& Slope_deg, double& Aspect_deg) const;
 protected:
 
 //-----------------------------------------------------------------------

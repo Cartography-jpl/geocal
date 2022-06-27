@@ -7253,6 +7253,96 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_DemMapInfo_slope_and_aspect_nearest_neighbor(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  double *arg3 = 0 ;
+  double *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  double temp3 ;
+  int res3 = SWIG_TMPOBJ ;
+  double temp4 ;
+  int res4 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[2] ;
+  
+  arg3 = &temp3;
+  arg4 = &temp4;
+  if (!SWIG_Python_UnpackTuple(args,"DemMapInfo_slope_and_aspect_nearest_neighbor",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_slope_and_aspect_nearest_neighbor" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "DemMapInfo_slope_and_aspect_nearest_neighbor" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "DemMapInfo_slope_and_aspect_nearest_neighbor" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::DemMapInfo const *)arg1)->slope_and_aspect_nearest_neighbor((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res3)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg3)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res3) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg3), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res4)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg4)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res4) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg4), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DemMapInfo__v_outside_dem_is_error(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
@@ -7472,7 +7562,22 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"DemMapInfo_slope_and_aspect", _wrap_DemMapInfo_slope_and_aspect, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect) const\n"
+		"void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)\n"
+		"const\n"
+		"Frequently we want both the slope and aspect, this one function saves\n"
+		"a step and returns both.\n"
+		"\n"
+		"There isn't really \"one\" way to handle slope and aspect for points\n"
+		"that don't lie on the DEM grid. MISR had a larger footprint and\n"
+		"calculated an average of slopes/aspect that fell in to the footprint.\n"
+		"Another approach is to do a bilinear interpolation.\n"
+		"\n"
+		"This particular function just uses bilinear interpolation. \n"
+		""},
+	 { (char *)"DemMapInfo_slope_and_aspect_nearest_neighbor", _wrap_DemMapInfo_slope_and_aspect_nearest_neighbor, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void DemMapInfo::slope_and_aspect_nearest_neighbor(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)\n"
+		"const\n"
 		"Frequently we want both the slope and aspect, this one function saves\n"
 		"a step and returns both.\n"
 		"\n"

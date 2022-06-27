@@ -27,8 +27,12 @@ public:
   double slope_radian(int Y_index, int X_index) const;
   double slope_degree(int Y_index, int X_index) const;
   double aspect(int Y_index, int X_index) const;
-  void slope_and_aspect(const GroundCoordinate& Gc, double& OUTPUT,
-			double& OUTPUT) const;
+  void slope_and_aspect
+  (const GroundCoordinate& Gc, double& OUTPUT,
+   double& OUTPUT) const;
+  void slope_and_aspect_nearest_neighbor
+  (const GroundCoordinate& Gc, double& OUTPUT,
+   double& OUTPUT) const;
   %python_attribute(outside_dem_is_error, bool);
   %python_attribute(naif_code, int);
   virtual boost::shared_ptr<GroundCoordinate> 

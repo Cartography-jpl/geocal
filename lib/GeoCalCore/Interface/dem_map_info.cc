@@ -138,8 +138,9 @@ double DemMapInfo::aspect(int Y_index, int X_index) const
 /// pixel size.
 //-----------------------------------------------------------------------
 
-void DemMapInfo::slope_and_aspect(const GroundCoordinate& Gc, double& Slope_deg,
-				  double& Aspect) const
+void DemMapInfo::slope_and_aspect_nearest_neighbor
+(const GroundCoordinate& Gc, double& Slope_deg,
+ double& Aspect_deg) const
 {
   double x, y;
   map_info_.coordinate(Gc, x, y);
@@ -148,9 +149,79 @@ void DemMapInfo::slope_and_aspect(const GroundCoordinate& Gc, double& Slope_deg,
   double dz_dx, dz_dy;
   gradient(yi, xi, dz_dx, dz_dy);
   Slope_deg = atan(hypot(dz_dx, dz_dy)) * Constant::rad_to_deg;
-  Aspect = 90 - atan2(dz_dy, -dz_dx) * Constant::rad_to_deg;
-  if(Aspect < 0)
-    Aspect += 360;
+  Aspect_deg = 90 - atan2(dz_dy, -dz_dx) * Constant::rad_to_deg;
+  if(Aspect_deg < 0)
+    Aspect_deg += 360;
+}
+
+//-----------------------------------------------------------------------
+/// Frequently we want both the slope and aspect, this one function
+/// saves a step and returns both.
+///
+/// There isn't really "one" way to handle slope and aspect for points
+/// that don't lie on the DEM grid. MISR had a larger footprint and
+/// calculated an average of slopes/aspect that fell in to the
+/// footprint. Another approach is to do a bilinear interpolation.
+///
+/// This particular function just uses bilinear interpolation. 
+//-----------------------------------------------------------------------
+
+void DemMapInfo::slope_and_aspect
+(const GroundCoordinate& Gc, double& Slope_deg,
+ double& Aspect_deg) const
+{
+  double x, y;
+  map_info_.coordinate(Gc, x, y);
+  int xi = (int) x;
+  int yi = (int) y;
+  double dz_dx1, dz_dy1,
+    dz_dx2, dz_dy2,
+    dz_dx3, dz_dy3,
+    dz_dx4, dz_dy4;
+  gradient(yi, xi, dz_dx1, dz_dy1);
+  gradient(yi, xi+1, dz_dx2, dz_dy2);
+  gradient(yi+1, xi, dz_dx3, dz_dy3);
+  gradient(yi+1, xi+1, dz_dx4, dz_dy4);
+  double t1 = atan(hypot(dz_dx1, dz_dy1)) * Constant::rad_to_deg;
+  double t2 = atan(hypot(dz_dx2, dz_dy2)) * Constant::rad_to_deg;
+  double t3 = atan(hypot(dz_dx3, dz_dy3)) * Constant::rad_to_deg;
+  double t4 = atan(hypot(dz_dx4, dz_dy4)) * Constant::rad_to_deg;
+  double t5 = t1 + (t2 - t1) * (x - xi);
+  double t6 = t3 + (t4 - t3) * (x - xi);
+  Slope_deg = t5 + (t6 - t5) * (y - yi);
+
+  t1 = 90 - atan2(dz_dy1, -dz_dx1) * Constant::rad_to_deg;
+  if(t1 < 0)
+    t1 += 360;
+  t2 = 90 - atan2(dz_dy2, -dz_dx2) * Constant::rad_to_deg;
+  if(t2 < 0)
+    t2 += 360;
+  t3 = 90 - atan2(dz_dy3, -dz_dx3) * Constant::rad_to_deg;
+  if(t3 < 0)
+    t3 += 360;
+  t4 = 90 - atan2(dz_dy4, -dz_dx4) * Constant::rad_to_deg;
+  if(t4 < 0)
+    t4 += 360;
+  // Special handling for data that might cross the 0/360 boundary
+  if(t1 > 300 || t2 > 300 || t3 > 300 || t4 > 300) {
+    // If one of the variables is near the top end, then convert any
+    // data on the lower end to the 360-720 range.
+    if(t1 < 100)
+      t1 += 360;
+    if(t2 < 100)
+      t2 += 360;
+    if(t3 < 100)
+      t3 += 360;
+    if(t4 < 100)
+      t4 += 360;
+  }
+  t5 = t1 + (t2 - t1) * (x - xi);
+  t6 = t3 + (t4 - t3) * (x - xi);
+  Aspect_deg = t5 + (t6 - t5) * (y - yi);
+  if(Aspect_deg >= 360)
+    Aspect_deg -= 360;
+  if(Aspect_deg < 0)
+    Aspect_deg += 360;
 }
 
 //-----------------------------------------------------------------------

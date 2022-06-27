@@ -306,7 +306,26 @@ class DemMapInfo(geocal_swig.dem.Dem):
     def slope_and_aspect(self, Gc):
         """
 
-        void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect) const
+        void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)
+        const
+        Frequently we want both the slope and aspect, this one function saves
+        a step and returns both.
+
+        There isn't really "one" way to handle slope and aspect for points
+        that don't lie on the DEM grid. MISR had a larger footprint and
+        calculated an average of slopes/aspect that fell in to the footprint.
+        Another approach is to do a bilinear interpolation.
+
+        This particular function just uses bilinear interpolation. 
+        """
+        return _dem_map_info.DemMapInfo_slope_and_aspect(self, Gc)
+
+
+    def slope_and_aspect_nearest_neighbor(self, Gc):
+        """
+
+        void DemMapInfo::slope_and_aspect_nearest_neighbor(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)
+        const
         Frequently we want both the slope and aspect, this one function saves
         a step and returns both.
 
@@ -320,7 +339,7 @@ class DemMapInfo(geocal_swig.dem.Dem):
         any other approach if the DEM resolution is similar to your pixel
         size. 
         """
-        return _dem_map_info.DemMapInfo_slope_and_aspect(self, Gc)
+        return _dem_map_info.DemMapInfo_slope_and_aspect_nearest_neighbor(self, Gc)
 
 
     def _v_outside_dem_is_error(self):
@@ -362,6 +381,7 @@ DemMapInfo.slope_radian = new_instancemethod(_dem_map_info.DemMapInfo_slope_radi
 DemMapInfo.slope_degree = new_instancemethod(_dem_map_info.DemMapInfo_slope_degree, None, DemMapInfo)
 DemMapInfo.aspect = new_instancemethod(_dem_map_info.DemMapInfo_aspect, None, DemMapInfo)
 DemMapInfo.slope_and_aspect = new_instancemethod(_dem_map_info.DemMapInfo_slope_and_aspect, None, DemMapInfo)
+DemMapInfo.slope_and_aspect_nearest_neighbor = new_instancemethod(_dem_map_info.DemMapInfo_slope_and_aspect_nearest_neighbor, None, DemMapInfo)
 DemMapInfo._v_outside_dem_is_error = new_instancemethod(_dem_map_info.DemMapInfo__v_outside_dem_is_error, None, DemMapInfo)
 DemMapInfo._v_naif_code = new_instancemethod(_dem_map_info.DemMapInfo__v_naif_code, None, DemMapInfo)
 DemMapInfo_swigregister = _dem_map_info.DemMapInfo_swigregister

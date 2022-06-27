@@ -88,6 +88,7 @@ EXTRA_DIST+=@srcpythonlib@/igc_map_projected_test.py
 EXTRA_DIST+=@srcpythonlib@/ikonos_reflectance_test.py
 EXTRA_DIST+=@srcpythonlib@/image_ground_connection_test.py
 EXTRA_DIST+=@srcpythonlib@/image_to_image_connection_test.py
+EXTRA_DIST+=@srcpythonlib@/isis_support_test.py
 EXTRA_DIST+=@srcpythonlib@/job_database_test.py
 EXTRA_DIST+=@srcpythonlib@/lm_optimize_test.py
 EXTRA_DIST+=@srcpythonlib@/matlab_test.py

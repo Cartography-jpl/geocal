@@ -3244,6 +3244,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/ikonos_reflectance_test.py \
 	@srcpythonlib@/image_ground_connection_test.py \
 	@srcpythonlib@/image_to_image_connection_test.py \
+	@srcpythonlib@/isis_support_test.py \
 	@srcpythonlib@/job_database_test.py \
 	@srcpythonlib@/lm_optimize_test.py \
 	@srcpythonlib@/matlab_test.py @srcpythonlib@/misc_test.py \

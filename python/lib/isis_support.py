@@ -1,5 +1,5 @@
 import os
-from geocal import GdalRasterImage, SpiceKernelList
+from geocal_swig import GdalRasterImage, SpiceKernelList
 import json
 import re
 import subprocess
@@ -85,7 +85,24 @@ def find_isis_kernel(klist, Skip_load=True):
 
     By default we don't actually load the kernels.'''
     return SpiceKernelList([find_isis_kernel_file(k)
-                            for k in klist.kernel_list], Skip_load)    
+                            for k in klist.kernel_list], Skip_load)
+
+def pds_to_isis(pds_fname, isis_fname):
+    '''Take a unprojected PDS file, and import it into an ISIS file - based 
+    on the instrument listed the PDS file.'''
+    f = GdalRasterImage(pds_fname)
+    inst_id = f['INSTRUMENT_ID']
+    if(inst_id == "CTX"):
+        setup_isis()
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/mroctx2isis",
+                        f"from={pds_fname}", f"to={isis_fname}"],
+                       check=True)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={isis_fname}", "web=true"])
+    elif(inst_id == "HIRISE"):
+        raise RuntimeError("Not supported yet")
+    else:
+        raise RuntimeError(f"Unrecognized instrument ID '{inst_id}' found in file {pds_fname}")
 
 __all__ = ["setup_isis", "read_kernel_from_isis", "find_isis_kernel_file",
-           "find_isis_kernel"]        
+           "find_isis_kernel", "pds_to_isis"]        

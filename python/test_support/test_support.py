@@ -15,6 +15,7 @@ import geocal_swig
 from geocal.orbit_extension import *
 from geocal.map_info_extension import *
 from geocal.misc import cib01_mapinfo
+from geocal.isis_support import setup_isis
 import sys
 import subprocess
 import pytest
@@ -113,7 +114,15 @@ def check_vicarb():
         return False
     return True
 
-
+def check_isis():
+    '''Check for the existence of isis code'''
+    try:
+        setup_isis()
+    except RuntimeError:
+        return False
+    return subprocess.call("type $ISISROOT/bin/spiceinit", shell=True, 
+                           stdout=subprocess.PIPE, stderr=subprocess.PIPE) == 0
+    
 # Marker that skips a test if we have a build without boost serialization
 # support
 require_serialize = pytest.mark.skipif(not have_serialize_supported(),
@@ -144,6 +153,9 @@ require_hdf5 = pytest.mark.skipif(not hasattr(geocal_swig, "HdfFile"),
 # Marker that tests if we have VICAR RTL available
 require_vicar = pytest.mark.skipif(not VicarFile.vicar_available(),
     reason="need a geocal build with VICAR support to run")
+
+require_isis = pytest.mark.skipif(not check_isis(),
+    reason="need to have ISIS available to run")
 
 # Marker that tests if we have vicarb command available
 require_vicarb = pytest.mark.skipif(not check_vicarb(),
@@ -417,13 +429,7 @@ def mars_kernel():
 
 @pytest.fixture(scope="function")
 def mars_test_data():
-    if(not SpiceHelper.have_spice() or
-       not "MARS_KERNEL" in os.environ or
-       not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
-       not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/kernel.json") or
-       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker") or
-       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/kernel.json")
-    ):
+    if(not SpiceHelper.have_spice()):
         raise SkipTest
     res = "/bigdata/smyth/MiplMarsTest/"
     if(not os.path.exists(res)):

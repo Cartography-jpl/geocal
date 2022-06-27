@@ -1571,6 +1571,7 @@ am__dist_afidspythonvdev_SCRIPTS_DIST =  \
 	$(srcdir)/$(srcpythonbin)/mars_import_vicar \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
+	$(srcdir)/$(srcpythonbin)/pomm_generate_model \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
@@ -3716,6 +3717,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/mars_import_vicar \
 	$(srcdir)/$(srcpythonbin)/shelve_dem \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm \
+	$(srcdir)/$(srcpythonbin)/pomm_generate_model \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \

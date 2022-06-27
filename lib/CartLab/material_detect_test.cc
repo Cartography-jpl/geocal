@@ -15,6 +15,9 @@ BOOST_AUTO_TEST_CASE(shiva)
   // at some point, but for now just punt if we don't have this.
   return;
 #endif
+#ifdef HAVE_VICAR_RTL
+  return;
+#endif
   boost::shared_ptr<GdalMultiBand> mul
     (new GdalMultiBand(shiva_test_data_dir() + "post_b1:8.img"));
   boost::shared_ptr<VicarLiteRasterImage> pandata

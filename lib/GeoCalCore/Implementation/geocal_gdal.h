@@ -69,6 +69,7 @@ namespace GeoCal {
   }
 
 GDALDataType gdal_band_type(const std::string& Fname, int Band_id = 1);
+std::string gdal_driver_name(const std::string& Fname);
 bool gdal_has_map_info(const std::string& Fname);
 bool gdal_has_rpc(const GDALDataset& D);
 Rpc gdal_rpc(const std::string& Fname);

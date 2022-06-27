@@ -273,6 +273,23 @@ GDALDataType GeoCal::gdal_band_type(const std::string& Fname, int Band_id)
 
 //-----------------------------------------------------------------------
 /// \ingroup Gdal
+/// Utility function to return the driver type used for a file.
+//-----------------------------------------------------------------------
+
+std::string GeoCal::gdal_driver_name(const std::string& Fname)
+{
+  GdalRegister::gdal_register();
+  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
+  if(!data_set.get()) {
+    Exception e;
+    e << "Opening GDAL file " << Fname << " to get driver type failed";
+    throw e;
+  }
+  return GDALGetDriverShortName(data_set->GetDriver());
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup Gdal
 /// Utility function that returns true if the file contains projection
 /// information, and false otherwise.
 //-----------------------------------------------------------------------

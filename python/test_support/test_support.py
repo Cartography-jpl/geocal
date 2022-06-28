@@ -142,7 +142,9 @@ require_msp = pytest.mark.skipif(not have_msp_supported(),
 require_mars_spice = pytest.mark.skipif(not SpiceHelper.have_spice() or
        not "MARS_KERNEL" in os.environ or
        not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker") or
-       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"),
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mro_kernel/kernel.json") or                                        
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker") or
+       not os.path.exists(os.environ["MARS_KERNEL"] + "/mex_kernel/kernel.json",
        reason="need a geocal build with spice support, and the mars spice kernels available to run")
 
                                        

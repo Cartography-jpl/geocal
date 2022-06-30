@@ -12,6 +12,8 @@ BOOST_FIXTURE_TEST_SUITE(velocity_aberration_exact, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(velocity_aberration_exact)
 {
+  if(!have_serialize_supported())
+    return;
   // Test data we generated in python. We could duplicate the
   // generation in C++, but no real reason to. This comes from
   // test_create_steep_igc in glas_gfm_test.py

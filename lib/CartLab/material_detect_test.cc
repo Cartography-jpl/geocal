@@ -15,7 +15,7 @@ BOOST_AUTO_TEST_CASE(shiva)
   // at some point, but for now just punt if we don't have this.
   return;
 #endif
-#ifdef HAVE_VICAR_RTL
+#ifndef HAVE_VICAR_RTL
   return;
 #endif
   boost::shared_ptr<GdalMultiBand> mul

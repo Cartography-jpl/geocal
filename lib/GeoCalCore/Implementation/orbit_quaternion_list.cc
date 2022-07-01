@@ -61,13 +61,11 @@ void OrbitQuaternionList::interpolate_or_extrapolate_data
   // use the final two points to extrapolate.
   if(i == orbit_data_map.end())
     --i;
-  check_lazy_evaluation(i);
   // Special handling if we are looking at the very first point. We
   // use the first two points to extrapolate
-  if(i == orbit_data_map.begin()) {
+  if(i == orbit_data_map.begin())
     ++i;
-    check_lazy_evaluation(i);
-  }
+  check_lazy_evaluation(i);
   Q2 = i->second;
   --i;
   check_lazy_evaluation(i);

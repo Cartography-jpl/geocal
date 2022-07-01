@@ -4,7 +4,7 @@ import numpy as np
 
 def test_orbit_array():
     '''Tests or OrbitArray that are easier to do in python'''
-    t = Time.parse_time("2020-01-01T00:00:00Z")
+    t = Time.parse_time("2010-01-01T00:00:00Z")
     orb = KeplerOrbit()
     eph_time0 = t.j2000 - 0.001
     eph_time = np.array([eph_time0 + i * 0.1 for i in range(20)])

@@ -3252,6 +3252,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/multiprocess_test.py \
 	@srcpythonlib@/orbit_data_image_ground_connection_test.py \
 	@srcpythonlib@/orbit_derived_test.py \
+	@srcpythonlib@/orbit_array_test.py \
 	@srcpythonlib@/orbit_extension_test.py \
 	@srcpythonlib@/map_info_extension_test.py \
 	@srcpythonlib@/orbit_offset_correction_test.py \

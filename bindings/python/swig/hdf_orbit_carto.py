@@ -187,7 +187,21 @@ import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
 import geocal_swig.look_vector
-class HdfOrbit_EciTodBurl_TimeAcs(object):
+class OrbitArray_EciTodBurl_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame=True, Serialize_data=True):
+        _hdf_orbit_carto.OrbitArray_EciTodBurl_TimeAcs_swiginit(self, _hdf_orbit_carto.new_OrbitArray_EciTodBurl_TimeAcs(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame, Serialize_data))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _hdf_orbit_carto.delete_OrbitArray_EciTodBurl_TimeAcs
+OrbitArray_EciTodBurl_TimeAcs_swigregister = _hdf_orbit_carto.OrbitArray_EciTodBurl_TimeAcs_swigregister
+OrbitArray_EciTodBurl_TimeAcs_swigregister(OrbitArray_EciTodBurl_TimeAcs)
+
+class HdfOrbit_EciTodBurl_TimeAcs(OrbitArray_EciTodBurl_TimeAcs):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 

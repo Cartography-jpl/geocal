@@ -23,6 +23,33 @@ public:
   %python_attribute(quaternion_orbit_data_time, std::vector<boost::shared_ptr<Time> >);
   boost::shared_ptr<QuaternionOrbitData>
   quaternion_orbit_data_i(int I) const;
+  %python_attribute(quaternion_orbit_data_size, int);
+  %rename(_v_set_min_time) set_min_time;
+  %rename(_v_set_max_time) set_max_time;
+  void set_min_time(const Time& T);
+  void set_max_time(const Time& T);
+%pythoncode {
+@property
+def min_time(self):
+  return self._v_min_time()
+
+@min_time.setter
+def min_time(self, value):
+  self._v_set_min_time(value)
+
+@property
+def max_time(self):
+  return self._v_max_time()
+
+@max_time.setter
+def max_time(self, value):
+  self._v_set_max_time(value)
+
+def quaternion_orbit_data_gen(self):
+  '''Generator version of quaternion_orbit_data'''
+  for i in range(self.quaternion_orbit_data_size):
+      yield self.quaternion_orbit_data_i(i)
+}
 protected:
   virtual void interpolate_or_extrapolate_data
   (Time T, const QuaternionOrbitData* Q1, const QuaternionOrbitData* Q2) const;

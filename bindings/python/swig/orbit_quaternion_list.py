@@ -295,11 +295,78 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
         """
         return _orbit_quaternion_list.OrbitQuaternionList_quaternion_orbit_data_i(self, I)
 
+
+    def _v_quaternion_orbit_data_size(self):
+        """
+
+        int GeoCal::OrbitQuaternionList::quaternion_orbit_data_size() const
+
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data_size(self)
+
+
+    @property
+    def quaternion_orbit_data_size(self):
+        return self._v_quaternion_orbit_data_size()
+
+
+    def _v_set_min_time(self, T):
+        """
+
+        void GeoCal::OrbitQuaternionList::set_min_time(const Time &T)
+        It can be useful in some cases to modify the min_time and max_time.
+
+        For example, we don't usually allow extrapolation outside of the range
+        of orbit data, but in some case this might be desirable (e.g., orbit
+        data doesn't fully cover our image data, but will if we extrapolate a
+        short ways). 
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList__v_set_min_time(self, T)
+
+
+    def _v_set_max_time(self, T):
+        """
+
+        void GeoCal::OrbitQuaternionList::set_max_time(const Time &T)
+        It can be useful in some cases to modify the min_time and max_time.
+
+        For example, we don't usually allow extrapolation outside of the range
+        of orbit data, but in some case this might be desirable (e.g., orbit
+        data doesn't fully cover our image data, but will if we extrapolate a
+        short ways). 
+        """
+        return _orbit_quaternion_list.OrbitQuaternionList__v_set_max_time(self, T)
+
+
+    @property
+    def min_time(self):
+      return self._v_min_time()
+
+    @min_time.setter
+    def min_time(self, value):
+      self._v_set_min_time(value)
+
+    @property
+    def max_time(self):
+      return self._v_max_time()
+
+    @max_time.setter
+    def max_time(self, value):
+      self._v_set_max_time(value)
+
+    def quaternion_orbit_data_gen(self):
+      '''Generator version of quaternion_orbit_data'''
+      for i in range(self.quaternion_orbit_data_size):
+          yield self.quaternion_orbit_data_i(i)
+
     __swig_destroy__ = _orbit_quaternion_list.delete_OrbitQuaternionList
 OrbitQuaternionList.orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList_orbit_data, None, OrbitQuaternionList)
 OrbitQuaternionList._v_quaternion_orbit_data = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data, None, OrbitQuaternionList)
 OrbitQuaternionList._v_quaternion_orbit_data_time = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data_time, None, OrbitQuaternionList)
 OrbitQuaternionList.quaternion_orbit_data_i = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList_quaternion_orbit_data_i, None, OrbitQuaternionList)
+OrbitQuaternionList._v_quaternion_orbit_data_size = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_quaternion_orbit_data_size, None, OrbitQuaternionList)
+OrbitQuaternionList._v_set_min_time = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_set_min_time, None, OrbitQuaternionList)
+OrbitQuaternionList._v_set_max_time = new_instancemethod(_orbit_quaternion_list.OrbitQuaternionList__v_set_max_time, None, OrbitQuaternionList)
 OrbitQuaternionList_swigregister = _orbit_quaternion_list.OrbitQuaternionList_swigregister
 OrbitQuaternionList_swigregister(OrbitQuaternionList)
 

@@ -57,9 +57,14 @@ void OrbitQuaternionList::interpolate_or_extrapolate_data
 {
   range_check_inclusive(T, min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T);
+  // Special handling if we are looking past the last point. We
+  // use the final two points to extrapolate.
+  if(i == orbit_data_map.end())
+    --i;
   check_lazy_evaluation(i);
-  // Special handling if we are looking at the very first point
-  if(i == orbit_data_map.begin() && i->first - T == 0.0) {
+  // Special handling if we are looking at the very first point. We
+  // use the first two points to extrapolate
+  if(i == orbit_data_map.begin()) {
     ++i;
     check_lazy_evaluation(i);
   }

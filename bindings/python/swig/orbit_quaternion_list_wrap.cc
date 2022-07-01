@@ -7174,6 +7174,189 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_quaternion_orbit_data_size(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitQuaternionList__v_quaternion_orbit_data_size" "', argument " "1"" of type '" "GeoCal::OrbitQuaternionList const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::OrbitQuaternionList const *)arg1)->quaternion_orbit_data_size();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_set_min_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"OrbitQuaternionList__v_set_min_time",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitQuaternionList__v_set_min_time" "', argument " "1"" of type '" "GeoCal::OrbitQuaternionList *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitQuaternionList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitQuaternionList__v_set_min_time" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitQuaternionList__v_set_min_time" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->set_min_time((GeoCal::Time const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_set_max_time(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitQuaternionList > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  
+  if (!SWIG_Python_UnpackTuple(args,"OrbitQuaternionList__v_set_max_time",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitQuaternionList_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitQuaternionList__v_set_max_time" "', argument " "1"" of type '" "GeoCal::OrbitQuaternionList *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitQuaternionList > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitQuaternionList > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitQuaternionList * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "OrbitQuaternionList__v_set_max_time" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "OrbitQuaternionList__v_set_max_time" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      (arg1)->set_max_time((GeoCal::Time const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_OrbitQuaternionList(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::OrbitQuaternionList *arg1 = (GeoCal::OrbitQuaternionList *) 0 ;
@@ -7673,6 +7856,31 @@ static PyMethodDef SwigMethods[] = {
 		"directly for an index. This is redundant for C++, just call\n"
 		"quaternion_orbit_data and index the results. But this is useful for\n"
 		"python. \n"
+		""},
+	 { (char *)"OrbitQuaternionList__v_quaternion_orbit_data_size", (PyCFunction)_wrap_OrbitQuaternionList__v_quaternion_orbit_data_size, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::OrbitQuaternionList::quaternion_orbit_data_size() const\n"
+		"\n"
+		""},
+	 { (char *)"OrbitQuaternionList__v_set_min_time", _wrap_OrbitQuaternionList__v_set_min_time, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::OrbitQuaternionList::set_min_time(const Time &T)\n"
+		"It can be useful in some cases to modify the min_time and max_time.\n"
+		"\n"
+		"For example, we don't usually allow extrapolation outside of the range\n"
+		"of orbit data, but in some case this might be desirable (e.g., orbit\n"
+		"data doesn't fully cover our image data, but will if we extrapolate a\n"
+		"short ways). \n"
+		""},
+	 { (char *)"OrbitQuaternionList__v_set_max_time", _wrap_OrbitQuaternionList__v_set_max_time, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::OrbitQuaternionList::set_max_time(const Time &T)\n"
+		"It can be useful in some cases to modify the min_time and max_time.\n"
+		"\n"
+		"For example, we don't usually allow extrapolation outside of the range\n"
+		"of orbit data, but in some case this might be desirable (e.g., orbit\n"
+		"data doesn't fully cover our image data, but will if we extrapolate a\n"
+		"short ways). \n"
 		""},
 	 { (char *)"delete_OrbitQuaternionList", (PyCFunction)_wrap_delete_OrbitQuaternionList, METH_O, (char *)"\n"
 		"\n"

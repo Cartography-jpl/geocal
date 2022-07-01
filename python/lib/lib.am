@@ -97,6 +97,7 @@ EXTRA_DIST+=@srcpythonlib@/mmap_file_test.py
 EXTRA_DIST+=@srcpythonlib@/multiprocess_test.py
 EXTRA_DIST+=@srcpythonlib@/orbit_data_image_ground_connection_test.py
 EXTRA_DIST+=@srcpythonlib@/orbit_derived_test.py
+EXTRA_DIST+=@srcpythonlib@/orbit_array_test.py
 EXTRA_DIST+=@srcpythonlib@/orbit_extension_test.py
 EXTRA_DIST+=@srcpythonlib@/map_info_extension_test.py
 EXTRA_DIST+=@srcpythonlib@/orbit_offset_correction_test.py

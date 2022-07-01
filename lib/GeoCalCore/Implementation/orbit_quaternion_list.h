@@ -78,6 +78,26 @@ public:
 
   virtual ~OrbitQuaternionList() {}
 
+//-----------------------------------------------------------------------
+/// It can be useful in some cases to modify the min_time and
+/// max_time. For example, we don't usually allow extrapolation
+/// outside of the range of orbit data, but in some case this might be
+/// desirable (e.g., orbit data doesn't fully cover our image data,
+/// but will if we extrapolate a short ways).
+//-----------------------------------------------------------------------
+
+  void set_min_time(const Time& T) { min_tm = T;}
+  
+//-----------------------------------------------------------------------
+/// It can be useful in some cases to modify the min_time and
+/// max_time. For example, we don't usually allow extrapolation
+/// outside of the range of orbit data, but in some case this might be
+/// desirable (e.g., orbit data doesn't fully cover our image data,
+/// but will if we extrapolate a short ways).
+//-----------------------------------------------------------------------
+
+  void set_max_time(const Time& T) { max_tm = T;}
+
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> 
   orbit_data(const TimeWithDerivative& T) const;
@@ -98,10 +118,14 @@ public:
   
   boost::shared_ptr<QuaternionOrbitData>
   quaternion_orbit_data_i(int I) const
-  { std::vector<boost::shared_ptr<QuaternionOrbitData> > res = quaternion_orbit_data();
-    range_check(I, 0, (int) res.size());
-    return res[I];
+  {
+    range_check(I, 0, (int) orbit_data_map.size());
+    auto i = std::next(orbit_data_map.begin(), I);
+    check_lazy_evaluation(i);
+    return i->second;
   }
+  int quaternion_orbit_data_size() const
+  { return (int) orbit_data_map.size(); }
   
   // Specialization of sc_look_vector, which turns out to be a bottle
   // neck in the Ipi code

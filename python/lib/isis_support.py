@@ -1,5 +1,6 @@
 import os
-from geocal_swig import GdalRasterImage, SpiceKernelList
+from geocal_swig import GdalRasterImage, SpiceKernelList, gdal_driver_name
+from .priority_handle_set import GeoCalPriorityHandleSet
 import json
 import re
 import subprocess
@@ -47,12 +48,12 @@ def find_isis_kernel_file(f):
         return f
     spice_cache_dir = os.environ.get('SPICECACHE',
                                      os.path.expanduser("~/.spice_cache"))
-    sublist = [('\$base',
+    sublist = [(r'\$base',
                 f"{os.environ['ISISDATA']}/base",
                 f"{spice_cache_dir}/base",
                 "isisdist.astrogeology.usgs.gov::isisdata/data/base",
                 ),
-               ('\$mro',
+               (r'\$mro',
                 f"{os.environ['ISISDATA']}/mro",
                 f"{spice_cache_dir}/mro",
                 "isisdist.astrogeology.usgs.gov::isisdata/data/mro"
@@ -87,22 +88,106 @@ def find_isis_kernel(klist, Skip_load=True):
     return SpiceKernelList([find_isis_kernel_file(k)
                             for k in klist.kernel_list], Skip_load)
 
-def pds_to_isis(pds_fname, isis_fname):
-    '''Take a unprojected PDS file, and import it into an ISIS file - based 
-    on the instrument listed the PDS file.'''
-    f = GdalRasterImage(pds_fname)
-    inst_id = f['INSTRUMENT_ID']
-    if(inst_id == "CTX"):
+class PdsToIsisHandleSet(GeoCalPriorityHandleSet):
+    '''Handle set for pds to isis.
+
+    Note this is a bit of overkill, we have little more than a 
+    switch on INSTRUMENT_ID. But since we already have the machinery
+    here, go ahead and put this in place. If nothing else, it allows 
+    downstream programs to add handles for new instruments.
+    '''
+    def handle_h(self, h, fin, pds_fname, isis_fname, pds_fname2):
+        return h.pds_to_isis(fin, pds_fname, isis_fname, pds_fname2 = pds_fname2)
+
+class CtxPdsToIsis:
+    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2 = None):
+        if(fin['INSTRUMENT_ID'] != "CTX"):
+            return (False, None)
         setup_isis()
         subprocess.run([f"{os.environ['ISISROOT']}/bin/mroctx2isis",
                         f"from={pds_fname}", f"to={isis_fname}"],
                        check=True)
         subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
-                        f"from={isis_fname}", "web=true"])
-    elif(inst_id == "HIRISE"):
-        raise RuntimeError("Not supported yet")
-    else:
-        raise RuntimeError(f"Unrecognized instrument ID '{inst_id}' found in file {pds_fname}")
+                        f"from={isis_fname}", "web=true"],
+                       check=True, stdout=subprocess.DEVNULL)
+        return (True, isis_fname)
+
+PdsToIsisHandleSet.add_default_handle(CtxPdsToIsis())
+
+class HrscPdsToIsis:
+    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2 = None):
+        if(fin['INSTRUMENT_ID'] != "HRSC"):
+            return (False, None)
+        setup_isis()
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/hrsc2isis",
+                        f"from={pds_fname}", f"to={isis_fname}"],
+                       check=True)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={isis_fname}", "web=true"],
+                       check=True, stdout=subprocess.DEVNULL)
+        return (True, isis_fname)
+
+PdsToIsisHandleSet.add_default_handle(HrscPdsToIsis())
+
+class DummyPdsToIsis:
+    '''Degenerate case of file already being a isis file'''
+    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2 = None):
+        if(gdal_driver_name(pds_fname) != "ISIS3"):
+            return (False, None)
+        # Degenerate case of output file being the same as input
+        if(not os.path.exists(isis_fname)):
+            os.symlink(pds_fname, isis_fname)
+        elif(not os.path.samefile(pds_fname, isis_fname)):
+            raise RuntimeError(f"File f{isis_fname} already exists when trying to import f{pds_fname}")
+        return (True, isis_fname)
+
+PdsToIsisHandleSet.add_default_handle(DummyPdsToIsis(), priority_order=1000)
+
+class HirisePdsToIsis:
+    '''Degenerate case of file already being a isis file'''
+    def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2 = None):
+        if((fin['INSTRUMENT_ID'] != "HIRISE" and
+            fin['INSTRUMENT_ID'] != '"HIRISE"') or
+           pds_fname2 is None):
+            return (False, None)
+        setup_isis()
+        fbase, _ = os.path.splitext(isis_fname)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/hi2isis",
+                        f"from={pds_fname}", f"to={fbase}_f1.cub"],
+                       check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/hi2isis",
+                        f"from={pds_fname2}", f"to={fbase}_f2.cub"],
+                       check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={fbase}_f1.cub", "web=true"], check=True,
+                       stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={fbase}_f2.cub", "web=true"], check=True,
+                       stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/hical",
+                        f"from={fbase}_f1.cub", f"to={fbase}_f1_cal.cub"],
+                       check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/hical",
+                        f"from={fbase}_f2.cub", f"to={fbase}_f2_cal.cub"],
+                       check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/histitch",
+                        f"from1={fbase}_f1_cal.cub",
+                        f"from2={fbase}_f2_cal.cub",
+                        f"to={isis_fname}"], check=True,
+                       stdout=subprocess.DEVNULL)
+        return (True, isis_fname)
+
+PdsToIsisHandleSet.add_default_handle(HirisePdsToIsis())
+    
+def pds_to_isis(pds_fname, isis_fname, pds_fname2 = None):
+    '''Take a unprojected PDS file, and import it into an ISIS file - based 
+    on the instrument listed the PDS file.
+
+    Note just to simplify processing, the file passed in can already be a ISIS
+    file. In that case, we just create a symbolic link from the input to the
+    output file.'''
+    f = GdalRasterImage(pds_fname)
+    PdsToIsisHandleSet.default_handle_set().handle(f,pds_fname,isis_fname,pds_fname2)
 
 __all__ = ["setup_isis", "read_kernel_from_isis", "find_isis_kernel_file",
            "find_isis_kernel", "pds_to_isis"]        

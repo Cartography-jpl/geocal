@@ -3259,6 +3259,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/pickle_test.py \
 	@srcpythonlib@/pleides_rpc_test.py \
 	@srcpythonlib@/ply_file_test.py \
+	@srcpythonlib@/priority_handle_set_test.py \
 	@srcpythonlib@/quick_bird_reflectance_test.py \
 	@srcpythonlib@/raster_image_extension_test.py \
 	@srcpythonlib@/raster_tile_test.py \
@@ -4421,6 +4422,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/geocal_nitf_des.py \
 	@srcpythonlib@/geocal_nitf_image.py \
 	@srcpythonlib@/geocal_nitf_sensrb.py \
+	@srcpythonlib@/priority_handle_set.py \
 	@srcpythonlib@/image_ground_connection.py \
 	@srcpythonlib@/ray_intersect.py \
 	@srcpythonlib@/simultaneous_bundle_adjustment.py \

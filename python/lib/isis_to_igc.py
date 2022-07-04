@@ -1,7 +1,8 @@
 from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          SubRasterImage, ConstantSpacingTimeTable,
                          PlanetConstant, PlanetSimpleDem, OrbitListCache,
-                         Ipi, IpiImageGroundConnection, Time)
+                         Ipi, IpiImageGroundConnection, Time,
+                         PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
@@ -15,11 +16,42 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     here, go ahead and put this in place. If nothing else, it allows 
     downstream programs to add handles for new instruments.
     '''
-    def handle_h(self, h, isis_img, isis_metadata, klist, subset):
-        return h.isis_to_igc(isis_img, isis_metadata, klist, subset=subset)
+    def handle_h(self, h, isis_img, isis_metadata, klist, subset, glas_gfm):
+        return h.isis_to_igc(isis_img, isis_metadata, klist, subset=subset,
+                             glas_gfm=glas_gfm)
 
 class CtxIsisToIgc:
-    def isis_to_igc(self, isis_img, isis_metadata, klist_in,subset=None):
+    def igc_to_glas(self, igc_r):
+        '''Convert IGC to a GLAS model.'''
+        tspace = igc_r.ipi.time_table.time_space
+        porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         PosCsephb.LAGRANGE,
+                         PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                         PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+        aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         AttCsattb.LAGRANGE,
+                         AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                         AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+        orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+        band = 0
+        delta_sample = 100
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+        ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                    igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
+        igc_g.platform_id = "MRO"
+        igc_g.payload_id = "MRO"
+        igc_g.sensor_id = "CTX"
+        return igc_g
+        
+    def isis_to_igc(self, isis_img, isis_metadata, klist_in,subset=None,
+                    glas_gfm=False):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "CTX"):
             return (False, None)
@@ -66,20 +98,26 @@ class CtxIsisToIgc:
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
+        if(glas_gfm):
+            igc = self.igc_to_glas(igc)
         return (True, igc)
 
 IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
     
-def isis_to_igc(isis_fname, subset=None):
+def isis_to_igc(isis_fname, subset=None, glas_gfm=False):
     '''Create an IGC for the given ISIS cube file. This should have
     already had spiceinit run on it (e.g., you called pds_to_isis).
 
     You can supply a subset if desired, this should be an array of
     [Lstart, Sstart, Number_line, Number_sample].
+
+    The default is to return a IGC that includes the native Spice orbit/
+    camera model, etc, but you can request a GLAS/GFM model instead.
     '''
     f = GdalRasterImage(isis_fname)
     d = json.loads(f.metadata_list('json:ISIS3')[0])
     klist = read_kernel_from_isis(isis_fname)
-    return IsisToIgcHandleSet.default_handle_set().handle(f,d,klist, subset)
+    return IsisToIgcHandleSet.default_handle_set().handle(f,d,klist,
+                                                          subset, glas_gfm)
 
 __all__ = ["IsisToIgcHandleSet", "isis_to_igc"]    

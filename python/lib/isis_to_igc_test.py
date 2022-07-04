@@ -12,7 +12,7 @@ def test_ctx_to_igc(mars_test_data, isolated_dir):
         pds_to_isis(mars_test_data + "P16_007388_2049_XI_24N020W.IMG",
                     "ctx.cub")
         fname = "ctx.cub"
-    igc = isis_to_igc(fname)
+    igc = isis_to_igc(fname, glas_gfm=True)
     print(igc)
     
 @long_test

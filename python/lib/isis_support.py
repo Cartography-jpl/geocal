@@ -190,4 +190,4 @@ def pds_to_isis(pds_fname, isis_fname, pds_fname2 = None):
     PdsToIsisHandleSet.default_handle_set().handle(f,pds_fname,isis_fname,pds_fname2)
 
 __all__ = ["setup_isis", "read_kernel_from_isis", "find_isis_kernel_file",
-           "find_isis_kernel", "pds_to_isis"]        
+           "find_isis_kernel", "pds_to_isis", "PdsToIsisHandleSet"]        

@@ -217,27 +217,9 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         """
 
         SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, const std::vector< std::string >
-        &Kernel_list, int Naif_id)
-        Create an orbit that has position information for the Target_name
-        (e.g., "GLL", "MRO"), and pointing information in the
-        Spacecraft_reference_frame_name (e.g., "GLL_SCAN_PLANE",
-        "MRO_CTX").
+        &Spacecraft_reference_frame_name, const SpiceKernelList &Kernel_list,
+        int Naif_id)
 
-        Note that the Target_name is of a body (e.g., something we have a spk
-        kernel for), while the Spacecraft_reference_frame_name is for a frame
-        (e.g., something we have a fk kernel for). In addition to the frame
-        definition, you'll generally need a C kernel file (ck kernel) giving
-        the orientation of the frame with the target.
-
-        In addition, this gives a list of kernels to load. This list is
-        included in this class, so if you load a serialized version it will
-        automatically load this given list of kernels.
-
-        Note we check first if the kernel as already been loaded. If it has,
-        then we don't load it a second time. Most of the time this is what you
-        want, but if you really do want to reload the kernel then this class
-        won't be doing what you want. 
         """
         _spice_planet_orbit.SpicePlanetOrbit_swiginit(self, _spice_planet_orbit.new_SpicePlanetOrbit(*args))
 

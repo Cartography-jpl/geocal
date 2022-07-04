@@ -161,10 +161,10 @@ void OrbitListCache::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "OrbitListCache:\n"
      << "  Underlying orbit:\n";
-  opad << orbit_underlying_ << "\n";
+  opad << *orbit_underlying_ << "\n";
   opad.strict_sync();
   Os << "  Time table:\n";
-  opad << tt << "\n";
+  opad << *tt << "\n";
   opad.strict_sync();
   Os << "  Sample: " << sample_ << "\n";
 }

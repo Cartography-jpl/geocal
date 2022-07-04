@@ -78,6 +78,18 @@ SpicePlanetOrbit::SpicePlanetOrbit
 {
 }
 
+SpicePlanetOrbit::SpicePlanetOrbit
+(const std::string& Target_name, 
+ const std::string& Spacecraft_reference_frame_name,
+ const SpiceKernelList& Kernel_list,
+ int Naif_id)
+  : target_name_(Target_name),
+    spacecraft_reference_frame_name_(Spacecraft_reference_frame_name),
+    kernel_list_(Kernel_list),
+    naif_id_(Naif_id)
+{
+}
+
 // Return orbit data
 boost::shared_ptr<OrbitData> SpicePlanetOrbit::orbit_data(Time T) const
 {

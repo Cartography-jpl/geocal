@@ -19,6 +19,10 @@ public:
 		   const std::string& Spacecraft_reference_frame_name,
 		   const std::vector<std::string>& Kernel_list,
 		   int Naif_id);
+  SpicePlanetOrbit(const std::string& Target_name, 
+		   const std::string& Spacecraft_reference_frame_name,
+		   const SpiceKernelList& Kernel_list,
+		   int Naif_id);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;

@@ -223,10 +223,8 @@ class MspiGimbal(geocal_swig.with_parameter.WithParameter, ObservableMspiGimbal)
     def __init__(self, *args):
         """
 
-        GeoCal::MspiGimbal::MspiGimbal(const std::string &File_name, const std::string
-        &Extra_config_file="")
-        Constructor, which creates a MspiGimbal from the given configuration
-        file. 
+        GeoCal::MspiGimbal::MspiGimbal(double Epsilon, double Psi, double Theta)
+        Constructor. The angles should be in degrees. 
         """
         _mspi_gimbal.MspiGimbal_swiginit(self, _mspi_gimbal.new_MspiGimbal(*args))
 

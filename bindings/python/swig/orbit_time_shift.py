@@ -219,7 +219,7 @@ class OrbitTimeShift(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        virtual boost::shared_ptr<OrbitData> GeoCal::OrbitTimeShift::orbit_data(const TimeWithDerivative &T) const
+        boost::shared_ptr< OrbitData > OrbitTimeShift::orbit_data(Time T) const
 
         """
         return _orbit_time_shift.OrbitTimeShift_orbit_data(self, *args)

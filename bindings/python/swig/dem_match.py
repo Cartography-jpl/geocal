@@ -215,12 +215,26 @@ class DemMatch(geocal_swig.generic_object.GenericObject):
     def surface_point(self, *args):
         """
 
-        blitz::Array< double, 2 > DemMatch::surface_point(const MapInfo &Mi, bool Include_ic=false) const
-        Variation of surface_point where we go from the Surface.
+        blitz::Array< double, 2 > DemMatch::surface_point(int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int
+        Sstride=1, bool Include_ic=false) const
+        Look through the given range in line and sample for the first image.
 
-        This requires that our image matcher is a SurfaceImageToImageMatch.
-        But this runs much faster for ImageGroundConnection where calculating
-        ground_coordinate is expensive. 
+        Try image matching, and where it succeeds look at the intersection of
+        the points. We allow a little slop, but the intersection need to be
+        close to where each image would put the point (e.g., epipolar
+        constraint), so we reject any point where the intersection is farther
+        than the maximum distance in meters that was passed to the
+        constructor.
+
+        We return an array of points that we find. This is a N X 3 array, with
+        each row corresponding to a point. The columns are latitude,
+        longitude, and height (in degrees and meters). This is a bit odd way
+        to return this, but it works well with the python class that uses this
+        code.
+
+        Note that you can optionally specify Include_ic as true. If this is
+        true, we return a N x (3 + 4) array, where the last four columns are
+        the image coordinate for the first and second images. 
         """
         return _dem_match.DemMatch_surface_point(self, *args)
 

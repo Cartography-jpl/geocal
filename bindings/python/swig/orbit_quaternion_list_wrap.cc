@@ -7833,7 +7833,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitQuaternionList_orbit_data", _wrap_OrbitQuaternionList_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"OrbitQuaternionList__v_quaternion_orbit_data", (PyCFunction)_wrap_OrbitQuaternionList__v_quaternion_orbit_data, METH_O, (char *)"\n"

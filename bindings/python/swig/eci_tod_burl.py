@@ -204,8 +204,8 @@ class EciTodBurl(geocal_swig.ground_coordinate.CartesianInertial):
     def __init__(self, *args):
         """
 
-        GeoCal::EciTodBurl::EciTodBurl(const boost::array< double, 3 > &Pos)
-        Create an Eci with the given position in meters. 
+        GeoCal::EciTodBurl::EciTodBurl(double X, double Y, double Z)
+        Make an EciTod with the given position, in meters. 
         """
         _eci_tod_burl.EciTodBurl_swiginit(self, _eci_tod_burl.new_EciTodBurl(*args))
 

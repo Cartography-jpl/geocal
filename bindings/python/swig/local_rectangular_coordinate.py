@@ -300,8 +300,8 @@ class LocalRectangularCoordinate(geocal_swig.ground_coordinate.GroundCoordinate)
     def __init__(self, *args):
         """
 
-        LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, const
-        GroundCoordinate &Gc)
+        GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, double X, double Y,
+        double Z)
 
         """
         _local_rectangular_coordinate.LocalRectangularCoordinate_swiginit(self, _local_rectangular_coordinate.new_LocalRectangularCoordinate(*args))

@@ -281,9 +281,8 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     def image_coordinate(self, *args):
         """
 
-        virtual blitz::Array<double, 4> GeoCal::RsmGrid::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >
-        &Y, const blitz::Array< double, 3 > &Z) const
-
+        ImageCoordinate RsmGrid::image_coordinate(double X, double Y, double Z, bool Extrapolate_ok) const
+        Apply the grid to the given X, Y, and Z value. 
         """
         return _rsm_grid.RsmGrid_image_coordinate(self, *args)
 
@@ -291,8 +290,10 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
     def image_coordinate_jacobian(self, *args):
         """
 
-        virtual blitz::Array<double, 2> GeoCal::RsmGrid::image_coordinate_jacobian(double X, double Y, double Z) const
+        blitz::Array< double, 2 > RsmGrid::image_coordinate_jacobian(double X, double Y, double Z, bool Extrapolate_ok) const
+        This the jacobian of the line, sample with respect to X, Y, Z.
 
+        This is a 2x3 matrix. 
         """
         return _rsm_grid.RsmGrid_image_coordinate_jacobian(self, *args)
 

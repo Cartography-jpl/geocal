@@ -7626,7 +7626,7 @@ SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_a(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7690,7 +7690,7 @@ SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_b(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7754,7 +7754,7 @@ SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_c(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7818,7 +7818,7 @@ SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_d(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7930,17 +7930,15 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"MspiParaxialTransform_paraxial_to_real", _wrap_MspiParaxialTransform_paraxial_to_real, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void MspiParaxialTransform::paraxial_to_real(int Row_number, const AutoDerivative< double > &Paraxial_x, const\n"
-		"AutoDerivative< double > &Paraxial_y, AutoDerivative< double >\n"
-		"&Real_x, AutoDerivative< double > &Real_y) const\n"
-		"\n"
+		"void MspiParaxialTransform::paraxial_to_real(int Row_number, double Paraxial_x, double Paraxial_y, double &Real_x,\n"
+		"double &Real_y) const\n"
+		"Convert from paraxial to real coordinates. \n"
 		""},
 	 { (char *)"MspiParaxialTransform_real_to_paraxial", _wrap_MspiParaxialTransform_real_to_paraxial, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void MspiParaxialTransform::real_to_paraxial(int Row_number, const AutoDerivative< double > &Real_x, const\n"
-		"AutoDerivative< double > &Real_y, AutoDerivative< double >\n"
-		"&Paraxial_x, AutoDerivative< double > &Paraxial_y) const\n"
-		"\n"
+		"void MspiParaxialTransform::real_to_paraxial(int Row_number, double Real_x, double Real_y, double &Paraxial_x,\n"
+		"double &Paraxial_y) const\n"
+		"Convert from real coordinates to paraxial. \n"
 		""},
 	 { (char *)"MspiParaxialTransform_has_row", _wrap_MspiParaxialTransform_has_row, METH_VARARGS, (char *)"\n"
 		"\n"

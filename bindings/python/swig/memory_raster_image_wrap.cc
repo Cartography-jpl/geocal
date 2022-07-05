@@ -7175,8 +7175,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MemoryRasterImage", _wrap_new_MemoryRasterImage, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::MemoryRasterImage::MemoryRasterImage(const MapInfo &Mi)\n"
-		"Construct a MemoryRasterImage of the given MapInfo. \n"
+		"GeoCal::MemoryRasterImage::MemoryRasterImage(int Number_line=0, int Number_sample=0)\n"
+		"Construct a MemoryRasterImage of the given size. \n"
 		""},
 	 { (char *)"delete_MemoryRasterImage", (PyCFunction)_wrap_delete_MemoryRasterImage, METH_O, (char *)"\n"
 		"\n"

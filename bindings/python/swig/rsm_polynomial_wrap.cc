@@ -7169,7 +7169,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_1(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7291,7 +7291,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_2(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7413,7 +7413,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_3(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7640,7 +7640,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian_fitted_coefficent(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7727,7 +7727,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7842,7 +7842,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_coefficient(PyObject *SWIGUNUSEDPARM
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7904,7 +7904,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_fitted_coefficent__SWIG_0(PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8175,8 +8175,15 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_RsmPolynomial", _wrap_new_RsmPolynomial, METH_VARARGS, (char *)"\n"
 		"\n"
-		"RsmPolynomial::RsmPolynomial(const RsmPolynomial &Rp)\n"
-		"Copy constructor. \n"
+		"RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int\n"
+		"Max_order=-1)\n"
+		"Constructor.\n"
+		"\n"
+		"You indicated the order of the polynomial in each dimension, and if\n"
+		"this is a denominator (where we hold the constant term to 1.0 by\n"
+		"convention, and don't fit for this). The maximum order of cross terms\n"
+		"can be given, or left as -1 in which case we don't limit the cross\n"
+		"terms. \n"
 		""},
 	 { (char *)"RsmPolynomial___str__", (PyCFunction)_wrap_RsmPolynomial___str__, METH_O, NULL},
 	 { (char *)"RsmPolynomial_check_zero_crossing", _wrap_RsmPolynomial_check_zero_crossing, METH_VARARGS, (char *)"\n"

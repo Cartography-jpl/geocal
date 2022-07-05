@@ -7833,8 +7833,14 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_LsmMatcher", _wrap_new_LsmMatcher, METH_VARARGS, (char *)"\n"
 		"\n"
-		"LsmMatcher::LsmMatcher(const LsmMatcher &M)\n"
-		"Copy constructor. \n"
+		"BZ_END_STENCIL LsmMatcher::LsmMatcher(int Number_line=21, int Number_sample=21, int Border_size=3, double\n"
+		"Precision_goal=0.0625, double Precision_requirement=0.2, double\n"
+		"Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double\n"
+		"Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1)\n"
+		"Constructor.\n"
+		"\n"
+		"Default values were tuned for MISR imagery, but work well for other\n"
+		"imagery. \n"
 		""},
 	 { (char *)"LsmMatcher__v_number_line", (PyCFunction)_wrap_LsmMatcher__v_number_line, METH_O, (char *)"\n"
 		"\n"

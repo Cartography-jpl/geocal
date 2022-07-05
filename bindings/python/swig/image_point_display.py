@@ -215,7 +215,7 @@ class ImagePointDisplay(geocal_swig.gdal_raster_image.GdalRasterImage):
     def image_point(self, *args):
         """
 
-        void GeoCal::ImagePointDisplay::image_point(const GroundCoordinate &Gc, int Cindex)
+        void ImagePointDisplay::image_point(const ImageCoordinate &Ic, int Cindex)
         Display Point with the given color index. 
         """
         return _image_point_display.ImagePointDisplay_image_point(self, *args)

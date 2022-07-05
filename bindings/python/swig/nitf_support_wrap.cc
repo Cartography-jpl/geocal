@@ -6634,7 +6634,7 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_0(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -6696,7 +6696,7 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_1(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -6758,7 +6758,7 @@ SWIGINTERN PyObject *_wrap_quaternion_to_nitf__SWIG_2(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -6877,7 +6877,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"quaternion_to_nitf", _wrap_quaternion_to_nitf, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array<T, 2> GeoCal::quaternion_to_nitf(const blitz::Array< T, 2 > &Q)\n"
+		"blitz::Array<T, 1> GeoCal::quaternion_to_nitf(const boost::math::quaternion< T > &Q)\n"
 		"Reverse nitf_to_quaternion.\n"
 		"\n"
 		"See nitf_to_quaternion for documentation on what this does. \n"

@@ -7839,12 +7839,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GeotiffFile_set_tiftag", _wrap_GeotiffFile_set_tiftag, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array< double, 1 > &V)\n"
+		"void GeotiffFile::set_tiftag(tiftag_t K, int V)\n"
 		"Set the tiff tag value. \n"
 		""},
 	 { (char *)"GeotiffFile_set_key", _wrap_GeotiffFile_set_key, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeotiffFile::set_key(geokey_t K, const std::string &V)\n"
+		"void GeotiffFile::set_key(geokey_t K, geocode_t V)\n"
 		"Set the value of the given key.\n"
 		"\n"
 		"Not actually written to the file until write_key is called. \n"

@@ -198,14 +198,14 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_array.OrbitArray_EciTod_TimeAcs)
 
     The file should have the following fields:
 
-    <Base group>="">/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>="">/Attitude/Quaternion - natt
-    x 4 in size, quaternion to take same coordinate system as Position
-    (e.g., ECI) <Base group>="">/Ephemeris/Time - neph in size, time of
-    ephemeris measurement as doubles <Base group>="">/Ephemeris/Position
-    - neph x 3 in size, position measurement as doubles in meters <Base
-    group>="">/Ephemeris/Velocity - neph x 3 in size, velocity
-    measurement as doubles in meter/second
+    <Base group>/Attitude/Time - natt in size, time of attitude
+    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
+    size, quaternion to take same coordinate system as Position (e.g.,
+    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
+    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
+    size, position measurement as doubles in meters <Base
+    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
+    doubles in meter/second
 
     Because it is useful, we allow the type of position measurement and
     time to be changed. The measurement class is passed in, e.g., Eci, as
@@ -290,14 +290,14 @@ class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_array.OrbitArray_Eci_TimePgs):
 
     The file should have the following fields:
 
-    <Base group>="">/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>="">/Attitude/Quaternion - natt
-    x 4 in size, quaternion to take same coordinate system as Position
-    (e.g., ECI) <Base group>="">/Ephemeris/Time - neph in size, time of
-    ephemeris measurement as doubles <Base group>="">/Ephemeris/Position
-    - neph x 3 in size, position measurement as doubles in meters <Base
-    group>="">/Ephemeris/Velocity - neph x 3 in size, velocity
-    measurement as doubles in meter/second
+    <Base group>/Attitude/Time - natt in size, time of attitude
+    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
+    size, quaternion to take same coordinate system as Position (e.g.,
+    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
+    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
+    size, position measurement as doubles in meters <Base
+    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
+    doubles in meter/second
 
     Because it is useful, we allow the type of position measurement and
     time to be changed. The measurement class is passed in, e.g., Eci, as
@@ -382,14 +382,14 @@ class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_array.OrbitArray_Eci_TimeJ2000):
 
     The file should have the following fields:
 
-    <Base group>="">/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>="">/Attitude/Quaternion - natt
-    x 4 in size, quaternion to take same coordinate system as Position
-    (e.g., ECI) <Base group>="">/Ephemeris/Time - neph in size, time of
-    ephemeris measurement as doubles <Base group>="">/Ephemeris/Position
-    - neph x 3 in size, position measurement as doubles in meters <Base
-    group>="">/Ephemeris/Velocity - neph x 3 in size, velocity
-    measurement as doubles in meter/second
+    <Base group>/Attitude/Time - natt in size, time of attitude
+    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
+    size, quaternion to take same coordinate system as Position (e.g.,
+    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
+    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
+    size, position measurement as doubles in meters <Base
+    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
+    doubles in meter/second
 
     Because it is useful, we allow the type of position measurement and
     time to be changed. The measurement class is passed in, e.g., Eci, as
@@ -474,14 +474,14 @@ class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_array.OrbitArray_EciTod_TimeJ2
 
     The file should have the following fields:
 
-    <Base group>="">/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>="">/Attitude/Quaternion - natt
-    x 4 in size, quaternion to take same coordinate system as Position
-    (e.g., ECI) <Base group>="">/Ephemeris/Time - neph in size, time of
-    ephemeris measurement as doubles <Base group>="">/Ephemeris/Position
-    - neph x 3 in size, position measurement as doubles in meters <Base
-    group>="">/Ephemeris/Velocity - neph x 3 in size, velocity
-    measurement as doubles in meter/second
+    <Base group>/Attitude/Time - natt in size, time of attitude
+    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
+    size, quaternion to take same coordinate system as Position (e.g.,
+    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
+    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
+    size, position measurement as doubles in meters <Base
+    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
+    doubles in meter/second
 
     Because it is useful, we allow the type of position measurement and
     time to be changed. The measurement class is passed in, e.g., Eci, as

@@ -203,8 +203,15 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
     def __init__(self, Np_x, Np_y, Np_z, Is_denominator=False, Max_order=-1):
         """
 
-        RsmPolynomial::RsmPolynomial(const RsmPolynomial &Rp)
-        Copy constructor. 
+        RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int
+        Max_order=-1)
+        Constructor.
+
+        You indicated the order of the polynomial in each dimension, and if
+        this is a denominator (where we hold the constant term to 1.0 by
+        convention, and don't fit for this). The maximum order of cross terms
+        can be given, or left as -1 in which case we don't limit the cross
+        terms. 
         """
         _rsm_polynomial.RsmPolynomial_swiginit(self, _rsm_polynomial.new_RsmPolynomial(Np_x, Np_y, Np_z, Is_denominator, Max_order))
 

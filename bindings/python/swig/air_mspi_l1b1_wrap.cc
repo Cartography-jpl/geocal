@@ -9130,8 +9130,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"AirMspiL1b1File_swiginit", AirMspiL1b1File_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_AirMspiL1b1", _wrap_new_AirMspiL1b1, METH_VARARGS, (char *)"\n"
 		"\n"
-		"AirMspiL1b1::AirMspiL1b1(const boost::shared_ptr< AirMspiL1b1File > &L1b1_file, int\n"
-		"Tile_number_line=-1, int Tile_number_sample=-1, unsigned int\n"
+		"AirMspiL1b1::AirMspiL1b1(const std::string &Fname, const std::string &Swath_to_use=\"660-I\",\n"
+		"int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int\n"
 		"Number_tile=4)\n"
 		"Constructor. \n"
 		""},

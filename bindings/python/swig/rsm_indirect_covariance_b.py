@@ -201,7 +201,7 @@ class RsmBSubgroup(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::RsmBSubgroup::RsmBSubgroup()
+        GeoCal::RsmBSubgroup::RsmBSubgroup(const RsmBSubgroup &V)
 
         """
         _rsm_indirect_covariance_b.RsmBSubgroup_swiginit(self, _rsm_indirect_covariance_b.new_RsmBSubgroup(*args))
@@ -304,7 +304,7 @@ class RsmBUnmodeledCovariance(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance()
+        GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(const RsmBUnmodeledCovariance &V)
 
         """
         _rsm_indirect_covariance_b.RsmBUnmodeledCovariance_swiginit(self, _rsm_indirect_covariance_b.new_RsmBUnmodeledCovariance(*args))
@@ -393,7 +393,9 @@ class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCova
     def __init__(self, *args):
         """
 
-        RsmIndirectCovarianceB::RsmIndirectCovarianceB(const RsmIndirectCovarianceB &V)
+        GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB(const std::string &Image_identifier="", const std::string
+        &Rsm_support_data_edition="fake-1", const std::string
+        &Triangulation_id="")
 
         """
         _rsm_indirect_covariance_b.RsmIndirectCovarianceB_swiginit(self, _rsm_indirect_covariance_b.new_RsmIndirectCovarianceB(*args))

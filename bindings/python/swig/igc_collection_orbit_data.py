@@ -202,8 +202,10 @@ class IgcCollectionOrbitData(geocal_swig.igc_collection.IgcCollection):
     def __init__(self, *args):
         """
 
-        GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        Camera > &Cam, const boost::shared_ptr< Dem > &D)
+        GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(const std::vector< boost::shared_ptr< RasterImage > > &Img_list,
+        const std::vector< Time > &Tm_list, const std::vector< std::string >
+        &Title_list, const boost::shared_ptr< Orbit > &Orb, const
+        boost::shared_ptr< Camera > &Cam, const boost::shared_ptr< Dem > &D)
 
         """
         _igc_collection_orbit_data.IgcCollectionOrbitData_swiginit(self, _igc_collection_orbit_data.new_IgcCollectionOrbitData(*args))

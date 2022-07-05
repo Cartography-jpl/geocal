@@ -11613,7 +11613,7 @@ SWIGINTERN PyObject *_wrap_PiecewiseLinear__v_parameter_mask__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11984,7 +11984,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PiecewiseLinear_FunctionType_get", (PyCFunction)_wrap_PiecewiseLinear_FunctionType_get, METH_O, NULL},
 	 { (char *)"new_PiecewiseLinear", _wrap_new_PiecewiseLinear, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::PiecewiseLinear::PiecewiseLinear()\n"
+		"PiecewiseLinear::PiecewiseLinear(const std::vector< Time > &X, const blitz::Array< int, 1 > &T)\n"
 		"\n"
 		""},
 	 { (char *)"PiecewiseLinear__v_parameter_mask", _wrap_PiecewiseLinear__v_parameter_mask, METH_VARARGS, (char *)"\n"

@@ -253,7 +253,7 @@ class Time(geocal_swig.generic_object.GenericObject):
     def time_unix(unix_time):
         """
 
-        static Time GeoCal::Time::time_unix(double unix_time)
+        static Time GeoCal::Time::time_unix(std::time_t unix_time)
         Return time from given Unix time (epoch of 1970-01-01). 
         """
         return _geocal_time.Time_time_unix(unix_time)
@@ -493,7 +493,7 @@ def Time_time_gps(*args):
 def Time_time_unix(unix_time):
     """
 
-    static Time GeoCal::Time::time_unix(double unix_time)
+    static Time GeoCal::Time::time_unix(std::time_t unix_time)
     Return time from given Unix time (epoch of 1970-01-01). 
     """
     return _geocal_time.Time_time_unix(unix_time)
@@ -545,7 +545,7 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::TimeWithDerivative::TimeWithDerivative()
+        GeoCal::TimeWithDerivative::TimeWithDerivative(const Time &T)
 
         """
         _geocal_time.TimeWithDerivative_swiginit(self, _geocal_time.new_TimeWithDerivative(*args))

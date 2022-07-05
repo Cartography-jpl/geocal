@@ -324,7 +324,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def set_tiftag(self, *args):
         """
 
-        void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array< double, 1 > &V)
+        void GeotiffFile::set_tiftag(tiftag_t K, int V)
         Set the tiff tag value. 
         """
         return _geotiff_file.GeotiffFile_set_tiftag(self, *args)
@@ -333,7 +333,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def set_key(self, *args):
         """
 
-        void GeotiffFile::set_key(geokey_t K, const std::string &V)
+        void GeotiffFile::set_key(geokey_t K, geocode_t V)
         Set the value of the given key.
 
         Not actually written to the file until write_key is called. 

@@ -18,12 +18,16 @@ def test_ctx_to_igc(mars_test_data, isolated_dir):
 @long_test
 @require_isis
 def test_hirise_to_igc(mars_test_data, isolated_dir):
-    f1 = "/raid26/tllogan/mars_map/hirise_gale/PDS_Image_Files/esp_025012_1745_red0_0.img"
-    f2 = "/raid26/tllogan/mars_map/hirise_gale/PDS_Image_Files/esp_025012_1745_red0_1.img"
-    pds_to_isis(f1, "ctx.cub", pds_fname2=f2)
-    # Test handling the kernels and downloading from the web.
-    klist = read_kernel_from_isis("ctx.cub")
-    print(klist)
-    klist.load_kernel()
+    if False:
+        # While developing, skip import by using hard coded path
+        fname = "/home/smyth/Local/geocal-repo/python/hirise.cub"
+    else:
+        f1 = "/raid26/tllogan/mars_map/hirise_gale/PDS_Image_Files/esp_025012_1745_red0_0.img"
+        f2 = "/raid26/tllogan/mars_map/hirise_gale/PDS_Image_Files/esp_025012_1745_red0_1.img"
+        pds_to_isis(f1, "hirise.cub", pds_fname2=f2)
+        fname = "hirise.cub"
+    igc = isis_to_igc(fname, glas_gfm=True)
+    print(igc)
+        
 
     

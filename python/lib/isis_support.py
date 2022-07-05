@@ -175,6 +175,7 @@ class HirisePdsToIsis:
                         f"from2={fbase}_f2_cal.cub",
                         f"to={isis_fname}"], check=True,
                        stdout=subprocess.DEVNULL)
+        # TODO We could possibly do cubenorm if desired. Perhaps as an option?
         return (True, isis_fname)
 
 PdsToIsisHandleSet.add_default_handle(HirisePdsToIsis())

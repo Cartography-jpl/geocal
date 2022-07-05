@@ -2,7 +2,8 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          SubRasterImage, ConstantSpacingTimeTable,
                          PlanetConstant, PlanetSimpleDem, OrbitListCache,
                          Ipi, IpiImageGroundConnection, Time,
-                         PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera)
+                         PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
+                         ScaleImage)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
@@ -44,7 +45,7 @@ class CtxIsisToIgc:
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
                     igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
-        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
+        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
         igc_g.platform_id = "MRO"
         igc_g.payload_id = "MRO"
         igc_g.sensor_id = "CTX"
@@ -103,7 +104,94 @@ class CtxIsisToIgc:
         return (True, igc)
 
 IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
-    
+
+class HiriseIsisToIgc:
+    '''Note that the HiRISE data is small floating point numbers. We
+    scale to get a reasonable looking image.'''
+    def __init__(self, rad_scale=10000):
+        self.rad_scale = rad_scale
+        
+    def igc_to_glas(self, igc_r):
+        '''Convert IGC to a GLAS model.'''
+        tspace = igc_r.ipi.time_table.time_space
+        porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         PosCsephb.LAGRANGE,
+                         PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                         PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+        aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         AttCsattb.LAGRANGE,
+                         AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                         AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+        orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+        band = 0
+        delta_sample = 2048 / 16
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+        ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                    igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
+        igc_g.platform_id = "MRO"
+        igc_g.payload_id = "MRO"
+        igc_g.sensor_id = "HIRISE"
+        return igc_g
+        
+    def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
+                    glas_gfm=False):
+        idata = isis_metadata["IsisCube"]["Instrument"]
+        if(idata["InstrumentId"] != "HIRISE"):
+            return (False, None)
+        sline = 0
+        nline = isis_img.number_line
+        if(subset is not None):
+            sline = subset[0]
+            nline = subset[2]
+            img = SubRasterImage(isis_img, subset[0], subset[1],
+                                 subset[2], subset[3])
+        else:
+            img = isis_img
+        if(self.rad_scale is not None):
+            img = ScaleImage(img, self.rad_scale)
+        klist.load_kernel()
+        orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
+                               PlanetConstant.MARS_NAIF_CODE)
+        # There are two kinds of spacecraft clocks. The normal
+        # resolution is "MRO", the high resolution is for NAIF ID
+        # -74999. We have high resolution for HIRISE
+        tstart = Time.time_sclk(idata["SpacecraftClockStartCount"], "-74999")
+
+        if(idata["LineExposureDuration"]["unit"] != "MICROSECONDS"):
+            raise RuntimeError(f"Not sure how to handle LineExposureDuration units of {idata['LineExposureDuration']['unit']}")
+        tspace = float(idata["LineExposureDuration"]["value"]) * 1e-6
+        if(subset is not None):
+            tstart += sline * tspace
+        # This is the CCD number. This comes through the "CCD Processing and
+        # Memory Modules (CPMM) IDS". Mapping is found in mro_hirise_v12.ti,
+        # we don't bother reading this from the SPICE kernels since this is
+        # just a fixed mapping.
+        ccd_number = [0, 1, 2, 3, 12, 4, 10, 11,
+                      5, 13, 6, 7, 8, 9][int(idata["CpmmNumber"])]
+        tt = ConstantSpacingTimeTable(tstart,
+                                      tstart + tspace * (img.number_line-1),
+                                      tspace)
+        dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
+        orb_cache = OrbitListCache(orb, tt)
+        cam = hirise_camera(ccd_number)
+        #TODO Handle subsetting in the sample direction for the camera
+        if(img.number_sample != cam.number_sample(0)):
+            raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
+        ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
+        igc = IpiImageGroundConnection(ipi, dem, img)
+        if(glas_gfm):
+            igc = self.igc_to_glas(igc)
+        return (True, igc)
+
+IsisToIgcHandleSet.add_default_handle(HiriseIsisToIgc())
+
 def isis_to_igc(isis_fname, subset=None, glas_gfm=False):
     '''Create an IGC for the given ISIS cube file. This should have
     already had spiceinit run on it (e.g., you called pds_to_isis).

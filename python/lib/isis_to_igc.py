@@ -7,6 +7,7 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
+from .mars_rsm import rsm_hirise, rsm_context
 import json
 
 class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
@@ -17,9 +18,11 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     here, go ahead and put this in place. If nothing else, it allows 
     downstream programs to add handles for new instruments.
     '''
-    def handle_h(self, h, isis_img, isis_metadata, klist, subset, glas_gfm):
+    def handle_h(self, h, isis_img, isis_metadata, klist, subset, glas_gfm,
+                 rsm, min_height,max_height):
         return h.isis_to_igc(isis_img, isis_metadata, klist, subset=subset,
-                             glas_gfm=glas_gfm)
+                             glas_gfm=glas_gfm, rsm=rsm, min_height=min_height,
+                             max_height=max_height)
 
 class CtxIsisToIgc:
     def igc_to_glas(self, igc_r):
@@ -52,7 +55,8 @@ class CtxIsisToIgc:
         return igc_g
         
     def isis_to_igc(self, isis_img, isis_metadata, klist_in,subset=None,
-                    glas_gfm=False):
+                    glas_gfm=False, rsm=False, min_height=-5000,
+                    max_height=-1500):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "CTX"):
             return (False, None)
@@ -101,7 +105,11 @@ class CtxIsisToIgc:
         igc = IpiImageGroundConnection(ipi, dem, img)
         if(glas_gfm):
             igc = self.igc_to_glas(igc)
-        return (True, igc)
+        if(not rsm):
+            return (True, igc)
+        else:
+            return (True, (igc, rsm_context(igc, min_height=min_height,
+                                            max_height=max_height)))
 
 IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
 
@@ -141,7 +149,8 @@ class HiriseIsisToIgc:
         return igc_g
         
     def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
-                    glas_gfm=False):
+                    glas_gfm=False, rsm=False, min_height=-5000,
+                    max_height=-1500):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "HIRISE"):
             return (False, None)
@@ -188,11 +197,16 @@ class HiriseIsisToIgc:
         igc = IpiImageGroundConnection(ipi, dem, img)
         if(glas_gfm):
             igc = self.igc_to_glas(igc)
-        return (True, igc)
+        if(not rsm):
+            return (True, igc)
+        else:
+            return (True, (igc, rsm_hirise(igc, min_height=min_height,
+                                           max_height=max_height)))
 
 IsisToIgcHandleSet.add_default_handle(HiriseIsisToIgc())
 
-def isis_to_igc(isis_fname, subset=None, glas_gfm=False):
+def isis_to_igc(isis_fname, subset=None, glas_gfm=False, rsm=False,
+                min_height = -5000, max_height = -1500):
     '''Create an IGC for the given ISIS cube file. This should have
     already had spiceinit run on it (e.g., you called pds_to_isis).
 
@@ -201,11 +215,17 @@ def isis_to_igc(isis_fname, subset=None, glas_gfm=False):
 
     The default is to return a IGC that includes the native Spice orbit/
     camera model, etc, but you can request a GLAS/GFM model instead.
+
+    You can also request a RSM, in which case a pair of igc,rsm gets
+    returned. I'm not 100% sure of this interface, but the details of
+    making the RSM depends on the specific instrument so for now this is
+    how we do this. For the RSM, you can pass in the min and max height to
+    use. This has no impact on the IGC.
     '''
     f = GdalRasterImage(isis_fname)
     d = json.loads(f.metadata_list('json:ISIS3')[0])
     klist = read_kernel_from_isis(isis_fname)
     return IsisToIgcHandleSet.default_handle_set().handle(f,d,klist,
-                                                          subset, glas_gfm)
+                            subset, glas_gfm, rsm,min_height, max_height)
 
 __all__ = ["IsisToIgcHandleSet", "isis_to_igc"]    

@@ -12,7 +12,7 @@ import tempfile
 version = "June 26, 2022"
 usage='''Usage:
   pomm_generate_model [options] <pds_or_isis_image> <output_base_name>
-  pomm_generate_model [options] <pds_image> <pds_image_2> <output_base_name>
+  pomm_generate_model [options] <pds_or_isis_image> <pds_image_2> <output_base_name>
   pomm_generate_model -h | --help
   pomm_generate_model -v | --version
 
@@ -52,15 +52,8 @@ Options:
        the one with the camera model, spice kernel, etc.). This is what we
        are approximating with the RSM and/or GLAS/GFM model.
 
-  --glas-gfm
-       Create a GLAS/GFM instead of a RSM.
-
-  --keep-temp-dir
-       For some instrument types we create a temporary directory for
-       initial processing (e.g., HiRISE using ISIS code). Normally we
-       delete this directory. For debugging, it can be useful to skip the
-       clean up and leave the directory in place so we can look at the
-       intermediate files
+  --rsm
+       Create RSM instead of a GLAS/GFM model.
 
   --min-height=d
        Minimum DEM height we create RSM for. Note this doesn't need to be
@@ -90,10 +83,9 @@ Options:
 '''
 long_name_to_vicar = { "pds_or_isis_image" : "pdsimg",
                        "pds_image_2" : "pdsimg2",
-                       "keep_temp_dir" : "ktemp",
                        "output_base_name" : "outbase",
                        "full_igc" : "fulligc",
-                       "glas_gfm": "glas",
+                       "rsm": "rsm",
                        "min_height" : "minh",
                        "max_height" : "maxh",
                        "subset" : "subset",
@@ -103,20 +95,39 @@ long_name_to_vicar = { "pds_or_isis_image" : "pdsimg",
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
-def write_vicar_file(igc, fin_name, output_base_name, rsm=None,
-                     igc_glas_gfm=None):
-    f = geocal.VicarRasterImage(output_base_name + ".img", "HALF",
-                                igc.number_line, igc.number_sample)
-    fin = geocal.GdalRasterImage(fin_name)
-    for k in fin.metadata_list():
-        if(not fin[k] == "") :
-            f[k] = fin[k]
-    geocal.copy_raster(igc.image, f, True, -1, igc.number_sample)
-    if(rsm):
-        # There are a number of size constraints here. Major pain, for
-        # now skip trying to cram RSM into NITF
-        #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
-        f.set_rsm(rsm, geocal.VicarFile.RSM_XML_FILE)
-    if(igc_glas_gfm):
-        f.set_igc_glas_gfm(igc_glas_gfm)
-    f.close()
+subset = None
+if args.subset:
+    if(args.subset == -999):
+        subset = None
+    elif(isinstance(args.subset, tuple)):
+        subset = args.subset
+    else:        
+        subset = eval(args.subset)
+        
+geocal.pds_to_isis(args.pds_or_isis_image, f"{args.output_base_name}.cub",
+                   pds_fname2 = args.pds_image_2)
+if(args.rsm): 
+    igc, rsm = geocal.isis_to_igc(f"{args.output_base_name}.cub", rsm=True,
+                       min_height=args.min_height, max_height=args.max_height,
+                       igc_out_fname=args.full_igc, subset=subset)
+else:
+    rsm = None
+    igc = geocal.isis_to_igc(f"{args.output_base_name}.cub", glas_gfm=True,
+                             subset=subset)
+    
+f = geocal.VicarRasterImage(f"{args.output_base_name}.img", "HALF",
+                            igc.number_line, igc.number_sample)
+geocal.copy_raster(igc.image, f, True, -1, igc.number_sample)
+if(rsm):
+    # There are a number of size constraints here. Major pain, for
+    # now skip trying to cram RSM into NITF
+    #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
+    f.set_rsm(rsm, geocal.VicarFile.RSM_XML_FILE)
+else:
+    f.set_igc_glas_gfm(igc)
+f.close()
+    
+if(args.plot_cross_section):
+    geocal.rsm_plot_diff(rsm, igc, args.plot_cross_section,
+                         min_height=args.min_height, max_height=args.max_height)
+    

@@ -56,6 +56,7 @@ dist_bin_SCRIPTS+= $(srcdir)/$(srcpythonbin)/create_kernel_json
 dist_afidspythonvdev_SCRIPTS+= $(srcdir)/$(srcpythonbin)/mars_generate_rsm
 dist_afidspythonvdev_DATA+= $(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf
 dist_afidspythonvdev_SCRIPTS+= $(srcdir)/$(srcpythonbin)/pomm_generate_model
+dist_afidspythonvdev_DATA+= $(srcdir)/$(srcpythonbin)/pomm_generate_model.pdf
 dist_afidspythonvdev_SCRIPTS+= $(srcdir)/$(srcpythonbin)/rpcorrsmfwd
 dist_afidspythonvdev_DATA+= $(srcdir)/$(srcpythonbin)/rpcorrsmfwd.pdf
 dist_afidspythonvdev_SCRIPTS+= $(srcdir)/$(srcpythonbin)/rsm_improve

@@ -2269,6 +2269,7 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/mars_import_vicar.pdf \
 	$(srcdir)/$(srcpythonbin)/shelve_dem.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
+	$(srcdir)/$(srcpythonbin)/pomm_generate_model.pdf \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_improve.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf \
@@ -3734,6 +3735,7 @@ dist_afidspythonvdev_DATA = $(am__append_20) \
 	$(srcdir)/$(srcpythonbin)/mars_import_vicar.pdf \
 	$(srcdir)/$(srcpythonbin)/shelve_dem.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_generate_rsm.pdf \
+	$(srcdir)/$(srcpythonbin)/pomm_generate_model.pdf \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_improve.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf \

@@ -5,7 +5,7 @@ from .isis_to_igc import *
 @long_test
 @require_isis
 def test_ctx_to_igc(mars_test_data, isolated_dir):
-    if True:
+    if False:
         # While developing, skip import by using hard coded path
         fname = "/home/smyth/Local/geocal-repo/python/ctx.cub"
     else:
@@ -19,7 +19,7 @@ def test_ctx_to_igc(mars_test_data, isolated_dir):
 @long_test
 @require_isis
 def test_hirise_to_igc(mars_test_data, isolated_dir):
-    if True:
+    if False:
         # While developing, skip import by using hard coded path
         fname = "/home/smyth/Local/geocal-repo/python/hirise.cub"
     else:

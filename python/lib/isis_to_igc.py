@@ -8,6 +8,7 @@ from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
 from .mars_rsm import rsm_hirise, rsm_context
+from .sqlite_shelf import write_shelve
 import json
 
 class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
@@ -19,10 +20,11 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     downstream programs to add handles for new instruments.
     '''
     def handle_h(self, h, isis_img, isis_metadata, klist, subset, glas_gfm,
-                 rsm, min_height,max_height):
+                 rsm, min_height,max_height,igc_out_fname):
         return h.isis_to_igc(isis_img, isis_metadata, klist, subset=subset,
                              glas_gfm=glas_gfm, rsm=rsm, min_height=min_height,
-                             max_height=max_height)
+                             max_height=max_height,
+                             igc_out_fname=igc_out_fname)
 
 class CtxIsisToIgc:
     def igc_to_glas(self, igc_r):
@@ -56,7 +58,7 @@ class CtxIsisToIgc:
         
     def isis_to_igc(self, isis_img, isis_metadata, klist_in,subset=None,
                     glas_gfm=False, rsm=False, min_height=-5000,
-                    max_height=-1500):
+                    max_height=-1500, igc_out_fname=None):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "CTX"):
             return (False, None)
@@ -103,6 +105,8 @@ class CtxIsisToIgc:
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
+        if(igc_out_fname is not None):
+            write_shelve(igc_out_fname, igc)
         if(glas_gfm):
             igc = self.igc_to_glas(igc)
         if(not rsm):
@@ -150,7 +154,7 @@ class HiriseIsisToIgc:
         
     def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
                     glas_gfm=False, rsm=False, min_height=-5000,
-                    max_height=-1500):
+                    max_height=-1500, igc_out_fname=None):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "HIRISE"):
             return (False, None)
@@ -195,6 +199,8 @@ class HiriseIsisToIgc:
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
+        if(igc_out_fname is not None):
+            write_shelve(igc_out_fname, igc)
         if(glas_gfm):
             igc = self.igc_to_glas(igc)
         if(not rsm):
@@ -206,7 +212,7 @@ class HiriseIsisToIgc:
 IsisToIgcHandleSet.add_default_handle(HiriseIsisToIgc())
 
 def isis_to_igc(isis_fname, subset=None, glas_gfm=False, rsm=False,
-                min_height = -5000, max_height = -1500):
+                min_height = -5000, max_height = -1500, igc_out_fname=None):
     '''Create an IGC for the given ISIS cube file. This should have
     already had spiceinit run on it (e.g., you called pds_to_isis).
 
@@ -221,11 +227,14 @@ def isis_to_igc(isis_fname, subset=None, glas_gfm=False, rsm=False,
     making the RSM depends on the specific instrument so for now this is
     how we do this. For the RSM, you can pass in the min and max height to
     use. This has no impact on the IGC.
+
+    You can optionally write the full IGC out as a shelve file by supplying
+    igc_out_fname
     '''
     f = GdalRasterImage(isis_fname)
     d = json.loads(f.metadata_list('json:ISIS3')[0])
     klist = read_kernel_from_isis(isis_fname)
     return IsisToIgcHandleSet.default_handle_set().handle(f,d,klist,
-                            subset, glas_gfm, rsm,min_height, max_height)
+                  subset, glas_gfm, rsm,min_height, max_height, igc_out_fname)
 
 __all__ = ["IsisToIgcHandleSet", "isis_to_igc"]    

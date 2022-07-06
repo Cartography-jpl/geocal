@@ -100,6 +100,8 @@ class PdsToIsisHandleSet(GeoCalPriorityHandleSet):
         return h.pds_to_isis(fin, pds_fname, isis_fname, pds_fname2 = pds_fname2)
 
 class CtxPdsToIsis:
+    '''The data format is described at https://pds-imaging.jpl.nasa.gov/data/mro/mars_reconnaissance_orbiter/ctx/mrox_0001/document/ctxsis.pdf if you
+    need information about the labels.'''
     def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2 = None):
         if(fin['INSTRUMENT_ID'] != "CTX"):
             return (False, None)
@@ -144,7 +146,7 @@ class DummyPdsToIsis:
 PdsToIsisHandleSet.add_default_handle(DummyPdsToIsis(), priority_order=1000)
 
 class HirisePdsToIsis:
-    '''Degenerate case of file already being a isis file'''
+    '''Documentation in HiRISE format is at https://hirise-pds.lpl.arizona.edu/PDS/DOCUMENT/HIRISE_EDR_SIS.PDF'''
     def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2 = None):
         if((fin['INSTRUMENT_ID'] != "HIRISE" and
             fin['INSTRUMENT_ID'] != '"HIRISE"') or

@@ -3247,6 +3247,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/image_to_image_connection_test.py \
 	@srcpythonlib@/isis_support_test.py \
 	@srcpythonlib@/isis_to_igc_test.py \
+	@srcpythonlib@/isis_igc_test.py \
 	@srcpythonlib@/job_database_test.py \
 	@srcpythonlib@/lm_optimize_test.py \
 	@srcpythonlib@/matlab_test.py @srcpythonlib@/misc_test.py \
@@ -4408,7 +4409,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/output_cache.py @srcpythonlib@/target.py \
 	@srcpythonlib@/local_target.py @srcpythonlib@/task.py \
 	@srcpythonlib@/ipython.py @srcpythonlib@/isis_support.py \
-	@srcpythonlib@/isis_to_igc.py \
+	@srcpythonlib@/isis_to_igc.py @srcpythonlib@/isis_igc.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
 	@srcpythonlib@/misc.py \
 	@srcpythonlib@/igc_collection_extension.py \

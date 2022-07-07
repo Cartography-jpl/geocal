@@ -26,8 +26,8 @@ def read_kernel_from_isis(fname, Skip_load=True):
     f = GdalRasterImage(fname)
     d = json.loads(f.metadata_list('json:ISIS3')[0])
     keylist = ['LeapSecond', 'TargetAttitudeShape', 'TargetPosition',
-               'InstrumentPointing', 'SpacecraftClock', 'InstrumentPosition',
-               'InstrumentAddendum', 'Instrument']
+               'InstrumentPointing', 'Instrument', 'SpacecraftClock',
+               'InstrumentPosition', 'InstrumentAddendum']
     kd = d['IsisCube']['Kernels']
     klist = []
     for k in keylist:

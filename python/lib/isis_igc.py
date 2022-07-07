@@ -1,6 +1,7 @@
 from geocal_swig import (ImageGroundConnection, GdalRasterImage,
                          PlanetSimpleDem, PlanetConstant, Planetocentric,
-                         PlanetFixed, Time, ImageCoordinate)
+                         PlanetFixed, Time, ImageCoordinate, GlasGfmCamera,
+                         CartesianFixedLookVector)
 import json
 import os
 from .tempdir import run_in_tempdir
@@ -8,6 +9,8 @@ from .isis_support import setup_isis
 from .pds_label import pds_label
 import subprocess
 import pandas as pd
+import csv
+import numpy as np
 
 class IsisIgc(ImageGroundConnection):
     '''Note that this is a IGC that is directly implemented by ISIS.
@@ -47,6 +50,35 @@ class IsisIgc(ImageGroundConnection):
                            self._naif_code)
 
     @run_in_tempdir()
+    def cf_look_vector_pos(self, ic):
+        setup_isis()
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/campt",
+                        f"from={self.fname}", "to=campt.csv",
+                        "type=IMAGE", f"line={str(ic.line + 0.5)}",
+                        f"sample={str(ic.sample + 0.5)}",
+                        "format=flat"],
+                       check=True, stdout=subprocess.DEVNULL)
+        t = pd.read_csv("campt.csv")
+        return PlanetFixed(t["SpacecraftPositionX"][0] * 1000,
+                           t["SpacecraftPositionY"][0] * 1000,
+                           t["SpacecraftPositionZ"][0] * 1000,
+                           self._naif_code)
+
+    @run_in_tempdir()
+    def cf_look_vector_lv(self, ic):
+        setup_isis()
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/campt",
+                        f"from={self.fname}", "to=campt.csv",
+                        "type=IMAGE", f"line={str(ic.line + 0.5)}",
+                        f"sample={str(ic.sample + 0.5)}",
+                        "format=flat"],
+                       check=True, stdout=subprocess.DEVNULL)
+        t = pd.read_csv("campt.csv")
+        return CartesianFixedLookVector(t["LookDirectionBodyFixedX"][0],
+                                        t["LookDirectionBodyFixedY"][0],
+                                        t["LookDirectionBodyFixedZ"][0])
+    
+    @run_in_tempdir()
     def image_coordinate(self, gc):
         # We ignore the gc height here. Could perhaps add some kind of check
         # for this, but we are only using this for comparison with ISIS
@@ -76,5 +108,42 @@ class IsisIgc(ImageGroundConnection):
                        check=True, stdout=subprocess.DEVNULL)
         t = pd.read_csv("campt.csv")
         return Time.parse_time(t["UTC"][0])
+
+    @run_in_tempdir()
+    def glas_cam_model(self, focal_length=0.352927):
+        '''Brute force a GLAS camera model by calculating for every
+        point in a full line.'''
+        with open("points.csv", "w") as f:
+            writer = csv.writer(f)
+            for i in range(self.number_sample):
+                writer.writerow([i+0.5,0])
+        setup_isis()
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/campt",
+                        f"from={self.fname}", "to=campt.csv",
+                        "coordtype=IMAGE", "coordlist=points.csv",
+                        "format=flat"],
+                       check=True, stdout=subprocess.DEVNULL)
+        t = pd.read_csv("campt.csv")
+        x = t["LookDirectionCameraX"][:]
+        y = t["LookDirectionCameraY"][:]
+        z = t["LookDirectionCameraZ"][:]
+        gcam = GlasGfmCamera(1,self.number_sample)
+        gcam.focal_length = focal_length
+        fa = np.empty((self.number_sample,4))
+        for smp in range(self.number_sample - 1):
+            fa[smp,0] = x[smp] / (z[smp] / gcam.focal_length)
+            fa[smp,1] = y[smp] / (z[smp] / gcam.focal_length)
+            fa[smp,2] = x[smp+1] / (z[smp+1] / gcam.focal_length)
+            fa[smp,3] = y[smp+1] / (z[smp+1] / gcam.focal_length)
+            # Extrapolated for the last entry in the field angle table    
+        smp = self.number_sample - 1
+        fa[smp,0] = x[smp] / (z[smp] / gcam.focal_length)
+        fa[smp,1] = y[smp] / (z[smp] / gcam.focal_length)
+        fa[smp,2] = fa[smp,0] + (fa[smp-1,2]-fa[smp-1,0])
+        fa[smp,3] = fa[smp,1] + (fa[smp-1,3]-fa[smp-1,1])
+        gcam.sample_number_first = 0
+        gcam.delta_sample_pair = 1
+        gcam.field_alignment = fa
+        return gcam
     
 __all__ = ["IsisIgc",]    

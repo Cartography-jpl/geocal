@@ -271,8 +271,8 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     tstart = Time.time_sclk(lbl["SpacecraftClockStartCount"], "-74999")
     # Hirise does a TDI, which means it collects a line multiple times
     # and sums it to reduce noise. We have to adjust the start times for this.
-    # Not sure of the source of this equation, I got this from the ISIS code
-    # Comes from https://hirise-pds.lpl.arizona.edu/PDS/DOCUMENT/HIRISE_EDR_SIS.PDF
+    # I got this from the ISIS code, originally 
+    # comes from https://hirise-pds.lpl.arizona.edu/PDS/DOCUMENT/HIRISE_EDR_SIS.PDF
     unbinned_rate = (74.0 + float(lbl["DeltaLineTimerCount"]) / 16) / 1e6
     tspace = unbinned_rate * float(lbl["Summing"])
     tstart -= unbinned_rate * (float(lbl["Tdi"]) / 2 - 0.5)

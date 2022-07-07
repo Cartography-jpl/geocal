@@ -176,6 +176,14 @@ class HiriseIsisToIgc:
         # resolution is "MRO", the high resolution is for NAIF ID
         # -74999. We have high resolution for HIRISE
         tstart = Time.time_sclk(idata["SpacecraftClockStartCount"], "-74999")
+        # Hirise does a TDI, which means it collects a line multiple times
+        # and sums it to reduce noise. We have to adjust the start times
+        # for this.
+        # I got this from the ISIS code, originally comes from
+        # https://hirise-pds.lpl.arizona.edu/PDS/DOCUMENT/HIRISE_EDR_SIS.PDF
+        unbinned_rate = (74.0 + float(idata["DeltaLineTimerCount"]) / 16) / 1e6
+        tstart -= unbinned_rate * (float(idata["Tdi"]) / 2 - 0.5)
+        tstart += unbinned_rate * (float(idata["Summing"]) / 2 - 0.5)
 
         if(idata["LineExposureDuration"]["unit"] != "MICROSECONDS"):
             raise RuntimeError(f"Not sure how to handle LineExposureDuration units of {idata['LineExposureDuration']['unit']}")

@@ -404,8 +404,8 @@ class AirMspiL1b1(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     def __init__(self, *args):
         """
 
-        AirMspiL1b1::AirMspiL1b1(const boost::shared_ptr< AirMspiL1b1File > &L1b1_file, int
-        Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
+        AirMspiL1b1::AirMspiL1b1(const std::string &Fname, const std::string &Swath_to_use="660-I",
+        int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
         Number_tile=4)
         Constructor. 
         """

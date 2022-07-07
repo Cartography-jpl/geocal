@@ -247,7 +247,7 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(const TimeWithDerivative &T) const
+        boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(Time T) const
 
         """
         return _orbit_quaternion_list.OrbitQuaternionList_orbit_data(self, *args)

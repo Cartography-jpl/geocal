@@ -199,9 +199,8 @@ class MapInfoImageGroundConnection(geocal_swig.image_ground_connection.ImageGrou
     def __init__(self, *args):
         """
 
-        GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
-        RasterImageMultiBand > &Img_mb, const boost::shared_ptr< Dem > &D,
-        const std::string &Title="Image")
+        GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const
+        boost::shared_ptr< Dem > &D, const std::string &Title="Image")
         Constructor. 
         """
         _map_info_image_ground_connection.MapInfoImageGroundConnection_swiginit(self, _map_info_image_ground_connection.new_MapInfoImageGroundConnection(*args))

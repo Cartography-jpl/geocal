@@ -7174,7 +7174,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_filled_image(PyObje
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7238,7 +7238,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_filled_mask(PyObjec
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7302,7 +7302,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_kernel(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7711,7 +7711,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbo
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {

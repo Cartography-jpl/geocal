@@ -201,13 +201,9 @@ class GdalMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMult
     def __init__(self, *args):
         """
 
-        GdalMultiBand::GdalMultiBand(const std::string &Fname, const std::string &Driver_name, int
-        Number_line, int Number_sample, int Number_band, int Dt, const
-        std::string &Options="", int Number_tile=4, int Tile_number_line=-1,
+        GdalMultiBand::GdalMultiBand(const std::string &Fname, int Number_tile=4, int Tile_number_line=-1,
         int Tile_number_sample=-1)
-        Create a new file.
-
-        All the arguments here are the same as for GdalRasterImage. 
+        Constructor. 
         """
         _gdal_multi_band.GdalMultiBand_swiginit(self, _gdal_multi_band.new_GdalMultiBand(*args))
 

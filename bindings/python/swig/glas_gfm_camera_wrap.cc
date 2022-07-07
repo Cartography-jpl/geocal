@@ -9979,7 +9979,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_ppoff__SWIG_0(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10125,7 +10125,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10501,7 +10501,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_field_alignment__SWIG_0(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11063,7 +11063,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11209,7 +11209,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11355,7 +11355,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11501,7 +11501,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11654,7 +11654,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block__SWIG_0(PyObject 
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[5], stride[5];
     for(int i = 0; i < 5; ++i) {
@@ -12243,18 +12243,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_GlasGfmCamera", _wrap_new_GlasGfmCamera, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GlasGfmCamera::GlasGfmCamera(const QuaternionCamera &Cam, int Band, double Delta_line, double\n"
-		"Delta_sample, const std::string &Band_type=\"N\", double\n"
-		"Band_wavelength=1.45, const Time\n"
-		"&Focal_length_time=Time::time_j2000(0))\n"
-		"It is common to create a GlasGfmCamera by fitting it to another\n"
-		"camera.\n"
+		"GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)\n"
 		"\n"
-		"This does that in one step, taking a QuaternionCamera and fitting for\n"
-		"the given Band. This version is for Frame \"F\" type sensor.\n"
-		"\n"
-		"See note in field_alignment_block about handling frame_to_sc\n"
-		"quaternion. \n"
 		""},
 	 { (char *)"GlasGfmCamera_set_number_line", _wrap_GlasGfmCamera_set_number_line, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -12435,30 +12425,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample, int\n"
-		"Band=0)\n"
-		"Populate the field_alignment, first_line_block, first_sample_block,\n"
-		"delta_line and delta_sample to match the given camera.\n"
+		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
 		"\n"
-		"This creates only one block - we currently don't support multiple\n"
-		"blocks.\n"
-		"\n"
-		"Only applicable for sensor type \"F\" and field_angle_type 0.\n"
-		"\n"
-		"You may want to call compare_camera to check how accurate the\n"
-		"approximation is.\n"
-		"\n"
-		"Note that you should be careful not to double count any frame_t\n"
-		"quaternion. If you pass that in with the Cam, then this is already\n"
-		"accounted for in the field angle map (which has the effect of the\n"
-		"quaternion embedded in it). If you want to assign the frame_to_sc to\n"
-		"the GlasGfmCamera, then you should make sure to pass a Camera with a\n"
-		"identity frame_to_sc. So a reasonable process (in python) would be\n"
-		"something like:\n"
-		"\n"
-		"q_original = cam.frame_to_sc cam.frame_to_sc =\n"
-		"Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)\n"
-		"gcam.frame_to_sc = q_original cam.frame_to_sc = q_original \n"
 		""},
 	 { (char *)"GlasGfmCamera_compare_camera", _wrap_GlasGfmCamera_compare_camera, METH_VARARGS, (char *)"\n"
 		"\n"

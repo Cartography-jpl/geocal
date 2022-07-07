@@ -12636,8 +12636,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ImageCoordinate", _wrap_new_ImageCoordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ImageCoordinate::ImageCoordinate()\n"
-		"Default constructor, line and sample aren't initialized. \n"
+		"GeoCal::ImageCoordinate::ImageCoordinate(double Line, double Sample)\n"
+		"Constructor. \n"
 		""},
 	 { (char *)"ImageCoordinate_line_set", _wrap_ImageCoordinate_line_set, METH_VARARGS, NULL},
 	 { (char *)"ImageCoordinate_line_get", (PyCFunction)_wrap_ImageCoordinate_line_get, METH_O, NULL},
@@ -12653,8 +12653,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ImageCoordinate_swiginit", ImageCoordinate_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_VicarImageCoordinate", _wrap_new_VicarImageCoordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::VicarImageCoordinate::VicarImageCoordinate()\n"
-		"Default constructor, line and sample aren't initialized. \n"
+		"GeoCal::VicarImageCoordinate::VicarImageCoordinate(double Line, double Sample)\n"
+		"Constructor. \n"
 		""},
 	 { (char *)"VicarImageCoordinate_line_set", _wrap_VicarImageCoordinate_line_set, METH_VARARGS, NULL},
 	 { (char *)"VicarImageCoordinate_line_get", (PyCFunction)_wrap_VicarImageCoordinate_line_get, METH_O, NULL},
@@ -12670,8 +12670,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"VicarImageCoordinate_swiginit", VicarImageCoordinate_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_ImageCoordinateWithDerivative", _wrap_new_ImageCoordinateWithDerivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative()\n"
-		"Default constructor, line and sample aren't initialized. \n"
+		"GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative(const AutoDerivative< double > &Line, const AutoDerivative< double >\n"
+		"&Sample)\n"
+		"Constructor. \n"
 		""},
 	 { (char *)"ImageCoordinateWithDerivative_line_set", _wrap_ImageCoordinateWithDerivative_line_set, METH_VARARGS, NULL},
 	 { (char *)"ImageCoordinateWithDerivative_line_get", (PyCFunction)_wrap_ImageCoordinateWithDerivative_line_get, METH_O, NULL},

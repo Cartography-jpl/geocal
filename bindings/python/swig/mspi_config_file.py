@@ -282,8 +282,7 @@ class MspiConfigTable(geocal_swig.generic_object.GenericObject):
     def __init__(self, Config, Table_name):
         """
 
-        MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)
-        Create a MspiConfigTable for the given table name in the given file.
+        GeoCal::MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)
 
         """
         _mspi_config_file.MspiConfigTable_swiginit(self, _mspi_config_file.new_MspiConfigTable(Config, Table_name))

@@ -11352,8 +11352,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"VicarFile_label_set", _wrap_VicarFile_label_set, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void VicarFile::label_set(const std::string &F, const std::string &Val, const std::string\n"
-		"&Property=\"\")\n"
+		"void VicarFile::label_set(const std::string &F, int Val, const std::string &Property=\"\")\n"
 		"Set the value of a label.\n"
 		"\n"
 		"If the label is already in the file, is is deleted and replaced with\n"

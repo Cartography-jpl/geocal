@@ -273,7 +273,11 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
     def fit_start(self, *args):
         """
 
-        void RsmMultiSection::fit_start(const blitz::Array< double, 2 > &Data)
+        void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,
+        double Min_height, double Max_height)
+        Fit just the low order polynomial.
+
+        This is intended for doing parallel fitting of the sections in python.
 
         """
         return _rsm_multi_section.RsmMultiSection_fit_start(self, *args)
@@ -282,8 +286,11 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
     def fit_section(self, *args):
         """
 
-        const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const blitz::Array< double, 2 > &Data)
+        const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const
+        CoordinateConverter &Cconv, double Min_height, double Max_height)
+        Fit a single segment.
 
+        This is intended for doing parallel fitting in python. 
         """
         return _rsm_multi_section.RsmMultiSection_fit_section(self, *args)
 

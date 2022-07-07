@@ -7444,7 +7444,7 @@ SWIGINTERN PyObject *_wrap_IgcMsp__v_covariance(PyObject *SWIGUNUSEDPARM(self), 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7536,7 +7536,7 @@ SWIGINTERN PyObject *_wrap_IgcMsp_joint_covariance(PyObject *SWIGUNUSEDPARM(self
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7782,7 +7782,7 @@ SWIGINTERN PyObject *_wrap_IgcMsp_sensor_velocity(PyObject *SWIGUNUSEDPARM(self)
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8120,7 +8120,7 @@ SWIGINTERN PyObject *_wrap_IgcMsp_ground_coordinate_with_cov(PyObject *SWIGUNUSE
   }
   {
     PyObject *res;
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8927,15 +8927,15 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"new_IgcMsp", _wrap_new_IgcMsp, METH_VARARGS, (char *)"\n"
 		"\n"
-		"IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem > &D, int\n"
-		"Image_index, const std::string &Plugin_name, const std::string\n"
-		"&Model_name)\n"
+		"IgcMsp::IgcMsp(const std::string &Fname, const boost::shared_ptr< Dem >\n"
+		"&D=boost::shared_ptr< Dem >(new SimpleDem()), int Image_index=0)\n"
 		"Constructor.\n"
 		"\n"
-		"This version forces the use of the given model name form the given\n"
-		"plugin. This can be useful when diagnosing problems where you expect a\n"
-		"particular plugin to handle a file, but it doesn't - or if the wrong\n"
-		"plugin is processing the file. \n"
+		"Note to use the MSP library, you should make sure the proper\n"
+		"environment variables are set. This happens in the normal GeoCal\n"
+		"setup, but the variables are MSP_DATA_DIR, MSPCCS_DATA, and\n"
+		"CSM_PLUGIN_DIR. Note the directory should end in \"/\", just as a\n"
+		"convention - so /foo/bar/plugins/. \n"
 		""},
 	 { (char *)"IgcMsp__v_covariance", (PyCFunction)_wrap_IgcMsp__v_covariance, METH_O, (char *)"\n"
 		"\n"

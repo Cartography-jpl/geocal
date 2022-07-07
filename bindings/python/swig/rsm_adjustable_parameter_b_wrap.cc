@@ -7235,7 +7235,7 @@ SWIGINTERN PyObject *_wrap_RsmBParameterDesc__v_normalization_scale(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7299,7 +7299,7 @@ SWIGINTERN PyObject *_wrap_RsmBParameterDesc__v_normalization_offset(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7404,7 +7404,7 @@ SWIGINTERN PyObject *_wrap_RsmBParameterDesc__v_row_power__SWIG_0(PyObject *SWIG
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7550,7 +7550,7 @@ SWIGINTERN PyObject *_wrap_RsmBParameterDesc__v_col_power__SWIG_0(PyObject *SWIG
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8401,13 +8401,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RsmBParameterDesc_swiginit", RsmBParameterDesc_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_RsmAdjustableParameterB", _wrap_new_RsmAdjustableParameterB, METH_VARARGS, (char *)"\n"
 		"\n"
-		"RsmAdjustableParameterB::RsmAdjustableParameterB(const ImageGroundConnection &Igc, double H_min, double H_max, const\n"
-		"RsmId &Rsm_id, const std::string &Triangulation_id=\"\")\n"
-		"Create a RsmAdjustableParameterB.\n"
+		"GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB(const std::string &Image_identifier=\"\", const std::string\n"
+		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
+		"&Triangulation_id=\"\")\n"
 		"\n"
-		"We create a LocalRcConverter that matches the given Igc, set the\n"
-		"Image_identifier and Rsm_support_data_edition to match that of the\n"
-		"given Rsm_id. \n"
 		""},
 	 { (char *)"RsmAdjustableParameterB_tre_string", (PyCFunction)_wrap_RsmAdjustableParameterB_tre_string, METH_O, (char *)"\n"
 		"\n"

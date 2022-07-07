@@ -204,8 +204,9 @@ class GdalDatum(geocal_swig.geocal_datum.Datum):
     def __init__(self, *args):
         """
 
-        GeoCal::GdalDatum::GdalDatum(const boost::shared_ptr< GdalRasterImage > &Map_file)
-
+        GeoCal::GdalDatum::GdalDatum(const std::string &Fname, int Band_id=1, int Number_tile=4, int
+        Tile_number_line=-1, int Tile_number_sample=-1)
+        Constructor. 
         """
         _gdal_datum.GdalDatum_swiginit(self, _gdal_datum.new_GdalDatum(*args))
 

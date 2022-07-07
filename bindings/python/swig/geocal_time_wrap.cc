@@ -9080,7 +9080,7 @@ SWIGINTERN PyObject *_wrap_TimeWithDerivative__v_gradient(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9647,7 +9647,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Time_time_unix", (PyCFunction)_wrap_Time_time_unix, METH_O, (char *)"\n"
 		"\n"
-		"static Time GeoCal::Time::time_unix(double unix_time)\n"
+		"static Time GeoCal::Time::time_unix(std::time_t unix_time)\n"
 		"Return time from given Unix time (epoch of 1970-01-01). \n"
 		""},
 	 { (char *)"Time_time_acs", (PyCFunction)_wrap_Time_time_acs, METH_O, (char *)"\n"
@@ -9740,7 +9740,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Time_swiginit", Time_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_TimeWithDerivative", _wrap_new_TimeWithDerivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::TimeWithDerivative::TimeWithDerivative()\n"
+		"GeoCal::TimeWithDerivative::TimeWithDerivative(const Time &T)\n"
 		"\n"
 		""},
 	 { (char *)"TimeWithDerivative_time_pgs", (PyCFunction)_wrap_TimeWithDerivative_time_pgs, METH_O, (char *)"\n"

@@ -200,14 +200,9 @@ class SubRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     def __init__(self, *args):
         """
 
-        SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, const MapInfo
-        &Mi, int boundary=0)
-        Create a subset of Raster_image that covers the corner points of the
-        given MapInfo plus a optional boundary.
-
-        Note that the area given by Mi may be larger than the area covered by
-        Raster_image. In that case, we only give the portion that falls within
-        this image. 
+        SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, int Start_line,
+        int Start_sample, int Number_line, int Number_sample)
+        Constructor. 
         """
         _sub_raster_image.SubRasterImage_swiginit(self, _sub_raster_image.new_SubRasterImage(*args))
 

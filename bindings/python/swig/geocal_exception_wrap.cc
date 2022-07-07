@@ -7503,8 +7503,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Exception", (PyCFunction)_wrap_new_Exception, METH_O, (char *)"\n"
 		"\n"
-		"GeoCal::Exception::Exception(const Exception &E)\n"
-		"Copy constructor. \n"
+		"GeoCal::Exception::Exception(const std::string &W=\"\")\n"
+		"Default constructor.\n"
+		"\n"
+		"Can give an optional string describing the error. \n"
 		""},
 	 { (char *)"Exception_what", (PyCFunction)_wrap_Exception_what, METH_O, (char *)"\n"
 		"\n"

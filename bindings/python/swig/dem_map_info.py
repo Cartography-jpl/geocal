@@ -226,8 +226,8 @@ class DemMapInfo(geocal_swig.dem.Dem):
     def height_datum(self, Gp):
         """
 
-        double DemMapInfo::height_datum(const Geodetic &Gp) const
-
+        double DemMapInfo::height_datum(const GroundCoordinate &Gp) const
+        Height relative to datum. 
         """
         return _dem_map_info.DemMapInfo_height_datum(self, Gp)
 

@@ -202,13 +202,11 @@ class IgcMultiplePass(geocal_swig.igc_collection.IgcCollection, geocal_swig.with
     boost::shared_ptr<IgcCollection> igc_pass2(new AirMspiIgcCollection
     (orb2, cam, gim, Dem, l1b1_file_name2)); IgcMultiplePass igc;
     igc.add_igc(igc_pass1); igc.add_igc(igc_pass2); igc.add_object(cam);
-    igc.add_object(gim);
-
-    The images are stacked together. So if the first IgcCollection Igc1
-    has 5 image, the second Igc2 6, the third Igc3 2 then in the
-    IgcMultiplePass image 0 is 0th image in Igc1, image 5 is the 0th image
-    in Igc2, image 12 is image 1 of Igc3. The total number of images is
-    13.
+    igc.add_object(gim); The images are stacked together. So if the first
+    IgcCollection Igc1 has 5 image, the second Igc2 6, the third Igc3 2
+    then in the IgcMultiplePass image 0 is 0th image in Igc1, image 5 is
+    the 0th image in Igc2, image 12 is image 1 of Igc3. The total number
+    of images is 13.
 
     C++ includes: igc_multiple_pass.h 
     """

@@ -6880,8 +6880,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"SpotOrbit_orbit_data", _wrap_SpotOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > SpotOrbit::orbit_data(const TimeWithDerivative &T) const\n"
-		"\n"
+		"boost::shared_ptr< OrbitData > SpotOrbit::orbit_data(Time T) const\n"
+		"Return orbit data for the given time. \n"
 		""},
 	 { (char *)"delete_SpotOrbit", (PyCFunction)_wrap_delete_SpotOrbit, METH_O, (char *)"\n"
 		"\n"

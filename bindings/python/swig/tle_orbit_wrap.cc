@@ -7271,7 +7271,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"TleOrbit_orbit_data", _wrap_TleOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::TleOrbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > TleOrbit::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"TleOrbit__v_tle", (PyCFunction)_wrap_TleOrbit__v_tle, METH_O, (char *)"\n"

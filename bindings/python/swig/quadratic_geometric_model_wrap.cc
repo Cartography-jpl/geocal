@@ -7292,7 +7292,7 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_transformation(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7356,7 +7356,7 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_inverse_transformation(PyO
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7816,12 +7816,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_QuadraticGeometricModel", _wrap_new_QuadraticGeometricModel, METH_VARARGS, (char *)"\n"
 		"\n"
-		"QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, int Min_tp_to_fit,\n"
-		"FitType ft=LINEAR, double Magnify_line=1.0, double Magnify_sample=1.0)\n"
-		"Constructor.\n"
-		"\n"
-		"This fits the set of Tp, or creates an identity transformation if Tp\n"
-		"is null. \n"
+		"QuadraticGeometricModel::QuadraticGeometricModel(FitType ft=LINEAR, double Magnify_line=1.0, double\n"
+		"Magnify_sample=1.0)\n"
+		"Constructor. This creates an identity transformation. \n"
 		""},
 	 { (char *)"QuadraticGeometricModel__v_tie_points", (PyCFunction)_wrap_QuadraticGeometricModel__v_tie_points, METH_O, (char *)"\n"
 		"\n"
@@ -7842,13 +7839,20 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"QuadraticGeometricModel__v_transformation", (PyCFunction)_wrap_QuadraticGeometricModel__v_transformation, METH_O, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation()\n"
+		"const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation() const\n"
+		"Transformation, which is the coefficients of the polynomial.\n"
 		"\n"
+		"We have\n"
+		"\n"
+		"x = trans(0)*px+trans(1)*py+trans(2)+trans(3)*px*px+\n"
+		"trans(4)*py*py+trans(5)*px*py y =\n"
+		"trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+\n"
+		"trans(10)*py*py+trans(11)*px*py \n"
 		""},
 	 { (char *)"QuadraticGeometricModel__v_inverse_transformation", (PyCFunction)_wrap_QuadraticGeometricModel__v_inverse_transformation, METH_O, (char *)"\n"
 		"\n"
-		"blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::inverse_transformation()\n"
-		"\n"
+		"const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::inverse_transformation() const\n"
+		"Inverse of transformation. \n"
 		""},
 	 { (char *)"QuadraticGeometricModel__v_magnify_line", _wrap_QuadraticGeometricModel__v_magnify_line, METH_VARARGS, (char *)"\n"
 		"\n"

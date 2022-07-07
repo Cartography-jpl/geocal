@@ -199,8 +199,8 @@ class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
     def __init__(self, *args):
         """
 
-        GeoCal::Ecr::Ecr()
-        Default constructor. 
+        GeoCal::Ecr::Ecr(double X, double Y, double Z)
+        Make an Ecr with the given position, in meters. 
         """
         _ecr.Ecr_swiginit(self, _ecr.new_Ecr(*args))
 

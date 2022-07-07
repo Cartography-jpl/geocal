@@ -7026,7 +7026,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_ccd_off__SWIG_0
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7162,7 +7162,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_ccd_cen__SWIG_0
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7298,7 +7298,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_t_off__SWIG_0(P
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7434,7 +7434,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_tinv_off__SWIG_
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7570,7 +7570,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_t_m__SWIG_0(PyO
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7706,7 +7706,7 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_tinv_m__SWIG_0(
     }
   }
   {
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7903,7 +7903,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CameraRadialDistortionAndTransform__v_ccd_cen", _wrap_CameraRadialDistortionAndTransform__v_ccd_cen, METH_VARARGS, (char *)"\n"
 		"\n"
-		"const blitz::Array<double, 1>& GeoCal::CameraRadialDistortionAndTransform::ccd_cen() const\n"
+		"void GeoCal::CameraRadialDistortionAndTransform::ccd_cen(const blitz::Array< double, 1 > &V)\n"
 		"\n"
 		""},
 	 { (char *)"CameraRadialDistortionAndTransform__v_t_off", _wrap_CameraRadialDistortionAndTransform__v_t_off, METH_VARARGS, (char *)"\n"

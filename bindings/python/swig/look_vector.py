@@ -454,8 +454,8 @@ class ScLookVector(LookVectorDouble):
     def __init__(self, *args):
         """
 
-        GeoCal::ScLookVector::ScLookVector(const boost::math::quaternion< double > &V)
-        Constructor using quaternion. 
+        GeoCal::ScLookVector::ScLookVector(double x, double y, double z)
+        Constructor. 
         """
         _look_vector.ScLookVector_swiginit(self, _look_vector.new_ScLookVector(*args))
 
@@ -509,8 +509,8 @@ class CartesianInertialLookVector(LookVectorDouble):
     def __init__(self, *args):
         """
 
-        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(const boost::math::quaternion< double > &V)
-        Constructor using quaternion. 
+        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)
+        Constructor. 
         """
         _look_vector.CartesianInertialLookVector_swiginit(self, _look_vector.new_CartesianInertialLookVector(*args))
 
@@ -563,7 +563,7 @@ class DcsLookVector(LookVectorDouble):
     def __init__(self, *args):
         """
 
-        GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)
+        GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)
         Constructor. 
         """
         _look_vector.DcsLookVector_swiginit(self, _look_vector.new_DcsLookVector(*args))

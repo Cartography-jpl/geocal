@@ -7969,8 +7969,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"VicarArgument_write_out", _wrap_VicarArgument_write_out, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void VicarArgument::write_out(const std::string &Keyword, const std::string &Val, int Max_len=250)\n"
-		"\n"
+		"void VicarArgument::write_out(const std::string &Keyword, int Val)\n"
+		"Write a value to a TCL variable. \n"
 		""},
 	 { (char *)"VicarArgument_type_string", _wrap_VicarArgument_type_string, METH_VARARGS, NULL},
 	 { (char *)"VicarArgument_type_count", _wrap_VicarArgument_type_count, METH_VARARGS, NULL},

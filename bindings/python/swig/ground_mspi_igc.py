@@ -202,9 +202,11 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
 
         GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
         double Azimuth, double Start_elevation_angle, double Rotation_rate,
-        const std::vector< Time > &Time_tag, const boost::shared_ptr<
-        QuaternionCamera > &Cam, int Band)
+        const std::vector< Time > &Time_tag, const std::string &Camera_config,
+        int Band)
+        Constructor.
 
+        The angles are in degrees, and the rate is in degress per second. 
         """
         _ground_mspi_igc.GroundMspiIgc_swiginit(self, _ground_mspi_igc.new_GroundMspiIgc(*args))
 

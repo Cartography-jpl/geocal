@@ -7505,8 +7505,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"FrameCoordinate_swiginit", FrameCoordinate_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_FrameCoordinateWithDerivative", _wrap_new_FrameCoordinateWithDerivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)\n"
-		"Create a FrameCoordinateWithDerivative with the given coordinates. \n"
+		"GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const FrameCoordinate &F)\n"
+		"Create FrameCoordinateWithDerivative from FrameCoordinate, so line and\n"
+		"sample are constants rather than having a gradient. \n"
 		""},
 	 { (char *)"FrameCoordinateWithDerivative_line_set", _wrap_FrameCoordinateWithDerivative_line_set, METH_VARARGS, NULL},
 	 { (char *)"FrameCoordinateWithDerivative_line_get", (PyCFunction)_wrap_FrameCoordinateWithDerivative_line_get, METH_O, NULL},

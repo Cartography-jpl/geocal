@@ -11605,7 +11605,7 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gcps(PyObject *SWIGUNUSEDPARM(self
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -14194,8 +14194,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_GdalRasterImage", _wrap_new_GdalRasterImage, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::GdalRasterImage::GdalRasterImage(const boost::shared_ptr< Gdal< T > > &Data)\n"
-		"Constructor. \n"
+		"GdalRasterImage::GdalRasterImage(const std::string &Fname, int Band_id=1, int Number_tile=4, bool\n"
+		"Update=false, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"Constructor to read and/or update an existing file. \n"
 		""},
 	 { (char *)"GdalRasterImage_read_all_bands", (PyCFunction)_wrap_GdalRasterImage_read_all_bands, METH_O, (char *)"\n"
 		"\n"
@@ -14337,8 +14338,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"GdalRasterImage_save_to_file", _wrap_GdalRasterImage_save_to_file, METH_VARARGS, NULL},
 	 { (char *)"GdalRasterImage_save_to_erdas", _wrap_GdalRasterImage_save_to_erdas, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GdalRasterImage::save_to_erdas(const std::string &Oname, const RasterImageMultiBand &d, int\n"
-		"Dt=GDT_Byte, int Fill_value=0)\n"
+		"void GdalRasterImage::save_to_erdas(const std::string &Oname, const std::vector< boost::shared_ptr<\n"
+		"RasterImage > > &d, int Dt=GDT_Byte, int Fill_value=0)\n"
 		"Copy the given RasterImages into a new Erdas file.\n"
 		"\n"
 		"This calculates the statistics and image pyramid needed by Erdas also.\n"

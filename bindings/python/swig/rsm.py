@@ -209,9 +209,8 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
     def __init__(self, *args):
         """
 
-        Rsm::Rsm(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<
-        CoordinateConverter > &Cconv)
-        Constructor. 
+        GeoCal::Rsm::Rsm(const boost::shared_ptr< RsmId > &Rsm_id)
+
         """
         _rsm.Rsm_swiginit(self, _rsm.new_Rsm(*args))
 

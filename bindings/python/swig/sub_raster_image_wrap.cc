@@ -7503,14 +7503,9 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_SubRasterImage", _wrap_new_SubRasterImage, METH_VARARGS, (char *)"\n"
 		"\n"
-		"SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, const MapInfo\n"
-		"&Mi, int boundary=0)\n"
-		"Create a subset of Raster_image that covers the corner points of the\n"
-		"given MapInfo plus a optional boundary.\n"
-		"\n"
-		"Note that the area given by Mi may be larger than the area covered by\n"
-		"Raster_image. In that case, we only give the portion that falls within\n"
-		"this image. \n"
+		"SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, int Start_line,\n"
+		"int Start_sample, int Number_line, int Number_sample)\n"
+		"Constructor. \n"
 		""},
 	 { (char *)"SubRasterImage__v_start_line", (PyCFunction)_wrap_SubRasterImage__v_start_line, METH_O, (char *)"\n"
 		"\n"

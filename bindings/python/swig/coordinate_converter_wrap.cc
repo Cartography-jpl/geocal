@@ -7911,11 +7911,12 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"CoordinateConverter_convert_to_coordinate", _wrap_CoordinateConverter_convert_to_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const Geodetic &Gc, double &X, double &Y, double &Z) const =0\n"
-		"Specialization that converts from Geodetic.\n"
+		"virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const GroundCoordinate &Gc, double &X, double &Y, double &Z) const =0\n"
+		"This converts from a ground coordinate to a particular coordinate\n"
+		"system.\n"
 		"\n"
-		"Because much of our data is in Geodetic coordinates this is an\n"
-		"important performance specialization. \n"
+		"The specific meaning and units of X, Y, and Z depend on which\n"
+		"coordinates system is used by a specialization of this class. \n"
 		""},
 	 { (char *)"CoordinateConverter__v_naif_code", (PyCFunction)_wrap_CoordinateConverter__v_naif_code, METH_O, (char *)"\n"
 		"\n"

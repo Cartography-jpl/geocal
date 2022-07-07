@@ -212,13 +212,13 @@ class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     def __init__(self, *args):
         """
 
-        AircraftOrbitData::AircraftOrbitData(const QuaternionOrbitData &Od, VerticalDefinition
-        V=GEODETIC_VERTICAL)
-        Convert a more general QuaternionOrbitData to a AircraftOrbitData.
+        AircraftOrbitData::AircraftOrbitData(const Time &Tm, const GroundCoordinate &Position, const Time &Tm2,
+        const GroundCoordinate &Position2, double Roll, double Pitch, double
+        Heading, VerticalDefinition V=GEODETIC_VERTICAL)
+        Often with Aircraft data we don't have a direct measure of velocity.
 
-        This is useful if you want to report things in terms of aircraft
-        heading etc., but didn't get the original navigation data in that
-        format. 
+        This calculates a simple velocity by taking a second position and a
+        different time and assuming a constant velocity between the values. 
         """
         _aircraft_orbit_data.AircraftOrbitData_swiginit(self, _aircraft_orbit_data.new_AircraftOrbitData(*args))
 

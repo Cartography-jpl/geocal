@@ -233,13 +233,8 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     def image_coordinate(self, *args):
         """
 
-        blitz::Array< double, 4 > RsmRationalPolynomial::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >
-        &Y, const blitz::Array< double, 3 > &Z) const
-        Apply the rational polynomial to the given X, Y, and Z value.
-
-        This converts a whole array of points at once. The results have the
-        first dimension of size 2, the first value is the line and the second
-        the sample. 
+        ImageCoordinate RsmRationalPolynomial::image_coordinate(double X, double Y, double Z) const
+        Apply the rational polynomial to the given X, Y, and Z value. 
         """
         return _rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate(self, *args)
 

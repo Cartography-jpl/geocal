@@ -669,7 +669,8 @@ def convert_position_and_velocity(*args):
     boost::array< AutoDerivative< double >, 3 > &Vel_ci,
     boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<
     double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3
-    > &Vel_cf)
+    > &Vel_cf, boost::math::quaternion< AutoDerivative< double > >
+    &Ci_to_cf_q)
     Convert including velocity. 
     """
     return _ground_coordinate.convert_position_and_velocity(*args)

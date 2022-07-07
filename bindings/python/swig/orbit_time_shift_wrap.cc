@@ -7050,7 +7050,7 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"OrbitTimeShift_orbit_data", _wrap_OrbitTimeShift_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"virtual boost::shared_ptr<OrbitData> GeoCal::OrbitTimeShift::orbit_data(const TimeWithDerivative &T) const\n"
+		"boost::shared_ptr< OrbitData > OrbitTimeShift::orbit_data(Time T) const\n"
 		"\n"
 		""},
 	 { (char *)"OrbitTimeShift__v_orbit_original", (PyCFunction)_wrap_OrbitTimeShift__v_orbit_original, METH_O, (char *)"\n"

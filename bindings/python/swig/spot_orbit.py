@@ -236,8 +236,8 @@ class SpotOrbit(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > SpotOrbit::orbit_data(const TimeWithDerivative &T) const
-
+        boost::shared_ptr< OrbitData > SpotOrbit::orbit_data(Time T) const
+        Return orbit data for the given time. 
         """
         return _spot_orbit.SpotOrbit_orbit_data(self, *args)
 

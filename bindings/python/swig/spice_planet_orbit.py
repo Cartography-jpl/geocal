@@ -207,6 +207,21 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
     This class can be a bit on the slow side, you may want to consider
     wrapping it with OrbitListCache to cache the orbit data calculation.
 
+    The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.
+    gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,
+    "LT").
+
+    Note that if you include the stellar correction (e.g., "LT+S") you
+    should not also include the velocity aberration correction in e.g.,
+    QuaternionOrbitData. Stellar correction gives the "apparent"
+    position, which already accounts for the aberration angle correction
+
+    Also, it is important to note that the light time calculated is to the
+    center of the Body, not the surface. If you are trying to find a
+    intercept with something near the surface this can be considerably
+    different (see sincpt_c vs spkezp_c in the SPICE documentation). So
+    generally you don't want anything other than the default "NONE".
+
     C++ includes: spice_planet_orbit.h 
     """
 
@@ -217,24 +232,16 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         """
 
         SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, int Naif_id)
-        Create an orbit that has position information for the Target_name
-        (e.g., "GLL", "MRO"), and pointing information in the
-        Spacecraft_reference_frame_name (e.g., "GLL_SCAN_PLANE",
-        "MRO_CTX").
+        &Spacecraft_reference_frame_name, const SpiceKernelList &Kernel_list,
+        int Naif_id, const std::string &Abcorr="NONE")
 
-        Note that the Target_name is of a body (e.g., something we have a spk
-        kernel for), while the Spacecraft_reference_frame_name is for a frame
-        (e.g., something we have a fk kernel for). In addition to the frame
-        definition, you'll generally need a C kernel file (ck kernel) giving
-        the orientation of the frame with the target. 
         """
         _spice_planet_orbit.SpicePlanetOrbit_swiginit(self, _spice_planet_orbit.new_SpicePlanetOrbit(*args))
 
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > SpicePlanetOrbit::orbit_data(Time T) const
+        virtual boost::shared_ptr<OrbitData> GeoCal::SpicePlanetOrbit::orbit_data(const TimeWithDerivative &T) const
 
         """
         return _spice_planet_orbit.SpicePlanetOrbit_orbit_data(self, *args)
@@ -317,6 +324,24 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         return self._v_spacecraft_reference_frame_name()
 
 
+    def _v_aberration_correction(self, *args):
+        """
+
+        void GeoCal::SpicePlanetOrbit::aberration_correction(const std::string &Abcorr)
+
+        """
+        return _spice_planet_orbit.SpicePlanetOrbit__v_aberration_correction(self, *args)
+
+
+    @property
+    def aberration_correction(self):
+        return self._v_aberration_correction()
+
+    @aberration_correction.setter
+    def aberration_correction(self, value):
+      self._v_aberration_correction(value)
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -328,6 +353,7 @@ SpicePlanetOrbit._v_kernel_list = new_instancemethod(_spice_planet_orbit.SpicePl
 SpicePlanetOrbit._v_naif_id = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_naif_id, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_target_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_target_name, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_spacecraft_reference_frame_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_spacecraft_reference_frame_name, None, SpicePlanetOrbit)
+SpicePlanetOrbit._v_aberration_correction = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_aberration_correction, None, SpicePlanetOrbit)
 SpicePlanetOrbit_swigregister = _spice_planet_orbit.SpicePlanetOrbit_swigregister
 SpicePlanetOrbit_swigregister(SpicePlanetOrbit)
 

@@ -406,26 +406,43 @@ void SpiceHelper::sub_body_point_calc(const std::string& Body,
 /// fixed coordinates for the given Body_id, and the given Time. The
 /// Target name can be anything spice recognizes.
 ///
-/// Note we don't handle light travel time yet, or aberration. It
-/// isn't clear if we want to or not.
+/// The Abcorr should be any of the strings spkezp
+/// (https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html)
+/// accepts (e.g., "LT").
+///
+/// Note that if you include the stellar correction (e.g., "LT+S") you
+/// should *not* also include the velocity aberration correction in
+/// e.g., QuaternionOrbitData. Stellar correction gives the "apparent"
+/// position, which already accounts for the aberration angle
+/// correction.
+///
+/// Also, it is important to note that the light time calculated is
+/// to the center of the Body, not the surface. If you are trying to
+/// find a intercept with something near the surface this can be
+/// considerably different (see sincpt_c vs spkezp_c in the SPICE
+/// documentation). So generally you don't want anything other than
+/// the default "NONE".
 //-----------------------------------------------------------------------
 
 void SpiceHelper::state_vector
 (int Body_id, const std::string& Target_name,
  const Time& T, boost::array<double, 3>& Pos,
- boost::array<double, 3>& Vel)
+ boost::array<double, 3>& Vel,
+ const std::string& Abcorr)
 {
 #ifdef HAVE_SPICE
   spice_setup();
   double state[6], lt;
   spkezr_c(Target_name.c_str(), T.et(), 
-	   fixed_frame_name(Body_id).c_str(), "NONE", 
+	   fixed_frame_name(Body_id).c_str(), Abcorr.c_str(), 
 	   body_name(Body_id).c_str(), state, &lt);
   spice_error_check();
   for(int i = 0; i < 3; ++i) {
     Pos[i] = state[i] * 1000.0;
     Vel[i] = state[i + 3] * 1000.0;
   }
+  if(false)
+    std::cerr << "Lt: " << lt << "\n";
 #else
   throw SpiceNotAvailableException();
 #endif

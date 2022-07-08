@@ -14,15 +14,15 @@ class SpicePlanetOrbit : public Orbit {
 public:
   SpicePlanetOrbit(const std::string& Target_name, 
 		   const std::string& Spacecraft_reference_frame_name,
-		   int Naif_id);
+		   int Naif_id, const std::string& Abcorr = "NONE");
   SpicePlanetOrbit(const std::string& Target_name, 
 		   const std::string& Spacecraft_reference_frame_name,
 		   const std::vector<std::string>& Kernel_list,
-		   int Naif_id);
+		   int Naif_id, const std::string& Abcorr = "NONE");
   SpicePlanetOrbit(const std::string& Target_name, 
 		   const std::string& Spacecraft_reference_frame_name,
 		   const SpiceKernelList& Kernel_list,
-		   int Naif_id);
+		   int Naif_id, const std::string& Abcorr = "NONE");
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const;
@@ -32,6 +32,7 @@ public:
   %python_attribute(naif_id, int);
   %python_attribute(target_name, std::string);
   %python_attribute(spacecraft_reference_frame_name, std::string);
+  %python_attribute_with_set(aberration_correction, std::string);
   %pickle_serialization();
 };
 }

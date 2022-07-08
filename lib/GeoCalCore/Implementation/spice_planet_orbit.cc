@@ -16,6 +16,10 @@ void SpicePlanetOrbit::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(spacecraft_reference_frame_name)
     & GEOCAL_NVP_(kernel_list)
     & GEOCAL_NVP_(naif_id);
+  // Older version didn't have abcorr_, it used the default
+  // value of true for this.
+  if(version > 0)
+    ar & GEOCAL_NVP_(abcorr);
 }
 
 GEOCAL_IMPLEMENT(SpicePlanetOrbit);
@@ -37,10 +41,11 @@ GEOCAL_IMPLEMENT(SpicePlanetOrbit);
 SpicePlanetOrbit::SpicePlanetOrbit
 (const std::string& Target_name, 
  const std::string& Spacecraft_reference_frame_name,
- int Naif_id)
+ int Naif_id, const std::string& Abcorr)
   : target_name_(Target_name),
     spacecraft_reference_frame_name_(Spacecraft_reference_frame_name),
-    naif_id_(Naif_id)
+    naif_id_(Naif_id),
+    abcorr_(Abcorr)
 {
 }
 
@@ -70,11 +75,12 @@ SpicePlanetOrbit::SpicePlanetOrbit
 (const std::string& Target_name, 
  const std::string& Spacecraft_reference_frame_name,
  const std::vector<std::string>& Kernel_list,
- int Naif_id)
+ int Naif_id, const std::string& Abcorr)
   : target_name_(Target_name),
     spacecraft_reference_frame_name_(Spacecraft_reference_frame_name),
     kernel_list_(Kernel_list),
-    naif_id_(Naif_id)
+    naif_id_(Naif_id),
+    abcorr_(Abcorr)
 {
 }
 
@@ -82,11 +88,12 @@ SpicePlanetOrbit::SpicePlanetOrbit
 (const std::string& Target_name, 
  const std::string& Spacecraft_reference_frame_name,
  const SpiceKernelList& Kernel_list,
- int Naif_id)
+ int Naif_id, const std::string& Abcorr)
   : target_name_(Target_name),
     spacecraft_reference_frame_name_(Spacecraft_reference_frame_name),
     kernel_list_(Kernel_list),
-    naif_id_(Naif_id)
+    naif_id_(Naif_id),
+    abcorr_(Abcorr)
 {
 }
 
@@ -95,7 +102,7 @@ boost::shared_ptr<OrbitData> SpicePlanetOrbit::orbit_data(Time T) const
 {
   kernel_list_.load_kernel();
   return PlanetFixed::orbit_data(target_name_, spacecraft_reference_frame_name_,
-				 T, naif_id_);
+				 T, naif_id_, abcorr_);
 }
 
 // Print to stream
@@ -105,7 +112,8 @@ void SpicePlanetOrbit::print(std::ostream& Os) const
      << "  Target Name:                " << target_name_ << "\n"
      << "  Spacecraft Reference Frame: " << spacecraft_reference_frame_name_
      << "\n"
-     << "  Body:                       " << PlanetConstant::name(naif_id_);
+     << "  Body:                       " << PlanetConstant::name(naif_id_)
+     << "  Aberration correction:      " << abcorr_ << "\n";
 }
 
 

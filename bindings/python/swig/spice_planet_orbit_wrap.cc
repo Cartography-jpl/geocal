@@ -7027,6 +7027,83 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_0(PyObject *SWIGUNUSEDPARM
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
   int arg3 ;
+  std::string *arg4 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  GeoCal::SpicePlanetOrbit *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SpicePlanetOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SpicePlanetOrbit" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_SpicePlanetOrbit" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_SpicePlanetOrbit" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,arg3,(std::string const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SpicePlanetOrbit > *smartresult = result ? new boost::shared_ptr<  GeoCal::SpicePlanetOrbit >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  int arg3 ;
   int res1 = SWIG_OLDOBJ ;
   int res2 = SWIG_OLDOBJ ;
   int val3 ;
@@ -7084,7 +7161,99 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  std::vector< std::string,std::allocator< std::string > > *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  GeoCal::SpicePlanetOrbit *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SpicePlanetOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SpicePlanetOrbit" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::vector< std::string,std::allocator< std::string > > *ptr = (std::vector< std::string,std::allocator< std::string > > *)0;
+    res3 = swig::asptr(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_SpicePlanetOrbit" "', argument " "3"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "3"" of type '" "std::vector< std::string,std::allocator< std::string > > const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SpicePlanetOrbit" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_SpicePlanetOrbit" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3,arg4,(std::string const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SpicePlanetOrbit > *smartresult = result ? new boost::shared_ptr<  GeoCal::SpicePlanetOrbit >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7161,7 +7330,113 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  GeoCal::SpiceKernelList *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::SpiceKernelList const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  GeoCal::SpicePlanetOrbit *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_SpicePlanetOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SpicePlanetOrbit" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::SpiceKernelList *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__SpiceKernelList,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_SpicePlanetOrbit" "', argument " "3"" of type '" "GeoCal::SpiceKernelList const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "3"" of type '" "GeoCal::SpiceKernelList const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp3);
+        arg3 = const_cast< GeoCal::SpiceKernelList * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::SpiceKernelList * >(reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKernelList > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_SpicePlanetOrbit" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_SpicePlanetOrbit" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_SpicePlanetOrbit" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::SpiceKernelList const &)*arg3,arg4,(std::string const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SpicePlanetOrbit > *smartresult = result ? new boost::shared_ptr<  GeoCal::SpicePlanetOrbit >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7254,14 +7529,14 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[5] = {
+  PyObject *argv[6] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SpicePlanetOrbit",0,4,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_SpicePlanetOrbit",0,5,argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
-    return _wrap_new_SpicePlanetOrbit__SWIG_0(self, argc, argv);
+    return _wrap_new_SpicePlanetOrbit__SWIG_1(self, argc, argv);
   }
   if (argc == 4) {
     int _v = 0;
@@ -7270,19 +7545,61 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit(PyObject *self, PyObject *args) 
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_2;
-    return _wrap_new_SpicePlanetOrbit__SWIG_2(self, argc, argv);
+    {
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_2;
+    return _wrap_new_SpicePlanetOrbit__SWIG_5(self, argc, argv);
   }
 check_2:
   
   if (argc == 4) {
-    return _wrap_new_SpicePlanetOrbit__SWIG_1(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_3;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_3;
+    return _wrap_new_SpicePlanetOrbit__SWIG_0(self, argc, argv);
+  }
+check_3:
+  
+  if (argc == 4) {
+    return _wrap_new_SpicePlanetOrbit__SWIG_3(self, argc, argv);
+  }
+  if (argc == 5) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_5;
+    return _wrap_new_SpicePlanetOrbit__SWIG_4(self, argc, argv);
+  }
+check_5:
+  
+  if (argc == 5) {
+    return _wrap_new_SpicePlanetOrbit__SWIG_2(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_SpicePlanetOrbit'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpicePlanetOrbit::SpicePlanetOrbit(std::string const &,std::string const &,int,std::string const &)\n"
     "    GeoCal::SpicePlanetOrbit::SpicePlanetOrbit(std::string const &,std::string const &,int)\n"
+    "    GeoCal::SpicePlanetOrbit::SpicePlanetOrbit(std::string const &,std::string const &,std::vector< std::string,std::allocator< std::string > > const &,int,std::string const &)\n"
     "    GeoCal::SpicePlanetOrbit::SpicePlanetOrbit(std::string const &,std::string const &,std::vector< std::string,std::allocator< std::string > > const &,int)\n"
+    "    GeoCal::SpicePlanetOrbit::SpicePlanetOrbit(std::string const &,std::string const &,GeoCal::SpiceKernelList const &,int,std::string const &)\n"
     "    GeoCal::SpicePlanetOrbit::SpicePlanetOrbit(std::string const &,std::string const &,GeoCal::SpiceKernelList const &,int)\n");
   return 0;
 }
@@ -7766,6 +8083,126 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_aberration_correction__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > *smartarg1 = 0 ;
+  std::string result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpicePlanetOrbit__v_aberration_correction" "', argument " "1"" of type '" "GeoCal::SpicePlanetOrbit const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::SpicePlanetOrbit const *)arg1)->aberration_correction();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_aberration_correction__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpicePlanetOrbit__v_aberration_correction" "', argument " "1"" of type '" "GeoCal::SpicePlanetOrbit *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::SpicePlanetOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpicePlanetOrbit__v_aberration_correction" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit__v_aberration_correction" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      (arg1)->aberration_correction((std::string const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_aberration_correction(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SpicePlanetOrbit__v_aberration_correction",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_SpicePlanetOrbit__v_aberration_correction__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_SpicePlanetOrbit__v_aberration_correction__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpicePlanetOrbit__v_aberration_correction'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpicePlanetOrbit::aberration_correction() const\n"
+    "    GeoCal::SpicePlanetOrbit::aberration_correction(std::string const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_SpicePlanetOrbit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
@@ -7842,21 +8279,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_SpicePlanetOrbit", _wrap_new_SpicePlanetOrbit, METH_VARARGS, (char *)"\n"
 		"\n"
 		"SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string\n"
-		"&Spacecraft_reference_frame_name, int Naif_id)\n"
-		"Create an orbit that has position information for the Target_name\n"
-		"(e.g., \"GLL\", \"MRO\"), and pointing information in the\n"
-		"Spacecraft_reference_frame_name (e.g., \"GLL_SCAN_PLANE\",\n"
-		"\"MRO_CTX\").\n"
+		"&Spacecraft_reference_frame_name, const SpiceKernelList &Kernel_list,\n"
+		"int Naif_id, const std::string &Abcorr=\"NONE\")\n"
 		"\n"
-		"Note that the Target_name is of a body (e.g., something we have a spk\n"
-		"kernel for), while the Spacecraft_reference_frame_name is for a frame\n"
-		"(e.g., something we have a fk kernel for). In addition to the frame\n"
-		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
-		"the orientation of the frame with the target. \n"
 		""},
 	 { (char *)"SpicePlanetOrbit_orbit_data", _wrap_SpicePlanetOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > SpicePlanetOrbit::orbit_data(Time T) const\n"
+		"virtual boost::shared_ptr<OrbitData> GeoCal::SpicePlanetOrbit::orbit_data(const TimeWithDerivative &T) const\n"
 		"\n"
 		""},
 	 { (char *)"SpicePlanetOrbit_set_min_time", _wrap_SpicePlanetOrbit_set_min_time, METH_VARARGS, (char *)"\n"
@@ -7891,6 +8320,11 @@ static PyMethodDef SwigMethods[] = {
 		"const std::string& GeoCal::SpicePlanetOrbit::spacecraft_reference_frame_name() const\n"
 		"Name of spacecraft reference frame (e.g., \"GLL_SCAN_PLANE\",\n"
 		"\"MRO_CTX\") \n"
+		""},
+	 { (char *)"SpicePlanetOrbit__v_aberration_correction", _wrap_SpicePlanetOrbit__v_aberration_correction, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::SpicePlanetOrbit::aberration_correction(const std::string &Abcorr)\n"
+		"\n"
 		""},
 	 { (char *)"delete_SpicePlanetOrbit", (PyCFunction)_wrap_delete_SpicePlanetOrbit, METH_O, (char *)"\n"
 		"\n"

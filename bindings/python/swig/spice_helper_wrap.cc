@@ -7150,7 +7150,7 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_kernel_data_array_double(PyObject *SWIGUN
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7589,7 +7589,116 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  std::string *arg2 = 0 ;
+  GeoCal::Time *arg3 = 0 ;
+  boost::array< double,3 > *arg4 = 0 ;
+  boost::array< double,3 > *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  void *argp5 = 0 ;
+  int res5 = 0 ;
+  int res6 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "SpiceHelper_state_vector" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpiceHelper_state_vector" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SpiceHelper_state_vector" "', argument " "3"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  res4 = SWIG_ConvertPtr(swig_obj[3], &argp4, SWIGTYPE_p_boost__arrayT_double_3_t,  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "SpiceHelper_state_vector" "', argument " "4"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  if (!argp4) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "4"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  arg4 = reinterpret_cast< boost::array< double,3 > * >(argp4);
+  res5 = SWIG_ConvertPtr(swig_obj[4], &argp5, SWIGTYPE_p_boost__arrayT_double_3_t,  0 );
+  if (!SWIG_IsOK(res5)) {
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "SpiceHelper_state_vector" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  if (!argp5) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "5"" of type '" "boost::array< double,3 > &""'"); 
+  }
+  arg5 = reinterpret_cast< boost::array< double,3 > * >(argp5);
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[5], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "SpiceHelper_state_vector" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpiceHelper_state_vector" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    try {
+      GeoCal::SpiceHelper::state_vector(arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,*arg4,*arg5,(std::string const &)*arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   int arg1 ;
   std::string *arg2 = 0 ;
@@ -7606,9 +7715,8 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector(PyObject *SWIGUNUSEDPARM(sel
   int res4 = 0 ;
   void *argp5 = 0 ;
   int res5 = 0 ;
-  PyObject *swig_obj[5] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"SpiceHelper_state_vector",5,5,swig_obj)) SWIG_fail;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(swig_obj[0], &val1);
   if (!SWIG_IsOK(ecode1)) {
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "SpiceHelper_state_vector" "', argument " "1"" of type '" "int""'");
@@ -7681,6 +7789,30 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector(PyObject *SWIGUNUSEDPARM(sel
 fail:
   if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[7] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SpiceHelper_state_vector",0,6,argv))) SWIG_fail;
+  --argc;
+  if (argc == 5) {
+    return _wrap_SpiceHelper_state_vector__SWIG_1(self, argc, argv);
+  }
+  if (argc == 6) {
+    return _wrap_SpiceHelper_state_vector__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpiceHelper_state_vector'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpiceHelper::state_vector(int,std::string const &,GeoCal::Time const &,boost::array< double,3 > &,boost::array< double,3 > &,std::string const &)\n"
+    "    GeoCal::SpiceHelper::state_vector(int,std::string const &,GeoCal::Time const &,boost::array< double,3 > &,boost::array< double,3 > &)\n");
+  return 0;
 }
 
 
@@ -8102,14 +8234,27 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SpiceHelper_state_vector", _wrap_SpiceHelper_state_vector, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,\n"
-		"boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)\n"
+		"boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel, const\n"
+		"std::string &Abcorr=\"NONE\")\n"
 		"Get the state vector (position and velocity, in meters), in the fixed\n"
 		"coordinates for the given Body_id, and the given Time.\n"
 		"\n"
 		"The Target name can be anything spice recognizes.\n"
 		"\n"
-		"Note we don't handle light travel time yet, or aberration. It isn't\n"
-		"clear if we want to or not. \n"
+		"The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.\n"
+		"gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,\n"
+		"\"LT\").\n"
+		"\n"
+		"Note that if you include the stellar correction (e.g., \"LT+S\") you\n"
+		"should not also include the velocity aberration correction in e.g.,\n"
+		"QuaternionOrbitData. Stellar correction gives the \"apparent\"\n"
+		"position, which already accounts for the aberration angle correction.\n"
+		"\n"
+		"Also, it is important to note that the light time calculated is to the\n"
+		"center of the Body, not the surface. If you are trying to find a\n"
+		"intercept with something near the surface this can be considerably\n"
+		"different (see sincpt_c vs spkezp_c in the SPICE documentation). So\n"
+		"generally you don't want anything other than the default \"NONE\". \n"
 		""},
 	 { (char *)"SpiceHelper_boresight_and_footprint", _wrap_SpiceHelper_boresight_and_footprint, METH_VARARGS, (char *)"\n"
 		"\n"

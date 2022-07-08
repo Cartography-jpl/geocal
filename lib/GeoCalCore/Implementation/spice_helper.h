@@ -116,7 +116,8 @@ public:
 				  boost::array<double, 3>& pout2);
   static void state_vector(int Body_id, const std::string& Target_name,
 			   const Time& T, boost::array<double, 3>& Pos,
-			   boost::array<double, 3>& Vel);
+			   boost::array<double, 3>& Vel,
+			   const std::string& Abcorr = "NONE");
   static std::vector<boost::shared_ptr<GroundCoordinate> >
   boresight_and_footprint(const Time& T, int Body_id,
 			  const std::string& Satellite_name,

@@ -384,20 +384,33 @@ class SpiceHelper(object):
 
     conversion_quaternion = staticmethod(conversion_quaternion)
 
-    def state_vector(Body_id, Target_name, T, arg4, arg5):
+    def state_vector(*args):
         """
 
         void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,
-        boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)
+        boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel, const
+        std::string &Abcorr="NONE")
         Get the state vector (position and velocity, in meters), in the fixed
         coordinates for the given Body_id, and the given Time.
 
         The Target name can be anything spice recognizes.
 
-        Note we don't handle light travel time yet, or aberration. It isn't
-        clear if we want to or not. 
+        The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.
+        gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,
+        "LT").
+
+        Note that if you include the stellar correction (e.g., "LT+S") you
+        should not also include the velocity aberration correction in e.g.,
+        QuaternionOrbitData. Stellar correction gives the "apparent"
+        position, which already accounts for the aberration angle correction.
+
+        Also, it is important to note that the light time calculated is to the
+        center of the Body, not the surface. If you are trying to find a
+        intercept with something near the surface this can be considerably
+        different (see sincpt_c vs spkezp_c in the SPICE documentation). So
+        generally you don't want anything other than the default "NONE". 
         """
-        return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg4, arg5)
+        return _spice_helper.SpiceHelper_state_vector(*args)
 
     state_vector = staticmethod(state_vector)
 
@@ -591,20 +604,33 @@ def SpiceHelper_conversion_quaternion(From, To, T):
     """
     return _spice_helper.SpiceHelper_conversion_quaternion(From, To, T)
 
-def SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6):
+def SpiceHelper_state_vector(*args):
     """
 
     void SpiceHelper::state_vector(int Body_id, const std::string &Target_name, const Time &T,
-    boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel)
+    boost::array< double, 3 > &Pos, boost::array< double, 3 > &Vel, const
+    std::string &Abcorr="NONE")
     Get the state vector (position and velocity, in meters), in the fixed
     coordinates for the given Body_id, and the given Time.
 
     The Target name can be anything spice recognizes.
 
-    Note we don't handle light travel time yet, or aberration. It isn't
-    clear if we want to or not. 
+    The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.
+    gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,
+    "LT").
+
+    Note that if you include the stellar correction (e.g., "LT+S") you
+    should not also include the velocity aberration correction in e.g.,
+    QuaternionOrbitData. Stellar correction gives the "apparent"
+    position, which already accounts for the aberration angle correction.
+
+    Also, it is important to note that the light time calculated is to the
+    center of the Body, not the surface. If you are trying to find a
+    intercept with something near the surface this can be considerably
+    different (see sincpt_c vs spkezp_c in the SPICE documentation). So
+    generally you don't want anything other than the default "NONE". 
     """
-    return _spice_helper.SpiceHelper_state_vector(Body_id, Target_name, T, arg5, arg6)
+    return _spice_helper.SpiceHelper_state_vector(*args)
 
 def SpiceHelper_boresight_and_footprint(*args):
     """

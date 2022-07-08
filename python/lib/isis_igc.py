@@ -21,7 +21,19 @@ class IsisIgc(ImageGroundConnection):
     See the routine isis_to_igc, which creates a ImageGroundConnection based
     on ISIS data. The intent is that those IGC will give a much more
     efficient calculation then going through campt, but this allows us
-    to compare the 2.'''
+    to compare the 2.
+
+    Note that ISIS uses LT+S for the position to account for light transfer
+    time and velocity aberration. This is different than our IGCs, so this
+    will disagree. But the final locations on the ground should end up
+    being the same.
+
+    IMPORTANT - Note that the use of LT+S is *actually* wrong. The light
+    time calculated by the spice routine spkezr_c is to the center of the body
+    (e.g., to mars center). This is very different than the light time
+    to the surface (see sincpt_c), which for mars data is much shorter.
+    This leads to a multiple pixel error in ISIS.
+    '''
     def __init__(self, isis_fname):
         self.fname = os.path.abspath(isis_fname)
         self.f = GdalRasterImage(self.fname)
@@ -51,6 +63,10 @@ class IsisIgc(ImageGroundConnection):
 
     @run_in_tempdir()
     def cf_look_vector_pos(self, ic):
+        '''Note that ISIS use LT+S, which means that this position is
+        the *apparent* position as seen from the ground, including
+        aberration. This will be different than what we have in our
+        IGC.'''
         setup_isis()
         subprocess.run([f"{os.environ['ISISROOT']}/bin/campt",
                         f"from={self.fname}", "to=campt.csv",
@@ -66,6 +82,10 @@ class IsisIgc(ImageGroundConnection):
 
     @run_in_tempdir()
     def cf_look_vector_lv(self, ic):
+        '''Note that ISIS use LT+S, which means that its look vector
+        (correctly) does not include a velocity aberration correction. So
+        In general this won't agree with our IGC, but the points on the
+        ground should end up in the same place.'''
         setup_isis()
         subprocess.run([f"{os.environ['ISISROOT']}/bin/campt",
                         f"from={self.fname}", "to=campt.csv",
@@ -110,7 +130,7 @@ class IsisIgc(ImageGroundConnection):
         return Time.parse_time(t["UTC"][0])
 
     @run_in_tempdir()
-    def glas_cam_model(self, focal_length=0.352927):
+    def glas_cam_model(self, focal_length):
         '''Brute force a GLAS camera model by calculating for every
         point in a full line.'''
         with open("points.csv", "w") as f:
@@ -128,7 +148,9 @@ class IsisIgc(ImageGroundConnection):
         y = t["LookDirectionCameraY"][:]
         z = t["LookDirectionCameraZ"][:]
         gcam = GlasGfmCamera(1,self.number_sample)
-        gcam.focal_length = focal_length
+        # Glas focal length is in meters, while
+        # input is in millimeters
+        gcam.focal_length = focal_length * 1e-3
         fa = np.empty((self.number_sample,4))
         for smp in range(self.number_sample - 1):
             fa[smp,0] = x[smp] / (z[smp] / gcam.focal_length)

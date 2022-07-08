@@ -93,7 +93,7 @@ def ctx_camera():
     nsamp = SpiceHelper.kernel_data_double("INS-74021_PIXEL_SAMPLES")
     
     principal_point = FrameCoordinate(\
-        SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_LINE"),
+        SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_LINE") - 0.5,
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_SAMPLE") - 0.5)
     od_k = SpiceHelper.kernel_data_array_double("INS-74021_OD_K");
     ctx_cam = CameraRadialDistortion(Quaternion_double(1,0,0,0), od_k,

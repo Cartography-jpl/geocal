@@ -360,11 +360,12 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     target_position = staticmethod(target_position)
 
-    def orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code):
+    def orbit_data(*args):
         """
 
         boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, const Time &T, int Naif_code)
+        &Spacecraft_reference_frame_name, const Time &T, int Naif_code, const
+        std::string &Abcorr="NONE")
         Return orbit data for the given target and spacecraft reference frame.
 
         The target is the name of the satellite used by spice (e.g, "GLL",
@@ -378,9 +379,24 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
         kernel for), while the Spacecraft_reference_frame_name is for a frame
         (e.g., something we have a fk kernel for). In addition to the frame
         definition, you'll generally need a C kernel file (ck kernel) giving
-        the orientation of the frame with the target. 
+        the orientation of the frame with the target.
+
+        The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.
+        gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,
+        "LT").
+
+        Note that if you include the stellar correction (e.g., "LT+S") you
+        should not also include the velocity aberration correction in e.g.,
+        QuaternionOrbitData. Stellar correction gives the "apparent"
+        position, which already accounts for the aberration angle correction
+
+        Also, it is important to note that the light time calculated is to the
+        center of the Body, not the surface. If you are trying to find a
+        intercept with something near the surface this can be considerably
+        different (see sincpt_c vs spkezp_c in the SPICE documentation). So
+        generally you don't want anything other than the default "NONE". 
         """
-        return _planet_coordinate.PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code)
+        return _planet_coordinate.PlanetFixed_orbit_data(*args)
 
     orbit_data = staticmethod(orbit_data)
 
@@ -416,11 +432,12 @@ def PlanetFixed_target_position(Target_name, T, Naif_code):
     """
     return _planet_coordinate.PlanetFixed_target_position(Target_name, T, Naif_code)
 
-def PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code):
+def PlanetFixed_orbit_data(*args):
     """
 
     boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string
-    &Spacecraft_reference_frame_name, const Time &T, int Naif_code)
+    &Spacecraft_reference_frame_name, const Time &T, int Naif_code, const
+    std::string &Abcorr="NONE")
     Return orbit data for the given target and spacecraft reference frame.
 
     The target is the name of the satellite used by spice (e.g, "GLL",
@@ -434,9 +451,24 @@ def PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif
     kernel for), while the Spacecraft_reference_frame_name is for a frame
     (e.g., something we have a fk kernel for). In addition to the frame
     definition, you'll generally need a C kernel file (ck kernel) giving
-    the orientation of the frame with the target. 
+    the orientation of the frame with the target.
+
+    The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.
+    gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,
+    "LT").
+
+    Note that if you include the stellar correction (e.g., "LT+S") you
+    should not also include the velocity aberration correction in e.g.,
+    QuaternionOrbitData. Stellar correction gives the "apparent"
+    position, which already accounts for the aberration angle correction
+
+    Also, it is important to note that the light time calculated is to the
+    center of the Body, not the surface. If you are trying to find a
+    intercept with something near the surface this can be considerably
+    different (see sincpt_c vs spkezp_c in the SPICE documentation). So
+    generally you don't want anything other than the default "NONE". 
     """
-    return _planet_coordinate.PlanetFixed_orbit_data(Target_name, Spacecraft_reference_frame_name, T, Naif_code)
+    return _planet_coordinate.PlanetFixed_orbit_data(*args)
 
 class Planetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     """
@@ -519,8 +551,8 @@ class PlanetInertial(geocal_swig.ground_coordinate.CartesianInertial):
     def __init__(self, *args):
         """
 
-        GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)
-        Default constructor, doesn't initialize position. 
+        GeoCal::PlanetInertial::PlanetInertial(const boost::array< double, 3 > &Pos, int Naif_code)
+        Create an PlanetInertial with the given position in meters. 
         """
         _planet_coordinate.PlanetInertial_swiginit(self, _planet_coordinate.new_PlanetInertial(*args))
 

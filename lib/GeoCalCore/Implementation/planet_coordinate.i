@@ -54,7 +54,8 @@ public:
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T,
-   int Naif_code);
+   int Naif_code,
+   const std::string& Abcorr = "NONE");
   virtual int naif_code() const;
   %python_attribute(planet_radius, double);
   %pickle_serialization();

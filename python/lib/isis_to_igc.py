@@ -3,7 +3,7 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          PlanetConstant, PlanetSimpleDem, OrbitListCache,
                          Ipi, IpiImageGroundConnection, Time,
                          PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
-                         ScaleImage)
+                         ScaleImage, NoVelocityAberration)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
@@ -78,6 +78,13 @@ class CtxIsisToIgc:
                                  subset[2], subset[3])
         else:
             img = isis_img
+        # Note IsisIgc uses LT+S. this is actually *wrong*, see the
+        # description of that in IsisIgc. We have this code in place
+        # if we want to duplicate IsisIgc (e.g., make sure everything else
+        # agrees)
+        #orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
+        #                       PlanetConstant.MARS_NAIF_CODE,
+        #                       "LT+S")
         orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
                                PlanetConstant.MARS_NAIF_CODE)
         tstart = Time.time_sclk(idata["SpacecraftClockCount"], "MRO")
@@ -105,6 +112,8 @@ class CtxIsisToIgc:
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
+        # Needed if we turn on LT+S above
+        #igc.velocity_aberration = NoVelocityAberration()
         if(igc_out_fname is not None):
             write_shelve(igc_out_fname, igc)
         if(glas_gfm):

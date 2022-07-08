@@ -169,7 +169,7 @@ public:
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T,
-   int Naif_code);
+   int Naif_code, const std::string& Abcorr = "NONE");
 private:
 //-----------------------------------------------------------------------
 /// Radius of planet in meters at given Planetocentric Latitude (in

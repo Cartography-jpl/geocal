@@ -7662,7 +7662,112 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  std::string *arg2 = 0 ;
+  GeoCal::Time *arg3 = 0 ;
+  int arg4 ;
+  std::string *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int res2 = SWIG_OLDOBJ ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared3 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  boost::shared_ptr< GeoCal::QuaternionOrbitData > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "PlanetFixed_orbit_data" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PlanetFixed_orbit_data" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "PlanetFixed_orbit_data" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PlanetFixed_orbit_data" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "PlanetFixed_orbit_data" "', argument " "3"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PlanetFixed_orbit_data" "', argument " "3"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3);
+        arg3 = const_cast< GeoCal::Time * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp3)->get());
+      }
+    }
+  }
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "PlanetFixed_orbit_data" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "PlanetFixed_orbit_data" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "PlanetFixed_orbit_data" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    try {
+      result = GeoCal::PlanetFixed::orbit_data((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,arg4,(std::string const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -7675,10 +7780,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data(PyObject *SWIGUNUSEDPARM(self)
   boost::shared_ptr< GeoCal::Time const > tempshared3 ;
   int val4 ;
   int ecode4 = 0 ;
-  PyObject *swig_obj[4] ;
   boost::shared_ptr< GeoCal::QuaternionOrbitData > result;
   
-  if (!SWIG_Python_UnpackTuple(args,"PlanetFixed_orbit_data",4,4,swig_obj)) SWIG_fail;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
   {
     std::string *ptr = (std::string *)0;
     res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
@@ -7750,6 +7854,30 @@ fail:
   if (SWIG_IsNewObj(res1)) delete arg1;
   if (SWIG_IsNewObj(res2)) delete arg2;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"PlanetFixed_orbit_data",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 4) {
+    return _wrap_PlanetFixed_orbit_data__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_PlanetFixed_orbit_data__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'PlanetFixed_orbit_data'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::PlanetFixed::orbit_data(std::string const &,std::string const &,GeoCal::Time const &,int,std::string const &)\n"
+    "    GeoCal::PlanetFixed::orbit_data(std::string const &,std::string const &,GeoCal::Time const &,int)\n");
+  return 0;
 }
 
 
@@ -9372,7 +9500,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"PlanetFixed_orbit_data", _wrap_PlanetFixed_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
 		"boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string\n"
-		"&Spacecraft_reference_frame_name, const Time &T, int Naif_code)\n"
+		"&Spacecraft_reference_frame_name, const Time &T, int Naif_code, const\n"
+		"std::string &Abcorr=\"NONE\")\n"
 		"Return orbit data for the given target and spacecraft reference frame.\n"
 		"\n"
 		"The target is the name of the satellite used by spice (e.g, \"GLL\",\n"
@@ -9386,7 +9515,22 @@ static PyMethodDef SwigMethods[] = {
 		"kernel for), while the Spacecraft_reference_frame_name is for a frame\n"
 		"(e.g., something we have a fk kernel for). In addition to the frame\n"
 		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
-		"the orientation of the frame with the target. \n"
+		"the orientation of the frame with the target.\n"
+		"\n"
+		"The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.\n"
+		"gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,\n"
+		"\"LT\").\n"
+		"\n"
+		"Note that if you include the stellar correction (e.g., \"LT+S\") you\n"
+		"should not also include the velocity aberration correction in e.g.,\n"
+		"QuaternionOrbitData. Stellar correction gives the \"apparent\"\n"
+		"position, which already accounts for the aberration angle correction\n"
+		"\n"
+		"Also, it is important to note that the light time calculated is to the\n"
+		"center of the Body, not the surface. If you are trying to find a\n"
+		"intercept with something near the surface this can be considerably\n"
+		"different (see sincpt_c vs spkezp_c in the SPICE documentation). So\n"
+		"generally you don't want anything other than the default \"NONE\". \n"
 		""},
 	 { (char *)"PlanetFixed__v_planet_radius", (PyCFunction)_wrap_PlanetFixed__v_planet_radius, METH_O, (char *)"\n"
 		"\n"
@@ -9419,8 +9563,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Planetocentric_swiginit", Planetocentric_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_PlanetInertial", _wrap_new_PlanetInertial, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)\n"
-		"Default constructor, doesn't initialize position. \n"
+		"GeoCal::PlanetInertial::PlanetInertial(const boost::array< double, 3 > &Pos, int Naif_code)\n"
+		"Create an PlanetInertial with the given position in meters. \n"
 		""},
 	 { (char *)"PlanetInertial_reference_surface_intersect_approximate", _wrap_PlanetInertial_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"

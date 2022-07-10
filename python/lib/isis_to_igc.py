@@ -23,6 +23,13 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     def handle_h(self, h, isis_img, isis_metadata, klist, **keywords):
         return h.isis_to_igc(isis_img, isis_metadata, klist, **keywords)
 
+# TODO Move common stuff into a base class
+# We only have two examples here, so it is a bit hard to know exactly how
+# this should be done. But already there is a bit of similarity between
+# CTX and HiRISE that could be put into a base class. For now, just
+# duplicate code - this is only a few 100 lines anyways. But this really
+# should have more of a structure.
+
 class CtxIsisToIgc:
     def igc_to_glas(self, igc_r):
         '''Convert IGC to a GLAS model.'''
@@ -169,6 +176,7 @@ class HiriseIsisToIgc:
     def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
                     glas_gfm=False, rsm=False, min_height=-5000,
                     max_height=-1500, igc_out_fname=None, match_isis=False,
+                    spice_igc = False,
                     **keywords):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "HIRISE"):
@@ -229,6 +237,8 @@ class HiriseIsisToIgc:
         #TODO Handle subsetting in the sample direction for the camera
         if(img.number_sample != cam.number_sample(0)):
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
+        if(spice_igc):
+            return (True, SpiceIgc(orb, cam, tt, img=img))
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
         # LT+S already corrects for velocity aberration (LT+S is basically

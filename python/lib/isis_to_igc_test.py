@@ -4,18 +4,17 @@ from .isis_to_igc import *
 from .isis_igc import IsisIgc
 from geocal_swig import ImageCoordinate
 from .sqlite_shelf import write_shelve
+import pandas as pd
 
-def check_igc(fname):
+def check_igc(fname, check_time=False, check_camera=True,check_isis=True,
+              check_spice=True, check_glas_rsm=True):
     '''Compare a IGC with the same ISIS calculation. This tends to be
     common for different instruments, so collect the generic part of
     what we check here.'''
-    igc = isis_to_igc(fname, match_isis=True)
+    igc = isis_to_igc(fname)
     igc_isis = IsisIgc(fname)
-    # During development, can be useful have things turned on an off, so
-    # the tests below are all in conditionals.  Just flip True to False to
-    # turn off
     # Check every 100th line time
-    if False:
+    if check_time:
         for ln in range(0,igc.number_line,100):
             ic = ImageCoordinate(ln,igc.number_sample/2)
             if ln % 1000 == 0:
@@ -23,7 +22,7 @@ def check_igc(fname):
             assert_almost_equal(igc.pixel_time(ic).j2000,
                                 igc_isis.pixel_time(ic).j2000)
 
-    if False:
+    if check_camera:
         cam = igc.ipi.camera
         gcam =igc_isis.glas_cam_model(cam.focal_length)
         write_shelve("cam.xml", cam)
@@ -35,19 +34,58 @@ def check_igc(fname):
         # in our comparison
         #assert t[0] < 1e-2
         assert t[1] < 1e-2
-    if True:
+    if check_isis:
+        igc_match_isis = isis_to_igc(fname, match_isis=True)
+        dlist = []
+        for ln in range(0,igc.number_line,1000):
+            if(ln > 0):
+                print(f"Looking at line {ln}. max dist: {max(dlist)}")
+            for smp in range (0,igc.number_sample,100):
+                ic = ImageCoordinate(ln, smp)
+                assert distance(igc_match_isis.cf_look_vector_pos(ic),
+                                igc_isis.cf_look_vector_pos(ic)) < 10
+                gc = igc_isis.ground_coordinate(ic)
+                # We don't currently have no aberration working with
+                # sc_look_vector in orbit, so IPI can't have aberration turned
+                # off. So look at distance instead
+                #ic2 = igc_match_isis.image_coordinate(gc)
+                gc2 = igc_match_isis.ground_coordinate_approx_height(ic, gc.height_reference_surface)
+                dlist.append(distance(gc,gc2))
+        print("ISIS diff")
+        print(pd.DataFrame(dlist).describe())
+    if check_spice:
+        igc_spice = isis_to_igc(fname, spice_igc=True)
+        igc_match_isis = isis_to_igc(fname, match_isis=True)
+        d = []
         for ln in range(0,igc.number_line,1000):
             for smp in range (0,igc.number_sample,100):
                 ic = ImageCoordinate(ln, smp)
-                assert distance(igc.cf_look_vector_pos(ic),
-                                igc_isis.cf_look_vector_pos(ic)) < 10
-                ic2 = igc.image_coordinate(igc_isis.ground_coordinate(ic))
+                gc = igc_spice.ground_coordinate(ic)
+                gc2 = igc_match_isis.ground_coordinate(ic)
+                d.append(distance(gc,gc2))
+                ic2 = igc.image_coordinate(gc)
                 assert abs(ic.line - ic2.line) < 0.1
                 assert abs(ic.sample - ic2.sample) < 0.1
-    if True:
-        igc,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True)
-        print(igc)
+        print("Difference ISIS vs SPICE")
+        print(pd.DataFrame(d).describe())
+    if check_glas_rsm:
+        igc_glas,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True)
+        print(igc_glas)
         print(rsm)
+        lnlist = []
+        smplist = []
+        for ln in range(0,igc.number_line,1000):
+            if(ln > 0):
+                print(f"Looking at line {ln}. ({max(lnlist)},{max(smplist)})")
+            for smp in range (0,igc.number_sample,100):
+                ic = ImageCoordinate(ln, smp)
+                gc = igc_glas.ground_coordinate(ic)
+                ic2 = igc.image_coordinate(gc)
+                lnlist.append(abs(ic.line - ic2.line))
+                smplist.append(abs(ic.sample - ic2.sample))
+        print("GLAS diff")
+        print(pd.DataFrame(lnlist).describe())
+        print(pd.DataFrame(smplist).describe())
 
     # TODO Spice comparison 
         
@@ -62,17 +100,6 @@ def test_ctx_to_igc(mars_test_data, isolated_dir):
                     "ctx.cub")
         fname = "ctx.cub"
     check_igc(fname)
-    # Verify that we calculate nearly the same boresight at SPICE.
-    igc = isis_to_igc(fname)
-    ic = ImageCoordinate(200, igc.ipi.camera.principal_point(0).sample)
-    pts = SpiceHelper.boresight_and_footprint(igc.pixel_time(ic),
-                                              PlanetConstant.MARS_NAIF_CODE,
-                                              "MRO", "MRO_CTX", "CN+S")
-    print("Distance spice boresight and IGC: ",
-          distance(pts[0], igc.ground_coordinate(ic)))
-    assert distance(pts[0], igc.ground_coordinate(ic)) < 1.0
-    print(ic)
-    print(igc.image_coordinate(pts[0]))
     
 @long_test
 @require_isis
@@ -87,5 +114,4 @@ def test_hirise_to_igc(mars_test_data, isolated_dir):
         fname = "hirise.cub"
     check_igc(fname)
         
-
     

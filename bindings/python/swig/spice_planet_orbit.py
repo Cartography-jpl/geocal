@@ -267,6 +267,20 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         return _spice_planet_orbit.SpicePlanetOrbit_set_max_time(self, Tmax)
 
 
+    def surface_intersect(self, *args):
+        """
+
+        void SpicePlanetOrbit::surface_intersect(const Time &T, const ScLookVector &Slv, boost::shared_ptr<
+        GroundCoordinate > &Gc, double &Light_time, const std::string
+        &Corr_type="CN+S", const std::string &Method="Ellipsoid") const
+        Return the intersection with the surface ellipsoid, as sincpt_c
+        calculates it.
+
+        Also return Light_time. 
+        """
+        return _spice_planet_orbit.SpicePlanetOrbit_surface_intersect(self, *args)
+
+
     def _v_kernel_list(self):
         """
 
@@ -349,6 +363,7 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
 SpicePlanetOrbit.orbit_data = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_orbit_data, None, SpicePlanetOrbit)
 SpicePlanetOrbit.set_min_time = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_set_min_time, None, SpicePlanetOrbit)
 SpicePlanetOrbit.set_max_time = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_set_max_time, None, SpicePlanetOrbit)
+SpicePlanetOrbit.surface_intersect = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit_surface_intersect, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_kernel_list = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_kernel_list, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_naif_id = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_naif_id, None, SpicePlanetOrbit)
 SpicePlanetOrbit._v_target_name = new_instancemethod(_spice_planet_orbit.SpicePlanetOrbit__v_target_name, None, SpicePlanetOrbit)

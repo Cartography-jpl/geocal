@@ -1044,6 +1044,55 @@ SpiceHelper::boresight_and_footprint
 }
 
 //-----------------------------------------------------------------------
+/// Use SPICE to find the intersection with the surface for a given
+/// ScLookVector.
+///
+/// The Corr_type is what is used by sincpt_c, check the SPICE
+/// documentation for this. 
+///
+/// Satellite_name is something like "MEX" (for mars express), and
+/// Camera_name is something like "MEX_HRSC_NADIR".
+///
+/// We return the GroundCoordinate on the surface ellipsoid, and the
+/// light time calculated (if applicable).
+//-----------------------------------------------------------------------
+
+void
+SpiceHelper::surface_intersect
+(const Time& T, int Body_id,
+ const std::string& Satellite_name,
+ const std::string& Camera_name,
+ const ScLookVector& Slv,
+ boost::shared_ptr<GroundCoordinate>& Gc,
+ double &Light_time,
+ const std::string& Corr_type,
+ const std::string& Method)
+{
+#ifdef HAVE_SPICE
+  spice_setup();
+  double spoint[3], trgepc, srfvec[3];
+  SpiceBoolean found;
+  double dvec[3];
+  dvec[0] = Slv.direction()[0];
+  dvec[1] = Slv.direction()[1];
+  dvec[2] = Slv.direction()[2];
+  sincpt_c (Method.c_str(), body_name(Body_id).c_str(), T.et(),
+	    fixed_frame_name(Body_id).c_str(),  
+	    Corr_type.c_str(), Satellite_name.c_str(), Camera_name.c_str(),
+	    dvec, spoint, &trgepc, srfvec, &found);  
+  SpiceHelper::spice_error_check();
+  if(!found)
+    throw Exception("Spice did not find a solution");
+  Gc = boost::make_shared<PlanetFixed>(spoint[0] * 1000.0,
+				       spoint[1] * 1000.0,spoint[2] * 1000.0,
+				       Body_id);
+  Light_time = T.et() - trgepc;
+#else
+  throw SpiceNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Return a specific kernel value. This returns a single double value.
 //-----------------------------------------------------------------------
 

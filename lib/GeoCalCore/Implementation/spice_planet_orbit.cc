@@ -116,4 +116,22 @@ void SpicePlanetOrbit::print(std::ostream& Os) const
      << "  Aberration correction:      " << abcorr_ << "\n";
 }
 
+//-----------------------------------------------------------------------
+/// Return the intersection with the surface ellipsoid, as sincpt_c
+/// calculates it. Also return Light_time.  
+//-----------------------------------------------------------------------
+  
+void SpicePlanetOrbit::surface_intersect
+(const Time& T, const ScLookVector& Slv,
+ boost::shared_ptr<GroundCoordinate>& Gc,
+ double &Light_time,
+ const std::string& Corr_type,
+ const std::string& Method) const
+{
+  kernel_list_.load_kernel();
+  SpiceHelper::surface_intersect(T, naif_id_, target_name_,
+				 spacecraft_reference_frame_name_,
+				 Slv, Gc, Light_time, Corr_type, Method);
+}
+
 

@@ -1,5 +1,7 @@
 # This is a collection of IGC generated for various instruments.
 
+# Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+# in place sort term
 from geocal_swig import *
 from .pds_label import pds_label
 from .sqlite_shelf import read_shelve
@@ -23,7 +25,10 @@ import os
 def igc_mro_context(fname, lbl = None, kernel_file = None,
                     kernel_file_post = None, kernel_json = None,
                     subset=None, left_mask=38, right_mask=18):
-    '''Process for context camera. 
+    '''Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+     in place sort term
+
+    Process for context camera. 
 
     Because we have often already processed the PDS labels, you can
     optionally pass that if available. If we don't have this, then we
@@ -103,7 +108,10 @@ def igc_mro_context(fname, lbl = None, kernel_file = None,
     return igc
 
 def igc_mro_context_to_glas(igc_r):
-    '''Create a igc that can be used with GLAS from the results of 
+    '''Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+     in place sort term
+
+    Create a igc that can be used with GLAS from the results of 
     igc_mro_context'''
     tspace = igc_r.ipi.time_table.time_space
     porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
@@ -135,7 +143,10 @@ def igc_mro_context_to_glas(igc_r):
 def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
                  kernel_file_post = None, kernel_json = None,
                  subset = None):
-    '''Process for HRSC camera
+    '''Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+    in place sort term
+    
+    Process for HRSC camera
 
     Because we have often already processed the PDS labels, you can
     optionally pass that if available. If we don't have this, then we
@@ -207,7 +218,10 @@ def igc_mex_hrsc(fname, lbl = None, kernel_file = None,
 def igc_mro_hirise(fname, lbl = None, kernel_file = None,
                    kernel_file_post = None, kernel_json = None,
                    subset = None, rad_scale=10000):
-    '''Process for HIRISE camera. 
+    '''Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+    in place sort term
+
+    Process for HIRISE camera. 
 
     Right now, we are using ISIS as input. We will try to move this
     to PDS, but there are a number of preprocessing steps that we 
@@ -305,7 +319,10 @@ def igc_mro_hirise(fname, lbl = None, kernel_file = None,
     return igc
 
 def igc_mro_hirise_to_glas(igc_r):
-    '''Create a igc that can be used with GLAS from the results of 
+    '''Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+    in place sort term
+
+    Create a igc that can be used with GLAS from the results of 
     igc_mro_hirise'''
     tspace = igc_r.ipi.time_table.time_space
     porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,

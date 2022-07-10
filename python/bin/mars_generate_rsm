@@ -1,5 +1,8 @@
 #! /usr/bin/env python
 #
+# Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+# in place sort term
+#
 # This takes a unprojected PDS file, imports it to VICAR, and adds a
 # RSM.
 
@@ -15,6 +18,9 @@ usage='''Usage:
   mars_generate_rsm [options] <pds_image> <pds_image_2> <output_base_name>
   mars_generate_rsm -h | --help
   mars_generate_rsm -v | --version
+
+Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
+in place sort term
 
 mars_generate_rsm takes an unprojected PDS image, imports it to VICAR, 
 and adds a RSM or GLAS/GFM.

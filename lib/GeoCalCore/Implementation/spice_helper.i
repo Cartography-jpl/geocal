@@ -46,6 +46,15 @@ public:
 			  const std::string& Satellite_name,
 			  const std::string& Camera_name,
 			  const std::string& Corr_type = "CN+S");
+  static void 
+  surface_intersect(const Time& T, int Body_id,
+		    const std::string& Satellite_name,
+		    const std::string& Camera_name,
+		    const ScLookVector& Slv,
+		    boost::shared_ptr<GroundCoordinate>& OUTPUT,
+		    double &OUTPUT,
+		    const std::string& Corr_type = "CN+S",
+		    const std::string& Method = "Ellipsoid");
 };
 }
 // List of things "import *" will include

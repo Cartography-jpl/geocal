@@ -3621,26 +3621,27 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[166]
 #define SWIGTYPE_p_char_type swig_types[167]
 #define SWIGTYPE_p_difference_type swig_types[168]
-#define SWIGTYPE_p_fmtflags swig_types[169]
-#define SWIGTYPE_p_int_type swig_types[170]
-#define SWIGTYPE_p_iostate swig_types[171]
-#define SWIGTYPE_p_off_type swig_types[172]
-#define SWIGTYPE_p_openmode swig_types[173]
-#define SWIGTYPE_p_pos_type swig_types[174]
-#define SWIGTYPE_p_seekdir swig_types[175]
-#define SWIGTYPE_p_size_t swig_types[176]
-#define SWIGTYPE_p_size_type swig_types[177]
-#define SWIGTYPE_p_state_type swig_types[178]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[179]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[180]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[181]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[182]
-#define SWIGTYPE_p_std__invalid_argument swig_types[183]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[184]
-#define SWIGTYPE_p_traits_type swig_types[185]
-#define SWIGTYPE_p_value_type swig_types[186]
-static swig_type_info *swig_types[188];
-static swig_module_info swig_module = {swig_types, 187, 0, 0, 0, 0};
+#define SWIGTYPE_p_double swig_types[169]
+#define SWIGTYPE_p_fmtflags swig_types[170]
+#define SWIGTYPE_p_int_type swig_types[171]
+#define SWIGTYPE_p_iostate swig_types[172]
+#define SWIGTYPE_p_off_type swig_types[173]
+#define SWIGTYPE_p_openmode swig_types[174]
+#define SWIGTYPE_p_pos_type swig_types[175]
+#define SWIGTYPE_p_seekdir swig_types[176]
+#define SWIGTYPE_p_size_t swig_types[177]
+#define SWIGTYPE_p_size_type swig_types[178]
+#define SWIGTYPE_p_state_type swig_types[179]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[180]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[181]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[182]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[183]
+#define SWIGTYPE_p_std__invalid_argument swig_types[184]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[185]
+#define SWIGTYPE_p_traits_type swig_types[186]
+#define SWIGTYPE_p_value_type swig_types[187]
+static swig_type_info *swig_types[189];
+static swig_module_info swig_module = {swig_types, 188, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6236,6 +6237,9 @@ namespace swig {
       }
     
 
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -7908,6 +7912,430 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > *arg4 = 0 ;
+  double *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  std::string *arg7 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > temp4 ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  int res7 = SWIG_OLDOBJ ;
+  
+  {
+    arg4 = &temp4;
+  }
+  arg5 = &temp5;
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "1"" of type '" "GeoCal::SpicePlanetOrbit const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res7 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "7"" of type '" "std::string const &""'"); 
+    }
+    arg7 = ptr;
+  }
+  {
+    try {
+      ((GeoCal::SpicePlanetOrbit const *)arg1)->surface_intersect((GeoCal::Time const &)*arg2,(GeoCal::ScLookVector const &)*arg3,*arg4,*arg5,(std::string const &)*arg6,(std::string const &)*arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<  GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::GroundCoordinate >(*arg4);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  if (SWIG_IsNewObj(res7)) delete arg7;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > *arg4 = 0 ;
+  double *arg5 = 0 ;
+  std::string *arg6 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > temp4 ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  int res6 = SWIG_OLDOBJ ;
+  
+  {
+    arg4 = &temp4;
+  }
+  arg5 = &temp5;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "1"" of type '" "GeoCal::SpicePlanetOrbit const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res6 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res6)) {
+      SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "6"" of type '" "std::string const &""'"); 
+    }
+    arg6 = ptr;
+  }
+  {
+    try {
+      ((GeoCal::SpicePlanetOrbit const *)arg1)->surface_intersect((GeoCal::Time const &)*arg2,(GeoCal::ScLookVector const &)*arg3,*arg4,*arg5,(std::string const &)*arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<  GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::GroundCoordinate >(*arg4);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res6)) delete arg6;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::ScLookVector *arg3 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > *arg4 = 0 ;
+  double *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpicePlanetOrbit const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared3 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate > temp4 ;
+  double temp5 ;
+  int res5 = SWIG_TMPOBJ ;
+  
+  {
+    arg4 = &temp4;
+  }
+  arg5 = &temp5;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpicePlanetOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "1"" of type '" "GeoCal::SpicePlanetOrbit const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpicePlanetOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpicePlanetOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::ScLookVector *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__ScLookVector,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "SpicePlanetOrbit_surface_intersect" "', argument " "3"" of type '" "GeoCal::ScLookVector const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3);
+        arg3 = const_cast< GeoCal::ScLookVector * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::ScLookVector * >(reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::SpicePlanetOrbit const *)arg1)->surface_intersect((GeoCal::Time const &)*arg2,(GeoCal::ScLookVector const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<  GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::GroundCoordinate >(*arg4);
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN));
+  }
+  if (SWIG_IsTmpObj(res5)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg5)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res5) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg5), SWIGTYPE_p_double, new_flags));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[6] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"SpicePlanetOrbit_surface_intersect",0,5,argv))) SWIG_fail;
+  --argc;
+  if (argc == 3) {
+    return _wrap_SpicePlanetOrbit_surface_intersect__SWIG_2(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_SpicePlanetOrbit_surface_intersect__SWIG_1(self, argc, argv);
+  }
+  if (argc == 5) {
+    return _wrap_SpicePlanetOrbit_surface_intersect__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'SpicePlanetOrbit_surface_intersect'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpicePlanetOrbit::surface_intersect(GeoCal::Time const &,GeoCal::ScLookVector const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double &,std::string const &,std::string const &) const\n"
+    "    GeoCal::SpicePlanetOrbit::surface_intersect(GeoCal::Time const &,GeoCal::ScLookVector const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double &,std::string const &) const\n"
+    "    GeoCal::SpicePlanetOrbit::surface_intersect(GeoCal::Time const &,GeoCal::ScLookVector const &,boost::shared_ptr< GeoCal::GroundCoordinate > &,double &) const\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_kernel_list(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::SpicePlanetOrbit *arg1 = (GeoCal::SpicePlanetOrbit *) 0 ;
@@ -8299,6 +8727,16 @@ static PyMethodDef SwigMethods[] = {
 		"void GeoCal::SpicePlanetOrbit::set_max_time(const Time &Tmax)\n"
 		"Set maximum time we want orbit for (important because kernels only\n"
 		"cover a particular time range). \n"
+		""},
+	 { (char *)"SpicePlanetOrbit_surface_intersect", _wrap_SpicePlanetOrbit_surface_intersect, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void SpicePlanetOrbit::surface_intersect(const Time &T, const ScLookVector &Slv, boost::shared_ptr<\n"
+		"GroundCoordinate > &Gc, double &Light_time, const std::string\n"
+		"&Corr_type=\"CN+S\", const std::string &Method=\"Ellipsoid\") const\n"
+		"Return the intersection with the surface ellipsoid, as sincpt_c\n"
+		"calculates it.\n"
+		"\n"
+		"Also return Light_time. \n"
 		""},
 	 { (char *)"SpicePlanetOrbit__v_kernel_list", (PyCFunction)_wrap_SpicePlanetOrbit__v_kernel_list, METH_O, (char *)"\n"
 		"\n"
@@ -9027,6 +9465,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__WithParameter_t = {"_
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -9216,6 +9655,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
+  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -9405,6 +9845,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__WithParameter_t[] = {
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -9594,6 +10035,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
+  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,

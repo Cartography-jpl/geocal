@@ -114,6 +114,11 @@ public:
   const std::string& aberration_correction() const {return abcorr_;}
   void aberration_correction(const std::string& Abcorr)
   {abcorr_ = Abcorr; }
+  void surface_intersect(const Time& T, const ScLookVector& Slv,
+			 boost::shared_ptr<GroundCoordinate>& Gc,
+			 double &Light_time,
+			 const std::string& Corr_type = "CN+S",
+			 const std::string& Method = "Ellipsoid") const;
 protected:
   SpicePlanetOrbit() : abcorr_("NONE") {}
 private:

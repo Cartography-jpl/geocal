@@ -28,6 +28,11 @@ public:
     const;
   void set_min_time(const Time& Tmin);
   void set_max_time(const Time& Tmax);
+  void surface_intersect(const Time& T, const ScLookVector& Slv,
+			 boost::shared_ptr<GroundCoordinate>& OUTPUT,
+			 double &OUTPUT,
+			 const std::string& Corr_type = "CN+S",
+			 const std::string& Method = "Ellipsoid") const;
   %python_attribute(kernel_list, SpiceKernelList);
   %python_attribute(naif_id, int);
   %python_attribute(target_name, std::string);

@@ -9,13 +9,13 @@ def check_igc(fname):
     '''Compare a IGC with the same ISIS calculation. This tends to be
     common for different instruments, so collect the generic part of
     what we check here.'''
-    igc = isis_to_igc(fname)
+    igc = isis_to_igc(fname, match_isis=True)
     igc_isis = IsisIgc(fname)
     # During development, can be useful have things turned on an off, so
     # the tests below are all in conditionals.  Just flip True to False to
     # turn off
     # Check every 100th line time
-    if True:
+    if False:
         for ln in range(0,igc.number_line,100):
             ic = ImageCoordinate(ln,igc.number_sample/2)
             if ln % 1000 == 0:
@@ -23,7 +23,7 @@ def check_igc(fname):
             assert_almost_equal(igc.pixel_time(ic).j2000,
                                 igc_isis.pixel_time(ic).j2000)
 
-    if True:
+    if False:
         cam = igc.ipi.camera
         gcam =igc_isis.glas_cam_model(cam.focal_length)
         write_shelve("cam.xml", cam)
@@ -35,13 +35,7 @@ def check_igc(fname):
         # in our comparison
         #assert t[0] < 1e-2
         assert t[1] < 1e-2
-    # Note this fails, and as it turns out for a good reason. IsisIgc
-    # incorrectly uses LT+S in its position calculation (see description
-    # in IsisIgc). We get a different value, but we are actually right
-    # and ISIS is wrong. We can turn this on if we manually change our
-    # Igc to be wrong in the same way - useful to track down other
-    # differences between the models
-    if False:
+    if True:
         for ln in range(0,igc.number_line,1000):
             for smp in range (0,igc.number_sample,100):
                 ic = ImageCoordinate(ln, smp)
@@ -54,6 +48,8 @@ def check_igc(fname):
         igc,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True)
         print(igc)
         print(rsm)
+
+    # TODO Spice comparison 
         
 @long_test
 @require_isis

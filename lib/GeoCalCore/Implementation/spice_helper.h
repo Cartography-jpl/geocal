@@ -123,6 +123,15 @@ public:
 			  const std::string& Satellite_name,
 			  const std::string& Camera_name,
 			  const std::string& Corr_type = "CN+S");
+  static void 
+  surface_intersect(const Time& T, int Body_id,
+		    const std::string& Satellite_name,
+		    const std::string& Camera_name,
+		    const ScLookVector& Slv,
+		    boost::shared_ptr<GroundCoordinate>& Gc,
+		    double &Light_time,
+		    const std::string& Corr_type = "CN+S",
+		    const std::string& Method = "Ellipsoid");
 private:
   static std::string max_version_find(const std::string& D, 
 				      const boost::regex& F_reg);

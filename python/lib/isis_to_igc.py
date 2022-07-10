@@ -9,6 +9,7 @@ from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
 from .mars_rsm import rsm_hirise, rsm_context
 from .sqlite_shelf import write_shelve
+from .spice_igc import SpiceIgc
 import json
 
 class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
@@ -19,12 +20,8 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     here, go ahead and put this in place. If nothing else, it allows 
     downstream programs to add handles for new instruments.
     '''
-    def handle_h(self, h, isis_img, isis_metadata, klist, subset, glas_gfm,
-                 rsm, min_height,max_height,igc_out_fname):
-        return h.isis_to_igc(isis_img, isis_metadata, klist, subset=subset,
-                             glas_gfm=glas_gfm, rsm=rsm, min_height=min_height,
-                             max_height=max_height,
-                             igc_out_fname=igc_out_fname)
+    def handle_h(self, h, isis_img, isis_metadata, klist, **keywords):
+        return h.isis_to_igc(isis_img, isis_metadata, klist, **keywords)
 
 class CtxIsisToIgc:
     def igc_to_glas(self, igc_r):
@@ -58,7 +55,8 @@ class CtxIsisToIgc:
         
     def isis_to_igc(self, isis_img, isis_metadata, klist_in,subset=None,
                     glas_gfm=False, rsm=False, min_height=-5000,
-                    max_height=-1500, igc_out_fname=None):
+                    max_height=-1500, igc_out_fname=None,
+                    match_isis=False, spice_igc=False, **keywords):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "CTX"):
             return (False, None)
@@ -80,13 +78,15 @@ class CtxIsisToIgc:
             img = isis_img
         # Note IsisIgc uses LT+S. this is actually *wrong*, see the
         # description of that in IsisIgc. We have this code in place
-        # if we want to duplicate IsisIgc (e.g., make sure everything else
+        # so we can duplicate IsisIgc (e.g., make sure everything else
         # agrees)
-        #orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
-        #                       PlanetConstant.MARS_NAIF_CODE,
-        #                       "LT+S")
-        orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
-                               PlanetConstant.MARS_NAIF_CODE)
+        if(match_isis):
+            orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
+                                   PlanetConstant.MARS_NAIF_CODE,
+                                   "LT+S")
+        else:
+            orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
+                                   PlanetConstant.MARS_NAIF_CODE)
         tstart = Time.time_sclk(idata["SpacecraftClockCount"], "MRO")
         # 1e-3 is because LINE_EXPOSURE_DURATION is in milliseconds.
         if(idata["LineExposureDuration"]["unit"] != "MSEC"):
@@ -107,13 +107,18 @@ class CtxIsisToIgc:
         dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
         orb_cache = OrbitListCache(orb, tt)
         cam = ctx_camera()
+        if(spice_igc):
+            return (True, SpiceIgc(orb, cam, tt, img=img))
         #TODO Handle subsetting in the sample direction for the camera
         if(img.number_sample != cam.number_sample(0)):
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
-        # Needed if we turn on LT+S above
-        #igc.velocity_aberration = NoVelocityAberration()
+        # LT+S already corrects for velocity aberration (LT+S is basically
+        # aberration plus light time - so more accurate). Turn off the
+        # igc calculation if we are matching ISIS
+        if(match_isis):
+            igc.velocity_aberration = NoVelocityAberration()
         if(igc_out_fname is not None):
             write_shelve(igc_out_fname, igc)
         if(glas_gfm):
@@ -163,7 +168,8 @@ class HiriseIsisToIgc:
         
     def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
                     glas_gfm=False, rsm=False, min_height=-5000,
-                    max_height=-1500, igc_out_fname=None):
+                    max_height=-1500, igc_out_fname=None, match_isis=False,
+                    **keywords):
         idata = isis_metadata["IsisCube"]["Instrument"]
         if(idata["InstrumentId"] != "HIRISE"):
             return (False, None)
@@ -179,8 +185,17 @@ class HiriseIsisToIgc:
         if(self.rad_scale is not None):
             img = ScaleImage(img, self.rad_scale)
         klist.load_kernel()
-        orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
-                               PlanetConstant.MARS_NAIF_CODE)
+        # Note IsisIgc uses LT+S. this is actually *wrong*, see the
+        # description of that in IsisIgc. We have this code in place
+        # so we can duplicate IsisIgc (e.g., make sure everything else
+        # agrees)
+        if(match_isis):
+            orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
+                                   PlanetConstant.MARS_NAIF_CODE,
+                                   "LT+S")
+        else:
+            orb = SpicePlanetOrbit("MRO", "MRO_HIRISE_OPTICAL_AXIS", klist,
+                                   PlanetConstant.MARS_NAIF_CODE)
         # There are two kinds of spacecraft clocks. The normal
         # resolution is "MRO", the high resolution is for NAIF ID
         # -74999. We have high resolution for HIRISE
@@ -216,6 +231,11 @@ class HiriseIsisToIgc:
             raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
+        # LT+S already corrects for velocity aberration (LT+S is basically
+        # aberration plus light time - so more accurate). Turn off the
+        # igc calculation if we are matching ISIS
+        if(match_isis):
+            igc.velocity_aberration = NoVelocityAberration()
         if(igc_out_fname is not None):
             write_shelve(igc_out_fname, igc)
         if(glas_gfm):
@@ -228,30 +248,42 @@ class HiriseIsisToIgc:
 
 IsisToIgcHandleSet.add_default_handle(HiriseIsisToIgc())
 
-def isis_to_igc(isis_fname, subset=None, glas_gfm=False, rsm=False,
-                min_height = -5000, max_height = -1500, igc_out_fname=None):
+def isis_to_igc(isis_fname, **keywords):
     '''Create an IGC for the given ISIS cube file. This should have
     already had spiceinit run on it (e.g., you called pds_to_isis).
 
-    You can supply a subset if desired, this should be an array of
+    The specific options for each IGC depends on the type, but some
+    of the keywords we have are:
+
+    subset - You can supply a subset if desired, this should be an array of
     [Lstart, Sstart, Number_line, Number_sample].
 
-    The default is to return a IGC that includes the native Spice orbit/
-    camera model, etc, but you can request a GLAS/GFM model instead.
+    glas_gfm - The default is to return a IGC that includes the native
+    Spice orbit/ camera model, etc, but you can request a GLAS/GFM
+    model instead.
 
-    You can also request a RSM, in which case a pair of igc,rsm gets
-    returned. I'm not 100% sure of this interface, but the details of
-    making the RSM depends on the specific instrument so for now this is
-    how we do this. For the RSM, you can pass in the min and max height to
-    use. This has no impact on the IGC.
+    rsm, min_height, max_height - You can also request a RSM, in which
+    case a pair of igc,rsm gets returned. I'm not 100% sure of this
+    interface, but the details of making the RSM depends on the
+    specific instrument so for now this is how we do this. For the
+    RSM, you can pass in the min and max height to use. This has no
+    impact on the IGC.
 
-    You can optionally write the full IGC out as a shelve file by supplying
-    igc_out_fname
+    igc_out_fname - You can optionally write the full IGC out as a shelve 
+    file by supplying igc_out_fname
+
+    match_isis - ISIS incorrectly calculate the light time based on
+    the center of the target (e.g., mars center) rather than the
+    surface. You can request that we use the same calculation as
+    ISIS. This is *wrong*, but it can be useful for testing to make
+    the same wrong calculation. This allows us to compare everything
+    else (e.g., camera model, timing).
+
+    Spice_igc - If true return a SpiceIgc.
     '''
     f = GdalRasterImage(isis_fname)
     d = json.loads(f.metadata_list('json:ISIS3')[0])
     klist = read_kernel_from_isis(isis_fname)
-    return IsisToIgcHandleSet.default_handle_set().handle(f,d,klist,
-                  subset, glas_gfm, rsm,min_height, max_height, igc_out_fname)
+    return IsisToIgcHandleSet.default_handle_set().handle(f,d,klist,**keywords)
 
 __all__ = ["IsisToIgcHandleSet", "isis_to_igc"]    

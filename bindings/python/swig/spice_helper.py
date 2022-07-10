@@ -441,6 +441,29 @@ class SpiceHelper(object):
 
     boresight_and_footprint = staticmethod(boresight_and_footprint)
 
+    def surface_intersect(*args):
+        """
+
+        void SpiceHelper::surface_intersect(const Time &T, int Body_id, const std::string &Satellite_name, const
+        std::string &Camera_name, const ScLookVector &Slv, boost::shared_ptr<
+        GroundCoordinate > &Gc, double &Light_time, const std::string
+        &Corr_type="CN+S", const std::string &Method="Ellipsoid")
+        Use SPICE to find the intersection with the surface for a given
+        ScLookVector.
+
+        The Corr_type is what is used by sincpt_c, check the SPICE
+        documentation for this.
+
+        Satellite_name is something like "MEX" (for mars express), and
+        Camera_name is something like "MEX_HRSC_NADIR".
+
+        We return the GroundCoordinate on the surface ellipsoid, and the light
+        time calculated (if applicable). 
+        """
+        return _spice_helper.SpiceHelper_surface_intersect(*args)
+
+    surface_intersect = staticmethod(surface_intersect)
+
     def __init__(self):
         _spice_helper.SpiceHelper_swiginit(self, _spice_helper.new_SpiceHelper())
     __swig_destroy__ = _spice_helper.delete_SpiceHelper
@@ -656,6 +679,27 @@ def SpiceHelper_boresight_and_footprint(*args):
     returns them. 
     """
     return _spice_helper.SpiceHelper_boresight_and_footprint(*args)
+
+def SpiceHelper_surface_intersect(*args):
+    """
+
+    void SpiceHelper::surface_intersect(const Time &T, int Body_id, const std::string &Satellite_name, const
+    std::string &Camera_name, const ScLookVector &Slv, boost::shared_ptr<
+    GroundCoordinate > &Gc, double &Light_time, const std::string
+    &Corr_type="CN+S", const std::string &Method="Ellipsoid")
+    Use SPICE to find the intersection with the surface for a given
+    ScLookVector.
+
+    The Corr_type is what is used by sincpt_c, check the SPICE
+    documentation for this.
+
+    Satellite_name is something like "MEX" (for mars express), and
+    Camera_name is something like "MEX_HRSC_NADIR".
+
+    We return the GroundCoordinate on the surface ellipsoid, and the light
+    time calculated (if applicable). 
+    """
+    return _spice_helper.SpiceHelper_surface_intersect(*args)
 
 
 __all__ = ["SpiceHelper"]

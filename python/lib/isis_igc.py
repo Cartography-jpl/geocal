@@ -33,6 +33,11 @@ class IsisIgc(ImageGroundConnection):
     (e.g., to mars center). This is very different than the light time
     to the surface (see sincpt_c), which for mars data is much shorter.
     This leads to a multiple pixel error in ISIS.
+
+    There is a somewhat related ticket 
+    https://github.com/USGS-Astrogeology/ISIS3/issues/1356. This has been
+    opened for almost 4 years, so I don't think this will be resolved 
+    any time soon.
     '''
     def __init__(self, isis_fname):
         self.fname = os.path.abspath(isis_fname)

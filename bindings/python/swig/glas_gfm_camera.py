@@ -209,8 +209,31 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     def __init__(self, *args):
         """
 
-        GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)
+        GlasGfmCamera::GlasGfmCamera(const Camera &Cam, int Band, double Delta_line, double Delta_sample,
+        const std::string &Band_type="N", double Band_wavelength=1.45,
+        double Focal_length_meter=1.0, const Time
+        &Focal_length_time=Time::time_j2000(0))
+        It is common to create a GlasGfmCamera by fitting it to another
+        camera.
 
+        This does that in one step, taking a QuaternionCamera and fitting for
+        the given Band. This version is for Frame "F" type sensor.
+
+        Note the focal length doesn't really affect anything, it gets scaled
+        out when we fit the Camera. If you don't otherwise have a value here
+        then you can just set this to 1.0 or something like that. Focal length
+        is in meters, unlike the focal length in QuaternionCamera that is in
+        mm.
+
+        Note for QuaternionCamera, the generated glas model has any rotation
+        embedded in the generated model. If you want to assign the frame_to_sc
+        to the GlasGfmCamera, then you should make sure to pass a Camera with
+        a identity frame_to_sc. So a reasonable process (in python) would be
+        something like:
+
+        q_original = cam.frame_to_sc cam.frame_to_sc =
+        Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)
+        gcam.frame_to_sc = q_original cam.frame_to_sc = q_original 
         """
         _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera(*args))
 
@@ -753,8 +776,30 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
     def field_alignment_block(self, *args):
         """
 
-        void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)
+        void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample, int
+        Band=0)
+        Populate the field_alignment, first_line_block, first_sample_block,
+        delta_line and delta_sample to match the given camera.
 
+        This creates only one block - we currently don't support multiple
+        blocks.
+
+        Only applicable for sensor type "F" and field_angle_type 0.
+
+        You may want to call compare_camera to check how accurate the
+        approximation is.
+
+        Note that you should be careful not to double count any frame_t
+        quaternion. If you pass that in with the Cam, then this is already
+        accounted for in the field angle map (which has the effect of the
+        quaternion embedded in it). If you want to assign the frame_to_sc to
+        the GlasGfmCamera, then you should make sure to pass a Camera with a
+        identity frame_to_sc. So a reasonable process (in python) would be
+        something like:
+
+        q_original = cam.frame_to_sc cam.frame_to_sc =
+        Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)
+        gcam.frame_to_sc = q_original cam.frame_to_sc = q_original 
         """
         return _glas_gfm_camera.GlasGfmCamera_field_alignment_block(self, *args)
 

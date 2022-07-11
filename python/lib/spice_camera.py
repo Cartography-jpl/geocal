@@ -82,7 +82,7 @@ def hirise_camera(ccd_number, bin_mode = 1, tdi_mode = 128):
         1, nsamp, pitch, pitch, focal_length, bin_mode, ccd_off, ccd_cen,
         t_off, t_m, tinv_off, tinv_m)
                                               
-def ctx_camera():
+def ctx_camera(start_sample=0,nsamp=None):
     '''Return the CTX camera. Note you should have loaded the instrument
     kernel already (e.g., os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker").
     We purposely don't load this, so you can direct to a different kernel
@@ -90,15 +90,18 @@ def ctx_camera():
     '''
     focal_length = SpiceHelper.kernel_data_double("INS-74021_FOCAL_LENGTH")
     pitch = SpiceHelper.kernel_data_double("INS-74021_PIXEL_PITCH")
-    nsamp = SpiceHelper.kernel_data_double("INS-74021_PIXEL_SAMPLES")
-    
+    if(nsamp is None):
+        nsamp = SpiceHelper.kernel_data_double("INS-74021_PIXEL_SAMPLES")
     principal_point = FrameCoordinate(\
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_LINE"),
         SpiceHelper.kernel_data_double("INS-74021_BORESIGHT_SAMPLE") - 0.5)
     od_k = SpiceHelper.kernel_data_array_double("INS-74021_OD_K");
     ctx_cam = CameraRadialDistortion(Quaternion_double(1,0,0,0), od_k,
-                                     1, nsamp, pitch, pitch, focal_length,
+                                     1, nsamp+abs(start_sample),
+                                     pitch, pitch, focal_length,
                                      principal_point)
+    if(start_sample != 0):
+        ctx_cam = SubCamera(ctx_cam, 0, start_sample, 1, nsamp)
     return ctx_cam
 
 __all__ = ["hrsc_camera", "ctx_camera", "hirise_camera"]

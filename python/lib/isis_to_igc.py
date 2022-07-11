@@ -3,7 +3,7 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          PlanetConstant, PlanetSimpleDem, OrbitListCache,
                          Ipi, IpiImageGroundConnection, Time,
                          PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
-                         ScaleImage, NoVelocityAberration)
+                         ScaleImage, NoVelocityAberration, SubCamera)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
@@ -31,7 +31,7 @@ class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
 # should have more of a structure.
 
 class CtxIsisToIgc:
-    def igc_to_glas(self, igc_r):
+    def igc_to_glas(self, igc_r, focal_length):
         '''Convert IGC to a GLAS model.'''
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
@@ -51,7 +51,8 @@ class CtxIsisToIgc:
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
         band = 0
         delta_sample = 100
-        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
+                              0.65, focal_length*1e-3)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
                     igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
@@ -113,12 +114,14 @@ class CtxIsisToIgc:
                                       tspace)
         dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
         orb_cache = OrbitListCache(orb, tt)
-        cam = ctx_camera()
+        start_sample = int(idata["SampleFirstPixel"])
+        cam = ctx_camera(start_sample=start_sample, nsamp=img.number_sample)
+        if(isinstance(cam, SubCamera)):
+            focal_length = cam.full_camera.focal_length
+        else:
+            focal_length = cam.focal_length
         if(spice_igc):
             return (True, SpiceIgc(orb, cam, tt, img=img))
-        #TODO Handle subsetting in the sample direction for the camera
-        if(img.number_sample != cam.number_sample(0)):
-            raise RuntimeError(f"The image has {img.number_sample} samples, but the context camera has {cam.number_sample(0)} samples. These need to match")
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
         igc = IpiImageGroundConnection(ipi, dem, img)
         # LT+S already corrects for velocity aberration (LT+S is basically
@@ -129,7 +132,7 @@ class CtxIsisToIgc:
         if(igc_out_fname is not None):
             write_shelve(igc_out_fname, igc)
         if(glas_gfm):
-            igc = self.igc_to_glas(igc)
+            igc = self.igc_to_glas(igc, focal_length)
         if(not rsm):
             return (True, igc)
         else:
@@ -144,7 +147,7 @@ class HiriseIsisToIgc:
     def __init__(self, rad_scale=10000):
         self.rad_scale = rad_scale
         
-    def igc_to_glas(self, igc_r):
+    def igc_to_glas(self, igc_r, focal_length):
         '''Convert IGC to a GLAS model.'''
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
@@ -164,7 +167,8 @@ class HiriseIsisToIgc:
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
         band = 0
         delta_sample = 2048 / 16
-        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample)
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R", 0.7,
+                              focal_length * 1e-3)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
                     igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
@@ -249,7 +253,7 @@ class HiriseIsisToIgc:
         if(igc_out_fname is not None):
             write_shelve(igc_out_fname, igc)
         if(glas_gfm):
-            igc = self.igc_to_glas(igc)
+            igc = self.igc_to_glas(igc, cam.focal_length)
         if(not rsm):
             return (True, igc)
         else:

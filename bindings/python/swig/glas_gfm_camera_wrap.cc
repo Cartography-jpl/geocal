@@ -7137,389 +7137,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
+  GeoCal::Camera *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
   std::string *arg4 = 0 ;
   double arg5 ;
-  GeoCal::Time *arg6 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  int res4 = SWIG_OLDOBJ ;
-  double val5 ;
-  int ecode5 = 0 ;
-  void *argp6 = 0 ;
-  int res6 = 0 ;
-  boost::shared_ptr< GeoCal::Time const > tempshared6 ;
-  GeoCal::GlasGfmCamera *result = 0 ;
-  
-  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::Time *ptr;
-    res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
-    if (SWIG_IsOK(res6)) {
-      arg6 = ptr;
-    } else {
-      res6 = SWIG_ConvertPtrAndOwn(swig_obj[5], &argp6, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
-      if (!SWIG_IsOK(res6)) {
-        SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "new_GlasGfmCamera" "', argument " "6"" of type '" "GeoCal::Time const &""'");
-      }
-      if (!argp6) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "6"" of type '" "GeoCal::Time const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared6 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp6);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp6);
-        arg6 = const_cast< GeoCal::Time * >(tempshared6.get());
-      } else {
-        arg6 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp6)->get());
-      }
-    }
-  }
-  {
-    try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,(std::string const &)*arg4,arg5,(GeoCal::Time const &)*arg6);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
-  int arg2 ;
-  double arg3 ;
-  std::string *arg4 = 0 ;
-  double arg5 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  int res4 = SWIG_OLDOBJ ;
-  double val5 ;
-  int ecode5 = 0 ;
-  GeoCal::GlasGfmCamera *result = 0 ;
-  
-  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
-  if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "double""'");
-  } 
-  arg5 = static_cast< double >(val5);
-  {
-    try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,(std::string const &)*arg4,arg5);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
-  int arg2 ;
-  double arg3 ;
-  std::string *arg4 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  int res4 = SWIG_OLDOBJ ;
-  GeoCal::GlasGfmCamera *result = 0 ;
-  
-  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    std::string *ptr = (std::string *)0;
-    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
-    if (!SWIG_IsOK(res4)) {
-      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
-    }
-    arg4 = ptr;
-  }
-  {
-    try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,(std::string const &)*arg4);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return resultobj;
-fail:
-  if (SWIG_IsNewObj(res4)) delete arg4;
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
-  int arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  GeoCal::GlasGfmCamera *result = 0 ;
-  
-  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
-  {
-    int newmem = 0;
-    // Added mms
-    // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
-    if (SWIG_IsOK(res1)) {
-      arg1 = ptr;
-    } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
-      if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
-      }
-      if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
-      }
-      if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
-      } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
-      }
-    }
-  }
-  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  {
-    try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3);
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  {
-    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
-    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
-  }
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
-  PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
-  int arg2 ;
-  double arg3 ;
-  double arg4 ;
-  std::string *arg5 = 0 ;
   double arg6 ;
   GeoCal::Time *arg7 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
   int val2 ;
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  double val4 ;
-  int ecode4 = 0 ;
-  int res5 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  double val5 ;
+  int ecode5 = 0 ;
   double val6 ;
   int ecode6 = 0 ;
   void *argp7 = 0 ;
@@ -7532,24 +7166,24 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
     if (SWIG_IsOK(res1)) {
       arg1 = ptr;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
       } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
       }
     }
   }
@@ -7563,22 +7197,22 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(se
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
-  if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "double""'");
-  } 
-  arg4 = static_cast< double >(val4);
   {
     std::string *ptr = (std::string *)0;
-    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
-    if (!SWIG_IsOK(res5)) {
-      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "std::string const &""'"); 
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
     }
-    arg5 = ptr;
+    arg4 = ptr;
   }
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GlasGfmCamera" "', argument " "6"" of type '" "double""'");
@@ -7611,7 +7245,489 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(se
   }
   {
     try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5,arg6,(GeoCal::Time const &)*arg7);
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,(std::string const &)*arg4,arg5,arg6,(GeoCal::Time const &)*arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Camera *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  std::string *arg4 = 0 ;
+  double arg5 ;
+  double arg6 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  double val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  GeoCal::GlasGfmCamera *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GlasGfmCamera" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  {
+    try {
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,(std::string const &)*arg4,arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Camera *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  std::string *arg4 = 0 ;
+  double arg5 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  double val5 ;
+  int ecode5 = 0 ;
+  GeoCal::GlasGfmCamera *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  {
+    try {
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,(std::string const &)*arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Camera *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  std::string *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  int res4 = SWIG_OLDOBJ ;
+  GeoCal::GlasGfmCamera *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,(std::string const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Camera *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  GeoCal::GlasGfmCamera *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Camera *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  double arg4 ;
+  std::string *arg5 = 0 ;
+  double arg6 ;
+  double arg7 ;
+  GeoCal::Time *arg8 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  void *argp8 = 0 ;
+  int res8 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared8 ;
+  GeoCal::GlasGfmCamera *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GlasGfmCamera" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_GlasGfmCamera" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res8 = SWIG_ConvertPtrAndOwn(swig_obj[7], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res8)) {
+      arg8 = ptr;
+    } else {
+      res8 = SWIG_ConvertPtrAndOwn(swig_obj[7], &argp8, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res8)) {
+        SWIG_exception_fail(SWIG_ArgError(res8), "in method '" "new_GlasGfmCamera" "', argument " "8"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp8) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "8"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared8 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp8);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp8);
+        arg8 = const_cast< GeoCal::Time * >(tempshared8.get());
+      } else {
+        arg8 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp8)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5,arg6,arg7,(GeoCal::Time const &)*arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7630,9 +7746,117 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
+  GeoCal::Camera *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  double arg4 ;
+  std::string *arg5 = 0 ;
+  double arg6 ;
+  double arg7 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  double val4 ;
+  int ecode4 = 0 ;
+  int res5 = SWIG_OLDOBJ ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  GeoCal::GlasGfmCamera *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
+      }
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GlasGfmCamera" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_GlasGfmCamera" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_GlasGfmCamera" "', argument " "4"" of type '" "double""'");
+  } 
+  arg4 = static_cast< double >(val4);
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GlasGfmCamera" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_GlasGfmCamera" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  {
+    try {
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GlasGfmCamera > *smartresult = result ? new boost::shared_ptr<  GeoCal::GlasGfmCamera >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GlasGfmCamera_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Camera *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
   double arg4 ;
@@ -7640,7 +7864,7 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_8(PyObject *SWIGUNUSEDPARM(se
   double arg6 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
   int val2 ;
   int ecode2 = 0 ;
   double val3 ;
@@ -7657,24 +7881,24 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_8(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
     if (SWIG_IsOK(res1)) {
       arg1 = ptr;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
       } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
       }
     }
   }
@@ -7711,7 +7935,7 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_8(PyObject *SWIGUNUSEDPARM(se
   arg6 = static_cast< double >(val6);
   {
     try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5,arg6);
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7730,16 +7954,16 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_11(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
+  GeoCal::Camera *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
   double arg4 ;
   std::string *arg5 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
   int val2 ;
   int ecode2 = 0 ;
   double val3 ;
@@ -7754,24 +7978,24 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_9(PyObject *SWIGUNUSEDPARM(se
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
     if (SWIG_IsOK(res1)) {
       arg1 = ptr;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
       } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
       }
     }
   }
@@ -7803,7 +8027,7 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_9(PyObject *SWIGUNUSEDPARM(se
   }
   {
     try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5);
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7822,15 +8046,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_10(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_12(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
-  GeoCal::QuaternionCamera *arg1 = 0 ;
+  GeoCal::Camera *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
   double arg4 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::QuaternionCamera const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Camera const > tempshared1 ;
   int val2 ;
   int ecode2 = 0 ;
   double val3 ;
@@ -7844,24 +8068,24 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_10(PyObject *SWIGUNUSEDPARM(s
     int newmem = 0;
     // Added mms
     // First check to see if all ready pointer type
-    GeoCal::QuaternionCamera *ptr;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__QuaternionCamera,  0 , &newmem);
+    GeoCal::Camera *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__Camera,  0 , &newmem);
     if (SWIG_IsOK(res1)) {
       arg1 = ptr;
     } else {
-      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__QuaternionCamera_t,  0 , &newmem);
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Camera_t,  0 , &newmem);
       if (!SWIG_IsOK(res1)) {
-        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'");
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'");
       }
       if (!argp1) {
-        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::QuaternionCamera const &""'"); 
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GlasGfmCamera" "', argument " "1"" of type '" "GeoCal::Camera const &""'"); 
       }
       if (newmem & SWIG_CAST_NEW_MEMORY) {
-        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        delete reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1);
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(tempshared1.get());
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1);
+        arg1 = const_cast< GeoCal::Camera * >(tempshared1.get());
       } else {
-        arg1 = const_cast< GeoCal::QuaternionCamera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::QuaternionCamera > * >(argp1)->get());
+        arg1 = const_cast< GeoCal::Camera * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Camera > * >(argp1)->get());
       }
     }
   }
@@ -7882,7 +8106,7 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera__SWIG_10(PyObject *SWIGUNUSEDPARM(s
   arg4 = static_cast< double >(val4);
   {
     try {
-      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::QuaternionCamera const &)*arg1,arg2,arg3,arg4);
+      result = (GeoCal::GlasGfmCamera *)new GeoCal::GlasGfmCamera((GeoCal::Camera const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7901,11 +8125,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_GlasGfmCamera(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[8] = {
+  PyObject *argv[9] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_GlasGfmCamera",0,7,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_GlasGfmCamera",0,8,argv))) SWIG_fail;
   --argc;
   if (argc == 0) {
     return _wrap_new_GlasGfmCamera__SWIG_2(self, argc, argv);
@@ -7917,7 +8141,7 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera(PyObject *self, PyObject *args) {
     return _wrap_new_GlasGfmCamera__SWIG_0(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_GlasGfmCamera__SWIG_6(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_7(self, argc, argv);
   }
   if (argc == 4) {
     int _v = 0;
@@ -7928,12 +8152,12 @@ SWIGINTERN PyObject *_wrap_new_GlasGfmCamera(PyObject *self, PyObject *args) {
       }
     }
     if (!_v) goto check_5;
-    return _wrap_new_GlasGfmCamera__SWIG_10(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_12(self, argc, argv);
   }
 check_5:
   
   if (argc == 4) {
-    return _wrap_new_GlasGfmCamera__SWIG_5(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_6(self, argc, argv);
   }
   if (argc == 5) {
     int _v = 0;
@@ -7949,12 +8173,12 @@ check_5:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_7;
-    return _wrap_new_GlasGfmCamera__SWIG_9(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_11(self, argc, argv);
   }
 check_7:
   
   if (argc == 5) {
-    return _wrap_new_GlasGfmCamera__SWIG_4(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_5(self, argc, argv);
   }
   if (argc == 6) {
     int _v = 0;
@@ -7970,22 +8194,43 @@ check_7:
       _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_9;
-    {
-      {
-        int res = SWIG_AsVal_double(argv[5], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_9;
-    return _wrap_new_GlasGfmCamera__SWIG_8(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_10(self, argc, argv);
   }
 check_9:
   
   if (argc == 6) {
-    return _wrap_new_GlasGfmCamera__SWIG_3(self, argc, argv);
+    return _wrap_new_GlasGfmCamera__SWIG_4(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_GlasGfmCamera__SWIG_7(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    {
+      {
+        int res = SWIG_AsVal_double(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_11;
+    return _wrap_new_GlasGfmCamera__SWIG_9(self, argc, argv);
+  }
+check_11:
+  
+  if (argc == 7) {
+    return _wrap_new_GlasGfmCamera__SWIG_3(self, argc, argv);
+  }
+  if (argc == 8) {
+    return _wrap_new_GlasGfmCamera__SWIG_8(self, argc, argv);
   }
   
 fail:
@@ -7994,14 +8239,16 @@ fail:
     "    GeoCal::GlasGfmCamera::GlasGfmCamera(int,int)\n"
     "    GeoCal::GlasGfmCamera::GlasGfmCamera(int)\n"
     "    GeoCal::GlasGfmCamera::GlasGfmCamera()\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,std::string const &,double,GeoCal::Time const &)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,std::string const &,double)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,std::string const &)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,double,std::string const &,double,GeoCal::Time const &)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,double,std::string const &,double)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,double,std::string const &)\n"
-    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::QuaternionCamera const &,int,double,double)\n");
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,std::string const &,double,double,GeoCal::Time const &)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,std::string const &,double,double)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,std::string const &,double)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,std::string const &)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,double,std::string const &,double,double,GeoCal::Time const &)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,double,std::string const &,double,double)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,double,std::string const &,double)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,double,std::string const &)\n"
+    "    GeoCal::GlasGfmCamera::GlasGfmCamera(GeoCal::Camera const &,int,double,double)\n");
   return 0;
 }
 
@@ -9979,7 +10226,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_ppoff__SWIG_0(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10125,7 +10372,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_angoff__SWIG_0(PyObject *SWIGUNUSEDP
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10501,7 +10748,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_field_alignment__SWIG_0(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11063,7 +11310,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11209,7 +11456,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_first_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11355,7 +11602,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_line_block__SWIG_0(PyObject *S
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11501,7 +11748,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera__v_delta_sample_block__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -11654,7 +11901,7 @@ SWIGINTERN PyObject *_wrap_GlasGfmCamera_field_alignment_block__SWIG_0(PyObject 
     }
   }
   {
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[5], stride[5];
     for(int i = 0; i < 5; ++i) {
@@ -12243,8 +12490,31 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_GlasGfmCamera", _wrap_new_GlasGfmCamera, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)\n"
+		"GlasGfmCamera::GlasGfmCamera(const Camera &Cam, int Band, double Delta_line, double Delta_sample,\n"
+		"const std::string &Band_type=\"N\", double Band_wavelength=1.45,\n"
+		"double Focal_length_meter=1.0, const Time\n"
+		"&Focal_length_time=Time::time_j2000(0))\n"
+		"It is common to create a GlasGfmCamera by fitting it to another\n"
+		"camera.\n"
 		"\n"
+		"This does that in one step, taking a QuaternionCamera and fitting for\n"
+		"the given Band. This version is for Frame \"F\" type sensor.\n"
+		"\n"
+		"Note the focal length doesn't really affect anything, it gets scaled\n"
+		"out when we fit the Camera. If you don't otherwise have a value here\n"
+		"then you can just set this to 1.0 or something like that. Focal length\n"
+		"is in meters, unlike the focal length in QuaternionCamera that is in\n"
+		"mm.\n"
+		"\n"
+		"Note for QuaternionCamera, the generated glas model has any rotation\n"
+		"embedded in the generated model. If you want to assign the frame_to_sc\n"
+		"to the GlasGfmCamera, then you should make sure to pass a Camera with\n"
+		"a identity frame_to_sc. So a reasonable process (in python) would be\n"
+		"something like:\n"
+		"\n"
+		"q_original = cam.frame_to_sc cam.frame_to_sc =\n"
+		"Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)\n"
+		"gcam.frame_to_sc = q_original cam.frame_to_sc = q_original \n"
 		""},
 	 { (char *)"GlasGfmCamera_set_number_line", _wrap_GlasGfmCamera_set_number_line, METH_VARARGS, (char *)"\n"
 		"\n"
@@ -12425,8 +12695,30 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
+		"void GlasGfmCamera::field_alignment_block(const Camera &Cam, double Delta_line, double Delta_sample, int\n"
+		"Band=0)\n"
+		"Populate the field_alignment, first_line_block, first_sample_block,\n"
+		"delta_line and delta_sample to match the given camera.\n"
 		"\n"
+		"This creates only one block - we currently don't support multiple\n"
+		"blocks.\n"
+		"\n"
+		"Only applicable for sensor type \"F\" and field_angle_type 0.\n"
+		"\n"
+		"You may want to call compare_camera to check how accurate the\n"
+		"approximation is.\n"
+		"\n"
+		"Note that you should be careful not to double count any frame_t\n"
+		"quaternion. If you pass that in with the Cam, then this is already\n"
+		"accounted for in the field angle map (which has the effect of the\n"
+		"quaternion embedded in it). If you want to assign the frame_to_sc to\n"
+		"the GlasGfmCamera, then you should make sure to pass a Camera with a\n"
+		"identity frame_to_sc. So a reasonable process (in python) would be\n"
+		"something like:\n"
+		"\n"
+		"q_original = cam.frame_to_sc cam.frame_to_sc =\n"
+		"Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)\n"
+		"gcam.frame_to_sc = q_original cam.frame_to_sc = q_original \n"
 		""},
 	 { (char *)"GlasGfmCamera_compare_camera", _wrap_GlasGfmCamera_compare_camera, METH_VARARGS, (char *)"\n"
 		"\n"

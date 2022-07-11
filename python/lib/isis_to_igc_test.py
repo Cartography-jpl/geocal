@@ -2,12 +2,12 @@ from test_support import *
 from .isis_support import pds_to_isis
 from .isis_to_igc import *
 from .isis_igc import IsisIgc
-from geocal_swig import ImageCoordinate
+from geocal_swig import ImageCoordinate, SubCamera
 from .sqlite_shelf import write_shelve
 import pandas as pd
 
-def check_igc(fname, check_time=False, check_camera=True,check_isis=True,
-              check_spice=True, check_glas_rsm=True):
+def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
+              check_spice=False, check_glas_rsm=True):
     '''Compare a IGC with the same ISIS calculation. This tends to be
     common for different instruments, so collect the generic part of
     what we check here.'''
@@ -24,7 +24,11 @@ def check_igc(fname, check_time=False, check_camera=True,check_isis=True,
 
     if check_camera:
         cam = igc.ipi.camera
-        gcam =igc_isis.glas_cam_model(cam.focal_length)
+        if(isinstance(cam, SubCamera)):
+            focal_length = cam.full_camera.focal_length
+        else:
+            focal_length = cam.focal_length
+        gcam =igc_isis.glas_cam_model(focal_length)
         write_shelve("cam.xml", cam)
         write_shelve("gcam.xml", gcam)
         # This shows we agree pretty well between the 2 cameras.
@@ -99,6 +103,13 @@ def test_ctx_to_igc(mars_test_data, isolated_dir):
         pds_to_isis(mars_test_data + "P16_007388_2049_XI_24N020W.IMG",
                     "ctx.cub")
         fname = "ctx.cub"
+    check_igc(fname)
+
+@long_test
+@require_isis
+def test_ctx_sample_first_to_igc(mars_test_data, isolated_dir):
+    '''A case Tom had where the sample_first isn't 0'''
+    fname = "/home/smyth/Local/geocal-repo/python/tom_problem.cub"
     check_igc(fname)
     
 @long_test

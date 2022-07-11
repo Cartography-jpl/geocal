@@ -411,19 +411,34 @@ void GlasGfmCamera::init_model()
 /// fitting for the given Band. This version is for Pushbroom "S" type
 /// sensor.
 ///
-/// See note in field_alignment_fit about handling frame_to_sc
-/// quaternion.
+/// Note the focal length doesn't really affect anything, it gets
+/// scaled out when we fit the Camera. If you don't otherwise have a
+/// value here then you can just set this to 1.0 or something like
+/// that. Focal length is in meters, unlike the focal length in
+/// QuaternionCamera that is in mm.
+///
+/// Note for QuaternionCamera, the generated glas model has any
+/// rotation embedded in the generated model. If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaternion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
-GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
+GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
 			     double Delta_sample,
 			     const std::string& Band_type,
 			     double Band_wavelength,
+			     double Focal_length_meter,
 			     const Time& Focal_length_time)
-: focal_length_(Cam.focal_length() * 1e-3), // 1e-3 to change units to meter
+: focal_length_(Focal_length_meter),
   nline_(Cam.number_line(Band)),
   nsamp_(Cam.number_sample(Band)),
-  frame_to_sc_(Cam.frame_to_sc()),
   band_type_(Band_type),
   band_wavelength_(Band_wavelength),
   focal_length_time_(Focal_length_time),
@@ -436,6 +451,7 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
+  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
   field_alignment_fit(Cam, delta_sample_pair_, Band);
@@ -450,20 +466,35 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
 /// fitting for the given Band. This version is for Frame "F" type
 /// sensor.
 ///
-/// See note in field_alignment_block about handling frame_to_sc
-/// quaternion.
+/// Note the focal length doesn't really affect anything, it gets
+/// scaled out when we fit the Camera. If you don't otherwise have a
+/// value here then you can just set this to 1.0 or something like
+/// that. Focal length is in meters, unlike the focal length in
+/// QuaternionCamera that is in mm.
+///
+/// Note for QuaternionCamera, the generated glas model has any
+/// rotation embedded in the generated model. If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaternion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
-GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
+GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
 			     double Delta_line,
 			     double Delta_sample,
 			     const std::string& Band_type,
 			     double Band_wavelength,
+			     double Focal_length_meter,
 			     const Time& Focal_length_time)
-: focal_length_(Cam.focal_length() * 1e-3), // 1e-3 to change units to meter
+: focal_length_(Focal_length_meter), 
   nline_(Cam.number_line(Band)),
   nsamp_(Cam.number_sample(Band)),
-  frame_to_sc_(Cam.frame_to_sc()),
   band_type_(Band_type),
   band_wavelength_(Band_wavelength),
   focal_length_time_(Focal_length_time),
@@ -476,6 +507,7 @@ GlasGfmCamera::GlasGfmCamera(const QuaternionCamera& Cam, int Band,
 {
   // Leave these as empty
   // band_index_, irepband_, isubcat_.
+  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
   field_alignment_block(Cam, Delta_line, Delta_sample, Band);

@@ -16,14 +16,16 @@ namespace GeoCal {
 class GlasGfmCamera : public Camera {
 public:
   GlasGfmCamera(int Number_line = 1, int Number_sample = 256);
-  GlasGfmCamera(const QuaternionCamera& Cam, int Band, double Delta_sample,
+  GlasGfmCamera(const Camera& Cam, int Band, double Delta_sample,
 		const std::string& Band_type = "N",
 		double Band_wavelength = 1.45,
+		double Focal_length_meter = 1.0,
 		const Time& Focal_length_time = Time::time_j2000(0));
-  GlasGfmCamera(const QuaternionCamera& Cam, int Band, double Delta_line,
+  GlasGfmCamera(const Camera& Cam, int Band, double Delta_line,
 		double Delta_sample,
 		const std::string& Band_type = "N",
 		double Band_wavelength = 1.45,
+		double Focal_length_meter = 1.0,
 		const Time& Focal_length_time = Time::time_j2000(0));
   virtual int number_line(int Band) const;
   virtual int number_sample(int Band) const;

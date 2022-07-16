@@ -143,6 +143,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_orbit_offset_correction)(void);
   INIT_TYPE INIT_FUNC(_orbit_piecewise_correction)(void);
   INIT_TYPE INIT_FUNC(_orbit_time_shift)(void);
+  INIT_TYPE INIT_FUNC(_orbit_array)(void);
   INIT_TYPE INIT_FUNC(_orbit_quaternion_list_offset)(void);
   INIT_TYPE INIT_FUNC(_tle_orbit)(void);
   INIT_TYPE INIT_FUNC(_spice_orbit)(void);
@@ -213,7 +214,6 @@ extern "C" {
 #ifdef HAVE_HDF5
   INIT_TYPE INIT_FUNC(_hdf_file)(void);
   INIT_TYPE INIT_FUNC(_hdf_orbit)(void);
-  INIT_TYPE INIT_FUNC(_orbit_array)(void);
   INIT_TYPE INIT_FUNC(_hdf_orbit_carto)(void);
 #endif
 #ifdef HAVE_GDAL
@@ -370,6 +370,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_orbit_offset_correction", INIT_FUNC(_orbit_offset_correction));
   INIT_MODULE(module, "_orbit_piecewise_correction", INIT_FUNC(_orbit_piecewise_correction));
   INIT_MODULE(module, "_orbit_time_shift", INIT_FUNC(_orbit_time_shift));
+  INIT_MODULE(module, "_orbit_array", INIT_FUNC(_orbit_array));
   INIT_MODULE(module, "_orbit_quaternion_list_offset", INIT_FUNC(_orbit_quaternion_list_offset));
   INIT_MODULE(module, "_tle_orbit", INIT_FUNC(_tle_orbit));
   INIT_MODULE(module, "_spice_orbit", INIT_FUNC(_spice_orbit));
@@ -440,7 +441,6 @@ static void module_init(PyObject* module)
 #ifdef HAVE_HDF5
   INIT_MODULE(module, "_hdf_file", INIT_FUNC(_hdf_file));
   INIT_MODULE(module, "_hdf_orbit", INIT_FUNC(_hdf_orbit));
-  INIT_MODULE(module, "_orbit_array", INIT_FUNC(_orbit_array));
   INIT_MODULE(module, "_hdf_orbit_carto", INIT_FUNC(_hdf_orbit_carto));
 #endif
 #ifdef HAVE_GDAL

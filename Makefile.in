@@ -498,6 +498,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/orbit_piecewise_correction_wrap.cc \
 	@swigsrc@/orbit_time_shift_wrap.cc \
+	@swigsrc@/orbit_array_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_offset_wrap.cc \
 	@swigsrc@/tle_orbit_wrap.cc @swigsrc@/spice_orbit_wrap.cc \
 	@swigsrc@/spice_planet_orbit_wrap.cc \
@@ -551,8 +552,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/air_mspi_l1b1_wrap.cc @swigsrc@/air_mspi_igc_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
 	@swigsrc@/jia_sample_wrap.cc @swigsrc@/hdf_file_wrap.cc \
-	@swigsrc@/hdf_orbit_wrap.cc @swigsrc@/orbit_array_wrap.cc \
-	@swigsrc@/hdf_orbit_carto_wrap.cc \
+	@swigsrc@/hdf_orbit_wrap.cc @swigsrc@/hdf_orbit_carto_wrap.cc \
 	@swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
 	@swigsrc@/gdal_datum_wrap.cc @swigsrc@/gdal_dem_wrap.cc \
@@ -700,6 +700,7 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_offset_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_piecewise_correction_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo \
+	@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo \
 	@swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo \
 	@swigsrc@/_swig_wrap_la-spice_orbit_wrap.lo \
@@ -769,7 +770,6 @@ am__objects_1 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-jia_sample_wrap.lo
 am__objects_2 = @swigsrc@/_swig_wrap_la-hdf_file_wrap.lo \
 	@swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo \
-	@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo \
 	@swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo
 @HAVE_HDF5_TRUE@am__objects_3 = $(am__objects_2)
 am__objects_4 = @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo \
@@ -3642,6 +3642,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/orbit_offset_correction_wrap.cc \
 	@swigsrc@/orbit_piecewise_correction_wrap.cc \
 	@swigsrc@/orbit_time_shift_wrap.cc \
+	@swigsrc@/orbit_array_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_offset_wrap.cc \
 	@swigsrc@/tle_orbit_wrap.cc @swigsrc@/spice_orbit_wrap.cc \
 	@swigsrc@/spice_planet_orbit_wrap.cc \
@@ -3696,7 +3697,6 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/air_mspi_igc_collection_wrap.cc \
 	@swigsrc@/jia_sample_wrap.cc
 SWIG_SRC_HDF5 = @swigsrc@/hdf_file_wrap.cc @swigsrc@/hdf_orbit_wrap.cc \
-	@swigsrc@/orbit_array_wrap.cc \
 	@swigsrc@/hdf_orbit_carto_wrap.cc
 SWIG_SRC_GDAL = @swigsrc@/geocal_gdal_wrap.cc \
 	@swigsrc@/gdal_raster_image_wrap.cc \
@@ -5033,6 +5033,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-tle_orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -5171,8 +5173,6 @@ clean-pkgpythonswigLTLIBRARIES:
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo: @swigsrc@/$(am__dirstamp) \
 	@swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-geocal_gdal_wrap.lo:  \
@@ -8142,6 +8142,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_time_shift_wrap.lo `test -f '@swigsrc@/orbit_time_shift_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_time_shift_wrap.cc
 
+@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo: @swigsrc@/orbit_array_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo `test -f '@swigsrc@/orbit_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_array_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_array_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo `test -f '@swigsrc@/orbit_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_array_wrap.cc
+
 @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo: @swigsrc@/orbit_quaternion_list_offset_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_quaternion_list_offset_wrap.lo `test -f '@swigsrc@/orbit_quaternion_list_offset_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_quaternion_list_offset_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_offset_wrap.Plo
@@ -8624,13 +8631,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/hdf_orbit_wrap.cc' object='@swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-hdf_orbit_wrap.lo `test -f '@swigsrc@/hdf_orbit_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/hdf_orbit_wrap.cc
-
-@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo: @swigsrc@/orbit_array_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo `test -f '@swigsrc@/orbit_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_array_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_array_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/orbit_array_wrap.cc' object='@swigsrc@/_swig_wrap_la-orbit_array_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-orbit_array_wrap.lo `test -f '@swigsrc@/orbit_array_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_array_wrap.cc
 
 @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo: @swigsrc@/hdf_orbit_carto_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-hdf_orbit_carto_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-hdf_orbit_carto_wrap.lo `test -f '@swigsrc@/hdf_orbit_carto_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/hdf_orbit_carto_wrap.cc

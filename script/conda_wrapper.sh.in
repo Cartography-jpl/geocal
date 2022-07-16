@@ -1,0 +1,6 @@
+#!/bin/bash
+# Simple wrapper script to execute a command in this conda environment.
+# Basically conda run with the paths set up. We also pull this out in case
+# we need to tweak this at some point (say handle more than just python)
+conda_prefix="@prefix@"
+$conda_prefix/bin/conda run -p $conda_prefix python "$@"

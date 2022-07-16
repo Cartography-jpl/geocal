@@ -8,3 +8,7 @@ if GEOCAL_OVERRIDE_AFIDS
 installafidspython_DATA+= @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
 bin_SCRIPTS+= @srcpythonscript@/vicarb
 endif
+if WITH_CONDA_INSTALL_SUPPORT
+bin_SCRIPTS+= @srcpythonscript@/conda_wrapper.sh
+endif
+

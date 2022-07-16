@@ -645,6 +645,8 @@ WITH_DOCUMENTATION_FALSE
 WITH_DOCUMENTATION_TRUE
 HAVE_BOOST_SERIALIZATION_FALSE
 HAVE_BOOST_SERIALIZATION_TRUE
+WITH_CONDA_INSTALL_SUPPORT_FALSE
+WITH_CONDA_INSTALL_SUPPORT_TRUE
 LIBM
 IS_MAC64_FALSE
 IS_MAC64_TRUE
@@ -1056,6 +1058,7 @@ with_afids
 with_carto
 with_python
 with_swig
+with_conda_install_support
 with_boost_serialization
 with_documentation
 with_isis_root
@@ -1837,6 +1840,8 @@ Optional Packages:
                           SWIG wrappers can take a bit of time to create and
                           compile, so if you aren't working directly with them
                           it can be useful to turn off during development.
+  --with-conda-install-support
+                          extra build support for doing a conda install
   --without-boost-serialization
                           Do not include code to support doing boost
                           serialization with GeoCal objects
@@ -2991,6 +2996,8 @@ ac_configure="$SHELL $ac_aux_dir/configure"  # Please don't use this var.
 ac_config_files="$ac_config_files script/setup_afids_python.csh script/setup_afids_python.sh"
 
 ac_config_files="$ac_config_files script/setup_geocal.csh script/setup_geocal.sh"
+
+ac_config_files="$ac_config_files script/conda_wrapper.sh"
 
 ac_config_files="$ac_config_files script/setup_afids_env.csh script/setup_afids_env.sh script/vicarb"
 
@@ -27003,6 +27010,28 @@ done
 
 
 #=================================================================
+# Build does a few extra things to support a conda install -
+# add a conda_wrapper.sh script, modify shebangs so vicar procs are
+# callable without activating conda.
+
+
+# Check whether --with-conda-install-support was given.
+if test "${with_conda_install_support+set}" = set; then :
+  withval=$with_conda_install_support; with_conda_install_support=yes
+else
+  with_conda_install_support=no
+fi
+
+ if  test "$with_conda_install_support" = "yes" ; then
+  WITH_CONDA_INSTALL_SUPPORT_TRUE=
+  WITH_CONDA_INSTALL_SUPPORT_FALSE='#'
+else
+  WITH_CONDA_INSTALL_SUPPORT_TRUE='#'
+  WITH_CONDA_INSTALL_SUPPORT_FALSE=
+fi
+
+
+#=================================================================
 # Turn off use of boost serialization of desired. Don't have a use
 # case for this yet, but it is easier to put in and not use than
 # to not have it and find we need it.
@@ -27538,6 +27567,10 @@ Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${IS_MAC64_TRUE}" && test -z "${IS_MAC64_FALSE}"; then
   as_fn_error $? "conditional \"IS_MAC64\" was never defined.
+Usually this means the macro was only invoked conditionally." "$LINENO" 5
+fi
+if test -z "${WITH_CONDA_INSTALL_SUPPORT_TRUE}" && test -z "${WITH_CONDA_INSTALL_SUPPORT_FALSE}"; then
+  as_fn_error $? "conditional \"WITH_CONDA_INSTALL_SUPPORT\" was never defined.
 Usually this means the macro was only invoked conditionally." "$LINENO" 5
 fi
 if test -z "${HAVE_BOOST_SERIALIZATION_TRUE}" && test -z "${HAVE_BOOST_SERIALIZATION_FALSE}"; then
@@ -28533,6 +28566,7 @@ do
     "script/setup_afids_python.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_python.sh" ;;
     "script/setup_geocal.csh") CONFIG_FILES="$CONFIG_FILES script/setup_geocal.csh" ;;
     "script/setup_geocal.sh") CONFIG_FILES="$CONFIG_FILES script/setup_geocal.sh" ;;
+    "script/conda_wrapper.sh") CONFIG_FILES="$CONFIG_FILES script/conda_wrapper.sh" ;;
     "script/setup_afids_env.csh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_env.csh" ;;
     "script/setup_afids_env.sh") CONFIG_FILES="$CONFIG_FILES script/setup_afids_env.sh" ;;
     "script/vicarb") CONFIG_FILES="$CONFIG_FILES script/vicarb" ;;
@@ -30018,6 +30052,9 @@ echo "  Generate SWIG wrappers:        ${generate_swig}"
 
 
 echo "  Install documentation:         ${with_documentation}"
+
+
+echo "  Conda install support:         ${with_conda_install_support}"
 
 
 echo "  Include boost serialization:   ${with_boost_serialization}"

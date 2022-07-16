@@ -6,6 +6,7 @@ AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_MACRO_DIR([config/m4_local])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
 AC_CONFIG_FILES([script/setup_geocal.csh script/setup_geocal.sh])
+AC_CONFIG_FILES([script/conda_wrapper.sh])
 AC_CONFIG_FILES([script/setup_afids_env.csh script/setup_afids_env.sh script/vicarb])
 AC_CONFIG_FILES([lib/GeoCalCore/Support/global_fixture_default.cc])
 AC_CONFIG_FILES([geocal.pc])
@@ -143,6 +144,18 @@ LIBS="$LIBS $LIBM"
 AC_CHECK_FUNCS(sincos)
 
 #=================================================================
+# Build does a few extra things to support a conda install -
+# add a conda_wrapper.sh script, modify shebangs so vicar procs are
+# callable without activating conda.
+
+AC_ARG_WITH([conda-install-support],
+	     [AS_HELP_STRING([--with-conda-install-support],
+	     [extra build support for doing a conda install])],
+	     [with_conda_install_support=yes],
+	     [with_conda_install_support=no])
+AM_CONDITIONAL([WITH_CONDA_INSTALL_SUPPORT], [ test "$with_conda_install_support" = "yes" ])
+	     
+#=================================================================
 # Turn off use of boost serialization of desired. Don't have a use
 # case for this yet, but it is easier to put in and not use than
 # to not have it and find we need it.
@@ -226,6 +239,7 @@ LOC_MSG([  CXX compiler:                  ${CXX} ${CXXFLAGS}])
 LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
+LOC_MSG([  Conda install support:         ${with_conda_install_support}])
 LOC_MSG([  Include boost serialization:   ${with_boost_serialization}])
 LOC_MSG([  Have AFIDS Data:               ${have_afids_data}])
 LOC_MSG([  Have AFIDS:                    ${have_afids}])

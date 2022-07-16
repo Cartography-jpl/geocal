@@ -198,8 +198,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@am__append_13 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	README.developer INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_14 = install_doxygen_doc \
-@WITH_DOCUMENTATION_TRUE@	install_python_doc
+@WITH_DOCUMENTATION_TRUE@am__append_14 = install_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_15 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_16 = clean_doxygen_generate
 @BUILD_LIBRAW_TRUE@am__append_17 = libraw.la
@@ -257,11 +256,14 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @BUILD_AFIDS_FALSE@am__append_36 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
 @GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_37 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
 @GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_38 = @srcpythonscript@/vicarb
-@CODE_COVERAGE_ENABLED_TRUE@am__append_39 = --cov-report term \
+@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_39 = @srcpythonscript@/conda_wrapper.sh
+@CODE_COVERAGE_ENABLED_TRUE@am__append_40 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@HAVE_VICAR_RTL_TRUE@am__append_40 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_41 = replace_python_shebang
+@HAVE_VICAR_RTL_TRUE@am__append_42 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_43 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps =  \
@@ -334,9 +336,10 @@ CONFIG_HEADER =  \
 	$(top_builddir)/lib/GeoCalCore/Support/geocal_external_config.h
 CONFIG_CLEAN_FILES = script/setup_afids_python.csh \
 	script/setup_afids_python.sh script/setup_geocal.csh \
-	script/setup_geocal.sh script/setup_afids_env.csh \
-	script/setup_afids_env.sh script/vicarb \
-	lib/GeoCalCore/Support/global_fixture_default.cc geocal.pc
+	script/setup_geocal.sh script/conda_wrapper.sh \
+	script/setup_afids_env.csh script/setup_afids_env.sh \
+	script/vicarb lib/GeoCalCore/Support/global_fixture_default.cc \
+	geocal.pc
 CONFIG_CLEAN_VPATH_FILES =
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__EXEEXT_1 = picmtch5$(EXEEXT)
 am__installdirs = "$(DESTDIR)$(afidspythonvdevdir)" \
@@ -2710,6 +2713,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(top_srcdir)/lib/GeoCalCore/Support/geocal_config.h.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/geocal_external_config.h.in \
 	$(top_srcdir)/lib/GeoCalCore/Support/global_fixture_default.cc.in \
+	$(top_srcdir)/script/conda_wrapper.sh.in \
 	$(top_srcdir)/script/setup_afids_env.csh.in \
 	$(top_srcdir)/script/setup_afids_env.sh.in \
 	$(top_srcdir)/script/setup_afids_python.csh.in \
@@ -3014,7 +3018,7 @@ noop =
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
 noinst_LTLIBRARIES = $(am__append_17)
-bin_SCRIPTS = $(am__append_38)
+bin_SCRIPTS = $(am__append_38) $(am__append_39)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -3325,7 +3329,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_14)
+INSTALL_DATA_HOOK = $(am__append_14) $(am__append_41) $(am__append_43)
 UNINSTALL_HOOK = $(am__append_15) clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_16)
 INSTALLCHECK_HOOK = python_check
@@ -3728,7 +3732,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_40)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_42)
 dist_afidspythonvdev_DATA = $(am__append_20) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -4477,7 +4481,7 @@ PYTEST_NJOB = 10
 # Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
 # PYTEST_EXTRAFLAGS="--timeout=20"
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_39)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_40)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
@@ -4548,6 +4552,8 @@ script/setup_afids_python.sh: $(top_builddir)/config.status $(top_srcdir)/script
 script/setup_geocal.csh: $(top_builddir)/config.status $(top_srcdir)/script/setup_geocal.csh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 script/setup_geocal.sh: $(top_builddir)/config.status $(top_srcdir)/script/setup_geocal.sh.in
+	cd $(top_builddir) && $(SHELL) ./config.status $@
+script/conda_wrapper.sh: $(top_builddir)/config.status $(top_srcdir)/script/conda_wrapper.sh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
 script/setup_afids_env.csh: $(top_builddir)/config.status $(top_srcdir)/script/setup_afids_env.csh.in
 	cd $(top_builddir) && $(SHELL) ./config.status $@
@@ -15209,10 +15215,11 @@ python-check:
         $(setup_geocal) && \
         $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
 
-# In some environments it can be useful to replace the standard
-# #!/usr/bin/env python with a hard coded path. In particular this
-# is useful in conda environments. So we have a rule here which can
-# get explicitly run if desired.
+# In conda environments it is useful to be able to call python
+# scripts without activating the conda environment. We have
+# logic here for replacing the shebang with a multiline shebang
+# (see https://rosettacode.org/wiki/Multiline_shebang#Python for
+# how this works.
 
 replace_python_shebang: replace_python_shebang1 replace_python_shebang2
 
@@ -15220,9 +15227,10 @@ replace_python_shebang1: install-dist_binSCRIPTS
 	flist=`grep --binary-files=without-match '#!' -R $(bindir) | grep python | sed s/:.*//g` ; \
         for i in $$flist; do \
            mv -f $$i $$i.old; \
-           echo "#!$(PYTHON)" > $$i; \
+           echo "#!/bin/bash" > $$i; \
+           echo '"exec" "${prefix}/bin/conda_wrapper.sh" "$$0" "$$@"' >> $$i; \
            chmod --reference=$$i.old $$i; \
-           tail -n +2 $$i.old >> $$i ; \
+           cat $$i.old >> $$i ; \
            rm -f $$i.old ; \
          done
 
@@ -15230,9 +15238,10 @@ replace_python_shebang2: install-dist_afidspythonvdevSCRIPTS
 	flist=`grep --binary-files=without-match '#!' -R $(afidspythonvdevdir) | grep python | sed s/:.*//g` ; \
         for i in $$flist; do \
           mv -f $$i $$i.old; \
-          echo "#!$(PYTHON)" > $$i; \
+          echo "#!/bin/bash" > $$i; \
+          echo '"exec" "${prefix}/bin/conda_wrapper.sh" "$$0" "$$@"' >> $$i; \
           chmod --reference=$$i.old $$i; \
-          tail -n +2 $$i.old >> $$i ; \
+          cat $$i.old >> $$i ; \
           rm -f $$i.old ; \
         done
 # Used to short circuit tests that would otherwise run.

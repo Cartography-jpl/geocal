@@ -70,10 +70,11 @@ python-check:
 
 INSTALLCHECK_HOOK+= python_check
 
-# In some environments it can be useful to replace the standard
-# #!/usr/bin/env python with a hard coded path. In particular this
-# is useful in conda environments. So we have a rule here which can
-# get explicitly run if desired.
+# In conda environments it is useful to be able to call python
+# scripts without activating the conda environment. We have
+# logic here for replacing the shebang with a multiline shebang
+# (see https://rosettacode.org/wiki/Multiline_shebang#Python for
+# how this works.
 
 replace_python_shebang: replace_python_shebang1 replace_python_shebang2
 
@@ -81,9 +82,10 @@ replace_python_shebang1: install-dist_binSCRIPTS
 	flist=`grep --binary-files=without-match '#!' -R $(bindir) | grep python | sed s/:.*//g` ; \
         for i in $$flist; do \
            mv -f $$i $$i.old; \
-           echo "#!$(PYTHON)" > $$i; \
+           echo "#!/bin/bash" > $$i; \
+           echo '"exec" "${prefix}/bin/conda_wrapper.sh" "$$0" "$$@"' >> $$i; \
            chmod --reference=$$i.old $$i; \
-           tail -n +2 $$i.old >> $$i ; \
+           cat $$i.old >> $$i ; \
            rm -f $$i.old ; \
          done
 
@@ -91,9 +93,13 @@ replace_python_shebang2: install-dist_afidspythonvdevSCRIPTS
 	flist=`grep --binary-files=without-match '#!' -R $(afidspythonvdevdir) | grep python | sed s/:.*//g` ; \
         for i in $$flist; do \
           mv -f $$i $$i.old; \
-          echo "#!$(PYTHON)" > $$i; \
+          echo "#!/bin/bash" > $$i; \
+          echo '"exec" "${prefix}/bin/conda_wrapper.sh" "$$0" "$$@"' >> $$i; \
           chmod --reference=$$i.old $$i; \
-          tail -n +2 $$i.old >> $$i ; \
+          cat $$i.old >> $$i ; \
           rm -f $$i.old ; \
         done
 
+if WITH_CONDA_INSTALL_SUPPORT
+INSTALL_DATA_HOOK += replace_python_shebang
+endif

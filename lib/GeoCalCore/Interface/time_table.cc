@@ -20,7 +20,11 @@ void ConstantSpacingTimeTable::serialize(Archive & ar, const unsigned int UNUSED
 {
   GEOCAL_GENERIC_BASE(TimeTable);
   GEOCAL_BASE(ConstantSpacingTimeTable, TimeTable);
-  ar & GEOCAL_NVP(min_t) & GEOCAL_NVP(max_l) & GEOCAL_NVP(tspace);
+  // We renamed min_t to t_min_line when we added support for negative
+  // time spacing. Not worth updating the serialization, so we just
+  // use the old name when saving.
+  ar & GEOCAL_NVP2("min_t", t_min_line) & GEOCAL_NVP(max_l)
+    & GEOCAL_NVP(tspace);
 }
 
 template<class Archive>
@@ -38,20 +42,24 @@ GEOCAL_IMPLEMENT(MeasuredTimeTable);
 #endif
 
 //-----------------------------------------------------------------------
-/// Constructor, creates time table from Min_time to Max_time with
-/// given Time spacing. We adjust Max_time to exactly Min_time + i *
+/// Constructor, creates time table from Time_min_line to
+/// Time_max_line with given Time spacing.
+/// We adjust Max_time to exactly Time_min_line + i *
 /// Time_space, rounding to nearest integer i, so it ok if Max_time is
 /// a little sloppy.
+/// Note Time_space can be negative, and Time_max_line < Time_min_line
 //-----------------------------------------------------------------------
   
-ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Min_time, 
-	   Time Max_time, double Time_space)
-: min_t(Min_time),
+ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, 
+	   Time Time_max_line, double Time_space)
+: t_min_line(Time_min_line),
   tspace(Time_space)
 {
-  range_min_check(Time_space, 0.0);
-  range_min_check(Max_time, Min_time);
-  max_l = (int) round((Max_time - Min_time) / tspace);
+  if(Time_space > 0)
+    range_min_check(Time_max_line, Time_min_line);
+  else
+    range_min_check(Time_min_line, Time_max_line);
+  max_l = (int) round((Time_max_line - Time_min_line) / tspace);
 }
 
 //-----------------------------------------------------------------------
@@ -62,7 +70,7 @@ ImageCoordinate ConstantSpacingTimeTable::image_coordinate(Time T,
 const FrameCoordinate& F) const
 {
   range_check_inclusive(T, min_time(), max_time());
-  double line = (T  - min_t) / tspace + F.line;
+  double line = (T  - t_min_line) / tspace + F.line;
   return ImageCoordinate(line, F.sample);
 }
 
@@ -77,7 +85,7 @@ ConstantSpacingTimeTable::image_coordinate_with_derivative
  const FrameCoordinateWithDerivative& F) const
 {
   range_check_inclusive(T.value(), min_time(), max_time());
-  AutoDerivative<double> line = (T  - min_t) / tspace + F.line;
+  AutoDerivative<double> line = (T  - t_min_line) / tspace + F.line;
   return ImageCoordinateWithDerivative(line, F.sample);
 }
 
@@ -91,7 +99,7 @@ void ConstantSpacingTimeTable::time(const ImageCoordinate& Ic, Time& T,
   // We add a border of 1 line to handle edge cases.
   range_check_inclusive(Ic.line, (double) min_line() - 1.0,
 			(double) max_line() + 1.0);
-  T = min_t + Ic.line * tspace;
+  T = t_min_line + Ic.line * tspace;
   F = FrameCoordinate(0, Ic.sample);
 }
 
@@ -107,7 +115,7 @@ void ConstantSpacingTimeTable::time_with_derivative
 {
   range_check_inclusive(Ic.line.value(), (double) min_line() - 1.0,
 			(double) max_line() + 1.0);
-  T = TimeWithDerivative(min_t) + Ic.line * tspace;
+  T = TimeWithDerivative(t_min_line) + Ic.line * tspace;
   F = FrameCoordinateWithDerivative(0, Ic.sample);
 }
 
@@ -133,6 +141,9 @@ void ConstantSpacingTimeTable::print(std::ostream& Os) const
 ///
 /// We often have trouble with edge cases (so time 1 ms before start
 /// of table). We pad the table with a single line extrapolation.
+///
+/// We currently assume that the timing is monotonic increasing. We
+/// could probably relax that if useful.
 //-----------------------------------------------------------------------
 
 MeasuredTimeTable::MeasuredTimeTable(const std::vector<Time>& Time_list,

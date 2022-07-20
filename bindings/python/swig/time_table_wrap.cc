@@ -12025,7 +12025,7 @@ SWIGINTERN PyObject *_wrap_TimeTable__v_parameter__SWIG_0(PyObject *SWIGUNUSEDPA
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -12308,7 +12308,7 @@ SWIGINTERN PyObject *_wrap_TimeTable__v_parameter_subset__SWIG_0(PyObject *SWIGU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -13274,7 +13274,12 @@ static PyMethodDef SwigMethods[] = {
 		"Minimum time table is valid for.\n"
 		"\n"
 		"Note often padding is added, so this is not necessarily the time of\n"
-		"the minimum line. \n"
+		"the minimum line.\n"
+		"\n"
+		"Also, there is no requirement that the time table is in increasing\n"
+		"time, or is even monotonic. So the min_time is the minimum time that\n"
+		"image_coordinate is valid for, not necessarily the time for the\n"
+		"minimum line. \n"
 		""},
 	 { (char *)"TimeTable__v_max_time", (PyCFunction)_wrap_TimeTable__v_max_time, METH_O, (char *)"\n"
 		"\n"
@@ -13282,7 +13287,12 @@ static PyMethodDef SwigMethods[] = {
 		"Maximum time table is valid for.\n"
 		"\n"
 		"Note often padding is added, so this is not necessarily the time of\n"
-		"the maximum line. \n"
+		"the maximum line.\n"
+		"\n"
+		"Also, there is no requirement that the time table is in increasing\n"
+		"time, or is even monotonic. So the max_time is the maximum time that\n"
+		"image_coordinate is valid for, not necessarily the time for the\n"
+		"maximum line. \n"
 		""},
 	 { (char *)"TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, NULL},
 	 { (char *)"TimeTable__v_parameter_with_derivative", _wrap_TimeTable__v_parameter_with_derivative, METH_VARARGS, NULL},
@@ -13297,12 +13307,13 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"TimeTable_swigregister", TimeTable_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ConstantSpacingTimeTable", _wrap_new_ConstantSpacingTimeTable, METH_VARARGS, (char *)"\n"
 		"\n"
-		"ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
-		"Constructor, creates time table from Min_time to Max_time with given\n"
-		"Time spacing.\n"
+		"ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, Time Time_max_line, double Time_space=40.8e-3)\n"
+		"Constructor, creates time table from Time_min_line to Time_max_line\n"
+		"with given Time spacing.\n"
 		"\n"
-		"We adjust Max_time to exactly Min_time + i * Time_space, rounding to\n"
-		"nearest integer i, so it ok if Max_time is a little sloppy. \n"
+		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding\n"
+		"to nearest integer i, so it ok if Max_time is a little sloppy. Note\n"
+		"Time_space can be negative, and Time_max_line < Time_min_line \n"
 		""},
 	 { (char *)"ConstantSpacingTimeTable__v_time_space", (PyCFunction)_wrap_ConstantSpacingTimeTable__v_time_space, METH_O, (char *)"\n"
 		"\n"
@@ -13325,7 +13336,10 @@ static PyMethodDef SwigMethods[] = {
 		"ordered. The first time is for the given Min_line (default of 0).\n"
 		"\n"
 		"We often have trouble with edge cases (so time 1 ms before start of\n"
-		"table). We pad the table with a single line extrapolation. \n"
+		"table). We pad the table with a single line extrapolation.\n"
+		"\n"
+		"We currently assume that the timing is monotonic increasing. We could\n"
+		"probably relax that if useful. \n"
 		""},
 	 { (char *)"MeasuredTimeTable__v_size_time_list", (PyCFunction)_wrap_MeasuredTimeTable__v_size_time_list, METH_O, (char *)"\n"
 		"\n"

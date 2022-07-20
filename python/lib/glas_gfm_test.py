@@ -9,7 +9,8 @@ from .glas_gfm import *
 from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance, Geodetic,
                          OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
                          KeplerOrbit, Time, OrbitDes, Ecr, RefractionMsp,
-                         quat_rot_x, quat_rot_y, deg_to_rad)
+                         quat_rot_x, quat_rot_y, deg_to_rad,
+                         ConstantSpacingTimeTable)
 from .sqlite_shelf import write_shelve
 import matplotlib.pylab as plt
 import matplotlib as mpl
@@ -666,6 +667,103 @@ def test_create_staring_glas(isolated_dir, igc_staring):
     print("Distance from refraction")
     print(pd.DataFrame(dist_ref).describe())
 
+@require_msp    
+@require_pynitf
+def test_create_reverse_staring_glas(isolated_dir, igc_staring):
+    '''Create a NITF file with GLAS in it. This is completely from scratch,
+    we don't use the RIP at all for this.
+
+    This variation uses a "staring" mode, which gives a strong bow-tie on the
+    surface. In addition, the timing goes "backwards", so the first line in
+    the data is actually the maximum time.'''
+    # "Real" igc
+    igc_r = igc_staring
+    igc_r.ipi.velocity_aberration = VelocityAberrationExact()
+    tt = igc_r.ipi.time_table
+    tt2 = ConstantSpacingTimeTable(tt.time(ImageCoordinate(igc_r.number_line-1,0))[0],
+                        tt.time(ImageCoordinate(0,0))[0],-tt.time_space)
+    igc_r.ipi.time_table = tt2
+    write_shelve("igc_r.xml", igc_r)
+    tdelta = abs(igc_r.ipi.time_table.time(ImageCoordinate(1,0))[0] -
+                 igc_r.ipi.time_table.time(ImageCoordinate(0,0))[0])
+    # Now, implement with stuff needed for GLAS
+    porb = PosCsephb(igc_r.ipi.orbit,
+                     igc_r.ipi.orbit.min_time,
+                     igc_r.ipi.orbit.max_time,
+                     tdelta,
+                     PosCsephb.LAGRANGE,
+                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+    aorb = AttCsattb(igc_r.ipi.orbit,
+                     igc_r.ipi.orbit.min_time,
+                     igc_r.ipi.orbit.max_time,
+                     tdelta,
+                     AttCsattb.LAGRANGE,
+                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+    orb_g = OrbitDes(porb,aorb)
+    cam_g = GlasGfmCamera(1, igc_r.ipi.camera.number_sample(0))
+    # 1e-3 converts from mm for QuaternionCamera to meter of GlasGfmCamera
+    cam_g.focal_length = igc_r.ipi.camera.focal_length * 1e-3
+    # MSP requires focal length to be from 0 100. Not clear why it would
+    # restrict this
+    cam_g.field_alignment_fit(igc_r.ipi.camera,
+                              igc_r.ipi.camera.number_sample(0))
+    ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+    igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, None)
+    ipi_g.velocity_aberration = VelocityAberrationExact()
+    igc_g.platform_id = "FAKEPL"
+    igc_g.payload_id = "FAKEPY"
+    igc_g.sensor_id = "FAKESN"
+    for i in range(0,2048,100):
+        for j in range(0,2048,100):
+            assert distance(igc_r.ground_coordinate(ImageCoordinate(i,j)),
+                            igc_g.ground_coordinate(ImageCoordinate(i,j))) < 0.01
+    f = pynitf.NitfFile()
+    # Should put in 3d data
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    img2 = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=3)
+    for i in range(9):
+        for j in range(10):
+            img2[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment.append(pynitf.NitfImageSegment(img2))
+    f.image_segment[0].create_glas_gfm(igc_g)
+    f.image_segment[1].create_glas_gfm(igc_g)
+    f.write("glas_test.ntf")
+    f2 = NitfFile("glas_test.ntf")
+    igc_msp2 = IgcMsp("glas_test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
+    with open("f2.txt", "w") as fh:
+        print(f2,file=fh)
+    igc_g2 = f2.image_segment[0].glas_gfm.igc(velocity_aberration_exact=True)
+    
+    # Slightly larger tolerance here because there is truncation of floats when
+    # we write the out.
+    diff = []
+    diff2 = []
+    h = []
+    h2 = []
+    for i in range(0,2048,100):
+        for j in range(0,2048,100):
+            gc1 = igc_r.ground_coordinate(ImageCoordinate(i,j))
+            gc2 = igc_g2.ground_coordinate(ImageCoordinate(i,j))
+            gc3 = igc_msp2.ground_coordinate(ImageCoordinate(i,j))
+            assert distance(gc1, gc2) < 0.05
+            diff.append(distance(gc3, gc2))
+            diff2.append(distance(gc3, gc1))
+            h.append(gc3.height_reference_surface)
+            h2.append(gc2.height_reference_surface)
+    # Small differences, not clear what this is from. Maybe aberration of light?
+    # Refraction is a much bigger effect here with the larger angles
+    print("max diff geocal vs. MSP no refraction: ", max(diff))
+    print("max diff before save: ", max(diff2))
+    print("max h: ", max(h))
+    print("max h: ", max(h2))
+    
 @skip    
 def test_create_dataset_refraction(igc_gfm, igc_staring):
     # A couple of data sets we can use for looking at the timing

@@ -76,6 +76,11 @@ public:
 ///  
 /// *Note* often padding is added, so this is not necessarily the time
 /// of the minimum line.
+///
+/// Also, there is no requirement that the time table is in increasing
+/// time, or is even monotonic. So the min_time is the minimum time
+/// that image_coordinate is valid for, not necessarily the time for
+/// the minimum line.
 //-----------------------------------------------------------------------
 
   virtual Time min_time() const = 0;
@@ -85,11 +90,14 @@ public:
 ///
 /// *Note* often padding is added, so this is not necessarily the time
 /// of the maximum line.
+///
+/// Also, there is no requirement that the time table is in increasing
+/// time, or is even monotonic. So the max_time is the maximum time
+/// that image_coordinate is valid for, not necessarily the time for
+/// the maximum line.
 //-----------------------------------------------------------------------
 
   virtual Time max_time() const = 0;
-
-  
 
   virtual void print(std::ostream& Os) const = 0;
 private:
@@ -104,7 +112,7 @@ private:
 
 class ConstantSpacingTimeTable : public TimeTable {
 public:
-  ConstantSpacingTimeTable(Time Min_time, Time Max_time, 
+  ConstantSpacingTimeTable(Time Time_min_line, Time Time_max_line, 
 			   double Time_space = 40.8e-3);
   virtual ~ConstantSpacingTimeTable() {}
   virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
@@ -137,24 +145,31 @@ public:
 ///
 /// Note we often have trouble with boundary cases, so something like
 /// like a time 1ms before the end edge of this time table. We add
-/// a border of -tspace to the min_time.  
+/// a border of tspace to the min_time.  
 //-----------------------------------------------------------------------
 
-  virtual Time min_time() const {return min_t - tspace;}
+  virtual Time min_time() const
+  {
+    return (tspace > 0 ? t_min_line - tspace :
+	    t_min_line + tspace * max_l + tspace);
+  }
 
 //-----------------------------------------------------------------------
 /// Maximum time table is valid for.
 ///
 /// Note we often have trouble with boundary cases, so something like
 /// like a time 1ms before the end edge of this time table. We add
-/// a border of -tspace to the min_time.  
+/// a border of tspace to the max_time.  
 //-----------------------------------------------------------------------
 
-  virtual Time max_time() const {return min_t + tspace * max_l + tspace;}
-
+  virtual Time max_time() const
+  {
+    return (tspace > 0 ? t_min_line + tspace * max_l + tspace:
+	    t_min_line - tspace);
+  }
   double time_space() const {return tspace;}
 private:
-  Time min_t;
+  Time t_min_line;
   int max_l;
   double tspace;
   ConstantSpacingTimeTable() {}

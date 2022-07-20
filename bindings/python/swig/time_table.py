@@ -365,7 +365,12 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         Minimum time table is valid for.
 
         Note often padding is added, so this is not necessarily the time of
-        the minimum line. 
+        the minimum line.
+
+        Also, there is no requirement that the time table is in increasing
+        time, or is even monotonic. So the min_time is the minimum time that
+        image_coordinate is valid for, not necessarily the time for the
+        minimum line. 
         """
         return _time_table.TimeTable__v_min_time(self)
 
@@ -382,7 +387,12 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         Maximum time table is valid for.
 
         Note often padding is added, so this is not necessarily the time of
-        the maximum line. 
+        the maximum line.
+
+        Also, there is no requirement that the time table is in increasing
+        time, or is even monotonic. So the max_time is the maximum time that
+        image_coordinate is valid for, not necessarily the time for the
+        maximum line. 
         """
         return _time_table.TimeTable__v_max_time(self)
 
@@ -473,12 +483,13 @@ class ConstantSpacingTimeTable(TimeTable):
     def __init__(self, Min_time, Max_time, Time_space=40.8e-3):
         """
 
-        ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)
-        Constructor, creates time table from Min_time to Max_time with given
-        Time spacing.
+        ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, Time Time_max_line, double Time_space=40.8e-3)
+        Constructor, creates time table from Time_min_line to Time_max_line
+        with given Time spacing.
 
-        We adjust Max_time to exactly Min_time + i * Time_space, rounding to
-        nearest integer i, so it ok if Max_time is a little sloppy. 
+        We adjust Max_time to exactly Time_min_line + i * Time_space, rounding
+        to nearest integer i, so it ok if Max_time is a little sloppy. Note
+        Time_space can be negative, and Time_max_line < Time_min_line 
         """
         _time_table.ConstantSpacingTimeTable_swiginit(self, _time_table.new_ConstantSpacingTimeTable(Min_time, Max_time, Time_space))
 
@@ -525,7 +536,10 @@ class MeasuredTimeTable(TimeTable):
         ordered. The first time is for the given Min_line (default of 0).
 
         We often have trouble with edge cases (so time 1 ms before start of
-        table). We pad the table with a single line extrapolation. 
+        table). We pad the table with a single line extrapolation.
+
+        We currently assume that the timing is monotonic increasing. We could
+        probably relax that if useful. 
         """
         _time_table.MeasuredTimeTable_swiginit(self, _time_table.new_MeasuredTimeTable(Time_list, Min_line))
 

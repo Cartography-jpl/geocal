@@ -40,6 +40,8 @@ public:
   virtual FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const ScLookVectorWithDerivative& Sl, 
 		   int Band) const;
+  void frame_coordinate_to_xy(const FrameCoordinate& F, int Band,
+			      double& OUTPUT, double& OUTPUT) const;
   virtual ScLookVector sc_look_vector(const FrameCoordinate& F, 
 				      int Band) const;
   virtual ScLookVectorWithDerivative 

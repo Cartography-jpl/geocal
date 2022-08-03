@@ -578,6 +578,17 @@ FrameCoordinateWithDerivative GlasGfmCamera::frame_coordinate_with_derivative
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Return the focal plane x and y for the given FrameCoordinate.
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::frame_coordinate_to_xy(const FrameCoordinate& F, int Band,
+					   double& xfp, double& yfp) const
+{
+  range_check(Band, 0, number_band());
+  model_->fc_to_xy(F, xfp, yfp);
+}
+
 ScLookVector GlasGfmCamera::sc_look_vector
 (const FrameCoordinate& F, int Band) const
 {

@@ -9563,8 +9563,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Planetocentric_swiginit", Planetocentric_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_PlanetInertial", _wrap_new_PlanetInertial, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::PlanetInertial::PlanetInertial(const boost::array< double, 3 > &Pos, int Naif_code)\n"
-		"Create an PlanetInertial with the given position in meters. \n"
+		"GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)\n"
+		"Default constructor, doesn't initialize position. \n"
 		""},
 	 { (char *)"PlanetInertial_reference_surface_intersect_approximate", _wrap_PlanetInertial_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"

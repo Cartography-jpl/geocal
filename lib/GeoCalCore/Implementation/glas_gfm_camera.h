@@ -174,6 +174,8 @@ public:
     notify_update();
   }
 
+  void frame_coordinate_to_xy(const FrameCoordinate& F, int Band,
+			      double& xfp, double& yfp) const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual FrameCoordinateWithDerivative 

@@ -219,8 +219,14 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::MapInfo::MapInfo(const MapInfo &Mi)
+        MapInfo::MapInfo(const boost::shared_ptr< CoordinateConverter > &Conv, const
+        blitz::Array< double, 1 > &Param, int Number_x_pixel, int
+        Number_y_pixel, bool Is_point=false)
+        Constructor that takes the affine parameters.
 
+        Note that the parameters should be such that the ulc is at coordinates
+        -0.5, 0.5. This is the same as "area based pixels", if you are using
+        Geotiff. 
         """
         _map_info.MapInfo_swiginit(self, _map_info.new_MapInfo(*args))
 
@@ -259,13 +265,9 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def coordinate(self, Gc):
         """
 
-        void MapInfo::coordinate(const GroundCoordinate &Gc, double &Pixel_x_index, double
-        &Pixel_y_index) const
-        Determine pixel coordinates for the given ground coordinates.
+        void MapInfo::coordinate(const Geodetic &Gc, double &Pixel_x_index, double &Pixel_y_index)
+        const
 
-        Note that this routine can be called with ground coordiantes outside
-        of the bounding box of the map, it just returns pixel coordinates
-        outside of the map in that case. 
         """
         return _map_info.MapInfo_coordinate(self, Gc)
 
@@ -287,9 +289,8 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def ground_coordinate(self, *args):
         """
 
-        boost::shared_ptr< GroundCoordinate > MapInfo::ground_coordinate(double Pixel_x_index, double Pixel_y_index, const Dem &D) const
-        Convert pixel coordinates to ground coordinates, and place on surface
-        using DEM. 
+        boost::shared_ptr< GroundCoordinate > MapInfo::ground_coordinate(double Pixel_x_index, double Pixel_y_index) const
+        Convert pixel coordinates to ground coordinates. 
         """
         return _map_info.MapInfo_ground_coordinate(self, *args)
 
@@ -321,9 +322,11 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def index_to_coordinate(self, *args):
         """
 
-        void GeoCal::MapInfo::index_to_coordinate(double Pixel_x_index, double Pixel_y_index, double
-        &Pixel_x_coordinate, double &Pixel_y_coordinate) const
-        Convert pixel index to pixel coordinate. 
+        void GeoCal::MapInfo::index_to_coordinate(const blitz::Array< double, 2 > &Pixel_x_index, const blitz::Array<
+        double, 2 > &Pixel_y_index, blitz::Array< double, 2 >
+        &Pixel_x_coordinate, blitz::Array< double, 2 > &Pixel_y_coordinate)
+        const
+
         """
         return _map_info.MapInfo_index_to_coordinate(self, *args)
 
@@ -331,9 +334,10 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def coordinate_to_index(self, *args):
         """
 
-        void GeoCal::MapInfo::coordinate_to_index(double Pixel_x_coordinate, double Pixel_y_coordinate, double
-        &Pixel_x_index, double &Pixel_y_index) const
-        Convert pixel coordinate to pixel index. 
+        void GeoCal::MapInfo::coordinate_to_index(const blitz::Array< double, 2 > &Pixel_x_coordinate, const
+        blitz::Array< double, 2 > &Pixel_y_coordinate, blitz::Array< double, 2
+        > &Pixel_x_index, blitz::Array< double, 2 > &Pixel_y_index) const
+
         """
         return _map_info.MapInfo_coordinate_to_index(self, *args)
 
@@ -457,7 +461,7 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
     def subset(self, *args):
         """
 
-        MapInfo MapInfo::subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const
+        MapInfo MapInfo::subset(double x_index, double y_index, int nx_pixel, int ny_pixel) const
         Return a MapInfo for a subset of this map info.
 
         Note that it is ok for x_index and y_index to be outside the range of

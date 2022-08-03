@@ -232,25 +232,16 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
         """
 
         SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, int Naif_id, const std::string
-        &Abcorr="NONE")
-        Create an orbit that has position information for the Target_name
-        (e.g., "GLL", "MRO"), and pointing information in the
-        Spacecraft_reference_frame_name (e.g., "GLL_SCAN_PLANE",
-        "MRO_CTX").
+        &Spacecraft_reference_frame_name, const SpiceKernelList &Kernel_list,
+        int Naif_id, const std::string &Abcorr="NONE")
 
-        Note that the Target_name is of a body (e.g., something we have a spk
-        kernel for), while the Spacecraft_reference_frame_name is for a frame
-        (e.g., something we have a fk kernel for). In addition to the frame
-        definition, you'll generally need a C kernel file (ck kernel) giving
-        the orientation of the frame with the target. 
         """
         _spice_planet_orbit.SpicePlanetOrbit_swiginit(self, _spice_planet_orbit.new_SpicePlanetOrbit(*args))
 
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > SpicePlanetOrbit::orbit_data(Time T) const
+        virtual boost::shared_ptr<OrbitData> GeoCal::SpicePlanetOrbit::orbit_data(const TimeWithDerivative &T) const
 
         """
         return _spice_planet_orbit.SpicePlanetOrbit_orbit_data(self, *args)

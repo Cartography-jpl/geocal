@@ -7420,7 +7420,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_SpiceKernelList", _wrap_new_SpiceKernelList, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::SpiceKernelList::SpiceKernelList(const std::vector< std::string > &Kernel_list, bool Skip_load=false)\n"
+		"GeoCal::SpiceKernelList::SpiceKernelList()\n"
 		"\n"
 		""},
 	 { (char *)"SpiceKernelList_load_kernel", _wrap_SpiceKernelList_load_kernel, METH_VARARGS, (char *)"\n"

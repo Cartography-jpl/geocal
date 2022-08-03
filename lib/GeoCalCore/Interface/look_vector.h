@@ -130,6 +130,11 @@ public:
 
   virtual ~ScLookVector() {}
   virtual void print(std::ostream& Os) const;
+
+  void field_angle(double& Fa_x_deg, double& Fa_y_deg) const;
+  static ScLookVector create_from_field_angle(double Fa_x_deg,
+					      double Fa_y_deg);
+  
 private:
   friend class boost::serialization::access;
   template<class Archive>

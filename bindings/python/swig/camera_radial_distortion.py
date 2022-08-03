@@ -215,16 +215,10 @@ class CameraRadialDistortion(geocal_swig.quaternion_camera.QuaternionCamera):
         double, 1 > &K_distort, double Number_line, double Number_sample,
         double Line_pitch, double Sample_pitch, double Focal_length, const
         FrameCoordinate &Principal_point, QuaternionCamera::FrameConvention
-        Frame_convention=QuaternionCamera::LINE_IS_X,
-        QuaternionCamera::FrameDirection
-        Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
-        QuaternionCamera::FrameDirection
-        Sample_direction=QuaternionCamera::INCREASE_IS_POSITIVE)
-        Create a QuaternionCamera with a radial distortion model given by
-        kdistort.
+        Frame_convention, QuaternionCamera::FrameDirection Line_direction,
+        QuaternionCamera::FrameDirection Sample_direction, const blitz::Array<
+        bool, 1 > &Parameter_mask)
 
-        We currently limit kdistort.rows() <= 3, although we could relax that
-        if it ends up being useful. 
         """
         _camera_radial_distortion.CameraRadialDistortion_swiginit(self, _camera_radial_distortion.new_CameraRadialDistortion(*args))
 

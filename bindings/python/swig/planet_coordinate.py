@@ -551,8 +551,8 @@ class PlanetInertial(geocal_swig.ground_coordinate.CartesianInertial):
     def __init__(self, *args):
         """
 
-        GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)
-        Default constructor, doesn't initialize position. 
+        GeoCal::PlanetInertial::PlanetInertial(const boost::array< double, 3 > &Pos, int Naif_code)
+        Create an PlanetInertial with the given position in meters. 
         """
         _planet_coordinate.PlanetInertial_swiginit(self, _planet_coordinate.new_PlanetInertial(*args))
 

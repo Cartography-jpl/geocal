@@ -289,3 +289,26 @@ void DcsLookVectorWithDerivative::print(std::ostream& Os) const
      << "  length: " << length() << " m\n";
 }
 
+//-----------------------------------------------------------------------
+/// Sometimes we compare against something that uses field angles, so
+/// return the x and y field angle in degrees for the given look
+/// direction. 
+//-----------------------------------------------------------------------
+
+void ScLookVector::field_angle(double& Fa_x_deg, double& Fa_y_deg) const
+{
+  Fa_x_deg = Constant::rad_to_deg * atan2(look_vector[0], look_vector[2]);
+  Fa_y_deg = Constant::rad_to_deg * atan2(look_vector[1], look_vector[2]);
+}
+
+//-----------------------------------------------------------------------
+/// Create a ScLookVector from the field angle values in degrees.
+//-----------------------------------------------------------------------
+
+ScLookVector ScLookVector::create_from_field_angle
+(double Fa_x_deg, double Fa_y_deg)
+{
+  return ScLookVector(tan(Fa_x_deg * Constant::rad_to_deg),
+		      tan(Fa_y_deg * Constant::rad_to_deg),
+		      1);
+}

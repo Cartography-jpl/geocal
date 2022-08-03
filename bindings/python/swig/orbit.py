@@ -213,11 +213,11 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def resolution_meter(self, *args):
         """
 
-        double OrbitData::resolution_meter(const Camera &C, int Band=0) const
+        double OrbitData::resolution_meter(const Camera &C, const FrameCoordinate &Fc, int Band=0) const
         Calculate the approximate resolution on the ground of a given Camera
         for this OrbitData.
 
-        This finds the intersection with the reference surface for the center
+        This finds the intersection with the reference surface for the given
         pixel of the camera, + 1 in the line and sample direction. We find the
         difference in meters between these points, and select the maximum
         value. 
@@ -260,9 +260,9 @@ class OrbitData(geocal_swig.generic_object.GenericObject):
     def sc_look_vector(self, *args):
         """
 
-        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci, bool
+        virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative &Cf, bool
         Include_velocity_aberration=true) const =0
-        Convert from CartesianInertialLookVector to ScLookVector. 
+        Convert from CartesianFixedLookVector to ScLookVector. 
         """
         return _orbit.OrbitData_sc_look_vector(self, *args)
 
@@ -523,13 +523,8 @@ class QuaternionOrbitData(OrbitData):
     def __init__(self, *args):
         """
 
-        QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const
-        boost::array< double, 3 > &vel_inertial, const
-        boost::math::quaternion< double > &sc_to_ci_q)
-        Construct QuaternionOrbitData.
-
-        This takes data in a CartesianInertial coordinate system (e.g., Eci
-        coordinates). 
+        QuaternionOrbitData::QuaternionOrbitData(const QuaternionOrbitData &V)
+        Copy constructor. 
         """
         _orbit.QuaternionOrbitData_swiginit(self, _orbit.new_QuaternionOrbitData(*args))
 
@@ -547,8 +542,9 @@ class QuaternionOrbitData(OrbitData):
         """
 
         boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const
-        TimeWithDerivative &tm, bool Extrapolation_ok=false)
-        Interpolate between two QuaternionOrbitData for the given time. 
+        Time &tm, bool Extrapolation_ok=false)
+        Interpolate between two QuaternionOrbitData for the given time,
+        without interpolating the derivative stuff. 
         """
         return _orbit.QuaternionOrbitData_interpolate(*args)
 
@@ -662,8 +658,9 @@ def QuaternionOrbitData_interpolate(*args):
     """
 
     boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const
-    TimeWithDerivative &tm, bool Extrapolation_ok=false)
-    Interpolate between two QuaternionOrbitData for the given time. 
+    Time &tm, bool Extrapolation_ok=false)
+    Interpolate between two QuaternionOrbitData for the given time,
+    without interpolating the derivative stuff. 
     """
     return _orbit.QuaternionOrbitData_interpolate(*args)
 
@@ -762,11 +759,9 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def ci_look_vector(self, *args):
         """
 
-        virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const
-        Convert from ScLookVector to CartesianInertialLookVector for the given
-        time.
+        virtual CartesianInertialLookVectorWithDerivative GeoCal::Orbit::ci_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)
+        const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_ci_look_vector(self, *args)
 
@@ -774,11 +769,9 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def cf_look_vector(self, *args):
         """
 
-        virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const
-        Convert from ScLookVector to CartesianFixedLookVector for the given
-        time.
+        virtual CartesianFixedLookVectorWithDerivative GeoCal::Orbit::cf_look_vector(const TimeWithDerivative &T, const ScLookVectorWithDerivative &Sl)
+        const
 
-        We should have min_time() <= T < max_time(). 
         """
         return _orbit.Orbit_cf_look_vector(self, *args)
 
@@ -827,11 +820,11 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def sc_look_vector(self, *args):
         """
 
-        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianInertialLookVector &Ci) const
-        Convert from CartesianInertialLookVector to ScLookVector for the given
-        time.
-
-        We should have min_time() <= T < max_time(). 
+        virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianFixed &Pt, const boost::shared_ptr< Refraction
+        > &Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<
+        VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())
+        const
+        Return ScLookVector that sees a given point. 
         """
         return _orbit.Orbit_sc_look_vector(self, *args)
 
@@ -889,13 +882,12 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def orbit_data(self, *args):
         """
 
-        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(Time T) const =0
+        virtual boost::shared_ptr<OrbitData> GeoCal::Orbit::orbit_data(const TimeWithDerivative &T) const =0
         Return OrbitData for the given time.
 
-        We should have min_time() <= T < max_time(). Note for orbit models
-        that you do not need to include the derivative information for this
-        version of orbit_data (which can be a great speed up). Users that want
-        that information should call the TimeWithDerivative version. 
+        We should have min_time() <= T < max_time(). This version should
+        include any AutoDerivative information if the orbit model has
+        parameters. 
         """
         return _orbit.Orbit_orbit_data(self, *args)
 
@@ -954,17 +946,10 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     def interpolate(*args):
         """
 
-        boost::math::quaternion< double > Orbit::interpolate(const boost::math::quaternion< double > &Q1, const
-        boost::math::quaternion< double > &Q2, double toffset, double tspace)
-        This is a utility function for use by derived classes.
+        boost::math::quaternion< AutoDerivative< double > > Orbit::interpolate(const boost::math::quaternion< AutoDerivative< double > > &Q1, const
+        boost::math::quaternion< AutoDerivative< double > > &Q2, const
+        AutoDerivative< double > &toffset, double tspace)
 
-        A common way of getting orbit data is to have discrete measurements of
-        the quaternion describing the rotation of the spacecraft. For a time t
-        between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the
-        quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This
-        function then returns Qres. We calculate this by determining the axis
-        and angle rotation that takes use from Q1 to Q2, and then do a linear
-        interpolation of that angle for the given time. 
         """
         return _orbit.Orbit_interpolate(*args)
 
@@ -1001,17 +986,10 @@ Orbit_swigregister(Orbit)
 def Orbit_interpolate(*args):
     """
 
-    boost::math::quaternion< double > Orbit::interpolate(const boost::math::quaternion< double > &Q1, const
-    boost::math::quaternion< double > &Q2, double toffset, double tspace)
-    This is a utility function for use by derived classes.
+    boost::math::quaternion< AutoDerivative< double > > Orbit::interpolate(const boost::math::quaternion< AutoDerivative< double > > &Q1, const
+    boost::math::quaternion< AutoDerivative< double > > &Q2, const
+    AutoDerivative< double > &toffset, double tspace)
 
-    A common way of getting orbit data is to have discrete measurements of
-    the quaternion describing the rotation of the spacecraft. For a time t
-    between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the
-    quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This
-    function then returns Qres. We calculate this by determining the axis
-    and angle rotation that takes use from Q1 to Q2, and then do a linear
-    interpolation of that angle for the given time. 
     """
     return _orbit.Orbit_interpolate(*args)
 
@@ -1053,13 +1031,12 @@ class KeplerOrbit(Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(Time T) const
+        boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(const TimeWithDerivative &T) const
         Return OrbitData for the given time.
 
-        We should have min_time() <= T < max_time(). Note for orbit models
-        that you do not need to include the derivative information for this
-        version of orbit_data (which can be a great speed up). Users that want
-        that information should call the TimeWithDerivative version. 
+        We should have min_time() <= T < max_time(). This version should
+        include any AutoDerivative information if the orbit model has
+        parameters. 
         """
         return _orbit.KeplerOrbit_orbit_data(self, *args)
 

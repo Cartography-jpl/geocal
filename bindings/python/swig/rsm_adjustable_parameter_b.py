@@ -351,10 +351,13 @@ class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
     def __init__(self, *args):
         """
 
-        GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
+        RsmAdjustableParameterB::RsmAdjustableParameterB(const ImageGroundConnection &Igc, double H_min, double H_max, const
+        RsmId &Rsm_id, const std::string &Triangulation_id="")
+        Create a RsmAdjustableParameterB.
 
+        We create a LocalRcConverter that matches the given Igc, set the
+        Image_identifier and Rsm_support_data_edition to match that of the
+        given Rsm_id. 
         """
         _rsm_adjustable_parameter_b.RsmAdjustableParameterB_swiginit(self, _rsm_adjustable_parameter_b.new_RsmAdjustableParameterB(*args))
 

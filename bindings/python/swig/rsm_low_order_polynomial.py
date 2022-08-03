@@ -207,8 +207,13 @@ class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
     def image_coordinate(self, *args):
         """
 
-        ImageCoordinate GeoCal::RsmLowOrderPolynomial::image_coordinate(double X, double Y, double Z) const
-        Return approximate image coordinates for given X, Y, and Z. 
+        blitz::Array< double, 4 > RsmLowOrderPolynomial::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >
+        &Y, const blitz::Array< double, 3 > &Z) const
+        Apply the rational polynomial to the given X, Y, and Z value.
+
+        This converts a whole array of points at once. The results have the
+        first dimension of size 2, the first value is the line and the second
+        the sample. 
         """
         return _rsm_low_order_polynomial.RsmLowOrderPolynomial_image_coordinate(self, *args)
 

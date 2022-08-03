@@ -228,7 +228,7 @@ class SpiceOrbit(geocal_swig.orbit.Orbit):
     def orbit_data(self, *args):
         """
 
-        boost::shared_ptr< OrbitData > SpiceOrbit::orbit_data(Time T) const
+        virtual boost::shared_ptr<OrbitData> GeoCal::SpiceOrbit::orbit_data(const TimeWithDerivative &T) const
 
         """
         return _spice_orbit.SpiceOrbit_orbit_data(self, *args)

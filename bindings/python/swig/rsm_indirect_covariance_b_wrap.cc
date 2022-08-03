@@ -7479,7 +7479,7 @@ SWIGINTERN PyObject *_wrap_RsmBSubgroup__v_covariance(PyObject *SWIGUNUSEDPARM(s
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7543,7 +7543,7 @@ SWIGINTERN PyObject *_wrap_RsmBSubgroup__v_time_correlation(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8001,7 +8001,7 @@ SWIGINTERN PyObject *_wrap_RsmBUnmodeledCovariance__v_covariance(PyObject *SWIGU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8065,7 +8065,7 @@ SWIGINTERN PyObject *_wrap_RsmBUnmodeledCovariance__v_row_time_correlation(PyObj
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8129,7 +8129,7 @@ SWIGINTERN PyObject *_wrap_RsmBUnmodeledCovariance__v_col_time_correlation(PyObj
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9172,7 +9172,7 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovarianceB__v_mapping_matrix__SWIG_0(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11849,7 +11849,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_RsmBSubgroup", _wrap_new_RsmBSubgroup, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::RsmBSubgroup::RsmBSubgroup(const RsmBSubgroup &V)\n"
+		"GeoCal::RsmBSubgroup::RsmBSubgroup()\n"
 		"\n"
 		""},
 	 { (char *)"RsmBSubgroup__v_number_parameter", (PyCFunction)_wrap_RsmBSubgroup__v_number_parameter, METH_O, (char *)"\n"
@@ -11887,7 +11887,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RsmBSubgroup_swiginit", RsmBSubgroup_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_RsmBUnmodeledCovariance", _wrap_new_RsmBUnmodeledCovariance, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(const RsmBUnmodeledCovariance &V)\n"
+		"GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance()\n"
 		"\n"
 		""},
 	 { (char *)"RsmBUnmodeledCovariance__v_is_csm_correlation", (PyCFunction)_wrap_RsmBUnmodeledCovariance__v_is_csm_correlation, METH_O, (char *)"\n"
@@ -11920,9 +11920,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RsmBUnmodeledCovariance_swiginit", RsmBUnmodeledCovariance_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_RsmIndirectCovarianceB", _wrap_new_RsmIndirectCovarianceB, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
+		"RsmIndirectCovarianceB::RsmIndirectCovarianceB(const RsmIndirectCovarianceB &V)\n"
 		"\n"
 		""},
 	 { (char *)"RsmIndirectCovarianceB_tre_string", (PyCFunction)_wrap_RsmIndirectCovarianceB_tre_string, METH_O, (char *)"\n"

@@ -196,8 +196,8 @@ class Eci(geocal_swig.ground_coordinate.CartesianInertial):
     def __init__(self, *args):
         """
 
-        GeoCal::Eci::Eci(double X, double Y, double Z)
-        Make an Eci with the given position, in meters. 
+        GeoCal::Eci::Eci(const boost::array< double, 3 > &Pos)
+        Create an Eci with the given position in meters. 
         """
         _eci.Eci_swiginit(self, _eci.new_Eci(*args))
 

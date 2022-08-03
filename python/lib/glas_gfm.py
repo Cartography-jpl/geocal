@@ -3,6 +3,7 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          QuaternionCamera, FrameCoordinate,
                          ImageCoordinate, RefractionMsp, NoVelocityAberration,
                          VelocityAberrationExact,
+                         GlasGfmCamera,Time,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
@@ -326,6 +327,44 @@ def _create_glas_gfm(self, igc):
 if(have_pynitf):
     pynitf.NitfImageSegment.glas_gfm = property(_glas_gfm)
     pynitf.NitfImageSegment.create_glas_gfm = _create_glas_gfm
+
+# Support functions for GlasGfmCamera
+
+def _create_glas_from_sc_look_vector(cls, sclv_list, focal_length=1,
+                   focal_length_time=Time.parse_time("2020-01-01T00:00:00Z"),
+                   sample_number_first=0,
+                   delta_sample_pair=1,
+                   band_type="N", band_wavelength = 1.45):
+    '''Create a GLAS camera model. This gets created from a list of 
+    ScLookVector values, which should be evenly spaced with the 
+    delta_sample_pair spacing starting as sample_number_first.'''
+    gcam = cls(1,sample_number_first + delta_sample_pair * len(sclv_list))
+    gcam.focal_length = focal_length
+    gcam.focal_length_time = focal_length_time
+    gcam.sample_number_first = sample_number_first
+    gcam.delta_sample_pair = delta_sample_pair
+    gcam.band_type = band_type
+    gcam.band_wavelength = band_wavelength
+    
+    fa = np.empty((len(sclv_list),4))
+    for smp in range(fa.shape[0] - 1):
+        lv1 = sclv_list[smp].look_vector
+        lv2 = sclv_list[smp+1].look_vector
+        fa[smp,0] = lv1[0] / (lv1[2] / gcam.focal_length)
+        fa[smp,1] = lv1[1] / (lv1[2] / gcam.focal_length)
+        fa[smp,2] = lv2[0] / (lv2[2] / gcam.focal_length)
+        fa[smp,3] = lv2[1] / (lv2[2] / gcam.focal_length)
+    # Extrapolated for the last entry in the field angle table    
+    smp = fa.shape[0]-1
+    lv1 = sclv_list[smp].look_vector
+    fa[smp,0] = lv1[0] / (lv1[2] / gcam.focal_length)
+    fa[smp,1] = lv1[1] / (lv1[2] / gcam.focal_length)
+    fa[smp,2] = fa[smp,0] + (fa[smp-1,2]-fa[smp-1,0])
+    fa[smp,3] = fa[smp,1] + (fa[smp-1,3]-fa[smp-1,1])
+    gcam.field_alignment = fa
+    return gcam
+
+GlasGfmCamera.create_glas_from_sc_look_vector = classmethod(_create_glas_from_sc_look_vector)
 
 __all__ = ["GlasGfm",]
     

@@ -199,10 +199,11 @@ class RpcImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
         """
 
         GeoCal::RpcImageGroundConnection::RpcImageGroundConnection(const Rpc &R, const boost::shared_ptr< Dem > &D, const
-        boost::shared_ptr< RasterImageMultiBand > &Img_mb, const std::string
-        &Title="Image", const boost::shared_ptr< ImageMask >
-        &Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<
-        GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >(), bool
+        boost::shared_ptr< RasterImage > &Img, const boost::shared_ptr<
+        RasterImageMultiBand > &Img_mb, const std::string &Title="Image",
+        const boost::shared_ptr< ImageMask > &Img_mask=boost::shared_ptr<
+        ImageMask >(), const boost::shared_ptr< GroundMask >
+        &Ground_mask=boost::shared_ptr< GroundMask >(), bool
         Fit_height_offset=false)
 
         """
@@ -235,16 +236,11 @@ class RpcImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
     def _v_fit_height_offset(self, *args):
         """
 
-        void GeoCal::RpcImageGroundConnection::fit_height_offset(bool Fit_height_offset)
-        In addition to the RPC parameters marked as being fitted for, add the
-        RPC height_offset to the list of parameters.
+        bool GeoCal::RpcImageGroundConnection::fit_height_offset() const
+        If true, we are fitting for the height offset.
 
-        This allows for errors is the height to be corrected for, e.g. WV-2
-        has the wrong altitude. Note that in general the height_offset won't
-        be an integer. It is the convention of NITF that the height_offset is
-        always an exact integer. If you fit for this, you should either not
-        store this as a NITF, or regenerate the RPC to match this by for
-        example a call to Rpc::generate_rpc. 
+        See the note in setting fit_height_offset on issues with storing the
+        RPC in NITF if you fit for height offset. 
         """
         return _rpc_image_ground_connection.RpcImageGroundConnection__v_fit_height_offset(self, *args)
 

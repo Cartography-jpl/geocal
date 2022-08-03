@@ -8702,7 +8702,7 @@ SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_image_coordinate__SWIG_1(PyObje
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8824,7 +8824,7 @@ SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_image_coordinate__SWIG_2(PyObje
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -8946,7 +8946,7 @@ SWIGINTERN PyObject *_wrap_RsmRationalPolynomial_image_coordinate__SWIG_3(PyObje
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[4], stride[4];
     for(int i = 0; i < 4; ++i) {
@@ -11379,8 +11379,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmRationalPolynomial_image_coordinate", _wrap_RsmRationalPolynomial_image_coordinate, METH_VARARGS, (char *)"\n"
 		"\n"
-		"ImageCoordinate RsmRationalPolynomial::image_coordinate(double X, double Y, double Z) const\n"
-		"Apply the rational polynomial to the given X, Y, and Z value. \n"
+		"blitz::Array< double, 4 > RsmRationalPolynomial::image_coordinate(const blitz::Array< double, 3 > &X, const blitz::Array< double, 3 >\n"
+		"&Y, const blitz::Array< double, 3 > &Z) const\n"
+		"Apply the rational polynomial to the given X, Y, and Z value.\n"
+		"\n"
+		"This converts a whole array of points at once. The results have the\n"
+		"first dimension of size 2, the first value is the line and the second\n"
+		"the sample. \n"
 		""},
 	 { (char *)"RsmRationalPolynomial_set_rpc_coeff", _wrap_RsmRationalPolynomial_set_rpc_coeff, METH_VARARGS, (char *)"\n"
 		"\n"

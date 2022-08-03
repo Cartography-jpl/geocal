@@ -3562,31 +3562,32 @@ namespace Swig {
 #define SWIGTYPE_p_char swig_types[107]
 #define SWIGTYPE_p_char_type swig_types[108]
 #define SWIGTYPE_p_difference_type swig_types[109]
-#define SWIGTYPE_p_fmtflags swig_types[110]
-#define SWIGTYPE_p_int_type swig_types[111]
-#define SWIGTYPE_p_iostate swig_types[112]
-#define SWIGTYPE_p_off_type swig_types[113]
-#define SWIGTYPE_p_openmode swig_types[114]
-#define SWIGTYPE_p_p_PyObject swig_types[115]
-#define SWIGTYPE_p_pos_type swig_types[116]
-#define SWIGTYPE_p_seekdir swig_types[117]
-#define SWIGTYPE_p_size_t swig_types[118]
-#define SWIGTYPE_p_size_type swig_types[119]
-#define SWIGTYPE_p_state_type swig_types[120]
-#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[121]
-#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[122]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[123]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[124]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[125]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[126]
-#define SWIGTYPE_p_std__invalid_argument swig_types[127]
-#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[128]
-#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[129]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[130]
-#define SWIGTYPE_p_traits_type swig_types[131]
-#define SWIGTYPE_p_value_type swig_types[132]
-static swig_type_info *swig_types[134];
-static swig_module_info swig_module = {swig_types, 133, 0, 0, 0, 0};
+#define SWIGTYPE_p_double swig_types[110]
+#define SWIGTYPE_p_fmtflags swig_types[111]
+#define SWIGTYPE_p_int_type swig_types[112]
+#define SWIGTYPE_p_iostate swig_types[113]
+#define SWIGTYPE_p_off_type swig_types[114]
+#define SWIGTYPE_p_openmode swig_types[115]
+#define SWIGTYPE_p_p_PyObject swig_types[116]
+#define SWIGTYPE_p_pos_type swig_types[117]
+#define SWIGTYPE_p_seekdir swig_types[118]
+#define SWIGTYPE_p_size_t swig_types[119]
+#define SWIGTYPE_p_size_type swig_types[120]
+#define SWIGTYPE_p_state_type swig_types[121]
+#define SWIGTYPE_p_std__allocatorT_GeoCal__Time_t swig_types[122]
+#define SWIGTYPE_p_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t swig_types[123]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[124]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[125]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[126]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[127]
+#define SWIGTYPE_p_std__invalid_argument swig_types[128]
+#define SWIGTYPE_p_std__vectorT_GeoCal__Time_std__allocatorT_GeoCal__Time_t_t swig_types[129]
+#define SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t swig_types[130]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[131]
+#define SWIGTYPE_p_traits_type swig_types[132]
+#define SWIGTYPE_p_value_type swig_types[133]
+static swig_type_info *swig_types[135];
+static swig_module_info swig_module = {swig_types, 134, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -11495,7 +11496,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_0(PyObject *SWIGU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -12483,6 +12484,68 @@ SWIGINTERN PyObject *_wrap_ScLookVector___str__(PyObject *SWIGUNUSEDPARM(self), 
     }
   }
   resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ScLookVector_field_angle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ScLookVector *arg1 = (GeoCal::ScLookVector *) 0 ;
+  double *arg2 = 0 ;
+  double *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > *smartarg1 = 0 ;
+  double temp2 ;
+  int res2 = SWIG_TMPOBJ ;
+  double temp3 ;
+  int res3 = SWIG_TMPOBJ ;
+  PyObject *swig_obj[1] ;
+  
+  arg2 = &temp2;
+  arg3 = &temp3;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ScLookVector_field_angle" "', argument " "1"" of type '" "GeoCal::ScLookVector const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::ScLookVector * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ScLookVector > * >(argp1);
+      arg1 = const_cast< GeoCal::ScLookVector * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      ((GeoCal::ScLookVector const *)arg1)->field_angle(*arg2,*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res2)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg2)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res2) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg2), SWIGTYPE_p_double, new_flags));
+  }
+  if (SWIG_IsTmpObj(res3)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_From_double((*arg3)));
+  } else {
+    int new_flags = SWIG_IsNewObj(res3) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg3), SWIGTYPE_p_double, new_flags));
+  }
   return resultobj;
 fail:
   return NULL;
@@ -14522,10 +14585,17 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"LookVectorAutoDerivativeDouble_swigregister", LookVectorAutoDerivativeDouble_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_ScLookVector", _wrap_new_ScLookVector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::ScLookVector::ScLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::ScLookVector::ScLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"ScLookVector___str__", (PyCFunction)_wrap_ScLookVector___str__, METH_O, NULL},
+	 { (char *)"ScLookVector_field_angle", (PyCFunction)_wrap_ScLookVector_field_angle, METH_O, (char *)"\n"
+		"\n"
+		"void ScLookVector::field_angle(double &Fa_x_deg, double &Fa_y_deg) const\n"
+		"Sometimes we compare against something that uses field angles, so\n"
+		"return the x and y field angle in degrees for the given look\n"
+		"direction. \n"
+		""},
 	 { (char *)"delete_ScLookVector", (PyCFunction)_wrap_delete_ScLookVector, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::ScLookVector::~ScLookVector()\n"
@@ -14548,8 +14618,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ScLookVectorWithDerivative_swiginit", ScLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_CartesianInertialLookVector", _wrap_new_CartesianInertialLookVector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)\n"
-		"Constructor. \n"
+		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(const boost::math::quaternion< double > &V)\n"
+		"Constructor using quaternion. \n"
 		""},
 	 { (char *)"CartesianInertialLookVector___str__", (PyCFunction)_wrap_CartesianInertialLookVector___str__, METH_O, NULL},
 	 { (char *)"delete_CartesianInertialLookVector", (PyCFunction)_wrap_delete_CartesianInertialLookVector, METH_O, (char *)"\n"
@@ -14574,7 +14644,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"CartesianInertialLookVectorWithDerivative_swiginit", CartesianInertialLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_DcsLookVector", _wrap_new_DcsLookVector, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)\n"
+		"GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)\n"
 		"Constructor. \n"
 		""},
 	 { (char *)"DcsLookVector___str__", (PyCFunction)_wrap_DcsLookVector___str__, METH_O, NULL},
@@ -14882,6 +14952,7 @@ static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__Time_t = {"_p_boost__
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
@@ -15017,6 +15088,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
+  &_swigt__p_double,
   &_swigt__p_fmtflags,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
@@ -15152,6 +15224,7 @@ static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__Time_t[] = {  {&_swig
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
@@ -15287,6 +15360,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_char_type,
   _swigc__p_difference_type,
+  _swigc__p_double,
   _swigc__p_fmtflags,
   _swigc__p_int_type,
   _swigc__p_iostate,

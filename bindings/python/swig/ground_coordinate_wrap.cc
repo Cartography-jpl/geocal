@@ -7915,7 +7915,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *SWIGUNU
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -8681,7 +8681,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *SWIGUNUSED
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -13693,8 +13693,7 @@ static PyMethodDef SwigMethods[] = {
 		"boost::array< AutoDerivative< double >, 3 > &Vel_ci,\n"
 		"boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<\n"
 		"double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3\n"
-		"> &Vel_cf, boost::math::quaternion< AutoDerivative< double > >\n"
-		"&Ci_to_cf_q)\n"
+		"> &Vel_cf)\n"
 		"Convert including velocity. \n"
 		""},
 	 { (char *)"Vector_GroundCoordinate_iterator", (PyCFunction)_wrap_Vector_GroundCoordinate_iterator, METH_O, NULL},

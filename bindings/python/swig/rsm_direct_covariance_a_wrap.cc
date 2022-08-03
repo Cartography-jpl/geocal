@@ -8090,7 +8090,7 @@ SWIGINTERN PyObject *_wrap_RsmDirectCovarianceA__v_covariance__SWIG_0(PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8456,10 +8456,16 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_RsmDirectCovarianceA", _wrap_new_RsmDirectCovarianceA, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
+		"RsmDirectCovarianceA::RsmDirectCovarianceA(const ImageGroundConnection &Igc, const RsmId &Rsm_id, const\n"
+		"std::string &Triangulation_id=\"\", bool\n"
+		"Activate_image_correction=false, bool Activate_ground_rotation=false,\n"
+		"bool Activate_ground_correction=false)\n"
+		"Create a RsmDirectCovarianceA.\n"
 		"\n"
+		"We create a LocalRcConverter that matches the given Igc, set the\n"
+		"Image_identifier and Rsm_support_data_edition to match that of the\n"
+		"given Rsm_id, and can optionally activate a set of the parameters for\n"
+		"the correction. \n"
 		""},
 	 { (char *)"RsmDirectCovarianceA_tre_string", (PyCFunction)_wrap_RsmDirectCovarianceA_tre_string, METH_O, (char *)"\n"
 		"\n"

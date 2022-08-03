@@ -205,10 +205,16 @@ class RsmDirectCovarianceA(geocal_swig.rsm_direct_covariance.RsmDirectCovariance
     def __init__(self, *args):
         """
 
-        GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
+        RsmDirectCovarianceA::RsmDirectCovarianceA(const ImageGroundConnection &Igc, const RsmId &Rsm_id, const
+        std::string &Triangulation_id="", bool
+        Activate_image_correction=false, bool Activate_ground_rotation=false,
+        bool Activate_ground_correction=false)
+        Create a RsmDirectCovarianceA.
 
+        We create a LocalRcConverter that matches the given Igc, set the
+        Image_identifier and Rsm_support_data_edition to match that of the
+        given Rsm_id, and can optionally activate a set of the parameters for
+        the correction. 
         """
         _rsm_direct_covariance_a.RsmDirectCovarianceA_swiginit(self, _rsm_direct_covariance_a.new_RsmDirectCovarianceA(*args))
 

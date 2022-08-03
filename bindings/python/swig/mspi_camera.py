@@ -203,10 +203,9 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     def __init__(self, *args):
         """
 
-        GeoCal::MspiCamera::MspiCamera(const std::string &File_name, const std::string
-        &Extra_config_file="")
+        GeoCal::MspiCamera::MspiCamera(const std::string &File_name, const blitz::Array< double, 1 > &Parm)
         Constructor, which creates a MspiCamera from the given configuration
-        file. 
+        file and then updates the parameters to the given value. 
         """
         _mspi_camera.MspiCamera_swiginit(self, _mspi_camera.new_MspiCamera(*args))
 

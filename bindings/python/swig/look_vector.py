@@ -454,16 +454,28 @@ class ScLookVector(LookVectorDouble):
     def __init__(self, *args):
         """
 
-        GeoCal::ScLookVector::ScLookVector(double x, double y, double z)
-        Constructor. 
+        GeoCal::ScLookVector::ScLookVector(const boost::math::quaternion< double > &V)
+        Constructor using quaternion. 
         """
         _look_vector.ScLookVector_swiginit(self, _look_vector.new_ScLookVector(*args))
+
+    def field_angle(self):
+        """
+
+        void ScLookVector::field_angle(double &Fa_x_deg, double &Fa_y_deg) const
+        Sometimes we compare against something that uses field angles, so
+        return the x and y field angle in degrees for the given look
+        direction. 
+        """
+        return _look_vector.ScLookVector_field_angle(self)
+
 
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_ScLookVector
 ScLookVector.__str__ = new_instancemethod(_look_vector.ScLookVector___str__, None, ScLookVector)
+ScLookVector.field_angle = new_instancemethod(_look_vector.ScLookVector_field_angle, None, ScLookVector)
 ScLookVector_swigregister = _look_vector.ScLookVector_swigregister
 ScLookVector_swigregister(ScLookVector)
 
@@ -509,8 +521,8 @@ class CartesianInertialLookVector(LookVectorDouble):
     def __init__(self, *args):
         """
 
-        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)
-        Constructor. 
+        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(const boost::math::quaternion< double > &V)
+        Constructor using quaternion. 
         """
         _look_vector.CartesianInertialLookVector_swiginit(self, _look_vector.new_CartesianInertialLookVector(*args))
 
@@ -563,7 +575,7 @@ class DcsLookVector(LookVectorDouble):
     def __init__(self, *args):
         """
 
-        GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)
+        GeoCal::DcsLookVector::DcsLookVector(const boost::math::quaternion< double > &V)
         Constructor. 
         """
         _look_vector.DcsLookVector_swiginit(self, _look_vector.new_DcsLookVector(*args))

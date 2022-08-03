@@ -8298,7 +8298,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8362,7 +8362,7 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic_sigma(PyObject *SWIGUNUSEDPARM(self), 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8454,7 +8454,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_pred(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8546,7 +8546,7 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_diff(PyObject *SWIGUNUSEDPARM(self), PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11607,7 +11607,7 @@ SWIGINTERN PyObject *_wrap_TiePointCollection_data_array(PyObject *SWIGUNUSEDPAR
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11794,8 +11794,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_TiePoint", _wrap_new_TiePoint, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::TiePoint::TiePoint(int Number_image)\n"
-		"Constructor. \n"
+		"TiePoint::TiePoint(const TiePoint &Tp)\n"
+		"Copy constructor. We make a deep copy of everything. \n"
 		""},
 	 { (char *)"TiePoint__v_id", _wrap_TiePoint__v_id, METH_VARARGS, (char *)"\n"
 		"\n"

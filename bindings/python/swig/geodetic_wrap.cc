@@ -7135,11 +7135,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Geodetic", _wrap_new_Geodetic, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::Geodetic::Geodetic(double Latitude, double Longitude, double Height_ellipsoid=0)\n"
-		"Make an Geodetic with the given latitude, longitude, and height.\n"
-		"\n"
-		"Latitude and longitude are in degrees, height is in meters. Longitude\n"
-		"should be between -180 and 180 and latitude -90 and 90. \n"
+		"GeoCal::Geodetic::Geodetic()\n"
+		"Default constructor. \n"
 		""},
 	 { (char *)"delete_Geodetic", (PyCFunction)_wrap_delete_Geodetic, METH_O, (char *)"\n"
 		"\n"
@@ -7150,11 +7147,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Geodetic_swiginit", Geodetic_swiginit, METH_VARARGS, NULL},
 	 { (char *)"new_Geocentric", _wrap_new_Geocentric, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::Geocentric::Geocentric(double Latitude, double Longitude, double Height_ellipsoid=0)\n"
-		"Make an Geocentric with the given latitude, longitude, and height.\n"
-		"\n"
-		"Latitude and longitude are in degrees, height is in meters. Longitude\n"
-		"should be between -180 and 180 and latitude -90 and 90. \n"
+		"GeoCal::Geocentric::Geocentric()\n"
+		"Default constructor. \n"
 		""},
 	 { (char *)"delete_Geocentric", (PyCFunction)_wrap_delete_Geocentric, METH_O, (char *)"\n"
 		"\n"

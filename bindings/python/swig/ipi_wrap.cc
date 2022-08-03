@@ -10808,13 +10808,15 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Ipi_image_coordinate_with_derivative", _wrap_Ipi_image_coordinate_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
+		"void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, const boost::array< AutoDerivative<\n"
+		"double >, 3 > &Gp_with_der, ImageCoordinateWithDerivative &Ic, bool\n"
 		"&Success) const\n"
 		"\n"
 		""},
 	 { (char *)"Ipi_image_coordinate_with_derivative_extended", _wrap_Ipi_image_coordinate_with_derivative_extended, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
+		"void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, const boost::array< AutoDerivative<\n"
+		"double >, 3 > &Gp_with_der, ImageCoordinateWithDerivative &Ic, bool\n"
 		"&Success) const\n"
 		"\n"
 		""},
@@ -10838,7 +10840,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Ipi_time_with_derivative", _wrap_Ipi_time_with_derivative, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,\n"
+		"void Ipi::time_with_derivative(const GroundCoordinate &Gp, const boost::array< AutoDerivative<\n"
+		"double >, 3 > &Gp_with_der, TimeWithDerivative &Tres,\n"
 		"FrameCoordinateWithDerivative &Fres, bool &Success) const\n"
 		"\n"
 		""},

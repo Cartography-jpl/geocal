@@ -7263,8 +7263,8 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"GroundMspiOrbit_orbit_data", _wrap_GroundMspiOrbit_orbit_data, METH_VARARGS, (char *)"\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > GroundMspiOrbit::orbit_data(Time T) const\n"
-		"Constructor. The azimuth and zenith angles should be in degrees. \n"
+		"boost::shared_ptr< OrbitData > GroundMspiOrbit::orbit_data(const TimeWithDerivative &T) const\n"
+		"\n"
 		""},
 	 { (char *)"delete_GroundMspiOrbit", (PyCFunction)_wrap_delete_GroundMspiOrbit, METH_O, (char *)"\n"
 		"\n"

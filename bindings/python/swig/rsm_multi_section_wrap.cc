@@ -8204,20 +8204,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"RsmMultiSection_fit_start", _wrap_RsmMultiSection_fit_start, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height)\n"
-		"Fit just the low order polynomial.\n"
-		"\n"
-		"This is intended for doing parallel fitting of the sections in python.\n"
+		"void RsmMultiSection::fit_start(const blitz::Array< double, 2 > &Data)\n"
 		"\n"
 		""},
 	 { (char *)"RsmMultiSection_fit_section", _wrap_RsmMultiSection_fit_section, METH_VARARGS, (char *)"\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const\n"
-		"CoordinateConverter &Cconv, double Min_height, double Max_height)\n"
-		"Fit a single segment.\n"
+		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const blitz::Array< double, 2 > &Data)\n"
 		"\n"
-		"This is intended for doing parallel fitting in python. \n"
 		""},
 	 { (char *)"RsmMultiSection_section", _wrap_RsmMultiSection_section, METH_VARARGS, (char *)"\n"
 		"\n"

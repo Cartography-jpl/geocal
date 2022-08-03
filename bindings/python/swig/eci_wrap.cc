@@ -7150,8 +7150,8 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Eci", _wrap_new_Eci, METH_VARARGS, (char *)"\n"
 		"\n"
-		"GeoCal::Eci::Eci(double X, double Y, double Z)\n"
-		"Make an Eci with the given position, in meters. \n"
+		"GeoCal::Eci::Eci(const boost::array< double, 3 > &Pos)\n"
+		"Create an Eci with the given position in meters. \n"
 		""},
 	 { (char *)"Eci_reference_surface_intersect_approximate", _wrap_Eci_reference_surface_intersect_approximate, METH_VARARGS, (char *)"\n"
 		"\n"

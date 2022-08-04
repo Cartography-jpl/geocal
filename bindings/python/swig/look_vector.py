@@ -470,6 +470,16 @@ class ScLookVector(LookVectorDouble):
         return _look_vector.ScLookVector_field_angle(self)
 
 
+    def create_from_field_angle(Fa_x_deg, Fa_y_deg):
+        """
+
+        ScLookVector ScLookVector::create_from_field_angle(double Fa_x_deg, double Fa_y_deg)
+        Create a ScLookVector from the field angle values in degrees. 
+        """
+        return _look_vector.ScLookVector_create_from_field_angle(Fa_x_deg, Fa_y_deg)
+
+    create_from_field_angle = staticmethod(create_from_field_angle)
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
@@ -478,6 +488,14 @@ ScLookVector.__str__ = new_instancemethod(_look_vector.ScLookVector___str__, Non
 ScLookVector.field_angle = new_instancemethod(_look_vector.ScLookVector_field_angle, None, ScLookVector)
 ScLookVector_swigregister = _look_vector.ScLookVector_swigregister
 ScLookVector_swigregister(ScLookVector)
+
+def ScLookVector_create_from_field_angle(Fa_x_deg, Fa_y_deg):
+    """
+
+    ScLookVector ScLookVector::create_from_field_angle(double Fa_x_deg, double Fa_y_deg)
+    Create a ScLookVector from the field angle values in degrees. 
+    """
+    return _look_vector.ScLookVector_create_from_field_angle(Fa_x_deg, Fa_y_deg)
 
 class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
     """

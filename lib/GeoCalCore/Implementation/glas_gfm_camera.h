@@ -262,7 +262,10 @@ public:
 
   double sample_number_first() const {return sample_number_first_; }
   void sample_number_first(double V)
-  { sample_number_first_ = V; notify_update();}
+  {
+    if(V != 0)
+      throw Exception("Right now we only support sample_number_first 0. We can extend this if needed");
+    sample_number_first_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Delta Sample Pair. This is applicable for sensor type "S" only.

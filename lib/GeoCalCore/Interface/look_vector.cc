@@ -308,7 +308,7 @@ void ScLookVector::field_angle(double& Fa_x_deg, double& Fa_y_deg) const
 ScLookVector ScLookVector::create_from_field_angle
 (double Fa_x_deg, double Fa_y_deg)
 {
-  return ScLookVector(tan(Fa_x_deg * Constant::rad_to_deg),
-		      tan(Fa_y_deg * Constant::rad_to_deg),
+  return ScLookVector(tan(Fa_x_deg * Constant::deg_to_rad),
+		      tan(Fa_y_deg * Constant::deg_to_rad),
 		      1);
 }

@@ -3,7 +3,7 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          QuaternionCamera, FrameCoordinate,
                          ImageCoordinate, RefractionMsp, NoVelocityAberration,
                          VelocityAberrationExact,
-                         GlasGfmCamera,Time,
+                         GlasGfmCamera,Time,ScLookVector,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
@@ -364,7 +364,15 @@ def _create_glas_from_sc_look_vector(cls, sclv_list, focal_length=1,
     gcam.field_alignment = fa
     return gcam
 
+def _create_glas_from_field_angle(cls, fa_x, fa_y, **keyword):
+    '''Variation of create_glas_from_sc_look_vector where we instead
+    take the field angles in degrees.'''
+    sclv_list = [ScLookVector.create_from_field_angle(fa_x[i], fa_y[i])
+                 for i in range(len(fa_x))]
+    return cls.create_glas_from_sc_look_vector(sclv_list, **keyword)
+                                     
 GlasGfmCamera.create_glas_from_sc_look_vector = classmethod(_create_glas_from_sc_look_vector)
+GlasGfmCamera.create_glas_from_field_angle = classmethod(_create_glas_from_field_angle)
 
 __all__ = ["GlasGfm",]
     

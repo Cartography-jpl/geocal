@@ -12552,6 +12552,47 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ScLookVector_create_from_field_angle(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  double arg1 ;
+  double arg2 ;
+  double val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
+  GeoCal::ScLookVector result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"ScLookVector_create_from_field_angle",2,2,swig_obj)) SWIG_fail;
+  ecode1 = SWIG_AsVal_double(swig_obj[0], &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "ScLookVector_create_from_field_angle" "', argument " "1"" of type '" "double""'");
+  } 
+  arg1 = static_cast< double >(val1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "ScLookVector_create_from_field_angle" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  {
+    try {
+      result = GeoCal::ScLookVector::create_from_field_angle(arg1,arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &)result));
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_ScLookVector(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ScLookVector *arg1 = (GeoCal::ScLookVector *) 0 ;
@@ -14595,6 +14636,11 @@ static PyMethodDef SwigMethods[] = {
 		"Sometimes we compare against something that uses field angles, so\n"
 		"return the x and y field angle in degrees for the given look\n"
 		"direction. \n"
+		""},
+	 { (char *)"ScLookVector_create_from_field_angle", _wrap_ScLookVector_create_from_field_angle, METH_VARARGS, (char *)"\n"
+		"\n"
+		"ScLookVector ScLookVector::create_from_field_angle(double Fa_x_deg, double Fa_y_deg)\n"
+		"Create a ScLookVector from the field angle values in degrees. \n"
 		""},
 	 { (char *)"delete_ScLookVector", (PyCFunction)_wrap_delete_ScLookVector, METH_O, (char *)"\n"
 		"\n"

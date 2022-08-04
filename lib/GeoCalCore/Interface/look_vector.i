@@ -45,7 +45,7 @@ public:
   ScLookVector(const boost::array<double, 3>& Lv);
   std::string print_to_string() const;
   void field_angle(double& OUTPUT, double& OUTPUT) const;
-  static create_from_field_angle(double Fa_x_deg, double Fa_y_deg);
+  static ScLookVector create_from_field_angle(double Fa_x_deg, double Fa_y_deg);
   %pickle_serialization();
 };
 

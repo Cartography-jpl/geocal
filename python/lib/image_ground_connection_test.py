@@ -44,6 +44,21 @@ def test_gdal_image_ground_connection():
     t = pickle.dumps(igc1)
     igc2 = pickle.loads(t)
 
+def p_view_zenith(igc, ic):
+    import datetime
+    import pyorbital.orbital
+    gp = igc.ground_coordinate(ic)
+    pos = igc.cf_look_vector_pos(ic)
+    # Couple of notes here. This takes an array only, so we pass one value
+    # through. The height is in km, not meter, so scale here.
+    # The datetime is a required argument, although it isn't actually used
+    # for anything. We just pass "now" as a convenient date time object
+    az,alt= pyorbital.orbital.get_observer_look([pos.longitude], [pos.latitude],
+                      [pos.height_reference_surface / 1000],
+                      datetime.datetime.now(), [gp.longitude], [gp.latitude],
+                      [gp.height_reference_surface/1000])
+    return 90-alt[0], az[0]
+    
 def test_view_angle():
     igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
                                       dem)
@@ -52,6 +67,18 @@ def test_view_angle():
     zen, azm = igc1.view_angle(ic)
     assert_almost_equal(zen, 33.2911, 2)
     assert_almost_equal(azm, 7.2390, 2)
+    try:
+        # It is ok if we don't have pyorbital, we just skip this test.
+        # The only place we use this is here for doing this comparison
+        p_zen, p_azm = p_view_zenith(igc1, ic)
+        # verify that we get almost the same answer
+        assert_almost_equal(zen,p_zen,2)
+        assert_almost_equal(azm,p_azm,2)
+        print(f"Ours {zen}, pyorbital {p_zen}")
+        print(f"Ours {azm}, pyorbital {p_azm}")
+    except ImportError:
+        print("Skipping comparison with pyorbital because that isn't installed")
+        
 
 def test_footprint_geometry():
     igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",

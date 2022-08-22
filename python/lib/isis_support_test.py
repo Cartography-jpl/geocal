@@ -36,3 +36,33 @@ def test_import_hrsc(mars_test_data, isolated_dir):
     klist = read_kernel_from_isis("hrsc.cub")
     klist.load_kernel()
     
+@long_test
+@require_isis
+def test_import_lro_wac(isolated_dir):
+    f = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549036CC.IMG"
+    r = pds_to_isis(f, "wac.cub")
+    # Test handling the kernels and downloading from the web.
+    klist = read_kernel_from_isis("wac.cub")
+    klist.load_kernel()
+
+@long_test
+@require_isis
+def test_import_lro_nac_edr(isolated_dir):
+    f = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549139LE.IMG"
+    pds_to_isis(f, "nac.cub")
+    # Test handling the kernels and downloading from the web.
+    klist = read_kernel_from_isis("nac.cub")
+    klist.load_kernel()
+
+# Doesn't currently work. I'm not sure if ISIS actually support this or
+# not.
+@skip    
+@long_test
+@require_isis
+def test_import_lro_nac_cdr(isolated_dir):
+    f = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549139LC.IMG"
+    pds_to_isis(f, "nac.cub")
+    # Test handling the kernels and downloading from the web.
+    klist = read_kernel_from_isis("nac.cub")
+    klist.load_kernel()
+    

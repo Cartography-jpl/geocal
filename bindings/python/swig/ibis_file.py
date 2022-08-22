@@ -819,6 +819,21 @@ class IbisFile(geocal_swig.generic_object.GenericObject):
         return self._v_unit()
 
 
+    def set_column_type(self, I, Dt):
+        """
+
+        void IbisFile::set_column_type(int i, data_type dt)
+        IBIS has support for casting a column type to and from a different
+        type for reading and writing.
+
+        This changes whatever the native type is to the given type. Note that
+        this is fixed. Also anything done with the previous type column is
+        lost, so you should call this before changing values in an IBIS
+        column. 
+        """
+        return _ibis_file.IbisFile_set_column_type(self, I, Dt)
+
+
     def mark_updated(self, *args):
         """
 
@@ -856,6 +871,7 @@ IbisFile._v_ibis_fh = new_instancemethod(_ibis_file.IbisFile__v_ibis_fh, None, I
 IbisFile._v_number_row = new_instancemethod(_ibis_file.IbisFile__v_number_row, None, IbisFile)
 IbisFile._v_number_col = new_instancemethod(_ibis_file.IbisFile__v_number_col, None, IbisFile)
 IbisFile._v_unit = new_instancemethod(_ibis_file.IbisFile__v_unit, None, IbisFile)
+IbisFile.set_column_type = new_instancemethod(_ibis_file.IbisFile_set_column_type, None, IbisFile)
 IbisFile.mark_updated = new_instancemethod(_ibis_file.IbisFile_mark_updated, None, IbisFile)
 IbisFile.flush = new_instancemethod(_ibis_file.IbisFile_flush, None, IbisFile)
 IbisFile.__str__ = new_instancemethod(_ibis_file.IbisFile___str__, None, IbisFile)

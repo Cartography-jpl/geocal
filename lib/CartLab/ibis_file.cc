@@ -69,6 +69,22 @@ int IbisFile::IBISColumnWritew(int ibis_id, char *buffer, int column,
 }
 
 //-----------------------------------------------------------------------
+/// This is a thin wrapper around the p1 function IBISColumnSet. If the
+/// VICAR library is installed then we just forward to that library,
+/// otherwise we throw an exception saying that it isn't available.
+//-----------------------------------------------------------------------
+
+int IbisFile::IBISColumnSetw(int ibis_id, char* name, void* value,
+			     int column)
+{
+#ifdef HAVE_VICAR_RTL
+  return IBISColumnSet(ibis_id, name, value, column);
+#else
+  throw VicarNotAvailableException();
+#endif
+}
+
+//-----------------------------------------------------------------------
 /// Constructor. The column index is 0 based.
 //-----------------------------------------------------------------------
 
@@ -428,4 +444,67 @@ template<> void IbisColumn<std::string>::print(std::ostream& Os) const
      << "  Index:      " << index << "\n"
      << "  Number row: " << f.number_row() << "\n"
      << "  Type:       " << "A" << size_byte() << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// IBIS has support for  casting a column type to and from a
+/// different type for reading and writing. This changes whatever the
+/// native type is to the given type. Note that this is fixed. Also
+/// anything done with the previous type column is lost, so you should
+/// call this before changing values in an IBIS column.
+//-----------------------------------------------------------------------
+
+void IbisFile::set_column_type(int i, data_type dt)
+{
+  std::string val;
+  switch(dt) {
+  case VICAR_BYTE:
+    val = "BYTE";
+    break;
+  case VICAR_HALF:
+    val = "HALF";
+    break;
+  case VICAR_FULL:
+    val = "FULL";
+    break;
+  case VICAR_FLOAT:
+    val = "REAL";
+    break;
+  case VICAR_DOUBLE:
+    val = "DOUB";
+    break;
+  case VICAR_ASCII:
+    throw Exception("We don't support changing the type to ASCII");
+    break;
+  default:
+    throw Exception("This shouldn't be able to happen");
+  }
+  
+  int status = IbisFile::IBISColumnSetw(ibis_fh(), "U_FORMAT",
+					const_cast<char*>(val.c_str()),
+					i + 1);
+  if(status != 1)
+    throw VicarException(status, "IBISColumnSet call failed");
+  switch(dt) {
+  case VICAR_BYTE:
+    col[i].reset(new IbisColumn<VicarByte>(*this, i, 1));
+    break;
+  case VICAR_HALF:
+    col[i].reset(new IbisColumn<VicarHalf>(*this, i, 2));
+    break;
+  case VICAR_FULL:
+    col[i].reset(new IbisColumn<VicarFull>(*this, i, 4));
+    break;
+  case VICAR_FLOAT:
+    col[i].reset(new IbisColumn<VicarFloat>(*this, i, 4));
+    break;
+  case VICAR_DOUBLE:
+    col[i].reset(new IbisColumn<VicarDouble>(*this, i, 8));
+    break;
+  case VICAR_ASCII:
+    throw Exception("We don't support changing the type to ASCII");
+    break;
+  default:
+    throw Exception("This shouldn't be able to happen");
+  }
 }

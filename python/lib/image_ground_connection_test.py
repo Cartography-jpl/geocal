@@ -45,6 +45,8 @@ def test_gdal_image_ground_connection():
     igc2 = pickle.loads(t)
 
 def p_view_zenith(igc, ic):
+    '''Independent calculation of view angles, using pyorbital. Not
+    identical to our calculation, but shoule be pretty close.'''
     import datetime
     import pyorbital.orbital
     gp = igc.ground_coordinate(ic)

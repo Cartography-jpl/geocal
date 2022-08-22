@@ -174,6 +174,8 @@ try {
   IbisFile ifile(inpfname[2], IbisFile::UPDATE);
   if (ifile.number_col()<11) throw Exception("ibis file needs 11 columns");
   // Give columns name, to make it clearer what we are doing here.
+  for(int i = 0; i <= 10; ++i)
+    ifile.set_column_type(i, IbisFile::VICAR_DOUBLE);
   std::vector<double>& first_line_or_east = ifile.column<double>(0).data;
   std::vector<double>& first_samp_or_west = ifile.column<double>(1).data;
   std::vector<double>& first_line = ifile.column<double>(2).data;
@@ -193,6 +195,8 @@ try {
   // set to zero.
   std::vector<ImageCoordinate> elvoff(ifile.number_row(), ImageCoordinate(0,0));
   if(elvcor) {
+    ifile.set_column_type(11, IbisFile::VICAR_DOUBLE);
+    ifile.set_column_type(12, IbisFile::VICAR_DOUBLE);
     const std::vector<double>& line_elv_offset = ifile.column<double>(11).data;
     const std::vector<double>& samp_elv_offset = ifile.column<double>(12).data;
     for(int i = 0; i < ifile.number_row(); ++i)

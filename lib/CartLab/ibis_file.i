@@ -61,6 +61,7 @@ public:
   %python_attribute(number_row, int)
   %python_attribute(number_col, int)
   %python_attribute(unit, int)
+  void set_column_type(int I, data_type Dt);
   void mark_updated();
   void mark_updated(int I);
   void flush();

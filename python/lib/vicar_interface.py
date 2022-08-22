@@ -185,6 +185,7 @@ end-proc
 """ % (self.before_body, self.cmd))
 
             self.pre_run()
+            self.run_out = None
             try:
                 fh = None
                 if(self.log_file):
@@ -193,7 +194,8 @@ end-proc
                          quiet = (not self.debug and not self.print_output))
             except subprocess.CalledProcessError as ex:
                 print("Vicar call failed. Log of VICAR:")
-                print(self.run_out)
+                if(self.run_out):
+                    print(self.run_out)
                 raise
             for f in outabs:
                 shutil.move(os.path.basename(f), f)

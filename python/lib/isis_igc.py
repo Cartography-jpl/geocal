@@ -174,5 +174,65 @@ class IsisIgc(ImageGroundConnection):
         gcam.delta_sample_pair = 1
         gcam.field_alignment = fa
         return gcam
+
+    @run_in_tempdir()
+    def gfm_cam_model(self, focal_length, number_line):
+        '''Brute force a GFM camera model by calculating for every
+        point in given number of lines.'''
+        with open("points.csv", "w") as f:
+            writer = csv.writer(f)
+            for j in range(number_line):
+                for i in range(self.number_sample):
+                    writer.writerow([i+0.5,j+0.5])
+        setup_isis()
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/campt",
+                        f"from={self.fname}", "to=campt.csv",
+                        "coordtype=IMAGE", "coordlist=points.csv",
+                        "format=flat"],
+                       check=True, stdout=subprocess.DEVNULL)
+        t = pd.read_csv("campt.csv")
+        x = np.array(t["LookDirectionCameraX"][:]).reshape((self.number_sample, number_line)).transpose()
+        y = np.array(t["LookDirectionCameraY"][:]).reshape((self.number_sample, number_line)).transpose()
+        z = np.array(t["LookDirectionCameraZ"][:]).reshape((self.number_sample, number_line)).transpose()
+        gcam = GlasGfmCamera(number_line,self.number_sample)
+        # Glas focal length is in meters, while
+        # input is in millimeters
+        gcam.focal_length = focal_length * 1e-3
+        fa = np.empty((number_line, self.number_sample, 2, 2, 2))
+        for ln in range(number_line - 1):
+            for smp in range(self.number_sample):
+                fa[ln,smp,0,0,0] = x[ln,smp] / (z[ln,smp] / gcam.focal_length)
+                fa[ln,smp,0,0,1] = y[ln,smp] / (z[ln,smp] / gcam.focal_length)
+                fa[ln,smp,1,0,0] = x[ln+1,smp] / (z[ln+1,smp] / gcam.focal_length)
+                fa[ln,smp,1,0,1] = y[ln+1,smp] / (z[ln+1,smp] / gcam.focal_length)
+                # Extrapolate last sample
+                if(smp < self.number_sample - 1):
+                    fa[ln,smp,0,1,0] = x[ln,smp+1] / (z[ln,smp+1] / gcam.focal_length)
+                    fa[ln,smp,0,1,1] = y[ln,smp+1] / (z[ln,smp+1] / gcam.focal_length)
+                    fa[ln,smp,1,1,0] = x[ln+1,smp+1] / (z[ln+1,smp+1] / gcam.focal_length)
+                    fa[ln,smp,1,1,1] = y[ln+1,smp+1] / (z[ln+1,smp+1] / gcam.focal_length)
+                else:
+                    fa[ln,smp,0,1,0] = fa[ln,smp,0,0,0]+(fa[ln,smp-1,0,1,0]-
+                                                         fa[ln,smp-1,0,0,0])
+                    fa[ln,smp,0,1,1] = fa[ln,smp,0,0,1]+(fa[ln,smp-1,0,1,1]-
+                                                         fa[ln,smp-1,0,0,1])
+                    fa[ln,smp,1,1,0] = fa[ln,smp,1,0,0]+(fa[ln,smp-1,1,1,0]-
+                                                         fa[ln,smp-1,1,0,0])
+                    fa[ln,smp,1,1,1] = fa[ln,smp,1,0,1]+(fa[ln,smp-1,1,1,1]-
+                                                         fa[ln,smp-1,1,0,1])
+        # Extrapolate last line
+        ln = number_line - 1
+        for smp in range(self.number_sample):
+            for i in range(2):
+                for j in range(2):
+                    fa[ln,smp,0,i,j] = fa[ln-1,smp,1,i,j]
+                    fa[ln,smp,1,i,j] = fa[ln,smp,0,i,j]+(fa[ln-1,smp,1,i,j]-
+                                                         fa[ln-1,smp,0,i,j])
+        gcam.first_line_block = np.array([0,])
+        gcam.first_sample_block = np.array([0,])
+        gcam.delta_line_block = np.array([1,])
+        gcam.delta_sample_block = np.array([1,])
+        gcam.field_alignment_block(0,fa)
+        return gcam
     
 __all__ = ["IsisIgc",]    

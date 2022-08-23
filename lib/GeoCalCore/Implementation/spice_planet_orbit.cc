@@ -113,6 +113,7 @@ void SpicePlanetOrbit::print(std::ostream& Os) const
      << "  Spacecraft Reference Frame: " << spacecraft_reference_frame_name_
      << "\n"
      << "  Body:                       " << PlanetConstant::name(naif_id_)
+     << "\n"
      << "  Aberration correction:      " << abcorr_ << "\n";
 }
 

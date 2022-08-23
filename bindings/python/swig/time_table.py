@@ -515,6 +515,71 @@ ConstantSpacingTimeTable._v_time_space = new_instancemethod(_time_table.Constant
 ConstantSpacingTimeTable_swigregister = _time_table.ConstantSpacingTimeTable_swigregister
 ConstantSpacingTimeTable_swigregister(ConstantSpacingTimeTable)
 
+class ConstantSpacingFrameletTimeTable(TimeTable):
+    """
+
+    Very similar to a ConstantSpacingTimeTable, but we have one than one
+    frame line per time.
+
+    This is like the time table for a push frame camera.
+
+    C++ includes: time_table.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Min_time, Max_time, Framelet_size, Time_space):
+        """
+
+        ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable(Time Time_min_line, Time Time_max_line, int Framelet_size, double
+        Time_space)
+        Constructor, creates time table from Time_min_line to Time_max_line
+        with given Time spacing.
+
+        We adjust Max_time to exactly Time_min_line + i * Time_space, rounding
+        to nearest integer i, so it ok if Max_time is a little sloppy. Note
+        Time_space can be negative, and Time_max_line < Time_min_line 
+        """
+        _time_table.ConstantSpacingFrameletTimeTable_swiginit(self, _time_table.new_ConstantSpacingFrameletTimeTable(Min_time, Max_time, Framelet_size, Time_space))
+
+    def _v_time_space(self):
+        """
+
+        double GeoCal::ConstantSpacingFrameletTimeTable::time_space() const
+
+        """
+        return _time_table.ConstantSpacingFrameletTimeTable__v_time_space(self)
+
+
+    @property
+    def time_space(self):
+        return self._v_time_space()
+
+
+    def _v_framelet_size(self):
+        """
+
+        int GeoCal::ConstantSpacingFrameletTimeTable::framelet_size() const
+
+        """
+        return _time_table.ConstantSpacingFrameletTimeTable__v_framelet_size(self)
+
+
+    @property
+    def framelet_size(self):
+        return self._v_framelet_size()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _time_table.delete_ConstantSpacingFrameletTimeTable
+ConstantSpacingFrameletTimeTable._v_time_space = new_instancemethod(_time_table.ConstantSpacingFrameletTimeTable__v_time_space, None, ConstantSpacingFrameletTimeTable)
+ConstantSpacingFrameletTimeTable._v_framelet_size = new_instancemethod(_time_table.ConstantSpacingFrameletTimeTable__v_framelet_size, None, ConstantSpacingFrameletTimeTable)
+ConstantSpacingFrameletTimeTable_swigregister = _time_table.ConstantSpacingFrameletTimeTable_swigregister
+ConstantSpacingFrameletTimeTable_swigregister(ConstantSpacingFrameletTimeTable)
+
 class MeasuredTimeTable(TimeTable):
     """
 
@@ -580,7 +645,7 @@ MeasuredTimeTable_swigregister = _time_table.MeasuredTimeTable_swigregister
 MeasuredTimeTable_swigregister(MeasuredTimeTable)
 
 
-__all__ = ["TimeTable","ConstantSpacingTimeTable","MeasuredTimeTable","Vector_Time","Vector_Time2"]
+__all__ = ["TimeTable","ConstantSpacingTimeTable","MeasuredTimeTable","ConstantSpacingFrameletTimeTable","Vector_Time","Vector_Time2"]
 
 
 

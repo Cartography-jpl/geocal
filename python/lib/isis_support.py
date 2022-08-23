@@ -175,6 +175,17 @@ class LroPdsToIsis:
         # have a pointer to is.
         t = os.path.splitext(isis_fname)[0]
         os.symlink(f"{t}.vis.even.cub", isis_fname)
+        # For now, run spiceinit on the other cubes. Not sure if
+        # we need this long term, but do for now
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={t}.vis.odd.cub", "web=true"],
+                       check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={t}.uv.even.cub", "web=true"],
+                       check=True, stdout=subprocess.DEVNULL)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={t}.uv.odd.cub", "web=true"],
+                       check=True, stdout=subprocess.DEVNULL)
 
     def pds_edr_nac_to_isis(self, fin, pds_fname, isis_fname):
         subprocess.run([f"{os.environ['ISISROOT']}/bin/lronac2isis",

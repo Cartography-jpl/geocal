@@ -11837,6 +11837,8 @@ SWIG_init(void) {
   
   SWIG_Python_SetConstant(d, "PlanetConstant_MARS_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::PlanetConstant::MARS_NAIF_CODE)));
   SWIG_Python_SetConstant(d, "PlanetConstant_EUROPA_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::PlanetConstant::EUROPA_NAIF_CODE)));
+  SWIG_Python_SetConstant(d, "PlanetConstant_CERES_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::PlanetConstant::CERES_NAIF_CODE)));
+  SWIG_Python_SetConstant(d, "PlanetConstant_MOON_NAIF_CODE",SWIG_From_int(static_cast< int >(GeoCal::PlanetConstant::MOON_NAIF_CODE)));
 #if PY_VERSION_HEX >= 0x03000000
   return m;
 #else

@@ -15,6 +15,7 @@
 %import "frame_coordinate.i"
 %geocal_shared_ptr(GeoCal::TimeTable);
 %geocal_shared_ptr(GeoCal::ConstantSpacingTimeTable);
+%geocal_shared_ptr(GeoCal::ConstantSpacingFrameletTimeTable);
 %geocal_shared_ptr(GeoCal::MeasuredTimeTable);
 
 namespace GeoCal {
@@ -56,6 +57,17 @@ public:
   %python_attribute(time_space, double)
   %pickle_serialization();
 };
+class ConstantSpacingFrameletTimeTable : public TimeTable {
+public:
+  ConstantSpacingFrameletTimeTable(Time Min_time, Time Max_time,
+				   int Framelet_size,
+				   double Time_space);
+  virtual ImageCoordinate image_coordinate(Time T, const FrameCoordinate& F)
+    const;
+  %python_attribute(time_space, double)
+  %python_attribute(framelet_size, int)
+  %pickle_serialization();
+};
 
 class MeasuredTimeTable : public TimeTable {
 public:
@@ -75,4 +87,5 @@ public:
 // included in multiple files, we just pick one to export it
 
 %python_export("TimeTable", "ConstantSpacingTimeTable", "MeasuredTimeTable",
+	       "ConstantSpacingFrameletTimeTable",
 	       "Vector_Time", "Vector_Time2")

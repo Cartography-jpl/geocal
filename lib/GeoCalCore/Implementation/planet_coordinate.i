@@ -22,7 +22,8 @@
 namespace GeoCal {
 class PlanetConstant {
 public:
-  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502};
+  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502, CERES_NAIF_CODE=2000001,
+	MOON_NAIF_CODE=301};
   static double a(int Naif_code);
   static double b(int Naif_code);
   static double esq(int Naif_code);

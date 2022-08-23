@@ -202,6 +202,8 @@ class PlanetConstant(object):
     __repr__ = _swig_repr
     MARS_NAIF_CODE = _planet_coordinate.PlanetConstant_MARS_NAIF_CODE
     EUROPA_NAIF_CODE = _planet_coordinate.PlanetConstant_EUROPA_NAIF_CODE
+    CERES_NAIF_CODE = _planet_coordinate.PlanetConstant_CERES_NAIF_CODE
+    MOON_NAIF_CODE = _planet_coordinate.PlanetConstant_MOON_NAIF_CODE
 
     def a(Naif_code):
         """

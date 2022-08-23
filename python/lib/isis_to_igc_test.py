@@ -128,13 +128,14 @@ def test_hirise_to_igc(mars_test_data, isolated_dir):
 @long_test
 @require_isis
 def test_lunar_wac_to_igc(isolated_dir):
-    if False:
+    if True:
         # While developing, skip import by using hard coded path
         fname = "/home/smyth/Local/geocal-repo/python/wac.cub"
     else:
         f = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549036CC.IMG"
         pds_to_isis(f, "wac.cub")
         fname = "wac.cub"
+    igc = isis_to_igc(fname, band=3)
     #check_igc(fname)
     
     

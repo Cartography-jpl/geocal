@@ -1,5 +1,6 @@
 from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          SubRasterImage, ConstantSpacingTimeTable,
+                         ConstantSpacingFrameletTimeTable,
                          PlanetConstant, PlanetSimpleDem, OrbitListCache,
                          Ipi, IpiImageGroundConnection, Time,
                          PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
@@ -141,6 +142,133 @@ class CtxIsisToIgc:
 
 IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
 
+class LroWacIsisToIgc:
+    def igc_to_glas(self, igc_r, focal_length):
+        '''Convert IGC to a GLAS model.'''
+        raise RuntimeError("Not implemented")
+        tspace = igc_r.ipi.time_table.time_space
+        porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         PosCsephb.LAGRANGE,
+                         PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                         PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+        aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         AttCsattb.LAGRANGE,
+                         AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                         AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+        orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+        band = 0
+        delta_sample = 100
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
+                              0.65, focal_length*1e-3)
+        ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                    igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
+        igc_g.platform_id = "MRO"
+        igc_g.payload_id = "MRO"
+        igc_g.sensor_id = "CTX"
+        return igc_g
+        
+    def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
+                    glas_gfm=False, rsm=False, min_height=-5000,
+                    max_height=-1500, igc_out_fname=None,
+                    match_isis=False, spice_igc=False, band=3, **keywords):
+        '''This takes the band number. By convention, we have 1 and 2 as
+        the UV bands, 3-7 as the visible bands.'''
+        idata = isis_metadata["IsisCube"]["Instrument"]
+        if(idata["InstrumentId"] != "WAC-VIS"):
+            return (False, None)
+        klist.load_kernel()
+        sline = 0
+        nline = isis_img.number_line
+        if(subset is not None):
+            sline = subset[0]
+            nline = subset[2]
+            img = SubRasterImage(isis_img, subset[0], subset[1],
+                                 subset[2], subset[3])
+        else:
+            img = isis_img
+
+        # Map band to the filter type
+        if(band == 1):
+            frame = "LRO_LROCWAC_UV_FILTER_1"
+            framelet_size = 16
+        elif(band == 2):
+            frame = "LRO_LROCWAC_UV_FILTER_2"
+            framelet_size = 16
+        elif(band == 3):
+            frame = "LRO_LROCWAC_VIS_FILTER_1"
+            framelet_size = 14
+        elif(band == 4):
+            frame = "LRO_LROCWAC_VIS_FILTER_2"
+            framelet_size = 14
+        elif(band == 5):
+            frame = "LRO_LROCWAC_VIS_FILTER_3"
+            framelet_size = 14
+        elif(band == 6):
+            frame = "LRO_LROCWAC_VIS_FILTER_4"
+            framelet_size = 14
+        elif(band == 7):
+            frame = "LRO_LROCWAC_VIS_FILTER_5"
+            framelet_size = 14
+        else:
+            raise RuntimeError(f"Unknown band number {band}. Should be 1-7")
+            
+        # Note IsisIgc uses LT+S. this is actually *wrong*, see the
+        # description of that in IsisIgc. We have this code in place
+        # so we can duplicate IsisIgc (e.g., make sure everything else
+        # agrees)
+        if(match_isis):
+            orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
+                                   PlanetConstant.MARS_NAIF_CODE,
+                                   "LT+S")
+        else:
+            orb = SpicePlanetOrbit("LRO", frame, klist,
+                                   PlanetConstant.MOON_NAIF_CODE)
+        tstart = Time.time_sclk(idata["SpacecraftClockStartCount"], "LRO")
+        tend = Time.time_sclk(idata["SpacecraftClockStopCount"], "LRO")
+        if(idata["InterframeDelay"]["unit"] != "ms"):
+            raise RuntimeError(f"Not sure how to handle InterframeDelay units of {idata['InterframeDelay']['unit']}")
+        tspace = float(idata["InterframeDelay"]["value"]) * 1e-3
+        tt = ConstantSpacingFrameletTimeTable(tstart, tend, framelet_size,
+                                              tspace)
+        print(orb)
+        print(tt)
+        return (True, None)
+        dem = PlanetSimpleDem(PlanetConstant.MOON_NAIF_CODE)
+        orb_cache = OrbitListCache(orb, tt)
+        start_sample = int(idata["SampleFirstPixel"])
+        cam = ctx_camera(start_sample=start_sample, nsamp=img.number_sample)
+        if(isinstance(cam, SubCamera)):
+            focal_length = cam.full_camera.focal_length
+        else:
+            focal_length = cam.focal_length
+        if(spice_igc):
+            return (True, SpiceIgc(orb, cam, tt, img=img))
+        ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
+        igc = IpiImageGroundConnection(ipi, dem, img)
+        # LT+S already corrects for velocity aberration (LT+S is basically
+        # aberration plus light time - so more accurate). Turn off the
+        # igc calculation if we are matching ISIS
+        if(match_isis):
+            igc.velocity_aberration = NoVelocityAberration()
+        if(igc_out_fname is not None):
+            write_shelve(igc_out_fname, igc)
+        if(glas_gfm):
+            igc = self.igc_to_glas(igc, focal_length)
+        if(not rsm):
+            return (True, igc)
+        else:
+            return (True, (igc, rsm_context(igc, min_height=min_height,
+                                            max_height=max_height)))
+
+IsisToIgcHandleSet.add_default_handle(LroWacIsisToIgc())
+
 class HiriseIsisToIgc:
     '''Note that the HiRISE data is small floating point numbers. We
     scale to get a reasonable looking image.'''
@@ -268,6 +396,9 @@ def isis_to_igc(isis_fname, **keywords):
 
     The specific options for each IGC depends on the type, but some
     of the keywords we have are:
+
+    band - If there are multiple bands, select which one to use. By convention
+    this is 1 based.
 
     subset - You can supply a subset if desired, this should be an array of
     [Lstart, Sstart, Number_line, Number_sample].

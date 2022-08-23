@@ -7,11 +7,15 @@ from .sqlite_shelf import write_shelve
 import pandas as pd
 
 def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
-              check_spice=False, check_glas_rsm=True):
+              check_spice=False, check_glas_rsm=True,
+              band = None):
     '''Compare a IGC with the same ISIS calculation. This tends to be
     common for different instruments, so collect the generic part of
     what we check here.'''
-    igc = isis_to_igc(fname)
+    keyword = {}
+    if(band):
+        keyword["band"]=band
+    igc = isis_to_igc(fname, **keyword)
     igc_isis = IsisIgc(fname)
     # Check every 100th line time
     if check_time:
@@ -20,7 +24,8 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
             if ln % 1000 == 0:
                 print(f"Checking line {ln}")
             assert_almost_equal(igc.pixel_time(ic).j2000,
-                                igc_isis.pixel_time(ic).j2000)
+                                igc_isis.pixel_time(ic).j2000,
+                                decimal=6)
 
     if check_camera:
         cam = igc.ipi.camera
@@ -39,7 +44,7 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
         #assert t[0] < 1e-2
         assert t[1] < 1e-2
     if check_isis:
-        igc_match_isis = isis_to_igc(fname, match_isis=True)
+        igc_match_isis = isis_to_igc(fname, match_isis=True, **keyword)
         dlist = []
         for ln in range(0,igc.number_line,1000):
             if(ln > 0):
@@ -58,8 +63,8 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
         print("ISIS diff")
         print(pd.DataFrame(dlist).describe())
     if check_spice:
-        igc_spice = isis_to_igc(fname, spice_igc=True)
-        igc_match_isis = isis_to_igc(fname, match_isis=True)
+        igc_spice = isis_to_igc(fname, spice_igc=True, **keyword)
+        igc_match_isis = isis_to_igc(fname, match_isis=True, **keyword)
         d = []
         for ln in range(0,igc.number_line,1000):
             for smp in range (0,igc.number_sample,100):
@@ -73,7 +78,7 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
         print("Difference ISIS vs SPICE")
         print(pd.DataFrame(d).describe())
     if check_glas_rsm:
-        igc_glas,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True)
+        igc_glas,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True, **keyword)
         print(igc_glas)
         print(rsm)
         lnlist = []
@@ -135,7 +140,9 @@ def test_lunar_wac_to_igc(isolated_dir):
         f = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549036CC.IMG"
         pds_to_isis(f, "wac.cub")
         fname = "wac.cub"
-    igc = isis_to_igc(fname, band=3)
-    #check_igc(fname)
+    if False:
+        igc = isis_to_igc(fname, band=3)
+        write_shelve("igc.xml", igc)
+    check_igc(fname, band=3, check_glas_rsm=False, check_time=True)
     
     

@@ -64,8 +64,9 @@ Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const
     time_tolerance_(Time_tolerance),
     max_frame_extend_(Max_frame_extend)
 {
-  if(Cam->number_line(Band) != 1)
-    throw Exception("I think we only want to do an IPI with a pushbroom camera with 1 line. If this is wrong, you can remove this exception");
+  // TODO Come back and think through this
+  // if(Cam->number_line(Band) != 1)
+  //   throw Exception("I think we only want to do an IPI with a pushbroom camera with 1 line. If this is wrong, you can remove this exception");
 }
 
 //-----------------------------------------------------------------------

@@ -4,7 +4,8 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          PlanetConstant, PlanetSimpleDem, OrbitListCache,
                          Ipi, IpiImageGroundConnection, Time,
                          PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
-                         ScaleImage, NoVelocityAberration, SubCamera)
+                         ScaleImage, NoVelocityAberration, SubCamera,
+                         SimpleCamera)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
@@ -234,20 +235,19 @@ class LroWacIsisToIgc:
         tend = Time.time_sclk(idata["SpacecraftClockStopCount"], "LRO")
         if(idata["InterframeDelay"]["unit"] != "ms"):
             raise RuntimeError(f"Not sure how to handle InterframeDelay units of {idata['InterframeDelay']['unit']}")
+        if(idata["ExposureDuration"]["unit"] != "ms"):
+            raise RuntimeError(f"Not sure how to handle ExposureDuration units of {idata['InterframeDelay']['unit']}")
+        edur = float(idata["ExposureDuration"]["value"]) * 1e-3
         tspace = float(idata["InterframeDelay"]["value"]) * 1e-3
+        # This is what ISIS does. This is probably sensible
+        tstart += edur / 2.0
         tt = ConstantSpacingFrameletTimeTable(tstart, tend, framelet_size,
                                               tspace)
-        print(orb)
-        print(tt)
-        return (True, None)
         dem = PlanetSimpleDem(PlanetConstant.MOON_NAIF_CODE)
         orb_cache = OrbitListCache(orb, tt)
-        start_sample = int(idata["SampleFirstPixel"])
-        cam = ctx_camera(start_sample=start_sample, nsamp=img.number_sample)
-        if(isinstance(cam, SubCamera)):
-            focal_length = cam.full_camera.focal_length
-        else:
-            focal_length = cam.focal_length
+        # Nominal values, we'll replace with real camera later
+        cam = SimpleCamera(0,0,0,6e-3,9.0e-6,9.0e-6,14,704)
+        focal_length = 6e-3
         if(spice_igc):
             return (True, SpiceIgc(orb, cam, tt, img=img))
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
@@ -264,8 +264,7 @@ class LroWacIsisToIgc:
         if(not rsm):
             return (True, igc)
         else:
-            return (True, (igc, rsm_context(igc, min_height=min_height,
-                                            max_height=max_height)))
+            raise RuntimeError("We don't support RSM for LRO WAC")
 
 IsisToIgcHandleSet.add_default_handle(LroWacIsisToIgc())
 

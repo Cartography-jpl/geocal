@@ -191,9 +191,9 @@ class IsisIgc(ImageGroundConnection):
                         "format=flat"],
                        check=True, stdout=subprocess.DEVNULL)
         t = pd.read_csv("campt.csv")
-        x = np.array(t["LookDirectionCameraX"][:]).reshape((self.number_sample, number_line)).transpose()
-        y = np.array(t["LookDirectionCameraY"][:]).reshape((self.number_sample, number_line)).transpose()
-        z = np.array(t["LookDirectionCameraZ"][:]).reshape((self.number_sample, number_line)).transpose()
+        x = np.array(t["LookDirectionCameraX"][:]).reshape((number_line, self.number_sample))
+        y = np.array(t["LookDirectionCameraY"][:]).reshape((number_line, self.number_sample))
+        z = np.array(t["LookDirectionCameraZ"][:]).reshape((number_line, self.number_sample))
         gcam = GlasGfmCamera(number_line,self.number_sample)
         # Glas focal length is in meters, while
         # input is in millimeters

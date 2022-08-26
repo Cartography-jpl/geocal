@@ -24,7 +24,7 @@ class CameraRadialDistortion : public QuaternionCamera {
 public:
 //-----------------------------------------------------------------------
 /// Create a QuaternionCamera with a radial distortion model given
-/// by kdistort. We currently limit kdistort.rows() <= 3, although we
+/// by kdistort. We currently limit kdistort.rows() <= 4, although we
 /// could relax that if it ends up being useful.  
 //-----------------------------------------------------------------------
   
@@ -46,8 +46,8 @@ public:
     k_distort_(K_distort.copy()),
     max_r2_filled_in(false)
   {
-    if(k_distort_.rows() > 3)
-      throw Exception("Right now, only support k_distort.rows <= 3");
+    if(k_distort_.rows() > 4)
+      throw Exception("Right now, only support k_distort.rows <= 4");
   }
   CameraRadialDistortion(boost::math::quaternion<double> Frame_to_sc_q, 
 			  const blitz::Array<double, 1>& K_distort,
@@ -66,8 +66,8 @@ public:
     k_distort_(K_distort.copy()),
     max_r2_filled_in(false)
   {
-    if(k_distort_.rows() > 3)
-      throw Exception("Right now, only support k_distort.rows <= 3");
+    if(k_distort_.rows() > 4)
+      throw Exception("Right now, only support k_distort.rows <= 4");
   }
   virtual void print(std::ostream& Os) const;
   void dcs_to_focal_plane
@@ -93,7 +93,12 @@ protected:
 private:
   blitz::Array<double, 1> k_distort_;
   double dr_over_r_calc(double r2) const
-  { return k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2)); }
+  { if(k_distort_.rows() == 3)
+      return k_distort_(0) + r2 * (k_distort_(1) + r2 * k_distort_(2));
+    if(k_distort_.rows() == 4)
+      return k_distort_(0) + r2 * (k_distort_(1) + r2 * (k_distort_(2) + r2 * k_distort_(3)));
+    throw Exception("Unsupported k_distort_ size");
+  }
   double dr_over_r_calc_from_x_y(double x, double y) const;
   mutable bool max_r2_filled_in;
   mutable double max_rp2;

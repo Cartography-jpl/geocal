@@ -104,4 +104,65 @@ def ctx_camera(start_sample=0,nsamp=None):
         ctx_cam = SubCamera(ctx_cam, 0, start_sample, 1, nsamp)
     return ctx_cam
 
-__all__ = ["hrsc_camera", "ctx_camera", "hirise_camera"]
+def lro_wac_camera(band=3, mode="COLOR"):
+    '''Return the LRO WAC camera. Note that this varies depending on the
+    band. By convention the first two bands are the UV, the next 5 are
+    the visible'''
+    if(band in (1, 2)):
+        # LRO_LROCWAC_UV_FILTER_1
+        # LRO_LROCWAC_UV_FILTER_2
+        bname = f"INS-8564{band}"
+        sub_nline = 16
+    elif(band in (3,4,5,6,7)):
+        # LRO_LROCWAC_VIS_FILTER_1 - 5
+        bname = f"INS-8563{band-2}"
+        sub_nline = 14
+    else:
+        raise RuntimeError(f"Band {band} is unknown, should be 1-7")
+ 
+    focal_length = SpiceHelper.kernel_data_double(f"{bname}_FOCAL_LENGTH")
+    pitch = SpiceHelper.kernel_data_double(f"{bname}_PIXEL_PITCH")
+    nsamp = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_SAMPLES")
+    nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
+    principal_point = FrameCoordinate(\
+        SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_LINE"),
+        SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_SAMPLE") - 0.5)
+    od_k = SpiceHelper.kernel_data_array_double(f"{bname}_OD_K");
+    # For who knows what reason, the od_k correction has a different
+    # form than the other spice cameras we have used. We can massage
+    # the values to fit in the original form
+    od_k = [0,-od_k[0],-od_k[1],-od_k[2]]
+    trans_x = SpiceHelper.kernel_data_array_double(f"{bname}_TRANSX")
+    trans_y = SpiceHelper.kernel_data_array_double(f"{bname}_TRANSY")
+    ccd_cen = SpiceHelper.kernel_data_array_double(f"{bname}_CCD_CENTER")
+    #ccd_cen = [principal_point.line, principal_point.sample]
+    # Extra 0.5 pixel is because the convention in the SPICE kernels is to
+    # have (0,0) be the upper left hand corner of first pixel, while we
+    # use (0,0) for the center of the pixel.
+    sline = SpiceHelper.kernel_data_int(f"{bname}_FILTER_OFFSET")
+    ccd_off = [0.5,0.5 + SpiceHelper.kernel_data_double(f"{bname}_FILTER_OFFSET")]
+    t_off = np.array([trans_x[0],trans_y[0]])
+    t_m = np.array([[trans_x[1], trans_x[2]],[trans_y[1],trans_y[2]]])
+    # We calculate the inverse rather than reading it. Limitations on the
+    # precision gives an inverse that round trips with an error of ~0.01
+    # pixel. Doesn't matter in practice, but it better if our inverse really
+    # reverses our forward calculation
+    tinv_m = np.linalg.inv(t_m)
+    tinv_off = np.dot(tinv_m, -t_off)
+    bin_mode=1
+    #wac_cam = CameraRadialDistortionAndTransform(Quaternion_double(1,0,0,0),
+    #                                             od_k,
+    #    nline, nsamp, pitch, pitch, focal_length, bin_mode, ccd_off, ccd_cen,
+    #    t_off, t_m, tinv_off, tinv_m)
+    wac_cam = CameraRadialDistortion(Quaternion_double(1,0,0,0),
+                                     od_k, nline, nsamp, pitch, pitch,
+                                     focal_length, principal_point)
+    # Camera is subsetted, depending on the mode it is in
+    soff = SpiceHelper.kernel_data_int(f"{bname}_{mode}_SAMPLE_OFFSET")
+    wac_cam = SubCamera(wac_cam, sline, soff, sub_nline, nsamp - 2 * soff)
+    return wac_cam
+
+
+
+
+__all__ = ["hrsc_camera", "ctx_camera", "hirise_camera", "lro_wac_camera"]

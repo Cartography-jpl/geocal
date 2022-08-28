@@ -517,7 +517,6 @@ MspiCamera.angular_separation = new_instancemethod(_mspi_camera.MspiCamera_angul
 MspiCamera.paraxial_offset = new_instancemethod(_mspi_camera.MspiCamera_paraxial_offset, None, MspiCamera)
 MspiCamera.row_number = new_instancemethod(_mspi_camera.MspiCamera_row_number, None, MspiCamera)
 MspiCamera.band_number = new_instancemethod(_mspi_camera.MspiCamera_band_number, None, MspiCamera)
-MspiCamera.__str__ = new_instancemethod(_mspi_camera.MspiCamera___str__, None, MspiCamera)
 MspiCamera_swigregister = _mspi_camera.MspiCamera_swigregister
 MspiCamera_swigregister(MspiCamera)
 

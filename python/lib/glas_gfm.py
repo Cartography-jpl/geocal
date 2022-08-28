@@ -2,9 +2,10 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          ConstantSpacingTimeTable, SimpleCamera, Ecr,
                          QuaternionCamera, FrameCoordinate,
                          ImageCoordinate, RefractionMsp, NoVelocityAberration,
-                         VelocityAberrationExact,
+                         VelocityAberrationExact, Camera,
                          GlasGfmCamera,Time,ScLookVector,
                          SimpleDem, IpiImageGroundConnection, Ipi,
+                         ScLookVector,
                          Quaternion_double, OrbitDataImageGroundConnection)
 from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                geocal_time_to_nitf_date_second_field,
@@ -15,6 +16,8 @@ import time
 import uuid
 import io
 import textwrap
+import scipy
+import numpy as np
 try:
     import pynitf
     from .geocal_nitf_des import(DesCSEPHB, DesCSATTB)
@@ -330,6 +333,32 @@ if(have_pynitf):
 
 # Support functions for GlasGfmCamera
 
+# Really minimal camera, but sufficient to pass to GlasGfmCamera to
+# fill in the field angle
+
+class _CameraForGlas(Camera):
+    def __init__(self, number_sample, lv_list, focal_length,
+                 sample_number_first=0,
+                 delta_sample_pair=0):
+        self.nsamp = number_sample
+        self.focal_length = focal_length
+        self.slv = scipy.interpolate.RegularGridInterpolator(
+            (range(sample_number_first, number_sample, delta_sample_pair),),
+            np.array([lv_list[:,0] * (focal_length / lv_list[:,2]),
+                      lv_list[:,1] * (focal_length / lv_list[:,2]),
+                      [focal_length,]* lv_list.shape[0]]).transpose(),
+            bounds_error = False, fill_value=None)
+        super().__init__()
+        
+    def number_line(self, b):
+        return 1
+
+    def number_sample(self, b):
+        return self.nsamp
+
+    def sc_look_vector(self, fc, b):
+        return ScLookVector(*self.slv([fc.sample])[0])
+        
 def _create_glas_from_sc_look_vector(cls, sclv_list, focal_length=1,
                    focal_length_time=Time.parse_time("2020-01-01T00:00:00Z"),
                    sample_number_first=0,
@@ -345,23 +374,14 @@ def _create_glas_from_sc_look_vector(cls, sclv_list, focal_length=1,
     gcam.delta_sample_pair = delta_sample_pair
     gcam.band_type = band_type
     gcam.band_wavelength = band_wavelength
-    
-    fa = np.empty((len(sclv_list),4))
-    for smp in range(fa.shape[0] - 1):
-        lv1 = sclv_list[smp].look_vector
-        lv2 = sclv_list[smp+1].look_vector
-        fa[smp,0] = lv1[0] / (lv1[2] / gcam.focal_length)
-        fa[smp,1] = lv1[1] / (lv1[2] / gcam.focal_length)
-        fa[smp,2] = lv2[0] / (lv2[2] / gcam.focal_length)
-        fa[smp,3] = lv2[1] / (lv2[2] / gcam.focal_length)
-    # Extrapolated for the last entry in the field angle table    
-    smp = fa.shape[0]-1
-    lv1 = sclv_list[smp].look_vector
-    fa[smp,0] = lv1[0] / (lv1[2] / gcam.focal_length)
-    fa[smp,1] = lv1[1] / (lv1[2] / gcam.focal_length)
-    fa[smp,2] = fa[smp,0] + (fa[smp-1,2]-fa[smp-1,0])
-    fa[smp,3] = fa[smp,1] + (fa[smp-1,3]-fa[smp-1,1])
-    gcam.field_alignment = fa
+
+    lv_list = np.array([[sclv.look_vector[0], sclv.look_vector[1],
+                         sclv.look_vector[2]] for sclv in sclv_list])
+    cfit = _CameraForGlas(gcam.number_sample(0), lv_list,
+                          gcam.focal_length,
+                          sample_number_first=sample_number_first,
+                          delta_sample_pair=delta_sample_pair)
+    gcam.field_alignment_fit(cfit, delta_sample_pair, 0)
     return gcam
 
 def _create_glas_from_field_angle(cls, fa_x, fa_y, **keyword):

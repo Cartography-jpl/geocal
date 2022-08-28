@@ -8256,49 +8256,6 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_MspiCamera___str__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  boost::shared_ptr< GeoCal::MspiCamera const > tempshared1 ;
-  boost::shared_ptr< GeoCal::MspiCamera const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
-  std::string result;
-  
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  {
-    int newmem = 0;
-    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiCamera_t, 0 |  0 , &newmem);
-    if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiCamera___str__" "', argument " "1"" of type '" "GeoCal::MspiCamera const *""'");
-    }
-    if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiCamera * >(tempshared1.get());
-    } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiCamera > * >(argp1);
-      arg1 = const_cast< GeoCal::MspiCamera * >((smartarg1 ? smartarg1->get() : 0));
-    }
-  }
-  {
-    try {
-      result = ((GeoCal::MspiCamera const *)arg1)->print_to_string();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
-    }
-  }
-  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
 SWIGINTERN PyObject *_wrap_delete_MspiCamera(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiCamera *arg1 = (GeoCal::MspiCamera *) 0 ;
@@ -8495,7 +8452,6 @@ static PyMethodDef SwigMethods[] = {
 		"int MspiCamera::band_number(int Row_number) const\n"
 		"Return the band number for the given row. \n"
 		""},
-	 { (char *)"MspiCamera___str__", (PyCFunction)_wrap_MspiCamera___str__, METH_O, NULL},
 	 { (char *)"delete_MspiCamera", (PyCFunction)_wrap_delete_MspiCamera, METH_O, (char *)"\n"
 		"\n"
 		"virtual GeoCal::MspiCamera::~MspiCamera()\n"

@@ -184,7 +184,7 @@ def velocity_cf_with_derivative(self):
   }
   %python_attribute(time, virtual Time)
   %python_attribute(time_with_derivative, virtual TimeWithDerivative)
-  std::string print_to_string() const;
+  virtual std::string print_to_string() const;
   %python_attribute(prefer_cf, bool)
 };
 
@@ -322,7 +322,7 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const = 0;
-  virtual std::string print_to_string();
+  virtual std::string print_to_string() const;
   %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
   %python_attribute_with_set_virtual(parameter_with_derivative, 
 			     ArrayAd<double, 1>);

@@ -225,10 +225,37 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     """
 
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+
+    def __init__(self):
+        """
+
+        GeoCal::Camera::Camera()
+        Default constructor. 
+        """
+        if self.__class__ == Camera:
+            _self = None
+        else:
+            _self = self
+        _camera.Camera_swiginit(self, _camera.new_Camera(_self, ))
+
+    def add_observer(self, Obs):
+        """
+
+        virtual void GeoCal::Camera::add_observer(Observer< Camera > &Obs)
+
+        """
+        return _camera.Camera_add_observer(self, Obs)
+
+
+    def remove_observer(self, Obs):
+        """
+
+        virtual void GeoCal::Camera::remove_observer(Observer< Camera > &Obs)
+
+        """
+        return _camera.Camera_remove_observer(self, Obs)
+
 
     def integration_time(self, Band):
         """
@@ -251,7 +278,7 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def _v_number_band(self):
         """
 
-        virtual int GeoCal::Camera::number_band() const =0
+        virtual int GeoCal::Camera::number_band() const
         Number of bands in camera. 
         """
         return _camera.Camera__v_number_band(self)
@@ -348,7 +375,64 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
         """
         return _camera.Camera_sc_look_vector_with_derivative(self, F, Band)
 
+
+    @property
+    def parameter(self):
+        return self._v_parameter()
+
+    @parameter.setter
+    def parameter(self, value):
+      self._v_parameter(value)
+
+
+    @property
+    def parameter_with_derivative(self):
+        return self._v_parameter_with_derivative()
+
+    @parameter_with_derivative.setter
+    def parameter_with_derivative(self, value):
+      self._v_parameter_with_derivative(value)
+
+
+    @property
+    def parameter_name(self):
+        return self._v_parameter_name()
+
+
+    @property
+    def parameter_subset(self):
+        return self._v_parameter_subset()
+
+    @parameter_subset.setter
+    def parameter_subset(self, value):
+      self._v_parameter_subset(value)
+
+
+    @property
+    def parameter_with_derivative_subset(self):
+        return self._v_parameter_with_derivative_subset()
+
+    @parameter_with_derivative_subset.setter
+    def parameter_with_derivative_subset(self, value):
+      self._v_parameter_with_derivative_subset(value)
+
+
+    @property
+    def parameter_name_subset(self):
+        return self._v_parameter_name_subset()
+
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
     __swig_destroy__ = _camera.delete_Camera
+    def __disown__(self):
+        self.this.disown()
+        _camera.disown_Camera(self)
+        return weakref_proxy(self)
+Camera.add_observer = new_instancemethod(_camera.Camera_add_observer, None, Camera)
+Camera.remove_observer = new_instancemethod(_camera.Camera_remove_observer, None, Camera)
 Camera.integration_time = new_instancemethod(_camera.Camera_integration_time, None, Camera)
 Camera._v_number_band = new_instancemethod(_camera.Camera__v_number_band, None, Camera)
 Camera.number_line = new_instancemethod(_camera.Camera_number_line, None, Camera)
@@ -359,6 +443,14 @@ Camera.frame_line_coordinate = new_instancemethod(_camera.Camera_frame_line_coor
 Camera.sc_look_vector = new_instancemethod(_camera.Camera_sc_look_vector, None, Camera)
 Camera.sc_look_vector_with_derivative = new_instancemethod(_camera.Camera_sc_look_vector_with_derivative, None, Camera)
 Camera.__str__ = new_instancemethod(_camera.Camera___str__, None, Camera)
+Camera._v_parameter = new_instancemethod(_camera.Camera__v_parameter, None, Camera)
+Camera._v_parameter_with_derivative = new_instancemethod(_camera.Camera__v_parameter_with_derivative, None, Camera)
+Camera._v_parameter_name = new_instancemethod(_camera.Camera__v_parameter_name, None, Camera)
+Camera._v_parameter_subset = new_instancemethod(_camera.Camera__v_parameter_subset, None, Camera)
+Camera._v_parameter_with_derivative_subset = new_instancemethod(_camera.Camera__v_parameter_with_derivative_subset, None, Camera)
+Camera._v_parameter_name_subset = new_instancemethod(_camera.Camera__v_parameter_name_subset, None, Camera)
+Camera._v_parameter_mask = new_instancemethod(_camera.Camera__v_parameter_mask, None, Camera)
+Camera.notify_update_do = new_instancemethod(_camera.Camera_notify_update_do, None, Camera)
 Camera_swigregister = _camera.Camera_swigregister
 Camera_swigregister(Camera)
 

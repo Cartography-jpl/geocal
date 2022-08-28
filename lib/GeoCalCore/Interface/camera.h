@@ -61,7 +61,7 @@ public:
 /// Number of bands in camera.
 //-----------------------------------------------------------------------
 
-  virtual int number_band() const = 0;
+  virtual int number_band() const { return 1; };
 
 //-----------------------------------------------------------------------
 /// Number of lines in camera for given band.
@@ -138,7 +138,7 @@ public:
 /// Print to a stream.
 //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const = 0;
+  virtual void print(std::ostream& Os) const { Os << "Camera"; }
 
 private:
   friend class boost::serialization::access;

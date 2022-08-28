@@ -7668,7 +7668,7 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
 }
 
 
-std::string SwigDirector_Orbit::print_to_string() {
+std::string SwigDirector_Orbit::print_to_string() const {
   std::string c_result;
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
@@ -21341,8 +21341,8 @@ SWIGINTERN PyObject *_wrap_Orbit___str__(PyObject *SWIGUNUSEDPARM(self), PyObjec
   GeoCal::Orbit *arg1 = (GeoCal::Orbit *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::Orbit > tempshared1 ;
-  boost::shared_ptr< GeoCal::Orbit > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::Orbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Orbit const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
   Swig::Director *director = 0;
   bool upcall = false;
@@ -21354,14 +21354,14 @@ SWIGINTERN PyObject *_wrap_Orbit___str__(PyObject *SWIGUNUSEDPARM(self), PyObjec
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Orbit_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Orbit___str__" "', argument " "1"" of type '" "GeoCal::Orbit *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Orbit___str__" "', argument " "1"" of type '" "GeoCal::Orbit const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
       arg1 = const_cast< GeoCal::Orbit * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Orbit > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Orbit > * >(argp1);
       arg1 = const_cast< GeoCal::Orbit * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
@@ -21371,9 +21371,9 @@ SWIGINTERN PyObject *_wrap_Orbit___str__(PyObject *SWIGUNUSEDPARM(self), PyObjec
     {
       try {
         if (upcall) {
-          result = (arg1)->GeoCal::Orbit::print_to_string();
+          result = ((GeoCal::Orbit const *)arg1)->GeoCal::Orbit::print_to_string();
         } else {
-          result = (arg1)->print_to_string();
+          result = ((GeoCal::Orbit const *)arg1)->print_to_string();
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 

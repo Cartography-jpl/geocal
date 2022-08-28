@@ -15,4 +15,69 @@
 #include <string>
 
 
+class SwigDirector_Camera : public GeoCal::Camera, public Swig::Director {
+
+public:
+    SwigDirector_Camera(PyObject *self);
+    virtual ~SwigDirector_Camera();
+    virtual void add_observer(GeoCal::Observer< GeoCal::Camera > &Obs);
+    virtual void remove_observer(GeoCal::Observer< GeoCal::Camera > &Obs);
+    virtual blitz::Array< double,1 > parameter() const;
+    virtual void parameter(blitz::Array< double,1 > const &V);
+    virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative() const;
+    virtual void parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V);
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name() const;
+    virtual blitz::Array< double,1 > parameter_subset() const;
+    virtual void parameter_subset(blitz::Array< double,1 > const &V);
+    virtual GeoCal::ArrayAd< double,1 > parameter_with_derivative_subset() const;
+    virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
+    virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
+    virtual blitz::Array< bool,1 > parameter_mask() const;
+    virtual double integration_time(int Band) const;
+    virtual int number_band() const;
+    virtual int number_line(int Band) const;
+    virtual int number_sample(int Band) const;
+    virtual GeoCal::FrameCoordinate frame_coordinate(GeoCal::ScLookVector const &Sl, int Band) const;
+    virtual GeoCal::FrameCoordinateWithDerivative frame_coordinate_with_derivative(GeoCal::ScLookVectorWithDerivative const &Sl, int Band) const;
+    virtual double frame_line_coordinate(GeoCal::ScLookVector const &Sl, int Band) const;
+    virtual GeoCal::ScLookVector sc_look_vector(GeoCal::FrameCoordinate const &F, int Band) const;
+    virtual GeoCal::ScLookVectorWithDerivative sc_look_vector_with_derivative(GeoCal::FrameCoordinateWithDerivative const &F, int Band) const;
+    virtual std::string print_to_string() const;
+    using GeoCal::Camera::notify_update_do;
+
+/* Internal director utilities */
+public:
+    bool swig_get_inner(const char *swig_protected_method_name) const {
+      std::map<std::string, bool>::const_iterator iv = swig_inner.find(swig_protected_method_name);
+      return (iv != swig_inner.end() ? iv->second : false);
+    }
+    void swig_set_inner(const char *swig_protected_method_name, bool swig_val) const {
+      swig_inner[swig_protected_method_name] = swig_val;
+    }
+private:
+    mutable std::map<std::string, bool> swig_inner;
+
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+/* VTable implementation */
+    PyObject *swig_get_method(size_t method_index, const char *method_name) const {
+      PyObject *method = vtable[method_index];
+      if (!method) {
+        swig::SwigVar_PyObject name = SWIG_Python_str_FromChar(method_name);
+        method = PyObject_GetAttr(swig_get_self(), name);
+        if (!method) {
+          std::string msg = "Method in class Camera doesn't exist, undefined ";
+          msg += method_name;
+          Swig::DirectorMethodException::raise(msg.c_str());
+        }
+        vtable[method_index] = method;
+      }
+      return method;
+    }
+private:
+    mutable swig::SwigVar_PyObject vtable[23];
+#endif
+
+};
+
+
 #endif

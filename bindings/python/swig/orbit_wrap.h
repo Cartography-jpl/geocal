@@ -46,7 +46,7 @@ public:
     virtual boost::shared_ptr< GeoCal::CartesianFixed > position_cf(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::Time T) const;
     virtual boost::shared_ptr< GeoCal::OrbitData > orbit_data(GeoCal::TimeWithDerivative const &T) const;
-    virtual std::string print_to_string();
+    virtual std::string print_to_string() const;
     using GeoCal::Orbit::notify_update_do;
 
 /* Internal director utilities */

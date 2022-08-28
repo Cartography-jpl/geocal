@@ -124,9 +124,8 @@ def lro_wac_camera(band=3, mode="COLOR"):
     pitch = SpiceHelper.kernel_data_double(f"{bname}_PIXEL_PITCH")
     nsamp = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_SAMPLES")
     nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
-    principal_point = FrameCoordinate(\
-        SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_LINE"),
-        SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_SAMPLE") - 0.5)
+    ccd_cen = [SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_SAMPLE"),
+               SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_LINE")]
     od_k = SpiceHelper.kernel_data_array_double(f"{bname}_OD_K");
     # For who knows what reason, the od_k correction has a different
     # form than the other spice cameras we have used. We can massage
@@ -134,13 +133,12 @@ def lro_wac_camera(band=3, mode="COLOR"):
     od_k = [0,-od_k[0],-od_k[1],-od_k[2]]
     trans_x = SpiceHelper.kernel_data_array_double(f"{bname}_TRANSX")
     trans_y = SpiceHelper.kernel_data_array_double(f"{bname}_TRANSY")
-    ccd_cen = SpiceHelper.kernel_data_array_double(f"{bname}_CCD_CENTER")
-    #ccd_cen = [principal_point.line, principal_point.sample]
     # Extra 0.5 pixel is because the convention in the SPICE kernels is to
     # have (0,0) be the upper left hand corner of first pixel, while we
     # use (0,0) for the center of the pixel.
-    sline = SpiceHelper.kernel_data_int(f"{bname}_FILTER_OFFSET")
-    ccd_off = [0.5,0.5 + SpiceHelper.kernel_data_double(f"{bname}_FILTER_OFFSET")]
+    loff = SpiceHelper.kernel_data_int(f"{bname}_FILTER_OFFSET")
+    soff = SpiceHelper.kernel_data_int(f"{bname}_{mode}_SAMPLE_OFFSET")
+    ccd_off = [-0.5+soff,-0.5+loff]
     t_off = np.array([trans_x[0],trans_y[0]])
     t_m = np.array([[trans_x[1], trans_x[2]],[trans_y[1],trans_y[2]]])
     # We calculate the inverse rather than reading it. Limitations on the
@@ -150,16 +148,10 @@ def lro_wac_camera(band=3, mode="COLOR"):
     tinv_m = np.linalg.inv(t_m)
     tinv_off = np.dot(tinv_m, -t_off)
     bin_mode=1
-    #wac_cam = CameraRadialDistortionAndTransform(Quaternion_double(1,0,0,0),
-    #                                             od_k,
-    #    nline, nsamp, pitch, pitch, focal_length, bin_mode, ccd_off, ccd_cen,
-    #    t_off, t_m, tinv_off, tinv_m)
-    wac_cam = CameraRadialDistortion(Quaternion_double(1,0,0,0),
-                                     od_k, nline, nsamp, pitch, pitch,
-                                     focal_length, principal_point)
-    # Camera is subsetted, depending on the mode it is in
-    soff = SpiceHelper.kernel_data_int(f"{bname}_{mode}_SAMPLE_OFFSET")
-    wac_cam = SubCamera(wac_cam, sline, soff, sub_nline, nsamp - 2 * soff)
+    wac_cam = CameraRadialDistortionAndTransform(Quaternion_double(1,0,0,0),
+                                                 od_k,
+        sub_nline, nsamp - 2 * soff, pitch, pitch, focal_length, bin_mode,
+        ccd_off, ccd_cen, t_off, t_m, tinv_off, tinv_m)
     return wac_cam
 
 

@@ -30,6 +30,21 @@ int main(int Argc, char** Argv)
   std::cout << "OD_K:" << "\n";
   for(auto i : cam.DistortionMap()->OpticalDistortionCoefficients())
     std::cout << i << "\n";
+  std::cout << "Detector origin: (" << cam.FocalPlaneMap()->DetectorLineOrigin()
+	    << ", " << cam.FocalPlaneMap()->DetectorSampleOrigin() << ")\n";
+  std::cout << "TransX: [" << cam.FocalPlaneMap()->TransX()[0] << ", "
+	    << cam.FocalPlaneMap()->TransX()[1] << ", "
+	    << cam.FocalPlaneMap()->TransX()[2] << "]\n";
+  std::cout << "TransY: [" << cam.FocalPlaneMap()->TransY()[0] << ", "
+	    << cam.FocalPlaneMap()->TransY()[1] << ", "
+	    << cam.FocalPlaneMap()->TransY()[2] << "]\n";
+  std::cout << "TransS: [" << cam.FocalPlaneMap()->TransS()[0] << ", "
+	    << cam.FocalPlaneMap()->TransS()[1] << ", "
+	    << cam.FocalPlaneMap()->TransS()[2] << "]\n";
+  std::cout << "TransL: [" << cam.FocalPlaneMap()->TransL()[0] << ", "
+	    << cam.FocalPlaneMap()->TransL()[1] << ", "
+	    << cam.FocalPlaneMap()->TransL()[2] << "]\n";
+  
   double ln = atof(Argv[3]);
   double samp = atof(Argv[4]);
   cam.SetImage(samp,ln);

@@ -31,13 +31,29 @@ def test_wac_camera():
     klist = SpiceKernelList(["$lro/kernels/ik/lro_lroc_v18.ti",
                              "$lro/kernels/iak/lro_instrumentAddendum_v04.ti"])
     klist.load_kernel()
-    gcam = read_shelve("gcam.xml")
     cam = lro_wac_camera(band=3,mode="COLOR")
-    print(cam.frame_coordinate(gcam.sc_look_vector(FrameCoordinate(7,704/2),0),0))
-    print(cam.full_camera.focal_length)
-    print(cam.full_camera.focal_plane_to_dcs(0, 0.543071, 3.17634))
-#    cam = SimpleCamera(0,0,0,6e-3,9.0e-6,9.0e-6,1024,1024)
-#    print(cam.frame_coordinate(gcam.sc_look_vector(FrameCoordinate(7,704/2),0),0))
+    # Some intermediate calculations we got from isis_camera.cc directly
+    # running ISIS. We don't need these results any more, but it is useful
+    # to leave this is place as an illustration of how we can diagnose stuff
+    # like this
+    print("Distortion calculation")
+    print("----------------------")
+    print("ISIS focal plane was (0.00595126, 3.17637)")
+    print(cam.focal_plane_to_dcs(0, 0.00595126, 3.17637))
+    print("Result from ISIS: [0.00675484, 3.60527, 5.99839]")
+    print()
+    print("Focal plane calculation")
+    print("-----------------------")
+    print("ISIS coordinate (13.5,703.5) (note 0.5 difference from our convention)")
+    print(cam.fc_to_focal_plane(FrameCoordinate(13,703),0))
+    print("Result from ISIS: (0.543071, 3.17634)")
+    print()
+    print("Overall calculation")
+    print("-------------------")
+    print("ISIS coordinate (13.5,703.5) (note 0.5 difference from our convention)")
+    print(cam.sc_look_vector(FrameCoordinate(13,703),0))
+    print("Result from ISIS: [0.088002, 0.51471, 0.852836]")
     
-    
+    # Add check for other bands, include UV. Add checks for other modes
+    # like BW
     

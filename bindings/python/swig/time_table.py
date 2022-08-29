@@ -330,6 +330,24 @@ class TimeTable(geocal_swig.with_parameter.WithParameter):
         return _time_table.TimeTable_time_with_derivative(self, Ic)
 
 
+    def time_acquisition(self, T, Fc):
+        """
+
+        void TimeTable::time_acquisition(const Time &T, const FrameCoordinate &Fc, Time &T1, Time &T2) const
+        Sometimes we want to know the acquisition times around a particular
+        time.
+
+        For a simple pushbroom camera, this is just the times for an integral
+        image coordinates around that time. But this can be a little more
+        complicated, e.g, ConstantSpacingFrameletTimeTable it would be the
+        framelet times surround the given time. This is returned as the time
+        for the smaller image line index first, and the time of the larger
+        line index second (so for a time table increasing in time this t1 <
+        t2. For a time table in descreasing time t1 > t2). 
+        """
+        return _time_table.TimeTable_time_acquisition(self, T, Fc)
+
+
     def _v_min_line(self):
         """
 
@@ -457,6 +475,7 @@ TimeTable.image_coordinate = new_instancemethod(_time_table.TimeTable_image_coor
 TimeTable.image_coordinate_with_derivative = new_instancemethod(_time_table.TimeTable_image_coordinate_with_derivative, None, TimeTable)
 TimeTable.time = new_instancemethod(_time_table.TimeTable_time, None, TimeTable)
 TimeTable.time_with_derivative = new_instancemethod(_time_table.TimeTable_time_with_derivative, None, TimeTable)
+TimeTable.time_acquisition = new_instancemethod(_time_table.TimeTable_time_acquisition, None, TimeTable)
 TimeTable._v_min_line = new_instancemethod(_time_table.TimeTable__v_min_line, None, TimeTable)
 TimeTable._v_max_line = new_instancemethod(_time_table.TimeTable__v_max_line, None, TimeTable)
 TimeTable._v_min_time = new_instancemethod(_time_table.TimeTable__v_min_time, None, TimeTable)

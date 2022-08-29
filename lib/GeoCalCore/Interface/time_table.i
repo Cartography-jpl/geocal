@@ -33,6 +33,8 @@ public:
   virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
 			    TimeWithDerivative &OUTPUT, 
 			    FrameCoordinateWithDerivative &OUTPUT) const;
+  virtual void time_acquisition(const Time& T, const FrameCoordinate& Fc,
+				Time& OUTPUT, Time& OUTPUT) const;
   %python_attribute(min_line, virtual int)
   %python_attribute(max_line, virtual int)
   %python_attribute(min_time, virtual Time)

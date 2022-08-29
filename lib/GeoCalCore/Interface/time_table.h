@@ -59,6 +59,9 @@ public:
 				    FrameCoordinateWithDerivative& F)
     const = 0;
 
+  virtual void time_acquisition(const Time& T, const FrameCoordinate& Fc,
+				Time& T1, Time& T2) const;
+
 //-----------------------------------------------------------------------
 /// Minimum line table is valid for.
 //-----------------------------------------------------------------------
@@ -202,6 +205,8 @@ public:
   virtual void time_with_derivative(const ImageCoordinateWithDerivative& Ic, 
 				    TimeWithDerivative& T, 
 				    FrameCoordinateWithDerivative& F) const;
+  virtual void time_acquisition(const Time& T, const FrameCoordinate& Fc,
+				Time& T1, Time& T2) const;
 
 //-----------------------------------------------------------------------
 /// Minimum line table is valid for.

@@ -11813,6 +11813,123 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_TimeTable_time_acquisition(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
+  GeoCal::Time *arg2 = 0 ;
+  GeoCal::FrameCoordinate *arg3 = 0 ;
+  GeoCal::Time *arg4 = 0 ;
+  GeoCal::Time *arg5 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::TimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::TimeTable const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::Time const > tempshared2 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  boost::shared_ptr< GeoCal::FrameCoordinate const > tempshared3 ;
+  GeoCal::Time temp4 ;
+  GeoCal::Time temp5 ;
+  PyObject *swig_obj[3] ;
+  
+  {
+    arg4 = &temp4;
+  }
+  {
+    arg5 = &temp5;
+  }
+  if (!SWIG_Python_UnpackTuple(args,"TimeTable_time_acquisition",3,3,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "TimeTable_time_acquisition" "', argument " "1"" of type '" "GeoCal::TimeTable const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::TimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::TimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::Time *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__Time,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "TimeTable_time_acquisition" "', argument " "2"" of type '" "GeoCal::Time const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_time_acquisition" "', argument " "2"" of type '" "GeoCal::Time const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2);
+        arg2 = const_cast< GeoCal::Time * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::Time * >(reinterpret_cast< boost::shared_ptr< const GeoCal::Time > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::FrameCoordinate *ptr;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], (void**)(&ptr), SWIGTYPE_p_GeoCal__FrameCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res3)) {
+      arg3 = ptr;
+    } else {
+      res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res3)) {
+        SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "TimeTable_time_acquisition" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'");
+      }
+      if (!argp3) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "TimeTable_time_acquisition" "', argument " "3"" of type '" "GeoCal::FrameCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared3 = *reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3);
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(tempshared3.get());
+      } else {
+        arg3 = const_cast< GeoCal::FrameCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::FrameCoordinate > * >(argp3)->get());
+      }
+    }
+  }
+  {
+    try {
+      ((GeoCal::TimeTable const *)arg1)->time_acquisition((GeoCal::Time const &)*arg2,(GeoCal::FrameCoordinate const &)*arg3,*arg4,*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  {
+    boost::shared_ptr<GeoCal::Time> *smartresult = new boost::shared_ptr<GeoCal::Time>(new GeoCal::Time(*arg4));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN));
+  }
+  {
+    boost::shared_ptr<GeoCal::Time> *smartresult = new boost::shared_ptr<GeoCal::Time>(new GeoCal::Time(*arg5));
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN));
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_TimeTable__v_min_line(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::TimeTable *arg1 = (GeoCal::TimeTable *) 0 ;
@@ -13471,6 +13588,20 @@ static PyMethodDef SwigMethods[] = {
 		"virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,\n"
 		"FrameCoordinateWithDerivative &F) const =0\n"
 		"Convert from ImageCoordinate to Time and FrameCoordinate. \n"
+		""},
+	 { (char *)"TimeTable_time_acquisition", _wrap_TimeTable_time_acquisition, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void TimeTable::time_acquisition(const Time &T, const FrameCoordinate &Fc, Time &T1, Time &T2) const\n"
+		"Sometimes we want to know the acquisition times around a particular\n"
+		"time.\n"
+		"\n"
+		"For a simple pushbroom camera, this is just the times for an integral\n"
+		"image coordinates around that time. But this can be a little more\n"
+		"complicated, e.g, ConstantSpacingFrameletTimeTable it would be the\n"
+		"framelet times surround the given time. This is returned as the time\n"
+		"for the smaller image line index first, and the time of the larger\n"
+		"line index second (so for a time table increasing in time this t1 <\n"
+		"t2. For a time table in descreasing time t1 > t2). \n"
 		""},
 	 { (char *)"TimeTable__v_min_line", (PyCFunction)_wrap_TimeTable__v_min_line, METH_O, (char *)"\n"
 		"\n"

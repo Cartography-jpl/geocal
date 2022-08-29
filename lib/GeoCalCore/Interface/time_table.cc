@@ -53,6 +53,32 @@ GEOCAL_IMPLEMENT(MeasuredTimeTable);
 #endif
 
 //-----------------------------------------------------------------------
+/// Sometimes we want to know the acquisition times around a
+/// particular time. For a simple pushbroom camera, this is just the
+/// times for an integral image coordinates around that time. But this
+/// can be a little more complicated, e.g, ConstantSpacingFrameletTimeTable  
+/// it would be the framelet times surround the given time. This is
+/// returned as the time for the smaller image line index first, and
+/// the time of the larger line index second (so for a time table
+/// increasing in time this t1 < t2. For a time table in descreasing
+/// time t1 > t2).
+//-----------------------------------------------------------------------
+
+void TimeTable::time_acquisition(const Time& T, const FrameCoordinate& Fc,
+			    Time& T1, Time& T2) const
+{
+  // This default implementation should work for a good number of Time
+  // tables. Derived class should override this if this isn't
+  // appropriate.
+  ImageCoordinate ic = image_coordinate(T, Fc);
+  ic.line = floor(ic.line);
+  FrameCoordinate fc;
+  time(ic, T1, fc);
+  ic.line += 1;
+  time(ic, T2, fc);
+}
+
+//-----------------------------------------------------------------------
 /// Constructor, creates time table from Time_min_line to
 /// Time_max_line with given Time spacing.
 /// We adjust Max_time to exactly Time_min_line + i *
@@ -360,4 +386,16 @@ void MeasuredTimeTable::print(std::ostream& Os) const
      << "  Max line:     " << max_line() << "\n"
      << "  Min time:     " << min_time() << "\n"
      << "  Max time:     " << max_time() << "\n";
+}
+
+// See base class for description
+void ConstantSpacingFrameletTimeTable::time_acquisition
+(const Time& T, const FrameCoordinate& Fc, Time& T1, Time& T2) const
+{
+  ImageCoordinate ic = image_coordinate(T, Fc);
+  ic.line = floor(ic.line / framelet_size_) * framelet_size_;
+  FrameCoordinate fc;
+  time(ic, T1, fc);
+  ic.line += framelet_size_;
+  time(ic, T2, fc);
 }

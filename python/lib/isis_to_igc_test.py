@@ -2,12 +2,15 @@ from test_support import *
 from .isis_support import pds_to_isis
 from .isis_to_igc import *
 from .isis_igc import IsisIgc
+from .glas_gfm import *
 from geocal_swig import ImageCoordinate, SubCamera
 from .sqlite_shelf import write_shelve
 import pandas as pd
+import pynitf
 
 def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
-              check_spice=False, check_glas_rsm=True,
+              check_spice=False, check_glas_rsm=True, check_glas=False,
+              check_create_nitf=False,
               band = None):
     '''Compare a IGC with the same ISIS calculation. This tends to be
     common for different instruments, so collect the generic part of
@@ -70,7 +73,7 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
         igc_spice = isis_to_igc(fname, spice_igc=True, **keyword)
         igc_match_isis = isis_to_igc(fname, match_isis=True, **keyword)
         d = []
-        for ln in range(0,igc.number_line,1000):
+        for ln in range(10,igc.number_line,1000):
             for smp in range (0,igc.number_sample,100):
                 ic = ImageCoordinate(ln, smp)
                 gc = igc_spice.ground_coordinate(ic)
@@ -81,26 +84,44 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
                 assert abs(ic.sample - ic2.sample) < 0.1
         print("Difference ISIS vs SPICE")
         print(pd.DataFrame(d).describe())
-    if check_glas_rsm:
-        igc_glas,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True, **keyword)
-        print(igc_glas)
-        print(rsm)
-        lnlist = []
-        smplist = []
-        for ln in range(0,igc.number_line,1000):
-            if(ln > 0):
-                print(f"Looking at line {ln}. ({max(lnlist)},{max(smplist)})")
+    if check_glas_rsm or check_glas:
+        if(check_glas_rsm):
+            igc_glas,rsm = isis_to_igc(fname, glas_gfm=True, rsm=True, **keyword)
+            print(rsm)
+        else:
+            igc_glas = isis_to_igc(fname, glas_gfm=True, **keyword)
+        pxdist = []
+        res = igc.resolution_meter()
+        for ln in range(10,igc.number_line,1000):
+            if(ln > 0 and len(pxdist) > 0):
+                print(f"Looking at line {ln}. {max(pxdist)}")
             for smp in range (0,igc.number_sample,100):
                 ic = ImageCoordinate(ln, smp)
+                # We may have some locations seen multiple times on the
+                # ground. So look at distance we get on the ground
+                # from round tripping
                 gc = igc_glas.ground_coordinate(ic)
                 ic2 = igc.image_coordinate(gc)
-                lnlist.append(abs(ic.line - ic2.line))
-                smplist.append(abs(ic.sample - ic2.sample))
+                gc2 = igc_glas.ground_coordinate(ic2)
+                pxdist.append(distance(gc, gc2)/res)
+                gc = igc.ground_coordinate(ic)
+                ic2 = igc_glas.image_coordinate(gc)
+                gc2 = igc.ground_coordinate(ic2)
+                pxdist.append(distance(gc, gc2)/res)
         print("GLAS diff")
-        print(pd.DataFrame(lnlist).describe())
-        print(pd.DataFrame(smplist).describe())
-
-    # TODO Spice comparison 
+        print(pd.DataFrame(pxdist).describe())
+    if(check_create_nitf):
+        igc_glas = isis_to_igc(fname, glas_gfm=True, **keyword)
+    f = pynitf.NitfFile()
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+    for i in range(9):
+        for j in range(10):
+            img[0, i,j] = i * 10 + j
+    f.image_segment.append(pynitf.NitfImageSegment(img))
+    f.image_segment[0].create_glas_gfm(igc_glas)
+    f.write("gfm_test.ntf")
+    f2 = NitfFile("gfm_test.ntf")
+    print(f2.image_segment[0].glas_gfm)
         
 @long_test
 @require_isis
@@ -148,6 +169,8 @@ def test_lunar_wac_to_igc(isolated_dir):
         igc = isis_to_igc(fname, band=3)
         write_shelve("igc.xml", igc)
     check_igc(fname, band=3, check_glas_rsm=False, check_time=False,
-              check_camera=False, check_isis=True, check_spice=True)
+              check_camera=False, check_isis=False, check_spice=False,
+              check_glas = True, check_create_nitf = True)
+    
     
     

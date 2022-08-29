@@ -146,7 +146,6 @@ IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
 class LroWacIsisToIgc:
     def igc_to_glas(self, igc_r, focal_length):
         '''Convert IGC to a GLAS model.'''
-        raise RuntimeError("Not implemented")
         tspace = igc_r.ipi.time_table.time_space
         porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
                          igc_r.ipi.time_table.min_time - 10 * tspace,
@@ -164,8 +163,10 @@ class LroWacIsisToIgc:
                          AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
         band = 0
-        delta_sample = 100
-        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
+        delta_line = 2
+        delta_sample = 16
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_line,
+                              delta_sample, "R",
                               0.65, focal_length*1e-3)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
                     igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)

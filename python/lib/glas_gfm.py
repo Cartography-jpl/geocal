@@ -3,6 +3,7 @@ from geocal_swig import (PosCsephb, AttCsattb, OrbitDes,
                          QuaternionCamera, FrameCoordinate,
                          ImageCoordinate, RefractionMsp, NoVelocityAberration,
                          VelocityAberrationExact, Camera,
+                         ConstantSpacingFrameletTimeTable,
                          GlasGfmCamera,Time,ScLookVector,
                          SimpleDem, IpiImageGroundConnection, Ipi,
                          ScLookVector,
@@ -13,6 +14,7 @@ from .geocal_nitf_misc import (nitf_date_second_field_to_geocal_time,
                                timestamp_to_geocal_time)
 from .glas_gfm_covariance import GlasGfmCovariance
 import time
+import math
 import uuid
 import io
 import textwrap
@@ -71,10 +73,13 @@ class GlasGfm(object):
         t.payload_id = igc.payload_id
         t.sensor_id = igc.sensor_id
         if(isinstance(igc, IpiImageGroundConnection)):
-            t.sensor_type = "S"
             orb = igc.ipi.orbit
             cam = igc.ipi.camera
             ttable = igc.ipi.time_table
+            if(cam.number_line(0) > 1):
+                t.sensor_type = "P"
+            else:
+                t.sensor_type = "S"
             min_time = ttable.time(ImageCoordinate(0,0))[0]
             max_time = ttable.time(ImageCoordinate(ttable.max_line, 0))[0]
             t.day_first_line_image, t.time_first_line_image = geocal_time_to_nitf_date_second_field(min_time)
@@ -180,14 +185,14 @@ class GlasGfm(object):
             self.naif_code = naif_code
         orb = self.orbit
         cam = self.camera
-        if(cam.sensor_type == "S"):
+        if(self.tre_csexrb.sensor_type in ("S", "P")):
             tt = self.time_table
             ipi = Ipi(orb, cam, 0, tt.min_time, tt.max_time, tt,
                       self.refraction,
                       self.velocity_aberration(velocity_aberration_exact))
             igc = IpiImageGroundConnection(ipi, dem, None,
                                            self.iseg.iid1)
-        elif(cam.sensor_type == "F"):
+        elif(self.tre_csexrb.sensor_type == "F"):
             if(self.tre_csexrb.time_stamp_loc != 0):
                 raise RuntimeError("We don't handle having the time stamps in a MTIMSA TRE")
             t = timestamp_to_geocal_time(self.tre_csexrb.base_timestamp) + self.tre_csexrb.dt_multiplier * 1e-9 * self.tre_csexrb.dt[0]
@@ -196,7 +201,7 @@ class GlasGfm(object):
                      self.refraction,
                      self.velocity_aberration(velocity_aberration_exact))
         else:
-            raise RuntimeError("Unrecognized camera sensor type")
+            raise RuntimeError("Unrecognized tre_csexrb sensor type")
         # Add some useful metadata
         igc.platform_id = self.tre_csexrb.platform_id
         igc.payload_id = self.tre_csexrb.payload_id
@@ -247,8 +252,16 @@ class GlasGfm(object):
         tend = tstart + self.tre_csexrb.time_image_duration
         nline = self.tre_csexrb.num_lines
         # May need a +- 1 in here, we'll want to carefully check this
-        return ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / (nline-1))
-
+        if self.tre_csexrb.sensor_type == "S":
+            return ConstantSpacingTimeTable(tstart, tend, (tend - tstart) / (nline-1))
+        elif(self.tre_csexrb.sensor_type == "P"):
+            nline_framelet = self.camera.number_line(0)
+            nframelet = int(math.floor(nline / nline_framelet))
+            return ConstantSpacingFrameletTimeTable(tstart, tend,
+                       nline_framelet, (tend - tstart) / (nframelet - 1))
+        else:
+            raise RuntimeError("Unrecognized tre_csexrb sensor type")
+            
     def find_one_des(self, desid):
         res = [d for d in self.des if d.desid == desid]
         if(len(res) == 0):
@@ -300,7 +313,7 @@ class GlasGfm(object):
         res += textwrap.indent(str(self.orbit), "      ") + "\n"
         res += "   Camera:\n"
         res += textwrap.indent(str(self.camera), "      ") + "\n"
-        if(self.camera.sensor_type == "F"):
+        if(self.tre_csexrb.sensor_type == "F"):
             if(self.tre_csexrb.time_stamp_loc != 0):
                 res += "   Timestamp in MTIMSA, which we can't process\n"
             else:

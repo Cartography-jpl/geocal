@@ -376,11 +376,20 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     if(time_acquisition_adjustment_) {
       Time t1, t2;
       tt->time_acquisition(Tres, Fres, t1, t2);
-      // I *think* we always want the smaller image coordinate t. We
+      // Special handling at the borders of the framelet
+      // I *think* this is correct. We
       // may need to change the logic here if we run into a problem of
       // some sort.
-      Tres = t1;
-      Fres = eq.frame_coordinate(t1 - min_time_);
+      FrameCoordinate fc1 = eq.frame_coordinate(t1 - min_time_);
+      FrameCoordinate fc2 = eq.frame_coordinate(t2 - min_time_);
+      if(fc1.line > cam->number_line(band_) - 0.5 ||
+	 fc2.line > -0.5) {
+	Tres = t2;
+	Fres = fc2;
+      } else {
+	Tres = t1;
+	Fres = fc1;
+      }
     }
   } else {
     Success = false;
@@ -539,11 +548,20 @@ void Ipi::time_with_derivative
     if(time_acquisition_adjustment_) {
       Time t1, t2;
       tt->time_acquisition(Tres.value(), Fres.value(), t1, t2);
-      // I *think* we always want the smaller image coordinate t. We
+      // Special handling at the borders of the framelet
+      // I *think* this is correct. We
       // may need to change the logic here if we run into a problem of
       // some sort.
-      Tres = TimeWithDerivative(t1);
-      Fres = eq.frame_coordinate(t1 - min_time_);
+      FrameCoordinateWithDerivative fc1 = eq.frame_coordinate(t1 - min_time_);
+      FrameCoordinateWithDerivative fc2 = eq.frame_coordinate(t2 - min_time_);
+      if(fc1.line.value() > cam->number_line(band_) - 0.5 ||
+	 fc2.line.value() > -0.5) {
+	Tres = TimeWithDerivative(t2);
+	Fres = fc2;
+      } else {
+	Tres = TimeWithDerivative(t1);
+	Fres = fc1;
+      }
     }
   } else {
     Success = false;

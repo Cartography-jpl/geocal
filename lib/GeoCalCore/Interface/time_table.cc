@@ -229,11 +229,13 @@ void ConstantSpacingFrameletTimeTable::time(const ImageCoordinate& Ic, Time& T,
 				    FrameCoordinate& F) const
 {
   // We add a border of 1 line to handle edge cases.
-  range_check_inclusive(Ic.line, (double) min_line() - 1.0,
-			(double) max_line() + 1.0);
-  T = t_min_line + floor(Ic.line / framelet_size_) * tspace;
+  range_check_inclusive(Ic.line, (double) min_line() - framelet_size_,
+			(double) max_line() + framelet_size_);
+  // Plus 0.5 to handle border, so -0.02 goes with time for line 0,
+  // not for line -14.
+  T = t_min_line + floor((Ic.line+0.5) / framelet_size_) * tspace;
   F = FrameCoordinate(Ic.line -
-		      floor(Ic.line / framelet_size_) * framelet_size_,
+		      floor((Ic.line+0.5) / framelet_size_) * framelet_size_,
 		      Ic.sample);
 }
 
@@ -247,12 +249,13 @@ void ConstantSpacingFrameletTimeTable::time_with_derivative
 (const ImageCoordinateWithDerivative& Ic, TimeWithDerivative& T, 
  FrameCoordinateWithDerivative& F) const
 {
-  range_check_inclusive(Ic.line.value(), (double) min_line() - 1.0,
-			(double) max_line() + 1.0);
-  T = TimeWithDerivative(t_min_line) + floor(Ic.line.value() / framelet_size_) * tspace;
+  range_check_inclusive(Ic.line.value(), (double) min_line() - framelet_size_,
+			(double) max_line() + framelet_size_);
+  T = TimeWithDerivative(t_min_line) +
+    floor((Ic.line.value()+0.5) / framelet_size_) * tspace;
   F = FrameCoordinateWithDerivative(Ic.line -
-				    floor(Ic.line.value() / framelet_size_) * framelet_size_,
-				    Ic.sample);
+	    floor((Ic.line.value()+0.5) / framelet_size_) * framelet_size_,
+	    Ic.sample);
 }
 
 //-----------------------------------------------------------------------

@@ -73,7 +73,7 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
         igc_spice = isis_to_igc(fname, spice_igc=True, **keyword)
         igc_match_isis = isis_to_igc(fname, match_isis=True, **keyword)
         d = []
-        for ln in range(10,igc.number_line,1000):
+        for ln in range(0,igc.number_line,1000):
             for smp in range (0,igc.number_sample,100):
                 ic = ImageCoordinate(ln, smp)
                 gc = igc_spice.ground_coordinate(ic)
@@ -92,7 +92,7 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
             igc_glas = isis_to_igc(fname, glas_gfm=True, **keyword)
         pxdist = []
         res = igc.resolution_meter()
-        for ln in range(10,igc.number_line,1000):
+        for ln in range(0,igc.number_line,1000):
             if(ln > 0 and len(pxdist) > 0):
                 print(f"Looking at line {ln}. {max(pxdist)}")
             for smp in range (0,igc.number_sample,100):
@@ -108,6 +108,8 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
                 ic2 = igc_glas.image_coordinate(gc)
                 gc2 = igc.ground_coordinate(ic2)
                 pxdist.append(distance(gc, gc2)/res)
+                if(pxdist[-2] > 1 or pxdist[-1] > 1):
+                    print(ic)
         print("GLAS diff")
         print(pd.DataFrame(pxdist).describe())
     if(check_create_nitf):

@@ -1,7 +1,7 @@
 from geocal_swig import (ImageGroundConnection, GdalRasterImage,
                          PlanetSimpleDem, PlanetConstant, Planetocentric,
                          PlanetFixed, Time, ImageCoordinate, GlasGfmCamera,
-                         CartesianFixedLookVector)
+                         CartesianFixedLookVector, ScLookVector)
 import json
 import os
 from .tempdir import run_in_tempdir
@@ -154,27 +154,10 @@ class IsisIgc(ImageGroundConnection):
         x = t["LookDirectionCameraX"][:]
         y = t["LookDirectionCameraY"][:]
         z = t["LookDirectionCameraZ"][:]
-        gcam = GlasGfmCamera(1,self.number_sample)
-        # Glas focal length is in meters, while
-        # input is in millimeters
-        gcam.focal_length = focal_length * 1e-3
-        fa = np.empty((self.number_sample,4))
-        for smp in range(self.number_sample - 1):
-            fa[smp,0] = x[smp] / (z[smp] / gcam.focal_length)
-            fa[smp,1] = y[smp] / (z[smp] / gcam.focal_length)
-            fa[smp,2] = x[smp+1] / (z[smp+1] / gcam.focal_length)
-            fa[smp,3] = y[smp+1] / (z[smp+1] / gcam.focal_length)
-            # Extrapolated for the last entry in the field angle table    
-        smp = self.number_sample - 1
-        fa[smp,0] = x[smp] / (z[smp] / gcam.focal_length)
-        fa[smp,1] = y[smp] / (z[smp] / gcam.focal_length)
-        fa[smp,2] = fa[smp,0] + (fa[smp-1,2]-fa[smp-1,0])
-        fa[smp,3] = fa[smp,1] + (fa[smp-1,3]-fa[smp-1,1])
-        gcam.sample_number_first = 0
-        gcam.delta_sample_pair = 1
-        gcam.field_alignment = fa
-        return gcam
-
+        sclist = [ScLookVector(x[i],y[i],z[i]) for i in range(len(x))]
+        return GlasGfmCamera.create_glas_from_sc_look_vector(sclist,
+                                     focal_length=focal_length)
+    
     @run_in_tempdir()
     def gfm_cam_model(self, focal_length, number_line):
         '''Brute force a GFM camera model by calculating for every
@@ -194,45 +177,7 @@ class IsisIgc(ImageGroundConnection):
         x = np.array(t["LookDirectionCameraX"][:]).reshape((number_line, self.number_sample))
         y = np.array(t["LookDirectionCameraY"][:]).reshape((number_line, self.number_sample))
         z = np.array(t["LookDirectionCameraZ"][:]).reshape((number_line, self.number_sample))
-        gcam = GlasGfmCamera(number_line,self.number_sample)
-        # Glas focal length is in meters, while
-        # input is in millimeters
-        gcam.focal_length = focal_length * 1e-3
-        fa = np.empty((number_line, self.number_sample, 2, 2, 2))
-        for ln in range(number_line - 1):
-            for smp in range(self.number_sample):
-                fa[ln,smp,0,0,0] = x[ln,smp] / (z[ln,smp] / gcam.focal_length)
-                fa[ln,smp,0,0,1] = y[ln,smp] / (z[ln,smp] / gcam.focal_length)
-                fa[ln,smp,1,0,0] = x[ln+1,smp] / (z[ln+1,smp] / gcam.focal_length)
-                fa[ln,smp,1,0,1] = y[ln+1,smp] / (z[ln+1,smp] / gcam.focal_length)
-                # Extrapolate last sample
-                if(smp < self.number_sample - 1):
-                    fa[ln,smp,0,1,0] = x[ln,smp+1] / (z[ln,smp+1] / gcam.focal_length)
-                    fa[ln,smp,0,1,1] = y[ln,smp+1] / (z[ln,smp+1] / gcam.focal_length)
-                    fa[ln,smp,1,1,0] = x[ln+1,smp+1] / (z[ln+1,smp+1] / gcam.focal_length)
-                    fa[ln,smp,1,1,1] = y[ln+1,smp+1] / (z[ln+1,smp+1] / gcam.focal_length)
-                else:
-                    fa[ln,smp,0,1,0] = fa[ln,smp,0,0,0]+(fa[ln,smp-1,0,1,0]-
-                                                         fa[ln,smp-1,0,0,0])
-                    fa[ln,smp,0,1,1] = fa[ln,smp,0,0,1]+(fa[ln,smp-1,0,1,1]-
-                                                         fa[ln,smp-1,0,0,1])
-                    fa[ln,smp,1,1,0] = fa[ln,smp,1,0,0]+(fa[ln,smp-1,1,1,0]-
-                                                         fa[ln,smp-1,1,0,0])
-                    fa[ln,smp,1,1,1] = fa[ln,smp,1,0,1]+(fa[ln,smp-1,1,1,1]-
-                                                         fa[ln,smp-1,1,0,1])
-        # Extrapolate last line
-        ln = number_line - 1
-        for smp in range(self.number_sample):
-            for i in range(2):
-                for j in range(2):
-                    fa[ln,smp,0,i,j] = fa[ln-1,smp,1,i,j]
-                    fa[ln,smp,1,i,j] = fa[ln,smp,0,i,j]+(fa[ln-1,smp,1,i,j]-
-                                                         fa[ln-1,smp,0,i,j])
-        gcam.first_line_block = np.array([0,])
-        gcam.first_sample_block = np.array([0,])
-        gcam.delta_line_block = np.array([1,])
-        gcam.delta_sample_block = np.array([1,])
-        gcam.field_alignment_block(0,fa)
-        return gcam
+        lv = np.array([x,y,z]).transpose(1,2,0)
+        return GlasGfmCamera.create_gfm_from_look_vector(lv,focal_length)
     
 __all__ = ["IsisIgc",]    

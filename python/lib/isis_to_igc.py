@@ -8,7 +8,7 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          SimpleCamera)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
-from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
+from .spice_camera import ctx_camera, hrsc_camera, hirise_camera, lro_wac_camera
 from .mars_rsm import rsm_hirise, rsm_context
 from .sqlite_shelf import write_shelve
 from .spice_igc import SpiceIgc
@@ -162,7 +162,7 @@ class LroWacIsisToIgc:
                          AttCsattb.LAGRANGE,
                          AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
                          AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
-        orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+        orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
         band = 0
         delta_sample = 100
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
@@ -170,9 +170,9 @@ class LroWacIsisToIgc:
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
                     igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
         igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
-        igc_g.platform_id = "MRO"
-        igc_g.payload_id = "MRO"
-        igc_g.sensor_id = "CTX"
+        igc_g.platform_id = "LRO"
+        igc_g.payload_id = "LRO"
+        igc_g.sensor_id = "WAC"
         return igc_g
         
     def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
@@ -225,8 +225,8 @@ class LroWacIsisToIgc:
         # so we can duplicate IsisIgc (e.g., make sure everything else
         # agrees)
         if(match_isis):
-            orb = SpicePlanetOrbit("MRO", "MRO_CTX", klist,
-                                   PlanetConstant.MARS_NAIF_CODE,
+            orb = SpicePlanetOrbit("LRO", frame, klist,
+                                   PlanetConstant.MOON_NAIF_CODE,
                                    "LT+S")
         else:
             orb = SpicePlanetOrbit("LRO", frame, klist,
@@ -245,9 +245,7 @@ class LroWacIsisToIgc:
                                               tspace)
         dem = PlanetSimpleDem(PlanetConstant.MOON_NAIF_CODE)
         orb_cache = OrbitListCache(orb, tt)
-        # Nominal values, we'll replace with real camera later
-        cam = SimpleCamera(0,0,0,6e-3,9.0e-6,9.0e-6,14,704)
-        focal_length = 6e-3
+        cam = lro_wac_camera(band, idata["InstrumentModeId"])
         if(spice_igc):
             return (True, SpiceIgc(orb, cam, tt, img=img))
         ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
@@ -260,7 +258,7 @@ class LroWacIsisToIgc:
         if(igc_out_fname is not None):
             write_shelve(igc_out_fname, igc)
         if(glas_gfm):
-            igc = self.igc_to_glas(igc, focal_length)
+            igc = self.igc_to_glas(igc, cam.focal_length)
         if(not rsm):
             return (True, igc)
         else:

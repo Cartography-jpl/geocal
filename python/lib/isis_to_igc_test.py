@@ -33,15 +33,19 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
             focal_length = cam.full_camera.focal_length
         else:
             focal_length = cam.focal_length
-        gcam =igc_isis.glas_cam_model(focal_length)
+        if(cam.number_line(0) == 1):
+            gcam =igc_isis.glas_cam_model(focal_length)
+        else:
+            gcam =igc_isis.gfm_cam_model(focal_length, cam.number_line(0))
         write_shelve("cam.xml", cam)
         write_shelve("gcam.xml", gcam)
         # This shows we agree pretty well between the 2 cameras.
         t = gcam.compare_camera(cam,0)
         print(f"Camera compare {t}")
         # GLAS doesn't really capture the line direction, so ignore this
-        # in our comparison
-        #assert t[0] < 1e-2
+        # in our comparison. But check for GFM
+        if(gcam.number_line(0) != 1):
+            assert t[0] < 1e-2
         assert t[1] < 1e-2
     if check_isis:
         igc_match_isis = isis_to_igc(fname, match_isis=True, **keyword)
@@ -143,6 +147,7 @@ def test_lunar_wac_to_igc(isolated_dir):
     if False:
         igc = isis_to_igc(fname, band=3)
         write_shelve("igc.xml", igc)
-    check_igc(fname, band=3, check_glas_rsm=False, check_time=True)
+    check_igc(fname, band=3, check_glas_rsm=False, check_time=False,
+              check_camera=False, check_isis=True, check_spice=True)
     
     

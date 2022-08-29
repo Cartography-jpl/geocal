@@ -337,16 +337,16 @@ if(have_pynitf):
 # fill in the field angle
 
 class _CameraForGlas(Camera):
-    def __init__(self, number_sample, lv_list, focal_length,
+    def __init__(self, number_sample, lv_arr, focal_length,
                  sample_number_first=0,
-                 delta_sample_pair=0):
+                 delta_sample_pair=1):
         self.nsamp = number_sample
         self.focal_length = focal_length
         self.slv = scipy.interpolate.RegularGridInterpolator(
             (range(sample_number_first, number_sample, delta_sample_pair),),
-            np.array([lv_list[:,0] * (focal_length / lv_list[:,2]),
-                      lv_list[:,1] * (focal_length / lv_list[:,2]),
-                      [focal_length,]* lv_list.shape[0]]).transpose(),
+            np.array([lv_arr[:,0] * (focal_length / lv_arr[:,2]),
+                      lv_arr[:,1] * (focal_length / lv_arr[:,2]),
+                      [focal_length,]* lv_arr.shape[0]]).transpose(),
             bounds_error = False, fill_value=None)
         super().__init__()
         
@@ -358,7 +358,37 @@ class _CameraForGlas(Camera):
 
     def sc_look_vector(self, fc, b):
         return ScLookVector(*self.slv([fc.sample])[0])
+
+class _CameraForGfm(Camera):
+    def __init__(self, number_line,
+                 number_sample, lv_arr, focal_length,
+                 line_number_first=0,
+                 sample_number_first=0,
+                 delta_sample_pair=1,
+                 delta_line_pair=1):
+        self.nline = number_line
+        self.nsamp = number_sample
+        self.focal_length = focal_length
+        flarr = np.empty((lv_arr.shape[0],lv_arr.shape[1]))
+        flarr[:,:] = focal_length
+        self.slv = scipy.interpolate.RegularGridInterpolator(
+            (range(line_number_first, number_line, delta_line_pair),
+             range(sample_number_first, number_sample, delta_sample_pair)),
+            np.array([lv_arr[:,:,0] * (focal_length / lv_arr[:,:,2]),
+                      lv_arr[:,:,1] * (focal_length / lv_arr[:,:,2]),
+                      flarr]).transpose(1,2,0),
+            bounds_error = False, fill_value=None)
+        super().__init__()
         
+    def number_line(self, b):
+        return self.nline
+
+    def number_sample(self, b):
+        return self.nsamp
+
+    def sc_look_vector(self, fc, b):
+        return ScLookVector(*self.slv([fc.line, fc.sample])[0])
+    
 def _create_glas_from_sc_look_vector(cls, sclv_list, focal_length=1,
                    focal_length_time=Time.parse_time("2020-01-01T00:00:00Z"),
                    sample_number_first=0,
@@ -375,13 +405,46 @@ def _create_glas_from_sc_look_vector(cls, sclv_list, focal_length=1,
     gcam.band_type = band_type
     gcam.band_wavelength = band_wavelength
 
-    lv_list = np.array([[sclv.look_vector[0], sclv.look_vector[1],
+    lv_arr = np.array([[sclv.look_vector[0], sclv.look_vector[1],
                          sclv.look_vector[2]] for sclv in sclv_list])
-    cfit = _CameraForGlas(gcam.number_sample(0), lv_list,
+    cfit = _CameraForGlas(gcam.number_sample(0), lv_arr,
                           gcam.focal_length,
                           sample_number_first=sample_number_first,
                           delta_sample_pair=delta_sample_pair)
     gcam.field_alignment_fit(cfit, delta_sample_pair, 0)
+    return gcam
+
+def _create_gfm_from_look_vector(cls, lv_arr, focal_length=1,
+                   focal_length_time=Time.parse_time("2020-01-01T00:00:00Z"),
+                   line_number_first=0,
+                   sample_number_first=0,
+                   delta_line_pair=1,
+                   delta_sample_pair=1,
+                   band_type="N", band_wavelength = 1.45):
+    '''Create a GFM camera model. This gets created from a array of 
+    look vector values, which should be evenly spaced in line index 
+    (first one) and sample index (second one) with the 
+    delta_sample_pair spacing starting as sample_number_first. 
+    lv_arr should be 3d, with shape (nline points, nsample point, 3)'''
+    gcam = cls(line_number_first + delta_line_pair * lv_arr.shape[0],
+               sample_number_first + delta_sample_pair * lv_arr.shape[1])
+    gcam.focal_length = focal_length
+    gcam.focal_length_time = focal_length_time
+    gcam.first_line_block = [line_number_first,]
+    gcam.first_sample_block = [sample_number_first,]
+    gcam.delta_line_block = [delta_line_pair,]
+    gcam.delta_sample_block = [delta_sample_pair,]
+    gcam.band_type = band_type
+    gcam.band_wavelength = band_wavelength
+
+    cfit = _CameraForGfm(gcam.number_line(0),
+                         gcam.number_sample(0), lv_arr,
+                         gcam.focal_length,
+                         line_number_first=line_number_first,
+                         sample_number_first=sample_number_first,
+                         delta_line_pair=delta_line_pair,
+                         delta_sample_pair=delta_sample_pair)
+    gcam.field_alignment_block(cfit, delta_line_pair, delta_sample_pair, 0)
     return gcam
 
 def _create_glas_from_field_angle(cls, fa_x, fa_y, **keyword):
@@ -393,6 +456,7 @@ def _create_glas_from_field_angle(cls, fa_x, fa_y, **keyword):
                                      
 GlasGfmCamera.create_glas_from_sc_look_vector = classmethod(_create_glas_from_sc_look_vector)
 GlasGfmCamera.create_glas_from_field_angle = classmethod(_create_glas_from_field_angle)
+GlasGfmCamera.create_gfm_from_look_vector = classmethod(_create_gfm_from_look_vector)
 
 __all__ = ["GlasGfm",]
     

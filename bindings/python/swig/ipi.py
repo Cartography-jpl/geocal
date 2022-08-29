@@ -370,6 +370,24 @@ class Ipi(geocal_swig.generic_object.GenericObject):
         return self._v_resolution_meter()
 
 
+    def _v_time_acquisition_adjustment(self, *args):
+        """
+
+        void GeoCal::Ipi::time_acquisition_adjustment(bool V)
+
+        """
+        return _ipi.Ipi__v_time_acquisition_adjustment(self, *args)
+
+
+    @property
+    def time_acquisition_adjustment(self):
+        return self._v_time_acquisition_adjustment()
+
+    @time_acquisition_adjustment.setter
+    def time_acquisition_adjustment(self, value):
+      self._v_time_acquisition_adjustment(value)
+
+
     def _v_orbit(self, *args):
         """
 
@@ -578,6 +596,7 @@ Ipi.time_with_derivative = new_instancemethod(_ipi.Ipi_time_with_derivative, Non
 Ipi.footprint = new_instancemethod(_ipi.Ipi_footprint, None, Ipi)
 Ipi._v_resolution_meter = new_instancemethod(_ipi.Ipi__v_resolution_meter, None, Ipi)
 Ipi.__str__ = new_instancemethod(_ipi.Ipi___str__, None, Ipi)
+Ipi._v_time_acquisition_adjustment = new_instancemethod(_ipi.Ipi__v_time_acquisition_adjustment, None, Ipi)
 Ipi._v_orbit = new_instancemethod(_ipi.Ipi__v_orbit, None, Ipi)
 Ipi._v_camera = new_instancemethod(_ipi.Ipi__v_camera, None, Ipi)
 Ipi._v_time_table = new_instancemethod(_ipi.Ipi__v_time_table, None, Ipi)

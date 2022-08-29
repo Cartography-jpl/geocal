@@ -31,6 +31,9 @@ void Ipi::serialize(Archive & ar, const unsigned int version)
   // Older version didn't have VelocityAberration
   if(version > 2)
     ar & GEOCAL_NVP_(velocity_aberration);
+  // Older version didn't have time_acquisition_adjustment_
+  if(version > 3)
+    ar & GEOCAL_NVP_(time_acquisition_adjustment);
 }
 
 GEOCAL_IMPLEMENT(Ipi);
@@ -62,11 +65,14 @@ Ipi::Ipi(const boost::shared_ptr<Orbit>& Orb, const
     last_time(Tmin), local_time_window_size_(Local_time_window_size),
     root_min_separation_(Root_min_separation), 
     time_tolerance_(Time_tolerance),
-    max_frame_extend_(Max_frame_extend)
+    max_frame_extend_(Max_frame_extend),
+    time_acquisition_adjustment_(false)
 {
-  // TODO Come back and think through this
-  // if(Cam->number_line(Band) != 1)
-  //   throw Exception("I think we only want to do an IPI with a pushbroom camera with 1 line. If this is wrong, you can remove this exception");
+  // I'm not sure if we want to make this a argument or not. For
+  // now, do time_acquisition_adjustment_ for Pushframe, but not
+  // for Pushbroom cameras.
+  if(Cam->number_line(Band) > 1)
+    time_acquisition_adjustment_ = true;
 }
 
 //-----------------------------------------------------------------------
@@ -367,6 +373,15 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
     Tres = min_time_ + true_sol;
     last_time = Tres;
     Fres = fc_sol;
+    if(time_acquisition_adjustment_) {
+      Time t1, t2;
+      tt->time_acquisition(Tres, Fres, t1, t2);
+      // I *think* we always want the smaller image coordinate t. We
+      // may need to change the logic here if we run into a problem of
+      // some sort.
+      Tres = t1;
+      Fres = eq.frame_coordinate(t1 - min_time_);
+    }
   } else {
     Success = false;
   }
@@ -521,6 +536,15 @@ void Ipi::time_with_derivative
     Tres = TimeWithDerivative(min_time_) + true_sol;
     last_time = Tres.value();
     Fres = eq.frame_coordinate(true_sol);
+    if(time_acquisition_adjustment_) {
+      Time t1, t2;
+      tt->time_acquisition(Tres.value(), Fres.value(), t1, t2);
+      // I *think* we always want the smaller image coordinate t. We
+      // may need to change the logic here if we run into a problem of
+      // some sort.
+      Tres = TimeWithDerivative(t1);
+      Fres = eq.frame_coordinate(t1 - min_time_);
+    }
   } else {
     Success = false;
   }

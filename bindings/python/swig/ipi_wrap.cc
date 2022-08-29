@@ -6079,6 +6079,20 @@ SWIG_From_std_string  (const std::string& s)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -9634,6 +9648,121 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Ipi__v_time_acquisition_adjustment__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Ipi const > tempshared1 ;
+  boost::shared_ptr< GeoCal::Ipi const > *smartarg1 = 0 ;
+  bool result;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi__v_time_acquisition_adjustment" "', argument " "1"" of type '" "GeoCal::Ipi const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::Ipi const *)arg1)->time_acquisition_adjustment();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Ipi__v_time_acquisition_adjustment__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
+  bool *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Ipi > tempshared1 ;
+  boost::shared_ptr< GeoCal::Ipi > *smartarg1 = 0 ;
+  bool temp2 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ipi_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Ipi__v_time_acquisition_adjustment" "', argument " "1"" of type '" "GeoCal::Ipi *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Ipi > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Ipi > * >(argp1);
+      arg1 = const_cast< GeoCal::Ipi * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  ecode2 = SWIG_AsVal_bool(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Ipi__v_time_acquisition_adjustment" "', argument " "2"" of type '" "bool""'");
+  } 
+  temp2 = static_cast< bool >(val2);
+  arg2 = &temp2;
+  {
+    try {
+      (arg1)->time_acquisition_adjustment((bool const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Ipi__v_time_acquisition_adjustment(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[3] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Ipi__v_time_acquisition_adjustment",0,2,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_Ipi__v_time_acquisition_adjustment__SWIG_0(self, argc, argv);
+  }
+  if (argc == 2) {
+    return _wrap_Ipi__v_time_acquisition_adjustment__SWIG_1(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Ipi__v_time_acquisition_adjustment'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Ipi::time_acquisition_adjustment() const\n"
+    "    GeoCal::Ipi::time_acquisition_adjustment(bool const &)\n");
+  return 0;
+}
+
+
 SWIGINTERN PyObject *_wrap_Ipi__v_orbit__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Ipi *arg1 = (GeoCal::Ipi *) 0 ;
@@ -10863,6 +10992,11 @@ static PyMethodDef SwigMethods[] = {
 		"This is for the center pixel in the area covered by the Ipi. \n"
 		""},
 	 { (char *)"Ipi___str__", (PyCFunction)_wrap_Ipi___str__, METH_O, NULL},
+	 { (char *)"Ipi__v_time_acquisition_adjustment", _wrap_Ipi__v_time_acquisition_adjustment, METH_VARARGS, (char *)"\n"
+		"\n"
+		"void GeoCal::Ipi::time_acquisition_adjustment(bool V)\n"
+		"\n"
+		""},
 	 { (char *)"Ipi__v_orbit", _wrap_Ipi__v_orbit, METH_VARARGS, (char *)"\n"
 		"\n"
 		"void GeoCal::Ipi::orbit(const boost::shared_ptr< Orbit > &Orb)\n"

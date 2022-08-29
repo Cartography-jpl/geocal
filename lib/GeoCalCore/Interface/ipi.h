@@ -119,6 +119,16 @@ public:
   void print(std::ostream& Os) const;
   std::vector<boost::shared_ptr<GroundCoordinate> > footprint(const Dem& D) 
     const;
+
+//-----------------------------------------------------------------------
+/// Indicates if we adjust the times to match when we actually have
+/// acquisition (see time_acquisition in TimeTable). This is important
+/// for handling Pushframe cameras correctly.
+//-----------------------------------------------------------------------
+  bool time_acquisition_adjustment() const
+  { return time_acquisition_adjustment_; }
+  void time_acquisition_adjustment(bool V)
+  { time_acquisition_adjustment_ = V; }
   
 //-----------------------------------------------------------------------
 /// Orbit that we are using.
@@ -235,6 +245,7 @@ private:
   double time_tolerance_;	 ///< How accurate we find the time.
   double max_frame_extend_;	 // Maximum FrameCoordinate outside of
 				 // the camera that we consider 'ok'.
+  bool time_acquisition_adjustment_;
 
 //-----------------------------------------------------------------------
 /// Initial guess at minimum time, based on last_time.
@@ -259,7 +270,7 @@ private:
 		    last_time + local_time_window_size_ / 2);
   }
 
-  Ipi() : max_frame_extend_(1e19) {}
+  Ipi() : max_frame_extend_(1e19), time_acquisition_adjustment_(false) {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -268,6 +279,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Ipi);
-GEOCAL_CLASS_VERSION(Ipi, 3);
+GEOCAL_CLASS_VERSION(Ipi, 4);
 #endif
 

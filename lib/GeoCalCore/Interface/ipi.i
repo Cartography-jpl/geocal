@@ -69,6 +69,7 @@ public:
     const;
   %python_attribute(resolution_meter, double)
   std::string print_to_string() const;
+  %python_attribute_with_set(time_acquisition_adjustment, bool)
   %python_attribute_with_set(orbit, boost::shared_ptr<Orbit>)
   %python_attribute_with_set(camera, boost::shared_ptr<Camera>)
   %python_attribute_with_set(time_table, boost::shared_ptr<TimeTable>)

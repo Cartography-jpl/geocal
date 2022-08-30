@@ -68,6 +68,7 @@ public:
     const;
   %python_attribute(time_space, double)
   %python_attribute(framelet_size, int)
+  %python_attribute(number_framelet, int)
   %pickle_serialization();
 };
 

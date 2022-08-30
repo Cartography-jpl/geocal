@@ -174,6 +174,10 @@ class LroPdsToIsis:
         # create a symbolic link for one of the files, just so we
         # have a pointer to is.
         t = os.path.splitext(isis_fname)[0]
+        try:
+            os.remove(isis_fname)
+        except:
+            pass
         os.symlink(f"{t}.vis.even.cub", isis_fname)
         # For now, run spiceinit on the other cubes. Not sure if
         # we need this long term, but do for now

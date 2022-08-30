@@ -4,6 +4,7 @@ parm pdsimg type=(string,99) count=1
 parm outbase type=(string,99) count=1
 parm pdsimg2 type=(string,99) count=1 default=""
 parm fulligc type=(string,99) count=1 default=""
+parm band type=int count=1 default=-1
 parm rsm type=(string,4) count=(0:1) valid=(n,y) default=n
 parm minh type=real count=1 default=-5000.0
 parm maxh type=real count=1 default=-1500.0
@@ -16,9 +17,9 @@ Pomm_Generate_Model
 pomm_generate_model takes an unprojected PDS or ISIS image, imports it to
 VICAR, and adds a RSM or GLAS/GFM.
 
-A PDS image can use passed to the program, or an already process ISIS image.
+A PDS image can be passed to the program, or an already process ISIS image.
 The ISIS cube image can be useful if you want more control on how the data
-is processed (e.g., using various options in ISIS). If you pass and ISIS
+is processed (e.g., using various options in ISIS). If you pass an ISIS
 cube, the kernels should already be listed in the file (e.g., spiceinit
 should be run on it). For PDS images, we just to a direct import to ISIS
 followed by running spiceinit with the --web option but otherwise using
@@ -27,6 +28,9 @@ the spiceinit defaults.
 The HiRISE instrument has 14 different CCDs, and each comes as 2 "channels"
 which is the left and right portion of the CCD image. You should supply
 both channels for a CCD image.
+
+Some datasets have multiple bands (e.g., LRO WAC color images). You can
+specify the band to use.
 
 We do not do any radiance correction (e.g., dark current subtraction),
 we just pass through the DNs unchanged. However, for CTX camera the
@@ -60,6 +64,11 @@ camera model, spice kernel,
 etc.). This is what we
 are approximating with the
 RSM.
+.variable band
+Some datasets have multiple
+bands (e.g., LRO WAC color 
+images). You can specify the
+band to use.
 .variable rsm
 If set to "y" use a RSM
 model rather than a GLAS/GFM.

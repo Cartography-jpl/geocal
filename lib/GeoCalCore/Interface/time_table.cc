@@ -190,7 +190,7 @@ ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable
     range_min_check(Time_max_line, Time_min_line);
   else
     range_min_check(Time_min_line, Time_max_line);
-  max_l = ((int) round((Time_max_line - Time_min_line) / tspace)) * framelet_size_;
+  max_l = ((int) round((Time_max_line - Time_min_line) / tspace)) * framelet_size_ - 1;
 }
 
 //-----------------------------------------------------------------------

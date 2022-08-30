@@ -19,9 +19,9 @@ usage='''Usage:
 pomm_generate_model takes an unprojected PDS or ISIS image, imports it to
 VICAR, and adds a RSM or GLAS/GFM.
 
-A PDS image can use passed to the program, or an already process ISIS image.
+A PDS image can be passed to the program, or an already process ISIS image.
 The ISIS cube image can be useful if you want more control on how the data
-is processed (e.g., using various options in ISIS). If you pass and ISIS
+is processed (e.g., using various options in ISIS). If you pass an ISIS
 cube, the kernels should already be listed in the file (e.g., spiceinit
 should be run on it). For PDS images, we just to a direct import to ISIS
 followed by running spiceinit with the --web option but otherwise using
@@ -30,6 +30,9 @@ the spiceinit defaults.
 The HiRISE instrument has 14 different CCDs, and each comes as 2 "channels"
 which is the left and right portion of the CCD image. You should supply
 both channels for a CCD image.
+
+Some datasets have multiple bands (e.g., LRO WAC color images). You can
+specify the band to use.
 
 We do not do any radiance correction (e.g., dark current subtraction),
 we just pass through the DNs unchanged. However, for CTX camera the
@@ -46,6 +49,10 @@ Example:
 Options:
   -h --help         
        Print this message
+
+  --band=d
+     Some datasets have multiple bands (e.g., LRO WAC color images). You can
+     specify the band to use.
 
   --full-igc=f
        For diagnostic purposes, it can be useful to have the full IGC (i.e.,
@@ -86,6 +93,7 @@ long_name_to_vicar = { "pds_or_isis_image" : "pdsimg",
                        "output_base_name" : "outbase",
                        "full_igc" : "fulligc",
                        "rsm": "rsm",
+                       "band" : "band",
                        "min_height" : "minh",
                        "max_height" : "maxh",
                        "subset" : "subset",
@@ -103,17 +111,22 @@ if args.subset:
         subset = args.subset
     else:        
         subset = eval(args.subset)
-        
+
+band=None        
+if(args.band and args.band >= 0):
+    band = args.band
 geocal.pds_to_isis(args.pds_or_isis_image, f"{args.output_base_name}.cub",
                    pds_fname2 = args.pds_image_2)
 if(args.rsm): 
     igc, rsm = geocal.isis_to_igc(f"{args.output_base_name}.cub", rsm=True,
                        min_height=args.min_height, max_height=args.max_height,
-                       igc_out_fname=args.full_igc, subset=subset)
+                       igc_out_fname=args.full_igc, subset=subset,
+                       band=args.band)
 else:
     rsm = None
     igc = geocal.isis_to_igc(f"{args.output_base_name}.cub", glas_gfm=True,
-                             subset=subset)
+                             subset=subset, band=args.band,
+                             igc_out_fname=args.full_igc)
     
 f = geocal.VicarRasterImage(f"{args.output_base_name}.img", "HALF",
                             igc.number_line, igc.number_sample)

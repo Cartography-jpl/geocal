@@ -40,9 +40,9 @@ BOOST_AUTO_TEST_CASE(framelet_time_table)
   int framelet_size = 10;
   ConstantSpacingFrameletTimeTable tt(t, t2, framelet_size, 40.8e-3);
   BOOST_CHECK(fabs(tt.min_time() - (t - 40.8e-3)) < 1e-4);
-  BOOST_CHECK(fabs(tt.max_time() - ( t + 101 * 40.8e-3)) < 1e-4);
+  BOOST_CHECK(fabs(tt.max_time() - ( t + 100 * 40.8e-3)) < 1e-4);
   BOOST_CHECK_EQUAL(tt.min_line(), 0);
-  BOOST_CHECK_EQUAL(tt.max_line(), 100*framelet_size);
+  BOOST_CHECK_EQUAL(tt.max_line(), 100*framelet_size-1);
   Time t_expect = t + 40.5 * 40.8e-3;
   FrameCoordinate f_expect(0, 35);
   ImageCoordinate ic_expect(405, 35);

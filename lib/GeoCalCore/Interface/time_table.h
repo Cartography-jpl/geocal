@@ -231,7 +231,7 @@ public:
   virtual Time min_time() const
   {
     return (tspace > 0 ? t_min_line - tspace :
-	    t_min_line + tspace * max_l / framelet_size_ + tspace);
+	    t_min_line + tspace * number_framelet());
   }
 
 //-----------------------------------------------------------------------
@@ -244,9 +244,10 @@ public:
 
   virtual Time max_time() const
   {
-    return (tspace > 0 ? t_min_line + tspace * max_l / framelet_size_ + tspace:
+    return (tspace > 0 ? t_min_line + tspace * number_framelet():
 	    t_min_line - tspace);
   }
+  int number_framelet() const { return (max_l + 1) / framelet_size_; }
   double time_space() const {return tspace;}
   int framelet_size() const { return framelet_size_;}
 private:

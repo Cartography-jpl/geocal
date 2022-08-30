@@ -590,12 +590,27 @@ class ConstantSpacingFrameletTimeTable(TimeTable):
         return self._v_framelet_size()
 
 
+    def _v_number_framelet(self):
+        """
+
+        int GeoCal::ConstantSpacingFrameletTimeTable::number_framelet() const
+
+        """
+        return _time_table.ConstantSpacingFrameletTimeTable__v_number_framelet(self)
+
+
+    @property
+    def number_framelet(self):
+        return self._v_number_framelet()
+
+
     def __reduce__(self):
       return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_ConstantSpacingFrameletTimeTable
 ConstantSpacingFrameletTimeTable._v_time_space = new_instancemethod(_time_table.ConstantSpacingFrameletTimeTable__v_time_space, None, ConstantSpacingFrameletTimeTable)
 ConstantSpacingFrameletTimeTable._v_framelet_size = new_instancemethod(_time_table.ConstantSpacingFrameletTimeTable__v_framelet_size, None, ConstantSpacingFrameletTimeTable)
+ConstantSpacingFrameletTimeTable._v_number_framelet = new_instancemethod(_time_table.ConstantSpacingFrameletTimeTable__v_number_framelet, None, ConstantSpacingFrameletTimeTable)
 ConstantSpacingFrameletTimeTable_swigregister = _time_table.ConstantSpacingFrameletTimeTable_swigregister
 ConstantSpacingFrameletTimeTable_swigregister(ConstantSpacingFrameletTimeTable)
 

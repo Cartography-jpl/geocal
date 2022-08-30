@@ -13165,6 +13165,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ConstantSpacingFrameletTimeTable__v_number_framelet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ConstantSpacingFrameletTimeTable *arg1 = (GeoCal::ConstantSpacingFrameletTimeTable *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ConstantSpacingFrameletTimeTable const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ConstantSpacingFrameletTimeTable const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ConstantSpacingFrameletTimeTable_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ConstantSpacingFrameletTimeTable__v_number_framelet" "', argument " "1"" of type '" "GeoCal::ConstantSpacingFrameletTimeTable const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ConstantSpacingFrameletTimeTable > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ConstantSpacingFrameletTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::ConstantSpacingFrameletTimeTable * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ConstantSpacingFrameletTimeTable > * >(argp1);
+      arg1 = const_cast< GeoCal::ConstantSpacingFrameletTimeTable * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::ConstantSpacingFrameletTimeTable const *)arg1)->number_framelet();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_ConstantSpacingFrameletTimeTable(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ConstantSpacingFrameletTimeTable *arg1 = (GeoCal::ConstantSpacingFrameletTimeTable *) 0 ;
@@ -13691,6 +13734,11 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"ConstantSpacingFrameletTimeTable__v_framelet_size", (PyCFunction)_wrap_ConstantSpacingFrameletTimeTable__v_framelet_size, METH_O, (char *)"\n"
 		"\n"
 		"int GeoCal::ConstantSpacingFrameletTimeTable::framelet_size() const\n"
+		"\n"
+		""},
+	 { (char *)"ConstantSpacingFrameletTimeTable__v_number_framelet", (PyCFunction)_wrap_ConstantSpacingFrameletTimeTable__v_number_framelet, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::ConstantSpacingFrameletTimeTable::number_framelet() const\n"
 		"\n"
 		""},
 	 { (char *)"delete_ConstantSpacingFrameletTimeTable", (PyCFunction)_wrap_delete_ConstantSpacingFrameletTimeTable, METH_O, (char *)"\n"

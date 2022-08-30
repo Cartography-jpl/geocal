@@ -179,7 +179,8 @@ class LroWacIsisToIgc:
     def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
                     glas_gfm=False, rsm=False, min_height=-5000,
                     max_height=-1500, igc_out_fname=None,
-                    match_isis=False, spice_igc=False, band=3, **keywords):
+                    match_isis=False, spice_igc=False, band=3,
+                    rad_scale=10000, **keywords):
         '''This takes the band number. By convention, we have 1 and 2 as
         the UV bands, 3-7 as the visible bands.'''
         idata = isis_metadata["IsisCube"]["Instrument"]
@@ -195,7 +196,8 @@ class LroWacIsisToIgc:
                                  subset[2], subset[3])
         else:
             img = isis_img
-
+        if(rad_scale is not None):
+            img = ScaleImage(img, rad_scale)
         # Map band to the filter type
         if(band == 1):
             frame = "LRO_LROCWAC_UV_FILTER_1"

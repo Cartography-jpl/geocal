@@ -117,12 +117,34 @@ long_name_to_vicar = { "image" : "img",
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
+# Move this elsewhere? For now we'll just keep this here but
+# we should perhaps have this in library
 def mars_default_mi(desired_resolution = 1):
     owrap = geocal.OgrWrapper(
 '''PROJCS["SimpleCylindrical Mars",
      GEOGCS["GCS_Mars",
          DATUM["D_Mars",
              SPHEROID["Mars",3396190,0]],
+         PRIMEM["Reference_Meridian",0],
+         UNIT["degree",0.0174532925199433]],
+     PROJECTION["Equirectangular"],
+     PARAMETER["latitude_of_origin",0],
+     PARAMETER["central_meridian",0],
+     PARAMETER["standard_parallel_1",0],
+     PARAMETER["false_easting",0],
+     PARAMETER["false_northing",0],
+     UNIT["metre",1,
+         AUTHORITY["EPSG","9001"]]]''')
+    cconv = geocal.OgrCoordinateConverter(owrap)
+    mi = geocal.MapInfo(cconv, 0, 10000, 10000, 0, 10000, 10000)
+    return mi.scale(desired_resolution, desired_resolution)
+
+def moon_default_mi(desired_resolution = 1):
+    owrap = geocal.OgrWrapper(
+'''PROJCS["SimpleCylindrical Moon",
+     GEOGCS["GCS_Moon",
+         DATUM["D_Moon",
+             SPHEROID["Moon",1737400.0,0]],
          PRIMEM["Reference_Meridian",0],
          UNIT["degree",0.0174532925199433]],
      PROJECTION["Equirectangular"],
@@ -170,6 +192,8 @@ def create_igc_map(igc, args):
             mibase = geocal.cib01_mapinfo(desired_resolution = resolution)
         elif(naif_code == geocal.PlanetConstant.MARS_NAIF_CODE):
             mibase = mars_default_mi(desired_resolution = resolution)
+        elif(naif_code == geocal.PlanetConstant.MOON_NAIF_CODE):
+            mibase = moon_default_mi(desired_resolution = resolution)
         else:
             raise RuntimeError("Don't currently support NAIF code %d" %
                                naif_code)
@@ -269,6 +293,8 @@ if(do_raycast):
     geocal.ray_caster_project(args.output, igc, mi, pool=pool,
                               dtype=dtype,
                               nline_process = args.process_number_line)
+    if(pool):
+        pool.close()
 else:
     # I don't think we actually need this, so comment out for now
     #geocal.write_shelve("igc_map.xml", igc_map)

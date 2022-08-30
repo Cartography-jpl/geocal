@@ -38,7 +38,7 @@ public:
 
   virtual void notify_update(const Camera& Observed_object) 
   {
-    sc_look_vector_cache.resize(boost::extents[0][0][0]);
+    sc_look_vector_cache.resize(boost::extents[0][0][0][0]);
   }
 
 //-----------------------------------------------------------------------
@@ -212,7 +212,7 @@ protected:
 private:
   boost::shared_ptr<Ipi> ipi_;
   double res, max_h;
-  mutable boost::multi_array<ScLookVector, 3> sc_look_vector_cache;
+  mutable boost::multi_array<ScLookVector, 4> sc_look_vector_cache;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

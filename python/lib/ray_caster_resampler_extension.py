@@ -5,11 +5,13 @@ from tempfile import NamedTemporaryFile
 from functools import partial
 import logging
 
-def _ray_caster_project_subset(igc, nline_process, nintegration_step,
+def _ray_caster_project_subset(igc, number_line_framelet,
+                               nline_process, nintegration_step,
                                map_info, scratch_file_name,
                                start_line):
     nline = min(nline_process, igc.number_line - start_line)
-    rcast = IgcRayCaster(igc, start_line, nline, nintegration_step,
+    rcast = IgcRayCaster(igc, number_line_framelet, start_line,
+                         nline, nintegration_step,
                          map_info.resolution_meter)
     rcast_data = np.memmap(scratch_file_name, mode="r+",
                            shape = (igc.number_line, rcast.shape(1),
@@ -42,7 +44,11 @@ def ray_caster_project(out_fname, igc, map_info, dtype=np.int16,
         nintegration_step = 1
     else:
         nintegration_step = 2
-    rcast = IgcRayCaster(igc, 0, -1, nintegration_step,
+    number_line_framelet = igc.ipi.camera.number_line(igc.ipi.band)
+    # Adjust nline_process to be a even multiple of number_line_framelet,
+    # required by ray caster
+    nline_process = int(round(nline_process / number_line_framelet)) * number_line_framelet
+    rcast = IgcRayCaster(igc, number_line_framelet, 0, -1, nintegration_step,
                          map_info.resolution_meter)
     with NamedTemporaryFile(dir=os.path.dirname(out_fname)) as fh:
         if(mmap_scratch or pool is not None):
@@ -61,7 +67,8 @@ def ray_caster_project(out_fname, igc, map_info, dtype=np.int16,
             rsamp.ray_cast_step(rcast_data)
         else:
             f = partial(_ray_caster_project_subset,
-                        igc, nline_process, nintegration_step,
+                        igc, number_line_framelet,
+                        nline_process, nintegration_step,
                         map_info, fh.name)
             pool.map(f, range(0, igc.number_line, nline_process))
         res = np.zeros((map_info.number_y_pixel,

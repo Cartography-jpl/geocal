@@ -108,7 +108,7 @@ blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
 			      5);
   // We use a really large resolution, to force the number of
   // subpixels to to 1.
-  IgcRayCaster rcast(Igc, 0, -1, 1, 1e6);
+  IgcRayCaster rcast(Igc, 1, 0, -1, 1, 1e6);
   int resind = 0;
   while(!rcast.last_position()) {
     blitz::Array<double, 6> d = rcast.next_position();

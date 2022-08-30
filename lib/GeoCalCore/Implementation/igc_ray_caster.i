@@ -13,6 +13,7 @@ namespace GeoCal {
 class IgcRayCaster: public RayCaster {
 public:
   IgcRayCaster(const boost::shared_ptr<ImageGroundConnection>& Igc,
+	       int Number_line_framelet = 1,
 	       int Start_line = 0,
 	       int Number_line = -1,
 	       int Number_integration_step = 2, double Resolution = 100,
@@ -26,6 +27,7 @@ public:
   %python_attribute_with_set(number_sub_sample, int);
   %python_attribute_with_set(number_integration_step, int);
   %python_attribute_with_set(include_path_distance, bool);
+  %python_attribute(number_line_framelet, int);
   %python_attribute(start_sample, int);
   %python_attribute(number_sample, int);
   %pickle_serialization();

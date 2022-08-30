@@ -52,6 +52,7 @@ IpiImageGroundConnection::cf_look_vector_arr
  int nintegration_step) const
 {
   CartesianFixedLookVector lv;
+  int nline_framelet = ipi_->camera()->number_line(ipi_->band());
   blitz::Array<double, 7>  res(nline, nsamp, nsubpixel_line, 
 			       nsubpixel_sample, nintegration_step, 2, 3);
   // Much of the time, cf_look_vector_arr is called repeatedly with
@@ -59,21 +60,24 @@ IpiImageGroundConnection::cf_look_vector_arr
   if(nsubpixel_line != (int) sc_look_vector_cache.shape()[1] ||
      nsubpixel_sample != (int) sc_look_vector_cache.shape()[2]) {
     sc_look_vector_cache.resize
-      (boost::extents[ipi_->camera()->number_sample(ipi_->band())]
+      (boost::extents[nline_framelet]
+       [ipi_->camera()->number_sample(ipi_->band())]
        [nsubpixel_line][nsubpixel_sample]);
     double fline_space = 1.0 / nsubpixel_line;
     double fsamp_space = 1.0 / nsubpixel_sample;
     double fline_start = fline_space / 2.0 - 0.5;
     double fsamp_start = fsamp_space / 2.0 - 0.5;
-    for(int j = 0; j < (int) sc_look_vector_cache.shape()[0]; ++j)
-      for(int i2 = 0; i2 < (int) sc_look_vector_cache.shape()[1]; ++i2)
-	for(int j2 = 0; j2 < (int) sc_look_vector_cache.shape()[2]; ++j2) {
-	  FrameCoordinate fc(fline_start + i2 * fline_space,
-			     j + fsamp_start + j2 * fsamp_space);
-	  sc_look_vector_cache[j][i2][j2] = 
-	    ipi_->camera()->sc_look_vector(fc, ipi_->band());
+    for(int i = 0; i < (int) sc_look_vector_cache.shape()[0]; ++i)
+      for(int j = 0; j < (int) sc_look_vector_cache.shape()[1]; ++j)
+	for(int i2 = 0; i2 < (int) sc_look_vector_cache.shape()[2]; ++i2)
+	  for(int j2 = 0; j2 < (int) sc_look_vector_cache.shape()[3]; ++j2) {
+	    FrameCoordinate fc(i + fline_start + i2 * fline_space,
+			       j + fsamp_start + j2 * fsamp_space);
+	    sc_look_vector_cache[i][j][i2][j2] = 
+	      ipi_->camera()->sc_look_vector(fc, ipi_->band());
 	}
   }
+  
   for(int i = 0; i < nline; ++i) {
     Time t;
     FrameCoordinate f;
@@ -88,11 +92,12 @@ IpiImageGroundConnection::cf_look_vector_arr
       od.push_back(ipi_->orbit()->orbit_data(t + tint));
       pos.push_back(od[k]->position_cf());
     }
+    int i_ind = i % nline_framelet;
     for(int j = 0; j < nsamp; ++j) 
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
 	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
 	  const ScLookVector& slv = 
-	    sc_look_vector_cache[j + smp_start][i2][j2];
+	    sc_look_vector_cache[i_ind][j + smp_start][i2][j2];
 	  for(int k = 0; k < nintegration_step; ++k) {
 	    lv = od[k]->cf_look_vector(slv);
 	    for(int k2 = 0; k2 < 3; ++k2) {

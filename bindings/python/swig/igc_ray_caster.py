@@ -262,13 +262,14 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
 
-    def __init__(self, Igc, Start_line=0, Number_line=-1, Number_integration_step=2, Resolution=100, Max_height=10e3, Start_sample=0, Number_sample=-1, Include_path_distance=False):
+    def __init__(self, Igc, Number_line_framelet=1, Start_line=0, Number_line=-1, Number_integration_step=2, Resolution=100, Max_height=10e3, Start_sample=0, Number_sample=-1, Include_path_distance=False):
         """
 
         IgcRayCaster::IgcRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, int
-        Start_line=0, int Number_line=-1, int Number_integration_step=2,
-        double Resolution=100, double Max_height=10e3, int Start_sample=0, int
-        Number_sample=-1, bool Include_path_distance=false)
+        Number_line_framelet=1, int Start_line=0, int Number_line=-1, int
+        Number_integration_step=2, double Resolution=100, double
+        Max_height=10e3, int Start_sample=0, int Number_sample=-1, bool
+        Include_path_distance=false)
         Constructor.
 
         You can pass the starting line to use and the number of lines to
@@ -291,7 +292,7 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
         If you have Include_path_distance set to true, then we return an extra
         entry in the result array that is the path distance. 
         """
-        _igc_ray_caster.IgcRayCaster_swiginit(self, _igc_ray_caster.new_IgcRayCaster(Igc, Start_line, Number_line, Number_integration_step, Resolution, Max_height, Start_sample, Number_sample, Include_path_distance))
+        _igc_ray_caster.IgcRayCaster_swiginit(self, _igc_ray_caster.new_IgcRayCaster(Igc, Number_line_framelet, Start_line, Number_line, Number_integration_step, Resolution, Max_height, Start_sample, Number_sample, Include_path_distance))
 
     def _v_number_sub_line(self, *args):
         """
@@ -365,6 +366,20 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
       self._v_include_path_distance(value)
 
 
+    def _v_number_line_framelet(self):
+        """
+
+        int GeoCal::IgcRayCaster::number_line_framelet() const
+
+        """
+        return _igc_ray_caster.IgcRayCaster__v_number_line_framelet(self)
+
+
+    @property
+    def number_line_framelet(self):
+        return self._v_number_line_framelet()
+
+
     def _v_start_sample(self):
         """
 
@@ -401,6 +416,7 @@ IgcRayCaster._v_number_sub_line = new_instancemethod(_igc_ray_caster.IgcRayCaste
 IgcRayCaster._v_number_sub_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sub_sample, None, IgcRayCaster)
 IgcRayCaster._v_number_integration_step = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_integration_step, None, IgcRayCaster)
 IgcRayCaster._v_include_path_distance = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_include_path_distance, None, IgcRayCaster)
+IgcRayCaster._v_number_line_framelet = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_line_framelet, None, IgcRayCaster)
 IgcRayCaster._v_start_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_start_sample, None, IgcRayCaster)
 IgcRayCaster._v_number_sample = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sample, None, IgcRayCaster)
 IgcRayCaster_swigregister = _igc_ray_caster.IgcRayCaster_swigregister

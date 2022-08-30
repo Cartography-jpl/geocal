@@ -6731,11 +6731,12 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   int arg2 ;
   int arg3 ;
   int arg4 ;
-  double arg5 ;
+  int arg5 ;
   double arg6 ;
-  int arg7 ;
+  double arg7 ;
   int arg8 ;
-  bool arg9 ;
+  int arg9 ;
+  bool arg10 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
@@ -6746,15 +6747,141 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  double val5 ;
+  int val5 ;
   int ecode5 = 0 ;
   double val6 ;
   int ecode6 = 0 ;
-  int val7 ;
+  double val7 ;
   int ecode7 = 0 ;
   int val8 ;
   int ecode8 = 0 ;
-  bool val9 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  bool val10 ;
+  int ecode10 = 0 ;
+  GeoCal::IgcRayCaster *result = 0 ;
+  
+  if ((nobjs < 10) || (nobjs > 10)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_IgcRayCaster" "', argument " "1"" of type '" "boost::shared_ptr< GeoCal::ImageGroundConnection > const &""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      if (argp1) tempshared1 = *reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1);
+      arg1 = &tempshared1;
+    } else {
+      arg1 = (argp1) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(argp1) : &tempshared1;
+    }
+    // Added mms
+    // Special handling if this is a director class. In that case, we
+    // don't own the underlying python object. Instead,
+    // we tell python we have a reference to the underlying object, and
+    // when this gets destroyed we decrement the reference to the python
+    // object. 
+    Swig::Director* dp = dynamic_cast<Swig::Director*>(arg1->get());
+    if(dp) {
+      Py_INCREF(dp->swig_get_self());
+      temp2shared1.reset(arg1->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      arg1 = &temp2shared1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_IgcRayCaster" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_IgcRayCaster" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcRayCaster" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcRayCaster" "', argument " "6"" of type '" "double""'");
+  } 
+  arg6 = static_cast< double >(val6);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "double""'");
+  } 
+  arg7 = static_cast< double >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_IgcRayCaster" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_IgcRayCaster" "', argument " "9"" of type '" "int""'");
+  } 
+  arg9 = static_cast< int >(val9);
+  ecode10 = SWIG_AsVal_bool(swig_obj[9], &val10);
+  if (!SWIG_IsOK(ecode10)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode10), "in method '" "new_IgcRayCaster" "', argument " "10"" of type '" "bool""'");
+  } 
+  arg10 = static_cast< bool >(val10);
+  {
+    try {
+      result = (GeoCal::IgcRayCaster *)new GeoCal::IgcRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::IgcRayCaster > *smartresult = result ? new boost::shared_ptr<  GeoCal::IgcRayCaster >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcRayCaster_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  int arg4 ;
+  int arg5 ;
+  double arg6 ;
+  double arg7 ;
+  int arg8 ;
+  int arg9 ;
+  void *argp1 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
+  boost::shared_ptr< GeoCal::ImageGroundConnection > temp2shared1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  double val6 ;
+  int ecode6 = 0 ;
+  double val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
   int ecode9 = 0 ;
   GeoCal::IgcRayCaster *result = 0 ;
   
@@ -6800,31 +6927,31 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcRayCaster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< double >(val5);
+  arg5 = static_cast< int >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcRayCaster" "', argument " "6"" of type '" "double""'");
   } 
   arg6 = static_cast< double >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
   if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "double""'");
   } 
-  arg7 = static_cast< int >(val7);
+  arg7 = static_cast< double >(val7);
   ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
   if (!SWIG_IsOK(ecode8)) {
     SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_IgcRayCaster" "', argument " "8"" of type '" "int""'");
   } 
   arg8 = static_cast< int >(val8);
-  ecode9 = SWIG_AsVal_bool(swig_obj[8], &val9);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
   if (!SWIG_IsOK(ecode9)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_IgcRayCaster" "', argument " "9"" of type '" "bool""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_IgcRayCaster" "', argument " "9"" of type '" "int""'");
   } 
-  arg9 = static_cast< bool >(val9);
+  arg9 = static_cast< int >(val9);
   {
     try {
       result = (GeoCal::IgcRayCaster *)new GeoCal::IgcRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
@@ -6844,15 +6971,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
-  double arg5 ;
+  int arg5 ;
   double arg6 ;
-  int arg7 ;
+  double arg7 ;
   int arg8 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -6864,11 +6991,11 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  double val5 ;
+  int val5 ;
   int ecode5 = 0 ;
   double val6 ;
   int ecode6 = 0 ;
-  int val7 ;
+  double val7 ;
   int ecode7 = 0 ;
   int val8 ;
   int ecode8 = 0 ;
@@ -6916,21 +7043,21 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcRayCaster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< double >(val5);
+  arg5 = static_cast< int >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcRayCaster" "', argument " "6"" of type '" "double""'");
   } 
   arg6 = static_cast< double >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
   if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "double""'");
   } 
-  arg7 = static_cast< int >(val7);
+  arg7 = static_cast< double >(val7);
   ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
   if (!SWIG_IsOK(ecode8)) {
     SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_IgcRayCaster" "', argument " "8"" of type '" "int""'");
@@ -6955,15 +7082,15 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_2(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
-  double arg5 ;
+  int arg5 ;
   double arg6 ;
-  int arg7 ;
+  double arg7 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
@@ -6974,11 +7101,11 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  double val5 ;
+  int val5 ;
   int ecode5 = 0 ;
   double val6 ;
   int ecode6 = 0 ;
-  int val7 ;
+  double val7 ;
   int ecode7 = 0 ;
   GeoCal::IgcRayCaster *result = 0 ;
   
@@ -7024,21 +7151,21 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_2(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcRayCaster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< double >(val5);
+  arg5 = static_cast< int >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcRayCaster" "', argument " "6"" of type '" "double""'");
   } 
   arg6 = static_cast< double >(val6);
-  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  ecode7 = SWIG_AsVal_double(swig_obj[6], &val7);
   if (!SWIG_IsOK(ecode7)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_IgcRayCaster" "', argument " "7"" of type '" "double""'");
   } 
-  arg7 = static_cast< int >(val7);
+  arg7 = static_cast< double >(val7);
   {
     try {
       result = (GeoCal::IgcRayCaster *)new GeoCal::IgcRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7);
@@ -7058,13 +7185,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_3(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
-  double arg5 ;
+  int arg5 ;
   double arg6 ;
   void *argp1 ;
   int res1 = 0 ;
@@ -7076,7 +7203,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_3(PyObject *SWIGUNUSEDPARM(sel
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  double val5 ;
+  int val5 ;
   int ecode5 = 0 ;
   double val6 ;
   int ecode6 = 0 ;
@@ -7124,11 +7251,11 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_3(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcRayCaster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< double >(val5);
+  arg5 = static_cast< int >(val5);
   ecode6 = SWIG_AsVal_double(swig_obj[5], &val6);
   if (!SWIG_IsOK(ecode6)) {
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_IgcRayCaster" "', argument " "6"" of type '" "double""'");
@@ -7153,13 +7280,13 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_4(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
-  double arg5 ;
+  int arg5 ;
   void *argp1 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection > tempshared1 ;
@@ -7170,7 +7297,7 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_4(PyObject *SWIGUNUSEDPARM(sel
   int ecode3 = 0 ;
   int val4 ;
   int ecode4 = 0 ;
-  double val5 ;
+  int val5 ;
   int ecode5 = 0 ;
   GeoCal::IgcRayCaster *result = 0 ;
   
@@ -7216,11 +7343,11 @@ SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_4(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_IgcRayCaster" "', argument " "4"" of type '" "int""'");
   } 
   arg4 = static_cast< int >(val4);
-  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "double""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "new_IgcRayCaster" "', argument " "5"" of type '" "int""'");
   } 
-  arg5 = static_cast< double >(val5);
+  arg5 = static_cast< int >(val5);
   {
     try {
       result = (GeoCal::IgcRayCaster *)new GeoCal::IgcRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3,arg4,arg5);
@@ -7240,7 +7367,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_5(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
@@ -7319,7 +7446,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_6(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
@@ -7390,7 +7517,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_7(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   int arg2 ;
@@ -7453,7 +7580,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_8(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_IgcRayCaster__SWIG_9(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   boost::shared_ptr< GeoCal::ImageGroundConnection > *arg1 = 0 ;
   void *argp1 ;
@@ -7510,48 +7637,52 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_IgcRayCaster(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[10] = {
+  PyObject *argv[11] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcRayCaster",0,9,argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args,"new_IgcRayCaster",0,10,argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    return _wrap_new_IgcRayCaster__SWIG_8(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_9(self, argc, argv);
   }
   if (argc == 2) {
-    return _wrap_new_IgcRayCaster__SWIG_7(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_8(self, argc, argv);
   }
   if (argc == 3) {
-    return _wrap_new_IgcRayCaster__SWIG_6(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_7(self, argc, argv);
   }
   if (argc == 4) {
-    return _wrap_new_IgcRayCaster__SWIG_5(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_6(self, argc, argv);
   }
   if (argc == 5) {
-    return _wrap_new_IgcRayCaster__SWIG_4(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_5(self, argc, argv);
   }
   if (argc == 6) {
-    return _wrap_new_IgcRayCaster__SWIG_3(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_4(self, argc, argv);
   }
   if (argc == 7) {
-    return _wrap_new_IgcRayCaster__SWIG_2(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_3(self, argc, argv);
   }
   if (argc == 8) {
-    return _wrap_new_IgcRayCaster__SWIG_1(self, argc, argv);
+    return _wrap_new_IgcRayCaster__SWIG_2(self, argc, argv);
   }
   if (argc == 9) {
+    return _wrap_new_IgcRayCaster__SWIG_1(self, argc, argv);
+  }
+  if (argc == 10) {
     return _wrap_new_IgcRayCaster__SWIG_0(self, argc, argv);
   }
   
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_IgcRayCaster'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,double,double,int,int,bool)\n"
-    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,double,double,int,int)\n"
-    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,double,double,int)\n"
-    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,double,double)\n"
-    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,double)\n"
+    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,int,double,double,int,int,bool)\n"
+    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,int,double,double,int,int)\n"
+    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,int,double,double,int)\n"
+    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,int,double,double)\n"
+    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,int,double)\n"
+    "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int,int)\n"
     "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int,int)\n"
     "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int,int)\n"
     "    GeoCal::IgcRayCaster::IgcRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const &,int)\n"
@@ -8020,6 +8151,49 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_IgcRayCaster__v_number_line_framelet(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::IgcRayCaster *arg1 = (GeoCal::IgcRayCaster *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::IgcRayCaster const > tempshared1 ;
+  boost::shared_ptr< GeoCal::IgcRayCaster const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcRayCaster_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IgcRayCaster__v_number_line_framelet" "', argument " "1"" of type '" "GeoCal::IgcRayCaster const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IgcRayCaster > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::IgcRayCaster > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcRayCaster * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::IgcRayCaster > * >(argp1);
+      arg1 = const_cast< GeoCal::IgcRayCaster * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (int)((GeoCal::IgcRayCaster const *)arg1)->number_line_framelet();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_IgcRayCaster__v_start_sample(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IgcRayCaster *arg1 = (GeoCal::IgcRayCaster *) 0 ;
@@ -8182,9 +8356,10 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"new_IgcRayCaster", _wrap_new_IgcRayCaster, METH_VARARGS, (char *)"\n"
 		"\n"
 		"IgcRayCaster::IgcRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, int\n"
-		"Start_line=0, int Number_line=-1, int Number_integration_step=2,\n"
-		"double Resolution=100, double Max_height=10e3, int Start_sample=0, int\n"
-		"Number_sample=-1, bool Include_path_distance=false)\n"
+		"Number_line_framelet=1, int Start_line=0, int Number_line=-1, int\n"
+		"Number_integration_step=2, double Resolution=100, double\n"
+		"Max_height=10e3, int Start_sample=0, int Number_sample=-1, bool\n"
+		"Include_path_distance=false)\n"
 		"Constructor.\n"
 		"\n"
 		"You can pass the starting line to use and the number of lines to\n"
@@ -8226,6 +8401,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"void GeoCal::IgcRayCaster::include_path_distance(bool v)\n"
 		"Set the value of the include_path_distance flag. \n"
+		""},
+	 { (char *)"IgcRayCaster__v_number_line_framelet", (PyCFunction)_wrap_IgcRayCaster__v_number_line_framelet, METH_O, (char *)"\n"
+		"\n"
+		"int GeoCal::IgcRayCaster::number_line_framelet() const\n"
+		"\n"
 		""},
 	 { (char *)"IgcRayCaster__v_start_sample", (PyCFunction)_wrap_IgcRayCaster__v_start_sample, METH_O, (char *)"\n"
 		"\n"

@@ -109,6 +109,7 @@ def lro_wac_camera(band=3, mode="COLOR"):
     band. By convention the first two bands are the UV, the next 5 are
     the visible'''
     if(band in (1, 2)):
+        raise RuntimeError("We don't support UV1 or UV2 yet. Use channels 3-7")
         # LRO_LROCWAC_UV_FILTER_1
         # LRO_LROCWAC_UV_FILTER_2
         bname = f"INS-8564{band}"

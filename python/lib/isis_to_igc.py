@@ -187,17 +187,7 @@ class LroWacIsisToIgc:
         if(idata["InstrumentId"] != "WAC-VIS"):
             return (False, None)
         klist.load_kernel()
-        sline = 0
-        nline = isis_img.number_line
-        if(subset is not None):
-            sline = subset[0]
-            nline = subset[2]
-            img = SubRasterImage(isis_img, subset[0], subset[1],
-                                 subset[2], subset[3])
-        else:
-            img = isis_img
-        if(rad_scale is not None):
-            img = ScaleImage(img, rad_scale)
+
         # Map band to the filter type
         if(band == 1):
             frame = "LRO_LROCWAC_UV_FILTER_1"
@@ -222,7 +212,20 @@ class LroWacIsisToIgc:
             framelet_size = 14
         else:
             raise RuntimeError(f"Unknown band number {band}. Should be 1-7")
-            
+        sline = 0
+        nline = isis_img.number_line
+        if(subset is not None):
+            sline = subset[0]
+            nline = subset[2]
+            # Adjust so this a even multiple of the framelet_size
+            sline = int(round(sline / framelet_size)) * framelet_size
+            nline = int(round(nline / framelet_size)) * framelet_size
+            img = SubRasterImage(isis_img, sline, 0,
+                                 nline, isis_img.number_sample)
+        else:
+            img = isis_img
+        if(rad_scale is not None):
+            img = ScaleImage(img, rad_scale)
         # Note IsisIgc uses LT+S. this is actually *wrong*, see the
         # description of that in IsisIgc. We have this code in place
         # so we can duplicate IsisIgc (e.g., make sure everything else
@@ -244,6 +247,9 @@ class LroWacIsisToIgc:
         tspace = float(idata["InterframeDelay"]["value"]) * 1e-3
         # This is what ISIS does. This is probably sensible
         tstart += edur / 2.0
+        # Handle subsetting
+        tstart += sline / framelet_size * tspace
+        tend = tstart + nline / framelet_size * tspace
         tt = ConstantSpacingFrameletTimeTable(tstart, tend, framelet_size,
                                               tspace)
         dem = PlanetSimpleDem(PlanetConstant.MOON_NAIF_CODE)

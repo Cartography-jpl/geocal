@@ -81,6 +81,9 @@ Options:
        full ImageGroundConnection calculation creates. Output is a PDF
        file.
 
+  --radiance-scale=d
+       Scale to apply to raw data when importing it.
+
   --subset=f
        Subset the image. This should be the start line, start sample, number
        line and number sample.
@@ -103,6 +106,7 @@ long_name_to_vicar = { "pds_or_isis_image" : "pdsimg",
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
+keywords = {}
 subset = None
 if args.subset:
     if(args.subset == -999):
@@ -111,22 +115,27 @@ if args.subset:
         subset = args.subset
     else:        
         subset = eval(args.subset)
-
+    keywords['subset'] = subset
 band=None        
 if(args.band and args.band >= 0):
     band = args.band
+    keywords['band'] = band
+if(args.full_igc):
+    keywords['igc_out_fname'] = args.full_igc
+if(args.radiance_scale):
+    keywords['rad_scale'] = args.radiance_scale
+    
 geocal.pds_to_isis(args.pds_or_isis_image, f"{args.output_base_name}.cub",
                    pds_fname2 = args.pds_image_2)
+
 if(args.rsm): 
     igc, rsm = geocal.isis_to_igc(f"{args.output_base_name}.cub", rsm=True,
                        min_height=args.min_height, max_height=args.max_height,
-                       igc_out_fname=args.full_igc, subset=subset,
-                       band=args.band)
+                       **keywords)
 else:
     rsm = None
     igc = geocal.isis_to_igc(f"{args.output_base_name}.cub", glas_gfm=True,
-                             subset=subset, band=args.band,
-                             igc_out_fname=args.full_igc)
+                             **keywords)
     
 f = geocal.VicarRasterImage(f"{args.output_base_name}.img", "HALF",
                             igc.number_line, igc.number_sample)

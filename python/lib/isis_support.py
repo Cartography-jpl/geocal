@@ -168,17 +168,10 @@ class LroPdsToIsis:
         subprocess.run([f"{os.environ['ISISROOT']}/bin/lrowac2isis",
                         f"from={pds_fname}", f"to={isis_fname}"],
                        check=True)
-        # Not sure exactly how to handle this. lrowac2isis produces 4
-        # output files, not just one. For now leave as 4 and we'll
-        # possibly figure out how to combine this. We return
-        # create a symbolic link for one of the files, just so we
-        # have a pointer to is.
         t = os.path.splitext(isis_fname)[0]
-        try:
-            os.remove(isis_fname)
-        except:
-            pass
-        os.symlink(f"{t}.vis.even.cub", isis_fname)
+        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                        f"from={t}.vis.even.cub", "web=true"],
+                       check=True, stdout=subprocess.DEVNULL)
         # For now, run spiceinit on the other cubes. Not sure if
         # we need this long term, but do for now
         subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
@@ -190,6 +183,35 @@ class LroPdsToIsis:
         subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
                         f"from={t}.uv.odd.cub", "web=true"],
                        check=True, stdout=subprocess.DEVNULL)
+        # Apply cal (should we be doing this?)
+        if False:
+            subprocess.run([f"{os.environ['ISISROOT']}/bin/lrowaccal",
+                            f"from={t}.uv.odd.cub", f"to={t}.uv.odd.cal.cub"],
+                           check=True, stdout=subprocess.DEVNULL)
+            subprocess.run([f"{os.environ['ISISROOT']}/bin/lrowaccal",
+                            f"from={t}.uv.even.cub", f"to={t}.uv.even.cal.cub"],
+                           check=True, stdout=subprocess.DEVNULL)
+            subprocess.run([f"{os.environ['ISISROOT']}/bin/lrowaccal",
+                            f"from={t}.vis.odd.cub", f"to={t}.vis.odd.cal.cub"],
+                           check=True, stdout=subprocess.DEVNULL)
+            subprocess.run([f"{os.environ['ISISROOT']}/bin/lrowaccal",
+                            f"from={t}.vis.even.cub",
+                            f"to={t}.vis.even.cal.cub"],
+                           check=True, stdout=subprocess.DEVNULL)
+                       
+        # Not sure exactly how to handle this. lrowac2isis produces 4
+        # output files, not just one. For now leave as 4 and we'll
+        # possibly figure out how to combine this. We return
+        # create a symbolic link for one of the files, just so we
+        # have a pointer to is.
+        try:
+            os.remove(isis_fname)
+        except:
+            pass
+        if False:
+            os.symlink(f"{t}.vis.even.cal.cub", isis_fname)
+        else:
+            os.symlink(f"{t}.vis.even.cub", isis_fname)
 
     def pds_edr_nac_to_isis(self, fin, pds_fname, isis_fname):
         subprocess.run([f"{os.environ['ISISROOT']}/bin/lronac2isis",

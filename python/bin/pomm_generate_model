@@ -146,6 +146,9 @@ if(rsm):
     #f.set_rsm(r, geocal.VicarFile.RSM_XML_FILE)
     f.set_rsm(rsm, geocal.VicarFile.RSM_XML_FILE)
 else:
+    # We can't serialize our image, so just drop before writing out the glas
+    # model
+    igc.image = None
     f.set_igc_glas_gfm(igc)
 f.close()
     

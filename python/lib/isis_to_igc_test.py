@@ -3,7 +3,7 @@ from .isis_support import pds_to_isis
 from .isis_to_igc import *
 from .isis_igc import IsisIgc
 from .glas_gfm import *
-from geocal_swig import ImageCoordinate, SubCamera
+from geocal_swig import ImageCoordinate, SubCamera, VicarRasterImage, copy_raster
 from .sqlite_shelf import write_shelve
 import pandas as pd
 import pynitf
@@ -171,6 +171,13 @@ def test_lunar_wac_to_igc(isolated_dir):
     if False:
         igc = isis_to_igc(fname, band=3)
         write_shelve("igc.xml", igc)
+    # Try writing raster data
+    if False:
+        igc = isis_to_igc(fname, band=3, radiance_scale=None)
+        f = VicarRasterImage(f"wac.img", "DOUB",
+                             igc.number_line, igc.number_sample)
+        copy_raster(igc.image, f, True, -1, igc.number_sample)
+        return
     check_igc(fname, band=3, check_glas_rsm=False, check_time=False,
               check_camera=False, check_isis=True, check_spice=False,
               check_glas = True, check_create_nitf = True)

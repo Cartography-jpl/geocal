@@ -5,7 +5,7 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          Ipi, IpiImageGroundConnection, Time,
                          PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
                          ScaleImage, NoVelocityAberration, SubCamera,
-                         SimpleCamera)
+                         SimpleCamera, CalcRaster)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera, lro_wac_camera
@@ -13,6 +13,8 @@ from .mars_rsm import rsm_hirise, rsm_context
 from .sqlite_shelf import write_shelve
 from .spice_igc import SpiceIgc
 import json
+import re
+import math
 
 class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     '''Handle set for pds to isis.
@@ -143,6 +145,33 @@ class CtxIsisToIgc:
 
 IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
 
+class LroCombineEvenOdd(CalcRaster):
+    '''The ISIS data is separated into even and odd data. I believe this
+    is because the original data is collected that way, and at this stage
+    of processing the data hasn't been combined yet. This simple class
+    just puts this two together.'''
+    def __init__(self, f_even, f_odd, framelet_size):
+        self.f_even = f_even
+        self.f_odd = f_odd
+        self.framelet_size = framelet_size
+        super().__init__(f_even.number_line, f_even.number_sample)
+        
+    def calc(self, lstart, sstart):
+        ln = lstart
+        while(ln < lstart + self.data.shape[0]):
+            frameindex = math.floor(ln / self.framelet_size)
+            # The first framelet is "odd" even though we count this
+            # a framelet 0. I suppose this is because ISIS uses counting
+            # starting at 1
+            even = (frameindex % 2 == 1)
+            f_to_read = self.f_even if even else self.f_odd
+            lend = (frameindex+1) * self.framelet_size
+            if(lend > lstart + self.data.shape[0]):
+                lend = lstart + self.data.shape[0]
+            self.data[(ln - lstart):(lend-lstart),:] = f_to_read.read_double(ln,sstart, lend-ln, self.data.shape[1])
+            self.data[(ln - lstart):(lend-lstart),:][self.data[(ln - lstart):(lend-lstart),:] < 0] = 0
+            ln = lend
+            
 class LroWacIsisToIgc:
     def igc_to_glas(self, igc_r, focal_length):
         '''Convert IGC to a GLAS model.'''
@@ -188,30 +217,50 @@ class LroWacIsisToIgc:
             return (False, None)
         klist.load_kernel()
 
+        # Get basename for file
+        bname = re.sub(r'(\.vis)?(\.uv)?(\.even)?(\.cal)?\.cub$',"",
+                       isis_img.file_names[0])
+        
         # Map band to the filter type
         if(band == 1):
             frame = "LRO_LROCWAC_UV_FILTER_1"
             framelet_size = 16
+            f_even = GdalRasterImage(bname + ".uv.even.cub", 1)
+            f_odd = GdalRasterImage(bname + ".uv.odd.cub", 1)
         elif(band == 2):
             frame = "LRO_LROCWAC_UV_FILTER_2"
             framelet_size = 16
+            f_even = GdalRasterImage(bname + ".uv.even.cub", 2)
+            f_odd = GdalRasterImage(bname + ".uv.odd.cub", 2)
         elif(band == 3):
             frame = "LRO_LROCWAC_VIS_FILTER_1"
             framelet_size = 14
+            f_even = GdalRasterImage(bname + ".vis.even.cub", 1)
+            f_odd = GdalRasterImage(bname + ".vis.odd.cub", 1)
         elif(band == 4):
             frame = "LRO_LROCWAC_VIS_FILTER_2"
             framelet_size = 14
+            f_even = GdalRasterImage(bname + ".vis.even.cub", 2)
+            f_odd = GdalRasterImage(bname + ".vis.odd.cub", 2)
         elif(band == 5):
             frame = "LRO_LROCWAC_VIS_FILTER_3"
             framelet_size = 14
+            f_even = GdalRasterImage(bname + ".vis.even.cub", 3)
+            f_odd = GdalRasterImage(bname + ".vis.odd.cub", 3)
         elif(band == 6):
             frame = "LRO_LROCWAC_VIS_FILTER_4"
             framelet_size = 14
+            f_even = GdalRasterImage(bname + ".vis.even.cub", 4)
+            f_odd = GdalRasterImage(bname + ".vis.odd.cub", 4)
         elif(band == 7):
             frame = "LRO_LROCWAC_VIS_FILTER_5"
             framelet_size = 14
+            f_even = GdalRasterImage(bname + ".vis.even.cub", 5)
+            f_odd = GdalRasterImage(bname + ".vis.odd.cub", 5)
         else:
             raise RuntimeError(f"Unknown band number {band}. Should be 1-7")
+
+        isis_img = LroCombineEvenOdd(f_even, f_odd, framelet_size)
         sline = 0
         nline = isis_img.number_line
         if(subset is not None):
@@ -265,7 +314,12 @@ class LroWacIsisToIgc:
         if(match_isis):
             igc.velocity_aberration = NoVelocityAberration()
         if(igc_out_fname is not None):
+            # Can't write out the LroCombineEvenOdd, so just chop off
+            # before saving
+            img = igc.image
+            igc.image = None
             write_shelve(igc_out_fname, igc)
+            igc.image = img
         if(glas_gfm):
             igc = self.igc_to_glas(igc, cam.focal_length)
         if(not rsm):

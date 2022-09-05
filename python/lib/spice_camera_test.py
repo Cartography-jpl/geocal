@@ -27,6 +27,7 @@ def test_ctx1_camera(mars_kernel):
     print(ctx_camera())
 
 @require_spice
+@require_isis
 def test_wac_camera():
     klist = SpiceKernelList(["$lro/kernels/ik/lro_lroc_v18.ti",
                              "$lro/kernels/iak/lro_instrumentAddendum_v04.ti"])

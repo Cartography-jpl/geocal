@@ -4,8 +4,12 @@
 # somehow at some point.
 
 from geocal_swig import *
+from .sqlite_shelf import read_shelve
 import numpy as np
+import os
 
+isis_camera_dir = os.path.abspath(os.path.dirname(__file__)) + "/data/isis_camera/"
+                                   
 def hrsc_camera():
     '''Return the HRSC camera. Note you should have loaded the instrument
     kernel already (e.g., os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker").
@@ -104,6 +108,19 @@ def ctx_camera(start_sample=0,nsamp=None):
         ctx_cam = SubCamera(ctx_cam, 0, start_sample, 1, nsamp)
     return ctx_cam
 
+def lro_nac_camera(typ="left"):
+    '''Return the LRO NAC camera. Type should be "left" or "right".'''
+    # Short cut for now, we just grab a file saved from a sample IsisIgc.
+    # TODO This should get replaced with reading the spice kernels, so
+    # we get any update from these files rather than just using a frozen
+    # camera model. 
+    if(typ == "left"):
+        return read_shelve(isis_camera_dir + "isis_lnac_cam.bin")
+    elif(typ == "right"):
+        return read_shelve(isis_camera_dir + "isis_rnac_cam.bin")
+    else:
+        raise RuntimeError("Typ should be 'right' or 'left'")
+                                  
 def lro_wac_camera(band=3, mode="COLOR"):
     '''Return the LRO WAC camera. Note that this varies depending on the
     band. By convention the first two bands are the UV, the next 5 are
@@ -158,4 +175,5 @@ def lro_wac_camera(band=3, mode="COLOR"):
 
 
 
-__all__ = ["hrsc_camera", "ctx_camera", "hirise_camera", "lro_wac_camera"]
+__all__ = ["hrsc_camera", "ctx_camera", "hirise_camera", "lro_wac_camera",
+           "lro_nac_camera"]

@@ -43,9 +43,9 @@ class IsisIgc(ImageGroundConnection):
         self.fname = os.path.abspath(isis_fname)
         self.f = GdalRasterImage(self.fname)
         self.d = json.loads(self.f.metadata_list('json:ISIS3')[0])
-        if(self.d['IsisCube']['Instrument']['TargetName'] == "Moon"):
+        if(self.d['IsisCube']['Instrument']['TargetName'].lower() == "moon"):
             self._naif_code = PlanetConstant.MOON_NAIF_CODE
-        elif(self.d['IsisCube']['Instrument']['TargetName'] == "Mars"):
+        elif(self.d['IsisCube']['Instrument']['TargetName'].lower() == "mars"):
             self._naif_code = PlanetConstant.MARS_NAIF_CODE
         dem = PlanetSimpleDem(self._naif_code)
         super().__init__(dem, self.f, None, "ISIS IGC")

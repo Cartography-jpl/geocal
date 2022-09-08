@@ -665,6 +665,8 @@ SWIG
 etcafidspythondir
 installafidspythondir
 afidspythonvdevdir
+geocalpkgpythondataisiscameradir
+geocalpkgpythondatadir
 geocalpkgpythondir
 swigincdir
 geocalswigincdir
@@ -26646,6 +26648,10 @@ geocalswigincdir=\${prefix}/share/geocal/swig
 swigincdir=\${prefix}/share/geocal/swig
 
 geocalpkgpythondir=\${prefix}/\${pythondir}/geocal
+
+geocalpkgpythondatadir=\${prefix}/\${pythondir}/geocal/data
+
+geocalpkgpythondataisiscameradir=\${prefix}/\${pythondir}/geocal/data/isis_camera
 
 afidspythonvdevdir=\${prefix}/afids/vdev
 

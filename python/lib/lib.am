@@ -67,6 +67,8 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/tie_point_collect_picmtch.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/warp_image.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/linear_gradient_bad_pixel_detection.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/version.py
+geocalpkgpythondataisiscamera_DATA= @srcpythonlib@/data/isis_camera/isis_lnac_cam.bin
+geocalpkgpythondataisiscamera_DATA+= @srcpythonlib@/data/isis_camera/isis_rnac_cam.bin
 if HAVE_VICAR_GDALPLUGIN
 else
 # Used to short circuit tests that would otherwise run.

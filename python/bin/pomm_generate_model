@@ -99,8 +99,9 @@ long_name_to_vicar = { "pds_or_isis_image" : "pdsimg",
                        "band" : "band",
                        "min_height" : "minh",
                        "max_height" : "maxh",
-                       "subset" : "subset",
                        "plot_cross_section" : "plot",
+                       "radiance_scale" : "rscale",
+                       "subset" : "subset",
                        }
 
 args = geocal.docopt_simple(usage, version=version,
@@ -122,7 +123,7 @@ if(args.band and args.band >= 0):
     keywords['band'] = band
 if(args.full_igc):
     keywords['igc_out_fname'] = args.full_igc
-if(args.radiance_scale):
+if(args.radiance_scale and args.radiance_scale > 0):
     keywords['rad_scale'] = args.radiance_scale
     
 geocal.pds_to_isis(args.pds_or_isis_image, f"{args.output_base_name}.cub",

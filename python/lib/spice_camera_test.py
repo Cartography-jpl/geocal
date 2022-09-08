@@ -26,6 +26,24 @@ def test_hrsc_camera(mars_kernel):
 def test_ctx1_camera(mars_kernel):
     print(ctx_camera())
 
+
+@skip    
+@require_spice
+@require_isis
+def test_create_nac():
+    from .isis_support import pds_to_isis
+    from .isis_igc import IsisIgc
+    # We can perhaps have a better way to handle this, perhaps directly
+    # working with ISIS. But for now, just save the file
+    lcam_nac_fname = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549139LE.IMG"
+    rcam_nac_fname = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549139RE.IMG"
+    pds_to_isis(lcam_nac_fname, "lnac.cub")
+    pds_to_isis(rcam_nac_fname, "rnac.cub")
+    lnac_cam = IsisIgc("lnac.cub").glas_cam_model(699.62)
+    rnac_cam = IsisIgc("rnac.cub").glas_cam_model(701.57)
+    write_shelve(unit_test_data + "isis_lnac_cam.bin", lnac_cam)
+    write_shelve(unit_test_data + "isis_rnac_cam.bin", rnac_cam)
+    
 @require_spice
 @require_isis
 def test_wac_camera():
@@ -57,4 +75,17 @@ def test_wac_camera():
     
     # Add check for other bands, include UV. Add checks for other modes
     # like BW
+
+@require_spice
+@require_isis
+def test_nac_camera():
+    klist = SpiceKernelList(["$lro/kernels/ik/lro_lroc_v18.ti",
+                             "$lro/kernels/iak/lro_instrumentAddendum_v04.ti"])
+    klist.load_kernel()
+    lcam = lro_nac_camera("left")
+    rcam = lro_nac_camera("right")
+    isis_lcam = read_shelve(unit_test_data + "isis_lnac_cam.bin")
+    isis_rcam = read_shelve(unit_test_data + "isis_rnac_cam.bin")
+    print("lcam: ", isis_lcam.compare_camera(lcam,0))
+    print("rcam: ", isis_rcam.compare_camera(rcam,0))
     

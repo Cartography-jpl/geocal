@@ -1,18 +1,21 @@
 #include <iostream>
-#include <isis/LroWideAngleCamera.h>
-#include <isis/PushFrameCameraGroundMap.h>
-#include <isis/PushFrameCameraDetectorMap.h>
+#include <isis/LroNarrowAngleCamera.h>
+#include <isis/LineScanCameraGroundMap.h>
+#include <isis/LineScanCameraDetectorMap.h>
 #include <isis/CameraFocalPlaneMap.h>
 using namespace Isis;
 
 int main(int Argc, char** Argv)
 {
   if(Argc != 5) {
-    std::cerr << "Usage: isis_camera <cube file> <band number> <line> <sample>\n";
+    std::cerr << "Usage: isis_camera <cube file> <band number> <line> <sample>\n"
+	      << "Note that the line and sample number is off 0.5 pixels from\n"
+	      << "the geocal convention. So geocal coordiante (0,0) is \n"
+	      << "(0.5.0.5) for ISIS\n";
     exit(1);
   }
   Cube cube(Argv[1]);
-  LroWideAngleCamera cam(cube);
+  LroNarrowAngleCamera cam(cube);
   cam.SetBand(atoi(Argv[2]));
   std::cout << "CkFrameId: " << cam.CkFrameId() << "\n"
 	    << "CkReferenceId: " << cam.CkReferenceId() << "\n"

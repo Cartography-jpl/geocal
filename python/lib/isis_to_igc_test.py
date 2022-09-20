@@ -59,6 +59,9 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
             for smp in range (0,igc.number_sample,100):
                 ic = ImageCoordinate(ln, smp)
                 #print(ic)
+                # Skip for now, doesn't work the WAC and NAC, which
+                # is probably an issue. We'll want to come back to
+                # this
                 #assert distance(igc_match_isis.cf_look_vector_pos(ic),
                 #                igc_isis.cf_look_vector_pos(ic)) < 10
                 gc = igc_isis.ground_coordinate(ic)
@@ -115,16 +118,16 @@ def check_igc(fname, check_time=False, check_camera=False,check_isis=False,
         print(pd.DataFrame(pxdist).describe())
     if(check_create_nitf):
         igc_glas = isis_to_igc(fname, glas_gfm=True, **keyword)
-    f = pynitf.NitfFile()
-    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
-    for i in range(9):
-        for j in range(10):
-            img[0, i,j] = i * 10 + j
-    f.image_segment.append(pynitf.NitfImageSegment(img))
-    f.image_segment[0].create_glas_gfm(igc_glas)
-    f.write("gfm_test.ntf")
-    f2 = NitfFile("gfm_test.ntf")
-    print(f2.image_segment[0].glas_gfm)
+        f = pynitf.NitfFile()
+        img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idlvl=2)
+        for i in range(9):
+            for j in range(10):
+                img[0, i,j] = i * 10 + j
+        f.image_segment.append(pynitf.NitfImageSegment(img))
+        f.image_segment[0].create_glas_gfm(igc_glas)
+        f.write("gfm_test.ntf")
+        f2 = NitfFile("gfm_test.ntf")
+        print(f2.image_segment[0].glas_gfm)
         
 @long_test
 @require_isis
@@ -181,6 +184,41 @@ def test_lunar_wac_to_igc(isolated_dir):
     check_igc(fname, band=3, check_glas_rsm=False, check_time=False,
               check_camera=False, check_isis=True, check_spice=False,
               check_glas = True, check_create_nitf = True)
-    
+
+@long_test
+@require_isis
+def test_lunar_nac_to_igc(isolated_dir):
+    if True:
+        # While developing, skip import by using hard coded path
+        lfname = "/home/smyth/Local/geocal-repo/python/lnac.cub"
+        rfname = "/home/smyth/Local/geocal-repo/python/rnac.cub"
+    else:
+        lcam_nac_fname = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549139LE.IMG"
+        rcam_nac_fname = "/raid28/tllogan/Moon_Luna_Data/WAC/mixed_WAC_NAC_edr_cdr/M1124549139RE.IMG"
+        pds_to_isis(lcam_nac_fname, "lnac.cub")
+        pds_to_isis(rcam_nac_fname, "rnac.cub")
+        lfname = "lnac.cub"
+        rfname = "rnac.cub"
+    for fname in (lfname, rfname):
+        check_igc(fname, check_glas_rsm=False, check_time=False,
+                  check_camera=False, check_isis=True, check_spice=False,
+                  check_glas = False, check_create_nitf = False)
+
+@long_test
+@require_isis
+def test_lunar_nac_to_igc2(isolated_dir):
+    '''Second NAC test were the sampling factor is 1 instead of 2'''
+    if True:
+        # While developing, skip import by using hard coded path
+        lfname = "/home/smyth/Local/geocal-repo/python/lnac2.cub"
+    else:
+        lcam_nac_fname = "/raid28/tllogan/Moon_Luna_Data/NAC_pilot_PDS/M1192065066LE.IMG"
+        pds_to_isis(lcam_nac_fname, "lnac2.cub")
+        lfname = "lnac2.cub"
+    for fname in (lfname, ):
+        check_igc(fname, check_glas_rsm=False, check_time=False,
+                  check_camera=False, check_isis=True, check_spice=False,
+                  check_glas = False, check_create_nitf = False)
+        
     
     

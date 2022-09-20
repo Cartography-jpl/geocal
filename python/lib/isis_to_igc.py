@@ -5,10 +5,11 @@ from geocal_swig import (GdalRasterImage, SpiceKernelList, SpicePlanetOrbit,
                          Ipi, IpiImageGroundConnection, Time,
                          PosCsephb, AttCsattb, OrbitDes, GlasGfmCamera,
                          ScaleImage, NoVelocityAberration, SubCamera,
-                         SimpleCamera, CalcRaster)
+                         SimpleCamera, CalcRaster, SpiceHelper)
 from .isis_support import read_kernel_from_isis
 from .priority_handle_set import GeoCalPriorityHandleSet
-from .spice_camera import ctx_camera, hrsc_camera, hirise_camera, lro_wac_camera
+from .spice_camera import (ctx_camera, hrsc_camera, hirise_camera,
+                           lro_wac_camera, lro_nac_camera)
 from .mars_rsm import rsm_hirise, rsm_context
 from .sqlite_shelf import write_shelve
 from .spice_igc import SpiceIgc
@@ -104,6 +105,7 @@ class CtxIsisToIgc:
         if(idata["LineExposureDuration"]["unit"] != "MSEC"):
             raise RuntimeError(f"Not sure how to handle LineExposureDuration units of {idata['LineExposureDuration']['unit']}")
         tspace = float(idata["LineExposureDuration"]["value"]) * 1e-3
+        tspace *= int(idata['SpatialSumming'])
         if(subset is not None):
             tstart += sline * tspace
         # The data can be averaged on board. I don't think this would be
@@ -328,6 +330,122 @@ class LroWacIsisToIgc:
             raise RuntimeError("We don't support RSM for LRO WAC")
 
 IsisToIgcHandleSet.add_default_handle(LroWacIsisToIgc())
+
+class LroNacIsisToIgc:
+    def igc_to_glas(self, igc_r, focal_length):
+        '''Convert IGC to a GLAS model.'''
+        tspace = igc_r.ipi.time_table.time_space
+        porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         PosCsephb.LAGRANGE,
+                         PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                         PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+        aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         AttCsattb.LAGRANGE,
+                         AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                         AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+        orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
+        band = 0
+        delta_sample = 16
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, 
+                              delta_sample, "R",
+                              0.65, focal_length*1e-3)
+        ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                    igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
+        igc_g.platform_id = "LRO"
+        igc_g.payload_id = "LRO"
+        igc_g.sensor_id = "NAC"
+        return igc_g
+        
+    def isis_to_igc(self, isis_img, isis_metadata, klist,subset=None,
+                    glas_gfm=False, rsm=False, min_height=-5000,
+                    max_height=-1500, igc_out_fname=None,
+                    match_isis=False, spice_igc=False,
+                    rad_scale=100, **keywords):
+        idata = isis_metadata["IsisCube"]["Instrument"]
+        if(idata["InstrumentId"] == "NACL"):
+            typ = "left"
+            frame = "LRO_LROCNACL"
+            bname = "INS-85600_"
+        elif(idata["InstrumentId"] == "NACR"):
+            typ = "right"
+            frame = "LRO_LROCNACR"
+            bname = "INS-85610_"
+        else:
+            return (False, None)
+        typ = idata["FrameId"].lower()
+        klist.load_kernel()
+
+        sline = 0
+        nline = isis_img.number_line
+        if(subset is not None):
+            sline = subset[0]
+            nline = subset[2]
+            img = SubRasterImage(isis_img, sline, 0,
+                                 nline, isis_img.number_sample)
+        else:
+            img = isis_img
+        if(rad_scale is not None):
+            img = ScaleImage(img, rad_scale)
+        # Note IsisIgc uses LT+S. this is actually *wrong*, see the
+        # description of that in IsisIgc. We have this code in place
+        # so we can duplicate IsisIgc (e.g., make sure everything else
+        # agrees)
+        if(match_isis):
+            # lro_instrumentAddendum_v04.ti has a note about the
+            # LT correction, and I believe it turns this off for ISIS.
+            # For the NAC and WAC, we don't have the LT+S in ISIS
+            orb = SpicePlanetOrbit("LRO", frame, klist,
+                                   PlanetConstant.MOON_NAIF_CODE,
+                                   "LT+S")
+        else:
+            orb = SpicePlanetOrbit("LRO", frame, klist,
+                                   PlanetConstant.MOON_NAIF_CODE)
+        # Time correction stuff found in lro_instrumentAddendum_v04.ti
+        ctoff = SpiceHelper.kernel_data_double(bname + "CONSTANT_TIME_OFFSET")
+        aproll = SpiceHelper.kernel_data_double(bname + "ADDITIONAL_PREROLL")
+        alerr = SpiceHelper.kernel_data_double(bname + "ADDITIVE_LINE_ERROR")
+        mlerr = SpiceHelper.kernel_data_double(bname + "MULTIPLI_LINE_ERROR")
+        tstart = Time.time_sclk(idata["SpacecraftClockPrerollCount"], "LRO")
+        if(idata["LineExposureDuration"]["unit"] != "ms"):
+            raise RuntimeError(f"Not sure how to handle LineExposureDuration units of {idata['LineExposureDuration']['unit']}")
+        tspace = float(idata["LineExposureDuration"]["value"]) * 1e-3
+        tspace *= (1 + mlerr)
+        tspace += alerr
+        tstart += aproll * tspace
+        tstart += ctoff
+        spatial_summing = int(idata['SpatialSumming'])
+        tt = ConstantSpacingTimeTable(tstart,
+                                      tstart + tspace * (img.number_line-1),
+                                      tspace)
+        dem = PlanetSimpleDem(PlanetConstant.MOON_NAIF_CODE)
+        orb_cache = OrbitListCache(orb, tt)
+        cam = lro_nac_camera(typ, spatial_summing=spatial_summing)
+        if(spice_igc):
+            return (True, SpiceIgc(orb, cam, tt, img=img))
+        ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
+        igc = IpiImageGroundConnection(ipi, dem, img)
+        # LT+S already corrects for velocity aberration (LT+S is basically
+        # aberration plus light time - so more accurate). Turn off the
+        # igc calculation if we are matching ISIS
+        if(match_isis):
+            igc.velocity_aberration = NoVelocityAberration()
+        if(igc_out_fname is not None):
+            write_shelve(igc_out_fname, igc)
+        if(glas_gfm):
+            igc = self.igc_to_glas(igc, cam.focal_length)
+        if(not rsm):
+            return (True, igc)
+        else:
+            raise RuntimeError("We don't support RSM for LRO NAC")
+
+IsisToIgcHandleSet.add_default_handle(LroNacIsisToIgc())
 
 class HiriseIsisToIgc:
     '''Note that the HiRISE data is small floating point numbers. We

@@ -41,8 +41,18 @@ def test_create_nac():
     pds_to_isis(rcam_nac_fname, "rnac.cub")
     lnac_cam = IsisIgc("lnac.cub").glas_cam_model(699.62)
     rnac_cam = IsisIgc("rnac.cub").glas_cam_model(701.57)
-    write_shelve(unit_test_data + "isis_lnac_cam.bin", lnac_cam)
-    write_shelve(unit_test_data + "isis_rnac_cam.bin", rnac_cam)
+    # Spatial sampling of 2
+    write_shelve(unit_test_data + "isis_lnac_cam_samp2.bin", lnac_cam)
+    write_shelve(unit_test_data + "isis_rnac_cam_samp2.bin", rnac_cam)
+    lcam_nac_fname = "/bigdata/tllogan30/marsmos/generic/data/a_curtis/M1114881635LE.IMG"
+    rcam_nac_fname = "/bigdata/tllogan30/marsmos/generic/data/a_curtis/M1103931028RE.IMG"
+    pds_to_isis(lcam_nac_fname, "lnac.cub")
+    pds_to_isis(rcam_nac_fname, "rnac.cub")
+    lnac_cam = IsisIgc("lnac.cub").glas_cam_model(699.62)
+    rnac_cam = IsisIgc("rnac.cub").glas_cam_model(701.57)
+    # Spatial sampling of 1
+    write_shelve(unit_test_data + "isis_lnac_cam_samp1.bin", lnac_cam)
+    write_shelve(unit_test_data + "isis_rnac_cam_samp1.bin", rnac_cam)
     
 @require_spice
 @require_isis
@@ -84,8 +94,13 @@ def test_nac_camera():
     klist.load_kernel()
     lcam = lro_nac_camera("left")
     rcam = lro_nac_camera("right")
-    isis_lcam = read_shelve(unit_test_data + "isis_lnac_cam.bin")
-    isis_rcam = read_shelve(unit_test_data + "isis_rnac_cam.bin")
+    isis_lcam = read_shelve(unit_test_data + "isis_lnac_cam_samp1.bin")
+    isis_rcam = read_shelve(unit_test_data + "isis_rnac_cam_samp1.bin")
     print("lcam: ", isis_lcam.compare_camera(lcam,0))
     print("rcam: ", isis_rcam.compare_camera(rcam,0))
-    
+    lcam = lro_nac_camera("left", spatial_summing=2)
+    rcam = lro_nac_camera("right", spatial_summing=2)
+    isis_lcam = read_shelve(unit_test_data + "isis_lnac_cam_samp2.bin")
+    isis_rcam = read_shelve(unit_test_data + "isis_rnac_cam_samp2.bin")
+    print("lcam spatial summing 2: ", isis_lcam.compare_camera(lcam,0))
+    print("rcam spatial summing 2: ", isis_rcam.compare_camera(rcam,0))

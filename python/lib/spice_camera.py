@@ -108,19 +108,64 @@ def ctx_camera(start_sample=0,nsamp=None):
         ctx_cam = SubCamera(ctx_cam, 0, start_sample, 1, nsamp)
     return ctx_cam
 
-def lro_nac_camera(typ="left"):
-    '''Return the LRO NAC camera. Type should be "left" or "right".'''
-    # Short cut for now, we just grab a file saved from a sample IsisIgc.
-    # TODO This should get replaced with reading the spice kernels, so
-    # we get any update from these files rather than just using a frozen
-    # camera model. 
+def lro_nac_camera_from_isis(typ="left"):
+    '''Return the LRO NAC camera. Type should be "left" or "right".
+    This gets this directly from a GLAS model saved from ISIS. This was
+    done initially for testing, we've left this in place for now'''
     if(typ == "left"):
         return read_shelve(isis_camera_dir + "isis_lnac_cam.bin")
     elif(typ == "right"):
         return read_shelve(isis_camera_dir + "isis_rnac_cam.bin")
     else:
         raise RuntimeError("Typ should be 'right' or 'left'")
-                                  
+
+def lro_nac_camera(typ="left", spatial_summing=1):
+    '''Return the LRO NAC camera. Type should be "left" or "right".'''
+    if(typ == "left"):
+        bname = f"INS-85600"
+    elif(typ == "right"):
+        bname = f"INS-85610"
+    else:
+        raise RuntimeError("Typ should be 'right' or 'left'")
+    focal_length = SpiceHelper.kernel_data_double(f"{bname}_FOCAL_LENGTH")
+    pitch = SpiceHelper.kernel_data_double(f"{bname}_PIXEL_PITCH")
+    nsamp = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_SAMPLES")
+    nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
+    ccd_cen = [SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_SAMPLE"),
+               SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_LINE")]
+    od_k = SpiceHelper.kernel_data_array_double(f"{bname}_OD_K");
+    # For who knows what reason, the od_k correction has a different
+    # form than the other spice cameras we have used. We can massage
+    # the values to fit in the original form. The
+    # code is x/(1+k * x^2), which we expand with a taylor series
+    # to the form x * (1 - (k0 + k1 * x^2 + k2 * x^4 + k4 * x^6)).
+    # This isn't exactly the same, but is pretty close
+    od_k = [0, od_k[0], -(od_k[0] ** 2), od_k[0] ** 3]
+    trans_x = SpiceHelper.kernel_data_array_double(f"{bname}_TRANSX")
+    trans_y = SpiceHelper.kernel_data_array_double(f"{bname}_TRANSY")
+    # Extra 0.5 pixel is because the convention in the SPICE kernels is to
+    # have (0,0) be the upper left hand corner of first pixel, while we
+    # use (0,0) for the center of the pixel.
+    ccd_off = [0.5,0]
+    t_off = np.array([trans_x[0],trans_y[0]])
+    t_m = np.array([[trans_x[1], trans_x[2]],[trans_y[1],trans_y[2]]])
+    # We calculate the inverse rather than reading it. Limitations on the
+    # precision gives an inverse that round trips with an error of ~0.01
+    # pixel. Doesn't matter in practice, but it better if our inverse really
+    # reverses our forward calculation
+    tinv_m = np.linalg.inv(t_m)
+    tinv_off = np.dot(tinv_m, -t_off)
+    bin_mode=spatial_summing
+    # Adjust line, which doesn't actually change for spatial_summing
+    # (our bin_mode knob changes both sample and line). We put in an offset
+    # that just cancels this
+    ccd_off[1] = (bin_mode / 2.0 - 0.5)
+    nac_cam = CameraRadialDistortionAndTransform(Quaternion_double(1,0,0,0),
+                                                 od_k,
+        1, nsamp/bin_mode, pitch, pitch, focal_length, bin_mode,
+        ccd_off, ccd_cen, t_off, t_m, tinv_off, tinv_m)
+    return nac_cam
+    
 def lro_wac_camera(band=3, mode="COLOR"):
     '''Return the LRO WAC camera. Note that this varies depending on the
     band. By convention the first two bands are the UV, the next 5 are
@@ -156,6 +201,7 @@ def lro_wac_camera(band=3, mode="COLOR"):
     # use (0,0) for the center of the pixel.
     loff = SpiceHelper.kernel_data_int(f"{bname}_FILTER_OFFSET")
     soff = SpiceHelper.kernel_data_int(f"{bname}_{mode}_SAMPLE_OFFSET")
+    # TODO - should this be +0.5?
     ccd_off = [-0.5+soff,-0.5+loff]
     t_off = np.array([trans_x[0],trans_y[0]])
     t_m = np.array([[trans_x[1], trans_x[2]],[trans_y[1],trans_y[2]]])
@@ -176,4 +222,4 @@ def lro_wac_camera(band=3, mode="COLOR"):
 
 
 __all__ = ["hrsc_camera", "ctx_camera", "hirise_camera", "lro_wac_camera",
-           "lro_nac_camera"]
+           "lro_nac_camera", "lro_nac_camera_from_isis"]

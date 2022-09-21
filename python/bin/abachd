@@ -456,6 +456,7 @@ if(args.diagnostic):
                                dbfile + ":normdiff_and_cvdnorm",
                                "diff_norm.hlf", "pre_norm.hlf"])
     with timing("Accuracy check"):
+        geocal.VicarInterface.cleanup_tae_nesting()
         res = subprocess.check_output(["vicarb", "accck", "pre_reg.hlf",
                                        "post_reg.hlf",  "magnif=1",
                                        "fftsize=128", "outnl=1200", 

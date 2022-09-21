@@ -351,7 +351,7 @@ class LroNacIsisToIgc:
                          AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
         band = 0
-        delta_sample = 16
+        delta_sample = 8
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, 
                               delta_sample, "R",
                               0.65, focal_length*1e-3)

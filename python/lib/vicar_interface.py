@@ -25,6 +25,30 @@ class VicarInterface(object):
         self.timing = True
         self.force_cleanup = False
         self.run_dir_name = None
+
+    @classmethod
+    def cleanup_tae_nesting(cls):
+        '''Note a fairly subtle bug we ran into at one point. taetm
+        uses a few environment variables to communicate through
+        processes. We may have been called through
+        a taetm, but for this run we want a completely detached.  This
+        is important, because 1) there seems to be a race condition of some
+        kind when calling through python a 2) we may run parallel jobs
+        which taetm isn't really set up to run.
+
+        To do this, we just remove the environment variables that taetm
+        uses to communicate. I think PARENT is the only one that matters,
+        but we also remove the PIPE ones just so things are clean'''
+        for k in ("PARENT", "DOWN_PIPE0", "DOWN_PIPE1", "UP_PIPE0",
+                  "UP_PIPE1"):
+            if k in os.environ:
+                del os.environ[k]
+
+    @classmethod
+    def vicarb_call(cls, cmd):
+        '''Call vicarb to run the given command'''
+        cls.cleanup_tae_nesting()
+        subprocess.run(["vicarb", cmd], check=True)
         
     def pre_run(self):
         '''This gets called after the temporary directory has been created
@@ -142,6 +166,11 @@ class VicarInterface(object):
         if(self.debug):
             print("Vicar command:")
             print(self.cmd)
+        self.cleanup_tae_nesting()
+        
+        # Note a fairly subtle bug. taetm uses a few environment variables
+        # to communicate through processes. We may have been called through
+        # a taetm, but for this run we want a completely detached. This is
         d = None
         curdir = None
         successfully_done = False

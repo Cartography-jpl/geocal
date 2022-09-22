@@ -352,7 +352,6 @@ def run_warp_image(fin, fref_res, tpcol, fout, tpgrid_out):
 def accck(fin,fref):
     '''Run accuracy check. We assume images are in the same projection
     (e.g., all geodetic)'''
-    geocal.VicarInterface.cleanup_tae_nesting()
     cmd = ["vicarb", "accck", fin, fref, "wmask=n",
            "fftsize=%d" % args.fftsize,
            "magnif=%f" % args.magmin, "remap=n", "echo=no",

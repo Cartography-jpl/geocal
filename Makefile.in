@@ -3071,8 +3071,7 @@ AM_LDFLAGS =
 #=================================================================
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
-BUILT_SOURCES = complain_if_afids dummy.pdf test_out/vicar_copy.img \
-	$(am__append_18)
+BUILT_SOURCES = dummy.pdf test_out/vicar_copy.img $(am__append_18)
 include_HEADERS = 
 # Test files
 
@@ -15042,15 +15041,21 @@ dist-hook: $(DIST_HOOK)
 # the AFIDS distribution contains a program "sort" that interfers with the
 # unix sort.
 
-complain_if_afids:
-	@if test -n "${AFIDSTOP}"; then \
-          echo "${red}You have sourced setup_afids_env.sh or setup_afids_env.csh.";  \
-          echo "This will cause the build to *fail*, because MIPL has";  \
-          echo "a program called 'sort' that interferes with the unix";  \
-          echo "sort command. You need to restart the build *without*"; \
-          echo "sourcing setup_afids_env.sh or setup_afids_env.csh${default}"; \
-          exit 1; \
-        fi
+# I think we can remove this, now that we have taken vdev out of our path
+# in the afids setup. Go ahead and comment this out, in case we need
+# to revisit this. But we may be able to just remove this after a time
+
+# complain_if_afids:
+# 	@if test -n "${AFIDSTOP}"; then \
+#           echo "${red}You have sourced setup_afids_env.sh or setup_afids_env.csh.";  \
+#           echo "This will cause the build to *fail*, because MIPL has";  \
+#           echo "a program called 'sort' that interferes with the unix";  \
+#           echo "sort command. You need to restart the build *without*"; \
+#           echo "sourcing setup_afids_env.sh or setup_afids_env.csh${default}"; \
+#           exit 1; \
+#         fi
+
+# BUILT_SOURCES += complain_if_afids
 
 #=================================================================
 # Target to just install geocal

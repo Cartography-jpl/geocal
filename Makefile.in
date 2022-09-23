@@ -3064,6 +3064,7 @@ dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/job_database_check_and_run \
 	$(srcdir)/$(srcpythonbin)/usgs_create_ocean_tile \
 	$(srcdir)/$(srcpythonbin)/srtm_90m_create_ocean_tile \
+	$(srcdir)/$(srcpythonbin)/pomm_generate_model \
 	$(srcdir)/$(srcpythonbin)/surface_image_project \
 	$(srcdir)/$(srcpythonbin)/create_kernel_json
 AM_LDFLAGS = 

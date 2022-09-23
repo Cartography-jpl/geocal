@@ -1,8 +1,8 @@
 PROCESS       HELP=*
-parm img type=(string,99) count=1
-parm dem type=(string,99) count=1
-parm rimg type=(string,99) count=1
-parm out type=(string,99) count=1
+parm img type=string count=1
+parm dem type=string count=1
+parm rimg type=string count=1
+parm out type=string count=1
 parm autofit type=int default=14 valid=(0:500)
 parm gspace type=int count=1 default=1
 parm fftsize type=int count=1 default=256 valid=32:1024
@@ -10,7 +10,7 @@ parm fftgrid type=int count=2 default=(42,42) valid=2:64
 parm magnify type=real count=1 default=4.0 valid=(0.0:5000.0)
 parm magmin type=real count=1 default=2.0 valid=(0.0:5000.0)
 parm nproc type=int count=1 default=1
-parm pname type=(string,99) count=1 default=""
+parm pname type=string count=1 default=""
 parm pline type=int count=1 default=1000
 parm psamp type=int count=1 default=1000
 parm redo type=int default=36 valid=(0:999)

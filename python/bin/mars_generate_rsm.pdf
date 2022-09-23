@@ -1,18 +1,18 @@
 PROCESS       HELP=*
 
-parm pdsimg type=(string,99) count=1
-parm outbase type=(string,99) count=1
-parm pdsimg2 type=(string,99) count=1 default=""
-parm fulligc type=(string,99) count=1 default=""
+parm pdsimg type=string count=1
+parm outbase type=string count=1
+parm pdsimg2 type=string count=1 default=""
+parm fulligc type=string count=1 default=""
 parm glas type=(string,4) count=(0:1) valid=(n,y) default=n
 parm ktemp type=(string,4) count=(0:1) valid=(n,y) default=n
 parm minh type=real count=1 default=-5000.0
 parm maxh type=real count=1 default=-1500.0
-parm plot type=(string,99) count=1 default=""
+parm plot type=string count=1 default=""
 parm subset type=int count=0:4 default=-999
-parm kfile type=(string,250) count=1 default=""
-parm kpfile type=(string,250) count=1 default=""
-parm kjson type=(string,250) count=1 default=""
+parm kfile type=string count=1 default=""
+parm kpfile type=string count=1 default=""
+parm kjson type=string count=1 default=""
 parm lmask type=int count=1 default=38
 parm rmask type=int count=1 default=18
 END-PROC

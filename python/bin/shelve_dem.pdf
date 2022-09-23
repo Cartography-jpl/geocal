@@ -1,7 +1,7 @@
 PROCESS       HELP=*
-parm dem type=(string,99) count=1 default=""
-parm datum type=(string,99) count=1 default=""
-parm out type=(string,99) count=1
+parm dem type=string count=1 default=""
+parm datum type=string count=1 default=""
+parm out type=string count=1
 parm outok type=(string,4) count=(0:1) valid=(n,y) default=n
 parm srtm type=(string,4) count=(0:1) valid=(n,y) default=n
 parm usgs type=(string,4) count=(0:1) valid=(n,y) default=n

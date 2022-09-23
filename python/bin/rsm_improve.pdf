@@ -1,8 +1,8 @@
 PROCESS       HELP=*
-parm img type=(string,99) count=1
-parm dem type=(string,99) count=1
-parm tp type=(string,99) count=1
-parm out type=(string,99) count=1
+parm img type=string count=1
+parm dem type=string count=1
+parm tp type=string count=1
+parm out type=string count=1
 parm icor type=(string,4) count=(0:1) valid=(n,y) default=n
 parm grot type=(string,4) count=(0:1) valid=(n,y) default=n
 parm gcor type=(string,4) count=(0:1) valid=(n,y) default=n

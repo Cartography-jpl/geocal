@@ -483,6 +483,18 @@ class RsmId(geocal_swig.generic_object.GenericObject):
       self._v_ground_domain_vertex(value)
 
 
+    def in_ground_domain(self, Gc):
+        """
+
+        bool RsmId::in_ground_domain(const GroundCoordinate &Gc) const
+        Check that point is in the ground domain.
+
+        You don't normally need to check this, but this is the equations found
+        in section 5.6 of "RSM TRE Specification for NITF 2.1" 
+        """
+        return _rsm_id.RsmId_in_ground_domain(self, Gc)
+
+
     def _v_ground_reference_point(self, *args):
         """
 
@@ -676,6 +688,7 @@ RsmId._v_sensor_type = new_instancemethod(_rsm_id.RsmId__v_sensor_type, None, Rs
 RsmId._v_image_acquistion_time = new_instancemethod(_rsm_id.RsmId__v_image_acquistion_time, None, RsmId)
 RsmId._v_timing = new_instancemethod(_rsm_id.RsmId__v_timing, None, RsmId)
 RsmId._v_ground_domain_vertex = new_instancemethod(_rsm_id.RsmId__v_ground_domain_vertex, None, RsmId)
+RsmId.in_ground_domain = new_instancemethod(_rsm_id.RsmId_in_ground_domain, None, RsmId)
 RsmId._v_ground_reference_point = new_instancemethod(_rsm_id.RsmId__v_ground_reference_point, None, RsmId)
 RsmId._v_full_number_line = new_instancemethod(_rsm_id.RsmId__v_full_number_line, None, RsmId)
 RsmId._v_full_number_sample = new_instancemethod(_rsm_id.RsmId__v_full_number_sample, None, RsmId)

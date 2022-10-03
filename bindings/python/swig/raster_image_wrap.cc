@@ -13406,9 +13406,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"RasterImage__v_rpc", (PyCFunction)_wrap_RasterImage__v_rpc, METH_O, (char *)"\n"
 		"\n"
 		"boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const\n"
-		"Pointer version of rpc().\n"
-		"\n"
-		"This makes python happier. \n"
+		"Pointer version of rpc(). \n"
 		""},
 	 { (char *)"RasterImage__v_has_rsm", (PyCFunction)_wrap_RasterImage__v_has_rsm, METH_O, (char *)"\n"
 		"\n"

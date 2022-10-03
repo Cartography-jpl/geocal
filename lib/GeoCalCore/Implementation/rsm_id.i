@@ -44,6 +44,7 @@ public:
   %python_attribute_with_set(image_acquistion_time, boost::shared_ptr<Time>);
   %python_attribute_with_set(timing, boost::shared_ptr<RsmIdTiming>);
   %python_attribute_with_set(ground_domain_vertex, std::vector<boost::shared_ptr<GroundCoordinate> >);
+  bool in_ground_domain(const GroundCoordinate& Gc) const;
   %python_attribute_with_set(ground_reference_point, boost::shared_ptr<GroundCoordinate>);
   %python_attribute_with_set(full_number_line, boost::optional<int>);
   %python_attribute_with_set(full_number_sample, boost::optional<int>);

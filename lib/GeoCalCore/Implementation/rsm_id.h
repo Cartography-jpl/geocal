@@ -160,6 +160,8 @@ public:
     ground_domain_vertex_ = V;
   }
 
+  bool in_ground_domain(const GroundCoordinate& Gc) const;
+    
 //-----------------------------------------------------------------------
 /// Ground reference point.
 //-----------------------------------------------------------------------

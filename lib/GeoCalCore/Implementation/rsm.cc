@@ -559,64 +559,104 @@ void Rsm::fit_data(const blitz::Array<double, 2>& Data,
 void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
 				       double Min_height, double Max_height)
 {
-  for(int hind = 0; hind < 2; ++hind) {
-    std::deque<boost::array<double, 3> > pts;
-    boost::shared_ptr<GroundCoordinate> gc;
-    boost::array<double,3> p;
-    gc = Igc.ground_coordinate_approx_height(
-		   ImageCoordinate(rp->min_line(), rp->min_sample()),
+  // Turns out the vertex really needs to be at constant z
+  // values. This isn't actually required, but is effectively required
+  // by the constraints on the vertex relationships. So calculate the
+  // min and max z values first.
+  std::vector<ImageCoordinate> iclist;
+  iclist.push_back(ImageCoordinate(rp->min_line(), rp->min_sample()));
+  iclist.push_back(ImageCoordinate(rp->max_line(), rp->min_sample()));
+  iclist.push_back(ImageCoordinate(rp->max_line(), rp->max_sample()));
+  iclist.push_back(ImageCoordinate(rp->min_line(), rp->max_sample()));
+  double min_z=0;
+  double max_z=0;
+  for(int hind = 0; hind < 2; ++hind)
+    for(int i = 0; i < 4; ++i) {
+      double p[3];
+      auto gc = Igc.ground_coordinate_approx_height(
+		   iclist[i],
 		   (hind == 0 ? Min_height : Max_height));
-    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-    pts.push_back(p);
-    gc = Igc.ground_coordinate_approx_height(
-		   ImageCoordinate(rp->max_line(), rp->min_sample()),
-		   (hind == 0 ? Min_height : Max_height));
-    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-    pts.push_back(p);
-    gc = Igc.ground_coordinate_approx_height(
-		   ImageCoordinate(rp->max_line(), rp->max_sample()),
-		   (hind == 0 ? Min_height : Max_height));
-    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-    pts.push_back(p);
-    gc = Igc.ground_coordinate_approx_height(
-		   ImageCoordinate(rp->min_line(), rp->max_sample()),
-		   (hind == 0 ? Min_height : Max_height));
-    coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
-    pts.push_back(p);
-    // Check if linear ring is in a clockwise direction
-    boost::array<double, 3> t;
-    boost::array<double, 3> x1,x2;
-    for(int i = 0; i < 3; ++i) {
-      x1[i] = pts[1][i]-pts[0][i];
-      x2[i] = pts[3][i]-pts[0][i];
+      coordinate_converter()->convert_to_coordinate(*gc, p[0], p[1], p[2]);
+      if(hind == 0 && i == 0) {
+	min_z = p[2];
+	max_z = p[2];
+      }
+      min_z = std::min(min_z, p[2]);
+      max_z = std::max(max_z, p[2]);
     }
-    cross(x1,x2,t);
-    bool is_clockwise = (t[2] < 0);
-    // If not clockwise, swap corners so it is
-    if(!is_clockwise)
-      std::swap(pts[1], pts[3]);
-    // Shift the linear ring until the first element is the lower left corner.
-    int i = 0;
-    while(pts[0][1] > pts[1][1] || pts[0][0] > pts[3][0]) {
-      pts.push_back(pts[0]);
-      pts.pop_front();
-      // Might be some weird pathological case where condition never met
-      // (e.g., we have NaN or something like that.
-      if(++i > 4)
-	throw Exception("This shouldn't be able to happen");
-    }
-    // Save points. Note that these don't go in a linear ring order, just
-    // by convention 0 is lower left corner, 1 is lower right, 2 upper left,
-    // 3 is upper right.
-    int b = (hind == 0 ? 0 : 4);
-    rid->ground_domain_vertex()[b + 0] = coordinate_converter()->
-      convert_from_coordinate(pts[0][0],pts[0][1],pts[0][2]);
-    rid->ground_domain_vertex()[b + 1] = coordinate_converter()->
-      convert_from_coordinate(pts[3][0],pts[3][1],pts[3][2]);
-    rid->ground_domain_vertex()[b + 2] = coordinate_converter()->
-      convert_from_coordinate(pts[1][0],pts[1][1],pts[1][2]);
-    rid->ground_domain_vertex()[b + 3] = coordinate_converter()->
-      convert_from_coordinate(pts[2][0],pts[2][1],pts[2][2]);
+  if(min_z < rsm_base()->min_z())
+    min_z = rsm_base()->min_z();
+  if(max_z > rsm_base()->max_z())
+    max_z = rsm_base()->max_z();
+  boost::shared_ptr<Dem> dem_min_z, dem_max_z;
+  boost::shared_ptr<LocalRcConverter> lconv =
+    boost::dynamic_pointer_cast<LocalRcConverter>(coordinate_converter());
+  if(lconv) {
+    dem_min_z = boost::make_shared<LocalZDem>(lconv, min_z);
+    dem_max_z = boost::make_shared<LocalZDem>(lconv, max_z);
+  } else if(coordinate_converter()->naif_code() == CoordinateConverter::EARTH_NAIF_CODE) {
+    dem_min_z = boost::make_shared<SimpleDem>(min_z);
+    dem_max_z = boost::make_shared<SimpleDem>(max_z);
+  } else {
+    dem_min_z = boost::make_shared<PlanetSimpleDem>(min_z,
+			    coordinate_converter()->naif_code());
+    dem_max_z = boost::make_shared<PlanetSimpleDem>(max_z,
+			    coordinate_converter()->naif_code());
+  }
+  double bottom_pt[4][3];
+  double top_pt[4][3];
+  std::deque<int> ptind;
+  for(int i = 0; i < 4; ++i) {
+    ptind.push_back(i);
+    auto gcmin = Igc.ground_coordinate_dem(iclist[i], *dem_min_z);
+    auto gcmax = Igc.ground_coordinate_dem(iclist[i], *dem_max_z);
+    coordinate_converter()->convert_to_coordinate(*gcmin, bottom_pt[i][0],
+				  bottom_pt[i][1], bottom_pt[i][2]);
+    coordinate_converter()->convert_to_coordinate(*gcmax, top_pt[i][0],
+				  top_pt[i][1], top_pt[i][2]);
+  }
+  // Check if linear ring is in a clockwise direction
+  boost::array<double, 3> t;
+  boost::array<double, 3> x1,x2;
+  for(int i = 0; i < 3; ++i) {
+    x1[i] = bottom_pt[1][i]-bottom_pt[0][i];
+    x2[i] = bottom_pt[3][i]-bottom_pt[0][i];
+  }
+  cross(x1,x2,t);
+  bool is_clockwise = (t[2] < 0);
+  // If not clockwise, swap corners so it is
+  if(!is_clockwise)
+    std::swap(ptind[1], ptind[3]);
+  // Shift the linear ring until the first element is the lower left corner.
+  int i = 0;
+  while(bottom_pt[ptind[0]][1] > bottom_pt[ptind[1]][1] ||
+	bottom_pt[ptind[0]][0] > bottom_pt[ptind[3]][0]) {
+    ptind.push_back(ptind[0]);
+    ptind.pop_front();
+    // Might be some weird pathological case where condition never met
+    // (e.g., we have NaN or something like that).
+    if(++i > 4)
+      throw Exception("This shouldn't be able to happen");
+  }
+  // Save points. Note that these don't go in a linear ring order, just
+  // by convention 0 is lower left corner, 1 is lower right, 2 upper left,
+  // 3 is upper right.
+  int ptind2[4];
+  ptind2[0] = ptind[0];
+  ptind2[1] = ptind[3];
+  ptind2[2] = ptind[1];
+  ptind2[3] = ptind[2];
+  for(int i = 0; i < 4; i++) {
+    rid->ground_domain_vertex()[i] = coordinate_converter()->
+      convert_from_coordinate(bottom_pt[ptind2[i]][0], bottom_pt[ptind2[i]][1],
+			      bottom_pt[ptind2[i]][2]);
+    if(false)
+      std::cerr << "(" << bottom_pt[ptind2[i]][0] << ", "
+		<< bottom_pt[ptind2[i]][1] << ", "
+		<< bottom_pt[ptind2[i]][2] << ")\n";
+    rid->ground_domain_vertex()[i+4] = coordinate_converter()->
+      convert_from_coordinate(top_pt[ptind2[i]][0], top_pt[ptind2[i]][1],
+			      top_pt[ptind2[i]][2]);
   }
   rid->full_number_line(rp->max_line());
   rid->full_number_sample(rp->max_sample());

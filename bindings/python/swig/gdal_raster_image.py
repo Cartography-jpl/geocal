@@ -555,7 +555,7 @@ class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
         """
 
         void GdalRasterImage::save(const std::string &Oname, const std::string &Driver, const
-        std::vector< const RasterImage * > &d, int Dt=GDT_Byte, const
+        std::vector< const RasterImage *> &d, int Dt=GDT_Byte, const
         std::string &Option="", bool Require_copy=false, int
         Fill_value=-1000)
         Copy the given RasterImages into a new file, using the given driver
@@ -637,7 +637,7 @@ def GdalRasterImage_save(*args):
     """
 
     void GdalRasterImage::save(const std::string &Oname, const std::string &Driver, const
-    std::vector< const RasterImage * > &d, int Dt=GDT_Byte, const
+    std::vector< const RasterImage *> &d, int Dt=GDT_Byte, const
     std::string &Option="", bool Require_copy=false, int
     Fill_value=-1000)
     Copy the given RasterImages into a new file, using the given driver

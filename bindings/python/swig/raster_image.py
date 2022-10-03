@@ -643,9 +643,7 @@ class RasterImage(geocal_swig.generic_object.GenericObject):
         """
 
         boost::shared_ptr<Rpc> GeoCal::RasterImage::rpc_ptr() const
-        Pointer version of rpc().
-
-        This makes python happier. 
+        Pointer version of rpc(). 
         """
         return _raster_image.RasterImage__v_rpc(self)
 

@@ -50,6 +50,7 @@ BOOST_AUTO_TEST_CASE(fit_test)
   // 	    << r.rsm_base()->min_z() << "\n"
   // 	    << r.rsm_base()->max_z() << "\n";
   BOOST_CHECK(in_valid_range);
+  BOOST_CHECK(r.rsm_id()->in_ground_domain(gp));
   BOOST_CHECK_CLOSE(ic_expect.line, ic.line, 1e-2);
   BOOST_CHECK_CLOSE(ic_expect.sample, ic.sample, 1e-2);
   boost::shared_ptr<GroundCoordinate> gpcalc =

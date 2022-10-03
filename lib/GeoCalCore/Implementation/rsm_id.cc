@@ -5,6 +5,7 @@
 #include "ostream_pad.h"
 #include "ecr.h"
 #include "planet_coordinate.h"
+#include "geocal_matrix.h"
 #include "local_rectangular_coordinate.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
@@ -336,4 +337,66 @@ void RsmId::naif_code(int Naif_code)
     return;
   }
   throw Exception("Unsupported coordinate converter in naif_code");
+}
+
+inline bool ground_domain_test(const boost::array<double, 3>& x,
+			       const boost::array<double, 3>& t1,
+			       const boost::array<double, 3>& t2,
+			       const boost::array<double, 3>& t3)
+{
+  // This is (x-t1)^T((t2-t1) x (t3-t1)) >=0
+  boost::array<double, 3> t4, t5, t6, t7;
+  for(int i = 0; i < 3; ++i) {
+    t4[i] = x[i]-t1[i];
+    t5[i] = t2[i] - t1[i];
+    t6[i] = t3[i] - t1[i];
+  }
+  cross(t5, t6, t7);
+  return dot(t4,t7) >= 0;
+}
+			       
+//-----------------------------------------------------------------------
+/// Check that point is in the ground domain. You don't normally need
+/// to check this, but this is the equations found in section 5.6
+/// of "RSM TRE Specification for NITF 2.1"
+//-----------------------------------------------------------------------
+
+bool RsmId::in_ground_domain(const GroundCoordinate& Gc) const
+{
+  boost::array<double, 3> x;
+  coordinate_converter()->convert_to_coordinate(Gc, x[0], x[1], x[2]);
+  std::vector<boost::array<double, 3> > v;
+  for(int i = 0; i < 8; ++i) {
+    boost::array<double, 3> t;
+    coordinate_converter()->convert_to_coordinate(*ground_domain_vertex_[i],
+						  t[0], t[1], t[2]);
+    v.push_back(t);
+  }
+  boost::array<double, 3> v1 = v[0];
+  boost::array<double, 3> v2 = v[1];
+  boost::array<double, 3> v3 = v[2];
+  boost::array<double, 3> v4 = v[3];
+  boost::array<double, 3> v5 = v[4];
+  boost::array<double, 3> v6 = v[5];
+  boost::array<double, 3> v7 = v[6];
+  boost::array<double, 3> v8 = v[7];
+  // Equation 1
+  if(!ground_domain_test(x,v2,v4,v1))
+    return false;
+  // Equation 2
+  if(!ground_domain_test(x,v6,v5,v8))
+    return false;
+  // Equation 3
+  if(!ground_domain_test(x,v1,v3,v5))
+    return false;
+  // Equation 4
+  if(!ground_domain_test(x,v2,v6,v4))
+    return false;
+  // Equation 5
+  if(!ground_domain_test(x,v2,v1,v6))
+    return false;
+  // Equation 6
+  if(!ground_domain_test(x,v4,v8,v3))
+    return false;
+  return true;
 }

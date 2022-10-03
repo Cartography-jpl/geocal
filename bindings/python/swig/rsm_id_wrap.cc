@@ -8905,6 +8905,77 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_RsmId_in_ground_domain(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
+  GeoCal::GroundCoordinate *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::RsmId const > tempshared1 ;
+  boost::shared_ptr< GeoCal::RsmId const > *smartarg1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  boost::shared_ptr< GeoCal::GroundCoordinate const > tempshared2 ;
+  PyObject *swig_obj[2] ;
+  bool result;
+  
+  if (!SWIG_Python_UnpackTuple(args,"RsmId_in_ground_domain",2,2,swig_obj)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RsmId_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "RsmId_in_ground_domain" "', argument " "1"" of type '" "GeoCal::RsmId const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::RsmId > * >(argp1);
+      arg1 = const_cast< GeoCal::RsmId * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::GroundCoordinate *ptr;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], (void**)(&ptr), SWIGTYPE_p_GeoCal__GroundCoordinate,  0 , &newmem);
+    if (SWIG_IsOK(res2)) {
+      arg2 = ptr;
+    } else {
+      res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
+      if (!SWIG_IsOK(res2)) {
+        SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "RsmId_in_ground_domain" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'");
+      }
+      if (!argp2) {
+        SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "RsmId_in_ground_domain" "', argument " "2"" of type '" "GeoCal::GroundCoordinate const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared2 = *reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2);
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(tempshared2.get());
+      } else {
+        arg2 = const_cast< GeoCal::GroundCoordinate * >(reinterpret_cast< boost::shared_ptr< const GeoCal::GroundCoordinate > * >(argp2)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::RsmId const *)arg1)->in_ground_domain((GeoCal::GroundCoordinate const &)*arg2);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_RsmId__v_ground_reference_point__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::RsmId *arg1 = (GeoCal::RsmId *) 0 ;
@@ -10109,6 +10180,14 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"The constraint is V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based\n"
 		"numbering). \n"
+		""},
+	 { (char *)"RsmId_in_ground_domain", _wrap_RsmId_in_ground_domain, METH_VARARGS, (char *)"\n"
+		"\n"
+		"bool RsmId::in_ground_domain(const GroundCoordinate &Gc) const\n"
+		"Check that point is in the ground domain.\n"
+		"\n"
+		"You don't normally need to check this, but this is the equations found\n"
+		"in section 5.6 of \"RSM TRE Specification for NITF 2.1\" \n"
 		""},
 	 { (char *)"RsmId__v_ground_reference_point", _wrap_RsmId__v_ground_reference_point, METH_VARARGS, (char *)"\n"
 		"\n"

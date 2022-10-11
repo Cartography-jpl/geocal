@@ -50,6 +50,7 @@ public:
 		int Nsamp) const;
   void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
 				    double Min_height, double Max_height);
+  void fill_in_ground_domain_vertex();
   blitz::Array<double, 2> compare_data(const blitz::Array<double, 2>& Data)
     const;
   blitz::Array<double, 1> compare_data_dist(const blitz::Array<double, 2>& Data)

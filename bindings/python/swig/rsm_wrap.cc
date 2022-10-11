@@ -8451,7 +8451,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex__SWIG_0(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
   GeoCal::ImageGroundConnection *arg2 = 0 ;
@@ -8468,9 +8468,8 @@ SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *SWIGUNUSED
   int ecode3 = 0 ;
   double val4 ;
   int ecode4 = 0 ;
-  PyObject *swig_obj[4] ;
   
-  if (!SWIG_Python_UnpackTuple(args,"Rsm_fill_in_ground_domain_vertex",4,4,swig_obj)) SWIG_fail;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
@@ -8534,6 +8533,70 @@ SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *SWIGUNUSED
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex__SWIG_1(PyObject *SWIGUNUSEDPARM(self), int nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::Rsm *arg1 = (GeoCal::Rsm *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::Rsm > tempshared1 ;
+  boost::shared_ptr< GeoCal::Rsm > *smartarg1 = 0 ;
+  
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rsm_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rsm_fill_in_ground_domain_vertex" "', argument " "1"" of type '" "GeoCal::Rsm *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::Rsm > * >(argp1);
+      arg1 = const_cast< GeoCal::Rsm * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->fill_in_ground_domain_vertex();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Rsm_fill_in_ground_domain_vertex(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args,"Rsm_fill_in_ground_domain_vertex",0,4,argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    return _wrap_Rsm_fill_in_ground_domain_vertex__SWIG_1(self, argc, argv);
+  }
+  if (argc == 4) {
+    return _wrap_Rsm_fill_in_ground_domain_vertex__SWIG_0(self, argc, argv);
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Rsm_fill_in_ground_domain_vertex'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::Rsm::fill_in_ground_domain_vertex(GeoCal::ImageGroundConnection const &,double,double)\n"
+    "    GeoCal::Rsm::fill_in_ground_domain_vertex()\n");
+  return 0;
 }
 
 
@@ -12444,23 +12507,13 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { (char *)"Rsm_fill_in_ground_domain_vertex", _wrap_Rsm_fill_in_ground_domain_vertex, METH_VARARGS, (char *)"\n"
 		"\n"
-		"void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection &Igc, double Min_height, double\n"
-		"Max_height)\n"
-		"Fill in the ground domain vertex information.\n"
+		"void Rsm::fill_in_ground_domain_vertex()\n"
+		"Variation of fill_in_ground_domain_vertex that just uses the bounding\n"
+		"cube of the RSM.\n"
 		"\n"
-		"Note that you don't normally need to call this directly, the \"fit\"\n"
-		"function already does this. But it can be useful in unit testing and\n"
-		"perhaps other contexts to directly calculate this. Also for fit_data,\n"
-		"you have to call this function separately since it doesn't call this\n"
-		"function.\n"
-		"\n"
-		"There is specific requirements about the ordering the vertices (see\n"
-		"the RSM documentation). We make sure the data is given in this order.\n"
-		"\n"
-		"Note we use to generate this from the RSM itself, but for some types\n"
-		"the very edges used by ground domain fails. Since we are usually doing\n"
-		"this in a context of a fit anyways, we go ahead and just use the\n"
-		"original Igc to calculate this. \n"
+		"This is less exact than using the igc to calculate a smaller region,\n"
+		"but we sometimes have odd Igcs that aren't properly captured in the\n"
+		"fill_in_ground_domain_vertex. \n"
 		""},
 	 { (char *)"Rsm_compare_data", _wrap_Rsm_compare_data, METH_VARARGS, (char *)"\n"
 		"\n"

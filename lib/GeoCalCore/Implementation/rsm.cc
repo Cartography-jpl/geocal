@@ -635,8 +635,11 @@ void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
     ptind.pop_front();
     // Might be some weird pathological case where condition never met
     // (e.g., we have NaN or something like that).
-    if(++i > 4)
-      throw Exception("This shouldn't be able to happen");
+    if(++i > 4) {
+      // Fall back to just using the bounding cube
+      fill_in_ground_domain_vertex();
+      return;
+    }
   }
   // Save points. Note that these don't go in a linear ring order, just
   // by convention 0 is lower left corner, 1 is lower right, 2 upper left,
@@ -664,8 +667,73 @@ void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
   rid->max_line(rp->max_line());
   rid->min_sample(rp->min_sample());
   rid->max_sample(rp->max_sample());
+  
+  // Check that we actually contain our data in the ground domain. We can get
+  // IGCs where odd things happen where this isn't the case. We then
+  // fall back to the bounding cube.
+  //fill_in_ground_domain_vertex();
+  std::vector<ImageCoordinate> iclist2;
+  iclist2.push_back(ImageCoordinate(rp->min_line()+0.5, rp->min_sample()+0.5));
+  iclist2.push_back(ImageCoordinate(rp->max_line()-0.5, rp->min_sample()+0.5));
+  iclist.push_back(ImageCoordinate(rp->max_line()-0.5, rp->max_sample()-0.5));
+  iclist.push_back(ImageCoordinate(rp->min_line()+0.5, rp->max_sample()-0.5));
+  int nstep = 10;
+  double h_step = (Max_height - Min_height) / (nstep - 1);
+  for(int hi = 0; hi < nstep; ++hi) {
+    double h = Min_height + h_step * hi;
+    for(int i = 0; i < 4; ++i) {
+      auto gc = Igc.ground_coordinate_approx_height(iclist[i], h);
+      if(!rid->in_ground_domain(*gc)) {
+	if(false)
+	  std::cerr << "Point not in ground_domain."
+		    << "i: " << i << "\n"
+		    << "hi: " << hi << "\n"
+		    << "x: " << rp->min_x() << " to " << rp->max_x() << "\n"
+		    << "y: " << rp->min_y() << " to " << rp->max_y() << "\n"
+		    << "z: " << rp->min_z() << " to " << rp->max_z() << "\n";
+	fill_in_ground_domain_vertex();
+	return;
+      }
+    }
+  }
 }
 
+
+//-----------------------------------------------------------------------
+/// Variation of fill_in_ground_domain_vertex that just uses the
+/// bounding cube of the RSM. This is less exact than using the igc to
+/// calculate a smaller region, but we sometimes have odd Igcs that
+/// aren't properly captured in the fill_in_ground_domain_vertex.
+//-----------------------------------------------------------------------
+
+void Rsm::fill_in_ground_domain_vertex()
+{
+  // Save points. Note that these don't go in a linear ring order, just
+  // by convention 0 is lower left corner, 1 is lower right, 2 upper left,
+  // 3 is upper right.
+  rid->ground_domain_vertex()[0] = coordinate_converter()->
+    convert_from_coordinate(rp->min_x(), rp->min_y(), rp->min_z());
+  rid->ground_domain_vertex()[1] = coordinate_converter()->
+    convert_from_coordinate(rp->max_x(), rp->min_y(), rp->min_z());
+  rid->ground_domain_vertex()[2] = coordinate_converter()->
+    convert_from_coordinate(rp->min_x(), rp->max_y(), rp->min_z());
+  rid->ground_domain_vertex()[3] = coordinate_converter()->
+    convert_from_coordinate(rp->max_x(), rp->max_y(), rp->min_z());
+  rid->ground_domain_vertex()[4] = coordinate_converter()->
+    convert_from_coordinate(rp->min_x(), rp->min_y(), rp->max_z());
+  rid->ground_domain_vertex()[5] = coordinate_converter()->
+    convert_from_coordinate(rp->max_x(), rp->min_y(), rp->max_z());
+  rid->ground_domain_vertex()[6] = coordinate_converter()->
+    convert_from_coordinate(rp->min_x(), rp->max_y(), rp->max_z());
+  rid->ground_domain_vertex()[7] = coordinate_converter()->
+    convert_from_coordinate(rp->max_x(), rp->max_y(), rp->max_z());
+  rid->full_number_line(rp->max_line());
+  rid->full_number_sample(rp->max_sample());
+  rid->min_line(rp->min_line());
+  rid->max_line(rp->max_line());
+  rid->min_sample(rp->min_sample());
+  rid->max_sample(rp->max_sample());
+}
 //-----------------------------------------------------------------------
 /// Print to stream.
 //-----------------------------------------------------------------------

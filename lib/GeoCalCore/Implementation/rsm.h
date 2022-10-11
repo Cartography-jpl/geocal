@@ -54,6 +54,7 @@ public:
 		int Nline, int Nsamp) const;
   void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
 				    double Min_height, double Max_height);
+  void fill_in_ground_domain_vertex();
   blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,
 					 double Min_height, double Max_height,
 					 int Nline_fit = 20,

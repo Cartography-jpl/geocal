@@ -381,22 +381,46 @@ bool RsmId::in_ground_domain(const GroundCoordinate& Gc) const
   boost::array<double, 3> v7 = v[6];
   boost::array<double, 3> v8 = v[7];
   // Equation 1
-  if(!ground_domain_test(x,v2,v4,v1))
+  if(!ground_domain_test(x,v2,v4,v1)) {
+    if(false)
+      std::cerr << "Equation 1\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
+  }
   // Equation 2
-  if(!ground_domain_test(x,v6,v5,v8))
+  if(!ground_domain_test(x,v6,v5,v8)) {
+    if(false)
+      std::cerr << "Equation 2\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
+  }
   // Equation 3
-  if(!ground_domain_test(x,v1,v3,v5))
+  if(!ground_domain_test(x,v1,v3,v5)) {
+    if(false)
+      std::cerr << "Equation 3\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
+  }
   // Equation 4
-  if(!ground_domain_test(x,v2,v6,v4))
+  if(!ground_domain_test(x,v2,v6,v4)) {
+    if(false)
+      std::cerr << "Equation 4\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
+  }
   // Equation 5
-  if(!ground_domain_test(x,v2,v1,v6))
+  if(!ground_domain_test(x,v2,v1,v6)) {
+    if(false)
+      std::cerr << "Equation 5\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
+  }
   // Equation 6
-  if(!ground_domain_test(x,v4,v8,v3))
+  if(!ground_domain_test(x,v4,v8,v3)) {
+    if(false)
+      std::cerr << "Equation 6\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
     return false;
+  }
   return true;
 }

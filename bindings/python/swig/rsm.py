@@ -339,28 +339,18 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
         return _rsm.Rsm_fit_data(self, Data, Nline, Nsamp)
 
 
-    def fill_in_ground_domain_vertex(self, Igc, Min_height, Max_height):
+    def fill_in_ground_domain_vertex(self, *args):
         """
 
-        void Rsm::fill_in_ground_domain_vertex(const ImageGroundConnection &Igc, double Min_height, double
-        Max_height)
-        Fill in the ground domain vertex information.
+        void Rsm::fill_in_ground_domain_vertex()
+        Variation of fill_in_ground_domain_vertex that just uses the bounding
+        cube of the RSM.
 
-        Note that you don't normally need to call this directly, the "fit"
-        function already does this. But it can be useful in unit testing and
-        perhaps other contexts to directly calculate this. Also for fit_data,
-        you have to call this function separately since it doesn't call this
-        function.
-
-        There is specific requirements about the ordering the vertices (see
-        the RSM documentation). We make sure the data is given in this order.
-
-        Note we use to generate this from the RSM itself, but for some types
-        the very edges used by ground domain fails. Since we are usually doing
-        this in a context of a fit anyways, we go ahead and just use the
-        original Igc to calculate this. 
+        This is less exact than using the igc to calculate a smaller region,
+        but we sometimes have odd Igcs that aren't properly captured in the
+        fill_in_ground_domain_vertex. 
         """
-        return _rsm.Rsm_fill_in_ground_domain_vertex(self, Igc, Min_height, Max_height)
+        return _rsm.Rsm_fill_in_ground_domain_vertex(self, *args)
 
 
     def compare_data(self, Data):

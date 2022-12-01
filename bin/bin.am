@@ -4,7 +4,7 @@ if HAVE_CARTO
 afidspythonvdev_PROGRAMS+= picmtch5
 picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
 EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
-picmtch5_LDADD = libgeocal.la $(MSP_LIBS)
+picmtch5_LDADD = libgeocal.la
 picmtch5_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS)
 picmtch5_CPPFLAGS+=  $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
 picmtch5_CPPFLAGS+= $(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw)

@@ -1,0 +1,38 @@
+if HAVE_MSP
+pkgpythonmspswigdir = $(prefix)/@pythondir@/msp_swig
+
+pkgpythonmspswig_LTLIBRARIES = _msp_wrap.la
+
+pkgpythonmspswig_PYTHON = @swigmspsrc@/msp_wrap.py
+pkgpythonmspswig_PYTHON += @swigmspsrc@/__init__.py
+
+_msp_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS)
+_msp_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
+_msp_wrap_la_LDFLAGS = -module -avoid-version
+_msp_wrap_la_SOURCES = @swigmspsrc@/msp_wrap.cc
+_msp_wrap_la_LDFLAGS+= $(MSP_LIBS)
+_msp_wrap_la_CPPFLAGS+= $(MSP_CFLAGS)
+# Also need dlopen
+_msp_wrap_la_LDFLAGS+= -ldl
+
+# Only generate these files in maintainer mode, otherwise consider them
+# as input.
+if MAINTAINER_MODE
+if HAVE_SWIG
+
+$(srcdir)/$(swigmspsrc)/msp_wrap.cc: @swigmspsrc@/msp_wrap.i Makefile 
+	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -o $@ $<
+
+BUILT_SOURCES+= $(srcdir)/$(swigmspsrc)/msp_wrap.cc
+
+endif HAVE_SWIG
+endif MAINTAINER_MODE
+
+# Shortcut for building just python
+install-msp-python: install-pkgpythonmspswigLTLIBRARIES install-pkgpythonmspswigPYTHON
+	$(noop)
+
+export MSP_DATA_DIR=$(MSP_PREFIX)/data
+export MSPCCS_DATA=$(MSP_PREFIX)/data
+export CSM_PLUGIN_DIR=$(MSP_PREFIX)/plugins/
+endif

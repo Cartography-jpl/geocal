@@ -8,6 +8,9 @@
 #include <dlfcn.h>
 #include <unistd.h>
 #include "boost/date_time/posix_time/posix_time.hpp"
+// We'll remove IgcMsp and replace with SWIG wrapper shortly, but
+// for now just short circuit this
+#undef HAVE_MSP
 #ifdef HAVE_MSP
 #include "Plugin.h"
 #include "GroundPoint.h"

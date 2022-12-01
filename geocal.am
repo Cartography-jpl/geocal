@@ -45,13 +45,6 @@ libgeocal_la_LDFLAGS+= $(MSPI_SHARED_LIBS)
 libgeocal_la_CPPFLAGS+= $(MSPI_SHARED_CFLAGS)
 endif
 
-if HAVE_MSP
-libgeocal_la_LDFLAGS+= $(MSP_LIBS)
-libgeocal_la_CPPFLAGS+= $(MSP_CFLAGS)
-# Also need dlopen
-libgeocal_la_LDFLAGS+= -ldl
-endif
-
 if HAVE_HDFEOS5
 libgeocal_la_LDFLAGS+= $(HDFEOS5_LIB)
 libgeocal_la_CPPFLAGS+= $(HDFEOS5_CFLAGS)
@@ -103,7 +96,6 @@ check_PROGRAMS = geocal_test_all
 geocal_test_all_SOURCES += @libgeocal@/test_all.cc
 geocal_test_all_LDADD = libgeocal.la 
 geocal_test_all_LDADD += $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(SPICE_LIBS)
-geocal_test_all_LDADD += $(MSP_LIBS)
 if BUILD_LIBRAW
 geocal_test_all_LDADD += libraw.la
 endif
@@ -111,7 +103,7 @@ geocal_test_all_LDADD += $(GDAL_LIBS) $(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS)
 geocal_test_all_CPPFLAGS+= $(OPENMP_CFLAGS)
-geocal_test_all_CPPFLAGS+= $(VICAR_RTL_CFLAGS) $(MSP_CFLAGS)
+geocal_test_all_CPPFLAGS+= $(VICAR_RTL_CFLAGS)
 geocal_test_all_CPPFLAGS+= $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
 geocal_test_all_CPPFLAGS+= $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
 geocal_test_all_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
@@ -123,11 +115,6 @@ export run_test = *
 if HAVE_AFIDS_DATA
 export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
-endif
-if HAVE_MSP
-export MSP_DATA_DIR=$(MSP_PREFIX)/data
-export MSPCCS_DATA=$(MSP_PREFIX)/data
-export CSM_PLUGIN_DIR=$(MSP_PREFIX)/plugins/
 endif
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)

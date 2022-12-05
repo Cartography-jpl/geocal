@@ -71,7 +71,7 @@ class TiePointDiagnostic(object):
     def __init__(self, num_image):
         """Initialize all counts to 0."""
         # Have diagnostic codes from 0 to 10.
-        max_diag_code = 10
+        max_diag_code = 11
         # Add in one extra bin for unrecognized codes
         self.image_match_diagnostic = np.zeros(
             (num_image, max_diag_code + 2), dtype=int
@@ -105,23 +105,18 @@ class TiePointDiagnostic(object):
         d = self.image_match_diagnostic
         self._print_or_log("        Tiepoint Matching")
         tp_tab = [self._print_tab_helper("Reason", range(d.shape[0]))]
-        for i, v in enumerate(
-            [
-                "Good Match",
-                "Image masked",
-                "Too close to edge",
-                "Variance too low",
-                "Correlation too low",
-                "Exceed Max Sigma",
-                "Exceed max radiance variance",
-                "Exceed precision requirement",
-                "Move past target",
-                "Solve failed",
-                "Exceed max iteration",
-                "Other",
-            ]
-        ):
-            tp_tab.append(self._print_tab_helper(v, d[:, i]))
+        for i, v in enumerate(["Good Match", "Image masked",
+                               "Too close to edge", "Variance too low",
+                               "Correlation too low", 
+                               "Exceed Max Sigma", 
+                               "Exceed max radiance variance", 
+                               "Exceed precision requirement", 
+                               "Move past target", 
+                               "Solve failed", 
+                               "Exceed max iteration",
+                               "IGC/Image Coor Failed", 
+                               "Other"]):
+            tp_tab.append(self._print_tab_helper(v, d[:,i]))
         self._print_or_log(tabulate(tp_tab, headers="firstrow"))
         self._print_or_log("\n")
 

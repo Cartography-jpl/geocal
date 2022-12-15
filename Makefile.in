@@ -4303,7 +4303,7 @@ norm_raw = $(shell cd $(abs_srcdir)/@srcraw@; pwd)
 norm_sdbx = $(shell cd $(abs_srcdir)/@srcsdbx@; pwd)
 geocal_test_all_LDADD = libgeocal.la $(CARTO_LIBS) $(VICAR_RTL_LIBS) \
 	$(SPICE_LIBS) $(MSP_LIBS) $(am__append_12) $(GDAL_LIBS) \
-	$(CODE_COVERAGE_LIBS)
+	$(OPENSSL_LIBS) $(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
 	$(OPENMP_CFLAGS) $(VICAR_RTL_CFLAGS) $(MSP_CFLAGS) \

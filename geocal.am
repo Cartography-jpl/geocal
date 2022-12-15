@@ -107,7 +107,7 @@ geocal_test_all_LDADD += $(MSP_LIBS)
 if BUILD_LIBRAW
 geocal_test_all_LDADD += libraw.la
 endif
-geocal_test_all_LDADD += $(GDAL_LIBS) $(CODE_COVERAGE_LIBS)
+geocal_test_all_LDADD += $(GDAL_LIBS) $(OPENSSL_LIBS) $(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS)
 geocal_test_all_CPPFLAGS+= $(OPENMP_CFLAGS)

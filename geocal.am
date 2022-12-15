@@ -26,7 +26,7 @@ EXTRA_libgeocal_la_DEPENDENCIES+= $(CARTO_BUILD_DEPEND)
 
 if HAVE_GDAL
 # Include gdal in builds
-libgeocal_la_LDFLAGS+= $(GDAL_LIBS)
+libgeocal_la_LDFLAGS+= $(GDAL_LIBS) $(OPENSSL_LIBS)
 libgeocal_la_CPPFLAGS+= $(GDAL_CFLAGS)
 endif
 

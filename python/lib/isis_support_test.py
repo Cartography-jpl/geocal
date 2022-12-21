@@ -13,6 +13,10 @@ def test_find_isis_kernel(isolated_dir):
         assert f is not None
         f = find_isis_kernel_file("$lro/kernels/spk/fdf29r_2012275_2012306_v01.bsp")
         assert f is not None
+        # Newer kernel only available with S3 buckets, so we can test using
+        # rclone instead of rsycnc
+        f = find_isis_kernel_file("$lro/kernels/sclk/lro_clkcor_2022263_v00.tsc")
+        assert f is not None
     finally:
         if(original_cache is None):
             try:

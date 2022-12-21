@@ -51,17 +51,27 @@ def find_isis_kernel_file(f):
     sublist = [(r'\$base',
                 f"{os.environ['ISISDATA']}/base",
                 f"{spice_cache_dir}/base",
-                "isisdist.astrogeology.usgs.gov::isisdata/data/base",
+                "base_usgs:",
                 ),
                (r'\$mro',
                 f"{os.environ['ISISDATA']}/mro",
                 f"{spice_cache_dir}/mro",
-                "isisdist.astrogeology.usgs.gov::isisdata/data/mro"
+                "mro_usgs:"
                 ),
                (r'\$lro',
                 f"{os.environ['ISISDATA']}/lro",
                 f"{spice_cache_dir}/lro",
-                "isisdist.astrogeology.usgs.gov::isisdata/data/lro"
+                "lro_usgs:"
+                ),
+               (r'\$mex',
+                f"{os.environ['ISISDATA']}/mex",
+                f"{spice_cache_dir}/mex",
+                "mex_usgs:"
+                ),
+               (r'\$mgs',
+                f"{os.environ['ISISDATA']}/mgs",
+                f"{spice_cache_dir}/mgs",
+                "mgs_usgs:"
                 )
                ]
     for r,s,_,_ in sublist:
@@ -76,7 +86,7 @@ def find_isis_kernel_file(f):
             return t
         t2 = re.sub(r,s2,f)
         subprocess.run(["mkdir","-p",os.path.dirname(t)],check=True)
-        subprocess.run(["rsync", "-lptgoD", t2, t], check=True,
+        subprocess.run(["rclone", "copy", f"--config={os.environ['ISISDATA']}/rclone.conf", t2, os.path.dirname(t)], check=True,
                        stdout=subprocess.DEVNULL)
         return t
     raise RuntimeError(f"Can't find kernel {f}")

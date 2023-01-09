@@ -280,6 +280,9 @@ GdalRasterImage::GdalRasterImage(const boost::shared_ptr<GDALDataset>&
 				 int Number_tile, int Tile_number_line,
 				 int Tile_number_sample)
 {
+  if(!Data_set)
+    throw Exception("Data_set is null");
+  range_check(Band_id, 1, Data_set->GetRasterCount() + 1);
   switch(Data_set->GetRasterBand(Band_id)->GetRasterDataType()) {
   case GDT_Byte:
     initialize<GByte>(Data_set, Band_id, Number_tile,

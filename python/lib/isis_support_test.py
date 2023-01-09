@@ -1,6 +1,30 @@
 from test_support import *
 from .isis_support import *
+import os
 
+@require_isis
+def test_find_isis_kernel(isolated_dir):
+    original_cache = os.environ.get('SPICECACHE')
+    try:
+        os.environ["SPICECACHE"] = isolated_dir + "/spice_cache"
+        f = find_isis_kernel_file("$mro/kernels/spk/mro_psp21_ssd_mro110c.bsp")
+        assert f is not None
+        f = find_isis_kernel_file("$lro/kernels/spk/fdf29r_2012275_2012306_v01.bsp")
+        assert f is not None
+        f = find_isis_kernel_file("$lro/kernels/spk/fdf29r_2012275_2012306_v01.bsp")
+        assert f is not None
+        # Newer kernel only available with S3 buckets, so we can test using
+        # rclone instead of rsycnc
+        f = find_isis_kernel_file("$lro/kernels/sclk/lro_clkcor_2022263_v00.tsc")
+        assert f is not None
+    finally:
+        if(original_cache is None):
+            try:
+                del os.environ["SPICECACHE"]
+            except KeyError:
+                pass
+        else:
+            os.environ["SPICECACHE"] = original_cache
 @long_test
 @require_isis
 def test_import_ctx(mars_test_data, isolated_dir):

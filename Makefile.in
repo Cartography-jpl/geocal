@@ -178,7 +178,7 @@ bin_PROGRAMS =
 afidspythonvdev_PROGRAMS = $(am__EXEEXT_1)
 
 # Include gdal in builds
-@HAVE_GDAL_TRUE@am__append_1 = $(GDAL_LIBS)
+@HAVE_GDAL_TRUE@am__append_1 = $(GDAL_LIBS) $(OPENSSL_LIBS)
 @HAVE_GDAL_TRUE@am__append_2 = $(GDAL_CFLAGS)
 @HAVE_MSPI_SHARED_TRUE@am__append_3 = $(MSPI_SHARED_LIBS)
 @HAVE_MSPI_SHARED_TRUE@am__append_4 = $(MSPI_SHARED_CFLAGS)
@@ -3343,7 +3343,12 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 
 # By default, gfortran ignores characters past column 72. Much of the fortan
 # code in this system goes past that column, so tell gfortran to allow this.
-@HAVE_GCC_TRUE@AM_FFLAGS = -ffixed-line-length-none
+# Starting with gfortran 10.0 type mismatch changed from a warning to
+# an error. Lots of the old code has type mistmatchs in them, for now
+# just go back to having the old behavior
+#AM_FFLAGS += -fallow-argument-mismatch
+# Older versions of the compiler break on this flag. Use -std=legacy instead
+@HAVE_GCC_TRUE@AM_FFLAGS = -ffixed-line-length-none -std=legacy
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
@@ -4310,7 +4315,7 @@ libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS) \
 norm_raw = $(shell cd $(abs_srcdir)/@srcraw@; pwd)
 norm_sdbx = $(shell cd $(abs_srcdir)/@srcsdbx@; pwd)
 geocal_test_all_LDADD = libgeocal.la $(CARTO_LIBS) $(VICAR_RTL_LIBS) \
-	$(SPICE_LIBS) $(am__append_10) $(GDAL_LIBS) \
+	$(SPICE_LIBS) $(am__append_10) $(GDAL_LIBS) $(OPENSSL_LIBS) \
 	$(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \

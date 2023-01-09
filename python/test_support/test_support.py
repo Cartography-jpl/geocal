@@ -232,7 +232,7 @@ def isolated_dir(tmpdir):
     curdir = os.getcwd()
     try:
         tmpdir.chdir()
-        yield curdir
+        yield os.getcwd()
     finally:
         os.chdir(curdir)
 

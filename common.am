@@ -50,6 +50,12 @@ AM_CFLAGS = -Wall
 # By default, gfortran ignores characters past column 72. Much of the fortan
 # code in this system goes past that column, so tell gfortran to allow this.
 AM_FFLAGS = -ffixed-line-length-none
+# Starting with gfortran 10.0 type mismatch changed from a warning to
+# an error. Lots of the old code has type mistmatchs in them, for now
+# just go back to having the old behavior
+#AM_FFLAGS += -fallow-argument-mismatch
+# Older versions of the compiler break on this flag. Use -std=legacy instead
+AM_FFLAGS += -std=legacy
 endif
 
 # hooks for installing. We collect this in one place so automake doesn't

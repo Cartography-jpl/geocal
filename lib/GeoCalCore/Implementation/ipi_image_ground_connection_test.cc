@@ -63,7 +63,6 @@ BOOST_AUTO_TEST_CASE(pushframe_test)
   boost::shared_ptr<RasterImage> img(new MemoryRasterImage(100,
 					   cam->number_sample(0)));
   auto igc = boost::make_shared<IpiImageGroundConnection>(ipi, dem, img);
-  serialize_write("igc.xml", igc);
   
   ImageCoordinate ic(999, 30);
   boost::shared_ptr<GroundCoordinate> gc = igc->ground_coordinate(ic);

@@ -189,7 +189,7 @@ BOOST_AUTO_TEST_CASE(glas_test)
 			     1, 2048, pitch, pitch, focal_length,
 			     FrameCoordinate(0.430442527 - 0.5,
 					     2543.46099 - 0.5 +left_masked));
-  GlasGfmCamera cam(rcam, 0, 10, "N", 1.45, rcam.focal_length()*1e-3);
+  GlasGfmCamera cam(rcam, 0, 8, "N", 1.45, rcam.focal_length()*1e-3);
   BOOST_CHECK_EQUAL(cam.number_band(), 1);
   BOOST_CHECK_EQUAL(cam.number_line(0), 1);
   BOOST_CHECK_EQUAL(cam.number_sample(0), 2048);

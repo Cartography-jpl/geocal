@@ -3248,8 +3248,10 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonbin@/shelve_igccol_test.py \
 	@srcpythonbin@/shelve_image_test.py \
 	@srcpythonbin@/tp_collect_test.py \
-	@srcpythonbin@/write_image_test.py @srcpythonlib@/__init__.py \
-	@srcpythonlib@/air_mspi_igc_test.py \
+	@srcpythonbin@/write_image_test.py \
+	@srcpythonlib@/data/isis_camera/isis_lnac_cam.bin \
+	@srcpythonlib@/data/isis_camera/isis_rnac_cam.bin \
+	@srcpythonlib@/__init__.py @srcpythonlib@/air_mspi_igc_test.py \
 	@srcpythonlib@/dem_generate_test.py \
 	@srcpythonlib@/docopt_simple_test.py \
 	@srcpythonlib@/feature_detector_extension_test.py \

@@ -787,6 +787,16 @@ void GlasGfmCamera::field_alignment_fit
   sample_number_first_ = 0;
   delta_sample_pair_ = Delta_sample;
   int npair = (int) floor(nsamp_ / delta_sample_pair_  + 0.5);
+  // Right now, we need to have delta_sample_pair_ exactly divide the
+  // number of samples. It isn't clear if the GLAS standard allows
+  // anything else, so at least for now we require this.
+  if(nsamp_ % int(delta_sample_pair_) != 0) {
+    Exception e;
+    e << "We require delta_sample_pair to exactly divide the number of samples\n"
+      << "  Delta_sample_pair: " << delta_sample_pair_ << "\n"
+      << "  Number sample:     " << nsamp_ << "\n";
+    throw e;
+  }
   field_alignment_.resize(npair, 4);
   blitz::Array<double, 2>& fa = field_alignment_;
   for(int i = 0; i < fa.rows(); ++i) {

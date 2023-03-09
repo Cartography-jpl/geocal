@@ -143,6 +143,20 @@ def test_ctx_to_igc(mars_test_data, isolated_dir):
 
 @long_test
 @require_isis
+def test_hrsc_to_igc(mars_test_data, isolated_dir):
+    # Note, this doesn't work yet. This is a placeholder for when we develop this.
+    return
+    if True:
+        # While developing, skip import by using hard coded path
+        fname = "/home/smyth/Local/geocal-repo/python/hrsc.cub"
+    else:
+        pds_to_isis("/bigdata/tllogan30/isis/hrsc_testcase/pds_data/h5235_0000_nd2.img",
+                    "hrsc.cub")
+        fname = "hrsc.cub"
+    check_igc(fname)
+    
+@long_test
+@require_isis
 def test_ctx_sample_first_to_igc(mars_test_data, isolated_dir):
     '''A case Tom had where the sample_first isn't 0'''
     fname = "/home/smyth/Local/geocal-repo/python/tom_problem.cub"

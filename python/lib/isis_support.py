@@ -139,9 +139,18 @@ class HrscPdsToIsis:
         subprocess.run([f"{os.environ['ISISROOT']}/bin/hrsc2isis",
                         f"from={pds_fname}", f"to={isis_fname}"],
                        check=True)
-        subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
-                        f"from={isis_fname}", "web=true"],
-                       check=True, stdout=subprocess.DEVNULL)
+        # spiceinit doesn't currently work with Hrsc over the web. Instead
+        # we need to have the kernels local.
+        if False:
+            subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                            f"from={isis_fname}", "web=true"],
+                           check=True, stdout=subprocess.DEVNULL)
+        else:
+            if(not os.path.exists(f"{os.environ['ISISDATA']}/mex/kernels/ck")):
+                raise RuntimeError("HRSC kernels currently can't be handled by spiceinit over the web. Make sure you have separately downloaded the HRSC mex kernels from ISIS. Looking for the directory $ISISDATA/mex/kernels/ck") 
+            subprocess.run([f"{os.environ['ISISROOT']}/bin/spiceinit",
+                            f"from={isis_fname}"],
+                           check=True, stdout=subprocess.DEVNULL)
         return (True, isis_fname)
 
 PdsToIsisHandleSet.add_default_handle(HrscPdsToIsis())
@@ -245,7 +254,7 @@ class DummyPdsToIsis:
         if(not os.path.exists(isis_fname)):
             os.symlink(pds_fname, isis_fname)
         elif(not os.path.samefile(pds_fname, isis_fname)):
-            raise RuntimeError(f"File f{isis_fname} already exists when trying to import f{pds_fname}")
+            raise RuntimeError(f"File {isis_fname} already exists when trying to import {pds_fname}")
         return (True, isis_fname)
 
 PdsToIsisHandleSet.add_default_handle(DummyPdsToIsis(), priority_order=1000)

@@ -1,7 +1,10 @@
 # This is a collection of IGC generated for various instruments.
 
+# *******************************************************************
 # Note that this is DEPRECATED, replaced with isis_to_igc. We'll leave this
-# in place sort term
+# in place short term
+# *******************************************************************
+
 from geocal_swig import *
 from .pds_label import pds_label
 from .sqlite_shelf import read_shelve

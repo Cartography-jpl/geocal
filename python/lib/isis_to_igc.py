@@ -17,6 +17,12 @@ import json
 import re
 import math
 
+def _adjust_delta_sample(delta_sample, cam_nsamp):
+    '''Adjust the delta_sample so it evenly divides cam_nsamp'''
+    while(cam_nsamp % delta_sample != 0):
+        delta_sample /= 2
+    return delta_sample
+
 class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     '''Handle set for pds to isis.
 
@@ -146,6 +152,115 @@ class CtxIsisToIgc:
                                             max_height=max_height)))
 
 IsisToIgcHandleSet.add_default_handle(CtxIsisToIgc())
+
+class HrscIsisToIgc:
+    def igc_to_glas(self, igc_r, focal_length):
+        '''Convert IGC to a GLAS model.'''
+        tspace = igc_r.ipi.time_table.time_space
+        porb = PosCsephb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         PosCsephb.LAGRANGE,
+                         PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
+                         PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
+        aorb = AttCsattb(igc_r.ipi.orbit.orbit_underlying,
+                         igc_r.ipi.time_table.min_time - 10 * tspace,
+                         igc_r.ipi.time_table.max_time + 10 * tspace,
+                         tspace,
+                         AttCsattb.LAGRANGE,
+                         AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
+                         AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
+        orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
+        band = 0
+        # TODO Update this
+        delta_sample = 100
+        cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
+                              0.65, focal_length*1e-3)
+        ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
+                    igc_r.ipi.time_table.max_time, igc_r.ipi.time_table)
+        igc_g = IpiImageGroundConnection(ipi_g, igc_r.dem, igc_r.image)
+        igc_g.platform_id = "MEX"
+        igc_g.payload_id = "MEX"
+        igc_g.sensor_id = "HRSC"
+        return igc_g
+        
+    def isis_to_igc(self, isis_img, isis_metadata, klist_in,subset=None,
+                    glas_gfm=False, rsm=False, min_height=-5000,
+                    max_height=-1500, igc_out_fname=None,
+                    match_isis=False, spice_igc=False, **keywords):
+        # TODO Update this
+        idata = isis_metadata["IsisCube"]["Instrument"]
+        if(idata["InstrumentId"] != "HRSC"):
+            return (False, None)
+        sline = 0
+        nline = isis_img.number_line
+        if(subset is not None):
+            sline = subset[0]
+            nline = subset[2]
+            img = SubRasterImage(isis_img, subset[0], subset[1],
+                                 subset[2], subset[3])
+        else:
+            img = isis_img
+        # Note IsisIgc uses LT+S. this is actually *wrong*, see the
+        # description of that in IsisIgc. We have this code in place
+        # so we can duplicate IsisIgc (e.g., make sure everything else
+        # agrees)
+        if(match_isis):
+            orb = SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist_in,
+                                   PlanetConstant.MARS_NAIF_CODE,
+                                   "LT+S")
+        else:
+            orb = SpicePlanetOrbit("MEX", "MEX_HRSC_HEAD", klist_in,
+                                   PlanetConstant.MARS_NAIF_CODE)
+        tstart = Time.time_sclk(idata["SpacecraftClockCount"], "MRO")
+        # 1e-3 is because LINE_EXPOSURE_DURATION is in milliseconds.
+        if(idata["LineExposureDuration"]["unit"] != "MSEC"):
+            raise RuntimeError(f"Not sure how to handle LineExposureDuration units of {idata['LineExposureDuration']['unit']}")
+        tspace = float(idata["LineExposureDuration"]["value"]) * 1e-3
+        tspace *= int(idata['SpatialSumming'])
+        if(subset is not None):
+            tstart += sline * tspace
+        # The data can be averaged on board. I don't think this would be
+        # hard to support, the line exposure should get multiplied (since
+        # it is a single line time) and the camera modified. But we should
+        # really test this out with some test data first though. For now, just
+        # notice that the data has on board averaging and trigger an error
+        if int(idata['SpatialSumming']) != 1:
+            raise RuntimeError("We currently only support a sampling factor of 1")
+        tt = ConstantSpacingTimeTable(tstart,
+                                      tstart + tspace * (img.number_line-1),
+                                      tspace)
+        dem = PlanetSimpleDem(PlanetConstant.MARS_NAIF_CODE)
+        orb_cache = OrbitListCache(orb, tt)
+        start_sample = int(idata["SampleFirstPixel"])
+        cam = ctx_camera(start_sample=start_sample, nsamp=img.number_sample)
+        if(isinstance(cam, SubCamera)):
+            focal_length = cam.full_camera.focal_length
+        else:
+            focal_length = cam.focal_length
+        if(spice_igc):
+            return (True, SpiceIgc(orb, cam, tt, img=img))
+        ipi = Ipi(orb_cache, cam, 0, tt.min_time, tt.max_time, tt)
+        igc = IpiImageGroundConnection(ipi, dem, img)
+        # LT+S already corrects for velocity aberration (LT+S is basically
+        # aberration plus light time - so more accurate). Turn off the
+        # igc calculation if we are matching ISIS
+        if(match_isis):
+            igc.velocity_aberration = NoVelocityAberration()
+        if(igc_out_fname is not None):
+            write_shelve(igc_out_fname, igc)
+        if(glas_gfm):
+            igc = self.igc_to_glas(igc, focal_length)
+        if(not rsm):
+            return (True, igc)
+        else:
+            return (True, (igc, rsm_context(igc, min_height=min_height,
+                                            max_height=max_height)))
+
+# Not actually in place yet, above routine is cut and pasted from
+# ctx. We need to update this
+#IsisToIgcHandleSet.add_default_handle(HrscIsisToIgc())
 
 class LroCombineEvenOdd(CalcRaster):
     '''The ISIS data is separated into even and odd data. I believe this
@@ -351,7 +466,7 @@ class LroNacIsisToIgc:
                          AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
         band = 0
-        delta_sample = 8
+        delta_sample = _adjust_delta_sample(8, igc_r.ipi.camera.number_sample(0))
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, 
                               delta_sample, "R",
                               0.65, focal_length*1e-3)

@@ -27115,8 +27115,7 @@ fi
 
 
 #=================================================================
-# Location of ISIS. Note that we only use this through python, which
-# already checks for these in a few standard locations (e.g., /opt/isis).
+# Location of ISIS.
 # This option here is used to add a specification to the setup files to
 # set these to particular values.
 
@@ -27124,7 +27123,7 @@ fi
 if test "${with_isis_root+set}" = set; then :
   withval=$with_isis_root;  ac_isis_root="$withval"
 else
-   ac_isis_root=""
+   ac_isis_root="/opt/isis"
 fi
 
 isisroot="$ac_isis_root"
@@ -27135,7 +27134,7 @@ isisroot="$ac_isis_root"
 if test "${with_isis_data+set}" = set; then :
   withval=$with_isis_data;  ac_isis_data="$withval"
 else
-   ac_isis_data=""
+   ac_isis_data="/opt/afids/data/isisdata"
 fi
 
 isisdata="$ac_isis_data"

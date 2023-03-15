@@ -201,16 +201,15 @@ fi
 AM_CONDITIONAL([BUILD_AFIDS], [false])
 
 #=================================================================
-# Location of ISIS. Note that we only use this through python, which
-# already checks for these in a few standard locations (e.g., /opt/isis).
+# Location of ISIS. 
 # This option here is used to add a specification to the setup files to
 # set these to particular values.
 AC_ARG_WITH([isis-root],
-AS_HELP_STRING([--with-isis-root@<:@=DIR@:>@], [give directory where ISIS executables can be found]), [ ac_isis_root="$withval" ], [ ac_isis_root=""] )
+AS_HELP_STRING([--with-isis-root@<:@=DIR@:>@], [give directory where ISIS executables can be found]), [ ac_isis_root="$withval" ], [ ac_isis_root="/opt/isis"] )
 AC_SUBST([isisroot], ["$ac_isis_root"])
 
 AC_ARG_WITH([isis-data],
-AS_HELP_STRING([--with-isis-data@<:@=DIR@:>@], [give directory where ISIS data can be found]), [ ac_isis_data="$withval" ], [ ac_isis_data=""] )
+AS_HELP_STRING([--with-isis-data@<:@=DIR@:>@], [give directory where ISIS data can be found]), [ ac_isis_data="$withval" ], [ ac_isis_data="/opt/afids/data/isisdata"] )
 AC_SUBST([isisdata], ["$ac_isis_data"])
 
 

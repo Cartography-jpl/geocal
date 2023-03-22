@@ -2,6 +2,7 @@
 #include "gdal_raster_image.h"
 #include "constant_raster_image.h"
 #include "geocal_serialize_support.h"
+#include "geocal_temp_file.h"
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
@@ -232,19 +233,6 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
 
 }
 
-class TempFile {
-public:
-  TempFile()
-  {
-    char fname[] = "TemporaryXXXXXX";
-    int fd = mkstemp(fname);
-    close(fd);
-    temp_fname = std::string(fname);
-  }
-  ~TempFile() {unlink(temp_fname.c_str());}
-  std::string temp_fname;
-};
-
 //-----------------------------------------------------------------------
 /// Create a stand alone file that contains a subset of the full file.
 /// This handles whatever mosaicing/subsetting is needed for the
@@ -334,8 +322,8 @@ void CartLabMultifile::create_subset_file
 	  << " -te " << std::setprecision(12)
 	  << lon_min << " " << lat_min << " " << lon_max << " "
 	  << lat_max << " -tr " << tres_lon << " " << tres_lat << " -r average";
-  TempFile f;
-  command << " " << f.temp_fname;
+  GeoCalTempFile f;
+  command << " " << f.temp_fname();
   BOOST_FOREACH(std::string f, flist)
     command << " " << f;
   // Make sure we have at least one file in the list, even if this
@@ -349,10 +337,10 @@ void CartLabMultifile::create_subset_file
   // try to use the file.
   system(command.str().c_str());
   if(Translate_arg != "") {
-    std::string t2 = std::string(f.temp_fname) + "_2";
+    std::string t2 = std::string(f.temp_fname()) + "_2";
     std::ostringstream command2;
     command2 << "gdal_translate " << Translate_arg << " "
-	     << f.temp_fname << " " << t2;
+	     << f.temp_fname() << " " << t2;
     if(Verbose)
       std::cout << "GDAL command: " << command2.str() << "\n";
     system(command2.str().c_str());
@@ -360,7 +348,7 @@ void CartLabMultifile::create_subset_file
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
     unlink(t2.c_str());
   } else {
-    GdalRasterImage d(f.temp_fname);
+    GdalRasterImage d(f.temp_fname());
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
   }
 }

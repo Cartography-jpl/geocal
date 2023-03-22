@@ -12,6 +12,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_generic_object)(void);
   INIT_TYPE INIT_FUNC(_generic_object_map)(void);
   INIT_TYPE INIT_FUNC(_auto_derivative)(void);
+  INIT_TYPE INIT_FUNC(_geocal_temp_file)(void);
   INIT_TYPE INIT_FUNC(_array_ad)(void);
   INIT_TYPE INIT_FUNC(_observer)(void);
   INIT_TYPE INIT_FUNC(_geocal_quaternion)(void);
@@ -239,6 +240,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_generic_object", INIT_FUNC(_generic_object));
   INIT_MODULE(module, "_generic_object_map", INIT_FUNC(_generic_object_map));
   INIT_MODULE(module, "_auto_derivative", INIT_FUNC(_auto_derivative));
+  INIT_MODULE(module, "_geocal_temp_file", INIT_FUNC(_geocal_temp_file));
   INIT_MODULE(module, "_array_ad", INIT_FUNC(_array_ad));
   INIT_MODULE(module, "_observer", INIT_FUNC(_observer));
   INIT_MODULE(module, "_geocal_quaternion", INIT_FUNC(_geocal_quaternion));

@@ -1,31 +1,12 @@
 #include "vicar_ogr.h"
 #include "gdal_raster_image.h"
+#include "geocal_temp_file.h"
 #include "geotiff_file.h"
 #include <boost/utility.hpp>
 #include <stdio.h>
 
 using namespace GeoCal;
 
-//-----------------------------------------------------------------------
-// Temporary file
-//-----------------------------------------------------------------------
-namespace GeoCal {
-namespace VicarOgrNsp {
-class TempFile {
-public:
-  TempFile()
-  {
-    char fname[] = "TemporaryXXXXXX";
-    int fd = mkstemp(fname);
-    close(fd);
-    temp_fname = std::string(fname);
-  }
-  ~TempFile() {unlink(temp_fname.c_str());}
-  std::string temp_fname;
-};
-
-}
-}
 //-----------------------------------------------------------------------
 /// Constructor. Normally we only have one of these objects around,
 /// although nothing is hurt if you create multiple copies.
@@ -51,7 +32,6 @@ VicarOgr::VicarOgr()
 
 template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*Fname) 
 {
-  using namespace VicarOgrNsp;
   // Write out all of the keys we find in the VICAR file into the
   // temporary file.
   GeotiffFile g(Fname, "w");
@@ -162,11 +142,10 @@ template<class T> void VicarOgr::vicar_to_gtiff_template(const T& F, const char*
 
 template<class T> MapInfo VicarOgr::from_vicar_template(const T& F) 
 {
-  using namespace VicarOgrNsp;
-  TempFile f;
-  vicar_to_gtiff_template(F, f.temp_fname.c_str());
+  GeoCalTempFile f;
+  vicar_to_gtiff_template(F, f.temp_fname().c_str());
 
-  GdalRasterImage gd(f.temp_fname);
+  GdalRasterImage gd(f.temp_fname());
   MapInfo m = gd.map_info();
 
 //----------------------------------------------------------------
@@ -225,8 +204,7 @@ MapInfo VicarOgr::from_vicar(const VicarLiteFile& F)
 
 void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
 {
-  using namespace VicarOgrNsp;
-  TempFile ft;
+  GeoCalTempFile ft;
 
 //----------------------------------------------------------------
 // Shrink MapInfo down to 1 pixel, since we don't need to create a
@@ -235,14 +213,14 @@ void VicarOgr::to_vicar(const MapInfo& Mi, VicarFile& F)
 
   MapInfo mi2 = Mi.subset(0,0,1,1);
   {
-    GdalRasterImage g(ft.temp_fname, "gtiff", mi2, 1,
+    GdalRasterImage g(ft.temp_fname(), "gtiff", mi2, 1,
 			    GdalRasterImage::Byte);
   } // Destructor called, which flushes data to disk.
 
   // Now open the file back as a GeoTIFF file and copy keys we find to
   // VICAR.
 
-  GeotiffFile g(ft.temp_fname, "r");
+  GeotiffFile g(ft.temp_fname(), "r");
   const int bufsize = 1000;
   char buf[bufsize];
   BOOST_FOREACH(GeotiffFile::geokey_t t, GeotiffFile::geotiff_tag_short()) {

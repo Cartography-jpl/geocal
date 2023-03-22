@@ -15,6 +15,7 @@
 #include <set>
 #include <vector>
 #include <fstream>
+#include <cstdint>
 
 namespace GeoCal {
 
@@ -319,26 +320,26 @@ VicarLiteFile::label<double>(const std::string& K,
 /// Convert to int.
 //-----------------------------------------------------------------------
 
-template<> inline int VicarLiteFile::to_int<unsigned char, true>(const char* c) const
-{ return *reinterpret_cast<const unsigned char*>(c); }
-template<> inline int VicarLiteFile::to_int<unsigned char, false>(const char* c) const
-{ return *reinterpret_cast<const unsigned char*>(c); }
+template<> inline int VicarLiteFile::to_int<uint8_t, true>(const char* c) const
+{ return *reinterpret_cast<const uint8_t*>(c); }
+template<> inline int VicarLiteFile::to_int<uint8_t, false>(const char* c) const
+{ return *reinterpret_cast<const uint8_t*>(c); }
 template<> inline int 
-VicarLiteFile::to_int<short int, true>(const char* c) const
-{ int res = 0;
+VicarLiteFile::to_int<int16_t, true>(const char* c) const
+{ int16_t res = 0;
   char* cr = reinterpret_cast<char*>(&res);
   cr[0] = c[1];
   cr[1] = c[0];
   return res; }
 template<> inline int 
-VicarLiteFile::to_int<short int, false>(const char* c) const
-{ return *(reinterpret_cast<const short int*>(c)); }
+VicarLiteFile::to_int<int16_t, false>(const char* c) const
+{ return *(reinterpret_cast<const int16_t*>(c)); }
 template<> inline int 
-VicarLiteFile::to_int<int, false>(const char* c) const
+VicarLiteFile::to_int<int32_t, false>(const char* c) const
 { return *(reinterpret_cast<const int*>(c)); }
 template<> inline int 
-VicarLiteFile::to_int<int, true>(const char* c) const
-{ int res = 0;
+VicarLiteFile::to_int<int32_t, true>(const char* c) const
+{ int32_t res = 0;
   char* cr = reinterpret_cast<char*>(&res);
   cr[0] = c[3];
   cr[1] = c[2];
@@ -353,18 +354,18 @@ template<> inline int VicarLiteFile::to_int<float, false>(const char* c) const
 template<> inline int VicarLiteFile::to_int<double, false>(const char* c) const
 { return (int) *reinterpret_cast<const double*>(c); }
 
-template<> inline double VicarLiteFile::to_double<unsigned char, true>(const char* c) const
-{ return to_int<unsigned char, true>(c); }
-template<> inline double VicarLiteFile::to_double<unsigned char, false>(const char* c) const
-{ return to_int<unsigned char, false>(c); }
-template<> inline double VicarLiteFile::to_double<short int, true>(const char* c) const
-{ return to_int<short int, true>(c); }
-template<> inline double VicarLiteFile::to_double<short int, false>(const char* c) const
-{ return to_int<short int, false>(c); }
-template<> inline double VicarLiteFile::to_double<int, true>(const char* c) const
-{ return to_int<int, true>(c); }
-template<> inline double VicarLiteFile::to_double<int, false>(const char* c) const
-{ return to_int<int, false>(c); }
+template<> inline double VicarLiteFile::to_double<uint8_t, true>(const char* c) const
+{ return to_int<uint8_t, true>(c); }
+template<> inline double VicarLiteFile::to_double<uint8_t, false>(const char* c) const
+{ return to_int<uint8_t, false>(c); }
+template<> inline double VicarLiteFile::to_double<int16_t, true>(const char* c) const
+{ return to_int<int16_t, true>(c); }
+template<> inline double VicarLiteFile::to_double<int16_t, false>(const char* c) const
+{ return to_int<int16_t, false>(c); }
+template<> inline double VicarLiteFile::to_double<int32_t, true>(const char* c) const
+{ return to_int<int32_t, true>(c); }
+template<> inline double VicarLiteFile::to_double<int32_t, false>(const char* c) const
+{ return to_int<int32_t, false>(c); }
 
 template<> inline double VicarLiteFile::to_double<float, false>(const char* c) const
 { return *reinterpret_cast<const float*>(c); }
@@ -377,23 +378,23 @@ template<> inline double VicarLiteFile::to_double<double, false>(const char* c) 
 //-----------------------------------------------------------------------
 
 template<> inline void 
-VicarLiteFile::from_int<unsigned char, true>(const int& I, char* c) const
-{ *c = static_cast<unsigned char>(I); }
+VicarLiteFile::from_int<uint8_t, true>(const int& I, char* c) const
+{ *c = static_cast<uint8_t>(I); }
 template<> inline void 
-VicarLiteFile::from_int<unsigned char, false>(const int& I, char* c) const
-{ *c = static_cast<unsigned char>(I); }
+VicarLiteFile::from_int<uint8_t, false>(const int& I, char* c) const
+{ *c = static_cast<uint8_t>(I); }
 template<> inline void 
-VicarLiteFile::from_int<short int, true>(const int& I, char* c) const
+VicarLiteFile::from_int<int16_t, true>(const int& I, char* c) const
 { 
   const char* cr = reinterpret_cast<const char*>(&I);
   c[0] = cr[1];
   c[1] = cr[0];
 }
 template<> inline void 
-VicarLiteFile::from_int<short int, false>(const int& I, char* c) const
-{ *(reinterpret_cast<short int *>(c)) = static_cast<short int>(I); }
+VicarLiteFile::from_int<int16_t, false>(const int& I, char* c) const
+{ *(reinterpret_cast<int16_t *>(c)) = static_cast<int16_t>(I); }
 template<> inline void 
-VicarLiteFile::from_int<int, true>(const int& I, char* c) const
+VicarLiteFile::from_int<int32_t, true>(const int& I, char* c) const
 { 
   const char* cr = reinterpret_cast<const char*>(&I);
   c[0] = cr[3];
@@ -402,8 +403,8 @@ VicarLiteFile::from_int<int, true>(const int& I, char* c) const
   c[3] = cr[0];
 }
 template<> inline void 
-VicarLiteFile::from_int<int, false>(const int& I, char* c) const
-{ *(reinterpret_cast<int *>(c)) = static_cast<int>(I); }
+VicarLiteFile::from_int<int32_t, false>(const int& I, char* c) const
+{ *(reinterpret_cast<int32_t *>(c)) = static_cast<int>(I); }
 template<> inline void 
 VicarLiteFile::from_int<float, false>(const int& I, char* c) const
 { *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
@@ -412,23 +413,23 @@ VicarLiteFile::from_int<double, false>(const int& I, char* c) const
 { *(reinterpret_cast<double *>(c)) = static_cast<double>(I); }
 
 template<> inline void 
-VicarLiteFile::from_double<unsigned char, true>(const double& I, char* c) const
-{ from_int<unsigned char, true>(static_cast<int>(I), c); }
+VicarLiteFile::from_double<uint8_t, true>(const double& I, char* c) const
+{ from_int<uint8_t, true>(static_cast<int>(I), c); }
 template<> inline void 
-VicarLiteFile::from_double<unsigned char, false>(const double& I, char* c) const
-{ from_int<unsigned char, false>(static_cast<int>(I), c); }
+VicarLiteFile::from_double<uint8_t, false>(const double& I, char* c) const
+{ from_int<uint8_t, false>(static_cast<int>(I), c); }
 template<> inline void 
-VicarLiteFile::from_double<short int, true>(const double& I, char* c) const
-{ from_int<short int, true>(static_cast<int>(I), c); }
+VicarLiteFile::from_double<int16_t, true>(const double& I, char* c) const
+{ from_int<int16_t, true>(static_cast<int>(I), c); }
 template<> inline void 
-VicarLiteFile::from_double<short int, false>(const double& I, char* c) const
-{ from_int<short int, false>(static_cast<int>(I), c); }
+VicarLiteFile::from_double<int16_t, false>(const double& I, char* c) const
+{ from_int<int16_t, false>(static_cast<int>(I), c); }
 template<> inline void 
-VicarLiteFile::from_double<int, true>(const double& I, char* c) const
-{ from_int<int, true>(static_cast<int>(I), c); }
+VicarLiteFile::from_double<int32_t, true>(const double& I, char* c) const
+{ from_int<int32_t, true>(static_cast<int>(I), c); }
 template<> inline void 
-VicarLiteFile::from_double<int, false>(const double& I, char* c) const
-{ from_int<int, false>(static_cast<int>(I), c); }
+VicarLiteFile::from_double<int32_t, false>(const double& I, char* c) const
+{ from_int<int32_t, false>(static_cast<int>(I), c); }
 template<> inline void 
 VicarLiteFile::from_double<float, false>(const double& I, char* c) const
 { *(reinterpret_cast<float *>(c)) = static_cast<float>(I); }
@@ -447,20 +448,20 @@ inline int VicarLiteFile::read_int(int B, int L, int S) const
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      return to_int<unsigned char, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<uint8_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_HALF:
-      return to_int<short int, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<int16_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     default:
       throw Exception("Unrecognized type");
       }
   else
     switch(type_) {
     case VICAR_BYTE:
-      return to_int<unsigned char, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<uint8_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_HALF:
-      return to_int<short int, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<int16_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_FULL:
-      return to_int<int, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_int<int32_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_FLOAT:
       return to_int<float, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_DOUBLE:
@@ -481,22 +482,22 @@ inline double VicarLiteFile::read_double(int B, int L, int S) const
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      return to_double<unsigned char, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<uint8_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_HALF:
-      return to_double<short int, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<int16_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_FULL:
-      return to_double<int, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<int32_t, true>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     default:
       throw Exception("Unrecognized type");
       }
   else
     switch(type_) {
     case VICAR_BYTE:
-      return to_double<unsigned char, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<uint8_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_HALF:
-      return to_double<short int, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<int16_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_FULL:
-      return to_double<int, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      return to_double<int32_t, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_FLOAT:
       return to_double<float, false>(&(data_raw->data()[B][L][S+number_sample_binary_][0]));
     case VICAR_DOUBLE:
@@ -522,21 +523,21 @@ inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl,
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<unsigned char, true>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_int<uint8_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<short int, true>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_int<int16_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<int, true>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_int<int32_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -548,21 +549,21 @@ inline void VicarLiteFile::read_int(int B, int L, int S, int Nb, int Nl,
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<unsigned char, false>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_int<uint8_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<short int, false>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_int<int16_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_int<int, false>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_int<int32_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FLOAT:
       for(int i = B; i < B + Nb; ++i)
@@ -599,21 +600,21 @@ inline void VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl,
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<unsigned char, true>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_double<uint8_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<short int, true>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_double<int16_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<int, true>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_double<int32_t, true>(&(data_raw->data()[i][j][k][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -625,21 +626,21 @@ inline void VicarLiteFile::read_double(int B, int L, int S, int Nb, int Nl,
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<unsigned char, false>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_double<uint8_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_HALF:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<short int, false>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_double<int16_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FULL:
       for(int i = B; i < B + Nb; ++i)
 	for(int j = L; j < L + Nl; ++j)
 	  for(int k = S+number_sample_binary_;
 	      k < S + Ns+number_sample_binary_; ++k, ++Res)
-	    *Res = to_double<int, false>(&(data_raw->data()[i][j][k][0]));
+	    *Res = to_double<int32_t, false>(&(data_raw->data()[i][j][k][0]));
       break;
     case VICAR_FLOAT:
       for(int i = B; i < B + Nb; ++i)
@@ -675,13 +676,13 @@ inline void VicarLiteFile::write_int(int B, int L, int S, int V) const
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      from_int<unsigned char, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<uint8_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_int<short int, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int16_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_int<int, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int32_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -689,13 +690,13 @@ inline void VicarLiteFile::write_int(int B, int L, int S, int V) const
   else
     switch(type_) {
     case VICAR_BYTE:
-      from_int<unsigned char, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<uint8_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_int<short int, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int16_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_int<int, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_int<int32_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_FLOAT:
       from_int<float, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
@@ -715,13 +716,13 @@ inline void VicarLiteFile::write_double(int B, int L, int S, double V) const
   if(swap_needed_)
     switch(type_) {
     case VICAR_BYTE:
-      from_double<unsigned char, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<uint8_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_double<short int, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int16_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_double<int, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int32_t, true>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     default:
       throw Exception("Unrecognized type");
@@ -729,13 +730,13 @@ inline void VicarLiteFile::write_double(int B, int L, int S, double V) const
   else
     switch(type_) {
     case VICAR_BYTE:
-      from_double<unsigned char, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<uint8_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_HALF:
-      from_double<short int, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int16_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_FULL:
-      from_double<int, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
+      from_double<int32_t, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));
       break;
     case VICAR_FLOAT:
       from_double<float, false>(V, &(data_raw->data()[B][L][S+number_sample_binary_][0]));

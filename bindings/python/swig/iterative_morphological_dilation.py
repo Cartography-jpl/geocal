@@ -197,8 +197,8 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
     __repr__ = _swig_repr
     C_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_C_ORDER
-    MOST_NEIGHBORS_FIRST = _iterative_morphological_dilation.IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST
     RANDOM_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_RANDOM_ORDER
+    MOST_NEIGHBORS_FIRST = _iterative_morphological_dilation.IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST
     FLAT_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE
     GAUSSIAN_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE
     NEIGBORHOOD_MEDIAN = _iterative_morphological_dilation.IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN
@@ -367,10 +367,10 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         return _iterative_morphological_dilation.IterativeMorphologicalDilation_predicted_value(self, i, j)
 
 
-    def frontier_pixel_neighbor_count(self):
+    def frontier_pixel_neighbor_count(self, num):
         """
 
-        blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const
+        blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count(int num) const
         Dilate the mask with a simple 3x3 kernel of all 1's.
 
         Subtract the original mask - so this returns nonzero for all the new
@@ -380,7 +380,7 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
         returns all masked pixels that have at least one immediate neighbor.
 
         """
-        return _iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count(self)
+        return _iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count(self, num)
 
 
     def __reduce__(self):

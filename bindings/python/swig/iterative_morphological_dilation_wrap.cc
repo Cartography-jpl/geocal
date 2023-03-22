@@ -7174,7 +7174,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_filled_image(PyObje
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7238,7 +7238,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_filled_mask(PyObjec
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7302,7 +7302,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_kernel(PyObject *SW
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7676,15 +7676,17 @@ fail:
 SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
+  int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > tempshared1 ;
   boost::shared_ptr< GeoCal::IterativeMorphologicalDilation const > *smartarg1 = 0 ;
-  PyObject *swig_obj[1] ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject *swig_obj[2] ;
   SwigValueWrapper< blitz::Array< unsigned short,2 > > result;
   
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
+  if (!SWIG_Python_UnpackTuple(args,"IterativeMorphologicalDilation_frontier_pixel_neighbor_count",2,2,swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
@@ -7700,9 +7702,14 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbo
       arg1 = const_cast< GeoCal::IterativeMorphologicalDilation * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IterativeMorphologicalDilation_frontier_pixel_neighbor_count" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
   {
     try {
-      result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_pixel_neighbor_count();
+      result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_pixel_neighbor_count(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -7711,7 +7718,7 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbo
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,188,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7887,9 +7894,9 @@ static PyMethodDef SwigMethods[] = {
 		"We only include data that as filled_mask_ false, and we normalize by\n"
 		"the portion of the kernel included. \n"
 		""},
-	 { (char *)"IterativeMorphologicalDilation_frontier_pixel_neighbor_count", (PyCFunction)_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count, METH_O, (char *)"\n"
+	 { (char *)"IterativeMorphologicalDilation_frontier_pixel_neighbor_count", _wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count, METH_VARARGS, (char *)"\n"
 		"\n"
-		"blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const\n"
+		"blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count(int num) const\n"
 		"Dilate the mask with a simple 3x3 kernel of all 1's.\n"
 		"\n"
 		"Subtract the original mask - so this returns nonzero for all the new\n"
@@ -9031,8 +9038,8 @@ SWIG_init(void) {
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation > *"));
   
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_C_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::C_ORDER)));
-  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::MOST_NEIGHBORS_FIRST)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_RANDOM_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::RANDOM_ORDER)));
+  SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::MOST_NEIGHBORS_FIRST)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::FLAT_WEIGHTED_AVERAGE)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::NEIGBORHOOD_MEDIAN)));

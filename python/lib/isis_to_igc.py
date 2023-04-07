@@ -16,12 +16,26 @@ from .spice_igc import SpiceIgc
 import json
 import re
 import math
+import numpy as np
 
 def _adjust_delta_sample(delta_sample, cam_nsamp):
-    '''Adjust the delta_sample so it evenly divides cam_nsamp'''
-    while(cam_nsamp % delta_sample != 0):
-        delta_sample /= 2
-    return delta_sample
+    '''Adjust the delta_sample so it evenly divides cam_nsamp. We find the
+    number closest to delta_sample that evenly divides cam_nsamp'''
+    # This is pretty brute force, but cam_nsamp should be at most ~10K, so
+    # this is actually pretty quick to calculate. Might be a more elegant
+    # way, but finding divisors is one of those "hard" problems, and just
+    # brute forcing it is pretty simple
+
+    # Check if we are already ok. delta_sample is chosen to divide the
+    # nominal camera sample number, so this is a good first guess
+    if(cam_nsamp % delta_sample == 0):
+        return delta_sample
+    # Note even if cam_nsamp is prime, there will be at least one number
+    # in this list because include cam_nsamp in the divisors we try
+    ntry = np.arange(2,cam_nsamp+1)
+    ndiv = ntry[np.divmod(cam_nsamp,ntry)[1] == 0]
+    # Return the ndiv closest to the delta_sample we started with
+    return int(ndiv[np.abs(ndiv - delta_sample).argmin()])
 
 class IsisToIgcHandleSet(GeoCalPriorityHandleSet):
     '''Handle set for pds to isis.
@@ -61,7 +75,8 @@ class CtxIsisToIgc:
                          AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
         band = 0
-        delta_sample = 100
+        delta_sample = _adjust_delta_sample(100,
+                                            igc_r.ipi.camera.number_sample(0))
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
                               0.65, focal_length*1e-3)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
@@ -174,7 +189,8 @@ class HrscIsisToIgc:
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
         band = 0
         # TODO Update this
-        delta_sample = 100
+        delta_sample = _adjust_delta_sample(100,
+                                            igc_r.ipi.camera.number_sample(0))
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R",
                               0.65, focal_length*1e-3)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,
@@ -310,7 +326,8 @@ class LroWacIsisToIgc:
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
         band = 0
         delta_line = 2
-        delta_sample = 16
+        delta_sample = _adjust_delta_sample(16,
+                                            igc_r.ipi.camera.number_sample(0))
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_line,
                               delta_sample, "R",
                               0.65, focal_length*1e-3)
@@ -466,7 +483,9 @@ class LroNacIsisToIgc:
                          AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MOON_NAIF_CODE)
         band = 0
-        delta_sample = _adjust_delta_sample(8, igc_r.ipi.camera.number_sample(0))
+        
+        delta_sample = _adjust_delta_sample(8,
+                                            igc_r.ipi.camera.number_sample(0))
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, 
                               delta_sample, "R",
                               0.65, focal_length*1e-3)
@@ -588,6 +607,8 @@ class HiriseIsisToIgc:
         orb_g = OrbitDes(porb,aorb, PlanetConstant.MARS_NAIF_CODE)
         band = 0
         delta_sample = 2048 / 16
+        delta_sample = _adjust_delta_sample(delta_sample,
+                                            igc_r.ipi.camera.number_sample(0))
         cam_g = GlasGfmCamera(igc_r.ipi.camera, band, delta_sample, "R", 0.7,
                               focal_length * 1e-3)
         ipi_g = Ipi(orb_g, cam_g, 0, igc_r.ipi.time_table.min_time,

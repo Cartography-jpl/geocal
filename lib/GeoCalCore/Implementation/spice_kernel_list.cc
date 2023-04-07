@@ -26,12 +26,20 @@ void SpiceKernelList::load_kernel(bool Download_from_isis_web_if_needed) const
     return;
   // Check to see if all the kernels are already on the system
   bool need_kernel = false;
+  std::vector<std::string> missing_kernel;
   for(auto f : kernel_list_)
-    if(!boost::filesystem::exists(f))
+    if(!boost::filesystem::exists(f)) {
       need_kernel = true;
+      missing_kernel.push_back(f);
+    }
   if(need_kernel) {
-    if(!Download_from_isis_web_if_needed)
-      throw Exception("We have kernels not found on the system, but aren't downloading from isis web.");
+    if(!Download_from_isis_web_if_needed) {
+      Exception e("We have kernels not found on the system, but aren't downloading from isis web.");
+      e << "Need the kernel(s):\n";
+      for(auto f : missing_kernel)
+	e << "   " << f << "\n";
+      throw e;
+    }
     boost::shared_ptr<SpiceKernelList> klist2 =
       boost_pcall<SpiceKernelList, SpiceKernelList>("boost_spice_kernel_list",
 			    boost::make_shared<SpiceKernelList>(*this));

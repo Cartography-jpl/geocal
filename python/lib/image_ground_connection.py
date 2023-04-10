@@ -179,4 +179,41 @@ def _footprint_geometry(self, cconver = geocal_swig.GeodeticConverter()):
 if(have_shape_file):
     geocal_swig.ImageGroundConnection.footprint_geometry = _footprint_geometry
 
+def _gsd_values(self, image_coordinate = None, height = None):
+    '''This return the row/along track, column/cross track, and mean
+    Ground Sampling Distance, in meters.
+
+    The GSD actually varies over the image. You can provide the image
+    coordinates to use, or if not supplied we use the image center.
+    image coordinate as seen on the surface.
+
+    The mean is the geometric mean, which is the sqrt(row gsd x col gsd).
+
+    Note that the GSD is calculated at a constant height above the reference
+    surface - we don't want to include the changes in the DEM in the GSD
+    calculation. You can supply a height to use, or we default to the median
+    value of the 9 pixels +-1 form image_coordinate (just as a robust
+    estimate to toss out any weird heights).
+    '''
+    if(image_coordinate is None):
+        image_coordinate = geocal_swig.ImageCoordinate(self.number_line // 2,
+                                                       self.number_sample // 2)
+    if(height is None):
+        hlist = []
+        for i in (-1,0,1):
+            for j in (-1,0,1):
+                ic = geocal_swig.ImageCoordinate(image_coordinate.line + i,
+                                                 image_coordinate.sample + j)
+                hlist.append(self.ground_coordinate(image_coordinate).height_reference_surface)
+        height = np.median(hlist)
+    gc = self.ground_coordinate_approx_height(image_coordinate, height)
+    gc2 = self.ground_coordinate_approx_height(geocal_swig.ImageCoordinate(image_coordinate.line + 1, image_coordinate.sample), height)
+    gc3 = self.ground_coordinate_approx_height(geocal_swig.ImageCoordinate(image_coordinate.line, image_coordinate.sample+1), height)
+    gsd_row = geocal_swig.distance(gc, gc2)
+    gsd_col = geocal_swig.distance(gc, gc3)
+    gsd_mean = sqrt(gsd_row * gsd_col)
+    return gsd_row, gsd_col, gsd_mean
+
+geocal_swig.ImageGroundConnection.gsd_values = _gsd_values
+    
 __all__ = ["GdalImageGroundConnection", "VicarImageGroundConnection"]    

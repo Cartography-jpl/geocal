@@ -91,6 +91,14 @@ def test_footprint_geometry():
     g = igc1.footprint_geometry()
     assert g.IsValid()
 
+def test_gsd():
+    igc1 = VicarImageGroundConnection(stereo_unit_test_data + "10MAY21-1.img",
+                                      dem)
+    gsd_row, gsd_col, gsd_mean = igc1.gsd_values()
+    assert gsd_row == pytest.approx(0.65,abs=0.01)
+    assert gsd_col == pytest.approx(0.55,abs=0.01)
+    assert gsd_mean == pytest.approx(0.60,abs=0.01)
+    
 
     
 

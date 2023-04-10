@@ -236,6 +236,52 @@ class TrexDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
 TrexDemData_swigregister = _trex_dem.TrexDemData_swigregister
 TrexDemData_swigregister(TrexDemData)
 
+class GdalTrexDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
+    """
+
+    This is used the read the TREx data.
+
+    This gets used by TrexDem. Although you can use this class directly,
+    generally uou'll use this through TrexDem class.
+
+    C++ includes: trex_dem.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
+        """
+
+        GdalTrexDemData::GdalTrexDemData(const std::string &Dir, bool No_coverage_is_error=true, int
+        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
+        Number_tile_each_file=4, int Number_file=4)
+        Constructor.
+
+        You can provide the directory to look for TREx DEM data, or if you
+        leave this blank we use the value of environment variable TREX_DATA.
+
+        The TREX doesn't cover the whole globe. If you ask for a point outside
+        of the area this can either be treated as an error, or alternatively
+        you can return a value of 0 instead. This is controlled by
+        No_coverage_is_error.
+
+        There are two kinds of tiling going on. At the top level, we have a
+        number of files open at one time, given by Number_file. For each file,
+        we read it with tiles with the given Number_line_per_tile x
+        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
+        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
+        entire file. 
+        """
+        _trex_dem.GdalTrexDemData_swiginit(self, _trex_dem.new_GdalTrexDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _trex_dem.delete_GdalTrexDemData
+GdalTrexDemData_swigregister = _trex_dem.GdalTrexDemData_swigregister
+GdalTrexDemData_swigregister(GdalTrexDemData)
+
 class TrexLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     """
 
@@ -351,8 +397,65 @@ TrexDem._v_directory_base = new_instancemethod(_trex_dem.TrexDem__v_directory_ba
 TrexDem_swigregister = _trex_dem.TrexDem_swigregister
 TrexDem_swigregister(TrexDem)
 
+class GdalTrexDem(geocal_swig.dem_map_info.DemMapInfo):
+    """
 
-__all__ = ["TrexDem","TrexDemData","TrexLwmData"]
+    This class provides access to the TREx.
+
+    C++ includes: trex_dem.h 
+    """
+
+    thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
+    __repr__ = _swig_repr
+
+    def __init__(self, *args):
+        """
+
+        GdalTrexDem::GdalTrexDem(const std::string &Dirbase="", bool Outside_dem_is_error=true,
+        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
+        DatumGeoid96()))
+        Constructor.
+
+        You can provide the directory where there data can be found. If you
+        leave this as a blank string, we use the environment variable
+        TREX_DATA. 
+        """
+        _trex_dem.GdalTrexDem_swiginit(self, _trex_dem.new_GdalTrexDem(*args))
+
+    def elevation(self, Y_index, X_index):
+        """
+
+        virtual double GeoCal::GdalTrexDem::elevation(int Y_index, int X_index) const
+        Return height in meters relative to datum(). 
+        """
+        return _trex_dem.GdalTrexDem_elevation(self, Y_index, X_index)
+
+
+    def _v_directory_base(self):
+        """
+
+        const std::string& GeoCal::GdalTrexDem::directory_base() const
+        Directory base that we read TREX data from. 
+        """
+        return _trex_dem.GdalTrexDem__v_directory_base(self)
+
+
+    @property
+    def directory_base(self):
+        return self._v_directory_base()
+
+
+    def __reduce__(self):
+      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+
+    __swig_destroy__ = _trex_dem.delete_GdalTrexDem
+GdalTrexDem.elevation = new_instancemethod(_trex_dem.GdalTrexDem_elevation, None, GdalTrexDem)
+GdalTrexDem._v_directory_base = new_instancemethod(_trex_dem.GdalTrexDem__v_directory_base, None, GdalTrexDem)
+GdalTrexDem_swigregister = _trex_dem.GdalTrexDem_swigregister
+GdalTrexDem_swigregister(GdalTrexDem)
+
+
+__all__ = ["TrexDem","TrexDemData","TrexLwmData","GdalTrexDem","GdalTrexDemData"]
 
 
 

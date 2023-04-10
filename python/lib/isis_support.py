@@ -52,42 +52,54 @@ def find_isis_kernel_file(f):
                 f"{os.environ['ISISDATA']}/base",
                 f"{spice_cache_dir}/base",
                 "base_usgs:",
+                "https://naif.jpl.nasa.gov/pub/naif/generic_kernels",
                 ),
                (r'\$mro',
                 f"{os.environ['ISISDATA']}/mro",
                 f"{spice_cache_dir}/mro",
-                "mro_usgs:"
+                "mro_usgs:",
+                "https://naif.jpl.nasa.gov/pub/naif/MRO",
                 ),
                (r'\$lro',
                 f"{os.environ['ISISDATA']}/lro",
                 f"{spice_cache_dir}/lro",
-                "lro_usgs:"
+                "lro_usgs:",
+                "https://naif.jpl.nasa.gov/pub/naif/LRO",
                 ),
                (r'\$mex',
                 f"{os.environ['ISISDATA']}/mex",
                 f"{spice_cache_dir}/mex",
-                "mex_usgs:"
+                "mex_usgs:",
+                "https://naif.jpl.nasa.gov/pub/naif/MEX",
                 ),
                (r'\$mgs',
                 f"{os.environ['ISISDATA']}/mgs",
                 f"{spice_cache_dir}/mgs",
-                "mgs_usgs:"
+                "mgs_usgs:",
+                "https://naif.jpl.nasa.gov/pub/naif/MGS",
                 )
                ]
-    for r,s,_,_ in sublist:
+    for r,s,_,_,_ in sublist:
         t = re.sub(r,s,f)
         if(os.path.exists(t)):
             return t
-    for r,_,s,s2 in sublist:
+    for r,_,s,s2,s3 in sublist:
         t,c = re.subn(r,s,f)
         if(c == 0):
             continue
         if(os.path.exists(t)):
             return t
         t2 = re.sub(r,s2,f)
+        t3 = re.sub(r,s3,f)
         subprocess.run(["mkdir","-p",os.path.dirname(t)],check=True)
-        subprocess.run(["rclone", "copy", f"--config={os.environ['ISISDATA']}/rclone.conf", t2, os.path.dirname(t)], check=True,
-                       stdout=subprocess.DEVNULL)
+        # Some times this fails to download, even without an error. So
+        # we just check if the file gets downloaded or not
+        subprocess.run(["rclone", "copy", f"--config={os.environ['ISISDATA']}/rclone.conf", t2, os.path.dirname(t)], stdout=subprocess.DEVNULL)
+        if(os.path.exists(t)):
+            return t
+        # If we didn't get it from ISIS, try downloading directly from
+        # the JPL NAIF site
+        subprocess.run(["curl", "-sL", t3, "-o", t], stdout=subprocess.DEVNULL)
         return t
     raise RuntimeError(f"Can't find kernel {f}")
     

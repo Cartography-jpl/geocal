@@ -194,7 +194,16 @@ RasterMultifileTile GdalCartLabMultifile::get_file(int Line, int Sample) const
     if(res.in_tile(Line, Sample))
       return res;
   }
-  return RasterMultifileTile();
+  if(!no_coverage_is_error_) {
+    boost::shared_ptr<RasterImage> cf
+      (new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
+			       no_coverage_fill_value_));
+    int ln = (Line / cf->number_line()) * cf->number_line();
+    int smp = (Sample / cf->number_sample()) * cf->number_sample();
+    return RasterMultifileTile(cf, ln, smp);
+  } else {
+    return RasterMultifileTile();
+  }
 }
 
 RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const

@@ -24,6 +24,10 @@ public:
     SwigDirector_CalcRasterMultiBand(PyObject *self, GeoCal::MapInfo const &Mi, int Nband, int Number_tile_line = -1, int Number_tile_sample = -1, int Number_tile = 4);
     virtual ~SwigDirector_CalcRasterMultiBand();
     virtual boost::shared_ptr< GeoCal::RasterImage > raster_image_ptr(int band);
+    virtual std::string desc() const;
+    virtual std::string descSwigPublic() const {
+      return GeoCal::CalcRasterMultiBand::desc();
+    }
     virtual void calc(int Lstart, int Sstart) const;
     using GeoCal::CalcRasterMultiBand::data_ptr;
     using GeoCal::CalcRasterMultiBand::initialize;
@@ -57,7 +61,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[2];
+    mutable swig::SwigVar_PyObject vtable[3];
 #endif
 
 };

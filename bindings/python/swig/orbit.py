@@ -959,10 +959,19 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
         return _orbit.Orbit_interpolate(*args)
 
     interpolate = staticmethod(interpolate)
+
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
     def __disown__(self):
         self.this.disown()
         _orbit.disown_Orbit(self)
         return weakref_proxy(self)
+Orbit.desc = new_instancemethod(_orbit.Orbit_desc, None, Orbit)
 Orbit.add_observer = new_instancemethod(_orbit.Orbit_add_observer, None, Orbit)
 Orbit.remove_observer = new_instancemethod(_orbit.Orbit_remove_observer, None, Orbit)
 Orbit.ci_look_vector = new_instancemethod(_orbit.Orbit_ci_look_vector, None, Orbit)

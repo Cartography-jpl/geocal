@@ -34,6 +34,10 @@ public:
     virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
     virtual blitz::Array< bool,1 > parameter_mask() const;
+    virtual std::string desc() const;
+    virtual std::string descSwigPublic() const {
+      return GeoCal::ImageGroundConnection::desc();
+    }
     virtual boost::shared_ptr< GeoCal::CartesianFixedLookVector > cf_look_vector_lv(GeoCal::ImageCoordinate const &Ic) const;
     virtual boost::shared_ptr< GeoCal::CartesianFixed > cf_look_vector_pos(GeoCal::ImageCoordinate const &Ic) const;
     virtual blitz::Array< double,1 > collinearity_residual(GeoCal::GroundCoordinate const &Gc, GeoCal::ImageCoordinate const &Ic_actual) const;
@@ -88,7 +92,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[37];
+    mutable swig::SwigVar_PyObject vtable[38];
 #endif
 
 };

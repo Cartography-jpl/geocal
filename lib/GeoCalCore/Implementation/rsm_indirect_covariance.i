@@ -19,6 +19,7 @@ public:
   // 		      const std::string& Rsm_support_data_edition="fake-1",
   // 		      const std::string& Triangulation_id="");
   std::string base_tre_string() const;
+  virtual std::string desc() const;
   void base_read_tre_string(std::istream& In);
   %python_attribute_with_set(image_identifier, std::string);
   %python_attribute_with_set(rsm_support_data_edition, std::string);
@@ -28,5 +29,19 @@ public:
   %pickle_serialization()
 };
 }
+
+// This class is abstract, and it isn't clear why we originally had
+// this as a directory. Skip serialization for now, we can come back
+// to this if needed. Could just add a "NotImplemented" error for the
+// pure virtual functions if needed, but for now we'll just set this aside.
+
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+//%{
+//#include "rsm_indirect_covariance_wrap.h"
+//%}
+//%geocal_director_serialization(RsmIndirectCovariance)
+
 // List of things "import *" will include
 %python_export("RsmIndirectCovariance")

@@ -211,12 +211,21 @@ class CalcRaster(geocal_swig.raster_image_variable.RasterImageVariable):
         else:
             _self = self
         _calc_raster.CalcRaster_swiginit(self, _calc_raster.new_CalcRaster(_self, *args))
+
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
     __swig_destroy__ = _calc_raster.delete_CalcRaster
     def __disown__(self):
         self.this.disown()
         _calc_raster.disown_CalcRaster(self)
         return weakref_proxy(self)
 CalcRaster._v_data = new_instancemethod(_calc_raster.CalcRaster__v_data, None, CalcRaster)
+CalcRaster.desc = new_instancemethod(_calc_raster.CalcRaster_desc, None, CalcRaster)
 CalcRaster.calc = new_instancemethod(_calc_raster.CalcRaster_calc, None, CalcRaster)
 CalcRaster_swigregister = _calc_raster.CalcRaster_swigregister
 CalcRaster_swigregister(CalcRaster)

@@ -47,6 +47,7 @@ namespace GeoCal {
 class Camera : public Observable<Camera>, public WithParameter {
 public:
   Camera();
+  virtual std::string desc() const;
   virtual void add_observer(Observer<Camera>& Obs); 
   virtual void remove_observer(Observer<Camera>& Obs);
   virtual double integration_time(int Band) const;
@@ -76,6 +77,7 @@ public:
 			     ArrayAd<double, 1>);
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
+  %pickle_serialization();
 protected:
   void notify_update_do(const Camera& Self);
 };
@@ -141,6 +143,15 @@ public:
 };
 }
 %template(Vector_Camera) std::vector<boost::shared_ptr<GeoCal::Camera> >;
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+%{
+// Needed by code below, can't easily figure these names out
+// automatically so just include here
+#include "camera_wrap.h"
+%}
+%geocal_director_serialization(Camera)
 
 // List of things "import *" will include
 %python_export("ObserverCamera", "ObservableCamera", "Camera", "SimpleCamera", "Vector_Camera",

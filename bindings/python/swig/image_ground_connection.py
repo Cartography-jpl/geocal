@@ -500,6 +500,14 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         return _image_ground_connection.ImageGroundConnection_cover(self, Mi, boundary)
 
 
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
+
     def _v_naif_code(self):
         """
 
@@ -882,6 +890,7 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
         self.this.disown()
         _image_ground_connection.disown_ImageGroundConnection(self)
         return weakref_proxy(self)
+ImageGroundConnection.desc = new_instancemethod(_image_ground_connection.ImageGroundConnection_desc, None, ImageGroundConnection)
 ImageGroundConnection.initialize = new_instancemethod(_image_ground_connection.ImageGroundConnection_initialize, None, ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_lv = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_lv, None, ImageGroundConnection)
 ImageGroundConnection.cf_look_vector_pos = new_instancemethod(_image_ground_connection.ImageGroundConnection_cf_look_vector_pos, None, ImageGroundConnection)

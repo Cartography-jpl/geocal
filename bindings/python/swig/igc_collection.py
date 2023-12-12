@@ -434,6 +434,14 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         return self._v_parameter_mask()
 
 
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
+
     def ground_coordinate(self, image_index, ic, dem = None):
       '''Return ground coordinate for the given image coordinate. You can specify
        a dem to use, or we use the dem associated with the class.'''
@@ -454,6 +462,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
         _igc_collection.disown_IgcCollection(self)
         return weakref_proxy(self)
 IgcCollection._v_number_image = new_instancemethod(_igc_collection.IgcCollection__v_number_image, None, IgcCollection)
+IgcCollection.desc = new_instancemethod(_igc_collection.IgcCollection_desc, None, IgcCollection)
 IgcCollection.collinearity_residual = new_instancemethod(_igc_collection.IgcCollection_collinearity_residual, None, IgcCollection)
 IgcCollection.collinearity_residual_jacobian = new_instancemethod(_igc_collection.IgcCollection_collinearity_residual_jacobian, None, IgcCollection)
 IgcCollection.__ground_coordinate = new_instancemethod(_igc_collection.IgcCollection___ground_coordinate, None, IgcCollection)

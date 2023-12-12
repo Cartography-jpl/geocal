@@ -24,6 +24,10 @@ public:
     SwigDirector_CalcRaster(PyObject *self, GeoCal::MapInfo const &Mi, int Number_tile = 4);
     SwigDirector_CalcRaster(PyObject *self, GeoCal::RasterImage const &Img, int Number_tile = 4);
     virtual ~SwigDirector_CalcRaster();
+    virtual std::string desc() const;
+    virtual std::string descSwigPublic() const {
+      return GeoCal::CalcRaster::desc();
+    }
     virtual void calc(int Lstart, int Sstart) const;
     using GeoCal::CalcRaster::data_ptr;
 
@@ -56,7 +60,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[1];
+    mutable swig::SwigVar_PyObject vtable[2];
 #endif
 
 };

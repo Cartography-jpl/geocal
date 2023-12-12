@@ -315,6 +315,14 @@ class WithParameter(geocal_swig.generic_object.GenericObject):
         return self._v_parameter_mask()
 
 
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
+
     def add_identity_gradient(self):
         """
 

@@ -33,6 +33,7 @@ public:
     virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
     virtual blitz::Array< bool,1 > parameter_mask() const;
+    virtual std::string desc() const;
     virtual GeoCal::CartesianInertialLookVector ci_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
     virtual GeoCal::CartesianInertialLookVectorWithDerivative ci_look_vector(GeoCal::TimeWithDerivative const &T, GeoCal::ScLookVectorWithDerivative const &Sl) const;
     virtual GeoCal::CartesianFixedLookVector cf_look_vector(GeoCal::Time T, GeoCal::ScLookVector const &Sl) const;
@@ -78,7 +79,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[29];
+    mutable swig::SwigVar_PyObject vtable[30];
 #endif
 
 };

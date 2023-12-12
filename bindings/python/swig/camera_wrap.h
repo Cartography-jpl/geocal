@@ -33,6 +33,7 @@ public:
     virtual void parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V);
     virtual std::vector< std::string,std::allocator< std::string > > parameter_name_subset() const;
     virtual blitz::Array< bool,1 > parameter_mask() const;
+    virtual std::string desc() const;
     virtual double integration_time(int Band) const;
     virtual int number_band() const;
     virtual int number_line(int Band) const;
@@ -74,7 +75,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[23];
+    mutable swig::SwigVar_PyObject vtable[24];
 #endif
 
 };

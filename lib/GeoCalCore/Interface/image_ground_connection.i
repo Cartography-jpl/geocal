@@ -66,6 +66,7 @@ protected:
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask,
 			const boost::shared_ptr<GroundMask>& Ground_mask);
+  virtual std::string desc() const;
   void initialize(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
 			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
@@ -132,6 +133,7 @@ public:
   image_coordinate_jac_parm_fd(const GroundCoordinate& Gc,
 			       const blitz::Array<double, 1>& Eps) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
+  %pickle_serialization();
   %python_attribute(naif_code, int);
   %python_attribute(cartesian_fixed, boost::shared_ptr<CartesianFixed>);
   %python_attribute_with_set(image, boost::shared_ptr<RasterImage>)
@@ -239,5 +241,15 @@ public:
 }
 
 %template(Vector_ImageGroundConnection) std::vector<boost::shared_ptr<GeoCal::ImageGroundConnection> >;
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+%{
+// Needed by code below, can't easily figure these names out
+// automatically so just include here
+#include "image_ground_connection_wrap.h"
+%}
+%geocal_director_serialization(ImageGroundConnection)
+
 // List of things "import *" will include
 %python_export("ImageGroundConnection", "Vector_ImageGroundConnection", "ImageGroundConnectionFailed", "OffsetImageGroundConnection", "ImageGroundConnectionCopy")

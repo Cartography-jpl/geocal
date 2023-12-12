@@ -267,6 +267,7 @@ public:
   Orbit(Time Min_time = Time::min_valid_time, 
 	Time Max_time = Time::max_valid_time);
   virtual ~Orbit();
+  virtual std::string desc() const;
   virtual void add_observer(Observer<Orbit>& Obs);
   virtual void remove_observer(Observer<Orbit>& Obs);
     
@@ -392,89 +393,10 @@ public:
               const boost::math::quaternion<AutoDerivative<double> >& Q1, 
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
 	      const AutoDerivative<double>& toffset, double tspace);
+  %pickle_serialization();
 protected:
   void notify_update_do(const Orbit& Self);
 };
-
-%{
-#include "geocal_serialize_support.h"
-#include "orbit_wrap.h"
-
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-
-namespace boost {
-  namespace serialization {
-    template<class Archive>
-    void serialize(Archive& ar, SwigDirector_Orbit& Orb, const unsigned int version) {
-      std::cerr << "In serialize\n";
-      ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(Orbit),
-					  boost::serialization::base_object<GeoCal::Orbit>(Orb));
-      std::cerr << "Orb min time: " << Orb.min_time() << "\n";
-    }
-    template<class Archive> 
-    void save_construct_data(Archive & ar, const SwigDirector_Orbit* d, 
-			     const unsigned int version)
-    {
-      PyObject* obj = PyObject_CallMethodObjArgs(d->swig_get_self(),
-			PyString_FromString("__boost_serialize_save__"),
-			NULL);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      std::string python_object = PyString_AsString(obj);
-      ar & GEOCAL_NVP(python_object);
-    }
-    template<class Archive>
-    void load_construct_data(Archive & ar, SwigDirector_Orbit* d,
-			     const unsigned int version)
-    {
-      std::string python_object;
-      ar & GEOCAL_NVP(python_object);
-      PyObject* lis = cpickle_loads(python_object);
-      PyObject* func = PyTuple_GetItem(lis, 0);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      PyObject* arg = PyTuple_GetItem(lis, 1);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      PyObject* obj = PyObject_Call(func, arg, NULL);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      ::new(d)SwigDirector_Orbit(obj);
-    }
-  }
-}
-BOOST_CLASS_EXPORT_KEY(SwigDirector_Orbit);
-BOOST_CLASS_EXPORT_IMPLEMENT(SwigDirector_Orbit);
- template void boost::serialization::serialize(boost::archive::polymorphic_oarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
- template void boost::serialization::serialize(boost::archive::polymorphic_iarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
-template
-
-void boost::serialization::save_construct_data
-(polymorphic_oarchive & ar, const SwigDirector_Orbit* d, 
- const unsigned int version);
-
-template
-void boost::serialization::load_construct_data
-(polymorphic_iarchive & ar, SwigDirector_Orbit* d, const unsigned int version);
-
-#endif  
-%}
 
 class KeplerOrbit : public Orbit {
 public:
@@ -507,6 +429,15 @@ public:
 %extend std::vector<boost::shared_ptr<GeoCal::QuaternionOrbitData> > {
   %pickle_serialization();
 };
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+%{
+// Needed by code below, can't easily figure these names out
+// automatically so just include here
+#include "orbit_wrap.h"
+%}
+%geocal_director_serialization(Orbit)
 
 // List of things "import *" will include
 %python_export("OrbitData", "QuaternionOrbitData", "Orbit", "KeplerOrbit", "ObservableOrbit", "ObserverOrbit", "Vector_QuaternionOrbitData")

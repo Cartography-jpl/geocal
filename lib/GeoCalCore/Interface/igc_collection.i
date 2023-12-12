@@ -47,6 +47,7 @@ class IgcCollection: public WithParameter {
 public:
   virtual ~IgcCollection() {}
   %python_attribute(number_image, virtual int);
+  virtual std::string desc() const;
   virtual blitz::Array<double, 1> 
   collinearity_residual(int Image_index,
 			const GroundCoordinate& Gc,
@@ -93,7 +94,7 @@ public:
 			     ArrayAd<double, 1>);
   %python_attribute(parameter_name_subset, virtual std::vector<std::string>);
   %python_attribute(parameter_mask, virtual blitz::Array<bool, 1>);
-
+  %pickle_serialization();
 %pythoncode {
 def ground_coordinate(self, image_index, ic, dem = None):
   '''Return ground coordinate for the given image coordinate. You can specify
@@ -107,6 +108,16 @@ def ground_coordinate(self, image_index, ic, dem = None):
 };
 
 }
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+%{
+// Needed by code below, can't easily figure these names out
+// automatically so just include here
+#include "igc_collection_wrap.h"
+%}
+%geocal_director_serialization(IgcCollection)
+
 // List of things "import *" will include
 %python_export("IgcCollection")
 

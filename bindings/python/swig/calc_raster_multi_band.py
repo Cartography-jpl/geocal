@@ -215,6 +215,14 @@ class CalcRasterMultiBand(geocal_swig.raster_image_multi_band_variable.RasterIma
         else:
             _self = self
         _calc_raster_multi_band.CalcRasterMultiBand_swiginit(self, _calc_raster_multi_band.new_CalcRasterMultiBand(_self, *args))
+
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
     __swig_destroy__ = _calc_raster_multi_band.delete_CalcRasterMultiBand
     def __disown__(self):
         self.this.disown()
@@ -222,6 +230,7 @@ class CalcRasterMultiBand(geocal_swig.raster_image_multi_band_variable.RasterIma
         return weakref_proxy(self)
 CalcRasterMultiBand.raster_image = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_raster_image, None, CalcRasterMultiBand)
 CalcRasterMultiBand._v_data = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand__v_data, None, CalcRasterMultiBand)
+CalcRasterMultiBand.desc = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_desc, None, CalcRasterMultiBand)
 CalcRasterMultiBand.calc = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_calc, None, CalcRasterMultiBand)
 CalcRasterMultiBand.initialize = new_instancemethod(_calc_raster_multi_band.CalcRasterMultiBand_initialize, None, CalcRasterMultiBand)
 CalcRasterMultiBand_swigregister = _calc_raster_multi_band.CalcRasterMultiBand_swigregister

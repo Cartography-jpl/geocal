@@ -20,6 +20,7 @@ class SwigDirector_RsmIndirectCovariance : public GeoCal::RsmIndirectCovariance,
 public:
     SwigDirector_RsmIndirectCovariance(PyObject *self);
     virtual ~SwigDirector_RsmIndirectCovariance();
+    virtual std::string desc() const;
     virtual std::string print_to_string() const;
 
 /* Internal director utilities */
@@ -51,7 +52,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[1];
+    mutable swig::SwigVar_PyObject vtable[2];
 #endif
 
 };

@@ -427,11 +427,20 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     def parameter_mask(self):
         return self._v_parameter_mask()
 
+
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
     __swig_destroy__ = _camera.delete_Camera
     def __disown__(self):
         self.this.disown()
         _camera.disown_Camera(self)
         return weakref_proxy(self)
+Camera.desc = new_instancemethod(_camera.Camera_desc, None, Camera)
 Camera.add_observer = new_instancemethod(_camera.Camera_add_observer, None, Camera)
 Camera.remove_observer = new_instancemethod(_camera.Camera_remove_observer, None, Camera)
 Camera.integration_time = new_instancemethod(_camera.Camera_integration_time, None, Camera)

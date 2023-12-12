@@ -1,6 +1,6 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(geocal, 1.28)
+AC_INIT([geocal],[1.28])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIR([config/m4])
 AC_CONFIG_MACRO_DIR([config/m4_local])
@@ -17,7 +17,7 @@ AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support
 geocal_topdir=.
 
 AFIDS_COMMON
-MP_WITH_CURSES
+AX_WITH_CURSES
 
 # Not sure if we'll always want this, but for now try adding openmp
 AC_OPENMP
@@ -139,7 +139,7 @@ AC_IS_MAC
 # Use sincos if it is available. This is on most Linux systems, but not on
 # the mac.
 #=================================================================
-AC_CHECK_LIBM
+LT_LIB_M
 LIBS="$LIBS $LIBM"
 AC_CHECK_FUNCS(sincos)
 

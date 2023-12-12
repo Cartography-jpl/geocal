@@ -1,4 +1,5 @@
 from geocal_swig import Orbit
+from .sqlite_shelf import read_shelve, write_shelve
 from test_support import *
 import pickle
 
@@ -14,17 +15,14 @@ class PythonOrbit(Orbit):
     def desc(self):
         return "PythonOrbit"
 
-@skip    
 @require_serialize
-def test_director_serialize():
+def test_director_serialize(isolated_dir):
     orb = PythonOrbit()
     print(orb)
-    t = serialize_write_string(orb)
-    print(t)
-    orb2 = serialize_read_generic_string(t)
+    write_shelve("orb.xml", orb)
+    orb2 = read_shelve("orb.xml")
     print(orb2.min_time)
 
-@skip    
 @require_serialize
 def test_director_pickle():
     orb = PythonOrbit()

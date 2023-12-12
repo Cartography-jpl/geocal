@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_igc_ray_caster.SwigPyIterator___sub
 SwigPyIterator_swigregister = _igc_ray_caster.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _igc_ray_caster.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _igc_ray_caster.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -409,7 +410,11 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _igc_ray_caster.delete_IgcRayCaster
 IgcRayCaster._v_number_sub_line = new_instancemethod(_igc_ray_caster.IgcRayCaster__v_number_sub_line, None, IgcRayCaster)

@@ -100,6 +100,13 @@ def _swig_setattr_nondynamic_method(set):
     return set_attr
 
 
+try:
+    import weakref
+    weakref_proxy = weakref.proxy
+except __builtin__.Exception:
+    weakref_proxy = lambda x: x
+
+
 
 import os
 
@@ -113,13 +120,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return SWIG_MODULE.serialize_read_binary(data)
+    return SWIG_MODULE.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return SWIG_MODULE.serialize_read_binary(data)
+      return SWIG_MODULE.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 

@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_geocal_time.SwigPyIterator___sub__,
 SwigPyIterator_swigregister = _geocal_time.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _geocal_time.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _geocal_time.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -253,7 +254,7 @@ class Time(geocal_swig.generic_object.GenericObject):
     def time_unix(unix_time):
         """
 
-        static Time GeoCal::Time::time_unix(std::time_t unix_time)
+        static Time GeoCal::Time::time_unix(double unix_time)
         Return time from given Unix time (epoch of 1970-01-01). 
         """
         return _geocal_time.Time_time_unix(unix_time)
@@ -421,7 +422,11 @@ class Time(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
 
     def __init__(self):
@@ -493,7 +498,7 @@ def Time_time_gps(*args):
 def Time_time_unix(unix_time):
     """
 
-    static Time GeoCal::Time::time_unix(std::time_t unix_time)
+    static Time GeoCal::Time::time_unix(double unix_time)
     Return time from given Unix time (epoch of 1970-01-01). 
     """
     return _geocal_time.Time_time_unix(unix_time)
@@ -545,7 +550,7 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::TimeWithDerivative::TimeWithDerivative(const Time &T)
+        GeoCal::TimeWithDerivative::TimeWithDerivative()
 
         """
         _geocal_time.TimeWithDerivative_swiginit(self, _geocal_time.new_TimeWithDerivative(*args))
@@ -693,7 +698,11 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _geocal_time.delete_TimeWithDerivative
 TimeWithDerivative._v_pgs = new_instancemethod(_geocal_time.TimeWithDerivative__v_pgs, None, TimeWithDerivative)

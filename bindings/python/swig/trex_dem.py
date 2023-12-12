@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _trex_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -230,7 +231,11 @@ class TrexDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
         _trex_dem.TrexDemData_swiginit(self, _trex_dem.new_TrexDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _trex_dem.delete_TrexDemData
 TrexDemData_swigregister = _trex_dem.TrexDemData_swigregister
@@ -276,7 +281,11 @@ class GdalTrexDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
         _trex_dem.GdalTrexDemData_swiginit(self, _trex_dem.new_GdalTrexDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _trex_dem.delete_GdalTrexDemData
 GdalTrexDemData_swigregister = _trex_dem.GdalTrexDemData_swigregister
@@ -334,7 +343,11 @@ class TrexLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
         _trex_dem.TrexLwmData_swiginit(self, _trex_dem.new_TrexLwmData(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _trex_dem.delete_TrexLwmData
 TrexLwmData_swigregister = _trex_dem.TrexLwmData_swigregister
@@ -389,7 +402,11 @@ class TrexDem(geocal_swig.dem_map_info.DemMapInfo):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _trex_dem.delete_TrexDem
 TrexDem.elevation = new_instancemethod(_trex_dem.TrexDem_elevation, None, TrexDem)
@@ -446,7 +463,11 @@ class GdalTrexDem(geocal_swig.dem_map_info.DemMapInfo):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _trex_dem.delete_GdalTrexDem
 GdalTrexDem.elevation = new_instancemethod(_trex_dem.GdalTrexDem_elevation, None, GdalTrexDem)

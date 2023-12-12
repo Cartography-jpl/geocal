@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _local_rectangular_coordinate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -252,7 +253,11 @@ class LocalRcParameter(geocal_swig.generic_object.GenericObject):
     cf_offset = _swig_property(_local_rectangular_coordinate.LocalRcParameter_cf_offset_get, _local_rectangular_coordinate.LocalRcParameter_cf_offset_set)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _local_rectangular_coordinate.delete_LocalRcParameter
 LocalRcParameter.__str__ = new_instancemethod(_local_rectangular_coordinate.LocalRcParameter___str__, None, LocalRcParameter)
@@ -309,7 +314,11 @@ class LocalRectangularCoordinate(geocal_swig.ground_coordinate.GroundCoordinate)
     position = _swig_property(_local_rectangular_coordinate.LocalRectangularCoordinate_position_get, _local_rectangular_coordinate.LocalRectangularCoordinate_position_set)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _local_rectangular_coordinate.delete_LocalRectangularCoordinate
 LocalRectangularCoordinate_swigregister = _local_rectangular_coordinate.LocalRectangularCoordinate_swigregister
@@ -367,7 +376,11 @@ class LocalRcConverter(geocal_swig.coordinate_converter.CoordinateConverter):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _local_rectangular_coordinate.delete_LocalRcConverter
 LocalRcConverter.convert_from_coordinate = new_instancemethod(_local_rectangular_coordinate.LocalRcConverter_convert_from_coordinate, None, LocalRcConverter)
@@ -425,7 +438,11 @@ class LocalZDem(geocal_swig.dem.Dem):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _local_rectangular_coordinate.delete_LocalZDem
 LocalZDem._v_z = new_instancemethod(_local_rectangular_coordinate.LocalZDem__v_z, None, LocalZDem)

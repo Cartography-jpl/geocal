@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _orbit_des.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -496,7 +497,11 @@ class PosCsephb(geocal_swig.generic_object.GenericObject):
     des_read = staticmethod(des_read)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_des.delete_PosCsephb
 PosCsephb.pos_vel = new_instancemethod(_orbit_des.PosCsephb_pos_vel, None, PosCsephb)
@@ -842,7 +847,11 @@ class AttCsattb(geocal_swig.generic_object.GenericObject):
     des_read = staticmethod(des_read)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_des.delete_AttCsattb
 AttCsattb._v_id = new_instancemethod(_orbit_des.AttCsattb__v_id, None, AttCsattb)
@@ -979,7 +988,11 @@ class OrbitDes(geocal_swig.orbit.Orbit):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit_des.delete_OrbitDes
 OrbitDes.orbit_data = new_instancemethod(_orbit_des.OrbitDes_orbit_data, None, OrbitDes)

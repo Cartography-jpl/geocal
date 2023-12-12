@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_geocal_quaternion.SwigPyIterator___
 SwigPyIterator_swigregister = _geocal_quaternion.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _geocal_quaternion.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _geocal_quaternion.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 

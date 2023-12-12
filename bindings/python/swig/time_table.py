@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_time_table.SwigPyIterator___sub__, 
 SwigPyIterator_swigregister = _time_table.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _time_table.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _time_table.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -193,7 +194,11 @@ class Vector_Time(object):
         _time_table.Vector_Time_swiginit(self, _time_table.new_Vector_Time(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_Vector_Time
 Vector_Time.iterator = new_instancemethod(_time_table.Vector_Time_iterator, None, Vector_Time)
@@ -527,7 +532,11 @@ class ConstantSpacingTimeTable(TimeTable):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_ConstantSpacingTimeTable
 ConstantSpacingTimeTable._v_time_space = new_instancemethod(_time_table.ConstantSpacingTimeTable__v_time_space, None, ConstantSpacingTimeTable)
@@ -605,7 +614,11 @@ class ConstantSpacingFrameletTimeTable(TimeTable):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_ConstantSpacingFrameletTimeTable
 ConstantSpacingFrameletTimeTable._v_time_space = new_instancemethod(_time_table.ConstantSpacingFrameletTimeTable__v_time_space, None, ConstantSpacingFrameletTimeTable)
@@ -670,7 +683,11 @@ class MeasuredTimeTable(TimeTable):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _time_table.delete_MeasuredTimeTable
 MeasuredTimeTable._v_size_time_list = new_instancemethod(_time_table.MeasuredTimeTable__v_size_time_list, None, MeasuredTimeTable)

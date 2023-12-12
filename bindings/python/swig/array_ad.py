@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _array_ad.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -217,7 +218,7 @@ class ArrayAd_double_1(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_1_swiginit(self, _array_ad.new_ArrayAd_double_1(*args))
@@ -234,7 +235,7 @@ class ArrayAd_double_1(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_1_resize(self, *args)
@@ -243,7 +244,7 @@ class ArrayAd_double_1(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_1__v_value(self)
@@ -257,7 +258,7 @@ class ArrayAd_double_1(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_1__v_jacobian(self)
@@ -413,7 +414,11 @@ class ArrayAd_double_1(object):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_1
 ArrayAd_double_1.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_1_resize_number_variable, None, ArrayAd_double_1)
@@ -440,7 +445,7 @@ class ArrayAd_double_2(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_2_swiginit(self, _array_ad.new_ArrayAd_double_2(*args))
@@ -457,7 +462,7 @@ class ArrayAd_double_2(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_2_resize(self, *args)
@@ -466,7 +471,7 @@ class ArrayAd_double_2(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_2__v_value(self)
@@ -480,7 +485,7 @@ class ArrayAd_double_2(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_2__v_jacobian(self)
@@ -636,7 +641,11 @@ class ArrayAd_double_2(object):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_2
 ArrayAd_double_2.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_2_resize_number_variable, None, ArrayAd_double_2)
@@ -663,7 +672,7 @@ class ArrayAd_double_3(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_3_swiginit(self, _array_ad.new_ArrayAd_double_3(*args))
@@ -680,7 +689,7 @@ class ArrayAd_double_3(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_3_resize(self, *args)
@@ -689,7 +698,7 @@ class ArrayAd_double_3(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_3__v_value(self)
@@ -703,7 +712,7 @@ class ArrayAd_double_3(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_3__v_jacobian(self)
@@ -859,7 +868,11 @@ class ArrayAd_double_3(object):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_3
 ArrayAd_double_3.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_3_resize_number_variable, None, ArrayAd_double_3)
@@ -886,7 +899,7 @@ class ArrayAd_double_4(object):
     def __init__(self, *args):
         """
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
+        GeoCal::ArrayAd< T, D >::ArrayAd(const blitz::TinyVector< int, D > &Shape, int nvar)
 
         """
         _array_ad.ArrayAd_double_4_swiginit(self, _array_ad.new_ArrayAd_double_4(*args))
@@ -903,7 +916,7 @@ class ArrayAd_double_4(object):
     def resize(self, *args):
         """
 
-        void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)
+        void GeoCal::ArrayAd< T, D >::resize(int n1, int n2, int n3, int n4, int n5, int nvar)
 
         """
         return _array_ad.ArrayAd_double_4_resize(self, *args)
@@ -912,7 +925,7 @@ class ArrayAd_double_4(object):
     def _v_value(self):
         """
 
-        const blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value() const
+        blitz::Array<T, D>& GeoCal::ArrayAd< T, D >::value()
 
         """
         return _array_ad.ArrayAd_double_4__v_value(self)
@@ -926,7 +939,7 @@ class ArrayAd_double_4(object):
     def _v_jacobian(self):
         """
 
-        const blitz::Array<T, D+1> GeoCal::ArrayAd< T, D >::jacobian() const
+        blitz::Array<T, D+1>& GeoCal::ArrayAd< T, D >::jacobian()
 
         """
         return _array_ad.ArrayAd_double_4__v_jacobian(self)
@@ -1082,7 +1095,11 @@ class ArrayAd_double_4(object):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _array_ad.delete_ArrayAd_double_4
 ArrayAd_double_4.resize_number_variable = new_instancemethod(_array_ad.ArrayAd_double_4_resize_number_variable, None, ArrayAd_double_4)

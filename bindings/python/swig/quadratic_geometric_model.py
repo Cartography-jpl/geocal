@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_quadratic_geometric_model.SwigPyIte
 SwigPyIterator_swigregister = _quadratic_geometric_model.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _quadratic_geometric_model.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _quadratic_geometric_model.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -200,9 +201,12 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def __init__(self, *args):
         """
 
-        QuadraticGeometricModel::QuadraticGeometricModel(FitType ft=LINEAR, double Magnify_line=1.0, double
-        Magnify_sample=1.0)
-        Constructor. This creates an identity transformation. 
+        QuadraticGeometricModel::QuadraticGeometricModel(const boost::shared_ptr< GeometricTiePoints > &Tp, int Min_tp_to_fit,
+        FitType ft=LINEAR, double Magnify_line=1.0, double Magnify_sample=1.0)
+        Constructor.
+
+        This fits the set of Tp, or creates an identity transformation if Tp
+        is null. 
         """
         _quadratic_geometric_model.QuadraticGeometricModel_swiginit(self, _quadratic_geometric_model.new_QuadraticGeometricModel(*args))
 
@@ -239,15 +243,8 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def _v_transformation(self):
         """
 
-        const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation() const
-        Transformation, which is the coefficients of the polynomial.
+        blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::transformation()
 
-        We have
-
-        x = trans(0)*px+trans(1)*py+trans(2)+trans(3)*px*px+
-        trans(4)*py*py+trans(5)*px*py y =
-        trans(6)*px+trans(7)*py+trans(8)+trans(9)*px*px+
-        trans(10)*py*py+trans(11)*px*py 
         """
         return _quadratic_geometric_model.QuadraticGeometricModel__v_transformation(self)
 
@@ -260,8 +257,8 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     def _v_inverse_transformation(self):
         """
 
-        const blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::inverse_transformation() const
-        Inverse of transformation. 
+        blitz::Array<double, 1>& GeoCal::QuadraticGeometricModel::inverse_transformation()
+
         """
         return _quadratic_geometric_model.QuadraticGeometricModel__v_inverse_transformation(self)
 
@@ -352,7 +349,11 @@ class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _quadratic_geometric_model.delete_QuadraticGeometricModel
 QuadraticGeometricModel._v_tie_points = new_instancemethod(_quadratic_geometric_model.QuadraticGeometricModel__v_tie_points, None, QuadraticGeometricModel)

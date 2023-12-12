@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _rsm_adjustable_parameter_a.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -303,7 +304,11 @@ class RsmAdjustableParameterA(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_adjustable_parameter_a.delete_RsmAdjustableParameterA
 RsmAdjustableParameterA.tre_string = new_instancemethod(_rsm_adjustable_parameter_a.RsmAdjustableParameterA_tre_string, None, RsmAdjustableParameterA)

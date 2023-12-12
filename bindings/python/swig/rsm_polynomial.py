@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _rsm_polynomial.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -203,15 +204,8 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
     def __init__(self, Np_x, Np_y, Np_z, Is_denominator=False, Max_order=-1):
         """
 
-        RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int
-        Max_order=-1)
-        Constructor.
-
-        You indicated the order of the polynomial in each dimension, and if
-        this is a denominator (where we hold the constant term to 1.0 by
-        convention, and don't fit for this). The maximum order of cross terms
-        can be given, or left as -1 in which case we don't limit the cross
-        terms. 
+        RsmPolynomial::RsmPolynomial(const RsmPolynomial &Rp)
+        Copy constructor. 
         """
         _rsm_polynomial.RsmPolynomial_swiginit(self, _rsm_polynomial.new_RsmPolynomial(Np_x, Np_y, Np_z, Is_denominator, Max_order))
 
@@ -324,7 +318,11 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _rsm_polynomial.delete_RsmPolynomial
 RsmPolynomial.__str__ = new_instancemethod(_rsm_polynomial.RsmPolynomial___str__, None, RsmPolynomial)

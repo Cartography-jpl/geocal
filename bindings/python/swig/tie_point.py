@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_tie_point.SwigPyIterator___sub__, N
 SwigPyIterator_swigregister = _tie_point.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _tie_point.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _tie_point.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -384,7 +385,11 @@ class TiePoint(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _tie_point.delete_TiePoint
 TiePoint._v_id = new_instancemethod(_tie_point.TiePoint__v_id, None, TiePoint)
@@ -518,7 +523,11 @@ class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVecto
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _tie_point.delete_TiePointCollection
 TiePointCollection.add_ibis_file = new_instancemethod(_tie_point.TiePointCollection_add_ibis_file, None, TiePointCollection)

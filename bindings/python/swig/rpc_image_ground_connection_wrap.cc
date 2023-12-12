@@ -3792,6 +3792,13 @@ namespace swig {
 }
 
 
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
+
+
 #include <boost/shared_ptr.hpp>
 #include <boost/rational.hpp>
 
@@ -4307,26 +4314,8 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #define SWIG_MAPPER_NAMESPACE GeoCal
 
 
-// If the object passed in actually a python director, we don't own
-// it. Instead, when the reference count goes to 0 we just decrement
-// our reference to it.
-//
-// The original RefPtr had null deleter if this is a director object,
-// so we don't actually delete the pointer p
-  class PythonRefPtrCleanup {
-  public:
-    PythonRefPtrCleanup(PyObject* Obj) : obj(Obj) {}
-    void operator()(void* p) { Py_DECREF(obj);}
-  private:
-    PyObject* obj;
-  };
-
-
-SWIGINTERNINLINE PyObject*
-  SWIG_From_int  (int value)
-{
-  return PyInt_FromLong((long) value);
-}
+// See DirectorNotes.md for discussion of this.
+#include "python_ref_ptr_cleanup.h"
 
 
 #include "swig_type_mapper.h"
@@ -4363,14 +4352,17 @@ inline std::string cpickle_dumps(PyObject* obj)
   if(PyErr_Occurred()) {
     throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
   }
-  return std::string(PyString_AsString(res));
+  char *buf;
+  Py_ssize_t len;
+  PyBytes_AsStringAndSize(res, &buf, &len);
+  return std::string(buf, len);
 }
 
 inline PyObject* cpickle_loads(const std::string& S)
 {
   PyObject* res = PyObject_CallMethodObjArgs(cpickle_module(),
 					     PyString_FromString("loads"),
-					     PyString_FromString(S.c_str()), 
+					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
     throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
@@ -5547,6 +5539,32 @@ template<> inline int type_to_npy<char>() {return NPY_BYTE;}
 template<> inline int type_to_npy<unsigned char>() {return NPY_UBYTE;}
 template<> inline int type_to_npy<bool>() {return NPY_BOOL;}
 
+inline const char* npy_type_str(int type_enum)
+{
+    switch (type_enum) {
+        case NPY_DOUBLE:
+            return "double";
+        case NPY_FLOAT:
+            return "float";
+        case NPY_INT:
+            return "int";
+        case NPY_UINT:
+            return "unsigned int";
+        case NPY_SHORT:
+            return "short int";
+        case NPY_USHORT:
+            return "unsigned short int";
+        case NPY_BYTE:
+            return "char";
+        case NPY_UBYTE:
+            return "unsigned char";
+        case NPY_BOOL:
+            return "bool";
+        default:
+            return "Unknown";
+    }
+}
+
 //--------------------------------------------------------------
 // Custom exception for throwing errors we encounter when
 // converting values that can be caught by typemaps and used
@@ -5672,12 +5690,20 @@ inline blitz::Array<T, D> to_blitz_array(PyObject* numpy_obj)
 {
   PyArrayObject* numpy = (PyArrayObject*) numpy_obj;
   if(PyArray_NDIM(numpy) != D) {
-    std::cerr << PyArray_NDIM(numpy) << "\n"
-              << D << "\n";
-    throw std::runtime_error("Dimension of array is not the expected size");
+    std::stringstream err;
+    err << "Error converting PyObject to Blitz array. "
+        << "Dimension of array passed: " << PyArray_NDIM(numpy) 
+        << " is not the expected size: " << D
+        << " for blitz::Array<" << npy_type_str(type_to_npy<T>()) << ", " << D << ">";
+    throw std::runtime_error(err.str().c_str());
   }
   if(PyArray_TYPE(numpy) != type_to_npy<T>()) {
-    throw std::runtime_error("Type of array not the expected type");
+    std::stringstream err;
+    err << "Error converting PyObject to Blitz array. "
+        << "Type of array passed: " << npy_type_str(PyArray_TYPE(numpy))
+        << " is not the expected type: " << npy_type_str(type_to_npy<T>())
+        << " for blitz::Array<" << npy_type_str(type_to_npy<T>()) << ", " << D << ">";
+    throw std::runtime_error(err.str().c_str());
   }
   blitz::TinyVector<int, D> shape, stride;
   for(int i = 0; i < D; ++i) {
@@ -5686,7 +5712,7 @@ inline blitz::Array<T, D> to_blitz_array(PyObject* numpy_obj)
     // of type T.
     stride(i) = PyArray_STRIDE(numpy, i) / sizeof(T);
     if((int) (stride(i) * sizeof(T)) != (int) PyArray_STRIDE(numpy, i)) {
-      throw std::runtime_error("blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
+      throw std::runtime_error("Error converting PyObject to Blitz array. blitz::Array can't handle strides that aren't an even multiple of sizeof(T)");
     }
   }
   blitz::Array<T, D> a((T*)PyArray_DATA(numpy), shape, stride, 
@@ -5779,7 +5805,7 @@ public:
     fh(Fh), fis(Fis) {}
   std::streamsize read(char* s, std::streamsize n)
   {
-    PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (int) n);
+    PyObject* res = PyObject_CallMethod(fh, "read", "(i)", (Py_ssize_t) n);
     if(res == NULL) {
       throw std::runtime_error("Call to FileHandle read failed");
     }
@@ -5796,9 +5822,9 @@ public:
   {
     // Different format strings for python 2 vs 3.
 #if PY_MAJOR_VERSION > 2
-    PyObject* res = PyObject_CallMethod(fh, "write", "(y#)", s, (int) n);
+    PyObject* res = PyObject_CallMethod(fh, "write", "(y#)", s, (Py_ssize_t) n);
 #else
-    PyObject* res = PyObject_CallMethod(fh, "write", "(s#)", s, (int) n);
+    PyObject* res = PyObject_CallMethod(fh, "write", "(s#)", s, (Py_ssize_t) n);
 #endif    
     if(res == NULL) {
       throw std::runtime_error("Call to FileHandle write failed");
@@ -5838,6 +5864,9 @@ public:
 /// expression here does this correctly.
 //--------------------------------------------------------------
 
+// Code changed a little between SWIG 3 and SWIG 4, so have different
+// versions depending on swig version.  
+#if SWIG_VERSION < 0x040000  
 namespace swig {
   template <class T>
   struct traits_asptr<std::vector<boost::shared_ptr<T> > >  {
@@ -5858,6 +5887,7 @@ namespace swig {
 	    vtype *pseq = new vtype();
 	    PyObject *iterator = PyObject_GetIter(obj);
 	    PyObject *item;
+	    typename std::vector< boost::shared_ptr<T > >::value_type temp2shared2;
 	    while((item = PyIter_Next(iterator))) {
 	      boost::shared_ptr<T> *itemp;
 	      int newmem = 0;
@@ -5867,6 +5897,15 @@ namespace swig {
 		Py_DECREF(item);
 		Py_DECREF(iterator);
 		return SWIG_ERROR;
+	      }
+	      // Added mms
+	      // Special handling if this is a director class. In that case, we
+	      // don't own the underlying python object. See
+	      // DirectorNotes.md for details.
+	      Swig::Director* dp = dynamic_cast<Swig::Director*>(itemp->get());
+	      if(dp) {
+		temp2shared2.reset(itemp->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+		itemp = &temp2shared2;
 	      }
 	      pseq->push_back(*itemp);
 	      Py_DECREF(item);
@@ -5891,6 +5930,31 @@ namespace swig {
     }
   };
 }
+#else
+namespace swig {
+  template <class SwigPySeq, class T>
+  inline void
+  assign(const SwigPySeq& swigpyseq, std::vector<boost::shared_ptr<T> >* seq) {
+    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
+    typedef typename SwigPySeq::value_type value_type;
+    typename SwigPySeq::const_iterator it = swigpyseq.begin();
+    for (;it != swigpyseq.end(); ++it) {
+      value_type itemp = (value_type)(*it);
+      // Added mms
+      // Special handling if this is a director class. In that case, we
+      // don't own the underlying python object. See
+      // DirectorNotes.md for details.
+      Swig::Director* dp = dynamic_cast<Swig::Director*>(itemp.get());
+      if(dp) {
+	// Diagnostic to make sure we end up here when we should
+	//std::cerr << "Setting up PythonRefPtrCleanup\n";
+      	itemp.reset(itemp.get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      }
+      seq->insert(seq->end(),itemp);
+    }
+  }
+}
+#endif  
 
 
 #include "rpc_image_ground_connection.h"
@@ -6926,14 +6990,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_0(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -6952,14 +7012,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_0(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7054,14 +7110,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_1(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -7080,14 +7132,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_1(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7176,14 +7224,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_2(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -7202,14 +7246,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_2(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7239,14 +7279,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_2(PyObject *SWIGUN
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp5) : &tempshared5;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg5 = &temp2shared5;
     }
@@ -7345,14 +7381,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_3(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -7371,14 +7403,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_3(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7408,14 +7436,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_3(PyObject *SWIGUN
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp5) : &tempshared5;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg5 = &temp2shared5;
     }
@@ -7434,14 +7458,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_3(PyObject *SWIGUN
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -7542,14 +7562,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_4(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -7568,14 +7584,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_4(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7605,14 +7617,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_4(PyObject *SWIGUN
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp5) : &tempshared5;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg5 = &temp2shared5;
     }
@@ -7631,14 +7639,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_4(PyObject *SWIGUN
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -7724,14 +7728,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_5(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -7750,14 +7750,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_5(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7852,14 +7848,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_6(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -7878,14 +7870,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_6(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -7974,14 +7962,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_7(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -8000,14 +7984,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_7(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -8037,14 +8017,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_7(PyObject *SWIGUN
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp5) : &tempshared5;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg5 = &temp2shared5;
     }
@@ -8143,14 +8119,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_8(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -8169,14 +8141,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_8(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -8206,14 +8174,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_8(PyObject *SWIGUN
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp5) : &tempshared5;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg5 = &temp2shared5;
     }
@@ -8232,14 +8196,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_8(PyObject *SWIGUN
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -8340,14 +8300,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_9(PyObject *SWIGUN
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -8366,14 +8322,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_9(PyObject *SWIGUN
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -8403,14 +8355,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_9(PyObject *SWIGUN
       arg5 = (argp5) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp5) : &tempshared5;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg5->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared5.reset(arg5->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg5 = &temp2shared5;
     }
@@ -8429,14 +8377,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_9(PyObject *SWIGUN
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -8527,14 +8471,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_10(PyObject *SWIGU
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -8553,14 +8493,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_10(PyObject *SWIGU
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -8579,14 +8515,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_10(PyObject *SWIGU
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg4 = &temp2shared4;
     }
@@ -8686,14 +8618,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_11(PyObject *SWIGU
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -8712,14 +8640,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_11(PyObject *SWIGU
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -8738,14 +8662,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_11(PyObject *SWIGU
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg4 = &temp2shared4;
     }
@@ -8839,14 +8759,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_12(PyObject *SWIGU
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -8865,14 +8781,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_12(PyObject *SWIGU
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -8891,14 +8803,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_12(PyObject *SWIGU
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg4 = &temp2shared4;
     }
@@ -8928,14 +8836,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_12(PyObject *SWIGU
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -9039,14 +8943,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_13(PyObject *SWIGU
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -9065,14 +8965,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_13(PyObject *SWIGU
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -9091,14 +8987,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_13(PyObject *SWIGU
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg4 = &temp2shared4;
     }
@@ -9128,14 +9020,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_13(PyObject *SWIGU
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -9154,14 +9042,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_13(PyObject *SWIGU
       arg7 = (argp7) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp7) : &tempshared7;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg7->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared7.reset(arg7->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg7 = &temp2shared7;
     }
@@ -9267,14 +9151,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_14(PyObject *SWIGU
       arg2 = (argp2) ? reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(argp2) : &tempshared2;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg2->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared2.reset(arg2->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg2 = &temp2shared2;
     }
@@ -9293,14 +9173,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_14(PyObject *SWIGU
       arg3 = (argp3) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(argp3) : &tempshared3;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg3->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared3.reset(arg3->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg3 = &temp2shared3;
     }
@@ -9319,14 +9195,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_14(PyObject *SWIGU
       arg4 = (argp4) ? reinterpret_cast< boost::shared_ptr< GeoCal::RasterImageMultiBand > * >(argp4) : &tempshared4;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg4->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared4.reset(arg4->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg4 = &temp2shared4;
     }
@@ -9356,14 +9228,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_14(PyObject *SWIGU
       arg6 = (argp6) ? reinterpret_cast< boost::shared_ptr< GeoCal::ImageMask > * >(argp6) : &tempshared6;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg6->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared6.reset(arg6->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg6 = &temp2shared6;
     }
@@ -9382,14 +9250,10 @@ SWIGINTERN PyObject *_wrap_new_RpcImageGroundConnection__SWIG_14(PyObject *SWIGU
       arg7 = (argp7) ? reinterpret_cast< boost::shared_ptr< GeoCal::GroundMask > * >(argp7) : &tempshared7;
     }
     // Added mms
-    // Special handling if this is a director class. In that case, we
-    // don't own the underlying python object. Instead,
-    // we tell python we have a reference to the underlying object, and
-    // when this gets destroyed we decrement the reference to the python
-    // object. 
+    // Special handling if this is a director class.
+    // See DirectorNotes.md for discussion of this.
     Swig::Director* dp = dynamic_cast<Swig::Director*>(arg7->get());
     if(dp) {
-      Py_INCREF(dp->swig_get_self());
       temp2shared7.reset(arg7->get(), PythonRefPtrCleanup(dp->swig_get_self()));
       arg7 = &temp2shared7;
     }
@@ -12221,6 +12085,7 @@ SWIG_init(void) {
   
   SWIG_InstallConstants(d,swig_const_table);
   
+  SWIG_Python_SetConstant(d, "SWIG_MODULE_ALREADY_DONE",SWIG_From_int(static_cast< int >(1)));
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::RpcImageGroundConnection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::RpcImageGroundConnection > > ("boost::shared_ptr< GeoCal::RpcImageGroundConnection > *"));

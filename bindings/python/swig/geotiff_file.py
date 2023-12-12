@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _geotiff_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -324,7 +325,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def set_tiftag(self, *args):
         """
 
-        void GeotiffFile::set_tiftag(tiftag_t K, int V)
+        void GeotiffFile::set_tiftag(tiftag_t K, const blitz::Array< double, 1 > &V)
         Set the tiff tag value. 
         """
         return _geotiff_file.GeotiffFile_set_tiftag(self, *args)
@@ -333,7 +334,7 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
     def set_key(self, *args):
         """
 
-        void GeotiffFile::set_key(geokey_t K, geocode_t V)
+        void GeotiffFile::set_key(geokey_t K, const std::string &V)
         Set the value of the given key.
 
         Not actually written to the file until write_key is called. 
@@ -455,7 +456,11 @@ class GeotiffFile(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _geotiff_file.delete_GeotiffFile
 GeotiffFile._v_file_name = new_instancemethod(_geotiff_file.GeotiffFile__v_file_name, None, GeotiffFile)

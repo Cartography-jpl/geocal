@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _look_vector.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -191,7 +192,11 @@ class Vector_Time(object):
         _look_vector.Vector_Time_swiginit(self, _look_vector.new_Vector_Time(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_Vector_Time
 Vector_Time.iterator = new_instancemethod(_look_vector.Vector_Time_iterator, None, Vector_Time)
@@ -481,7 +486,11 @@ class ScLookVector(LookVectorDouble):
     create_from_field_angle = staticmethod(create_from_field_angle)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_ScLookVector
 ScLookVector.__str__ = new_instancemethod(_look_vector.ScLookVector___str__, None, ScLookVector)
@@ -518,7 +527,11 @@ class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         _look_vector.ScLookVectorWithDerivative_swiginit(self, _look_vector.new_ScLookVectorWithDerivative(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_ScLookVectorWithDerivative
 ScLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.ScLookVectorWithDerivative___str__, None, ScLookVectorWithDerivative)
@@ -545,7 +558,11 @@ class CartesianInertialLookVector(LookVectorDouble):
         _look_vector.CartesianInertialLookVector_swiginit(self, _look_vector.new_CartesianInertialLookVector(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_CartesianInertialLookVector
 CartesianInertialLookVector.__str__ = new_instancemethod(_look_vector.CartesianInertialLookVector___str__, None, CartesianInertialLookVector)
@@ -572,7 +589,11 @@ class CartesianInertialLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         _look_vector.CartesianInertialLookVectorWithDerivative_swiginit(self, _look_vector.new_CartesianInertialLookVectorWithDerivative(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_CartesianInertialLookVectorWithDerivative
 CartesianInertialLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.CartesianInertialLookVectorWithDerivative___str__, None, CartesianInertialLookVectorWithDerivative)
@@ -599,7 +620,11 @@ class DcsLookVector(LookVectorDouble):
         _look_vector.DcsLookVector_swiginit(self, _look_vector.new_DcsLookVector(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_DcsLookVector
 DcsLookVector.__str__ = new_instancemethod(_look_vector.DcsLookVector___str__, None, DcsLookVector)
@@ -627,7 +652,11 @@ class DcsLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         _look_vector.DcsLookVectorWithDerivative_swiginit(self, _look_vector.new_DcsLookVectorWithDerivative(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_DcsLookVectorWithDerivative
 DcsLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.DcsLookVectorWithDerivative___str__, None, DcsLookVectorWithDerivative)
@@ -654,7 +683,11 @@ class CartesianFixedLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
         _look_vector.CartesianFixedLookVectorWithDerivative_swiginit(self, _look_vector.new_CartesianFixedLookVectorWithDerivative(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _look_vector.delete_CartesianFixedLookVectorWithDerivative
 CartesianFixedLookVectorWithDerivative.__str__ = new_instancemethod(_look_vector.CartesianFixedLookVectorWithDerivative___str__, None, CartesianFixedLookVectorWithDerivative)

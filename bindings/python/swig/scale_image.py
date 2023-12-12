@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _scale_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -236,7 +237,11 @@ class ScaleImage(geocal_swig.calc_raster.CalcRaster):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _scale_image.delete_ScaleImage
 ScaleImage._v_raw_data = new_instancemethod(_scale_image.ScaleImage__v_raw_data, None, ScaleImage)
@@ -294,7 +299,11 @@ class ScaleImageMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _scale_image.delete_ScaleImageMultiBand
 ScaleImageMultiBand._v_raw_data = new_instancemethod(_scale_image.ScaleImageMultiBand__v_raw_data, None, ScaleImageMultiBand)
@@ -322,7 +331,11 @@ class ScaleImageGroundConnection(object):
         _scale_image.ScaleImageGroundConnection_swiginit(self, _scale_image.new_ScaleImageGroundConnection(Igc, Scale_factor))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _scale_image.delete_ScaleImageGroundConnection
 ScaleImageGroundConnection_swigregister = _scale_image.ScaleImageGroundConnection_swigregister

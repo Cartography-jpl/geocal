@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_ground_mask.SwigPyIterator___sub__,
 SwigPyIterator_swigregister = _ground_mask.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _ground_mask.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _ground_mask.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -292,7 +293,11 @@ class CombinedGroundMask(GroundMask):
     mask_list = _swig_property(_ground_mask.CombinedGroundMask_mask_list_get, _ground_mask.CombinedGroundMask_mask_list_set)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mask.delete_CombinedGroundMask
 CombinedGroundMask_swigregister = _ground_mask.CombinedGroundMask_swigregister
@@ -308,7 +313,11 @@ class Vector_GroundMask(object):
         _ground_mask.Vector_GroundMask_swiginit(self, _ground_mask.new_Vector_GroundMask(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _ground_mask.delete_Vector_GroundMask
 Vector_GroundMask.iterator = new_instancemethod(_ground_mask.Vector_GroundMask_iterator, None, Vector_GroundMask)

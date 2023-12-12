@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_feature_detector.SwigPyIterator___s
 SwigPyIterator_swigregister = _feature_detector.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _feature_detector.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _feature_detector.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -205,7 +206,11 @@ class InterestPoint(geocal_swig.generic_object.GenericObject):
     weight = _swig_property(_feature_detector.InterestPoint_weight_get, _feature_detector.InterestPoint_weight_set)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _feature_detector.delete_InterestPoint
 InterestPoint.__str__ = new_instancemethod(_feature_detector.InterestPoint___str__, None, InterestPoint)

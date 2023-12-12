@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _mspi_paraxial_transform.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -233,9 +234,10 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     def paraxial_to_real(self, *args):
         """
 
-        void MspiParaxialTransform::paraxial_to_real(int Row_number, double Paraxial_x, double Paraxial_y, double &Real_x,
-        double &Real_y) const
-        Convert from paraxial to real coordinates. 
+        void MspiParaxialTransform::paraxial_to_real(int Row_number, const AutoDerivative< double > &Paraxial_x, const
+        AutoDerivative< double > &Paraxial_y, AutoDerivative< double >
+        &Real_x, AutoDerivative< double > &Real_y) const
+
         """
         return _mspi_paraxial_transform.MspiParaxialTransform_paraxial_to_real(self, *args)
 
@@ -243,9 +245,10 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     def real_to_paraxial(self, *args):
         """
 
-        void MspiParaxialTransform::real_to_paraxial(int Row_number, double Real_x, double Real_y, double &Paraxial_x,
-        double &Paraxial_y) const
-        Convert from real coordinates to paraxial. 
+        void MspiParaxialTransform::real_to_paraxial(int Row_number, const AutoDerivative< double > &Real_x, const
+        AutoDerivative< double > &Real_y, AutoDerivative< double >
+        &Paraxial_x, AutoDerivative< double > &Paraxial_y) const
+
         """
         return _mspi_paraxial_transform.MspiParaxialTransform_real_to_paraxial(self, *args)
 
@@ -316,7 +319,11 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _mspi_paraxial_transform.delete_MspiParaxialTransform
 MspiParaxialTransform._v_file_name = new_instancemethod(_mspi_paraxial_transform.MspiParaxialTransform__v_file_name, None, MspiParaxialTransform)

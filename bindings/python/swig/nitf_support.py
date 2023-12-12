@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _nitf_support.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -213,7 +214,7 @@ def nitf_to_quaternion(Data):
 def quaternion_to_nitf(*args):
     """
 
-    blitz::Array<T, 1> GeoCal::quaternion_to_nitf(const boost::math::quaternion< T > &Q)
+    blitz::Array<T, 2> GeoCal::quaternion_to_nitf(const blitz::Array< T, 2 > &Q)
     Reverse nitf_to_quaternion.
 
     See nitf_to_quaternion for documentation on what this does. 

@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_auto_derivative.SwigPyIterator___su
 SwigPyIterator_swigregister = _auto_derivative.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _auto_derivative.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _auto_derivative.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -224,11 +225,8 @@ class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::AutoDerivative< T >::AutoDerivative(const T &Val, int i_th, int nvars)
-        Constructor for a value of the i_th independent variable (0 based).
-
-        We create a gradient that is all 0, except for "1" in the i_th
-        location. 
+        GeoCal::AutoDerivative< T >::AutoDerivative(const AutoDerivative< T > &D)
+        Copy constructor. This does a deep copy. 
         """
         _auto_derivative.AutoDerivativeDouble_swiginit(self, _auto_derivative.new_AutoDerivativeDouble(*args))
 
@@ -284,7 +282,11 @@ class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _auto_derivative.delete_AutoDerivativeDouble
 AutoDerivativeDouble._v_number_variable = new_instancemethod(_auto_derivative.AutoDerivativeDouble__v_number_variable, None, AutoDerivativeDouble)
@@ -327,7 +329,7 @@ class AutoDerivativeRefDouble(geocal_swig.generic_object.GenericObject):
     def __init__(self, V, FORCE_COPY):
         """
 
-        GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V, const blitz::Array< T, 1 > &G)
+        GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V)
 
         """
         _auto_derivative.AutoDerivativeRefDouble_swiginit(self, _auto_derivative.new_AutoDerivativeRefDouble(V, FORCE_COPY))

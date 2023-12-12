@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_orbit.SwigPyIterator___sub__, None,
 SwigPyIterator_swigregister = _orbit.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _orbit.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _orbit.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -642,7 +643,11 @@ class QuaternionOrbitData(OrbitData):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_QuaternionOrbitData
 QuaternionOrbitData.ci_look_vector = new_instancemethod(_orbit.QuaternionOrbitData_ci_look_vector, None, QuaternionOrbitData)
@@ -1182,7 +1187,11 @@ class KeplerOrbit(Orbit):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_KeplerOrbit
 KeplerOrbit.orbit_data = new_instancemethod(_orbit.KeplerOrbit_orbit_data, None, KeplerOrbit)
@@ -1207,7 +1216,11 @@ class Vector_QuaternionOrbitData(object):
         _orbit.Vector_QuaternionOrbitData_swiginit(self, _orbit.new_Vector_QuaternionOrbitData(*args))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _orbit.delete_Vector_QuaternionOrbitData
 Vector_QuaternionOrbitData.iterator = new_instancemethod(_orbit.Vector_QuaternionOrbitData_iterator, None, Vector_QuaternionOrbitData)

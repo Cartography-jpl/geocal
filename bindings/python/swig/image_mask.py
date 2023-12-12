@@ -135,6 +135,7 @@ SwigPyIterator.__sub__ = new_instancemethod(_image_mask.SwigPyIterator___sub__, 
 SwigPyIterator_swigregister = _image_mask.SwigPyIterator_swigregister
 SwigPyIterator_swigregister(SwigPyIterator)
 
+SWIG_MODULE_ALREADY_DONE = _image_mask.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _image_mask.SHARED_PTR_DISOWN
 
 import os
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -242,7 +243,11 @@ class ImageMask(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_mask.delete_ImageMask
 ImageMask.mask = new_instancemethod(_image_mask.ImageMask_mask, None, ImageMask)
@@ -311,7 +316,11 @@ class OffsetImageMask(ImageMask):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_mask.delete_OffsetImageMask
 OffsetImageMask._v_original_image_mask = new_instancemethod(_image_mask.OffsetImageMask__v_original_image_mask, None, OffsetImageMask)
@@ -352,7 +361,11 @@ class CombinedImageMask(ImageMask):
     mask_list = _swig_property(_image_mask.CombinedImageMask_mask_list_get, _image_mask.CombinedImageMask_mask_list_set)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _image_mask.delete_CombinedImageMask
 CombinedImageMask_swigregister = _image_mask.CombinedImageMask_swigregister

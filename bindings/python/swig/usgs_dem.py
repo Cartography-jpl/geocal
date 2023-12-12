@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _usgs_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -232,7 +233,11 @@ class UsgsDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
         _usgs_dem.UsgsDemData_swiginit(self, _usgs_dem.new_UsgsDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _usgs_dem.delete_UsgsDemData
 UsgsDemData_swigregister = _usgs_dem.UsgsDemData_swigregister
@@ -304,7 +309,11 @@ class UsgsDem(geocal_swig.dem_map_info.DemMapInfo):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _usgs_dem.delete_UsgsDem
 UsgsDem._v_directory_base = new_instancemethod(_usgs_dem.UsgsDem__v_directory_base, None, UsgsDem)

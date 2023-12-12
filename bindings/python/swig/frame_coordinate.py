@@ -107,6 +107,7 @@ except __builtin__.Exception:
     weakref_proxy = lambda x: x
 
 
+SWIG_MODULE_ALREADY_DONE = _frame_coordinate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
     thisown = _swig_property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc='The membership flag')
 
@@ -149,13 +150,13 @@ def _new_from_init(cls, version, *args):
     return inst
 
 def _new_from_serialization(data):
-    return geocal_swig.serialize_read_binary(data)
+    return geocal_swig.serialize_function.serialize_read_binary(data)
 
 def _new_from_serialization_dir(dir, data):
     curdir = os.getcwd()
     try:
       os.chdir(dir)
-      return geocal_swig.serialize_read_binary(data)
+      return geocal_swig.serialize_function.serialize_read_binary(data)
     finally:
       os.chdir(curdir)
 
@@ -207,7 +208,11 @@ class FrameCoordinate(geocal_swig.generic_object.GenericObject):
     sample = _swig_property(_frame_coordinate.FrameCoordinate_sample_get, _frame_coordinate.FrameCoordinate_sample_set)
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _frame_coordinate.delete_FrameCoordinate
 FrameCoordinate.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinate___str__, None, FrameCoordinate)
@@ -228,9 +233,8 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args):
         """
 
-        GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const FrameCoordinate &F)
-        Create FrameCoordinateWithDerivative from FrameCoordinate, so line and
-        sample are constants rather than having a gradient. 
+        GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const AutoDerivative< double > &L, const AutoDerivative< double > &S)
+        Create a FrameCoordinateWithDerivative with the given coordinates. 
         """
         _frame_coordinate.FrameCoordinateWithDerivative_swiginit(self, _frame_coordinate.new_FrameCoordinateWithDerivative(*args))
     line = _swig_property(_frame_coordinate.FrameCoordinateWithDerivative_line_get, _frame_coordinate.FrameCoordinateWithDerivative_line_set)
@@ -251,7 +255,11 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
 
 
     def __reduce__(self):
-      return _new_from_serialization, (geocal_swig.serialize_write_binary(self),)
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
     __swig_destroy__ = _frame_coordinate.delete_FrameCoordinateWithDerivative
 FrameCoordinateWithDerivative.__str__ = new_instancemethod(_frame_coordinate.FrameCoordinateWithDerivative___str__, None, FrameCoordinateWithDerivative)

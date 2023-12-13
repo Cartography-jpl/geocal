@@ -52,7 +52,7 @@ public:
   %python_attribute(sensor_type, std::string);
   %python_attribute(sensor_mode, std::string);
   %python_attribute(reference_date_time, std::string);
-  %pickle_serialization;
+  %pickle_serialization();
 };
 
 }

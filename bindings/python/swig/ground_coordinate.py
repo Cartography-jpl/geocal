@@ -215,15 +215,15 @@ class CartesianInertial(geocal_swig.generic_object.GenericObject):
     create = _swig_new_instance_method(_ground_coordinate.CartesianInertial_create)
     reference_surface_intersect_approximate = _swig_new_instance_method(_ground_coordinate.CartesianInertial_reference_surface_intersect_approximate)
     __str__ = _swig_new_instance_method(_ground_coordinate.CartesianInertial___str__)
-    _position = _swig_new_instance_method(_ground_coordinate.CartesianInertial__position)
+    _v_position = _swig_new_instance_method(_ground_coordinate.CartesianInertial__v_position)
 
     @property
     def position(self):
-        return self._position()
+        return self._v_position()
 
     @position.setter
     def position(self, value):
-      self._position(value)
+      self._v_position(value)
 
     __swig_destroy__ = _ground_coordinate.delete_CartesianInertial
 
@@ -266,15 +266,15 @@ class CartesianFixed(GroundCoordinate):
     def min_radius_reference_surface(self):
         return self._v_min_radius_reference_surface()
 
-    _position = _swig_new_instance_method(_ground_coordinate.CartesianFixed__position)
+    _v_position = _swig_new_instance_method(_ground_coordinate.CartesianFixed__v_position)
 
     @property
     def position(self):
-        return self._position()
+        return self._v_position()
 
     @position.setter
     def position(self, value):
-      self._position(value)
+      self._v_position(value)
 
     __swig_destroy__ = _ground_coordinate.delete_CartesianFixed
 

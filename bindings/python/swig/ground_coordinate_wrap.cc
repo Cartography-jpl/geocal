@@ -4875,25 +4875,25 @@ SWIG_From_std_string  (const std::string& s)
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
-SWIGINTERN blitz::Array< double,1 > GeoCal_CartesianInertial__position__SWIG_0(GeoCal::CartesianInertial const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_CartesianInertial__v_position__SWIG_0(GeoCal::CartesianInertial const *self){
       blitz::Array<double, 1> res(3);
       for(int i = 0; i < 3; ++i)
         res(i) = self->position[i];
       return res;
     }
-SWIGINTERN void GeoCal_CartesianInertial__position__SWIG_1(GeoCal::CartesianInertial *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_CartesianInertial__v_position__SWIG_1(GeoCal::CartesianInertial *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 3)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 3; ++i)
         self->position[i] = V(i);
     }
-SWIGINTERN blitz::Array< double,1 > GeoCal_CartesianFixed__position__SWIG_0(GeoCal::CartesianFixed const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_CartesianFixed__v_position__SWIG_0(GeoCal::CartesianFixed const *self){
       blitz::Array<double, 1> res(3);
       for(int i = 0; i < 3; ++i)
         res(i) = self->position[i];
       return res;
     }
-SWIGINTERN void GeoCal_CartesianFixed__position__SWIG_1(GeoCal::CartesianFixed *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_CartesianFixed__v_position__SWIG_1(GeoCal::CartesianFixed *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 3)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 3; ++i)
@@ -7999,7 +7999,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartesianInertial__v_position__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartesianInertial *arg1 = (GeoCal::CartesianInertial *) 0 ;
   void *argp1 = 0 ;
@@ -8013,7 +8013,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *self, P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__position" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__v_position" "', argument " "1"" of type '" "GeoCal::CartesianInertial const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianInertial > * >(argp1);
@@ -8026,7 +8026,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_0(PyObject *self, P
   }
   {
     try {
-      result = GeoCal_CartesianInertial__position__SWIG_0((GeoCal::CartesianInertial const *)arg1);
+      result = GeoCal_CartesianInertial__v_position__SWIG_0((GeoCal::CartesianInertial const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8061,7 +8061,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartesianInertial__v_position__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartesianInertial *arg1 = (GeoCal::CartesianInertial *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -8077,7 +8077,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_1(PyObject *self, P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__position" "', argument " "1"" of type '" "GeoCal::CartesianInertial *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianInertial__v_position" "', argument " "1"" of type '" "GeoCal::CartesianInertial *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertial > * >(argp1);
@@ -8094,11 +8094,11 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_1(PyObject *self, P
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'CartesianInertial__position', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'CartesianInertial__v_position', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'CartesianInertial__position', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'CartesianInertial__v_position', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -8107,7 +8107,7 @@ SWIGINTERN PyObject *_wrap_CartesianInertial__position__SWIG_1(PyObject *self, P
   }
   {
     try {
-      GeoCal_CartesianInertial__position__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_CartesianInertial__v_position__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8121,30 +8121,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianInertial__position(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_CartesianInertial__v_position(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "CartesianInertial__position", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "CartesianInertial__v_position", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_CartesianInertial__position__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_CartesianInertial__v_position__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_CartesianInertial__position__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_CartesianInertial__v_position__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'CartesianInertial__position'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'CartesianInertial__v_position'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::CartesianInertial::_position() const\n"
-    "    GeoCal::CartesianInertial::_position(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::CartesianInertial::_v_position() const\n"
+    "    GeoCal::CartesianInertial::_v_position(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
@@ -8773,7 +8773,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartesianFixed__v_position__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartesianFixed *arg1 = (GeoCal::CartesianFixed *) 0 ;
   void *argp1 = 0 ;
@@ -8787,7 +8787,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *self, Py_s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__position" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__v_position" "', argument " "1"" of type '" "GeoCal::CartesianFixed const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartesianFixed > * >(argp1);
@@ -8800,7 +8800,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_0(PyObject *self, Py_s
   }
   {
     try {
-      result = GeoCal_CartesianFixed__position__SWIG_0((GeoCal::CartesianFixed const *)arg1);
+      result = GeoCal_CartesianFixed__v_position__SWIG_0((GeoCal::CartesianFixed const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8835,7 +8835,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_CartesianFixed__v_position__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::CartesianFixed *arg1 = (GeoCal::CartesianFixed *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -8851,7 +8851,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_1(PyObject *self, Py_s
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__position" "', argument " "1"" of type '" "GeoCal::CartesianFixed *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartesianFixed__v_position" "', argument " "1"" of type '" "GeoCal::CartesianFixed *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixed > * >(argp1);
@@ -8868,11 +8868,11 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_1(PyObject *self, Py_s
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'CartesianFixed__position', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'CartesianFixed__v_position', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'CartesianFixed__position', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'CartesianFixed__v_position', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -8881,7 +8881,7 @@ SWIGINTERN PyObject *_wrap_CartesianFixed__position__SWIG_1(PyObject *self, Py_s
   }
   {
     try {
-      GeoCal_CartesianFixed__position__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_CartesianFixed__v_position__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8895,30 +8895,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_CartesianFixed__position(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_CartesianFixed__v_position(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "CartesianFixed__position", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "CartesianFixed__v_position", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_CartesianFixed__position__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_CartesianFixed__v_position__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_CartesianFixed__position__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_CartesianFixed__v_position__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'CartesianFixed__position'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'CartesianFixed__v_position'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::CartesianFixed::_position() const\n"
-    "    GeoCal::CartesianFixed::_position(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::CartesianFixed::_v_position() const\n"
+    "    GeoCal::CartesianFixed::_v_position(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
@@ -13703,7 +13703,7 @@ static PyMethodDef SwigMethods[] = {
 		"derived classes for the approximation used. \n"
 		""},
 	 { "CartesianInertial___str__", _wrap_CartesianInertial___str__, METH_O, NULL},
-	 { "CartesianInertial__position", _wrap_CartesianInertial__position, METH_VARARGS, NULL},
+	 { "CartesianInertial__v_position", _wrap_CartesianInertial__v_position, METH_VARARGS, NULL},
 	 { "delete_CartesianInertial", _wrap_delete_CartesianInertial, METH_O, "\n"
 		"\n"
 		"virtual GeoCal::CartesianInertial::~CartesianInertial()\n"
@@ -13761,7 +13761,7 @@ static PyMethodDef SwigMethods[] = {
 		"reference surface (e.g., radius for a reference sphere, minimum of a\n"
 		"and b for a ellipsoid). \n"
 		""},
-	 { "CartesianFixed__position", _wrap_CartesianFixed__position, METH_VARARGS, NULL},
+	 { "CartesianFixed__v_position", _wrap_CartesianFixed__v_position, METH_VARARGS, NULL},
 	 { "delete_CartesianFixed", _wrap_delete_CartesianFixed, METH_O, "\n"
 		"\n"
 		"virtual GeoCal::CartesianFixed::~CartesianFixed()\n"
@@ -13974,7 +13974,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"derived classes for the approximation used. \n"
 		""},
 	 { "CartesianInertial___str__", _wrap_CartesianInertial___str__, METH_O, NULL},
-	 { "CartesianInertial__position", _wrap_CartesianInertial__position, METH_VARARGS, NULL},
+	 { "CartesianInertial__v_position", _wrap_CartesianInertial__v_position, METH_VARARGS, NULL},
 	 { "delete_CartesianInertial", _wrap_delete_CartesianInertial, METH_O, "\n"
 		"\n"
 		"virtual GeoCal::CartesianInertial::~CartesianInertial()\n"
@@ -14032,7 +14032,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"reference surface (e.g., radius for a reference sphere, minimum of a\n"
 		"and b for a ellipsoid). \n"
 		""},
-	 { "CartesianFixed__position", _wrap_CartesianFixed__position, METH_VARARGS, NULL},
+	 { "CartesianFixed__v_position", _wrap_CartesianFixed__v_position, METH_VARARGS, NULL},
 	 { "delete_CartesianFixed", _wrap_delete_CartesianFixed, METH_O, "\n"
 		"\n"
 		"virtual GeoCal::CartesianFixed::~CartesianFixed()\n"

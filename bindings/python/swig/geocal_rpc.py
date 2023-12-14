@@ -199,65 +199,65 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     line_scale = property(_geocal_rpc.Rpc_line_scale_get, _geocal_rpc.Rpc_line_scale_set)
     sample_offset = property(_geocal_rpc.Rpc_sample_offset_get, _geocal_rpc.Rpc_sample_offset_set)
     sample_scale = property(_geocal_rpc.Rpc_sample_scale_get, _geocal_rpc.Rpc_sample_scale_set)
-    _line_denominator = _swig_new_instance_method(_geocal_rpc.Rpc__line_denominator)
+    _v_line_denominator = _swig_new_instance_method(_geocal_rpc.Rpc__v_line_denominator)
 
     @property
     def line_denominator(self):
-        return self._line_denominator()
+        return self._v_line_denominator()
 
     @line_denominator.setter
     def line_denominator(self, value):
-      self._line_denominator(value)
+      self._v_line_denominator(value)
 
-    _line_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__line_numerator)
+    _v_line_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__v_line_numerator)
 
     @property
     def line_numerator(self):
-        return self._line_numerator()
+        return self._v_line_numerator()
 
     @line_numerator.setter
     def line_numerator(self, value):
-      self._line_numerator(value)
+      self._v_line_numerator(value)
 
-    _sample_denominator = _swig_new_instance_method(_geocal_rpc.Rpc__sample_denominator)
+    _v_sample_denominator = _swig_new_instance_method(_geocal_rpc.Rpc__v_sample_denominator)
 
     @property
     def sample_denominator(self):
-        return self._sample_denominator()
+        return self._v_sample_denominator()
 
     @sample_denominator.setter
     def sample_denominator(self, value):
-      self._sample_denominator(value)
+      self._v_sample_denominator(value)
 
-    _sample_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__sample_numerator)
+    _v_sample_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__v_sample_numerator)
 
     @property
     def sample_numerator(self):
-        return self._sample_numerator()
+        return self._v_sample_numerator()
 
     @sample_numerator.setter
     def sample_numerator(self, value):
-      self._sample_numerator(value)
+      self._v_sample_numerator(value)
 
-    _fit_line_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__fit_line_numerator)
+    _v_fit_line_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__v_fit_line_numerator)
 
     @property
     def fit_line_numerator(self):
-        return self._fit_line_numerator()
+        return self._v_fit_line_numerator()
 
     @fit_line_numerator.setter
     def fit_line_numerator(self, value):
-      self._fit_line_numerator(value)
+      self._v_fit_line_numerator(value)
 
-    _fit_sample_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__fit_sample_numerator)
+    _v_fit_sample_numerator = _swig_new_instance_method(_geocal_rpc.Rpc__v_fit_sample_numerator)
 
     @property
     def fit_sample_numerator(self):
-        return self._fit_sample_numerator()
+        return self._v_fit_sample_numerator()
 
     @fit_sample_numerator.setter
     def fit_sample_numerator(self, value):
-      self._fit_sample_numerator(value)
+      self._v_fit_sample_numerator(value)
 
     _v_naif_code = _swig_new_instance_method(_geocal_rpc.Rpc__v_naif_code)
 

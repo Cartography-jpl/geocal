@@ -6365,13 +6365,13 @@ namespace swig {
   };
 }
 
-SWIGINTERN blitz::Array< double,1 > GeoCal_LookVector_Sl_double_Sg___look_vector__SWIG_0(GeoCal::LookVector< double > const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_LookVector_Sl_double_Sg___v_look_vector__SWIG_0(GeoCal::LookVector< double > const *self){
       blitz::Array<double, 1> res(3);
       for(int i = 0; i < 3; ++i)
         res(i) = self->look_vector[i];
       return res;
     }
-SWIGINTERN void GeoCal_LookVector_Sl_double_Sg___look_vector__SWIG_1(GeoCal::LookVector< double > *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_LookVector_Sl_double_Sg___v_look_vector__SWIG_1(GeoCal::LookVector< double > *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 3)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 3; ++i)
@@ -6425,13 +6425,13 @@ SWIG_From_std_string  (const std::string& s)
   return SWIG_FromCharPtrAndSize(s.data(), s.size());
 }
 
-SWIGINTERN blitz::Array< GeoCal::AutoDerivative< double >,1 > GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___look_vector__SWIG_0(GeoCal::LookVector< GeoCal::AutoDerivative< double > > const *self){
+SWIGINTERN blitz::Array< GeoCal::AutoDerivative< double >,1 > GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___v_look_vector__SWIG_0(GeoCal::LookVector< GeoCal::AutoDerivative< double > > const *self){
       blitz::Array<GeoCal::AutoDerivative< double >, 1> res(3);
       for(int i = 0; i < 3; ++i)
         res(i) = self->look_vector[i];
       return res;
     }
-SWIGINTERN void GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___look_vector__SWIG_1(GeoCal::LookVector< GeoCal::AutoDerivative< double > > *self,blitz::Array< GeoCal::AutoDerivative< double >,1 > const &V){
+SWIGINTERN void GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___v_look_vector__SWIG_1(GeoCal::LookVector< GeoCal::AutoDerivative< double > > *self,blitz::Array< GeoCal::AutoDerivative< double >,1 > const &V){
       if(V.rows() != 3)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 3; ++i)
@@ -11544,7 +11544,7 @@ SWIGINTERN PyObject *Vector_Time2_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_LookVectorDouble__v_look_vector__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::LookVector< double > *arg1 = (GeoCal::LookVector< double > *) 0 ;
   void *argp1 = 0 ;
@@ -11558,7 +11558,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_0(PyObject *self,
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorDouble__look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< double > const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorDouble__v_look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< double > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LookVector<double> > * >(argp1);
@@ -11571,7 +11571,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_0(PyObject *self,
   }
   {
     try {
-      result = GeoCal_LookVector_Sl_double_Sg___look_vector__SWIG_0((GeoCal::LookVector< double > const *)arg1);
+      result = GeoCal_LookVector_Sl_double_Sg___v_look_vector__SWIG_0((GeoCal::LookVector< double > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -11606,7 +11606,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_LookVectorDouble__v_look_vector__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::LookVector< double > *arg1 = (GeoCal::LookVector< double > *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -11622,7 +11622,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_1(PyObject *self,
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_double_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorDouble__look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< double > *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorDouble__v_look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< double > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::LookVector<double> > * >(argp1);
@@ -11639,11 +11639,11 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_1(PyObject *self,
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'LookVectorDouble__look_vector', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'LookVectorDouble__v_look_vector', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'LookVectorDouble__look_vector', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'LookVectorDouble__v_look_vector', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -11652,7 +11652,7 @@ SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector__SWIG_1(PyObject *self,
   }
   {
     try {
-      GeoCal_LookVector_Sl_double_Sg___look_vector__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_LookVector_Sl_double_Sg___v_look_vector__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -11666,30 +11666,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_LookVectorDouble__look_vector(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_LookVectorDouble__v_look_vector(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "LookVectorDouble__look_vector", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "LookVectorDouble__v_look_vector", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_LookVectorDouble__look_vector__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_LookVectorDouble__v_look_vector__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_LookVectorDouble__look_vector__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_LookVectorDouble__v_look_vector__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'LookVectorDouble__look_vector'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'LookVectorDouble__v_look_vector'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::LookVector< double >::_look_vector() const\n"
-    "    GeoCal::LookVector< double >::_look_vector(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::LookVector< double >::_v_look_vector() const\n"
+    "    GeoCal::LookVector< double >::_v_look_vector(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
@@ -11992,7 +11992,7 @@ SWIGINTERN PyObject *LookVectorDouble_swigregister(PyObject *SWIGUNUSEDPARM(self
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__v_look_vector__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::LookVector< GeoCal::AutoDerivative< double > > *arg1 = (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) 0 ;
   void *argp1 = 0 ;
@@ -12006,7 +12006,7 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_0(P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorAutoDerivativeDouble__look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< GeoCal::AutoDerivative< double > > const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorAutoDerivativeDouble__v_look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< GeoCal::AutoDerivative< double > > const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::LookVector<GeoCal::AutoDerivative<double> > > * >(argp1);
@@ -12019,7 +12019,7 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_0(P
   }
   {
     try {
-      result = GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___look_vector__SWIG_0((GeoCal::LookVector< GeoCal::AutoDerivative< double > > const *)arg1);
+      result = GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___v_look_vector__SWIG_0((GeoCal::LookVector< GeoCal::AutoDerivative< double > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -12033,7 +12033,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__v_look_vector__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::LookVector< GeoCal::AutoDerivative< double > > *arg1 = (GeoCal::LookVector< GeoCal::AutoDerivative< double > > *) 0 ;
   blitz::Array< GeoCal::AutoDerivative< double >,1 > *arg2 = 0 ;
@@ -12049,7 +12049,7 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_1(P
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__LookVectorT_GeoCal__AutoDerivativeT_double_t_t_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorAutoDerivativeDouble__look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< GeoCal::AutoDerivative< double > > *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "LookVectorAutoDerivativeDouble__v_look_vector" "', argument " "1"" of type '" "GeoCal::LookVector< GeoCal::AutoDerivative< double > > *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::LookVector<GeoCal::AutoDerivative<double> > > * >(argp1);
@@ -12062,15 +12062,15 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_1(P
   }
   res2 = SWIG_ConvertPtr(swig_obj[1], &argp2, SWIGTYPE_p_blitz__ArrayT_GeoCal__AutoDerivativeT_double_t_1_t,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LookVectorAutoDerivativeDouble__look_vector" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "LookVectorAutoDerivativeDouble__v_look_vector" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LookVectorAutoDerivativeDouble__look_vector" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "LookVectorAutoDerivativeDouble__v_look_vector" "', argument " "2"" of type '" "blitz::Array< GeoCal::AutoDerivative< double >,1 > const &""'"); 
   }
   arg2 = reinterpret_cast< blitz::Array< GeoCal::AutoDerivative< double >,1 > * >(argp2);
   {
     try {
-      GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___look_vector__SWIG_1(arg1,(blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)*arg2);
+      GeoCal_LookVector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg___v_look_vector__SWIG_1(arg1,(blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -12084,30 +12084,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__look_vector(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__v_look_vector(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "LookVectorAutoDerivativeDouble__look_vector", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "LookVectorAutoDerivativeDouble__v_look_vector", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_LookVectorAutoDerivativeDouble__v_look_vector__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_LookVectorAutoDerivativeDouble__look_vector__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_LookVectorAutoDerivativeDouble__v_look_vector__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'LookVectorAutoDerivativeDouble__look_vector'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'LookVectorAutoDerivativeDouble__v_look_vector'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::LookVector< GeoCal::AutoDerivative< double > >::_look_vector() const\n"
-    "    GeoCal::LookVector< GeoCal::AutoDerivative< double > >::_look_vector(blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)\n");
+    "    GeoCal::LookVector< GeoCal::AutoDerivative< double > >::_v_look_vector() const\n"
+    "    GeoCal::LookVector< GeoCal::AutoDerivative< double > >::_v_look_vector(blitz::Array< GeoCal::AutoDerivative< double >,1 > const &)\n");
   return 0;
 }
 
@@ -14721,7 +14721,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, NULL},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
-	 { "LookVectorDouble__look_vector", _wrap_LookVectorDouble__look_vector, METH_VARARGS, NULL},
+	 { "LookVectorDouble__v_look_vector", _wrap_LookVectorDouble__v_look_vector, METH_VARARGS, NULL},
 	 { "LookVectorDouble__v_direction", _wrap_LookVectorDouble__v_direction, METH_O, "\n"
 		"\n"
 		"boost::array<T, 3> GeoCal::LookVector< T >::direction() const\n"
@@ -14744,7 +14744,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { "LookVectorDouble_swigregister", LookVectorDouble_swigregister, METH_O, NULL},
-	 { "LookVectorAutoDerivativeDouble__look_vector", _wrap_LookVectorAutoDerivativeDouble__look_vector, METH_VARARGS, NULL},
+	 { "LookVectorAutoDerivativeDouble__v_look_vector", _wrap_LookVectorAutoDerivativeDouble__v_look_vector, METH_VARARGS, NULL},
 	 { "LookVectorAutoDerivativeDouble__v_direction", _wrap_LookVectorAutoDerivativeDouble__v_direction, METH_O, "\n"
 		"\n"
 		"boost::array<T, 3> GeoCal::LookVector< T >::direction() const\n"
@@ -14964,7 +14964,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, NULL},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
-	 { "LookVectorDouble__look_vector", _wrap_LookVectorDouble__look_vector, METH_VARARGS, NULL},
+	 { "LookVectorDouble__v_look_vector", _wrap_LookVectorDouble__v_look_vector, METH_VARARGS, NULL},
 	 { "LookVectorDouble__v_direction", _wrap_LookVectorDouble__v_direction, METH_O, "\n"
 		"\n"
 		"boost::array<T, 3> GeoCal::LookVector< T >::direction() const\n"
@@ -14987,7 +14987,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"\n"
 		""},
 	 { "LookVectorDouble_swigregister", LookVectorDouble_swigregister, METH_O, NULL},
-	 { "LookVectorAutoDerivativeDouble__look_vector", _wrap_LookVectorAutoDerivativeDouble__look_vector, METH_VARARGS, NULL},
+	 { "LookVectorAutoDerivativeDouble__v_look_vector", _wrap_LookVectorAutoDerivativeDouble__v_look_vector, METH_VARARGS, NULL},
 	 { "LookVectorAutoDerivativeDouble__v_direction", _wrap_LookVectorAutoDerivativeDouble__v_direction, METH_O, "\n"
 		"\n"
 		"boost::array<T, 3> GeoCal::LookVector< T >::direction() const\n"

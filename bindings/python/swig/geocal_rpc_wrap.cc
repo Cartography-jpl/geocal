@@ -4973,73 +4973,73 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 
   #define SWIG_From_double   PyFloat_FromDouble 
 
-SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__line_denominator__SWIG_0(GeoCal::Rpc const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__v_line_denominator__SWIG_0(GeoCal::Rpc const *self){
       blitz::Array<double, 1> res(20);
       for(int i = 0; i < 20; ++i)
         res(i) = self->line_denominator[i];
       return res;
     }
-SWIGINTERN void GeoCal_Rpc__line_denominator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_Rpc__v_line_denominator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 20)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 20; ++i)
         self->line_denominator[i] = V(i);
     }
-SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__line_numerator__SWIG_0(GeoCal::Rpc const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__v_line_numerator__SWIG_0(GeoCal::Rpc const *self){
       blitz::Array<double, 1> res(20);
       for(int i = 0; i < 20; ++i)
         res(i) = self->line_numerator[i];
       return res;
     }
-SWIGINTERN void GeoCal_Rpc__line_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_Rpc__v_line_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 20)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 20; ++i)
         self->line_numerator[i] = V(i);
     }
-SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__sample_denominator__SWIG_0(GeoCal::Rpc const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__v_sample_denominator__SWIG_0(GeoCal::Rpc const *self){
       blitz::Array<double, 1> res(20);
       for(int i = 0; i < 20; ++i)
         res(i) = self->sample_denominator[i];
       return res;
     }
-SWIGINTERN void GeoCal_Rpc__sample_denominator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_Rpc__v_sample_denominator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 20)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 20; ++i)
         self->sample_denominator[i] = V(i);
     }
-SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__sample_numerator__SWIG_0(GeoCal::Rpc const *self){
+SWIGINTERN blitz::Array< double,1 > GeoCal_Rpc__v_sample_numerator__SWIG_0(GeoCal::Rpc const *self){
       blitz::Array<double, 1> res(20);
       for(int i = 0; i < 20; ++i)
         res(i) = self->sample_numerator[i];
       return res;
     }
-SWIGINTERN void GeoCal_Rpc__sample_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
+SWIGINTERN void GeoCal_Rpc__v_sample_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< double,1 > const &V){
       if(V.rows() != 20)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 20; ++i)
         self->sample_numerator[i] = V(i);
     }
-SWIGINTERN blitz::Array< bool,1 > GeoCal_Rpc__fit_line_numerator__SWIG_0(GeoCal::Rpc const *self){
+SWIGINTERN blitz::Array< bool,1 > GeoCal_Rpc__v_fit_line_numerator__SWIG_0(GeoCal::Rpc const *self){
       blitz::Array<bool, 1> res(20);
       for(int i = 0; i < 20; ++i)
         res(i) = self->fit_line_numerator[i];
       return res;
     }
-SWIGINTERN void GeoCal_Rpc__fit_line_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< bool,1 > const &V){
+SWIGINTERN void GeoCal_Rpc__v_fit_line_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< bool,1 > const &V){
       if(V.rows() != 20)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 20; ++i)
         self->fit_line_numerator[i] = V(i);
     }
-SWIGINTERN blitz::Array< bool,1 > GeoCal_Rpc__fit_sample_numerator__SWIG_0(GeoCal::Rpc const *self){
+SWIGINTERN blitz::Array< bool,1 > GeoCal_Rpc__v_fit_sample_numerator__SWIG_0(GeoCal::Rpc const *self){
       blitz::Array<bool, 1> res(20);
       for(int i = 0; i < 20; ++i)
         res(i) = self->fit_sample_numerator[i];
       return res;
     }
-SWIGINTERN void GeoCal_Rpc__fit_sample_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< bool,1 > const &V){
+SWIGINTERN void GeoCal_Rpc__v_fit_sample_numerator__SWIG_1(GeoCal::Rpc *self,blitz::Array< bool,1 > const &V){
       if(V.rows() != 20)
 	throw std::runtime_error("Array not expeced size");
       for(int i = 0; i < 20; ++i)
@@ -8135,7 +8135,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_line_denominator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   void *argp1 = 0 ;
@@ -8149,7 +8149,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_0(PyObject *self, Py_ssiz
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__line_denominator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_line_denominator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
@@ -8162,7 +8162,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_0(PyObject *self, Py_ssiz
   }
   {
     try {
-      result = GeoCal_Rpc__line_denominator__SWIG_0((GeoCal::Rpc const *)arg1);
+      result = GeoCal_Rpc__v_line_denominator__SWIG_0((GeoCal::Rpc const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8197,7 +8197,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_line_denominator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -8213,7 +8213,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_1(PyObject *self, Py_ssiz
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__line_denominator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_line_denominator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
@@ -8230,11 +8230,11 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_1(PyObject *self, Py_ssiz
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_denominator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_line_denominator', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_denominator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_line_denominator', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -8243,7 +8243,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_denominator__SWIG_1(PyObject *self, Py_ssiz
   }
   {
     try {
-      GeoCal_Rpc__line_denominator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_Rpc__v_line_denominator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8257,35 +8257,35 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__line_denominator(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc__v_line_denominator(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__line_denominator", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__v_line_denominator", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_Rpc__line_denominator__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_line_denominator__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_Rpc__line_denominator__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_line_denominator__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__line_denominator'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__v_line_denominator'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rpc::_line_denominator() const\n"
-    "    GeoCal::Rpc::_line_denominator(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::Rpc::_v_line_denominator() const\n"
+    "    GeoCal::Rpc::_v_line_denominator(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_line_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   void *argp1 = 0 ;
@@ -8299,7 +8299,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_0(PyObject *self, Py_ssize_
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
@@ -8312,7 +8312,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_0(PyObject *self, Py_ssize_
   }
   {
     try {
-      result = GeoCal_Rpc__line_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
+      result = GeoCal_Rpc__v_line_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8347,7 +8347,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_line_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -8363,7 +8363,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_1(PyObject *self, Py_ssize_
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
@@ -8380,11 +8380,11 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_1(PyObject *self, Py_ssize_
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_numerator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_line_numerator', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__line_numerator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_line_numerator', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -8393,7 +8393,7 @@ SWIGINTERN PyObject *_wrap_Rpc__line_numerator__SWIG_1(PyObject *self, Py_ssize_
   }
   {
     try {
-      GeoCal_Rpc__line_numerator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_Rpc__v_line_numerator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8407,35 +8407,35 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__line_numerator(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc__v_line_numerator(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__line_numerator", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__v_line_numerator", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_Rpc__line_numerator__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_line_numerator__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_Rpc__line_numerator__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_line_numerator__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__line_numerator'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__v_line_numerator'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rpc::_line_numerator() const\n"
-    "    GeoCal::Rpc::_line_numerator(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::Rpc::_v_line_numerator() const\n"
+    "    GeoCal::Rpc::_v_line_numerator(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_sample_denominator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   void *argp1 = 0 ;
@@ -8449,7 +8449,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_0(PyObject *self, Py_ss
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__sample_denominator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_sample_denominator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
@@ -8462,7 +8462,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_0(PyObject *self, Py_ss
   }
   {
     try {
-      result = GeoCal_Rpc__sample_denominator__SWIG_0((GeoCal::Rpc const *)arg1);
+      result = GeoCal_Rpc__v_sample_denominator__SWIG_0((GeoCal::Rpc const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8497,7 +8497,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_sample_denominator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -8513,7 +8513,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_1(PyObject *self, Py_ss
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__sample_denominator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_sample_denominator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
@@ -8530,11 +8530,11 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_1(PyObject *self, Py_ss
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_denominator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_sample_denominator', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_denominator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_sample_denominator', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -8543,7 +8543,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_denominator__SWIG_1(PyObject *self, Py_ss
   }
   {
     try {
-      GeoCal_Rpc__sample_denominator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_Rpc__v_sample_denominator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8557,35 +8557,35 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__sample_denominator(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc__v_sample_denominator(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__sample_denominator", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__v_sample_denominator", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_Rpc__sample_denominator__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_sample_denominator__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_Rpc__sample_denominator__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_sample_denominator__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__sample_denominator'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__v_sample_denominator'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rpc::_sample_denominator() const\n"
-    "    GeoCal::Rpc::_sample_denominator(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::Rpc::_v_sample_denominator() const\n"
+    "    GeoCal::Rpc::_v_sample_denominator(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_sample_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   void *argp1 = 0 ;
@@ -8599,7 +8599,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_0(PyObject *self, Py_ssiz
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
@@ -8612,7 +8612,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_0(PyObject *self, Py_ssiz
   }
   {
     try {
-      result = GeoCal_Rpc__sample_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
+      result = GeoCal_Rpc__v_sample_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8647,7 +8647,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_sample_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   blitz::Array< double,1 > *arg2 = 0 ;
@@ -8663,7 +8663,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_1(PyObject *self, Py_ssiz
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
@@ -8680,11 +8680,11 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_1(PyObject *self, Py_ssiz
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<double >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_numerator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_sample_numerator', expecting type  Array<double,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__sample_numerator', expecting type  Array<double,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_sample_numerator', expecting type  Array<double,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<double, 1>(numpy2));
@@ -8693,7 +8693,7 @@ SWIGINTERN PyObject *_wrap_Rpc__sample_numerator__SWIG_1(PyObject *self, Py_ssiz
   }
   {
     try {
-      GeoCal_Rpc__sample_numerator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
+      GeoCal_Rpc__v_sample_numerator__SWIG_1(arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8707,35 +8707,35 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__sample_numerator(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc__v_sample_numerator(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__sample_numerator", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__v_sample_numerator", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_Rpc__sample_numerator__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_sample_numerator__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_Rpc__sample_numerator__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_sample_numerator__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__sample_numerator'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__v_sample_numerator'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rpc::_sample_numerator() const\n"
-    "    GeoCal::Rpc::_sample_numerator(blitz::Array< double,1 > const &)\n");
+    "    GeoCal::Rpc::_v_sample_numerator() const\n"
+    "    GeoCal::Rpc::_v_sample_numerator(blitz::Array< double,1 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_fit_line_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   void *argp1 = 0 ;
@@ -8749,7 +8749,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_0(PyObject *self, Py_ss
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__fit_line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_fit_line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
@@ -8762,7 +8762,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_0(PyObject *self, Py_ss
   }
   {
     try {
-      result = GeoCal_Rpc__fit_line_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
+      result = GeoCal_Rpc__v_fit_line_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8797,7 +8797,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_fit_line_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   blitz::Array< bool,1 > *arg2 = 0 ;
@@ -8813,7 +8813,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_1(PyObject *self, Py_ss
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__fit_line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_fit_line_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
@@ -8830,11 +8830,11 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_1(PyObject *self, Py_ss
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_line_numerator', expecting type  Array<bool,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_fit_line_numerator', expecting type  Array<bool,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_line_numerator', expecting type  Array<bool,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_fit_line_numerator', expecting type  Array<bool,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
@@ -8843,7 +8843,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator__SWIG_1(PyObject *self, Py_ss
   }
   {
     try {
-      GeoCal_Rpc__fit_line_numerator__SWIG_1(arg1,(blitz::Array< bool,1 > const &)*arg2);
+      GeoCal_Rpc__v_fit_line_numerator__SWIG_1(arg1,(blitz::Array< bool,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8857,35 +8857,35 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__fit_line_numerator(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc__v_fit_line_numerator(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__fit_line_numerator", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__v_fit_line_numerator", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_Rpc__fit_line_numerator__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_fit_line_numerator__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_Rpc__fit_line_numerator__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_fit_line_numerator__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__fit_line_numerator'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__v_fit_line_numerator'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rpc::_fit_line_numerator() const\n"
-    "    GeoCal::Rpc::_fit_line_numerator(blitz::Array< bool,1 > const &)\n");
+    "    GeoCal::Rpc::_v_fit_line_numerator() const\n"
+    "    GeoCal::Rpc::_v_fit_line_numerator(blitz::Array< bool,1 > const &)\n");
   return 0;
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_fit_sample_numerator__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   void *argp1 = 0 ;
@@ -8899,7 +8899,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_0(PyObject *self, Py_
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__fit_sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_fit_sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::Rpc > * >(argp1);
@@ -8912,7 +8912,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_0(PyObject *self, Py_
   }
   {
     try {
-      result = GeoCal_Rpc__fit_sample_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
+      result = GeoCal_Rpc__v_fit_sample_numerator__SWIG_0((GeoCal::Rpc const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -8947,7 +8947,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_Rpc__v_fit_sample_numerator__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   GeoCal::Rpc *arg1 = (GeoCal::Rpc *) 0 ;
   blitz::Array< bool,1 > *arg2 = 0 ;
@@ -8963,7 +8963,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_1(PyObject *self, Py_
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__fit_sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Rpc__v_fit_sample_numerator" "', argument " "1"" of type '" "GeoCal::Rpc *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::Rpc > * >(argp1);
@@ -8980,11 +8980,11 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_1(PyObject *self, Py_
     if(!SWIG_IsOK(res)) {
       numpy2.obj = to_numpy<bool >(swig_obj[1]);
       if(!numpy2.obj) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_sample_numerator', expecting type  Array<bool,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_fit_sample_numerator', expecting type  Array<bool,1>");
         return NULL;
       }
       if(PyArray_NDIM((PyArrayObject*)numpy2.obj) !=1) {
-        SWIG_Error(SWIG_TypeError, "in method 'Rpc__fit_sample_numerator', expecting type  Array<bool,1>");
+        SWIG_Error(SWIG_TypeError, "in method 'Rpc__v_fit_sample_numerator', expecting type  Array<bool,1>");
         return NULL;
       }
       a2.reference(to_blitz_array<bool, 1>(numpy2));
@@ -8993,7 +8993,7 @@ SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator__SWIG_1(PyObject *self, Py_
   }
   {
     try {
-      GeoCal_Rpc__fit_sample_numerator__SWIG_1(arg1,(blitz::Array< bool,1 > const &)*arg2);
+      GeoCal_Rpc__v_fit_sample_numerator__SWIG_1(arg1,(blitz::Array< bool,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -9007,30 +9007,30 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Rpc__fit_sample_numerator(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Rpc__v_fit_sample_numerator(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[3] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__fit_sample_numerator", 0, 2, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "Rpc__v_fit_sample_numerator", 0, 2, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_Rpc__fit_sample_numerator__SWIG_0(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_fit_sample_numerator__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_Rpc__fit_sample_numerator__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_Rpc__v_fit_sample_numerator__SWIG_1(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   
 fail:
-  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__fit_sample_numerator'.\n"
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'Rpc__v_fit_sample_numerator'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::Rpc::_fit_sample_numerator() const\n"
-    "    GeoCal::Rpc::_fit_sample_numerator(blitz::Array< bool,1 > const &)\n");
+    "    GeoCal::Rpc::_v_fit_sample_numerator() const\n"
+    "    GeoCal::Rpc::_v_fit_sample_numerator(blitz::Array< bool,1 > const &)\n");
   return 0;
 }
 
@@ -12439,12 +12439,12 @@ static PyMethodDef SwigMethods[] = {
 	 { "Rpc_sample_offset_get", _wrap_Rpc_sample_offset_get, METH_O, NULL},
 	 { "Rpc_sample_scale_set", _wrap_Rpc_sample_scale_set, METH_VARARGS, NULL},
 	 { "Rpc_sample_scale_get", _wrap_Rpc_sample_scale_get, METH_O, NULL},
-	 { "Rpc__line_denominator", _wrap_Rpc__line_denominator, METH_VARARGS, NULL},
-	 { "Rpc__line_numerator", _wrap_Rpc__line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__sample_denominator", _wrap_Rpc__sample_denominator, METH_VARARGS, NULL},
-	 { "Rpc__sample_numerator", _wrap_Rpc__sample_numerator, METH_VARARGS, NULL},
-	 { "Rpc__fit_line_numerator", _wrap_Rpc__fit_line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__fit_sample_numerator", _wrap_Rpc__fit_sample_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_line_denominator", _wrap_Rpc__v_line_denominator, METH_VARARGS, NULL},
+	 { "Rpc__v_line_numerator", _wrap_Rpc__v_line_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_sample_denominator", _wrap_Rpc__v_sample_denominator, METH_VARARGS, NULL},
+	 { "Rpc__v_sample_numerator", _wrap_Rpc__v_sample_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_fit_line_numerator", _wrap_Rpc__v_fit_line_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_fit_sample_numerator", _wrap_Rpc__v_fit_sample_numerator, METH_VARARGS, NULL},
 	 { "Rpc__v_naif_code", _wrap_Rpc__v_naif_code, METH_VARARGS, "\n"
 		"\n"
 		"void Rpc::naif_code(int Naif_code)\n"
@@ -12674,12 +12674,12 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "Rpc_sample_offset_get", _wrap_Rpc_sample_offset_get, METH_O, NULL},
 	 { "Rpc_sample_scale_set", _wrap_Rpc_sample_scale_set, METH_VARARGS, NULL},
 	 { "Rpc_sample_scale_get", _wrap_Rpc_sample_scale_get, METH_O, NULL},
-	 { "Rpc__line_denominator", _wrap_Rpc__line_denominator, METH_VARARGS, NULL},
-	 { "Rpc__line_numerator", _wrap_Rpc__line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__sample_denominator", _wrap_Rpc__sample_denominator, METH_VARARGS, NULL},
-	 { "Rpc__sample_numerator", _wrap_Rpc__sample_numerator, METH_VARARGS, NULL},
-	 { "Rpc__fit_line_numerator", _wrap_Rpc__fit_line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__fit_sample_numerator", _wrap_Rpc__fit_sample_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_line_denominator", _wrap_Rpc__v_line_denominator, METH_VARARGS, NULL},
+	 { "Rpc__v_line_numerator", _wrap_Rpc__v_line_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_sample_denominator", _wrap_Rpc__v_sample_denominator, METH_VARARGS, NULL},
+	 { "Rpc__v_sample_numerator", _wrap_Rpc__v_sample_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_fit_line_numerator", _wrap_Rpc__v_fit_line_numerator, METH_VARARGS, NULL},
+	 { "Rpc__v_fit_sample_numerator", _wrap_Rpc__v_fit_sample_numerator, METH_VARARGS, NULL},
 	 { "Rpc__v_naif_code", _wrap_Rpc__v_naif_code, METH_VARARGS, "\n"
 		"\n"
 		"void Rpc::naif_code(int Naif_code)\n"

@@ -243,15 +243,15 @@ class LookVectorDouble(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    _look_vector = _swig_new_instance_method(_look_vector.LookVectorDouble__look_vector)
+    _v_look_vector = _swig_new_instance_method(_look_vector.LookVectorDouble__v_look_vector)
 
     @property
     def look_vector(self):
-        return self._look_vector()
+        return self._v_look_vector()
 
     @look_vector.setter
     def look_vector(self, value):
-      self._look_vector(value)
+      self._v_look_vector(value)
 
     _v_direction = _swig_new_instance_method(_look_vector.LookVectorDouble__v_direction)
 
@@ -295,15 +295,15 @@ class LookVectorAutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
-    _look_vector = _swig_new_instance_method(_look_vector.LookVectorAutoDerivativeDouble__look_vector)
+    _v_look_vector = _swig_new_instance_method(_look_vector.LookVectorAutoDerivativeDouble__v_look_vector)
 
     @property
     def look_vector(self):
-        return self._look_vector()
+        return self._v_look_vector()
 
     @look_vector.setter
     def look_vector(self, value):
-      self._look_vector(value)
+      self._v_look_vector(value)
 
     _v_direction = _swig_new_instance_method(_look_vector.LookVectorAutoDerivativeDouble__v_direction)
 

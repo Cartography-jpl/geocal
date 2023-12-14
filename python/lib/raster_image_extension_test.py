@@ -42,7 +42,7 @@ def test_past_edge3():
 
 def test_no_image():
     t = img.read_with_pad(15, 15, 10, 10)
-    assert (t == np.zeros((10, 10), dtype = np.int)).all()
+    assert (t == np.zeros((10, 10), dtype = int)).all()
 
 @skip    
 def test_display():

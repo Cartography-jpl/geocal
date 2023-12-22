@@ -6621,11 +6621,20 @@ SWIGINTERN std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iter
 SWIGINTERN std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_QuaternionOrbitData_Sg__Sg__insert__SWIG_0(std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > > *self,std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_QuaternionOrbitData_Sg__Sg__insert__SWIG_1(std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > > *self,std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n,std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &x){ self->insert(pos, n, x); }
 
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "orbit_wrap.h"
-
-
+#ifndef QUOTE  
+#define Q(x)#x
+#define QUOTE(x) Q(x)
+#endif
+  
+// CMAKE unfortunately uses a different name for the wrapper file that
+// the standard SWIG convention. So we set up CMAKE ot pass in a
+// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
+#ifndef CMAKE_SWIG_FILE_NAMES  
+#include QUOTE(orbit_wrap.h)
+#else  
+#include QUOTE(orbitPYTHON_wrap.h)
+#endif  
+  
 #include "geocal_serialize_support.h"
  namespace boost {
    namespace serialization {

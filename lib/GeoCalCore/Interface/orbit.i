@@ -432,12 +432,7 @@ public:
 
 // Extra code for handling boost serialization/python pickle of
 // director classes
-%{
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "orbit_wrap.h"
-%}
-%geocal_director_serialization(Orbit)
+%geocal_director_serialization(orbit, Orbit)
 
 // List of things "import *" will include
 %python_export("OrbitData", "QuaternionOrbitData", "Orbit", "KeplerOrbit", "ObservableOrbit", "ObserverOrbit", "Vector_QuaternionOrbitData")

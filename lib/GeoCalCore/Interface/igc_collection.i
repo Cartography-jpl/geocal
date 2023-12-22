@@ -111,12 +111,7 @@ def ground_coordinate(self, image_index, ic, dem = None):
 
 // Extra code for handling boost serialization/python pickle of
 // director classes
-%{
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "igc_collection_wrap.h"
-%}
-%geocal_director_serialization(IgcCollection)
+%geocal_director_serialization(igc_collection, IgcCollection)
 
 // List of things "import *" will include
 %python_export("IgcCollection")

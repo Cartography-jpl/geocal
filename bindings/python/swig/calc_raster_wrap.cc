@@ -5127,11 +5127,20 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "calc_raster_wrap.h"
-
-
+#ifndef QUOTE  
+#define Q(x)#x
+#define QUOTE(x) Q(x)
+#endif
+  
+// CMAKE unfortunately uses a different name for the wrapper file that
+// the standard SWIG convention. So we set up CMAKE ot pass in a
+// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
+#ifndef CMAKE_SWIG_FILE_NAMES  
+#include QUOTE(calc_raster_wrap.h)
+#else  
+#include QUOTE(calc_rasterPYTHON_wrap.h)
+#endif  
+  
 #include "geocal_serialize_support.h"
  namespace boost {
    namespace serialization {

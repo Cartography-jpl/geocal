@@ -40,12 +40,7 @@ public:
 
 // Extra code for handling boost serialization/python pickle of
 // director classes
-%{
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "with_parameter_wrap.h"
-%}
-%geocal_director_serialization(WithParameter)
+%geocal_director_serialization(with_parameter, WithParameter)
 
 // List of things "import *" will include
 %python_export("WithParameter", "WithParameterNested")

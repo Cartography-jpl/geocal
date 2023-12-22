@@ -47,12 +47,7 @@ protected:
 
 // Extra code for handling boost serialization/python pickle of
 // director classes
-%{
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "calc_raster_multi_band_wrap.h"
-%}
-%geocal_director_serialization(CalcRasterMultiBand)
+%geocal_director_serialization(calc_raster_multi_band, CalcRasterMultiBand)
 
 // List of things "import *" will include
 %python_export("CalcRasterMultiBand")

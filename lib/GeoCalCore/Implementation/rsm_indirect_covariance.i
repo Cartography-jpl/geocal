@@ -38,10 +38,7 @@ public:
 
 // Extra code for handling boost serialization/python pickle of
 // director classes
-//%{
-//#include "rsm_indirect_covariance_wrap.h"
-//%}
-//%geocal_director_serialization(RsmIndirectCovariance)
+//%geocal_director_serialization(rsm_indirect_covariance, RsmIndirectCovariance)
 
 // List of things "import *" will include
 %python_export("RsmIndirectCovariance")

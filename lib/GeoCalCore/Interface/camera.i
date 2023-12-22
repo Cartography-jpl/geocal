@@ -146,13 +146,8 @@ public:
 
 // Extra code for handling boost serialization/python pickle of
 // director classes
-%{
-// Needed by code below, can't easily figure these names out
-// automatically so just include here
-#include "camera_wrap.h"
-%}
-%geocal_director_serialization(Camera)
+%geocal_director_serialization(camera, Camera)
 
 // List of things "import *" will include
-%python_export("ObserverCamera", "ObservableCamera", "Camera", "SimpleCamera", "Vector_Camera",
-	       "SubCamera")
+%python_export("ObserverCamera", "ObservableCamera", "Camera", "SimpleCamera",
+	       "Vector_Camera", "SubCamera")

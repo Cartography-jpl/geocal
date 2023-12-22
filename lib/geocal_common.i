@@ -61,6 +61,6 @@
 %include "swig_vector_shared_ptr.i"
 %import "swig_rational.i"
 %include "director_serialization.i"
-%define %geocal_director_serialization(TYPE...)
-  %director_serialization(GeoCal, geocal_serialize_support.h, TYPE)
+%define %geocal_director_serialization(BNAME, TYPE...)
+%director_serialization(GeoCal, geocal_serialize_support.h, BNAME, TYPE)
 %enddef

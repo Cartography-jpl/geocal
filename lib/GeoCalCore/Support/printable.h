@@ -45,9 +45,12 @@ public:
     return os.str();
   }
 
-  // Alternative to print, this works better with python. If this
-  // is an empty string we fall back to print - so C++ classes work
-  // without change but python can intercept this by overriding desc.
+//-----------------------------------------------------------------------
+/// Alternative to print, this works better with python. If this
+/// is an empty string we fall back to print - so C++ classes work
+/// without change but python can intercept this by overriding desc.
+//-----------------------------------------------------------------------
+
   virtual std::string desc() const { return ""; }
 
   void print_wrapper(std::ostream& Os) const

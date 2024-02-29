@@ -250,18 +250,20 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_HDF5_TRUE@am__append_31 = $(SWIG_SRC_HDF5)
 @HAVE_GDAL_TRUE@am__append_32 = $(SWIG_SRC_GDAL)
 @HAVE_BOOST_SERIALIZATION_TRUE@am__append_33 = -DSWIG_HAVE_BOOST_SERIALIZATION
-@HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_34 = $(srcdir)/$(swigmspsrc)/msp_wrap.cc
-@BUILD_AFIDS_FALSE@am__append_35 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_36 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_37 = @srcpythonscript@/vicarb
-@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_38 = @srcpythonscript@/conda_wrapper.sh
-@CODE_COVERAGE_ENABLED_TRUE@am__append_39 = --cov-report term \
+@HAVE_BOOST_SERIALIZATION_TRUE@am__append_34 = -DSWIG_HAVE_BOOST_SERIALIZATION
+@HAVE_BOOST_SERIALIZATION_TRUE@am__append_35 = -DSWIG_HAVE_BOOST_SERIALIZATION
+@HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_36 = $(srcdir)/$(swigmspsrc)/msp_wrap.cc
+@BUILD_AFIDS_FALSE@am__append_37 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_38 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_39 = @srcpythonscript@/vicarb
+@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_40 = @srcpythonscript@/conda_wrapper.sh
+@CODE_COVERAGE_ENABLED_TRUE@am__append_41 = --cov-report term \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
 @CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
 @CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_40 = replace_python_shebang
-@HAVE_VICAR_RTL_TRUE@am__append_41 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_42 = install_python_doc
+@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_42 = replace_python_shebang
+@HAVE_VICAR_RTL_TRUE@am__append_43 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@WITH_DOCUMENTATION_TRUE@am__append_44 = install_python_doc
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps =  \
@@ -2499,9 +2501,11 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h @swigrules@/lib/swig_type_mapper_base.h \
 	@swigrules@/lib/python_lib_init.h \
+	@swigrules@/lib/python_ref_ptr_cleanup.h \
 	@swigrules@/lib/swig_type_mapper.h \
 	@swigrules@/lib/swig_to_python.h \
 	@swigrules@/lib/serialize_function.h \
+	@swigrules@/lib/serialize_shared_ptr.h \
 	@swigrules@/lib/weak_ptr_serialize_support.h
 am__libraw_HEADERS_DIST = @srcraw@/libraw.h @srcraw@/libraw_alloc.h \
 	@srcraw@/libraw_const.h @srcraw@/libraw_datastream.h \
@@ -3043,7 +3047,7 @@ noop =
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
 noinst_LTLIBRARIES = $(am__append_15)
-bin_SCRIPTS = $(am__append_37) $(am__append_38)
+bin_SCRIPTS = $(am__append_39) $(am__append_40)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -3094,7 +3098,7 @@ AM_LDFLAGS =
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
 BUILT_SOURCES = dummy.pdf test_out/vicar_copy.img $(am__append_16) \
-	$(am__append_34)
+	$(am__append_36)
 include_HEADERS = 
 # Test files
 
@@ -3363,7 +3367,7 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_12) $(am__append_40) $(am__append_42)
+INSTALL_DATA_HOOK = $(am__append_12) $(am__append_42) $(am__append_44)
 UNINSTALL_HOOK = $(am__append_13) clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_14)
 INSTALLCHECK_HOOK = python_check
@@ -3766,7 +3770,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_41)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_43)
 dist_afidspythonvdev_DATA = $(am__append_18) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -3975,9 +3979,11 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h @swigrules@/lib/swig_type_mapper_base.h \
 	@swigrules@/lib/python_lib_init.h \
+	@swigrules@/lib/python_ref_ptr_cleanup.h \
 	@swigrules@/lib/swig_type_mapper.h \
 	@swigrules@/lib/swig_to_python.h \
 	@swigrules@/lib/serialize_function.h \
+	@swigrules@/lib/serialize_shared_ptr.h \
 	@swigrules@/lib/weak_ptr_serialize_support.h
 #  SWIG_SRC_GDAL += @swigsrc@/gdal_multi_file_wrap.cc
 geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
@@ -4334,7 +4340,8 @@ geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
 	$(OPENMP_CFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) \
 	$(SPICE_CFLAGS) $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw) \
-	$(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS)
+	$(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) \
+	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_35)
 @BUILD_VICAR_GDALPLUGIN_TRUE@EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
 MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
@@ -4435,7 +4442,7 @@ CONDITIONAL_SWIG_SRC = $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5) \
 SWIG_CPPFLAGS = $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) \
 	$(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) \
 	$(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS) \
-	-DSWIG_MAPPER_NAMESPACE=GeoCal
+	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_34)
 SWIG_TYPE_TABLE_NAME = geocal
 SWIG_MODULE_NAME = geocal
 SWIG_LIBADD = libgeocal.la
@@ -4450,7 +4457,7 @@ SWIG_LIBADD = libgeocal.la
 @HAVE_MSP_TRUE@_msp_wrap_la_LDFLAGS = -module -avoid-version \
 @HAVE_MSP_TRUE@	$(MSP_LIBS) -ldl
 @HAVE_MSP_TRUE@_msp_wrap_la_SOURCES = @swigmspsrc@/msp_wrap.cc
-installafidspython_DATA = $(am__append_35) $(am__append_36)
+installafidspython_DATA = $(am__append_37) $(am__append_38)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/job_handle.py @srcpythonlib@/glas_gfm.py \
@@ -4527,7 +4534,7 @@ PYTEST_NJOB = 10
 # Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
 # PYTEST_EXTRAFLAGS="--timeout=20"
 PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_39)
+PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_41)
 dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
 geocalpkgpythondataisiscamera_DATA =  \
 	@srcpythonlib@/data/isis_camera/isis_lnac_cam.bin \

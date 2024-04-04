@@ -123,7 +123,15 @@ EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mex_kernel/ik/MEX_HRSC_V05.TI
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/mro.ker
 EXTRA_DIST+= @geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti
 EXTRA_DIST+= @geocalunittestdata@/steep_igc_gfm.xml
-
+EXTRA_DIST+= @geocalunittestdata@/11SLT_0455_00.TIF
+EXTRA_DIST+= @geocalunittestdata@/rsm_ms_polynomial_np.xml
+EXTRA_DIST+= @geocalunittestdata@/igc_refraction_gfm.xml
+EXTRA_DIST+= @geocalunittestdata@/isis_lnac_cam_samp1.bin
+EXTRA_DIST+= @geocalunittestdata@/igc_refraction_glas.xml
+EXTRA_DIST+= @geocalunittestdata@/isis_rnac_cam_samp1.bin
+EXTRA_DIST+= @geocalunittestdata@/isis_lnac_cam_samp2.bin
+EXTRA_DIST+= @geocalunittestdata@/steep_igc_gfm.xml
+EXTRA_DIST+= @geocalunittestdata@/isis_rnac_cam_samp2.bin
 
 
 

@@ -291,6 +291,10 @@ void CartLabMultifile::create_subset_file
     msub = Desired_map_info;
   else
     msub = boost::make_shared<MapInfo>(map_info().cover(Pt, Boundary));
+  // Check that map projection uses the same coordinates, we don't
+  // handle with this function doing something like converting to UTM.
+  if(!map_info().coordinate_converter().is_same(msub->coordinate_converter()))
+    throw Exception("Desired_map_info needs to be in the same coordinate system as CartLabMultifile.");
   ImageCoordinate ic = coordinate(*msub->ground_coordinate(0,0));
   ImageCoordinate icend = coordinate(*msub->ground_coordinate(msub->number_x_pixel(), msub->number_y_pixel()));
   int lstart = (int) floor(ic.line);

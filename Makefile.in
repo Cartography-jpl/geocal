@@ -3247,9 +3247,19 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/mars_kernel/mex_kernel/ik/MEX_HRSC_V05.TI \
 	@geocalunittestdata@/mars_kernel/mro_kernel/mro.ker \
 	@geocalunittestdata@/mars_kernel/mro_kernel/ik/mro_ctx_v11.ti \
-	@geocalunittestdata@/steep_igc_gfm.xml @srcpython@/pytest.ini \
-	@srcpython@/setup.cfg @srcpython@/conftest.py \
-	@srcpython@/README_test @srcpython@/test.sh \
+	@geocalunittestdata@/steep_igc_gfm.xml \
+	@geocalunittestdata@/11SLT_0455_00.TIF \
+	@geocalunittestdata@/rsm_ms_polynomial_np.xml \
+	@geocalunittestdata@/igc_refraction_gfm.xml \
+	@geocalunittestdata@/isis_lnac_cam_samp1.bin \
+	@geocalunittestdata@/igc_refraction_glas.xml \
+	@geocalunittestdata@/isis_rnac_cam_samp1.bin \
+	@geocalunittestdata@/isis_lnac_cam_samp2.bin \
+	@geocalunittestdata@/steep_igc_gfm.xml \
+	@geocalunittestdata@/isis_rnac_cam_samp2.bin \
+	@srcpython@/pytest.ini @srcpython@/setup.cfg \
+	@srcpython@/conftest.py @srcpython@/README_test \
+	@srcpython@/test.sh \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \
@@ -3333,6 +3343,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonlib@/warp_image_test.py \
 	@srcpythonlib@/linear_gradient_bad_pixel_detection_test.py \
 	@srcpythonlib@/tie_point_feature_matching_test.py \
+	@srcpythonlib@/cart_lab_multifile_extension_test.py \
 	@docpythonsrc@ @testsupportsrc@/__init__.py \
 	@testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
@@ -4514,7 +4525,8 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/tie_point_collect_picmtch.py \
 	@srcpythonlib@/warp_image.py \
 	@srcpythonlib@/linear_gradient_bad_pixel_detection.py \
-	@srcpythonlib@/version.py
+	@srcpythonlib@/version.py \
+	@srcpythonlib@/cart_lab_multifile_extension.py
 
 # We need to override the default py_compile to make sure the LD_LIBRARY_PATH
 # is set if needed

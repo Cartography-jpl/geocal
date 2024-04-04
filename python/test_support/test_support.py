@@ -175,6 +175,9 @@ require_afids_data = pytest.mark.skipif(not "AFIDS_VDEV_DATA" in os.environ,
 require_srtm_data = pytest.mark.skipif(not "ELEV_ROOT" in os.environ or not os.path.exists(os.environ["ELEV_ROOT"]),
     reason="need to have SRTM data available to run.")
 
+require_panchromatic_orthobase = pytest.mark.skipif(not os.path.exists("/raid22/band8_VICAR"),
+    reason="need to have orthobase data available to run.")
+
 # Marker that test requires the geocal test data in /data/geocal_test_data
 require_geocal_test_data = pytest.mark.skipif(not os.path.exists(geocal_test_igc),
     reason="need to have geocal test data (/data/geocal_test_data) available to run.")

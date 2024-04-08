@@ -346,9 +346,13 @@ void CartLabMultifile::create_subset_file
     command << " " << first_file;
   if(Verbose)
     std::cout << "GDAL command: " << command.str() << "\n";
-  // Can ignore system status, we just fail in the next step when we
-  // try to use the file.
-  system(command.str().c_str());
+  int status = system(command.str().c_str());
+  if(status != 0) {
+    Exception e;
+    e << "CartLabMultifile::create_subset_file failed system command.\n"
+      << "  Command: " << command.str() << "\n";
+    throw e;
+  }
   if(Translate_arg != "") {
     std::string t2 = std::string(f.temp_fname()) + "_2";
     std::ostringstream command2;
@@ -356,7 +360,13 @@ void CartLabMultifile::create_subset_file
 	     << f.temp_fname() << " " << t2;
     if(Verbose)
       std::cout << "GDAL command: " << command2.str() << "\n";
-    system(command2.str().c_str());
+    status = system(command2.str().c_str());
+    if(status != 0) {
+      Exception e;
+      e << "CartLabMultifile::create_subset_file failed system command.\n"
+	<< "  Command: " << command2.str() << "\n";
+      throw e;
+    }
     GdalRasterImage d(t2);
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
     unlink(t2.c_str());

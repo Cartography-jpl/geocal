@@ -68,6 +68,10 @@ namespace GeoCal {
     };
   }
 
+boost::shared_ptr<GDALDataset> gdal_openex(const std::string& Fname,
+   bool Update=false,					   
+   const std::string& Allowed_drivers="", const std::string& Open_options="",
+   const std::string& Sibling_files="");
 GDALDataType gdal_band_type(const std::string& Fname, int Band_id = 1);
 std::string gdal_driver_name(const std::string& Fname);
 bool gdal_has_map_info(const std::string& Fname);
@@ -356,6 +360,23 @@ public:
     initialize(Band_id, Number_tile, Tile_number_line, Tile_number_sample);
   }
 
+//-----------------------------------------------------------------------
+/// Variation of constructor where we specify more options, using
+/// GDALOpenEx instead of GDALOpen.
+//-----------------------------------------------------------------------
+
+  Gdal(const std::string& Fname, int Band_id, const std::string& Allowed_drivers,
+       const std::string& Open_options="", const std::string& Sibling_files="",
+       int Number_tile = 4, 
+       bool Update = false, int Tile_number_line = -1, 
+       int Tile_number_sample = -1)
+  {
+    fnames_.push_back(Fname);
+    GdalRegister::gdal_register();
+    data_set = gdal_openex(Fname, Update, Allowed_drivers, Open_options, Sibling_files);
+    initialize(Band_id, Number_tile, Tile_number_line, Tile_number_sample);
+  }
+  
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------

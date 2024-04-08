@@ -8972,6 +8972,685 @@ fail:
 SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_23(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  int arg6 ;
+  bool arg7 ;
+  int arg8 ;
+  int arg9 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  int val9 ;
+  int ecode9 = 0 ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 9) || (nobjs > 9)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GdalRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_GdalRasterImage" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_GdalRasterImage" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  ecode9 = SWIG_AsVal_int(swig_obj[8], &val9);
+  if (!SWIG_IsOK(ecode9)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode9), "in method '" "new_GdalRasterImage" "', argument " "9"" of type '" "int""'");
+  } 
+  arg9 = static_cast< int >(val9);
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7,arg8,arg9);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_24(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  int arg6 ;
+  bool arg7 ;
+  int arg8 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  int val8 ;
+  int ecode8 = 0 ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 8) || (nobjs > 8)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GdalRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_GdalRasterImage" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  ecode8 = SWIG_AsVal_int(swig_obj[7], &val8);
+  if (!SWIG_IsOK(ecode8)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode8), "in method '" "new_GdalRasterImage" "', argument " "8"" of type '" "int""'");
+  } 
+  arg8 = static_cast< int >(val8);
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7,arg8);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_25(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  int arg6 ;
+  bool arg7 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int val6 ;
+  int ecode6 = 0 ;
+  bool val7 ;
+  int ecode7 = 0 ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GdalRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  ecode7 = SWIG_AsVal_bool(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "new_GdalRasterImage" "', argument " "7"" of type '" "bool""'");
+  } 
+  arg7 = static_cast< bool >(val7);
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_26(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  int arg6 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  int val6 ;
+  int ecode6 = 0 ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 6) || (nobjs > 6)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "new_GdalRasterImage" "', argument " "6"" of type '" "int""'");
+  } 
+  arg6 = static_cast< int >(val6);
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_27(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  std::string *arg5 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  int res5 = SWIG_OLDOBJ ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res5 = SWIG_AsPtr_std_string(swig_obj[4], &ptr);
+    if (!SWIG_IsOK(res5)) {
+      SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "5"" of type '" "std::string const &""'"); 
+    }
+    arg5 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  if (SWIG_IsNewObj(res5)) delete arg5;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_28(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_29(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  GeoCal::GdalRasterImage *result = 0 ;
+  
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_GdalRasterImage" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_GdalRasterImage" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::GdalRasterImage > *smartresult = result ? new boost::shared_ptr<  GeoCal::GdalRasterImage >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_30(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
   GeoCal::GdalRasterImage *arg3 = 0 ;
   std::string *arg4 = 0 ;
@@ -9107,7 +9786,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_24(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_31(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9237,7 +9916,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_25(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_32(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9359,7 +10038,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_26(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_33(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9473,7 +10152,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_27(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_34(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9579,7 +10258,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_28(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_35(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9677,7 +10356,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_29(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_36(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   std::string *arg1 = 0 ;
   std::string *arg2 = 0 ;
@@ -9876,7 +10555,25 @@ check_7:
 check_10:
   
   if (argc == 3) {
-    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_29(self, argc, argv);
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_11;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_11;
+    return _wrap_new_GdalRasterImage__SWIG_29(self, argc, argv);
+  }
+check_11:
+  
+  if (argc == 3) {
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_36(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
@@ -9888,95 +10585,85 @@ check_10:
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_12;
+    if (!_v) goto check_13;
     {
       {
         int res = SWIG_AsVal_int(argv[2], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_12;
+    if (!_v) goto check_13;
     {
       {
         int res = SWIG_AsVal_bool(argv[3], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_12;
+    if (!_v) goto check_13;
     return _wrap_new_GdalRasterImage__SWIG_19(self, argc, argv);
   }
-check_12:
+check_13:
   
   if (argc == 4) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_14;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_14;
     PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_28(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
-  if (argc == 5) {
-    int _v = 0;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_14;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[2], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_14;
-    {
-      {
-        int res = SWIG_AsVal_bool(argv[3], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_14;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_14;
-    return _wrap_new_GdalRasterImage__SWIG_18(self, argc, argv);
-  }
 check_14:
   
-  if (argc == 5) {
-    int _v = 0;
-    {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
-      _v = SWIG_CheckState(res);
-    }
-    if (!_v) goto check_15;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[3], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_15;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_15;
-    return _wrap_new_GdalRasterImage__SWIG_9(self, argc, argv);
-  }
-check_15:
-  
-  if (argc == 5) {
-    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_27(self, argc, argv);
+  if (argc == 4) {
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_35(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
-  if (argc == 6) {
+  if (argc == 5) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_16;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_16;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_16;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_16;
+    return _wrap_new_GdalRasterImage__SWIG_18(self, argc, argv);
+  }
+check_16:
+  
+  if (argc == 5) {
     int _v = 0;
     {
       {
@@ -9986,38 +10673,25 @@ check_15:
     }
     if (!_v) goto check_17;
     {
-      {
-        int res = SWIG_AsVal_int(argv[2], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_17;
     {
-      {
-        int res = SWIG_AsVal_bool(argv[3], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_17;
     {
-      {
-        int res = SWIG_AsVal_int(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
     if (!_v) goto check_17;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[5], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_17;
-    return _wrap_new_GdalRasterImage__SWIG_17(self, argc, argv);
+    return _wrap_new_GdalRasterImage__SWIG_27(self, argc, argv);
   }
 check_17:
   
-  if (argc == 6) {
+  if (argc == 5) {
     int _v = 0;
     {
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
@@ -10036,16 +10710,90 @@ check_17:
       }
     }
     if (!_v) goto check_18;
+    return _wrap_new_GdalRasterImage__SWIG_34(self, argc, argv);
+  }
+check_18:
+  
+  if (argc == 5) {
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_9(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 6) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_20;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[2], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_20;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_20;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_20;
     {
       {
         int res = SWIG_AsVal_int(argv[5], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_18;
+    if (!_v) goto check_20;
+    return _wrap_new_GdalRasterImage__SWIG_17(self, argc, argv);
+  }
+check_20:
+  
+  if (argc == 6) {
+    int _v = 0;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_21;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_21;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_21;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_21;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_21;
     return _wrap_new_GdalRasterImage__SWIG_26(self, argc, argv);
   }
-check_18:
+check_21:
   
   if (argc == 6) {
     int _v = 0;
@@ -10053,15 +10801,54 @@ check_18:
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_19;
+    if (!_v) goto check_22;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_22;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_22;
     {
       int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_19;
+    if (!_v) goto check_22;
     return _wrap_new_GdalRasterImage__SWIG_8(self, argc, argv);
   }
-check_19:
+check_22:
+  
+  if (argc == 6) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_23;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_23;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_23;
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_33(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+check_23:
   
   if (argc == 6) {
     PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_4(self, argc, argv);
@@ -10071,39 +10858,44 @@ check_19:
   if (argc == 7) {
     int _v = 0;
     {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_25;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_21;
+    if (!_v) goto check_25;
     {
       int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_21;
+    if (!_v) goto check_25;
     {
-      {
-        int res = SWIG_AsVal_bool(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_21;
+    if (!_v) goto check_25;
     {
       {
         int res = SWIG_AsVal_int(argv[5], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_21;
+    if (!_v) goto check_25;
     {
       {
-        int res = SWIG_AsVal_int(argv[6], NULL);
+        int res = SWIG_AsVal_bool(argv[6], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_21;
+    if (!_v) goto check_25;
     return _wrap_new_GdalRasterImage__SWIG_25(self, argc, argv);
   }
-check_21:
+check_25:
   
   if (argc == 7) {
     int _v = 0;
@@ -10111,22 +10903,66 @@ check_21:
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_22;
+    if (!_v) goto check_26;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[3], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_26;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_26;
     {
       int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_22;
+    if (!_v) goto check_26;
     {
       {
         int res = SWIG_AsVal_int(argv[6], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_22;
+    if (!_v) goto check_26;
     return _wrap_new_GdalRasterImage__SWIG_7(self, argc, argv);
   }
-check_22:
+check_26:
+  
+  if (argc == 7) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_27;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_27;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_27;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_27;
+    return _wrap_new_GdalRasterImage__SWIG_32(self, argc, argv);
+  }
+check_27:
   
   if (argc == 7) {
     PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_3(self, argc, argv);
@@ -10136,41 +10972,85 @@ check_22:
   if (argc == 8) {
     int _v = 0;
     {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_29;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_24;
+    if (!_v) goto check_29;
     {
       int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_24;
+    if (!_v) goto check_29;
     {
-      {
-        int res = SWIG_AsVal_bool(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_24;
+    if (!_v) goto check_29;
     {
       {
         int res = SWIG_AsVal_int(argv[5], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_24;
+    if (!_v) goto check_29;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_29;
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_24(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+check_29:
+  
+  if (argc == 8) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_30;
+    {
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_30;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[4], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_30;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_30;
     {
       {
         int res = SWIG_AsVal_int(argv[6], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_24;
-    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_24(self, argc, argv);
+    if (!_v) goto check_30;
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_31(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
-check_24:
+check_30:
   
   if (argc == 8) {
     int _v = 0;
@@ -10178,24 +11058,24 @@ check_24:
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_25;
+    if (!_v) goto check_31;
     {
       int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_25;
+    if (!_v) goto check_31;
     {
       {
         int res = SWIG_AsVal_int(argv[6], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_25;
+    if (!_v) goto check_31;
     PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_6(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
-check_25:
+check_31:
   
   if (argc == 8) {
     PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_2(self, argc, argv);
@@ -10205,41 +11085,46 @@ check_25:
   if (argc == 9) {
     int _v = 0;
     {
-      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_33;
+    {
+      int res = SWIG_AsPtr_std_string(argv[2], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_27;
+    if (!_v) goto check_33;
     {
-      {
-        int res = SWIG_AsVal_int(argv[3], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_27;
-    {
-      {
-        int res = SWIG_AsVal_int(argv[4], NULL);
-        _v = SWIG_CheckState(res);
-      }
-    }
-    if (!_v) goto check_27;
-    {
-      int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
+      int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_27;
+    if (!_v) goto check_33;
+    {
+      int res = SWIG_AsPtr_std_string(argv[4], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_33;
     {
       {
-        int res = SWIG_AsVal_int(argv[6], NULL);
+        int res = SWIG_AsVal_int(argv[5], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_27;
-    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_5(self, argc, argv);
+    if (!_v) goto check_33;
+    {
+      {
+        int res = SWIG_AsVal_bool(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_33;
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_23(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
-check_27:
+check_33:
   
   if (argc == 9) {
     int _v = 0;
@@ -10247,31 +11132,63 @@ check_27:
       int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GdalRasterImage_t, 0);
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_28;
+    if (!_v) goto check_34;
     {
       int res = SWIG_AsPtr_std_string(argv[3], (std::string**)(0));
       _v = SWIG_CheckState(res);
     }
-    if (!_v) goto check_28;
+    if (!_v) goto check_34;
     {
       {
         int res = SWIG_AsVal_bool(argv[4], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_28;
+    if (!_v) goto check_34;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[5], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_34;
     {
       {
         int res = SWIG_AsVal_int(argv[6], NULL);
         _v = SWIG_CheckState(res);
       }
     }
-    if (!_v) goto check_28;
-    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_23(self, argc, argv);
+    if (!_v) goto check_34;
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_30(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
-check_28:
+check_34:
+  
+  if (argc == 9) {
+    int _v = 0;
+    {
+      int res = SWIG_ConvertPtr(argv[2], 0, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, 0);
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_35;
+    {
+      int res = SWIG_AsPtr_std_string(argv[5], (std::string**)(0));
+      _v = SWIG_CheckState(res);
+    }
+    if (!_v) goto check_35;
+    {
+      {
+        int res = SWIG_AsVal_int(argv[6], NULL);
+        _v = SWIG_CheckState(res);
+      }
+    }
+    if (!_v) goto check_35;
+    PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_5(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+check_35:
   
   if (argc == 9) {
     PyObject *retobj = _wrap_new_GdalRasterImage__SWIG_1(self, argc, argv);
@@ -10310,6 +11227,13 @@ fail:
     "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,int)\n"
     "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int)\n"
     "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &,std::string const &,std::string const &,int,bool,int,int)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &,std::string const &,std::string const &,int,bool,int)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &,std::string const &,std::string const &,int,bool)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &,std::string const &,std::string const &,int)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &,std::string const &,std::string const &)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &,std::string const &)\n"
+    "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,int,std::string const &)\n"
     "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,std::string const &,GeoCal::GdalRasterImage const &,std::string const &,bool,int,int,int,int)\n"
     "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,std::string const &,GeoCal::GdalRasterImage const &,std::string const &,bool,int,int,int)\n"
     "    GeoCal::GdalRasterImage::GdalRasterImage(std::string const &,std::string const &,GeoCal::GdalRasterImage const &,std::string const &,bool,int,int)\n"

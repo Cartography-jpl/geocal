@@ -44,6 +44,11 @@ public:
   GdalRasterImage(const std::string& Fname, int Band_id = 1, int
      Number_tile = 4, bool Update = false,
      int Tile_number_line = -1, int Tile_number_sample = -1);
+  GdalRasterImage(const std::string& Fname, int Band_id,
+		  const std::string& Allowed_drivers,
+		  const std::string& Open_options="", const std::string& Sibling_files="",
+		  int Number_tile = 4, bool Update = false,
+		  int Tile_number_line = -1, int Tile_number_sample = -1);
   GdalRasterImage(const std::string& Fname,
 		  const std::string& Driver_name,
 		  const GdalRasterImage& Source,

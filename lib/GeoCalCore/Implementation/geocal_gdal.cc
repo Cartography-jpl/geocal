@@ -255,6 +255,83 @@ void GdalRegister::gdal_register()
 /** \defgroup Gdal Gdal support routines **/
 //-----------------------------------------------------------------------
 /// \ingroup Gdal
+///
+/// Utility function to use GDALOpenEx to open a file for
+/// reading. This can be useful for some special cases (e.g.,
+/// specifying a list of allowed drivers). We only support reading
+/// here, because the existing create function should already have the
+/// functionality needed.
+///
+/// Can optionally supply a list of drivers, open options, and
+/// sibling files (see GDALOpenEx for details of this). These are
+/// passed as single strings, with different values seperated by " ".
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
+    bool Update, const std::string& Allowed_drivers, const std::string& Open_options,
+    const std::string& Sibling_files)
+{
+  size_t start = 0;
+  std::vector<std::string> opt1_str;
+  std::vector<char*> opt1;
+  std::string options1 = Allowed_drivers;
+  for(size_t i = 0; i < options1.length(); ++i)
+    if(options1[i] == ' ') {
+      opt1_str.push_back(options1.substr(start, i - start));
+      opt1.push_back(const_cast<char*>(opt1_str.back().c_str()));
+      while(options1[i] == ' ' && i < options1.length())
+	++i;
+      start = i;
+    }
+  if(start + 1 < options1.length()) {
+    opt1_str.push_back(options1.substr(start));
+    opt1.push_back(const_cast<char*>(opt1_str.back().c_str()));
+  }
+  opt1.push_back(0);
+  
+  start = 0;
+  std::vector<std::string> opt2_str;
+  std::vector<char*> opt2;
+  std::string options2 = Open_options;
+  for(size_t i = 0; i < options2.length(); ++i)
+    if(options2[i] == ' ') {
+      opt2_str.push_back(options2.substr(start, i - start));
+      opt2.push_back(const_cast<char*>(opt2_str.back().c_str()));
+      while(options2[i] == ' ' && i < options2.length())
+	++i;
+      start = i;
+    }
+  if(start + 1 < options2.length()) {
+    opt2_str.push_back(options2.substr(start));
+    opt2.push_back(const_cast<char*>(opt2_str.back().c_str()));
+  }
+  opt2.push_back(0);
+
+  start = 0;
+  std::vector<std::string> opt3_str;
+  std::vector<char*> opt3;
+  std::string options3 = Sibling_files;
+  for(size_t i = 0; i < options3.length(); ++i)
+    if(options3[i] == ' ') {
+      opt3_str.push_back(options3.substr(start, i - start));
+      opt3.push_back(const_cast<char*>(opt3_str.back().c_str()));
+      while(options3[i] == ' ' && i < options3.length())
+	++i;
+      start = i;
+    }
+  if(start + 3 < options3.length()) {
+    opt3_str.push_back(options3.substr(start));
+    opt3.push_back(const_cast<char*>(opt3_str.back().c_str()));
+  }
+  opt3.push_back(0);
+  boost::shared_ptr<GDALDataset> data_set((GDALDataset *) GDALOpenEx(Fname.c_str(), (Update ? GA_Update : GA_ReadOnly), &(*opt1.begin()), &(*opt2.begin()), &(*opt3.begin())));
+  if(!data_set.get())
+    throw Exception("Trouble opening file " + Fname);
+  return data_set;
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup Gdal
 /// Utility function to return the type of a raster band.
 //-----------------------------------------------------------------------
 

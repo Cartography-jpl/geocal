@@ -543,6 +543,56 @@ GdalRasterImage::GdalRasterImage(const std::string& Fname, int Band_id, int
   }
 }
 
+//-----------------------------------------------------------------------
+/// Variation of Constructor to read and/or update an existing file
+/// that uses more options to open the file, using GDALOpenEx instead
+/// of GDALOpen
+//-----------------------------------------------------------------------
+
+GdalRasterImage::GdalRasterImage(const std::string& Fname, int Band_id,
+				 const std::string& Allowed_drivers,
+				 const std::string& Open_options,
+				 const std::string& Sibling_files, 
+				 int Number_tile, bool Update, 
+				 int Tile_number_line, int Tile_number_sample)
+{
+  boost::shared_ptr<GDALDataset> data_set = gdal_openex(Fname, Update, Allowed_drivers,
+							Open_options, Sibling_files);
+  range_check(Band_id, 1, data_set->GetRasterCount() + 1);
+  switch(data_set->GetRasterBand(Band_id)->GetRasterDataType()) {
+  case GDT_Byte:
+    initialize<GByte>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  case GDT_UInt16:
+    initialize<GUInt16>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  case GDT_Int16:
+    initialize<GInt16>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  case GDT_UInt32:
+    initialize<GUInt32>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  case GDT_Int32:
+    initialize<GInt32>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  case GDT_Float32:
+    initialize<float>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  case GDT_Float64:
+    initialize<double>(data_set, Band_id, Number_tile,
+		      Tile_number_line, Tile_number_sample);
+    break;
+  default:
+    throw Exception("Unrecognized data type");
+  }
+}
+
 
 // Actual work of reading, parametrized by type.
 

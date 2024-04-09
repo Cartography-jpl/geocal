@@ -40,7 +40,7 @@ def _create_image_chip(self, out_fname, gdal_img_to_match, out_format="VICAR", b
         gc4 = gdal_img_to_match.ground_coordinate(
             geocal_swig.ImageCoordinate(gdal_img_to_match.number_line-1,
                                         gdal_img_to_match.number_sample-1))
-        self.create_subset_file(f"{tdir}/ichip_landsat.vrt", "VRT", [gc1,gc2,gc3,gc4], None,
+        self.create_subset_file(f"{tdir}/ichip_landsat.tif", "gtiff", [gc1,gc2,gc3,gc4], None,
                                 "", "", border, False)
         gc1=gdal_img_to_match.ground_coordinate(
             geocal_swig.ImageCoordinate(gdal_img_to_match.number_line//2,
@@ -52,7 +52,7 @@ def _create_image_chip(self, out_fname, gdal_img_to_match, out_format="VICAR", b
         res_y = abs(gc1.y - gc2.y)
         subprocess.run(f"gdalsrsinfo -o wkt {img_to_match_fname} > {tdir}/ichip.wkt",
                        shell=True, check=True)
-        subprocess.run(f"gdalwarp -q -t_srs {tdir}/ichip.wkt -tr {res_x} {res_y} {tdir}/ichip_landsat.vrt -overwrite -of {out_format} -r {resampling_method} {out_fname}", shell=True, check=True)
+        subprocess.run(f"gdalwarp -q -t_srs {tdir}/ichip.wkt -tr {res_x} {res_y} {tdir}/ichip_landsat.tif -overwrite -of {out_format} -r {resampling_method} {out_fname}", shell=True, check=True)
 
 geocal_swig.CartLabMultifile.create_image_chip = _create_image_chip
 

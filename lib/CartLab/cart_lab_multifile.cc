@@ -330,22 +330,34 @@ void CartLabMultifile::create_subset_file
 			 msub->number_x_pixel());
   double tres_lat = fabs((msub->ulc_y()-msub->lrc_y()) /
 			 msub->number_y_pixel());
+  // We ran into a case where gdalbuildvrt created a vrt file with one
+  // of the files having a zero size (it was once that just touched
+  // the edge of the desired map info). To work around this, do the
+  // vrt in two steps - one just joins the files together and the
+  // other subsets it.
+  
   std::ostringstream command;
-  command << "gdalbuildvrt -q"
-	  << " -te " << std::setprecision(12)
-	  << lon_min << " " << lat_min << " " << lon_max << " "
-	  << lat_max << " -tr " << tres_lon << " " << tres_lat << " -r average";
+  std::ostringstream command2;
+  command << "gdalbuildvrt -q";
+  command2 << "gdalbuildvrt -q"
+	   << " -te " << std::setprecision(12)
+	   << lon_min << " " << lat_min << " " << lon_max << " "
+	   << lat_max << " -tr " << tres_lon << " " << tres_lat << " -r average";
   GeoCalTempFile f;
   command << " " << f.temp_fname();
+  GeoCalTempFile f2;
+  command2 << " " << f2.temp_fname();
   BOOST_FOREACH(std::string f, flist)
     command << " " << f;
   // Make sure we have at least one file in the list, even if this
-  // doesn't actually over the area at all. This will force
+  // doesn't actually cover the area at all. This will force
   // gdalbuildvrt to make an empty file
   if(flist.size() == 0)
     command << " " << first_file;
+  command2 << " " << f.temp_fname();
   if(Verbose)
-    std::cout << "GDAL command: " << command.str() << "\n";
+    std::cout << "GDAL command: " << command.str() << "\n"
+	      << "GDAL command: " << command2.str() << "\n";
   int status = system(command.str().c_str());
   if(status != 0) {
     Exception e;
@@ -353,25 +365,32 @@ void CartLabMultifile::create_subset_file
       << "  Command: " << command.str() << "\n";
     throw e;
   }
+  status = system(command2.str().c_str());
+  if(status != 0) {
+    Exception e;
+    e << "CartLabMultifile::create_subset_file failed system command.\n"
+      << "  Command: " << command2.str() << "\n";
+    throw e;
+  }
   if(Translate_arg != "") {
-    std::string t2 = std::string(f.temp_fname()) + "_2";
-    std::ostringstream command2;
-    command2 << "gdal_translate " << Translate_arg << " "
-	     << f.temp_fname() << " " << t2;
+    std::string t2 = std::string(f2.temp_fname()) + "_2";
+    std::ostringstream command3;
+    command3 << "gdal_translate " << Translate_arg << " "
+	     << f2.temp_fname() << " " << t2;
     if(Verbose)
-      std::cout << "GDAL command: " << command2.str() << "\n";
-    status = system(command2.str().c_str());
+      std::cout << "GDAL command: " << command3.str() << "\n";
+    status = system(command3.str().c_str());
     if(status != 0) {
       Exception e;
       e << "CartLabMultifile::create_subset_file failed system command.\n"
-	<< "  Command: " << command2.str() << "\n";
+	<< "  Command: " << command3.str() << "\n";
       throw e;
     }
     GdalRasterImage d(t2);
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
     unlink(t2.c_str());
   } else {
-    GdalRasterImage d(f.temp_fname());
+    GdalRasterImage d(f2.temp_fname());
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
   }
 }

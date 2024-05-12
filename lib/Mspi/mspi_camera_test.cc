@@ -40,19 +40,19 @@ BOOST_AUTO_TEST_CASE(basic_test)
   const int nband = 7;
   // Results from old code unit test.
   double line_expect[nband] = {4.02840527542328388222e+01,
-			       4.82840527542328388222e+01,
-			       5.62840527542328388222e+01,
-			       3.70840527542328430854e+01,
-			       4.50840527542328359800e+01,
-			       5.30840527542328430854e+01,
-			       -1.07776474074074037901e+01};
+             4.82840527542328388222e+01,
+             5.62840527542328388222e+01,
+             3.70840527542328430854e+01,
+             4.50840527542328359800e+01,
+             5.30840527542328430854e+01,
+             -1.07776474074074037901e+01};
   double sample_expect[nband] = {8.00175853880662771189e+02,
-				 8.00175853880662771189e+02,
-				 8.00175853880662771189e+02,
-				 8.00175853880662771189e+02,
-				 8.00175853880662771189e+02,
-				 8.00175853880662771189e+02,
-				 7.98416764444444424953e+02};
+         8.00175853880662771189e+02,
+         8.00175853880662771189e+02,
+         8.00175853880662771189e+02,
+         8.00175853880662771189e+02,
+         8.00175853880662771189e+02,
+         7.98416764444444424953e+02};
   for(int b = 0; b < cam.number_band(); ++b) {
     FrameCoordinate fc = cam.frame_coordinate(slv, b);
     BOOST_CHECK_CLOSE(fc.line, line_expect[b], 1e-8);
@@ -151,35 +151,35 @@ BOOST_AUTO_TEST_CASE(basic_test)
     for(int i = 0; i < 3; ++i)
       BOOST_CHECK_CLOSE(slv.direction()[i], direction_expect3[b][i], 1e-8);
   }
-  double angular_separation_expect[nband] = 
-    {-2.87509743311235464389e-03, 
-     0.0, 
+  double angular_separation_expect[nband] =
+    {-2.87509743311235464389e-03,
+     0.0,
      2.87505465482229246102e-03,
-     -4.02513773725820221683e-03, 
-     -1.15003650156956832747e-03, 
+     -4.02513773725820221683e-03,
+     -1.15003650156956832747e-03,
      1.72504096818234002250e-03,
      -2.12735828800964844876e-02};
 
   for(int b = 0; b < cam.number_band(); ++b)
-    BOOST_CHECK_CLOSE(cam.angular_separation(1, b), 
-		      angular_separation_expect[b], 1e-8);
+    BOOST_CHECK_CLOSE(cam.angular_separation(1, b),
+          angular_separation_expect[b], 1e-8);
 
-  double loff_expect[nband] = 
-	{3.91114046925584588621e+01,
-	 3.93225488022550777600e+01,
-	 3.95515012995958485931e+01,
-	 3.91114046925584588621e+01,
-	 3.93225488022550777600e+01,
-	 3.95515012995958485931e+01,
-	 0.0};
-  double soff_expect[nband] = 
-	{3.12289783792453867761e+01,
-	 3.16220033730039595810e+01,
-	 3.20145509437610442660e+01,
-	 3.12289783792453867761e+01,
-	 3.16220033730039595810e+01,
-	 3.20145509437610442660e+01,
-	 0.0};
+  double loff_expect[nband] =
+  {3.91114046925584588621e+01,
+   3.93225488022550777600e+01,
+   3.95515012995958485931e+01,
+   3.91114046925584588621e+01,
+   3.93225488022550777600e+01,
+   3.95515012995958485931e+01,
+   0.0};
+  double soff_expect[nband] =
+  {3.12289783792453867761e+01,
+   3.16220033730039595810e+01,
+   3.20145509437610442660e+01,
+   3.12289783792453867761e+01,
+   3.16220033730039595810e+01,
+   3.20145509437610442660e+01,
+   0.0};
 
   FrameCoordinate f(-0.3, 0.1);
   for(int b = 0; b < cam.number_band(); ++b) {
@@ -245,10 +245,10 @@ BOOST_AUTO_TEST_CASE(airmisr_roundtrip_test)
   for(int b = 0; b < cam.number_band(); ++b)
     for(double ln = -1.0; ln < 1.05; ln += 0.5) {
       for(int smp = 0; smp < cam.number_sample(b); smp += 10) {
-	FrameCoordinate fc(ln, smp);
-	FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
-	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
-	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+  FrameCoordinate fc(ln, smp);
+  FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
+  BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+  BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
       }
     }
 }
@@ -261,10 +261,10 @@ BOOST_AUTO_TEST_CASE(gndmisr_roundtrip_test)
   for(int b = 0; b < cam.number_band(); ++b)
     for(double ln = -1.0; ln < 1.05; ln += 0.5) {
       for(int smp = 0; smp < cam.number_sample(b); smp += 10) {
-	FrameCoordinate fc(ln, smp);
-	FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
-	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
-	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+  FrameCoordinate fc(ln, smp);
+  FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
+  BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+  BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
       }
     }
 }
@@ -283,15 +283,15 @@ BOOST_AUTO_TEST_CASE(serialization)
     BOOST_CHECK_EQUAL(cam->number_sample(b), camr->number_sample(b));
     for(double ln = -1.0; ln < 1.05; ln += 0.5) {
       for(int smp = 0; smp < cam->number_sample(b); smp += 10) {
-	FrameCoordinate fc(ln, smp);
-	FrameCoordinate fc2 = 
-	  camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
-	BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
-	BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
-	FrameCoordinate fc3 = 
-	  cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
-	BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
-	BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);
+  FrameCoordinate fc(ln, smp);
+  FrameCoordinate fc2 =
+    camr->frame_coordinate(cam->sc_look_vector(fc, b), b);
+  BOOST_CHECK(fabs(fc.line - fc2.line) < 0.1);
+  BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.1);
+  FrameCoordinate fc3 =
+    cam->frame_coordinate(camr->sc_look_vector(fc, b), b);
+  BOOST_CHECK(fabs(fc.line - fc3.line) < 0.1);
+  BOOST_CHECK(fabs(fc.sample - fc3.sample) < 0.1);
       }
     }
   }
@@ -305,7 +305,7 @@ BOOST_AUTO_TEST_CASE(jac_test)
   if(0)
     for(int i = 0; i < cam.parameter().rows(); ++i)
       std::cerr << i << ": " << cam.parameter()(i)
-		<< " " << cam.parameter_name()[i] << "\n";
+    << " " << cam.parameter_name()[i] << "\n";
   cam.add_identity_gradient();
   FrameCoordinate fc(-0.9, 100);
   ScLookVector slv = cam.sc_look_vector(fc, 0);
@@ -313,9 +313,9 @@ BOOST_AUTO_TEST_CASE(jac_test)
   // Jacobian is sensitive to the difference, so we will use the
   // calculated inverse in the finite difference.
   FrameCoordinate fc_calc = cam.frame_coordinate(slv, 0);
-  ScLookVectorWithDerivative slvwd = 
+  ScLookVectorWithDerivative slvwd =
     cam.sc_look_vector_with_derivative(fc, 0);
-  FrameCoordinateWithDerivative fcwd = 
+  FrameCoordinateWithDerivative fcwd =
     cam.frame_coordinate_with_derivative(slv, 0);
   const int parm_size = 3;
   blitz::Array<double, 1> eps(parm_size);

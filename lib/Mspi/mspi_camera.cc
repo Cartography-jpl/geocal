@@ -40,7 +40,6 @@ void MspiCamera::read_config_file(const std::string& File_name,
           const std::string& Extra_config_file)
 {
   fname = File_name;
-  std::cerr << fname << " (read_config mspi_camera.cc)\n";
   MspiConfigFile config(File_name);
   if(Extra_config_file != "")
     config.add_file(Extra_config_file);

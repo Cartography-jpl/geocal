@@ -40,58 +40,83 @@ void MspiCamera::read_config_file(const std::string& File_name,
           const std::string& Extra_config_file)
 {
   fname = File_name;
-  MspiConfigFile c(File_name);
+  std::cerr << fname << " (read_config mspi_camera.cc)\n";
+  MspiConfigFile config(File_name);
   if(Extra_config_file != "")
-    c.add_file(Extra_config_file);
+    config.add_file(Extra_config_file);
+
+//-------------------------------------------------------
+// Get camera mode
+// 0 = MSPI/AirMspi; 1 = AirMSPI2
+//-------------------------------------------------------
+
+  int camera_mode = 0;
+  if (config.have_key("camera_mode")) {
+    camera_mode = config.value<int>("camera_mode");
+  }
+
+//-------------------------------------------------------
+// Read parameters specific to AirMSPI2
+//-------------------------------------------------------
+
+  double line_pitch_swir = 0;
+  if (camera_mode == 1) {
+    line_pitch_swir = config.value<double>("line_pitch_swir");
+  }
 
 //-------------------------------------------------------
 // Some hardcoded values that we don't expect to change.
 //-------------------------------------------------------
 
-  sample_pitch_ = c.value<double>("sample_pitch"); // pixel size along sample axis (millimeters)
-  line_pitch_ = c.value<double>("line_pitch");  // pixel size along row axis (millimeters)
   frame_convention_ = QuaternionCamera::LINE_IS_Y;
 
 //-------------------------------------------------------
 // Value we read from the configuration file.
 //-------------------------------------------------------
 
-  boresight_angle_ = c.value<double>("boresight_angle");
-  yaw_ = c.value<double>("camera_yaw");
-  pitch_ = c.value<double>("camera_pitch");
-  roll_ = c.value<double>("camera_roll");
-  focal_length_ = c.value<double>("focal_length");
+  sample_pitch_ = config.value<double>("sample_pitch"); // pixel size along sample axis (millimeters)
+  line_pitch_ = config.value<double>("line_pitch");  // pixel size along row axis (millimeters)
+  boresight_angle_ = config.value<double>("boresight_angle");
+  yaw_ = config.value<double>("camera_yaw");
+  pitch_ = config.value<double>("camera_pitch");
+  roll_ = config.value<double>("camera_roll");
+  focal_length_ = config.value<double>("focal_length");
   nline_ = 1;
-  nsamp_ = c.value<int>("number_sample");
-  nband_ = c.value<int>("number_band");
-  line_direction_ = (c.value<int>("line_direction") == -1 ?
+  nsamp_ = config.value<int>("number_sample");
+  nband_ = config.value<int>("number_band");
+  line_direction_ = (config.value<int>("line_direction") == -1 ?
            QuaternionCamera::INCREASE_IS_NEGATIVE :
            QuaternionCamera::INCREASE_IS_POSITIVE);
-  sample_direction_ = (c.value<int>("sample_direction") == -1 ?
+  sample_direction_ = (config.value<int>("sample_direction") == -1 ?
            QuaternionCamera::INCREASE_IS_NEGATIVE :
            QuaternionCamera::INCREASE_IS_POSITIVE);
-  inversion_ = c.value<int>("inversion");
-  granule_id_ = c.value<std::string>("granule_id");
+  inversion_ = config.value<int>("inversion");
+  granule_id_ = config.value<std::string>("granule_id");
+
+  row_number_ = config.value<std::vector<int> >("row_numbers");
+  if ((int)row_number_.size() != number_band()) {
+    throw Exception("row_number_ size does not match number_band");
+  }
+  std::vector<double> X0(config.value<std::vector<double> >("X0"));
+  if ((int)X0.size() != number_band()) {
+    throw Exception("X0 size does not match number_band");
+  }
+
+  std::vector<double> Y0(config.value<std::vector<double> >("Y0"));
+  if ((int)Y0.size() != number_band()) {
+    throw Exception("Y0 size does not match number_band");
+  }
 
 //--------------------------------------------------------------------------
-/// Get mapping from band to row number
+// Calculate principal point in pixel units
 //--------------------------------------------------------------------------
 
-  for(int b = 0; b < number_band(); ++b)
-    row_number_.push_back(c.value<int>
-       ("band" + boost::lexical_cast<std::string>(b)));
-
-//--------------------------------------------------------------------------
-// Set up principal point for each band. Row origin is given by
-// MSPI L1B2 ATB (equation 1.1)
-//--------------------------------------------------------------------------
-
-  for(int b = 0; b < number_band(); ++b) {
-    std::string row = boost::lexical_cast<std::string>(row_number_[b]);
-    blitz::Array<double, 1> coor = c.value<blitz::Array<double, 1> >("origin" + row);
-    double l_origin = coor(0);
-    double s_origin = coor(1);
-    principal_point_.push_back(FrameCoordinate(l_origin, s_origin));
+  for (int iband = 0; iband < number_band(); ++iband) {
+    int row = row_number_[iband];
+    AutoDerivative<double> this_line_pitch = (row > 999 ? line_pitch_swir : line_pitch_);  // SWIR row numbering starts at 1000
+    AutoDerivative<double> origin_line = Y0[iband] / this_line_pitch;
+    AutoDerivative<double> origin_sample = X0[iband] / sample_pitch_;
+    principal_point_.push_back(FrameCoordinateWithDerivative(origin_line, origin_sample));
   }
 
 //--------------------------------------------------------------------------

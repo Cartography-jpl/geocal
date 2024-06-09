@@ -64,12 +64,14 @@ class LinearGradientBadPixelDetection(object):
         '''
 
         # Difference right, left, up, down. This trims the edges, we'll add
-        # that back in shortly
+        # that back in shortly. Note that other than a sign up and down are the
+        # same, as is left and right. We take an abs value in next step, so we only
+        # need to calculate one of these.
         nl, ns = img.shape
         down_diff = img[0:nl-1, :] - img[1:nl, :]
-        up_diff = img[1:nl, :] - img[0:(nl-1), :]
+        #up_diff = img[1:nl, :] - img[0:(nl-1), :]
         left_diff = img[:, 1:ns] - img[:, 0:(ns-1)]
-        right_diff = img[:, 0:ns-1] - img[:, 1:ns]
+        #right_diff = img[:, 0:ns-1] - img[:, 1:ns]
 
         # Local median
         # Note, this is the python version. It is slow
@@ -79,12 +81,6 @@ class LinearGradientBadPixelDetection(object):
         down_diff_local_med = np.abs(down_diff -
                      geocal.array_local_median(down_diff, 1, self.window_size,
                                                self.edge_handle))
-        up_diff_local_med = np.abs(up_diff -
-                     geocal.array_local_median(up_diff, 1, self.window_size,
-                                               self.edge_handle))
-        right_diff_local_med = np.abs(right_diff -
-                     geocal.array_local_median(right_diff, self.window_size, 1,
-                                               self.edge_handle))
         left_diff_local_med = np.abs(left_diff -
                      geocal.array_local_median(left_diff, self.window_size, 1,
                                                self.edge_handle))
@@ -92,26 +88,18 @@ class LinearGradientBadPixelDetection(object):
         # Calculate thresholds
         down_thresh = np.percentile(down_diff_local_med,
                                     self.percentile) * self.thresh_fact
-        up_thresh = np.percentile(up_diff_local_med,
-                                  self.percentile) * self.thresh_fact
-        right_thresh = np.percentile(right_diff_local_med,
-                                     self.percentile) * self.thresh_fact
         left_thresh = np.percentile(left_diff_local_med,
                                     self.percentile) * self.thresh_fact
-
-        # Put back the edges we trimmed while calculating
-        z = np.zeros((1,img.shape[1]))
-        down_diff_local_med = np.concatenate((down_diff_local_med,z), axis=0)
-        up_diff_local_med = np.concatenate((z,up_diff_local_med), axis=0)
-        z = np.zeros((img.shape[0], 1))
-        right_diff_local_med = np.concatenate((right_diff_local_med,z), axis=1)
-        left_diff_local_med = np.concatenate((z,left_diff_local_med), axis=1)
+        # Count failures
+        nfail_down = (down_diff_local_med > down_thresh).astype(int)
+        nfail_left = (left_diff_local_med > left_thresh).astype(int)
+        # Put back the edges we trimmed while calculating and calculate total results
+        nfail = np.zeros(img.shape, dtype=int)
+        nfail[1:nl,:] += nfail_down
+        nfail[0:(nl-1),:] += nfail_down
+        nfail[:,1:ns] += nfail_left
+        nfail[:,0:(ns-1)] += nfail_left
         
-        # Calculate the number of test failures for each pixel
-        nfail = ((down_diff_local_med > down_thresh).astype(int) +
-                 (up_diff_local_med > up_thresh).astype(int) +
-                 (right_diff_local_med > right_thresh).astype(int) +
-                 (left_diff_local_med > left_thresh).astype(int))
         # Convert to percentage
         npix = np.empty(nfail.shape)
         npix[:,:]=4

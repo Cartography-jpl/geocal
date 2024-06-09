@@ -134,7 +134,7 @@ blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
 /// this algorithm is doing.
 //-----------------------------------------------------------------------
 
-blitz::Array<bool, 2> GeoCal::linear_gradient_pad_pixel_detection
+blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
 (const blitz::Array<double, 2>& Img,
  int Window_size,
  double Percentile,
@@ -184,8 +184,34 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_pad_pixel_detection
   double down_thresh = dwn.data()[ndwn] * Thresh_fact;
   double right_thresh = rgt.data()[nrgt] * Thresh_fact;
 
-  std::cerr << "down_thresh: " << down_thresh << "\n"
-	    << "right_thresh: " << right_thresh << "\n";
+  // Determine the number of failures in the 4 directions. We use
+  // doubles where because we convert this to a percentage in a
+  // following step
+  blitz::Array<double, 2> nfail_down(down_diff_local_med.shape());
+  blitz::Array<double, 2> nfail_right(right_diff_local_med.shape());
+  nfail_down = blitz::where(down_diff_local_med > down_thresh, 1.0, 0.0);
+  nfail_right = blitz::where(right_diff_local_med > right_thresh, 1.0, 0.0);
+  blitz::Array<double, 2> nfail(Img.shape());
+  nfail = 0;
+  nfail(blitz::Range(1,Img.rows()-1), blitz::Range::all()) += nfail_down;
+  nfail(blitz::Range(0,Img.rows()-2), blitz::Range::all()) += nfail_down;
+  nfail(blitz::Range::all(), blitz::Range(1,Img.cols()-1)) += nfail_right;
+  nfail(blitz::Range::all(), blitz::Range(0,Img.cols()-2)) += nfail_right;
+
+  // Convert to percentage
+  blitz::Array<double, 2> npix(Img.shape());
+  npix = 4;
+  npix(0,blitz::Range::all()) = 3;
+  npix(Img.rows()-1,blitz::Range::all()) = 3;
+  npix(blitz::Range::all(),0) = 3;
+  npix(blitz::Range::all(),Img.cols()-1) = 3;
+  npix(0,0) = 2;
+  npix(0,Img.cols()-1) = 2;
+  npix(Img.rows()-1,0) = 2;
+  npix(Img.rows()-1,Img.cols()-1) = 2;
+
+  nfail *= 100.0 / npix;
   blitz::Array<bool, 2> res(Img.shape());
+  res = (nfail >= Nfail_thresh_percentage);
   return res;
 }

@@ -18,6 +18,33 @@ BOOST_AUTO_TEST_CASE(array_local_median_test)
   BOOST_CHECK_CLOSE(res(0,0), (data(0,1) + data(0,2)) / 2.0, 1e-2);
 }
 
+BOOST_AUTO_TEST_CASE(linear_gradient_bad_pixel_detection_test)
+{
+  //int sz = 2048;
+  int sz = 512;
+  blitz::Array<double, 2> img(sz,sz);
+  blitz::Array<double, 1> lnspace(sz);
+  for(int i = 0; i < img.cols(); ++i)
+    lnspace(i) = 10.0/sz * i;
+  for(int i = 0; i < img.rows(); ++i)
+    img(i,blitz::Range::all()) = lnspace + lnspace(i);
+
+  // Add a couple of bad pixels.
+  blitz::Array<bool, 2> bad_expect(img.shape());
+  bad_expect = false;
+  img(100,200) = 40.0;
+  img(300,400) = -40.0;
+  img(0,100) = -80.0;
+  img(sz-1,sz-1) = 80.0;
+  bad_expect(100,200) = true;
+  bad_expect(300,400) = true;
+  bad_expect(0,100) = true;
+  bad_expect(sz-1,sz-1) = true;
+  blitz::Array<bool, 2> bad_pixel = linear_gradient_bad_pixel_detection(img);
+  for(int i = 0; i < sz; ++i)
+    for(int j = 0; j < sz; ++j)
+      BOOST_CHECK_EQUAL(bad_pixel(i,j), bad_expect(i,j));
+}
 
 // We've moved away from openmp, instead use C++ threads.
 //#include <omp.h>

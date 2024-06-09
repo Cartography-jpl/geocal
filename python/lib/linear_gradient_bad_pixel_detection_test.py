@@ -98,6 +98,6 @@ def test_timing_linear_gradient_bad_pixel_detection():
 
     bpixdetect = LinearGradientBadPixelDetection()
     is_bad = bpixdetect.bad_pixel_detection(original_data)
-    #assert (np.argwhere(is_bad == True) == [[0,100], [100, 200], [300, 400],
-    #                                        [8191,8191]]).all()
+    assert (np.argwhere(is_bad == True) == [[0,100], [100, 200], [300, 400],
+                                            [8191,8191]]).all()
         

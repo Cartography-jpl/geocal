@@ -1,5 +1,6 @@
 import numpy as np
 import geocal
+import line_profiler
 
 class LinearGradientBadPixelDetection(object):
     '''This class is used to detect bad/outlier pixels in an image. This class
@@ -52,6 +53,7 @@ class LinearGradientBadPixelDetection(object):
         self.nfail_thresh_percentage = nfail_thresh_percentage
         self.edge_handle = edge_handle
 
+    @line_profiler.profile
     def bad_pixel_detection(self, img):
         '''Take the given image as a 2d numpy array. Return a boolean array
         with a True value for bad pixels.
@@ -60,6 +62,7 @@ class LinearGradientBadPixelDetection(object):
         fill the image in with data over the bad pixel (e.g. use 
         IterativeMorphologicalDilation).
         '''
+
         # Difference right, left, up, down. This trims the edges, we'll add
         # that back in shortly
         nl, ns = img.shape

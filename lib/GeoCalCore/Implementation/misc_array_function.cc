@@ -68,9 +68,10 @@ blitz::Array<double, 2> GeoCal::array_local_median
 	std::nth_element(scratch.begin(), scratch.begin() + n,
 			 scratch.begin() + sind);
 	double t1 = scratch[n];
-	std::nth_element(scratch.begin(), scratch.begin() + n + 1,
-			 scratch.begin() + sind);
-	double t2 = scratch[n+1];
+	// This is the n+1 element. Data is partially sorted, to all
+	// the values in scratch.begin() + n + 1, scratch.begin() +
+	// sind are >= t1
+	double t2 = *std::min_element(scratch.begin() + n + 1, scratch.begin() + sind);
 	res(i, j) = (t1 + t2) / 2;
       }
     }

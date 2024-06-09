@@ -1,3 +1,5 @@
+#ifndef MISC_ARRAY_FUNCTION_H
+#define MISC_ARRAY_FUNCTION_H
 #include <blitz/array.h>
 #include "image_ground_connection.h"
 #include "coordinate_converter.h"
@@ -14,3 +16,4 @@ namespace GeoCal {
   (const boost::shared_ptr<ImageGroundConnection>& Igc,
    const CoordinateConverter& Cconv);
 }
+#endif

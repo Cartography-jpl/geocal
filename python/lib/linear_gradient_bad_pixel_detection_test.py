@@ -76,3 +76,28 @@ def test_bad_pixel_fill():
                    vmax=20.0)
         plt.show()
     
+
+# Larger set for timing        
+def test_timing_linear_gradient_bad_pixel_detection():
+    '''Test detection of bad/outlier pixels'''
+    sz = 8192
+    original_data = np.empty((sz,sz))
+    fill_data = np.linspace(0.0,10.0, sz)
+    for i in range(original_data.shape[0]):
+        original_data[i, :] = fill_data + fill_data[i]
+    if(False):
+        plt.imshow(original_data, cmap=plt.cm.gray, vmin=0.0,
+                   vmax=20.0)
+        plt.show()
+
+    # Add a couple bad pixels
+    original_data[100,200] = 40.0
+    original_data[300,400] = -40.0
+    original_data[0,100] = -80
+    original_data[-1,-1] = 80
+
+    bpixdetect = LinearGradientBadPixelDetection()
+    is_bad = bpixdetect.bad_pixel_detection(original_data)
+    #assert (np.argwhere(is_bad == True) == [[0,100], [100, 200], [300, 400],
+    #                                        [8191,8191]]).all()
+        

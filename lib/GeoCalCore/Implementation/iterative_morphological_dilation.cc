@@ -207,11 +207,7 @@ bool IterativeMorphologicalDilation::fill_iteration_random
     for(int j = 0; j < mcount.cols(); ++j)
       if(mcount(i,j) > 0)
 	fp.push_back(FrontierPixel(i, j, mcount(i,j)));
-#ifdef HAVE_CXX11
   std::shuffle(fp.begin(), fp.end(), rand_gen);
-#else
-  throw Exception("Random order requires C++ 11 features, which this compilation doesn't support.");
-#endif  
   BOOST_FOREACH(const FrontierPixel& p, fp) {
     filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
     filled_mask_(p.i,p.j) = false;

@@ -126,7 +126,6 @@ BOOST_AUTO_TEST_CASE(median)
 
 BOOST_AUTO_TEST_CASE(random)
 {
-#ifdef HAVE_CXX11  
   IterativeMorphologicalDilation m(data, mask, 3, -1,
 	   IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE,
 	   IterativeMorphologicalDilation::RANDOM_ORDER);
@@ -139,10 +138,6 @@ BOOST_AUTO_TEST_CASE(random)
   // worth tracking down, we just want to make sure the results is "reasonable"
   BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.988751, 5.0);
   BOOST_CHECK_EQUAL(m.iteration_count(), 3);
-#else
-  // Skip if we don't have C++ 11 support.
-  return;
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

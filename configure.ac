@@ -19,9 +19,6 @@ geocal_topdir=.
 AFIDS_COMMON
 AX_WITH_CURSES
 
-# Not sure if we'll always want this, but for now try adding openmp
-AC_OPENMP
-
 AC_ARG_VAR([THIRDPARTY], [
 It is common that either 1) you want to build a local copy of all
 thirdparty software or 2) you have a central location not already

@@ -3,6 +3,7 @@
 #include "igc_ray_caster.h"
 #include <vector>
 #include <algorithm>
+#include <cmath>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -122,5 +123,69 @@ blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
       ++resind;
     }
   }
+  return res;
+}
+
+//-----------------------------------------------------------------------
+/// This determines bad pixels. This is the exact same algorithm as
+/// found in
+/// LinearGradientBadPixelDetection._bad_pixel_detection_python,
+/// but rewritten in C++ for speed. See the python code to see what
+/// this algorithm is doing.
+//-----------------------------------------------------------------------
+
+blitz::Array<bool, 2> GeoCal::linear_gradient_pad_pixel_detection
+(const blitz::Array<double, 2>& Img,
+ int Window_size,
+ double Percentile,
+ int Thresh_fact,
+ double Nfail_thresh_percentage,
+ array_local_edge_handle Edge_handle
+)
+{
+  range_check_inclusive(Percentile, 0.0, 100.0);
+  range_check_inclusive(Nfail_thresh_percentage, 0.0, 100.0);
+  
+  // Difference right, left, up, down. This trims the edges, we'll add
+  // that back in shortly. Note that other than a sign up and down are the
+  // same, as is left and right. We take an abs value in next step, so we only
+  // need to calculate one of these.
+  blitz::Array<double, 2> down_diff(Img.rows()-1,Img.cols());
+  blitz::Array<double, 2> right_diff(Img.rows(),Img.cols()-1);
+  for(int i = 0; i < down_diff.rows(); ++i)
+    for(int j = 0; j < down_diff.cols(); ++j)
+      down_diff(i,j) = Img(i,j) - Img(i+1,j);
+  for(int i = 0; i < right_diff.rows(); ++i)
+    for(int j = 0; j < right_diff.cols(); ++j)
+      right_diff(i,j) = Img(i,j) - Img(i,j+1);
+  
+  // Local median
+  blitz::Array<double, 2> down_diff_local_med(down_diff.shape());
+  blitz::Array<double, 2> right_diff_local_med(right_diff.shape());
+  down_diff_local_med = blitz::abs(down_diff -
+			   array_local_median(down_diff, 1, Window_size, Edge_handle));
+  right_diff_local_med = blitz::abs(right_diff -
+		           array_local_median(right_diff, Window_size, 1, Edge_handle));
+
+  // Calculate threshold. Note this is slightly different than what we
+  // do in the python, we don't bother handling the small difference
+  // in Percentile*size not exactly matching a integer value - this is
+  // a pretty small effect and not worth the extra handling for this.
+  int ndwn = (int) round((int) down_diff_local_med.size() * Percentile / 100.0);
+  int nrgt = (int) round((int) right_diff_local_med.size() * Percentile / 100.0);
+  range_check(ndwn, 0, (int) down_diff_local_med.size());
+  range_check(nrgt, 0, (int) right_diff_local_med.size());
+  // nth_element rearranges the data, so we need to make a copy here
+  // for working with
+  blitz::Array<double, 2> dwn(down_diff_local_med.copy());
+  blitz::Array<double, 2> rgt(right_diff_local_med.copy());
+  std::nth_element(dwn.data(), dwn.data() + ndwn, dwn.data() + dwn.size());
+  std::nth_element(rgt.data(), rgt.data() + nrgt, rgt.data() + rgt.size());
+  double down_thresh = dwn.data()[ndwn] * Thresh_fact;
+  double right_thresh = rgt.data()[nrgt] * Thresh_fact;
+
+  std::cerr << "down_thresh: " << down_thresh << "\n"
+	    << "right_thresh: " << right_thresh << "\n";
+  blitz::Array<bool, 2> res(Img.shape());
   return res;
 }

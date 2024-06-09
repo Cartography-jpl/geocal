@@ -140,8 +140,9 @@ ARRAY_LOCAL_MEDIAN_TRUNCATE = _misc_array_function.ARRAY_LOCAL_MEDIAN_TRUNCATE
 ARRAY_LOCAL_MEDIAN_ZEROPAD = _misc_array_function.ARRAY_LOCAL_MEDIAN_ZEROPAD
 ARRAY_LOCAL_MEDIAN_REPEAT = _misc_array_function.ARRAY_LOCAL_MEDIAN_REPEAT
 array_local_median = _misc_array_function.array_local_median
+linear_gradient_pad_pixel_detection = _misc_array_function.linear_gradient_pad_pixel_detection
 ray_cast_ground_coordinate = _misc_array_function.ray_cast_ground_coordinate
 
-__all__ = ["array_local_median","ARRAY_LOCAL_MEDIAN_TRUNCATE","ARRAY_LOCAL_MEDIAN_ZEROPAD","ARRAY_LOCAL_MEDIAN_REPEAT","ray_cast_ground_coordinate"]
+__all__ = ["array_local_median","ARRAY_LOCAL_MEDIAN_TRUNCATE","ARRAY_LOCAL_MEDIAN_ZEROPAD","ARRAY_LOCAL_MEDIAN_REPEAT","linear_gradient_pad_pixel_detection","ray_cast_ground_coordinate"]
 
 

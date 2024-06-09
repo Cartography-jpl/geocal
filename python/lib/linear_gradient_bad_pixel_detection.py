@@ -63,6 +63,11 @@ class LinearGradientBadPixelDetection(object):
         IterativeMorphologicalDilation).
         '''
 
+        t = geocal.linear_gradient_pad_pixel_detection(img, self.window_size,
+                                                       self.percentile, self.thresh_fact,
+                                                       self.nfail_thresh_percentage,
+                                                       self.edge_handle)
+        
         # Difference right, left, up, down. This trims the edges, we'll add
         # that back in shortly. Note that other than a sign up and down are the
         # same, as is left and right. We take an abs value in next step, so we only
@@ -70,8 +75,8 @@ class LinearGradientBadPixelDetection(object):
         nl, ns = img.shape
         down_diff = img[0:nl-1, :] - img[1:nl, :]
         #up_diff = img[1:nl, :] - img[0:(nl-1), :]
-        left_diff = img[:, 1:ns] - img[:, 0:(ns-1)]
-        #right_diff = img[:, 0:ns-1] - img[:, 1:ns]
+        right_diff = img[:, 0:ns-1] - img[:, 1:ns]
+        #left_diff = img[:, 1:ns] - img[:, 0:(ns-1)]
 
         # Local median
         # Note, this is the python version. It is slow
@@ -81,24 +86,26 @@ class LinearGradientBadPixelDetection(object):
         down_diff_local_med = np.abs(down_diff -
                      geocal.array_local_median(down_diff, 1, self.window_size,
                                                self.edge_handle))
-        left_diff_local_med = np.abs(left_diff -
-                     geocal.array_local_median(left_diff, self.window_size, 1,
+        right_diff_local_med = np.abs(right_diff -
+                     geocal.array_local_median(right_diff, self.window_size, 1,
                                                self.edge_handle))
 
         # Calculate thresholds
         down_thresh = np.percentile(down_diff_local_med,
                                     self.percentile) * self.thresh_fact
-        left_thresh = np.percentile(left_diff_local_med,
+        right_thresh = np.percentile(right_diff_local_med,
                                     self.percentile) * self.thresh_fact
+        print(down_thresh)
+        print(right_thresh)
         # Count failures
         nfail_down = (down_diff_local_med > down_thresh).astype(int)
-        nfail_left = (left_diff_local_med > left_thresh).astype(int)
+        nfail_right = (right_diff_local_med > right_thresh).astype(int)
         # Put back the edges we trimmed while calculating and calculate total results
         nfail = np.zeros(img.shape, dtype=int)
         nfail[1:nl,:] += nfail_down
         nfail[0:(nl-1),:] += nfail_down
-        nfail[:,1:ns] += nfail_left
-        nfail[:,0:(ns-1)] += nfail_left
+        nfail[:,1:ns] += nfail_right
+        nfail[:,0:(ns-1)] += nfail_right
         
         # Convert to percentage
         npix = np.empty(nfail.shape)

@@ -193,18 +193,33 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
   nfail_right = blitz::where(right_diff_local_med > right_thresh, 1.0, 0.0);
   blitz::Array<double, 2> nfail(Img.shape());
   nfail = 0;
-  nfail(blitz::Range(1,Img.rows()-1), blitz::Range::all()) += nfail_down;
-  nfail(blitz::Range(0,Img.rows()-2), blitz::Range::all()) += nfail_down;
-  nfail(blitz::Range::all(), blitz::Range(1,Img.cols()-1)) += nfail_right;
-  nfail(blitz::Range::all(), blitz::Range(0,Img.cols()-2)) += nfail_right;
+  // A little faster to unroll this and calculate in a loop.
+  //nfail(blitz::Range(1,Img.rows()-1), blitz::Range::all()) += nfail_down;
+  //nfail(blitz::Range(0,Img.rows()-2), blitz::Range::all()) += nfail_down;
+  //nfail(blitz::Range::all(), blitz::Range(1,Img.cols()-1)) += nfail_right;
+  //nfail(blitz::Range::all(), blitz::Range(0,Img.cols()-2)) += nfail_right;
 
+  for(int i = 0; i < nfail.rows(); ++i)
+    for(int j = 0; j < nfail.rows(); ++j) {
+      nfail(i,j) += nfail_down(i,j);
+      if(i < nfail_down.rows())
+	nfail(i+1,j) += nfail_down(i,j);
+      nfail(i,j) += nfail_right(i,j);
+      if(j < nfail_right.cols())
+	nfail(i,j+1) += nfail_right(i,j);
+    }
+  
   // Convert to percentage
   blitz::Array<double, 2> npix(Img.shape());
   npix = 4;
-  npix(0,blitz::Range::all()) = 3;
-  npix(Img.rows()-1,blitz::Range::all()) = 3;
-  npix(blitz::Range::all(),0) = 3;
-  npix(blitz::Range::all(),Img.cols()-1) = 3;
+  for(int i = 0; i < npix.cols(); ++i) {
+    npix(0,i) = 3;
+    npix(Img.rows()-1,i) = 3;
+  }
+  for(int i = 0; i < npix.rows(); ++i) {
+    npix(i,0) = 3;
+    npix(i,Img.cols()-1) = 3;
+  }
   npix(0,0) = 2;
   npix(0,Img.cols()-1) = 2;
   npix(Img.rows()-1,0) = 2;

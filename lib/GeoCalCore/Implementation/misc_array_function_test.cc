@@ -20,9 +20,10 @@ BOOST_AUTO_TEST_CASE(array_local_median_test)
 
 BOOST_AUTO_TEST_CASE(linear_gradient_bad_pixel_detection_test)
 {
-  //int sz = 2048;
-  //int sz = 512;
-  int sz = 8192;
+  int sz = 512;
+  int number_thread = 1;
+  // int sz = 8192;
+  // int number_thread = 5;
   blitz::Array<double, 2> img(sz,sz);
   blitz::Array<double, 1> lnspace(sz);
   for(int i = 0; i < img.cols(); ++i)
@@ -41,7 +42,13 @@ BOOST_AUTO_TEST_CASE(linear_gradient_bad_pixel_detection_test)
   bad_expect(300,400) = true;
   bad_expect(0,100) = true;
   bad_expect(sz-1,sz-1) = true;
-  blitz::Array<bool, 2> bad_pixel = linear_gradient_bad_pixel_detection(img);
+  // For better timing
+  // for(int i = 0; i < 9; ++i) {
+  //   blitz::Array<bool, 2> bad_pixel = linear_gradient_bad_pixel_detection(img, 7, 90.0, 2, 75,
+  // 				ARRAY_LOCAL_MEDIAN_TRUNCATE, number_thread);
+  //}
+  blitz::Array<bool, 2> bad_pixel = linear_gradient_bad_pixel_detection(img, 7, 90.0, 2, 75,
+				ARRAY_LOCAL_MEDIAN_TRUNCATE, number_thread);
   BOOST_CHECK(blitz::all(bad_pixel == bad_expect));
 }
 

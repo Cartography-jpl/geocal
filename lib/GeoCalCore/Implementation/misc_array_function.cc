@@ -5,10 +5,18 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
-#include <boost/iterator/counting_iterator.hpp>
+// Use boost threadpool for now, because the std library threading
+// isn't support until a much newer version of gcc then we want to
+// depend on (9 or so).
+#include <boost/asio/thread_pool.hpp>
+#include <boost/asio/post.hpp>
 
 using namespace GeoCal;
 using namespace blitz;
+
+// Perhaps we should move this to some central place, but for now just
+// have this here.
+static boost::asio::thread_pool tpool(10);
 
 //-----------------------------------------------------------------------
 // The median calculation in array_local_median is usually a small
@@ -75,40 +83,68 @@ inline double median_calc(std::vector<double>& d)
 blitz::Array<double, 2> GeoCal::array_local_median
 (const blitz::Array<double, 2>& In,
  int Window_nrow, int Window_ncol,
- array_local_edge_handle Edge_handle)
+ array_local_edge_handle Edge_handle,
+ int Number_thread)
 {
   if(Window_nrow % 2 != 1 ||
      Window_ncol % 2 != 1)
     throw Exception("Window size needs to be odd");
   int hnr = (Window_nrow - 1) / 2;
   int hnc = (Window_ncol - 1) / 2;
-  std::vector<double> scratch;
-  scratch.reserve(Window_nrow * Window_ncol);
   blitz::Array<double, 2> res(In.shape());
-  std::for_each(boost::counting_iterator<int>(0), boost::counting_iterator<int>(res.size()),
-		[&scratch, Edge_handle, hnr, hnc, &In, &res] (auto ind)
+  // We would like to use the new auto threads stuff introduced in
+  // C++17, but the stl threading isn't supported until a pretty new
+  // version of gcc (9.1). So we explicitly handle the threads
+  // our self.
+  //std::for_each(std::execution::par,
+  //boost::counting_iterator<int>(0), boost::counting_iterator<int>(res.size()),
+  auto func = [Edge_handle, hnr, hnc, &In, &res] (int istart, int iend)
   {
-    int i = ind / res.cols();
-    int j = ind % res.cols();
-    scratch.clear();
-    if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
-      for(int ii = i - hnr; ii <= i + hnr; ++ii)
-	for(int ji = j - hnc; ji <= j + hnc; ++ji)
-	  if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
-	    scratch.push_back(In(ii,ji));
-	  else
-	    scratch.push_back(0);
-    } else {
-      int iimin = std::max(i - hnr,0);
-      int iimax = std::min(i + hnr, In.rows()-1);
-      int jjmin = std::max(j - hnc, 0);
-      int jjmax = std::min(j + hnc, In.cols()-1);
-      for(int ii = iimin; ii <= iimax; ++ii)
-	for(int ji = jjmin; ji <= jjmax; ++ji)
-	  scratch.push_back(In(ii,ji));
+    std::vector<double> scratch;
+    scratch.reserve((2*hnr+1)*(2*hnc+1));
+    for(int i = istart; i < iend; ++i)
+      for(int j = 0; j < res.cols(); ++j) {
+	scratch.clear();
+	if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
+	  for(int ii = i - hnr; ii <= i + hnr; ++ii)
+	    for(int ji = j - hnc; ji <= j + hnc; ++ji)
+	      if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
+		scratch.push_back(In(ii,ji));
+	      else
+		scratch.push_back(0);
+	} else {
+	  int iimin = std::max(i - hnr,0);
+	  int iimax = std::min(i + hnr, In.rows()-1);
+	  int jjmin = std::max(j - hnc, 0);
+	  int jjmax = std::min(j + hnc, In.cols()-1);
+	  for(int ii = iimin; ii <= iimax; ++ii)
+	    for(int ji = jjmin; ji <= jjmax; ++ji)
+	      scratch.push_back(In(ii,ji));
+	}
+	res(i,j) = median_calc(scratch);
+      }
+  };
+  if(Number_thread == 1)
+    func(0,res.rows());
+  else {
+    // Divide the data into Number_thread nearly equal blocks, and
+    // start a thread for each block.
+    int tsize = In.rows() / Number_thread;
+    int overflow_num = In.rows() % Number_thread;
+    int istart = 0;
+    for(int i = 0; i < Number_thread; ++i) {
+      int iend = istart + tsize;
+      // Add a overflow of 1 if needed.
+      if(overflow_num > 0) {
+	++iend;
+	--overflow_num;
+      }
+      boost::asio::post(tpool, [istart,iend,&func](){func(istart,iend);});
+      istart = iend;
     }
-    res(i,j) = median_calc(scratch);
-  });
+    // Wait for everything to finish
+    tpool.join();
+  }
   if(Edge_handle == ARRAY_LOCAL_MEDIAN_REPEAT) {
     for(int i = 0; i < res.rows(); ++i)
       for(int j = 0; j < res.cols();++j) {
@@ -173,7 +209,8 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
  double Percentile,
  int Thresh_fact,
  double Nfail_thresh_percentage,
- array_local_edge_handle Edge_handle
+ array_local_edge_handle Edge_handle,
+ int Number_thread
 )
 {
   range_check_inclusive(Percentile, 0.0, 100.0);
@@ -196,9 +233,11 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
   blitz::Array<double, 2> down_diff_local_med(down_diff.shape());
   blitz::Array<double, 2> right_diff_local_med(right_diff.shape());
   down_diff_local_med = blitz::abs(down_diff -
-			   array_local_median(down_diff, 1, Window_size, Edge_handle));
+				   array_local_median(down_diff, 1, Window_size, Edge_handle,
+						      Number_thread));
   right_diff_local_med = blitz::abs(right_diff -
-		           array_local_median(right_diff, Window_size, 1, Edge_handle));
+				    array_local_median(right_diff, Window_size, 1, Edge_handle,
+						       Number_thread));
 
   // Calculate threshold. Note this is slightly different than what we
   // do in the python, we don't bother handling the small difference

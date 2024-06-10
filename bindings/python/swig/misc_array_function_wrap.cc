@@ -3606,25 +3606,26 @@ namespace Swig {
 #define SWIGTYPE_p_char_type swig_types[201]
 #define SWIGTYPE_p_difference_type swig_types[202]
 #define SWIGTYPE_p_fmtflags swig_types[203]
-#define SWIGTYPE_p_int_type swig_types[204]
-#define SWIGTYPE_p_iostate swig_types[205]
-#define SWIGTYPE_p_off_type swig_types[206]
-#define SWIGTYPE_p_openmode swig_types[207]
-#define SWIGTYPE_p_pos_type swig_types[208]
-#define SWIGTYPE_p_seekdir swig_types[209]
-#define SWIGTYPE_p_size_t swig_types[210]
-#define SWIGTYPE_p_size_type swig_types[211]
-#define SWIGTYPE_p_state_type swig_types[212]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[213]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[214]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[215]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[216]
-#define SWIGTYPE_p_std__invalid_argument swig_types[217]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[218]
-#define SWIGTYPE_p_traits_type swig_types[219]
-#define SWIGTYPE_p_value_type swig_types[220]
-static swig_type_info *swig_types[222];
-static swig_module_info swig_module = {swig_types, 221, 0, 0, 0, 0};
+#define SWIGTYPE_p_in swig_types[204]
+#define SWIGTYPE_p_int_type swig_types[205]
+#define SWIGTYPE_p_iostate swig_types[206]
+#define SWIGTYPE_p_off_type swig_types[207]
+#define SWIGTYPE_p_openmode swig_types[208]
+#define SWIGTYPE_p_pos_type swig_types[209]
+#define SWIGTYPE_p_seekdir swig_types[210]
+#define SWIGTYPE_p_size_t swig_types[211]
+#define SWIGTYPE_p_size_type swig_types[212]
+#define SWIGTYPE_p_state_type swig_types[213]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[214]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[215]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[216]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[217]
+#define SWIGTYPE_p_std__invalid_argument swig_types[218]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[219]
+#define SWIGTYPE_p_traits_type swig_types[220]
+#define SWIGTYPE_p_value_type swig_types[221]
+static swig_type_info *swig_types[223];
+static swig_module_info swig_module = {swig_types, 222, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5704,6 +5705,100 @@ SWIGINTERN PyObject *_wrap_array_local_median__SWIG_0(PyObject *self, Py_ssize_t
   int arg2 ;
   int arg3 ;
   GeoCal::array_local_edge_handle arg4 ;
+  int arg5 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  int val5 ;
+  int ecode5 = 0 ;
+  SwigValueWrapper< blitz::Array< double,2 > > result;
+  
+  if ((nobjs < 5) || (nobjs > 5)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'array_local_median', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'array_local_median', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "array_local_median" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_int(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "array_local_median" "', argument " "3"" of type '" "int""'");
+  } 
+  arg3 = static_cast< int >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "array_local_median" "', argument " "4"" of type '" "GeoCal::array_local_edge_handle""'");
+  } 
+  arg4 = static_cast< GeoCal::array_local_edge_handle >(val4);
+  ecode5 = SWIG_AsVal_int(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "array_local_median" "', argument " "5"" of type '" "int""'");
+  } 
+  arg5 = static_cast< int >(val5);
+  {
+    try {
+      result = GeoCal::array_local_median((blitz::Array< double,2 > const &)*arg1,arg2,arg3,arg4,arg5);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,196,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_array_local_median__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  int arg2 ;
+  int arg3 ;
+  GeoCal::array_local_edge_handle arg4 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
   int val2 ;
@@ -5784,7 +5879,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_array_local_median__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_array_local_median__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -5864,18 +5959,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_array_local_median(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[5] = {
+  PyObject *argv[6] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "array_local_median", 0, 4, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "array_local_median", 0, 5, argv))) SWIG_fail;
   --argc;
   if (argc == 3) {
-    PyObject *retobj = _wrap_array_local_median__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_array_local_median__SWIG_2(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 4) {
+    PyObject *retobj = _wrap_array_local_median__SWIG_1(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 5) {
     PyObject *retobj = _wrap_array_local_median__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
@@ -5884,6 +5984,7 @@ SWIGINTERN PyObject *_wrap_array_local_median(PyObject *self, PyObject *args) {
 fail:
   SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'array_local_median'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::array_local_median(blitz::Array< double,2 > const &,int,int,GeoCal::array_local_edge_handle,int)\n"
     "    GeoCal::array_local_median(blitz::Array< double,2 > const &,int,int,GeoCal::array_local_edge_handle)\n"
     "    GeoCal::array_local_median(blitz::Array< double,2 > const &,int,int)\n");
   return 0;
@@ -5891,6 +5992,124 @@ fail:
 
 
 SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,2 > *arg1 = 0 ;
+  int arg2 ;
+  double arg3 ;
+  int arg4 ;
+  double arg5 ;
+  GeoCal::array_local_edge_handle arg6 ;
+  in arg7 ;
+  blitz::Array< double,2 > a1 ;
+  PythonObject numpy1 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  int val4 ;
+  int ecode4 = 0 ;
+  double val5 ;
+  int ecode5 = 0 ;
+  int val6 ;
+  int ecode6 = 0 ;
+  void *argp7 ;
+  int res7 = 0 ;
+  SwigValueWrapper< blitz::Array< bool,2 > > result;
+  
+  if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_2_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'linear_gradient_bad_pixel_detection', expecting type  Array<double,2>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=2) {
+        SWIG_Error(SWIG_TypeError, "in method 'linear_gradient_bad_pixel_detection', expecting type  Array<double,2>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 2>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  if (!SWIG_IsOK(ecode4)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "int""'");
+  } 
+  arg4 = static_cast< int >(val4);
+  ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
+  if (!SWIG_IsOK(ecode5)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "5"" of type '" "double""'");
+  } 
+  arg5 = static_cast< double >(val5);
+  ecode6 = SWIG_AsVal_int(swig_obj[5], &val6);
+  if (!SWIG_IsOK(ecode6)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "6"" of type '" "GeoCal::array_local_edge_handle""'");
+  } 
+  arg6 = static_cast< GeoCal::array_local_edge_handle >(val6);
+  {
+    res7 = SWIG_ConvertPtr(swig_obj[6], &argp7, SWIGTYPE_p_in,  0  | 0);
+    if (!SWIG_IsOK(res7)) {
+      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "7"" of type '" "in""'"); 
+    }  
+    if (!argp7) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "linear_gradient_bad_pixel_detection" "', argument " "7"" of type '" "in""'");
+    } else {
+      in * temp = reinterpret_cast< in * >(argp7);
+      arg7 = *temp;
+      if (SWIG_IsNewObj(res7)) delete temp;
+    }
+  }
+  {
+    try {
+      result = GeoCal::linear_gradient_bad_pixel_detection((blitz::Array< double,2 > const &)*arg1,arg2,arg3,arg4,arg5,arg6,SWIG_STD_MOVE(arg7));
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,196,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(bool);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<bool >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<bool, 2>* t = new blitz::Array<bool, 2>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_bool_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -5992,7 +6211,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -6086,7 +6305,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_3(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -6172,7 +6391,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_3(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_4(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -6250,7 +6469,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_4(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_5(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
@@ -6320,7 +6539,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_5(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_6(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
   blitz::Array< double,2 > *arg1 = 0 ;
   blitz::Array< double,2 > a1 ;
@@ -6384,38 +6603,43 @@ fail:
 
 SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
-  PyObject *argv[7] = {
+  PyObject *argv[8] = {
     0
   };
   
-  if (!(argc = SWIG_Python_UnpackTuple(args, "linear_gradient_bad_pixel_detection", 0, 6, argv))) SWIG_fail;
+  if (!(argc = SWIG_Python_UnpackTuple(args, "linear_gradient_bad_pixel_detection", 0, 7, argv))) SWIG_fail;
   --argc;
   if (argc == 1) {
-    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_5(self, argc, argv);
+    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_6(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 2) {
-    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_4(self, argc, argv);
+    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_5(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 3) {
-    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_3(self, argc, argv);
+    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_4(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 4) {
-    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_2(self, argc, argv);
+    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_3(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 5) {
-    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_1(self, argc, argv);
+    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_2(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
   }
   if (argc == 6) {
+    PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_1(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 7) {
     PyObject *retobj = _wrap_linear_gradient_bad_pixel_detection__SWIG_0(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
     SWIG_fail;
@@ -6424,6 +6648,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection(PyObject *self, P
 fail:
   SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'linear_gradient_bad_pixel_detection'.\n"
     "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle,in)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int)\n"
@@ -6558,7 +6783,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"blitz::Array< double, 2 > GeoCal::array_local_median(const blitz::Array< double, 2 > &In, int Window_nrow, int\n"
 		"Window_ncol, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE)\n"
+		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_thread=1)\n"
 		"This calculates the local median of a 2d array, using a filter of the\n"
 		"given number of rows and cols.\n"
 		"\n"
@@ -6587,7 +6812,7 @@ static PyMethodDef SwigMethods[] = {
 		"blitz::Array< bool, 2 > GeoCal::linear_gradient_bad_pixel_detection(const blitz::Array< double, 2 > &Img, int Window_size=7, double\n"
 		"Percentile=90.0, int Thresh_fact=2, double\n"
 		"Nfail_thresh_percentage=75.0, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE)\n"
+		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_thread=1)\n"
 		"This determines bad pixels.\n"
 		"\n"
 		"This is the exact same algorithm as found in\n"
@@ -6636,7 +6861,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"\n"
 		"blitz::Array< double, 2 > GeoCal::array_local_median(const blitz::Array< double, 2 > &In, int Window_nrow, int\n"
 		"Window_ncol, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE)\n"
+		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_thread=1)\n"
 		"This calculates the local median of a 2d array, using a filter of the\n"
 		"given number of rows and cols.\n"
 		"\n"
@@ -6665,7 +6890,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"blitz::Array< bool, 2 > GeoCal::linear_gradient_bad_pixel_detection(const blitz::Array< double, 2 > &Img, int Window_size=7, double\n"
 		"Percentile=90.0, int Thresh_fact=2, double\n"
 		"Nfail_thresh_percentage=75.0, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE)\n"
+		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_thread=1)\n"
 		"This determines bad pixels.\n"
 		"\n"
 		"This is the exact same algorithm as found in\n"
@@ -7527,6 +7752,7 @@ static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_in = {"_p_in", "in *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_off_type = {"_p_off_type", "off_type *", 0, 0, (void*)0, 0};
@@ -7750,6 +7976,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
   &_swigt__p_fmtflags,
+  &_swigt__p_in,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
   &_swigt__p_off_type,
@@ -7973,6 +8200,7 @@ static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0,
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_in[] = {  {&_swigt__p_in, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_off_type[] = {  {&_swigt__p_off_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -8196,6 +8424,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char_type,
   _swigc__p_difference_type,
   _swigc__p_fmtflags,
+  _swigc__p_in,
   _swigc__p_int_type,
   _swigc__p_iostate,
   _swigc__p_off_type,

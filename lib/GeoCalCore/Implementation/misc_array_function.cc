@@ -5,6 +5,7 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <boost/iterator/counting_iterator.hpp>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -84,27 +85,30 @@ blitz::Array<double, 2> GeoCal::array_local_median
   std::vector<double> scratch;
   scratch.reserve(Window_nrow * Window_ncol);
   blitz::Array<double, 2> res(In.shape());
-  for(int i = 0; i < res.rows(); ++i)
-    for(int j = 0; j < res.cols(); ++j) {
-      scratch.clear();
-      if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
-	for(int ii = i - hnr; ii <= i + hnr; ++ii)
-	  for(int ji = j - hnc; ji <= j + hnc; ++ji)
-	    if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
-	      scratch.push_back(In(ii,ji));
-	    else
-	      scratch.push_back(0);
-      } else {
-	int iimin = std::max(i - hnr,0);
-	int iimax = std::min(i + hnr, In.rows()-1);
-	int jjmin = std::max(j - hnc, 0);
-	int jjmax = std::min(j + hnc, In.cols()-1);
-	for(int ii = iimin; ii <= iimax; ++ii)
-	  for(int ji = jjmin; ji <= jjmax; ++ji)
+  std::for_each(boost::counting_iterator<int>(0), boost::counting_iterator<int>(res.size()),
+		[&scratch, Edge_handle, hnr, hnc, &In, &res] (auto ind)
+  {
+    int i = ind / res.cols();
+    int j = ind % res.cols();
+    scratch.clear();
+    if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
+      for(int ii = i - hnr; ii <= i + hnr; ++ii)
+	for(int ji = j - hnc; ji <= j + hnc; ++ji)
+	  if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
 	    scratch.push_back(In(ii,ji));
-      }
-      res(i,j) = median_calc(scratch);
+	  else
+	    scratch.push_back(0);
+    } else {
+      int iimin = std::max(i - hnr,0);
+      int iimax = std::min(i + hnr, In.rows()-1);
+      int jjmin = std::max(j - hnc, 0);
+      int jjmax = std::min(j + hnc, In.cols()-1);
+      for(int ii = iimin; ii <= iimax; ++ii)
+	for(int ji = jjmin; ji <= jjmax; ++ji)
+	  scratch.push_back(In(ii,ji));
     }
+    res(i,j) = median_calc(scratch);
+  });
   if(Edge_handle == ARRAY_LOCAL_MEDIAN_REPEAT) {
     for(int i = 0; i < res.rows(); ++i)
       for(int j = 0; j < res.cols();++j) {

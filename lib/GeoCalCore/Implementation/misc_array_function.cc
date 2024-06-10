@@ -47,18 +47,23 @@ blitz::Array<double, 2> GeoCal::array_local_median
   for(int i = 0; i < res.rows(); ++i)
     for(int j = 0; j < res.cols(); ++j) {
       int sind = 0;
-      for(int ii = i - hnr; ii <= i + hnr; ++ii)
-	for(int ji = j - hnc; ji <= j + hnc; ++ji)
-	  if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols()) {
-	    scratch[sind] = In(ii,ji);
-	    ++sind;
-	  } else {
-	    // Handle edges according to user preference
-	    if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
+      if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
+	for(int ii = i - hnr; ii <= i + hnr; ++ii)
+	  for(int ji = j - hnc; ji <= j + hnc; ++ji)
+	    if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols()) {
+	      scratch[sind] = In(ii,ji);
+	      ++sind;
+	    } else {
 	      scratch[sind] = 0;
 	      ++sind;
 	    }
+      } else {
+	for(int ii = std::max(i - hnr,0); ii <= std::min(i + hnr, In.rows()-1); ++ii)
+	  for(int ji = std::max(j - hnc, 0); ji <= std::min(j + hnc,In.cols()-1); ++ji) {
+	    scratch[sind] = In(ii,ji);
+	    ++sind;
 	  }
+      }
       if(sind % 2 == 1) {
 	int n = (sind - 1)  / 2;
 	std::nth_element(scratch.begin(), scratch.begin() + n,

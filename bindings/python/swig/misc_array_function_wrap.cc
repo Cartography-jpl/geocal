@@ -3606,26 +3606,25 @@ namespace Swig {
 #define SWIGTYPE_p_char_type swig_types[201]
 #define SWIGTYPE_p_difference_type swig_types[202]
 #define SWIGTYPE_p_fmtflags swig_types[203]
-#define SWIGTYPE_p_in swig_types[204]
-#define SWIGTYPE_p_int_type swig_types[205]
-#define SWIGTYPE_p_iostate swig_types[206]
-#define SWIGTYPE_p_off_type swig_types[207]
-#define SWIGTYPE_p_openmode swig_types[208]
-#define SWIGTYPE_p_pos_type swig_types[209]
-#define SWIGTYPE_p_seekdir swig_types[210]
-#define SWIGTYPE_p_size_t swig_types[211]
-#define SWIGTYPE_p_size_type swig_types[212]
-#define SWIGTYPE_p_state_type swig_types[213]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[214]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[215]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[216]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[217]
-#define SWIGTYPE_p_std__invalid_argument swig_types[218]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[219]
-#define SWIGTYPE_p_traits_type swig_types[220]
-#define SWIGTYPE_p_value_type swig_types[221]
-static swig_type_info *swig_types[223];
-static swig_module_info swig_module = {swig_types, 222, 0, 0, 0, 0};
+#define SWIGTYPE_p_int_type swig_types[204]
+#define SWIGTYPE_p_iostate swig_types[205]
+#define SWIGTYPE_p_off_type swig_types[206]
+#define SWIGTYPE_p_openmode swig_types[207]
+#define SWIGTYPE_p_pos_type swig_types[208]
+#define SWIGTYPE_p_seekdir swig_types[209]
+#define SWIGTYPE_p_size_t swig_types[210]
+#define SWIGTYPE_p_size_type swig_types[211]
+#define SWIGTYPE_p_state_type swig_types[212]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[213]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[214]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[215]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[216]
+#define SWIGTYPE_p_std__invalid_argument swig_types[217]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[218]
+#define SWIGTYPE_p_traits_type swig_types[219]
+#define SWIGTYPE_p_value_type swig_types[220]
+static swig_type_info *swig_types[222];
+static swig_module_info swig_module = {swig_types, 221, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -5999,7 +5998,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
   int arg4 ;
   double arg5 ;
   GeoCal::array_local_edge_handle arg6 ;
-  in arg7 ;
+  int arg7 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
   int val2 ;
@@ -6012,8 +6011,8 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
   int ecode5 = 0 ;
   int val6 ;
   int ecode6 = 0 ;
-  void *argp7 ;
-  int res7 = 0 ;
+  int val7 ;
+  int ecode7 = 0 ;
   SwigValueWrapper< blitz::Array< bool,2 > > result;
   
   if ((nobjs < 7) || (nobjs > 7)) SWIG_fail;
@@ -6059,22 +6058,14 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "6"" of type '" "GeoCal::array_local_edge_handle""'");
   } 
   arg6 = static_cast< GeoCal::array_local_edge_handle >(val6);
-  {
-    res7 = SWIG_ConvertPtr(swig_obj[6], &argp7, SWIGTYPE_p_in,  0  | 0);
-    if (!SWIG_IsOK(res7)) {
-      SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "7"" of type '" "in""'"); 
-    }  
-    if (!argp7) {
-      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "linear_gradient_bad_pixel_detection" "', argument " "7"" of type '" "in""'");
-    } else {
-      in * temp = reinterpret_cast< in * >(argp7);
-      arg7 = *temp;
-      if (SWIG_IsNewObj(res7)) delete temp;
-    }
-  }
+  ecode7 = SWIG_AsVal_int(swig_obj[6], &val7);
+  if (!SWIG_IsOK(ecode7)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode7), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "7"" of type '" "int""'");
+  } 
+  arg7 = static_cast< int >(val7);
   {
     try {
-      result = GeoCal::linear_gradient_bad_pixel_detection((blitz::Array< double,2 > const &)*arg1,arg2,arg3,arg4,arg5,arg6,SWIG_STD_MOVE(arg7));
+      result = GeoCal::linear_gradient_bad_pixel_detection((blitz::Array< double,2 > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
@@ -6648,7 +6639,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection(PyObject *self, P
 fail:
   SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'linear_gradient_bad_pixel_detection'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle,in)\n"
+    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle,int)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int)\n"
@@ -7752,7 +7743,6 @@ static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_difference_type = {"_p_difference_type", "difference_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_fmtflags = {"_p_fmtflags", "fmtflags *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_in = {"_p_in", "in *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int_type = {"_p_int_type", "int_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_iostate = {"_p_iostate", "iostate *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_off_type = {"_p_off_type", "off_type *", 0, 0, (void*)0, 0};
@@ -7976,7 +7966,6 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char_type,
   &_swigt__p_difference_type,
   &_swigt__p_fmtflags,
-  &_swigt__p_in,
   &_swigt__p_int_type,
   &_swigt__p_iostate,
   &_swigt__p_off_type,
@@ -8200,7 +8189,6 @@ static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0,
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_difference_type[] = {  {&_swigt__p_difference_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_fmtflags[] = {  {&_swigt__p_fmtflags, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_in[] = {  {&_swigt__p_in, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int_type[] = {  {&_swigt__p_int_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_iostate[] = {  {&_swigt__p_iostate, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_off_type[] = {  {&_swigt__p_off_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -8424,7 +8412,6 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char_type,
   _swigc__p_difference_type,
   _swigc__p_fmtflags,
-  _swigc__p_in,
   _swigc__p_int_type,
   _swigc__p_iostate,
   _swigc__p_off_type,

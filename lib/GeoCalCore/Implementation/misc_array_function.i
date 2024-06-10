@@ -24,7 +24,7 @@ blitz::Array<bool, 2> linear_gradient_bad_pixel_detection
    int Thresh_fact = 2,
    double Nfail_thresh_percentage = 75.0,
    array_local_edge_handle Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE,
-   in Number_thread=1);
+   int Number_thread=1);
 blitz::Array<double, 2> ray_cast_ground_coordinate
 (const boost::shared_ptr<ImageGroundConnection>& Igc,
  const CoordinateConverter& Cconv);

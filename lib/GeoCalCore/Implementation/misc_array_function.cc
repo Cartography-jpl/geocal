@@ -1,12 +1,51 @@
 #include "misc_array_function.h"
 #include "geocal_exception.h"
 #include "igc_ray_caster.h"
+#include "geocal_static_sort.h"
 #include <vector>
 #include <algorithm>
 #include <cmath>
 
 using namespace GeoCal;
 using namespace blitz;
+
+//-----------------------------------------------------------------------
+// The median calculation in array_local_median is usually a small
+// number of values that we need to sort/find median. This function handles
+// this case, falling back to the standard std::nth_element if we have
+// a larger value
+//-----------------------------------------------------------------------
+
+inline double median_calc(std::vector<double>& d)
+{
+  if(d.size() <= 30) {
+    static_sort(d);
+    if(d.size() % 2 == 1) {
+      int n = (d.size() - 1)  / 2;
+      return d[n];
+    } else {
+      int n = d.size() / 2 - 1;
+      return (d[n] + d[n+1]) / 2;
+    }
+  } else {
+    if(d.size() % 2 == 1) {
+      int n = (d.size() - 1)  / 2;
+      std::nth_element(d.begin(), d.begin() + n,
+		       d.end());
+      return d[n];
+    } else {
+      int n = d.size() / 2 - 1;
+      std::nth_element(d.begin(), d.begin() + n,
+		       d.end());
+      double t1 = d[n];
+      // This is the n+1 element. Data is partially sorted, to all
+      // the values in d.begin() + n + 1, d.end()
+      // are >= t1
+      double t2 = *std::min_element(d.begin() + n + 1, d.end());
+      return (t1 + t2) / 2;
+    }
+  }
+}
 
 //-----------------------------------------------------------------------
 /// This calculates the local median of a 2d array, using a filter of
@@ -42,44 +81,29 @@ blitz::Array<double, 2> GeoCal::array_local_median
     throw Exception("Window size needs to be odd");
   int hnr = (Window_nrow - 1) / 2;
   int hnc = (Window_ncol - 1) / 2;
-  std::vector<double> scratch(Window_nrow * Window_ncol);
+  std::vector<double> scratch;
+  scratch.reserve(Window_nrow * Window_ncol);
   blitz::Array<double, 2> res(In.shape());
   for(int i = 0; i < res.rows(); ++i)
     for(int j = 0; j < res.cols(); ++j) {
-      int sind = 0;
+      scratch.clear();
       if(Edge_handle == ARRAY_LOCAL_MEDIAN_ZEROPAD) {
 	for(int ii = i - hnr; ii <= i + hnr; ++ii)
 	  for(int ji = j - hnc; ji <= j + hnc; ++ji)
-	    if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols()) {
-	      scratch[sind] = In(ii,ji);
-	      ++sind;
-	    } else {
-	      scratch[sind] = 0;
-	      ++sind;
-	    }
+	    if(ii >= 0 && ii < In.rows() && ji >= 0 && ji < In.cols())
+	      scratch.push_back(In(ii,ji));
+	    else
+	      scratch.push_back(0);
       } else {
-	for(int ii = std::max(i - hnr,0); ii <= std::min(i + hnr, In.rows()-1); ++ii)
-	  for(int ji = std::max(j - hnc, 0); ji <= std::min(j + hnc,In.cols()-1); ++ji) {
-	    scratch[sind] = In(ii,ji);
-	    ++sind;
-	  }
+	int iimin = std::max(i - hnr,0);
+	int iimax = std::min(i + hnr, In.rows()-1);
+	int jjmin = std::max(j - hnc, 0);
+	int jjmax = std::min(j + hnc, In.cols()-1);
+	for(int ii = iimin; ii <= iimax; ++ii)
+	  for(int ji = jjmin; ji <= jjmax; ++ji)
+	    scratch.push_back(In(ii,ji));
       }
-      if(sind % 2 == 1) {
-	int n = (sind - 1)  / 2;
-	std::nth_element(scratch.begin(), scratch.begin() + n,
-			 scratch.begin() + sind);
-	res(i, j) = scratch[n];
-      } else {
-	int n = sind / 2 - 1;
-	std::nth_element(scratch.begin(), scratch.begin() + n,
-			 scratch.begin() + sind);
-	double t1 = scratch[n];
-	// This is the n+1 element. Data is partially sorted, to all
-	// the values in scratch.begin() + n + 1, scratch.begin() +
-	// sind are >= t1
-	double t2 = *std::min_element(scratch.begin() + n + 1, scratch.begin() + sind);
-	res(i, j) = (t1 + t2) / 2;
-      }
+      res(i,j) = median_calc(scratch);
     }
   if(Edge_handle == ARRAY_LOCAL_MEDIAN_REPEAT) {
     for(int i = 0; i < res.rows(); ++i)

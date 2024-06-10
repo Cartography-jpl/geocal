@@ -1247,7 +1247,9 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/geocal_gsl_root_test.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
-	@srcsupport@/geocal_fftw_test.cc @srcsupport@/hdf_file_test.cc \
+	@srcsupport@/geocal_fftw_test.cc \
+	@srcsupport@/geocal_static_sort_test.cc \
+	@srcsupport@/hdf_file_test.cc \
 	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
@@ -1429,6 +1431,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcsupport@/geocal_test_all-statistic_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-blitz_array_serialize_support_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT) \
+	@srcsupport@/geocal_test_all-geocal_static_sort_test.$(OBJEXT) \
 	$(am__objects_12) \
 	@srcinterface@/geocal_test_all-constant_raster_image_test.$(OBJEXT) \
 	@srcinterface@/geocal_test_all-memory_raster_image_test.$(OBJEXT) \
@@ -1974,6 +1977,7 @@ am__depfiles_remade =  \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_gsl_root_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_matrix_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_quaternion_test.Po \
+	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_temp_file_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_time_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-global_fixture.Po \
@@ -2333,7 +2337,8 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/blitz_array_serialize_support.h \
-	@srcsupport@/geocal_fftw.h @srcsupport@/hdf_file.h \
+	@srcsupport@/geocal_fftw.h @srcsupport@/static_sort.h \
+	@srcsupport@/geocal_static_sort.h @srcsupport@/hdf_file.h \
 	@srcsupport@/tre_support.h @srcinterface@/raster_image.h \
 	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
@@ -3834,7 +3839,8 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/toolkit_time_interface.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/blitz_array_serialize_support.h \
-	@srcsupport@/geocal_fftw.h $(am__append_19) \
+	@srcsupport@/geocal_fftw.h @srcsupport@/static_sort.h \
+	@srcsupport@/geocal_static_sort.h $(am__append_19) \
 	@srcsupport@/tre_support.h @srcinterface@/raster_image.h \
 	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
@@ -4200,7 +4206,8 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/geocal_gsl_root_test.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
-	@srcsupport@/geocal_fftw_test.cc $(am__append_21) \
+	@srcsupport@/geocal_fftw_test.cc \
+	@srcsupport@/geocal_static_sort_test.cc $(am__append_21) \
 	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
@@ -6072,6 +6079,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcsupport@/geocal_test_all-geocal_fftw_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/geocal_test_all-geocal_static_sort_test.$(OBJEXT):  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/geocal_test_all-hdf_file_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -7025,6 +7035,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_gsl_root_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_matrix_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_quaternion_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_temp_file_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_time_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-global_fixture.Po@am__quote@ # am--include-marker
@@ -10714,6 +10725,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-geocal_fftw_test.obj `if test -f '@srcsupport@/geocal_fftw_test.cc'; then $(CYGPATH_W) '@srcsupport@/geocal_fftw_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/geocal_fftw_test.cc'; fi`
 
+@srcsupport@/geocal_test_all-geocal_static_sort_test.o: @srcsupport@/geocal_static_sort_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-geocal_static_sort_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Tpo -c -o @srcsupport@/geocal_test_all-geocal_static_sort_test.o `test -f '@srcsupport@/geocal_static_sort_test.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_static_sort_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/geocal_static_sort_test.cc' object='@srcsupport@/geocal_test_all-geocal_static_sort_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-geocal_static_sort_test.o `test -f '@srcsupport@/geocal_static_sort_test.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_static_sort_test.cc
+
+@srcsupport@/geocal_test_all-geocal_static_sort_test.obj: @srcsupport@/geocal_static_sort_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-geocal_static_sort_test.obj -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Tpo -c -o @srcsupport@/geocal_test_all-geocal_static_sort_test.obj `if test -f '@srcsupport@/geocal_static_sort_test.cc'; then $(CYGPATH_W) '@srcsupport@/geocal_static_sort_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/geocal_static_sort_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/geocal_static_sort_test.cc' object='@srcsupport@/geocal_test_all-geocal_static_sort_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-geocal_static_sort_test.obj `if test -f '@srcsupport@/geocal_static_sort_test.cc'; then $(CYGPATH_W) '@srcsupport@/geocal_static_sort_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/geocal_static_sort_test.cc'; fi`
+
 @srcsupport@/geocal_test_all-hdf_file_test.o: @srcsupport@/hdf_file_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-hdf_file_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-hdf_file_test.Tpo -c -o @srcsupport@/geocal_test_all-hdf_file_test.o `test -f '@srcsupport@/hdf_file_test.cc' || echo '$(srcdir)/'`@srcsupport@/hdf_file_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-hdf_file_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-hdf_file_test.Po
@@ -14216,6 +14241,7 @@ distclean: distclean-am
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_gsl_root_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_matrix_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_quaternion_test.Po
+	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_temp_file_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_time_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-global_fixture.Po
@@ -14896,6 +14922,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_gsl_root_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_matrix_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_quaternion_test.Po
+	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_static_sort_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_temp_file_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_time_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-global_fixture.Po

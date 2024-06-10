@@ -61,6 +61,8 @@ libgeocal_la_SOURCES+= @srcsupport@/blitz_array_serialize_support.cc
 geocalinc_HEADERS+=@srcsupport@/blitz_array_serialize_support.h
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
+geocalinc_HEADERS+= @srcsupport@/static_sort.h
+geocalinc_HEADERS+= @srcsupport@/geocal_static_sort.h
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcsupport@/hdf_file.h
 libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
@@ -136,6 +138,7 @@ geocal_test_all_SOURCES+= @srcsupport@/covariance_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/statistic_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/blitz_array_serialize_support_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_fftw_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_static_sort_test.cc 
 if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif

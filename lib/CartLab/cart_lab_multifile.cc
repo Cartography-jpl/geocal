@@ -74,9 +74,16 @@ void VicarCartLabMultifile::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP(force_area_pixel);
 }
 
+template<class Archive>
+void VicarCartLabMultifileSetup::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
+}
+
 GEOCAL_SPLIT_IMPLEMENT(CartLabMultifile);
 GEOCAL_IMPLEMENT(GdalCartLabMultifile);
 GEOCAL_IMPLEMENT(VicarCartLabMultifile);
+GEOCAL_IMPLEMENT(VicarCartLabMultifileSetup);
 #endif
 
 CartLabMultifile::CartLabMultifile

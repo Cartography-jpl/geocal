@@ -274,7 +274,45 @@ class VicarCartLabMultifile(CartLabMultifile):
 
 # Register VicarCartLabMultifile in _cart_lab_multifile:
 _cart_lab_multifile.VicarCartLabMultifile_swigregister(VicarCartLabMultifile)
+class VicarCartLabMultifileSetup(CartLabMultifile):
+    r"""
 
-__all__ = ["CartLabMultifile","GdalCartLabMultifile","VicarCartLabMultifile"]
+    For some one off sort of files sets, it can be useful to just fill in
+    the loc_to_file stuff directly (e.g.
+
+    with python). This supports that, it allows everything to be set up.
+
+    C++ includes: cart_lab_multifile.h 
+    """
+
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+
+    def __init__(self, Minfo, Number_line_per_tile=100, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_tile=4, Favor_memory_mapped=True, No_coverage_is_error=True, No_coverage_fill_value=-1, Force_area_pixel=False):
+        r"""
+
+        GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup(const boost::shared_ptr< MapInfo > Minfo, int
+        Number_line_per_tile=100, int Number_sample_per_tile=-1, int
+        Number_tile_each_file=4, int Number_tile=4, bool
+        Favor_memory_mapped=true, bool No_coverage_is_error=true, int
+        No_coverage_fill_value=-1, bool Force_area_pixel=false)
+
+        """
+        _cart_lab_multifile.VicarCartLabMultifileSetup_swiginit(self, _cart_lab_multifile.new_VicarCartLabMultifileSetup(Minfo, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_tile, Favor_memory_mapped, No_coverage_is_error, No_coverage_fill_value, Force_area_pixel))
+    file_add = _swig_new_instance_method(_cart_lab_multifile.VicarCartLabMultifileSetup_file_add)
+
+    def __reduce__(self):
+    #Special handling for when we are doing boost serialization, we set
+    #"this" to None
+      if(self.this is None):
+        return super().__reduce__()
+      return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
+
+    __swig_destroy__ = _cart_lab_multifile.delete_VicarCartLabMultifileSetup
+
+# Register VicarCartLabMultifileSetup in _cart_lab_multifile:
+_cart_lab_multifile.VicarCartLabMultifileSetup_swigregister(VicarCartLabMultifileSetup)
+
+__all__ = ["CartLabMultifile","GdalCartLabMultifile","VicarCartLabMultifile","VicarCartLabMultifileSetup"]
 
 

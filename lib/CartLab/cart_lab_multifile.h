@@ -213,10 +213,50 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
+
+/****************************************************************//**
+  For some one off sort of files sets, it can be useful to just fill
+  in the loc_to_file stuff directly (e.g. with python). This supports
+  that, it allows everything to be set up.
+*******************************************************************/
+
+class VicarCartLabMultifileSetup : public VicarCartLabMultifile
+{
+public:
+  VicarCartLabMultifileSetup(const boost::shared_ptr<MapInfo> Minfo,
+			     int Number_line_per_tile = 100,
+			     int Number_sample_per_tile = -1, 
+			     int Number_tile_each_file = 4,
+			     int Number_tile = 4,
+			     bool Favor_memory_mapped = true,
+			     bool No_coverage_is_error = true, 
+			     int No_coverage_fill_value = -1,
+			     bool Force_area_pixel = false)
+    : VicarCartLabMultifile("fake_dir", "", Number_line_per_tile, Number_sample_per_tile,
+			    Number_tile_each_file, Number_tile, Favor_memory_mapped,
+			    No_coverage_is_error, No_coverage_fill_value, Force_area_pixel)
+  {
+    map_info_ = Minfo;
+    number_line_ = map_info().number_y_pixel();
+    number_sample_ = map_info().number_x_pixel();
+  }
+  void file_add(int x1, int y1, int x2, int y2, const std::string& fname)
+  { loc_to_file.add(x1, y1, x2, y2, fname);
+    if(first_file == "")
+      first_file = fname;
+  }
+  virtual ~VicarCartLabMultifileSetup() {};
+private:
+  VicarCartLabMultifileSetup() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 
 GEOCAL_EXPORT_KEY(CartLabMultifile);
 GEOCAL_EXPORT_KEY(GdalCartLabMultifile);
 GEOCAL_EXPORT_KEY(VicarCartLabMultifile);
+GEOCAL_EXPORT_KEY(VicarCartLabMultifileSetup);
 #endif
 

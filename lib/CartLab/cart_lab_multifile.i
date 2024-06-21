@@ -13,6 +13,7 @@
 %geocal_shared_ptr(GeoCal::CartLabMultifile);
 %geocal_shared_ptr(GeoCal::GdalCartLabMultifile);
 %geocal_shared_ptr(GeoCal::VicarCartLabMultifile);
+%geocal_shared_ptr(GeoCal::VicarCartLabMultifileSetup);
 namespace GeoCal {
 %nodefaultctor CartLabMultifile;
 class CartLabMultifile: public RasterMultifile {
@@ -51,7 +52,23 @@ public:
   %pickle_serialization();
 };
 
+class VicarCartLabMultifileSetup: public CartLabMultifile {
+public:
+  VicarCartLabMultifileSetup(const boost::shared_ptr<MapInfo> Minfo,
+			     int Number_line_per_tile = 100,
+			     int Number_sample_per_tile = -1, 
+			     int Number_tile_each_file = 4,
+			     int Number_tile = 4,
+			     bool Favor_memory_mapped = true,
+			     bool No_coverage_is_error = true, 
+			     int No_coverage_fill_value = -1,
+			     bool Force_area_pixel = false);
+  void file_add(int x1, int y1, int x2, int y2, const std::string& fname);
+  %pickle_serialization();
+};
+  
 }
 
 // List of things "import *" will include
-%python_export("CartLabMultifile", "GdalCartLabMultifile", "VicarCartLabMultifile")
+%python_export("CartLabMultifile", "GdalCartLabMultifile", "VicarCartLabMultifile",
+	       "VicarCartLabMultifileSetup")

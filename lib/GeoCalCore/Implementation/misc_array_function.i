@@ -33,5 +33,5 @@ blitz::Array<double, 2> ray_cast_ground_coordinate
 // List of things "import *" will include
 %python_export("array_local_median", "ARRAY_LOCAL_MEDIAN_TRUNCATE",
 	       "ARRAY_LOCAL_MEDIAN_ZEROPAD", "ARRAY_LOCAL_MEDIAN_REPEAT",
-	       "linear_gradient_pad_pixel_detection",
+	       "linear_gradient_bad_pixel_detection",
 	       "ray_cast_ground_coordinate")

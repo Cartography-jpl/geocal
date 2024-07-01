@@ -2,6 +2,7 @@
 #define GEOCAL_THREAD_POOL_H
 #include "printable.h"
 #include <boost/asio/thread_pool.hpp>
+#include <boost/asio/post.hpp>
 #include <boost/shared_ptr.hpp>
 
 namespace GeoCal {
@@ -30,6 +31,23 @@ public:
   int number_thread() const { return number_thread_; }
   void number_thread(int V);
   virtual void print(std::ostream& Os) const;
+
+//-----------------------------------------------------------------------
+/// Add a task to the pools of jobs for the workers to work through.
+/// Note you can add as many as you like, there is no requirement that
+/// you keep to the number_thread() tasks - more or less is
+/// fine. number_thread() is the maximum number of tasks that will be
+/// processed at one time, but the list of tasks to be done can be
+/// larger than that.
+//-----------------------------------------------------------------------
+  
+  template<typename ExecutionContext, class... Types> void add_task(ExecutionContext & ctx, Types... args) { boost::asio::post(*tpool, [ctx, &args...](){ ctx(args...);});}
+
+//-----------------------------------------------------------------------
+/// Wait for all the tasks to finish.
+//-----------------------------------------------------------------------
+
+  void wait_tasks_finish() { tpool->join(); }
 private:
   ThreadPool(int Number_thread = default_number_thread);
   static ThreadPool the_thread_pool;

@@ -2,21 +2,13 @@
 #include "geocal_exception.h"
 #include "igc_ray_caster.h"
 #include "geocal_static_sort.h"
+#include "geocal_thread_pool.h"
 #include <vector>
 #include <algorithm>
 #include <cmath>
-// Use boost threadpool for now, because the std library threading
-// isn't support until a much newer version of gcc then we want to
-// depend on (9 or so).
-#include <boost/asio/thread_pool.hpp>
-#include <boost/asio/post.hpp>
 
 using namespace GeoCal;
 using namespace blitz;
-
-// Perhaps we should move this to some central place, but for now just
-// have this here.
-static boost::asio::thread_pool tpool(10);
 
 //-----------------------------------------------------------------------
 // The median calculation in array_local_median is usually a small
@@ -84,7 +76,7 @@ blitz::Array<double, 2> GeoCal::array_local_median
 (const blitz::Array<double, 2>& In,
  int Window_nrow, int Window_ncol,
  array_local_edge_handle Edge_handle,
- int Number_thread)
+ int Number_task)
 {
   if(Window_nrow % 2 != 1 ||
      Window_ncol % 2 != 1)
@@ -124,26 +116,26 @@ blitz::Array<double, 2> GeoCal::array_local_median
 	res(i,j) = median_calc(scratch);
       }
   };
-  if(Number_thread == 1)
+  if(Number_task == 1 || ThreadPool::thread_pool().number_thread() == 1)
     func(0,res.rows());
   else {
-    // Divide the data into Number_thread nearly equal blocks, and
+    // Divide the data into Number_task nearly equal blocks, and
     // start a thread for each block.
-    int tsize = In.rows() / Number_thread;
-    int overflow_num = In.rows() % Number_thread;
+    int tsize = In.rows() / Number_task;
+    int overflow_num = In.rows() % Number_task;
     int istart = 0;
-    for(int i = 0; i < Number_thread; ++i) {
+    for(int i = 0; i < Number_task; ++i) {
       int iend = istart + tsize;
       // Add a overflow of 1 if needed.
       if(overflow_num > 0) {
 	++iend;
 	--overflow_num;
       }
-      boost::asio::post(tpool, [istart,iend,&func](){func(istart,iend);});
+      ThreadPool::thread_pool().add_task(func, istart, iend);
       istart = iend;
     }
     // Wait for everything to finish
-    tpool.join();
+    ThreadPool::thread_pool().wait_tasks_finish();
   }
   if(Edge_handle == ARRAY_LOCAL_MEDIAN_REPEAT) {
     for(int i = 0; i < res.rows(); ++i)
@@ -201,6 +193,12 @@ blitz::Array<double, 2> GeoCal::ray_cast_ground_coordinate
 /// LinearGradientBadPixelDetection._bad_pixel_detection_python,
 /// but rewritten in C++ for speed. See the python code to see what
 /// this algorithm is doing.
+///
+/// The jobs can be divided up into number of tasks, submitted to the
+/// ThreadPool. Note that the number of tasks selected is just how we
+/// divide up the work, the actual number of threads used is
+/// controlled by ThreadPool (e.g., you could that 10 threads working
+/// through 100 tasks).
 //-----------------------------------------------------------------------
 
 blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
@@ -210,7 +208,7 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
  int Thresh_fact,
  double Nfail_thresh_percentage,
  array_local_edge_handle Edge_handle,
- int Number_thread
+ int Number_task
 )
 {
   range_check_inclusive(Percentile, 0.0, 100.0);
@@ -234,10 +232,10 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
   blitz::Array<double, 2> right_diff_local_med(right_diff.shape());
   down_diff_local_med = blitz::abs(down_diff -
 				   array_local_median(down_diff, 1, Window_size, Edge_handle,
-						      Number_thread));
+						      Number_task));
   right_diff_local_med = blitz::abs(right_diff -
 				    array_local_median(right_diff, Window_size, 1, Edge_handle,
-						       Number_thread));
+						       Number_task));
 
   // Calculate threshold. Note this is slightly different than what we
   // do in the python, we don't bother handling the small difference

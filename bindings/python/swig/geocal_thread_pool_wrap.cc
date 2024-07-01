@@ -4813,6 +4813,51 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#else
+      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -5732,6 +5777,91 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_ThreadPool_wait_tasks_finish(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ThreadPool *arg1 = (GeoCal::ThreadPool *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ThreadPool > tempshared1 ;
+  boost::shared_ptr< GeoCal::ThreadPool > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ThreadPool_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ThreadPool_wait_tasks_finish" "', argument " "1"" of type '" "GeoCal::ThreadPool *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::ThreadPool > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::ThreadPool > * >(argp1);
+      arg1 = const_cast< GeoCal::ThreadPool * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::ThreadPool > * >(argp1);
+      arg1 = const_cast< GeoCal::ThreadPool * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->wait_tasks_finish();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_ThreadPool___str__(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::ThreadPool *arg1 = (GeoCal::ThreadPool *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::ThreadPool const > tempshared1 ;
+  boost::shared_ptr< GeoCal::ThreadPool const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ThreadPool_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "ThreadPool___str__" "', argument " "1"" of type '" "GeoCal::ThreadPool const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::ThreadPool > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::ThreadPool > * >(argp1);
+      arg1 = const_cast< GeoCal::ThreadPool * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::ThreadPool > * >(argp1);
+      arg1 = const_cast< GeoCal::ThreadPool * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::ThreadPool const *)arg1)->print_to_string();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_ThreadPool(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::ThreadPool *arg1 = (GeoCal::ThreadPool *) 0 ;
@@ -5818,6 +5948,12 @@ static PyMethodDef SwigMethods[] = {
 		"void ThreadPool::number_thread(int V)\n"
 		"Set the number of workers in the thread pool. \n"
 		""},
+	 { "ThreadPool_wait_tasks_finish", _wrap_ThreadPool_wait_tasks_finish, METH_O, "\n"
+		"\n"
+		"void GeoCal::ThreadPool::wait_tasks_finish()\n"
+		"Wait for all the tasks to finish. \n"
+		""},
+	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, NULL},
 	 { "delete_ThreadPool", _wrap_delete_ThreadPool, METH_O, "\n"
 		"\n"
 		"virtual GeoCal::ThreadPool::~ThreadPool()\n"
@@ -5864,6 +6000,12 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"void ThreadPool::number_thread(int V)\n"
 		"Set the number of workers in the thread pool. \n"
 		""},
+	 { "ThreadPool_wait_tasks_finish", _wrap_ThreadPool_wait_tasks_finish, METH_O, "\n"
+		"\n"
+		"void GeoCal::ThreadPool::wait_tasks_finish()\n"
+		"Wait for all the tasks to finish. \n"
+		""},
+	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, NULL},
 	 { "delete_ThreadPool", _wrap_delete_ThreadPool, METH_O, "\n"
 		"\n"
 		"virtual GeoCal::ThreadPool::~ThreadPool()\n"

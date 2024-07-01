@@ -41,7 +41,7 @@ public:
 /// larger than that.
 //-----------------------------------------------------------------------
   
-  template<typename ExecutionContext, class... Types> void add_task(ExecutionContext & ctx, Types... args) { boost::asio::post(*tpool, [ctx, &args...](){ ctx(args...);});}
+  template<typename ExecutionContext, class... Types> void add_task(ExecutionContext & ctx, Types... args) { boost::asio::post(*tpool, [&ctx, &args...](){ ctx(args...);});}
 
 //-----------------------------------------------------------------------
 /// Wait for all the tasks to finish.

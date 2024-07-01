@@ -168,6 +168,8 @@ class ThreadPool(geocal_swig.generic_object.GenericObject):
     def number_thread(self, value):
       self._v_number_thread(value)
 
+    wait_tasks_finish = _swig_new_instance_method(_geocal_thread_pool.ThreadPool_wait_tasks_finish)
+    __str__ = _swig_new_instance_method(_geocal_thread_pool.ThreadPool___str__)
     __swig_destroy__ = _geocal_thread_pool.delete_ThreadPool
 
 # Register ThreadPool in _geocal_thread_pool:

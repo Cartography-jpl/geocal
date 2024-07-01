@@ -8,6 +8,7 @@
 %}
 %base_import(generic_object)
 %geocal_shared_ptr(GeoCal::IterativeMorphologicalDilation);
+%geocal_shared_ptr(GeoCal::IterativeMorphologicalDilation::FrontierPixel);
 namespace GeoCal {
 class IterativeMorphologicalDilation : public GenericObject {
 public:
@@ -15,6 +16,10 @@ public:
   enum PredictionType { FLAT_WEIGHTED_AVERAGE=0,
 			GAUSSIAN_WEIGHTED_AVERAGE=1,
 			NEIGBORHOOD_MEDIAN=2 };
+  struct FrontierPixel {
+    FrontierPixel(int I, int J, int Count) : i(I), j(J), count(Count) {}
+    int i, j, count;
+  };
   IterativeMorphologicalDilation(const blitz::Array<double, 2>& Image,
 				 const blitz::Array<bool, 2>& Mask,
 		 int Window_size = 3,
@@ -33,7 +38,7 @@ public:
   static void set_random_seed(unsigned int S);
   void fill_missing_data();
   double predicted_value(int i, int j) const;
-  blitz::Array<unsigned short int, 2> frontier_pixel_neighbor_count(int num) const;
+  std::vector<FrontierPixel> frontier_pixel_find(int num) const;
   %pickle_serialization();
 };
 }

@@ -45,12 +45,14 @@ class LinearGradientBadPixelDetection(object):
     '''
     def __init__(self, window_size = 7, percentile = 90.0, thresh_fact = 2,
                  nfail_thresh_percentage = 75.0,
-                 edge_handle = geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE):
+                 edge_handle = geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE,
+                 number_task=1):
         self.window_size = window_size
         self.percentile = percentile
         self.thresh_fact = thresh_fact
         self.nfail_thresh_percentage = nfail_thresh_percentage
         self.edge_handle = edge_handle
+        self.number_task = number_task
 
     def bad_pixel_detection(self, img):
         '''Take the given image as a 2d numpy array. Return a boolean array
@@ -63,7 +65,7 @@ class LinearGradientBadPixelDetection(object):
         return geocal.linear_gradient_bad_pixel_detection(img, self.window_size,
                                                        self.percentile, self.thresh_fact,
                                                        self.nfail_thresh_percentage,
-                                                       self.edge_handle)
+                                                       self.edge_handle, self.number_task)
 
     def _bad_pixel_detection_python(self, img):
         '''This is the original python implementation of this. This wasn't super slow,

@@ -226,7 +226,7 @@ class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     set_random_seed = _swig_new_static_method(_iterative_morphological_dilation.IterativeMorphologicalDilation_set_random_seed)
     fill_missing_data = _swig_new_instance_method(_iterative_morphological_dilation.IterativeMorphologicalDilation_fill_missing_data)
     predicted_value = _swig_new_instance_method(_iterative_morphological_dilation.IterativeMorphologicalDilation_predicted_value)
-    frontier_pixel_neighbor_count = _swig_new_instance_method(_iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_neighbor_count)
+    frontier_pixel_find = _swig_new_instance_method(_iterative_morphological_dilation.IterativeMorphologicalDilation_frontier_pixel_find)
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set

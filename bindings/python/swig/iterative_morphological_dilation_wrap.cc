@@ -3404,105 +3404,108 @@ namespace Swig {
 
 #define SWIGTYPE_p_GeoCal__GenericObject swig_types[0]
 #define SWIGTYPE_p_GeoCal__IterativeMorphologicalDilation swig_types[1]
-#define SWIGTYPE_p_allocator_type swig_types[2]
-#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[3]
-#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[4]
-#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[5]
-#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[6]
-#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[7]
-#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[8]
-#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[9]
-#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[10]
-#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[11]
-#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[12]
-#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[13]
-#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[14]
-#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[15]
-#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[16]
-#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[17]
-#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[18]
-#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[19]
-#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[20]
-#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[21]
-#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[22]
-#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[23]
-#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[24]
-#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[25]
-#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[26]
-#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[27]
-#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[28]
-#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[29]
-#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[30]
-#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[31]
-#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[32]
-#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[33]
-#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[34]
-#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[35]
-#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[36]
-#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[37]
-#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[38]
-#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[39]
-#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[40]
-#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[41]
-#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[42]
-#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[43]
-#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[44]
-#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[45]
-#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[46]
-#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[47]
-#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[48]
-#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[49]
-#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[50]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[51]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[52]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[53]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[54]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[55]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[56]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[57]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[58]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[59]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[60]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[61]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[62]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[63]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[64]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[65]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[66]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[67]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[68]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[69]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[70]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[71]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[72]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[73]
-#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[74]
-#define SWIGTYPE_p_blitz__Range swig_types[75]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[76]
-#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t swig_types[77]
-#define SWIGTYPE_p_char swig_types[78]
-#define SWIGTYPE_p_char_type swig_types[79]
-#define SWIGTYPE_p_difference_type swig_types[80]
-#define SWIGTYPE_p_fmtflags swig_types[81]
-#define SWIGTYPE_p_int_type swig_types[82]
-#define SWIGTYPE_p_iostate swig_types[83]
-#define SWIGTYPE_p_off_type swig_types[84]
-#define SWIGTYPE_p_openmode swig_types[85]
-#define SWIGTYPE_p_pos_type swig_types[86]
-#define SWIGTYPE_p_seekdir swig_types[87]
-#define SWIGTYPE_p_size_t swig_types[88]
-#define SWIGTYPE_p_size_type swig_types[89]
-#define SWIGTYPE_p_state_type swig_types[90]
-#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[91]
-#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[92]
-#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[93]
-#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[94]
-#define SWIGTYPE_p_std__invalid_argument swig_types[95]
-#define SWIGTYPE_p_swig__SwigPyIterator swig_types[96]
-#define SWIGTYPE_p_traits_type swig_types[97]
-#define SWIGTYPE_p_value_type swig_types[98]
-static swig_type_info *swig_types[100];
-static swig_module_info swig_module = {swig_types, 99, 0, 0, 0, 0};
+#define SWIGTYPE_p_GeoCal__IterativeMorphologicalDilation__FrontierPixel swig_types[2]
+#define SWIGTYPE_p_allocator_type swig_types[3]
+#define SWIGTYPE_p_blitz__ArrayT_bool_1_t swig_types[4]
+#define SWIGTYPE_p_blitz__ArrayT_bool_2_t swig_types[5]
+#define SWIGTYPE_p_blitz__ArrayT_bool_3_t swig_types[6]
+#define SWIGTYPE_p_blitz__ArrayT_bool_4_t swig_types[7]
+#define SWIGTYPE_p_blitz__ArrayT_bool_5_t swig_types[8]
+#define SWIGTYPE_p_blitz__ArrayT_bool_6_t swig_types[9]
+#define SWIGTYPE_p_blitz__ArrayT_bool_7_t swig_types[10]
+#define SWIGTYPE_p_blitz__ArrayT_bool_8_t swig_types[11]
+#define SWIGTYPE_p_blitz__ArrayT_char_1_t swig_types[12]
+#define SWIGTYPE_p_blitz__ArrayT_char_2_t swig_types[13]
+#define SWIGTYPE_p_blitz__ArrayT_char_3_t swig_types[14]
+#define SWIGTYPE_p_blitz__ArrayT_char_4_t swig_types[15]
+#define SWIGTYPE_p_blitz__ArrayT_char_5_t swig_types[16]
+#define SWIGTYPE_p_blitz__ArrayT_char_6_t swig_types[17]
+#define SWIGTYPE_p_blitz__ArrayT_char_7_t swig_types[18]
+#define SWIGTYPE_p_blitz__ArrayT_char_8_t swig_types[19]
+#define SWIGTYPE_p_blitz__ArrayT_double_1_t swig_types[20]
+#define SWIGTYPE_p_blitz__ArrayT_double_2_t swig_types[21]
+#define SWIGTYPE_p_blitz__ArrayT_double_3_t swig_types[22]
+#define SWIGTYPE_p_blitz__ArrayT_double_4_t swig_types[23]
+#define SWIGTYPE_p_blitz__ArrayT_double_5_t swig_types[24]
+#define SWIGTYPE_p_blitz__ArrayT_double_6_t swig_types[25]
+#define SWIGTYPE_p_blitz__ArrayT_double_7_t swig_types[26]
+#define SWIGTYPE_p_blitz__ArrayT_double_8_t swig_types[27]
+#define SWIGTYPE_p_blitz__ArrayT_float_1_t swig_types[28]
+#define SWIGTYPE_p_blitz__ArrayT_float_2_t swig_types[29]
+#define SWIGTYPE_p_blitz__ArrayT_float_3_t swig_types[30]
+#define SWIGTYPE_p_blitz__ArrayT_float_4_t swig_types[31]
+#define SWIGTYPE_p_blitz__ArrayT_float_5_t swig_types[32]
+#define SWIGTYPE_p_blitz__ArrayT_float_6_t swig_types[33]
+#define SWIGTYPE_p_blitz__ArrayT_float_7_t swig_types[34]
+#define SWIGTYPE_p_blitz__ArrayT_float_8_t swig_types[35]
+#define SWIGTYPE_p_blitz__ArrayT_int_1_t swig_types[36]
+#define SWIGTYPE_p_blitz__ArrayT_int_2_t swig_types[37]
+#define SWIGTYPE_p_blitz__ArrayT_int_3_t swig_types[38]
+#define SWIGTYPE_p_blitz__ArrayT_int_4_t swig_types[39]
+#define SWIGTYPE_p_blitz__ArrayT_int_5_t swig_types[40]
+#define SWIGTYPE_p_blitz__ArrayT_int_6_t swig_types[41]
+#define SWIGTYPE_p_blitz__ArrayT_int_7_t swig_types[42]
+#define SWIGTYPE_p_blitz__ArrayT_int_8_t swig_types[43]
+#define SWIGTYPE_p_blitz__ArrayT_short_1_t swig_types[44]
+#define SWIGTYPE_p_blitz__ArrayT_short_2_t swig_types[45]
+#define SWIGTYPE_p_blitz__ArrayT_short_3_t swig_types[46]
+#define SWIGTYPE_p_blitz__ArrayT_short_4_t swig_types[47]
+#define SWIGTYPE_p_blitz__ArrayT_short_5_t swig_types[48]
+#define SWIGTYPE_p_blitz__ArrayT_short_6_t swig_types[49]
+#define SWIGTYPE_p_blitz__ArrayT_short_7_t swig_types[50]
+#define SWIGTYPE_p_blitz__ArrayT_short_8_t swig_types[51]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_1_t swig_types[52]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_2_t swig_types[53]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_3_t swig_types[54]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_4_t swig_types[55]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_5_t swig_types[56]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_6_t swig_types[57]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_7_t swig_types[58]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_char_8_t swig_types[59]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_1_t swig_types[60]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_2_t swig_types[61]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_3_t swig_types[62]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_4_t swig_types[63]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_5_t swig_types[64]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_6_t swig_types[65]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_7_t swig_types[66]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_int_8_t swig_types[67]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_1_t swig_types[68]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t swig_types[69]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_3_t swig_types[70]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_4_t swig_types[71]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_5_t swig_types[72]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_6_t swig_types[73]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_7_t swig_types[74]
+#define SWIGTYPE_p_blitz__ArrayT_unsigned_short_8_t swig_types[75]
+#define SWIGTYPE_p_blitz__Range swig_types[76]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__GenericObject_t swig_types[77]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t swig_types[78]
+#define SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t swig_types[79]
+#define SWIGTYPE_p_char swig_types[80]
+#define SWIGTYPE_p_char_type swig_types[81]
+#define SWIGTYPE_p_difference_type swig_types[82]
+#define SWIGTYPE_p_fmtflags swig_types[83]
+#define SWIGTYPE_p_int_type swig_types[84]
+#define SWIGTYPE_p_iostate swig_types[85]
+#define SWIGTYPE_p_off_type swig_types[86]
+#define SWIGTYPE_p_openmode swig_types[87]
+#define SWIGTYPE_p_pos_type swig_types[88]
+#define SWIGTYPE_p_seekdir swig_types[89]
+#define SWIGTYPE_p_size_t swig_types[90]
+#define SWIGTYPE_p_size_type swig_types[91]
+#define SWIGTYPE_p_state_type swig_types[92]
+#define SWIGTYPE_p_std__basic_iosT_char_std__char_traitsT_char_t_t swig_types[93]
+#define SWIGTYPE_p_std__basic_iostreamT_char_std__char_traitsT_char_t_t swig_types[94]
+#define SWIGTYPE_p_std__basic_istreamT_char_std__char_traitsT_char_t_t swig_types[95]
+#define SWIGTYPE_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t swig_types[96]
+#define SWIGTYPE_p_std__invalid_argument swig_types[97]
+#define SWIGTYPE_p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t swig_types[98]
+#define SWIGTYPE_p_swig__SwigPyIterator swig_types[99]
+#define SWIGTYPE_p_traits_type swig_types[100]
+#define SWIGTYPE_p_value_type swig_types[101]
+static swig_type_info *swig_types[103];
+static swig_module_info swig_module = {swig_types, 102, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -6679,7 +6682,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_find(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::IterativeMorphologicalDilation *arg1 = (GeoCal::IterativeMorphologicalDilation *) 0 ;
   int arg2 ;
@@ -6690,14 +6693,14 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbo
   int val2 ;
   int ecode2 = 0 ;
   PyObject *swig_obj[2] ;
-  SwigValueWrapper< blitz::Array< unsigned short,2 > > result;
+  SwigValueWrapper< std::vector< GeoCal::IterativeMorphologicalDilation::FrontierPixel,std::allocator< GeoCal::IterativeMorphologicalDilation::FrontierPixel > > > result;
   
-  if (!SWIG_Python_UnpackTuple(args, "IterativeMorphologicalDilation_frontier_pixel_neighbor_count", 2, 2, swig_obj)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args, "IterativeMorphologicalDilation_frontier_pixel_find", 2, 2, swig_obj)) SWIG_fail;
   {
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation_frontier_pixel_neighbor_count" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "IterativeMorphologicalDilation_frontier_pixel_find" "', argument " "1"" of type '" "GeoCal::IterativeMorphologicalDilation const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::IterativeMorphologicalDilation > * >(argp1);
@@ -6710,40 +6713,19 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_neighbo
   }
   ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
   if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IterativeMorphologicalDilation_frontier_pixel_neighbor_count" "', argument " "2"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "IterativeMorphologicalDilation_frontier_pixel_find" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
   {
     try {
-      result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_pixel_neighbor_count(arg2);
+      result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_pixel_find(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  {
-    // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,196,%blitz_to_numpy@*/
-    // Copy out dimensions and stride from blitz array
-    npy_intp dims[2], stride[2];
-    for(int i = 0; i < 2; ++i) {
-      dims[i] = (&result)->extent(i);
-      // Note numpy stride is in terms of bytes, while blitz in in terms
-      // of type T.
-      stride[i] = (&result)->stride(i) * sizeof(unsigned short int);
-    }
-    
-    // Create new numpy object using Numpy C API
-    resultobj = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<unsigned short int >(), 
-      stride, (&result)->data(), 0, 0, 0);
-    blitz::Array<unsigned short int, 2>* t = new blitz::Array<unsigned short int, 2>(*(&result));
-    // Stash pointer to original blitz array as detailed above
-    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
-      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
-        SWIGTYPE_p_blitz__ArrayT_unsigned_short_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
-    /*@SWIG@*/;
-  }
+  resultobj = SWIG_NewPointerObj((new std::vector< GeoCal::IterativeMorphologicalDilation::FrontierPixel,std::allocator< GeoCal::IterativeMorphologicalDilation::FrontierPixel > >(result)), SWIGTYPE_p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6901,17 +6883,16 @@ static PyMethodDef SwigMethods[] = {
 		"We only include data that as filled_mask_ false, and we normalize by\n"
 		"the portion of the kernel included. \n"
 		""},
-	 { "IterativeMorphologicalDilation_frontier_pixel_neighbor_count", _wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count, METH_VARARGS, "\n"
+	 { "IterativeMorphologicalDilation_frontier_pixel_find", _wrap_IterativeMorphologicalDilation_frontier_pixel_find, METH_VARARGS, "\n"
 		"\n"
-		"blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count(int num) const\n"
+		"std::vector< IterativeMorphologicalDilation::FrontierPixel > IterativeMorphologicalDilation::frontier_pixel_find(int num) const\n"
 		"Dilate the mask with a simple 3x3 kernel of all 1's.\n"
 		"\n"
 		"Subtract the original mask - so this returns nonzero for all the new\n"
 		"\"frontier\" pixels. Because it is useful, fill the nonzero values\n"
 		"with a count of neighbors in the original mask (this can be useful to\n"
-		"fill in points with the most neighbors first in an iteration). So this\n"
-		"returns all masked pixels that have at least one immediate neighbor.\n"
-		"\n"
+		"fill in points with the most neighbors first in an iteration). Return\n"
+		"a list of these frontier pixels \n"
 		""},
 	 { "delete_IterativeMorphologicalDilation", _wrap_delete_IterativeMorphologicalDilation, METH_O, "\n"
 		"\n"
@@ -7021,17 +7002,16 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"We only include data that as filled_mask_ false, and we normalize by\n"
 		"the portion of the kernel included. \n"
 		""},
-	 { "IterativeMorphologicalDilation_frontier_pixel_neighbor_count", _wrap_IterativeMorphologicalDilation_frontier_pixel_neighbor_count, METH_VARARGS, "\n"
+	 { "IterativeMorphologicalDilation_frontier_pixel_find", _wrap_IterativeMorphologicalDilation_frontier_pixel_find, METH_VARARGS, "\n"
 		"\n"
-		"blitz::Array< unsigned short int, 2 > IterativeMorphologicalDilation::frontier_pixel_neighbor_count(int num) const\n"
+		"std::vector< IterativeMorphologicalDilation::FrontierPixel > IterativeMorphologicalDilation::frontier_pixel_find(int num) const\n"
 		"Dilate the mask with a simple 3x3 kernel of all 1's.\n"
 		"\n"
 		"Subtract the original mask - so this returns nonzero for all the new\n"
 		"\"frontier\" pixels. Because it is useful, fill the nonzero values\n"
 		"with a count of neighbors in the original mask (this can be useful to\n"
-		"fill in points with the most neighbors first in an iteration). So this\n"
-		"returns all masked pixels that have at least one immediate neighbor.\n"
-		"\n"
+		"fill in points with the most neighbors first in an iteration). Return\n"
+		"a list of these frontier pixels \n"
 		""},
 	 { "delete_IterativeMorphologicalDilation", _wrap_delete_IterativeMorphologicalDilation, METH_O, "\n"
 		"\n"
@@ -7070,6 +7050,7 @@ static void *_p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__ba
 }
 static swig_type_info _swigt__p_GeoCal__GenericObject = {"_p_GeoCal__GenericObject", "GeoCal::GenericObject *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_GeoCal__IterativeMorphologicalDilation = {"_p_GeoCal__IterativeMorphologicalDilation", "GeoCal::IterativeMorphologicalDilation *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_GeoCal__IterativeMorphologicalDilation__FrontierPixel = {"_p_GeoCal__IterativeMorphologicalDilation__FrontierPixel", "GeoCal::IterativeMorphologicalDilation::FrontierPixel *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_allocator_type = {"_p_allocator_type", "allocator_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_1_t = {"_p_blitz__ArrayT_bool_1_t", "blitz::Array< bool,1 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__ArrayT_bool_2_t = {"_p_blitz__ArrayT_bool_2_t", "blitz::Array< bool,2 > *", 0, 0, (void*)0, 0};
@@ -7145,6 +7126,7 @@ static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_7_t = {"_p_blitz__A
 static swig_type_info _swigt__p_blitz__ArrayT_unsigned_short_8_t = {"_p_blitz__ArrayT_unsigned_short_8_t", "blitz::Array< unsigned short,8 > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_blitz__Range = {"_p_blitz__Range", "blitz::Range *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t = {"_p_boost__shared_ptrT_GeoCal__GenericObject_t", "boost::shared_ptr< GeoCal::GenericObject > *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t = {"_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t", "boost::shared_ptr< GeoCal::IterativeMorphologicalDilation::FrontierPixel > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t = {"_p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t", "boost::shared_ptr< GeoCal::IterativeMorphologicalDilation > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char_type = {"_p_char_type", "char_type *", 0, 0, (void*)0, 0};
@@ -7164,6 +7146,7 @@ static swig_type_info _swigt__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_type_info _swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_istreamT_char_std__char_traitsT_char_t_t", "std::istream *|std::basic_istream< char,std::char_traits< char > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t = {"_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t", "std::ostream *|std::basic_ostream< char,std::char_traits< char > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_std__invalid_argument = {"_p_std__invalid_argument", "std::invalid_argument *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t = {"_p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t", "std::vector< GeoCal::IterativeMorphologicalDilation::FrontierPixel,std::allocator< GeoCal::IterativeMorphologicalDilation::FrontierPixel > > *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_swig__SwigPyIterator = {"_p_swig__SwigPyIterator", "swig::SwigPyIterator *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_traits_type = {"_p_traits_type", "traits_type *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0, 0, (void*)0, 0};
@@ -7171,6 +7154,7 @@ static swig_type_info _swigt__p_value_type = {"_p_value_type", "value_type *", 0
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_GeoCal__GenericObject,
   &_swigt__p_GeoCal__IterativeMorphologicalDilation,
+  &_swigt__p_GeoCal__IterativeMorphologicalDilation__FrontierPixel,
   &_swigt__p_allocator_type,
   &_swigt__p_blitz__ArrayT_bool_1_t,
   &_swigt__p_blitz__ArrayT_bool_2_t,
@@ -7246,6 +7230,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_blitz__ArrayT_unsigned_short_8_t,
   &_swigt__p_blitz__Range,
   &_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t,
+  &_swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t,
   &_swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t,
   &_swigt__p_char,
   &_swigt__p_char_type,
@@ -7265,6 +7250,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   &_swigt__p_std__invalid_argument,
+  &_swigt__p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t,
   &_swigt__p_swig__SwigPyIterator,
   &_swigt__p_traits_type,
   &_swigt__p_value_type,
@@ -7272,6 +7258,7 @@ static swig_type_info *swig_type_initial[] = {
 
 static swig_cast_info _swigc__p_GeoCal__GenericObject[] = {  {&_swigt__p_GeoCal__GenericObject, 0, 0, 0},  {&_swigt__p_GeoCal__IterativeMorphologicalDilation, _p_GeoCal__IterativeMorphologicalDilationTo_p_GeoCal__GenericObject, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_GeoCal__IterativeMorphologicalDilation[] = {  {&_swigt__p_GeoCal__IterativeMorphologicalDilation, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_GeoCal__IterativeMorphologicalDilation__FrontierPixel[] = {  {&_swigt__p_GeoCal__IterativeMorphologicalDilation__FrontierPixel, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_allocator_type[] = {  {&_swigt__p_allocator_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_1_t[] = {  {&_swigt__p_blitz__ArrayT_bool_1_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__ArrayT_bool_2_t[] = {  {&_swigt__p_blitz__ArrayT_bool_2_t, 0, 0, 0},{0, 0, 0, 0}};
@@ -7347,6 +7334,7 @@ static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_7_t[] = {  {&_swigt
 static swig_cast_info _swigc__p_blitz__ArrayT_unsigned_short_8_t[] = {  {&_swigt__p_blitz__ArrayT_unsigned_short_8_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_blitz__Range[] = {  {&_swigt__p_blitz__Range, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0, 0},  {&_swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, _p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_tTo_p_boost__shared_ptrT_GeoCal__GenericObject_t, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t[] = {  {&_swigt__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char_type[] = {  {&_swigt__p_char_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7366,6 +7354,7 @@ static swig_cast_info _swigc__p_std__basic_iostreamT_char_std__char_traitsT_char
 static swig_cast_info _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_istreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t[] = {  {&_swigt__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0, 0},  {&_swigt__p_std__basic_iostreamT_char_std__char_traitsT_char_t_t, _p_std__basic_iostreamT_char_std__char_traitsT_char_t_tTo_p_std__basic_ostreamT_char_std__char_traitsT_char_t_t, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_std__invalid_argument[] = {  {&_swigt__p_std__invalid_argument, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t[] = {  {&_swigt__p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_swig__SwigPyIterator[] = {  {&_swigt__p_swig__SwigPyIterator, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_traits_type[] = {  {&_swigt__p_traits_type, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 0},{0, 0, 0, 0}};
@@ -7373,6 +7362,7 @@ static swig_cast_info _swigc__p_value_type[] = {  {&_swigt__p_value_type, 0, 0, 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_GeoCal__GenericObject,
   _swigc__p_GeoCal__IterativeMorphologicalDilation,
+  _swigc__p_GeoCal__IterativeMorphologicalDilation__FrontierPixel,
   _swigc__p_allocator_type,
   _swigc__p_blitz__ArrayT_bool_1_t,
   _swigc__p_blitz__ArrayT_bool_2_t,
@@ -7448,6 +7438,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_blitz__ArrayT_unsigned_short_8_t,
   _swigc__p_blitz__Range,
   _swigc__p_boost__shared_ptrT_GeoCal__GenericObject_t,
+  _swigc__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t,
   _swigc__p_boost__shared_ptrT_GeoCal__IterativeMorphologicalDilation_t,
   _swigc__p_char,
   _swigc__p_char_type,
@@ -7467,6 +7458,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_std__basic_istreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__basic_ostreamT_char_std__char_traitsT_char_t_t,
   _swigc__p_std__invalid_argument,
+  _swigc__p_std__vectorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_std__allocatorT_GeoCal__IterativeMorphologicalDilation__FrontierPixel_t_t,
   _swigc__p_swig__SwigPyIterator,
   _swigc__p_traits_type,
   _swigc__p_value_type,
@@ -8009,6 +8001,9 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation > *"));
+  
+  
+  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation::FrontierPixel), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation::FrontierPixel > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation::FrontierPixel > *"));
   
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_C_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::C_ORDER)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_RANDOM_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::RANDOM_ORDER)));

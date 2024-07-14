@@ -112,7 +112,7 @@ void MspiCamera::read_config_file(const std::string& File_name,
 
   for (int iband = 0; iband < number_band(); ++iband) {
     int row = row_number_[iband];
-    AutoDerivative<double> this_line_pitch = (row > 999 ? line_pitch_swir : line_pitch_);  // SWIR row numbering starts at 1000
+    AutoDerivative<double> this_line_pitch = (row > 999 ? line_pitch_ : line_pitch_swir);  // VIS row numbering starts at 1000
     AutoDerivative<double> origin_line = Y0[iband] / this_line_pitch;
     AutoDerivative<double> origin_sample = X0[iband] / sample_pitch_;
     principal_point_.push_back(FrameCoordinateWithDerivative(origin_line, origin_sample));

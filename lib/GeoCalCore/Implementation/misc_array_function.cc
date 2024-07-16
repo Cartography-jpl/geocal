@@ -270,13 +270,15 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
   //nfail(blitz::Range::all(), blitz::Range(0,Img.cols()-2)) += nfail_right;
 
   for(int i = 0; i < nfail.rows(); ++i)
-    for(int j = 0; j < nfail.rows(); ++j) {
-      nfail(i,j) += nfail_down(i,j);
-      if(i < nfail_down.rows())
+    for(int j = 0; j < nfail.cols(); ++j) {
+      if(i < nfail_down.rows()) {
+	nfail(i,j) += nfail_down(i,j);
 	nfail(i+1,j) += nfail_down(i,j);
-      nfail(i,j) += nfail_right(i,j);
-      if(j < nfail_right.cols())
+      }
+      if(j < nfail_right.cols()) {
+	nfail(i,j) += nfail_right(i,j);
 	nfail(i,j+1) += nfail_right(i,j);
+      }
     }
   
   // Convert to percentage

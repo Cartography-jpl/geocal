@@ -345,5 +345,7 @@ for i in range(len(tparr)):
     tparr[i].id = i
 
 geocal.write_shelve(args.output, tparr)
+if(pool):
+    pool.close()
 
 

@@ -4511,7 +4511,7 @@ geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
 	@srcpythonlib@/isis_to_igc.py @srcpythonlib@/isis_igc.py \
 	@srcpythonlib@/spice_igc.py \
 	@srcpythonlib@/safe_matplotlib_import.py \
-	@srcpythonlib@/misc.py \
+	@srcpythonlib@/misc.py @srcpythonlib@/gaussian_stretch.py \
 	@srcpythonlib@/igc_collection_extension.py \
 	@srcpythonlib@/igc_msp_extension.py \
 	@srcpythonlib@/ray_caster_resampler_extension.py \

@@ -182,6 +182,7 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
         _ray_caster_resampler.RayCasterResampler_swiginit(self, _ray_caster_resampler.new_RayCasterResampler(Ray_caster, Map_info))
     ray_cast_step = _swig_new_instance_method(_ray_caster_resampler.RayCasterResampler_ray_cast_step)
     final_rad_step = _swig_new_instance_method(_ray_caster_resampler.RayCasterResampler_final_rad_step)
+    final_rad_step_double = _swig_new_instance_method(_ray_caster_resampler.RayCasterResampler_final_rad_step_double)
     _v_ray_caster = _swig_new_instance_method(_ray_caster_resampler.RayCasterResampler__v_ray_caster)
 
     @property

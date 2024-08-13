@@ -232,6 +232,12 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
         intersection with the DEM. The Max_height should be larger than the
         greatest height we will encounter in the Dem belonging to the Igc.
 
+        We calculate the number of subpixels to use in the line and sample
+        direction from the Resolution argument. This sometimes leaves holes,
+        in particular if we are working with data where the pixel size varies
+        on the ground. You can reset these values after the fact if desired -
+        just set nsub_line and nsub_sample
+
         Note that in some cases you may want to control the exactly number of
         subpixels. The easiest way to do this is to just first call this
         constructor and let it figure out what it thinks the number of

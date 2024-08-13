@@ -42,6 +42,10 @@ public:
 		      blitz::Array<int, 6> Ray_cast_res,
 		      blitz::Array<int, 2> Rad_res,
 		      blitz::Array<int, 2> Scratch_count);
+  void final_rad_step_double(const RasterImage& Input_img,
+			     blitz::Array<int, 6> Ray_cast_res,
+			     blitz::Array<double, 2> Rad_res,
+			     blitz::Array<int, 2> Scratch_count);
   const boost::shared_ptr<RayCaster>& ray_caster() const  { return ray_caster_;}
   const boost::shared_ptr<MapInfo>& map_info() const  { return mi_;}
   virtual void print(std::ostream& Os) const

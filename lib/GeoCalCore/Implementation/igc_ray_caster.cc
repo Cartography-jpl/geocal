@@ -48,6 +48,12 @@ inline double sqr(double x) { return x * x; }
 /// larger than the greatest height we will encounter in the Dem
 /// belonging to the Igc.
 ///
+/// We calculate the number of subpixels to use in the line and sample
+/// direction from the Resolution argument. This sometimes leaves
+/// holes, in particular if we are working with data where the pixel
+/// size varies on the ground. You can reset these values after the
+/// fact if desired - just set nsub_line and nsub_sample
+///
 /// Note that in some cases you may want to control the exactly number
 /// of subpixels. The easiest way to do this is to just first call
 /// this constructor and let it figure out what it thinks the number
@@ -85,7 +91,7 @@ IgcRayCaster::IgcRayCaster
 		 Igc->number_sample() - Start_sample),
   number_line_framelet_(Number_line_framelet),
   include_path_distance_(Include_path_distance),
-    resolution(Resolution),
+  resolution(Resolution),
   max_height(Max_height)
 {
   // We only work with integral numbers of framelets. Can perhaps

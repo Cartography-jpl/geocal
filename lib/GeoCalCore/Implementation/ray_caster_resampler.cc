@@ -124,3 +124,39 @@ void RayCasterResampler::final_rad_step
       if(Scratch_count(i,j) >0)
 	Rad_res(i, j) /= Scratch_count(i, j);
 }
+
+//-----------------------------------------------------------------------
+/// Double version of final_rad_step.
+//-----------------------------------------------------------------------
+
+void RayCasterResampler::final_rad_step_double
+(const RasterImage& Input_img,
+ blitz::Array<int, 6> Ray_cast_res,
+ blitz::Array<double, 2> Rad_res,
+ blitz::Array<int, 2> Scratch_count)
+{
+  if(Rad_res.rows() != mi_->number_y_pixel() ||
+     Rad_res.cols() != mi_->number_x_pixel() ||
+     Scratch_count.rows() != mi_->number_y_pixel() ||
+     Scratch_count.cols() != mi_->number_x_pixel())
+    throw Exception("Rad_res or Scratch_count is the wrong size");
+  for(int i = 0; i < Ray_cast_res.extent(0); ++i)
+    for(int j = 0; j < Ray_cast_res.extent(1); ++j)
+      for(int k1 = 0; k1 < Ray_cast_res.extent(2); ++k1)
+	for(int k2 = 0; k2 < Ray_cast_res.extent(3); ++k2)
+	  for(int k3 = 0; k3 < Ray_cast_res.extent(4); ++k3) {
+	    int ln = Ray_cast_res(i,j,k1,k2,k3,0);
+	    int smp = Ray_cast_res(i,j,k1,k2,k3,1);
+	    if(ln >=0 && ln < Rad_res.rows() &&
+	       smp >= 0 && smp < Rad_res.cols()) {
+	      range_check(i, 0, Input_img.number_line());
+	      range_check(j, 0, Input_img.number_sample());
+	      Rad_res(ln, smp) += Input_img.unchecked_read_double(i, j);
+	      Scratch_count(ln, smp) += 1;
+	    }
+	  }
+  for(int i = 0; i < Rad_res.rows(); ++i)
+    for(int j = 0; j < Rad_res.cols(); ++j)
+      if(Scratch_count(i,j) >0)
+	Rad_res(i, j) /= Scratch_count(i, j);
+}

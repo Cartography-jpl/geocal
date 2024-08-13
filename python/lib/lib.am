@@ -15,6 +15,7 @@ geocalpkgpython_PYTHON+= @srcpythonlib@/isis_igc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/spice_igc.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/safe_matplotlib_import.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/misc.py
+geocalpkgpython_PYTHON+= @srcpythonlib@/gaussian_stretch.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/igc_collection_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/igc_msp_extension.py
 geocalpkgpython_PYTHON+= @srcpythonlib@/ray_caster_resampler_extension.py

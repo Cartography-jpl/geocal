@@ -39,7 +39,17 @@ Options:
        comparing against an existing image/DEM.
 
   --number-process=n
-       Number of processors to use. [default: 1]
+      Number of processors to use. [default: 1]
+
+  --number-sub-line=n
+       Number of subpixels in the line direction. We normally calculate this from
+       the resolution, but this can leave holes particularly if the pixel size on the
+       ground isn't constant. This manually overrides this value. [default: -1]
+
+  --number-sub-sample=n
+       Number of subpixels in the line direction. We normally calculate this from
+       the resolution, but this can leave holes particularly if the pixel size on the
+       ground isn't constant. This manually overrides this value. [default: -1]
 
   --process-number-line=n
        Number of lines to include in each tile that we work on. This 
@@ -122,4 +132,8 @@ else:
     process_nline = int(math.ceil(float(igc.number_line) / args.number_process))
 geocal.ray_caster_project(args.vicar_output, igc, mi, pool=pool,
                           dtype=dtype,
-                          nline_process = process_nline)
+                          nline_process = process_nline,
+                          nsub_line = args.number_sub_line,
+                          nsub_sample = args.number_sub_sample)
+if(pool):
+    pool.close()

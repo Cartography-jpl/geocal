@@ -7,10 +7,10 @@
 #include "raster_averaged.h"
 #include "image_ground_connection.h"
 %}
-%base_import(calc_raster)
-%base_import(calc_raster_multi_band)
 %base_import(image_mask)
 %base_import(image_ground_connection)
+%base_import(calc_raster)
+%base_import(calc_raster_multi_band)
 %geocal_shared_ptr(GeoCal::RasterAveraged);
 %geocal_shared_ptr(GeoCal::RasterAveragedMultiBand);
 %geocal_shared_ptr(GeoCal::ImageMaskAveraged);

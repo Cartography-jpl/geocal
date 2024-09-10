@@ -133,12 +133,13 @@ def _new_from_set(cls, version, *args):
     inst.set(*args)
     return inst
 
-import geocal_swig.calc_raster
-import geocal_swig.raster_image_variable
-import geocal_swig.raster_image
+import geocal_swig.image_mask
 import geocal_swig.generic_object
+import geocal_swig.image_ground_connection
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
+import geocal_swig.calc_raster
+import geocal_swig.raster_image_variable
 import geocal_swig.calc_raster_multi_band
 class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
     r"""
@@ -280,7 +281,7 @@ class RasterAveragedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMulti
 
 # Register RasterAveragedMultiBand in _raster_averaged:
 _raster_averaged.RasterAveragedMultiBand_swigregister(RasterAveragedMultiBand)
-class ImageMaskAveraged(object):
+class ImageMaskAveraged(geocal_swig.image_mask.ImageMask):
     r"""
 
     Take an existing image mask, and averages it like RasterAveraged.
@@ -332,7 +333,7 @@ class ImageMaskAveraged(object):
 
 # Register ImageMaskAveraged in _raster_averaged:
 _raster_averaged.ImageMaskAveraged_swigregister(ImageMaskAveraged)
-class AveragedImageGroundConnection(object):
+class AveragedImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
     This takes an existing ImageGroundConnection and it averages the

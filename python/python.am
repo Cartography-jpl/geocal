@@ -79,7 +79,7 @@ INSTALLCHECK_HOOK+= python_check
 replace_python_shebang: replace_python_shebang1 replace_python_shebang2
 
 replace_python_shebang1: install-dist_binSCRIPTS
-	flist=`grep --binary-files=without-match '#!' -R $(bindir) | grep python | sed s/:.*//g` ; \
+	flist=`grep --binary-files=without-match '#!' $(addprefix $(bindir)/,$(notdir $(dist_bin_SCRIPTS))) | grep python | sed s/:.*//g` ; \
         for i in $$flist; do \
            mv -f $$i $$i.old; \
            echo "#!/bin/bash" > $$i; \
@@ -90,7 +90,7 @@ replace_python_shebang1: install-dist_binSCRIPTS
          done
 
 replace_python_shebang2: install-dist_afidspythonvdevSCRIPTS
-	flist=`grep --binary-files=without-match '#!' -R $(afidspythonvdevdir) | grep python | sed s/:.*//g` ; \
+	flist=`grep --binary-files=without-match '#!' $(addprefix $(afidspythonvdevdir)/,$(notdir $(dist_afidspythonvdev_SCRIPTS))) | grep python | sed s/:.*//g` ; \
         for i in $$flist; do \
           mv -f $$i $$i.old; \
           echo "#!/bin/bash" > $$i; \

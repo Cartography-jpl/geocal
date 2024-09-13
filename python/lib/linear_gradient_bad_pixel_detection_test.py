@@ -42,7 +42,7 @@ def test_bad_pixel_fill():
     for i in range(original_data.shape[0]):
         original_data[i, :] = fill_data + fill_data[i]
     data_with_bad_pixel = original_data.copy()
-    mask = np.empty((sz,sz))
+    mask = np.empty((sz,sz), dtype=bool)
     mask[:,:] = False
     data_with_bad_pixel[10:16,20:31] = -9999
     mask[10:16,20:31] = True
@@ -123,7 +123,7 @@ def test_timing_bad_pixel_fill():
     for i in range(original_data.shape[0]):
         original_data[i, :] = fill_data + fill_data[i]
     data_with_bad_pixel = original_data.copy()
-    mask = np.empty((sz,sz))
+    mask = np.empty((sz,sz), dtype=bool)
     mask[:,:] = False
     # Really large area to fill, just so we test the timing
     data_with_bad_pixel[10:116,20:131] = -9999
@@ -133,6 +133,6 @@ def test_timing_bad_pixel_fill():
     m.fill_missing_data()
     print(f"Time: {timeit.default_timer()-start_time}")
     # Don't worry about results, filling most of the image is pretty hokey and likely
-    # won't work all that wll
+    # won't work all that well
     #assert np.median(np.abs(original_data[10:16,20:31] - m.filled_image[10:16,20:31])) < 0.2
     

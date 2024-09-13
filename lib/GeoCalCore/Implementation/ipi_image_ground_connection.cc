@@ -96,8 +96,7 @@ IpiImageGroundConnection::cf_look_vector_arr
     for(int j = 0; j < nsamp; ++j) 
       for(int i2 = 0; i2 < nsubpixel_line; ++i2)
 	for(int j2 = 0; j2 < nsubpixel_sample; ++j2) {
-	  const ScLookVector& slv = 
-	    sc_look_vector_cache[i_ind][j + smp_start][i2][j2];
+	  auto slv = sc_look_vector_cache[i_ind][j + smp_start][i2][j2];
 	  for(int k = 0; k < nintegration_step; ++k) {
 	    lv = od[k]->cf_look_vector(slv);
 	    for(int k2 = 0; k2 < 3; ++k2) {

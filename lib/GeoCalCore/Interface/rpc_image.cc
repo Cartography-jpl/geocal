@@ -6,7 +6,6 @@
 #include "simple_dem.h"
 #include <cmath>
 #include <boost/foreach.hpp>
-#include <boost/timer.hpp>
 #include <fstream>
 #include "image_point_display.h"
 using namespace GeoCal;
@@ -179,11 +178,9 @@ void RpcImage::set_ref_img(const RasterImage& Ref_img,
 void RpcImage::interest_point(const FeatureDetector& Fd, const GroundMask& M,
 	            int Feature_grid_space)
 {
-  std::cerr << "Starting Interest Points. Elapsed time: " << tmr.elapsed() << " s.\n";
   ip_grid = Fd.interest_point_grid(*ref_img, M,
 		(int) ceil(ref_img->number_line() / Feature_grid_space),
 		(int) ceil(ref_img->number_sample() / Feature_grid_space));
-  std::cerr << "Interest point done. Elapsed time: " << tmr.elapsed() << " s.\n";
 }
 
 //-----------------------------------------------------------------------
@@ -245,7 +242,6 @@ double RpcImage::match(const RasterImage& New_img,
     }
   }
   dist_ave /= ic.size();
-  std::cerr << "Matching done. Elapsed time: " << tmr.elapsed() << " s.\n";
   return dist_ave;
 }
 
@@ -315,7 +311,6 @@ void RpcImage::fit(const RasterImage& Ref_img,
 		   bool Blunder_detect
 		   )
 {
-  tmr.restart();
   // Keep original MapInfo information. We'll update this as we go
   // along, and then put it back when done.
   boost::shared_ptr<MapInfo> map_info_original(new MapInfo(map_info()));
@@ -327,7 +322,6 @@ void RpcImage::fit(const RasterImage& Ref_img,
   double dist = Max_diff;
   int max_iter = 10;
   for(int i = 0; i < max_iter && dist > Match_search * ref_img_res; ++i) {
-    std::cerr << "Starting iteration " << i + 1 << " of coarse fit. Elapsed time: " << tmr.elapsed() << " s.\n";
     map_info_bounding_update();
     dist = fit_coarse(Ref_img, Fd, M, Coarse_im, dist, Match_search, 
 		      Feature_grid_space);
@@ -340,14 +334,11 @@ void RpcImage::fit(const RasterImage& Ref_img,
   set_ref_img(Ref_img, *this);
   interest_point(Fd, M, Feature_grid_space);
   for(int i = 0; i < max_iter && dist_last / dist > 1.05; ++i) {
-    std::cerr << "Starting iteration " << i + 1 << " of fine fit. Elapsed time: " << tmr.elapsed() << " s.\n";
     dist_last = dist;
     map_info_bounding_update();
     dist = fit_fine(Fine_im, Blunder_threshold, Chisq_threshold, 
 		    Blunder_detect);
   }
-  std::cerr << "Done with RpcImage::fit. Elapsed time: " << tmr.elapsed() 
-	    << " s.\n";
   ImagePointDisplay distimg("dist.img", "hfa", map_info(), GDT_UInt16);
   ImagePointDisplay lineimg("line.img", "hfa", map_info(), GDT_UInt16);
   ImagePointDisplay sampimg("samp.img", "hfa", map_info(), GDT_UInt16);
@@ -434,10 +425,8 @@ double RpcImage::fit_coarse(const RasterImage& Ref_img,
   std::cerr << "Average factor: " << average_factor << "\n";
   RasterAveraged ref_img_avg(const_pointer(Ref_img), 
 			     average_factor, average_factor);
-  std::cerr << "Ref average done. Elapsed time: " << tmr.elapsed() << " s.\n";
   RpcImage new_img(raw_img_, *rpc_, dem_, ref_img_avg.map_info());
   new_img.map_info_bounding_update();
-  std::cerr << "New average done. Elapsed time: " << tmr.elapsed() << " s.\n";
 
 // Scale feature grid space to the size we are working with, but
 // don't let it get smaller than 10.
@@ -467,7 +456,6 @@ double RpcImage::fit_coarse(const RasterImage& Ref_img,
   std::cerr << "90% <= :      " << dist[dist.size() * 9 / 10] << " m\n";
   std::cerr << "Minimum diff: " << dist.front() << " m\n";
   std::cerr << "Maximum diff: " << dist.back() << " m\n";
-  std::cerr << "Fit done. Elapsed time: " << tmr.elapsed() << " s.\n";
   return dist_ave;
 }
 

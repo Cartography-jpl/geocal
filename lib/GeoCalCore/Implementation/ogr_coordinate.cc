@@ -92,12 +92,16 @@ void OgrWrapper::init_naif()
   // we have a coordinate system with a spherical mars model. See
   // Issue #19 in github for details on this.
   add_spatial_reference("mars", PlanetConstant::MARS_NAIF_CODE, wkt);
+  // Newer version of gdal (3.9) doesn't seem to like a flattening
+  // between 0 and 1. This is pretty close to sphere, but for now just
+  // comment this out. We can try to sort this out if we actually need
+  // to work with CERES data again.
   wkt = "GEOGCS[\"GCS_CERES\",\
     DATUM[\"D_CERES\",\
         SPHEROID[\"CERES\",487300,0.0668992407141]],\
     PRIMEM[\"Reference_Meridian\",0],\
     UNIT[\"Decimal_Degree\",0.0174532925199433]]";
-  add_spatial_reference("ceres", PlanetConstant::CERES_NAIF_CODE, wkt);
+  //add_spatial_reference("ceres", PlanetConstant::CERES_NAIF_CODE, wkt);
   wkt = "GEOGCS[\"Moon 2000\",\
     DATUM[\"D_Moon_2000\",\
         SPHEROID[\"Moon_2000_IAU_IAG\",1737400,0]],\

@@ -373,7 +373,7 @@ public:
   {
     fnames_.push_back(Fname);
     GdalRegister::gdal_register();
-    data_set = gdal_openex(Fname, Update, Allowed_drivers, Open_options, Sibling_files);
+    data_set_ = gdal_openex(Fname, Update, Allowed_drivers, Open_options, Sibling_files);
     initialize(Band_id, Number_tile, Tile_number_line, Tile_number_sample);
   }
   

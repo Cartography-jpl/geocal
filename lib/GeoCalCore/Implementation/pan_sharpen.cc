@@ -7,7 +7,6 @@
 #include "map_info_image_ground_connection.h"
 #include "sub_raster_image_multi_band.h"
 #include "statistic.h"
-#include <boost/progress.hpp>
 using namespace GeoCal;
 using namespace blitz;
 
@@ -247,11 +246,6 @@ bool Log_progress)
   if(Log_progress)
     std::cout << "Calculating statistics on multispectral image:\n";
   mul_stat = mulsub.get();
-  boost::shared_ptr<boost::progress_display> disp;
-  if(Log_progress)
-    disp.reset(new boost::progress_display
-	       (mul_stat->raster_image(0).number_line() * 
-		mul_stat->raster_image(0).number_sample()));
   for(RasterImageTileIterator i(mul_stat->raster_image(0)); !i.end(); ++i) {
     Array<double, 3> tl = mul_stat->read_double(i.istart(), i.jstart(),
 			     i.number_line(), i.number_sample());
@@ -260,25 +254,18 @@ bool Log_progress)
     for(int j = 0; j < i.number_line(); ++j)
       for(int k = 0; k < i.number_sample(); ++k) {
 	isq_stat += isq(j, k);
-	if(disp)
-	  *disp += 1;
       }
   }
   RasterImage* pan_stat = 0;
   if(Log_progress)
     std::cout << "Calculating statistics on pan image:\n";
   pan_stat = pansub.get();
-  if(Log_progress)
-    disp.reset(new boost::progress_display
-	       (pan_stat->number_line() * pan_stat->number_sample()));
   for(RasterImageTileIterator i(*pan_stat); !i.end(); ++i) {
     Array<double, 2> tl = pan_stat->read_double(i.istart(), i.jstart(),
 			     i.number_line(), i.number_sample());
     for(int j = 0; j < i.number_line(); ++j)
       for(int k = 0; k < i.number_sample(); ++k) {
 	psq_stat += tl(j, k) * tl(j, k);
-	if(disp)
-	  *disp += 1;
       }
   }
 

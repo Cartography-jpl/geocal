@@ -329,7 +329,7 @@ void Ipi::time(const GroundCoordinate& Gp, Time& Tres, FrameCoordinate& Fres,
 //-----------------------------------------------------------------------
 
   double true_sol = 0;
-  FrameCoordinate fc_sol;
+  FrameCoordinate fc_sol(-1,-1);
   int num_sol = 0;
   BOOST_FOREACH(double x, sol) {
     if(!eq.false_root(x)) {

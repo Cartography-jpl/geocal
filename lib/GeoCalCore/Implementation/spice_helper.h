@@ -8,8 +8,6 @@
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
 #include <sys/types.h>
-// This won't be needed once version 3 becomes the default for boost filesystem
-#define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem.hpp>
 
 namespace GeoCal {
@@ -184,7 +182,7 @@ public:
 class SpicePlanetConstant {
 public:
   SpicePlanetConstant(int Naif_code=-1) 
-  : naif_code(Naif_code), filled_in(false) {}
+    : naif_code(Naif_code), filled_in(false), a(0.0), b(0.0), esq(0.0) {}
 
 //-----------------------------------------------------------------------
 /// Planet equatorial radius, in meters

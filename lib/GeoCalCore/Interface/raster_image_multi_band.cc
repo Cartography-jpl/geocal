@@ -1,7 +1,6 @@
 #include "raster_image_multi_band.h"
 #include "raster_image_multi_band_variable.h"
 #include "sub_raster_image.h"
-#include <boost/progress.hpp>
 #include "geocal_serialize_support.h"
 using namespace GeoCal;
 using namespace blitz;
@@ -154,14 +153,6 @@ void GeoCal::copy(const RasterImageMultiBand& Img_in,
        Img_out.raster_image(i).number_sample() != 
        Img_in.raster_image(0).number_sample())
       throw Exception("Images need to be the same size");
-  boost::shared_ptr<boost::progress_display> disp;
-  if(Log_progress) {
-    int count = 0;
-    for(RasterImageTileIterator i(Img_in.raster_image(0));
-	!i.end(); ++i)
-      ++count;
-    disp.reset(new boost::progress_display(count));
-  }
   for(RasterImageTileIterator i(Img_in.raster_image(0));
       !i.end(); ++i) {
     if(Img_in.copy_needs_double())
@@ -172,8 +163,6 @@ void GeoCal::copy(const RasterImageMultiBand& Img_in,
       Img_out.write(i.istart(), i.jstart(), 
 		    Img_in.read(i.istart(), i.jstart(),
 				i.number_line(), i.number_sample()));
-    if(disp)
-      *disp +=1;
   }
 }
 

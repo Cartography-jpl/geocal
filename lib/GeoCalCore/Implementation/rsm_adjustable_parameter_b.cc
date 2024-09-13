@@ -116,7 +116,7 @@ void RsmBParameterDesc::rsm_b_parm_read_tre_string(std::istream& In)
   cconv = boost::make_shared<LocalRcConverter>(lp);
   std::string apbase = read_size<std::string>(In, 1);
   if(aptype == "I") {
-    int nisap = read_size<int>(In, 2);
+    int nisap __attribute__((unused)) = read_size<int>(In, 2);
     int nisapr = read_size<int>(In, 2);
     row_power_.resize(nisapr, 3);
     for(int i = 0; i < nisapr; ++i) {

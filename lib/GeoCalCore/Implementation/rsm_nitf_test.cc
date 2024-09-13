@@ -17,7 +17,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
   rsm_write_nitf("test_out/rsm_out.ntf", rsm);
   boost::shared_ptr<Rsm> rsmr = rsm_read_nitf("test_out/rsm_out.ntf",
 					      Ecr::EARTH_NAIF_CODE);
-  std::cerr << *rsmr << "\n";
+  // std::cerr << *rsmr << "\n";
 }
 
 BOOST_AUTO_TEST_SUITE_END()

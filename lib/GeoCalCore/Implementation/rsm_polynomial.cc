@@ -272,7 +272,7 @@ blitz::Array<double, 1> RsmPolynomial::jacobian
 (double X, double Y, double Z) const
 {
   Array<double, 1> res(3);
-  res = 0;
+  res = 0.0;
   firstIndex i1; secondIndex i2; thirdIndex i3;
   Array<double, 1> xpow(coefficient_.rows());
   Array<double, 1> ypow(coefficient_.cols());

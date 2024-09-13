@@ -378,7 +378,8 @@ bool RsmId::in_ground_domain(const GroundCoordinate& Gc) const
   boost::array<double, 3> v4 = v[3];
   boost::array<double, 3> v5 = v[4];
   boost::array<double, 3> v6 = v[5];
-  boost::array<double, 3> v7 = v[6];
+  // Not actually used below, comment out so we don't get a warning
+  // boost::array<double, 3> v7 = v[6]; 
   boost::array<double, 3> v8 = v[7];
   // Equation 1
   if(!ground_domain_test(x,v2,v4,v1)) {

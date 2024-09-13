@@ -1,6 +1,5 @@
 #include "raster_image.h"
 #include <iostream>
-#include <boost/progress.hpp>
 #include <boost/make_shared.hpp>
 #include "geocal_serialize_support.h"
 
@@ -272,9 +271,6 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
     tns = Tile_nsamp;
   int ntile = int(ceil(double(Img_out.number_line()) / tnl) *
 		  ceil(double(Img_out.number_sample()) / tns));
-  boost::shared_ptr<boost::progress_display> dp;
-  if(Diagnostic)
-    dp = boost::make_shared<boost::progress_display>(ntile);
   std::vector<int> buf;
   if(!Img_in.copy_needs_double())
     buf.resize(tnl * tns);
@@ -282,8 +278,6 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
       istart += tnl)
     for(int jstart = 0; jstart < Img_out.number_sample();
 	jstart += tns) {
-      if(dp)
-	++(*dp);
       int nl = std::min(tnl, Img_out.number_line() - istart);
       int ns = std::min(tns, Img_out.number_sample() - jstart);
       if(Img_in.copy_needs_double())
@@ -358,15 +352,10 @@ void GeoCal::fill_image
     tns = Tile_nsamp;
   int ntile = int(ceil(double(Img.number_line()) / tnl) *
 		  ceil(double(Img.number_sample()) / tns));
-  boost::shared_ptr<boost::progress_display> dp;
-  if(Diagnostic)
-    dp = boost::make_shared<boost::progress_display>(ntile);
   for(int istart = 0; istart < Img.number_line();
       istart += tnl)
     for(int jstart = 0; jstart < Img.number_sample();
 	jstart += tns) {
-      if(dp)
-	++(*dp);
       for(int i = istart; i < Img.number_line() && i < istart + tnl; ++i)
 	for(int j = jstart; j < Img.number_sample() && j < jstart + tns; 
 	    ++j) {

@@ -7,7 +7,6 @@
 #include "ccorr_lsm_matcher.h"
 #include "forstner_feature_detector.h"
 #include "ground_mask.h"
-#include <boost/timer.hpp>
 
 namespace GeoCal {
 /****************************************************************//**
@@ -165,7 +164,6 @@ public:
   const RasterImage& img_avg() const {return *img_avg_;}
   virtual bool copy_needs_double() const {return raw_img_->copy_needs_double();}
 private:
-  boost::timer tmr;
   boost::shared_ptr<Dem> dem_;		   ///< DEM.
   boost::shared_ptr<RasterImage> raw_img_; ///< Raw image
   boost::shared_ptr<RasterImage> img_avg_; 

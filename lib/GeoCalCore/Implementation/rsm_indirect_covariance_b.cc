@@ -105,7 +105,7 @@ RsmIndirectCovarianceB::read_tre_string(const std::string& Tre_in)
   std::string inclic = read_size<std::string>(in, 1);
   std::string incluc = read_size<std::string>(in, 1);
   if(inclic == "Y") {
-    int norgparm = read_size<int>(in, 2);
+    int norgparm __attribute__((unused)) = read_size<int>(in, 2);
     int num_subgroup = read_size<int>(in, 2);
     res->cvdate = read_size<std::string>(in, 8);
     boost::trim(res->cvdate);

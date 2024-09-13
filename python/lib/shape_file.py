@@ -9,6 +9,7 @@ try:
         warnings.filterwarnings("ignore",category=DeprecationWarning)
         import osgeo.ogr as ogr
         import osgeo.osr as osr
+    osr.UseExceptions()
     have_shape_file = True
 except ImportError:
     have_shape_file = False

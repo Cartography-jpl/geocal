@@ -293,11 +293,14 @@ class TiePointCollect(object):
                 for smp in range(border, nsamp - border, step_samp):
                     gp = aoi.ground_coordinate(smp, ln)
                     gp = dem.surface_point(gp)
-                    ic1 = self.igc_collection.image_coordinate(
-                       self.base_image_index, gp)
-                    ic1.line = round(ic1.line)
-                    ic1.sample = round(ic1.sample)
-                    iplist.append(ic1)
+                    try:
+                        ic1 = self.igc_collection.image_coordinate(
+                            self.base_image_index, gp)
+                        ic1.line = round(ic1.line)
+                        ic1.sample = round(ic1.sample)
+                        iplist.append(ic1)
+                    except RuntimeError:
+                        pass
         else:
             fd = ForstnerFeatureDetector()
             log.info("Starting interest point")

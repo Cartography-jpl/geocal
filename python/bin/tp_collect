@@ -49,6 +49,10 @@ Options:
        collect tiepoints with images 0, 3, 6, 9, 10 as the base image. If
        you also specify "--gcp", we in addition collect gcps. [default: 0]
 
+  --grid-border=n
+       Border to use, so we don't look for tiepoints too close to the edge
+       of the image. [default: 100]
+
   --feature-match 
        Use feature matching instead of image matching. If
        you also specify "--gcp", we in addition collect GCPs. 
@@ -168,6 +172,10 @@ Options:
        should all be at the same resolution, although it doesn't need to
        have the same coverage.
 
+  --surface-image-aoi
+       Sometimes the ForstnerFeatureDetector doesn't select good points. As an
+       alternative, we can just use a regular grid in the surface-image space.
+
   --verbose
        Print more information as we run.
 
@@ -199,7 +207,12 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
        dem = geocal.read_shelve(args.reference_dem)
     else:
        dem = igc.dem(0)
-           
+    border=args.grid_border
+    if(args.surface_image_aoi):
+        aoi = surface_image[args.base_image_index].map_info
+    else:
+        aoi = None    
+    
     if(args.base_image_spacing):
         for i in range(0, igc.number_image, args.base_image_spacing):
             log.info("Adding base image %d" % i)
@@ -264,7 +277,9 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
         log.info("---------------------------------------------------------")
         log.info(msg[i])
         log.info("---------------------------------------------------------")
-        tpres, diag = tpcol.tie_point_grid(numx, numy, pool = pool,
+        tpres, diag = tpcol.tie_point_grid(numx, numy, aoi=aoi,
+                                           dem=dem,
+                                           border=border, pool = pool,
                                            diagnostic=diag)
         tparr.extend(tpres)
     return tparr, diag

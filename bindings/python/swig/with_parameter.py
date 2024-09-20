@@ -258,7 +258,41 @@ class WithParameterNested(WithParameter):
 
 # Register WithParameterNested in _with_parameter:
 _with_parameter.WithParameterNested_swigregister(WithParameterNested)
+class WithParameterShare(WithParameter):
+    r"""
 
-__all__ = ["WithParameter","WithParameterNested"]
+    Another issues that arises (in particular when having IgcCollection
+    across multiple orbits, e.g.
+
+    camera calibration for EcostressIgcCollection) is to have multiple
+    objects that should all have the same parameter set. This handles that
+    case.
+
+    C++ includes: with_parameter.h 
+    """
+
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined")
+    __repr__ = _swig_repr
+    add_object = _swig_new_instance_method(_with_parameter.WithParameterShare_add_object)
+    clear_object = _swig_new_instance_method(_with_parameter.WithParameterShare_clear_object)
+    _v_parameter_mask = _swig_new_instance_method(_with_parameter.WithParameterShare__v_parameter_mask)
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
+    @parameter_mask.setter
+    def parameter_mask(self, value):
+      self._v_parameter_mask(value)
+
+    __swig_destroy__ = _with_parameter.delete_WithParameterShare
+
+# Register WithParameterShare in _with_parameter:
+_with_parameter.WithParameterShare_swigregister(WithParameterShare)
+
+__all__ = ["WithParameter","WithParameterNested","WithParameterShare"]
 
 

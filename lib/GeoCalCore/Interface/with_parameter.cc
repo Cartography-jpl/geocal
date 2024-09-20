@@ -16,12 +16,26 @@ template<class Archive>
 void WithParameterNested::serialize
 (Archive & ar, const unsigned int UNUSED(version))
 {
+  GEOCAL_GENERIC_BASE(WithParameter);
   GEOCAL_GENERIC_BASE(WithParameterNested);
+  GEOCAL_BASE(WithParameterNested, WithParameter);
   ar & GEOCAL_NVP(obj_list);
+}
+
+template<class Archive>
+void WithParameterShare::serialize
+(Archive & ar, const unsigned int UNUSED(version))
+{
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_GENERIC_BASE(WithParameterShare);
+  GEOCAL_BASE(WithParameterShare, WithParameter);
+  ar & GEOCAL_NVP(obj_list)
+    & GEOCAL_NVP_(parameter_mask);
 }
 
 GEOCAL_IMPLEMENT(WithParameter);
 GEOCAL_IMPLEMENT(WithParameterNested);
+GEOCAL_IMPLEMENT(WithParameterShare);
 #endif
 
 //-----------------------------------------------------------------------
@@ -235,4 +249,61 @@ blitz::Array<bool, 1> WithParameterNested::parameter_mask() const
     }
   }
   return res;
+}
+
+void WithParameterShare::add_object(const boost::shared_ptr<WithParameter>& Obj)
+{
+  obj_list.push_back(Obj);
+  if(obj_list.size() == 1)
+    parameter_mask_.reference(Obj->parameter_mask().copy());
+}
+
+blitz::Array<double, 1> WithParameterShare::parameter() const
+{
+  if(obj_list.size() == 0)
+    throw Exception("Need to have at least one object in WithParameterShare");
+  return obj_list[0]->parameter();
+}
+
+void WithParameterShare::parameter(const blitz::Array<double, 1>& Parm)
+{
+  if(obj_list.size() == 0)
+    throw Exception("Need to have at least one object in WithParameterShare");
+  for(auto obj : obj_list)
+    obj->parameter(Parm);
+}
+
+ArrayAd<double, 1> WithParameterShare::parameter_with_derivative() const
+{
+  if(obj_list.size() == 0)
+    throw Exception("Need to have at least one object in WithParameterShare");
+  return obj_list[0]->parameter_with_derivative();
+}
+
+void WithParameterShare::parameter_with_derivative
+(const ArrayAd<double, 1>& Parm)
+{
+  if(obj_list.size() == 0)
+    throw Exception("Need to have at least one object in WithParameterShare");
+  for(auto obj : obj_list)
+    obj->parameter_with_derivative(Parm);
+}
+
+std::vector<std::string> WithParameterShare::parameter_name() const
+{
+  if(obj_list.size() == 0)
+    throw Exception("Need to have at least one object in WithParameterShare");
+  return obj_list[0]->parameter_name();
+}
+
+blitz::Array<bool, 1> WithParameterShare::parameter_mask() const
+{
+  return parameter_mask_;
+}
+
+void WithParameterShare::parameter_mask(const blitz::Array<bool, 1>& M)
+{
+  if(M.rows() != parameter().rows())
+    throw Exception("M is wrong size");
+  parameter_mask_.reference(M.copy());
 }

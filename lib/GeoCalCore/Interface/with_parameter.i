@@ -10,6 +10,7 @@
 %import "array_ad.i"
 %geocal_shared_ptr(GeoCal::WithParameter);
 %geocal_shared_ptr(GeoCal::WithParameterNested);
+%geocal_shared_ptr(GeoCal::WithParameterShare);
 namespace GeoCal {
 // Allow this class to be derived from in Python.
 %feature("director") WithParameter;
@@ -36,6 +37,14 @@ public:
   void clear_object();
 };
 
+class WithParameterShare: public WithParameter {
+public:
+  WithParameterNested();
+  void add_object(const boost::shared_ptr<WithParameter>& Obj);
+  void clear_object();
+  %python_attribute_with_set_virtual(parameter_mask, blitz::Array<bool, 1>);
+};
+  
 }
 
 // Extra code for handling boost serialization/python pickle of
@@ -43,4 +52,4 @@ public:
 %geocal_director_serialization(with_parameter, WithParameter)
 
 // List of things "import *" will include
-%python_export("WithParameter", "WithParameterNested")
+%python_export("WithParameter", "WithParameterNested", "WithParameterShare")

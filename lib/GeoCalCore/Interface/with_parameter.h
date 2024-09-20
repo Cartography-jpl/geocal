@@ -124,8 +124,37 @@ private:
   void serialize(Archive & ar, const unsigned int version);
 };
 
+/****************************************************************//**
+  Another issues that arises (in particular when having IgcCollection
+  across multiple orbits, e.g. camera calibration for
+  EcostressIgcCollection) is to have multiple objects that should all
+  have the same parameter set. This handles that case.
+*******************************************************************/
+
+class WithParameterShare : public virtual WithParameter {
+public:
+  WithParameterShare() {}
+  virtual ~WithParameterShare() {}
+  void add_object(const boost::shared_ptr<WithParameter>& Obj);
+  void clear_object() { obj_list.resize(0); }
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
+  virtual blitz::Array<bool, 1> parameter_mask() const;
+  virtual void parameter_mask(const blitz::Array<bool, 1>& M);
+private:
+  std::vector<boost::shared_ptr<WithParameter> > obj_list;
+  blitz::Array<bool, 1> parameter_mask_;
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
+  
 }
 GEOCAL_EXPORT_KEY(WithParameter);
 GEOCAL_EXPORT_KEY(WithParameterNested);
+GEOCAL_EXPORT_KEY(WithParameterShare);
 #endif
 

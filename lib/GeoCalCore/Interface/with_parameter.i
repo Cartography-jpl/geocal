@@ -39,7 +39,7 @@ public:
 
 class WithParameterShare: public WithParameter {
 public:
-  WithParameterNested();
+  WithParameterShare();
   void add_object(const boost::shared_ptr<WithParameter>& Obj);
   void clear_object();
   %python_attribute_with_set_virtual(parameter_mask, blitz::Array<bool, 1>);

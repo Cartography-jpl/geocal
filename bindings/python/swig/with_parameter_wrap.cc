@@ -8701,6 +8701,30 @@ SWIGINTERN PyObject *WithParameterNested_swiginit(PyObject *SWIGUNUSEDPARM(self)
   return SWIG_Python_InitShadowInstance(args);
 }
 
+SWIGINTERN PyObject *_wrap_new_WithParameterShare(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::WithParameterShare *result = 0 ;
+  
+  if (!SWIG_Python_UnpackTuple(args, "new_WithParameterShare", 0, 0, 0)) SWIG_fail;
+  {
+    try {
+      result = (GeoCal::WithParameterShare *)new GeoCal::WithParameterShare();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::WithParameterShare > *smartresult = result ? new boost::shared_ptr<  GeoCal::WithParameterShare >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__WithParameterShare_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_WithParameterShare_add_object(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::WithParameterShare *arg1 = (GeoCal::WithParameterShare *) 0 ;
@@ -9010,6 +9034,10 @@ SWIGINTERN PyObject *WithParameterShare_swigregister(PyObject *SWIGUNUSEDPARM(se
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *WithParameterShare_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  return SWIG_Python_InitShadowInstance(args);
+}
+
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
@@ -9111,6 +9139,11 @@ static PyMethodDef SwigMethods[] = {
 		""},
 	 { "WithParameterNested_swigregister", WithParameterNested_swigregister, METH_O, NULL},
 	 { "WithParameterNested_swiginit", WithParameterNested_swiginit, METH_VARARGS, NULL},
+	 { "new_WithParameterShare", _wrap_new_WithParameterShare, METH_NOARGS, "\n"
+		"\n"
+		"GeoCal::WithParameterShare::WithParameterShare()\n"
+		"\n"
+		""},
 	 { "WithParameterShare_add_object", _wrap_WithParameterShare_add_object, METH_VARARGS, "\n"
 		"\n"
 		"void WithParameterShare::add_object(const boost::shared_ptr< WithParameter > &Obj)\n"
@@ -9132,6 +9165,7 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		""},
 	 { "WithParameterShare_swigregister", WithParameterShare_swigregister, METH_O, NULL},
+	 { "WithParameterShare_swiginit", WithParameterShare_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
@@ -9236,6 +9270,11 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		""},
 	 { "WithParameterNested_swigregister", WithParameterNested_swigregister, METH_O, NULL},
 	 { "WithParameterNested_swiginit", WithParameterNested_swiginit, METH_VARARGS, NULL},
+	 { "new_WithParameterShare", _wrap_new_WithParameterShare, METH_NOARGS, "\n"
+		"\n"
+		"GeoCal::WithParameterShare::WithParameterShare()\n"
+		"\n"
+		""},
 	 { "WithParameterShare_add_object", _wrap_WithParameterShare_add_object, METH_VARARGS, "\n"
 		"\n"
 		"void WithParameterShare::add_object(const boost::shared_ptr< WithParameter > &Obj)\n"
@@ -9257,6 +9296,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"\n"
 		""},
 	 { "WithParameterShare_swigregister", WithParameterShare_swigregister, METH_O, NULL},
+	 { "WithParameterShare_swiginit", WithParameterShare_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 

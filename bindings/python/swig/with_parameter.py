@@ -272,10 +272,15 @@ class WithParameterShare(WithParameter):
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
+
+    def __init__(self):
+        r"""
+
+        GeoCal::WithParameterShare::WithParameterShare()
+
+        """
+        _with_parameter.WithParameterShare_swiginit(self, _with_parameter.new_WithParameterShare())
     add_object = _swig_new_instance_method(_with_parameter.WithParameterShare_add_object)
     clear_object = _swig_new_instance_method(_with_parameter.WithParameterShare_clear_object)
     _v_parameter_mask = _swig_new_instance_method(_with_parameter.WithParameterShare__v_parameter_mask)

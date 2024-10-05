@@ -4791,6 +4791,22 @@ namespace swig {
 #endif  
 
 
+#ifndef CMAKE_KLUDGE_QUOTE  
+#define CMAKE_KLUDGE_Q(x) #x
+#define CMAKE_KLUDGE_QUOTE(x) CMAKE_KLUDGE_Q(x)
+#endif
+
+// CMAKE unfortunately uses a different name for the wrapper file that
+// the standard SWIG convention. So we set up CMAKE ot pass in a
+// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
+#ifndef CMAKE_SWIG_FILE_NAMES  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## _wrap.h)
+#else  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## PYTHON_wrap.h)
+#endif  
+  
+
+
 #include "geocal_autoderivative_quaternion.h"
 
 SWIGINTERN boost::math::quaternion< GeoCal::AutoDerivative< double > > boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_0(boost::math::quaternion< GeoCal::AutoDerivative< double > > *self,GeoCal::AutoDerivative< double > x){return (boost::math::quaternion<GeoCal::AutoDerivative< double > >(*self) += x); }

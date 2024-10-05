@@ -4799,6 +4799,22 @@ namespace swig {
 #endif  
 
 
+#ifndef CMAKE_KLUDGE_QUOTE  
+#define CMAKE_KLUDGE_Q(x) #x
+#define CMAKE_KLUDGE_QUOTE(x) CMAKE_KLUDGE_Q(x)
+#endif
+
+// CMAKE unfortunately uses a different name for the wrapper file that
+// the standard SWIG convention. So we set up CMAKE ot pass in a
+// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
+#ifndef CMAKE_SWIG_FILE_NAMES  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## _wrap.h)
+#else  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## PYTHON_wrap.h)
+#endif  
+  
+
+
 #include "with_parameter.h"
 
 
@@ -6237,19 +6253,7 @@ namespace swig {
       }
     
 
-#ifndef QUOTE  
-#define Q(x)#x
-#define QUOTE(x) Q(x)
-#endif
-  
-// CMAKE unfortunately uses a different name for the wrapper file that
-// the standard SWIG convention. So we set up CMAKE ot pass in a
-// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
-#ifndef CMAKE_SWIG_FILE_NAMES  
-#include QUOTE(with_parameter_wrap.h)
-#else  
-#include QUOTE(with_parameterPYTHON_wrap.h)
-#endif  
+#include CMAKE_KLUDGE_INCLUDE_HEADER(with_parameter)
   
 #include "geocal_serialize_support.h"
  namespace boost {

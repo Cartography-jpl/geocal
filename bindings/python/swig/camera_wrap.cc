@@ -4840,6 +4840,22 @@ namespace swig {
 #endif  
 
 
+#ifndef CMAKE_KLUDGE_QUOTE  
+#define CMAKE_KLUDGE_Q(x) #x
+#define CMAKE_KLUDGE_QUOTE(x) CMAKE_KLUDGE_Q(x)
+#endif
+
+// CMAKE unfortunately uses a different name for the wrapper file that
+// the standard SWIG convention. So we set up CMAKE ot pass in a
+// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
+#ifndef CMAKE_SWIG_FILE_NAMES  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## _wrap.h)
+#else  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## PYTHON_wrap.h)
+#endif  
+  
+
+
 #include "geocal_time.h"
 #include "camera.h"
 
@@ -6476,19 +6492,7 @@ SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator std_vect
 SWIGINTERN std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__insert__SWIG_0(std::vector< boost::shared_ptr< GeoCal::Camera > > *self,std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &x){ return self->insert(pos, x); }
 SWIGINTERN void std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__insert__SWIG_1(std::vector< boost::shared_ptr< GeoCal::Camera > > *self,std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos,std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n,std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &x){ self->insert(pos, n, x); }
 
-#ifndef QUOTE  
-#define Q(x)#x
-#define QUOTE(x) Q(x)
-#endif
-  
-// CMAKE unfortunately uses a different name for the wrapper file that
-// the standard SWIG convention. So we set up CMAKE ot pass in a
-// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
-#ifndef CMAKE_SWIG_FILE_NAMES  
-#include QUOTE(camera_wrap.h)
-#else  
-#include QUOTE(cameraPYTHON_wrap.h)
-#endif  
+#include CMAKE_KLUDGE_INCLUDE_HEADER(camera)
   
 #include "geocal_serialize_support.h"
  namespace boost {

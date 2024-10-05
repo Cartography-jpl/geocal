@@ -8069,6 +8069,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time_pop(PyObject *self, PyObject *args) {
   }
   {
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new std::vector< GeoCal::Time >::value_type((std::vector< GeoCal::Time >::value_type &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -11627,6 +11628,7 @@ SWIGINTERN PyObject *_wrap_TimeTable_image_coordinate(PyObject *self, PyObject *
   }
   {
     boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -11717,6 +11719,7 @@ SWIGINTERN PyObject *_wrap_TimeTable_image_coordinate_with_derivative(PyObject *
   }
   {
     boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative >(new GeoCal::ImageCoordinateWithDerivative((GeoCal::ImageCoordinateWithDerivative &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -12142,6 +12145,7 @@ SWIGINTERN PyObject *_wrap_TimeTable__v_min_time(PyObject *self, PyObject *args)
   }
   {
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -12188,6 +12192,7 @@ SWIGINTERN PyObject *_wrap_TimeTable__v_max_time(PyObject *self, PyObject *args)
   }
   {
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -12382,6 +12387,7 @@ SWIGINTERN PyObject *_wrap_TimeTable__v_parameter_with_derivative__SWIG_0(PyObje
   }
   {
     boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -12673,6 +12679,7 @@ SWIGINTERN PyObject *_wrap_TimeTable__v_parameter_with_derivative_subset__SWIG_0
   }
   {
     boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -13571,6 +13578,7 @@ SWIGINTERN PyObject *_wrap_MeasuredTimeTable_time_list(PyObject *self, PyObject 
   }
   {
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
   return resultobj;

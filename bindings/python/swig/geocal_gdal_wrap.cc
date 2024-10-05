@@ -5958,6 +5958,7 @@ SWIGINTERN PyObject *_wrap_GdalBase__v_map_info__SWIG_0(PyObject *self, Py_ssize
   }
   {
     boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo((GeoCal::MapInfo &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -6357,6 +6358,7 @@ SWIGINTERN PyObject *_wrap_GdalBase__v_rpc(PyObject *self, PyObject *args) {
   }
   {
     boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
   return resultobj;

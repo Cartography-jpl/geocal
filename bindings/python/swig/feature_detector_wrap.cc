@@ -9154,6 +9154,7 @@ SWIGINTERN PyObject *_wrap_Vector_InterestPoint_pop(PyObject *self, PyObject *ar
   }
   {
     boost::shared_ptr<  GeoCal::InterestPoint > *smartresult = new boost::shared_ptr<  GeoCal::InterestPoint >(new std::vector< GeoCal::InterestPoint >::value_type((std::vector< GeoCal::InterestPoint >::value_type &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__InterestPoint_t, SWIG_POINTER_OWN);
   }
   return resultobj;

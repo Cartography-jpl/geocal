@@ -7256,6 +7256,7 @@ SWIGINTERN PyObject *_wrap_SpiceDem__v_kernel_list(PyObject *self, PyObject *arg
   }
   {
     boost::shared_ptr<  GeoCal::SpiceKernelList > *smartresult = new boost::shared_ptr<  GeoCal::SpiceKernelList >(new GeoCal::SpiceKernelList((GeoCal::SpiceKernelList &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -7345,6 +7346,7 @@ SWIGINTERN PyObject *_wrap_SpiceDem__v_time(PyObject *self, PyObject *args) {
   }
   {
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
   return resultobj;

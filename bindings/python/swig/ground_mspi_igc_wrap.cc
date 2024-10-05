@@ -7504,6 +7504,7 @@ SWIGINTERN PyObject *_wrap_GroundMspiIgc_solar_look(PyObject *self, PyObject *ar
   }
   {
     boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector((GeoCal::DcsLookVector &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -7557,6 +7558,7 @@ SWIGINTERN PyObject *_wrap_GroundMspiIgc_normal_look(PyObject *self, PyObject *a
   }
   {
     boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector((GeoCal::DcsLookVector &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -7610,6 +7612,7 @@ SWIGINTERN PyObject *_wrap_GroundMspiIgc_pixel_look(PyObject *self, PyObject *ar
   }
   {
     boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector((GeoCal::DcsLookVector &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_OWN);
   }
   return resultobj;

@@ -9246,6 +9246,7 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_map_info(PyObject *self, PyObject *arg
   }
   {
     boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo((GeoCal::MapInfo &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -9690,6 +9691,7 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_0(PyObject *self, Py_ssi
   }
   {
     boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
   return resultobj;

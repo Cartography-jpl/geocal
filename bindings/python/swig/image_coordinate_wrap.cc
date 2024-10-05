@@ -8280,6 +8280,7 @@ SWIGINTERN PyObject *_wrap_ImageCoordinateWithDerivative_value(PyObject *self, P
   }
   {
     boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -9238,6 +9239,7 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_pop(PyObject *self, PyObject *
   }
   {
     boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new std::vector< GeoCal::ImageCoordinate >::value_type((std::vector< GeoCal::ImageCoordinate >::value_type &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
   return resultobj;

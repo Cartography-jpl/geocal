@@ -8068,6 +8068,7 @@ SWIGINTERN PyObject *_wrap_Vector_Time_pop(PyObject *self, PyObject *args) {
   }
   {
     boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new std::vector< GeoCal::Time >::value_type((std::vector< GeoCal::Time >::value_type &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -12313,6 +12314,7 @@ SWIGINTERN PyObject *_wrap_LookVectorAutoDerivativeDouble__v_length(PyObject *se
   }
   {
     boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
   return resultobj;
@@ -12691,6 +12693,7 @@ SWIGINTERN PyObject *_wrap_ScLookVector_create_from_field_angle(PyObject *self, 
   }
   {
     boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
   return resultobj;

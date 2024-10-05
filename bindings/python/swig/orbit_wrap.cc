@@ -6702,11 +6702,13 @@ SwigDirector_Orbit::~SwigDirector_Orbit() {
 }
 
 void SwigDirector_Orbit::add_observer(GeoCal::Observer< GeoCal::Orbit > &Obs) {
+  boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Observer<GeoCal::Orbit> > *smartresult = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Orbit> >((GeoCal::Observer< GeoCal::Orbit > *)&Obs, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Orbit> >(&Obs SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -6731,11 +6733,13 @@ void SwigDirector_Orbit::add_observer(GeoCal::Observer< GeoCal::Orbit > &Obs) {
 
 
 void SwigDirector_Orbit::remove_observer(GeoCal::Observer< GeoCal::Orbit > &Obs) {
+  boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Observer<GeoCal::Orbit> > *smartresult = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Orbit> >((GeoCal::Observer< GeoCal::Orbit > *)&Obs, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Orbit> >(&Obs SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Orbit_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -6866,22 +6870,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Orbit::parameter_with_derivative() cons
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_Orbit::parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7046,22 +7056,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Orbit::parameter_with_derivative_subset
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_Orbit::parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7193,20 +7209,26 @@ std::string SwigDirector_Orbit::desc() const {
 
 
 GeoCal::CartesianInertialLookVector SwigDirector_Orbit::ci_look_vector(GeoCal::Time T,GeoCal::ScLookVector const &Sl) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::CartesianInertialLookVector c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVector > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVector >((GeoCal::ScLookVector *)&Sl, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::ScLookVector >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7228,31 +7250,37 @@ GeoCal::CartesianInertialLookVector SwigDirector_Orbit::ci_look_vector(GeoCal::T
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::CartesianInertialLookVector""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVector > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVector > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::CartesianInertialLookVector""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVector > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVector > * >(swig_argp);
+  }
   return (GeoCal::CartesianInertialLookVector) c_result;
 }
 
 
 GeoCal::CartesianInertialLookVectorWithDerivative SwigDirector_Orbit::ci_look_vector(GeoCal::TimeWithDerivative const &T,GeoCal::ScLookVectorWithDerivative const &Sl) const {
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::CartesianInertialLookVectorWithDerivative c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::TimeWithDerivative >((GeoCal::TimeWithDerivative *)&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::TimeWithDerivative >(&T SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative >((GeoCal::ScLookVectorWithDerivative *)&Sl, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7274,31 +7302,41 @@ GeoCal::CartesianInertialLookVectorWithDerivative SwigDirector_Orbit::ci_look_ve
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::CartesianInertialLookVectorWithDerivative""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::CartesianInertialLookVectorWithDerivative""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > * >(swig_argp);
+  }
   return (GeoCal::CartesianInertialLookVectorWithDerivative) c_result;
 }
 
 
 GeoCal::CartesianFixedLookVector SwigDirector_Orbit::cf_look_vector(GeoCal::Time T,GeoCal::ScLookVector const &Sl) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVector const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::CartesianFixedLookVector c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVector > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVector >((GeoCal::ScLookVector *)&Sl, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::ScLookVector >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7320,31 +7358,37 @@ GeoCal::CartesianFixedLookVector SwigDirector_Orbit::cf_look_vector(GeoCal::Time
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::CartesianFixedLookVector""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::CartesianFixedLookVector""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVector > * >(swig_argp);
+  }
   return (GeoCal::CartesianFixedLookVector) c_result;
 }
 
 
 GeoCal::CartesianFixedLookVectorWithDerivative SwigDirector_Orbit::cf_look_vector(GeoCal::TimeWithDerivative const &T,GeoCal::ScLookVectorWithDerivative const &Sl) const {
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::CartesianFixedLookVectorWithDerivative c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::TimeWithDerivative >((GeoCal::TimeWithDerivative *)&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::TimeWithDerivative >(&T SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative >((GeoCal::ScLookVectorWithDerivative *)&Sl, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7366,31 +7410,41 @@ GeoCal::CartesianFixedLookVectorWithDerivative SwigDirector_Orbit::cf_look_vecto
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::CartesianFixedLookVectorWithDerivative""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::CartesianFixedLookVectorWithDerivative""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > * >(swig_argp);
+  }
   return (GeoCal::CartesianFixedLookVectorWithDerivative) c_result;
 }
 
 
 GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T,GeoCal::CartesianInertialLookVector const &Ci) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertialLookVector const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVector c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr< const GeoCal::CartesianInertialLookVector >((GeoCal::CartesianInertialLookVector *)&Ci, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianInertialLookVector >(&Ci SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7412,31 +7466,37 @@ GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T,GeoCal::C
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVector""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVector""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  }
   return (GeoCal::ScLookVector) c_result;
 }
 
 
 GeoCal::ScLookVectorWithDerivative SwigDirector_Orbit::sc_look_vector(GeoCal::TimeWithDerivative const &T,GeoCal::CartesianInertialLookVectorWithDerivative const &Ci) const {
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianInertialLookVectorWithDerivative const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVectorWithDerivative c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::TimeWithDerivative >((GeoCal::TimeWithDerivative *)&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::TimeWithDerivative >(&T SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative >((GeoCal::CartesianInertialLookVectorWithDerivative *)&Ci, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianInertialLookVectorWithDerivative >(&Ci SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7458,31 +7518,41 @@ GeoCal::ScLookVectorWithDerivative SwigDirector_Orbit::sc_look_vector(GeoCal::Ti
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVectorWithDerivative""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVectorWithDerivative""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp);
+  }
   return (GeoCal::ScLookVectorWithDerivative) c_result;
 }
 
 
 GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T,GeoCal::CartesianFixedLookVector const &Cf) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVector const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVector c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixedLookVector >((GeoCal::CartesianFixedLookVector *)&Cf, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixedLookVector >(&Cf SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7504,31 +7574,37 @@ GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T,GeoCal::C
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVector""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVector""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  }
   return (GeoCal::ScLookVector) c_result;
 }
 
 
 GeoCal::ScLookVectorWithDerivative SwigDirector_Orbit::sc_look_vector(GeoCal::TimeWithDerivative const &T,GeoCal::CartesianFixedLookVectorWithDerivative const &Cf) const {
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixedLookVectorWithDerivative const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVectorWithDerivative c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::TimeWithDerivative >((GeoCal::TimeWithDerivative *)&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::TimeWithDerivative >(&T SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative >((GeoCal::CartesianFixedLookVectorWithDerivative *)&Cf, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixedLookVectorWithDerivative >(&Cf SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7550,35 +7626,53 @@ GeoCal::ScLookVectorWithDerivative SwigDirector_Orbit::sc_look_vector(GeoCal::Ti
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVectorWithDerivative""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVectorWithDerivative""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp);
+  }
   return (GeoCal::ScLookVectorWithDerivative) c_result;
 }
 
 
 GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T,GeoCal::CartesianFixed const &Pt,boost::shared_ptr< GeoCal::Refraction > const &Ref,boost::shared_ptr< GeoCal::VelocityAberration > const &Vabb) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg2 = 0 ;
+  boost::shared_ptr< GeoCal::Refraction > *smartarg3 = 0 ;
+  boost::shared_ptr< GeoCal::VelocityAberration > *smartarg4 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVector c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Pt, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixed >(&Pt SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj2;
-  obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(&Ref), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Refraction_t,  0 );
+  
+  smartarg3 = Ref ? new boost::shared_ptr<  GeoCal::Refraction >(Ref) : 0;
+  obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg3), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Refraction_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj3;
-  obj3 = SWIG_NewPointerObj(SWIG_as_voidptr(&Vabb), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberration_t,  0 );
+  
+  smartarg4 = Vabb ? new boost::shared_ptr<  GeoCal::VelocityAberration >(Vabb) : 0;
+  obj3 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg4), SWIGTYPE_p_boost__shared_ptrT_GeoCal__VelocityAberration_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7600,26 +7694,35 @@ GeoCal::ScLookVector SwigDirector_Orbit::sc_look_vector(GeoCal::Time T,GeoCal::C
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVector""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVector""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  }
   return (GeoCal::ScLookVector) c_result;
 }
 
 
 boost::shared_ptr< GeoCal::CartesianInertial > SwigDirector_Orbit::position_ci(GeoCal::Time T) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   boost::shared_ptr< GeoCal::CartesianInertial > c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7641,11 +7744,15 @@ boost::shared_ptr< GeoCal::CartesianInertial > SwigDirector_Orbit::position_ci(G
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertial_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::CartesianInertial >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianInertial > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7661,15 +7768,20 @@ boost::shared_ptr< GeoCal::CartesianInertial > SwigDirector_Orbit::position_ci(G
 
 
 boost::shared_ptr< GeoCal::CartesianFixed > SwigDirector_Orbit::position_cf(GeoCal::Time T) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   boost::shared_ptr< GeoCal::CartesianFixed > c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7691,11 +7803,15 @@ boost::shared_ptr< GeoCal::CartesianFixed > SwigDirector_Orbit::position_cf(GeoC
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::CartesianFixed >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::CartesianFixed > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7711,15 +7827,20 @@ boost::shared_ptr< GeoCal::CartesianFixed > SwigDirector_Orbit::position_cf(GeoC
 
 
 boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Time T) const {
+  boost::shared_ptr< GeoCal::Time > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   boost::shared_ptr< GeoCal::OrbitData > c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
-  }
+  
+#if 0x040101 < 0x040100
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &)T));
+#else
+  smartarg1 = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(SWIG_STD_MOVE(T)));
+#endif  
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7741,11 +7862,15 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::OrbitData >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7761,15 +7886,16 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
 
 
 boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::TimeWithDerivative const &T) const {
+  boost::shared_ptr< GeoCal::TimeWithDerivative const > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   boost::shared_ptr< GeoCal::OrbitData > c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::TimeWithDerivative >((GeoCal::TimeWithDerivative *)&T, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::TimeWithDerivative >(&T SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Orbit.__init__.");
   }
@@ -7791,11 +7917,15 @@ boost::shared_ptr< GeoCal::OrbitData > SwigDirector_Orbit::orbit_data(GeoCal::Ti
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::OrbitData >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::OrbitData > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -8974,7 +9104,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_0(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9048,7 +9178,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_1(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9130,7 +9260,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_2(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9204,7 +9334,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_ci_look_vector__SWIG_3(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9340,7 +9470,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_0(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9414,7 +9544,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_1(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9496,7 +9626,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_2(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative((GeoCal::CartesianFixedLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9570,7 +9700,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_cf_look_vector__SWIG_3(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative((GeoCal::CartesianFixedLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9752,7 +9882,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_0(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9853,7 +9983,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_1(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9927,7 +10057,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_2(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -10055,7 +10185,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector_with_derivative__SWIG_0(PyOb
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -10156,7 +10286,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector_with_derivative__SWIG_1(PyOb
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -10230,7 +10360,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector_with_derivative__SWIG_2(PyOb
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -10346,7 +10476,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_3(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -10420,7 +10550,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_4(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -10502,7 +10632,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_5(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -10576,7 +10706,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_6(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -10658,7 +10788,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_7(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -10732,7 +10862,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_8(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -10814,7 +10944,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_9(PyObject *self, Py_s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -10888,7 +11018,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_sc_look_vector__SWIG_10(PyObject *self, Py_
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -11204,7 +11334,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate__SWIG_0(PyObject *self, Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -11342,7 +11472,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate__SWIG_1(PyObject *self, Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -11453,7 +11583,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate__SWIG_2(PyObject *self, Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -11556,7 +11686,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate__SWIG_3(PyObject *self, Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -11761,7 +11891,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate_with_derivative__SWIG_0(Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -11899,7 +12029,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate_with_derivative__SWIG_1(Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -12010,7 +12140,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate_with_derivative__SWIG_2(Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -12113,7 +12243,7 @@ SWIGINTERN PyObject *_wrap_OrbitData_frame_coordinate_with_derivative__SWIG_3(Py
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -14535,7 +14665,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__velocity_ci_with_derivative(PyObject *self
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -14582,7 +14712,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__position_ci_with_derivative(PyObject *self
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -14629,7 +14759,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__position_cf_with_derivative(PyObject *self
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -14740,7 +14870,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__velocity_cf_with_derivative(PyObject *self
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -14787,7 +14917,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__v_time(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
@@ -14834,7 +14964,7 @@ SWIGINTERN PyObject *_wrap_OrbitData__v_time_with_derivative(PyObject *self, PyO
     }
   }
   {
-    boost::shared_ptr<  GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::TimeWithDerivative >(new GeoCal::TimeWithDerivative((GeoCal::TimeWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::TimeWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::TimeWithDerivative >(new GeoCal::TimeWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__TimeWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -15681,7 +15811,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_0(PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
   }
@@ -15755,7 +15885,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_1(PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
   }
@@ -15837,7 +15967,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_2(PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -15911,7 +16041,7 @@ SWIGINTERN PyObject *_wrap_QuaternionOrbitData_ci_look_vector__SWIG_3(PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -18139,7 +18269,7 @@ SWIGINTERN PyObject *_wrap_Orbit_ci_look_vector__SWIG_0(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector((GeoCal::CartesianInertialLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVector >(new GeoCal::CartesianInertialLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVector_t, SWIG_POINTER_OWN);
   }
@@ -18254,7 +18384,7 @@ SWIGINTERN PyObject *_wrap_Orbit_ci_look_vector__SWIG_1(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative((GeoCal::CartesianInertialLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianInertialLookVectorWithDerivative >(new GeoCal::CartesianInertialLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianInertialLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -18395,7 +18525,7 @@ SWIGINTERN PyObject *_wrap_Orbit_cf_look_vector__SWIG_0(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }
@@ -18510,7 +18640,7 @@ SWIGINTERN PyObject *_wrap_Orbit_cf_look_vector__SWIG_1(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative((GeoCal::CartesianFixedLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVectorWithDerivative >(new GeoCal::CartesianFixedLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -18730,7 +18860,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate__SWIG_0(PyObject *self, Py_ssi
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -18884,7 +19014,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate__SWIG_1(PyObject *self, Py_ssi
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -19011,7 +19141,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate__SWIG_2(PyObject *self, Py_ssi
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -19130,7 +19260,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate__SWIG_3(PyObject *self, Py_ssi
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -19364,7 +19494,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_0(PyObje
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -19531,7 +19661,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_1(PyObje
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -19671,7 +19801,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_2(PyObje
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -19803,7 +19933,7 @@ SWIGINTERN PyObject *_wrap_Orbit_frame_coordinate_with_derivative__SWIG_3(PyObje
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -20354,7 +20484,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_0(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -20469,7 +20599,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_1(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -20571,7 +20701,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_2(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -20686,7 +20816,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_3(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -20842,7 +20972,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_4(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -20971,7 +21101,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_5(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -21073,7 +21203,7 @@ SWIGINTERN PyObject *_wrap_Orbit_sc_look_vector__SWIG_6(PyObject *self, Py_ssize
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -21366,7 +21496,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_min_time(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
@@ -21413,7 +21543,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_max_time(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
@@ -21888,7 +22018,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_with_derivative__SWIG_0(PyObject *
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -22283,7 +22413,7 @@ SWIGINTERN PyObject *_wrap_Orbit__v_parameter_with_derivative_subset__SWIG_0(PyO
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -24203,7 +24333,7 @@ SWIGINTERN PyObject *_wrap_KeplerOrbit__v_epoch__SWIG_0(PyObject *self, Py_ssize
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }

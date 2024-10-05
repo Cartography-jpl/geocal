@@ -7848,7 +7848,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_0(PyObject *self,
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -7903,7 +7903,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_1(PyObject *self,
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8011,7 +8011,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_0(PyObject *self,
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8066,7 +8066,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_1(PyObject *self,
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8174,7 +8174,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_0(PyObject *self,
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8229,7 +8229,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_1(PyObject *self,
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8337,7 +8337,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_0(PyObject *s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8392,7 +8392,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_1(PyObject *s
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8751,7 +8751,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_0(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8808,7 +8808,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_1(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8897,7 +8897,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___radd__(PyObject *self, PyObjec
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8973,7 +8973,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_0(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9030,7 +9030,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_1(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9119,7 +9119,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rsub__(PyObject *self, PyObjec
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9195,7 +9195,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_0(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9252,7 +9252,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_1(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9341,7 +9341,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rmul__(PyObject *self, PyObjec
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9417,7 +9417,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_0(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9474,7 +9474,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_1(PyObject *self, 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9563,7 +9563,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rdiv__(PyObject *self, PyObjec
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9621,7 +9621,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___pow__(PyObject *self, PyObject
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -9677,7 +9677,7 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rpow__(PyObject *self, PyObjec
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -10503,7 +10503,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_0(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -10552,7 +10552,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_1(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -10609,7 +10609,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_2(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -10674,7 +10674,7 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_3(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11279,7 +11279,7 @@ SWIGINTERN PyObject *_wrap_BoostArrayAutoDerivativeDouble_3___getitem__(PyObject
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11494,7 +11494,7 @@ SWIGINTERN PyObject *_wrap_sqrt(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11550,7 +11550,7 @@ SWIGINTERN PyObject *_wrap_log(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11606,7 +11606,7 @@ SWIGINTERN PyObject *_wrap_log10(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11662,7 +11662,7 @@ SWIGINTERN PyObject *_wrap_exp(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11718,7 +11718,7 @@ SWIGINTERN PyObject *_wrap_sin(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11774,7 +11774,7 @@ SWIGINTERN PyObject *_wrap_asin(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11830,7 +11830,7 @@ SWIGINTERN PyObject *_wrap_cos(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11886,7 +11886,7 @@ SWIGINTERN PyObject *_wrap_acos(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11942,7 +11942,7 @@ SWIGINTERN PyObject *_wrap_tan(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -11998,7 +11998,7 @@ SWIGINTERN PyObject *_wrap_atan(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -12861,7 +12861,7 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_pop(PyObject *self, PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new std::vector< GeoCal::AutoDerivative< double > >::value_type((std::vector< GeoCal::AutoDerivative< double > >::value_type &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new std::vector< GeoCal::AutoDerivative< double > >::value_type(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }

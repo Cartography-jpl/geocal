@@ -9154,7 +9154,7 @@ SWIGINTERN PyObject *_wrap_OrbitDataImageGroundConnection_image_coordinate_with_
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative >(new GeoCal::ImageCoordinateWithDerivative((GeoCal::ImageCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinateWithDerivative >(new GeoCal::ImageCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }

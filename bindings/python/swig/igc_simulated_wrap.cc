@@ -6631,7 +6631,7 @@ SWIGINTERN PyObject *_wrap_IgcSimulated__v_map_info(PyObject *self, PyObject *ar
     }
   }
   {
-    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo((GeoCal::MapInfo &&)result));
+    boost::shared_ptr<  GeoCal::MapInfo > *smartresult = new boost::shared_ptr<  GeoCal::MapInfo >(new GeoCal::MapInfo(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__MapInfo_t, SWIG_POINTER_OWN);
   }

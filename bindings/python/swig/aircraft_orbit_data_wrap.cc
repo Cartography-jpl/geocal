@@ -6574,7 +6574,7 @@ SWIGINTERN PyObject *_wrap_AircraftOrbitData__v_position_geodetic(PyObject *self
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Geodetic > *smartresult = new boost::shared_ptr<  GeoCal::Geodetic >(new GeoCal::Geodetic((GeoCal::Geodetic &&)result));
+    boost::shared_ptr<  GeoCal::Geodetic > *smartresult = new boost::shared_ptr<  GeoCal::Geodetic >(new GeoCal::Geodetic(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Geodetic_t, SWIG_POINTER_OWN);
   }

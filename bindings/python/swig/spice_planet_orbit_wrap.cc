@@ -8474,7 +8474,7 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_kernel_list(PyObject *self, PyObj
     }
   }
   {
-    boost::shared_ptr<  GeoCal::SpiceKernelList > *smartresult = new boost::shared_ptr<  GeoCal::SpiceKernelList >(new GeoCal::SpiceKernelList((GeoCal::SpiceKernelList &&)result));
+    boost::shared_ptr<  GeoCal::SpiceKernelList > *smartresult = new boost::shared_ptr<  GeoCal::SpiceKernelList >(new GeoCal::SpiceKernelList(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKernelList_t, SWIG_POINTER_OWN);
   }

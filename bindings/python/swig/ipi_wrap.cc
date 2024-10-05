@@ -10594,7 +10594,7 @@ SWIGINTERN PyObject *_wrap_Ipi__v_min_time(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }
@@ -10641,7 +10641,7 @@ SWIGINTERN PyObject *_wrap_Ipi__v_max_time(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time((GeoCal::Time &&)result));
+    boost::shared_ptr<  GeoCal::Time > *smartresult = new boost::shared_ptr<  GeoCal::Time >(new GeoCal::Time(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t, SWIG_POINTER_OWN);
   }

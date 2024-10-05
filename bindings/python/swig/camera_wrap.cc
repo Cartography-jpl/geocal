@@ -6555,11 +6555,13 @@ SwigDirector_Camera::~SwigDirector_Camera() {
 }
 
 void SwigDirector_Camera::add_observer(GeoCal::Observer< GeoCal::Camera > &Obs) {
+  boost::shared_ptr< GeoCal::Observer< GeoCal::Camera > > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Observer<GeoCal::Camera> > *smartresult = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Camera> >((GeoCal::Observer< GeoCal::Camera > *)&Obs, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Camera> >(&Obs SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Camera.__init__.");
   }
@@ -6584,11 +6586,13 @@ void SwigDirector_Camera::add_observer(GeoCal::Observer< GeoCal::Camera > &Obs) 
 
 
 void SwigDirector_Camera::remove_observer(GeoCal::Observer< GeoCal::Camera > &Obs) {
+  boost::shared_ptr< GeoCal::Observer< GeoCal::Camera > > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr<  GeoCal::Observer<GeoCal::Camera> > *smartresult = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Camera> >((GeoCal::Observer< GeoCal::Camera > *)&Obs, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr<  GeoCal::Observer<GeoCal::Camera> >(&Obs SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ObserverT_GeoCal__Camera_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Camera.__init__.");
   }
@@ -6719,22 +6723,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Camera::parameter_with_derivative() con
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_Camera::parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Camera.__init__.");
   }
@@ -6899,22 +6909,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Camera::parameter_with_derivative_subse
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_Camera::parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call Camera.__init__.");
   }
@@ -7185,15 +7201,16 @@ int SwigDirector_Camera::number_sample(int Band) const {
 
 
 GeoCal::FrameCoordinate SwigDirector_Camera::frame_coordinate(GeoCal::ScLookVector const &Sl,int Band) const {
+  boost::shared_ptr< GeoCal::ScLookVector const > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::FrameCoordinate c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVector > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVector >((GeoCal::ScLookVector *)&Sl, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ScLookVector >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
   obj1 = SWIG_From_int(static_cast< int >(Band));
   if (!swig_get_self()) {
@@ -7217,26 +7234,31 @@ GeoCal::FrameCoordinate SwigDirector_Camera::frame_coordinate(GeoCal::ScLookVect
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::FrameCoordinate""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::FrameCoordinate""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinate > * >(swig_argp);
+  }
   return (GeoCal::FrameCoordinate) c_result;
 }
 
 
 GeoCal::FrameCoordinateWithDerivative SwigDirector_Camera::frame_coordinate_with_derivative(GeoCal::ScLookVectorWithDerivative const &Sl,int Band) const {
+  boost::shared_ptr< GeoCal::ScLookVectorWithDerivative const > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::FrameCoordinateWithDerivative c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative >((GeoCal::ScLookVectorWithDerivative *)&Sl, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ScLookVectorWithDerivative >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
   obj1 = SWIG_From_int(static_cast< int >(Band));
   if (!swig_get_self()) {
@@ -7260,24 +7282,29 @@ GeoCal::FrameCoordinateWithDerivative SwigDirector_Camera::frame_coordinate_with
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::FrameCoordinateWithDerivative""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::FrameCoordinateWithDerivative""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > * >(swig_argp);
+  }
   return (GeoCal::FrameCoordinateWithDerivative) c_result;
 }
 
 
 double SwigDirector_Camera::frame_line_coordinate(GeoCal::ScLookVector const &Sl,int Band) const {
   double c_result = SwigValueInit< double >() ;
+  boost::shared_ptr< GeoCal::ScLookVector const > *smartarg1 = 0 ;
   
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ScLookVector > *smartresult = new boost::shared_ptr< const GeoCal::ScLookVector >((GeoCal::ScLookVector *)&Sl, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ScLookVector >(&Sl SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
   obj1 = SWIG_From_int(static_cast< int >(Band));
   if (!swig_get_self()) {
@@ -7311,15 +7338,16 @@ double SwigDirector_Camera::frame_line_coordinate(GeoCal::ScLookVector const &Sl
 
 
 GeoCal::ScLookVector SwigDirector_Camera::sc_look_vector(GeoCal::FrameCoordinate const &F,int Band) const {
+  boost::shared_ptr< GeoCal::FrameCoordinate const > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVector c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::FrameCoordinate >((GeoCal::FrameCoordinate *)&F, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::FrameCoordinate >(&F SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
   obj1 = SWIG_From_int(static_cast< int >(Band));
   if (!swig_get_self()) {
@@ -7343,26 +7371,31 @@ GeoCal::ScLookVector SwigDirector_Camera::sc_look_vector(GeoCal::FrameCoordinate
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVector""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVector""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVector > * >(swig_argp);
+  }
   return (GeoCal::ScLookVector) c_result;
 }
 
 
 GeoCal::ScLookVectorWithDerivative SwigDirector_Camera::sc_look_vector_with_derivative(GeoCal::FrameCoordinateWithDerivative const &F,int Band) const {
+  boost::shared_ptr< GeoCal::FrameCoordinateWithDerivative const > *smartarg1 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
   GeoCal::ScLookVectorWithDerivative c_result;
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative >((GeoCal::FrameCoordinateWithDerivative *)&F, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::FrameCoordinateWithDerivative >(&F SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj1;
   obj1 = SWIG_From_int(static_cast< int >(Band));
   if (!swig_get_self()) {
@@ -7386,12 +7419,16 @@ GeoCal::ScLookVectorWithDerivative SwigDirector_Camera::sc_look_vector_with_deri
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ScLookVectorWithDerivative""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ScLookVectorWithDerivative""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > * >(swig_argp);
+  }
   return (GeoCal::ScLookVectorWithDerivative) c_result;
 }
 
@@ -9323,7 +9360,7 @@ SWIGINTERN PyObject *_wrap_Camera_frame_coordinate(PyObject *self, PyObject *arg
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -9418,7 +9455,7 @@ SWIGINTERN PyObject *_wrap_Camera_frame_coordinate_with_derivative(PyObject *sel
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9604,7 +9641,7 @@ SWIGINTERN PyObject *_wrap_Camera_sc_look_vector(PyObject *self, PyObject *args)
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9699,7 +9736,7 @@ SWIGINTERN PyObject *_wrap_Camera_sc_look_vector_with_derivative(PyObject *self,
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative((GeoCal::ScLookVectorWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVectorWithDerivative >(new GeoCal::ScLookVectorWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVectorWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9985,7 +10022,7 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_with_derivative__SWIG_0(PyObject 
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -10380,7 +10417,7 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_with_derivative_subset__SWIG_0(Py
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }

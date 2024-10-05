@@ -5254,11 +5254,15 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raste
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::RasterImage >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and

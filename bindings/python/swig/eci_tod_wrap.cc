@@ -6250,7 +6250,7 @@ SWIGINTERN PyObject *_wrap_EciTod_to_eci(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Eci > *smartresult = new boost::shared_ptr<  GeoCal::Eci >(new GeoCal::Eci((GeoCal::Eci &&)result));
+    boost::shared_ptr<  GeoCal::Eci > *smartresult = new boost::shared_ptr<  GeoCal::Eci >(new GeoCal::Eci(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Eci_t, SWIG_POINTER_OWN);
   }

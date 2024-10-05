@@ -6599,7 +6599,7 @@ SWIGINTERN PyObject *_wrap_AirMspiNavData_interpolate(PyObject *self, PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AirMspiNavData > *smartresult = new boost::shared_ptr<  GeoCal::AirMspiNavData >(new GeoCal::AirMspiNavData((GeoCal::AirMspiNavData &&)result));
+    boost::shared_ptr<  GeoCal::AirMspiNavData > *smartresult = new boost::shared_ptr<  GeoCal::AirMspiNavData >(new GeoCal::AirMspiNavData(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiNavData_t, SWIG_POINTER_OWN);
   }
@@ -7360,7 +7360,7 @@ SWIGINTERN PyObject *_wrap_AirMspiOrbit_nav_data__SWIG_0(PyObject *self, Py_ssiz
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AirMspiNavData > *smartresult = new boost::shared_ptr<  GeoCal::AirMspiNavData >(new GeoCal::AirMspiNavData((GeoCal::AirMspiNavData &&)result));
+    boost::shared_ptr<  GeoCal::AirMspiNavData > *smartresult = new boost::shared_ptr<  GeoCal::AirMspiNavData >(new GeoCal::AirMspiNavData(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiNavData_t, SWIG_POINTER_OWN);
   }
@@ -7421,7 +7421,7 @@ SWIGINTERN PyObject *_wrap_AirMspiOrbit_nav_data__SWIG_1(PyObject *self, Py_ssiz
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AirMspiNavData > *smartresult = new boost::shared_ptr<  GeoCal::AirMspiNavData >(new GeoCal::AirMspiNavData((GeoCal::AirMspiNavData &&)result));
+    boost::shared_ptr<  GeoCal::AirMspiNavData > *smartresult = new boost::shared_ptr<  GeoCal::AirMspiNavData >(new GeoCal::AirMspiNavData(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AirMspiNavData_t, SWIG_POINTER_OWN);
   }

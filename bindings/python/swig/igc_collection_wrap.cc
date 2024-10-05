@@ -4915,6 +4915,19 @@ typedef blitz::Array<double, 1> blitz_array_double_1d;
 }
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -6386,19 +6399,6 @@ namespace swig {
       }
     
 
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
 #ifndef QUOTE  
 #define Q(x)#x
 #define QUOTE(x) Q(x)
@@ -6584,22 +6584,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_IgcCollection::parameter_with_derivativ
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_IgcCollection::parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -6764,22 +6770,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_IgcCollection::parameter_with_derivativ
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_IgcCollection::parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -6945,21 +6957,23 @@ std::string SwigDirector_IgcCollection::desc() const {
 
 
 blitz::Array< double,1 > SwigDirector_IgcCollection::collinearity_residual(int Image_index,GeoCal::GroundCoordinate const &Gc,GeoCal::ImageCoordinate const &Ic_actual) const {
+  boost::shared_ptr< GeoCal::GroundCoordinate const > *smartarg2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > *smartarg3 = 0 ;
   PythonObject numpy ;
   
   blitz::Array< double,1 > c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::GroundCoordinate >((GeoCal::GroundCoordinate *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::GroundCoordinate >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj2;
-  {
-    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic_actual, SWIG_null_deleter());
-    obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg3 = new boost::shared_ptr< const GeoCal::ImageCoordinate >(&Ic_actual SWIG_NO_NULL_DELETER_0);
+  obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg3), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -6995,21 +7009,23 @@ blitz::Array< double,1 > SwigDirector_IgcCollection::collinearity_residual(int I
 
 
 blitz::Array< double,2 > SwigDirector_IgcCollection::collinearity_residual_jacobian(int Image_index,GeoCal::GroundCoordinate const &Gc,GeoCal::ImageCoordinate const &Ic_actual) const {
+  boost::shared_ptr< GeoCal::GroundCoordinate const > *smartarg2 = 0 ;
+  boost::shared_ptr< GeoCal::ImageCoordinate const > *smartarg3 = 0 ;
   PythonObject numpy ;
   
   blitz::Array< double,2 > c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::GroundCoordinate >((GeoCal::GroundCoordinate *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::GroundCoordinate >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj2;
-  {
-    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic_actual, SWIG_null_deleter());
-    obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg3 = new boost::shared_ptr< const GeoCal::ImageCoordinate >(&Ic_actual SWIG_NO_NULL_DELETER_0);
+  obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg3), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -7045,6 +7061,7 @@ blitz::Array< double,2 > SwigDirector_IgcCollection::collinearity_residual_jacob
 
 
 boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground_coordinate(int Image_index,GeoCal::ImageCoordinate const &Ic) const {
+  boost::shared_ptr< GeoCal::ImageCoordinate const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
@@ -7052,10 +7069,10 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::ImageCoordinate >(&Ic SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -7077,11 +7094,15 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::GroundCoordinate >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7097,6 +7118,8 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
 
 
 boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground_coordinate_dem(int Image_index,GeoCal::ImageCoordinate const &Ic,GeoCal::Dem const &D) const {
+  boost::shared_ptr< GeoCal::ImageCoordinate const > *smartarg2 = 0 ;
+  boost::shared_ptr< GeoCal::Dem const > *smartarg3 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
@@ -7104,15 +7127,15 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::ImageCoordinate >((GeoCal::ImageCoordinate *)&Ic, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::ImageCoordinate >(&Ic SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj2;
-  {
-    boost::shared_ptr< const GeoCal::Dem > *smartresult = new boost::shared_ptr< const GeoCal::Dem >((GeoCal::Dem *)&D, SWIG_null_deleter());
-    obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg3 = new boost::shared_ptr< const GeoCal::Dem >(&D SWIG_NO_NULL_DELETER_0);
+  obj2 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg3), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -7134,11 +7157,15 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_IgcCollection::ground
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::GroundCoordinate >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::GroundCoordinate > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7181,11 +7208,15 @@ boost::shared_ptr< GeoCal::Dem > SwigDirector_IgcCollection::dem(int Image_index
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Dem_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::Dem >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::Dem > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7201,6 +7232,7 @@ boost::shared_ptr< GeoCal::Dem > SwigDirector_IgcCollection::dem(int Image_index
 
 
 GeoCal::ImageCoordinate SwigDirector_IgcCollection::image_coordinate(int Image_index,GeoCal::GroundCoordinate const &Gc) const {
+  boost::shared_ptr< GeoCal::GroundCoordinate const > *smartarg2 = 0 ;
   void *swig_argp ;
   int swig_res = 0 ;
   
@@ -7208,10 +7240,10 @@ GeoCal::ImageCoordinate SwigDirector_IgcCollection::image_coordinate(int Image_i
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::GroundCoordinate > *smartresult = new boost::shared_ptr< const GeoCal::GroundCoordinate >((GeoCal::GroundCoordinate *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::GroundCoordinate >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__GroundCoordinate_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -7233,27 +7265,32 @@ GeoCal::ImageCoordinate SwigDirector_IgcCollection::image_coordinate(int Image_i
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ImageCoordinate""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinate > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinate > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ImageCoordinate""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinate > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ImageCoordinate > * >(swig_argp);
+  }
   return (GeoCal::ImageCoordinate) c_result;
 }
 
 
 blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_parm(int Image_index,GeoCal::CartesianFixed const &Gc) const {
+  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg2 = 0 ;
   PythonObject numpy ;
   
   blitz::Array< double,2 > c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixed >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -7289,16 +7326,17 @@ blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_parm(i
 
 
 blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_parm_fd(int Image_index,GeoCal::CartesianFixed const &Gc,GeoCal::blitz_array_double_1d const &Pstep) const {
+  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg2 = 0 ;
   PythonObject numpy ;
   
   blitz::Array< double,2 > c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixed >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj2;
   {
     npy_intp dims[1], stride[1];
@@ -7351,16 +7389,17 @@ blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_parm_f
 
 
 blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_cf(int Image_index,GeoCal::CartesianFixed const &Gc) const {
+  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg2 = 0 ;
   PythonObject numpy ;
   
   blitz::Array< double,2 > c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixed >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call IgcCollection.__init__.");
   }
@@ -7396,16 +7435,17 @@ blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_cf(int
 
 
 blitz::Array< double,2 > SwigDirector_IgcCollection::image_coordinate_jac_cf_fd(int Image_index,GeoCal::CartesianFixed const &Gc,double Step_size) const {
+  boost::shared_ptr< GeoCal::CartesianFixed const > *smartarg2 = 0 ;
   PythonObject numpy ;
   
   blitz::Array< double,2 > c_result;
   swig::SwigVar_PyObject obj0;
   obj0 = SWIG_From_int(static_cast< int >(Image_index));
   swig::SwigVar_PyObject obj1;
-  {
-    boost::shared_ptr< const GeoCal::CartesianFixed > *smartresult = new boost::shared_ptr< const GeoCal::CartesianFixed >((GeoCal::CartesianFixed *)&Gc, SWIG_null_deleter());
-    obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg2 = new boost::shared_ptr< const GeoCal::CartesianFixed >(&Gc SWIG_NO_NULL_DELETER_0);
+  obj1 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg2), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixed_t, SWIG_POINTER_OWN |  0 );
+  
   swig::SwigVar_PyObject obj2;
   obj2 = SWIG_From_double(static_cast< double >(Step_size));
   if (!swig_get_self()) {
@@ -7505,11 +7545,15 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_IgcCollection::image(int I
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__RasterImage_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::RasterImage >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7552,11 +7596,15 @@ boost::shared_ptr< GeoCal::ImageGroundConnection > SwigDirector_IgcCollection::i
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageGroundConnection_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::ImageGroundConnection >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::ImageGroundConnection > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -7599,11 +7647,15 @@ boost::shared_ptr< GeoCal::IgcCollection > SwigDirector_IgcCollection::subset(st
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__IgcCollection_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""boost::shared_ptr< GeoCal::IgcCollection >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::IgcCollection > * >(swig_argp));
+  if (swig_argp) {
+    c_result = *(reinterpret_cast< boost::shared_ptr< GeoCal::IgcCollection > * >(swig_argp));
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::IgcCollection > * >(swig_argp);
+  }
+  // mmms
   // Special handling if this is a director class. In that case, we
   // don't own the underlying python object. Instead,
   // we tell python we have a reference to the underlying object, and
@@ -9185,7 +9237,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection_image_coordinate(PyObject *self, PyObje
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -10196,7 +10248,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection__v_parameter_with_derivative__SWIG_0(Py
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -10591,7 +10643,7 @@ SWIGINTERN PyObject *_wrap_IgcCollection__v_parameter_with_derivative_subset__SW
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }

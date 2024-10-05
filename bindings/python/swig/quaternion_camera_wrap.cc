@@ -6460,7 +6460,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_focal_length_with_derivative__SWI
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -6610,7 +6610,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_principal_point__SWIG_0(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -7036,7 +7036,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_line_pitch_with_derivative__SWIG_
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -7297,7 +7297,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera__v_sample_pitch_with_derivative__SWI
     }
   }
   {
-    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > &&)result));
+    boost::shared_ptr<  GeoCal::AutoDerivative<double> > *smartresult = new boost::shared_ptr<  GeoCal::AutoDerivative<double> >(new GeoCal::AutoDerivative< double >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__AutoDerivativeT_double_t_t, SWIG_POINTER_OWN);
   }
@@ -8603,7 +8603,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_focal_plane_to_fc__SWIG_0(PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate((GeoCal::FrameCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinate >(new GeoCal::FrameCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -8714,7 +8714,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_focal_plane_to_fc__SWIG_1(PyObject *
     }
   }
   {
-    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinateWithDerivative &&)result));
+    boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative > *smartresult = new boost::shared_ptr<  GeoCal::FrameCoordinateWithDerivative >(new GeoCal::FrameCoordinateWithDerivative(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__FrameCoordinateWithDerivative_t, SWIG_POINTER_OWN);
   }
@@ -9095,7 +9095,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_sc_look_vector__SWIG_0(PyObject *sel
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9169,7 +9169,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_sc_look_vector__SWIG_1(PyObject *sel
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector((GeoCal::ScLookVector &&)result));
+    boost::shared_ptr<  GeoCal::ScLookVector > *smartresult = new boost::shared_ptr<  GeoCal::ScLookVector >(new GeoCal::ScLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ScLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9271,7 +9271,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector__SWIG_0(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector((GeoCal::DcsLookVector &&)result));
+    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_OWN);
   }
@@ -9353,7 +9353,7 @@ SWIGINTERN PyObject *_wrap_QuaternionCamera_dcs_look_vector__SWIG_1(PyObject *se
     }
   }
   {
-    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector((GeoCal::DcsLookVector &&)result));
+    boost::shared_ptr<  GeoCal::DcsLookVector > *smartresult = new boost::shared_ptr<  GeoCal::DcsLookVector >(new GeoCal::DcsLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__DcsLookVector_t, SWIG_POINTER_OWN);
   }

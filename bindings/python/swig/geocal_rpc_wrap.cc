@@ -10092,7 +10092,7 @@ SWIGINTERN PyObject *_wrap_Rpc_generate_rpc__SWIG_0(PyObject *self, Py_ssize_t n
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -10194,7 +10194,7 @@ SWIGINTERN PyObject *_wrap_Rpc_generate_rpc__SWIG_1(PyObject *self, Py_ssize_t n
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -10288,7 +10288,7 @@ SWIGINTERN PyObject *_wrap_Rpc_generate_rpc__SWIG_2(PyObject *self, Py_ssize_t n
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -10374,7 +10374,7 @@ SWIGINTERN PyObject *_wrap_Rpc_generate_rpc__SWIG_3(PyObject *self, Py_ssize_t n
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -10452,7 +10452,7 @@ SWIGINTERN PyObject *_wrap_Rpc_generate_rpc__SWIG_4(PyObject *self, Py_ssize_t n
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -10522,7 +10522,7 @@ SWIGINTERN PyObject *_wrap_Rpc_generate_rpc__SWIG_5(PyObject *self, Py_ssize_t n
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -10863,7 +10863,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_0(PyObject *self, Py_ssize
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -10932,7 +10932,7 @@ SWIGINTERN PyObject *_wrap_Rpc_image_coordinate__SWIG_1(PyObject *self, Py_ssize
     }
   }
   {
-    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate((GeoCal::ImageCoordinate &&)result));
+    boost::shared_ptr<  GeoCal::ImageCoordinate > *smartresult = new boost::shared_ptr<  GeoCal::ImageCoordinate >(new GeoCal::ImageCoordinate(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ImageCoordinate_t, SWIG_POINTER_OWN);
   }
@@ -12188,7 +12188,7 @@ SWIGINTERN PyObject *_wrap_Rpc_rpc_type_a(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }
@@ -12235,7 +12235,7 @@ SWIGINTERN PyObject *_wrap_Rpc_rpc_type_b(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc((GeoCal::Rpc &&)result));
+    boost::shared_ptr<  GeoCal::Rpc > *smartresult = new boost::shared_ptr<  GeoCal::Rpc >(new GeoCal::Rpc(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Rpc_t, SWIG_POINTER_OWN);
   }

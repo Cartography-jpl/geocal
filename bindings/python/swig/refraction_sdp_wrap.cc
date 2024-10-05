@@ -6131,7 +6131,7 @@ SWIGINTERN PyObject *_wrap_RefractionSdp_refraction_apply(PyObject *self, PyObje
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }
@@ -6235,7 +6235,7 @@ SWIGINTERN PyObject *_wrap_RefractionSdp_refraction_reverse(PyObject *self, PyOb
     }
   }
   {
-    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector((GeoCal::CartesianFixedLookVector &&)result));
+    boost::shared_ptr<  GeoCal::CartesianFixedLookVector > *smartresult = new boost::shared_ptr<  GeoCal::CartesianFixedLookVector >(new GeoCal::CartesianFixedLookVector(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartesianFixedLookVector_t, SWIG_POINTER_OWN);
   }

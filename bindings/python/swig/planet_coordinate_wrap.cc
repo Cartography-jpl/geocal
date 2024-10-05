@@ -6663,7 +6663,7 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_target_position(PyObject *self, PyObject 
     }
   }
   {
-    boost::shared_ptr<  GeoCal::PlanetFixed > *smartresult = new boost::shared_ptr<  GeoCal::PlanetFixed >(new GeoCal::PlanetFixed((GeoCal::PlanetFixed &&)result));
+    boost::shared_ptr<  GeoCal::PlanetFixed > *smartresult = new boost::shared_ptr<  GeoCal::PlanetFixed >(new GeoCal::PlanetFixed(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__PlanetFixed_t, SWIG_POINTER_OWN);
   }

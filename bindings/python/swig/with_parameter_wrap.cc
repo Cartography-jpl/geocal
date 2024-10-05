@@ -4802,6 +4802,19 @@ namespace swig {
 #include "with_parameter.h"
 
 
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
 SWIGINTERN swig_type_info*
 SWIG_pchar_descriptor(void)
 {
@@ -6224,19 +6237,6 @@ namespace swig {
       }
     
 
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
 #ifndef QUOTE  
 #define Q(x)#x
 #define QUOTE(x) Q(x)
@@ -6422,22 +6422,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_WithParameter::parameter_with_derivativ
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_WithParameter::parameter_with_derivative(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
   }
@@ -6602,22 +6608,28 @@ GeoCal::ArrayAd< double,1 > SwigDirector_WithParameter::parameter_with_derivativ
     }
   }
   int newmem = 0;
-  swig_res = SWIG_ConvertPtrAndOwn(result,&swig_argp,SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0  | 0, &newmem);
+  swig_res = SWIG_ConvertPtrAndOwn(result, &swig_argp, SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t,  0 , &newmem);
   if (!SWIG_IsOK(swig_res)) {
     Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
   }
-  c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  if (!swig_argp) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ValueError), "invalid null reference " "in output value of type '""GeoCal::ArrayAd< double,1 >""'");
+  } else {
+    c_result = *(reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp)->get());
+    if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::ArrayAd<double,1> > * >(swig_argp);
+  }
   return (GeoCal::ArrayAd< double,1 >) c_result;
 }
 
 
 void SwigDirector_WithParameter::parameter_with_derivative_subset(GeoCal::ArrayAd< double,1 > const &V) {
+  boost::shared_ptr< GeoCal::ArrayAd< double,1 > const > *smartarg1 = 0 ;
+  
   swig::SwigVar_PyObject obj0;
-  {
-    boost::shared_ptr< const GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >((GeoCal::ArrayAd< double,1 > *)&V, SWIG_null_deleter());
-    obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
-  }
+  
+  smartarg1 = new boost::shared_ptr< const GeoCal::ArrayAd<double,1> >(&V SWIG_NO_NULL_DELETER_0);
+  obj0 = SWIG_NewPointerObj(SWIG_as_voidptr(smartarg1), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN |  0 );
+  
   if (!swig_get_self()) {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call WithParameter.__init__.");
   }
@@ -7704,7 +7716,7 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative__SWIG_0(Py
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }
@@ -8099,7 +8111,7 @@ SWIGINTERN PyObject *_wrap_WithParameter__v_parameter_with_derivative_subset__SW
     SWIG_fail;
   }
   {
-    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >((GeoCal::ArrayAd< double,1 > &&)result));
+    boost::shared_ptr<  GeoCal::ArrayAd<double,1> > *smartresult = new boost::shared_ptr<  GeoCal::ArrayAd<double,1> >(new GeoCal::ArrayAd< double,1 >(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__ArrayAdT_double_1_t_t, SWIG_POINTER_OWN);
   }

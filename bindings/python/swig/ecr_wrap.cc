@@ -6107,7 +6107,7 @@ SWIGINTERN PyObject *_wrap_Ecr_sub_solar_point(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Ecr > *smartresult = new boost::shared_ptr<  GeoCal::Ecr >(new GeoCal::Ecr((GeoCal::Ecr &&)result));
+    boost::shared_ptr<  GeoCal::Ecr > *smartresult = new boost::shared_ptr<  GeoCal::Ecr >(new GeoCal::Ecr(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t, SWIG_POINTER_OWN);
   }
@@ -6222,7 +6222,7 @@ SWIGINTERN PyObject *_wrap_Ecr_sub_body_point(PyObject *self, PyObject *args) {
     }
   }
   {
-    boost::shared_ptr<  GeoCal::Ecr > *smartresult = new boost::shared_ptr<  GeoCal::Ecr >(new GeoCal::Ecr((GeoCal::Ecr &&)result));
+    boost::shared_ptr<  GeoCal::Ecr > *smartresult = new boost::shared_ptr<  GeoCal::Ecr >(new GeoCal::Ecr(result));
     
     resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__Ecr_t, SWIG_POINTER_OWN);
   }

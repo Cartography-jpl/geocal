@@ -4691,244 +4691,6 @@ public:
  
 
 
-
-//--------------------------------------------------------------
-/// The default conversion of a python sequence to a std::vector<T>
-/// doesn't work correctly for boost::shared_ptr types. This
-/// expression here does this correctly.
-//--------------------------------------------------------------
-
-// Code changed a little between SWIG 3 and SWIG 4, so have different
-// versions depending on swig version.  
-#if SWIG_VERSION < 0x040000  
-namespace swig {
-  template <class T>
-  struct traits_asptr<std::vector<boost::shared_ptr<T> > >  {
-    static int asptr(PyObject *obj, 
-		     std::vector<boost::shared_ptr<T> > **vec) {
-      // Long name, so shorten
-      typedef std::vector<boost::shared_ptr<T> > vtype;
-      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
-	vtype *p;
-	if (::SWIG_ConvertPtr(obj,(void**)&p,
-			      swig::type_info<vtype>(),0) == SWIG_OK) {
-	  if (vec) *vec = p;
-	  return SWIG_OLDOBJ;
-	}
-      } else if (PySequence_Check(obj)) {
-	try {
-	  if (vec) {
-	    vtype *pseq = new vtype();
-	    PyObject *iterator = PyObject_GetIter(obj);
-	    PyObject *item;
-	    typename std::vector< boost::shared_ptr<T > >::value_type temp2shared2;
-	    while((item = PyIter_Next(iterator))) {
-	      boost::shared_ptr<T> *itemp;
-	      int newmem = 0;
-	      int res = SWIG_ConvertPtrAndOwn(item, (void**) &itemp, 
-			swig::type_info<boost::shared_ptr<T> >(),  0, &newmem);
-	      if(!SWIG_IsOK(res)) {
-		Py_DECREF(item);
-		Py_DECREF(iterator);
-		return SWIG_ERROR;
-	      }
-	      // Added mms
-	      // Special handling if this is a director class. In that case, we
-	      // don't own the underlying python object. See
-	      // DirectorNotes.md for details.
-	      Swig::Director* dp = dynamic_cast<Swig::Director*>(itemp->get());
-	      if(dp) {
-		temp2shared2.reset(itemp->get(), PythonRefPtrCleanup(dp->swig_get_self()));
-		itemp = &temp2shared2;
-	      }
-	      pseq->push_back(*itemp);
-	      Py_DECREF(item);
-	    }
-	    Py_DECREF(iterator);
-	    *vec = pseq;
-	    return SWIG_NEWOBJ;
-	  } else {
-	    SwigPySequence_Cont<boost::shared_ptr<T> > swigpyseq(obj);
-	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
-	  }
-	} catch (std::exception& e) {
-	  if (vec) {
-	    if (!PyErr_Occurred()) {
-	      PyErr_SetString(PyExc_TypeError, e.what());
-	    }
-	  }
-	  return SWIG_ERROR;
-	}
-      }
-      return SWIG_ERROR;
-    }
-  };
-}
-#else
-namespace swig {
-  template <class SwigPySeq, class T>
-  inline void
-  assign(const SwigPySeq& swigpyseq, std::vector<boost::shared_ptr<T> >* seq) {
-    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
-    typedef typename SwigPySeq::value_type value_type;
-    typename SwigPySeq::const_iterator it = swigpyseq.begin();
-    for (;it != swigpyseq.end(); ++it) {
-      value_type itemp = (value_type)(*it);
-      // Added mms
-      // Special handling if this is a director class. In that case, we
-      // don't own the underlying python object. See
-      // DirectorNotes.md for details.
-      Swig::Director* dp = dynamic_cast<Swig::Director*>(itemp.get());
-      if(dp) {
-	// Diagnostic to make sure we end up here when we should
-	//std::cerr << "Setting up PythonRefPtrCleanup\n";
-      	itemp.reset(itemp.get(), PythonRefPtrCleanup(dp->swig_get_self()));
-      }
-      seq->insert(seq->end(),itemp);
-    }
-  }
-}
-#endif  
-
-
-#ifndef CMAKE_KLUDGE_QUOTE  
-#define CMAKE_KLUDGE_Q(x) #x
-#define CMAKE_KLUDGE_QUOTE(x) CMAKE_KLUDGE_Q(x)
-#endif
-
-// CMAKE unfortunately uses a different name for the wrapper file that
-// the standard SWIG convention. So we set up CMAKE ot pass in a
-// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
-#ifndef CMAKE_SWIG_FILE_NAMES  
-  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## _wrap.h)
-#else  
-  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## PYTHON_wrap.h)
-#endif  
-  
-
-
-#include "auto_derivative.h"
-namespace GeoCal {
-}
-
-
-
-struct SWIG_null_deleter {
-  void operator() (void const *) const {
-  }
-};
-#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
-#define SWIG_NO_NULL_DELETER_1
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
-#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
-
-
-#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
-
-
-SWIGINTERN int
-SWIG_AsVal_int (PyObject * obj, int *val)
-{
-  long v;
-  int res = SWIG_AsVal_long (obj, &v);
-  if (SWIG_IsOK(res)) {
-    if ((v < INT_MIN || v > INT_MAX)) {
-      return SWIG_OverflowError;
-    } else {
-      if (val) *val = static_cast< int >(v);
-    }
-  }  
-  return res;
-}
-
-
-SWIGINTERN swig_type_info*
-SWIG_pchar_descriptor(void)
-{
-  static int init = 0;
-  static swig_type_info* info = 0;
-  if (!init) {
-    info = SWIG_TypeQuery("_p_char");
-    init = 1;
-  }
-  return info;
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_FromCharPtrAndSize(const char* carray, size_t size)
-{
-  if (carray) {
-    if (size > INT_MAX) {
-      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
-      return pchar_descriptor ? 
-	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
-    } else {
-#if PY_VERSION_HEX >= 0x03000000
-#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
-      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#else
-      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
-#endif
-#else
-      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
-#endif
-    }
-  } else {
-    return SWIG_Py_Void();
-  }
-}
-
-
-SWIGINTERNINLINE PyObject *
-SWIG_From_std_string  (const std::string& s)
-{
-  return SWIG_FromCharPtrAndSize(s.data(), s.size());
-}
-
-SWIGINTERN double GeoCal_AutoDerivative_Sl_double_Sg___value(GeoCal::AutoDerivative< double > const *self){ return self->value();}
-
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-SWIGINTERN void GeoCal_AutoDerivative_Sl_double_Sg___value_set(GeoCal::AutoDerivative< double > *self,double V){ self->value() = V;}
-SWIGINTERN blitz::Array< double,1 > GeoCal_AutoDerivative_Sl_double_Sg___gradient(GeoCal::AutoDerivative< double > const *self){ return self->gradient();}
-SWIGINTERN void GeoCal_AutoDerivative_Sl_double_Sg___gradient_set(GeoCal::AutoDerivative< double > *self,blitz::Array< double,1 > &V){ self->gradient().reference(V.copy());}
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____add____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self + Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____add____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self + Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____radd__(GeoCal::AutoDerivative< double > *self,double const &X){ return X + *self;}
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____sub____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self - Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____sub____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self - Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rsub__(GeoCal::AutoDerivative< double > *self,double const &X){ return X - *self;}
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____mul____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self * Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____mul____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self * Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rmul__(GeoCal::AutoDerivative< double > *self,double const &X){ return X * *self;}
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____div____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self / Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____div____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self / Y; }
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rdiv__(GeoCal::AutoDerivative< double > *self,double const &X){ return X / *self;}
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____pow__(GeoCal::AutoDerivative< double > *self,double const &X){ return std::pow(*self,  X);}
-SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rpow__(GeoCal::AutoDerivative< double > *self,double const &X){ return std::pow(X, *self);}
-SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_0(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1){return (*self)(i1);}
-SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_1(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2){return (*self)(i1,i2);}
-SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_2(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
-SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_3(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
-SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_0(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,GeoCal::AutoDerivative< double > val){(*self)(i1) = val;}
-SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_1(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,GeoCal::AutoDerivative< double > val){(*self)(i1,i2) = val;}
-SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_2(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3,GeoCal::AutoDerivative< double > val){(*self)(i1,i2,i3) = val;}
-SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_3(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3,int i4,GeoCal::AutoDerivative< double > val){(*self)(i1,i2,i3,i4) = val;}
-SWIGINTERN void *blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__datav(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return (void*) self->data(); }
-SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape0(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[0]; }
-SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape1(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[1]; }
-SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape2(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[2]; }
-SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape3(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[3]; }
-SWIGINTERN GeoCal::AutoDerivative< double > boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg____getitem__(boost::array< GeoCal::AutoDerivative< double >,3 > *self,int i){return (*self)[i];}
-SWIGINTERN void boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg____setitem__(boost::array< GeoCal::AutoDerivative< double >,3 > *self,int i,GeoCal::AutoDerivative< double > const &V){(*self)[i] = V;}
-SWIGINTERN std::string boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg__print_to_string(boost::array< GeoCal::AutoDerivative< double >,3 > const *self){ 
-	std::ostringstream os;
-	BOOST_FOREACH(GeoCal::AutoDerivative< double > i, *self)
-	  os << i << " ";
-	return os.str();
-      }
-
 namespace swig {
   template <class Type>
   struct noconst_traits {
@@ -5205,6 +4967,277 @@ namespace swig {
   }
 }
 
+
+
+//--------------------------------------------------------------
+/// The default conversion of a python sequence to a std::vector<T>
+/// doesn't work correctly for boost::shared_ptr types. This
+/// expression here does this correctly.
+//--------------------------------------------------------------
+
+// Code changed a little between SWIG 3 and SWIG 4, so have different
+// versions depending on swig version.  
+#if SWIG_VERSION < 0x040000  
+namespace swig {
+  template <class T>
+  struct traits_asptr<std::vector<boost::shared_ptr<T> > >  {
+    static int asptr(PyObject *obj, 
+		     std::vector<boost::shared_ptr<T> > **vec) {
+      // Long name, so shorten
+      typedef std::vector<boost::shared_ptr<T> > vtype;
+      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
+	vtype *p;
+	if (::SWIG_ConvertPtr(obj,(void**)&p,
+			      swig::type_info<vtype>(),0) == SWIG_OK) {
+	  if (vec) *vec = p;
+	  return SWIG_OLDOBJ;
+	}
+      } else if (PySequence_Check(obj)) {
+	try {
+	  if (vec) {
+	    vtype *pseq = new vtype();
+	    PyObject *iterator = PyObject_GetIter(obj);
+	    PyObject *item;
+	    typename std::vector< boost::shared_ptr<T > >::value_type temp2shared2;
+	    while((item = PyIter_Next(iterator))) {
+	      boost::shared_ptr<T> *itemp;
+	      int newmem = 0;
+	      int res = SWIG_ConvertPtrAndOwn(item, (void**) &itemp, 
+			swig::type_info<boost::shared_ptr<T> >(),  0, &newmem);
+	      if(!SWIG_IsOK(res)) {
+		Py_DECREF(item);
+		Py_DECREF(iterator);
+		return SWIG_ERROR;
+	      }
+	      // Added mms
+	      // Special handling if this is a director class. In that case, we
+	      // don't own the underlying python object. See
+	      // DirectorNotes.md for details.
+	      Swig::Director* dp = dynamic_cast<Swig::Director*>(itemp->get());
+	      if(dp) {
+		temp2shared2.reset(itemp->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+		itemp = &temp2shared2;
+	      }
+	      pseq->push_back(*itemp);
+	      Py_DECREF(item);
+	    }
+	    Py_DECREF(iterator);
+	    *vec = pseq;
+	    return SWIG_NEWOBJ;
+	  } else {
+	    SwigPySequence_Cont<boost::shared_ptr<T> > swigpyseq(obj);
+	    return swigpyseq.check() ? SWIG_OK : SWIG_ERROR;
+	  }
+	} catch (std::exception& e) {
+	  if (vec) {
+	    if (!PyErr_Occurred()) {
+	      PyErr_SetString(PyExc_TypeError, e.what());
+	    }
+	  }
+	  return SWIG_ERROR;
+	}
+      }
+      return SWIG_ERROR;
+    }
+  };
+}
+#else
+namespace swig {
+  template <class SwigPySeq, class T>
+  inline void
+  assign(const SwigPySeq& swigpyseq, std::vector<boost::shared_ptr<T> >* seq) {
+    // seq->assign(swigpyseq.begin(), swigpyseq.end()); // not used as not always implemented
+    typedef typename SwigPySeq::value_type value_type;
+    typename SwigPySeq::const_iterator it = swigpyseq.begin();
+    for (;it != swigpyseq.end(); ++it) {
+      value_type itemp = (value_type)(*it);
+      // Added mms
+      // Special handling if this is a director class. In that case, we
+      // don't own the underlying python object. See
+      // DirectorNotes.md for details.
+      Swig::Director* dp = dynamic_cast<Swig::Director*>(itemp.get());
+      if(dp) {
+	// Diagnostic to make sure we end up here when we should
+	//std::cerr << "Setting up PythonRefPtrCleanup\n";
+      	itemp.reset(itemp.get(), PythonRefPtrCleanup(dp->swig_get_self()));
+      }
+      seq->insert(seq->end(),itemp);
+    }
+  }
+
+  template <class T>
+  struct traits_asptr<boost::shared_ptr<T> > {   
+    static int asptr(PyObject *obj, boost::shared_ptr<T> **val) {
+      int res = SWIG_ERROR;
+      swig_type_info *descriptor = swig::type_info<boost::shared_ptr<T> >();
+      if (val) {
+        boost::shared_ptr<T> *p = 0;
+        int newmem = 0;
+        res = descriptor ? SWIG_ConvertPtrAndOwn(obj, (void **)&p, descriptor, 0, &newmem) : SWIG_ERROR;
+        if (SWIG_IsOK(res)) {
+          if (newmem & SWIG_CAST_NEW_MEMORY) {
+            res |= SWIG_NEWOBJMASK;
+          }
+	  // Added mms
+	  // Special handling if this is a director class. In that case, we
+	  // don't own the underlying python object. See
+	  // DirectorNotes.md for details.
+	  Swig::Director* dp = dynamic_cast<Swig::Director*>(p->get());
+	  if(dp) {
+	    boost::shared_ptr<T> *p2 = new boost::shared_ptr<T>(p->get(), PythonRefPtrCleanup(dp->swig_get_self()));
+	    p = p2;
+            res |= SWIG_NEWOBJMASK;
+	  }
+          *val = p;
+        }
+      } else {
+        res = descriptor ? SWIG_ConvertPtr(obj, 0, descriptor, 0) : SWIG_ERROR;
+      }
+      return res;
+    }
+  }; 
+}
+  
+#endif  
+
+
+#ifndef CMAKE_KLUDGE_QUOTE  
+#define CMAKE_KLUDGE_Q(x) #x
+#define CMAKE_KLUDGE_QUOTE(x) CMAKE_KLUDGE_Q(x)
+#endif
+
+// CMAKE unfortunately uses a different name for the wrapper file that
+// the standard SWIG convention. So we set up CMAKE ot pass in a
+// CMAKE_SWIG_FILE_NAMES to get the right inclusion file.  
+#ifndef CMAKE_SWIG_FILE_NAMES  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## _wrap.h)
+#else  
+  #define CMAKE_KLUDGE_INCLUDE_HEADER(x) CMAKE_KLUDGE_QUOTE(x ## PYTHON_wrap.h)
+#endif  
+  
+
+
+#include "auto_derivative.h"
+namespace GeoCal {
+}
+
+
+
+struct SWIG_null_deleter {
+  void operator() (void const *) const {
+  }
+};
+#define SWIG_NO_NULL_DELETER_0 , SWIG_null_deleter()
+#define SWIG_NO_NULL_DELETER_1
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW
+#define SWIG_NO_NULL_DELETER_SWIG_POINTER_OWN
+
+
+#define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
+
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static int init = 0;
+  static swig_type_info* info = 0;
+  if (!init) {
+    info = SWIG_TypeQuery("_p_char");
+    init = 1;
+  }
+  return info;
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_FromCharPtrAndSize(const char* carray, size_t size)
+{
+  if (carray) {
+    if (size > INT_MAX) {
+      swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+      return pchar_descriptor ? 
+	SWIG_InternalNewPointerObj(const_cast< char * >(carray), pchar_descriptor, 0) : SWIG_Py_Void();
+    } else {
+#if PY_VERSION_HEX >= 0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+      return PyBytes_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#else
+      return PyUnicode_DecodeUTF8(carray, static_cast< Py_ssize_t >(size), "surrogateescape");
+#endif
+#else
+      return PyString_FromStringAndSize(carray, static_cast< Py_ssize_t >(size));
+#endif
+    }
+  } else {
+    return SWIG_Py_Void();
+  }
+}
+
+
+SWIGINTERNINLINE PyObject *
+SWIG_From_std_string  (const std::string& s)
+{
+  return SWIG_FromCharPtrAndSize(s.data(), s.size());
+}
+
+SWIGINTERN double GeoCal_AutoDerivative_Sl_double_Sg___value(GeoCal::AutoDerivative< double > const *self){ return self->value();}
+
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+SWIGINTERN void GeoCal_AutoDerivative_Sl_double_Sg___value_set(GeoCal::AutoDerivative< double > *self,double V){ self->value() = V;}
+SWIGINTERN blitz::Array< double,1 > GeoCal_AutoDerivative_Sl_double_Sg___gradient(GeoCal::AutoDerivative< double > const *self){ return self->gradient();}
+SWIGINTERN void GeoCal_AutoDerivative_Sl_double_Sg___gradient_set(GeoCal::AutoDerivative< double > *self,blitz::Array< double,1 > &V){ self->gradient().reference(V.copy());}
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____add____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self + Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____add____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self + Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____radd__(GeoCal::AutoDerivative< double > *self,double const &X){ return X + *self;}
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____sub____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self - Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____sub____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self - Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rsub__(GeoCal::AutoDerivative< double > *self,double const &X){ return X - *self;}
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____mul____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self * Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____mul____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self * Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rmul__(GeoCal::AutoDerivative< double > *self,double const &X){ return X * *self;}
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____div____SWIG_0(GeoCal::AutoDerivative< double > *self,GeoCal::AutoDerivative< double > const &Y){ return *self / Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____div____SWIG_1(GeoCal::AutoDerivative< double > *self,double const &Y){ return *self / Y; }
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rdiv__(GeoCal::AutoDerivative< double > *self,double const &X){ return X / *self;}
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____pow__(GeoCal::AutoDerivative< double > *self,double const &X){ return std::pow(*self,  X);}
+SWIGINTERN GeoCal::AutoDerivative< double > GeoCal_AutoDerivative_Sl_double_Sg____rpow__(GeoCal::AutoDerivative< double > *self,double const &X){ return std::pow(X, *self);}
+SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_0(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1){return (*self)(i1);}
+SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_1(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2){return (*self)(i1,i2);}
+SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_2(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3){return (*self)(i1,i2,i3);}
+SWIGINTERN GeoCal::AutoDerivative< double > blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_3(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3,int i4){return (*self)(i1,i2,i3,i4);}
+SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_0(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,GeoCal::AutoDerivative< double > val){(*self)(i1) = val;}
+SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_1(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,GeoCal::AutoDerivative< double > val){(*self)(i1,i2) = val;}
+SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_2(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3,GeoCal::AutoDerivative< double > val){(*self)(i1,i2,i3) = val;}
+SWIGINTERN void blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_3(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self,int i1,int i2,int i3,int i4,GeoCal::AutoDerivative< double > val){(*self)(i1,i2,i3,i4) = val;}
+SWIGINTERN void *blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__datav(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return (void*) self->data(); }
+SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape0(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[0]; }
+SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape1(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[1]; }
+SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape2(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[2]; }
+SWIGINTERN int blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape3(blitz::Array< GeoCal::AutoDerivative< double >,1 > *self){ return self->shape()[3]; }
+SWIGINTERN GeoCal::AutoDerivative< double > boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg____getitem__(boost::array< GeoCal::AutoDerivative< double >,3 > *self,int i){return (*self)[i];}
+SWIGINTERN void boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg____setitem__(boost::array< GeoCal::AutoDerivative< double >,3 > *self,int i,GeoCal::AutoDerivative< double > const &V){(*self)[i] = V;}
+SWIGINTERN std::string boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg__print_to_string(boost::array< GeoCal::AutoDerivative< double >,3 > const *self){ 
+	std::ostringstream os;
+	BOOST_FOREACH(GeoCal::AutoDerivative< double > i, *self)
+	  os << i << " ";
+	return os.str();
+      }
 
 #include <functional>
 

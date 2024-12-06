@@ -39,6 +39,12 @@ Options:
        matching or get all the way down to full resolution data. Useful
        for difficult to match imagery. [default: 0]
 
+  --start-image-index=n
+       Start index (inclusive) of images to consider in matching. [default: 0]
+
+  --end-image-index=n
+       End index (exclusive) of images to consider in matching.  Default is to use all images in IGC.
+
   --base-image-index=n
        The image to consider the base image in matching. [default: 0]
 
@@ -202,58 +208,61 @@ def image_match_tp_collect(args, igc, mi, refimg, pool):
            
     if(args.base_image_spacing):
         for i in range(0, igc.number_image, args.base_image_spacing):
-            log.info("Adding base image %d" % i)
-            msg.append("Doing base image %d" % i)
+            log.info("Adding base image %d, start %d, end %s" % (i, args.start_image_index, repr(args.end_image_index)))
+            msg.append("Doing base image %d, start %d, end %s" % (i, args.start_image_index, repr(args.end_image_index)))
             if(args.project_surface):
                 ig_base = igc.image_ground_connection(i)
                 mibase = cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
             tpcollect.append(geocal.TiePointCollect(igc, avg_level = args.avg_level,
-                                             scale_factor = args.scale_factor,
-                                             image_matcher = image_matcher,
-                                             ref_image = refimg,
-                                             ref_dem = dem,
-                                             gcp_image_matcher = gcp_image_matcher,
-                                             map_info = mi,
-                                             grid_spacing = args.grid_spacing,
-                                             surface_image = surface_image,
-                                             base_image_index = i,
-                                             max_ground_covariance = 
-                                             args.max_ground_sigma ** 2))
+                                                    scale_factor = args.scale_factor,
+                                                    image_matcher = image_matcher,
+                                                    ref_image = refimg,
+                                                    ref_dem = dem,
+                                                    gcp_image_matcher = gcp_image_matcher,
+                                                    map_info = mi,
+                                                    grid_spacing = args.grid_spacing,
+                                                    surface_image = surface_image,
+                                                    base_image_index = i,
+                                                    max_ground_covariance = args.max_ground_sigma ** 2,
+                                                    start_image_index = args.start_image_index,
+                                                    end_image_index = args.end_image_index))
         if(not igc.number_image % args.base_image_spacing == 0):
-            log.info("Adding base image %d" % (igc.number_image - 1, ))
-            msg.append("Doing base image %d" % (igc.number_image - 1, ))
+            log.info("Adding base image %d, start %d, end %s" % (igc.number_image - 1, args.start_image_index, repr(args.end_image_index)))
+            msg.append("Doing base image %d, start %d, end %s" % (igc.number_image - 1, args.start_image_index, repr(args.end_image_index)))
             if(args.project_surface):
                 ig_base = igc.image_ground_connection(igc.number_image - 1)
                 mibase = geocal.cib01_mapinfo(desired_resolution = ig_base.resolution_meter())
                 mi = ig_base.cover(mibase)
             tpcollect.append(geocal.TiePointCollect(igc, avg_level = args.avg_level,
-                                             image_matcher = image_matcher,
-                                             ref_image = refimg,
-                                             ref_dem = dem,
-                                             gcp_image_matcher = gcp_image_matcher,
-                                             scale_factor = args.scale_factor,
-                                             map_info = mi,
-                                             grid_spacing = args.grid_spacing,
-                                             surface_image = surface_image,
-                                             base_image_index = igc.number_image - 1,
-                                             max_ground_covariance = 
-                                             args.max_ground_sigma ** 2))
+                                                    image_matcher = image_matcher,
+                                                    ref_image = refimg,
+                                                    ref_dem = dem,
+                                                    gcp_image_matcher = gcp_image_matcher,
+                                                    scale_factor = args.scale_factor,
+                                                    map_info = mi,
+                                                    grid_spacing = args.grid_spacing,
+                                                    surface_image = surface_image,
+                                                    base_image_index = igc.number_image - 1,
+                                                    max_ground_covariance = args.max_ground_sigma ** 2,
+                                                    start_image_index = args.start_image_index,
+                                                    end_image_index = args.end_image_index))
     else:
-        log.info("Adding base image %d" % args.base_image_index)
-        msg.append("Doing base image %d" % args.base_image_index)
+        log.info("Adding base image %d : start %d, end %s" % (args.base_image_index, args.start_image_index, repr(args.end_image_index)))
+        msg.append("Doing base image %d : start %d, end %s" % (args.base_image_index, args.start_image_index, repr(args.end_image_index)))
         tpcollect.append(geocal.TiePointCollect(igc, avg_level = args.avg_level,
-                                         image_matcher = image_matcher,
-                                         ref_image = refimg,
-                                         ref_dem = dem,
-                                         gcp_image_matcher = gcp_image_matcher,
-                                         scale_factor = args.scale_factor,
-                                         map_info = mi,
-                                         grid_spacing = args.grid_spacing,
-                                         surface_image = surface_image,
-                                         base_image_index = args.base_image_index,
-                                         max_ground_covariance = 
-                                         args.max_ground_sigma ** 2))
+                                                image_matcher = image_matcher,
+                                                ref_image = refimg,
+                                                ref_dem = dem,
+                                                gcp_image_matcher = gcp_image_matcher,
+                                                scale_factor = args.scale_factor,
+                                                map_info = mi,
+                                                grid_spacing = args.grid_spacing,
+                                                surface_image = surface_image,
+                                                base_image_index = args.base_image_index,
+                                                max_ground_covariance = args.max_ground_sigma ** 2,
+                                                start_image_index = args.start_image_index,
+                                                end_image_index = args.end_image_index))
     maxnumx = int(igc.image(0).number_line / args.min_grid_size)
     maxnumy = int(igc.image(0).number_sample / args.min_grid_size)
     numx = min(args.number_x, maxnumx)
@@ -293,6 +302,10 @@ if(args.number_process > 1):
     pool = Pool(args.number_process)
 
 igc = geocal.read_shelve(args.igc)
+
+if args.end_image_index == None:
+    args.end_image_index = igc.number_image
+
 if(args.map_info):
     m = geocal.read_shelve(args.map_info)
     if(isinstance(m, geocal.MapInfo)):

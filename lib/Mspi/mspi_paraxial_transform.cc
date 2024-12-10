@@ -17,7 +17,8 @@ void MspiParaxialTransform::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(a)
     & GEOCAL_NVP_(b)
     & GEOCAL_NVP_(c)
-    & GEOCAL_NVP_(d);
+    & GEOCAL_NVP_(d)
+    & GEOCAL_NVP_(paraxial_y_mode);
 }
 
 GEOCAL_IMPLEMENT(MspiParaxialTransform);
@@ -31,7 +32,8 @@ const int number_c_parameter = 12;
 //-----------------------------------------------------------------------
 
 MspiParaxialTransform::MspiParaxialTransform(const std::string& File_name)
-  :fname(File_name)
+  :fname(File_name),
+   paraxial_y_mode_(0) // default, use real Y input to paraxial Y
 {
   Range ra = Range::all();
   MspiConfigFile config(File_name);
@@ -72,6 +74,16 @@ MspiParaxialTransform::MspiParaxialTransform(const std::string& File_name)
     if(scratch.rows() != d_.cols())
       throw Exception("Coefficient is the wrong size");
     d_(i, ra) = scratch;
+  }
+
+  //---------------------------------------------------------------------
+  // Read optional config parameters
+  //
+  // if paraxial_y_mode == 1, then do not use real y input to paraxial y
+  //---------------------------------------------------------------------
+
+  if (config.have_key("paraxial_y_mode")) {
+    paraxial_y_mode_ = config.value<int>("paraxial_y_mode");
   }
 }
 
@@ -200,7 +212,12 @@ void MspiParaxialTransform::real_to_paraxial
   Array<double, 1> bf = b_(index, ra);
 
   double xfp = Real_x;
-  double yfp = Real_y;
+  double yfp;
+  if (paraxial_y_mode_ == 1) {
+    yfp = 0;
+  } else {
+    yfp = Real_y;
+  }
 
   double xfp2 = xfp * xfp;
   double xfp3 = xfp2 * xfp;
@@ -237,7 +254,12 @@ void MspiParaxialTransform::real_to_paraxial
   Array<double, 1> bf = b_(index, ra);
 
   AutoDerivative<double> xfp = Real_x;
-  AutoDerivative<double> yfp = Real_y;
+  AutoDerivative<double> yfp;
+  if (paraxial_y_mode_ == 1) {
+    yfp = 0;
+  } else {
+    yfp = Real_y;
+  }
 
   AutoDerivative<double> xfp2 = xfp * xfp;
   AutoDerivative<double> xfp3 = xfp2 * xfp;

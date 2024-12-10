@@ -69,6 +69,7 @@ private:
   std::string fname;
   std::map<int, int> row_to_index;
   blitz::Array<double, 2> a_, b_, c_, d_;
+  int paraxial_y_mode_;
   MspiParaxialTransform() {}
   friend class boost::serialization::access;
   template<class Archive>

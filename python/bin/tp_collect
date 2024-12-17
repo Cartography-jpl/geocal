@@ -6,7 +6,7 @@ import geocal
 from multiprocessing import Pool
 import logging
 
-version = "September 9, 2016"
+version = "December 16, 2024"
 usage="""Usage: 
   tp_collect [options] <igc> <output>
   tp_collect --gcp [options] <igc> <reference_image> <output>

@@ -1,6 +1,6 @@
 # GeoCal
 This provides software for map projection, geometric calibration, 
-simultaneous bundle adjustment, etc.
+simultaneous bundle adjustment, etc. (NPO 20999).
 
 The software is made up of a core C++ library, python wrappers that allows 
 the library to be used through python, and a number of support executables. 

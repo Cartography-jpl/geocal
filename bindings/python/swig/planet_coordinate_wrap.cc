@@ -11298,9 +11298,6 @@ SWIG_init(void) {
   SWIG_Python_SetConstant(d, "SWIG_MODULE_ALREADY_DONE",SWIG_From_int(static_cast< int >(1)));
   SWIG_Python_SetConstant(d, "SHARED_PTR_DISOWN",SWIG_From_int(static_cast< int >(0)));
   
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetConstant), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetConstant > > ("boost::shared_ptr< GeoCal::PlanetConstant > *"));
-  
-  
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::PlanetFixed), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::PlanetFixed > > ("boost::shared_ptr< GeoCal::PlanetFixed > *"));
   
   

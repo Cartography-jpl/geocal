@@ -12,7 +12,7 @@
 %import "orbit.i"
 %import "simple_dem.i"
 
-%geocal_shared_ptr(GeoCal::PlanetConstant);
+%shared_ptr(GeoCal::PlanetConstant);
 %geocal_shared_ptr(GeoCal::PlanetFixed);
 %geocal_shared_ptr(GeoCal::PlanetInertial);
 %geocal_shared_ptr(GeoCal::Planetocentric);

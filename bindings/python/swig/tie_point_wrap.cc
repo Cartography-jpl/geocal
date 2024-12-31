@@ -14462,9 +14462,6 @@ SWIG_init(void) {
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::TiePointCollection), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::TiePointCollection > > ("boost::shared_ptr< GeoCal::TiePointCollection > *"));
   
   
-  GeoCal::SwigTypeMapperBase::add(typeid(std::vector<boost::shared_ptr<GeoCal::TiePoint> >), boost::make_shared<GeoCal::SwigTypeMapper< std::vector<boost::shared_ptr<GeoCal::TiePoint> > > > ("boost::shared_ptr< std::vector<boost::shared_ptr<GeoCal::TiePoint> > > *"));
-  
-  
   // thread safe initialization
   swig::container_owner_attribute();
   

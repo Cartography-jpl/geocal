@@ -8,7 +8,7 @@
 %}
 %base_import(generic_object)
 %geocal_shared_ptr(GeoCal::IterativeMorphologicalDilation);
-%geocal_shared_ptr(GeoCal::IterativeMorphologicalDilation::FrontierPixel);
+%shared_ptr(GeoCal::IterativeMorphologicalDilation::FrontierPixel);
 namespace GeoCal {
 class IterativeMorphologicalDilation : public GenericObject {
 public:

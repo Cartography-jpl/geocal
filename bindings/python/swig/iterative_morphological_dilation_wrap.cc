@@ -8328,9 +8328,6 @@ SWIG_init(void) {
   
   GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation > *"));
   
-  
-  GeoCal::SwigTypeMapperBase::add(typeid(GeoCal::IterativeMorphologicalDilation::FrontierPixel), boost::make_shared<GeoCal::SwigTypeMapper< GeoCal::IterativeMorphologicalDilation::FrontierPixel > > ("boost::shared_ptr< GeoCal::IterativeMorphologicalDilation::FrontierPixel > *"));
-  
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_C_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::C_ORDER)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_RANDOM_ORDER",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::RANDOM_ORDER)));
   SWIG_Python_SetConstant(d, "IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST",SWIG_From_int(static_cast< int >(GeoCal::IterativeMorphologicalDilation::MOST_NEIGHBORS_FIRST)));

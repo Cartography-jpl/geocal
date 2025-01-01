@@ -6163,24 +6163,6 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
-  namespace swig {
-    template <>  struct traits< boost::shared_ptr< GeoCal::Time > > {
-      typedef pointer_category category;
-      static const char* type_name() { return"boost::shared_ptr< GeoCal::Time >"; }
-    };
-  }
-
-
-      namespace swig {
-	template <>  struct traits<std::vector< boost::shared_ptr< GeoCal::Time >, std::allocator< boost::shared_ptr< GeoCal::Time > > > > {
-	  typedef pointer_category category;
-	  static const char* type_name() {
-	    return "std::vector<" "boost::shared_ptr< GeoCal::Time >" "," "std::allocator< boost::shared_ptr< GeoCal::Time > >" " >";
-	  }
-	};
-      }
-    
-
 SWIGINTERN int
 SWIG_AsVal_int (PyObject * obj, int *val)
 {
@@ -7261,7 +7243,9 @@ SWIGINTERN PyObject *_wrap_OrbitQuaternionList__v_quaternion_orbit_data_time(PyO
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = swig::from(static_cast< std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > >(result));
+  {
+    resultobj = GeoCal::swig_to_python(result);
+  }
   return resultobj;
 fail:
   return NULL;

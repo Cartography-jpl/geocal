@@ -9595,7 +9595,9 @@ SWIGINTERN PyObject *_wrap_Vector_Time2___getslice__(PyObject *self, PyObject *a
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_OWN |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(*result);
+  }
   return resultobj;
 fail:
   return NULL;
@@ -9873,7 +9875,9 @@ SWIGINTERN PyObject *_wrap_Vector_Time2___getitem____SWIG_0(PyObject *self, Py_s
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_OWN |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(*result);
+  }
   return resultobj;
 fail:
   return NULL;
@@ -10352,7 +10356,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_0(PyObject *self, Py_ssize_t n
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(*result);
+  }
   return resultobj;
 fail:
   return NULL;
@@ -10386,7 +10392,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_1(PyObject *self, Py_ssize_t n
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(*result);
+  }
   if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
@@ -10708,7 +10716,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_2(PyObject *self, Py_ssize_t n
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(*result);
+  }
   return resultobj;
 fail:
   return NULL;
@@ -10960,7 +10970,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Time2__SWIG_3(PyObject *self, Py_ssize_t n
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_std__allocatorT_boost__shared_ptrT_GeoCal__Time_t_t_t, SWIG_POINTER_NEW |  0 );
+  {
+    resultobj = GeoCal::swig_to_python(*result);
+  }
   return resultobj;
 fail:
   return NULL;

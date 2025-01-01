@@ -183,7 +183,7 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
-    _v_create_subset_file = _swig_new_instance_method(_cart_lab_multifile.CartLabMultifile__v_create_subset_file)
+    create_subset_file = _swig_new_instance_method(_cart_lab_multifile.CartLabMultifile_create_subset_file)
     _v_directory_base = _swig_new_instance_method(_cart_lab_multifile.CartLabMultifile__v_directory_base)
 
     @property
@@ -197,16 +197,6 @@ class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
       if(self.this is None):
         return super().__reduce__()
       return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
-
-
-    def create_subset_file(self, Oname, Driver, Pt_list = [], Desired_map_info = None, Translate_arg = "", Options = "", Boundary = 0, Verbose = False):
-      if(isinstance(Pt_list, geocal_swig.Vector_GroundCoordinate)):
-          t = Pt_list
-      else:
-          t = geocal_swig.Vector_GroundCoordinate()
-          for p in Pt_list:
-              t.push_back(p)
-      return self._v_create_subset_file(Oname, Driver, t, Desired_map_info, Translate_arg,Options, Boundary, Verbose)
 
     __swig_destroy__ = _cart_lab_multifile.delete_CartLabMultifile
 

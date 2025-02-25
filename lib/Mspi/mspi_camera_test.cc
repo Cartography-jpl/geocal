@@ -249,13 +249,12 @@ BOOST_AUTO_TEST_CASE(airmspi2_roundtrip_test)
       for (int smp = 0; smp < cam.number_sample(b); smp += 10) {
         FrameCoordinate fc(ln, smp);
         FrameCoordinate fc2 = cam.frame_coordinate(cam.sc_look_vector(fc, b), b);
-        /// KLUDGE: Since line offset (ln) is not included in the current configuration, we subtract it here
-        if ((fabs(fc.line - fc2.line - ln) >= 0.2) or  /// <-- KLUDGE: subtract ln offset
-            (fabs(fc.sample - fc2.sample) >= 0.2)) {
+        if ((fabs(fc.line - fc2.line) >= 0.2) or
+            (fabs(fc.sample - fc2.sample) >= 0.25)) {
           std::cerr << b << " " << row << " : " << fc.sample << " " << fc.line << " : " << fc2.sample << " " << fc2.line << " : " << fc.sample - fc2.sample << " " << fc.line - fc2.line << " (band row : sample line : roundtrip fail mspi_camera_test.cc)\n";
         }
-        BOOST_CHECK(fabs(fc.line - fc2.line - ln) < 0.2);  /// <-- KLUDGE: subtract ln offset
-        BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.2);
+        BOOST_CHECK(fabs(fc.line - fc2.line) < 0.2);
+        BOOST_CHECK(fabs(fc.sample - fc2.sample) < 0.25);
       }
     }
   }

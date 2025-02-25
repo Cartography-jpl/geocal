@@ -40,8 +40,8 @@ granule_MSPI-Ground/GeoCal/MspiCamera/src/mspi_camera_test.config2 : granule_id
 #24 : band5
 #64 : band6
 
-7 : paraxial_number_row  # Number of rows for which paraxial transform coefficients are provided.
-34 32 29 27 24 22 64 : paraxial_row_numbers # Row numbers for which paraxial transform coefficients are provided.
+#7 : paraxial_number_row  # Number of rows for which paraxial transform coefficients are provided.
+#34 32 29 27 24 22 64 : paraxial_row_numbers # Row numbers for which paraxial transform coefficients are provided.
 
 # Real to paraxial X
 #    X       X^3        X^5        X^7
@@ -55,16 +55,15 @@ granule_MSPI-Ground/GeoCal/MspiCamera/src/mspi_camera_test.config2 : granule_id
 1.0    0.0       0.0        0.0        : a64 # Row 64 (identity)
 
 # Real to paraxial Y
-#   b0 = X^0 - F(n)orgin
 #
-#    b0      X^2       X^4       X^6
--.00727 0.006595 2.79e-006 1.60e-009 : b34 # Row 34 (copy of row 32)
--.00727 0.006595 2.79e-006 1.60e-009 : b32 # Row 32
--.00682 0.006622 2.81e-006 1.61e-009 : b29 # Row 29 (copy of row 27)
--.00682 0.006622 2.81e-006 1.61e-009 : b27 # Row 27
--.00640 0.006649 2.89e-006 1.62e-009 : b24 # Row 24 (copy of row 22)
--.00640 0.006649 2.89e-006 1.62e-009 : b22 # Row 22
-0.0     0.0      0.0       0.0       : b64 # Row 64 (identity)
+#    X^0     X^2       X^4       X^6
+7.30000e-04    0.006595 2.79e-006 1.60e-009 : b32 # Row 32
+-7.88200e-02   0.006622 2.81e-006 1.61e-009 : b27 # Row 27
+-1.58400e-01   0.006649 2.89e-006 1.62e-009 : b22 # Row 22
+3.27300e-02    0.006595 2.79e-006 1.60e-009 : b34 # Row 34 (copy of row 32)
+-4.68200e-02   0.006622 2.81e-006 1.61e-009 : b29 # Row 29 (copy of row 27)
+-1.26400e-01   0.006649 2.89e-006 1.62e-009 : b24 # Row 24 (copy of row 22)
+5.20000e-01    0.0      0.0       0.0       : b64 # Row 64 (identity)
 
 # Paraxial to real X
 #      x        xy       xy^2        x^3       x^3y    x^3y^2       x^5      x^5y     x^5y^2        x^7       x^7y    x^7y^2 

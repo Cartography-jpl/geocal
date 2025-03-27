@@ -21,7 +21,7 @@ blitz::Array<bool, 2> linear_gradient_bad_pixel_detection
   (const blitz::Array<double, 2>& Img,
    int Window_size = 7,
    double Percentile = 90.0,
-   int Thresh_fact = 2,
+   double Thresh_fact = 2.0,
    double Nfail_thresh_percentage = 75.0,
    array_local_edge_handle Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE,
    int Number_task=1);

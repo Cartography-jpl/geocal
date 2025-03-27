@@ -23,7 +23,7 @@ def test_linear_gradient_bad_pixel_detection():
     original_data[0,100] = -80
     original_data[-1,-1] = 80
 
-    bpixdetect = LinearGradientBadPixelDetection()
+    bpixdetect = LinearGradientBadPixelDetection(thresh_fact=2.5)
     is_bad = bpixdetect.bad_pixel_detection(original_data)
     assert (np.argwhere(is_bad == True) == [[0,100], [100, 200], [300, 400],
                                             [2047,2047]]).all()

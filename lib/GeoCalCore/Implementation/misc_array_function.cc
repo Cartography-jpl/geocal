@@ -205,7 +205,7 @@ blitz::Array<bool, 2> GeoCal::linear_gradient_bad_pixel_detection
 (const blitz::Array<double, 2>& Img,
  int Window_size,
  double Percentile,
- int Thresh_fact,
+ double Thresh_fact,
  double Nfail_thresh_percentage,
  array_local_edge_handle Edge_handle,
  int Number_task

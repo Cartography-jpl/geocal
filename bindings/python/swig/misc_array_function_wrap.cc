@@ -6323,7 +6323,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
-  int arg4 ;
+  double arg4 ;
   double arg5 ;
   GeoCal::array_local_edge_handle arg6 ;
   int arg7 ;
@@ -6333,7 +6333,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  double val4 ;
   int ecode4 = 0 ;
   double val5 ;
   int ecode5 = 0 ;
@@ -6371,11 +6371,11 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "double""'");
   } 
-  arg4 = static_cast< int >(val4);
+  arg4 = static_cast< double >(val4);
   ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "5"" of type '" "double""'");
@@ -6433,7 +6433,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_1(PyObject 
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
-  int arg4 ;
+  double arg4 ;
   double arg5 ;
   GeoCal::array_local_edge_handle arg6 ;
   blitz::Array< double,2 > a1 ;
@@ -6442,7 +6442,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_1(PyObject 
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  double val4 ;
   int ecode4 = 0 ;
   double val5 ;
   int ecode5 = 0 ;
@@ -6478,11 +6478,11 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_1(PyObject 
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "double""'");
   } 
-  arg4 = static_cast< int >(val4);
+  arg4 = static_cast< double >(val4);
   ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "5"" of type '" "double""'");
@@ -6535,7 +6535,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_2(PyObject 
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
-  int arg4 ;
+  double arg4 ;
   double arg5 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
@@ -6543,7 +6543,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_2(PyObject 
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  double val4 ;
   int ecode4 = 0 ;
   double val5 ;
   int ecode5 = 0 ;
@@ -6577,11 +6577,11 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_2(PyObject 
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "double""'");
   } 
-  arg4 = static_cast< int >(val4);
+  arg4 = static_cast< double >(val4);
   ecode5 = SWIG_AsVal_double(swig_obj[4], &val5);
   if (!SWIG_IsOK(ecode5)) {
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "5"" of type '" "double""'");
@@ -6629,14 +6629,14 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_3(PyObject 
   blitz::Array< double,2 > *arg1 = 0 ;
   int arg2 ;
   double arg3 ;
-  int arg4 ;
+  double arg4 ;
   blitz::Array< double,2 > a1 ;
   PythonObject numpy1 ;
   int val2 ;
   int ecode2 = 0 ;
   double val3 ;
   int ecode3 = 0 ;
-  int val4 ;
+  double val4 ;
   int ecode4 = 0 ;
   SwigValueWrapper< blitz::Array< bool,2 > > result;
   
@@ -6668,11 +6668,11 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_3(PyObject 
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  ecode4 = SWIG_AsVal_int(swig_obj[3], &val4);
+  ecode4 = SWIG_AsVal_double(swig_obj[3], &val4);
   if (!SWIG_IsOK(ecode4)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "int""'");
+    SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "linear_gradient_bad_pixel_detection" "', argument " "4"" of type '" "double""'");
   } 
-  arg4 = static_cast< int >(val4);
+  arg4 = static_cast< double >(val4);
   {
     try {
       result = GeoCal::linear_gradient_bad_pixel_detection((blitz::Array< double,2 > const &)*arg1,arg2,arg3,arg4);
@@ -6967,10 +6967,10 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection(PyObject *self, P
 fail:
   SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'linear_gradient_bad_pixel_detection'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle,int)\n"
-    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double,GeoCal::array_local_edge_handle)\n"
-    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int,double)\n"
-    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,int)\n"
+    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,double,double,GeoCal::array_local_edge_handle,int)\n"
+    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,double,double,GeoCal::array_local_edge_handle)\n"
+    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,double,double)\n"
+    "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double,double)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int,double)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &,int)\n"
     "    GeoCal::linear_gradient_bad_pixel_detection(blitz::Array< double,2 > const &)\n");
@@ -7129,7 +7129,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "linear_gradient_bad_pixel_detection", _wrap_linear_gradient_bad_pixel_detection, METH_VARARGS, "\n"
 		"\n"
 		"blitz::Array< bool, 2 > GeoCal::linear_gradient_bad_pixel_detection(const blitz::Array< double, 2 > &Img, int Window_size=7, double\n"
-		"Percentile=90.0, int Thresh_fact=2, double\n"
+		"Percentile=90.0, double Thresh_fact=2.0, double\n"
 		"Nfail_thresh_percentage=75.0, array_local_edge_handle\n"
 		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1)\n"
 		"This determines bad pixels.\n"
@@ -7213,7 +7213,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "linear_gradient_bad_pixel_detection", _wrap_linear_gradient_bad_pixel_detection, METH_VARARGS, "\n"
 		"\n"
 		"blitz::Array< bool, 2 > GeoCal::linear_gradient_bad_pixel_detection(const blitz::Array< double, 2 > &Img, int Window_size=7, double\n"
-		"Percentile=90.0, int Thresh_fact=2, double\n"
+		"Percentile=90.0, double Thresh_fact=2.0, double\n"
 		"Nfail_thresh_percentage=75.0, array_local_edge_handle\n"
 		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1)\n"
 		"This determines bad pixels.\n"

@@ -7870,6 +7870,91 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_5(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  GeoCal::CartLabMultifile *arg1 = (GeoCal::CartLabMultifile *) 0 ;
+  std::string *arg2 = 0 ;
+  std::string *arg3 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *arg4 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::CartLabMultifile const > tempshared1 ;
+  boost::shared_ptr< GeoCal::CartLabMultifile const > *smartarg1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
+  
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__CartLabMultifile_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "CartLabMultifile_create_subset_file" "', argument " "1"" of type '" "GeoCal::CartLabMultifile const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultifile > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultifile > * >(argp1);
+      arg1 = const_cast< GeoCal::CartLabMultifile * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::CartLabMultifile > * >(argp1);
+      arg1 = const_cast< GeoCal::CartLabMultifile * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *ptr = (std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > *)0;
+    res4 = swig::asptr(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "CartLabMultifile_create_subset_file" "', argument " "4"" of type '" "std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &""'"); 
+    }
+    arg4 = ptr;
+  }
+  {
+    try {
+      ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file(PyObject *self, PyObject *args) {
   Py_ssize_t argc;
   PyObject *argv[10] = {
@@ -7878,6 +7963,11 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file(PyObject *self, P
   
   if (!(argc = SWIG_Python_UnpackTuple(args, "CartLabMultifile_create_subset_file", 0, 9, argv))) SWIG_fail;
   --argc;
+  if (argc == 4) {
+    PyObject *retobj = _wrap_CartLabMultifile_create_subset_file__SWIG_5(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
   if (argc == 5) {
     PyObject *retobj = _wrap_CartLabMultifile_create_subset_file__SWIG_4(self, argc, argv);
     if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
@@ -7911,7 +8001,8 @@ fail:
     "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,boost::shared_ptr< GeoCal::MapInfo > const &,std::string const &,std::string const &,int) const\n"
     "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,boost::shared_ptr< GeoCal::MapInfo > const &,std::string const &,std::string const &) const\n"
     "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,boost::shared_ptr< GeoCal::MapInfo > const &,std::string const &) const\n"
-    "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,boost::shared_ptr< GeoCal::MapInfo > const &) const\n");
+    "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &,boost::shared_ptr< GeoCal::MapInfo > const &) const\n"
+    "    GeoCal::CartLabMultifile::create_subset_file(std::string const &,std::string const &,std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &) const\n");
   return 0;
 }
 

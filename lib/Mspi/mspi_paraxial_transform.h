@@ -65,6 +65,8 @@ public:
   const blitz::Array<double, 2>& b() const {return b_; }
   const blitz::Array<double, 2>& c() const {return c_; }
   const blitz::Array<double, 2>& d() const {return d_; }
+  const std::vector<double>& y0() const {return y0_; }
+  
 private:
   std::string fname;
   std::map<int, int> row_to_index;

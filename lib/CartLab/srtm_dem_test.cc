@@ -25,6 +25,12 @@ BOOST_AUTO_TEST_CASE(basic_test)
   }
 }
 
+BOOST_AUTO_TEST_CASE(near_dateline)
+{
+  SrtmDem d;
+  std::cerr << d.height_reference_surface(Geodetic(70,179.99)) << "\n";
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported() || !VicarFile::vicar_available())

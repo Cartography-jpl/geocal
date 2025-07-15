@@ -55,7 +55,7 @@ namespace GeoCal {
 	   const std::vector<ImageCoordinate>& Ic, 
 	   const std::vector<double>& Line_sigma,
 	   const std::vector<double>& Sample_sigma,
-	   std::set<int> Blunder,
+	   std::set<int>& Blunder,
 	   double Blunder_threshold = 3,
 	   double Chisq_threshold = 0.8,
 	   bool Blunder_detect = true);

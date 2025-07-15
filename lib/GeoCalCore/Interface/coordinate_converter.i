@@ -11,6 +11,7 @@
 
 %geocal_shared_ptr(GeoCal::CoordinateConverter);
 %geocal_shared_ptr(GeoCal::GeodeticConverter);
+%geocal_shared_ptr(GeoCal::Geodetic360Converter);
 %geocal_shared_ptr(GeoCal::GeodeticRadianConverter);
 %geocal_shared_ptr(GeoCal::GeodeticRadian2piConverter);
 
@@ -38,6 +39,15 @@ public:
   %pickle_serialization();
 };
 
+class Geodetic360Converter : public CoordinateConverter {
+public:
+  virtual boost::shared_ptr<GroundCoordinate>
+    convert_from_coordinate(double X, double Y, double Z = 0) const;
+  virtual void convert_to_coordinate(const GroundCoordinate& Gc, 
+  double& OUTPUT, double& OUTPUT, double& OUTPUT) const;
+  %pickle_serialization();
+};
+  
 class GeodeticRadianConverter : public CoordinateConverter {
 public:
   virtual boost::shared_ptr<GroundCoordinate>
@@ -58,6 +68,6 @@ public:
 }
 
 // List of things "import *" will include
-%python_export("CoordinateConverter", "GeodeticConverter", "GeodeticRadianConverter", "GeodeticRadian2piConverter")
+%python_export("CoordinateConverter", "GeodeticConverter", "Geodetic360Converter", "GeodeticRadianConverter", "GeodeticRadian2piConverter")
 
 

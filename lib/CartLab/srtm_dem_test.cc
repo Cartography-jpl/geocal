@@ -27,8 +27,19 @@ BOOST_AUTO_TEST_CASE(basic_test)
 
 BOOST_AUTO_TEST_CASE(near_dateline)
 {
-  SrtmDem d;
-  std::cerr << d.height_reference_surface(Geodetic(70,179.99)) << "\n";
+  if(!VicarFile::vicar_available())
+    return;
+  try {
+    SrtmDem d;
+    BOOST_CHECK_CLOSE(d.height_reference_surface(Geodetic(70,179.99)),
+		      2.56005, 1e-4);
+  } catch(const Exception&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    // Don't worry if we can't find the data.
+  } catch(const boost::filesystem::filesystem_error&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    // Don't worry if we can't find the data.
+  }
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

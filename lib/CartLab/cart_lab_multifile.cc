@@ -219,9 +219,6 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
 		 number_line_per_tile, number_tile_each_file, force_area_pixel);
     ImageCoordinate ic = 
       coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
-    ImageCoordinate ic2 = 
-      coordinate(*(f->ground_coordinate(ImageCoordinate(f->number_line() - 1,
-					      f->number_sample() - 1))));
     int ln = (int) round(ic.line);
     int smp = (int) round(ic.sample);
     RasterMultifileTile res(f, ln, smp);

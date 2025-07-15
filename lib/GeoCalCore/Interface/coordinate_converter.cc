@@ -17,6 +17,13 @@ void GeodeticConverter::serialize(Archive & UNUSED(ar), const unsigned int UNUSE
 }
 
 template<class Archive>
+void Geodetic360Converter::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
+{
+  GEOCAL_GENERIC_BASE(CoordinateConverter);
+  GEOCAL_BASE(Geodetic360Converter, CoordinateConverter);
+}
+
+template<class Archive>
 void GeodeticRadianConverter::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CoordinateConverter);
@@ -32,6 +39,7 @@ void GeodeticRadian2piConverter::serialize(Archive & UNUSED(ar), const unsigned 
 
 GEOCAL_IMPLEMENT(CoordinateConverter);
 GEOCAL_IMPLEMENT(GeodeticConverter);
+GEOCAL_IMPLEMENT(Geodetic360Converter);
 GEOCAL_IMPLEMENT(GeodeticRadianConverter);
 GEOCAL_IMPLEMENT(GeodeticRadian2piConverter);
 #endif

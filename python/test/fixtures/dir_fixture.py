@@ -20,5 +20,5 @@ def mspi_unit_test_data(unit_test_data):
 
 
 @pytest.fixture(scope="function")
-def shiva_unit_test_data(unit_test_data):
+def shiva_test_data(unit_test_data):
     return unit_test_data / "shiva_test_case"

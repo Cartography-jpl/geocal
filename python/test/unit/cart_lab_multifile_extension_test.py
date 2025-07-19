@@ -1,6 +1,7 @@
 from geocal import GdalRasterImage, Landsat7Global
 from fixtures.require_check import require_panchromatic_orthobase
 
+
 @require_panchromatic_orthobase
 def test_create_image_chip(isolated_dir, unit_test_data):
     # GCP from GRI

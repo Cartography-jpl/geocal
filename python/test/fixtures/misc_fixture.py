@@ -2,6 +2,7 @@
 import pytest
 import os
 
+
 @pytest.fixture(scope="function")
 def isolated_dir(tmpdir):
     """This is a fixture that creates a temporary directory, and uses this
@@ -22,4 +23,3 @@ def isolated_dir(tmpdir):
         yield curdir
     finally:
         os.chdir(curdir)
-

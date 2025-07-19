@@ -1,7 +1,7 @@
-from test_support import *
-from geocal_swig import GdalRasterImage, MapInfo, Geodetic360Converter
+from geocal import GdalRasterImage, MapInfo, Geodetic360Converter
 
 # Various tests for handling dateline.
+
 
 def test_gdal_cross_dateline(isolated_dir):
     mi = MapInfo(Geodetic360Converter(), 179, 30, 182, 29, 100, 100)

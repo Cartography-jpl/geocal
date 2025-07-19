@@ -148,6 +148,74 @@ BOOST_AUTO_TEST_CASE(rotated)
   BOOST_CHECK_CLOSE(yindex, (6.25  + 0.5) / 5 - 0.5, 1e-8);
 }
 
+BOOST_AUTO_TEST_CASE(rotated_change_coordinate_patch)
+{
+  // Test handling of going from -180 to 180 longitude to 0 to 360.
+  double ulc_x = -50;
+  double ulc_y = 60;
+  Array<double, 1> param(6);
+  param = -50, 0.02, 0.01,
+    60, -0.01, 0.02;
+  int number_x_pixel = 100;
+  int number_y_pixel = 200;
+  MapInfo mi(boost::shared_ptr<CoordinateConverter>(new GeodeticConverter), 
+	     param,
+	     number_x_pixel, number_y_pixel);
+  BOOST_CHECK_EQUAL(mi.number_x_pixel(), number_x_pixel);
+  BOOST_CHECK_EQUAL(mi.number_y_pixel(), number_y_pixel);
+  BOOST_CHECK_CLOSE(mi.ulc_x(), ulc_x, 1e-8);
+  BOOST_CHECK_CLOSE(mi.ulc_y(), ulc_y, 1e-8);
+  BOOST_CHECK_CLOSE(mi.lrc_x(), ulc_x + number_x_pixel * 0.02 + 
+		    0.01 * number_y_pixel,
+		    1e-8);
+  BOOST_CHECK_CLOSE(mi.lrc_y(), ulc_y - 0.01 * number_x_pixel + 
+		    0.02 * number_y_pixel,
+		    1e-8);
+  double xindex = 10, yindex = 15;
+  double x, y;
+  mi.index_to_coordinate(xindex, yindex, x, y);
+  BOOST_CHECK_CLOSE(x, -49.635, 1e-4);
+  BOOST_CHECK_CLOSE(y, 60.205, 1e-4);
+  double xindex2, yindex2;
+  mi.coordinate_to_index(x, y, xindex2, yindex2);
+  BOOST_CHECK_CLOSE(xindex2, xindex, 1e-4);
+  BOOST_CHECK_CLOSE(yindex2, yindex, 1e-4);
+  mi.change_to_geodetic360();
+  BOOST_CHECK_EQUAL(mi.number_x_pixel(), number_x_pixel);
+  BOOST_CHECK_EQUAL(mi.number_y_pixel(), number_y_pixel);
+  BOOST_CHECK_CLOSE(mi.ulc_x(), ulc_x + 360, 1e-8);
+  BOOST_CHECK_CLOSE(mi.ulc_y(), ulc_y, 1e-8);
+  BOOST_CHECK_CLOSE(mi.lrc_x(), ulc_x + 360 + + number_x_pixel * 0.02 + 
+		    0.01 * number_y_pixel,
+		    1e-8);
+  BOOST_CHECK_CLOSE(mi.lrc_y(), ulc_y - 0.01 * number_x_pixel + 
+		    0.02 * number_y_pixel,
+		    1e-8);
+  mi.index_to_coordinate(xindex, yindex, x, y);
+  BOOST_CHECK_CLOSE(x, -49.635 + 360, 1e-4);
+  BOOST_CHECK_CLOSE(y, 60.205, 1e-4);
+  mi.coordinate_to_index(x, y, xindex2, yindex2);
+  BOOST_CHECK_CLOSE(xindex2, xindex, 1e-4);
+  BOOST_CHECK_CLOSE(yindex2, yindex, 1e-4);
+  mi.change_to_geodetic();
+  BOOST_CHECK_EQUAL(mi.number_x_pixel(), number_x_pixel);
+  BOOST_CHECK_EQUAL(mi.number_y_pixel(), number_y_pixel);
+  BOOST_CHECK_CLOSE(mi.ulc_x(), ulc_x, 1e-8);
+  BOOST_CHECK_CLOSE(mi.ulc_y(), ulc_y, 1e-8);
+  BOOST_CHECK_CLOSE(mi.lrc_x(), ulc_x + + number_x_pixel * 0.02 + 
+		    0.01 * number_y_pixel,
+		    1e-8);
+  BOOST_CHECK_CLOSE(mi.lrc_y(), ulc_y - 0.01 * number_x_pixel + 
+		    0.02 * number_y_pixel,
+		    1e-8);
+  mi.index_to_coordinate(xindex, yindex, x, y);
+  BOOST_CHECK_CLOSE(x, -49.635, 1e-4);
+  BOOST_CHECK_CLOSE(y, 60.205, 1e-4);
+  mi.coordinate_to_index(x, y, xindex2, yindex2);
+  BOOST_CHECK_CLOSE(xindex2, xindex, 1e-4);
+  BOOST_CHECK_CLOSE(yindex2, yindex, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())

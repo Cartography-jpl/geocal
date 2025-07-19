@@ -92,6 +92,52 @@ MapInfo::MapInfo(const boost::shared_ptr<CoordinateConverter>& Conv,
 }
 
 //-----------------------------------------------------------------------
+/// We need special handling for maps that are crossing the
+/// dateline. For most projections this isn't an issue - we just pick
+/// one that doesn't do anything in particular crossing the dateline. 
+/// But for the special case of a Geodetic map projection, we flip
+/// signs so the point with longitude -180 is right next to 179.999.
+/// To handle this, we can change the map projection to work with a
+/// Geodetic360. This is really the same map projection, we just label
+/// the longitude differently.
+///
+/// Note this is a noop if the coordinate converter is already a
+/// Geodetic360Converter, and changes if it is a
+/// GeodeticConverter. Any other projection will cause an exception to
+/// be thrown.
+//-----------------------------------------------------------------------
+
+void MapInfo::change_to_geodetic360()
+{
+  auto cconv = boost::make_shared<Geodetic360Converter>();
+  if(coordinate_converter().is_same(*cconv))
+    return;
+  GeodeticConverter gconv;
+  if(!coordinate_converter().is_same(gconv))
+    throw Exception("Need to either have GeodeticConverter or Geodetic360Converter as the coordinate_converter to call change_to_geodetic360");
+  if(param(0) < 0)
+    param(0) += 360;
+  conv_ = cconv;
+}
+
+//-----------------------------------------------------------------------
+/// Change back to -180 to 180.
+//-----------------------------------------------------------------------
+
+void MapInfo::change_to_geodetic()
+{
+  auto cconv = boost::make_shared<GeodeticConverter>();
+  if(coordinate_converter().is_same(*cconv))
+    return;
+  Geodetic360Converter gconv;
+  if(!coordinate_converter().is_same(gconv))
+    throw Exception("Need to either have GeodeticConverter or Geodetic360Converter as the coordinate_converter to call change_to_geodetic");
+  if(param(0) >= 180)
+    param(0) -= 360;
+  conv_ = cconv;
+}
+
+//-----------------------------------------------------------------------
 /// Determine pixel coordinates for the given ground coordinates. Note
 /// that this routine can be called with ground coordiantes outside of
 /// the bounding box of the map, it just returns pixel coordinates

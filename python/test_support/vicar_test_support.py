@@ -60,7 +60,7 @@ def vicarb_tae_path():
         if(curdir):
             os.chdir(curdir)
 
-def add_tae_path(d, original_env):
+def add_tae_path(d):
     '''Add the given directory to the TAE_PATH environment variable, which
     can then be used in testing with vicarb. In particular you can call
     with os.path.dirname(__file__) to test code in the same directory as
@@ -75,6 +75,7 @@ def add_tae_path(d, original_env):
     original_env = os.environ.get('TAE_PATH', None)
     tae_path = os.path.abspath(d) + ":" + vicarb_tae_path()
     os.environ['TAE_PATH'] = tae_path
+    return original_env
 
 def set_original_env(original_env):
     '''Pair to add_tae_path which sets the environment back to what it 
@@ -91,8 +92,7 @@ def vicarb_env(isolated_dir):
     '''This sets up for a test of our own pdf files. We make sure that we
     have the proper TAEPATH, and we also set up to run in an isolated 
     directory so we capture all the files vicar tends to vomit.'''
-    original_env = None
-    add_tae_path(isolated_dir, original_env)
+    original_env = add_tae_path(isolated_dir)
     yield
     set_original_env(original_env)
     

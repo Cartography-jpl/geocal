@@ -20,16 +20,24 @@ public:
   %python_attribute(column_index, int)
   %python_attribute(size_byte, int)
   std::string print_to_string() const;
-  std::vector<T> data;
+  T data_get(int i) const { return data[i]; }
+  void data_set(int i, const T& V) { data[i] = V; }
+  %python_attribute(data_size, int)
   bool update;
   %pythoncode {
 def __getitem__(self, i):
-  return self.data[i]
+  if isinstance(i, slice):
+     return [self.data_get(j) for j in range(*i.indices(self.data_size)) ]
+  else:
+     return self.data_get(i)
 
 def __setitem__(self, i, v):
   self.update = True
-  self.data[i] = v
-
+  if isinstance(i, slice):
+    for j,k in enumerate(range(*i.indices(self.data_size))):
+       self.data_set(k, v[j])
+  else:
+    self.data_set(i,v)
   }
 private:
   IbisColumn(const IbisColumn<T>&);

@@ -73,6 +73,9 @@ public:
   virtual void flush();
   std::vector<T> data;
   virtual void print(std::ostream& Os) const;
+  T data_get(int i) const { return data[i]; }
+  void data_set(int i, const T& V) { data[i] = V; }
+  int data_size() const { return (int) data.size(); }
 private:
   // Only IbisFile can call this.
   IbisColumn(IbisFile& F, int Index, int Size_byte);

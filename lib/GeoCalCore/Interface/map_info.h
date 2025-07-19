@@ -68,6 +68,16 @@ public:
   const CoordinateConverter& coordinate_converter() const 
   {return *conv_; }
 
+  void change_to_geodetic360();
+  void change_to_geodetic();
+
+//-----------------------------------------------------------------------
+/// Simple test to see if we are Geodetic360, sometimes class need
+/// special handling for this
+//-----------------------------------------------------------------------
+
+  bool is_geodetic_360() const { return bool(boost::dynamic_pointer_cast<Geodetic360Converter>(conv_)); }
+  
 //-----------------------------------------------------------------------
 /// Pointer to Coordinate converter used by map projection.
 //-----------------------------------------------------------------------

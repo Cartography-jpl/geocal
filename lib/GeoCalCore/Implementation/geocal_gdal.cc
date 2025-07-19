@@ -177,6 +177,10 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
     int status = ogr.SetWellKnownGeogCS("WGS84");
     if(status != OGRERR_NONE)
       throw Exception("Call to SetWellKnownGeogCS failed");
+  } else if(dynamic_cast<const Geodetic360Converter*>(&M.coordinate_converter())) {
+    int status = ogr.SetWellKnownGeogCS("WGS84");
+    if(status != OGRERR_NONE)
+      throw Exception("Call to SetWellKnownGeogCS failed");
   } else if(const PlanetocentricConverter* conv = dynamic_cast<const PlanetocentricConverter*>(&M.coordinate_converter())) {
     std::string name = PlanetConstant::name(conv->naif_code());
     std::string gcs_name = "GCS_" + name;

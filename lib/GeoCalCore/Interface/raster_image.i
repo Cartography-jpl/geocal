@@ -71,6 +71,7 @@ public:
   read(const RasterImageTileIterator& Ti) const; 
   void write(int Line, int Sample, int Val);
   void write(int Lstart, int Sstart, const blitz::Array<int, 2>& A);
+  void write(int Lstart, int Sstart, const blitz::Array<double, 2>& A);
   std::string print_to_string() const;
   %python_attribute(has_map_info, bool)
   %python_attribute(map_info, MapInfo)

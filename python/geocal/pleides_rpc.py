@@ -2,19 +2,20 @@ from builtins import range
 from geocal_swig import *
 from xml.etree.cElementTree import parse
 
+
 def pleides_rpc(fname):
-    '''This read a Pleides XML file to get the RPC. Note that the RPC
-   for Pleides doesn't follow the normal NITF constraints (e.g.,
-   line_offset being an int). This should only matter if we actually try
-   to save this as a NITF.
-   '''
+    """This read a Pleides XML file to get the RPC. Note that the RPC
+    for Pleides doesn't follow the normal NITF constraints (e.g.,
+    line_offset being an int). This should only matter if we actually try
+    to save this as a NITF.
+    """
     rpc = Rpc()
     doc = parse(fname)
     root = doc.getroot()
 
     # The data is stored in a few different places in the XML file. We go
-    # through and grab each piece. 
-    
+    # through and grab each piece.
+
     rpc.rpc_type = Rpc.RPC_B
     rpc.error_bias = 0
     rpc.error_random = 0
@@ -44,5 +45,6 @@ def pleides_rpc(fname):
     rpc.sample_numerator = samp_num
     rpc.sample_denominator = samp_den
     return rpc
+
 
 __all__ = ["pleides_rpc"]

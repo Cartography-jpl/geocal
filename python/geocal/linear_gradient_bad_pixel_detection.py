@@ -1,11 +1,12 @@
 import numpy as np
 import geocal
 
+
 class LinearGradientBadPixelDetection(object):
-    '''This class is used to detect bad/outlier pixels in an image. This class
+    """This class is used to detect bad/outlier pixels in an image. This class
     looks at the gradient in 4 directions for each pixel (up/down/left/right)
-    and looks for pixels with larger than normal gradients in a threshold 
-    number of directions. A good pixel might have a large gradient in 
+    and looks for pixels with larger than normal gradients in a threshold
+    number of directions. A good pixel might have a large gradient in
     1 direction (e.g, be the edge of a building) or 2 directions (eg., the
     corner of a building), but if it has a large gradient in 3 or 4 directions
     this algorithm assumes they are bad (e.g., a pixel with a abnormally large
@@ -17,12 +18,12 @@ class LinearGradientBadPixelDetection(object):
     of known bad pixels (e.g., static bad pixels found during the
     calibration of the instrument), but then use this algorithm to
     find dynamic bad pixels (e.g., a high energy particle hit of a CCD
-    element).  
+    element).
 
     If you have a set of known bad pixels, you should first fill the
     bad pixels in before using this algorithm (e.g., use
     IterativeMorphologicalDilation) - so the known bad pixels don't
-    make neighboring pixels look bad because they are different than 
+    make neighboring pixels look bad because they are different than
     the neighbors.
 
     We use the following algorithm:
@@ -32,21 +33,27 @@ class LinearGradientBadPixelDetection(object):
     2. Calculate the local median for a fixed window in the perpendicular
        direction (e.g., left and right look at a window up and down).
     3. Subtract the local median from each gradient and take abs value
-    4. Calculate a given percentile (e.g., 90 percentile). Multiply by 
+    4. Calculate a given percentile (e.g., 90 percentile). Multiply by
        a factor (e.g., 2) to give a threshold
-    5. A pixel "fails" the test for a particular direction if the 
+    5. A pixel "fails" the test for a particular direction if the
        abs(gradient - local median) > threshold
     6. Count the number of failures out of the 4 directions. Compare to
-       a threshold percentage (e.g., 75.0), and if we are >= nfail_thresh 
-       the pixel is marked as bad. Note for edges and corners we only have 
+       a threshold percentage (e.g., 75.0), and if we are >= nfail_thresh
+       the pixel is marked as bad. Note for edges and corners we only have
        3 and 2 directions, so the percentage is calculated using the number
        of directions.
 
-    '''
-    def __init__(self, window_size = 7, percentile = 90.0, thresh_fact = 2,
-                 nfail_thresh_percentage = 75.0,
-                 edge_handle = geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE,
-                 number_task=1):
+    """
+
+    def __init__(
+        self,
+        window_size=7,
+        percentile=90.0,
+        thresh_fact=2,
+        nfail_thresh_percentage=75.0,
+        edge_handle=geocal.ARRAY_LOCAL_MEDIAN_TRUNCATE,
+        number_task=1,
+    ):
         self.window_size = window_size
         self.percentile = percentile
         self.thresh_fact = thresh_fact
@@ -55,51 +62,64 @@ class LinearGradientBadPixelDetection(object):
         self.number_task = number_task
 
     def bad_pixel_detection(self, img):
-        '''Take the given image as a 2d numpy array. Return a boolean array
+        """Take the given image as a 2d numpy array. Return a boolean array
         with a True value for bad pixels.
 
         Note that if you have a known static bad pixel set, you should first
-        fill the image in with data over the bad pixel (e.g. use 
+        fill the image in with data over the bad pixel (e.g. use
         IterativeMorphologicalDilation).
-        '''
-        return geocal.linear_gradient_bad_pixel_detection(img, self.window_size,
-                                                       self.percentile, self.thresh_fact,
-                                                       self.nfail_thresh_percentage,
-                                                       self.edge_handle, self.number_task)
+        """
+        return geocal.linear_gradient_bad_pixel_detection(
+            img,
+            self.window_size,
+            self.percentile,
+            self.thresh_fact,
+            self.nfail_thresh_percentage,
+            self.edge_handle,
+            self.number_task,
+        )
 
     def _bad_pixel_detection_python(self, img):
-        '''This is the original python implementation of this. This wasn't super slow,
+        """This is the original python implementation of this. This wasn't super slow,
         but this turns out to be a bottle neck so we moved this to C++ code. But leave
         the reference implementation here, since it makes it clearer what the C++ code
-        is doing.'''
-        
+        is doing."""
+
         # Difference right, left, up, down. This trims the edges, we'll add
         # that back in shortly. Note that other than a sign up and down are the
         # same, as is left and right. We take an abs value in next step, so we only
         # need to calculate one of these.
         nl, ns = img.shape
-        down_diff = img[0:nl-1, :] - img[1:nl, :]
-        #up_diff = img[1:nl, :] - img[0:(nl-1), :]
-        right_diff = img[:, 0:ns-1] - img[:, 1:ns]
-        #left_diff = img[:, 1:ns] - img[:, 0:(ns-1)]
+        down_diff = img[0 : nl - 1, :] - img[1:nl, :]
+        # up_diff = img[1:nl, :] - img[0:(nl-1), :]
+        right_diff = img[:, 0 : ns - 1] - img[:, 1:ns]
+        # left_diff = img[:, 1:ns] - img[:, 0:(ns-1)]
 
         # Local median
         # Note, this is the python version. It is slow
         # down_diff_local_med = \
         #    scipy.ndimage.generic_filter(down_diff, np.nanmedian,
         #       (1, window_size), mode='constant', cval=np.nan)
-        down_diff_local_med = np.abs(down_diff -
-                     geocal.array_local_median(down_diff, 1, self.window_size,
-                                               self.edge_handle))
-        right_diff_local_med = np.abs(right_diff -
-                     geocal.array_local_median(right_diff, self.window_size, 1,
-                                               self.edge_handle))
+        down_diff_local_med = np.abs(
+            down_diff
+            - geocal.array_local_median(
+                down_diff, 1, self.window_size, self.edge_handle
+            )
+        )
+        right_diff_local_med = np.abs(
+            right_diff
+            - geocal.array_local_median(
+                right_diff, self.window_size, 1, self.edge_handle
+            )
+        )
 
         # Calculate thresholds
-        down_thresh = np.percentile(down_diff_local_med,
-                                    self.percentile) * self.thresh_fact
-        right_thresh = np.percentile(right_diff_local_med,
-                                    self.percentile) * self.thresh_fact
+        down_thresh = (
+            np.percentile(down_diff_local_med, self.percentile) * self.thresh_fact
+        )
+        right_thresh = (
+            np.percentile(right_diff_local_med, self.percentile) * self.thresh_fact
+        )
         print(down_thresh)
         print(right_thresh)
         # Count failures
@@ -107,27 +127,29 @@ class LinearGradientBadPixelDetection(object):
         nfail_right = (right_diff_local_med > right_thresh).astype(int)
         # Put back the edges we trimmed while calculating and calculate total results
         nfail = np.zeros(img.shape, dtype=int)
-        nfail[1:nl,:] += nfail_down
-        nfail[0:(nl-1),:] += nfail_down
-        nfail[:,1:ns] += nfail_right
-        nfail[:,0:(ns-1)] += nfail_right
-        
+        nfail[1:nl, :] += nfail_down
+        nfail[0 : (nl - 1), :] += nfail_down
+        nfail[:, 1:ns] += nfail_right
+        nfail[:, 0 : (ns - 1)] += nfail_right
+
         # Convert to percentage
         npix = np.empty(nfail.shape)
-        npix[:,:]=4
-        npix[0,:]=3
-        npix[-1,:]=3
-        npix[:,0]=3
-        npix[:,-1]=3
-        npix[0,0]=2
-        npix[0,-1]=2
-        npix[-1,0]=2
-        npix[-1,-1]=2
+        npix[:, :] = 4
+        npix[0, :] = 3
+        npix[-1, :] = 3
+        npix[:, 0] = 3
+        npix[:, -1] = 3
+        npix[0, 0] = 2
+        npix[0, -1] = 2
+        npix[-1, 0] = 2
+        npix[-1, -1] = 2
         nfail = nfail / npix * 100.0
 
         # Compare to threshold and return results as bad pixel mask
         is_bad = nfail >= self.nfail_thresh_percentage
         return is_bad
 
-__all__ = ["LinearGradientBadPixelDetection",]
-    
+
+__all__ = [
+    "LinearGradientBadPixelDetection",
+]

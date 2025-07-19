@@ -8,10 +8,12 @@ import time
 import geocal_swig
 from .misc import makedirs_p, run_tee
 
+
 class VicarInterface(object):
-    '''This provides a basic interface for calling a vicar routine 
+    """This provides a basic interface for calling a vicar routine
     from Python. This include several helper routines for building up
-    and running a command.'''
+    and running a command."""
+
     def __init__(self):
         self.print_output = False
         self.log_file = False
@@ -25,80 +27,83 @@ class VicarInterface(object):
         self.timing = True
         self.force_cleanup = False
         self.run_dir_name = None
-        
+
     def pre_run(self):
-        '''This gets called after the temporary directory has been created
-        and everything set up, but before we actually run. This can be 
+        """This gets called after the temporary directory has been created
+        and everything set up, but before we actually run. This can be
         overridden by derived classes to put any special set up in place
-        (e.g., copy other files)'''
+        (e.g., copy other files)"""
         pass
 
     def post_run(self):
-        '''This after the run, but before we have destroyed the
+        """This after the run, but before we have destroyed the
         temporary directory. This can be overridden by derived classes
-        to put any special set up in place (e.g., copy other files)'''
+        to put any special set up in place (e.g., copy other files)"""
         pass
 
-    def build_command(self, arg_list, extra_text = []):
-        '''This builds up a VICAR command by adding the given argument list
+    def build_command(self, arg_list, extra_text=[]):
+        """This builds up a VICAR command by adding the given argument list
         to what is already in self.cmd. The arg_list is looked up in the
         attributes of this class. If a particular attribute is not found,
         then this is just left off the command. You can add extra text
         to be put at the end for things that don't fit the arg_list format
         (for example, passing in local variables - see vicar_wrap.scinterp.
-        for an example).'''
+        for an example)."""
         res = []
         for a in arg_list:
             if a in self.__dict__:
                 res.append(self.argstring(a))
         res.extend(extra_text)
-        if(len(res) > 0):
+        if len(res) > 0:
             self.cmd += " " + " +\n".join(res) + "\n"
 
     def argstring(self, arg):
-        '''This build up a single argument, handling quotes and processing
-        arrays'''
-        if(getattr(self.__dict__[arg], '__iter__', False)):
-            if(isinstance(self.__dict__[arg], str)):
+        """This build up a single argument, handling quotes and processing
+        arrays"""
+        if getattr(self.__dict__[arg], "__iter__", False):
+            if isinstance(self.__dict__[arg], str):
                 arg2 = [self.__dict__[arg]]
             else:
                 arg2 = [str(x) for x in self.__dict__[arg]]
-            if(len(arg2) ==0): return ""
-            if(isinstance(self.__dict__[arg][0], int) or
-               isinstance(self.__dict__[arg][0], float)):
+            if len(arg2) == 0:
+                return ""
+            if isinstance(self.__dict__[arg][0], int) or isinstance(
+                self.__dict__[arg][0], float
+            ):
                 res = arg + "="
                 is_string = False
-            else: 
-                res = arg + "=\""
+            else:
+                res = arg + '="'
                 is_string = True
-            if(len(arg2) ==1):
+            if len(arg2) == 1:
                 res += arg2[0]
             else:
                 res += "(" + ",".join(arg2) + ")"
         else:
-            if(isinstance(self.__dict__[arg], int) or
-               isinstance(self.__dict__[arg], float)):
+            if isinstance(self.__dict__[arg], int) or isinstance(
+                self.__dict__[arg], float
+            ):
                 res = arg + "="
                 is_string = False
-            else: 
-                res = arg + "=\""
+            else:
+                res = arg + '="'
                 is_string = True
             res += str(self.__dict__[arg])
-        if(is_string):
-            res += "\""
+        if is_string:
+            res += '"'
         return res
 
     def vicar_run(self):
-        '''This runs a set of vicar commands in a vicarb. To handle the files 
+        """This runs a set of vicar commands in a vicarb. To handle the files
         that VICAR tends to vomit, and to allow parrallel execution with other
         vicar commands, we run in a temporary directory that is removed when
         done. You can list any input and output files that should be linked in
         or moved out. The input files will be available in the top level of the
-        current directory, where the given cmd will run. The following 
-        attributues 
+        current directory, where the given cmd will run. The following
+        attributues
         are used:
 
-        print_output 
+        print_output
             If true, print output of VICAR function to stdout
         debug
             If true, print out command before running it. This also implies
@@ -115,14 +120,14 @@ class VicarInterface(object):
             keep_run_dir if we have a unique, meaningful name. Without this
             we use mkdtemp to create a unique directory name.
         input
-            List of files the should be linked in to the temporary directory 
+            List of files the should be linked in to the temporary directory
             to be available for the command.
         output
             List of files that will be copied out. These files should all
             be generated in the top level by VICAR (i.e., the VICAR command
             should not have a path), but the actual output file listed here
             can include path information to specify where the file should go.
-        cmd 
+        cmd
             Vicar command to run.
         title
             Title used in timing message.
@@ -134,34 +139,33 @@ class VicarInterface(object):
         before_body
             Any text before the body of the cmd (e.g., declaration of local
             variables)
-            '''
-    
-        if(self.timing):
+        """
+
+        if self.timing:
             time_start = time.time()
             print("Starting " + self.title)
-        if(self.debug):
+        if self.debug:
             print("Vicar command:")
             print(self.cmd)
         d = None
         curdir = None
         successfully_done = False
         try:
-            if(self.run_dir_name is not None):
+            if self.run_dir_name is not None:
                 d = self.run_dir_name
                 makedirs_p(d)
             else:
-                d = tempfile.mkdtemp(dir='./')
+                d = tempfile.mkdtemp(dir="./")
             for i in self.input:
                 try:
-                    os.symlink(os.path.abspath(i), d + "/" +
-                               os.path.basename(i))
+                    os.symlink(os.path.abspath(i), d + "/" + os.path.basename(i))
                 except FileExistsError:
                     # Ok if file already exists, we sometimes create input
                     # data in run_dir_name before calling VicarInterface,
                     # cf. TiePointCollectPicmtch
                     pass
             outabs = [os.path.abspath(x) for x in self.output]
-            if(self.log_file): 
+            if self.log_file:
                 self.log_file = os.path.abspath(self.log_file)
             curdir = os.getcwd()
             os.chdir(d)
@@ -171,30 +175,35 @@ class VicarInterface(object):
             # These were used by the Shiva stuff. Not sure if we still
             # need these, but they are cheap to create so leave in
             # place for now
-            #for f in ["basemos", "baseraw", "dtedmos", "dtedraw", 
-            #          "finaltst", "rawtst", "scratch"]: 
+            # for f in ["basemos", "baseraw", "dtedmos", "dtedraw",
+            #          "finaltst", "rawtst", "scratch"]:
             #    os.mkdir(f)
             with open("tmppdf.pdf", "w") as f:
                 f.write(
-"""procedure
+                    """procedure
 %s
 body
 %s
 
 end-proc
-""" % (self.before_body, self.cmd))
+"""
+                    % (self.before_body, self.cmd)
+                )
 
             self.pre_run()
             self.run_out = None
             try:
                 fh = None
-                if(self.log_file):
+                if self.log_file:
                     fh = open(self.log_file, "w")
-                self.run_out = run_tee(["vicarb", "tmppdf"], out_fh = fh,
-                         quiet = (not self.debug and not self.print_output))
-            except subprocess.CalledProcessError as ex:
+                self.run_out = run_tee(
+                    ["vicarb", "tmppdf"],
+                    out_fh=fh,
+                    quiet=(not self.debug and not self.print_output),
+                )
+            except subprocess.CalledProcessError:
                 print("Vicar call failed. Log of VICAR:")
-                if(self.run_out):
+                if self.run_out:
                     print(self.run_out)
                 raise
             for f in outabs:
@@ -202,15 +211,14 @@ end-proc
             self.post_run()
             successfully_done = True
         finally:
-            if(curdir):
+            if curdir:
                 os.chdir(curdir)
-            if(self.force_cleanup or 
-               (successfully_done and d and not self.keep_run_dir and 
-                not self.debug)):
+            if self.force_cleanup or (
+                successfully_done and d and not self.keep_run_dir and not self.debug
+            ):
                 shutil.rmtree(d)
-        if(self.timing):
-            print("Done with " + self.title +". Time: ", \
-                time.time() - time_start)
+        if self.timing:
+            print("Done with " + self.title + ". Time: ", time.time() - time_start)
 
 
 class __VicarToNarray(VicarInterface):
@@ -224,13 +232,15 @@ class __VicarToNarray(VicarInterface):
         t = geocal_swig.VicarRasterImage(self.output_name)
         self.res = t.read(0, 0, t.number_line, t.number_sample)
 
-def vicar_to_numpy(cmd, output_name = "out"):
-    '''A common thing to do (particularly when testing), is to run
+
+def vicar_to_numpy(cmd, output_name="out"):
+    """A common thing to do (particularly when testing), is to run
     a set of VICAR commands that result in an output file, and then
-    reading the output into a numpy array. This helper function wraps this 
-    into one easy call.'''
+    reading the output into a numpy array. This helper function wraps this
+    into one easy call."""
     vi = __VicarToNarray(cmd, output_name)
     vi.vicar_run()
     return vi.res
+
 
 __all__ = ["VicarInterface", "vicar_to_numpy"]

@@ -1,5 +1,6 @@
 from geocal_swig import *
 
+
 def tile_iterator(data):
     """
     This gives a tile_iterator. This returns a RasterImageTileIterator
@@ -13,14 +14,15 @@ def tile_iterator(data):
     for i in tile_iterator(file):
        print i
     """
-    if(isinstance(data, RasterImageMultiBand)):
+    if isinstance(data, RasterImageMultiBand):
         t = RasterImageTileIterator(data.raster_image(0))
     else:
         t = RasterImageTileIterator(data)
 
-    while(not t.end):
+    while not t.end:
         yield t
         t.next()
+
 
 def read_iterator(data):
     """
@@ -38,14 +40,14 @@ def read_iterator(data):
        print i.shape
     """
 
-    if(isinstance(data, RasterImageMultiBand)):
+    if isinstance(data, RasterImageMultiBand):
         t = RasterImageTileIterator(data.raster_image(0))
     else:
         t = RasterImageTileIterator(data)
 
-    while(not t.end):
-        yield data.read(t.istart, t.jstart, t.number_line,
-                        t.number_sample)
+    while not t.end:
+        yield data.read(t.istart, t.jstart, t.number_line, t.number_sample)
         t.next()
 
-__all__ = ["tile_iterator", "read_iterator"]        
+
+__all__ = ["tile_iterator", "read_iterator"]

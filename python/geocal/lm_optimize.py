@@ -1,16 +1,24 @@
 from builtins import range
 import numpy as np
 import scipy.sparse as sp
-import scipy.sparse.linalg
 import time
 import logging
 
-def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1, 
-                stopping_criteria = 0.001, max_iteration = 50, boost = 2, 
-                drop = 3, lambda_initial =0.1):
-    '''This is a simple implementation of Levenberg Marquardt for minimizing
-    the residuals of a set of equations. scipy already has an optimizer 
-    called scipy.optimize.leastsq. You should generally use this scipy 
+
+def lm_optimize(
+    eq_func,
+    x0,
+    jac_func,
+    min_chisqr=0.1,
+    stopping_criteria=0.001,
+    max_iteration=50,
+    boost=2,
+    drop=3,
+    lambda_initial=0.1,
+):
+    """This is a simple implementation of Levenberg Marquardt for minimizing
+    the residuals of a set of equations. scipy already has an optimizer
+    called scipy.optimize.leastsq. You should generally use this scipy
     function in preference to this class, it is implemented in Fortran and
     is a more sophisticated algorithm. But unlike that code, this algorithm
     takes advantage of sparse matrixes.
@@ -18,9 +26,9 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
     We use as a stopping criteria one of the following conditions:
     1. We exceed max_iteration. In that case, we quit and raise an exception
     2. The chisqr of the residuals is < min_chisqr,
-    3. The change in chisqr from one iteration to the next is 
+    3. The change in chisqr from one iteration to the next is
        < stopping_criteria
-   '''
+    """
     start_time = time.process_time()
     x = x0
     t1 = time.process_time()
@@ -43,12 +51,13 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
             c = jtj + lam * sp.eye(jtj.shape[0], jtj.shape[1], format="csr")
             jtres = j.transpose() * res
             t1 = time.process_time()
-            # Note permc_spec has *no* effect on umfpack library, but we put 
-            # this in place in case umf isn't available and we are using 
+            # Note permc_spec has *no* effect on umfpack library, but we put
+            # this in place in case umf isn't available and we are using
             # superlu. For superlu, this permutation significantly speeds
             # this up.
-            xnew = x - sp.linalg.spsolve(c, jtres, use_umfpack=True,
-                                         permc_spec="MMD_ATA")
+            xnew = x - sp.linalg.spsolve(
+                c, jtres, use_umfpack=True, permc_spec="MMD_ATA"
+            )
             log.info("Done with spsolve.")
             log.info("  Total time: %f " % (time.process_time() - start_time))
             log.info("  Delta time: %f" % (time.process_time() - t1))
@@ -58,7 +67,7 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
             log.info("  Total time: %f " % (time.process_time() - start_time))
             log.info("  Delta time: %f" % (time.process_time() - t1))
             chisq = np.inner(resnew, resnew) / (len(resnew) - len(x0))
-            if(chisq < chisqold):
+            if chisq < chisqold:
                 x = xnew
                 lam /= drop
                 res = resnew
@@ -69,14 +78,14 @@ def lm_optimize(eq_func, x0, jac_func, min_chisqr = 0.1,
                 log.info("Redoing iteration with lambda boosted to %f" % lam)
         else:
             raise RuntimeError("Exceeded maximum number of iterators")
-        if(chisq < min_chisqr or
-           (chisqold - chisq) / chisq < stopping_criteria):
+        if chisq < min_chisqr or (chisqold - chisq) / chisq < stopping_criteria:
             break
         log.info("Done with iteration %d, chisq %f" % (i, chisq))
     else:
         raise RuntimeError("Exceeded maximum number of iterators")
     log.info("Done with optimize.")
-    log.info("  Total time: %f" %(time.process_time() - start_time))
+    log.info("  Total time: %f" % (time.process_time() - start_time))
     return x
+
 
 __all__ = ["lm_optimize"]

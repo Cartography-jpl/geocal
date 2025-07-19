@@ -195,7 +195,8 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @WITH_DOCUMENTATION_TRUE@am__append_11 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	README.developer INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_12 = install_doxygen_doc
+@WITH_DOCUMENTATION_TRUE@am__append_12 = install_doxygen_doc \
+@WITH_DOCUMENTATION_TRUE@	install_python_doc
 @WITH_DOCUMENTATION_TRUE@am__append_13 = clean_doxygen_doc
 @WITH_DOCUMENTATION_TRUE@am__append_14 = clean_doxygen_generate
 @BUILD_LIBRAW_TRUE@am__append_15 = libraw.la
@@ -257,13 +258,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_38 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
 @GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_39 = @srcpythonscript@/vicarb
 @WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_40 = @srcpythonscript@/conda_wrapper.sh
-@CODE_COVERAGE_ENABLED_TRUE@am__append_41 = --cov-report term \
-@CODE_COVERAGE_ENABLED_TRUE@	--cov-report \
-@CODE_COVERAGE_ENABLED_TRUE@	html:$(PACKAGE)-coverage-python \
-@CODE_COVERAGE_ENABLED_TRUE@	--cov=geocal
-@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_42 = replace_python_shebang
-@HAVE_VICAR_RTL_TRUE@am__append_43 = $(srcdir)/$(srcpythonbin)/pan_sharpen
-@WITH_DOCUMENTATION_TRUE@am__append_44 = install_python_doc
+@HAVE_VICAR_RTL_TRUE@am__append_41 = $(srcdir)/$(srcpythonbin)/pan_sharpen
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps =  \
@@ -322,12 +317,11 @@ am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
 DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 	$(am__configure_deps) $(am__dist_afidspythonvdev_SCRIPTS_DIST) \
-	$(dist_bin_SCRIPTS) $(geocalpkgpython_PYTHON) \
-	$(am__pkgpythonmspswig_PYTHON_DIST) $(pkgpythonswig_PYTHON) \
-	$(am__dist_afidspythonvdev_DATA_DIST) \
-	$(dist_geocalpkgpython_DATA) $(dist_sdbxdoc_DATA) \
-	$(am__geocalinc_HEADERS_DIST) $(geocalswiginc_HEADERS) \
-	$(include_HEADERS) $(am__libraw_HEADERS_DIST) $(sdbx_HEADERS) \
+	$(dist_bin_SCRIPTS) $(am__pkgpythonmspswig_PYTHON_DIST) \
+	$(pkgpythonswig_PYTHON) $(am__dist_afidspythonvdev_DATA_DIST) \
+	$(dist_sdbxdoc_DATA) $(am__geocalinc_HEADERS_DIST) \
+	$(geocalswiginc_HEADERS) $(include_HEADERS) \
+	$(am__libraw_HEADERS_DIST) $(sdbx_HEADERS) \
 	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS) $(swiginc_HEADERS) $(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -349,13 +343,10 @@ am__installdirs = "$(DESTDIR)$(afidspythonvdevdir)" \
 	"$(DESTDIR)$(pkgpythonmspswigdir)" \
 	"$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" \
-	"$(DESTDIR)$(geocalpkgpythondir)" \
 	"$(DESTDIR)$(pkgpythonmspswigdir)" \
 	"$(DESTDIR)$(pkgpythonswigdir)" \
-	"$(DESTDIR)$(afidspythonvdevdir)" \
-	"$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" \
+	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" \
 	"$(DESTDIR)$(etcafidspythondir)" \
-	"$(DESTDIR)$(geocalpkgpythondataisiscameradir)" \
 	"$(DESTDIR)$(installafidspythondir)" \
 	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" \
 	"$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" \
@@ -2295,10 +2286,11 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-am__pep3147_tweak = \
-  sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
 am__pkgpythonmspswig_PYTHON_DIST = @swigmspsrc@/msp_wrap.py \
 	@swigmspsrc@/__init__.py
+am__py_compile = PYTHON=$(PYTHON) $(SHELL) $(py_compile)
+am__pep3147_tweak = \
+  sed -e 's|\.py$$||' -e 's|[^/]*$$|__pycache__/&.*.py|'
 py_compile = $(top_srcdir)/config/py-compile
 am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcgeocalbin)/picmtch5.pdf \
@@ -2318,10 +2310,9 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
-DATA = $(dist_afidspythonvdev_DATA) $(dist_geocalpkgpython_DATA) \
-	$(dist_sdbxdoc_DATA) $(etcafidspython_DATA) \
-	$(geocalpkgpythondataisiscamera_DATA) \
-	$(installafidspython_DATA) $(pkgconfig_DATA)
+DATA = $(dist_afidspythonvdev_DATA) $(dist_sdbxdoc_DATA) \
+	$(etcafidspython_DATA) $(installafidspython_DATA) \
+	$(pkgconfig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/boost_pcall.h \
 	@srcsupport@/geocal_external_config.h \
@@ -2741,8 +2732,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(srcdir)/lib/GeoCalCore/geocal_core.am \
 	$(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am \
 	$(srcdir)/lib/lib.am $(srcdir)/python/bin/bin.am \
-	$(srcdir)/python/doc/doc_python.am $(srcdir)/python/lib/lib.am \
-	$(srcdir)/python/python.am \
+	$(srcdir)/python/doc/doc_python.am $(srcdir)/python/python.am \
 	$(srcdir)/python/test_support/test_support.am \
 	$(srcdir)/script/script.am $(srcdir)/swig_rules/swig_rules.am \
 	$(srcdir)/thirdparty/libraw/libraw.am \
@@ -3029,6 +3019,7 @@ pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
 pythonswigsrc = @pythonswigsrc@
+runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srccartlab = @srccartlab@
@@ -3284,9 +3275,6 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/isis_lnac_cam_samp2.bin \
 	@geocalunittestdata@/steep_igc_gfm.xml \
 	@geocalunittestdata@/isis_rnac_cam_samp2.bin \
-	@srcpython@/pytest.ini @srcpython@/setup.cfg \
-	@srcpython@/conftest.py @srcpython@/README_test \
-	@srcpython@/test.sh \
 	@srcpythonbin@/call_sample_vicar_python_test.py \
 	@srcpythonbin@/gdal_to_nitf_test.py \
 	@srcpythonbin@/gtproj2_test.py \
@@ -3297,82 +3285,8 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@srcpythonbin@/shelve_igccol_test.py \
 	@srcpythonbin@/shelve_image_test.py \
 	@srcpythonbin@/tp_collect_test.py \
-	@srcpythonbin@/write_image_test.py \
-	@srcpythonlib@/data/isis_camera/isis_lnac_cam.bin \
-	@srcpythonlib@/data/isis_camera/isis_rnac_cam.bin \
-	@srcpythonlib@/__init__.py @srcpythonlib@/air_mspi_igc_test.py \
-	@srcpythonlib@/dem_generate_test.py \
-	@srcpythonlib@/docopt_simple_test.py \
-	@srcpythonlib@/feature_detector_extension_test.py \
-	@srcpythonlib@/glas_gfm_test.py \
-	@srcpythonlib@/glas_gfm_covariance_test.py \
-	@srcpythonlib@/mars_igc_test.py \
-	@srcpythonlib@/mars_rsm_test.py \
-	@srcpythonlib@/geocal_nitf_misc.py \
-	@srcpythonlib@/geocal_test.py \
-	@srcpythonlib@/geoeye1_reflectance_test.py \
-	@srcpythonlib@/ray_caster_resampler_test.py \
-	@srcpythonlib@/hdf_orbit_test.py \
-	@srcpythonlib@/ibis_file_extension_test.py \
-	@srcpythonlib@/igc_collection_extension_test.py \
-	@srcpythonlib@/igc_map_projected_test.py \
-	@srcpythonlib@/ikonos_reflectance_test.py \
-	@srcpythonlib@/image_ground_connection_test.py \
-	@srcpythonlib@/image_to_image_connection_test.py \
-	@srcpythonlib@/isis_support_test.py \
-	@srcpythonlib@/isis_to_igc_test.py \
-	@srcpythonlib@/isis_igc_test.py \
-	@srcpythonlib@/spice_igc_test.py \
-	@srcpythonlib@/job_database_test.py \
-	@srcpythonlib@/lm_optimize_test.py \
-	@srcpythonlib@/matlab_test.py @srcpythonlib@/misc_test.py \
-	@srcpythonlib@/mmap_file_test.py \
-	@srcpythonlib@/multiprocess_test.py \
-	@srcpythonlib@/orbit_data_image_ground_connection_test.py \
-	@srcpythonlib@/orbit_derived_test.py \
-	@srcpythonlib@/orbit_array_test.py \
-	@srcpythonlib@/orbit_extension_test.py \
-	@srcpythonlib@/map_info_extension_test.py \
-	@srcpythonlib@/orbit_offset_correction_test.py \
-	@srcpythonlib@/pickle_test.py \
-	@srcpythonlib@/pleides_rpc_test.py \
-	@srcpythonlib@/ply_file_test.py \
-	@srcpythonlib@/priority_handle_set_test.py \
-	@srcpythonlib@/quick_bird_reflectance_test.py \
-	@srcpythonlib@/raster_image_extension_test.py \
-	@srcpythonlib@/raster_tile_test.py \
-	@srcpythonlib@/ray_intersect_test.py \
-	@srcpythonlib@/rsm_polynomial_test.py \
-	@srcpythonlib@/sba_end_to_end_test.py \
-	@srcpythonlib@/sba_test.py @srcpythonlib@/sba_timing_test.py \
-	@srcpythonlib@/shape_file_test.py \
-	@srcpythonlib@/simultaneous_bundle_adjustment_test.py \
-	@srcpythonlib@/spot_reflectance_test.py \
-	@srcpythonlib@/sqlite_shelf_test.py \
-	@srcpythonlib@/tie_point_collect_test.py \
-	@srcpythonlib@/tie_point_extension_test.py \
-	@srcpythonlib@/tre_struct_test.py \
-	@srcpythonlib@/vector_test.py \
-	@srcpythonlib@/vicar_interface_test.py \
-	@srcpythonlib@/vicar_wrap_test.py \
-	@srcpythonlib@/with_parameter_test.py \
-	@srcpythonlib@/world_view2_reflectance_test.py \
-	@srcpythonlib@/pds_label_test.py \
-	@srcpythonlib@/compare_burl_matlab_test.py \
-	@srcpythonlib@/geocal_nitf_rpc_test.py \
-	@srcpythonlib@/geocal_nitf_rsm_test.py \
-	@srcpythonlib@/geocal_nitf_des_test.py \
-	@srcpythonlib@/geocal_nitf_image_test.py \
-	@srcpythonlib@/geocal_nitf_sensrb_test.py \
-	@srcpythonlib@/geocal_nitf_snip_test.py \
-	@srcpythonlib@/spice_camera_test.py \
-	@srcpythonlib@/tie_point_collect_picmtch_test.py \
-	@srcpythonlib@/warp_image_test.py \
-	@srcpythonlib@/linear_gradient_bad_pixel_detection_test.py \
-	@srcpythonlib@/tie_point_feature_matching_test.py \
-	@srcpythonlib@/cart_lab_multifile_extension_test.py \
-	@docpythonsrc@ @testsupportsrc@/__init__.py \
-	@testsupportsrc@/print_tae_path \
+	@srcpythonbin@/write_image_test.py @docpythonsrc@ \
+	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
 	@testsupportsrc@/print_tae_path.pdf \
 	@testsupportsrc@/test_support.py \
 	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
@@ -3404,14 +3318,12 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
-INSTALL_EXEC_HOOK = 
-INSTALL_DATA_HOOK = $(am__append_12) $(am__append_42) $(am__append_44)
+INSTALL_EXEC_HOOK = python-install
+INSTALL_DATA_HOOK = $(am__append_12)
 UNINSTALL_HOOK = $(am__append_13) clean_install_python_doc
 CLEAN_HOOK = clean_unit_test $(am__append_14)
-INSTALLCHECK_HOOK = python_check
-
-# Make sure we don't have any pyc or pycache files floating around
-DIST_HOOK = dist-clean-up-python
+INSTALLCHECK_HOOK = python-check
+DIST_HOOK = 
 TESTS = @libgeocal@/test_all.sh
 check_PROGRAM = 
 check_DATA = 
@@ -3811,7 +3723,7 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_43)
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_41)
 dist_afidspythonvdev_DATA = $(am__append_18) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
@@ -4505,87 +4417,14 @@ SWIG_LIBADD = libgeocal.la
 @HAVE_MSP_TRUE@_msp_wrap_la_SOURCES = @swigmspsrc@/msp_wrap.cc
 installafidspython_DATA = $(am__append_37) $(am__append_38)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
-geocalpkgpython_PYTHON = @srcpython@/init/__init__.py \
-	@srcpythonlib@/job_handle.py @srcpythonlib@/glas_gfm.py \
-	@srcpythonlib@/glas_gfm_covariance.py \
-	@srcpythonlib@/mars_igc.py @srcpythonlib@/mars_rsm.py \
-	@srcpythonlib@/geocal_nitf_misc.py \
-	@srcpythonlib@/output_cache.py @srcpythonlib@/target.py \
-	@srcpythonlib@/local_target.py @srcpythonlib@/task.py \
-	@srcpythonlib@/ipython.py @srcpythonlib@/isis_support.py \
-	@srcpythonlib@/isis_to_igc.py @srcpythonlib@/isis_igc.py \
-	@srcpythonlib@/spice_igc.py \
-	@srcpythonlib@/safe_matplotlib_import.py \
-	@srcpythonlib@/misc.py @srcpythonlib@/gaussian_stretch.py \
-	@srcpythonlib@/igc_collection_extension.py \
-	@srcpythonlib@/igc_msp_extension.py \
-	@srcpythonlib@/ray_caster_resampler_extension.py \
-	@srcpythonlib@/orbit_extension.py \
-	@srcpythonlib@/map_info_extension.py \
-	@srcpythonlib@/tie_point_extension.py \
-	@srcpythonlib@/vicar_interface.py \
-	@srcpythonlib@/image_to_image_connection.py \
-	@srcpythonlib@/doc_inherit.py @srcpythonlib@/tre_struct.py \
-	@srcpythonlib@/dem_generate.py \
-	@srcpythonlib@/geocal_nitf_rpc.py \
-	@srcpythonlib@/geocal_nitf_rsm.py \
-	@srcpythonlib@/geocal_nitf_des.py \
-	@srcpythonlib@/geocal_nitf_image.py \
-	@srcpythonlib@/geocal_nitf_sensrb.py \
-	@srcpythonlib@/priority_handle_set.py \
-	@srcpythonlib@/image_ground_connection.py \
-	@srcpythonlib@/ray_intersect.py \
-	@srcpythonlib@/simultaneous_bundle_adjustment.py \
-	@srcpythonlib@/tie_point_collect.py \
-	@srcpythonlib@/raster_image_extension.py \
-	@srcpythonlib@/lm_optimize.py @srcpythonlib@/vicar_wrap.py \
-	@srcpythonlib@/instrument_reflectance.py \
-	@srcpythonlib@/geoeye1_reflectance.py \
-	@srcpythonlib@/ikonos_reflectance.py \
-	@srcpythonlib@/quick_bird_reflectance.py \
-	@srcpythonlib@/world_view2_reflectance.py \
-	@srcpythonlib@/spot_reflectance.py \
-	@srcpythonlib@/sqlite_shelf.py \
-	@srcpythonlib@/feature_detector_extension.py \
-	@srcpythonlib@/ply_file.py @srcpythonlib@/docopt_simple.py \
-	@srcpythonlib@/docopt.py @srcpythonlib@/tempdir.py \
-	@srcpythonlib@/gdal_to_erdas_file.py \
-	@srcpythonlib@/mmap_file.py @srcpythonlib@/raster_tile.py \
-	@srcpythonlib@/pleides_rpc.py \
-	@srcpythonlib@/parallel_process.py \
-	@srcpythonlib@/ibis_file_extension.py \
-	@srcpythonlib@/job_database.py @srcpythonlib@/shape_file.py \
-	@srcpythonlib@/air_mspi_igc.py @srcpythonlib@/pds_label.py \
-	@srcpythonlib@/spice_camera.py \
-	@srcpythonlib@/tie_point_collect_picmtch.py \
-	@srcpythonlib@/warp_image.py \
-	@srcpythonlib@/linear_gradient_bad_pixel_detection.py \
-	@srcpythonlib@/version.py \
-	@srcpythonlib@/cart_lab_multifile_extension.py
-
-# We need to override the default py_compile to make sure the LD_LIBRARY_PATH
-# is set if needed
-am__py_compile = LD_LIBRARY_PATH=$(PYTHON_LDPATH)$(LD_LIBRARY_PATH) PYTHON=$(PYTHON) $(SHELL) $(py_compile)
-@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
-@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA="$(abs_top_srcdir)/@geocalunittestdata@/spice" && export MARS_KERNEL="$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel"
 @BUILD_AFIDS_FALSE@setup_geocal = $(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
 @BUILD_AFIDS_TRUE@setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
-# Number of jobs to run at once. Default is to automatically determine this,
-# but you can specify a different number.
-PYTEST_NJOB = 10
-
-# Note useful flags to use here might be PYTEST_EXTRAFLAGS="--instafail" or
-# PYTEST_EXTRAFLAGS="--timeout=20"
-PYTEST_EXTRAFLAGS = 
-PYTEST_FLAGS = -q -n $(PYTEST_NJOB) $(am__append_41)
-dist_geocalpkgpython_DATA = @srcpythonlib@/cib01_mapinfo.xml
-geocalpkgpythondataisiscamera_DATA =  \
-	@srcpythonlib@/data/isis_camera/isis_lnac_cam.bin \
-	@srcpythonlib@/data/isis_camera/isis_rnac_cam.bin
+@HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
+@HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 all: $(BUILT_SOURCES)
 	$(MAKE) $(AM_MAKEFLAGS) all-am
 
@@ -4593,7 +4432,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -4615,7 +4454,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/lib/lib.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -12986,54 +12825,6 @@ clean-libtool:
 
 distclean-libtool:
 	-rm -f libtool config.lt
-install-geocalpkgpythonPYTHON: $(geocalpkgpython_PYTHON)
-	@$(NORMAL_INSTALL)
-	@list='$(geocalpkgpython_PYTHON)'; dlist=; list2=; test -n "$(geocalpkgpythondir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then b=; else b="$(srcdir)/"; fi; \
-	  if test -f $$b$$p; then \
-	    $(am__strip_dir) \
-	    dlist="$$dlist $$f"; \
-	    list2="$$list2 $$b$$p"; \
-	  else :; fi; \
-	done; \
-	for file in $$list2; do echo $$file; done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondir)" || exit $$?; \
-	done || exit $$?; \
-	if test -n "$$dlist"; then \
-	  $(am__py_compile) --destdir "$(DESTDIR)" \
-	                    --basedir "$(geocalpkgpythondir)" $$dlist; \
-	else :; fi
-
-uninstall-geocalpkgpythonPYTHON:
-	@$(NORMAL_UNINSTALL)
-	@list='$(geocalpkgpython_PYTHON)'; test -n "$(geocalpkgpythondir)" || list=; \
-	py_files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	test -n "$$py_files" || exit 0; \
-	dir='$(DESTDIR)$(geocalpkgpythondir)'; \
-	pyc_files=`echo "$$py_files" | sed 's|$$|c|'`; \
-	pyo_files=`echo "$$py_files" | sed 's|$$|o|'`; \
-	py_files_pep3147=`echo "$$py_files" | $(am__pep3147_tweak)`; \
-	echo "$$py_files_pep3147";\
-	pyc_files_pep3147=`echo "$$py_files_pep3147" | sed 's|$$|c|'`; \
-	pyo_files_pep3147=`echo "$$py_files_pep3147" | sed 's|$$|o|'`; \
-	st=0; \
-	for files in \
-	  "$$py_files" \
-	  "$$pyc_files" \
-	  "$$pyo_files" \
-	  "$$pyc_files_pep3147" \
-	  "$$pyo_files_pep3147" \
-	; do \
-	  $(am__uninstall_files_from_dir) || st=$$?; \
-	done; \
-	exit $$st
 install-pkgpythonmspswigPYTHON: $(pkgpythonmspswig_PYTHON)
 	@$(NORMAL_INSTALL)
 	@list='$(pkgpythonmspswig_PYTHON)'; dlist=; list2=; test -n "$(pkgpythonmspswigdir)" || list=; \
@@ -13151,27 +12942,6 @@ uninstall-dist_afidspythonvdevDATA:
 	@list='$(dist_afidspythonvdev_DATA)'; test -n "$(afidspythonvdevdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(afidspythonvdevdir)'; $(am__uninstall_files_from_dir)
-install-dist_geocalpkgpythonDATA: $(dist_geocalpkgpython_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(dist_geocalpkgpython_DATA)'; test -n "$(geocalpkgpythondir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondir)" || exit $$?; \
-	done
-
-uninstall-dist_geocalpkgpythonDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(dist_geocalpkgpython_DATA)'; test -n "$(geocalpkgpythondir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(geocalpkgpythondir)'; $(am__uninstall_files_from_dir)
 install-dist_sdbxdocDATA: $(dist_sdbxdoc_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(dist_sdbxdoc_DATA)'; test -n "$(sdbxdocdir)" || list=; \
@@ -13214,27 +12984,6 @@ uninstall-etcafidspythonDATA:
 	@list='$(etcafidspython_DATA)'; test -n "$(etcafidspythondir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(etcafidspythondir)'; $(am__uninstall_files_from_dir)
-install-geocalpkgpythondataisiscameraDATA: $(geocalpkgpythondataisiscamera_DATA)
-	@$(NORMAL_INSTALL)
-	@list='$(geocalpkgpythondataisiscamera_DATA)'; test -n "$(geocalpkgpythondataisiscameradir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(geocalpkgpythondataisiscameradir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(geocalpkgpythondataisiscameradir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(geocalpkgpythondataisiscameradir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(geocalpkgpythondataisiscameradir)" || exit $$?; \
-	done
-
-uninstall-geocalpkgpythondataisiscameraDATA:
-	@$(NORMAL_UNINSTALL)
-	@list='$(geocalpkgpythondataisiscamera_DATA)'; test -n "$(geocalpkgpythondataisiscameradir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(geocalpkgpythondataisiscameradir)'; $(am__uninstall_files_from_dir)
 install-installafidspythonDATA: $(installafidspython_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(installafidspython_DATA)'; test -n "$(installafidspythondir)" || list=; \
@@ -13868,7 +13617,7 @@ all-am: Makefile $(PROGRAMS) $(LTLIBRARIES) $(SCRIPTS) $(DATA) \
 install-binPROGRAMS: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(geocalpkgpythondir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(geocalpkgpythondataisiscameradir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
+	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -14581,11 +14330,8 @@ info-am:
 
 install-data-am: install-afidspythonvdevPROGRAMS \
 	install-dist_afidspythonvdevDATA \
-	install-dist_afidspythonvdevSCRIPTS \
-	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
+	install-dist_afidspythonvdevSCRIPTS install-dist_sdbxdocDATA \
 	install-etcafidspythonDATA install-geocalincHEADERS \
-	install-geocalpkgpythonPYTHON \
-	install-geocalpkgpythondataisiscameraDATA \
 	install-geocalswigincHEADERS install-includeHEADERS \
 	install-installafidspythonDATA install-librawHEADERS \
 	install-pkgconfigDATA install-pkgpythonmspswigLTLIBRARIES \
@@ -15266,10 +15012,8 @@ ps-am:
 uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-binSCRIPTS uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
-	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
-	uninstall-dist_sdbxdocDATA uninstall-etcafidspythonDATA \
-	uninstall-geocalincHEADERS uninstall-geocalpkgpythonPYTHON \
-	uninstall-geocalpkgpythondataisiscameraDATA \
+	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
+	uninstall-etcafidspythonDATA uninstall-geocalincHEADERS \
 	uninstall-geocalswigincHEADERS uninstall-includeHEADERS \
 	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
 	uninstall-librawHEADERS uninstall-pkgconfigDATA \
@@ -15300,11 +15044,9 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	install-data-am install-data-hook \
 	install-dist_afidspythonvdevDATA \
 	install-dist_afidspythonvdevSCRIPTS install-dist_binSCRIPTS \
-	install-dist_geocalpkgpythonDATA install-dist_sdbxdocDATA \
-	install-dvi install-dvi-am install-etcafidspythonDATA \
-	install-exec install-exec-am install-exec-hook \
-	install-geocalincHEADERS install-geocalpkgpythonPYTHON \
-	install-geocalpkgpythondataisiscameraDATA \
+	install-dist_sdbxdocDATA install-dvi install-dvi-am \
+	install-etcafidspythonDATA install-exec install-exec-am \
+	install-exec-hook install-geocalincHEADERS \
 	install-geocalswigincHEADERS install-html install-html-am \
 	install-includeHEADERS install-info install-info-am \
 	install-installafidspythonDATA install-libLTLIBRARIES \
@@ -15324,10 +15066,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-binPROGRAMS uninstall-binSCRIPTS \
 	uninstall-dist_afidspythonvdevDATA \
 	uninstall-dist_afidspythonvdevSCRIPTS \
-	uninstall-dist_binSCRIPTS uninstall-dist_geocalpkgpythonDATA \
-	uninstall-dist_sdbxdocDATA uninstall-etcafidspythonDATA \
-	uninstall-geocalincHEADERS uninstall-geocalpkgpythonPYTHON \
-	uninstall-geocalpkgpythondataisiscameraDATA \
+	uninstall-dist_binSCRIPTS uninstall-dist_sdbxdocDATA \
+	uninstall-etcafidspythonDATA uninstall-geocalincHEADERS \
 	uninstall-geocalswigincHEADERS uninstall-hook \
 	uninstall-includeHEADERS uninstall-installafidspythonDATA \
 	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
@@ -15566,57 +15306,19 @@ install-python: all
 @HAVE_MSP_TRUE@export MSP_DATA_DIR=$(MSP_PREFIX)/data
 @HAVE_MSP_TRUE@export MSPCCS_DATA=$(MSP_PREFIX)/data
 @HAVE_MSP_TRUE@export CSM_PLUGIN_DIR=$(MSP_PREFIX)/plugins/
-# Backdoor rule to do a quick install when we are just varying python
-install-python-geocal: install-geocalpkgpythonPYTHON install-dist_geocalpkgpythonDATA install-dist_binSCRIPTS
 
-dist-clean-up-python:
-	rm -rf `find $(distdir) -name '__pycache__'`
-	rm -f `find $(distdir) -name '*.pyc'`
+# TODO Have a editable version of this
 
-# We use to have this called python_check, which is inconsistent with
-# the "normal" automake convention of names with a "-" instead of "_".
-# So we've changed this. But I'm not sure that there isn't old scripts out
-# there depending on the old name, so at least for a while accept both
-# names
-python_check: python-check
+python-install:
+	pip install --prefix=@prefix@ $(srcdir)/@srcpython@
+
+#python-check:
+#	$(setup_geocal) && pytest -n 10 $(srcdir)/@srcpython@/test
 
 python-check:
-	export PATH="$(PYTHON_CHECK_PATH)" && \
-        export PYTHONPATH="$(abs_srcdir)/$(srcpython):${PYTHONPATH}" && \
-        $(setup_geocal) && \
-        $(PYTEST) $(PYTEST_FLAGS) $(PYTEST_EXTRAFLAGS) $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/lib/ $(srcdir)/@srcgeocalbin@
+	$(setup_geocal) && pytest -n 10 $(srcdir)/@srcpython@/bin/ $(srcdir)/@srcpython@/geocal/ $(srcdir)/@srcgeocalbin@
 
-# In conda environments it is useful to be able to call python
-# scripts without activating the conda environment. We have
-# logic here for replacing the shebang with a multiline shebang
-# (see https://rosettacode.org/wiki/Multiline_shebang#Python for
-# how this works.
-
-replace_python_shebang: replace_python_shebang1 replace_python_shebang2
-
-replace_python_shebang1: install-dist_binSCRIPTS
-	flist=`grep --binary-files=without-match '#!' $(addprefix $(bindir)/,$(notdir $(dist_bin_SCRIPTS))) | grep python | sed s/:.*//g` ; \
-        for i in $$flist; do \
-           mv -f $$i $$i.old; \
-           echo "#!/bin/bash" > $$i; \
-           echo '"exec" "${prefix}/bin/conda_wrapper.sh" "$$0" "$$@"' >> $$i; \
-           chmod --reference=$$i.old $$i; \
-           cat $$i.old >> $$i ; \
-           rm -f $$i.old ; \
-         done
-
-replace_python_shebang2: install-dist_afidspythonvdevSCRIPTS
-	flist=`grep --binary-files=without-match '#!' $(addprefix $(afidspythonvdevdir)/,$(notdir $(dist_afidspythonvdev_SCRIPTS))) | grep python | sed s/:.*//g` ; \
-        for i in $$flist; do \
-          mv -f $$i $$i.old; \
-          echo "#!/bin/bash" > $$i; \
-          echo '"exec" "${prefix}/bin/conda_wrapper.sh" "$$0" "$$@"' >> $$i; \
-          chmod --reference=$$i.old $$i; \
-          cat $$i.old >> $$i ; \
-          rm -f $$i.old ; \
-        done
-# Used to short circuit tests that would otherwise run.
-@HAVE_VICAR_GDALPLUGIN_FALSE@export NO_VICAR_GDALPLUGIN=t
+ # This should go away, but leave for now
 
 install_python_doc: 
 	export PATH=$(bindir):$$PATH && \

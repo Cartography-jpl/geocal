@@ -66,21 +66,9 @@ dist_afidspythonvdev_SCRIPTS+= $(srcdir)/$(srcpythonbin)/rsm_tiepoint
 dist_afidspythonvdev_DATA+= $(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf
 dist_afidspythonvdev_SCRIPTS+= $(srcdir)/$(srcpythonbin)/rsm_project
 dist_afidspythonvdev_DATA+= $(srcdir)/$(srcpythonbin)/rsm_project.pdf
-dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pair_ortho.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pair_ortho2.pdf
 dist_afidspythonvdev_DATA += $(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 if HAVE_VICAR_RTL
 dist_afidspythonvdev_SCRIPTS += $(srcdir)/$(srcpythonbin)/pan_sharpen
 endif
-EXTRA_DIST+=@srcpythonbin@/call_sample_vicar_python_test.py
-EXTRA_DIST+=@srcpythonbin@/gdal_to_nitf_test.py
-EXTRA_DIST+=@srcpythonbin@/gtproj2_test.py
-EXTRA_DIST+=@srcpythonbin@/pan_sharpen_test.py
-EXTRA_DIST+=@srcpythonbin@/sba_bin_test.py
-EXTRA_DIST+=@srcpythonbin@/shelve_dem_test.py
-EXTRA_DIST+=@srcpythonbin@/shelve_dir_test.py
-EXTRA_DIST+=@srcpythonbin@/shelve_igccol_test.py
-EXTRA_DIST+=@srcpythonbin@/shelve_image_test.py
-EXTRA_DIST+=@srcpythonbin@/tp_collect_test.py
-EXTRA_DIST+=@srcpythonbin@/write_image_test.py

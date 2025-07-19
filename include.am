@@ -29,5 +29,4 @@ include script/script.am
 include python/python.am
 include python/bin/bin.am
 include python/doc/doc_python.am
-include python/test_support/test_support.am
 

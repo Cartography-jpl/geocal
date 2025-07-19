@@ -11,7 +11,8 @@ setup(
     author_email='mike.m.smyth@jpl.nasa.gov',
     license='Apache 2.0',
     packages=['geocal'],
-#    package_data={"*" : ["py.typed", "*.pyi"]},
+    package_data={"geocal" : ["cib01_mapinfo.xml", "data/isis_camera/*",
+                              "py.typed", "*.pyi"]},
     install_requires=[
         'numpy', 'scipy', 'matplotlib', 'h5py', 'scikit-umfpack', 'pandas'
     ],

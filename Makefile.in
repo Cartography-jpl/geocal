@@ -2306,7 +2306,6 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/rsm_improve.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_project.pdf \
-	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
@@ -2733,7 +2732,6 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am \
 	$(srcdir)/lib/lib.am $(srcdir)/python/bin/bin.am \
 	$(srcdir)/python/doc/doc_python.am $(srcdir)/python/python.am \
-	$(srcdir)/python/test_support/test_support.am \
 	$(srcdir)/script/script.am $(srcdir)/swig_rules/swig_rules.am \
 	$(srcdir)/thirdparty/libraw/libraw.am \
 	$(srcdir)/thirdparty/libsdbx/sdbx.am \
@@ -3274,22 +3272,7 @@ EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
 	@geocalunittestdata@/isis_rnac_cam_samp1.bin \
 	@geocalunittestdata@/isis_lnac_cam_samp2.bin \
 	@geocalunittestdata@/steep_igc_gfm.xml \
-	@geocalunittestdata@/isis_rnac_cam_samp2.bin \
-	@srcpythonbin@/call_sample_vicar_python_test.py \
-	@srcpythonbin@/gdal_to_nitf_test.py \
-	@srcpythonbin@/gtproj2_test.py \
-	@srcpythonbin@/pan_sharpen_test.py \
-	@srcpythonbin@/sba_bin_test.py \
-	@srcpythonbin@/shelve_dem_test.py \
-	@srcpythonbin@/shelve_dir_test.py \
-	@srcpythonbin@/shelve_igccol_test.py \
-	@srcpythonbin@/shelve_image_test.py \
-	@srcpythonbin@/tp_collect_test.py \
-	@srcpythonbin@/write_image_test.py @docpythonsrc@ \
-	@testsupportsrc@/__init__.py @testsupportsrc@/print_tae_path \
-	@testsupportsrc@/print_tae_path.pdf \
-	@testsupportsrc@/test_support.py \
-	@testsupportsrc@/vicar_test_support.py @testsupportsrc@/README
+	@geocalunittestdata@/isis_rnac_cam_samp2.bin @docpythonsrc@
 pkgconfig_DATA = @libgeocal@/../geocal.pc
 
 # Allow files to be include in other directories
@@ -3737,7 +3720,6 @@ dist_afidspythonvdev_DATA = $(am__append_18) \
 	$(srcdir)/$(srcpythonbin)/rsm_improve.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint.pdf \
 	$(srcdir)/$(srcpythonbin)/rsm_project.pdf \
-	$(srcdir)/$(srcpythonbin)/call_sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho.pdf \
 	$(srcdir)/$(srcpythonbin)/pair_ortho2.pdf \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
@@ -4432,7 +4414,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -4454,7 +4436,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(srcdir)/python/test_support/test_support.am $(am__empty):
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck

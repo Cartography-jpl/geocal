@@ -55,6 +55,8 @@ public:
    const std::string& Options = "",   
    int boundary = 0,
    bool Verbose = false) const;
+  virtual void change_to_geodetic360();
+  virtual void change_to_geodetic();
 protected:
   CartLabMultifile() {}
   CartLabMultifile(int Number_tile,
@@ -87,7 +89,8 @@ protected:
   // Note that RasterMultifile also has a init function which may need
   // to be called.
   void init_loc_to_file();
-
+  void init_loc_to_file_360();
+  
   // This is stuff that the derived class should fill in before
   // calling init_loc_to_file.
   std::string dirbase;		///< Location of data we are reading

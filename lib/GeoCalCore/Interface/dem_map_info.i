@@ -15,6 +15,9 @@
 namespace GeoCal {
 class DemMapInfo : public Dem {
 public:
+  virtual void change_to_geodetic360();
+  virtual void change_to_geodetic();
+  %python_attribute(is_geodetic_360, bool);
   %python_attribute2(datum, datum_ptr, boost::shared_ptr<Datum>)
   %python_attribute(map_info, MapInfo)
   virtual double distance_to_surface(const GroundCoordinate& Gp) const;

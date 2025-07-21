@@ -111,9 +111,37 @@ CartLabMultifile::CartLabMultifile
 }
 
 
+void CartLabMultifile::change_to_geodetic360()
+{
+  mi_ref.change_to_geodetic360();
+  init_loc_to_file_360();
+}
+
+void CartLabMultifile::change_to_geodetic()
+{
+  mi_ref.change_to_geodetic();
+  init_loc_to_file();
+}
+
+//-----------------------------------------------------------------------
+/// Derived classes should call init_loc_to_file() in their
+/// constructor, after filling in information listed below.
+/// Note that RasterMultifile also has a init function which may need
+/// to be called.
+///
+/// We look at mi_ref to determine if we are using Geodetic or Geodetic360
+//-----------------------------------------------------------------------
 
 void CartLabMultifile::init_loc_to_file()
 {
+  if(mi_ref.is_geodetic_360()) {
+    init_loc_to_file_360();
+    return;
+  }
+  // If we flipped to and from 360, lon_ref might be > 180. handle
+  // that
+  if(lon_ref >= 180)
+    lon_ref -= 360;
   boost::regex fname_regex("([ns])(\\d+)([ew])(\\d+)" + file_name_end);
   boost::smatch m;
   std::vector<std::string> flist;
@@ -142,6 +170,80 @@ void CartLabMultifile::init_loc_to_file()
       // position of the files by comparing the lat/lon between files.
       int lat = boost::lexical_cast<int>(m[2]) * (m[1] == "n" ? 1 : -1);
       int lon = boost::lexical_cast<int>(m[4]) * (m[3] == "e" ? 1 : -1);
+      // Calculate the line/sample relative to our initial mapinfo.
+      int loff = (lat - lat_ref) * num_per_deg_lat;
+      int soff = (lon - lon_ref) * num_per_deg_lon;
+      loffset.push_back(loff);
+      soffset.push_back(soff);
+      lmin = std::min(loff, lmin);
+      smin = std::min(soff, smin);
+      lmax = std::max(loff, lmax);
+      smax = std::max(soff, smax);
+    }
+  }
+  if(flist.size() == 0) {
+    Exception e;
+    e << "No data files found at " << dirbase;
+    throw e;
+  }
+  first_file = flist[0];
+  // Calculate the map_info that fill cover all the data.
+  map_info_.reset(new MapInfo(mi_ref.subset(smin, lmin, 
+		    smax - smin + mi_ref.number_x_pixel(),
+		    lmax - lmin + mi_ref.number_y_pixel())));
+  number_line_ = map_info().number_y_pixel();
+  number_sample_ = map_info().number_x_pixel();
+  number_tile_line_ = number_line_;
+  number_tile_sample_ = number_sample_;
+
+  // Now go back through and populate loc_to_file.
+  for(std::vector<std::string>::size_type i = 0; i < flist.size(); ++i)
+    loc_to_file.add(loffset[i] - lmin,
+		    soffset[i] - smin, 
+		    loffset[i] - lmin + mi_ref.number_y_pixel(),
+		    soffset[i] - smin + mi_ref.number_x_pixel(),
+		    flist[i]);
+}
+
+//-----------------------------------------------------------------------
+/// Variation of init_loc_to_file that has longitude going from 0 to
+/// 360, useful for working near the dateline.
+//-----------------------------------------------------------------------
+
+void CartLabMultifile::init_loc_to_file_360()
+{
+  if(lon_ref < 0)
+    lon_ref += 360;
+  boost::regex fname_regex("([ns])(\\d+)([ew])(\\d+)" + file_name_end);
+  boost::smatch m;
+  std::vector<std::string> flist;
+  std::vector<int> loffset;
+  std::vector<int> soffset;
+  int lmin = 0, lmax = 0, smin = 0, smax = 0;
+  BOOST_FOREACH(boost::filesystem::directory_entry d, 
+   		std::make_pair(boost::filesystem::directory_iterator(dirbase),
+			       boost::filesystem::directory_iterator())) {
+    std::string fname = d.path().filename().string();
+    // Ignore files that have names we don't recognize (e.g., a README
+    // file or something like that with the data files). This also
+    // breaks the files we do recognize into the pieces we need to
+    // determine the upper left corner
+
+    double x0, y0, x1, y1;
+    mi_ref.coordinate(Geodetic360(lat_ref, lon_ref), x0, y0);
+    mi_ref.coordinate(Geodetic360(lat_ref + 1, lon_ref + 1), x1, y1);
+    int num_per_deg_lat = (int) round(y1 - y0);
+    int num_per_deg_lon = (int) round(x1 - x0);
+    if(boost::regex_match(fname, m, fname_regex)) {
+      flist.push_back(d.path().string());
+      // Note that this is *not* the ULC of the file. There is a
+      // border around the file (of 6 pixels). However this border is
+      // the same for all the files, so we can determine the relative
+      // position of the files by comparing the lat/lon between files.
+      int lat = boost::lexical_cast<int>(m[2]) * (m[1] == "n" ? 1 : -1);
+      int lon = boost::lexical_cast<int>(m[4]) * (m[3] == "e" ? 1 : -1);
+      if(lon < 0)
+	lon += 360;
       // Calculate the line/sample relative to our initial mapinfo.
       int loff = (lat - lat_ref) * num_per_deg_lat;
       int soff = (lon - lon_ref) * num_per_deg_lon;

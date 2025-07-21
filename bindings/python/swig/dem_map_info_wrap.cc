@@ -6267,6 +6267,136 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
+SWIGINTERN PyObject *_wrap_DemMapInfo_change_to_geodetic360(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_change_to_geodetic360" "', argument " "1"" of type '" "GeoCal::DemMapInfo *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->change_to_geodetic360();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo_change_to_geodetic(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo_change_to_geodetic" "', argument " "1"" of type '" "GeoCal::DemMapInfo *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr<  GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      (arg1)->change_to_geodetic();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_DemMapInfo__v_is_geodetic_360(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > tempshared1 ;
+  boost::shared_ptr< GeoCal::DemMapInfo const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  bool result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__DemMapInfo_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "DemMapInfo__v_is_geodetic_360" "', argument " "1"" of type '" "GeoCal::DemMapInfo const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::DemMapInfo > * >(argp1);
+      arg1 = const_cast< GeoCal::DemMapInfo * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = (bool)((GeoCal::DemMapInfo const *)arg1)->is_geodetic_360();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_DemMapInfo__v_datum(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::DemMapInfo *arg1 = (GeoCal::DemMapInfo *) 0 ;
@@ -7147,6 +7277,37 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
+	 { "DemMapInfo_change_to_geodetic360", _wrap_DemMapInfo_change_to_geodetic360, METH_O, "\n"
+		"\n"
+		"virtual void GeoCal::DemMapInfo::change_to_geodetic360()\n"
+		"GeoCal::DemMapInfo::change_to_geodetic360\n"
+		"We need special handling for maps that are crossing the dateline.\n"
+		"For most projections this isn't an issue - we just pick one that\n"
+		"doesn't do anything in particular crossing the dateline. But for the\n"
+		"special case of a Geodetic map projection, we flip signs so the point\n"
+		"with longitude -180 is right next to 179.999. To handle this, we can\n"
+		"change the map projection to work with a Geodetic360. This is really\n"
+		"the same map projection, we just label the longitude differently.\n"
+		"\n"
+		"Note this is a noop if the coordinate converter is already a\n"
+		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any\n"
+		"other projection will cause an exception to be thrown. \n"
+		""},
+	 { "DemMapInfo_change_to_geodetic", _wrap_DemMapInfo_change_to_geodetic, METH_O, "\n"
+		"\n"
+		"virtual void GeoCal::DemMapInfo::change_to_geodetic()\n"
+		"GeoCal::DemMapInfo::change_to_geodetic\n"
+		"Change back to -180 to 180.\n"
+		"\n"
+		""},
+	 { "DemMapInfo__v_is_geodetic_360", _wrap_DemMapInfo__v_is_geodetic_360, METH_O, "\n"
+		"\n"
+		"bool GeoCal::DemMapInfo::is_geodetic_360() const\n"
+		"GeoCal::DemMapInfo::is_geodetic_360\n"
+		"Simple test to see if we are Geodetic360, sometimes class need special\n"
+		"handling for this.\n"
+		"\n"
+		""},
 	 { "DemMapInfo__v_datum", _wrap_DemMapInfo__v_datum, METH_O, "\n"
 		"\n"
 		"const boost::shared_ptr< Datum > GeoCal::DemMapInfo::datum_ptr() const\n"
@@ -7299,6 +7460,37 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
+	 { "DemMapInfo_change_to_geodetic360", _wrap_DemMapInfo_change_to_geodetic360, METH_O, "\n"
+		"\n"
+		"virtual void GeoCal::DemMapInfo::change_to_geodetic360()\n"
+		"GeoCal::DemMapInfo::change_to_geodetic360\n"
+		"We need special handling for maps that are crossing the dateline.\n"
+		"For most projections this isn't an issue - we just pick one that\n"
+		"doesn't do anything in particular crossing the dateline. But for the\n"
+		"special case of a Geodetic map projection, we flip signs so the point\n"
+		"with longitude -180 is right next to 179.999. To handle this, we can\n"
+		"change the map projection to work with a Geodetic360. This is really\n"
+		"the same map projection, we just label the longitude differently.\n"
+		"\n"
+		"Note this is a noop if the coordinate converter is already a\n"
+		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any\n"
+		"other projection will cause an exception to be thrown. \n"
+		""},
+	 { "DemMapInfo_change_to_geodetic", _wrap_DemMapInfo_change_to_geodetic, METH_O, "\n"
+		"\n"
+		"virtual void GeoCal::DemMapInfo::change_to_geodetic()\n"
+		"GeoCal::DemMapInfo::change_to_geodetic\n"
+		"Change back to -180 to 180.\n"
+		"\n"
+		""},
+	 { "DemMapInfo__v_is_geodetic_360", _wrap_DemMapInfo__v_is_geodetic_360, METH_O, "\n"
+		"\n"
+		"bool GeoCal::DemMapInfo::is_geodetic_360() const\n"
+		"GeoCal::DemMapInfo::is_geodetic_360\n"
+		"Simple test to see if we are Geodetic360, sometimes class need special\n"
+		"handling for this.\n"
+		"\n"
+		""},
 	 { "DemMapInfo__v_datum", _wrap_DemMapInfo__v_datum, METH_O, "\n"
 		"\n"
 		"const boost::shared_ptr< Datum > GeoCal::DemMapInfo::datum_ptr() const\n"

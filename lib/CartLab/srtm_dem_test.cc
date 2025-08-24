@@ -42,6 +42,44 @@ BOOST_AUTO_TEST_CASE(near_dateline)
   }
 }
 
+BOOST_AUTO_TEST_CASE(cache_problem)
+{
+  if(!VicarFile::vicar_available())
+    return;
+  try {
+    // We found an issue with the no coverage caching. This was
+    // extracted from a specific ECOSTRESS problem, but we tracked it
+    // back to this.
+    SrtmDem dem("", false);
+
+    // On land
+    Geodetic pt1(50.51221665841272, -4.222361227183813);
+    // In water, with no tile
+    Geodetic pt2(49.9907, -4.31486);
+
+    // This works, because we already have the tile we need
+    double h = dem.height_datum(pt1);
+    BOOST_CHECK_CLOSE(h, 145.4403287192108, 1e-4);
+    h = dem.height_datum(pt2);
+    BOOST_CHECK_CLOSE(h, 0, 1e-4);
+    h = dem.height_datum(pt1);
+    BOOST_CHECK_CLOSE(h, 145.4403287192108, 1e-4);
+
+    // This originally didn't work.
+    SrtmDem dem2("", false);
+    h = dem2.height_datum(pt2);
+    BOOST_CHECK_CLOSE(h, 0, 1e-4);
+    h = dem2.height_datum(pt1);
+    BOOST_CHECK_CLOSE(h, 145.4403287192108, 1e-4);
+  } catch(const Exception&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    // Don't worry if we can't find the data.
+  } catch(const boost::filesystem::filesystem_error&) {
+    BOOST_WARN_MESSAGE(false, "Skipping SrtmDem test, data wasn't found");
+    // Don't worry if we can't find the data.
+  }
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported() || !VicarFile::vicar_available())

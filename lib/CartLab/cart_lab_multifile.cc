@@ -420,10 +420,24 @@ void CartLabMultifile::create_subset_file
 			    std::min(g3.latitude(), g4.latitude())));
   double lat_max = std::max(g1.latitude(), std::max(g2.latitude(),
 			    std::max(g3.latitude(), g4.latitude())));
-  double lon_min = std::min(g1.longitude(), std::min(g2.longitude(),
-			    std::min(g3.longitude(), g4.longitude())));
-  double lon_max = std::max(g1.longitude(), std::max(g2.longitude(),
-			    std::max(g3.longitude(), g4.longitude())));
+  double lon1 = g1.longitude();
+  double lon2 = g2.longitude();
+  double lon3 = g3.longitude();
+  double lon4 = g4.longitude();
+  if(is_geodetic_360()) {
+    if(lon1 < 0)
+      lon1 += 360;
+    if(lon2 < 0)
+      lon2 += 360;
+    if(lon3 < 0)
+      lon3 += 360;
+    if(lon4 < 0)
+      lon4 += 360;
+  }
+  double lon_min = std::min(lon1, std::min(lon2,
+			    std::min(lon3, lon4)));
+  double lon_max = std::max(lon1, std::max(lon2,
+			    std::max(lon3, lon4)));
   double tres_lon = fabs((msub->ulc_x()-msub->lrc_x()) /
 			 msub->number_x_pixel());
   double tres_lat = fabs((msub->ulc_y()-msub->lrc_y()) /

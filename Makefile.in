@@ -3017,7 +3017,6 @@ pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
 pythonswigsrc = @pythonswigsrc@
-runstatedir = @runstatedir@
 sbindir = @sbindir@
 sharedstatedir = @sharedstatedir@
 srccartlab = @srccartlab@

@@ -363,6 +363,11 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
     res = att(i, ra);
   if(itype_ == LINEAR) {
     AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
+    blitz::Array<double, 1> a1 = att(i+1, ra).copy();
+    blitz::Array<double, 1> a0 = att(i, ra).copy();
+    // Handle sign change in attitude
+    if(need_sign_flip(a0,a1))
+      a1 *= -1;
     res = f * att(i+1, ra) + (1 - f) * att(i, ra);
   }
   if(itype_ == LAGRANGE) {
@@ -373,10 +378,17 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
     std::vector<blitz::Array<double, 1> > a;
     for(int j = istart; j < iend; ++j) {
       tm.push_back(min_time_ + j * tstep_);
-      a.push_back(att(j,ra));
+      blitz::Array<double, 1> av = att(j,ra).copy();
+      //  Handle sign flips
+      if(a.size() > 0 && need_sign_flip(a[0], av))
+	av *= -1;
+      a.push_back(av);
     }
     res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(),
 					  a.end());
+    //  Translate back to whatever sign the closest point has
+    if(need_sign_flip(a[0], att(i,ra)))
+      res *= -1;
   }
   boost::math::quaternion<AutoDerivative<double> > resq =
     nitf_to_quaternion(res);

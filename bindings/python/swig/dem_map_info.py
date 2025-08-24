@@ -147,6 +147,14 @@ class DemMapInfo(geocal_swig.dem.Dem):
     def __init__(self, *args, **kwargs):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
+    change_to_geodetic360 = _swig_new_instance_method(_dem_map_info.DemMapInfo_change_to_geodetic360)
+    change_to_geodetic = _swig_new_instance_method(_dem_map_info.DemMapInfo_change_to_geodetic)
+    _v_is_geodetic_360 = _swig_new_instance_method(_dem_map_info.DemMapInfo__v_is_geodetic_360)
+
+    @property
+    def is_geodetic_360(self):
+        return self._v_is_geodetic_360()
+
     _v_datum = _swig_new_instance_method(_dem_map_info.DemMapInfo__v_datum)
 
     @property

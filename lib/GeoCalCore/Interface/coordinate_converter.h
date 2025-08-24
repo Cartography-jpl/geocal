@@ -209,7 +209,7 @@ public:
 			       double& Y, double& Z) const
   {
     Geodetic360 gd(Gc);
-    X = gd.longitude();
+    X = gd.longitude360();
     Y = gd.latitude();
     Z = gd.height_reference_surface();
   }

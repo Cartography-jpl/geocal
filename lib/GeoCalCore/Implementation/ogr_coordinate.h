@@ -184,7 +184,8 @@ public:
   virtual double longitude() const;
   virtual double height_reference_surface() const;
   virtual void lat_lon_height(double& Latitude, double& Longitude, 
-			      double& Height_reference_surface) const; 
+			      double& Height_reference_surface) const;
+  std::string to_proj4() const;
 
 //-----------------------------------------------------------------------
 /// Convert to CartesianFixed.

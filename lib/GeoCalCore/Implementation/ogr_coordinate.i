@@ -60,6 +60,7 @@ public:
   OgrCoordinate(const boost::shared_ptr<OgrWrapper>& Ogr,
 		const Planetocentric& G);
   virtual boost::shared_ptr<CartesianFixed> convert_to_cf() const;
+  std::string to_proj4() const;
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OgrWrapper>);
   %python_attribute(utm_zone, int);
   double x;

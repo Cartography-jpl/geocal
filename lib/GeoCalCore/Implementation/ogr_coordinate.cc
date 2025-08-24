@@ -402,6 +402,19 @@ boost::shared_ptr<OgrWrapper> OgrWrapper::from_proj4
 }
 
 //-----------------------------------------------------------------------
+/// This returns the proj4 string for the projection of the given coordinate.
+//-----------------------------------------------------------------------
+
+std::string OgrCoordinate::to_proj4() const
+{
+  char *res;
+  ogr().ogr().exportToProj4(&res);
+  std::string ress(res);
+  CPLFree(res);
+  return ress;
+}
+
+//-----------------------------------------------------------------------
 /// If true, then we have OAMS_TRADITIONAL_GIS_ORDER. If false, we
 /// have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as an error,
 /// because we don't support that with serialization.

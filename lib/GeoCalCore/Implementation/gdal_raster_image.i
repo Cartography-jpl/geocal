@@ -75,6 +75,11 @@ public:
 		    const std::string& Domain = "");
   %python_attribute(file_names, std::vector<std::string>)
   boost::shared_ptr<MapInfo> map_info_from_nitf_corner(bool Approx_ok = false) const;
+  void set_fill_value(double Fill_value);
+  void set_scale(double Scale_value);
+  void set_offset(double Offset_value);
+  void write_gdal(const std::string& Fname, const std::string& Driver_name,
+		  const std::string& Options="") const;
   %python_attribute(band_id, int)
   %python_attribute(offset, double)
   %python_attribute(scale, double)

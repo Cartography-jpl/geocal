@@ -77,6 +77,35 @@ public:
   { return const_cast<GDALRasterBand*>(&raster_band())->GetBand(); }
   int raster_data_type() const
   { return const_cast<GDALRasterBand*>(&raster_band())->GetRasterDataType(); }
+
+//-----------------------------------------------------------------------
+/// Set fill value
+//-----------------------------------------------------------------------
+  void set_fill_value(double Fill_value)
+  { raster_band().SetNoDataValue(Fill_value); }
+
+//-----------------------------------------------------------------------
+/// Set scale value
+//-----------------------------------------------------------------------
+  void set_scale(double Scale_value)
+  { raster_band().SetScale(Scale_value); }
+
+//-----------------------------------------------------------------------
+/// Set offset value
+//-----------------------------------------------------------------------
+  void set_offset(double Offset_value)
+  { raster_band().SetOffset(Offset_value); }
+
+//-----------------------------------------------------------------------
+/// Write a GdalRasterImage to a file with a given driver name. This
+/// helps handle drivers that only support create_copy (like COG). We
+/// create GdalRasterImage with a different driver (often "MEM"), and
+/// then use this function to create an output file
+//-----------------------------------------------------------------------
+
+  void write_gdal(const std::string& Fname, const std::string& Driver_name,
+		  const std::string& Options="") const
+  { gdal_create_copy(Fname, Driver_name, *data_set(), Options); }
   
 //-----------------------------------------------------------------------
 /// Return offset, if any to apply to data to get underlying values.

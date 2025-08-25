@@ -33,7 +33,8 @@ BOOST_AUTO_TEST_CASE(create_subset_file)
   pt.push_back(boost::make_shared<Geodetic>(65.1, 70.1));
   auto msub = boost::make_shared<MapInfo>(f.map_info().cover(pt));
   std::vector<boost::shared_ptr<GroundCoordinate> > pt2;
-  f.create_subset_file("subset_file.img", "VICAR", pt2, msub, "", "", 0, true);
+  //f.create_subset_file("subset_file.img", "VICAR", pt2, msub, "", "", 0, true);
+  f.create_subset_file("subset_file.img", "VICAR", pt2, msub);
 }
 
 BOOST_AUTO_TEST_CASE(create_subset_file_dateline)
@@ -49,7 +50,8 @@ BOOST_AUTO_TEST_CASE(create_subset_file_dateline)
   pt.push_back(boost::make_shared<Geodetic360>(65.1, 180.1));
   auto msub = boost::make_shared<MapInfo>(f.map_info().cover(pt));
   std::vector<boost::shared_ptr<GroundCoordinate> > pt2;
-  f.create_subset_file("subset_file_dateline.img", "VICAR", pt2, msub, "", "", 0, true);
+  //f.create_subset_file("subset_file_dateline.img", "VICAR", pt2, msub, "", "", 0, true);
+  f.create_subset_file("subset_file_dateline.img", "VICAR", pt2, msub);
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

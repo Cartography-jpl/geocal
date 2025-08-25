@@ -140,6 +140,8 @@ GdalTrexDemData::GdalTrexDemData
 		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
 		   num_per_deg);
   mi_ref = mi_ref.subset(-0.5,-0.5,9001,9001);
+  file_spacing_number_line = 9000;
+  file_spacing_number_sample = 9000;
   init_loc_to_file();
 }
 
@@ -190,6 +192,8 @@ TrexLwmData::TrexLwmData
 		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
 		   num_per_deg);
   mi_ref = mi_ref.subset(-0.5,-0.5,9001,9001);
+  file_spacing_number_line = 9000;
+  file_spacing_number_sample = 9000;
   init_loc_to_file();
 }
 

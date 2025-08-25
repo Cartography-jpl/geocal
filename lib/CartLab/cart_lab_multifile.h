@@ -129,12 +129,17 @@ class GdalCartLabMultifile: public CartLabMultifile {
 public:
   virtual ~GdalCartLabMultifile() {}
 protected:
-  GdalCartLabMultifile() {}
+  GdalCartLabMultifile()
+    : file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
+  {}
   GdalCartLabMultifile(int Number_tile,
 		       bool No_coverage_is_error = true, 
 		       int No_coverage_fill_value = -1) 
     : CartLabMultifile(Number_tile, No_coverage_is_error, 
-		       No_coverage_fill_value)
+		       No_coverage_fill_value),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
   {
   }
   GdalCartLabMultifile(const std::string& Dir,
@@ -149,14 +154,37 @@ protected:
 		       Number_sample_per_tile,
 		       Number_tile_each_file, Number_tile,
 		       No_coverage_is_error,
-		       No_coverage_fill_value)
+		       No_coverage_fill_value),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
   {
   }
   virtual RasterMultifileTile get_file(int Line, int Sample) const;
+  // In general, the files that make up a RasterMultifile aren't
+  // assumed to have the same size. The only assumption is that they
+  // are rectangular, and we have a way to identify the file uniquely
+  // for a line sample (so if we have overlap, we have a simple rule
+  // for picking a file).
+  //
+  // However, an optimization can be do for the missing files - we
+  // just create a ConstantRasterImage with the fill data. For this to
+  // work, we *do* assume that the files are all the same size and
+  // form a simple rectangular grid. This is the case for many of the
+  // datasets, which for example are 1x1 degree.
+  //
+  // These files have a overlap, usually 1 pixel. So the size of the
+  // file isn't exactly the size of mi_ref. This is the size between
+  // files, usually just mi_ref - 1 pixel. This is the size of the
+  // ConstantRasterImage we create.
+  int file_spacing_number_line, file_spacing_number_sample;
 private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -176,12 +204,17 @@ class VicarCartLabMultifile : public CartLabMultifile {
 public:
   virtual ~VicarCartLabMultifile() {}
 protected:
-  VicarCartLabMultifile() {}
+  VicarCartLabMultifile()
+    : file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
+  {}
   VicarCartLabMultifile(int Number_tile,
 		       bool No_coverage_is_error = true, 
 		       int No_coverage_fill_value = -1) 
     : CartLabMultifile(Number_tile, No_coverage_is_error, 
-		       No_coverage_fill_value)
+		       No_coverage_fill_value),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
   {
   }
   VicarCartLabMultifile(const std::string& Dir,
@@ -200,21 +233,28 @@ protected:
 		       No_coverage_is_error,
 		       No_coverage_fill_value),
       favor_memory_mapped(Favor_memory_mapped),
-      force_area_pixel(Force_area_pixel)
+      force_area_pixel(Force_area_pixel),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)      
   {
   }
   virtual RasterMultifileTile get_file(int Line, int Sample) const;
-
   bool favor_memory_mapped;	///< Whether we use memory mapping or
 				///not when reading an uncompressed
 				///file. 
   bool force_area_pixel;	///< If true force map to have pixel
 				///as area rather than point, meant as
 				///a work around for the SRTM data.
+  // See comment above in GdalCartLabMultifile.
+  int file_spacing_number_line, file_spacing_number_sample;
 private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -259,7 +299,9 @@ private:
 
 GEOCAL_EXPORT_KEY(CartLabMultifile);
 GEOCAL_EXPORT_KEY(GdalCartLabMultifile);
+GEOCAL_CLASS_VERSION(GdalCartLabMultifile, 1);
 GEOCAL_EXPORT_KEY(VicarCartLabMultifile);
+GEOCAL_CLASS_VERSION(VicarCartLabMultifile, 1);
 GEOCAL_EXPORT_KEY(VicarCartLabMultifileSetup);
 #endif
 

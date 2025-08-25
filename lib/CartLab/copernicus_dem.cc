@@ -75,6 +75,8 @@ CopernicusDemData::CopernicusDemData
 		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
 		   num_per_deg);
   mi_ref = mi_ref.subset(0,0,3601,3601);
+  file_spacing_number_line = 3600;
+  file_spacing_number_sample = 3600;
   init_loc_to_file();
 }
 
@@ -122,6 +124,8 @@ CopernicusLwmData::CopernicusLwmData
 		   lon_ref, lat_ref + 1, lon_ref + 1, lat_ref, num_per_deg, 
 		   num_per_deg);
   mi_ref = mi_ref.subset(0,0,3601,3601);
+  file_spacing_number_line = 3600;
+  file_spacing_number_sample = 3600;
   init_loc_to_file();
 }
 

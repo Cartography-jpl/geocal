@@ -142,7 +142,7 @@ import geocal_swig.raster_image_variable
 import geocal_swig.raster_image
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
-class CopernicusDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
+class CopernicusDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
     This is used the read the Copernicus data.
@@ -156,13 +156,12 @@ class CopernicusDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
-    def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4, Favor_memory_mapped=True, Force_area_pixel=True):
+    def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
         r"""
 
         CopernicusDemData::CopernicusDemData(const std::string &Dir, bool No_coverage_is_error=true, int
         Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4, bool
-        Favor_memory_mapped=true, bool Force_area_pixel=true)
+        Number_tile_each_file=4, int Number_file=4)
         Constructor.
 
         You can provide the directory to look for Copernicus DEM data, or if
@@ -181,7 +180,7 @@ class CopernicusDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
         the Number_line_per_tile or Number_sample_per_tile is -1 we read the
         entire file. 
         """
-        _copernicus_dem.CopernicusDemData_swiginit(self, _copernicus_dem.new_CopernicusDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped, Force_area_pixel))
+        _copernicus_dem.CopernicusDemData_swiginit(self, _copernicus_dem.new_CopernicusDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set
@@ -194,7 +193,7 @@ class CopernicusDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
 
 # Register CopernicusDemData in _copernicus_dem:
 _copernicus_dem.CopernicusDemData_swigregister(CopernicusDemData)
-class CopernicusLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
+class CopernicusLwmData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
     This is used the read the Copernicus LWM data.
@@ -241,13 +240,12 @@ class CopernicusLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     SEASONAL_FLOOD = _copernicus_dem.CopernicusLwmData_SEASONAL_FLOOD
     EPHEMERAL_FLOOD = _copernicus_dem.CopernicusLwmData_EPHEMERAL_FLOOD
 
-    def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4, Favor_memory_mapped=True, Force_area_pixel=True):
+    def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
         r"""
 
         CopernicusLwmData::CopernicusLwmData(const std::string &Dir, bool No_coverage_is_error=true, int
         Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4, bool
-        Favor_memory_mapped=true, bool Force_area_pixel=true)
+        Number_tile_each_file=4, int Number_file=4)
         Constructor.
 
         You provide the directory to look for Copernicus LWM data. If left
@@ -265,7 +263,7 @@ class CopernicusLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
         the Number_line_per_tile or Number_sample_per_tile is -1 we read the
         entire file. 
         """
-        _copernicus_dem.CopernicusLwmData_swiginit(self, _copernicus_dem.new_CopernicusLwmData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped, Force_area_pixel))
+        _copernicus_dem.CopernicusLwmData_swiginit(self, _copernicus_dem.new_CopernicusLwmData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set

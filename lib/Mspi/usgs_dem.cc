@@ -86,6 +86,8 @@ UsgsDemData::UsgsDemData
 		   -num_per_deg_lat);
   mi_ref = mi_ref.subset(-border, -border, num_per_deg_lon + 2 * border,
 			 -num_per_deg_lat + 2 * border);
+  file_spacing_number_line = 10800;
+  file_spacing_number_sample = 10800;
   init_loc_to_file();
 }
 

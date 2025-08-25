@@ -84,6 +84,8 @@ Srtm90mData::Srtm90mData
     		   num_per_deg);
 
   mi_ref = mi_ref.subset(-0.5,-0.5,1201,1201);
+  file_spacing_number_line = 1200;
+  file_spacing_number_sample = 1200;
   init_loc_to_file();
 }
 

@@ -17,11 +17,10 @@ namespace GeoCal {
 class CopernicusDemData: public GdalCartLabMultifile {
 public:
   CopernicusDemData(const std::string& Dir,
-	      bool No_coverage_is_error = true,
-	      int Number_line_per_tile = -1,
-	      int Number_sample_per_tile = -1, 
-	      int Number_tile_each_file = 4, int Number_file = 4,
-	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
+		    bool No_coverage_is_error = true,
+		    int Number_line_per_tile = -1,
+		    int Number_sample_per_tile = -1, 
+		    int Number_tile_each_file = 4, int Number_file = 4);
   %pickle_serialization()
 };
 
@@ -31,11 +30,10 @@ public:
 	MIN_RIVER_DROUGHT=4, ADD_RIVER_DROUGHT=5, PERM_LAKE=6,
 	MOSTLY_PERM_LAKE=7, SEASONAL_FLOOD=8, EPHEMERAL_FLOOD=9};
   CopernicusLwmData(const std::string& Dir,
-	      bool No_coverage_is_error = true,
-	      int Number_line_per_tile = -1,
-	      int Number_sample_per_tile = -1, 
-	      int Number_tile_each_file = 4, int Number_file = 4,
-	      bool Favor_memory_mapped = true, bool Force_area_pixel = true);
+		    bool No_coverage_is_error = true,
+		    int Number_line_per_tile = -1,
+		    int Number_sample_per_tile = -1, 
+		    int Number_tile_each_file = 4, int Number_file = 4);
   %pickle_serialization()
 };
   

@@ -15,6 +15,7 @@
 
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
 template<class Archive>
 void CartLabMultifile::save(Archive & ar, const unsigned int version) const
 {
@@ -64,7 +65,29 @@ template<class Archive>
 void GdalCartLabMultifile::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartLabMultifile);
+  if(version > 1)
+    ar & GEOCAL_NVP(file_spacing_number_line) & GEOCAL_NVP(file_spacing_number_sample);
+  boost::serialization::split_member(ar, *this, version);
 }
+
+template<class Archive>
+void GdalCartLabMultifile::save(Archive& Ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void GdalCartLabMultifile::load(Archive& Ar, const unsigned int version)
+{
+  // Default value, which is what we have most of the time, is 1 pixel
+  // overlap.  Fall back to this if we are using an older version
+  // without these values saved.
+  if(version < 1) {
+    file_spacing_number_line = mi_ref.number_y_pixel() - 1;
+    file_spacing_number_sample = mi_ref.number_x_pixel() - 1;
+  }
+}
+
 
 template<class Archive>
 void VicarCartLabMultifile::serialize(Archive & ar, const unsigned int version)
@@ -72,6 +95,27 @@ void VicarCartLabMultifile::serialize(Archive & ar, const unsigned int version)
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartLabMultifile)
     & GEOCAL_NVP(favor_memory_mapped)
     & GEOCAL_NVP(force_area_pixel);
+  if(version > 1)
+    ar & GEOCAL_NVP(file_spacing_number_line) & GEOCAL_NVP(file_spacing_number_sample);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void VicarCartLabMultifile::save(Archive& Ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void VicarCartLabMultifile::load(Archive& Ar, const unsigned int version)
+{
+  // Default value, which is what we have most of the time, is 1 pixel
+  // overlap.  Fall back to this if we are using an older version
+  // without these values saved.
+  if(version < 1) {
+    file_spacing_number_line = mi_ref.number_y_pixel() - 1;
+    file_spacing_number_sample = mi_ref.number_x_pixel() - 1;
+  }
 }
 
 template<class Archive>
@@ -296,8 +340,11 @@ RasterMultifileTile GdalCartLabMultifile::get_file(int Line, int Sample) const
       return res;
   }
   if(!no_coverage_is_error_) {
+    // Note that this ConstantRasterImage *doesn't* have the 1 pixel overlap we often
+    // have with multifile. We don't know that the edge of the next tile doesn't
+    // have data.
     boost::shared_ptr<RasterImage> cf
-      (new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
+      (new ConstantRasterImage(file_spacing_number_line, file_spacing_number_sample,
 			       no_coverage_fill_value_));
     int ln = (Line / cf->number_line()) * cf->number_line();
     int smp = (Sample / cf->number_sample()) * cf->number_sample();
@@ -328,8 +375,11 @@ RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
       return res;
   }
   if(!no_coverage_is_error_) {
+    // Note that this ConstantRasterImage *doesn't* have the 1 pixel overlap we often
+    // have with multifile. We don't know that the edge of the next tile doesn't
+    // have data.
     boost::shared_ptr<RasterImage> cf
-      (new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
+      (new ConstantRasterImage(file_spacing_number_line, file_spacing_number_sample,
 			       no_coverage_fill_value_));
     int ln = (Line / cf->number_line()) * cf->number_line();
     int smp = (Sample / cf->number_sample()) * cf->number_sample();

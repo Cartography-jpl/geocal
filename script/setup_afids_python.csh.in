@@ -35,5 +35,11 @@ endif
 if("@isisdata@" != "") then
     setenv ISISDATA "@isisdata@"
 endif
+if("@copernicusdem@" != "") then
+    setenv AFIDS_COPERNICUS_DEM "@copernicusdem@"
+endif
+if("@copernicuslwm@" != "") then
+    setenv AFIDS_COPERNICUS_LWM "@copernicuslwm@"
+endif
 
 

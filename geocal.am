@@ -121,6 +121,8 @@ if HAVE_AFIDS_DATA
 export AFIDS_VDEV_DATA = $(AFIDS_DATA)/vdev
 export ELEV_ROOT = $(AFIDS_DATA)/srtmL2_filled
 endif
+export AFIDS_COPERNICUS_DEM = @copernicusdem@
+export AFIDS_COPERNICUS_LWM = @copernicuslwm@
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
 

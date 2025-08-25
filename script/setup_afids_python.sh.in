@@ -35,3 +35,9 @@ fi
 if [ -n "@isisdata@" ] ; then
   export ISISDATA="@isisdata@"
 fi
+if [ -n "@copernicusdem@" ] ; then
+  export AFIDS_COPERNICUS_DEM="@copernicusdem@"
+fi
+if [ -n "@copernicuslwm@" ] ; then
+  export AFIDS_COPERNICUS_LWM="@copernicuslwm@"
+fi

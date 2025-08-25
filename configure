@@ -637,6 +637,8 @@ LTLIBOBJS
 LIBOBJS
 GEOCAL_OVERRIDE_AFIDS_FALSE
 GEOCAL_OVERRIDE_AFIDS_TRUE
+copernicuslwm
+copernicusdem
 isisdata
 isisroot
 BUILD_AFIDS_FALSE
@@ -1069,6 +1071,8 @@ with_boost_serialization
 with_documentation
 with_isis_root
 with_isis_data
+with_copernicus_dem
+with_copernicus_lwm
 '
       ac_precious_vars='build_alias
 host_alias
@@ -1856,6 +1860,10 @@ Optional Packages:
                           build environments to also update the documentation.
   --with-isis-root[=DIR]  give directory where ISIS executables can be found
   --with-isis-data[=DIR]  give directory where ISIS data can be found
+  --with-copernicus-dem[=DIR]
+                          give directory where Copernicus DEM can be found
+  --with-copernicus-lwm[=DIR]
+                          give directory where Copernicus LWM can be found
 
 Some influential environment variables:
   CC          C compiler command
@@ -28015,6 +28023,30 @@ fi
 
 isisdata="$ac_isis_data"
 
+
+#=================================================================
+# Location of Copernicus data
+
+
+# Check whether --with-copernicus-dem was given.
+if test "${with_copernicus_dem+set}" = set; then :
+  withval=$with_copernicus_dem;  ac_copernicus_dem="$withval"
+else
+   ac_copernicus_dem="/bigdata/tllogan30/copernicusDEM/copdem_v1_L2_tif"
+fi
+
+copernicusdem="$ac_copernicus_dem"
+
+
+
+# Check whether --with-copernicus-lwm was given.
+if test "${with_copernicus_lwm+set}" = set; then :
+  withval=$with_copernicus_lwm;  ac_copernicus_lwm="$withval"
+else
+   ac_copernicus_lwm="/bigdata/tllogan30/copernicusDEM/coplwm_v1_L2_tif"
+fi
+
+copernicuslwm="$ac_copernicus_lwm"
 
 
 #=================================================================

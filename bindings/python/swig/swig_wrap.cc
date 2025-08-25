@@ -196,6 +196,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_vicar_dem)(void);
   INIT_TYPE INIT_FUNC(_datum_geoid96)(void);
   INIT_TYPE INIT_FUNC(_srtm_dem)(void);
+  INIT_TYPE INIT_FUNC(_copernicus_dem)(void);
   INIT_TYPE INIT_FUNC(_trex_dem)(void);
   INIT_TYPE INIT_FUNC(_vicar_raster_image)(void);
   INIT_TYPE INIT_FUNC(_mspi_config_file)(void);
@@ -425,6 +426,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_vicar_dem", INIT_FUNC(_vicar_dem));
   INIT_MODULE(module, "_datum_geoid96", INIT_FUNC(_datum_geoid96));
   INIT_MODULE(module, "_srtm_dem", INIT_FUNC(_srtm_dem));
+  INIT_MODULE(module, "_copernicus_dem", INIT_FUNC(_copernicus_dem));
   INIT_MODULE(module, "_trex_dem", INIT_FUNC(_trex_dem));
   INIT_MODULE(module, "_vicar_raster_image", INIT_FUNC(_vicar_raster_image));
   INIT_MODULE(module, "_mspi_config_file", INIT_FUNC(_mspi_config_file));

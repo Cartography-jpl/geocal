@@ -208,6 +208,16 @@ AC_ARG_WITH([isis-data],
 AS_HELP_STRING([--with-isis-data@<:@=DIR@:>@], [give directory where ISIS data can be found]), [ ac_isis_data="$withval" ], [ ac_isis_data="/opt/afids/data/isisdata"] )
 AC_SUBST([isisdata], ["$ac_isis_data"])
 
+#=================================================================
+# Location of Copernicus data
+
+AC_ARG_WITH([copernicus-dem],
+AS_HELP_STRING([--with-copernicus-dem@<:@=DIR@:>@], [give directory where Copernicus DEM can be found]), [ ac_copernicus_dem="$withval" ], [ ac_copernicus_dem="/bigdata/tllogan30/copernicusDEM/copdem_v1_L2_tif" ] )
+AC_SUBST([copernicusdem], ["$ac_copernicus_dem"])
+
+AC_ARG_WITH([copernicus-lwm],
+AS_HELP_STRING([--with-copernicus-lwm@<:@=DIR@:>@], [give directory where Copernicus LWM can be found]), [ ac_copernicus_lwm="$withval" ], [ ac_copernicus_lwm="/bigdata/tllogan30/copernicusDEM/coplwm_v1_L2_tif" ] )
+AC_SUBST([copernicuslwm], ["$ac_copernicus_lwm"])
 
 #=================================================================
 # Put in setup_afids_env.csh/setup_afids_env.sh and vicarb that

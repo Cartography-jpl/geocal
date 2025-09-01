@@ -55,6 +55,8 @@ public:
    const std::string& Options = "",   
    int boundary = 0,
    bool Verbose = false) const;
+  void set_tile_size(int Number_tile_line, int Number_tile_sample)
+  { number_tile_line_ = Number_tile_line; number_tile_sample_ = Number_tile_sample; }
   virtual void change_to_geodetic360();
   virtual void change_to_geodetic();
 protected:

@@ -26,6 +26,9 @@ public:
    const std::string& Translate_arg = "",
    const std::string& Options = "",   
    int boundary = 0, bool Verbose = false) const;
+  void set_tile_size(int Number_tile_line, int Number_tile_sample);
+  virtual void change_to_geodetic360();
+  virtual void change_to_geodetic();
   %python_attribute(directory_base, std::string);
   %pickle_serialization();
 };

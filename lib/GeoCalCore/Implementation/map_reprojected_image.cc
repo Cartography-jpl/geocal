@@ -5,12 +5,13 @@ using namespace GeoCal;
 
 //-----------------------------------------------------------------------
 /// Constructor. We resample Img_in to the projection and resolution
-/// given by MapInfo.
+/// given by MapInfo. You can optionally supply the averaging to use,
+/// useful if our simple algorithm doesn't work well.
 //-----------------------------------------------------------------------
 
-MapReprojectedImage::MapReprojectedImage(const 
-		    boost::shared_ptr<RasterImage> Img_in,
-		    const MapInfo& Mi)
+MapReprojectedImage::MapReprojectedImage
+(const boost::shared_ptr<RasterImage> Img_in, const MapInfo& Mi,
+ int Line_avg, int Sample_avg)
 : RasterImageVariable(Mi)
 {
   boost::shared_ptr<GroundCoordinate> gc1 = 
@@ -27,6 +28,10 @@ MapReprojectedImage::MapReprojectedImage(const
     line_avg = 1;
   if(samp_avg < 1)
     samp_avg = 1;
+  if(Line_avg > 0)
+    line_avg = Line_avg;
+  if(Sample_avg > 0)
+    samp_avg = Sample_avg;
   if(line_avg > 1 || samp_avg > 1)
     img.reset(new RasterAveraged(Img_in, line_avg, samp_avg));
   else

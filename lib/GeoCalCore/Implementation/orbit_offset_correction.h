@@ -143,6 +143,7 @@ public:
     pos_corr[T_pt] = pc;
     notify_update();
   }
+  blitz::Array<double, 1> att_parm_to_match(const Time& Tm) const;
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;

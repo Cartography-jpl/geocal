@@ -271,6 +271,20 @@ std::vector<Time> OrbitOffsetCorrection::attitude_time_point() const
 }
 
 //-----------------------------------------------------------------------
+/// Return the parameters to use for a new attitude time point at Tm
+/// to match the current value (e.g, useful for adding a new
+/// breakpoint w/o changing the calculated values.
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 1> OrbitOffsetCorrection::att_parm_to_match(const Time& Tm) const
+{
+  blitz::Array<double, 1> res(3);
+  quat_to_ypr(acorr(Tm), res(0), res(1), res(2));
+  res /= Constant::arcsecond_to_rad;
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Return list of time points that we have position corrections for.
 //-----------------------------------------------------------------------
 

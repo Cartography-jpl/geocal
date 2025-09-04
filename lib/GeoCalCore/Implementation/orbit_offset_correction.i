@@ -21,6 +21,7 @@ public:
 			bool Fit_yaw = true,
 			bool Fit_pitch = true,
 			bool Fit_roll = true);
+  blitz::Array<double, 1> att_parm_to_match(const Time& Tm) const;
   %python_attribute_with_set(outside_is_error, bool);
   %python_attribute_with_set(fit_position_x, bool);
   %python_attribute_with_set(fit_position_y, bool);

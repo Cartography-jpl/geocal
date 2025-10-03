@@ -33,6 +33,11 @@ namespace GeoCal {
   in which case we'll need to update these. But the GeoTIFF library
   hasn't changed in some time, so the trade against adding a
   dependency is probably a good one.
+
+  An update - the newer version of gdal doesn't have the same symbols
+  exposed. So we can't depend on gdal. We have a direct dependency
+  on geotiff. We can remove the hardcoded stuff at some point, but
+  for now just leave in place since we already have that.
 *******************************************************************/
 
 class GeotiffFile: public boost::noncopyable, public Printable<GeotiffFile>  {

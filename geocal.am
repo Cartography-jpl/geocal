@@ -24,7 +24,7 @@ libgeocal_la_CFLAGS = $(AM_CFLAGS) $(CODE_COVERAGE_CFLAGS)
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS)
 libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
 libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(CODE_COVERAGE_CPPFLAGS)
-libgeocal_la_CPPFLAGS+= $(OPENMP_CFLAGS)
+libgeocal_la_CPPFLAGS+= $(OPENMP_CFLAGS) $(GEOTIFF_CFLAGS)
 
 EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND)
 EXTRA_libgeocal_la_DEPENDENCIES+= $(CARTO_BUILD_DEPEND)
@@ -34,6 +34,9 @@ if HAVE_GDAL
 libgeocal_la_LDFLAGS+= $(GDAL_LIBS) $(OPENSSL_LIBS)
 libgeocal_la_CPPFLAGS+= $(GDAL_CFLAGS)
 endif
+
+# Include geotiff in builds
+libgeocal_la_LDFLAGS+= $(GEOTIFF_LIBS)
 
 # Include boost in builds
 libgeocal_la_LDFLAGS+= -R $(BOOST_LIBDIR) -L$(BOOST_LIBDIR)
@@ -104,10 +107,10 @@ geocal_test_all_LDADD += $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(SPICE_LIBS)
 if BUILD_LIBRAW
 geocal_test_all_LDADD += libraw.la
 endif
-geocal_test_all_LDADD += $(GDAL_LIBS) $(OPENSSL_LIBS) $(CODE_COVERAGE_LIBS)
+geocal_test_all_LDADD += $(GDAL_LIBS) $(OPENSSL_LIBS) $(GEOTIFF_LIBS) $(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS)
-geocal_test_all_CPPFLAGS+= $(OPENMP_CFLAGS)
+geocal_test_all_CPPFLAGS+= $(OPENMP_CFLAGS) $(GEOTIFF_CFLAGS)
 geocal_test_all_CPPFLAGS+= $(VICAR_RTL_CFLAGS)
 geocal_test_all_CPPFLAGS+= $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) 
 geocal_test_all_CPPFLAGS+= $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)

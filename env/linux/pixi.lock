@@ -402,6 +402,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/pexpect-4.9.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pickleshare-0.7.5-pyhd8ed1ab_1004.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pillow-11.3.0-py313ha492abd_3.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/pip-25.2-pyh145f28c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pixman-0.46.4-h54a6638_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pkg-config-0.29.2-h4bc722e_1009.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pkgconfig-1.5.5-pyhd8ed1ab_5.conda
@@ -560,7 +561,7 @@ environments:
       - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/linux-64/vicar-gdalplugin-1.13-h3c0a5df_0.conda
       - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/linux-64/vicar-rtl-1.11-hb0f4dca_0.conda
       - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/noarch/afids-data-1.12-h4616a5c_0.conda
-      - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/noarch/pynitf-1.14-h4616a5c_1.conda
+      - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/noarch/pynitf-1.14-np==23py==313he499983_1.conda
       - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/noarch/tkheader-8.6-h4616a5c_0.conda
 packages:
 - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
@@ -669,14 +670,15 @@ packages:
   timestamp: 1759166906442
 - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/linux-64/afids-development-tools-1.07-np==23py==313h0beaf5e_0.conda
   subdir: linux-64
-  sha256: c9381d7c33dc0de7bf42e3f713b7845cd27935d3469e3835f3b6157bdc2489d4
-  md5: 8c35130580e4a3de77ea3c5fa59a3370
+  sha256: 2625fc6bb031d7429329ceaa2981c528fc650ecb0763a171cace10ed1a4d8a9d
+  md5: a449eca43b7d967975587feaa7a278b5
   depends:
   - gcc_linux-64
   - gxx_linux-64
   - gfortran_linux-64
   - python ==3.13.7
   - numpy ==2.3.3
+  - pip
   - perl
   - patch
   - make
@@ -732,8 +734,8 @@ packages:
   - ptpython
   channel: file:///home/smyth/Local/afids-conda-package/afids-conda-channel
   license: BSD-3-Clause
-  size: 3151
-  timestamp: 1759530326
+  size: 3166
+  timestamp: 1759702483325
 - conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/linux-64/afids-xvd-1.06-hb0f4dca_0.conda
   subdir: linux-64
   sha256: 30c1555746fcdf856d5511ba358cab0f178425e973c0a27bd51d614a3796094d
@@ -5818,6 +5820,15 @@ packages:
   license: HPND
   size: 1040551
   timestamp: 1758208668856
+- conda: https://conda.anaconda.org/conda-forge/noarch/pip-25.2-pyh145f28c_0.conda
+  sha256: 20fe420bb29c7e655988fd0b654888e6d7755c1d380f82ca2f1bd2493b95d650
+  md5: e7ab34d5a93e0819b62563c78635d937
+  depends:
+  - python >=3.13.0a0
+  license: MIT
+  license_family: MIT
+  size: 1179951
+  timestamp: 1753925011027
 - conda: https://conda.anaconda.org/conda-forge/linux-64/pixman-0.46.4-h54a6638_1.conda
   sha256: 43d37bc9ca3b257c5dd7bf76a8426addbdec381f6786ff441dc90b1a49143b6a
   md5: c01af13bdc553d1a8fbfff6e8db075f0
@@ -6087,21 +6098,23 @@ packages:
   license_family: BSD
   size: 889287
   timestamp: 1750615908735
-- conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/noarch/pynitf-1.14-h4616a5c_1.conda
+- conda: /home/smyth/Local/afids-conda-package/afids-conda-channel/noarch/pynitf-1.14-np==23py==313he499983_1.conda
   subdir: noarch
-  sha256: 35e38d915077f1badc5404e17579beddd4d07bec501bb69bccb3451941025e68
-  md5: c78982a23b7c7501ae6626917701f3e8
+  noarch: generic
+  sha256: e3e995d7fdbeff94d04712b9589b1fb7a75f0a905415ba8f8c7f307178e9beee
+  md5: a3623ea4984ab259b1f1e9de4f5bbdee
   depends:
   - numpy
-  - python
+  - pip
+  - python ==3.13.7
   - docopt
   - jsonpickle
   - h5py
   - python
   channel: file:///home/smyth/Local/afids-conda-package/afids-conda-channel
   license: BSD-3-Clause
-  size: 259118
-  timestamp: 1759518349946
+  size: 263173
+  timestamp: 1759709792895
 - conda: https://conda.anaconda.org/conda-forge/noarch/pyparsing-3.2.5-pyhcf101f3_0.conda
   sha256: 6814b61b94e95ffc45ec539a6424d8447895fef75b0fec7e1be31f5beee883fb
   md5: 6c8979be6d7a17692793114fa26916e8

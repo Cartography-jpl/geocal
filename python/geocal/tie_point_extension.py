@@ -269,8 +269,8 @@ def _tpcol_tp_res(self, igccol):
     max_res = np.zeros(len(self))
     for i in range(self[0].number_image):
         igc = igccol.image_ground_connection(i)
-        lres = np.full((len(self),), np.NaN)
-        sres = np.full((len(self),), np.NaN)
+        lres = np.full((len(self),), np.nan)
+        sres = np.full((len(self),), np.nan)
         for j, tp in enumerate(self):
             iloc = tp.image_coordinate(i)
             if iloc:
@@ -361,7 +361,7 @@ def _tpcol_data_frame(self, igccol, image_index):
     ind = [tp.id for tp in self]
     is_gcp = [tp.is_gcp for tp in self]
     nimgloc = [tp.number_image_location for tp in self]
-    data = np.full((len(self), 9), np.NaN)
+    data = np.full((len(self), 9), np.nan)
     d = SimpleDem()
     for i, tp in enumerate(self):
         iloc = tp.image_coordinate(image_index)

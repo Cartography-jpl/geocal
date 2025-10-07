@@ -4111,6 +4111,12 @@ SWIGINTERNINLINE PyObject*
 
 #include <boost/shared_ptr.hpp>
 #include <boost/rational.hpp>
+#if defined(__clang__)
+// For some reason, the configuration of blitz on the mac (1.0.2 from
+// conda-forge) doesn't have BZ_HAVE_IEEE_MATH defined. However, this
+// is actually true of clang. So set this, so we get blitz_isnan available.
+#define BZ_HAVE_IEEE_MATH 1
+#endif
 
 
 #include <iostream>
@@ -6488,7 +6494,7 @@ SWIGINTERN PyObject *_wrap_MemoryMultiBand__v_data(PyObject *self, PyObject *arg
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {

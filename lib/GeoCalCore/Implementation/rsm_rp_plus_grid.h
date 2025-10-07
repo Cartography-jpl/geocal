@@ -1,7 +1,7 @@
 #ifndef RSM_RP_PLUS_GRID_H
 #define RSM_RP_PLUS_GRID_H
-#include "rsm_rational_polynomial.h"
 #include "rsm_grid.h"
+#include "rsm_rational_polynomial.h"
 
 namespace GeoCal {
   class ImageGroundConnection;

@@ -28,17 +28,17 @@ install2:
 # ------------------------------------------------------------------
 
 lint:
-	ruff check geocal test
+	ruff check geocal tests
 
 # Add some extra rules
 lint-strict:
-	ruff check --extend-select N geocal test
+	ruff check --extend-select N geocal tests
 
 lint-fix:
-	ruff check --fix geocal test
+	ruff check --fix geocal tests
 
 format:
-	ruff format geocal test
+	ruff format geocal tests
 
 # Note that PYTHONPATH is required, at least as of pip 24.3.1. The py.typed file needed to
 # tell mypy that our modules have types doesn't get translated through using

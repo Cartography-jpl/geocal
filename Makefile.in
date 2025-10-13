@@ -15384,7 +15384,7 @@ python-install:
 #	$(setup_geocal) && pytest -n 10 $(srcdir)/@srcpython@/test
 
 python-check:
-	$(setup_geocal) && pytest -n 10 $(srcdir)/@srcpython@/test 
+	$(setup_geocal) && pytest -n 10 $(srcdir)/@srcpython@/tests 
 
  # This should go away, but leave for now
 

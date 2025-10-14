@@ -2,35 +2,64 @@ try:
     import pynitf
 except ImportError:
     pass
-from test_support import *
-from .geocal_nitf_des import *
-from .glas_gfm import *
-from geocal_swig import (IgcMsp, SimpleDem, ImageCoordinate, distance,
-                         OrbitDataImageGroundConnection, PosCsephb, AttCsattb,
-                         KeplerOrbit, Time, OrbitDes)
+from geocal import (
+    IgcMsp,
+    SimpleDem,
+    ImageCoordinate,
+    distance,
+    OrbitDataImageGroundConnection,
+    PosCsephb,
+    AttCsattb,
+    KeplerOrbit,
+    Time,
+    OrbitDes,
+    LnLookVector,
+    Ecr,
+    GlasGfmCamera,
+)
+from fixtures.require_check import require_pynitf, require_msp
 import os
 import math
+import numpy as np
+import pytest
+
 
 def create_image_seg(f):
-    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8,
-                                     idatim="20030101111100")
+    img = pynitf.NitfImageWriteNumpy(9, 10, np.uint8, idatim="20030101111100")
     img.subheader.idlvl = 1
     for i in range(9):
         for j in range(10):
-            img[0,i,j] = i + j
+            img[0, i, j] = i + j
     f.image_segment.append(pynitf.NitfImageSegment(img))
 
+
 def create_gfm_igc():
-    '''Sample IGC that can be used to write GLAS/GFM'''
+    """Sample IGC that can be used to write GLAS/GFM"""
     tdata = Time.parse_time("2003-01-01T11:11:00Z")
     orb = KeplerOrbit()
-    porb = PosCsephb(orb, tdata-10.0,tdata+10.0, 0.5, PosCsephb.LAGRANGE,
-                     PosCsephb.LAGRANGE_5, PosCsephb.EPHEMERIS_QUALITY_GOOD,
-                     PosCsephb.ACTUAL, PosCsephb.CARTESIAN_FIXED)
-    aorb = AttCsattb(orb, tdata-10.0,tdata+10.0, 0.5, AttCsattb.LAGRANGE,
-                     AttCsattb.LAGRANGE_7, AttCsattb.ATTITUDE_QUALITY_GOOD,
-                     AttCsattb.ACTUAL, AttCsattb.CARTESIAN_FIXED)
-    orb = OrbitDes(porb,aorb)
+    porb = PosCsephb(
+        orb,
+        tdata - 10.0,
+        tdata + 10.0,
+        0.5,
+        PosCsephb.LAGRANGE,
+        PosCsephb.LAGRANGE_5,
+        PosCsephb.EPHEMERIS_QUALITY_GOOD,
+        PosCsephb.ACTUAL,
+        PosCsephb.CARTESIAN_FIXED,
+    )
+    aorb = AttCsattb(
+        orb,
+        tdata - 10.0,
+        tdata + 10.0,
+        0.5,
+        AttCsattb.LAGRANGE,
+        AttCsattb.LAGRANGE_7,
+        AttCsattb.ATTITUDE_QUALITY_GOOD,
+        AttCsattb.ACTUAL,
+        AttCsattb.CARTESIAN_FIXED,
+    )
+    orb = OrbitDes(porb, aorb)
     cam = GlasGfmCamera(2048, 2048)
     cam.focal_length = 123.8e-3
     cam.focal_length_time = orb.min_time
@@ -38,20 +67,20 @@ def create_gfm_igc():
     cam.first_sample_block = [0]
     cam.delta_line_block = [2048]
     cam.delta_sample_block = [2048]
-    fa = np.empty((1,1,2,2,2))
-    fa[0,0,:,0,0] = -1024 * 21e-6
-    fa[0,0,:,1,0] = 1024 * 21e-6
-    fa[0,0,0,:,1] = 1024 * 21e-6
-    fa[0,0,1,:,1] = -1024 * 21e-6
-    cam.field_alignment_block(0,fa)
-    igc = OrbitDataImageGroundConnection(orb, tdata, cam, SimpleDem(),
-                                         None)
+    fa = np.empty((1, 1, 2, 2, 2))
+    fa[0, 0, :, 0, 0] = -1024 * 21e-6
+    fa[0, 0, :, 1, 0] = 1024 * 21e-6
+    fa[0, 0, 0, :, 1] = 1024 * 21e-6
+    fa[0, 0, 1, :, 1] = -1024 * 21e-6
+    cam.field_alignment_block(0, fa)
+    igc = OrbitDataImageGroundConnection(orb, tdata, cam, SimpleDem(), None)
     igc.platform_id = "FAKEPL"
     igc.payload_id = "FAKEPY"
     igc.sensor_id = "FAKESN"
     return igc
 
-@require_msp    
+
+@require_msp
 @require_pynitf
 def test_snip_example(isolated_dir, nitf_sample_rip):
     igc1 = IgcMsp(nitf_sample_rip, SimpleDem(), 1, "GLAS", "GLAS")
@@ -62,27 +91,28 @@ def test_snip_example(isolated_dir, nitf_sample_rip):
     print(igc1)
     print(igc2)
     print(igc3)
-    pt1 = igc1.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
-    pt2 = igc2.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
-    pt3 = igc3.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
+    pt1 = igc1.ground_coordinate_approx_height(ImageCoordinate(100, 100), 0)
+    pt2 = igc2.ground_coordinate_approx_height(ImageCoordinate(100, 100), 0)
+    pt3 = igc3.ground_coordinate_approx_height(ImageCoordinate(100, 100), 0)
     print(distance(pt1, pt2))
     print(distance(pt1, pt3))
 
-# Fails, we'll want to look at this but turn off for now.    
-@skip    
-@require_msp    
+
+# Fails, we'll want to look at this but turn off for now.
+@pytest.mark.skip
+@require_msp
 @require_pynitf
 def test_snip_create(isolated_dir):
-    '''Basic creation test. Right now, we just copy things'''
+    """Basic creation test. Right now, we just copy things"""
     pynitf.register_des_class(pynitf.NitfDesCopy, priority_order=-999)
     fname = "/home/smyth/Local/SNIP NITF Example/07APR2005_Hyperion_331405N0442002E_SWIR172_001_L1R.ntf"
     # Ok if data isn't available. We can only run test if we have the
     # test data.
-    if(not os.path.exists(fname)):
-        raise SkipTest
-    f = NitfFile(fname)
+    if not os.path.exists(fname):
+        raise pytest.SkipTest
+    f = pynitf.NitfFile(fname)
     tcsexrb = f.image_segment[1].find_exactly_one_tre("CSEXRB")
-    f2 = NitfFile()
+    f2 = pynitf.NitfFile()
     create_image_seg(f2)
     f2.image_segment[0].tre_list.append(tcsexrb)
     # All 4 of these seem to be needed. Not clear if this is just because
@@ -100,14 +130,15 @@ def test_snip_create(isolated_dir):
     f2.write("test.ntf")
     igc1 = IgcMsp(fname, SimpleDem(), 1, "GLAS", "GLAS")
     igc2 = IgcMsp("test.ntf", SimpleDem(), 0, "GLAS", "GLAS")
-    pt1 = igc1.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
-    pt2 = igc2.ground_coordinate_approx_height(ImageCoordinate(100,100), 0)
+    pt1 = igc1.ground_coordinate_approx_height(ImageCoordinate(100, 100), 0)
+    pt2 = igc2.ground_coordinate_approx_height(ImageCoordinate(100, 100), 0)
     print(distance(pt1, pt2))
     pynitf.unregister_des_class(pynitf.NitfDesCopy)
-    
+
+
 @require_pynitf
 def test_illumb(isolated_dir):
-    '''Test creating a ILLUMB tre.'''
+    """Test creating a ILLUMB tre."""
     # The sample SNIP file doesn't actually have a a ILLUMB TRE in it.
     # So we just create a placeholder Igc as a sample. This is a GLAS/GFM,
     # but this is just for convenience. ILLUMB has nothing directly to do
@@ -161,7 +192,9 @@ def test_illumb(isolated_dir):
     t.sun_azimuth[0] = slv.view_azimuth
 
     # Moon angles
-    mlv = LnLookVector.body_look_vector(Ecr.MOON_NAIF_CODE, igc.pixel_time(ic_center), gc_center)
+    mlv = LnLookVector.body_look_vector(
+        Ecr.MOON_NAIF_CODE, igc.pixel_time(ic_center), gc_center
+    )
     t.existence_mask |= 0x200000
     # We happen to have zenith angle in geocal, not elevation. Convert since
     # tre wants the elevation
@@ -174,7 +207,7 @@ def test_illumb(isolated_dir):
     t2 = np.array([*mlv.direction])
     t.existence_mask |= 0x100000
     t.moon_phase_angle[0] = math.degrees(math.acos(np.dot(t1, t2)))
-    
+
     # View angles
     vlv = LnLookVector(igc.cf_look_vector_lv(ic_center), gc_center)
     t.existence_mask |= 0x020000
@@ -183,8 +216,6 @@ def test_illumb(isolated_dir):
 
     # Could probably calculate cats_angle if needed, would need to figure
     # out defintion
-    
+
     iseg.tre_list.append(t)
     f.write("illumb_test.ntf")
-
-

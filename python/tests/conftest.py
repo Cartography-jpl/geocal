@@ -47,7 +47,8 @@ def pytest_collection_modifyitems(config, items):
 
 pytest_plugins = [
     "fixtures.dir_fixture",
-    #    "fixtures.igc_fixture",
+    "fixtures.igc_fixture",
     "fixtures.misc_fixture",
+    "fixtures.rsm_fixture",
     "fixtures.vicar_fixture",
 ]

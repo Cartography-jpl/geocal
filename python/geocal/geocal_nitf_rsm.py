@@ -9,8 +9,8 @@ from geocal_swig import (
     RsmAdjustableParameterB,
     RsmDirectCovarianceA,
     RsmIndirectCovarianceB,
-    have_msp_supported,
 )
+from .igc_msp import have_msp, IgcMsp
 import re
 
 try:
@@ -298,9 +298,7 @@ if have_pynitf and not suppress_rsm:
         isegh.after_read_hook(fseg, None)
         return fseg.rsm
 
-    if have_msp_supported():
-        from geocal_swig import IgcMsp
-
+    if have_msp:
         def _generate_rsm(self, report="", rsm_config=""):
             t = self.generate_rsm_tre(report, rsm_config)
             t = re.split(r"^RSM_TRE_DATA$", t, flags=re.MULTILINE)[1]

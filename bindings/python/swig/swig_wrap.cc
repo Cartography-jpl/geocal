@@ -95,7 +95,6 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_pyramid_image_matcher)(void);
   INIT_TYPE INIT_FUNC(_igc_map_projected)(void);
   INIT_TYPE INIT_FUNC(_igc_simulated)(void);
-  INIT_TYPE INIT_FUNC(_igc_msp)(void);
   INIT_TYPE INIT_FUNC(_igc_simulated_ray_caster)(void);
   INIT_TYPE INIT_FUNC(_igc_image_to_image_match)(void);
   INIT_TYPE INIT_FUNC(_surface_image_to_image_match)(void);
@@ -325,7 +324,6 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_pyramid_image_matcher", INIT_FUNC(_pyramid_image_matcher));
   INIT_MODULE(module, "_igc_map_projected", INIT_FUNC(_igc_map_projected));
   INIT_MODULE(module, "_igc_simulated", INIT_FUNC(_igc_simulated));
-  INIT_MODULE(module, "_igc_msp", INIT_FUNC(_igc_msp));
   INIT_MODULE(module, "_igc_simulated_ray_caster", INIT_FUNC(_igc_simulated_ray_caster));
   INIT_MODULE(module, "_igc_image_to_image_match", INIT_FUNC(_igc_image_to_image_match));
   INIT_MODULE(module, "_surface_image_to_image_match", INIT_FUNC(_surface_image_to_image_match));

@@ -4,8 +4,8 @@ from geocal import (
     have_serialize_supported,
     VicarFile,
     SpiceHelper,
-    have_msp_supported,
     setup_isis,
+    have_msp
 )
 import geocal_swig
 import os
@@ -27,17 +27,6 @@ except ImportError:
 # In any case, for python < 3 we can't use pynitf
 if sys.version_info < (3,):
     have_pynitf = False
-
-have_msp = False
-try:
-    # Comment turns off lint. We are testing an import, that we don't actually
-    # do anything with. But want to make sure the import is successful
-    from msp_swig import Msp  # noqa: F401
-
-    have_msp = True
-except ImportError:
-    # Ok if we don't have pynitf, we just can't execute this code
-    pass
 
 # Data is way too big to check into source, so we put it here. This means
 # we have tests that can only be run on pistol. We may fold this into

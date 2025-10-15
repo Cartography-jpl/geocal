@@ -111,6 +111,28 @@ private:
   std::ostringstream s_;
 };
 
+/****************************************************************//**
+  This is close to a ImageGroundConnection that uses the MSP (Mensuration
+  Service Program) library to implement an ImageGroundConnection. This
+  uses a set of plugins for the CSM (Community Sensor Model, see 
+  https://github.com/sminster/csm) to support various sensor models.
+  In particular, this supports various NITF formats such as RPC, RSM,
+  SENSRB, GLAS/GFM.
+
+  This is primarily used for testing, to compare our
+  ImageGroundConnection implementation against the MSP library, which
+  is somewhat of a standard library.
+
+  Note that the MSP library uses the very old gcc 4.8.5 compiler, and
+  is closed source. So we don't want to directly link to this in
+  geocal. Instead, we have a simple class that we can call from swig,
+  and we wrap this in python into a full ImageGroundConnection.
+
+  This library isn't intended to be used as an actual
+  ImageGroundConnection, it is not written to be overly efficient.
+  But it should be sufficient for comparing things.
+*******************************************************************/
+
 class Msp {
 public:
   Msp() {

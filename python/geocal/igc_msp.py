@@ -1,6 +1,6 @@
 from __future__ import annotations
 from geocal_swig import ImageGroundConnection, SimpleDem, distance, ImageCoordinate, Geodetic # type: ignore
-
+import os
 import typing
 
 have_msp = False
@@ -12,32 +12,97 @@ except ImportError:
 
 if typing.TYPE_CHECKING:
     import pynitf # type: ignore
+
+class classproperty:
+    def __init__(self, func):
+        self.fget = func
+    def __get__(self, instance, owner):
+        return self.fget(owner)
     
 class IgcMsp(ImageGroundConnection):
-    def __init__(self) -> None:
+    def __init__(self, fname : str | os.PathLike[str], image_index : int = 0,
+                 plugin_name : str | None = None, model_name : str | None = None) -> None:
         super().__init__(SimpleDem(), None, None, "")
-        self._msp = Msp()
+        self._msp = Msp(str(fname), image_index, plugin_name if plugin_name is not None else "",
+                        model_name if model_name is not None else "")
 
     def desc(self) -> str:
         return "IgcMsp"
 
-    def print_plugin_list(self) -> None:
+    @classmethod
+    def print_plugin_list(cls) -> None:
         '''Print the plugin list, a basic diagnostic we use to make sure things
         are working.'''
-        self._msp.msp_print_plugin_list()
+        Msp.msp_print_plugin_list()
 
-    @property
-    def plugin_list(self) -> list[str]:
+    @classproperty
+    def plugin_list(cls) -> list[str]:
         '''Return the plugin list, as a list of str'''
-        return self._msp.msp_plugin_list()
+        return Msp.msp_plugin_list()
 
-    @property
-    def model_dict(self) -> dict[str, list[str]]:
+    @classproperty
+    def model_dict(cls) -> dict[str, list[str]]:
         '''Return dict going from a plugin name to the models that plugin supports.'''
         res = {}
-        for p in self.plugin_list:
-            res[p] = self._msp.msp_model_list(p)
+        for p in cls.plugin_list:
+            res[p] = Msp.msp_model_list(p)
         return res
+
+    @property
+    def file_name(self) -> str:
+        return self._msp.file_name()
+    
+    @property
+    def image_index(self) -> int:
+        return self._msp.image_index()
+    
+    @property
+    def family(self) -> str:
+        return self._msp.family()
+    
+    @property
+    def version(self) -> str:
+        return self._msp.version()
+    
+    @property
+    def model_name(self) -> str:
+        return self._msp.model_name()
+    
+    @property
+    def pedigree(self) -> str:
+        return self._msp.pedigree()
+    
+    @property
+    def image_identifer(self) -> str:
+        return self._msp.image_identifer()
+    
+    @property
+    def sensor_identifer(self) -> str:
+        return self._msp.sensor_identifer()
+    
+    @property
+    def platform_identifer(self) -> str:
+        return self._msp.platform_identifer()
+    
+    @property
+    def collection_identifer(self) -> str:
+        return self._msp.collection_identifer()
+    
+    @property
+    def trajectory_identifer(self) -> str:
+        return self._msp.trajectory_identifer()
+    
+    @property
+    def sensor_type(self) -> str:
+        return self._msp.sensor_type()
+    
+    @property
+    def sensor_mode(self) -> str:
+        return self._msp.sensor_mode()
+    
+    @property
+    def reference_date_time(self) -> str:
+        return self._msp.reference_date_time()
     
     @classmethod
     def check_plugin(cls, f : pynitf.NitfFile, iid1 : str, plugin : str, check_corner : bool=True, corner_tol : float =1.0, dist_tol : float =-1) -> bool:
@@ -69,7 +134,7 @@ class IgcMsp(ImageGroundConnection):
             segindx = [t for t, isg in enumerate(f.image_segment) if isg is iseg][0]
             try:
                 igc = cls(
-                    f.file_name, SimpleDem(), segindx, plugin, plugin
+                    f.file_name, segindx, plugin, plugin
                 )
             except RuntimeError:
                 print("MSP failed to read " + desc)

@@ -5,6 +5,55 @@
 #include <boost/foreach.hpp>
 
 void* Msp::lib_ptr = 0;
+boost::shared_ptr<MSP::SDS::SupportDataService> Msp::sds;
+boost::shared_ptr<MSP::SMS::SensorModelService> Msp::sms;
+boost::shared_ptr<MSP::CS::CovarianceService> Msp::cs;
+
+Msp::Msp(const std::string& Fname, int Image_index,
+	 const std::string& Plugin_name, const std::string& Model_name)
+  : fname_(Fname), plugin_name_(Plugin_name), model_name_(Model_name),
+    image_index_(Image_index)
+{
+  try{
+    msp_init();
+    boost::shared_ptr<csm::Isd> isd(sds->createIsdFromFile(fname_.c_str()));
+    sds->setImageInIsd(image_index_, *isd);
+    MSP::WarningListType msg;
+    boost::shared_ptr<csm::Model> model_raw;
+    if(plugin_name_ == "")
+      model_raw.reset(sms->createModelFromISD(*isd,0,&msg));
+    else {
+      const csm::Plugin* t = csm::Plugin::findPlugin(plugin_name_);
+      if(!t)
+	throw Exception("Could not file plugin '" + plugin_name_ + "'");
+      std::list<csm::Warning> msg2;
+      bool can_do = t->canISDBeConvertedToModelState(*isd, model_name_, &msg2);
+      if(can_do)
+	model_raw.reset(t->constructModelFromISD(*isd, model_name_, &msg2));
+      BOOST_FOREACH(const csm::Warning& w, msg2) {
+	std::cout << "Warning:\n" << w.getMessage() << "\n"
+		  << w.getFunction() << "\n";
+      }
+    }
+    // We may want to turn this off, but for now it is useful to get all
+    // the warning messages when we create the model.
+    BOOST_FOREACH(const MSP::Warning& w, msg) {
+      std::cout << "Warning:\n" << w.getMessage() << "\n"
+		<< w.getFunction() << "\n";
+    }
+    model = boost::dynamic_pointer_cast<csm::RasterGM>(model_raw);
+    if(!model)
+      throw Exception("Model needs to be a RasterGM model");
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
 
 //-----------------------------------------------------------------------
 /// Print out a list of plugins that have been registered
@@ -52,6 +101,9 @@ void Msp::msp_init()
       << "  Error: " << dlerror() << "\n";
     throw e;
   }
+  sds = boost::make_shared<MSP::SDS::SupportDataService>();
+  sms = boost::make_shared<MSP::SMS::SensorModelService>();
+  cs = boost::make_shared<MSP::CS::CovarianceService>();
 }
 
 //-----------------------------------------------------------------------
@@ -123,6 +175,39 @@ std::vector<std::string> Msp::msp_model_list(const std::string& Plugin)
     std::vector<std::string> res;
     for(int i = 0; i < (int) t->getNumModels(); ++i)
       res.push_back(t->getModelName(i));
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Return the list of image IDS for the given NITF file. 
+//-----------------------------------------------------------------------
+
+std::vector<std::string> Msp::image_ids(const std::string& Fname)
+{
+  try {
+    msp_init();
+    // This registers stuff
+    MSP::SDS::SupportDataService sds;
+    boost::shared_ptr<MSP::SMS::SensorModelService> sms =
+      boost::make_shared<MSP::SMS::SensorModelService>();
+    boost::shared_ptr<csm::Isd> isd(sds.createIsdFromFile(Fname.c_str()));
+    int numImages = sds.getNumImages(*isd);
+    // For some reason, our test examples don't work with this. Like so
+    // much with MSP not clear why, we just get "Unrecognized support
+    // data" error. Leave this minor diagnostic in place for now, we can
+    // come back to this.
+    std::cerr << "nuImages: " << numImages << "\n";
+    std::vector<std::string> res;
+    sds.getImageIds(*isd, res);
     return res;
   } catch(const csm::Error& error) {
     // Translate MSP error to Geocal error, just so we don't need

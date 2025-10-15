@@ -5246,6 +5246,29 @@ SWIGINTERN void std_vector_Sl_std_string_Sg__insert__SWIG_1(std::vector< std::st
 
 #include "msp.h"  
 
+
+SWIGINTERN int
+SWIG_AsVal_int (PyObject * obj, int *val)
+{
+  long v;
+  int res = SWIG_AsVal_long (obj, &v);
+  if (SWIG_IsOK(res)) {
+    if ((v < INT_MIN || v > INT_MAX)) {
+      return SWIG_OverflowError;
+    } else {
+      if (val) *val = static_cast< int >(v);
+    }
+  }  
+  return res;
+}
+
+
+SWIGINTERNINLINE PyObject*
+  SWIG_From_int  (int value)
+{
+  return PyInt_FromLong((long) value);
+}
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -7799,88 +7822,319 @@ SWIGINTERN PyObject *StringVector_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
   return SWIG_Python_InitShadowInstance(args);
 }
 
-SWIGINTERN PyObject *_wrap_new_Msp(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Msp__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  std::string *arg4 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  int res4 = SWIG_OLDOBJ ;
   Msp *result = 0 ;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "new_Msp", 0, 0, 0)) SWIG_fail;
+  if ((nobjs < 4) || (nobjs > 4)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Msp" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Msp" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    std::string *ptr = (std::string *)0;
+    res4 = SWIG_AsPtr_std_string(swig_obj[3], &ptr);
+    if (!SWIG_IsOK(res4)) {
+      SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "new_Msp" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "4"" of type '" "std::string const &""'"); 
+    }
+    arg4 = ptr;
+  }
   {
     try {
-      result = (Msp *)new Msp();
+      result = (Msp *)new Msp((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Msp, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
   return resultobj;
 fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  if (SWIG_IsNewObj(res4)) delete arg4;
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Msp__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  std::string *arg3 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  int res3 = SWIG_OLDOBJ ;
+  Msp *result = 0 ;
+  
+  (void)self;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Msp" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    std::string *ptr = (std::string *)0;
+    res3 = SWIG_AsPtr_std_string(swig_obj[2], &ptr);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Msp" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "3"" of type '" "std::string const &""'"); 
+    }
+    arg3 = ptr;
+  }
+  {
+    try {
+      result = (Msp *)new Msp((std::string const &)*arg1,arg2,(std::string const &)*arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Msp, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  if (SWIG_IsNewObj(res3)) delete arg3;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Msp__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int arg2 ;
+  int res1 = SWIG_OLDOBJ ;
+  int val2 ;
+  int ecode2 = 0 ;
+  Msp *result = 0 ;
+  
+  (void)self;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  ecode2 = SWIG_AsVal_int(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Msp" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  {
+    try {
+      result = (Msp *)new Msp((std::string const &)*arg1,arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Msp, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Msp__SWIG_3(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  Msp *result = 0 ;
+  
+  (void)self;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_Msp" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = (Msp *)new Msp((std::string const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Msp, SWIG_POINTER_NEW |  0 );
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Msp(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[5] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "new_Msp", 0, 4, argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    PyObject *retobj = _wrap_new_Msp__SWIG_3(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 2) {
+    PyObject *retobj = _wrap_new_Msp__SWIG_2(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 3) {
+    PyObject *retobj = _wrap_new_Msp__SWIG_1(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 4) {
+    PyObject *retobj = _wrap_new_Msp__SWIG_0(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'new_Msp'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Msp::Msp(std::string const &,int,std::string const &,std::string const &)\n"
+    "    Msp::Msp(std::string const &,int,std::string const &)\n"
+    "    Msp::Msp(std::string const &,int)\n"
+    "    Msp::Msp(std::string const &)\n");
+  return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Msp_msp_register_plugin(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Msp *arg1 = (Msp *) 0 ;
-  std::string *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int res2 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[2] ;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "Msp_msp_register_plugin", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_register_plugin" "', argument " "1"" of type '" "Msp *""'"); 
-  }
-  arg1 = reinterpret_cast< Msp * >(argp1);
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   {
     std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Msp_msp_register_plugin" "', argument " "2"" of type '" "std::string const &""'"); 
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_msp_register_plugin" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_msp_register_plugin" "', argument " "1"" of type '" "std::string const &""'"); 
     }
-    arg2 = ptr;
+    arg1 = ptr;
   }
   {
     try {
-      (arg1)->msp_register_plugin((std::string const &)*arg2);
+      Msp::msp_register_plugin((std::string const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
   resultobj = SWIG_Py_Void();
-  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_msp_print_plugin_list(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Msp_msp_print_plugin_list", 0, 0, 0)) SWIG_fail;
+  {
+    try {
+      Msp::msp_print_plugin_list();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
   return NULL;
 }
 
 
 SWIGINTERN PyObject *_wrap_Msp_msp_plugin_list(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Msp *arg1 = (Msp *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject *swig_obj[1] ;
   std::vector< std::string,std::allocator< std::string > > result;
   
   (void)self;
-  if (!args) SWIG_fail;
-  swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_plugin_list" "', argument " "1"" of type '" "Msp *""'"); 
-  }
-  arg1 = reinterpret_cast< Msp * >(argp1);
+  if (!SWIG_Python_UnpackTuple(args, "Msp_msp_plugin_list", 0, 0, 0)) SWIG_fail;
   {
     try {
-      result = (arg1)->msp_plugin_list();
+      result = Msp::msp_plugin_list();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7894,71 +8148,492 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Msp_msp_model_list(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Msp *arg1 = (Msp *) 0 ;
-  std::string *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int res2 = SWIG_OLDOBJ ;
-  PyObject *swig_obj[2] ;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
   std::vector< std::string,std::allocator< std::string > > result;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "Msp_msp_model_list", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_model_list" "', argument " "1"" of type '" "Msp *""'"); 
-  }
-  arg1 = reinterpret_cast< Msp * >(argp1);
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
   {
     std::string *ptr = (std::string *)0;
-    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
-    if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Msp_msp_model_list" "', argument " "2"" of type '" "std::string const &""'"); 
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_model_list" "', argument " "1"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_msp_model_list" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_msp_model_list" "', argument " "1"" of type '" "std::string const &""'"); 
     }
-    arg2 = ptr;
+    arg1 = ptr;
   }
   {
     try {
-      result = (arg1)->msp_model_list((std::string const &)*arg2);
+      result = Msp::msp_model_list((std::string const &)*arg1);
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
   resultobj = swig::from(static_cast< std::vector< std::string,std::allocator< std::string > > >(result));
-  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return resultobj;
 fail:
-  if (SWIG_IsNewObj(res2)) delete arg2;
+  if (SWIG_IsNewObj(res1)) delete arg1;
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Msp_msp_print_plugin_list(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Msp_image_ids(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  std::vector< std::string,std::allocator< std::string > > result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_image_ids" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_image_ids" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = Msp::image_ids((std::string const &)*arg1);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::string,std::allocator< std::string > > >(result));
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_file_name(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Msp *arg1 = (Msp *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
+  std::string *result = 0 ;
   
   (void)self;
   if (!args) SWIG_fail;
   swig_obj[0] = args;
   res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_print_plugin_list" "', argument " "1"" of type '" "Msp *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_file_name" "', argument " "1"" of type '" "Msp const *""'"); 
   }
   arg1 = reinterpret_cast< Msp * >(argp1);
   {
     try {
-      (arg1)->msp_print_plugin_list();
+      result = (std::string *) &((Msp const *)arg1)->file_name();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_Py_Void();
+  resultobj = SWIG_From_std_string(static_cast< std::string >(*result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_image_index(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  int result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_image_index" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = (int)((Msp const *)arg1)->image_index();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_family(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_family" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->family();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_version(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_version" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->version();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_model_name(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_model_name" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->model_name();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_pedigree(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_pedigree" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->pedigree();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_image_identifer(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_image_identifer" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->image_identifer();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_sensor_identifer(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_sensor_identifer" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->sensor_identifer();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_platform_identifer(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_platform_identifer" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->platform_identifer();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_collection_identifer(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_collection_identifer" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->collection_identifer();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_trajectory_identifer(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_trajectory_identifer" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->trajectory_identifer();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_sensor_type(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_sensor_type" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->sensor_type();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_sensor_mode(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_sensor_mode" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->sensor_mode();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_reference_date_time(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::string result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_reference_date_time" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->reference_date_time();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
   return resultobj;
 fail:
   return NULL;
@@ -8061,11 +8736,26 @@ static PyMethodDef SwigMethods[] = {
 	 { "delete_StringVector", _wrap_delete_StringVector, METH_O, NULL},
 	 { "StringVector_swigregister", StringVector_swigregister, METH_O, NULL},
 	 { "StringVector_swiginit", StringVector_swiginit, METH_VARARGS, NULL},
-	 { "new_Msp", _wrap_new_Msp, METH_NOARGS, NULL},
-	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_VARARGS, NULL},
-	 { "Msp_msp_plugin_list", _wrap_Msp_msp_plugin_list, METH_O, NULL},
-	 { "Msp_msp_model_list", _wrap_Msp_msp_model_list, METH_VARARGS, NULL},
-	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_O, NULL},
+	 { "new_Msp", _wrap_new_Msp, METH_VARARGS, NULL},
+	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_O, NULL},
+	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_NOARGS, NULL},
+	 { "Msp_msp_plugin_list", _wrap_Msp_msp_plugin_list, METH_NOARGS, NULL},
+	 { "Msp_msp_model_list", _wrap_Msp_msp_model_list, METH_O, NULL},
+	 { "Msp_image_ids", _wrap_Msp_image_ids, METH_O, NULL},
+	 { "Msp_file_name", _wrap_Msp_file_name, METH_O, NULL},
+	 { "Msp_image_index", _wrap_Msp_image_index, METH_O, NULL},
+	 { "Msp_family", _wrap_Msp_family, METH_O, NULL},
+	 { "Msp_version", _wrap_Msp_version, METH_O, NULL},
+	 { "Msp_model_name", _wrap_Msp_model_name, METH_O, NULL},
+	 { "Msp_pedigree", _wrap_Msp_pedigree, METH_O, NULL},
+	 { "Msp_image_identifer", _wrap_Msp_image_identifer, METH_O, NULL},
+	 { "Msp_sensor_identifer", _wrap_Msp_sensor_identifer, METH_O, NULL},
+	 { "Msp_platform_identifer", _wrap_Msp_platform_identifer, METH_O, NULL},
+	 { "Msp_collection_identifer", _wrap_Msp_collection_identifer, METH_O, NULL},
+	 { "Msp_trajectory_identifer", _wrap_Msp_trajectory_identifer, METH_O, NULL},
+	 { "Msp_sensor_type", _wrap_Msp_sensor_type, METH_O, NULL},
+	 { "Msp_sensor_mode", _wrap_Msp_sensor_mode, METH_O, NULL},
+	 { "Msp_reference_date_time", _wrap_Msp_reference_date_time, METH_O, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
 	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},
@@ -8128,11 +8818,26 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "delete_StringVector", _wrap_delete_StringVector, METH_O, NULL},
 	 { "StringVector_swigregister", StringVector_swigregister, METH_O, NULL},
 	 { "StringVector_swiginit", StringVector_swiginit, METH_VARARGS, NULL},
-	 { "new_Msp", _wrap_new_Msp, METH_NOARGS, NULL},
-	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_VARARGS, NULL},
-	 { "Msp_msp_plugin_list", _wrap_Msp_msp_plugin_list, METH_O, NULL},
-	 { "Msp_msp_model_list", _wrap_Msp_msp_model_list, METH_VARARGS, NULL},
-	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_O, NULL},
+	 { "new_Msp", _wrap_new_Msp, METH_VARARGS, NULL},
+	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_O, NULL},
+	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_NOARGS, NULL},
+	 { "Msp_msp_plugin_list", _wrap_Msp_msp_plugin_list, METH_NOARGS, NULL},
+	 { "Msp_msp_model_list", _wrap_Msp_msp_model_list, METH_O, NULL},
+	 { "Msp_image_ids", _wrap_Msp_image_ids, METH_O, NULL},
+	 { "Msp_file_name", _wrap_Msp_file_name, METH_O, NULL},
+	 { "Msp_image_index", _wrap_Msp_image_index, METH_O, NULL},
+	 { "Msp_family", _wrap_Msp_family, METH_O, NULL},
+	 { "Msp_version", _wrap_Msp_version, METH_O, NULL},
+	 { "Msp_model_name", _wrap_Msp_model_name, METH_O, NULL},
+	 { "Msp_pedigree", _wrap_Msp_pedigree, METH_O, NULL},
+	 { "Msp_image_identifer", _wrap_Msp_image_identifer, METH_O, NULL},
+	 { "Msp_sensor_identifer", _wrap_Msp_sensor_identifer, METH_O, NULL},
+	 { "Msp_platform_identifer", _wrap_Msp_platform_identifer, METH_O, NULL},
+	 { "Msp_collection_identifer", _wrap_Msp_collection_identifer, METH_O, NULL},
+	 { "Msp_trajectory_identifer", _wrap_Msp_trajectory_identifer, METH_O, NULL},
+	 { "Msp_sensor_type", _wrap_Msp_sensor_type, METH_O, NULL},
+	 { "Msp_sensor_mode", _wrap_Msp_sensor_mode, METH_O, NULL},
+	 { "Msp_reference_date_time", _wrap_Msp_reference_date_time, METH_O, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
 	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},

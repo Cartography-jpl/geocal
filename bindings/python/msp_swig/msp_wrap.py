@@ -136,12 +136,27 @@ class Msp(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
-    def __init__(self):
-        _msp_wrap.Msp_swiginit(self, _msp_wrap.new_Msp())
-    msp_register_plugin = _swig_new_instance_method(_msp_wrap.Msp_msp_register_plugin)
-    msp_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_plugin_list)
-    msp_model_list = _swig_new_instance_method(_msp_wrap.Msp_msp_model_list)
-    msp_print_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_print_plugin_list)
+    def __init__(self, *args):
+        _msp_wrap.Msp_swiginit(self, _msp_wrap.new_Msp(*args))
+    msp_register_plugin = _swig_new_static_method(_msp_wrap.Msp_msp_register_plugin)
+    msp_print_plugin_list = _swig_new_static_method(_msp_wrap.Msp_msp_print_plugin_list)
+    msp_plugin_list = _swig_new_static_method(_msp_wrap.Msp_msp_plugin_list)
+    msp_model_list = _swig_new_static_method(_msp_wrap.Msp_msp_model_list)
+    image_ids = _swig_new_static_method(_msp_wrap.Msp_image_ids)
+    file_name = _swig_new_instance_method(_msp_wrap.Msp_file_name)
+    image_index = _swig_new_instance_method(_msp_wrap.Msp_image_index)
+    family = _swig_new_instance_method(_msp_wrap.Msp_family)
+    version = _swig_new_instance_method(_msp_wrap.Msp_version)
+    model_name = _swig_new_instance_method(_msp_wrap.Msp_model_name)
+    pedigree = _swig_new_instance_method(_msp_wrap.Msp_pedigree)
+    image_identifer = _swig_new_instance_method(_msp_wrap.Msp_image_identifer)
+    sensor_identifer = _swig_new_instance_method(_msp_wrap.Msp_sensor_identifer)
+    platform_identifer = _swig_new_instance_method(_msp_wrap.Msp_platform_identifer)
+    collection_identifer = _swig_new_instance_method(_msp_wrap.Msp_collection_identifer)
+    trajectory_identifer = _swig_new_instance_method(_msp_wrap.Msp_trajectory_identifer)
+    sensor_type = _swig_new_instance_method(_msp_wrap.Msp_sensor_type)
+    sensor_mode = _swig_new_instance_method(_msp_wrap.Msp_sensor_mode)
+    reference_date_time = _swig_new_instance_method(_msp_wrap.Msp_reference_date_time)
     __swig_destroy__ = _msp_wrap.delete_Msp
 
 # Register Msp in _msp_wrap:

@@ -7892,6 +7892,50 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Msp_msp_model_list(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  std::string *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int res2 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[2] ;
+  std::vector< std::string,std::allocator< std::string > > result;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Msp_msp_model_list", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_model_list" "', argument " "1"" of type '" "Msp *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    std::string *ptr = (std::string *)0;
+    res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Msp_msp_model_list" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_msp_model_list" "', argument " "2"" of type '" "std::string const &""'"); 
+    }
+    arg2 = ptr;
+  }
+  {
+    try {
+      result = (arg1)->msp_model_list((std::string const &)*arg2);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< std::string,std::allocator< std::string > > >(result));
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res2)) delete arg2;
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_Msp_msp_print_plugin_list(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Msp *arg1 = (Msp *) 0 ;
@@ -8020,6 +8064,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "new_Msp", _wrap_new_Msp, METH_NOARGS, NULL},
 	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_VARARGS, NULL},
 	 { "Msp_msp_plugin_list", _wrap_Msp_msp_plugin_list, METH_O, NULL},
+	 { "Msp_msp_model_list", _wrap_Msp_msp_model_list, METH_VARARGS, NULL},
 	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_O, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
@@ -8086,6 +8131,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "new_Msp", _wrap_new_Msp, METH_NOARGS, NULL},
 	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_VARARGS, NULL},
 	 { "Msp_msp_plugin_list", _wrap_Msp_msp_plugin_list, METH_O, NULL},
+	 { "Msp_msp_model_list", _wrap_Msp_msp_model_list, METH_VARARGS, NULL},
 	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_O, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},

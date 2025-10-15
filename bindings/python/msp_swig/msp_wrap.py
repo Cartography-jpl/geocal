@@ -140,6 +140,7 @@ class Msp(object):
         _msp_wrap.Msp_swiginit(self, _msp_wrap.new_Msp())
     msp_register_plugin = _swig_new_instance_method(_msp_wrap.Msp_msp_register_plugin)
     msp_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_plugin_list)
+    msp_model_list = _swig_new_instance_method(_msp_wrap.Msp_msp_model_list)
     msp_print_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_print_plugin_list)
     __swig_destroy__ = _msp_wrap.delete_Msp
 

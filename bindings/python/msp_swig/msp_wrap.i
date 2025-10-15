@@ -30,7 +30,7 @@ public:
   Msp();
   void msp_register_plugin(const std::string& Plugin_name);
   std::vector<std::string> msp_plugin_list();
-  std::vector<std::string> IgcMsp::msp_model_list(const std::string& Plugin);
+  std::vector<std::string> msp_model_list(const std::string& Plugin);
   void msp_print_plugin_list();
 };
 

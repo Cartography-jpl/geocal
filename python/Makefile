@@ -55,6 +55,6 @@ mypy:
 	PYTHONPATH=$(PWD) mypy --disallow-untyped-defs geocal
 
 check:
-	pytest -n 10 test
+	pytest -n 10 tests
 
 

@@ -133,7 +133,7 @@ def warp_image(
     polynomial fit. It should be empty, linear, keystone, quad or
     cubic.
     """
-    w = _warp(
+    _ = _warp(
         img_in,
         img_out,
         ref_img,

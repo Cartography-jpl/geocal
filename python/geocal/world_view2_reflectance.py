@@ -1,6 +1,6 @@
 from builtins import range
-from geocal_swig import *
-from .instrument_reflectance import *
+from geocal_swig import GdalRasterImage
+from .instrument_reflectance import InstrumentReflectance
 import math
 import re
 
@@ -46,13 +46,13 @@ class WorldView2Reflectance(InstrumentReflectance):
         for i in range(9):
             self.absCalFactors.append(-999.0)
             self.effectiveBandwidths.append(-999.0)
-        if multimetafname != None:
+        if multimetafname is not None:
             if re.search(".IMD", multimetafname):
                 self.readMetaData(multimetafname)
             else:
                 self.readNTFMetaData(multimetafname, ispan=False)
             self.calculateSolarDistance()
-        if panmetafname != None:
+        if panmetafname is not None:
             if re.search(".IMD", panmetafname):
                 self.readMetaData(panmetafname)
             else:

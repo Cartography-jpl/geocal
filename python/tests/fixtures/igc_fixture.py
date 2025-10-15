@@ -16,8 +16,13 @@ from geocal import (
     QuaternionCamera,
     Time,
     KeplerOrbit,
+    OrbitDataImageGroundConnection,
+    GlasGfmCamera,
+    OrbitDes,
+    AttCsattb,
+    PosCsephb,
 )
-
+import numpy as np
 import pytest
 
 
@@ -196,3 +201,52 @@ def igc_staring2(igc_two_meter_pushbroom):
 def igc_rpc(rpc):
     image = MemoryRasterImage(int(rpc.line_offset * 2), int(rpc.sample_offset * 2), 0)
     return RpcImageGroundConnection(rpc, SimpleDem(), image)
+
+
+@pytest.fixture(scope="function")
+def igc_gfm():
+    """Sample GFM IGC"""
+    tdata = Time.parse_time("2003-01-01T11:11:00Z")
+    orb = KeplerOrbit()
+    porb = PosCsephb(
+        orb,
+        tdata - 10.0,
+        tdata + 10.0,
+        0.5,
+        PosCsephb.LINEAR,
+        PosCsephb.NO_LAGRANGE,
+        PosCsephb.EPHEMERIS_QUALITY_GOOD,
+        PosCsephb.ACTUAL,
+        PosCsephb.CARTESIAN_FIXED,
+    )
+    aorb = AttCsattb(
+        orb,
+        tdata - 10.0,
+        tdata + 10.0,
+        0.5,
+        AttCsattb.LINEAR,
+        AttCsattb.NO_LAGRANGE,
+        AttCsattb.ATTITUDE_QUALITY_GOOD,
+        AttCsattb.ACTUAL,
+        AttCsattb.CARTESIAN_FIXED,
+    )
+    orb = OrbitDes(porb, aorb)
+    cam = GlasGfmCamera(2048, 2048)
+    cam.focal_length = 123.8e-3
+    cam.focal_length_time = orb.min_time
+    cam.first_line_block = [0]
+    cam.first_sample_block = [0]
+    cam.delta_line_block = [2048]
+    cam.delta_sample_block = [2048]
+    fa = np.empty((1, 1, 2, 2, 2))
+    fa[0, 0, :, 0, 0] = -1024 * 21e-7
+    fa[0, 0, :, 1, 0] = 1024 * 21e-7
+    fa[0, 0, 0, :, 1] = 1024 * 21e-7
+    fa[0, 0, 1, :, 1] = -1024 * 21e-7
+    cam.field_alignment_block(0, fa)
+
+    igc = OrbitDataImageGroundConnection(orb, tdata, cam, SimpleDem(), None)
+    igc.platform_id = "FAKEPL"
+    igc.payload_id = "FAKEPY"
+    igc.sensor_id = "FAKESN"
+    return igc

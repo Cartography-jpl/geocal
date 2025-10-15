@@ -1,8 +1,8 @@
-from geocal_swig import *
-from .vicar_interface import *
-from .ibis_file_extension import *
+from geocal_swig import Geodetic, IbisFile, Quaternion_double, QuaternionOrbitData
+from .vicar_interface import VicarInterface
 import numpy as np
 import math
+import os
 
 # This wraps various VICAR routines to allow them to be called through
 # python

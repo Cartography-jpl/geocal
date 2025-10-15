@@ -3223,7 +3223,7 @@ SWIGINTERN PyObject *SWIG_PyStaticMethod_New(PyObject *SWIGUNUSEDPARM(self), PyO
 
 /* -------- TYPES TABLE (BEGIN) -------- */
 
-#define SWIGTYPE_p_Test swig_types[0]
+#define SWIGTYPE_p_Msp swig_types[0]
 #define SWIGTYPE_p_char swig_types[1]
 static swig_type_info *swig_types[3];
 static swig_module_info swig_module = {swig_types, 2, 0, 0, 0, 0};
@@ -3376,180 +3376,7 @@ namespace swig {
 #include <string>
 
 
-#include <iostream>
-
-#include "Plugin.h"
-#include "GroundPoint.h"
-#include "CovarianceService.h"
-#include "ImagePoint.h"
-#include "PointExtractionService.h"
-#include "SensorModelService.h"
-#include "SupportDataService.h"
-#include "ImagingGeometryService.h"
-#include "MSPTime.h"
-#include "IWS_WarningTracker.h"
-#include "CsmSensorModelList.h"
-// Note these two include files were *not* part of MSP 1.6, although
-// the RsmGeneratorService library still is present. I'm assuming they
-// have just dropped the headers for now. We copied this over from MSP
-// 1.5. We can come back to this if the RSM service gets completely
-// dropped in the future, but for now just include the header files
-// and assume they have been copied into place.
-#include "RsmGeneratorService.h"
-#include "RGSConfig.h"
-#include <sstream>		// Definition of ostringstream.
-#include <dlfcn.h>
-#include <boost/shared_ptr.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/foreach.hpp>
-
-class Exception: public std::exception {
-public:
-//-----------------------------------------------------------------------
-/// Default constructor. Can give an optional string describing
-/// the error.
-//-----------------------------------------------------------------------
-
-  Exception(const std::string& W = "") 
-  { 
-    // This reserve shouldn't really be necessary, but on a Mac
-    // 10.4.11 using gcc 4.0.1, there is some kind of bug where we get
-    // a "Double free" error when printing in Ruby. I never tracked
-    // exactly where this occurred, but it was somewhere in the
-    // iostream library when the buffer of os was resized. We just
-    // reserve enough space up front so this isn't an issue. Since
-    // this only gets called when an exception occurs, there shouldn't
-    // be much of a performance issue with this.
-    std::string buf("blah");
-    buf.reserve(1000);
-    s_.str(buf);
-    s_ << W;  
-  }
-
-//-----------------------------------------------------------------------
-/// Copy constructor.
-//-----------------------------------------------------------------------
-
-  Exception(const Exception& E)
-  {
-    try {
-      std::string cp(E.s_.str());
-      s_.str(cp);
-    } catch(...) {		// Ignore all errors.
-    }
-  }
-  
-//-----------------------------------------------------------------------
-/// Destructor.
-//-----------------------------------------------------------------------
-    
-  virtual ~Exception() throw() {}
-
-//-----------------------------------------------------------------------
-/// Write to exception what() string.
-//-----------------------------------------------------------------------
-    
-  template<class T> inline Exception& operator<<(const T& V)
-  {
-    s_ << V;
-    return *this;
-  }
-
-//-----------------------------------------------------------------------
-/// Print out description of object.
-//-----------------------------------------------------------------------
-
-  virtual void print(std::ostream& Os) const 
-  {
-    Os << "GeoCal Exception:\n"
-       << "=========================\n" 
-       << what() << "\n"
-       << "=========================\n" ;
-  }
-
-//-----------------------------------------------------------------------
-/// Description of what the error is.
-//-----------------------------------------------------------------------
-
-  virtual const char* what() const throw()
-  {
-    scratch = s_.str();
-    return scratch.c_str();
-  }
-private:
-  mutable std::string scratch;
-  std::ostringstream s_;
-};
-  
-class Test {
-public:
-  Test() {
-    std::cerr << "Hi there";
-  }
-
-  void msp_print_plugin_list() {
-    try {
-      msp_init();
-      MSP::SDS::SupportDataService sds;
-      boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-	boost::make_shared<MSP::SMS::SensorModelService>();
-      MSP::SMS::NameList plugin_list;
-      sms->getAllRegisteredPlugins(plugin_list);
-      std::cout << "MSP Plugin list:\n";
-      BOOST_FOREACH(const std::string& n, plugin_list)
-	std::cout<< "  " << n << "\n";
-    } catch(const csm::Error& error) {
-      // Translate MSP error to Geocal error, just so we don't need
-      // additional logic to handle this
-      Exception e;
-      e << "MSP error:\n"
-	<< "Message: " << error.getMessage() << "\n"
-	<< "Function: " << error.getFunction() << "\n";
-      throw e;
-    }
-  }
-  
-  void msp_init()
-  {
-    if(lib_ptr)
-      return;
-    char* t = getenv("CSM_PLUGIN_DIR");
-    if(!t)
-      throw Exception("You need to set the environment variable CSM_PLUGIN_DIR to use the MSP plugins");
-    std::string lib = std::string(t) + "/../lib/libMSPcsm.so";
-    lib_ptr = dlopen(lib.c_str(), RTLD_NOW | RTLD_GLOBAL);
-    if(!lib_ptr) {
-      Exception e;
-      e << "Trouble loading the library " << lib << "\n"
-	<< "  Error: " << dlerror() << "\n";
-      throw e;
-    }
-  }
-
-  void msp_register_plugin(const std::string& Plugin_name)
-  {
-    try {
-      msp_init();
-      MSP::SDS::SupportDataService sds;
-      boost::shared_ptr<MSP::SMS::SensorModelService> sms =
-	boost::make_shared<MSP::SMS::SensorModelService>();
-      sms->registerPlugin(Plugin_name);
-    } catch(const csm::Error& error) {
-      // Translate MSP error to Geocal error, just so we don't need
-      // additional logic to handle this
-      Exception e;
-      e << "MSP error:\n"
-	<< "Message: " << error.getMessage() << "\n"
-	<< "Function: " << error.getFunction() << "\n";
-      throw e;
-    }
-  }
-private:
-  static void* lib_ptr;
-};
-
-void* Test::lib_ptr = 0;
-
+#include "msp.h"  
 
 
 SWIGINTERN swig_type_info*
@@ -3679,29 +3506,29 @@ SWIG_AsPtr_std_string (PyObject * obj, std::string **val)
 #ifdef __cplusplus
 extern "C" {
 #endif
-SWIGINTERN PyObject *_wrap_new_Test(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_Msp(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Test *result = 0 ;
+  Msp *result = 0 ;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "new_Test", 0, 0, 0)) SWIG_fail;
+  if (!SWIG_Python_UnpackTuple(args, "new_Msp", 0, 0, 0)) SWIG_fail;
   {
     try {
-      result = (Test *)new Test();
+      result = (Msp *)new Msp();
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
   }
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Test, SWIG_POINTER_NEW |  0 );
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Msp, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
 }
 
 
-SWIGINTERN PyObject *_wrap_Test_msp_register_plugin(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Msp_msp_register_plugin(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Test *arg1 = (Test *) 0 ;
+  Msp *arg1 = (Msp *) 0 ;
   std::string *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -3709,20 +3536,20 @@ SWIGINTERN PyObject *_wrap_Test_msp_register_plugin(PyObject *self, PyObject *ar
   PyObject *swig_obj[2] ;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "Test_msp_register_plugin", 2, 2, swig_obj)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Test, 0 |  0 );
+  if (!SWIG_Python_UnpackTuple(args, "Msp_msp_register_plugin", 2, 2, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Test_msp_register_plugin" "', argument " "1"" of type '" "Test *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_register_plugin" "', argument " "1"" of type '" "Msp *""'"); 
   }
-  arg1 = reinterpret_cast< Test * >(argp1);
+  arg1 = reinterpret_cast< Msp * >(argp1);
   {
     std::string *ptr = (std::string *)0;
     res2 = SWIG_AsPtr_std_string(swig_obj[1], &ptr);
     if (!SWIG_IsOK(res2)) {
-      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Test_msp_register_plugin" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Msp_msp_register_plugin" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     if (!ptr) {
-      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Test_msp_register_plugin" "', argument " "2"" of type '" "std::string const &""'"); 
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "Msp_msp_register_plugin" "', argument " "2"" of type '" "std::string const &""'"); 
     }
     arg2 = ptr;
   }
@@ -3742,9 +3569,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Test_msp_print_plugin_list(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_Msp_msp_print_plugin_list(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Test *arg1 = (Test *) 0 ;
+  Msp *arg1 = (Msp *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
@@ -3752,11 +3579,11 @@ SWIGINTERN PyObject *_wrap_Test_msp_print_plugin_list(PyObject *self, PyObject *
   (void)self;
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Test, 0 |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Test_msp_print_plugin_list" "', argument " "1"" of type '" "Test *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_msp_print_plugin_list" "', argument " "1"" of type '" "Msp *""'"); 
   }
-  arg1 = reinterpret_cast< Test * >(argp1);
+  arg1 = reinterpret_cast< Msp * >(argp1);
   {
     try {
       (arg1)->msp_print_plugin_list();
@@ -3771,9 +3598,9 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_delete_Test(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_delete_Msp(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
-  Test *arg1 = (Test *) 0 ;
+  Msp *arg1 = (Msp *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject *swig_obj[1] ;
@@ -3781,11 +3608,11 @@ SWIGINTERN PyObject *_wrap_delete_Test(PyObject *self, PyObject *args) {
   (void)self;
   if (!args) SWIG_fail;
   swig_obj[0] = args;
-  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Test, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Test" "', argument " "1"" of type '" "Test *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Msp" "', argument " "1"" of type '" "Msp *""'"); 
   }
-  arg1 = reinterpret_cast< Test * >(argp1);
+  arg1 = reinterpret_cast< Msp * >(argp1);
   {
     try {
       delete arg1;
@@ -3800,57 +3627,57 @@ fail:
 }
 
 
-SWIGINTERN PyObject *Test_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *Msp_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj = NULL;
   if (!SWIG_Python_UnpackTuple(args, "swigregister", 1, 1, &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Test, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_Msp, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *Test_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *Msp_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   return SWIG_Python_InitShadowInstance(args);
 }
 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "new_Test", _wrap_new_Test, METH_NOARGS, NULL},
-	 { "Test_msp_register_plugin", _wrap_Test_msp_register_plugin, METH_VARARGS, NULL},
-	 { "Test_msp_print_plugin_list", _wrap_Test_msp_print_plugin_list, METH_O, NULL},
-	 { "delete_Test", _wrap_delete_Test, METH_O, NULL},
-	 { "Test_swigregister", Test_swigregister, METH_O, NULL},
-	 { "Test_swiginit", Test_swiginit, METH_VARARGS, NULL},
+	 { "new_Msp", _wrap_new_Msp, METH_NOARGS, NULL},
+	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_VARARGS, NULL},
+	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_O, NULL},
+	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
+	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
+	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "new_Test", _wrap_new_Test, METH_NOARGS, NULL},
-	 { "Test_msp_register_plugin", _wrap_Test_msp_register_plugin, METH_VARARGS, NULL},
-	 { "Test_msp_print_plugin_list", _wrap_Test_msp_print_plugin_list, METH_O, NULL},
-	 { "delete_Test", _wrap_delete_Test, METH_O, NULL},
-	 { "Test_swigregister", Test_swigregister, METH_O, NULL},
-	 { "Test_swiginit", Test_swiginit, METH_VARARGS, NULL},
+	 { "new_Msp", _wrap_new_Msp, METH_NOARGS, NULL},
+	 { "Msp_msp_register_plugin", _wrap_Msp_msp_register_plugin, METH_VARARGS, NULL},
+	 { "Msp_msp_print_plugin_list", _wrap_Msp_msp_print_plugin_list, METH_O, NULL},
+	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
+	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
+	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
 };
 
 
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
-static swig_type_info _swigt__p_Test = {"_p_Test", "Test *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_Msp = {"_p_Msp", "Msp *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
-  &_swigt__p_Test,
+  &_swigt__p_Msp,
   &_swigt__p_char,
 };
 
-static swig_cast_info _swigc__p_Test[] = {  {&_swigt__p_Test, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_Msp[] = {  {&_swigt__p_Msp, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
-  _swigc__p_Test,
+  _swigc__p_Msp,
   _swigc__p_char,
 };
 

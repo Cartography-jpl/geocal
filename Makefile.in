@@ -385,10 +385,12 @@ am__uninstall_files_from_dir = { \
 LTLIBRARIES = $(lib_LTLIBRARIES) $(noinst_LTLIBRARIES) \
 	$(pkgpythonmspswig_LTLIBRARIES) $(pkgpythonswig_LTLIBRARIES)
 _msp_wrap_la_LIBADD =
-am___msp_wrap_la_SOURCES_DIST = @swigmspsrc@/msp_wrap.cc
+am___msp_wrap_la_SOURCES_DIST = @swigmspsrc@/msp_wrap.cc \
+	@swigmspsrc@/msp.cc
 am__dirstamp = $(am__leading_dot)dirstamp
 @HAVE_MSP_TRUE@am__msp_wrap_la_OBJECTS =  \
-@HAVE_MSP_TRUE@	@swigmspsrc@/_msp_wrap_la-msp_wrap.lo
+@HAVE_MSP_TRUE@	@swigmspsrc@/_msp_wrap_la-msp_wrap.lo \
+@HAVE_MSP_TRUE@	@swigmspsrc@/_msp_wrap_la-msp.lo
 _msp_wrap_la_OBJECTS = $(am__msp_wrap_la_OBJECTS)
 AM_V_lt = $(am__v_lt_@AM_V@)
 am__v_lt_ = $(am__v_lt_@AM_DEFAULT_V@)
@@ -2019,6 +2021,7 @@ am__depfiles_remade =  \
 	@srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo \
 	@srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo \
 	@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo \
+	@swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Plo \
 	@swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp_wrap.Plo \
 	@swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo \
 	@swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo \
@@ -4428,12 +4431,14 @@ SWIG_LIBADD = libgeocal.la
 @HAVE_MSP_TRUE@pkgpythonmspswig_PYTHON = @swigmspsrc@/msp_wrap.py \
 @HAVE_MSP_TRUE@	@swigmspsrc@/__init__.py
 @HAVE_MSP_TRUE@_msp_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) \
-@HAVE_MSP_TRUE@	$(PYTHON_NUMPY_CPPFLAGS) $(MSP_CFLAGS)
+@HAVE_MSP_TRUE@	$(PYTHON_NUMPY_CPPFLAGS) $(MSP_CFLAGS) \
+@HAVE_MSP_TRUE@	-I$(abs_srcdir)/@swigmspsrc@
 @HAVE_MSP_TRUE@_msp_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
 # Also need dlopen
 @HAVE_MSP_TRUE@_msp_wrap_la_LDFLAGS = -module -avoid-version \
 @HAVE_MSP_TRUE@	$(MSP_LIBS) -ldl
-@HAVE_MSP_TRUE@_msp_wrap_la_SOURCES = @swigmspsrc@/msp_wrap.cc
+@HAVE_MSP_TRUE@_msp_wrap_la_SOURCES = @swigmspsrc@/msp_wrap.cc \
+@HAVE_MSP_TRUE@	@swigmspsrc@/msp.cc
 installafidspython_DATA = $(am__append_37) $(am__append_38)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
@@ -4733,6 +4738,8 @@ clean-pkgpythonswigLTLIBRARIES:
 	@$(MKDIR_P) @swigmspsrc@/$(DEPDIR)
 	@: >>@swigmspsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigmspsrc@/_msp_wrap_la-msp_wrap.lo: @swigmspsrc@/$(am__dirstamp) \
+	@swigmspsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigmspsrc@/_msp_wrap_la-msp.lo: @swigmspsrc@/$(am__dirstamp) \
 	@swigmspsrc@/$(DEPDIR)/$(am__dirstamp)
 
 _msp_wrap.la: $(_msp_wrap_la_OBJECTS) $(_msp_wrap_la_DEPENDENCIES) $(EXTRA__msp_wrap_la_DEPENDENCIES) 
@@ -6945,6 +6952,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo@am__quote@ # am--include-marker
@@ -7209,6 +7217,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigmspsrc@/msp_wrap.cc' object='@swigmspsrc@/_msp_wrap_la-msp_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_msp_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_msp_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigmspsrc@/_msp_wrap_la-msp_wrap.lo `test -f '@swigmspsrc@/msp_wrap.cc' || echo '$(srcdir)/'`@swigmspsrc@/msp_wrap.cc
+
+@swigmspsrc@/_msp_wrap_la-msp.lo: @swigmspsrc@/msp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_msp_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_msp_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigmspsrc@/_msp_wrap_la-msp.lo -MD -MP -MF @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Tpo -c -o @swigmspsrc@/_msp_wrap_la-msp.lo `test -f '@swigmspsrc@/msp.cc' || echo '$(srcdir)/'`@swigmspsrc@/msp.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Tpo @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigmspsrc@/msp.cc' object='@swigmspsrc@/_msp_wrap_la-msp.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_msp_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_msp_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigmspsrc@/_msp_wrap_la-msp.lo `test -f '@swigmspsrc@/msp.cc' || echo '$(srcdir)/'`@swigmspsrc@/msp.cc
 
 @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo: @swigsrc@/swig_quaternion_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-swig_quaternion_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo `test -f '@swigsrc@/swig_quaternion_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/swig_quaternion_wrap.cc
@@ -14148,6 +14163,7 @@ distclean: distclean-am
 	-rm -f @srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo
 	-rm -f @srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo
 	-rm -f @srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo
+	-rm -f @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Plo
 	-rm -f @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp_wrap.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo
@@ -14832,6 +14848,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcsupport@/$(DEPDIR)/libgeocal_la-tiled_file.Plo
 	-rm -f @srcsupport@/$(DEPDIR)/libgeocal_la-vfunctor_with_derivative.Plo
 	-rm -f @srcsupport@/boost/$(DEPDIR)/libgeocal_la-backtrace.Plo
+	-rm -f @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp.Plo
 	-rm -f @swigmspsrc@/$(DEPDIR)/_msp_wrap_la-msp_wrap.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-serialize_function.Plo
 	-rm -f @swigrules@/lib/$(DEPDIR)/libgeocal_la-swig_type_mapper_base.Plo

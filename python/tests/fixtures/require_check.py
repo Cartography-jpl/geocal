@@ -32,7 +32,7 @@ have_msp = False
 try:
     # Comment turns off lint. We are testing an import, that we don't actually
     # do anything with. But want to make sure the import is successful
-    from msp_swig import Test  # noqa: F401
+    from msp_swig import Msp  # noqa: F401
 
     have_msp = True
 except ImportError:

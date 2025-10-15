@@ -61,16 +61,16 @@ class _SwigNonDynamicMeta(type):
     __setattr__ = _swig_setattr_nondynamic_class_variable(type.__setattr__)
 
 
-class Test(object):
+class Msp(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self):
-        _msp_wrap.Test_swiginit(self, _msp_wrap.new_Test())
-    msp_register_plugin = _swig_new_instance_method(_msp_wrap.Test_msp_register_plugin)
-    msp_print_plugin_list = _swig_new_instance_method(_msp_wrap.Test_msp_print_plugin_list)
-    __swig_destroy__ = _msp_wrap.delete_Test
+        _msp_wrap.Msp_swiginit(self, _msp_wrap.new_Msp())
+    msp_register_plugin = _swig_new_instance_method(_msp_wrap.Msp_msp_register_plugin)
+    msp_print_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_print_plugin_list)
+    __swig_destroy__ = _msp_wrap.delete_Msp
 
-# Register Test in _msp_wrap:
-_msp_wrap.Test_swigregister(Test)
+# Register Msp in _msp_wrap:
+_msp_wrap.Msp_swigregister(Msp)
 

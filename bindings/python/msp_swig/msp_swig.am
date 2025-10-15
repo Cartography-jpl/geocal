@@ -10,8 +10,10 @@ _msp_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS)
 _msp_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
 _msp_wrap_la_LDFLAGS = -module -avoid-version
 _msp_wrap_la_SOURCES = @swigmspsrc@/msp_wrap.cc
+_msp_wrap_la_SOURCES+= @swigmspsrc@/msp.cc
 _msp_wrap_la_LDFLAGS+= $(MSP_LIBS)
 _msp_wrap_la_CPPFLAGS+= $(MSP_CFLAGS)
+_msp_wrap_la_CPPFLAGS+= -I$(abs_srcdir)/@swigmspsrc@
 # Also need dlopen
 _msp_wrap_la_LDFLAGS+= -ldl
 

@@ -1,26 +1,46 @@
-from geocal_swig import ImageGroundConnection, SimpleDem, distance
+from __future__ import annotations
+from geocal_swig import ImageGroundConnection, SimpleDem, distance, ImageCoordinate, Geodetic # type: ignore
+
+import typing
+
 have_msp = False
 try:
-    from msp_swig import Msp
+    from msp_swig import Msp # type: ignore
     have_msp =  True
 except ImportError:
     pass
 
+if typing.TYPE_CHECKING:
+    import pynitf # type: ignore
+    
 class IgcMsp(ImageGroundConnection):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(SimpleDem(), None, None, "")
+        self._msp = Msp()
 
-    def desc(self):
+    def desc(self) -> str:
         return "IgcMsp"
 
-    def msp_print_plugin_list(self):
+    def print_plugin_list(self) -> None:
         '''Print the plugin list, a basic diagnostic we use to make sure things
         are working.'''
-        t = Msp()
-        t.msp_print_plugin_list()
+        self._msp.msp_print_plugin_list()
 
+    @property
+    def plugin_list(self) -> list[str]:
+        '''Return the plugin list, as a list of str'''
+        return self._msp.msp_plugin_list()
+
+    @property
+    def model_dict(self) -> dict[str, list[str]]:
+        '''Return dict going from a plugin name to the models that plugin supports.'''
+        res = {}
+        for p in self.plugin_list:
+            res[p] = self._msp.msp_model_list(p)
+        return res
+    
     @classmethod
-    def check_plugin(cls, f, iid1, plugin, check_corner=True, corner_tol=1.0, dist_tol=-1):
+    def check_plugin(cls, f : pynitf.NitfFile, iid1 : str, plugin : str, check_corner : bool=True, corner_tol : float =1.0, dist_tol : float =-1) -> bool:
         """This does a basic check of using the MSP library to read the
         data for a file. This is meant for diagnostic purposes, there are
         all kinds of reasons why a file we generate doesn't work with MSP.
@@ -48,8 +68,8 @@ class IgcMsp(ImageGroundConnection):
             iseg = iseg[0]
             segindx = [t for t, isg in enumerate(f.image_segment) if isg is iseg][0]
             try:
-                igc = geocal_swig.IgcMsp(
-                    f.file_name, geocal_swig.SimpleDem(), segindx, plugin, plugin
+                igc = cls(
+                    f.file_name, SimpleDem(), segindx, plugin, plugin
                 )
             except RuntimeError:
                 print("MSP failed to read " + desc)

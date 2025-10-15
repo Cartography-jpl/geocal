@@ -61,6 +61,77 @@ class _SwigNonDynamicMeta(type):
     __setattr__ = _swig_setattr_nondynamic_class_variable(type.__setattr__)
 
 
+class SwigPyIterator(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+
+    def __init__(self, *args, **kwargs):
+        raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _msp_wrap.delete_SwigPyIterator
+    value = _swig_new_instance_method(_msp_wrap.SwigPyIterator_value)
+    incr = _swig_new_instance_method(_msp_wrap.SwigPyIterator_incr)
+    decr = _swig_new_instance_method(_msp_wrap.SwigPyIterator_decr)
+    distance = _swig_new_instance_method(_msp_wrap.SwigPyIterator_distance)
+    equal = _swig_new_instance_method(_msp_wrap.SwigPyIterator_equal)
+    copy = _swig_new_instance_method(_msp_wrap.SwigPyIterator_copy)
+    next = _swig_new_instance_method(_msp_wrap.SwigPyIterator_next)
+    __next__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___next__)
+    previous = _swig_new_instance_method(_msp_wrap.SwigPyIterator_previous)
+    advance = _swig_new_instance_method(_msp_wrap.SwigPyIterator_advance)
+    __eq__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___eq__)
+    __ne__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___ne__)
+    __iadd__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___iadd__)
+    __isub__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___isub__)
+    __add__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___add__)
+    __sub__ = _swig_new_instance_method(_msp_wrap.SwigPyIterator___sub__)
+    def __iter__(self):
+        return self
+
+# Register SwigPyIterator in _msp_wrap:
+_msp_wrap.SwigPyIterator_swigregister(SwigPyIterator)
+class StringVector(object):
+    thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
+    __repr__ = _swig_repr
+    iterator = _swig_new_instance_method(_msp_wrap.StringVector_iterator)
+    def __iter__(self):
+        return self.iterator()
+    __nonzero__ = _swig_new_instance_method(_msp_wrap.StringVector___nonzero__)
+    __bool__ = _swig_new_instance_method(_msp_wrap.StringVector___bool__)
+    __len__ = _swig_new_instance_method(_msp_wrap.StringVector___len__)
+    __getslice__ = _swig_new_instance_method(_msp_wrap.StringVector___getslice__)
+    __setslice__ = _swig_new_instance_method(_msp_wrap.StringVector___setslice__)
+    __delslice__ = _swig_new_instance_method(_msp_wrap.StringVector___delslice__)
+    __delitem__ = _swig_new_instance_method(_msp_wrap.StringVector___delitem__)
+    __getitem__ = _swig_new_instance_method(_msp_wrap.StringVector___getitem__)
+    __setitem__ = _swig_new_instance_method(_msp_wrap.StringVector___setitem__)
+    pop = _swig_new_instance_method(_msp_wrap.StringVector_pop)
+    append = _swig_new_instance_method(_msp_wrap.StringVector_append)
+    empty = _swig_new_instance_method(_msp_wrap.StringVector_empty)
+    size = _swig_new_instance_method(_msp_wrap.StringVector_size)
+    swap = _swig_new_instance_method(_msp_wrap.StringVector_swap)
+    begin = _swig_new_instance_method(_msp_wrap.StringVector_begin)
+    end = _swig_new_instance_method(_msp_wrap.StringVector_end)
+    rbegin = _swig_new_instance_method(_msp_wrap.StringVector_rbegin)
+    rend = _swig_new_instance_method(_msp_wrap.StringVector_rend)
+    clear = _swig_new_instance_method(_msp_wrap.StringVector_clear)
+    get_allocator = _swig_new_instance_method(_msp_wrap.StringVector_get_allocator)
+    pop_back = _swig_new_instance_method(_msp_wrap.StringVector_pop_back)
+    erase = _swig_new_instance_method(_msp_wrap.StringVector_erase)
+
+    def __init__(self, *args):
+        _msp_wrap.StringVector_swiginit(self, _msp_wrap.new_StringVector(*args))
+    push_back = _swig_new_instance_method(_msp_wrap.StringVector_push_back)
+    front = _swig_new_instance_method(_msp_wrap.StringVector_front)
+    back = _swig_new_instance_method(_msp_wrap.StringVector_back)
+    assign = _swig_new_instance_method(_msp_wrap.StringVector_assign)
+    resize = _swig_new_instance_method(_msp_wrap.StringVector_resize)
+    insert = _swig_new_instance_method(_msp_wrap.StringVector_insert)
+    reserve = _swig_new_instance_method(_msp_wrap.StringVector_reserve)
+    capacity = _swig_new_instance_method(_msp_wrap.StringVector_capacity)
+    __swig_destroy__ = _msp_wrap.delete_StringVector
+
+# Register StringVector in _msp_wrap:
+_msp_wrap.StringVector_swigregister(StringVector)
 class Msp(object):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
@@ -68,6 +139,7 @@ class Msp(object):
     def __init__(self):
         _msp_wrap.Msp_swiginit(self, _msp_wrap.new_Msp())
     msp_register_plugin = _swig_new_instance_method(_msp_wrap.Msp_msp_register_plugin)
+    msp_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_plugin_list)
     msp_print_plugin_list = _swig_new_instance_method(_msp_wrap.Msp_msp_print_plugin_list)
     __swig_destroy__ = _msp_wrap.delete_Msp
 

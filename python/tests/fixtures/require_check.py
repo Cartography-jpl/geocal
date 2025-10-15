@@ -28,6 +28,17 @@ except ImportError:
 if sys.version_info < (3,):
     have_pynitf = False
 
+have_msp = False
+try:
+    # Comment turns off lint. We are testing an import, that we don't actually
+    # do anything with. But want to make sure the import is successful
+    from msp_swig import Test  # noqa: F401
+
+    have_msp = True
+except ImportError:
+    # Ok if we don't have pynitf, we just can't execute this code
+    pass
+
 # Data is way too big to check into source, so we put it here. This means
 # we have tests that can only be run on pistol. We may fold this into
 # the afids data area at some point.
@@ -107,7 +118,7 @@ require_spice = pytest.mark.skipif(
 # Marker that skips a test if we have a build without MSP
 # support
 require_msp = pytest.mark.skipif(
-    not have_msp_supported(), reason="need a geocal build with MSP support to run"
+    not have_msp, reason="need a geocal build with MSP support to run"
 )
 
 # Marker that skips a test if we don't have mars data

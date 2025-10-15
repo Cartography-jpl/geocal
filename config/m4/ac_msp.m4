@@ -11,6 +11,11 @@
 # want an error to occur if we don't find the library, then specify
 # "required". Otherwise, leave it as empty and we'll just silently
 # return if we don't find the library.
+#
+# Note that the library uses a very old (4.85) version of gcc. We have flags to
+# link using the old ABI - but this should just be used in small wrapper type libraries
+# (e.g., we don't want all of geocal to use the old flag, just the small swig wrappers
+# we have for using the MSP library).
 
 AC_DEFUN([AC_MSP],
 [

@@ -219,3 +219,78 @@ std::vector<std::string> Msp::image_ids(const std::string& Fname)
     throw e;
   }
 }
+
+blitz::Array<double, 1> Msp::sensor_velocity(double Line, double Sample)
+{
+  try {
+    csm::EcefVector v = model->getSensorVelocity(csm::ImageCoord(Line, Sample));
+    blitz::Array<double, 1> res(3);
+    res = v.x, v.y, v.z;
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+
+blitz::Array<double, 1> Msp::image_coordinate(const blitz::Array<double, 1>& Gc_ecr) const
+{
+  try {
+    csm::ImageCoord ic = model->groundToImage(csm::EcefCoord(Gc_ecr(0), Gc_ecr(1), Gc_ecr(2)));
+    blitz::Array<double, 1> res(2);
+    res = ic.line, ic.samp;
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+blitz::Array<double, 2> Msp::cf_look_vector(double Line, double Sample) const
+{
+  try {
+    csm::EcefLocus lc = model->imageToRemoteImagingLocus(csm::ImageCoord(Line, Sample));
+    blitz::Array<double, 2> res(2, 3);
+    res = lc.point.x, lc.point.y, lc.point.z,
+      lc.direction.x, lc.direction.y, lc.direction.z;
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+blitz::Array<double, 1>
+Msp::ground_coordinate_approx_height(double Line, double Sample, double H) const
+{
+  try {
+    csm::EcefCoord gp = model->imageToGround(csm::ImageCoord(Line, Sample), H);
+    blitz::Array<double, 1> res(3);
+    res = gp.x, gp.y, gp.z;
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}

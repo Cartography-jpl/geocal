@@ -5,6 +5,8 @@
 
 %include "std_string.i"
 %include "std_vector.i"
+#define SWIG_MODULE_ALREADY_DONE
+%include "swig_array.i"
 
 %template(StringVector) std::vector<std::string>;
 
@@ -34,19 +36,27 @@ public:
   static std::vector<std::string> msp_plugin_list();
   static std::vector<std::string> msp_model_list(const std::string& Plugin);
   static std::vector<std::string> image_ids(const std::string& Fname);
-  const std::string& file_name() const { return fname_;}
-  int image_index() const { return image_index_;}
-  std::string family() const { return model->getFamily(); }
-  std::string version() const { return model->getVersion().version(); }
-  std::string model_name() const { return model->getModelName(); }
-  std::string pedigree() const { return model->getPedigree(); }
-  std::string image_identifer() const { return model->getImageIdentifier(); }
-  std::string sensor_identifer() const { return model->getSensorIdentifier(); }
-  std::string platform_identifer() const { return model->getPlatformIdentifier(); }
-  std::string collection_identifer() const { return model->getCollectionIdentifier(); }
-  std::string trajectory_identifer() const { return model->getTrajectoryIdentifier(); }
-  std::string sensor_type() const { return model->getSensorType(); }
-  std::string sensor_mode() const { return model->getSensorMode(); }
-  std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
+  const std::string& file_name() const;
+  int image_index() const;
+  std::string family() const;
+  std::string version() const;
+  std::string model_name() const;
+  std::string pedigree() const;
+  std::string image_identifer() const;
+  std::string sensor_identifer() const;
+  std::string platform_identifer() const;
+  std::string collection_identifer() const;
+  std::string trajectory_identifer() const;
+  std::string sensor_type() const;
+  std::string sensor_mode() const;
+  std::string reference_date_time() const;
+  blitz::Array<double, 1> sensor_velocity(double Line, double Sample);
+  blitz::Array<double, 1> image_coordinate(const blitz::Array<double, 1>& Gc_ecr) const;
+  blitz::Array<double, 2> cf_look_vector(double Line, double Sample) const;
+  blitz::Array<double, 1>
+  ground_coordinate_approx_height(double Line, double Sample, double H) const;
 };
 
+%pythoncode {
+  __all__.append("Msp")
+}

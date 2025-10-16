@@ -1,5 +1,5 @@
 from fixtures.require_check import require_msp
-from geocal import IgcMsp
+from geocal import IgcMsp, ImageCoordinate
 
 @require_msp
 def test_igc_msp(unit_test_data):
@@ -23,5 +23,7 @@ def test_igc_msp(unit_test_data):
     print(igc.sensor_type)
     print(igc.sensor_mode)
     print(igc.reference_date_time)
-    
-    
+
+    # This isn't support by RPC
+    if False:
+        print(igc.sensor_velocity(ImageCoordinate(10,20)))

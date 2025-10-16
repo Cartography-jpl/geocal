@@ -29,6 +29,10 @@ class IgcMsp(ImageGroundConnection):
     def desc(self) -> str:
         return "IgcMsp"
 
+    def sensor_velocity(self, ic: ImageCoordinate) -> np.ndarray:
+        '''Return sensor velocity. I think this is m/s, but I'm not sure'''
+        return self._msp.sensor_velocity(ic.line, ic.sample)
+
     @classmethod
     def print_plugin_list(cls) -> None:
         '''Print the plugin list, a basic diagnostic we use to make sure things

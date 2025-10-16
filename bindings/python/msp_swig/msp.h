@@ -27,6 +27,7 @@
 
 #include <sstream>		// Definition of ostringstream.
 #include <boost/shared_ptr.hpp>
+#include <blitz/array.h>
 
 /****************************************************************//**
   Copy of exception we use in geocal. Note we can't link in geocal,
@@ -158,6 +159,18 @@ public:
   std::string sensor_type() const { return model->getSensorType(); }
   std::string sensor_mode() const { return model->getSensorMode(); }
   std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
+  blitz::Array<double, 1> sensor_velocity(double Line, double Sample);
+  // std::string generate_rsm_tre(const std::string& Report = "",
+  // 			       const std::string& Rsm_config = "") const;
+  // blitz::Array<double, 2> covariance() const;
+  // blitz::Array<double, 2> joint_covariance(const IgcMspImp& igc2) const;
+  // virtual Time pixel_time(const ImageCoordinate& Ic) const;
+  // void ce90_le90(const ImageCoordinate& Ic, double H,
+  // 		 double& Ce90, double& Le90) const;
+  blitz::Array<double, 1> image_coordinate(const blitz::Array<double, 1>& Gc_ecr) const;
+  blitz::Array<double, 2> cf_look_vector(double Line, double Sample) const;
+  blitz::Array<double, 1>
+  ground_coordinate_approx_height(double Line, double Sample, double H) const;
 private:
   static void msp_init();
   static void* lib_ptr;

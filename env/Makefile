@@ -33,6 +33,17 @@ MSP_INSTALL=no
 
 MSP_PREFIX=need_to_Set
 
+# Do we have the ISIS install, and want to use it?
+# ---------------------------------------------------------------------------
+
+HAVE_ISIS=no
+
+# Location of ISIS software and data
+# ---------------------------------------------------------------------------
+
+ISISROOT=/opt/isis
+ISISDATA=/opt/afids/data/isisdata
+
 # Include a Makefile.local to override things, if found
 # ---------------------------------------------------------------------------
 
@@ -82,6 +93,11 @@ else
 EXTRA_CONFIG=
 endif
 
+ifeq '$(HAVE_ISIS)' 'yes'
+
+PIXI_INSTALL_COMMAND+= && pixi run --manifest-path $(ENV_DIR) bash -c "\$$CONDA_PREFIX/bin/conda env config vars set ISISROOT=$(ISISROOT) ISISDATA=$(ISISDATA)"
+
+endif
 $(ENV_DIR): $(PIXI_FILE_DEPEND)
 	-rm -rf $(ENV_DIR)
 	pixi init -c conda-forge -c $(CONDA_PACKAGE_DIR) $(ENV_DIR)

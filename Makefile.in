@@ -15349,7 +15349,7 @@ install-python: all
 # Only generate these files in maintainer mode, otherwise consider them
 # as input.
 
-@HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigmspsrc)/%.cc: %.i Makefile 
+@HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@$(srcdir)/$(swigmspsrc)/%_wrap.cc: %.i Makefile 
 @HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -o $@ $<
 
 # Shortcut for building just python

@@ -33,6 +33,40 @@ class IgcMsp(ImageGroundConnection):
         '''Return sensor velocity. I think this is m/s, but I'm not sure'''
         return self._msp.sensor_velocity(ic.line, ic.sample)
 
+    # blitz::Array<double, 2> covariance() const;
+    # blitz::Array<double, 2> joint_covariance(const IgcMsp& igc2) const;
+    # std::string generate_rsm_tre(const std::string& Report = "",
+    # const std::string& Rsm_config = "") const;
+    # void ground_coordinate_with_cov(const ImageCoordinate& Ic,
+    #const blitz::Array<double, 2>& Ic_cov,
+    # double H,
+    # double H_var,
+    # boost::shared_ptr<GroundCoordinate>& Gp,
+    #blitz::Array<double, 2>& Gp_cov) const;
+    # void ce90_le90(const ImageCoordinate& Ic, double H,
+    # double& Ce90, double& Le90) const;
+    # virtual bool has_time() const { return true; }
+    # virtual Time pixel_time(const ImageCoordinate& Ic) const;
+
+    def ground_coordinate_dem(self, ic: ImageCoordinate, dem: Dem) -> GroundCoordinate:
+        pass
+
+    def ground_coordinate_approx_height(self, ic: ImageCoordinate, h: float) -> GroundCoordinate:
+        # Note, MSP really is just Ecr rather than a more general CartesianFixed.
+        # Although our general ImageGroundConnection supports other planets,
+        # the MSP library only supports Earth.
+        return Ecr(*self._msp.ground_coordinate_approx_height(ic.line, ic.sample, h))
+
+    def image_coordinate(self, gc: GroundCoordinate) -> ImageCoordinate:
+        # Note, MSP really is just Ecr rather than a more general CartesianFixed.
+        # Although our general ImageGroundConnection supports other planets,
+        # the MSP library only supports Earth.
+        gc_ecr = Ecr(gc)
+        return ImageCoordinate(*self._msp.image_coordinate([*gc_ecr.position])
+
+    def cf_look_vector(self, ic: ImageCoordinate) -> tuple[CartesianFixedLookVector, CartesianFixed]:
+        pass
+    
     @classmethod
     def print_plugin_list(cls) -> None:
         '''Print the plugin list, a basic diagnostic we use to make sure things

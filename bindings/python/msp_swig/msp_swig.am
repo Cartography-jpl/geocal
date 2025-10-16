@@ -21,7 +21,7 @@ _msp_wrap_la_LDFLAGS+= -ldl
 if MAINTAINER_MODE
 if HAVE_SWIG
 
-$(srcdir)/$(swigmspsrc)/%.cc: %.i Makefile 
+$(srcdir)/$(swigmspsrc)/%_wrap.cc: %.i Makefile 
 	$(SWIG) $(SWIG_PYTHON_OPT) $(SWIG_FLAG) $(AM_CPPFLAGS) -o $@ $<
 
 BUILT_SOURCES+= $(srcdir)/$(swigmspsrc)/msp_wrap.cc

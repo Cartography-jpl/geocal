@@ -3,6 +3,9 @@
 #include "image_ground_connection.h"
 #include "simple_dem.h"
 
+// ********** Old code, we will remove. Leave around as reference for
+// ********** a short while.
+
 namespace GeoCal {
 bool have_msp_supported();
   

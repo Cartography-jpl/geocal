@@ -1,3 +1,6 @@
+// ********** Old code, we will remove. Leave around as reference for
+// ********** a short while.
+
 #include "igc_msp.h"
 #include "geocal_config.h"
 #include "geocal_serialize_support.h"

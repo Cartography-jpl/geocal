@@ -5,6 +5,9 @@
 
 using namespace GeoCal;
 
+// ********** Old code, we will remove. Leave around as reference for
+// ********** a short while.
+
 BOOST_FIXTURE_TEST_SUITE(igc_msp, GlobalFixture)
 
 BOOST_AUTO_TEST_CASE(basic)

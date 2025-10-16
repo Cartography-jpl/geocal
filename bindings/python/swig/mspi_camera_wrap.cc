@@ -7547,7 +7547,7 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_parameter_mask__SWIG_0(PyObject *self, 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {

@@ -320,7 +320,6 @@
   if(dp) {
     $result.reset($result.get(), PythonRefPtrCleanup(dp->swig_get_self()));
     }
-  if (newmem & SWIG_CAST_NEW_MEMORY) %delete(%reinterpret_cast(swig_argp, $&ltype));
 }
 
 // shared_ptr by reference

@@ -171,6 +171,7 @@ public:
   blitz::Array<double, 2> cf_look_vector(double Line, double Sample) const;
   blitz::Array<double, 1>
   ground_coordinate_approx_height(double Line, double Sample, double H) const;
+  blitz::Array<int, 1> image_size() const;
 private:
   static void msp_init();
   static void* lib_ptr;

@@ -47,7 +47,6 @@ public:
 // Make parameter a python property
 #ifdef SWIGPYTHON
 %rename("__dem") ImageGroundConnection::dem;
-%rename("__ground_coordinate") ImageGroundConnection::ground_coordinate;
 #endif
 class ImageGroundConnection: public WithParameter {
 protected:
@@ -186,14 +185,7 @@ def cf_look_vector(self, ic):
 def footprint_resolution(self, line, sample):
   return (self.footprint_resolution_line(line, sample), 
 	  self.footprint_resolution_sample(line, sample))
-
-def ground_coordinate(self, ic, dem = None):
-  '''Return ground coordinate for the given image coordinate. You can specify
-   a dem to use, or we use the dem associated with the class.'''
-  if(dem):
-    return self.ground_coordinate_dem(ic, dem)
-  else:
-    return self.__ground_coordinate(ic)
+  
 }
 
 };

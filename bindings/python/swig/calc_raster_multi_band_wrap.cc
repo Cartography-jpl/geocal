@@ -5896,7 +5896,6 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raste
   if(dp) {
     c_result.reset(c_result.get(), PythonRefPtrCleanup(dp->swig_get_self()));
   }
-  if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr< GeoCal::RasterImage > * >(swig_argp);
   return (boost::shared_ptr< GeoCal::RasterImage >) c_result;
 }
 

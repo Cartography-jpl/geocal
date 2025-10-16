@@ -1,36 +1,69 @@
 from __future__ import annotations
-from geocal_swig import ImageGroundConnection, SimpleDem, distance, ImageCoordinate, Geodetic # type: ignore
+from geocal_swig import ( # type: ignore
+    CartesianFixed,
+    CartesianFixedLookVector,
+    Ecr,
+    ImageGroundConnection,
+    SimpleDem,
+    distance,
+    ImageCoordinate,
+    Geodetic,
+    GroundCoordinate,
+    Dem,
+)  
 import os
 import typing
+from typing import Any
+import numpy as np
 
 have_msp = False
 try:
-    from msp_swig import Msp # type: ignore
-    have_msp =  True
+    from msp_swig import Msp  # type: ignore
+
+    have_msp = True
 except ImportError:
     pass
 
 if typing.TYPE_CHECKING:
-    import pynitf # type: ignore
+    import pynitf  # type: ignore
+
 
 class classproperty:
-    def __init__(self, func):
+    def __init__(self, func: Any) -> None:
         self.fget = func
-    def __get__(self, instance, owner):
+
+    def __get__(self, instance: Any, owner: Any) -> Any:
         return self.fget(owner)
-    
+
+
 class IgcMsp(ImageGroundConnection):
-    def __init__(self, fname : str | os.PathLike[str], image_index : int = 0,
-                 plugin_name : str | None = None, model_name : str | None = None) -> None:
-        super().__init__(SimpleDem(), None, None, "")
-        self._msp = Msp(str(fname), image_index, plugin_name if plugin_name is not None else "",
-                        model_name if model_name is not None else "")
+    def __init__(
+        self,
+        fname: str | os.PathLike[str],
+        dem: Dem | None = None,
+        image_index: int = 0,
+        plugin_name: str | None = None,
+        model_name: str | None = None,
+    ) -> None:
+        super().__init__(SimpleDem() if dem is None else dem, None, None, "")
+        self._msp = Msp(
+            str(fname),
+            image_index,
+            plugin_name if plugin_name is not None else "",
+            model_name if model_name is not None else "",
+        )
 
     def desc(self) -> str:
         return "IgcMsp"
 
+    def _v_number_line(self) -> int:
+        return int(self._msp.image_size()[0])
+
+    def _v_number_sample(self) -> int:
+        return int(self._msp.image_size()[1])
+    
     def sensor_velocity(self, ic: ImageCoordinate) -> np.ndarray:
-        '''Return sensor velocity. I think this is m/s, but I'm not sure'''
+        """Return sensor velocity. I think this is m/s, but I'm not sure"""
         return self._msp.sensor_velocity(ic.line, ic.sample)
 
     # blitz::Array<double, 2> covariance() const;
@@ -38,20 +71,29 @@ class IgcMsp(ImageGroundConnection):
     # std::string generate_rsm_tre(const std::string& Report = "",
     # const std::string& Rsm_config = "") const;
     # void ground_coordinate_with_cov(const ImageCoordinate& Ic,
-    #const blitz::Array<double, 2>& Ic_cov,
+    # const blitz::Array<double, 2>& Ic_cov,
     # double H,
     # double H_var,
     # boost::shared_ptr<GroundCoordinate>& Gp,
-    #blitz::Array<double, 2>& Gp_cov) const;
+    # blitz::Array<double, 2>& Gp_cov) const;
     # void ce90_le90(const ImageCoordinate& Ic, double H,
     # double& Ce90, double& Le90) const;
     # virtual bool has_time() const { return true; }
     # virtual Time pixel_time(const ImageCoordinate& Ic) const;
 
-    def ground_coordinate_dem(self, ic: ImageCoordinate, dem: Dem) -> GroundCoordinate:
-        pass
+    def ground_coordinate(self, ic: ImageCoordinate, dem = None):
+        return self.ground_coordinate_dem(ic, self.dem)
 
-    def ground_coordinate_approx_height(self, ic: ImageCoordinate, h: float) -> GroundCoordinate:
+    def ground_coordinate_dem(self, ic: ImageCoordinate, dem: Dem) -> GroundCoordinate:
+        if not isinstance(dem, SimpleDem):
+            raise RuntimeError(
+                "Right now, IgcMsp only works with constant DEMs for SimpleDem"
+            )
+        return self.ground_coordinate_approx_height(ic, dem.h)
+
+    def ground_coordinate_approx_height(
+        self, ic: ImageCoordinate, h: float
+    ) -> GroundCoordinate:
         # Note, MSP really is just Ecr rather than a more general CartesianFixed.
         # Although our general ImageGroundConnection supports other planets,
         # the MSP library only supports Earth.
@@ -62,25 +104,28 @@ class IgcMsp(ImageGroundConnection):
         # Although our general ImageGroundConnection supports other planets,
         # the MSP library only supports Earth.
         gc_ecr = Ecr(gc)
-        return ImageCoordinate(*self._msp.image_coordinate([*gc_ecr.position])
+        return ImageCoordinate(*self._msp.image_coordinate([*gc_ecr.position]))
 
-    def cf_look_vector(self, ic: ImageCoordinate) -> tuple[CartesianFixedLookVector, CartesianFixed]:
-        pass
-    
+    def cf_look_vector(
+        self, ic: ImageCoordinate
+    ) -> tuple[CartesianFixedLookVector, CartesianFixed]:
+        res = self._msp.cf_look_vector(ic.line, ic.sample)
+        return CartesianFixedLookVector(*res[1, :]), Ecr(*res[0, :])
+
     @classmethod
     def print_plugin_list(cls) -> None:
-        '''Print the plugin list, a basic diagnostic we use to make sure things
-        are working.'''
+        """Print the plugin list, a basic diagnostic we use to make sure things
+        are working."""
         Msp.msp_print_plugin_list()
 
     @classproperty
     def plugin_list(cls) -> list[str]:
-        '''Return the plugin list, as a list of str'''
+        """Return the plugin list, as a list of str"""
         return Msp.msp_plugin_list()
 
     @classproperty
     def model_dict(cls) -> dict[str, list[str]]:
-        '''Return dict going from a plugin name to the models that plugin supports.'''
+        """Return dict going from a plugin name to the models that plugin supports."""
         res = {}
         for p in cls.plugin_list:
             res[p] = Msp.msp_model_list(p)
@@ -89,61 +134,69 @@ class IgcMsp(ImageGroundConnection):
     @property
     def file_name(self) -> str:
         return self._msp.file_name()
-    
+
     @property
     def image_index(self) -> int:
         return self._msp.image_index()
-    
+
     @property
     def family(self) -> str:
         return self._msp.family()
-    
+
     @property
     def version(self) -> str:
         return self._msp.version()
-    
+
     @property
     def model_name(self) -> str:
         return self._msp.model_name()
-    
+
     @property
     def pedigree(self) -> str:
         return self._msp.pedigree()
-    
+
     @property
     def image_identifer(self) -> str:
         return self._msp.image_identifer()
-    
+
     @property
     def sensor_identifer(self) -> str:
         return self._msp.sensor_identifer()
-    
+
     @property
     def platform_identifer(self) -> str:
         return self._msp.platform_identifer()
-    
+
     @property
     def collection_identifer(self) -> str:
         return self._msp.collection_identifer()
-    
+
     @property
     def trajectory_identifer(self) -> str:
         return self._msp.trajectory_identifer()
-    
+
     @property
     def sensor_type(self) -> str:
         return self._msp.sensor_type()
-    
+
     @property
     def sensor_mode(self) -> str:
         return self._msp.sensor_mode()
-    
+
     @property
     def reference_date_time(self) -> str:
         return self._msp.reference_date_time()
-    
+
     @classmethod
-    def check_plugin(cls, f : pynitf.NitfFile, iid1 : str, plugin : str, check_corner : bool=True, corner_tol : float =1.0, dist_tol : float =-1) -> bool:
+    def check_plugin(
+        cls,
+        f: pynitf.NitfFile,
+        iid1: str,
+        plugin: str,
+        check_corner: bool = True,
+        corner_tol: float = 1.0,
+        dist_tol: float = -1,
+    ) -> bool:
         """This does a basic check of using the MSP library to read the
         data for a file. This is meant for diagnostic purposes, there are
         all kinds of reasons why a file we generate doesn't work with MSP.
@@ -171,9 +224,7 @@ class IgcMsp(ImageGroundConnection):
             iseg = iseg[0]
             segindx = [t for t, isg in enumerate(f.image_segment) if isg is iseg][0]
             try:
-                igc = cls(
-                    f.file_name, segindx, plugin, plugin
-                )
+                igc = cls(f.file_name, None, segindx, plugin, plugin)
             except RuntimeError:
                 print("MSP failed to read " + desc)
                 return False
@@ -249,5 +300,6 @@ class IgcMsp(ImageGroundConnection):
             print("General failure for " + desc)
             print(e)
             return False
-    
+
+
 __all__ = ["IgcMsp", "have_msp"]

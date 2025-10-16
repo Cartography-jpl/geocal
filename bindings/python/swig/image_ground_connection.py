@@ -209,7 +209,7 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     collinearity_residual = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_collinearity_residual)
     collinearity_residual_jacobian = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_collinearity_residual_jacobian)
     compare_igc = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_compare_igc)
-    __ground_coordinate = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection___ground_coordinate)
+    ground_coordinate = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_ground_coordinate)
     ground_coordinate_dem = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_ground_coordinate_dem)
     ground_coordinate_approx_height = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_ground_coordinate_approx_height)
     image_coordinate = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_image_coordinate)
@@ -397,13 +397,6 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
       return (self.footprint_resolution_line(line, sample), 
     	  self.footprint_resolution_sample(line, sample))
 
-    def ground_coordinate(self, ic, dem = None):
-      '''Return ground coordinate for the given image coordinate. You can specify
-       a dem to use, or we use the dem associated with the class.'''
-      if(dem):
-        return self.ground_coordinate_dem(ic, dem)
-      else:
-        return self.__ground_coordinate(ic)
 
     def __disown__(self):
         self.this.disown()

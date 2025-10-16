@@ -150,7 +150,7 @@ def test_glas_with_image(nitf_sample_rip):
 
 @require_msp
 @require_pynitf
-def test_create_glas(nitf_sample_rip):
+def test_create_glas(nitf_sample_rip, isolated_dir):
     """Create a NITF file with GLAS in it, and make sure MSP can read this"""
     f = pynitf.NitfFile()
     # Create two images, so we can make sure the DESs aren't duplicated
@@ -200,7 +200,7 @@ def test_create_glas(nitf_sample_rip):
 
 @require_msp
 @require_pynitf
-def test_create_rot_glas(nitf_sample_rip):
+def test_create_rot_glas(nitf_sample_rip, isolated_dir):
     """Create a NITF file with GLAS in it, and make sure MSP can read this.
     This tests the rotation of the camera"""
     f = pynitf.NitfFile()
@@ -245,7 +245,7 @@ def test_create_rot_glas(nitf_sample_rip):
 
 @require_msp
 @require_pynitf
-def test_create_multiple_fa_glas(nitf_sample_rip):
+def test_create_multiple_fa_glas(nitf_sample_rip, isolated_dir):
     """Create a NITF file with GLAS in it, and make sure MSP can read this.
     This tests having more than one pair in the field_alignment"""
     f = pynitf.NitfFile()

@@ -299,6 +299,7 @@ if have_pynitf and not suppress_rsm:
         return fseg.rsm
 
     if have_msp:
+
         def _generate_rsm(self, report="", rsm_config=""):
             t = self.generate_rsm_tre(report, rsm_config)
             t = re.split(r"^RSM_TRE_DATA$", t, flags=re.MULTILINE)[1]

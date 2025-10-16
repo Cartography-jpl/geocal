@@ -294,3 +294,22 @@ Msp::ground_coordinate_approx_height(double Line, double Sample, double H) const
     throw e;
   }
 }
+
+blitz::Array<int, 1> Msp::image_size() const
+{
+  try {
+    csm::ImageVector sz = model->getImageSize();
+    blitz::Array<int, 1> res(2);
+    res = sz.line, sz.samp;
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+

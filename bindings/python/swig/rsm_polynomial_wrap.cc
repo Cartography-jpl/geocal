@@ -6878,7 +6878,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_1(PyObject *self, Py_ssi
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7001,7 +7001,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_2(PyObject *self, Py_ssi
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7124,7 +7124,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial___call____SWIG_3(PyObject *self, Py_ssi
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7354,7 +7354,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian_fitted_coefficent(PyObject *se
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7442,7 +7442,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial_jacobian(PyObject *self, PyObject *args
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -7559,7 +7559,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_coefficient(PyObject *self, PyObject
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[3], stride[3];
     for(int i = 0; i < 3; ++i) {
@@ -7622,7 +7622,7 @@ SWIGINTERN PyObject *_wrap_RsmPolynomial__v_fitted_coefficent__SWIG_0(PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/Users/smyth/Afids/geocal/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {

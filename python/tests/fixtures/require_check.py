@@ -5,7 +5,7 @@ from geocal import (
     VicarFile,
     SpiceHelper,
     setup_isis,
-    have_msp
+    have_msp,
 )
 import geocal_swig
 import os

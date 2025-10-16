@@ -84796,6 +84796,57 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Msp_image_size(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< int,1 > > result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_image_size" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  {
+    try {
+      result = ((Msp const *)arg1)->image_size();
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(int);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<int >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<int, 1>* t = new blitz::Array<int, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_int_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Msp(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Msp *arg1 = (Msp *) 0 ;
@@ -85866,6 +85917,7 @@ static PyMethodDef SwigMethods[] = {
 	 { "Msp_image_coordinate", _wrap_Msp_image_coordinate, METH_VARARGS, NULL},
 	 { "Msp_cf_look_vector", _wrap_Msp_cf_look_vector, METH_VARARGS, NULL},
 	 { "Msp_ground_coordinate_approx_height", _wrap_Msp_ground_coordinate_approx_height, METH_VARARGS, NULL},
+	 { "Msp_image_size", _wrap_Msp_image_size, METH_O, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
 	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},
@@ -86902,6 +86954,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "Msp_image_coordinate", _wrap_Msp_image_coordinate, METH_VARARGS, NULL},
 	 { "Msp_cf_look_vector", _wrap_Msp_cf_look_vector, METH_VARARGS, NULL},
 	 { "Msp_ground_coordinate_approx_height", _wrap_Msp_ground_coordinate_approx_height, METH_VARARGS, NULL},
+	 { "Msp_image_size", _wrap_Msp_image_size, METH_O, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
 	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},

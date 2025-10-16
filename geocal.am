@@ -14,6 +14,10 @@ geocalinc_HEADERS =
 geocalswiginc_HEADERS =
 geocal_test_all_SOURCES = 
 
+_msp_wrap_la_SOURCES =
+MSP_SWIG_SRC =
+_msp_wrap_la_CPPFLAGS =
+
 # Few different versions of boost filesystem. We want to consistent across code,
 # so for now hold this as verison 3. It look like a bit of this moved into C++
 # standard as of C++17, so this may go away in the future. But for now C++17 is a bit

@@ -702,8 +702,9 @@ srccartlab
 srcinterface
 srcserialize
 srcsupport
-swigmspsrc
 swigsrc
+srcmsp
+swigmspsrc
 pythonswigsrc
 srcimplementation
 srcgeocalcore
@@ -32044,9 +32045,11 @@ srcimplementation=${srcgeocalcore}/Implementation
 
 pythonswigsrc=${geocal_topdir}/bindings/python
 
-swigsrc=${geocal_topdir}/bindings/python/swig
-
 swigmspsrc=${geocal_topdir}/bindings/python/msp_swig
+
+srcmsp=${libgeocal}/Msp
+
+swigsrc=${geocal_topdir}/bindings/python/swig
 
 srcsupport=${srcgeocalcore}/Support
 

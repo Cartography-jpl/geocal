@@ -1,0 +1,13 @@
+export MSP_DATA_DIR=$(MSP_PREFIX)/data
+export MSPCCS_DATA=$(MSP_PREFIX)/data
+export CSM_PLUGIN_DIR=$(MSP_PREFIX)/plugins/
+
+EXTRA_DIST+= @srcmsp@/msp.h @srcmsp@/README.md
+_msp_wrap_la_SOURCES+= @srcmsp@/msp.cc
+MSP_SWIG_SRC += @swigmspsrc@/msp_wrap.cc
+_msp_wrap_la_CPPFLAGS+= -I$(abs_srcdir)/@srcmsp@
+
+# Allow searchs for .i, .h. and .cc files in this directory
+vpath %.cc $(srcdir)/@srcmsp@
+vpath %.h $(srcdir)/@srcmsp@
+vpath %.i $(srcdir)/@srcmsp@

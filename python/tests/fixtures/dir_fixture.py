@@ -3,6 +3,7 @@
 from pathlib import Path
 import pytest
 import warnings
+from geocal import SpiceHelper
 
 
 @pytest.fixture(scope="function")
@@ -82,3 +83,13 @@ def nitf_sample_wv2(nitf_sample_files):
     if fname.exists():
         return fname
     pytest.skip(f"Required file {fname} not found, so skipping test")
+
+@pytest.fixture(scope="function")
+def mars_test_data():
+    if(not SpiceHelper.have_spice()):
+        pytest.skip("require spice")
+    res = Path("/bigdata/smyth/MiplMarsTest")
+    if not res.exists:
+        pytest.skip("Required mars test data not found")
+    return res
+    

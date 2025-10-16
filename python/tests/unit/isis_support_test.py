@@ -2,12 +2,13 @@ from geocal import find_isis_kernel_file, read_kernel_from_isis, pds_to_isis
 from fixtures.require_check import require_isis
 import os
 import pytest
+from pathlib import Path
 
 @require_isis
 def test_find_isis_kernel(isolated_dir):
-    original_cache = os.environ.get('SPICECACHE')
+    original_cache = os.environ.get("SPICECACHE")
     try:
-        os.environ["SPICECACHE"] = isolated_dir + "/spice_cache"
+        os.environ["SPICECACHE"] = str(Path("./spice_cache").absolute())
         f = find_isis_kernel_file("$mro/kernels/spk/mro_psp21_ssd_mro110c.bsp")
         assert f is not None
         f = find_isis_kernel_file("$lro/kernels/spk/fdf29r_2012275_2012306_v01.bsp")
@@ -19,19 +20,19 @@ def test_find_isis_kernel(isolated_dir):
         f = find_isis_kernel_file("$lro/kernels/sclk/lro_clkcor_2022263_v00.tsc")
         assert f is not None
     finally:
-        if(original_cache is None):
+        if original_cache is None:
             try:
                 del os.environ["SPICECACHE"]
             except KeyError:
                 pass
         else:
             os.environ["SPICECACHE"] = original_cache
-            
+
+
 @pytest.mark.long_test
 @require_isis
 def test_import_ctx(mars_test_data, isolated_dir):
-    pds_to_isis(mars_test_data + "P16_007388_2049_XI_24N020W.IMG",
-                "ctx.cub")
+    pds_to_isis(mars_test_data / "P16_007388_2049_XI_24N020W.IMG", "ctx.cub")
     # Test handling the kernels and downloading from the web.
     klist = read_kernel_from_isis("ctx.cub")
     klist.load_kernel()
@@ -39,7 +40,8 @@ def test_import_ctx(mars_test_data, isolated_dir):
     pds_to_isis("ctx.cub", "ctx2.cub")
     # Test passing the same file twice
     pds_to_isis("ctx2.cub", "ctx2.cub")
-    
+
+
 @pytest.mark.long_test
 @require_isis
 def test_import_hirise(mars_test_data, isolated_dir):
@@ -51,17 +53,20 @@ def test_import_hirise(mars_test_data, isolated_dir):
     print(klist)
     klist.load_kernel()
 
+
 @pytest.mark.long_test
 @require_isis
 def test_import_hrsc(mars_test_data, isolated_dir):
-    print("This test currently fails with the spiceinit. Not clear if this is a problem with our code, with ISIS, or just with this particular dataset. We can come back this this")
+    print(
+        "This test currently fails with the spiceinit. Not clear if this is a problem with our code, with ISIS, or just with this particular dataset. We can come back this this"
+    )
     raise pytest.SkipTest
-    pds_to_isis(mars_test_data + "h1326_0000_nd2.img",
-                "hrsc.cub")
+    pds_to_isis(mars_test_data / "h1326_0000_nd2.img", "hrsc.cub")
     # Test handling the kernels and downloading from the web.
     klist = read_kernel_from_isis("hrsc.cub")
     klist.load_kernel()
-    
+
+
 @pytest.mark.long_test
 @require_isis
 def test_import_lro_wac(isolated_dir):
@@ -70,6 +75,7 @@ def test_import_lro_wac(isolated_dir):
     # Test handling the kernels and downloading from the web.
     klist = read_kernel_from_isis("wac.cub")
     klist.load_kernel()
+
 
 @pytest.mark.long_test
 @require_isis
@@ -80,9 +86,10 @@ def test_import_lro_nac_edr(isolated_dir):
     klist = read_kernel_from_isis("nac.cub")
     klist.load_kernel()
 
+
 # Doesn't currently work. I'm not sure if ISIS actually support this or
 # not.
-@pytest.mark.skip    
+@pytest.mark.skip
 @pytest.mark.long_test
 @require_isis
 def test_import_lro_nac_cdr(isolated_dir):
@@ -91,4 +98,3 @@ def test_import_lro_nac_cdr(isolated_dir):
     # Test handling the kernels and downloading from the web.
     klist = read_kernel_from_isis("nac.cub")
     klist.load_kernel()
-    

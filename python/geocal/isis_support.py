@@ -25,7 +25,7 @@ def read_kernel_from_isis(fname, Skip_load=True):
     """This takes a ISIS cube file which has had spiceinit run on it,
     and determines the kernels listed in the file. Returned as a
     SpiceKernelList, which has *not* been loaded yet."""
-    f = GdalRasterImage(fname)
+    f = GdalRasterImage(str(fname))
     d = json.loads(f.metadata_list("json:ISIS3")[0])
     keylist = [
         "LeapSecond",
@@ -393,7 +393,7 @@ class DummyPdsToIsis:
     """Degenerate case of file already being a isis file"""
 
     def pds_to_isis(self, fin, pds_fname, isis_fname, pds_fname2=None):
-        if gdal_driver_name(pds_fname) != "ISIS3":
+        if gdal_driver_name(str(pds_fname)) != "ISIS3":
             return (False, None)
         # Degenerate case of output file being the same as input
         if not os.path.exists(isis_fname):
@@ -496,7 +496,7 @@ def pds_to_isis(pds_fname, isis_fname, pds_fname2=None):
     Note just to simplify processing, the file passed in can already be a ISIS
     file. In that case, we just create a symbolic link from the input to the
     output file."""
-    f = GdalRasterImage(pds_fname)
+    f = GdalRasterImage(str(pds_fname))
     return PdsToIsisHandleSet.default_handle_set().handle(
         f, pds_fname, isis_fname, pds_fname2
     )

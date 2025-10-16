@@ -1,5 +1,5 @@
 from __future__ import annotations
-from geocal_swig import ( # type: ignore
+from geocal_swig import (  # type: ignore
     CartesianFixed,
     CartesianFixedLookVector,
     Ecr,
@@ -10,7 +10,7 @@ from geocal_swig import ( # type: ignore
     Geodetic,
     GroundCoordinate,
     Dem,
-)  
+)
 import os
 import typing
 from typing import Any
@@ -61,7 +61,7 @@ class IgcMsp(ImageGroundConnection):
 
     def _v_number_sample(self) -> int:
         return int(self._msp.image_size()[1])
-    
+
     def sensor_velocity(self, ic: ImageCoordinate) -> np.ndarray:
         """Return sensor velocity. I think this is m/s, but I'm not sure"""
         return self._msp.sensor_velocity(ic.line, ic.sample)
@@ -81,7 +81,7 @@ class IgcMsp(ImageGroundConnection):
     # virtual bool has_time() const { return true; }
     # virtual Time pixel_time(const ImageCoordinate& Ic) const;
 
-    def ground_coordinate(self, ic: ImageCoordinate, dem = None):
+    def ground_coordinate(self, ic: ImageCoordinate, dem=None):
         return self.ground_coordinate_dem(ic, self.dem)
 
     def ground_coordinate_dem(self, ic: ImageCoordinate, dem: Dem) -> GroundCoordinate:

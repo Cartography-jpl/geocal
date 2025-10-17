@@ -56,6 +56,8 @@ public:
   blitz::Array<double, 1>
   ground_coordinate_approx_height(double Line, double Sample, double H) const;
   blitz::Array<int, 1> image_size() const;
+  std::string pixel_time_base(double Line, double Sample) const;
+  double pixel_time_offset(double Line, double Sample) const;
 };
 
 %pythoncode {

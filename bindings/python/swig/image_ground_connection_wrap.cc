@@ -6250,6 +6250,20 @@ SWIG_AsVal_int (PyObject * obj, int *val)
 }
 
 
+SWIGINTERN int
+SWIG_AsVal_bool (PyObject *obj, bool *val)
+{
+  int r;
+  if (!PyBool_Check(obj))
+    return SWIG_ERROR;
+  r = PyObject_IsTrue(obj);
+  if (r == -1)
+    return SWIG_ERROR;
+  if (val) *val = r ? true : false;
+  return SWIG_OK;
+}
+
+
 #if defined(__SUNPRO_CC) && defined(_RWSTD_VER)
 #  if !defined(SWIG_NO_STD_NOITERATOR_TRAITS_STL)
 #    define SWIG_STD_NOITERATOR_TRAITS_STL
@@ -8016,6 +8030,40 @@ int SwigDirector_ImageGroundConnection::number_band() const {
 }
 
 
+bool SwigDirector_ImageGroundConnection::has_time() const {
+  bool c_result = SwigValueInit< bool >() ;
+  
+  if (!swig_get_self()) {
+    Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
+  }
+#if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
+  const size_t swig_method_index = 29;
+  const char *const swig_method_name = "_v_has_time";
+  PyObject *method = swig_get_method(swig_method_index, swig_method_name);
+  swig::SwigVar_PyObject args = PyTuple_New(0);
+  swig::SwigVar_PyObject result = PyObject_Call(method, (PyObject *) args, NULL);
+#else
+  swig::SwigVar_PyObject swig_method_name = SWIG_Python_str_FromChar("_v_has_time");
+  swig::SwigVar_PyObject result = PyObject_CallMethodObjArgs(swig_get_self(), (PyObject *) swig_method_name, NULL);
+#endif
+  if (!result) {
+    PyObject *error = PyErr_Occurred();
+    {
+      if (error != NULL) {
+        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+      }
+    }
+  }
+  bool swig_val;
+  int swig_res = SWIG_AsVal_bool(result, &swig_val);
+  if (!SWIG_IsOK(swig_res)) {
+    Swig::DirectorTypeMismatchException::raise(SWIG_ErrorType(SWIG_ArgError(swig_res)), "in output value of type '""bool""'");
+  }
+  c_result = static_cast< bool >(swig_val);
+  return (bool) c_result;
+}
+
+
 GeoCal::Time SwigDirector_ImageGroundConnection::pixel_time(GeoCal::ImageCoordinate const &Ic) const {
   boost::shared_ptr< GeoCal::ImageCoordinate const > *smartarg1 = 0 ;
   void *swig_argp ;
@@ -8031,7 +8079,7 @@ GeoCal::Time SwigDirector_ImageGroundConnection::pixel_time(GeoCal::ImageCoordin
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 29;
+  const size_t swig_method_index = 30;
   const char *const swig_method_name = "pixel_time";
   PyObject *method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -8075,7 +8123,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter(GeoCal::ImageCoordin
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 30;
+  const size_t swig_method_index = 31;
   const char *const swig_method_name = "resolution_meter";
   PyObject *method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0, NULL);
@@ -8108,7 +8156,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter() const {
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 31;
+  const size_t swig_method_index = 32;
   const char *const swig_method_name = "resolution_meter";
   PyObject *method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject args = PyTuple_New(0);
@@ -8146,7 +8194,7 @@ double SwigDirector_ImageGroundConnection::footprint_resolution_line(int Line,in
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 32;
+  const size_t swig_method_index = 33;
   const char *const swig_method_name = "footprint_resolution_line";
   PyObject *method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
@@ -8183,7 +8231,7 @@ double SwigDirector_ImageGroundConnection::footprint_resolution_sample(int Line,
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 33;
+  const size_t swig_method_index = 34;
   const char *const swig_method_name = "footprint_resolution_sample";
   PyObject *method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1, NULL);
@@ -8231,7 +8279,7 @@ blitz::Array< double,7 > SwigDirector_ImageGroundConnection::cf_look_vector_arr(
     Swig::DirectorException::raise("'self' uninitialized, maybe you forgot to call ImageGroundConnection.__init__.");
   }
 #if defined(SWIG_PYTHON_DIRECTOR_VTABLE)
-  const size_t swig_method_index = 34;
+  const size_t swig_method_index = 35;
   const char *const swig_method_name = "cf_look_vector_arr";
   PyObject *method = swig_get_method(swig_method_index, swig_method_name);
   swig::SwigVar_PyObject result = PyObject_CallFunctionObjArgs(method ,(PyObject *)obj0,(PyObject *)obj1,(PyObject *)obj2,(PyObject *)obj3,(PyObject *)obj4,(PyObject *)obj5,(PyObject *)obj6, NULL);
@@ -13191,6 +13239,8 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_has_time(PyObject *self, PyO
   boost::shared_ptr< GeoCal::ImageGroundConnection const > tempshared1 ;
   boost::shared_ptr< GeoCal::ImageGroundConnection const > *smartarg1 = 0 ;
   PyObject *swig_obj[1] ;
+  Swig::Director *director = 0;
+  bool upcall = false;
   bool result;
   
   (void)self;
@@ -13211,14 +13261,24 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_has_time(PyObject *self, PyO
       arg1 = const_cast< GeoCal::ImageGroundConnection * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
-  {
-    try {
-      result = (bool)((GeoCal::ImageGroundConnection const *)arg1)->has_time();
-    } catch (Swig::DirectorException &e) {
-      SWIG_fail; 
-    } catch (const std::exception& e) {
-      SWIG_exception(SWIG_RuntimeError, e.what());
+  director = SWIG_DIRECTOR_CAST(arg1);
+  upcall = (director && (director->swig_get_self()==swig_obj[0]));
+  try {
+    {
+      try {
+        if (upcall) {
+          result = (bool)((GeoCal::ImageGroundConnection const *)arg1)->GeoCal::ImageGroundConnection::has_time();
+        } else {
+          result = (bool)((GeoCal::ImageGroundConnection const *)arg1)->has_time();
+        }
+      } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const std::exception& e) {
+        SWIG_exception(SWIG_RuntimeError, e.what());
+      }
     }
+  } catch (Swig::DirectorException&) {
+    SWIG_fail;
   }
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;

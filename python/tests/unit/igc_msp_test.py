@@ -1,5 +1,5 @@
 from fixtures.require_check import require_msp
-from geocal import IgcMsp, ImageCoordinate, distance, GdalRasterImage
+from geocal import IgcMsp, ImageCoordinate, distance, GdalRasterImage, Time
 import pytest
 
 
@@ -52,5 +52,6 @@ def test_igc_msp(unit_test_data):
             assert ic2.line == pytest.approx(ic1.line, abs=0.01)
             assert ic2.sample == pytest.approx(ic1.sample, abs=0.01)
 
-    # Time texpect = Time::parse_time("2002-12-16T15:16:29.000000Z");
-    # BOOST_CHECK(fabs(igc.pixel_time(ImageCoordinate(10,10)) - texpect) < 1e-6);
+    assert igc.has_time
+    texpect = Time.parse_time("2002-12-16T15:16:29.000000Z")
+    assert abs(igc.pixel_time(ImageCoordinate(10,10)) - texpect) < 1e-6

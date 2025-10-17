@@ -10,6 +10,7 @@ from geocal_swig import (  # type: ignore
     Geodetic,
     GroundCoordinate,
     Dem,
+    Time
 )
 import os
 import typing
@@ -81,6 +82,12 @@ class IgcMsp(ImageGroundConnection):
     # virtual bool has_time() const { return true; }
     # virtual Time pixel_time(const ImageCoordinate& Ic) const;
 
+    def _v_has_time(self) -> bool:
+        return True
+
+    def pixel_time(self, ic: ImageCoordinate) -> Time:
+        return Time.parse_time(self._msp.pixel_time_base(ic.line, ic.sample)) + self._msp.pixel_time_offset(ic.line, ic.sample)
+    
     def ground_coordinate(self, ic: ImageCoordinate, dem=None):
         return self.ground_coordinate_dem(ic, self.dem)
 

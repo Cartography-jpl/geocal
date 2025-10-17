@@ -53,6 +53,7 @@ public:
     virtual int number_line() const;
     virtual int number_sample() const;
     virtual int number_band() const;
+    virtual bool has_time() const;
     virtual GeoCal::Time pixel_time(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter(GeoCal::ImageCoordinate const &Ic) const;
     virtual double resolution_meter() const;
@@ -90,7 +91,7 @@ private:
       return method;
     }
 private:
-    mutable swig::SwigVar_PyObject vtable[38];
+    mutable swig::SwigVar_PyObject vtable[39];
 #endif
 
 };

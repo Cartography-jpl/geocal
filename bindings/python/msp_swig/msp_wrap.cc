@@ -84847,6 +84847,96 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Msp_pixel_time_base(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  std::string result;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Msp_pixel_time_base", 3, 3, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_pixel_time_base" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Msp_pixel_time_base" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Msp_pixel_time_base" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = ((Msp const *)arg1)->pixel_time_base(arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_std_string(static_cast< std::string >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Msp_pixel_time_offset(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  Msp *arg1 = (Msp *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject *swig_obj[3] ;
+  double result;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "Msp_pixel_time_offset", 3, 3, swig_obj)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(swig_obj[0], &argp1,SWIGTYPE_p_Msp, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Msp_pixel_time_offset" "', argument " "1"" of type '" "Msp const *""'"); 
+  }
+  arg1 = reinterpret_cast< Msp * >(argp1);
+  ecode2 = SWIG_AsVal_double(swig_obj[1], &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Msp_pixel_time_offset" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(swig_obj[2], &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Msp_pixel_time_offset" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  {
+    try {
+      result = (double)((Msp const *)arg1)->pixel_time_offset(arg2,arg3);
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_Msp(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   Msp *arg1 = (Msp *) 0 ;
@@ -85918,6 +86008,8 @@ static PyMethodDef SwigMethods[] = {
 	 { "Msp_cf_look_vector", _wrap_Msp_cf_look_vector, METH_VARARGS, NULL},
 	 { "Msp_ground_coordinate_approx_height", _wrap_Msp_ground_coordinate_approx_height, METH_VARARGS, NULL},
 	 { "Msp_image_size", _wrap_Msp_image_size, METH_O, NULL},
+	 { "Msp_pixel_time_base", _wrap_Msp_pixel_time_base, METH_VARARGS, NULL},
+	 { "Msp_pixel_time_offset", _wrap_Msp_pixel_time_offset, METH_VARARGS, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
 	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},
@@ -86955,6 +87047,8 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "Msp_cf_look_vector", _wrap_Msp_cf_look_vector, METH_VARARGS, NULL},
 	 { "Msp_ground_coordinate_approx_height", _wrap_Msp_ground_coordinate_approx_height, METH_VARARGS, NULL},
 	 { "Msp_image_size", _wrap_Msp_image_size, METH_O, NULL},
+	 { "Msp_pixel_time_base", _wrap_Msp_pixel_time_base, METH_VARARGS, NULL},
+	 { "Msp_pixel_time_offset", _wrap_Msp_pixel_time_offset, METH_VARARGS, NULL},
 	 { "delete_Msp", _wrap_delete_Msp, METH_O, NULL},
 	 { "Msp_swigregister", Msp_swigregister, METH_O, NULL},
 	 { "Msp_swiginit", Msp_swiginit, METH_VARARGS, NULL},

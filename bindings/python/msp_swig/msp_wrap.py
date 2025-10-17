@@ -1558,6 +1558,8 @@ class Msp(object):
     cf_look_vector = _swig_new_instance_method(_msp_wrap.Msp_cf_look_vector)
     ground_coordinate_approx_height = _swig_new_instance_method(_msp_wrap.Msp_ground_coordinate_approx_height)
     image_size = _swig_new_instance_method(_msp_wrap.Msp_image_size)
+    pixel_time_base = _swig_new_instance_method(_msp_wrap.Msp_pixel_time_base)
+    pixel_time_offset = _swig_new_instance_method(_msp_wrap.Msp_pixel_time_offset)
     __swig_destroy__ = _msp_wrap.delete_Msp
 
 # Register Msp in _msp_wrap:

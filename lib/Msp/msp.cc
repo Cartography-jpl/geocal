@@ -3,6 +3,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 #include <boost/foreach.hpp>
+#include "boost/date_time/posix_time/posix_time.hpp"
 
 void* Msp::lib_ptr = 0;
 boost::shared_ptr<MSP::SDS::SupportDataService> Msp::sds;
@@ -302,6 +303,50 @@ blitz::Array<int, 1> Msp::image_size() const
     blitz::Array<int, 1> res(2);
     res = sz.line, sz.samp;
     return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+std::string Msp::pixel_time_base(double Line, double Sample) const
+{
+  using namespace boost::posix_time;
+  using namespace boost::gregorian;
+  try {
+    MSP::IGS::ImagingGeometryService is;
+    MSP::Time tm;
+    double second_from_midnight, second_from_start_of_imaging;
+    is.getImageTime(model.get(), MSP::ImagePoint(Line, Sample),
+		    tm, second_from_midnight, second_from_start_of_imaging);
+    date d(tm.getYear(), Jan, 1);
+    d += date_duration(tm.getDate()-1);
+    return to_iso_extended_string(d) + "T00:00:00Z";
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+double Msp::pixel_time_offset(double Line, double Sample) const
+{
+  try {
+    MSP::IGS::ImagingGeometryService is;
+    MSP::Time tm;
+    double second_from_midnight, second_from_start_of_imaging;
+    is.getImageTime(model.get(), MSP::ImagePoint(Line, Sample),
+		    tm, second_from_midnight, second_from_start_of_imaging);
+    return second_from_midnight;
   } catch(const csm::Error& error) {
     // Translate MSP error to Geocal error, just so we don't need
     // additional logic to handle this

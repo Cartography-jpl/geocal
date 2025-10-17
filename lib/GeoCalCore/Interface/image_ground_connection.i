@@ -144,7 +144,7 @@ public:
   %python_attribute(number_sample, virtual int)
   %python_attribute(number_band, virtual int)
   %python_attribute_with_set(title, std::string)
-  %python_attribute(has_time, bool)
+  %python_attribute(has_time, virtual bool)
   virtual Time pixel_time(const ImageCoordinate& Ic) const;
   std::string print_to_string() const;
   virtual double resolution_meter(const ImageCoordinate& Ic) const;

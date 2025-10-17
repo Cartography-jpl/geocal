@@ -168,7 +168,7 @@ strftime('%Y-%m-%d %H:%M:%f', 'now'), 'queued', null, null, ?)""",
         """Return information about a job with the given key."""
         r = self.db.execute("select * from job_status where key=?", (key,)).fetchone()
         if r is None:
-            raise KeyError(job_id)
+            raise KeyError(key)
         return r
 
     def keys(self):

@@ -5,7 +5,29 @@
 # in place short term
 # *******************************************************************
 
-from geocal_swig import *
+from geocal_swig import (
+    OrbitDes,
+    AttCsattb,
+    PosCsephb,
+    VicarFile,
+    VicarRasterImage,
+    IpiImageGroundConnection,
+    Ipi,
+    GlasGfmCamera,
+    PlanetConstant,
+    OrbitListCache,
+    PlanetSimpleDem,
+    ConstantSpacingTimeTable,
+    Time,
+    SubRasterImage,
+    GdalRasterImage,
+    ScaleImage,
+    SpicePlanetOrbit,
+    OffsetImageGroundConnection,
+    MeasuredTimeTable,
+    Vector_Time,
+    ContextSqrtDecodeImage,
+)
 from .pds_label import pds_label
 from .sqlite_shelf import read_shelve
 from .spice_camera import ctx_camera, hrsc_camera, hirise_camera
@@ -202,7 +224,7 @@ def igc_mex_hrsc(
             % (fname, lbl["INSTRUMENT_NAME"])
         )
     tstart = Time.parse_time(lbl["START_TIME"])
-    tend = Time.parse_time(lbl["STOP_TIME"])
+    # tend = Time.parse_time(lbl["STOP_TIME"])
     if lbl["DETECTOR_ID"] != "MEX_HRSC_NADIR":
         raise RuntimeError("Right now we only work with MEX_HRSC_NADIR")
     bdir = os.environ["MARS_KERNEL"] + "/mex_kernel/"
@@ -339,14 +361,14 @@ def igc_mro_hirise(
     tstart += unbinned_rate * (float(lbl["Summing"]) / 2 - 0.5)
     tstart += tspace * sline
     # Effective CCD Line number for the given TDI mode
-    ccd_line = -64.0 + float(lbl["Tdi"]) / 2
+    ccd_line = -64.0 + float(lbl["Tdi"]) / 2  # noqa: F841
     # Channel number is right and left, they get combined when we
     # put the channels together. Somewhat confusing name, this is *not*
     # the CCD number (e.g., red0 through red9). The offset is for the
     # right vs left. We might be off by 1, I got this from ISIS and they
     # use a different convention. We'll want to verify this at some point.
     if int(lbl["ChannelNumber"]) == 0:
-        ccd_start_sample = 1025
+        ccd_start_sample = 1025  # noqa: F841
     # This is the CCD number. This comes through the "CCD Processing and
     # Memory Modules (CPMM) IDS". Mapping is found in mro_hirise_v12.ti,
     # we don't bother reading this from the SPICE kernels since this is

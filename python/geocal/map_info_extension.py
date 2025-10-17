@@ -1,4 +1,4 @@
-from geocal_swig import *
+from geocal_swig import MapInfo, ImageCoordinate, Geodetic
 import math
 import numpy as np
 

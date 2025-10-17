@@ -1,7 +1,19 @@
 # This generates an RSM form various instruments. There is already general
 # RSM code, but this has the various choices appropriate to each instrument.
 
-from geocal_swig import *
+from geocal_swig import (
+    LocalRcParameter,
+    LocalRcConverter,
+    RsmGrid,
+    RsmRationalPolynomial,
+    RsmMultiSection,
+    RsmRpPlusGrid,
+    Rsm,
+    distance,
+    PlanetConstant,
+    SpiceHelper,
+    ImageCoordinate,
+)
 import matplotlib.pylab as plt
 import matplotlib as mpl
 import seaborn as sns
@@ -34,7 +46,7 @@ def rsm_plot_diff(r, igc, fname=None, min_height=-5000, max_height=-1500):
     if fname is None:
         return
     pdf = PdfPages(fname)
-    cmap = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
+    _ = mpl.colors.ListedColormap(sns.color_palette("RdBu_r", 256))
     plt.clf()
     plt.ylim(-2, 2)
     for i in range(smp.shape[1]):

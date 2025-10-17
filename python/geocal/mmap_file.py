@@ -1,4 +1,4 @@
-from geocal_swig import *
+from geocal_swig import VicarFile, VicarRasterImage
 import numpy as np
 
 
@@ -7,7 +7,7 @@ def _new_memmap(version, args, kwargs):
     arguments needed to create an object. See for example HdfFile"""
     cls = memmap_wrap
     if cls.pickle_format_version() != version:
-        raise RuntimeException(
+        raise RuntimeError(
             "Class is expecting a pickled object with version number %d, but we found %d"
             % (cls.pickle_format_version(), version)
         )
@@ -96,7 +96,7 @@ def mmap_file(*args, **kwargs):
     f = VicarFile(fname)
     lsize = f.label_int("LBLSIZE")[0]
     shp = (f.label_int("NL")[0], f.label_int("NS")[0])
-    if kwargs.get("dtype") == None:
+    if kwargs.get("dtype") is None:
         t = f.label_string("FORMAT")[0]
         if t == "DOUB":
             dtype = np.float64

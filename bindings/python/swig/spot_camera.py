@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spot_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spot_camera:
 _spot_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spot_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,24 +143,24 @@ import geocal_swig.with_parameter
 class SpotCamera(geocal_swig.camera.Camera):
     r"""
 
-    This class models the SPOT camera.
 
-    The camera parameters are given by an DIMAP file. This file is an XML
-    file format. You can find documentation for this format
-    athttp://www.spot.com/web/SICORP/452-sicorp-the-dimap-format.php.
+    This class models the SPOT camera.  
 
-    We don't actually read this file format. XML is a bit of a pain to
-    deal with in C++, and is much easier to process in Ruby. So we set up
-    an interface that just takes the PSI_X and PSI_Y values for each
-    pixel. The Afids class Dimap processes the XML file and can use that
-    to create an instance of this class.
+    The camera parameters are given by an DIMAP file. This file is an XML file
+    format. You can find documentation for this format at
+    http://www.spot.com/web/SICORP/452-sicorp-the-dimap-format.php.  
+
+    We don't actually read this file format. XML is a bit of a pain to deal with in
+    C++, and is much easier to process in Ruby. So we set up an interface that just
+    takes the PSI_X and PSI_Y values for each pixel. The Afids class Dimap processes
+    the XML file and can use that to create an instance of this class.  
 
     The various angles and so forth are described in the "SPOT Geometry
-    Handbook", available athttp://www.spotimage.com/automne_modules_files
-    /standard/public/p229_0b
-    9c0d94a22e77aac09df2b360c73073SPOT_Geometry_Handbook.pdf
+    Handbook", available at
+    http://www.spotimage.com/automne_modules_files/standard/public/p229_0b9c0d94a22e77aac09df2b360c73073SPOT_Geometry_Handbook.pdf  
 
-    C++ includes: spot_camera.h 
+    C++ includes: spot_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -165,17 +168,17 @@ class SpotCamera(geocal_swig.camera.Camera):
 
     def __init__(self, Psi_x, Psi_y):
         r"""
+        __init__(SpotCamera self, vector_double Psi_x, vector_double Psi_y) -> SpotCamera
 
-        SpotCamera::SpotCamera(const std::vector< double > &Psi_x, const std::vector< double >
-        &Psi_y)
         GeoCal::SpotCamera::SpotCamera
-        Create a spot camera with the given PSI angles.
-        Psi_x and Psi_y need to be equal in size, and have at least two
-        values.
+        Create a spot camera with the given PSI angles.  
 
-        The angles should be in radians.
+        Psi_x and Psi_y need to be equal in size, and have at least two values.  
 
-        We require that Psi_y be strictly increasing. 
+        The angles should be in radians.  
+
+        We require that Psi_y be strictly increasing.  
+
         """
         _spot_camera.SpotCamera_swiginit(self, _spot_camera.new_SpotCamera(Psi_x, Psi_y))
     _v_psi_x = _swig_new_instance_method(_spot_camera.SpotCamera__v_psi_x)

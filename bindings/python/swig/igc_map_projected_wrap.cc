@@ -8584,122 +8584,123 @@ SWIGINTERN PyObject *IgcMapProjectedMultiBand_swiginit(PyObject *SWIGUNUSEDPARM(
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcMapProjected", _wrap_new_IgcMapProjected, METH_VARARGS, "\n"
+		"IgcMapProjected(MapInfo Mi, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcMapProjected::IgcMapProjected(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >\n"
-		"&Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,\n"
-		"int Number_tile_line=-1, int Number_tile_sample=-1, double\n"
-		"Fill_value=0.0)\n"
 		"GeoCal::IgcMapProjected::IgcMapProjected\n"
-		"Constructor.\n"
-		"We average the data either by the factor given as Avg_fact, or by\n"
-		"ratio of the Mapinfo resolution and the Igc resolution.\n"
+		"Constructor.  \n"
 		"\n"
-		"You can optionally pass a grid spacing to use. We calculate image\n"
-		"coordinates in the input exactly at the grid spacing, and interpolate\n"
-		"in betweeen. This is much faster than calculating every point, and if\n"
-		"the grid spacing is small compared to the Dem and any nonlinearities\n"
-		"then it gives results very close to the full calculation. \n"
+		"We average the data either by the factor given as Avg_fact, or by ratio of the\n"
+		"Mapinfo resolution and the Igc resolution.  \n"
+		"\n"
+		"You can optionally pass a grid spacing to use. We calculate image coordinates in\n"
+		"the input exactly at the grid spacing, and interpolate in betweeen. This is much\n"
+		"faster than calculating every point, and if the grid spacing is small compared\n"
+		"to the Dem and any nonlinearities then it gives results very close to the full\n"
+		"calculation.  \n"
+		"\n"
 		""},
 	 { "IgcMapProjected__v_igc_original", _wrap_IgcMapProjected__v_igc_original, METH_O, "\n"
+		"IgcMapProjected__v_igc_original(IgcMapProjected self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcMapProjectedBase::igc_original() const\n"
 		"GeoCal::IgcMapProjectedBase::igc_original\n"
 		""},
 	 { "IgcMapProjected__v_avg_factor", _wrap_IgcMapProjected__v_avg_factor, METH_O, "\n"
+		"IgcMapProjected__v_avg_factor(IgcMapProjected self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::avg_factor() const\n"
 		"GeoCal::IgcMapProjectedBase::avg_factor\n"
 		""},
 	 { "IgcMapProjected__v_grid_spacing", _wrap_IgcMapProjected__v_grid_spacing, METH_O, "\n"
+		"IgcMapProjected__v_grid_spacing(IgcMapProjected self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
 		"GeoCal::IgcMapProjectedBase::grid_spacing\n"
 		""},
 	 { "IgcMapProjected__v_fill_value", _wrap_IgcMapProjected__v_fill_value, METH_O, "\n"
+		"IgcMapProjected__v_fill_value(IgcMapProjected self) -> double\n"
 		"\n"
-		"double GeoCal::IgcMapProjectedBase::fill_value() const\n"
 		"GeoCal::IgcMapProjectedBase::fill_value\n"
 		""},
 	 { "IgcMapProjected__v_read_into_memory", _wrap_IgcMapProjected__v_read_into_memory, METH_O, "\n"
+		"IgcMapProjected__v_read_into_memory(IgcMapProjected self) -> bool\n"
 		"\n"
-		"bool GeoCal::IgcMapProjectedBase::read_into_memory() const\n"
 		"GeoCal::IgcMapProjectedBase::read_into_memory\n"
 		""},
 	 { "delete_IgcMapProjected", _wrap_delete_IgcMapProjected, METH_O, "\n"
+		"delete_IgcMapProjected(IgcMapProjected self)\n"
 		"\n"
-		"virtual GeoCal::IgcMapProjected::~IgcMapProjected()\n"
 		"GeoCal::IgcMapProjected::~IgcMapProjected\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IgcMapProjected_swigregister", IgcMapProjected_swigregister, METH_O, NULL},
 	 { "IgcMapProjected_swiginit", IgcMapProjected_swiginit, METH_VARARGS, NULL},
 	 { "new_IgcMapProjectedMultiBand", _wrap_new_IgcMapProjectedMultiBand, METH_VARARGS, "\n"
+		"IgcMapProjectedMultiBand(MapInfo Mi, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >\n"
-		"&Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,\n"
-		"int Number_tile_line=-1, int Number_tile_sample=-1, double\n"
-		"Fill_value=0.0)\n"
 		"GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand\n"
-		"Constructor.\n"
-		"We average the data either by the factor given as Avg_fact, or by\n"
-		"ratio of the Mapinfo resolution and the Igc resolution.\n"
+		"Constructor.  \n"
 		"\n"
-		"You can optionally pass a grid spacing to use. We calculate image\n"
-		"coordinates in the input exactly at the grid spacing, and interpolate\n"
-		"in betweeen. This is much faster than calculating every point, and if\n"
-		"the grid spacing is small compared to the Dem and any nonlinearities\n"
-		"then it gives results very close to the full calculation. \n"
+		"We average the data either by the factor given as Avg_fact, or by ratio of the\n"
+		"Mapinfo resolution and the Igc resolution.  \n"
+		"\n"
+		"You can optionally pass a grid spacing to use. We calculate image coordinates in\n"
+		"the input exactly at the grid spacing, and interpolate in betweeen. This is much\n"
+		"faster than calculating every point, and if the grid spacing is small compared\n"
+		"to the Dem and any nonlinearities then it gives results very close to the full\n"
+		"calculation.  \n"
+		"\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_igc_original", _wrap_IgcMapProjectedMultiBand__v_igc_original, METH_O, "\n"
+		"IgcMapProjectedMultiBand__v_igc_original(IgcMapProjectedMultiBand self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcMapProjectedBase::igc_original() const\n"
 		"GeoCal::IgcMapProjectedBase::igc_original\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_avg_factor", _wrap_IgcMapProjectedMultiBand__v_avg_factor, METH_O, "\n"
+		"IgcMapProjectedMultiBand__v_avg_factor(IgcMapProjectedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::avg_factor() const\n"
 		"GeoCal::IgcMapProjectedBase::avg_factor\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_grid_spacing", _wrap_IgcMapProjectedMultiBand__v_grid_spacing, METH_O, "\n"
+		"IgcMapProjectedMultiBand__v_grid_spacing(IgcMapProjectedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
 		"GeoCal::IgcMapProjectedBase::grid_spacing\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_fill_value", _wrap_IgcMapProjectedMultiBand__v_fill_value, METH_O, "\n"
+		"IgcMapProjectedMultiBand__v_fill_value(IgcMapProjectedMultiBand self) -> double\n"
 		"\n"
-		"double GeoCal::IgcMapProjectedBase::fill_value() const\n"
 		"GeoCal::IgcMapProjectedBase::fill_value\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_read_into_memory", _wrap_IgcMapProjectedMultiBand__v_read_into_memory, METH_O, "\n"
+		"IgcMapProjectedMultiBand__v_read_into_memory(IgcMapProjectedMultiBand self) -> bool\n"
 		"\n"
-		"bool GeoCal::IgcMapProjectedBase::read_into_memory() const\n"
 		"GeoCal::IgcMapProjectedBase::read_into_memory\n"
 		""},
 	 { "delete_IgcMapProjectedMultiBand", _wrap_delete_IgcMapProjectedMultiBand, METH_O, "\n"
+		"delete_IgcMapProjectedMultiBand(IgcMapProjectedMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::IgcMapProjectedMultiBand::~IgcMapProjectedMultiBand()\n"
 		"GeoCal::IgcMapProjectedMultiBand::~IgcMapProjectedMultiBand\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IgcMapProjectedMultiBand_swigregister", IgcMapProjectedMultiBand_swigregister, METH_O, NULL},
@@ -8710,122 +8711,123 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcMapProjected", _wrap_new_IgcMapProjected, METH_VARARGS, "\n"
+		"IgcMapProjected(MapInfo Mi, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcMapProjected::IgcMapProjected(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >\n"
-		"&Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,\n"
-		"int Number_tile_line=-1, int Number_tile_sample=-1, double\n"
-		"Fill_value=0.0)\n"
 		"GeoCal::IgcMapProjected::IgcMapProjected\n"
-		"Constructor.\n"
-		"We average the data either by the factor given as Avg_fact, or by\n"
-		"ratio of the Mapinfo resolution and the Igc resolution.\n"
+		"Constructor.  \n"
 		"\n"
-		"You can optionally pass a grid spacing to use. We calculate image\n"
-		"coordinates in the input exactly at the grid spacing, and interpolate\n"
-		"in betweeen. This is much faster than calculating every point, and if\n"
-		"the grid spacing is small compared to the Dem and any nonlinearities\n"
-		"then it gives results very close to the full calculation. \n"
+		"We average the data either by the factor given as Avg_fact, or by ratio of the\n"
+		"Mapinfo resolution and the Igc resolution.  \n"
+		"\n"
+		"You can optionally pass a grid spacing to use. We calculate image coordinates in\n"
+		"the input exactly at the grid spacing, and interpolate in betweeen. This is much\n"
+		"faster than calculating every point, and if the grid spacing is small compared\n"
+		"to the Dem and any nonlinearities then it gives results very close to the full\n"
+		"calculation.  \n"
+		"\n"
 		""},
 	 { "IgcMapProjected__v_igc_original", _wrap_IgcMapProjected__v_igc_original, METH_O, "\n"
+		"_v_igc_original(IgcMapProjected self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcMapProjectedBase::igc_original() const\n"
 		"GeoCal::IgcMapProjectedBase::igc_original\n"
 		""},
 	 { "IgcMapProjected__v_avg_factor", _wrap_IgcMapProjected__v_avg_factor, METH_O, "\n"
+		"_v_avg_factor(IgcMapProjected self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::avg_factor() const\n"
 		"GeoCal::IgcMapProjectedBase::avg_factor\n"
 		""},
 	 { "IgcMapProjected__v_grid_spacing", _wrap_IgcMapProjected__v_grid_spacing, METH_O, "\n"
+		"_v_grid_spacing(IgcMapProjected self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
 		"GeoCal::IgcMapProjectedBase::grid_spacing\n"
 		""},
 	 { "IgcMapProjected__v_fill_value", _wrap_IgcMapProjected__v_fill_value, METH_O, "\n"
+		"_v_fill_value(IgcMapProjected self) -> double\n"
 		"\n"
-		"double GeoCal::IgcMapProjectedBase::fill_value() const\n"
 		"GeoCal::IgcMapProjectedBase::fill_value\n"
 		""},
 	 { "IgcMapProjected__v_read_into_memory", _wrap_IgcMapProjected__v_read_into_memory, METH_O, "\n"
+		"_v_read_into_memory(IgcMapProjected self) -> bool\n"
 		"\n"
-		"bool GeoCal::IgcMapProjectedBase::read_into_memory() const\n"
 		"GeoCal::IgcMapProjectedBase::read_into_memory\n"
 		""},
 	 { "delete_IgcMapProjected", _wrap_delete_IgcMapProjected, METH_O, "\n"
+		"delete_IgcMapProjected(IgcMapProjected self)\n"
 		"\n"
-		"virtual GeoCal::IgcMapProjected::~IgcMapProjected()\n"
 		"GeoCal::IgcMapProjected::~IgcMapProjected\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IgcMapProjected_swigregister", IgcMapProjected_swigregister, METH_O, NULL},
 	 { "IgcMapProjected_swiginit", IgcMapProjected_swiginit, METH_VARARGS, NULL},
 	 { "new_IgcMapProjectedMultiBand", _wrap_new_IgcMapProjectedMultiBand, METH_VARARGS, "\n"
+		"IgcMapProjectedMultiBand(MapInfo Mi, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >\n"
-		"&Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,\n"
-		"int Number_tile_line=-1, int Number_tile_sample=-1, double\n"
-		"Fill_value=0.0)\n"
 		"GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand\n"
-		"Constructor.\n"
-		"We average the data either by the factor given as Avg_fact, or by\n"
-		"ratio of the Mapinfo resolution and the Igc resolution.\n"
+		"Constructor.  \n"
 		"\n"
-		"You can optionally pass a grid spacing to use. We calculate image\n"
-		"coordinates in the input exactly at the grid spacing, and interpolate\n"
-		"in betweeen. This is much faster than calculating every point, and if\n"
-		"the grid spacing is small compared to the Dem and any nonlinearities\n"
-		"then it gives results very close to the full calculation. \n"
+		"We average the data either by the factor given as Avg_fact, or by ratio of the\n"
+		"Mapinfo resolution and the Igc resolution.  \n"
+		"\n"
+		"You can optionally pass a grid spacing to use. We calculate image coordinates in\n"
+		"the input exactly at the grid spacing, and interpolate in betweeen. This is much\n"
+		"faster than calculating every point, and if the grid spacing is small compared\n"
+		"to the Dem and any nonlinearities then it gives results very close to the full\n"
+		"calculation.  \n"
+		"\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_igc_original", _wrap_IgcMapProjectedMultiBand__v_igc_original, METH_O, "\n"
+		"_v_igc_original(IgcMapProjectedMultiBand self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcMapProjectedBase::igc_original() const\n"
 		"GeoCal::IgcMapProjectedBase::igc_original\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_avg_factor", _wrap_IgcMapProjectedMultiBand__v_avg_factor, METH_O, "\n"
+		"_v_avg_factor(IgcMapProjectedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::avg_factor() const\n"
 		"GeoCal::IgcMapProjectedBase::avg_factor\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_grid_spacing", _wrap_IgcMapProjectedMultiBand__v_grid_spacing, METH_O, "\n"
+		"_v_grid_spacing(IgcMapProjectedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::IgcMapProjectedBase::grid_spacing() const\n"
 		"GeoCal::IgcMapProjectedBase::grid_spacing\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_fill_value", _wrap_IgcMapProjectedMultiBand__v_fill_value, METH_O, "\n"
+		"_v_fill_value(IgcMapProjectedMultiBand self) -> double\n"
 		"\n"
-		"double GeoCal::IgcMapProjectedBase::fill_value() const\n"
 		"GeoCal::IgcMapProjectedBase::fill_value\n"
 		""},
 	 { "IgcMapProjectedMultiBand__v_read_into_memory", _wrap_IgcMapProjectedMultiBand__v_read_into_memory, METH_O, "\n"
+		"_v_read_into_memory(IgcMapProjectedMultiBand self) -> bool\n"
 		"\n"
-		"bool GeoCal::IgcMapProjectedBase::read_into_memory() const\n"
 		"GeoCal::IgcMapProjectedBase::read_into_memory\n"
 		""},
 	 { "delete_IgcMapProjectedMultiBand", _wrap_delete_IgcMapProjectedMultiBand, METH_O, "\n"
+		"delete_IgcMapProjectedMultiBand(IgcMapProjectedMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::IgcMapProjectedMultiBand::~IgcMapProjectedMultiBand()\n"
 		"GeoCal::IgcMapProjectedMultiBand::~IgcMapProjectedMultiBand\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IgcMapProjectedMultiBand_swigregister", IgcMapProjectedMultiBand_swigregister, METH_O, NULL},

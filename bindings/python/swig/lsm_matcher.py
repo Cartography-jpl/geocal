@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _lsm_matcher.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _lsm_matcher:
 _lsm_matcher.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _lsm_matcher.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,40 +143,41 @@ import geocal_swig.geocal_exception
 class LsmMatcher(geocal_swig.image_matcher.ImageMatcher):
     r"""
 
-    This class performs image matching.
 
-    This does a nonlinear least squares match. It also calculates an
-    estimate of the error in its matching.
+    This class performs image matching.  
 
-    We attempt to reach a goal of precision_goal in determining a0 and b0.
-    If at any iteration, the uncertainty in determining a0 and b0 is
-    greater than max_sigma, then we give up on doing LSM. If the final
-    uncertainty in determining a0 and b0 is larger than
-    precision_requirement, then we give up on doing LSM. We now also check
-    radiometric uncertainty at each iteration as described in MISR SDS
-    DFM-0245-I. The maximum allowed radiometric uncertainty is calculated
-    by multiplying the factor radiometric_uncertainty_factor by the
-    minimum of the template and target window sigmas. After each iteration
-    in the lsm the uncertainty in the calculation of h0 is greater than
-    this threshold we stop doing LSM and return unsuccessful.
+    This does a nonlinear least squares match. It also calculates an estimate of the
+    error in its matching.  
 
-    The minimum uncertainty that will be returned is precision_goal (i.e.,
-    if the estimated uncertainty is smaller than this value, then
-    precision_goal is returned instead).
+    We attempt to reach a goal of precision_goal in determining a0 and b0. If at any
+    iteration, the uncertainty in determining a0 and b0 is greater than max_sigma,
+    then we give up on doing LSM. If the final uncertainty in determining a0 and b0
+    is larger than precision_requirement, then we give up on doing LSM. We now also
+    check radiometric uncertainty at each iteration as described in MISR SDS
+    DFM-0245-I. The maximum allowed radiometric uncertainty is calculated by
+    multiplying the factor radiometric_uncertainty_factor by the minimum of the
+    template and target window sigmas. After each iteration in the lsm the
+    uncertainty in the calculation of h0 is greater than this threshold we stop
+    doing LSM and return unsuccessful.  
 
-    The model used is to resample the target using an affine
-    transformation combined with a linear correction to the radiometry:
+    The minimum uncertainty that will be returned is precision_goal (i.e., if the
+    estimated uncertainty is smaller than this value, then precision_goal is
+    returned instead).  
 
-    g'(i, j) = h0 + h1 * g(a0 + a1 * i + a2 * j, b0 + b1 * i + b2 * j)
+    The model used is to resample the target using an affine transformation combined
+    with a linear correction to the radiometry:  
 
-    Where g is the target, g' is the template.
+    g'(i, j) = h0 + h1 * g(a0 + a1 * i + a2 * j, b0 + b1 * i + b2 * j)  
 
-    As a convention, internal to this class we index things so g'(0, 0) is
-    the center of the template.
+    Where g is the target, g' is the template.  
 
-    We solve for the parameters giving the best fit against the template.
+    As a convention, internal to this class we index things so g'(0, 0) is the
+    center of the template.  
 
-    C++ includes: lsm_matcher.h 
+    We solve for the parameters giving the best fit against the template.  
+
+    C++ includes: lsm_matcher.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -181,15 +185,13 @@ class LsmMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     def __init__(self, Number_line=21, Number_sample=21, Border_size=3, Precision_goal=0.0625, Precision_requirement=0.2, Max_sigma=0.5, Rad_uncertainty_factor=2.0, Precision_min_geo_goal=0.15, Precision_min_rad_goal=1):
         r"""
+        __init__(LsmMatcher self, int Number_line=21, int Number_sample=21, int Border_size=3, double Precision_goal=0.0625, double Precision_requirement=0.2, double Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1) -> LsmMatcher
 
-        BZ_END_STENCIL LsmMatcher::LsmMatcher(int Number_line=21, int Number_sample=21, int Border_size=3, double
-        Precision_goal=0.0625, double Precision_requirement=0.2, double
-        Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double
-        Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1)
         GeoCal::LsmMatcher::LsmMatcher
-        Constructor.
-        Default values were tuned for MISR imagery, but work well for other
-        imagery. 
+        Constructor.  
+
+        Default values were tuned for MISR imagery, but work well for other imagery.  
+
         """
         _lsm_matcher.LsmMatcher_swiginit(self, _lsm_matcher.new_LsmMatcher(Number_line, Number_sample, Border_size, Precision_goal, Precision_requirement, Max_sigma, Rad_uncertainty_factor, Precision_min_geo_goal, Precision_min_rad_goal))
     _v_number_line = _swig_new_instance_method(_lsm_matcher.LsmMatcher__v_number_line)

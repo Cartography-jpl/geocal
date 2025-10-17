@@ -8209,89 +8209,92 @@ SWIGINTERN PyObject *MspiConfigTable_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_MspiConfigFile", _wrap_new_MspiConfigFile, METH_O, "\n"
+		"new_MspiConfigFile(std::string const & Fname) -> MspiConfigFile\n"
 		"\n"
-		"MspiConfigFile::MspiConfigFile(const std::string &Fname)\n"
 		"GeoCal::MspiConfigFile::MspiConfigFile\n"
-		"Read the given configuration file.\n"
-		"See the class comments for the details of the format of this string.\n"
+		"Read the given configuration file.  \n"
+		"\n"
+		"See the class comments for the details of the format of this string.  \n"
 		"\n"
 		""},
 	 { "MspiConfigFile_add_file", _wrap_MspiConfigFile_add_file, METH_VARARGS, "\n"
+		"MspiConfigFile_add_file(MspiConfigFile self, std::string const & Fname)\n"
 		"\n"
-		"void MspiConfigFile::add_file(const std::string &Fname)\n"
 		"GeoCal::MspiConfigFile::add_file\n"
-		"Add a file, replacing any keywords already in this class from earlier\n"
-		"files.\n"
+		"Add a file, replacing any keywords already in this class from earlier files.  \n"
 		"\n"
 		""},
 	 { "MspiConfigFile_add", _wrap_MspiConfigFile_add, METH_VARARGS, "\n"
+		"MspiConfigFile_add(MspiConfigFile self, std::string const & Keyword, std::string const & Value)\n"
 		"\n"
-		"void GeoCal::MspiConfigFile::add(const std::string &Keyword, const std::string &Value)\n"
 		"GeoCal::MspiConfigFile::add\n"
-		"Add or replace a value.\n"
+		"Add or replace a value.  \n"
 		"\n"
 		""},
 	 { "MspiConfigFile_have_key", _wrap_MspiConfigFile_have_key, METH_VARARGS, "\n"
+		"MspiConfigFile_have_key(MspiConfigFile self, std::string const & Key) -> bool\n"
 		"\n"
-		"bool GeoCal::MspiConfigFile::have_key(const std::string &K) const\n"
 		"GeoCal::MspiConfigFile::have_key\n"
-		"True if we have a value for the given keyword.\n"
+		"True if we have a value for the given keyword.  \n"
 		"\n"
 		""},
-	 { "MspiConfigFile_value_double", _wrap_MspiConfigFile_value_double, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_double", _wrap_MspiConfigFile_value_vector_double, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_int", _wrap_MspiConfigFile_value_int, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_int", _wrap_MspiConfigFile_value_vector_int, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_string", _wrap_MspiConfigFile_value_string, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_string", _wrap_MspiConfigFile_value_vector_string, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_bool", _wrap_MspiConfigFile_value_bool, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_bool", _wrap_MspiConfigFile_value_vector_bool, METH_VARARGS, NULL},
-	 { "MspiConfigFile___str__", _wrap_MspiConfigFile___str__, METH_O, NULL},
+	 { "MspiConfigFile_value_double", _wrap_MspiConfigFile_value_double, METH_VARARGS, "MspiConfigFile_value_double(MspiConfigFile self, std::string const & Key) -> double"},
+	 { "MspiConfigFile_value_vector_double", _wrap_MspiConfigFile_value_vector_double, METH_VARARGS, "MspiConfigFile_value_vector_double(MspiConfigFile self, std::string const & Key) -> vector_double"},
+	 { "MspiConfigFile_value_int", _wrap_MspiConfigFile_value_int, METH_VARARGS, "MspiConfigFile_value_int(MspiConfigFile self, std::string const & Key) -> int"},
+	 { "MspiConfigFile_value_vector_int", _wrap_MspiConfigFile_value_vector_int, METH_VARARGS, "MspiConfigFile_value_vector_int(MspiConfigFile self, std::string const & Key) -> vector_int"},
+	 { "MspiConfigFile_value_string", _wrap_MspiConfigFile_value_string, METH_VARARGS, "MspiConfigFile_value_string(MspiConfigFile self, std::string const & Key) -> std::string"},
+	 { "MspiConfigFile_value_vector_string", _wrap_MspiConfigFile_value_vector_string, METH_VARARGS, "MspiConfigFile_value_vector_string(MspiConfigFile self, std::string const & Key) -> vector_string"},
+	 { "MspiConfigFile_value_bool", _wrap_MspiConfigFile_value_bool, METH_VARARGS, "MspiConfigFile_value_bool(MspiConfigFile self, std::string const & Key) -> bool"},
+	 { "MspiConfigFile_value_vector_bool", _wrap_MspiConfigFile_value_vector_bool, METH_VARARGS, "MspiConfigFile_value_vector_bool(MspiConfigFile self, std::string const & Key) -> std::vector< bool,std::allocator< bool > >"},
+	 { "MspiConfigFile___str__", _wrap_MspiConfigFile___str__, METH_O, "MspiConfigFile___str__(MspiConfigFile self) -> std::string"},
 	 { "delete_MspiConfigFile", _wrap_delete_MspiConfigFile, METH_O, "\n"
+		"delete_MspiConfigFile(MspiConfigFile self)\n"
 		"\n"
-		"virtual GeoCal::MspiConfigFile::~MspiConfigFile()\n"
 		"GeoCal::MspiConfigFile::~MspiConfigFile\n"
 		""},
 	 { "MspiConfigFile_swigregister", MspiConfigFile_swigregister, METH_O, NULL},
 	 { "MspiConfigFile_swiginit", MspiConfigFile_swiginit, METH_VARARGS, NULL},
 	 { "new_MspiConfigTable", _wrap_new_MspiConfigTable, METH_VARARGS, "\n"
+		"new_MspiConfigTable(MspiConfigFile Config, std::string const & Table_name) -> MspiConfigTable\n"
 		"\n"
-		"MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)\n"
 		"GeoCal::MspiConfigTable::MspiConfigTable\n"
-		"Create a MspiConfigTable for the given table name in the given file.\n"
+		"Create a MspiConfigTable for the given table name in the given file.  \n"
 		"\n"
 		""},
 	 { "MspiConfigTable__v_number_row", _wrap_MspiConfigTable__v_number_row, METH_O, "\n"
+		"MspiConfigTable__v_number_row(MspiConfigTable self) -> int\n"
 		"\n"
-		"int GeoCal::MspiConfigTable::number_row() const\n"
 		"GeoCal::MspiConfigTable::number_row\n"
 		""},
-	 { "MspiConfigTable_value_double", _wrap_MspiConfigTable_value_double, METH_VARARGS, NULL},
-	 { "MspiConfigTable_value_int", _wrap_MspiConfigTable_value_int, METH_VARARGS, NULL},
-	 { "MspiConfigTable_value_string", _wrap_MspiConfigTable_value_string, METH_VARARGS, NULL},
-	 { "MspiConfigTable___str__", _wrap_MspiConfigTable___str__, METH_O, NULL},
+	 { "MspiConfigTable_value_double", _wrap_MspiConfigTable_value_double, METH_VARARGS, "MspiConfigTable_value_double(MspiConfigTable self, int Index, std::string const & Column) -> double"},
+	 { "MspiConfigTable_value_int", _wrap_MspiConfigTable_value_int, METH_VARARGS, "MspiConfigTable_value_int(MspiConfigTable self, int Index, std::string const & Column) -> int"},
+	 { "MspiConfigTable_value_string", _wrap_MspiConfigTable_value_string, METH_VARARGS, "MspiConfigTable_value_string(MspiConfigTable self, int Index, std::string const & Column) -> std::string"},
+	 { "MspiConfigTable___str__", _wrap_MspiConfigTable___str__, METH_O, "MspiConfigTable___str__(MspiConfigTable self) -> std::string"},
 	 { "delete_MspiConfigTable", _wrap_delete_MspiConfigTable, METH_O, "\n"
+		"delete_MspiConfigTable(MspiConfigTable self)\n"
 		"\n"
-		"virtual GeoCal::MspiConfigTable::~MspiConfigTable()\n"
 		"GeoCal::MspiConfigTable::~MspiConfigTable\n"
 		""},
 	 { "MspiConfigTable_swigregister", MspiConfigTable_swigregister, METH_O, NULL},
@@ -8302,89 +8305,92 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_MspiConfigFile", _wrap_new_MspiConfigFile, METH_O, "\n"
+		"new_MspiConfigFile(std::string const & Fname) -> MspiConfigFile\n"
 		"\n"
-		"MspiConfigFile::MspiConfigFile(const std::string &Fname)\n"
 		"GeoCal::MspiConfigFile::MspiConfigFile\n"
-		"Read the given configuration file.\n"
-		"See the class comments for the details of the format of this string.\n"
+		"Read the given configuration file.  \n"
+		"\n"
+		"See the class comments for the details of the format of this string.  \n"
 		"\n"
 		""},
 	 { "MspiConfigFile_add_file", _wrap_MspiConfigFile_add_file, METH_VARARGS, "\n"
+		"add_file(MspiConfigFile self, std::string const & Fname)\n"
 		"\n"
-		"void MspiConfigFile::add_file(const std::string &Fname)\n"
 		"GeoCal::MspiConfigFile::add_file\n"
-		"Add a file, replacing any keywords already in this class from earlier\n"
-		"files.\n"
+		"Add a file, replacing any keywords already in this class from earlier files.  \n"
 		"\n"
 		""},
 	 { "MspiConfigFile_add", _wrap_MspiConfigFile_add, METH_VARARGS, "\n"
+		"add(MspiConfigFile self, std::string const & Keyword, std::string const & Value)\n"
 		"\n"
-		"void GeoCal::MspiConfigFile::add(const std::string &Keyword, const std::string &Value)\n"
 		"GeoCal::MspiConfigFile::add\n"
-		"Add or replace a value.\n"
+		"Add or replace a value.  \n"
 		"\n"
 		""},
 	 { "MspiConfigFile_have_key", _wrap_MspiConfigFile_have_key, METH_VARARGS, "\n"
+		"have_key(MspiConfigFile self, std::string const & Key) -> bool\n"
 		"\n"
-		"bool GeoCal::MspiConfigFile::have_key(const std::string &K) const\n"
 		"GeoCal::MspiConfigFile::have_key\n"
-		"True if we have a value for the given keyword.\n"
+		"True if we have a value for the given keyword.  \n"
 		"\n"
 		""},
-	 { "MspiConfigFile_value_double", _wrap_MspiConfigFile_value_double, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_double", _wrap_MspiConfigFile_value_vector_double, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_int", _wrap_MspiConfigFile_value_int, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_int", _wrap_MspiConfigFile_value_vector_int, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_string", _wrap_MspiConfigFile_value_string, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_string", _wrap_MspiConfigFile_value_vector_string, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_bool", _wrap_MspiConfigFile_value_bool, METH_VARARGS, NULL},
-	 { "MspiConfigFile_value_vector_bool", _wrap_MspiConfigFile_value_vector_bool, METH_VARARGS, NULL},
-	 { "MspiConfigFile___str__", _wrap_MspiConfigFile___str__, METH_O, NULL},
+	 { "MspiConfigFile_value_double", _wrap_MspiConfigFile_value_double, METH_VARARGS, "value_double(MspiConfigFile self, std::string const & Key) -> double"},
+	 { "MspiConfigFile_value_vector_double", _wrap_MspiConfigFile_value_vector_double, METH_VARARGS, "value_vector_double(MspiConfigFile self, std::string const & Key) -> vector_double"},
+	 { "MspiConfigFile_value_int", _wrap_MspiConfigFile_value_int, METH_VARARGS, "value_int(MspiConfigFile self, std::string const & Key) -> int"},
+	 { "MspiConfigFile_value_vector_int", _wrap_MspiConfigFile_value_vector_int, METH_VARARGS, "value_vector_int(MspiConfigFile self, std::string const & Key) -> vector_int"},
+	 { "MspiConfigFile_value_string", _wrap_MspiConfigFile_value_string, METH_VARARGS, "value_string(MspiConfigFile self, std::string const & Key) -> std::string"},
+	 { "MspiConfigFile_value_vector_string", _wrap_MspiConfigFile_value_vector_string, METH_VARARGS, "value_vector_string(MspiConfigFile self, std::string const & Key) -> vector_string"},
+	 { "MspiConfigFile_value_bool", _wrap_MspiConfigFile_value_bool, METH_VARARGS, "value_bool(MspiConfigFile self, std::string const & Key) -> bool"},
+	 { "MspiConfigFile_value_vector_bool", _wrap_MspiConfigFile_value_vector_bool, METH_VARARGS, "value_vector_bool(MspiConfigFile self, std::string const & Key) -> std::vector< bool,std::allocator< bool > >"},
+	 { "MspiConfigFile___str__", _wrap_MspiConfigFile___str__, METH_O, "__str__(MspiConfigFile self) -> std::string"},
 	 { "delete_MspiConfigFile", _wrap_delete_MspiConfigFile, METH_O, "\n"
+		"delete_MspiConfigFile(MspiConfigFile self)\n"
 		"\n"
-		"virtual GeoCal::MspiConfigFile::~MspiConfigFile()\n"
 		"GeoCal::MspiConfigFile::~MspiConfigFile\n"
 		""},
 	 { "MspiConfigFile_swigregister", MspiConfigFile_swigregister, METH_O, NULL},
 	 { "MspiConfigFile_swiginit", MspiConfigFile_swiginit, METH_VARARGS, NULL},
 	 { "new_MspiConfigTable", _wrap_new_MspiConfigTable, METH_VARARGS, "\n"
+		"new_MspiConfigTable(MspiConfigFile Config, std::string const & Table_name) -> MspiConfigTable\n"
 		"\n"
-		"MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)\n"
 		"GeoCal::MspiConfigTable::MspiConfigTable\n"
-		"Create a MspiConfigTable for the given table name in the given file.\n"
+		"Create a MspiConfigTable for the given table name in the given file.  \n"
 		"\n"
 		""},
 	 { "MspiConfigTable__v_number_row", _wrap_MspiConfigTable__v_number_row, METH_O, "\n"
+		"_v_number_row(MspiConfigTable self) -> int\n"
 		"\n"
-		"int GeoCal::MspiConfigTable::number_row() const\n"
 		"GeoCal::MspiConfigTable::number_row\n"
 		""},
-	 { "MspiConfigTable_value_double", _wrap_MspiConfigTable_value_double, METH_VARARGS, NULL},
-	 { "MspiConfigTable_value_int", _wrap_MspiConfigTable_value_int, METH_VARARGS, NULL},
-	 { "MspiConfigTable_value_string", _wrap_MspiConfigTable_value_string, METH_VARARGS, NULL},
-	 { "MspiConfigTable___str__", _wrap_MspiConfigTable___str__, METH_O, NULL},
+	 { "MspiConfigTable_value_double", _wrap_MspiConfigTable_value_double, METH_VARARGS, "value_double(MspiConfigTable self, int Index, std::string const & Column) -> double"},
+	 { "MspiConfigTable_value_int", _wrap_MspiConfigTable_value_int, METH_VARARGS, "value_int(MspiConfigTable self, int Index, std::string const & Column) -> int"},
+	 { "MspiConfigTable_value_string", _wrap_MspiConfigTable_value_string, METH_VARARGS, "value_string(MspiConfigTable self, int Index, std::string const & Column) -> std::string"},
+	 { "MspiConfigTable___str__", _wrap_MspiConfigTable___str__, METH_O, "__str__(MspiConfigTable self) -> std::string"},
 	 { "delete_MspiConfigTable", _wrap_delete_MspiConfigTable, METH_O, "\n"
+		"delete_MspiConfigTable(MspiConfigTable self)\n"
 		"\n"
-		"virtual GeoCal::MspiConfigTable::~MspiConfigTable()\n"
 		"GeoCal::MspiConfigTable::~MspiConfigTable\n"
 		""},
 	 { "MspiConfigTable_swigregister", MspiConfigTable_swigregister, METH_O, NULL},

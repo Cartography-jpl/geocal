@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_low_order_polynomial.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_low_order_polynomial:
 _rsm_low_order_polynomial.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_low_order_polynomial.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,10 +142,12 @@ import geocal_swig.geocal_exception
 class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is the low order polynomial used to determine approximate
-    row/column (line/sample, the RSM documentation calls this Row/Column)
 
-    C++ includes: rsm_low_order_polynomial.h 
+    This is the low order polynomial used to determine approximate row/column
+    (line/sample, the RSM documentation calls this Row/Column)  
+
+    C++ includes: rsm_low_order_polynomial.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,11 +155,10 @@ class RsmLowOrderPolynomial(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Nline_fit=10, Nsample_fit=10, Nheight_fit=10, Ignore_igc_error_in_fit=False):
         r"""
+        __init__(RsmLowOrderPolynomial self, int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool Ignore_igc_error_in_fit=False) -> RsmLowOrderPolynomial
 
-        GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool
-        Ignore_igc_error_in_fit=false)
         GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial
-        Constructor.
+        Constructor.  
 
         """
         _rsm_low_order_polynomial.RsmLowOrderPolynomial_swiginit(self, _rsm_low_order_polynomial.new_RsmLowOrderPolynomial(Nline_fit, Nsample_fit, Nheight_fit, Ignore_igc_error_in_fit))

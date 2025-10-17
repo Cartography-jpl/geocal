@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _dem_tiled_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _dem_tiled_file:
 _dem_tiled_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _dem_tiled_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,9 +142,11 @@ import geocal_swig.generic_object
 class DemTiledFile(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This is a DemMapInfo that is implemented as a TiledFile<T, 2>
 
-    C++ includes: dem_tiled_file.h 
+    This is a DemMapInfo that is implemented as a TiledFile<T, 2>  
+
+    C++ includes: dem_tiled_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

@@ -7882,102 +7882,113 @@ SWIGINTERN PyObject *RsmPolynomial_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmPolynomial", _wrap_new_RsmPolynomial, METH_VARARGS, "\n"
+		"RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=False, int Max_order=-1)\n"
 		"\n"
-		"RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int\n"
-		"Max_order=-1)\n"
 		"GeoCal::RsmPolynomial::RsmPolynomial\n"
-		"Constructor.\n"
-		"You indicated the order of the polynomial in each dimension, and if\n"
-		"this is a denominator (where we hold the constant term to 1.0 by\n"
-		"convention, and don't fit for this). The maximum order of cross terms\n"
-		"can be given, or left as -1 in which case we don't limit the cross\n"
-		"terms. \n"
+		"Constructor.  \n"
+		"\n"
+		"You indicated the order of the polynomial in each dimension, and if this is a\n"
+		"denominator (where we hold the constant term to 1.0 by convention, and don't fit\n"
+		"for this). The maximum order of cross terms can be given, or left as -1 in which\n"
+		"case we don't limit the cross terms.  \n"
+		"\n"
 		""},
-	 { "RsmPolynomial___str__", _wrap_RsmPolynomial___str__, METH_O, NULL},
+	 { "RsmPolynomial___str__", _wrap_RsmPolynomial___str__, METH_O, "RsmPolynomial___str__(RsmPolynomial self) -> std::string"},
 	 { "RsmPolynomial_check_zero_crossing", _wrap_RsmPolynomial_check_zero_crossing, METH_VARARGS, "\n"
+		"RsmPolynomial_check_zero_crossing(RsmPolynomial self, double Grid_spacing=0.01) -> bool\n"
 		"\n"
-		"bool RsmPolynomial::check_zero_crossing(double Grid_spacing=0.01) const\n"
 		"GeoCal::RsmPolynomial::check_zero_crossing\n"
-		"Determine if we have a zero crossing.\n"
-		"We use a simple sufficient test, and if that fails we look directly\n"
-		"for zero crossings using A spacing in X,Y,Z of the given spacing. \n"
-		""},
-	 { "RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, NULL},
-	 { "RsmPolynomial_jacobian_fitted_coefficent", _wrap_RsmPolynomial_jacobian_fitted_coefficent, METH_VARARGS, "\n"
+		"Determine if we have a zero crossing.  \n"
 		"\n"
-		"blitz::Array< double, 2 > RsmPolynomial::jacobian_fitted_coefficent(const blitz::Array< double, 1 > &X, const blitz::Array< double, 1 >\n"
-		"&Y, const blitz::Array< double, 1 > &Z) const\n"
+		"We use a simple sufficient test, and if that fails we look directly for zero\n"
+		"crossings using A spacing in X,Y,Z of the given spacing.  \n"
+		"\n"
+		""},
+	 { "RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, "\n"
+		"RsmPolynomial___call__(RsmPolynomial self, double X, double Y, double Z) -> double\n"
+		"RsmPolynomial___call__(RsmPolynomial self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_1\n"
+		"RsmPolynomial___call__(RsmPolynomial self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_2\n"
+		"RsmPolynomial___call__(RsmPolynomial self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_3\n"
+		""},
+	 { "RsmPolynomial_jacobian_fitted_coefficent", _wrap_RsmPolynomial_jacobian_fitted_coefficent, METH_VARARGS, "\n"
+		"RsmPolynomial_jacobian_fitted_coefficent(RsmPolynomial self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"\n"
 		"GeoCal::RsmPolynomial::jacobian_fitted_coefficent\n"
-		"This is the jacobian of the value with respect to the\n"
-		"fitted_coefficent.\n"
+		"This is the jacobian of the value with respect to the fitted_coefficent.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial_jacobian", _wrap_RsmPolynomial_jacobian, METH_VARARGS, "\n"
+		"RsmPolynomial_jacobian(RsmPolynomial self, double X, double Y, double Z) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > RsmPolynomial::jacobian(double X, double Y, double Z) const\n"
 		"GeoCal::RsmPolynomial::jacobian\n"
-		"This is the jacobian of the value with respect to X, Y, and Z.\n"
+		"This is the jacobian of the value with respect to X, Y, and Z.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial_set_rpc_coeff", _wrap_RsmPolynomial_set_rpc_coeff, METH_VARARGS, "\n"
+		"RsmPolynomial_set_rpc_coeff(RsmPolynomial self, Array_double_20 V)\n"
 		"\n"
-		"void RsmPolynomial::set_rpc_coeff(const boost::array< double, 20 > &V)\n"
 		"GeoCal::RsmPolynomial::set_rpc_coeff\n"
-		"Set a RsmPolynomial to match coefficients from RPC_B format RPC.\n"
-		"This is really only useful for testing, comparing against our RPC code\n"
+		"Set a RsmPolynomial to match coefficients from RPC_B format RPC.  \n"
+		"\n"
+		"This is really only useful for testing, comparing against our RPC code  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial__v_coefficient", _wrap_RsmPolynomial__v_coefficient, METH_O, "\n"
+		"RsmPolynomial__v_coefficient(RsmPolynomial self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< double, 3 > & GeoCal::RsmPolynomial::coefficient() const\n"
 		"GeoCal::RsmPolynomial::coefficient\n"
-		"The full set of coefficients for the polynomial.\n"
+		"The full set of coefficients for the polynomial.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial__v_fitted_coefficent", _wrap_RsmPolynomial__v_fitted_coefficent, METH_VARARGS, "\n"
+		"RsmPolynomial__v_fitted_coefficent(RsmPolynomial self) -> BlitzArray_double_1\n"
+		"RsmPolynomial__v_fitted_coefficent(RsmPolynomial self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void RsmPolynomial::fitted_coefficent(const blitz::Array< double, 1 > &Fc)\n"
 		"GeoCal::RsmPolynomial::fitted_coefficent\n"
-		"Set the value of the set of coefficients that we are fitting for.\n"
+		"Set the value of the set of coefficients that we are fitting for.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial__v_is_denominator", _wrap_RsmPolynomial__v_is_denominator, METH_O, "\n"
+		"RsmPolynomial__v_is_denominator(RsmPolynomial self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmPolynomial::is_denominator() const\n"
 		"GeoCal::RsmPolynomial::is_denominator\n"
-		"True if this is a denominator polynomial.\n"
-		"We hold the constant term at 1.0 by convention, and don't fit for\n"
-		"this. \n"
+		"True if this is a denominator polynomial.  \n"
+		"\n"
+		"We hold the constant term at 1.0 by convention, and don't fit for this.  \n"
+		"\n"
 		""},
 	 { "RsmPolynomial__v_max_order", _wrap_RsmPolynomial__v_max_order, METH_O, "\n"
+		"RsmPolynomial__v_max_order(RsmPolynomial self) -> int\n"
 		"\n"
-		"int GeoCal::RsmPolynomial::max_order() const\n"
 		"GeoCal::RsmPolynomial::max_order\n"
-		"Maximum order cross term we fit for, or -1 if we don't restrict this.\n"
+		"Maximum order cross term we fit for, or -1 if we don't restrict this.  \n"
 		"\n"
 		""},
 	 { "delete_RsmPolynomial", _wrap_delete_RsmPolynomial, METH_O, "\n"
+		"delete_RsmPolynomial(RsmPolynomial self)\n"
 		"\n"
-		"virtual GeoCal::RsmPolynomial::~RsmPolynomial()\n"
 		"GeoCal::RsmPolynomial::~RsmPolynomial\n"
 		""},
 	 { "RsmPolynomial_swigregister", RsmPolynomial_swigregister, METH_O, NULL},
@@ -7988,102 +7999,113 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmPolynomial", _wrap_new_RsmPolynomial, METH_VARARGS, "\n"
+		"RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=False, int Max_order=-1)\n"
 		"\n"
-		"RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int\n"
-		"Max_order=-1)\n"
 		"GeoCal::RsmPolynomial::RsmPolynomial\n"
-		"Constructor.\n"
-		"You indicated the order of the polynomial in each dimension, and if\n"
-		"this is a denominator (where we hold the constant term to 1.0 by\n"
-		"convention, and don't fit for this). The maximum order of cross terms\n"
-		"can be given, or left as -1 in which case we don't limit the cross\n"
-		"terms. \n"
+		"Constructor.  \n"
+		"\n"
+		"You indicated the order of the polynomial in each dimension, and if this is a\n"
+		"denominator (where we hold the constant term to 1.0 by convention, and don't fit\n"
+		"for this). The maximum order of cross terms can be given, or left as -1 in which\n"
+		"case we don't limit the cross terms.  \n"
+		"\n"
 		""},
-	 { "RsmPolynomial___str__", _wrap_RsmPolynomial___str__, METH_O, NULL},
+	 { "RsmPolynomial___str__", _wrap_RsmPolynomial___str__, METH_O, "__str__(RsmPolynomial self) -> std::string"},
 	 { "RsmPolynomial_check_zero_crossing", _wrap_RsmPolynomial_check_zero_crossing, METH_VARARGS, "\n"
+		"check_zero_crossing(RsmPolynomial self, double Grid_spacing=0.01) -> bool\n"
 		"\n"
-		"bool RsmPolynomial::check_zero_crossing(double Grid_spacing=0.01) const\n"
 		"GeoCal::RsmPolynomial::check_zero_crossing\n"
-		"Determine if we have a zero crossing.\n"
-		"We use a simple sufficient test, and if that fails we look directly\n"
-		"for zero crossings using A spacing in X,Y,Z of the given spacing. \n"
-		""},
-	 { "RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, NULL},
-	 { "RsmPolynomial_jacobian_fitted_coefficent", _wrap_RsmPolynomial_jacobian_fitted_coefficent, METH_VARARGS, "\n"
+		"Determine if we have a zero crossing.  \n"
 		"\n"
-		"blitz::Array< double, 2 > RsmPolynomial::jacobian_fitted_coefficent(const blitz::Array< double, 1 > &X, const blitz::Array< double, 1 >\n"
-		"&Y, const blitz::Array< double, 1 > &Z) const\n"
+		"We use a simple sufficient test, and if that fails we look directly for zero\n"
+		"crossings using A spacing in X,Y,Z of the given spacing.  \n"
+		"\n"
+		""},
+	 { "RsmPolynomial___call__", _wrap_RsmPolynomial___call__, METH_VARARGS, "\n"
+		"__call__(RsmPolynomial self, double X, double Y, double Z) -> double\n"
+		"__call__(RsmPolynomial self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_1\n"
+		"__call__(RsmPolynomial self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_2\n"
+		"__call__(RsmPolynomial self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_3\n"
+		""},
+	 { "RsmPolynomial_jacobian_fitted_coefficent", _wrap_RsmPolynomial_jacobian_fitted_coefficent, METH_VARARGS, "\n"
+		"jacobian_fitted_coefficent(RsmPolynomial self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"\n"
 		"GeoCal::RsmPolynomial::jacobian_fitted_coefficent\n"
-		"This is the jacobian of the value with respect to the\n"
-		"fitted_coefficent.\n"
+		"This is the jacobian of the value with respect to the fitted_coefficent.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial_jacobian", _wrap_RsmPolynomial_jacobian, METH_VARARGS, "\n"
+		"jacobian(RsmPolynomial self, double X, double Y, double Z) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > RsmPolynomial::jacobian(double X, double Y, double Z) const\n"
 		"GeoCal::RsmPolynomial::jacobian\n"
-		"This is the jacobian of the value with respect to X, Y, and Z.\n"
+		"This is the jacobian of the value with respect to X, Y, and Z.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial_set_rpc_coeff", _wrap_RsmPolynomial_set_rpc_coeff, METH_VARARGS, "\n"
+		"set_rpc_coeff(RsmPolynomial self, Array_double_20 V)\n"
 		"\n"
-		"void RsmPolynomial::set_rpc_coeff(const boost::array< double, 20 > &V)\n"
 		"GeoCal::RsmPolynomial::set_rpc_coeff\n"
-		"Set a RsmPolynomial to match coefficients from RPC_B format RPC.\n"
-		"This is really only useful for testing, comparing against our RPC code\n"
+		"Set a RsmPolynomial to match coefficients from RPC_B format RPC.  \n"
+		"\n"
+		"This is really only useful for testing, comparing against our RPC code  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial__v_coefficient", _wrap_RsmPolynomial__v_coefficient, METH_O, "\n"
+		"_v_coefficient(RsmPolynomial self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< double, 3 > & GeoCal::RsmPolynomial::coefficient() const\n"
 		"GeoCal::RsmPolynomial::coefficient\n"
-		"The full set of coefficients for the polynomial.\n"
+		"The full set of coefficients for the polynomial.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial__v_fitted_coefficent", _wrap_RsmPolynomial__v_fitted_coefficent, METH_VARARGS, "\n"
+		"_v_fitted_coefficent(RsmPolynomial self) -> BlitzArray_double_1\n"
+		"_v_fitted_coefficent(RsmPolynomial self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void RsmPolynomial::fitted_coefficent(const blitz::Array< double, 1 > &Fc)\n"
 		"GeoCal::RsmPolynomial::fitted_coefficent\n"
-		"Set the value of the set of coefficients that we are fitting for.\n"
+		"Set the value of the set of coefficients that we are fitting for.  \n"
 		"\n"
 		""},
 	 { "RsmPolynomial__v_is_denominator", _wrap_RsmPolynomial__v_is_denominator, METH_O, "\n"
+		"_v_is_denominator(RsmPolynomial self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmPolynomial::is_denominator() const\n"
 		"GeoCal::RsmPolynomial::is_denominator\n"
-		"True if this is a denominator polynomial.\n"
-		"We hold the constant term at 1.0 by convention, and don't fit for\n"
-		"this. \n"
+		"True if this is a denominator polynomial.  \n"
+		"\n"
+		"We hold the constant term at 1.0 by convention, and don't fit for this.  \n"
+		"\n"
 		""},
 	 { "RsmPolynomial__v_max_order", _wrap_RsmPolynomial__v_max_order, METH_O, "\n"
+		"_v_max_order(RsmPolynomial self) -> int\n"
 		"\n"
-		"int GeoCal::RsmPolynomial::max_order() const\n"
 		"GeoCal::RsmPolynomial::max_order\n"
-		"Maximum order cross term we fit for, or -1 if we don't restrict this.\n"
+		"Maximum order cross term we fit for, or -1 if we don't restrict this.  \n"
 		"\n"
 		""},
 	 { "delete_RsmPolynomial", _wrap_delete_RsmPolynomial, METH_O, "\n"
+		"delete_RsmPolynomial(RsmPolynomial self)\n"
 		"\n"
-		"virtual GeoCal::RsmPolynomial::~RsmPolynomial()\n"
 		"GeoCal::RsmPolynomial::~RsmPolynomial\n"
 		""},
 	 { "RsmPolynomial_swigregister", RsmPolynomial_swigregister, METH_O, NULL},

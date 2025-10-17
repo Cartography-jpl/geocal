@@ -7426,65 +7426,70 @@ SWIGINTERN PyObject *HdfFile_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "HdfFile___str__", _wrap_HdfFile___str__, METH_O, NULL},
+	 { "HdfFile___str__", _wrap_HdfFile___str__, METH_O, "HdfFile___str__(HdfFile self) -> std::string"},
 	 { "new_HdfFile", _wrap_new_HdfFile, METH_VARARGS, "\n"
+		"HdfFile(std::string const & Fname, GeoCal::HdfFile::Mode M=READ)\n"
 		"\n"
-		"HdfFile::HdfFile(const std::string &Fname, Mode M=READ)\n"
 		"GeoCal::HdfFile::HdfFile\n"
-		"Open the given file with the given mode.\n"
+		"Open the given file with the given mode.  \n"
 		"\n"
 		""},
 	 { "HdfFile_close", _wrap_HdfFile_close, METH_O, "\n"
+		"HdfFile_close(HdfFile self)\n"
 		"\n"
-		"void GeoCal::HdfFile::close()\n"
 		"GeoCal::HdfFile::close\n"
-		"Close the underlying file.\n"
-		"This is automatically done by the destructor, so you only need to call\n"
-		"this if you want to force a close (e.g., for a unit test) \n"
+		"Close the underlying file.  \n"
+		"\n"
+		"This is automatically done by the destructor, so you only need to call this if\n"
+		"you want to force a close (e.g., for a unit test)  \n"
+		"\n"
 		""},
 	 { "HdfFile__v_file_name", _wrap_HdfFile__v_file_name, METH_O, "\n"
+		"HdfFile__v_file_name(HdfFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::HdfFile::file_name() const\n"
 		"GeoCal::HdfFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "HdfFile_is_hdf", _wrap_HdfFile_is_hdf, METH_O, "\n"
+		"HdfFile_is_hdf(std::string const & Fname) -> bool\n"
 		"\n"
-		"static bool GeoCal::HdfFile::is_hdf(const std::string &Fname)\n"
 		"GeoCal::HdfFile::is_hdf\n"
-		"Return true if the given file is an HDF file.\n"
+		"Return true if the given file is an HDF file.  \n"
 		"\n"
 		""},
-	 { "HdfFile_read_double_1d", _wrap_HdfFile_read_double_1d, METH_VARARGS, NULL},
-	 { "HdfFile_read_double_2d", _wrap_HdfFile_read_double_2d, METH_VARARGS, NULL},
-	 { "HdfFile_read_double_3d", _wrap_HdfFile_read_double_3d, METH_VARARGS, NULL},
-	 { "HdfFile_read_double_4d", _wrap_HdfFile_read_double_4d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_1d", _wrap_HdfFile_read_int_1d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_2d", _wrap_HdfFile_read_int_2d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_3d", _wrap_HdfFile_read_int_3d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_4d", _wrap_HdfFile_read_int_4d, METH_VARARGS, NULL},
+	 { "HdfFile_read_double_1d", _wrap_HdfFile_read_double_1d, METH_VARARGS, "HdfFile_read_double_1d(HdfFile self, std::string const & fname) -> BlitzArray_double_1"},
+	 { "HdfFile_read_double_2d", _wrap_HdfFile_read_double_2d, METH_VARARGS, "HdfFile_read_double_2d(HdfFile self, std::string const & fname) -> BlitzArray_double_2"},
+	 { "HdfFile_read_double_3d", _wrap_HdfFile_read_double_3d, METH_VARARGS, "HdfFile_read_double_3d(HdfFile self, std::string const & fname) -> BlitzArray_double_3"},
+	 { "HdfFile_read_double_4d", _wrap_HdfFile_read_double_4d, METH_VARARGS, "HdfFile_read_double_4d(HdfFile self, std::string const & fname) -> BlitzArray_double_4"},
+	 { "HdfFile_read_int_1d", _wrap_HdfFile_read_int_1d, METH_VARARGS, "HdfFile_read_int_1d(HdfFile self, std::string const & fname) -> BlitzArray_int_1"},
+	 { "HdfFile_read_int_2d", _wrap_HdfFile_read_int_2d, METH_VARARGS, "HdfFile_read_int_2d(HdfFile self, std::string const & fname) -> BlitzArray_int_2"},
+	 { "HdfFile_read_int_3d", _wrap_HdfFile_read_int_3d, METH_VARARGS, "HdfFile_read_int_3d(HdfFile self, std::string const & fname) -> BlitzArray_int_3"},
+	 { "HdfFile_read_int_4d", _wrap_HdfFile_read_int_4d, METH_VARARGS, "HdfFile_read_int_4d(HdfFile self, std::string const & fname) -> BlitzArray_int_4"},
 	 { "delete_HdfFile", _wrap_delete_HdfFile, METH_O, "\n"
+		"delete_HdfFile(HdfFile self)\n"
 		"\n"
-		"virtual GeoCal::HdfFile::~HdfFile()\n"
 		"GeoCal::HdfFile::~HdfFile\n"
 		""},
 	 { "HdfFile_swigregister", HdfFile_swigregister, METH_O, NULL},
@@ -7495,65 +7500,70 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "HdfFile___str__", _wrap_HdfFile___str__, METH_O, NULL},
+	 { "HdfFile___str__", _wrap_HdfFile___str__, METH_O, "__str__(HdfFile self) -> std::string"},
 	 { "new_HdfFile", _wrap_new_HdfFile, METH_VARARGS, "\n"
+		"HdfFile(std::string const & Fname, GeoCal::HdfFile::Mode M=READ)\n"
 		"\n"
-		"HdfFile::HdfFile(const std::string &Fname, Mode M=READ)\n"
 		"GeoCal::HdfFile::HdfFile\n"
-		"Open the given file with the given mode.\n"
+		"Open the given file with the given mode.  \n"
 		"\n"
 		""},
 	 { "HdfFile_close", _wrap_HdfFile_close, METH_O, "\n"
+		"close(HdfFile self)\n"
 		"\n"
-		"void GeoCal::HdfFile::close()\n"
 		"GeoCal::HdfFile::close\n"
-		"Close the underlying file.\n"
-		"This is automatically done by the destructor, so you only need to call\n"
-		"this if you want to force a close (e.g., for a unit test) \n"
+		"Close the underlying file.  \n"
+		"\n"
+		"This is automatically done by the destructor, so you only need to call this if\n"
+		"you want to force a close (e.g., for a unit test)  \n"
+		"\n"
 		""},
 	 { "HdfFile__v_file_name", _wrap_HdfFile__v_file_name, METH_O, "\n"
+		"_v_file_name(HdfFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::HdfFile::file_name() const\n"
 		"GeoCal::HdfFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "HdfFile_is_hdf", _wrap_HdfFile_is_hdf, METH_O, "\n"
+		"is_hdf(std::string const & Fname) -> bool\n"
 		"\n"
-		"static bool GeoCal::HdfFile::is_hdf(const std::string &Fname)\n"
 		"GeoCal::HdfFile::is_hdf\n"
-		"Return true if the given file is an HDF file.\n"
+		"Return true if the given file is an HDF file.  \n"
 		"\n"
 		""},
-	 { "HdfFile_read_double_1d", _wrap_HdfFile_read_double_1d, METH_VARARGS, NULL},
-	 { "HdfFile_read_double_2d", _wrap_HdfFile_read_double_2d, METH_VARARGS, NULL},
-	 { "HdfFile_read_double_3d", _wrap_HdfFile_read_double_3d, METH_VARARGS, NULL},
-	 { "HdfFile_read_double_4d", _wrap_HdfFile_read_double_4d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_1d", _wrap_HdfFile_read_int_1d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_2d", _wrap_HdfFile_read_int_2d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_3d", _wrap_HdfFile_read_int_3d, METH_VARARGS, NULL},
-	 { "HdfFile_read_int_4d", _wrap_HdfFile_read_int_4d, METH_VARARGS, NULL},
+	 { "HdfFile_read_double_1d", _wrap_HdfFile_read_double_1d, METH_VARARGS, "read_double_1d(HdfFile self, std::string const & fname) -> BlitzArray_double_1"},
+	 { "HdfFile_read_double_2d", _wrap_HdfFile_read_double_2d, METH_VARARGS, "read_double_2d(HdfFile self, std::string const & fname) -> BlitzArray_double_2"},
+	 { "HdfFile_read_double_3d", _wrap_HdfFile_read_double_3d, METH_VARARGS, "read_double_3d(HdfFile self, std::string const & fname) -> BlitzArray_double_3"},
+	 { "HdfFile_read_double_4d", _wrap_HdfFile_read_double_4d, METH_VARARGS, "read_double_4d(HdfFile self, std::string const & fname) -> BlitzArray_double_4"},
+	 { "HdfFile_read_int_1d", _wrap_HdfFile_read_int_1d, METH_VARARGS, "read_int_1d(HdfFile self, std::string const & fname) -> BlitzArray_int_1"},
+	 { "HdfFile_read_int_2d", _wrap_HdfFile_read_int_2d, METH_VARARGS, "read_int_2d(HdfFile self, std::string const & fname) -> BlitzArray_int_2"},
+	 { "HdfFile_read_int_3d", _wrap_HdfFile_read_int_3d, METH_VARARGS, "read_int_3d(HdfFile self, std::string const & fname) -> BlitzArray_int_3"},
+	 { "HdfFile_read_int_4d", _wrap_HdfFile_read_int_4d, METH_VARARGS, "read_int_4d(HdfFile self, std::string const & fname) -> BlitzArray_int_4"},
 	 { "delete_HdfFile", _wrap_delete_HdfFile, METH_O, "\n"
+		"delete_HdfFile(HdfFile self)\n"
 		"\n"
-		"virtual GeoCal::HdfFile::~HdfFile()\n"
 		"GeoCal::HdfFile::~HdfFile\n"
 		""},
 	 { "HdfFile_swigregister", HdfFile_swigregister, METH_O, NULL},

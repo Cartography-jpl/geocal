@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _statistic.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _statistic:
 _statistic.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _statistic.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,9 +140,11 @@ import geocal_swig.generic_object
 class Statistic(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This calculates basic statistics.
 
-    C++ includes: statistic.h 
+    This calculates basic statistics.  
+
+    C++ includes: statistic.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -147,10 +152,10 @@ class Statistic(geocal_swig.generic_object.GenericObject):
 
     def __init__(self):
         r"""
+        __init__(Statistic self) -> Statistic
 
-        GeoCal::Statistic::Statistic()
         GeoCal::Statistic::Statistic
-        Constructor.
+        Constructor.  
 
         """
         _statistic.Statistic_swiginit(self, _statistic.new_Statistic())

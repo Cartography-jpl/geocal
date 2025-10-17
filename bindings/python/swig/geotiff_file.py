@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geotiff_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geotiff_file:
 _geotiff_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geotiff_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,117 +140,191 @@ import geocal_swig.generic_object
 class GeotiffFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Provide direct access to a GeoTiff file.
 
-    Note that this is a pretty low level class, you almost certainly don't
-    want to be using this but instead want something like a
-    GdalRasterImage. But this class if useful if you need to do low level
-    things with a geotiff file like directly read and write geotiff tags.
+    Provide direct access to a GeoTiff file.  
 
-    A note on the hardcode values/protypes:
+    Note that this is a pretty low level class, you almost certainly don't want to
+    be using this but instead want something like a GdalRasterImage. But this class
+    if useful if you need to do low level things with a geotiff file like directly
+    read and write geotiff tags.  
 
-    Normally we wouldn't have prototypes and hard coded values defined
-    directly in a class. However, we have a special case. We know that
-    GDAL will supply the GeoTIFF library, because if it isn't found on the
-    system GDAL will use its own private copy. However, we don't know that
-    the GeoTIFF headers will be available. GDAL doesn't install them, and
-    unless there is a another copy of GeoTIFF available they won't be
-    found. Since it is entirely possible to have GDAL installed but
-    GeoTIFF not, we don't want to add a dependency on this library that we
-    don't really need. So, we define the prototypes here. There is a risk
-    that these prototypes will become out of date, in which case we'll
-    need to update these. But the GeoTIFF library hasn't changed in some
-    time, so the trade against adding a dependency is probably a good one.
+    A note on the hardcode values/protypes:  
 
-    An update - the newer version of gdal doesn't have the same symbols
-    exposed. So we can't depend on gdal. We have a direct dependency on
-    geotiff. We can remove the hardcoded stuff at some point, but for now
-    just leave in place since we already have that.
+    Normally we wouldn't have prototypes and hard coded values defined directly in a
+    class. However, we have a special case. We know that GDAL will supply the
+    GeoTIFF library, because if it isn't found on the system GDAL will use its own
+    private copy. However, we don't know that the GeoTIFF headers will be available.
+    GDAL doesn't install them, and unless there is a another copy of GeoTIFF
+    available they won't be found. Since it is entirely possible to have GDAL
+    installed but GeoTIFF not, we don't want to add a dependency on this library
+    that we don't really need. So, we define the prototypes here. There is a risk
+    that these prototypes will become out of date, in which case we'll need to
+    update these. But the GeoTIFF library hasn't changed in some time, so the trade
+    against adding a dependency is probably a good one.  
 
-    C++ includes: geotiff_file.h 
+    An update - the newer version of gdal doesn't have the same symbols exposed. So
+    we can't depend on gdal. We have a direct dependency on geotiff. We can remove
+    the hardcoded stuff at some point, but for now just leave in place since we
+    already have that.  
+
+    C++ includes: geotiff_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     GTModelTypeGeoKey = _geotiff_file.GeotiffFile_GTModelTypeGeoKey
+    
     GTRasterTypeGeoKey = _geotiff_file.GeotiffFile_GTRasterTypeGeoKey
+    
     GTCitationGeoKey = _geotiff_file.GeotiffFile_GTCitationGeoKey
+    
     GeographicTypeGeoKey = _geotiff_file.GeotiffFile_GeographicTypeGeoKey
+    
     GeogCitationGeoKey = _geotiff_file.GeotiffFile_GeogCitationGeoKey
+    
     GeogGeodeticDatumGeoKey = _geotiff_file.GeotiffFile_GeogGeodeticDatumGeoKey
+    
     GeogPrimeMeridianGeoKey = _geotiff_file.GeotiffFile_GeogPrimeMeridianGeoKey
+    
     GeogLinearUnitsGeoKey = _geotiff_file.GeotiffFile_GeogLinearUnitsGeoKey
+    
     GeogLinearUnitSizeGeoKey = _geotiff_file.GeotiffFile_GeogLinearUnitSizeGeoKey
+    
     GeogAngularUnitsGeoKey = _geotiff_file.GeotiffFile_GeogAngularUnitsGeoKey
+    
     GeogAngularUnitSizeGeoKey = _geotiff_file.GeotiffFile_GeogAngularUnitSizeGeoKey
+    
     GeogEllipsoidGeoKey = _geotiff_file.GeotiffFile_GeogEllipsoidGeoKey
+    
     GeogSemiMajorAxisGeoKey = _geotiff_file.GeotiffFile_GeogSemiMajorAxisGeoKey
+    
     GeogSemiMinorAxisGeoKey = _geotiff_file.GeotiffFile_GeogSemiMinorAxisGeoKey
+    
     GeogInvFlatteningGeoKey = _geotiff_file.GeotiffFile_GeogInvFlatteningGeoKey
+    
     GeogAzimuthUnitsGeoKey = _geotiff_file.GeotiffFile_GeogAzimuthUnitsGeoKey
+    
     GeogPrimeMeridianLongGeoKey = _geotiff_file.GeotiffFile_GeogPrimeMeridianLongGeoKey
+    
     ProjectedCSTypeGeoKey = _geotiff_file.GeotiffFile_ProjectedCSTypeGeoKey
+    
     PCSCitationGeoKey = _geotiff_file.GeotiffFile_PCSCitationGeoKey
+    
     ProjectionGeoKey = _geotiff_file.GeotiffFile_ProjectionGeoKey
+    
     ProjCoordTransGeoKey = _geotiff_file.GeotiffFile_ProjCoordTransGeoKey
+    
     ProjLinearUnitsGeoKey = _geotiff_file.GeotiffFile_ProjLinearUnitsGeoKey
+    
     ProjLinearUnitSizeGeoKey = _geotiff_file.GeotiffFile_ProjLinearUnitSizeGeoKey
+    
     ProjStdParallel1GeoKey = _geotiff_file.GeotiffFile_ProjStdParallel1GeoKey
+    
     ProjStdParallelGeoKey = _geotiff_file.GeotiffFile_ProjStdParallelGeoKey
+    
     ProjStdParallel2GeoKey = _geotiff_file.GeotiffFile_ProjStdParallel2GeoKey
+    
     ProjNatOriginLongGeoKey = _geotiff_file.GeotiffFile_ProjNatOriginLongGeoKey
+    
     ProjOriginLongGeoKey = _geotiff_file.GeotiffFile_ProjOriginLongGeoKey
+    
     ProjNatOriginLatGeoKey = _geotiff_file.GeotiffFile_ProjNatOriginLatGeoKey
+    
     ProjOriginLatGeoKey = _geotiff_file.GeotiffFile_ProjOriginLatGeoKey
+    
     ProjFalseEastingGeoKey = _geotiff_file.GeotiffFile_ProjFalseEastingGeoKey
+    
     ProjFalseNorthingGeoKey = _geotiff_file.GeotiffFile_ProjFalseNorthingGeoKey
+    
     ProjFalseOriginLongGeoKey = _geotiff_file.GeotiffFile_ProjFalseOriginLongGeoKey
+    
     ProjFalseOriginLatGeoKey = _geotiff_file.GeotiffFile_ProjFalseOriginLatGeoKey
+    
     ProjFalseOriginEastingGeoKey = _geotiff_file.GeotiffFile_ProjFalseOriginEastingGeoKey
+    
     ProjFalseOriginNorthingGeoKey = _geotiff_file.GeotiffFile_ProjFalseOriginNorthingGeoKey
+    
     ProjCenterLongGeoKey = _geotiff_file.GeotiffFile_ProjCenterLongGeoKey
+    
     ProjCenterLatGeoKey = _geotiff_file.GeotiffFile_ProjCenterLatGeoKey
+    
     ProjCenterEastingGeoKey = _geotiff_file.GeotiffFile_ProjCenterEastingGeoKey
+    
     ProjCenterNorthingGeoKey = _geotiff_file.GeotiffFile_ProjCenterNorthingGeoKey
+    
     ProjScaleAtNatOriginGeoKey = _geotiff_file.GeotiffFile_ProjScaleAtNatOriginGeoKey
+    
     ProjScaleAtOriginGeoKey = _geotiff_file.GeotiffFile_ProjScaleAtOriginGeoKey
+    
     ProjScaleAtCenterGeoKey = _geotiff_file.GeotiffFile_ProjScaleAtCenterGeoKey
+    
     ProjAzimuthAngleGeoKey = _geotiff_file.GeotiffFile_ProjAzimuthAngleGeoKey
+    
     ProjStraightVertPoleLongGeoKey = _geotiff_file.GeotiffFile_ProjStraightVertPoleLongGeoKey
+    
     ProjRectifiedGridAngleGeoKey = _geotiff_file.GeotiffFile_ProjRectifiedGridAngleGeoKey
+    
     VerticalCSTypeGeoKey = _geotiff_file.GeotiffFile_VerticalCSTypeGeoKey
+    
     VerticalCitationGeoKey = _geotiff_file.GeotiffFile_VerticalCitationGeoKey
+    
     VerticalDatumGeoKey = _geotiff_file.GeotiffFile_VerticalDatumGeoKey
+    
     VerticalUnitsGeoKey = _geotiff_file.GeotiffFile_VerticalUnitsGeoKey
+    
     TYPE_BYTE = _geotiff_file.GeotiffFile_TYPE_BYTE
+    
     TYPE_SHORT = _geotiff_file.GeotiffFile_TYPE_SHORT
+    
     TYPE_LONG = _geotiff_file.GeotiffFile_TYPE_LONG
+    
     TYPE_RATIONAL = _geotiff_file.GeotiffFile_TYPE_RATIONAL
+    
     TYPE_ASCII = _geotiff_file.GeotiffFile_TYPE_ASCII
+    
     TYPE_FLOAT = _geotiff_file.GeotiffFile_TYPE_FLOAT
+    
     TYPE_DOUBLE = _geotiff_file.GeotiffFile_TYPE_DOUBLE
+    
     TYPE_SBYTE = _geotiff_file.GeotiffFile_TYPE_SBYTE
+    
     TYPE_SSHORT = _geotiff_file.GeotiffFile_TYPE_SSHORT
+    
     TYPE_SLONG = _geotiff_file.GeotiffFile_TYPE_SLONG
+    
     TYPE_UNKNOWN = _geotiff_file.GeotiffFile_TYPE_UNKNOWN
+    
     TIFFTAG_GEOPIXELSCALE = _geotiff_file.GeotiffFile_TIFFTAG_GEOPIXELSCALE
+    
     TIFFTAG_GEOTIEPOINTS = _geotiff_file.GeotiffFile_TIFFTAG_GEOTIEPOINTS
+    
     TIFFTAG_GEOTRANSMATRIX = _geotiff_file.GeotiffFile_TIFFTAG_GEOTRANSMATRIX
+    
     TIFFTAG_IMAGEWIDTH = _geotiff_file.GeotiffFile_TIFFTAG_IMAGEWIDTH
+    
     TIFFTAG_IMAGELENGTH = _geotiff_file.GeotiffFile_TIFFTAG_IMAGELENGTH
+    
     TIFFTAG_COMPRESSION = _geotiff_file.GeotiffFile_TIFFTAG_COMPRESSION
+    
     TIFFTAG_PLANARCONFIG = _geotiff_file.GeotiffFile_TIFFTAG_PLANARCONFIG
+    
     TIFFTAG_PHOTOMETRIC = _geotiff_file.GeotiffFile_TIFFTAG_PHOTOMETRIC
+    
     TIFFTAG_BITSPERSAMPLE = _geotiff_file.GeotiffFile_TIFFTAG_BITSPERSAMPLE
+    
     TIFFTAG_SAMPLESPERPIXEL = _geotiff_file.GeotiffFile_TIFFTAG_SAMPLESPERPIXEL
+    
 
     def __init__(self, Fname, Mode):
         r"""
+        __init__(GeotiffFile self, std::string const & Fname, std::string const & Mode) -> GeotiffFile
 
-        GeoCal::GeotiffFile::GeotiffFile(const std::string &Fname, const std::string &Mode)
         GeoCal::GeotiffFile::GeotiffFile
-        Open given file name with the given mode.
-        Mode should be "r", "w", or "a". 
+        Open given file name with the given mode.  
+
+        Mode should be "r", "w", or "a".  
+
         """
         _geotiff_file.GeotiffFile_swiginit(self, _geotiff_file.new_GeotiffFile(Fname, Mode))
     _v_file_name = _swig_new_instance_method(_geotiff_file.GeotiffFile__v_file_name)

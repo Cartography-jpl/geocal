@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ipi.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ipi:
 _ipi.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ipi.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,62 +143,61 @@ import geocal_swig.look_vector
 class Ipi(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This performs an image point intersection (IPI), finding the time or
-    image coordinates that a given ground point is seen by a camera.
 
-    This solves the collinearity equation in order to find the time and
-    frame coordinates that a ground point is seen. Note however that the
-    collinearity equation can give "false" solutions, because it is
-    perfectly happy to find points seen by looking straight through the
-    earth (since it does not account for an obstructed view).
+    This performs an image point intersection (IPI), finding the time or image
+    coordinates that a given ground point is seen by a camera.  
 
-    These "false" solutions have nothing to do with the obscuration
-    "looking being a mountain" sorts of problems. This actually is a
-    different problem. When you run the IPI you can get solutions that are
-    on the other side of earth, so looking at when a ground point in the
-    United State is seen you can get a solution that returns a time for
-    when the spacecraft is flying over China. This is not the "behind a
-    mountain" issue, but the fact that a line of sight intersects a
-    sphere twice on opposite sides of the Earth. The "false solutions"
-    tries to throw these "other side of the earth" solutions out. But
-    the IPI does nothing for simple obscuration of the "behind a
-    mountain" sorts. The IPI assumes that the point it is given is not
-    obscured by terrain. If you need to calculate obscuration, you should
-    use a full ray caster (e.g., IgcRayCaster).
+    This solves the collinearity equation in order to find the time and frame
+    coordinates that a ground point is seen. Note however that the collinearity
+    equation can give "false" solutions, because it is perfectly happy to find
+    points seen by looking straight through the earth (since it does not account for
+    an obstructed view).  
 
-    We also get "false" solutions if the camera model diverges (i.e, we
-    pass in a look vector parallel to the camera CCD plane, so the point
-    is not seen by the camera). This is because the root finder doesn't
-    actually look for a zero, but rather a change in the sign of the
-    equation. When the camera model diverges, we go from negative infinity
-    to positive infinity. We recognize these "false" solutions by
-    comparing the collinearity equation results to a user supplied
-    tolerance.
+    These "false" solutions have nothing to do with the obscuration "looking
+    being a mountain" sorts of problems. This actually is a different problem. When
+    you run the IPI you can get solutions that are on the other side of earth, so
+    looking at when a ground point in the United State is seen you can get a
+    solution that returns a time for when the spacecraft is flying over China. This
+    is *not* the "behind a
+    mountain" issue, but the fact that a line of sight intersects a sphere twice on
+    opposite sides of the Earth. The "false solutions" tries to throw these
+    "other side of the earth" solutions out. But the IPI does nothing for simple
+    obscuration of the "behind a
+    mountain" sorts. The IPI *assumes* that the point it is given is not obscured
+    by terrain. If you need to calculate obscuration, you should use a full ray
+    caster (e.g., IgcRayCaster).  
 
-    We also allow a "extended" camera (i.e., frame coordinate outside of
-    the range of the camera). This is useful for edge of images etc, so we
-    don't have abrupt transitions. But we can get false solutions with
-    really large coordinate - e.g., imagine two lines at a slight angle to
-    each other than intersect at some point outside of the image. We pass
-    in a "max_frame_extend" value to limit how far outside the camera we
-    look for a solution. This can be a large value to skip this limit, or
-    set to 0 to not allow any extension at all.
+    We also get "false" solutions if the camera model diverges (i.e, we pass in a
+    look vector parallel to the camera CCD plane, so the point is not seen by the
+    camera). This is because the root finder doesn't actually look for a zero, but
+    rather a change in the sign of the equation. When the camera model diverges, we
+    go from negative infinity to positive infinity. We recognize these "false"
+    solutions by comparing the collinearity equation results to a user supplied
+    tolerance.  
 
-    We find all the solutions to the collinearity equation, in the range
-    Tmin to Tmax. The solutions found must be seperated by a time larger
-    then Root_min_separation.
+    We also allow a "extended" camera (i.e., frame coordinate outside of the range
+    of the camera). This is useful for edge of images etc, so we don't have abrupt
+    transitions. But we can get false solutions with really large coordinate - e.g.,
+    imagine two lines at a slight angle to each other than intersect at some point
+    outside of the image. We pass in a "max_frame_extend" value to limit how far
+    outside the camera we look for a solution. This can be a large value to skip
+    this limit, or set to 0 to not allow any extension at all.  
+
+    We find all the solutions to the collinearity equation, in the range Tmin to
+    Tmax. The solutions found must be seperated by a time larger then
+    Root_min_separation.  
 
     We then inspect the list of roots, and reject those that are "false"
-    solutions. If 1 solution is left, we return it with the success flag
-    set to true. Otherwise, we return with the success flag set to false.
+    solutions. If 1 solution is left, we return it with the success flag set to
+    true. Otherwise, we return with the success flag set to false.  
 
-    It is very common to call the IPI with a ground point near the last
-    call. As a performance improvement, we remember the time results from
-    the previous IPI calculation. We first look in a local time range
-    around the previous time result. If no solution is found, we then look
-    over the entire time range.
+    It is very common to call the IPI with a ground point near the last call. As a
+    performance improvement, we remember the time results from the previous IPI
+    calculation. We first look in a local time range around the previous time
+    result. If no solution is found, we then look over the entire time range.  
 
-    C++ includes: ipi.h 
+    C++ includes: ipi.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -203,26 +205,20 @@ class Ipi(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(Ipi self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::Camera > const & Cam, int Band, Time Tmin, Time Tmax, boost::shared_ptr< GeoCal::TimeTable > const & Tt=boost::shared_ptr< GeoCal::TimeTable >(), boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >(), double Local_time_window_size=5.0, double Root_min_separation=30.0, double Time_tolerance=1e-6, double Max_frame_extend=1000) -> Ipi
 
-        Ipi::Ipi(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        Camera > &Cam, int Band, Time Tmin, Time Tmax, const
-        boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),
-        const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
-        Refraction >(), const boost::shared_ptr< VelocityAberration >
-        &Vabb=boost::shared_ptr< VelocityAberration >(), double
-        Local_time_window_size=5.0, double Root_min_separation=30.0, double
-        Time_tolerance=1e-6, double Max_frame_extend=1000)
         GeoCal::Ipi::Ipi
-        Constructor.
-        If you only want to get the Time from the Ipi and not ImageCoordinate,
-        it is ok for Tt to be null.
+        Constructor.  
 
-        We find solutions to the Collinearity equations over the full time
-        range Tmin to Tmax. However, as a performance enhancement we first
-        look around the given Local_time_window_size in seconds around the
-        solution from the last call to time() or image_coordinate(). We look
-        for all solutions that are Root_min_separation apart. We find time
-        with a accuracy given by Time_tolerance. 
+        If you only want to get the Time from the Ipi and not ImageCoordinate, it is ok
+        for Tt to be null.  
+
+        We find solutions to the Collinearity equations over the full time range Tmin to
+        Tmax. However, as a performance enhancement we first look around the given
+        Local_time_window_size in seconds around the solution from the last call to
+        time() or image_coordinate(). We look for all solutions that are
+        Root_min_separation apart. We find time with a accuracy given by Time_tolerance.  
+
         """
         _ipi.Ipi_swiginit(self, _ipi.new_Ipi(*args))
     image_coordinate = _swig_new_instance_method(_ipi.Ipi_image_coordinate)

@@ -9384,140 +9384,152 @@ SWIGINTERN PyObject *OrbitOffsetCorrection_swiginit(PyObject *SWIGUNUSEDPARM(sel
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OrbitOffsetCorrection", _wrap_new_OrbitOffsetCorrection, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const Orb_uncorr, bool Outside_is_error=False, bool Use_local_north_coordinate=False, bool Fit_position_x=True, bool Fit_position_y=True, bool Fit_position_z=True, bool Fit_yaw=True, bool Fit_pitch=True, bool Fit_roll=True)\n"
 		"\n"
-		"OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool\n"
-		"Outside_is_error=false, bool Use_local_north_coordinate=false, bool\n"
-		"Fit_position_x=true, bool Fit_position_y=true, bool\n"
-		"Fit_position_z=true, bool Fit_yaw=true, bool Fit_pitch=true, bool\n"
-		"Fit_roll=true)\n"
 		"GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection\n"
-		"Constructor.\n"
-		"This has no time points for doing corrections, but you can add those\n"
-		"using insert_time_point. \n"
+		"Constructor.  \n"
+		"\n"
+		"This has no time points for doing corrections, but you can add those using\n"
+		"insert_time_point.  \n"
+		"\n"
 		""},
 	 { "OrbitOffsetCorrection_att_parm_to_match", _wrap_OrbitOffsetCorrection_att_parm_to_match, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection_att_parm_to_match(OrbitOffsetCorrection self, Time Tm) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > OrbitOffsetCorrection::att_parm_to_match(const Time &Tm) const\n"
 		"GeoCal::OrbitOffsetCorrection::att_parm_to_match\n"
-		"Return the parameters to use for a new attitude time point at Tm to\n"
-		"match the current value (e.g, useful for adding a new breakpoint w/o\n"
-		"changing the calculated values.\n"
+		"Return the parameters to use for a new attitude time point at Tm to match the\n"
+		"current value (e.g, useful for adding a new breakpoint w/o changing the\n"
+		"calculated values.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection__v_outside_is_error", _wrap_OrbitOffsetCorrection__v_outside_is_error, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_outside_is_error(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_outside_is_error(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::outside_is_error(bool Outside_is_error)\n"
 		"GeoCal::OrbitOffsetCorrection::outside_is_error\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_x", _wrap_OrbitOffsetCorrection__v_fit_position_x, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_position_x(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_position_x(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_x(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_x\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_y", _wrap_OrbitOffsetCorrection__v_fit_position_y, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_position_y(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_position_y(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_y(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_y\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_z", _wrap_OrbitOffsetCorrection__v_fit_position_z, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_position_z(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_position_z(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_z(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_z\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_e", _wrap_OrbitOffsetCorrection__v_fit_position_e, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_position_e(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_position_e(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_e(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_e\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_n", _wrap_OrbitOffsetCorrection__v_fit_position_n, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_position_n(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_position_n(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_n(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_n\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_u", _wrap_OrbitOffsetCorrection__v_fit_position_u, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_position_u(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_position_u(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_u(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_u\n"
 		""},
 	 { "OrbitOffsetCorrection__v_use_local_north_coordinate", _wrap_OrbitOffsetCorrection__v_use_local_north_coordinate, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_use_local_north_coordinate(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_use_local_north_coordinate(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::use_local_north_coordinate(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::use_local_north_coordinate\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_yaw", _wrap_OrbitOffsetCorrection__v_fit_yaw, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_yaw(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_yaw(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_yaw(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_yaw\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_pitch", _wrap_OrbitOffsetCorrection__v_fit_pitch, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_pitch(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_pitch(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_pitch(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_pitch\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_roll", _wrap_OrbitOffsetCorrection__v_fit_roll, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection__v_fit_roll(OrbitOffsetCorrection self) -> bool\n"
+		"OrbitOffsetCorrection__v_fit_roll(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_roll(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_roll\n"
 		""},
 	 { "OrbitOffsetCorrection_update_quaterion", _wrap_OrbitOffsetCorrection_update_quaterion, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection_update_quaterion(OrbitOffsetCorrection self, int Ind, Quaternion_double Q)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::update_quaterion(int Ind, const boost::math::quaternion< double > &Q)\n"
 		"GeoCal::OrbitOffsetCorrection::update_quaterion\n"
-		"Directly update the quaternion at time_point i.\n"
-		"This is occasionally more convenient that updating the parameters. \n"
+		"Directly update the quaternion at time_point i.  \n"
+		"\n"
+		"This is occasionally more convenient that updating the parameters.  \n"
+		"\n"
 		""},
 	 { "OrbitOffsetCorrection_insert_attitude_time_point", _wrap_OrbitOffsetCorrection_insert_attitude_time_point, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection_insert_attitude_time_point(OrbitOffsetCorrection self, Time T_pt)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::insert_attitude_time_point(Time T_pt)\n"
 		"GeoCal::OrbitOffsetCorrection::insert_attitude_time_point\n"
-		"Add a time point where we are going to do an attitude correction.\n"
+		"Add a time point where we are going to do an attitude correction.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection_insert_position_time_point", _wrap_OrbitOffsetCorrection_insert_position_time_point, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection_insert_position_time_point(OrbitOffsetCorrection self, Time T_pt)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::insert_position_time_point(Time T_pt)\n"
 		"GeoCal::OrbitOffsetCorrection::insert_position_time_point\n"
-		"Add a time point where we are going to do a position correction.\n"
+		"Add a time point where we are going to do a position correction.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection_orbit_correction_parameter", _wrap_OrbitOffsetCorrection_orbit_correction_parameter, METH_O, "\n"
+		"OrbitOffsetCorrection_orbit_correction_parameter(OrbitOffsetCorrection self)\n"
 		"\n"
-		"void OrbitOffsetCorrection::orbit_correction_parameter(std::vector< boost::shared_ptr< Time > > &Attitude_time_point,\n"
-		"blitz::Array< double, 2 > &Attitude_corr, std::vector<\n"
-		"boost::shared_ptr< Time > > &Position_time_point, blitz::Array<\n"
-		"double, 2 > &Position_corr)\n"
 		"GeoCal::OrbitOffsetCorrection::orbit_correction_parameter\n"
-		"Return the time points and corrections.\n"
-		"This is primarily of use for python wrappers, to give access to the\n"
-		"same kind of information that std::cout << *this gives.\n"
+		"Return the time points and corrections.  \n"
 		"\n"
-		"We return the attitude correction in arcseconds, one row per time\n"
-		"point. The columns are yaw, pitch, and roll. The position correction\n"
-		"is returned in meters, one row per time point. The columns are X, Y, Z\n"
-		"offset. \n"
+		"This is primarily of use for python wrappers, to give access to the same kind of\n"
+		"information that std::cout << *this gives.  \n"
+		"\n"
+		"We return the attitude correction in arcseconds, one row per time point. The\n"
+		"columns are yaw, pitch, and roll. The position correction is returned in meters,\n"
+		"one row per time point. The columns are X, Y, Z offset.  \n"
+		"\n"
 		""},
 	 { "delete_OrbitOffsetCorrection", _wrap_delete_OrbitOffsetCorrection, METH_O, "\n"
+		"delete_OrbitOffsetCorrection(OrbitOffsetCorrection self)\n"
 		"\n"
-		"virtual GeoCal::OrbitOffsetCorrection::~OrbitOffsetCorrection()\n"
 		"GeoCal::OrbitOffsetCorrection::~OrbitOffsetCorrection\n"
 		""},
 	 { "OrbitOffsetCorrection_swigregister", OrbitOffsetCorrection_swigregister, METH_O, NULL},
@@ -9528,140 +9540,152 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OrbitOffsetCorrection", _wrap_new_OrbitOffsetCorrection, METH_VARARGS, "\n"
+		"OrbitOffsetCorrection(boost::shared_ptr< GeoCal::Orbit > const Orb_uncorr, bool Outside_is_error=False, bool Use_local_north_coordinate=False, bool Fit_position_x=True, bool Fit_position_y=True, bool Fit_position_z=True, bool Fit_yaw=True, bool Fit_pitch=True, bool Fit_roll=True)\n"
 		"\n"
-		"OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool\n"
-		"Outside_is_error=false, bool Use_local_north_coordinate=false, bool\n"
-		"Fit_position_x=true, bool Fit_position_y=true, bool\n"
-		"Fit_position_z=true, bool Fit_yaw=true, bool Fit_pitch=true, bool\n"
-		"Fit_roll=true)\n"
 		"GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection\n"
-		"Constructor.\n"
-		"This has no time points for doing corrections, but you can add those\n"
-		"using insert_time_point. \n"
+		"Constructor.  \n"
+		"\n"
+		"This has no time points for doing corrections, but you can add those using\n"
+		"insert_time_point.  \n"
+		"\n"
 		""},
 	 { "OrbitOffsetCorrection_att_parm_to_match", _wrap_OrbitOffsetCorrection_att_parm_to_match, METH_VARARGS, "\n"
+		"att_parm_to_match(OrbitOffsetCorrection self, Time Tm) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > OrbitOffsetCorrection::att_parm_to_match(const Time &Tm) const\n"
 		"GeoCal::OrbitOffsetCorrection::att_parm_to_match\n"
-		"Return the parameters to use for a new attitude time point at Tm to\n"
-		"match the current value (e.g, useful for adding a new breakpoint w/o\n"
-		"changing the calculated values.\n"
+		"Return the parameters to use for a new attitude time point at Tm to match the\n"
+		"current value (e.g, useful for adding a new breakpoint w/o changing the\n"
+		"calculated values.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection__v_outside_is_error", _wrap_OrbitOffsetCorrection__v_outside_is_error, METH_VARARGS, "\n"
+		"_v_outside_is_error(OrbitOffsetCorrection self) -> bool\n"
+		"_v_outside_is_error(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::outside_is_error(bool Outside_is_error)\n"
 		"GeoCal::OrbitOffsetCorrection::outside_is_error\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_x", _wrap_OrbitOffsetCorrection__v_fit_position_x, METH_VARARGS, "\n"
+		"_v_fit_position_x(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_position_x(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_x(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_x\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_y", _wrap_OrbitOffsetCorrection__v_fit_position_y, METH_VARARGS, "\n"
+		"_v_fit_position_y(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_position_y(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_y(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_y\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_z", _wrap_OrbitOffsetCorrection__v_fit_position_z, METH_VARARGS, "\n"
+		"_v_fit_position_z(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_position_z(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_z(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_z\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_e", _wrap_OrbitOffsetCorrection__v_fit_position_e, METH_VARARGS, "\n"
+		"_v_fit_position_e(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_position_e(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_e(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_e\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_n", _wrap_OrbitOffsetCorrection__v_fit_position_n, METH_VARARGS, "\n"
+		"_v_fit_position_n(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_position_n(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_n(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_n\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_position_u", _wrap_OrbitOffsetCorrection__v_fit_position_u, METH_VARARGS, "\n"
+		"_v_fit_position_u(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_position_u(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_position_u(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_position_u\n"
 		""},
 	 { "OrbitOffsetCorrection__v_use_local_north_coordinate", _wrap_OrbitOffsetCorrection__v_use_local_north_coordinate, METH_VARARGS, "\n"
+		"_v_use_local_north_coordinate(OrbitOffsetCorrection self) -> bool\n"
+		"_v_use_local_north_coordinate(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::use_local_north_coordinate(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::use_local_north_coordinate\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_yaw", _wrap_OrbitOffsetCorrection__v_fit_yaw, METH_VARARGS, "\n"
+		"_v_fit_yaw(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_yaw(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_yaw(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_yaw\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_pitch", _wrap_OrbitOffsetCorrection__v_fit_pitch, METH_VARARGS, "\n"
+		"_v_fit_pitch(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_pitch(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_pitch(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_pitch\n"
 		""},
 	 { "OrbitOffsetCorrection__v_fit_roll", _wrap_OrbitOffsetCorrection__v_fit_roll, METH_VARARGS, "\n"
+		"_v_fit_roll(OrbitOffsetCorrection self) -> bool\n"
+		"_v_fit_roll(OrbitOffsetCorrection self, bool const & V)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::fit_roll(bool V)\n"
 		"GeoCal::OrbitOffsetCorrection::fit_roll\n"
 		""},
 	 { "OrbitOffsetCorrection_update_quaterion", _wrap_OrbitOffsetCorrection_update_quaterion, METH_VARARGS, "\n"
+		"update_quaterion(OrbitOffsetCorrection self, int Ind, Quaternion_double Q)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::update_quaterion(int Ind, const boost::math::quaternion< double > &Q)\n"
 		"GeoCal::OrbitOffsetCorrection::update_quaterion\n"
-		"Directly update the quaternion at time_point i.\n"
-		"This is occasionally more convenient that updating the parameters. \n"
+		"Directly update the quaternion at time_point i.  \n"
+		"\n"
+		"This is occasionally more convenient that updating the parameters.  \n"
+		"\n"
 		""},
 	 { "OrbitOffsetCorrection_insert_attitude_time_point", _wrap_OrbitOffsetCorrection_insert_attitude_time_point, METH_VARARGS, "\n"
+		"insert_attitude_time_point(OrbitOffsetCorrection self, Time T_pt)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::insert_attitude_time_point(Time T_pt)\n"
 		"GeoCal::OrbitOffsetCorrection::insert_attitude_time_point\n"
-		"Add a time point where we are going to do an attitude correction.\n"
+		"Add a time point where we are going to do an attitude correction.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection_insert_position_time_point", _wrap_OrbitOffsetCorrection_insert_position_time_point, METH_VARARGS, "\n"
+		"insert_position_time_point(OrbitOffsetCorrection self, Time T_pt)\n"
 		"\n"
-		"void GeoCal::OrbitOffsetCorrection::insert_position_time_point(Time T_pt)\n"
 		"GeoCal::OrbitOffsetCorrection::insert_position_time_point\n"
-		"Add a time point where we are going to do a position correction.\n"
+		"Add a time point where we are going to do a position correction.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection_orbit_correction_parameter", _wrap_OrbitOffsetCorrection_orbit_correction_parameter, METH_O, "\n"
+		"orbit_correction_parameter(OrbitOffsetCorrection self)\n"
 		"\n"
-		"void OrbitOffsetCorrection::orbit_correction_parameter(std::vector< boost::shared_ptr< Time > > &Attitude_time_point,\n"
-		"blitz::Array< double, 2 > &Attitude_corr, std::vector<\n"
-		"boost::shared_ptr< Time > > &Position_time_point, blitz::Array<\n"
-		"double, 2 > &Position_corr)\n"
 		"GeoCal::OrbitOffsetCorrection::orbit_correction_parameter\n"
-		"Return the time points and corrections.\n"
-		"This is primarily of use for python wrappers, to give access to the\n"
-		"same kind of information that std::cout << *this gives.\n"
+		"Return the time points and corrections.  \n"
 		"\n"
-		"We return the attitude correction in arcseconds, one row per time\n"
-		"point. The columns are yaw, pitch, and roll. The position correction\n"
-		"is returned in meters, one row per time point. The columns are X, Y, Z\n"
-		"offset. \n"
+		"This is primarily of use for python wrappers, to give access to the same kind of\n"
+		"information that std::cout << *this gives.  \n"
+		"\n"
+		"We return the attitude correction in arcseconds, one row per time point. The\n"
+		"columns are yaw, pitch, and roll. The position correction is returned in meters,\n"
+		"one row per time point. The columns are X, Y, Z offset.  \n"
+		"\n"
 		""},
 	 { "delete_OrbitOffsetCorrection", _wrap_delete_OrbitOffsetCorrection, METH_O, "\n"
+		"delete_OrbitOffsetCorrection(OrbitOffsetCorrection self)\n"
 		"\n"
-		"virtual GeoCal::OrbitOffsetCorrection::~OrbitOffsetCorrection()\n"
 		"GeoCal::OrbitOffsetCorrection::~OrbitOffsetCorrection\n"
 		""},
 	 { "OrbitOffsetCorrection_swigregister", OrbitOffsetCorrection_swigregister, METH_O, NULL},

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _location_to_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _location_to_file:
 _location_to_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _location_to_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,21 +140,21 @@ import geocal_swig.generic_object
 class LocationToFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    A common implementation of MapProjectedMultifile is to have some sort
-    of a look up table that gives the file name for a particular location.
 
-    This class is a thin wrapper around RTree to give a mapping between
-    location and file name. We do this both because RTree's interface is a
-    bit different than how we want to access this, and because we want to
-    abstract out the use of the libsdbx library since this may go away at
-    some point.
+    A common implementation of MapProjectedMultifile is to have some sort of a look
+    up table that gives the file name for a particular location.  
 
-    Note that boost has added a library "geometry" that looks like it
-    also has a R-* tree (as of version 1.47). There is no compelling
-    reason right now to change to using this, but if libsdx ever becomes
-    an issue we can switch to boost.
+    This class is a thin wrapper around RTree to give a mapping between location and
+    file name. We do this both because RTree's interface is a bit different than how
+    we want to access this, and because we want to abstract out the use of the
+    libsdbx library since this may go away at some point.  
 
-    C++ includes: location_to_file.h 
+    Note that boost has added a library "geometry" that looks like it also has a
+    R-* tree (as of version 1.47). There is no compelling reason right now to change
+    to using this, but if libsdx ever becomes an issue we can switch to boost.  
+
+    C++ includes: location_to_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

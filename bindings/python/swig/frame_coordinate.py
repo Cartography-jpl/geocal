@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _frame_coordinate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _frame_coordinate:
 _frame_coordinate.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _frame_coordinate.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,13 +140,15 @@ import geocal_swig.generic_object
 class FrameCoordinate(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is the coordinates of a frame camera.
 
-    We use the same convention that we do for ImageCoordinate, the center
-    of a pixel in the frame camera is at an integer value. So the first
-    pixel goes from frame coordinate (-0.5, -0.5) to (0.5, 0.5).
+    This is the coordinates of a frame camera.  
 
-    C++ includes: frame_coordinate.h 
+    We use the same convention that we do for ImageCoordinate, the center of a pixel
+    in the frame camera is at an integer value. So the first pixel goes from frame
+    coordinate (-0.5, -0.5) to (0.5, 0.5).  
+
+    C++ includes: frame_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,15 +156,16 @@ class FrameCoordinate(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(FrameCoordinate self) -> FrameCoordinate
+        __init__(FrameCoordinate self, double L, double S) -> FrameCoordinate
 
-        GeoCal::FrameCoordinate::FrameCoordinate(double L, double S)
         GeoCal::FrameCoordinate::FrameCoordinate
-        Create a FrameCoordinate with the given coordinates.
+        Create a FrameCoordinate with the given coordinates.  
 
         """
         _frame_coordinate.FrameCoordinate_swiginit(self, _frame_coordinate.new_FrameCoordinate(*args))
-    line = property(_frame_coordinate.FrameCoordinate_line_get, _frame_coordinate.FrameCoordinate_line_set)
-    sample = property(_frame_coordinate.FrameCoordinate_sample_get, _frame_coordinate.FrameCoordinate_sample_set)
+    line = property(_frame_coordinate.FrameCoordinate_line_get, _frame_coordinate.FrameCoordinate_line_set, doc=r"""line : double""")
+    sample = property(_frame_coordinate.FrameCoordinate_sample_get, _frame_coordinate.FrameCoordinate_sample_set, doc=r"""sample : double""")
     __str__ = _swig_new_instance_method(_frame_coordinate.FrameCoordinate___str__)
 
     def __reduce__(self):
@@ -176,9 +182,11 @@ _frame_coordinate.FrameCoordinate_swigregister(FrameCoordinate)
 class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is the coordinates of a frame camera, including derivatives.
 
-    C++ includes: frame_coordinate.h 
+    This is the coordinates of a frame camera, including derivatives.  
+
+    C++ includes: frame_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -186,15 +194,18 @@ class FrameCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(FrameCoordinateWithDerivative self) -> FrameCoordinateWithDerivative
+        __init__(FrameCoordinateWithDerivative self, AutoDerivativeDouble L, AutoDerivativeDouble S) -> FrameCoordinateWithDerivative
+        __init__(FrameCoordinateWithDerivative self, FrameCoordinate F) -> FrameCoordinateWithDerivative
 
-        GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative(const FrameCoordinate &F)
         GeoCal::FrameCoordinateWithDerivative::FrameCoordinateWithDerivative
-        Create FrameCoordinateWithDerivative from FrameCoordinate, so line and sample are constants rather than having a gradient.
+        Create FrameCoordinateWithDerivative from FrameCoordinate, so line and sample
+        are constants rather than having a gradient.  
 
         """
         _frame_coordinate.FrameCoordinateWithDerivative_swiginit(self, _frame_coordinate.new_FrameCoordinateWithDerivative(*args))
-    line = property(_frame_coordinate.FrameCoordinateWithDerivative_line_get, _frame_coordinate.FrameCoordinateWithDerivative_line_set)
-    sample = property(_frame_coordinate.FrameCoordinateWithDerivative_sample_get, _frame_coordinate.FrameCoordinateWithDerivative_sample_set)
+    line = property(_frame_coordinate.FrameCoordinateWithDerivative_line_get, _frame_coordinate.FrameCoordinateWithDerivative_line_set, doc=r"""line : GeoCal::AutoDerivative<(double)>""")
+    sample = property(_frame_coordinate.FrameCoordinateWithDerivative_sample_get, _frame_coordinate.FrameCoordinateWithDerivative_sample_set, doc=r"""sample : GeoCal::AutoDerivative<(double)>""")
     __str__ = _swig_new_instance_method(_frame_coordinate.FrameCoordinateWithDerivative___str__)
     _v_value = _swig_new_instance_method(_frame_coordinate.FrameCoordinateWithDerivative__v_value)
 

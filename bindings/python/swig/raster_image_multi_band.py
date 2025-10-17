@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_image_multi_band.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_image_multi_band:
 _raster_image_multi_band.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_image_multi_band.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,9 +142,11 @@ import geocal_swig.geocal_exception
 class RasterImageMultiBand(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a set of RasterImages, one for each band.
 
-    C++ includes: raster_image_multi_band.h 
+    This is a set of RasterImages, one for each band.  
+
+    C++ includes: raster_image_multi_band.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

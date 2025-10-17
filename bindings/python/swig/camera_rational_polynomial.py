@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _camera_rational_polynomial.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _camera_rational_polynomial:
 _camera_rational_polynomial.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _camera_rational_polynomial.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,13 +144,15 @@ import geocal_swig.with_parameter
 class CameraRationalPolyomial(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    This is a QuaternionCamera where the nonlinearity of the camera is
-    described as a rational polynomial in the line and sample.
 
-    This is the formulation Mike Burl uses in his matlab code, and we want
-    to implement this so we can take his camera models for use in GeoCal.
+    This is a QuaternionCamera where the nonlinearity of the camera is described as
+    a rational polynomial in the line and sample.  
 
-    C++ includes: camera_rational_polynomial.h 
+    This is the formulation Mike Burl uses in his matlab code, and we want to
+    implement this so we can take his camera models for use in GeoCal.  
+
+    C++ includes: camera_rational_polynomial.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,21 +160,19 @@ class CameraRationalPolyomial(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self, Nu, Nv, Xi, U0, V0, Pld_q_c, Kappa, Kappa_inverse):
         r"""
+        __init__(CameraRationalPolyomial self, int Nu, int Nv, double Xi, double U0, double V0, Quaternion_double Pld_q_c, BlitzArray_double_2 Kappa, BlitzArray_double_2 Kappa_inverse) -> CameraRationalPolyomial
 
-        GeoCal::CameraRationalPolyomial::CameraRationalPolyomial(int Nu, int Nv, double Xi, double U0, double V0,
-        boost::math::quaternion< double > Pld_q_c, const blitz::Array< double,
-        2 > &Kappa, const blitz::Array< double, 2 > &Kappa_inverse)
         GeoCal::CameraRationalPolyomial::CameraRationalPolyomial
-        This makes a QuaternionCamera using Mike Burls conventions.
-        He works with (u,v), which is what we call (sample,line) (so
-        reversed). xi is the field angle of a pixel. He doesn't have an
-        explicit focal length (since he works in radians), so be convention we
-        set the focal length to 1 and then xi is what we use for line and
-        sample pitch. The principle point is (V0, U0) He uses the term Pld_q_c
-        for what we call Frame_to_sc_q.
+        This makes a QuaternionCamera using Mike Burls conventions.  
 
-        *** NOTE *** I may have this reversed, if so we might need an inverse
-        in here 
+        He works with (u,v), which is what we call (sample,line) (so reversed). xi is
+        the field angle of a pixel. He doesn't have an explicit focal length (since he
+        works in radians), so be convention we set the focal length to 1 and then xi is
+        what we use for line and sample pitch. The principle point is (V0, U0) He uses
+        the term Pld_q_c for what we call Frame_to_sc_q.  
+
+        *** NOTE *** I may have this reversed, if so we might need an inverse in here  
+
         """
         _camera_rational_polynomial.CameraRationalPolyomial_swiginit(self, _camera_rational_polynomial.new_CameraRationalPolyomial(Nu, Nv, Xi, U0, V0, Pld_q_c, Kappa, Kappa_inverse))
     _v_kappa = _swig_new_instance_method(_camera_rational_polynomial.CameraRationalPolyomial__v_kappa)

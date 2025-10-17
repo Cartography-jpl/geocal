@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _camera_radial_distortion.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _camera_radial_distortion:
 _camera_radial_distortion.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _camera_radial_distortion.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,21 +144,22 @@ import geocal_swig.with_parameter
 class CameraRadialDistortion(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    This is a QuaternionCamera where the nonlinearity of the camera is
-    described by a radial model.
 
-    r^2 = x^2 + y^2 dr/r = k0 + r^2*(k1 + r^2*k2) x_corrected = x -
-    (dr/r)*x y_corrected = y - (dr/r)*y
+    This is a QuaternionCamera where the nonlinearity of the camera is described by
+    a radial model.  
 
-    Note this is similar to but not identical to the Brown-Conrady
-    distortion model,
-    seehttps://en.wikipedia.org/wiki/Distortion_(optics). This is a common
-    used by SPICE camera models, among other uses.
+    r^2 = x^2 + y^2 dr/r = k0 + r^2*(k1 + r^2*k2) x_corrected = x - (dr/r)*x
+    y_corrected = y - (dr/r)*y  
 
-    We currently hardcode this to maximum 3rd order in k, we could easily
-    generalize this if that ends up being useful.
+    Note this is similar to but not identical to the Brown-Conrady distortion model,
+    see https://en.wikipedia.org/wiki/Distortion_(optics). This is a common used by
+    SPICE camera models, among other uses.  
 
-    C++ includes: camera_radial_distortion.h 
+    We currently hardcode this to maximum 3rd order in k, we could easily generalize
+    this if that ends up being useful.  
+
+    C++ includes: camera_radial_distortion.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -163,21 +167,15 @@ class CameraRadialDistortion(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self, *args):
         r"""
+        __init__(CameraRadialDistortion self, Quaternion_double Frame_to_sc_q, BlitzArray_double_1 K_distort, double Number_line, double Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, GeoCal::QuaternionCamera::FrameConvention Frame_convention=LINE_IS_X, GeoCal::QuaternionCamera::FrameDirection Line_direction=INCREASE_IS_POSITIVE, GeoCal::QuaternionCamera::FrameDirection Sample_direction=INCREASE_IS_POSITIVE) -> CameraRadialDistortion
+        __init__(CameraRadialDistortion self, Quaternion_double Frame_to_sc_q, BlitzArray_double_1 K_distort, double Number_line, double Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, GeoCal::QuaternionCamera::FrameConvention Frame_convention, GeoCal::QuaternionCamera::FrameDirection Line_direction, GeoCal::QuaternionCamera::FrameDirection Sample_direction, BlitzArray_bool_1 Parameter_mask) -> CameraRadialDistortion
 
-        GeoCal::CameraRadialDistortion::CameraRadialDistortion(boost::math::quaternion< double > Frame_to_sc_q, const blitz::Array<
-        double, 1 > &K_distort, double Number_line, double Number_sample,
-        double Line_pitch, double Sample_pitch, double Focal_length, const
-        FrameCoordinate &Principal_point, QuaternionCamera::FrameConvention
-        Frame_convention=QuaternionCamera::LINE_IS_X,
-        QuaternionCamera::FrameDirection
-        Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
-        QuaternionCamera::FrameDirection
-        Sample_direction=QuaternionCamera::INCREASE_IS_POSITIVE)
         GeoCal::CameraRadialDistortion::CameraRadialDistortion
-        Create a QuaternionCamera with a radial distortion model given by
-        kdistort.
-        We currently limit kdistort.rows() <= 4, although we could relax that
-        if it ends up being useful. 
+        Create a QuaternionCamera with a radial distortion model given by kdistort.  
+
+        We currently limit kdistort.rows() <= 4, although we could relax that if it ends
+        up being useful.  
+
         """
         _camera_radial_distortion.CameraRadialDistortion_swiginit(self, _camera_radial_distortion.new_CameraRadialDistortion(*args))
     _v_k_distort = _swig_new_instance_method(_camera_radial_distortion.CameraRadialDistortion__v_k_distort)

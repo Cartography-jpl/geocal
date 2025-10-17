@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _mspi_paraxial_transform.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _mspi_paraxial_transform:
 _mspi_paraxial_transform.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _mspi_paraxial_transform.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,20 +140,22 @@ import geocal_swig.generic_object
 class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles the non-linearity of MSPI camera optics.
 
-    This goes to and from real frame camera coordinate (i.e. x and y of
-    the CCD) and the location we'd get for a pinhole camera with no non-
-    linearity (the paraxial approximation).
+    This handles the non-linearity of MSPI camera optics.  
 
-    This transformation is a polynomial expansion going to or from the
-    paraxial coordinate system. It is described in detail in [1].
+    This goes to and from real frame camera coordinate (i.e. x and y of the CCD) and
+    the location we'd get for a pinhole camera with no non-linearity (the paraxial
+    approximation).  
+
+    This transformation is a polynomial expansion going to or from the paraxial
+    coordinate system. It is described in detail in [1].  
 
     References: [1] Veljko Jovanovic, "Algorithm Theoretical Basis and
     processing software design consideration for GroundMSPI L1B2
-    process", Rev A.1, April 4, 2012.
+    process", Rev A.1, April 4, 2012.  
 
-    C++ includes: mspi_paraxial_transform.h 
+    C++ includes: mspi_paraxial_transform.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -158,10 +163,10 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Fname):
         r"""
+        __init__(MspiParaxialTransform self, std::string const & Fname) -> MspiParaxialTransform
 
-        MspiParaxialTransform::MspiParaxialTransform(const std::string &File_name)
         GeoCal::MspiParaxialTransform::MspiParaxialTransform
-        Constructor that reads the given file for the transform coefficients.
+        Constructor that reads the given file for the transform coefficients.  
 
         """
         _mspi_paraxial_transform.MspiParaxialTransform_swiginit(self, _mspi_paraxial_transform.new_MspiParaxialTransform(Fname))

@@ -8730,108 +8730,112 @@ SWIGINTERN PyObject *SpicePlanetOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), P
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_SpicePlanetOrbit", _wrap_new_SpicePlanetOrbit, METH_VARARGS, "\n"
+		"SpicePlanetOrbit(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, int Naif_id, std::string const & Abcorr=\"NONE\")\n"
+		"SpicePlanetOrbit(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, vector_string Kernel_list, int Naif_id, std::string const & Abcorr=\"NONE\")\n"
+		"SpicePlanetOrbit(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, SpiceKernelList Kernel_list, int Naif_id, std::string const & Abcorr=\"NONE\")\n"
 		"\n"
-		"SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string\n"
-		"&Spacecraft_reference_frame_name, int Naif_id, const std::string\n"
-		"&Abcorr=\"NONE\")\n"
 		"GeoCal::SpicePlanetOrbit::SpicePlanetOrbit\n"
-		"Create an orbit that has position information for the Target_name\n"
-		"(e.g., \"GLL\", \"MRO\"), and pointing information in the\n"
-		"Spacecraft_reference_frame_name (e.g., \"GLL_SCAN_PLANE\",\n"
-		"\"MRO_CTX\").\n"
-		"Note that the Target_name is of a body (e.g., something we have a spk\n"
-		"kernel for), while the Spacecraft_reference_frame_name is for a frame\n"
-		"(e.g., something we have a fk kernel for). In addition to the frame\n"
-		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
-		"the orientation of the frame with the target. \n"
+		"Create an orbit that has position information for the Target_name (e.g.,\n"
+		"\"GLL\", \"MRO\"), and pointing information in the\n"
+		"Spacecraft_reference_frame_name (e.g., \"GLL_SCAN_PLANE\", \"MRO_CTX\").  \n"
+		"\n"
+		"Note that the Target_name is of a body (e.g., something we have a spk kernel\n"
+		"for), while the Spacecraft_reference_frame_name is for a frame (e.g., something\n"
+		"we have a fk kernel for). In addition to the frame definition, you'll generally\n"
+		"need a C kernel file (ck kernel) giving the orientation of the frame with the\n"
+		"target.  \n"
+		"\n"
 		""},
 	 { "SpicePlanetOrbit_orbit_data", _wrap_SpicePlanetOrbit_orbit_data, METH_VARARGS, "\n"
+		"SpicePlanetOrbit_orbit_data(SpicePlanetOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"SpicePlanetOrbit_orbit_data(SpicePlanetOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > SpicePlanetOrbit::orbit_data(Time T) const\n"
 		"GeoCal::SpicePlanetOrbit::orbit_data\n"
 		""},
 	 { "SpicePlanetOrbit_set_min_time", _wrap_SpicePlanetOrbit_set_min_time, METH_VARARGS, "\n"
+		"SpicePlanetOrbit_set_min_time(SpicePlanetOrbit self, Time Tmin)\n"
 		"\n"
-		"void GeoCal::SpicePlanetOrbit::set_min_time(const Time &Tmin)\n"
 		"GeoCal::SpicePlanetOrbit::set_min_time\n"
-		"Set minimum time we want orbit for (important because kernels only\n"
-		"cover a particular time range).\n"
+		"Set minimum time we want orbit for (important because kernels only cover a\n"
+		"particular time range).  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit_set_max_time", _wrap_SpicePlanetOrbit_set_max_time, METH_VARARGS, "\n"
+		"SpicePlanetOrbit_set_max_time(SpicePlanetOrbit self, Time Tmax)\n"
 		"\n"
-		"void GeoCal::SpicePlanetOrbit::set_max_time(const Time &Tmax)\n"
 		"GeoCal::SpicePlanetOrbit::set_max_time\n"
-		"Set maximum time we want orbit for (important because kernels only\n"
-		"cover a particular time range).\n"
+		"Set maximum time we want orbit for (important because kernels only cover a\n"
+		"particular time range).  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit_surface_intersect", _wrap_SpicePlanetOrbit_surface_intersect, METH_VARARGS, "\n"
+		"SpicePlanetOrbit_surface_intersect(SpicePlanetOrbit self, Time T, ScLookVector Slv, std::string const & Corr_type=\"CN+S\", std::string const & Method=\"Ellipsoid\")\n"
 		"\n"
-		"void SpicePlanetOrbit::surface_intersect(const Time &T, const ScLookVector &Slv, boost::shared_ptr<\n"
-		"GroundCoordinate > &Gc, double &Light_time, const std::string\n"
-		"&Corr_type=\"CN+S\", const std::string &Method=\"Ellipsoid\") const\n"
 		"GeoCal::SpicePlanetOrbit::surface_intersect\n"
-		"Return the intersection with the surface ellipsoid, as sincpt_c\n"
-		"calculates it.\n"
-		"Also return Light_time. \n"
+		"Return the intersection with the surface ellipsoid, as sincpt_c calculates it.  \n"
+		"\n"
+		"Also return Light_time.  \n"
+		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_kernel_list", _wrap_SpicePlanetOrbit__v_kernel_list, METH_O, "\n"
+		"SpicePlanetOrbit__v_kernel_list(SpicePlanetOrbit self) -> SpiceKernelList\n"
 		"\n"
-		"const SpiceKernelList & GeoCal::SpicePlanetOrbit::kernel_list() const\n"
 		"GeoCal::SpicePlanetOrbit::kernel_list\n"
-		"List of kernels that should be loaded with this class.\n"
+		"List of kernels that should be loaded with this class.  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_naif_id", _wrap_SpicePlanetOrbit__v_naif_id, METH_O, "\n"
+		"SpicePlanetOrbit__v_naif_id(SpicePlanetOrbit self) -> int\n"
 		"\n"
-		"int GeoCal::SpicePlanetOrbit::naif_id() const\n"
 		"GeoCal::SpicePlanetOrbit::naif_id\n"
-		"Body NAIF id.\n"
+		"Body NAIF id.  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_target_name", _wrap_SpicePlanetOrbit__v_target_name, METH_O, "\n"
+		"SpicePlanetOrbit__v_target_name(SpicePlanetOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::SpicePlanetOrbit::target_name() const\n"
 		"GeoCal::SpicePlanetOrbit::target_name\n"
-		"Target name of spacecraft (e.g., \"GLL\", \"MRO\")\n"
+		"Target name of spacecraft (e.g., \"GLL\", \"MRO\")  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_spacecraft_reference_frame_name", _wrap_SpicePlanetOrbit__v_spacecraft_reference_frame_name, METH_O, "\n"
+		"SpicePlanetOrbit__v_spacecraft_reference_frame_name(SpicePlanetOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::SpicePlanetOrbit::spacecraft_reference_frame_name() const\n"
 		"GeoCal::SpicePlanetOrbit::spacecraft_reference_frame_name\n"
-		"Name of spacecraft reference frame (e.g., \"GLL_SCAN_PLANE\",\n"
-		"\"MRO_CTX\")\n"
+		"Name of spacecraft reference frame (e.g., \"GLL_SCAN_PLANE\", \"MRO_CTX\")  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_aberration_correction", _wrap_SpicePlanetOrbit__v_aberration_correction, METH_VARARGS, "\n"
+		"SpicePlanetOrbit__v_aberration_correction(SpicePlanetOrbit self) -> std::string\n"
+		"SpicePlanetOrbit__v_aberration_correction(SpicePlanetOrbit self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::SpicePlanetOrbit::aberration_correction(const std::string &Abcorr)\n"
 		"GeoCal::SpicePlanetOrbit::aberration_correction\n"
 		""},
 	 { "delete_SpicePlanetOrbit", _wrap_delete_SpicePlanetOrbit, METH_O, "\n"
+		"delete_SpicePlanetOrbit(SpicePlanetOrbit self)\n"
 		"\n"
-		"virtual GeoCal::SpicePlanetOrbit::~SpicePlanetOrbit()\n"
 		"GeoCal::SpicePlanetOrbit::~SpicePlanetOrbit\n"
 		""},
 	 { "SpicePlanetOrbit_swigregister", SpicePlanetOrbit_swigregister, METH_O, NULL},
@@ -8842,108 +8846,112 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_SpicePlanetOrbit", _wrap_new_SpicePlanetOrbit, METH_VARARGS, "\n"
+		"SpicePlanetOrbit(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, int Naif_id, std::string const & Abcorr=\"NONE\")\n"
+		"SpicePlanetOrbit(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, vector_string Kernel_list, int Naif_id, std::string const & Abcorr=\"NONE\")\n"
+		"SpicePlanetOrbit(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, SpiceKernelList Kernel_list, int Naif_id, std::string const & Abcorr=\"NONE\")\n"
 		"\n"
-		"SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string\n"
-		"&Spacecraft_reference_frame_name, int Naif_id, const std::string\n"
-		"&Abcorr=\"NONE\")\n"
 		"GeoCal::SpicePlanetOrbit::SpicePlanetOrbit\n"
-		"Create an orbit that has position information for the Target_name\n"
-		"(e.g., \"GLL\", \"MRO\"), and pointing information in the\n"
-		"Spacecraft_reference_frame_name (e.g., \"GLL_SCAN_PLANE\",\n"
-		"\"MRO_CTX\").\n"
-		"Note that the Target_name is of a body (e.g., something we have a spk\n"
-		"kernel for), while the Spacecraft_reference_frame_name is for a frame\n"
-		"(e.g., something we have a fk kernel for). In addition to the frame\n"
-		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
-		"the orientation of the frame with the target. \n"
+		"Create an orbit that has position information for the Target_name (e.g.,\n"
+		"\"GLL\", \"MRO\"), and pointing information in the\n"
+		"Spacecraft_reference_frame_name (e.g., \"GLL_SCAN_PLANE\", \"MRO_CTX\").  \n"
+		"\n"
+		"Note that the Target_name is of a body (e.g., something we have a spk kernel\n"
+		"for), while the Spacecraft_reference_frame_name is for a frame (e.g., something\n"
+		"we have a fk kernel for). In addition to the frame definition, you'll generally\n"
+		"need a C kernel file (ck kernel) giving the orientation of the frame with the\n"
+		"target.  \n"
+		"\n"
 		""},
 	 { "SpicePlanetOrbit_orbit_data", _wrap_SpicePlanetOrbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(SpicePlanetOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(SpicePlanetOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > SpicePlanetOrbit::orbit_data(Time T) const\n"
 		"GeoCal::SpicePlanetOrbit::orbit_data\n"
 		""},
 	 { "SpicePlanetOrbit_set_min_time", _wrap_SpicePlanetOrbit_set_min_time, METH_VARARGS, "\n"
+		"set_min_time(SpicePlanetOrbit self, Time Tmin)\n"
 		"\n"
-		"void GeoCal::SpicePlanetOrbit::set_min_time(const Time &Tmin)\n"
 		"GeoCal::SpicePlanetOrbit::set_min_time\n"
-		"Set minimum time we want orbit for (important because kernels only\n"
-		"cover a particular time range).\n"
+		"Set minimum time we want orbit for (important because kernels only cover a\n"
+		"particular time range).  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit_set_max_time", _wrap_SpicePlanetOrbit_set_max_time, METH_VARARGS, "\n"
+		"set_max_time(SpicePlanetOrbit self, Time Tmax)\n"
 		"\n"
-		"void GeoCal::SpicePlanetOrbit::set_max_time(const Time &Tmax)\n"
 		"GeoCal::SpicePlanetOrbit::set_max_time\n"
-		"Set maximum time we want orbit for (important because kernels only\n"
-		"cover a particular time range).\n"
+		"Set maximum time we want orbit for (important because kernels only cover a\n"
+		"particular time range).  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit_surface_intersect", _wrap_SpicePlanetOrbit_surface_intersect, METH_VARARGS, "\n"
+		"surface_intersect(SpicePlanetOrbit self, Time T, ScLookVector Slv, std::string const & Corr_type=\"CN+S\", std::string const & Method=\"Ellipsoid\")\n"
 		"\n"
-		"void SpicePlanetOrbit::surface_intersect(const Time &T, const ScLookVector &Slv, boost::shared_ptr<\n"
-		"GroundCoordinate > &Gc, double &Light_time, const std::string\n"
-		"&Corr_type=\"CN+S\", const std::string &Method=\"Ellipsoid\") const\n"
 		"GeoCal::SpicePlanetOrbit::surface_intersect\n"
-		"Return the intersection with the surface ellipsoid, as sincpt_c\n"
-		"calculates it.\n"
-		"Also return Light_time. \n"
+		"Return the intersection with the surface ellipsoid, as sincpt_c calculates it.  \n"
+		"\n"
+		"Also return Light_time.  \n"
+		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_kernel_list", _wrap_SpicePlanetOrbit__v_kernel_list, METH_O, "\n"
+		"_v_kernel_list(SpicePlanetOrbit self) -> SpiceKernelList\n"
 		"\n"
-		"const SpiceKernelList & GeoCal::SpicePlanetOrbit::kernel_list() const\n"
 		"GeoCal::SpicePlanetOrbit::kernel_list\n"
-		"List of kernels that should be loaded with this class.\n"
+		"List of kernels that should be loaded with this class.  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_naif_id", _wrap_SpicePlanetOrbit__v_naif_id, METH_O, "\n"
+		"_v_naif_id(SpicePlanetOrbit self) -> int\n"
 		"\n"
-		"int GeoCal::SpicePlanetOrbit::naif_id() const\n"
 		"GeoCal::SpicePlanetOrbit::naif_id\n"
-		"Body NAIF id.\n"
+		"Body NAIF id.  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_target_name", _wrap_SpicePlanetOrbit__v_target_name, METH_O, "\n"
+		"_v_target_name(SpicePlanetOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::SpicePlanetOrbit::target_name() const\n"
 		"GeoCal::SpicePlanetOrbit::target_name\n"
-		"Target name of spacecraft (e.g., \"GLL\", \"MRO\")\n"
+		"Target name of spacecraft (e.g., \"GLL\", \"MRO\")  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_spacecraft_reference_frame_name", _wrap_SpicePlanetOrbit__v_spacecraft_reference_frame_name, METH_O, "\n"
+		"_v_spacecraft_reference_frame_name(SpicePlanetOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::SpicePlanetOrbit::spacecraft_reference_frame_name() const\n"
 		"GeoCal::SpicePlanetOrbit::spacecraft_reference_frame_name\n"
-		"Name of spacecraft reference frame (e.g., \"GLL_SCAN_PLANE\",\n"
-		"\"MRO_CTX\")\n"
+		"Name of spacecraft reference frame (e.g., \"GLL_SCAN_PLANE\", \"MRO_CTX\")  \n"
 		"\n"
 		""},
 	 { "SpicePlanetOrbit__v_aberration_correction", _wrap_SpicePlanetOrbit__v_aberration_correction, METH_VARARGS, "\n"
+		"_v_aberration_correction(SpicePlanetOrbit self) -> std::string\n"
+		"_v_aberration_correction(SpicePlanetOrbit self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::SpicePlanetOrbit::aberration_correction(const std::string &Abcorr)\n"
 		"GeoCal::SpicePlanetOrbit::aberration_correction\n"
 		""},
 	 { "delete_SpicePlanetOrbit", _wrap_delete_SpicePlanetOrbit, METH_O, "\n"
+		"delete_SpicePlanetOrbit(SpicePlanetOrbit self)\n"
 		"\n"
-		"virtual GeoCal::SpicePlanetOrbit::~SpicePlanetOrbit()\n"
 		"GeoCal::SpicePlanetOrbit::~SpicePlanetOrbit\n"
 		""},
 	 { "SpicePlanetOrbit_swigregister", SpicePlanetOrbit_swigregister, METH_O, NULL},

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _image_to_image_match.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _image_to_image_match:
 _image_to_image_match.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _image_to_image_match.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,13 +140,15 @@ import geocal_swig.generic_object
 class ImageToImageMatch(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class find matches between two images.
 
-    This is similar to the class ImageMatcher, but in addition to doing
-    the matching it also keeps track of which two images we are matching,
-    and how we do the initial guess for the location in the second image.
+    This class find matches between two images.  
 
-    C++ includes: image_to_image_match.h 
+    This is similar to the class ImageMatcher, but in addition to doing the matching
+    it also keeps track of which two images we are matching, and how we do the
+    initial guess for the location in the second image.  
+
+    C++ includes: image_to_image_match.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

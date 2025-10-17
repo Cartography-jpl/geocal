@@ -90,6 +90,7 @@ _raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _raster_image.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _raster_image.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -139,11 +140,13 @@ import geocal_swig.geocal_exception
 class RasterImageTileIterator(geocal_swig.generic_object.GenericObject):
     r"""
 
-    It can be useful to step through a Raster Image in tiles.
 
-    This is a helper class for RasterImage to do this.
+    It can be useful to step through a Raster Image in tiles.  
 
-    C++ includes: raster_image.h 
+    This is a helper class for RasterImage to do this.  
+
+    C++ includes: raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,11 +154,11 @@ class RasterImageTileIterator(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Ri):
         r"""
+        __init__(RasterImageTileIterator self, RasterImage Ri) -> RasterImageTileIterator
 
-        RasterImageTileIterator::RasterImageTileIterator(const RasterImage &Ri, int Number_tile_line, int Number_tile_sample)
         GeoCal::RasterImageTileIterator::RasterImageTileIterator
-        Constructor, where we supply a tile size to use (which may be
-        different than Ri's tile size).
+        Constructor, where we supply a tile size to use (which may be different than
+        Ri's tile size).  
 
         """
         _raster_image.RasterImageTileIterator_swiginit(self, _raster_image.new_RasterImageTileIterator(Ri))
@@ -210,39 +213,37 @@ _raster_image.RasterImageTileIterator_swigregister(RasterImageTileIterator)
 class RasterImage(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a general image class.
 
-    Conceptually, an image is just a two dimensional array of integers,
-    although it is not necessarily implemented this way. This is an
-    abstract class, containing behavior common to all images. It handles
-    keeping track of the size of the image, but all other behaviour needs
-    to be defined by subclasses.
+    This is a general image class.  
 
-    It is common for Raster data to be stored on disk as a series of
-    tiles. It can be significantly more efficient to access and write the
-    data in tiles. To support this, we provide a "preferred" tile size
-    given by number_tile_line() and number_tile_sample(). Classes using a
-    RasterImage are free to ignore this tiling - data can be read and
-    written in any order desired, and the only impact of tiles is in the
-    performance.
+    Conceptually, an image is just a two dimensional array of integers, although it
+    is not necessarily implemented this way. This is an abstract class, containing
+    behavior common to all images. It handles keeping track of the size of the
+    image, but all other behaviour needs to be defined by subclasses.  
 
-    It is very common to want to step through a file "efficiently".
-    There is a macro "RASTER_FOREACH(Img, IND1, IND2)" that steps
-    through a given raster image, setting the index variable IND1 and IND2
-    to the line and samples. This steps through by tiles, so it avoids
-    reading the same tile multiple times. If you need to step through by
-    tiles (rather than looping through all line and samples), the class
-    RasterImageTileIterator can be used.
+    It is common for Raster data to be stored on disk as a series of tiles. It can
+    be significantly more efficient to access and write the data in tiles. To
+    support this, we provide a "preferred" tile size given by number_tile_line()
+    and number_tile_sample(). Classes using a RasterImage are free to ignore this
+    tiling - data can be read and written in any order desired, and the only impact
+    of tiles is in the performance.  
 
-    The default tile size is the entire image, derived classes can supply
-    other values if desired.
+    It is very common to want to step through a file "efficiently". There is a
+    macro "RASTER_FOREACH(Img, IND1, IND2)" that steps through a given raster
+    image, setting the index variable IND1 and IND2 to the line and samples. This
+    steps through by tiles, so it avoids reading the same tile multiple times. If
+    you need to step through by tiles (rather than looping through all line and
+    samples), the class RasterImageTileIterator can be used.  
 
-    A RasterImage may or may not have a Rpc, Rsm, or MapInfo associated
-    with it. You can query has_rpc(), has_rsm(), and has_mapinfo() to find
-    out if it has this metadata, and if it does you can access this by
-    rpc(), rsm() and map_info().
+    The default tile size is the entire image, derived classes can supply other
+    values if desired.  
 
-    C++ includes: raster_image.h 
+    A RasterImage may or may not have a Rpc, Rsm, or MapInfo associated with it. You
+    can query has_rpc(), has_rsm(), and has_mapinfo() to find out if it has this
+    metadata, and if it does you can access this by rpc(), rsm() and map_info().  
+
+    C++ includes: raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -346,12 +347,14 @@ _raster_image.RasterImage_swigregister(RasterImage)
 class ArrayRasterImage(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a array of Raster Image.
 
-    This isn't much more than a std::vector, but we do have added support
-    in python of being able to serialize this.
+    This is a array of Raster Image.  
 
-    C++ includes: raster_image.h 
+    This isn't much more than a std::vector, but we do have added support in python
+    of being able to serialize this.  
+
+    C++ includes: raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -359,10 +362,10 @@ class ArrayRasterImage(geocal_swig.generic_object.GenericObject):
 
     def __init__(self):
         r"""
+        __init__(ArrayRasterImage self) -> ArrayRasterImage
 
-        GeoCal::ArrayRasterImage::ArrayRasterImage()
         GeoCal::ArrayRasterImage::ArrayRasterImage
-        Create an empty array.
+        Create an empty array.  
 
         """
         _raster_image.ArrayRasterImage_swiginit(self, _raster_image.new_ArrayRasterImage())
@@ -396,6 +399,8 @@ _raster_image.ArrayRasterImage_swigregister(ArrayRasterImage)
 copy_no_fill = _raster_image.copy_no_fill
 fill_image = _raster_image.fill_image
 class Vector_RasterImage(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::RasterImage > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_raster_image.Vector_RasterImage_iterator)
@@ -425,6 +430,12 @@ class Vector_RasterImage(object):
     erase = _swig_new_instance_method(_raster_image.Vector_RasterImage_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_RasterImage self) -> Vector_RasterImage
+        __init__(Vector_RasterImage self, Vector_RasterImage other) -> Vector_RasterImage
+        __init__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type size) -> Vector_RasterImage
+        __init__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type size, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & value) -> Vector_RasterImage
+        """
         _raster_image.Vector_RasterImage_swiginit(self, _raster_image.new_Vector_RasterImage(*args))
     push_back = _swig_new_instance_method(_raster_image.Vector_RasterImage_push_back)
     front = _swig_new_instance_method(_raster_image.Vector_RasterImage_front)

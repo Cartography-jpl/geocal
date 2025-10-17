@@ -10862,191 +10862,202 @@ SWIGINTERN PyObject *Ipi_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Ipi", _wrap_new_Ipi, METH_VARARGS, "\n"
+		"Ipi(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::Camera > const & Cam, int Band, Time Tmin, Time Tmax, boost::shared_ptr< GeoCal::TimeTable > const & Tt=boost::shared_ptr< GeoCal::TimeTable >(), boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >(), double Local_time_window_size=5.0, double Root_min_separation=30.0, double Time_tolerance=1e-6, double Max_frame_extend=1000)\n"
 		"\n"
-		"Ipi::Ipi(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"Camera > &Cam, int Band, Time Tmin, Time Tmax, const\n"
-		"boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),\n"
-		"const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<\n"
-		"Refraction >(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >(), double\n"
-		"Local_time_window_size=5.0, double Root_min_separation=30.0, double\n"
-		"Time_tolerance=1e-6, double Max_frame_extend=1000)\n"
 		"GeoCal::Ipi::Ipi\n"
-		"Constructor.\n"
-		"If you only want to get the Time from the Ipi and not ImageCoordinate,\n"
-		"it is ok for Tt to be null.\n"
+		"Constructor.  \n"
 		"\n"
-		"We find solutions to the Collinearity equations over the full time\n"
-		"range Tmin to Tmax. However, as a performance enhancement we first\n"
-		"look around the given Local_time_window_size in seconds around the\n"
-		"solution from the last call to time() or image_coordinate(). We look\n"
-		"for all solutions that are Root_min_separation apart. We find time\n"
-		"with a accuracy given by Time_tolerance. \n"
+		"If you only want to get the Time from the Ipi and not ImageCoordinate, it is ok\n"
+		"for Tt to be null.  \n"
+		"\n"
+		"We find solutions to the Collinearity equations over the full time range Tmin to\n"
+		"Tmax. However, as a performance enhancement we first look around the given\n"
+		"Local_time_window_size in seconds around the solution from the last call to\n"
+		"time() or image_coordinate(). We look for all solutions that are\n"
+		"Root_min_separation apart. We find time with a accuracy given by Time_tolerance.  \n"
+		"\n"
 		""},
 	 { "Ipi_image_coordinate", _wrap_Ipi_image_coordinate, METH_VARARGS, "\n"
+		"Ipi_image_coordinate(Ipi self, GroundCoordinate Gp)\n"
 		"\n"
-		"void Ipi::image_coordinate(const GroundCoordinate &Gp, ImageCoordinate &Ic, bool &Success) const\n"
 		"GeoCal::Ipi::image_coordinate\n"
-		"Look for the image location that a point is seen.\n"
-		"Note that unlike time, if a point is seen only outside of the sample\n"
-		"range of the image then we consider the Ipi a failure. If Success is\n"
-		"true, then Ic will have a line and sample number inside of the image\n"
-		"given by the Camera and TimeTable. \n"
+		"Look for the image location that a point is seen.  \n"
+		"\n"
+		"Note that unlike time, if a point is seen only outside of the sample range of\n"
+		"the image then we consider the Ipi a failure. If Success is true, then Ic will\n"
+		"have a line and sample number inside of the image given by the Camera and\n"
+		"TimeTable.  \n"
+		"\n"
 		""},
 	 { "Ipi_image_coordinate_with_derivative", _wrap_Ipi_image_coordinate_with_derivative, METH_VARARGS, "\n"
+		"Ipi_image_coordinate_with_derivative(Ipi self, GroundCoordinate Gp, ImageCoordinateWithDerivative arg3)\n"
+		"Ipi_image_coordinate_with_derivative(Ipi self, GroundCoordinate Gp, BoostArrayAutoDerivativeDouble_3 Gp_with_der, ImageCoordinateWithDerivative arg4)\n"
 		"\n"
-		"void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
-		"&Success) const\n"
 		"GeoCal::Ipi::image_coordinate_with_derivative\n"
 		""},
 	 { "Ipi_image_coordinate_with_derivative_extended", _wrap_Ipi_image_coordinate_with_derivative_extended, METH_VARARGS, "\n"
+		"Ipi_image_coordinate_with_derivative_extended(Ipi self, GroundCoordinate Gp, BoostArrayAutoDerivativeDouble_3 Gp_with_der, ImageCoordinateWithDerivative arg4)\n"
+		"Ipi_image_coordinate_with_derivative_extended(Ipi self, GroundCoordinate Gp, ImageCoordinateWithDerivative arg3)\n"
 		"\n"
-		"void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
-		"&Success) const\n"
 		"GeoCal::Ipi::image_coordinate_with_derivative_extended\n"
 		""},
 	 { "Ipi_time", _wrap_Ipi_time, METH_VARARGS, "\n"
+		"Ipi_time(Ipi self, GroundCoordinate Gp)\n"
 		"\n"
-		"void Ipi::time(const GroundCoordinate &Gp, Time &Tres, FrameCoordinate &Fres, bool\n"
-		"&Success) const\n"
 		"GeoCal::Ipi::time\n"
-		"Look for solution for when the GroundCoordinate Gp is seen.\n"
-		"If we don't find a solution, then Success will be false.\n"
+		"Look for solution for when the GroundCoordinate Gp is seen.  \n"
 		"\n"
-		"Note that we may return a solution where Fres has a sample number < 0\n"
-		"or > cam.number_sample(). This means that a point is not actually seen\n"
-		"in the image, but would be if we had an infinite extent camera. Often\n"
-		"this is useful information, however depending on the application you\n"
-		"may want to reject points with Fres outside of the image range.\n"
+		"If we don't find a solution, then Success will be false.  \n"
 		"\n"
-		"If it is more useful to you, image_coordinate has the opposite\n"
-		"behavior, it rejects any points that are outside of the actual image.\n"
+		"Note that we may return a solution where Fres has a sample number < 0 or >\n"
+		"cam.number_sample(). This means that a point is not actually seen in the image,\n"
+		"but would be if we had an infinite extent camera. Often this is useful\n"
+		"information, however depending on the application you may want to reject points\n"
+		"with Fres outside of the image range.  \n"
+		"\n"
+		"If it is more useful to you, image_coordinate has the opposite behavior, it\n"
+		"rejects any points that are outside of the actual image.  \n"
 		"\n"
 		""},
 	 { "Ipi_time_with_derivative", _wrap_Ipi_time_with_derivative, METH_VARARGS, "\n"
+		"Ipi_time_with_derivative(Ipi self, GroundCoordinate Gp)\n"
+		"Ipi_time_with_derivative(Ipi self, GroundCoordinate Gp, BoostArrayAutoDerivativeDouble_3 Gp_with_der)\n"
 		"\n"
-		"void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,\n"
-		"FrameCoordinateWithDerivative &Fres, bool &Success) const\n"
 		"GeoCal::Ipi::time_with_derivative\n"
 		""},
 	 { "Ipi_footprint", _wrap_Ipi_footprint, METH_VARARGS, "\n"
+		"Ipi_footprint(Ipi self, Dem D) -> Vector_GroundCoordinate\n"
 		"\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > Ipi::footprint(const Dem &D) const\n"
 		"GeoCal::Ipi::footprint\n"
-		"Return the footprint of the data on the ground.\n"
-		"This is just the footprint of the orbit data at the start and end of\n"
-		"the time range. \n"
+		"Return the footprint of the data on the ground.  \n"
+		"\n"
+		"This is just the footprint of the orbit data at the start and end of the time\n"
+		"range.  \n"
+		"\n"
 		""},
 	 { "Ipi__v_resolution_meter", _wrap_Ipi__v_resolution_meter, METH_O, "\n"
+		"Ipi__v_resolution_meter(Ipi self) -> double\n"
 		"\n"
-		"double Ipi::resolution_meter() const\n"
 		"GeoCal::Ipi::resolution_meter\n"
-		"Give the approximate ground resolution in meters.\n"
-		"This is for the center pixel in the area covered by the Ipi. \n"
-		""},
-	 { "Ipi___str__", _wrap_Ipi___str__, METH_O, NULL},
-	 { "Ipi__v_time_acquisition_adjustment", _wrap_Ipi__v_time_acquisition_adjustment, METH_VARARGS, "\n"
+		"Give the approximate ground resolution in meters.  \n"
 		"\n"
-		"void GeoCal::Ipi::time_acquisition_adjustment(bool V)\n"
+		"This is for the center pixel in the area covered by the Ipi.  \n"
+		"\n"
+		""},
+	 { "Ipi___str__", _wrap_Ipi___str__, METH_O, "Ipi___str__(Ipi self) -> std::string"},
+	 { "Ipi__v_time_acquisition_adjustment", _wrap_Ipi__v_time_acquisition_adjustment, METH_VARARGS, "\n"
+		"Ipi__v_time_acquisition_adjustment(Ipi self) -> bool\n"
+		"Ipi__v_time_acquisition_adjustment(Ipi self, bool const & V)\n"
+		"\n"
 		"GeoCal::Ipi::time_acquisition_adjustment\n"
 		""},
 	 { "Ipi__v_orbit", _wrap_Ipi__v_orbit, METH_VARARGS, "\n"
+		"Ipi__v_orbit(Ipi self) -> boost::shared_ptr< GeoCal::Orbit >\n"
+		"Ipi__v_orbit(Ipi self, boost::shared_ptr< GeoCal::Orbit > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"GeoCal::Ipi::orbit\n"
 		""},
 	 { "Ipi__v_camera", _wrap_Ipi__v_camera, METH_VARARGS, "\n"
+		"Ipi__v_camera(Ipi self) -> boost::shared_ptr< GeoCal::Camera >\n"
+		"Ipi__v_camera(Ipi self, boost::shared_ptr< GeoCal::Camera > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::camera(const boost::shared_ptr< Camera > &Cam)\n"
 		"GeoCal::Ipi::camera\n"
 		""},
 	 { "Ipi__v_time_table", _wrap_Ipi__v_time_table, METH_VARARGS, "\n"
+		"Ipi__v_time_table(Ipi self) -> boost::shared_ptr< GeoCal::TimeTable >\n"
+		"Ipi__v_time_table(Ipi self, boost::shared_ptr< GeoCal::TimeTable > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::time_table(const boost::shared_ptr< TimeTable > &Tt)\n"
 		"GeoCal::Ipi::time_table\n"
 		""},
 	 { "Ipi__v_refraction", _wrap_Ipi__v_refraction, METH_VARARGS, "\n"
+		"Ipi__v_refraction(Ipi self) -> boost::shared_ptr< GeoCal::Refraction >\n"
+		"Ipi__v_refraction(Ipi self, boost::shared_ptr< GeoCal::Refraction > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::refraction(const boost::shared_ptr< Refraction > &Ref)\n"
 		"GeoCal::Ipi::refraction\n"
 		""},
 	 { "Ipi__v_velocity_aberration", _wrap_Ipi__v_velocity_aberration, METH_VARARGS, "\n"
+		"Ipi__v_velocity_aberration(Ipi self) -> boost::shared_ptr< GeoCal::VelocityAberration >\n"
+		"Ipi__v_velocity_aberration(Ipi self, boost::shared_ptr< GeoCal::VelocityAberration > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::velocity_aberration(const boost::shared_ptr< VelocityAberration > &V)\n"
 		"GeoCal::Ipi::velocity_aberration\n"
 		""},
 	 { "Ipi__v_band", _wrap_Ipi__v_band, METH_VARARGS, "\n"
+		"Ipi__v_band(Ipi self) -> int\n"
+		"Ipi__v_band(Ipi self, int const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::band(int B)\n"
 		"GeoCal::Ipi::band\n"
-		"Set band that we are using.\n"
+		"Set band that we are using.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_min_time", _wrap_Ipi__v_min_time, METH_O, "\n"
+		"Ipi__v_min_time(Ipi self) -> Time\n"
 		"\n"
-		"Time GeoCal::Ipi::min_time() const\n"
 		"GeoCal::Ipi::min_time\n"
-		"Minimum time that we are using.\n"
+		"Minimum time that we are using.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_max_time", _wrap_Ipi__v_max_time, METH_O, "\n"
+		"Ipi__v_max_time(Ipi self) -> Time\n"
 		"\n"
-		"Time GeoCal::Ipi::max_time() const\n"
 		"GeoCal::Ipi::max_time\n"
-		"Maximum time that we are using.\n"
+		"Maximum time that we are using.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_local_time_window_size", _wrap_Ipi__v_local_time_window_size, METH_O, "\n"
+		"Ipi__v_local_time_window_size(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::local_time_window_size() const\n"
 		"GeoCal::Ipi::local_time_window_size\n"
-		"How large of a window to search around last solution, in seconds.\n"
+		"How large of a window to search around last solution, in seconds.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_root_min_separation", _wrap_Ipi__v_root_min_separation, METH_O, "\n"
+		"Ipi__v_root_min_separation(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::root_min_separation() const\n"
 		"GeoCal::Ipi::root_min_separation\n"
-		"How far apart in seconds we look for solutions to the collinearity\n"
-		"equation.\n"
+		"How far apart in seconds we look for solutions to the collinearity equation.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_time_tolerance", _wrap_Ipi__v_time_tolerance, METH_O, "\n"
+		"Ipi__v_time_tolerance(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::time_tolerance() const\n"
 		"GeoCal::Ipi::time_tolerance\n"
-		"How accurate we find the time.\n"
+		"How accurate we find the time.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_max_frame_extend", _wrap_Ipi__v_max_frame_extend, METH_O, "\n"
+		"Ipi__v_max_frame_extend(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::max_frame_extend() const\n"
 		"GeoCal::Ipi::max_frame_extend\n"
-		"Maximum amount we allow a Ipi solution to be outside the edged of the camera.\n"
-		"See class description for discussion of this. \n"
+		"Maximum amount we allow a Ipi solution to be outside the edged of the camera.  \n"
+		"\n"
+		"See class description for discussion of this.  \n"
+		"\n"
 		""},
 	 { "delete_Ipi", _wrap_delete_Ipi, METH_O, "\n"
+		"delete_Ipi(Ipi self)\n"
 		"\n"
-		"virtual GeoCal::Ipi::~Ipi()\n"
 		"GeoCal::Ipi::~Ipi\n"
 		""},
 	 { "Ipi_swigregister", Ipi_swigregister, METH_O, NULL},
@@ -11057,191 +11068,202 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Ipi", _wrap_new_Ipi, METH_VARARGS, "\n"
+		"Ipi(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::Camera > const & Cam, int Band, Time Tmin, Time Tmax, boost::shared_ptr< GeoCal::TimeTable > const & Tt=boost::shared_ptr< GeoCal::TimeTable >(), boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >(), double Local_time_window_size=5.0, double Root_min_separation=30.0, double Time_tolerance=1e-6, double Max_frame_extend=1000)\n"
 		"\n"
-		"Ipi::Ipi(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"Camera > &Cam, int Band, Time Tmin, Time Tmax, const\n"
-		"boost::shared_ptr< TimeTable > &Tt=boost::shared_ptr< TimeTable >(),\n"
-		"const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<\n"
-		"Refraction >(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >(), double\n"
-		"Local_time_window_size=5.0, double Root_min_separation=30.0, double\n"
-		"Time_tolerance=1e-6, double Max_frame_extend=1000)\n"
 		"GeoCal::Ipi::Ipi\n"
-		"Constructor.\n"
-		"If you only want to get the Time from the Ipi and not ImageCoordinate,\n"
-		"it is ok for Tt to be null.\n"
+		"Constructor.  \n"
 		"\n"
-		"We find solutions to the Collinearity equations over the full time\n"
-		"range Tmin to Tmax. However, as a performance enhancement we first\n"
-		"look around the given Local_time_window_size in seconds around the\n"
-		"solution from the last call to time() or image_coordinate(). We look\n"
-		"for all solutions that are Root_min_separation apart. We find time\n"
-		"with a accuracy given by Time_tolerance. \n"
+		"If you only want to get the Time from the Ipi and not ImageCoordinate, it is ok\n"
+		"for Tt to be null.  \n"
+		"\n"
+		"We find solutions to the Collinearity equations over the full time range Tmin to\n"
+		"Tmax. However, as a performance enhancement we first look around the given\n"
+		"Local_time_window_size in seconds around the solution from the last call to\n"
+		"time() or image_coordinate(). We look for all solutions that are\n"
+		"Root_min_separation apart. We find time with a accuracy given by Time_tolerance.  \n"
+		"\n"
 		""},
 	 { "Ipi_image_coordinate", _wrap_Ipi_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(Ipi self, GroundCoordinate Gp)\n"
 		"\n"
-		"void Ipi::image_coordinate(const GroundCoordinate &Gp, ImageCoordinate &Ic, bool &Success) const\n"
 		"GeoCal::Ipi::image_coordinate\n"
-		"Look for the image location that a point is seen.\n"
-		"Note that unlike time, if a point is seen only outside of the sample\n"
-		"range of the image then we consider the Ipi a failure. If Success is\n"
-		"true, then Ic will have a line and sample number inside of the image\n"
-		"given by the Camera and TimeTable. \n"
+		"Look for the image location that a point is seen.  \n"
+		"\n"
+		"Note that unlike time, if a point is seen only outside of the sample range of\n"
+		"the image then we consider the Ipi a failure. If Success is true, then Ic will\n"
+		"have a line and sample number inside of the image given by the Camera and\n"
+		"TimeTable.  \n"
+		"\n"
 		""},
 	 { "Ipi_image_coordinate_with_derivative", _wrap_Ipi_image_coordinate_with_derivative, METH_VARARGS, "\n"
+		"image_coordinate_with_derivative(Ipi self, GroundCoordinate Gp, ImageCoordinateWithDerivative arg3)\n"
+		"image_coordinate_with_derivative(Ipi self, GroundCoordinate Gp, BoostArrayAutoDerivativeDouble_3 Gp_with_der, ImageCoordinateWithDerivative arg4)\n"
 		"\n"
-		"void Ipi::image_coordinate_with_derivative(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
-		"&Success) const\n"
 		"GeoCal::Ipi::image_coordinate_with_derivative\n"
 		""},
 	 { "Ipi_image_coordinate_with_derivative_extended", _wrap_Ipi_image_coordinate_with_derivative_extended, METH_VARARGS, "\n"
+		"image_coordinate_with_derivative_extended(Ipi self, GroundCoordinate Gp, BoostArrayAutoDerivativeDouble_3 Gp_with_der, ImageCoordinateWithDerivative arg4)\n"
+		"image_coordinate_with_derivative_extended(Ipi self, GroundCoordinate Gp, ImageCoordinateWithDerivative arg3)\n"
 		"\n"
-		"void Ipi::image_coordinate_with_derivative_extended(const GroundCoordinate &Gp, ImageCoordinateWithDerivative &Ic, bool\n"
-		"&Success) const\n"
 		"GeoCal::Ipi::image_coordinate_with_derivative_extended\n"
 		""},
 	 { "Ipi_time", _wrap_Ipi_time, METH_VARARGS, "\n"
+		"time(Ipi self, GroundCoordinate Gp)\n"
 		"\n"
-		"void Ipi::time(const GroundCoordinate &Gp, Time &Tres, FrameCoordinate &Fres, bool\n"
-		"&Success) const\n"
 		"GeoCal::Ipi::time\n"
-		"Look for solution for when the GroundCoordinate Gp is seen.\n"
-		"If we don't find a solution, then Success will be false.\n"
+		"Look for solution for when the GroundCoordinate Gp is seen.  \n"
 		"\n"
-		"Note that we may return a solution where Fres has a sample number < 0\n"
-		"or > cam.number_sample(). This means that a point is not actually seen\n"
-		"in the image, but would be if we had an infinite extent camera. Often\n"
-		"this is useful information, however depending on the application you\n"
-		"may want to reject points with Fres outside of the image range.\n"
+		"If we don't find a solution, then Success will be false.  \n"
 		"\n"
-		"If it is more useful to you, image_coordinate has the opposite\n"
-		"behavior, it rejects any points that are outside of the actual image.\n"
+		"Note that we may return a solution where Fres has a sample number < 0 or >\n"
+		"cam.number_sample(). This means that a point is not actually seen in the image,\n"
+		"but would be if we had an infinite extent camera. Often this is useful\n"
+		"information, however depending on the application you may want to reject points\n"
+		"with Fres outside of the image range.  \n"
+		"\n"
+		"If it is more useful to you, image_coordinate has the opposite behavior, it\n"
+		"rejects any points that are outside of the actual image.  \n"
 		"\n"
 		""},
 	 { "Ipi_time_with_derivative", _wrap_Ipi_time_with_derivative, METH_VARARGS, "\n"
+		"time_with_derivative(Ipi self, GroundCoordinate Gp)\n"
+		"time_with_derivative(Ipi self, GroundCoordinate Gp, BoostArrayAutoDerivativeDouble_3 Gp_with_der)\n"
 		"\n"
-		"void Ipi::time_with_derivative(const GroundCoordinate &Gp, TimeWithDerivative &Tres,\n"
-		"FrameCoordinateWithDerivative &Fres, bool &Success) const\n"
 		"GeoCal::Ipi::time_with_derivative\n"
 		""},
 	 { "Ipi_footprint", _wrap_Ipi_footprint, METH_VARARGS, "\n"
+		"footprint(Ipi self, Dem D) -> Vector_GroundCoordinate\n"
 		"\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > Ipi::footprint(const Dem &D) const\n"
 		"GeoCal::Ipi::footprint\n"
-		"Return the footprint of the data on the ground.\n"
-		"This is just the footprint of the orbit data at the start and end of\n"
-		"the time range. \n"
+		"Return the footprint of the data on the ground.  \n"
+		"\n"
+		"This is just the footprint of the orbit data at the start and end of the time\n"
+		"range.  \n"
+		"\n"
 		""},
 	 { "Ipi__v_resolution_meter", _wrap_Ipi__v_resolution_meter, METH_O, "\n"
+		"_v_resolution_meter(Ipi self) -> double\n"
 		"\n"
-		"double Ipi::resolution_meter() const\n"
 		"GeoCal::Ipi::resolution_meter\n"
-		"Give the approximate ground resolution in meters.\n"
-		"This is for the center pixel in the area covered by the Ipi. \n"
-		""},
-	 { "Ipi___str__", _wrap_Ipi___str__, METH_O, NULL},
-	 { "Ipi__v_time_acquisition_adjustment", _wrap_Ipi__v_time_acquisition_adjustment, METH_VARARGS, "\n"
+		"Give the approximate ground resolution in meters.  \n"
 		"\n"
-		"void GeoCal::Ipi::time_acquisition_adjustment(bool V)\n"
+		"This is for the center pixel in the area covered by the Ipi.  \n"
+		"\n"
+		""},
+	 { "Ipi___str__", _wrap_Ipi___str__, METH_O, "__str__(Ipi self) -> std::string"},
+	 { "Ipi__v_time_acquisition_adjustment", _wrap_Ipi__v_time_acquisition_adjustment, METH_VARARGS, "\n"
+		"_v_time_acquisition_adjustment(Ipi self) -> bool\n"
+		"_v_time_acquisition_adjustment(Ipi self, bool const & V)\n"
+		"\n"
 		"GeoCal::Ipi::time_acquisition_adjustment\n"
 		""},
 	 { "Ipi__v_orbit", _wrap_Ipi__v_orbit, METH_VARARGS, "\n"
+		"_v_orbit(Ipi self) -> boost::shared_ptr< GeoCal::Orbit >\n"
+		"_v_orbit(Ipi self, boost::shared_ptr< GeoCal::Orbit > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"GeoCal::Ipi::orbit\n"
 		""},
 	 { "Ipi__v_camera", _wrap_Ipi__v_camera, METH_VARARGS, "\n"
+		"_v_camera(Ipi self) -> boost::shared_ptr< GeoCal::Camera >\n"
+		"_v_camera(Ipi self, boost::shared_ptr< GeoCal::Camera > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::camera(const boost::shared_ptr< Camera > &Cam)\n"
 		"GeoCal::Ipi::camera\n"
 		""},
 	 { "Ipi__v_time_table", _wrap_Ipi__v_time_table, METH_VARARGS, "\n"
+		"_v_time_table(Ipi self) -> boost::shared_ptr< GeoCal::TimeTable >\n"
+		"_v_time_table(Ipi self, boost::shared_ptr< GeoCal::TimeTable > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::time_table(const boost::shared_ptr< TimeTable > &Tt)\n"
 		"GeoCal::Ipi::time_table\n"
 		""},
 	 { "Ipi__v_refraction", _wrap_Ipi__v_refraction, METH_VARARGS, "\n"
+		"_v_refraction(Ipi self) -> boost::shared_ptr< GeoCal::Refraction >\n"
+		"_v_refraction(Ipi self, boost::shared_ptr< GeoCal::Refraction > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::refraction(const boost::shared_ptr< Refraction > &Ref)\n"
 		"GeoCal::Ipi::refraction\n"
 		""},
 	 { "Ipi__v_velocity_aberration", _wrap_Ipi__v_velocity_aberration, METH_VARARGS, "\n"
+		"_v_velocity_aberration(Ipi self) -> boost::shared_ptr< GeoCal::VelocityAberration >\n"
+		"_v_velocity_aberration(Ipi self, boost::shared_ptr< GeoCal::VelocityAberration > const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::velocity_aberration(const boost::shared_ptr< VelocityAberration > &V)\n"
 		"GeoCal::Ipi::velocity_aberration\n"
 		""},
 	 { "Ipi__v_band", _wrap_Ipi__v_band, METH_VARARGS, "\n"
+		"_v_band(Ipi self) -> int\n"
+		"_v_band(Ipi self, int const & V)\n"
 		"\n"
-		"void GeoCal::Ipi::band(int B)\n"
 		"GeoCal::Ipi::band\n"
-		"Set band that we are using.\n"
+		"Set band that we are using.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_min_time", _wrap_Ipi__v_min_time, METH_O, "\n"
+		"_v_min_time(Ipi self) -> Time\n"
 		"\n"
-		"Time GeoCal::Ipi::min_time() const\n"
 		"GeoCal::Ipi::min_time\n"
-		"Minimum time that we are using.\n"
+		"Minimum time that we are using.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_max_time", _wrap_Ipi__v_max_time, METH_O, "\n"
+		"_v_max_time(Ipi self) -> Time\n"
 		"\n"
-		"Time GeoCal::Ipi::max_time() const\n"
 		"GeoCal::Ipi::max_time\n"
-		"Maximum time that we are using.\n"
+		"Maximum time that we are using.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_local_time_window_size", _wrap_Ipi__v_local_time_window_size, METH_O, "\n"
+		"_v_local_time_window_size(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::local_time_window_size() const\n"
 		"GeoCal::Ipi::local_time_window_size\n"
-		"How large of a window to search around last solution, in seconds.\n"
+		"How large of a window to search around last solution, in seconds.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_root_min_separation", _wrap_Ipi__v_root_min_separation, METH_O, "\n"
+		"_v_root_min_separation(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::root_min_separation() const\n"
 		"GeoCal::Ipi::root_min_separation\n"
-		"How far apart in seconds we look for solutions to the collinearity\n"
-		"equation.\n"
+		"How far apart in seconds we look for solutions to the collinearity equation.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_time_tolerance", _wrap_Ipi__v_time_tolerance, METH_O, "\n"
+		"_v_time_tolerance(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::time_tolerance() const\n"
 		"GeoCal::Ipi::time_tolerance\n"
-		"How accurate we find the time.\n"
+		"How accurate we find the time.  \n"
 		"\n"
 		""},
 	 { "Ipi__v_max_frame_extend", _wrap_Ipi__v_max_frame_extend, METH_O, "\n"
+		"_v_max_frame_extend(Ipi self) -> double\n"
 		"\n"
-		"double GeoCal::Ipi::max_frame_extend() const\n"
 		"GeoCal::Ipi::max_frame_extend\n"
-		"Maximum amount we allow a Ipi solution to be outside the edged of the camera.\n"
-		"See class description for discussion of this. \n"
+		"Maximum amount we allow a Ipi solution to be outside the edged of the camera.  \n"
+		"\n"
+		"See class description for discussion of this.  \n"
+		"\n"
 		""},
 	 { "delete_Ipi", _wrap_delete_Ipi, METH_O, "\n"
+		"delete_Ipi(Ipi self)\n"
 		"\n"
-		"virtual GeoCal::Ipi::~Ipi()\n"
 		"GeoCal::Ipi::~Ipi\n"
 		""},
 	 { "Ipi_swigregister", Ipi_swigregister, METH_O, NULL},

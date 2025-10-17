@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _pan_sharpen.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _pan_sharpen:
 _pan_sharpen.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _pan_sharpen.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,18 +145,20 @@ import geocal_swig.geocal_exception
 class PanSharpen(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     r"""
 
+
     This create a set of pan sharpened images from a pan band and a set of
-    multispectral bands (at lower resolution).
+    multispectral bands (at lower resolution).  
 
-    This uses the pan sharpening algorithm described in "WorldView-2 Pan-
-    Sharpening" by Chris Padwick et. al. (ASPRS 2010 Annual Conference).
+    This uses the pan sharpening algorithm described in "WorldView-2
+    Pan-Sharpening" by Chris Padwick et. al. (ASPRS 2010 Annual Conference).  
 
-    Because of the way this is calculated, it is most efficient to
-    calculate all bands for a given tile at one time. So you should access
-    all bands for a particular tile before going to the next tile for this
-    object. Nothing bad happens if you don't, it is just slower to access.
+    Because of the way this is calculated, it is most efficient to calculate all
+    bands for a given tile at one time. So you should access all bands for a
+    particular tile before going to the next tile for this object. Nothing bad
+    happens if you don't, it is just slower to access.  
 
-    C++ includes: pan_sharpen.h 
+    C++ includes: pan_sharpen.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,28 +166,27 @@ class PanSharpen(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
 
     def __init__(self, Pan, Mul, Force_rpc=False, Log_progress=True):
         r"""
+        __init__(PanSharpen self, boost::shared_ptr< GeoCal::RasterImage > const & Pan, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Mul, bool Force_rpc=False, bool Log_progress=True) -> PanSharpen
 
-        PanSharpen::PanSharpen(const boost::shared_ptr< RasterImage > &Pan, const boost::shared_ptr<
-        RasterImageMultiBand > &Mul, bool Force_rpc=false, bool
-        Log_progress=true)
         GeoCal::PanSharpen::PanSharpen
-        Constructor.
-        This takes in a pan image and a multi spectral image. We subset to the
-        area we can calculate PanSharpen over.
+        Constructor.  
 
-        Parameters:
-        -----------
+        This takes in a pan image and a multi spectral image. We subset to the area we
+        can calculate PanSharpen over.  
 
-        Pan:  The panchromatic image to use
+        Parameters
+        ----------
+        * `Pan` :  
+            The panchromatic image to use  
+        * `Mul` :  
+            The multispectral images to use  
+        * `Force_rpc` :  
+            Sometimes an image will have both map information and an RPC. In this case,
+            we use the map information by preference, unless directed by Force_rpc being
+            true.  
+        * `Log_progress` :  
+            If true, write progress message to std::cout as we work through the data.  
 
-        Mul:  The multispectral images to use
-
-        Force_rpc:  Sometimes an image will have both map information and an
-        RPC. In this case, we use the map information by preference, unless
-        directed by Force_rpc being true.
-
-        Log_progress:  If true, write progress message to std::cout as we work
-        through the data. 
         """
         _pan_sharpen.PanSharpen_swiginit(self, _pan_sharpen.new_PanSharpen(Pan, Mul, Force_rpc, Log_progress))
     __swig_destroy__ = _pan_sharpen.delete_PanSharpen

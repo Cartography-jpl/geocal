@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_polynomial.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_polynomial:
 _rsm_polynomial.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_polynomial.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,17 +140,17 @@ import geocal_swig.generic_object
 class RsmPolynomial(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is used to handle a single polynomial for use with a
-    RsmRationalPolynomial.
 
-    This is a low level class, you don't normally use this directly
-    (although you certainly could if it was useful).
+    This is used to handle a single polynomial for use with a RsmRationalPolynomial.  
 
-    Note we might want to consider making this a template based on the
-    sizes so we can specialize/optimize the code. We'll see what the
-    performance is like.
+    This is a low level class, you don't normally use this directly (although you
+    certainly could if it was useful).  
 
-    C++ includes: rsm_polynomial.h 
+    Note we might want to consider making this a template based on the sizes so we
+    can specialize/optimize the code. We'll see what the performance is like.  
+
+    C++ includes: rsm_polynomial.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,16 +158,16 @@ class RsmPolynomial(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Np_x, Np_y, Np_z, Is_denominator=False, Max_order=-1):
         r"""
+        __init__(RsmPolynomial self, int Np_x, int Np_y, int Np_z, bool Is_denominator=False, int Max_order=-1) -> RsmPolynomial
 
-        RsmPolynomial::RsmPolynomial(int Np_x, int Np_y, int Np_z, bool Is_denominator=false, int
-        Max_order=-1)
         GeoCal::RsmPolynomial::RsmPolynomial
-        Constructor.
-        You indicated the order of the polynomial in each dimension, and if
-        this is a denominator (where we hold the constant term to 1.0 by
-        convention, and don't fit for this). The maximum order of cross terms
-        can be given, or left as -1 in which case we don't limit the cross
-        terms. 
+        Constructor.  
+
+        You indicated the order of the polynomial in each dimension, and if this is a
+        denominator (where we hold the constant term to 1.0 by convention, and don't fit
+        for this). The maximum order of cross terms can be given, or left as -1 in which
+        case we don't limit the cross terms.  
+
         """
         _rsm_polynomial.RsmPolynomial_swiginit(self, _rsm_polynomial.new_RsmPolynomial(Np_x, Np_y, Np_z, Is_denominator, Max_order))
     __str__ = _swig_new_instance_method(_rsm_polynomial.RsmPolynomial___str__)

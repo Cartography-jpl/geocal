@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_base.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_base:
 _rsm_base.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_base.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,12 +142,14 @@ import geocal_swig.geocal_exception
 class RsmBase(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is the base for some of the Rsm support classes.
 
-    This allows us to use a RsmRationalPolynomial, RsmMultiSection, as
-    RsmGrid together.
+    This is the base for some of the Rsm support classes.  
 
-    C++ includes: rsm_base.h 
+    This allows us to use a RsmRationalPolynomial, RsmMultiSection, as RsmGrid
+    together.  
+
+    C++ includes: rsm_base.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

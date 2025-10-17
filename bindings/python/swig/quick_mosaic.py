@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _quick_mosaic.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _quick_mosaic:
 _quick_mosaic.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _quick_mosaic.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,24 +145,24 @@ import geocal_swig.raster_image_variable
 class QuickMosaic(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This is a simple mosaic of a set of RasterImages.
 
-    The RasterImages should have a common projection and resolution,
-    although in general they will have difference bounding boxes.
+    This is a simple mosaic of a set of RasterImages.  
 
-    The data is calculated dynamically, using a simple algorithm of using
-    the pixel value for the first RasterImage with a non-fill value. The
-    RasterImages are checked in the order they appear in the input list,
-    so if image A and B both have data but A comes before in the list then
-    it is "on top" of B.
+    The RasterImages should have a common projection and resolution, although in
+    general they will have difference bounding boxes.  
 
-    No attempt is made to smooth edges or anything like that. The purpose
-    of this class is for dynamically creating a mosiac (e.g, the
-    RasterImages are themselves a CalcRaster like IgcMapProjected). If the
-    images are actually files, you might want to use a existing program
-    like fthfastmos or gdal_merge.py
+    The data is calculated dynamically, using a simple algorithm of using the pixel
+    value for the first RasterImage with a non-fill value. The RasterImages are
+    checked in the order they appear in the input list, so if image A and B both
+    have data but A comes before in the list then it is "on top" of B.  
 
-    C++ includes: quick_mosaic.h 
+    No attempt is made to smooth edges or anything like that. The purpose of this
+    class is for dynamically creating a mosiac (e.g, the RasterImages are themselves
+    a CalcRaster like IgcMapProjected). If the images are actually files, you might
+    want to use a existing program like fthfastmos or gdal_merge.py  
+
+    C++ includes: quick_mosaic.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -167,12 +170,10 @@ class QuickMosaic(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Mi, Img_list, Number_tile_line=-1, Number_tile_sample=-1, Fill_value=0.0):
         r"""
+        __init__(QuickMosaic self, MapInfo Mi, Vector_RasterImage Img_list, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0) -> QuickMosaic
 
-        QuickMosaic::QuickMosaic(const MapInfo &Mi, const std::vector< boost::shared_ptr< RasterImage
-        > > &Img_list, int Number_tile_line=-1, int Number_tile_sample=-1,
-        double Fill_value=0.0)
         GeoCal::QuickMosaic::QuickMosaic
-        Constructor.
+        Constructor.  
 
         """
         _quick_mosaic.QuickMosaic_swiginit(self, _quick_mosaic.new_QuickMosaic(Mi, Img_list, Number_tile_line, Number_tile_sample, Fill_value))

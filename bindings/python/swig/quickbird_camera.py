@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _quickbird_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _quickbird_camera:
 _quickbird_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _quickbird_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,26 +144,26 @@ import geocal_swig.with_parameter
 class QuickBirdCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    This class models a the QuickBird camera.
 
-    It is used to convert ScLookVector to FrameCoordinate and vice versa.
+    This class models a the QuickBird camera.  
 
-    The QuickBird camera is described by metadata supplied with the
-    QuickBird data, a ".GEO" file. This is potentially dynamic, and
-    potentially accounts for nonlinearities in the optics. However, in
-    practice all of the GEO file we have are exactly the same, and all the
-    nonlinear terms are set to 0. I'm not sure if this is because the
-    camera really is very stable and the optics very linear, or just that
-    DigitalGlobe didn't do a very good job at geometric camera
-    calibration. In any case, rather than reading in this file we just
-    hardwire the coefficients into this class. This is something we can
-    revisit in the future if needed.
+    It is used to convert ScLookVector to FrameCoordinate and vice versa.  
 
-    This model is for the Panchromatic band only. We could easily extend
-    this to other bands, but right now we only work with the Panchromatic
-    data.
+    The QuickBird camera is described by metadata supplied with the QuickBird data,
+    a ".GEO" file. This is potentially dynamic, and potentially accounts for
+    nonlinearities in the optics. However, in practice all of the GEO file we have
+    are exactly the same, and all the nonlinear terms are set to 0. I'm not sure if
+    this is because the camera really is very stable and the optics very linear, or
+    just that DigitalGlobe didn't do a very good job at geometric camera
+    calibration. In any case, rather than reading in this file we just hardwire the
+    coefficients into this class. This is something we can revisit in the future if
+    needed.  
 
-    C++ includes: quickbird_camera.h 
+    This model is for the Panchromatic band only. We could easily extend this to
+    other bands, but right now we only work with the Panchromatic data.  
+
+    C++ includes: quickbird_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -168,12 +171,14 @@ class QuickBirdCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self):
         r"""
+        __init__(QuickBirdCamera self) -> QuickBirdCamera
 
-        QuickBirdCamera::QuickBirdCamera()
         GeoCal::QuickBirdCamera::QuickBirdCamera
-        Constructor.
-        At this point, all of the camera coefficients are hardwired in this
-        class. We can change this in the future if needed. 
+        Constructor.  
+
+        At this point, all of the camera coefficients are hardwired in this class. We
+        can change this in the future if needed.  
+
         """
         _quickbird_camera.QuickBirdCamera_swiginit(self, _quickbird_camera.new_QuickBirdCamera())
     __swig_destroy__ = _quickbird_camera.delete_QuickBirdCamera

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_collection_orbit_data.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_collection_orbit_data:
 _igc_collection_orbit_data.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_collection_orbit_data.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,12 +144,13 @@ import geocal_swig.observer
 class IgcCollectionOrbitData(geocal_swig.igc_collection.IgcCollection):
     r"""
 
-    This is a IgcCollection that is a collection of
-    OrbitDataImageGroundConnection.
 
-    These all share the same Orbit and Camera.
+    This is a IgcCollection that is a collection of OrbitDataImageGroundConnection.  
 
-    C++ includes: igc_collection_orbit_data.h 
+    These all share the same Orbit and Camera.  
+
+    C++ includes: igc_collection_orbit_data.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,11 +158,9 @@ class IgcCollectionOrbitData(geocal_swig.igc_collection.IgcCollection):
 
     def __init__(self, *args):
         r"""
+        __init__(IgcCollectionOrbitData self, Vector_RasterImage Img_list, Vector_Time Tm_list, vector_string Title_list, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D) -> IgcCollectionOrbitData
+        __init__(IgcCollectionOrbitData self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D) -> IgcCollectionOrbitData
 
-        GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData(const std::vector< boost::shared_ptr< RasterImage > > &Img_list,
-        const std::vector< Time > &Tm_list, const std::vector< std::string >
-        &Title_list, const boost::shared_ptr< Orbit > &Orb, const
-        boost::shared_ptr< Camera > &Cam, const boost::shared_ptr< Dem > &D)
         GeoCal::IgcCollectionOrbitData::IgcCollectionOrbitData
         """
         _igc_collection_orbit_data.IgcCollectionOrbitData_swiginit(self, _igc_collection_orbit_data.new_IgcCollectionOrbitData(*args))

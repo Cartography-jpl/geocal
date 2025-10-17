@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_time_shift.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_time_shift:
 _orbit_time_shift.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_time_shift.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,20 +144,22 @@ import geocal_swig.look_vector
 class OrbitTimeShift(geocal_swig.orbit.Orbit):
     r"""
 
-    This is a simple adapter for an underlying orbit that allows us to
-    "shift" the time of orbit.
 
-    For a time "t", this returns orbit data from the underlying data at
-    t-toffset, but with the time for the orbit data changed to "t".
+    This is a simple adapter for an underlying orbit that allows us to "shift" the
+    time of orbit.  
 
-    This is useful for simulations, where we may have an underlying orbit
-    that otherwise matches some desired characteristics but that is at the
-    wrong time (e.g., the orbit passes over a desired point but at local
-    night when a simulation requires local day). It is possible this might
-    end up having other uses (e.g., correct for a known time error), but
-    the simulation was what we originally developed this for.
+    For a time "t", this returns orbit data from the underlying data at t-toffset,
+    but with the time for the orbit data changed to "t".  
 
-    C++ includes: orbit_time_shift.h 
+    This is useful for simulations, where we may have an underlying orbit that
+    otherwise matches some desired characteristics but that is at the wrong time
+    (e.g., the orbit passes over a desired point but at local night when a
+    simulation requires local day). It is possible this might end up having other
+    uses (e.g., correct for a known time error), but the simulation was what we
+    originally developed this for.  
+
+    C++ includes: orbit_time_shift.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -162,11 +167,11 @@ class OrbitTimeShift(geocal_swig.orbit.Orbit):
 
     def __init__(self, Orbit_original, Time_shift):
         r"""
+        __init__(OrbitTimeShift self, boost::shared_ptr< GeoCal::Orbit > const Orbit_original, double Time_shift) -> OrbitTimeShift
 
-        OrbitTimeShift::OrbitTimeShift(const boost::shared_ptr< Orbit > Orbit_original, double Time_shift)
         GeoCal::OrbitTimeShift::OrbitTimeShift
-        Create an orbit that uses the data for the Orbit_original, shifted by
-        the given Time_shift.
+        Create an orbit that uses the data for the Orbit_original, shifted by the given
+        Time_shift.  
 
         """
         _orbit_time_shift.OrbitTimeShift_swiginit(self, _orbit_time_shift.new_OrbitTimeShift(Orbit_original, Time_shift))

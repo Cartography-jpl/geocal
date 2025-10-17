@@ -90,6 +90,7 @@ _tle_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _tle_orbit.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _tle_orbit.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -141,13 +142,15 @@ import geocal_swig.look_vector
 class TleOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This is an orbit that does the calculation based on a two-line element
-    set (TLE, seehttps://en.wikipedia.org/wiki/Two-line_element_set).
 
-    You can get TLE for a particular satellite and time
-    fromhttps://www.space-track.org.
+    This is an orbit that does the calculation based on a two-line element set (TLE,
+    see https://en.wikipedia.org/wiki/Two-line_element_set).  
 
-    C++ includes: tle_orbit.h 
+    You can get TLE for a particular satellite and time from https://www.space-
+    track.org.  
+
+    C++ includes: tle_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,12 +158,14 @@ class TleOrbit(geocal_swig.orbit.Orbit):
 
     def __init__(self, Tle):
         r"""
+        __init__(TleOrbit self, std::string const & Tle) -> TleOrbit
 
-        GeoCal::TleOrbit::TleOrbit(const std::string &Tle)
         GeoCal::TleOrbit::TleOrbit
-        Constructor.
-        The TLE should be in the standard two-line element set format
-        (seehttps://en.wikipedia.org/wiki/Two-line_element_set). 
+        Constructor.  
+
+        The TLE should be in the standard two-line element set format (see
+        https://en.wikipedia.org/wiki/Two-line_element_set).  
+
         """
         _tle_orbit.TleOrbit_swiginit(self, _tle_orbit.new_TleOrbit(Tle))
     orbit_data = _swig_new_instance_method(_tle_orbit.TleOrbit_orbit_data)

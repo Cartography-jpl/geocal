@@ -10358,85 +10358,92 @@ SWIGINTERN PyObject *GdalMultiBand_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GdalMultiBand", _wrap_new_GdalMultiBand, METH_VARARGS, "\n"
+		"GdalMultiBand(std::string const & Fname, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, int Number_tile, std::string const & Allowed_drivers, std::string const & Open_options=\"\", std::string const & Sibling_files=\"\", int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, std::string const & Driver_name, GdalRasterImage Source, std::string const & Options=\"\", bool Log_progress=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, std::string const & Driver_name, GdalMultiBand Source, std::string const & Options=\"\", bool Log_progress=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, std::string const & Driver_name, int Number_line, int Number_sample, int Number_band, int Dt, std::string const & Options=\"\", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
 		"\n"
-		"GdalMultiBand::GdalMultiBand(const std::string &Fname, int Number_tile=4, int Tile_number_line=-1,\n"
-		"int Tile_number_sample=-1)\n"
 		"GeoCal::GdalMultiBand::GdalMultiBand\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_set_rpc", _wrap_GdalMultiBand_set_rpc, METH_VARARGS, "\n"
+		"GdalMultiBand_set_rpc(GdalMultiBand self, Rpc R)\n"
 		"\n"
-		"void GeoCal::GdalMultiBand::set_rpc(const Rpc &R)\n"
 		"GeoCal::GdalMultiBand::set_rpc\n"
 		""},
 	 { "GdalMultiBand_set_map_info", _wrap_GdalMultiBand_set_map_info, METH_VARARGS, "\n"
+		"GdalMultiBand_set_map_info(GdalMultiBand self, MapInfo M)\n"
 		"\n"
-		"void GeoCal::GdalMultiBand::set_map_info(const MapInfo &M)\n"
 		"GeoCal::GdalMultiBand::set_map_info\n"
 		""},
 	 { "GdalMultiBand_save", _wrap_GdalMultiBand_save, METH_VARARGS, "\n"
+		"GdalMultiBand_save(std::string const & Oname, std::string const & Driver, RasterImageMultiBand d, bool Log_progress=False, int Dt=GDT_Byte, std::string const & Options=\"\")\n"
 		"\n"
-		"void GdalMultiBand::save(const std::string &Oname, const std::string &Driver, const\n"
-		"RasterImageMultiBand &d, bool Log_progress=false, int Dt=GDT_Byte,\n"
-		"const std::string &Options=\"\")\n"
 		"GeoCal::GdalMultiBand::save\n"
-		"Copy the RasterImageMultiBand into a new file.\n"
+		"Copy the RasterImageMultiBand into a new file.  \n"
+		"\n"
 		"We copy map and RPC information (if found) from the first band in\n"
-		"RasterImageMultiBand. \n"
+		"RasterImageMultiBand.  \n"
+		"\n"
 		""},
 	 { "GdalMultiBand_gdal_raster_image", _wrap_GdalMultiBand_gdal_raster_image, METH_VARARGS, "\n"
+		"GdalMultiBand_gdal_raster_image(GdalMultiBand self, int band) -> boost::shared_ptr< GeoCal::GdalRasterImage >\n"
 		"\n"
-		"boost::shared_ptr< GdalRasterImage > GeoCal::GdalMultiBand::gdal_raster_image(int band) const\n"
 		"GeoCal::GdalMultiBand::gdal_raster_image\n"
-		"RasterImage, cast to GdalRasterImage.\n"
+		"RasterImage, cast to GdalRasterImage.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_data_set", _wrap_GdalMultiBand_data_set, METH_O, "\n"
+		"GdalMultiBand_data_set(GdalMultiBand self) -> boost::shared_ptr< GDALDataset > const &\n"
 		"\n"
-		"const boost::shared_ptr< GDALDataset > & GeoCal::GdalMultiBand::data_set() const\n"
 		"GeoCal::GdalMultiBand::data_set\n"
-		"The underlying dataset object.\n"
+		"The underlying dataset object.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_flush", _wrap_GdalMultiBand_flush, METH_O, "\n"
+		"GdalMultiBand_flush(GdalMultiBand self)\n"
 		"\n"
-		"void GdalMultiBand::flush() const\n"
 		"GeoCal::GdalMultiBand::flush\n"
-		"Flush data to disk for all bands.\n"
+		"Flush data to disk for all bands.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_close", _wrap_GdalMultiBand_close, METH_O, "\n"
+		"GdalMultiBand_close(GdalMultiBand self)\n"
 		"\n"
-		"void GdalMultiBand::close() const\n"
 		"GeoCal::GdalMultiBand::close\n"
-		"Flush data to disk for all bands and close file.\n"
-		"You don't normally need to call this directly, since the destructor of\n"
-		"the files automatically does this. But this can be useful in some\n"
-		"cases. \n"
+		"Flush data to disk for all bands and close file.  \n"
+		"\n"
+		"You don't normally need to call this directly, since the destructor of the files\n"
+		"automatically does this. But this can be useful in some cases.  \n"
+		"\n"
 		""},
 	 { "delete_GdalMultiBand", _wrap_delete_GdalMultiBand, METH_O, "\n"
+		"delete_GdalMultiBand(GdalMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::GdalMultiBand::~GdalMultiBand()\n"
 		"GeoCal::GdalMultiBand::~GdalMultiBand\n"
 		""},
 	 { "GdalMultiBand_swigregister", GdalMultiBand_swigregister, METH_O, NULL},
@@ -10447,85 +10454,92 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GdalMultiBand", _wrap_new_GdalMultiBand, METH_VARARGS, "\n"
+		"GdalMultiBand(std::string const & Fname, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, int Number_tile, std::string const & Allowed_drivers, std::string const & Open_options=\"\", std::string const & Sibling_files=\"\", int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, std::string const & Driver_name, GdalRasterImage Source, std::string const & Options=\"\", bool Log_progress=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, std::string const & Driver_name, GdalMultiBand Source, std::string const & Options=\"\", bool Log_progress=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
+		"GdalMultiBand(std::string const & Fname, std::string const & Driver_name, int Number_line, int Number_sample, int Number_band, int Dt, std::string const & Options=\"\", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
 		"\n"
-		"GdalMultiBand::GdalMultiBand(const std::string &Fname, int Number_tile=4, int Tile_number_line=-1,\n"
-		"int Tile_number_sample=-1)\n"
 		"GeoCal::GdalMultiBand::GdalMultiBand\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_set_rpc", _wrap_GdalMultiBand_set_rpc, METH_VARARGS, "\n"
+		"set_rpc(GdalMultiBand self, Rpc R)\n"
 		"\n"
-		"void GeoCal::GdalMultiBand::set_rpc(const Rpc &R)\n"
 		"GeoCal::GdalMultiBand::set_rpc\n"
 		""},
 	 { "GdalMultiBand_set_map_info", _wrap_GdalMultiBand_set_map_info, METH_VARARGS, "\n"
+		"set_map_info(GdalMultiBand self, MapInfo M)\n"
 		"\n"
-		"void GeoCal::GdalMultiBand::set_map_info(const MapInfo &M)\n"
 		"GeoCal::GdalMultiBand::set_map_info\n"
 		""},
 	 { "GdalMultiBand_save", _wrap_GdalMultiBand_save, METH_VARARGS, "\n"
+		"save(std::string const & Oname, std::string const & Driver, RasterImageMultiBand d, bool Log_progress=False, int Dt=GDT_Byte, std::string const & Options=\"\")\n"
 		"\n"
-		"void GdalMultiBand::save(const std::string &Oname, const std::string &Driver, const\n"
-		"RasterImageMultiBand &d, bool Log_progress=false, int Dt=GDT_Byte,\n"
-		"const std::string &Options=\"\")\n"
 		"GeoCal::GdalMultiBand::save\n"
-		"Copy the RasterImageMultiBand into a new file.\n"
+		"Copy the RasterImageMultiBand into a new file.  \n"
+		"\n"
 		"We copy map and RPC information (if found) from the first band in\n"
-		"RasterImageMultiBand. \n"
+		"RasterImageMultiBand.  \n"
+		"\n"
 		""},
 	 { "GdalMultiBand_gdal_raster_image", _wrap_GdalMultiBand_gdal_raster_image, METH_VARARGS, "\n"
+		"gdal_raster_image(GdalMultiBand self, int band) -> boost::shared_ptr< GeoCal::GdalRasterImage >\n"
 		"\n"
-		"boost::shared_ptr< GdalRasterImage > GeoCal::GdalMultiBand::gdal_raster_image(int band) const\n"
 		"GeoCal::GdalMultiBand::gdal_raster_image\n"
-		"RasterImage, cast to GdalRasterImage.\n"
+		"RasterImage, cast to GdalRasterImage.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_data_set", _wrap_GdalMultiBand_data_set, METH_O, "\n"
+		"data_set(GdalMultiBand self) -> boost::shared_ptr< GDALDataset > const &\n"
 		"\n"
-		"const boost::shared_ptr< GDALDataset > & GeoCal::GdalMultiBand::data_set() const\n"
 		"GeoCal::GdalMultiBand::data_set\n"
-		"The underlying dataset object.\n"
+		"The underlying dataset object.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_flush", _wrap_GdalMultiBand_flush, METH_O, "\n"
+		"flush(GdalMultiBand self)\n"
 		"\n"
-		"void GdalMultiBand::flush() const\n"
 		"GeoCal::GdalMultiBand::flush\n"
-		"Flush data to disk for all bands.\n"
+		"Flush data to disk for all bands.  \n"
 		"\n"
 		""},
 	 { "GdalMultiBand_close", _wrap_GdalMultiBand_close, METH_O, "\n"
+		"close(GdalMultiBand self)\n"
 		"\n"
-		"void GdalMultiBand::close() const\n"
 		"GeoCal::GdalMultiBand::close\n"
-		"Flush data to disk for all bands and close file.\n"
-		"You don't normally need to call this directly, since the destructor of\n"
-		"the files automatically does this. But this can be useful in some\n"
-		"cases. \n"
+		"Flush data to disk for all bands and close file.  \n"
+		"\n"
+		"You don't normally need to call this directly, since the destructor of the files\n"
+		"automatically does this. But this can be useful in some cases.  \n"
+		"\n"
 		""},
 	 { "delete_GdalMultiBand", _wrap_delete_GdalMultiBand, METH_O, "\n"
+		"delete_GdalMultiBand(GdalMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::GdalMultiBand::~GdalMultiBand()\n"
 		"GeoCal::GdalMultiBand::~GdalMultiBand\n"
 		""},
 	 { "GdalMultiBand_swigregister", GdalMultiBand_swigregister, METH_O, NULL},

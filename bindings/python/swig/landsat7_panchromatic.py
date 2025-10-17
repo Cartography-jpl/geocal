@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _landsat7_panchromatic.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _landsat7_panchromatic:
 _landsat7_panchromatic.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _landsat7_panchromatic.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,19 +146,20 @@ import geocal_swig.geocal_exception
 class Landsat7Panchromatic(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
-    This is used to read the global Landsat 7 panchromatic band.
 
-    This data has 15 meter resolution. The geolocation accuracy was
-    estimated by Tom Logan at 1/3 pixel or so (so 5m). Not sure how
-    accurate this estimate is, perhaps Tom has a better estimate.
+    This is used to read the global Landsat 7 panchromatic band.  
 
-    Note that this is very similar to Landsat7Global. The difference is
-    that this was used for MSPI, where the data was supplied as geotiff
-    rather that the VICAR format we use in the cartlab. Could probably
-    combine these into one class with some extra options, but doesn't seem
-    to be much point in doing that.
+    This data has 15 meter resolution. The geolocation accuracy was estimated by Tom
+    Logan at 1/3 pixel or so (so 5m). Not sure how accurate this estimate is,
+    perhaps Tom has a better estimate.  
 
-    C++ includes: landsat7_panchromatic.h 
+    Note that this is very similar to Landsat7Global. The difference is that this
+    was used for MSPI, where the data was supplied as geotiff rather that the VICAR
+    format we use in the cartlab. Could probably combine these into one class with
+    some extra options, but doesn't seem to be much point in doing that.  
+
+    C++ includes: landsat7_panchromatic.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -163,13 +167,15 @@ class Landsat7Panchromatic(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
 
     def __init__(self, Dir):
         r"""
+        __init__(Landsat7Panchromatic self, std::string const & Dir) -> Landsat7Panchromatic
 
-        Landsat7Panchromatic::Landsat7Panchromatic(const std::string &Dir)
         GeoCal::Landsat7Panchromatic::Landsat7Panchromatic
-        Constructor.
-        You can provide the directory to look for Landsat 7 panchromatic data,
-        or if you leave this blank we use the value of environment variable
-        LANDSAT7_PANCHROMATIC_15M. 
+        Constructor.  
+
+        You can provide the directory to look for Landsat 7 panchromatic data, or if you
+        leave this blank we use the value of environment variable
+        LANDSAT7_PANCHROMATIC_15M.  
+
         """
         _landsat7_panchromatic.Landsat7Panchromatic_swiginit(self, _landsat7_panchromatic.new_Landsat7Panchromatic(Dir))
 

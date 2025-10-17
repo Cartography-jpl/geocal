@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _quickbird_time_table.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _quickbird_time_table:
 _quickbird_time_table.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _quickbird_time_table.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,13 +143,15 @@ import geocal_swig.geocal_time
 class QuickBirdTimeTable(geocal_swig.time_table.TimeTable):
     r"""
 
-    This reads a quickbird .IMD file to get time table information.
 
-    Note that Quickbird uses the same convention that we use in our code,
-    an integer location is the center of a pixel. So (0, 0) is the center
-    of the upper left pixel.
+    This reads a quickbird .IMD file to get time table information.  
 
-    C++ includes: quickbird_time_table.h 
+    Note that Quickbird uses the same convention that we use in our code, an integer
+    location is the center of a pixel. So (0, 0) is the center of the upper left
+    pixel.  
+
+    C++ includes: quickbird_time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,10 +159,10 @@ class QuickBirdTimeTable(geocal_swig.time_table.TimeTable):
 
     def __init__(self, Fname):
         r"""
+        __init__(QuickBirdTimeTable self, std::string const & Fname) -> QuickBirdTimeTable
 
-        QuickBirdTimeTable::QuickBirdTimeTable(const std::string &Fname)
         GeoCal::QuickBirdTimeTable::QuickBirdTimeTable
-        Read the given file.
+        Read the given file.  
 
         """
         _quickbird_time_table.QuickBirdTimeTable_swiginit(self, _quickbird_time_table.new_QuickBirdTimeTable(Fname))

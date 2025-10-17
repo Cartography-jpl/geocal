@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _local_rectangular_coordinate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _local_rectangular_coordinate:
 _local_rectangular_coordinate.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _local_rectangular_coordinate.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,46 +146,53 @@ import geocal_swig.geocal_exception
 class LocalRcParameter(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a support class for LocalRectangularCoordinate.
 
-    C++ includes: local_rectangular_coordinate.h 
+    This is a support class for LocalRectangularCoordinate.  
+
+    C++ includes: local_rectangular_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     FOLLOW_SAMPLE_LOCAL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_SAMPLE_LOCAL
+    
     FOLLOW_LINE_LOCAL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_LINE_LOCAL
+    
     FOLLOW_SAMPLE_FULL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_SAMPLE_FULL
+    
     FOLLOW_LINE_FULL = _local_rectangular_coordinate.LocalRcParameter_FOLLOW_LINE_FULL
+    
 
     def __init__(self, *args):
         r"""
+        __init__(LocalRcParameter self) -> LocalRcParameter
+        __init__(LocalRcParameter self, ImageGroundConnection Igc, double Height=0, double Line=-1, double Sample=-1, GeoCal::LocalRcParameter::CoordinateCreation C=FOLLOW_SAMPLE_LOCAL) -> LocalRcParameter
 
-        LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0, double Line=-1,
-        double Sample=-1, CoordinateCreation C=FOLLOW_SAMPLE_LOCAL)
         GeoCal::LocalRcParameter::LocalRcParameter
-        Constructor.
-        This sets up coordinates so the origin is at the given height on the
-        surface for the center pixel of the Igc.
+        Constructor.  
 
-        You can optionally override the line/sample used for the origin. Most
-        of the time you don't want to do this, but this can be useful when
-        generating testing data.
+        This sets up coordinates so the origin is at the given height on the surface for
+        the center pixel of the Igc.  
 
-        There are a couple of reasonable ways to create this. The default is
-        to set Z in the look direction, X mostly in the image sample/scan
-        direction, and Y completing the right hand coordinate system. An
-        alternative is to have Y set to be in the image coordinate line/push
-        direction, and X completing the RHCS. Often these are similar, but we
-        may have difference if the image scan line isn't perpendicular to the
-        push direction. There is also a variation where we look local (+- 1
-        pixel) or over the whole image (+- number_line/number_sample). 
+        You can optionally override the line/sample used for the origin. Most of the
+        time you don't want to do this, but this can be useful when generating testing
+        data.  
+
+        There are a couple of reasonable ways to create this. The default is to set Z in
+        the look direction, X mostly in the image sample/scan direction, and Y
+        completing the right hand coordinate system. An alternative is to have Y set to
+        be in the image coordinate line/push direction, and X completing the RHCS. Often
+        these are similar, but we may have difference if the image scan line isn't
+        perpendicular to the push direction. There is also a variation where we look
+        local (+- 1 pixel) or over the whole image (+- number_line/number_sample).  
+
         """
         _local_rectangular_coordinate.LocalRcParameter_swiginit(self, _local_rectangular_coordinate.new_LocalRcParameter(*args))
     check_rc_assumption = _swig_new_static_method(_local_rectangular_coordinate.LocalRcParameter_check_rc_assumption)
     __str__ = _swig_new_instance_method(_local_rectangular_coordinate.LocalRcParameter___str__)
-    cf_to_rc = property(_local_rectangular_coordinate.LocalRcParameter_cf_to_rc_get, _local_rectangular_coordinate.LocalRcParameter_cf_to_rc_set)
-    cf_offset = property(_local_rectangular_coordinate.LocalRcParameter_cf_offset_get, _local_rectangular_coordinate.LocalRcParameter_cf_offset_set)
+    cf_to_rc = property(_local_rectangular_coordinate.LocalRcParameter_cf_to_rc_get, _local_rectangular_coordinate.LocalRcParameter_cf_to_rc_set, doc=r"""cf_to_rc : a(3).a(3).double""")
+    cf_offset = property(_local_rectangular_coordinate.LocalRcParameter_cf_offset_get, _local_rectangular_coordinate.LocalRcParameter_cf_offset_set, doc=r"""cf_offset : boost::array<(double,3)>""")
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set
@@ -198,16 +208,17 @@ _local_rectangular_coordinate.LocalRcParameter_swigregister(LocalRcParameter)
 class LocalRectangularCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     r"""
 
-    This is a local rectangular coordinate system.
 
-    This is used by Rsm as one of its coordinates choices, this is a
-    rotation and offset of a standard CartesianFixed coordinate system
-    such that the origin is the at the center of a ImageGroundConnection
-    projection to the surface, oriented to Z in in the look direction, X
-    is mostly in the scan direction (orthogonal to Z), and Y completes the
-    right handed coordinate system.
+    This is a local rectangular coordinate system.  
 
-    C++ includes: local_rectangular_coordinate.h 
+    This is used by Rsm as one of its coordinates choices, this is a rotation and
+    offset of a standard CartesianFixed coordinate system such that the origin is
+    the at the center of a ImageGroundConnection projection to the surface, oriented
+    to Z in in the look direction, X is mostly in the scan direction (orthogonal to
+    Z), and Y completes the right handed coordinate system.  
+
+    C++ includes: local_rectangular_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -215,14 +226,15 @@ class LocalRectangularCoordinate(geocal_swig.ground_coordinate.GroundCoordinate)
 
     def __init__(self, *args):
         r"""
+        __init__(LocalRectangularCoordinate self) -> LocalRectangularCoordinate
+        __init__(LocalRectangularCoordinate self, boost::shared_ptr< GeoCal::LocalRcParameter > const & P, GroundCoordinate Gc) -> LocalRectangularCoordinate
+        __init__(LocalRectangularCoordinate self, boost::shared_ptr< GeoCal::LocalRcParameter > const & P, double X, double Y, double Z) -> LocalRectangularCoordinate
 
-        GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, double X, double Y,
-        double Z)
         GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate
         """
         _local_rectangular_coordinate.LocalRectangularCoordinate_swiginit(self, _local_rectangular_coordinate.new_LocalRectangularCoordinate(*args))
-    parameter = property(_local_rectangular_coordinate.LocalRectangularCoordinate_parameter_get, _local_rectangular_coordinate.LocalRectangularCoordinate_parameter_set)
-    position = property(_local_rectangular_coordinate.LocalRectangularCoordinate_position_get, _local_rectangular_coordinate.LocalRectangularCoordinate_position_set)
+    parameter = property(_local_rectangular_coordinate.LocalRectangularCoordinate_parameter_get, _local_rectangular_coordinate.LocalRectangularCoordinate_parameter_set, doc=r"""parameter : boost::shared_ptr<(GeoCal::LocalRcParameter)>""")
+    position = property(_local_rectangular_coordinate.LocalRectangularCoordinate_position_get, _local_rectangular_coordinate.LocalRectangularCoordinate_position_set, doc=r"""position : boost::array<(double,3)>""")
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set
@@ -238,6 +250,7 @@ _local_rectangular_coordinate.LocalRectangularCoordinate_swigregister(LocalRecta
 class LocalRcConverter(geocal_swig.coordinate_converter.CoordinateConverter):
     r"""
 
+
     C++ includes: local_rectangular_coordinate.h
 
     """
@@ -247,8 +260,8 @@ class LocalRcConverter(geocal_swig.coordinate_converter.CoordinateConverter):
 
     def __init__(self, P):
         r"""
+        __init__(LocalRcConverter self, boost::shared_ptr< GeoCal::LocalRcParameter > const & P) -> LocalRcConverter
 
-        GeoCal::LocalRcConverter::LocalRcConverter(const boost::shared_ptr< LocalRcParameter > &P)
         GeoCal::LocalRcConverter::LocalRcConverter
         """
         _local_rectangular_coordinate.LocalRcConverter_swiginit(self, _local_rectangular_coordinate.new_LocalRcConverter(P))
@@ -275,10 +288,11 @@ _local_rectangular_coordinate.LocalRcConverter_swigregister(LocalRcConverter)
 class LocalZDem(geocal_swig.dem.Dem):
     r"""
 
-    This is a Dem that is at a constant Z in a LocalRcConverter coordinate
-    system.
 
-    C++ includes: local_rectangular_coordinate.h 
+    This is a Dem that is at a constant Z in a LocalRcConverter coordinate system.  
+
+    C++ includes: local_rectangular_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -286,10 +300,10 @@ class LocalZDem(geocal_swig.dem.Dem):
 
     def __init__(self, Cconv, Z):
         r"""
+        __init__(LocalZDem self, boost::shared_ptr< GeoCal::LocalRcConverter > const & Cconv, int Z) -> LocalZDem
 
-        GeoCal::LocalZDem::LocalZDem(const boost::shared_ptr< LocalRcConverter > &Cconv, int Z)
         GeoCal::LocalZDem::LocalZDem
-        Constructor.
+        Constructor.  
 
         """
         _local_rectangular_coordinate.LocalZDem_swiginit(self, _local_rectangular_coordinate.new_LocalZDem(Cconv, Z))

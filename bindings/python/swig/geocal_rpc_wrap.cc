@@ -12404,228 +12404,263 @@ SWIGINTERN PyObject *Rpc_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *args
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Rpc___str__", _wrap_Rpc___str__, METH_O, NULL},
-	 { "Rpc_rpc_type_set", _wrap_Rpc_rpc_type_set, METH_VARARGS, NULL},
-	 { "Rpc_rpc_type_get", _wrap_Rpc_rpc_type_get, METH_O, NULL},
-	 { "Rpc_error_bias_set", _wrap_Rpc_error_bias_set, METH_VARARGS, NULL},
-	 { "Rpc_error_bias_get", _wrap_Rpc_error_bias_get, METH_O, NULL},
-	 { "Rpc_error_random_set", _wrap_Rpc_error_random_set, METH_VARARGS, NULL},
-	 { "Rpc_error_random_get", _wrap_Rpc_error_random_get, METH_O, NULL},
-	 { "Rpc_height_offset_set", _wrap_Rpc_height_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_height_offset_get", _wrap_Rpc_height_offset_get, METH_O, NULL},
-	 { "Rpc_height_scale_set", _wrap_Rpc_height_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_height_scale_get", _wrap_Rpc_height_scale_get, METH_O, NULL},
-	 { "Rpc_latitude_offset_set", _wrap_Rpc_latitude_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_latitude_offset_get", _wrap_Rpc_latitude_offset_get, METH_O, NULL},
-	 { "Rpc_latitude_scale_set", _wrap_Rpc_latitude_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_latitude_scale_get", _wrap_Rpc_latitude_scale_get, METH_O, NULL},
-	 { "Rpc_longitude_offset_set", _wrap_Rpc_longitude_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_longitude_offset_get", _wrap_Rpc_longitude_offset_get, METH_O, NULL},
-	 { "Rpc_longitude_scale_set", _wrap_Rpc_longitude_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_longitude_scale_get", _wrap_Rpc_longitude_scale_get, METH_O, NULL},
-	 { "Rpc_line_offset_set", _wrap_Rpc_line_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_line_offset_get", _wrap_Rpc_line_offset_get, METH_O, NULL},
-	 { "Rpc_line_scale_set", _wrap_Rpc_line_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_line_scale_get", _wrap_Rpc_line_scale_get, METH_O, NULL},
-	 { "Rpc_sample_offset_set", _wrap_Rpc_sample_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_sample_offset_get", _wrap_Rpc_sample_offset_get, METH_O, NULL},
-	 { "Rpc_sample_scale_set", _wrap_Rpc_sample_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_sample_scale_get", _wrap_Rpc_sample_scale_get, METH_O, NULL},
-	 { "Rpc__v_line_denominator", _wrap_Rpc__v_line_denominator, METH_VARARGS, NULL},
-	 { "Rpc__v_line_numerator", _wrap_Rpc__v_line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__v_sample_denominator", _wrap_Rpc__v_sample_denominator, METH_VARARGS, NULL},
-	 { "Rpc__v_sample_numerator", _wrap_Rpc__v_sample_numerator, METH_VARARGS, NULL},
-	 { "Rpc__v_fit_line_numerator", _wrap_Rpc__v_fit_line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__v_fit_sample_numerator", _wrap_Rpc__v_fit_sample_numerator, METH_VARARGS, NULL},
+	 { "Rpc___str__", _wrap_Rpc___str__, METH_O, "Rpc___str__(Rpc self) -> std::string"},
+	 { "Rpc_rpc_type_set", _wrap_Rpc_rpc_type_set, METH_VARARGS, "Rpc_rpc_type_set(Rpc self, GeoCal::Rpc::RpcType rpc_type)"},
+	 { "Rpc_rpc_type_get", _wrap_Rpc_rpc_type_get, METH_O, "Rpc_rpc_type_get(Rpc self) -> GeoCal::Rpc::RpcType"},
+	 { "Rpc_error_bias_set", _wrap_Rpc_error_bias_set, METH_VARARGS, "Rpc_error_bias_set(Rpc self, double error_bias)"},
+	 { "Rpc_error_bias_get", _wrap_Rpc_error_bias_get, METH_O, "Rpc_error_bias_get(Rpc self) -> double"},
+	 { "Rpc_error_random_set", _wrap_Rpc_error_random_set, METH_VARARGS, "Rpc_error_random_set(Rpc self, double error_random)"},
+	 { "Rpc_error_random_get", _wrap_Rpc_error_random_get, METH_O, "Rpc_error_random_get(Rpc self) -> double"},
+	 { "Rpc_height_offset_set", _wrap_Rpc_height_offset_set, METH_VARARGS, "Rpc_height_offset_set(Rpc self, double height_offset)"},
+	 { "Rpc_height_offset_get", _wrap_Rpc_height_offset_get, METH_O, "Rpc_height_offset_get(Rpc self) -> double"},
+	 { "Rpc_height_scale_set", _wrap_Rpc_height_scale_set, METH_VARARGS, "Rpc_height_scale_set(Rpc self, double height_scale)"},
+	 { "Rpc_height_scale_get", _wrap_Rpc_height_scale_get, METH_O, "Rpc_height_scale_get(Rpc self) -> double"},
+	 { "Rpc_latitude_offset_set", _wrap_Rpc_latitude_offset_set, METH_VARARGS, "Rpc_latitude_offset_set(Rpc self, double latitude_offset)"},
+	 { "Rpc_latitude_offset_get", _wrap_Rpc_latitude_offset_get, METH_O, "Rpc_latitude_offset_get(Rpc self) -> double"},
+	 { "Rpc_latitude_scale_set", _wrap_Rpc_latitude_scale_set, METH_VARARGS, "Rpc_latitude_scale_set(Rpc self, double latitude_scale)"},
+	 { "Rpc_latitude_scale_get", _wrap_Rpc_latitude_scale_get, METH_O, "Rpc_latitude_scale_get(Rpc self) -> double"},
+	 { "Rpc_longitude_offset_set", _wrap_Rpc_longitude_offset_set, METH_VARARGS, "Rpc_longitude_offset_set(Rpc self, double longitude_offset)"},
+	 { "Rpc_longitude_offset_get", _wrap_Rpc_longitude_offset_get, METH_O, "Rpc_longitude_offset_get(Rpc self) -> double"},
+	 { "Rpc_longitude_scale_set", _wrap_Rpc_longitude_scale_set, METH_VARARGS, "Rpc_longitude_scale_set(Rpc self, double longitude_scale)"},
+	 { "Rpc_longitude_scale_get", _wrap_Rpc_longitude_scale_get, METH_O, "Rpc_longitude_scale_get(Rpc self) -> double"},
+	 { "Rpc_line_offset_set", _wrap_Rpc_line_offset_set, METH_VARARGS, "Rpc_line_offset_set(Rpc self, double line_offset)"},
+	 { "Rpc_line_offset_get", _wrap_Rpc_line_offset_get, METH_O, "Rpc_line_offset_get(Rpc self) -> double"},
+	 { "Rpc_line_scale_set", _wrap_Rpc_line_scale_set, METH_VARARGS, "Rpc_line_scale_set(Rpc self, double line_scale)"},
+	 { "Rpc_line_scale_get", _wrap_Rpc_line_scale_get, METH_O, "Rpc_line_scale_get(Rpc self) -> double"},
+	 { "Rpc_sample_offset_set", _wrap_Rpc_sample_offset_set, METH_VARARGS, "Rpc_sample_offset_set(Rpc self, double sample_offset)"},
+	 { "Rpc_sample_offset_get", _wrap_Rpc_sample_offset_get, METH_O, "Rpc_sample_offset_get(Rpc self) -> double"},
+	 { "Rpc_sample_scale_set", _wrap_Rpc_sample_scale_set, METH_VARARGS, "Rpc_sample_scale_set(Rpc self, double sample_scale)"},
+	 { "Rpc_sample_scale_get", _wrap_Rpc_sample_scale_get, METH_O, "Rpc_sample_scale_get(Rpc self) -> double"},
+	 { "Rpc__v_line_denominator", _wrap_Rpc__v_line_denominator, METH_VARARGS, "\n"
+		"Rpc__v_line_denominator(Rpc self) -> BlitzArray_double_1\n"
+		"Rpc__v_line_denominator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_line_numerator", _wrap_Rpc__v_line_numerator, METH_VARARGS, "\n"
+		"Rpc__v_line_numerator(Rpc self) -> BlitzArray_double_1\n"
+		"Rpc__v_line_numerator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_sample_denominator", _wrap_Rpc__v_sample_denominator, METH_VARARGS, "\n"
+		"Rpc__v_sample_denominator(Rpc self) -> BlitzArray_double_1\n"
+		"Rpc__v_sample_denominator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_sample_numerator", _wrap_Rpc__v_sample_numerator, METH_VARARGS, "\n"
+		"Rpc__v_sample_numerator(Rpc self) -> BlitzArray_double_1\n"
+		"Rpc__v_sample_numerator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_fit_line_numerator", _wrap_Rpc__v_fit_line_numerator, METH_VARARGS, "\n"
+		"Rpc__v_fit_line_numerator(Rpc self) -> BlitzArray_bool_1\n"
+		"Rpc__v_fit_line_numerator(Rpc self, BlitzArray_bool_1 V)\n"
+		""},
+	 { "Rpc__v_fit_sample_numerator", _wrap_Rpc__v_fit_sample_numerator, METH_VARARGS, "\n"
+		"Rpc__v_fit_sample_numerator(Rpc self) -> BlitzArray_bool_1\n"
+		"Rpc__v_fit_sample_numerator(Rpc self, BlitzArray_bool_1 V)\n"
+		""},
 	 { "Rpc__v_naif_code", _wrap_Rpc__v_naif_code, METH_VARARGS, "\n"
+		"Rpc__v_naif_code(Rpc self) -> int\n"
+		"Rpc__v_naif_code(Rpc self, int const & V)\n"
 		"\n"
-		"void Rpc::naif_code(int Naif_code)\n"
 		"GeoCal::Rpc::naif_code\n"
-		"Set the coordinate_converter based on the given NAIF code.\n"
+		"Set the coordinate_converter based on the given NAIF code.  \n"
 		"\n"
 		""},
-	 { "Rpc_coordinate_converter_set", _wrap_Rpc_coordinate_converter_set, METH_VARARGS, NULL},
-	 { "Rpc_coordinate_converter_get", _wrap_Rpc_coordinate_converter_get, METH_O, NULL},
+	 { "Rpc_coordinate_converter_set", _wrap_Rpc_coordinate_converter_set, METH_VARARGS, "Rpc_coordinate_converter_set(Rpc self, boost::shared_ptr< GeoCal::CoordinateConverter > const & coordinate_converter)"},
+	 { "Rpc_coordinate_converter_get", _wrap_Rpc_coordinate_converter_get, METH_O, "Rpc_coordinate_converter_get(Rpc self) -> boost::shared_ptr< GeoCal::CoordinateConverter > const &"},
 	 { "Rpc_resolution_meter", _wrap_Rpc_resolution_meter, METH_VARARGS, "\n"
+		"Rpc_resolution_meter(Rpc self, Dem D) -> double\n"
 		"\n"
-		"double Rpc::resolution_meter(const Dem &D) const\n"
 		"GeoCal::Rpc::resolution_meter\n"
-		"Calculate the approximate resolution on the ground.\n"
-		"This finds the intersection for the center pixel with the surface + 1\n"
-		"in the line and sample direction. We find the difference in meters\n"
-		"between these points, and select the maximum value. We the height from\n"
-		"the Dem. \n"
+		"Calculate the approximate resolution on the ground.  \n"
+		"\n"
+		"This finds the intersection for the center pixel with the surface + 1 in the\n"
+		"line and sample direction. We find the difference in meters between these\n"
+		"points, and select the maximum value. We the height from the Dem.  \n"
+		"\n"
 		""},
 	 { "Rpc_fit", _wrap_Rpc_fit, METH_VARARGS, "\n"
+		"Rpc_fit(Rpc self, Vector_GroundCoordinate Gc, Vector_ImageCoordinate Ic, vector_double Line_sigma, vector_double Sample_sigma, std::set< int > & Blunder, double Blunder_threshold=3, double Chisq_threshold=0.8, bool Blunder_detect=True)\n"
 		"\n"
-		"void Rpc::fit(const std::vector< boost::shared_ptr< GroundCoordinate > > &Gc, const\n"
-		"std::vector< ImageCoordinate > &Ic, const std::vector< double >\n"
-		"&Line_sigma, const std::vector< double > &Sample_sigma, std::set< int\n"
-		"> &Blunder, double Blunder_threshold=3, double Chisq_threshold=0.8,\n"
-		"bool Blunder_detect=true)\n"
 		"GeoCal::Rpc::fit\n"
-		"This updates the RPC parameters to better match a given set of data.\n"
-		"This class takes a list of GroundCoordinates, and the ImageCoordinate\n"
-		"that should be returned by the RPC. Each of the ImageCoordinate has an\n"
-		"associated line and sample sigma used to weight it (i.e., the line and\n"
-		"sigma returned by ImageMatcher).\n"
+		"This updates the RPC parameters to better match a given set of data.  \n"
+		"\n"
+		"This class takes a list of GroundCoordinates, and the ImageCoordinate that\n"
+		"should be returned by the RPC. Each of the ImageCoordinate has an associated\n"
+		"line and sample sigma used to weight it (i.e., the line and sigma returned by\n"
+		"ImageMatcher).  \n"
 		"\n"
 		"We update the set of parameters given by fit_line_numerator and\n"
-		"fit_sample_numerator. Right now, we only do a linear fit and don't try\n"
-		"to fit the nonlinear denominator pieces. We can add that in the future\n"
-		"if it is needed.\n"
+		"fit_sample_numerator. Right now, we only do a linear fit and don't try to fit\n"
+		"the nonlinear denominator pieces. We can add that in the future if it is needed.  \n"
 		"\n"
-		"The blunder detection used is iterative data snooping, where the point\n"
-		"with the largest standardized residual is removed. If the Chisq of the\n"
-		"match improves by the Chisq_threshold, we toss the point out,\n"
-		"otherwise we keep it. We then proceed to the next largest residual,\n"
-		"and so.\n"
+		"The blunder detection used is iterative data snooping, where the point with the\n"
+		"largest standardized residual is removed. If the Chisq of the match improves by\n"
+		"the Chisq_threshold, we toss the point out, otherwise we keep it. We then\n"
+		"proceed to the next largest residual, and so.  \n"
 		"\n"
-		"However, if we expect large numbers of blunders in otherwise well\n"
-		"matched data (e.g., image matching between two images with lots of\n"
-		"differences), it might be preferable to toss out all large outliers.\n"
-		"So, if Chisq_threshold is >= 1 we just toss out all points outside of\n"
-		"the Blunder_threshold. \n"
+		"However, if we expect large numbers of blunders in otherwise well matched data\n"
+		"(e.g., image matching between two images with lots of differences), it might be\n"
+		"preferable to toss out all large outliers. So, if Chisq_threshold is >= 1 we\n"
+		"just toss out all points outside of the Blunder_threshold.  \n"
+		"\n"
 		""},
 	 { "Rpc_fit_all", _wrap_Rpc_fit_all, METH_VARARGS, "\n"
+		"Rpc_fit_all(Rpc self, vector_double Line, vector_double Sample, vector_double Latitude, vector_double Longitude, vector_double Height)\n"
 		"\n"
-		"void Rpc::fit_all(const std::vector< double > &Line, const std::vector< double >\n"
-		"&Sample, const std::vector< double > &Latitude, const std::vector<\n"
-		"double > &Longitude, const std::vector< double > &Height)\n"
 		"GeoCal::Rpc::fit_all\n"
-		"You may not want to use this function directly, but rather use Rpc::generate_rpc which sets up the entire RPC.\n"
-		"This is a low level function used to create an RPC that matches a set\n"
-		"of data. The RPC should have already had the various offset and scales\n"
-		"filled in. This function then fills in line_denominator,\n"
-		"line_numerator, sample_denominator, and sample_numerator.\n"
+		"You may not want to use this function directly, but rather use Rpc::generate_rpc\n"
+		"which sets up the entire RPC.  \n"
 		"\n"
-		"This fits all of the rpc parameters (the full 78 parameters) doing a\n"
-		"linear least squares fit. This doesn't to any blunder detection, or\n"
-		"allow a subset to be used.\n"
+		"This is a low level function used to create an RPC that matches a set of data.\n"
+		"The RPC should have already had the various offset and scales filled in. This\n"
+		"function then fills in line_denominator, line_numerator, sample_denominator, and\n"
+		"sample_numerator.  \n"
+		"\n"
+		"This fits all of the rpc parameters (the full 78 parameters) doing a linear\n"
+		"least squares fit. This doesn't to any blunder detection, or allow a subset to\n"
+		"be used.  \n"
 		"\n"
 		"The idea is that through some other method you can determine latitude,\n"
-		"longitude, height vs line, sample (e.g., using a Orbit and Camera).\n"
-		"You then generate a regular set of points, set up the offset and\n"
-		"scale, and finally call this function to fit the RPC. \n"
+		"longitude, height vs line, sample (e.g., using a Orbit and Camera). You then\n"
+		"generate a regular set of points, set up the offset and scale, and finally call\n"
+		"this function to fit the RPC.  \n"
+		"\n"
 		""},
 	 { "Rpc_generate_rpc", _wrap_Rpc_generate_rpc, METH_VARARGS, "\n"
+		"Rpc_generate_rpc(ImageGroundConnection Igc, double Min_height, double Max_height, int Nlat=20, int Nlon=20, int Nheight=20, bool Skip_masked_point=False, bool Ignore_error=False) -> Rpc\n"
 		"\n"
-		"Rpc Rpc::generate_rpc(const ImageGroundConnection &Igc, double Min_height, double\n"
-		"Max_height, int Nlat=20, int Nlon=20, int Nheight=20, bool\n"
-		"Skip_masked_point=false, bool Ignore_error=false)\n"
 		"GeoCal::Rpc::generate_rpc\n"
 		"Generate a RPC that approximates the calculation done by a\n"
-		"ImageGroundConnection.\n"
-		"We determine that latitude and longitude range to use automatically to\n"
-		"cover the range given by the ImageGroundConnection.\n"
+		"ImageGroundConnection.  \n"
 		"\n"
-		"This routine always ignores ImageGroundConnectionFailed exceptions,\n"
-		"and just skips to the next point. But if we are using python code for\n"
-		"the ImageGroundConnection we can't translate errors to\n"
-		"ImageGroundConnectionFailed (this is a limitation of SWIG). So you can\n"
-		"optionally specify Ignore_error as true, in which case we ignore all\n"
-		"exceptions and just skip to the next point.\n"
+		"We determine that latitude and longitude range to use automatically to cover the\n"
+		"range given by the ImageGroundConnection.  \n"
 		"\n"
-		"We normally look at all image points when generating the RPC. You can\n"
-		"optionally specify Skip_masked_point to skip all image points that are\n"
-		"masked. \n"
+		"This routine always ignores ImageGroundConnectionFailed exceptions, and just\n"
+		"skips to the next point. But if we are using python code for the\n"
+		"ImageGroundConnection we can't translate errors to ImageGroundConnectionFailed\n"
+		"(this is a limitation of SWIG). So you can optionally specify Ignore_error as\n"
+		"true, in which case we ignore *all* exceptions and just skip to the next point.  \n"
+		"\n"
+		"We normally look at all image points when generating the RPC. You can optionally\n"
+		"specify Skip_masked_point to skip all image points that are masked.  \n"
+		"\n"
 		""},
 	 { "Rpc_ground_coordinate", _wrap_Rpc_ground_coordinate, METH_VARARGS, "\n"
+		"Rpc_ground_coordinate(Rpc self, ImageCoordinate Ic, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"Rpc_ground_coordinate(Rpc self, ImageCoordinate Ic, double Height) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > Rpc::ground_coordinate(const ImageCoordinate &Ic, double Height) const\n"
 		"GeoCal::Rpc::ground_coordinate\n"
 		"Invert the RPC to find the ground coordinate that maps to a give\n"
-		"ImageCoordinate.\n"
-		"This routine may fail to find a solution, in which case a\n"
-		"ConvergenceFailure exception will be thrown. \n"
+		"ImageCoordinate.  \n"
+		"\n"
+		"This routine may fail to find a solution, in which case a ConvergenceFailure\n"
+		"exception will be thrown.  \n"
+		"\n"
 		""},
 	 { "Rpc_image_coordinate", _wrap_Rpc_image_coordinate, METH_VARARGS, "\n"
+		"Rpc_image_coordinate(Rpc self, GroundCoordinate Gc) -> ImageCoordinate\n"
+		"Rpc_image_coordinate(Rpc self, double Latitude, double Longitude, double Height_ellipsoid) -> ImageCoordinate\n"
+		"Rpc_image_coordinate(Rpc self, BlitzArray_double_1 Latitude, BlitzArray_double_1 Longitude, BlitzArray_double_1 Height_ellipsoid) -> BlitzArray_double_2\n"
+		"Rpc_image_coordinate(Rpc self, BlitzArray_double_2 Latitude, BlitzArray_double_2 Longitude, BlitzArray_double_2 Height_ellipsoid) -> BlitzArray_double_3\n"
+		"Rpc_image_coordinate(Rpc self, BlitzArray_double_3 Latitude, BlitzArray_double_3 Longitude, BlitzArray_double_3 Height_ellipsoid) -> BlitzArray_double_4\n"
 		"\n"
-		"ImageCoordinate GeoCal::Rpc::image_coordinate(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"GeoCal::Rpc::image_coordinate\n"
-		"Convert from object space to image space (i.e., calculate RPC).\n"
-		"The longitude and latitude are given in degrees (this is the geodetic\n"
-		"latitude). The height is in meters, relative to the reference\n"
-		"ellipsoid (e.g., WGS-84). \n"
+		"Convert from object space to image space (i.e., calculate RPC).  \n"
+		"\n"
+		"The longitude and latitude are given in degrees (this is the geodetic latitude).\n"
+		"The height is in meters, relative to the reference ellipsoid (e.g., WGS-84).  \n"
+		"\n"
 		""},
 	 { "Rpc_image_coordinate_jac_parm", _wrap_Rpc_image_coordinate_jac_parm, METH_VARARGS, "\n"
+		"Rpc_image_coordinate_jac_parm(Rpc self, GroundCoordinate Gc) -> BlitzArray_double_2\n"
+		"Rpc_image_coordinate_jac_parm(Rpc self, double Latitude, double Longitude, double Height_ellipsoid) -> BlitzArray_double_2\n"
 		"\n"
-		"Array< double, 2 > Rpc::image_coordinate_jac_parm(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"GeoCal::Rpc::image_coordinate_jac_parm\n"
-		"Jacobian of image_coordinate with respect to the parameters that are\n"
-		"marked as ones we are fitting.\n"
-		"This has two rows, the first is for line and the second sample. The\n"
-		"columns are first the true values in fit_line_numerator, and then\n"
-		"fit_sample_numerator. \n"
+		"Jacobian of image_coordinate with respect to the parameters that are marked as\n"
+		"ones we are fitting.  \n"
+		"\n"
+		"This has two rows, the first is for line and the second sample. The columns are\n"
+		"first the true values in fit_line_numerator, and then fit_sample_numerator.  \n"
+		"\n"
 		""},
 	 { "Rpc_image_coordinate_jac", _wrap_Rpc_image_coordinate_jac, METH_VARARGS, "\n"
+		"Rpc_image_coordinate_jac(Rpc self, double Latitude, double Longitude, double Height_ellipsoid) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeoCal::Rpc::image_coordinate_jac(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"GeoCal::Rpc::image_coordinate_jac\n"
-		"Jacobian of image_coordinate with respect to the Latitude, Longitude,\n"
-		"and Height_ellipsoid.\n"
-		"This is a 2 x 3 matrix, with the first row being line and the second\n"
-		"sample. The columns are in Latitude, Longitude and Height_ellipsoid\n"
-		"order. \n"
+		"Jacobian of image_coordinate with respect to the Latitude, Longitude, and\n"
+		"Height_ellipsoid.  \n"
+		"\n"
+		"This is a 2 x 3 matrix, with the first row being line and the second sample. The\n"
+		"columns are in Latitude, Longitude and Height_ellipsoid order.  \n"
+		"\n"
 		""},
 	 { "Rpc_rpc_project", _wrap_Rpc_rpc_project, METH_VARARGS, "\n"
+		"Rpc_rpc_project(Rpc self, RasterImage Res, RasterImage Img, Dem D, double Line_scale=1, double Sample_scale=1)\n"
 		"\n"
-		"void Rpc::rpc_project(RasterImage &Res, const RasterImage &Img, const Dem &D, double\n"
-		"Line_scale=1.0, double Sample_scale=1.0) const\n"
 		"GeoCal::Rpc::rpc_project\n"
-		"This uses the RPC to project a RasterImage to a MapInfo.\n"
-		"On entry, the RasterImage Res should already have the size and MapInfo\n"
-		"that we want to project to.\n"
+		"This uses the RPC to project a RasterImage to a MapInfo.  \n"
 		"\n"
-		"In some cases, Img might be a lower resolution image than is described\n"
-		"by the RPC (e.g., we are imaging matching 60 cm Quickbird data to 5 m\n"
-		"CIB data, so we down sample by a factor of 9). In those cases, a scale\n"
-		"to apply to the line and sample returned by the RPC before looking\n"
-		"into Img can be given. The default value is to not scale. \n"
+		"On entry, the RasterImage Res should already have the size and MapInfo that we\n"
+		"want to project to.  \n"
+		"\n"
+		"In some cases, Img might be a lower resolution image than is described by the\n"
+		"RPC (e.g., we are imaging matching 60 cm Quickbird data to 5 m CIB data, so we\n"
+		"down sample by a factor of 9). In those cases, a scale to apply to the line and\n"
+		"sample returned by the RPC before looking into Img can be given. The default\n"
+		"value is to not scale.  \n"
+		"\n"
 		""},
 	 { "Rpc_rpc_type_a", _wrap_Rpc_rpc_type_a, METH_O, "\n"
+		"Rpc_rpc_type_a(Rpc self) -> Rpc\n"
 		"\n"
-		"Rpc Rpc::rpc_type_a() const\n"
 		"GeoCal::Rpc::rpc_type_a\n"
-		"This return a Rpc that has type RPC_A.\n"
-		"If this rpc is already type RPC_A, then this is just a copy. Otherwise\n"
-		"we rearrange the coefficients to give a type RPC_A. \n"
+		"This return a Rpc that has type RPC_A.  \n"
+		"\n"
+		"If this rpc is already type RPC_A, then this is just a copy. Otherwise we\n"
+		"rearrange the coefficients to give a type RPC_A.  \n"
+		"\n"
 		""},
 	 { "Rpc_rpc_type_b", _wrap_Rpc_rpc_type_b, METH_O, "\n"
+		"Rpc_rpc_type_b(Rpc self) -> Rpc\n"
 		"\n"
-		"Rpc Rpc::rpc_type_b() const\n"
 		"GeoCal::Rpc::rpc_type_b\n"
-		"This return a Rpc that has type RPC_B.\n"
-		"If this rpc is already type RPC_B, then this is just a copy. Otherwise\n"
-		"we rearrange the coefficients to give a type RPC_B. \n"
+		"This return a Rpc that has type RPC_B.  \n"
+		"\n"
+		"If this rpc is already type RPC_B, then this is just a copy. Otherwise we\n"
+		"rearrange the coefficients to give a type RPC_B.  \n"
+		"\n"
 		""},
 	 { "new_Rpc", _wrap_new_Rpc, METH_VARARGS, "\n"
+		"Rpc()\n"
+		"new_Rpc(Rpc other) -> Rpc\n"
 		"\n"
-		"Rpc::Rpc()\n"
 		"GeoCal::Rpc::Rpc\n"
-		"Default constructor.\n"
-		"Initializes fit_line_numerator and fit_sample_numerator to all false.\n"
+		"Default constructor.  \n"
+		"\n"
+		"Initializes fit_line_numerator and fit_sample_numerator to all false.  \n"
 		"\n"
 		""},
-	 { "delete_Rpc", _wrap_delete_Rpc, METH_O, NULL},
+	 { "delete_Rpc", _wrap_delete_Rpc, METH_O, "delete_Rpc(Rpc self)"},
 	 { "Rpc_swigregister", Rpc_swigregister, METH_O, NULL},
 	 { "Rpc_swiginit", Rpc_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -12634,228 +12669,263 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Rpc___str__", _wrap_Rpc___str__, METH_O, NULL},
-	 { "Rpc_rpc_type_set", _wrap_Rpc_rpc_type_set, METH_VARARGS, NULL},
-	 { "Rpc_rpc_type_get", _wrap_Rpc_rpc_type_get, METH_O, NULL},
-	 { "Rpc_error_bias_set", _wrap_Rpc_error_bias_set, METH_VARARGS, NULL},
-	 { "Rpc_error_bias_get", _wrap_Rpc_error_bias_get, METH_O, NULL},
-	 { "Rpc_error_random_set", _wrap_Rpc_error_random_set, METH_VARARGS, NULL},
-	 { "Rpc_error_random_get", _wrap_Rpc_error_random_get, METH_O, NULL},
-	 { "Rpc_height_offset_set", _wrap_Rpc_height_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_height_offset_get", _wrap_Rpc_height_offset_get, METH_O, NULL},
-	 { "Rpc_height_scale_set", _wrap_Rpc_height_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_height_scale_get", _wrap_Rpc_height_scale_get, METH_O, NULL},
-	 { "Rpc_latitude_offset_set", _wrap_Rpc_latitude_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_latitude_offset_get", _wrap_Rpc_latitude_offset_get, METH_O, NULL},
-	 { "Rpc_latitude_scale_set", _wrap_Rpc_latitude_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_latitude_scale_get", _wrap_Rpc_latitude_scale_get, METH_O, NULL},
-	 { "Rpc_longitude_offset_set", _wrap_Rpc_longitude_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_longitude_offset_get", _wrap_Rpc_longitude_offset_get, METH_O, NULL},
-	 { "Rpc_longitude_scale_set", _wrap_Rpc_longitude_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_longitude_scale_get", _wrap_Rpc_longitude_scale_get, METH_O, NULL},
-	 { "Rpc_line_offset_set", _wrap_Rpc_line_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_line_offset_get", _wrap_Rpc_line_offset_get, METH_O, NULL},
-	 { "Rpc_line_scale_set", _wrap_Rpc_line_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_line_scale_get", _wrap_Rpc_line_scale_get, METH_O, NULL},
-	 { "Rpc_sample_offset_set", _wrap_Rpc_sample_offset_set, METH_VARARGS, NULL},
-	 { "Rpc_sample_offset_get", _wrap_Rpc_sample_offset_get, METH_O, NULL},
-	 { "Rpc_sample_scale_set", _wrap_Rpc_sample_scale_set, METH_VARARGS, NULL},
-	 { "Rpc_sample_scale_get", _wrap_Rpc_sample_scale_get, METH_O, NULL},
-	 { "Rpc__v_line_denominator", _wrap_Rpc__v_line_denominator, METH_VARARGS, NULL},
-	 { "Rpc__v_line_numerator", _wrap_Rpc__v_line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__v_sample_denominator", _wrap_Rpc__v_sample_denominator, METH_VARARGS, NULL},
-	 { "Rpc__v_sample_numerator", _wrap_Rpc__v_sample_numerator, METH_VARARGS, NULL},
-	 { "Rpc__v_fit_line_numerator", _wrap_Rpc__v_fit_line_numerator, METH_VARARGS, NULL},
-	 { "Rpc__v_fit_sample_numerator", _wrap_Rpc__v_fit_sample_numerator, METH_VARARGS, NULL},
+	 { "Rpc___str__", _wrap_Rpc___str__, METH_O, "__str__(Rpc self) -> std::string"},
+	 { "Rpc_rpc_type_set", _wrap_Rpc_rpc_type_set, METH_VARARGS, "Rpc_rpc_type_set(Rpc self, GeoCal::Rpc::RpcType rpc_type)"},
+	 { "Rpc_rpc_type_get", _wrap_Rpc_rpc_type_get, METH_O, "Rpc_rpc_type_get(Rpc self) -> GeoCal::Rpc::RpcType"},
+	 { "Rpc_error_bias_set", _wrap_Rpc_error_bias_set, METH_VARARGS, "Rpc_error_bias_set(Rpc self, double error_bias)"},
+	 { "Rpc_error_bias_get", _wrap_Rpc_error_bias_get, METH_O, "Rpc_error_bias_get(Rpc self) -> double"},
+	 { "Rpc_error_random_set", _wrap_Rpc_error_random_set, METH_VARARGS, "Rpc_error_random_set(Rpc self, double error_random)"},
+	 { "Rpc_error_random_get", _wrap_Rpc_error_random_get, METH_O, "Rpc_error_random_get(Rpc self) -> double"},
+	 { "Rpc_height_offset_set", _wrap_Rpc_height_offset_set, METH_VARARGS, "Rpc_height_offset_set(Rpc self, double height_offset)"},
+	 { "Rpc_height_offset_get", _wrap_Rpc_height_offset_get, METH_O, "Rpc_height_offset_get(Rpc self) -> double"},
+	 { "Rpc_height_scale_set", _wrap_Rpc_height_scale_set, METH_VARARGS, "Rpc_height_scale_set(Rpc self, double height_scale)"},
+	 { "Rpc_height_scale_get", _wrap_Rpc_height_scale_get, METH_O, "Rpc_height_scale_get(Rpc self) -> double"},
+	 { "Rpc_latitude_offset_set", _wrap_Rpc_latitude_offset_set, METH_VARARGS, "Rpc_latitude_offset_set(Rpc self, double latitude_offset)"},
+	 { "Rpc_latitude_offset_get", _wrap_Rpc_latitude_offset_get, METH_O, "Rpc_latitude_offset_get(Rpc self) -> double"},
+	 { "Rpc_latitude_scale_set", _wrap_Rpc_latitude_scale_set, METH_VARARGS, "Rpc_latitude_scale_set(Rpc self, double latitude_scale)"},
+	 { "Rpc_latitude_scale_get", _wrap_Rpc_latitude_scale_get, METH_O, "Rpc_latitude_scale_get(Rpc self) -> double"},
+	 { "Rpc_longitude_offset_set", _wrap_Rpc_longitude_offset_set, METH_VARARGS, "Rpc_longitude_offset_set(Rpc self, double longitude_offset)"},
+	 { "Rpc_longitude_offset_get", _wrap_Rpc_longitude_offset_get, METH_O, "Rpc_longitude_offset_get(Rpc self) -> double"},
+	 { "Rpc_longitude_scale_set", _wrap_Rpc_longitude_scale_set, METH_VARARGS, "Rpc_longitude_scale_set(Rpc self, double longitude_scale)"},
+	 { "Rpc_longitude_scale_get", _wrap_Rpc_longitude_scale_get, METH_O, "Rpc_longitude_scale_get(Rpc self) -> double"},
+	 { "Rpc_line_offset_set", _wrap_Rpc_line_offset_set, METH_VARARGS, "Rpc_line_offset_set(Rpc self, double line_offset)"},
+	 { "Rpc_line_offset_get", _wrap_Rpc_line_offset_get, METH_O, "Rpc_line_offset_get(Rpc self) -> double"},
+	 { "Rpc_line_scale_set", _wrap_Rpc_line_scale_set, METH_VARARGS, "Rpc_line_scale_set(Rpc self, double line_scale)"},
+	 { "Rpc_line_scale_get", _wrap_Rpc_line_scale_get, METH_O, "Rpc_line_scale_get(Rpc self) -> double"},
+	 { "Rpc_sample_offset_set", _wrap_Rpc_sample_offset_set, METH_VARARGS, "Rpc_sample_offset_set(Rpc self, double sample_offset)"},
+	 { "Rpc_sample_offset_get", _wrap_Rpc_sample_offset_get, METH_O, "Rpc_sample_offset_get(Rpc self) -> double"},
+	 { "Rpc_sample_scale_set", _wrap_Rpc_sample_scale_set, METH_VARARGS, "Rpc_sample_scale_set(Rpc self, double sample_scale)"},
+	 { "Rpc_sample_scale_get", _wrap_Rpc_sample_scale_get, METH_O, "Rpc_sample_scale_get(Rpc self) -> double"},
+	 { "Rpc__v_line_denominator", _wrap_Rpc__v_line_denominator, METH_VARARGS, "\n"
+		"_v_line_denominator(Rpc self) -> BlitzArray_double_1\n"
+		"_v_line_denominator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_line_numerator", _wrap_Rpc__v_line_numerator, METH_VARARGS, "\n"
+		"_v_line_numerator(Rpc self) -> BlitzArray_double_1\n"
+		"_v_line_numerator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_sample_denominator", _wrap_Rpc__v_sample_denominator, METH_VARARGS, "\n"
+		"_v_sample_denominator(Rpc self) -> BlitzArray_double_1\n"
+		"_v_sample_denominator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_sample_numerator", _wrap_Rpc__v_sample_numerator, METH_VARARGS, "\n"
+		"_v_sample_numerator(Rpc self) -> BlitzArray_double_1\n"
+		"_v_sample_numerator(Rpc self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Rpc__v_fit_line_numerator", _wrap_Rpc__v_fit_line_numerator, METH_VARARGS, "\n"
+		"_v_fit_line_numerator(Rpc self) -> BlitzArray_bool_1\n"
+		"_v_fit_line_numerator(Rpc self, BlitzArray_bool_1 V)\n"
+		""},
+	 { "Rpc__v_fit_sample_numerator", _wrap_Rpc__v_fit_sample_numerator, METH_VARARGS, "\n"
+		"_v_fit_sample_numerator(Rpc self) -> BlitzArray_bool_1\n"
+		"_v_fit_sample_numerator(Rpc self, BlitzArray_bool_1 V)\n"
+		""},
 	 { "Rpc__v_naif_code", _wrap_Rpc__v_naif_code, METH_VARARGS, "\n"
+		"_v_naif_code(Rpc self) -> int\n"
+		"_v_naif_code(Rpc self, int const & V)\n"
 		"\n"
-		"void Rpc::naif_code(int Naif_code)\n"
 		"GeoCal::Rpc::naif_code\n"
-		"Set the coordinate_converter based on the given NAIF code.\n"
+		"Set the coordinate_converter based on the given NAIF code.  \n"
 		"\n"
 		""},
-	 { "Rpc_coordinate_converter_set", _wrap_Rpc_coordinate_converter_set, METH_VARARGS, NULL},
-	 { "Rpc_coordinate_converter_get", _wrap_Rpc_coordinate_converter_get, METH_O, NULL},
+	 { "Rpc_coordinate_converter_set", _wrap_Rpc_coordinate_converter_set, METH_VARARGS, "Rpc_coordinate_converter_set(Rpc self, boost::shared_ptr< GeoCal::CoordinateConverter > const & coordinate_converter)"},
+	 { "Rpc_coordinate_converter_get", _wrap_Rpc_coordinate_converter_get, METH_O, "Rpc_coordinate_converter_get(Rpc self) -> boost::shared_ptr< GeoCal::CoordinateConverter > const &"},
 	 { "Rpc_resolution_meter", _wrap_Rpc_resolution_meter, METH_VARARGS, "\n"
+		"resolution_meter(Rpc self, Dem D) -> double\n"
 		"\n"
-		"double Rpc::resolution_meter(const Dem &D) const\n"
 		"GeoCal::Rpc::resolution_meter\n"
-		"Calculate the approximate resolution on the ground.\n"
-		"This finds the intersection for the center pixel with the surface + 1\n"
-		"in the line and sample direction. We find the difference in meters\n"
-		"between these points, and select the maximum value. We the height from\n"
-		"the Dem. \n"
+		"Calculate the approximate resolution on the ground.  \n"
+		"\n"
+		"This finds the intersection for the center pixel with the surface + 1 in the\n"
+		"line and sample direction. We find the difference in meters between these\n"
+		"points, and select the maximum value. We the height from the Dem.  \n"
+		"\n"
 		""},
 	 { "Rpc_fit", _wrap_Rpc_fit, METH_VARARGS, "\n"
+		"fit(Rpc self, Vector_GroundCoordinate Gc, Vector_ImageCoordinate Ic, vector_double Line_sigma, vector_double Sample_sigma, std::set< int > & Blunder, double Blunder_threshold=3, double Chisq_threshold=0.8, bool Blunder_detect=True)\n"
 		"\n"
-		"void Rpc::fit(const std::vector< boost::shared_ptr< GroundCoordinate > > &Gc, const\n"
-		"std::vector< ImageCoordinate > &Ic, const std::vector< double >\n"
-		"&Line_sigma, const std::vector< double > &Sample_sigma, std::set< int\n"
-		"> &Blunder, double Blunder_threshold=3, double Chisq_threshold=0.8,\n"
-		"bool Blunder_detect=true)\n"
 		"GeoCal::Rpc::fit\n"
-		"This updates the RPC parameters to better match a given set of data.\n"
-		"This class takes a list of GroundCoordinates, and the ImageCoordinate\n"
-		"that should be returned by the RPC. Each of the ImageCoordinate has an\n"
-		"associated line and sample sigma used to weight it (i.e., the line and\n"
-		"sigma returned by ImageMatcher).\n"
+		"This updates the RPC parameters to better match a given set of data.  \n"
+		"\n"
+		"This class takes a list of GroundCoordinates, and the ImageCoordinate that\n"
+		"should be returned by the RPC. Each of the ImageCoordinate has an associated\n"
+		"line and sample sigma used to weight it (i.e., the line and sigma returned by\n"
+		"ImageMatcher).  \n"
 		"\n"
 		"We update the set of parameters given by fit_line_numerator and\n"
-		"fit_sample_numerator. Right now, we only do a linear fit and don't try\n"
-		"to fit the nonlinear denominator pieces. We can add that in the future\n"
-		"if it is needed.\n"
+		"fit_sample_numerator. Right now, we only do a linear fit and don't try to fit\n"
+		"the nonlinear denominator pieces. We can add that in the future if it is needed.  \n"
 		"\n"
-		"The blunder detection used is iterative data snooping, where the point\n"
-		"with the largest standardized residual is removed. If the Chisq of the\n"
-		"match improves by the Chisq_threshold, we toss the point out,\n"
-		"otherwise we keep it. We then proceed to the next largest residual,\n"
-		"and so.\n"
+		"The blunder detection used is iterative data snooping, where the point with the\n"
+		"largest standardized residual is removed. If the Chisq of the match improves by\n"
+		"the Chisq_threshold, we toss the point out, otherwise we keep it. We then\n"
+		"proceed to the next largest residual, and so.  \n"
 		"\n"
-		"However, if we expect large numbers of blunders in otherwise well\n"
-		"matched data (e.g., image matching between two images with lots of\n"
-		"differences), it might be preferable to toss out all large outliers.\n"
-		"So, if Chisq_threshold is >= 1 we just toss out all points outside of\n"
-		"the Blunder_threshold. \n"
+		"However, if we expect large numbers of blunders in otherwise well matched data\n"
+		"(e.g., image matching between two images with lots of differences), it might be\n"
+		"preferable to toss out all large outliers. So, if Chisq_threshold is >= 1 we\n"
+		"just toss out all points outside of the Blunder_threshold.  \n"
+		"\n"
 		""},
 	 { "Rpc_fit_all", _wrap_Rpc_fit_all, METH_VARARGS, "\n"
+		"fit_all(Rpc self, vector_double Line, vector_double Sample, vector_double Latitude, vector_double Longitude, vector_double Height)\n"
 		"\n"
-		"void Rpc::fit_all(const std::vector< double > &Line, const std::vector< double >\n"
-		"&Sample, const std::vector< double > &Latitude, const std::vector<\n"
-		"double > &Longitude, const std::vector< double > &Height)\n"
 		"GeoCal::Rpc::fit_all\n"
-		"You may not want to use this function directly, but rather use Rpc::generate_rpc which sets up the entire RPC.\n"
-		"This is a low level function used to create an RPC that matches a set\n"
-		"of data. The RPC should have already had the various offset and scales\n"
-		"filled in. This function then fills in line_denominator,\n"
-		"line_numerator, sample_denominator, and sample_numerator.\n"
+		"You may not want to use this function directly, but rather use Rpc::generate_rpc\n"
+		"which sets up the entire RPC.  \n"
 		"\n"
-		"This fits all of the rpc parameters (the full 78 parameters) doing a\n"
-		"linear least squares fit. This doesn't to any blunder detection, or\n"
-		"allow a subset to be used.\n"
+		"This is a low level function used to create an RPC that matches a set of data.\n"
+		"The RPC should have already had the various offset and scales filled in. This\n"
+		"function then fills in line_denominator, line_numerator, sample_denominator, and\n"
+		"sample_numerator.  \n"
+		"\n"
+		"This fits all of the rpc parameters (the full 78 parameters) doing a linear\n"
+		"least squares fit. This doesn't to any blunder detection, or allow a subset to\n"
+		"be used.  \n"
 		"\n"
 		"The idea is that through some other method you can determine latitude,\n"
-		"longitude, height vs line, sample (e.g., using a Orbit and Camera).\n"
-		"You then generate a regular set of points, set up the offset and\n"
-		"scale, and finally call this function to fit the RPC. \n"
+		"longitude, height vs line, sample (e.g., using a Orbit and Camera). You then\n"
+		"generate a regular set of points, set up the offset and scale, and finally call\n"
+		"this function to fit the RPC.  \n"
+		"\n"
 		""},
 	 { "Rpc_generate_rpc", _wrap_Rpc_generate_rpc, METH_VARARGS, "\n"
+		"generate_rpc(ImageGroundConnection Igc, double Min_height, double Max_height, int Nlat=20, int Nlon=20, int Nheight=20, bool Skip_masked_point=False, bool Ignore_error=False) -> Rpc\n"
 		"\n"
-		"Rpc Rpc::generate_rpc(const ImageGroundConnection &Igc, double Min_height, double\n"
-		"Max_height, int Nlat=20, int Nlon=20, int Nheight=20, bool\n"
-		"Skip_masked_point=false, bool Ignore_error=false)\n"
 		"GeoCal::Rpc::generate_rpc\n"
 		"Generate a RPC that approximates the calculation done by a\n"
-		"ImageGroundConnection.\n"
-		"We determine that latitude and longitude range to use automatically to\n"
-		"cover the range given by the ImageGroundConnection.\n"
+		"ImageGroundConnection.  \n"
 		"\n"
-		"This routine always ignores ImageGroundConnectionFailed exceptions,\n"
-		"and just skips to the next point. But if we are using python code for\n"
-		"the ImageGroundConnection we can't translate errors to\n"
-		"ImageGroundConnectionFailed (this is a limitation of SWIG). So you can\n"
-		"optionally specify Ignore_error as true, in which case we ignore all\n"
-		"exceptions and just skip to the next point.\n"
+		"We determine that latitude and longitude range to use automatically to cover the\n"
+		"range given by the ImageGroundConnection.  \n"
 		"\n"
-		"We normally look at all image points when generating the RPC. You can\n"
-		"optionally specify Skip_masked_point to skip all image points that are\n"
-		"masked. \n"
+		"This routine always ignores ImageGroundConnectionFailed exceptions, and just\n"
+		"skips to the next point. But if we are using python code for the\n"
+		"ImageGroundConnection we can't translate errors to ImageGroundConnectionFailed\n"
+		"(this is a limitation of SWIG). So you can optionally specify Ignore_error as\n"
+		"true, in which case we ignore *all* exceptions and just skip to the next point.  \n"
+		"\n"
+		"We normally look at all image points when generating the RPC. You can optionally\n"
+		"specify Skip_masked_point to skip all image points that are masked.  \n"
+		"\n"
 		""},
 	 { "Rpc_ground_coordinate", _wrap_Rpc_ground_coordinate, METH_VARARGS, "\n"
+		"ground_coordinate(Rpc self, ImageCoordinate Ic, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"ground_coordinate(Rpc self, ImageCoordinate Ic, double Height) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > Rpc::ground_coordinate(const ImageCoordinate &Ic, double Height) const\n"
 		"GeoCal::Rpc::ground_coordinate\n"
 		"Invert the RPC to find the ground coordinate that maps to a give\n"
-		"ImageCoordinate.\n"
-		"This routine may fail to find a solution, in which case a\n"
-		"ConvergenceFailure exception will be thrown. \n"
+		"ImageCoordinate.  \n"
+		"\n"
+		"This routine may fail to find a solution, in which case a ConvergenceFailure\n"
+		"exception will be thrown.  \n"
+		"\n"
 		""},
 	 { "Rpc_image_coordinate", _wrap_Rpc_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(Rpc self, GroundCoordinate Gc) -> ImageCoordinate\n"
+		"image_coordinate(Rpc self, double Latitude, double Longitude, double Height_ellipsoid) -> ImageCoordinate\n"
+		"image_coordinate(Rpc self, BlitzArray_double_1 Latitude, BlitzArray_double_1 Longitude, BlitzArray_double_1 Height_ellipsoid) -> BlitzArray_double_2\n"
+		"image_coordinate(Rpc self, BlitzArray_double_2 Latitude, BlitzArray_double_2 Longitude, BlitzArray_double_2 Height_ellipsoid) -> BlitzArray_double_3\n"
+		"image_coordinate(Rpc self, BlitzArray_double_3 Latitude, BlitzArray_double_3 Longitude, BlitzArray_double_3 Height_ellipsoid) -> BlitzArray_double_4\n"
 		"\n"
-		"ImageCoordinate GeoCal::Rpc::image_coordinate(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"GeoCal::Rpc::image_coordinate\n"
-		"Convert from object space to image space (i.e., calculate RPC).\n"
-		"The longitude and latitude are given in degrees (this is the geodetic\n"
-		"latitude). The height is in meters, relative to the reference\n"
-		"ellipsoid (e.g., WGS-84). \n"
+		"Convert from object space to image space (i.e., calculate RPC).  \n"
+		"\n"
+		"The longitude and latitude are given in degrees (this is the geodetic latitude).\n"
+		"The height is in meters, relative to the reference ellipsoid (e.g., WGS-84).  \n"
+		"\n"
 		""},
 	 { "Rpc_image_coordinate_jac_parm", _wrap_Rpc_image_coordinate_jac_parm, METH_VARARGS, "\n"
+		"image_coordinate_jac_parm(Rpc self, GroundCoordinate Gc) -> BlitzArray_double_2\n"
+		"image_coordinate_jac_parm(Rpc self, double Latitude, double Longitude, double Height_ellipsoid) -> BlitzArray_double_2\n"
 		"\n"
-		"Array< double, 2 > Rpc::image_coordinate_jac_parm(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"GeoCal::Rpc::image_coordinate_jac_parm\n"
-		"Jacobian of image_coordinate with respect to the parameters that are\n"
-		"marked as ones we are fitting.\n"
-		"This has two rows, the first is for line and the second sample. The\n"
-		"columns are first the true values in fit_line_numerator, and then\n"
-		"fit_sample_numerator. \n"
+		"Jacobian of image_coordinate with respect to the parameters that are marked as\n"
+		"ones we are fitting.  \n"
+		"\n"
+		"This has two rows, the first is for line and the second sample. The columns are\n"
+		"first the true values in fit_line_numerator, and then fit_sample_numerator.  \n"
+		"\n"
 		""},
 	 { "Rpc_image_coordinate_jac", _wrap_Rpc_image_coordinate_jac, METH_VARARGS, "\n"
+		"image_coordinate_jac(Rpc self, double Latitude, double Longitude, double Height_ellipsoid) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeoCal::Rpc::image_coordinate_jac(double Latitude, double Longitude, double Height_ellipsoid) const\n"
 		"GeoCal::Rpc::image_coordinate_jac\n"
-		"Jacobian of image_coordinate with respect to the Latitude, Longitude,\n"
-		"and Height_ellipsoid.\n"
-		"This is a 2 x 3 matrix, with the first row being line and the second\n"
-		"sample. The columns are in Latitude, Longitude and Height_ellipsoid\n"
-		"order. \n"
+		"Jacobian of image_coordinate with respect to the Latitude, Longitude, and\n"
+		"Height_ellipsoid.  \n"
+		"\n"
+		"This is a 2 x 3 matrix, with the first row being line and the second sample. The\n"
+		"columns are in Latitude, Longitude and Height_ellipsoid order.  \n"
+		"\n"
 		""},
 	 { "Rpc_rpc_project", _wrap_Rpc_rpc_project, METH_VARARGS, "\n"
+		"rpc_project(Rpc self, RasterImage Res, RasterImage Img, Dem D, double Line_scale=1, double Sample_scale=1)\n"
 		"\n"
-		"void Rpc::rpc_project(RasterImage &Res, const RasterImage &Img, const Dem &D, double\n"
-		"Line_scale=1.0, double Sample_scale=1.0) const\n"
 		"GeoCal::Rpc::rpc_project\n"
-		"This uses the RPC to project a RasterImage to a MapInfo.\n"
-		"On entry, the RasterImage Res should already have the size and MapInfo\n"
-		"that we want to project to.\n"
+		"This uses the RPC to project a RasterImage to a MapInfo.  \n"
 		"\n"
-		"In some cases, Img might be a lower resolution image than is described\n"
-		"by the RPC (e.g., we are imaging matching 60 cm Quickbird data to 5 m\n"
-		"CIB data, so we down sample by a factor of 9). In those cases, a scale\n"
-		"to apply to the line and sample returned by the RPC before looking\n"
-		"into Img can be given. The default value is to not scale. \n"
+		"On entry, the RasterImage Res should already have the size and MapInfo that we\n"
+		"want to project to.  \n"
+		"\n"
+		"In some cases, Img might be a lower resolution image than is described by the\n"
+		"RPC (e.g., we are imaging matching 60 cm Quickbird data to 5 m CIB data, so we\n"
+		"down sample by a factor of 9). In those cases, a scale to apply to the line and\n"
+		"sample returned by the RPC before looking into Img can be given. The default\n"
+		"value is to not scale.  \n"
+		"\n"
 		""},
 	 { "Rpc_rpc_type_a", _wrap_Rpc_rpc_type_a, METH_O, "\n"
+		"rpc_type_a(Rpc self) -> Rpc\n"
 		"\n"
-		"Rpc Rpc::rpc_type_a() const\n"
 		"GeoCal::Rpc::rpc_type_a\n"
-		"This return a Rpc that has type RPC_A.\n"
-		"If this rpc is already type RPC_A, then this is just a copy. Otherwise\n"
-		"we rearrange the coefficients to give a type RPC_A. \n"
+		"This return a Rpc that has type RPC_A.  \n"
+		"\n"
+		"If this rpc is already type RPC_A, then this is just a copy. Otherwise we\n"
+		"rearrange the coefficients to give a type RPC_A.  \n"
+		"\n"
 		""},
 	 { "Rpc_rpc_type_b", _wrap_Rpc_rpc_type_b, METH_O, "\n"
+		"rpc_type_b(Rpc self) -> Rpc\n"
 		"\n"
-		"Rpc Rpc::rpc_type_b() const\n"
 		"GeoCal::Rpc::rpc_type_b\n"
-		"This return a Rpc that has type RPC_B.\n"
-		"If this rpc is already type RPC_B, then this is just a copy. Otherwise\n"
-		"we rearrange the coefficients to give a type RPC_B. \n"
+		"This return a Rpc that has type RPC_B.  \n"
+		"\n"
+		"If this rpc is already type RPC_B, then this is just a copy. Otherwise we\n"
+		"rearrange the coefficients to give a type RPC_B.  \n"
+		"\n"
 		""},
 	 { "new_Rpc", _wrap_new_Rpc, METH_VARARGS, "\n"
+		"Rpc()\n"
+		"new_Rpc(Rpc other) -> Rpc\n"
 		"\n"
-		"Rpc::Rpc()\n"
 		"GeoCal::Rpc::Rpc\n"
-		"Default constructor.\n"
-		"Initializes fit_line_numerator and fit_sample_numerator to all false.\n"
+		"Default constructor.  \n"
+		"\n"
+		"Initializes fit_line_numerator and fit_sample_numerator to all false.  \n"
 		"\n"
 		""},
-	 { "delete_Rpc", _wrap_delete_Rpc, METH_O, NULL},
+	 { "delete_Rpc", _wrap_delete_Rpc, METH_O, "delete_Rpc(Rpc self)"},
 	 { "Rpc_swigregister", Rpc_swigregister, METH_O, NULL},
 	 { "Rpc_swiginit", Rpc_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

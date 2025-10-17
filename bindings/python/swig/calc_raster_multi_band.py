@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _calc_raster_multi_band.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _calc_raster_multi_band:
 _calc_raster_multi_band.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _calc_raster_multi_band.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,16 +144,18 @@ import geocal_swig.geocal_exception
 class CalcRasterMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMultiBandVariable):
     r"""
 
-    Some classes most naturally generate a RasterImageMultiBand by
-    calculating a results for an array of data (e.g., a tile).
 
-    This class handles the common behavior for these classes.
+    Some classes most naturally generate a RasterImageMultiBand by calculating a
+    results for an array of data (e.g., a tile).  
 
-    This is very similar to RasterImageMultiBand made upf of CalcRaster,
-    the difference is that for this class it makes sense to calculate all
-    the bands at once.
+    This class handles the common behavior for these classes.  
 
-    C++ includes: calc_raster_multi_band.h 
+    This is very similar to RasterImageMultiBand made upf of CalcRaster, the
+    difference is that for this class it makes sense to calculate all the bands at
+    once.  
+
+    C++ includes: calc_raster_multi_band.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -166,6 +171,12 @@ class CalcRasterMultiBand(geocal_swig.raster_image_multi_band_variable.RasterIma
     calc = _swig_new_instance_method(_calc_raster_multi_band.CalcRasterMultiBand_calc)
 
     def __init__(self, *args):
+        r"""
+        __init__(CalcRasterMultiBand self) -> CalcRasterMultiBand
+        __init__(CalcRasterMultiBand self, RasterImage Img, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4) -> CalcRasterMultiBand
+        __init__(CalcRasterMultiBand self, int Nline, int Nsamp, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4) -> CalcRasterMultiBand
+        __init__(CalcRasterMultiBand self, MapInfo Mi, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4) -> CalcRasterMultiBand
+        """
         if self.__class__ == CalcRasterMultiBand:
             _self = None
         else:

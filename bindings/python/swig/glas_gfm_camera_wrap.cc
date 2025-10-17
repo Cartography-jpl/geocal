@@ -12789,242 +12789,277 @@ SWIGINTERN PyObject *GlasGfmCamera_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GlasGfmCamera", _wrap_new_GlasGfmCamera, METH_VARARGS, "\n"
+		"GlasGfmCamera(int Number_line=1, int Number_sample=256)\n"
+		"GlasGfmCamera(Camera Cam, int Band, double Delta_sample, std::string const & Band_type=\"N\", double Band_wavelength=1.45, double Focal_length_meter=1.0, Time Focal_length_time=GeoCal::Time::time_j2000(0))\n"
+		"GlasGfmCamera(Camera Cam, int Band, double Delta_line, double Delta_sample, std::string const & Band_type=\"N\", double Band_wavelength=1.45, double Focal_length_meter=1.0, Time Focal_length_time=GeoCal::Time::time_j2000(0))\n"
 		"\n"
-		"GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)\n"
 		"GeoCal::GlasGfmCamera::GlasGfmCamera\n"
 		""},
 	 { "GlasGfmCamera_set_number_line", _wrap_GlasGfmCamera_set_number_line, METH_VARARGS, "\n"
+		"GlasGfmCamera_set_number_line(GlasGfmCamera self, int V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::set_number_line(int V)\n"
 		"GeoCal::GlasGfmCamera::set_number_line\n"
 		""},
 	 { "GlasGfmCamera_set_number_sample", _wrap_GlasGfmCamera_set_number_sample, METH_VARARGS, "\n"
+		"GlasGfmCamera_set_number_sample(GlasGfmCamera self, int V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::set_number_sample(int V)\n"
 		"GeoCal::GlasGfmCamera::set_number_sample\n"
 		""},
 	 { "GlasGfmCamera__v_focal_length", _wrap_GlasGfmCamera__v_focal_length, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_focal_length(GlasGfmCamera self) -> double\n"
+		"GlasGfmCamera__v_focal_length(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::focal_length(double V)\n"
 		"GeoCal::GlasGfmCamera::focal_length\n"
-		"Set focal length, in meters (so not mm like QuaternionCamera)\n"
+		"Set focal length, in meters (so not mm like QuaternionCamera)  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_focal_length_with_derivative", _wrap_GlasGfmCamera__v_focal_length_with_derivative, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_focal_length_with_derivative(GlasGfmCamera self) -> AutoDerivativeDouble\n"
+		"GlasGfmCamera__v_focal_length_with_derivative(GlasGfmCamera self, AutoDerivativeDouble V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::focal_length_with_derivative(const AutoDerivative< double > &V)\n"
 		"GeoCal::GlasGfmCamera::focal_length_with_derivative\n"
-		"Set focal length, in meters (so not mm like QuaternionCamera)\n"
+		"Set focal length, in meters (so not mm like QuaternionCamera)  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera_frame_coordinate_to_xy", _wrap_GlasGfmCamera_frame_coordinate_to_xy, METH_VARARGS, "\n"
+		"GlasGfmCamera_frame_coordinate_to_xy(GlasGfmCamera self, FrameCoordinate F, int Band)\n"
 		"\n"
-		"void GlasGfmCamera::frame_coordinate_to_xy(const FrameCoordinate &F, int Band, double &xfp, double &yfp) const\n"
 		"GeoCal::GlasGfmCamera::frame_coordinate_to_xy\n"
-		"Return the focal plane x and y for the given FrameCoordinate.\n"
+		"Return the focal plane x and y for the given FrameCoordinate.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_frame_to_sc", _wrap_GlasGfmCamera__v_frame_to_sc, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_frame_to_sc(GlasGfmCamera self) -> Quaternion_double\n"
+		"GlasGfmCamera__v_frame_to_sc(GlasGfmCamera self, Quaternion_double V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::frame_to_sc(const boost::math::quaternion< double > &frame_to_sc_q)\n"
 		"GeoCal::GlasGfmCamera::frame_to_sc\n"
-		"Set frame to spacecraft quaternion.\n"
+		"Set frame to spacecraft quaternion.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_frame_to_sc_with_derivative", _wrap_GlasGfmCamera__v_frame_to_sc_with_derivative, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_frame_to_sc_with_derivative(GlasGfmCamera self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"GlasGfmCamera__v_frame_to_sc_with_derivative(GlasGfmCamera self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::frame_to_sc_with_derivative(const boost::math::quaternion< AutoDerivative< double > >\n"
-		"&frame_to_sc_q)\n"
 		"GeoCal::GlasGfmCamera::frame_to_sc_with_derivative\n"
-		"Set frame to spacecraft quaternion.\n"
+		"Set frame to spacecraft quaternion.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_id", _wrap_GlasGfmCamera__v_id, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_id(GlasGfmCamera self) -> std::string\n"
+		"GlasGfmCamera__v_id(GlasGfmCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::id(const std::string &V)\n"
 		"GeoCal::GlasGfmCamera::id\n"
 		""},
 	 { "GlasGfmCamera__v_sensor_type", _wrap_GlasGfmCamera__v_sensor_type, METH_O, "\n"
+		"GlasGfmCamera__v_sensor_type(GlasGfmCamera self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::GlasGfmCamera::sensor_type() const\n"
 		"GeoCal::GlasGfmCamera::sensor_type\n"
-		"Sensor type, \"S\" or \"F\".\n"
+		"Sensor type, \"S\" or \"F\".  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_fit_epsilon", _wrap_GlasGfmCamera__v_fit_epsilon, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_fit_epsilon(GlasGfmCamera self) -> bool\n"
+		"GlasGfmCamera__v_fit_epsilon(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_epsilon(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_epsilon\n"
 		""},
 	 { "GlasGfmCamera__v_fit_beta", _wrap_GlasGfmCamera__v_fit_beta, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_fit_beta(GlasGfmCamera self) -> bool\n"
+		"GlasGfmCamera__v_fit_beta(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_beta(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_beta\n"
 		""},
 	 { "GlasGfmCamera__v_fit_delta", _wrap_GlasGfmCamera__v_fit_delta, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_fit_delta(GlasGfmCamera self) -> bool\n"
+		"GlasGfmCamera__v_fit_delta(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_delta(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_delta\n"
 		""},
 	 { "GlasGfmCamera__v_fit_focal_length", _wrap_GlasGfmCamera__v_fit_focal_length, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_fit_focal_length(GlasGfmCamera self) -> bool\n"
+		"GlasGfmCamera__v_fit_focal_length(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_focal_length(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_focal_length\n"
 		""},
 	 { "GlasGfmCamera__v_band_type", _wrap_GlasGfmCamera__v_band_type, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_band_type(GlasGfmCamera self) -> std::string\n"
+		"GlasGfmCamera__v_band_type(GlasGfmCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::band_type(const std::string &V)\n"
 		"GeoCal::GlasGfmCamera::band_type\n"
 		""},
 	 { "GlasGfmCamera__v_band_wavelength", _wrap_GlasGfmCamera__v_band_wavelength, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_band_wavelength(GlasGfmCamera self) -> double\n"
+		"GlasGfmCamera__v_band_wavelength(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::band_wavelength(double V)\n"
 		"GeoCal::GlasGfmCamera::band_wavelength\n"
 		""},
 	 { "GlasGfmCamera__v_band_index", _wrap_GlasGfmCamera__v_band_index, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_band_index(GlasGfmCamera self) -> vector_int\n"
+		"GlasGfmCamera__v_band_index(GlasGfmCamera self, vector_int V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::band_index(const std::vector< int > &V)\n"
 		"GeoCal::GlasGfmCamera::band_index\n"
 		""},
 	 { "GlasGfmCamera__v_irepband", _wrap_GlasGfmCamera__v_irepband, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_irepband(GlasGfmCamera self) -> vector_string\n"
+		"GlasGfmCamera__v_irepband(GlasGfmCamera self, vector_string V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::irepband(const std::vector< std::string > &V)\n"
 		"GeoCal::GlasGfmCamera::irepband\n"
 		""},
 	 { "GlasGfmCamera__v_isubcat", _wrap_GlasGfmCamera__v_isubcat, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_isubcat(GlasGfmCamera self) -> vector_string\n"
+		"GlasGfmCamera__v_isubcat(GlasGfmCamera self, vector_string V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::isubcat(const std::vector< std::string > &V)\n"
 		"GeoCal::GlasGfmCamera::isubcat\n"
 		""},
 	 { "GlasGfmCamera__v_focal_length_time", _wrap_GlasGfmCamera__v_focal_length_time, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_focal_length_time(GlasGfmCamera self) -> Time\n"
+		"GlasGfmCamera__v_focal_length_time(GlasGfmCamera self, Time V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::focal_length_time(const Time &V)\n"
 		"GeoCal::GlasGfmCamera::focal_length_time\n"
 		""},
 	 { "GlasGfmCamera__v_ppoff", _wrap_GlasGfmCamera__v_ppoff, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_ppoff(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"GlasGfmCamera__v_ppoff(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GlasGfmCamera::ppoff(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::ppoff\n"
 		""},
 	 { "GlasGfmCamera__v_angoff", _wrap_GlasGfmCamera__v_angoff, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_angoff(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"GlasGfmCamera__v_angoff(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GlasGfmCamera::angoff(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::angoff\n"
 		""},
 	 { "GlasGfmCamera__v_sample_number_first", _wrap_GlasGfmCamera__v_sample_number_first, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_sample_number_first(GlasGfmCamera self) -> double\n"
+		"GlasGfmCamera__v_sample_number_first(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::sample_number_first(double V)\n"
 		"GeoCal::GlasGfmCamera::sample_number_first\n"
 		""},
 	 { "GlasGfmCamera__v_delta_sample_pair", _wrap_GlasGfmCamera__v_delta_sample_pair, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_delta_sample_pair(GlasGfmCamera self) -> double\n"
+		"GlasGfmCamera__v_delta_sample_pair(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GlasGfmCamera::delta_sample_pair(double V)\n"
 		"GeoCal::GlasGfmCamera::delta_sample_pair\n"
-		"Set delta Sample Pair. This is applicable for sensor type \"S\" only.\n"
+		"Set delta Sample Pair. This is applicable for sensor type \"S\" only.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_field_alignment", _wrap_GlasGfmCamera__v_field_alignment, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_field_alignment(GlasGfmCamera self) -> BlitzArray_double_2\n"
+		"GlasGfmCamera__v_field_alignment(GlasGfmCamera self, BlitzArray_double_2 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment(const blitz::Array< double, 2 > &V)\n"
 		"GeoCal::GlasGfmCamera::field_alignment\n"
-		"Set Field Alignment.\n"
-		"This is n x 4. The columns are start_x, start_y, end_x, end_y. This is\n"
-		"applicable for sensor type \"S\" only.\n"
+		"Set Field Alignment.  \n"
 		"\n"
-		"Note this does not change delta_sample_pair. If you alter the size of\n"
-		"field_alignment you almost certainly want to also set\n"
-		"delta_sample_pair, which is a separate step. \n"
+		"This is n x 4. The columns are start_x, start_y, end_x, end_y. This is\n"
+		"applicable for sensor type \"S\" only.  \n"
+		"\n"
+		"Note this does *not* change delta_sample_pair. If you alter the size of\n"
+		"field_alignment you almost certainly want to also set delta_sample_pair, which\n"
+		"is a separate step.  \n"
+		"\n"
 		""},
 	 { "GlasGfmCamera_field_alignment_fit", _wrap_GlasGfmCamera_field_alignment_fit, METH_VARARGS, "\n"
+		"GlasGfmCamera_field_alignment_fit(GlasGfmCamera self, Camera Cam, double Delta_sample, int Band=0)\n"
 		"\n"
-		"void GlasGfmCamera::field_alignment_fit(const Camera &Cam, double Delta_sample, int Band=0)\n"
 		"GeoCal::GlasGfmCamera::field_alignment_fit\n"
-		"Populate the field_alignment, sample_number_first_, delta_sample_pair_\n"
-		"to match the given camera.\n"
-		"Only applicable for sensor type \"S\".\n"
+		"Populate the field_alignment, sample_number_first_, delta_sample_pair_ to match\n"
+		"the given camera.  \n"
 		"\n"
-		"You may want to call compare_camera to check how accurate the\n"
-		"approximation is.\n"
+		"Only applicable for sensor type \"S\".  \n"
 		"\n"
-		"Note that you should be careful not to double count any frame_t\n"
-		"quaternion. If you pass that in with the Cam, then this is already\n"
-		"accounted for in the field angle map (which has the effect of the\n"
-		"quaternion embedded in it). If you want to assign the frame_to_sc to\n"
-		"the GlasGfmCamera, then you should make sure to pass a Camera with a\n"
-		"identity frame_to_sc. So a reasonable process (in python) would be\n"
-		"something like:\n"
+		"You may want to call compare_camera to check how accurate the approximation is.  \n"
 		"\n"
-		"q_original = cam.frame_to_sc cam.frame_to_sc =\n"
-		"Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)\n"
-		"gcam.frame_to_sc = q_original cam.frame_to_sc = q_original \n"
+		"Note that you should be careful not to double count any frame_t quaternion. If\n"
+		"you pass that in with the Cam, then this is already accounted for in the field\n"
+		"angle map (which has the effect of the quaternion embedded in it). If you want\n"
+		"to assign the frame_to_sc to the GlasGfmCamera, then you should make sure to\n"
+		"pass a Camera with a identity frame_to_sc. So a reasonable process (in python)\n"
+		"would be something like:  \n"
+		"\n"
+		"q_original = cam.frame_to_sc cam.frame_to_sc = Quaternion_double(1,0,0,0) gcam =\n"
+		"GlasGfmCamera(cam, 0, ...) gcam.frame_to_sc = q_original cam.frame_to_sc =\n"
+		"q_original  \n"
+		"\n"
 		""},
 	 { "GlasGfmCamera__v_field_angle_type", _wrap_GlasGfmCamera__v_field_angle_type, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_field_angle_type(GlasGfmCamera self) -> int\n"
+		"GlasGfmCamera__v_field_angle_type(GlasGfmCamera self, int const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_angle_type(int V)\n"
 		"GeoCal::GlasGfmCamera::field_angle_type\n"
 		""},
 	 { "GlasGfmCamera__v_field_angle_interpolation_type", _wrap_GlasGfmCamera__v_field_angle_interpolation_type, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_field_angle_interpolation_type(GlasGfmCamera self) -> int\n"
+		"GlasGfmCamera__v_field_angle_interpolation_type(GlasGfmCamera self, int const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_angle_interpolation_type(int V)\n"
 		"GeoCal::GlasGfmCamera::field_angle_interpolation_type\n"
 		""},
 	 { "GlasGfmCamera__v_first_line_block", _wrap_GlasGfmCamera__v_first_line_block, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_first_line_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"GlasGfmCamera__v_first_line_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::first_line_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::first_line_block\n"
 		""},
 	 { "GlasGfmCamera__v_first_sample_block", _wrap_GlasGfmCamera__v_first_sample_block, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_first_sample_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"GlasGfmCamera__v_first_sample_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::first_sample_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::first_sample_block\n"
 		""},
 	 { "GlasGfmCamera__v_delta_line_block", _wrap_GlasGfmCamera__v_delta_line_block, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_delta_line_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"GlasGfmCamera__v_delta_line_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::delta_line_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::delta_line_block\n"
 		""},
 	 { "GlasGfmCamera__v_delta_sample_block", _wrap_GlasGfmCamera__v_delta_sample_block, METH_VARARGS, "\n"
+		"GlasGfmCamera__v_delta_sample_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"GlasGfmCamera__v_delta_sample_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::delta_sample_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::delta_sample_block\n"
 		""},
 	 { "GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, "\n"
+		"GlasGfmCamera_field_alignment_block(GlasGfmCamera self, int i) -> BlitzArray_double_5\n"
+		"GlasGfmCamera_field_alignment_block(GlasGfmCamera self, int i, BlitzArray_double_5 V)\n"
+		"GlasGfmCamera_field_alignment_block(GlasGfmCamera self, Camera cam, double Delta_line, double Delta_sample, int Band=0)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
 		"GeoCal::GlasGfmCamera::field_alignment_block\n"
 		""},
 	 { "GlasGfmCamera_compare_camera", _wrap_GlasGfmCamera_compare_camera, METH_VARARGS, "\n"
+		"GlasGfmCamera_compare_camera(GlasGfmCamera self, Camera Cam, int Band=0)\n"
 		"\n"
-		"void GlasGfmCamera::compare_camera(const Camera &Cam, double &max_line_diff, double &max_sample_diff,\n"
-		"int Band=0) const\n"
 		"GeoCal::GlasGfmCamera::compare_camera\n"
-		"Return the maximum difference in frame coordinate line and sample\n"
-		"between this camera and another camera.\n"
+		"Return the maximum difference in frame coordinate line and sample between this\n"
+		"camera and another camera.  \n"
+		"\n"
 		"You may want to call this after doing field_alignment_block or\n"
-		"field_alignment_fit. \n"
+		"field_alignment_fit.  \n"
+		"\n"
 		""},
 	 { "delete_GlasGfmCamera", _wrap_delete_GlasGfmCamera, METH_O, "\n"
+		"delete_GlasGfmCamera(GlasGfmCamera self)\n"
 		"\n"
-		"virtual GeoCal::GlasGfmCamera::~GlasGfmCamera()\n"
 		"GeoCal::GlasGfmCamera::~GlasGfmCamera\n"
 		""},
 	 { "GlasGfmCamera_swigregister", GlasGfmCamera_swigregister, METH_O, NULL},
@@ -13035,242 +13070,277 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GlasGfmCamera", _wrap_new_GlasGfmCamera, METH_VARARGS, "\n"
+		"GlasGfmCamera(int Number_line=1, int Number_sample=256)\n"
+		"GlasGfmCamera(Camera Cam, int Band, double Delta_sample, std::string const & Band_type=\"N\", double Band_wavelength=1.45, double Focal_length_meter=1.0, Time Focal_length_time=GeoCal::Time::time_j2000(0))\n"
+		"GlasGfmCamera(Camera Cam, int Band, double Delta_line, double Delta_sample, std::string const & Band_type=\"N\", double Band_wavelength=1.45, double Focal_length_meter=1.0, Time Focal_length_time=GeoCal::Time::time_j2000(0))\n"
 		"\n"
-		"GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)\n"
 		"GeoCal::GlasGfmCamera::GlasGfmCamera\n"
 		""},
 	 { "GlasGfmCamera_set_number_line", _wrap_GlasGfmCamera_set_number_line, METH_VARARGS, "\n"
+		"set_number_line(GlasGfmCamera self, int V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::set_number_line(int V)\n"
 		"GeoCal::GlasGfmCamera::set_number_line\n"
 		""},
 	 { "GlasGfmCamera_set_number_sample", _wrap_GlasGfmCamera_set_number_sample, METH_VARARGS, "\n"
+		"set_number_sample(GlasGfmCamera self, int V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::set_number_sample(int V)\n"
 		"GeoCal::GlasGfmCamera::set_number_sample\n"
 		""},
 	 { "GlasGfmCamera__v_focal_length", _wrap_GlasGfmCamera__v_focal_length, METH_VARARGS, "\n"
+		"_v_focal_length(GlasGfmCamera self) -> double\n"
+		"_v_focal_length(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::focal_length(double V)\n"
 		"GeoCal::GlasGfmCamera::focal_length\n"
-		"Set focal length, in meters (so not mm like QuaternionCamera)\n"
+		"Set focal length, in meters (so not mm like QuaternionCamera)  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_focal_length_with_derivative", _wrap_GlasGfmCamera__v_focal_length_with_derivative, METH_VARARGS, "\n"
+		"_v_focal_length_with_derivative(GlasGfmCamera self) -> AutoDerivativeDouble\n"
+		"_v_focal_length_with_derivative(GlasGfmCamera self, AutoDerivativeDouble V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::focal_length_with_derivative(const AutoDerivative< double > &V)\n"
 		"GeoCal::GlasGfmCamera::focal_length_with_derivative\n"
-		"Set focal length, in meters (so not mm like QuaternionCamera)\n"
+		"Set focal length, in meters (so not mm like QuaternionCamera)  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera_frame_coordinate_to_xy", _wrap_GlasGfmCamera_frame_coordinate_to_xy, METH_VARARGS, "\n"
+		"frame_coordinate_to_xy(GlasGfmCamera self, FrameCoordinate F, int Band)\n"
 		"\n"
-		"void GlasGfmCamera::frame_coordinate_to_xy(const FrameCoordinate &F, int Band, double &xfp, double &yfp) const\n"
 		"GeoCal::GlasGfmCamera::frame_coordinate_to_xy\n"
-		"Return the focal plane x and y for the given FrameCoordinate.\n"
+		"Return the focal plane x and y for the given FrameCoordinate.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_frame_to_sc", _wrap_GlasGfmCamera__v_frame_to_sc, METH_VARARGS, "\n"
+		"_v_frame_to_sc(GlasGfmCamera self) -> Quaternion_double\n"
+		"_v_frame_to_sc(GlasGfmCamera self, Quaternion_double V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::frame_to_sc(const boost::math::quaternion< double > &frame_to_sc_q)\n"
 		"GeoCal::GlasGfmCamera::frame_to_sc\n"
-		"Set frame to spacecraft quaternion.\n"
+		"Set frame to spacecraft quaternion.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_frame_to_sc_with_derivative", _wrap_GlasGfmCamera__v_frame_to_sc_with_derivative, METH_VARARGS, "\n"
+		"_v_frame_to_sc_with_derivative(GlasGfmCamera self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"_v_frame_to_sc_with_derivative(GlasGfmCamera self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::frame_to_sc_with_derivative(const boost::math::quaternion< AutoDerivative< double > >\n"
-		"&frame_to_sc_q)\n"
 		"GeoCal::GlasGfmCamera::frame_to_sc_with_derivative\n"
-		"Set frame to spacecraft quaternion.\n"
+		"Set frame to spacecraft quaternion.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_id", _wrap_GlasGfmCamera__v_id, METH_VARARGS, "\n"
+		"_v_id(GlasGfmCamera self) -> std::string\n"
+		"_v_id(GlasGfmCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::id(const std::string &V)\n"
 		"GeoCal::GlasGfmCamera::id\n"
 		""},
 	 { "GlasGfmCamera__v_sensor_type", _wrap_GlasGfmCamera__v_sensor_type, METH_O, "\n"
+		"_v_sensor_type(GlasGfmCamera self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::GlasGfmCamera::sensor_type() const\n"
 		"GeoCal::GlasGfmCamera::sensor_type\n"
-		"Sensor type, \"S\" or \"F\".\n"
+		"Sensor type, \"S\" or \"F\".  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_fit_epsilon", _wrap_GlasGfmCamera__v_fit_epsilon, METH_VARARGS, "\n"
+		"_v_fit_epsilon(GlasGfmCamera self) -> bool\n"
+		"_v_fit_epsilon(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_epsilon(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_epsilon\n"
 		""},
 	 { "GlasGfmCamera__v_fit_beta", _wrap_GlasGfmCamera__v_fit_beta, METH_VARARGS, "\n"
+		"_v_fit_beta(GlasGfmCamera self) -> bool\n"
+		"_v_fit_beta(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_beta(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_beta\n"
 		""},
 	 { "GlasGfmCamera__v_fit_delta", _wrap_GlasGfmCamera__v_fit_delta, METH_VARARGS, "\n"
+		"_v_fit_delta(GlasGfmCamera self) -> bool\n"
+		"_v_fit_delta(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_delta(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_delta\n"
 		""},
 	 { "GlasGfmCamera__v_fit_focal_length", _wrap_GlasGfmCamera__v_fit_focal_length, METH_VARARGS, "\n"
+		"_v_fit_focal_length(GlasGfmCamera self) -> bool\n"
+		"_v_fit_focal_length(GlasGfmCamera self, bool const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::fit_focal_length(bool V)\n"
 		"GeoCal::GlasGfmCamera::fit_focal_length\n"
 		""},
 	 { "GlasGfmCamera__v_band_type", _wrap_GlasGfmCamera__v_band_type, METH_VARARGS, "\n"
+		"_v_band_type(GlasGfmCamera self) -> std::string\n"
+		"_v_band_type(GlasGfmCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::band_type(const std::string &V)\n"
 		"GeoCal::GlasGfmCamera::band_type\n"
 		""},
 	 { "GlasGfmCamera__v_band_wavelength", _wrap_GlasGfmCamera__v_band_wavelength, METH_VARARGS, "\n"
+		"_v_band_wavelength(GlasGfmCamera self) -> double\n"
+		"_v_band_wavelength(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::band_wavelength(double V)\n"
 		"GeoCal::GlasGfmCamera::band_wavelength\n"
 		""},
 	 { "GlasGfmCamera__v_band_index", _wrap_GlasGfmCamera__v_band_index, METH_VARARGS, "\n"
+		"_v_band_index(GlasGfmCamera self) -> vector_int\n"
+		"_v_band_index(GlasGfmCamera self, vector_int V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::band_index(const std::vector< int > &V)\n"
 		"GeoCal::GlasGfmCamera::band_index\n"
 		""},
 	 { "GlasGfmCamera__v_irepband", _wrap_GlasGfmCamera__v_irepband, METH_VARARGS, "\n"
+		"_v_irepband(GlasGfmCamera self) -> vector_string\n"
+		"_v_irepband(GlasGfmCamera self, vector_string V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::irepband(const std::vector< std::string > &V)\n"
 		"GeoCal::GlasGfmCamera::irepband\n"
 		""},
 	 { "GlasGfmCamera__v_isubcat", _wrap_GlasGfmCamera__v_isubcat, METH_VARARGS, "\n"
+		"_v_isubcat(GlasGfmCamera self) -> vector_string\n"
+		"_v_isubcat(GlasGfmCamera self, vector_string V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::isubcat(const std::vector< std::string > &V)\n"
 		"GeoCal::GlasGfmCamera::isubcat\n"
 		""},
 	 { "GlasGfmCamera__v_focal_length_time", _wrap_GlasGfmCamera__v_focal_length_time, METH_VARARGS, "\n"
+		"_v_focal_length_time(GlasGfmCamera self) -> Time\n"
+		"_v_focal_length_time(GlasGfmCamera self, Time V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::focal_length_time(const Time &V)\n"
 		"GeoCal::GlasGfmCamera::focal_length_time\n"
 		""},
 	 { "GlasGfmCamera__v_ppoff", _wrap_GlasGfmCamera__v_ppoff, METH_VARARGS, "\n"
+		"_v_ppoff(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"_v_ppoff(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GlasGfmCamera::ppoff(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::ppoff\n"
 		""},
 	 { "GlasGfmCamera__v_angoff", _wrap_GlasGfmCamera__v_angoff, METH_VARARGS, "\n"
+		"_v_angoff(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"_v_angoff(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GlasGfmCamera::angoff(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::angoff\n"
 		""},
 	 { "GlasGfmCamera__v_sample_number_first", _wrap_GlasGfmCamera__v_sample_number_first, METH_VARARGS, "\n"
+		"_v_sample_number_first(GlasGfmCamera self) -> double\n"
+		"_v_sample_number_first(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::sample_number_first(double V)\n"
 		"GeoCal::GlasGfmCamera::sample_number_first\n"
 		""},
 	 { "GlasGfmCamera__v_delta_sample_pair", _wrap_GlasGfmCamera__v_delta_sample_pair, METH_VARARGS, "\n"
+		"_v_delta_sample_pair(GlasGfmCamera self) -> double\n"
+		"_v_delta_sample_pair(GlasGfmCamera self, double const & V)\n"
 		"\n"
-		"void GlasGfmCamera::delta_sample_pair(double V)\n"
 		"GeoCal::GlasGfmCamera::delta_sample_pair\n"
-		"Set delta Sample Pair. This is applicable for sensor type \"S\" only.\n"
+		"Set delta Sample Pair. This is applicable for sensor type \"S\" only.  \n"
 		"\n"
 		""},
 	 { "GlasGfmCamera__v_field_alignment", _wrap_GlasGfmCamera__v_field_alignment, METH_VARARGS, "\n"
+		"_v_field_alignment(GlasGfmCamera self) -> BlitzArray_double_2\n"
+		"_v_field_alignment(GlasGfmCamera self, BlitzArray_double_2 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment(const blitz::Array< double, 2 > &V)\n"
 		"GeoCal::GlasGfmCamera::field_alignment\n"
-		"Set Field Alignment.\n"
-		"This is n x 4. The columns are start_x, start_y, end_x, end_y. This is\n"
-		"applicable for sensor type \"S\" only.\n"
+		"Set Field Alignment.  \n"
 		"\n"
-		"Note this does not change delta_sample_pair. If you alter the size of\n"
-		"field_alignment you almost certainly want to also set\n"
-		"delta_sample_pair, which is a separate step. \n"
+		"This is n x 4. The columns are start_x, start_y, end_x, end_y. This is\n"
+		"applicable for sensor type \"S\" only.  \n"
+		"\n"
+		"Note this does *not* change delta_sample_pair. If you alter the size of\n"
+		"field_alignment you almost certainly want to also set delta_sample_pair, which\n"
+		"is a separate step.  \n"
+		"\n"
 		""},
 	 { "GlasGfmCamera_field_alignment_fit", _wrap_GlasGfmCamera_field_alignment_fit, METH_VARARGS, "\n"
+		"field_alignment_fit(GlasGfmCamera self, Camera Cam, double Delta_sample, int Band=0)\n"
 		"\n"
-		"void GlasGfmCamera::field_alignment_fit(const Camera &Cam, double Delta_sample, int Band=0)\n"
 		"GeoCal::GlasGfmCamera::field_alignment_fit\n"
-		"Populate the field_alignment, sample_number_first_, delta_sample_pair_\n"
-		"to match the given camera.\n"
-		"Only applicable for sensor type \"S\".\n"
+		"Populate the field_alignment, sample_number_first_, delta_sample_pair_ to match\n"
+		"the given camera.  \n"
 		"\n"
-		"You may want to call compare_camera to check how accurate the\n"
-		"approximation is.\n"
+		"Only applicable for sensor type \"S\".  \n"
 		"\n"
-		"Note that you should be careful not to double count any frame_t\n"
-		"quaternion. If you pass that in with the Cam, then this is already\n"
-		"accounted for in the field angle map (which has the effect of the\n"
-		"quaternion embedded in it). If you want to assign the frame_to_sc to\n"
-		"the GlasGfmCamera, then you should make sure to pass a Camera with a\n"
-		"identity frame_to_sc. So a reasonable process (in python) would be\n"
-		"something like:\n"
+		"You may want to call compare_camera to check how accurate the approximation is.  \n"
 		"\n"
-		"q_original = cam.frame_to_sc cam.frame_to_sc =\n"
-		"Quaternion_double(1,0,0,0) gcam = GlasGfmCamera(cam, 0, ...)\n"
-		"gcam.frame_to_sc = q_original cam.frame_to_sc = q_original \n"
+		"Note that you should be careful not to double count any frame_t quaternion. If\n"
+		"you pass that in with the Cam, then this is already accounted for in the field\n"
+		"angle map (which has the effect of the quaternion embedded in it). If you want\n"
+		"to assign the frame_to_sc to the GlasGfmCamera, then you should make sure to\n"
+		"pass a Camera with a identity frame_to_sc. So a reasonable process (in python)\n"
+		"would be something like:  \n"
+		"\n"
+		"q_original = cam.frame_to_sc cam.frame_to_sc = Quaternion_double(1,0,0,0) gcam =\n"
+		"GlasGfmCamera(cam, 0, ...) gcam.frame_to_sc = q_original cam.frame_to_sc =\n"
+		"q_original  \n"
+		"\n"
 		""},
 	 { "GlasGfmCamera__v_field_angle_type", _wrap_GlasGfmCamera__v_field_angle_type, METH_VARARGS, "\n"
+		"_v_field_angle_type(GlasGfmCamera self) -> int\n"
+		"_v_field_angle_type(GlasGfmCamera self, int const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_angle_type(int V)\n"
 		"GeoCal::GlasGfmCamera::field_angle_type\n"
 		""},
 	 { "GlasGfmCamera__v_field_angle_interpolation_type", _wrap_GlasGfmCamera__v_field_angle_interpolation_type, METH_VARARGS, "\n"
+		"_v_field_angle_interpolation_type(GlasGfmCamera self) -> int\n"
+		"_v_field_angle_interpolation_type(GlasGfmCamera self, int const & V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_angle_interpolation_type(int V)\n"
 		"GeoCal::GlasGfmCamera::field_angle_interpolation_type\n"
 		""},
 	 { "GlasGfmCamera__v_first_line_block", _wrap_GlasGfmCamera__v_first_line_block, METH_VARARGS, "\n"
+		"_v_first_line_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"_v_first_line_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::first_line_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::first_line_block\n"
 		""},
 	 { "GlasGfmCamera__v_first_sample_block", _wrap_GlasGfmCamera__v_first_sample_block, METH_VARARGS, "\n"
+		"_v_first_sample_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"_v_first_sample_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::first_sample_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::first_sample_block\n"
 		""},
 	 { "GlasGfmCamera__v_delta_line_block", _wrap_GlasGfmCamera__v_delta_line_block, METH_VARARGS, "\n"
+		"_v_delta_line_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"_v_delta_line_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::delta_line_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::delta_line_block\n"
 		""},
 	 { "GlasGfmCamera__v_delta_sample_block", _wrap_GlasGfmCamera__v_delta_sample_block, METH_VARARGS, "\n"
+		"_v_delta_sample_block(GlasGfmCamera self) -> BlitzArray_double_1\n"
+		"_v_delta_sample_block(GlasGfmCamera self, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::delta_sample_block(const blitz::Array< double, 1 > &V)\n"
 		"GeoCal::GlasGfmCamera::delta_sample_block\n"
 		""},
 	 { "GlasGfmCamera_field_alignment_block", _wrap_GlasGfmCamera_field_alignment_block, METH_VARARGS, "\n"
+		"field_alignment_block(GlasGfmCamera self, int i) -> BlitzArray_double_5\n"
+		"field_alignment_block(GlasGfmCamera self, int i, BlitzArray_double_5 V)\n"
+		"field_alignment_block(GlasGfmCamera self, Camera cam, double Delta_line, double Delta_sample, int Band=0)\n"
 		"\n"
-		"void GeoCal::GlasGfmCamera::field_alignment_block(int i, const blitz::Array< double, 5 > &V)\n"
 		"GeoCal::GlasGfmCamera::field_alignment_block\n"
 		""},
 	 { "GlasGfmCamera_compare_camera", _wrap_GlasGfmCamera_compare_camera, METH_VARARGS, "\n"
+		"compare_camera(GlasGfmCamera self, Camera Cam, int Band=0)\n"
 		"\n"
-		"void GlasGfmCamera::compare_camera(const Camera &Cam, double &max_line_diff, double &max_sample_diff,\n"
-		"int Band=0) const\n"
 		"GeoCal::GlasGfmCamera::compare_camera\n"
-		"Return the maximum difference in frame coordinate line and sample\n"
-		"between this camera and another camera.\n"
+		"Return the maximum difference in frame coordinate line and sample between this\n"
+		"camera and another camera.  \n"
+		"\n"
 		"You may want to call this after doing field_alignment_block or\n"
-		"field_alignment_fit. \n"
+		"field_alignment_fit.  \n"
+		"\n"
 		""},
 	 { "delete_GlasGfmCamera", _wrap_delete_GlasGfmCamera, METH_O, "\n"
+		"delete_GlasGfmCamera(GlasGfmCamera self)\n"
 		"\n"
-		"virtual GeoCal::GlasGfmCamera::~GlasGfmCamera()\n"
 		"GeoCal::GlasGfmCamera::~GlasGfmCamera\n"
 		""},
 	 { "GlasGfmCamera_swigregister", GlasGfmCamera_swigregister, METH_O, NULL},

@@ -10912,168 +10912,184 @@ SWIGINTERN PyObject *IgcCollection_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "delete_IgcCollection", _wrap_delete_IgcCollection, METH_O, "\n"
+		"delete_IgcCollection(IgcCollection self)\n"
 		"\n"
-		"virtual GeoCal::IgcCollection::~IgcCollection()\n"
 		"GeoCal::IgcCollection::~IgcCollection\n"
 		""},
 	 { "IgcCollection__v_number_image", _wrap_IgcCollection__v_number_image, METH_O, "\n"
+		"IgcCollection__v_number_image(IgcCollection self) -> int\n"
 		"\n"
-		"virtual int GeoCal::IgcCollection::number_image() const\n"
 		"GeoCal::IgcCollection::number_image\n"
 		""},
-	 { "IgcCollection_desc", _wrap_IgcCollection_desc, METH_O, NULL},
+	 { "IgcCollection_desc", _wrap_IgcCollection_desc, METH_O, "IgcCollection_desc(IgcCollection self) -> std::string"},
 	 { "IgcCollection_collinearity_residual", _wrap_IgcCollection_collinearity_residual, METH_VARARGS, "\n"
+		"IgcCollection_collinearity_residual(IgcCollection self, int Image_index, GroundCoordinate Gc, ImageCoordinate Ic_actual) -> BlitzArray_double_1\n"
 		"\n"
-		"virtual blitz::Array< double, 1 > GeoCal::IgcCollection::collinearity_residual(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate\n"
-		"&Ic_actual) const\n"
 		"GeoCal::IgcCollection::collinearity_residual\n"
-		"Return collinearity residual for given Image_index (see\n"
-		"ImageGroundConnection for details on this.\n"
+		"Return collinearity residual for given Image_index (see ImageGroundConnection\n"
+		"for details on this.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_collinearity_residual_jacobian", _wrap_IgcCollection_collinearity_residual_jacobian, METH_VARARGS, "\n"
+		"IgcCollection_collinearity_residual_jacobian(IgcCollection self, int Image_index, GroundCoordinate Gc, ImageCoordinate Ic_actual) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::collinearity_residual_jacobian(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate\n"
-		"&Ic_actual) const\n"
 		"GeoCal::IgcCollection::collinearity_residual_jacobian\n"
-		"Return jacobian of collinearity_residual.\n"
-		"The parameters for this class should already have AutoDerivative\n"
-		"extended for the jacobian (e.g., call add_identity_gradient()).\n"
+		"Return jacobian of collinearity_residual.  \n"
 		"\n"
-		"We add the derivative wrt the CartesianFixed coordinates of the\n"
-		"Ground_coor (X, Y, Z in that order), at the end of the Jacobian. So\n"
-		"the total Jacobian is 2 x (number parameter + 3). \n"
+		"The parameters for this class should already have AutoDerivative extended for\n"
+		"the jacobian (e.g., call add_identity_gradient()).  \n"
+		"\n"
+		"We add the derivative wrt the CartesianFixed coordinates of the Ground_coor (X,\n"
+		"Y, Z in that order), at the end of the Jacobian. So the total Jacobian is 2 x\n"
+		"(number parameter + 3).  \n"
+		"\n"
 		""},
 	 { "IgcCollection___ground_coordinate", _wrap_IgcCollection___ground_coordinate, METH_VARARGS, "\n"
+		"IgcCollection___ground_coordinate(IgcCollection self, int Image_index, ImageCoordinate Ic) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::IgcCollection::ground_coordinate(int Image_index, const ImageCoordinate &Ic) const\n"
 		"GeoCal::IgcCollection::ground_coordinate\n"
-		"Return ground coordinate that goes with a particular image coordinate.\n"
+		"Return ground coordinate that goes with a particular image coordinate.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_ground_coordinate_dem", _wrap_IgcCollection_ground_coordinate_dem, METH_VARARGS, "\n"
+		"IgcCollection_ground_coordinate_dem(IgcCollection self, int Image_index, ImageCoordinate Ic, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::IgcCollection::ground_coordinate_dem(int Image_index, const ImageCoordinate &Ic, const Dem &D) const\n"
 		"GeoCal::IgcCollection::ground_coordinate_dem\n"
-		"Return ground coordinate that goes with a particular image coordinate.\n"
-		"This version supplies a Dem to use. \n"
+		"Return ground coordinate that goes with a particular image coordinate.  \n"
+		"\n"
+		"This version supplies a Dem to use.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_dem", _wrap_IgcCollection_dem, METH_VARARGS, "\n"
+		"IgcCollection_dem(IgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::Dem >\n"
 		"\n"
-		"virtual boost::shared_ptr< Dem > GeoCal::IgcCollection::dem(int Image_index) const\n"
 		"GeoCal::IgcCollection::dem\n"
-		"Dem used by ground_coordinate.\n"
+		"Dem used by ground_coordinate.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate", _wrap_IgcCollection_image_coordinate, METH_VARARGS, "\n"
+		"IgcCollection_image_coordinate(IgcCollection self, int Image_index, GroundCoordinate Gc) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::IgcCollection::image_coordinate(int Image_index, const GroundCoordinate &Gc) const\n"
 		"GeoCal::IgcCollection::image_coordinate\n"
-		"Return image coordinate that goes with a particular GroundCoordinate.\n"
-		"For some types of ImageGroundConnection, we might not be able to\n"
-		"calculate image_coordinate for all values (e.g., Ipi might fail). In\n"
-		"those cases, we will throw a ImageGroundConnectionFailed exception.\n"
-		"This means that nothing is wrong, other than that we can't calculate\n"
-		"the image_coordinate. Callers can catch this exception if they have\n"
-		"some way of handling no image coordinate data. \n"
+		"Return image coordinate that goes with a particular GroundCoordinate.  \n"
+		"\n"
+		"For some types of ImageGroundConnection, we might not be able to calculate\n"
+		"image_coordinate for all values (e.g., Ipi might fail). In those cases, we will\n"
+		"throw a ImageGroundConnectionFailed exception. This means that nothing is wrong,\n"
+		"other than that we can't calculate the image_coordinate. Callers can catch this\n"
+		"exception if they have some way of handling no image coordinate data.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_parm", _wrap_IgcCollection_image_coordinate_jac_parm, METH_VARARGS, "\n"
+		"IgcCollection_image_coordinate_jac_parm(IgcCollection self, int Image_index, CartesianFixed Gc) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::image_coordinate_jac_parm(int Image_index, const CartesianFixed &Gc) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_parm\n"
-		"Return the Jacobian of the image coordinates with respect to the\n"
-		"parameters.\n"
+		"Return the Jacobian of the image coordinates with respect to the parameters.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_parm_fd", _wrap_IgcCollection_image_coordinate_jac_parm_fd, METH_VARARGS, "\n"
+		"IgcCollection_image_coordinate_jac_parm_fd(IgcCollection self, int Image_index, CartesianFixed Gc, BlitzArray_double_1 Pstep) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > IgcCollection::image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed &Gc, const blitz::Array<\n"
-		"double, 1 > &Pstep) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_parm_fd\n"
-		"Return the Jacobian of the image coordinates with respect to the\n"
-		"parameters, calculated by taking a finite difference.\n"
+		"Return the Jacobian of the image coordinates with respect to the parameters,\n"
+		"calculated by taking a finite difference.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, "\n"
+		"IgcCollection_image_coordinate_jac_cf(IgcCollection self, int Image_index, CartesianFixed Gc) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::image_coordinate_jac_cf(int Image_index, const CartesianFixed &Gc) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_cf\n"
-		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
-		"and Z components of the CartesianFixed ground location.\n"
+		"Return the Jacobian of the image coordinates with respect to the X, Y, and Z\n"
+		"components of the CartesianFixed ground location.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_cf_fd", _wrap_IgcCollection_image_coordinate_jac_cf_fd, METH_VARARGS, "\n"
+		"IgcCollection_image_coordinate_jac_cf_fd(IgcCollection self, int Image_index, CartesianFixed Gc, double Step_size) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed &Gc, double Step_size) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_cf_fd\n"
-		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
-		"and Z components of the CartesianFixed ground location.\n"
-		"Calculated as a finite difference with the given step size. \n"
+		"Return the Jacobian of the image coordinates with respect to the X, Y, and Z\n"
+		"components of the CartesianFixed ground location.  \n"
+		"\n"
+		"Calculated as a finite difference with the given step size.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_title", _wrap_IgcCollection_title, METH_VARARGS, "\n"
+		"IgcCollection_title(IgcCollection self, int Image_index) -> std::string\n"
 		"\n"
-		"virtual std::string GeoCal::IgcCollection::title(int Image_index) const\n"
 		"GeoCal::IgcCollection::title\n"
-		"Title that we can use to describe the image.\n"
-		"This can be any string that is useful as a label. \n"
+		"Title that we can use to describe the image.  \n"
+		"\n"
+		"This can be any string that is useful as a label.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_image", _wrap_IgcCollection_image, METH_VARARGS, "\n"
+		"IgcCollection_image(IgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"virtual boost::shared_ptr< RasterImage > GeoCal::IgcCollection::image(int Image_index) const\n"
 		"GeoCal::IgcCollection::image\n"
-		"Underlying image (if present)\n"
+		"Underlying image (if present)  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_ground_connection", _wrap_IgcCollection_image_ground_connection, METH_VARARGS, "\n"
+		"IgcCollection_image_ground_connection(IgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"virtual boost::shared_ptr< ImageGroundConnection > GeoCal::IgcCollection::image_ground_connection(int Image_index) const =0\n"
 		"GeoCal::IgcCollection::image_ground_connection\n"
-		"Image ground connection for given image index.\n"
+		"Image ground connection for given image index.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_subset", _wrap_IgcCollection_subset, METH_VARARGS, "\n"
+		"IgcCollection_subset(IgcCollection self, vector_int Index_set) -> boost::shared_ptr< GeoCal::IgcCollection >\n"
 		"\n"
-		"virtual boost::shared_ptr< IgcCollection > GeoCal::IgcCollection::subset(const std::vector< int > &Index_set) const =0\n"
 		"GeoCal::IgcCollection::subset\n"
-		"Return IgcCollection for a subset of the data.\n"
+		"Return IgcCollection for a subset of the data.  \n"
 		"\n"
 		""},
-	 { "IgcCollection___str__", _wrap_IgcCollection___str__, METH_O, NULL},
+	 { "IgcCollection___str__", _wrap_IgcCollection___str__, METH_O, "IgcCollection___str__(IgcCollection self) -> std::string"},
 	 { "IgcCollection__v_parameter", _wrap_IgcCollection__v_parameter, METH_VARARGS, "\n"
+		"IgcCollection__v_parameter(IgcCollection self) -> BlitzArray_double_1\n"
+		"IgcCollection__v_parameter(IgcCollection self, BlitzArray_double_1 V)\n"
 		"\n"
-		"virtual void GeoCal::IgcCollection::parameter(const blitz::Array< double, 1 > &P)\n"
 		"GeoCal::IgcCollection::parameter\n"
 		""},
 	 { "IgcCollection__v_parameter_with_derivative", _wrap_IgcCollection__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"IgcCollection__v_parameter_with_derivative(IgcCollection self) -> ArrayAd_double_1\n"
+		"IgcCollection__v_parameter_with_derivative(IgcCollection self, ArrayAd_double_1 V)\n"
 		"\n"
-		"virtual void GeoCal::IgcCollection::parameter_with_derivative(const ArrayAd< double, 1 > &P)\n"
 		"GeoCal::IgcCollection::parameter_with_derivative\n"
 		""},
-	 { "IgcCollection__v_parameter_name", _wrap_IgcCollection__v_parameter_name, METH_O, NULL},
-	 { "IgcCollection__v_parameter_subset", _wrap_IgcCollection__v_parameter_subset, METH_VARARGS, NULL},
-	 { "IgcCollection__v_parameter_with_derivative_subset", _wrap_IgcCollection__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "IgcCollection__v_parameter_name_subset", _wrap_IgcCollection__v_parameter_name_subset, METH_O, NULL},
-	 { "IgcCollection__v_parameter_mask", _wrap_IgcCollection__v_parameter_mask, METH_O, NULL},
-	 { "new_IgcCollection", _wrap_new_IgcCollection, METH_O, NULL},
+	 { "IgcCollection__v_parameter_name", _wrap_IgcCollection__v_parameter_name, METH_O, "IgcCollection__v_parameter_name(IgcCollection self) -> vector_string"},
+	 { "IgcCollection__v_parameter_subset", _wrap_IgcCollection__v_parameter_subset, METH_VARARGS, "\n"
+		"IgcCollection__v_parameter_subset(IgcCollection self) -> BlitzArray_double_1\n"
+		"IgcCollection__v_parameter_subset(IgcCollection self, BlitzArray_double_1 V)\n"
+		""},
+	 { "IgcCollection__v_parameter_with_derivative_subset", _wrap_IgcCollection__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"IgcCollection__v_parameter_with_derivative_subset(IgcCollection self) -> ArrayAd_double_1\n"
+		"IgcCollection__v_parameter_with_derivative_subset(IgcCollection self, ArrayAd_double_1 V)\n"
+		""},
+	 { "IgcCollection__v_parameter_name_subset", _wrap_IgcCollection__v_parameter_name_subset, METH_O, "IgcCollection__v_parameter_name_subset(IgcCollection self) -> vector_string"},
+	 { "IgcCollection__v_parameter_mask", _wrap_IgcCollection__v_parameter_mask, METH_O, "IgcCollection__v_parameter_mask(IgcCollection self) -> BlitzArray_bool_1"},
+	 { "new_IgcCollection", _wrap_new_IgcCollection, METH_O, "new_IgcCollection(PyObject * _self) -> IgcCollection"},
 	 { "disown_IgcCollection", _wrap_disown_IgcCollection, METH_O, NULL},
 	 { "IgcCollection_swigregister", IgcCollection_swigregister, METH_O, NULL},
 	 { "IgcCollection_swiginit", IgcCollection_swiginit, METH_VARARGS, NULL},
@@ -11083,168 +11099,184 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "delete_IgcCollection", _wrap_delete_IgcCollection, METH_O, "\n"
+		"delete_IgcCollection(IgcCollection self)\n"
 		"\n"
-		"virtual GeoCal::IgcCollection::~IgcCollection()\n"
 		"GeoCal::IgcCollection::~IgcCollection\n"
 		""},
 	 { "IgcCollection__v_number_image", _wrap_IgcCollection__v_number_image, METH_O, "\n"
+		"_v_number_image(IgcCollection self) -> int\n"
 		"\n"
-		"virtual int GeoCal::IgcCollection::number_image() const\n"
 		"GeoCal::IgcCollection::number_image\n"
 		""},
-	 { "IgcCollection_desc", _wrap_IgcCollection_desc, METH_O, NULL},
+	 { "IgcCollection_desc", _wrap_IgcCollection_desc, METH_O, "desc(IgcCollection self) -> std::string"},
 	 { "IgcCollection_collinearity_residual", _wrap_IgcCollection_collinearity_residual, METH_VARARGS, "\n"
+		"collinearity_residual(IgcCollection self, int Image_index, GroundCoordinate Gc, ImageCoordinate Ic_actual) -> BlitzArray_double_1\n"
 		"\n"
-		"virtual blitz::Array< double, 1 > GeoCal::IgcCollection::collinearity_residual(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate\n"
-		"&Ic_actual) const\n"
 		"GeoCal::IgcCollection::collinearity_residual\n"
-		"Return collinearity residual for given Image_index (see\n"
-		"ImageGroundConnection for details on this.\n"
+		"Return collinearity residual for given Image_index (see ImageGroundConnection\n"
+		"for details on this.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_collinearity_residual_jacobian", _wrap_IgcCollection_collinearity_residual_jacobian, METH_VARARGS, "\n"
+		"collinearity_residual_jacobian(IgcCollection self, int Image_index, GroundCoordinate Gc, ImageCoordinate Ic_actual) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::collinearity_residual_jacobian(int Image_index, const GroundCoordinate &Gc, const ImageCoordinate\n"
-		"&Ic_actual) const\n"
 		"GeoCal::IgcCollection::collinearity_residual_jacobian\n"
-		"Return jacobian of collinearity_residual.\n"
-		"The parameters for this class should already have AutoDerivative\n"
-		"extended for the jacobian (e.g., call add_identity_gradient()).\n"
+		"Return jacobian of collinearity_residual.  \n"
 		"\n"
-		"We add the derivative wrt the CartesianFixed coordinates of the\n"
-		"Ground_coor (X, Y, Z in that order), at the end of the Jacobian. So\n"
-		"the total Jacobian is 2 x (number parameter + 3). \n"
+		"The parameters for this class should already have AutoDerivative extended for\n"
+		"the jacobian (e.g., call add_identity_gradient()).  \n"
+		"\n"
+		"We add the derivative wrt the CartesianFixed coordinates of the Ground_coor (X,\n"
+		"Y, Z in that order), at the end of the Jacobian. So the total Jacobian is 2 x\n"
+		"(number parameter + 3).  \n"
+		"\n"
 		""},
 	 { "IgcCollection___ground_coordinate", _wrap_IgcCollection___ground_coordinate, METH_VARARGS, "\n"
+		"__ground_coordinate(IgcCollection self, int Image_index, ImageCoordinate Ic) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::IgcCollection::ground_coordinate(int Image_index, const ImageCoordinate &Ic) const\n"
 		"GeoCal::IgcCollection::ground_coordinate\n"
-		"Return ground coordinate that goes with a particular image coordinate.\n"
+		"Return ground coordinate that goes with a particular image coordinate.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_ground_coordinate_dem", _wrap_IgcCollection_ground_coordinate_dem, METH_VARARGS, "\n"
+		"ground_coordinate_dem(IgcCollection self, int Image_index, ImageCoordinate Ic, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::IgcCollection::ground_coordinate_dem(int Image_index, const ImageCoordinate &Ic, const Dem &D) const\n"
 		"GeoCal::IgcCollection::ground_coordinate_dem\n"
-		"Return ground coordinate that goes with a particular image coordinate.\n"
-		"This version supplies a Dem to use. \n"
+		"Return ground coordinate that goes with a particular image coordinate.  \n"
+		"\n"
+		"This version supplies a Dem to use.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_dem", _wrap_IgcCollection_dem, METH_VARARGS, "\n"
+		"dem(IgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::Dem >\n"
 		"\n"
-		"virtual boost::shared_ptr< Dem > GeoCal::IgcCollection::dem(int Image_index) const\n"
 		"GeoCal::IgcCollection::dem\n"
-		"Dem used by ground_coordinate.\n"
+		"Dem used by ground_coordinate.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate", _wrap_IgcCollection_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(IgcCollection self, int Image_index, GroundCoordinate Gc) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::IgcCollection::image_coordinate(int Image_index, const GroundCoordinate &Gc) const\n"
 		"GeoCal::IgcCollection::image_coordinate\n"
-		"Return image coordinate that goes with a particular GroundCoordinate.\n"
-		"For some types of ImageGroundConnection, we might not be able to\n"
-		"calculate image_coordinate for all values (e.g., Ipi might fail). In\n"
-		"those cases, we will throw a ImageGroundConnectionFailed exception.\n"
-		"This means that nothing is wrong, other than that we can't calculate\n"
-		"the image_coordinate. Callers can catch this exception if they have\n"
-		"some way of handling no image coordinate data. \n"
+		"Return image coordinate that goes with a particular GroundCoordinate.  \n"
+		"\n"
+		"For some types of ImageGroundConnection, we might not be able to calculate\n"
+		"image_coordinate for all values (e.g., Ipi might fail). In those cases, we will\n"
+		"throw a ImageGroundConnectionFailed exception. This means that nothing is wrong,\n"
+		"other than that we can't calculate the image_coordinate. Callers can catch this\n"
+		"exception if they have some way of handling no image coordinate data.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_parm", _wrap_IgcCollection_image_coordinate_jac_parm, METH_VARARGS, "\n"
+		"image_coordinate_jac_parm(IgcCollection self, int Image_index, CartesianFixed Gc) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::image_coordinate_jac_parm(int Image_index, const CartesianFixed &Gc) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_parm\n"
-		"Return the Jacobian of the image coordinates with respect to the\n"
-		"parameters.\n"
+		"Return the Jacobian of the image coordinates with respect to the parameters.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_parm_fd", _wrap_IgcCollection_image_coordinate_jac_parm_fd, METH_VARARGS, "\n"
+		"image_coordinate_jac_parm_fd(IgcCollection self, int Image_index, CartesianFixed Gc, BlitzArray_double_1 Pstep) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > IgcCollection::image_coordinate_jac_parm_fd(int Image_index, const CartesianFixed &Gc, const blitz::Array<\n"
-		"double, 1 > &Pstep) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_parm_fd\n"
-		"Return the Jacobian of the image coordinates with respect to the\n"
-		"parameters, calculated by taking a finite difference.\n"
+		"Return the Jacobian of the image coordinates with respect to the parameters,\n"
+		"calculated by taking a finite difference.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_cf", _wrap_IgcCollection_image_coordinate_jac_cf, METH_VARARGS, "\n"
+		"image_coordinate_jac_cf(IgcCollection self, int Image_index, CartesianFixed Gc) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::image_coordinate_jac_cf(int Image_index, const CartesianFixed &Gc) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_cf\n"
-		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
-		"and Z components of the CartesianFixed ground location.\n"
+		"Return the Jacobian of the image coordinates with respect to the X, Y, and Z\n"
+		"components of the CartesianFixed ground location.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_coordinate_jac_cf_fd", _wrap_IgcCollection_image_coordinate_jac_cf_fd, METH_VARARGS, "\n"
+		"image_coordinate_jac_cf_fd(IgcCollection self, int Image_index, CartesianFixed Gc, double Step_size) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::IgcCollection::image_coordinate_jac_cf_fd(int Image_index, const CartesianFixed &Gc, double Step_size) const\n"
 		"GeoCal::IgcCollection::image_coordinate_jac_cf_fd\n"
-		"Return the Jacobian of the image coordinates with respect to the X, Y,\n"
-		"and Z components of the CartesianFixed ground location.\n"
-		"Calculated as a finite difference with the given step size. \n"
+		"Return the Jacobian of the image coordinates with respect to the X, Y, and Z\n"
+		"components of the CartesianFixed ground location.  \n"
+		"\n"
+		"Calculated as a finite difference with the given step size.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_title", _wrap_IgcCollection_title, METH_VARARGS, "\n"
+		"title(IgcCollection self, int Image_index) -> std::string\n"
 		"\n"
-		"virtual std::string GeoCal::IgcCollection::title(int Image_index) const\n"
 		"GeoCal::IgcCollection::title\n"
-		"Title that we can use to describe the image.\n"
-		"This can be any string that is useful as a label. \n"
+		"Title that we can use to describe the image.  \n"
+		"\n"
+		"This can be any string that is useful as a label.  \n"
+		"\n"
 		""},
 	 { "IgcCollection_image", _wrap_IgcCollection_image, METH_VARARGS, "\n"
+		"image(IgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"virtual boost::shared_ptr< RasterImage > GeoCal::IgcCollection::image(int Image_index) const\n"
 		"GeoCal::IgcCollection::image\n"
-		"Underlying image (if present)\n"
+		"Underlying image (if present)  \n"
 		"\n"
 		""},
 	 { "IgcCollection_image_ground_connection", _wrap_IgcCollection_image_ground_connection, METH_VARARGS, "\n"
+		"image_ground_connection(IgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"virtual boost::shared_ptr< ImageGroundConnection > GeoCal::IgcCollection::image_ground_connection(int Image_index) const =0\n"
 		"GeoCal::IgcCollection::image_ground_connection\n"
-		"Image ground connection for given image index.\n"
+		"Image ground connection for given image index.  \n"
 		"\n"
 		""},
 	 { "IgcCollection_subset", _wrap_IgcCollection_subset, METH_VARARGS, "\n"
+		"subset(IgcCollection self, vector_int Index_set) -> boost::shared_ptr< GeoCal::IgcCollection >\n"
 		"\n"
-		"virtual boost::shared_ptr< IgcCollection > GeoCal::IgcCollection::subset(const std::vector< int > &Index_set) const =0\n"
 		"GeoCal::IgcCollection::subset\n"
-		"Return IgcCollection for a subset of the data.\n"
+		"Return IgcCollection for a subset of the data.  \n"
 		"\n"
 		""},
-	 { "IgcCollection___str__", _wrap_IgcCollection___str__, METH_O, NULL},
+	 { "IgcCollection___str__", _wrap_IgcCollection___str__, METH_O, "__str__(IgcCollection self) -> std::string"},
 	 { "IgcCollection__v_parameter", _wrap_IgcCollection__v_parameter, METH_VARARGS, "\n"
+		"_v_parameter(IgcCollection self) -> BlitzArray_double_1\n"
+		"_v_parameter(IgcCollection self, BlitzArray_double_1 V)\n"
 		"\n"
-		"virtual void GeoCal::IgcCollection::parameter(const blitz::Array< double, 1 > &P)\n"
 		"GeoCal::IgcCollection::parameter\n"
 		""},
 	 { "IgcCollection__v_parameter_with_derivative", _wrap_IgcCollection__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative(IgcCollection self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative(IgcCollection self, ArrayAd_double_1 V)\n"
 		"\n"
-		"virtual void GeoCal::IgcCollection::parameter_with_derivative(const ArrayAd< double, 1 > &P)\n"
 		"GeoCal::IgcCollection::parameter_with_derivative\n"
 		""},
-	 { "IgcCollection__v_parameter_name", _wrap_IgcCollection__v_parameter_name, METH_O, NULL},
-	 { "IgcCollection__v_parameter_subset", _wrap_IgcCollection__v_parameter_subset, METH_VARARGS, NULL},
-	 { "IgcCollection__v_parameter_with_derivative_subset", _wrap_IgcCollection__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "IgcCollection__v_parameter_name_subset", _wrap_IgcCollection__v_parameter_name_subset, METH_O, NULL},
-	 { "IgcCollection__v_parameter_mask", _wrap_IgcCollection__v_parameter_mask, METH_O, NULL},
-	 { "new_IgcCollection", _wrap_new_IgcCollection, METH_O, NULL},
+	 { "IgcCollection__v_parameter_name", _wrap_IgcCollection__v_parameter_name, METH_O, "_v_parameter_name(IgcCollection self) -> vector_string"},
+	 { "IgcCollection__v_parameter_subset", _wrap_IgcCollection__v_parameter_subset, METH_VARARGS, "\n"
+		"_v_parameter_subset(IgcCollection self) -> BlitzArray_double_1\n"
+		"_v_parameter_subset(IgcCollection self, BlitzArray_double_1 V)\n"
+		""},
+	 { "IgcCollection__v_parameter_with_derivative_subset", _wrap_IgcCollection__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative_subset(IgcCollection self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative_subset(IgcCollection self, ArrayAd_double_1 V)\n"
+		""},
+	 { "IgcCollection__v_parameter_name_subset", _wrap_IgcCollection__v_parameter_name_subset, METH_O, "_v_parameter_name_subset(IgcCollection self) -> vector_string"},
+	 { "IgcCollection__v_parameter_mask", _wrap_IgcCollection__v_parameter_mask, METH_O, "_v_parameter_mask(IgcCollection self) -> BlitzArray_bool_1"},
+	 { "new_IgcCollection", _wrap_new_IgcCollection, METH_O, "new_IgcCollection(PyObject * _self) -> IgcCollection"},
 	 { "disown_IgcCollection", _wrap_disown_IgcCollection, METH_O, NULL},
 	 { "IgcCollection_swigregister", IgcCollection_swigregister, METH_O, NULL},
 	 { "IgcCollection_swiginit", IgcCollection_swiginit, METH_VARARGS, NULL},

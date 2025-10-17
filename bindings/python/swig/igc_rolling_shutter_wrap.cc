@@ -9089,108 +9089,118 @@ SWIGINTERN PyObject *IgcRollingShutter_swiginit(PyObject *SWIGUNUSEDPARM(self), 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcRollingShutter", _wrap_new_IgcRollingShutter, METH_VARARGS, "\n"
+		"IgcRollingShutter(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::TimeTable > const & Time_table, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, GeoCal::IgcRollingShutter::RollDirection Roll_direction=ROLL_LINE_DIRECTION, std::string const Title=\"\")\n"
+		"IgcRollingShutter(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::TimeTable > const & Time_table, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, GeoCal::IgcRollingShutter::RollDirection Roll_direction, std::string const Title, boost::shared_ptr< GeoCal::Refraction > const & Ref, double Resolution=30, int Band=0, double Max_height=9000)\n"
 		"\n"
-		"GeoCal::IgcRollingShutter::IgcRollingShutter(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"TimeTable > &Time_table, const boost::shared_ptr< Camera > &Cam, const\n"
-		"boost::shared_ptr< Dem > &D, const boost::shared_ptr< RasterImage >\n"
-		"&Img, RollDirection Roll_direction=ROLL_LINE_DIRECTION, const\n"
-		"std::string Title=\"\", const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), double Resolution=30, int\n"
-		"Band=0, double Max_height=9000)\n"
 		"GeoCal::IgcRollingShutter::IgcRollingShutter\n"
-		"Constructor that takes a Orbit and a Time_table.\n"
-		"If the roll direction is in the line direction we assume that all the\n"
-		"samples for a particular line are acquired at the same time, and if\n"
-		"the roll direction is in the sample direction we assume that all the\n"
-		"lines for a particular sample are acquired at the same time.\n"
+		"Constructor that takes a Orbit and a Time_table.  \n"
 		"\n"
-		"You can optionally include a approximate refraction correction, the\n"
-		"default is not to.\n"
+		"If the roll direction is in the line direction we assume that all the samples\n"
+		"for a particular line are acquired at the same time, and if the roll direction\n"
+		"is in the sample direction we assume that all the lines for a particular sample\n"
+		"are acquired at the same time.  \n"
 		"\n"
-		"NOTE: refraction doesn't seem to actually be used. I think this was\n"
-		"something we started to add, but didn't actually complete. We can come\n"
-		"back to this. Usually the effect of refraction is pretty small. \n"
+		"You can optionally include a approximate refraction correction, the default is\n"
+		"not to.  \n"
+		"\n"
+		"NOTE: refraction doesn't seem to actually be used. I think this was something we\n"
+		"started to add, but didn't actually complete. We can come back to this. Usually\n"
+		"the effect of refraction is pretty small.  \n"
+		"\n"
 		""},
 	 { "IgcRollingShutter_cf_look_vector", _wrap_IgcRollingShutter_cf_look_vector, METH_VARARGS, "\n"
+		"IgcRollingShutter_cf_look_vector(IgcRollingShutter self, ImageCoordinate Ic)\n"
 		"\n"
-		"void IgcRollingShutter::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
-		"boost::shared_ptr< CartesianFixed > &P) const\n"
 		"GeoCal::IgcRollingShutter::cf_look_vector\n"
 		""},
 	 { "IgcRollingShutter__v_orbit", _wrap_IgcRollingShutter__v_orbit, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_orbit(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::Orbit >\n"
+		"IgcRollingShutter__v_orbit(IgcRollingShutter self, boost::shared_ptr< GeoCal::Orbit > const & V)\n"
 		"\n"
-		"void IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"GeoCal::IgcRollingShutter::orbit\n"
-		"Set orbit.\n"
+		"Set orbit.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_time_table", _wrap_IgcRollingShutter__v_time_table, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_time_table(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::TimeTable >\n"
+		"IgcRollingShutter__v_time_table(IgcRollingShutter self, boost::shared_ptr< GeoCal::TimeTable > const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::time_table(const boost::shared_ptr< TimeTable > &Tt)\n"
 		"GeoCal::IgcRollingShutter::time_table\n"
-		"Set time table.\n"
+		"Set time table.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_camera", _wrap_IgcRollingShutter__v_camera, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_camera(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::Camera >\n"
+		"IgcRollingShutter__v_camera(IgcRollingShutter self, boost::shared_ptr< GeoCal::Camera > const & V)\n"
 		"\n"
-		"void IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)\n"
 		"GeoCal::IgcRollingShutter::camera\n"
-		"Set Camera that we are using.\n"
+		"Set Camera that we are using.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_resolution", _wrap_IgcRollingShutter__v_resolution, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_resolution(IgcRollingShutter self) -> double\n"
+		"IgcRollingShutter__v_resolution(IgcRollingShutter self, double const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::resolution(double R)\n"
 		"GeoCal::IgcRollingShutter::resolution\n"
-		"Set resolution in meters that we examine Dem out.\n"
-		"This affects how long ground_coordinate takes to figure out. It should\n"
-		"be about the resolution of the Dem \n"
+		"Set resolution in meters that we examine Dem out.  \n"
+		"\n"
+		"This affects how long ground_coordinate takes to figure out. It should be about\n"
+		"the resolution of the Dem  \n"
+		"\n"
 		""},
 	 { "IgcRollingShutter__v_refraction", _wrap_IgcRollingShutter__v_refraction, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_refraction(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::Refraction >\n"
+		"IgcRollingShutter__v_refraction(IgcRollingShutter self, boost::shared_ptr< GeoCal::Refraction > const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::refraction(const boost::shared_ptr< Refraction > &Ref)\n"
 		"GeoCal::IgcRollingShutter::refraction\n"
-		"Set refraction object we are using.\n"
-		"May be null if we aren't including refraction. \n"
+		"Set refraction object we are using.  \n"
+		"\n"
+		"May be null if we aren't including refraction.  \n"
+		"\n"
 		""},
 	 { "IgcRollingShutter__v_band", _wrap_IgcRollingShutter__v_band, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_band(IgcRollingShutter self) -> int\n"
+		"IgcRollingShutter__v_band(IgcRollingShutter self, int const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::band(int B)\n"
 		"GeoCal::IgcRollingShutter::band\n"
-		"Set camera band we are using.\n"
+		"Set camera band we are using.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_max_height", _wrap_IgcRollingShutter__v_max_height, METH_VARARGS, "\n"
+		"IgcRollingShutter__v_max_height(IgcRollingShutter self) -> double\n"
+		"IgcRollingShutter__v_max_height(IgcRollingShutter self, double const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::max_height(double Max_h)\n"
 		"GeoCal::IgcRollingShutter::max_height\n"
-		"Set Maximum height that we expect to see in the Dem.\n"
+		"Set Maximum height that we expect to see in the Dem.  \n"
 		"\n"
 		""},
 	 { "delete_IgcRollingShutter", _wrap_delete_IgcRollingShutter, METH_O, "\n"
+		"delete_IgcRollingShutter(IgcRollingShutter self)\n"
 		"\n"
-		"virtual GeoCal::IgcRollingShutter::~IgcRollingShutter()\n"
 		"GeoCal::IgcRollingShutter::~IgcRollingShutter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter_swigregister", IgcRollingShutter_swigregister, METH_O, NULL},
@@ -9201,108 +9211,118 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcRollingShutter", _wrap_new_IgcRollingShutter, METH_VARARGS, "\n"
+		"IgcRollingShutter(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::TimeTable > const & Time_table, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, GeoCal::IgcRollingShutter::RollDirection Roll_direction=ROLL_LINE_DIRECTION, std::string const Title=\"\")\n"
+		"IgcRollingShutter(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::TimeTable > const & Time_table, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, GeoCal::IgcRollingShutter::RollDirection Roll_direction, std::string const Title, boost::shared_ptr< GeoCal::Refraction > const & Ref, double Resolution=30, int Band=0, double Max_height=9000)\n"
 		"\n"
-		"GeoCal::IgcRollingShutter::IgcRollingShutter(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<\n"
-		"TimeTable > &Time_table, const boost::shared_ptr< Camera > &Cam, const\n"
-		"boost::shared_ptr< Dem > &D, const boost::shared_ptr< RasterImage >\n"
-		"&Img, RollDirection Roll_direction=ROLL_LINE_DIRECTION, const\n"
-		"std::string Title=\"\", const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), double Resolution=30, int\n"
-		"Band=0, double Max_height=9000)\n"
 		"GeoCal::IgcRollingShutter::IgcRollingShutter\n"
-		"Constructor that takes a Orbit and a Time_table.\n"
-		"If the roll direction is in the line direction we assume that all the\n"
-		"samples for a particular line are acquired at the same time, and if\n"
-		"the roll direction is in the sample direction we assume that all the\n"
-		"lines for a particular sample are acquired at the same time.\n"
+		"Constructor that takes a Orbit and a Time_table.  \n"
 		"\n"
-		"You can optionally include a approximate refraction correction, the\n"
-		"default is not to.\n"
+		"If the roll direction is in the line direction we assume that all the samples\n"
+		"for a particular line are acquired at the same time, and if the roll direction\n"
+		"is in the sample direction we assume that all the lines for a particular sample\n"
+		"are acquired at the same time.  \n"
 		"\n"
-		"NOTE: refraction doesn't seem to actually be used. I think this was\n"
-		"something we started to add, but didn't actually complete. We can come\n"
-		"back to this. Usually the effect of refraction is pretty small. \n"
+		"You can optionally include a approximate refraction correction, the default is\n"
+		"not to.  \n"
+		"\n"
+		"NOTE: refraction doesn't seem to actually be used. I think this was something we\n"
+		"started to add, but didn't actually complete. We can come back to this. Usually\n"
+		"the effect of refraction is pretty small.  \n"
+		"\n"
 		""},
 	 { "IgcRollingShutter_cf_look_vector", _wrap_IgcRollingShutter_cf_look_vector, METH_VARARGS, "\n"
+		"cf_look_vector(IgcRollingShutter self, ImageCoordinate Ic)\n"
 		"\n"
-		"void IgcRollingShutter::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
-		"boost::shared_ptr< CartesianFixed > &P) const\n"
 		"GeoCal::IgcRollingShutter::cf_look_vector\n"
 		""},
 	 { "IgcRollingShutter__v_orbit", _wrap_IgcRollingShutter__v_orbit, METH_VARARGS, "\n"
+		"_v_orbit(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::Orbit >\n"
+		"_v_orbit(IgcRollingShutter self, boost::shared_ptr< GeoCal::Orbit > const & V)\n"
 		"\n"
-		"void IgcRollingShutter::orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"GeoCal::IgcRollingShutter::orbit\n"
-		"Set orbit.\n"
+		"Set orbit.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_time_table", _wrap_IgcRollingShutter__v_time_table, METH_VARARGS, "\n"
+		"_v_time_table(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::TimeTable >\n"
+		"_v_time_table(IgcRollingShutter self, boost::shared_ptr< GeoCal::TimeTable > const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::time_table(const boost::shared_ptr< TimeTable > &Tt)\n"
 		"GeoCal::IgcRollingShutter::time_table\n"
-		"Set time table.\n"
+		"Set time table.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_camera", _wrap_IgcRollingShutter__v_camera, METH_VARARGS, "\n"
+		"_v_camera(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::Camera >\n"
+		"_v_camera(IgcRollingShutter self, boost::shared_ptr< GeoCal::Camera > const & V)\n"
 		"\n"
-		"void IgcRollingShutter::camera(const boost::shared_ptr< Camera > &C)\n"
 		"GeoCal::IgcRollingShutter::camera\n"
-		"Set Camera that we are using.\n"
+		"Set Camera that we are using.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_resolution", _wrap_IgcRollingShutter__v_resolution, METH_VARARGS, "\n"
+		"_v_resolution(IgcRollingShutter self) -> double\n"
+		"_v_resolution(IgcRollingShutter self, double const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::resolution(double R)\n"
 		"GeoCal::IgcRollingShutter::resolution\n"
-		"Set resolution in meters that we examine Dem out.\n"
-		"This affects how long ground_coordinate takes to figure out. It should\n"
-		"be about the resolution of the Dem \n"
+		"Set resolution in meters that we examine Dem out.  \n"
+		"\n"
+		"This affects how long ground_coordinate takes to figure out. It should be about\n"
+		"the resolution of the Dem  \n"
+		"\n"
 		""},
 	 { "IgcRollingShutter__v_refraction", _wrap_IgcRollingShutter__v_refraction, METH_VARARGS, "\n"
+		"_v_refraction(IgcRollingShutter self) -> boost::shared_ptr< GeoCal::Refraction >\n"
+		"_v_refraction(IgcRollingShutter self, boost::shared_ptr< GeoCal::Refraction > const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::refraction(const boost::shared_ptr< Refraction > &Ref)\n"
 		"GeoCal::IgcRollingShutter::refraction\n"
-		"Set refraction object we are using.\n"
-		"May be null if we aren't including refraction. \n"
+		"Set refraction object we are using.  \n"
+		"\n"
+		"May be null if we aren't including refraction.  \n"
+		"\n"
 		""},
 	 { "IgcRollingShutter__v_band", _wrap_IgcRollingShutter__v_band, METH_VARARGS, "\n"
+		"_v_band(IgcRollingShutter self) -> int\n"
+		"_v_band(IgcRollingShutter self, int const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::band(int B)\n"
 		"GeoCal::IgcRollingShutter::band\n"
-		"Set camera band we are using.\n"
+		"Set camera band we are using.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter__v_max_height", _wrap_IgcRollingShutter__v_max_height, METH_VARARGS, "\n"
+		"_v_max_height(IgcRollingShutter self) -> double\n"
+		"_v_max_height(IgcRollingShutter self, double const & V)\n"
 		"\n"
-		"void GeoCal::IgcRollingShutter::max_height(double Max_h)\n"
 		"GeoCal::IgcRollingShutter::max_height\n"
-		"Set Maximum height that we expect to see in the Dem.\n"
+		"Set Maximum height that we expect to see in the Dem.  \n"
 		"\n"
 		""},
 	 { "delete_IgcRollingShutter", _wrap_delete_IgcRollingShutter, METH_O, "\n"
+		"delete_IgcRollingShutter(IgcRollingShutter self)\n"
 		"\n"
-		"virtual GeoCal::IgcRollingShutter::~IgcRollingShutter()\n"
 		"GeoCal::IgcRollingShutter::~IgcRollingShutter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IgcRollingShutter_swigregister", IgcRollingShutter_swigregister, METH_O, NULL},

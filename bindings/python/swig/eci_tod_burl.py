@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _eci_tod_burl.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _eci_tod_burl:
 _eci_tod_burl.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _eci_tod_burl.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,16 +142,18 @@ import geocal_swig.look_vector
 class EciTodBurl(geocal_swig.ground_coordinate.CartesianInertial):
     r"""
 
-    This is a ECI true of date coordinate.
 
-    This is a dynamic frame that uses the true equator and equinox of a
-    particular data.
+    This is a ECI true of date coordinate.  
 
-    This implementation uses Mike Burl's code. I believe EciTod is more
-    accurate since it accounts for polar drift, but I'm not positive. We
-    want to be able to compare between the two, so I'll put this in place.
+    This is a dynamic frame that uses the true equator and equinox of a particular
+    data.  
 
-    C++ includes: eci_tod_burl.h 
+    This implementation uses Mike Burl's code. I believe EciTod is more accurate
+    since it accounts for polar drift, but I'm not positive. We want to be able to
+    compare between the two, so I'll put this in place.  
+
+    C++ includes: eci_tod_burl.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -156,10 +161,11 @@ class EciTodBurl(geocal_swig.ground_coordinate.CartesianInertial):
 
     def __init__(self, *args):
         r"""
+        __init__(EciTodBurl self, double X, double Y, double Z) -> EciTodBurl
+        __init__(EciTodBurl self, Array_double_3 Pos) -> EciTodBurl
 
-        GeoCal::EciTodBurl::EciTodBurl(double X, double Y, double Z)
         GeoCal::EciTodBurl::EciTodBurl
-        Make an EciTod with the given position, in meters.
+        Make an EciTod with the given position, in meters.  
 
         """
         _eci_tod_burl.EciTodBurl_swiginit(self, _eci_tod_burl.new_EciTodBurl(*args))

@@ -7850,132 +7850,139 @@ SWIGINTERN PyObject *RsmMultiSection_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmMultiSection", _wrap_new_RsmMultiSection, METH_VARARGS, "\n"
+		"RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, RsmBase Rsm_prototype, int Border=5)\n"
 		"\n"
-		"RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const\n"
-		"RsmBase &Rsm_prototype, int Border=5, const std::string\n"
-		"&Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\")\n"
 		"GeoCal::RsmMultiSection::RsmMultiSection\n"
-		"Constructor.\n"
-		"The RsmRationalPolynomial tends to extrapolate badly. Because the low\n"
-		"order polynomial is only approximately correct, we add a little bit of\n"
-		"a border to each underlying RsmRationalPolynomial so we can avoid\n"
-		"extrapolating. \n"
+		"Constructor.  \n"
+		"\n"
+		"The RsmRationalPolynomial tends to extrapolate badly. Because the low order\n"
+		"polynomial is only approximately correct, we add a little bit of a border to\n"
+		"each underlying RsmRationalPolynomial so we can avoid extrapolating.  \n"
+		"\n"
 		""},
 	 { "RsmMultiSection__v_number_row_section", _wrap_RsmMultiSection__v_number_row_section, METH_O, "\n"
+		"RsmMultiSection__v_number_row_section(RsmMultiSection self) -> int\n"
 		"\n"
-		"int GeoCal::RsmMultiSection::number_row_section() const\n"
 		"GeoCal::RsmMultiSection::number_row_section\n"
 		""},
 	 { "RsmMultiSection__v_number_col_section", _wrap_RsmMultiSection__v_number_col_section, METH_O, "\n"
+		"RsmMultiSection__v_number_col_section(RsmMultiSection self) -> int\n"
 		"\n"
-		"int GeoCal::RsmMultiSection::number_col_section() const\n"
 		"GeoCal::RsmMultiSection::number_col_section\n"
 		""},
 	 { "RsmMultiSection__v_number_line_per_section", _wrap_RsmMultiSection__v_number_line_per_section, METH_O, "\n"
+		"RsmMultiSection__v_number_line_per_section(RsmMultiSection self) -> double\n"
 		"\n"
-		"double GeoCal::RsmMultiSection::number_line_per_section() const\n"
 		"GeoCal::RsmMultiSection::number_line_per_section\n"
 		""},
 	 { "RsmMultiSection__v_number_sample_per_section", _wrap_RsmMultiSection__v_number_sample_per_section, METH_O, "\n"
+		"RsmMultiSection__v_number_sample_per_section(RsmMultiSection self) -> double\n"
 		"\n"
-		"double GeoCal::RsmMultiSection::number_sample_per_section() const\n"
 		"GeoCal::RsmMultiSection::number_sample_per_section\n"
 		""},
 	 { "RsmMultiSection_fit_start", _wrap_RsmMultiSection_fit_start, METH_VARARGS, "\n"
+		"RsmMultiSection_fit_start(RsmMultiSection self, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height)\n"
+		"RsmMultiSection_fit_start(RsmMultiSection self, BlitzArray_double_2 Data)\n"
 		"\n"
-		"void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height)\n"
 		"GeoCal::RsmMultiSection::fit_start\n"
-		"Fit just the low order polynomial.\n"
-		"This is intended for doing parallel fitting of the sections in python.\n"
+		"Fit just the low order polynomial.  \n"
+		"\n"
+		"This is intended for doing parallel fitting of the sections in python.  \n"
 		"\n"
 		""},
 	 { "RsmMultiSection_fit_section", _wrap_RsmMultiSection_fit_section, METH_VARARGS, "\n"
+		"RsmMultiSection_fit_section(RsmMultiSection self, int i, int j, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height) -> boost::shared_ptr< GeoCal::RsmBase > const\n"
+		"RsmMultiSection_fit_section(RsmMultiSection self, int i, int j, BlitzArray_double_2 Data) -> boost::shared_ptr< GeoCal::RsmBase > const &\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const\n"
-		"CoordinateConverter &Cconv, double Min_height, double Max_height)\n"
 		"GeoCal::RsmMultiSection::fit_section\n"
-		"Fit a single segment.\n"
-		"This is intended for doing parallel fitting in python. \n"
+		"Fit a single segment.  \n"
+		"\n"
+		"This is intended for doing parallel fitting in python.  \n"
+		"\n"
 		""},
 	 { "RsmMultiSection_section", _wrap_RsmMultiSection_section, METH_VARARGS, "\n"
+		"RsmMultiSection_section(RsmMultiSection self, int i, int j) -> boost::shared_ptr< GeoCal::RsmBase >\n"
+		"RsmMultiSection_section(RsmMultiSection self, int i, int j, boost::shared_ptr< GeoCal::RsmBase > const & V)\n"
 		"\n"
-		"void GeoCal::RsmMultiSection::section(int i, int j, const boost::shared_ptr< RsmBase > &V)\n"
 		"GeoCal::RsmMultiSection::section\n"
 		""},
 	 { "RsmMultiSection_section_ls", _wrap_RsmMultiSection_section_ls, METH_VARARGS, "\n"
+		"RsmMultiSection_section_ls(RsmMultiSection self, double Line, double Sample) -> boost::shared_ptr< GeoCal::RsmBase > const &\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::section_ls(double Line, double Sample) const\n"
 		"GeoCal::RsmMultiSection::section_ls\n"
-		"Return the section that handles the given image coordinate line and\n"
-		"sample.\n"
+		"Return the section that handles the given image coordinate line and sample.  \n"
 		"\n"
 		""},
 	 { "RsmMultiSection_section_xyz", _wrap_RsmMultiSection_section_xyz, METH_VARARGS, "\n"
+		"RsmMultiSection_section_xyz(RsmMultiSection self, double X, double Y, double Z) -> boost::shared_ptr< GeoCal::RsmBase > const &\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::section_xyz(double X, double Y, double Z) const\n"
 		"GeoCal::RsmMultiSection::section_xyz\n"
-		"Use low order polynomial to determine section for a particular\n"
-		"coordinate.\n"
+		"Use low order polynomial to determine section for a particular coordinate.  \n"
 		"\n"
 		""},
 	 { "RsmMultiSection_tre_string", _wrap_RsmMultiSection_tre_string, METH_O, "\n"
+		"RsmMultiSection_tre_string(RsmMultiSection self) -> std::string\n"
 		"\n"
-		"std::string RsmMultiSection::tre_string() const\n"
 		"GeoCal::RsmMultiSection::tre_string\n"
-		"Write to TRE string.\n"
-		"Note also that the TRE has a fixed precision which is less than the\n"
-		"machine precision. Writing a RsmMultiSection and then reading it from\n"
-		"a TRE does not in general give the exact same RsmRationalPolynomial,\n"
-		"rather just one that is close.\n"
+		"Write to TRE string.  \n"
 		"\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to).\n"
+		"Note also that the TRE has a fixed precision which is less than the machine\n"
+		"precision. Writing a RsmMultiSection and then reading it from a TRE does *not*\n"
+		"in general give the exact same RsmRationalPolynomial, rather just one that is\n"
+		"close.  \n"
 		"\n"
-		"We do not write out the actually RsmBase that make up the section,\n"
-		"this writing is handled separately. \n"
+		"Note that this is all the fields *except* the CETAG and CEL (the front two). It\n"
+		"is convenient to treat those special. (We can revisit this in the future if we\n"
+		"need to).  \n"
+		"\n"
+		"We do *not* write out the actually RsmBase that make up the section, this\n"
+		"writing is handled separately.  \n"
+		"\n"
 		""},
 	 { "RsmMultiSection_read_tre_string", _wrap_RsmMultiSection_read_tre_string, METH_O, "\n"
+		"RsmMultiSection_read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmMultiSection >\n"
 		"\n"
-		"boost::shared_ptr< RsmMultiSection > RsmMultiSection::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmMultiSection::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmMultiSection. However the fields that aren't contained are ones\n"
-		"used for fitting the RSM, so in practice this doesn't matter. We just\n"
-		"set the various fields to the default values found in the constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to).\n"
+		"Note that the TRE does not contain all the fields we have in a RsmMultiSection.\n"
+		"However the fields that aren't contained are ones used for fitting the RSM, so\n"
+		"in practice this doesn't matter. We just set the various fields to the default\n"
+		"values found in the constructor.  \n"
 		"\n"
-		"We do not fill in the actual RsmBase stuff in sec, that is handled\n"
-		"separately. We do resize sec, but fill it with null pointers. \n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
+		"We do *not* fill in the actual RsmBase stuff in sec, that is handled separately.\n"
+		"We do resize sec, but fill it with null pointers.  \n"
+		"\n"
 		""},
 	 { "delete_RsmMultiSection", _wrap_delete_RsmMultiSection, METH_O, "\n"
+		"delete_RsmMultiSection(RsmMultiSection self)\n"
 		"\n"
-		"virtual GeoCal::RsmMultiSection::~RsmMultiSection()\n"
 		"GeoCal::RsmMultiSection::~RsmMultiSection\n"
 		""},
 	 { "RsmMultiSection_swigregister", RsmMultiSection_swigregister, METH_O, NULL},
@@ -7986,132 +7993,139 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmMultiSection", _wrap_new_RsmMultiSection, METH_VARARGS, "\n"
+		"RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, RsmBase Rsm_prototype, int Border=5)\n"
 		"\n"
-		"RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const\n"
-		"RsmBase &Rsm_prototype, int Border=5, const std::string\n"
-		"&Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\")\n"
 		"GeoCal::RsmMultiSection::RsmMultiSection\n"
-		"Constructor.\n"
-		"The RsmRationalPolynomial tends to extrapolate badly. Because the low\n"
-		"order polynomial is only approximately correct, we add a little bit of\n"
-		"a border to each underlying RsmRationalPolynomial so we can avoid\n"
-		"extrapolating. \n"
+		"Constructor.  \n"
+		"\n"
+		"The RsmRationalPolynomial tends to extrapolate badly. Because the low order\n"
+		"polynomial is only approximately correct, we add a little bit of a border to\n"
+		"each underlying RsmRationalPolynomial so we can avoid extrapolating.  \n"
+		"\n"
 		""},
 	 { "RsmMultiSection__v_number_row_section", _wrap_RsmMultiSection__v_number_row_section, METH_O, "\n"
+		"_v_number_row_section(RsmMultiSection self) -> int\n"
 		"\n"
-		"int GeoCal::RsmMultiSection::number_row_section() const\n"
 		"GeoCal::RsmMultiSection::number_row_section\n"
 		""},
 	 { "RsmMultiSection__v_number_col_section", _wrap_RsmMultiSection__v_number_col_section, METH_O, "\n"
+		"_v_number_col_section(RsmMultiSection self) -> int\n"
 		"\n"
-		"int GeoCal::RsmMultiSection::number_col_section() const\n"
 		"GeoCal::RsmMultiSection::number_col_section\n"
 		""},
 	 { "RsmMultiSection__v_number_line_per_section", _wrap_RsmMultiSection__v_number_line_per_section, METH_O, "\n"
+		"_v_number_line_per_section(RsmMultiSection self) -> double\n"
 		"\n"
-		"double GeoCal::RsmMultiSection::number_line_per_section() const\n"
 		"GeoCal::RsmMultiSection::number_line_per_section\n"
 		""},
 	 { "RsmMultiSection__v_number_sample_per_section", _wrap_RsmMultiSection__v_number_sample_per_section, METH_O, "\n"
+		"_v_number_sample_per_section(RsmMultiSection self) -> double\n"
 		"\n"
-		"double GeoCal::RsmMultiSection::number_sample_per_section() const\n"
 		"GeoCal::RsmMultiSection::number_sample_per_section\n"
 		""},
 	 { "RsmMultiSection_fit_start", _wrap_RsmMultiSection_fit_start, METH_VARARGS, "\n"
+		"fit_start(RsmMultiSection self, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height)\n"
+		"fit_start(RsmMultiSection self, BlitzArray_double_2 Data)\n"
 		"\n"
-		"void RsmMultiSection::fit_start(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height)\n"
 		"GeoCal::RsmMultiSection::fit_start\n"
-		"Fit just the low order polynomial.\n"
-		"This is intended for doing parallel fitting of the sections in python.\n"
+		"Fit just the low order polynomial.  \n"
+		"\n"
+		"This is intended for doing parallel fitting of the sections in python.  \n"
 		"\n"
 		""},
 	 { "RsmMultiSection_fit_section", _wrap_RsmMultiSection_fit_section, METH_VARARGS, "\n"
+		"fit_section(RsmMultiSection self, int i, int j, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height) -> boost::shared_ptr< GeoCal::RsmBase > const\n"
+		"fit_section(RsmMultiSection self, int i, int j, BlitzArray_double_2 Data) -> boost::shared_ptr< GeoCal::RsmBase > const &\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::fit_section(int i, int j, const ImageGroundConnection &Igc, const\n"
-		"CoordinateConverter &Cconv, double Min_height, double Max_height)\n"
 		"GeoCal::RsmMultiSection::fit_section\n"
-		"Fit a single segment.\n"
-		"This is intended for doing parallel fitting in python. \n"
+		"Fit a single segment.  \n"
+		"\n"
+		"This is intended for doing parallel fitting in python.  \n"
+		"\n"
 		""},
 	 { "RsmMultiSection_section", _wrap_RsmMultiSection_section, METH_VARARGS, "\n"
+		"section(RsmMultiSection self, int i, int j) -> boost::shared_ptr< GeoCal::RsmBase >\n"
+		"section(RsmMultiSection self, int i, int j, boost::shared_ptr< GeoCal::RsmBase > const & V)\n"
 		"\n"
-		"void GeoCal::RsmMultiSection::section(int i, int j, const boost::shared_ptr< RsmBase > &V)\n"
 		"GeoCal::RsmMultiSection::section\n"
 		""},
 	 { "RsmMultiSection_section_ls", _wrap_RsmMultiSection_section_ls, METH_VARARGS, "\n"
+		"section_ls(RsmMultiSection self, double Line, double Sample) -> boost::shared_ptr< GeoCal::RsmBase > const &\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::section_ls(double Line, double Sample) const\n"
 		"GeoCal::RsmMultiSection::section_ls\n"
-		"Return the section that handles the given image coordinate line and\n"
-		"sample.\n"
+		"Return the section that handles the given image coordinate line and sample.  \n"
 		"\n"
 		""},
 	 { "RsmMultiSection_section_xyz", _wrap_RsmMultiSection_section_xyz, METH_VARARGS, "\n"
+		"section_xyz(RsmMultiSection self, double X, double Y, double Z) -> boost::shared_ptr< GeoCal::RsmBase > const &\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & RsmMultiSection::section_xyz(double X, double Y, double Z) const\n"
 		"GeoCal::RsmMultiSection::section_xyz\n"
-		"Use low order polynomial to determine section for a particular\n"
-		"coordinate.\n"
+		"Use low order polynomial to determine section for a particular coordinate.  \n"
 		"\n"
 		""},
 	 { "RsmMultiSection_tre_string", _wrap_RsmMultiSection_tre_string, METH_O, "\n"
+		"tre_string(RsmMultiSection self) -> std::string\n"
 		"\n"
-		"std::string RsmMultiSection::tre_string() const\n"
 		"GeoCal::RsmMultiSection::tre_string\n"
-		"Write to TRE string.\n"
-		"Note also that the TRE has a fixed precision which is less than the\n"
-		"machine precision. Writing a RsmMultiSection and then reading it from\n"
-		"a TRE does not in general give the exact same RsmRationalPolynomial,\n"
-		"rather just one that is close.\n"
+		"Write to TRE string.  \n"
 		"\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to).\n"
+		"Note also that the TRE has a fixed precision which is less than the machine\n"
+		"precision. Writing a RsmMultiSection and then reading it from a TRE does *not*\n"
+		"in general give the exact same RsmRationalPolynomial, rather just one that is\n"
+		"close.  \n"
 		"\n"
-		"We do not write out the actually RsmBase that make up the section,\n"
-		"this writing is handled separately. \n"
+		"Note that this is all the fields *except* the CETAG and CEL (the front two). It\n"
+		"is convenient to treat those special. (We can revisit this in the future if we\n"
+		"need to).  \n"
+		"\n"
+		"We do *not* write out the actually RsmBase that make up the section, this\n"
+		"writing is handled separately.  \n"
+		"\n"
 		""},
 	 { "RsmMultiSection_read_tre_string", _wrap_RsmMultiSection_read_tre_string, METH_O, "\n"
+		"read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmMultiSection >\n"
 		"\n"
-		"boost::shared_ptr< RsmMultiSection > RsmMultiSection::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmMultiSection::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmMultiSection. However the fields that aren't contained are ones\n"
-		"used for fitting the RSM, so in practice this doesn't matter. We just\n"
-		"set the various fields to the default values found in the constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to).\n"
+		"Note that the TRE does not contain all the fields we have in a RsmMultiSection.\n"
+		"However the fields that aren't contained are ones used for fitting the RSM, so\n"
+		"in practice this doesn't matter. We just set the various fields to the default\n"
+		"values found in the constructor.  \n"
 		"\n"
-		"We do not fill in the actual RsmBase stuff in sec, that is handled\n"
-		"separately. We do resize sec, but fill it with null pointers. \n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
+		"We do *not* fill in the actual RsmBase stuff in sec, that is handled separately.\n"
+		"We do resize sec, but fill it with null pointers.  \n"
+		"\n"
 		""},
 	 { "delete_RsmMultiSection", _wrap_delete_RsmMultiSection, METH_O, "\n"
+		"delete_RsmMultiSection(RsmMultiSection self)\n"
 		"\n"
-		"virtual GeoCal::RsmMultiSection::~RsmMultiSection()\n"
 		"GeoCal::RsmMultiSection::~RsmMultiSection\n"
 		""},
 	 { "RsmMultiSection_swigregister", RsmMultiSection_swigregister, METH_O, NULL},

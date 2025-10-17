@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _memory_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _memory_dem:
 _memory_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _memory_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,12 +142,14 @@ import geocal_swig.generic_object
 class MemoryDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This is a DemMapInfo that has everything stored in memory.
 
-    This Dem can be updated, and we can also supply the jacobian with
-    respect to the Dem height values.
+    This is a DemMapInfo that has everything stored in memory.  
 
-    C++ includes: memory_dem.h 
+    This Dem can be updated, and we can also supply the jacobian with respect to the
+    Dem height values.  
+
+    C++ includes: memory_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,16 +157,15 @@ class MemoryDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, D, M, Outside_dem_is_error=False):
         r"""
+        __init__(MemoryDem self, boost::shared_ptr< GeoCal::Datum > const & D, MapInfo M, bool Outside_dem_is_error=False) -> MemoryDem
 
-        GeoCal::MemoryDem::MemoryDem(const boost::shared_ptr< Datum > &D, const MapInfo &M, bool
-        Outside_dem_is_error=false)
         GeoCal::MemoryDem::MemoryDem
-        Constructor.
+        Constructor.  
 
         """
         _memory_dem.MemoryDem_swiginit(self, _memory_dem.new_MemoryDem(D, M, Outside_dem_is_error))
     elevation = _swig_new_instance_method(_memory_dem.MemoryDem_elevation)
-    elevation_data = property(_memory_dem.MemoryDem_elevation_data_get, _memory_dem.MemoryDem_elevation_data_set)
+    elevation_data = property(_memory_dem.MemoryDem_elevation_data_get, _memory_dem.MemoryDem_elevation_data_set, doc=r"""elevation_data : boost::multi_array<(double,2)>""")
     __swig_destroy__ = _memory_dem.delete_MemoryDem
 
 # Register MemoryDem in _memory_dem:

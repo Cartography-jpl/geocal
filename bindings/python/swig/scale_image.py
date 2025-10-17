@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _scale_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _scale_image:
 _scale_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _scale_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,10 +146,11 @@ import geocal_swig.calc_raster_multi_band
 class ScaleImage(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This is a simple adapter that multiples a underlying image by a scale
-    factor.
 
-    C++ includes: scale_image.h 
+    This is a simple adapter that multiples a underlying image by a scale factor.  
+
+    C++ includes: scale_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,8 +158,8 @@ class ScaleImage(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Data, Scale_factor):
         r"""
+        __init__(ScaleImage self, boost::shared_ptr< GeoCal::RasterImage > const & Data, double Scale_factor) -> ScaleImage
 
-        GeoCal::ScaleImage::ScaleImage(const boost::shared_ptr< RasterImage > &Data, double Scale_factor)
         GeoCal::ScaleImage::ScaleImage
         """
         _scale_image.ScaleImage_swiginit(self, _scale_image.new_ScaleImage(Data, Scale_factor))
@@ -186,10 +190,11 @@ _scale_image.ScaleImage_swigregister(ScaleImage)
 class ScaleImageMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     r"""
 
-    This is a simple adapter that multiples a underlying image by a scale
-    factor.
 
-    C++ includes: scale_image.h 
+    This is a simple adapter that multiples a underlying image by a scale factor.  
+
+    C++ includes: scale_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -197,9 +202,8 @@ class ScaleImageMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand
 
     def __init__(self, Data, Scale_factor):
         r"""
+        __init__(ScaleImageMultiBand self, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Data, double Scale_factor) -> ScaleImageMultiBand
 
-        GeoCal::ScaleImageMultiBand::ScaleImageMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Data, double
-        Scale_factor)
         GeoCal::ScaleImageMultiBand::ScaleImageMultiBand
         """
         _scale_image.ScaleImageMultiBand_swiginit(self, _scale_image.new_ScaleImageMultiBand(Data, Scale_factor))
@@ -230,6 +234,7 @@ _scale_image.ScaleImageMultiBand_swigregister(ScaleImageMultiBand)
 class ScaleImageGroundConnection(object):
     r"""
 
+
     C++ includes: scale_image.h
 
     """
@@ -239,11 +244,10 @@ class ScaleImageGroundConnection(object):
 
     def __init__(self, Igc, Scale_factor):
         r"""
+        __init__(ScaleImageGroundConnection self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, double Scale_factor) -> ScaleImageGroundConnection
 
-        ScaleImageGroundConnection::ScaleImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Igc, double
-        Scale_factor)
         GeoCal::ScaleImageGroundConnection::ScaleImageGroundConnection
-        Scale the image of an ImageGroundConnection.
+        Scale the image of an ImageGroundConnection.  
 
         """
         _scale_image.ScaleImageGroundConnection_swiginit(self, _scale_image.new_ScaleImageGroundConnection(Igc, Scale_factor))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spice_kernel_list.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spice_kernel_list:
 _spice_kernel_list.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spice_kernel_list.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,24 +140,24 @@ import geocal_swig.generic_object
 class SpiceKernelList(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This maintains a list of spice kernels.
 
-    This supports loading the kernels, and in particular it handles
-    serializing this. This is useful in support of other Spice objects
-    (e.g., SpicePlanetOrbit).
+    This maintains a list of spice kernels.  
 
-    Note that this maintains the list of kernels, to actually load them
-    call load_kernel.
+    This supports loading the kernels, and in particular it handles serializing
+    this. This is useful in support of other Spice objects (e.g., SpicePlanetOrbit).  
+
+    Note that this maintains the list of kernels, to actually load them call
+    load_kernel.  
 
     This handles spiceinit style kernel names from ISIS, so things like
-    $mro/kernels/fk/mro_v16.tf. We look for these first in the directory
-    pointed to by environment ISISDATA, then in SPICECACHE (if defined) or
-    ~/.spice_cache if not. If the kernel isn't found on the system, we
-    attempt to download from the the ISIS data server
-    (seehttps://github.com/USGS-Astrogeology/ISIS3#isis-spice-web-
-    service).
+    $mro/kernels/fk/mro_v16.tf. We look for these first in the directory pointed to
+    by environment ISISDATA, then in SPICECACHE (if defined) or ~/.spice_cache if
+    not. If the kernel isn't found on the system, we attempt to download from the
+    the ISIS data server (see https://github.com/USGS-Astrogeology/ISIS3#isis-spice-
+    web-service).  
 
-    C++ includes: spice_kernel_list.h 
+    C++ includes: spice_kernel_list.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -162,8 +165,9 @@ class SpiceKernelList(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(SpiceKernelList self, vector_string Kernel_list, bool Skip_load=False) -> SpiceKernelList
+        __init__(SpiceKernelList self) -> SpiceKernelList
 
-        GeoCal::SpiceKernelList::SpiceKernelList(const std::vector< std::string > &Kernel_list, bool Skip_load=false)
         GeoCal::SpiceKernelList::SpiceKernelList
         """
         _spice_kernel_list.SpiceKernelList_swiginit(self, _spice_kernel_list.new_SpiceKernelList(*args))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _vicar_raster_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _vicar_raster_image:
 _vicar_raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _vicar_raster_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,12 +145,14 @@ import geocal_swig.geocal_exception
 class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     r"""
 
-    This wraps a VicarTiledFile<T> to make a RasterImage.
 
-    The type of T should be one we can convert to and from a int, since
-    this is what a RasterImage works in.
+    This wraps a VicarTiledFile<T> to make a RasterImage.  
 
-    C++ includes: vicar_raster_image.h 
+    The type of T should be one we can convert to and from a int, since this is what
+    a RasterImage works in.  
+
+    C++ includes: vicar_raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,13 +160,17 @@ class VicarRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile)
 
     def __init__(self, *args):
         r"""
+        __init__(VicarRasterImage self, std::string const & Fname, int Band_id=1, GeoCal::VicarRasterImage::access_type Access=READ, int Number_line_per_tile=100, int Number_tile=4, bool Force_area_pixel=False) -> VicarRasterImage
+        __init__(VicarRasterImage self, boost::shared_ptr< GeoCal::VicarFile > const & Vicar_file, int Band_id=1, int Number_line_per_tile=100, int Number_tile=4) -> VicarRasterImage
+        __init__(VicarRasterImage self, std::string const & Fname, std::string const & Type, int Number_line, int Number_sample, int Number_band=1, std::string const & Org="BSQ", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE) -> VicarRasterImage
+        __init__(VicarRasterImage self, std::string const & Fname, MapInfo M, std::string const & Type="BYTE", int Number_band=1, std::string const & Org="BSQ", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE) -> VicarRasterImage
+        __init__(VicarRasterImage self, int Instance, int Band_id=1, GeoCal::VicarRasterImage::access_type Access=READ, std::string const & Name="INP", int Number_line_per_tile=100, int Number_tile=4) -> VicarRasterImage
+        __init__(VicarRasterImage self, int Instance, std::string const & Type, int Number_line, int Number_sample, int Number_band=1, std::string const & Org="BSQ", std::string const & Name="OUT", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE) -> VicarRasterImage
+        __init__(VicarRasterImage self, int Instance, MapInfo M, std::string const & Type="BYTE", int Number_band=1, std::string const & Org="BSQ", std::string const & Name="OUT", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE) -> VicarRasterImage
 
-        GeoCal::VicarRasterImage::VicarRasterImage(int Instance, int Band_id=1, access_type Access=VicarFile::READ,
-        const std::string &Name="INP", int Number_line_per_tile=100, int
-        Number_tile=4)
         GeoCal::VicarRasterImage::VicarRasterImage
-        Open a file, using the VICAR Name and Instance input (so for example,
-        "INP" and 2 is the second INP file passed to a VICAR program.
+        Open a file, using the VICAR Name and Instance input (so for example, "INP"
+        and 2 is the second INP file passed to a VICAR program.  
 
         """
         _vicar_raster_image.VicarRasterImage_swiginit(self, _vicar_raster_image.new_VicarRasterImage(*args))

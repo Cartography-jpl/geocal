@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _vicar_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _vicar_file:
 _vicar_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _vicar_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,78 +142,97 @@ import geocal_swig.geocal_exception
 class VicarFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles opening and closing a Vicar file.
 
-    This class doesn't actually read and write data, but is used by other
-    classes which do.
+    This handles opening and closing a Vicar file.  
 
-    This uses the VICAR RTL, which is documented athttp://www-
-    mipl.jpl.nasa.gov/RTL
+    This class doesn't actually read and write data, but is used by other classes
+    which do.  
 
-    If the VICAR RTL library wasn't available when this geocal was built,
-    then this class will just throw an exception when we try to do
-    anything with a VICAR file.
+    This uses the VICAR RTL, which is documented at http://www-mipl.jpl.nasa.gov/RTL  
 
-    As an implementation detail, the class VicarFile and IbisFile need to
-    coordinate in translating file names to unit numbers since the same
-    underlying Vicar routine zvunit is used by both. We arbitrarily have
-    VicarFile handle this, and IbisFile accesses VicarFile when it needs
-    to do this.
+    If the VICAR RTL library wasn't available when this geocal was built, then this
+    class will just throw an exception when we try to do anything with a VICAR file.  
 
-    Also a note for developers. The Vicar RTL library uses various
-    variable argument functions. You need to end the list of arguments
-    with "NULL". Note that a cast to a point type is mandatory, you
-    can't just say "0". If say "0" then you will get fairly difficult
-    to track down errors. Without the cast, this gets passed as an int,
-    which the RTL library code will then try to interpret as a char *.
-    va_args has undefined behavior when called with the wrong type,
-    ranging from seeming to work to core dumping.
+    As an implementation detail, the class VicarFile and IbisFile need to coordinate
+    in translating file names to unit numbers since the same underlying Vicar
+    routine zvunit is used by both. We arbitrarily have VicarFile handle this, and
+    IbisFile accesses VicarFile when it needs to do this.  
 
-    Because of the complication involved, we have separated out the
-    functionality of reading and writing MapInfo metadata. This is done by
-    the class VicarOgr. This is handled behind the scenes, so for a user
-    of this class this separation makes no difference. But if you are
-    looking for the code that does this, you'll need to look in VicarOgr.
+    Also a note for developers. The Vicar RTL library uses various variable argument
+    functions. You need to end the list of arguments with "NULL". Note that a cast
+    to a point type is *mandatory*, you can't just say "0". If say "0" then you
+    will get fairly difficult to track down errors. Without the cast, this gets
+    passed as an int, which the RTL library code will then try to interpret as a
+    char *. va_args has undefined behavior when called with the wrong type, ranging
+    from seeming to work to core dumping.  
 
-    The current implementation of the MapInfo metadata requires the GDAL
-    library to be available. If this isn't you can still build the GeoCal
-    system but any attempt to read or write MapInfo metadata will trigger
-    an exception.
+    Because of the complication involved, we have separated out the functionality of
+    reading and writing MapInfo metadata. This is done by the class VicarOgr. This
+    is handled behind the scenes, so for a user of this class this separation makes
+    no difference. But if you are looking for the code that does this, you'll need
+    to look in VicarOgr.  
 
-    C++ includes: vicar_file.h 
+    The current implementation of the MapInfo metadata requires the GDAL library to
+    be available. If this isn't you can still build the GeoCal system but any
+    attempt to read or write MapInfo metadata will trigger an exception.  
+
+    C++ includes: vicar_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     VICAR_INT = _vicar_file.VicarFile_VICAR_INT
+    
     VICAR_REAL = _vicar_file.VicarFile_VICAR_REAL
+    
     VICAR_STRING = _vicar_file.VicarFile_VICAR_STRING
+    
     VICAR_BYTE = _vicar_file.VicarFile_VICAR_BYTE
+    
     VICAR_HALF = _vicar_file.VicarFile_VICAR_HALF
+    
     VICAR_FULL = _vicar_file.VicarFile_VICAR_FULL
+    
     VICAR_FLOAT = _vicar_file.VicarFile_VICAR_FLOAT
+    
     VICAR_DOUBLE = _vicar_file.VicarFile_VICAR_DOUBLE
+    
     READ = _vicar_file.VicarFile_READ
+    
     WRITE = _vicar_file.VicarFile_WRITE
+    
     UPDATE = _vicar_file.VicarFile_UPDATE
+    
     NONE = _vicar_file.VicarFile_NONE
+    
     BASIC = _vicar_file.VicarFile_BASIC
+    
     BASIC2 = _vicar_file.VicarFile_BASIC2
+    
     RSM_XML_FILE = _vicar_file.VicarFile_RSM_XML_FILE
+    
     RSM_NITF_FILE = _vicar_file.VicarFile_RSM_NITF_FILE
+    
     GLAS_GFM_XML_FILE = _vicar_file.VicarFile_GLAS_GFM_XML_FILE
+    
     GLAS_GFM_NITF_FILE = _vicar_file.VicarFile_GLAS_GFM_NITF_FILE
+    
 
     def __init__(self, *args):
         r"""
+        __init__(VicarFile self, std::string const & Fname, GeoCal::VicarFile::access_type Access=READ) -> VicarFile
+        __init__(VicarFile self, std::string const & Fname, int Number_line, int Number_sample, std::string const & Type="BYTE") -> VicarFile
+        __init__(VicarFile self, std::string const & Fname, int Number_line, int Number_sample, int Number_band, std::string const & Type="BYTE", std::string const & Org="BSQ") -> VicarFile
+        __init__(VicarFile self, int Instance, GeoCal::VicarFile::access_type Access=READ, std::string const & Name="INP") -> VicarFile
+        __init__(VicarFile self, int Instance, int Number_line, int Number_sample, int Number_band=1, std::string const & Type="BYTE", std::string const & Name="OUT", std::string const & Org="BSQ", GeoCal::VicarFile::compression C=NONE) -> VicarFile
 
-        VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1,
-        const std::string &Type="BYTE", const std::string &Name="OUT",
-        const std::string &Org="BSQ", compression C=NONE)
         GeoCal::VicarFile::VicarFile
-        Create a new VICAR file with the given size.
-        Use the VICAR Name and Instance input (so for example, "INP" and 2
-        is the second INP file passed to a VICAR program. 
+        Create a new VICAR file with the given size.  
+
+        Use the VICAR Name and Instance input (so for example, "INP" and 2 is the
+        second INP file passed to a VICAR program.  
+
         """
         _vicar_file.VicarFile_swiginit(self, _vicar_file.new_VicarFile(*args))
     __swig_destroy__ = _vicar_file.delete_VicarFile

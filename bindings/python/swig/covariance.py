@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _covariance.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _covariance:
 _covariance.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _covariance.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,12 +140,14 @@ import geocal_swig.generic_object
 class Covariance(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This calculates simple statistics on a pair of numbers.
 
-    It does this by keeping running sums, so we don't need all the numbers
-    to be available at once.
+    This calculates simple statistics on a pair of numbers.  
 
-    C++ includes: covariance.h 
+    It does this by keeping running sums, so we don't need all the numbers to be
+    available at once.  
+
+    C++ includes: covariance.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,10 +155,10 @@ class Covariance(geocal_swig.generic_object.GenericObject):
 
     def __init__(self):
         r"""
+        __init__(Covariance self) -> Covariance
 
-        GeoCal::Covariance::Covariance()
         GeoCal::Covariance::Covariance
-        Constructor.
+        Constructor.  
 
         """
         _covariance.Covariance_swiginit(self, _covariance.new_Covariance())

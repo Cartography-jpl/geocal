@@ -7362,180 +7362,188 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "GdalBase__v_map_info", _wrap_GdalBase__v_map_info, METH_VARARGS, "\n"
+		"GdalBase__v_map_info(GdalBase self) -> MapInfo\n"
+		"GdalBase__v_map_info(GdalBase self, MapInfo V)\n"
 		"\n"
-		"virtual void GeoCal::GdalBase::map_info(const MapInfo &M)\n"
 		"GeoCal::GdalBase::map_info\n"
 		""},
 	 { "GdalBase__v_raster_band", _wrap_GdalBase__v_raster_band, METH_O, "\n"
+		"GdalBase__v_raster_band(GdalBase self) -> GDALRasterBand &\n"
 		"\n"
-		"const GDALRasterBand & GeoCal::GdalBase::raster_band() const\n"
 		"GeoCal::GdalBase::raster_band\n"
-		"The underlying GDALRasterBand object.\n"
+		"The underlying GDALRasterBand object.  \n"
 		"\n"
 		""},
 	 { "GdalBase__v_linear_unit_name", _wrap_GdalBase__v_linear_unit_name, METH_O, "\n"
+		"GdalBase__v_linear_unit_name(GdalBase self) -> std::string\n"
 		"\n"
-		"std::string GdalBase::linear_unit_name() const\n"
 		"GeoCal::GdalBase::linear_unit_name\n"
-		"Return linear units name.\n"
+		"Return linear units name.  \n"
 		"\n"
 		""},
 	 { "GdalBase__v_linear_unit_scale", _wrap_GdalBase__v_linear_unit_scale, METH_O, "\n"
+		"GdalBase__v_linear_unit_scale(GdalBase self) -> double\n"
 		"\n"
-		"double GdalBase::linear_unit_scale() const\n"
 		"GeoCal::GdalBase::linear_unit_scale\n"
-		"Return linear units scale, which is the factor needed to multiple\n"
-		"linear distance by to get meters.\n"
+		"Return linear units scale, which is the factor needed to multiple linear\n"
+		"distance by to get meters.  \n"
 		"\n"
 		""},
 	 { "GdalBase_close", _wrap_GdalBase_close, METH_O, "\n"
+		"GdalBase_close(GdalBase self)\n"
 		"\n"
-		"void GeoCal::GdalBase::close()\n"
 		"GeoCal::GdalBase::close\n"
 		""},
 	 { "GdalBase__v_is_closed", _wrap_GdalBase__v_is_closed, METH_O, "\n"
+		"GdalBase__v_is_closed(GdalBase self) -> bool\n"
 		"\n"
-		"bool GeoCal::GdalBase::is_closed() const\n"
 		"GeoCal::GdalBase::is_closed\n"
 		""},
 	 { "GdalBase_flush", _wrap_GdalBase_flush, METH_O, "\n"
+		"GdalBase_flush(GdalBase self)\n"
 		"\n"
-		"void GeoCal::GdalBase::flush() const\n"
 		"GeoCal::GdalBase::flush\n"
-		"Flush data to disk.\n"
+		"Flush data to disk.  \n"
 		"\n"
 		""},
 	 { "GdalBase__v_rpc", _wrap_GdalBase__v_rpc, METH_O, "\n"
+		"GdalBase__v_rpc(GdalBase self) -> Rpc\n"
 		"\n"
-		"void GeoCal::GdalBase::rpc(const Rpc &R)\n"
 		"GeoCal::GdalBase::rpc\n"
 		""},
-	 { "GdalBase___str__", _wrap_GdalBase___str__, METH_O, NULL},
-	 { "GdalBase_driver_count", _wrap_GdalBase_driver_count, METH_NOARGS, NULL},
-	 { "GdalBase_driver_short_name", _wrap_GdalBase_driver_short_name, METH_O, NULL},
-	 { "GdalBase_driver_long_name", _wrap_GdalBase_driver_long_name, METH_O, NULL},
-	 { "GdalBase_driver_help_url", _wrap_GdalBase_driver_help_url, METH_O, NULL},
-	 { "GdalBase_driver_option_list", _wrap_GdalBase_driver_option_list, METH_O, NULL},
-	 { "new_GdalBase", _wrap_new_GdalBase, METH_NOARGS, NULL},
+	 { "GdalBase___str__", _wrap_GdalBase___str__, METH_O, "GdalBase___str__(GdalBase self) -> std::string"},
+	 { "GdalBase_driver_count", _wrap_GdalBase_driver_count, METH_NOARGS, "GdalBase_driver_count() -> int"},
+	 { "GdalBase_driver_short_name", _wrap_GdalBase_driver_short_name, METH_O, "GdalBase_driver_short_name(int i) -> char const *"},
+	 { "GdalBase_driver_long_name", _wrap_GdalBase_driver_long_name, METH_O, "GdalBase_driver_long_name(int i) -> char const *"},
+	 { "GdalBase_driver_help_url", _wrap_GdalBase_driver_help_url, METH_O, "GdalBase_driver_help_url(int i) -> char const *"},
+	 { "GdalBase_driver_option_list", _wrap_GdalBase_driver_option_list, METH_O, "GdalBase_driver_option_list(int i) -> char const *"},
+	 { "new_GdalBase", _wrap_new_GdalBase, METH_NOARGS, "new_GdalBase() -> GdalBase"},
 	 { "delete_GdalBase", _wrap_delete_GdalBase, METH_O, "\n"
+		"delete_GdalBase(GdalBase self)\n"
 		"\n"
-		"virtual GeoCal::GdalBase::~GdalBase()\n"
 		"GeoCal::GdalBase::~GdalBase\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GdalBase_swigregister", GdalBase_swigregister, METH_O, NULL},
 	 { "GdalBase_swiginit", GdalBase_swiginit, METH_VARARGS, NULL},
-	 { "gdal_driver_name", _wrap_gdal_driver_name, METH_O, NULL},
+	 { "gdal_driver_name", _wrap_gdal_driver_name, METH_O, "gdal_driver_name(std::string const & Fname) -> std::string"},
 	 { NULL, NULL, 0, NULL }
 };
 
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "GdalBase__v_map_info", _wrap_GdalBase__v_map_info, METH_VARARGS, "\n"
+		"_v_map_info(GdalBase self) -> MapInfo\n"
+		"_v_map_info(GdalBase self, MapInfo V)\n"
 		"\n"
-		"virtual void GeoCal::GdalBase::map_info(const MapInfo &M)\n"
 		"GeoCal::GdalBase::map_info\n"
 		""},
 	 { "GdalBase__v_raster_band", _wrap_GdalBase__v_raster_band, METH_O, "\n"
+		"_v_raster_band(GdalBase self) -> GDALRasterBand &\n"
 		"\n"
-		"const GDALRasterBand & GeoCal::GdalBase::raster_band() const\n"
 		"GeoCal::GdalBase::raster_band\n"
-		"The underlying GDALRasterBand object.\n"
+		"The underlying GDALRasterBand object.  \n"
 		"\n"
 		""},
 	 { "GdalBase__v_linear_unit_name", _wrap_GdalBase__v_linear_unit_name, METH_O, "\n"
+		"_v_linear_unit_name(GdalBase self) -> std::string\n"
 		"\n"
-		"std::string GdalBase::linear_unit_name() const\n"
 		"GeoCal::GdalBase::linear_unit_name\n"
-		"Return linear units name.\n"
+		"Return linear units name.  \n"
 		"\n"
 		""},
 	 { "GdalBase__v_linear_unit_scale", _wrap_GdalBase__v_linear_unit_scale, METH_O, "\n"
+		"_v_linear_unit_scale(GdalBase self) -> double\n"
 		"\n"
-		"double GdalBase::linear_unit_scale() const\n"
 		"GeoCal::GdalBase::linear_unit_scale\n"
-		"Return linear units scale, which is the factor needed to multiple\n"
-		"linear distance by to get meters.\n"
+		"Return linear units scale, which is the factor needed to multiple linear\n"
+		"distance by to get meters.  \n"
 		"\n"
 		""},
 	 { "GdalBase_close", _wrap_GdalBase_close, METH_O, "\n"
+		"close(GdalBase self)\n"
 		"\n"
-		"void GeoCal::GdalBase::close()\n"
 		"GeoCal::GdalBase::close\n"
 		""},
 	 { "GdalBase__v_is_closed", _wrap_GdalBase__v_is_closed, METH_O, "\n"
+		"_v_is_closed(GdalBase self) -> bool\n"
 		"\n"
-		"bool GeoCal::GdalBase::is_closed() const\n"
 		"GeoCal::GdalBase::is_closed\n"
 		""},
 	 { "GdalBase_flush", _wrap_GdalBase_flush, METH_O, "\n"
+		"flush(GdalBase self)\n"
 		"\n"
-		"void GeoCal::GdalBase::flush() const\n"
 		"GeoCal::GdalBase::flush\n"
-		"Flush data to disk.\n"
+		"Flush data to disk.  \n"
 		"\n"
 		""},
 	 { "GdalBase__v_rpc", _wrap_GdalBase__v_rpc, METH_O, "\n"
+		"_v_rpc(GdalBase self) -> Rpc\n"
 		"\n"
-		"void GeoCal::GdalBase::rpc(const Rpc &R)\n"
 		"GeoCal::GdalBase::rpc\n"
 		""},
-	 { "GdalBase___str__", _wrap_GdalBase___str__, METH_O, NULL},
-	 { "GdalBase_driver_count", _wrap_GdalBase_driver_count, METH_NOARGS, NULL},
-	 { "GdalBase_driver_short_name", _wrap_GdalBase_driver_short_name, METH_O, NULL},
-	 { "GdalBase_driver_long_name", _wrap_GdalBase_driver_long_name, METH_O, NULL},
-	 { "GdalBase_driver_help_url", _wrap_GdalBase_driver_help_url, METH_O, NULL},
-	 { "GdalBase_driver_option_list", _wrap_GdalBase_driver_option_list, METH_O, NULL},
-	 { "new_GdalBase", _wrap_new_GdalBase, METH_NOARGS, NULL},
+	 { "GdalBase___str__", _wrap_GdalBase___str__, METH_O, "__str__(GdalBase self) -> std::string"},
+	 { "GdalBase_driver_count", _wrap_GdalBase_driver_count, METH_NOARGS, "driver_count() -> int"},
+	 { "GdalBase_driver_short_name", _wrap_GdalBase_driver_short_name, METH_O, "driver_short_name(int i) -> char const *"},
+	 { "GdalBase_driver_long_name", _wrap_GdalBase_driver_long_name, METH_O, "driver_long_name(int i) -> char const *"},
+	 { "GdalBase_driver_help_url", _wrap_GdalBase_driver_help_url, METH_O, "driver_help_url(int i) -> char const *"},
+	 { "GdalBase_driver_option_list", _wrap_GdalBase_driver_option_list, METH_O, "driver_option_list(int i) -> char const *"},
+	 { "new_GdalBase", _wrap_new_GdalBase, METH_NOARGS, "new_GdalBase() -> GdalBase"},
 	 { "delete_GdalBase", _wrap_delete_GdalBase, METH_O, "\n"
+		"delete_GdalBase(GdalBase self)\n"
 		"\n"
-		"virtual GeoCal::GdalBase::~GdalBase()\n"
 		"GeoCal::GdalBase::~GdalBase\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GdalBase_swigregister", GdalBase_swigregister, METH_O, NULL},
 	 { "GdalBase_swiginit", GdalBase_swiginit, METH_VARARGS, NULL},
-	 { "gdal_driver_name", _wrap_gdal_driver_name, METH_O, NULL},
+	 { "gdal_driver_name", _wrap_gdal_driver_name, METH_O, "gdal_driver_name(std::string const & Fname) -> std::string"},
 	 { NULL, NULL, 0, NULL }
 };
 

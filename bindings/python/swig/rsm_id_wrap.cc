@@ -10185,193 +10185,221 @@ SWIGINTERN PyObject *RsmId_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *ar
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmIdTiming", _wrap_new_RsmIdTiming, METH_VARARGS, "\n"
+		"new_RsmIdTiming(int Number_row_acquired_simulatenously, int Number_col_acquired_simulatenously, double Time_betweeen_adjacent_row_group, double Time_betweeen_adjacent_col_group) -> RsmIdTiming\n"
 		"\n"
-		"GeoCal::RsmIdTiming::RsmIdTiming(int Number_row_acquired_simulatenously, int\n"
-		"Number_col_acquired_simulatenously, double\n"
-		"Time_betweeen_adjacent_row_group, double\n"
-		"Time_betweeen_adjacent_col_group)\n"
 		"GeoCal::RsmIdTiming::RsmIdTiming\n"
 		""},
 	 { "RsmIdTiming__v_number_row_acquired_simultaneously", _wrap_RsmIdTiming__v_number_row_acquired_simultaneously, METH_VARARGS, "\n"
+		"RsmIdTiming__v_number_row_acquired_simultaneously(RsmIdTiming self) -> int\n"
+		"RsmIdTiming__v_number_row_acquired_simultaneously(RsmIdTiming self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::number_row_acquired_simultaneously(int V)\n"
 		"GeoCal::RsmIdTiming::number_row_acquired_simultaneously\n"
 		""},
 	 { "RsmIdTiming__v_number_col_acquired_simultaneously", _wrap_RsmIdTiming__v_number_col_acquired_simultaneously, METH_VARARGS, "\n"
+		"RsmIdTiming__v_number_col_acquired_simultaneously(RsmIdTiming self) -> int\n"
+		"RsmIdTiming__v_number_col_acquired_simultaneously(RsmIdTiming self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::number_col_acquired_simultaneously(int V)\n"
 		"GeoCal::RsmIdTiming::number_col_acquired_simultaneously\n"
 		""},
 	 { "RsmIdTiming__v_time_between_adjacent_row_group", _wrap_RsmIdTiming__v_time_between_adjacent_row_group, METH_VARARGS, "\n"
+		"RsmIdTiming__v_time_between_adjacent_row_group(RsmIdTiming self) -> double\n"
+		"RsmIdTiming__v_time_between_adjacent_row_group(RsmIdTiming self, double const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::time_between_adjacent_row_group(double V)\n"
 		"GeoCal::RsmIdTiming::time_between_adjacent_row_group\n"
 		""},
 	 { "RsmIdTiming__v_time_between_adjacent_col_group", _wrap_RsmIdTiming__v_time_between_adjacent_col_group, METH_VARARGS, "\n"
+		"RsmIdTiming__v_time_between_adjacent_col_group(RsmIdTiming self) -> double\n"
+		"RsmIdTiming__v_time_between_adjacent_col_group(RsmIdTiming self, double const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::time_between_adjacent_col_group(double V)\n"
 		"GeoCal::RsmIdTiming::time_between_adjacent_col_group\n"
 		""},
-	 { "RsmIdTiming___str__", _wrap_RsmIdTiming___str__, METH_O, NULL},
-	 { "delete_RsmIdTiming", _wrap_delete_RsmIdTiming, METH_O, NULL},
+	 { "RsmIdTiming___str__", _wrap_RsmIdTiming___str__, METH_O, "RsmIdTiming___str__(RsmIdTiming self) -> std::string"},
+	 { "delete_RsmIdTiming", _wrap_delete_RsmIdTiming, METH_O, "delete_RsmIdTiming(RsmIdTiming self)"},
 	 { "RsmIdTiming_swigregister", RsmIdTiming_swigregister, METH_O, NULL},
 	 { "RsmIdTiming_swiginit", RsmIdTiming_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmId", _wrap_new_RsmId, METH_VARARGS, "\n"
+		"new_RsmId(boost::shared_ptr< GeoCal::RsmBase > const & Base, boost::shared_ptr< GeoCal::CoordinateConverter > const & Cconv) -> RsmId\n"
 		"\n"
-		"GeoCal::RsmId::RsmId(const boost::shared_ptr< RsmBase > &Base, const boost::shared_ptr<\n"
-		"CoordinateConverter > &Cconv)\n"
 		"GeoCal::RsmId::RsmId\n"
 		""},
-	 { "RsmId___str__", _wrap_RsmId___str__, METH_O, NULL},
+	 { "RsmId___str__", _wrap_RsmId___str__, METH_O, "RsmId___str__(RsmId self) -> std::string"},
 	 { "RsmId__v_coordinate_converter", _wrap_RsmId__v_coordinate_converter, METH_VARARGS, "\n"
+		"RsmId__v_coordinate_converter(RsmId self) -> boost::shared_ptr< GeoCal::CoordinateConverter >\n"
+		"RsmId__v_coordinate_converter(RsmId self, boost::shared_ptr< GeoCal::CoordinateConverter > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)\n"
 		"GeoCal::RsmId::coordinate_converter\n"
 		""},
 	 { "RsmId__v_image_identifier", _wrap_RsmId__v_image_identifier, METH_VARARGS, "\n"
+		"RsmId__v_image_identifier(RsmId self) -> std::string\n"
+		"RsmId__v_image_identifier(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmId::image_identifier\n"
 		""},
 	 { "RsmId__v_rsm_support_data_edition", _wrap_RsmId__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"RsmId__v_rsm_support_data_edition(RsmId self) -> std::string\n"
+		"RsmId__v_rsm_support_data_edition(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmId::rsm_support_data_edition\n"
 		""},
 	 { "RsmId__v_image_sequence_identifier", _wrap_RsmId__v_image_sequence_identifier, METH_VARARGS, "\n"
+		"RsmId__v_image_sequence_identifier(RsmId self) -> std::string\n"
+		"RsmId__v_image_sequence_identifier(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::image_sequence_identifier(const std::string &V)\n"
 		"GeoCal::RsmId::image_sequence_identifier\n"
 		""},
 	 { "RsmId__v_sensor_identifier", _wrap_RsmId__v_sensor_identifier, METH_VARARGS, "\n"
+		"RsmId__v_sensor_identifier(RsmId self) -> std::string\n"
+		"RsmId__v_sensor_identifier(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::sensor_identifier(const std::string &V)\n"
 		"GeoCal::RsmId::sensor_identifier\n"
 		""},
 	 { "RsmId__v_sensor_type", _wrap_RsmId__v_sensor_type, METH_VARARGS, "\n"
+		"RsmId__v_sensor_type(RsmId self) -> std::string\n"
+		"RsmId__v_sensor_type(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::sensor_type(const std::string &V)\n"
 		"GeoCal::RsmId::sensor_type\n"
 		""},
 	 { "RsmId__v_image_acquistion_time", _wrap_RsmId__v_image_acquistion_time, METH_VARARGS, "\n"
+		"RsmId__v_image_acquistion_time(RsmId self) -> boost::shared_ptr< GeoCal::Time >\n"
+		"RsmId__v_image_acquistion_time(RsmId self, boost::shared_ptr< GeoCal::Time > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::image_acquistion_time(const boost::shared_ptr< Time > &V)\n"
 		"GeoCal::RsmId::image_acquistion_time\n"
 		""},
 	 { "RsmId__v_timing", _wrap_RsmId__v_timing, METH_VARARGS, "\n"
+		"RsmId__v_timing(RsmId self) -> boost::shared_ptr< GeoCal::RsmIdTiming >\n"
+		"RsmId__v_timing(RsmId self, boost::shared_ptr< GeoCal::RsmIdTiming > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::timing(const boost::shared_ptr< RsmIdTiming > &V)\n"
 		"GeoCal::RsmId::timing\n"
 		""},
 	 { "RsmId__v_ground_domain_vertex", _wrap_RsmId__v_ground_domain_vertex, METH_VARARGS, "\n"
+		"RsmId__v_ground_domain_vertex(RsmId self) -> Vector_GroundCoordinate\n"
+		"RsmId__v_ground_domain_vertex(RsmId self, Vector_GroundCoordinate V)\n"
 		"\n"
-		"void GeoCal::RsmId::ground_domain_vertex(const std::vector< boost::shared_ptr< GroundCoordinate > > &V)\n"
 		"GeoCal::RsmId::ground_domain_vertex\n"
-		"Set the ground domain vertex values.\n"
-		"This should be exactly 8 points, and the vertexes need to be ordered\n"
-		"at specified in the NITF standard. Because the coordinate_converter\n"
-		"might not be set or might be changed, we can only check that in when\n"
-		"generating the TRE.\n"
+		"Set the ground domain vertex values.  \n"
 		"\n"
-		"The constraint is V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based\n"
-		"numbering). \n"
+		"This should be exactly 8 points, and the vertexes need to be ordered at\n"
+		"specified in the NITF standard. Because the coordinate_converter might not be\n"
+		"set or might be changed, we can only check that in when generating the TRE.  \n"
+		"\n"
+		"The constraint is V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based numbering).  \n"
+		"\n"
 		""},
 	 { "RsmId_in_ground_domain", _wrap_RsmId_in_ground_domain, METH_VARARGS, "\n"
+		"RsmId_in_ground_domain(RsmId self, GroundCoordinate Gc) -> bool\n"
 		"\n"
-		"bool RsmId::in_ground_domain(const GroundCoordinate &Gc) const\n"
 		"GeoCal::RsmId::in_ground_domain\n"
-		"Check that point is in the ground domain.\n"
-		"You don't normally need to check this, but this is the equations found\n"
-		"in section 5.6 of \"RSM TRE Specification for NITF 2.1\" \n"
+		"Check that point is in the ground domain.  \n"
+		"\n"
+		"You don't normally need to check this, but this is the equations found in\n"
+		"section 5.6 of \"RSM TRE Specification for NITF 2.1\"  \n"
+		"\n"
 		""},
 	 { "RsmId__v_ground_reference_point", _wrap_RsmId__v_ground_reference_point, METH_VARARGS, "\n"
+		"RsmId__v_ground_reference_point(RsmId self) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"RsmId__v_ground_reference_point(RsmId self, boost::shared_ptr< GeoCal::GroundCoordinate > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::ground_reference_point(const boost::shared_ptr< GroundCoordinate > &V)\n"
 		"GeoCal::RsmId::ground_reference_point\n"
 		""},
 	 { "RsmId__v_full_number_line", _wrap_RsmId__v_full_number_line, METH_VARARGS, "\n"
+		"RsmId__v_full_number_line(RsmId self) -> boost::optional< int >\n"
+		"RsmId__v_full_number_line(RsmId self, boost::optional< int > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::full_number_line(const boost::optional< int > &V)\n"
 		"GeoCal::RsmId::full_number_line\n"
 		""},
 	 { "RsmId__v_full_number_sample", _wrap_RsmId__v_full_number_sample, METH_VARARGS, "\n"
+		"RsmId__v_full_number_sample(RsmId self) -> boost::optional< int >\n"
+		"RsmId__v_full_number_sample(RsmId self, boost::optional< int > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::full_number_sample(const boost::optional< int > &V)\n"
 		"GeoCal::RsmId::full_number_sample\n"
 		""},
 	 { "RsmId__v_min_line", _wrap_RsmId__v_min_line, METH_VARARGS, "\n"
+		"RsmId__v_min_line(RsmId self) -> int\n"
+		"RsmId__v_min_line(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::min_line(int V)\n"
 		"GeoCal::RsmId::min_line\n"
 		""},
 	 { "RsmId__v_min_sample", _wrap_RsmId__v_min_sample, METH_VARARGS, "\n"
+		"RsmId__v_min_sample(RsmId self) -> int\n"
+		"RsmId__v_min_sample(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::min_sample(int V)\n"
 		"GeoCal::RsmId::min_sample\n"
 		""},
 	 { "RsmId__v_max_line", _wrap_RsmId__v_max_line, METH_VARARGS, "\n"
+		"RsmId__v_max_line(RsmId self) -> int\n"
+		"RsmId__v_max_line(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::max_line(int V)\n"
 		"GeoCal::RsmId::max_line\n"
 		""},
 	 { "RsmId__v_max_sample", _wrap_RsmId__v_max_sample, METH_VARARGS, "\n"
+		"RsmId__v_max_sample(RsmId self) -> int\n"
+		"RsmId__v_max_sample(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::max_sample(int V)\n"
 		"GeoCal::RsmId::max_sample\n"
 		""},
 	 { "RsmId__v_naif_code", _wrap_RsmId__v_naif_code, METH_VARARGS, "\n"
+		"RsmId__v_naif_code(RsmId self) -> int\n"
+		"RsmId__v_naif_code(RsmId self, int const & V)\n"
 		"\n"
-		"void RsmId::naif_code(int Naif_code)\n"
 		"GeoCal::RsmId::naif_code\n"
-		"Set the NAIF code for the planet/body we are working with.\n"
-		"Note that the NITF TRE structure does not have a place to store the\n"
-		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
-		"for something like Mars, we have the NAIF code set to earth. We need\n"
-		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"Set the NAIF code for the planet/body we are working with.  \n"
 		"\n"
-		"This is not a problem for boost serialization (which keeps the NAIF\n"
-		"code), just for NITF TRE. \n"
+		"Note that the NITF TRE structure does not have a place to store the NAIF code,\n"
+		"it implicitly assumes earth. So when we read a TRE, even for something like\n"
+		"Mars, we have the NAIF code set to earth. We need to update this with other\n"
+		"metadata (e.g. TARGET_NAME in PDS label).  \n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF code), just\n"
+		"for NITF TRE.  \n"
+		"\n"
 		""},
 	 { "RsmId_tre_string", _wrap_RsmId_tre_string, METH_O, "\n"
+		"RsmId_tre_string(RsmId self) -> std::string\n"
 		"\n"
-		"std::string RsmId::tre_string() const\n"
 		"GeoCal::RsmId::tre_string\n"
-		"Write to TRE string.\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Write to TRE string.  \n"
+		"\n"
+		"Note that this is all the fields *except* the CETAG and CEL (the front two). It\n"
+		"is convenient to treat those special. (We can revisit this in the future if we\n"
+		"need to).  \n"
+		"\n"
 		""},
 	 { "RsmId_read_tre_string", _wrap_RsmId_read_tre_string, METH_O, "\n"
+		"RsmId_read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmId >\n"
 		"\n"
-		"boost::shared_ptr< RsmId > RsmId::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmId::read_tre_string\n"
-		"Read a TRE string.\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Read a TRE string.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "delete_RsmId", _wrap_delete_RsmId, METH_O, "\n"
+		"delete_RsmId(RsmId self)\n"
 		"\n"
-		"virtual GeoCal::RsmId::~RsmId()\n"
 		"GeoCal::RsmId::~RsmId\n"
 		""},
 	 { "RsmId_swigregister", RsmId_swigregister, METH_O, NULL},
@@ -10382,193 +10410,221 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmIdTiming", _wrap_new_RsmIdTiming, METH_VARARGS, "\n"
+		"new_RsmIdTiming(int Number_row_acquired_simulatenously, int Number_col_acquired_simulatenously, double Time_betweeen_adjacent_row_group, double Time_betweeen_adjacent_col_group) -> RsmIdTiming\n"
 		"\n"
-		"GeoCal::RsmIdTiming::RsmIdTiming(int Number_row_acquired_simulatenously, int\n"
-		"Number_col_acquired_simulatenously, double\n"
-		"Time_betweeen_adjacent_row_group, double\n"
-		"Time_betweeen_adjacent_col_group)\n"
 		"GeoCal::RsmIdTiming::RsmIdTiming\n"
 		""},
 	 { "RsmIdTiming__v_number_row_acquired_simultaneously", _wrap_RsmIdTiming__v_number_row_acquired_simultaneously, METH_VARARGS, "\n"
+		"_v_number_row_acquired_simultaneously(RsmIdTiming self) -> int\n"
+		"_v_number_row_acquired_simultaneously(RsmIdTiming self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::number_row_acquired_simultaneously(int V)\n"
 		"GeoCal::RsmIdTiming::number_row_acquired_simultaneously\n"
 		""},
 	 { "RsmIdTiming__v_number_col_acquired_simultaneously", _wrap_RsmIdTiming__v_number_col_acquired_simultaneously, METH_VARARGS, "\n"
+		"_v_number_col_acquired_simultaneously(RsmIdTiming self) -> int\n"
+		"_v_number_col_acquired_simultaneously(RsmIdTiming self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::number_col_acquired_simultaneously(int V)\n"
 		"GeoCal::RsmIdTiming::number_col_acquired_simultaneously\n"
 		""},
 	 { "RsmIdTiming__v_time_between_adjacent_row_group", _wrap_RsmIdTiming__v_time_between_adjacent_row_group, METH_VARARGS, "\n"
+		"_v_time_between_adjacent_row_group(RsmIdTiming self) -> double\n"
+		"_v_time_between_adjacent_row_group(RsmIdTiming self, double const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::time_between_adjacent_row_group(double V)\n"
 		"GeoCal::RsmIdTiming::time_between_adjacent_row_group\n"
 		""},
 	 { "RsmIdTiming__v_time_between_adjacent_col_group", _wrap_RsmIdTiming__v_time_between_adjacent_col_group, METH_VARARGS, "\n"
+		"_v_time_between_adjacent_col_group(RsmIdTiming self) -> double\n"
+		"_v_time_between_adjacent_col_group(RsmIdTiming self, double const & V)\n"
 		"\n"
-		"void GeoCal::RsmIdTiming::time_between_adjacent_col_group(double V)\n"
 		"GeoCal::RsmIdTiming::time_between_adjacent_col_group\n"
 		""},
-	 { "RsmIdTiming___str__", _wrap_RsmIdTiming___str__, METH_O, NULL},
-	 { "delete_RsmIdTiming", _wrap_delete_RsmIdTiming, METH_O, NULL},
+	 { "RsmIdTiming___str__", _wrap_RsmIdTiming___str__, METH_O, "__str__(RsmIdTiming self) -> std::string"},
+	 { "delete_RsmIdTiming", _wrap_delete_RsmIdTiming, METH_O, "delete_RsmIdTiming(RsmIdTiming self)"},
 	 { "RsmIdTiming_swigregister", RsmIdTiming_swigregister, METH_O, NULL},
 	 { "RsmIdTiming_swiginit", RsmIdTiming_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmId", _wrap_new_RsmId, METH_VARARGS, "\n"
+		"new_RsmId(boost::shared_ptr< GeoCal::RsmBase > const & Base, boost::shared_ptr< GeoCal::CoordinateConverter > const & Cconv) -> RsmId\n"
 		"\n"
-		"GeoCal::RsmId::RsmId(const boost::shared_ptr< RsmBase > &Base, const boost::shared_ptr<\n"
-		"CoordinateConverter > &Cconv)\n"
 		"GeoCal::RsmId::RsmId\n"
 		""},
-	 { "RsmId___str__", _wrap_RsmId___str__, METH_O, NULL},
+	 { "RsmId___str__", _wrap_RsmId___str__, METH_O, "__str__(RsmId self) -> std::string"},
 	 { "RsmId__v_coordinate_converter", _wrap_RsmId__v_coordinate_converter, METH_VARARGS, "\n"
+		"_v_coordinate_converter(RsmId self) -> boost::shared_ptr< GeoCal::CoordinateConverter >\n"
+		"_v_coordinate_converter(RsmId self, boost::shared_ptr< GeoCal::CoordinateConverter > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::coordinate_converter(const boost::shared_ptr< CoordinateConverter > &V)\n"
 		"GeoCal::RsmId::coordinate_converter\n"
 		""},
 	 { "RsmId__v_image_identifier", _wrap_RsmId__v_image_identifier, METH_VARARGS, "\n"
+		"_v_image_identifier(RsmId self) -> std::string\n"
+		"_v_image_identifier(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmId::image_identifier\n"
 		""},
 	 { "RsmId__v_rsm_support_data_edition", _wrap_RsmId__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"_v_rsm_support_data_edition(RsmId self) -> std::string\n"
+		"_v_rsm_support_data_edition(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmId::rsm_support_data_edition\n"
 		""},
 	 { "RsmId__v_image_sequence_identifier", _wrap_RsmId__v_image_sequence_identifier, METH_VARARGS, "\n"
+		"_v_image_sequence_identifier(RsmId self) -> std::string\n"
+		"_v_image_sequence_identifier(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::image_sequence_identifier(const std::string &V)\n"
 		"GeoCal::RsmId::image_sequence_identifier\n"
 		""},
 	 { "RsmId__v_sensor_identifier", _wrap_RsmId__v_sensor_identifier, METH_VARARGS, "\n"
+		"_v_sensor_identifier(RsmId self) -> std::string\n"
+		"_v_sensor_identifier(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::sensor_identifier(const std::string &V)\n"
 		"GeoCal::RsmId::sensor_identifier\n"
 		""},
 	 { "RsmId__v_sensor_type", _wrap_RsmId__v_sensor_type, METH_VARARGS, "\n"
+		"_v_sensor_type(RsmId self) -> std::string\n"
+		"_v_sensor_type(RsmId self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::sensor_type(const std::string &V)\n"
 		"GeoCal::RsmId::sensor_type\n"
 		""},
 	 { "RsmId__v_image_acquistion_time", _wrap_RsmId__v_image_acquistion_time, METH_VARARGS, "\n"
+		"_v_image_acquistion_time(RsmId self) -> boost::shared_ptr< GeoCal::Time >\n"
+		"_v_image_acquistion_time(RsmId self, boost::shared_ptr< GeoCal::Time > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::image_acquistion_time(const boost::shared_ptr< Time > &V)\n"
 		"GeoCal::RsmId::image_acquistion_time\n"
 		""},
 	 { "RsmId__v_timing", _wrap_RsmId__v_timing, METH_VARARGS, "\n"
+		"_v_timing(RsmId self) -> boost::shared_ptr< GeoCal::RsmIdTiming >\n"
+		"_v_timing(RsmId self, boost::shared_ptr< GeoCal::RsmIdTiming > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::timing(const boost::shared_ptr< RsmIdTiming > &V)\n"
 		"GeoCal::RsmId::timing\n"
 		""},
 	 { "RsmId__v_ground_domain_vertex", _wrap_RsmId__v_ground_domain_vertex, METH_VARARGS, "\n"
+		"_v_ground_domain_vertex(RsmId self) -> Vector_GroundCoordinate\n"
+		"_v_ground_domain_vertex(RsmId self, Vector_GroundCoordinate V)\n"
 		"\n"
-		"void GeoCal::RsmId::ground_domain_vertex(const std::vector< boost::shared_ptr< GroundCoordinate > > &V)\n"
 		"GeoCal::RsmId::ground_domain_vertex\n"
-		"Set the ground domain vertex values.\n"
-		"This should be exactly 8 points, and the vertexes need to be ordered\n"
-		"at specified in the NITF standard. Because the coordinate_converter\n"
-		"might not be set or might be changed, we can only check that in when\n"
-		"generating the TRE.\n"
+		"Set the ground domain vertex values.  \n"
 		"\n"
-		"The constraint is V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based\n"
-		"numbering). \n"
+		"This should be exactly 8 points, and the vertexes need to be ordered at\n"
+		"specified in the NITF standard. Because the coordinate_converter might not be\n"
+		"set or might be changed, we can only check that in when generating the TRE.  \n"
+		"\n"
+		"The constraint is V1X<V2X, V1Y<V3Y, and V1Z<V5Z (using 1 based numbering).  \n"
+		"\n"
 		""},
 	 { "RsmId_in_ground_domain", _wrap_RsmId_in_ground_domain, METH_VARARGS, "\n"
+		"in_ground_domain(RsmId self, GroundCoordinate Gc) -> bool\n"
 		"\n"
-		"bool RsmId::in_ground_domain(const GroundCoordinate &Gc) const\n"
 		"GeoCal::RsmId::in_ground_domain\n"
-		"Check that point is in the ground domain.\n"
-		"You don't normally need to check this, but this is the equations found\n"
-		"in section 5.6 of \"RSM TRE Specification for NITF 2.1\" \n"
+		"Check that point is in the ground domain.  \n"
+		"\n"
+		"You don't normally need to check this, but this is the equations found in\n"
+		"section 5.6 of \"RSM TRE Specification for NITF 2.1\"  \n"
+		"\n"
 		""},
 	 { "RsmId__v_ground_reference_point", _wrap_RsmId__v_ground_reference_point, METH_VARARGS, "\n"
+		"_v_ground_reference_point(RsmId self) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"_v_ground_reference_point(RsmId self, boost::shared_ptr< GeoCal::GroundCoordinate > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::ground_reference_point(const boost::shared_ptr< GroundCoordinate > &V)\n"
 		"GeoCal::RsmId::ground_reference_point\n"
 		""},
 	 { "RsmId__v_full_number_line", _wrap_RsmId__v_full_number_line, METH_VARARGS, "\n"
+		"_v_full_number_line(RsmId self) -> boost::optional< int >\n"
+		"_v_full_number_line(RsmId self, boost::optional< int > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::full_number_line(const boost::optional< int > &V)\n"
 		"GeoCal::RsmId::full_number_line\n"
 		""},
 	 { "RsmId__v_full_number_sample", _wrap_RsmId__v_full_number_sample, METH_VARARGS, "\n"
+		"_v_full_number_sample(RsmId self) -> boost::optional< int >\n"
+		"_v_full_number_sample(RsmId self, boost::optional< int > const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::full_number_sample(const boost::optional< int > &V)\n"
 		"GeoCal::RsmId::full_number_sample\n"
 		""},
 	 { "RsmId__v_min_line", _wrap_RsmId__v_min_line, METH_VARARGS, "\n"
+		"_v_min_line(RsmId self) -> int\n"
+		"_v_min_line(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::min_line(int V)\n"
 		"GeoCal::RsmId::min_line\n"
 		""},
 	 { "RsmId__v_min_sample", _wrap_RsmId__v_min_sample, METH_VARARGS, "\n"
+		"_v_min_sample(RsmId self) -> int\n"
+		"_v_min_sample(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::min_sample(int V)\n"
 		"GeoCal::RsmId::min_sample\n"
 		""},
 	 { "RsmId__v_max_line", _wrap_RsmId__v_max_line, METH_VARARGS, "\n"
+		"_v_max_line(RsmId self) -> int\n"
+		"_v_max_line(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::max_line(int V)\n"
 		"GeoCal::RsmId::max_line\n"
 		""},
 	 { "RsmId__v_max_sample", _wrap_RsmId__v_max_sample, METH_VARARGS, "\n"
+		"_v_max_sample(RsmId self) -> int\n"
+		"_v_max_sample(RsmId self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmId::max_sample(int V)\n"
 		"GeoCal::RsmId::max_sample\n"
 		""},
 	 { "RsmId__v_naif_code", _wrap_RsmId__v_naif_code, METH_VARARGS, "\n"
+		"_v_naif_code(RsmId self) -> int\n"
+		"_v_naif_code(RsmId self, int const & V)\n"
 		"\n"
-		"void RsmId::naif_code(int Naif_code)\n"
 		"GeoCal::RsmId::naif_code\n"
-		"Set the NAIF code for the planet/body we are working with.\n"
-		"Note that the NITF TRE structure does not have a place to store the\n"
-		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
-		"for something like Mars, we have the NAIF code set to earth. We need\n"
-		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"Set the NAIF code for the planet/body we are working with.  \n"
 		"\n"
-		"This is not a problem for boost serialization (which keeps the NAIF\n"
-		"code), just for NITF TRE. \n"
+		"Note that the NITF TRE structure does not have a place to store the NAIF code,\n"
+		"it implicitly assumes earth. So when we read a TRE, even for something like\n"
+		"Mars, we have the NAIF code set to earth. We need to update this with other\n"
+		"metadata (e.g. TARGET_NAME in PDS label).  \n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF code), just\n"
+		"for NITF TRE.  \n"
+		"\n"
 		""},
 	 { "RsmId_tre_string", _wrap_RsmId_tre_string, METH_O, "\n"
+		"tre_string(RsmId self) -> std::string\n"
 		"\n"
-		"std::string RsmId::tre_string() const\n"
 		"GeoCal::RsmId::tre_string\n"
-		"Write to TRE string.\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Write to TRE string.  \n"
+		"\n"
+		"Note that this is all the fields *except* the CETAG and CEL (the front two). It\n"
+		"is convenient to treat those special. (We can revisit this in the future if we\n"
+		"need to).  \n"
+		"\n"
 		""},
 	 { "RsmId_read_tre_string", _wrap_RsmId_read_tre_string, METH_O, "\n"
+		"read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmId >\n"
 		"\n"
-		"boost::shared_ptr< RsmId > RsmId::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmId::read_tre_string\n"
-		"Read a TRE string.\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Read a TRE string.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "delete_RsmId", _wrap_delete_RsmId, METH_O, "\n"
+		"delete_RsmId(RsmId self)\n"
 		"\n"
-		"virtual GeoCal::RsmId::~RsmId()\n"
 		"GeoCal::RsmId::~RsmId\n"
 		""},
 	 { "RsmId_swigregister", RsmId_swigregister, METH_O, NULL},

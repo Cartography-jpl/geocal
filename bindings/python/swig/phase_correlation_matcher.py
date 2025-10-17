@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _phase_correlation_matcher.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _phase_correlation_matcher:
 _phase_correlation_matcher.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _phase_correlation_matcher.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,22 +143,24 @@ import geocal_swig.geocal_exception
 class PhaseCorrelationMatcher(geocal_swig.image_matcher.ImageMatcher):
     r"""
 
-    This class performs image matching.
 
-    It uses phase correlation. This is an adaption of Al Zobrist's
-    picmtch4 AFIDS procedure.
+    This class performs image matching.  
 
-    That program tries to match a number of points as one executable call.
-    This includes both the matching, and the update of the predictor for
-    the matching. We have extracted out just the image matching, we have
-    other functionality for handling the predictor.
+    It uses phase correlation. This is an adaption of Al Zobrist's picmtch4 AFIDS
+    procedure.  
 
-    The original code was based on the paper: C. D. Kuglin and D. C.
-    Hines, "The phase correlation     image alignment method," Proc.
-    IEEE 1975 International Conference on Cybernetics and Society,
-    September, 1975, pp. 163-165.
+    That program tries to match a number of points as one executable call. This
+    includes both the matching, and the update of the predictor for the matching. We
+    have extracted out just the image matching, we have other functionality for
+    handling the predictor.  
 
-    C++ includes: phase_correlation_matcher.h 
+    The original code was based on the paper: C. D. Kuglin and D. C. Hines, "The
+    phase correlation
+       image alignment method," Proc. IEEE 1975 International Conference on
+    Cybernetics and Society, September, 1975, pp. 163-165.  
+
+    C++ includes: phase_correlation_matcher.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -163,19 +168,20 @@ class PhaseCorrelationMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     def __init__(self, Template_size=32, Search_size=32):
         r"""
+        __init__(PhaseCorrelationMatcher self, int Template_size=32, int Search_size=32) -> PhaseCorrelationMatcher
 
-        PhaseCorrelationMatcher::PhaseCorrelationMatcher(int Template_size=32, int Search_size=32)
         GeoCal::PhaseCorrelationMatcher::PhaseCorrelationMatcher
-        Constructor.
-        Parameters:
-        -----------
+        Constructor.  
 
-        Template_size:  Size of the area that we do use in the first image.
-        This was called FFTSIZE in Al Zobrist's picmtch4 program. Note that
-        this must be even.
+        Parameters
+        ----------
+        * `Template_size` :  
+            Size of the area that we do use in the first image. This was called FFTSIZE
+            in Al Zobrist's picmtch4 program. Note that this must be even.  
+        * `Search_size` :  
+            Size to search in the second image. This should be > Template_size, and
+            even.  
 
-        Search_size:  Size to search in the second image. This should be >
-        Template_size, and even. 
         """
         _phase_correlation_matcher.PhaseCorrelationMatcher_swiginit(self, _phase_correlation_matcher.new_PhaseCorrelationMatcher(Template_size, Search_size))
     _v_template_size = _swig_new_instance_method(_phase_correlation_matcher.PhaseCorrelationMatcher__v_template_size)

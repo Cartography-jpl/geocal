@@ -90,6 +90,7 @@ _quadratic_geometric_model.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _quadratic_geometric_model.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _quadratic_geometric_model.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -139,24 +140,27 @@ import geocal_swig.observer
 class QuadraticGeometricModel(geocal_swig.geometric_model.GeometricModel):
     r"""
 
-    This is a GeometricModel that provides a quadratic polynomial
-    geometric model.
 
-    C++ includes: quadratic_geometric_model.h 
+    This is a GeometricModel that provides a quadratic polynomial geometric model.  
+
+    C++ includes: quadratic_geometric_model.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     LINEAR = _quadratic_geometric_model.QuadraticGeometricModel_LINEAR
+    
     QUADRATIC = _quadratic_geometric_model.QuadraticGeometricModel_QUADRATIC
+    
 
     def __init__(self, *args):
         r"""
+        __init__(QuadraticGeometricModel self, boost::shared_ptr< GeoCal::GeometricTiePoints > const & Tp, int Min_tp_to_fit, GeoCal::QuadraticGeometricModel::FitType ft=LINEAR, double Magnify_line=1.0, double Magnify_sample=1.0) -> QuadraticGeometricModel
+        __init__(QuadraticGeometricModel self, GeoCal::QuadraticGeometricModel::FitType ft=LINEAR, double Magnify_line=1.0, double Magnify_sample=1.0) -> QuadraticGeometricModel
 
-        QuadraticGeometricModel::QuadraticGeometricModel(FitType ft=LINEAR, double Magnify_line=1.0, double
-        Magnify_sample=1.0)
         GeoCal::QuadraticGeometricModel::QuadraticGeometricModel
-        Constructor. This creates an identity transformation.
+        Constructor. This creates an identity transformation.  
 
         """
         _quadratic_geometric_model.QuadraticGeometricModel_swiginit(self, _quadratic_geometric_model.new_QuadraticGeometricModel(*args))

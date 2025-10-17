@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _image_matcher.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _image_matcher:
 _image_matcher.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _image_matcher.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,10 +142,12 @@ import geocal_swig.geocal_exception
 class ImageMatcher(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class performs image matching, finding the location of a point in
-    a reference image in a new image.
 
-    C++ includes: image_matcher.h 
+    This class performs image matching, finding the location of a point in a
+    reference image in a new image.  
+
+    C++ includes: image_matcher.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

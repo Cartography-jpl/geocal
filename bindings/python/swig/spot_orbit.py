@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spot_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spot_orbit:
 _spot_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spot_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,43 +144,41 @@ import geocal_swig.look_vector
 class SpotOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This class models the SPOT orbit.
 
-    The orbit parameters are given by an DIMAP file. This file is an XML
-    file format. You can find documentation for this format
-    athttp://www.spot.com/web/SICORP/452-sicorp-the-dimap-format.php.
+    This class models the SPOT orbit.  
 
-    We don't actually read this file format. XML is a bit of a pain to
-    deal with in C++, and is much easier to process in Ruby. So we set up
-    an interface that just takes the Ephemeris and Attitude measurements.
-    The Afids class Dimap processes the XML file and can use that to
-    create an instance of this class.
+    The orbit parameters are given by an DIMAP file. This file is an XML file
+    format. You can find documentation for this format at
+    http://www.spot.com/web/SICORP/452-sicorp-the-dimap-format.php.  
+
+    We don't actually read this file format. XML is a bit of a pain to deal with in
+    C++, and is much easier to process in Ruby. So we set up an interface that just
+    takes the Ephemeris and Attitude measurements. The Afids class Dimap processes
+    the XML file and can use that to create an instance of this class.  
 
     The various angles and so forth are described in the "SPOT Geometry
-    Handbook", available athttp://www.spotimage.com/automne_modules_files
-    /standard/public/p229_0b
-    9c0d94a22e77aac09df2b360c73073SPOT_Geometry_Handbook.pdf
+    Handbook", available at
+    http://www.spotimage.com/automne_modules_files/standard/public/p229_0b9c0d94a22e77aac09df2b360c73073SPOT_Geometry_Handbook.pdf  
 
-    A note for a developer working with this class. The definition of
-    space craft and orbital coordinate used internally has a different
-    sign convention than we've used on other instruments such as MISR.
+    A note for a developer working with this class. The definition of space craft
+    and orbital coordinate used internally has a different sign convention than
+    we've used on other instruments such as MISR.  
 
     We use the conventions spelled out in the "SPOT Geometry Handbook"
-    consistently in this class, even though this is different than what is
-    used in the MISR ATB. In particular, the Z axis points from earth
-    center to spacecraft, not spacecraft to earth center as we've used on
-    MISR. This is all accounted for by this class, for the outside user
-    everything works as expected. But if you are working internally on
-    this class this might seem strange.
+    consistently in this class, even though this is different than what is used in
+    the MISR ATB. In particular, the Z axis points from earth center to spacecraft,
+    not spacecraft to earth center as we've used on MISR. This is all accounted for
+    by this class, for the outside user everything works as expected. But if you are
+    working internally on this class this might seem strange.  
 
-    Note also that according to the "SPOT Geometry Handbook" the
-    reported attitudes are relative to -X, -Y, and Z axis. This means that
-    pitch and roll (but not yaw) have the opposite sign of what you would
-    expect. The Ypr given to this routine should match what is supplied by
-    SPOT in its DIMAP file - we account for the strange sign in this
-    class.
+    Note also that according to the "SPOT Geometry Handbook" the reported
+    attitudes are relative to -X, -Y, and Z axis. This means that pitch and roll
+    (but not yaw) have the opposite sign of what you would expect. The Ypr given to
+    this routine should match what is supplied by SPOT in its DIMAP file - we
+    account for the strange sign in this class.  
 
-    C++ includes: spot_orbit.h 
+    C++ includes: spot_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

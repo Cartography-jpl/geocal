@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spice_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spice_dem:
 _spice_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spice_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,14 +141,15 @@ import geocal_swig.generic_object
 class SpiceDem(geocal_swig.dem.Dem):
     r"""
 
-    This class uses the SPICE function latsrf to use DSK files to create a
-    DEM.
 
-    Note that this isn't particularly efficient. If you are doing to use
-    this for a large number of points you may want to use DemToRaster or
-    something similar to create a stand alone DEM file
+    This class uses the SPICE function latsrf to use DSK files to create a DEM.  
 
-    C++ includes: spice_dem.h 
+    Note that this isn't particularly efficient. If you are doing to use this for a
+    large number of points you may want to use DemToRaster or something similar to
+    create a stand alone DEM file  
+
+    C++ includes: spice_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -153,9 +157,9 @@ class SpiceDem(geocal_swig.dem.Dem):
 
     def __init__(self, *args):
         r"""
+        __init__(SpiceDem self, int Naif_code, Time Tm) -> SpiceDem
+        __init__(SpiceDem self, int Naif_code, Time Tm, vector_string Kernel_list) -> SpiceDem
 
-        GeoCal::SpiceDem::SpiceDem(int Naif_code, const Time &Tm, const std::vector< std::string >
-        &Kernel_list)
         GeoCal::SpiceDem::SpiceDem
         """
         _spice_dem.SpiceDem_swiginit(self, _spice_dem.new_SpiceDem(*args))

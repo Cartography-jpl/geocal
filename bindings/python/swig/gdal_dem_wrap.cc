@@ -7126,57 +7126,59 @@ SWIGINTERN PyObject *GdalDem_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GdalDem", _wrap_new_GdalDem, METH_VARARGS, "\n"
+		"GdalDem(std::string const & Fname)\n"
+		"GdalDem(std::string const & Fname, boost::shared_ptr< GeoCal::Datum > const & D, int Band_id=1, bool Outside_dem_is_error=False, int Number_tile=4)\n"
 		"\n"
-		"GdalDem::GdalDem(const std::string &Fname, const boost::shared_ptr< Datum >\n"
-		"&D=boost::shared_ptr< Datum >(new NoDatum()), int Band_id=1, bool\n"
-		"Outside_dem_is_error=false, int Number_tile=4, int\n"
-		"Tile_number_line=-1, int Tile_number_sample=-1)\n"
 		"GeoCal::GdalDem::GdalDem\n"
-		"Constructor that reads an existing file to get the Dem data.\n"
-		"The default Datum used if none is supplied is DidDatum, which is\n"
-		"relative to WGS-84. If Outside_dem_is_error is false, we return a\n"
-		"height of 0 outside of the range of the data, otherwise an exception\n"
-		"is thrown when an attempt is made to retrieve an height outside of the\n"
-		"range.\n"
+		"Constructor that reads an existing file to get the Dem data.  \n"
 		"\n"
-		"You can optionally pass the desired tile size. If you don't pass this\n"
-		"in, we use the blocking size of the underlying dataset. \n"
+		"The default Datum used if none is supplied is DidDatum, which is relative to\n"
+		"WGS-84. If Outside_dem_is_error is false, we return a height of 0 outside of the\n"
+		"range of the data, otherwise an exception is thrown when an attempt is made to\n"
+		"retrieve an height outside of the range.  \n"
+		"\n"
+		"You can optionally pass the desired tile size. If you don't pass this in, we use\n"
+		"the blocking size of the underlying dataset.  \n"
+		"\n"
 		""},
-	 { "GdalDem_elevation", _wrap_GdalDem_elevation, METH_VARARGS, NULL},
+	 { "GdalDem_elevation", _wrap_GdalDem_elevation, METH_VARARGS, "GdalDem_elevation(GdalDem self, int Y_index, int X_index) -> double"},
 	 { "GdalDem__v_file_name", _wrap_GdalDem__v_file_name, METH_O, "\n"
+		"GdalDem__v_file_name(GdalDem self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::GdalDem::file_name() const\n"
 		"GeoCal::GdalDem::file_name\n"
 		""},
 	 { "GdalDem__v_band_id", _wrap_GdalDem__v_band_id, METH_O, "\n"
+		"GdalDem__v_band_id(GdalDem self) -> int\n"
 		"\n"
-		"int GeoCal::GdalDem::band_id() const\n"
 		"GeoCal::GdalDem::band_id\n"
 		""},
 	 { "delete_GdalDem", _wrap_delete_GdalDem, METH_O, "\n"
+		"delete_GdalDem(GdalDem self)\n"
 		"\n"
-		"virtual GeoCal::GdalDem::~GdalDem()\n"
 		"GeoCal::GdalDem::~GdalDem\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GdalDem_swigregister", GdalDem_swigregister, METH_O, NULL},
@@ -7187,57 +7189,59 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GdalDem", _wrap_new_GdalDem, METH_VARARGS, "\n"
+		"GdalDem(std::string const & Fname)\n"
+		"GdalDem(std::string const & Fname, boost::shared_ptr< GeoCal::Datum > const & D, int Band_id=1, bool Outside_dem_is_error=False, int Number_tile=4)\n"
 		"\n"
-		"GdalDem::GdalDem(const std::string &Fname, const boost::shared_ptr< Datum >\n"
-		"&D=boost::shared_ptr< Datum >(new NoDatum()), int Band_id=1, bool\n"
-		"Outside_dem_is_error=false, int Number_tile=4, int\n"
-		"Tile_number_line=-1, int Tile_number_sample=-1)\n"
 		"GeoCal::GdalDem::GdalDem\n"
-		"Constructor that reads an existing file to get the Dem data.\n"
-		"The default Datum used if none is supplied is DidDatum, which is\n"
-		"relative to WGS-84. If Outside_dem_is_error is false, we return a\n"
-		"height of 0 outside of the range of the data, otherwise an exception\n"
-		"is thrown when an attempt is made to retrieve an height outside of the\n"
-		"range.\n"
+		"Constructor that reads an existing file to get the Dem data.  \n"
 		"\n"
-		"You can optionally pass the desired tile size. If you don't pass this\n"
-		"in, we use the blocking size of the underlying dataset. \n"
+		"The default Datum used if none is supplied is DidDatum, which is relative to\n"
+		"WGS-84. If Outside_dem_is_error is false, we return a height of 0 outside of the\n"
+		"range of the data, otherwise an exception is thrown when an attempt is made to\n"
+		"retrieve an height outside of the range.  \n"
+		"\n"
+		"You can optionally pass the desired tile size. If you don't pass this in, we use\n"
+		"the blocking size of the underlying dataset.  \n"
+		"\n"
 		""},
-	 { "GdalDem_elevation", _wrap_GdalDem_elevation, METH_VARARGS, NULL},
+	 { "GdalDem_elevation", _wrap_GdalDem_elevation, METH_VARARGS, "elevation(GdalDem self, int Y_index, int X_index) -> double"},
 	 { "GdalDem__v_file_name", _wrap_GdalDem__v_file_name, METH_O, "\n"
+		"_v_file_name(GdalDem self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::GdalDem::file_name() const\n"
 		"GeoCal::GdalDem::file_name\n"
 		""},
 	 { "GdalDem__v_band_id", _wrap_GdalDem__v_band_id, METH_O, "\n"
+		"_v_band_id(GdalDem self) -> int\n"
 		"\n"
-		"int GeoCal::GdalDem::band_id() const\n"
 		"GeoCal::GdalDem::band_id\n"
 		""},
 	 { "delete_GdalDem", _wrap_delete_GdalDem, METH_O, "\n"
+		"delete_GdalDem(GdalDem self)\n"
 		"\n"
-		"virtual GeoCal::GdalDem::~GdalDem()\n"
 		"GeoCal::GdalDem::~GdalDem\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GdalDem_swigregister", GdalDem_swigregister, METH_O, NULL},

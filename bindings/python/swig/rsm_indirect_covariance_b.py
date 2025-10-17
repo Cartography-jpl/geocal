@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_indirect_covariance_b.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_indirect_covariance_b:
 _rsm_indirect_covariance_b.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_indirect_covariance_b.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,10 +145,12 @@ import geocal_swig.geocal_exception
 class RsmBSubgroup(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles a single "independent subgroup", basically a set of
-    original parameters that has a given covariance and time behavior.
 
-    C++ includes: rsm_indirect_covariance_b.h 
+    This handles a single "independent subgroup", basically a set of original
+    parameters that has a given covariance and time behavior.  
+
+    C++ includes: rsm_indirect_covariance_b.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -153,8 +158,10 @@ class RsmBSubgroup(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(RsmBSubgroup self, BlitzArray_double_2 Cov, int Time_correlation_domain_flag, BlitzArray_double_2 Time_correlation) -> RsmBSubgroup
+        __init__(RsmBSubgroup self, BlitzArray_double_2 Cov, int Time_correlation_domain_flag, double A, double alpha, double beta, double T) -> RsmBSubgroup
+        __init__(RsmBSubgroup self) -> RsmBSubgroup
 
-        GeoCal::RsmBSubgroup::RsmBSubgroup(const RsmBSubgroup &V)
         GeoCal::RsmBSubgroup::RsmBSubgroup
         """
         _rsm_indirect_covariance_b.RsmBSubgroup_swiginit(self, _rsm_indirect_covariance_b.new_RsmBSubgroup(*args))
@@ -204,10 +211,12 @@ _rsm_indirect_covariance_b.RsmBSubgroup_swigregister(RsmBSubgroup)
 class RsmBUnmodeledCovariance(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles the unmodeled covariance, this is just complicated enough
-    to be worth pulling out.
 
-    C++ includes: rsm_indirect_covariance_b.h 
+    This handles the unmodeled covariance, this is just complicated enough to be
+    worth pulling out.  
+
+    C++ includes: rsm_indirect_covariance_b.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -215,8 +224,10 @@ class RsmBUnmodeledCovariance(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(RsmBUnmodeledCovariance self, BlitzArray_double_2 Cov, BlitzArray_double_2 Row_time_correlation, BlitzArray_double_2 Cow_time_correlation) -> RsmBUnmodeledCovariance
+        __init__(RsmBUnmodeledCovariance self, BlitzArray_double_2 Cov, double Row_A, double Row_alpha, double Row_beta, double Row_T, double Col_A, double Col_alpha, double Col_beta, double Col_T) -> RsmBUnmodeledCovariance
+        __init__(RsmBUnmodeledCovariance self) -> RsmBUnmodeledCovariance
 
-        GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(const RsmBUnmodeledCovariance &V)
         GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance
         """
         _rsm_indirect_covariance_b.RsmBUnmodeledCovariance_swiginit(self, _rsm_indirect_covariance_b.new_RsmBUnmodeledCovariance(*args))
@@ -260,11 +271,13 @@ _rsm_indirect_covariance_b.RsmBUnmodeledCovariance_swigregister(RsmBUnmodeledCov
 class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCovariance, geocal_swig.rsm_adjustable_parameter_b.RsmBParameterDesc):
     r"""
 
-    This is used to handle the RSM indirect covariance.
 
-    This supports RSMECB.
+    This is used to handle the RSM indirect covariance.  
 
-    C++ includes: rsm_indirect_covariance_b.h 
+    This supports RSMECB.  
+
+    C++ includes: rsm_indirect_covariance_b.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -272,10 +285,9 @@ class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCova
 
     def __init__(self, *args):
         r"""
+        __init__(RsmIndirectCovarianceB self, std::string const & Image_identifier="", std::string const & Rsm_support_data_edition="fake-1", std::string const & Triangulation_id="") -> RsmIndirectCovarianceB
+        __init__(RsmIndirectCovarianceB self, ImageGroundConnection Igc, double H_min, double H_max, RsmId Rsm_id, std::string const & Triangulation_id="") -> RsmIndirectCovarianceB
 
-        GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
         GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB
         """
         _rsm_indirect_covariance_b.RsmIndirectCovarianceB_swiginit(self, _rsm_indirect_covariance_b.new_RsmIndirectCovarianceB(*args))
@@ -355,6 +367,8 @@ class RsmIndirectCovarianceB(geocal_swig.rsm_indirect_covariance.RsmIndirectCova
 # Register RsmIndirectCovarianceB in _rsm_indirect_covariance_b:
 _rsm_indirect_covariance_b.RsmIndirectCovarianceB_swigregister(RsmIndirectCovarianceB)
 class Vector_RsmBSubgroup(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_iterator)
@@ -384,6 +398,12 @@ class Vector_RsmBSubgroup(object):
     erase = _swig_new_instance_method(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_RsmBSubgroup self) -> Vector_RsmBSubgroup
+        __init__(Vector_RsmBSubgroup self, Vector_RsmBSubgroup other) -> Vector_RsmBSubgroup
+        __init__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type size) -> Vector_RsmBSubgroup
+        __init__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type size, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & value) -> Vector_RsmBSubgroup
+        """
         _rsm_indirect_covariance_b.Vector_RsmBSubgroup_swiginit(self, _rsm_indirect_covariance_b.new_Vector_RsmBSubgroup(*args))
     push_back = _swig_new_instance_method(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_push_back)
     front = _swig_new_instance_method(_rsm_indirect_covariance_b.Vector_RsmBSubgroup_front)

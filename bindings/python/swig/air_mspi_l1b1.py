@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _air_mspi_l1b1.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _air_mspi_l1b1:
 _air_mspi_l1b1.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _air_mspi_l1b1.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,17 +145,18 @@ import geocal_swig.geocal_exception
 class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides access to a AirMspiL1b1File.
 
-    Note that somewhat confusingly, row index is not the same as the
-    MspiCamera band index. In fact, for the current configuration the
-    MspiCamera bands run in the opposite order from the row index. You
-    should not assume any particular relationship between the 2, instead
-    you'll want to relate the row numbers to each other, which are
-    consistent. AirMspiIgc handles this correctly, but if you are directly
-    working with these classes you'll need to do that yourself.
+    This provides access to a AirMspiL1b1File.  
 
-    C++ includes: air_mspi_l1b1.h 
+    Note that somewhat confusingly, row index is *not* the same as the MspiCamera
+    band index. In fact, for the current configuration the MspiCamera bands run in
+    the *opposite* order from the row index. You should not assume any particular
+    relationship between the 2, instead you'll want to relate the *row numbers* to
+    each other, which are consistent. AirMspiIgc handles this correctly, but if you
+    are directly working with these classes you'll need to do that yourself.  
+
+    C++ includes: air_mspi_l1b1.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -160,12 +164,10 @@ class AirMspiL1b1File(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiL1b1File self, std::string const & Fname, std::string const & Swath_to_use="660-I", int Min_l1b1_line=0, int Max_l1b1_line=-1, int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4) -> AirMspiL1b1File
 
-        AirMspiL1b1File::AirMspiL1b1File(const std::string &Fname, const std::string &Swath_to_use="660-I",
-        int Min_l1b1_line=0, int Max_l1b1_line=-1, int Tile_number_line=-1,
-        int Tile_number_sample=-1, unsigned int Number_tile=4)
         GeoCal::AirMspiL1b1File::AirMspiL1b1File
-        Constructor.
+        Constructor.  
 
         """
         _air_mspi_l1b1.AirMspiL1b1File_swiginit(self, _air_mspi_l1b1.new_AirMspiL1b1File(*args))
@@ -228,6 +230,7 @@ _air_mspi_l1b1.AirMspiL1b1File_swigregister(AirMspiL1b1File)
 class AirMspiL1b1(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     r"""
 
+
     C++ includes: air_mspi_l1b1.h
 
     """
@@ -237,12 +240,11 @@ class AirMspiL1b1(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiL1b1 self, std::string const & Fname, std::string const & Swath_to_use="660-I", int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4) -> AirMspiL1b1
+        __init__(AirMspiL1b1 self, boost::shared_ptr< GeoCal::AirMspiL1b1File > const & L1b1_file, int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4) -> AirMspiL1b1
 
-        AirMspiL1b1::AirMspiL1b1(const std::string &Fname, const std::string &Swath_to_use="660-I",
-        int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int
-        Number_tile=4)
         GeoCal::AirMspiL1b1::AirMspiL1b1
-        Constructor.
+        Constructor.  
 
         """
         _air_mspi_l1b1.AirMspiL1b1_swiginit(self, _air_mspi_l1b1.new_AirMspiL1b1(*args))

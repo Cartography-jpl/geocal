@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_rolling_shutter.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_rolling_shutter:
 _igc_rolling_shutter.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_rolling_shutter.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,61 +144,62 @@ import geocal_swig.observer
 class IgcRollingShutter(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
-    This is a ImageGroundConnection where the connection is made by
-    OrbitData and a Camera.
 
-    This is similar to OrbitDataImageGroundConnection, however this is
-    intended for use with a rolling shutter camera.
+    This is a ImageGroundConnection where the connection is made by OrbitData and a
+    Camera.  
 
-    A rolling shutter is common with CMOS sensors. Rather than recording
-    an image at a single instance, the image is recorded by scanning over
-    the camera rapidly in either the line or sample direction.
+    This is similar to OrbitDataImageGroundConnection, however this is intended for
+    use with a rolling shutter camera.  
 
-    If the camera is moving while the image is taken (e.g., it is on an
-    aircraft), then significant differences can occur between modeling
-    this as close a frame camera vs. modeling the rolling shutter.
+    A rolling shutter is common with CMOS sensors. Rather than recording an image at
+    a single instance, the image is recorded by scanning over the camera rapidly in
+    either the line or sample direction.  
 
-    We currently only support the line roll direction, although we have
-    some interface support for sample roll direction (just in case we need
-    to expand this in the future).
+    If the camera is moving while the image is taken (e.g., it is on an aircraft),
+    then significant differences can occur between modeling this as close a frame
+    camera vs. modeling the rolling shutter.  
 
-    Note that this class assumes that the orbit data varies smoothly over
-    the time that the rolling shutter operates. We speed up the class by
-    taking the orbit data at the start and end of the rolling shutter and
-    interpolating. If this is not true of the orbit data, then there will
-    be significant errors in the calculations done by this class.
+    We currently only support the line roll direction, although we have some
+    interface support for sample roll direction (just in case we need to expand this
+    in the future).  
 
-    C++ includes: igc_rolling_shutter.h 
+    Note that this class assumes that the orbit data varies smoothly over the time
+    that the rolling shutter operates. We speed up the class by taking the orbit
+    data at the start and end of the rolling shutter and interpolating. If this is
+    *not* true of the orbit data, then there will be significant errors in the
+    calculations done by this class.  
+
+    C++ includes: igc_rolling_shutter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     ROLL_LINE_DIRECTION = _igc_rolling_shutter.IgcRollingShutter_ROLL_LINE_DIRECTION
+    
     ROLL_SAMPLE_DIRECTION = _igc_rolling_shutter.IgcRollingShutter_ROLL_SAMPLE_DIRECTION
+    
 
     def __init__(self, *args):
         r"""
+        __init__(IgcRollingShutter self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::TimeTable > const & Time_table, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, GeoCal::IgcRollingShutter::RollDirection Roll_direction=ROLL_LINE_DIRECTION, std::string const Title="") -> IgcRollingShutter
+        __init__(IgcRollingShutter self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::TimeTable > const & Time_table, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, GeoCal::IgcRollingShutter::RollDirection Roll_direction, std::string const Title, boost::shared_ptr< GeoCal::Refraction > const & Ref, double Resolution=30, int Band=0, double Max_height=9000) -> IgcRollingShutter
 
-        GeoCal::IgcRollingShutter::IgcRollingShutter(const boost::shared_ptr< Orbit > &Orb, const boost::shared_ptr<
-        TimeTable > &Time_table, const boost::shared_ptr< Camera > &Cam, const
-        boost::shared_ptr< Dem > &D, const boost::shared_ptr< RasterImage >
-        &Img, RollDirection Roll_direction=ROLL_LINE_DIRECTION, const
-        std::string Title="", const boost::shared_ptr< Refraction >
-        &Ref=boost::shared_ptr< Refraction >(), double Resolution=30, int
-        Band=0, double Max_height=9000)
         GeoCal::IgcRollingShutter::IgcRollingShutter
-        Constructor that takes a Orbit and a Time_table.
-        If the roll direction is in the line direction we assume that all the
-        samples for a particular line are acquired at the same time, and if
-        the roll direction is in the sample direction we assume that all the
-        lines for a particular sample are acquired at the same time.
+        Constructor that takes a Orbit and a Time_table.  
 
-        You can optionally include a approximate refraction correction, the
-        default is not to.
+        If the roll direction is in the line direction we assume that all the samples
+        for a particular line are acquired at the same time, and if the roll direction
+        is in the sample direction we assume that all the lines for a particular sample
+        are acquired at the same time.  
 
-        NOTE: refraction doesn't seem to actually be used. I think this was
-        something we started to add, but didn't actually complete. We can come
-        back to this. Usually the effect of refraction is pretty small. 
+        You can optionally include a approximate refraction correction, the default is
+        not to.  
+
+        NOTE: refraction doesn't seem to actually be used. I think this was something we
+        started to add, but didn't actually complete. We can come back to this. Usually
+        the effect of refraction is pretty small.  
+
         """
         _igc_rolling_shutter.IgcRollingShutter_swiginit(self, _igc_rolling_shutter.new_IgcRollingShutter(*args))
     cf_look_vector = _swig_new_instance_method(_igc_rolling_shutter.IgcRollingShutter_cf_look_vector)

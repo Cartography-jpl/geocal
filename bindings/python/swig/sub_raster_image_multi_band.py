@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _sub_raster_image_multi_band.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _sub_raster_image_multi_band:
 _sub_raster_image_multi_band.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _sub_raster_image_multi_band.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,9 +144,11 @@ import geocal_swig.geocal_exception
 class SubRasterImageMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMultiBandVariable):
     r"""
 
-    This is a subset of RasterImageMultiBand.
 
-    C++ includes: sub_raster_image_multi_band.h 
+    This is a subset of RasterImageMultiBand.  
+
+    C++ includes: sub_raster_image_multi_band.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,9 +156,8 @@ class SubRasterImageMultiBand(geocal_swig.raster_image_multi_band_variable.Raste
 
     def __init__(self, Rmb, Start_line, Start_sample, Number_line, Number_sample):
         r"""
+        __init__(SubRasterImageMultiBand self, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Rmb, int Start_line, int Start_sample, int Number_line, int Number_sample) -> SubRasterImageMultiBand
 
-        SubRasterImageMultiBand::SubRasterImageMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Rmb, int Start_line,
-        int Start_sample, int Number_line, int Number_sample)
         GeoCal::SubRasterImageMultiBand::SubRasterImageMultiBand
         """
         _sub_raster_image_multi_band.SubRasterImageMultiBand_swiginit(self, _sub_raster_image_multi_band.new_SubRasterImageMultiBand(Rmb, Start_line, Start_sample, Number_line, Number_sample))

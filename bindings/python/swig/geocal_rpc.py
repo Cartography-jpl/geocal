@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_rpc.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_rpc:
 _geocal_rpc.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_rpc.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,66 +142,68 @@ import geocal_swig.geocal_exception
 class Rpc(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is used to handle RPC (Rational Polynomial Coefficients).
 
-    RPC is an alternative to using a rigorous camera/orbit model to map
-    project satellite data.
+    This is used to handle RPC (Rational Polynomial Coefficients).  
 
-    This is a common technique, and there are numerous references. One
-    reference is Fraser, CS, Dial, G, Grodecki, J "Sensor orientation via
-    RPCs" ISPRS J PHOTOGRAMM 60 (3): 182-194 MAY 2006.
+    RPC is an alternative to using a rigorous camera/orbit model to map project
+    satellite data.  
 
-    Note that there are two versions of the RPCs, type "A" and type
-    "B". The difference is the order of the terms. The military tends to
-    use "A" and the rest of the world tends to use "B". This class
-    supports both types, based on the setting of the rpc_type variable.
+    This is a common technique, and there are numerous references. One reference is
+    Fraser, CS, Dial, G, Grodecki, J "Sensor orientation
+    via RPCs" ISPRS J PHOTOGRAMM 60 (3): 182-194 MAY 2006.  
 
-    By definition of RPC, the leading term of the denominator coefficient
-    should be 1.0 - so there are 20 degrees of freedom for the numerator
-    but only 19 for the denominator. After some debate, I decided to do
-    nothing in this class to enforce this restriction, you can assign a
-    value other than 1 to the first coefficient of the denominator.
-    However, this class will complain when you actually try to use this.
+    Note that there are two versions of the RPCs, type "A" and type "B". The
+    difference is the order of the terms. The military tends to use "A" and the
+    rest of the world tends to use "B". This class supports both types, based on
+    the setting of the rpc_type variable.  
 
-    The definition of line, sample and height offset and scale allow these
-    numbers to be floats. However file formats such as geotiff and NITF
-    treat these as integers. If you store a RPC into a file with one of
-    these formats, the data will be truncated. If you plan on saving to
-    one of these formats, you should be aware of this and keep these an
-    whole numbers. This limitation is not present in the VICAR file
-    format.
+    By definition of RPC, the leading term of the denominator coefficient should be
+    1.0 - so there are 20 degrees of freedom for the numerator but only 19 for the
+    denominator. After some debate, I decided to do nothing in this class to enforce
+    this restriction, you can assign a value other than 1 to the first coefficient
+    of the denominator. However, this class will complain when you actually try to
+    use this.  
 
-    It has never been 100% clear what "line and sample" means according
-    to the standard. The best I can determine, the RPC is set up so
-    integer values are the center of a pixel, e.g., (0,0) is the center of
-    the upper left pixel. This seems to be the convention used by WV-2,
-    seehttps://trac.osgeo.org/gdal/ticket/5993. Note that GDAL uses a
-    convention where the upper left corner of the bounding box is (0,0)
-    (so the center of the pixel is (0.5,0.5)). This is not the convention
-    used by ImageCoordinate, so while the referenced ticket mentions a 0.5
-    offset being needed we don't actually need to do that in our code.
+    The definition of line, sample and height offset and scale allow these numbers
+    to be floats. However file formats such as geotiff and NITF treat these as
+    integers. If you store a RPC into a file with one of these formats, the data
+    will be truncated. If you plan on saving to one of these formats, you should be
+    aware of this and keep these an whole numbers. This limitation is *not* present
+    in the VICAR file format.  
 
-    C++ includes: geocal_rpc.h 
+    It has never been 100% clear what "line and sample" means according to the
+    standard. The best I can determine, the RPC is set up so integer values are the
+    center of a pixel, e.g., (0,0) is the center of the upper left pixel. This seems
+    to be the convention used by WV-2, see https://trac.osgeo.org/gdal/ticket/5993.
+    Note that GDAL uses a convention where the upper left corner of the bounding box
+    is (0,0) (so the center of the pixel is (0.5,0.5)). This is *not* the convention
+    used by ImageCoordinate, so while the referenced ticket mentions a 0.5 offset
+    being needed we don't actually need to do that in our code.  
+
+    C++ includes: geocal_rpc.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     __str__ = _swig_new_instance_method(_geocal_rpc.Rpc___str__)
     RPC_A = _geocal_rpc.Rpc_RPC_A
+    
     RPC_B = _geocal_rpc.Rpc_RPC_B
-    rpc_type = property(_geocal_rpc.Rpc_rpc_type_get, _geocal_rpc.Rpc_rpc_type_set)
-    error_bias = property(_geocal_rpc.Rpc_error_bias_get, _geocal_rpc.Rpc_error_bias_set)
-    error_random = property(_geocal_rpc.Rpc_error_random_get, _geocal_rpc.Rpc_error_random_set)
-    height_offset = property(_geocal_rpc.Rpc_height_offset_get, _geocal_rpc.Rpc_height_offset_set)
-    height_scale = property(_geocal_rpc.Rpc_height_scale_get, _geocal_rpc.Rpc_height_scale_set)
-    latitude_offset = property(_geocal_rpc.Rpc_latitude_offset_get, _geocal_rpc.Rpc_latitude_offset_set)
-    latitude_scale = property(_geocal_rpc.Rpc_latitude_scale_get, _geocal_rpc.Rpc_latitude_scale_set)
-    longitude_offset = property(_geocal_rpc.Rpc_longitude_offset_get, _geocal_rpc.Rpc_longitude_offset_set)
-    longitude_scale = property(_geocal_rpc.Rpc_longitude_scale_get, _geocal_rpc.Rpc_longitude_scale_set)
-    line_offset = property(_geocal_rpc.Rpc_line_offset_get, _geocal_rpc.Rpc_line_offset_set)
-    line_scale = property(_geocal_rpc.Rpc_line_scale_get, _geocal_rpc.Rpc_line_scale_set)
-    sample_offset = property(_geocal_rpc.Rpc_sample_offset_get, _geocal_rpc.Rpc_sample_offset_set)
-    sample_scale = property(_geocal_rpc.Rpc_sample_scale_get, _geocal_rpc.Rpc_sample_scale_set)
+    
+    rpc_type = property(_geocal_rpc.Rpc_rpc_type_get, _geocal_rpc.Rpc_rpc_type_set, doc=r"""rpc_type : GeoCal::Rpc::RpcType""")
+    error_bias = property(_geocal_rpc.Rpc_error_bias_get, _geocal_rpc.Rpc_error_bias_set, doc=r"""error_bias : double""")
+    error_random = property(_geocal_rpc.Rpc_error_random_get, _geocal_rpc.Rpc_error_random_set, doc=r"""error_random : double""")
+    height_offset = property(_geocal_rpc.Rpc_height_offset_get, _geocal_rpc.Rpc_height_offset_set, doc=r"""height_offset : double""")
+    height_scale = property(_geocal_rpc.Rpc_height_scale_get, _geocal_rpc.Rpc_height_scale_set, doc=r"""height_scale : double""")
+    latitude_offset = property(_geocal_rpc.Rpc_latitude_offset_get, _geocal_rpc.Rpc_latitude_offset_set, doc=r"""latitude_offset : double""")
+    latitude_scale = property(_geocal_rpc.Rpc_latitude_scale_get, _geocal_rpc.Rpc_latitude_scale_set, doc=r"""latitude_scale : double""")
+    longitude_offset = property(_geocal_rpc.Rpc_longitude_offset_get, _geocal_rpc.Rpc_longitude_offset_set, doc=r"""longitude_offset : double""")
+    longitude_scale = property(_geocal_rpc.Rpc_longitude_scale_get, _geocal_rpc.Rpc_longitude_scale_set, doc=r"""longitude_scale : double""")
+    line_offset = property(_geocal_rpc.Rpc_line_offset_get, _geocal_rpc.Rpc_line_offset_set, doc=r"""line_offset : double""")
+    line_scale = property(_geocal_rpc.Rpc_line_scale_get, _geocal_rpc.Rpc_line_scale_set, doc=r"""line_scale : double""")
+    sample_offset = property(_geocal_rpc.Rpc_sample_offset_get, _geocal_rpc.Rpc_sample_offset_set, doc=r"""sample_offset : double""")
+    sample_scale = property(_geocal_rpc.Rpc_sample_scale_get, _geocal_rpc.Rpc_sample_scale_set, doc=r"""sample_scale : double""")
     _v_line_denominator = _swig_new_instance_method(_geocal_rpc.Rpc__v_line_denominator)
 
     @property
@@ -269,7 +274,7 @@ class Rpc(geocal_swig.generic_object.GenericObject):
     def naif_code(self, value):
       self._v_naif_code(value)
 
-    coordinate_converter = property(_geocal_rpc.Rpc_coordinate_converter_get, _geocal_rpc.Rpc_coordinate_converter_set)
+    coordinate_converter = property(_geocal_rpc.Rpc_coordinate_converter_get, _geocal_rpc.Rpc_coordinate_converter_set, doc=r"""coordinate_converter : boost::shared_ptr<(GeoCal::CoordinateConverter)>""")
     resolution_meter = _swig_new_instance_method(_geocal_rpc.Rpc_resolution_meter)
     fit = _swig_new_instance_method(_geocal_rpc.Rpc_fit)
     fit_all = _swig_new_instance_method(_geocal_rpc.Rpc_fit_all)
@@ -292,11 +297,13 @@ class Rpc(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(Rpc self) -> Rpc
+        __init__(Rpc self, Rpc other) -> Rpc
 
-        Rpc::Rpc()
         GeoCal::Rpc::Rpc
-        Default constructor.
-        Initializes fit_line_numerator and fit_sample_numerator to all false.
+        Default constructor.  
+
+        Initializes fit_line_numerator and fit_sample_numerator to all false.  
 
         """
         _geocal_rpc.Rpc_swiginit(self, _geocal_rpc.new_Rpc(*args))

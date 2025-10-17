@@ -6898,99 +6898,102 @@ SWIGINTERN PyObject *Statistic_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Statistic", _wrap_new_Statistic, METH_NOARGS, "\n"
+		"new_Statistic() -> Statistic\n"
 		"\n"
-		"GeoCal::Statistic::Statistic()\n"
 		"GeoCal::Statistic::Statistic\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "Statistic_add", _wrap_Statistic_add, METH_VARARGS, "\n"
+		"Statistic_add(Statistic self, double x)\n"
 		"\n"
-		"void Statistic::add(double x)\n"
 		"GeoCal::Statistic::add\n"
-		"Add a new data point.\n"
+		"Add a new data point.  \n"
 		"\n"
 		""},
-	 { "Statistic___iadd__", _wrap_Statistic___iadd__, METH_VARARGS, NULL},
+	 { "Statistic___iadd__", _wrap_Statistic___iadd__, METH_VARARGS, "Statistic___iadd__(Statistic self, double x) -> Statistic"},
 	 { "Statistic__v_min", _wrap_Statistic__v_min, METH_O, "\n"
+		"Statistic__v_min(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::min() const\n"
 		"GeoCal::Statistic::min\n"
-		"Minimum value encountered.\n"
+		"Minimum value encountered.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_max", _wrap_Statistic__v_max, METH_O, "\n"
+		"Statistic__v_max(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::max() const\n"
 		"GeoCal::Statistic::max\n"
-		"Maximum value encountered.\n"
+		"Maximum value encountered.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_mean", _wrap_Statistic__v_mean, METH_O, "\n"
+		"Statistic__v_mean(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::mean() const\n"
 		"GeoCal::Statistic::mean\n"
-		"Mean value.\n"
+		"Mean value.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_sigma", _wrap_Statistic__v_sigma, METH_O, "\n"
+		"Statistic__v_sigma(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::sigma() const\n"
 		"GeoCal::Statistic::sigma\n"
-		"Standard deviation.\n"
+		"Standard deviation.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_mean_abs", _wrap_Statistic__v_mean_abs, METH_O, "\n"
+		"Statistic__v_mean_abs(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::mean_abs() const\n"
 		"GeoCal::Statistic::mean_abs\n"
-		"Mean of the absolute value.\n"
+		"Mean of the absolute value.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_min_index", _wrap_Statistic__v_min_index, METH_O, "\n"
+		"Statistic__v_min_index(Statistic self) -> int\n"
 		"\n"
-		"int GeoCal::Statistic::min_index() const\n"
 		"GeoCal::Statistic::min_index\n"
-		"Index number of minimum point, where the first point added is index 0,\n"
-		"second is 1 and so on.\n"
+		"Index number of minimum point, where the first point added is index 0, second is\n"
+		"1 and so on.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_max_index", _wrap_Statistic__v_max_index, METH_O, "\n"
+		"Statistic__v_max_index(Statistic self) -> int\n"
 		"\n"
-		"int GeoCal::Statistic::max_index() const\n"
 		"GeoCal::Statistic::max_index\n"
-		"Index number of maximum point, where the first point added is index 0,\n"
-		"second is 1 and so on.\n"
+		"Index number of maximum point, where the first point added is index 0, second is\n"
+		"1 and so on.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_count", _wrap_Statistic__v_count, METH_O, "\n"
+		"Statistic__v_count(Statistic self) -> int\n"
 		"\n"
-		"int GeoCal::Statistic::count() const\n"
 		"GeoCal::Statistic::count\n"
-		"Number of points added.\n"
+		"Number of points added.  \n"
 		"\n"
 		""},
-	 { "Statistic___str__", _wrap_Statistic___str__, METH_O, NULL},
-	 { "delete_Statistic", _wrap_delete_Statistic, METH_O, NULL},
+	 { "Statistic___str__", _wrap_Statistic___str__, METH_O, "Statistic___str__(Statistic self) -> std::string"},
+	 { "delete_Statistic", _wrap_delete_Statistic, METH_O, "delete_Statistic(Statistic self)"},
 	 { "Statistic_swigregister", Statistic_swigregister, METH_O, NULL},
 	 { "Statistic_swiginit", Statistic_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -6999,99 +7002,102 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Statistic", _wrap_new_Statistic, METH_NOARGS, "\n"
+		"new_Statistic() -> Statistic\n"
 		"\n"
-		"GeoCal::Statistic::Statistic()\n"
 		"GeoCal::Statistic::Statistic\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "Statistic_add", _wrap_Statistic_add, METH_VARARGS, "\n"
+		"add(Statistic self, double x)\n"
 		"\n"
-		"void Statistic::add(double x)\n"
 		"GeoCal::Statistic::add\n"
-		"Add a new data point.\n"
+		"Add a new data point.  \n"
 		"\n"
 		""},
-	 { "Statistic___iadd__", _wrap_Statistic___iadd__, METH_VARARGS, NULL},
+	 { "Statistic___iadd__", _wrap_Statistic___iadd__, METH_VARARGS, "__iadd__(Statistic self, double x) -> Statistic"},
 	 { "Statistic__v_min", _wrap_Statistic__v_min, METH_O, "\n"
+		"_v_min(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::min() const\n"
 		"GeoCal::Statistic::min\n"
-		"Minimum value encountered.\n"
+		"Minimum value encountered.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_max", _wrap_Statistic__v_max, METH_O, "\n"
+		"_v_max(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::max() const\n"
 		"GeoCal::Statistic::max\n"
-		"Maximum value encountered.\n"
+		"Maximum value encountered.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_mean", _wrap_Statistic__v_mean, METH_O, "\n"
+		"_v_mean(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::mean() const\n"
 		"GeoCal::Statistic::mean\n"
-		"Mean value.\n"
+		"Mean value.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_sigma", _wrap_Statistic__v_sigma, METH_O, "\n"
+		"_v_sigma(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::sigma() const\n"
 		"GeoCal::Statistic::sigma\n"
-		"Standard deviation.\n"
+		"Standard deviation.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_mean_abs", _wrap_Statistic__v_mean_abs, METH_O, "\n"
+		"_v_mean_abs(Statistic self) -> double\n"
 		"\n"
-		"double GeoCal::Statistic::mean_abs() const\n"
 		"GeoCal::Statistic::mean_abs\n"
-		"Mean of the absolute value.\n"
+		"Mean of the absolute value.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_min_index", _wrap_Statistic__v_min_index, METH_O, "\n"
+		"_v_min_index(Statistic self) -> int\n"
 		"\n"
-		"int GeoCal::Statistic::min_index() const\n"
 		"GeoCal::Statistic::min_index\n"
-		"Index number of minimum point, where the first point added is index 0,\n"
-		"second is 1 and so on.\n"
+		"Index number of minimum point, where the first point added is index 0, second is\n"
+		"1 and so on.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_max_index", _wrap_Statistic__v_max_index, METH_O, "\n"
+		"_v_max_index(Statistic self) -> int\n"
 		"\n"
-		"int GeoCal::Statistic::max_index() const\n"
 		"GeoCal::Statistic::max_index\n"
-		"Index number of maximum point, where the first point added is index 0,\n"
-		"second is 1 and so on.\n"
+		"Index number of maximum point, where the first point added is index 0, second is\n"
+		"1 and so on.  \n"
 		"\n"
 		""},
 	 { "Statistic__v_count", _wrap_Statistic__v_count, METH_O, "\n"
+		"_v_count(Statistic self) -> int\n"
 		"\n"
-		"int GeoCal::Statistic::count() const\n"
 		"GeoCal::Statistic::count\n"
-		"Number of points added.\n"
+		"Number of points added.  \n"
 		"\n"
 		""},
-	 { "Statistic___str__", _wrap_Statistic___str__, METH_O, NULL},
-	 { "delete_Statistic", _wrap_delete_Statistic, METH_O, NULL},
+	 { "Statistic___str__", _wrap_Statistic___str__, METH_O, "__str__(Statistic self) -> std::string"},
+	 { "delete_Statistic", _wrap_delete_Statistic, METH_O, "delete_Statistic(Statistic self)"},
 	 { "Statistic_swigregister", Statistic_swigregister, METH_O, NULL},
 	 { "Statistic_swiginit", Statistic_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

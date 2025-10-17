@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _magnify_replicate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _magnify_replicate:
 _magnify_replicate.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _magnify_replicate.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,11 +145,13 @@ import geocal_swig.geocal_exception
 class MagnifyReplicate(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This creates a magnified image of a RasterImage.
 
-    We do replicatione to get the values.
+    This creates a magnified image of a RasterImage.  
 
-    C++ includes: magnify_replicate.h 
+    We do replicatione to get the values.  
+
+    C++ includes: magnify_replicate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,11 +159,10 @@ class MagnifyReplicate(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Data, Magfactor, Number_tile=4):
         r"""
+        __init__(MagnifyReplicate self, boost::shared_ptr< GeoCal::RasterImage > const & Data, int Magfactor, int Number_tile=4) -> MagnifyReplicate
 
-        MagnifyReplicate::MagnifyReplicate(const boost::shared_ptr< RasterImage > &Data, int Magfactor, int
-        Number_tile=4)
         GeoCal::MagnifyReplicate::MagnifyReplicate
-        Constructor.
+        Constructor.  
 
         """
         _magnify_replicate.MagnifyReplicate_swiginit(self, _magnify_replicate.new_MagnifyReplicate(Data, Magfactor, Number_tile))

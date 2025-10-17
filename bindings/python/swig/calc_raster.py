@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _calc_raster.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _calc_raster:
 _calc_raster.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _calc_raster.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,12 +144,14 @@ import geocal_swig.geocal_exception
 class CalcRaster(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    Some classes most naturally generate a RasterImage by calculating a
-    results for an array of data (e.g., a tile).
 
-    This class handles the common behavior for these classes.
+    Some classes most naturally generate a RasterImage by calculating a results for
+    an array of data (e.g., a tile).  
 
-    C++ includes: calc_raster.h 
+    This class handles the common behavior for these classes.  
+
+    C++ includes: calc_raster.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,6 +166,13 @@ class CalcRaster(geocal_swig.raster_image_variable.RasterImageVariable):
     calc = _swig_new_instance_method(_calc_raster.CalcRaster_calc)
 
     def __init__(self, *args):
+        r"""
+        __init__(CalcRaster self, int Number_tile=4) -> CalcRaster
+        __init__(CalcRaster self, int Nline, int Nsamp, int Number_tile=4) -> CalcRaster
+        __init__(CalcRaster self, int Nline, int Nsamp, int Ntileln, int Ntilesmp, int Number_tile=4) -> CalcRaster
+        __init__(CalcRaster self, MapInfo Mi, int Number_tile=4) -> CalcRaster
+        __init__(CalcRaster self, RasterImage Img, int Number_tile=4) -> CalcRaster
+        """
         if self.__class__ == CalcRaster:
             _self = None
         else:

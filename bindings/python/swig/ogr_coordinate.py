@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ogr_coordinate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ogr_coordinate:
 _ogr_coordinate.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ogr_coordinate.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,39 +146,38 @@ import geocal_swig.with_parameter
 class OgrWrapper(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a wrapper around the OGRSpatialReference class.
 
-    We hold onto a OGRSpatialReference class and a transformation from
-    that coordinate system to the Geodetic coordinate system. This class
-    handles the lifetime of these objects. This is separated out from
-    OgrCoordinate because typically we'll have lots of OgrCoordinates that
-    have the same OgrWrapper.
+    This is a wrapper around the OGRSpatialReference class.  
 
-    Note a complication in axis ordering. The WKT changed to include axis
-    ordering, seehttps://trac.osgeo.org/gdal/wiki/rfc20_srs_axes
-    andhttps://trac.osgeo.org/gdal/wiki/rfc73_proj6_wkt2_srsbarn (axis
-    ordering section). This change took place in GDAL 3. All our code was
-    written before this change, so in lots of places we assume the old
-    behavior. Our low level coordinate code doesn't actually care, but
-    anything using this likely makes assumptions about what the order is.
-    We also will need to support GDAL 2 for sometime in addition got GDAL
-    3.
+    We hold onto a OGRSpatialReference class and a transformation from that
+    coordinate system to the Geodetic coordinate system. This class handles the
+    lifetime of these objects. This is separated out from OgrCoordinate because
+    typically we'll have lots of OgrCoordinates that have the same OgrWrapper.  
+
+    Note a complication in axis ordering. The WKT changed to include axis ordering,
+    see https://trac.osgeo.org/gdal/wiki/rfc20_srs_axes and
+    https://trac.osgeo.org/gdal/wiki/rfc73_proj6_wkt2_srsbarn (axis ordering
+    section). This change took place in GDAL 3. All our code was written before this
+    change, so in lots of places we assume the old behavior. Our low level
+    coordinate code doesn't actually care, but anything using this likely makes
+    assumptions about what the order is. We also will need to support GDAL 2 for
+    sometime in addition got GDAL 3.  
 
     So we don't break a lot of existing code, we take a
     "use_traditional_gis_order" flag. If this is true, we use the
-    OAMS_TRADITIONAL_GIS_ORDER. false is an error if we are using gdal
-    older than version 3 (since it isn't supported with gdal 2), otherwise
-    we use OAMS_AUTHORITY_COMPLIANT. At some point we can just directly
-    take the GDAL enumeration, but since this is in GDAL 3 only we instead
-    take a boolean that can be use with 2.
+    OAMS_TRADITIONAL_GIS_ORDER. false is an error if we are using gdal older than
+    version 3 (since it isn't supported with gdal 2), otherwise we use
+    OAMS_AUTHORITY_COMPLIANT. At some point we can just directly take the GDAL
+    enumeration, but since this is in GDAL 3 only we instead take a boolean that can
+    be use with 2.  
 
     We don't directly support OAMS_CUSTOM, although you can pass a
-    OGRSpatialReference directly with that. However, serialization isn't
-    currently supported for OAMS_CUSTOM. We could add that if needed, we
-    just need to think through how to save that. For now, I don't see much
-    of a need for that.
+    OGRSpatialReference directly with that. However, serialization isn't currently
+    supported for OAMS_CUSTOM. We could add that if needed, we just need to think
+    through how to save that. For now, I don't see much of a need for that.  
 
-    C++ includes: ogr_coordinate.h 
+    C++ includes: ogr_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -183,12 +185,14 @@ class OgrWrapper(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(OgrWrapper self, std::string const & Wkt, bool Use_traditional_gis_order=True) -> OgrWrapper
+        __init__(OgrWrapper self, boost::shared_ptr< OGRSpatialReference > const & Ogr) -> OgrWrapper
 
-        OgrWrapper::OgrWrapper(const std::string &Wkt, bool Use_traditional_gis_order=true)
         GeoCal::OgrWrapper::OgrWrapper
-        Constructor that creates a OGRSpatialReference from a WKT (Well Known
-        Text) string.
-        See class description for information about use_traditional_gis_order
+        Constructor that creates a OGRSpatialReference from a WKT (Well Known Text)
+        string.  
+
+        See class description for information about use_traditional_gis_order  
 
         """
         _ogr_coordinate.OgrWrapper_swiginit(self, _ogr_coordinate.new_OgrWrapper(*args))
@@ -283,23 +287,24 @@ _ogr_coordinate.OgrWrapper_swigregister(OgrWrapper)
 class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     r"""
 
-    This is a ground coordinate, implemented by the OGRSpatialReference
-    class supplied with GDAL.
 
-    This class is particularly useful for working with
-    GdalMapProjectedImage or VicarMapProjectedImage. The
-    OGRSpatialReference can work with a number of ways of describing a
-    coordinate system, including Well Known Text format (WKT) of the
-    OpenGIS Transformation specification and the EPSG specification. Note
-    in particular the EPSG specification is what is used by geotiff, the
-    format used by the AFIDS system.
+    This is a ground coordinate, implemented by the OGRSpatialReference class
+    supplied with GDAL.  
 
-    You can see the documentation for OGRSpatialReference
-    athttp://www.gdal.org/ogr/osr_tutorial.html.
+    This class is particularly useful for working with GdalMapProjectedImage or
+    VicarMapProjectedImage. The OGRSpatialReference can work with a number of ways
+    of describing a coordinate system, including Well Known Text format (WKT) of the
+    OpenGIS Transformation specification and the EPSG specification. Note in
+    particular the EPSG specification is what is used by geotiff, the format used by
+    the AFIDS system.  
 
-    See note in OgrWrapper about axis order.
+    You can see the documentation for OGRSpatialReference at
+    http://www.gdal.org/ogr/osr_tutorial.html.  
 
-    C++ includes: ogr_coordinate.h 
+    See note in OgrWrapper about axis order.  
+
+    C++ includes: ogr_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -307,11 +312,13 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
 
     def __init__(self, *args):
         r"""
+        __init__(OgrCoordinate self, boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, double x, double y, double z) -> OgrCoordinate
+        __init__(OgrCoordinate self, boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, Geodetic G) -> OgrCoordinate
+        __init__(OgrCoordinate self, boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, GroundCoordinate G) -> OgrCoordinate
+        __init__(OgrCoordinate self, boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, Planetocentric G) -> OgrCoordinate
 
-        GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,
-        double z)
         GeoCal::OgrCoordinate::OgrCoordinate
-        Constructor. X, Y, and Z are in whatever coordinates Ogr are in.
+        Constructor. X, Y, and Z are in whatever coordinates Ogr are in.  
 
         """
         _ogr_coordinate.OgrCoordinate_swiginit(self, _ogr_coordinate.new_OgrCoordinate(*args))
@@ -328,9 +335,9 @@ class OgrCoordinate(geocal_swig.ground_coordinate.GroundCoordinate):
     def utm_zone(self):
         return self._v_utm_zone()
 
-    x = property(_ogr_coordinate.OgrCoordinate_x_get, _ogr_coordinate.OgrCoordinate_x_set)
-    y = property(_ogr_coordinate.OgrCoordinate_y_get, _ogr_coordinate.OgrCoordinate_y_set)
-    z = property(_ogr_coordinate.OgrCoordinate_z_get, _ogr_coordinate.OgrCoordinate_z_set)
+    x = property(_ogr_coordinate.OgrCoordinate_x_get, _ogr_coordinate.OgrCoordinate_x_set, doc=r"""x : double""")
+    y = property(_ogr_coordinate.OgrCoordinate_y_get, _ogr_coordinate.OgrCoordinate_y_set, doc=r"""y : double""")
+    z = property(_ogr_coordinate.OgrCoordinate_z_get, _ogr_coordinate.OgrCoordinate_z_set, doc=r"""z : double""")
     to_utm = _swig_new_static_method(_ogr_coordinate.OgrCoordinate_to_utm)
 
     def __reduce__(self):
@@ -347,11 +354,13 @@ _ogr_coordinate.OgrCoordinate_swigregister(OgrCoordinate)
 class OgrCoordinateConverter(geocal_swig.coordinate_converter.CoordinateConverter):
     r"""
 
-    This is a CoordinateConverter for working with OgrCoordinates.
 
-    See note in OgrWrap about axis order.
+    This is a CoordinateConverter for working with OgrCoordinates.  
 
-    C++ includes: ogr_coordinate.h 
+    See note in OgrWrap about axis order.  
+
+    C++ includes: ogr_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -359,10 +368,10 @@ class OgrCoordinateConverter(geocal_swig.coordinate_converter.CoordinateConverte
 
     def __init__(self, Ogr):
         r"""
+        __init__(OgrCoordinateConverter self, boost::shared_ptr< GeoCal::OgrWrapper > Ogr) -> OgrCoordinateConverter
 
-        GeoCal::OgrCoordinateConverter::OgrCoordinateConverter(const boost::shared_ptr< OgrWrapper > Ogr)
         GeoCal::OgrCoordinateConverter::OgrCoordinateConverter
-        Constructor.
+        Constructor.  
 
         """
         _ogr_coordinate.OgrCoordinateConverter_swiginit(self, _ogr_coordinate.new_OgrCoordinateConverter(Ogr))

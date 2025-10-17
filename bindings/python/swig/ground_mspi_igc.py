@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ground_mspi_igc.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ground_mspi_igc:
 _ground_mspi_igc.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ground_mspi_igc.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,9 +145,11 @@ import geocal_swig.observer
 class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     r"""
 
-    This is an ImageGroundConnection for GroundMspi.
 
-    C++ includes: ground_mspi_igc.h 
+    This is an ImageGroundConnection for GroundMspi.  
+
+    C++ includes: ground_mspi_igc.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,14 +157,14 @@ class GroundMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnec
 
     def __init__(self, *args):
         r"""
+        __init__(GroundMspiIgc self, Time Start_time, boost::shared_ptr< GeoCal::GroundCoordinate > & Pos, double Azimuth, double Start_elevation_angle, double Rotation_rate, Vector_Time Time_tag, std::string const & Camera_config, int Band) -> GroundMspiIgc
+        __init__(GroundMspiIgc self, Time Start_time, boost::shared_ptr< GeoCal::GroundCoordinate > & Pos, double Azimuth, double Start_elevation_angle, double Rotation_rate, Vector_Time Time_tag, boost::shared_ptr< GeoCal::QuaternionCamera > const & Cam, int Band) -> GroundMspiIgc
 
-        GroundMspiIgc::GroundMspiIgc(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
-        double Azimuth, double Start_elevation_angle, double Rotation_rate,
-        const std::vector< Time > &Time_tag, const std::string &Camera_config,
-        int Band)
         GeoCal::GroundMspiIgc::GroundMspiIgc
-        Constructor.
-        The angles are in degrees, and the rate is in degress per second. 
+        Constructor.  
+
+        The angles are in degrees, and the rate is in degress per second.  
+
         """
         _ground_mspi_igc.GroundMspiIgc_swiginit(self, _ground_mspi_igc.new_GroundMspiIgc(*args))
     solar_look = _swig_new_instance_method(_ground_mspi_igc.GroundMspiIgc_solar_look)

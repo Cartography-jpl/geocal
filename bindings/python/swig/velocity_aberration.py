@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _velocity_aberration.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _velocity_aberration:
 _velocity_aberration.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _velocity_aberration.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,6 +141,7 @@ import geocal_swig.look_vector
 class VelocityAberration(geocal_swig.generic_object.GenericObject):
     r"""
 
+
     C++ includes: velocity_aberration.h
 
     """
@@ -165,14 +169,16 @@ _velocity_aberration.VelocityAberration_swigregister(VelocityAberration)
 class NoVelocityAberration(VelocityAberration):
     r"""
 
-    Implementation that doesn't do a correction.
 
-    This isn't something you would normally want, VelocityAberration is
-    generally an important effect to include. But this can be useful in
-    test code, e.g., for comparing to the MSP library with velocity
-    aberration turned off in order to focus on other differences.
+    Implementation that doesn't do a correction.  
 
-    C++ includes: velocity_aberration.h 
+    This isn't something you would normally want, VelocityAberration is generally an
+    important effect to include. But this can be useful in test code, e.g., for
+    comparing to the MSP library with velocity aberration turned off in order to
+    focus on other differences.  
+
+    C++ includes: velocity_aberration.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -180,8 +186,8 @@ class NoVelocityAberration(VelocityAberration):
 
     def __init__(self):
         r"""
+        __init__(NoVelocityAberration self) -> NoVelocityAberration
 
-        GeoCal::NoVelocityAberration::NoVelocityAberration()
         GeoCal::NoVelocityAberration::NoVelocityAberration
         """
         _velocity_aberration.NoVelocityAberration_swiginit(self, _velocity_aberration.new_NoVelocityAberration())
@@ -200,12 +206,14 @@ _velocity_aberration.NoVelocityAberration_swigregister(NoVelocityAberration)
 class VelocityAberrationFirstOrder(VelocityAberration):
     r"""
 
-    Implementation that just duplicates the first order velocity
-    aberration that is the default for OrbitData.
 
-    We have this in the same VelocityAberration framework.
+    Implementation that just duplicates the first order velocity aberration that is
+    the default for OrbitData.  
 
-    C++ includes: velocity_aberration.h 
+    We have this in the same VelocityAberration framework.  
+
+    C++ includes: velocity_aberration.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -213,8 +221,8 @@ class VelocityAberrationFirstOrder(VelocityAberration):
 
     def __init__(self):
         r"""
+        __init__(VelocityAberrationFirstOrder self) -> VelocityAberrationFirstOrder
 
-        GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder()
         GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder
         """
         _velocity_aberration.VelocityAberrationFirstOrder_swiginit(self, _velocity_aberration.new_VelocityAberrationFirstOrder())

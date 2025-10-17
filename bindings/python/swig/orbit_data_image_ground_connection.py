@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_data_image_ground_connection.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_data_image_ground_connection:
 _orbit_data_image_ground_connection.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_data_image_ground_connection.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,10 +144,12 @@ import geocal_swig.observer
 class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
-    This is a ImageGroundConnection where the connection is made by
-    OrbitData and a Camera.
 
-    C++ includes: orbit_data_image_ground_connection.h 
+    This is a ImageGroundConnection where the connection is made by OrbitData and a
+    Camera.  
+
+    C++ includes: orbit_data_image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,18 +157,15 @@ class OrbitDataImageGroundConnection(geocal_swig.image_ground_connection.ImageGr
 
     def __init__(self, *args):
         r"""
+        __init__(OrbitDataImageGroundConnection self, boost::shared_ptr< GeoCal::OrbitData > const & Od, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const Title="", boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >(), double Resolution=30, int Band=0, double Max_height=9000) -> OrbitDataImageGroundConnection
+        __init__(OrbitDataImageGroundConnection self, boost::shared_ptr< GeoCal::Orbit > const & Orb, Time Tm, boost::shared_ptr< GeoCal::Camera > const & Cam, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const Title="", boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >(), double Resolution=30, int Band=0, double Max_height=9000) -> OrbitDataImageGroundConnection
 
-        GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection(const boost::shared_ptr< OrbitData > &Od, const boost::shared_ptr<
-        Camera > &Cam, const boost::shared_ptr< Dem > &D, const
-        boost::shared_ptr< RasterImage > &Img, const std::string Title="",
-        const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<
-        Refraction >(), const boost::shared_ptr< VelocityAberration >
-        &Vabb=boost::shared_ptr< VelocityAberration >(), double Resolution=30,
-        int Band=0, double Max_height=9000)
         GeoCal::OrbitDataImageGroundConnection::OrbitDataImageGroundConnection
-        Constructor.
-        You can optionally include a approximate refraction correction, the
-        default is not to. 
+        Constructor.  
+
+        You can optionally include a approximate refraction correction, the default is
+        not to.  
+
         """
         _orbit_data_image_ground_connection.OrbitDataImageGroundConnection_swiginit(self, _orbit_data_image_ground_connection.new_OrbitDataImageGroundConnection(*args))
     cf_look_vector = _swig_new_instance_method(_orbit_data_image_ground_connection.OrbitDataImageGroundConnection_cf_look_vector)

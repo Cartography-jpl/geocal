@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_quaternion_list_offset.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_quaternion_list_offset:
 _orbit_quaternion_list_offset.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_quaternion_list_offset.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,27 +145,27 @@ import geocal_swig.look_vector
 class OrbitQuaternionListOffset(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This is an adapter to a OrbitQuaternionList where we add a fixed
-    offset in spacecraft coordinates to the position.
 
-    The original use of this is to model Ecostress, where we are far
-    enough away from the center of the ISS that we need to account for the
-    difference (we are about 25 meters or so away, which is a significant
-    fraction of a pixel away). Note that this is similar to but distinct
-    from a position offset in OrbitOffsetCorrection. There the correction
-    is time dependent, and represented in whatever the native position is
-    (e.g., ECI coordinates). Here, the correction is a know constant and
-    is expressed in spacecraft coordinate - we have a fixed known
-    orientation. Note that for most spacecraft we can ignore the position
-    difference, the ISS is a special case because it is so large.
+    This is an adapter to a OrbitQuaternionList where we add a fixed offset in
+    spacecraft coordinates to the position.  
 
-    We could have a general "Orbit" adapter, however again our use case
-    is a OrbitQuaternionList (or more specifically, a HdfOrbit). We just
-    use this particular case for performance reasons, overriding the
-    cached orbit_data_create rather than doing the correction every time
-    we create a orbit data.
+    The original use of this is to model Ecostress, where we are far enough away
+    from the center of the ISS that we need to account for the difference (we are
+    about 25 meters or so away, which is a significant fraction of a pixel away).
+    Note that this is similar to but distinct from a position offset in
+    OrbitOffsetCorrection. There the correction is time dependent, and represented
+    in whatever the native position is (e.g., ECI coordinates). Here, the correction
+    is a know constant and is expressed in spacecraft coordinate - we have a fixed
+    known orientation. Note that for most spacecraft we can ignore the position
+    difference, the ISS is a special case because it is so large.  
 
-    C++ includes: orbit_quaternion_list_offset.h 
+    We could have a general "Orbit" adapter, however again our use case is a
+    OrbitQuaternionList (or more specifically, a HdfOrbit). We just use this
+    particular case for performance reasons, overriding the cached orbit_data_create
+    rather than doing the correction every time we create a orbit data.  
+
+    C++ includes: orbit_quaternion_list_offset.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -170,13 +173,13 @@ class OrbitQuaternionListOffset(geocal_swig.orbit_quaternion_list.OrbitQuaternio
 
     def __init__(self, Orbit_underlying, Position_offset_sc_coordinate):
         r"""
+        __init__(OrbitQuaternionListOffset self, boost::shared_ptr< GeoCal::OrbitQuaternionList > const & Orbit_underlying, BlitzArray_double_1 Position_offset_sc_coordinate) -> OrbitQuaternionListOffset
 
-        GeoCal::OrbitQuaternionListOffset::OrbitQuaternionListOffset(const boost::shared_ptr< OrbitQuaternionList > &Orbit_underlying,
-        const blitz::Array< double, 1 > &Position_offset_sc_coordinate)
         GeoCal::OrbitQuaternionListOffset::OrbitQuaternionListOffset
-        Constructor.
-        Add a fixed offset to the position in meters, in space craft
-        coordinate system. 
+        Constructor.  
+
+        Add a fixed offset to the position in meters, in space craft coordinate system.  
+
         """
         _orbit_quaternion_list_offset.OrbitQuaternionListOffset_swiginit(self, _orbit_quaternion_list_offset.new_OrbitQuaternionListOffset(Orbit_underlying, Position_offset_sc_coordinate))
     _v_orbit_underlying = _swig_new_instance_method(_orbit_quaternion_list_offset.OrbitQuaternionListOffset__v_orbit_underlying)
@@ -206,9 +209,11 @@ _orbit_quaternion_list_offset.OrbitQuaternionListOffset_swigregister(OrbitQuater
 class OrbitScCoorOffset(geocal_swig.orbit.Orbit):
     r"""
 
-    Like OrbitQuaternionListOffset, but for a more general orbit.
 
-    C++ includes: orbit_quaternion_list_offset.h 
+    Like OrbitQuaternionListOffset, but for a more general orbit.  
+
+    C++ includes: orbit_quaternion_list_offset.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -216,13 +221,13 @@ class OrbitScCoorOffset(geocal_swig.orbit.Orbit):
 
     def __init__(self, Orbit_underlying, Position_offset_sc_coordinate):
         r"""
+        __init__(OrbitScCoorOffset self, boost::shared_ptr< GeoCal::Orbit > const & Orbit_underlying, BlitzArray_double_1 Position_offset_sc_coordinate) -> OrbitScCoorOffset
 
-        GeoCal::OrbitScCoorOffset::OrbitScCoorOffset(const boost::shared_ptr< Orbit > &Orbit_underlying, const
-        blitz::Array< double, 1 > &Position_offset_sc_coordinate)
         GeoCal::OrbitScCoorOffset::OrbitScCoorOffset
-        Constructor.
-        Add a fixed offset to the position in meters, in space craft
-        coordinate system. 
+        Constructor.  
+
+        Add a fixed offset to the position in meters, in space craft coordinate system.  
+
         """
         _orbit_quaternion_list_offset.OrbitScCoorOffset_swiginit(self, _orbit_quaternion_list_offset.new_OrbitScCoorOffset(Orbit_underlying, Position_offset_sc_coordinate))
     orbit_data = _swig_new_instance_method(_orbit_quaternion_list_offset.OrbitScCoorOffset_orbit_data)

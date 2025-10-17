@@ -7766,121 +7766,121 @@ SWIGINTERN PyObject *DemMatch_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_DemMatch", _wrap_new_DemMatch, METH_VARARGS, "\n"
+		"new_DemMatch(boost::shared_ptr< GeoCal::ImageToImageMatch > const & Match, boost::shared_ptr< GeoCal::RayIntersect > const & Ray_intersect, double Max_dist_good_point) -> DemMatch\n"
 		"\n"
-		"GeoCal::DemMatch::DemMatch(const boost::shared_ptr< ImageToImageMatch > &Match, const\n"
-		"boost::shared_ptr< RayIntersect > &Ray_intersect, double\n"
-		"Max_dist_good_point)\n"
 		"GeoCal::DemMatch::DemMatch\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "DemMatch_surface_point", _wrap_DemMatch_surface_point, METH_VARARGS, "\n"
+		"DemMatch_surface_point(DemMatch self, int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int Sstride=1, bool Include_ic=False) -> BlitzArray_double_2\n"
+		"DemMatch_surface_point(DemMatch self, MapInfo Mi, bool Include_ic=False) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > DemMatch::surface_point(int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int\n"
-		"Sstride=1, bool Include_ic=false) const\n"
 		"GeoCal::DemMatch::surface_point\n"
-		"Look through the given range in line and sample for the first image.\n"
-		"Try image matching, and where it succeeds look at the intersection of\n"
-		"the points. We allow a little slop, but the intersection need to be\n"
-		"close to where each image would put the point (e.g., epipolar\n"
-		"constraint), so we reject any point where the intersection is farther\n"
-		"than the maximum distance in meters that was passed to the\n"
-		"constructor.\n"
+		"Look through the given range in line and sample for the first image.  \n"
 		"\n"
-		"We return an array of points that we find. This is a N X 3 array, with\n"
-		"each row corresponding to a point. The columns are latitude,\n"
-		"longitude, and height (in degrees and meters). This is a bit odd way\n"
-		"to return this, but it works well with the python class that uses this\n"
-		"code.\n"
+		"Try image matching, and where it succeeds look at the intersection of the\n"
+		"points. We allow a little slop, but the intersection need to be close to where\n"
+		"each image would put the point (e.g., epipolar constraint), so we reject any\n"
+		"point where the intersection is farther than the maximum distance in meters that\n"
+		"was passed to the constructor.  \n"
 		"\n"
-		"Note that you can optionally specify Include_ic as true. If this is\n"
-		"true, we return a N x (3 + 4) array, where the last four columns are\n"
-		"the image coordinate for the first and second images. \n"
+		"We return an array of points that we find. This is a N X 3 array, with each row\n"
+		"corresponding to a point. The columns are latitude, longitude, and height (in\n"
+		"degrees and meters). This is a bit odd way to return this, but it works well\n"
+		"with the python class that uses this code.  \n"
+		"\n"
+		"Note that you can optionally specify Include_ic as true. If this is true, we\n"
+		"return a N x (3 + 4) array, where the last four columns are the image coordinate\n"
+		"for the first and second images.  \n"
+		"\n"
 		""},
-	 { "DemMatch___str__", _wrap_DemMatch___str__, METH_O, NULL},
+	 { "DemMatch___str__", _wrap_DemMatch___str__, METH_O, "DemMatch___str__(DemMatch self) -> std::string"},
 	 { "DemMatch__v_match", _wrap_DemMatch__v_match, METH_O, "\n"
+		"DemMatch__v_match(DemMatch self) -> boost::shared_ptr< GeoCal::ImageToImageMatch >\n"
 		"\n"
-		"boost::shared_ptr< ImageToImageMatch > GeoCal::DemMatch::match() const\n"
 		"GeoCal::DemMatch::match\n"
 		""},
 	 { "DemMatch__v_ray_intersect", _wrap_DemMatch__v_ray_intersect, METH_O, "\n"
+		"DemMatch__v_ray_intersect(DemMatch self) -> boost::shared_ptr< GeoCal::RayIntersect >\n"
 		"\n"
-		"boost::shared_ptr< RayIntersect > GeoCal::DemMatch::ray_intersect() const\n"
 		"GeoCal::DemMatch::ray_intersect\n"
 		""},
 	 { "DemMatch__v_max_distance", _wrap_DemMatch__v_max_distance, METH_O, "\n"
+		"DemMatch__v_max_distance(DemMatch self) -> double\n"
 		"\n"
-		"double GeoCal::DemMatch::max_distance() const\n"
 		"GeoCal::DemMatch::max_distance\n"
 		""},
 	 { "DemMatch__v_number_point", _wrap_DemMatch__v_number_point, METH_O, "\n"
+		"DemMatch__v_number_point(DemMatch self) -> int\n"
 		"\n"
-		"int GeoCal::DemMatch::number_point() const\n"
 		"GeoCal::DemMatch::number_point\n"
-		"Total number of points we attempted matching in last call to\n"
-		"surface_point.\n"
+		"Total number of points we attempted matching in last call to surface_point.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_number_match", _wrap_DemMatch__v_number_match, METH_O, "\n"
+		"DemMatch__v_number_match(DemMatch self) -> int\n"
 		"\n"
-		"int GeoCal::DemMatch::number_match() const\n"
 		"GeoCal::DemMatch::number_match\n"
-		"Number of successful matches in last call to surface_point.\n"
+		"Number of successful matches in last call to surface_point.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_number_success", _wrap_DemMatch__v_number_success, METH_O, "\n"
+		"DemMatch__v_number_success(DemMatch self) -> int\n"
 		"\n"
-		"int GeoCal::DemMatch::number_success() const\n"
 		"GeoCal::DemMatch::number_success\n"
-		"Number of point matched that then satisfied epipolar constraint in\n"
-		"last call to surface_point, so total number of points returned.\n"
+		"Number of point matched that then satisfied epipolar constraint in last call to\n"
+		"surface_point, so total number of points returned.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_diagnostic", _wrap_DemMatch__v_diagnostic, METH_O, "\n"
+		"DemMatch__v_diagnostic(DemMatch self) -> BlitzArray_int_1\n"
 		"\n"
-		"blitz::Array< int, 1 > GeoCal::DemMatch::diagnostic() const\n"
 		"GeoCal::DemMatch::diagnostic\n"
-		" Diagnostic values for failed image matches in the last call to surface_point.\n"
+		"Diagnostic values for failed image matches in the last call to surface_point.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_all_distance_stat", _wrap_DemMatch__v_all_distance_stat, METH_O, "\n"
+		"DemMatch__v_all_distance_stat(DemMatch self) -> boost::shared_ptr< GeoCal::Statistic >\n"
 		"\n"
-		"const boost::shared_ptr< Statistic > & GeoCal::DemMatch::all_distance_stat() const\n"
 		"GeoCal::DemMatch::all_distance_stat\n"
-		"Statistics on distance for last call to surface point, including all\n"
-		"matches (including those later rejected).\n"
+		"Statistics on distance for last call to surface point, including all matches\n"
+		"(including those later rejected).  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_good_distance_stat", _wrap_DemMatch__v_good_distance_stat, METH_O, "\n"
+		"DemMatch__v_good_distance_stat(DemMatch self) -> boost::shared_ptr< GeoCal::Statistic >\n"
 		"\n"
-		"const boost::shared_ptr< Statistic > & GeoCal::DemMatch::good_distance_stat() const\n"
 		"GeoCal::DemMatch::good_distance_stat\n"
-		"Statistics on distance for last call to surface point, only including\n"
-		"matches that are accepted as good points.\n"
+		"Statistics on distance for last call to surface point, only including matches\n"
+		"that are accepted as good points.  \n"
 		"\n"
 		""},
 	 { "delete_DemMatch", _wrap_delete_DemMatch, METH_O, "\n"
+		"delete_DemMatch(DemMatch self)\n"
 		"\n"
-		"virtual GeoCal::DemMatch::~DemMatch()\n"
 		"GeoCal::DemMatch::~DemMatch\n"
 		""},
 	 { "DemMatch_swigregister", DemMatch_swigregister, METH_O, NULL},
@@ -7891,121 +7891,121 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_DemMatch", _wrap_new_DemMatch, METH_VARARGS, "\n"
+		"new_DemMatch(boost::shared_ptr< GeoCal::ImageToImageMatch > const & Match, boost::shared_ptr< GeoCal::RayIntersect > const & Ray_intersect, double Max_dist_good_point) -> DemMatch\n"
 		"\n"
-		"GeoCal::DemMatch::DemMatch(const boost::shared_ptr< ImageToImageMatch > &Match, const\n"
-		"boost::shared_ptr< RayIntersect > &Ray_intersect, double\n"
-		"Max_dist_good_point)\n"
 		"GeoCal::DemMatch::DemMatch\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "DemMatch_surface_point", _wrap_DemMatch_surface_point, METH_VARARGS, "\n"
+		"surface_point(DemMatch self, int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int Sstride=1, bool Include_ic=False) -> BlitzArray_double_2\n"
+		"surface_point(DemMatch self, MapInfo Mi, bool Include_ic=False) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > DemMatch::surface_point(int Lstart, int Sstart, int Lend, int Send, int Lstride=1, int\n"
-		"Sstride=1, bool Include_ic=false) const\n"
 		"GeoCal::DemMatch::surface_point\n"
-		"Look through the given range in line and sample for the first image.\n"
-		"Try image matching, and where it succeeds look at the intersection of\n"
-		"the points. We allow a little slop, but the intersection need to be\n"
-		"close to where each image would put the point (e.g., epipolar\n"
-		"constraint), so we reject any point where the intersection is farther\n"
-		"than the maximum distance in meters that was passed to the\n"
-		"constructor.\n"
+		"Look through the given range in line and sample for the first image.  \n"
 		"\n"
-		"We return an array of points that we find. This is a N X 3 array, with\n"
-		"each row corresponding to a point. The columns are latitude,\n"
-		"longitude, and height (in degrees and meters). This is a bit odd way\n"
-		"to return this, but it works well with the python class that uses this\n"
-		"code.\n"
+		"Try image matching, and where it succeeds look at the intersection of the\n"
+		"points. We allow a little slop, but the intersection need to be close to where\n"
+		"each image would put the point (e.g., epipolar constraint), so we reject any\n"
+		"point where the intersection is farther than the maximum distance in meters that\n"
+		"was passed to the constructor.  \n"
 		"\n"
-		"Note that you can optionally specify Include_ic as true. If this is\n"
-		"true, we return a N x (3 + 4) array, where the last four columns are\n"
-		"the image coordinate for the first and second images. \n"
+		"We return an array of points that we find. This is a N X 3 array, with each row\n"
+		"corresponding to a point. The columns are latitude, longitude, and height (in\n"
+		"degrees and meters). This is a bit odd way to return this, but it works well\n"
+		"with the python class that uses this code.  \n"
+		"\n"
+		"Note that you can optionally specify Include_ic as true. If this is true, we\n"
+		"return a N x (3 + 4) array, where the last four columns are the image coordinate\n"
+		"for the first and second images.  \n"
+		"\n"
 		""},
-	 { "DemMatch___str__", _wrap_DemMatch___str__, METH_O, NULL},
+	 { "DemMatch___str__", _wrap_DemMatch___str__, METH_O, "__str__(DemMatch self) -> std::string"},
 	 { "DemMatch__v_match", _wrap_DemMatch__v_match, METH_O, "\n"
+		"_v_match(DemMatch self) -> boost::shared_ptr< GeoCal::ImageToImageMatch >\n"
 		"\n"
-		"boost::shared_ptr< ImageToImageMatch > GeoCal::DemMatch::match() const\n"
 		"GeoCal::DemMatch::match\n"
 		""},
 	 { "DemMatch__v_ray_intersect", _wrap_DemMatch__v_ray_intersect, METH_O, "\n"
+		"_v_ray_intersect(DemMatch self) -> boost::shared_ptr< GeoCal::RayIntersect >\n"
 		"\n"
-		"boost::shared_ptr< RayIntersect > GeoCal::DemMatch::ray_intersect() const\n"
 		"GeoCal::DemMatch::ray_intersect\n"
 		""},
 	 { "DemMatch__v_max_distance", _wrap_DemMatch__v_max_distance, METH_O, "\n"
+		"_v_max_distance(DemMatch self) -> double\n"
 		"\n"
-		"double GeoCal::DemMatch::max_distance() const\n"
 		"GeoCal::DemMatch::max_distance\n"
 		""},
 	 { "DemMatch__v_number_point", _wrap_DemMatch__v_number_point, METH_O, "\n"
+		"_v_number_point(DemMatch self) -> int\n"
 		"\n"
-		"int GeoCal::DemMatch::number_point() const\n"
 		"GeoCal::DemMatch::number_point\n"
-		"Total number of points we attempted matching in last call to\n"
-		"surface_point.\n"
+		"Total number of points we attempted matching in last call to surface_point.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_number_match", _wrap_DemMatch__v_number_match, METH_O, "\n"
+		"_v_number_match(DemMatch self) -> int\n"
 		"\n"
-		"int GeoCal::DemMatch::number_match() const\n"
 		"GeoCal::DemMatch::number_match\n"
-		"Number of successful matches in last call to surface_point.\n"
+		"Number of successful matches in last call to surface_point.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_number_success", _wrap_DemMatch__v_number_success, METH_O, "\n"
+		"_v_number_success(DemMatch self) -> int\n"
 		"\n"
-		"int GeoCal::DemMatch::number_success() const\n"
 		"GeoCal::DemMatch::number_success\n"
-		"Number of point matched that then satisfied epipolar constraint in\n"
-		"last call to surface_point, so total number of points returned.\n"
+		"Number of point matched that then satisfied epipolar constraint in last call to\n"
+		"surface_point, so total number of points returned.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_diagnostic", _wrap_DemMatch__v_diagnostic, METH_O, "\n"
+		"_v_diagnostic(DemMatch self) -> BlitzArray_int_1\n"
 		"\n"
-		"blitz::Array< int, 1 > GeoCal::DemMatch::diagnostic() const\n"
 		"GeoCal::DemMatch::diagnostic\n"
-		" Diagnostic values for failed image matches in the last call to surface_point.\n"
+		"Diagnostic values for failed image matches in the last call to surface_point.  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_all_distance_stat", _wrap_DemMatch__v_all_distance_stat, METH_O, "\n"
+		"_v_all_distance_stat(DemMatch self) -> boost::shared_ptr< GeoCal::Statistic >\n"
 		"\n"
-		"const boost::shared_ptr< Statistic > & GeoCal::DemMatch::all_distance_stat() const\n"
 		"GeoCal::DemMatch::all_distance_stat\n"
-		"Statistics on distance for last call to surface point, including all\n"
-		"matches (including those later rejected).\n"
+		"Statistics on distance for last call to surface point, including all matches\n"
+		"(including those later rejected).  \n"
 		"\n"
 		""},
 	 { "DemMatch__v_good_distance_stat", _wrap_DemMatch__v_good_distance_stat, METH_O, "\n"
+		"_v_good_distance_stat(DemMatch self) -> boost::shared_ptr< GeoCal::Statistic >\n"
 		"\n"
-		"const boost::shared_ptr< Statistic > & GeoCal::DemMatch::good_distance_stat() const\n"
 		"GeoCal::DemMatch::good_distance_stat\n"
-		"Statistics on distance for last call to surface point, only including\n"
-		"matches that are accepted as good points.\n"
+		"Statistics on distance for last call to surface point, only including matches\n"
+		"that are accepted as good points.  \n"
 		"\n"
 		""},
 	 { "delete_DemMatch", _wrap_delete_DemMatch, METH_O, "\n"
+		"delete_DemMatch(DemMatch self)\n"
 		"\n"
-		"virtual GeoCal::DemMatch::~DemMatch()\n"
 		"GeoCal::DemMatch::~DemMatch\n"
 		""},
 	 { "DemMatch_swigregister", DemMatch_swigregister, METH_O, NULL},

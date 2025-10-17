@@ -9203,123 +9203,136 @@ SWIGINTERN PyObject *RsmLowOrderPolynomial_swiginit(PyObject *SWIGUNUSEDPARM(sel
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmLowOrderPolynomial", _wrap_new_RsmLowOrderPolynomial, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool Ignore_igc_error_in_fit=False)\n"
 		"\n"
-		"GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool\n"
-		"Ignore_igc_error_in_fit=false)\n"
 		"GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "RsmLowOrderPolynomial___str__", _wrap_RsmLowOrderPolynomial___str__, METH_O, NULL},
+	 { "RsmLowOrderPolynomial___str__", _wrap_RsmLowOrderPolynomial___str__, METH_O, "RsmLowOrderPolynomial___str__(RsmLowOrderPolynomial self) -> std::string"},
 	 { "RsmLowOrderPolynomial_image_coordinate", _wrap_RsmLowOrderPolynomial_image_coordinate, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial_image_coordinate(RsmLowOrderPolynomial self, double X, double Y, double Z) -> ImageCoordinate\n"
+		"RsmLowOrderPolynomial_image_coordinate(RsmLowOrderPolynomial self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"RsmLowOrderPolynomial_image_coordinate(RsmLowOrderPolynomial self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_3\n"
+		"RsmLowOrderPolynomial_image_coordinate(RsmLowOrderPolynomial self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_4\n"
 		"\n"
-		"ImageCoordinate GeoCal::RsmLowOrderPolynomial::image_coordinate(double X, double Y, double Z) const\n"
 		"GeoCal::RsmLowOrderPolynomial::image_coordinate\n"
-		"Return approximate image coordinates for given X, Y, and Z.\n"
+		"Return approximate image coordinates for given X, Y, and Z.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial_fit_data", _wrap_RsmLowOrderPolynomial_fit_data, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial_fit_data(RsmLowOrderPolynomial self, vector_double Line, vector_double Sample, vector_double X, vector_double Y, vector_double Z)\n"
 		"\n"
-		"void RsmLowOrderPolynomial::fit_data(const std::vector< double > &Line, const std::vector< double >\n"
-		"&Sample, const std::vector< double > &X, const std::vector< double >\n"
-		"&Y, const std::vector< double > &Z)\n"
 		"GeoCal::RsmLowOrderPolynomial::fit_data\n"
-		"Adjust the parameters of line and sample numerator and denominator to\n"
-		"fit the given data.\n"
-		"Note that this uses the existing scale and offset values, so you\n"
-		"should make sure to set that first (e.g., call fit_offset_and_scale).\n"
+		"Adjust the parameters of line and sample numerator and denominator to fit the\n"
+		"given data.  \n"
+		"\n"
+		"Note that this uses the existing scale and offset values, so you should make\n"
+		"sure to set that first (e.g., call fit_offset_and_scale).  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial_fit", _wrap_RsmLowOrderPolynomial_fit, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial_fit(RsmLowOrderPolynomial self, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height, int Min_line, int Max_line, int Min_sample, int Max_sample)\n"
 		"\n"
-		"void RsmLowOrderPolynomial::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height, int Min_line, int Max_line, int\n"
-		"Min_sample, int Max_sample)\n"
 		"GeoCal::RsmLowOrderPolynomial::fit\n"
-		"Generate a RsmLowOrderPolynomial that approximates the calculation done by a ImageGroundConnection.\n"
-		"To support sections, you can pass in a restricted number of\n"
-		"line/samples to fit over. \n"
+		"Generate a RsmLowOrderPolynomial that approximates the calculation done by a\n"
+		"ImageGroundConnection.  \n"
+		"\n"
+		"To support sections, you can pass in a restricted number of line/samples to fit\n"
+		"over.  \n"
+		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_min_line", _wrap_RsmLowOrderPolynomial__v_min_line, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_min_line(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_min_line(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::min_line(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::min_line\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_max_line", _wrap_RsmLowOrderPolynomial__v_max_line, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_max_line(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_max_line(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::max_line(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::max_line\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_min_sample", _wrap_RsmLowOrderPolynomial__v_min_sample, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_min_sample(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_min_sample(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::min_sample(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::min_sample\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_max_sample", _wrap_RsmLowOrderPolynomial__v_max_sample, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_max_sample(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_max_sample(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::max_sample(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::max_sample\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_number_line_fit", _wrap_RsmLowOrderPolynomial__v_number_line_fit, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_number_line_fit(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_number_line_fit(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::number_line_fit(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::number_line_fit\n"
-		"Number of lines in the grid we fit for.\n"
+		"Number of lines in the grid we fit for.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_number_sample_fit", _wrap_RsmLowOrderPolynomial__v_number_sample_fit, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_number_sample_fit(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_number_sample_fit(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::number_sample_fit(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::number_sample_fit\n"
-		"Number of samples in the grid we fit for.\n"
+		"Number of samples in the grid we fit for.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_number_height_fit", _wrap_RsmLowOrderPolynomial__v_number_height_fit, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_number_height_fit(RsmLowOrderPolynomial self) -> int\n"
+		"RsmLowOrderPolynomial__v_number_height_fit(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::number_height_fit(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::number_height_fit\n"
-		"Number of heights in the grid we fit for.\n"
+		"Number of heights in the grid we fit for.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_ignore_igc_error_in_fit", _wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial__v_ignore_igc_error_in_fit(RsmLowOrderPolynomial self) -> bool\n"
+		"RsmLowOrderPolynomial__v_ignore_igc_error_in_fit(RsmLowOrderPolynomial self, bool const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit(bool V)\n"
 		"GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit\n"
-		"If true, ignore igc errors in fit.\n"
+		"If true, ignore igc errors in fit.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_parameter_line", _wrap_RsmLowOrderPolynomial__v_parameter_line, METH_O, "\n"
+		"RsmLowOrderPolynomial__v_parameter_line(RsmLowOrderPolynomial self) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::RsmLowOrderPolynomial::parameter_line() const\n"
 		"GeoCal::RsmLowOrderPolynomial::parameter_line\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_parameter_sample", _wrap_RsmLowOrderPolynomial__v_parameter_sample, METH_O, "\n"
+		"RsmLowOrderPolynomial__v_parameter_sample(RsmLowOrderPolynomial self) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::RsmLowOrderPolynomial::parameter_sample() const\n"
 		"GeoCal::RsmLowOrderPolynomial::parameter_sample\n"
 		""},
 	 { "delete_RsmLowOrderPolynomial", _wrap_delete_RsmLowOrderPolynomial, METH_O, "\n"
+		"delete_RsmLowOrderPolynomial(RsmLowOrderPolynomial self)\n"
 		"\n"
-		"virtual GeoCal::RsmLowOrderPolynomial::~RsmLowOrderPolynomial()\n"
 		"GeoCal::RsmLowOrderPolynomial::~RsmLowOrderPolynomial\n"
 		""},
 	 { "RsmLowOrderPolynomial_swigregister", RsmLowOrderPolynomial_swigregister, METH_O, NULL},
@@ -9330,123 +9343,136 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmLowOrderPolynomial", _wrap_new_RsmLowOrderPolynomial, METH_VARARGS, "\n"
+		"RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool Ignore_igc_error_in_fit=False)\n"
 		"\n"
-		"GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial(int Nline_fit=10, int Nsample_fit=10, int Nheight_fit=10, bool\n"
-		"Ignore_igc_error_in_fit=false)\n"
 		"GeoCal::RsmLowOrderPolynomial::RsmLowOrderPolynomial\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "RsmLowOrderPolynomial___str__", _wrap_RsmLowOrderPolynomial___str__, METH_O, NULL},
+	 { "RsmLowOrderPolynomial___str__", _wrap_RsmLowOrderPolynomial___str__, METH_O, "__str__(RsmLowOrderPolynomial self) -> std::string"},
 	 { "RsmLowOrderPolynomial_image_coordinate", _wrap_RsmLowOrderPolynomial_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(RsmLowOrderPolynomial self, double X, double Y, double Z) -> ImageCoordinate\n"
+		"image_coordinate(RsmLowOrderPolynomial self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"image_coordinate(RsmLowOrderPolynomial self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_3\n"
+		"image_coordinate(RsmLowOrderPolynomial self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_4\n"
 		"\n"
-		"ImageCoordinate GeoCal::RsmLowOrderPolynomial::image_coordinate(double X, double Y, double Z) const\n"
 		"GeoCal::RsmLowOrderPolynomial::image_coordinate\n"
-		"Return approximate image coordinates for given X, Y, and Z.\n"
+		"Return approximate image coordinates for given X, Y, and Z.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial_fit_data", _wrap_RsmLowOrderPolynomial_fit_data, METH_VARARGS, "\n"
+		"fit_data(RsmLowOrderPolynomial self, vector_double Line, vector_double Sample, vector_double X, vector_double Y, vector_double Z)\n"
 		"\n"
-		"void RsmLowOrderPolynomial::fit_data(const std::vector< double > &Line, const std::vector< double >\n"
-		"&Sample, const std::vector< double > &X, const std::vector< double >\n"
-		"&Y, const std::vector< double > &Z)\n"
 		"GeoCal::RsmLowOrderPolynomial::fit_data\n"
-		"Adjust the parameters of line and sample numerator and denominator to\n"
-		"fit the given data.\n"
-		"Note that this uses the existing scale and offset values, so you\n"
-		"should make sure to set that first (e.g., call fit_offset_and_scale).\n"
+		"Adjust the parameters of line and sample numerator and denominator to fit the\n"
+		"given data.  \n"
+		"\n"
+		"Note that this uses the existing scale and offset values, so you should make\n"
+		"sure to set that first (e.g., call fit_offset_and_scale).  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial_fit", _wrap_RsmLowOrderPolynomial_fit, METH_VARARGS, "\n"
+		"fit(RsmLowOrderPolynomial self, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height, int Min_line, int Max_line, int Min_sample, int Max_sample)\n"
 		"\n"
-		"void RsmLowOrderPolynomial::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height, int Min_line, int Max_line, int\n"
-		"Min_sample, int Max_sample)\n"
 		"GeoCal::RsmLowOrderPolynomial::fit\n"
-		"Generate a RsmLowOrderPolynomial that approximates the calculation done by a ImageGroundConnection.\n"
-		"To support sections, you can pass in a restricted number of\n"
-		"line/samples to fit over. \n"
+		"Generate a RsmLowOrderPolynomial that approximates the calculation done by a\n"
+		"ImageGroundConnection.  \n"
+		"\n"
+		"To support sections, you can pass in a restricted number of line/samples to fit\n"
+		"over.  \n"
+		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_min_line", _wrap_RsmLowOrderPolynomial__v_min_line, METH_VARARGS, "\n"
+		"_v_min_line(RsmLowOrderPolynomial self) -> int\n"
+		"_v_min_line(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::min_line(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::min_line\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_max_line", _wrap_RsmLowOrderPolynomial__v_max_line, METH_VARARGS, "\n"
+		"_v_max_line(RsmLowOrderPolynomial self) -> int\n"
+		"_v_max_line(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::max_line(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::max_line\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_min_sample", _wrap_RsmLowOrderPolynomial__v_min_sample, METH_VARARGS, "\n"
+		"_v_min_sample(RsmLowOrderPolynomial self) -> int\n"
+		"_v_min_sample(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::min_sample(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::min_sample\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_max_sample", _wrap_RsmLowOrderPolynomial__v_max_sample, METH_VARARGS, "\n"
+		"_v_max_sample(RsmLowOrderPolynomial self) -> int\n"
+		"_v_max_sample(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::max_sample(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::max_sample\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_number_line_fit", _wrap_RsmLowOrderPolynomial__v_number_line_fit, METH_VARARGS, "\n"
+		"_v_number_line_fit(RsmLowOrderPolynomial self) -> int\n"
+		"_v_number_line_fit(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::number_line_fit(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::number_line_fit\n"
-		"Number of lines in the grid we fit for.\n"
+		"Number of lines in the grid we fit for.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_number_sample_fit", _wrap_RsmLowOrderPolynomial__v_number_sample_fit, METH_VARARGS, "\n"
+		"_v_number_sample_fit(RsmLowOrderPolynomial self) -> int\n"
+		"_v_number_sample_fit(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::number_sample_fit(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::number_sample_fit\n"
-		"Number of samples in the grid we fit for.\n"
+		"Number of samples in the grid we fit for.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_number_height_fit", _wrap_RsmLowOrderPolynomial__v_number_height_fit, METH_VARARGS, "\n"
+		"_v_number_height_fit(RsmLowOrderPolynomial self) -> int\n"
+		"_v_number_height_fit(RsmLowOrderPolynomial self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::number_height_fit(int V)\n"
 		"GeoCal::RsmLowOrderPolynomial::number_height_fit\n"
-		"Number of heights in the grid we fit for.\n"
+		"Number of heights in the grid we fit for.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_ignore_igc_error_in_fit", _wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit, METH_VARARGS, "\n"
+		"_v_ignore_igc_error_in_fit(RsmLowOrderPolynomial self) -> bool\n"
+		"_v_ignore_igc_error_in_fit(RsmLowOrderPolynomial self, bool const & V)\n"
 		"\n"
-		"void GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit(bool V)\n"
 		"GeoCal::RsmLowOrderPolynomial::ignore_igc_error_in_fit\n"
-		"If true, ignore igc errors in fit.\n"
+		"If true, ignore igc errors in fit.  \n"
 		"\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_parameter_line", _wrap_RsmLowOrderPolynomial__v_parameter_line, METH_O, "\n"
+		"_v_parameter_line(RsmLowOrderPolynomial self) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::RsmLowOrderPolynomial::parameter_line() const\n"
 		"GeoCal::RsmLowOrderPolynomial::parameter_line\n"
 		""},
 	 { "RsmLowOrderPolynomial__v_parameter_sample", _wrap_RsmLowOrderPolynomial__v_parameter_sample, METH_O, "\n"
+		"_v_parameter_sample(RsmLowOrderPolynomial self) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::RsmLowOrderPolynomial::parameter_sample() const\n"
 		"GeoCal::RsmLowOrderPolynomial::parameter_sample\n"
 		""},
 	 { "delete_RsmLowOrderPolynomial", _wrap_delete_RsmLowOrderPolynomial, METH_O, "\n"
+		"delete_RsmLowOrderPolynomial(RsmLowOrderPolynomial self)\n"
 		"\n"
-		"virtual GeoCal::RsmLowOrderPolynomial::~RsmLowOrderPolynomial()\n"
 		"GeoCal::RsmLowOrderPolynomial::~RsmLowOrderPolynomial\n"
 		""},
 	 { "RsmLowOrderPolynomial_swigregister", RsmLowOrderPolynomial_swigregister, METH_O, NULL},

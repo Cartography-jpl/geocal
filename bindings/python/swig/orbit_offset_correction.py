@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_offset_correction.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_offset_correction:
 _orbit_offset_correction.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_offset_correction.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,32 +145,32 @@ import geocal_swig.look_vector
 class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     r"""
 
-    This class gives an orbit that tries to correct errors in another
-    underlying orbit.
 
-    This uses a simple error model which captures a common set of orbit
-    errors.
+    This class gives an orbit that tries to correct errors in another underlying
+    orbit.  
 
-    A time dependent correction is added to the position of the orbit.
-    This correction supplies a correction at fixed time values. For times
-    in between, we interpolate the position correction.
+    This uses a simple error model which captures a common set of orbit errors.  
 
-    A time dependent correction is added to the spacecraft to Cartesian
-    inertial system. This correction supplies a yaw, pitch, and roll
-    correction at fixed time values. For times in between we interpolate
-    the quaternion correction. Note that in general the time points used
-    in the attitude correction do not match the time points used in the
-    position correction.
+    A time dependent correction is added to the position of the orbit. This
+    correction supplies a correction at fixed time values. For times in between, we
+    interpolate the position correction.  
 
-    The position offset is in meters. Right now, the attitude correction
-    is in arcseconds. We may change that.
+    A time dependent correction is added to the spacecraft to Cartesian inertial
+    system. This correction supplies a yaw, pitch, and roll correction at fixed time
+    values. For times in between we interpolate the quaternion correction. Note that
+    in general the time points used in the attitude correction do not match the time
+    points used in the position correction.  
 
-    The velocity is left unchanged.
+    The position offset is in meters. Right now, the attitude correction is in
+    arcseconds. We may change that.  
 
-    The underlying orbit should return a QuaternionOrbitData orbit data,
-    since this is currently the only type supported.
+    The velocity is left unchanged.  
 
-    C++ includes: orbit_offset_correction.h 
+    The underlying orbit should return a QuaternionOrbitData orbit data, since this
+    is currently the only type supported.  
+
+    C++ includes: orbit_offset_correction.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -175,16 +178,14 @@ class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
 
     def __init__(self, Orb_uncorr, Outside_is_error=False, Use_local_north_coordinate=False, Fit_position_x=True, Fit_position_y=True, Fit_position_z=True, Fit_yaw=True, Fit_pitch=True, Fit_roll=True):
         r"""
+        __init__(OrbitOffsetCorrection self, boost::shared_ptr< GeoCal::Orbit > const Orb_uncorr, bool Outside_is_error=False, bool Use_local_north_coordinate=False, bool Fit_position_x=True, bool Fit_position_y=True, bool Fit_position_z=True, bool Fit_yaw=True, bool Fit_pitch=True, bool Fit_roll=True) -> OrbitOffsetCorrection
 
-        OrbitOffsetCorrection::OrbitOffsetCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, bool
-        Outside_is_error=false, bool Use_local_north_coordinate=false, bool
-        Fit_position_x=true, bool Fit_position_y=true, bool
-        Fit_position_z=true, bool Fit_yaw=true, bool Fit_pitch=true, bool
-        Fit_roll=true)
         GeoCal::OrbitOffsetCorrection::OrbitOffsetCorrection
-        Constructor.
-        This has no time points for doing corrections, but you can add those
-        using insert_time_point. 
+        Constructor.  
+
+        This has no time points for doing corrections, but you can add those using
+        insert_time_point.  
+
         """
         _orbit_offset_correction.OrbitOffsetCorrection_swiginit(self, _orbit_offset_correction.new_OrbitOffsetCorrection(Orb_uncorr, Outside_is_error, Use_local_north_coordinate, Fit_position_x, Fit_position_y, Fit_position_z, Fit_yaw, Fit_pitch, Fit_roll))
     att_parm_to_match = _swig_new_instance_method(_orbit_offset_correction.OrbitOffsetCorrection_att_parm_to_match)

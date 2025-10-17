@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _vicar_argument.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _vicar_argument:
 _vicar_argument.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _vicar_argument.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,24 +140,24 @@ import geocal_swig.generic_object
 class VicarArgument(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides access to arguments passed by VICAR.
 
-    Note an important limitation of VICAR, you can only initialize the
-    argument handling once. This means that if you try to create multiple
-    VicarArgument objects, you'll trigger a TAE error when you try to
-    create the second object.
+    This provides access to arguments passed by VICAR.  
 
-    VICAR uses a somewhat unusual mechanism to pass arguments to a program
-    called from the TAE. Rather than putting the arguments on the command
-    line to appear in Argv, the arguments get passed down a pipe (usually
-    file logical 4) in a compressed format. I'm not sure why exactly it
-    does this, probably some historical artifact from when it was
-    developed on VMS. In any case, in order to fit into VICAR we need to
-    parse arguments the same way.
+    Note an important limitation of VICAR, you can only initialize the argument
+    handling once. This means that if you try to create multiple VicarArgument
+    objects, you'll trigger a TAE error when you try to create the second object.  
 
-    This class handles the arguments.
+    VICAR uses a somewhat unusual mechanism to pass arguments to a program called
+    from the TAE. Rather than putting the arguments on the command line to appear in
+    Argv, the arguments get passed down a pipe (usually file logical 4) in a
+    compressed format. I'm not sure why exactly it does this, probably some
+    historical artifact from when it was developed on VMS. In any case, in order to
+    fit into VICAR we need to parse arguments the same way.  
 
-    C++ includes: vicar_argument.h 
+    This class handles the arguments.  
+
+    C++ includes: vicar_argument.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -162,29 +165,30 @@ class VicarArgument(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, ARGC, copy_primary_input_label=False):
         r"""
+        __init__(VicarArgument self, int ARGC, bool copy_primary_input_label=False) -> VicarArgument
 
-        VicarArgument::VicarArgument(int Argc, char **Argv, bool copy_primary_input_label=false)
         GeoCal::VicarArgument::VicarArgument
-        Set up to parse VICAR arguments.
-        VICAR arguments are accessed by keywords. This isn't a bad interface,
-        but because we also want to support straight unix command line style
-        arguments, we have the VicarArgument interface in terms of index
-        number (first argument, second argument, etc.). Keyword_list gives the
-        list of keywords in order that we want.
+        Set up to parse VICAR arguments.  
 
-        VICAR has the convention that when creating a new file it
-        automatically copies over all of the labels from the "primary input"
-        - usually the first input file. The idea is that with old VICAR files
-        most of the time the output image would have same size, map
-        projection, etc. However, this doesn't fit well with the geocal usage
-        at all. Much of the time the output file doesn't have any relationship
-        to the input file. Also the label reading and writing happens in the
-        background anyways, so there isn't a lot gained by the defaults. This
-        can often cause problems, such as copying map projection data from an
-        input file to an output file that isn't map projected.
+        VICAR arguments are accessed by keywords. This isn't a bad interface, but
+        because we also want to support straight unix command line style arguments, we
+        have the VicarArgument interface in terms of index number (first argument,
+        second argument, etc.). Keyword_list gives the list of keywords in order that we
+        want.  
 
-        By default, we turn this copying off. You can get the old VICAR
-        behavior by setting Copy_primary_input_label to true. 
+        VICAR has the convention that when creating a new file it automatically copies
+        over all of the labels from the "primary
+        input" - usually the first input file. The idea is that with old VICAR files
+        most of the time the output image would have same size, map projection, etc.
+        However, this doesn't fit well with the geocal usage at all. Much of the time
+        the output file doesn't have any relationship to the input file. Also the label
+        reading and writing happens in the background anyways, so there isn't a lot
+        gained by the defaults. This can often cause problems, such as copying map
+        projection data from an input file to an output file that isn't map projected.  
+
+        By default, we turn this copying off. You can get the old VICAR behavior by
+        setting Copy_primary_input_label to true.  
+
         """
         _vicar_argument.VicarArgument_swiginit(self, _vicar_argument.new_VicarArgument(ARGC, copy_primary_input_label))
     write_out = _swig_new_instance_method(_vicar_argument.VicarArgument_write_out)

@@ -90,6 +90,7 @@ _igc_ray_caster.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _igc_ray_caster.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _igc_ray_caster.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -140,76 +141,71 @@ import geocal_swig.geocal_exception
 class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
     r"""
 
-    This class implements a RayCaster by using a ImageGroundConnection.
 
-    We get a significant speed increase by having a good initial guess at
-    the starting length of each ray when finding the intersection with the
-    surface.
+    This class implements a RayCaster by using a ImageGroundConnection.  
 
-    For a pushbroom camera, we can get a pretty good guess by making use
-    of the fact that the rays form the same camera line/sample are nearly
-    parallel from on orbit position to the next. For a forward pointing
-    camera, the rays from time t + epsilon will be above the rays from
-    time t. This means that we can get a good guess at the length of the
-    intersection of the ray at time t + epsilon by using the distance from
-    the camera position at time t + epsilon & the intersection at time t.
+    We get a significant speed increase by having a good initial guess at the
+    starting length of each ray when finding the intersection with the surface.  
 
-    We can improve the guess a bit by using not just one ray. For the
-    subpixel (sub_l, sub_s) of camera pixel (cam_l, cam_s), we get the
-    guess at the ray length by:
+    For a pushbroom camera, we can get a pretty good guess by making use of the fact
+    that the rays form the same camera line/sample are nearly parallel from on orbit
+    position to the next. For a forward pointing camera, the rays from time t +
+    epsilon will be above the rays from time t. This means that we can get a good
+    guess at the length of the intersection of the ray at time t + epsilon by using
+    the distance from the camera position at time t + epsilon & the intersection at
+    time t.  
 
-    ray_length = min(distance for pos(t + eps) from intersection at
-    (cam_l, cam_s - 1, sub_l, sub_s, t) (cam_l, cam_s , sub_l, sub_s, t)
-    (cam_l, cam_s + 1, sub_l, sub_s, t) (cam_l, cam_s , sub_l, sub_s, t +
-    eps)
+    We can improve the guess a bit by using not just one ray. For the subpixel
+    (sub_l, sub_s) of camera pixel (cam_l, cam_s), we get the guess at the ray
+    length by:  
 
-    There are a few complications: What do we do for the first line of
-    data, when data from time t has not been calculated.
+    ray_length = min(distance for pos(t + eps) from intersection at (cam_l, cam_s -
+    1, sub_l, sub_s, t) (cam_l, cam_s , sub_l, sub_s, t) (cam_l, cam_s + 1, sub_l,
+    sub_s, t) (cam_l, cam_s , sub_l, sub_s, t + eps)  
 
-    What do we do at the egdes of the camera, when cam_s - 1 or cam_s + 1
-    has not been calculated.
+    There are a few complications:  
 
-    For (1) we use the length of the ray that intersectes the WGS84 +
-    Max_height where Max_height is greater than any height we encounter in
-    the dem. This is guaranteed to give a ray length that will be above
-    the surface.
+    1.  What do we do for the first line of data, when data from time t has not been
+        calculated.  
+    2.  What do we do at the egdes of the camera, when cam_s - 1 or cam_s + 1 has
+        not been calculated.  
 
-    For(2), we just use the neighbors that are available.
+    For (1) we use the length of the ray that intersectes the WGS84 + Max_height
+    where Max_height is greater than any height we encounter in the dem. This is
+    guaranteed to give a ray length that will be above the surface.  
 
-    For aftward cameras, we just progress through the orbit in the
-    opposite order, starting with the last orbit position and working
-    backwards.
+    For(2), we just use the neighbors that are available.  
 
-    We assume that this holds for the ImageGroundConnection, which might
-    not be a push broom camera. We may need to generalize this class at
-    some point, but for now this is the assumption made.
+    For aftward cameras, we just progress through the orbit in the opposite order,
+    starting with the last orbit position and working backwards.  
 
-    We determine if we are forward or aftward by looking at the first
-    pixel of the first 2 lines. We do a intersection with the reference
-    ellipsoid, and if the point for line 1 is farther away from the
-    position and line 0 then we have a forward looking camera, otherwise
-    we have an aftward camera.
+    We assume that this holds for the ImageGroundConnection, which might not be a
+    push broom camera. We may need to generalize this class at some point, but for
+    now this is the assumption made.  
 
-    Note that this assumes that we continue pointing in the same
-    direction. This is not the case for something like AirMSPI running in
-    sweep mode (where we step through a number of camera angles), but for
-    now we just assume that whatever the first pointing is that we use is
-    the pointing that will be used for all lines.
+    We determine if we are forward or aftward by looking at the first pixel of the
+    first 2 lines. We do a intersection with the reference ellipsoid, and if the
+    point for line 1 is farther away from the position and line 0 then we have a
+    forward looking camera, otherwise we have an aftward camera.  
 
-    Note that we could relax the assumption that we are always going
-    forward or aftward in the future by doing a calculation like we do for
-    the initial determination of forward/aftward for each line. We could
-    then break the position up into segments one direction of the other,
-    going one way through forward and the other through aftward. But we
-    have not implemented this yet.
+    Note that this assumes that we continue pointing in the same direction. This is
+    *not* the case for something like AirMSPI running in sweep mode (where we step
+    through a number of camera angles), but for now we just assume that whatever the
+    first pointing is that we use is the pointing that will be used for all lines.  
 
-    We break the pixels up into the number of subpixels needed to cover
-    the desired Resolution of the results. This determination is done for
-    the first line, and we assume it holds for the full orbit. Again, we
-    could relax this if desired and calculate this for every line. But we
-    don't do that right now.
+    Note that we could relax the assumption that we are always going forward or
+    aftward in the future by doing a calculation like we do for the initial
+    determination of forward/aftward for each line. We could then break the position
+    up into segments one direction of the other, going one way through forward and
+    the other through aftward. But we have not implemented this yet.  
 
-    C++ includes: igc_ray_caster.h 
+    We break the pixels up into the number of subpixels needed to cover the desired
+    Resolution of the results. This determination is done for the first line, and we
+    assume it holds for the full orbit. Again, we could relax this if desired and
+    calculate this for every line. But we don't do that right now.  
+
+    C++ includes: igc_ray_caster.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -217,39 +213,34 @@ class IgcRayCaster(geocal_swig.ray_caster.RayCaster):
 
     def __init__(self, Igc, Number_line_framelet=1, Start_line=0, Number_line=-1, Number_integration_step=2, Resolution=100, Max_height=10e3, Start_sample=0, Number_sample=-1, Include_path_distance=False):
         r"""
+        __init__(IgcRayCaster self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Number_line_framelet=1, int Start_line=0, int Number_line=-1, int Number_integration_step=2, double Resolution=100, double Max_height=10e3, int Start_sample=0, int Number_sample=-1, bool Include_path_distance=False) -> IgcRayCaster
 
-        IgcRayCaster::IgcRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, int
-        Number_line_framelet=1, int Start_line=0, int Number_line=-1, int
-        Number_integration_step=2, double Resolution=100, double
-        Max_height=10e3, int Start_sample=0, int Number_sample=-1, bool
-        Include_path_distance=false)
         GeoCal::IgcRayCaster::IgcRayCaster
-        Constructor.
-        You can pass the starting line to use and the number of lines to
-        process, the default is to do the full range covered by the Igc. The
-        resolution is the desired accuracy, we use this both to figure out the
-        number of subpixels to use and the accuracy that we do the
-        intersection with the DEM. The Max_height should be larger than the
-        greatest height we will encounter in the Dem belonging to the Igc.
+        Constructor.  
 
-        We calculate the number of subpixels to use in the line and sample
-        direction from the Resolution argument. This sometimes leaves holes,
-        in particular if we are working with data where the pixel size varies
-        on the ground. You can reset these values after the fact if desired -
-        just set nsub_line and nsub_sample
+        You can pass the starting line to use and the number of lines to process, the
+        default is to do the full range covered by the Igc. The resolution is the
+        desired accuracy, we use this both to figure out the number of subpixels to use
+        and the accuracy that we do the intersection with the DEM. The Max_height should
+        be larger than the greatest height we will encounter in the Dem belonging to the
+        Igc.  
 
-        Note that in some cases you may want to control the exactly number of
-        subpixels. The easiest way to do this is to just first call this
-        constructor and let it figure out what it thinks the number of
-        subpixels should be, and then manually changing this (e.g., call
-        number_sub_line and number_sub_sample to set this).
+        We calculate the number of subpixels to use in the line and sample direction
+        from the Resolution argument. This sometimes leaves holes, in particular if we
+        are working with data where the pixel size varies on the ground. You can reset
+        these values after the fact if desired - just set nsub_line and nsub_sample  
 
-        For larger images, it might be more convenient to pass in start sample
-        and number of samples to process, the default is to do the full
-        camera.
+        Note that in some cases you may want to control the exactly number of subpixels.
+        The easiest way to do this is to just first call this constructor and let it
+        figure out what it thinks the number of subpixels should be, and then manually
+        changing this (e.g., call number_sub_line and number_sub_sample to set this).  
 
-        If you have Include_path_distance set to true, then we return an extra
-        entry in the result array that is the path distance. 
+        For larger images, it might be more convenient to pass in start sample and
+        number of samples to process, the default is to do the full camera.  
+
+        If you have Include_path_distance set to true, then we return an extra entry in
+        the result array that is the path distance.  
+
         """
         _igc_ray_caster.IgcRayCaster_swiginit(self, _igc_ray_caster.new_IgcRayCaster(Igc, Number_line_framelet, Start_line, Number_line, Number_integration_step, Resolution, Max_height, Start_sample, Number_sample, Include_path_distance))
     _v_number_sub_line = _swig_new_instance_method(_igc_ray_caster.IgcRayCaster__v_number_sub_line)

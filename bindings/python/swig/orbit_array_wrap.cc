@@ -8360,84 +8360,71 @@ SWIGINTERN PyObject *OrbitArray_EciTod_TimeJ2000_swiginit(PyObject *SWIGUNUSEDPA
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OrbitArray_EciTod_TimeAcs", _wrap_new_OrbitArray_EciTod_TimeAcs, METH_VARARGS, "\n"
+		"OrbitArray_EciTod_TimeAcs(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_EciTod_TimeAcs", _wrap_delete_OrbitArray_EciTod_TimeAcs, METH_O, "\n"
+		"delete_OrbitArray_EciTod_TimeAcs(OrbitArray_EciTod_TimeAcs self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_EciTod_TimeAcs_swigregister", OrbitArray_EciTod_TimeAcs_swigregister, METH_O, NULL},
 	 { "OrbitArray_EciTod_TimeAcs_swiginit", OrbitArray_EciTod_TimeAcs_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitArray_Eci_TimePgs", _wrap_new_OrbitArray_Eci_TimePgs, METH_VARARGS, "\n"
+		"OrbitArray_Eci_TimePgs(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_Eci_TimePgs", _wrap_delete_OrbitArray_Eci_TimePgs, METH_O, "\n"
+		"delete_OrbitArray_Eci_TimePgs(OrbitArray_Eci_TimePgs self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_Eci_TimePgs_swigregister", OrbitArray_Eci_TimePgs_swigregister, METH_O, NULL},
 	 { "OrbitArray_Eci_TimePgs_swiginit", OrbitArray_Eci_TimePgs_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitArray_Eci_TimeJ2000", _wrap_new_OrbitArray_Eci_TimeJ2000, METH_VARARGS, "\n"
+		"OrbitArray_Eci_TimeJ2000(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_Eci_TimeJ2000", _wrap_delete_OrbitArray_Eci_TimeJ2000, METH_O, "\n"
+		"delete_OrbitArray_Eci_TimeJ2000(OrbitArray_Eci_TimeJ2000 self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_Eci_TimeJ2000_swigregister", OrbitArray_Eci_TimeJ2000_swigregister, METH_O, NULL},
 	 { "OrbitArray_Eci_TimeJ2000_swiginit", OrbitArray_Eci_TimeJ2000_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitArray_EciTod_TimeJ2000", _wrap_new_OrbitArray_EciTod_TimeJ2000, METH_VARARGS, "\n"
+		"OrbitArray_EciTod_TimeJ2000(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_EciTod_TimeJ2000", _wrap_delete_OrbitArray_EciTod_TimeJ2000, METH_O, "\n"
+		"delete_OrbitArray_EciTod_TimeJ2000(OrbitArray_EciTod_TimeJ2000 self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_EciTod_TimeJ2000_swigregister", OrbitArray_EciTod_TimeJ2000_swigregister, METH_O, NULL},
@@ -8448,84 +8435,71 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OrbitArray_EciTod_TimeAcs", _wrap_new_OrbitArray_EciTod_TimeAcs, METH_VARARGS, "\n"
+		"OrbitArray_EciTod_TimeAcs(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_EciTod_TimeAcs", _wrap_delete_OrbitArray_EciTod_TimeAcs, METH_O, "\n"
+		"delete_OrbitArray_EciTod_TimeAcs(OrbitArray_EciTod_TimeAcs self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_EciTod_TimeAcs_swigregister", OrbitArray_EciTod_TimeAcs_swigregister, METH_O, NULL},
 	 { "OrbitArray_EciTod_TimeAcs_swiginit", OrbitArray_EciTod_TimeAcs_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitArray_Eci_TimePgs", _wrap_new_OrbitArray_Eci_TimePgs, METH_VARARGS, "\n"
+		"OrbitArray_Eci_TimePgs(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_Eci_TimePgs", _wrap_delete_OrbitArray_Eci_TimePgs, METH_O, "\n"
+		"delete_OrbitArray_Eci_TimePgs(OrbitArray_Eci_TimePgs self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_Eci_TimePgs_swigregister", OrbitArray_Eci_TimePgs_swigregister, METH_O, NULL},
 	 { "OrbitArray_Eci_TimePgs_swiginit", OrbitArray_Eci_TimePgs_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitArray_Eci_TimeJ2000", _wrap_new_OrbitArray_Eci_TimeJ2000, METH_VARARGS, "\n"
+		"OrbitArray_Eci_TimeJ2000(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_Eci_TimeJ2000", _wrap_delete_OrbitArray_Eci_TimeJ2000, METH_O, "\n"
+		"delete_OrbitArray_Eci_TimeJ2000(OrbitArray_Eci_TimeJ2000 self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_Eci_TimeJ2000_swigregister", OrbitArray_Eci_TimeJ2000_swigregister, METH_O, NULL},
 	 { "OrbitArray_Eci_TimeJ2000_swiginit", OrbitArray_Eci_TimeJ2000_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitArray_EciTod_TimeJ2000", _wrap_new_OrbitArray_EciTod_TimeJ2000, METH_VARARGS, "\n"
+		"OrbitArray_EciTod_TimeJ2000(BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True)\n"
 		"\n"
-		"GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<\n"
-		"double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const\n"
-		"blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >\n"
-		"&Att_quat, bool Att_from_sc_to_ref_frame=true, bool\n"
-		"Serialize_data=true)\n"
 		"GeoCal::OrbitArray::OrbitArray\n"
 		""},
 	 { "delete_OrbitArray_EciTod_TimeJ2000", _wrap_delete_OrbitArray_EciTod_TimeJ2000, METH_O, "\n"
+		"delete_OrbitArray_EciTod_TimeJ2000(OrbitArray_EciTod_TimeJ2000 self)\n"
 		"\n"
-		"virtual GeoCal::OrbitArray< PositionType, TimeCreatorType >::~OrbitArray()\n"
 		"GeoCal::OrbitArray::~OrbitArray\n"
 		""},
 	 { "OrbitArray_EciTod_TimeJ2000_swigregister", OrbitArray_EciTod_TimeJ2000_swigregister, METH_O, NULL},

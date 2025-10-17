@@ -6676,68 +6676,71 @@ SWIGINTERN PyObject *Covariance_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObjec
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Covariance", _wrap_new_Covariance, METH_NOARGS, "\n"
+		"new_Covariance() -> Covariance\n"
 		"\n"
-		"GeoCal::Covariance::Covariance()\n"
 		"GeoCal::Covariance::Covariance\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "Covariance_add", _wrap_Covariance_add, METH_VARARGS, "\n"
+		"Covariance_add(Covariance self, double x1, double x2)\n"
 		"\n"
-		"void GeoCal::Covariance::add(double x1, double x2)\n"
 		"GeoCal::Covariance::add\n"
-		"Add another pair to the running total.\n"
+		"Add another pair to the running total.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_count", _wrap_Covariance__v_count, METH_O, "\n"
+		"Covariance__v_count(Covariance self) -> int\n"
 		"\n"
-		"int GeoCal::Covariance::count() const\n"
 		"GeoCal::Covariance::count\n"
-		"Return number of pairs that have been added.\n"
+		"Return number of pairs that have been added.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_mean1", _wrap_Covariance__v_mean1, METH_O, "\n"
+		"Covariance__v_mean1(Covariance self) -> double\n"
 		"\n"
-		"double GeoCal::Covariance::mean1() const\n"
 		"GeoCal::Covariance::mean1\n"
-		"Return mean of first number. Returns 0 if count < 1.\n"
+		"Return mean of first number. Returns 0 if count < 1.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_mean2", _wrap_Covariance__v_mean2, METH_O, "\n"
+		"Covariance__v_mean2(Covariance self) -> double\n"
 		"\n"
-		"double GeoCal::Covariance::mean2() const\n"
 		"GeoCal::Covariance::mean2\n"
-		"Return mean of second number. Returns 0 if count < 1.\n"
+		"Return mean of second number. Returns 0 if count < 1.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_covariance", _wrap_Covariance__v_covariance, METH_O, "\n"
+		"Covariance__v_covariance(Covariance self) -> double\n"
 		"\n"
-		"double GeoCal::Covariance::covariance() const\n"
 		"GeoCal::Covariance::covariance\n"
-		"Return covariance between numbers. Returns 0 if count < 2.\n"
+		"Return covariance between numbers. Returns 0 if count < 2.  \n"
 		"\n"
 		""},
-	 { "Covariance___str__", _wrap_Covariance___str__, METH_O, NULL},
-	 { "delete_Covariance", _wrap_delete_Covariance, METH_O, NULL},
+	 { "Covariance___str__", _wrap_Covariance___str__, METH_O, "Covariance___str__(Covariance self) -> std::string"},
+	 { "delete_Covariance", _wrap_delete_Covariance, METH_O, "delete_Covariance(Covariance self)"},
 	 { "Covariance_swigregister", Covariance_swigregister, METH_O, NULL},
 	 { "Covariance_swiginit", Covariance_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -6746,68 +6749,71 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Covariance", _wrap_new_Covariance, METH_NOARGS, "\n"
+		"new_Covariance() -> Covariance\n"
 		"\n"
-		"GeoCal::Covariance::Covariance()\n"
 		"GeoCal::Covariance::Covariance\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "Covariance_add", _wrap_Covariance_add, METH_VARARGS, "\n"
+		"add(Covariance self, double x1, double x2)\n"
 		"\n"
-		"void GeoCal::Covariance::add(double x1, double x2)\n"
 		"GeoCal::Covariance::add\n"
-		"Add another pair to the running total.\n"
+		"Add another pair to the running total.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_count", _wrap_Covariance__v_count, METH_O, "\n"
+		"_v_count(Covariance self) -> int\n"
 		"\n"
-		"int GeoCal::Covariance::count() const\n"
 		"GeoCal::Covariance::count\n"
-		"Return number of pairs that have been added.\n"
+		"Return number of pairs that have been added.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_mean1", _wrap_Covariance__v_mean1, METH_O, "\n"
+		"_v_mean1(Covariance self) -> double\n"
 		"\n"
-		"double GeoCal::Covariance::mean1() const\n"
 		"GeoCal::Covariance::mean1\n"
-		"Return mean of first number. Returns 0 if count < 1.\n"
+		"Return mean of first number. Returns 0 if count < 1.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_mean2", _wrap_Covariance__v_mean2, METH_O, "\n"
+		"_v_mean2(Covariance self) -> double\n"
 		"\n"
-		"double GeoCal::Covariance::mean2() const\n"
 		"GeoCal::Covariance::mean2\n"
-		"Return mean of second number. Returns 0 if count < 1.\n"
+		"Return mean of second number. Returns 0 if count < 1.  \n"
 		"\n"
 		""},
 	 { "Covariance__v_covariance", _wrap_Covariance__v_covariance, METH_O, "\n"
+		"_v_covariance(Covariance self) -> double\n"
 		"\n"
-		"double GeoCal::Covariance::covariance() const\n"
 		"GeoCal::Covariance::covariance\n"
-		"Return covariance between numbers. Returns 0 if count < 2.\n"
+		"Return covariance between numbers. Returns 0 if count < 2.  \n"
 		"\n"
 		""},
-	 { "Covariance___str__", _wrap_Covariance___str__, METH_O, NULL},
-	 { "delete_Covariance", _wrap_delete_Covariance, METH_O, NULL},
+	 { "Covariance___str__", _wrap_Covariance___str__, METH_O, "__str__(Covariance self) -> std::string"},
+	 { "delete_Covariance", _wrap_delete_Covariance, METH_O, "delete_Covariance(Covariance self)"},
 	 { "Covariance_swigregister", Covariance_swigregister, METH_O, NULL},
 	 { "Covariance_swiginit", Covariance_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

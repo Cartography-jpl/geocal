@@ -7124,69 +7124,78 @@ SWIGINTERN PyObject *RsmDirectCovariance_swigregister(PyObject *SWIGUNUSEDPARM(s
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RsmDirectCovariance_base_tre_string", _wrap_RsmDirectCovariance_base_tre_string, METH_O, "\n"
+		"RsmDirectCovariance_base_tre_string(RsmDirectCovariance self) -> std::string\n"
 		"\n"
-		"std::string RsmDirectCovariance::base_tre_string() const\n"
 		"GeoCal::RsmDirectCovariance::base_tre_string\n"
-		"Write the part of the TRE string for the image identification, RSM\n"
-		"support data edition, and triangulation_id.\n"
+		"Write the part of the TRE string for the image identification, RSM support data\n"
+		"edition, and triangulation_id.  \n"
 		"\n"
 		""},
 	 { "RsmDirectCovariance_base_read_tre_string", _wrap_RsmDirectCovariance_base_read_tre_string, METH_VARARGS, "\n"
+		"RsmDirectCovariance_base_read_tre_string(RsmDirectCovariance self, istream In)\n"
 		"\n"
-		"void RsmDirectCovariance::base_read_tre_string(std::istream &In)\n"
 		"GeoCal::RsmDirectCovariance::base_read_tre_string\n"
 		""},
 	 { "RsmDirectCovariance__v_image_identifier", _wrap_RsmDirectCovariance__v_image_identifier, METH_VARARGS, "\n"
+		"RsmDirectCovariance__v_image_identifier(RsmDirectCovariance self) -> std::string\n"
+		"RsmDirectCovariance__v_image_identifier(RsmDirectCovariance self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmDirectCovariance::image_identifier\n"
 		""},
 	 { "RsmDirectCovariance__v_rsm_support_data_edition", _wrap_RsmDirectCovariance__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"RsmDirectCovariance__v_rsm_support_data_edition(RsmDirectCovariance self) -> std::string\n"
+		"RsmDirectCovariance__v_rsm_support_data_edition(RsmDirectCovariance self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmDirectCovariance::rsm_support_data_edition\n"
 		""},
 	 { "RsmDirectCovariance__v_triangulation_id", _wrap_RsmDirectCovariance__v_triangulation_id, METH_VARARGS, "\n"
+		"RsmDirectCovariance__v_triangulation_id(RsmDirectCovariance self) -> std::string\n"
+		"RsmDirectCovariance__v_triangulation_id(RsmDirectCovariance self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::triangulation_id(const std::string &V)\n"
 		"GeoCal::RsmDirectCovariance::triangulation_id\n"
 		""},
 	 { "RsmDirectCovariance__v_naif_code", _wrap_RsmDirectCovariance__v_naif_code, METH_VARARGS, "\n"
+		"RsmDirectCovariance__v_naif_code(RsmDirectCovariance self) -> int\n"
+		"RsmDirectCovariance__v_naif_code(RsmDirectCovariance self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmDirectCovariance::naif_code(int Naif_code)=0\n"
 		"GeoCal::RsmDirectCovariance::naif_code\n"
-		"Set the NAIF code for the planet/body we are working with.\n"
-		"Note that the NITF TRE structure does not have a place to store the\n"
-		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
-		"for something like Mars, we have the NAIF code set to earth. We need\n"
-		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"Set the NAIF code for the planet/body we are working with.  \n"
 		"\n"
-		"This is not a problem for boost serialization (which keeps the NAIF\n"
-		"code), just for NITF TRE. \n"
+		"Note that the NITF TRE structure does not have a place to store the NAIF code,\n"
+		"it implicitly assumes earth. So when we read a TRE, even for something like\n"
+		"Mars, we have the NAIF code set to earth. We need to update this with other\n"
+		"metadata (e.g. TARGET_NAME in PDS label).  \n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF code), just\n"
+		"for NITF TRE.  \n"
+		"\n"
 		""},
-	 { "RsmDirectCovariance___str__", _wrap_RsmDirectCovariance___str__, METH_O, NULL},
+	 { "RsmDirectCovariance___str__", _wrap_RsmDirectCovariance___str__, METH_O, "RsmDirectCovariance___str__(RsmDirectCovariance self) -> std::string"},
 	 { "delete_RsmDirectCovariance", _wrap_delete_RsmDirectCovariance, METH_O, "\n"
+		"delete_RsmDirectCovariance(RsmDirectCovariance self)\n"
 		"\n"
-		"virtual GeoCal::RsmDirectCovariance::~RsmDirectCovariance()\n"
 		"GeoCal::RsmDirectCovariance::~RsmDirectCovariance\n"
 		""},
 	 { "RsmDirectCovariance_swigregister", RsmDirectCovariance_swigregister, METH_O, NULL},
@@ -7196,69 +7205,78 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RsmDirectCovariance_base_tre_string", _wrap_RsmDirectCovariance_base_tre_string, METH_O, "\n"
+		"base_tre_string(RsmDirectCovariance self) -> std::string\n"
 		"\n"
-		"std::string RsmDirectCovariance::base_tre_string() const\n"
 		"GeoCal::RsmDirectCovariance::base_tre_string\n"
-		"Write the part of the TRE string for the image identification, RSM\n"
-		"support data edition, and triangulation_id.\n"
+		"Write the part of the TRE string for the image identification, RSM support data\n"
+		"edition, and triangulation_id.  \n"
 		"\n"
 		""},
 	 { "RsmDirectCovariance_base_read_tre_string", _wrap_RsmDirectCovariance_base_read_tre_string, METH_VARARGS, "\n"
+		"base_read_tre_string(RsmDirectCovariance self, istream In)\n"
 		"\n"
-		"void RsmDirectCovariance::base_read_tre_string(std::istream &In)\n"
 		"GeoCal::RsmDirectCovariance::base_read_tre_string\n"
 		""},
 	 { "RsmDirectCovariance__v_image_identifier", _wrap_RsmDirectCovariance__v_image_identifier, METH_VARARGS, "\n"
+		"_v_image_identifier(RsmDirectCovariance self) -> std::string\n"
+		"_v_image_identifier(RsmDirectCovariance self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmDirectCovariance::image_identifier\n"
 		""},
 	 { "RsmDirectCovariance__v_rsm_support_data_edition", _wrap_RsmDirectCovariance__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"_v_rsm_support_data_edition(RsmDirectCovariance self) -> std::string\n"
+		"_v_rsm_support_data_edition(RsmDirectCovariance self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmDirectCovariance::rsm_support_data_edition\n"
 		""},
 	 { "RsmDirectCovariance__v_triangulation_id", _wrap_RsmDirectCovariance__v_triangulation_id, METH_VARARGS, "\n"
+		"_v_triangulation_id(RsmDirectCovariance self) -> std::string\n"
+		"_v_triangulation_id(RsmDirectCovariance self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovariance::triangulation_id(const std::string &V)\n"
 		"GeoCal::RsmDirectCovariance::triangulation_id\n"
 		""},
 	 { "RsmDirectCovariance__v_naif_code", _wrap_RsmDirectCovariance__v_naif_code, METH_VARARGS, "\n"
+		"_v_naif_code(RsmDirectCovariance self) -> int\n"
+		"_v_naif_code(RsmDirectCovariance self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmDirectCovariance::naif_code(int Naif_code)=0\n"
 		"GeoCal::RsmDirectCovariance::naif_code\n"
-		"Set the NAIF code for the planet/body we are working with.\n"
-		"Note that the NITF TRE structure does not have a place to store the\n"
-		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
-		"for something like Mars, we have the NAIF code set to earth. We need\n"
-		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"Set the NAIF code for the planet/body we are working with.  \n"
 		"\n"
-		"This is not a problem for boost serialization (which keeps the NAIF\n"
-		"code), just for NITF TRE. \n"
+		"Note that the NITF TRE structure does not have a place to store the NAIF code,\n"
+		"it implicitly assumes earth. So when we read a TRE, even for something like\n"
+		"Mars, we have the NAIF code set to earth. We need to update this with other\n"
+		"metadata (e.g. TARGET_NAME in PDS label).  \n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF code), just\n"
+		"for NITF TRE.  \n"
+		"\n"
 		""},
-	 { "RsmDirectCovariance___str__", _wrap_RsmDirectCovariance___str__, METH_O, NULL},
+	 { "RsmDirectCovariance___str__", _wrap_RsmDirectCovariance___str__, METH_O, "__str__(RsmDirectCovariance self) -> std::string"},
 	 { "delete_RsmDirectCovariance", _wrap_delete_RsmDirectCovariance, METH_O, "\n"
+		"delete_RsmDirectCovariance(RsmDirectCovariance self)\n"
 		"\n"
-		"virtual GeoCal::RsmDirectCovariance::~RsmDirectCovariance()\n"
 		"GeoCal::RsmDirectCovariance::~RsmDirectCovariance\n"
 		""},
 	 { "RsmDirectCovariance_swigregister", RsmDirectCovariance_swigregister, METH_O, NULL},

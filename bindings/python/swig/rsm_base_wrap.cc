@@ -9013,176 +9013,184 @@ SWIGINTERN PyObject *RsmBase_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObje
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "RsmBase___str__", _wrap_RsmBase___str__, METH_O, NULL},
+	 { "RsmBase___str__", _wrap_RsmBase___str__, METH_O, "RsmBase___str__(RsmBase self) -> std::string"},
 	 { "RsmBase_clone", _wrap_RsmBase_clone, METH_O, "\n"
+		"RsmBase_clone(RsmBase self) -> boost::shared_ptr< GeoCal::RsmBase >\n"
 		"\n"
-		"virtual boost::shared_ptr< RsmBase > GeoCal::RsmBase::clone() const =0\n"
 		"GeoCal::RsmBase::clone\n"
 		""},
 	 { "RsmBase_image_coordinate", _wrap_RsmBase_image_coordinate, METH_VARARGS, "\n"
+		"RsmBase_image_coordinate(RsmBase self, double X, double Y, double Z) -> ImageCoordinate\n"
+		"RsmBase_image_coordinate(RsmBase self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"RsmBase_image_coordinate(RsmBase self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_3\n"
+		"RsmBase_image_coordinate(RsmBase self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_4\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::RsmBase::image_coordinate(double X, double Y, double Z) const =0\n"
 		"GeoCal::RsmBase::image_coordinate\n"
 		""},
 	 { "RsmBase_image_coordinate_jacobian", _wrap_RsmBase_image_coordinate_jacobian, METH_VARARGS, "\n"
+		"RsmBase_image_coordinate_jacobian(RsmBase self, double X, double Y, double Z) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::RsmBase::image_coordinate_jacobian(double X, double Y, double Z) const =0\n"
 		"GeoCal::RsmBase::image_coordinate_jacobian\n"
 		""},
 	 { "RsmBase_initial_guess", _wrap_RsmBase_initial_guess, METH_VARARGS, "\n"
+		"RsmBase_initial_guess(RsmBase self, double Line, double Sample, double Z, double & X_guess, double & Y_guess)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::initial_guess(double Line, double Sample, double Z, double &X_guess, double\n"
-		"&Y_guess) const =0\n"
 		"GeoCal::RsmBase::initial_guess\n"
-		"Initial guess to use when inverting the ground to image function.\n"
+		"Initial guess to use when inverting the ground to image function.  \n"
 		"\n"
 		""},
 	 { "RsmBase_initial_guess_z", _wrap_RsmBase_initial_guess_z, METH_VARARGS, "\n"
+		"RsmBase_initial_guess_z(RsmBase self, double Line, double Sample) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::initial_guess_z(double Line, double Sample) const =0\n"
 		"GeoCal::RsmBase::initial_guess_z\n"
-		"Initial guess at Z, if we need to find that also.\n"
+		"Initial guess at Z, if we need to find that also.  \n"
 		"\n"
 		""},
 	 { "RsmBase_fit", _wrap_RsmBase_fit, METH_VARARGS, "\n"
+		"RsmBase_fit(RsmBase self, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height, int Min_line, int Max_line, int Min_sample, int Max_sample)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height, int Min_line, int Max_line, int\n"
-		"Min_sample, int Max_sample)=0\n"
 		"GeoCal::RsmBase::fit\n"
-		"Fit that approximates the calculation done by a ImageGroundConnection.\n"
-		"To support sections, you can pass in a restricted number of\n"
-		"line/samples to fit over. \n"
+		"Fit that approximates the calculation done by a ImageGroundConnection.  \n"
+		"\n"
+		"To support sections, you can pass in a restricted number of line/samples to fit\n"
+		"over.  \n"
+		"\n"
 		""},
 	 { "RsmBase_fit_data", _wrap_RsmBase_fit_data, METH_VARARGS, "\n"
+		"RsmBase_fit_data(RsmBase self, BlitzArray_double_2 Data, int Min_line, int Max_line, int Min_sample, int Max_sample)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::fit_data(const blitz::Array< double, 2 > &Data, int Min_line, int Max_line,\n"
-		"int Min_sample, int Max_sample)=0\n"
 		"GeoCal::RsmBase::fit_data\n"
-		"Variation of fit that takes data generated by generate_data.\n"
-		"This is intended for use with adaptive strategies such as varying the\n"
-		"number of sections to meet a certain tolerance. Note that this does\n"
-		"not call fill_in_ground_domain_vertex (since we don't have the Igc in\n"
-		"this call). You should call fill_in_ground_domain_vertex separately\n"
-		"once you are happy with the fit. \n"
+		"Variation of fit that takes data generated by generate_data.  \n"
+		"\n"
+		"This is intended for use with adaptive strategies such as varying the number of\n"
+		"sections to meet a certain tolerance. Note that this does *not* call\n"
+		"fill_in_ground_domain_vertex (since we don't have the Igc in this call). You\n"
+		"should call fill_in_ground_domain_vertex separately once you are happy with the\n"
+		"fit.  \n"
+		"\n"
 		""},
 	 { "RsmBase_generate_data", _wrap_RsmBase_generate_data, METH_VARARGS, "\n"
+		"RsmBase_generate_data(ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_x, double Max_x, double Min_y, double Max_y, double Min_z, double Max_z, int Numx, int Numy, int Numz) -> BlitzArray_double_4\n"
 		"\n"
-		"blitz::Array< double, 4 > RsmBase::generate_data(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_x, double Max_x, double Min_y, double Max_y, double Min_z,\n"
-		"double Max_z, int Numx, int Numy, int Numz)\n"
 		"GeoCal::RsmBase::generate_data\n"
 		""},
 	 { "RsmBase_set_z_range", _wrap_RsmBase_set_z_range, METH_VARARGS, "\n"
+		"RsmBase_set_z_range(RsmBase self, double Z_min, double Z_max)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::set_z_range(double Z_min, double Z_max)\n"
 		"GeoCal::RsmBase::set_z_range\n"
-		"Based on examples, the MSP library seems to prefer that all sections\n"
-		"have the same z start and delta.\n"
-		"This isn't actually required from the RSM standard, but seems to be\n"
-		"one of the those \"unstated\" requirements. This gives access for\n"
-		"RsmMultiSection to pass the z values to use, rather than computing\n"
-		"this in fit. \n"
+		"Based on examples, the MSP library seems to prefer that all sections have the\n"
+		"same z start and delta.  \n"
+		"\n"
+		"This isn't actually required from the RSM standard, but seems to be one of the\n"
+		"those \"unstated\" requirements. This gives access for RsmMultiSection to pass\n"
+		"the z values to use, rather than computing this in fit.  \n"
+		"\n"
 		""},
 	 { "RsmBase_check_zero_crossing", _wrap_RsmBase_check_zero_crossing, METH_VARARGS, "\n"
+		"RsmBase_check_zero_crossing(RsmBase self, double Grid_spacing=0.01) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RsmBase::check_zero_crossing(double Grid_spacing=0.01) const =0\n"
 		"GeoCal::RsmBase::check_zero_crossing\n"
-		"Check for zero crossing in the denominator, i.e., do we have poles in\n"
-		"our fit.\n"
+		"Check for zero crossing in the denominator, i.e., do we have poles in our fit.  \n"
 		"\n"
 		""},
 	 { "RsmBase__v_min_line", _wrap_RsmBase__v_min_line, METH_O, "\n"
+		"RsmBase__v_min_line(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::min_line() const =0\n"
 		"GeoCal::RsmBase::min_line\n"
 		""},
 	 { "RsmBase__v_max_line", _wrap_RsmBase__v_max_line, METH_O, "\n"
+		"RsmBase__v_max_line(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::max_line() const =0\n"
 		"GeoCal::RsmBase::max_line\n"
 		""},
 	 { "RsmBase__v_min_sample", _wrap_RsmBase__v_min_sample, METH_O, "\n"
+		"RsmBase__v_min_sample(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::min_sample() const =0\n"
 		"GeoCal::RsmBase::min_sample\n"
 		""},
 	 { "RsmBase__v_max_sample", _wrap_RsmBase__v_max_sample, METH_O, "\n"
+		"RsmBase__v_max_sample(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::max_sample() const =0\n"
 		"GeoCal::RsmBase::max_sample\n"
 		""},
 	 { "RsmBase__v_min_x", _wrap_RsmBase__v_min_x, METH_O, "\n"
+		"RsmBase__v_min_x(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::min_x() const =0\n"
 		"GeoCal::RsmBase::min_x\n"
 		""},
 	 { "RsmBase__v_max_x", _wrap_RsmBase__v_max_x, METH_O, "\n"
+		"RsmBase__v_max_x(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::max_x() const =0\n"
 		"GeoCal::RsmBase::max_x\n"
 		""},
 	 { "RsmBase__v_min_y", _wrap_RsmBase__v_min_y, METH_O, "\n"
+		"RsmBase__v_min_y(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::min_y() const =0\n"
 		"GeoCal::RsmBase::min_y\n"
 		""},
 	 { "RsmBase__v_max_y", _wrap_RsmBase__v_max_y, METH_O, "\n"
+		"RsmBase__v_max_y(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::max_y() const =0\n"
 		"GeoCal::RsmBase::max_y\n"
 		""},
 	 { "RsmBase__v_min_z", _wrap_RsmBase__v_min_z, METH_O, "\n"
+		"RsmBase__v_min_z(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::min_z() const =0\n"
 		"GeoCal::RsmBase::min_z\n"
 		""},
 	 { "RsmBase__v_max_z", _wrap_RsmBase__v_max_z, METH_O, "\n"
+		"RsmBase__v_max_z(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::max_z() const =0\n"
 		"GeoCal::RsmBase::max_z\n"
 		""},
 	 { "RsmBase__v_image_identifier", _wrap_RsmBase__v_image_identifier, METH_VARARGS, "\n"
+		"RsmBase__v_image_identifier(RsmBase self) -> std::string\n"
+		"RsmBase__v_image_identifier(RsmBase self, std::string const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmBase::image_identifier\n"
 		""},
 	 { "RsmBase__v_rsm_support_data_edition", _wrap_RsmBase__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"RsmBase__v_rsm_support_data_edition(RsmBase self) -> std::string\n"
+		"RsmBase__v_rsm_support_data_edition(RsmBase self, std::string const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmBase::rsm_support_data_edition\n"
 		""},
 	 { "RsmBase__v_row_section_number", _wrap_RsmBase__v_row_section_number, METH_VARARGS, "\n"
+		"RsmBase__v_row_section_number(RsmBase self) -> int\n"
+		"RsmBase__v_row_section_number(RsmBase self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::row_section_number(int UNUSED(V))\n"
 		"GeoCal::RsmBase::row_section_number\n"
 		""},
 	 { "RsmBase__v_col_section_number", _wrap_RsmBase__v_col_section_number, METH_VARARGS, "\n"
+		"RsmBase__v_col_section_number(RsmBase self) -> int\n"
+		"RsmBase__v_col_section_number(RsmBase self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::col_section_number(int UNUSED(V))\n"
 		"GeoCal::RsmBase::col_section_number\n"
 		""},
 	 { "delete_RsmBase", _wrap_delete_RsmBase, METH_O, "\n"
+		"delete_RsmBase(RsmBase self)\n"
 		"\n"
-		"virtual GeoCal::RsmBase::~RsmBase()\n"
 		"GeoCal::RsmBase::~RsmBase\n"
 		""},
 	 { "RsmBase_swigregister", RsmBase_swigregister, METH_O, NULL},
@@ -9192,176 +9200,184 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "RsmBase___str__", _wrap_RsmBase___str__, METH_O, NULL},
+	 { "RsmBase___str__", _wrap_RsmBase___str__, METH_O, "__str__(RsmBase self) -> std::string"},
 	 { "RsmBase_clone", _wrap_RsmBase_clone, METH_O, "\n"
+		"clone(RsmBase self) -> boost::shared_ptr< GeoCal::RsmBase >\n"
 		"\n"
-		"virtual boost::shared_ptr< RsmBase > GeoCal::RsmBase::clone() const =0\n"
 		"GeoCal::RsmBase::clone\n"
 		""},
 	 { "RsmBase_image_coordinate", _wrap_RsmBase_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(RsmBase self, double X, double Y, double Z) -> ImageCoordinate\n"
+		"image_coordinate(RsmBase self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"image_coordinate(RsmBase self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_3\n"
+		"image_coordinate(RsmBase self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_4\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::RsmBase::image_coordinate(double X, double Y, double Z) const =0\n"
 		"GeoCal::RsmBase::image_coordinate\n"
 		""},
 	 { "RsmBase_image_coordinate_jacobian", _wrap_RsmBase_image_coordinate_jacobian, METH_VARARGS, "\n"
+		"image_coordinate_jacobian(RsmBase self, double X, double Y, double Z) -> BlitzArray_double_2\n"
 		"\n"
-		"virtual blitz::Array< double, 2 > GeoCal::RsmBase::image_coordinate_jacobian(double X, double Y, double Z) const =0\n"
 		"GeoCal::RsmBase::image_coordinate_jacobian\n"
 		""},
 	 { "RsmBase_initial_guess", _wrap_RsmBase_initial_guess, METH_VARARGS, "\n"
+		"initial_guess(RsmBase self, double Line, double Sample, double Z, double & X_guess, double & Y_guess)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::initial_guess(double Line, double Sample, double Z, double &X_guess, double\n"
-		"&Y_guess) const =0\n"
 		"GeoCal::RsmBase::initial_guess\n"
-		"Initial guess to use when inverting the ground to image function.\n"
+		"Initial guess to use when inverting the ground to image function.  \n"
 		"\n"
 		""},
 	 { "RsmBase_initial_guess_z", _wrap_RsmBase_initial_guess_z, METH_VARARGS, "\n"
+		"initial_guess_z(RsmBase self, double Line, double Sample) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::initial_guess_z(double Line, double Sample) const =0\n"
 		"GeoCal::RsmBase::initial_guess_z\n"
-		"Initial guess at Z, if we need to find that also.\n"
+		"Initial guess at Z, if we need to find that also.  \n"
 		"\n"
 		""},
 	 { "RsmBase_fit", _wrap_RsmBase_fit, METH_VARARGS, "\n"
+		"fit(RsmBase self, ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_height, double Max_height, int Min_line, int Max_line, int Min_sample, int Max_sample)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::fit(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_height, double Max_height, int Min_line, int Max_line, int\n"
-		"Min_sample, int Max_sample)=0\n"
 		"GeoCal::RsmBase::fit\n"
-		"Fit that approximates the calculation done by a ImageGroundConnection.\n"
-		"To support sections, you can pass in a restricted number of\n"
-		"line/samples to fit over. \n"
+		"Fit that approximates the calculation done by a ImageGroundConnection.  \n"
+		"\n"
+		"To support sections, you can pass in a restricted number of line/samples to fit\n"
+		"over.  \n"
+		"\n"
 		""},
 	 { "RsmBase_fit_data", _wrap_RsmBase_fit_data, METH_VARARGS, "\n"
+		"fit_data(RsmBase self, BlitzArray_double_2 Data, int Min_line, int Max_line, int Min_sample, int Max_sample)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::fit_data(const blitz::Array< double, 2 > &Data, int Min_line, int Max_line,\n"
-		"int Min_sample, int Max_sample)=0\n"
 		"GeoCal::RsmBase::fit_data\n"
-		"Variation of fit that takes data generated by generate_data.\n"
-		"This is intended for use with adaptive strategies such as varying the\n"
-		"number of sections to meet a certain tolerance. Note that this does\n"
-		"not call fill_in_ground_domain_vertex (since we don't have the Igc in\n"
-		"this call). You should call fill_in_ground_domain_vertex separately\n"
-		"once you are happy with the fit. \n"
+		"Variation of fit that takes data generated by generate_data.  \n"
+		"\n"
+		"This is intended for use with adaptive strategies such as varying the number of\n"
+		"sections to meet a certain tolerance. Note that this does *not* call\n"
+		"fill_in_ground_domain_vertex (since we don't have the Igc in this call). You\n"
+		"should call fill_in_ground_domain_vertex separately once you are happy with the\n"
+		"fit.  \n"
+		"\n"
 		""},
 	 { "RsmBase_generate_data", _wrap_RsmBase_generate_data, METH_VARARGS, "\n"
+		"generate_data(ImageGroundConnection Igc, CoordinateConverter Cconv, double Min_x, double Max_x, double Min_y, double Max_y, double Min_z, double Max_z, int Numx, int Numy, int Numz) -> BlitzArray_double_4\n"
 		"\n"
-		"blitz::Array< double, 4 > RsmBase::generate_data(const ImageGroundConnection &Igc, const CoordinateConverter &Cconv,\n"
-		"double Min_x, double Max_x, double Min_y, double Max_y, double Min_z,\n"
-		"double Max_z, int Numx, int Numy, int Numz)\n"
 		"GeoCal::RsmBase::generate_data\n"
 		""},
 	 { "RsmBase_set_z_range", _wrap_RsmBase_set_z_range, METH_VARARGS, "\n"
+		"set_z_range(RsmBase self, double Z_min, double Z_max)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::set_z_range(double Z_min, double Z_max)\n"
 		"GeoCal::RsmBase::set_z_range\n"
-		"Based on examples, the MSP library seems to prefer that all sections\n"
-		"have the same z start and delta.\n"
-		"This isn't actually required from the RSM standard, but seems to be\n"
-		"one of the those \"unstated\" requirements. This gives access for\n"
-		"RsmMultiSection to pass the z values to use, rather than computing\n"
-		"this in fit. \n"
+		"Based on examples, the MSP library seems to prefer that all sections have the\n"
+		"same z start and delta.  \n"
+		"\n"
+		"This isn't actually required from the RSM standard, but seems to be one of the\n"
+		"those \"unstated\" requirements. This gives access for RsmMultiSection to pass\n"
+		"the z values to use, rather than computing this in fit.  \n"
+		"\n"
 		""},
 	 { "RsmBase_check_zero_crossing", _wrap_RsmBase_check_zero_crossing, METH_VARARGS, "\n"
+		"check_zero_crossing(RsmBase self, double Grid_spacing=0.01) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RsmBase::check_zero_crossing(double Grid_spacing=0.01) const =0\n"
 		"GeoCal::RsmBase::check_zero_crossing\n"
-		"Check for zero crossing in the denominator, i.e., do we have poles in\n"
-		"our fit.\n"
+		"Check for zero crossing in the denominator, i.e., do we have poles in our fit.  \n"
 		"\n"
 		""},
 	 { "RsmBase__v_min_line", _wrap_RsmBase__v_min_line, METH_O, "\n"
+		"_v_min_line(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::min_line() const =0\n"
 		"GeoCal::RsmBase::min_line\n"
 		""},
 	 { "RsmBase__v_max_line", _wrap_RsmBase__v_max_line, METH_O, "\n"
+		"_v_max_line(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::max_line() const =0\n"
 		"GeoCal::RsmBase::max_line\n"
 		""},
 	 { "RsmBase__v_min_sample", _wrap_RsmBase__v_min_sample, METH_O, "\n"
+		"_v_min_sample(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::min_sample() const =0\n"
 		"GeoCal::RsmBase::min_sample\n"
 		""},
 	 { "RsmBase__v_max_sample", _wrap_RsmBase__v_max_sample, METH_O, "\n"
+		"_v_max_sample(RsmBase self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RsmBase::max_sample() const =0\n"
 		"GeoCal::RsmBase::max_sample\n"
 		""},
 	 { "RsmBase__v_min_x", _wrap_RsmBase__v_min_x, METH_O, "\n"
+		"_v_min_x(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::min_x() const =0\n"
 		"GeoCal::RsmBase::min_x\n"
 		""},
 	 { "RsmBase__v_max_x", _wrap_RsmBase__v_max_x, METH_O, "\n"
+		"_v_max_x(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::max_x() const =0\n"
 		"GeoCal::RsmBase::max_x\n"
 		""},
 	 { "RsmBase__v_min_y", _wrap_RsmBase__v_min_y, METH_O, "\n"
+		"_v_min_y(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::min_y() const =0\n"
 		"GeoCal::RsmBase::min_y\n"
 		""},
 	 { "RsmBase__v_max_y", _wrap_RsmBase__v_max_y, METH_O, "\n"
+		"_v_max_y(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::max_y() const =0\n"
 		"GeoCal::RsmBase::max_y\n"
 		""},
 	 { "RsmBase__v_min_z", _wrap_RsmBase__v_min_z, METH_O, "\n"
+		"_v_min_z(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::min_z() const =0\n"
 		"GeoCal::RsmBase::min_z\n"
 		""},
 	 { "RsmBase__v_max_z", _wrap_RsmBase__v_max_z, METH_O, "\n"
+		"_v_max_z(RsmBase self) -> double\n"
 		"\n"
-		"virtual double GeoCal::RsmBase::max_z() const =0\n"
 		"GeoCal::RsmBase::max_z\n"
 		""},
 	 { "RsmBase__v_image_identifier", _wrap_RsmBase__v_image_identifier, METH_VARARGS, "\n"
+		"_v_image_identifier(RsmBase self) -> std::string\n"
+		"_v_image_identifier(RsmBase self, std::string const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmBase::image_identifier\n"
 		""},
 	 { "RsmBase__v_rsm_support_data_edition", _wrap_RsmBase__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"_v_rsm_support_data_edition(RsmBase self) -> std::string\n"
+		"_v_rsm_support_data_edition(RsmBase self, std::string const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmBase::rsm_support_data_edition\n"
 		""},
 	 { "RsmBase__v_row_section_number", _wrap_RsmBase__v_row_section_number, METH_VARARGS, "\n"
+		"_v_row_section_number(RsmBase self) -> int\n"
+		"_v_row_section_number(RsmBase self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::row_section_number(int UNUSED(V))\n"
 		"GeoCal::RsmBase::row_section_number\n"
 		""},
 	 { "RsmBase__v_col_section_number", _wrap_RsmBase__v_col_section_number, METH_VARARGS, "\n"
+		"_v_col_section_number(RsmBase self) -> int\n"
+		"_v_col_section_number(RsmBase self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmBase::col_section_number(int UNUSED(V))\n"
 		"GeoCal::RsmBase::col_section_number\n"
 		""},
 	 { "delete_RsmBase", _wrap_delete_RsmBase, METH_O, "\n"
+		"delete_RsmBase(RsmBase self)\n"
 		"\n"
-		"virtual GeoCal::RsmBase::~RsmBase()\n"
 		"GeoCal::RsmBase::~RsmBase\n"
 		""},
 	 { "RsmBase_swigregister", RsmBase_swigregister, METH_O, NULL},

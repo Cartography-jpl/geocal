@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_image_ground_connection.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_image_ground_connection:
 _rsm_image_ground_connection.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_image_ground_connection.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,9 +143,11 @@ import geocal_swig.geocal_exception
 class RsmImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
-    This is a ImageGroundConnection where the connection is made by a Rsm.
 
-    C++ includes: rsm_image_ground_connection.h 
+    This is a ImageGroundConnection where the connection is made by a Rsm.  
+
+    C++ includes: rsm_image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,12 +155,16 @@ class RsmImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
 
     def __init__(self, *args):
         r"""
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title="Image") -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask) -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title="Image") -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask) -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title="Image") -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask) -> RsmImageGroundConnection
+        __init__(RsmImageGroundConnection self, boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> RsmImageGroundConnection
 
-        GeoCal::RsmImageGroundConnection::RsmImageGroundConnection(const boost::shared_ptr< Rsm > &R, const boost::shared_ptr< Dem > &D,
-        const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const
-        std::string &Title="Image", const boost::shared_ptr< ImageMask >
-        &Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<
-        GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >())
         GeoCal::RsmImageGroundConnection::RsmImageGroundConnection
         """
         _rsm_image_ground_connection.RsmImageGroundConnection_swiginit(self, _rsm_image_ground_connection.new_RsmImageGroundConnection(*args))

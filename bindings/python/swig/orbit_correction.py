@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_correction.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_correction:
 _orbit_correction.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_correction.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,13 +144,14 @@ import geocal_swig.look_vector
 class OrbitCorrection(geocal_swig.orbit.Orbit):
     r"""
 
-    This is a class that handles correcting an orbit.
 
-    This handles the common behavior for having an independent position
-    and attitude correction, derived classes need to supply the actual
-    corrections to use.
+    This is a class that handles correcting an orbit.  
 
-    C++ includes: orbit_correction.h 
+    This handles the common behavior for having an independent position and attitude
+    correction, derived classes need to supply the actual corrections to use.  
+
+    C++ includes: orbit_correction.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _air_mspi_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _air_mspi_orbit:
 _air_mspi_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _air_mspi_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,9 +144,11 @@ import geocal_swig.look_vector
 class AirMspiNavData(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Simple structure that describes navigation data at a point in time.
 
-    C++ includes: air_mspi_orbit.h 
+    Simple structure that describes navigation data at a point in time.  
+
+    C++ includes: air_mspi_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,21 +156,23 @@ class AirMspiNavData(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiNavData self) -> AirMspiNavData
+        __init__(AirMspiNavData self, BlitzArray_double_1 Raw_data, Datum datum, bool Old_format) -> AirMspiNavData
 
-        AirMspiNavData::AirMspiNavData(const blitz::Array< double, 1 > &Raw_data, const Datum &datum, bool
-        Old_format)
         GeoCal::AirMspiNavData::AirMspiNavData
-        Constructor, that takes raw data and create AirMspiNavData from this.
-        Note that I'm not sure about the datum here, the height might be
-        relative to WGS-84 already. I'll check with Mike Bull. 
+        Constructor, that takes raw data and create AirMspiNavData from this.  
+
+        Note that I'm not sure about the datum here, the height might be relative to
+        WGS-84 already. I'll check with Mike Bull.  
+
         """
         _air_mspi_orbit.AirMspiNavData_swiginit(self, _air_mspi_orbit.new_AirMspiNavData(*args))
-    position = property(_air_mspi_orbit.AirMspiNavData_position_get, _air_mspi_orbit.AirMspiNavData_position_set)
-    velocity = property(_air_mspi_orbit.AirMspiNavData_velocity_get, _air_mspi_orbit.AirMspiNavData_velocity_set)
-    ypr = property(_air_mspi_orbit.AirMspiNavData_ypr_get, _air_mspi_orbit.AirMspiNavData_ypr_set)
-    ypr_rate = property(_air_mspi_orbit.AirMspiNavData_ypr_rate_get, _air_mspi_orbit.AirMspiNavData_ypr_rate_set)
-    gimbal_pos = property(_air_mspi_orbit.AirMspiNavData_gimbal_pos_get, _air_mspi_orbit.AirMspiNavData_gimbal_pos_set)
-    gimbal_vel = property(_air_mspi_orbit.AirMspiNavData_gimbal_vel_get, _air_mspi_orbit.AirMspiNavData_gimbal_vel_set)
+    position = property(_air_mspi_orbit.AirMspiNavData_position_get, _air_mspi_orbit.AirMspiNavData_position_set, doc=r"""position : GeoCal::Geodetic""")
+    velocity = property(_air_mspi_orbit.AirMspiNavData_velocity_get, _air_mspi_orbit.AirMspiNavData_velocity_set, doc=r"""velocity : boost::array<(double,3)>""")
+    ypr = property(_air_mspi_orbit.AirMspiNavData_ypr_get, _air_mspi_orbit.AirMspiNavData_ypr_set, doc=r"""ypr : boost::array<(double,3)>""")
+    ypr_rate = property(_air_mspi_orbit.AirMspiNavData_ypr_rate_get, _air_mspi_orbit.AirMspiNavData_ypr_rate_set, doc=r"""ypr_rate : boost::array<(double,3)>""")
+    gimbal_pos = property(_air_mspi_orbit.AirMspiNavData_gimbal_pos_get, _air_mspi_orbit.AirMspiNavData_gimbal_pos_set, doc=r"""gimbal_pos : double""")
+    gimbal_vel = property(_air_mspi_orbit.AirMspiNavData_gimbal_vel_get, _air_mspi_orbit.AirMspiNavData_gimbal_vel_set, doc=r"""gimbal_vel : double""")
     interpolate = _swig_new_static_method(_air_mspi_orbit.AirMspiNavData_interpolate)
     __str__ = _swig_new_instance_method(_air_mspi_orbit.AirMspiNavData___str__)
     __swig_destroy__ = _air_mspi_orbit.delete_AirMspiNavData
@@ -175,15 +182,16 @@ _air_mspi_orbit.AirMspiNavData_swigregister(AirMspiNavData)
 class AirMspiOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This reads the AirMSPI orbit file.
 
-    As an implementation detail, we use GDAL to read the data. This isn't
-    really an image, but by doing this we don't need to bother developing
-    all the mechanism for reading/writing HDF files. May want to revisit
-    this if we actually do develop that, since there is no reason other
-    than convenience to use GDAL here.
+    This reads the AirMSPI orbit file.  
 
-    C++ includes: air_mspi_orbit.h 
+    As an implementation detail, we use GDAL to read the data. This isn't really an
+    image, but by doing this we don't need to bother developing all the mechanism
+    for reading/writing HDF files. May want to revisit this if we actually do
+    develop that, since there is no reason other than convenience to use GDAL here.  
+
+    C++ includes: air_mspi_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -191,13 +199,11 @@ class AirMspiOrbit(geocal_swig.orbit.Orbit):
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiOrbit self, std::string const & Fname, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim) -> AirMspiOrbit
+        __init__(AirMspiOrbit self, std::string const & Fname, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Datum > const & D, GeoCal::AircraftOrbitData::VerticalDefinition Def=GEODETIC_VERTICAL) -> AirMspiOrbit
 
-        AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< MspiGimbal > &Gim,
-        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        NoDatum()), AircraftOrbitData::VerticalDefinition
-        Def=AircraftOrbitData::GEODETIC_VERTICAL)
         GeoCal::AirMspiOrbit::AirMspiOrbit
-        Read the given file.
+        Read the given file.  
 
         """
         _air_mspi_orbit.AirMspiOrbit_swiginit(self, _air_mspi_orbit.new_AirMspiOrbit(*args))

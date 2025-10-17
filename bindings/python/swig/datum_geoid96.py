@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _datum_geoid96.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _datum_geoid96:
 _datum_geoid96.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _datum_geoid96.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,9 +141,11 @@ import geocal_swig.generic_object
 class DatumGeoid96(geocal_swig.geocal_datum.Datum):
     r"""
 
-    This class read the EGM 96 geoid data to provide a Datum.
 
-    C++ includes: datum_geoid96.h 
+    This class read the EGM 96 geoid data to provide a Datum.  
+
+    C++ includes: datum_geoid96.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -148,12 +153,14 @@ class DatumGeoid96(geocal_swig.geocal_datum.Datum):
 
     def __init__(self, *args):
         r"""
+        __init__(DatumGeoid96 self, std::string const & Fname="") -> DatumGeoid96
 
-        DatumGeoid96::DatumGeoid96(const std::string &Fname="")
         GeoCal::DatumGeoid96::DatumGeoid96
-        Constructor.
-        You can pass the datum file to read, but if you leave this as blank we
-        use the file ${AFIDS_VDEV_DATA}/EGM96_20_x100.HLF. 
+        Constructor.  
+
+        You can pass the datum file to read, but if you leave this as blank we use the
+        file ${AFIDS_VDEV_DATA}/EGM96_20_x100.HLF.  
+
         """
         _datum_geoid96.DatumGeoid96_swiginit(self, _datum_geoid96.new_DatumGeoid96(*args))
     _v_file_name = _swig_new_instance_method(_datum_geoid96.DatumGeoid96__v_file_name)

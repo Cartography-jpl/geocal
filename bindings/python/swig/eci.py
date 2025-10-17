@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _eci.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _eci:
 _eci.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _eci.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,9 +141,11 @@ import geocal_swig.ground_coordinate
 class Eci(geocal_swig.ground_coordinate.CartesianInertial):
     r"""
 
-    This is a ECI coordinate (J2000)
 
-    C++ includes: eci.h 
+    This is a ECI coordinate (J2000)  
+
+    C++ includes: eci.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -148,10 +153,13 @@ class Eci(geocal_swig.ground_coordinate.CartesianInertial):
 
     def __init__(self, *args):
         r"""
+        __init__(Eci self, double X, double Y, double Z) -> Eci
+        __init__(Eci self, Array_double_3 Pos) -> Eci
+        __init__(Eci self, Ecr P, Time T) -> Eci
+        __init__(Eci self, GroundCoordinate Gc, Time T) -> Eci
 
-        GeoCal::Eci::Eci(double X, double Y, double Z)
         GeoCal::Eci::Eci
-        Make an Eci with the given position, in meters.
+        Make an Eci with the given position, in meters.  
 
         """
         _eci.Eci_swiginit(self, _eci.new_Eci(*args))

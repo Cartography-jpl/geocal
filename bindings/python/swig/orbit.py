@@ -90,6 +90,7 @@ _orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _orbit.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _orbit.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -140,21 +141,22 @@ import geocal_swig.look_vector
 class OrbitData(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class is used to convert ScLookVector,
-    CartesianInertialLookVector and CartesianFixedLookVector to and from
-    each other at a given time.
+
+    This class is used to convert ScLookVector, CartesianInertialLookVector and
+    CartesianFixedLookVector to and from each other at a given time.  
 
     Note that there are different conventions for the definition of the
-    ScLookVector.
+    ScLookVector.  
 
-    The original MISR convention used +z in the down direction, +x in the
-    generally velocity (along track) direction, and +y finished the right
-    hand coordinate system.
+    The original MISR convention used +z in the down direction, +x in the generally
+    velocity (along track) direction, and +y finished the right hand coordinate
+    system.  
 
-    Another convention used (by for example sc2rpc) is +x goes in the
-    sample direction, +y goes in the line direction, and +z points down.
+    Another convention used (by for example sc2rpc) is +x goes in the sample
+    direction, +y goes in the line direction, and +z points down.  
 
-    C++ includes: orbit.h 
+    C++ includes: orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -242,53 +244,54 @@ _orbit.OrbitData_swigregister(OrbitData)
 class QuaternionOrbitData(OrbitData):
     r"""
 
-    This class implements the most common way of doing OrbitData
-    conversions, which just uses fixed quaternions.
 
-    This accounts for both the orientation of the spacecraft relative to
-    the planet, as well as the aberration of light (a small correction due
-    to the movement of the spacecraft relative to the planet).
+    This class implements the most common way of doing OrbitData conversions, which
+    just uses fixed quaternions.  
 
-    This does not account for atmospheric refraction. Depending on the
-    zenith angle, this can be somewhat important for satellites. From the
-    approximate atmospheric model described in "Theoretical Basis of the
-    SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
-    displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is
-    1.223 meters, and 30 degrees is 2.221.
+    This accounts for both the orientation of the spacecraft relative to the planet,
+    as well as the aberration of light (a small correction due to the movement of
+    the spacecraft relative to the planet).  
 
-    The refraction calculation can be handled by an instance of the
-    Refraction class (e.g., RefractionMsp). This is handled outside of the
-    class - so we return look vectors before correcting for refraction.
+    This does *not* account for atmospheric refraction. Depending on the zenith
+    angle, this can be somewhat important for satellites. From the approximate
+    atmospheric model described in "Theoretical Basis of
+    the SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
+    displacement for a zenith angle of 10 is 0.549 meters, 20 degrees is 1.223
+    meters, and 30 degrees is 2.221.  
 
-    The velocity aberration includes a couple of approximations to enable
-    it to run faster:
+    The refraction calculation can be handled by an instance of the Refraction class
+    (e.g., RefractionMsp). This is handled outside of the class - so we return look
+    vectors before correcting for refraction.  
 
-    We only include the first order terms in v/c.
+    The velocity aberration includes a couple of approximations to enable it to run
+    faster:  
 
-    We ignore the rotation of the planet for the CartesianFixedLookVector,
-    using the velocity_cf() as an approximation to the relative velocity
-    of the target.
+    1.  We only include the first order terms in v/c.  
+    2.  We ignore the rotation of the planet for the CartesianFixedLookVector, using
+        the velocity_cf() as an approximation to the relative velocity of the
+        target.  
 
-    This approximation is pretty good, it introduces small ~1m errors for
-    a typical orbit on the Earth.
+    This approximation is pretty good, it introduces small ~1m errors for a typical
+    orbit on the Earth.  
 
     For high precision work (e.g, 0.5 m pixels of WV-2) this might not be
-    sufficient. For those cases, you can request that the Orbit not
-    perform its approximate velocity aberration correction and then handle
-    this correction separately (similar to how Refraction is handled).
+    sufficient. For those cases, you can request that the Orbit *not* perform its
+    approximate velocity aberration correction and then handle this correction
+    separately (similar to how Refraction is handled).  
 
-    We need to have one of the toolkit available if we want to convert for
-    the CartesianFixed coordinates used by this class to
-    CartesianInertial. If you stick to working with CartesianFixed only,
-    you can avoid the need of using one of these toolkits.
+    We need to have one of the toolkit available if we want to convert for the
+    CartesianFixed coordinates used by this class to CartesianInertial. If you stick
+    to working with CartesianFixed only, you can avoid the need of using one of
+    these toolkits.  
 
-    Note that we allow most pieces of this to be AutoDerivative, useful
-    for propagating jacobians. By convention an Orbit uses the
-    AutoDerivative if orbit_data is called with a TimeWithDerivative, but
-    doesn't if it isn't. This means the AutoDerivative can be available,
-    but if not needed we save time by not calculating these.
+    Note that we allow most pieces of this to be AutoDerivative, useful for
+    propagating jacobians. By convention an Orbit uses the AutoDerivative if
+    orbit_data is called with a TimeWithDerivative, but doesn't if it isn't. This
+    means the AutoDerivative can be available, but if not needed we save time by not
+    calculating these.  
 
-    C++ includes: orbit.h 
+    C++ includes: orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -296,14 +299,19 @@ class QuaternionOrbitData(OrbitData):
 
     def __init__(self, *args):
         r"""
+        __init__(QuaternionOrbitData self, QuaternionOrbitData Start, BoostArrayAutoDerivativeDouble_3 Pos_off, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Sc_to_sc_corr) -> QuaternionOrbitData
+        __init__(QuaternionOrbitData self, QuaternionOrbitData Start, Array_double_3 Pos_off, Quaternion_double Sc_to_sc_corr) -> QuaternionOrbitData
+        __init__(QuaternionOrbitData self, Time Tm, boost::shared_ptr< GeoCal::CartesianFixed > const & pos_cf, Array_double_3 vel_fixed, Quaternion_double sc_to_cf_q) -> QuaternionOrbitData
+        __init__(QuaternionOrbitData self, TimeWithDerivative Tm, boost::shared_ptr< GeoCal::CartesianFixed > const & pos_cf, BoostArrayAutoDerivativeDouble_3 pos_cf_with_der, BoostArrayAutoDerivativeDouble_3 vel_fixed, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & sc_to_cf_q) -> QuaternionOrbitData
+        __init__(QuaternionOrbitData self, Time Tm, boost::shared_ptr< GeoCal::CartesianInertial > const & pos_ci, Array_double_3 vel_inertial, Quaternion_double sc_to_ci_q) -> QuaternionOrbitData
+        __init__(QuaternionOrbitData self, TimeWithDerivative Tm, boost::shared_ptr< GeoCal::CartesianInertial > const & pos_ci, BoostArrayAutoDerivativeDouble_3 pos_ci_with_der, BoostArrayAutoDerivativeDouble_3 vel_inertial, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & sc_to_ci_q) -> QuaternionOrbitData
 
-        QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const
-        boost::array< double, 3 > &vel_inertial, const
-        boost::math::quaternion< double > &sc_to_ci_q)
         GeoCal::QuaternionOrbitData::QuaternionOrbitData
-        Construct QuaternionOrbitData.
+        Construct QuaternionOrbitData.  
+
         This takes data in a CartesianInertial coordinate system (e.g., Eci
-        coordinates). 
+        coordinates).  
+
         """
         _orbit.QuaternionOrbitData_swiginit(self, _orbit.new_QuaternionOrbitData(*args))
     ci_look_vector = _swig_new_instance_method(_orbit.QuaternionOrbitData_ci_look_vector)
@@ -367,6 +375,8 @@ class QuaternionOrbitData(OrbitData):
 # Register QuaternionOrbitData in _orbit:
 _orbit.QuaternionOrbitData_swigregister(QuaternionOrbitData)
 class ObservableOrbit(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observable< GeoCal::Orbit > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -380,10 +390,13 @@ class ObservableOrbit(geocal_swig.generic_object.GenericObject):
 # Register ObservableOrbit in _orbit:
 _orbit.ObservableOrbit_swigregister(ObservableOrbit)
 class ObserverOrbit(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observer< GeoCal::Orbit > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self):
+        r"""__init__(ObserverOrbit self) -> ObserverOrbit"""
         _orbit.ObserverOrbit_swiginit(self, _orbit.new_ObserverOrbit())
     __swig_destroy__ = _orbit.delete_ObserverOrbit
     notify_update = _swig_new_instance_method(_orbit.ObserverOrbit_notify_update)
@@ -395,30 +408,29 @@ _orbit.ObserverOrbit_swigregister(ObserverOrbit)
 class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
     r"""
 
-    This class is used to model orbit data, allowing conversions from
-    spacecraft coordinates to CartesianInertial and CartesianFixed
-    coordinates.
 
-    This class is used to return orbit data at a given time. OrbitData is
-    a class that is able to convert from spacecraft coordinates to
-    CartesianInertial coordinates and vice-versa at a given time, as well
-    as giving the platforms position.
+    This class is used to model orbit data, allowing conversions from spacecraft
+    coordinates to CartesianInertial and CartesianFixed coordinates.  
 
-    As an optimization, methods for direct conversion from spacecraft
-    coordinates to CartesianInertial and vice-versa, which don't use the
-    intermediate OrbitData classes, are supplied. The default methods just
-    use the OrbitData methods, but derived classes can supply more
-    optimized versions of these methods.
+    This class is used to return orbit data at a given time. OrbitData is a class
+    that is able to convert from spacecraft coordinates to CartesianInertial
+    coordinates and vice-versa at a given time, as well as giving the platforms
+    position.  
 
-    See QuaternionOrbitData for a discussion of Refraction and velocity
-    aberration corrections.
+    As an optimization, methods for direct conversion from spacecraft coordinates to
+    CartesianInertial and vice-versa, which don't use the intermediate OrbitData
+    classes, are supplied. The default methods just use the OrbitData methods, but
+    derived classes can supply more optimized versions of these methods.  
 
-    An orbit has a min_time() and a max_time() that orbit data is
-    available for. Requesting data outside of this range will cause an
-    exception to be thrown. For Time T, we must have min_time() <= T <
-    max_time().
+    See QuaternionOrbitData for a discussion of Refraction and velocity aberration
+    corrections.  
 
-    C++ includes: orbit.h 
+    An orbit has a min_time() and a max_time() that orbit data is available for.
+    Requesting data outside of this range will cause an exception to be thrown. For
+    Time T, we must have min_time() <= T < max_time().  
+
+    C++ includes: orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -426,12 +438,13 @@ class Orbit(ObservableOrbit, geocal_swig.with_parameter.WithParameter):
 
     def __init__(self, *args):
         r"""
+        __init__(Orbit self, Time Min_time=min_valid_time, Time Max_time=max_valid_time) -> Orbit
 
-        GeoCal::Orbit::Orbit(Time Min_time=Time::min_valid_time, Time
-        Max_time=Time::max_valid_time)
         GeoCal::Orbit::Orbit
-        Constructor.
-        The Orbit is valid for the given range of minimum to maximum time. 
+        Constructor.  
+
+        The Orbit is valid for the given range of minimum to maximum time.  
+
         """
         if self.__class__ == Orbit:
             _self = None
@@ -542,15 +555,17 @@ _orbit.Orbit_swigregister(Orbit)
 class KeplerOrbit(Orbit):
     r"""
 
-    This is a simple implementation of an Orbit.
 
-    It just uses Kepler's equations. This is intended primarily for easy
-    testing of other classes that need an Orbit, rather than being a
-    realistic orbit simulation for real use.
+    This is a simple implementation of an Orbit.  
 
-    The default parameters are for a nominal MISR orbit.
+    It just uses Kepler's equations. This is intended primarily for easy testing of
+    other classes that need an Orbit, rather than being a realistic orbit simulation
+    for real use.  
 
-    C++ includes: orbit.h 
+    The default parameters are for a nominal MISR orbit.  
+
+    C++ includes: orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -558,19 +573,15 @@ class KeplerOrbit(Orbit):
 
     def __init__(self, *args):
         r"""
+        __init__(KeplerOrbit self, Time Min_time=min_valid_time, Time Max_time=max_valid_time, Time Epoch=GeoCal::Time::time_pgs(173357492.32), double Semimajor_axis=7086930, double Eccentricity=0.001281620, double Inclination=98.199990, double Ra_ascending_node=255.355971130, double Ap_at_epoch=69.086962170, double Mean_anomaly_at_epoch=290.912925280) -> KeplerOrbit
 
-        KeplerOrbit::KeplerOrbit(Time Min_time=Time::min_valid_time, Time
-        Max_time=Time::max_valid_time, Time
-        Epoch=Time::time_pgs(173357492.32), double Semimajor_axis=7086930,
-        double Eccentricity=0.001281620, double Inclination=98.199990, double
-        Ra_ascending_node=255.355971130, double Ap_at_epoch=69.086962170,
-        double Mean_anomaly_at_epoch=290.912925280)
         GeoCal::KeplerOrbit::KeplerOrbit
-        Create a Kepler orbit with the given elements, valid over the given
-        time range.
-        Distances are in meters and angles are in degrees. The Epoch gives the
-        Time that the rest of the data is valid for. The default values are a
-        nominal orbit for MISR. 
+        Create a Kepler orbit with the given elements, valid over the given time range.  
+
+        Distances are in meters and angles are in degrees. The Epoch gives the Time that
+        the rest of the data is valid for. The default values are a nominal orbit for
+        MISR.  
+
         """
         _orbit.KeplerOrbit_swiginit(self, _orbit.new_KeplerOrbit(*args))
     orbit_data = _swig_new_instance_method(_orbit.KeplerOrbit_orbit_data)
@@ -663,6 +674,8 @@ class KeplerOrbit(Orbit):
 # Register KeplerOrbit in _orbit:
 _orbit.KeplerOrbit_swigregister(KeplerOrbit)
 class Vector_QuaternionOrbitData(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_orbit.Vector_QuaternionOrbitData_iterator)
@@ -692,6 +705,12 @@ class Vector_QuaternionOrbitData(object):
     erase = _swig_new_instance_method(_orbit.Vector_QuaternionOrbitData_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_QuaternionOrbitData self) -> Vector_QuaternionOrbitData
+        __init__(Vector_QuaternionOrbitData self, Vector_QuaternionOrbitData other) -> Vector_QuaternionOrbitData
+        __init__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type size) -> Vector_QuaternionOrbitData
+        __init__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type size, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & value) -> Vector_QuaternionOrbitData
+        """
         _orbit.Vector_QuaternionOrbitData_swiginit(self, _orbit.new_Vector_QuaternionOrbitData(*args))
     push_back = _swig_new_instance_method(_orbit.Vector_QuaternionOrbitData_push_back)
     front = _swig_new_instance_method(_orbit.Vector_QuaternionOrbitData_front)

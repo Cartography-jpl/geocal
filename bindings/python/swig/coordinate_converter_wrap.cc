@@ -7847,140 +7847,150 @@ SWIGINTERN PyObject *GeodeticRadian2piConverter_swiginit(PyObject *SWIGUNUSEDPAR
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "CoordinateConverter_convert_from_coordinate", _wrap_CoordinateConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"CoordinateConverter_convert_from_coordinate(CoordinateConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Z=0) const =0\n"
 		"GeoCal::CoordinateConverter::convert_from_coordinate\n"
-		"This converts from a particular coordinate system, returning a ground\n"
-		"coordinate for the given coordinates.\n"
-		"The specific meaning and units of X, Y, and Z depend on which\n"
-		"coordinates system is used by a specialization of this class. \n"
+		"This converts from a particular coordinate system, returning a ground coordinate\n"
+		"for the given coordinates.  \n"
+		"\n"
+		"The specific meaning and units of X, Y, and Z depend on which coordinates system\n"
+		"is used by a specialization of this class.  \n"
+		"\n"
 		""},
 	 { "CoordinateConverter_convert_to_coordinate", _wrap_CoordinateConverter_convert_to_coordinate, METH_VARARGS, "\n"
+		"CoordinateConverter_convert_to_coordinate(CoordinateConverter self, GroundCoordinate Gc)\n"
 		"\n"
-		"virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const GroundCoordinate &Gc, double &X, double &Y, double &Z) const =0\n"
 		"GeoCal::CoordinateConverter::convert_to_coordinate\n"
-		"This converts from a ground coordinate to a particular coordinate\n"
-		"system.\n"
-		"The specific meaning and units of X, Y, and Z depend on which\n"
-		"coordinates system is used by a specialization of this class. \n"
+		"This converts from a ground coordinate to a particular coordinate system.  \n"
+		"\n"
+		"The specific meaning and units of X, Y, and Z depend on which coordinates system\n"
+		"is used by a specialization of this class.  \n"
+		"\n"
 		""},
 	 { "CoordinateConverter__v_naif_code", _wrap_CoordinateConverter__v_naif_code, METH_O, "\n"
+		"CoordinateConverter__v_naif_code(CoordinateConverter self) -> int\n"
 		"\n"
-		"virtual int GeoCal::CoordinateConverter::naif_code() const\n"
 		"GeoCal::CoordinateConverter::naif_code\n"
-		"Naif code for planet.\n"
+		"Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "CoordinateConverter_create", _wrap_CoordinateConverter_create, METH_VARARGS, "\n"
+		"CoordinateConverter_create(CoordinateConverter self, GroundCoordinate Gc) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::CoordinateConverter::create(const GroundCoordinate &Gc) const\n"
 		"GeoCal::CoordinateConverter::create\n"
-		"Convert and create a coordinate.\n"
+		"Convert and create a coordinate.  \n"
 		"\n"
 		""},
 	 { "CoordinateConverter_is_same", _wrap_CoordinateConverter_is_same, METH_VARARGS, "\n"
+		"CoordinateConverter_is_same(CoordinateConverter self, CoordinateConverter Conv) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::CoordinateConverter::is_same(const CoordinateConverter &Conv) const =0\n"
 		"GeoCal::CoordinateConverter::is_same\n"
-		"Test if two CoordinateConverters are the same coordinate system.\n"
+		"Test if two CoordinateConverters are the same coordinate system.  \n"
 		"\n"
 		""},
-	 { "CoordinateConverter___str__", _wrap_CoordinateConverter___str__, METH_O, NULL},
+	 { "CoordinateConverter___str__", _wrap_CoordinateConverter___str__, METH_O, "CoordinateConverter___str__(CoordinateConverter self) -> std::string"},
 	 { "delete_CoordinateConverter", _wrap_delete_CoordinateConverter, METH_O, "\n"
+		"delete_CoordinateConverter(CoordinateConverter self)\n"
 		"\n"
-		"virtual GeoCal::CoordinateConverter::~CoordinateConverter()\n"
 		"GeoCal::CoordinateConverter::~CoordinateConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CoordinateConverter_swigregister", CoordinateConverter_swigregister, METH_O, NULL},
 	 { "GeodeticConverter_convert_from_coordinate", _wrap_GeodeticConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"GeodeticConverter_convert_from_coordinate(GeodeticConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::GeodeticConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::GeodeticConverter::convert_from_coordinate\n"
-		"Convert to geodetic.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_GeodeticConverter", _wrap_new_GeodeticConverter, METH_NOARGS, NULL},
-	 { "delete_GeodeticConverter", _wrap_delete_GeodeticConverter, METH_O, "\n"
+		"Convert to geodetic.  \n"
 		"\n"
-		"virtual GeoCal::GeodeticConverter::~GeodeticConverter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_GeodeticConverter", _wrap_new_GeodeticConverter, METH_NOARGS, "new_GeodeticConverter() -> GeodeticConverter"},
+	 { "delete_GeodeticConverter", _wrap_delete_GeodeticConverter, METH_O, "\n"
+		"delete_GeodeticConverter(GeodeticConverter self)\n"
+		"\n"
 		"GeoCal::GeodeticConverter::~GeodeticConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GeodeticConverter_swigregister", GeodeticConverter_swigregister, METH_O, NULL},
 	 { "GeodeticConverter_swiginit", GeodeticConverter_swiginit, METH_VARARGS, NULL},
 	 { "Geodetic360Converter_convert_from_coordinate", _wrap_Geodetic360Converter_convert_from_coordinate, METH_VARARGS, "\n"
+		"Geodetic360Converter_convert_from_coordinate(Geodetic360Converter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::Geodetic360Converter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::Geodetic360Converter::convert_from_coordinate\n"
-		"Convert to geodetic360.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_Geodetic360Converter", _wrap_new_Geodetic360Converter, METH_NOARGS, NULL},
-	 { "delete_Geodetic360Converter", _wrap_delete_Geodetic360Converter, METH_O, "\n"
+		"Convert to geodetic360.  \n"
 		"\n"
-		"virtual GeoCal::Geodetic360Converter::~Geodetic360Converter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_Geodetic360Converter", _wrap_new_Geodetic360Converter, METH_NOARGS, "new_Geodetic360Converter() -> Geodetic360Converter"},
+	 { "delete_Geodetic360Converter", _wrap_delete_Geodetic360Converter, METH_O, "\n"
+		"delete_Geodetic360Converter(Geodetic360Converter self)\n"
+		"\n"
 		"GeoCal::Geodetic360Converter::~Geodetic360Converter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Geodetic360Converter_swigregister", Geodetic360Converter_swigregister, METH_O, NULL},
 	 { "Geodetic360Converter_swiginit", Geodetic360Converter_swiginit, METH_VARARGS, NULL},
 	 { "GeodeticRadianConverter_convert_from_coordinate", _wrap_GeodeticRadianConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"GeodeticRadianConverter_convert_from_coordinate(GeodeticRadianConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::GeodeticRadianConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::GeodeticRadianConverter::convert_from_coordinate\n"
-		"Convert to geodetic.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_GeodeticRadianConverter", _wrap_new_GeodeticRadianConverter, METH_NOARGS, NULL},
-	 { "delete_GeodeticRadianConverter", _wrap_delete_GeodeticRadianConverter, METH_O, "\n"
+		"Convert to geodetic.  \n"
 		"\n"
-		"virtual GeoCal::GeodeticRadianConverter::~GeodeticRadianConverter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_GeodeticRadianConverter", _wrap_new_GeodeticRadianConverter, METH_NOARGS, "new_GeodeticRadianConverter() -> GeodeticRadianConverter"},
+	 { "delete_GeodeticRadianConverter", _wrap_delete_GeodeticRadianConverter, METH_O, "\n"
+		"delete_GeodeticRadianConverter(GeodeticRadianConverter self)\n"
+		"\n"
 		"GeoCal::GeodeticRadianConverter::~GeodeticRadianConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GeodeticRadianConverter_swigregister", GeodeticRadianConverter_swigregister, METH_O, NULL},
 	 { "GeodeticRadianConverter_swiginit", GeodeticRadianConverter_swiginit, METH_VARARGS, NULL},
 	 { "GeodeticRadian2piConverter_convert_from_coordinate", _wrap_GeodeticRadian2piConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"GeodeticRadian2piConverter_convert_from_coordinate(GeodeticRadian2piConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::GeodeticRadian2piConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::GeodeticRadian2piConverter::convert_from_coordinate\n"
-		"Convert to geodetic.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_GeodeticRadian2piConverter", _wrap_new_GeodeticRadian2piConverter, METH_NOARGS, NULL},
-	 { "delete_GeodeticRadian2piConverter", _wrap_delete_GeodeticRadian2piConverter, METH_O, "\n"
+		"Convert to geodetic.  \n"
 		"\n"
-		"virtual GeoCal::GeodeticRadian2piConverter::~GeodeticRadian2piConverter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_GeodeticRadian2piConverter", _wrap_new_GeodeticRadian2piConverter, METH_NOARGS, "new_GeodeticRadian2piConverter() -> GeodeticRadian2piConverter"},
+	 { "delete_GeodeticRadian2piConverter", _wrap_delete_GeodeticRadian2piConverter, METH_O, "\n"
+		"delete_GeodeticRadian2piConverter(GeodeticRadian2piConverter self)\n"
+		"\n"
 		"GeoCal::GeodeticRadian2piConverter::~GeodeticRadian2piConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GeodeticRadian2piConverter_swigregister", GeodeticRadian2piConverter_swigregister, METH_O, NULL},
@@ -7991,140 +8001,150 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "CoordinateConverter_convert_from_coordinate", _wrap_CoordinateConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(CoordinateConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::CoordinateConverter::convert_from_coordinate(double X, double Y, double Z=0) const =0\n"
 		"GeoCal::CoordinateConverter::convert_from_coordinate\n"
-		"This converts from a particular coordinate system, returning a ground\n"
-		"coordinate for the given coordinates.\n"
-		"The specific meaning and units of X, Y, and Z depend on which\n"
-		"coordinates system is used by a specialization of this class. \n"
+		"This converts from a particular coordinate system, returning a ground coordinate\n"
+		"for the given coordinates.  \n"
+		"\n"
+		"The specific meaning and units of X, Y, and Z depend on which coordinates system\n"
+		"is used by a specialization of this class.  \n"
+		"\n"
 		""},
 	 { "CoordinateConverter_convert_to_coordinate", _wrap_CoordinateConverter_convert_to_coordinate, METH_VARARGS, "\n"
+		"convert_to_coordinate(CoordinateConverter self, GroundCoordinate Gc)\n"
 		"\n"
-		"virtual void GeoCal::CoordinateConverter::convert_to_coordinate(const GroundCoordinate &Gc, double &X, double &Y, double &Z) const =0\n"
 		"GeoCal::CoordinateConverter::convert_to_coordinate\n"
-		"This converts from a ground coordinate to a particular coordinate\n"
-		"system.\n"
-		"The specific meaning and units of X, Y, and Z depend on which\n"
-		"coordinates system is used by a specialization of this class. \n"
+		"This converts from a ground coordinate to a particular coordinate system.  \n"
+		"\n"
+		"The specific meaning and units of X, Y, and Z depend on which coordinates system\n"
+		"is used by a specialization of this class.  \n"
+		"\n"
 		""},
 	 { "CoordinateConverter__v_naif_code", _wrap_CoordinateConverter__v_naif_code, METH_O, "\n"
+		"_v_naif_code(CoordinateConverter self) -> int\n"
 		"\n"
-		"virtual int GeoCal::CoordinateConverter::naif_code() const\n"
 		"GeoCal::CoordinateConverter::naif_code\n"
-		"Naif code for planet.\n"
+		"Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "CoordinateConverter_create", _wrap_CoordinateConverter_create, METH_VARARGS, "\n"
+		"create(CoordinateConverter self, GroundCoordinate Gc) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::CoordinateConverter::create(const GroundCoordinate &Gc) const\n"
 		"GeoCal::CoordinateConverter::create\n"
-		"Convert and create a coordinate.\n"
+		"Convert and create a coordinate.  \n"
 		"\n"
 		""},
 	 { "CoordinateConverter_is_same", _wrap_CoordinateConverter_is_same, METH_VARARGS, "\n"
+		"is_same(CoordinateConverter self, CoordinateConverter Conv) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::CoordinateConverter::is_same(const CoordinateConverter &Conv) const =0\n"
 		"GeoCal::CoordinateConverter::is_same\n"
-		"Test if two CoordinateConverters are the same coordinate system.\n"
+		"Test if two CoordinateConverters are the same coordinate system.  \n"
 		"\n"
 		""},
-	 { "CoordinateConverter___str__", _wrap_CoordinateConverter___str__, METH_O, NULL},
+	 { "CoordinateConverter___str__", _wrap_CoordinateConverter___str__, METH_O, "__str__(CoordinateConverter self) -> std::string"},
 	 { "delete_CoordinateConverter", _wrap_delete_CoordinateConverter, METH_O, "\n"
+		"delete_CoordinateConverter(CoordinateConverter self)\n"
 		"\n"
-		"virtual GeoCal::CoordinateConverter::~CoordinateConverter()\n"
 		"GeoCal::CoordinateConverter::~CoordinateConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CoordinateConverter_swigregister", CoordinateConverter_swigregister, METH_O, NULL},
 	 { "GeodeticConverter_convert_from_coordinate", _wrap_GeodeticConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(GeodeticConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::GeodeticConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::GeodeticConverter::convert_from_coordinate\n"
-		"Convert to geodetic.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_GeodeticConverter", _wrap_new_GeodeticConverter, METH_NOARGS, NULL},
-	 { "delete_GeodeticConverter", _wrap_delete_GeodeticConverter, METH_O, "\n"
+		"Convert to geodetic.  \n"
 		"\n"
-		"virtual GeoCal::GeodeticConverter::~GeodeticConverter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_GeodeticConverter", _wrap_new_GeodeticConverter, METH_NOARGS, "new_GeodeticConverter() -> GeodeticConverter"},
+	 { "delete_GeodeticConverter", _wrap_delete_GeodeticConverter, METH_O, "\n"
+		"delete_GeodeticConverter(GeodeticConverter self)\n"
+		"\n"
 		"GeoCal::GeodeticConverter::~GeodeticConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GeodeticConverter_swigregister", GeodeticConverter_swigregister, METH_O, NULL},
 	 { "GeodeticConverter_swiginit", GeodeticConverter_swiginit, METH_VARARGS, NULL},
 	 { "Geodetic360Converter_convert_from_coordinate", _wrap_Geodetic360Converter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(Geodetic360Converter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::Geodetic360Converter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::Geodetic360Converter::convert_from_coordinate\n"
-		"Convert to geodetic360.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_Geodetic360Converter", _wrap_new_Geodetic360Converter, METH_NOARGS, NULL},
-	 { "delete_Geodetic360Converter", _wrap_delete_Geodetic360Converter, METH_O, "\n"
+		"Convert to geodetic360.  \n"
 		"\n"
-		"virtual GeoCal::Geodetic360Converter::~Geodetic360Converter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_Geodetic360Converter", _wrap_new_Geodetic360Converter, METH_NOARGS, "new_Geodetic360Converter() -> Geodetic360Converter"},
+	 { "delete_Geodetic360Converter", _wrap_delete_Geodetic360Converter, METH_O, "\n"
+		"delete_Geodetic360Converter(Geodetic360Converter self)\n"
+		"\n"
 		"GeoCal::Geodetic360Converter::~Geodetic360Converter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Geodetic360Converter_swigregister", Geodetic360Converter_swigregister, METH_O, NULL},
 	 { "Geodetic360Converter_swiginit", Geodetic360Converter_swiginit, METH_VARARGS, NULL},
 	 { "GeodeticRadianConverter_convert_from_coordinate", _wrap_GeodeticRadianConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(GeodeticRadianConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::GeodeticRadianConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::GeodeticRadianConverter::convert_from_coordinate\n"
-		"Convert to geodetic.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_GeodeticRadianConverter", _wrap_new_GeodeticRadianConverter, METH_NOARGS, NULL},
-	 { "delete_GeodeticRadianConverter", _wrap_delete_GeodeticRadianConverter, METH_O, "\n"
+		"Convert to geodetic.  \n"
 		"\n"
-		"virtual GeoCal::GeodeticRadianConverter::~GeodeticRadianConverter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_GeodeticRadianConverter", _wrap_new_GeodeticRadianConverter, METH_NOARGS, "new_GeodeticRadianConverter() -> GeodeticRadianConverter"},
+	 { "delete_GeodeticRadianConverter", _wrap_delete_GeodeticRadianConverter, METH_O, "\n"
+		"delete_GeodeticRadianConverter(GeodeticRadianConverter self)\n"
+		"\n"
 		"GeoCal::GeodeticRadianConverter::~GeodeticRadianConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GeodeticRadianConverter_swigregister", GeodeticRadianConverter_swigregister, METH_O, NULL},
 	 { "GeodeticRadianConverter_swiginit", GeodeticRadianConverter_swiginit, METH_VARARGS, NULL},
 	 { "GeodeticRadian2piConverter_convert_from_coordinate", _wrap_GeodeticRadian2piConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(GeodeticRadian2piConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::GeodeticRadian2piConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::GeodeticRadian2piConverter::convert_from_coordinate\n"
-		"Convert to geodetic.\n"
-		"X and Y are longitude and latitude in degrees, and Z is height is in\n"
-		"meters. \n"
-		""},
-	 { "new_GeodeticRadian2piConverter", _wrap_new_GeodeticRadian2piConverter, METH_NOARGS, NULL},
-	 { "delete_GeodeticRadian2piConverter", _wrap_delete_GeodeticRadian2piConverter, METH_O, "\n"
+		"Convert to geodetic.  \n"
 		"\n"
-		"virtual GeoCal::GeodeticRadian2piConverter::~GeodeticRadian2piConverter()\n"
+		"X and Y are longitude and latitude in degrees, and Z is height is in meters.  \n"
+		"\n"
+		""},
+	 { "new_GeodeticRadian2piConverter", _wrap_new_GeodeticRadian2piConverter, METH_NOARGS, "new_GeodeticRadian2piConverter() -> GeodeticRadian2piConverter"},
+	 { "delete_GeodeticRadian2piConverter", _wrap_delete_GeodeticRadian2piConverter, METH_O, "\n"
+		"delete_GeodeticRadian2piConverter(GeodeticRadian2piConverter self)\n"
+		"\n"
 		"GeoCal::GeodeticRadian2piConverter::~GeodeticRadian2piConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GeodeticRadian2piConverter_swigregister", GeodeticRadian2piConverter_swigregister, METH_O, NULL},

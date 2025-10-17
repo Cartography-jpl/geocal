@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _vicar_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _vicar_dem:
 _vicar_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _vicar_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,18 +145,19 @@ import geocal_swig.geocal_exception
 class VicarDem(geocal_swig.dem_tiled_file.DemTiledFile):
     r"""
 
-    This uses a VicarTiledFile<T> as a DEM.
 
-    The type of T should be one we can convert to a double, and should
-    give the height in meters above sea level. We do a bilinear
-    interpolation to get values between points, and we optionally return a
-    height of 0 outside of the range of where we have data (or
-    alternatively, throw an exception).
+    This uses a VicarTiledFile<T> as a DEM.  
 
-    The default datum used is NoDatum, e.g., the heights in the VICAR file
-    are relative to WGS-84. If desired, a different Datum can be given.
+    The type of T should be one we can convert to a double, and should give the
+    height in meters above sea level. We do a bilinear interpolation to get values
+    between points, and we optionally return a height of 0 outside of the range of
+    where we have data (or alternatively, throw an exception).  
 
-    C++ includes: vicar_dem.h 
+    The default datum used is NoDatum, e.g., the heights in the VICAR file are
+    relative to WGS-84. If desired, a different Datum can be given.  
+
+    C++ includes: vicar_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,13 +165,13 @@ class VicarDem(geocal_swig.dem_tiled_file.DemTiledFile):
 
     def __init__(self, *args):
         r"""
+        __init__(VicarDem self, std::string const & Fname, bool Outside_dem_is_error=False, int Number_line_per_tile=100, int Number_tile=4) -> VicarDem
+        __init__(VicarDem self, std::string const & Fname, bool Outside_dem_is_error, int Number_line_per_tile, int Number_tile, boost::shared_ptr< GeoCal::Datum > const & D) -> VicarDem
+        __init__(VicarDem self, int Instance, bool Outside_dem_is_error=False, int Number_line_per_tile=100, int Number_tile=4, std::string const & Name="INP") -> VicarDem
+        __init__(VicarDem self, int Instance, bool Outside_dem_is_error, int Number_line_per_tile, int Number_tile, std::string const & Name, boost::shared_ptr< GeoCal::Datum > const & D) -> VicarDem
 
-        GeoCal::VicarDem::VicarDem(int Instance, bool Outside_dem_is_error=false, int
-        Number_line_per_tile=100, int Number_tile=4, const std::string
-        &Name="INP", const boost::shared_ptr< Datum > &D=boost::shared_ptr<
-        Datum >(new NoDatum()))
         GeoCal::VicarDem::VicarDem
-        Open VICAR file as a DEM.
+        Open VICAR file as a DEM.  
 
         """
         _vicar_dem.VicarDem_swiginit(self, _vicar_dem.new_VicarDem(*args))

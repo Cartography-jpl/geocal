@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _jia_sample.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _jia_sample:
 _jia_sample.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _jia_sample.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,9 +140,11 @@ import geocal_swig.generic_object
 class JiaSample(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Dummy class for Jia.
 
-    C++ includes: jia_sample.h 
+    Dummy class for Jia.  
+
+    C++ includes: jia_sample.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -147,8 +152,8 @@ class JiaSample(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Blah):
         r"""
+        __init__(JiaSample self, int Blah) -> JiaSample
 
-        GeoCal::JiaSample::JiaSample(int Blah)
         GeoCal::JiaSample::JiaSample
         """
         _jia_sample.JiaSample_swiginit(self, _jia_sample.new_JiaSample(Blah))

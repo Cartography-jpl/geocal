@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_exception.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_exception:
 _geocal_exception.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_exception.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,12 +140,14 @@ import geocal_swig.generic_object
 class Exception(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is the base of the exception hierarchy for GeoCal code.
 
-    This can be written to like a stream to contain information about the
-    exception. This is derived from the standard library std::exception
+    This is the base of the exception hierarchy for GeoCal code.  
 
-    C++ includes: geocal_exception.h 
+    This can be written to like a stream to contain information about the exception.
+    This is derived from the standard library std::exception  
+
+    C++ includes: geocal_exception.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,11 +155,13 @@ class Exception(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, W):
         r"""
+        __init__(Exception self, std::string const & W) -> Exception
 
-        GeoCal::Exception::Exception(const std::string &W="")
         GeoCal::Exception::Exception
-        Default constructor.
-        Can give an optional string describing the error. 
+        Default constructor.  
+
+        Can give an optional string describing the error.  
+
         """
         _geocal_exception.Exception_swiginit(self, _geocal_exception.new_Exception(W))
     what = _swig_new_instance_method(_geocal_exception.Exception_what)
@@ -166,9 +173,11 @@ _geocal_exception.Exception_swigregister(Exception)
 class ConvergenceFailure(Exception):
     r"""
 
-    Exception thrown if Math routine fails to converge.
 
-    C++ includes: geocal_exception.h 
+    Exception thrown if Math routine fails to converge.  
+
+    C++ includes: geocal_exception.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -176,11 +185,13 @@ class ConvergenceFailure(Exception):
 
     def __init__(self, W):
         r"""
+        __init__(ConvergenceFailure self, std::string const & W) -> ConvergenceFailure
 
-        GeoCal::ConvergenceFailure::ConvergenceFailure(const std::string &W="")
         GeoCal::ConvergenceFailure::ConvergenceFailure
-        Default constructor.
-        Can give an optional string describing the error. 
+        Default constructor.  
+
+        Can give an optional string describing the error.  
+
         """
         _geocal_exception.ConvergenceFailure_swiginit(self, _geocal_exception.new_ConvergenceFailure(W))
     __swig_destroy__ = _geocal_exception.delete_ConvergenceFailure
@@ -190,9 +201,11 @@ _geocal_exception.ConvergenceFailure_swigregister(ConvergenceFailure)
 class NoCoverage(Exception):
     r"""
 
-    Exception thrown if no coverage.
 
-    C++ includes: geocal_exception.h 
+    Exception thrown if no coverage.  
+
+    C++ includes: geocal_exception.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -200,11 +213,13 @@ class NoCoverage(Exception):
 
     def __init__(self, *args):
         r"""
+        __init__(NoCoverage self, std::string const & W="") -> NoCoverage
 
-        GeoCal::NoCoverage::NoCoverage(const std::string &W="")
         GeoCal::NoCoverage::NoCoverage
-        Default constructor.
-        Can give an optional string describing the error. 
+        Default constructor.  
+
+        Can give an optional string describing the error.  
+
         """
         _geocal_exception.NoCoverage_swiginit(self, _geocal_exception.new_NoCoverage(*args))
     __swig_destroy__ = _geocal_exception.delete_NoCoverage
@@ -214,9 +229,11 @@ _geocal_exception.NoCoverage_swigregister(NoCoverage)
 class MetadataMissing(Exception):
     r"""
 
-    Exception thrown if Metadata is missing.
 
-    C++ includes: geocal_exception.h 
+    Exception thrown if Metadata is missing.  
+
+    C++ includes: geocal_exception.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -224,11 +241,13 @@ class MetadataMissing(Exception):
 
     def __init__(self, W):
         r"""
+        __init__(MetadataMissing self, std::string const & W) -> MetadataMissing
 
-        GeoCal::MetadataMissing::MetadataMissing(const std::string &W="")
         GeoCal::MetadataMissing::MetadataMissing
-        Default constructor.
-        Can give an optional string describing the error. 
+        Default constructor.  
+
+        Can give an optional string describing the error.  
+
         """
         _geocal_exception.MetadataMissing_swiginit(self, _geocal_exception.new_MetadataMissing(W))
     __swig_destroy__ = _geocal_exception.delete_MetadataMissing
@@ -238,9 +257,11 @@ _geocal_exception.MetadataMissing_swigregister(MetadataMissing)
 class VicarException(Exception):
     r"""
 
-    Exception thrown if Vicar call fails.
 
-    C++ includes: geocal_exception.h 
+    Exception thrown if Vicar call fails.  
+
+    C++ includes: geocal_exception.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -248,11 +269,13 @@ class VicarException(Exception):
 
     def __init__(self, *args):
         r"""
+        __init__(VicarException self, int status, std::string const & W="") -> VicarException
 
-        GeoCal::VicarException::VicarException(int status, const std::string &W="")
         GeoCal::VicarException::VicarException
-        Default constructor.
-        Can give an optional string describing the error. 
+        Default constructor.  
+
+        Can give an optional string describing the error.  
+
         """
         _geocal_exception.VicarException_swiginit(self, _geocal_exception.new_VicarException(*args))
     __swig_destroy__ = _geocal_exception.delete_VicarException

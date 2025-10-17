@@ -6491,55 +6491,61 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "air_mspi_permanent_file_name", _wrap_air_mspi_permanent_file_name, METH_O, "\n"
+		"air_mspi_permanent_file_name(std::string const & Fname) -> std::string\n"
 		"\n"
-		"std::string GeoCal::air_mspi_permanent_file_name(const std::string &Fname)\n"
 		"GeoCal::air_mspi_permanent_file_name\n"
-		"AirMSPI uses a file caching mechanism to speed up the processing by\n"
-		"copying files to a local disk before running executables.\n"
-		"What this means in practice is that a file can either be found in its\n"
-		"original location, or possibly in the directory pointed to by\n"
-		"MSPI_TEMP_DIR environment variable.\n"
+		"AirMSPI uses a file caching mechanism to speed up the processing by copying\n"
+		"files to a local disk before running executables.  \n"
 		"\n"
-		"This routine handles the logic of determining the permanent file name\n"
-		"if given either a permanent file name or a local file name (e.g., it\n"
-		"strips off the MSPI_TEMP_DIR part). \n"
+		"What this means in practice is that a file can either be found in its original\n"
+		"location, or possibly in the directory pointed to by MSPI_TEMP_DIR environment\n"
+		"variable.  \n"
+		"\n"
+		"This routine handles the logic of determining the permanent file name if given\n"
+		"either a permanent file name or a local file name (e.g., it strips off the\n"
+		"MSPI_TEMP_DIR part).  \n"
+		"\n"
 		""},
 	 { "air_mspi_local_file_name", _wrap_air_mspi_local_file_name, METH_O, "\n"
+		"air_mspi_local_file_name(std::string const & Fname) -> std::string\n"
 		"\n"
-		"std::string GeoCal::air_mspi_local_file_name(const std::string &Fname)\n"
 		"GeoCal::air_mspi_local_file_name\n"
-		"AirMSPI uses a file caching mechanism to speed up the processing by\n"
-		"copying files to a local disk before running executables.\n"
-		"What this means in practice is that a file can either be found in its\n"
-		"original location, or possibly in the directory pointed to by\n"
-		"MSPI_TEMP_DIR environment variable.\n"
+		"AirMSPI uses a file caching mechanism to speed up the processing by copying\n"
+		"files to a local disk before running executables.  \n"
 		"\n"
-		"This routine handles the logic of determining the local file name if\n"
-		"given either a permanent file name or a local file name (e.g., it adds\n"
-		"the MSPI_TEMP_DIR part).\n"
+		"What this means in practice is that a file can either be found in its original\n"
+		"location, or possibly in the directory pointed to by MSPI_TEMP_DIR environment\n"
+		"variable.  \n"
 		"\n"
-		"Since the file might not have been copied to the MSPI_TEMP_DIR, we\n"
-		"check if the file exists. If it doesn't we return the permanent name\n"
-		"instead. \n"
+		"This routine handles the logic of determining the local file name if given\n"
+		"either a permanent file name or a local file name (e.g., it adds the\n"
+		"MSPI_TEMP_DIR part).  \n"
+		"\n"
+		"Since the file might not have been copied to the MSPI_TEMP_DIR, we check if the\n"
+		"file exists. If it doesn't we return the permanent name instead.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -6547,55 +6553,61 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "air_mspi_permanent_file_name", _wrap_air_mspi_permanent_file_name, METH_O, "\n"
+		"air_mspi_permanent_file_name(std::string const & Fname) -> std::string\n"
 		"\n"
-		"std::string GeoCal::air_mspi_permanent_file_name(const std::string &Fname)\n"
 		"GeoCal::air_mspi_permanent_file_name\n"
-		"AirMSPI uses a file caching mechanism to speed up the processing by\n"
-		"copying files to a local disk before running executables.\n"
-		"What this means in practice is that a file can either be found in its\n"
-		"original location, or possibly in the directory pointed to by\n"
-		"MSPI_TEMP_DIR environment variable.\n"
+		"AirMSPI uses a file caching mechanism to speed up the processing by copying\n"
+		"files to a local disk before running executables.  \n"
 		"\n"
-		"This routine handles the logic of determining the permanent file name\n"
-		"if given either a permanent file name or a local file name (e.g., it\n"
-		"strips off the MSPI_TEMP_DIR part). \n"
+		"What this means in practice is that a file can either be found in its original\n"
+		"location, or possibly in the directory pointed to by MSPI_TEMP_DIR environment\n"
+		"variable.  \n"
+		"\n"
+		"This routine handles the logic of determining the permanent file name if given\n"
+		"either a permanent file name or a local file name (e.g., it strips off the\n"
+		"MSPI_TEMP_DIR part).  \n"
+		"\n"
 		""},
 	 { "air_mspi_local_file_name", _wrap_air_mspi_local_file_name, METH_O, "\n"
+		"air_mspi_local_file_name(std::string const & Fname) -> std::string\n"
 		"\n"
-		"std::string GeoCal::air_mspi_local_file_name(const std::string &Fname)\n"
 		"GeoCal::air_mspi_local_file_name\n"
-		"AirMSPI uses a file caching mechanism to speed up the processing by\n"
-		"copying files to a local disk before running executables.\n"
-		"What this means in practice is that a file can either be found in its\n"
-		"original location, or possibly in the directory pointed to by\n"
-		"MSPI_TEMP_DIR environment variable.\n"
+		"AirMSPI uses a file caching mechanism to speed up the processing by copying\n"
+		"files to a local disk before running executables.  \n"
 		"\n"
-		"This routine handles the logic of determining the local file name if\n"
-		"given either a permanent file name or a local file name (e.g., it adds\n"
-		"the MSPI_TEMP_DIR part).\n"
+		"What this means in practice is that a file can either be found in its original\n"
+		"location, or possibly in the directory pointed to by MSPI_TEMP_DIR environment\n"
+		"variable.  \n"
 		"\n"
-		"Since the file might not have been copied to the MSPI_TEMP_DIR, we\n"
-		"check if the file exists. If it doesn't we return the permanent name\n"
-		"instead. \n"
+		"This routine handles the logic of determining the local file name if given\n"
+		"either a permanent file name or a local file name (e.g., it adds the\n"
+		"MSPI_TEMP_DIR part).  \n"
+		"\n"
+		"Since the file might not have been copied to the MSPI_TEMP_DIR, we check if the\n"
+		"file exists. If it doesn't we return the permanent name instead.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

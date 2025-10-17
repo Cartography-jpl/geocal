@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _context_sqrt_decode_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _context_sqrt_decode_image:
 _context_sqrt_decode_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _context_sqrt_decode_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,18 +145,19 @@ import geocal_swig.geocal_exception
 class ContextSqrtDecodeImage(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    The Mars Context camera uses sqrt encoding.
+
+    The Mars Context camera uses sqrt encoding.  
 
     This is described in the Context documentation "Software Interface
-    Specification Context Camera (CTX) Standard Data Product" by M.
-    Caplinger (available athttps://pds-
-    imaging.jpl.nasa.gov/data/mro/mars_reconnaissance_orbiter/
-    ctx/mrox_2628/document, file ctxsis.pdf).
+    Specification Context
+    Camera (CTX) Standard Data Product" by M. Caplinger (available at https://pds-
+    imaging.jpl.nasa.gov/data/mro/mars_reconnaissance_orbiter/ctx/mrox_2628/document,
+    file ctxsis.pdf).  
 
-    This class handles decoding this data. This is a simple table
-    substitution.
+    This class handles decoding this data. This is a simple table substitution.  
 
-    C++ includes: context_sqrt_decode_image.h 
+    C++ includes: context_sqrt_decode_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,8 +165,8 @@ class ContextSqrtDecodeImage(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Raw_data):
         r"""
+        __init__(ContextSqrtDecodeImage self, boost::shared_ptr< GeoCal::RasterImage > const & Raw_data) -> ContextSqrtDecodeImage
 
-        GeoCal::ContextSqrtDecodeImage::ContextSqrtDecodeImage(const boost::shared_ptr< RasterImage > &Raw_data)
         GeoCal::ContextSqrtDecodeImage::ContextSqrtDecodeImage
         """
         _context_sqrt_decode_image.ContextSqrtDecodeImage_swiginit(self, _context_sqrt_decode_image.new_ContextSqrtDecodeImage(Raw_data))

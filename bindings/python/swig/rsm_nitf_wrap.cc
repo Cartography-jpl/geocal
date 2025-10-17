@@ -6752,84 +6752,87 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "rsm_write_nitf", _wrap_rsm_write_nitf, METH_VARARGS, "\n"
+		"rsm_write_nitf(std::string const & Fname, boost::shared_ptr< GeoCal::Rsm > const & R)\n"
 		"\n"
-		"void GeoCal::rsm_write_nitf(const std::string &Fname, const boost::shared_ptr< Rsm > &R)\n"
 		"GeoCal::rsm_write_nitf\n"
-		"We have support for saving RSMs as boost XML serialization objects.\n"
-		"This works well, but this is not an official standard. It is useful to\n"
-		"use a official standard for saving data, so we use the RSM NITF\n"
-		"standard, such as: \"Replacement Sensor Model Tagged Record Extensions\n"
-		"Specification for NITF 2.1\"\n"
-		"(http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)\n"
+		"We have support for saving RSMs as boost XML serialization objects.  \n"
+		"\n"
+		"This works well, but this is not an official standard. It is useful to use a\n"
+		"official standard for saving data, so we use the RSM NITF standard, such as:\n"
+		"\"Replacement Sensor Model Tagged Record Extensions Specification for NITF\n"
+		"2.1\" (http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)  \n"
 		"\n"
 		"While we could implement this entirely in C++, it is tricky to handle\n"
-		"everything. We already have an implementation in python. This function\n"
-		"uses a simple wrapper program that goes to and from a NITF file, using\n"
-		"python (boost_nitf_rsm). This should be sufficient, we can always\n"
-		"revisit this if there is an issue with performance or the python\n"
-		"dependency. But for now, we just route the RSM through a system call.\n"
+		"everything. We already have an implementation in python. This function uses a\n"
+		"simple wrapper program that goes to and from a NITF file, using python\n"
+		"(boost_nitf_rsm). This should be sufficient, we can always revisit this if there\n"
+		"is an issue with performance or the python dependency. But for now, we just\n"
+		"route the RSM through a system call.  \n"
 		"\n"
-		"This writes the given Rsm to a NITF file with the same name. The NITF\n"
-		"file has a single image segment in it with a size of 1x1, and the TREs\n"
-		"attached to the image segment supply the RSM. \n"
+		"This writes the given Rsm to a NITF file with the same name. The NITF file has a\n"
+		"single image segment in it with a size of 1x1, and the TREs attached to the\n"
+		"image segment supply the RSM.  \n"
+		"\n"
 		""},
 	 { "rsm_read_nitf", _wrap_rsm_read_nitf, METH_VARARGS, "\n"
+		"rsm_read_nitf(std::string const & Fname, int Naif_code) -> boost::shared_ptr< GeoCal::Rsm >\n"
 		"\n"
-		"boost::shared_ptr< Rsm > GeoCal::rsm_read_nitf(const std::string &Fname, int Naif_code)\n"
 		"GeoCal::rsm_read_nitf\n"
-		"We have support for saving RSMs as boost XML serialization objects.\n"
-		"This works well, but this is not an official standard. It is useful to\n"
-		"use a official standard for saving data, so we use the RSM NITF\n"
-		"standard, such as: \"Replacement Sensor Model Tagged Record Extensions\n"
-		"Specification for NITF 2.1\"\n"
-		"(http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)\n"
+		"We have support for saving RSMs as boost XML serialization objects.  \n"
+		"\n"
+		"This works well, but this is not an official standard. It is useful to use a\n"
+		"official standard for saving data, so we use the RSM NITF standard, such as:\n"
+		"\"Replacement Sensor Model Tagged Record Extensions Specification for NITF\n"
+		"2.1\" (http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)  \n"
 		"\n"
 		"While we could implement this entirely in C++, it is tricky to handle\n"
-		"everything. We already have an implementation in python. This function\n"
-		"uses a simple wrapper program that goes to and from a NITF file, using\n"
-		"python (boost_nitf_rsm). This should be sufficient, we can always\n"
-		"revisit this if there is an issue with performance or the python\n"
-		"dependency. But for now, we just route the RSM through a system call.\n"
+		"everything. We already have an implementation in python. This function uses a\n"
+		"simple wrapper program that goes to and from a NITF file, using python\n"
+		"(boost_nitf_rsm). This should be sufficient, we can always revisit this if there\n"
+		"is an issue with performance or the python dependency. But for now, we just\n"
+		"route the RSM through a system call.  \n"
 		"\n"
-		"This reads a NITF file generated by rsm_write_nitf. We just take the\n"
-		"first image segment found in the file, and RSM defined by that image\n"
-		"segments TREs.\n"
+		"This reads a NITF file generated by rsm_write_nitf. We just take the first image\n"
+		"segment found in the file, and RSM defined by that image segments TREs.  \n"
 		"\n"
-		"The NITF doesn't keep the Naif_code, so we pass that in. This gets\n"
-		"store in the VICAR file. \n"
+		"The NITF doesn't keep the Naif_code, so we pass that in. This gets store in the\n"
+		"VICAR file.  \n"
+		"\n"
 		""},
 	 { "glas_gfm_write_nitf", _wrap_glas_gfm_write_nitf, METH_VARARGS, "\n"
+		"glas_gfm_write_nitf(std::string const & Fname, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc)\n"
 		"\n"
-		"void GeoCal::glas_gfm_write_nitf(const std::string &Fname, const boost::shared_ptr<\n"
-		"ImageGroundConnection > &Igc)\n"
 		"GeoCal::glas_gfm_write_nitf\n"
-		"Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection.\n"
+		"Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection.  \n"
 		"\n"
 		""},
 	 { "glas_gfm_read_nitf", _wrap_glas_gfm_read_nitf, METH_VARARGS, "\n"
+		"glas_gfm_read_nitf(std::string const & Fname, int Naif_code) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > GeoCal::glas_gfm_read_nitf(const std::string &Fname, int Naif_code)\n"
 		"GeoCal::glas_gfm_read_nitf\n"
-		"Same as rsm_read_nitf, but for GLAS/GFM ImageGroundConnection.\n"
+		"Same as rsm_read_nitf, but for GLAS/GFM ImageGroundConnection.  \n"
 		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
@@ -6838,84 +6841,87 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "rsm_write_nitf", _wrap_rsm_write_nitf, METH_VARARGS, "\n"
+		"rsm_write_nitf(std::string const & Fname, boost::shared_ptr< GeoCal::Rsm > const & R)\n"
 		"\n"
-		"void GeoCal::rsm_write_nitf(const std::string &Fname, const boost::shared_ptr< Rsm > &R)\n"
 		"GeoCal::rsm_write_nitf\n"
-		"We have support for saving RSMs as boost XML serialization objects.\n"
-		"This works well, but this is not an official standard. It is useful to\n"
-		"use a official standard for saving data, so we use the RSM NITF\n"
-		"standard, such as: \"Replacement Sensor Model Tagged Record Extensions\n"
-		"Specification for NITF 2.1\"\n"
-		"(http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)\n"
+		"We have support for saving RSMs as boost XML serialization objects.  \n"
+		"\n"
+		"This works well, but this is not an official standard. It is useful to use a\n"
+		"official standard for saving data, so we use the RSM NITF standard, such as:\n"
+		"\"Replacement Sensor Model Tagged Record Extensions Specification for NITF\n"
+		"2.1\" (http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)  \n"
 		"\n"
 		"While we could implement this entirely in C++, it is tricky to handle\n"
-		"everything. We already have an implementation in python. This function\n"
-		"uses a simple wrapper program that goes to and from a NITF file, using\n"
-		"python (boost_nitf_rsm). This should be sufficient, we can always\n"
-		"revisit this if there is an issue with performance or the python\n"
-		"dependency. But for now, we just route the RSM through a system call.\n"
+		"everything. We already have an implementation in python. This function uses a\n"
+		"simple wrapper program that goes to and from a NITF file, using python\n"
+		"(boost_nitf_rsm). This should be sufficient, we can always revisit this if there\n"
+		"is an issue with performance or the python dependency. But for now, we just\n"
+		"route the RSM through a system call.  \n"
 		"\n"
-		"This writes the given Rsm to a NITF file with the same name. The NITF\n"
-		"file has a single image segment in it with a size of 1x1, and the TREs\n"
-		"attached to the image segment supply the RSM. \n"
+		"This writes the given Rsm to a NITF file with the same name. The NITF file has a\n"
+		"single image segment in it with a size of 1x1, and the TREs attached to the\n"
+		"image segment supply the RSM.  \n"
+		"\n"
 		""},
 	 { "rsm_read_nitf", _wrap_rsm_read_nitf, METH_VARARGS, "\n"
+		"rsm_read_nitf(std::string const & Fname, int Naif_code) -> boost::shared_ptr< GeoCal::Rsm >\n"
 		"\n"
-		"boost::shared_ptr< Rsm > GeoCal::rsm_read_nitf(const std::string &Fname, int Naif_code)\n"
 		"GeoCal::rsm_read_nitf\n"
-		"We have support for saving RSMs as boost XML serialization objects.\n"
-		"This works well, but this is not an official standard. It is useful to\n"
-		"use a official standard for saving data, so we use the RSM NITF\n"
-		"standard, such as: \"Replacement Sensor Model Tagged Record Extensions\n"
-		"Specification for NITF 2.1\"\n"
-		"(http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)\n"
+		"We have support for saving RSMs as boost XML serialization objects.  \n"
+		"\n"
+		"This works well, but this is not an official standard. It is useful to use a\n"
+		"official standard for saving data, so we use the RSM NITF standard, such as:\n"
+		"\"Replacement Sensor Model Tagged Record Extensions Specification for NITF\n"
+		"2.1\" (http://www.gwg.nga.mil/ntb/baseline/docs/RSM/RSM_NITF_TREs_v1.0_.pdf)  \n"
 		"\n"
 		"While we could implement this entirely in C++, it is tricky to handle\n"
-		"everything. We already have an implementation in python. This function\n"
-		"uses a simple wrapper program that goes to and from a NITF file, using\n"
-		"python (boost_nitf_rsm). This should be sufficient, we can always\n"
-		"revisit this if there is an issue with performance or the python\n"
-		"dependency. But for now, we just route the RSM through a system call.\n"
+		"everything. We already have an implementation in python. This function uses a\n"
+		"simple wrapper program that goes to and from a NITF file, using python\n"
+		"(boost_nitf_rsm). This should be sufficient, we can always revisit this if there\n"
+		"is an issue with performance or the python dependency. But for now, we just\n"
+		"route the RSM through a system call.  \n"
 		"\n"
-		"This reads a NITF file generated by rsm_write_nitf. We just take the\n"
-		"first image segment found in the file, and RSM defined by that image\n"
-		"segments TREs.\n"
+		"This reads a NITF file generated by rsm_write_nitf. We just take the first image\n"
+		"segment found in the file, and RSM defined by that image segments TREs.  \n"
 		"\n"
-		"The NITF doesn't keep the Naif_code, so we pass that in. This gets\n"
-		"store in the VICAR file. \n"
+		"The NITF doesn't keep the Naif_code, so we pass that in. This gets store in the\n"
+		"VICAR file.  \n"
+		"\n"
 		""},
 	 { "glas_gfm_write_nitf", _wrap_glas_gfm_write_nitf, METH_VARARGS, "\n"
+		"glas_gfm_write_nitf(std::string const & Fname, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc)\n"
 		"\n"
-		"void GeoCal::glas_gfm_write_nitf(const std::string &Fname, const boost::shared_ptr<\n"
-		"ImageGroundConnection > &Igc)\n"
 		"GeoCal::glas_gfm_write_nitf\n"
-		"Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection.\n"
+		"Like rsm_write_nitf, but for GLAS/GFM ImageGroundConnection.  \n"
 		"\n"
 		""},
 	 { "glas_gfm_read_nitf", _wrap_glas_gfm_read_nitf, METH_VARARGS, "\n"
+		"glas_gfm_read_nitf(std::string const & Fname, int Naif_code) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > GeoCal::glas_gfm_read_nitf(const std::string &Fname, int Naif_code)\n"
 		"GeoCal::glas_gfm_read_nitf\n"
-		"Same as rsm_read_nitf, but for GLAS/GFM ImageGroundConnection.\n"
+		"Same as rsm_read_nitf, but for GLAS/GFM ImageGroundConnection.  \n"
 		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }

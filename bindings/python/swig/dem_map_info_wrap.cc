@@ -7325,180 +7325,189 @@ SWIGINTERN PyObject *DemMapInfo_swigregister(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "DemMapInfo_change_to_geodetic360", _wrap_DemMapInfo_change_to_geodetic360, METH_O, "\n"
+		"DemMapInfo_change_to_geodetic360(DemMapInfo self)\n"
 		"\n"
-		"virtual void GeoCal::DemMapInfo::change_to_geodetic360()\n"
 		"GeoCal::DemMapInfo::change_to_geodetic360\n"
-		"We need special handling for maps that are crossing the dateline.\n"
-		"For most projections this isn't an issue - we just pick one that\n"
-		"doesn't do anything in particular crossing the dateline. But for the\n"
-		"special case of a Geodetic map projection, we flip signs so the point\n"
-		"with longitude -180 is right next to 179.999. To handle this, we can\n"
-		"change the map projection to work with a Geodetic360. This is really\n"
-		"the same map projection, we just label the longitude differently.\n"
+		"We need special handling for maps that are crossing the dateline.  \n"
+		"\n"
+		"For most projections this isn't an issue - we just pick one that doesn't do\n"
+		"anything in particular crossing the dateline. But for the special case of a\n"
+		"Geodetic map projection, we flip signs so the point with longitude -180 is right\n"
+		"next to 179.999. To handle this, we can change the map projection to work with a\n"
+		"Geodetic360. This is really the same map projection, we just label the longitude\n"
+		"differently.  \n"
 		"\n"
 		"Note this is a noop if the coordinate converter is already a\n"
-		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any\n"
-		"other projection will cause an exception to be thrown. \n"
+		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any other\n"
+		"projection will cause an exception to be thrown.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_change_to_geodetic", _wrap_DemMapInfo_change_to_geodetic, METH_O, "\n"
+		"DemMapInfo_change_to_geodetic(DemMapInfo self)\n"
 		"\n"
-		"virtual void GeoCal::DemMapInfo::change_to_geodetic()\n"
 		"GeoCal::DemMapInfo::change_to_geodetic\n"
-		"Change back to -180 to 180.\n"
+		"Change back to -180 to 180.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_is_geodetic_360", _wrap_DemMapInfo__v_is_geodetic_360, METH_O, "\n"
+		"DemMapInfo__v_is_geodetic_360(DemMapInfo self) -> bool\n"
 		"\n"
-		"bool GeoCal::DemMapInfo::is_geodetic_360() const\n"
 		"GeoCal::DemMapInfo::is_geodetic_360\n"
-		"Simple test to see if we are Geodetic360, sometimes class need special\n"
-		"handling for this.\n"
+		"Simple test to see if we are Geodetic360, sometimes class need special handling\n"
+		"for this.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_datum", _wrap_DemMapInfo__v_datum, METH_O, "\n"
+		"DemMapInfo__v_datum(DemMapInfo self) -> boost::shared_ptr< GeoCal::Datum >\n"
 		"\n"
-		"const boost::shared_ptr< Datum > GeoCal::DemMapInfo::datum_ptr() const\n"
 		"GeoCal::DemMapInfo::datum_ptr\n"
-		"Pointer to datum.\n"
+		"Pointer to datum.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_map_info", _wrap_DemMapInfo__v_map_info, METH_O, "\n"
+		"DemMapInfo__v_map_info(DemMapInfo self) -> MapInfo\n"
 		"\n"
-		"const MapInfo & GeoCal::DemMapInfo::map_info() const\n"
 		"GeoCal::DemMapInfo::map_info\n"
-		"MapInfo of underlying data.\n"
+		"MapInfo of underlying data.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_height_datum", _wrap_DemMapInfo_height_datum, METH_VARARGS, "\n"
+		"DemMapInfo_height_datum(DemMapInfo self, GroundCoordinate Gp) -> double\n"
 		"\n"
-		"double DemMapInfo::height_datum(const GroundCoordinate &Gp) const\n"
 		"GeoCal::DemMapInfo::height_datum\n"
-		"Height relative to datum.\n"
+		"Height relative to datum.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_gradient", _wrap_DemMapInfo_gradient, METH_VARARGS, "\n"
+		"DemMapInfo_gradient(DemMapInfo self, int Y_index, int X_index)\n"
 		"\n"
-		"void DemMapInfo::gradient(int Y_index, int X_index, double &dz_dx, double &dz_dy) const\n"
 		"GeoCal::DemMapInfo::gradient\n"
-		"Calculate dz_dx and dz_dy, which is the first step in calculating\n"
-		"slope and aspect of the DEM.\n"
-		"This uses the second order ARCINFO method. We handle the grid edges by\n"
-		"just using the elevation as Y_index, X_index.\n"
+		"Calculate dz_dx and dz_dy, which is the first step in calculating slope and\n"
+		"aspect of the DEM.  \n"
 		"\n"
-		"This is also the method used by richdem (a python package), which\n"
-		"references Horn, B.K.P., 1981. Hill shading and the reflectance map.\n"
-		"Proceedings of the IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the\n"
-		"original source of this algorithm \n"
+		"This uses the second order ARCINFO method. We handle the grid edges by just\n"
+		"using the elevation as Y_index, X_index.  \n"
+		"\n"
+		"This is also the method used by richdem (a python package), which references\n"
+		"Horn, B.K.P., 1981. Hill shading and the reflectance map. Proceedings of the\n"
+		"IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the original source of this\n"
+		"algorithm  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_slope_riserun", _wrap_DemMapInfo_slope_riserun, METH_VARARGS, "\n"
+		"DemMapInfo_slope_riserun(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double DemMapInfo::slope_riserun(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_riserun\n"
-		"Slope for the given point, as a Rise/Run.\n"
+		"Slope for the given point, as a Rise/Run.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_slope_percentage", _wrap_DemMapInfo_slope_percentage, METH_VARARGS, "\n"
+		"DemMapInfo_slope_percentage(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double GeoCal::DemMapInfo::slope_percentage(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_percentage\n"
-		"Slope for the given point, as a percentage.\n"
+		"Slope for the given point, as a percentage.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_slope_radian", _wrap_DemMapInfo_slope_radian, METH_VARARGS, "\n"
+		"DemMapInfo_slope_radian(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double GeoCal::DemMapInfo::slope_radian(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_radian\n"
-		"Slope for the given point, as radians.\n"
+		"Slope for the given point, as radians.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_slope_degree", _wrap_DemMapInfo_slope_degree, METH_VARARGS, "\n"
+		"DemMapInfo_slope_degree(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double GeoCal::DemMapInfo::slope_degree(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_degree\n"
-		"Slope for the given point, as degrees.\n"
+		"Slope for the given point, as degrees.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_aspect", _wrap_DemMapInfo_aspect, METH_VARARGS, "\n"
+		"DemMapInfo_aspect(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double DemMapInfo::aspect(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::aspect\n"
-		"Aspect angle.\n"
-		"This uses the Horn 1981 definition, in degrees [0, 360). 0 is north,\n"
-		"we increase in a clockwise fashion. Note for perfectly flat areas\n"
-		"(slope_riserun is 0) this isn't really defined, but by convention we\n"
-		"return 270 (directly west).\n"
+		"Aspect angle.  \n"
 		"\n"
-		"Aspect is the downslope direction for the maximum rate of change in\n"
-		"value for each pixel. \n"
+		"This uses the Horn 1981 definition, in degrees [0, 360). 0 is north, we increase\n"
+		"in a clockwise fashion. Note for perfectly flat areas (slope_riserun is 0) this\n"
+		"isn't really defined, but by convention we return 270 (directly west).  \n"
+		"\n"
+		"Aspect is the downslope direction for the maximum rate of change in value for\n"
+		"each pixel.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_slope_and_aspect", _wrap_DemMapInfo_slope_and_aspect, METH_VARARGS, "\n"
+		"DemMapInfo_slope_and_aspect(DemMapInfo self, GroundCoordinate Gc)\n"
 		"\n"
-		"void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)\n"
-		"const\n"
 		"GeoCal::DemMapInfo::slope_and_aspect\n"
-		"Frequently we want both the slope and aspect, this one function saves\n"
-		"a step and returns both.\n"
-		"There isn't really \"one\" way to handle slope and aspect for points\n"
-		"that don't lie on the DEM grid. MISR had a larger footprint and\n"
-		"calculated an average of slopes/aspect that fell in to the footprint.\n"
-		"Another approach is to do a bilinear interpolation.\n"
+		"Frequently we want both the slope and aspect, this one function saves a step and\n"
+		"returns both.  \n"
 		"\n"
-		"This particular function just uses bilinear interpolation. \n"
+		"There isn't really \"one\" way to handle slope and aspect for points that don't\n"
+		"lie on the DEM grid. MISR had a larger footprint and calculated an average of\n"
+		"slopes/aspect that fell in to the footprint. Another approach is to do a\n"
+		"bilinear interpolation.  \n"
+		"\n"
+		"This particular function just uses bilinear interpolation.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_slope_and_aspect_nearest_neighbor", _wrap_DemMapInfo_slope_and_aspect_nearest_neighbor, METH_VARARGS, "\n"
+		"DemMapInfo_slope_and_aspect_nearest_neighbor(DemMapInfo self, GroundCoordinate Gc)\n"
 		"\n"
-		"void DemMapInfo::slope_and_aspect_nearest_neighbor(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)\n"
-		"const\n"
 		"GeoCal::DemMapInfo::slope_and_aspect_nearest_neighbor\n"
-		"Frequently we want both the slope and aspect, this one function saves\n"
-		"a step and returns both.\n"
-		"There isn't really \"one\" way to handle slope and aspect for points\n"
-		"that don't lie on the DEM grid. MISR had a larger footprint and\n"
-		"calculated an average of slopes/aspect that fell in to the footprint.\n"
-		"Another approach is to do a bilinear interpolation.\n"
+		"Frequently we want both the slope and aspect, this one function saves a step and\n"
+		"returns both.  \n"
 		"\n"
-		"This particular function just uses the nearest neighbor. Slope and\n"
-		"aspect are a bit approximate anyways, so this is probably as good as\n"
-		"any other approach if the DEM resolution is similar to your pixel\n"
-		"size. \n"
+		"There isn't really \"one\" way to handle slope and aspect for points that don't\n"
+		"lie on the DEM grid. MISR had a larger footprint and calculated an average of\n"
+		"slopes/aspect that fell in to the footprint. Another approach is to do a\n"
+		"bilinear interpolation.  \n"
+		"\n"
+		"This particular function just uses the nearest neighbor. Slope and aspect are a\n"
+		"bit approximate anyways, so this is probably as good as any other approach if\n"
+		"the DEM resolution is similar to your pixel size.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo__v_outside_dem_is_error", _wrap_DemMapInfo__v_outside_dem_is_error, METH_O, "\n"
+		"DemMapInfo__v_outside_dem_is_error(DemMapInfo self) -> bool\n"
 		"\n"
-		"bool GeoCal::DemMapInfo::outside_dem_is_error() const\n"
 		"GeoCal::DemMapInfo::outside_dem_is_error\n"
-		"If true, then calling with values outside the range of area of the DEM\n"
-		"triggers an exception, otherwise we just return a height of 0.\n"
+		"If true, then calling with values outside the range of area of the DEM triggers\n"
+		"an exception, otherwise we just return a height of 0.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_naif_code", _wrap_DemMapInfo__v_naif_code, METH_O, "\n"
+		"DemMapInfo__v_naif_code(DemMapInfo self) -> int\n"
 		"\n"
-		"int GeoCal::DemMapInfo::naif_code() const\n"
 		"GeoCal::DemMapInfo::naif_code\n"
 		""},
 	 { "delete_DemMapInfo", _wrap_delete_DemMapInfo, METH_O, "\n"
+		"delete_DemMapInfo(DemMapInfo self)\n"
 		"\n"
-		"virtual GeoCal::DemMapInfo::~DemMapInfo()\n"
 		"GeoCal::DemMapInfo::~DemMapInfo\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_swigregister", DemMapInfo_swigregister, METH_O, NULL},
@@ -7508,180 +7517,189 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "DemMapInfo_change_to_geodetic360", _wrap_DemMapInfo_change_to_geodetic360, METH_O, "\n"
+		"change_to_geodetic360(DemMapInfo self)\n"
 		"\n"
-		"virtual void GeoCal::DemMapInfo::change_to_geodetic360()\n"
 		"GeoCal::DemMapInfo::change_to_geodetic360\n"
-		"We need special handling for maps that are crossing the dateline.\n"
-		"For most projections this isn't an issue - we just pick one that\n"
-		"doesn't do anything in particular crossing the dateline. But for the\n"
-		"special case of a Geodetic map projection, we flip signs so the point\n"
-		"with longitude -180 is right next to 179.999. To handle this, we can\n"
-		"change the map projection to work with a Geodetic360. This is really\n"
-		"the same map projection, we just label the longitude differently.\n"
+		"We need special handling for maps that are crossing the dateline.  \n"
+		"\n"
+		"For most projections this isn't an issue - we just pick one that doesn't do\n"
+		"anything in particular crossing the dateline. But for the special case of a\n"
+		"Geodetic map projection, we flip signs so the point with longitude -180 is right\n"
+		"next to 179.999. To handle this, we can change the map projection to work with a\n"
+		"Geodetic360. This is really the same map projection, we just label the longitude\n"
+		"differently.  \n"
 		"\n"
 		"Note this is a noop if the coordinate converter is already a\n"
-		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any\n"
-		"other projection will cause an exception to be thrown. \n"
+		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any other\n"
+		"projection will cause an exception to be thrown.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_change_to_geodetic", _wrap_DemMapInfo_change_to_geodetic, METH_O, "\n"
+		"change_to_geodetic(DemMapInfo self)\n"
 		"\n"
-		"virtual void GeoCal::DemMapInfo::change_to_geodetic()\n"
 		"GeoCal::DemMapInfo::change_to_geodetic\n"
-		"Change back to -180 to 180.\n"
+		"Change back to -180 to 180.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_is_geodetic_360", _wrap_DemMapInfo__v_is_geodetic_360, METH_O, "\n"
+		"_v_is_geodetic_360(DemMapInfo self) -> bool\n"
 		"\n"
-		"bool GeoCal::DemMapInfo::is_geodetic_360() const\n"
 		"GeoCal::DemMapInfo::is_geodetic_360\n"
-		"Simple test to see if we are Geodetic360, sometimes class need special\n"
-		"handling for this.\n"
+		"Simple test to see if we are Geodetic360, sometimes class need special handling\n"
+		"for this.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_datum", _wrap_DemMapInfo__v_datum, METH_O, "\n"
+		"_v_datum(DemMapInfo self) -> boost::shared_ptr< GeoCal::Datum >\n"
 		"\n"
-		"const boost::shared_ptr< Datum > GeoCal::DemMapInfo::datum_ptr() const\n"
 		"GeoCal::DemMapInfo::datum_ptr\n"
-		"Pointer to datum.\n"
+		"Pointer to datum.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_map_info", _wrap_DemMapInfo__v_map_info, METH_O, "\n"
+		"_v_map_info(DemMapInfo self) -> MapInfo\n"
 		"\n"
-		"const MapInfo & GeoCal::DemMapInfo::map_info() const\n"
 		"GeoCal::DemMapInfo::map_info\n"
-		"MapInfo of underlying data.\n"
+		"MapInfo of underlying data.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_height_datum", _wrap_DemMapInfo_height_datum, METH_VARARGS, "\n"
+		"height_datum(DemMapInfo self, GroundCoordinate Gp) -> double\n"
 		"\n"
-		"double DemMapInfo::height_datum(const GroundCoordinate &Gp) const\n"
 		"GeoCal::DemMapInfo::height_datum\n"
-		"Height relative to datum.\n"
+		"Height relative to datum.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_gradient", _wrap_DemMapInfo_gradient, METH_VARARGS, "\n"
+		"gradient(DemMapInfo self, int Y_index, int X_index)\n"
 		"\n"
-		"void DemMapInfo::gradient(int Y_index, int X_index, double &dz_dx, double &dz_dy) const\n"
 		"GeoCal::DemMapInfo::gradient\n"
-		"Calculate dz_dx and dz_dy, which is the first step in calculating\n"
-		"slope and aspect of the DEM.\n"
-		"This uses the second order ARCINFO method. We handle the grid edges by\n"
-		"just using the elevation as Y_index, X_index.\n"
+		"Calculate dz_dx and dz_dy, which is the first step in calculating slope and\n"
+		"aspect of the DEM.  \n"
 		"\n"
-		"This is also the method used by richdem (a python package), which\n"
-		"references Horn, B.K.P., 1981. Hill shading and the reflectance map.\n"
-		"Proceedings of the IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the\n"
-		"original source of this algorithm \n"
+		"This uses the second order ARCINFO method. We handle the grid edges by just\n"
+		"using the elevation as Y_index, X_index.  \n"
+		"\n"
+		"This is also the method used by richdem (a python package), which references\n"
+		"Horn, B.K.P., 1981. Hill shading and the reflectance map. Proceedings of the\n"
+		"IEEE 69, 14–47. doi:10.1109/PROC.1981.11918 as the original source of this\n"
+		"algorithm  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_slope_riserun", _wrap_DemMapInfo_slope_riserun, METH_VARARGS, "\n"
+		"slope_riserun(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double DemMapInfo::slope_riserun(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_riserun\n"
-		"Slope for the given point, as a Rise/Run.\n"
+		"Slope for the given point, as a Rise/Run.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_slope_percentage", _wrap_DemMapInfo_slope_percentage, METH_VARARGS, "\n"
+		"slope_percentage(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double GeoCal::DemMapInfo::slope_percentage(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_percentage\n"
-		"Slope for the given point, as a percentage.\n"
+		"Slope for the given point, as a percentage.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_slope_radian", _wrap_DemMapInfo_slope_radian, METH_VARARGS, "\n"
+		"slope_radian(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double GeoCal::DemMapInfo::slope_radian(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_radian\n"
-		"Slope for the given point, as radians.\n"
+		"Slope for the given point, as radians.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_slope_degree", _wrap_DemMapInfo_slope_degree, METH_VARARGS, "\n"
+		"slope_degree(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double GeoCal::DemMapInfo::slope_degree(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::slope_degree\n"
-		"Slope for the given point, as degrees.\n"
+		"Slope for the given point, as degrees.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_aspect", _wrap_DemMapInfo_aspect, METH_VARARGS, "\n"
+		"aspect(DemMapInfo self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"double DemMapInfo::aspect(int Y_index, int X_index) const\n"
 		"GeoCal::DemMapInfo::aspect\n"
-		"Aspect angle.\n"
-		"This uses the Horn 1981 definition, in degrees [0, 360). 0 is north,\n"
-		"we increase in a clockwise fashion. Note for perfectly flat areas\n"
-		"(slope_riserun is 0) this isn't really defined, but by convention we\n"
-		"return 270 (directly west).\n"
+		"Aspect angle.  \n"
 		"\n"
-		"Aspect is the downslope direction for the maximum rate of change in\n"
-		"value for each pixel. \n"
+		"This uses the Horn 1981 definition, in degrees [0, 360). 0 is north, we increase\n"
+		"in a clockwise fashion. Note for perfectly flat areas (slope_riserun is 0) this\n"
+		"isn't really defined, but by convention we return 270 (directly west).  \n"
+		"\n"
+		"Aspect is the downslope direction for the maximum rate of change in value for\n"
+		"each pixel.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_slope_and_aspect", _wrap_DemMapInfo_slope_and_aspect, METH_VARARGS, "\n"
+		"slope_and_aspect(DemMapInfo self, GroundCoordinate Gc)\n"
 		"\n"
-		"void DemMapInfo::slope_and_aspect(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)\n"
-		"const\n"
 		"GeoCal::DemMapInfo::slope_and_aspect\n"
-		"Frequently we want both the slope and aspect, this one function saves\n"
-		"a step and returns both.\n"
-		"There isn't really \"one\" way to handle slope and aspect for points\n"
-		"that don't lie on the DEM grid. MISR had a larger footprint and\n"
-		"calculated an average of slopes/aspect that fell in to the footprint.\n"
-		"Another approach is to do a bilinear interpolation.\n"
+		"Frequently we want both the slope and aspect, this one function saves a step and\n"
+		"returns both.  \n"
 		"\n"
-		"This particular function just uses bilinear interpolation. \n"
+		"There isn't really \"one\" way to handle slope and aspect for points that don't\n"
+		"lie on the DEM grid. MISR had a larger footprint and calculated an average of\n"
+		"slopes/aspect that fell in to the footprint. Another approach is to do a\n"
+		"bilinear interpolation.  \n"
+		"\n"
+		"This particular function just uses bilinear interpolation.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo_slope_and_aspect_nearest_neighbor", _wrap_DemMapInfo_slope_and_aspect_nearest_neighbor, METH_VARARGS, "\n"
+		"slope_and_aspect_nearest_neighbor(DemMapInfo self, GroundCoordinate Gc)\n"
 		"\n"
-		"void DemMapInfo::slope_and_aspect_nearest_neighbor(const GroundCoordinate &Gc, double &Slope_deg, double &Aspect_deg)\n"
-		"const\n"
 		"GeoCal::DemMapInfo::slope_and_aspect_nearest_neighbor\n"
-		"Frequently we want both the slope and aspect, this one function saves\n"
-		"a step and returns both.\n"
-		"There isn't really \"one\" way to handle slope and aspect for points\n"
-		"that don't lie on the DEM grid. MISR had a larger footprint and\n"
-		"calculated an average of slopes/aspect that fell in to the footprint.\n"
-		"Another approach is to do a bilinear interpolation.\n"
+		"Frequently we want both the slope and aspect, this one function saves a step and\n"
+		"returns both.  \n"
 		"\n"
-		"This particular function just uses the nearest neighbor. Slope and\n"
-		"aspect are a bit approximate anyways, so this is probably as good as\n"
-		"any other approach if the DEM resolution is similar to your pixel\n"
-		"size. \n"
+		"There isn't really \"one\" way to handle slope and aspect for points that don't\n"
+		"lie on the DEM grid. MISR had a larger footprint and calculated an average of\n"
+		"slopes/aspect that fell in to the footprint. Another approach is to do a\n"
+		"bilinear interpolation.  \n"
+		"\n"
+		"This particular function just uses the nearest neighbor. Slope and aspect are a\n"
+		"bit approximate anyways, so this is probably as good as any other approach if\n"
+		"the DEM resolution is similar to your pixel size.  \n"
+		"\n"
 		""},
 	 { "DemMapInfo__v_outside_dem_is_error", _wrap_DemMapInfo__v_outside_dem_is_error, METH_O, "\n"
+		"_v_outside_dem_is_error(DemMapInfo self) -> bool\n"
 		"\n"
-		"bool GeoCal::DemMapInfo::outside_dem_is_error() const\n"
 		"GeoCal::DemMapInfo::outside_dem_is_error\n"
-		"If true, then calling with values outside the range of area of the DEM\n"
-		"triggers an exception, otherwise we just return a height of 0.\n"
+		"If true, then calling with values outside the range of area of the DEM triggers\n"
+		"an exception, otherwise we just return a height of 0.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo__v_naif_code", _wrap_DemMapInfo__v_naif_code, METH_O, "\n"
+		"_v_naif_code(DemMapInfo self) -> int\n"
 		"\n"
-		"int GeoCal::DemMapInfo::naif_code() const\n"
 		"GeoCal::DemMapInfo::naif_code\n"
 		""},
 	 { "delete_DemMapInfo", _wrap_delete_DemMapInfo, METH_O, "\n"
+		"delete_DemMapInfo(DemMapInfo self)\n"
 		"\n"
-		"virtual GeoCal::DemMapInfo::~DemMapInfo()\n"
 		"GeoCal::DemMapInfo::~DemMapInfo\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "DemMapInfo_swigregister", DemMapInfo_swigregister, METH_O, NULL},

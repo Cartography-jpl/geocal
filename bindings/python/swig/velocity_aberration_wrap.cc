@@ -6840,70 +6840,71 @@ SWIGINTERN PyObject *VelocityAberrationFirstOrder_swiginit(PyObject *SWIGUNUSEDP
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "VelocityAberration_velocity_aberration_apply", _wrap_VelocityAberration_velocity_aberration_apply, METH_VARARGS, "\n"
+		"VelocityAberration_velocity_aberration_apply(VelocityAberration self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_no_aberration, Array_double_3 Velocity_cf) -> CartesianFixedLookVector\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberration::velocity_aberration_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_no_aberration, const boost::array< double, 3 > &Velocity_cf) const\n"
-		"=0\n"
 		"GeoCal::VelocityAberration::velocity_aberration_apply\n"
 		"Apply a velocity aberration correction, taking a ground coordinate w/o\n"
-		"aberration.\n"
-		"We return the CartesianFixedLookVector including aberration. \n"
+		"aberration.  \n"
+		"\n"
+		"We return the CartesianFixedLookVector including aberration.  \n"
+		"\n"
 		""},
 	 { "VelocityAberration_velocity_aberration_reverse", _wrap_VelocityAberration_velocity_aberration_reverse, METH_VARARGS, "\n"
+		"VelocityAberration_velocity_aberration_reverse(VelocityAberration self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_with_aberration, Array_double_3 Velocity_cf) -> CartesianFixedLookVector\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberration::velocity_aberration_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_with_aberration, const boost::array< double, 3 > &Velocity_cf)\n"
-		"const =0\n"
 		"GeoCal::VelocityAberration::velocity_aberration_reverse\n"
-		"Reverse of velocity_aberration_apply.\n"
+		"Reverse of velocity_aberration_apply.  \n"
 		"\n"
 		""},
-	 { "VelocityAberration___str__", _wrap_VelocityAberration___str__, METH_O, NULL},
+	 { "VelocityAberration___str__", _wrap_VelocityAberration___str__, METH_O, "VelocityAberration___str__(VelocityAberration self) -> std::string"},
 	 { "delete_VelocityAberration", _wrap_delete_VelocityAberration, METH_O, "\n"
+		"delete_VelocityAberration(VelocityAberration self)\n"
 		"\n"
-		"virtual GeoCal::VelocityAberration::~VelocityAberration()\n"
 		"GeoCal::VelocityAberration::~VelocityAberration\n"
 		""},
 	 { "VelocityAberration_swigregister", VelocityAberration_swigregister, METH_O, NULL},
 	 { "new_NoVelocityAberration", _wrap_new_NoVelocityAberration, METH_NOARGS, "\n"
+		"new_NoVelocityAberration() -> NoVelocityAberration\n"
 		"\n"
-		"GeoCal::NoVelocityAberration::NoVelocityAberration()\n"
 		"GeoCal::NoVelocityAberration::NoVelocityAberration\n"
 		""},
 	 { "delete_NoVelocityAberration", _wrap_delete_NoVelocityAberration, METH_O, "\n"
+		"delete_NoVelocityAberration(NoVelocityAberration self)\n"
 		"\n"
-		"virtual GeoCal::NoVelocityAberration::~NoVelocityAberration()\n"
 		"GeoCal::NoVelocityAberration::~NoVelocityAberration\n"
 		""},
 	 { "NoVelocityAberration_swigregister", NoVelocityAberration_swigregister, METH_O, NULL},
 	 { "NoVelocityAberration_swiginit", NoVelocityAberration_swiginit, METH_VARARGS, NULL},
 	 { "new_VelocityAberrationFirstOrder", _wrap_new_VelocityAberrationFirstOrder, METH_NOARGS, "\n"
+		"new_VelocityAberrationFirstOrder() -> VelocityAberrationFirstOrder\n"
 		"\n"
-		"GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder()\n"
 		"GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder\n"
 		""},
 	 { "delete_VelocityAberrationFirstOrder", _wrap_delete_VelocityAberrationFirstOrder, METH_O, "\n"
+		"delete_VelocityAberrationFirstOrder(VelocityAberrationFirstOrder self)\n"
 		"\n"
-		"virtual GeoCal::VelocityAberrationFirstOrder::~VelocityAberrationFirstOrder()\n"
 		"GeoCal::VelocityAberrationFirstOrder::~VelocityAberrationFirstOrder\n"
 		""},
 	 { "VelocityAberrationFirstOrder_swigregister", VelocityAberrationFirstOrder_swigregister, METH_O, NULL},
@@ -6914,70 +6915,71 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "VelocityAberration_velocity_aberration_apply", _wrap_VelocityAberration_velocity_aberration_apply, METH_VARARGS, "\n"
+		"velocity_aberration_apply(VelocityAberration self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_no_aberration, Array_double_3 Velocity_cf) -> CartesianFixedLookVector\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberration::velocity_aberration_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_no_aberration, const boost::array< double, 3 > &Velocity_cf) const\n"
-		"=0\n"
 		"GeoCal::VelocityAberration::velocity_aberration_apply\n"
 		"Apply a velocity aberration correction, taking a ground coordinate w/o\n"
-		"aberration.\n"
-		"We return the CartesianFixedLookVector including aberration. \n"
+		"aberration.  \n"
+		"\n"
+		"We return the CartesianFixedLookVector including aberration.  \n"
+		"\n"
 		""},
 	 { "VelocityAberration_velocity_aberration_reverse", _wrap_VelocityAberration_velocity_aberration_reverse, METH_VARARGS, "\n"
+		"velocity_aberration_reverse(VelocityAberration self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_with_aberration, Array_double_3 Velocity_cf) -> CartesianFixedLookVector\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::VelocityAberration::velocity_aberration_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_with_aberration, const boost::array< double, 3 > &Velocity_cf)\n"
-		"const =0\n"
 		"GeoCal::VelocityAberration::velocity_aberration_reverse\n"
-		"Reverse of velocity_aberration_apply.\n"
+		"Reverse of velocity_aberration_apply.  \n"
 		"\n"
 		""},
-	 { "VelocityAberration___str__", _wrap_VelocityAberration___str__, METH_O, NULL},
+	 { "VelocityAberration___str__", _wrap_VelocityAberration___str__, METH_O, "__str__(VelocityAberration self) -> std::string"},
 	 { "delete_VelocityAberration", _wrap_delete_VelocityAberration, METH_O, "\n"
+		"delete_VelocityAberration(VelocityAberration self)\n"
 		"\n"
-		"virtual GeoCal::VelocityAberration::~VelocityAberration()\n"
 		"GeoCal::VelocityAberration::~VelocityAberration\n"
 		""},
 	 { "VelocityAberration_swigregister", VelocityAberration_swigregister, METH_O, NULL},
 	 { "new_NoVelocityAberration", _wrap_new_NoVelocityAberration, METH_NOARGS, "\n"
+		"new_NoVelocityAberration() -> NoVelocityAberration\n"
 		"\n"
-		"GeoCal::NoVelocityAberration::NoVelocityAberration()\n"
 		"GeoCal::NoVelocityAberration::NoVelocityAberration\n"
 		""},
 	 { "delete_NoVelocityAberration", _wrap_delete_NoVelocityAberration, METH_O, "\n"
+		"delete_NoVelocityAberration(NoVelocityAberration self)\n"
 		"\n"
-		"virtual GeoCal::NoVelocityAberration::~NoVelocityAberration()\n"
 		"GeoCal::NoVelocityAberration::~NoVelocityAberration\n"
 		""},
 	 { "NoVelocityAberration_swigregister", NoVelocityAberration_swigregister, METH_O, NULL},
 	 { "NoVelocityAberration_swiginit", NoVelocityAberration_swiginit, METH_VARARGS, NULL},
 	 { "new_VelocityAberrationFirstOrder", _wrap_new_VelocityAberrationFirstOrder, METH_NOARGS, "\n"
+		"new_VelocityAberrationFirstOrder() -> VelocityAberrationFirstOrder\n"
 		"\n"
-		"GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder()\n"
 		"GeoCal::VelocityAberrationFirstOrder::VelocityAberrationFirstOrder\n"
 		""},
 	 { "delete_VelocityAberrationFirstOrder", _wrap_delete_VelocityAberrationFirstOrder, METH_O, "\n"
+		"delete_VelocityAberrationFirstOrder(VelocityAberrationFirstOrder self)\n"
 		"\n"
-		"virtual GeoCal::VelocityAberrationFirstOrder::~VelocityAberrationFirstOrder()\n"
 		"GeoCal::VelocityAberrationFirstOrder::~VelocityAberrationFirstOrder\n"
 		""},
 	 { "VelocityAberrationFirstOrder_swigregister", VelocityAberrationFirstOrder_swigregister, METH_O, NULL},

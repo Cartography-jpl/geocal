@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _magnify_bilinear.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _magnify_bilinear:
 _magnify_bilinear.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _magnify_bilinear.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,11 +145,13 @@ import geocal_swig.geocal_exception
 class MagnifyBilinear(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This creates a magnified image of a RasterImage.
 
-    We do a bilinear interpolation to get the values
+    This creates a magnified image of a RasterImage.  
 
-    C++ includes: magnify_bilinear.h 
+    We do a bilinear interpolation to get the values  
+
+    C++ includes: magnify_bilinear.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,11 +159,10 @@ class MagnifyBilinear(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Data, Magfactor, Number_tile=4):
         r"""
+        __init__(MagnifyBilinear self, boost::shared_ptr< GeoCal::RasterImage > const & Data, int Magfactor, int Number_tile=4) -> MagnifyBilinear
 
-        MagnifyBilinear::MagnifyBilinear(const boost::shared_ptr< RasterImage > &Data, int Magfactor, int
-        Number_tile=4)
         GeoCal::MagnifyBilinear::MagnifyBilinear
-        Constructor.
+        Constructor.  
 
         """
         _magnify_bilinear.MagnifyBilinear_swiginit(self, _magnify_bilinear.new_MagnifyBilinear(Data, Magfactor, Number_tile))
@@ -189,10 +193,12 @@ _magnify_bilinear.MagnifyBilinear_swigregister(MagnifyBilinear)
 class MagnifyBilinearImageGroundConnection(object):
     r"""
 
-    This create an ImageGroundConnection that is magnified the same way
-    MagnifyBilinear does.
 
-    C++ includes: magnify_bilinear.h 
+    This create an ImageGroundConnection that is magnified the same way
+    MagnifyBilinear does.  
+
+    C++ includes: magnify_bilinear.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -200,12 +206,10 @@ class MagnifyBilinearImageGroundConnection(object):
 
     def __init__(self, Ig_original, Magfactor):
         r"""
+        __init__(MagnifyBilinearImageGroundConnection self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Ig_original, int Magfactor) -> MagnifyBilinearImageGroundConnection
 
-        GeoCal::MagnifyBilinearImageGroundConnection::MagnifyBilinearImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, int
-        Magfactor)
-        GeoCal::MagnifyBilinearImageGroundConnection::MagnifyBilinearImageGrou
-        ndConnection
-        Constructor.
+        GeoCal::MagnifyBilinearImageGroundConnection::MagnifyBilinearImageGroundConnection
+        Constructor.  
 
         """
         _magnify_bilinear.MagnifyBilinearImageGroundConnection_swiginit(self, _magnify_bilinear.new_MagnifyBilinearImageGroundConnection(Ig_original, Magfactor))

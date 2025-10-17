@@ -6637,47 +6637,49 @@ SWIGINTERN PyObject *RsmRpPlusGrid_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmRpPlusGrid", _wrap_new_RsmRpPlusGrid, METH_VARARGS, "\n"
+		"new_RsmRpPlusGrid(boost::shared_ptr< GeoCal::RsmBase > const & Rp, boost::shared_ptr< GeoCal::RsmGrid > const & Rgrid) -> RsmRpPlusGrid\n"
 		"\n"
-		"GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<\n"
-		"RsmGrid > &Rgrid)\n"
 		"GeoCal::RsmRpPlusGrid::RsmRpPlusGrid\n"
 		""},
 	 { "RsmRpPlusGrid__v_rational_polynomial", _wrap_RsmRpPlusGrid__v_rational_polynomial, METH_O, "\n"
+		"RsmRpPlusGrid__v_rational_polynomial(RsmRpPlusGrid self) -> boost::shared_ptr< GeoCal::RsmBase >\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & GeoCal::RsmRpPlusGrid::rational_polynomial() const\n"
 		"GeoCal::RsmRpPlusGrid::rational_polynomial\n"
-		"RsmRationalPolynomial we are using.\n"
+		"RsmRationalPolynomial we are using.  \n"
 		"\n"
 		""},
 	 { "RsmRpPlusGrid__v_correction_grid", _wrap_RsmRpPlusGrid__v_correction_grid, METH_O, "\n"
+		"RsmRpPlusGrid__v_correction_grid(RsmRpPlusGrid self) -> boost::shared_ptr< GeoCal::RsmGrid >\n"
 		"\n"
-		"const boost::shared_ptr< RsmGrid > & GeoCal::RsmRpPlusGrid::correction_grid() const\n"
 		"GeoCal::RsmRpPlusGrid::correction_grid\n"
-		"RsmGrid we are using to correction rational_polynomial.\n"
+		"RsmGrid we are using to correction rational_polynomial.  \n"
 		"\n"
 		""},
 	 { "delete_RsmRpPlusGrid", _wrap_delete_RsmRpPlusGrid, METH_O, "\n"
+		"delete_RsmRpPlusGrid(RsmRpPlusGrid self)\n"
 		"\n"
-		"virtual GeoCal::RsmRpPlusGrid::~RsmRpPlusGrid()\n"
 		"GeoCal::RsmRpPlusGrid::~RsmRpPlusGrid\n"
 		""},
 	 { "RsmRpPlusGrid_swigregister", RsmRpPlusGrid_swigregister, METH_O, NULL},
@@ -6688,47 +6690,49 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmRpPlusGrid", _wrap_new_RsmRpPlusGrid, METH_VARARGS, "\n"
+		"new_RsmRpPlusGrid(boost::shared_ptr< GeoCal::RsmBase > const & Rp, boost::shared_ptr< GeoCal::RsmGrid > const & Rgrid) -> RsmRpPlusGrid\n"
 		"\n"
-		"GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<\n"
-		"RsmGrid > &Rgrid)\n"
 		"GeoCal::RsmRpPlusGrid::RsmRpPlusGrid\n"
 		""},
 	 { "RsmRpPlusGrid__v_rational_polynomial", _wrap_RsmRpPlusGrid__v_rational_polynomial, METH_O, "\n"
+		"_v_rational_polynomial(RsmRpPlusGrid self) -> boost::shared_ptr< GeoCal::RsmBase >\n"
 		"\n"
-		"const boost::shared_ptr< RsmBase > & GeoCal::RsmRpPlusGrid::rational_polynomial() const\n"
 		"GeoCal::RsmRpPlusGrid::rational_polynomial\n"
-		"RsmRationalPolynomial we are using.\n"
+		"RsmRationalPolynomial we are using.  \n"
 		"\n"
 		""},
 	 { "RsmRpPlusGrid__v_correction_grid", _wrap_RsmRpPlusGrid__v_correction_grid, METH_O, "\n"
+		"_v_correction_grid(RsmRpPlusGrid self) -> boost::shared_ptr< GeoCal::RsmGrid >\n"
 		"\n"
-		"const boost::shared_ptr< RsmGrid > & GeoCal::RsmRpPlusGrid::correction_grid() const\n"
 		"GeoCal::RsmRpPlusGrid::correction_grid\n"
-		"RsmGrid we are using to correction rational_polynomial.\n"
+		"RsmGrid we are using to correction rational_polynomial.  \n"
 		"\n"
 		""},
 	 { "delete_RsmRpPlusGrid", _wrap_delete_RsmRpPlusGrid, METH_O, "\n"
+		"delete_RsmRpPlusGrid(RsmRpPlusGrid self)\n"
 		"\n"
-		"virtual GeoCal::RsmRpPlusGrid::~RsmRpPlusGrid()\n"
 		"GeoCal::RsmRpPlusGrid::~RsmRpPlusGrid\n"
 		""},
 	 { "RsmRpPlusGrid_swigregister", RsmRpPlusGrid_swigregister, METH_O, NULL},

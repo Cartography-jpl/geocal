@@ -8062,81 +8062,82 @@ SWIGINTERN PyObject *IgcSimulatedRayCaster_swiginit(PyObject *SWIGUNUSEDPARM(sel
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcSimulatedRayCaster", _wrap_new_IgcSimulatedRayCaster, METH_VARARGS, "\n"
+		"IgcSimulatedRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::RasterImage > const & Map_projected_image, int Number_integration_step=1, double Raycast_resolution=-1, double Max_height=10e3, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcSimulatedRayCaster::IgcSimulatedRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, const\n"
-		"boost::shared_ptr< RasterImage > &Map_projected_image, int\n"
-		"Number_integration_step=1, double Raycast_resolution=-1, double\n"
-		"Max_height=10e3, int Number_tile_line=-1, int Number_tile_sample=-1,\n"
-		"double Fill_value=0.0)\n"
 		"GeoCal::IgcSimulatedRayCaster::IgcSimulatedRayCaster\n"
-		"Constructor.\n"
-		"If the Raycast_resolution is passed as a negative number, then we use\n"
-		"the resolution of the Map_projected_image. \n"
-		""},
-	 { "IgcSimulatedRayCaster__v_number_line", _wrap_IgcSimulatedRayCaster__v_number_line, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_number_sample", _wrap_IgcSimulatedRayCaster__v_number_sample, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_number_tile_line", _wrap_IgcSimulatedRayCaster__v_number_tile_line, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_number_tile_sample", _wrap_IgcSimulatedRayCaster__v_number_tile_sample, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_has_map_info", _wrap_IgcSimulatedRayCaster__v_has_map_info, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_map_info", _wrap_IgcSimulatedRayCaster__v_map_info, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_grid_center_line_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_line_resolution, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_grid_center_sample_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_sample_resolution, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_has_rpc", _wrap_IgcSimulatedRayCaster__v_has_rpc, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_rpc", _wrap_IgcSimulatedRayCaster__v_rpc, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_has_rsm", _wrap_IgcSimulatedRayCaster__v_has_rsm, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_rsm", _wrap_IgcSimulatedRayCaster__v_rsm, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_igc", _wrap_IgcSimulatedRayCaster__v_igc, METH_O, "\n"
+		"Constructor.  \n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcSimulatedRayCaster::igc() const\n"
+		"If the Raycast_resolution is passed as a negative number, then we use the\n"
+		"resolution of the Map_projected_image.  \n"
+		"\n"
+		""},
+	 { "IgcSimulatedRayCaster__v_number_line", _wrap_IgcSimulatedRayCaster__v_number_line, METH_O, "IgcSimulatedRayCaster__v_number_line(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_number_sample", _wrap_IgcSimulatedRayCaster__v_number_sample, METH_O, "IgcSimulatedRayCaster__v_number_sample(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_number_tile_line", _wrap_IgcSimulatedRayCaster__v_number_tile_line, METH_O, "IgcSimulatedRayCaster__v_number_tile_line(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_number_tile_sample", _wrap_IgcSimulatedRayCaster__v_number_tile_sample, METH_O, "IgcSimulatedRayCaster__v_number_tile_sample(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_has_map_info", _wrap_IgcSimulatedRayCaster__v_has_map_info, METH_O, "IgcSimulatedRayCaster__v_has_map_info(IgcSimulatedRayCaster self) -> bool"},
+	 { "IgcSimulatedRayCaster__v_map_info", _wrap_IgcSimulatedRayCaster__v_map_info, METH_O, "IgcSimulatedRayCaster__v_map_info(IgcSimulatedRayCaster self) -> MapInfo"},
+	 { "IgcSimulatedRayCaster__v_grid_center_line_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_line_resolution, METH_O, "IgcSimulatedRayCaster__v_grid_center_line_resolution(IgcSimulatedRayCaster self) -> double"},
+	 { "IgcSimulatedRayCaster__v_grid_center_sample_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_sample_resolution, METH_O, "IgcSimulatedRayCaster__v_grid_center_sample_resolution(IgcSimulatedRayCaster self) -> double"},
+	 { "IgcSimulatedRayCaster__v_has_rpc", _wrap_IgcSimulatedRayCaster__v_has_rpc, METH_O, "IgcSimulatedRayCaster__v_has_rpc(IgcSimulatedRayCaster self) -> bool"},
+	 { "IgcSimulatedRayCaster__v_rpc", _wrap_IgcSimulatedRayCaster__v_rpc, METH_O, "IgcSimulatedRayCaster__v_rpc(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::Rpc >"},
+	 { "IgcSimulatedRayCaster__v_has_rsm", _wrap_IgcSimulatedRayCaster__v_has_rsm, METH_O, "IgcSimulatedRayCaster__v_has_rsm(IgcSimulatedRayCaster self) -> bool"},
+	 { "IgcSimulatedRayCaster__v_rsm", _wrap_IgcSimulatedRayCaster__v_rsm, METH_O, "IgcSimulatedRayCaster__v_rsm(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::Rsm >"},
+	 { "IgcSimulatedRayCaster__v_igc", _wrap_IgcSimulatedRayCaster__v_igc, METH_O, "\n"
+		"IgcSimulatedRayCaster__v_igc(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
+		"\n"
 		"GeoCal::IgcSimulatedRayCaster::igc\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_number_integration_step", _wrap_IgcSimulatedRayCaster__v_number_integration_step, METH_O, "\n"
+		"IgcSimulatedRayCaster__v_number_integration_step(IgcSimulatedRayCaster self) -> int\n"
 		"\n"
-		"int GeoCal::IgcSimulatedRayCaster::number_integration_step() const\n"
 		"GeoCal::IgcSimulatedRayCaster::number_integration_step\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_fill_value", _wrap_IgcSimulatedRayCaster__v_fill_value, METH_O, "\n"
+		"IgcSimulatedRayCaster__v_fill_value(IgcSimulatedRayCaster self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulatedRayCaster::fill_value() const\n"
 		"GeoCal::IgcSimulatedRayCaster::fill_value\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_max_height", _wrap_IgcSimulatedRayCaster__v_max_height, METH_O, "\n"
+		"IgcSimulatedRayCaster__v_max_height(IgcSimulatedRayCaster self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulatedRayCaster::max_height() const\n"
 		"GeoCal::IgcSimulatedRayCaster::max_height\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_raycast_resolution", _wrap_IgcSimulatedRayCaster__v_raycast_resolution, METH_O, "\n"
+		"IgcSimulatedRayCaster__v_raycast_resolution(IgcSimulatedRayCaster self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulatedRayCaster::raycast_resolution() const\n"
 		"GeoCal::IgcSimulatedRayCaster::raycast_resolution\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_map_projected_image", _wrap_IgcSimulatedRayCaster__v_map_projected_image, METH_O, "\n"
+		"IgcSimulatedRayCaster__v_map_projected_image(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::IgcSimulatedRayCaster::map_projected_image() const\n"
 		"GeoCal::IgcSimulatedRayCaster::map_projected_image\n"
 		""},
 	 { "delete_IgcSimulatedRayCaster", _wrap_delete_IgcSimulatedRayCaster, METH_O, "\n"
+		"delete_IgcSimulatedRayCaster(IgcSimulatedRayCaster self)\n"
 		"\n"
-		"virtual GeoCal::IgcSimulatedRayCaster::~IgcSimulatedRayCaster()\n"
 		"GeoCal::IgcSimulatedRayCaster::~IgcSimulatedRayCaster\n"
 		""},
 	 { "IgcSimulatedRayCaster_swigregister", IgcSimulatedRayCaster_swigregister, METH_O, NULL},
@@ -8147,81 +8148,82 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcSimulatedRayCaster", _wrap_new_IgcSimulatedRayCaster, METH_VARARGS, "\n"
+		"IgcSimulatedRayCaster(boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::RasterImage > const & Map_projected_image, int Number_integration_step=1, double Raycast_resolution=-1, double Max_height=10e3, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcSimulatedRayCaster::IgcSimulatedRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, const\n"
-		"boost::shared_ptr< RasterImage > &Map_projected_image, int\n"
-		"Number_integration_step=1, double Raycast_resolution=-1, double\n"
-		"Max_height=10e3, int Number_tile_line=-1, int Number_tile_sample=-1,\n"
-		"double Fill_value=0.0)\n"
 		"GeoCal::IgcSimulatedRayCaster::IgcSimulatedRayCaster\n"
-		"Constructor.\n"
-		"If the Raycast_resolution is passed as a negative number, then we use\n"
-		"the resolution of the Map_projected_image. \n"
-		""},
-	 { "IgcSimulatedRayCaster__v_number_line", _wrap_IgcSimulatedRayCaster__v_number_line, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_number_sample", _wrap_IgcSimulatedRayCaster__v_number_sample, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_number_tile_line", _wrap_IgcSimulatedRayCaster__v_number_tile_line, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_number_tile_sample", _wrap_IgcSimulatedRayCaster__v_number_tile_sample, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_has_map_info", _wrap_IgcSimulatedRayCaster__v_has_map_info, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_map_info", _wrap_IgcSimulatedRayCaster__v_map_info, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_grid_center_line_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_line_resolution, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_grid_center_sample_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_sample_resolution, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_has_rpc", _wrap_IgcSimulatedRayCaster__v_has_rpc, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_rpc", _wrap_IgcSimulatedRayCaster__v_rpc, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_has_rsm", _wrap_IgcSimulatedRayCaster__v_has_rsm, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_rsm", _wrap_IgcSimulatedRayCaster__v_rsm, METH_O, NULL},
-	 { "IgcSimulatedRayCaster__v_igc", _wrap_IgcSimulatedRayCaster__v_igc, METH_O, "\n"
+		"Constructor.  \n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcSimulatedRayCaster::igc() const\n"
+		"If the Raycast_resolution is passed as a negative number, then we use the\n"
+		"resolution of the Map_projected_image.  \n"
+		"\n"
+		""},
+	 { "IgcSimulatedRayCaster__v_number_line", _wrap_IgcSimulatedRayCaster__v_number_line, METH_O, "_v_number_line(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_number_sample", _wrap_IgcSimulatedRayCaster__v_number_sample, METH_O, "_v_number_sample(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_number_tile_line", _wrap_IgcSimulatedRayCaster__v_number_tile_line, METH_O, "_v_number_tile_line(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_number_tile_sample", _wrap_IgcSimulatedRayCaster__v_number_tile_sample, METH_O, "_v_number_tile_sample(IgcSimulatedRayCaster self) -> int"},
+	 { "IgcSimulatedRayCaster__v_has_map_info", _wrap_IgcSimulatedRayCaster__v_has_map_info, METH_O, "_v_has_map_info(IgcSimulatedRayCaster self) -> bool"},
+	 { "IgcSimulatedRayCaster__v_map_info", _wrap_IgcSimulatedRayCaster__v_map_info, METH_O, "_v_map_info(IgcSimulatedRayCaster self) -> MapInfo"},
+	 { "IgcSimulatedRayCaster__v_grid_center_line_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_line_resolution, METH_O, "_v_grid_center_line_resolution(IgcSimulatedRayCaster self) -> double"},
+	 { "IgcSimulatedRayCaster__v_grid_center_sample_resolution", _wrap_IgcSimulatedRayCaster__v_grid_center_sample_resolution, METH_O, "_v_grid_center_sample_resolution(IgcSimulatedRayCaster self) -> double"},
+	 { "IgcSimulatedRayCaster__v_has_rpc", _wrap_IgcSimulatedRayCaster__v_has_rpc, METH_O, "_v_has_rpc(IgcSimulatedRayCaster self) -> bool"},
+	 { "IgcSimulatedRayCaster__v_rpc", _wrap_IgcSimulatedRayCaster__v_rpc, METH_O, "_v_rpc(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::Rpc >"},
+	 { "IgcSimulatedRayCaster__v_has_rsm", _wrap_IgcSimulatedRayCaster__v_has_rsm, METH_O, "_v_has_rsm(IgcSimulatedRayCaster self) -> bool"},
+	 { "IgcSimulatedRayCaster__v_rsm", _wrap_IgcSimulatedRayCaster__v_rsm, METH_O, "_v_rsm(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::Rsm >"},
+	 { "IgcSimulatedRayCaster__v_igc", _wrap_IgcSimulatedRayCaster__v_igc, METH_O, "\n"
+		"_v_igc(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
+		"\n"
 		"GeoCal::IgcSimulatedRayCaster::igc\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_number_integration_step", _wrap_IgcSimulatedRayCaster__v_number_integration_step, METH_O, "\n"
+		"_v_number_integration_step(IgcSimulatedRayCaster self) -> int\n"
 		"\n"
-		"int GeoCal::IgcSimulatedRayCaster::number_integration_step() const\n"
 		"GeoCal::IgcSimulatedRayCaster::number_integration_step\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_fill_value", _wrap_IgcSimulatedRayCaster__v_fill_value, METH_O, "\n"
+		"_v_fill_value(IgcSimulatedRayCaster self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulatedRayCaster::fill_value() const\n"
 		"GeoCal::IgcSimulatedRayCaster::fill_value\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_max_height", _wrap_IgcSimulatedRayCaster__v_max_height, METH_O, "\n"
+		"_v_max_height(IgcSimulatedRayCaster self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulatedRayCaster::max_height() const\n"
 		"GeoCal::IgcSimulatedRayCaster::max_height\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_raycast_resolution", _wrap_IgcSimulatedRayCaster__v_raycast_resolution, METH_O, "\n"
+		"_v_raycast_resolution(IgcSimulatedRayCaster self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulatedRayCaster::raycast_resolution() const\n"
 		"GeoCal::IgcSimulatedRayCaster::raycast_resolution\n"
 		""},
 	 { "IgcSimulatedRayCaster__v_map_projected_image", _wrap_IgcSimulatedRayCaster__v_map_projected_image, METH_O, "\n"
+		"_v_map_projected_image(IgcSimulatedRayCaster self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::IgcSimulatedRayCaster::map_projected_image() const\n"
 		"GeoCal::IgcSimulatedRayCaster::map_projected_image\n"
 		""},
 	 { "delete_IgcSimulatedRayCaster", _wrap_delete_IgcSimulatedRayCaster, METH_O, "\n"
+		"delete_IgcSimulatedRayCaster(IgcSimulatedRayCaster self)\n"
 		"\n"
-		"virtual GeoCal::IgcSimulatedRayCaster::~IgcSimulatedRayCaster()\n"
 		"GeoCal::IgcSimulatedRayCaster::~IgcSimulatedRayCaster\n"
 		""},
 	 { "IgcSimulatedRayCaster_swigregister", IgcSimulatedRayCaster_swigregister, METH_O, NULL},

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _memory_raster_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _memory_raster_image:
 _memory_raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _memory_raster_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,16 +144,18 @@ import geocal_swig.geocal_exception
 class MemoryRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    This is a simple implementation of a RasterImage, where the data is
-    just stored in a 2D array.
 
-    This is useful both for testing and to read all of another RasterImage
-    into memory.
+    This is a simple implementation of a RasterImage, where the data is just stored
+    in a 2D array.  
 
-    Note that this stores data as int type, so floating point data gets
-    truncated to int.
+    This is useful both for testing and to read all of another RasterImage into
+    memory.  
 
-    C++ includes: memory_raster_image.h 
+    Note that this stores data as int type, so floating point data gets truncated to
+    int.  
+
+    C++ includes: memory_raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -158,10 +163,13 @@ class MemoryRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
 
     def __init__(self, *args):
         r"""
+        __init__(MemoryRasterImage self, int Number_line, int Number_sample) -> MemoryRasterImage
+        __init__(MemoryRasterImage self, int Number_line, int Number_sample, int Fill_value) -> MemoryRasterImage
+        __init__(MemoryRasterImage self, RasterImage Img, int Number_line_to_read=-1, int Number_sample_to_read=-1) -> MemoryRasterImage
+        __init__(MemoryRasterImage self, MapInfo Mi) -> MemoryRasterImage
 
-        GeoCal::MemoryRasterImage::MemoryRasterImage(int Number_line=0, int Number_sample=0)
         GeoCal::MemoryRasterImage::MemoryRasterImage
-        Construct a MemoryRasterImage of the given size.
+        Construct a MemoryRasterImage of the given size.  
 
         """
         _memory_raster_image.MemoryRasterImage_swiginit(self, _memory_raster_image.new_MemoryRasterImage(*args))

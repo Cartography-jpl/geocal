@@ -12236,218 +12236,258 @@ SWIGINTERN PyObject *Vector_RsmBSubgroup_swiginit(PyObject *SWIGUNUSEDPARM(self)
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmBSubgroup", _wrap_new_RsmBSubgroup, METH_VARARGS, "\n"
+		"RsmBSubgroup(BlitzArray_double_2 Cov, int Time_correlation_domain_flag, BlitzArray_double_2 Time_correlation)\n"
+		"RsmBSubgroup(BlitzArray_double_2 Cov, int Time_correlation_domain_flag, double A, double alpha, double beta, double T)\n"
+		"new_RsmBSubgroup() -> RsmBSubgroup\n"
 		"\n"
-		"GeoCal::RsmBSubgroup::RsmBSubgroup(const RsmBSubgroup &V)\n"
 		"GeoCal::RsmBSubgroup::RsmBSubgroup\n"
 		""},
 	 { "RsmBSubgroup__v_number_parameter", _wrap_RsmBSubgroup__v_number_parameter, METH_O, "\n"
+		"RsmBSubgroup__v_number_parameter(RsmBSubgroup self) -> int\n"
 		"\n"
-		"int GeoCal::RsmBSubgroup::number_parameter() const\n"
 		"GeoCal::RsmBSubgroup::number_parameter\n"
 		""},
 	 { "RsmBSubgroup__v_is_csm_correlation", _wrap_RsmBSubgroup__v_is_csm_correlation, METH_O, "\n"
+		"RsmBSubgroup__v_is_csm_correlation(RsmBSubgroup self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmBSubgroup::is_csm_correlation() const\n"
 		"GeoCal::RsmBSubgroup::is_csm_correlation\n"
 		""},
 	 { "RsmBSubgroup__v_covariance", _wrap_RsmBSubgroup__v_covariance, METH_O, "\n"
+		"RsmBSubgroup__v_covariance(RsmBSubgroup self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBSubgroup::covariance() const\n"
 		"GeoCal::RsmBSubgroup::covariance\n"
 		""},
 	 { "RsmBSubgroup__v_time_correlation", _wrap_RsmBSubgroup__v_time_correlation, METH_O, "\n"
+		"RsmBSubgroup__v_time_correlation(RsmBSubgroup self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBSubgroup::time_correlation() const\n"
 		"GeoCal::RsmBSubgroup::time_correlation\n"
 		""},
 	 { "RsmBSubgroup__v_time_correlation_domain_flag", _wrap_RsmBSubgroup__v_time_correlation_domain_flag, METH_O, "\n"
+		"RsmBSubgroup__v_time_correlation_domain_flag(RsmBSubgroup self) -> int\n"
 		"\n"
-		"int GeoCal::RsmBSubgroup::time_correlation_domain_flag() const\n"
 		"GeoCal::RsmBSubgroup::time_correlation_domain_flag\n"
 		""},
-	 { "RsmBSubgroup___str__", _wrap_RsmBSubgroup___str__, METH_O, NULL},
+	 { "RsmBSubgroup___str__", _wrap_RsmBSubgroup___str__, METH_O, "RsmBSubgroup___str__(RsmBSubgroup self) -> std::string"},
 	 { "delete_RsmBSubgroup", _wrap_delete_RsmBSubgroup, METH_O, "\n"
+		"delete_RsmBSubgroup(RsmBSubgroup self)\n"
 		"\n"
-		"virtual GeoCal::RsmBSubgroup::~RsmBSubgroup()\n"
 		"GeoCal::RsmBSubgroup::~RsmBSubgroup\n"
 		""},
 	 { "RsmBSubgroup_swigregister", RsmBSubgroup_swigregister, METH_O, NULL},
 	 { "RsmBSubgroup_swiginit", RsmBSubgroup_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmBUnmodeledCovariance", _wrap_new_RsmBUnmodeledCovariance, METH_VARARGS, "\n"
+		"RsmBUnmodeledCovariance(BlitzArray_double_2 Cov, BlitzArray_double_2 Row_time_correlation, BlitzArray_double_2 Cow_time_correlation)\n"
+		"RsmBUnmodeledCovariance(BlitzArray_double_2 Cov, double Row_A, double Row_alpha, double Row_beta, double Row_T, double Col_A, double Col_alpha, double Col_beta, double Col_T)\n"
+		"new_RsmBUnmodeledCovariance() -> RsmBUnmodeledCovariance\n"
 		"\n"
-		"GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(const RsmBUnmodeledCovariance &V)\n"
 		"GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_is_csm_correlation", _wrap_RsmBUnmodeledCovariance__v_is_csm_correlation, METH_O, "\n"
+		"RsmBUnmodeledCovariance__v_is_csm_correlation(RsmBUnmodeledCovariance self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmBUnmodeledCovariance::is_csm_correlation() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::is_csm_correlation\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_covariance", _wrap_RsmBUnmodeledCovariance__v_covariance, METH_O, "\n"
+		"RsmBUnmodeledCovariance__v_covariance(RsmBUnmodeledCovariance self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBUnmodeledCovariance::covariance() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::covariance\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_row_time_correlation", _wrap_RsmBUnmodeledCovariance__v_row_time_correlation, METH_O, "\n"
+		"RsmBUnmodeledCovariance__v_row_time_correlation(RsmBUnmodeledCovariance self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBUnmodeledCovariance::row_time_correlation() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::row_time_correlation\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_col_time_correlation", _wrap_RsmBUnmodeledCovariance__v_col_time_correlation, METH_O, "\n"
+		"RsmBUnmodeledCovariance__v_col_time_correlation(RsmBUnmodeledCovariance self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBUnmodeledCovariance::col_time_correlation() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::col_time_correlation\n"
 		""},
-	 { "RsmBUnmodeledCovariance___str__", _wrap_RsmBUnmodeledCovariance___str__, METH_O, NULL},
+	 { "RsmBUnmodeledCovariance___str__", _wrap_RsmBUnmodeledCovariance___str__, METH_O, "RsmBUnmodeledCovariance___str__(RsmBUnmodeledCovariance self) -> std::string"},
 	 { "delete_RsmBUnmodeledCovariance", _wrap_delete_RsmBUnmodeledCovariance, METH_O, "\n"
+		"delete_RsmBUnmodeledCovariance(RsmBUnmodeledCovariance self)\n"
 		"\n"
-		"virtual GeoCal::RsmBUnmodeledCovariance::~RsmBUnmodeledCovariance()\n"
 		"GeoCal::RsmBUnmodeledCovariance::~RsmBUnmodeledCovariance\n"
 		""},
 	 { "RsmBUnmodeledCovariance_swigregister", RsmBUnmodeledCovariance_swigregister, METH_O, NULL},
 	 { "RsmBUnmodeledCovariance_swiginit", RsmBUnmodeledCovariance_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmIndirectCovarianceB", _wrap_new_RsmIndirectCovarianceB, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB(std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\", std::string const & Triangulation_id=\"\")\n"
+		"RsmIndirectCovarianceB(ImageGroundConnection Igc, double H_min, double H_max, RsmId Rsm_id, std::string const & Triangulation_id=\"\")\n"
 		"\n"
-		"GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
 		"GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB\n"
 		""},
 	 { "RsmIndirectCovarianceB_tre_string", _wrap_RsmIndirectCovarianceB_tre_string, METH_O, "\n"
+		"RsmIndirectCovarianceB_tre_string(RsmIndirectCovarianceB self) -> std::string\n"
 		"\n"
-		"std::string RsmIndirectCovarianceB::tre_string() const\n"
 		"GeoCal::RsmIndirectCovarianceB::tre_string\n"
 		""},
 	 { "RsmIndirectCovarianceB_read_tre_string", _wrap_RsmIndirectCovarianceB_read_tre_string, METH_O, "\n"
+		"RsmIndirectCovarianceB_read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmIndirectCovarianceB >\n"
 		"\n"
-		"boost::shared_ptr< RsmIndirectCovarianceB > RsmIndirectCovarianceB::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmIndirectCovarianceB::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmRationalPolynomial. However the fields that aren't contained are ones used\n"
+		"for fitting the RSM, so in practice this doesn't matter. We just set the various\n"
+		"fields to the default values found in the constructor.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_covariance_version_date", _wrap_RsmIndirectCovarianceB__v_covariance_version_date, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB__v_covariance_version_date(RsmIndirectCovarianceB self) -> std::string\n"
+		"RsmIndirectCovarianceB__v_covariance_version_date(RsmIndirectCovarianceB self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::covariance_version_date(const std::string &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::covariance_version_date\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_has_indirect_error_covariance", _wrap_RsmIndirectCovarianceB__v_has_indirect_error_covariance, METH_O, "\n"
+		"RsmIndirectCovarianceB__v_has_indirect_error_covariance(RsmIndirectCovarianceB self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmIndirectCovarianceB::has_indirect_error_covariance() const\n"
 		"GeoCal::RsmIndirectCovarianceB::has_indirect_error_covariance\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_has_unmodeled_error_covariance", _wrap_RsmIndirectCovarianceB__v_has_unmodeled_error_covariance, METH_O, "\n"
+		"RsmIndirectCovarianceB__v_has_unmodeled_error_covariance(RsmIndirectCovarianceB self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmIndirectCovarianceB::has_unmodeled_error_covariance() const\n"
 		"GeoCal::RsmIndirectCovarianceB::has_unmodeled_error_covariance\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_number_original_parameter", _wrap_RsmIndirectCovarianceB__v_number_original_parameter, METH_O, "\n"
+		"RsmIndirectCovarianceB__v_number_original_parameter(RsmIndirectCovarianceB self) -> int\n"
 		"\n"
-		"int RsmIndirectCovarianceB::number_original_parameter() const\n"
 		"GeoCal::RsmIndirectCovarianceB::number_original_parameter\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_subgroup", _wrap_RsmIndirectCovarianceB__v_subgroup, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB__v_subgroup(RsmIndirectCovarianceB self) -> Vector_RsmBSubgroup\n"
+		"RsmIndirectCovarianceB__v_subgroup(RsmIndirectCovarianceB self, Vector_RsmBSubgroup V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::subgroup(const std::vector< boost::shared_ptr< RsmBSubgroup > > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::subgroup\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_mapping_matrix", _wrap_RsmIndirectCovarianceB__v_mapping_matrix, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB__v_mapping_matrix(RsmIndirectCovarianceB self) -> BlitzArray_double_2\n"
+		"RsmIndirectCovarianceB__v_mapping_matrix(RsmIndirectCovarianceB self, BlitzArray_double_2 V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::mapping_matrix(const blitz::Array< double, 2 > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::mapping_matrix\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_unmodeled_covariance", _wrap_RsmIndirectCovarianceB__v_unmodeled_covariance, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB__v_unmodeled_covariance(RsmIndirectCovarianceB self) -> boost::shared_ptr< GeoCal::RsmBUnmodeledCovariance >\n"
+		"RsmIndirectCovarianceB__v_unmodeled_covariance(RsmIndirectCovarianceB self, boost::shared_ptr< GeoCal::RsmBUnmodeledCovariance > const & V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::unmodeled_covariance(const boost::shared_ptr< RsmBUnmodeledCovariance > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::unmodeled_covariance\n"
 		""},
 	 { "RsmIndirectCovarianceB_subgroup_i", _wrap_RsmIndirectCovarianceB_subgroup_i, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB_subgroup_i(RsmIndirectCovarianceB self, int I) -> RsmBSubgroup\n"
 		"\n"
-		"const RsmBSubgroup & GeoCal::RsmIndirectCovarianceB::subgroup_i(int I) const\n"
 		"GeoCal::RsmIndirectCovarianceB::subgroup_i\n"
 		""},
 	 { "RsmIndirectCovarianceB_add_subgroup", _wrap_RsmIndirectCovarianceB_add_subgroup, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB_add_subgroup(RsmIndirectCovarianceB self, boost::shared_ptr< GeoCal::RsmBSubgroup > const & V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::add_subgroup(const boost::shared_ptr< RsmBSubgroup > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::add_subgroup\n"
 		""},
 	 { "RsmIndirectCovarianceB_check_consistent", _wrap_RsmIndirectCovarianceB_check_consistent, METH_O, "\n"
+		"RsmIndirectCovarianceB_check_consistent(RsmIndirectCovarianceB self)\n"
 		"\n"
-		"void RsmIndirectCovarianceB::check_consistent() const\n"
 		"GeoCal::RsmIndirectCovarianceB::check_consistent\n"
-		"We have a few different pieces that need to match sizes.\n"
-		"We don't check this as the object is created/modified because we may\n"
-		"be in an inconsistent state during construction (e.g., we have added\n"
-		"subgroups, but haven't yet modified the mapping_matrix). This routine\n"
-		"does that consistency check, and throws an exception if things aren't\n"
-		"consistent. Called before creating and after reading a TRE. \n"
+		"We have a few different pieces that need to match sizes.  \n"
+		"\n"
+		"We don't check this as the object is created/modified because we may be in an\n"
+		"inconsistent state during construction (e.g., we have added subgroups, but\n"
+		"haven't yet modified the mapping_matrix). This routine does that consistency\n"
+		"check, and throws an exception if things aren't consistent. Called before\n"
+		"creating and after reading a TRE.  \n"
+		"\n"
 		""},
 	 { "delete_RsmIndirectCovarianceB", _wrap_delete_RsmIndirectCovarianceB, METH_O, "\n"
+		"delete_RsmIndirectCovarianceB(RsmIndirectCovarianceB self)\n"
 		"\n"
-		"virtual GeoCal::RsmIndirectCovarianceB::~RsmIndirectCovarianceB()\n"
 		"GeoCal::RsmIndirectCovarianceB::~RsmIndirectCovarianceB\n"
 		""},
 	 { "RsmIndirectCovarianceB_swigregister", RsmIndirectCovarianceB_swigregister, METH_O, NULL},
 	 { "RsmIndirectCovarianceB_swiginit", RsmIndirectCovarianceB_swiginit, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_iterator", _wrap_Vector_RsmBSubgroup_iterator, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___nonzero__", _wrap_Vector_RsmBSubgroup___nonzero__, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___bool__", _wrap_Vector_RsmBSubgroup___bool__, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___len__", _wrap_Vector_RsmBSubgroup___len__, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___getslice__", _wrap_Vector_RsmBSubgroup___getslice__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___setslice__", _wrap_Vector_RsmBSubgroup___setslice__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___delslice__", _wrap_Vector_RsmBSubgroup___delslice__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___delitem__", _wrap_Vector_RsmBSubgroup___delitem__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___getitem__", _wrap_Vector_RsmBSubgroup___getitem__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___setitem__", _wrap_Vector_RsmBSubgroup___setitem__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_pop", _wrap_Vector_RsmBSubgroup_pop, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_append", _wrap_Vector_RsmBSubgroup_append, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_empty", _wrap_Vector_RsmBSubgroup_empty, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_size", _wrap_Vector_RsmBSubgroup_size, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_swap", _wrap_Vector_RsmBSubgroup_swap, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_begin", _wrap_Vector_RsmBSubgroup_begin, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_end", _wrap_Vector_RsmBSubgroup_end, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_rbegin", _wrap_Vector_RsmBSubgroup_rbegin, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_rend", _wrap_Vector_RsmBSubgroup_rend, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_clear", _wrap_Vector_RsmBSubgroup_clear, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_get_allocator", _wrap_Vector_RsmBSubgroup_get_allocator, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_pop_back", _wrap_Vector_RsmBSubgroup_pop_back, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_erase", _wrap_Vector_RsmBSubgroup_erase, METH_VARARGS, NULL},
-	 { "new_Vector_RsmBSubgroup", _wrap_new_Vector_RsmBSubgroup, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_push_back", _wrap_Vector_RsmBSubgroup_push_back, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_front", _wrap_Vector_RsmBSubgroup_front, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_back", _wrap_Vector_RsmBSubgroup_back, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_assign", _wrap_Vector_RsmBSubgroup_assign, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_resize", _wrap_Vector_RsmBSubgroup_resize, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_insert", _wrap_Vector_RsmBSubgroup_insert, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_reserve", _wrap_Vector_RsmBSubgroup_reserve, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_capacity", _wrap_Vector_RsmBSubgroup_capacity, METH_O, NULL},
-	 { "delete_Vector_RsmBSubgroup", _wrap_delete_Vector_RsmBSubgroup, METH_O, NULL},
+	 { "Vector_RsmBSubgroup_iterator", _wrap_Vector_RsmBSubgroup_iterator, METH_O, "Vector_RsmBSubgroup_iterator(Vector_RsmBSubgroup self) -> SwigPyIterator"},
+	 { "Vector_RsmBSubgroup___nonzero__", _wrap_Vector_RsmBSubgroup___nonzero__, METH_O, "Vector_RsmBSubgroup___nonzero__(Vector_RsmBSubgroup self) -> bool"},
+	 { "Vector_RsmBSubgroup___bool__", _wrap_Vector_RsmBSubgroup___bool__, METH_O, "Vector_RsmBSubgroup___bool__(Vector_RsmBSubgroup self) -> bool"},
+	 { "Vector_RsmBSubgroup___len__", _wrap_Vector_RsmBSubgroup___len__, METH_O, "Vector_RsmBSubgroup___len__(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type"},
+	 { "Vector_RsmBSubgroup___getslice__", _wrap_Vector_RsmBSubgroup___getslice__, METH_VARARGS, "Vector_RsmBSubgroup___getslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j) -> Vector_RsmBSubgroup"},
+	 { "Vector_RsmBSubgroup___setslice__", _wrap_Vector_RsmBSubgroup___setslice__, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup___setslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j)\n"
+		"Vector_RsmBSubgroup___setslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j, Vector_RsmBSubgroup v)\n"
+		""},
+	 { "Vector_RsmBSubgroup___delslice__", _wrap_Vector_RsmBSubgroup___delslice__, METH_VARARGS, "Vector_RsmBSubgroup___delslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j)"},
+	 { "Vector_RsmBSubgroup___delitem__", _wrap_Vector_RsmBSubgroup___delitem__, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup___delitem__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i)\n"
+		"Vector_RsmBSubgroup___delitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_RsmBSubgroup___getitem__", _wrap_Vector_RsmBSubgroup___getitem__, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup___getitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice) -> Vector_RsmBSubgroup\n"
+		"Vector_RsmBSubgroup___getitem__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const &\n"
+		""},
+	 { "Vector_RsmBSubgroup___setitem__", _wrap_Vector_RsmBSubgroup___setitem__, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup___setitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice, Vector_RsmBSubgroup v)\n"
+		"Vector_RsmBSubgroup___setitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_RsmBSubgroup___setitem__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)\n"
+		""},
+	 { "Vector_RsmBSubgroup_pop", _wrap_Vector_RsmBSubgroup_pop, METH_O, "Vector_RsmBSubgroup_pop(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type"},
+	 { "Vector_RsmBSubgroup_append", _wrap_Vector_RsmBSubgroup_append, METH_VARARGS, "Vector_RsmBSubgroup_append(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)"},
+	 { "Vector_RsmBSubgroup_empty", _wrap_Vector_RsmBSubgroup_empty, METH_O, "Vector_RsmBSubgroup_empty(Vector_RsmBSubgroup self) -> bool"},
+	 { "Vector_RsmBSubgroup_size", _wrap_Vector_RsmBSubgroup_size, METH_O, "Vector_RsmBSubgroup_size(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type"},
+	 { "Vector_RsmBSubgroup_swap", _wrap_Vector_RsmBSubgroup_swap, METH_VARARGS, "Vector_RsmBSubgroup_swap(Vector_RsmBSubgroup self, Vector_RsmBSubgroup v)"},
+	 { "Vector_RsmBSubgroup_begin", _wrap_Vector_RsmBSubgroup_begin, METH_O, "Vector_RsmBSubgroup_begin(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator"},
+	 { "Vector_RsmBSubgroup_end", _wrap_Vector_RsmBSubgroup_end, METH_O, "Vector_RsmBSubgroup_end(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator"},
+	 { "Vector_RsmBSubgroup_rbegin", _wrap_Vector_RsmBSubgroup_rbegin, METH_O, "Vector_RsmBSubgroup_rbegin(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::reverse_iterator"},
+	 { "Vector_RsmBSubgroup_rend", _wrap_Vector_RsmBSubgroup_rend, METH_O, "Vector_RsmBSubgroup_rend(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::reverse_iterator"},
+	 { "Vector_RsmBSubgroup_clear", _wrap_Vector_RsmBSubgroup_clear, METH_O, "Vector_RsmBSubgroup_clear(Vector_RsmBSubgroup self)"},
+	 { "Vector_RsmBSubgroup_get_allocator", _wrap_Vector_RsmBSubgroup_get_allocator, METH_O, "Vector_RsmBSubgroup_get_allocator(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::allocator_type"},
+	 { "Vector_RsmBSubgroup_pop_back", _wrap_Vector_RsmBSubgroup_pop_back, METH_O, "Vector_RsmBSubgroup_pop_back(Vector_RsmBSubgroup self)"},
+	 { "Vector_RsmBSubgroup_erase", _wrap_Vector_RsmBSubgroup_erase, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup_erase(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator\n"
+		"Vector_RsmBSubgroup_erase(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator first, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator\n"
+		""},
+	 { "new_Vector_RsmBSubgroup", _wrap_new_Vector_RsmBSubgroup, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup()\n"
+		"Vector_RsmBSubgroup(Vector_RsmBSubgroup other)\n"
+		"Vector_RsmBSubgroup(std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type size)\n"
+		"new_Vector_RsmBSubgroup(std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type size, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & value) -> Vector_RsmBSubgroup\n"
+		""},
+	 { "Vector_RsmBSubgroup_push_back", _wrap_Vector_RsmBSubgroup_push_back, METH_VARARGS, "Vector_RsmBSubgroup_push_back(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)"},
+	 { "Vector_RsmBSubgroup_front", _wrap_Vector_RsmBSubgroup_front, METH_O, "Vector_RsmBSubgroup_front(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const &"},
+	 { "Vector_RsmBSubgroup_back", _wrap_Vector_RsmBSubgroup_back, METH_O, "Vector_RsmBSubgroup_back(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const &"},
+	 { "Vector_RsmBSubgroup_assign", _wrap_Vector_RsmBSubgroup_assign, METH_VARARGS, "Vector_RsmBSubgroup_assign(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)"},
+	 { "Vector_RsmBSubgroup_resize", _wrap_Vector_RsmBSubgroup_resize, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup_resize(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type new_size)\n"
+		"Vector_RsmBSubgroup_resize(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)\n"
+		""},
+	 { "Vector_RsmBSubgroup_insert", _wrap_Vector_RsmBSubgroup_insert, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup_insert(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator\n"
+		"Vector_RsmBSubgroup_insert(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)\n"
+		""},
+	 { "Vector_RsmBSubgroup_reserve", _wrap_Vector_RsmBSubgroup_reserve, METH_VARARGS, "Vector_RsmBSubgroup_reserve(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type n)"},
+	 { "Vector_RsmBSubgroup_capacity", _wrap_Vector_RsmBSubgroup_capacity, METH_O, "Vector_RsmBSubgroup_capacity(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type"},
+	 { "delete_Vector_RsmBSubgroup", _wrap_delete_Vector_RsmBSubgroup, METH_O, "delete_Vector_RsmBSubgroup(Vector_RsmBSubgroup self)"},
 	 { "Vector_RsmBSubgroup_swigregister", Vector_RsmBSubgroup_swigregister, METH_O, NULL},
 	 { "Vector_RsmBSubgroup_swiginit", Vector_RsmBSubgroup_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -12456,218 +12496,258 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmBSubgroup", _wrap_new_RsmBSubgroup, METH_VARARGS, "\n"
+		"RsmBSubgroup(BlitzArray_double_2 Cov, int Time_correlation_domain_flag, BlitzArray_double_2 Time_correlation)\n"
+		"RsmBSubgroup(BlitzArray_double_2 Cov, int Time_correlation_domain_flag, double A, double alpha, double beta, double T)\n"
+		"new_RsmBSubgroup() -> RsmBSubgroup\n"
 		"\n"
-		"GeoCal::RsmBSubgroup::RsmBSubgroup(const RsmBSubgroup &V)\n"
 		"GeoCal::RsmBSubgroup::RsmBSubgroup\n"
 		""},
 	 { "RsmBSubgroup__v_number_parameter", _wrap_RsmBSubgroup__v_number_parameter, METH_O, "\n"
+		"_v_number_parameter(RsmBSubgroup self) -> int\n"
 		"\n"
-		"int GeoCal::RsmBSubgroup::number_parameter() const\n"
 		"GeoCal::RsmBSubgroup::number_parameter\n"
 		""},
 	 { "RsmBSubgroup__v_is_csm_correlation", _wrap_RsmBSubgroup__v_is_csm_correlation, METH_O, "\n"
+		"_v_is_csm_correlation(RsmBSubgroup self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmBSubgroup::is_csm_correlation() const\n"
 		"GeoCal::RsmBSubgroup::is_csm_correlation\n"
 		""},
 	 { "RsmBSubgroup__v_covariance", _wrap_RsmBSubgroup__v_covariance, METH_O, "\n"
+		"_v_covariance(RsmBSubgroup self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBSubgroup::covariance() const\n"
 		"GeoCal::RsmBSubgroup::covariance\n"
 		""},
 	 { "RsmBSubgroup__v_time_correlation", _wrap_RsmBSubgroup__v_time_correlation, METH_O, "\n"
+		"_v_time_correlation(RsmBSubgroup self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBSubgroup::time_correlation() const\n"
 		"GeoCal::RsmBSubgroup::time_correlation\n"
 		""},
 	 { "RsmBSubgroup__v_time_correlation_domain_flag", _wrap_RsmBSubgroup__v_time_correlation_domain_flag, METH_O, "\n"
+		"_v_time_correlation_domain_flag(RsmBSubgroup self) -> int\n"
 		"\n"
-		"int GeoCal::RsmBSubgroup::time_correlation_domain_flag() const\n"
 		"GeoCal::RsmBSubgroup::time_correlation_domain_flag\n"
 		""},
-	 { "RsmBSubgroup___str__", _wrap_RsmBSubgroup___str__, METH_O, NULL},
+	 { "RsmBSubgroup___str__", _wrap_RsmBSubgroup___str__, METH_O, "__str__(RsmBSubgroup self) -> std::string"},
 	 { "delete_RsmBSubgroup", _wrap_delete_RsmBSubgroup, METH_O, "\n"
+		"delete_RsmBSubgroup(RsmBSubgroup self)\n"
 		"\n"
-		"virtual GeoCal::RsmBSubgroup::~RsmBSubgroup()\n"
 		"GeoCal::RsmBSubgroup::~RsmBSubgroup\n"
 		""},
 	 { "RsmBSubgroup_swigregister", RsmBSubgroup_swigregister, METH_O, NULL},
 	 { "RsmBSubgroup_swiginit", RsmBSubgroup_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmBUnmodeledCovariance", _wrap_new_RsmBUnmodeledCovariance, METH_VARARGS, "\n"
+		"RsmBUnmodeledCovariance(BlitzArray_double_2 Cov, BlitzArray_double_2 Row_time_correlation, BlitzArray_double_2 Cow_time_correlation)\n"
+		"RsmBUnmodeledCovariance(BlitzArray_double_2 Cov, double Row_A, double Row_alpha, double Row_beta, double Row_T, double Col_A, double Col_alpha, double Col_beta, double Col_T)\n"
+		"new_RsmBUnmodeledCovariance() -> RsmBUnmodeledCovariance\n"
 		"\n"
-		"GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance(const RsmBUnmodeledCovariance &V)\n"
 		"GeoCal::RsmBUnmodeledCovariance::RsmBUnmodeledCovariance\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_is_csm_correlation", _wrap_RsmBUnmodeledCovariance__v_is_csm_correlation, METH_O, "\n"
+		"_v_is_csm_correlation(RsmBUnmodeledCovariance self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmBUnmodeledCovariance::is_csm_correlation() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::is_csm_correlation\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_covariance", _wrap_RsmBUnmodeledCovariance__v_covariance, METH_O, "\n"
+		"_v_covariance(RsmBUnmodeledCovariance self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBUnmodeledCovariance::covariance() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::covariance\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_row_time_correlation", _wrap_RsmBUnmodeledCovariance__v_row_time_correlation, METH_O, "\n"
+		"_v_row_time_correlation(RsmBUnmodeledCovariance self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBUnmodeledCovariance::row_time_correlation() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::row_time_correlation\n"
 		""},
 	 { "RsmBUnmodeledCovariance__v_col_time_correlation", _wrap_RsmBUnmodeledCovariance__v_col_time_correlation, METH_O, "\n"
+		"_v_col_time_correlation(RsmBUnmodeledCovariance self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::RsmBUnmodeledCovariance::col_time_correlation() const\n"
 		"GeoCal::RsmBUnmodeledCovariance::col_time_correlation\n"
 		""},
-	 { "RsmBUnmodeledCovariance___str__", _wrap_RsmBUnmodeledCovariance___str__, METH_O, NULL},
+	 { "RsmBUnmodeledCovariance___str__", _wrap_RsmBUnmodeledCovariance___str__, METH_O, "__str__(RsmBUnmodeledCovariance self) -> std::string"},
 	 { "delete_RsmBUnmodeledCovariance", _wrap_delete_RsmBUnmodeledCovariance, METH_O, "\n"
+		"delete_RsmBUnmodeledCovariance(RsmBUnmodeledCovariance self)\n"
 		"\n"
-		"virtual GeoCal::RsmBUnmodeledCovariance::~RsmBUnmodeledCovariance()\n"
 		"GeoCal::RsmBUnmodeledCovariance::~RsmBUnmodeledCovariance\n"
 		""},
 	 { "RsmBUnmodeledCovariance_swigregister", RsmBUnmodeledCovariance_swigregister, METH_O, NULL},
 	 { "RsmBUnmodeledCovariance_swiginit", RsmBUnmodeledCovariance_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmIndirectCovarianceB", _wrap_new_RsmIndirectCovarianceB, METH_VARARGS, "\n"
+		"RsmIndirectCovarianceB(std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\", std::string const & Triangulation_id=\"\")\n"
+		"RsmIndirectCovarianceB(ImageGroundConnection Igc, double H_min, double H_max, RsmId Rsm_id, std::string const & Triangulation_id=\"\")\n"
 		"\n"
-		"GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
 		"GeoCal::RsmIndirectCovarianceB::RsmIndirectCovarianceB\n"
 		""},
 	 { "RsmIndirectCovarianceB_tre_string", _wrap_RsmIndirectCovarianceB_tre_string, METH_O, "\n"
+		"tre_string(RsmIndirectCovarianceB self) -> std::string\n"
 		"\n"
-		"std::string RsmIndirectCovarianceB::tre_string() const\n"
 		"GeoCal::RsmIndirectCovarianceB::tre_string\n"
 		""},
 	 { "RsmIndirectCovarianceB_read_tre_string", _wrap_RsmIndirectCovarianceB_read_tre_string, METH_O, "\n"
+		"read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmIndirectCovarianceB >\n"
 		"\n"
-		"boost::shared_ptr< RsmIndirectCovarianceB > RsmIndirectCovarianceB::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmIndirectCovarianceB::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmRationalPolynomial. However the fields that aren't contained are ones used\n"
+		"for fitting the RSM, so in practice this doesn't matter. We just set the various\n"
+		"fields to the default values found in the constructor.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_covariance_version_date", _wrap_RsmIndirectCovarianceB__v_covariance_version_date, METH_VARARGS, "\n"
+		"_v_covariance_version_date(RsmIndirectCovarianceB self) -> std::string\n"
+		"_v_covariance_version_date(RsmIndirectCovarianceB self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::covariance_version_date(const std::string &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::covariance_version_date\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_has_indirect_error_covariance", _wrap_RsmIndirectCovarianceB__v_has_indirect_error_covariance, METH_O, "\n"
+		"_v_has_indirect_error_covariance(RsmIndirectCovarianceB self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmIndirectCovarianceB::has_indirect_error_covariance() const\n"
 		"GeoCal::RsmIndirectCovarianceB::has_indirect_error_covariance\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_has_unmodeled_error_covariance", _wrap_RsmIndirectCovarianceB__v_has_unmodeled_error_covariance, METH_O, "\n"
+		"_v_has_unmodeled_error_covariance(RsmIndirectCovarianceB self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmIndirectCovarianceB::has_unmodeled_error_covariance() const\n"
 		"GeoCal::RsmIndirectCovarianceB::has_unmodeled_error_covariance\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_number_original_parameter", _wrap_RsmIndirectCovarianceB__v_number_original_parameter, METH_O, "\n"
+		"_v_number_original_parameter(RsmIndirectCovarianceB self) -> int\n"
 		"\n"
-		"int RsmIndirectCovarianceB::number_original_parameter() const\n"
 		"GeoCal::RsmIndirectCovarianceB::number_original_parameter\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_subgroup", _wrap_RsmIndirectCovarianceB__v_subgroup, METH_VARARGS, "\n"
+		"_v_subgroup(RsmIndirectCovarianceB self) -> Vector_RsmBSubgroup\n"
+		"_v_subgroup(RsmIndirectCovarianceB self, Vector_RsmBSubgroup V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::subgroup(const std::vector< boost::shared_ptr< RsmBSubgroup > > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::subgroup\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_mapping_matrix", _wrap_RsmIndirectCovarianceB__v_mapping_matrix, METH_VARARGS, "\n"
+		"_v_mapping_matrix(RsmIndirectCovarianceB self) -> BlitzArray_double_2\n"
+		"_v_mapping_matrix(RsmIndirectCovarianceB self, BlitzArray_double_2 V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::mapping_matrix(const blitz::Array< double, 2 > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::mapping_matrix\n"
 		""},
 	 { "RsmIndirectCovarianceB__v_unmodeled_covariance", _wrap_RsmIndirectCovarianceB__v_unmodeled_covariance, METH_VARARGS, "\n"
+		"_v_unmodeled_covariance(RsmIndirectCovarianceB self) -> boost::shared_ptr< GeoCal::RsmBUnmodeledCovariance >\n"
+		"_v_unmodeled_covariance(RsmIndirectCovarianceB self, boost::shared_ptr< GeoCal::RsmBUnmodeledCovariance > const & V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::unmodeled_covariance(const boost::shared_ptr< RsmBUnmodeledCovariance > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::unmodeled_covariance\n"
 		""},
 	 { "RsmIndirectCovarianceB_subgroup_i", _wrap_RsmIndirectCovarianceB_subgroup_i, METH_VARARGS, "\n"
+		"subgroup_i(RsmIndirectCovarianceB self, int I) -> RsmBSubgroup\n"
 		"\n"
-		"const RsmBSubgroup & GeoCal::RsmIndirectCovarianceB::subgroup_i(int I) const\n"
 		"GeoCal::RsmIndirectCovarianceB::subgroup_i\n"
 		""},
 	 { "RsmIndirectCovarianceB_add_subgroup", _wrap_RsmIndirectCovarianceB_add_subgroup, METH_VARARGS, "\n"
+		"add_subgroup(RsmIndirectCovarianceB self, boost::shared_ptr< GeoCal::RsmBSubgroup > const & V)\n"
 		"\n"
-		"void GeoCal::RsmIndirectCovarianceB::add_subgroup(const boost::shared_ptr< RsmBSubgroup > &V)\n"
 		"GeoCal::RsmIndirectCovarianceB::add_subgroup\n"
 		""},
 	 { "RsmIndirectCovarianceB_check_consistent", _wrap_RsmIndirectCovarianceB_check_consistent, METH_O, "\n"
+		"check_consistent(RsmIndirectCovarianceB self)\n"
 		"\n"
-		"void RsmIndirectCovarianceB::check_consistent() const\n"
 		"GeoCal::RsmIndirectCovarianceB::check_consistent\n"
-		"We have a few different pieces that need to match sizes.\n"
-		"We don't check this as the object is created/modified because we may\n"
-		"be in an inconsistent state during construction (e.g., we have added\n"
-		"subgroups, but haven't yet modified the mapping_matrix). This routine\n"
-		"does that consistency check, and throws an exception if things aren't\n"
-		"consistent. Called before creating and after reading a TRE. \n"
+		"We have a few different pieces that need to match sizes.  \n"
+		"\n"
+		"We don't check this as the object is created/modified because we may be in an\n"
+		"inconsistent state during construction (e.g., we have added subgroups, but\n"
+		"haven't yet modified the mapping_matrix). This routine does that consistency\n"
+		"check, and throws an exception if things aren't consistent. Called before\n"
+		"creating and after reading a TRE.  \n"
+		"\n"
 		""},
 	 { "delete_RsmIndirectCovarianceB", _wrap_delete_RsmIndirectCovarianceB, METH_O, "\n"
+		"delete_RsmIndirectCovarianceB(RsmIndirectCovarianceB self)\n"
 		"\n"
-		"virtual GeoCal::RsmIndirectCovarianceB::~RsmIndirectCovarianceB()\n"
 		"GeoCal::RsmIndirectCovarianceB::~RsmIndirectCovarianceB\n"
 		""},
 	 { "RsmIndirectCovarianceB_swigregister", RsmIndirectCovarianceB_swigregister, METH_O, NULL},
 	 { "RsmIndirectCovarianceB_swiginit", RsmIndirectCovarianceB_swiginit, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_iterator", _wrap_Vector_RsmBSubgroup_iterator, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___nonzero__", _wrap_Vector_RsmBSubgroup___nonzero__, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___bool__", _wrap_Vector_RsmBSubgroup___bool__, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___len__", _wrap_Vector_RsmBSubgroup___len__, METH_O, NULL},
-	 { "Vector_RsmBSubgroup___getslice__", _wrap_Vector_RsmBSubgroup___getslice__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___setslice__", _wrap_Vector_RsmBSubgroup___setslice__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___delslice__", _wrap_Vector_RsmBSubgroup___delslice__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___delitem__", _wrap_Vector_RsmBSubgroup___delitem__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___getitem__", _wrap_Vector_RsmBSubgroup___getitem__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup___setitem__", _wrap_Vector_RsmBSubgroup___setitem__, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_pop", _wrap_Vector_RsmBSubgroup_pop, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_append", _wrap_Vector_RsmBSubgroup_append, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_empty", _wrap_Vector_RsmBSubgroup_empty, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_size", _wrap_Vector_RsmBSubgroup_size, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_swap", _wrap_Vector_RsmBSubgroup_swap, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_begin", _wrap_Vector_RsmBSubgroup_begin, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_end", _wrap_Vector_RsmBSubgroup_end, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_rbegin", _wrap_Vector_RsmBSubgroup_rbegin, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_rend", _wrap_Vector_RsmBSubgroup_rend, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_clear", _wrap_Vector_RsmBSubgroup_clear, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_get_allocator", _wrap_Vector_RsmBSubgroup_get_allocator, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_pop_back", _wrap_Vector_RsmBSubgroup_pop_back, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_erase", _wrap_Vector_RsmBSubgroup_erase, METH_VARARGS, NULL},
-	 { "new_Vector_RsmBSubgroup", _wrap_new_Vector_RsmBSubgroup, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_push_back", _wrap_Vector_RsmBSubgroup_push_back, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_front", _wrap_Vector_RsmBSubgroup_front, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_back", _wrap_Vector_RsmBSubgroup_back, METH_O, NULL},
-	 { "Vector_RsmBSubgroup_assign", _wrap_Vector_RsmBSubgroup_assign, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_resize", _wrap_Vector_RsmBSubgroup_resize, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_insert", _wrap_Vector_RsmBSubgroup_insert, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_reserve", _wrap_Vector_RsmBSubgroup_reserve, METH_VARARGS, NULL},
-	 { "Vector_RsmBSubgroup_capacity", _wrap_Vector_RsmBSubgroup_capacity, METH_O, NULL},
-	 { "delete_Vector_RsmBSubgroup", _wrap_delete_Vector_RsmBSubgroup, METH_O, NULL},
+	 { "Vector_RsmBSubgroup_iterator", _wrap_Vector_RsmBSubgroup_iterator, METH_O, "iterator(Vector_RsmBSubgroup self) -> SwigPyIterator"},
+	 { "Vector_RsmBSubgroup___nonzero__", _wrap_Vector_RsmBSubgroup___nonzero__, METH_O, "__nonzero__(Vector_RsmBSubgroup self) -> bool"},
+	 { "Vector_RsmBSubgroup___bool__", _wrap_Vector_RsmBSubgroup___bool__, METH_O, "__bool__(Vector_RsmBSubgroup self) -> bool"},
+	 { "Vector_RsmBSubgroup___len__", _wrap_Vector_RsmBSubgroup___len__, METH_O, "__len__(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type"},
+	 { "Vector_RsmBSubgroup___getslice__", _wrap_Vector_RsmBSubgroup___getslice__, METH_VARARGS, "__getslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j) -> Vector_RsmBSubgroup"},
+	 { "Vector_RsmBSubgroup___setslice__", _wrap_Vector_RsmBSubgroup___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j)\n"
+		"__setslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j, Vector_RsmBSubgroup v)\n"
+		""},
+	 { "Vector_RsmBSubgroup___delslice__", _wrap_Vector_RsmBSubgroup___delslice__, METH_VARARGS, "__delslice__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type j)"},
+	 { "Vector_RsmBSubgroup___delitem__", _wrap_Vector_RsmBSubgroup___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i)\n"
+		"__delitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_RsmBSubgroup___getitem__", _wrap_Vector_RsmBSubgroup___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice) -> Vector_RsmBSubgroup\n"
+		"__getitem__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const &\n"
+		""},
+	 { "Vector_RsmBSubgroup___setitem__", _wrap_Vector_RsmBSubgroup___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice, Vector_RsmBSubgroup v)\n"
+		"__setitem__(Vector_RsmBSubgroup self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)\n"
+		""},
+	 { "Vector_RsmBSubgroup_pop", _wrap_Vector_RsmBSubgroup_pop, METH_O, "pop(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type"},
+	 { "Vector_RsmBSubgroup_append", _wrap_Vector_RsmBSubgroup_append, METH_VARARGS, "append(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)"},
+	 { "Vector_RsmBSubgroup_empty", _wrap_Vector_RsmBSubgroup_empty, METH_O, "empty(Vector_RsmBSubgroup self) -> bool"},
+	 { "Vector_RsmBSubgroup_size", _wrap_Vector_RsmBSubgroup_size, METH_O, "size(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type"},
+	 { "Vector_RsmBSubgroup_swap", _wrap_Vector_RsmBSubgroup_swap, METH_VARARGS, "swap(Vector_RsmBSubgroup self, Vector_RsmBSubgroup v)"},
+	 { "Vector_RsmBSubgroup_begin", _wrap_Vector_RsmBSubgroup_begin, METH_O, "begin(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator"},
+	 { "Vector_RsmBSubgroup_end", _wrap_Vector_RsmBSubgroup_end, METH_O, "end(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator"},
+	 { "Vector_RsmBSubgroup_rbegin", _wrap_Vector_RsmBSubgroup_rbegin, METH_O, "rbegin(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::reverse_iterator"},
+	 { "Vector_RsmBSubgroup_rend", _wrap_Vector_RsmBSubgroup_rend, METH_O, "rend(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::reverse_iterator"},
+	 { "Vector_RsmBSubgroup_clear", _wrap_Vector_RsmBSubgroup_clear, METH_O, "clear(Vector_RsmBSubgroup self)"},
+	 { "Vector_RsmBSubgroup_get_allocator", _wrap_Vector_RsmBSubgroup_get_allocator, METH_O, "get_allocator(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::allocator_type"},
+	 { "Vector_RsmBSubgroup_pop_back", _wrap_Vector_RsmBSubgroup_pop_back, METH_O, "pop_back(Vector_RsmBSubgroup self)"},
+	 { "Vector_RsmBSubgroup_erase", _wrap_Vector_RsmBSubgroup_erase, METH_VARARGS, "\n"
+		"erase(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator\n"
+		"erase(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator first, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator\n"
+		""},
+	 { "new_Vector_RsmBSubgroup", _wrap_new_Vector_RsmBSubgroup, METH_VARARGS, "\n"
+		"Vector_RsmBSubgroup()\n"
+		"Vector_RsmBSubgroup(Vector_RsmBSubgroup other)\n"
+		"Vector_RsmBSubgroup(std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type size)\n"
+		"new_Vector_RsmBSubgroup(std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type size, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & value) -> Vector_RsmBSubgroup\n"
+		""},
+	 { "Vector_RsmBSubgroup_push_back", _wrap_Vector_RsmBSubgroup_push_back, METH_VARARGS, "push_back(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)"},
+	 { "Vector_RsmBSubgroup_front", _wrap_Vector_RsmBSubgroup_front, METH_O, "front(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const &"},
+	 { "Vector_RsmBSubgroup_back", _wrap_Vector_RsmBSubgroup_back, METH_O, "back(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const &"},
+	 { "Vector_RsmBSubgroup_assign", _wrap_Vector_RsmBSubgroup_assign, METH_VARARGS, "assign(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)"},
+	 { "Vector_RsmBSubgroup_resize", _wrap_Vector_RsmBSubgroup_resize, METH_VARARGS, "\n"
+		"resize(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type new_size)\n"
+		"resize(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)\n"
+		""},
+	 { "Vector_RsmBSubgroup_insert", _wrap_Vector_RsmBSubgroup_insert, METH_VARARGS, "\n"
+		"insert(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator\n"
+		"insert(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::value_type const & x)\n"
+		""},
+	 { "Vector_RsmBSubgroup_reserve", _wrap_Vector_RsmBSubgroup_reserve, METH_VARARGS, "reserve(Vector_RsmBSubgroup self, std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type n)"},
+	 { "Vector_RsmBSubgroup_capacity", _wrap_Vector_RsmBSubgroup_capacity, METH_O, "capacity(Vector_RsmBSubgroup self) -> std::vector< boost::shared_ptr< GeoCal::RsmBSubgroup > >::size_type"},
+	 { "delete_Vector_RsmBSubgroup", _wrap_delete_Vector_RsmBSubgroup, METH_O, "delete_Vector_RsmBSubgroup(Vector_RsmBSubgroup self)"},
 	 { "Vector_RsmBSubgroup_swigregister", Vector_RsmBSubgroup_swigregister, METH_O, NULL},
 	 { "Vector_RsmBSubgroup_swiginit", Vector_RsmBSubgroup_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

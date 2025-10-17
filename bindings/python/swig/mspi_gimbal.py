@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _mspi_gimbal.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _mspi_gimbal:
 _mspi_gimbal.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _mspi_gimbal.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,6 +140,8 @@ import geocal_swig.with_parameter
 import geocal_swig.generic_object
 import geocal_swig.observer
 class ObservableMspiGimbal(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observable< GeoCal::MspiGimbal > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -150,10 +155,13 @@ class ObservableMspiGimbal(geocal_swig.generic_object.GenericObject):
 # Register ObservableMspiGimbal in _mspi_gimbal:
 _mspi_gimbal.ObservableMspiGimbal_swigregister(ObservableMspiGimbal)
 class ObserverMspiGimbal(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observer< GeoCal::MspiGimbal > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self):
+        r"""__init__(ObserverMspiGimbal self) -> ObserverMspiGimbal"""
         _mspi_gimbal.ObserverMspiGimbal_swiginit(self, _mspi_gimbal.new_ObserverMspiGimbal())
     __swig_destroy__ = _mspi_gimbal.delete_ObserverMspiGimbal
     notify_update = _swig_new_instance_method(_mspi_gimbal.ObserverMspiGimbal_notify_update)
@@ -165,9 +173,11 @@ _mspi_gimbal.ObserverMspiGimbal_swigregister(ObserverMspiGimbal)
 class MspiGimbal(geocal_swig.with_parameter.WithParameter, ObservableMspiGimbal):
     r"""
 
-    This handles the AirMSPI gimbal calculations.
 
-    C++ includes: mspi_gimbal.h 
+    This handles the AirMSPI gimbal calculations.  
+
+    C++ includes: mspi_gimbal.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -175,10 +185,11 @@ class MspiGimbal(geocal_swig.with_parameter.WithParameter, ObservableMspiGimbal)
 
     def __init__(self, *args):
         r"""
+        __init__(MspiGimbal self, double Epsilon, double Psi, double Theta) -> MspiGimbal
+        __init__(MspiGimbal self, std::string const & File_name, std::string const & Extra_config_file="") -> MspiGimbal
 
-        GeoCal::MspiGimbal::MspiGimbal(double Epsilon, double Psi, double Theta)
         GeoCal::MspiGimbal::MspiGimbal
-        Constructor. The angles should be in degrees.
+        Constructor. The angles should be in degrees.  
 
         """
         _mspi_gimbal.MspiGimbal_swiginit(self, _mspi_gimbal.new_MspiGimbal(*args))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_map_projected.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_map_projected:
 _igc_map_projected.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_map_projected.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -145,33 +148,31 @@ import geocal_swig.geocal_exception
 class IgcMapProjected(geocal_swig.calc_raster.CalcRaster):
     r"""
 
+
     This is a RasterImage that has been map projected using an
-    ImageGroundConnection.
+    ImageGroundConnection.  
 
-    To do this we do two steps:
+    To do this we do two steps:  
 
-    We calculate roughly what the difference in resolution is between the
-    original data and final MapInfo. We do this by looking at the center
-    pixel of the original data and the pixel +1 in line and sample. We
-    then use RasterAveraged to average the original data to roughly the
-    resolution of the final MapInfo. If the final MapInfo is near the same
-    resolution as the original, or if it has a higher resolution, then we
-    don't do any averaging. Alternatively, you can pass in the averaging
-    factor (include a value of 1 which turns this behavior off).
+    1.  We calculate roughly what the difference in resolution is between the
+        original data and final MapInfo. We do this by looking at the center pixel
+        of the original data and the pixel +1 in line and sample. We then use
+        RasterAveraged to average the original data to roughly the resolution of the
+        final MapInfo. If the final MapInfo is near the same resolution as the
+        original, or if it has a higher resolution, then we don't do any averaging.
+        Alternatively, you can pass in the averaging factor (include a value of 1
+        which turns this behavior off).  
+    2.  We then interpolate the possibly averaged data to the final projection.  
 
-    We then interpolate the possibly averaged data to the final
-    projection.
+    It is ok if the final MapInfo contains areas outside of the original data. For
+    any pixel outside of the original data, we just return a value of 0.  
 
-    It is ok if the final MapInfo contains areas outside of the original
-    data. For any pixel outside of the original data, we just return a
-    value of 0.
+    This class calculates the data on the fly. Sometimes this is what you want, but
+    if you are going to be using the resulting data a few times, you may want to use
+    a MemoryRasterImage to generate a copy once and keep it in memory.  
 
-    This class calculates the data on the fly. Sometimes this is what you
-    want, but if you are going to be using the resulting data a few times,
-    you may want to use a MemoryRasterImage to generate a copy once and
-    keep it in memory.
+    C++ includes: igc_map_projected.h
 
-    C++ includes: igc_map_projected.h 
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -179,21 +180,20 @@ class IgcMapProjected(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Mi, Igc, Grid_spacing=1, Avg_fact=-1, Read_into_memory=True, Number_tile_line=-1, Number_tile_sample=-1, Fill_value=0.0):
         r"""
+        __init__(IgcMapProjected self, MapInfo Mi, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0) -> IgcMapProjected
 
-        IgcMapProjected::IgcMapProjected(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >
-        &Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,
-        int Number_tile_line=-1, int Number_tile_sample=-1, double
-        Fill_value=0.0)
         GeoCal::IgcMapProjected::IgcMapProjected
-        Constructor.
-        We average the data either by the factor given as Avg_fact, or by
-        ratio of the Mapinfo resolution and the Igc resolution.
+        Constructor.  
 
-        You can optionally pass a grid spacing to use. We calculate image
-        coordinates in the input exactly at the grid spacing, and interpolate
-        in betweeen. This is much faster than calculating every point, and if
-        the grid spacing is small compared to the Dem and any nonlinearities
-        then it gives results very close to the full calculation. 
+        We average the data either by the factor given as Avg_fact, or by ratio of the
+        Mapinfo resolution and the Igc resolution.  
+
+        You can optionally pass a grid spacing to use. We calculate image coordinates in
+        the input exactly at the grid spacing, and interpolate in betweeen. This is much
+        faster than calculating every point, and if the grid spacing is small compared
+        to the Dem and any nonlinearities then it gives results very close to the full
+        calculation.  
+
         """
         _igc_map_projected.IgcMapProjected_swiginit(self, _igc_map_projected.new_IgcMapProjected(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory, Number_tile_line, Number_tile_sample, Fill_value))
     _v_igc_original = _swig_new_instance_method(_igc_map_projected.IgcMapProjected__v_igc_original)
@@ -241,33 +241,31 @@ _igc_map_projected.IgcMapProjected_swigregister(IgcMapProjected)
 class IgcMapProjectedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     r"""
 
+
     This is a RasterImageMultiBand that has been map projected using an
-    ImageGroundConnection.
+    ImageGroundConnection.  
 
-    To do this we do two steps:
+    To do this we do two steps:  
 
-    We calculate roughly what the difference in resolution is between the
-    original data and final MapInfo. We do this by looking at the center
-    pixel of the original data and the pixel +1 in line and sample. We
-    then use RasterAveraged to average the original data to roughly the
-    resolution of the final MapInfo. If the final MapInfo is near the same
-    resolution as the original, or if it has a higher resolution, then we
-    don't do any averaging. Alternatively, you can pass in the averaging
-    factor (include a value of 1 which turns this behavior off).
+    1.  We calculate roughly what the difference in resolution is between the
+        original data and final MapInfo. We do this by looking at the center pixel
+        of the original data and the pixel +1 in line and sample. We then use
+        RasterAveraged to average the original data to roughly the resolution of the
+        final MapInfo. If the final MapInfo is near the same resolution as the
+        original, or if it has a higher resolution, then we don't do any averaging.
+        Alternatively, you can pass in the averaging factor (include a value of 1
+        which turns this behavior off).  
+    2.  We then interpolate the possibly averaged data to the final projection.  
 
-    We then interpolate the possibly averaged data to the final
-    projection.
+    It is ok if the final MapInfo contains areas outside of the original data. For
+    any pixel outside of the original data, we just return a value of 0.  
 
-    It is ok if the final MapInfo contains areas outside of the original
-    data. For any pixel outside of the original data, we just return a
-    value of 0.
+    This class calculates the data on the fly. Sometimes this is what you want, but
+    if you are going to be using the resulting data a few times, you may want to use
+    a MemoryRasterImage to generate a copy once and keep it in memory.  
 
-    This class calculates the data on the fly. Sometimes this is what you
-    want, but if you are going to be using the resulting data a few times,
-    you may want to use a MemoryRasterImage to generate a copy once and
-    keep it in memory.
+    C++ includes: igc_map_projected.h
 
-    C++ includes: igc_map_projected.h 
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -275,21 +273,20 @@ class IgcMapProjectedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMult
 
     def __init__(self, Mi, Igc, Grid_spacing=1, Avg_fact=-1, Read_into_memory=True, Number_tile_line=-1, Number_tile_sample=-1, Fill_value=0.0):
         r"""
+        __init__(IgcMapProjectedMultiBand self, MapInfo Mi, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0) -> IgcMapProjectedMultiBand
 
-        IgcMapProjectedMultiBand::IgcMapProjectedMultiBand(const MapInfo &Mi, const boost::shared_ptr< ImageGroundConnection >
-        &Igc, int Grid_spacing=1, int Avg_fact=-1, bool Read_into_memory=true,
-        int Number_tile_line=-1, int Number_tile_sample=-1, double
-        Fill_value=0.0)
         GeoCal::IgcMapProjectedMultiBand::IgcMapProjectedMultiBand
-        Constructor.
-        We average the data either by the factor given as Avg_fact, or by
-        ratio of the Mapinfo resolution and the Igc resolution.
+        Constructor.  
 
-        You can optionally pass a grid spacing to use. We calculate image
-        coordinates in the input exactly at the grid spacing, and interpolate
-        in betweeen. This is much faster than calculating every point, and if
-        the grid spacing is small compared to the Dem and any nonlinearities
-        then it gives results very close to the full calculation. 
+        We average the data either by the factor given as Avg_fact, or by ratio of the
+        Mapinfo resolution and the Igc resolution.  
+
+        You can optionally pass a grid spacing to use. We calculate image coordinates in
+        the input exactly at the grid spacing, and interpolate in betweeen. This is much
+        faster than calculating every point, and if the grid spacing is small compared
+        to the Dem and any nonlinearities then it gives results very close to the full
+        calculation.  
+
         """
         _igc_map_projected.IgcMapProjectedMultiBand_swiginit(self, _igc_map_projected.new_IgcMapProjectedMultiBand(Mi, Igc, Grid_spacing, Avg_fact, Read_into_memory, Number_tile_line, Number_tile_sample, Fill_value))
     _v_igc_original = _swig_new_instance_method(_igc_map_projected.IgcMapProjectedMultiBand__v_igc_original)

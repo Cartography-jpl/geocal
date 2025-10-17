@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm:
 _rsm.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,21 +142,23 @@ import geocal_swig.geocal_exception
 class Rsm(geocal_swig.with_parameter.WithParameterNested):
     r"""
 
-    This class is a Replacement Sensor Model (see Dolloff, J.T., M.M.
 
-    Iiyama, and C.R. Taylor, 2008. The Replacement Sensor Model (RSM):
-    Overview, Status, and Performance Summary, ASPRS 2008 Annual
-    Conference, April 28 - May 2, 2008)
+    This class is a Replacement Sensor Model (see Dolloff, J.T., M.M.  
+
+    Iiyama, and C.R. Taylor, 2008. The Replacement Sensor Model (RSM): Overview,
+    Status, and Performance Summary, ASPRS 2008 Annual Conference, April 28 - May 2,
+    2008)  
 
     This is the top level class which provides access to mapping from
-    GroundCoordinate to ImageCoordinate and vice versa.
+    GroundCoordinate to ImageCoordinate and vice versa.  
 
-    Note that the same ambiguity mentioned in the Rpc comments exist here,
-    it isn't clear the exact definition of row/sample in the standard. For
-    the Rpc, I'm fairly sure that it matches our ImageCoordinate
-    convention - (0,0) is the center of the upper left corner pixel.
+    Note that the same ambiguity mentioned in the Rpc comments exist here, it isn't
+    clear the exact definition of row/sample in the standard. For the Rpc, I'm
+    *fairly* sure that it matches our ImageCoordinate convention - (0,0) is the
+    center of the upper left corner pixel.  
 
-    C++ includes: rsm.h 
+    C++ includes: rsm.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,8 +166,9 @@ class Rsm(geocal_swig.with_parameter.WithParameterNested):
 
     def __init__(self, *args):
         r"""
+        __init__(Rsm self, boost::shared_ptr< GeoCal::RsmId > const & Rsm_id) -> Rsm
+        __init__(Rsm self, boost::shared_ptr< GeoCal::RsmBase > const & Rp, boost::shared_ptr< GeoCal::CoordinateConverter > const & Cconv) -> Rsm
 
-        GeoCal::Rsm::Rsm(const boost::shared_ptr< RsmId > &Rsm_id)
         GeoCal::Rsm::Rsm
         """
         _rsm.Rsm_swiginit(self, _rsm.new_Rsm(*args))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _refraction_msp.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _refraction_msp:
 _refraction_msp.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _refraction_msp.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,11 +141,13 @@ import geocal_swig.generic_object
 class RefractionMsp(geocal_swig.refraction.Refraction):
     r"""
 
-    This calculates refraction.
 
-    The algorithm used here is the one the MSP library uses.
+    This calculates refraction.  
 
-    C++ includes: refraction_msp.h 
+    The algorithm used here is the one the MSP library uses.  
+
+    C++ includes: refraction_msp.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,14 +155,14 @@ class RefractionMsp(geocal_swig.refraction.Refraction):
 
     def __init__(self, Wavelength_micrometer=0.6, Temperature_kelvin=-1, Pressure_millibar=-1):
         r"""
+        __init__(RefractionMsp self, double Wavelength_micrometer=0.6, double Temperature_kelvin=-1, double Pressure_millibar=-1) -> RefractionMsp
 
-        RefractionMsp::RefractionMsp(double Wavelength_micrometer=0.6, double Temperature_kelvin=-1,
-        double Pressure_millibar=-1)
         GeoCal::RefractionMsp::RefractionMsp
-        Constructor.
-        You can supply the wavelength, temperature, and pressure of the ground
-        point if you have that information. Otherwise the algorithm will use
-        defaults. 
+        Constructor.  
+
+        You can supply the wavelength, temperature, and pressure of the ground point if
+        you have that information. Otherwise the algorithm will use defaults.  
+
         """
         _refraction_msp.RefractionMsp_swiginit(self, _refraction_msp.new_RefractionMsp(Wavelength_micrometer, Temperature_kelvin, Pressure_millibar))
     refraction_apply = _swig_new_instance_method(_refraction_msp.RefractionMsp_refraction_apply)

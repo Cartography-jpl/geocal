@@ -7512,96 +7512,103 @@ SWIGINTERN PyObject *RsmAdjustableParameter_swigregister(PyObject *SWIGUNUSEDPAR
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RsmAdjustableParameter_adjustment", _wrap_RsmAdjustableParameter_adjustment, METH_VARARGS, "\n"
+		"RsmAdjustableParameter_adjustment(RsmAdjustableParameter self, GroundCoordinate Gc, boost::shared_ptr< GeoCal::GroundCoordinate > & Gc_adjusted, double & Lndelta, double & Smpdelta)\n"
 		"\n"
-		"virtual void GeoCal::RsmAdjustableParameter::adjustment(const GroundCoordinate &Gc, boost::shared_ptr< GroundCoordinate >\n"
-		"&Gc_adjusted, double &Lndelta, double &Smpdelta) const =0\n"
 		"GeoCal::RsmAdjustableParameter::adjustment\n"
-		"Adjustment for given ground location.\n"
+		"Adjustment for given ground location.  \n"
 		"\n"
 		""},
 	 { "RsmAdjustableParameter_adjustment_with_derivative", _wrap_RsmAdjustableParameter_adjustment_with_derivative, METH_VARARGS, "\n"
+		"RsmAdjustableParameter_adjustment_with_derivative(RsmAdjustableParameter self, GroundCoordinate Gc, ArrayAd_double_1 Cf_adjusted, AutoDerivativeDouble Lndelta, AutoDerivativeDouble Smpdelta)\n"
 		"\n"
-		"virtual void GeoCal::RsmAdjustableParameter::adjustment_with_derivative(const GroundCoordinate &Gc, ArrayAd< double, 1 > &Cf_adjusted,\n"
-		"AutoDerivative< double > &Lndelta, AutoDerivative< double > &Smpdelta)\n"
-		"const =0\n"
 		"GeoCal::RsmAdjustableParameter::adjustment_with_derivative\n"
-		"Adjustment including sample derivatives.\n"
+		"Adjustment including sample derivatives.  \n"
 		"\n"
 		""},
 	 { "RsmAdjustableParameter_base_tre_string", _wrap_RsmAdjustableParameter_base_tre_string, METH_O, "\n"
+		"RsmAdjustableParameter_base_tre_string(RsmAdjustableParameter self) -> std::string\n"
 		"\n"
-		"std::string RsmAdjustableParameter::base_tre_string() const\n"
 		"GeoCal::RsmAdjustableParameter::base_tre_string\n"
-		"Write the part of the TRE string for the image identification, RSM\n"
-		"support data edition, and triangulation_id.\n"
+		"Write the part of the TRE string for the image identification, RSM support data\n"
+		"edition, and triangulation_id.  \n"
 		"\n"
 		""},
 	 { "RsmAdjustableParameter_base_read_tre_string", _wrap_RsmAdjustableParameter_base_read_tre_string, METH_VARARGS, "\n"
+		"RsmAdjustableParameter_base_read_tre_string(RsmAdjustableParameter self, istream In)\n"
 		"\n"
-		"void RsmAdjustableParameter::base_read_tre_string(std::istream &In)\n"
 		"GeoCal::RsmAdjustableParameter::base_read_tre_string\n"
 		""},
 	 { "RsmAdjustableParameter__v_image_identifier", _wrap_RsmAdjustableParameter__v_image_identifier, METH_VARARGS, "\n"
+		"RsmAdjustableParameter__v_image_identifier(RsmAdjustableParameter self) -> std::string\n"
+		"RsmAdjustableParameter__v_image_identifier(RsmAdjustableParameter self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmAdjustableParameter::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmAdjustableParameter::image_identifier\n"
 		""},
 	 { "RsmAdjustableParameter__v_rsm_support_data_edition", _wrap_RsmAdjustableParameter__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"RsmAdjustableParameter__v_rsm_support_data_edition(RsmAdjustableParameter self) -> std::string\n"
+		"RsmAdjustableParameter__v_rsm_support_data_edition(RsmAdjustableParameter self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmAdjustableParameter::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmAdjustableParameter::rsm_support_data_edition\n"
 		""},
 	 { "RsmAdjustableParameter__v_triangulation_id", _wrap_RsmAdjustableParameter__v_triangulation_id, METH_VARARGS, "\n"
+		"RsmAdjustableParameter__v_triangulation_id(RsmAdjustableParameter self) -> std::string\n"
+		"RsmAdjustableParameter__v_triangulation_id(RsmAdjustableParameter self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmAdjustableParameter::triangulation_id(const std::string &V)\n"
 		"GeoCal::RsmAdjustableParameter::triangulation_id\n"
 		""},
 	 { "RsmAdjustableParameter__v_naif_code", _wrap_RsmAdjustableParameter__v_naif_code, METH_VARARGS, "\n"
+		"RsmAdjustableParameter__v_naif_code(RsmAdjustableParameter self) -> int\n"
+		"RsmAdjustableParameter__v_naif_code(RsmAdjustableParameter self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmAdjustableParameter::naif_code(int Naif_code)=0\n"
 		"GeoCal::RsmAdjustableParameter::naif_code\n"
-		"Set the NAIF code for the planet/body we are working with.\n"
-		"Note that the NITF TRE structure does not have a place to store the\n"
-		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
-		"for something like Mars, we have the NAIF code set to earth. We need\n"
-		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"Set the NAIF code for the planet/body we are working with.  \n"
 		"\n"
-		"This is not a problem for boost serialization (which keeps the NAIF\n"
-		"code), just for NITF TRE. \n"
+		"Note that the NITF TRE structure does not have a place to store the NAIF code,\n"
+		"it implicitly assumes earth. So when we read a TRE, even for something like\n"
+		"Mars, we have the NAIF code set to earth. We need to update this with other\n"
+		"metadata (e.g. TARGET_NAME in PDS label).  \n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF code), just\n"
+		"for NITF TRE.  \n"
+		"\n"
 		""},
 	 { "RsmAdjustableParameter__v_has_ground_coordinate_parameter", _wrap_RsmAdjustableParameter__v_has_ground_coordinate_parameter, METH_O, "\n"
+		"RsmAdjustableParameter__v_has_ground_coordinate_parameter(RsmAdjustableParameter self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RsmAdjustableParameter::has_ground_coordinate_parameter() const =0\n"
 		"GeoCal::RsmAdjustableParameter::has_ground_coordinate_parameter\n"
-		"The derivative handling requires different handling for ground\n"
-		"coordinate adjusting parameters vs.\n"
-		"just image coordinate adjusting parameters. This function lets the Rsm\n"
-		"class know if it needs to worry about the ground coordinate adjusting\n"
-		"parameters. \n"
-		""},
-	 { "RsmAdjustableParameter___str__", _wrap_RsmAdjustableParameter___str__, METH_O, NULL},
-	 { "delete_RsmAdjustableParameter", _wrap_delete_RsmAdjustableParameter, METH_O, "\n"
+		"The derivative handling requires different handling for ground coordinate\n"
+		"adjusting parameters vs.  \n"
 		"\n"
-		"virtual GeoCal::RsmAdjustableParameter::~RsmAdjustableParameter()\n"
+		"just image coordinate adjusting parameters. This function lets the Rsm class\n"
+		"know if it needs to worry about the ground coordinate adjusting parameters.  \n"
+		"\n"
+		""},
+	 { "RsmAdjustableParameter___str__", _wrap_RsmAdjustableParameter___str__, METH_O, "RsmAdjustableParameter___str__(RsmAdjustableParameter self) -> std::string"},
+	 { "delete_RsmAdjustableParameter", _wrap_delete_RsmAdjustableParameter, METH_O, "\n"
+		"delete_RsmAdjustableParameter(RsmAdjustableParameter self)\n"
+		"\n"
 		"GeoCal::RsmAdjustableParameter::~RsmAdjustableParameter\n"
 		""},
 	 { "RsmAdjustableParameter_swigregister", RsmAdjustableParameter_swigregister, METH_O, NULL},
@@ -7611,96 +7618,103 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RsmAdjustableParameter_adjustment", _wrap_RsmAdjustableParameter_adjustment, METH_VARARGS, "\n"
+		"adjustment(RsmAdjustableParameter self, GroundCoordinate Gc, boost::shared_ptr< GeoCal::GroundCoordinate > & Gc_adjusted, double & Lndelta, double & Smpdelta)\n"
 		"\n"
-		"virtual void GeoCal::RsmAdjustableParameter::adjustment(const GroundCoordinate &Gc, boost::shared_ptr< GroundCoordinate >\n"
-		"&Gc_adjusted, double &Lndelta, double &Smpdelta) const =0\n"
 		"GeoCal::RsmAdjustableParameter::adjustment\n"
-		"Adjustment for given ground location.\n"
+		"Adjustment for given ground location.  \n"
 		"\n"
 		""},
 	 { "RsmAdjustableParameter_adjustment_with_derivative", _wrap_RsmAdjustableParameter_adjustment_with_derivative, METH_VARARGS, "\n"
+		"adjustment_with_derivative(RsmAdjustableParameter self, GroundCoordinate Gc, ArrayAd_double_1 Cf_adjusted, AutoDerivativeDouble Lndelta, AutoDerivativeDouble Smpdelta)\n"
 		"\n"
-		"virtual void GeoCal::RsmAdjustableParameter::adjustment_with_derivative(const GroundCoordinate &Gc, ArrayAd< double, 1 > &Cf_adjusted,\n"
-		"AutoDerivative< double > &Lndelta, AutoDerivative< double > &Smpdelta)\n"
-		"const =0\n"
 		"GeoCal::RsmAdjustableParameter::adjustment_with_derivative\n"
-		"Adjustment including sample derivatives.\n"
+		"Adjustment including sample derivatives.  \n"
 		"\n"
 		""},
 	 { "RsmAdjustableParameter_base_tre_string", _wrap_RsmAdjustableParameter_base_tre_string, METH_O, "\n"
+		"base_tre_string(RsmAdjustableParameter self) -> std::string\n"
 		"\n"
-		"std::string RsmAdjustableParameter::base_tre_string() const\n"
 		"GeoCal::RsmAdjustableParameter::base_tre_string\n"
-		"Write the part of the TRE string for the image identification, RSM\n"
-		"support data edition, and triangulation_id.\n"
+		"Write the part of the TRE string for the image identification, RSM support data\n"
+		"edition, and triangulation_id.  \n"
 		"\n"
 		""},
 	 { "RsmAdjustableParameter_base_read_tre_string", _wrap_RsmAdjustableParameter_base_read_tre_string, METH_VARARGS, "\n"
+		"base_read_tre_string(RsmAdjustableParameter self, istream In)\n"
 		"\n"
-		"void RsmAdjustableParameter::base_read_tre_string(std::istream &In)\n"
 		"GeoCal::RsmAdjustableParameter::base_read_tre_string\n"
 		""},
 	 { "RsmAdjustableParameter__v_image_identifier", _wrap_RsmAdjustableParameter__v_image_identifier, METH_VARARGS, "\n"
+		"_v_image_identifier(RsmAdjustableParameter self) -> std::string\n"
+		"_v_image_identifier(RsmAdjustableParameter self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmAdjustableParameter::image_identifier(const std::string &V)\n"
 		"GeoCal::RsmAdjustableParameter::image_identifier\n"
 		""},
 	 { "RsmAdjustableParameter__v_rsm_support_data_edition", _wrap_RsmAdjustableParameter__v_rsm_support_data_edition, METH_VARARGS, "\n"
+		"_v_rsm_support_data_edition(RsmAdjustableParameter self) -> std::string\n"
+		"_v_rsm_support_data_edition(RsmAdjustableParameter self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmAdjustableParameter::rsm_support_data_edition(const std::string &V)\n"
 		"GeoCal::RsmAdjustableParameter::rsm_support_data_edition\n"
 		""},
 	 { "RsmAdjustableParameter__v_triangulation_id", _wrap_RsmAdjustableParameter__v_triangulation_id, METH_VARARGS, "\n"
+		"_v_triangulation_id(RsmAdjustableParameter self) -> std::string\n"
+		"_v_triangulation_id(RsmAdjustableParameter self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::RsmAdjustableParameter::triangulation_id(const std::string &V)\n"
 		"GeoCal::RsmAdjustableParameter::triangulation_id\n"
 		""},
 	 { "RsmAdjustableParameter__v_naif_code", _wrap_RsmAdjustableParameter__v_naif_code, METH_VARARGS, "\n"
+		"_v_naif_code(RsmAdjustableParameter self) -> int\n"
+		"_v_naif_code(RsmAdjustableParameter self, int const & V)\n"
 		"\n"
-		"virtual void GeoCal::RsmAdjustableParameter::naif_code(int Naif_code)=0\n"
 		"GeoCal::RsmAdjustableParameter::naif_code\n"
-		"Set the NAIF code for the planet/body we are working with.\n"
-		"Note that the NITF TRE structure does not have a place to store the\n"
-		"NAIF code, it implicitly assumes earth. So when we read a TRE, even\n"
-		"for something like Mars, we have the NAIF code set to earth. We need\n"
-		"to update this with other metadata (e.g. TARGET_NAME in PDS label).\n"
+		"Set the NAIF code for the planet/body we are working with.  \n"
 		"\n"
-		"This is not a problem for boost serialization (which keeps the NAIF\n"
-		"code), just for NITF TRE. \n"
+		"Note that the NITF TRE structure does not have a place to store the NAIF code,\n"
+		"it implicitly assumes earth. So when we read a TRE, even for something like\n"
+		"Mars, we have the NAIF code set to earth. We need to update this with other\n"
+		"metadata (e.g. TARGET_NAME in PDS label).  \n"
+		"\n"
+		"This is not a problem for boost serialization (which keeps the NAIF code), just\n"
+		"for NITF TRE.  \n"
+		"\n"
 		""},
 	 { "RsmAdjustableParameter__v_has_ground_coordinate_parameter", _wrap_RsmAdjustableParameter__v_has_ground_coordinate_parameter, METH_O, "\n"
+		"_v_has_ground_coordinate_parameter(RsmAdjustableParameter self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RsmAdjustableParameter::has_ground_coordinate_parameter() const =0\n"
 		"GeoCal::RsmAdjustableParameter::has_ground_coordinate_parameter\n"
-		"The derivative handling requires different handling for ground\n"
-		"coordinate adjusting parameters vs.\n"
-		"just image coordinate adjusting parameters. This function lets the Rsm\n"
-		"class know if it needs to worry about the ground coordinate adjusting\n"
-		"parameters. \n"
-		""},
-	 { "RsmAdjustableParameter___str__", _wrap_RsmAdjustableParameter___str__, METH_O, NULL},
-	 { "delete_RsmAdjustableParameter", _wrap_delete_RsmAdjustableParameter, METH_O, "\n"
+		"The derivative handling requires different handling for ground coordinate\n"
+		"adjusting parameters vs.  \n"
 		"\n"
-		"virtual GeoCal::RsmAdjustableParameter::~RsmAdjustableParameter()\n"
+		"just image coordinate adjusting parameters. This function lets the Rsm class\n"
+		"know if it needs to worry about the ground coordinate adjusting parameters.  \n"
+		"\n"
+		""},
+	 { "RsmAdjustableParameter___str__", _wrap_RsmAdjustableParameter___str__, METH_O, "__str__(RsmAdjustableParameter self) -> std::string"},
+	 { "delete_RsmAdjustableParameter", _wrap_delete_RsmAdjustableParameter, METH_O, "\n"
+		"delete_RsmAdjustableParameter(RsmAdjustableParameter self)\n"
+		"\n"
 		"GeoCal::RsmAdjustableParameter::~RsmAdjustableParameter\n"
 		""},
 	 { "RsmAdjustableParameter_swigregister", RsmAdjustableParameter_swigregister, METH_O, NULL},

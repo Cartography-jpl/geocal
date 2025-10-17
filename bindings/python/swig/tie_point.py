@@ -90,6 +90,7 @@ _tie_point.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _tie_point.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _tie_point.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -140,24 +141,24 @@ import geocal_swig.geocal_exception
 class TiePoint(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a tiepoint.
 
-    This is little more than a structure.
+    This is a tiepoint.  
 
-    Note that we previously had TiePoint a python only object, and stored
-    it as a python pickled object. The primary motivation for moving this
-    to C++ is to be able to use the boost XML serialization, which is more
-    stable and can support old versions. If you have an older tiepoint
-    data using the old pickle format, you can either rerun the process
-    that generated the tie points, or you can run the old version of the
-    code, write the tiepoints out as the old MSPI format
-    (write_old_mspi_format defined in python), and the read the old MSPI
-    format using the new version of the code with the tiepoints in C++.
-    This is just a temporary fix, going forward the intention is that the
-    tiepoints will use the boost format and will automatically support
-    older versions.
+    This is little more than a structure.  
 
-    C++ includes: tie_point.h 
+    Note that we previously had TiePoint a python only object, and stored it as a
+    python pickled object. The primary motivation for moving this to C++ is to be
+    able to use the boost XML serialization, which is more stable and can support
+    old versions. If you have an older tiepoint data using the old pickle format,
+    you can either rerun the process that generated the tie points, or you can run
+    the old version of the code, write the tiepoints out as the old MSPI format
+    (write_old_mspi_format defined in python), and the read the old MSPI format
+    using the new version of the code with the tiepoints in C++. This is just a
+    temporary fix, going forward the intention is that the tiepoints will use the
+    boost format and will automatically support older versions.  
+
+    C++ includes: tie_point.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -165,10 +166,12 @@ class TiePoint(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(TiePoint self, int Number_image) -> TiePoint
+        __init__(TiePoint self) -> TiePoint
+        __init__(TiePoint self, TiePoint Tp) -> TiePoint
 
-        GeoCal::TiePoint::TiePoint(int Number_image)
         GeoCal::TiePoint::TiePoint
-        Constructor.
+        Constructor.  
 
         """
         _tie_point.TiePoint_swiginit(self, _tie_point.new_TiePoint(*args))
@@ -245,6 +248,8 @@ class TiePoint(geocal_swig.generic_object.GenericObject):
 # Register TiePoint in _tie_point:
 _tie_point.TiePoint_swigregister(TiePoint)
 class TiePointVector(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::TiePoint > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_tie_point.TiePointVector_iterator)
@@ -274,6 +279,12 @@ class TiePointVector(object):
     erase = _swig_new_instance_method(_tie_point.TiePointVector_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(TiePointVector self) -> TiePointVector
+        __init__(TiePointVector self, TiePointVector other) -> TiePointVector
+        __init__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type size) -> TiePointVector
+        __init__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type size, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & value) -> TiePointVector
+        """
         _tie_point.TiePointVector_swiginit(self, _tie_point.new_TiePointVector(*args))
     push_back = _swig_new_instance_method(_tie_point.TiePointVector_push_back)
     front = _swig_new_instance_method(_tie_point.TiePointVector_front)
@@ -290,9 +301,11 @@ _tie_point.TiePointVector_swigregister(TiePointVector)
 class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVector):
     r"""
 
-    This is a list of TiePoints with a few useful functions added.
 
-    C++ includes: tie_point.h 
+    This is a list of TiePoints with a few useful functions added.  
+
+    C++ includes: tie_point.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -300,10 +313,11 @@ class TiePointCollection(geocal_swig.generic_object.GenericObject, TiePointVecto
 
     def __init__(self, *args):
         r"""
+        __init__(TiePointCollection self) -> TiePointCollection
+        __init__(TiePointCollection self, TiePointVector Tpv) -> TiePointCollection
 
-        GeoCal::TiePointCollection::TiePointCollection(const TiePointVector &Tlist)
         GeoCal::TiePointCollection::TiePointCollection
-        Constructor with an initial list of TiePoints.
+        Constructor with an initial list of TiePoints.  
 
         """
         _tie_point.TiePointCollection_swiginit(self, _tie_point.new_TiePointCollection(*args))

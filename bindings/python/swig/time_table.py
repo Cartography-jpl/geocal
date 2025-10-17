@@ -90,6 +90,7 @@ _time_table.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _time_table.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _time_table.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,6 +138,8 @@ import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_time
 class Vector_Time(object):
+    r"""Proxy of C++ std::vector< GeoCal::Time > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_time_table.Vector_Time_iterator)
@@ -166,6 +169,12 @@ class Vector_Time(object):
     erase = _swig_new_instance_method(_time_table.Vector_Time_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Time self) -> Vector_Time
+        __init__(Vector_Time self, Vector_Time other) -> Vector_Time
+        __init__(Vector_Time self, std::vector< GeoCal::Time >::size_type size) -> Vector_Time
+        __init__(Vector_Time self, std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time
+        """
         _time_table.Vector_Time_swiginit(self, _time_table.new_Vector_Time(*args))
     push_back = _swig_new_instance_method(_time_table.Vector_Time_push_back)
     front = _swig_new_instance_method(_time_table.Vector_Time_front)
@@ -188,6 +197,8 @@ class Vector_Time(object):
 # Register Vector_Time in _time_table:
 _time_table.Vector_Time_swigregister(Vector_Time)
 class Vector_Time2(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::Time > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_time_table.Vector_Time2_iterator)
@@ -217,6 +228,12 @@ class Vector_Time2(object):
     erase = _swig_new_instance_method(_time_table.Vector_Time2_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Time2 self) -> Vector_Time2
+        __init__(Vector_Time2 self, Vector_Time2 other) -> Vector_Time2
+        __init__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size) -> Vector_Time2
+        __init__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2
+        """
         _time_table.Vector_Time2_swiginit(self, _time_table.new_Vector_Time2(*args))
     push_back = _swig_new_instance_method(_time_table.Vector_Time2_push_back)
     front = _swig_new_instance_method(_time_table.Vector_Time2_front)
@@ -233,14 +250,16 @@ _time_table.Vector_Time2_swigregister(Vector_Time2)
 class TimeTable(geocal_swig.with_parameter.WithParameter):
     r"""
 
-    This class is used to relate time to image line number and vice versa.
 
-    Often the relationship is pretty simply, there is just a fixed time
-    interval between one line and the next. However this class can be used
-    to model any instrument complications that need to be modelled (e.g.,
-    missing lines, drift in spacing).
+    This class is used to relate time to image line number and vice versa.  
 
-    C++ includes: time_table.h 
+    Often the relationship is pretty simply, there is just a fixed time interval
+    between one line and the next. However this class can be used to model any
+    instrument complications that need to be modelled (e.g., missing lines, drift in
+    spacing).  
+
+    C++ includes: time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -340,9 +359,11 @@ _time_table.TimeTable_swigregister(TimeTable)
 class ConstantSpacingTimeTable(TimeTable):
     r"""
 
-    This is a time table that has a constant spacing between lines.
 
-    C++ includes: time_table.h 
+    This is a time table that has a constant spacing between lines.  
+
+    C++ includes: time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -350,14 +371,16 @@ class ConstantSpacingTimeTable(TimeTable):
 
     def __init__(self, Min_time, Max_time, Time_space=40.8e-3):
         r"""
+        __init__(ConstantSpacingTimeTable self, Time Min_time, Time Max_time, double Time_space=40.8e-3) -> ConstantSpacingTimeTable
 
-        ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, Time Time_max_line, double Time_space=40.8e-3)
         GeoCal::ConstantSpacingTimeTable::ConstantSpacingTimeTable
-        Constructor, creates time table from Time_min_line to Time_max_line
-        with given Time spacing.
-        We adjust Max_time to exactly Time_min_line + i * Time_space, rounding
-        to nearest integer i, so it ok if Max_time is a little sloppy. Note
-        Time_space can be negative, and Time_max_line < Time_min_line 
+        Constructor, creates time table from Time_min_line to Time_max_line with given
+        Time spacing.  
+
+        We adjust Max_time to exactly Time_min_line + i * Time_space, rounding to
+        nearest integer i, so it ok if Max_time is a little sloppy. Note Time_space can
+        be negative, and Time_max_line < Time_min_line  
+
         """
         _time_table.ConstantSpacingTimeTable_swiginit(self, _time_table.new_ConstantSpacingTimeTable(Min_time, Max_time, Time_space))
     _v_time_space = _swig_new_instance_method(_time_table.ConstantSpacingTimeTable__v_time_space)
@@ -381,12 +404,14 @@ _time_table.ConstantSpacingTimeTable_swigregister(ConstantSpacingTimeTable)
 class ConstantSpacingFrameletTimeTable(TimeTable):
     r"""
 
-    Very similar to a ConstantSpacingTimeTable, but we have one than one
-    frame line per time.
 
-    This is like the time table for a push frame camera.
+    Very similar to a ConstantSpacingTimeTable, but we have one than one frame line
+    per time.  
 
-    C++ includes: time_table.h 
+    This is like the time table for a push frame camera.  
+
+    C++ includes: time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -394,16 +419,16 @@ class ConstantSpacingFrameletTimeTable(TimeTable):
 
     def __init__(self, Min_time, Max_time, Framelet_size, Time_space):
         r"""
+        __init__(ConstantSpacingFrameletTimeTable self, Time Min_time, Time Max_time, int Framelet_size, double Time_space) -> ConstantSpacingFrameletTimeTable
 
-        ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable(Time Time_min_line, Time Time_max_line, int Framelet_size, double
-        Time_space)
-        GeoCal::ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeT
-        able
-        Constructor, creates time table from Time_min_line to Time_max_line
-        with given Time spacing.
-        We adjust Max_time to exactly Time_min_line + i * Time_space, rounding
-        to nearest integer i, so it ok if Max_time is a little sloppy. Note
-        Time_space can be negative, and Time_max_line < Time_min_line 
+        GeoCal::ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable
+        Constructor, creates time table from Time_min_line to Time_max_line with given
+        Time spacing.  
+
+        We adjust Max_time to exactly Time_min_line + i * Time_space, rounding to
+        nearest integer i, so it ok if Max_time is a little sloppy. Note Time_space can
+        be negative, and Time_max_line < Time_min_line  
+
         """
         _time_table.ConstantSpacingFrameletTimeTable_swiginit(self, _time_table.new_ConstantSpacingFrameletTimeTable(Min_time, Max_time, Framelet_size, Time_space))
     _v_time_space = _swig_new_instance_method(_time_table.ConstantSpacingFrameletTimeTable__v_time_space)
@@ -439,9 +464,11 @@ _time_table.ConstantSpacingFrameletTimeTable_swigregister(ConstantSpacingFramele
 class MeasuredTimeTable(TimeTable):
     r"""
 
-    This is a time table that has a time associated with each line.
 
-    C++ includes: time_table.h 
+    This is a time table that has a time associated with each line.  
+
+    C++ includes: time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -449,18 +476,20 @@ class MeasuredTimeTable(TimeTable):
 
     def __init__(self, Time_list, Min_line=0):
         r"""
+        __init__(MeasuredTimeTable self, Vector_Time Time_list, int Min_line=0) -> MeasuredTimeTable
 
-        MeasuredTimeTable::MeasuredTimeTable(const std::vector< Time > &Time_list, int Min_line=0)
         GeoCal::MeasuredTimeTable::MeasuredTimeTable
-        Constructor.
-        This gives the time for every line. This list should be strictly
-        ordered. The first time is for the given Min_line (default of 0).
+        Constructor.  
 
-        We often have trouble with edge cases (so time 1 ms before start of
-        table). We pad the table with a single line extrapolation.
+        This gives the time for every line. This list should be strictly ordered. The
+        first time is for the given Min_line (default of 0).  
 
-        We currently assume that the timing is monotonic increasing. We could
-        probably relax that if useful. 
+        We often have trouble with edge cases (so time 1 ms before start of table). We
+        pad the table with a single line extrapolation.  
+
+        We currently assume that the timing is monotonic increasing. We could probably
+        relax that if useful.  
+
         """
         _time_table.MeasuredTimeTable_swiginit(self, _time_table.new_MeasuredTimeTable(Time_list, Min_line))
     _v_size_time_list = _swig_new_instance_method(_time_table.MeasuredTimeTable__v_size_time_list)

@@ -7164,91 +7164,95 @@ SWIGINTERN PyObject *MaterialDetect_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_MaterialDetect", _wrap_new_MaterialDetect, METH_VARARGS, "\n"
+		"new_MaterialDetect(boost::shared_ptr< GeoCal::RasterImage > const & Pan_data, boost::shared_ptr< GeoCal::RasterImage > const & Pan_diff, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Mulspect, BlitzArray_double_1 Pan_diff_threshold, BlitzArray_double_1 Spectral_diff_threshold, BlitzArray_int_1 Class_priority, std::string const & Ibis_fname, double Pan_shadow_threshold) -> MaterialDetect\n"
 		"\n"
-		"MaterialDetect::MaterialDetect(const boost::shared_ptr< RasterImage > &Pan_data, const\n"
-		"boost::shared_ptr< RasterImage > &Pan_diff, const boost::shared_ptr<\n"
-		"RasterImageMultiBand > &Mulspect, const blitz::Array< double, 1 >\n"
-		"&Pan_diff_threshold, const blitz::Array< double, 1 >\n"
-		"&Spectral_diff_threshold, const blitz::Array< int, 1 >\n"
-		"&Class_priority, const std::string &Ibis_fname, double\n"
-		"Pan_shadow_threshold)\n"
 		"GeoCal::MaterialDetect::MaterialDetect\n"
-		"Constructor.\n"
+		"Constructor.  \n"
+		"\n"
 		"This takes the pan difference band (normally pandif_raster_image from\n"
-		"DoughnutAverage), the multispectral bands, the threshold for each\n"
-		"material for the pan difference and spectral difference, the class\n"
-		"priority for eahc class, and the name of the IBIS file to get the\n"
-		"material information.\n"
+		"DoughnutAverage), the multispectral bands, the threshold for each material for\n"
+		"the pan difference and spectral difference, the class priority for eahc class,\n"
+		"and the name of the IBIS file to get the material information.  \n"
 		"\n"
-		"The IBIS file should have at least 5 columns (which is all that we\n"
-		"read). The first two columns should be full word values, and are the\n"
-		"band indices (1 based, rather than the 0 based we use elsewhere). The\n"
-		"third should be double (for no good reason, it just is), which is the\n"
-		"class id. The fourth and fifth are also double, and are the mean and\n"
-		"sigma for that band ratio.\n"
+		"The IBIS file should have at least 5 columns (which is all that we read). The\n"
+		"first two columns should be full word values, and are the band indices (1 based,\n"
+		"rather than the 0 based we use elsewhere). The third should be double (for no\n"
+		"good reason, it just is), which is the class id. The fourth and fifth are also\n"
+		"double, and are the mean and sigma for that band ratio.  \n"
 		"\n"
-		"In generate, the class ID doesn't start from 0. We find the minimum\n"
-		"value in the table, and use that as the index into Pan_diff_threshold\n"
-		"etc. (so if first id is 8881 then the threshold for 8881 is\n"
-		"Pan_diff_threshold[0] and 8885 is Pan_diff_threshold[4]). Obviously we\n"
-		"could have just used a map instead, but this convention fits better\n"
-		"with the current way we supply this values in the Shiva scripts. \n"
+		"In generate, the class ID doesn't start from 0. We find the minimum value in the\n"
+		"table, and use that as the index into Pan_diff_threshold etc. (so if first id is\n"
+		"8881 then the threshold for 8881 is Pan_diff_threshold[0] and 8885 is\n"
+		"Pan_diff_threshold[4]). Obviously we could have just used a map instead, but\n"
+		"this convention fits better with the current way we supply this values in the\n"
+		"Shiva scripts.  \n"
+		"\n"
 		""},
 	 { "MaterialDetect__v_closest_material_raster_image", _wrap_MaterialDetect__v_closest_material_raster_image, METH_O, "\n"
+		"MaterialDetect__v_closest_material_raster_image(MaterialDetect self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"boost::shared_ptr< RasterImage > MaterialDetect::closest_material_raster_image() const\n"
 		"GeoCal::MaterialDetect::closest_material_raster_image\n"
-		"This returns an image that gives the distance to the closest material\n"
-		"(whose class id will vary from pixel to pixel).\n"
-		"By convention we multiple this difference by 100 so it can be viewed\n"
-		"more easily in xvd (which prefers integers). \n"
+		"This returns an image that gives the distance to the closest material (whose\n"
+		"class id will vary from pixel to pixel).  \n"
+		"\n"
+		"By convention we multiple this difference by 100 so it can be viewed more easily\n"
+		"in xvd (which prefers integers).  \n"
+		"\n"
 		""},
 	 { "MaterialDetect__v_material_raster_image", _wrap_MaterialDetect__v_material_raster_image, METH_VARARGS, "\n"
+		"MaterialDetect__v_material_raster_image(MaterialDetect self) -> boost::shared_ptr< GeoCal::RasterImageMultiBand >\n"
+		"MaterialDetect__v_material_raster_image(MaterialDetect self, int Class_id) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"boost::shared_ptr< RasterImage > MaterialDetect::material_raster_image(int Class_id) const\n"
 		"GeoCal::MaterialDetect::material_raster_image\n"
-		"This returns a set image that gives the distance to the given\n"
-		"material.\n"
-		"By convention we multiple this difference by 100 so it can be viewed\n"
-		"more easily in xvd (which prefers integers). \n"
+		"This returns a set image that gives the distance to the given material.  \n"
+		"\n"
+		"By convention we multiple this difference by 100 so it can be viewed more easily\n"
+		"in xvd (which prefers integers).  \n"
+		"\n"
 		""},
 	 { "MaterialDetect_closest_material_dif", _wrap_MaterialDetect_closest_material_dif, METH_VARARGS, "\n"
+		"MaterialDetect_closest_material_dif(MaterialDetect self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > MaterialDetect::closest_material_dif(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::MaterialDetect::closest_material_dif\n"
-		"Calculate distance for every point from the nearest material.\n"
-		"By convention we multiple this by 100. \n"
+		"Calculate distance for every point from the nearest material.  \n"
+		"\n"
+		"By convention we multiple this by 100.  \n"
+		"\n"
 		""},
 	 { "MaterialDetect_material_dif", _wrap_MaterialDetect_material_dif, METH_VARARGS, "\n"
+		"MaterialDetect_material_dif(MaterialDetect self, int Lstart, int Sstart, int Number_line, int Number_sample, int Class_id) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > MaterialDetect::material_dif(int Lstart, int Sstart, int Number_line, int Number_sample, int\n"
-		"Class_id) const\n"
 		"GeoCal::MaterialDetect::material_dif\n"
-		"Calculate the distance for every point from the given material.\n"
-		"By convention we multiple this by 100. \n"
+		"Calculate the distance for every point from the given material.  \n"
+		"\n"
+		"By convention we multiple this by 100.  \n"
+		"\n"
 		""},
 	 { "delete_MaterialDetect", _wrap_delete_MaterialDetect, METH_O, "\n"
+		"delete_MaterialDetect(MaterialDetect self)\n"
 		"\n"
-		"virtual GeoCal::MaterialDetect::~MaterialDetect()\n"
 		"GeoCal::MaterialDetect::~MaterialDetect\n"
 		""},
 	 { "MaterialDetect_swigregister", MaterialDetect_swigregister, METH_O, NULL},
@@ -7259,91 +7263,95 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_MaterialDetect", _wrap_new_MaterialDetect, METH_VARARGS, "\n"
+		"new_MaterialDetect(boost::shared_ptr< GeoCal::RasterImage > const & Pan_data, boost::shared_ptr< GeoCal::RasterImage > const & Pan_diff, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Mulspect, BlitzArray_double_1 Pan_diff_threshold, BlitzArray_double_1 Spectral_diff_threshold, BlitzArray_int_1 Class_priority, std::string const & Ibis_fname, double Pan_shadow_threshold) -> MaterialDetect\n"
 		"\n"
-		"MaterialDetect::MaterialDetect(const boost::shared_ptr< RasterImage > &Pan_data, const\n"
-		"boost::shared_ptr< RasterImage > &Pan_diff, const boost::shared_ptr<\n"
-		"RasterImageMultiBand > &Mulspect, const blitz::Array< double, 1 >\n"
-		"&Pan_diff_threshold, const blitz::Array< double, 1 >\n"
-		"&Spectral_diff_threshold, const blitz::Array< int, 1 >\n"
-		"&Class_priority, const std::string &Ibis_fname, double\n"
-		"Pan_shadow_threshold)\n"
 		"GeoCal::MaterialDetect::MaterialDetect\n"
-		"Constructor.\n"
+		"Constructor.  \n"
+		"\n"
 		"This takes the pan difference band (normally pandif_raster_image from\n"
-		"DoughnutAverage), the multispectral bands, the threshold for each\n"
-		"material for the pan difference and spectral difference, the class\n"
-		"priority for eahc class, and the name of the IBIS file to get the\n"
-		"material information.\n"
+		"DoughnutAverage), the multispectral bands, the threshold for each material for\n"
+		"the pan difference and spectral difference, the class priority for eahc class,\n"
+		"and the name of the IBIS file to get the material information.  \n"
 		"\n"
-		"The IBIS file should have at least 5 columns (which is all that we\n"
-		"read). The first two columns should be full word values, and are the\n"
-		"band indices (1 based, rather than the 0 based we use elsewhere). The\n"
-		"third should be double (for no good reason, it just is), which is the\n"
-		"class id. The fourth and fifth are also double, and are the mean and\n"
-		"sigma for that band ratio.\n"
+		"The IBIS file should have at least 5 columns (which is all that we read). The\n"
+		"first two columns should be full word values, and are the band indices (1 based,\n"
+		"rather than the 0 based we use elsewhere). The third should be double (for no\n"
+		"good reason, it just is), which is the class id. The fourth and fifth are also\n"
+		"double, and are the mean and sigma for that band ratio.  \n"
 		"\n"
-		"In generate, the class ID doesn't start from 0. We find the minimum\n"
-		"value in the table, and use that as the index into Pan_diff_threshold\n"
-		"etc. (so if first id is 8881 then the threshold for 8881 is\n"
-		"Pan_diff_threshold[0] and 8885 is Pan_diff_threshold[4]). Obviously we\n"
-		"could have just used a map instead, but this convention fits better\n"
-		"with the current way we supply this values in the Shiva scripts. \n"
+		"In generate, the class ID doesn't start from 0. We find the minimum value in the\n"
+		"table, and use that as the index into Pan_diff_threshold etc. (so if first id is\n"
+		"8881 then the threshold for 8881 is Pan_diff_threshold[0] and 8885 is\n"
+		"Pan_diff_threshold[4]). Obviously we could have just used a map instead, but\n"
+		"this convention fits better with the current way we supply this values in the\n"
+		"Shiva scripts.  \n"
+		"\n"
 		""},
 	 { "MaterialDetect__v_closest_material_raster_image", _wrap_MaterialDetect__v_closest_material_raster_image, METH_O, "\n"
+		"_v_closest_material_raster_image(MaterialDetect self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"boost::shared_ptr< RasterImage > MaterialDetect::closest_material_raster_image() const\n"
 		"GeoCal::MaterialDetect::closest_material_raster_image\n"
-		"This returns an image that gives the distance to the closest material\n"
-		"(whose class id will vary from pixel to pixel).\n"
-		"By convention we multiple this difference by 100 so it can be viewed\n"
-		"more easily in xvd (which prefers integers). \n"
+		"This returns an image that gives the distance to the closest material (whose\n"
+		"class id will vary from pixel to pixel).  \n"
+		"\n"
+		"By convention we multiple this difference by 100 so it can be viewed more easily\n"
+		"in xvd (which prefers integers).  \n"
+		"\n"
 		""},
 	 { "MaterialDetect__v_material_raster_image", _wrap_MaterialDetect__v_material_raster_image, METH_VARARGS, "\n"
+		"_v_material_raster_image(MaterialDetect self) -> boost::shared_ptr< GeoCal::RasterImageMultiBand >\n"
+		"_v_material_raster_image(MaterialDetect self, int Class_id) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"boost::shared_ptr< RasterImage > MaterialDetect::material_raster_image(int Class_id) const\n"
 		"GeoCal::MaterialDetect::material_raster_image\n"
-		"This returns a set image that gives the distance to the given\n"
-		"material.\n"
-		"By convention we multiple this difference by 100 so it can be viewed\n"
-		"more easily in xvd (which prefers integers). \n"
+		"This returns a set image that gives the distance to the given material.  \n"
+		"\n"
+		"By convention we multiple this difference by 100 so it can be viewed more easily\n"
+		"in xvd (which prefers integers).  \n"
+		"\n"
 		""},
 	 { "MaterialDetect_closest_material_dif", _wrap_MaterialDetect_closest_material_dif, METH_VARARGS, "\n"
+		"closest_material_dif(MaterialDetect self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > MaterialDetect::closest_material_dif(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::MaterialDetect::closest_material_dif\n"
-		"Calculate distance for every point from the nearest material.\n"
-		"By convention we multiple this by 100. \n"
+		"Calculate distance for every point from the nearest material.  \n"
+		"\n"
+		"By convention we multiple this by 100.  \n"
+		"\n"
 		""},
 	 { "MaterialDetect_material_dif", _wrap_MaterialDetect_material_dif, METH_VARARGS, "\n"
+		"material_dif(MaterialDetect self, int Lstart, int Sstart, int Number_line, int Number_sample, int Class_id) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > MaterialDetect::material_dif(int Lstart, int Sstart, int Number_line, int Number_sample, int\n"
-		"Class_id) const\n"
 		"GeoCal::MaterialDetect::material_dif\n"
-		"Calculate the distance for every point from the given material.\n"
-		"By convention we multiple this by 100. \n"
+		"Calculate the distance for every point from the given material.  \n"
+		"\n"
+		"By convention we multiple this by 100.  \n"
+		"\n"
 		""},
 	 { "delete_MaterialDetect", _wrap_delete_MaterialDetect, METH_O, "\n"
+		"delete_MaterialDetect(MaterialDetect self)\n"
 		"\n"
-		"virtual GeoCal::MaterialDetect::~MaterialDetect()\n"
 		"GeoCal::MaterialDetect::~MaterialDetect\n"
 		""},
 	 { "MaterialDetect_swigregister", MaterialDetect_swigregister, METH_O, NULL},

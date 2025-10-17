@@ -90,6 +90,7 @@ _ground_mask.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _ground_mask.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _ground_mask.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,44 +138,44 @@ import geocal_swig.generic_object
 class GroundMask(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides a GroundMask, which can be used to prevent doing some
-    kind of processing.
 
-    An example is a using a Land/Water mask to restrict image matching to
-    land, or a cloud mask to restrict image matching to cloud free areas.
+    This provides a GroundMask, which can be used to prevent doing some kind of
+    processing.  
 
-    The mask can look at specific GroundCoordinate points indicating if
-    the that point is masked or not. You can also look at a region to see
-    if the entire area is masked (e.g., avoid processing on this area
-    because it is masked).
+    An example is a using a Land/Water mask to restrict image matching to land, or a
+    cloud mask to restrict image matching to cloud free areas.  
 
-    The region search is a bit loose, you give the corners of the area to
-    search. The region selected depends on the underlying map projection
-    used by the mask data - it might be a region in latitude/longitude, a
-    region in UTM, or something else. The region search is useful only for
-    small areas where these difference aren't very important. If you need
-    detailed, accurate information about a region in a specific map
-    projection then you should simply look at each individual point. The
-    region is useful for the "don't bother looking here for tie points,
-    look somewhere else" sorts of uses.
+    The mask can look at specific GroundCoordinate points indicating if the that
+    point is masked or not. You can also look at a region to see if the entire area
+    is masked (e.g., avoid processing on this area because it is masked).  
 
-    If the region search returns true, then all of the region is masked.
-    If this is false, then some of the region might be unmasked. Note that
-    this is conservative in the true direction - a value of false doesn't
-    promise that there is an unmasked pixel, just that we are pretty sure
-    that there is one. Edge cases where a false value clips the corner of
-    a region might have region search return false, while when you look at
-    it pixel by pixel every point ends up being masked.
+    The region search is a bit loose, you give the corners of the area to search.
+    The region selected depends on the underlying map projection used by the mask
+    data - it might be a region in latitude/longitude, a region in UTM, or something
+    else. The region search is useful only for small areas where these difference
+    aren't very important. If you need detailed, accurate information about a region
+    in a specific map projection then you should simply look at each individual
+    point. The region is useful for the "don't bother
+    looking here for tie points, look somewhere else" sorts of uses.  
+
+    If the region search returns true, then all of the region is masked. If this is
+    false, then some of the region might be unmasked. Note that this is conservative
+    in the true direction - a value of false doesn't promise that there is an
+    unmasked pixel, just that we are pretty sure that there is one. Edge cases where
+    a false value clips the corner of a region might have region search return
+    false, while when you look at it pixel by pixel every point ends up being
+    masked.  
 
     Typically a Mask has an underlying RasterImage or something similar. A
-    particular GroundCoordinate probably doesn't fall exactly on a pixel
-    of the Mask. How we interpolate is defined by the particular derived
-    class uses - a common approach is to mask if any of the 4 neighboring
-    pixels are masked (but check the derived class for details).
+    particular GroundCoordinate probably doesn't fall exactly on a pixel of the
+    Mask. How we interpolate is defined by the particular derived class uses - a
+    common approach is to mask if any of the 4 neighboring pixels are masked (but
+    check the derived class for details).  
 
-    This mask works in GroundCoordinates, cf. ImageMask.
+    This mask works in GroundCoordinates, cf. ImageMask.  
 
-    C++ includes: ground_mask.h 
+    C++ includes: ground_mask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -192,19 +193,21 @@ _ground_mask.GroundMask_swigregister(GroundMask)
 class CombinedGroundMask(GroundMask):
     r"""
 
-    This is combines a set of masks into a single one.
 
-    The combination just check each mask in turn, and if any of them
-    indicates a point or a region is masked, then we return true.
+    This is combines a set of masks into a single one.  
+
+    The combination just check each mask in turn, and if any of them indicates a
+    point or a region is masked, then we return true.  
 
     Note that this class handles the degenerate case of no masked. This is
-    particular useful in handling situations where you might or might not
-    have mask, e.g. a general routine that can take a mask but where you
-    don't happen to have any masks in a particular case.
+    particular useful in handling situations where you might or might not have mask,
+    e.g. a general routine that can take a mask but where you don't happen to have
+    any masks in a particular case.  
 
-    When there are no masks, we return true.
+    When there are no masks, we return true.  
 
-    C++ includes: ground_mask.h 
+    C++ includes: ground_mask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -212,15 +215,16 @@ class CombinedGroundMask(GroundMask):
 
     def __init__(self, *args):
         r"""
+        __init__(CombinedGroundMask self) -> CombinedGroundMask
+        __init__(CombinedGroundMask self, Vector_GroundMask Ml) -> CombinedGroundMask
 
-        GeoCal::CombinedGroundMask::CombinedGroundMask(It First, It Last)
         GeoCal::CombinedGroundMask::CombinedGroundMask
-        Create a CombinedGroundMask using the given set of masks, where we get this from a general
-        InputIterator.
+        Create a CombinedGroundMask using the given set of masks, where we get this from
+        a general InputIterator.  
 
         """
         _ground_mask.CombinedGroundMask_swiginit(self, _ground_mask.new_CombinedGroundMask(*args))
-    mask_list = property(_ground_mask.CombinedGroundMask_mask_list_get, _ground_mask.CombinedGroundMask_mask_list_set)
+    mask_list = property(_ground_mask.CombinedGroundMask_mask_list_get, _ground_mask.CombinedGroundMask_mask_list_set, doc=r"""mask_list : std::vector<(boost::shared_ptr<(GeoCal::GroundMask)>,std::allocator<(boost::shared_ptr<(GeoCal::GroundMask)>)>)>""")
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set
@@ -234,6 +238,8 @@ class CombinedGroundMask(GroundMask):
 # Register CombinedGroundMask in _ground_mask:
 _ground_mask.CombinedGroundMask_swigregister(CombinedGroundMask)
 class Vector_GroundMask(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::GroundMask > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_ground_mask.Vector_GroundMask_iterator)
@@ -263,6 +269,12 @@ class Vector_GroundMask(object):
     erase = _swig_new_instance_method(_ground_mask.Vector_GroundMask_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_GroundMask self) -> Vector_GroundMask
+        __init__(Vector_GroundMask self, Vector_GroundMask other) -> Vector_GroundMask
+        __init__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type size) -> Vector_GroundMask
+        __init__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type size, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & value) -> Vector_GroundMask
+        """
         _ground_mask.Vector_GroundMask_swiginit(self, _ground_mask.new_Vector_GroundMask(*args))
     push_back = _swig_new_instance_method(_ground_mask.Vector_GroundMask_push_back)
     front = _swig_new_instance_method(_ground_mask.Vector_GroundMask_front)

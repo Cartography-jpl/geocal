@@ -13952,259 +13952,331 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, NULL},
-	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, NULL},
-	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, NULL},
-	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, NULL},
-	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, NULL},
-	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, NULL},
-	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, NULL},
-	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, NULL},
-	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, NULL},
-	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, NULL},
-	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, NULL},
-	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, NULL},
-	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, NULL},
-	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, NULL},
-	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, NULL},
-	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, NULL},
-	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, NULL},
-	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, NULL},
-	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, NULL},
-	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, NULL},
-	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, NULL},
-	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, NULL},
-	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, NULL},
-	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, NULL},
+	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, "Vector_Time_iterator(Vector_Time self) -> SwigPyIterator"},
+	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, "Vector_Time___nonzero__(Vector_Time self) -> bool"},
+	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, "Vector_Time___bool__(Vector_Time self) -> bool"},
+	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, "Vector_Time___len__(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, "Vector_Time___getslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j) -> Vector_Time"},
+	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, "\n"
+		"Vector_Time___setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)\n"
+		"Vector_Time___setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j, Vector_Time v)\n"
+		""},
+	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, "Vector_Time___delslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)"},
+	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, "\n"
+		"Vector_Time___delitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i)\n"
+		"Vector_Time___delitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, "\n"
+		"Vector_Time___getitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time\n"
+		"Vector_Time___getitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i) -> Time\n"
+		""},
+	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, "\n"
+		"Vector_Time___setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice, Vector_Time v)\n"
+		"Vector_Time___setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_Time___setitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, Time x)\n"
+		""},
+	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, "Vector_Time_pop(Vector_Time self) -> Time"},
+	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, "Vector_Time_append(Vector_Time self, Time x)"},
+	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, "Vector_Time_empty(Vector_Time self) -> bool"},
+	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, "Vector_Time_size(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, "Vector_Time_swap(Vector_Time self, Vector_Time v)"},
+	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, "Vector_Time_begin(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, "Vector_Time_end(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, "Vector_Time_rbegin(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, "Vector_Time_rend(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, "Vector_Time_clear(Vector_Time self)"},
+	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, "Vector_Time_get_allocator(Vector_Time self) -> std::vector< GeoCal::Time >::allocator_type"},
+	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, "Vector_Time_pop_back(Vector_Time self)"},
+	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, "\n"
+		"Vector_Time_erase(Vector_Time self, std::vector< GeoCal::Time >::iterator pos) -> std::vector< GeoCal::Time >::iterator\n"
+		"Vector_Time_erase(Vector_Time self, std::vector< GeoCal::Time >::iterator first, std::vector< GeoCal::Time >::iterator last) -> std::vector< GeoCal::Time >::iterator\n"
+		""},
+	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, "\n"
+		"Vector_Time()\n"
+		"Vector_Time(Vector_Time other)\n"
+		"Vector_Time(std::vector< GeoCal::Time >::size_type size)\n"
+		"new_Vector_Time(std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time\n"
+		""},
+	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, "Vector_Time_push_back(Vector_Time self, Time x)"},
+	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, "Vector_Time_front(Vector_Time self) -> Time"},
+	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, "Vector_Time_back(Vector_Time self) -> Time"},
+	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, "Vector_Time_assign(Vector_Time self, std::vector< GeoCal::Time >::size_type n, Time x)"},
+	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, "\n"
+		"Vector_Time_resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size)\n"
+		"Vector_Time_resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size, Time x)\n"
+		""},
+	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, "\n"
+		"Vector_Time_insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, Time x) -> std::vector< GeoCal::Time >::iterator\n"
+		"Vector_Time_insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, std::vector< GeoCal::Time >::size_type n, Time x)\n"
+		""},
+	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, "Vector_Time_reserve(Vector_Time self, std::vector< GeoCal::Time >::size_type n)"},
+	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, "Vector_Time_capacity(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, "delete_Vector_Time(Vector_Time self)"},
 	 { "Vector_Time_swigregister", Vector_Time_swigregister, METH_O, NULL},
 	 { "Vector_Time_swiginit", Vector_Time_swiginit, METH_VARARGS, NULL},
-	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, NULL},
-	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, NULL},
-	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, NULL},
-	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, NULL},
-	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, NULL},
-	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, NULL},
-	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, NULL},
-	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, NULL},
-	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, NULL},
-	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, NULL},
-	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, NULL},
-	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, NULL},
-	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, NULL},
-	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, NULL},
-	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, NULL},
-	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, NULL},
-	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, NULL},
-	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, NULL},
-	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, NULL},
-	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, NULL},
-	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, NULL},
-	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, NULL},
-	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, NULL},
-	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, NULL},
+	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, "Vector_Time2_iterator(Vector_Time2 self) -> SwigPyIterator"},
+	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, "Vector_Time2___nonzero__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, "Vector_Time2___bool__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, "Vector_Time2___len__(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, "Vector_Time2___getslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j) -> Vector_Time2"},
+	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, "\n"
+		"Vector_Time2___setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)\n"
+		"Vector_Time2___setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j, Vector_Time2 v)\n"
+		""},
+	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, "Vector_Time2___delslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)"},
+	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, "\n"
+		"Vector_Time2___delitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i)\n"
+		"Vector_Time2___delitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, "\n"
+		"Vector_Time2___getitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time2\n"
+		"Vector_Time2___getitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &\n"
+		""},
+	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, "\n"
+		"Vector_Time2___setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice, Vector_Time2 v)\n"
+		"Vector_Time2___setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_Time2___setitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, "Vector_Time2_pop(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type"},
+	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, "Vector_Time2_append(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, "Vector_Time2_empty(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, "Vector_Time2_size(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, "Vector_Time2_swap(Vector_Time2 self, Vector_Time2 v)"},
+	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, "Vector_Time2_begin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, "Vector_Time2_end(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, "Vector_Time2_rbegin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, "Vector_Time2_rend(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, "Vector_Time2_clear(Vector_Time2 self)"},
+	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, "Vector_Time2_get_allocator(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type"},
+	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, "Vector_Time2_pop_back(Vector_Time2 self)"},
+	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, "\n"
+		"Vector_Time2_erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"Vector_Time2_erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator first, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		""},
+	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, "\n"
+		"Vector_Time2()\n"
+		"Vector_Time2(Vector_Time2 other)\n"
+		"Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size)\n"
+		"new_Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2\n"
+		""},
+	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, "Vector_Time2_push_back(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, "Vector_Time2_front(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, "Vector_Time2_back(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, "Vector_Time2_assign(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, "\n"
+		"Vector_Time2_resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size)\n"
+		"Vector_Time2_resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, "\n"
+		"Vector_Time2_insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"Vector_Time2_insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, "Vector_Time2_reserve(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n)"},
+	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, "Vector_Time2_capacity(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, "delete_Vector_Time2(Vector_Time2 self)"},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
 	 { "TimeTable_image_coordinate", _wrap_TimeTable_image_coordinate, METH_VARARGS, "\n"
+		"TimeTable_image_coordinate(TimeTable self, Time T, FrameCoordinate F) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const =0\n"
 		"GeoCal::TimeTable::image_coordinate\n"
-		"Convert from Time and FrameCoordinate to ImageCoordinate.\n"
+		"Convert from Time and FrameCoordinate to ImageCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_image_coordinate_with_derivative", _wrap_TimeTable_image_coordinate_with_derivative, METH_VARARGS, "\n"
+		"TimeTable_image_coordinate_with_derivative(TimeTable self, TimeWithDerivative T, FrameCoordinateWithDerivative F) -> ImageCoordinateWithDerivative\n"
 		"\n"
-		"virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)\n"
-		"const =0\n"
 		"GeoCal::TimeTable::image_coordinate_with_derivative\n"
-		"Convert from Time and FrameCoordinate to ImageCoordinate.\n"
+		"Convert from Time and FrameCoordinate to ImageCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_time", _wrap_TimeTable_time, METH_VARARGS, "\n"
+		"TimeTable_time(TimeTable self, ImageCoordinate Ic)\n"
 		"\n"
-		"virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0\n"
 		"GeoCal::TimeTable::time\n"
-		"Convert from ImageCoordinate to Time and FrameCoordinate.\n"
+		"Convert from ImageCoordinate to Time and FrameCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_time_with_derivative", _wrap_TimeTable_time_with_derivative, METH_VARARGS, "\n"
+		"TimeTable_time_with_derivative(TimeTable self, ImageCoordinateWithDerivative Ic)\n"
 		"\n"
-		"virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,\n"
-		"FrameCoordinateWithDerivative &F) const =0\n"
 		"GeoCal::TimeTable::time_with_derivative\n"
-		"Convert from ImageCoordinate to Time and FrameCoordinate.\n"
+		"Convert from ImageCoordinate to Time and FrameCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_time_acquisition", _wrap_TimeTable_time_acquisition, METH_VARARGS, "\n"
+		"TimeTable_time_acquisition(TimeTable self, Time T, FrameCoordinate Fc)\n"
 		"\n"
-		"void TimeTable::time_acquisition(const Time &T, const FrameCoordinate &Fc, Time &T1, Time &T2) const\n"
 		"GeoCal::TimeTable::time_acquisition\n"
-		"Sometimes we want to know the acquisition times around a particular\n"
-		"time.\n"
-		"For a simple pushbroom camera, this is just the times for an integral\n"
-		"image coordinates around that time. But this can be a little more\n"
-		"complicated, e.g, ConstantSpacingFrameletTimeTable  it would be the\n"
-		"framelet times surround the given time. This is returned as the time\n"
-		"for the smaller image line index first, and the time of the larger\n"
-		"line index second (so for a time table increasing in time this t1 <\n"
-		"t2. For a time table in descreasing time t1 > t2). \n"
+		"Sometimes we want to know the acquisition times around a particular time.  \n"
+		"\n"
+		"For a simple pushbroom camera, this is just the times for an integral image\n"
+		"coordinates around that time. But this can be a little more complicated, e.g,\n"
+		"ConstantSpacingFrameletTimeTable  \n"
+		" it would be the framelet times surround the given time. This is returned as the\n"
+		"time for the smaller image line index first, and the time of the larger line\n"
+		"index second (so for a time table increasing in time this t1 < t2. For a time\n"
+		"table in descreasing time t1 > t2).  \n"
+		"\n"
 		""},
 	 { "TimeTable__v_min_line", _wrap_TimeTable__v_min_line, METH_O, "\n"
+		"TimeTable__v_min_line(TimeTable self) -> int\n"
 		"\n"
-		"virtual int GeoCal::TimeTable::min_line() const =0\n"
 		"GeoCal::TimeTable::min_line\n"
-		"Minimum line table is valid for.\n"
+		"Minimum line table is valid for.  \n"
 		"\n"
 		""},
 	 { "TimeTable__v_max_line", _wrap_TimeTable__v_max_line, METH_O, "\n"
+		"TimeTable__v_max_line(TimeTable self) -> int\n"
 		"\n"
-		"virtual int GeoCal::TimeTable::max_line() const =0\n"
 		"GeoCal::TimeTable::max_line\n"
-		"Maximum line table is valid for.\n"
+		"Maximum line table is valid for.  \n"
 		"\n"
 		""},
 	 { "TimeTable__v_min_time", _wrap_TimeTable__v_min_time, METH_O, "\n"
+		"TimeTable__v_min_time(TimeTable self) -> Time\n"
 		"\n"
-		"virtual Time GeoCal::TimeTable::min_time() const =0\n"
 		"GeoCal::TimeTable::min_time\n"
-		"Minimum time table is valid for.\n"
-		"Note often padding is added, so this is not necessarily the time of\n"
-		"the minimum line.\n"
+		"Minimum time table is valid for.  \n"
 		"\n"
-		"Also, there is no requirement that the time table is in increasing\n"
-		"time, or is even monotonic. So the min_time is the minimum time that\n"
-		"image_coordinate is valid for, not necessarily the time for the\n"
-		"minimum line. \n"
+		"*Note* often padding is added, so this is not necessarily the time of the\n"
+		"minimum line.  \n"
+		"\n"
+		"Also, there is no requirement that the time table is in increasing time, or is\n"
+		"even monotonic. So the min_time is the minimum time that image_coordinate is\n"
+		"valid for, not necessarily the time for the minimum line.  \n"
+		"\n"
 		""},
 	 { "TimeTable__v_max_time", _wrap_TimeTable__v_max_time, METH_O, "\n"
+		"TimeTable__v_max_time(TimeTable self) -> Time\n"
 		"\n"
-		"virtual Time GeoCal::TimeTable::max_time() const =0\n"
 		"GeoCal::TimeTable::max_time\n"
-		"Maximum time table is valid for.\n"
-		"Note often padding is added, so this is not necessarily the time of\n"
-		"the maximum line.\n"
+		"Maximum time table is valid for.  \n"
 		"\n"
-		"Also, there is no requirement that the time table is in increasing\n"
-		"time, or is even monotonic. So the max_time is the maximum time that\n"
-		"image_coordinate is valid for, not necessarily the time for the\n"
-		"maximum line. \n"
+		"*Note* often padding is added, so this is not necessarily the time of the\n"
+		"maximum line.  \n"
+		"\n"
+		"Also, there is no requirement that the time table is in increasing time, or is\n"
+		"even monotonic. So the max_time is the maximum time that image_coordinate is\n"
+		"valid for, not necessarily the time for the maximum line.  \n"
+		"\n"
 		""},
-	 { "TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, NULL},
-	 { "TimeTable__v_parameter_with_derivative", _wrap_TimeTable__v_parameter_with_derivative, METH_VARARGS, NULL},
-	 { "TimeTable__v_parameter_subset", _wrap_TimeTable__v_parameter_subset, METH_VARARGS, NULL},
-	 { "TimeTable__v_parameter_with_derivative_subset", _wrap_TimeTable__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "TimeTable___str__", _wrap_TimeTable___str__, METH_O, NULL},
+	 { "TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, "\n"
+		"TimeTable__v_parameter(TimeTable self) -> BlitzArray_double_1\n"
+		"TimeTable__v_parameter(TimeTable self, BlitzArray_double_1 V)\n"
+		""},
+	 { "TimeTable__v_parameter_with_derivative", _wrap_TimeTable__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"TimeTable__v_parameter_with_derivative(TimeTable self) -> ArrayAd_double_1\n"
+		"TimeTable__v_parameter_with_derivative(TimeTable self, ArrayAd_double_1 V)\n"
+		""},
+	 { "TimeTable__v_parameter_subset", _wrap_TimeTable__v_parameter_subset, METH_VARARGS, "\n"
+		"TimeTable__v_parameter_subset(TimeTable self) -> BlitzArray_double_1\n"
+		"TimeTable__v_parameter_subset(TimeTable self, BlitzArray_double_1 V)\n"
+		""},
+	 { "TimeTable__v_parameter_with_derivative_subset", _wrap_TimeTable__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"TimeTable__v_parameter_with_derivative_subset(TimeTable self) -> ArrayAd_double_1\n"
+		"TimeTable__v_parameter_with_derivative_subset(TimeTable self, ArrayAd_double_1 V)\n"
+		""},
+	 { "TimeTable___str__", _wrap_TimeTable___str__, METH_O, "TimeTable___str__(TimeTable self) -> std::string"},
 	 { "delete_TimeTable", _wrap_delete_TimeTable, METH_O, "\n"
+		"delete_TimeTable(TimeTable self)\n"
 		"\n"
-		"virtual GeoCal::TimeTable::~TimeTable()\n"
 		"GeoCal::TimeTable::~TimeTable\n"
 		""},
 	 { "TimeTable_swigregister", TimeTable_swigregister, METH_O, NULL},
 	 { "new_ConstantSpacingTimeTable", _wrap_new_ConstantSpacingTimeTable, METH_VARARGS, "\n"
+		"ConstantSpacingTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
 		"\n"
-		"ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, Time Time_max_line, double Time_space=40.8e-3)\n"
 		"GeoCal::ConstantSpacingTimeTable::ConstantSpacingTimeTable\n"
-		"Constructor, creates time table from Time_min_line to Time_max_line\n"
-		"with given Time spacing.\n"
-		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding\n"
-		"to nearest integer i, so it ok if Max_time is a little sloppy. Note\n"
-		"Time_space can be negative, and Time_max_line < Time_min_line \n"
+		"Constructor, creates time table from Time_min_line to Time_max_line with given\n"
+		"Time spacing.  \n"
+		"\n"
+		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding to\n"
+		"nearest integer i, so it ok if Max_time is a little sloppy. Note Time_space can\n"
+		"be negative, and Time_max_line < Time_min_line  \n"
+		"\n"
 		""},
 	 { "ConstantSpacingTimeTable__v_time_space", _wrap_ConstantSpacingTimeTable__v_time_space, METH_O, "\n"
+		"ConstantSpacingTimeTable__v_time_space(ConstantSpacingTimeTable self) -> double\n"
 		"\n"
-		"double GeoCal::ConstantSpacingTimeTable::time_space() const\n"
 		"GeoCal::ConstantSpacingTimeTable::time_space\n"
 		""},
 	 { "delete_ConstantSpacingTimeTable", _wrap_delete_ConstantSpacingTimeTable, METH_O, "\n"
+		"delete_ConstantSpacingTimeTable(ConstantSpacingTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::ConstantSpacingTimeTable::~ConstantSpacingTimeTable()\n"
 		"GeoCal::ConstantSpacingTimeTable::~ConstantSpacingTimeTable\n"
 		""},
 	 { "ConstantSpacingTimeTable_swigregister", ConstantSpacingTimeTable_swigregister, METH_O, NULL},
 	 { "ConstantSpacingTimeTable_swiginit", ConstantSpacingTimeTable_swiginit, METH_VARARGS, NULL},
 	 { "new_ConstantSpacingFrameletTimeTable", _wrap_new_ConstantSpacingFrameletTimeTable, METH_VARARGS, "\n"
+		"new_ConstantSpacingFrameletTimeTable(Time Min_time, Time Max_time, int Framelet_size, double Time_space) -> ConstantSpacingFrameletTimeTable\n"
 		"\n"
-		"ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable(Time Time_min_line, Time Time_max_line, int Framelet_size, double\n"
-		"Time_space)\n"
-		"GeoCal::ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeT\n"
-		"able\n"
-		"Constructor, creates time table from Time_min_line to Time_max_line\n"
-		"with given Time spacing.\n"
-		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding\n"
-		"to nearest integer i, so it ok if Max_time is a little sloppy. Note\n"
-		"Time_space can be negative, and Time_max_line < Time_min_line \n"
+		"GeoCal::ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable\n"
+		"Constructor, creates time table from Time_min_line to Time_max_line with given\n"
+		"Time spacing.  \n"
+		"\n"
+		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding to\n"
+		"nearest integer i, so it ok if Max_time is a little sloppy. Note Time_space can\n"
+		"be negative, and Time_max_line < Time_min_line  \n"
+		"\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable__v_time_space", _wrap_ConstantSpacingFrameletTimeTable__v_time_space, METH_O, "\n"
+		"ConstantSpacingFrameletTimeTable__v_time_space(ConstantSpacingFrameletTimeTable self) -> double\n"
 		"\n"
-		"double GeoCal::ConstantSpacingFrameletTimeTable::time_space() const\n"
 		"GeoCal::ConstantSpacingFrameletTimeTable::time_space\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable__v_framelet_size", _wrap_ConstantSpacingFrameletTimeTable__v_framelet_size, METH_O, "\n"
+		"ConstantSpacingFrameletTimeTable__v_framelet_size(ConstantSpacingFrameletTimeTable self) -> int\n"
 		"\n"
-		"int GeoCal::ConstantSpacingFrameletTimeTable::framelet_size() const\n"
 		"GeoCal::ConstantSpacingFrameletTimeTable::framelet_size\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable__v_number_framelet", _wrap_ConstantSpacingFrameletTimeTable__v_number_framelet, METH_O, "\n"
+		"ConstantSpacingFrameletTimeTable__v_number_framelet(ConstantSpacingFrameletTimeTable self) -> int\n"
 		"\n"
-		"int GeoCal::ConstantSpacingFrameletTimeTable::number_framelet() const\n"
 		"GeoCal::ConstantSpacingFrameletTimeTable::number_framelet\n"
 		""},
 	 { "delete_ConstantSpacingFrameletTimeTable", _wrap_delete_ConstantSpacingFrameletTimeTable, METH_O, "\n"
+		"delete_ConstantSpacingFrameletTimeTable(ConstantSpacingFrameletTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::ConstantSpacingFrameletTimeTable::~ConstantSpacingFrameletTimeTable()\n"
-		"GeoCal::ConstantSpacingFrameletTimeTable::~ConstantSpacingFrameletTime\n"
-		"Table\n"
+		"GeoCal::ConstantSpacingFrameletTimeTable::~ConstantSpacingFrameletTimeTable\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable_swigregister", ConstantSpacingFrameletTimeTable_swigregister, METH_O, NULL},
 	 { "ConstantSpacingFrameletTimeTable_swiginit", ConstantSpacingFrameletTimeTable_swiginit, METH_VARARGS, NULL},
 	 { "new_MeasuredTimeTable", _wrap_new_MeasuredTimeTable, METH_VARARGS, "\n"
+		"MeasuredTimeTable(Vector_Time Time_list, int Min_line=0)\n"
 		"\n"
-		"MeasuredTimeTable::MeasuredTimeTable(const std::vector< Time > &Time_list, int Min_line=0)\n"
 		"GeoCal::MeasuredTimeTable::MeasuredTimeTable\n"
-		"Constructor.\n"
-		"This gives the time for every line. This list should be strictly\n"
-		"ordered. The first time is for the given Min_line (default of 0).\n"
+		"Constructor.  \n"
 		"\n"
-		"We often have trouble with edge cases (so time 1 ms before start of\n"
-		"table). We pad the table with a single line extrapolation.\n"
+		"This gives the time for every line. This list should be strictly ordered. The\n"
+		"first time is for the given Min_line (default of 0).  \n"
 		"\n"
-		"We currently assume that the timing is monotonic increasing. We could\n"
-		"probably relax that if useful. \n"
+		"We often have trouble with edge cases (so time 1 ms before start of table). We\n"
+		"pad the table with a single line extrapolation.  \n"
+		"\n"
+		"We currently assume that the timing is monotonic increasing. We could probably\n"
+		"relax that if useful.  \n"
+		"\n"
 		""},
 	 { "MeasuredTimeTable__v_size_time_list", _wrap_MeasuredTimeTable__v_size_time_list, METH_O, "\n"
+		"MeasuredTimeTable__v_size_time_list(MeasuredTimeTable self) -> int\n"
 		"\n"
-		"int GeoCal::MeasuredTimeTable::size_time_list() const\n"
 		"GeoCal::MeasuredTimeTable::size_time_list\n"
-		"List of times.\n"
-		"Note that std::vector<Time> doesn't play well with python for reasons\n"
-		"I've not bothered to track down. So instead we just provide access to\n"
-		"the underlying list and have python set this up. \n"
+		"List of times.  \n"
+		"\n"
+		"Note that std::vector<Time> doesn't play well with python for reasons I've not\n"
+		"bothered to track down. So instead we just provide access to the underlying list\n"
+		"and have python set this up.  \n"
+		"\n"
 		""},
 	 { "MeasuredTimeTable_time_list", _wrap_MeasuredTimeTable_time_list, METH_VARARGS, "\n"
+		"MeasuredTimeTable_time_list(MeasuredTimeTable self, int i) -> Time\n"
 		"\n"
-		"Time GeoCal::MeasuredTimeTable::time_list(int i) const\n"
 		"GeoCal::MeasuredTimeTable::time_list\n"
 		""},
 	 { "delete_MeasuredTimeTable", _wrap_delete_MeasuredTimeTable, METH_O, "\n"
+		"delete_MeasuredTimeTable(MeasuredTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::MeasuredTimeTable::~MeasuredTimeTable()\n"
 		"GeoCal::MeasuredTimeTable::~MeasuredTimeTable\n"
 		""},
 	 { "MeasuredTimeTable_swigregister", MeasuredTimeTable_swigregister, METH_O, NULL},
@@ -14233,259 +14305,331 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, NULL},
-	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, NULL},
-	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, NULL},
-	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, NULL},
-	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, NULL},
-	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, NULL},
-	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, NULL},
-	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, NULL},
-	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, NULL},
-	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, NULL},
-	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, NULL},
-	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, NULL},
-	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, NULL},
-	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, NULL},
-	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, NULL},
-	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, NULL},
-	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, NULL},
-	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, NULL},
-	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, NULL},
-	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, NULL},
-	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, NULL},
-	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, NULL},
-	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, NULL},
-	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, NULL},
+	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, "iterator(Vector_Time self) -> SwigPyIterator"},
+	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, "__nonzero__(Vector_Time self) -> bool"},
+	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, "__bool__(Vector_Time self) -> bool"},
+	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, "__len__(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, "__getslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j) -> Vector_Time"},
+	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)\n"
+		"__setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j, Vector_Time v)\n"
+		""},
+	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, "__delslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)"},
+	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i)\n"
+		"__delitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time\n"
+		"__getitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i) -> Time\n"
+		""},
+	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice, Vector_Time v)\n"
+		"__setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, Time x)\n"
+		""},
+	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, "pop(Vector_Time self) -> Time"},
+	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, "append(Vector_Time self, Time x)"},
+	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, "empty(Vector_Time self) -> bool"},
+	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, "size(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, "swap(Vector_Time self, Vector_Time v)"},
+	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, "begin(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, "end(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, "rbegin(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, "rend(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, "clear(Vector_Time self)"},
+	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, "get_allocator(Vector_Time self) -> std::vector< GeoCal::Time >::allocator_type"},
+	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, "pop_back(Vector_Time self)"},
+	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, "\n"
+		"erase(Vector_Time self, std::vector< GeoCal::Time >::iterator pos) -> std::vector< GeoCal::Time >::iterator\n"
+		"erase(Vector_Time self, std::vector< GeoCal::Time >::iterator first, std::vector< GeoCal::Time >::iterator last) -> std::vector< GeoCal::Time >::iterator\n"
+		""},
+	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, "\n"
+		"Vector_Time()\n"
+		"Vector_Time(Vector_Time other)\n"
+		"Vector_Time(std::vector< GeoCal::Time >::size_type size)\n"
+		"new_Vector_Time(std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time\n"
+		""},
+	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, "push_back(Vector_Time self, Time x)"},
+	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, "front(Vector_Time self) -> Time"},
+	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, "back(Vector_Time self) -> Time"},
+	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, "assign(Vector_Time self, std::vector< GeoCal::Time >::size_type n, Time x)"},
+	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, "\n"
+		"resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size)\n"
+		"resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size, Time x)\n"
+		""},
+	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, "\n"
+		"insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, Time x) -> std::vector< GeoCal::Time >::iterator\n"
+		"insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, std::vector< GeoCal::Time >::size_type n, Time x)\n"
+		""},
+	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, "reserve(Vector_Time self, std::vector< GeoCal::Time >::size_type n)"},
+	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, "capacity(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, "delete_Vector_Time(Vector_Time self)"},
 	 { "Vector_Time_swigregister", Vector_Time_swigregister, METH_O, NULL},
 	 { "Vector_Time_swiginit", Vector_Time_swiginit, METH_VARARGS, NULL},
-	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, NULL},
-	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, NULL},
-	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, NULL},
-	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, NULL},
-	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, NULL},
-	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, NULL},
-	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, NULL},
-	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, NULL},
-	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, NULL},
-	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, NULL},
-	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, NULL},
-	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, NULL},
-	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, NULL},
-	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, NULL},
-	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, NULL},
-	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, NULL},
-	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, NULL},
-	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, NULL},
-	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, NULL},
-	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, NULL},
-	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, NULL},
-	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, NULL},
-	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, NULL},
-	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, NULL},
+	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, "iterator(Vector_Time2 self) -> SwigPyIterator"},
+	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, "__nonzero__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, "__bool__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, "__len__(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, "__getslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j) -> Vector_Time2"},
+	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)\n"
+		"__setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j, Vector_Time2 v)\n"
+		""},
+	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, "__delslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)"},
+	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i)\n"
+		"__delitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time2\n"
+		"__getitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &\n"
+		""},
+	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice, Vector_Time2 v)\n"
+		"__setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, "pop(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type"},
+	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, "append(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, "empty(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, "size(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, "swap(Vector_Time2 self, Vector_Time2 v)"},
+	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, "begin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, "end(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, "rbegin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, "rend(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, "clear(Vector_Time2 self)"},
+	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, "get_allocator(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type"},
+	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, "pop_back(Vector_Time2 self)"},
+	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, "\n"
+		"erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator first, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		""},
+	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, "\n"
+		"Vector_Time2()\n"
+		"Vector_Time2(Vector_Time2 other)\n"
+		"Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size)\n"
+		"new_Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2\n"
+		""},
+	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, "push_back(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, "front(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, "back(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, "assign(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, "\n"
+		"resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size)\n"
+		"resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, "\n"
+		"insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, "reserve(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n)"},
+	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, "capacity(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, "delete_Vector_Time2(Vector_Time2 self)"},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
 	 { "TimeTable_image_coordinate", _wrap_TimeTable_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(TimeTable self, Time T, FrameCoordinate F) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::TimeTable::image_coordinate(Time T, const FrameCoordinate &F) const =0\n"
 		"GeoCal::TimeTable::image_coordinate\n"
-		"Convert from Time and FrameCoordinate to ImageCoordinate.\n"
+		"Convert from Time and FrameCoordinate to ImageCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_image_coordinate_with_derivative", _wrap_TimeTable_image_coordinate_with_derivative, METH_VARARGS, "\n"
+		"image_coordinate_with_derivative(TimeTable self, TimeWithDerivative T, FrameCoordinateWithDerivative F) -> ImageCoordinateWithDerivative\n"
 		"\n"
-		"virtual ImageCoordinateWithDerivative GeoCal::TimeTable::image_coordinate_with_derivative(const TimeWithDerivative &T, const FrameCoordinateWithDerivative &F)\n"
-		"const =0\n"
 		"GeoCal::TimeTable::image_coordinate_with_derivative\n"
-		"Convert from Time and FrameCoordinate to ImageCoordinate.\n"
+		"Convert from Time and FrameCoordinate to ImageCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_time", _wrap_TimeTable_time, METH_VARARGS, "\n"
+		"time(TimeTable self, ImageCoordinate Ic)\n"
 		"\n"
-		"virtual void GeoCal::TimeTable::time(const ImageCoordinate &Ic, Time &T, FrameCoordinate &F) const =0\n"
 		"GeoCal::TimeTable::time\n"
-		"Convert from ImageCoordinate to Time and FrameCoordinate.\n"
+		"Convert from ImageCoordinate to Time and FrameCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_time_with_derivative", _wrap_TimeTable_time_with_derivative, METH_VARARGS, "\n"
+		"time_with_derivative(TimeTable self, ImageCoordinateWithDerivative Ic)\n"
 		"\n"
-		"virtual void GeoCal::TimeTable::time_with_derivative(const ImageCoordinateWithDerivative &Ic, TimeWithDerivative &T,\n"
-		"FrameCoordinateWithDerivative &F) const =0\n"
 		"GeoCal::TimeTable::time_with_derivative\n"
-		"Convert from ImageCoordinate to Time and FrameCoordinate.\n"
+		"Convert from ImageCoordinate to Time and FrameCoordinate.  \n"
 		"\n"
 		""},
 	 { "TimeTable_time_acquisition", _wrap_TimeTable_time_acquisition, METH_VARARGS, "\n"
+		"time_acquisition(TimeTable self, Time T, FrameCoordinate Fc)\n"
 		"\n"
-		"void TimeTable::time_acquisition(const Time &T, const FrameCoordinate &Fc, Time &T1, Time &T2) const\n"
 		"GeoCal::TimeTable::time_acquisition\n"
-		"Sometimes we want to know the acquisition times around a particular\n"
-		"time.\n"
-		"For a simple pushbroom camera, this is just the times for an integral\n"
-		"image coordinates around that time. But this can be a little more\n"
-		"complicated, e.g, ConstantSpacingFrameletTimeTable  it would be the\n"
-		"framelet times surround the given time. This is returned as the time\n"
-		"for the smaller image line index first, and the time of the larger\n"
-		"line index second (so for a time table increasing in time this t1 <\n"
-		"t2. For a time table in descreasing time t1 > t2). \n"
+		"Sometimes we want to know the acquisition times around a particular time.  \n"
+		"\n"
+		"For a simple pushbroom camera, this is just the times for an integral image\n"
+		"coordinates around that time. But this can be a little more complicated, e.g,\n"
+		"ConstantSpacingFrameletTimeTable  \n"
+		" it would be the framelet times surround the given time. This is returned as the\n"
+		"time for the smaller image line index first, and the time of the larger line\n"
+		"index second (so for a time table increasing in time this t1 < t2. For a time\n"
+		"table in descreasing time t1 > t2).  \n"
+		"\n"
 		""},
 	 { "TimeTable__v_min_line", _wrap_TimeTable__v_min_line, METH_O, "\n"
+		"_v_min_line(TimeTable self) -> int\n"
 		"\n"
-		"virtual int GeoCal::TimeTable::min_line() const =0\n"
 		"GeoCal::TimeTable::min_line\n"
-		"Minimum line table is valid for.\n"
+		"Minimum line table is valid for.  \n"
 		"\n"
 		""},
 	 { "TimeTable__v_max_line", _wrap_TimeTable__v_max_line, METH_O, "\n"
+		"_v_max_line(TimeTable self) -> int\n"
 		"\n"
-		"virtual int GeoCal::TimeTable::max_line() const =0\n"
 		"GeoCal::TimeTable::max_line\n"
-		"Maximum line table is valid for.\n"
+		"Maximum line table is valid for.  \n"
 		"\n"
 		""},
 	 { "TimeTable__v_min_time", _wrap_TimeTable__v_min_time, METH_O, "\n"
+		"_v_min_time(TimeTable self) -> Time\n"
 		"\n"
-		"virtual Time GeoCal::TimeTable::min_time() const =0\n"
 		"GeoCal::TimeTable::min_time\n"
-		"Minimum time table is valid for.\n"
-		"Note often padding is added, so this is not necessarily the time of\n"
-		"the minimum line.\n"
+		"Minimum time table is valid for.  \n"
 		"\n"
-		"Also, there is no requirement that the time table is in increasing\n"
-		"time, or is even monotonic. So the min_time is the minimum time that\n"
-		"image_coordinate is valid for, not necessarily the time for the\n"
-		"minimum line. \n"
+		"*Note* often padding is added, so this is not necessarily the time of the\n"
+		"minimum line.  \n"
+		"\n"
+		"Also, there is no requirement that the time table is in increasing time, or is\n"
+		"even monotonic. So the min_time is the minimum time that image_coordinate is\n"
+		"valid for, not necessarily the time for the minimum line.  \n"
+		"\n"
 		""},
 	 { "TimeTable__v_max_time", _wrap_TimeTable__v_max_time, METH_O, "\n"
+		"_v_max_time(TimeTable self) -> Time\n"
 		"\n"
-		"virtual Time GeoCal::TimeTable::max_time() const =0\n"
 		"GeoCal::TimeTable::max_time\n"
-		"Maximum time table is valid for.\n"
-		"Note often padding is added, so this is not necessarily the time of\n"
-		"the maximum line.\n"
+		"Maximum time table is valid for.  \n"
 		"\n"
-		"Also, there is no requirement that the time table is in increasing\n"
-		"time, or is even monotonic. So the max_time is the maximum time that\n"
-		"image_coordinate is valid for, not necessarily the time for the\n"
-		"maximum line. \n"
+		"*Note* often padding is added, so this is not necessarily the time of the\n"
+		"maximum line.  \n"
+		"\n"
+		"Also, there is no requirement that the time table is in increasing time, or is\n"
+		"even monotonic. So the max_time is the maximum time that image_coordinate is\n"
+		"valid for, not necessarily the time for the maximum line.  \n"
+		"\n"
 		""},
-	 { "TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, NULL},
-	 { "TimeTable__v_parameter_with_derivative", _wrap_TimeTable__v_parameter_with_derivative, METH_VARARGS, NULL},
-	 { "TimeTable__v_parameter_subset", _wrap_TimeTable__v_parameter_subset, METH_VARARGS, NULL},
-	 { "TimeTable__v_parameter_with_derivative_subset", _wrap_TimeTable__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "TimeTable___str__", _wrap_TimeTable___str__, METH_O, NULL},
+	 { "TimeTable__v_parameter", _wrap_TimeTable__v_parameter, METH_VARARGS, "\n"
+		"_v_parameter(TimeTable self) -> BlitzArray_double_1\n"
+		"_v_parameter(TimeTable self, BlitzArray_double_1 V)\n"
+		""},
+	 { "TimeTable__v_parameter_with_derivative", _wrap_TimeTable__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative(TimeTable self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative(TimeTable self, ArrayAd_double_1 V)\n"
+		""},
+	 { "TimeTable__v_parameter_subset", _wrap_TimeTable__v_parameter_subset, METH_VARARGS, "\n"
+		"_v_parameter_subset(TimeTable self) -> BlitzArray_double_1\n"
+		"_v_parameter_subset(TimeTable self, BlitzArray_double_1 V)\n"
+		""},
+	 { "TimeTable__v_parameter_with_derivative_subset", _wrap_TimeTable__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative_subset(TimeTable self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative_subset(TimeTable self, ArrayAd_double_1 V)\n"
+		""},
+	 { "TimeTable___str__", _wrap_TimeTable___str__, METH_O, "__str__(TimeTable self) -> std::string"},
 	 { "delete_TimeTable", _wrap_delete_TimeTable, METH_O, "\n"
+		"delete_TimeTable(TimeTable self)\n"
 		"\n"
-		"virtual GeoCal::TimeTable::~TimeTable()\n"
 		"GeoCal::TimeTable::~TimeTable\n"
 		""},
 	 { "TimeTable_swigregister", TimeTable_swigregister, METH_O, NULL},
 	 { "new_ConstantSpacingTimeTable", _wrap_new_ConstantSpacingTimeTable, METH_VARARGS, "\n"
+		"ConstantSpacingTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
 		"\n"
-		"ConstantSpacingTimeTable::ConstantSpacingTimeTable(Time Time_min_line, Time Time_max_line, double Time_space=40.8e-3)\n"
 		"GeoCal::ConstantSpacingTimeTable::ConstantSpacingTimeTable\n"
-		"Constructor, creates time table from Time_min_line to Time_max_line\n"
-		"with given Time spacing.\n"
-		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding\n"
-		"to nearest integer i, so it ok if Max_time is a little sloppy. Note\n"
-		"Time_space can be negative, and Time_max_line < Time_min_line \n"
+		"Constructor, creates time table from Time_min_line to Time_max_line with given\n"
+		"Time spacing.  \n"
+		"\n"
+		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding to\n"
+		"nearest integer i, so it ok if Max_time is a little sloppy. Note Time_space can\n"
+		"be negative, and Time_max_line < Time_min_line  \n"
+		"\n"
 		""},
 	 { "ConstantSpacingTimeTable__v_time_space", _wrap_ConstantSpacingTimeTable__v_time_space, METH_O, "\n"
+		"_v_time_space(ConstantSpacingTimeTable self) -> double\n"
 		"\n"
-		"double GeoCal::ConstantSpacingTimeTable::time_space() const\n"
 		"GeoCal::ConstantSpacingTimeTable::time_space\n"
 		""},
 	 { "delete_ConstantSpacingTimeTable", _wrap_delete_ConstantSpacingTimeTable, METH_O, "\n"
+		"delete_ConstantSpacingTimeTable(ConstantSpacingTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::ConstantSpacingTimeTable::~ConstantSpacingTimeTable()\n"
 		"GeoCal::ConstantSpacingTimeTable::~ConstantSpacingTimeTable\n"
 		""},
 	 { "ConstantSpacingTimeTable_swigregister", ConstantSpacingTimeTable_swigregister, METH_O, NULL},
 	 { "ConstantSpacingTimeTable_swiginit", ConstantSpacingTimeTable_swiginit, METH_VARARGS, NULL},
 	 { "new_ConstantSpacingFrameletTimeTable", _wrap_new_ConstantSpacingFrameletTimeTable, METH_VARARGS, "\n"
+		"new_ConstantSpacingFrameletTimeTable(Time Min_time, Time Max_time, int Framelet_size, double Time_space) -> ConstantSpacingFrameletTimeTable\n"
 		"\n"
-		"ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable(Time Time_min_line, Time Time_max_line, int Framelet_size, double\n"
-		"Time_space)\n"
-		"GeoCal::ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeT\n"
-		"able\n"
-		"Constructor, creates time table from Time_min_line to Time_max_line\n"
-		"with given Time spacing.\n"
-		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding\n"
-		"to nearest integer i, so it ok if Max_time is a little sloppy. Note\n"
-		"Time_space can be negative, and Time_max_line < Time_min_line \n"
+		"GeoCal::ConstantSpacingFrameletTimeTable::ConstantSpacingFrameletTimeTable\n"
+		"Constructor, creates time table from Time_min_line to Time_max_line with given\n"
+		"Time spacing.  \n"
+		"\n"
+		"We adjust Max_time to exactly Time_min_line + i * Time_space, rounding to\n"
+		"nearest integer i, so it ok if Max_time is a little sloppy. Note Time_space can\n"
+		"be negative, and Time_max_line < Time_min_line  \n"
+		"\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable__v_time_space", _wrap_ConstantSpacingFrameletTimeTable__v_time_space, METH_O, "\n"
+		"_v_time_space(ConstantSpacingFrameletTimeTable self) -> double\n"
 		"\n"
-		"double GeoCal::ConstantSpacingFrameletTimeTable::time_space() const\n"
 		"GeoCal::ConstantSpacingFrameletTimeTable::time_space\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable__v_framelet_size", _wrap_ConstantSpacingFrameletTimeTable__v_framelet_size, METH_O, "\n"
+		"_v_framelet_size(ConstantSpacingFrameletTimeTable self) -> int\n"
 		"\n"
-		"int GeoCal::ConstantSpacingFrameletTimeTable::framelet_size() const\n"
 		"GeoCal::ConstantSpacingFrameletTimeTable::framelet_size\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable__v_number_framelet", _wrap_ConstantSpacingFrameletTimeTable__v_number_framelet, METH_O, "\n"
+		"_v_number_framelet(ConstantSpacingFrameletTimeTable self) -> int\n"
 		"\n"
-		"int GeoCal::ConstantSpacingFrameletTimeTable::number_framelet() const\n"
 		"GeoCal::ConstantSpacingFrameletTimeTable::number_framelet\n"
 		""},
 	 { "delete_ConstantSpacingFrameletTimeTable", _wrap_delete_ConstantSpacingFrameletTimeTable, METH_O, "\n"
+		"delete_ConstantSpacingFrameletTimeTable(ConstantSpacingFrameletTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::ConstantSpacingFrameletTimeTable::~ConstantSpacingFrameletTimeTable()\n"
-		"GeoCal::ConstantSpacingFrameletTimeTable::~ConstantSpacingFrameletTime\n"
-		"Table\n"
+		"GeoCal::ConstantSpacingFrameletTimeTable::~ConstantSpacingFrameletTimeTable\n"
 		""},
 	 { "ConstantSpacingFrameletTimeTable_swigregister", ConstantSpacingFrameletTimeTable_swigregister, METH_O, NULL},
 	 { "ConstantSpacingFrameletTimeTable_swiginit", ConstantSpacingFrameletTimeTable_swiginit, METH_VARARGS, NULL},
 	 { "new_MeasuredTimeTable", _wrap_new_MeasuredTimeTable, METH_VARARGS, "\n"
+		"MeasuredTimeTable(Vector_Time Time_list, int Min_line=0)\n"
 		"\n"
-		"MeasuredTimeTable::MeasuredTimeTable(const std::vector< Time > &Time_list, int Min_line=0)\n"
 		"GeoCal::MeasuredTimeTable::MeasuredTimeTable\n"
-		"Constructor.\n"
-		"This gives the time for every line. This list should be strictly\n"
-		"ordered. The first time is for the given Min_line (default of 0).\n"
+		"Constructor.  \n"
 		"\n"
-		"We often have trouble with edge cases (so time 1 ms before start of\n"
-		"table). We pad the table with a single line extrapolation.\n"
+		"This gives the time for every line. This list should be strictly ordered. The\n"
+		"first time is for the given Min_line (default of 0).  \n"
 		"\n"
-		"We currently assume that the timing is monotonic increasing. We could\n"
-		"probably relax that if useful. \n"
+		"We often have trouble with edge cases (so time 1 ms before start of table). We\n"
+		"pad the table with a single line extrapolation.  \n"
+		"\n"
+		"We currently assume that the timing is monotonic increasing. We could probably\n"
+		"relax that if useful.  \n"
+		"\n"
 		""},
 	 { "MeasuredTimeTable__v_size_time_list", _wrap_MeasuredTimeTable__v_size_time_list, METH_O, "\n"
+		"_v_size_time_list(MeasuredTimeTable self) -> int\n"
 		"\n"
-		"int GeoCal::MeasuredTimeTable::size_time_list() const\n"
 		"GeoCal::MeasuredTimeTable::size_time_list\n"
-		"List of times.\n"
-		"Note that std::vector<Time> doesn't play well with python for reasons\n"
-		"I've not bothered to track down. So instead we just provide access to\n"
-		"the underlying list and have python set this up. \n"
+		"List of times.  \n"
+		"\n"
+		"Note that std::vector<Time> doesn't play well with python for reasons I've not\n"
+		"bothered to track down. So instead we just provide access to the underlying list\n"
+		"and have python set this up.  \n"
+		"\n"
 		""},
 	 { "MeasuredTimeTable_time_list", _wrap_MeasuredTimeTable_time_list, METH_VARARGS, "\n"
+		"time_list(MeasuredTimeTable self, int i) -> Time\n"
 		"\n"
-		"Time GeoCal::MeasuredTimeTable::time_list(int i) const\n"
 		"GeoCal::MeasuredTimeTable::time_list\n"
 		""},
 	 { "delete_MeasuredTimeTable", _wrap_delete_MeasuredTimeTable, METH_O, "\n"
+		"delete_MeasuredTimeTable(MeasuredTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::MeasuredTimeTable::~MeasuredTimeTable()\n"
 		"GeoCal::MeasuredTimeTable::~MeasuredTimeTable\n"
 		""},
 	 { "MeasuredTimeTable_swigregister", MeasuredTimeTable_swigregister, METH_O, NULL},

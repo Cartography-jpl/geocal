@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _air_mspi_igc.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _air_mspi_igc:
 _air_mspi_igc.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _air_mspi_igc.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -145,9 +148,11 @@ import geocal_swig.quaternion_camera
 class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnection):
     r"""
 
-    This is an ImageGroundConnection for AirMspi.
 
-    C++ includes: air_mspi_igc.h 
+    This is an ImageGroundConnection for AirMspi.  
+
+    C++ includes: air_mspi_igc.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,19 +160,17 @@ class AirMspiIgc(geocal_swig.ipi_image_ground_connection.IpiImageGroundConnectio
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiIgc self, std::string const & Master_config_file, std::string const & Orbit_file_name, std::string const & L1b1_file_name, std::string const & Swath_to_use="660-I", std::string const & Base_directory=".", std::string const & Title="Image", int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4) -> AirMspiIgc
+        __init__(AirMspiIgc self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & Dem, std::string const & L1b1_file_name, int Min_l1b1_line, int Max_l1b1_line, std::string const & Swath_to_use="660-I", std::string const & Title="Image", int Dem_resolution=10, int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4) -> AirMspiIgc
 
-        AirMspiIgc::AirMspiIgc(const std::string &Master_config_file, const std::string
-        &Orbit_file_name, const std::string &L1b1_file_name, const std::string
-        &Swath_to_use="660-I", const std::string &Base_directory=".",
-        const std::string &Title="Image", int Tile_number_line=-1, int
-        Tile_number_sample=-1, unsigned int Number_tile=4)
         GeoCal::AirMspiIgc::AirMspiIgc
-        Constructor.
-        This takes the master config file and uses it to create a AirMspiIgc.
+        Constructor.  
+
+        This takes the master config file and uses it to create a AirMspiIgc.  
 
         You can optionally add the base directory that file names in the
-        Master_config_file are relative to. The default is the current
-        directory. 
+        Master_config_file are relative to. The default is the current directory.  
+
         """
         _air_mspi_igc.AirMspiIgc_swiginit(self, _air_mspi_igc.new_AirMspiIgc(*args))
     _v_band = _swig_new_instance_method(_air_mspi_igc.AirMspiIgc__v_band)

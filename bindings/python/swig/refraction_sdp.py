@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _refraction_sdp.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _refraction_sdp:
 _refraction_sdp.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _refraction_sdp.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,26 +141,26 @@ import geocal_swig.generic_object
 class RefractionSdp(geocal_swig.refraction.Refraction):
     r"""
 
-    This calculates refraction.
 
-    The algorithm used was take from the SDP toolkit. The original code
-    was written by Peter Noerdlinger as the SDP toolkit function
-    PGS_CSC_SpaceRefract. The algorithm is described in detail in
-    "Theoretical Basis of the SDP Toolkit Geolocation Package for the
-    ECS".
+    This calculates refraction.  
 
-    This depends on the index of refraction of air at the surface. We
-    don't actually know this. There are various approximations, and the
-    toolkit uses one described in the "Theoretical Basis of the SDP
-    Toolkit Geolocation Package for the ECS".
+    The algorithm used was take from the SDP toolkit. The original code was written
+    by Peter Noerdlinger as the SDP toolkit function PGS_CSC_SpaceRefract. The
+    algorithm is described in detail in "Theoretical Basis of the SDP Toolkit
+    Geolocation Package for the ECS".  
 
-    This class allows the index of refraction to simple be given. This
-    allows us to just fit for this unknown using something like a
-    simultanous bundle adjustment. Note that a reasonable range of values
-    is something like 1.00026 to 1.00029, so you can vary from the initial
-    prediction by a few 1e-5.
+    This depends on the index of refraction of air at the surface. We don't actually
+    know this. There are various approximations, and the toolkit uses one described
+    in the "Theoretical Basis of the SDP Toolkit
+    Geolocation Package for the ECS".  
 
-    C++ includes: refraction_sdp.h 
+    This class allows the index of refraction to simple be given. This allows us to
+    just fit for this unknown using something like a simultanous bundle adjustment.
+    Note that a reasonable range of values is something like 1.00026 to 1.00029, so
+    you can vary from the initial prediction by a few 1e-5.  
+
+    C++ includes: refraction_sdp.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -165,17 +168,19 @@ class RefractionSdp(geocal_swig.refraction.Refraction):
 
     def __init__(self, Altitude, Latitude, Index_refraction_surface=-1):
         r"""
+        __init__(RefractionSdp self, double Altitude, double Latitude, double Index_refraction_surface=-1) -> RefractionSdp
 
-        RefractionSdp::RefractionSdp(double Altitude, double Latitude, double Index_refraction_surface=-1)
         GeoCal::RefractionSdp::RefractionSdp
-        This sets up for a Refraction calculation.
-        A representative altitude (in meters) and latitude (in degrees) is
-        given. This doesn't depend very strongly on altitude and latitude, so
-        unless you using widely varying points just using the center of you
-        scene should be pretty much sufficient.
+        This sets up for a Refraction calculation.  
 
-        The index of refraction at the surface can be supplied if desired,
-        otherwise we calculate an approximate value. 
+        A representative altitude (in meters) and latitude (in degrees) is given. This
+        doesn't depend very strongly on altitude and latitude, so unless you using
+        widely varying points just using the center of you scene should be pretty much
+        sufficient.  
+
+        The index of refraction at the surface can be supplied if desired, otherwise we
+        calculate an approximate value.  
+
         """
         _refraction_sdp.RefractionSdp_swiginit(self, _refraction_sdp.new_RefractionSdp(Altitude, Latitude, Index_refraction_surface))
     _v_altitude = _swig_new_instance_method(_refraction_sdp.RefractionSdp__v_altitude)

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ray_intersect.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ray_intersect:
 _ray_intersect.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ray_intersect.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,12 +142,14 @@ import geocal_swig.geocal_exception
 class RayIntersect(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This finds the point closest intersection of two look vector.
 
-    Note that in generate two look vectors don't intersect, we find the
-    point closest to the two look vectors.
+    This finds the point closest intersection of two look vector.  
 
-    C++ includes: ray_intersect.h 
+    Note that in generate two look vectors don't intersect, we find the point
+    closest to the two look vectors.  
+
+    C++ includes: ray_intersect.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,9 +157,8 @@ class RayIntersect(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Igc1, Igc2):
         r"""
+        __init__(RayIntersect self, boost::shared_ptr< GeoCal::ImageGroundConnection > const Igc1, boost::shared_ptr< GeoCal::ImageGroundConnection > const Igc2) -> RayIntersect
 
-        GeoCal::RayIntersect::RayIntersect(const boost::shared_ptr< ImageGroundConnection > Igc1, const
-        boost::shared_ptr< ImageGroundConnection > Igc2)
         GeoCal::RayIntersect::RayIntersect
         """
         _ray_intersect.RayIntersect_swiginit(self, _ray_intersect.new_RayIntersect(Igc1, Igc2))

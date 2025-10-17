@@ -7414,80 +7414,79 @@ SWIGINTERN PyObject *ForstnerFeatureDetector_swiginit(PyObject *SWIGUNUSEDPARM(s
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ForstnerFeatureDetector", _wrap_new_ForstnerFeatureDetector, METH_VARARGS, "\n"
+		"ForstnerFeatureDetector(int Basic_ip_large_number=1000, int Maximum_weight_threshold=10000, int Forstner_max_window_large_size=9, int Forstner_max_window_small_size=7, int Forstner_window_size=3, double Roundness_threshold=0.2, double Weight_threshold=1.0, double Basic_robert_threshold=1.2)\n"
 		"\n"
-		"BZ_END_STENCIL ForstnerFeatureDetector::ForstnerFeatureDetector(int Basic_ip_large_number=1000, int Maximum_weight_threshold=10000,\n"
-		"int Forstner_max_window_large_size=9, int\n"
-		"Forstner_max_window_small_size=7, int Forstner_window_size=3, double\n"
-		"Roundness_threshold=0.2, double Weight_threshold=1.0, double\n"
-		"Basic_robert_threshold=1.2)\n"
 		"GeoCal::ForstnerFeatureDetector::ForstnerFeatureDetector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "ForstnerFeatureDetector__v_basic_ip_large_number", _wrap_ForstnerFeatureDetector__v_basic_ip_large_number, METH_O, "\n"
+		"ForstnerFeatureDetector__v_basic_ip_large_number(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::basic_ip_large_number() const\n"
 		"GeoCal::ForstnerFeatureDetector::basic_ip_large_number\n"
 		""},
 	 { "ForstnerFeatureDetector__v_maximum_weight_threshold", _wrap_ForstnerFeatureDetector__v_maximum_weight_threshold, METH_O, "\n"
+		"ForstnerFeatureDetector__v_maximum_weight_threshold(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::maximum_weight_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::maximum_weight_threshold\n"
 		""},
 	 { "ForstnerFeatureDetector__v_forstner_max_window_large_size", _wrap_ForstnerFeatureDetector__v_forstner_max_window_large_size, METH_O, "\n"
+		"ForstnerFeatureDetector__v_forstner_max_window_large_size(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::forstner_max_window_large_size() const\n"
 		"GeoCal::ForstnerFeatureDetector::forstner_max_window_large_size\n"
 		""},
 	 { "ForstnerFeatureDetector__v_forstner_max_window_small_size", _wrap_ForstnerFeatureDetector__v_forstner_max_window_small_size, METH_O, "\n"
+		"ForstnerFeatureDetector__v_forstner_max_window_small_size(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::forstner_max_window_small_size() const\n"
 		"GeoCal::ForstnerFeatureDetector::forstner_max_window_small_size\n"
 		""},
 	 { "ForstnerFeatureDetector__v_forstner_window_size", _wrap_ForstnerFeatureDetector__v_forstner_window_size, METH_O, "\n"
+		"ForstnerFeatureDetector__v_forstner_window_size(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::forstner_window_size() const\n"
 		"GeoCal::ForstnerFeatureDetector::forstner_window_size\n"
 		""},
 	 { "ForstnerFeatureDetector__v_roundness_threshold", _wrap_ForstnerFeatureDetector__v_roundness_threshold, METH_O, "\n"
+		"ForstnerFeatureDetector__v_roundness_threshold(ForstnerFeatureDetector self) -> double\n"
 		"\n"
-		"double GeoCal::ForstnerFeatureDetector::roundness_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::roundness_threshold\n"
 		""},
 	 { "ForstnerFeatureDetector__v_weight_threshold", _wrap_ForstnerFeatureDetector__v_weight_threshold, METH_O, "\n"
+		"ForstnerFeatureDetector__v_weight_threshold(ForstnerFeatureDetector self) -> double\n"
 		"\n"
-		"double GeoCal::ForstnerFeatureDetector::weight_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::weight_threshold\n"
 		""},
 	 { "ForstnerFeatureDetector__v_basic_robert_threshold", _wrap_ForstnerFeatureDetector__v_basic_robert_threshold, METH_O, "\n"
+		"ForstnerFeatureDetector__v_basic_robert_threshold(ForstnerFeatureDetector self) -> double\n"
 		"\n"
-		"double GeoCal::ForstnerFeatureDetector::basic_robert_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::basic_robert_threshold\n"
 		""},
 	 { "delete_ForstnerFeatureDetector", _wrap_delete_ForstnerFeatureDetector, METH_O, "\n"
+		"delete_ForstnerFeatureDetector(ForstnerFeatureDetector self)\n"
 		"\n"
-		"virtual GeoCal::ForstnerFeatureDetector::~ForstnerFeatureDetector()\n"
 		"GeoCal::ForstnerFeatureDetector::~ForstnerFeatureDetector\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ForstnerFeatureDetector_swigregister", ForstnerFeatureDetector_swigregister, METH_O, NULL},
@@ -7498,80 +7497,79 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ForstnerFeatureDetector", _wrap_new_ForstnerFeatureDetector, METH_VARARGS, "\n"
+		"ForstnerFeatureDetector(int Basic_ip_large_number=1000, int Maximum_weight_threshold=10000, int Forstner_max_window_large_size=9, int Forstner_max_window_small_size=7, int Forstner_window_size=3, double Roundness_threshold=0.2, double Weight_threshold=1.0, double Basic_robert_threshold=1.2)\n"
 		"\n"
-		"BZ_END_STENCIL ForstnerFeatureDetector::ForstnerFeatureDetector(int Basic_ip_large_number=1000, int Maximum_weight_threshold=10000,\n"
-		"int Forstner_max_window_large_size=9, int\n"
-		"Forstner_max_window_small_size=7, int Forstner_window_size=3, double\n"
-		"Roundness_threshold=0.2, double Weight_threshold=1.0, double\n"
-		"Basic_robert_threshold=1.2)\n"
 		"GeoCal::ForstnerFeatureDetector::ForstnerFeatureDetector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "ForstnerFeatureDetector__v_basic_ip_large_number", _wrap_ForstnerFeatureDetector__v_basic_ip_large_number, METH_O, "\n"
+		"_v_basic_ip_large_number(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::basic_ip_large_number() const\n"
 		"GeoCal::ForstnerFeatureDetector::basic_ip_large_number\n"
 		""},
 	 { "ForstnerFeatureDetector__v_maximum_weight_threshold", _wrap_ForstnerFeatureDetector__v_maximum_weight_threshold, METH_O, "\n"
+		"_v_maximum_weight_threshold(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::maximum_weight_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::maximum_weight_threshold\n"
 		""},
 	 { "ForstnerFeatureDetector__v_forstner_max_window_large_size", _wrap_ForstnerFeatureDetector__v_forstner_max_window_large_size, METH_O, "\n"
+		"_v_forstner_max_window_large_size(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::forstner_max_window_large_size() const\n"
 		"GeoCal::ForstnerFeatureDetector::forstner_max_window_large_size\n"
 		""},
 	 { "ForstnerFeatureDetector__v_forstner_max_window_small_size", _wrap_ForstnerFeatureDetector__v_forstner_max_window_small_size, METH_O, "\n"
+		"_v_forstner_max_window_small_size(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::forstner_max_window_small_size() const\n"
 		"GeoCal::ForstnerFeatureDetector::forstner_max_window_small_size\n"
 		""},
 	 { "ForstnerFeatureDetector__v_forstner_window_size", _wrap_ForstnerFeatureDetector__v_forstner_window_size, METH_O, "\n"
+		"_v_forstner_window_size(ForstnerFeatureDetector self) -> int\n"
 		"\n"
-		"int GeoCal::ForstnerFeatureDetector::forstner_window_size() const\n"
 		"GeoCal::ForstnerFeatureDetector::forstner_window_size\n"
 		""},
 	 { "ForstnerFeatureDetector__v_roundness_threshold", _wrap_ForstnerFeatureDetector__v_roundness_threshold, METH_O, "\n"
+		"_v_roundness_threshold(ForstnerFeatureDetector self) -> double\n"
 		"\n"
-		"double GeoCal::ForstnerFeatureDetector::roundness_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::roundness_threshold\n"
 		""},
 	 { "ForstnerFeatureDetector__v_weight_threshold", _wrap_ForstnerFeatureDetector__v_weight_threshold, METH_O, "\n"
+		"_v_weight_threshold(ForstnerFeatureDetector self) -> double\n"
 		"\n"
-		"double GeoCal::ForstnerFeatureDetector::weight_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::weight_threshold\n"
 		""},
 	 { "ForstnerFeatureDetector__v_basic_robert_threshold", _wrap_ForstnerFeatureDetector__v_basic_robert_threshold, METH_O, "\n"
+		"_v_basic_robert_threshold(ForstnerFeatureDetector self) -> double\n"
 		"\n"
-		"double GeoCal::ForstnerFeatureDetector::basic_robert_threshold() const\n"
 		"GeoCal::ForstnerFeatureDetector::basic_robert_threshold\n"
 		""},
 	 { "delete_ForstnerFeatureDetector", _wrap_delete_ForstnerFeatureDetector, METH_O, "\n"
+		"delete_ForstnerFeatureDetector(ForstnerFeatureDetector self)\n"
 		"\n"
-		"virtual GeoCal::ForstnerFeatureDetector::~ForstnerFeatureDetector()\n"
 		"GeoCal::ForstnerFeatureDetector::~ForstnerFeatureDetector\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ForstnerFeatureDetector_swigregister", ForstnerFeatureDetector_swigregister, METH_O, NULL},

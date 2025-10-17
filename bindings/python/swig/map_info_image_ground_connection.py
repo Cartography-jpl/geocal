@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _map_info_image_ground_connection.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _map_info_image_ground_connection:
 _map_info_image_ground_connection.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _map_info_image_ground_connection.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,10 +143,12 @@ import geocal_swig.geocal_exception
 class MapInfoImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
-    This class creates an ImageGroundConnection that simply maps map
-    registered image to the ground.
 
-    C++ includes: map_info_image_ground_connection.h 
+    This class creates an ImageGroundConnection that simply maps map registered
+    image to the ground.  
+
+    C++ includes: map_info_image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,11 +156,12 @@ class MapInfoImageGroundConnection(geocal_swig.image_ground_connection.ImageGrou
 
     def __init__(self, *args):
         r"""
+        __init__(MapInfoImageGroundConnection self, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::Dem > const & D, std::string const & Title="Image") -> MapInfoImageGroundConnection
+        __init__(MapInfoImageGroundConnection self, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, boost::shared_ptr< GeoCal::Dem > const & D, std::string const & Title="Image") -> MapInfoImageGroundConnection
+        __init__(MapInfoImageGroundConnection self, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, boost::shared_ptr< GeoCal::Dem > const & D, std::string const & Title="Image") -> MapInfoImageGroundConnection
 
-        GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection(const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const
-        boost::shared_ptr< Dem > &D, const std::string &Title="Image")
         GeoCal::MapInfoImageGroundConnection::MapInfoImageGroundConnection
-        Constructor.
+        Constructor.  
 
         """
         _map_info_image_ground_connection.MapInfoImageGroundConnection_swiginit(self, _map_info_image_ground_connection.new_MapInfoImageGroundConnection(*args))

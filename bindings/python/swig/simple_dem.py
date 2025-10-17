@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _simple_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _simple_dem:
 _simple_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _simple_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,13 +141,15 @@ import geocal_swig.generic_object
 class SimpleDem(geocal_swig.dem.Dem):
     r"""
 
-    This is a simple implementation of a Dem, intended primarily for use
-    during testing.
 
-    It find the height of a given point above the reference ellipsoid +
-    fixed height, in the given coordinates.
+    This is a simple implementation of a Dem, intended primarily for use during
+    testing.  
 
-    C++ includes: simple_dem.h 
+    It find the height of a given point above the reference ellipsoid + fixed
+    height, in the given coordinates.  
+
+    C++ includes: simple_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,10 +157,10 @@ class SimpleDem(geocal_swig.dem.Dem):
 
     def __init__(self, H=0):
         r"""
+        __init__(SimpleDem self, double H=0) -> SimpleDem
 
-        GeoCal::SimpleDemT< G >::SimpleDemT(double H=0)
         GeoCal::SimpleDemT::SimpleDemT
-        Default constructor.
+        Default constructor.  
 
         """
         _simple_dem.SimpleDem_swiginit(self, _simple_dem.new_SimpleDem(H))

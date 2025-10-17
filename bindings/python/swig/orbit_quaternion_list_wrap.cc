@@ -7833,133 +7833,143 @@ SWIGINTERN PyObject *OrbitListCache_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OrbitQuaternionList", _wrap_new_OrbitQuaternionList, METH_O, "\n"
+		"new_OrbitQuaternionList(Vector_QuaternionOrbitData Data) -> OrbitQuaternionList\n"
 		"\n"
-		"GeoCal::OrbitQuaternionList::OrbitQuaternionList(iterator ibeg, iterator iend)\n"
 		"GeoCal::OrbitQuaternionList::OrbitQuaternionList\n"
-		"Constructor that takes a list of QuaternionOrbitData values.\n"
-		"Note that the data doesn't need to be sorted, we handle sorting as we\n"
-		"ingest the data.\n"
+		"Constructor that takes a list of QuaternionOrbitData values.  \n"
 		"\n"
-		"QuaternionOrbitData pointer can be null if we want to do a lazy\n"
-		"evaluation of the data (see description of class for details). \n"
+		"Note that the data doesn't need to be sorted, we handle sorting as we ingest the\n"
+		"data.  \n"
+		"\n"
+		"QuaternionOrbitData pointer can be null if we want to do a lazy evaluation of\n"
+		"the data (see description of class for details).  \n"
+		"\n"
 		""},
 	 { "OrbitQuaternionList_orbit_data", _wrap_OrbitQuaternionList_orbit_data, METH_VARARGS, "\n"
+		"OrbitQuaternionList_orbit_data(OrbitQuaternionList self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"OrbitQuaternionList_orbit_data(OrbitQuaternionList self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(Time T) const\n"
 		"GeoCal::OrbitQuaternionList::orbit_data\n"
 		""},
 	 { "OrbitQuaternionList__v_quaternion_orbit_data", _wrap_OrbitQuaternionList__v_quaternion_orbit_data, METH_O, "\n"
+		"OrbitQuaternionList__v_quaternion_orbit_data(OrbitQuaternionList self) -> Vector_QuaternionOrbitData\n"
 		"\n"
-		"std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data\n"
-		"Return the list of QuaternionOrbitData.\n"
+		"Return the list of QuaternionOrbitData.  \n"
 		"\n"
 		""},
 	 { "OrbitQuaternionList__v_quaternion_orbit_data_time", _wrap_OrbitQuaternionList__v_quaternion_orbit_data_time, METH_O, "\n"
+		"OrbitQuaternionList__v_quaternion_orbit_data_time(OrbitQuaternionList self) -> Vector_Time2\n"
 		"\n"
-		"std::vector< boost::shared_ptr< Time > > OrbitQuaternionList::quaternion_orbit_data_time() const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data_time\n"
-		"Return the Times of QuaternionOrbitData.\n"
+		"Return the Times of QuaternionOrbitData.  \n"
 		"\n"
 		""},
 	 { "OrbitQuaternionList_quaternion_orbit_data_i", _wrap_OrbitQuaternionList_quaternion_orbit_data_i, METH_VARARGS, "\n"
+		"OrbitQuaternionList_quaternion_orbit_data_i(OrbitQuaternionList self, int I) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > GeoCal::OrbitQuaternionList::quaternion_orbit_data_i(int I) const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data_i\n"
-		"Python will sometime crash with quaternion_orbit_data if it is larger,\n"
-		"probably just a SWIG sort of bug.\n"
-		"But for use with python, supply a function that returns the data\n"
-		"directly for an index. This is redundant for C++, just call\n"
-		"quaternion_orbit_data and index the results. But this is useful for\n"
-		"python. \n"
+		"Python will sometime crash with quaternion_orbit_data if it is larger, probably\n"
+		"just a SWIG sort of bug.  \n"
+		"\n"
+		"But for use with python, supply a function that returns the data directly for an\n"
+		"index. This is redundant for C++, just call quaternion_orbit_data and index the\n"
+		"results. But this is useful for python.  \n"
+		"\n"
 		""},
 	 { "OrbitQuaternionList__v_quaternion_orbit_data_size", _wrap_OrbitQuaternionList__v_quaternion_orbit_data_size, METH_O, "\n"
+		"OrbitQuaternionList__v_quaternion_orbit_data_size(OrbitQuaternionList self) -> int\n"
 		"\n"
-		"int GeoCal::OrbitQuaternionList::quaternion_orbit_data_size() const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data_size\n"
 		""},
 	 { "OrbitQuaternionList__v_set_min_time", _wrap_OrbitQuaternionList__v_set_min_time, METH_VARARGS, "\n"
+		"OrbitQuaternionList__v_set_min_time(OrbitQuaternionList self, Time T)\n"
 		"\n"
-		"void GeoCal::OrbitQuaternionList::set_min_time(const Time &T)\n"
 		"GeoCal::OrbitQuaternionList::set_min_time\n"
-		"It can be useful in some cases to modify the min_time and max_time.\n"
-		"For example, we don't usually allow extrapolation outside of the range\n"
-		"of orbit data, but in some case this might be desirable (e.g., orbit\n"
-		"data doesn't fully cover our image data, but will if we extrapolate a\n"
-		"short ways). \n"
+		"It can be useful in some cases to modify the min_time and max_time.  \n"
+		"\n"
+		"For example, we don't usually allow extrapolation outside of the range of orbit\n"
+		"data, but in some case this might be desirable (e.g., orbit data doesn't fully\n"
+		"cover our image data, but will if we extrapolate a short ways).  \n"
+		"\n"
 		""},
 	 { "OrbitQuaternionList__v_set_max_time", _wrap_OrbitQuaternionList__v_set_max_time, METH_VARARGS, "\n"
+		"OrbitQuaternionList__v_set_max_time(OrbitQuaternionList self, Time T)\n"
 		"\n"
-		"void GeoCal::OrbitQuaternionList::set_max_time(const Time &T)\n"
 		"GeoCal::OrbitQuaternionList::set_max_time\n"
-		"It can be useful in some cases to modify the min_time and max_time.\n"
-		"For example, we don't usually allow extrapolation outside of the range\n"
-		"of orbit data, but in some case this might be desirable (e.g., orbit\n"
-		"data doesn't fully cover our image data, but will if we extrapolate a\n"
-		"short ways). \n"
+		"It can be useful in some cases to modify the min_time and max_time.  \n"
+		"\n"
+		"For example, we don't usually allow extrapolation outside of the range of orbit\n"
+		"data, but in some case this might be desirable (e.g., orbit data doesn't fully\n"
+		"cover our image data, but will if we extrapolate a short ways).  \n"
+		"\n"
 		""},
 	 { "delete_OrbitQuaternionList", _wrap_delete_OrbitQuaternionList, METH_O, "\n"
+		"delete_OrbitQuaternionList(OrbitQuaternionList self)\n"
 		"\n"
-		"virtual GeoCal::OrbitQuaternionList::~OrbitQuaternionList()\n"
 		"GeoCal::OrbitQuaternionList::~OrbitQuaternionList\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OrbitQuaternionList_swigregister", OrbitQuaternionList_swigregister, METH_O, NULL},
 	 { "OrbitQuaternionList_swiginit", OrbitQuaternionList_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitListCache", _wrap_new_OrbitListCache, METH_VARARGS, "\n"
+		"OrbitListCache(boost::shared_ptr< GeoCal::Orbit > const & Orbit_underlying, boost::shared_ptr< GeoCal::TimeTable > const & Tt, double Sample=0.0)\n"
 		"\n"
-		"GeoCal::OrbitListCache::OrbitListCache(const boost::shared_ptr< Orbit > &Orbit_underlying, const\n"
-		"boost::shared_ptr< TimeTable > &Tt, double Sample=0.0)\n"
 		"GeoCal::OrbitListCache::OrbitListCache\n"
-		"Create a OrbitListCache that calculates the orbit at each time found for image coordinate\n"
-		"line from Tt.min_line() to tt.max_line() for the given sample.\n"
-		"We cache the orbit data. If the underlying orbit changes, we throw\n"
-		"away the cached values. \n"
+		"Create a OrbitListCache that calculates the orbit at each time found for image\n"
+		"coordinate line from Tt.min_line() to tt.max_line() for the given sample.  \n"
+		"\n"
+		"We cache the orbit data. If the underlying orbit changes, we throw away the\n"
+		"cached values.  \n"
+		"\n"
 		""},
 	 { "OrbitListCache__v_orbit_underlying", _wrap_OrbitListCache__v_orbit_underlying, METH_O, "\n"
+		"OrbitListCache__v_orbit_underlying(OrbitListCache self) -> boost::shared_ptr< GeoCal::Orbit >\n"
 		"\n"
-		"const boost::shared_ptr< Orbit > & GeoCal::OrbitListCache::orbit_underlying() const\n"
 		"GeoCal::OrbitListCache::orbit_underlying\n"
-		"Underlying orbit.\n"
+		"Underlying orbit.  \n"
 		"\n"
 		""},
 	 { "OrbitListCache__v_time_table", _wrap_OrbitListCache__v_time_table, METH_O, "\n"
+		"OrbitListCache__v_time_table(OrbitListCache self) -> boost::shared_ptr< GeoCal::TimeTable >\n"
 		"\n"
-		"const boost::shared_ptr< TimeTable > & GeoCal::OrbitListCache::time_table() const\n"
 		"GeoCal::OrbitListCache::time_table\n"
-		"Time table we sample orbit at.\n"
+		"Time table we sample orbit at.  \n"
 		"\n"
 		""},
 	 { "OrbitListCache__v_sample", _wrap_OrbitListCache__v_sample, METH_O, "\n"
+		"OrbitListCache__v_sample(OrbitListCache self) -> double\n"
 		"\n"
-		"double GeoCal::OrbitListCache::sample() const\n"
 		"GeoCal::OrbitListCache::sample\n"
-		"Sample we use with time table.\n"
+		"Sample we use with time table.  \n"
 		"\n"
 		""},
 	 { "delete_OrbitListCache", _wrap_delete_OrbitListCache, METH_O, "\n"
+		"delete_OrbitListCache(OrbitListCache self)\n"
 		"\n"
-		"virtual GeoCal::OrbitListCache::~OrbitListCache()\n"
 		"GeoCal::OrbitListCache::~OrbitListCache\n"
 		""},
 	 { "OrbitListCache_swigregister", OrbitListCache_swigregister, METH_O, NULL},
@@ -7970,133 +7980,143 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OrbitQuaternionList", _wrap_new_OrbitQuaternionList, METH_O, "\n"
+		"new_OrbitQuaternionList(Vector_QuaternionOrbitData Data) -> OrbitQuaternionList\n"
 		"\n"
-		"GeoCal::OrbitQuaternionList::OrbitQuaternionList(iterator ibeg, iterator iend)\n"
 		"GeoCal::OrbitQuaternionList::OrbitQuaternionList\n"
-		"Constructor that takes a list of QuaternionOrbitData values.\n"
-		"Note that the data doesn't need to be sorted, we handle sorting as we\n"
-		"ingest the data.\n"
+		"Constructor that takes a list of QuaternionOrbitData values.  \n"
 		"\n"
-		"QuaternionOrbitData pointer can be null if we want to do a lazy\n"
-		"evaluation of the data (see description of class for details). \n"
+		"Note that the data doesn't need to be sorted, we handle sorting as we ingest the\n"
+		"data.  \n"
+		"\n"
+		"QuaternionOrbitData pointer can be null if we want to do a lazy evaluation of\n"
+		"the data (see description of class for details).  \n"
+		"\n"
 		""},
 	 { "OrbitQuaternionList_orbit_data", _wrap_OrbitQuaternionList_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(OrbitQuaternionList self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(OrbitQuaternionList self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitQuaternionList::orbit_data(Time T) const\n"
 		"GeoCal::OrbitQuaternionList::orbit_data\n"
 		""},
 	 { "OrbitQuaternionList__v_quaternion_orbit_data", _wrap_OrbitQuaternionList__v_quaternion_orbit_data, METH_O, "\n"
+		"_v_quaternion_orbit_data(OrbitQuaternionList self) -> Vector_QuaternionOrbitData\n"
 		"\n"
-		"std::vector< boost::shared_ptr< QuaternionOrbitData > > OrbitQuaternionList::quaternion_orbit_data() const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data\n"
-		"Return the list of QuaternionOrbitData.\n"
+		"Return the list of QuaternionOrbitData.  \n"
 		"\n"
 		""},
 	 { "OrbitQuaternionList__v_quaternion_orbit_data_time", _wrap_OrbitQuaternionList__v_quaternion_orbit_data_time, METH_O, "\n"
+		"_v_quaternion_orbit_data_time(OrbitQuaternionList self) -> Vector_Time2\n"
 		"\n"
-		"std::vector< boost::shared_ptr< Time > > OrbitQuaternionList::quaternion_orbit_data_time() const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data_time\n"
-		"Return the Times of QuaternionOrbitData.\n"
+		"Return the Times of QuaternionOrbitData.  \n"
 		"\n"
 		""},
 	 { "OrbitQuaternionList_quaternion_orbit_data_i", _wrap_OrbitQuaternionList_quaternion_orbit_data_i, METH_VARARGS, "\n"
+		"quaternion_orbit_data_i(OrbitQuaternionList self, int I) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > GeoCal::OrbitQuaternionList::quaternion_orbit_data_i(int I) const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data_i\n"
-		"Python will sometime crash with quaternion_orbit_data if it is larger,\n"
-		"probably just a SWIG sort of bug.\n"
-		"But for use with python, supply a function that returns the data\n"
-		"directly for an index. This is redundant for C++, just call\n"
-		"quaternion_orbit_data and index the results. But this is useful for\n"
-		"python. \n"
+		"Python will sometime crash with quaternion_orbit_data if it is larger, probably\n"
+		"just a SWIG sort of bug.  \n"
+		"\n"
+		"But for use with python, supply a function that returns the data directly for an\n"
+		"index. This is redundant for C++, just call quaternion_orbit_data and index the\n"
+		"results. But this is useful for python.  \n"
+		"\n"
 		""},
 	 { "OrbitQuaternionList__v_quaternion_orbit_data_size", _wrap_OrbitQuaternionList__v_quaternion_orbit_data_size, METH_O, "\n"
+		"_v_quaternion_orbit_data_size(OrbitQuaternionList self) -> int\n"
 		"\n"
-		"int GeoCal::OrbitQuaternionList::quaternion_orbit_data_size() const\n"
 		"GeoCal::OrbitQuaternionList::quaternion_orbit_data_size\n"
 		""},
 	 { "OrbitQuaternionList__v_set_min_time", _wrap_OrbitQuaternionList__v_set_min_time, METH_VARARGS, "\n"
+		"_v_set_min_time(OrbitQuaternionList self, Time T)\n"
 		"\n"
-		"void GeoCal::OrbitQuaternionList::set_min_time(const Time &T)\n"
 		"GeoCal::OrbitQuaternionList::set_min_time\n"
-		"It can be useful in some cases to modify the min_time and max_time.\n"
-		"For example, we don't usually allow extrapolation outside of the range\n"
-		"of orbit data, but in some case this might be desirable (e.g., orbit\n"
-		"data doesn't fully cover our image data, but will if we extrapolate a\n"
-		"short ways). \n"
+		"It can be useful in some cases to modify the min_time and max_time.  \n"
+		"\n"
+		"For example, we don't usually allow extrapolation outside of the range of orbit\n"
+		"data, but in some case this might be desirable (e.g., orbit data doesn't fully\n"
+		"cover our image data, but will if we extrapolate a short ways).  \n"
+		"\n"
 		""},
 	 { "OrbitQuaternionList__v_set_max_time", _wrap_OrbitQuaternionList__v_set_max_time, METH_VARARGS, "\n"
+		"_v_set_max_time(OrbitQuaternionList self, Time T)\n"
 		"\n"
-		"void GeoCal::OrbitQuaternionList::set_max_time(const Time &T)\n"
 		"GeoCal::OrbitQuaternionList::set_max_time\n"
-		"It can be useful in some cases to modify the min_time and max_time.\n"
-		"For example, we don't usually allow extrapolation outside of the range\n"
-		"of orbit data, but in some case this might be desirable (e.g., orbit\n"
-		"data doesn't fully cover our image data, but will if we extrapolate a\n"
-		"short ways). \n"
+		"It can be useful in some cases to modify the min_time and max_time.  \n"
+		"\n"
+		"For example, we don't usually allow extrapolation outside of the range of orbit\n"
+		"data, but in some case this might be desirable (e.g., orbit data doesn't fully\n"
+		"cover our image data, but will if we extrapolate a short ways).  \n"
+		"\n"
 		""},
 	 { "delete_OrbitQuaternionList", _wrap_delete_OrbitQuaternionList, METH_O, "\n"
+		"delete_OrbitQuaternionList(OrbitQuaternionList self)\n"
 		"\n"
-		"virtual GeoCal::OrbitQuaternionList::~OrbitQuaternionList()\n"
 		"GeoCal::OrbitQuaternionList::~OrbitQuaternionList\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OrbitQuaternionList_swigregister", OrbitQuaternionList_swigregister, METH_O, NULL},
 	 { "OrbitQuaternionList_swiginit", OrbitQuaternionList_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitListCache", _wrap_new_OrbitListCache, METH_VARARGS, "\n"
+		"OrbitListCache(boost::shared_ptr< GeoCal::Orbit > const & Orbit_underlying, boost::shared_ptr< GeoCal::TimeTable > const & Tt, double Sample=0.0)\n"
 		"\n"
-		"GeoCal::OrbitListCache::OrbitListCache(const boost::shared_ptr< Orbit > &Orbit_underlying, const\n"
-		"boost::shared_ptr< TimeTable > &Tt, double Sample=0.0)\n"
 		"GeoCal::OrbitListCache::OrbitListCache\n"
-		"Create a OrbitListCache that calculates the orbit at each time found for image coordinate\n"
-		"line from Tt.min_line() to tt.max_line() for the given sample.\n"
-		"We cache the orbit data. If the underlying orbit changes, we throw\n"
-		"away the cached values. \n"
+		"Create a OrbitListCache that calculates the orbit at each time found for image\n"
+		"coordinate line from Tt.min_line() to tt.max_line() for the given sample.  \n"
+		"\n"
+		"We cache the orbit data. If the underlying orbit changes, we throw away the\n"
+		"cached values.  \n"
+		"\n"
 		""},
 	 { "OrbitListCache__v_orbit_underlying", _wrap_OrbitListCache__v_orbit_underlying, METH_O, "\n"
+		"_v_orbit_underlying(OrbitListCache self) -> boost::shared_ptr< GeoCal::Orbit >\n"
 		"\n"
-		"const boost::shared_ptr< Orbit > & GeoCal::OrbitListCache::orbit_underlying() const\n"
 		"GeoCal::OrbitListCache::orbit_underlying\n"
-		"Underlying orbit.\n"
+		"Underlying orbit.  \n"
 		"\n"
 		""},
 	 { "OrbitListCache__v_time_table", _wrap_OrbitListCache__v_time_table, METH_O, "\n"
+		"_v_time_table(OrbitListCache self) -> boost::shared_ptr< GeoCal::TimeTable >\n"
 		"\n"
-		"const boost::shared_ptr< TimeTable > & GeoCal::OrbitListCache::time_table() const\n"
 		"GeoCal::OrbitListCache::time_table\n"
-		"Time table we sample orbit at.\n"
+		"Time table we sample orbit at.  \n"
 		"\n"
 		""},
 	 { "OrbitListCache__v_sample", _wrap_OrbitListCache__v_sample, METH_O, "\n"
+		"_v_sample(OrbitListCache self) -> double\n"
 		"\n"
-		"double GeoCal::OrbitListCache::sample() const\n"
 		"GeoCal::OrbitListCache::sample\n"
-		"Sample we use with time table.\n"
+		"Sample we use with time table.  \n"
 		"\n"
 		""},
 	 { "delete_OrbitListCache", _wrap_delete_OrbitListCache, METH_O, "\n"
+		"delete_OrbitListCache(OrbitListCache self)\n"
 		"\n"
-		"virtual GeoCal::OrbitListCache::~OrbitListCache()\n"
 		"GeoCal::OrbitListCache::~OrbitListCache\n"
 		""},
 	 { "OrbitListCache_swigregister", OrbitListCache_swigregister, METH_O, NULL},

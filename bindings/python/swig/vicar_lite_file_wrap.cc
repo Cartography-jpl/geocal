@@ -10429,263 +10429,278 @@ SWIGINTERN PyObject *VicarLiteDem_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarLiteFile", _wrap_new_VicarLiteFile, METH_VARARGS, "\n"
+		"VicarLiteFile(std::string const & Fname, GeoCal::VicarLiteFile::access_type Access=READ, bool Force_area_pixel=False)\n"
+		"new_VicarLiteFile(std::string const & Fname, int Number_line, int Number_sample, std::string const & Type) -> VicarLiteFile\n"
 		"\n"
-		"GeoCal::VicarLiteFile::VicarLiteFile(const std::string &Fname, int Number_line, int Number_sample, const\n"
-		"std::string &Type=\"BYTE\")\n"
 		"GeoCal::VicarLiteFile::VicarLiteFile\n"
 		""},
 	 { "delete_VicarLiteFile", _wrap_delete_VicarLiteFile, METH_O, "\n"
+		"delete_VicarLiteFile(VicarLiteFile self)\n"
 		"\n"
-		"virtual GeoCal::VicarLiteFile::~VicarLiteFile()\n"
 		"GeoCal::VicarLiteFile::~VicarLiteFile\n"
 		""},
 	 { "VicarLiteFile__v_access", _wrap_VicarLiteFile__v_access, METH_O, "\n"
+		"VicarLiteFile__v_access(VicarLiteFile self) -> GeoCal::VicarLiteFile::access_type\n"
 		"\n"
-		"access_type GeoCal::VicarLiteFile::access() const\n"
 		"GeoCal::VicarLiteFile::access\n"
-		"Access type of file.\n"
+		"Access type of file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_force_area_pixel", _wrap_VicarLiteFile__v_force_area_pixel, METH_O, "\n"
+		"VicarLiteFile__v_force_area_pixel(VicarLiteFile self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteFile::force_area_pixel() const\n"
 		"GeoCal::VicarLiteFile::force_area_pixel\n"
-		"If true, then force the file to be treated as \"pixel is area\".\n"
-		"This is really just meant as a work around for the SRTM data, which\n"
-		"incorrectly labels the data as \"point\" rather than \"area\". Since\n"
-		"this is a 15 meter difference, it matters for many applications. Most\n"
-		"users should just ignore this value. \n"
+		"If true, then force the file to be treated as \"pixel is area\".  \n"
+		"\n"
+		"This is really just meant as a work around for the SRTM data, which incorrectly\n"
+		"labels the data as \"point\" rather than \"area\". Since this is a 15 meter\n"
+		"difference, it matters for many applications. Most users should just ignore this\n"
+		"value.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile__v_data_offset", _wrap_VicarLiteFile__v_data_offset, METH_O, "\n"
+		"VicarLiteFile__v_data_offset(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::data_offset() const\n"
 		"GeoCal::VicarLiteFile::data_offset\n"
-		"Offset to where the data starts.\n"
+		"Offset to where the data starts.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_file_name", _wrap_VicarLiteFile__v_file_name, METH_O, "\n"
+		"VicarLiteFile__v_file_name(VicarLiteFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::VicarLiteFile::file_name() const\n"
 		"GeoCal::VicarLiteFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile_is_vicar_file", _wrap_VicarLiteFile_is_vicar_file, METH_O, "\n"
+		"VicarLiteFile_is_vicar_file(std::string const & Fname) -> bool\n"
 		"\n"
-		"bool VicarLiteFile::is_vicar_file(const std::string &Fname)\n"
 		"GeoCal::VicarLiteFile::is_vicar_file\n"
-		"Determine if a given file is a VICAR file or not.\n"
-		"This looks for the first few characters of the file being \"LBLSIZE=\"\n"
+		"Determine if a given file is a VICAR file or not.  \n"
+		"\n"
+		"This looks for the first few characters of the file being \"LBLSIZE=\"  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_has_igc_glas_gfm", _wrap_VicarLiteFile__v_has_igc_glas_gfm, METH_O, "\n"
+		"VicarLiteFile__v_has_igc_glas_gfm(VicarLiteFile self) -> bool\n"
 		"\n"
-		"bool VicarLiteFile::has_igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteFile::has_igc_glas_gfm\n"
-		"Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE\n"
-		"label in it, indicating it has GLAS/GFM information.\n"
+		"Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE label in\n"
+		"it, indicating it has GLAS/GFM information.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_igc_glas_gfm", _wrap_VicarLiteFile__v_igc_glas_gfm, METH_O, "\n"
+		"VicarLiteFile__v_igc_glas_gfm(VicarLiteFile self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > VicarLiteFile::igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteFile::igc_glas_gfm\n"
-		"Read metadata for GLAS/GFM.\n"
+		"Read metadata for GLAS/GFM.  \n"
+		"\n"
 		"Note we store this as a separate detached file in either NITF or boost\n"
-		"serialization XML format. The VICAR file then has a pointer to the\n"
-		"file. The pointer just has a file name, it is assumed the file is in\n"
-		"the same directory as the VICAR file. \n"
+		"serialization XML format. The VICAR file then has a pointer to the file. The\n"
+		"pointer just has a file name, it is assumed the file is in the same directory as\n"
+		"the VICAR file.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile__v_number_line", _wrap_VicarLiteFile__v_number_line, METH_O, "\n"
+		"VicarLiteFile__v_number_line(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_line() const\n"
 		"GeoCal::VicarLiteFile::number_line\n"
-		"Number of lines in file.\n"
+		"Number of lines in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_sample", _wrap_VicarLiteFile__v_number_sample, METH_O, "\n"
+		"VicarLiteFile__v_number_sample(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_sample() const\n"
 		"GeoCal::VicarLiteFile::number_sample\n"
-		"Number of samples in file.\n"
+		"Number of samples in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_band", _wrap_VicarLiteFile__v_number_band, METH_O, "\n"
+		"VicarLiteFile__v_number_band(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_band() const\n"
 		"GeoCal::VicarLiteFile::number_band\n"
-		"Number of bands in file.\n"
+		"Number of bands in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_line_binary", _wrap_VicarLiteFile__v_number_line_binary, METH_O, "\n"
+		"VicarLiteFile__v_number_line_binary(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_line_binary() const\n"
 		"GeoCal::VicarLiteFile::number_line_binary\n"
-		"Number of lines of binary data before the start of the image.\n"
+		"Number of lines of binary data before the start of the image.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_byte_binary", _wrap_VicarLiteFile__v_number_byte_binary, METH_O, "\n"
+		"VicarLiteFile__v_number_byte_binary(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_byte_binary() const\n"
 		"GeoCal::VicarLiteFile::number_byte_binary\n"
-		"Number of bytes of binary data before the start of each line.\n"
+		"Number of bytes of binary data before the start of each line.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_type", _wrap_VicarLiteFile__v_type, METH_O, "\n"
+		"VicarLiteFile__v_type(VicarLiteFile self) -> GeoCal::VicarLiteFile::data_type\n"
 		"\n"
-		"data_type GeoCal::VicarLiteFile::type() const\n"
 		"GeoCal::VicarLiteFile::type\n"
-		"Type of data in file.\n"
+		"Type of data in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_map_info", _wrap_VicarLiteFile__v_map_info, METH_VARARGS, "\n"
+		"VicarLiteFile__v_map_info(VicarLiteFile self) -> MapInfo\n"
+		"VicarLiteFile__v_map_info(VicarLiteFile self, MapInfo V)\n"
 		"\n"
-		"void GeoCal::VicarLiteFile::map_info(const MapInfo &M)\n"
 		"GeoCal::VicarLiteFile::map_info\n"
 		""},
 	 { "VicarLiteFile__v_rpc", _wrap_VicarLiteFile__v_rpc, METH_VARARGS, "\n"
+		"VicarLiteFile__v_rpc(VicarLiteFile self) -> Rpc\n"
+		"VicarLiteFile__v_rpc(VicarLiteFile self, Rpc V)\n"
 		"\n"
-		"void GeoCal::VicarLiteFile::rpc(const Rpc &UNUSED(R))\n"
 		"GeoCal::VicarLiteFile::rpc\n"
 		""},
 	 { "VicarLiteFile__v_rsm", _wrap_VicarLiteFile__v_rsm, METH_VARARGS, "\n"
+		"VicarLiteFile__v_rsm(VicarLiteFile self) -> boost::shared_ptr< GeoCal::Rsm >\n"
+		"VicarLiteFile__v_rsm(VicarLiteFile self, boost::shared_ptr< GeoCal::Rsm > const & V)\n"
 		"\n"
-		"void GeoCal::VicarLiteFile::rsm(const boost::shared_ptr< Rsm > &UNUSED(R))\n"
 		"GeoCal::VicarLiteFile::rsm\n"
 		""},
-	 { "VicarLiteFile___str__", _wrap_VicarLiteFile___str__, METH_O, NULL},
+	 { "VicarLiteFile___str__", _wrap_VicarLiteFile___str__, METH_O, "VicarLiteFile___str__(VicarLiteFile self) -> std::string"},
 	 { "VicarLiteFile__v_is_compressed", _wrap_VicarLiteFile__v_is_compressed, METH_O, "\n"
+		"VicarLiteFile__v_is_compressed(VicarLiteFile self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteFile::is_compressed() const\n"
 		"GeoCal::VicarLiteFile::is_compressed\n"
-		"Indicate if the file is compressed.\n"
-		"If it is, we can't actually read the data but we can still read all of\n"
-		"the labels. \n"
+		"Indicate if the file is compressed.  \n"
+		"\n"
+		"If it is, we can't actually read the data but we can still read all of the\n"
+		"labels.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile_label_string", _wrap_VicarLiteFile_label_string, METH_VARARGS, "\n"
+		"VicarLiteFile_label_string(VicarLiteFile self, std::string const & N) -> std::string\n"
 		"\n"
-		"std::string GeoCal::VicarLiteFile::label_string(const std::string &F, const std::string &Property=\"\") const\n"
 		"GeoCal::VicarLiteFile::label_string\n"
-		"Non template form of label, useful in some contexts.\n"
+		"Non template form of label, useful in some contexts.  \n"
 		"\n"
 		""},
-	 { "VicarLiteFile_label_list", _wrap_VicarLiteFile_label_list, METH_O, NULL},
+	 { "VicarLiteFile_label_list", _wrap_VicarLiteFile_label_list, METH_O, "VicarLiteFile_label_list(VicarLiteFile self) -> vector_string"},
 	 { "VicarLiteFile_swigregister", VicarLiteFile_swigregister, METH_O, NULL},
 	 { "VicarLiteFile_swiginit", VicarLiteFile_swiginit, METH_VARARGS, NULL},
 	 { "new_VicarLiteRasterImage", _wrap_new_VicarLiteRasterImage, METH_VARARGS, "\n"
+		"VicarLiteRasterImage(std::string const & Fname, int Band_id=1, GeoCal::VicarLiteRasterImage::access_type Access=READ, int Number_tile_line=-1, int Number_tile_sample=-1, bool Force_area_pixel=False)\n"
+		"VicarLiteRasterImage(std::string const & Fname, MapInfo Mi, int Band_id=1, GeoCal::VicarLiteRasterImage::access_type Access=READ, int Number_tile_line=-1, int Number_tile_sample=-1, bool Force_area_pixel=False)\n"
 		"\n"
-		"GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type\n"
-		"Access=VicarLiteFile::READ, int Number_tile_line=-1, int\n"
-		"Number_tile_sample=-1, bool Force_area_pixel=false)\n"
 		"GeoCal::VicarLiteRasterImage::VicarLiteRasterImage\n"
-		"Constructor.\n"
-		"The Force_area_pixel forces the file to be treated as \"pixel as\n"
-		"area\" rather than \"pixel as point\". This is really just meant as a\n"
-		"work around for the SRTM data, which incorrectly labels the data as\n"
-		"\"point\" rather than \"area\". Since this is a 15 meter difference,\n"
-		"it matters for many applications. Most users should just ignore this\n"
-		"value. \n"
+		"Constructor.  \n"
+		"\n"
+		"The Force_area_pixel forces the file to be treated as \"pixel as area\" rather\n"
+		"than \"pixel as point\". This is really just meant as a work around for the SRTM\n"
+		"data, which incorrectly labels the data as \"point\" rather than \"area\". Since\n"
+		"this is a 15 meter difference, it matters for many applications. Most users\n"
+		"should just ignore this value.  \n"
+		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_file", _wrap_VicarLiteRasterImage__v_file, METH_O, "\n"
+		"VicarLiteRasterImage__v_file(VicarLiteRasterImage self) -> boost::shared_ptr< GeoCal::VicarLiteFile >\n"
 		"\n"
-		"boost::shared_ptr< VicarLiteFile > GeoCal::VicarLiteRasterImage::file_ptr() const\n"
 		"GeoCal::VicarLiteRasterImage::file_ptr\n"
 		""},
 	 { "VicarLiteRasterImage__v_is_compressed", _wrap_VicarLiteRasterImage__v_is_compressed, METH_O, "\n"
+		"VicarLiteRasterImage__v_is_compressed(VicarLiteRasterImage self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteRasterImage::is_compressed() const\n"
 		"GeoCal::VicarLiteRasterImage::is_compressed\n"
-		"Indicate if the file is compressed.\n"
-		"If it is, we can't actually read the data but we can still read all of\n"
-		"the labels. \n"
+		"Indicate if the file is compressed.  \n"
+		"\n"
+		"If it is, we can't actually read the data but we can still read all of the\n"
+		"labels.  \n"
+		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_band_id", _wrap_VicarLiteRasterImage__v_band_id, METH_O, "\n"
+		"VicarLiteRasterImage__v_band_id(VicarLiteRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteRasterImage::band_id() const\n"
 		"GeoCal::VicarLiteRasterImage::band_id\n"
-		"Return band number. This is 1 based (like GDAL).\n"
+		"Return band number. This is 1 based (like GDAL).  \n"
 		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_force_map_info", _wrap_VicarLiteRasterImage__v_force_map_info, METH_O, "\n"
+		"VicarLiteRasterImage__v_force_map_info(VicarLiteRasterImage self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteRasterImage::force_map_info() const\n"
 		"GeoCal::VicarLiteRasterImage::force_map_info\n"
-		"Marker to force a map_info in python pickle.\n"
-		"This is a work around for map info that VICAR doesn't support writing.\n"
+		"Marker to force a map_info in python pickle.  \n"
+		"\n"
+		"This is a work around for map info that VICAR doesn't support writing.  \n"
 		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_has_igc_glas_gfm", _wrap_VicarLiteRasterImage__v_has_igc_glas_gfm, METH_O, "\n"
+		"VicarLiteRasterImage__v_has_igc_glas_gfm(VicarLiteRasterImage self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteRasterImage::has_igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteRasterImage::has_igc_glas_gfm\n"
 		""},
 	 { "VicarLiteRasterImage__v_igc_glas_gfm", _wrap_VicarLiteRasterImage__v_igc_glas_gfm, METH_O, "\n"
+		"VicarLiteRasterImage__v_igc_glas_gfm(VicarLiteRasterImage self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > GeoCal::VicarLiteRasterImage::igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteRasterImage::igc_glas_gfm\n"
 		""},
 	 { "delete_VicarLiteRasterImage", _wrap_delete_VicarLiteRasterImage, METH_O, "\n"
+		"delete_VicarLiteRasterImage(VicarLiteRasterImage self)\n"
 		"\n"
-		"virtual GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage()\n"
 		"GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage\n"
 		""},
 	 { "VicarLiteRasterImage_swigregister", VicarLiteRasterImage_swigregister, METH_O, NULL},
 	 { "VicarLiteRasterImage_swiginit", VicarLiteRasterImage_swiginit, METH_VARARGS, NULL},
 	 { "new_VicarLiteDem", _wrap_new_VicarLiteDem, METH_VARARGS, "\n"
+		"VicarLiteDem(std::string const & Fname, bool Outside_dem_is_error=False, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new NoDatum()), int Band=0)\n"
 		"\n"
-		"GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const\n"
-		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"NoDatum()), int Band_id=1)\n"
 		"GeoCal::VicarLiteDem::VicarLiteDem\n"
-		"Constructor.\n"
-		"If Outside_dem_is_error is true, then calls for Dem data outside of\n"
-		"the range of the Dem cause an exception to be thrown, otherwise we\n"
-		"just return a height of 0.\n"
+		"Constructor.  \n"
 		"\n"
-		"Probably should have the Naif_code stored as metadata in the file, but\n"
-		"for now we just explicitly pass this in. \n"
+		"If Outside_dem_is_error is true, then calls for Dem data outside of the range of\n"
+		"the Dem cause an exception to be thrown, otherwise we just return a height of 0.  \n"
+		"\n"
+		"Probably should have the Naif_code stored as metadata in the file, but for now\n"
+		"we just explicitly pass this in.  \n"
+		"\n"
 		""},
 	 { "VicarLiteDem__v_file", _wrap_VicarLiteDem__v_file, METH_O, "\n"
+		"VicarLiteDem__v_file(VicarLiteDem self) -> boost::shared_ptr< GeoCal::VicarLiteFile >\n"
 		"\n"
-		"boost::shared_ptr< VicarLiteFile > GeoCal::VicarLiteDem::file_ptr() const\n"
 		"GeoCal::VicarLiteDem::file_ptr\n"
 		""},
 	 { "VicarLiteDem_elevation", _wrap_VicarLiteDem_elevation, METH_VARARGS, "\n"
+		"VicarLiteDem_elevation(VicarLiteDem self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"virtual double GeoCal::VicarLiteDem::elevation(int Y_index, int X_index) const\n"
 		"GeoCal::VicarLiteDem::elevation\n"
-		"Return height in meters relative to datum().\n"
+		"Return height in meters relative to datum().  \n"
 		"\n"
 		""},
 	 { "VicarLiteDem__v_band", _wrap_VicarLiteDem__v_band, METH_O, "\n"
+		"VicarLiteDem__v_band(VicarLiteDem self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteDem::band() const\n"
 		"GeoCal::VicarLiteDem::band\n"
-		"Return band number.\n"
+		"Return band number.  \n"
 		"\n"
 		""},
 	 { "delete_VicarLiteDem", _wrap_delete_VicarLiteDem, METH_O, "\n"
+		"delete_VicarLiteDem(VicarLiteDem self)\n"
 		"\n"
-		"virtual GeoCal::VicarLiteDem::~VicarLiteDem()\n"
 		"GeoCal::VicarLiteDem::~VicarLiteDem\n"
 		""},
 	 { "VicarLiteDem_swigregister", VicarLiteDem_swigregister, METH_O, NULL},
@@ -10696,263 +10711,278 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarLiteFile", _wrap_new_VicarLiteFile, METH_VARARGS, "\n"
+		"VicarLiteFile(std::string const & Fname, GeoCal::VicarLiteFile::access_type Access=READ, bool Force_area_pixel=False)\n"
+		"new_VicarLiteFile(std::string const & Fname, int Number_line, int Number_sample, std::string const & Type) -> VicarLiteFile\n"
 		"\n"
-		"GeoCal::VicarLiteFile::VicarLiteFile(const std::string &Fname, int Number_line, int Number_sample, const\n"
-		"std::string &Type=\"BYTE\")\n"
 		"GeoCal::VicarLiteFile::VicarLiteFile\n"
 		""},
 	 { "delete_VicarLiteFile", _wrap_delete_VicarLiteFile, METH_O, "\n"
+		"delete_VicarLiteFile(VicarLiteFile self)\n"
 		"\n"
-		"virtual GeoCal::VicarLiteFile::~VicarLiteFile()\n"
 		"GeoCal::VicarLiteFile::~VicarLiteFile\n"
 		""},
 	 { "VicarLiteFile__v_access", _wrap_VicarLiteFile__v_access, METH_O, "\n"
+		"_v_access(VicarLiteFile self) -> GeoCal::VicarLiteFile::access_type\n"
 		"\n"
-		"access_type GeoCal::VicarLiteFile::access() const\n"
 		"GeoCal::VicarLiteFile::access\n"
-		"Access type of file.\n"
+		"Access type of file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_force_area_pixel", _wrap_VicarLiteFile__v_force_area_pixel, METH_O, "\n"
+		"_v_force_area_pixel(VicarLiteFile self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteFile::force_area_pixel() const\n"
 		"GeoCal::VicarLiteFile::force_area_pixel\n"
-		"If true, then force the file to be treated as \"pixel is area\".\n"
-		"This is really just meant as a work around for the SRTM data, which\n"
-		"incorrectly labels the data as \"point\" rather than \"area\". Since\n"
-		"this is a 15 meter difference, it matters for many applications. Most\n"
-		"users should just ignore this value. \n"
+		"If true, then force the file to be treated as \"pixel is area\".  \n"
+		"\n"
+		"This is really just meant as a work around for the SRTM data, which incorrectly\n"
+		"labels the data as \"point\" rather than \"area\". Since this is a 15 meter\n"
+		"difference, it matters for many applications. Most users should just ignore this\n"
+		"value.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile__v_data_offset", _wrap_VicarLiteFile__v_data_offset, METH_O, "\n"
+		"_v_data_offset(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::data_offset() const\n"
 		"GeoCal::VicarLiteFile::data_offset\n"
-		"Offset to where the data starts.\n"
+		"Offset to where the data starts.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_file_name", _wrap_VicarLiteFile__v_file_name, METH_O, "\n"
+		"_v_file_name(VicarLiteFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::VicarLiteFile::file_name() const\n"
 		"GeoCal::VicarLiteFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile_is_vicar_file", _wrap_VicarLiteFile_is_vicar_file, METH_O, "\n"
+		"is_vicar_file(std::string const & Fname) -> bool\n"
 		"\n"
-		"bool VicarLiteFile::is_vicar_file(const std::string &Fname)\n"
 		"GeoCal::VicarLiteFile::is_vicar_file\n"
-		"Determine if a given file is a VICAR file or not.\n"
-		"This looks for the first few characters of the file being \"LBLSIZE=\"\n"
+		"Determine if a given file is a VICAR file or not.  \n"
+		"\n"
+		"This looks for the first few characters of the file being \"LBLSIZE=\"  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_has_igc_glas_gfm", _wrap_VicarLiteFile__v_has_igc_glas_gfm, METH_O, "\n"
+		"_v_has_igc_glas_gfm(VicarLiteFile self) -> bool\n"
 		"\n"
-		"bool VicarLiteFile::has_igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteFile::has_igc_glas_gfm\n"
-		"Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE\n"
-		"label in it, indicating it has GLAS/GFM information.\n"
+		"Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE label in\n"
+		"it, indicating it has GLAS/GFM information.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_igc_glas_gfm", _wrap_VicarLiteFile__v_igc_glas_gfm, METH_O, "\n"
+		"_v_igc_glas_gfm(VicarLiteFile self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > VicarLiteFile::igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteFile::igc_glas_gfm\n"
-		"Read metadata for GLAS/GFM.\n"
+		"Read metadata for GLAS/GFM.  \n"
+		"\n"
 		"Note we store this as a separate detached file in either NITF or boost\n"
-		"serialization XML format. The VICAR file then has a pointer to the\n"
-		"file. The pointer just has a file name, it is assumed the file is in\n"
-		"the same directory as the VICAR file. \n"
+		"serialization XML format. The VICAR file then has a pointer to the file. The\n"
+		"pointer just has a file name, it is assumed the file is in the same directory as\n"
+		"the VICAR file.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile__v_number_line", _wrap_VicarLiteFile__v_number_line, METH_O, "\n"
+		"_v_number_line(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_line() const\n"
 		"GeoCal::VicarLiteFile::number_line\n"
-		"Number of lines in file.\n"
+		"Number of lines in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_sample", _wrap_VicarLiteFile__v_number_sample, METH_O, "\n"
+		"_v_number_sample(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_sample() const\n"
 		"GeoCal::VicarLiteFile::number_sample\n"
-		"Number of samples in file.\n"
+		"Number of samples in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_band", _wrap_VicarLiteFile__v_number_band, METH_O, "\n"
+		"_v_number_band(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_band() const\n"
 		"GeoCal::VicarLiteFile::number_band\n"
-		"Number of bands in file.\n"
+		"Number of bands in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_line_binary", _wrap_VicarLiteFile__v_number_line_binary, METH_O, "\n"
+		"_v_number_line_binary(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_line_binary() const\n"
 		"GeoCal::VicarLiteFile::number_line_binary\n"
-		"Number of lines of binary data before the start of the image.\n"
+		"Number of lines of binary data before the start of the image.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_number_byte_binary", _wrap_VicarLiteFile__v_number_byte_binary, METH_O, "\n"
+		"_v_number_byte_binary(VicarLiteFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteFile::number_byte_binary() const\n"
 		"GeoCal::VicarLiteFile::number_byte_binary\n"
-		"Number of bytes of binary data before the start of each line.\n"
+		"Number of bytes of binary data before the start of each line.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_type", _wrap_VicarLiteFile__v_type, METH_O, "\n"
+		"_v_type(VicarLiteFile self) -> GeoCal::VicarLiteFile::data_type\n"
 		"\n"
-		"data_type GeoCal::VicarLiteFile::type() const\n"
 		"GeoCal::VicarLiteFile::type\n"
-		"Type of data in file.\n"
+		"Type of data in file.  \n"
 		"\n"
 		""},
 	 { "VicarLiteFile__v_map_info", _wrap_VicarLiteFile__v_map_info, METH_VARARGS, "\n"
+		"_v_map_info(VicarLiteFile self) -> MapInfo\n"
+		"_v_map_info(VicarLiteFile self, MapInfo V)\n"
 		"\n"
-		"void GeoCal::VicarLiteFile::map_info(const MapInfo &M)\n"
 		"GeoCal::VicarLiteFile::map_info\n"
 		""},
 	 { "VicarLiteFile__v_rpc", _wrap_VicarLiteFile__v_rpc, METH_VARARGS, "\n"
+		"_v_rpc(VicarLiteFile self) -> Rpc\n"
+		"_v_rpc(VicarLiteFile self, Rpc V)\n"
 		"\n"
-		"void GeoCal::VicarLiteFile::rpc(const Rpc &UNUSED(R))\n"
 		"GeoCal::VicarLiteFile::rpc\n"
 		""},
 	 { "VicarLiteFile__v_rsm", _wrap_VicarLiteFile__v_rsm, METH_VARARGS, "\n"
+		"_v_rsm(VicarLiteFile self) -> boost::shared_ptr< GeoCal::Rsm >\n"
+		"_v_rsm(VicarLiteFile self, boost::shared_ptr< GeoCal::Rsm > const & V)\n"
 		"\n"
-		"void GeoCal::VicarLiteFile::rsm(const boost::shared_ptr< Rsm > &UNUSED(R))\n"
 		"GeoCal::VicarLiteFile::rsm\n"
 		""},
-	 { "VicarLiteFile___str__", _wrap_VicarLiteFile___str__, METH_O, NULL},
+	 { "VicarLiteFile___str__", _wrap_VicarLiteFile___str__, METH_O, "__str__(VicarLiteFile self) -> std::string"},
 	 { "VicarLiteFile__v_is_compressed", _wrap_VicarLiteFile__v_is_compressed, METH_O, "\n"
+		"_v_is_compressed(VicarLiteFile self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteFile::is_compressed() const\n"
 		"GeoCal::VicarLiteFile::is_compressed\n"
-		"Indicate if the file is compressed.\n"
-		"If it is, we can't actually read the data but we can still read all of\n"
-		"the labels. \n"
+		"Indicate if the file is compressed.  \n"
+		"\n"
+		"If it is, we can't actually read the data but we can still read all of the\n"
+		"labels.  \n"
+		"\n"
 		""},
 	 { "VicarLiteFile_label_string", _wrap_VicarLiteFile_label_string, METH_VARARGS, "\n"
+		"label_string(VicarLiteFile self, std::string const & N) -> std::string\n"
 		"\n"
-		"std::string GeoCal::VicarLiteFile::label_string(const std::string &F, const std::string &Property=\"\") const\n"
 		"GeoCal::VicarLiteFile::label_string\n"
-		"Non template form of label, useful in some contexts.\n"
+		"Non template form of label, useful in some contexts.  \n"
 		"\n"
 		""},
-	 { "VicarLiteFile_label_list", _wrap_VicarLiteFile_label_list, METH_O, NULL},
+	 { "VicarLiteFile_label_list", _wrap_VicarLiteFile_label_list, METH_O, "label_list(VicarLiteFile self) -> vector_string"},
 	 { "VicarLiteFile_swigregister", VicarLiteFile_swigregister, METH_O, NULL},
 	 { "VicarLiteFile_swiginit", VicarLiteFile_swiginit, METH_VARARGS, NULL},
 	 { "new_VicarLiteRasterImage", _wrap_new_VicarLiteRasterImage, METH_VARARGS, "\n"
+		"VicarLiteRasterImage(std::string const & Fname, int Band_id=1, GeoCal::VicarLiteRasterImage::access_type Access=READ, int Number_tile_line=-1, int Number_tile_sample=-1, bool Force_area_pixel=False)\n"
+		"VicarLiteRasterImage(std::string const & Fname, MapInfo Mi, int Band_id=1, GeoCal::VicarLiteRasterImage::access_type Access=READ, int Number_tile_line=-1, int Number_tile_sample=-1, bool Force_area_pixel=False)\n"
 		"\n"
-		"GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type\n"
-		"Access=VicarLiteFile::READ, int Number_tile_line=-1, int\n"
-		"Number_tile_sample=-1, bool Force_area_pixel=false)\n"
 		"GeoCal::VicarLiteRasterImage::VicarLiteRasterImage\n"
-		"Constructor.\n"
-		"The Force_area_pixel forces the file to be treated as \"pixel as\n"
-		"area\" rather than \"pixel as point\". This is really just meant as a\n"
-		"work around for the SRTM data, which incorrectly labels the data as\n"
-		"\"point\" rather than \"area\". Since this is a 15 meter difference,\n"
-		"it matters for many applications. Most users should just ignore this\n"
-		"value. \n"
+		"Constructor.  \n"
+		"\n"
+		"The Force_area_pixel forces the file to be treated as \"pixel as area\" rather\n"
+		"than \"pixel as point\". This is really just meant as a work around for the SRTM\n"
+		"data, which incorrectly labels the data as \"point\" rather than \"area\". Since\n"
+		"this is a 15 meter difference, it matters for many applications. Most users\n"
+		"should just ignore this value.  \n"
+		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_file", _wrap_VicarLiteRasterImage__v_file, METH_O, "\n"
+		"_v_file(VicarLiteRasterImage self) -> boost::shared_ptr< GeoCal::VicarLiteFile >\n"
 		"\n"
-		"boost::shared_ptr< VicarLiteFile > GeoCal::VicarLiteRasterImage::file_ptr() const\n"
 		"GeoCal::VicarLiteRasterImage::file_ptr\n"
 		""},
 	 { "VicarLiteRasterImage__v_is_compressed", _wrap_VicarLiteRasterImage__v_is_compressed, METH_O, "\n"
+		"_v_is_compressed(VicarLiteRasterImage self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteRasterImage::is_compressed() const\n"
 		"GeoCal::VicarLiteRasterImage::is_compressed\n"
-		"Indicate if the file is compressed.\n"
-		"If it is, we can't actually read the data but we can still read all of\n"
-		"the labels. \n"
+		"Indicate if the file is compressed.  \n"
+		"\n"
+		"If it is, we can't actually read the data but we can still read all of the\n"
+		"labels.  \n"
+		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_band_id", _wrap_VicarLiteRasterImage__v_band_id, METH_O, "\n"
+		"_v_band_id(VicarLiteRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteRasterImage::band_id() const\n"
 		"GeoCal::VicarLiteRasterImage::band_id\n"
-		"Return band number. This is 1 based (like GDAL).\n"
+		"Return band number. This is 1 based (like GDAL).  \n"
 		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_force_map_info", _wrap_VicarLiteRasterImage__v_force_map_info, METH_O, "\n"
+		"_v_force_map_info(VicarLiteRasterImage self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteRasterImage::force_map_info() const\n"
 		"GeoCal::VicarLiteRasterImage::force_map_info\n"
-		"Marker to force a map_info in python pickle.\n"
-		"This is a work around for map info that VICAR doesn't support writing.\n"
+		"Marker to force a map_info in python pickle.  \n"
+		"\n"
+		"This is a work around for map info that VICAR doesn't support writing.  \n"
 		"\n"
 		""},
 	 { "VicarLiteRasterImage__v_has_igc_glas_gfm", _wrap_VicarLiteRasterImage__v_has_igc_glas_gfm, METH_O, "\n"
+		"_v_has_igc_glas_gfm(VicarLiteRasterImage self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarLiteRasterImage::has_igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteRasterImage::has_igc_glas_gfm\n"
 		""},
 	 { "VicarLiteRasterImage__v_igc_glas_gfm", _wrap_VicarLiteRasterImage__v_igc_glas_gfm, METH_O, "\n"
+		"_v_igc_glas_gfm(VicarLiteRasterImage self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > GeoCal::VicarLiteRasterImage::igc_glas_gfm() const\n"
 		"GeoCal::VicarLiteRasterImage::igc_glas_gfm\n"
 		""},
 	 { "delete_VicarLiteRasterImage", _wrap_delete_VicarLiteRasterImage, METH_O, "\n"
+		"delete_VicarLiteRasterImage(VicarLiteRasterImage self)\n"
 		"\n"
-		"virtual GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage()\n"
 		"GeoCal::VicarLiteRasterImage::~VicarLiteRasterImage\n"
 		""},
 	 { "VicarLiteRasterImage_swigregister", VicarLiteRasterImage_swigregister, METH_O, NULL},
 	 { "VicarLiteRasterImage_swiginit", VicarLiteRasterImage_swiginit, METH_VARARGS, NULL},
 	 { "new_VicarLiteDem", _wrap_new_VicarLiteDem, METH_VARARGS, "\n"
+		"VicarLiteDem(std::string const & Fname, bool Outside_dem_is_error=False, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new NoDatum()), int Band=0)\n"
 		"\n"
-		"GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const\n"
-		"boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"NoDatum()), int Band_id=1)\n"
 		"GeoCal::VicarLiteDem::VicarLiteDem\n"
-		"Constructor.\n"
-		"If Outside_dem_is_error is true, then calls for Dem data outside of\n"
-		"the range of the Dem cause an exception to be thrown, otherwise we\n"
-		"just return a height of 0.\n"
+		"Constructor.  \n"
 		"\n"
-		"Probably should have the Naif_code stored as metadata in the file, but\n"
-		"for now we just explicitly pass this in. \n"
+		"If Outside_dem_is_error is true, then calls for Dem data outside of the range of\n"
+		"the Dem cause an exception to be thrown, otherwise we just return a height of 0.  \n"
+		"\n"
+		"Probably should have the Naif_code stored as metadata in the file, but for now\n"
+		"we just explicitly pass this in.  \n"
+		"\n"
 		""},
 	 { "VicarLiteDem__v_file", _wrap_VicarLiteDem__v_file, METH_O, "\n"
+		"_v_file(VicarLiteDem self) -> boost::shared_ptr< GeoCal::VicarLiteFile >\n"
 		"\n"
-		"boost::shared_ptr< VicarLiteFile > GeoCal::VicarLiteDem::file_ptr() const\n"
 		"GeoCal::VicarLiteDem::file_ptr\n"
 		""},
 	 { "VicarLiteDem_elevation", _wrap_VicarLiteDem_elevation, METH_VARARGS, "\n"
+		"elevation(VicarLiteDem self, int Y_index, int X_index) -> double\n"
 		"\n"
-		"virtual double GeoCal::VicarLiteDem::elevation(int Y_index, int X_index) const\n"
 		"GeoCal::VicarLiteDem::elevation\n"
-		"Return height in meters relative to datum().\n"
+		"Return height in meters relative to datum().  \n"
 		"\n"
 		""},
 	 { "VicarLiteDem__v_band", _wrap_VicarLiteDem__v_band, METH_O, "\n"
+		"_v_band(VicarLiteDem self) -> int\n"
 		"\n"
-		"int GeoCal::VicarLiteDem::band() const\n"
 		"GeoCal::VicarLiteDem::band\n"
-		"Return band number.\n"
+		"Return band number.  \n"
 		"\n"
 		""},
 	 { "delete_VicarLiteDem", _wrap_delete_VicarLiteDem, METH_O, "\n"
+		"delete_VicarLiteDem(VicarLiteDem self)\n"
 		"\n"
-		"virtual GeoCal::VicarLiteDem::~VicarLiteDem()\n"
 		"GeoCal::VicarLiteDem::~VicarLiteDem\n"
 		""},
 	 { "VicarLiteDem_swigregister", VicarLiteDem_swigregister, METH_O, NULL},

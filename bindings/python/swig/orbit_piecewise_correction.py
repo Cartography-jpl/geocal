@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_piecewise_correction.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_piecewise_correction:
 _orbit_piecewise_correction.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_piecewise_correction.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,16 +145,18 @@ import geocal_swig.look_vector
 class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     r"""
 
-    This class gives an orbit that tries to correct errors in another
-    underlying orbit.
+
+    This class gives an orbit that tries to correct errors in another underlying
+    orbit.  
 
     The correction is a piecewise correction to the position, in local ENU
-    coordinate system.
+    coordinate system.  
 
-    The underlying orbit should return a QuaternionOrbitData orbit data,
-    since this is currently the only type supported.
+    The underlying orbit should return a QuaternionOrbitData orbit data, since this
+    is currently the only type supported.  
 
-    C++ includes: orbit_piecewise_correction.h 
+    C++ includes: orbit_piecewise_correction.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -159,10 +164,8 @@ class OrbitPiecewiseCorrection(geocal_swig.orbit_correction.OrbitCorrection):
 
     def __init__(self, Orb_uncorr, E_corr, N_corr, U_corr):
         r"""
+        __init__(OrbitPiecewiseCorrection self, boost::shared_ptr< GeoCal::Orbit > const Orb_uncorr, boost::shared_ptr< GeoCal::PiecewiseLinear > const & E_corr, boost::shared_ptr< GeoCal::PiecewiseLinear > const & N_corr, boost::shared_ptr< GeoCal::PiecewiseLinear > const & U_corr) -> OrbitPiecewiseCorrection
 
-        GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection(const boost::shared_ptr< Orbit > Orb_uncorr, const boost::shared_ptr<
-        PiecewiseLinear > &E_corr, const boost::shared_ptr< PiecewiseLinear >
-        &N_corr, const boost::shared_ptr< PiecewiseLinear > &U_corr)
         GeoCal::OrbitPiecewiseCorrection::OrbitPiecewiseCorrection
         """
         _orbit_piecewise_correction.OrbitPiecewiseCorrection_swiginit(self, _orbit_piecewise_correction.new_OrbitPiecewiseCorrection(Orb_uncorr, E_corr, N_corr, U_corr))

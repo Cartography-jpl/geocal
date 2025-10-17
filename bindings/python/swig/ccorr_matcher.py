@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ccorr_matcher.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ccorr_matcher:
 _ccorr_matcher.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ccorr_matcher.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,11 +143,13 @@ import geocal_swig.geocal_exception
 class CcorrMatcher(geocal_swig.image_matcher.ImageMatcher):
     r"""
 
-    This class performs image matching.
 
-    It does a normalized cross correlation match.
+    This class performs image matching.  
 
-    C++ includes: ccorr_matcher.h 
+    It does a normalized cross correlation match.  
+
+    C++ includes: ccorr_matcher.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,9 +157,8 @@ class CcorrMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     def __init__(self, Target_nline=37, Target_nsamp=37, Template_nline=9, Template_nsamp=9, Min_ccorr=0.3, Min_variance=0):
         r"""
+        __init__(CcorrMatcher self, int Target_nline=37, int Target_nsamp=37, int Template_nline=9, int Template_nsamp=9, double Min_ccorr=0.3, double Min_variance=0) -> CcorrMatcher
 
-        CcorrMatcher::CcorrMatcher(int Target_nline=37, int Target_nsamp=37, int Template_nline=9, int
-        Template_nsamp=9, double Min_ccorr=0.3, double Min_variance=0)
         GeoCal::CcorrMatcher::CcorrMatcher
         """
         _ccorr_matcher.CcorrMatcher_swiginit(self, _ccorr_matcher.new_CcorrMatcher(Target_nline, Target_nsamp, Template_nline, Template_nsamp, Min_ccorr, Min_variance))

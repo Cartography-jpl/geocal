@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_temp_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_temp_file:
 _geocal_temp_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_temp_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,11 +140,13 @@ import geocal_swig.generic_object
 class GeoCalTempFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Simple class for creating a temporary file.
 
-    The file gets automatically removed when this class goes out of scope.
+    Simple class for creating a temporary file.  
 
-    C++ includes: geocal_temp_file.h 
+    The file gets automatically removed when this class goes out of scope.  
+
+    C++ includes: geocal_temp_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -149,8 +154,8 @@ class GeoCalTempFile(geocal_swig.generic_object.GenericObject):
 
     def __init__(self):
         r"""
+        __init__(GeoCalTempFile self) -> GeoCalTempFile
 
-        GeoCal::GeoCalTempFile::GeoCalTempFile()
         GeoCal::GeoCalTempFile::GeoCalTempFile
         """
         _geocal_temp_file.GeoCalTempFile_swiginit(self, _geocal_temp_file.new_GeoCalTempFile())

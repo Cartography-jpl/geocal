@@ -10550,232 +10550,252 @@ SWIGINTERN PyObject *RsmGrid_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject *
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmGrid", _wrap_new_RsmGrid, METH_VARARGS, "\n"
+		"RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=False, int Total_number_row_digit=11, int Total_number_col_digit=11, int Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int Row_section_number=1, int Col_section_number=1, std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\")\n"
 		"\n"
-		"GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false, int\n"
-		"Total_number_row_digit=11, int Total_number_col_digit=11, int\n"
-		"Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int\n"
-		"Row_section_number=1, int Col_section_number=1, const std::string\n"
-		"&Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\")\n"
 		"GeoCal::RsmGrid::RsmGrid\n"
 		""},
 	 { "RsmGrid_fit_corr", _wrap_RsmGrid_fit_corr, METH_VARARGS, "\n"
+		"RsmGrid_fit_corr(RsmGrid self, ImageGroundConnection IGc, CoordinateConverter Cconv, RsmBase Rb)\n"
 		"\n"
-		"void RsmGrid::fit_corr(const ImageGroundConnection &IGc, const CoordinateConverter &Cconv,\n"
-		"const RsmBase &Rb)\n"
 		"GeoCal::RsmGrid::fit_corr\n"
-		"Generate a RsmGrid that gives a correction to another RsmBase.\n"
+		"Generate a RsmGrid that gives a correction to another RsmBase.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_ignore_igc_error_in_fit", _wrap_RsmGrid__v_ignore_igc_error_in_fit, METH_VARARGS, "\n"
+		"RsmGrid__v_ignore_igc_error_in_fit(RsmGrid self) -> bool\n"
+		"RsmGrid__v_ignore_igc_error_in_fit(RsmGrid self, bool const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::ignore_igc_error_in_fit(bool V)\n"
 		"GeoCal::RsmGrid::ignore_igc_error_in_fit\n"
-		"If true, ignore igc errors in fit.\n"
+		"If true, ignore igc errors in fit.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_line_grid", _wrap_RsmGrid__v_line_grid, METH_O, "\n"
+		"RsmGrid__v_line_grid(RsmGrid self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< double, 3 > & GeoCal::RsmGrid::line_grid() const\n"
 		"GeoCal::RsmGrid::line_grid\n"
-		"Grid of Line values.\n"
+		"Grid of Line values.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_sample_grid", _wrap_RsmGrid__v_sample_grid, METH_O, "\n"
+		"RsmGrid__v_sample_grid(RsmGrid self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< double, 3 > & GeoCal::RsmGrid::sample_grid() const\n"
 		"GeoCal::RsmGrid::sample_grid\n"
-		"Grid of sample values.\n"
+		"Grid of sample values.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_image_coordinate", _wrap_RsmGrid_image_coordinate, METH_VARARGS, "\n"
+		"RsmGrid_image_coordinate(RsmGrid self, double X, double Y, double Z, bool Extrapolate_ok) -> ImageCoordinate\n"
+		"RsmGrid_image_coordinate(RsmGrid self, double X, double Y, double Z) -> ImageCoordinate\n"
+		"RsmGrid_image_coordinate(RsmGrid self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z, bool Extrapolate_ok) -> BlitzArray_double_2\n"
+		"RsmGrid_image_coordinate(RsmGrid self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"RsmGrid_image_coordinate(RsmGrid self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z, bool Extrapolate_ok) -> BlitzArray_double_3\n"
+		"RsmGrid_image_coordinate(RsmGrid self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_3\n"
+		"RsmGrid_image_coordinate(RsmGrid self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z, bool Extrapolate_ok) -> BlitzArray_double_4\n"
+		"RsmGrid_image_coordinate(RsmGrid self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_4\n"
 		"\n"
-		"ImageCoordinate RsmGrid::image_coordinate(double X, double Y, double Z, bool Extrapolate_ok) const\n"
 		"GeoCal::RsmGrid::image_coordinate\n"
-		"Apply the grid to the given X, Y, and Z value.\n"
+		"Apply the grid to the given X, Y, and Z value.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_image_coordinate_jacobian", _wrap_RsmGrid_image_coordinate_jacobian, METH_VARARGS, "\n"
+		"RsmGrid_image_coordinate_jacobian(RsmGrid self, double X, double Y, double Z, bool Extrapolate_ok) -> BlitzArray_double_2\n"
+		"RsmGrid_image_coordinate_jacobian(RsmGrid self, double X, double Y, double Z) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > RsmGrid::image_coordinate_jacobian(double X, double Y, double Z, bool Extrapolate_ok) const\n"
 		"GeoCal::RsmGrid::image_coordinate_jacobian\n"
-		"This the jacobian of the line, sample with respect to X, Y, Z.\n"
-		"This is a 2x3 matrix. \n"
+		"This the jacobian of the line, sample with respect to X, Y, Z.  \n"
+		"\n"
+		"This is a 2x3 matrix.  \n"
+		"\n"
 		""},
 	 { "RsmGrid_number_x", _wrap_RsmGrid_number_x, METH_VARARGS, "\n"
+		"RsmGrid_number_x(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_x(int Zindex) const\n"
 		"GeoCal::RsmGrid::number_x\n"
-		"Number of X values in grid.\n"
-		"This can potentially depend on the z axis value. \n"
+		"Number of X values in grid.  \n"
+		"\n"
+		"This can potentially depend on the z axis value.  \n"
+		"\n"
 		""},
 	 { "RsmGrid_number_y", _wrap_RsmGrid_number_y, METH_VARARGS, "\n"
+		"RsmGrid_number_y(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_y(int Zindex) const\n"
 		"GeoCal::RsmGrid::number_y\n"
-		"Number of Y values in grid.\n"
-		"This can potentially depend on the z axis value. \n"
+		"Number of Y values in grid.  \n"
+		"\n"
+		"This can potentially depend on the z axis value.  \n"
+		"\n"
 		""},
 	 { "RsmGrid_x_offset", _wrap_RsmGrid_x_offset, METH_VARARGS, "\n"
+		"RsmGrid_x_offset(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::x_offset(int Zindex) const\n"
 		"GeoCal::RsmGrid::x_offset\n"
-		"Offset in X pixels of particular z_index grid relative to the initial\n"
-		"grid.\n"
+		"Offset in X pixels of particular z_index grid relative to the initial grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_y_offset", _wrap_RsmGrid_y_offset, METH_VARARGS, "\n"
+		"RsmGrid_y_offset(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::y_offset(int Zindex) const\n"
 		"GeoCal::RsmGrid::y_offset\n"
-		"Offset in Y pixels of particular z_index grid relative to the initial\n"
-		"grid.\n"
+		"Offset in Y pixels of particular z_index grid relative to the initial grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_number_z", _wrap_RsmGrid__v_number_z, METH_O, "\n"
+		"RsmGrid__v_number_z(RsmGrid self) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_z() const\n"
 		"GeoCal::RsmGrid::number_z\n"
-		"Number of Z values in grid.\n"
+		"Number of Z values in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_x_start", _wrap_RsmGrid__v_x_start, METH_O, "\n"
+		"RsmGrid__v_x_start(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::x_start() const\n"
 		"GeoCal::RsmGrid::x_start\n"
-		"First X value in grid.\n"
-		"This is for the first index, use x_offset for other z index values. \n"
+		"First X value in grid.  \n"
+		"\n"
+		"This is for the first index, use x_offset for other z index values.  \n"
+		"\n"
 		""},
 	 { "RsmGrid__v_x_delta", _wrap_RsmGrid__v_x_delta, METH_O, "\n"
+		"RsmGrid__v_x_delta(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::x_delta() const\n"
 		"GeoCal::RsmGrid::x_delta\n"
-		"Spacing of X in grid.\n"
+		"Spacing of X in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_y_start", _wrap_RsmGrid__v_y_start, METH_O, "\n"
+		"RsmGrid__v_y_start(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::y_start() const\n"
 		"GeoCal::RsmGrid::y_start\n"
-		"First Y value in grid.\n"
+		"First Y value in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_y_delta", _wrap_RsmGrid__v_y_delta, METH_O, "\n"
+		"RsmGrid__v_y_delta(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::y_delta() const\n"
 		"GeoCal::RsmGrid::y_delta\n"
-		"Spacing of Y in grid.\n"
+		"Spacing of Y in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_z_start", _wrap_RsmGrid__v_z_start, METH_O, "\n"
+		"RsmGrid__v_z_start(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::z_start() const\n"
 		"GeoCal::RsmGrid::z_start\n"
-		"First Z value in grid.\n"
+		"First Z value in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_z_delta", _wrap_RsmGrid__v_z_delta, METH_O, "\n"
+		"RsmGrid__v_z_delta(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::z_delta() const\n"
 		"GeoCal::RsmGrid::z_delta\n"
-		"Spacing of Z in grid.\n"
+		"Spacing of Z in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_total_number_row_digit", _wrap_RsmGrid__v_total_number_row_digit, METH_VARARGS, "\n"
+		"RsmGrid__v_total_number_row_digit(RsmGrid self) -> int\n"
+		"RsmGrid__v_total_number_row_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::total_number_row_digit(int v)\n"
 		"GeoCal::RsmGrid::total_number_row_digit\n"
 		""},
 	 { "RsmGrid__v_total_number_col_digit", _wrap_RsmGrid__v_total_number_col_digit, METH_VARARGS, "\n"
+		"RsmGrid__v_total_number_col_digit(RsmGrid self) -> int\n"
+		"RsmGrid__v_total_number_col_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::total_number_col_digit(int v)\n"
 		"GeoCal::RsmGrid::total_number_col_digit\n"
 		""},
 	 { "RsmGrid__v_number_fractional_row_digit", _wrap_RsmGrid__v_number_fractional_row_digit, METH_VARARGS, "\n"
+		"RsmGrid__v_number_fractional_row_digit(RsmGrid self) -> int\n"
+		"RsmGrid__v_number_fractional_row_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::number_fractional_row_digit(int v)\n"
 		"GeoCal::RsmGrid::number_fractional_row_digit\n"
 		""},
 	 { "RsmGrid__v_number_fractional_col_digit", _wrap_RsmGrid__v_number_fractional_col_digit, METH_VARARGS, "\n"
+		"RsmGrid__v_number_fractional_col_digit(RsmGrid self) -> int\n"
+		"RsmGrid__v_number_fractional_col_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::number_fractional_col_digit(int v)\n"
 		"GeoCal::RsmGrid::number_fractional_col_digit\n"
 		""},
 	 { "RsmGrid_extrapolate_x_direction", _wrap_RsmGrid_extrapolate_x_direction, METH_O, "\n"
+		"RsmGrid_extrapolate_x_direction(RsmGrid self)\n"
 		"\n"
-		"void RsmGrid::extrapolate_x_direction()\n"
 		"GeoCal::RsmGrid::extrapolate_x_direction\n"
-		"Extrapolate data in the x/sample direction.\n"
+		"Extrapolate data in the x/sample direction.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_extrapolate_y_direction", _wrap_RsmGrid_extrapolate_y_direction, METH_O, "\n"
+		"RsmGrid_extrapolate_y_direction(RsmGrid self)\n"
 		"\n"
-		"void RsmGrid::extrapolate_y_direction()\n"
 		"GeoCal::RsmGrid::extrapolate_y_direction\n"
-		"Extrapolate data in the y/line direction.\n"
+		"Extrapolate data in the y/line direction.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_extrapolate_z_direction", _wrap_RsmGrid_extrapolate_z_direction, METH_O, "\n"
+		"RsmGrid_extrapolate_z_direction(RsmGrid self)\n"
 		"\n"
-		"void RsmGrid::extrapolate_z_direction()\n"
 		"GeoCal::RsmGrid::extrapolate_z_direction\n"
-		"Extrapolate data in the z/height direction.\n"
+		"Extrapolate data in the z/height direction.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_tre_size", _wrap_RsmGrid_tre_size, METH_O, "\n"
+		"RsmGrid_tre_size(RsmGrid self) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::tre_size() const\n"
 		"GeoCal::RsmGrid::tre_size\n"
-		"Calculate the TRE size that we will try to write, so we can check if\n"
-		"it is too big.\n"
-		"This is the size that will go into the CEL field (so the total TRE\n"
-		"size - 11). \n"
+		"Calculate the TRE size that we will try to write, so we can check if it is too\n"
+		"big.  \n"
+		"\n"
+		"This is the size that will go into the CEL field (so the total TRE size - 11).  \n"
+		"\n"
 		""},
 	 { "RsmGrid_tre_string", _wrap_RsmGrid_tre_string, METH_O, "\n"
+		"RsmGrid_tre_string(RsmGrid self) -> std::string\n"
 		"\n"
-		"std::string RsmGrid::tre_string() const\n"
 		"GeoCal::RsmGrid::tre_string\n"
-		"Write to TRE string.\n"
-		"Note also that the TRE has a fixed precision which is less than the\n"
-		"machine precision. Writing a RsmGrid and then reading it from a TRE\n"
-		"does not in general give the exact same RsmGrid, rather just one that\n"
-		"is close.\n"
+		"Write to TRE string.  \n"
 		"\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note also that the TRE has a fixed precision which is less than the machine\n"
+		"precision. Writing a RsmGrid and then reading it from a TRE does *not* in\n"
+		"general give the exact same RsmGrid, rather just one that is close.  \n"
+		"\n"
+		"Note that this is all the fields *except* the CETAG and CEL (the front two). It\n"
+		"is convenient to treat those special. (We can revisit this in the future if we\n"
+		"need to).  \n"
+		"\n"
 		""},
 	 { "RsmGrid_read_tre_string", _wrap_RsmGrid_read_tre_string, METH_O, "\n"
+		"RsmGrid_read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmGrid >\n"
 		"\n"
-		"boost::shared_ptr< RsmGrid > RsmGrid::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmGrid::read_tre_string\n"
-		"Read a TRE string.\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Read a TRE string.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "delete_RsmGrid", _wrap_delete_RsmGrid, METH_O, "\n"
+		"delete_RsmGrid(RsmGrid self)\n"
 		"\n"
-		"virtual GeoCal::RsmGrid::~RsmGrid()\n"
 		"GeoCal::RsmGrid::~RsmGrid\n"
 		""},
 	 { "RsmGrid_swigregister", RsmGrid_swigregister, METH_O, NULL},
@@ -10786,232 +10806,252 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmGrid", _wrap_new_RsmGrid, METH_VARARGS, "\n"
+		"RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=False, int Total_number_row_digit=11, int Total_number_col_digit=11, int Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int Row_section_number=1, int Col_section_number=1, std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\")\n"
 		"\n"
-		"GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false, int\n"
-		"Total_number_row_digit=11, int Total_number_col_digit=11, int\n"
-		"Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int\n"
-		"Row_section_number=1, int Col_section_number=1, const std::string\n"
-		"&Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\")\n"
 		"GeoCal::RsmGrid::RsmGrid\n"
 		""},
 	 { "RsmGrid_fit_corr", _wrap_RsmGrid_fit_corr, METH_VARARGS, "\n"
+		"fit_corr(RsmGrid self, ImageGroundConnection IGc, CoordinateConverter Cconv, RsmBase Rb)\n"
 		"\n"
-		"void RsmGrid::fit_corr(const ImageGroundConnection &IGc, const CoordinateConverter &Cconv,\n"
-		"const RsmBase &Rb)\n"
 		"GeoCal::RsmGrid::fit_corr\n"
-		"Generate a RsmGrid that gives a correction to another RsmBase.\n"
+		"Generate a RsmGrid that gives a correction to another RsmBase.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_ignore_igc_error_in_fit", _wrap_RsmGrid__v_ignore_igc_error_in_fit, METH_VARARGS, "\n"
+		"_v_ignore_igc_error_in_fit(RsmGrid self) -> bool\n"
+		"_v_ignore_igc_error_in_fit(RsmGrid self, bool const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::ignore_igc_error_in_fit(bool V)\n"
 		"GeoCal::RsmGrid::ignore_igc_error_in_fit\n"
-		"If true, ignore igc errors in fit.\n"
+		"If true, ignore igc errors in fit.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_line_grid", _wrap_RsmGrid__v_line_grid, METH_O, "\n"
+		"_v_line_grid(RsmGrid self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< double, 3 > & GeoCal::RsmGrid::line_grid() const\n"
 		"GeoCal::RsmGrid::line_grid\n"
-		"Grid of Line values.\n"
+		"Grid of Line values.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_sample_grid", _wrap_RsmGrid__v_sample_grid, METH_O, "\n"
+		"_v_sample_grid(RsmGrid self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< double, 3 > & GeoCal::RsmGrid::sample_grid() const\n"
 		"GeoCal::RsmGrid::sample_grid\n"
-		"Grid of sample values.\n"
+		"Grid of sample values.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_image_coordinate", _wrap_RsmGrid_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(RsmGrid self, double X, double Y, double Z, bool Extrapolate_ok) -> ImageCoordinate\n"
+		"image_coordinate(RsmGrid self, double X, double Y, double Z) -> ImageCoordinate\n"
+		"image_coordinate(RsmGrid self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z, bool Extrapolate_ok) -> BlitzArray_double_2\n"
+		"image_coordinate(RsmGrid self, BlitzArray_double_1 X, BlitzArray_double_1 Y, BlitzArray_double_1 Z) -> BlitzArray_double_2\n"
+		"image_coordinate(RsmGrid self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z, bool Extrapolate_ok) -> BlitzArray_double_3\n"
+		"image_coordinate(RsmGrid self, BlitzArray_double_2 X, BlitzArray_double_2 Y, BlitzArray_double_2 Z) -> BlitzArray_double_3\n"
+		"image_coordinate(RsmGrid self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z, bool Extrapolate_ok) -> BlitzArray_double_4\n"
+		"image_coordinate(RsmGrid self, BlitzArray_double_3 X, BlitzArray_double_3 Y, BlitzArray_double_3 Z) -> BlitzArray_double_4\n"
 		"\n"
-		"ImageCoordinate RsmGrid::image_coordinate(double X, double Y, double Z, bool Extrapolate_ok) const\n"
 		"GeoCal::RsmGrid::image_coordinate\n"
-		"Apply the grid to the given X, Y, and Z value.\n"
+		"Apply the grid to the given X, Y, and Z value.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_image_coordinate_jacobian", _wrap_RsmGrid_image_coordinate_jacobian, METH_VARARGS, "\n"
+		"image_coordinate_jacobian(RsmGrid self, double X, double Y, double Z, bool Extrapolate_ok) -> BlitzArray_double_2\n"
+		"image_coordinate_jacobian(RsmGrid self, double X, double Y, double Z) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > RsmGrid::image_coordinate_jacobian(double X, double Y, double Z, bool Extrapolate_ok) const\n"
 		"GeoCal::RsmGrid::image_coordinate_jacobian\n"
-		"This the jacobian of the line, sample with respect to X, Y, Z.\n"
-		"This is a 2x3 matrix. \n"
+		"This the jacobian of the line, sample with respect to X, Y, Z.  \n"
+		"\n"
+		"This is a 2x3 matrix.  \n"
+		"\n"
 		""},
 	 { "RsmGrid_number_x", _wrap_RsmGrid_number_x, METH_VARARGS, "\n"
+		"number_x(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_x(int Zindex) const\n"
 		"GeoCal::RsmGrid::number_x\n"
-		"Number of X values in grid.\n"
-		"This can potentially depend on the z axis value. \n"
+		"Number of X values in grid.  \n"
+		"\n"
+		"This can potentially depend on the z axis value.  \n"
+		"\n"
 		""},
 	 { "RsmGrid_number_y", _wrap_RsmGrid_number_y, METH_VARARGS, "\n"
+		"number_y(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_y(int Zindex) const\n"
 		"GeoCal::RsmGrid::number_y\n"
-		"Number of Y values in grid.\n"
-		"This can potentially depend on the z axis value. \n"
+		"Number of Y values in grid.  \n"
+		"\n"
+		"This can potentially depend on the z axis value.  \n"
+		"\n"
 		""},
 	 { "RsmGrid_x_offset", _wrap_RsmGrid_x_offset, METH_VARARGS, "\n"
+		"x_offset(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::x_offset(int Zindex) const\n"
 		"GeoCal::RsmGrid::x_offset\n"
-		"Offset in X pixels of particular z_index grid relative to the initial\n"
-		"grid.\n"
+		"Offset in X pixels of particular z_index grid relative to the initial grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_y_offset", _wrap_RsmGrid_y_offset, METH_VARARGS, "\n"
+		"y_offset(RsmGrid self, int Zindex) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::y_offset(int Zindex) const\n"
 		"GeoCal::RsmGrid::y_offset\n"
-		"Offset in Y pixels of particular z_index grid relative to the initial\n"
-		"grid.\n"
+		"Offset in Y pixels of particular z_index grid relative to the initial grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_number_z", _wrap_RsmGrid__v_number_z, METH_O, "\n"
+		"_v_number_z(RsmGrid self) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::number_z() const\n"
 		"GeoCal::RsmGrid::number_z\n"
-		"Number of Z values in grid.\n"
+		"Number of Z values in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_x_start", _wrap_RsmGrid__v_x_start, METH_O, "\n"
+		"_v_x_start(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::x_start() const\n"
 		"GeoCal::RsmGrid::x_start\n"
-		"First X value in grid.\n"
-		"This is for the first index, use x_offset for other z index values. \n"
+		"First X value in grid.  \n"
+		"\n"
+		"This is for the first index, use x_offset for other z index values.  \n"
+		"\n"
 		""},
 	 { "RsmGrid__v_x_delta", _wrap_RsmGrid__v_x_delta, METH_O, "\n"
+		"_v_x_delta(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::x_delta() const\n"
 		"GeoCal::RsmGrid::x_delta\n"
-		"Spacing of X in grid.\n"
+		"Spacing of X in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_y_start", _wrap_RsmGrid__v_y_start, METH_O, "\n"
+		"_v_y_start(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::y_start() const\n"
 		"GeoCal::RsmGrid::y_start\n"
-		"First Y value in grid.\n"
+		"First Y value in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_y_delta", _wrap_RsmGrid__v_y_delta, METH_O, "\n"
+		"_v_y_delta(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::y_delta() const\n"
 		"GeoCal::RsmGrid::y_delta\n"
-		"Spacing of Y in grid.\n"
+		"Spacing of Y in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_z_start", _wrap_RsmGrid__v_z_start, METH_O, "\n"
+		"_v_z_start(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::z_start() const\n"
 		"GeoCal::RsmGrid::z_start\n"
-		"First Z value in grid.\n"
+		"First Z value in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_z_delta", _wrap_RsmGrid__v_z_delta, METH_O, "\n"
+		"_v_z_delta(RsmGrid self) -> double\n"
 		"\n"
-		"double GeoCal::RsmGrid::z_delta() const\n"
 		"GeoCal::RsmGrid::z_delta\n"
-		"Spacing of Z in grid.\n"
+		"Spacing of Z in grid.  \n"
 		"\n"
 		""},
 	 { "RsmGrid__v_total_number_row_digit", _wrap_RsmGrid__v_total_number_row_digit, METH_VARARGS, "\n"
+		"_v_total_number_row_digit(RsmGrid self) -> int\n"
+		"_v_total_number_row_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::total_number_row_digit(int v)\n"
 		"GeoCal::RsmGrid::total_number_row_digit\n"
 		""},
 	 { "RsmGrid__v_total_number_col_digit", _wrap_RsmGrid__v_total_number_col_digit, METH_VARARGS, "\n"
+		"_v_total_number_col_digit(RsmGrid self) -> int\n"
+		"_v_total_number_col_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::total_number_col_digit(int v)\n"
 		"GeoCal::RsmGrid::total_number_col_digit\n"
 		""},
 	 { "RsmGrid__v_number_fractional_row_digit", _wrap_RsmGrid__v_number_fractional_row_digit, METH_VARARGS, "\n"
+		"_v_number_fractional_row_digit(RsmGrid self) -> int\n"
+		"_v_number_fractional_row_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::number_fractional_row_digit(int v)\n"
 		"GeoCal::RsmGrid::number_fractional_row_digit\n"
 		""},
 	 { "RsmGrid__v_number_fractional_col_digit", _wrap_RsmGrid__v_number_fractional_col_digit, METH_VARARGS, "\n"
+		"_v_number_fractional_col_digit(RsmGrid self) -> int\n"
+		"_v_number_fractional_col_digit(RsmGrid self, int const & V)\n"
 		"\n"
-		"void GeoCal::RsmGrid::number_fractional_col_digit(int v)\n"
 		"GeoCal::RsmGrid::number_fractional_col_digit\n"
 		""},
 	 { "RsmGrid_extrapolate_x_direction", _wrap_RsmGrid_extrapolate_x_direction, METH_O, "\n"
+		"extrapolate_x_direction(RsmGrid self)\n"
 		"\n"
-		"void RsmGrid::extrapolate_x_direction()\n"
 		"GeoCal::RsmGrid::extrapolate_x_direction\n"
-		"Extrapolate data in the x/sample direction.\n"
+		"Extrapolate data in the x/sample direction.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_extrapolate_y_direction", _wrap_RsmGrid_extrapolate_y_direction, METH_O, "\n"
+		"extrapolate_y_direction(RsmGrid self)\n"
 		"\n"
-		"void RsmGrid::extrapolate_y_direction()\n"
 		"GeoCal::RsmGrid::extrapolate_y_direction\n"
-		"Extrapolate data in the y/line direction.\n"
+		"Extrapolate data in the y/line direction.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_extrapolate_z_direction", _wrap_RsmGrid_extrapolate_z_direction, METH_O, "\n"
+		"extrapolate_z_direction(RsmGrid self)\n"
 		"\n"
-		"void RsmGrid::extrapolate_z_direction()\n"
 		"GeoCal::RsmGrid::extrapolate_z_direction\n"
-		"Extrapolate data in the z/height direction.\n"
+		"Extrapolate data in the z/height direction.  \n"
 		"\n"
 		""},
 	 { "RsmGrid_tre_size", _wrap_RsmGrid_tre_size, METH_O, "\n"
+		"tre_size(RsmGrid self) -> int\n"
 		"\n"
-		"int GeoCal::RsmGrid::tre_size() const\n"
 		"GeoCal::RsmGrid::tre_size\n"
-		"Calculate the TRE size that we will try to write, so we can check if\n"
-		"it is too big.\n"
-		"This is the size that will go into the CEL field (so the total TRE\n"
-		"size - 11). \n"
+		"Calculate the TRE size that we will try to write, so we can check if it is too\n"
+		"big.  \n"
+		"\n"
+		"This is the size that will go into the CEL field (so the total TRE size - 11).  \n"
+		"\n"
 		""},
 	 { "RsmGrid_tre_string", _wrap_RsmGrid_tre_string, METH_O, "\n"
+		"tre_string(RsmGrid self) -> std::string\n"
 		"\n"
-		"std::string RsmGrid::tre_string() const\n"
 		"GeoCal::RsmGrid::tre_string\n"
-		"Write to TRE string.\n"
-		"Note also that the TRE has a fixed precision which is less than the\n"
-		"machine precision. Writing a RsmGrid and then reading it from a TRE\n"
-		"does not in general give the exact same RsmGrid, rather just one that\n"
-		"is close.\n"
+		"Write to TRE string.  \n"
 		"\n"
-		"Note that this is all the fields except the CETAG and CEL (the front\n"
-		"two). It is convenient to treat those special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note also that the TRE has a fixed precision which is less than the machine\n"
+		"precision. Writing a RsmGrid and then reading it from a TRE does *not* in\n"
+		"general give the exact same RsmGrid, rather just one that is close.  \n"
+		"\n"
+		"Note that this is all the fields *except* the CETAG and CEL (the front two). It\n"
+		"is convenient to treat those special. (We can revisit this in the future if we\n"
+		"need to).  \n"
+		"\n"
 		""},
 	 { "RsmGrid_read_tre_string", _wrap_RsmGrid_read_tre_string, METH_O, "\n"
+		"read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmGrid >\n"
 		"\n"
-		"boost::shared_ptr< RsmGrid > RsmGrid::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmGrid::read_tre_string\n"
-		"Read a TRE string.\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Read a TRE string.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "delete_RsmGrid", _wrap_delete_RsmGrid, METH_O, "\n"
+		"delete_RsmGrid(RsmGrid self)\n"
 		"\n"
-		"virtual GeoCal::RsmGrid::~RsmGrid()\n"
 		"GeoCal::RsmGrid::~RsmGrid\n"
 		""},
 	 { "RsmGrid_swigregister", RsmGrid_swigregister, METH_O, NULL},

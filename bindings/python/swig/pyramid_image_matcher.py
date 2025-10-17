@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _pyramid_image_matcher.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _pyramid_image_matcher:
 _pyramid_image_matcher.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _pyramid_image_matcher.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,23 +143,24 @@ import geocal_swig.geocal_exception
 class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
     r"""
 
-    This takes an existing ImageMatcher, and it uses it on images in a
-    pyramid fashion.
 
-    We start with a given power of 2 (e.g., 8), average the raster data by
-    that value and perform image matching.
+    This takes an existing ImageMatcher, and it uses it on images in a pyramid
+    fashion.  
 
-    If that is successful, we then take the result of the previous match
-    as the initial guess, then match on the finer grid by a factor p of 2
-    (e.g., 4). If successful, we then proceed to the next level, ending at
-    the full resolution image.
+    We start with a given power of 2 (e.g., 8), average the raster data by that
+    value and perform image matching.  
 
-    If we match any level, then we call the match successful. However, the
-    Line and Sample sigmas will get scaled the same way - so data matched
-    at a coarser resolution is less accurate than matched at the finer
-    resolution.
+    If that is successful, we then take the result of the previous match as the
+    initial guess, then match on the finer grid by a factor p of 2 (e.g., 4). If
+    successful, we then proceed to the next level, ending at the full resolution
+    image.  
 
-    C++ includes: pyramid_image_matcher.h 
+    If we match any level, then we call the match successful. However, the Line and
+    Sample sigmas will get scaled the same way - so data matched at a coarser
+    resolution is less accurate than matched at the finer resolution.  
+
+    C++ includes: pyramid_image_matcher.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -164,15 +168,15 @@ class PyramidImageMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     def __init__(self, Im, start_level, Only_accept_finest_resolution=False):
         r"""
+        __init__(PyramidImageMatcher self, boost::shared_ptr< GeoCal::ImageMatcher > const & Im, int start_level, bool Only_accept_finest_resolution=False) -> PyramidImageMatcher
 
-        GeoCal::PyramidImageMatcher::PyramidImageMatcher(const boost::shared_ptr< ImageMatcher > &Im, int start_level, bool
-        Only_accept_finest_resolution=false)
         GeoCal::PyramidImageMatcher::PyramidImageMatcher
-        Constructor.
-        The start level is how coarse to do the initial matching. By default
-        we accept any level of matching (just with a larger error), but you
-        can optionally specify that we only accept a point if we can match at
-        the finest resolution 
+        Constructor.  
+
+        The start level is how coarse to do the initial matching. By default we accept
+        any level of matching (just with a larger error), but you can optionally specify
+        that we only accept a point if we can match at the finest resolution  
+
         """
         _pyramid_image_matcher.PyramidImageMatcher_swiginit(self, _pyramid_image_matcher.new_PyramidImageMatcher(Im, start_level, Only_accept_finest_resolution))
     _v_start_level = _swig_new_instance_method(_pyramid_image_matcher.PyramidImageMatcher__v_start_level)

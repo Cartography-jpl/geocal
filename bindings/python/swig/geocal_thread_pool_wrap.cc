@@ -6615,53 +6615,59 @@ SWIGINTERN PyObject *ThreadPool_swigregister(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "ThreadPool_thread_pool", _wrap_ThreadPool_thread_pool, METH_NOARGS, "\n"
+		"ThreadPool_thread_pool() -> ThreadPool\n"
 		"\n"
-		"ThreadPool & ThreadPool::thread_pool()\n"
 		"GeoCal::ThreadPool::thread_pool\n"
-		"Return the ThreadPool we are using.\n"
-		"We have this as a singleton, we want one ThreadPool for handling all\n"
-		"our threading. Note that there isn't any intrinsic reason why we\n"
-		"couldn't have multiple ThreadPool, it just seems natural to use one\n"
-		"set of workers. We could reevaluate this in the future if there are\n"
-		"places where we want multiple ThreadPool. \n"
+		"Return the ThreadPool we are using.  \n"
+		"\n"
+		"We have this as a singleton, we want one ThreadPool for handling all our\n"
+		"threading. Note that there isn't any intrinsic reason why we couldn't have\n"
+		"multiple ThreadPool, it just seems natural to use one set of workers. We could\n"
+		"reevaluate this in the future if there are places where we want multiple\n"
+		"ThreadPool.  \n"
+		"\n"
 		""},
 	 { "ThreadPool__v_number_thread", _wrap_ThreadPool__v_number_thread, METH_VARARGS, "\n"
+		"ThreadPool__v_number_thread(ThreadPool self) -> int\n"
+		"ThreadPool__v_number_thread(ThreadPool self, int const & V)\n"
 		"\n"
-		"void ThreadPool::number_thread(int V)\n"
 		"GeoCal::ThreadPool::number_thread\n"
-		"Set the number of workers in the thread pool.\n"
+		"Set the number of workers in the thread pool.  \n"
 		"\n"
 		""},
 	 { "ThreadPool_wait_tasks_finish", _wrap_ThreadPool_wait_tasks_finish, METH_O, "\n"
+		"ThreadPool_wait_tasks_finish(ThreadPool self)\n"
 		"\n"
-		"void GeoCal::ThreadPool::wait_tasks_finish()\n"
 		"GeoCal::ThreadPool::wait_tasks_finish\n"
-		"Wait for all the tasks to finish.\n"
+		"Wait for all the tasks to finish.  \n"
 		"\n"
 		""},
-	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, NULL},
+	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, "ThreadPool___str__(ThreadPool self) -> std::string"},
 	 { "delete_ThreadPool", _wrap_delete_ThreadPool, METH_O, "\n"
+		"delete_ThreadPool(ThreadPool self)\n"
 		"\n"
-		"virtual GeoCal::ThreadPool::~ThreadPool()\n"
 		"GeoCal::ThreadPool::~ThreadPool\n"
 		""},
 	 { "ThreadPool_swigregister", ThreadPool_swigregister, METH_O, NULL},
@@ -6671,53 +6677,59 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "ThreadPool_thread_pool", _wrap_ThreadPool_thread_pool, METH_NOARGS, "\n"
+		"thread_pool() -> ThreadPool\n"
 		"\n"
-		"ThreadPool & ThreadPool::thread_pool()\n"
 		"GeoCal::ThreadPool::thread_pool\n"
-		"Return the ThreadPool we are using.\n"
-		"We have this as a singleton, we want one ThreadPool for handling all\n"
-		"our threading. Note that there isn't any intrinsic reason why we\n"
-		"couldn't have multiple ThreadPool, it just seems natural to use one\n"
-		"set of workers. We could reevaluate this in the future if there are\n"
-		"places where we want multiple ThreadPool. \n"
+		"Return the ThreadPool we are using.  \n"
+		"\n"
+		"We have this as a singleton, we want one ThreadPool for handling all our\n"
+		"threading. Note that there isn't any intrinsic reason why we couldn't have\n"
+		"multiple ThreadPool, it just seems natural to use one set of workers. We could\n"
+		"reevaluate this in the future if there are places where we want multiple\n"
+		"ThreadPool.  \n"
+		"\n"
 		""},
 	 { "ThreadPool__v_number_thread", _wrap_ThreadPool__v_number_thread, METH_VARARGS, "\n"
+		"_v_number_thread(ThreadPool self) -> int\n"
+		"_v_number_thread(ThreadPool self, int const & V)\n"
 		"\n"
-		"void ThreadPool::number_thread(int V)\n"
 		"GeoCal::ThreadPool::number_thread\n"
-		"Set the number of workers in the thread pool.\n"
+		"Set the number of workers in the thread pool.  \n"
 		"\n"
 		""},
 	 { "ThreadPool_wait_tasks_finish", _wrap_ThreadPool_wait_tasks_finish, METH_O, "\n"
+		"wait_tasks_finish(ThreadPool self)\n"
 		"\n"
-		"void GeoCal::ThreadPool::wait_tasks_finish()\n"
 		"GeoCal::ThreadPool::wait_tasks_finish\n"
-		"Wait for all the tasks to finish.\n"
+		"Wait for all the tasks to finish.  \n"
 		"\n"
 		""},
-	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, NULL},
+	 { "ThreadPool___str__", _wrap_ThreadPool___str__, METH_O, "__str__(ThreadPool self) -> std::string"},
 	 { "delete_ThreadPool", _wrap_delete_ThreadPool, METH_O, "\n"
+		"delete_ThreadPool(ThreadPool self)\n"
 		"\n"
-		"virtual GeoCal::ThreadPool::~ThreadPool()\n"
 		"GeoCal::ThreadPool::~ThreadPool\n"
 		""},
 	 { "ThreadPool_swigregister", ThreadPool_swigregister, METH_O, NULL},

@@ -90,6 +90,7 @@ _rolling_shutter_constant_time_table.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _rolling_shutter_constant_time_table.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _rolling_shutter_constant_time_table.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -140,9 +141,11 @@ import geocal_swig.geocal_time
 class RollingShutterConstantTimeTable(geocal_swig.time_table.TimeTable):
     r"""
 
-    Time table for a rolling shutter with constant time spacing.
 
-    C++ includes: rolling_shutter_constant_time_table.h 
+    Time table for a rolling shutter with constant time spacing.  
+
+    C++ includes: rolling_shutter_constant_time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,10 +153,9 @@ class RollingShutterConstantTimeTable(geocal_swig.time_table.TimeTable):
 
     def __init__(self, Min_time, Max_time, Time_space=40.8e-3):
         r"""
+        __init__(RollingShutterConstantTimeTable self, Time Min_time, Time Max_time, double Time_space=40.8e-3) -> RollingShutterConstantTimeTable
 
-        GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)
-        GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTab
-        le
+        GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTable
         """
         _rolling_shutter_constant_time_table.RollingShutterConstantTimeTable_swiginit(self, _rolling_shutter_constant_time_table.new_RollingShutterConstantTimeTable(Min_time, Max_time, Time_space))
     image_coordinate = _swig_new_instance_method(_rolling_shutter_constant_time_table.RollingShutterConstantTimeTable_image_coordinate)

@@ -9210,130 +9210,135 @@ SWIGINTERN PyObject *SensrbCamera_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_SensrbCamera", _wrap_new_SensrbCamera, METH_VARARGS, "\n"
+		"SensrbCamera(Quaternion_double Frame_to_sc_q, double K1, double K2, double K3, double P1, double P2, double B1, double B2, double Radial_distort_limit, int Number_line, int Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, std::string const & Detection_type=\"VIS\", std::string const & Calibration_date=\"20000101\", GeoCal::QuaternionCamera::FrameConvention Frame_convention=LINE_IS_Y, GeoCal::QuaternionCamera::FrameDirection Line_direction=INCREASE_IS_POSITIVE, GeoCal::QuaternionCamera::FrameDirection Sample_direction=INCREASE_IS_NEGATIVE)\n"
 		"\n"
-		"GeoCal::SensrbCamera::SensrbCamera(const boost::math::quaternion< double > &Frame_to_sc_q, double K1,\n"
-		"double K2, double K3, double P1, double P2, double B1, double B2,\n"
-		"double Radial_distort_limit, int Number_line, int Number_sample,\n"
-		"double Line_pitch, double Sample_pitch, double Focal_length, const\n"
-		"FrameCoordinate &Principal_point, const std::string\n"
-		"&Detection_type=\"VIS\", const std::string\n"
-		"&Calibration_date=\"20000101\", QuaternionCamera::FrameConvention\n"
-		"Frame_convention=QuaternionCamera::LINE_IS_Y,\n"
-		"QuaternionCamera::FrameDirection\n"
-		"Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,\n"
-		"QuaternionCamera::FrameDirection\n"
-		"Sample_direction=QuaternionCamera::INCREASE_IS_NEGATIVE)\n"
 		"GeoCal::SensrbCamera::SensrbCamera\n"
-		"Create a QuaternionCamera with a radial distortion model given by\n"
-		"kdistort.\n"
-		"We currently limit kdistort.rows() <= 3, although we could relax that\n"
-		"if it ends up being useful. \n"
+		"Create a QuaternionCamera with a radial distortion model given by kdistort.  \n"
+		"\n"
+		"We currently limit kdistort.rows() <= 3, although we could relax that if it ends\n"
+		"up being useful.  \n"
+		"\n"
 		""},
 	 { "SensrbCamera__v_p_distort", _wrap_SensrbCamera__v_p_distort, METH_O, "\n"
+		"SensrbCamera__v_p_distort(SensrbCamera self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< double, 1 > & GeoCal::SensrbCamera::p_distort() const\n"
 		"GeoCal::SensrbCamera::p_distort\n"
-		"Parameters describing nonlinearity.\n"
+		"Parameters describing nonlinearity.  \n"
 		"\n"
 		""},
 	 { "SensrbCamera__v_k1", _wrap_SensrbCamera__v_k1, METH_VARARGS, "\n"
+		"SensrbCamera__v_k1(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_k1(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::k1(double V)\n"
 		"GeoCal::SensrbCamera::k1\n"
 		""},
 	 { "SensrbCamera__v_k2", _wrap_SensrbCamera__v_k2, METH_VARARGS, "\n"
+		"SensrbCamera__v_k2(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_k2(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::k2(double V)\n"
 		"GeoCal::SensrbCamera::k2\n"
 		""},
 	 { "SensrbCamera__v_k3", _wrap_SensrbCamera__v_k3, METH_VARARGS, "\n"
+		"SensrbCamera__v_k3(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_k3(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::k3(double V)\n"
 		"GeoCal::SensrbCamera::k3\n"
 		""},
 	 { "SensrbCamera__v_p1", _wrap_SensrbCamera__v_p1, METH_VARARGS, "\n"
+		"SensrbCamera__v_p1(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_p1(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::p1(double V)\n"
 		"GeoCal::SensrbCamera::p1\n"
 		""},
 	 { "SensrbCamera__v_p2", _wrap_SensrbCamera__v_p2, METH_VARARGS, "\n"
+		"SensrbCamera__v_p2(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_p2(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::p2(double V)\n"
 		"GeoCal::SensrbCamera::p2\n"
 		""},
 	 { "SensrbCamera__v_b1", _wrap_SensrbCamera__v_b1, METH_VARARGS, "\n"
+		"SensrbCamera__v_b1(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_b1(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::b1(double V)\n"
 		"GeoCal::SensrbCamera::b1\n"
 		""},
 	 { "SensrbCamera__v_b2", _wrap_SensrbCamera__v_b2, METH_VARARGS, "\n"
+		"SensrbCamera__v_b2(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_b2(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::b2(double V)\n"
 		"GeoCal::SensrbCamera::b2\n"
 		""},
 	 { "SensrbCamera__v_radial_distort_limit", _wrap_SensrbCamera__v_radial_distort_limit, METH_VARARGS, "\n"
+		"SensrbCamera__v_radial_distort_limit(SensrbCamera self) -> double\n"
+		"SensrbCamera__v_radial_distort_limit(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::radial_distort_limit(double V)\n"
 		"GeoCal::SensrbCamera::radial_distort_limit\n"
 		""},
 	 { "SensrbCamera__v_calibration_date", _wrap_SensrbCamera__v_calibration_date, METH_VARARGS, "\n"
+		"SensrbCamera__v_calibration_date(SensrbCamera self) -> std::string\n"
+		"SensrbCamera__v_calibration_date(SensrbCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::calibration_date(const std::string &V)\n"
 		"GeoCal::SensrbCamera::calibration_date\n"
 		""},
 	 { "SensrbCamera__v_detection_type", _wrap_SensrbCamera__v_detection_type, METH_VARARGS, "\n"
+		"SensrbCamera__v_detection_type(SensrbCamera self) -> std::string\n"
+		"SensrbCamera__v_detection_type(SensrbCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::detection_type(const std::string &V)\n"
 		"GeoCal::SensrbCamera::detection_type\n"
 		""},
 	 { "SensrbCamera_quaternion_to_sensor_angle", _wrap_SensrbCamera_quaternion_to_sensor_angle, METH_O, "\n"
+		"SensrbCamera_quaternion_to_sensor_angle(Quaternion_double Frame_to_sc_or_ned)\n"
 		"\n"
-		"void SensrbCamera::quaternion_to_sensor_angle(const boost::math::quaternion< double > &Frame_to_sc_or_ned, double\n"
-		"&Sensor_angle_1, double &Sensor_angle_2, double &Sensor_angle_3)\n"
 		"GeoCal::SensrbCamera::quaternion_to_sensor_angle\n"
-		"Convert a quaternion to sensor angles 1 through 3.\n"
-		"Depending on the values in SENSRB, the angles either describe the\n"
-		"angles relative to the platform coordinate system or relative the\n"
-		"local NED coordinate system. In the first case, the quaternion would\n"
-		"be the normal frame_to_sc() quaternion found in a SensrbCamera, or the\n"
-		"combination of the frame_to_sc() and the body_to_local_north() found\n"
-		"in AircraftOrbitData.\n"
+		"Convert a quaternion to sensor angles 1 through 3.  \n"
 		"\n"
-		"Note that the angles are in degrees. They are also passive rotation\n"
-		"angles rather than active (so negative of the angles we normally use\n"
-		"in our quaternion calculations). \n"
+		"Depending on the values in SENSRB, the angles either describe the angles\n"
+		"relative to the platform coordinate system or relative the local NED coordinate\n"
+		"system. In the first case, the quaternion would be the normal frame_to_sc()\n"
+		"quaternion found in a SensrbCamera, or the combination of the frame_to_sc() and\n"
+		"the body_to_local_north() found in AircraftOrbitData.  \n"
+		"\n"
+		"Note that the angles are in degrees. They are also passive rotation angles\n"
+		"rather than active (so negative of the angles we normally use in our quaternion\n"
+		"calculations).  \n"
+		"\n"
 		""},
 	 { "SensrbCamera_sensor_angle_to_quaternion", _wrap_SensrbCamera_sensor_angle_to_quaternion, METH_VARARGS, "\n"
+		"SensrbCamera_sensor_angle_to_quaternion(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > SensrbCamera::sensor_angle_to_quaternion(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)\n"
 		"GeoCal::SensrbCamera::sensor_angle_to_quaternion\n"
-		"Convert sensor angles 1 through 3 to a frame_to_sc() quaternion.\n"
-		"This version is for when this is relative to the platform.\n"
+		"Convert sensor angles 1 through 3 to a frame_to_sc() quaternion.  \n"
 		"\n"
-		"Note that the angles are in degrees. They are also passive rotation\n"
-		"angles rather than active (so negative of the angles we normally use\n"
-		"in our quaternion calculations). \n"
+		"This version is for when this is relative to the platform.  \n"
+		"\n"
+		"Note that the angles are in degrees. They are also passive rotation angles\n"
+		"rather than active (so negative of the angles we normally use in our quaternion\n"
+		"calculations).  \n"
+		"\n"
 		""},
-	 { "delete_SensrbCamera", _wrap_delete_SensrbCamera, METH_O, NULL},
+	 { "delete_SensrbCamera", _wrap_delete_SensrbCamera, METH_O, "delete_SensrbCamera(SensrbCamera self)"},
 	 { "SensrbCamera_swigregister", SensrbCamera_swigregister, METH_O, NULL},
 	 { "SensrbCamera_swiginit", SensrbCamera_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -9342,130 +9347,135 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_SensrbCamera", _wrap_new_SensrbCamera, METH_VARARGS, "\n"
+		"SensrbCamera(Quaternion_double Frame_to_sc_q, double K1, double K2, double K3, double P1, double P2, double B1, double B2, double Radial_distort_limit, int Number_line, int Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, std::string const & Detection_type=\"VIS\", std::string const & Calibration_date=\"20000101\", GeoCal::QuaternionCamera::FrameConvention Frame_convention=LINE_IS_Y, GeoCal::QuaternionCamera::FrameDirection Line_direction=INCREASE_IS_POSITIVE, GeoCal::QuaternionCamera::FrameDirection Sample_direction=INCREASE_IS_NEGATIVE)\n"
 		"\n"
-		"GeoCal::SensrbCamera::SensrbCamera(const boost::math::quaternion< double > &Frame_to_sc_q, double K1,\n"
-		"double K2, double K3, double P1, double P2, double B1, double B2,\n"
-		"double Radial_distort_limit, int Number_line, int Number_sample,\n"
-		"double Line_pitch, double Sample_pitch, double Focal_length, const\n"
-		"FrameCoordinate &Principal_point, const std::string\n"
-		"&Detection_type=\"VIS\", const std::string\n"
-		"&Calibration_date=\"20000101\", QuaternionCamera::FrameConvention\n"
-		"Frame_convention=QuaternionCamera::LINE_IS_Y,\n"
-		"QuaternionCamera::FrameDirection\n"
-		"Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,\n"
-		"QuaternionCamera::FrameDirection\n"
-		"Sample_direction=QuaternionCamera::INCREASE_IS_NEGATIVE)\n"
 		"GeoCal::SensrbCamera::SensrbCamera\n"
-		"Create a QuaternionCamera with a radial distortion model given by\n"
-		"kdistort.\n"
-		"We currently limit kdistort.rows() <= 3, although we could relax that\n"
-		"if it ends up being useful. \n"
+		"Create a QuaternionCamera with a radial distortion model given by kdistort.  \n"
+		"\n"
+		"We currently limit kdistort.rows() <= 3, although we could relax that if it ends\n"
+		"up being useful.  \n"
+		"\n"
 		""},
 	 { "SensrbCamera__v_p_distort", _wrap_SensrbCamera__v_p_distort, METH_O, "\n"
+		"_v_p_distort(SensrbCamera self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< double, 1 > & GeoCal::SensrbCamera::p_distort() const\n"
 		"GeoCal::SensrbCamera::p_distort\n"
-		"Parameters describing nonlinearity.\n"
+		"Parameters describing nonlinearity.  \n"
 		"\n"
 		""},
 	 { "SensrbCamera__v_k1", _wrap_SensrbCamera__v_k1, METH_VARARGS, "\n"
+		"_v_k1(SensrbCamera self) -> double\n"
+		"_v_k1(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::k1(double V)\n"
 		"GeoCal::SensrbCamera::k1\n"
 		""},
 	 { "SensrbCamera__v_k2", _wrap_SensrbCamera__v_k2, METH_VARARGS, "\n"
+		"_v_k2(SensrbCamera self) -> double\n"
+		"_v_k2(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::k2(double V)\n"
 		"GeoCal::SensrbCamera::k2\n"
 		""},
 	 { "SensrbCamera__v_k3", _wrap_SensrbCamera__v_k3, METH_VARARGS, "\n"
+		"_v_k3(SensrbCamera self) -> double\n"
+		"_v_k3(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::k3(double V)\n"
 		"GeoCal::SensrbCamera::k3\n"
 		""},
 	 { "SensrbCamera__v_p1", _wrap_SensrbCamera__v_p1, METH_VARARGS, "\n"
+		"_v_p1(SensrbCamera self) -> double\n"
+		"_v_p1(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::p1(double V)\n"
 		"GeoCal::SensrbCamera::p1\n"
 		""},
 	 { "SensrbCamera__v_p2", _wrap_SensrbCamera__v_p2, METH_VARARGS, "\n"
+		"_v_p2(SensrbCamera self) -> double\n"
+		"_v_p2(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::p2(double V)\n"
 		"GeoCal::SensrbCamera::p2\n"
 		""},
 	 { "SensrbCamera__v_b1", _wrap_SensrbCamera__v_b1, METH_VARARGS, "\n"
+		"_v_b1(SensrbCamera self) -> double\n"
+		"_v_b1(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::b1(double V)\n"
 		"GeoCal::SensrbCamera::b1\n"
 		""},
 	 { "SensrbCamera__v_b2", _wrap_SensrbCamera__v_b2, METH_VARARGS, "\n"
+		"_v_b2(SensrbCamera self) -> double\n"
+		"_v_b2(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::b2(double V)\n"
 		"GeoCal::SensrbCamera::b2\n"
 		""},
 	 { "SensrbCamera__v_radial_distort_limit", _wrap_SensrbCamera__v_radial_distort_limit, METH_VARARGS, "\n"
+		"_v_radial_distort_limit(SensrbCamera self) -> double\n"
+		"_v_radial_distort_limit(SensrbCamera self, double const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::radial_distort_limit(double V)\n"
 		"GeoCal::SensrbCamera::radial_distort_limit\n"
 		""},
 	 { "SensrbCamera__v_calibration_date", _wrap_SensrbCamera__v_calibration_date, METH_VARARGS, "\n"
+		"_v_calibration_date(SensrbCamera self) -> std::string\n"
+		"_v_calibration_date(SensrbCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::calibration_date(const std::string &V)\n"
 		"GeoCal::SensrbCamera::calibration_date\n"
 		""},
 	 { "SensrbCamera__v_detection_type", _wrap_SensrbCamera__v_detection_type, METH_VARARGS, "\n"
+		"_v_detection_type(SensrbCamera self) -> std::string\n"
+		"_v_detection_type(SensrbCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::SensrbCamera::detection_type(const std::string &V)\n"
 		"GeoCal::SensrbCamera::detection_type\n"
 		""},
 	 { "SensrbCamera_quaternion_to_sensor_angle", _wrap_SensrbCamera_quaternion_to_sensor_angle, METH_O, "\n"
+		"quaternion_to_sensor_angle(Quaternion_double Frame_to_sc_or_ned)\n"
 		"\n"
-		"void SensrbCamera::quaternion_to_sensor_angle(const boost::math::quaternion< double > &Frame_to_sc_or_ned, double\n"
-		"&Sensor_angle_1, double &Sensor_angle_2, double &Sensor_angle_3)\n"
 		"GeoCal::SensrbCamera::quaternion_to_sensor_angle\n"
-		"Convert a quaternion to sensor angles 1 through 3.\n"
-		"Depending on the values in SENSRB, the angles either describe the\n"
-		"angles relative to the platform coordinate system or relative the\n"
-		"local NED coordinate system. In the first case, the quaternion would\n"
-		"be the normal frame_to_sc() quaternion found in a SensrbCamera, or the\n"
-		"combination of the frame_to_sc() and the body_to_local_north() found\n"
-		"in AircraftOrbitData.\n"
+		"Convert a quaternion to sensor angles 1 through 3.  \n"
 		"\n"
-		"Note that the angles are in degrees. They are also passive rotation\n"
-		"angles rather than active (so negative of the angles we normally use\n"
-		"in our quaternion calculations). \n"
+		"Depending on the values in SENSRB, the angles either describe the angles\n"
+		"relative to the platform coordinate system or relative the local NED coordinate\n"
+		"system. In the first case, the quaternion would be the normal frame_to_sc()\n"
+		"quaternion found in a SensrbCamera, or the combination of the frame_to_sc() and\n"
+		"the body_to_local_north() found in AircraftOrbitData.  \n"
+		"\n"
+		"Note that the angles are in degrees. They are also passive rotation angles\n"
+		"rather than active (so negative of the angles we normally use in our quaternion\n"
+		"calculations).  \n"
+		"\n"
 		""},
 	 { "SensrbCamera_sensor_angle_to_quaternion", _wrap_SensrbCamera_sensor_angle_to_quaternion, METH_VARARGS, "\n"
+		"sensor_angle_to_quaternion(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > SensrbCamera::sensor_angle_to_quaternion(double Sensor_angle_1, double Sensor_angle_2, double Sensor_angle_3)\n"
 		"GeoCal::SensrbCamera::sensor_angle_to_quaternion\n"
-		"Convert sensor angles 1 through 3 to a frame_to_sc() quaternion.\n"
-		"This version is for when this is relative to the platform.\n"
+		"Convert sensor angles 1 through 3 to a frame_to_sc() quaternion.  \n"
 		"\n"
-		"Note that the angles are in degrees. They are also passive rotation\n"
-		"angles rather than active (so negative of the angles we normally use\n"
-		"in our quaternion calculations). \n"
+		"This version is for when this is relative to the platform.  \n"
+		"\n"
+		"Note that the angles are in degrees. They are also passive rotation angles\n"
+		"rather than active (so negative of the angles we normally use in our quaternion\n"
+		"calculations).  \n"
+		"\n"
 		""},
-	 { "delete_SensrbCamera", _wrap_delete_SensrbCamera, METH_O, NULL},
+	 { "delete_SensrbCamera", _wrap_delete_SensrbCamera, METH_O, "delete_SensrbCamera(SensrbCamera self)"},
 	 { "SensrbCamera_swigregister", SensrbCamera_swigregister, METH_O, NULL},
 	 { "SensrbCamera_swiginit", SensrbCamera_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

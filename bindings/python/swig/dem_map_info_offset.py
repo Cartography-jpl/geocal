@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _dem_map_info_offset.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _dem_map_info_offset:
 _dem_map_info_offset.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _dem_map_info_offset.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,9 +142,11 @@ import geocal_swig.generic_object
 class DemMapInfoOffset(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This applies a fixed height offset to a DemMapInfo.
 
-    C++ includes: dem_map_info_offset.h 
+    This applies a fixed height offset to a DemMapInfo.  
+
+    C++ includes: dem_map_info_offset.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -149,12 +154,12 @@ class DemMapInfoOffset(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, Dem_underlying, Height_offset):
         r"""
+        __init__(DemMapInfoOffset self, boost::shared_ptr< GeoCal::DemMapInfo > const & Dem_underlying, double Height_offset) -> DemMapInfoOffset
 
-        GeoCal::DemMapInfoOffset::DemMapInfoOffset(const boost::shared_ptr< DemMapInfo > &Dem_underlying, double
-        Height_offset)
         GeoCal::DemMapInfoOffset::DemMapInfoOffset
-        Constructor.
-        Height_offset should be in meters, and is added to the underlying DEM.
+        Constructor.  
+
+        Height_offset should be in meters, and is added to the underlying DEM.  
 
         """
         _dem_map_info_offset.DemMapInfoOffset_swiginit(self, _dem_map_info_offset.new_DemMapInfoOffset(Dem_underlying, Height_offset))

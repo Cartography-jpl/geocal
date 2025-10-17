@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_simulated.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_simulated:
 _igc_simulated.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_simulated.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,38 +145,37 @@ import geocal_swig.geocal_exception
 class IgcSimulated(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This is a RasterImage that is a simulated based on an underlying map
-    projected image.
 
-    For each point in the image of an ImageGroundConnection, we calculate
-    where that point appears on the ground and then assign a value to it
-    from the map projected image.
+    This is a RasterImage that is a simulated based on an underlying map projected
+    image.  
 
-    This is essentially the inverse of IgcMapProjected, if you replace the
-    image of an ImageGroundConnection with this simulated image and then
-    run IgcMapProjected you'll get the original map projected image back
-    (with changes from being resampled twice). This is similar to the old
-    MisrSim program.
+    For each point in the image of an ImageGroundConnection, we calculate where that
+    point appears on the ground and then assign a value to it from the map projected
+    image.  
 
-    We do this in two steps:
+    This is essentially the inverse of IgcMapProjected, if you replace the image of
+    an ImageGroundConnection with this simulated image and then run IgcMapProjected
+    you'll get the original map projected image back (with changes from being
+    resampled twice). This is similar to the old MisrSim program.  
 
-    We calculate roughly what the difference in resolution is between the
-    original data and the image we are generating. We do this by looking
-    at the center pixel of the original data and the pixel +1 in line and
-    sample. We then use RasterAveraged to average the original data to
-    roughly the resolution of the final image. If the final image is near
-    the same resolution as the original, or if it has a higher resolution,
-    then we don't do any averaging. Alternatively, you can pass in the
-    averaging factor (include a value of 1 which turns this behavior off).
+    We do this in two steps:  
 
-    We then interpolate the possibly averaged data to the final image.
+    1.  We calculate roughly what the difference in resolution is between the
+        original data and the image we are generating. We do this by looking at the
+        center pixel of the original data and the pixel +1 in line and sample. We
+        then use RasterAveraged to average the original data to roughly the
+        resolution of the final image. If the final image is near the same
+        resolution as the original, or if it has a higher resolution, then we don't
+        do any averaging. Alternatively, you can pass in the averaging factor
+        (include a value of 1 which turns this behavior off).  
+    2.  We then interpolate the possibly averaged data to the final image.  
 
-    This class calculates the data on the fly. Sometimes this is what you
-    want, but if you are going to be using the resulting data a few times,
-    you may want to use a MemoryRasterImage to generate a copy once and
-    keep it in memory.
+    This class calculates the data on the fly. Sometimes this is what you want, but
+    if you are going to be using the resulting data a few times, you may want to use
+    a MemoryRasterImage to generate a copy once and keep it in memory.  
 
-    C++ includes: igc_simulated.h 
+    C++ includes: igc_simulated.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -181,13 +183,10 @@ class IgcSimulated(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Igc, Map_projected_image, Avg_fact=-1, Read_into_memory=True, Number_tile_line=-1, Number_tile_sample=-1, Fill_value=0.0):
         r"""
+        __init__(IgcSimulated self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::RasterImage > const & Map_projected_image, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0) -> IgcSimulated
 
-        IgcSimulated::IgcSimulated(const boost::shared_ptr< ImageGroundConnection > &Igc, const
-        boost::shared_ptr< RasterImage > &Map_projected_image, int
-        Avg_fact=-1, bool Read_into_memory=true, int Number_tile_line=-1, int
-        Number_tile_sample=-1, double Fill_value=0.0)
         GeoCal::IgcSimulated::IgcSimulated
-        Constructor.
+        Constructor.  
 
         """
         _igc_simulated.IgcSimulated_swiginit(self, _igc_simulated.new_IgcSimulated(Igc, Map_projected_image, Avg_fact, Read_into_memory, Number_tile_line, Number_tile_sample, Fill_value))

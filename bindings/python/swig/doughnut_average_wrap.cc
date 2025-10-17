@@ -7721,138 +7721,144 @@ SWIGINTERN PyObject *RasterImageWrapPandif_swiginit(PyObject *SWIGUNUSEDPARM(sel
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_DoughnutAverage", _wrap_new_DoughnutAverage, METH_VARARGS, "\n"
+		"DoughnutAverage(boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Rimg, int Window_size=11, int Doughnut_size=5, bool Allow_gore=True, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
 		"\n"
-		"DoughnutAverage::DoughnutAverage(const boost::shared_ptr< RasterImageMultiBand > &Rimg, int\n"
-		"Window_size=11, int Doughnut_size=5, bool Allow_gore=true, int\n"
-		"Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
 		"GeoCal::DoughnutAverage::DoughnutAverage\n"
-		"Constructor.\n"
-		"Parameters:\n"
-		"-----------\n"
+		"Constructor.  \n"
 		"\n"
-		"Rimg:  The underlying image we are producing the average for.\n"
+		"Parameters\n"
+		"----------\n"
+		"* `Rimg` :  \n"
+		"    The underlying image we are producing the average for.  \n"
+		"* `Window_size` :  \n"
+		"    The window size we are averaging. Should be odd number.  \n"
+		"* `Doughnut_size` :  \n"
+		"    The doughnut we are excluding in the average. Should be odd, and <\n"
+		"    Window_size.  \n"
+		"* `Allow_gore` :  \n"
+		"    If \"Allow_gore\" is true, then any point other than the center can be gore\n"
+		"    and we just exclude it from the average. If \"Allow_gore\" is false, we set\n"
+		"    a value to 0 if any value in the window is 0. In all cases, we set a value\n"
+		"    to 0 if the center  \n"
+		"* `Number_tile_line` :  \n"
+		"    Number of lines in each tile  \n"
+		"* `Number_tile_sample` :  \n"
+		"    Number of samples in each tile  \n"
+		"* `Number_tile` :  \n"
+		"    Number of tiles to use  \n"
 		"\n"
-		"Window_size:  The window size we are averaging. Should be odd number.\n"
-		"\n"
-		"Doughnut_size:  The doughnut we are excluding in the average. Should\n"
-		"be odd, and < Window_size.\n"
-		"\n"
-		"Allow_gore:  If \"Allow_gore\" is true, then any point other than the\n"
-		"center can be gore and we just exclude it from the average. If\n"
-		"\"Allow_gore\" is false, we set a value to 0 if any value in the\n"
-		"window is 0. In all cases, we set a value to 0 if the center\n"
-		"\n"
-		"Number_tile_line:  Number of lines in each tile\n"
-		"\n"
-		"Number_tile_sample:  Number of samples in each tile\n"
-		"\n"
-		"Number_tile:  Number of tiles to use \n"
 		""},
 	 { "DoughnutAverage_cvdnorm", _wrap_DoughnutAverage_cvdnorm, METH_VARARGS, "\n"
+		"DoughnutAverage_cvdnorm(DoughnutAverage self, int band, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"Array< double, 2 > DoughnutAverage::cvdnorm(int band, int Lstart, int Sstart, int Number_line, int Number_sample)\n"
-		"const\n"
 		"GeoCal::DoughnutAverage::cvdnorm\n"
-		"Very closely related in the doughnut average is the cvdnorm for one of\n"
-		"the bands.\n"
-		"So we provide the calculation for that. \n"
+		"Very closely related in the doughnut average is the cvdnorm for one of the\n"
+		"bands.  \n"
+		"\n"
+		"So we provide the calculation for that.  \n"
+		"\n"
 		""},
 	 { "DoughnutAverage_pandif", _wrap_DoughnutAverage_pandif, METH_VARARGS, "\n"
+		"DoughnutAverage_pandif(DoughnutAverage self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > DoughnutAverage::pandif(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::DoughnutAverage::pandif\n"
-		"This is the difference of the first two cvdnorm bands.\n"
+		"This is the difference of the first two cvdnorm bands.  \n"
 		"\n"
 		""},
 	 { "DoughnutAverage__v_window_size", _wrap_DoughnutAverage__v_window_size, METH_O, "\n"
+		"DoughnutAverage__v_window_size(DoughnutAverage self) -> int\n"
 		"\n"
-		"int GeoCal::DoughnutAverage::window_size() const\n"
 		"GeoCal::DoughnutAverage::window_size\n"
-		"The window size.\n"
+		"The window size.  \n"
 		"\n"
 		""},
 	 { "DoughnutAverage__v_doughnut_size", _wrap_DoughnutAverage__v_doughnut_size, METH_O, "\n"
+		"DoughnutAverage__v_doughnut_size(DoughnutAverage self) -> int\n"
 		"\n"
-		"int GeoCal::DoughnutAverage::doughnut_size() const\n"
 		"GeoCal::DoughnutAverage::doughnut_size\n"
-		"The doughnut size.\n"
+		"The doughnut size.  \n"
 		"\n"
 		""},
 	 { "DoughnutAverage__v_allow_gore", _wrap_DoughnutAverage__v_allow_gore, METH_O, "\n"
+		"DoughnutAverage__v_allow_gore(DoughnutAverage self) -> bool\n"
 		"\n"
-		"bool GeoCal::DoughnutAverage::allow_gore() const\n"
 		"GeoCal::DoughnutAverage::allow_gore\n"
-		"If true, we allow gore in a window and just exclude it in the average.\n"
-		"Otherwise we set a point to 0 if any point in the window is 0. \n"
+		"If true, we allow gore in a window and just exclude it in the average.  \n"
+		"\n"
+		"Otherwise we set a point to 0 if any point in the window is 0.  \n"
+		"\n"
 		""},
 	 { "DoughnutAverage__v_underlying_image", _wrap_DoughnutAverage__v_underlying_image, METH_O, "\n"
+		"DoughnutAverage__v_underlying_image(DoughnutAverage self) -> boost::shared_ptr< GeoCal::RasterImageMultiBand >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImageMultiBand > & GeoCal::DoughnutAverage::underlying_image() const\n"
 		"GeoCal::DoughnutAverage::underlying_image\n"
-		"The underlying image.\n"
+		"The underlying image.  \n"
 		"\n"
 		""},
 	 { "delete_DoughnutAverage", _wrap_delete_DoughnutAverage, METH_O, "\n"
+		"delete_DoughnutAverage(DoughnutAverage self)\n"
 		"\n"
-		"virtual GeoCal::DoughnutAverage::~DoughnutAverage()\n"
 		"GeoCal::DoughnutAverage::~DoughnutAverage\n"
 		""},
 	 { "DoughnutAverage_swigregister", DoughnutAverage_swigregister, METH_O, NULL},
 	 { "DoughnutAverage_swiginit", DoughnutAverage_swiginit, METH_VARARGS, NULL},
 	 { "new_RasterImageWrapCvdNorm", _wrap_new_RasterImageWrapCvdNorm, METH_VARARGS, "\n"
+		"new_RasterImageWrapCvdNorm(boost::shared_ptr< GeoCal::DoughnutAverage > const & Davg, int Band) -> RasterImageWrapCvdNorm\n"
 		"\n"
-		"GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm(const boost::shared_ptr< DoughnutAverage > &Davg, int Band)\n"
 		"GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm\n"
 		""},
 	 { "RasterImageWrapCvdNorm__v_band", _wrap_RasterImageWrapCvdNorm__v_band, METH_O, "\n"
+		"RasterImageWrapCvdNorm__v_band(RasterImageWrapCvdNorm self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageWrapCvdNorm::band() const\n"
 		"GeoCal::RasterImageWrapCvdNorm::band\n"
 		""},
 	 { "RasterImageWrapCvdNorm__v_davg", _wrap_RasterImageWrapCvdNorm__v_davg, METH_O, "\n"
+		"RasterImageWrapCvdNorm__v_davg(RasterImageWrapCvdNorm self) -> boost::shared_ptr< GeoCal::DoughnutAverage >\n"
 		"\n"
-		"const boost::shared_ptr< DoughnutAverage > & GeoCal::RasterImageWrapCvdNorm::davg() const\n"
 		"GeoCal::RasterImageWrapCvdNorm::davg\n"
 		""},
 	 { "delete_RasterImageWrapCvdNorm", _wrap_delete_RasterImageWrapCvdNorm, METH_O, "\n"
+		"delete_RasterImageWrapCvdNorm(RasterImageWrapCvdNorm self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageWrapCvdNorm::~RasterImageWrapCvdNorm()\n"
 		"GeoCal::RasterImageWrapCvdNorm::~RasterImageWrapCvdNorm\n"
 		""},
 	 { "RasterImageWrapCvdNorm_swigregister", RasterImageWrapCvdNorm_swigregister, METH_O, NULL},
 	 { "RasterImageWrapCvdNorm_swiginit", RasterImageWrapCvdNorm_swiginit, METH_VARARGS, NULL},
 	 { "new_RasterImageWrapPandif", _wrap_new_RasterImageWrapPandif, METH_O, "\n"
+		"new_RasterImageWrapPandif(boost::shared_ptr< GeoCal::DoughnutAverage > const & Davg) -> RasterImageWrapPandif\n"
 		"\n"
-		"GeoCal::RasterImageWrapPandif::RasterImageWrapPandif(const boost::shared_ptr< DoughnutAverage > &Davg)\n"
 		"GeoCal::RasterImageWrapPandif::RasterImageWrapPandif\n"
 		""},
 	 { "RasterImageWrapPandif__v_davg", _wrap_RasterImageWrapPandif__v_davg, METH_O, "\n"
+		"RasterImageWrapPandif__v_davg(RasterImageWrapPandif self) -> boost::shared_ptr< GeoCal::DoughnutAverage >\n"
 		"\n"
-		"const boost::shared_ptr< DoughnutAverage > & GeoCal::RasterImageWrapPandif::davg() const\n"
 		"GeoCal::RasterImageWrapPandif::davg\n"
 		""},
 	 { "delete_RasterImageWrapPandif", _wrap_delete_RasterImageWrapPandif, METH_O, "\n"
+		"delete_RasterImageWrapPandif(RasterImageWrapPandif self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageWrapPandif::~RasterImageWrapPandif()\n"
 		"GeoCal::RasterImageWrapPandif::~RasterImageWrapPandif\n"
 		""},
 	 { "RasterImageWrapPandif_swigregister", RasterImageWrapPandif_swigregister, METH_O, NULL},
@@ -7863,138 +7869,144 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_DoughnutAverage", _wrap_new_DoughnutAverage, METH_VARARGS, "\n"
+		"DoughnutAverage(boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Rimg, int Window_size=11, int Doughnut_size=5, bool Allow_gore=True, int Tile_number_line=-1, int Tile_number_sample=-1)\n"
 		"\n"
-		"DoughnutAverage::DoughnutAverage(const boost::shared_ptr< RasterImageMultiBand > &Rimg, int\n"
-		"Window_size=11, int Doughnut_size=5, bool Allow_gore=true, int\n"
-		"Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
 		"GeoCal::DoughnutAverage::DoughnutAverage\n"
-		"Constructor.\n"
-		"Parameters:\n"
-		"-----------\n"
+		"Constructor.  \n"
 		"\n"
-		"Rimg:  The underlying image we are producing the average for.\n"
+		"Parameters\n"
+		"----------\n"
+		"* `Rimg` :  \n"
+		"    The underlying image we are producing the average for.  \n"
+		"* `Window_size` :  \n"
+		"    The window size we are averaging. Should be odd number.  \n"
+		"* `Doughnut_size` :  \n"
+		"    The doughnut we are excluding in the average. Should be odd, and <\n"
+		"    Window_size.  \n"
+		"* `Allow_gore` :  \n"
+		"    If \"Allow_gore\" is true, then any point other than the center can be gore\n"
+		"    and we just exclude it from the average. If \"Allow_gore\" is false, we set\n"
+		"    a value to 0 if any value in the window is 0. In all cases, we set a value\n"
+		"    to 0 if the center  \n"
+		"* `Number_tile_line` :  \n"
+		"    Number of lines in each tile  \n"
+		"* `Number_tile_sample` :  \n"
+		"    Number of samples in each tile  \n"
+		"* `Number_tile` :  \n"
+		"    Number of tiles to use  \n"
 		"\n"
-		"Window_size:  The window size we are averaging. Should be odd number.\n"
-		"\n"
-		"Doughnut_size:  The doughnut we are excluding in the average. Should\n"
-		"be odd, and < Window_size.\n"
-		"\n"
-		"Allow_gore:  If \"Allow_gore\" is true, then any point other than the\n"
-		"center can be gore and we just exclude it from the average. If\n"
-		"\"Allow_gore\" is false, we set a value to 0 if any value in the\n"
-		"window is 0. In all cases, we set a value to 0 if the center\n"
-		"\n"
-		"Number_tile_line:  Number of lines in each tile\n"
-		"\n"
-		"Number_tile_sample:  Number of samples in each tile\n"
-		"\n"
-		"Number_tile:  Number of tiles to use \n"
 		""},
 	 { "DoughnutAverage_cvdnorm", _wrap_DoughnutAverage_cvdnorm, METH_VARARGS, "\n"
+		"cvdnorm(DoughnutAverage self, int band, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"Array< double, 2 > DoughnutAverage::cvdnorm(int band, int Lstart, int Sstart, int Number_line, int Number_sample)\n"
-		"const\n"
 		"GeoCal::DoughnutAverage::cvdnorm\n"
-		"Very closely related in the doughnut average is the cvdnorm for one of\n"
-		"the bands.\n"
-		"So we provide the calculation for that. \n"
+		"Very closely related in the doughnut average is the cvdnorm for one of the\n"
+		"bands.  \n"
+		"\n"
+		"So we provide the calculation for that.  \n"
+		"\n"
 		""},
 	 { "DoughnutAverage_pandif", _wrap_DoughnutAverage_pandif, METH_VARARGS, "\n"
+		"pandif(DoughnutAverage self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > DoughnutAverage::pandif(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::DoughnutAverage::pandif\n"
-		"This is the difference of the first two cvdnorm bands.\n"
+		"This is the difference of the first two cvdnorm bands.  \n"
 		"\n"
 		""},
 	 { "DoughnutAverage__v_window_size", _wrap_DoughnutAverage__v_window_size, METH_O, "\n"
+		"_v_window_size(DoughnutAverage self) -> int\n"
 		"\n"
-		"int GeoCal::DoughnutAverage::window_size() const\n"
 		"GeoCal::DoughnutAverage::window_size\n"
-		"The window size.\n"
+		"The window size.  \n"
 		"\n"
 		""},
 	 { "DoughnutAverage__v_doughnut_size", _wrap_DoughnutAverage__v_doughnut_size, METH_O, "\n"
+		"_v_doughnut_size(DoughnutAverage self) -> int\n"
 		"\n"
-		"int GeoCal::DoughnutAverage::doughnut_size() const\n"
 		"GeoCal::DoughnutAverage::doughnut_size\n"
-		"The doughnut size.\n"
+		"The doughnut size.  \n"
 		"\n"
 		""},
 	 { "DoughnutAverage__v_allow_gore", _wrap_DoughnutAverage__v_allow_gore, METH_O, "\n"
+		"_v_allow_gore(DoughnutAverage self) -> bool\n"
 		"\n"
-		"bool GeoCal::DoughnutAverage::allow_gore() const\n"
 		"GeoCal::DoughnutAverage::allow_gore\n"
-		"If true, we allow gore in a window and just exclude it in the average.\n"
-		"Otherwise we set a point to 0 if any point in the window is 0. \n"
+		"If true, we allow gore in a window and just exclude it in the average.  \n"
+		"\n"
+		"Otherwise we set a point to 0 if any point in the window is 0.  \n"
+		"\n"
 		""},
 	 { "DoughnutAverage__v_underlying_image", _wrap_DoughnutAverage__v_underlying_image, METH_O, "\n"
+		"_v_underlying_image(DoughnutAverage self) -> boost::shared_ptr< GeoCal::RasterImageMultiBand >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImageMultiBand > & GeoCal::DoughnutAverage::underlying_image() const\n"
 		"GeoCal::DoughnutAverage::underlying_image\n"
-		"The underlying image.\n"
+		"The underlying image.  \n"
 		"\n"
 		""},
 	 { "delete_DoughnutAverage", _wrap_delete_DoughnutAverage, METH_O, "\n"
+		"delete_DoughnutAverage(DoughnutAverage self)\n"
 		"\n"
-		"virtual GeoCal::DoughnutAverage::~DoughnutAverage()\n"
 		"GeoCal::DoughnutAverage::~DoughnutAverage\n"
 		""},
 	 { "DoughnutAverage_swigregister", DoughnutAverage_swigregister, METH_O, NULL},
 	 { "DoughnutAverage_swiginit", DoughnutAverage_swiginit, METH_VARARGS, NULL},
 	 { "new_RasterImageWrapCvdNorm", _wrap_new_RasterImageWrapCvdNorm, METH_VARARGS, "\n"
+		"new_RasterImageWrapCvdNorm(boost::shared_ptr< GeoCal::DoughnutAverage > const & Davg, int Band) -> RasterImageWrapCvdNorm\n"
 		"\n"
-		"GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm(const boost::shared_ptr< DoughnutAverage > &Davg, int Band)\n"
 		"GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm\n"
 		""},
 	 { "RasterImageWrapCvdNorm__v_band", _wrap_RasterImageWrapCvdNorm__v_band, METH_O, "\n"
+		"_v_band(RasterImageWrapCvdNorm self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageWrapCvdNorm::band() const\n"
 		"GeoCal::RasterImageWrapCvdNorm::band\n"
 		""},
 	 { "RasterImageWrapCvdNorm__v_davg", _wrap_RasterImageWrapCvdNorm__v_davg, METH_O, "\n"
+		"_v_davg(RasterImageWrapCvdNorm self) -> boost::shared_ptr< GeoCal::DoughnutAverage >\n"
 		"\n"
-		"const boost::shared_ptr< DoughnutAverage > & GeoCal::RasterImageWrapCvdNorm::davg() const\n"
 		"GeoCal::RasterImageWrapCvdNorm::davg\n"
 		""},
 	 { "delete_RasterImageWrapCvdNorm", _wrap_delete_RasterImageWrapCvdNorm, METH_O, "\n"
+		"delete_RasterImageWrapCvdNorm(RasterImageWrapCvdNorm self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageWrapCvdNorm::~RasterImageWrapCvdNorm()\n"
 		"GeoCal::RasterImageWrapCvdNorm::~RasterImageWrapCvdNorm\n"
 		""},
 	 { "RasterImageWrapCvdNorm_swigregister", RasterImageWrapCvdNorm_swigregister, METH_O, NULL},
 	 { "RasterImageWrapCvdNorm_swiginit", RasterImageWrapCvdNorm_swiginit, METH_VARARGS, NULL},
 	 { "new_RasterImageWrapPandif", _wrap_new_RasterImageWrapPandif, METH_O, "\n"
+		"new_RasterImageWrapPandif(boost::shared_ptr< GeoCal::DoughnutAverage > const & Davg) -> RasterImageWrapPandif\n"
 		"\n"
-		"GeoCal::RasterImageWrapPandif::RasterImageWrapPandif(const boost::shared_ptr< DoughnutAverage > &Davg)\n"
 		"GeoCal::RasterImageWrapPandif::RasterImageWrapPandif\n"
 		""},
 	 { "RasterImageWrapPandif__v_davg", _wrap_RasterImageWrapPandif__v_davg, METH_O, "\n"
+		"_v_davg(RasterImageWrapPandif self) -> boost::shared_ptr< GeoCal::DoughnutAverage >\n"
 		"\n"
-		"const boost::shared_ptr< DoughnutAverage > & GeoCal::RasterImageWrapPandif::davg() const\n"
 		"GeoCal::RasterImageWrapPandif::davg\n"
 		""},
 	 { "delete_RasterImageWrapPandif", _wrap_delete_RasterImageWrapPandif, METH_O, "\n"
+		"delete_RasterImageWrapPandif(RasterImageWrapPandif self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageWrapPandif::~RasterImageWrapPandif()\n"
 		"GeoCal::RasterImageWrapPandif::~RasterImageWrapPandif\n"
 		""},
 	 { "RasterImageWrapPandif_swigregister", RasterImageWrapPandif_swigregister, METH_O, NULL},

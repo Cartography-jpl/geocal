@@ -90,6 +90,7 @@ _argus_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _argus_orbit.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _argus_orbit.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -147,18 +148,19 @@ import geocal_swig.geocal_exception
 class ArgusOrbitData(geocal_swig.aircraft_orbit_data.AircraftOrbitData):
     r"""
 
-    This is a single ARGUS navigation file record.
 
-    In addition to the normal things in an OrbitData class, this contains
-    some other metadata. This matches what is stored in the ARGUS CSV
-    navigation file. The additional information is the file name of the
-    JPEG image file collected by the camera and the camera number.
+    This is a single ARGUS navigation file record.  
 
-    Note that we don't have access to a direct measurement of the
-    velocity. Rather than trying to do some clever estimate of the
-    velocity, we just set it to 0.
+    In addition to the normal things in an OrbitData class, this contains some other
+    metadata. This matches what is stored in the ARGUS CSV navigation file. The
+    additional information is the file name of the JPEG image file collected by the
+    camera and the camera number.  
 
-    C++ includes: argus_orbit.h 
+    Note that we don't have access to a direct measurement of the velocity. Rather
+    than trying to do some clever estimate of the velocity, we just set it to 0.  
+
+    C++ includes: argus_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -166,12 +168,10 @@ class ArgusOrbitData(geocal_swig.aircraft_orbit_data.AircraftOrbitData):
 
     def __init__(self, Tm, File_name, Camera_number, Position, Vel_fixed, Roll, Pitch, Heading):
         r"""
+        __init__(ArgusOrbitData self, Time Tm, std::string const & File_name, int Camera_number, Geodetic Position, Array_double_3 Vel_fixed, double Roll, double Pitch, double Heading) -> ArgusOrbitData
 
-        GeoCal::ArgusOrbitData::ArgusOrbitData(const Time &Tm, const std::string &File_name, int Camera_number,
-        const Geodetic &Position, const boost::array< double, 3 > &Vel_fixed,
-        double Roll, double Pitch, double Heading)
         GeoCal::ArgusOrbitData::ArgusOrbitData
-        Constructor.
+        Constructor.  
 
         """
         _argus_orbit.ArgusOrbitData_swiginit(self, _argus_orbit.new_ArgusOrbitData(Tm, File_name, Camera_number, Position, Vel_fixed, Roll, Pitch, Heading))
@@ -206,17 +206,19 @@ _argus_orbit.ArgusOrbitData_swigregister(ArgusOrbitData)
 class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This read a CSV navigation file and uses it to generate a Orbit.
 
-    We access the data in two ways. The first is the standard time index,
-    giving a OrbitData for that time (interpolating if needed). The second
-    is by "row" and camera number. All the orbit data for a given row
-    were acquired at nearly the same time. A row contains data for 1 or
-    more cameras - once the instrument is fully working a row has data for
-    cameras 1 through 13. We return a ArgusOrbitData, which in addition to
-    having the normal OrbitData stuff has additional metadata information.
+    This read a CSV navigation file and uses it to generate a Orbit.  
 
-    C++ includes: argus_orbit.h 
+    We access the data in two ways. The first is the standard time index, giving a
+    OrbitData for that time (interpolating if needed). The second is by "row" and
+    camera number. All the orbit data for a given row were acquired at nearly the
+    same time. A row contains data for 1 or more cameras - once the instrument is
+    fully working a row has data for cameras 1 through 13. We return a
+    ArgusOrbitData, which in addition to having the normal OrbitData stuff has
+    additional metadata information.  
+
+    C++ includes: argus_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -224,14 +226,16 @@ class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
 
     def __init__(self, Fname):
         r"""
+        __init__(ArgusOrbit self, std::string const & Fname) -> ArgusOrbit
 
-        ArgusOrbit::ArgusOrbit(const std::string &Fname)
         GeoCal::ArgusOrbit::ArgusOrbit
-        Open the given file and use it to provide Orbit information.
-        This file should be a CSV file containing one record per line, with
-        the fields "File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading". The
-        first line is assumed to be a header, and is discarded. The second
-        line is the epoch that the times are measured relative to. 
+        Open the given file and use it to provide Orbit information.  
+
+        This file should be a CSV file containing one record per line, with the fields
+        "File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading". The first line is assumed
+        to be a header, and is discarded. The second line is the epoch that the times
+        are measured relative to.  
+
         """
         _argus_orbit.ArgusOrbit_swiginit(self, _argus_orbit.new_ArgusOrbit(Fname))
     focal_length = _swig_new_instance_method(_argus_orbit.ArgusOrbit_focal_length)
@@ -261,6 +265,8 @@ class ArgusOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
 # Register ArgusOrbit in _argus_orbit:
 _argus_orbit.ArgusOrbit_swigregister(ArgusOrbit)
 class Vector_ArgusOrbitData(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_argus_orbit.Vector_ArgusOrbitData_iterator)
@@ -290,6 +296,12 @@ class Vector_ArgusOrbitData(object):
     erase = _swig_new_instance_method(_argus_orbit.Vector_ArgusOrbitData_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_ArgusOrbitData self) -> Vector_ArgusOrbitData
+        __init__(Vector_ArgusOrbitData self, Vector_ArgusOrbitData other) -> Vector_ArgusOrbitData
+        __init__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type size) -> Vector_ArgusOrbitData
+        __init__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & value) -> Vector_ArgusOrbitData
+        """
         _argus_orbit.Vector_ArgusOrbitData_swiginit(self, _argus_orbit.new_Vector_ArgusOrbitData(*args))
     push_back = _swig_new_instance_method(_argus_orbit.Vector_ArgusOrbitData_push_back)
     front = _swig_new_instance_method(_argus_orbit.Vector_ArgusOrbitData_front)

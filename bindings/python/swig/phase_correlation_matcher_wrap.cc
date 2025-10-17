@@ -6742,69 +6742,74 @@ SWIGINTERN PyObject *PhaseCorrelationMatcher_swiginit(PyObject *SWIGUNUSEDPARM(s
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_PhaseCorrelationMatcher", _wrap_new_PhaseCorrelationMatcher, METH_VARARGS, "\n"
+		"PhaseCorrelationMatcher(int Template_size=32, int Search_size=32)\n"
 		"\n"
-		"PhaseCorrelationMatcher::PhaseCorrelationMatcher(int Template_size=32, int Search_size=32)\n"
 		"GeoCal::PhaseCorrelationMatcher::PhaseCorrelationMatcher\n"
-		"Constructor.\n"
-		"Parameters:\n"
-		"-----------\n"
+		"Constructor.  \n"
 		"\n"
-		"Template_size:  Size of the area that we do use in the first image.\n"
-		"This was called FFTSIZE in Al Zobrist's picmtch4 program. Note that\n"
-		"this must be even.\n"
+		"Parameters\n"
+		"----------\n"
+		"* `Template_size` :  \n"
+		"    Size of the area that we do use in the first image. This was called FFTSIZE\n"
+		"    in Al Zobrist's picmtch4 program. Note that this must be even.  \n"
+		"* `Search_size` :  \n"
+		"    Size to search in the second image. This should be > Template_size, and\n"
+		"    even.  \n"
 		"\n"
-		"Search_size:  Size to search in the second image. This should be >\n"
-		"Template_size, and even. \n"
 		""},
 	 { "PhaseCorrelationMatcher__v_template_size", _wrap_PhaseCorrelationMatcher__v_template_size, METH_O, "\n"
+		"PhaseCorrelationMatcher__v_template_size(PhaseCorrelationMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::PhaseCorrelationMatcher::template_size() const\n"
 		"GeoCal::PhaseCorrelationMatcher::template_size\n"
-		"TODO Go through and change the variable names used here.\n"
-		"But for now, match Al's code Size of the area that we do use in the\n"
-		"first image. This was called FFTSIZE in Al Zobrist's picmtch4 program.\n"
-		"Note that this must be a power of 2. There is a note in picmtch4 that\n"
-		"this should be at least 32 and a power of 2, but this isn't actually\n"
-		"required by the code, just that it is even. \n"
+		"TODO Go through and change the variable names used here.  \n"
+		"\n"
+		"But for now, match Al's code Size of the area that we do use in the first image.\n"
+		"This was called FFTSIZE in Al Zobrist's picmtch4 program. Note that this must be\n"
+		"a power of 2. There is a note in picmtch4 that this should be at least 32 and a\n"
+		"power of 2, but this isn't actually required by the code, just that it is even.  \n"
+		"\n"
 		""},
 	 { "PhaseCorrelationMatcher__v_search_size", _wrap_PhaseCorrelationMatcher__v_search_size, METH_O, "\n"
+		"PhaseCorrelationMatcher__v_search_size(PhaseCorrelationMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::PhaseCorrelationMatcher::search_size() const\n"
 		"GeoCal::PhaseCorrelationMatcher::search_size\n"
-		"The search size. This should be >= template_size().\n"
+		"The search size. This should be >= template_size().  \n"
 		"\n"
 		""},
 	 { "PhaseCorrelationMatcher__v_correlation_last_match", _wrap_PhaseCorrelationMatcher__v_correlation_last_match, METH_O, "\n"
+		"PhaseCorrelationMatcher__v_correlation_last_match(PhaseCorrelationMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::PhaseCorrelationMatcher::correlation_last_match() const\n"
 		"GeoCal::PhaseCorrelationMatcher::correlation_last_match\n"
-		"The maximum correlation of last match.\n"
+		"The maximum correlation of last match.  \n"
 		"\n"
 		""},
 	 { "delete_PhaseCorrelationMatcher", _wrap_delete_PhaseCorrelationMatcher, METH_O, "\n"
+		"delete_PhaseCorrelationMatcher(PhaseCorrelationMatcher self)\n"
 		"\n"
-		"PhaseCorrelationMatcher::~PhaseCorrelationMatcher()\n"
 		"GeoCal::PhaseCorrelationMatcher::~PhaseCorrelationMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PhaseCorrelationMatcher_swigregister", PhaseCorrelationMatcher_swigregister, METH_O, NULL},
@@ -6815,69 +6820,74 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_PhaseCorrelationMatcher", _wrap_new_PhaseCorrelationMatcher, METH_VARARGS, "\n"
+		"PhaseCorrelationMatcher(int Template_size=32, int Search_size=32)\n"
 		"\n"
-		"PhaseCorrelationMatcher::PhaseCorrelationMatcher(int Template_size=32, int Search_size=32)\n"
 		"GeoCal::PhaseCorrelationMatcher::PhaseCorrelationMatcher\n"
-		"Constructor.\n"
-		"Parameters:\n"
-		"-----------\n"
+		"Constructor.  \n"
 		"\n"
-		"Template_size:  Size of the area that we do use in the first image.\n"
-		"This was called FFTSIZE in Al Zobrist's picmtch4 program. Note that\n"
-		"this must be even.\n"
+		"Parameters\n"
+		"----------\n"
+		"* `Template_size` :  \n"
+		"    Size of the area that we do use in the first image. This was called FFTSIZE\n"
+		"    in Al Zobrist's picmtch4 program. Note that this must be even.  \n"
+		"* `Search_size` :  \n"
+		"    Size to search in the second image. This should be > Template_size, and\n"
+		"    even.  \n"
 		"\n"
-		"Search_size:  Size to search in the second image. This should be >\n"
-		"Template_size, and even. \n"
 		""},
 	 { "PhaseCorrelationMatcher__v_template_size", _wrap_PhaseCorrelationMatcher__v_template_size, METH_O, "\n"
+		"_v_template_size(PhaseCorrelationMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::PhaseCorrelationMatcher::template_size() const\n"
 		"GeoCal::PhaseCorrelationMatcher::template_size\n"
-		"TODO Go through and change the variable names used here.\n"
-		"But for now, match Al's code Size of the area that we do use in the\n"
-		"first image. This was called FFTSIZE in Al Zobrist's picmtch4 program.\n"
-		"Note that this must be a power of 2. There is a note in picmtch4 that\n"
-		"this should be at least 32 and a power of 2, but this isn't actually\n"
-		"required by the code, just that it is even. \n"
+		"TODO Go through and change the variable names used here.  \n"
+		"\n"
+		"But for now, match Al's code Size of the area that we do use in the first image.\n"
+		"This was called FFTSIZE in Al Zobrist's picmtch4 program. Note that this must be\n"
+		"a power of 2. There is a note in picmtch4 that this should be at least 32 and a\n"
+		"power of 2, but this isn't actually required by the code, just that it is even.  \n"
+		"\n"
 		""},
 	 { "PhaseCorrelationMatcher__v_search_size", _wrap_PhaseCorrelationMatcher__v_search_size, METH_O, "\n"
+		"_v_search_size(PhaseCorrelationMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::PhaseCorrelationMatcher::search_size() const\n"
 		"GeoCal::PhaseCorrelationMatcher::search_size\n"
-		"The search size. This should be >= template_size().\n"
+		"The search size. This should be >= template_size().  \n"
 		"\n"
 		""},
 	 { "PhaseCorrelationMatcher__v_correlation_last_match", _wrap_PhaseCorrelationMatcher__v_correlation_last_match, METH_O, "\n"
+		"_v_correlation_last_match(PhaseCorrelationMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::PhaseCorrelationMatcher::correlation_last_match() const\n"
 		"GeoCal::PhaseCorrelationMatcher::correlation_last_match\n"
-		"The maximum correlation of last match.\n"
+		"The maximum correlation of last match.  \n"
 		"\n"
 		""},
 	 { "delete_PhaseCorrelationMatcher", _wrap_delete_PhaseCorrelationMatcher, METH_O, "\n"
+		"delete_PhaseCorrelationMatcher(PhaseCorrelationMatcher self)\n"
 		"\n"
-		"PhaseCorrelationMatcher::~PhaseCorrelationMatcher()\n"
 		"GeoCal::PhaseCorrelationMatcher::~PhaseCorrelationMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PhaseCorrelationMatcher_swigregister", PhaseCorrelationMatcher_swigregister, METH_O, NULL},

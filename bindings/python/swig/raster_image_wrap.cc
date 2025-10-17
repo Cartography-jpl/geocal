@@ -13760,331 +13760,403 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RasterImageTileIterator", _wrap_new_RasterImageTileIterator, METH_O, "\n"
+		"new_RasterImageTileIterator(RasterImage Ri) -> RasterImageTileIterator\n"
 		"\n"
-		"RasterImageTileIterator::RasterImageTileIterator(const RasterImage &Ri, int Number_tile_line, int Number_tile_sample)\n"
 		"GeoCal::RasterImageTileIterator::RasterImageTileIterator\n"
-		"Constructor, where we supply a tile size to use (which may be\n"
-		"different than Ri's tile size).\n"
+		"Constructor, where we supply a tile size to use (which may be different than\n"
+		"Ri's tile size).  \n"
 		"\n"
 		""},
 	 { "RasterImageTileIterator__v_istart", _wrap_RasterImageTileIterator__v_istart, METH_O, "\n"
+		"RasterImageTileIterator__v_istart(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::istart() const\n"
 		"GeoCal::RasterImageTileIterator::istart\n"
 		""},
 	 { "RasterImageTileIterator__v_jstart", _wrap_RasterImageTileIterator__v_jstart, METH_O, "\n"
+		"RasterImageTileIterator__v_jstart(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::jstart() const\n"
 		"GeoCal::RasterImageTileIterator::jstart\n"
 		""},
 	 { "RasterImageTileIterator__v_iend", _wrap_RasterImageTileIterator__v_iend, METH_O, "\n"
+		"RasterImageTileIterator__v_iend(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::iend() const\n"
 		"GeoCal::RasterImageTileIterator::iend\n"
 		""},
 	 { "RasterImageTileIterator__v_jend", _wrap_RasterImageTileIterator__v_jend, METH_O, "\n"
+		"RasterImageTileIterator__v_jend(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::jend() const\n"
 		"GeoCal::RasterImageTileIterator::jend\n"
 		""},
 	 { "RasterImageTileIterator__v_number_line", _wrap_RasterImageTileIterator__v_number_line, METH_O, "\n"
+		"RasterImageTileIterator__v_number_line(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::number_line() const\n"
 		"GeoCal::RasterImageTileIterator::number_line\n"
 		""},
 	 { "RasterImageTileIterator__v_number_sample", _wrap_RasterImageTileIterator__v_number_sample, METH_O, "\n"
+		"RasterImageTileIterator__v_number_sample(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::number_sample() const\n"
 		"GeoCal::RasterImageTileIterator::number_sample\n"
 		""},
 	 { "RasterImageTileIterator__v_end", _wrap_RasterImageTileIterator__v_end, METH_O, "\n"
+		"RasterImageTileIterator__v_end(RasterImageTileIterator self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterImageTileIterator::end() const\n"
 		"GeoCal::RasterImageTileIterator::end\n"
 		""},
-	 { "RasterImageTileIterator_next", _wrap_RasterImageTileIterator_next, METH_O, NULL},
-	 { "RasterImageTileIterator___str__", _wrap_RasterImageTileIterator___str__, METH_O, NULL},
-	 { "delete_RasterImageTileIterator", _wrap_delete_RasterImageTileIterator, METH_O, NULL},
+	 { "RasterImageTileIterator_next", _wrap_RasterImageTileIterator_next, METH_O, "RasterImageTileIterator_next(RasterImageTileIterator self) -> RasterImageTileIterator"},
+	 { "RasterImageTileIterator___str__", _wrap_RasterImageTileIterator___str__, METH_O, "RasterImageTileIterator___str__(RasterImageTileIterator self) -> std::string"},
+	 { "delete_RasterImageTileIterator", _wrap_delete_RasterImageTileIterator, METH_O, "delete_RasterImageTileIterator(RasterImageTileIterator self)"},
 	 { "RasterImageTileIterator_swigregister", RasterImageTileIterator_swigregister, METH_O, NULL},
 	 { "RasterImageTileIterator_swiginit", RasterImageTileIterator_swiginit, METH_VARARGS, NULL},
 	 { "RasterImage_overview", _wrap_RasterImage_overview, METH_VARARGS, "\n"
+		"RasterImage_overview(RasterImage self, int Min_number_sample) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"virtual boost::shared_ptr< RasterImage > GeoCal::RasterImage::overview(int UNUSED(Min_number_sample)) const\n"
 		"GeoCal::RasterImage::overview\n"
-		"Some RasterImage may have overviews which are lower resolution images.\n"
-		"If we do have these, then this will return the lower resolution\n"
-		"RasterImage that has at least the given number of samples. If we don't\n"
-		"have an overview, this returns a null - which the calling routine\n"
-		"needs to be ready to handle. \n"
+		"Some RasterImage may have overviews which are lower resolution images.  \n"
+		"\n"
+		"If we do have these, then this will return the lower resolution RasterImage that\n"
+		"has at least the given number of samples. If we don't have an overview, this\n"
+		"returns a null - which the calling routine needs to be ready to handle.  \n"
+		"\n"
 		""},
 	 { "RasterImage_interpolate", _wrap_RasterImage_interpolate, METH_VARARGS, "\n"
+		"RasterImage_interpolate(RasterImage self, double Line, double Sample) -> double\n"
+		"RasterImage_interpolate(RasterImage self, ImageCoordinate Ic) -> double\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::interpolate(double Line, double Sample, int Number_line, int Number_sample,\n"
-		"double Fill_value=0.0) const\n"
 		"GeoCal::RasterImage::interpolate\n"
-		"Interpolate a region, starting with the given fractional line and\n"
-		"sample.\n"
-		"This is a bilinear interpolation. This does padding with the given\n"
-		"fill value. \n"
+		"Interpolate a region, starting with the given fractional line and sample.  \n"
+		"\n"
+		"This is a bilinear interpolation. This does padding with the given fill value.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_copy_needs_double", _wrap_RasterImage__v_copy_needs_double, METH_O, "\n"
+		"RasterImage__v_copy_needs_double(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::copy_needs_double() const\n"
 		"GeoCal::RasterImage::copy_needs_double\n"
-		"As an optimization, we assume when copying that data can be\n"
-		"represented as a int.\n"
-		"That is true of many images. But we actually need to use double, then\n"
-		"we need to know that in the copy command. This function indicates if\n"
-		"we need a double or not. \n"
+		"As an optimization, we assume when copying that data can be represented as a\n"
+		"int.  \n"
+		"\n"
+		"That is true of many images. But we actually need to use double, then we need to\n"
+		"know that in the copy command. This function indicates if we need a double or\n"
+		"not.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_number_line", _wrap_RasterImage__v_number_line, METH_O, "\n"
+		"RasterImage__v_number_line(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_line() const =0\n"
 		"GeoCal::RasterImage::number_line\n"
-		"Return number of lines in the image.\n"
+		"Return number of lines in the image.  \n"
 		"\n"
 		""},
 	 { "RasterImage__v_number_sample", _wrap_RasterImage__v_number_sample, METH_O, "\n"
+		"RasterImage__v_number_sample(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_sample() const =0\n"
 		"GeoCal::RasterImage::number_sample\n"
-		"Return number of samples in the image.\n"
+		"Return number of samples in the image.  \n"
 		"\n"
 		""},
 	 { "RasterImage__v_number_tile_line", _wrap_RasterImage__v_number_tile_line, METH_O, "\n"
+		"RasterImage__v_number_tile_line(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_tile_line() const\n"
 		"GeoCal::RasterImage::number_tile_line\n"
-		"Number of lines in the preferred tile size.\n"
-		"Default is the entire image. \n"
+		"Number of lines in the preferred tile size.  \n"
+		"\n"
+		"Default is the entire image.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_number_tile_sample", _wrap_RasterImage__v_number_tile_sample, METH_O, "\n"
+		"RasterImage__v_number_tile_sample(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_tile_sample() const\n"
 		"GeoCal::RasterImage::number_tile_sample\n"
-		"Number of samples in the preferred tile size.\n"
-		"Default is the entire image. \n"
+		"Number of samples in the preferred tile size.  \n"
+		"\n"
+		"Default is the entire image.  \n"
+		"\n"
 		""},
 	 { "RasterImage_unchecked_read_double", _wrap_RasterImage_unchecked_read_double, METH_VARARGS, "\n"
+		"RasterImage_unchecked_read_double(RasterImage self, int Line, int Sample) -> double\n"
 		"\n"
-		"virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0\n"
 		"GeoCal::RasterImage::unchecked_read_double\n"
 		""},
 	 { "RasterImage_read_with_pad", _wrap_RasterImage_read_with_pad, METH_VARARGS, "\n"
+		"RasterImage_read_with_pad(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample, int Fill_value=0) -> BlitzArray_int_2\n"
 		"\n"
-		"blitz::Array< int, 2 > RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, int\n"
-		"Fill_value=0) const\n"
 		"GeoCal::RasterImage::read_with_pad\n"
-		"Return a subset of the image.\n"
+		"Return a subset of the image.  \n"
+		"\n"
 		"This variation of read allows the data read to extend past the actual\n"
-		"RasterImage (e.g., negative start line). In this case, we return the\n"
-		"given fill value for the outside area. \n"
+		"RasterImage (e.g., negative start line). In this case, we return the given fill\n"
+		"value for the outside area.  \n"
+		"\n"
 		""},
 	 { "RasterImage_read_double", _wrap_RasterImage_read_double, METH_VARARGS, "\n"
+		"RasterImage_read_double(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::RasterImage::read_double\n"
-		"Some raster images actually are floating point values (e.g., a\n"
-		"CalcRaster).\n"
-		"This function gives access to the underlying floating point numbers.\n"
-		"The default function here just returns the result of read as a double,\n"
-		"but derived classes can override this. \n"
+		"Some raster images actually are floating point values (e.g., a CalcRaster).  \n"
+		"\n"
+		"This function gives access to the underlying floating point numbers. The default\n"
+		"function here just returns the result of read as a double, but derived classes\n"
+		"can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage_read_double_with_pad", _wrap_RasterImage_read_double_with_pad, METH_VARARGS, "\n"
+		"RasterImage_read_double_with_pad(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample, double Fill_value=0.0) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, double\n"
-		"Fill_value=0.0) const\n"
 		"GeoCal::RasterImage::read_double_with_pad\n"
-		"Return a subset of the image.\n"
+		"Return a subset of the image.  \n"
+		"\n"
 		"This variation of read allows the data read to extend past the actual\n"
-		"RasterImage (e.g., negative start line). In this case, we return the\n"
-		"given fill value for the outside area. \n"
+		"RasterImage (e.g., negative start line). In this case, we return the given fill\n"
+		"value for the outside area.  \n"
+		"\n"
 		""},
 	 { "RasterImage_read", _wrap_RasterImage_read, METH_VARARGS, "\n"
+		"RasterImage_read(RasterImage self, int Line, int Sample) -> int\n"
+		"RasterImage_read(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_int_2\n"
+		"RasterImage_read(RasterImage self, RasterImageTileIterator Ti) -> BlitzArray_int_2\n"
 		"\n"
-		"blitz::Array< int, 2 > RasterImage::read(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::RasterImage::read\n"
-		"Return a subset of the image.\n"
+		"Return a subset of the image.  \n"
 		"\n"
 		""},
 	 { "RasterImage_write", _wrap_RasterImage_write, METH_VARARGS, "\n"
+		"RasterImage_write(RasterImage self, int Line, int Sample, int Val)\n"
+		"RasterImage_write(RasterImage self, int Lstart, int Sstart, BlitzArray_int_2 A)\n"
+		"RasterImage_write(RasterImage self, int Lstart, int Sstart, BlitzArray_double_2 A)\n"
 		"\n"
-		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< int, 2 > &A)\n"
 		"GeoCal::RasterImage::write\n"
 		""},
-	 { "RasterImage___str__", _wrap_RasterImage___str__, METH_O, NULL},
+	 { "RasterImage___str__", _wrap_RasterImage___str__, METH_O, "RasterImage___str__(RasterImage self) -> std::string"},
 	 { "RasterImage__v_has_map_info", _wrap_RasterImage__v_has_map_info, METH_O, "\n"
+		"RasterImage__v_has_map_info(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_map_info() const\n"
 		"GeoCal::RasterImage::has_map_info\n"
-		"Indicate if we have MapInfo.\n"
-		"Functions available if we have MapInfo data.  The default is false,\n"
-		"but derived classes can override this. \n"
+		"Indicate if we have MapInfo.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" Functions available if we have MapInfo data.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" The default is false, but derived classes can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_map_info", _wrap_RasterImage__v_map_info, METH_O, "\n"
+		"RasterImage__v_map_info(RasterImage self) -> MapInfo\n"
 		"\n"
-		"virtual const MapInfo & GeoCal::RasterImage::map_info() const\n"
 		"GeoCal::RasterImage::map_info\n"
-		"  MapInfo for image.\n"
+		"* * * * *  \n"
+		"\n"
+		" MapInfo for image.  \n"
 		"\n"
 		""},
 	 { "RasterImage_ground_coordinate", _wrap_RasterImage_ground_coordinate, METH_VARARGS, "\n"
+		"RasterImage_ground_coordinate(RasterImage self, ImageCoordinate Ic) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"RasterImage_ground_coordinate(RasterImage self, ImageCoordinate Ic, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"RasterImage_ground_coordinate(RasterImage self, double Line, double Sample) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"RasterImage_ground_coordinate(RasterImage self, double Line, double Sample, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > GeoCal::RasterImage::ground_coordinate(double Line, double Sample, const Dem &D) const\n"
 		"GeoCal::RasterImage::ground_coordinate\n"
-		"Shortcut to calling mapinfo().ground_coordinate.\n"
+		"Shortcut to calling mapinfo().ground_coordinate.  \n"
 		"\n"
 		""},
 	 { "RasterImage_coordinate", _wrap_RasterImage_coordinate, METH_VARARGS, "\n"
+		"RasterImage_coordinate(RasterImage self, GroundCoordinate Gc) -> ImageCoordinate\n"
+		"RasterImage_coordinate(RasterImage self, BlitzArray_double_1 Lat, BlitzArray_double_1 Lon) -> BlitzArray_double_2\n"
 		"\n"
-		"ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const\n"
 		"GeoCal::RasterImage::coordinate\n"
-		"Shortcut to calling mapinfo().coordinate.\n"
+		"Shortcut to calling mapinfo().coordinate.  \n"
 		"\n"
 		""},
 	 { "RasterImage__v_grid_center_line_resolution", _wrap_RasterImage__v_grid_center_line_resolution, METH_O, "\n"
+		"RasterImage__v_grid_center_line_resolution(RasterImage self) -> double\n"
 		"\n"
-		"double RasterImage::grid_center_line_resolution() const\n"
 		"GeoCal::RasterImage::grid_center_line_resolution\n"
-		"This calculates the grid resolution in meters for the center of the\n"
-		"grid in the line direction.\n"
+		"This calculates the grid resolution in meters for the center of the grid in the\n"
+		"line direction.  \n"
+		"\n"
 		"This is just the distance between The center pixel number_line() / 2,\n"
-		"number_sample() / 2 and the pixel number_line() / 2 + 1,\n"
-		"number_sample() / 2. \n"
+		"number_sample() / 2 and the pixel number_line() / 2 + 1, number_sample() / 2.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_grid_center_sample_resolution", _wrap_RasterImage__v_grid_center_sample_resolution, METH_O, "\n"
+		"RasterImage__v_grid_center_sample_resolution(RasterImage self) -> double\n"
 		"\n"
-		"double RasterImage::grid_center_sample_resolution() const\n"
 		"GeoCal::RasterImage::grid_center_sample_resolution\n"
-		"This calculates the grid resolution in meters for the center of the\n"
-		"grid in the sample direction.\n"
+		"This calculates the grid resolution in meters for the center of the grid in the\n"
+		"sample direction.  \n"
+		"\n"
 		"This is just the distance between The center pixel number_line() / 2,\n"
-		"number_sample() / 2 and the pixel number_line() / 2, number_sample() /\n"
-		"2 + 1. \n"
+		"number_sample() / 2 and the pixel number_line() / 2, number_sample() / 2 + 1.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_has_rpc", _wrap_RasterImage__v_has_rpc, METH_O, "\n"
+		"RasterImage__v_has_rpc(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_rpc() const\n"
 		"GeoCal::RasterImage::has_rpc\n"
-		"Indicate if we have Rpc.\n"
-		"Functions available if we have RPC  The default is false, but derived\n"
-		"classes can override this. \n"
+		"Indicate if we have Rpc.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" Functions available if we have RPC  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" The default is false, but derived classes can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_rpc", _wrap_RasterImage__v_rpc, METH_O, "\n"
+		"RasterImage__v_rpc(RasterImage self) -> boost::shared_ptr< GeoCal::Rpc >\n"
 		"\n"
-		"boost::shared_ptr< Rpc > GeoCal::RasterImage::rpc_ptr() const\n"
 		"GeoCal::RasterImage::rpc_ptr\n"
+		"* * * * *  \n"
 		"Pointer version of rpc(). This makes python happier.\n"
-		"\n"
 		""},
 	 { "RasterImage__v_has_rsm", _wrap_RasterImage__v_has_rsm, METH_O, "\n"
+		"RasterImage__v_has_rsm(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_rsm() const\n"
 		"GeoCal::RasterImage::has_rsm\n"
-		"Indicate if we have Rsm.\n"
-		"Functions available if we have RSM  The default is false, but derived\n"
-		"classes can override this. \n"
+		"Indicate if we have Rsm.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" Functions available if we have RSM  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" The default is false, but derived classes can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_rsm", _wrap_RasterImage__v_rsm, METH_O, "\n"
+		"RasterImage__v_rsm(RasterImage self) -> boost::shared_ptr< GeoCal::Rsm >\n"
 		"\n"
-		"virtual boost::shared_ptr< Rsm > GeoCal::RasterImage::rsm() const\n"
 		"GeoCal::RasterImage::rsm\n"
-		"  Rsm for image.\n"
+		"* * * * *  \n"
+		"\n"
+		" Rsm for image.  \n"
 		"\n"
 		""},
 	 { "delete_RasterImage", _wrap_delete_RasterImage, METH_O, "\n"
+		"delete_RasterImage(RasterImage self)\n"
 		"\n"
-		"virtual GeoCal::RasterImage::~RasterImage()\n"
 		"GeoCal::RasterImage::~RasterImage\n"
 		""},
 	 { "RasterImage_swigregister", RasterImage_swigregister, METH_O, NULL},
 	 { "new_ArrayRasterImage", _wrap_new_ArrayRasterImage, METH_NOARGS, "\n"
+		"new_ArrayRasterImage() -> ArrayRasterImage\n"
 		"\n"
-		"GeoCal::ArrayRasterImage::ArrayRasterImage()\n"
 		"GeoCal::ArrayRasterImage::ArrayRasterImage\n"
-		"Create an empty array.\n"
+		"Create an empty array.  \n"
 		"\n"
 		""},
 	 { "ArrayRasterImage_append", _wrap_ArrayRasterImage_append, METH_VARARGS, "\n"
+		"ArrayRasterImage_append(ArrayRasterImage self, boost::shared_ptr< GeoCal::RasterImage > const & Img)\n"
 		"\n"
-		"void GeoCal::ArrayRasterImage::push_back(const boost::shared_ptr< RasterImage > &Img)\n"
 		"GeoCal::ArrayRasterImage::push_back\n"
-		"Add to the array.\n"
+		"Add to the array.  \n"
 		"\n"
 		""},
 	 { "ArrayRasterImage_size", _wrap_ArrayRasterImage_size, METH_O, "\n"
+		"ArrayRasterImage_size(ArrayRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayRasterImage::size() const\n"
 		"GeoCal::ArrayRasterImage::size\n"
-		"Return size.\n"
+		"Return size.  \n"
 		"\n"
 		""},
-	 { "ArrayRasterImage_get", _wrap_ArrayRasterImage_get, METH_VARARGS, NULL},
-	 { "ArrayRasterImage_set", _wrap_ArrayRasterImage_set, METH_VARARGS, NULL},
-	 { "ArrayRasterImage___str__", _wrap_ArrayRasterImage___str__, METH_O, NULL},
+	 { "ArrayRasterImage_get", _wrap_ArrayRasterImage_get, METH_VARARGS, "ArrayRasterImage_get(ArrayRasterImage self, int i) -> boost::shared_ptr< GeoCal::RasterImage >"},
+	 { "ArrayRasterImage_set", _wrap_ArrayRasterImage_set, METH_VARARGS, "ArrayRasterImage_set(ArrayRasterImage self, int i, boost::shared_ptr< GeoCal::RasterImage > const & V)"},
+	 { "ArrayRasterImage___str__", _wrap_ArrayRasterImage___str__, METH_O, "ArrayRasterImage___str__(ArrayRasterImage self) -> std::string"},
 	 { "delete_ArrayRasterImage", _wrap_delete_ArrayRasterImage, METH_O, "\n"
+		"delete_ArrayRasterImage(ArrayRasterImage self)\n"
 		"\n"
-		"virtual GeoCal::ArrayRasterImage::~ArrayRasterImage()\n"
 		"GeoCal::ArrayRasterImage::~ArrayRasterImage\n"
 		""},
 	 { "ArrayRasterImage_swigregister", ArrayRasterImage_swigregister, METH_O, NULL},
 	 { "ArrayRasterImage_swiginit", ArrayRasterImage_swiginit, METH_VARARGS, NULL},
 	 { "copy_no_fill", _wrap_copy_no_fill, METH_VARARGS, "\n"
+		"copy_no_fill(RasterImage Img_in, RasterImage Img_out, int Fill_value=0, bool diagnostic=False)\n"
 		"\n"
-		"void GeoCal::copy_no_fill(const RasterImage &Img_in, RasterImage &Img_out, int Fill_value=0,\n"
-		"bool diagnostic=false)\n"
 		"GeoCal::copy_no_fill\n"
-		"This copies one image to another.\n"
-		"The images should be the same size. Setting Diagnostic to true causes\n"
-		"messages to be printed as we do the copying.\n"
+		"This copies one image to another.  \n"
 		"\n"
-		"This differs from copy by skipping copying all values that are equal\n"
-		"to the Fill_value.\n"
+		"The images should be the same size. Setting Diagnostic to true causes messages\n"
+		"to be printed as we do the copying.  \n"
 		"\n"
-		"This can be used to create a simple mosaic by copying multiple images\n"
-		"to a common image. \n"
+		"This differs from copy by skipping copying all values that are equal to the\n"
+		"Fill_value.  \n"
+		"\n"
+		"This can be used to create a simple mosaic by copying multiple images to a\n"
+		"common image.  \n"
+		"\n"
 		""},
 	 { "fill_image", _wrap_fill_image, METH_VARARGS, "\n"
+		"fill_image(RasterImage Img, int Fill_value=0, bool diagnostic=False, int Tile_nline=-1, int Tile_nsamp=-1)\n"
 		"\n"
-		"void GeoCal::fill_image(RasterImage &Img, int Fill_value=0, bool diagnostic=false, int\n"
-		"Tile_nline=-1, int Tile_nsamp=-1)\n"
 		"GeoCal::fill_image\n"
-		"This fills an image with a given value (often 0).\n"
+		"This fills an image with a given value (often 0).  \n"
 		"\n"
 		""},
-	 { "Vector_RasterImage_iterator", _wrap_Vector_RasterImage_iterator, METH_O, NULL},
-	 { "Vector_RasterImage___nonzero__", _wrap_Vector_RasterImage___nonzero__, METH_O, NULL},
-	 { "Vector_RasterImage___bool__", _wrap_Vector_RasterImage___bool__, METH_O, NULL},
-	 { "Vector_RasterImage___len__", _wrap_Vector_RasterImage___len__, METH_O, NULL},
-	 { "Vector_RasterImage___getslice__", _wrap_Vector_RasterImage___getslice__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___setslice__", _wrap_Vector_RasterImage___setslice__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___delslice__", _wrap_Vector_RasterImage___delslice__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___delitem__", _wrap_Vector_RasterImage___delitem__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___getitem__", _wrap_Vector_RasterImage___getitem__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___setitem__", _wrap_Vector_RasterImage___setitem__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_pop", _wrap_Vector_RasterImage_pop, METH_O, NULL},
-	 { "Vector_RasterImage_append", _wrap_Vector_RasterImage_append, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_empty", _wrap_Vector_RasterImage_empty, METH_O, NULL},
-	 { "Vector_RasterImage_size", _wrap_Vector_RasterImage_size, METH_O, NULL},
-	 { "Vector_RasterImage_swap", _wrap_Vector_RasterImage_swap, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_begin", _wrap_Vector_RasterImage_begin, METH_O, NULL},
-	 { "Vector_RasterImage_end", _wrap_Vector_RasterImage_end, METH_O, NULL},
-	 { "Vector_RasterImage_rbegin", _wrap_Vector_RasterImage_rbegin, METH_O, NULL},
-	 { "Vector_RasterImage_rend", _wrap_Vector_RasterImage_rend, METH_O, NULL},
-	 { "Vector_RasterImage_clear", _wrap_Vector_RasterImage_clear, METH_O, NULL},
-	 { "Vector_RasterImage_get_allocator", _wrap_Vector_RasterImage_get_allocator, METH_O, NULL},
-	 { "Vector_RasterImage_pop_back", _wrap_Vector_RasterImage_pop_back, METH_O, NULL},
-	 { "Vector_RasterImage_erase", _wrap_Vector_RasterImage_erase, METH_VARARGS, NULL},
-	 { "new_Vector_RasterImage", _wrap_new_Vector_RasterImage, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_push_back", _wrap_Vector_RasterImage_push_back, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_front", _wrap_Vector_RasterImage_front, METH_O, NULL},
-	 { "Vector_RasterImage_back", _wrap_Vector_RasterImage_back, METH_O, NULL},
-	 { "Vector_RasterImage_assign", _wrap_Vector_RasterImage_assign, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_resize", _wrap_Vector_RasterImage_resize, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_insert", _wrap_Vector_RasterImage_insert, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_reserve", _wrap_Vector_RasterImage_reserve, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_capacity", _wrap_Vector_RasterImage_capacity, METH_O, NULL},
-	 { "delete_Vector_RasterImage", _wrap_delete_Vector_RasterImage, METH_O, NULL},
+	 { "Vector_RasterImage_iterator", _wrap_Vector_RasterImage_iterator, METH_O, "Vector_RasterImage_iterator(Vector_RasterImage self) -> SwigPyIterator"},
+	 { "Vector_RasterImage___nonzero__", _wrap_Vector_RasterImage___nonzero__, METH_O, "Vector_RasterImage___nonzero__(Vector_RasterImage self) -> bool"},
+	 { "Vector_RasterImage___bool__", _wrap_Vector_RasterImage___bool__, METH_O, "Vector_RasterImage___bool__(Vector_RasterImage self) -> bool"},
+	 { "Vector_RasterImage___len__", _wrap_Vector_RasterImage___len__, METH_O, "Vector_RasterImage___len__(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type"},
+	 { "Vector_RasterImage___getslice__", _wrap_Vector_RasterImage___getslice__, METH_VARARGS, "Vector_RasterImage___getslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j) -> Vector_RasterImage"},
+	 { "Vector_RasterImage___setslice__", _wrap_Vector_RasterImage___setslice__, METH_VARARGS, "\n"
+		"Vector_RasterImage___setslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j)\n"
+		"Vector_RasterImage___setslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j, Vector_RasterImage v)\n"
+		""},
+	 { "Vector_RasterImage___delslice__", _wrap_Vector_RasterImage___delslice__, METH_VARARGS, "Vector_RasterImage___delslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j)"},
+	 { "Vector_RasterImage___delitem__", _wrap_Vector_RasterImage___delitem__, METH_VARARGS, "\n"
+		"Vector_RasterImage___delitem__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i)\n"
+		"Vector_RasterImage___delitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_RasterImage___getitem__", _wrap_Vector_RasterImage___getitem__, METH_VARARGS, "\n"
+		"Vector_RasterImage___getitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice) -> Vector_RasterImage\n"
+		"Vector_RasterImage___getitem__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &\n"
+		""},
+	 { "Vector_RasterImage___setitem__", _wrap_Vector_RasterImage___setitem__, METH_VARARGS, "\n"
+		"Vector_RasterImage___setitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice, Vector_RasterImage v)\n"
+		"Vector_RasterImage___setitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_RasterImage___setitem__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)\n"
+		""},
+	 { "Vector_RasterImage_pop", _wrap_Vector_RasterImage_pop, METH_O, "Vector_RasterImage_pop(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type"},
+	 { "Vector_RasterImage_append", _wrap_Vector_RasterImage_append, METH_VARARGS, "Vector_RasterImage_append(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)"},
+	 { "Vector_RasterImage_empty", _wrap_Vector_RasterImage_empty, METH_O, "Vector_RasterImage_empty(Vector_RasterImage self) -> bool"},
+	 { "Vector_RasterImage_size", _wrap_Vector_RasterImage_size, METH_O, "Vector_RasterImage_size(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type"},
+	 { "Vector_RasterImage_swap", _wrap_Vector_RasterImage_swap, METH_VARARGS, "Vector_RasterImage_swap(Vector_RasterImage self, Vector_RasterImage v)"},
+	 { "Vector_RasterImage_begin", _wrap_Vector_RasterImage_begin, METH_O, "Vector_RasterImage_begin(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator"},
+	 { "Vector_RasterImage_end", _wrap_Vector_RasterImage_end, METH_O, "Vector_RasterImage_end(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator"},
+	 { "Vector_RasterImage_rbegin", _wrap_Vector_RasterImage_rbegin, METH_O, "Vector_RasterImage_rbegin(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator"},
+	 { "Vector_RasterImage_rend", _wrap_Vector_RasterImage_rend, METH_O, "Vector_RasterImage_rend(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator"},
+	 { "Vector_RasterImage_clear", _wrap_Vector_RasterImage_clear, METH_O, "Vector_RasterImage_clear(Vector_RasterImage self)"},
+	 { "Vector_RasterImage_get_allocator", _wrap_Vector_RasterImage_get_allocator, METH_O, "Vector_RasterImage_get_allocator(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::allocator_type"},
+	 { "Vector_RasterImage_pop_back", _wrap_Vector_RasterImage_pop_back, METH_O, "Vector_RasterImage_pop_back(Vector_RasterImage self)"},
+	 { "Vector_RasterImage_erase", _wrap_Vector_RasterImage_erase, METH_VARARGS, "\n"
+		"Vector_RasterImage_erase(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator\n"
+		"Vector_RasterImage_erase(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator first, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator\n"
+		""},
+	 { "new_Vector_RasterImage", _wrap_new_Vector_RasterImage, METH_VARARGS, "\n"
+		"Vector_RasterImage()\n"
+		"Vector_RasterImage(Vector_RasterImage other)\n"
+		"Vector_RasterImage(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type size)\n"
+		"new_Vector_RasterImage(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type size, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & value) -> Vector_RasterImage\n"
+		""},
+	 { "Vector_RasterImage_push_back", _wrap_Vector_RasterImage_push_back, METH_VARARGS, "Vector_RasterImage_push_back(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)"},
+	 { "Vector_RasterImage_front", _wrap_Vector_RasterImage_front, METH_O, "Vector_RasterImage_front(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &"},
+	 { "Vector_RasterImage_back", _wrap_Vector_RasterImage_back, METH_O, "Vector_RasterImage_back(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &"},
+	 { "Vector_RasterImage_assign", _wrap_Vector_RasterImage_assign, METH_VARARGS, "Vector_RasterImage_assign(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)"},
+	 { "Vector_RasterImage_resize", _wrap_Vector_RasterImage_resize, METH_VARARGS, "\n"
+		"Vector_RasterImage_resize(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type new_size)\n"
+		"Vector_RasterImage_resize(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)\n"
+		""},
+	 { "Vector_RasterImage_insert", _wrap_Vector_RasterImage_insert, METH_VARARGS, "\n"
+		"Vector_RasterImage_insert(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator\n"
+		"Vector_RasterImage_insert(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)\n"
+		""},
+	 { "Vector_RasterImage_reserve", _wrap_Vector_RasterImage_reserve, METH_VARARGS, "Vector_RasterImage_reserve(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n)"},
+	 { "Vector_RasterImage_capacity", _wrap_Vector_RasterImage_capacity, METH_O, "Vector_RasterImage_capacity(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type"},
+	 { "delete_Vector_RasterImage", _wrap_delete_Vector_RasterImage, METH_O, "delete_Vector_RasterImage(Vector_RasterImage self)"},
 	 { "Vector_RasterImage_swigregister", Vector_RasterImage_swigregister, METH_O, NULL},
 	 { "Vector_RasterImage_swiginit", Vector_RasterImage_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -14112,331 +14184,403 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RasterImageTileIterator", _wrap_new_RasterImageTileIterator, METH_O, "\n"
+		"new_RasterImageTileIterator(RasterImage Ri) -> RasterImageTileIterator\n"
 		"\n"
-		"RasterImageTileIterator::RasterImageTileIterator(const RasterImage &Ri, int Number_tile_line, int Number_tile_sample)\n"
 		"GeoCal::RasterImageTileIterator::RasterImageTileIterator\n"
-		"Constructor, where we supply a tile size to use (which may be\n"
-		"different than Ri's tile size).\n"
+		"Constructor, where we supply a tile size to use (which may be different than\n"
+		"Ri's tile size).  \n"
 		"\n"
 		""},
 	 { "RasterImageTileIterator__v_istart", _wrap_RasterImageTileIterator__v_istart, METH_O, "\n"
+		"_v_istart(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::istart() const\n"
 		"GeoCal::RasterImageTileIterator::istart\n"
 		""},
 	 { "RasterImageTileIterator__v_jstart", _wrap_RasterImageTileIterator__v_jstart, METH_O, "\n"
+		"_v_jstart(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::jstart() const\n"
 		"GeoCal::RasterImageTileIterator::jstart\n"
 		""},
 	 { "RasterImageTileIterator__v_iend", _wrap_RasterImageTileIterator__v_iend, METH_O, "\n"
+		"_v_iend(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::iend() const\n"
 		"GeoCal::RasterImageTileIterator::iend\n"
 		""},
 	 { "RasterImageTileIterator__v_jend", _wrap_RasterImageTileIterator__v_jend, METH_O, "\n"
+		"_v_jend(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::jend() const\n"
 		"GeoCal::RasterImageTileIterator::jend\n"
 		""},
 	 { "RasterImageTileIterator__v_number_line", _wrap_RasterImageTileIterator__v_number_line, METH_O, "\n"
+		"_v_number_line(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::number_line() const\n"
 		"GeoCal::RasterImageTileIterator::number_line\n"
 		""},
 	 { "RasterImageTileIterator__v_number_sample", _wrap_RasterImageTileIterator__v_number_sample, METH_O, "\n"
+		"_v_number_sample(RasterImageTileIterator self) -> int\n"
 		"\n"
-		"int GeoCal::RasterImageTileIterator::number_sample() const\n"
 		"GeoCal::RasterImageTileIterator::number_sample\n"
 		""},
 	 { "RasterImageTileIterator__v_end", _wrap_RasterImageTileIterator__v_end, METH_O, "\n"
+		"_v_end(RasterImageTileIterator self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterImageTileIterator::end() const\n"
 		"GeoCal::RasterImageTileIterator::end\n"
 		""},
-	 { "RasterImageTileIterator_next", _wrap_RasterImageTileIterator_next, METH_O, NULL},
-	 { "RasterImageTileIterator___str__", _wrap_RasterImageTileIterator___str__, METH_O, NULL},
-	 { "delete_RasterImageTileIterator", _wrap_delete_RasterImageTileIterator, METH_O, NULL},
+	 { "RasterImageTileIterator_next", _wrap_RasterImageTileIterator_next, METH_O, "next(RasterImageTileIterator self) -> RasterImageTileIterator"},
+	 { "RasterImageTileIterator___str__", _wrap_RasterImageTileIterator___str__, METH_O, "__str__(RasterImageTileIterator self) -> std::string"},
+	 { "delete_RasterImageTileIterator", _wrap_delete_RasterImageTileIterator, METH_O, "delete_RasterImageTileIterator(RasterImageTileIterator self)"},
 	 { "RasterImageTileIterator_swigregister", RasterImageTileIterator_swigregister, METH_O, NULL},
 	 { "RasterImageTileIterator_swiginit", RasterImageTileIterator_swiginit, METH_VARARGS, NULL},
 	 { "RasterImage_overview", _wrap_RasterImage_overview, METH_VARARGS, "\n"
+		"overview(RasterImage self, int Min_number_sample) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"virtual boost::shared_ptr< RasterImage > GeoCal::RasterImage::overview(int UNUSED(Min_number_sample)) const\n"
 		"GeoCal::RasterImage::overview\n"
-		"Some RasterImage may have overviews which are lower resolution images.\n"
-		"If we do have these, then this will return the lower resolution\n"
-		"RasterImage that has at least the given number of samples. If we don't\n"
-		"have an overview, this returns a null - which the calling routine\n"
-		"needs to be ready to handle. \n"
+		"Some RasterImage may have overviews which are lower resolution images.  \n"
+		"\n"
+		"If we do have these, then this will return the lower resolution RasterImage that\n"
+		"has at least the given number of samples. If we don't have an overview, this\n"
+		"returns a null - which the calling routine needs to be ready to handle.  \n"
+		"\n"
 		""},
 	 { "RasterImage_interpolate", _wrap_RasterImage_interpolate, METH_VARARGS, "\n"
+		"interpolate(RasterImage self, double Line, double Sample) -> double\n"
+		"interpolate(RasterImage self, ImageCoordinate Ic) -> double\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::interpolate(double Line, double Sample, int Number_line, int Number_sample,\n"
-		"double Fill_value=0.0) const\n"
 		"GeoCal::RasterImage::interpolate\n"
-		"Interpolate a region, starting with the given fractional line and\n"
-		"sample.\n"
-		"This is a bilinear interpolation. This does padding with the given\n"
-		"fill value. \n"
+		"Interpolate a region, starting with the given fractional line and sample.  \n"
+		"\n"
+		"This is a bilinear interpolation. This does padding with the given fill value.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_copy_needs_double", _wrap_RasterImage__v_copy_needs_double, METH_O, "\n"
+		"_v_copy_needs_double(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::copy_needs_double() const\n"
 		"GeoCal::RasterImage::copy_needs_double\n"
-		"As an optimization, we assume when copying that data can be\n"
-		"represented as a int.\n"
-		"That is true of many images. But we actually need to use double, then\n"
-		"we need to know that in the copy command. This function indicates if\n"
-		"we need a double or not. \n"
+		"As an optimization, we assume when copying that data can be represented as a\n"
+		"int.  \n"
+		"\n"
+		"That is true of many images. But we actually need to use double, then we need to\n"
+		"know that in the copy command. This function indicates if we need a double or\n"
+		"not.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_number_line", _wrap_RasterImage__v_number_line, METH_O, "\n"
+		"_v_number_line(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_line() const =0\n"
 		"GeoCal::RasterImage::number_line\n"
-		"Return number of lines in the image.\n"
+		"Return number of lines in the image.  \n"
 		"\n"
 		""},
 	 { "RasterImage__v_number_sample", _wrap_RasterImage__v_number_sample, METH_O, "\n"
+		"_v_number_sample(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_sample() const =0\n"
 		"GeoCal::RasterImage::number_sample\n"
-		"Return number of samples in the image.\n"
+		"Return number of samples in the image.  \n"
 		"\n"
 		""},
 	 { "RasterImage__v_number_tile_line", _wrap_RasterImage__v_number_tile_line, METH_O, "\n"
+		"_v_number_tile_line(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_tile_line() const\n"
 		"GeoCal::RasterImage::number_tile_line\n"
-		"Number of lines in the preferred tile size.\n"
-		"Default is the entire image. \n"
+		"Number of lines in the preferred tile size.  \n"
+		"\n"
+		"Default is the entire image.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_number_tile_sample", _wrap_RasterImage__v_number_tile_sample, METH_O, "\n"
+		"_v_number_tile_sample(RasterImage self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImage::number_tile_sample() const\n"
 		"GeoCal::RasterImage::number_tile_sample\n"
-		"Number of samples in the preferred tile size.\n"
-		"Default is the entire image. \n"
+		"Number of samples in the preferred tile size.  \n"
+		"\n"
+		"Default is the entire image.  \n"
+		"\n"
 		""},
 	 { "RasterImage_unchecked_read_double", _wrap_RasterImage_unchecked_read_double, METH_VARARGS, "\n"
+		"unchecked_read_double(RasterImage self, int Line, int Sample) -> double\n"
 		"\n"
-		"virtual double GeoCal::RasterImage::unchecked_read_double(int Line, int Sample) const =0\n"
 		"GeoCal::RasterImage::unchecked_read_double\n"
 		""},
 	 { "RasterImage_read_with_pad", _wrap_RasterImage_read_with_pad, METH_VARARGS, "\n"
+		"read_with_pad(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample, int Fill_value=0) -> BlitzArray_int_2\n"
 		"\n"
-		"blitz::Array< int, 2 > RasterImage::read_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, int\n"
-		"Fill_value=0) const\n"
 		"GeoCal::RasterImage::read_with_pad\n"
-		"Return a subset of the image.\n"
+		"Return a subset of the image.  \n"
+		"\n"
 		"This variation of read allows the data read to extend past the actual\n"
-		"RasterImage (e.g., negative start line). In this case, we return the\n"
-		"given fill value for the outside area. \n"
+		"RasterImage (e.g., negative start line). In this case, we return the given fill\n"
+		"value for the outside area.  \n"
+		"\n"
 		""},
 	 { "RasterImage_read_double", _wrap_RasterImage_read_double, METH_VARARGS, "\n"
+		"read_double(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::read_double(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::RasterImage::read_double\n"
-		"Some raster images actually are floating point values (e.g., a\n"
-		"CalcRaster).\n"
-		"This function gives access to the underlying floating point numbers.\n"
-		"The default function here just returns the result of read as a double,\n"
-		"but derived classes can override this. \n"
+		"Some raster images actually are floating point values (e.g., a CalcRaster).  \n"
+		"\n"
+		"This function gives access to the underlying floating point numbers. The default\n"
+		"function here just returns the result of read as a double, but derived classes\n"
+		"can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage_read_double_with_pad", _wrap_RasterImage_read_double_with_pad, METH_VARARGS, "\n"
+		"read_double_with_pad(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample, double Fill_value=0.0) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > RasterImage::read_double_with_pad(int Lstart, int Sstart, int Number_line, int Number_sample, double\n"
-		"Fill_value=0.0) const\n"
 		"GeoCal::RasterImage::read_double_with_pad\n"
-		"Return a subset of the image.\n"
+		"Return a subset of the image.  \n"
+		"\n"
 		"This variation of read allows the data read to extend past the actual\n"
-		"RasterImage (e.g., negative start line). In this case, we return the\n"
-		"given fill value for the outside area. \n"
+		"RasterImage (e.g., negative start line). In this case, we return the given fill\n"
+		"value for the outside area.  \n"
+		"\n"
 		""},
 	 { "RasterImage_read", _wrap_RasterImage_read, METH_VARARGS, "\n"
+		"read(RasterImage self, int Line, int Sample) -> int\n"
+		"read(RasterImage self, int Lstart, int Sstart, int Number_line, int Number_sample) -> BlitzArray_int_2\n"
+		"read(RasterImage self, RasterImageTileIterator Ti) -> BlitzArray_int_2\n"
 		"\n"
-		"blitz::Array< int, 2 > RasterImage::read(int Lstart, int Sstart, int Number_line, int Number_sample) const\n"
 		"GeoCal::RasterImage::read\n"
-		"Return a subset of the image.\n"
+		"Return a subset of the image.  \n"
 		"\n"
 		""},
 	 { "RasterImage_write", _wrap_RasterImage_write, METH_VARARGS, "\n"
+		"write(RasterImage self, int Line, int Sample, int Val)\n"
+		"write(RasterImage self, int Lstart, int Sstart, BlitzArray_int_2 A)\n"
+		"write(RasterImage self, int Lstart, int Sstart, BlitzArray_double_2 A)\n"
 		"\n"
-		"void RasterImage::write(int Lstart, int Sstart, const blitz::Array< int, 2 > &A)\n"
 		"GeoCal::RasterImage::write\n"
 		""},
-	 { "RasterImage___str__", _wrap_RasterImage___str__, METH_O, NULL},
+	 { "RasterImage___str__", _wrap_RasterImage___str__, METH_O, "__str__(RasterImage self) -> std::string"},
 	 { "RasterImage__v_has_map_info", _wrap_RasterImage__v_has_map_info, METH_O, "\n"
+		"_v_has_map_info(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_map_info() const\n"
 		"GeoCal::RasterImage::has_map_info\n"
-		"Indicate if we have MapInfo.\n"
-		"Functions available if we have MapInfo data.  The default is false,\n"
-		"but derived classes can override this. \n"
+		"Indicate if we have MapInfo.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" Functions available if we have MapInfo data.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" The default is false, but derived classes can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_map_info", _wrap_RasterImage__v_map_info, METH_O, "\n"
+		"_v_map_info(RasterImage self) -> MapInfo\n"
 		"\n"
-		"virtual const MapInfo & GeoCal::RasterImage::map_info() const\n"
 		"GeoCal::RasterImage::map_info\n"
-		"  MapInfo for image.\n"
+		"* * * * *  \n"
+		"\n"
+		" MapInfo for image.  \n"
 		"\n"
 		""},
 	 { "RasterImage_ground_coordinate", _wrap_RasterImage_ground_coordinate, METH_VARARGS, "\n"
+		"ground_coordinate(RasterImage self, ImageCoordinate Ic) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"ground_coordinate(RasterImage self, ImageCoordinate Ic, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"ground_coordinate(RasterImage self, double Line, double Sample) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"ground_coordinate(RasterImage self, double Line, double Sample, Dem D) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"boost::shared_ptr< GroundCoordinate > GeoCal::RasterImage::ground_coordinate(double Line, double Sample, const Dem &D) const\n"
 		"GeoCal::RasterImage::ground_coordinate\n"
-		"Shortcut to calling mapinfo().ground_coordinate.\n"
+		"Shortcut to calling mapinfo().ground_coordinate.  \n"
 		"\n"
 		""},
 	 { "RasterImage_coordinate", _wrap_RasterImage_coordinate, METH_VARARGS, "\n"
+		"coordinate(RasterImage self, GroundCoordinate Gc) -> ImageCoordinate\n"
+		"coordinate(RasterImage self, BlitzArray_double_1 Lat, BlitzArray_double_1 Lon) -> BlitzArray_double_2\n"
 		"\n"
-		"ImageCoordinate GeoCal::RasterImage::coordinate(const GroundCoordinate &Gc) const\n"
 		"GeoCal::RasterImage::coordinate\n"
-		"Shortcut to calling mapinfo().coordinate.\n"
+		"Shortcut to calling mapinfo().coordinate.  \n"
 		"\n"
 		""},
 	 { "RasterImage__v_grid_center_line_resolution", _wrap_RasterImage__v_grid_center_line_resolution, METH_O, "\n"
+		"_v_grid_center_line_resolution(RasterImage self) -> double\n"
 		"\n"
-		"double RasterImage::grid_center_line_resolution() const\n"
 		"GeoCal::RasterImage::grid_center_line_resolution\n"
-		"This calculates the grid resolution in meters for the center of the\n"
-		"grid in the line direction.\n"
+		"This calculates the grid resolution in meters for the center of the grid in the\n"
+		"line direction.  \n"
+		"\n"
 		"This is just the distance between The center pixel number_line() / 2,\n"
-		"number_sample() / 2 and the pixel number_line() / 2 + 1,\n"
-		"number_sample() / 2. \n"
+		"number_sample() / 2 and the pixel number_line() / 2 + 1, number_sample() / 2.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_grid_center_sample_resolution", _wrap_RasterImage__v_grid_center_sample_resolution, METH_O, "\n"
+		"_v_grid_center_sample_resolution(RasterImage self) -> double\n"
 		"\n"
-		"double RasterImage::grid_center_sample_resolution() const\n"
 		"GeoCal::RasterImage::grid_center_sample_resolution\n"
-		"This calculates the grid resolution in meters for the center of the\n"
-		"grid in the sample direction.\n"
+		"This calculates the grid resolution in meters for the center of the grid in the\n"
+		"sample direction.  \n"
+		"\n"
 		"This is just the distance between The center pixel number_line() / 2,\n"
-		"number_sample() / 2 and the pixel number_line() / 2, number_sample() /\n"
-		"2 + 1. \n"
+		"number_sample() / 2 and the pixel number_line() / 2, number_sample() / 2 + 1.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_has_rpc", _wrap_RasterImage__v_has_rpc, METH_O, "\n"
+		"_v_has_rpc(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_rpc() const\n"
 		"GeoCal::RasterImage::has_rpc\n"
-		"Indicate if we have Rpc.\n"
-		"Functions available if we have RPC  The default is false, but derived\n"
-		"classes can override this. \n"
+		"Indicate if we have Rpc.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" Functions available if we have RPC  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" The default is false, but derived classes can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_rpc", _wrap_RasterImage__v_rpc, METH_O, "\n"
+		"_v_rpc(RasterImage self) -> boost::shared_ptr< GeoCal::Rpc >\n"
 		"\n"
-		"boost::shared_ptr< Rpc > GeoCal::RasterImage::rpc_ptr() const\n"
 		"GeoCal::RasterImage::rpc_ptr\n"
+		"* * * * *  \n"
 		"Pointer version of rpc(). This makes python happier.\n"
-		"\n"
 		""},
 	 { "RasterImage__v_has_rsm", _wrap_RasterImage__v_has_rsm, METH_O, "\n"
+		"_v_has_rsm(RasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::RasterImage::has_rsm() const\n"
 		"GeoCal::RasterImage::has_rsm\n"
-		"Indicate if we have Rsm.\n"
-		"Functions available if we have RSM  The default is false, but derived\n"
-		"classes can override this. \n"
+		"Indicate if we have Rsm.  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" Functions available if we have RSM  \n"
+		"\n"
+		"* * * * *  \n"
+		"\n"
+		" The default is false, but derived classes can override this.  \n"
+		"\n"
 		""},
 	 { "RasterImage__v_rsm", _wrap_RasterImage__v_rsm, METH_O, "\n"
+		"_v_rsm(RasterImage self) -> boost::shared_ptr< GeoCal::Rsm >\n"
 		"\n"
-		"virtual boost::shared_ptr< Rsm > GeoCal::RasterImage::rsm() const\n"
 		"GeoCal::RasterImage::rsm\n"
-		"  Rsm for image.\n"
+		"* * * * *  \n"
+		"\n"
+		" Rsm for image.  \n"
 		"\n"
 		""},
 	 { "delete_RasterImage", _wrap_delete_RasterImage, METH_O, "\n"
+		"delete_RasterImage(RasterImage self)\n"
 		"\n"
-		"virtual GeoCal::RasterImage::~RasterImage()\n"
 		"GeoCal::RasterImage::~RasterImage\n"
 		""},
 	 { "RasterImage_swigregister", RasterImage_swigregister, METH_O, NULL},
 	 { "new_ArrayRasterImage", _wrap_new_ArrayRasterImage, METH_NOARGS, "\n"
+		"new_ArrayRasterImage() -> ArrayRasterImage\n"
 		"\n"
-		"GeoCal::ArrayRasterImage::ArrayRasterImage()\n"
 		"GeoCal::ArrayRasterImage::ArrayRasterImage\n"
-		"Create an empty array.\n"
+		"Create an empty array.  \n"
 		"\n"
 		""},
 	 { "ArrayRasterImage_append", _wrap_ArrayRasterImage_append, METH_VARARGS, "\n"
+		"append(ArrayRasterImage self, boost::shared_ptr< GeoCal::RasterImage > const & Img)\n"
 		"\n"
-		"void GeoCal::ArrayRasterImage::push_back(const boost::shared_ptr< RasterImage > &Img)\n"
 		"GeoCal::ArrayRasterImage::push_back\n"
-		"Add to the array.\n"
+		"Add to the array.  \n"
 		"\n"
 		""},
 	 { "ArrayRasterImage_size", _wrap_ArrayRasterImage_size, METH_O, "\n"
+		"size(ArrayRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayRasterImage::size() const\n"
 		"GeoCal::ArrayRasterImage::size\n"
-		"Return size.\n"
+		"Return size.  \n"
 		"\n"
 		""},
-	 { "ArrayRasterImage_get", _wrap_ArrayRasterImage_get, METH_VARARGS, NULL},
-	 { "ArrayRasterImage_set", _wrap_ArrayRasterImage_set, METH_VARARGS, NULL},
-	 { "ArrayRasterImage___str__", _wrap_ArrayRasterImage___str__, METH_O, NULL},
+	 { "ArrayRasterImage_get", _wrap_ArrayRasterImage_get, METH_VARARGS, "get(ArrayRasterImage self, int i) -> boost::shared_ptr< GeoCal::RasterImage >"},
+	 { "ArrayRasterImage_set", _wrap_ArrayRasterImage_set, METH_VARARGS, "set(ArrayRasterImage self, int i, boost::shared_ptr< GeoCal::RasterImage > const & V)"},
+	 { "ArrayRasterImage___str__", _wrap_ArrayRasterImage___str__, METH_O, "__str__(ArrayRasterImage self) -> std::string"},
 	 { "delete_ArrayRasterImage", _wrap_delete_ArrayRasterImage, METH_O, "\n"
+		"delete_ArrayRasterImage(ArrayRasterImage self)\n"
 		"\n"
-		"virtual GeoCal::ArrayRasterImage::~ArrayRasterImage()\n"
 		"GeoCal::ArrayRasterImage::~ArrayRasterImage\n"
 		""},
 	 { "ArrayRasterImage_swigregister", ArrayRasterImage_swigregister, METH_O, NULL},
 	 { "ArrayRasterImage_swiginit", ArrayRasterImage_swiginit, METH_VARARGS, NULL},
 	 { "copy_no_fill", _wrap_copy_no_fill, METH_VARARGS, "\n"
+		"copy_no_fill(RasterImage Img_in, RasterImage Img_out, int Fill_value=0, bool diagnostic=False)\n"
 		"\n"
-		"void GeoCal::copy_no_fill(const RasterImage &Img_in, RasterImage &Img_out, int Fill_value=0,\n"
-		"bool diagnostic=false)\n"
 		"GeoCal::copy_no_fill\n"
-		"This copies one image to another.\n"
-		"The images should be the same size. Setting Diagnostic to true causes\n"
-		"messages to be printed as we do the copying.\n"
+		"This copies one image to another.  \n"
 		"\n"
-		"This differs from copy by skipping copying all values that are equal\n"
-		"to the Fill_value.\n"
+		"The images should be the same size. Setting Diagnostic to true causes messages\n"
+		"to be printed as we do the copying.  \n"
 		"\n"
-		"This can be used to create a simple mosaic by copying multiple images\n"
-		"to a common image. \n"
+		"This differs from copy by skipping copying all values that are equal to the\n"
+		"Fill_value.  \n"
+		"\n"
+		"This can be used to create a simple mosaic by copying multiple images to a\n"
+		"common image.  \n"
+		"\n"
 		""},
 	 { "fill_image", _wrap_fill_image, METH_VARARGS, "\n"
+		"fill_image(RasterImage Img, int Fill_value=0, bool diagnostic=False, int Tile_nline=-1, int Tile_nsamp=-1)\n"
 		"\n"
-		"void GeoCal::fill_image(RasterImage &Img, int Fill_value=0, bool diagnostic=false, int\n"
-		"Tile_nline=-1, int Tile_nsamp=-1)\n"
 		"GeoCal::fill_image\n"
-		"This fills an image with a given value (often 0).\n"
+		"This fills an image with a given value (often 0).  \n"
 		"\n"
 		""},
-	 { "Vector_RasterImage_iterator", _wrap_Vector_RasterImage_iterator, METH_O, NULL},
-	 { "Vector_RasterImage___nonzero__", _wrap_Vector_RasterImage___nonzero__, METH_O, NULL},
-	 { "Vector_RasterImage___bool__", _wrap_Vector_RasterImage___bool__, METH_O, NULL},
-	 { "Vector_RasterImage___len__", _wrap_Vector_RasterImage___len__, METH_O, NULL},
-	 { "Vector_RasterImage___getslice__", _wrap_Vector_RasterImage___getslice__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___setslice__", _wrap_Vector_RasterImage___setslice__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___delslice__", _wrap_Vector_RasterImage___delslice__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___delitem__", _wrap_Vector_RasterImage___delitem__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___getitem__", _wrap_Vector_RasterImage___getitem__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage___setitem__", _wrap_Vector_RasterImage___setitem__, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_pop", _wrap_Vector_RasterImage_pop, METH_O, NULL},
-	 { "Vector_RasterImage_append", _wrap_Vector_RasterImage_append, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_empty", _wrap_Vector_RasterImage_empty, METH_O, NULL},
-	 { "Vector_RasterImage_size", _wrap_Vector_RasterImage_size, METH_O, NULL},
-	 { "Vector_RasterImage_swap", _wrap_Vector_RasterImage_swap, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_begin", _wrap_Vector_RasterImage_begin, METH_O, NULL},
-	 { "Vector_RasterImage_end", _wrap_Vector_RasterImage_end, METH_O, NULL},
-	 { "Vector_RasterImage_rbegin", _wrap_Vector_RasterImage_rbegin, METH_O, NULL},
-	 { "Vector_RasterImage_rend", _wrap_Vector_RasterImage_rend, METH_O, NULL},
-	 { "Vector_RasterImage_clear", _wrap_Vector_RasterImage_clear, METH_O, NULL},
-	 { "Vector_RasterImage_get_allocator", _wrap_Vector_RasterImage_get_allocator, METH_O, NULL},
-	 { "Vector_RasterImage_pop_back", _wrap_Vector_RasterImage_pop_back, METH_O, NULL},
-	 { "Vector_RasterImage_erase", _wrap_Vector_RasterImage_erase, METH_VARARGS, NULL},
-	 { "new_Vector_RasterImage", _wrap_new_Vector_RasterImage, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_push_back", _wrap_Vector_RasterImage_push_back, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_front", _wrap_Vector_RasterImage_front, METH_O, NULL},
-	 { "Vector_RasterImage_back", _wrap_Vector_RasterImage_back, METH_O, NULL},
-	 { "Vector_RasterImage_assign", _wrap_Vector_RasterImage_assign, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_resize", _wrap_Vector_RasterImage_resize, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_insert", _wrap_Vector_RasterImage_insert, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_reserve", _wrap_Vector_RasterImage_reserve, METH_VARARGS, NULL},
-	 { "Vector_RasterImage_capacity", _wrap_Vector_RasterImage_capacity, METH_O, NULL},
-	 { "delete_Vector_RasterImage", _wrap_delete_Vector_RasterImage, METH_O, NULL},
+	 { "Vector_RasterImage_iterator", _wrap_Vector_RasterImage_iterator, METH_O, "iterator(Vector_RasterImage self) -> SwigPyIterator"},
+	 { "Vector_RasterImage___nonzero__", _wrap_Vector_RasterImage___nonzero__, METH_O, "__nonzero__(Vector_RasterImage self) -> bool"},
+	 { "Vector_RasterImage___bool__", _wrap_Vector_RasterImage___bool__, METH_O, "__bool__(Vector_RasterImage self) -> bool"},
+	 { "Vector_RasterImage___len__", _wrap_Vector_RasterImage___len__, METH_O, "__len__(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type"},
+	 { "Vector_RasterImage___getslice__", _wrap_Vector_RasterImage___getslice__, METH_VARARGS, "__getslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j) -> Vector_RasterImage"},
+	 { "Vector_RasterImage___setslice__", _wrap_Vector_RasterImage___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j)\n"
+		"__setslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j, Vector_RasterImage v)\n"
+		""},
+	 { "Vector_RasterImage___delslice__", _wrap_Vector_RasterImage___delslice__, METH_VARARGS, "__delslice__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type j)"},
+	 { "Vector_RasterImage___delitem__", _wrap_Vector_RasterImage___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i)\n"
+		"__delitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_RasterImage___getitem__", _wrap_Vector_RasterImage___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice) -> Vector_RasterImage\n"
+		"__getitem__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &\n"
+		""},
+	 { "Vector_RasterImage___setitem__", _wrap_Vector_RasterImage___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice, Vector_RasterImage v)\n"
+		"__setitem__(Vector_RasterImage self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)\n"
+		""},
+	 { "Vector_RasterImage_pop", _wrap_Vector_RasterImage_pop, METH_O, "pop(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type"},
+	 { "Vector_RasterImage_append", _wrap_Vector_RasterImage_append, METH_VARARGS, "append(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)"},
+	 { "Vector_RasterImage_empty", _wrap_Vector_RasterImage_empty, METH_O, "empty(Vector_RasterImage self) -> bool"},
+	 { "Vector_RasterImage_size", _wrap_Vector_RasterImage_size, METH_O, "size(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type"},
+	 { "Vector_RasterImage_swap", _wrap_Vector_RasterImage_swap, METH_VARARGS, "swap(Vector_RasterImage self, Vector_RasterImage v)"},
+	 { "Vector_RasterImage_begin", _wrap_Vector_RasterImage_begin, METH_O, "begin(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator"},
+	 { "Vector_RasterImage_end", _wrap_Vector_RasterImage_end, METH_O, "end(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator"},
+	 { "Vector_RasterImage_rbegin", _wrap_Vector_RasterImage_rbegin, METH_O, "rbegin(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator"},
+	 { "Vector_RasterImage_rend", _wrap_Vector_RasterImage_rend, METH_O, "rend(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::reverse_iterator"},
+	 { "Vector_RasterImage_clear", _wrap_Vector_RasterImage_clear, METH_O, "clear(Vector_RasterImage self)"},
+	 { "Vector_RasterImage_get_allocator", _wrap_Vector_RasterImage_get_allocator, METH_O, "get_allocator(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::allocator_type"},
+	 { "Vector_RasterImage_pop_back", _wrap_Vector_RasterImage_pop_back, METH_O, "pop_back(Vector_RasterImage self)"},
+	 { "Vector_RasterImage_erase", _wrap_Vector_RasterImage_erase, METH_VARARGS, "\n"
+		"erase(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator\n"
+		"erase(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator first, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator\n"
+		""},
+	 { "new_Vector_RasterImage", _wrap_new_Vector_RasterImage, METH_VARARGS, "\n"
+		"Vector_RasterImage()\n"
+		"Vector_RasterImage(Vector_RasterImage other)\n"
+		"Vector_RasterImage(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type size)\n"
+		"new_Vector_RasterImage(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type size, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & value) -> Vector_RasterImage\n"
+		""},
+	 { "Vector_RasterImage_push_back", _wrap_Vector_RasterImage_push_back, METH_VARARGS, "push_back(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)"},
+	 { "Vector_RasterImage_front", _wrap_Vector_RasterImage_front, METH_O, "front(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &"},
+	 { "Vector_RasterImage_back", _wrap_Vector_RasterImage_back, METH_O, "back(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &"},
+	 { "Vector_RasterImage_assign", _wrap_Vector_RasterImage_assign, METH_VARARGS, "assign(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)"},
+	 { "Vector_RasterImage_resize", _wrap_Vector_RasterImage_resize, METH_VARARGS, "\n"
+		"resize(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type new_size)\n"
+		"resize(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)\n"
+		""},
+	 { "Vector_RasterImage_insert", _wrap_Vector_RasterImage_insert, METH_VARARGS, "\n"
+		"insert(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator\n"
+		"insert(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const & x)\n"
+		""},
+	 { "Vector_RasterImage_reserve", _wrap_Vector_RasterImage_reserve, METH_VARARGS, "reserve(Vector_RasterImage self, std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type n)"},
+	 { "Vector_RasterImage_capacity", _wrap_Vector_RasterImage_capacity, METH_O, "capacity(Vector_RasterImage self) -> std::vector< boost::shared_ptr< GeoCal::RasterImage > >::size_type"},
+	 { "delete_Vector_RasterImage", _wrap_delete_Vector_RasterImage, METH_O, "delete_Vector_RasterImage(Vector_RasterImage self)"},
 	 { "Vector_RasterImage_swigregister", Vector_RasterImage_swigregister, METH_O, NULL},
 	 { "Vector_RasterImage_swiginit", Vector_RasterImage_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

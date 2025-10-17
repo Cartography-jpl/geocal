@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _vicar_ogr.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _vicar_ogr:
 _vicar_ogr.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _vicar_ogr.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,40 +144,38 @@ import geocal_swig.dem_map_info
 class VicarOgr(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class is really part of VicarFile, but because of the
-    complication in this software we separate this out into its own class.
 
-    This class handles the reading and writing of the GeoTIFF map
-    projection and coordinate transformation information, going to and
-    from a MapInfo.
+    This class is really part of VicarFile, but because of the complication in this
+    software we separate this out into its own class.  
 
-    AFIDS stores map projection information as text labels in a VICAR
-    file. The text is GeoTIFF tags stored as text. We can't directly work
-    with these to supply map projection information. Instead, we want to
-    use the GDAL library to handle this (through the OgrCoordinate class).
-    However, there is no easy mapping between GDAL which use the Well
-    Known Text (WKT) to express its coordinate information and GeoTIFF
-    which uses about 40 different tags for this information.
+    This class handles the reading and writing of the GeoTIFF map projection and
+    coordinate transformation information, going to and from a MapInfo.  
 
-    The two systems contain similar information, so one possible approach
-    would be to create a mapping between the two systems - e.g., Tag X
-    corresponds to WKT node Y. While possible, this would result in a
-    large amount of code.
+    AFIDS stores map projection information as text labels in a VICAR file. The text
+    is GeoTIFF tags stored as text. We can't directly work with these to supply map
+    projection information. Instead, we want to use the GDAL library to handle this
+    (through the OgrCoordinate class). However, there is no easy mapping between
+    GDAL which use the Well Known Text (WKT) to express its coordinate information
+    and GeoTIFF which uses about 40 different tags for this information.  
 
-    As an alternative, we take advantage of the ability of GDAL to create
-    and read GeoTIFF files. The GDAL library contains all of the code
-    connecting the two, which we don't want to duplicate.
+    The two systems contain similar information, so one possible approach would be
+    to create a mapping between the two systems - e.g., Tag X corresponds to WKT
+    node Y. While possible, this would result in a large amount of code.  
 
-    This class creates a temporary GeoTIFF file, and either writes map
-    projection information using GDAL and a MapInfo, or from the VICAR
-    GeoTIFF information. We then read the file and go the other way,
-    creating a MapInfo or the metadata for a VICAR file. The temporary
-    file is then removed.
+    As an alternative, we take advantage of the ability of GDAL to create and read
+    GeoTIFF files. The GDAL library contains all of the code connecting the two,
+    which we don't want to duplicate.  
 
-    This is a bit awkward, but this is the best approach I could come up
-    with to map VICAR and GDAL together.
+    This class creates a temporary GeoTIFF file, and either writes map projection
+    information using GDAL and a MapInfo, or from the VICAR GeoTIFF information. We
+    then read the file and go the other way, creating a MapInfo or the metadata for
+    a VICAR file. The temporary file is then removed.  
 
-    C++ includes: vicar_ogr.h 
+    This is a bit awkward, but this is the best approach I could come up with to map
+    VICAR and GDAL together.  
+
+    C++ includes: vicar_ogr.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -182,12 +183,14 @@ class VicarOgr(geocal_swig.generic_object.GenericObject):
 
     def __init__(self):
         r"""
+        __init__(VicarOgr self) -> VicarOgr
 
-        VicarOgr::VicarOgr()
         GeoCal::VicarOgr::VicarOgr
-        Constructor.
-        Normally we only have one of these objects around, although nothing is
-        hurt if you create multiple copies. 
+        Constructor.  
+
+        Normally we only have one of these objects around, although nothing is hurt if
+        you create multiple copies.  
+
         """
         _vicar_ogr.VicarOgr_swiginit(self, _vicar_ogr.new_VicarOgr())
     vicar_to_gtiff = _swig_new_instance_method(_vicar_ogr.VicarOgr_vicar_to_gtiff)

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _gdal_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _gdal_dem:
 _gdal_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _gdal_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,19 +143,19 @@ import geocal_swig.generic_object
 class GdalDem(geocal_swig.dem_tiled_file.DemTiledFile):
     r"""
 
-    This uses a Gdal<T> as a DEM.
 
-    The type of T should be one we can convert to a double, and should
-    give the height in meters above sea level. We do a bilinear
-    interpolation to get values between points, and we optionally return a
-    height of 0 outside of the range of where we have data (or
-    alternatively, throw an exception).
+    This uses a Gdal<T> as a DEM.  
 
-    Right now, the datum needs to be passed in. I don't believe there is
-    any information available in the files to let us know which datum to
-    use.
+    The type of T should be one we can convert to a double, and should give the
+    height in meters above sea level. We do a bilinear interpolation to get values
+    between points, and we optionally return a height of 0 outside of the range of
+    where we have data (or alternatively, throw an exception).  
 
-    C++ includes: gdal_dem.h 
+    Right now, the datum needs to be passed in. I don't believe there is any
+    information available in the files to let us know which datum to use.  
+
+    C++ includes: gdal_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -160,21 +163,20 @@ class GdalDem(geocal_swig.dem_tiled_file.DemTiledFile):
 
     def __init__(self, *args):
         r"""
+        __init__(GdalDem self, std::string const & Fname) -> GdalDem
+        __init__(GdalDem self, std::string const & Fname, boost::shared_ptr< GeoCal::Datum > const & D, int Band_id=1, bool Outside_dem_is_error=False, int Number_tile=4) -> GdalDem
 
-        GdalDem::GdalDem(const std::string &Fname, const boost::shared_ptr< Datum >
-        &D=boost::shared_ptr< Datum >(new NoDatum()), int Band_id=1, bool
-        Outside_dem_is_error=false, int Number_tile=4, int
-        Tile_number_line=-1, int Tile_number_sample=-1)
         GeoCal::GdalDem::GdalDem
-        Constructor that reads an existing file to get the Dem data.
-        The default Datum used if none is supplied is DidDatum, which is
-        relative to WGS-84. If Outside_dem_is_error is false, we return a
-        height of 0 outside of the range of the data, otherwise an exception
-        is thrown when an attempt is made to retrieve an height outside of the
-        range.
+        Constructor that reads an existing file to get the Dem data.  
 
-        You can optionally pass the desired tile size. If you don't pass this
-        in, we use the blocking size of the underlying dataset. 
+        The default Datum used if none is supplied is DidDatum, which is relative to
+        WGS-84. If Outside_dem_is_error is false, we return a height of 0 outside of the
+        range of the data, otherwise an exception is thrown when an attempt is made to
+        retrieve an height outside of the range.  
+
+        You can optionally pass the desired tile size. If you don't pass this in, we use
+        the blocking size of the underlying dataset.  
+
         """
         _gdal_dem.GdalDem_swiginit(self, _gdal_dem.new_GdalDem(*args))
     elevation = _swig_new_instance_method(_gdal_dem.GdalDem_elevation)

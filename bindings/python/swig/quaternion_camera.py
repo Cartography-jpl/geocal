@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _quaternion_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _quaternion_camera:
 _quaternion_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _quaternion_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,54 +143,54 @@ import geocal_swig.with_parameter
 class QuaternionCamera(geocal_swig.camera.Camera):
     r"""
 
-    A lot of cameras follow the model of "rotate into the detector space,
-    do a nonlinear correction".
 
-    This class supports this by handling the rotation of a ScLookVector
-    and conversion to FrameCoordinate (and vice versa). This base class
-    doesn't model any nonlinear corrections - we just model a pinhole. But
-    derived classes can override the dcs_to_focal_plane and
-    focal_plane_to_dcs functions to put in whatever functionality is
-    desired.
+    A lot of cameras follow the model of "rotate into the detector
+    space, do a nonlinear correction".  
 
-    There are 2 conventions used for the frame coordinates. The convention
-    used by some cameras we have implemented is that the line direction is
-    +x, and the sample direction is +y.
+    This class supports this by handling the rotation of a ScLookVector and
+    conversion to FrameCoordinate (and vice versa). This base class doesn't model
+    any nonlinear corrections - we just model a pinhole. But derived classes can
+    override the dcs_to_focal_plane and focal_plane_to_dcs functions to put in
+    whatever functionality is desired.  
 
-    However, another convention is that line goes in the +y direction and
-    sample goes in +x direction. This is what was used in the VICAR
-    procedure sc2rpc. Note that this is more than just a rotation from the
-    other convention, it is both a rotation and a reflection (so the
-    chirality is different).
+    There are 2 conventions used for the frame coordinates. The convention used by
+    some cameras we have implemented is that the line direction is +x, and the
+    sample direction is +y.  
 
-    We support both conventions, depending on the setting of the
-    frame_convention.
+    However, another convention is that line goes in the +y direction and sample
+    goes in +x direction. This is what was used in the VICAR procedure sc2rpc. Note
+    that this is more than just a rotation from the other convention, it is both a
+    rotation and a reflection (so the chirality is different).  
 
-    In addition to either x or y direction for line, we can have
-    increasing line go in the positive direction or negative direction.
-    Likewise for sample.
+    We support both conventions, depending on the setting of the frame_convention.  
 
-    The conversion goes:
+    In addition to either x or y direction for line, we can have increasing line go
+    in the positive direction or negative direction. Likewise for sample.  
 
-    FrameCoordinate -> focal plane xfp, yfp -> DcsLookVector ->
-    ScLookVector
+    The conversion goes:  
 
-    The focal plane coordinates are on the actual CCD (so offset from an
-    origin in mm). The conversion to DcsLookVector capture any non-
-    linearity, it gives the look vector in the detector coordinate system
-    for the given location on the focal plane. The conversion to
-    ScLookVector captures the angle orientation of the camera relative to
-    the space craft.
+    FrameCoordinate -> focal plane xfp, yfp -> DcsLookVector -> ScLookVector  
 
-    C++ includes: quaternion_camera.h 
+    The focal plane coordinates are on the actual CCD (so offset from an origin in
+    mm). The conversion to DcsLookVector capture any non-linearity, it gives the
+    look vector in the detector coordinate system for the given location on the
+    focal plane. The conversion to ScLookVector captures the angle orientation of
+    the camera relative to the space craft.  
+
+    C++ includes: quaternion_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     LINE_IS_X = _quaternion_camera.QuaternionCamera_LINE_IS_X
+    
     LINE_IS_Y = _quaternion_camera.QuaternionCamera_LINE_IS_Y
+    
     INCREASE_IS_POSITIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_POSITIVE
+    
     INCREASE_IS_NEGATIVE = _quaternion_camera.QuaternionCamera_INCREASE_IS_NEGATIVE
+    
     _v_focal_length = _swig_new_instance_method(_quaternion_camera.QuaternionCamera__v_focal_length)
 
     @property
@@ -419,20 +422,18 @@ class QuaternionCamera(geocal_swig.camera.Camera):
 
     def __init__(self, *args):
         r"""
+        __init__(QuaternionCamera self, Quaternion_double frame_to_sc_q, double Number_line, double Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, GeoCal::QuaternionCamera::FrameConvention Frame_convention=LINE_IS_X, GeoCal::QuaternionCamera::FrameDirection Line_direction=INCREASE_IS_POSITIVE, GeoCal::QuaternionCamera::FrameDirection Sample_direction=INCREASE_IS_NEGATIVE) -> QuaternionCamera
+        __init__(QuaternionCamera self, Quaternion_double frame_to_sc_q, double Number_line, double Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, GeoCal::QuaternionCamera::FrameConvention Frame_convention, GeoCal::QuaternionCamera::FrameDirection Line_direction, GeoCal::QuaternionCamera::FrameDirection Sample_direction, BlitzArray_bool_1 Parameter_mask) -> QuaternionCamera
+        __init__(QuaternionCamera self, QuaternionCamera other) -> QuaternionCamera
 
-        GeoCal::QuaternionCamera::QuaternionCamera(boost::math::quaternion< double > Frame_to_sc_q, double Number_line,
-        double Number_sample, double Line_pitch, double Sample_pitch, double
-        Focal_length, const FrameCoordinate &Principal_point, FrameConvention
-        Frame_convention=LINE_IS_X, FrameDirection
-        Line_direction=INCREASE_IS_POSITIVE, FrameDirection
-        Sample_direction=INCREASE_IS_POSITIVE)
         GeoCal::QuaternionCamera::QuaternionCamera
-        Create a QuaternionCamera.
-        The orientation of the camera to the spacecraft to given by the
-        quaternion that takes frame coordinates to spacecraft coordinates. The
-        size of the camera and the line pitch, sample pitch, and focal length
-        are given. By convention, these are given in mm. Finally the
-        Principal_point (coordinates at center) are given. 
+        Create a QuaternionCamera.  
+
+        The orientation of the camera to the spacecraft to given by the quaternion that
+        takes frame coordinates to spacecraft coordinates. The size of the camera and
+        the line pitch, sample pitch, and focal length are given. By convention, these
+        are given in mm. Finally the Principal_point (coordinates at center) are given.  
+
         """
         _quaternion_camera.QuaternionCamera_swiginit(self, _quaternion_camera.new_QuaternionCamera(*args))
     __swig_destroy__ = _quaternion_camera.delete_QuaternionCamera

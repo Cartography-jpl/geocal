@@ -6923,80 +6923,84 @@ SWIGINTERN PyObject *GroundMspiOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GroundMspiOrbit", _wrap_new_GroundMspiOrbit, METH_VARARGS, "\n"
+		"new_GroundMspiOrbit(Time Start_time, boost::shared_ptr< GeoCal::GroundCoordinate > & Pos, double Azimuth, double Start_elevation_angle, double Rotation_rate) -> GroundMspiOrbit\n"
 		"\n"
-		"GeoCal::GroundMspiOrbit::GroundMspiOrbit(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,\n"
-		"double Azimuth, double Start_elevation_angle, double Rotation_rate)\n"
 		"GeoCal::GroundMspiOrbit::GroundMspiOrbit\n"
-		"Constructor.\n"
-		"The angles should be in degrees, and the rate is in degrees per\n"
-		"second. \n"
+		"Constructor.  \n"
+		"\n"
+		"The angles should be in degrees, and the rate is in degrees per second.  \n"
+		"\n"
 		""},
 	 { "GroundMspiOrbit__v_start_time", _wrap_GroundMspiOrbit__v_start_time, METH_O, "\n"
+		"GroundMspiOrbit__v_start_time(GroundMspiOrbit self) -> Time\n"
 		"\n"
-		"Time GeoCal::GroundMspiOrbit::start_time() const\n"
 		"GeoCal::GroundMspiOrbit::start_time\n"
-		"Starting time.\n"
+		"Starting time.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_position", _wrap_GroundMspiOrbit__v_position, METH_O, "\n"
+		"GroundMspiOrbit__v_position(GroundMspiOrbit self) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"const boost::shared_ptr< GroundCoordinate > & GeoCal::GroundMspiOrbit::position() const\n"
 		"GeoCal::GroundMspiOrbit::position\n"
-		"Position.\n"
+		"Position.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_azimuth", _wrap_GroundMspiOrbit__v_azimuth, METH_O, "\n"
+		"GroundMspiOrbit__v_azimuth(GroundMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::GroundMspiOrbit::azimuth() const\n"
 		"GeoCal::GroundMspiOrbit::azimuth\n"
-		"Azimuth angle, in degrees.\n"
+		"Azimuth angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_start_elevation_angle", _wrap_GroundMspiOrbit__v_start_elevation_angle, METH_O, "\n"
+		"GroundMspiOrbit__v_start_elevation_angle(GroundMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::GroundMspiOrbit::start_elevation_angle() const\n"
 		"GeoCal::GroundMspiOrbit::start_elevation_angle\n"
-		"Starting elevation angle, in degrees.\n"
+		"Starting elevation angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_rotation_rate", _wrap_GroundMspiOrbit__v_rotation_rate, METH_O, "\n"
+		"GroundMspiOrbit__v_rotation_rate(GroundMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::GroundMspiOrbit::rotation_rate() const\n"
 		"GeoCal::GroundMspiOrbit::rotation_rate\n"
-		"Rotation rate of elevation angle, in deg/sec.\n"
+		"Rotation rate of elevation angle, in deg/sec.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit_orbit_data", _wrap_GroundMspiOrbit_orbit_data, METH_VARARGS, "\n"
+		"GroundMspiOrbit_orbit_data(GroundMspiOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"GroundMspiOrbit_orbit_data(GroundMspiOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > GroundMspiOrbit::orbit_data(Time T) const\n"
 		"GeoCal::GroundMspiOrbit::orbit_data\n"
-		"Constructor. The azimuth and zenith angles should be in degrees.\n"
+		"Constructor. The azimuth and zenith angles should be in degrees.  \n"
 		"\n"
 		""},
 	 { "delete_GroundMspiOrbit", _wrap_delete_GroundMspiOrbit, METH_O, "\n"
+		"delete_GroundMspiOrbit(GroundMspiOrbit self)\n"
 		"\n"
-		"virtual GeoCal::GroundMspiOrbit::~GroundMspiOrbit()\n"
 		"GeoCal::GroundMspiOrbit::~GroundMspiOrbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit_swigregister", GroundMspiOrbit_swigregister, METH_O, NULL},
@@ -7007,80 +7011,84 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GroundMspiOrbit", _wrap_new_GroundMspiOrbit, METH_VARARGS, "\n"
+		"new_GroundMspiOrbit(Time Start_time, boost::shared_ptr< GeoCal::GroundCoordinate > & Pos, double Azimuth, double Start_elevation_angle, double Rotation_rate) -> GroundMspiOrbit\n"
 		"\n"
-		"GeoCal::GroundMspiOrbit::GroundMspiOrbit(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,\n"
-		"double Azimuth, double Start_elevation_angle, double Rotation_rate)\n"
 		"GeoCal::GroundMspiOrbit::GroundMspiOrbit\n"
-		"Constructor.\n"
-		"The angles should be in degrees, and the rate is in degrees per\n"
-		"second. \n"
+		"Constructor.  \n"
+		"\n"
+		"The angles should be in degrees, and the rate is in degrees per second.  \n"
+		"\n"
 		""},
 	 { "GroundMspiOrbit__v_start_time", _wrap_GroundMspiOrbit__v_start_time, METH_O, "\n"
+		"_v_start_time(GroundMspiOrbit self) -> Time\n"
 		"\n"
-		"Time GeoCal::GroundMspiOrbit::start_time() const\n"
 		"GeoCal::GroundMspiOrbit::start_time\n"
-		"Starting time.\n"
+		"Starting time.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_position", _wrap_GroundMspiOrbit__v_position, METH_O, "\n"
+		"_v_position(GroundMspiOrbit self) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"const boost::shared_ptr< GroundCoordinate > & GeoCal::GroundMspiOrbit::position() const\n"
 		"GeoCal::GroundMspiOrbit::position\n"
-		"Position.\n"
+		"Position.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_azimuth", _wrap_GroundMspiOrbit__v_azimuth, METH_O, "\n"
+		"_v_azimuth(GroundMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::GroundMspiOrbit::azimuth() const\n"
 		"GeoCal::GroundMspiOrbit::azimuth\n"
-		"Azimuth angle, in degrees.\n"
+		"Azimuth angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_start_elevation_angle", _wrap_GroundMspiOrbit__v_start_elevation_angle, METH_O, "\n"
+		"_v_start_elevation_angle(GroundMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::GroundMspiOrbit::start_elevation_angle() const\n"
 		"GeoCal::GroundMspiOrbit::start_elevation_angle\n"
-		"Starting elevation angle, in degrees.\n"
+		"Starting elevation angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit__v_rotation_rate", _wrap_GroundMspiOrbit__v_rotation_rate, METH_O, "\n"
+		"_v_rotation_rate(GroundMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::GroundMspiOrbit::rotation_rate() const\n"
 		"GeoCal::GroundMspiOrbit::rotation_rate\n"
-		"Rotation rate of elevation angle, in deg/sec.\n"
+		"Rotation rate of elevation angle, in deg/sec.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit_orbit_data", _wrap_GroundMspiOrbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(GroundMspiOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(GroundMspiOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > GroundMspiOrbit::orbit_data(Time T) const\n"
 		"GeoCal::GroundMspiOrbit::orbit_data\n"
-		"Constructor. The azimuth and zenith angles should be in degrees.\n"
+		"Constructor. The azimuth and zenith angles should be in degrees.  \n"
 		"\n"
 		""},
 	 { "delete_GroundMspiOrbit", _wrap_delete_GroundMspiOrbit, METH_O, "\n"
+		"delete_GroundMspiOrbit(GroundMspiOrbit self)\n"
 		"\n"
-		"virtual GeoCal::GroundMspiOrbit::~GroundMspiOrbit()\n"
 		"GeoCal::GroundMspiOrbit::~GroundMspiOrbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GroundMspiOrbit_swigregister", GroundMspiOrbit_swigregister, METH_O, NULL},

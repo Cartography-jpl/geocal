@@ -9206,236 +9206,247 @@ SWIGINTERN PyObject *PlanetSimpleDem_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "PlanetConstant_a", _wrap_PlanetConstant_a, METH_O, "\n"
+		"PlanetConstant_a(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::a(int Naif_code)\n"
 		"GeoCal::PlanetConstant::a\n"
 		""},
 	 { "PlanetConstant_b", _wrap_PlanetConstant_b, METH_O, "\n"
+		"PlanetConstant_b(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::b(int Naif_code)\n"
 		"GeoCal::PlanetConstant::b\n"
 		""},
 	 { "PlanetConstant_esq", _wrap_PlanetConstant_esq, METH_O, "\n"
+		"PlanetConstant_esq(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::esq(int Naif_code)\n"
 		"GeoCal::PlanetConstant::esq\n"
 		""},
 	 { "PlanetConstant_flattening", _wrap_PlanetConstant_flattening, METH_O, "\n"
+		"PlanetConstant_flattening(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::flattening(int Naif_code)\n"
 		"GeoCal::PlanetConstant::flattening\n"
-		"Calculate flattening.\n"
+		"Calculate flattening.  \n"
 		"\n"
 		""},
 	 { "PlanetConstant_inverse_flattening", _wrap_PlanetConstant_inverse_flattening, METH_O, "\n"
+		"PlanetConstant_inverse_flattening(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::inverse_flattening(int Naif_code)\n"
 		"GeoCal::PlanetConstant::inverse_flattening\n"
-		"Calculate inverse flattening.\n"
+		"Calculate inverse flattening.  \n"
 		"\n"
 		""},
 	 { "PlanetConstant_name", _wrap_PlanetConstant_name, METH_O, "\n"
+		"PlanetConstant_name(int Naif_code) -> std::string\n"
 		"\n"
-		"static std::string GeoCal::PlanetConstant::name(int Naif_code)\n"
 		"GeoCal::PlanetConstant::name\n"
 		""},
-	 { "new_PlanetConstant", _wrap_new_PlanetConstant, METH_NOARGS, NULL},
-	 { "delete_PlanetConstant", _wrap_delete_PlanetConstant, METH_O, NULL},
+	 { "new_PlanetConstant", _wrap_new_PlanetConstant, METH_NOARGS, "new_PlanetConstant() -> PlanetConstant"},
+	 { "delete_PlanetConstant", _wrap_delete_PlanetConstant, METH_O, "delete_PlanetConstant(PlanetConstant self)"},
 	 { "PlanetConstant_swigregister", PlanetConstant_swigregister, METH_O, NULL},
 	 { "PlanetConstant_swiginit", PlanetConstant_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetFixed", _wrap_new_PlanetFixed, METH_VARARGS, "\n"
+		"PlanetFixed(GroundCoordinate Gc)\n"
+		"PlanetFixed(double X, double Y, double Z, int NAIF_CODE)\n"
+		"PlanetFixed(Array_double_3 Pos, int NAIF_CODE)\n"
+		"PlanetFixed(int NAIF_CODE=-1)\n"
 		"\n"
-		"GeoCal::PlanetFixed::PlanetFixed(int Naif_code=-1)\n"
 		"GeoCal::PlanetFixed::PlanetFixed\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
 	 { "PlanetFixed_reference_surface_intersect_approximate", _wrap_PlanetFixed_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"PlanetFixed_reference_surface_intersect_approximate(PlanetFixed self, CartesianFixedLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > PlanetFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double\n"
-		"Height_reference_surface=0) const\n"
 		"GeoCal::PlanetFixed::reference_surface_intersect_approximate\n"
 		""},
 	 { "PlanetFixed_target_position", _wrap_PlanetFixed_target_position, METH_VARARGS, "\n"
+		"PlanetFixed_target_position(std::string const & Target_name, Time T, int Naif_code) -> PlanetFixed\n"
 		"\n"
-		"PlanetFixed PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)\n"
 		"GeoCal::PlanetFixed::target_position\n"
-		"Use spice to determine the position of the given body at the given\n"
-		"time.\n"
+		"Use spice to determine the position of the given body at the given time.  \n"
 		"\n"
 		""},
 	 { "PlanetFixed_orbit_data", _wrap_PlanetFixed_orbit_data, METH_VARARGS, "\n"
+		"PlanetFixed_orbit_data(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, Time T, int Naif_code, std::string const & Abcorr=\"NONE\") -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string\n"
-		"&Spacecraft_reference_frame_name, const Time &T, int Naif_code, const\n"
-		"std::string &Abcorr=\"NONE\")\n"
 		"GeoCal::PlanetFixed::orbit_data\n"
-		"Return orbit data for the given target and spacecraft reference frame.\n"
-		"The target is the name of the satellite used by spice (e.g, \"GLL\",\n"
-		"\"MRO\"), and the reference frame is the name of the camera reference\n"
-		"frame (e.g., \"GLL_SCAN_PLANE\", \"MRO_CTX\"). Note that this combined\n"
-		"both the space craft coordinate system and conversion to frame\n"
-		"coordinates. We could split this out into a separate camera model, but\n"
-		"there doesn't seem to be much of a reason to do this.\n"
+		"Return orbit data for the given target and spacecraft reference frame.  \n"
 		"\n"
-		"Note that the Target_name is of a body (e.g., something we have a spk\n"
-		"kernel for), while the Spacecraft_reference_frame_name is for a frame\n"
-		"(e.g., something we have a fk kernel for). In addition to the frame\n"
-		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
-		"the orientation of the frame with the target.\n"
+		"The target is the name of the satellite used by spice (e.g, \"GLL\", \"MRO\"),\n"
+		"and the reference frame is the name of the camera reference frame (e.g.,\n"
+		"\"GLL_SCAN_PLANE\", \"MRO_CTX\"). Note that this combined both the space craft\n"
+		"coordinate system and conversion to frame coordinates. We could split this out\n"
+		"into a separate camera model, but there doesn't seem to be much of a reason to\n"
+		"do this.  \n"
 		"\n"
-		"The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.\n"
-		"gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,\n"
-		"\"LT\").\n"
+		"Note that the Target_name is of a body (e.g., something we have a spk kernel\n"
+		"for), while the Spacecraft_reference_frame_name is for a frame (e.g., something\n"
+		"we have a fk kernel for). In addition to the frame definition, you'll generally\n"
+		"need a C kernel file (ck kernel) giving the orientation of the frame with the\n"
+		"target.  \n"
 		"\n"
-		"Note that if you include the stellar correction (e.g., \"LT+S\") you\n"
-		"should not also include the velocity aberration correction in e.g.,\n"
-		"QuaternionOrbitData. Stellar correction gives the \"apparent\"\n"
-		"position, which already accounts for the aberration angle correction\n"
+		"The Abcorr should be any of the strings spkezp\n"
+		"(https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts\n"
+		"(e.g., \"LT\").  \n"
 		"\n"
-		"Also, it is important to note that the light time calculated is to the\n"
-		"center of the Body, not the surface. If you are trying to find a\n"
-		"intercept with something near the surface this can be considerably\n"
-		"different (see sincpt_c vs spkezp_c in the SPICE documentation). So\n"
-		"generally you don't want anything other than the default \"NONE\". \n"
+		"Note that if you include the stellar correction (e.g., \"LT+S\") you should\n"
+		"*not* also include the velocity aberration correction in e.g.,\n"
+		"QuaternionOrbitData. Stellar correction gives the \"apparent\" position, which\n"
+		"already accounts for the aberration angle correction  \n"
+		"\n"
+		"Also, it is important to note that the light time calculated is to the center of\n"
+		"the Body, not the surface. If you are trying to find a intercept with something\n"
+		"near the surface this can be considerably different (see sincpt_c vs spkezp_c in\n"
+		"the SPICE documentation). So generally you don't want anything other than the\n"
+		"default \"NONE\".  \n"
+		"\n"
 		""},
 	 { "PlanetFixed__v_planet_radius", _wrap_PlanetFixed__v_planet_radius, METH_O, "\n"
+		"PlanetFixed__v_planet_radius(PlanetFixed self) -> double\n"
 		"\n"
-		"double GeoCal::PlanetFixed::planet_radius() const\n"
 		"GeoCal::PlanetFixed::planet_radius\n"
-		"Radius of planet in meters at the point.\n"
+		"Radius of planet in meters at the point.  \n"
 		"\n"
 		""},
 	 { "delete_PlanetFixed", _wrap_delete_PlanetFixed, METH_O, "\n"
+		"delete_PlanetFixed(PlanetFixed self)\n"
 		"\n"
-		"virtual GeoCal::PlanetFixed::~PlanetFixed()\n"
 		"GeoCal::PlanetFixed::~PlanetFixed\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetFixed_swigregister", PlanetFixed_swigregister, METH_O, NULL},
 	 { "PlanetFixed_swiginit", PlanetFixed_swiginit, METH_VARARGS, NULL},
 	 { "new_Planetocentric", _wrap_new_Planetocentric, METH_VARARGS, "\n"
+		"Planetocentric(GroundCoordinate Gc)\n"
+		"Planetocentric(double Latitude, double Longitude, double Height_ellipsoid, int Naif_code)\n"
+		"Planetocentric(int Naif_code=-1)\n"
 		"\n"
-		"GeoCal::Planetocentric::Planetocentric(int Naif_code=-1)\n"
 		"GeoCal::Planetocentric::Planetocentric\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
 	 { "Planetocentric__v_planet_radius", _wrap_Planetocentric__v_planet_radius, METH_O, "\n"
+		"Planetocentric__v_planet_radius(Planetocentric self) -> double\n"
 		"\n"
-		"double GeoCal::Planetocentric::planet_radius() const\n"
 		"GeoCal::Planetocentric::planet_radius\n"
-		"Radius of planet in meters at the point.\n"
+		"Radius of planet in meters at the point.  \n"
 		"\n"
 		""},
 	 { "delete_Planetocentric", _wrap_delete_Planetocentric, METH_O, "\n"
+		"delete_Planetocentric(Planetocentric self)\n"
 		"\n"
-		"virtual GeoCal::Planetocentric::~Planetocentric()\n"
 		"GeoCal::Planetocentric::~Planetocentric\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Planetocentric_swigregister", Planetocentric_swigregister, METH_O, NULL},
 	 { "Planetocentric_swiginit", Planetocentric_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetInertial", _wrap_new_PlanetInertial, METH_VARARGS, "\n"
+		"PlanetInertial(int Naif_code=-1)\n"
+		"PlanetInertial(double X, double Y, double Z, int Naif_code)\n"
+		"new_PlanetInertial(Array_double_3 Pos, int Naif_code) -> PlanetInertial\n"
 		"\n"
-		"GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)\n"
 		"GeoCal::PlanetInertial::PlanetInertial\n"
-		"Default constructor, doesn't initialize position.\n"
+		"Default constructor, doesn't initialize position.  \n"
 		"\n"
 		""},
 	 { "PlanetInertial_reference_surface_intersect_approximate", _wrap_PlanetInertial_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"PlanetInertial_reference_surface_intersect_approximate(PlanetInertial self, CartesianInertialLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"boost::shared_ptr< CartesianInertial > PlanetInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double\n"
-		"Height_reference_surface=0) const\n"
 		"GeoCal::PlanetInertial::reference_surface_intersect_approximate\n"
 		""},
 	 { "delete_PlanetInertial", _wrap_delete_PlanetInertial, METH_O, "\n"
+		"delete_PlanetInertial(PlanetInertial self)\n"
 		"\n"
-		"virtual GeoCal::PlanetInertial::~PlanetInertial()\n"
 		"GeoCal::PlanetInertial::~PlanetInertial\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetInertial_swigregister", PlanetInertial_swigregister, METH_O, NULL},
 	 { "PlanetInertial_swiginit", PlanetInertial_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetocentricConverter", _wrap_new_PlanetocentricConverter, METH_VARARGS, "\n"
+		"PlanetocentricConverter(int Naif_code=-1)\n"
 		"\n"
-		"GeoCal::PlanetocentricConverter::PlanetocentricConverter(int Naif_code=-1)\n"
 		"GeoCal::PlanetocentricConverter::PlanetocentricConverter\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "PlanetocentricConverter_convert_from_coordinate", _wrap_PlanetocentricConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"PlanetocentricConverter_convert_from_coordinate(PlanetocentricConverter self, double X, double Y, double Height=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::PlanetocentricConverter::convert_from_coordinate(double X, double Y, double Height=0) const\n"
 		"GeoCal::PlanetocentricConverter::convert_from_coordinate\n"
-		"Convert to Planetocentric.\n"
-		"X and Y are longitude and latitude in degrees, and height is in\n"
-		"meters. \n"
+		"Convert to Planetocentric.  \n"
+		"\n"
+		"X and Y are longitude and latitude in degrees, and height is in meters.  \n"
+		"\n"
 		""},
 	 { "PlanetocentricConverter__v_naif_code", _wrap_PlanetocentricConverter__v_naif_code, METH_O, "\n"
+		"PlanetocentricConverter__v_naif_code(PlanetocentricConverter self) -> int\n"
 		"\n"
-		"virtual int GeoCal::PlanetocentricConverter::naif_code() const\n"
 		"GeoCal::PlanetocentricConverter::naif_code\n"
-		"Return NAIF code.\n"
+		"Return NAIF code.  \n"
 		"\n"
 		""},
 	 { "delete_PlanetocentricConverter", _wrap_delete_PlanetocentricConverter, METH_O, "\n"
+		"delete_PlanetocentricConverter(PlanetocentricConverter self)\n"
 		"\n"
-		"virtual GeoCal::PlanetocentricConverter::~PlanetocentricConverter()\n"
 		"GeoCal::PlanetocentricConverter::~PlanetocentricConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetocentricConverter_swigregister", PlanetocentricConverter_swigregister, METH_O, NULL},
 	 { "PlanetocentricConverter_swiginit", PlanetocentricConverter_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetSimpleDem", _wrap_new_PlanetSimpleDem, METH_VARARGS, "\n"
+		"PlanetSimpleDem(double H, int Naif_code)\n"
+		"PlanetSimpleDem(int Naif_code=-1)\n"
 		"\n"
-		"GeoCal::PlanetSimpleDem::PlanetSimpleDem(int Naif_code=-1)\n"
 		"GeoCal::PlanetSimpleDem::PlanetSimpleDem\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
 	 { "PlanetSimpleDem__v_h", _wrap_PlanetSimpleDem__v_h, METH_VARARGS, "\n"
+		"PlanetSimpleDem__v_h(PlanetSimpleDem self) -> double\n"
+		"PlanetSimpleDem__v_h(PlanetSimpleDem self, double const & V)\n"
 		"\n"
-		"void GeoCal::PlanetSimpleDem::h(double Hnew)\n"
 		"GeoCal::PlanetSimpleDem::h\n"
-		"Set height value used by this object.\n"
+		"Set height value used by this object.  \n"
 		"\n"
 		""},
 	 { "PlanetSimpleDem__v_naif_code", _wrap_PlanetSimpleDem__v_naif_code, METH_VARARGS, "\n"
+		"PlanetSimpleDem__v_naif_code(PlanetSimpleDem self) -> int\n"
+		"PlanetSimpleDem__v_naif_code(PlanetSimpleDem self, int const & V)\n"
 		"\n"
-		"void GeoCal::PlanetSimpleDem::naif_code(int Naif_code)\n"
 		"GeoCal::PlanetSimpleDem::naif_code\n"
-		"Set Naif code for planet.\n"
+		"Set Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "delete_PlanetSimpleDem", _wrap_delete_PlanetSimpleDem, METH_O, "\n"
+		"delete_PlanetSimpleDem(PlanetSimpleDem self)\n"
 		"\n"
-		"virtual GeoCal::PlanetSimpleDem::~PlanetSimpleDem()\n"
 		"GeoCal::PlanetSimpleDem::~PlanetSimpleDem\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetSimpleDem_swigregister", PlanetSimpleDem_swigregister, METH_O, NULL},
@@ -9446,236 +9457,247 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "PlanetConstant_a", _wrap_PlanetConstant_a, METH_O, "\n"
+		"a(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::a(int Naif_code)\n"
 		"GeoCal::PlanetConstant::a\n"
 		""},
 	 { "PlanetConstant_b", _wrap_PlanetConstant_b, METH_O, "\n"
+		"b(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::b(int Naif_code)\n"
 		"GeoCal::PlanetConstant::b\n"
 		""},
 	 { "PlanetConstant_esq", _wrap_PlanetConstant_esq, METH_O, "\n"
+		"esq(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::esq(int Naif_code)\n"
 		"GeoCal::PlanetConstant::esq\n"
 		""},
 	 { "PlanetConstant_flattening", _wrap_PlanetConstant_flattening, METH_O, "\n"
+		"flattening(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::flattening(int Naif_code)\n"
 		"GeoCal::PlanetConstant::flattening\n"
-		"Calculate flattening.\n"
+		"Calculate flattening.  \n"
 		"\n"
 		""},
 	 { "PlanetConstant_inverse_flattening", _wrap_PlanetConstant_inverse_flattening, METH_O, "\n"
+		"inverse_flattening(int Naif_code) -> double\n"
 		"\n"
-		"static double GeoCal::PlanetConstant::inverse_flattening(int Naif_code)\n"
 		"GeoCal::PlanetConstant::inverse_flattening\n"
-		"Calculate inverse flattening.\n"
+		"Calculate inverse flattening.  \n"
 		"\n"
 		""},
 	 { "PlanetConstant_name", _wrap_PlanetConstant_name, METH_O, "\n"
+		"name(int Naif_code) -> std::string\n"
 		"\n"
-		"static std::string GeoCal::PlanetConstant::name(int Naif_code)\n"
 		"GeoCal::PlanetConstant::name\n"
 		""},
-	 { "new_PlanetConstant", _wrap_new_PlanetConstant, METH_NOARGS, NULL},
-	 { "delete_PlanetConstant", _wrap_delete_PlanetConstant, METH_O, NULL},
+	 { "new_PlanetConstant", _wrap_new_PlanetConstant, METH_NOARGS, "new_PlanetConstant() -> PlanetConstant"},
+	 { "delete_PlanetConstant", _wrap_delete_PlanetConstant, METH_O, "delete_PlanetConstant(PlanetConstant self)"},
 	 { "PlanetConstant_swigregister", PlanetConstant_swigregister, METH_O, NULL},
 	 { "PlanetConstant_swiginit", PlanetConstant_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetFixed", _wrap_new_PlanetFixed, METH_VARARGS, "\n"
+		"PlanetFixed(GroundCoordinate Gc)\n"
+		"PlanetFixed(double X, double Y, double Z, int NAIF_CODE)\n"
+		"PlanetFixed(Array_double_3 Pos, int NAIF_CODE)\n"
+		"PlanetFixed(int NAIF_CODE=-1)\n"
 		"\n"
-		"GeoCal::PlanetFixed::PlanetFixed(int Naif_code=-1)\n"
 		"GeoCal::PlanetFixed::PlanetFixed\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
 	 { "PlanetFixed_reference_surface_intersect_approximate", _wrap_PlanetFixed_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"reference_surface_intersect_approximate(PlanetFixed self, CartesianFixedLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > PlanetFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double\n"
-		"Height_reference_surface=0) const\n"
 		"GeoCal::PlanetFixed::reference_surface_intersect_approximate\n"
 		""},
 	 { "PlanetFixed_target_position", _wrap_PlanetFixed_target_position, METH_VARARGS, "\n"
+		"target_position(std::string const & Target_name, Time T, int Naif_code) -> PlanetFixed\n"
 		"\n"
-		"PlanetFixed PlanetFixed::target_position(const std::string &Target_name, const Time &T, int Naif_code)\n"
 		"GeoCal::PlanetFixed::target_position\n"
-		"Use spice to determine the position of the given body at the given\n"
-		"time.\n"
+		"Use spice to determine the position of the given body at the given time.  \n"
 		"\n"
 		""},
 	 { "PlanetFixed_orbit_data", _wrap_PlanetFixed_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, Time T, int Naif_code, std::string const & Abcorr=\"NONE\") -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > PlanetFixed::orbit_data(const std::string &Target_name, const std::string\n"
-		"&Spacecraft_reference_frame_name, const Time &T, int Naif_code, const\n"
-		"std::string &Abcorr=\"NONE\")\n"
 		"GeoCal::PlanetFixed::orbit_data\n"
-		"Return orbit data for the given target and spacecraft reference frame.\n"
-		"The target is the name of the satellite used by spice (e.g, \"GLL\",\n"
-		"\"MRO\"), and the reference frame is the name of the camera reference\n"
-		"frame (e.g., \"GLL_SCAN_PLANE\", \"MRO_CTX\"). Note that this combined\n"
-		"both the space craft coordinate system and conversion to frame\n"
-		"coordinates. We could split this out into a separate camera model, but\n"
-		"there doesn't seem to be much of a reason to do this.\n"
+		"Return orbit data for the given target and spacecraft reference frame.  \n"
 		"\n"
-		"Note that the Target_name is of a body (e.g., something we have a spk\n"
-		"kernel for), while the Spacecraft_reference_frame_name is for a frame\n"
-		"(e.g., something we have a fk kernel for). In addition to the frame\n"
-		"definition, you'll generally need a C kernel file (ck kernel) giving\n"
-		"the orientation of the frame with the target.\n"
+		"The target is the name of the satellite used by spice (e.g, \"GLL\", \"MRO\"),\n"
+		"and the reference frame is the name of the camera reference frame (e.g.,\n"
+		"\"GLL_SCAN_PLANE\", \"MRO_CTX\"). Note that this combined both the space craft\n"
+		"coordinate system and conversion to frame coordinates. We could split this out\n"
+		"into a separate camera model, but there doesn't seem to be much of a reason to\n"
+		"do this.  \n"
 		"\n"
-		"The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.\n"
-		"gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,\n"
-		"\"LT\").\n"
+		"Note that the Target_name is of a body (e.g., something we have a spk kernel\n"
+		"for), while the Spacecraft_reference_frame_name is for a frame (e.g., something\n"
+		"we have a fk kernel for). In addition to the frame definition, you'll generally\n"
+		"need a C kernel file (ck kernel) giving the orientation of the frame with the\n"
+		"target.  \n"
 		"\n"
-		"Note that if you include the stellar correction (e.g., \"LT+S\") you\n"
-		"should not also include the velocity aberration correction in e.g.,\n"
-		"QuaternionOrbitData. Stellar correction gives the \"apparent\"\n"
-		"position, which already accounts for the aberration angle correction\n"
+		"The Abcorr should be any of the strings spkezp\n"
+		"(https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts\n"
+		"(e.g., \"LT\").  \n"
 		"\n"
-		"Also, it is important to note that the light time calculated is to the\n"
-		"center of the Body, not the surface. If you are trying to find a\n"
-		"intercept with something near the surface this can be considerably\n"
-		"different (see sincpt_c vs spkezp_c in the SPICE documentation). So\n"
-		"generally you don't want anything other than the default \"NONE\". \n"
+		"Note that if you include the stellar correction (e.g., \"LT+S\") you should\n"
+		"*not* also include the velocity aberration correction in e.g.,\n"
+		"QuaternionOrbitData. Stellar correction gives the \"apparent\" position, which\n"
+		"already accounts for the aberration angle correction  \n"
+		"\n"
+		"Also, it is important to note that the light time calculated is to the center of\n"
+		"the Body, not the surface. If you are trying to find a intercept with something\n"
+		"near the surface this can be considerably different (see sincpt_c vs spkezp_c in\n"
+		"the SPICE documentation). So generally you don't want anything other than the\n"
+		"default \"NONE\".  \n"
+		"\n"
 		""},
 	 { "PlanetFixed__v_planet_radius", _wrap_PlanetFixed__v_planet_radius, METH_O, "\n"
+		"_v_planet_radius(PlanetFixed self) -> double\n"
 		"\n"
-		"double GeoCal::PlanetFixed::planet_radius() const\n"
 		"GeoCal::PlanetFixed::planet_radius\n"
-		"Radius of planet in meters at the point.\n"
+		"Radius of planet in meters at the point.  \n"
 		"\n"
 		""},
 	 { "delete_PlanetFixed", _wrap_delete_PlanetFixed, METH_O, "\n"
+		"delete_PlanetFixed(PlanetFixed self)\n"
 		"\n"
-		"virtual GeoCal::PlanetFixed::~PlanetFixed()\n"
 		"GeoCal::PlanetFixed::~PlanetFixed\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetFixed_swigregister", PlanetFixed_swigregister, METH_O, NULL},
 	 { "PlanetFixed_swiginit", PlanetFixed_swiginit, METH_VARARGS, NULL},
 	 { "new_Planetocentric", _wrap_new_Planetocentric, METH_VARARGS, "\n"
+		"Planetocentric(GroundCoordinate Gc)\n"
+		"Planetocentric(double Latitude, double Longitude, double Height_ellipsoid, int Naif_code)\n"
+		"Planetocentric(int Naif_code=-1)\n"
 		"\n"
-		"GeoCal::Planetocentric::Planetocentric(int Naif_code=-1)\n"
 		"GeoCal::Planetocentric::Planetocentric\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
 	 { "Planetocentric__v_planet_radius", _wrap_Planetocentric__v_planet_radius, METH_O, "\n"
+		"_v_planet_radius(Planetocentric self) -> double\n"
 		"\n"
-		"double GeoCal::Planetocentric::planet_radius() const\n"
 		"GeoCal::Planetocentric::planet_radius\n"
-		"Radius of planet in meters at the point.\n"
+		"Radius of planet in meters at the point.  \n"
 		"\n"
 		""},
 	 { "delete_Planetocentric", _wrap_delete_Planetocentric, METH_O, "\n"
+		"delete_Planetocentric(Planetocentric self)\n"
 		"\n"
-		"virtual GeoCal::Planetocentric::~Planetocentric()\n"
 		"GeoCal::Planetocentric::~Planetocentric\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Planetocentric_swigregister", Planetocentric_swigregister, METH_O, NULL},
 	 { "Planetocentric_swiginit", Planetocentric_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetInertial", _wrap_new_PlanetInertial, METH_VARARGS, "\n"
+		"PlanetInertial(int Naif_code=-1)\n"
+		"PlanetInertial(double X, double Y, double Z, int Naif_code)\n"
+		"new_PlanetInertial(Array_double_3 Pos, int Naif_code) -> PlanetInertial\n"
 		"\n"
-		"GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)\n"
 		"GeoCal::PlanetInertial::PlanetInertial\n"
-		"Default constructor, doesn't initialize position.\n"
+		"Default constructor, doesn't initialize position.  \n"
 		"\n"
 		""},
 	 { "PlanetInertial_reference_surface_intersect_approximate", _wrap_PlanetInertial_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"reference_surface_intersect_approximate(PlanetInertial self, CartesianInertialLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"boost::shared_ptr< CartesianInertial > PlanetInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double\n"
-		"Height_reference_surface=0) const\n"
 		"GeoCal::PlanetInertial::reference_surface_intersect_approximate\n"
 		""},
 	 { "delete_PlanetInertial", _wrap_delete_PlanetInertial, METH_O, "\n"
+		"delete_PlanetInertial(PlanetInertial self)\n"
 		"\n"
-		"virtual GeoCal::PlanetInertial::~PlanetInertial()\n"
 		"GeoCal::PlanetInertial::~PlanetInertial\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetInertial_swigregister", PlanetInertial_swigregister, METH_O, NULL},
 	 { "PlanetInertial_swiginit", PlanetInertial_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetocentricConverter", _wrap_new_PlanetocentricConverter, METH_VARARGS, "\n"
+		"PlanetocentricConverter(int Naif_code=-1)\n"
 		"\n"
-		"GeoCal::PlanetocentricConverter::PlanetocentricConverter(int Naif_code=-1)\n"
 		"GeoCal::PlanetocentricConverter::PlanetocentricConverter\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "PlanetocentricConverter_convert_from_coordinate", _wrap_PlanetocentricConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(PlanetocentricConverter self, double X, double Y, double Height=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::PlanetocentricConverter::convert_from_coordinate(double X, double Y, double Height=0) const\n"
 		"GeoCal::PlanetocentricConverter::convert_from_coordinate\n"
-		"Convert to Planetocentric.\n"
-		"X and Y are longitude and latitude in degrees, and height is in\n"
-		"meters. \n"
+		"Convert to Planetocentric.  \n"
+		"\n"
+		"X and Y are longitude and latitude in degrees, and height is in meters.  \n"
+		"\n"
 		""},
 	 { "PlanetocentricConverter__v_naif_code", _wrap_PlanetocentricConverter__v_naif_code, METH_O, "\n"
+		"_v_naif_code(PlanetocentricConverter self) -> int\n"
 		"\n"
-		"virtual int GeoCal::PlanetocentricConverter::naif_code() const\n"
 		"GeoCal::PlanetocentricConverter::naif_code\n"
-		"Return NAIF code.\n"
+		"Return NAIF code.  \n"
 		"\n"
 		""},
 	 { "delete_PlanetocentricConverter", _wrap_delete_PlanetocentricConverter, METH_O, "\n"
+		"delete_PlanetocentricConverter(PlanetocentricConverter self)\n"
 		"\n"
-		"virtual GeoCal::PlanetocentricConverter::~PlanetocentricConverter()\n"
 		"GeoCal::PlanetocentricConverter::~PlanetocentricConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetocentricConverter_swigregister", PlanetocentricConverter_swigregister, METH_O, NULL},
 	 { "PlanetocentricConverter_swiginit", PlanetocentricConverter_swiginit, METH_VARARGS, NULL},
 	 { "new_PlanetSimpleDem", _wrap_new_PlanetSimpleDem, METH_VARARGS, "\n"
+		"PlanetSimpleDem(double H, int Naif_code)\n"
+		"PlanetSimpleDem(int Naif_code=-1)\n"
 		"\n"
-		"GeoCal::PlanetSimpleDem::PlanetSimpleDem(int Naif_code=-1)\n"
 		"GeoCal::PlanetSimpleDem::PlanetSimpleDem\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
 	 { "PlanetSimpleDem__v_h", _wrap_PlanetSimpleDem__v_h, METH_VARARGS, "\n"
+		"_v_h(PlanetSimpleDem self) -> double\n"
+		"_v_h(PlanetSimpleDem self, double const & V)\n"
 		"\n"
-		"void GeoCal::PlanetSimpleDem::h(double Hnew)\n"
 		"GeoCal::PlanetSimpleDem::h\n"
-		"Set height value used by this object.\n"
+		"Set height value used by this object.  \n"
 		"\n"
 		""},
 	 { "PlanetSimpleDem__v_naif_code", _wrap_PlanetSimpleDem__v_naif_code, METH_VARARGS, "\n"
+		"_v_naif_code(PlanetSimpleDem self) -> int\n"
+		"_v_naif_code(PlanetSimpleDem self, int const & V)\n"
 		"\n"
-		"void GeoCal::PlanetSimpleDem::naif_code(int Naif_code)\n"
 		"GeoCal::PlanetSimpleDem::naif_code\n"
-		"Set Naif code for planet.\n"
+		"Set Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "delete_PlanetSimpleDem", _wrap_delete_PlanetSimpleDem, METH_O, "\n"
+		"delete_PlanetSimpleDem(PlanetSimpleDem self)\n"
 		"\n"
-		"virtual GeoCal::PlanetSimpleDem::~PlanetSimpleDem()\n"
 		"GeoCal::PlanetSimpleDem::~PlanetSimpleDem\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "PlanetSimpleDem_swigregister", PlanetSimpleDem_swigregister, METH_O, NULL},

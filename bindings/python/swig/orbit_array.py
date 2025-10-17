@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_array.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_array:
 _orbit_array.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_array.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,33 +145,34 @@ import geocal_swig.look_vector
 class OrbitArray_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This is an implementation of an Orbit that is directly given an arrays
-    with time, position, velocity:
+
+    This is an implementation of an Orbit that is directly given an arrays with
+    time, position, velocity:  
 
     Attitude_time - natt in size, time of attitude measurement as doubles.
-    Attitude_quaternion - natt x 4 in size, quaternion to take same
-    coordinate system as Position (e.g., ECI) Ephemeris_time - neph in
-    size, time of ephemeris measurement as doubles Ephemeris_position -
-    neph x 3 in size, position measurement as doubles in meters
-    Ephemeris_velocity - neph x 3 in size, velocity measurement as doubles
-    in meter/second Because it is useful, we allow the type of position
-    measurement and time to be changed. The measurement class is passed
-    in, e.g., Eci, as is a small wrapper to give the conversion to Time.
+    Attitude_quaternion - natt x 4 in size, quaternion to take same coordinate
+    system as Position (e.g., ECI) Ephemeris_time - neph in size, time of ephemeris
+    measurement as doubles Ephemeris_position - neph x 3 in size, position
+    measurement as doubles in meters Ephemeris_velocity - neph x 3 in size, velocity
+    measurement as doubles in meter/second Because it is useful, we allow the type
+    of position measurement and time to be changed. The measurement class is passed
+    in, e.g., Eci, as is a small wrapper to give the conversion to Time.  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
 
-    Derived classes may have a way to populate the data (e.g. HdfOrbit),
-    so an additional field indicates if the class should serialize this
-    data itself or let the derived object handle this (e.g. HdfOrbit
-    stores a file name, and gets the data from that file).
+    Derived classes may have a way to populate the data (e.g. HdfOrbit), so an
+    additional field indicates if the class should serialize this data itself or let
+    the derived object handle this (e.g. HdfOrbit stores a file name, and gets the
+    data from that file).  
 
-    C++ includes: orbit_array.h 
+    C++ includes: orbit_array.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -176,12 +180,8 @@ class OrbitArray_EciTod_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternio
 
     def __init__(self, Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame=True, Serialize_data=True):
         r"""
+        __init__(OrbitArray_EciTod_TimeAcs self, BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True) -> OrbitArray_EciTod_TimeAcs
 
-        GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<
-        double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const
-        blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >
-        &Att_quat, bool Att_from_sc_to_ref_frame=true, bool
-        Serialize_data=true)
         GeoCal::OrbitArray::OrbitArray
         """
         _orbit_array.OrbitArray_EciTod_TimeAcs_swiginit(self, _orbit_array.new_OrbitArray_EciTod_TimeAcs(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame, Serialize_data))
@@ -200,33 +200,34 @@ _orbit_array.OrbitArray_EciTod_TimeAcs_swigregister(OrbitArray_EciTod_TimeAcs)
 class OrbitArray_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This is an implementation of an Orbit that is directly given an arrays
-    with time, position, velocity:
+
+    This is an implementation of an Orbit that is directly given an arrays with
+    time, position, velocity:  
 
     Attitude_time - natt in size, time of attitude measurement as doubles.
-    Attitude_quaternion - natt x 4 in size, quaternion to take same
-    coordinate system as Position (e.g., ECI) Ephemeris_time - neph in
-    size, time of ephemeris measurement as doubles Ephemeris_position -
-    neph x 3 in size, position measurement as doubles in meters
-    Ephemeris_velocity - neph x 3 in size, velocity measurement as doubles
-    in meter/second Because it is useful, we allow the type of position
-    measurement and time to be changed. The measurement class is passed
-    in, e.g., Eci, as is a small wrapper to give the conversion to Time.
+    Attitude_quaternion - natt x 4 in size, quaternion to take same coordinate
+    system as Position (e.g., ECI) Ephemeris_time - neph in size, time of ephemeris
+    measurement as doubles Ephemeris_position - neph x 3 in size, position
+    measurement as doubles in meters Ephemeris_velocity - neph x 3 in size, velocity
+    measurement as doubles in meter/second Because it is useful, we allow the type
+    of position measurement and time to be changed. The measurement class is passed
+    in, e.g., Eci, as is a small wrapper to give the conversion to Time.  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
 
-    Derived classes may have a way to populate the data (e.g. HdfOrbit),
-    so an additional field indicates if the class should serialize this
-    data itself or let the derived object handle this (e.g. HdfOrbit
-    stores a file name, and gets the data from that file).
+    Derived classes may have a way to populate the data (e.g. HdfOrbit), so an
+    additional field indicates if the class should serialize this data itself or let
+    the derived object handle this (e.g. HdfOrbit stores a file name, and gets the
+    data from that file).  
 
-    C++ includes: orbit_array.h 
+    C++ includes: orbit_array.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -234,12 +235,8 @@ class OrbitArray_Eci_TimePgs(geocal_swig.orbit_quaternion_list.OrbitQuaternionLi
 
     def __init__(self, Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame=True, Serialize_data=True):
         r"""
+        __init__(OrbitArray_Eci_TimePgs self, BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True) -> OrbitArray_Eci_TimePgs
 
-        GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<
-        double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const
-        blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >
-        &Att_quat, bool Att_from_sc_to_ref_frame=true, bool
-        Serialize_data=true)
         GeoCal::OrbitArray::OrbitArray
         """
         _orbit_array.OrbitArray_Eci_TimePgs_swiginit(self, _orbit_array.new_OrbitArray_Eci_TimePgs(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame, Serialize_data))
@@ -258,33 +255,34 @@ _orbit_array.OrbitArray_Eci_TimePgs_swigregister(OrbitArray_Eci_TimePgs)
 class OrbitArray_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This is an implementation of an Orbit that is directly given an arrays
-    with time, position, velocity:
+
+    This is an implementation of an Orbit that is directly given an arrays with
+    time, position, velocity:  
 
     Attitude_time - natt in size, time of attitude measurement as doubles.
-    Attitude_quaternion - natt x 4 in size, quaternion to take same
-    coordinate system as Position (e.g., ECI) Ephemeris_time - neph in
-    size, time of ephemeris measurement as doubles Ephemeris_position -
-    neph x 3 in size, position measurement as doubles in meters
-    Ephemeris_velocity - neph x 3 in size, velocity measurement as doubles
-    in meter/second Because it is useful, we allow the type of position
-    measurement and time to be changed. The measurement class is passed
-    in, e.g., Eci, as is a small wrapper to give the conversion to Time.
+    Attitude_quaternion - natt x 4 in size, quaternion to take same coordinate
+    system as Position (e.g., ECI) Ephemeris_time - neph in size, time of ephemeris
+    measurement as doubles Ephemeris_position - neph x 3 in size, position
+    measurement as doubles in meters Ephemeris_velocity - neph x 3 in size, velocity
+    measurement as doubles in meter/second Because it is useful, we allow the type
+    of position measurement and time to be changed. The measurement class is passed
+    in, e.g., Eci, as is a small wrapper to give the conversion to Time.  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
 
-    Derived classes may have a way to populate the data (e.g. HdfOrbit),
-    so an additional field indicates if the class should serialize this
-    data itself or let the derived object handle this (e.g. HdfOrbit
-    stores a file name, and gets the data from that file).
+    Derived classes may have a way to populate the data (e.g. HdfOrbit), so an
+    additional field indicates if the class should serialize this data itself or let
+    the derived object handle this (e.g. HdfOrbit stores a file name, and gets the
+    data from that file).  
 
-    C++ includes: orbit_array.h 
+    C++ includes: orbit_array.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -292,12 +290,8 @@ class OrbitArray_Eci_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternion
 
     def __init__(self, Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame=True, Serialize_data=True):
         r"""
+        __init__(OrbitArray_Eci_TimeJ2000 self, BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True) -> OrbitArray_Eci_TimeJ2000
 
-        GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<
-        double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const
-        blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >
-        &Att_quat, bool Att_from_sc_to_ref_frame=true, bool
-        Serialize_data=true)
         GeoCal::OrbitArray::OrbitArray
         """
         _orbit_array.OrbitArray_Eci_TimeJ2000_swiginit(self, _orbit_array.new_OrbitArray_Eci_TimeJ2000(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame, Serialize_data))
@@ -316,33 +310,34 @@ _orbit_array.OrbitArray_Eci_TimeJ2000_swigregister(OrbitArray_Eci_TimeJ2000)
 class OrbitArray_EciTod_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This is an implementation of an Orbit that is directly given an arrays
-    with time, position, velocity:
+
+    This is an implementation of an Orbit that is directly given an arrays with
+    time, position, velocity:  
 
     Attitude_time - natt in size, time of attitude measurement as doubles.
-    Attitude_quaternion - natt x 4 in size, quaternion to take same
-    coordinate system as Position (e.g., ECI) Ephemeris_time - neph in
-    size, time of ephemeris measurement as doubles Ephemeris_position -
-    neph x 3 in size, position measurement as doubles in meters
-    Ephemeris_velocity - neph x 3 in size, velocity measurement as doubles
-    in meter/second Because it is useful, we allow the type of position
-    measurement and time to be changed. The measurement class is passed
-    in, e.g., Eci, as is a small wrapper to give the conversion to Time.
+    Attitude_quaternion - natt x 4 in size, quaternion to take same coordinate
+    system as Position (e.g., ECI) Ephemeris_time - neph in size, time of ephemeris
+    measurement as doubles Ephemeris_position - neph x 3 in size, position
+    measurement as doubles in meters Ephemeris_velocity - neph x 3 in size, velocity
+    measurement as doubles in meter/second Because it is useful, we allow the type
+    of position measurement and time to be changed. The measurement class is passed
+    in, e.g., Eci, as is a small wrapper to give the conversion to Time.  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
 
-    Derived classes may have a way to populate the data (e.g. HdfOrbit),
-    so an additional field indicates if the class should serialize this
-    data itself or let the derived object handle this (e.g. HdfOrbit
-    stores a file name, and gets the data from that file).
+    Derived classes may have a way to populate the data (e.g. HdfOrbit), so an
+    additional field indicates if the class should serialize this data itself or let
+    the derived object handle this (e.g. HdfOrbit stores a file name, and gets the
+    data from that file).  
 
-    C++ includes: orbit_array.h 
+    C++ includes: orbit_array.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -350,12 +345,8 @@ class OrbitArray_EciTod_TimeJ2000(geocal_swig.orbit_quaternion_list.OrbitQuatern
 
     def __init__(self, Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame=True, Serialize_data=True):
         r"""
+        __init__(OrbitArray_EciTod_TimeJ2000 self, BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True) -> OrbitArray_EciTod_TimeJ2000
 
-        GeoCal::OrbitArray< PositionType, TimeCreatorType >::OrbitArray(const blitz::Array< double, 1 > &Eph_time, const blitz::Array<
-        double, 2 > &Eph_pos, const blitz::Array< double, 2 > &Eph_vel, const
-        blitz::Array< double, 1 > &Att_time, const blitz::Array< double, 2 >
-        &Att_quat, bool Att_from_sc_to_ref_frame=true, bool
-        Serialize_data=true)
         GeoCal::OrbitArray::OrbitArray
         """
         _orbit_array.OrbitArray_EciTod_TimeJ2000_swiginit(self, _orbit_array.new_OrbitArray_EciTod_TimeJ2000(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame, Serialize_data))

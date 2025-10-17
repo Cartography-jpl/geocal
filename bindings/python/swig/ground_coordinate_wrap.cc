@@ -13943,273 +13943,339 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "GroundCoordinate__v_latitude", _wrap_GroundCoordinate__v_latitude, METH_O, "\n"
+		"GroundCoordinate__v_latitude(GroundCoordinate self) -> double\n"
 		"\n"
-		"double GeoCal::GroundCoordinate::latitude() const\n"
 		"GeoCal::GroundCoordinate::latitude\n"
-		"Return latitude in degrees.\n"
-		"By default we just convert to CartesianFixed and then to latitude, but\n"
-		"derived classes can supply more efficient versions of these if needed.\n"
-		"Latitude is -90 to 90.\n"
+		"Return latitude in degrees.  \n"
 		"\n"
-		"Note that for the earth, the latitude is the standard geodetic\n"
-		"latitude. However, by convention other planets use Planetocentric\n"
-		"latitude, the equivalent of geocentric latitude for the other planet.\n"
-		"This is handled transparently and consistently by the various\n"
-		"coordinate classes (e.g., PlanetConstant, OgrCoordinate), but you\n"
-		"should be aware of this difference. \n"
+		"By default we just convert to CartesianFixed and then to latitude, but derived\n"
+		"classes can supply more efficient versions of these if needed. Latitude is -90\n"
+		"to 90.  \n"
+		"\n"
+		"Note that for the earth, the latitude is the standard geodetic latitude.\n"
+		"However, by convention other planets use Planetocentric latitude, the equivalent\n"
+		"of geocentric latitude for the other planet. This is handled transparently and\n"
+		"consistently by the various coordinate classes (e.g., PlanetConstant,\n"
+		"OgrCoordinate), but you should be aware of this difference.  \n"
+		"\n"
 		""},
 	 { "GroundCoordinate__v_longitude", _wrap_GroundCoordinate__v_longitude, METH_O, "\n"
+		"GroundCoordinate__v_longitude(GroundCoordinate self) -> double\n"
 		"\n"
-		"double GeoCal::GroundCoordinate::longitude() const\n"
 		"GeoCal::GroundCoordinate::longitude\n"
-		"Return longitude in degrees.\n"
-		"By default we just convert to CartesianFixed and then to longitude,\n"
-		"but derived classes can supply more efficient versions of these if\n"
-		"needed. Longitude is -180 to 180. \n"
+		"Return longitude in degrees.  \n"
+		"\n"
+		"By default we just convert to CartesianFixed and then to longitude, but derived\n"
+		"classes can supply more efficient versions of these if needed. Longitude is -180\n"
+		"to 180.  \n"
+		"\n"
 		""},
 	 { "GroundCoordinate__v_height_reference_surface", _wrap_GroundCoordinate__v_height_reference_surface, METH_O, "\n"
+		"GroundCoordinate__v_height_reference_surface(GroundCoordinate self) -> double\n"
 		"\n"
-		"double GeoCal::GroundCoordinate::height_reference_surface() const\n"
 		"GeoCal::GroundCoordinate::height_reference_surface\n"
-		"Return height in meters above reference surface (e.g., WGS-84 for the\n"
-		"earth).\n"
-		"By default we just convert to CartesianFixed and then to height, but\n"
-		"derived classes can supply more efficient versions of these if needed.\n"
+		"Return height in meters above reference surface (e.g., WGS-84 for the earth).  \n"
+		"\n"
+		"By default we just convert to CartesianFixed and then to height, but derived\n"
+		"classes can supply more efficient versions of these if needed.  \n"
 		"\n"
 		""},
 	 { "GroundCoordinate_convert_to_cf", _wrap_GroundCoordinate_convert_to_cf, METH_O, "\n"
+		"GroundCoordinate_convert_to_cf(GroundCoordinate self) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::GroundCoordinate::convert_to_cf() const =0\n"
 		"GeoCal::GroundCoordinate::convert_to_cf\n"
-		"Convert to CartesianFixed.\n"
+		"Convert to CartesianFixed.  \n"
 		"\n"
 		""},
-	 { "GroundCoordinate___str__", _wrap_GroundCoordinate___str__, METH_O, NULL},
+	 { "GroundCoordinate___str__", _wrap_GroundCoordinate___str__, METH_O, "GroundCoordinate___str__(GroundCoordinate self) -> std::string"},
 	 { "GroundCoordinate_naif_code", _wrap_GroundCoordinate_naif_code, METH_O, "\n"
+		"GroundCoordinate_naif_code(GroundCoordinate self) -> int\n"
 		"\n"
-		"virtual int GeoCal::GroundCoordinate::naif_code() const =0\n"
 		"GeoCal::GroundCoordinate::naif_code\n"
-		"Naif code for planet.\n"
+		"Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "delete_GroundCoordinate", _wrap_delete_GroundCoordinate, METH_O, "\n"
+		"delete_GroundCoordinate(GroundCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::GroundCoordinate::~GroundCoordinate()\n"
 		"GeoCal::GroundCoordinate::~GroundCoordinate\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GroundCoordinate_swigregister", GroundCoordinate_swigregister, METH_O, NULL},
 	 { "CartesianInertial_convert_to_cf", _wrap_CartesianInertial_convert_to_cf, METH_VARARGS, "\n"
+		"CartesianInertial_convert_to_cf(CartesianInertial self, Time T) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::CartesianInertial::convert_to_cf(const Time &T) const =0\n"
 		"GeoCal::CartesianInertial::convert_to_cf\n"
-		"Convert to a CartesianFixed.\n"
+		"Convert to a CartesianFixed.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_ci_to_cf", _wrap_CartesianInertial_ci_to_cf, METH_VARARGS, "\n"
+		"CartesianInertial_ci_to_cf(CartesianInertial self, Time T, double [3][3] Ci_to_cf)\n"
 		"\n"
-		"virtual void GeoCal::CartesianInertial::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"GeoCal::CartesianInertial::ci_to_cf\n"
-		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
-		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
-		"transpose of this matrix. \n"
+		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial\n"
+		"at the given Time.  \n"
+		"\n"
+		"The matrix for going from CartesianInertial to CartesianFixed is the transpose\n"
+		"of this matrix.  \n"
+		"\n"
 		""},
 	 { "CartesianInertial_ci_to_cf_with_vel", _wrap_CartesianInertial_ci_to_cf_with_vel, METH_VARARGS, "\n"
+		"CartesianInertial_ci_to_cf_with_vel(CartesianInertial self, Time T, double [6][6] Ci_to_cf)\n"
 		"\n"
-		"virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
 		"GeoCal::CartesianInertial::ci_to_cf_with_vel\n"
-		"Calculate matrix that can be used to convert CartesianInertial to CartesianFixed at the given Time, including velocity.\n"
-		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
-		"transpose is not the inverse. \n"
+		"Calculate matrix that can be used to convert CartesianInertial to CartesianFixed\n"
+		"at the given Time, including velocity.  \n"
+		"\n"
+		"Note that unlike the 3x3 matrix, this is *not* orthogonal so the transpose is\n"
+		"not the inverse.  \n"
+		"\n"
 		""},
 	 { "CartesianInertial_naif_code", _wrap_CartesianInertial_naif_code, METH_O, "\n"
+		"CartesianInertial_naif_code(CartesianInertial self) -> int\n"
 		"\n"
-		"virtual int GeoCal::CartesianInertial::naif_code() const =0\n"
 		"GeoCal::CartesianInertial::naif_code\n"
-		"Naif code for planet.\n"
+		"Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_ci_to_cf_quat", _wrap_CartesianInertial_ci_to_cf_quat, METH_VARARGS, "\n"
+		"CartesianInertial_ci_to_cf_quat(CartesianInertial self, Time T) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > GeoCal::CartesianInertial::ci_to_cf_quat(const Time &T) const\n"
 		"GeoCal::CartesianInertial::ci_to_cf_quat\n"
-		"Calculate quaternion that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
+		"Calculate quaternion that can be used to convert CartesianFixed to\n"
+		"CartesianInertial at the given Time.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_create", _wrap_CartesianInertial_create, METH_VARARGS, "\n"
+		"CartesianInertial_create(CartesianInertial self, Array_double_3 P) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::CartesianInertial::create(boost::array< double, 3 > P) const =0\n"
 		"GeoCal::CartesianInertial::create\n"
-		"Create an instance of whatever type of CartesianInertial this is.\n"
+		"Create an instance of whatever type of CartesianInertial this is.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_reference_surface_intersect_approximate", _wrap_CartesianInertial_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"CartesianInertial_reference_surface_intersect_approximate(CartesianInertial self, CartesianInertialLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::CartesianInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double\n"
-		"Height_reference_surface=0) const =0\n"
 		"GeoCal::CartesianInertial::reference_surface_intersect_approximate\n"
-		"Find the intersection with the surface at the given height starting at\n"
-		"this point and looking in the given direction.\n"
-		"The intersection is done in an approximate but quicker manner, see the\n"
-		"derived classes for the approximation used. \n"
-		""},
-	 { "CartesianInertial___str__", _wrap_CartesianInertial___str__, METH_O, NULL},
-	 { "CartesianInertial__v_position", _wrap_CartesianInertial__v_position, METH_VARARGS, NULL},
-	 { "delete_CartesianInertial", _wrap_delete_CartesianInertial, METH_O, "\n"
+		"Find the intersection with the surface at the given height starting at this\n"
+		"point and looking in the given direction.  \n"
 		"\n"
-		"virtual GeoCal::CartesianInertial::~CartesianInertial()\n"
+		"The intersection is done in an approximate but quicker manner, see the derived\n"
+		"classes for the approximation used.  \n"
+		"\n"
+		""},
+	 { "CartesianInertial___str__", _wrap_CartesianInertial___str__, METH_O, "CartesianInertial___str__(CartesianInertial self) -> std::string"},
+	 { "CartesianInertial__v_position", _wrap_CartesianInertial__v_position, METH_VARARGS, "\n"
+		"CartesianInertial__v_position(CartesianInertial self) -> BlitzArray_double_1\n"
+		"CartesianInertial__v_position(CartesianInertial self, BlitzArray_double_1 V)\n"
+		""},
+	 { "delete_CartesianInertial", _wrap_delete_CartesianInertial, METH_O, "\n"
+		"delete_CartesianInertial(CartesianInertial self)\n"
+		"\n"
 		"GeoCal::CartesianInertial::~CartesianInertial\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_swigregister", CartesianInertial_swigregister, METH_O, NULL},
 	 { "CartesianFixed_convert_to_ci", _wrap_CartesianFixed_convert_to_ci, METH_VARARGS, "\n"
+		"CartesianFixed_convert_to_ci(CartesianFixed self, Time T) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::CartesianFixed::convert_to_ci(const Time &T) const =0\n"
 		"GeoCal::CartesianFixed::convert_to_ci\n"
-		"Convert to CartesianInertial.\n"
+		"Convert to CartesianInertial.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_create", _wrap_CartesianFixed_create, METH_VARARGS, "\n"
+		"CartesianFixed_create(CartesianFixed self, Array_double_3 P) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::CartesianFixed::create(boost::array< double, 3 > P) const =0\n"
 		"GeoCal::CartesianFixed::create\n"
-		"Create an instance of whatever type of CartesianFixed this is.\n"
+		"Create an instance of whatever type of CartesianFixed this is.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_ci_to_cf", _wrap_CartesianFixed_ci_to_cf, METH_VARARGS, "\n"
+		"CartesianFixed_ci_to_cf(CartesianFixed self, Time T, double [3][3] Ci_to_cf)\n"
 		"\n"
-		"virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"GeoCal::CartesianFixed::ci_to_cf\n"
-		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
-		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
-		"transpose of this matrix. \n"
+		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial\n"
+		"at the given Time.  \n"
+		"\n"
+		"The matrix for going from CartesianInertial to CartesianFixed is the transpose\n"
+		"of this matrix.  \n"
+		"\n"
 		""},
 	 { "CartesianFixed_cf_to_ci_with_vel", _wrap_CartesianFixed_cf_to_ci_with_vel, METH_VARARGS, "\n"
+		"CartesianFixed_cf_to_ci_with_vel(CartesianFixed self, Time T, double [6][6] Cf_to_ci)\n"
 		"\n"
-		"virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const =0\n"
 		"GeoCal::CartesianFixed::cf_to_ci_with_vel\n"
-		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial at the given Time, including velocity.\n"
-		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
-		"transpose is not the inverse. \n"
+		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial\n"
+		"at the given Time, including velocity.  \n"
+		"\n"
+		"Note that unlike the 3x3 matrix, this is *not* orthogonal so the transpose is\n"
+		"not the inverse.  \n"
+		"\n"
 		""},
 	 { "CartesianFixed_ci_to_cf_quat", _wrap_CartesianFixed_ci_to_cf_quat, METH_VARARGS, "\n"
+		"CartesianFixed_ci_to_cf_quat(CartesianFixed self, Time T) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > GeoCal::CartesianFixed::ci_to_cf_quat(const Time &T) const\n"
 		"GeoCal::CartesianFixed::ci_to_cf_quat\n"
-		"Calculate quaternion that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
+		"Calculate quaternion that can be used to convert CartesianFixed to\n"
+		"CartesianInertial at the given Time.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_reference_surface_intersect_approximate", _wrap_CartesianFixed_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"CartesianFixed_reference_surface_intersect_approximate(CartesianFixed self, CartesianFixedLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::CartesianFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double\n"
-		"Height_reference_surface=0) const =0\n"
 		"GeoCal::CartesianFixed::reference_surface_intersect_approximate\n"
-		"Find the intersection with the surface at the given height starting at\n"
-		"this point and looking in the given direction.\n"
-		"The intersection is done in an approximate but quicker manner, see the\n"
-		"derived classes for the approximation used. \n"
+		"Find the intersection with the surface at the given height starting at this\n"
+		"point and looking in the given direction.  \n"
+		"\n"
+		"The intersection is done in an approximate but quicker manner, see the derived\n"
+		"classes for the approximation used.  \n"
+		"\n"
 		""},
 	 { "CartesianFixed__v_min_radius_reference_surface", _wrap_CartesianFixed__v_min_radius_reference_surface, METH_O, "\n"
+		"CartesianFixed__v_min_radius_reference_surface(CartesianFixed self) -> double\n"
 		"\n"
-		"virtual double GeoCal::CartesianFixed::min_radius_reference_surface() const =0\n"
 		"GeoCal::CartesianFixed::min_radius_reference_surface\n"
-		"This is the radius of the largest sphere that fits completely into the\n"
-		"reference surface (e.g., radius for a reference sphere, minimum of a\n"
-		"and b for a ellipsoid).\n"
+		"This is the radius of the largest sphere that fits completely into the reference\n"
+		"surface (e.g., radius for a reference sphere, minimum of a and b for a\n"
+		"ellipsoid).  \n"
 		"\n"
 		""},
-	 { "CartesianFixed__v_position", _wrap_CartesianFixed__v_position, METH_VARARGS, NULL},
+	 { "CartesianFixed__v_position", _wrap_CartesianFixed__v_position, METH_VARARGS, "\n"
+		"CartesianFixed__v_position(CartesianFixed self) -> BlitzArray_double_1\n"
+		"CartesianFixed__v_position(CartesianFixed self, BlitzArray_double_1 V)\n"
+		""},
 	 { "delete_CartesianFixed", _wrap_delete_CartesianFixed, METH_O, "\n"
+		"delete_CartesianFixed(CartesianFixed self)\n"
 		"\n"
-		"virtual GeoCal::CartesianFixed::~CartesianFixed()\n"
 		"GeoCal::CartesianFixed::~CartesianFixed\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_swigregister", CartesianFixed_swigregister, METH_O, NULL},
-	 { "new_LnLookVector", _wrap_new_LnLookVector, METH_VARARGS, NULL},
-	 { "LnLookVector_to_cf", _wrap_LnLookVector_to_cf, METH_VARARGS, NULL},
-	 { "LnLookVector___str__", _wrap_LnLookVector___str__, METH_O, NULL},
-	 { "LnLookVector_cf_to_enu", _wrap_LnLookVector_cf_to_enu, METH_O, NULL},
-	 { "LnLookVector_enu_to_cf", _wrap_LnLookVector_enu_to_cf, METH_O, NULL},
-	 { "LnLookVector_solar_look_vector", _wrap_LnLookVector_solar_look_vector, METH_VARARGS, NULL},
-	 { "LnLookVector_body_look_vector", _wrap_LnLookVector_body_look_vector, METH_VARARGS, NULL},
-	 { "LnLookVector__v_view_azimuth", _wrap_LnLookVector__v_view_azimuth, METH_O, NULL},
-	 { "LnLookVector__v_view_zenith", _wrap_LnLookVector__v_view_zenith, METH_O, NULL},
-	 { "delete_LnLookVector", _wrap_delete_LnLookVector, METH_O, NULL},
+	 { "new_LnLookVector", _wrap_new_LnLookVector, METH_VARARGS, "\n"
+		"LnLookVector()\n"
+		"LnLookVector(CartesianFixedLookVector Lv, GroundCoordinate Ref_pt)\n"
+		"LnLookVector(double x, double y, double z)\n"
+		"new_LnLookVector(Array_double_3 Lv) -> LnLookVector\n"
+		""},
+	 { "LnLookVector_to_cf", _wrap_LnLookVector_to_cf, METH_VARARGS, "LnLookVector_to_cf(LnLookVector self, GroundCoordinate Ref_pt) -> CartesianFixedLookVector"},
+	 { "LnLookVector___str__", _wrap_LnLookVector___str__, METH_O, "LnLookVector___str__(LnLookVector self) -> std::string"},
+	 { "LnLookVector_cf_to_enu", _wrap_LnLookVector_cf_to_enu, METH_O, "LnLookVector_cf_to_enu(GroundCoordinate Ref_pt) -> Quaternion_double"},
+	 { "LnLookVector_enu_to_cf", _wrap_LnLookVector_enu_to_cf, METH_O, "LnLookVector_enu_to_cf(GroundCoordinate Ref_pt) -> Quaternion_double"},
+	 { "LnLookVector_solar_look_vector", _wrap_LnLookVector_solar_look_vector, METH_VARARGS, "LnLookVector_solar_look_vector(Time T, GroundCoordinate Ref_pt) -> LnLookVector"},
+	 { "LnLookVector_body_look_vector", _wrap_LnLookVector_body_look_vector, METH_VARARGS, "LnLookVector_body_look_vector(int Body_id, Time T, GroundCoordinate Ref_pt) -> LnLookVector"},
+	 { "LnLookVector__v_view_azimuth", _wrap_LnLookVector__v_view_azimuth, METH_O, "LnLookVector__v_view_azimuth(LnLookVector self) -> double"},
+	 { "LnLookVector__v_view_zenith", _wrap_LnLookVector__v_view_zenith, METH_O, "LnLookVector__v_view_zenith(LnLookVector self) -> double"},
+	 { "delete_LnLookVector", _wrap_delete_LnLookVector, METH_O, "delete_LnLookVector(LnLookVector self)"},
 	 { "LnLookVector_swigregister", LnLookVector_swigregister, METH_O, NULL},
 	 { "LnLookVector_swiginit", LnLookVector_swiginit, METH_VARARGS, NULL},
-	 { "new_LnLookVectorWithDerivative", _wrap_new_LnLookVectorWithDerivative, METH_VARARGS, NULL},
-	 { "LnLookVectorWithDerivative_to_cf", _wrap_LnLookVectorWithDerivative_to_cf, METH_VARARGS, NULL},
-	 { "LnLookVectorWithDerivative___str__", _wrap_LnLookVectorWithDerivative___str__, METH_O, NULL},
-	 { "LnLookVectorWithDerivative__v_view_azimuth", _wrap_LnLookVectorWithDerivative__v_view_azimuth, METH_O, NULL},
-	 { "LnLookVectorWithDerivative__v_view_zenith", _wrap_LnLookVectorWithDerivative__v_view_zenith, METH_O, NULL},
-	 { "delete_LnLookVectorWithDerivative", _wrap_delete_LnLookVectorWithDerivative, METH_O, NULL},
+	 { "new_LnLookVectorWithDerivative", _wrap_new_LnLookVectorWithDerivative, METH_VARARGS, "\n"
+		"LnLookVectorWithDerivative()\n"
+		"LnLookVectorWithDerivative(CartesianFixedLookVectorWithDerivative Lv, GroundCoordinate Ref_pt)\n"
+		"LnLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_LnLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv) -> LnLookVectorWithDerivative\n"
+		""},
+	 { "LnLookVectorWithDerivative_to_cf", _wrap_LnLookVectorWithDerivative_to_cf, METH_VARARGS, "LnLookVectorWithDerivative_to_cf(LnLookVectorWithDerivative self, GroundCoordinate Ref_pt) -> CartesianFixedLookVectorWithDerivative"},
+	 { "LnLookVectorWithDerivative___str__", _wrap_LnLookVectorWithDerivative___str__, METH_O, "LnLookVectorWithDerivative___str__(LnLookVectorWithDerivative self) -> std::string"},
+	 { "LnLookVectorWithDerivative__v_view_azimuth", _wrap_LnLookVectorWithDerivative__v_view_azimuth, METH_O, "LnLookVectorWithDerivative__v_view_azimuth(LnLookVectorWithDerivative self) -> AutoDerivativeDouble"},
+	 { "LnLookVectorWithDerivative__v_view_zenith", _wrap_LnLookVectorWithDerivative__v_view_zenith, METH_O, "LnLookVectorWithDerivative__v_view_zenith(LnLookVectorWithDerivative self) -> AutoDerivativeDouble"},
+	 { "delete_LnLookVectorWithDerivative", _wrap_delete_LnLookVectorWithDerivative, METH_O, "delete_LnLookVectorWithDerivative(LnLookVectorWithDerivative self)"},
 	 { "LnLookVectorWithDerivative_swigregister", LnLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "LnLookVectorWithDerivative_swiginit", LnLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
-	 { "new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, NULL},
-	 { "CartesianFixedLookVector___str__", _wrap_CartesianFixedLookVector___str__, METH_O, NULL},
-	 { "CartesianFixedLookVector_solar_look_vector", _wrap_CartesianFixedLookVector_solar_look_vector, METH_O, NULL},
-	 { "CartesianFixedLookVector_body_look_vector", _wrap_CartesianFixedLookVector_body_look_vector, METH_VARARGS, NULL},
-	 { "delete_CartesianFixedLookVector", _wrap_delete_CartesianFixedLookVector, METH_O, NULL},
+	 { "new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, "\n"
+		"CartesianFixedLookVector()\n"
+		"CartesianFixedLookVector(Array_double_3 Lv)\n"
+		"CartesianFixedLookVector(double x, double y, double z)\n"
+		"new_CartesianFixedLookVector(GroundCoordinate From, GroundCoordinate To) -> CartesianFixedLookVector\n"
+		""},
+	 { "CartesianFixedLookVector___str__", _wrap_CartesianFixedLookVector___str__, METH_O, "CartesianFixedLookVector___str__(CartesianFixedLookVector self) -> std::string"},
+	 { "CartesianFixedLookVector_solar_look_vector", _wrap_CartesianFixedLookVector_solar_look_vector, METH_O, "CartesianFixedLookVector_solar_look_vector(Time T) -> CartesianFixedLookVector"},
+	 { "CartesianFixedLookVector_body_look_vector", _wrap_CartesianFixedLookVector_body_look_vector, METH_VARARGS, "CartesianFixedLookVector_body_look_vector(int Body_id, Time T) -> CartesianFixedLookVector"},
+	 { "delete_CartesianFixedLookVector", _wrap_delete_CartesianFixedLookVector, METH_O, "delete_CartesianFixedLookVector(CartesianFixedLookVector self)"},
 	 { "CartesianFixedLookVector_swigregister", CartesianFixedLookVector_swigregister, METH_O, NULL},
 	 { "CartesianFixedLookVector_swiginit", CartesianFixedLookVector_swiginit, METH_VARARGS, NULL},
 	 { "distance", _wrap_distance, METH_VARARGS, "\n"
+		"distance(GroundCoordinate G1, GroundCoordinate G2) -> double\n"
 		"\n"
-		"double GeoCal::distance(const GroundCoordinate &G1, const GroundCoordinate &G2)\n"
 		"GeoCal::distance\n"
-		"Distance in meters between ground coordinates.\n"
-		"This is the distance of the points in 3 space, i.e. it is not distance\n"
-		"along a geodesic or anything like that. \n"
+		"Distance in meters between ground coordinates.  \n"
+		"\n"
+		"This is the distance of the points in 3 space, i.e. it is not distance along a\n"
+		"geodesic or anything like that.  \n"
+		"\n"
 		""},
 	 { "convert_position_and_velocity", _wrap_convert_position_and_velocity, METH_VARARGS, "\n"
+		"convert_position_and_velocity(Time T, CartesianFixed Cf, Array_double_3 Vel_cf, boost::shared_ptr< GeoCal::CartesianInertial > & Ci, Array_double_3 Vel_ci)\n"
+		"convert_position_and_velocity(TimeWithDerivative T, CartesianFixed Cf, BoostArrayAutoDerivativeDouble_3 Cf_with_der, BoostArrayAutoDerivativeDouble_3 Vel_cf, boost::shared_ptr< GeoCal::CartesianInertial > & Ci, BoostArrayAutoDerivativeDouble_3 Ci_with_der, BoostArrayAutoDerivativeDouble_3 Vel_ci)\n"
+		"convert_position_and_velocity(Time T, CartesianInertial Ci, Array_double_3 Vel_ci, boost::shared_ptr< GeoCal::CartesianFixed > & Cf, Array_double_3 Vel_cf)\n"
+		"convert_position_and_velocity(TimeWithDerivative T, CartesianInertial Ci, BoostArrayAutoDerivativeDouble_3 Ci_with_der, BoostArrayAutoDerivativeDouble_3 Vel_ci, boost::shared_ptr< GeoCal::CartesianFixed > & Cf, BoostArrayAutoDerivativeDouble_3 Cf_with_der, BoostArrayAutoDerivativeDouble_3 Vel_cf)\n"
 		"\n"
-		"void GeoCal::convert_position_and_velocity(const TimeWithDerivative &T, const CartesianInertial &Ci, const\n"
-		"boost::array< AutoDerivative< double >, 3 > &Ci_with_der, const\n"
-		"boost::array< AutoDerivative< double >, 3 > &Vel_ci,\n"
-		"boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<\n"
-		"double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3\n"
-		"> &Vel_cf, boost::math::quaternion< AutoDerivative< double > >\n"
-		"&Ci_to_cf_q)\n"
 		"GeoCal::convert_position_and_velocity\n"
-		"Convert including velocity.\n"
+		"Convert including velocity.  \n"
 		"\n"
 		""},
-	 { "Vector_GroundCoordinate_iterator", _wrap_Vector_GroundCoordinate_iterator, METH_O, NULL},
-	 { "Vector_GroundCoordinate___nonzero__", _wrap_Vector_GroundCoordinate___nonzero__, METH_O, NULL},
-	 { "Vector_GroundCoordinate___bool__", _wrap_Vector_GroundCoordinate___bool__, METH_O, NULL},
-	 { "Vector_GroundCoordinate___len__", _wrap_Vector_GroundCoordinate___len__, METH_O, NULL},
-	 { "Vector_GroundCoordinate___getslice__", _wrap_Vector_GroundCoordinate___getslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___setslice__", _wrap_Vector_GroundCoordinate___setslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___delslice__", _wrap_Vector_GroundCoordinate___delslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___delitem__", _wrap_Vector_GroundCoordinate___delitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___getitem__", _wrap_Vector_GroundCoordinate___getitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___setitem__", _wrap_Vector_GroundCoordinate___setitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_pop", _wrap_Vector_GroundCoordinate_pop, METH_O, NULL},
-	 { "Vector_GroundCoordinate_append", _wrap_Vector_GroundCoordinate_append, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_empty", _wrap_Vector_GroundCoordinate_empty, METH_O, NULL},
-	 { "Vector_GroundCoordinate_size", _wrap_Vector_GroundCoordinate_size, METH_O, NULL},
-	 { "Vector_GroundCoordinate_swap", _wrap_Vector_GroundCoordinate_swap, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_begin", _wrap_Vector_GroundCoordinate_begin, METH_O, NULL},
-	 { "Vector_GroundCoordinate_end", _wrap_Vector_GroundCoordinate_end, METH_O, NULL},
-	 { "Vector_GroundCoordinate_rbegin", _wrap_Vector_GroundCoordinate_rbegin, METH_O, NULL},
-	 { "Vector_GroundCoordinate_rend", _wrap_Vector_GroundCoordinate_rend, METH_O, NULL},
-	 { "Vector_GroundCoordinate_clear", _wrap_Vector_GroundCoordinate_clear, METH_O, NULL},
-	 { "Vector_GroundCoordinate_get_allocator", _wrap_Vector_GroundCoordinate_get_allocator, METH_O, NULL},
-	 { "Vector_GroundCoordinate_pop_back", _wrap_Vector_GroundCoordinate_pop_back, METH_O, NULL},
-	 { "Vector_GroundCoordinate_erase", _wrap_Vector_GroundCoordinate_erase, METH_VARARGS, NULL},
-	 { "new_Vector_GroundCoordinate", _wrap_new_Vector_GroundCoordinate, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_push_back", _wrap_Vector_GroundCoordinate_push_back, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_front", _wrap_Vector_GroundCoordinate_front, METH_O, NULL},
-	 { "Vector_GroundCoordinate_back", _wrap_Vector_GroundCoordinate_back, METH_O, NULL},
-	 { "Vector_GroundCoordinate_assign", _wrap_Vector_GroundCoordinate_assign, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_resize", _wrap_Vector_GroundCoordinate_resize, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_insert", _wrap_Vector_GroundCoordinate_insert, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_reserve", _wrap_Vector_GroundCoordinate_reserve, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_capacity", _wrap_Vector_GroundCoordinate_capacity, METH_O, NULL},
-	 { "delete_Vector_GroundCoordinate", _wrap_delete_Vector_GroundCoordinate, METH_O, NULL},
+	 { "Vector_GroundCoordinate_iterator", _wrap_Vector_GroundCoordinate_iterator, METH_O, "Vector_GroundCoordinate_iterator(Vector_GroundCoordinate self) -> SwigPyIterator"},
+	 { "Vector_GroundCoordinate___nonzero__", _wrap_Vector_GroundCoordinate___nonzero__, METH_O, "Vector_GroundCoordinate___nonzero__(Vector_GroundCoordinate self) -> bool"},
+	 { "Vector_GroundCoordinate___bool__", _wrap_Vector_GroundCoordinate___bool__, METH_O, "Vector_GroundCoordinate___bool__(Vector_GroundCoordinate self) -> bool"},
+	 { "Vector_GroundCoordinate___len__", _wrap_Vector_GroundCoordinate___len__, METH_O, "Vector_GroundCoordinate___len__(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type"},
+	 { "Vector_GroundCoordinate___getslice__", _wrap_Vector_GroundCoordinate___getslice__, METH_VARARGS, "Vector_GroundCoordinate___getslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j) -> Vector_GroundCoordinate"},
+	 { "Vector_GroundCoordinate___setslice__", _wrap_Vector_GroundCoordinate___setslice__, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate___setslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j)\n"
+		"Vector_GroundCoordinate___setslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j, Vector_GroundCoordinate v)\n"
+		""},
+	 { "Vector_GroundCoordinate___delslice__", _wrap_Vector_GroundCoordinate___delslice__, METH_VARARGS, "Vector_GroundCoordinate___delslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j)"},
+	 { "Vector_GroundCoordinate___delitem__", _wrap_Vector_GroundCoordinate___delitem__, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate___delitem__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i)\n"
+		"Vector_GroundCoordinate___delitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_GroundCoordinate___getitem__", _wrap_Vector_GroundCoordinate___getitem__, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate___getitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice) -> Vector_GroundCoordinate\n"
+		"Vector_GroundCoordinate___getitem__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &\n"
+		""},
+	 { "Vector_GroundCoordinate___setitem__", _wrap_Vector_GroundCoordinate___setitem__, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate___setitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice, Vector_GroundCoordinate v)\n"
+		"Vector_GroundCoordinate___setitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_GroundCoordinate___setitem__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundCoordinate_pop", _wrap_Vector_GroundCoordinate_pop, METH_O, "Vector_GroundCoordinate_pop(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type"},
+	 { "Vector_GroundCoordinate_append", _wrap_Vector_GroundCoordinate_append, METH_VARARGS, "Vector_GroundCoordinate_append(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)"},
+	 { "Vector_GroundCoordinate_empty", _wrap_Vector_GroundCoordinate_empty, METH_O, "Vector_GroundCoordinate_empty(Vector_GroundCoordinate self) -> bool"},
+	 { "Vector_GroundCoordinate_size", _wrap_Vector_GroundCoordinate_size, METH_O, "Vector_GroundCoordinate_size(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type"},
+	 { "Vector_GroundCoordinate_swap", _wrap_Vector_GroundCoordinate_swap, METH_VARARGS, "Vector_GroundCoordinate_swap(Vector_GroundCoordinate self, Vector_GroundCoordinate v)"},
+	 { "Vector_GroundCoordinate_begin", _wrap_Vector_GroundCoordinate_begin, METH_O, "Vector_GroundCoordinate_begin(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator"},
+	 { "Vector_GroundCoordinate_end", _wrap_Vector_GroundCoordinate_end, METH_O, "Vector_GroundCoordinate_end(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator"},
+	 { "Vector_GroundCoordinate_rbegin", _wrap_Vector_GroundCoordinate_rbegin, METH_O, "Vector_GroundCoordinate_rbegin(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::reverse_iterator"},
+	 { "Vector_GroundCoordinate_rend", _wrap_Vector_GroundCoordinate_rend, METH_O, "Vector_GroundCoordinate_rend(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::reverse_iterator"},
+	 { "Vector_GroundCoordinate_clear", _wrap_Vector_GroundCoordinate_clear, METH_O, "Vector_GroundCoordinate_clear(Vector_GroundCoordinate self)"},
+	 { "Vector_GroundCoordinate_get_allocator", _wrap_Vector_GroundCoordinate_get_allocator, METH_O, "Vector_GroundCoordinate_get_allocator(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::allocator_type"},
+	 { "Vector_GroundCoordinate_pop_back", _wrap_Vector_GroundCoordinate_pop_back, METH_O, "Vector_GroundCoordinate_pop_back(Vector_GroundCoordinate self)"},
+	 { "Vector_GroundCoordinate_erase", _wrap_Vector_GroundCoordinate_erase, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate_erase(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator\n"
+		"Vector_GroundCoordinate_erase(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator first, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator\n"
+		""},
+	 { "new_Vector_GroundCoordinate", _wrap_new_Vector_GroundCoordinate, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate()\n"
+		"Vector_GroundCoordinate(Vector_GroundCoordinate other)\n"
+		"Vector_GroundCoordinate(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type size)\n"
+		"new_Vector_GroundCoordinate(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type size, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & value) -> Vector_GroundCoordinate\n"
+		""},
+	 { "Vector_GroundCoordinate_push_back", _wrap_Vector_GroundCoordinate_push_back, METH_VARARGS, "Vector_GroundCoordinate_push_back(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)"},
+	 { "Vector_GroundCoordinate_front", _wrap_Vector_GroundCoordinate_front, METH_O, "Vector_GroundCoordinate_front(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &"},
+	 { "Vector_GroundCoordinate_back", _wrap_Vector_GroundCoordinate_back, METH_O, "Vector_GroundCoordinate_back(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &"},
+	 { "Vector_GroundCoordinate_assign", _wrap_Vector_GroundCoordinate_assign, METH_VARARGS, "Vector_GroundCoordinate_assign(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)"},
+	 { "Vector_GroundCoordinate_resize", _wrap_Vector_GroundCoordinate_resize, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate_resize(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type new_size)\n"
+		"Vector_GroundCoordinate_resize(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundCoordinate_insert", _wrap_Vector_GroundCoordinate_insert, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate_insert(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator\n"
+		"Vector_GroundCoordinate_insert(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundCoordinate_reserve", _wrap_Vector_GroundCoordinate_reserve, METH_VARARGS, "Vector_GroundCoordinate_reserve(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type n)"},
+	 { "Vector_GroundCoordinate_capacity", _wrap_Vector_GroundCoordinate_capacity, METH_O, "Vector_GroundCoordinate_capacity(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type"},
+	 { "delete_Vector_GroundCoordinate", _wrap_delete_Vector_GroundCoordinate, METH_O, "delete_Vector_GroundCoordinate(Vector_GroundCoordinate self)"},
 	 { "Vector_GroundCoordinate_swigregister", Vector_GroundCoordinate_swigregister, METH_O, NULL},
 	 { "Vector_GroundCoordinate_swiginit", Vector_GroundCoordinate_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -14237,273 +14303,339 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "GroundCoordinate__v_latitude", _wrap_GroundCoordinate__v_latitude, METH_O, "\n"
+		"_v_latitude(GroundCoordinate self) -> double\n"
 		"\n"
-		"double GeoCal::GroundCoordinate::latitude() const\n"
 		"GeoCal::GroundCoordinate::latitude\n"
-		"Return latitude in degrees.\n"
-		"By default we just convert to CartesianFixed and then to latitude, but\n"
-		"derived classes can supply more efficient versions of these if needed.\n"
-		"Latitude is -90 to 90.\n"
+		"Return latitude in degrees.  \n"
 		"\n"
-		"Note that for the earth, the latitude is the standard geodetic\n"
-		"latitude. However, by convention other planets use Planetocentric\n"
-		"latitude, the equivalent of geocentric latitude for the other planet.\n"
-		"This is handled transparently and consistently by the various\n"
-		"coordinate classes (e.g., PlanetConstant, OgrCoordinate), but you\n"
-		"should be aware of this difference. \n"
+		"By default we just convert to CartesianFixed and then to latitude, but derived\n"
+		"classes can supply more efficient versions of these if needed. Latitude is -90\n"
+		"to 90.  \n"
+		"\n"
+		"Note that for the earth, the latitude is the standard geodetic latitude.\n"
+		"However, by convention other planets use Planetocentric latitude, the equivalent\n"
+		"of geocentric latitude for the other planet. This is handled transparently and\n"
+		"consistently by the various coordinate classes (e.g., PlanetConstant,\n"
+		"OgrCoordinate), but you should be aware of this difference.  \n"
+		"\n"
 		""},
 	 { "GroundCoordinate__v_longitude", _wrap_GroundCoordinate__v_longitude, METH_O, "\n"
+		"_v_longitude(GroundCoordinate self) -> double\n"
 		"\n"
-		"double GeoCal::GroundCoordinate::longitude() const\n"
 		"GeoCal::GroundCoordinate::longitude\n"
-		"Return longitude in degrees.\n"
-		"By default we just convert to CartesianFixed and then to longitude,\n"
-		"but derived classes can supply more efficient versions of these if\n"
-		"needed. Longitude is -180 to 180. \n"
+		"Return longitude in degrees.  \n"
+		"\n"
+		"By default we just convert to CartesianFixed and then to longitude, but derived\n"
+		"classes can supply more efficient versions of these if needed. Longitude is -180\n"
+		"to 180.  \n"
+		"\n"
 		""},
 	 { "GroundCoordinate__v_height_reference_surface", _wrap_GroundCoordinate__v_height_reference_surface, METH_O, "\n"
+		"_v_height_reference_surface(GroundCoordinate self) -> double\n"
 		"\n"
-		"double GeoCal::GroundCoordinate::height_reference_surface() const\n"
 		"GeoCal::GroundCoordinate::height_reference_surface\n"
-		"Return height in meters above reference surface (e.g., WGS-84 for the\n"
-		"earth).\n"
-		"By default we just convert to CartesianFixed and then to height, but\n"
-		"derived classes can supply more efficient versions of these if needed.\n"
+		"Return height in meters above reference surface (e.g., WGS-84 for the earth).  \n"
+		"\n"
+		"By default we just convert to CartesianFixed and then to height, but derived\n"
+		"classes can supply more efficient versions of these if needed.  \n"
 		"\n"
 		""},
 	 { "GroundCoordinate_convert_to_cf", _wrap_GroundCoordinate_convert_to_cf, METH_O, "\n"
+		"convert_to_cf(GroundCoordinate self) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::GroundCoordinate::convert_to_cf() const =0\n"
 		"GeoCal::GroundCoordinate::convert_to_cf\n"
-		"Convert to CartesianFixed.\n"
+		"Convert to CartesianFixed.  \n"
 		"\n"
 		""},
-	 { "GroundCoordinate___str__", _wrap_GroundCoordinate___str__, METH_O, NULL},
+	 { "GroundCoordinate___str__", _wrap_GroundCoordinate___str__, METH_O, "__str__(GroundCoordinate self) -> std::string"},
 	 { "GroundCoordinate_naif_code", _wrap_GroundCoordinate_naif_code, METH_O, "\n"
+		"naif_code(GroundCoordinate self) -> int\n"
 		"\n"
-		"virtual int GeoCal::GroundCoordinate::naif_code() const =0\n"
 		"GeoCal::GroundCoordinate::naif_code\n"
-		"Naif code for planet.\n"
+		"Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "delete_GroundCoordinate", _wrap_delete_GroundCoordinate, METH_O, "\n"
+		"delete_GroundCoordinate(GroundCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::GroundCoordinate::~GroundCoordinate()\n"
 		"GeoCal::GroundCoordinate::~GroundCoordinate\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GroundCoordinate_swigregister", GroundCoordinate_swigregister, METH_O, NULL},
 	 { "CartesianInertial_convert_to_cf", _wrap_CartesianInertial_convert_to_cf, METH_VARARGS, "\n"
+		"convert_to_cf(CartesianInertial self, Time T) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::CartesianInertial::convert_to_cf(const Time &T) const =0\n"
 		"GeoCal::CartesianInertial::convert_to_cf\n"
-		"Convert to a CartesianFixed.\n"
+		"Convert to a CartesianFixed.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_ci_to_cf", _wrap_CartesianInertial_ci_to_cf, METH_VARARGS, "\n"
+		"ci_to_cf(CartesianInertial self, Time T, double [3][3] Ci_to_cf)\n"
 		"\n"
-		"virtual void GeoCal::CartesianInertial::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"GeoCal::CartesianInertial::ci_to_cf\n"
-		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
-		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
-		"transpose of this matrix. \n"
+		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial\n"
+		"at the given Time.  \n"
+		"\n"
+		"The matrix for going from CartesianInertial to CartesianFixed is the transpose\n"
+		"of this matrix.  \n"
+		"\n"
 		""},
 	 { "CartesianInertial_ci_to_cf_with_vel", _wrap_CartesianInertial_ci_to_cf_with_vel, METH_VARARGS, "\n"
+		"ci_to_cf_with_vel(CartesianInertial self, Time T, double [6][6] Ci_to_cf)\n"
 		"\n"
-		"virtual void GeoCal::CartesianInertial::ci_to_cf_with_vel(const Time &T, double Ci_to_cf[6][6]) const =0\n"
 		"GeoCal::CartesianInertial::ci_to_cf_with_vel\n"
-		"Calculate matrix that can be used to convert CartesianInertial to CartesianFixed at the given Time, including velocity.\n"
-		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
-		"transpose is not the inverse. \n"
+		"Calculate matrix that can be used to convert CartesianInertial to CartesianFixed\n"
+		"at the given Time, including velocity.  \n"
+		"\n"
+		"Note that unlike the 3x3 matrix, this is *not* orthogonal so the transpose is\n"
+		"not the inverse.  \n"
+		"\n"
 		""},
 	 { "CartesianInertial_naif_code", _wrap_CartesianInertial_naif_code, METH_O, "\n"
+		"naif_code(CartesianInertial self) -> int\n"
 		"\n"
-		"virtual int GeoCal::CartesianInertial::naif_code() const =0\n"
 		"GeoCal::CartesianInertial::naif_code\n"
-		"Naif code for planet.\n"
+		"Naif code for planet.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_ci_to_cf_quat", _wrap_CartesianInertial_ci_to_cf_quat, METH_VARARGS, "\n"
+		"ci_to_cf_quat(CartesianInertial self, Time T) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > GeoCal::CartesianInertial::ci_to_cf_quat(const Time &T) const\n"
 		"GeoCal::CartesianInertial::ci_to_cf_quat\n"
-		"Calculate quaternion that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
+		"Calculate quaternion that can be used to convert CartesianFixed to\n"
+		"CartesianInertial at the given Time.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_create", _wrap_CartesianInertial_create, METH_VARARGS, "\n"
+		"create(CartesianInertial self, Array_double_3 P) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::CartesianInertial::create(boost::array< double, 3 > P) const =0\n"
 		"GeoCal::CartesianInertial::create\n"
-		"Create an instance of whatever type of CartesianInertial this is.\n"
+		"Create an instance of whatever type of CartesianInertial this is.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_reference_surface_intersect_approximate", _wrap_CartesianInertial_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"reference_surface_intersect_approximate(CartesianInertial self, CartesianInertialLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::CartesianInertial::reference_surface_intersect_approximate(const CartesianInertialLookVector &Cl, double\n"
-		"Height_reference_surface=0) const =0\n"
 		"GeoCal::CartesianInertial::reference_surface_intersect_approximate\n"
-		"Find the intersection with the surface at the given height starting at\n"
-		"this point and looking in the given direction.\n"
-		"The intersection is done in an approximate but quicker manner, see the\n"
-		"derived classes for the approximation used. \n"
-		""},
-	 { "CartesianInertial___str__", _wrap_CartesianInertial___str__, METH_O, NULL},
-	 { "CartesianInertial__v_position", _wrap_CartesianInertial__v_position, METH_VARARGS, NULL},
-	 { "delete_CartesianInertial", _wrap_delete_CartesianInertial, METH_O, "\n"
+		"Find the intersection with the surface at the given height starting at this\n"
+		"point and looking in the given direction.  \n"
 		"\n"
-		"virtual GeoCal::CartesianInertial::~CartesianInertial()\n"
+		"The intersection is done in an approximate but quicker manner, see the derived\n"
+		"classes for the approximation used.  \n"
+		"\n"
+		""},
+	 { "CartesianInertial___str__", _wrap_CartesianInertial___str__, METH_O, "__str__(CartesianInertial self) -> std::string"},
+	 { "CartesianInertial__v_position", _wrap_CartesianInertial__v_position, METH_VARARGS, "\n"
+		"_v_position(CartesianInertial self) -> BlitzArray_double_1\n"
+		"_v_position(CartesianInertial self, BlitzArray_double_1 V)\n"
+		""},
+	 { "delete_CartesianInertial", _wrap_delete_CartesianInertial, METH_O, "\n"
+		"delete_CartesianInertial(CartesianInertial self)\n"
+		"\n"
 		"GeoCal::CartesianInertial::~CartesianInertial\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CartesianInertial_swigregister", CartesianInertial_swigregister, METH_O, NULL},
 	 { "CartesianFixed_convert_to_ci", _wrap_CartesianFixed_convert_to_ci, METH_VARARGS, "\n"
+		"convert_to_ci(CartesianFixed self, Time T) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::CartesianFixed::convert_to_ci(const Time &T) const =0\n"
 		"GeoCal::CartesianFixed::convert_to_ci\n"
-		"Convert to CartesianInertial.\n"
+		"Convert to CartesianInertial.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_create", _wrap_CartesianFixed_create, METH_VARARGS, "\n"
+		"create(CartesianFixed self, Array_double_3 P) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::CartesianFixed::create(boost::array< double, 3 > P) const =0\n"
 		"GeoCal::CartesianFixed::create\n"
-		"Create an instance of whatever type of CartesianFixed this is.\n"
+		"Create an instance of whatever type of CartesianFixed this is.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_ci_to_cf", _wrap_CartesianFixed_ci_to_cf, METH_VARARGS, "\n"
+		"ci_to_cf(CartesianFixed self, Time T, double [3][3] Ci_to_cf)\n"
 		"\n"
-		"virtual void GeoCal::CartesianFixed::ci_to_cf(const Time &T, double Ci_to_cf[3][3]) const =0\n"
 		"GeoCal::CartesianFixed::ci_to_cf\n"
-		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
-		"The matrix for going from CartesianInertial to CartesianFixed is the\n"
-		"transpose of this matrix. \n"
+		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial\n"
+		"at the given Time.  \n"
+		"\n"
+		"The matrix for going from CartesianInertial to CartesianFixed is the transpose\n"
+		"of this matrix.  \n"
+		"\n"
 		""},
 	 { "CartesianFixed_cf_to_ci_with_vel", _wrap_CartesianFixed_cf_to_ci_with_vel, METH_VARARGS, "\n"
+		"cf_to_ci_with_vel(CartesianFixed self, Time T, double [6][6] Cf_to_ci)\n"
 		"\n"
-		"virtual void GeoCal::CartesianFixed::cf_to_ci_with_vel(const Time &T, double Cf_to_ci[6][6]) const =0\n"
 		"GeoCal::CartesianFixed::cf_to_ci_with_vel\n"
-		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial at the given Time, including velocity.\n"
-		"Note that unlike the 3x3 matrix, this is not orthogonal so the\n"
-		"transpose is not the inverse. \n"
+		"Calculate matrix that can be used to convert CartesianFixed to CartesianInertial\n"
+		"at the given Time, including velocity.  \n"
+		"\n"
+		"Note that unlike the 3x3 matrix, this is *not* orthogonal so the transpose is\n"
+		"not the inverse.  \n"
+		"\n"
 		""},
 	 { "CartesianFixed_ci_to_cf_quat", _wrap_CartesianFixed_ci_to_cf_quat, METH_VARARGS, "\n"
+		"ci_to_cf_quat(CartesianFixed self, Time T) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > GeoCal::CartesianFixed::ci_to_cf_quat(const Time &T) const\n"
 		"GeoCal::CartesianFixed::ci_to_cf_quat\n"
-		"Calculate quaternion that can be used to convert CartesianFixed to CartesianInertial at the given Time.\n"
+		"Calculate quaternion that can be used to convert CartesianFixed to\n"
+		"CartesianInertial at the given Time.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_reference_surface_intersect_approximate", _wrap_CartesianFixed_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"reference_surface_intersect_approximate(CartesianFixed self, CartesianFixedLookVector Cl, double Height_reference_surface=0) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::CartesianFixed::reference_surface_intersect_approximate(const CartesianFixedLookVector &Cl, double\n"
-		"Height_reference_surface=0) const =0\n"
 		"GeoCal::CartesianFixed::reference_surface_intersect_approximate\n"
-		"Find the intersection with the surface at the given height starting at\n"
-		"this point and looking in the given direction.\n"
-		"The intersection is done in an approximate but quicker manner, see the\n"
-		"derived classes for the approximation used. \n"
+		"Find the intersection with the surface at the given height starting at this\n"
+		"point and looking in the given direction.  \n"
+		"\n"
+		"The intersection is done in an approximate but quicker manner, see the derived\n"
+		"classes for the approximation used.  \n"
+		"\n"
 		""},
 	 { "CartesianFixed__v_min_radius_reference_surface", _wrap_CartesianFixed__v_min_radius_reference_surface, METH_O, "\n"
+		"_v_min_radius_reference_surface(CartesianFixed self) -> double\n"
 		"\n"
-		"virtual double GeoCal::CartesianFixed::min_radius_reference_surface() const =0\n"
 		"GeoCal::CartesianFixed::min_radius_reference_surface\n"
-		"This is the radius of the largest sphere that fits completely into the\n"
-		"reference surface (e.g., radius for a reference sphere, minimum of a\n"
-		"and b for a ellipsoid).\n"
+		"This is the radius of the largest sphere that fits completely into the reference\n"
+		"surface (e.g., radius for a reference sphere, minimum of a and b for a\n"
+		"ellipsoid).  \n"
 		"\n"
 		""},
-	 { "CartesianFixed__v_position", _wrap_CartesianFixed__v_position, METH_VARARGS, NULL},
+	 { "CartesianFixed__v_position", _wrap_CartesianFixed__v_position, METH_VARARGS, "\n"
+		"_v_position(CartesianFixed self) -> BlitzArray_double_1\n"
+		"_v_position(CartesianFixed self, BlitzArray_double_1 V)\n"
+		""},
 	 { "delete_CartesianFixed", _wrap_delete_CartesianFixed, METH_O, "\n"
+		"delete_CartesianFixed(CartesianFixed self)\n"
 		"\n"
-		"virtual GeoCal::CartesianFixed::~CartesianFixed()\n"
 		"GeoCal::CartesianFixed::~CartesianFixed\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CartesianFixed_swigregister", CartesianFixed_swigregister, METH_O, NULL},
-	 { "new_LnLookVector", _wrap_new_LnLookVector, METH_VARARGS, NULL},
-	 { "LnLookVector_to_cf", _wrap_LnLookVector_to_cf, METH_VARARGS, NULL},
-	 { "LnLookVector___str__", _wrap_LnLookVector___str__, METH_O, NULL},
-	 { "LnLookVector_cf_to_enu", _wrap_LnLookVector_cf_to_enu, METH_O, NULL},
-	 { "LnLookVector_enu_to_cf", _wrap_LnLookVector_enu_to_cf, METH_O, NULL},
-	 { "LnLookVector_solar_look_vector", _wrap_LnLookVector_solar_look_vector, METH_VARARGS, NULL},
-	 { "LnLookVector_body_look_vector", _wrap_LnLookVector_body_look_vector, METH_VARARGS, NULL},
-	 { "LnLookVector__v_view_azimuth", _wrap_LnLookVector__v_view_azimuth, METH_O, NULL},
-	 { "LnLookVector__v_view_zenith", _wrap_LnLookVector__v_view_zenith, METH_O, NULL},
-	 { "delete_LnLookVector", _wrap_delete_LnLookVector, METH_O, NULL},
+	 { "new_LnLookVector", _wrap_new_LnLookVector, METH_VARARGS, "\n"
+		"LnLookVector()\n"
+		"LnLookVector(CartesianFixedLookVector Lv, GroundCoordinate Ref_pt)\n"
+		"LnLookVector(double x, double y, double z)\n"
+		"new_LnLookVector(Array_double_3 Lv) -> LnLookVector\n"
+		""},
+	 { "LnLookVector_to_cf", _wrap_LnLookVector_to_cf, METH_VARARGS, "to_cf(LnLookVector self, GroundCoordinate Ref_pt) -> CartesianFixedLookVector"},
+	 { "LnLookVector___str__", _wrap_LnLookVector___str__, METH_O, "__str__(LnLookVector self) -> std::string"},
+	 { "LnLookVector_cf_to_enu", _wrap_LnLookVector_cf_to_enu, METH_O, "cf_to_enu(GroundCoordinate Ref_pt) -> Quaternion_double"},
+	 { "LnLookVector_enu_to_cf", _wrap_LnLookVector_enu_to_cf, METH_O, "enu_to_cf(GroundCoordinate Ref_pt) -> Quaternion_double"},
+	 { "LnLookVector_solar_look_vector", _wrap_LnLookVector_solar_look_vector, METH_VARARGS, "solar_look_vector(Time T, GroundCoordinate Ref_pt) -> LnLookVector"},
+	 { "LnLookVector_body_look_vector", _wrap_LnLookVector_body_look_vector, METH_VARARGS, "body_look_vector(int Body_id, Time T, GroundCoordinate Ref_pt) -> LnLookVector"},
+	 { "LnLookVector__v_view_azimuth", _wrap_LnLookVector__v_view_azimuth, METH_O, "_v_view_azimuth(LnLookVector self) -> double"},
+	 { "LnLookVector__v_view_zenith", _wrap_LnLookVector__v_view_zenith, METH_O, "_v_view_zenith(LnLookVector self) -> double"},
+	 { "delete_LnLookVector", _wrap_delete_LnLookVector, METH_O, "delete_LnLookVector(LnLookVector self)"},
 	 { "LnLookVector_swigregister", LnLookVector_swigregister, METH_O, NULL},
 	 { "LnLookVector_swiginit", LnLookVector_swiginit, METH_VARARGS, NULL},
-	 { "new_LnLookVectorWithDerivative", _wrap_new_LnLookVectorWithDerivative, METH_VARARGS, NULL},
-	 { "LnLookVectorWithDerivative_to_cf", _wrap_LnLookVectorWithDerivative_to_cf, METH_VARARGS, NULL},
-	 { "LnLookVectorWithDerivative___str__", _wrap_LnLookVectorWithDerivative___str__, METH_O, NULL},
-	 { "LnLookVectorWithDerivative__v_view_azimuth", _wrap_LnLookVectorWithDerivative__v_view_azimuth, METH_O, NULL},
-	 { "LnLookVectorWithDerivative__v_view_zenith", _wrap_LnLookVectorWithDerivative__v_view_zenith, METH_O, NULL},
-	 { "delete_LnLookVectorWithDerivative", _wrap_delete_LnLookVectorWithDerivative, METH_O, NULL},
+	 { "new_LnLookVectorWithDerivative", _wrap_new_LnLookVectorWithDerivative, METH_VARARGS, "\n"
+		"LnLookVectorWithDerivative()\n"
+		"LnLookVectorWithDerivative(CartesianFixedLookVectorWithDerivative Lv, GroundCoordinate Ref_pt)\n"
+		"LnLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_LnLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv) -> LnLookVectorWithDerivative\n"
+		""},
+	 { "LnLookVectorWithDerivative_to_cf", _wrap_LnLookVectorWithDerivative_to_cf, METH_VARARGS, "to_cf(LnLookVectorWithDerivative self, GroundCoordinate Ref_pt) -> CartesianFixedLookVectorWithDerivative"},
+	 { "LnLookVectorWithDerivative___str__", _wrap_LnLookVectorWithDerivative___str__, METH_O, "__str__(LnLookVectorWithDerivative self) -> std::string"},
+	 { "LnLookVectorWithDerivative__v_view_azimuth", _wrap_LnLookVectorWithDerivative__v_view_azimuth, METH_O, "_v_view_azimuth(LnLookVectorWithDerivative self) -> AutoDerivativeDouble"},
+	 { "LnLookVectorWithDerivative__v_view_zenith", _wrap_LnLookVectorWithDerivative__v_view_zenith, METH_O, "_v_view_zenith(LnLookVectorWithDerivative self) -> AutoDerivativeDouble"},
+	 { "delete_LnLookVectorWithDerivative", _wrap_delete_LnLookVectorWithDerivative, METH_O, "delete_LnLookVectorWithDerivative(LnLookVectorWithDerivative self)"},
 	 { "LnLookVectorWithDerivative_swigregister", LnLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "LnLookVectorWithDerivative_swiginit", LnLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
-	 { "new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, NULL},
-	 { "CartesianFixedLookVector___str__", _wrap_CartesianFixedLookVector___str__, METH_O, NULL},
-	 { "CartesianFixedLookVector_solar_look_vector", _wrap_CartesianFixedLookVector_solar_look_vector, METH_O, NULL},
-	 { "CartesianFixedLookVector_body_look_vector", _wrap_CartesianFixedLookVector_body_look_vector, METH_VARARGS, NULL},
-	 { "delete_CartesianFixedLookVector", _wrap_delete_CartesianFixedLookVector, METH_O, NULL},
+	 { "new_CartesianFixedLookVector", _wrap_new_CartesianFixedLookVector, METH_VARARGS, "\n"
+		"CartesianFixedLookVector()\n"
+		"CartesianFixedLookVector(Array_double_3 Lv)\n"
+		"CartesianFixedLookVector(double x, double y, double z)\n"
+		"new_CartesianFixedLookVector(GroundCoordinate From, GroundCoordinate To) -> CartesianFixedLookVector\n"
+		""},
+	 { "CartesianFixedLookVector___str__", _wrap_CartesianFixedLookVector___str__, METH_O, "__str__(CartesianFixedLookVector self) -> std::string"},
+	 { "CartesianFixedLookVector_solar_look_vector", _wrap_CartesianFixedLookVector_solar_look_vector, METH_O, "solar_look_vector(Time T) -> CartesianFixedLookVector"},
+	 { "CartesianFixedLookVector_body_look_vector", _wrap_CartesianFixedLookVector_body_look_vector, METH_VARARGS, "body_look_vector(int Body_id, Time T) -> CartesianFixedLookVector"},
+	 { "delete_CartesianFixedLookVector", _wrap_delete_CartesianFixedLookVector, METH_O, "delete_CartesianFixedLookVector(CartesianFixedLookVector self)"},
 	 { "CartesianFixedLookVector_swigregister", CartesianFixedLookVector_swigregister, METH_O, NULL},
 	 { "CartesianFixedLookVector_swiginit", CartesianFixedLookVector_swiginit, METH_VARARGS, NULL},
 	 { "distance", _wrap_distance, METH_VARARGS, "\n"
+		"distance(GroundCoordinate G1, GroundCoordinate G2) -> double\n"
 		"\n"
-		"double GeoCal::distance(const GroundCoordinate &G1, const GroundCoordinate &G2)\n"
 		"GeoCal::distance\n"
-		"Distance in meters between ground coordinates.\n"
-		"This is the distance of the points in 3 space, i.e. it is not distance\n"
-		"along a geodesic or anything like that. \n"
+		"Distance in meters between ground coordinates.  \n"
+		"\n"
+		"This is the distance of the points in 3 space, i.e. it is not distance along a\n"
+		"geodesic or anything like that.  \n"
+		"\n"
 		""},
 	 { "convert_position_and_velocity", _wrap_convert_position_and_velocity, METH_VARARGS, "\n"
+		"convert_position_and_velocity(Time T, CartesianFixed Cf, Array_double_3 Vel_cf, boost::shared_ptr< GeoCal::CartesianInertial > & Ci, Array_double_3 Vel_ci)\n"
+		"convert_position_and_velocity(TimeWithDerivative T, CartesianFixed Cf, BoostArrayAutoDerivativeDouble_3 Cf_with_der, BoostArrayAutoDerivativeDouble_3 Vel_cf, boost::shared_ptr< GeoCal::CartesianInertial > & Ci, BoostArrayAutoDerivativeDouble_3 Ci_with_der, BoostArrayAutoDerivativeDouble_3 Vel_ci)\n"
+		"convert_position_and_velocity(Time T, CartesianInertial Ci, Array_double_3 Vel_ci, boost::shared_ptr< GeoCal::CartesianFixed > & Cf, Array_double_3 Vel_cf)\n"
+		"convert_position_and_velocity(TimeWithDerivative T, CartesianInertial Ci, BoostArrayAutoDerivativeDouble_3 Ci_with_der, BoostArrayAutoDerivativeDouble_3 Vel_ci, boost::shared_ptr< GeoCal::CartesianFixed > & Cf, BoostArrayAutoDerivativeDouble_3 Cf_with_der, BoostArrayAutoDerivativeDouble_3 Vel_cf)\n"
 		"\n"
-		"void GeoCal::convert_position_and_velocity(const TimeWithDerivative &T, const CartesianInertial &Ci, const\n"
-		"boost::array< AutoDerivative< double >, 3 > &Ci_with_der, const\n"
-		"boost::array< AutoDerivative< double >, 3 > &Vel_ci,\n"
-		"boost::shared_ptr< CartesianFixed > &Cf, boost::array< AutoDerivative<\n"
-		"double >, 3 > &Cf_with_der, boost::array< AutoDerivative< double >, 3\n"
-		"> &Vel_cf, boost::math::quaternion< AutoDerivative< double > >\n"
-		"&Ci_to_cf_q)\n"
 		"GeoCal::convert_position_and_velocity\n"
-		"Convert including velocity.\n"
+		"Convert including velocity.  \n"
 		"\n"
 		""},
-	 { "Vector_GroundCoordinate_iterator", _wrap_Vector_GroundCoordinate_iterator, METH_O, NULL},
-	 { "Vector_GroundCoordinate___nonzero__", _wrap_Vector_GroundCoordinate___nonzero__, METH_O, NULL},
-	 { "Vector_GroundCoordinate___bool__", _wrap_Vector_GroundCoordinate___bool__, METH_O, NULL},
-	 { "Vector_GroundCoordinate___len__", _wrap_Vector_GroundCoordinate___len__, METH_O, NULL},
-	 { "Vector_GroundCoordinate___getslice__", _wrap_Vector_GroundCoordinate___getslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___setslice__", _wrap_Vector_GroundCoordinate___setslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___delslice__", _wrap_Vector_GroundCoordinate___delslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___delitem__", _wrap_Vector_GroundCoordinate___delitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___getitem__", _wrap_Vector_GroundCoordinate___getitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate___setitem__", _wrap_Vector_GroundCoordinate___setitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_pop", _wrap_Vector_GroundCoordinate_pop, METH_O, NULL},
-	 { "Vector_GroundCoordinate_append", _wrap_Vector_GroundCoordinate_append, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_empty", _wrap_Vector_GroundCoordinate_empty, METH_O, NULL},
-	 { "Vector_GroundCoordinate_size", _wrap_Vector_GroundCoordinate_size, METH_O, NULL},
-	 { "Vector_GroundCoordinate_swap", _wrap_Vector_GroundCoordinate_swap, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_begin", _wrap_Vector_GroundCoordinate_begin, METH_O, NULL},
-	 { "Vector_GroundCoordinate_end", _wrap_Vector_GroundCoordinate_end, METH_O, NULL},
-	 { "Vector_GroundCoordinate_rbegin", _wrap_Vector_GroundCoordinate_rbegin, METH_O, NULL},
-	 { "Vector_GroundCoordinate_rend", _wrap_Vector_GroundCoordinate_rend, METH_O, NULL},
-	 { "Vector_GroundCoordinate_clear", _wrap_Vector_GroundCoordinate_clear, METH_O, NULL},
-	 { "Vector_GroundCoordinate_get_allocator", _wrap_Vector_GroundCoordinate_get_allocator, METH_O, NULL},
-	 { "Vector_GroundCoordinate_pop_back", _wrap_Vector_GroundCoordinate_pop_back, METH_O, NULL},
-	 { "Vector_GroundCoordinate_erase", _wrap_Vector_GroundCoordinate_erase, METH_VARARGS, NULL},
-	 { "new_Vector_GroundCoordinate", _wrap_new_Vector_GroundCoordinate, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_push_back", _wrap_Vector_GroundCoordinate_push_back, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_front", _wrap_Vector_GroundCoordinate_front, METH_O, NULL},
-	 { "Vector_GroundCoordinate_back", _wrap_Vector_GroundCoordinate_back, METH_O, NULL},
-	 { "Vector_GroundCoordinate_assign", _wrap_Vector_GroundCoordinate_assign, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_resize", _wrap_Vector_GroundCoordinate_resize, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_insert", _wrap_Vector_GroundCoordinate_insert, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_reserve", _wrap_Vector_GroundCoordinate_reserve, METH_VARARGS, NULL},
-	 { "Vector_GroundCoordinate_capacity", _wrap_Vector_GroundCoordinate_capacity, METH_O, NULL},
-	 { "delete_Vector_GroundCoordinate", _wrap_delete_Vector_GroundCoordinate, METH_O, NULL},
+	 { "Vector_GroundCoordinate_iterator", _wrap_Vector_GroundCoordinate_iterator, METH_O, "iterator(Vector_GroundCoordinate self) -> SwigPyIterator"},
+	 { "Vector_GroundCoordinate___nonzero__", _wrap_Vector_GroundCoordinate___nonzero__, METH_O, "__nonzero__(Vector_GroundCoordinate self) -> bool"},
+	 { "Vector_GroundCoordinate___bool__", _wrap_Vector_GroundCoordinate___bool__, METH_O, "__bool__(Vector_GroundCoordinate self) -> bool"},
+	 { "Vector_GroundCoordinate___len__", _wrap_Vector_GroundCoordinate___len__, METH_O, "__len__(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type"},
+	 { "Vector_GroundCoordinate___getslice__", _wrap_Vector_GroundCoordinate___getslice__, METH_VARARGS, "__getslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j) -> Vector_GroundCoordinate"},
+	 { "Vector_GroundCoordinate___setslice__", _wrap_Vector_GroundCoordinate___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j)\n"
+		"__setslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j, Vector_GroundCoordinate v)\n"
+		""},
+	 { "Vector_GroundCoordinate___delslice__", _wrap_Vector_GroundCoordinate___delslice__, METH_VARARGS, "__delslice__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type j)"},
+	 { "Vector_GroundCoordinate___delitem__", _wrap_Vector_GroundCoordinate___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i)\n"
+		"__delitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_GroundCoordinate___getitem__", _wrap_Vector_GroundCoordinate___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice) -> Vector_GroundCoordinate\n"
+		"__getitem__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &\n"
+		""},
+	 { "Vector_GroundCoordinate___setitem__", _wrap_Vector_GroundCoordinate___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice, Vector_GroundCoordinate v)\n"
+		"__setitem__(Vector_GroundCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundCoordinate_pop", _wrap_Vector_GroundCoordinate_pop, METH_O, "pop(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type"},
+	 { "Vector_GroundCoordinate_append", _wrap_Vector_GroundCoordinate_append, METH_VARARGS, "append(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)"},
+	 { "Vector_GroundCoordinate_empty", _wrap_Vector_GroundCoordinate_empty, METH_O, "empty(Vector_GroundCoordinate self) -> bool"},
+	 { "Vector_GroundCoordinate_size", _wrap_Vector_GroundCoordinate_size, METH_O, "size(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type"},
+	 { "Vector_GroundCoordinate_swap", _wrap_Vector_GroundCoordinate_swap, METH_VARARGS, "swap(Vector_GroundCoordinate self, Vector_GroundCoordinate v)"},
+	 { "Vector_GroundCoordinate_begin", _wrap_Vector_GroundCoordinate_begin, METH_O, "begin(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator"},
+	 { "Vector_GroundCoordinate_end", _wrap_Vector_GroundCoordinate_end, METH_O, "end(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator"},
+	 { "Vector_GroundCoordinate_rbegin", _wrap_Vector_GroundCoordinate_rbegin, METH_O, "rbegin(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::reverse_iterator"},
+	 { "Vector_GroundCoordinate_rend", _wrap_Vector_GroundCoordinate_rend, METH_O, "rend(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::reverse_iterator"},
+	 { "Vector_GroundCoordinate_clear", _wrap_Vector_GroundCoordinate_clear, METH_O, "clear(Vector_GroundCoordinate self)"},
+	 { "Vector_GroundCoordinate_get_allocator", _wrap_Vector_GroundCoordinate_get_allocator, METH_O, "get_allocator(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::allocator_type"},
+	 { "Vector_GroundCoordinate_pop_back", _wrap_Vector_GroundCoordinate_pop_back, METH_O, "pop_back(Vector_GroundCoordinate self)"},
+	 { "Vector_GroundCoordinate_erase", _wrap_Vector_GroundCoordinate_erase, METH_VARARGS, "\n"
+		"erase(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator\n"
+		"erase(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator first, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator\n"
+		""},
+	 { "new_Vector_GroundCoordinate", _wrap_new_Vector_GroundCoordinate, METH_VARARGS, "\n"
+		"Vector_GroundCoordinate()\n"
+		"Vector_GroundCoordinate(Vector_GroundCoordinate other)\n"
+		"Vector_GroundCoordinate(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type size)\n"
+		"new_Vector_GroundCoordinate(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type size, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & value) -> Vector_GroundCoordinate\n"
+		""},
+	 { "Vector_GroundCoordinate_push_back", _wrap_Vector_GroundCoordinate_push_back, METH_VARARGS, "push_back(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)"},
+	 { "Vector_GroundCoordinate_front", _wrap_Vector_GroundCoordinate_front, METH_O, "front(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &"},
+	 { "Vector_GroundCoordinate_back", _wrap_Vector_GroundCoordinate_back, METH_O, "back(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const &"},
+	 { "Vector_GroundCoordinate_assign", _wrap_Vector_GroundCoordinate_assign, METH_VARARGS, "assign(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)"},
+	 { "Vector_GroundCoordinate_resize", _wrap_Vector_GroundCoordinate_resize, METH_VARARGS, "\n"
+		"resize(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type new_size)\n"
+		"resize(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundCoordinate_insert", _wrap_Vector_GroundCoordinate_insert, METH_VARARGS, "\n"
+		"insert(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator\n"
+		"insert(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundCoordinate_reserve", _wrap_Vector_GroundCoordinate_reserve, METH_VARARGS, "reserve(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type n)"},
+	 { "Vector_GroundCoordinate_capacity", _wrap_Vector_GroundCoordinate_capacity, METH_O, "capacity(Vector_GroundCoordinate self) -> std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type"},
+	 { "delete_Vector_GroundCoordinate", _wrap_delete_Vector_GroundCoordinate, METH_O, "delete_Vector_GroundCoordinate(Vector_GroundCoordinate self)"},
 	 { "Vector_GroundCoordinate_swigregister", Vector_GroundCoordinate_swigregister, METH_O, NULL},
 	 { "Vector_GroundCoordinate_swiginit", Vector_GroundCoordinate_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

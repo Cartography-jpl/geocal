@@ -14594,174 +14594,252 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AutoDerivativeDouble", _wrap_new_AutoDerivativeDouble, METH_VARARGS, "\n"
+		"AutoDerivativeDouble()\n"
+		"AutoDerivativeDouble(double const & Val, BlitzArray_double_1 FORCE_COPY)\n"
+		"AutoDerivativeDouble(double const & Val, int i_th, int nvars)\n"
+		"AutoDerivativeDouble(double const & Val)\n"
+		"AutoDerivativeDouble(AutoDerivativeDouble D)\n"
+		"new_AutoDerivativeDouble(AutoDerivativeRefDouble V) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< T >::AutoDerivative(const T &Val, int i_th, int nvars)\n"
 		"GeoCal::AutoDerivative::AutoDerivative\n"
-		"Constructor for a value of the i_th independent variable (0 based).\n"
-		"We create a gradient that is all 0, except for \"1\" in the i_th\n"
-		"location. \n"
+		"Constructor for a value of the i_th independent variable (0 based).  \n"
+		"\n"
+		"We create a gradient that is all 0, except for \"1\" in the i_th location.  \n"
+		"\n"
 		""},
 	 { "AutoDerivativeDouble__v_number_variable", _wrap_AutoDerivativeDouble__v_number_variable, METH_O, "\n"
+		"AutoDerivativeDouble__v_number_variable(AutoDerivativeDouble self) -> int\n"
 		"\n"
-		"int GeoCal::AutoDerivative< T >::number_variable() const\n"
 		"GeoCal::AutoDerivative::number_variable\n"
-		"Number of variables in gradient.\n"
+		"Number of variables in gradient.  \n"
 		"\n"
 		""},
 	 { "AutoDerivativeDouble__v_is_constant", _wrap_AutoDerivativeDouble__v_is_constant, METH_O, "\n"
+		"AutoDerivativeDouble__v_is_constant(AutoDerivativeDouble self) -> bool\n"
 		"\n"
-		"bool GeoCal::AutoDerivative< T >::is_constant() const\n"
 		"GeoCal::AutoDerivative::is_constant\n"
-		"Is this object a constant (with a gradient() all zeros)?\n"
+		"Is this object a constant (with a gradient() all zeros)?  \n"
 		"\n"
 		""},
-	 { "AutoDerivativeDouble___lt__", _wrap_AutoDerivativeDouble___lt__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___eq__", _wrap_AutoDerivativeDouble___eq__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___iadd__", _wrap_AutoDerivativeDouble___iadd__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___isub__", _wrap_AutoDerivativeDouble___isub__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___imul__", _wrap_AutoDerivativeDouble___imul__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___itruediv__", _wrap_AutoDerivativeDouble___itruediv__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___str__", _wrap_AutoDerivativeDouble___str__, METH_O, NULL},
-	 { "AutoDerivativeDouble__value", _wrap_AutoDerivativeDouble__value, METH_O, NULL},
-	 { "AutoDerivativeDouble__value_set", _wrap_AutoDerivativeDouble__value_set, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble__gradient", _wrap_AutoDerivativeDouble__gradient, METH_O, NULL},
-	 { "AutoDerivativeDouble__gradient_set", _wrap_AutoDerivativeDouble__gradient_set, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___add__", _wrap_AutoDerivativeDouble___add__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___radd__", _wrap_AutoDerivativeDouble___radd__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___sub__", _wrap_AutoDerivativeDouble___sub__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rsub__", _wrap_AutoDerivativeDouble___rsub__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___mul__", _wrap_AutoDerivativeDouble___mul__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rmul__", _wrap_AutoDerivativeDouble___rmul__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___div__", _wrap_AutoDerivativeDouble___div__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rdiv__", _wrap_AutoDerivativeDouble___rdiv__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___pow__", _wrap_AutoDerivativeDouble___pow__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rpow__", _wrap_AutoDerivativeDouble___rpow__, METH_VARARGS, NULL},
-	 { "delete_AutoDerivativeDouble", _wrap_delete_AutoDerivativeDouble, METH_O, NULL},
+	 { "AutoDerivativeDouble___lt__", _wrap_AutoDerivativeDouble___lt__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___lt__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> bool\n"
+		"AutoDerivativeDouble___lt__(AutoDerivativeDouble self, double const & V) -> bool\n"
+		""},
+	 { "AutoDerivativeDouble___eq__", _wrap_AutoDerivativeDouble___eq__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___eq__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> bool\n"
+		"AutoDerivativeDouble___eq__(AutoDerivativeDouble self, double const & V) -> bool\n"
+		""},
+	 { "AutoDerivativeDouble___iadd__", _wrap_AutoDerivativeDouble___iadd__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___iadd__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___iadd__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___isub__", _wrap_AutoDerivativeDouble___isub__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___isub__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___isub__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___imul__", _wrap_AutoDerivativeDouble___imul__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___imul__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___imul__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___itruediv__", _wrap_AutoDerivativeDouble___itruediv__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___itruediv__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___itruediv__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___str__", _wrap_AutoDerivativeDouble___str__, METH_O, "AutoDerivativeDouble___str__(AutoDerivativeDouble self) -> std::string"},
+	 { "AutoDerivativeDouble__value", _wrap_AutoDerivativeDouble__value, METH_O, "AutoDerivativeDouble__value(AutoDerivativeDouble self) -> double"},
+	 { "AutoDerivativeDouble__value_set", _wrap_AutoDerivativeDouble__value_set, METH_VARARGS, "AutoDerivativeDouble__value_set(AutoDerivativeDouble self, double V)"},
+	 { "AutoDerivativeDouble__gradient", _wrap_AutoDerivativeDouble__gradient, METH_O, "AutoDerivativeDouble__gradient(AutoDerivativeDouble self) -> BlitzArray_double_1"},
+	 { "AutoDerivativeDouble__gradient_set", _wrap_AutoDerivativeDouble__gradient_set, METH_VARARGS, "AutoDerivativeDouble__gradient_set(AutoDerivativeDouble self, BlitzArray_double_1 V)"},
+	 { "AutoDerivativeDouble___add__", _wrap_AutoDerivativeDouble___add__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___add__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___add__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___radd__", _wrap_AutoDerivativeDouble___radd__, METH_VARARGS, "AutoDerivativeDouble___radd__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___sub__", _wrap_AutoDerivativeDouble___sub__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___sub__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___sub__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___rsub__", _wrap_AutoDerivativeDouble___rsub__, METH_VARARGS, "AutoDerivativeDouble___rsub__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___mul__", _wrap_AutoDerivativeDouble___mul__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___mul__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___mul__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___rmul__", _wrap_AutoDerivativeDouble___rmul__, METH_VARARGS, "AutoDerivativeDouble___rmul__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___div__", _wrap_AutoDerivativeDouble___div__, METH_VARARGS, "\n"
+		"AutoDerivativeDouble___div__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"AutoDerivativeDouble___div__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___rdiv__", _wrap_AutoDerivativeDouble___rdiv__, METH_VARARGS, "AutoDerivativeDouble___rdiv__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___pow__", _wrap_AutoDerivativeDouble___pow__, METH_VARARGS, "AutoDerivativeDouble___pow__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___rpow__", _wrap_AutoDerivativeDouble___rpow__, METH_VARARGS, "AutoDerivativeDouble___rpow__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "delete_AutoDerivativeDouble", _wrap_delete_AutoDerivativeDouble, METH_O, "delete_AutoDerivativeDouble(AutoDerivativeDouble self)"},
 	 { "AutoDerivativeDouble_swigregister", AutoDerivativeDouble_swigregister, METH_O, NULL},
 	 { "AutoDerivativeDouble_swiginit", AutoDerivativeDouble_swiginit, METH_VARARGS, NULL},
 	 { "new_AutoDerivativeRefDouble", _wrap_new_AutoDerivativeRefDouble, METH_VARARGS, "\n"
+		"new_AutoDerivativeRefDouble(double & V, BlitzArray_double_1 FORCE_COPY) -> AutoDerivativeRefDouble\n"
 		"\n"
-		"GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V, const blitz::Array< T, 1 > &G)\n"
 		"GeoCal::AutoDerivativeRef::AutoDerivativeRef\n"
 		""},
 	 { "AutoDerivativeRefDouble__v_value", _wrap_AutoDerivativeRefDouble__v_value, METH_O, "\n"
+		"AutoDerivativeRefDouble__v_value(AutoDerivativeRefDouble self) -> double\n"
 		"\n"
-		"T GeoCal::AutoDerivativeRef< T >::value() const\n"
 		"GeoCal::AutoDerivativeRef::value\n"
 		""},
 	 { "AutoDerivativeRefDouble__v_gradient", _wrap_AutoDerivativeRefDouble__v_gradient, METH_O, "\n"
+		"AutoDerivativeRefDouble__v_gradient(AutoDerivativeRefDouble self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< T, 1 > & GeoCal::AutoDerivativeRef< T >::gradient() const\n"
 		"GeoCal::AutoDerivativeRef::gradient\n"
 		""},
-	 { "AutoDerivativeRefDouble___str__", _wrap_AutoDerivativeRefDouble___str__, METH_O, NULL},
-	 { "delete_AutoDerivativeRefDouble", _wrap_delete_AutoDerivativeRefDouble, METH_O, NULL},
+	 { "AutoDerivativeRefDouble___str__", _wrap_AutoDerivativeRefDouble___str__, METH_O, "AutoDerivativeRefDouble___str__(AutoDerivativeRefDouble self) -> std::string"},
+	 { "delete_AutoDerivativeRefDouble", _wrap_delete_AutoDerivativeRefDouble, METH_O, "delete_AutoDerivativeRefDouble(AutoDerivativeRefDouble self)"},
 	 { "AutoDerivativeRefDouble_swigregister", AutoDerivativeRefDouble_swigregister, METH_O, NULL},
 	 { "AutoDerivativeRefDouble_swiginit", AutoDerivativeRefDouble_swiginit, METH_VARARGS, NULL},
-	 { "new_ArrayAutoDerivativeDouble_1", _wrap_new_ArrayAutoDerivativeDouble_1, METH_VARARGS, NULL},
-	 { "ArrayAutoDerivativeDouble_1_data", _wrap_ArrayAutoDerivativeDouble_1_data, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_size", _wrap_ArrayAutoDerivativeDouble_1_size, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_read", _wrap_ArrayAutoDerivativeDouble_1_read, METH_VARARGS, NULL},
-	 { "ArrayAutoDerivativeDouble_1_write", _wrap_ArrayAutoDerivativeDouble_1_write, METH_VARARGS, NULL},
-	 { "ArrayAutoDerivativeDouble_1_datav", _wrap_ArrayAutoDerivativeDouble_1_datav, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape0", _wrap_ArrayAutoDerivativeDouble_1_shape0, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape1", _wrap_ArrayAutoDerivativeDouble_1_shape1, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape2", _wrap_ArrayAutoDerivativeDouble_1_shape2, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape3", _wrap_ArrayAutoDerivativeDouble_1_shape3, METH_O, NULL},
-	 { "delete_ArrayAutoDerivativeDouble_1", _wrap_delete_ArrayAutoDerivativeDouble_1, METH_O, NULL},
+	 { "new_ArrayAutoDerivativeDouble_1", _wrap_new_ArrayAutoDerivativeDouble_1, METH_VARARGS, "\n"
+		"ArrayAutoDerivativeDouble_1(int e1)\n"
+		"ArrayAutoDerivativeDouble_1(int e1, int e2, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >())\n"
+		"ArrayAutoDerivativeDouble_1(int e1, int e2, int e3, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >())\n"
+		"ArrayAutoDerivativeDouble_1(int e1, int e2, int e3, int e4, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >())\n"
+		""},
+	 { "ArrayAutoDerivativeDouble_1_data", _wrap_ArrayAutoDerivativeDouble_1_data, METH_O, "ArrayAutoDerivativeDouble_1_data(ArrayAutoDerivativeDouble_1 self) -> AutoDerivativeDouble"},
+	 { "ArrayAutoDerivativeDouble_1_size", _wrap_ArrayAutoDerivativeDouble_1_size, METH_O, "ArrayAutoDerivativeDouble_1_size(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_read", _wrap_ArrayAutoDerivativeDouble_1_read, METH_VARARGS, "\n"
+		"ArrayAutoDerivativeDouble_1_read(ArrayAutoDerivativeDouble_1 self, int i1) -> AutoDerivativeDouble\n"
+		"ArrayAutoDerivativeDouble_1_read(ArrayAutoDerivativeDouble_1 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"ArrayAutoDerivativeDouble_1_read(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"ArrayAutoDerivativeDouble_1_read(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAutoDerivativeDouble_1_write", _wrap_ArrayAutoDerivativeDouble_1_write, METH_VARARGS, "\n"
+		"ArrayAutoDerivativeDouble_1_write(ArrayAutoDerivativeDouble_1 self, int i1, AutoDerivativeDouble val)\n"
+		"ArrayAutoDerivativeDouble_1_write(ArrayAutoDerivativeDouble_1 self, int i1, int i2, AutoDerivativeDouble val)\n"
+		"ArrayAutoDerivativeDouble_1_write(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3, AutoDerivativeDouble val)\n"
+		"ArrayAutoDerivativeDouble_1_write(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble val)\n"
+		""},
+	 { "ArrayAutoDerivativeDouble_1_datav", _wrap_ArrayAutoDerivativeDouble_1_datav, METH_O, "ArrayAutoDerivativeDouble_1_datav(ArrayAutoDerivativeDouble_1 self) -> void *"},
+	 { "ArrayAutoDerivativeDouble_1_shape0", _wrap_ArrayAutoDerivativeDouble_1_shape0, METH_O, "ArrayAutoDerivativeDouble_1_shape0(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_shape1", _wrap_ArrayAutoDerivativeDouble_1_shape1, METH_O, "ArrayAutoDerivativeDouble_1_shape1(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_shape2", _wrap_ArrayAutoDerivativeDouble_1_shape2, METH_O, "ArrayAutoDerivativeDouble_1_shape2(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_shape3", _wrap_ArrayAutoDerivativeDouble_1_shape3, METH_O, "ArrayAutoDerivativeDouble_1_shape3(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "delete_ArrayAutoDerivativeDouble_1", _wrap_delete_ArrayAutoDerivativeDouble_1, METH_O, "delete_ArrayAutoDerivativeDouble_1(ArrayAutoDerivativeDouble_1 self)"},
 	 { "ArrayAutoDerivativeDouble_1_swigregister", ArrayAutoDerivativeDouble_1_swigregister, METH_O, NULL},
 	 { "ArrayAutoDerivativeDouble_1_swiginit", ArrayAutoDerivativeDouble_1_swiginit, METH_VARARGS, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3__size", _wrap_BoostArrayAutoDerivativeDouble_3__size, METH_O, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3___getitem__", _wrap_BoostArrayAutoDerivativeDouble_3___getitem__, METH_VARARGS, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3___setitem__", _wrap_BoostArrayAutoDerivativeDouble_3___setitem__, METH_VARARGS, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3___str__", _wrap_BoostArrayAutoDerivativeDouble_3___str__, METH_O, NULL},
-	 { "new_BoostArrayAutoDerivativeDouble_3", _wrap_new_BoostArrayAutoDerivativeDouble_3, METH_NOARGS, NULL},
-	 { "delete_BoostArrayAutoDerivativeDouble_3", _wrap_delete_BoostArrayAutoDerivativeDouble_3, METH_O, NULL},
+	 { "BoostArrayAutoDerivativeDouble_3__size", _wrap_BoostArrayAutoDerivativeDouble_3__size, METH_O, "BoostArrayAutoDerivativeDouble_3__size(BoostArrayAutoDerivativeDouble_3 self) -> int"},
+	 { "BoostArrayAutoDerivativeDouble_3___getitem__", _wrap_BoostArrayAutoDerivativeDouble_3___getitem__, METH_VARARGS, "BoostArrayAutoDerivativeDouble_3___getitem__(BoostArrayAutoDerivativeDouble_3 self, int i) -> AutoDerivativeDouble"},
+	 { "BoostArrayAutoDerivativeDouble_3___setitem__", _wrap_BoostArrayAutoDerivativeDouble_3___setitem__, METH_VARARGS, "BoostArrayAutoDerivativeDouble_3___setitem__(BoostArrayAutoDerivativeDouble_3 self, int i, AutoDerivativeDouble V)"},
+	 { "BoostArrayAutoDerivativeDouble_3___str__", _wrap_BoostArrayAutoDerivativeDouble_3___str__, METH_O, "BoostArrayAutoDerivativeDouble_3___str__(BoostArrayAutoDerivativeDouble_3 self) -> std::string"},
+	 { "new_BoostArrayAutoDerivativeDouble_3", _wrap_new_BoostArrayAutoDerivativeDouble_3, METH_NOARGS, "new_BoostArrayAutoDerivativeDouble_3() -> BoostArrayAutoDerivativeDouble_3"},
+	 { "delete_BoostArrayAutoDerivativeDouble_3", _wrap_delete_BoostArrayAutoDerivativeDouble_3, METH_O, "delete_BoostArrayAutoDerivativeDouble_3(BoostArrayAutoDerivativeDouble_3 self)"},
 	 { "BoostArrayAutoDerivativeDouble_3_swigregister", BoostArrayAutoDerivativeDouble_3_swigregister, METH_O, NULL},
 	 { "BoostArrayAutoDerivativeDouble_3_swiginit", BoostArrayAutoDerivativeDouble_3_swiginit, METH_VARARGS, NULL},
 	 { "sqrt", _wrap_sqrt, METH_O, "\n"
+		"sqrt(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::sqrt(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::sqrt\n"
 		""},
 	 { "log", _wrap_log, METH_O, "\n"
+		"log(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::log(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::log\n"
 		""},
 	 { "log10", _wrap_log10, METH_O, "\n"
+		"log10(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::log10(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::log10\n"
 		""},
 	 { "exp", _wrap_exp, METH_O, "\n"
+		"exp(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::exp(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::exp\n"
 		""},
 	 { "sin", _wrap_sin, METH_O, "\n"
+		"sin(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::sin(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::sin\n"
 		""},
 	 { "asin", _wrap_asin, METH_O, "\n"
+		"asin(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::asin(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::asin\n"
 		""},
 	 { "cos", _wrap_cos, METH_O, "\n"
+		"cos(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::cos(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::cos\n"
 		""},
 	 { "acos", _wrap_acos, METH_O, "\n"
+		"acos(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::acos(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::acos\n"
 		""},
 	 { "tan", _wrap_tan, METH_O, "\n"
+		"tan(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::tan(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::tan\n"
 		""},
 	 { "atan", _wrap_atan, METH_O, "\n"
+		"atan(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::atan(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::atan\n"
 		""},
-	 { "vector_auto_derivative_iterator", _wrap_vector_auto_derivative_iterator, METH_O, NULL},
-	 { "vector_auto_derivative___nonzero__", _wrap_vector_auto_derivative___nonzero__, METH_O, NULL},
-	 { "vector_auto_derivative___bool__", _wrap_vector_auto_derivative___bool__, METH_O, NULL},
-	 { "vector_auto_derivative___len__", _wrap_vector_auto_derivative___len__, METH_O, NULL},
-	 { "vector_auto_derivative___getslice__", _wrap_vector_auto_derivative___getslice__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___setslice__", _wrap_vector_auto_derivative___setslice__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___delslice__", _wrap_vector_auto_derivative___delslice__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___delitem__", _wrap_vector_auto_derivative___delitem__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___getitem__", _wrap_vector_auto_derivative___getitem__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___setitem__", _wrap_vector_auto_derivative___setitem__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_pop", _wrap_vector_auto_derivative_pop, METH_O, NULL},
-	 { "vector_auto_derivative_append", _wrap_vector_auto_derivative_append, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_empty", _wrap_vector_auto_derivative_empty, METH_O, NULL},
-	 { "vector_auto_derivative_size", _wrap_vector_auto_derivative_size, METH_O, NULL},
-	 { "vector_auto_derivative_swap", _wrap_vector_auto_derivative_swap, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_begin", _wrap_vector_auto_derivative_begin, METH_O, NULL},
-	 { "vector_auto_derivative_end", _wrap_vector_auto_derivative_end, METH_O, NULL},
-	 { "vector_auto_derivative_rbegin", _wrap_vector_auto_derivative_rbegin, METH_O, NULL},
-	 { "vector_auto_derivative_rend", _wrap_vector_auto_derivative_rend, METH_O, NULL},
-	 { "vector_auto_derivative_clear", _wrap_vector_auto_derivative_clear, METH_O, NULL},
-	 { "vector_auto_derivative_get_allocator", _wrap_vector_auto_derivative_get_allocator, METH_O, NULL},
-	 { "vector_auto_derivative_pop_back", _wrap_vector_auto_derivative_pop_back, METH_O, NULL},
-	 { "vector_auto_derivative_erase", _wrap_vector_auto_derivative_erase, METH_VARARGS, NULL},
-	 { "new_vector_auto_derivative", _wrap_new_vector_auto_derivative, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_push_back", _wrap_vector_auto_derivative_push_back, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_front", _wrap_vector_auto_derivative_front, METH_O, NULL},
-	 { "vector_auto_derivative_back", _wrap_vector_auto_derivative_back, METH_O, NULL},
-	 { "vector_auto_derivative_assign", _wrap_vector_auto_derivative_assign, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_resize", _wrap_vector_auto_derivative_resize, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_insert", _wrap_vector_auto_derivative_insert, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_reserve", _wrap_vector_auto_derivative_reserve, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_capacity", _wrap_vector_auto_derivative_capacity, METH_O, NULL},
-	 { "delete_vector_auto_derivative", _wrap_delete_vector_auto_derivative, METH_O, NULL},
+	 { "vector_auto_derivative_iterator", _wrap_vector_auto_derivative_iterator, METH_O, "vector_auto_derivative_iterator(vector_auto_derivative self) -> SwigPyIterator"},
+	 { "vector_auto_derivative___nonzero__", _wrap_vector_auto_derivative___nonzero__, METH_O, "vector_auto_derivative___nonzero__(vector_auto_derivative self) -> bool"},
+	 { "vector_auto_derivative___bool__", _wrap_vector_auto_derivative___bool__, METH_O, "vector_auto_derivative___bool__(vector_auto_derivative self) -> bool"},
+	 { "vector_auto_derivative___len__", _wrap_vector_auto_derivative___len__, METH_O, "vector_auto_derivative___len__(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::size_type"},
+	 { "vector_auto_derivative___getslice__", _wrap_vector_auto_derivative___getslice__, METH_VARARGS, "vector_auto_derivative___getslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j) -> vector_auto_derivative"},
+	 { "vector_auto_derivative___setslice__", _wrap_vector_auto_derivative___setslice__, METH_VARARGS, "\n"
+		"vector_auto_derivative___setslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j)\n"
+		"vector_auto_derivative___setslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j, vector_auto_derivative v)\n"
+		""},
+	 { "vector_auto_derivative___delslice__", _wrap_vector_auto_derivative___delslice__, METH_VARARGS, "vector_auto_derivative___delslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j)"},
+	 { "vector_auto_derivative___delitem__", _wrap_vector_auto_derivative___delitem__, METH_VARARGS, "\n"
+		"vector_auto_derivative___delitem__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i)\n"
+		"vector_auto_derivative___delitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "vector_auto_derivative___getitem__", _wrap_vector_auto_derivative___getitem__, METH_VARARGS, "\n"
+		"vector_auto_derivative___getitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice) -> vector_auto_derivative\n"
+		"vector_auto_derivative___getitem__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i) -> AutoDerivativeDouble\n"
+		""},
+	 { "vector_auto_derivative___setitem__", _wrap_vector_auto_derivative___setitem__, METH_VARARGS, "\n"
+		"vector_auto_derivative___setitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice, vector_auto_derivative v)\n"
+		"vector_auto_derivative___setitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice)\n"
+		"vector_auto_derivative___setitem__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, AutoDerivativeDouble x)\n"
+		""},
+	 { "vector_auto_derivative_pop", _wrap_vector_auto_derivative_pop, METH_O, "vector_auto_derivative_pop(vector_auto_derivative self) -> AutoDerivativeDouble"},
+	 { "vector_auto_derivative_append", _wrap_vector_auto_derivative_append, METH_VARARGS, "vector_auto_derivative_append(vector_auto_derivative self, AutoDerivativeDouble x)"},
+	 { "vector_auto_derivative_empty", _wrap_vector_auto_derivative_empty, METH_O, "vector_auto_derivative_empty(vector_auto_derivative self) -> bool"},
+	 { "vector_auto_derivative_size", _wrap_vector_auto_derivative_size, METH_O, "vector_auto_derivative_size(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::size_type"},
+	 { "vector_auto_derivative_swap", _wrap_vector_auto_derivative_swap, METH_VARARGS, "vector_auto_derivative_swap(vector_auto_derivative self, vector_auto_derivative v)"},
+	 { "vector_auto_derivative_begin", _wrap_vector_auto_derivative_begin, METH_O, "vector_auto_derivative_begin(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::iterator"},
+	 { "vector_auto_derivative_end", _wrap_vector_auto_derivative_end, METH_O, "vector_auto_derivative_end(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::iterator"},
+	 { "vector_auto_derivative_rbegin", _wrap_vector_auto_derivative_rbegin, METH_O, "vector_auto_derivative_rbegin(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::reverse_iterator"},
+	 { "vector_auto_derivative_rend", _wrap_vector_auto_derivative_rend, METH_O, "vector_auto_derivative_rend(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::reverse_iterator"},
+	 { "vector_auto_derivative_clear", _wrap_vector_auto_derivative_clear, METH_O, "vector_auto_derivative_clear(vector_auto_derivative self)"},
+	 { "vector_auto_derivative_get_allocator", _wrap_vector_auto_derivative_get_allocator, METH_O, "vector_auto_derivative_get_allocator(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::allocator_type"},
+	 { "vector_auto_derivative_pop_back", _wrap_vector_auto_derivative_pop_back, METH_O, "vector_auto_derivative_pop_back(vector_auto_derivative self)"},
+	 { "vector_auto_derivative_erase", _wrap_vector_auto_derivative_erase, METH_VARARGS, "\n"
+		"vector_auto_derivative_erase(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator pos) -> std::vector< GeoCal::AutoDerivative< double > >::iterator\n"
+		"vector_auto_derivative_erase(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator first, std::vector< GeoCal::AutoDerivative< double > >::iterator last) -> std::vector< GeoCal::AutoDerivative< double > >::iterator\n"
+		""},
+	 { "new_vector_auto_derivative", _wrap_new_vector_auto_derivative, METH_VARARGS, "\n"
+		"vector_auto_derivative()\n"
+		"vector_auto_derivative(vector_auto_derivative other)\n"
+		"vector_auto_derivative(std::vector< GeoCal::AutoDerivative< double > >::size_type size)\n"
+		"new_vector_auto_derivative(std::vector< GeoCal::AutoDerivative< double > >::size_type size, AutoDerivativeDouble value) -> vector_auto_derivative\n"
+		""},
+	 { "vector_auto_derivative_push_back", _wrap_vector_auto_derivative_push_back, METH_VARARGS, "vector_auto_derivative_push_back(vector_auto_derivative self, AutoDerivativeDouble x)"},
+	 { "vector_auto_derivative_front", _wrap_vector_auto_derivative_front, METH_O, "vector_auto_derivative_front(vector_auto_derivative self) -> AutoDerivativeDouble"},
+	 { "vector_auto_derivative_back", _wrap_vector_auto_derivative_back, METH_O, "vector_auto_derivative_back(vector_auto_derivative self) -> AutoDerivativeDouble"},
+	 { "vector_auto_derivative_assign", _wrap_vector_auto_derivative_assign, METH_VARARGS, "vector_auto_derivative_assign(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type n, AutoDerivativeDouble x)"},
+	 { "vector_auto_derivative_resize", _wrap_vector_auto_derivative_resize, METH_VARARGS, "\n"
+		"vector_auto_derivative_resize(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type new_size)\n"
+		"vector_auto_derivative_resize(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type new_size, AutoDerivativeDouble x)\n"
+		""},
+	 { "vector_auto_derivative_insert", _wrap_vector_auto_derivative_insert, METH_VARARGS, "\n"
+		"vector_auto_derivative_insert(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator pos, AutoDerivativeDouble x) -> std::vector< GeoCal::AutoDerivative< double > >::iterator\n"
+		"vector_auto_derivative_insert(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator pos, std::vector< GeoCal::AutoDerivative< double > >::size_type n, AutoDerivativeDouble x)\n"
+		""},
+	 { "vector_auto_derivative_reserve", _wrap_vector_auto_derivative_reserve, METH_VARARGS, "vector_auto_derivative_reserve(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type n)"},
+	 { "vector_auto_derivative_capacity", _wrap_vector_auto_derivative_capacity, METH_O, "vector_auto_derivative_capacity(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::size_type"},
+	 { "delete_vector_auto_derivative", _wrap_delete_vector_auto_derivative, METH_O, "delete_vector_auto_derivative(vector_auto_derivative self)"},
 	 { "vector_auto_derivative_swigregister", vector_auto_derivative_swigregister, METH_O, NULL},
 	 { "vector_auto_derivative_swiginit", vector_auto_derivative_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -14789,174 +14867,252 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AutoDerivativeDouble", _wrap_new_AutoDerivativeDouble, METH_VARARGS, "\n"
+		"AutoDerivativeDouble()\n"
+		"AutoDerivativeDouble(double const & Val, BlitzArray_double_1 FORCE_COPY)\n"
+		"AutoDerivativeDouble(double const & Val, int i_th, int nvars)\n"
+		"AutoDerivativeDouble(double const & Val)\n"
+		"AutoDerivativeDouble(AutoDerivativeDouble D)\n"
+		"new_AutoDerivativeDouble(AutoDerivativeRefDouble V) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< T >::AutoDerivative(const T &Val, int i_th, int nvars)\n"
 		"GeoCal::AutoDerivative::AutoDerivative\n"
-		"Constructor for a value of the i_th independent variable (0 based).\n"
-		"We create a gradient that is all 0, except for \"1\" in the i_th\n"
-		"location. \n"
+		"Constructor for a value of the i_th independent variable (0 based).  \n"
+		"\n"
+		"We create a gradient that is all 0, except for \"1\" in the i_th location.  \n"
+		"\n"
 		""},
 	 { "AutoDerivativeDouble__v_number_variable", _wrap_AutoDerivativeDouble__v_number_variable, METH_O, "\n"
+		"_v_number_variable(AutoDerivativeDouble self) -> int\n"
 		"\n"
-		"int GeoCal::AutoDerivative< T >::number_variable() const\n"
 		"GeoCal::AutoDerivative::number_variable\n"
-		"Number of variables in gradient.\n"
+		"Number of variables in gradient.  \n"
 		"\n"
 		""},
 	 { "AutoDerivativeDouble__v_is_constant", _wrap_AutoDerivativeDouble__v_is_constant, METH_O, "\n"
+		"_v_is_constant(AutoDerivativeDouble self) -> bool\n"
 		"\n"
-		"bool GeoCal::AutoDerivative< T >::is_constant() const\n"
 		"GeoCal::AutoDerivative::is_constant\n"
-		"Is this object a constant (with a gradient() all zeros)?\n"
+		"Is this object a constant (with a gradient() all zeros)?  \n"
 		"\n"
 		""},
-	 { "AutoDerivativeDouble___lt__", _wrap_AutoDerivativeDouble___lt__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___eq__", _wrap_AutoDerivativeDouble___eq__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___iadd__", _wrap_AutoDerivativeDouble___iadd__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___isub__", _wrap_AutoDerivativeDouble___isub__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___imul__", _wrap_AutoDerivativeDouble___imul__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___itruediv__", _wrap_AutoDerivativeDouble___itruediv__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___str__", _wrap_AutoDerivativeDouble___str__, METH_O, NULL},
-	 { "AutoDerivativeDouble__value", _wrap_AutoDerivativeDouble__value, METH_O, NULL},
-	 { "AutoDerivativeDouble__value_set", _wrap_AutoDerivativeDouble__value_set, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble__gradient", _wrap_AutoDerivativeDouble__gradient, METH_O, NULL},
-	 { "AutoDerivativeDouble__gradient_set", _wrap_AutoDerivativeDouble__gradient_set, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___add__", _wrap_AutoDerivativeDouble___add__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___radd__", _wrap_AutoDerivativeDouble___radd__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___sub__", _wrap_AutoDerivativeDouble___sub__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rsub__", _wrap_AutoDerivativeDouble___rsub__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___mul__", _wrap_AutoDerivativeDouble___mul__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rmul__", _wrap_AutoDerivativeDouble___rmul__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___div__", _wrap_AutoDerivativeDouble___div__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rdiv__", _wrap_AutoDerivativeDouble___rdiv__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___pow__", _wrap_AutoDerivativeDouble___pow__, METH_VARARGS, NULL},
-	 { "AutoDerivativeDouble___rpow__", _wrap_AutoDerivativeDouble___rpow__, METH_VARARGS, NULL},
-	 { "delete_AutoDerivativeDouble", _wrap_delete_AutoDerivativeDouble, METH_O, NULL},
+	 { "AutoDerivativeDouble___lt__", _wrap_AutoDerivativeDouble___lt__, METH_VARARGS, "\n"
+		"__lt__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> bool\n"
+		"__lt__(AutoDerivativeDouble self, double const & V) -> bool\n"
+		""},
+	 { "AutoDerivativeDouble___eq__", _wrap_AutoDerivativeDouble___eq__, METH_VARARGS, "\n"
+		"__eq__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> bool\n"
+		"__eq__(AutoDerivativeDouble self, double const & V) -> bool\n"
+		""},
+	 { "AutoDerivativeDouble___iadd__", _wrap_AutoDerivativeDouble___iadd__, METH_VARARGS, "\n"
+		"__iadd__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"__iadd__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___isub__", _wrap_AutoDerivativeDouble___isub__, METH_VARARGS, "\n"
+		"__isub__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"__isub__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___imul__", _wrap_AutoDerivativeDouble___imul__, METH_VARARGS, "\n"
+		"__imul__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"__imul__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___itruediv__", _wrap_AutoDerivativeDouble___itruediv__, METH_VARARGS, "\n"
+		"__itruediv__(AutoDerivativeDouble self, AutoDerivativeDouble V) -> AutoDerivativeDouble\n"
+		"__itruediv__(AutoDerivativeDouble self, double const & V) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___str__", _wrap_AutoDerivativeDouble___str__, METH_O, "__str__(AutoDerivativeDouble self) -> std::string"},
+	 { "AutoDerivativeDouble__value", _wrap_AutoDerivativeDouble__value, METH_O, "_value(AutoDerivativeDouble self) -> double"},
+	 { "AutoDerivativeDouble__value_set", _wrap_AutoDerivativeDouble__value_set, METH_VARARGS, "_value_set(AutoDerivativeDouble self, double V)"},
+	 { "AutoDerivativeDouble__gradient", _wrap_AutoDerivativeDouble__gradient, METH_O, "_gradient(AutoDerivativeDouble self) -> BlitzArray_double_1"},
+	 { "AutoDerivativeDouble__gradient_set", _wrap_AutoDerivativeDouble__gradient_set, METH_VARARGS, "_gradient_set(AutoDerivativeDouble self, BlitzArray_double_1 V)"},
+	 { "AutoDerivativeDouble___add__", _wrap_AutoDerivativeDouble___add__, METH_VARARGS, "\n"
+		"__add__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"__add__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___radd__", _wrap_AutoDerivativeDouble___radd__, METH_VARARGS, "__radd__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___sub__", _wrap_AutoDerivativeDouble___sub__, METH_VARARGS, "\n"
+		"__sub__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"__sub__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___rsub__", _wrap_AutoDerivativeDouble___rsub__, METH_VARARGS, "__rsub__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___mul__", _wrap_AutoDerivativeDouble___mul__, METH_VARARGS, "\n"
+		"__mul__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"__mul__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___rmul__", _wrap_AutoDerivativeDouble___rmul__, METH_VARARGS, "__rmul__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___div__", _wrap_AutoDerivativeDouble___div__, METH_VARARGS, "\n"
+		"__div__(AutoDerivativeDouble self, AutoDerivativeDouble Y) -> AutoDerivativeDouble\n"
+		"__div__(AutoDerivativeDouble self, double const & Y) -> AutoDerivativeDouble\n"
+		""},
+	 { "AutoDerivativeDouble___rdiv__", _wrap_AutoDerivativeDouble___rdiv__, METH_VARARGS, "__rdiv__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___pow__", _wrap_AutoDerivativeDouble___pow__, METH_VARARGS, "__pow__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "AutoDerivativeDouble___rpow__", _wrap_AutoDerivativeDouble___rpow__, METH_VARARGS, "__rpow__(AutoDerivativeDouble self, double const & X) -> AutoDerivativeDouble"},
+	 { "delete_AutoDerivativeDouble", _wrap_delete_AutoDerivativeDouble, METH_O, "delete_AutoDerivativeDouble(AutoDerivativeDouble self)"},
 	 { "AutoDerivativeDouble_swigregister", AutoDerivativeDouble_swigregister, METH_O, NULL},
 	 { "AutoDerivativeDouble_swiginit", AutoDerivativeDouble_swiginit, METH_VARARGS, NULL},
 	 { "new_AutoDerivativeRefDouble", _wrap_new_AutoDerivativeRefDouble, METH_VARARGS, "\n"
+		"new_AutoDerivativeRefDouble(double & V, BlitzArray_double_1 FORCE_COPY) -> AutoDerivativeRefDouble\n"
 		"\n"
-		"GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V, const blitz::Array< T, 1 > &G)\n"
 		"GeoCal::AutoDerivativeRef::AutoDerivativeRef\n"
 		""},
 	 { "AutoDerivativeRefDouble__v_value", _wrap_AutoDerivativeRefDouble__v_value, METH_O, "\n"
+		"_v_value(AutoDerivativeRefDouble self) -> double\n"
 		"\n"
-		"T GeoCal::AutoDerivativeRef< T >::value() const\n"
 		"GeoCal::AutoDerivativeRef::value\n"
 		""},
 	 { "AutoDerivativeRefDouble__v_gradient", _wrap_AutoDerivativeRefDouble__v_gradient, METH_O, "\n"
+		"_v_gradient(AutoDerivativeRefDouble self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< T, 1 > & GeoCal::AutoDerivativeRef< T >::gradient() const\n"
 		"GeoCal::AutoDerivativeRef::gradient\n"
 		""},
-	 { "AutoDerivativeRefDouble___str__", _wrap_AutoDerivativeRefDouble___str__, METH_O, NULL},
-	 { "delete_AutoDerivativeRefDouble", _wrap_delete_AutoDerivativeRefDouble, METH_O, NULL},
+	 { "AutoDerivativeRefDouble___str__", _wrap_AutoDerivativeRefDouble___str__, METH_O, "__str__(AutoDerivativeRefDouble self) -> std::string"},
+	 { "delete_AutoDerivativeRefDouble", _wrap_delete_AutoDerivativeRefDouble, METH_O, "delete_AutoDerivativeRefDouble(AutoDerivativeRefDouble self)"},
 	 { "AutoDerivativeRefDouble_swigregister", AutoDerivativeRefDouble_swigregister, METH_O, NULL},
 	 { "AutoDerivativeRefDouble_swiginit", AutoDerivativeRefDouble_swiginit, METH_VARARGS, NULL},
-	 { "new_ArrayAutoDerivativeDouble_1", _wrap_new_ArrayAutoDerivativeDouble_1, METH_VARARGS, NULL},
-	 { "ArrayAutoDerivativeDouble_1_data", _wrap_ArrayAutoDerivativeDouble_1_data, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_size", _wrap_ArrayAutoDerivativeDouble_1_size, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_read", _wrap_ArrayAutoDerivativeDouble_1_read, METH_VARARGS, NULL},
-	 { "ArrayAutoDerivativeDouble_1_write", _wrap_ArrayAutoDerivativeDouble_1_write, METH_VARARGS, NULL},
-	 { "ArrayAutoDerivativeDouble_1_datav", _wrap_ArrayAutoDerivativeDouble_1_datav, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape0", _wrap_ArrayAutoDerivativeDouble_1_shape0, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape1", _wrap_ArrayAutoDerivativeDouble_1_shape1, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape2", _wrap_ArrayAutoDerivativeDouble_1_shape2, METH_O, NULL},
-	 { "ArrayAutoDerivativeDouble_1_shape3", _wrap_ArrayAutoDerivativeDouble_1_shape3, METH_O, NULL},
-	 { "delete_ArrayAutoDerivativeDouble_1", _wrap_delete_ArrayAutoDerivativeDouble_1, METH_O, NULL},
+	 { "new_ArrayAutoDerivativeDouble_1", _wrap_new_ArrayAutoDerivativeDouble_1, METH_VARARGS, "\n"
+		"ArrayAutoDerivativeDouble_1(int e1)\n"
+		"ArrayAutoDerivativeDouble_1(int e1, int e2, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >())\n"
+		"ArrayAutoDerivativeDouble_1(int e1, int e2, int e3, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >())\n"
+		"ArrayAutoDerivativeDouble_1(int e1, int e2, int e3, int e4, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >())\n"
+		""},
+	 { "ArrayAutoDerivativeDouble_1_data", _wrap_ArrayAutoDerivativeDouble_1_data, METH_O, "data(ArrayAutoDerivativeDouble_1 self) -> AutoDerivativeDouble"},
+	 { "ArrayAutoDerivativeDouble_1_size", _wrap_ArrayAutoDerivativeDouble_1_size, METH_O, "size(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_read", _wrap_ArrayAutoDerivativeDouble_1_read, METH_VARARGS, "\n"
+		"read(ArrayAutoDerivativeDouble_1 self, int i1) -> AutoDerivativeDouble\n"
+		"read(ArrayAutoDerivativeDouble_1 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"read(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"read(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAutoDerivativeDouble_1_write", _wrap_ArrayAutoDerivativeDouble_1_write, METH_VARARGS, "\n"
+		"write(ArrayAutoDerivativeDouble_1 self, int i1, AutoDerivativeDouble val)\n"
+		"write(ArrayAutoDerivativeDouble_1 self, int i1, int i2, AutoDerivativeDouble val)\n"
+		"write(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3, AutoDerivativeDouble val)\n"
+		"write(ArrayAutoDerivativeDouble_1 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble val)\n"
+		""},
+	 { "ArrayAutoDerivativeDouble_1_datav", _wrap_ArrayAutoDerivativeDouble_1_datav, METH_O, "datav(ArrayAutoDerivativeDouble_1 self) -> void *"},
+	 { "ArrayAutoDerivativeDouble_1_shape0", _wrap_ArrayAutoDerivativeDouble_1_shape0, METH_O, "shape0(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_shape1", _wrap_ArrayAutoDerivativeDouble_1_shape1, METH_O, "shape1(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_shape2", _wrap_ArrayAutoDerivativeDouble_1_shape2, METH_O, "shape2(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "ArrayAutoDerivativeDouble_1_shape3", _wrap_ArrayAutoDerivativeDouble_1_shape3, METH_O, "shape3(ArrayAutoDerivativeDouble_1 self) -> int"},
+	 { "delete_ArrayAutoDerivativeDouble_1", _wrap_delete_ArrayAutoDerivativeDouble_1, METH_O, "delete_ArrayAutoDerivativeDouble_1(ArrayAutoDerivativeDouble_1 self)"},
 	 { "ArrayAutoDerivativeDouble_1_swigregister", ArrayAutoDerivativeDouble_1_swigregister, METH_O, NULL},
 	 { "ArrayAutoDerivativeDouble_1_swiginit", ArrayAutoDerivativeDouble_1_swiginit, METH_VARARGS, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3__size", _wrap_BoostArrayAutoDerivativeDouble_3__size, METH_O, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3___getitem__", _wrap_BoostArrayAutoDerivativeDouble_3___getitem__, METH_VARARGS, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3___setitem__", _wrap_BoostArrayAutoDerivativeDouble_3___setitem__, METH_VARARGS, NULL},
-	 { "BoostArrayAutoDerivativeDouble_3___str__", _wrap_BoostArrayAutoDerivativeDouble_3___str__, METH_O, NULL},
-	 { "new_BoostArrayAutoDerivativeDouble_3", _wrap_new_BoostArrayAutoDerivativeDouble_3, METH_NOARGS, NULL},
-	 { "delete_BoostArrayAutoDerivativeDouble_3", _wrap_delete_BoostArrayAutoDerivativeDouble_3, METH_O, NULL},
+	 { "BoostArrayAutoDerivativeDouble_3__size", _wrap_BoostArrayAutoDerivativeDouble_3__size, METH_O, "_size(BoostArrayAutoDerivativeDouble_3 self) -> int"},
+	 { "BoostArrayAutoDerivativeDouble_3___getitem__", _wrap_BoostArrayAutoDerivativeDouble_3___getitem__, METH_VARARGS, "__getitem__(BoostArrayAutoDerivativeDouble_3 self, int i) -> AutoDerivativeDouble"},
+	 { "BoostArrayAutoDerivativeDouble_3___setitem__", _wrap_BoostArrayAutoDerivativeDouble_3___setitem__, METH_VARARGS, "__setitem__(BoostArrayAutoDerivativeDouble_3 self, int i, AutoDerivativeDouble V)"},
+	 { "BoostArrayAutoDerivativeDouble_3___str__", _wrap_BoostArrayAutoDerivativeDouble_3___str__, METH_O, "__str__(BoostArrayAutoDerivativeDouble_3 self) -> std::string"},
+	 { "new_BoostArrayAutoDerivativeDouble_3", _wrap_new_BoostArrayAutoDerivativeDouble_3, METH_NOARGS, "new_BoostArrayAutoDerivativeDouble_3() -> BoostArrayAutoDerivativeDouble_3"},
+	 { "delete_BoostArrayAutoDerivativeDouble_3", _wrap_delete_BoostArrayAutoDerivativeDouble_3, METH_O, "delete_BoostArrayAutoDerivativeDouble_3(BoostArrayAutoDerivativeDouble_3 self)"},
 	 { "BoostArrayAutoDerivativeDouble_3_swigregister", BoostArrayAutoDerivativeDouble_3_swigregister, METH_O, NULL},
 	 { "BoostArrayAutoDerivativeDouble_3_swiginit", BoostArrayAutoDerivativeDouble_3_swiginit, METH_VARARGS, NULL},
 	 { "sqrt", _wrap_sqrt, METH_O, "\n"
+		"sqrt(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::sqrt(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::sqrt\n"
 		""},
 	 { "log", _wrap_log, METH_O, "\n"
+		"log(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::log(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::log\n"
 		""},
 	 { "log10", _wrap_log10, METH_O, "\n"
+		"log10(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::log10(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::log10\n"
 		""},
 	 { "exp", _wrap_exp, METH_O, "\n"
+		"exp(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::exp(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::exp\n"
 		""},
 	 { "sin", _wrap_sin, METH_O, "\n"
+		"sin(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::sin(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::sin\n"
 		""},
 	 { "asin", _wrap_asin, METH_O, "\n"
+		"asin(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::asin(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::asin\n"
 		""},
 	 { "cos", _wrap_cos, METH_O, "\n"
+		"cos(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::cos(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::cos\n"
 		""},
 	 { "acos", _wrap_acos, METH_O, "\n"
+		"acos(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::acos(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::acos\n"
 		""},
 	 { "tan", _wrap_tan, METH_O, "\n"
+		"tan(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::tan(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::tan\n"
 		""},
 	 { "atan", _wrap_atan, METH_O, "\n"
+		"atan(AutoDerivativeDouble x) -> AutoDerivativeDouble\n"
 		"\n"
-		"GeoCal::AutoDerivative< double > std::atan(const GeoCal::AutoDerivative< double > &x)\n"
 		"std::atan\n"
 		""},
-	 { "vector_auto_derivative_iterator", _wrap_vector_auto_derivative_iterator, METH_O, NULL},
-	 { "vector_auto_derivative___nonzero__", _wrap_vector_auto_derivative___nonzero__, METH_O, NULL},
-	 { "vector_auto_derivative___bool__", _wrap_vector_auto_derivative___bool__, METH_O, NULL},
-	 { "vector_auto_derivative___len__", _wrap_vector_auto_derivative___len__, METH_O, NULL},
-	 { "vector_auto_derivative___getslice__", _wrap_vector_auto_derivative___getslice__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___setslice__", _wrap_vector_auto_derivative___setslice__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___delslice__", _wrap_vector_auto_derivative___delslice__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___delitem__", _wrap_vector_auto_derivative___delitem__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___getitem__", _wrap_vector_auto_derivative___getitem__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative___setitem__", _wrap_vector_auto_derivative___setitem__, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_pop", _wrap_vector_auto_derivative_pop, METH_O, NULL},
-	 { "vector_auto_derivative_append", _wrap_vector_auto_derivative_append, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_empty", _wrap_vector_auto_derivative_empty, METH_O, NULL},
-	 { "vector_auto_derivative_size", _wrap_vector_auto_derivative_size, METH_O, NULL},
-	 { "vector_auto_derivative_swap", _wrap_vector_auto_derivative_swap, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_begin", _wrap_vector_auto_derivative_begin, METH_O, NULL},
-	 { "vector_auto_derivative_end", _wrap_vector_auto_derivative_end, METH_O, NULL},
-	 { "vector_auto_derivative_rbegin", _wrap_vector_auto_derivative_rbegin, METH_O, NULL},
-	 { "vector_auto_derivative_rend", _wrap_vector_auto_derivative_rend, METH_O, NULL},
-	 { "vector_auto_derivative_clear", _wrap_vector_auto_derivative_clear, METH_O, NULL},
-	 { "vector_auto_derivative_get_allocator", _wrap_vector_auto_derivative_get_allocator, METH_O, NULL},
-	 { "vector_auto_derivative_pop_back", _wrap_vector_auto_derivative_pop_back, METH_O, NULL},
-	 { "vector_auto_derivative_erase", _wrap_vector_auto_derivative_erase, METH_VARARGS, NULL},
-	 { "new_vector_auto_derivative", _wrap_new_vector_auto_derivative, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_push_back", _wrap_vector_auto_derivative_push_back, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_front", _wrap_vector_auto_derivative_front, METH_O, NULL},
-	 { "vector_auto_derivative_back", _wrap_vector_auto_derivative_back, METH_O, NULL},
-	 { "vector_auto_derivative_assign", _wrap_vector_auto_derivative_assign, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_resize", _wrap_vector_auto_derivative_resize, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_insert", _wrap_vector_auto_derivative_insert, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_reserve", _wrap_vector_auto_derivative_reserve, METH_VARARGS, NULL},
-	 { "vector_auto_derivative_capacity", _wrap_vector_auto_derivative_capacity, METH_O, NULL},
-	 { "delete_vector_auto_derivative", _wrap_delete_vector_auto_derivative, METH_O, NULL},
+	 { "vector_auto_derivative_iterator", _wrap_vector_auto_derivative_iterator, METH_O, "iterator(vector_auto_derivative self) -> SwigPyIterator"},
+	 { "vector_auto_derivative___nonzero__", _wrap_vector_auto_derivative___nonzero__, METH_O, "__nonzero__(vector_auto_derivative self) -> bool"},
+	 { "vector_auto_derivative___bool__", _wrap_vector_auto_derivative___bool__, METH_O, "__bool__(vector_auto_derivative self) -> bool"},
+	 { "vector_auto_derivative___len__", _wrap_vector_auto_derivative___len__, METH_O, "__len__(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::size_type"},
+	 { "vector_auto_derivative___getslice__", _wrap_vector_auto_derivative___getslice__, METH_VARARGS, "__getslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j) -> vector_auto_derivative"},
+	 { "vector_auto_derivative___setslice__", _wrap_vector_auto_derivative___setslice__, METH_VARARGS, "\n"
+		"__setslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j)\n"
+		"__setslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j, vector_auto_derivative v)\n"
+		""},
+	 { "vector_auto_derivative___delslice__", _wrap_vector_auto_derivative___delslice__, METH_VARARGS, "__delslice__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, std::vector< GeoCal::AutoDerivative< double > >::difference_type j)"},
+	 { "vector_auto_derivative___delitem__", _wrap_vector_auto_derivative___delitem__, METH_VARARGS, "\n"
+		"__delitem__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i)\n"
+		"__delitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "vector_auto_derivative___getitem__", _wrap_vector_auto_derivative___getitem__, METH_VARARGS, "\n"
+		"__getitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice) -> vector_auto_derivative\n"
+		"__getitem__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i) -> AutoDerivativeDouble\n"
+		""},
+	 { "vector_auto_derivative___setitem__", _wrap_vector_auto_derivative___setitem__, METH_VARARGS, "\n"
+		"__setitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice, vector_auto_derivative v)\n"
+		"__setitem__(vector_auto_derivative self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::difference_type i, AutoDerivativeDouble x)\n"
+		""},
+	 { "vector_auto_derivative_pop", _wrap_vector_auto_derivative_pop, METH_O, "pop(vector_auto_derivative self) -> AutoDerivativeDouble"},
+	 { "vector_auto_derivative_append", _wrap_vector_auto_derivative_append, METH_VARARGS, "append(vector_auto_derivative self, AutoDerivativeDouble x)"},
+	 { "vector_auto_derivative_empty", _wrap_vector_auto_derivative_empty, METH_O, "empty(vector_auto_derivative self) -> bool"},
+	 { "vector_auto_derivative_size", _wrap_vector_auto_derivative_size, METH_O, "size(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::size_type"},
+	 { "vector_auto_derivative_swap", _wrap_vector_auto_derivative_swap, METH_VARARGS, "swap(vector_auto_derivative self, vector_auto_derivative v)"},
+	 { "vector_auto_derivative_begin", _wrap_vector_auto_derivative_begin, METH_O, "begin(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::iterator"},
+	 { "vector_auto_derivative_end", _wrap_vector_auto_derivative_end, METH_O, "end(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::iterator"},
+	 { "vector_auto_derivative_rbegin", _wrap_vector_auto_derivative_rbegin, METH_O, "rbegin(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::reverse_iterator"},
+	 { "vector_auto_derivative_rend", _wrap_vector_auto_derivative_rend, METH_O, "rend(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::reverse_iterator"},
+	 { "vector_auto_derivative_clear", _wrap_vector_auto_derivative_clear, METH_O, "clear(vector_auto_derivative self)"},
+	 { "vector_auto_derivative_get_allocator", _wrap_vector_auto_derivative_get_allocator, METH_O, "get_allocator(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::allocator_type"},
+	 { "vector_auto_derivative_pop_back", _wrap_vector_auto_derivative_pop_back, METH_O, "pop_back(vector_auto_derivative self)"},
+	 { "vector_auto_derivative_erase", _wrap_vector_auto_derivative_erase, METH_VARARGS, "\n"
+		"erase(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator pos) -> std::vector< GeoCal::AutoDerivative< double > >::iterator\n"
+		"erase(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator first, std::vector< GeoCal::AutoDerivative< double > >::iterator last) -> std::vector< GeoCal::AutoDerivative< double > >::iterator\n"
+		""},
+	 { "new_vector_auto_derivative", _wrap_new_vector_auto_derivative, METH_VARARGS, "\n"
+		"vector_auto_derivative()\n"
+		"vector_auto_derivative(vector_auto_derivative other)\n"
+		"vector_auto_derivative(std::vector< GeoCal::AutoDerivative< double > >::size_type size)\n"
+		"new_vector_auto_derivative(std::vector< GeoCal::AutoDerivative< double > >::size_type size, AutoDerivativeDouble value) -> vector_auto_derivative\n"
+		""},
+	 { "vector_auto_derivative_push_back", _wrap_vector_auto_derivative_push_back, METH_VARARGS, "push_back(vector_auto_derivative self, AutoDerivativeDouble x)"},
+	 { "vector_auto_derivative_front", _wrap_vector_auto_derivative_front, METH_O, "front(vector_auto_derivative self) -> AutoDerivativeDouble"},
+	 { "vector_auto_derivative_back", _wrap_vector_auto_derivative_back, METH_O, "back(vector_auto_derivative self) -> AutoDerivativeDouble"},
+	 { "vector_auto_derivative_assign", _wrap_vector_auto_derivative_assign, METH_VARARGS, "assign(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type n, AutoDerivativeDouble x)"},
+	 { "vector_auto_derivative_resize", _wrap_vector_auto_derivative_resize, METH_VARARGS, "\n"
+		"resize(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type new_size)\n"
+		"resize(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type new_size, AutoDerivativeDouble x)\n"
+		""},
+	 { "vector_auto_derivative_insert", _wrap_vector_auto_derivative_insert, METH_VARARGS, "\n"
+		"insert(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator pos, AutoDerivativeDouble x) -> std::vector< GeoCal::AutoDerivative< double > >::iterator\n"
+		"insert(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::iterator pos, std::vector< GeoCal::AutoDerivative< double > >::size_type n, AutoDerivativeDouble x)\n"
+		""},
+	 { "vector_auto_derivative_reserve", _wrap_vector_auto_derivative_reserve, METH_VARARGS, "reserve(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type n)"},
+	 { "vector_auto_derivative_capacity", _wrap_vector_auto_derivative_capacity, METH_O, "capacity(vector_auto_derivative self) -> std::vector< GeoCal::AutoDerivative< double > >::size_type"},
+	 { "delete_vector_auto_derivative", _wrap_delete_vector_auto_derivative, METH_O, "delete_vector_auto_derivative(vector_auto_derivative self)"},
 	 { "vector_auto_derivative_swigregister", vector_auto_derivative_swigregister, METH_O, NULL},
 	 { "vector_auto_derivative_swiginit", vector_auto_derivative_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

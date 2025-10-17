@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _iterative_morphological_dilation.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _iterative_morphological_dilation:
 _iterative_morphological_dilation.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _iterative_morphological_dilation.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,41 +140,47 @@ import geocal_swig.generic_object
 class IterativeMorphologicalDilation(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a simple algorithm to fill in missing pixels in an image.
 
-    This looks at all the pixels that are on the "edge" of the image -
-    so pixels that aren't filled in but have at least one neighbor. We
-    then fill in those pixels, and repeat the process iteratively. This is
-    sometimes referred to as the "grass fire" algorithm.
+    This is a simple algorithm to fill in missing pixels in an image.  
 
-    C++ includes: iterative_morphological_dilation.h 
+    This looks at all the pixels that are on the "edge" of the image - so pixels
+    that aren't filled in but have at least one neighbor. We then fill in those
+    pixels, and repeat the process iteratively. This is sometimes referred to as the
+    "grass fire" algorithm.  
+
+    C++ includes: iterative_morphological_dilation.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     C_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_C_ORDER
+    
     RANDOM_ORDER = _iterative_morphological_dilation.IterativeMorphologicalDilation_RANDOM_ORDER
+    
     MOST_NEIGHBORS_FIRST = _iterative_morphological_dilation.IterativeMorphologicalDilation_MOST_NEIGHBORS_FIRST
+    
     FLAT_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_FLAT_WEIGHTED_AVERAGE
+    
     GAUSSIAN_WEIGHTED_AVERAGE = _iterative_morphological_dilation.IterativeMorphologicalDilation_GAUSSIAN_WEIGHTED_AVERAGE
+    
     NEIGBORHOOD_MEDIAN = _iterative_morphological_dilation.IterativeMorphologicalDilation_NEIGBORHOOD_MEDIAN
+    
 
     def __init__(self, *args):
         r"""
+        __init__(IterativeMorphologicalDilation self, BlitzArray_double_2 Image, BlitzArray_bool_2 Mask, int Window_size=3, double Sigma=-1, GeoCal::IterativeMorphologicalDilation::PredictionType Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, GeoCal::IterativeMorphologicalDilation::FrontierFillOrder Frontier_fill_order=RANDOM_ORDER) -> IterativeMorphologicalDilation
 
-        IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >
-        &Mask, int Window_size=3, double Sigma=-1, PredictionType
-        Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder
-        Frontier_fill_order=RANDOM_ORDER)
         GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation
-        Constructor.
-        The Mask is "true" where we don't have Image data and wish to fill
-        in data (i.e., this is the same sense as ImageMask).
+        Constructor.  
 
-        Right now, this just works with blitz arrays. We could extend this to
-        work with RasterImage and ImageMask. But this is often called from
-        python, which interacts better with blitz arrays (which map to numpy
-        arrays in python). 
+        The Mask is "true" where we don't have Image data and wish to fill in data
+        (i.e., this is the same sense as ImageMask).  
+
+        Right now, this just works with blitz arrays. We could extend this to work with
+        RasterImage and ImageMask. But this is often called from python, which interacts
+        better with blitz arrays (which map to numpy arrays in python).  
+
         """
         _iterative_morphological_dilation.IterativeMorphologicalDilation_swiginit(self, _iterative_morphological_dilation.new_IterativeMorphologicalDilation(*args))
     __str__ = _swig_new_instance_method(_iterative_morphological_dilation.IterativeMorphologicalDilation___str__)

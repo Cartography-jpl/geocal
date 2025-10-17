@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_simulated_ray_caster.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_simulated_ray_caster:
 _igc_simulated_ray_caster.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_simulated_ray_caster.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,25 +145,25 @@ import geocal_swig.geocal_exception
 class IgcSimulatedRayCaster(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This is a RasterImage that is a simulated based on an underlying map
-    projected image.
 
-    For each point in the image of an ImageGroundConnection, we calculate
-    where that point appears on the ground and then assign a value to it
-    from the map projected image. This is done using a IgcRayCaster.
+    This is a RasterImage that is a simulated based on an underlying map projected
+    image.  
 
-    This is essentially the inverse of IgcMapProjected, if you replace the
-    image of an ImageGroundConnection with this simulated image and then
-    run IgcMapProjected you'll get the original map projected image back
-    (with changes from being resampled twice). This is similar to the old
-    MisrSim program.
+    For each point in the image of an ImageGroundConnection, we calculate where that
+    point appears on the ground and then assign a value to it from the map projected
+    image. This is done using a IgcRayCaster.  
 
-    This class calculates the data on the fly. Sometimes this is what you
-    want, but if you are going to be using the resulting data a few times,
-    you may want to use a MemoryRasterImage to generate a copy once and
-    keep it in memory.
+    This is essentially the inverse of IgcMapProjected, if you replace the image of
+    an ImageGroundConnection with this simulated image and then run IgcMapProjected
+    you'll get the original map projected image back (with changes from being
+    resampled twice). This is similar to the old MisrSim program.  
 
-    C++ includes: igc_simulated_ray_caster.h 
+    This class calculates the data on the fly. Sometimes this is what you want, but
+    if you are going to be using the resulting data a few times, you may want to use
+    a MemoryRasterImage to generate a copy once and keep it in memory.  
+
+    C++ includes: igc_simulated_ray_caster.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -168,16 +171,14 @@ class IgcSimulatedRayCaster(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Igc, Map_projected_image, Number_integration_step=1, Raycast_resolution=-1, Max_height=10e3, Number_tile_line=-1, Number_tile_sample=-1, Fill_value=0.0):
         r"""
+        __init__(IgcSimulatedRayCaster self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::RasterImage > const & Map_projected_image, int Number_integration_step=1, double Raycast_resolution=-1, double Max_height=10e3, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0) -> IgcSimulatedRayCaster
 
-        IgcSimulatedRayCaster::IgcSimulatedRayCaster(const boost::shared_ptr< ImageGroundConnection > &Igc, const
-        boost::shared_ptr< RasterImage > &Map_projected_image, int
-        Number_integration_step=1, double Raycast_resolution=-1, double
-        Max_height=10e3, int Number_tile_line=-1, int Number_tile_sample=-1,
-        double Fill_value=0.0)
         GeoCal::IgcSimulatedRayCaster::IgcSimulatedRayCaster
-        Constructor.
-        If the Raycast_resolution is passed as a negative number, then we use
-        the resolution of the Map_projected_image. 
+        Constructor.  
+
+        If the Raycast_resolution is passed as a negative number, then we use the
+        resolution of the Map_projected_image.  
+
         """
         _igc_simulated_ray_caster.IgcSimulatedRayCaster_swiginit(self, _igc_simulated_ray_caster.new_IgcSimulatedRayCaster(Igc, Map_projected_image, Number_integration_step, Raycast_resolution, Max_height, Number_tile_line, Number_tile_sample, Fill_value))
     _v_number_line = _swig_new_instance_method(_igc_simulated_ray_caster.IgcSimulatedRayCaster__v_number_line)

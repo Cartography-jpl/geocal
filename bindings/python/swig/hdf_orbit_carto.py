@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _hdf_orbit_carto.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _hdf_orbit_carto:
 _hdf_orbit_carto.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _hdf_orbit_carto.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,10 +144,13 @@ import geocal_swig.observer
 import geocal_swig.with_parameter
 import geocal_swig.look_vector
 class OrbitArray_EciTodBurl_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
+    r"""Proxy of C++ GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame=True, Serialize_data=True):
+        r"""__init__(OrbitArray_EciTodBurl_TimeAcs self, BlitzArray_double_1 Eph_time, BlitzArray_double_2 Eph_pos, BlitzArray_double_2 Eph_vel, BlitzArray_double_1 Att_time, BlitzArray_double_2 Att_quat, bool Att_from_sc_to_ref_frame=True, bool Serialize_data=True) -> OrbitArray_EciTodBurl_TimeAcs"""
         _hdf_orbit_carto.OrbitArray_EciTodBurl_TimeAcs_swiginit(self, _hdf_orbit_carto.new_OrbitArray_EciTodBurl_TimeAcs(Eph_time, Eph_pos, Eph_vel, Att_time, Att_quat, Att_from_sc_to_ref_frame, Serialize_data))
 
     def __reduce__(self):
@@ -159,10 +165,13 @@ class OrbitArray_EciTodBurl_TimeAcs(geocal_swig.orbit_quaternion_list.OrbitQuate
 # Register OrbitArray_EciTodBurl_TimeAcs in _hdf_orbit_carto:
 _hdf_orbit_carto.OrbitArray_EciTodBurl_TimeAcs_swigregister(OrbitArray_EciTodBurl_TimeAcs)
 class HdfOrbit_EciTodBurl_TimeAcs(OrbitArray_EciTodBurl_TimeAcs):
+    r"""Proxy of C++ GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
+        r"""__init__(HdfOrbit_EciTodBurl_TimeAcs self, std::string const & Fname, std::string const & Base_group="Orbit", std::string const & Eph_time="/Ephemeris/Time", std::string const & Eph_pos="/Ephemeris/Position", std::string const & Eph_vel="/Ephemeris/Velocity", std::string const & Att_time="/Attitude/Time", std::string const & Att_quat="/Attitude/Quaternion", bool Att_from_sc_to_ref_frame=True) -> HdfOrbit_EciTodBurl_TimeAcs"""
         _hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs_swiginit(self, _hdf_orbit_carto.new_HdfOrbit_EciTodBurl_TimeAcs(*args))
     _v_file_name = _swig_new_instance_method(_hdf_orbit_carto.HdfOrbit_EciTodBurl_TimeAcs__v_file_name)
 

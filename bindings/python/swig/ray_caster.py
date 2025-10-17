@@ -90,6 +90,7 @@ _ray_caster.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _ray_caster.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _ray_caster.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -139,23 +140,24 @@ import geocal_swig.geocal_exception
 class RayCaster(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class is used to do ray casting, determining what in instrument
-    is looking at on the ground (e.g., a camera at a particular pose).
 
-    This includes the calculation of obscuration.
+    This class is used to do ray casting, determining what in instrument is looking
+    at on the ground (e.g., a camera at a particular pose).  
 
-    This class chooses what order it is going to go through the various
-    camera positions. You can step to the next position, getting the
-    ground locations for that position, by calling "next_position". All
-    positions have been stepped through from start_position() to
-    start_position() + number_position() - 1 (in whatever order the class
-    wants) when last_position() returns true.The current position can be
-    queried by "current_position". The mapping of position to something
-    like image line depends on the particular derived class used, so for
-    example a push broom camera might have the position corresponding to
-    line number.
+    This includes the calculation of obscuration.  
 
-    C++ includes: ray_caster.h 
+    This class chooses what order it is going to go through the various camera
+    positions. You can step to the next position, getting the ground locations for
+    that position, by calling "next_position". All positions have been stepped
+    through from start_position() to start_position() + number_position() - 1 (in
+    whatever order the class wants) when last_position() returns true.The current
+    position can be queried by "current_position". The mapping of position to
+    something like image line depends on the particular derived class used, so for
+    example a push broom camera might have the position corresponding to line
+    number.  
+
+    C++ includes: ray_caster.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

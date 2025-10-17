@@ -90,6 +90,7 @@ _auto_derivative.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _auto_derivative.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _auto_derivative.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,38 +138,36 @@ import geocal_swig.generic_object
 class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     r"""
 
+
     There are a number of tools that can be used to do "Automatic
-    Differentiation" (see for
-    examplehttp://www.autodiff.org/?module=Tools).
+    Differentiation" (see for example http://www.autodiff.org/?module=Tools).  
 
-    We examined several of the tools, and while these packages have a
-    number of advantages (in particular, the ability to run the
-    calculation either forward or backwards) for our particular needs a
-    simpler forward only calculation was selected. This uses a number of
-    type T, along with the first order gradient with respect to a set of
-    independent variables. We then overload the standard operations such
-    as "+" and "*" to apply the chain rule, to propagate the
-    derivatives forward.
+    We examined several of the tools, and while these packages have a number of
+    advantages (in particular, the ability to run the calculation either forward or
+    backwards) for our particular needs a simpler forward only calculation was
+    selected. This uses a number of type T, along with the first order gradient with
+    respect to a set of independent variables. We then overload the standard
+    operations such as "+" and "*" to apply the chain rule, to propagate the
+    derivatives forward.  
 
-    This is a newer field, so there doesn't seem to be standard
-    terminology. In "Scientific and Engineering C++" by John Barton and
-    Lee Nackman, this is call "Rall numbers" after a paper by L.B. Rall.
-    On wikipedia athttp://en.wikipedia.org/wiki/Automatic_differentiation
-    this is called "Automatic differentiation using dual numbers".
+    This is a newer field, so there doesn't seem to be standard terminology. In
+    "Scientific and Engineering C++" by John Barton and Lee Nackman, this is call
+    "Rall numbers" after a paper by L.B. Rall. On wikipedia at
+    http://en.wikipedia.org/wiki/Automatic_differentiation this is called
+    "Automatic differentiation using dual numbers".  
 
-    As the existing automatic differentiation packages mature, we may want
-    to revisit this choice and replace this class with a fuller library.
+    As the existing automatic differentiation packages mature, we may want to
+    revisit this choice and replace this class with a fuller library.  
 
-    This class is not as efficient as hand coding derivative calculation,
-    although it is much easier to use. If profiling shows a particular
-    bottle neck, you might want to hand code derivatives for that specific
-    location, which can then be placed into a AutoDerivative for use
-    elsewhere.
+    This class is not as efficient as hand coding derivative calculation, although
+    it is much easier to use. If profiling shows a particular bottle neck, you might
+    want to hand code derivatives for that specific location, which can then be
+    placed into a AutoDerivative for use elsewhere.  
 
-    See also ArrayAd which work with this class for Arrays of
-    AutoDerivative.
+    See also ArrayAd which work with this class for Arrays of AutoDerivative.  
 
-    C++ includes: auto_derivative.h 
+    C++ includes: auto_derivative.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -176,12 +175,18 @@ class AutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(AutoDerivativeDouble self) -> AutoDerivativeDouble
+        __init__(AutoDerivativeDouble self, double const & Val, BlitzArray_double_1 FORCE_COPY) -> AutoDerivativeDouble
+        __init__(AutoDerivativeDouble self, double const & Val, int i_th, int nvars) -> AutoDerivativeDouble
+        __init__(AutoDerivativeDouble self, double const & Val) -> AutoDerivativeDouble
+        __init__(AutoDerivativeDouble self, AutoDerivativeDouble D) -> AutoDerivativeDouble
+        __init__(AutoDerivativeDouble self, AutoDerivativeRefDouble V) -> AutoDerivativeDouble
 
-        GeoCal::AutoDerivative< T >::AutoDerivative(const T &Val, int i_th, int nvars)
         GeoCal::AutoDerivative::AutoDerivative
-        Constructor for a value of the i_th independent variable (0 based).
-        We create a gradient that is all 0, except for "1" in the i_th
-        location. 
+        Constructor for a value of the i_th independent variable (0 based).  
+
+        We create a gradient that is all 0, except for "1" in the i_th location.  
+
         """
         _auto_derivative.AutoDerivativeDouble_swiginit(self, _auto_derivative.new_AutoDerivativeDouble(*args))
     _v_number_variable = _swig_new_instance_method(_auto_derivative.AutoDerivativeDouble__v_number_variable)
@@ -254,10 +259,12 @@ _auto_derivative.AutoDerivativeDouble_swigregister(AutoDerivativeDouble)
 class AutoDerivativeRefDouble(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Helper class that gives us a reference that we can assign a
-    AutoDerivative to and write into the correct space in a ArrayAd.
 
-    C++ includes: auto_derivative.h 
+    Helper class that gives us a reference that we can assign a AutoDerivative to
+    and write into the correct space in a ArrayAd.  
+
+    C++ includes: auto_derivative.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -265,8 +272,8 @@ class AutoDerivativeRefDouble(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, V, FORCE_COPY):
         r"""
+        __init__(AutoDerivativeRefDouble self, double & V, BlitzArray_double_1 FORCE_COPY) -> AutoDerivativeRefDouble
 
-        GeoCal::AutoDerivativeRef< T >::AutoDerivativeRef(T &V, const blitz::Array< T, 1 > &G)
         GeoCal::AutoDerivativeRef::AutoDerivativeRef
         """
         _auto_derivative.AutoDerivativeRefDouble_swiginit(self, _auto_derivative.new_AutoDerivativeRefDouble(V, FORCE_COPY))
@@ -288,10 +295,18 @@ class AutoDerivativeRefDouble(geocal_swig.generic_object.GenericObject):
 # Register AutoDerivativeRefDouble in _auto_derivative:
 _auto_derivative.AutoDerivativeRefDouble_swigregister(AutoDerivativeRefDouble)
 class ArrayAutoDerivativeDouble_1(object):
+    r"""Proxy of C++ blitz::Array< GeoCal::AutoDerivative< double >,1 > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
+        r"""
+        __init__(ArrayAutoDerivativeDouble_1 self, int e1) -> ArrayAutoDerivativeDouble_1
+        __init__(ArrayAutoDerivativeDouble_1 self, int e1, int e2, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >()) -> ArrayAutoDerivativeDouble_1
+        __init__(ArrayAutoDerivativeDouble_1 self, int e1, int e2, int e3, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >()) -> ArrayAutoDerivativeDouble_1
+        __init__(ArrayAutoDerivativeDouble_1 self, int e1, int e2, int e3, int e4, blitz::GeneralArrayStorage< 1 > storage=blitz::FortranArray< 1 >()) -> ArrayAutoDerivativeDouble_1
+        """
         _auto_derivative.ArrayAutoDerivativeDouble_1_swiginit(self, _auto_derivative.new_ArrayAutoDerivativeDouble_1(*args))
     data = _swig_new_instance_method(_auto_derivative.ArrayAutoDerivativeDouble_1_data)
     size = _swig_new_instance_method(_auto_derivative.ArrayAutoDerivativeDouble_1_size)
@@ -307,6 +322,8 @@ class ArrayAutoDerivativeDouble_1(object):
 # Register ArrayAutoDerivativeDouble_1 in _auto_derivative:
 _auto_derivative.ArrayAutoDerivativeDouble_1_swigregister(ArrayAutoDerivativeDouble_1)
 class BoostArrayAutoDerivativeDouble_3(object):
+    r"""Proxy of C++ boost::array< GeoCal::AutoDerivative< double >,3 > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     _size = _swig_new_instance_method(_auto_derivative.BoostArrayAutoDerivativeDouble_3__size)
@@ -337,6 +354,7 @@ class BoostArrayAutoDerivativeDouble_3(object):
     __str__ = _swig_new_instance_method(_auto_derivative.BoostArrayAutoDerivativeDouble_3___str__)
 
     def __init__(self):
+        r"""__init__(BoostArrayAutoDerivativeDouble_3 self) -> BoostArrayAutoDerivativeDouble_3"""
         _auto_derivative.BoostArrayAutoDerivativeDouble_3_swiginit(self, _auto_derivative.new_BoostArrayAutoDerivativeDouble_3())
     __swig_destroy__ = _auto_derivative.delete_BoostArrayAutoDerivativeDouble_3
 
@@ -353,6 +371,8 @@ acos = _auto_derivative.acos
 tan = _auto_derivative.tan
 atan = _auto_derivative.atan
 class vector_auto_derivative(object):
+    r"""Proxy of C++ std::vector< GeoCal::AutoDerivative< double > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_auto_derivative.vector_auto_derivative_iterator)
@@ -382,6 +402,12 @@ class vector_auto_derivative(object):
     erase = _swig_new_instance_method(_auto_derivative.vector_auto_derivative_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(vector_auto_derivative self) -> vector_auto_derivative
+        __init__(vector_auto_derivative self, vector_auto_derivative other) -> vector_auto_derivative
+        __init__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type size) -> vector_auto_derivative
+        __init__(vector_auto_derivative self, std::vector< GeoCal::AutoDerivative< double > >::size_type size, AutoDerivativeDouble value) -> vector_auto_derivative
+        """
         _auto_derivative.vector_auto_derivative_swiginit(self, _auto_derivative.new_vector_auto_derivative(*args))
     push_back = _swig_new_instance_method(_auto_derivative.vector_auto_derivative_push_back)
     front = _swig_new_instance_method(_auto_derivative.vector_auto_derivative_front)

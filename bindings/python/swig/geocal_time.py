@@ -90,6 +90,7 @@ _geocal_time.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _geocal_time.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _geocal_time.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -146,6 +147,7 @@ def _new_time_with_derivative(pgs):
 
 class Time(geocal_swig.generic_object.GenericObject):
     r"""
+
 
     C++ includes: geocal_time.h
 
@@ -225,6 +227,7 @@ class Time(geocal_swig.generic_object.GenericObject):
 
 
     def __init__(self):
+        r"""__init__(Time self) -> Time"""
         _geocal_time.Time_swiginit(self, _geocal_time.new_Time())
     __swig_destroy__ = _geocal_time.delete_Time
 
@@ -237,6 +240,7 @@ Time.max_valid_time = _geocal_time.cvar.Time_max_valid_time
 class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
     r"""
 
+
     C++ includes: geocal_time.h
 
     """
@@ -246,8 +250,9 @@ class TimeWithDerivative(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(TimeWithDerivative self, Time T) -> TimeWithDerivative
+        __init__(TimeWithDerivative self) -> TimeWithDerivative
 
-        GeoCal::TimeWithDerivative::TimeWithDerivative(const Time &T)
         GeoCal::TimeWithDerivative::TimeWithDerivative
         """
         _geocal_time.TimeWithDerivative_swiginit(self, _geocal_time.new_TimeWithDerivative(*args))

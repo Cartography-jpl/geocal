@@ -6677,26 +6677,24 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RollingShutterConstantTimeTable", _wrap_new_RollingShutterConstantTimeTable, METH_VARARGS, "\n"
+		"RollingShutterConstantTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
 		"\n"
-		"GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
-		"GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTab\n"
-		"le\n"
+		"GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTable\n"
 		""},
 	 { "RollingShutterConstantTimeTable_image_coordinate", _wrap_RollingShutterConstantTimeTable_image_coordinate, METH_VARARGS, "\n"
+		"RollingShutterConstantTimeTable_image_coordinate(RollingShutterConstantTimeTable self, Time T, FrameCoordinate F) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::RollingShutterConstantTimeTable::image_coordinate(Time T, const FrameCoordinate &F) const\n"
 		"GeoCal::RollingShutterConstantTimeTable::image_coordinate\n"
 		""},
 	 { "RollingShutterConstantTimeTable__v_time_space", _wrap_RollingShutterConstantTimeTable__v_time_space, METH_O, "\n"
+		"RollingShutterConstantTimeTable__v_time_space(RollingShutterConstantTimeTable self) -> double\n"
 		"\n"
-		"double GeoCal::RollingShutterConstantTimeTable::time_space() const\n"
 		"GeoCal::RollingShutterConstantTimeTable::time_space\n"
 		""},
 	 { "delete_RollingShutterConstantTimeTable", _wrap_delete_RollingShutterConstantTimeTable, METH_O, "\n"
+		"delete_RollingShutterConstantTimeTable(RollingShutterConstantTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::RollingShutterConstantTimeTable::~RollingShutterConstantTimeTable()\n"
-		"GeoCal::RollingShutterConstantTimeTable::~RollingShutterConstantTimeTa\n"
-		"ble\n"
+		"GeoCal::RollingShutterConstantTimeTable::~RollingShutterConstantTimeTable\n"
 		""},
 	 { "RollingShutterConstantTimeTable_swigregister", RollingShutterConstantTimeTable_swigregister, METH_O, NULL},
 	 { "RollingShutterConstantTimeTable_swiginit", RollingShutterConstantTimeTable_swiginit, METH_VARARGS, NULL},
@@ -6725,26 +6723,24 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RollingShutterConstantTimeTable", _wrap_new_RollingShutterConstantTimeTable, METH_VARARGS, "\n"
+		"RollingShutterConstantTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
 		"\n"
-		"GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTable(Time Min_time, Time Max_time, double Time_space=40.8e-3)\n"
-		"GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTab\n"
-		"le\n"
+		"GeoCal::RollingShutterConstantTimeTable::RollingShutterConstantTimeTable\n"
 		""},
 	 { "RollingShutterConstantTimeTable_image_coordinate", _wrap_RollingShutterConstantTimeTable_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(RollingShutterConstantTimeTable self, Time T, FrameCoordinate F) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::RollingShutterConstantTimeTable::image_coordinate(Time T, const FrameCoordinate &F) const\n"
 		"GeoCal::RollingShutterConstantTimeTable::image_coordinate\n"
 		""},
 	 { "RollingShutterConstantTimeTable__v_time_space", _wrap_RollingShutterConstantTimeTable__v_time_space, METH_O, "\n"
+		"_v_time_space(RollingShutterConstantTimeTable self) -> double\n"
 		"\n"
-		"double GeoCal::RollingShutterConstantTimeTable::time_space() const\n"
 		"GeoCal::RollingShutterConstantTimeTable::time_space\n"
 		""},
 	 { "delete_RollingShutterConstantTimeTable", _wrap_delete_RollingShutterConstantTimeTable, METH_O, "\n"
+		"delete_RollingShutterConstantTimeTable(RollingShutterConstantTimeTable self)\n"
 		"\n"
-		"virtual GeoCal::RollingShutterConstantTimeTable::~RollingShutterConstantTimeTable()\n"
-		"GeoCal::RollingShutterConstantTimeTable::~RollingShutterConstantTimeTa\n"
-		"ble\n"
+		"GeoCal::RollingShutterConstantTimeTable::~RollingShutterConstantTimeTable\n"
 		""},
 	 { "RollingShutterConstantTimeTable_swigregister", RollingShutterConstantTimeTable_swigregister, METH_O, NULL},
 	 { "RollingShutterConstantTimeTable_swiginit", RollingShutterConstantTimeTable_swiginit, METH_VARARGS, NULL},

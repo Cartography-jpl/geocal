@@ -7559,105 +7559,106 @@ SWIGINTERN PyObject *LsmMatcher_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObjec
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_LsmMatcher", _wrap_new_LsmMatcher, METH_VARARGS, "\n"
+		"LsmMatcher(int Number_line=21, int Number_sample=21, int Border_size=3, double Precision_goal=0.0625, double Precision_requirement=0.2, double Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1)\n"
 		"\n"
-		"BZ_END_STENCIL LsmMatcher::LsmMatcher(int Number_line=21, int Number_sample=21, int Border_size=3, double\n"
-		"Precision_goal=0.0625, double Precision_requirement=0.2, double\n"
-		"Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double\n"
-		"Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1)\n"
 		"GeoCal::LsmMatcher::LsmMatcher\n"
-		"Constructor.\n"
-		"Default values were tuned for MISR imagery, but work well for other\n"
-		"imagery. \n"
+		"Constructor.  \n"
+		"\n"
+		"Default values were tuned for MISR imagery, but work well for other imagery.  \n"
+		"\n"
 		""},
 	 { "LsmMatcher__v_number_line", _wrap_LsmMatcher__v_number_line, METH_O, "\n"
+		"LsmMatcher__v_number_line(LsmMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::LsmMatcher::number_line() const\n"
 		"GeoCal::LsmMatcher::number_line\n"
-		"Number of lines in target and template.\n"
+		"Number of lines in target and template.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_number_sample", _wrap_LsmMatcher__v_number_sample, METH_O, "\n"
+		"LsmMatcher__v_number_sample(LsmMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::LsmMatcher::number_sample() const\n"
 		"GeoCal::LsmMatcher::number_sample\n"
-		"Number of samples in target and template.\n"
+		"Number of samples in target and template.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_border_size", _wrap_LsmMatcher__v_border_size, METH_O, "\n"
+		"LsmMatcher__v_border_size(LsmMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::LsmMatcher::border_size() const\n"
 		"GeoCal::LsmMatcher::border_size\n"
-		"Border added to target to allow for template/target shift.\n"
+		"Border added to target to allow for template/target shift.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_goal", _wrap_LsmMatcher__v_precision_goal, METH_O, "\n"
+		"LsmMatcher__v_precision_goal(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_goal() const\n"
 		"GeoCal::LsmMatcher::precision_goal\n"
-		"Goal in doing solving LSM.\n"
+		"Goal in doing solving LSM.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_requirement", _wrap_LsmMatcher__v_precision_requirement, METH_O, "\n"
+		"LsmMatcher__v_precision_requirement(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_requirement() const\n"
 		"GeoCal::LsmMatcher::precision_requirement\n"
-		"Requirement for LSM success.\n"
+		"Requirement for LSM success.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_max_sigma", _wrap_LsmMatcher__v_max_sigma, METH_O, "\n"
+		"LsmMatcher__v_max_sigma(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::max_sigma() const\n"
 		"GeoCal::LsmMatcher::max_sigma\n"
-		"If at any stagee in solving LSM uncertainty is greater than this\n"
-		"value, then give up doing image matching.\n"
+		"If at any stagee in solving LSM uncertainty is greater than this value, then\n"
+		"give up doing image matching.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_rad_uncertainty_factor", _wrap_LsmMatcher__v_rad_uncertainty_factor, METH_O, "\n"
+		"LsmMatcher__v_rad_uncertainty_factor(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::rad_uncertainty_factor() const\n"
 		"GeoCal::LsmMatcher::rad_uncertainty_factor\n"
-		"This factor is used to scale the maximum allowable radiometric\n"
-		"uncertainty while solving LSM.\n"
+		"This factor is used to scale the maximum allowable radiometric uncertainty while\n"
+		"solving LSM.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_min_geo_goal", _wrap_LsmMatcher__v_precision_min_geo_goal, METH_O, "\n"
+		"LsmMatcher__v_precision_min_geo_goal(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_min_geo_goal() const\n"
 		"GeoCal::LsmMatcher::precision_min_geo_goal\n"
-		"Minimum geometric goal for LSM to success.\n"
+		"Minimum geometric goal for LSM to success.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_min_rad_goal", _wrap_LsmMatcher__v_precision_min_rad_goal, METH_O, "\n"
+		"LsmMatcher__v_precision_min_rad_goal(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_min_rad_goal() const\n"
 		"GeoCal::LsmMatcher::precision_min_rad_goal\n"
-		"Minimum radiometric goal for LSM to success.\n"
+		"Minimum radiometric goal for LSM to success.  \n"
 		"\n"
 		""},
 	 { "delete_LsmMatcher", _wrap_delete_LsmMatcher, METH_O, "\n"
+		"delete_LsmMatcher(LsmMatcher self)\n"
 		"\n"
-		"virtual GeoCal::LsmMatcher::~LsmMatcher()\n"
 		"GeoCal::LsmMatcher::~LsmMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher_swigregister", LsmMatcher_swigregister, METH_O, NULL},
@@ -7668,105 +7669,106 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_LsmMatcher", _wrap_new_LsmMatcher, METH_VARARGS, "\n"
+		"LsmMatcher(int Number_line=21, int Number_sample=21, int Border_size=3, double Precision_goal=0.0625, double Precision_requirement=0.2, double Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1)\n"
 		"\n"
-		"BZ_END_STENCIL LsmMatcher::LsmMatcher(int Number_line=21, int Number_sample=21, int Border_size=3, double\n"
-		"Precision_goal=0.0625, double Precision_requirement=0.2, double\n"
-		"Max_sigma=0.5, double Rad_uncertainty_factor=2.0, double\n"
-		"Precision_min_geo_goal=0.15, double Precision_min_rad_goal=1)\n"
 		"GeoCal::LsmMatcher::LsmMatcher\n"
-		"Constructor.\n"
-		"Default values were tuned for MISR imagery, but work well for other\n"
-		"imagery. \n"
+		"Constructor.  \n"
+		"\n"
+		"Default values were tuned for MISR imagery, but work well for other imagery.  \n"
+		"\n"
 		""},
 	 { "LsmMatcher__v_number_line", _wrap_LsmMatcher__v_number_line, METH_O, "\n"
+		"_v_number_line(LsmMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::LsmMatcher::number_line() const\n"
 		"GeoCal::LsmMatcher::number_line\n"
-		"Number of lines in target and template.\n"
+		"Number of lines in target and template.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_number_sample", _wrap_LsmMatcher__v_number_sample, METH_O, "\n"
+		"_v_number_sample(LsmMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::LsmMatcher::number_sample() const\n"
 		"GeoCal::LsmMatcher::number_sample\n"
-		"Number of samples in target and template.\n"
+		"Number of samples in target and template.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_border_size", _wrap_LsmMatcher__v_border_size, METH_O, "\n"
+		"_v_border_size(LsmMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::LsmMatcher::border_size() const\n"
 		"GeoCal::LsmMatcher::border_size\n"
-		"Border added to target to allow for template/target shift.\n"
+		"Border added to target to allow for template/target shift.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_goal", _wrap_LsmMatcher__v_precision_goal, METH_O, "\n"
+		"_v_precision_goal(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_goal() const\n"
 		"GeoCal::LsmMatcher::precision_goal\n"
-		"Goal in doing solving LSM.\n"
+		"Goal in doing solving LSM.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_requirement", _wrap_LsmMatcher__v_precision_requirement, METH_O, "\n"
+		"_v_precision_requirement(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_requirement() const\n"
 		"GeoCal::LsmMatcher::precision_requirement\n"
-		"Requirement for LSM success.\n"
+		"Requirement for LSM success.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_max_sigma", _wrap_LsmMatcher__v_max_sigma, METH_O, "\n"
+		"_v_max_sigma(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::max_sigma() const\n"
 		"GeoCal::LsmMatcher::max_sigma\n"
-		"If at any stagee in solving LSM uncertainty is greater than this\n"
-		"value, then give up doing image matching.\n"
+		"If at any stagee in solving LSM uncertainty is greater than this value, then\n"
+		"give up doing image matching.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_rad_uncertainty_factor", _wrap_LsmMatcher__v_rad_uncertainty_factor, METH_O, "\n"
+		"_v_rad_uncertainty_factor(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::rad_uncertainty_factor() const\n"
 		"GeoCal::LsmMatcher::rad_uncertainty_factor\n"
-		"This factor is used to scale the maximum allowable radiometric\n"
-		"uncertainty while solving LSM.\n"
+		"This factor is used to scale the maximum allowable radiometric uncertainty while\n"
+		"solving LSM.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_min_geo_goal", _wrap_LsmMatcher__v_precision_min_geo_goal, METH_O, "\n"
+		"_v_precision_min_geo_goal(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_min_geo_goal() const\n"
 		"GeoCal::LsmMatcher::precision_min_geo_goal\n"
-		"Minimum geometric goal for LSM to success.\n"
+		"Minimum geometric goal for LSM to success.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher__v_precision_min_rad_goal", _wrap_LsmMatcher__v_precision_min_rad_goal, METH_O, "\n"
+		"_v_precision_min_rad_goal(LsmMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::LsmMatcher::precision_min_rad_goal() const\n"
 		"GeoCal::LsmMatcher::precision_min_rad_goal\n"
-		"Minimum radiometric goal for LSM to success.\n"
+		"Minimum radiometric goal for LSM to success.  \n"
 		"\n"
 		""},
 	 { "delete_LsmMatcher", _wrap_delete_LsmMatcher, METH_O, "\n"
+		"delete_LsmMatcher(LsmMatcher self)\n"
 		"\n"
-		"virtual GeoCal::LsmMatcher::~LsmMatcher()\n"
 		"GeoCal::LsmMatcher::~LsmMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "LsmMatcher_swigregister", LsmMatcher_swigregister, METH_O, NULL},

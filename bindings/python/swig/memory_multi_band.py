@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _memory_multi_band.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _memory_multi_band:
 _memory_multi_band.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _memory_multi_band.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,10 +144,11 @@ import geocal_swig.geocal_exception
 class MemoryMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMultiBandVariable):
     r"""
 
-    This reads a RasterImageMultiBand into memory, and allow access that
-    memory.
 
-    C++ includes: memory_multi_band.h 
+    This reads a RasterImageMultiBand into memory, and allow access that memory.  
+
+    C++ includes: memory_multi_band.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,13 +156,15 @@ class MemoryMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMu
 
     def __init__(self, R):
         r"""
+        __init__(MemoryMultiBand self, RasterImageMultiBand R) -> MemoryMultiBand
 
-        MemoryMultiBand::MemoryMultiBand(const RasterImageMultiBand &R)
         GeoCal::MemoryMultiBand::MemoryMultiBand
-        Read all of the data from the given RasterImageBand into memory, and
-        provide access to it.
-        Note that we require that all the bands have the same number of lines
-        and samples. 
+        Read all of the data from the given RasterImageBand into memory, and provide
+        access to it.  
+
+        Note that we require that all the bands have the same number of lines and
+        samples.  
+
         """
         _memory_multi_band.MemoryMultiBand_swiginit(self, _memory_multi_band.new_MemoryMultiBand(R))
     _v_data = _swig_new_instance_method(_memory_multi_band.MemoryMultiBand__v_data)

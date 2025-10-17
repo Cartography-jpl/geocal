@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_direct_covariance.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_direct_covariance:
 _rsm_direct_covariance.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_direct_covariance.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,10 +140,12 @@ import geocal_swig.generic_object
 class RsmDirectCovariance(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides additional information about the Rsm, it is what is used
-    to populate.
 
-    C++ includes: rsm_direct_covariance.h 
+    This provides additional information about the Rsm, it is what is used to
+    populate.  
+
+    C++ includes: rsm_direct_covariance.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

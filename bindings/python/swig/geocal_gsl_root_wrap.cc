@@ -7674,73 +7674,73 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "gsl_root", _wrap_gsl_root, METH_VARARGS, "\n"
+		"gsl_root(VFunctor F, BlitzArray_double_1 Initial, double Residual=1e-6) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::gsl_root(const VFunctorWithDerivative &F, const blitz::Array< double, 1 >\n"
-		"&Initial, double Residual=1e-8)\n"
 		"GeoCal::gsl_root\n"
-		"This finds the root of a Vector -> Vector function, with a Jacobian\n"
-		"available.\n"
-		"The size of the input and output Vector should be the same (i.e., same\n"
-		"number of equations as we have variables).\n"
+		"This finds the root of a Vector -> Vector function, with a Jacobian available.  \n"
 		"\n"
-		"If we can't find a solution, we throw a ConvergenceFailure exception.\n"
+		"The size of the input and output Vector should be the same (i.e., same number of\n"
+		"equations as we have variables).  \n"
+		"\n"
+		"If we can't find a solution, we throw a ConvergenceFailure exception.  \n"
 		"\n"
 		""},
 	 { "root", _wrap_root, METH_VARARGS, "\n"
+		"root(DFunctor F, double Xmin, double Xmax, double Eps=1e-6, double Eps_abs=1e-8) -> double\n"
 		"\n"
-		"double GeoCal::root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-8, double\n"
-		"Eps_abs=1e-10)\n"
 		"GeoCal::root\n"
 		""},
 	 { "root_with_derivative", _wrap_root_with_derivative, METH_VARARGS, "\n"
+		"root_with_derivative(DFunctorWithDerivative F, double Xmin, double Xmax, double Eps=1e-6, double Eps_abs=1e-8) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Eps=1e-8, double Eps_abs=1e-10)\n"
 		"GeoCal::root_with_derivative\n"
-		"This finds the root of a function, and propagates the derivative of\n"
-		"the solution with respect to any parameters in the function (i.e., we aren't talking about the derivative wrt X here).\n"
+		"This finds the root of a function, and propagates the derivative of the solution\n"
+		"with respect to any parameters in the function (i.e., we *aren't* talking about\n"
+		"the derivative wrt X here).  \n"
 		"\n"
 		""},
 	 { "root_list", _wrap_root_list, METH_VARARGS, "\n"
+		"root_list(DFunctor F, double Xmin, double Xmax, double Root_minimum_spacing, double Residual=1e-6) -> vector_double\n"
 		"\n"
-		"std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Root_minimum_spacing, double Eps=1e-8)\n"
 		"GeoCal::root_list\n"
-		"This will find a (possible empty) list of roots of a function, where\n"
-		"the roots have a seperation of at least the supplied minimum\n"
-		"separation.\n"
-		"This function is useful for finding roots when you don't know how many\n"
-		"solutions there are in the given range. It will find all roots,\n"
-		"provided that they have a seperation larger then Root_minimum_spacing,\n"
-		"and return the list of solutions. This list is ordered from smallest\n"
-		"to greatest.\n"
+		"This will find a (possible empty) list of roots of a function, where the roots\n"
+		"have a seperation of at least the supplied minimum separation.  \n"
+		"\n"
+		"This function is useful for finding roots when you don't know how many solutions\n"
+		"there are in the given range. It will find all roots, provided that they have a\n"
+		"seperation larger then Root_minimum_spacing, and return the list of solutions.\n"
+		"This list is ordered from smallest to greatest.  \n"
 		"\n"
 		"This function works by sampling the Functor with a spacing of\n"
-		"Root_minimum_spacing. If the function changes sign between one spacing\n"
-		"and the next, the routine root is called between those spacings and\n"
-		"the results is added to the root list.\n"
+		"Root_minimum_spacing. If the function changes sign between one spacing and the\n"
+		"next, the routine root is called between those spacings and the results is added\n"
+		"to the root list.  \n"
 		"\n"
-		"This will not finds roots that are closer together then the supplied\n"
-		"minimum spacing. (Limitation) \n"
+		"This will not finds roots that are closer together then the supplied minimum\n"
+		"spacing. (Limitation)  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -7748,73 +7748,73 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "gsl_root", _wrap_gsl_root, METH_VARARGS, "\n"
+		"gsl_root(VFunctor F, BlitzArray_double_1 Initial, double Residual=1e-6) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::gsl_root(const VFunctorWithDerivative &F, const blitz::Array< double, 1 >\n"
-		"&Initial, double Residual=1e-8)\n"
 		"GeoCal::gsl_root\n"
-		"This finds the root of a Vector -> Vector function, with a Jacobian\n"
-		"available.\n"
-		"The size of the input and output Vector should be the same (i.e., same\n"
-		"number of equations as we have variables).\n"
+		"This finds the root of a Vector -> Vector function, with a Jacobian available.  \n"
 		"\n"
-		"If we can't find a solution, we throw a ConvergenceFailure exception.\n"
+		"The size of the input and output Vector should be the same (i.e., same number of\n"
+		"equations as we have variables).  \n"
+		"\n"
+		"If we can't find a solution, we throw a ConvergenceFailure exception.  \n"
 		"\n"
 		""},
 	 { "root", _wrap_root, METH_VARARGS, "\n"
+		"root(DFunctor F, double Xmin, double Xmax, double Eps=1e-6, double Eps_abs=1e-8) -> double\n"
 		"\n"
-		"double GeoCal::root(const DFunctor &F, double Xmin, double Xmax, double Eps=1e-8, double\n"
-		"Eps_abs=1e-10)\n"
 		"GeoCal::root\n"
 		""},
 	 { "root_with_derivative", _wrap_root_with_derivative, METH_VARARGS, "\n"
+		"root_with_derivative(DFunctorWithDerivative F, double Xmin, double Xmax, double Eps=1e-6, double Eps_abs=1e-8) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::root_with_derivative(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Eps=1e-8, double Eps_abs=1e-10)\n"
 		"GeoCal::root_with_derivative\n"
-		"This finds the root of a function, and propagates the derivative of\n"
-		"the solution with respect to any parameters in the function (i.e., we aren't talking about the derivative wrt X here).\n"
+		"This finds the root of a function, and propagates the derivative of the solution\n"
+		"with respect to any parameters in the function (i.e., we *aren't* talking about\n"
+		"the derivative wrt X here).  \n"
 		"\n"
 		""},
 	 { "root_list", _wrap_root_list, METH_VARARGS, "\n"
+		"root_list(DFunctor F, double Xmin, double Xmax, double Root_minimum_spacing, double Residual=1e-6) -> vector_double\n"
 		"\n"
-		"std::vector< AutoDerivative< double > > GeoCal::root_list(const DFunctorWithDerivative &F, double Xmin, double Xmax, double\n"
-		"Root_minimum_spacing, double Eps=1e-8)\n"
 		"GeoCal::root_list\n"
-		"This will find a (possible empty) list of roots of a function, where\n"
-		"the roots have a seperation of at least the supplied minimum\n"
-		"separation.\n"
-		"This function is useful for finding roots when you don't know how many\n"
-		"solutions there are in the given range. It will find all roots,\n"
-		"provided that they have a seperation larger then Root_minimum_spacing,\n"
-		"and return the list of solutions. This list is ordered from smallest\n"
-		"to greatest.\n"
+		"This will find a (possible empty) list of roots of a function, where the roots\n"
+		"have a seperation of at least the supplied minimum separation.  \n"
+		"\n"
+		"This function is useful for finding roots when you don't know how many solutions\n"
+		"there are in the given range. It will find all roots, provided that they have a\n"
+		"seperation larger then Root_minimum_spacing, and return the list of solutions.\n"
+		"This list is ordered from smallest to greatest.  \n"
 		"\n"
 		"This function works by sampling the Functor with a spacing of\n"
-		"Root_minimum_spacing. If the function changes sign between one spacing\n"
-		"and the next, the routine root is called between those spacings and\n"
-		"the results is added to the root list.\n"
+		"Root_minimum_spacing. If the function changes sign between one spacing and the\n"
+		"next, the routine root is called between those spacings and the results is added\n"
+		"to the root list.  \n"
 		"\n"
-		"This will not finds roots that are closer together then the supplied\n"
-		"minimum spacing. (Limitation) \n"
+		"This will not finds roots that are closer together then the supplied minimum\n"
+		"spacing. (Limitation)  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

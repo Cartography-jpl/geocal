@@ -27,6 +27,8 @@
 #include "msp.h"  
 %}
 
+%feature("autodoc", 1);
+
 class Msp {
 public:
   Msp(const std::string& Fname, int Image_index = 0,

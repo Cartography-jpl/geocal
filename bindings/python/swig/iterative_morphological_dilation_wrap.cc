@@ -7502,133 +7502,138 @@ SWIGINTERN PyObject *IterativeMorphologicalDilation_swiginit(PyObject *SWIGUNUSE
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IterativeMorphologicalDilation", _wrap_new_IterativeMorphologicalDilation, METH_VARARGS, "\n"
+		"IterativeMorphologicalDilation(BlitzArray_double_2 Image, BlitzArray_bool_2 Mask, int Window_size=3, double Sigma=-1, GeoCal::IterativeMorphologicalDilation::PredictionType Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, GeoCal::IterativeMorphologicalDilation::FrontierFillOrder Frontier_fill_order=RANDOM_ORDER)\n"
 		"\n"
-		"IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >\n"
-		"&Mask, int Window_size=3, double Sigma=-1, PredictionType\n"
-		"Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder\n"
-		"Frontier_fill_order=RANDOM_ORDER)\n"
 		"GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation\n"
-		"Constructor.\n"
-		"The Mask is \"true\" where we don't have Image data and wish to fill\n"
-		"in data (i.e., this is the same sense as ImageMask).\n"
+		"Constructor.  \n"
 		"\n"
-		"Right now, this just works with blitz arrays. We could extend this to\n"
-		"work with RasterImage and ImageMask. But this is often called from\n"
-		"python, which interacts better with blitz arrays (which map to numpy\n"
-		"arrays in python). \n"
+		"The Mask is \"true\" where we don't have Image data and wish to fill in data\n"
+		"(i.e., this is the same sense as ImageMask).  \n"
+		"\n"
+		"Right now, this just works with blitz arrays. We could extend this to work with\n"
+		"RasterImage and ImageMask. But this is often called from python, which interacts\n"
+		"better with blitz arrays (which map to numpy arrays in python).  \n"
+		"\n"
 		""},
-	 { "IterativeMorphologicalDilation___str__", _wrap_IterativeMorphologicalDilation___str__, METH_O, NULL},
+	 { "IterativeMorphologicalDilation___str__", _wrap_IterativeMorphologicalDilation___str__, METH_O, "IterativeMorphologicalDilation___str__(IterativeMorphologicalDilation self) -> std::string"},
 	 { "IterativeMorphologicalDilation__v_filled_image", _wrap_IterativeMorphologicalDilation__v_filled_image, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_filled_image(IterativeMorphologicalDilation self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::IterativeMorphologicalDilation::filled_image() const\n"
 		"GeoCal::IterativeMorphologicalDilation::filled_image\n"
-		"Image that has been filled in for missing data.\n"
+		"Image that has been filled in for missing data.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_filled_mask", _wrap_IterativeMorphologicalDilation__v_filled_mask, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_filled_mask(IterativeMorphologicalDilation self) -> BlitzArray_bool_2\n"
 		"\n"
-		"const blitz::Array< bool, 2 > & GeoCal::IterativeMorphologicalDilation::filled_mask() const\n"
 		"GeoCal::IterativeMorphologicalDilation::filled_mask\n"
-		"Mask for filled_image.\n"
+		"Mask for filled_image.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_kernel", _wrap_IterativeMorphologicalDilation__v_kernel, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_kernel(IterativeMorphologicalDilation self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::IterativeMorphologicalDilation::kernel() const\n"
 		"GeoCal::IterativeMorphologicalDilation::kernel\n"
-		"Kernel used for neighborhood averaging to fill in missing data.\n"
+		"Kernel used for neighborhood averaging to fill in missing data.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_frontier_fill_order", _wrap_IterativeMorphologicalDilation__v_frontier_fill_order, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_frontier_fill_order(IterativeMorphologicalDilation self) -> GeoCal::IterativeMorphologicalDilation::FrontierFillOrder\n"
 		"\n"
-		"FrontierFillOrder GeoCal::IterativeMorphologicalDilation::frontier_fill_order() const\n"
 		"GeoCal::IterativeMorphologicalDilation::frontier_fill_order\n"
-		"Order that we fill the frontier pixels in an iteration.\n"
+		"Order that we fill the frontier pixels in an iteration.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_iteration_count", _wrap_IterativeMorphologicalDilation__v_iteration_count, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_iteration_count(IterativeMorphologicalDilation self) -> int\n"
 		"\n"
-		"int GeoCal::IterativeMorphologicalDilation::iteration_count() const\n"
 		"GeoCal::IterativeMorphologicalDilation::iteration_count\n"
-		"The iteration count for filling in the data.\n"
+		"The iteration count for filling in the data.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_window_size", _wrap_IterativeMorphologicalDilation__v_window_size, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_window_size(IterativeMorphologicalDilation self) -> int\n"
 		"\n"
-		"int GeoCal::IterativeMorphologicalDilation::window_size() const\n"
 		"GeoCal::IterativeMorphologicalDilation::window_size\n"
-		"Size of kernel to use.\n"
+		"Size of kernel to use.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_sigma", _wrap_IterativeMorphologicalDilation__v_sigma, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_sigma(IterativeMorphologicalDilation self) -> double\n"
 		"\n"
-		"double GeoCal::IterativeMorphologicalDilation::sigma() const\n"
 		"GeoCal::IterativeMorphologicalDilation::sigma\n"
-		"Gaussian sigma to use.\n"
+		"Gaussian sigma to use.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_prediction_type", _wrap_IterativeMorphologicalDilation__v_prediction_type, METH_O, "\n"
+		"IterativeMorphologicalDilation__v_prediction_type(IterativeMorphologicalDilation self) -> GeoCal::IterativeMorphologicalDilation::PredictionType\n"
 		"\n"
-		"PredictionType GeoCal::IterativeMorphologicalDilation::prediction_type() const\n"
 		"GeoCal::IterativeMorphologicalDilation::prediction_type\n"
-		"Type of prediction to use.\n"
+		"Type of prediction to use.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation_set_random_seed", _wrap_IterativeMorphologicalDilation_set_random_seed, METH_O, "\n"
+		"IterativeMorphologicalDilation_set_random_seed(unsigned int S)\n"
 		"\n"
-		"static void GeoCal::IterativeMorphologicalDilation::set_random_seed(unsigned int S)\n"
 		"GeoCal::IterativeMorphologicalDilation::set_random_seed\n"
 		""},
 	 { "IterativeMorphologicalDilation_fill_missing_data", _wrap_IterativeMorphologicalDilation_fill_missing_data, METH_O, "\n"
+		"IterativeMorphologicalDilation_fill_missing_data(IterativeMorphologicalDilation self)\n"
 		"\n"
-		"void IterativeMorphologicalDilation::fill_missing_data()\n"
 		"GeoCal::IterativeMorphologicalDilation::fill_missing_data\n"
-		"Iteratively fill in missing data until everything is filled.\n"
-		"This just runs fill_iteration() until there is nothing left. \n"
+		"Iteratively fill in missing data until everything is filled.  \n"
+		"\n"
+		"This just runs fill_iteration() until there is nothing left.  \n"
+		"\n"
 		""},
 	 { "IterativeMorphologicalDilation_predicted_value", _wrap_IterativeMorphologicalDilation_predicted_value, METH_VARARGS, "\n"
+		"IterativeMorphologicalDilation_predicted_value(IterativeMorphologicalDilation self, int i, int j) -> double\n"
 		"\n"
-		"double IterativeMorphologicalDilation::predicted_value(int i, int j) const\n"
 		"GeoCal::IterativeMorphologicalDilation::predicted_value\n"
-		"Predicted value for the given pixel.\n"
-		"We only include data that as filled_mask_ false, and we normalize by\n"
-		"the portion of the kernel included. \n"
+		"Predicted value for the given pixel.  \n"
+		"\n"
+		"We only include data that as filled_mask_ false, and we normalize by the portion\n"
+		"of the kernel included.  \n"
+		"\n"
 		""},
 	 { "IterativeMorphologicalDilation_frontier_pixel_find", _wrap_IterativeMorphologicalDilation_frontier_pixel_find, METH_VARARGS, "\n"
+		"IterativeMorphologicalDilation_frontier_pixel_find(IterativeMorphologicalDilation self, int num) -> std::vector< GeoCal::IterativeMorphologicalDilation::FrontierPixel,std::allocator< GeoCal::IterativeMorphologicalDilation::FrontierPixel > >\n"
 		"\n"
-		"std::vector< IterativeMorphologicalDilation::FrontierPixel > IterativeMorphologicalDilation::frontier_pixel_find(int num) const\n"
 		"GeoCal::IterativeMorphologicalDilation::frontier_pixel_find\n"
-		"Dilate the mask with a simple 3x3 kernel of all 1's.\n"
+		"Dilate the mask with a simple 3x3 kernel of all 1's.  \n"
+		"\n"
 		"Subtract the original mask - so this returns nonzero for all the new\n"
-		"\"frontier\" pixels. Because it is useful, fill the nonzero values\n"
-		"with a count of neighbors in the original mask (this can be useful to\n"
-		"fill in points with the most neighbors first in an iteration). Return\n"
-		"a list of these frontier pixels \n"
+		"\"frontier\" pixels. Because it is useful, fill the nonzero values with a count\n"
+		"of neighbors in the original mask (this can be useful to fill in points with the\n"
+		"most neighbors first in an iteration). Return a list of these frontier pixels  \n"
+		"\n"
 		""},
 	 { "delete_IterativeMorphologicalDilation", _wrap_delete_IterativeMorphologicalDilation, METH_O, "\n"
+		"delete_IterativeMorphologicalDilation(IterativeMorphologicalDilation self)\n"
 		"\n"
-		"virtual GeoCal::IterativeMorphologicalDilation::~IterativeMorphologicalDilation()\n"
-		"GeoCal::IterativeMorphologicalDilation::~IterativeMorphologicalDilatio\n"
-		"n\n"
+		"GeoCal::IterativeMorphologicalDilation::~IterativeMorphologicalDilation\n"
 		""},
 	 { "IterativeMorphologicalDilation_swigregister", IterativeMorphologicalDilation_swigregister, METH_O, NULL},
 	 { "IterativeMorphologicalDilation_swiginit", IterativeMorphologicalDilation_swiginit, METH_VARARGS, NULL},
@@ -7638,133 +7643,138 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IterativeMorphologicalDilation", _wrap_new_IterativeMorphologicalDilation, METH_VARARGS, "\n"
+		"IterativeMorphologicalDilation(BlitzArray_double_2 Image, BlitzArray_bool_2 Mask, int Window_size=3, double Sigma=-1, GeoCal::IterativeMorphologicalDilation::PredictionType Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, GeoCal::IterativeMorphologicalDilation::FrontierFillOrder Frontier_fill_order=RANDOM_ORDER)\n"
 		"\n"
-		"IterativeMorphologicalDilation::IterativeMorphologicalDilation(const blitz::Array< double, 2 > &Image, const blitz::Array< bool, 2 >\n"
-		"&Mask, int Window_size=3, double Sigma=-1, PredictionType\n"
-		"Prediction_type=GAUSSIAN_WEIGHTED_AVERAGE, FrontierFillOrder\n"
-		"Frontier_fill_order=RANDOM_ORDER)\n"
 		"GeoCal::IterativeMorphologicalDilation::IterativeMorphologicalDilation\n"
-		"Constructor.\n"
-		"The Mask is \"true\" where we don't have Image data and wish to fill\n"
-		"in data (i.e., this is the same sense as ImageMask).\n"
+		"Constructor.  \n"
 		"\n"
-		"Right now, this just works with blitz arrays. We could extend this to\n"
-		"work with RasterImage and ImageMask. But this is often called from\n"
-		"python, which interacts better with blitz arrays (which map to numpy\n"
-		"arrays in python). \n"
+		"The Mask is \"true\" where we don't have Image data and wish to fill in data\n"
+		"(i.e., this is the same sense as ImageMask).  \n"
+		"\n"
+		"Right now, this just works with blitz arrays. We could extend this to work with\n"
+		"RasterImage and ImageMask. But this is often called from python, which interacts\n"
+		"better with blitz arrays (which map to numpy arrays in python).  \n"
+		"\n"
 		""},
-	 { "IterativeMorphologicalDilation___str__", _wrap_IterativeMorphologicalDilation___str__, METH_O, NULL},
+	 { "IterativeMorphologicalDilation___str__", _wrap_IterativeMorphologicalDilation___str__, METH_O, "__str__(IterativeMorphologicalDilation self) -> std::string"},
 	 { "IterativeMorphologicalDilation__v_filled_image", _wrap_IterativeMorphologicalDilation__v_filled_image, METH_O, "\n"
+		"_v_filled_image(IterativeMorphologicalDilation self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::IterativeMorphologicalDilation::filled_image() const\n"
 		"GeoCal::IterativeMorphologicalDilation::filled_image\n"
-		"Image that has been filled in for missing data.\n"
+		"Image that has been filled in for missing data.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_filled_mask", _wrap_IterativeMorphologicalDilation__v_filled_mask, METH_O, "\n"
+		"_v_filled_mask(IterativeMorphologicalDilation self) -> BlitzArray_bool_2\n"
 		"\n"
-		"const blitz::Array< bool, 2 > & GeoCal::IterativeMorphologicalDilation::filled_mask() const\n"
 		"GeoCal::IterativeMorphologicalDilation::filled_mask\n"
-		"Mask for filled_image.\n"
+		"Mask for filled_image.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_kernel", _wrap_IterativeMorphologicalDilation__v_kernel, METH_O, "\n"
+		"_v_kernel(IterativeMorphologicalDilation self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::IterativeMorphologicalDilation::kernel() const\n"
 		"GeoCal::IterativeMorphologicalDilation::kernel\n"
-		"Kernel used for neighborhood averaging to fill in missing data.\n"
+		"Kernel used for neighborhood averaging to fill in missing data.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_frontier_fill_order", _wrap_IterativeMorphologicalDilation__v_frontier_fill_order, METH_O, "\n"
+		"_v_frontier_fill_order(IterativeMorphologicalDilation self) -> GeoCal::IterativeMorphologicalDilation::FrontierFillOrder\n"
 		"\n"
-		"FrontierFillOrder GeoCal::IterativeMorphologicalDilation::frontier_fill_order() const\n"
 		"GeoCal::IterativeMorphologicalDilation::frontier_fill_order\n"
-		"Order that we fill the frontier pixels in an iteration.\n"
+		"Order that we fill the frontier pixels in an iteration.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_iteration_count", _wrap_IterativeMorphologicalDilation__v_iteration_count, METH_O, "\n"
+		"_v_iteration_count(IterativeMorphologicalDilation self) -> int\n"
 		"\n"
-		"int GeoCal::IterativeMorphologicalDilation::iteration_count() const\n"
 		"GeoCal::IterativeMorphologicalDilation::iteration_count\n"
-		"The iteration count for filling in the data.\n"
+		"The iteration count for filling in the data.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_window_size", _wrap_IterativeMorphologicalDilation__v_window_size, METH_O, "\n"
+		"_v_window_size(IterativeMorphologicalDilation self) -> int\n"
 		"\n"
-		"int GeoCal::IterativeMorphologicalDilation::window_size() const\n"
 		"GeoCal::IterativeMorphologicalDilation::window_size\n"
-		"Size of kernel to use.\n"
+		"Size of kernel to use.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_sigma", _wrap_IterativeMorphologicalDilation__v_sigma, METH_O, "\n"
+		"_v_sigma(IterativeMorphologicalDilation self) -> double\n"
 		"\n"
-		"double GeoCal::IterativeMorphologicalDilation::sigma() const\n"
 		"GeoCal::IterativeMorphologicalDilation::sigma\n"
-		"Gaussian sigma to use.\n"
+		"Gaussian sigma to use.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation__v_prediction_type", _wrap_IterativeMorphologicalDilation__v_prediction_type, METH_O, "\n"
+		"_v_prediction_type(IterativeMorphologicalDilation self) -> GeoCal::IterativeMorphologicalDilation::PredictionType\n"
 		"\n"
-		"PredictionType GeoCal::IterativeMorphologicalDilation::prediction_type() const\n"
 		"GeoCal::IterativeMorphologicalDilation::prediction_type\n"
-		"Type of prediction to use.\n"
+		"Type of prediction to use.  \n"
 		"\n"
 		""},
 	 { "IterativeMorphologicalDilation_set_random_seed", _wrap_IterativeMorphologicalDilation_set_random_seed, METH_O, "\n"
+		"set_random_seed(unsigned int S)\n"
 		"\n"
-		"static void GeoCal::IterativeMorphologicalDilation::set_random_seed(unsigned int S)\n"
 		"GeoCal::IterativeMorphologicalDilation::set_random_seed\n"
 		""},
 	 { "IterativeMorphologicalDilation_fill_missing_data", _wrap_IterativeMorphologicalDilation_fill_missing_data, METH_O, "\n"
+		"fill_missing_data(IterativeMorphologicalDilation self)\n"
 		"\n"
-		"void IterativeMorphologicalDilation::fill_missing_data()\n"
 		"GeoCal::IterativeMorphologicalDilation::fill_missing_data\n"
-		"Iteratively fill in missing data until everything is filled.\n"
-		"This just runs fill_iteration() until there is nothing left. \n"
+		"Iteratively fill in missing data until everything is filled.  \n"
+		"\n"
+		"This just runs fill_iteration() until there is nothing left.  \n"
+		"\n"
 		""},
 	 { "IterativeMorphologicalDilation_predicted_value", _wrap_IterativeMorphologicalDilation_predicted_value, METH_VARARGS, "\n"
+		"predicted_value(IterativeMorphologicalDilation self, int i, int j) -> double\n"
 		"\n"
-		"double IterativeMorphologicalDilation::predicted_value(int i, int j) const\n"
 		"GeoCal::IterativeMorphologicalDilation::predicted_value\n"
-		"Predicted value for the given pixel.\n"
-		"We only include data that as filled_mask_ false, and we normalize by\n"
-		"the portion of the kernel included. \n"
+		"Predicted value for the given pixel.  \n"
+		"\n"
+		"We only include data that as filled_mask_ false, and we normalize by the portion\n"
+		"of the kernel included.  \n"
+		"\n"
 		""},
 	 { "IterativeMorphologicalDilation_frontier_pixel_find", _wrap_IterativeMorphologicalDilation_frontier_pixel_find, METH_VARARGS, "\n"
+		"frontier_pixel_find(IterativeMorphologicalDilation self, int num) -> std::vector< GeoCal::IterativeMorphologicalDilation::FrontierPixel,std::allocator< GeoCal::IterativeMorphologicalDilation::FrontierPixel > >\n"
 		"\n"
-		"std::vector< IterativeMorphologicalDilation::FrontierPixel > IterativeMorphologicalDilation::frontier_pixel_find(int num) const\n"
 		"GeoCal::IterativeMorphologicalDilation::frontier_pixel_find\n"
-		"Dilate the mask with a simple 3x3 kernel of all 1's.\n"
+		"Dilate the mask with a simple 3x3 kernel of all 1's.  \n"
+		"\n"
 		"Subtract the original mask - so this returns nonzero for all the new\n"
-		"\"frontier\" pixels. Because it is useful, fill the nonzero values\n"
-		"with a count of neighbors in the original mask (this can be useful to\n"
-		"fill in points with the most neighbors first in an iteration). Return\n"
-		"a list of these frontier pixels \n"
+		"\"frontier\" pixels. Because it is useful, fill the nonzero values with a count\n"
+		"of neighbors in the original mask (this can be useful to fill in points with the\n"
+		"most neighbors first in an iteration). Return a list of these frontier pixels  \n"
+		"\n"
 		""},
 	 { "delete_IterativeMorphologicalDilation", _wrap_delete_IterativeMorphologicalDilation, METH_O, "\n"
+		"delete_IterativeMorphologicalDilation(IterativeMorphologicalDilation self)\n"
 		"\n"
-		"virtual GeoCal::IterativeMorphologicalDilation::~IterativeMorphologicalDilation()\n"
-		"GeoCal::IterativeMorphologicalDilation::~IterativeMorphologicalDilatio\n"
-		"n\n"
+		"GeoCal::IterativeMorphologicalDilation::~IterativeMorphologicalDilation\n"
 		""},
 	 { "IterativeMorphologicalDilation_swigregister", IterativeMorphologicalDilation_swigregister, METH_O, NULL},
 	 { "IterativeMorphologicalDilation_swiginit", IterativeMorphologicalDilation_swiginit, METH_VARARGS, NULL},

@@ -6880,68 +6880,72 @@ SWIGINTERN PyObject *ImageMaskImage_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ImageMaskImage", _wrap_new_ImageMaskImage, METH_VARARGS, "\n"
+		"ImageMaskImage(boost::shared_ptr< GeoCal::RasterImage > Img, int Mask_value=0, GeoCal::ImageMaskImage::OutsideHandling Handling=OUTSIDE_MASKED)\n"
 		"\n"
-		"GeoCal::ImageMaskImage::ImageMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0,\n"
-		"OutsideHandling Handling=OUTSIDE_MASKED)\n"
 		"GeoCal::ImageMaskImage::ImageMaskImage\n"
-		"Constructor.\n"
-		"Values outside of the Image may or may not want to be marked as\n"
-		"masked. \n"
+		"Constructor.  \n"
+		"\n"
+		"Values outside of the Image may or may not want to be marked as masked.  \n"
+		"\n"
 		""},
 	 { "ImageMaskImage_unmasked_bounding_box", _wrap_ImageMaskImage_unmasked_bounding_box, METH_O, "\n"
+		"ImageMaskImage_unmasked_bounding_box(ImageMaskImage self)\n"
 		"\n"
-		"void ImageMaskImage::unmasked_bounding_box(int &Minline, int &Minsample, int &Numberline, int &Numbersample)\n"
-		"const\n"
 		"GeoCal::ImageMaskImage::unmasked_bounding_box\n"
-		"This returns the bounding box of the unmasked area.\n"
-		"This can be useful for an image to chop off an outer edge that is\n"
-		"completely masked. \n"
+		"This returns the bounding box of the unmasked area.  \n"
+		"\n"
+		"This can be useful for an image to chop off an outer edge that is completely\n"
+		"masked.  \n"
+		"\n"
 		""},
 	 { "ImageMaskImage__v_raster_image", _wrap_ImageMaskImage__v_raster_image, METH_O, "\n"
+		"ImageMaskImage__v_raster_image(ImageMaskImage self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::ImageMaskImage::raster_image_ptr() const\n"
 		"GeoCal::ImageMaskImage::raster_image_ptr\n"
-		"Underlying RasterImage.\n"
+		"Underlying RasterImage.  \n"
 		"\n"
 		""},
 	 { "ImageMaskImage__v_masked_value", _wrap_ImageMaskImage__v_masked_value, METH_O, "\n"
+		"ImageMaskImage__v_masked_value(ImageMaskImage self) -> int\n"
 		"\n"
-		"int GeoCal::ImageMaskImage::masked_value() const\n"
 		"GeoCal::ImageMaskImage::masked_value\n"
-		"Value indicating masked data.\n"
+		"Value indicating masked data.  \n"
 		"\n"
 		""},
 	 { "ImageMaskImage__v_outside_handling", _wrap_ImageMaskImage__v_outside_handling, METH_O, "\n"
+		"ImageMaskImage__v_outside_handling(ImageMaskImage self) -> GeoCal::ImageMaskImage::OutsideHandling\n"
 		"\n"
-		"OutsideHandling GeoCal::ImageMaskImage::outside_handling() const\n"
 		"GeoCal::ImageMaskImage::outside_handling\n"
-		"Handling for data outside of image.\n"
+		"Handling for data outside of image.  \n"
 		"\n"
 		""},
 	 { "delete_ImageMaskImage", _wrap_delete_ImageMaskImage, METH_O, "\n"
+		"delete_ImageMaskImage(ImageMaskImage self)\n"
 		"\n"
-		"virtual GeoCal::ImageMaskImage::~ImageMaskImage()\n"
 		"GeoCal::ImageMaskImage::~ImageMaskImage\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMaskImage_swigregister", ImageMaskImage_swigregister, METH_O, NULL},
@@ -6952,68 +6956,72 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ImageMaskImage", _wrap_new_ImageMaskImage, METH_VARARGS, "\n"
+		"ImageMaskImage(boost::shared_ptr< GeoCal::RasterImage > Img, int Mask_value=0, GeoCal::ImageMaskImage::OutsideHandling Handling=OUTSIDE_MASKED)\n"
 		"\n"
-		"GeoCal::ImageMaskImage::ImageMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0,\n"
-		"OutsideHandling Handling=OUTSIDE_MASKED)\n"
 		"GeoCal::ImageMaskImage::ImageMaskImage\n"
-		"Constructor.\n"
-		"Values outside of the Image may or may not want to be marked as\n"
-		"masked. \n"
+		"Constructor.  \n"
+		"\n"
+		"Values outside of the Image may or may not want to be marked as masked.  \n"
+		"\n"
 		""},
 	 { "ImageMaskImage_unmasked_bounding_box", _wrap_ImageMaskImage_unmasked_bounding_box, METH_O, "\n"
+		"unmasked_bounding_box(ImageMaskImage self)\n"
 		"\n"
-		"void ImageMaskImage::unmasked_bounding_box(int &Minline, int &Minsample, int &Numberline, int &Numbersample)\n"
-		"const\n"
 		"GeoCal::ImageMaskImage::unmasked_bounding_box\n"
-		"This returns the bounding box of the unmasked area.\n"
-		"This can be useful for an image to chop off an outer edge that is\n"
-		"completely masked. \n"
+		"This returns the bounding box of the unmasked area.  \n"
+		"\n"
+		"This can be useful for an image to chop off an outer edge that is completely\n"
+		"masked.  \n"
+		"\n"
 		""},
 	 { "ImageMaskImage__v_raster_image", _wrap_ImageMaskImage__v_raster_image, METH_O, "\n"
+		"_v_raster_image(ImageMaskImage self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::ImageMaskImage::raster_image_ptr() const\n"
 		"GeoCal::ImageMaskImage::raster_image_ptr\n"
-		"Underlying RasterImage.\n"
+		"Underlying RasterImage.  \n"
 		"\n"
 		""},
 	 { "ImageMaskImage__v_masked_value", _wrap_ImageMaskImage__v_masked_value, METH_O, "\n"
+		"_v_masked_value(ImageMaskImage self) -> int\n"
 		"\n"
-		"int GeoCal::ImageMaskImage::masked_value() const\n"
 		"GeoCal::ImageMaskImage::masked_value\n"
-		"Value indicating masked data.\n"
+		"Value indicating masked data.  \n"
 		"\n"
 		""},
 	 { "ImageMaskImage__v_outside_handling", _wrap_ImageMaskImage__v_outside_handling, METH_O, "\n"
+		"_v_outside_handling(ImageMaskImage self) -> GeoCal::ImageMaskImage::OutsideHandling\n"
 		"\n"
-		"OutsideHandling GeoCal::ImageMaskImage::outside_handling() const\n"
 		"GeoCal::ImageMaskImage::outside_handling\n"
-		"Handling for data outside of image.\n"
+		"Handling for data outside of image.  \n"
 		"\n"
 		""},
 	 { "delete_ImageMaskImage", _wrap_delete_ImageMaskImage, METH_O, "\n"
+		"delete_ImageMaskImage(ImageMaskImage self)\n"
 		"\n"
-		"virtual GeoCal::ImageMaskImage::~ImageMaskImage()\n"
 		"GeoCal::ImageMaskImage::~ImageMaskImage\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMaskImage_swigregister", ImageMaskImage_swigregister, METH_O, NULL},

@@ -90,6 +90,7 @@ _image_ground_connection.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _image_ground_connection.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _image_ground_connection.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -139,10 +140,11 @@ import geocal_swig.geocal_exception
 class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
     r"""
 
-    Exception thrown if ImageGroundConnection fails to calculate a image
-    coordinate.
 
-    C++ includes: image_ground_connection.h 
+    Exception thrown if ImageGroundConnection fails to calculate a image coordinate.  
+
+    C++ includes: image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,11 +152,13 @@ class ImageGroundConnectionFailed(geocal_swig.geocal_exception.Exception):
 
     def __init__(self, W):
         r"""
+        __init__(ImageGroundConnectionFailed self, std::string const & W) -> ImageGroundConnectionFailed
 
-        GeoCal::ImageGroundConnectionFailed::ImageGroundConnectionFailed(const std::string &W="ImageGroundConnectionFailed")
         GeoCal::ImageGroundConnectionFailed::ImageGroundConnectionFailed
-        Default constructor.
-        Can give an optional string describing the error. 
+        Default constructor.  
+
+        Can give an optional string describing the error.  
+
         """
         _image_ground_connection.ImageGroundConnectionFailed_swiginit(self, _image_ground_connection.new_ImageGroundConnectionFailed(W))
     __swig_destroy__ = _image_ground_connection.delete_ImageGroundConnectionFailed
@@ -164,32 +168,32 @@ _image_ground_connection.ImageGroundConnectionFailed_swigregister(ImageGroundCon
 class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     r"""
 
-    Depending on the the data we are using, we may connect a location in
-    an image to a ground location in one of several ways.
 
-    For example, we might have a rigorous camera model and orbit data
-    allowing us to use an Ipi. Or we might have a RPC (Rational Polynomial
-    Coefficients) that connect an image to the ground. Or we might be
-    working with data that has already been map projected, so a MapInfo
-    gives us a direct connection.
+    Depending on the the data we are using, we may connect a location in an image to
+    a ground location in one of several ways.  
 
-    For many purposes, we don't care exactly how the connection is done,
-    we just use the fact that there is a connection.
+    For example, we might have a rigorous camera model and orbit data allowing us to
+    use an Ipi. Or we might have a RPC (Rational Polynomial Coefficients) that
+    connect an image to the ground. Or we might be working with data that has
+    already been map projected, so a MapInfo gives us a direct connection.  
 
-    This class gives a generic interface that can be used for any kind of
-    a connection between the ground and an image.
+    For many purposes, we don't care exactly how the connection is done, we just use
+    the fact that there is a connection.  
 
-    An important implementation issue, because of the way the templates
-    work in the boost serialization library if you derive from this class
-    and want to use boost serialize on it, make sure to derive virtual,
-    e.g
+    This class gives a generic interface that can be used for any kind of a
+    connection between the ground and an image.  
 
-    class Foo : public virtual ImageGroundConnection { blah blah };
+    An important implementation issue, because of the way the templates work in the
+    boost serialization library if you derive from this class and want to use boost
+    serialize on it, make sure to derive virtual, e.g  
 
-    This doesn't hurt anything, for other code and because of how boost
-    deals with multiple inheritance is required.
+    class Foo : public virtual ImageGroundConnection { blah blah };  
 
-    C++ includes: image_ground_connection.h 
+    This doesn't hurt anything, for other code and because of how boost deals with
+    multiple inheritance is required.  
+
+    C++ includes: image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -198,6 +202,12 @@ class ImageGroundConnection(geocal_swig.with_parameter.WithParameter):
     initialize = _swig_new_instance_method(_image_ground_connection.ImageGroundConnection_initialize)
 
     def __init__(self, *args):
+        r"""
+        __init__(ImageGroundConnection self, boost::shared_ptr< GeoCal::Dem > const & d, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title) -> ImageGroundConnection
+        __init__(ImageGroundConnection self, boost::shared_ptr< GeoCal::Dem > const & d, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask) -> ImageGroundConnection
+        __init__(ImageGroundConnection self, boost::shared_ptr< GeoCal::Dem > const & d, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> ImageGroundConnection
+        __init__(ImageGroundConnection self) -> ImageGroundConnection
+        """
         if self.__class__ == ImageGroundConnection:
             _self = None
         else:
@@ -408,13 +418,15 @@ _image_ground_connection.ImageGroundConnection_swigregister(ImageGroundConnectio
 class OffsetImageGroundConnection(ImageGroundConnection):
     r"""
 
-    This class creates an ImageGroundConnection that that is an offset of
-    a given one.
+
+    This class creates an ImageGroundConnection that that is an offset of a given
+    one.  
 
     This would be used for example when a image is subsetted to create a
-    ImageGroundConnection to go with that subsetted image.
+    ImageGroundConnection to go with that subsetted image.  
 
-    C++ includes: image_ground_connection.h 
+    C++ includes: image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -422,11 +434,11 @@ class OffsetImageGroundConnection(ImageGroundConnection):
 
     def __init__(self, *args):
         r"""
+        __init__(OffsetImageGroundConnection self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Ig_original, double Line_offset, double Sample_offset) -> OffsetImageGroundConnection
+        __init__(OffsetImageGroundConnection self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Ig_original, int Lstart, int Sstart, int Number_line, int Number_sample) -> OffsetImageGroundConnection
 
-        GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > &Ig_original, int
-        Lstart, int Sstart, int Number_line, int Number_sample)
         GeoCal::OffsetImageGroundConnection::OffsetImageGroundConnection
-        Constructor that subsets an existing Igc.
+        Constructor that subsets an existing Igc.  
 
         """
         _image_ground_connection.OffsetImageGroundConnection_swiginit(self, _image_ground_connection.new_OffsetImageGroundConnection(*args))
@@ -463,14 +475,16 @@ _image_ground_connection.OffsetImageGroundConnection_swigregister(OffsetImageGro
 class ImageGroundConnectionCopy(ImageGroundConnection):
     r"""
 
-    Simple ImageGroundConnection where we use the mapping from an
-    underlying ImageGroundConnection, but allow the raster image, dem,
-    title, image mask, or ground mask to be different.
 
-    You can create a copy, and then modify the image etc. without changing
-    the underlying ImageGroundConnection.
+    Simple ImageGroundConnection where we use the mapping from an underlying
+    ImageGroundConnection, but allow the raster image, dem, title, image mask, or
+    ground mask to be different.  
 
-    C++ includes: image_ground_connection.h 
+    You can create a copy, and then modify the image etc. without changing the
+    underlying ImageGroundConnection.  
+
+    C++ includes: image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -478,12 +492,9 @@ class ImageGroundConnectionCopy(ImageGroundConnection):
 
     def __init__(self, *args):
         r"""
+        __init__(ImageGroundConnectionCopy self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc) -> ImageGroundConnectionCopy
+        __init__(ImageGroundConnectionCopy self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::Dem > const & d, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> ImageGroundConnectionCopy
 
-        GeoCal::ImageGroundConnectionCopy::ImageGroundConnectionCopy(const boost::shared_ptr< ImageGroundConnection > &Igc, const
-        boost::shared_ptr< Dem > &d, const boost::shared_ptr< RasterImage >
-        &Img, const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const
-        std::string &Title, const boost::shared_ptr< ImageMask > &Img_mask,
-        const boost::shared_ptr< GroundMask > &Ground_mask)
         GeoCal::ImageGroundConnectionCopy::ImageGroundConnectionCopy
         """
         _image_ground_connection.ImageGroundConnectionCopy_swiginit(self, _image_ground_connection.new_ImageGroundConnectionCopy(*args))
@@ -506,6 +517,8 @@ class ImageGroundConnectionCopy(ImageGroundConnection):
 # Register ImageGroundConnectionCopy in _image_ground_connection:
 _image_ground_connection.ImageGroundConnectionCopy_swigregister(ImageGroundConnectionCopy)
 class Vector_ImageGroundConnection(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_image_ground_connection.Vector_ImageGroundConnection_iterator)
@@ -535,6 +548,12 @@ class Vector_ImageGroundConnection(object):
     erase = _swig_new_instance_method(_image_ground_connection.Vector_ImageGroundConnection_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_ImageGroundConnection self) -> Vector_ImageGroundConnection
+        __init__(Vector_ImageGroundConnection self, Vector_ImageGroundConnection other) -> Vector_ImageGroundConnection
+        __init__(Vector_ImageGroundConnection self, std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::size_type size) -> Vector_ImageGroundConnection
+        __init__(Vector_ImageGroundConnection self, std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type const & value) -> Vector_ImageGroundConnection
+        """
         _image_ground_connection.Vector_ImageGroundConnection_swiginit(self, _image_ground_connection.new_Vector_ImageGroundConnection(*args))
     push_back = _swig_new_instance_method(_image_ground_connection.Vector_ImageGroundConnection_push_back)
     front = _swig_new_instance_method(_image_ground_connection.Vector_ImageGroundConnection_front)

@@ -10284,182 +10284,191 @@ SWIGINTERN PyObject *AirMspiIgcCollection_swiginit(PyObject *SWIGUNUSEDPARM(self
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AirMspiIgcCollection", _wrap_new_AirMspiIgcCollection, METH_VARARGS, "\n"
+		"AirMspiIgcCollection(std::string const & Master_config_file, std::string const & Orbit_file_name, std::string const & L1b1_table, std::string const & Swath_to_use=\"660-I\", std::string const & Base_directory=\".\")\n"
+		"AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & D, vector_string L1b1_file_name, std::string const & Swath_to_use=\"660-I\", int Dem_resolution=10, std::string const & Base_directory=\".\")\n"
+		"AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & D, std::string const & Master_config_file, vector_string L1b1_file_name, std::string const & Swath_to_use=\"660-I\", int Dem_resolution=10, std::string const & Base_directory=\".\")\n"
 		"\n"
-		"AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string\n"
-		"&Orbit_file_name, const std::string &L1b1_table, const std::string\n"
-		"&Swath_to_use=\"660-I\", const std::string &Base_directory=\".\")\n"
 		"GeoCal::AirMspiIgcCollection::AirMspiIgcCollection\n"
-		"This creates a AirMspiIgcCollection by reading the given master config file.\n"
-		"Various files found in the input files can have relative paths. You\n"
-		"can specify the base directory these paths are relative to, the\n"
-		"default is the current directory. \n"
+		"This creates a AirMspiIgcCollection by reading the given master config file.  \n"
+		"\n"
+		"Various files found in the input files can have relative paths. You can specify\n"
+		"the base directory these paths are relative to, the default is the current\n"
+		"directory.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgcCollection_image_ground_connection", _wrap_AirMspiIgcCollection_image_ground_connection, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_image_ground_connection(AirMspiIgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"virtual boost::shared_ptr< ImageGroundConnection > GeoCal::AirMspiIgcCollection::image_ground_connection(int Image_index) const\n"
 		"GeoCal::AirMspiIgcCollection::image_ground_connection\n"
 		""},
 	 { "AirMspiIgcCollection_have_config", _wrap_AirMspiIgcCollection_have_config, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_have_config(AirMspiIgcCollection self, int Index, std::string const & Keyword) -> bool\n"
 		"\n"
-		"bool GeoCal::AirMspiIgcCollection::have_config(int Index, const std::string &Keyword) const\n"
 		"GeoCal::AirMspiIgcCollection::have_config\n"
-		"Do we have keyword in configuration value given view number?\n"
+		"Do we have keyword in configuration value given view number?  \n"
 		"\n"
 		""},
-	 { "AirMspiIgcCollection_config_value_double", _wrap_AirMspiIgcCollection_config_value_double, METH_VARARGS, NULL},
-	 { "AirMspiIgcCollection_config_value_int", _wrap_AirMspiIgcCollection_config_value_int, METH_VARARGS, NULL},
-	 { "AirMspiIgcCollection_config_value_string", _wrap_AirMspiIgcCollection_config_value_string, METH_VARARGS, NULL},
+	 { "AirMspiIgcCollection_config_value_double", _wrap_AirMspiIgcCollection_config_value_double, METH_VARARGS, "AirMspiIgcCollection_config_value_double(AirMspiIgcCollection self, int Index, std::string const & Key) -> double"},
+	 { "AirMspiIgcCollection_config_value_int", _wrap_AirMspiIgcCollection_config_value_int, METH_VARARGS, "AirMspiIgcCollection_config_value_int(AirMspiIgcCollection self, int Index, std::string const & Key) -> int"},
+	 { "AirMspiIgcCollection_config_value_string", _wrap_AirMspiIgcCollection_config_value_string, METH_VARARGS, "AirMspiIgcCollection_config_value_string(AirMspiIgcCollection self, int Index, std::string const & Key) -> std::string"},
 	 { "AirMspiIgcCollection_set_config_value", _wrap_AirMspiIgcCollection_set_config_value, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_set_config_value(AirMspiIgcCollection self, int Index, std::string const & Keyword, std::string const & Value)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_config_value(int Index, const std::string &Keyword, const std::string &Value)\n"
 		"GeoCal::AirMspiIgcCollection::set_config_value\n"
-		"Set Configuration value for given view number.\n"
+		"Set Configuration value for given view number.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_orbit", _wrap_AirMspiIgcCollection_orbit, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_orbit(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::Orbit >\n"
 		"\n"
-		"boost::shared_ptr< Orbit > GeoCal::AirMspiIgcCollection::orbit(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::orbit\n"
-		"Return specific orbit we are using.\n"
+		"Return specific orbit we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_l1b1_file_name", _wrap_AirMspiIgcCollection_l1b1_file_name, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_l1b1_file_name(AirMspiIgcCollection self, int Index) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiIgcCollection::l1b1_file_name(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::l1b1_file_name\n"
-		"Return L1B1 file name.\n"
+		"Return L1B1 file name.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_set_orbit", _wrap_AirMspiIgcCollection_set_orbit, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_set_orbit(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::Orbit > const & Orb)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"GeoCal::AirMspiIgcCollection::set_orbit\n"
-		"Change the orbit we are using.\n"
+		"Change the orbit we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_camera", _wrap_AirMspiIgcCollection_camera, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_camera(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::MspiCamera >\n"
 		"\n"
-		"boost::shared_ptr< MspiCamera > GeoCal::AirMspiIgcCollection::camera(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::camera\n"
-		"Return specific camera we are using, needed for some routines that\n"
-		"depend on the details of MspiCamera.\n"
+		"Return specific camera we are using, needed for some routines that depend on the\n"
+		"details of MspiCamera.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_set_camera", _wrap_AirMspiIgcCollection_set_camera, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_set_camera(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::MspiCamera > const & Can)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_camera(const boost::shared_ptr< MspiCamera > &Cam)\n"
 		"GeoCal::AirMspiIgcCollection::set_camera\n"
-		"Change the camera we are using.\n"
+		"Change the camera we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_gimbal", _wrap_AirMspiIgcCollection_gimbal, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_gimbal(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::MspiGimbal >\n"
 		"\n"
-		"boost::shared_ptr< MspiGimbal > GeoCal::AirMspiIgcCollection::gimbal(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::gimbal\n"
-		"Return specific gimbal we are using, needed for some routines that\n"
-		"depend on the details of MspiGimbal.\n"
+		"Return specific gimbal we are using, needed for some routines that depend on the\n"
+		"details of MspiGimbal.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_set_gimbal", _wrap_AirMspiIgcCollection_set_gimbal, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_set_gimbal(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_gimbal(const boost::shared_ptr< MspiGimbal > &Gim)\n"
 		"GeoCal::AirMspiIgcCollection::set_gimbal\n"
-		"Change the gimbal we are using.\n"
+		"Change the gimbal we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_time_table", _wrap_AirMspiIgcCollection_time_table, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_time_table(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::TimeTable >\n"
 		"\n"
-		"boost::shared_ptr< TimeTable > GeoCal::AirMspiIgcCollection::time_table(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::time_table\n"
-		"Return specific time table we are using, needed for some routines that\n"
-		"depend on the details of the time table.\n"
+		"Return specific time table we are using, needed for some routines that depend on\n"
+		"the details of the time table.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_number_band", _wrap_AirMspiIgcCollection_number_band, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_number_band(AirMspiIgcCollection self, int Index) -> int\n"
 		"\n"
-		"int GeoCal::AirMspiIgcCollection::number_band(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::number_band\n"
-		"Return number of bands.\n"
+		"Return number of bands.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_band", _wrap_AirMspiIgcCollection_band, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_band(AirMspiIgcCollection self, int Index) -> int\n"
+		"AirMspiIgcCollection_band(AirMspiIgcCollection self, int Index, int B)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::band(int Index, int B)\n"
 		"GeoCal::AirMspiIgcCollection::band\n"
-		"Set band that we are using.\n"
+		"Set band that we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_min_l1b1_line", _wrap_AirMspiIgcCollection_min_l1b1_line, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_min_l1b1_line(AirMspiIgcCollection self, int Index) -> int\n"
 		"\n"
-		"int GeoCal::AirMspiIgcCollection::min_l1b1_line(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::min_l1b1_line\n"
-		"Return the minimum line in the l1b1 file that we have all the data to\n"
-		"process.\n"
-		"This looks at the both the l1b1 file itself and also the coverage of\n"
-		"the navigation file. It can also be shrunk by the user supplying the\n"
-		"range in the configuration files.\n"
+		"Return the minimum line in the l1b1 file that we have all the data to process.  \n"
 		"\n"
-		"Note that the images etc returned by this class have already been\n"
-		"subsetted, you don't need to use min_l1b1_line or max_l1b1_line\n"
-		"directly. This is provided just as metadata. \n"
+		"This looks at the both the l1b1 file itself and also the coverage of the\n"
+		"navigation file. It can also be shrunk by the user supplying the range in the\n"
+		"configuration files.  \n"
+		"\n"
+		"Note that the images etc returned by this class have *already* been subsetted,\n"
+		"you don't need to use min_l1b1_line or max_l1b1_line directly. This is provided\n"
+		"just as metadata.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgcCollection_max_l1b1_line", _wrap_AirMspiIgcCollection_max_l1b1_line, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_max_l1b1_line(AirMspiIgcCollection self, int Index) -> int\n"
 		"\n"
-		"int GeoCal::AirMspiIgcCollection::max_l1b1_line(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::max_l1b1_line\n"
-		"Return the maximum line in the l1b1 file that we have all the data to\n"
-		"process.\n"
-		"This looks at the both the l1b1 file itself and also the coverage of\n"
-		"the navigation file. It can also be shrunk by the user supplying the\n"
-		"range in the configuration files.\n"
+		"Return the maximum line in the l1b1 file that we have all the data to process.  \n"
 		"\n"
-		"Note that the images etc. returned by this class have already been\n"
-		"subsetted, you don't need to use min_l1b1_line or max_l1b1_line\n"
-		"directly. This is provided just as metadata. \n"
+		"This looks at the both the l1b1 file itself and also the coverage of the\n"
+		"navigation file. It can also be shrunk by the user supplying the range in the\n"
+		"configuration files.  \n"
+		"\n"
+		"Note that the images etc. returned by this class have *already* been subsetted,\n"
+		"you don't need to use min_l1b1_line or max_l1b1_line directly. This is provided\n"
+		"just as metadata.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgcCollection_view_number_to_image_index", _wrap_AirMspiIgcCollection_view_number_to_image_index, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_view_number_to_image_index(AirMspiIgcCollection self, int View_number) -> int\n"
 		"\n"
-		"int AirMspiIgcCollection::view_number_to_image_index(int View_number) const\n"
 		"GeoCal::AirMspiIgcCollection::view_number_to_image_index\n"
-		"Go from view number (found in the l1b1 table file) to the index number\n"
-		"matching it.\n"
+		"Go from view number (found in the l1b1 table file) to the index number matching\n"
+		"it.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_replace_view_config", _wrap_AirMspiIgcCollection_replace_view_config, METH_VARARGS, "\n"
+		"AirMspiIgcCollection_replace_view_config(AirMspiIgcCollection self, std::string const & Master_config_file, std::string const & L1b1_table)\n"
 		"\n"
-		"void AirMspiIgcCollection::replace_view_config(const std::string &Master_config_file, const std::string &L1b1_table)\n"
 		"GeoCal::AirMspiIgcCollection::replace_view_config\n"
-		"There is various metadata needed by the airmspi programs that is only\n"
-		"available once a master config and l1b1_table file are created.\n"
-		"This is created as part of AirMspiMapInfoProcessor (a python class\n"
-		"found in the MSPI-Ground software, not here in GeoCal). We need to be\n"
-		"able to add in this metadata to an existing IgcCollection. This\n"
-		"function does this. Because we may also have direction to process only\n"
-		"a subset of the data, this also recalculates the minimum and maximum\n"
-		"L1B1 lines to use. \n"
+		"There is various metadata needed by the airmspi programs that is only available\n"
+		"once a master config and l1b1_table file are created.  \n"
+		"\n"
+		"This is created as part of AirMspiMapInfoProcessor (a python class found in the\n"
+		"MSPI-Ground software, not here in GeoCal). We need to be able to add in this\n"
+		"metadata to an existing IgcCollection. This function does this. Because we may\n"
+		"also have direction to process only a subset of the data, this also recalculates\n"
+		"the minimum and maximum L1B1 lines to use.  \n"
+		"\n"
 		""},
 	 { "delete_AirMspiIgcCollection", _wrap_delete_AirMspiIgcCollection, METH_O, "\n"
+		"delete_AirMspiIgcCollection(AirMspiIgcCollection self)\n"
 		"\n"
-		"virtual GeoCal::AirMspiIgcCollection::~AirMspiIgcCollection()\n"
 		"GeoCal::AirMspiIgcCollection::~AirMspiIgcCollection\n"
 		""},
 	 { "AirMspiIgcCollection_swigregister", AirMspiIgcCollection_swigregister, METH_O, NULL},
@@ -10470,182 +10479,191 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AirMspiIgcCollection", _wrap_new_AirMspiIgcCollection, METH_VARARGS, "\n"
+		"AirMspiIgcCollection(std::string const & Master_config_file, std::string const & Orbit_file_name, std::string const & L1b1_table, std::string const & Swath_to_use=\"660-I\", std::string const & Base_directory=\".\")\n"
+		"AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & D, vector_string L1b1_file_name, std::string const & Swath_to_use=\"660-I\", int Dem_resolution=10, std::string const & Base_directory=\".\")\n"
+		"AirMspiIgcCollection(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & D, std::string const & Master_config_file, vector_string L1b1_file_name, std::string const & Swath_to_use=\"660-I\", int Dem_resolution=10, std::string const & Base_directory=\".\")\n"
 		"\n"
-		"AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string\n"
-		"&Orbit_file_name, const std::string &L1b1_table, const std::string\n"
-		"&Swath_to_use=\"660-I\", const std::string &Base_directory=\".\")\n"
 		"GeoCal::AirMspiIgcCollection::AirMspiIgcCollection\n"
-		"This creates a AirMspiIgcCollection by reading the given master config file.\n"
-		"Various files found in the input files can have relative paths. You\n"
-		"can specify the base directory these paths are relative to, the\n"
-		"default is the current directory. \n"
+		"This creates a AirMspiIgcCollection by reading the given master config file.  \n"
+		"\n"
+		"Various files found in the input files can have relative paths. You can specify\n"
+		"the base directory these paths are relative to, the default is the current\n"
+		"directory.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgcCollection_image_ground_connection", _wrap_AirMspiIgcCollection_image_ground_connection, METH_VARARGS, "\n"
+		"image_ground_connection(AirMspiIgcCollection self, int Image_index) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"virtual boost::shared_ptr< ImageGroundConnection > GeoCal::AirMspiIgcCollection::image_ground_connection(int Image_index) const\n"
 		"GeoCal::AirMspiIgcCollection::image_ground_connection\n"
 		""},
 	 { "AirMspiIgcCollection_have_config", _wrap_AirMspiIgcCollection_have_config, METH_VARARGS, "\n"
+		"have_config(AirMspiIgcCollection self, int Index, std::string const & Keyword) -> bool\n"
 		"\n"
-		"bool GeoCal::AirMspiIgcCollection::have_config(int Index, const std::string &Keyword) const\n"
 		"GeoCal::AirMspiIgcCollection::have_config\n"
-		"Do we have keyword in configuration value given view number?\n"
+		"Do we have keyword in configuration value given view number?  \n"
 		"\n"
 		""},
-	 { "AirMspiIgcCollection_config_value_double", _wrap_AirMspiIgcCollection_config_value_double, METH_VARARGS, NULL},
-	 { "AirMspiIgcCollection_config_value_int", _wrap_AirMspiIgcCollection_config_value_int, METH_VARARGS, NULL},
-	 { "AirMspiIgcCollection_config_value_string", _wrap_AirMspiIgcCollection_config_value_string, METH_VARARGS, NULL},
+	 { "AirMspiIgcCollection_config_value_double", _wrap_AirMspiIgcCollection_config_value_double, METH_VARARGS, "config_value_double(AirMspiIgcCollection self, int Index, std::string const & Key) -> double"},
+	 { "AirMspiIgcCollection_config_value_int", _wrap_AirMspiIgcCollection_config_value_int, METH_VARARGS, "config_value_int(AirMspiIgcCollection self, int Index, std::string const & Key) -> int"},
+	 { "AirMspiIgcCollection_config_value_string", _wrap_AirMspiIgcCollection_config_value_string, METH_VARARGS, "config_value_string(AirMspiIgcCollection self, int Index, std::string const & Key) -> std::string"},
 	 { "AirMspiIgcCollection_set_config_value", _wrap_AirMspiIgcCollection_set_config_value, METH_VARARGS, "\n"
+		"set_config_value(AirMspiIgcCollection self, int Index, std::string const & Keyword, std::string const & Value)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_config_value(int Index, const std::string &Keyword, const std::string &Value)\n"
 		"GeoCal::AirMspiIgcCollection::set_config_value\n"
-		"Set Configuration value for given view number.\n"
+		"Set Configuration value for given view number.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_orbit", _wrap_AirMspiIgcCollection_orbit, METH_VARARGS, "\n"
+		"orbit(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::Orbit >\n"
 		"\n"
-		"boost::shared_ptr< Orbit > GeoCal::AirMspiIgcCollection::orbit(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::orbit\n"
-		"Return specific orbit we are using.\n"
+		"Return specific orbit we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_l1b1_file_name", _wrap_AirMspiIgcCollection_l1b1_file_name, METH_VARARGS, "\n"
+		"l1b1_file_name(AirMspiIgcCollection self, int Index) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiIgcCollection::l1b1_file_name(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::l1b1_file_name\n"
-		"Return L1B1 file name.\n"
+		"Return L1B1 file name.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_set_orbit", _wrap_AirMspiIgcCollection_set_orbit, METH_VARARGS, "\n"
+		"set_orbit(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::Orbit > const & Orb)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_orbit(const boost::shared_ptr< Orbit > &Orb)\n"
 		"GeoCal::AirMspiIgcCollection::set_orbit\n"
-		"Change the orbit we are using.\n"
+		"Change the orbit we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_camera", _wrap_AirMspiIgcCollection_camera, METH_VARARGS, "\n"
+		"camera(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::MspiCamera >\n"
 		"\n"
-		"boost::shared_ptr< MspiCamera > GeoCal::AirMspiIgcCollection::camera(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::camera\n"
-		"Return specific camera we are using, needed for some routines that\n"
-		"depend on the details of MspiCamera.\n"
+		"Return specific camera we are using, needed for some routines that depend on the\n"
+		"details of MspiCamera.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_set_camera", _wrap_AirMspiIgcCollection_set_camera, METH_VARARGS, "\n"
+		"set_camera(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::MspiCamera > const & Can)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_camera(const boost::shared_ptr< MspiCamera > &Cam)\n"
 		"GeoCal::AirMspiIgcCollection::set_camera\n"
-		"Change the camera we are using.\n"
+		"Change the camera we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_gimbal", _wrap_AirMspiIgcCollection_gimbal, METH_VARARGS, "\n"
+		"gimbal(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::MspiGimbal >\n"
 		"\n"
-		"boost::shared_ptr< MspiGimbal > GeoCal::AirMspiIgcCollection::gimbal(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::gimbal\n"
-		"Return specific gimbal we are using, needed for some routines that\n"
-		"depend on the details of MspiGimbal.\n"
+		"Return specific gimbal we are using, needed for some routines that depend on the\n"
+		"details of MspiGimbal.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_set_gimbal", _wrap_AirMspiIgcCollection_set_gimbal, METH_VARARGS, "\n"
+		"set_gimbal(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::set_gimbal(const boost::shared_ptr< MspiGimbal > &Gim)\n"
 		"GeoCal::AirMspiIgcCollection::set_gimbal\n"
-		"Change the gimbal we are using.\n"
+		"Change the gimbal we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_time_table", _wrap_AirMspiIgcCollection_time_table, METH_VARARGS, "\n"
+		"time_table(AirMspiIgcCollection self, int Index) -> boost::shared_ptr< GeoCal::TimeTable >\n"
 		"\n"
-		"boost::shared_ptr< TimeTable > GeoCal::AirMspiIgcCollection::time_table(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::time_table\n"
-		"Return specific time table we are using, needed for some routines that\n"
-		"depend on the details of the time table.\n"
+		"Return specific time table we are using, needed for some routines that depend on\n"
+		"the details of the time table.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_number_band", _wrap_AirMspiIgcCollection_number_band, METH_VARARGS, "\n"
+		"number_band(AirMspiIgcCollection self, int Index) -> int\n"
 		"\n"
-		"int GeoCal::AirMspiIgcCollection::number_band(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::number_band\n"
-		"Return number of bands.\n"
+		"Return number of bands.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_band", _wrap_AirMspiIgcCollection_band, METH_VARARGS, "\n"
+		"band(AirMspiIgcCollection self, int Index) -> int\n"
+		"band(AirMspiIgcCollection self, int Index, int B)\n"
 		"\n"
-		"void GeoCal::AirMspiIgcCollection::band(int Index, int B)\n"
 		"GeoCal::AirMspiIgcCollection::band\n"
-		"Set band that we are using.\n"
+		"Set band that we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_min_l1b1_line", _wrap_AirMspiIgcCollection_min_l1b1_line, METH_VARARGS, "\n"
+		"min_l1b1_line(AirMspiIgcCollection self, int Index) -> int\n"
 		"\n"
-		"int GeoCal::AirMspiIgcCollection::min_l1b1_line(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::min_l1b1_line\n"
-		"Return the minimum line in the l1b1 file that we have all the data to\n"
-		"process.\n"
-		"This looks at the both the l1b1 file itself and also the coverage of\n"
-		"the navigation file. It can also be shrunk by the user supplying the\n"
-		"range in the configuration files.\n"
+		"Return the minimum line in the l1b1 file that we have all the data to process.  \n"
 		"\n"
-		"Note that the images etc returned by this class have already been\n"
-		"subsetted, you don't need to use min_l1b1_line or max_l1b1_line\n"
-		"directly. This is provided just as metadata. \n"
+		"This looks at the both the l1b1 file itself and also the coverage of the\n"
+		"navigation file. It can also be shrunk by the user supplying the range in the\n"
+		"configuration files.  \n"
+		"\n"
+		"Note that the images etc returned by this class have *already* been subsetted,\n"
+		"you don't need to use min_l1b1_line or max_l1b1_line directly. This is provided\n"
+		"just as metadata.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgcCollection_max_l1b1_line", _wrap_AirMspiIgcCollection_max_l1b1_line, METH_VARARGS, "\n"
+		"max_l1b1_line(AirMspiIgcCollection self, int Index) -> int\n"
 		"\n"
-		"int GeoCal::AirMspiIgcCollection::max_l1b1_line(int Index) const\n"
 		"GeoCal::AirMspiIgcCollection::max_l1b1_line\n"
-		"Return the maximum line in the l1b1 file that we have all the data to\n"
-		"process.\n"
-		"This looks at the both the l1b1 file itself and also the coverage of\n"
-		"the navigation file. It can also be shrunk by the user supplying the\n"
-		"range in the configuration files.\n"
+		"Return the maximum line in the l1b1 file that we have all the data to process.  \n"
 		"\n"
-		"Note that the images etc. returned by this class have already been\n"
-		"subsetted, you don't need to use min_l1b1_line or max_l1b1_line\n"
-		"directly. This is provided just as metadata. \n"
+		"This looks at the both the l1b1 file itself and also the coverage of the\n"
+		"navigation file. It can also be shrunk by the user supplying the range in the\n"
+		"configuration files.  \n"
+		"\n"
+		"Note that the images etc. returned by this class have *already* been subsetted,\n"
+		"you don't need to use min_l1b1_line or max_l1b1_line directly. This is provided\n"
+		"just as metadata.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgcCollection_view_number_to_image_index", _wrap_AirMspiIgcCollection_view_number_to_image_index, METH_VARARGS, "\n"
+		"view_number_to_image_index(AirMspiIgcCollection self, int View_number) -> int\n"
 		"\n"
-		"int AirMspiIgcCollection::view_number_to_image_index(int View_number) const\n"
 		"GeoCal::AirMspiIgcCollection::view_number_to_image_index\n"
-		"Go from view number (found in the l1b1 table file) to the index number\n"
-		"matching it.\n"
+		"Go from view number (found in the l1b1 table file) to the index number matching\n"
+		"it.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgcCollection_replace_view_config", _wrap_AirMspiIgcCollection_replace_view_config, METH_VARARGS, "\n"
+		"replace_view_config(AirMspiIgcCollection self, std::string const & Master_config_file, std::string const & L1b1_table)\n"
 		"\n"
-		"void AirMspiIgcCollection::replace_view_config(const std::string &Master_config_file, const std::string &L1b1_table)\n"
 		"GeoCal::AirMspiIgcCollection::replace_view_config\n"
-		"There is various metadata needed by the airmspi programs that is only\n"
-		"available once a master config and l1b1_table file are created.\n"
-		"This is created as part of AirMspiMapInfoProcessor (a python class\n"
-		"found in the MSPI-Ground software, not here in GeoCal). We need to be\n"
-		"able to add in this metadata to an existing IgcCollection. This\n"
-		"function does this. Because we may also have direction to process only\n"
-		"a subset of the data, this also recalculates the minimum and maximum\n"
-		"L1B1 lines to use. \n"
+		"There is various metadata needed by the airmspi programs that is only available\n"
+		"once a master config and l1b1_table file are created.  \n"
+		"\n"
+		"This is created as part of AirMspiMapInfoProcessor (a python class found in the\n"
+		"MSPI-Ground software, not here in GeoCal). We need to be able to add in this\n"
+		"metadata to an existing IgcCollection. This function does this. Because we may\n"
+		"also have direction to process only a subset of the data, this also recalculates\n"
+		"the minimum and maximum L1B1 lines to use.  \n"
+		"\n"
 		""},
 	 { "delete_AirMspiIgcCollection", _wrap_delete_AirMspiIgcCollection, METH_O, "\n"
+		"delete_AirMspiIgcCollection(AirMspiIgcCollection self)\n"
 		"\n"
-		"virtual GeoCal::AirMspiIgcCollection::~AirMspiIgcCollection()\n"
 		"GeoCal::AirMspiIgcCollection::~AirMspiIgcCollection\n"
 		""},
 	 { "AirMspiIgcCollection_swigregister", AirMspiIgcCollection_swigregister, METH_O, NULL},

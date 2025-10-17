@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _material_detect.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _material_detect:
 _material_detect.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _material_detect.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,37 +145,36 @@ import geocal_swig.geocal_exception
 class MaterialDetect(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This class is used to do change detection and identify the material
-    for pixels that have changed.
 
-    This duplicates what was done in the VICAR proc "detwvpan", and in
-    particular the "f2ratio" process.
+    This class is used to do change detection and identify the material for pixels
+    that have changed.  
 
-    We read a IBIS file that describes the thresholds for a number of
-    material classes. For each material class, we do the following:
+    This duplicates what was done in the VICAR proc "detwvpan", and in particular
+    the "f2ratio" process.  
 
-    First, the difference in the pan bands is compared to a threshold. The
-    difference is normally calculated by DoughnutAverage, using the
-    pandif_raster_image. But something else could be used, all this class
-    cares about is having a difference it can compare against a threshold.
+    We read a IBIS file that describes the thresholds for a number of material
+    classes. For each material class, we do the following:  
 
-    Compare pan data to a shadow threshold. This masks at very dark pixels
-    that we assume are in shadow.
+    1.  First, the difference in the pan bands is compared to a threshold. The
+        difference is normally calculated by DoughnutAverage, using the
+        pandif_raster_image. But something else could be used, all this class cares
+        about is having a difference it can compare against a threshold.  
+    2.  Compare pan data to a shadow threshold. This masks at very dark pixels that
+        we assume are in shadow.  
+    3.  For each point, we calculate the required ratios between the multispectral
+        bands, take the difference with the supplied class mean and divide by the
+        class sigma.  
+    4.  We sum the abs value of for each of the band ratios divided by the number of
+        band ratios (i.e, we use a L1 norm). This is compared against a second
+        threshold.  
 
-    For each point, we calculate the required ratios between the
-    multispectral bands, take the difference with the supplied class mean
-    and divide by the class sigma.
+    We may have more than one class that passes the second threshold. In that case,
+    we sort the classes first by a class priority (with the lower number being
+    selected first). For ties, we then pick the class that has the smallest
+    difference norm.  
 
-    We sum the abs value of for each of the band ratios divided by the
-    number of band ratios (i.e, we use a L1 norm). This is compared
-    against a second threshold.
+    C++ includes: material_detect.h
 
-    We may have more than one class that passes the second threshold. In
-    that case, we sort the classes first by a class priority (with the
-    lower number being selected first). For ties, we then pick the class
-    that has the smallest difference norm.
-
-    C++ includes: material_detect.h 
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -180,35 +182,29 @@ class MaterialDetect(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Pan_data, Pan_diff, Mulspect, Pan_diff_threshold, Spectral_diff_threshold, Class_priority, Ibis_fname, Pan_shadow_threshold):
         r"""
+        __init__(MaterialDetect self, boost::shared_ptr< GeoCal::RasterImage > const & Pan_data, boost::shared_ptr< GeoCal::RasterImage > const & Pan_diff, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Mulspect, BlitzArray_double_1 Pan_diff_threshold, BlitzArray_double_1 Spectral_diff_threshold, BlitzArray_int_1 Class_priority, std::string const & Ibis_fname, double Pan_shadow_threshold) -> MaterialDetect
 
-        MaterialDetect::MaterialDetect(const boost::shared_ptr< RasterImage > &Pan_data, const
-        boost::shared_ptr< RasterImage > &Pan_diff, const boost::shared_ptr<
-        RasterImageMultiBand > &Mulspect, const blitz::Array< double, 1 >
-        &Pan_diff_threshold, const blitz::Array< double, 1 >
-        &Spectral_diff_threshold, const blitz::Array< int, 1 >
-        &Class_priority, const std::string &Ibis_fname, double
-        Pan_shadow_threshold)
         GeoCal::MaterialDetect::MaterialDetect
-        Constructor.
+        Constructor.  
+
         This takes the pan difference band (normally pandif_raster_image from
-        DoughnutAverage), the multispectral bands, the threshold for each
-        material for the pan difference and spectral difference, the class
-        priority for eahc class, and the name of the IBIS file to get the
-        material information.
+        DoughnutAverage), the multispectral bands, the threshold for each material for
+        the pan difference and spectral difference, the class priority for eahc class,
+        and the name of the IBIS file to get the material information.  
 
-        The IBIS file should have at least 5 columns (which is all that we
-        read). The first two columns should be full word values, and are the
-        band indices (1 based, rather than the 0 based we use elsewhere). The
-        third should be double (for no good reason, it just is), which is the
-        class id. The fourth and fifth are also double, and are the mean and
-        sigma for that band ratio.
+        The IBIS file should have at least 5 columns (which is all that we read). The
+        first two columns should be full word values, and are the band indices (1 based,
+        rather than the 0 based we use elsewhere). The third should be double (for no
+        good reason, it just is), which is the class id. The fourth and fifth are also
+        double, and are the mean and sigma for that band ratio.  
 
-        In generate, the class ID doesn't start from 0. We find the minimum
-        value in the table, and use that as the index into Pan_diff_threshold
-        etc. (so if first id is 8881 then the threshold for 8881 is
-        Pan_diff_threshold[0] and 8885 is Pan_diff_threshold[4]). Obviously we
-        could have just used a map instead, but this convention fits better
-        with the current way we supply this values in the Shiva scripts. 
+        In generate, the class ID doesn't start from 0. We find the minimum value in the
+        table, and use that as the index into Pan_diff_threshold etc. (so if first id is
+        8881 then the threshold for 8881 is Pan_diff_threshold[0] and 8885 is
+        Pan_diff_threshold[4]). Obviously we could have just used a map instead, but
+        this convention fits better with the current way we supply this values in the
+        Shiva scripts.  
+
         """
         _material_detect.MaterialDetect_swiginit(self, _material_detect.new_MaterialDetect(Pan_data, Pan_diff, Mulspect, Pan_diff_threshold, Spectral_diff_threshold, Class_priority, Ibis_fname, Pan_shadow_threshold))
     _v_closest_material_raster_image = _swig_new_instance_method(_material_detect.MaterialDetect__v_closest_material_raster_image)

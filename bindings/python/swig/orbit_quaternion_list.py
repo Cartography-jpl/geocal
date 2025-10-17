@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_quaternion_list.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_quaternion_list:
 _orbit_quaternion_list.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_quaternion_list.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,43 +144,40 @@ import geocal_swig.look_vector
 class OrbitQuaternionList(geocal_swig.orbit.Orbit):
     r"""
 
-    This is an implementation of an Orbit that is a list of
-    QuaternionOrbitData values.
 
-    For times that fall between these values, we interpolate to get the
-    OrbitData.
+    This is an implementation of an Orbit that is a list of QuaternionOrbitData
+    values.  
+
+    For times that fall between these values, we interpolate to get the OrbitData.  
 
     Note that for some classes the calculation of the full list of
-    QuaternionOrbitData might not be needed, for example an Orbit file
-    covering a full day of which we are only using a subset of the data.
-    To support this, we allow a lazy evaluation of the
-    QuaternionOrbitData. It can initially be supplied as a null
-    boost::shared_ptr, and when we encounter a null we call the function
-    orbit_data_create. This function should be overriden by a derived
-    class to supply the calculation of a QuaternionOrbitData for a
-    particular time on demand.
+    QuaternionOrbitData might not be needed, for example an Orbit file covering a
+    full day of which we are only using a subset of the data. To support this, we
+    allow a lazy evaluation of the QuaternionOrbitData. It can initially be supplied
+    as a null boost::shared_ptr, and when we encounter a null we call the function
+    orbit_data_create. This function should be overriden by a derived class to
+    supply the calculation of a QuaternionOrbitData for a particular time on demand.  
 
-    A note about AutoDerivative in the underlying Orbit. For the orbit
-    creation (orbit_data_create) we use a constant time only. This is
-    really just what we mean by doing a time interpolation. We select
-    points at a specific, exact time - t0, t1, t2, etc. No derivatives,
-    the times are exact constants. However, when we interpolate to time t
-    using orbit data at t0 and t1, that is where the derivative enters in.
-    So we propagate time gradients through the linear interpolation in
-    orbit_data. Note that this is the time behavior of
-    OrbitQuaterntionList, even if it isn’t the derivative of the
-    underlying orbit. This is one differences in using a
-    OrbitQuaternionList vs. some other Orbit - the time behavior is by
-    design linear.
+    A note about AutoDerivative in the underlying Orbit. For the orbit creation
+    (orbit_data_create) we use a constant time only. This is really just what we
+    mean by doing a time interpolation. We select points at a specific, exact time -
+    t0, t1, t2, etc. No derivatives, the times are exact constants. However, when we
+    interpolate to time t using orbit data at t0 and t1, that is where the
+    derivative enters in. So we propagate time gradients through the linear
+    interpolation in orbit_data. Note that this *is* the time behavior of
+    OrbitQuaterntionList, even if it isn’t the derivative of the underlying orbit.
+    This is one differences in using a OrbitQuaternionList vs. some other Orbit -
+    the time behavior is by design linear.  
 
     So you should calculate your quaternions in orbit_data_create using
-    AutoDerivative (if the orbit supports it and has parameters), but hold
-    time constant (either don’t include as one of the gradient variables,
-    or give it a gradient of zero). The OrbitQuaternionList will then
-    given the correct gradients of how it behaves, even if this isn’t the
-    same gradient you would have gotten from the underlying Orbit.
+    AutoDerivative (if the orbit supports it and has parameters), but hold time
+    constant (either don’t include as one of the gradient variables, or give it a
+    gradient of zero). The OrbitQuaternionList will then given the correct gradients
+    of how *it* behaves, even if this isn’t the same gradient you would have gotten
+    from the underlying Orbit.  
 
-    C++ includes: orbit_quaternion_list.h 
+    C++ includes: orbit_quaternion_list.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -185,15 +185,17 @@ class OrbitQuaternionList(geocal_swig.orbit.Orbit):
 
     def __init__(self, Data):
         r"""
+        __init__(OrbitQuaternionList self, Vector_QuaternionOrbitData Data) -> OrbitQuaternionList
 
-        GeoCal::OrbitQuaternionList::OrbitQuaternionList(iterator ibeg, iterator iend)
         GeoCal::OrbitQuaternionList::OrbitQuaternionList
-        Constructor that takes a list of QuaternionOrbitData values.
-        Note that the data doesn't need to be sorted, we handle sorting as we
-        ingest the data.
+        Constructor that takes a list of QuaternionOrbitData values.  
 
-        QuaternionOrbitData pointer can be null if we want to do a lazy
-        evaluation of the data (see description of class for details). 
+        Note that the data doesn't need to be sorted, we handle sorting as we ingest the
+        data.  
+
+        QuaternionOrbitData pointer can be null if we want to do a lazy evaluation of
+        the data (see description of class for details).  
+
         """
         _orbit_quaternion_list.OrbitQuaternionList_swiginit(self, _orbit_quaternion_list.new_OrbitQuaternionList(Data))
     orbit_data = _swig_new_instance_method(_orbit_quaternion_list.OrbitQuaternionList_orbit_data)
@@ -247,13 +249,14 @@ _orbit_quaternion_list.OrbitQuaternionList_swigregister(OrbitQuaternionList)
 class OrbitListCache(OrbitQuaternionList):
     r"""
 
-    Some orbits are expensive to calculate (e.g., SpicePlanetOrbit).
 
-    Often it is perfectly fine to only calculate this at some fixed set of
-    times and then interpolate, which can be significantly faster. This
-    class supports this.
+    Some orbits are expensive to calculate (e.g., SpicePlanetOrbit).  
 
-    C++ includes: orbit_quaternion_list.h 
+    Often it is perfectly fine to only calculate this at some fixed set of times and
+    then interpolate, which can be significantly faster. This class supports this.  
+
+    C++ includes: orbit_quaternion_list.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -261,14 +264,15 @@ class OrbitListCache(OrbitQuaternionList):
 
     def __init__(self, Orbit_underlying, Tt, Sample=0.0):
         r"""
+        __init__(OrbitListCache self, boost::shared_ptr< GeoCal::Orbit > const & Orbit_underlying, boost::shared_ptr< GeoCal::TimeTable > const & Tt, double Sample=0.0) -> OrbitListCache
 
-        GeoCal::OrbitListCache::OrbitListCache(const boost::shared_ptr< Orbit > &Orbit_underlying, const
-        boost::shared_ptr< TimeTable > &Tt, double Sample=0.0)
         GeoCal::OrbitListCache::OrbitListCache
-        Create a OrbitListCache that calculates the orbit at each time found for image coordinate
-        line from Tt.min_line() to tt.max_line() for the given sample.
-        We cache the orbit data. If the underlying orbit changes, we throw
-        away the cached values. 
+        Create a OrbitListCache that calculates the orbit at each time found for image
+        coordinate line from Tt.min_line() to tt.max_line() for the given sample.  
+
+        We cache the orbit data. If the underlying orbit changes, we throw away the
+        cached values.  
+
         """
         _orbit_quaternion_list.OrbitListCache_swiginit(self, _orbit_quaternion_list.new_OrbitListCache(Orbit_underlying, Tt, Sample))
     _v_orbit_underlying = _swig_new_instance_method(_orbit_quaternion_list.OrbitListCache__v_orbit_underlying)

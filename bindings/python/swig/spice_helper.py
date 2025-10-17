@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spice_helper.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spice_helper:
 _spice_helper.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spice_helper.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,17 +141,19 @@ import geocal_swig.look_vector
 class SpiceHelper(object):
     r"""
 
-    This class centralizes all of the CSPICE calls from the CSPICE library
-    (available from NAIF athttp://naif.jpl.nasa.gov/naif/pds.html).
 
-    This class handles initializing CSPICE, and provides one place to
-    modify if we ever need to replace the dependency on this library.
+    This class centralizes all of the CSPICE calls from the CSPICE library
+    (available from NAIF at http://naif.jpl.nasa.gov/naif/pds.html).  
+
+    This class handles initializing CSPICE, and provides one place to modify if we
+    ever need to replace the dependency on this library.  
 
     SPICE depends on various kernels. We load the file found at
-    $SPICEDATA/geocal.ker. This file in turn loads a number of other
-    kernels, you can edit this file to change which kernels are used.
+    $SPICEDATA/geocal.ker. This file in turn loads a number of other kernels, you
+    can edit this file to change which kernels are used.  
 
-    C++ includes: spice_helper.h 
+    C++ includes: spice_helper.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -171,6 +176,7 @@ class SpiceHelper(object):
     surface_intersect = _swig_new_static_method(_spice_helper.SpiceHelper_surface_intersect)
 
     def __init__(self):
+        r"""__init__(SpiceHelper self) -> SpiceHelper"""
         _spice_helper.SpiceHelper_swiginit(self, _spice_helper.new_SpiceHelper())
     __swig_destroy__ = _spice_helper.delete_SpiceHelper
 

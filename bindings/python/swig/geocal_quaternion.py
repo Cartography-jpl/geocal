@@ -90,6 +90,7 @@ _geocal_quaternion.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _geocal_quaternion.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _geocal_quaternion.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -135,10 +136,13 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 class Quaternion_AutoDerivative_double(object):
+    r"""Proxy of C++ boost::math::quaternion< GeoCal::AutoDerivative< double > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, a, b, c, d):
+        r"""__init__(Quaternion_AutoDerivative_double self, AutoDerivativeDouble a, AutoDerivativeDouble b, AutoDerivativeDouble c, AutoDerivativeDouble d) -> Quaternion_AutoDerivative_double"""
         _geocal_quaternion.Quaternion_AutoDerivative_double_swiginit(self, _geocal_quaternion.new_Quaternion_AutoDerivative_double(a, b, c, d))
     _v_R_component_1 = _swig_new_instance_method(_geocal_quaternion.Quaternion_AutoDerivative_double__v_R_component_1)
 

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_collection.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_collection:
 _igc_collection.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_collection.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,9 +142,11 @@ import geocal_swig.geocal_exception
 class IgcCollection(geocal_swig.with_parameter.WithParameter):
     r"""
 
-    This is a collection of ImageGroundConnection.
 
-    C++ includes: igc_collection.h 
+    This is a collection of ImageGroundConnection.  
+
+    C++ includes: igc_collection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -246,6 +251,7 @@ class IgcCollection(geocal_swig.with_parameter.WithParameter):
 
 
     def __init__(self):
+        r"""__init__(IgcCollection self) -> IgcCollection"""
         if self.__class__ == IgcCollection:
             _self = None
         else:

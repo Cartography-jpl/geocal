@@ -8048,104 +8048,113 @@ SWIGINTERN PyObject *RsmAdjustableParameterB_swiginit(PyObject *SWIGUNUSEDPARM(s
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmBParameterDesc", _wrap_new_RsmBParameterDesc, METH_VARARGS, "\n"
+		"RsmBParameterDesc()\n"
+		"new_RsmBParameterDesc(ImageGroundConnection Igc, double H_min, double H_max) -> RsmBParameterDesc\n"
 		"\n"
-		"RsmBParameterDesc::RsmBParameterDesc(const ImageGroundConnection &Igc, double H_min, double H_max)\n"
 		"GeoCal::RsmBParameterDesc::RsmBParameterDesc\n"
-		"Create a RsmBParameterDesc.\n"
-		"We create a LocalRcConverter that matches the given Igc. \n"
+		"Create a RsmBParameterDesc.  \n"
+		"\n"
+		"We create a LocalRcConverter that matches the given Igc.  \n"
+		"\n"
 		""},
 	 { "RsmBParameterDesc__v_number_parameter", _wrap_RsmBParameterDesc__v_number_parameter, METH_O, "\n"
+		"RsmBParameterDesc__v_number_parameter(RsmBParameterDesc self) -> int\n"
 		"\n"
-		"int GeoCal::RsmBParameterDesc::number_parameter() const\n"
 		"GeoCal::RsmBParameterDesc::number_parameter\n"
 		""},
 	 { "RsmBParameterDesc__v_coordinate_converter", _wrap_RsmBParameterDesc__v_coordinate_converter, METH_VARARGS, "\n"
+		"RsmBParameterDesc__v_coordinate_converter(RsmBParameterDesc self) -> boost::shared_ptr< GeoCal::LocalRcConverter >\n"
+		"RsmBParameterDesc__v_coordinate_converter(RsmBParameterDesc self, boost::shared_ptr< GeoCal::LocalRcConverter > const & V)\n"
 		"\n"
-		"void GeoCal::RsmBParameterDesc::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)\n"
 		"GeoCal::RsmBParameterDesc::coordinate_converter\n"
 		""},
 	 { "RsmBParameterDesc__v_normalization_scale", _wrap_RsmBParameterDesc__v_normalization_scale, METH_O, "\n"
+		"RsmBParameterDesc__v_normalization_scale(RsmBParameterDesc self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< double, 1 > & GeoCal::RsmBParameterDesc::normalization_scale() const\n"
 		"GeoCal::RsmBParameterDesc::normalization_scale\n"
 		""},
 	 { "RsmBParameterDesc__v_normalization_offset", _wrap_RsmBParameterDesc__v_normalization_offset, METH_O, "\n"
+		"RsmBParameterDesc__v_normalization_offset(RsmBParameterDesc self) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::RsmBParameterDesc::normalization_offset() const\n"
 		"GeoCal::RsmBParameterDesc::normalization_offset\n"
 		""},
 	 { "RsmBParameterDesc__v_using_basis", _wrap_RsmBParameterDesc__v_using_basis, METH_O, "\n"
+		"RsmBParameterDesc__v_using_basis(RsmBParameterDesc self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmBParameterDesc::using_basis() const\n"
 		"GeoCal::RsmBParameterDesc::using_basis\n"
 		""},
 	 { "RsmBParameterDesc__v_row_power", _wrap_RsmBParameterDesc__v_row_power, METH_VARARGS, "\n"
+		"RsmBParameterDesc__v_row_power(RsmBParameterDesc self) -> BlitzArray_int_2\n"
+		"RsmBParameterDesc__v_row_power(RsmBParameterDesc self, BlitzArray_int_2 V)\n"
 		"\n"
-		"void GeoCal::RsmBParameterDesc::row_power(const blitz::Array< int, 2 > &V)\n"
 		"GeoCal::RsmBParameterDesc::row_power\n"
 		""},
 	 { "RsmBParameterDesc__v_col_power", _wrap_RsmBParameterDesc__v_col_power, METH_VARARGS, "\n"
+		"RsmBParameterDesc__v_col_power(RsmBParameterDesc self) -> BlitzArray_int_2\n"
+		"RsmBParameterDesc__v_col_power(RsmBParameterDesc self, BlitzArray_int_2 V)\n"
 		"\n"
-		"void GeoCal::RsmBParameterDesc::col_power(const blitz::Array< int, 2 > &V)\n"
 		"GeoCal::RsmBParameterDesc::col_power\n"
 		""},
-	 { "RsmBParameterDesc___str__", _wrap_RsmBParameterDesc___str__, METH_O, NULL},
+	 { "RsmBParameterDesc___str__", _wrap_RsmBParameterDesc___str__, METH_O, "RsmBParameterDesc___str__(RsmBParameterDesc self) -> std::string"},
 	 { "delete_RsmBParameterDesc", _wrap_delete_RsmBParameterDesc, METH_O, "\n"
+		"delete_RsmBParameterDesc(RsmBParameterDesc self)\n"
 		"\n"
-		"virtual GeoCal::RsmBParameterDesc::~RsmBParameterDesc()\n"
 		"GeoCal::RsmBParameterDesc::~RsmBParameterDesc\n"
 		""},
 	 { "RsmBParameterDesc_swigregister", RsmBParameterDesc_swigregister, METH_O, NULL},
 	 { "RsmBParameterDesc_swiginit", RsmBParameterDesc_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmAdjustableParameterB", _wrap_new_RsmAdjustableParameterB, METH_VARARGS, "\n"
+		"RsmAdjustableParameterB(std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\", std::string const & Triangulation_id=\"\")\n"
+		"RsmAdjustableParameterB(ImageGroundConnection Igc, double H_min, double H_max, RsmId Rsm_id, std::string const & Triangulation_id=\"\")\n"
 		"\n"
-		"GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
 		"GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB\n"
 		""},
 	 { "RsmAdjustableParameterB_tre_string", _wrap_RsmAdjustableParameterB_tre_string, METH_O, "\n"
+		"RsmAdjustableParameterB_tre_string(RsmAdjustableParameterB self) -> std::string\n"
 		"\n"
-		"std::string RsmAdjustableParameterB::tre_string() const\n"
 		"GeoCal::RsmAdjustableParameterB::tre_string\n"
 		""},
 	 { "RsmAdjustableParameterB_read_tre_string", _wrap_RsmAdjustableParameterB_read_tre_string, METH_O, "\n"
+		"RsmAdjustableParameterB_read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmAdjustableParameterB >\n"
 		"\n"
-		"boost::shared_ptr< RsmAdjustableParameterB > RsmAdjustableParameterB::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmAdjustableParameterB::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmRationalPolynomial. However the fields that aren't contained are ones used\n"
+		"for fitting the RSM, so in practice this doesn't matter. We just set the various\n"
+		"fields to the default values found in the constructor.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "delete_RsmAdjustableParameterB", _wrap_delete_RsmAdjustableParameterB, METH_O, "\n"
+		"delete_RsmAdjustableParameterB(RsmAdjustableParameterB self)\n"
 		"\n"
-		"virtual GeoCal::RsmAdjustableParameterB::~RsmAdjustableParameterB()\n"
 		"GeoCal::RsmAdjustableParameterB::~RsmAdjustableParameterB\n"
 		""},
 	 { "RsmAdjustableParameterB_swigregister", RsmAdjustableParameterB_swigregister, METH_O, NULL},
@@ -8156,104 +8165,113 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmBParameterDesc", _wrap_new_RsmBParameterDesc, METH_VARARGS, "\n"
+		"RsmBParameterDesc()\n"
+		"new_RsmBParameterDesc(ImageGroundConnection Igc, double H_min, double H_max) -> RsmBParameterDesc\n"
 		"\n"
-		"RsmBParameterDesc::RsmBParameterDesc(const ImageGroundConnection &Igc, double H_min, double H_max)\n"
 		"GeoCal::RsmBParameterDesc::RsmBParameterDesc\n"
-		"Create a RsmBParameterDesc.\n"
-		"We create a LocalRcConverter that matches the given Igc. \n"
+		"Create a RsmBParameterDesc.  \n"
+		"\n"
+		"We create a LocalRcConverter that matches the given Igc.  \n"
+		"\n"
 		""},
 	 { "RsmBParameterDesc__v_number_parameter", _wrap_RsmBParameterDesc__v_number_parameter, METH_O, "\n"
+		"_v_number_parameter(RsmBParameterDesc self) -> int\n"
 		"\n"
-		"int GeoCal::RsmBParameterDesc::number_parameter() const\n"
 		"GeoCal::RsmBParameterDesc::number_parameter\n"
 		""},
 	 { "RsmBParameterDesc__v_coordinate_converter", _wrap_RsmBParameterDesc__v_coordinate_converter, METH_VARARGS, "\n"
+		"_v_coordinate_converter(RsmBParameterDesc self) -> boost::shared_ptr< GeoCal::LocalRcConverter >\n"
+		"_v_coordinate_converter(RsmBParameterDesc self, boost::shared_ptr< GeoCal::LocalRcConverter > const & V)\n"
 		"\n"
-		"void GeoCal::RsmBParameterDesc::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)\n"
 		"GeoCal::RsmBParameterDesc::coordinate_converter\n"
 		""},
 	 { "RsmBParameterDesc__v_normalization_scale", _wrap_RsmBParameterDesc__v_normalization_scale, METH_O, "\n"
+		"_v_normalization_scale(RsmBParameterDesc self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< double, 1 > & GeoCal::RsmBParameterDesc::normalization_scale() const\n"
 		"GeoCal::RsmBParameterDesc::normalization_scale\n"
 		""},
 	 { "RsmBParameterDesc__v_normalization_offset", _wrap_RsmBParameterDesc__v_normalization_offset, METH_O, "\n"
+		"_v_normalization_offset(RsmBParameterDesc self) -> BlitzArray_double_1\n"
 		"\n"
-		"blitz::Array< double, 1 > GeoCal::RsmBParameterDesc::normalization_offset() const\n"
 		"GeoCal::RsmBParameterDesc::normalization_offset\n"
 		""},
 	 { "RsmBParameterDesc__v_using_basis", _wrap_RsmBParameterDesc__v_using_basis, METH_O, "\n"
+		"_v_using_basis(RsmBParameterDesc self) -> bool\n"
 		"\n"
-		"bool GeoCal::RsmBParameterDesc::using_basis() const\n"
 		"GeoCal::RsmBParameterDesc::using_basis\n"
 		""},
 	 { "RsmBParameterDesc__v_row_power", _wrap_RsmBParameterDesc__v_row_power, METH_VARARGS, "\n"
+		"_v_row_power(RsmBParameterDesc self) -> BlitzArray_int_2\n"
+		"_v_row_power(RsmBParameterDesc self, BlitzArray_int_2 V)\n"
 		"\n"
-		"void GeoCal::RsmBParameterDesc::row_power(const blitz::Array< int, 2 > &V)\n"
 		"GeoCal::RsmBParameterDesc::row_power\n"
 		""},
 	 { "RsmBParameterDesc__v_col_power", _wrap_RsmBParameterDesc__v_col_power, METH_VARARGS, "\n"
+		"_v_col_power(RsmBParameterDesc self) -> BlitzArray_int_2\n"
+		"_v_col_power(RsmBParameterDesc self, BlitzArray_int_2 V)\n"
 		"\n"
-		"void GeoCal::RsmBParameterDesc::col_power(const blitz::Array< int, 2 > &V)\n"
 		"GeoCal::RsmBParameterDesc::col_power\n"
 		""},
-	 { "RsmBParameterDesc___str__", _wrap_RsmBParameterDesc___str__, METH_O, NULL},
+	 { "RsmBParameterDesc___str__", _wrap_RsmBParameterDesc___str__, METH_O, "__str__(RsmBParameterDesc self) -> std::string"},
 	 { "delete_RsmBParameterDesc", _wrap_delete_RsmBParameterDesc, METH_O, "\n"
+		"delete_RsmBParameterDesc(RsmBParameterDesc self)\n"
 		"\n"
-		"virtual GeoCal::RsmBParameterDesc::~RsmBParameterDesc()\n"
 		"GeoCal::RsmBParameterDesc::~RsmBParameterDesc\n"
 		""},
 	 { "RsmBParameterDesc_swigregister", RsmBParameterDesc_swigregister, METH_O, NULL},
 	 { "RsmBParameterDesc_swiginit", RsmBParameterDesc_swiginit, METH_VARARGS, NULL},
 	 { "new_RsmAdjustableParameterB", _wrap_new_RsmAdjustableParameterB, METH_VARARGS, "\n"
+		"RsmAdjustableParameterB(std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\", std::string const & Triangulation_id=\"\")\n"
+		"RsmAdjustableParameterB(ImageGroundConnection Igc, double H_min, double H_max, RsmId Rsm_id, std::string const & Triangulation_id=\"\")\n"
 		"\n"
-		"GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
 		"GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB\n"
 		""},
 	 { "RsmAdjustableParameterB_tre_string", _wrap_RsmAdjustableParameterB_tre_string, METH_O, "\n"
+		"tre_string(RsmAdjustableParameterB self) -> std::string\n"
 		"\n"
-		"std::string RsmAdjustableParameterB::tre_string() const\n"
 		"GeoCal::RsmAdjustableParameterB::tre_string\n"
 		""},
 	 { "RsmAdjustableParameterB_read_tre_string", _wrap_RsmAdjustableParameterB_read_tre_string, METH_O, "\n"
+		"read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmAdjustableParameterB >\n"
 		"\n"
-		"boost::shared_ptr< RsmAdjustableParameterB > RsmAdjustableParameterB::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmAdjustableParameterB::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmRationalPolynomial. However the fields that aren't contained are ones used\n"
+		"for fitting the RSM, so in practice this doesn't matter. We just set the various\n"
+		"fields to the default values found in the constructor.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "delete_RsmAdjustableParameterB", _wrap_delete_RsmAdjustableParameterB, METH_O, "\n"
+		"delete_RsmAdjustableParameterB(RsmAdjustableParameterB self)\n"
 		"\n"
-		"virtual GeoCal::RsmAdjustableParameterB::~RsmAdjustableParameterB()\n"
 		"GeoCal::RsmAdjustableParameterB::~RsmAdjustableParameterB\n"
 		""},
 	 { "RsmAdjustableParameterB_swigregister", RsmAdjustableParameterB_swigregister, METH_O, NULL},

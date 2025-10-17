@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _vicar_lite_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _vicar_lite_file:
 _vicar_lite_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _vicar_lite_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,38 +145,47 @@ import geocal_swig.dem_map_info
 class VicarLiteFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles opening and closing a Vicar file.
 
-    This class doesn't actually read and write data, but is used by other
-    classes which do.
+    This handles opening and closing a Vicar file.  
 
-    This class is a simple implementation of Vicar. It doesn't use the
-    Vicar RTL library, which is the primary attraction of it. We can use
-    this to read Vicar files in a context where we don't want to use the
-    RTL library, or don't want to be constrained to running in the Vicar
-    environment.
+    This class doesn't actually read and write data, but is used by other classes
+    which do.  
 
-    This class does not handle new VICAR features such as compression.
+    This class is a simple implementation of Vicar. It doesn't use the Vicar RTL
+    library, which is the primary attraction of it. We can use this to read Vicar
+    files in a context where we don't want to use the RTL library, or don't want to
+    be constrained to running in the Vicar environment.  
 
-    C++ includes: vicar_lite_file.h 
+    This class does *not* handle new VICAR features such as compression.  
+
+    C++ includes: vicar_lite_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     VICAR_BYTE = _vicar_lite_file.VicarLiteFile_VICAR_BYTE
+    
     VICAR_HALF = _vicar_lite_file.VicarLiteFile_VICAR_HALF
+    
     VICAR_FULL = _vicar_lite_file.VicarLiteFile_VICAR_FULL
+    
     VICAR_FLOAT = _vicar_lite_file.VicarLiteFile_VICAR_FLOAT
+    
     VICAR_DOUBLE = _vicar_lite_file.VicarLiteFile_VICAR_DOUBLE
+    
     READ = _vicar_lite_file.VicarLiteFile_READ
+    
     WRITE = _vicar_lite_file.VicarLiteFile_WRITE
+    
     UPDATE = _vicar_lite_file.VicarLiteFile_UPDATE
+    
 
     def __init__(self, *args):
         r"""
+        __init__(VicarLiteFile self, std::string const & Fname, GeoCal::VicarLiteFile::access_type Access=READ, bool Force_area_pixel=False) -> VicarLiteFile
+        __init__(VicarLiteFile self, std::string const & Fname, int Number_line, int Number_sample, std::string const & Type) -> VicarLiteFile
 
-        GeoCal::VicarLiteFile::VicarLiteFile(const std::string &Fname, int Number_line, int Number_sample, const
-        std::string &Type="BYTE")
         GeoCal::VicarLiteFile::VicarLiteFile
         """
         _vicar_lite_file.VicarLiteFile_swiginit(self, _vicar_lite_file.new_VicarLiteFile(*args))
@@ -304,11 +316,13 @@ _vicar_lite_file.VicarLiteFile_swigregister(VicarLiteFile)
 class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
     r"""
 
-    This uses VicarLiteFile to implement a RasterImage.
 
-    We use a VicarLiteFile to implement a RasterImage.
+    This uses VicarLiteFile to implement a RasterImage.  
 
-    C++ includes: vicar_lite_file.h 
+    We use a VicarLiteFile to implement a RasterImage.  
+
+    C++ includes: vicar_lite_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -316,18 +330,18 @@ class VicarLiteRasterImage(geocal_swig.raster_image.RasterImage):
 
     def __init__(self, *args):
         r"""
+        __init__(VicarLiteRasterImage self, std::string const & Fname, int Band_id=1, GeoCal::VicarLiteRasterImage::access_type Access=READ, int Number_tile_line=-1, int Number_tile_sample=-1, bool Force_area_pixel=False) -> VicarLiteRasterImage
+        __init__(VicarLiteRasterImage self, std::string const & Fname, MapInfo Mi, int Band_id=1, GeoCal::VicarLiteRasterImage::access_type Access=READ, int Number_tile_line=-1, int Number_tile_sample=-1, bool Force_area_pixel=False) -> VicarLiteRasterImage
 
-        GeoCal::VicarLiteRasterImage::VicarLiteRasterImage(const std::string &Fname, int Band_id=1, access_type
-        Access=VicarLiteFile::READ, int Number_tile_line=-1, int
-        Number_tile_sample=-1, bool Force_area_pixel=false)
         GeoCal::VicarLiteRasterImage::VicarLiteRasterImage
-        Constructor.
-        The Force_area_pixel forces the file to be treated as "pixel as
-        area" rather than "pixel as point". This is really just meant as a
-        work around for the SRTM data, which incorrectly labels the data as
-        "point" rather than "area". Since this is a 15 meter difference,
-        it matters for many applications. Most users should just ignore this
-        value. 
+        Constructor.  
+
+        The Force_area_pixel forces the file to be treated as "pixel as area" rather
+        than "pixel as point". This is really just meant as a work around for the SRTM
+        data, which incorrectly labels the data as "point" rather than "area". Since
+        this is a 15 meter difference, it matters for many applications. Most users
+        should just ignore this value.  
+
         """
         _vicar_lite_file.VicarLiteRasterImage_swiginit(self, _vicar_lite_file.new_VicarLiteRasterImage(*args))
     _v_file = _swig_new_instance_method(_vicar_lite_file.VicarLiteRasterImage__v_file)
@@ -381,11 +395,13 @@ _vicar_lite_file.VicarLiteRasterImage_swigregister(VicarLiteRasterImage)
 class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This uses VicarLiteFile to implement a Dem.
 
-    We use VicarLiteFile to implement a Dem
+    This uses VicarLiteFile to implement a Dem.  
 
-    C++ includes: vicar_lite_file.h 
+    We use VicarLiteFile to implement a Dem  
+
+    C++ includes: vicar_lite_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -393,18 +409,17 @@ class VicarLiteDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, *args):
         r"""
+        __init__(VicarLiteDem self, std::string const & Fname, bool Outside_dem_is_error=False, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new NoDatum()), int Band=0) -> VicarLiteDem
 
-        GeoCal::VicarLiteDem::VicarLiteDem(const std::string &Fname, bool Outside_dem_is_error=false, const
-        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        NoDatum()), int Band_id=1)
         GeoCal::VicarLiteDem::VicarLiteDem
-        Constructor.
-        If Outside_dem_is_error is true, then calls for Dem data outside of
-        the range of the Dem cause an exception to be thrown, otherwise we
-        just return a height of 0.
+        Constructor.  
 
-        Probably should have the Naif_code stored as metadata in the file, but
-        for now we just explicitly pass this in. 
+        If Outside_dem_is_error is true, then calls for Dem data outside of the range of
+        the Dem cause an exception to be thrown, otherwise we just return a height of 0.  
+
+        Probably should have the Naif_code stored as metadata in the file, but for now
+        we just explicitly pass this in.  
+
         """
         _vicar_lite_file.VicarLiteDem_swiginit(self, _vicar_lite_file.new_VicarLiteDem(*args))
     _v_file = _swig_new_instance_method(_vicar_lite_file.VicarLiteDem__v_file)

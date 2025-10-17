@@ -15748,286 +15748,373 @@ SWIGINTERN PyObject *ArrayAd_double_4_swiginit(PyObject *SWIGUNUSEDPARM(self), P
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ArrayAd_double_1", _wrap_new_ArrayAd_double_1, METH_VARARGS, "\n"
+		"ArrayAd_double_1(ArrayAutoDerivativeDouble_1 V)\n"
+		"ArrayAd_double_1(int n1, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_1(BlitzArray_double_1 arg1, BlitzArray_double_2 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_1(BlitzArray_double_1 FORCE_COPY) -> ArrayAd_double_1\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_1_resize_number_variable", _wrap_ArrayAd_double_1_resize_number_variable, METH_VARARGS, "\n"
+		"ArrayAd_double_1_resize_number_variable(ArrayAd_double_1 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_1_resize", _wrap_ArrayAd_double_1_resize, METH_VARARGS, "\n"
+		"ArrayAd_double_1_resize(ArrayAd_double_1 self, int n1, int nvar)\n"
+		"ArrayAd_double_1_resize(ArrayAd_double_1 self, int n1, int n2, int nvar)\n"
+		"ArrayAd_double_1_resize(ArrayAd_double_1 self, int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_1_resize(ArrayAd_double_1 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_1_resize(ArrayAd_double_1 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_1__v_value", _wrap_ArrayAd_double_1__v_value, METH_O, "\n"
+		"ArrayAd_double_1__v_value(ArrayAd_double_1 self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_1__v_jacobian", _wrap_ArrayAd_double_1__v_jacobian, METH_O, "\n"
+		"ArrayAd_double_1__v_jacobian(ArrayAd_double_1 self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_1__v_rows", _wrap_ArrayAd_double_1__v_rows, METH_O, "\n"
+		"ArrayAd_double_1__v_rows(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_1__v_cols", _wrap_ArrayAd_double_1__v_cols, METH_O, "\n"
+		"ArrayAd_double_1__v_cols(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_1__v_depth", _wrap_ArrayAd_double_1__v_depth, METH_O, "\n"
+		"ArrayAd_double_1__v_depth(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_1__v_is_constant", _wrap_ArrayAd_double_1__v_is_constant, METH_O, "\n"
+		"ArrayAd_double_1__v_is_constant(ArrayAd_double_1 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_1__v_number_variable", _wrap_ArrayAd_double_1__v_number_variable, METH_O, "\n"
+		"ArrayAd_double_1__v_number_variable(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_1___str__", _wrap_ArrayAd_double_1___str__, METH_O, NULL},
+	 { "ArrayAd_double_1___str__", _wrap_ArrayAd_double_1___str__, METH_O, "ArrayAd_double_1___str__(ArrayAd_double_1 self) -> std::string"},
 	 { "ArrayAd_double_1_reference", _wrap_ArrayAd_double_1_reference, METH_VARARGS, "\n"
+		"ArrayAd_double_1_reference(ArrayAd_double_1 self, ArrayAd_double_1 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_1_copy", _wrap_ArrayAd_double_1_copy, METH_O, "\n"
+		"ArrayAd_double_1_copy(ArrayAd_double_1 self) -> ArrayAd_double_1\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_1_read", _wrap_ArrayAd_double_1_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_1_write", _wrap_ArrayAd_double_1_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_1", _wrap_delete_ArrayAd_double_1, METH_O, NULL},
+	 { "ArrayAd_double_1_read", _wrap_ArrayAd_double_1_read, METH_VARARGS, "\n"
+		"ArrayAd_double_1_read(ArrayAd_double_1 self, int i1) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_1_read(ArrayAd_double_1 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_1_read(ArrayAd_double_1 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_1_read(ArrayAd_double_1 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_1_write", _wrap_ArrayAd_double_1_write, METH_VARARGS, "\n"
+		"ArrayAd_double_1_write(ArrayAd_double_1 self, int i1, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_1_write(ArrayAd_double_1 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_1_write(ArrayAd_double_1 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_1_write(ArrayAd_double_1 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_1", _wrap_delete_ArrayAd_double_1, METH_O, "delete_ArrayAd_double_1(ArrayAd_double_1 self)"},
 	 { "ArrayAd_double_1_swigregister", ArrayAd_double_1_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_1_swiginit", ArrayAd_double_1_swiginit, METH_VARARGS, NULL},
 	 { "new_ArrayAd_double_2", _wrap_new_ArrayAd_double_2, METH_VARARGS, "\n"
+		"ArrayAd_double_2(blitz::Array< GeoCal::AutoDerivative< double >,2 > const & V)\n"
+		"ArrayAd_double_2(int n1, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_2(BlitzArray_double_2 arg1, BlitzArray_double_3 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_2(BlitzArray_double_2 FORCE_COPY) -> ArrayAd_double_2\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_2_resize_number_variable", _wrap_ArrayAd_double_2_resize_number_variable, METH_VARARGS, "\n"
+		"ArrayAd_double_2_resize_number_variable(ArrayAd_double_2 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_2_resize", _wrap_ArrayAd_double_2_resize, METH_VARARGS, "\n"
+		"ArrayAd_double_2_resize(ArrayAd_double_2 self, int n1, int nvar)\n"
+		"ArrayAd_double_2_resize(ArrayAd_double_2 self, int n1, int n2, int nvar)\n"
+		"ArrayAd_double_2_resize(ArrayAd_double_2 self, int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_2_resize(ArrayAd_double_2 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_2_resize(ArrayAd_double_2 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_2__v_value", _wrap_ArrayAd_double_2__v_value, METH_O, "\n"
+		"ArrayAd_double_2__v_value(ArrayAd_double_2 self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_2__v_jacobian", _wrap_ArrayAd_double_2__v_jacobian, METH_O, "\n"
+		"ArrayAd_double_2__v_jacobian(ArrayAd_double_2 self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_2__v_rows", _wrap_ArrayAd_double_2__v_rows, METH_O, "\n"
+		"ArrayAd_double_2__v_rows(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_2__v_cols", _wrap_ArrayAd_double_2__v_cols, METH_O, "\n"
+		"ArrayAd_double_2__v_cols(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_2__v_depth", _wrap_ArrayAd_double_2__v_depth, METH_O, "\n"
+		"ArrayAd_double_2__v_depth(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_2__v_is_constant", _wrap_ArrayAd_double_2__v_is_constant, METH_O, "\n"
+		"ArrayAd_double_2__v_is_constant(ArrayAd_double_2 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_2__v_number_variable", _wrap_ArrayAd_double_2__v_number_variable, METH_O, "\n"
+		"ArrayAd_double_2__v_number_variable(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_2___str__", _wrap_ArrayAd_double_2___str__, METH_O, NULL},
+	 { "ArrayAd_double_2___str__", _wrap_ArrayAd_double_2___str__, METH_O, "ArrayAd_double_2___str__(ArrayAd_double_2 self) -> std::string"},
 	 { "ArrayAd_double_2_reference", _wrap_ArrayAd_double_2_reference, METH_VARARGS, "\n"
+		"ArrayAd_double_2_reference(ArrayAd_double_2 self, ArrayAd_double_2 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_2_copy", _wrap_ArrayAd_double_2_copy, METH_O, "\n"
+		"ArrayAd_double_2_copy(ArrayAd_double_2 self) -> ArrayAd_double_2\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_2_read", _wrap_ArrayAd_double_2_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_2_write", _wrap_ArrayAd_double_2_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_2", _wrap_delete_ArrayAd_double_2, METH_O, NULL},
+	 { "ArrayAd_double_2_read", _wrap_ArrayAd_double_2_read, METH_VARARGS, "\n"
+		"ArrayAd_double_2_read(ArrayAd_double_2 self, int i1) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_2_read(ArrayAd_double_2 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_2_read(ArrayAd_double_2 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_2_read(ArrayAd_double_2 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_2_write", _wrap_ArrayAd_double_2_write, METH_VARARGS, "\n"
+		"ArrayAd_double_2_write(ArrayAd_double_2 self, int i1, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_2_write(ArrayAd_double_2 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_2_write(ArrayAd_double_2 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_2_write(ArrayAd_double_2 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_2", _wrap_delete_ArrayAd_double_2, METH_O, "delete_ArrayAd_double_2(ArrayAd_double_2 self)"},
 	 { "ArrayAd_double_2_swigregister", ArrayAd_double_2_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_2_swiginit", ArrayAd_double_2_swiginit, METH_VARARGS, NULL},
 	 { "new_ArrayAd_double_3", _wrap_new_ArrayAd_double_3, METH_VARARGS, "\n"
+		"ArrayAd_double_3(blitz::Array< GeoCal::AutoDerivative< double >,3 > const & V)\n"
+		"ArrayAd_double_3(int n1, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_3(BlitzArray_double_3 arg1, BlitzArray_double_4 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_3(BlitzArray_double_3 FORCE_COPY) -> ArrayAd_double_3\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_3_resize_number_variable", _wrap_ArrayAd_double_3_resize_number_variable, METH_VARARGS, "\n"
+		"ArrayAd_double_3_resize_number_variable(ArrayAd_double_3 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_3_resize", _wrap_ArrayAd_double_3_resize, METH_VARARGS, "\n"
+		"ArrayAd_double_3_resize(ArrayAd_double_3 self, int n1, int nvar)\n"
+		"ArrayAd_double_3_resize(ArrayAd_double_3 self, int n1, int n2, int nvar)\n"
+		"ArrayAd_double_3_resize(ArrayAd_double_3 self, int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_3_resize(ArrayAd_double_3 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_3_resize(ArrayAd_double_3 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_3__v_value", _wrap_ArrayAd_double_3__v_value, METH_O, "\n"
+		"ArrayAd_double_3__v_value(ArrayAd_double_3 self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_3__v_jacobian", _wrap_ArrayAd_double_3__v_jacobian, METH_O, "\n"
+		"ArrayAd_double_3__v_jacobian(ArrayAd_double_3 self) -> BlitzArray_double_4\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_3__v_rows", _wrap_ArrayAd_double_3__v_rows, METH_O, "\n"
+		"ArrayAd_double_3__v_rows(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_3__v_cols", _wrap_ArrayAd_double_3__v_cols, METH_O, "\n"
+		"ArrayAd_double_3__v_cols(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_3__v_depth", _wrap_ArrayAd_double_3__v_depth, METH_O, "\n"
+		"ArrayAd_double_3__v_depth(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_3__v_is_constant", _wrap_ArrayAd_double_3__v_is_constant, METH_O, "\n"
+		"ArrayAd_double_3__v_is_constant(ArrayAd_double_3 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_3__v_number_variable", _wrap_ArrayAd_double_3__v_number_variable, METH_O, "\n"
+		"ArrayAd_double_3__v_number_variable(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_3___str__", _wrap_ArrayAd_double_3___str__, METH_O, NULL},
+	 { "ArrayAd_double_3___str__", _wrap_ArrayAd_double_3___str__, METH_O, "ArrayAd_double_3___str__(ArrayAd_double_3 self) -> std::string"},
 	 { "ArrayAd_double_3_reference", _wrap_ArrayAd_double_3_reference, METH_VARARGS, "\n"
+		"ArrayAd_double_3_reference(ArrayAd_double_3 self, ArrayAd_double_3 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_3_copy", _wrap_ArrayAd_double_3_copy, METH_O, "\n"
+		"ArrayAd_double_3_copy(ArrayAd_double_3 self) -> ArrayAd_double_3\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_3_read", _wrap_ArrayAd_double_3_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_3_write", _wrap_ArrayAd_double_3_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_3", _wrap_delete_ArrayAd_double_3, METH_O, NULL},
+	 { "ArrayAd_double_3_read", _wrap_ArrayAd_double_3_read, METH_VARARGS, "\n"
+		"ArrayAd_double_3_read(ArrayAd_double_3 self, int i1) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_3_read(ArrayAd_double_3 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_3_read(ArrayAd_double_3 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_3_read(ArrayAd_double_3 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_3_write", _wrap_ArrayAd_double_3_write, METH_VARARGS, "\n"
+		"ArrayAd_double_3_write(ArrayAd_double_3 self, int i1, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_3_write(ArrayAd_double_3 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_3_write(ArrayAd_double_3 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_3_write(ArrayAd_double_3 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_3", _wrap_delete_ArrayAd_double_3, METH_O, "delete_ArrayAd_double_3(ArrayAd_double_3 self)"},
 	 { "ArrayAd_double_3_swigregister", ArrayAd_double_3_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_3_swiginit", ArrayAd_double_3_swiginit, METH_VARARGS, NULL},
 	 { "new_ArrayAd_double_4", _wrap_new_ArrayAd_double_4, METH_VARARGS, "\n"
+		"ArrayAd_double_4(blitz::Array< GeoCal::AutoDerivative< double >,4 > const & V)\n"
+		"ArrayAd_double_4(int n1, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_4(BlitzArray_double_4 arg1, BlitzArray_double_5 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_4(BlitzArray_double_4 FORCE_COPY) -> ArrayAd_double_4\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_4_resize_number_variable", _wrap_ArrayAd_double_4_resize_number_variable, METH_VARARGS, "\n"
+		"ArrayAd_double_4_resize_number_variable(ArrayAd_double_4 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_4_resize", _wrap_ArrayAd_double_4_resize, METH_VARARGS, "\n"
+		"ArrayAd_double_4_resize(ArrayAd_double_4 self, int n1, int nvar)\n"
+		"ArrayAd_double_4_resize(ArrayAd_double_4 self, int n1, int n2, int nvar)\n"
+		"ArrayAd_double_4_resize(ArrayAd_double_4 self, int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_4_resize(ArrayAd_double_4 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_4_resize(ArrayAd_double_4 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_4__v_value", _wrap_ArrayAd_double_4__v_value, METH_O, "\n"
+		"ArrayAd_double_4__v_value(ArrayAd_double_4 self) -> BlitzArray_double_4\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_4__v_jacobian", _wrap_ArrayAd_double_4__v_jacobian, METH_O, "\n"
+		"ArrayAd_double_4__v_jacobian(ArrayAd_double_4 self) -> BlitzArray_double_5\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_4__v_rows", _wrap_ArrayAd_double_4__v_rows, METH_O, "\n"
+		"ArrayAd_double_4__v_rows(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_4__v_cols", _wrap_ArrayAd_double_4__v_cols, METH_O, "\n"
+		"ArrayAd_double_4__v_cols(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_4__v_depth", _wrap_ArrayAd_double_4__v_depth, METH_O, "\n"
+		"ArrayAd_double_4__v_depth(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_4__v_is_constant", _wrap_ArrayAd_double_4__v_is_constant, METH_O, "\n"
+		"ArrayAd_double_4__v_is_constant(ArrayAd_double_4 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_4__v_number_variable", _wrap_ArrayAd_double_4__v_number_variable, METH_O, "\n"
+		"ArrayAd_double_4__v_number_variable(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_4___str__", _wrap_ArrayAd_double_4___str__, METH_O, NULL},
+	 { "ArrayAd_double_4___str__", _wrap_ArrayAd_double_4___str__, METH_O, "ArrayAd_double_4___str__(ArrayAd_double_4 self) -> std::string"},
 	 { "ArrayAd_double_4_reference", _wrap_ArrayAd_double_4_reference, METH_VARARGS, "\n"
+		"ArrayAd_double_4_reference(ArrayAd_double_4 self, ArrayAd_double_4 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_4_copy", _wrap_ArrayAd_double_4_copy, METH_O, "\n"
+		"ArrayAd_double_4_copy(ArrayAd_double_4 self) -> ArrayAd_double_4\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_4_read", _wrap_ArrayAd_double_4_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_4_write", _wrap_ArrayAd_double_4_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_4", _wrap_delete_ArrayAd_double_4, METH_O, NULL},
+	 { "ArrayAd_double_4_read", _wrap_ArrayAd_double_4_read, METH_VARARGS, "\n"
+		"ArrayAd_double_4_read(ArrayAd_double_4 self, int i1) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_4_read(ArrayAd_double_4 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_4_read(ArrayAd_double_4 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"ArrayAd_double_4_read(ArrayAd_double_4 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_4_write", _wrap_ArrayAd_double_4_write, METH_VARARGS, "\n"
+		"ArrayAd_double_4_write(ArrayAd_double_4 self, int i1, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_4_write(ArrayAd_double_4 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_4_write(ArrayAd_double_4 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"ArrayAd_double_4_write(ArrayAd_double_4 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_4", _wrap_delete_ArrayAd_double_4, METH_O, "delete_ArrayAd_double_4(ArrayAd_double_4 self)"},
 	 { "ArrayAd_double_4_swigregister", ArrayAd_double_4_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_4_swiginit", ArrayAd_double_4_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -16036,286 +16123,373 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ArrayAd_double_1", _wrap_new_ArrayAd_double_1, METH_VARARGS, "\n"
+		"ArrayAd_double_1(ArrayAutoDerivativeDouble_1 V)\n"
+		"ArrayAd_double_1(int n1, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_1(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_1(BlitzArray_double_1 arg1, BlitzArray_double_2 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_1(BlitzArray_double_1 FORCE_COPY) -> ArrayAd_double_1\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_1_resize_number_variable", _wrap_ArrayAd_double_1_resize_number_variable, METH_VARARGS, "\n"
+		"resize_number_variable(ArrayAd_double_1 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_1_resize", _wrap_ArrayAd_double_1_resize, METH_VARARGS, "\n"
+		"resize(ArrayAd_double_1 self, int n1, int nvar)\n"
+		"resize(ArrayAd_double_1 self, int n1, int n2, int nvar)\n"
+		"resize(ArrayAd_double_1 self, int n1, int n2, int n3, int nvar)\n"
+		"resize(ArrayAd_double_1 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"resize(ArrayAd_double_1 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_1__v_value", _wrap_ArrayAd_double_1__v_value, METH_O, "\n"
+		"_v_value(ArrayAd_double_1 self) -> BlitzArray_double_1\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_1__v_jacobian", _wrap_ArrayAd_double_1__v_jacobian, METH_O, "\n"
+		"_v_jacobian(ArrayAd_double_1 self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_1__v_rows", _wrap_ArrayAd_double_1__v_rows, METH_O, "\n"
+		"_v_rows(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_1__v_cols", _wrap_ArrayAd_double_1__v_cols, METH_O, "\n"
+		"_v_cols(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_1__v_depth", _wrap_ArrayAd_double_1__v_depth, METH_O, "\n"
+		"_v_depth(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_1__v_is_constant", _wrap_ArrayAd_double_1__v_is_constant, METH_O, "\n"
+		"_v_is_constant(ArrayAd_double_1 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_1__v_number_variable", _wrap_ArrayAd_double_1__v_number_variable, METH_O, "\n"
+		"_v_number_variable(ArrayAd_double_1 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_1___str__", _wrap_ArrayAd_double_1___str__, METH_O, NULL},
+	 { "ArrayAd_double_1___str__", _wrap_ArrayAd_double_1___str__, METH_O, "__str__(ArrayAd_double_1 self) -> std::string"},
 	 { "ArrayAd_double_1_reference", _wrap_ArrayAd_double_1_reference, METH_VARARGS, "\n"
+		"reference(ArrayAd_double_1 self, ArrayAd_double_1 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_1_copy", _wrap_ArrayAd_double_1_copy, METH_O, "\n"
+		"copy(ArrayAd_double_1 self) -> ArrayAd_double_1\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_1_read", _wrap_ArrayAd_double_1_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_1_write", _wrap_ArrayAd_double_1_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_1", _wrap_delete_ArrayAd_double_1, METH_O, NULL},
+	 { "ArrayAd_double_1_read", _wrap_ArrayAd_double_1_read, METH_VARARGS, "\n"
+		"read(ArrayAd_double_1 self, int i1) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_1 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_1 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_1 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_1_write", _wrap_ArrayAd_double_1_write, METH_VARARGS, "\n"
+		"write(ArrayAd_double_1 self, int i1, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_1 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_1 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_1 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_1", _wrap_delete_ArrayAd_double_1, METH_O, "delete_ArrayAd_double_1(ArrayAd_double_1 self)"},
 	 { "ArrayAd_double_1_swigregister", ArrayAd_double_1_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_1_swiginit", ArrayAd_double_1_swiginit, METH_VARARGS, NULL},
 	 { "new_ArrayAd_double_2", _wrap_new_ArrayAd_double_2, METH_VARARGS, "\n"
+		"ArrayAd_double_2(blitz::Array< GeoCal::AutoDerivative< double >,2 > const & V)\n"
+		"ArrayAd_double_2(int n1, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_2(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_2(BlitzArray_double_2 arg1, BlitzArray_double_3 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_2(BlitzArray_double_2 FORCE_COPY) -> ArrayAd_double_2\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_2_resize_number_variable", _wrap_ArrayAd_double_2_resize_number_variable, METH_VARARGS, "\n"
+		"resize_number_variable(ArrayAd_double_2 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_2_resize", _wrap_ArrayAd_double_2_resize, METH_VARARGS, "\n"
+		"resize(ArrayAd_double_2 self, int n1, int nvar)\n"
+		"resize(ArrayAd_double_2 self, int n1, int n2, int nvar)\n"
+		"resize(ArrayAd_double_2 self, int n1, int n2, int n3, int nvar)\n"
+		"resize(ArrayAd_double_2 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"resize(ArrayAd_double_2 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_2__v_value", _wrap_ArrayAd_double_2__v_value, METH_O, "\n"
+		"_v_value(ArrayAd_double_2 self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_2__v_jacobian", _wrap_ArrayAd_double_2__v_jacobian, METH_O, "\n"
+		"_v_jacobian(ArrayAd_double_2 self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_2__v_rows", _wrap_ArrayAd_double_2__v_rows, METH_O, "\n"
+		"_v_rows(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_2__v_cols", _wrap_ArrayAd_double_2__v_cols, METH_O, "\n"
+		"_v_cols(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_2__v_depth", _wrap_ArrayAd_double_2__v_depth, METH_O, "\n"
+		"_v_depth(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_2__v_is_constant", _wrap_ArrayAd_double_2__v_is_constant, METH_O, "\n"
+		"_v_is_constant(ArrayAd_double_2 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_2__v_number_variable", _wrap_ArrayAd_double_2__v_number_variable, METH_O, "\n"
+		"_v_number_variable(ArrayAd_double_2 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_2___str__", _wrap_ArrayAd_double_2___str__, METH_O, NULL},
+	 { "ArrayAd_double_2___str__", _wrap_ArrayAd_double_2___str__, METH_O, "__str__(ArrayAd_double_2 self) -> std::string"},
 	 { "ArrayAd_double_2_reference", _wrap_ArrayAd_double_2_reference, METH_VARARGS, "\n"
+		"reference(ArrayAd_double_2 self, ArrayAd_double_2 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_2_copy", _wrap_ArrayAd_double_2_copy, METH_O, "\n"
+		"copy(ArrayAd_double_2 self) -> ArrayAd_double_2\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_2_read", _wrap_ArrayAd_double_2_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_2_write", _wrap_ArrayAd_double_2_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_2", _wrap_delete_ArrayAd_double_2, METH_O, NULL},
+	 { "ArrayAd_double_2_read", _wrap_ArrayAd_double_2_read, METH_VARARGS, "\n"
+		"read(ArrayAd_double_2 self, int i1) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_2 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_2 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_2 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_2_write", _wrap_ArrayAd_double_2_write, METH_VARARGS, "\n"
+		"write(ArrayAd_double_2 self, int i1, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_2 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_2 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_2 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_2", _wrap_delete_ArrayAd_double_2, METH_O, "delete_ArrayAd_double_2(ArrayAd_double_2 self)"},
 	 { "ArrayAd_double_2_swigregister", ArrayAd_double_2_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_2_swiginit", ArrayAd_double_2_swiginit, METH_VARARGS, NULL},
 	 { "new_ArrayAd_double_3", _wrap_new_ArrayAd_double_3, METH_VARARGS, "\n"
+		"ArrayAd_double_3(blitz::Array< GeoCal::AutoDerivative< double >,3 > const & V)\n"
+		"ArrayAd_double_3(int n1, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_3(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_3(BlitzArray_double_3 arg1, BlitzArray_double_4 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_3(BlitzArray_double_3 FORCE_COPY) -> ArrayAd_double_3\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_3_resize_number_variable", _wrap_ArrayAd_double_3_resize_number_variable, METH_VARARGS, "\n"
+		"resize_number_variable(ArrayAd_double_3 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_3_resize", _wrap_ArrayAd_double_3_resize, METH_VARARGS, "\n"
+		"resize(ArrayAd_double_3 self, int n1, int nvar)\n"
+		"resize(ArrayAd_double_3 self, int n1, int n2, int nvar)\n"
+		"resize(ArrayAd_double_3 self, int n1, int n2, int n3, int nvar)\n"
+		"resize(ArrayAd_double_3 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"resize(ArrayAd_double_3 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_3__v_value", _wrap_ArrayAd_double_3__v_value, METH_O, "\n"
+		"_v_value(ArrayAd_double_3 self) -> BlitzArray_double_3\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_3__v_jacobian", _wrap_ArrayAd_double_3__v_jacobian, METH_O, "\n"
+		"_v_jacobian(ArrayAd_double_3 self) -> BlitzArray_double_4\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_3__v_rows", _wrap_ArrayAd_double_3__v_rows, METH_O, "\n"
+		"_v_rows(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_3__v_cols", _wrap_ArrayAd_double_3__v_cols, METH_O, "\n"
+		"_v_cols(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_3__v_depth", _wrap_ArrayAd_double_3__v_depth, METH_O, "\n"
+		"_v_depth(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_3__v_is_constant", _wrap_ArrayAd_double_3__v_is_constant, METH_O, "\n"
+		"_v_is_constant(ArrayAd_double_3 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_3__v_number_variable", _wrap_ArrayAd_double_3__v_number_variable, METH_O, "\n"
+		"_v_number_variable(ArrayAd_double_3 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_3___str__", _wrap_ArrayAd_double_3___str__, METH_O, NULL},
+	 { "ArrayAd_double_3___str__", _wrap_ArrayAd_double_3___str__, METH_O, "__str__(ArrayAd_double_3 self) -> std::string"},
 	 { "ArrayAd_double_3_reference", _wrap_ArrayAd_double_3_reference, METH_VARARGS, "\n"
+		"reference(ArrayAd_double_3 self, ArrayAd_double_3 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_3_copy", _wrap_ArrayAd_double_3_copy, METH_O, "\n"
+		"copy(ArrayAd_double_3 self) -> ArrayAd_double_3\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_3_read", _wrap_ArrayAd_double_3_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_3_write", _wrap_ArrayAd_double_3_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_3", _wrap_delete_ArrayAd_double_3, METH_O, NULL},
+	 { "ArrayAd_double_3_read", _wrap_ArrayAd_double_3_read, METH_VARARGS, "\n"
+		"read(ArrayAd_double_3 self, int i1) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_3 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_3 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_3 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_3_write", _wrap_ArrayAd_double_3_write, METH_VARARGS, "\n"
+		"write(ArrayAd_double_3 self, int i1, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_3 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_3 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_3 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_3", _wrap_delete_ArrayAd_double_3, METH_O, "delete_ArrayAd_double_3(ArrayAd_double_3 self)"},
 	 { "ArrayAd_double_3_swigregister", ArrayAd_double_3_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_3_swiginit", ArrayAd_double_3_swiginit, METH_VARARGS, NULL},
 	 { "new_ArrayAd_double_4", _wrap_new_ArrayAd_double_4, METH_VARARGS, "\n"
+		"ArrayAd_double_4(blitz::Array< GeoCal::AutoDerivative< double >,4 > const & V)\n"
+		"ArrayAd_double_4(int n1, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int n3, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int n3, int n4, int nvar)\n"
+		"ArrayAd_double_4(int n1, int n2, int n3, int n4, int n5, int nvar)\n"
+		"ArrayAd_double_4(BlitzArray_double_4 arg1, BlitzArray_double_5 arg2, bool Is_const=False)\n"
+		"new_ArrayAd_double_4(BlitzArray_double_4 FORCE_COPY) -> ArrayAd_double_4\n"
 		"\n"
-		"GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::ArrayAd\n"
 		""},
 	 { "ArrayAd_double_4_resize_number_variable", _wrap_ArrayAd_double_4_resize_number_variable, METH_VARARGS, "\n"
+		"resize_number_variable(ArrayAd_double_4 self, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize_number_variable(int nvar)\n"
 		"GeoCal::ArrayAd::resize_number_variable\n"
 		""},
 	 { "ArrayAd_double_4_resize", _wrap_ArrayAd_double_4_resize, METH_VARARGS, "\n"
+		"resize(ArrayAd_double_4 self, int n1, int nvar)\n"
+		"resize(ArrayAd_double_4 self, int n1, int n2, int nvar)\n"
+		"resize(ArrayAd_double_4 self, int n1, int n2, int n3, int nvar)\n"
+		"resize(ArrayAd_double_4 self, int n1, int n2, int n3, int n4, int nvar)\n"
+		"resize(ArrayAd_double_4 self, int n1, int n2, int n3, int n4, int n5, int nvar)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::resize(int n1, int nvar)\n"
 		"GeoCal::ArrayAd::resize\n"
 		""},
 	 { "ArrayAd_double_4__v_value", _wrap_ArrayAd_double_4__v_value, METH_O, "\n"
+		"_v_value(ArrayAd_double_4 self) -> BlitzArray_double_4\n"
 		"\n"
-		"const blitz::Array< T, D > & GeoCal::ArrayAd< T, D >::value() const\n"
 		"GeoCal::ArrayAd::value\n"
 		""},
 	 { "ArrayAd_double_4__v_jacobian", _wrap_ArrayAd_double_4__v_jacobian, METH_O, "\n"
+		"_v_jacobian(ArrayAd_double_4 self) -> BlitzArray_double_5\n"
 		"\n"
-		"const blitz::Array< T, D+1 > GeoCal::ArrayAd< T, D >::jacobian() const\n"
 		"GeoCal::ArrayAd::jacobian\n"
 		""},
 	 { "ArrayAd_double_4__v_rows", _wrap_ArrayAd_double_4__v_rows, METH_O, "\n"
+		"_v_rows(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::rows() const\n"
 		"GeoCal::ArrayAd::rows\n"
 		""},
 	 { "ArrayAd_double_4__v_cols", _wrap_ArrayAd_double_4__v_cols, METH_O, "\n"
+		"_v_cols(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::cols() const\n"
 		"GeoCal::ArrayAd::cols\n"
 		""},
 	 { "ArrayAd_double_4__v_depth", _wrap_ArrayAd_double_4__v_depth, METH_O, "\n"
+		"_v_depth(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::depth() const\n"
 		"GeoCal::ArrayAd::depth\n"
 		""},
 	 { "ArrayAd_double_4__v_is_constant", _wrap_ArrayAd_double_4__v_is_constant, METH_O, "\n"
+		"_v_is_constant(ArrayAd_double_4 self) -> bool\n"
 		"\n"
-		"bool GeoCal::ArrayAd< T, D >::is_constant() const\n"
 		"GeoCal::ArrayAd::is_constant\n"
 		""},
 	 { "ArrayAd_double_4__v_number_variable", _wrap_ArrayAd_double_4__v_number_variable, METH_O, "\n"
+		"_v_number_variable(ArrayAd_double_4 self) -> int\n"
 		"\n"
-		"int GeoCal::ArrayAd< T, D >::number_variable() const\n"
 		"GeoCal::ArrayAd::number_variable\n"
 		""},
-	 { "ArrayAd_double_4___str__", _wrap_ArrayAd_double_4___str__, METH_O, NULL},
+	 { "ArrayAd_double_4___str__", _wrap_ArrayAd_double_4___str__, METH_O, "__str__(ArrayAd_double_4 self) -> std::string"},
 	 { "ArrayAd_double_4_reference", _wrap_ArrayAd_double_4_reference, METH_VARARGS, "\n"
+		"reference(ArrayAd_double_4 self, ArrayAd_double_4 V)\n"
 		"\n"
-		"void GeoCal::ArrayAd< T, D >::reference(const ArrayAd< T, D > &V)\n"
 		"GeoCal::ArrayAd::reference\n"
 		""},
 	 { "ArrayAd_double_4_copy", _wrap_ArrayAd_double_4_copy, METH_O, "\n"
+		"copy(ArrayAd_double_4 self) -> ArrayAd_double_4\n"
 		"\n"
-		"ArrayAd< T, D > GeoCal::ArrayAd< T, D >::copy() const\n"
 		"GeoCal::ArrayAd::copy\n"
 		""},
-	 { "ArrayAd_double_4_read", _wrap_ArrayAd_double_4_read, METH_VARARGS, NULL},
-	 { "ArrayAd_double_4_write", _wrap_ArrayAd_double_4_write, METH_VARARGS, NULL},
-	 { "delete_ArrayAd_double_4", _wrap_delete_ArrayAd_double_4, METH_O, NULL},
+	 { "ArrayAd_double_4_read", _wrap_ArrayAd_double_4_read, METH_VARARGS, "\n"
+		"read(ArrayAd_double_4 self, int i1) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_4 self, int i1, int i2) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_4 self, int i1, int i2, int i3) -> AutoDerivativeDouble\n"
+		"read(ArrayAd_double_4 self, int i1, int i2, int i3, int i4) -> AutoDerivativeDouble\n"
+		""},
+	 { "ArrayAd_double_4_write", _wrap_ArrayAd_double_4_write, METH_VARARGS, "\n"
+		"write(ArrayAd_double_4 self, int i1, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_4 self, int i1, int i2, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_4 self, int i1, int i2, int i3, AutoDerivativeDouble V)\n"
+		"write(ArrayAd_double_4 self, int i1, int i2, int i3, int i4, AutoDerivativeDouble V)\n"
+		""},
+	 { "delete_ArrayAd_double_4", _wrap_delete_ArrayAd_double_4, METH_O, "delete_ArrayAd_double_4(ArrayAd_double_4 self)"},
 	 { "ArrayAd_double_4_swigregister", ArrayAd_double_4_swigregister, METH_O, NULL},
 	 { "ArrayAd_double_4_swiginit", ArrayAd_double_4_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

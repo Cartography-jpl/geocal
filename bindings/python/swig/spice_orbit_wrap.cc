@@ -6944,59 +6944,65 @@ SWIGINTERN PyObject *SpiceOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObjec
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_SpiceOrbit", _wrap_new_SpiceOrbit, METH_VARARGS, "\n"
+		"SpiceOrbit(int Satellite_id, std::string const & Kernel_name=\"\", int Body_id=Ecr::EARTH_NAIF_CODE)\n"
 		"\n"
-		"SpiceOrbit::SpiceOrbit(int Satellite_id, const std::string &Kernel_name=\"\", int\n"
-		"Body_id=Ecr::EARTH_NAIF_CODE)\n"
 		"GeoCal::SpiceOrbit::SpiceOrbit\n"
-		"Create a orbit based on SPICE data.\n"
-		"This takes the satellite ID, which is the number used to generate the\n"
-		"ID the SPICE toolkit uses, for example the TLE spacecraft code. Note\n"
-		"that the SPICE number is actually -100000 - satellite ID\n"
+		"Create a orbit based on SPICE data.  \n"
 		"\n"
-		"You need to make sure the spice kernel describing this satellite has\n"
-		"been loaded. Often you will have a single kernel that you want used,\n"
-		"in that case you can pass this to the constructor and that kernel will\n"
-		"be loaded.\n"
+		"This takes the satellite ID, which is the number used to generate the ID the\n"
+		"SPICE toolkit uses, for example the TLE spacecraft code. Note that the SPICE\n"
+		"number is actually -100000 - satellite ID  \n"
 		"\n"
-		"Note that if you pass a kernel name, we save that and make sure it is\n"
-		"loaded when we create this class from serialization. \n"
+		"You need to make sure the spice kernel describing this satellite has been\n"
+		"loaded. Often you will have a single kernel that you want used, in that case you\n"
+		"can pass this to the constructor and that kernel will be loaded.  \n"
+		"\n"
+		"Note that if you pass a kernel name, we save that and make sure it is loaded\n"
+		"when we create this class from serialization.  \n"
+		"\n"
 		""},
 	 { "SpiceOrbit_orbit_data", _wrap_SpiceOrbit_orbit_data, METH_VARARGS, "\n"
+		"SpiceOrbit_orbit_data(SpiceOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"SpiceOrbit_orbit_data(SpiceOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > SpiceOrbit::orbit_data(Time T) const\n"
 		"GeoCal::SpiceOrbit::orbit_data\n"
 		""},
 	 { "SpiceOrbit__v_satellite_id", _wrap_SpiceOrbit__v_satellite_id, METH_O, "\n"
+		"SpiceOrbit__v_satellite_id(SpiceOrbit self) -> int\n"
 		"\n"
-		"int GeoCal::SpiceOrbit::satellite_id() const\n"
 		"GeoCal::SpiceOrbit::satellite_id\n"
-		"The satellite ID.\n"
-		"This is used to generate the number that the SPICE toolkit uses, for\n"
-		"example the TLE spacecraft code. Note that the SPICE number is\n"
-		"actually -100000 - satellite ID \n"
+		"The satellite ID.  \n"
+		"\n"
+		"This is used to generate the number that the SPICE toolkit uses, for example the\n"
+		"TLE spacecraft code. Note that the SPICE number is actually -100000 - satellite\n"
+		"ID  \n"
+		"\n"
 		""},
 	 { "delete_SpiceOrbit", _wrap_delete_SpiceOrbit, METH_O, "\n"
+		"delete_SpiceOrbit(SpiceOrbit self)\n"
 		"\n"
-		"virtual GeoCal::SpiceOrbit::~SpiceOrbit()\n"
 		"GeoCal::SpiceOrbit::~SpiceOrbit\n"
 		""},
 	 { "SpiceOrbit_swigregister", SpiceOrbit_swigregister, METH_O, NULL},
@@ -7007,59 +7013,65 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_SpiceOrbit", _wrap_new_SpiceOrbit, METH_VARARGS, "\n"
+		"SpiceOrbit(int Satellite_id, std::string const & Kernel_name=\"\", int Body_id=Ecr::EARTH_NAIF_CODE)\n"
 		"\n"
-		"SpiceOrbit::SpiceOrbit(int Satellite_id, const std::string &Kernel_name=\"\", int\n"
-		"Body_id=Ecr::EARTH_NAIF_CODE)\n"
 		"GeoCal::SpiceOrbit::SpiceOrbit\n"
-		"Create a orbit based on SPICE data.\n"
-		"This takes the satellite ID, which is the number used to generate the\n"
-		"ID the SPICE toolkit uses, for example the TLE spacecraft code. Note\n"
-		"that the SPICE number is actually -100000 - satellite ID\n"
+		"Create a orbit based on SPICE data.  \n"
 		"\n"
-		"You need to make sure the spice kernel describing this satellite has\n"
-		"been loaded. Often you will have a single kernel that you want used,\n"
-		"in that case you can pass this to the constructor and that kernel will\n"
-		"be loaded.\n"
+		"This takes the satellite ID, which is the number used to generate the ID the\n"
+		"SPICE toolkit uses, for example the TLE spacecraft code. Note that the SPICE\n"
+		"number is actually -100000 - satellite ID  \n"
 		"\n"
-		"Note that if you pass a kernel name, we save that and make sure it is\n"
-		"loaded when we create this class from serialization. \n"
+		"You need to make sure the spice kernel describing this satellite has been\n"
+		"loaded. Often you will have a single kernel that you want used, in that case you\n"
+		"can pass this to the constructor and that kernel will be loaded.  \n"
+		"\n"
+		"Note that if you pass a kernel name, we save that and make sure it is loaded\n"
+		"when we create this class from serialization.  \n"
+		"\n"
 		""},
 	 { "SpiceOrbit_orbit_data", _wrap_SpiceOrbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(SpiceOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(SpiceOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > SpiceOrbit::orbit_data(Time T) const\n"
 		"GeoCal::SpiceOrbit::orbit_data\n"
 		""},
 	 { "SpiceOrbit__v_satellite_id", _wrap_SpiceOrbit__v_satellite_id, METH_O, "\n"
+		"_v_satellite_id(SpiceOrbit self) -> int\n"
 		"\n"
-		"int GeoCal::SpiceOrbit::satellite_id() const\n"
 		"GeoCal::SpiceOrbit::satellite_id\n"
-		"The satellite ID.\n"
-		"This is used to generate the number that the SPICE toolkit uses, for\n"
-		"example the TLE spacecraft code. Note that the SPICE number is\n"
-		"actually -100000 - satellite ID \n"
+		"The satellite ID.  \n"
+		"\n"
+		"This is used to generate the number that the SPICE toolkit uses, for example the\n"
+		"TLE spacecraft code. Note that the SPICE number is actually -100000 - satellite\n"
+		"ID  \n"
+		"\n"
 		""},
 	 { "delete_SpiceOrbit", _wrap_delete_SpiceOrbit, METH_O, "\n"
+		"delete_SpiceOrbit(SpiceOrbit self)\n"
 		"\n"
-		"virtual GeoCal::SpiceOrbit::~SpiceOrbit()\n"
 		"GeoCal::SpiceOrbit::~SpiceOrbit\n"
 		""},
 	 { "SpiceOrbit_swigregister", SpiceOrbit_swigregister, METH_O, NULL},

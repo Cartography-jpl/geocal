@@ -90,6 +90,7 @@ _image_coordinate.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _image_coordinate.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _image_coordinate.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,18 +138,18 @@ import geocal_swig.generic_object
 class ImageCoordinate(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This describes an image coordinate.
 
-    We also define the print operator <<, and equality operator ==. Two
-    image coordinates are considers equal if they are within 0.01 in the
-    line and sample.
+    This describes an image coordinate.  
+
+    We also define the print operator <<, and equality operator ==. Two image
+    coordinates are considers equal if they are within 0.01 in the line and sample.  
 
     The convention used throughout GeoCal is that an integer value of the
-    ImageCoordinate line or sample refers to the center of a pixel. This
-    means the upper left corner of the bounding box of an image is at
-    (-0.5, -0.5).
+    ImageCoordinate line or sample refers to the center of a pixel. This means the
+    upper left corner of the bounding box of an image is at (-0.5, -0.5).  
 
-    C++ includes: image_coordinate.h 
+    C++ includes: image_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -156,15 +157,17 @@ class ImageCoordinate(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(ImageCoordinate self, double Line, double Sample) -> ImageCoordinate
+        __init__(ImageCoordinate self, VicarImageCoordinate Vic) -> ImageCoordinate
+        __init__(ImageCoordinate self) -> ImageCoordinate
 
-        GeoCal::ImageCoordinate::ImageCoordinate(double Line, double Sample)
         GeoCal::ImageCoordinate::ImageCoordinate
-        Constructor.
+        Constructor.  
 
         """
         _image_coordinate.ImageCoordinate_swiginit(self, _image_coordinate.new_ImageCoordinate(*args))
-    line = property(_image_coordinate.ImageCoordinate_line_get, _image_coordinate.ImageCoordinate_line_set)
-    sample = property(_image_coordinate.ImageCoordinate_sample_get, _image_coordinate.ImageCoordinate_sample_set)
+    line = property(_image_coordinate.ImageCoordinate_line_get, _image_coordinate.ImageCoordinate_line_set, doc=r"""line : double""")
+    sample = property(_image_coordinate.ImageCoordinate_sample_get, _image_coordinate.ImageCoordinate_sample_set, doc=r"""sample : double""")
     __str__ = _swig_new_instance_method(_image_coordinate.ImageCoordinate___str__)
 
     def __reduce__(self):
@@ -181,15 +184,16 @@ _image_coordinate.ImageCoordinate_swigregister(ImageCoordinate)
 class VicarImageCoordinate(geocal_swig.generic_object.GenericObject):
     r"""
 
-    VICAR programs use a different convention than our ImageCoordinate.
 
-    Instead of the upper left hand corner of the bounding box being
-    (-0.5,-0.5), VICAR uses a 1-based convention where the upper left
-    corner is (0.5, 0.5). This is just a difference of 1-pixel. To avoid
-    any confusion, we define a VicarImageCoordinate class, and allow
-    conversions to and from ImageCoordinate.
+    VICAR programs use a different convention than our ImageCoordinate.  
 
-    C++ includes: image_coordinate.h 
+    Instead of the upper left hand corner of the bounding box being (-0.5,-0.5),
+    VICAR uses a 1-based convention where the upper left corner is (0.5, 0.5). This
+    is just a difference of 1-pixel. To avoid any confusion, we define a
+    VicarImageCoordinate class, and allow conversions to and from ImageCoordinate.  
+
+    C++ includes: image_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -197,15 +201,17 @@ class VicarImageCoordinate(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(VicarImageCoordinate self, double Line, double Sample) -> VicarImageCoordinate
+        __init__(VicarImageCoordinate self, ImageCoordinate Vic) -> VicarImageCoordinate
+        __init__(VicarImageCoordinate self) -> VicarImageCoordinate
 
-        GeoCal::VicarImageCoordinate::VicarImageCoordinate(double Line, double Sample)
         GeoCal::VicarImageCoordinate::VicarImageCoordinate
-        Constructor.
+        Constructor.  
 
         """
         _image_coordinate.VicarImageCoordinate_swiginit(self, _image_coordinate.new_VicarImageCoordinate(*args))
-    line = property(_image_coordinate.VicarImageCoordinate_line_get, _image_coordinate.VicarImageCoordinate_line_set)
-    sample = property(_image_coordinate.VicarImageCoordinate_sample_get, _image_coordinate.VicarImageCoordinate_sample_set)
+    line = property(_image_coordinate.VicarImageCoordinate_line_get, _image_coordinate.VicarImageCoordinate_line_set, doc=r"""line : double""")
+    sample = property(_image_coordinate.VicarImageCoordinate_sample_get, _image_coordinate.VicarImageCoordinate_sample_set, doc=r"""sample : double""")
     __str__ = _swig_new_instance_method(_image_coordinate.VicarImageCoordinate___str__)
 
     def __reduce__(self):
@@ -222,10 +228,12 @@ _image_coordinate.VicarImageCoordinate_swigregister(VicarImageCoordinate)
 class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This describes an image coordinate, including the gradient of the line
-    and sample.
 
-    C++ includes: image_coordinate.h 
+    This describes an image coordinate, including the gradient of the line and
+    sample.  
+
+    C++ includes: image_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -233,16 +241,16 @@ class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(ImageCoordinateWithDerivative self, AutoDerivativeDouble Line, AutoDerivativeDouble Sample) -> ImageCoordinateWithDerivative
+        __init__(ImageCoordinateWithDerivative self) -> ImageCoordinateWithDerivative
 
-        GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative(const AutoDerivative< double > &Line, const AutoDerivative< double >
-        &Sample)
         GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative
-        Constructor.
+        Constructor.  
 
         """
         _image_coordinate.ImageCoordinateWithDerivative_swiginit(self, _image_coordinate.new_ImageCoordinateWithDerivative(*args))
-    line = property(_image_coordinate.ImageCoordinateWithDerivative_line_get, _image_coordinate.ImageCoordinateWithDerivative_line_set)
-    sample = property(_image_coordinate.ImageCoordinateWithDerivative_sample_get, _image_coordinate.ImageCoordinateWithDerivative_sample_set)
+    line = property(_image_coordinate.ImageCoordinateWithDerivative_line_get, _image_coordinate.ImageCoordinateWithDerivative_line_set, doc=r"""line : GeoCal::AutoDerivative<(double)>""")
+    sample = property(_image_coordinate.ImageCoordinateWithDerivative_sample_get, _image_coordinate.ImageCoordinateWithDerivative_sample_set, doc=r"""sample : GeoCal::AutoDerivative<(double)>""")
     value = _swig_new_instance_method(_image_coordinate.ImageCoordinateWithDerivative_value)
     __str__ = _swig_new_instance_method(_image_coordinate.ImageCoordinateWithDerivative___str__)
 
@@ -258,6 +266,8 @@ class ImageCoordinateWithDerivative(geocal_swig.generic_object.GenericObject):
 # Register ImageCoordinateWithDerivative in _image_coordinate:
 _image_coordinate.ImageCoordinateWithDerivative_swigregister(ImageCoordinateWithDerivative)
 class Vector_ImageCoordinate(object):
+    r"""Proxy of C++ std::vector< GeoCal::ImageCoordinate > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinate_iterator)
@@ -287,6 +297,12 @@ class Vector_ImageCoordinate(object):
     erase = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinate_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_ImageCoordinate self) -> Vector_ImageCoordinate
+        __init__(Vector_ImageCoordinate self, Vector_ImageCoordinate other) -> Vector_ImageCoordinate
+        __init__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type size) -> Vector_ImageCoordinate
+        __init__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type size, ImageCoordinate value) -> Vector_ImageCoordinate
+        """
         _image_coordinate.Vector_ImageCoordinate_swiginit(self, _image_coordinate.new_Vector_ImageCoordinate(*args))
     push_back = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinate_push_back)
     front = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinate_front)
@@ -301,6 +317,8 @@ class Vector_ImageCoordinate(object):
 # Register Vector_ImageCoordinate in _image_coordinate:
 _image_coordinate.Vector_ImageCoordinate_swigregister(Vector_ImageCoordinate)
 class Vector_ImageCoordinatePtr(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinatePtr_iterator)
@@ -330,6 +348,12 @@ class Vector_ImageCoordinatePtr(object):
     erase = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinatePtr_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_ImageCoordinatePtr self) -> Vector_ImageCoordinatePtr
+        __init__(Vector_ImageCoordinatePtr self, Vector_ImageCoordinatePtr other) -> Vector_ImageCoordinatePtr
+        __init__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type size) -> Vector_ImageCoordinatePtr
+        __init__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & value) -> Vector_ImageCoordinatePtr
+        """
         _image_coordinate.Vector_ImageCoordinatePtr_swiginit(self, _image_coordinate.new_Vector_ImageCoordinatePtr(*args))
     push_back = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinatePtr_push_back)
     front = _swig_new_instance_method(_image_coordinate.Vector_ImageCoordinatePtr_front)

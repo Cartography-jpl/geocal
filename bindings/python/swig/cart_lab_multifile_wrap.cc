@@ -9035,110 +9035,104 @@ SWIGINTERN PyObject *VicarCartLabMultifileSetup_swiginit(PyObject *SWIGUNUSEDPAR
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "CartLabMultifile_create_subset_file", _wrap_CartLabMultifile_create_subset_file, METH_VARARGS, "\n"
+		"CartLabMultifile_create_subset_file(CartLabMultifile self, std::string const & Oname, std::string const & Driver, Vector_GroundCoordinate Pt, boost::shared_ptr< GeoCal::MapInfo > const & Desired_map_info=boost::shared_ptr< GeoCal::MapInfo >(), std::string const & Translate_arg=\"\", std::string const & Options=\"\", int boundary=0, bool Verbose=False)\n"
 		"\n"
-		"void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const\n"
-		"boost::shared_ptr< MapInfo > &Desired_map_info=boost::shared_ptr<\n"
-		"MapInfo >(), const std::string &Translate_arg=\"\", const std::string\n"
-		"&Options=\"\", int boundary=0, bool Verbose=false) const\n"
 		"GeoCal::CartLabMultifile::create_subset_file\n"
-		"Create a stand alone file that contains a subset of the full file.\n"
-		"This handles whatever mosaicing/subsetting is needed for the\n"
-		"underlying tile files. We use GDAL to generate this, so you pass in\n"
-		"the driver to use like you do with a GdalRasterImage (e.g., \"gtiff\")\n"
-		"and whatever options (e.g., \"TILED=YES BLOCKXSIZE=16 BLOCKYSIZE=32\n"
-		"COMPRESS=JPEG JPEG_QUALITY=90\"). We cover the given set of points,\n"
-		"along with whatever boundary you request (just like MapInfo cover\n"
-		"function).\n"
+		"Create a stand alone file that contains a subset of the full file.  \n"
 		"\n"
-		"Note that datasets often have holes in them (e.g., no data over the\n"
-		"ocean). These get filled in as zero. It is perfectly possible (and not\n"
-		"an error) for there to be no data over the desired subset. In that\n"
-		"case, we create a file with all zeros.\n"
+		"This handles whatever mosaicing/subsetting is needed for the underlying tile\n"
+		"files. We use GDAL to generate this, so you pass in the driver to use like you\n"
+		"do with a GdalRasterImage (e.g., \"gtiff\") and whatever options (e.g.,\n"
+		"\"TILED=YES BLOCKXSIZE=16 BLOCKYSIZE=32 COMPRESS=JPEG\n"
+		"JPEG_QUALITY=90\"). We cover the given set of points, along with whatever\n"
+		"boundary you request (just like MapInfo cover function).  \n"
 		"\n"
-		"This executes the command shell gdalbuildvrt, which must be in the\n"
-		"path. Right now with GDAL the same functionality can't be done through\n"
-		"C++, but there is talk of making VRTBuilder found in gdalbuildvrt\n"
-		"available. For now though, we just use a system call.\n"
+		"Note that datasets often have holes in them (e.g., no data over the ocean).\n"
+		"These get filled in as zero. It is perfectly possible (and not an error) for\n"
+		"there to be *no* data over the desired subset. In that case, we create a file\n"
+		"with all zeros.  \n"
 		"\n"
-		"You can either supply a set of points to cover (which will use the\n"
-		"native map_info() for this object), or you can supply an explicit\n"
-		"Desired_map_info (e.g., you are matching an existing file in extent\n"
-		"and resolution).\n"
+		"This executes the command shell gdalbuildvrt, which must be in the path. Right\n"
+		"now with GDAL the same functionality can't be done through C++, but there is\n"
+		"talk of making VRTBuilder found in gdalbuildvrt available. For now though, we\n"
+		"just use a system call.  \n"
 		"\n"
-		"You can optionally supply an argument string to use with\n"
-		"gdal_translate on the gdalbuildvrt file before writing to the output.\n"
-		"This can be useful to do things like change the output type or scale\n"
-		"the data. See gdal_translate documentation for what these options\n"
-		"should be (e.g., \"-ot Int16 -outsize 50% 50% -r average\" to convert\n"
-		"to Int16 and 2x2 pixel averaging to make a coarser image). \n"
+		"You can either supply a set of points to cover (which will use the native\n"
+		"map_info() for this object), or you can supply an explicit Desired_map_info\n"
+		"(e.g., you are matching an existing file in extent and resolution).  \n"
+		"\n"
+		"You can optionally supply an argument string to use with gdal_translate on the\n"
+		"gdalbuildvrt file before writing to the output. This can be useful to do things\n"
+		"like change the output type or scale the data. See gdal_translate documentation\n"
+		"for what these options should be (e.g., \"-ot Int16 -outsize 50% 50% -r\n"
+		"average\" to convert to Int16 and 2x2 pixel averaging to make a coarser image).  \n"
+		"\n"
 		""},
 	 { "CartLabMultifile_set_tile_size", _wrap_CartLabMultifile_set_tile_size, METH_VARARGS, "\n"
+		"CartLabMultifile_set_tile_size(CartLabMultifile self, int Number_tile_line, int Number_tile_sample)\n"
 		"\n"
-		"void GeoCal::CartLabMultifile::set_tile_size(int Number_tile_line, int Number_tile_sample)\n"
 		"GeoCal::CartLabMultifile::set_tile_size\n"
 		""},
 	 { "CartLabMultifile__v_directory_base", _wrap_CartLabMultifile__v_directory_base, METH_O, "\n"
+		"CartLabMultifile__v_directory_base(CartLabMultifile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::CartLabMultifile::directory_base() const\n"
 		"GeoCal::CartLabMultifile::directory_base\n"
-		"Database base directory.\n"
+		"Database base directory.  \n"
 		"\n"
 		""},
 	 { "delete_CartLabMultifile", _wrap_delete_CartLabMultifile, METH_O, "\n"
+		"delete_CartLabMultifile(CartLabMultifile self)\n"
 		"\n"
-		"virtual GeoCal::CartLabMultifile::~CartLabMultifile()\n"
 		"GeoCal::CartLabMultifile::~CartLabMultifile\n"
 		""},
 	 { "CartLabMultifile_swigregister", CartLabMultifile_swigregister, METH_O, NULL},
 	 { "delete_GdalCartLabMultifile", _wrap_delete_GdalCartLabMultifile, METH_O, "\n"
+		"delete_GdalCartLabMultifile(GdalCartLabMultifile self)\n"
 		"\n"
-		"virtual GeoCal::GdalCartLabMultifile::~GdalCartLabMultifile()\n"
 		"GeoCal::GdalCartLabMultifile::~GdalCartLabMultifile\n"
 		""},
 	 { "GdalCartLabMultifile_swigregister", GdalCartLabMultifile_swigregister, METH_O, NULL},
 	 { "delete_VicarCartLabMultifile", _wrap_delete_VicarCartLabMultifile, METH_O, "\n"
+		"delete_VicarCartLabMultifile(VicarCartLabMultifile self)\n"
 		"\n"
-		"virtual GeoCal::VicarCartLabMultifile::~VicarCartLabMultifile()\n"
 		"GeoCal::VicarCartLabMultifile::~VicarCartLabMultifile\n"
 		""},
 	 { "VicarCartLabMultifile_swigregister", VicarCartLabMultifile_swigregister, METH_O, NULL},
 	 { "new_VicarCartLabMultifileSetup", _wrap_new_VicarCartLabMultifileSetup, METH_VARARGS, "\n"
+		"VicarCartLabMultifileSetup(boost::shared_ptr< GeoCal::MapInfo > const Minfo, int Number_line_per_tile=100, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_tile=4, bool Favor_memory_mapped=True, bool No_coverage_is_error=True, int No_coverage_fill_value=-1, bool Force_area_pixel=False)\n"
 		"\n"
-		"GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup(const boost::shared_ptr< MapInfo > Minfo, int\n"
-		"Number_line_per_tile=100, int Number_sample_per_tile=-1, int\n"
-		"Number_tile_each_file=4, int Number_tile=4, bool\n"
-		"Favor_memory_mapped=true, bool No_coverage_is_error=true, int\n"
-		"No_coverage_fill_value=-1, bool Force_area_pixel=false)\n"
 		"GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup\n"
 		""},
 	 { "VicarCartLabMultifileSetup_file_add", _wrap_VicarCartLabMultifileSetup_file_add, METH_VARARGS, "\n"
+		"VicarCartLabMultifileSetup_file_add(VicarCartLabMultifileSetup self, int x1, int y1, int x2, int y2, std::string const & fname)\n"
 		"\n"
-		"void GeoCal::VicarCartLabMultifileSetup::file_add(int x1, int y1, int x2, int y2, const std::string &fname)\n"
 		"GeoCal::VicarCartLabMultifileSetup::file_add\n"
 		""},
 	 { "delete_VicarCartLabMultifileSetup", _wrap_delete_VicarCartLabMultifileSetup, METH_O, "\n"
+		"delete_VicarCartLabMultifileSetup(VicarCartLabMultifileSetup self)\n"
 		"\n"
-		"virtual GeoCal::VicarCartLabMultifileSetup::~VicarCartLabMultifileSetup()\n"
 		"GeoCal::VicarCartLabMultifileSetup::~VicarCartLabMultifileSetup\n"
 		""},
 	 { "VicarCartLabMultifileSetup_swigregister", VicarCartLabMultifileSetup_swigregister, METH_O, NULL},
@@ -9149,110 +9143,104 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "CartLabMultifile_create_subset_file", _wrap_CartLabMultifile_create_subset_file, METH_VARARGS, "\n"
+		"create_subset_file(CartLabMultifile self, std::string const & Oname, std::string const & Driver, Vector_GroundCoordinate Pt, boost::shared_ptr< GeoCal::MapInfo > const & Desired_map_info=boost::shared_ptr< GeoCal::MapInfo >(), std::string const & Translate_arg=\"\", std::string const & Options=\"\", int boundary=0, bool Verbose=False)\n"
 		"\n"
-		"void CartLabMultifile::create_subset_file(const std::string &Oname, const std::string &Driver, const\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > &Pt, const\n"
-		"boost::shared_ptr< MapInfo > &Desired_map_info=boost::shared_ptr<\n"
-		"MapInfo >(), const std::string &Translate_arg=\"\", const std::string\n"
-		"&Options=\"\", int boundary=0, bool Verbose=false) const\n"
 		"GeoCal::CartLabMultifile::create_subset_file\n"
-		"Create a stand alone file that contains a subset of the full file.\n"
-		"This handles whatever mosaicing/subsetting is needed for the\n"
-		"underlying tile files. We use GDAL to generate this, so you pass in\n"
-		"the driver to use like you do with a GdalRasterImage (e.g., \"gtiff\")\n"
-		"and whatever options (e.g., \"TILED=YES BLOCKXSIZE=16 BLOCKYSIZE=32\n"
-		"COMPRESS=JPEG JPEG_QUALITY=90\"). We cover the given set of points,\n"
-		"along with whatever boundary you request (just like MapInfo cover\n"
-		"function).\n"
+		"Create a stand alone file that contains a subset of the full file.  \n"
 		"\n"
-		"Note that datasets often have holes in them (e.g., no data over the\n"
-		"ocean). These get filled in as zero. It is perfectly possible (and not\n"
-		"an error) for there to be no data over the desired subset. In that\n"
-		"case, we create a file with all zeros.\n"
+		"This handles whatever mosaicing/subsetting is needed for the underlying tile\n"
+		"files. We use GDAL to generate this, so you pass in the driver to use like you\n"
+		"do with a GdalRasterImage (e.g., \"gtiff\") and whatever options (e.g.,\n"
+		"\"TILED=YES BLOCKXSIZE=16 BLOCKYSIZE=32 COMPRESS=JPEG\n"
+		"JPEG_QUALITY=90\"). We cover the given set of points, along with whatever\n"
+		"boundary you request (just like MapInfo cover function).  \n"
 		"\n"
-		"This executes the command shell gdalbuildvrt, which must be in the\n"
-		"path. Right now with GDAL the same functionality can't be done through\n"
-		"C++, but there is talk of making VRTBuilder found in gdalbuildvrt\n"
-		"available. For now though, we just use a system call.\n"
+		"Note that datasets often have holes in them (e.g., no data over the ocean).\n"
+		"These get filled in as zero. It is perfectly possible (and not an error) for\n"
+		"there to be *no* data over the desired subset. In that case, we create a file\n"
+		"with all zeros.  \n"
 		"\n"
-		"You can either supply a set of points to cover (which will use the\n"
-		"native map_info() for this object), or you can supply an explicit\n"
-		"Desired_map_info (e.g., you are matching an existing file in extent\n"
-		"and resolution).\n"
+		"This executes the command shell gdalbuildvrt, which must be in the path. Right\n"
+		"now with GDAL the same functionality can't be done through C++, but there is\n"
+		"talk of making VRTBuilder found in gdalbuildvrt available. For now though, we\n"
+		"just use a system call.  \n"
 		"\n"
-		"You can optionally supply an argument string to use with\n"
-		"gdal_translate on the gdalbuildvrt file before writing to the output.\n"
-		"This can be useful to do things like change the output type or scale\n"
-		"the data. See gdal_translate documentation for what these options\n"
-		"should be (e.g., \"-ot Int16 -outsize 50% 50% -r average\" to convert\n"
-		"to Int16 and 2x2 pixel averaging to make a coarser image). \n"
+		"You can either supply a set of points to cover (which will use the native\n"
+		"map_info() for this object), or you can supply an explicit Desired_map_info\n"
+		"(e.g., you are matching an existing file in extent and resolution).  \n"
+		"\n"
+		"You can optionally supply an argument string to use with gdal_translate on the\n"
+		"gdalbuildvrt file before writing to the output. This can be useful to do things\n"
+		"like change the output type or scale the data. See gdal_translate documentation\n"
+		"for what these options should be (e.g., \"-ot Int16 -outsize 50% 50% -r\n"
+		"average\" to convert to Int16 and 2x2 pixel averaging to make a coarser image).  \n"
+		"\n"
 		""},
 	 { "CartLabMultifile_set_tile_size", _wrap_CartLabMultifile_set_tile_size, METH_VARARGS, "\n"
+		"set_tile_size(CartLabMultifile self, int Number_tile_line, int Number_tile_sample)\n"
 		"\n"
-		"void GeoCal::CartLabMultifile::set_tile_size(int Number_tile_line, int Number_tile_sample)\n"
 		"GeoCal::CartLabMultifile::set_tile_size\n"
 		""},
 	 { "CartLabMultifile__v_directory_base", _wrap_CartLabMultifile__v_directory_base, METH_O, "\n"
+		"_v_directory_base(CartLabMultifile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::CartLabMultifile::directory_base() const\n"
 		"GeoCal::CartLabMultifile::directory_base\n"
-		"Database base directory.\n"
+		"Database base directory.  \n"
 		"\n"
 		""},
 	 { "delete_CartLabMultifile", _wrap_delete_CartLabMultifile, METH_O, "\n"
+		"delete_CartLabMultifile(CartLabMultifile self)\n"
 		"\n"
-		"virtual GeoCal::CartLabMultifile::~CartLabMultifile()\n"
 		"GeoCal::CartLabMultifile::~CartLabMultifile\n"
 		""},
 	 { "CartLabMultifile_swigregister", CartLabMultifile_swigregister, METH_O, NULL},
 	 { "delete_GdalCartLabMultifile", _wrap_delete_GdalCartLabMultifile, METH_O, "\n"
+		"delete_GdalCartLabMultifile(GdalCartLabMultifile self)\n"
 		"\n"
-		"virtual GeoCal::GdalCartLabMultifile::~GdalCartLabMultifile()\n"
 		"GeoCal::GdalCartLabMultifile::~GdalCartLabMultifile\n"
 		""},
 	 { "GdalCartLabMultifile_swigregister", GdalCartLabMultifile_swigregister, METH_O, NULL},
 	 { "delete_VicarCartLabMultifile", _wrap_delete_VicarCartLabMultifile, METH_O, "\n"
+		"delete_VicarCartLabMultifile(VicarCartLabMultifile self)\n"
 		"\n"
-		"virtual GeoCal::VicarCartLabMultifile::~VicarCartLabMultifile()\n"
 		"GeoCal::VicarCartLabMultifile::~VicarCartLabMultifile\n"
 		""},
 	 { "VicarCartLabMultifile_swigregister", VicarCartLabMultifile_swigregister, METH_O, NULL},
 	 { "new_VicarCartLabMultifileSetup", _wrap_new_VicarCartLabMultifileSetup, METH_VARARGS, "\n"
+		"VicarCartLabMultifileSetup(boost::shared_ptr< GeoCal::MapInfo > const Minfo, int Number_line_per_tile=100, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_tile=4, bool Favor_memory_mapped=True, bool No_coverage_is_error=True, int No_coverage_fill_value=-1, bool Force_area_pixel=False)\n"
 		"\n"
-		"GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup(const boost::shared_ptr< MapInfo > Minfo, int\n"
-		"Number_line_per_tile=100, int Number_sample_per_tile=-1, int\n"
-		"Number_tile_each_file=4, int Number_tile=4, bool\n"
-		"Favor_memory_mapped=true, bool No_coverage_is_error=true, int\n"
-		"No_coverage_fill_value=-1, bool Force_area_pixel=false)\n"
 		"GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup\n"
 		""},
 	 { "VicarCartLabMultifileSetup_file_add", _wrap_VicarCartLabMultifileSetup_file_add, METH_VARARGS, "\n"
+		"file_add(VicarCartLabMultifileSetup self, int x1, int y1, int x2, int y2, std::string const & fname)\n"
 		"\n"
-		"void GeoCal::VicarCartLabMultifileSetup::file_add(int x1, int y1, int x2, int y2, const std::string &fname)\n"
 		"GeoCal::VicarCartLabMultifileSetup::file_add\n"
 		""},
 	 { "delete_VicarCartLabMultifileSetup", _wrap_delete_VicarCartLabMultifileSetup, METH_O, "\n"
+		"delete_VicarCartLabMultifileSetup(VicarCartLabMultifileSetup self)\n"
 		"\n"
-		"virtual GeoCal::VicarCartLabMultifileSetup::~VicarCartLabMultifileSetup()\n"
 		"GeoCal::VicarCartLabMultifileSetup::~VicarCartLabMultifileSetup\n"
 		""},
 	 { "VicarCartLabMultifileSetup_swigregister", VicarCartLabMultifileSetup_swigregister, METH_O, NULL},

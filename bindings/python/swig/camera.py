@@ -90,6 +90,7 @@ _camera.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _camera.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _camera.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,6 +138,8 @@ import geocal_swig.generic_object
 import geocal_swig.observer
 import geocal_swig.with_parameter
 class ObservableCamera(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observable< GeoCal::Camera > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -150,10 +153,13 @@ class ObservableCamera(geocal_swig.generic_object.GenericObject):
 # Register ObservableCamera in _camera:
 _camera.ObservableCamera_swigregister(ObservableCamera)
 class ObserverCamera(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observer< GeoCal::Camera > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self):
+        r"""__init__(ObserverCamera self) -> ObserverCamera"""
         _camera.ObserverCamera_swiginit(self, _camera.new_ObserverCamera())
     __swig_destroy__ = _camera.delete_ObserverCamera
     notify_update = _swig_new_instance_method(_camera.ObserverCamera_notify_update)
@@ -165,16 +171,17 @@ _camera.ObserverCamera_swigregister(ObserverCamera)
 class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
     r"""
 
-    This class models a frame camera.
 
-    It is used to convert ScLookVector to FrameCoordinate and vice versa.
+    This class models a frame camera.  
 
-    Other objects may depend on the Camera, and should be updated when the
-    Camera is updated. To facilitate that, this class in an Oberverable,
-    and objects can add themselves as Observers to be notified when the
-    Camera is updated.
+    It is used to convert ScLookVector to FrameCoordinate and vice versa.  
 
-    C++ includes: camera.h 
+    Other objects may depend on the Camera, and should be updated when the Camera is
+    updated. To facilitate that, this class in an Oberverable, and objects can add
+    themselves as Observers to be notified when the Camera is updated.  
+
+    C++ includes: camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -182,10 +189,10 @@ class Camera(ObservableCamera, geocal_swig.with_parameter.WithParameter):
 
     def __init__(self):
         r"""
+        __init__(Camera self) -> Camera
 
-        GeoCal::Camera::Camera()
         GeoCal::Camera::Camera
-        Default constructor.
+        Default constructor.  
 
         """
         if self.__class__ == Camera:
@@ -289,10 +296,12 @@ _camera.Camera_swigregister(Camera)
 class SubCamera(Camera):
     r"""
 
-    This is an adapter of a Camera, that presents a subset of the full
-    camera as a smaller camera.
 
-    C++ includes: camera.h 
+    This is an adapter of a Camera, that presents a subset of the full camera as a
+    smaller camera.  
+
+    C++ includes: camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -300,9 +309,8 @@ class SubCamera(Camera):
 
     def __init__(self, Cam, Start_line, Start_sample, Number_line, Number_sample):
         r"""
+        __init__(SubCamera self, boost::shared_ptr< GeoCal::Camera > const & Cam, int Start_line, int Start_sample, int Number_line, int Number_sample) -> SubCamera
 
-        GeoCal::SubCamera::SubCamera(const boost::shared_ptr< Camera > &Cam, int Start_line, int
-        Start_sample, int Number_line, int Number_sample)
         GeoCal::SubCamera::SubCamera
         """
         _camera.SubCamera_swiginit(self, _camera.new_SubCamera(Cam, Start_line, Start_sample, Number_line, Number_sample))
@@ -331,13 +339,15 @@ _camera.SubCamera_swigregister(SubCamera)
 class SimpleCamera(Camera):
     r"""
 
-    This is a simple Camera.
 
-    It is not intended as a realistic camera model, but rather as
-    supplying a simple class to use for testing. The defaults are for the
-    nominal MISR DF camera, red band.
+    This is a simple Camera.  
 
-    C++ includes: camera.h 
+    It is not intended as a realistic camera model, but rather as supplying a simple
+    class to use for testing. The defaults are for the nominal MISR DF camera, red
+    band.  
+
+    C++ includes: camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -345,14 +355,15 @@ class SimpleCamera(Camera):
 
     def __init__(self, *args):
         r"""
+        __init__(SimpleCamera self) -> SimpleCamera
+        __init__(SimpleCamera self, double Beta) -> SimpleCamera
+        __init__(SimpleCamera self, double Beta, double Delta, double Epsilon=0, double Focal=123.8e-3, double Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_line=1, int Number_sample=1504) -> SimpleCamera
 
-        SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7
-        *Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double
-        line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int
-        Number_sample=1504)
         GeoCal::SimpleCamera::SimpleCamera
-        This creates SimpleCamera with the given data.
-        The default data is for the nominal MISR DF, red band. 
+        This creates SimpleCamera with the given data.  
+
+        The default data is for the nominal MISR DF, red band.  
+
         """
         _camera.SimpleCamera_swiginit(self, _camera.new_SimpleCamera(*args))
     _v_beta = _swig_new_instance_method(_camera.SimpleCamera__v_beta)
@@ -404,6 +415,8 @@ class SimpleCamera(Camera):
 # Register SimpleCamera in _camera:
 _camera.SimpleCamera_swigregister(SimpleCamera)
 class Vector_Camera(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::Camera > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_camera.Vector_Camera_iterator)
@@ -433,6 +446,12 @@ class Vector_Camera(object):
     erase = _swig_new_instance_method(_camera.Vector_Camera_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Camera self) -> Vector_Camera
+        __init__(Vector_Camera self, Vector_Camera other) -> Vector_Camera
+        __init__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type size) -> Vector_Camera
+        __init__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & value) -> Vector_Camera
+        """
         _camera.Vector_Camera_swiginit(self, _camera.new_Vector_Camera(*args))
     push_back = _swig_new_instance_method(_camera.Vector_Camera_push_back)
     front = _swig_new_instance_method(_camera.Vector_Camera_front)

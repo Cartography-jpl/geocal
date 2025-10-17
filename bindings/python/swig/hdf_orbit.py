@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _hdf_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _hdf_orbit:
 _hdf_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _hdf_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,36 +146,37 @@ import geocal_swig.look_vector
 class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_array.OrbitArray_EciTod_TimeAcs):
     r"""
 
-    This is an implementation of an Orbit that reads position, velocity,
-    and attitude quaternion from an HDF file.
 
-    For times that fall between the values given in the file, we
-    interpolate to get the OrbitData.
+    This is an implementation of an Orbit that reads position, velocity, and
+    attitude quaternion from an HDF file.  
 
-    The file should have the following fields:
+    For times that fall between the values given in the file, we interpolate to get
+    the OrbitData.  
 
-    <Base group>/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
-    size, quaternion to take same coordinate system as Position (e.g.,
-    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
-    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
-    size, position measurement as doubles in meters <Base
-    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
-    doubles in meter/second
+    The file should have the following fields:  
 
-    Because it is useful, we allow the type of position measurement and
-    time to be changed. The measurement class is passed in, e.g., Eci, as
-    is a small wrapper to give the conversion to Time.
+    <Base group>/Attitude/Time - natt in size, time of attitude measurement as
+    doubles. <Base group>/Attitude/Quaternion - natt x 4 in size, quaternion to take
+    same coordinate system as Position (e.g., ECI) <Base group>/Ephemeris/Time -
+    neph in size, time of ephemeris measurement as doubles <Base
+    group>/Ephemeris/Position - neph x 3 in size, position measurement as doubles in
+    meters <Base group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement
+    as doubles in meter/second  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    Because it is useful, we allow the type of position measurement and time to be
+    changed. The measurement class is passed in, e.g., Eci, as is a small wrapper to
+    give the conversion to Time.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    C++ includes: hdf_orbit.h 
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
+
+    C++ includes: hdf_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -180,18 +184,13 @@ class HdfOrbit_EciTod_TimeAcs(geocal_swig.orbit_array.OrbitArray_EciTod_TimeAcs)
 
     def __init__(self, *args):
         r"""
+        __init__(HdfOrbit_EciTod_TimeAcs self, std::string const & Fname, std::string const & Base_group="Orbit", std::string const & Eph_time="/Ephemeris/Time", std::string const & Eph_pos="/Ephemeris/Position", std::string const & Eph_vel="/Ephemeris/Velocity", std::string const & Att_time="/Attitude/Time", std::string const & Att_quat="/Attitude/Quaternion", bool Att_from_sc_to_ref_frame=True) -> HdfOrbit_EciTod_TimeAcs
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
-        const std::string &Eph_time="/Ephemeris/Time", const std::string
-        &Eph_pos="/Ephemeris/Position", const std::string
-        &Eph_vel="/Ephemeris/Velocity", const std::string
-        &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion", bool
-        Att_from_sc_to_ref_frame=true)
         GeoCal::HdfOrbit::HdfOrbit
-        Read the given orbit data file.
-        You can optional pass the base group of the HDF file, the default is
-        "/Orbit" 
+        Read the given orbit data file.  
+
+        You can optional pass the base group of the HDF file, the default is "/Orbit"  
+
         """
         _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swiginit(self, _hdf_orbit.new_HdfOrbit_EciTod_TimeAcs(*args))
     _v_file_name = _swig_new_instance_method(_hdf_orbit.HdfOrbit_EciTod_TimeAcs__v_file_name)
@@ -221,36 +220,37 @@ _hdf_orbit.HdfOrbit_EciTod_TimeAcs_swigregister(HdfOrbit_EciTod_TimeAcs)
 class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_array.OrbitArray_Eci_TimePgs):
     r"""
 
-    This is an implementation of an Orbit that reads position, velocity,
-    and attitude quaternion from an HDF file.
 
-    For times that fall between the values given in the file, we
-    interpolate to get the OrbitData.
+    This is an implementation of an Orbit that reads position, velocity, and
+    attitude quaternion from an HDF file.  
 
-    The file should have the following fields:
+    For times that fall between the values given in the file, we interpolate to get
+    the OrbitData.  
 
-    <Base group>/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
-    size, quaternion to take same coordinate system as Position (e.g.,
-    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
-    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
-    size, position measurement as doubles in meters <Base
-    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
-    doubles in meter/second
+    The file should have the following fields:  
 
-    Because it is useful, we allow the type of position measurement and
-    time to be changed. The measurement class is passed in, e.g., Eci, as
-    is a small wrapper to give the conversion to Time.
+    <Base group>/Attitude/Time - natt in size, time of attitude measurement as
+    doubles. <Base group>/Attitude/Quaternion - natt x 4 in size, quaternion to take
+    same coordinate system as Position (e.g., ECI) <Base group>/Ephemeris/Time -
+    neph in size, time of ephemeris measurement as doubles <Base
+    group>/Ephemeris/Position - neph x 3 in size, position measurement as doubles in
+    meters <Base group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement
+    as doubles in meter/second  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    Because it is useful, we allow the type of position measurement and time to be
+    changed. The measurement class is passed in, e.g., Eci, as is a small wrapper to
+    give the conversion to Time.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    C++ includes: hdf_orbit.h 
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
+
+    C++ includes: hdf_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -258,18 +258,13 @@ class HdfOrbit_Eci_TimePgs(geocal_swig.orbit_array.OrbitArray_Eci_TimePgs):
 
     def __init__(self, *args):
         r"""
+        __init__(HdfOrbit_Eci_TimePgs self, std::string const & Fname, std::string const & Base_group="Orbit", std::string const & Eph_time="/Ephemeris/Time", std::string const & Eph_pos="/Ephemeris/Position", std::string const & Eph_vel="/Ephemeris/Velocity", std::string const & Att_time="/Attitude/Time", std::string const & Att_quat="/Attitude/Quaternion", bool Att_from_sc_to_ref_frame=True) -> HdfOrbit_Eci_TimePgs
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
-        const std::string &Eph_time="/Ephemeris/Time", const std::string
-        &Eph_pos="/Ephemeris/Position", const std::string
-        &Eph_vel="/Ephemeris/Velocity", const std::string
-        &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion", bool
-        Att_from_sc_to_ref_frame=true)
         GeoCal::HdfOrbit::HdfOrbit
-        Read the given orbit data file.
-        You can optional pass the base group of the HDF file, the default is
-        "/Orbit" 
+        Read the given orbit data file.  
+
+        You can optional pass the base group of the HDF file, the default is "/Orbit"  
+
         """
         _hdf_orbit.HdfOrbit_Eci_TimePgs_swiginit(self, _hdf_orbit.new_HdfOrbit_Eci_TimePgs(*args))
     _v_file_name = _swig_new_instance_method(_hdf_orbit.HdfOrbit_Eci_TimePgs__v_file_name)
@@ -299,36 +294,37 @@ _hdf_orbit.HdfOrbit_Eci_TimePgs_swigregister(HdfOrbit_Eci_TimePgs)
 class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_array.OrbitArray_Eci_TimeJ2000):
     r"""
 
-    This is an implementation of an Orbit that reads position, velocity,
-    and attitude quaternion from an HDF file.
 
-    For times that fall between the values given in the file, we
-    interpolate to get the OrbitData.
+    This is an implementation of an Orbit that reads position, velocity, and
+    attitude quaternion from an HDF file.  
 
-    The file should have the following fields:
+    For times that fall between the values given in the file, we interpolate to get
+    the OrbitData.  
 
-    <Base group>/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
-    size, quaternion to take same coordinate system as Position (e.g.,
-    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
-    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
-    size, position measurement as doubles in meters <Base
-    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
-    doubles in meter/second
+    The file should have the following fields:  
 
-    Because it is useful, we allow the type of position measurement and
-    time to be changed. The measurement class is passed in, e.g., Eci, as
-    is a small wrapper to give the conversion to Time.
+    <Base group>/Attitude/Time - natt in size, time of attitude measurement as
+    doubles. <Base group>/Attitude/Quaternion - natt x 4 in size, quaternion to take
+    same coordinate system as Position (e.g., ECI) <Base group>/Ephemeris/Time -
+    neph in size, time of ephemeris measurement as doubles <Base
+    group>/Ephemeris/Position - neph x 3 in size, position measurement as doubles in
+    meters <Base group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement
+    as doubles in meter/second  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    Because it is useful, we allow the type of position measurement and time to be
+    changed. The measurement class is passed in, e.g., Eci, as is a small wrapper to
+    give the conversion to Time.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    C++ includes: hdf_orbit.h 
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
+
+    C++ includes: hdf_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -336,18 +332,13 @@ class HdfOrbit_Eci_TimeJ2000(geocal_swig.orbit_array.OrbitArray_Eci_TimeJ2000):
 
     def __init__(self, *args):
         r"""
+        __init__(HdfOrbit_Eci_TimeJ2000 self, std::string const & Fname, std::string const & Base_group="Orbit", std::string const & Eph_time="/Ephemeris/Time", std::string const & Eph_pos="/Ephemeris/Position", std::string const & Eph_vel="/Ephemeris/Velocity", std::string const & Att_time="/Attitude/Time", std::string const & Att_quat="/Attitude/Quaternion", bool Att_from_sc_to_ref_frame=True) -> HdfOrbit_Eci_TimeJ2000
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
-        const std::string &Eph_time="/Ephemeris/Time", const std::string
-        &Eph_pos="/Ephemeris/Position", const std::string
-        &Eph_vel="/Ephemeris/Velocity", const std::string
-        &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion", bool
-        Att_from_sc_to_ref_frame=true)
         GeoCal::HdfOrbit::HdfOrbit
-        Read the given orbit data file.
-        You can optional pass the base group of the HDF file, the default is
-        "/Orbit" 
+        Read the given orbit data file.  
+
+        You can optional pass the base group of the HDF file, the default is "/Orbit"  
+
         """
         _hdf_orbit.HdfOrbit_Eci_TimeJ2000_swiginit(self, _hdf_orbit.new_HdfOrbit_Eci_TimeJ2000(*args))
     _v_file_name = _swig_new_instance_method(_hdf_orbit.HdfOrbit_Eci_TimeJ2000__v_file_name)
@@ -377,36 +368,37 @@ _hdf_orbit.HdfOrbit_Eci_TimeJ2000_swigregister(HdfOrbit_Eci_TimeJ2000)
 class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_array.OrbitArray_EciTod_TimeJ2000):
     r"""
 
-    This is an implementation of an Orbit that reads position, velocity,
-    and attitude quaternion from an HDF file.
 
-    For times that fall between the values given in the file, we
-    interpolate to get the OrbitData.
+    This is an implementation of an Orbit that reads position, velocity, and
+    attitude quaternion from an HDF file.  
 
-    The file should have the following fields:
+    For times that fall between the values given in the file, we interpolate to get
+    the OrbitData.  
 
-    <Base group>/Attitude/Time - natt in size, time of attitude
-    measurement as doubles. <Base group>/Attitude/Quaternion - natt x 4 in
-    size, quaternion to take same coordinate system as Position (e.g.,
-    ECI) <Base group>/Ephemeris/Time - neph in size, time of ephemeris
-    measurement as doubles <Base group>/Ephemeris/Position - neph x 3 in
-    size, position measurement as doubles in meters <Base
-    group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement as
-    doubles in meter/second
+    The file should have the following fields:  
 
-    Because it is useful, we allow the type of position measurement and
-    time to be changed. The measurement class is passed in, e.g., Eci, as
-    is a small wrapper to give the conversion to Time.
+    <Base group>/Attitude/Time - natt in size, time of attitude measurement as
+    doubles. <Base group>/Attitude/Quaternion - natt x 4 in size, quaternion to take
+    same coordinate system as Position (e.g., ECI) <Base group>/Ephemeris/Time -
+    neph in size, time of ephemeris measurement as doubles <Base
+    group>/Ephemeris/Position - neph x 3 in size, position measurement as doubles in
+    meters <Base group>/Ephemeris/Velocity - neph x 3 in size, velocity measurement
+    as doubles in meter/second  
 
-    The Attitude is always assumed to have the real part first, like boost
-    library uses. We could probably add an option to change this if
-    needed, but for now this is always the case.
+    Because it is useful, we allow the type of position measurement and time to be
+    changed. The measurement class is passed in, e.g., Eci, as is a small wrapper to
+    give the conversion to Time.  
 
-    By default, the reported attitude goes from the spacecraft to the
-    reference frame (e.g., ECI). However, you can optionally specify that
-    the attitude goes in the other direction.
+    The Attitude is always assumed to have the real part first, like boost library
+    uses. We could probably add an option to change this if needed, but for now this
+    is always the case.  
 
-    C++ includes: hdf_orbit.h 
+    By default, the reported attitude goes from the spacecraft to the reference
+    frame (e.g., ECI). However, you can optionally specify that the attitude goes in
+    the other direction.  
+
+    C++ includes: hdf_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -414,18 +406,13 @@ class HdfOrbit_EciTod_TimeJ2000(geocal_swig.orbit_array.OrbitArray_EciTod_TimeJ2
 
     def __init__(self, *args):
         r"""
+        __init__(HdfOrbit_EciTod_TimeJ2000 self, std::string const & Fname, std::string const & Base_group="Orbit", std::string const & Eph_time="/Ephemeris/Time", std::string const & Eph_pos="/Ephemeris/Position", std::string const & Eph_vel="/Ephemeris/Velocity", std::string const & Att_time="/Attitude/Time", std::string const & Att_quat="/Attitude/Quaternion", bool Att_from_sc_to_ref_frame=True) -> HdfOrbit_EciTod_TimeJ2000
 
-        GeoCal::HdfOrbit< PositionType, TimeCreatorType >::HdfOrbit(const std::string &Fname, const std::string &Base_group="Orbit",
-        const std::string &Eph_time="/Ephemeris/Time", const std::string
-        &Eph_pos="/Ephemeris/Position", const std::string
-        &Eph_vel="/Ephemeris/Velocity", const std::string
-        &Att_time="/Attitude/Time", const std::string
-        &Att_quat="/Attitude/Quaternion", bool
-        Att_from_sc_to_ref_frame=true)
         GeoCal::HdfOrbit::HdfOrbit
-        Read the given orbit data file.
-        You can optional pass the base group of the HDF file, the default is
-        "/Orbit" 
+        Read the given orbit data file.  
+
+        You can optional pass the base group of the HDF file, the default is "/Orbit"  
+
         """
         _hdf_orbit.HdfOrbit_EciTod_TimeJ2000_swiginit(self, _hdf_orbit.new_HdfOrbit_EciTod_TimeJ2000(*args))
     _v_file_name = _swig_new_instance_method(_hdf_orbit.HdfOrbit_EciTod_TimeJ2000__v_file_name)

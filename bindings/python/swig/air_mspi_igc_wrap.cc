@@ -9441,82 +9441,84 @@ SWIGINTERN PyObject *AirMspiIgc_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObjec
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AirMspiIgc", _wrap_new_AirMspiIgc, METH_VARARGS, "\n"
+		"AirMspiIgc(std::string const & Master_config_file, std::string const & Orbit_file_name, std::string const & L1b1_file_name, std::string const & Swath_to_use=\"660-I\", std::string const & Base_directory=\".\", std::string const & Title=\"Image\", int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4)\n"
+		"AirMspiIgc(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & Dem, std::string const & L1b1_file_name, int Min_l1b1_line, int Max_l1b1_line, std::string const & Swath_to_use=\"660-I\", std::string const & Title=\"Image\", int Dem_resolution=10, int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4)\n"
 		"\n"
-		"AirMspiIgc::AirMspiIgc(const std::string &Master_config_file, const std::string\n"
-		"&Orbit_file_name, const std::string &L1b1_file_name, const std::string\n"
-		"&Swath_to_use=\"660-I\", const std::string &Base_directory=\".\",\n"
-		"const std::string &Title=\"Image\", int Tile_number_line=-1, int\n"
-		"Tile_number_sample=-1, unsigned int Number_tile=4)\n"
 		"GeoCal::AirMspiIgc::AirMspiIgc\n"
-		"Constructor.\n"
-		"This takes the master config file and uses it to create a AirMspiIgc.\n"
+		"Constructor.  \n"
+		"\n"
+		"This takes the master config file and uses it to create a AirMspiIgc.  \n"
 		"\n"
 		"You can optionally add the base directory that file names in the\n"
-		"Master_config_file are relative to. The default is the current\n"
-		"directory. \n"
+		"Master_config_file are relative to. The default is the current directory.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgc__v_band", _wrap_AirMspiIgc__v_band, METH_VARARGS, "\n"
+		"AirMspiIgc__v_band(AirMspiIgc self) -> int\n"
+		"AirMspiIgc__v_band(AirMspiIgc self, int const & V)\n"
 		"\n"
-		"void AirMspiIgc::band(int B)\n"
 		"GeoCal::AirMspiIgc::band\n"
-		"Set band that we are using.\n"
+		"Set band that we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_orbit", _wrap_AirMspiIgc__v_orbit, METH_O, "\n"
+		"AirMspiIgc__v_orbit(AirMspiIgc self) -> boost::shared_ptr< GeoCal::Orbit >\n"
 		"\n"
-		"boost::shared_ptr< Orbit > GeoCal::AirMspiIgc::orbit() const\n"
 		"GeoCal::AirMspiIgc::orbit\n"
-		"Orbit we are using.\n"
+		"Orbit we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_time_table", _wrap_AirMspiIgc__v_time_table, METH_O, "\n"
+		"AirMspiIgc__v_time_table(AirMspiIgc self) -> boost::shared_ptr< GeoCal::AirMspiTimeTable >\n"
 		"\n"
-		"boost::shared_ptr< AirMspiTimeTable > GeoCal::AirMspiIgc::time_table() const\n"
 		"GeoCal::AirMspiIgc::time_table\n"
-		"TimeTable we are using.\n"
+		"TimeTable we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_camera", _wrap_AirMspiIgc__v_camera, METH_O, "\n"
+		"AirMspiIgc__v_camera(AirMspiIgc self) -> boost::shared_ptr< GeoCal::MspiCamera >\n"
 		"\n"
-		"boost::shared_ptr< MspiCamera > GeoCal::AirMspiIgc::camera() const\n"
 		"GeoCal::AirMspiIgc::camera\n"
-		"Camera we are using.\n"
+		"Camera we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_gimbal", _wrap_AirMspiIgc__v_gimbal, METH_O, "\n"
+		"AirMspiIgc__v_gimbal(AirMspiIgc self) -> boost::shared_ptr< GeoCal::MspiGimbal >\n"
 		"\n"
-		"boost::shared_ptr< MspiGimbal > GeoCal::AirMspiIgc::gimbal() const\n"
 		"GeoCal::AirMspiIgc::gimbal\n"
-		"Gimbal we are using.\n"
+		"Gimbal we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_l1b1_file_name", _wrap_AirMspiIgc__v_l1b1_file_name, METH_O, "\n"
+		"AirMspiIgc__v_l1b1_file_name(AirMspiIgc self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiIgc::l1b1_file_name() const\n"
 		"GeoCal::AirMspiIgc::l1b1_file_name\n"
-		"The name of the l1b1 file.\n"
+		"The name of the l1b1 file.  \n"
 		"\n"
 		""},
-	 { "delete_AirMspiIgc", _wrap_delete_AirMspiIgc, METH_O, NULL},
+	 { "delete_AirMspiIgc", _wrap_delete_AirMspiIgc, METH_O, "delete_AirMspiIgc(AirMspiIgc self)"},
 	 { "AirMspiIgc_swigregister", AirMspiIgc_swigregister, METH_O, NULL},
 	 { "AirMspiIgc_swiginit", AirMspiIgc_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -9525,82 +9527,84 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AirMspiIgc", _wrap_new_AirMspiIgc, METH_VARARGS, "\n"
+		"AirMspiIgc(std::string const & Master_config_file, std::string const & Orbit_file_name, std::string const & L1b1_file_name, std::string const & Swath_to_use=\"660-I\", std::string const & Base_directory=\".\", std::string const & Title=\"Image\", int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4)\n"
+		"AirMspiIgc(boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & Dem, std::string const & L1b1_file_name, int Min_l1b1_line, int Max_l1b1_line, std::string const & Swath_to_use=\"660-I\", std::string const & Title=\"Image\", int Dem_resolution=10, int Tile_number_line=-1, int Tile_number_sample=-1, unsigned int Number_tile=4)\n"
 		"\n"
-		"AirMspiIgc::AirMspiIgc(const std::string &Master_config_file, const std::string\n"
-		"&Orbit_file_name, const std::string &L1b1_file_name, const std::string\n"
-		"&Swath_to_use=\"660-I\", const std::string &Base_directory=\".\",\n"
-		"const std::string &Title=\"Image\", int Tile_number_line=-1, int\n"
-		"Tile_number_sample=-1, unsigned int Number_tile=4)\n"
 		"GeoCal::AirMspiIgc::AirMspiIgc\n"
-		"Constructor.\n"
-		"This takes the master config file and uses it to create a AirMspiIgc.\n"
+		"Constructor.  \n"
+		"\n"
+		"This takes the master config file and uses it to create a AirMspiIgc.  \n"
 		"\n"
 		"You can optionally add the base directory that file names in the\n"
-		"Master_config_file are relative to. The default is the current\n"
-		"directory. \n"
+		"Master_config_file are relative to. The default is the current directory.  \n"
+		"\n"
 		""},
 	 { "AirMspiIgc__v_band", _wrap_AirMspiIgc__v_band, METH_VARARGS, "\n"
+		"_v_band(AirMspiIgc self) -> int\n"
+		"_v_band(AirMspiIgc self, int const & V)\n"
 		"\n"
-		"void AirMspiIgc::band(int B)\n"
 		"GeoCal::AirMspiIgc::band\n"
-		"Set band that we are using.\n"
+		"Set band that we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_orbit", _wrap_AirMspiIgc__v_orbit, METH_O, "\n"
+		"_v_orbit(AirMspiIgc self) -> boost::shared_ptr< GeoCal::Orbit >\n"
 		"\n"
-		"boost::shared_ptr< Orbit > GeoCal::AirMspiIgc::orbit() const\n"
 		"GeoCal::AirMspiIgc::orbit\n"
-		"Orbit we are using.\n"
+		"Orbit we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_time_table", _wrap_AirMspiIgc__v_time_table, METH_O, "\n"
+		"_v_time_table(AirMspiIgc self) -> boost::shared_ptr< GeoCal::AirMspiTimeTable >\n"
 		"\n"
-		"boost::shared_ptr< AirMspiTimeTable > GeoCal::AirMspiIgc::time_table() const\n"
 		"GeoCal::AirMspiIgc::time_table\n"
-		"TimeTable we are using.\n"
+		"TimeTable we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_camera", _wrap_AirMspiIgc__v_camera, METH_O, "\n"
+		"_v_camera(AirMspiIgc self) -> boost::shared_ptr< GeoCal::MspiCamera >\n"
 		"\n"
-		"boost::shared_ptr< MspiCamera > GeoCal::AirMspiIgc::camera() const\n"
 		"GeoCal::AirMspiIgc::camera\n"
-		"Camera we are using.\n"
+		"Camera we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_gimbal", _wrap_AirMspiIgc__v_gimbal, METH_O, "\n"
+		"_v_gimbal(AirMspiIgc self) -> boost::shared_ptr< GeoCal::MspiGimbal >\n"
 		"\n"
-		"boost::shared_ptr< MspiGimbal > GeoCal::AirMspiIgc::gimbal() const\n"
 		"GeoCal::AirMspiIgc::gimbal\n"
-		"Gimbal we are using.\n"
+		"Gimbal we are using.  \n"
 		"\n"
 		""},
 	 { "AirMspiIgc__v_l1b1_file_name", _wrap_AirMspiIgc__v_l1b1_file_name, METH_O, "\n"
+		"_v_l1b1_file_name(AirMspiIgc self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiIgc::l1b1_file_name() const\n"
 		"GeoCal::AirMspiIgc::l1b1_file_name\n"
-		"The name of the l1b1 file.\n"
+		"The name of the l1b1 file.  \n"
 		"\n"
 		""},
-	 { "delete_AirMspiIgc", _wrap_delete_AirMspiIgc, METH_O, NULL},
+	 { "delete_AirMspiIgc", _wrap_delete_AirMspiIgc, METH_O, "delete_AirMspiIgc(AirMspiIgc self)"},
 	 { "AirMspiIgc_swigregister", AirMspiIgc_swigregister, METH_O, NULL},
 	 { "AirMspiIgc_swiginit", AirMspiIgc_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

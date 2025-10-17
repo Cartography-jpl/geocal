@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _sensrb_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _sensrb_camera:
 _sensrb_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _sensrb_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,48 +144,45 @@ import geocal_swig.with_parameter
 class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    This is a QuaternionCamera where the nonlinearity of the camera is
-    described by a radial model.
 
-    r^2 = x^2 + y^2 dr/r = k1 * r^2 + k2 * r^4 + k3 * r^3 x_corrected = x
-    + (dr/r)*x + p1 * (r^2 + 2 x^2) + 2 p2 * x * y + b1 * x + b2 * y
-    y_corrected = x + (dr/r)*x + p2 *(r^2 + 2 y^2) + 2 p1 * x * y
+    This is a QuaternionCamera where the nonlinearity of the camera is described by
+    a radial model.  
 
-    Note this is similar to but not identical to the Brown-Conrady
-    distortion model,
-    seehttps://en.wikipedia.org/wiki/Distortion_(optics).
+    r^2 = x^2 + y^2 dr/r = k1 * r^2 + k2 * r^4 + k3 * r^3 x_corrected = x + (dr/r)*x
+    + p1 * (r^2 + 2 x^2) + 2 p2 * x * y + b1 * x + b2 * y y_corrected = x + (dr/r)*x
+    + p2 *(r^2 + 2 y^2) + 2 p1 * x * y  
 
-    Note, I think we need to have the various constants in mm rather than
-    pixel - I think this is required by MSP library and normally we do
-    this in x,y space - not line/sample space.
+    Note this is similar to but not identical to the Brown-Conrady distortion model,
+    see https://en.wikipedia.org/wiki/Distortion_(optics).  
 
-    This is the camera model used by the SENSRB TRE in NITF files.
+    Note, I think we need to have the various constants in mm rather than pixel - I
+    think this is required by MSP library and normally we do this in x,y space - not
+    line/sample space.  
 
-    The convention used by SENSRB is that line is in the +y direction,
-    sample is the -x direction (so different than the default for
-    QuaternionCamera class). This is the "Camera" coordinates, there is
-    another (and different) coordinate system called "Sensor". See
-    "SENSRB Profile Frame Image-To-Ground Transformation Description" by
-    Michael J. Lenihan.
+    This is the camera model used by the SENSRB TRE in NITF files.  
 
-    The coordinate system for the angles is "SENSOR_ANGLE_MODEL = 1"
-    which actually has a bit of a odd orientation. It appears to be
-    something like the pilot holding the camera in front of his face. This
-    means that all angles 0 actually doesn't point the camera towards the
-    ground (most of our models have had nadir pointing camera have an
-    identity quaternion).
+    The convention used by SENSRB is that line is in the +y direction, sample is the
+    -x direction (so different than the default for QuaternionCamera class). This is
+    the "Camera" coordinates, there is another (and different) coordinate system
+    called "Sensor". See "SENSRB Profile Frame Image-To-Ground Transformation
+    Description" by Michael J. Lenihan.  
 
-    There are other SENSOR_ANGLE_MODEL (2 and 3), but the MSP library
-    doesn't support these. We could add support for these in the future if
-    useful (e.g., change quaternion_to_sensor_angle to take the model
-    number).
+    The coordinate system for the angles is "SENSOR_ANGLE_MODEL = 1" which
+    actually has a bit of a odd orientation. It appears to be something like the
+    pilot holding the camera in front of his face. This means that all angles 0
+    actually doesn't point the camera towards the ground (most of our models have
+    had nadir pointing camera have an identity quaternion).  
+
+    There are other SENSOR_ANGLE_MODEL (2 and 3), but the MSP library doesn't
+    support these. We could add support for these in the future if useful (e.g.,
+    change quaternion_to_sensor_angle to take the model number).  
 
     The actual camera model just as a normal frame_to_sc() like other
-    QuaternionCamera. We handle mapping this too and from the sensor
-    angles used NITF through the various static functions (e.g.,
-    quaternion_to_sensor_angle).
+    QuaternionCamera. We handle mapping this too and from the sensor angles used
+    NITF through the various static functions (e.g., quaternion_to_sensor_angle).  
 
-    C++ includes: sensrb_camera.h 
+    C++ includes: sensrb_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -190,24 +190,14 @@ class SensrbCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self, *args):
         r"""
+        __init__(SensrbCamera self, Quaternion_double Frame_to_sc_q, double K1, double K2, double K3, double P1, double P2, double B1, double B2, double Radial_distort_limit, int Number_line, int Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, FrameCoordinate Principal_point, std::string const & Detection_type="VIS", std::string const & Calibration_date="20000101", GeoCal::QuaternionCamera::FrameConvention Frame_convention=LINE_IS_Y, GeoCal::QuaternionCamera::FrameDirection Line_direction=INCREASE_IS_POSITIVE, GeoCal::QuaternionCamera::FrameDirection Sample_direction=INCREASE_IS_NEGATIVE) -> SensrbCamera
 
-        GeoCal::SensrbCamera::SensrbCamera(const boost::math::quaternion< double > &Frame_to_sc_q, double K1,
-        double K2, double K3, double P1, double P2, double B1, double B2,
-        double Radial_distort_limit, int Number_line, int Number_sample,
-        double Line_pitch, double Sample_pitch, double Focal_length, const
-        FrameCoordinate &Principal_point, const std::string
-        &Detection_type="VIS", const std::string
-        &Calibration_date="20000101", QuaternionCamera::FrameConvention
-        Frame_convention=QuaternionCamera::LINE_IS_Y,
-        QuaternionCamera::FrameDirection
-        Line_direction=QuaternionCamera::INCREASE_IS_POSITIVE,
-        QuaternionCamera::FrameDirection
-        Sample_direction=QuaternionCamera::INCREASE_IS_NEGATIVE)
         GeoCal::SensrbCamera::SensrbCamera
-        Create a QuaternionCamera with a radial distortion model given by
-        kdistort.
-        We currently limit kdistort.rows() <= 3, although we could relax that
-        if it ends up being useful. 
+        Create a QuaternionCamera with a radial distortion model given by kdistort.  
+
+        We currently limit kdistort.rows() <= 3, although we could relax that if it ends
+        up being useful.  
+
         """
         _sensrb_camera.SensrbCamera_swiginit(self, _sensrb_camera.new_SensrbCamera(*args))
     _v_p_distort = _swig_new_instance_method(_sensrb_camera.SensrbCamera__v_p_distort)

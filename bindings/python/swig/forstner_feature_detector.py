@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _forstner_feature_detector.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _forstner_feature_detector:
 _forstner_feature_detector.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _forstner_feature_detector.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,10 +143,11 @@ import geocal_swig.geocal_exception
 class ForstnerFeatureDetector(geocal_swig.feature_detector.FeatureDetector):
     r"""
 
-    This class detects interest points in an image using Forstner feature
-    detection.
 
-    C++ includes: forstner_feature_detector.h 
+    This class detects interest points in an image using Forstner feature detection.  
+
+    C++ includes: forstner_feature_detector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,14 +155,10 @@ class ForstnerFeatureDetector(geocal_swig.feature_detector.FeatureDetector):
 
     def __init__(self, Basic_ip_large_number=1000, Maximum_weight_threshold=10000, Forstner_max_window_large_size=9, Forstner_max_window_small_size=7, Forstner_window_size=3, Roundness_threshold=0.2, Weight_threshold=1.0, Basic_robert_threshold=1.2):
         r"""
+        __init__(ForstnerFeatureDetector self, int Basic_ip_large_number=1000, int Maximum_weight_threshold=10000, int Forstner_max_window_large_size=9, int Forstner_max_window_small_size=7, int Forstner_window_size=3, double Roundness_threshold=0.2, double Weight_threshold=1.0, double Basic_robert_threshold=1.2) -> ForstnerFeatureDetector
 
-        BZ_END_STENCIL ForstnerFeatureDetector::ForstnerFeatureDetector(int Basic_ip_large_number=1000, int Maximum_weight_threshold=10000,
-        int Forstner_max_window_large_size=9, int
-        Forstner_max_window_small_size=7, int Forstner_window_size=3, double
-        Roundness_threshold=0.2, double Weight_threshold=1.0, double
-        Basic_robert_threshold=1.2)
         GeoCal::ForstnerFeatureDetector::ForstnerFeatureDetector
-        Constructor.
+        Constructor.  
 
         """
         _forstner_feature_detector.ForstnerFeatureDetector_swiginit(self, _forstner_feature_detector.new_ForstnerFeatureDetector(Basic_ip_large_number, Maximum_weight_threshold, Forstner_max_window_large_size, Forstner_max_window_small_size, Forstner_window_size, Roundness_threshold, Weight_threshold, Basic_robert_threshold))

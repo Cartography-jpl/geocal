@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _gdal_raster_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _gdal_raster_image:
 _gdal_raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _gdal_raster_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,31 +145,50 @@ import geocal_swig.geocal_exception
 class GdalRasterImage(geocal_swig.raster_image_tiled_file.RasterImageTiledFile):
     r"""
 
-    This wraps a Gdal<T> to make a RasterImage.
 
-    The type of T should be one we can convert to and from a int, since
-    this is what a RasterImage works in.
+    This wraps a Gdal<T> to make a RasterImage.  
 
-    C++ includes: gdal_raster_image.h 
+    The type of T should be one we can convert to and from a int, since this is what
+    a RasterImage works in.  
+
+    C++ includes: gdal_raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     Byte = _gdal_raster_image.GdalRasterImage_Byte
+    
     UInt16 = _gdal_raster_image.GdalRasterImage_UInt16
+    
     Int16 = _gdal_raster_image.GdalRasterImage_Int16
+    
     UInt32 = _gdal_raster_image.GdalRasterImage_UInt32
+    
     Int32 = _gdal_raster_image.GdalRasterImage_Int32
+    
     Float32 = _gdal_raster_image.GdalRasterImage_Float32
+    
     Float64 = _gdal_raster_image.GdalRasterImage_Float64
+    
 
     def __init__(self, *args):
         r"""
+        __init__(GdalRasterImage self, std::string const & Fname, std::string const & Driver_name, int Number_line, int Number_sample, int Number_band, int Dt, std::string const & Options="", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalRasterImage
+        __init__(GdalRasterImage self, std::string const & Fname, std::string const & Driver_name, MapInfo Mi, int Number_band, int Dt, std::string const & Options="", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< GByte > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< GUInt16 > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< GInt16 > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< GUInt32 > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< GInt32 > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< float > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, boost::shared_ptr< GeoCal::Gdal< double > > const & Data) -> GdalRasterImage
+        __init__(GdalRasterImage self, std::string const & Fname, int Band_id=1, int Number_tile=4, bool Update=False, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalRasterImage
+        __init__(GdalRasterImage self, std::string const & Fname, int Band_id, std::string const & Allowed_drivers, std::string const & Open_options="", std::string const & Sibling_files="", int Number_tile=4, bool Update=False, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalRasterImage
+        __init__(GdalRasterImage self, std::string const & Fname, std::string const & Driver_name, GdalRasterImage Source, std::string const & Options="", bool Log_progress=False, int Band_id=1, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalRasterImage
 
-        GdalRasterImage::GdalRasterImage(const std::string &Fname, int Band_id=1, int Number_tile=4, bool
-        Update=false, int Tile_number_line=-1, int Tile_number_sample=-1)
         GeoCal::GdalRasterImage::GdalRasterImage
-        Constructor to read and/or update an existing file.
+        Constructor to read and/or update an existing file.  
 
         """
         _gdal_raster_image.GdalRasterImage_swiginit(self, _gdal_raster_image.new_GdalRasterImage(*args))

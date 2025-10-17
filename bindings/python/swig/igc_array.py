@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_array.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_array:
 _igc_array.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_array.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,10 +143,12 @@ import geocal_swig.geocal_exception
 class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parameter.WithParameterNested):
     r"""
 
-    This is a IgcCollection that is just an array of independent
-    ImageGroundConnection.
 
-    C++ includes: igc_array.h 
+    This is a IgcCollection that is just an array of independent
+    ImageGroundConnection.  
+
+    C++ includes: igc_array.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,18 +156,18 @@ class IgcArray(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parame
 
     def __init__(self, Igc_list, Assume_igc_independent=True):
         r"""
+        __init__(IgcArray self, Vector_ImageGroundConnection Igc_list, bool Assume_igc_independent=True) -> IgcArray
 
-        IgcArray::IgcArray(const std::vector< boost::shared_ptr< ImageGroundConnection > >
-        &Igc_list, bool Assume_igc_independent=true)
         GeoCal::IgcArray::IgcArray
-        Constructor.
-        Note that we can make assumption about ImageGroundConnection being
-        independent. If they are, then we can get a optimization in the
-        jacobian calculation to speed it up. If they aren't (e.g., they share
-        a common Orbit that has been added to the WithParameterNested), that
-        is fine. We just take longer to do the calculation. But we need to
-        know this to avoid making an incorrect optimization. Make sure
-        Assume_igc_independent is set to the right value. 
+        Constructor.  
+
+        Note that we can make assumption about ImageGroundConnection being independent.
+        If they are, then we can get a optimization in the jacobian calculation to speed
+        it up. If they aren't (e.g., they share a common Orbit that has been added to
+        the WithParameterNested), that is fine. We just take longer to do the
+        calculation. But we need to know this to avoid making an incorrect optimization.
+        Make sure Assume_igc_independent is set to the right value.  
+
         """
         _igc_array.IgcArray_swiginit(self, _igc_array.new_IgcArray(Igc_list, Assume_igc_independent))
     image_ground_connection = _swig_new_instance_method(_igc_array.IgcArray_image_ground_connection)

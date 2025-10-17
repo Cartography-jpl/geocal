@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _camera_radial_distortion_and_transform.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _camera_radial_distortion_and_transform:
 _camera_radial_distortion_and_transform.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _camera_radial_distortion_and_transform.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,13 +145,14 @@ import geocal_swig.with_parameter
 class CameraRadialDistortionAndTransform(geocal_swig.camera_radial_distortion.CameraRadialDistortion):
     r"""
 
-    This is a CameraRadialDistortion, with the addition of a supplied
-    transform.
 
-    This is the form of the HiRISE camera. I'm not sure how general this
-    is, perhaps this should just be called HiRISE.
+    This is a CameraRadialDistortion, with the addition of a supplied transform.  
 
-    C++ includes: camera_radial_distortion_and_transform.h 
+    This is the form of the HiRISE camera. I'm not sure how general this is, perhaps
+    this should just be called HiRISE.  
+
+    C++ includes: camera_radial_distortion_and_transform.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -156,16 +160,9 @@ class CameraRadialDistortionAndTransform(geocal_swig.camera_radial_distortion.Ca
 
     def __init__(self, Frame_to_sc_q, K_distort, Number_line, Number_sample, Line_pitch, Sample_pitch, Focal_length, Bin_mode, Ccd_off, Ccd_cen, T_off, T_m, Tinv_off, Tinv_m):
         r"""
+        __init__(CameraRadialDistortionAndTransform self, Quaternion_double Frame_to_sc_q, BlitzArray_double_1 K_distort, double Number_line, double Number_sample, double Line_pitch, double Sample_pitch, double Focal_length, int Bin_mode, BlitzArray_double_1 Ccd_off, BlitzArray_double_1 Ccd_cen, BlitzArray_double_1 T_off, BlitzArray_double_2 T_m, BlitzArray_double_1 Tinv_off, BlitzArray_double_2 Tinv_m) -> CameraRadialDistortionAndTransform
 
-        GeoCal::CameraRadialDistortionAndTransform::CameraRadialDistortionAndTransform(boost::math::quaternion< double > Frame_to_sc_q, const blitz::Array<
-        double, 1 > &K_distort, double Number_line, double Number_sample,
-        double Line_pitch, double Sample_pitch, double Focal_length, int
-        Bin_mode, const blitz::Array< double, 1 > &Ccd_off, const
-        blitz::Array< double, 1 > &Ccd_cen, const blitz::Array< double, 1 >
-        &T_off, const blitz::Array< double, 2 > &T_m, const blitz::Array<
-        double, 1 > &Tinv_off, const blitz::Array< double, 2 > &Tinv_m)
-        GeoCal::CameraRadialDistortionAndTransform::CameraRadialDistortionAndT
-        ransform
+        GeoCal::CameraRadialDistortionAndTransform::CameraRadialDistortionAndTransform
         """
         _camera_radial_distortion_and_transform.CameraRadialDistortionAndTransform_swiginit(self, _camera_radial_distortion_and_transform.new_CameraRadialDistortionAndTransform(Frame_to_sc_q, K_distort, Number_line, Number_sample, Line_pitch, Sample_pitch, Focal_length, Bin_mode, Ccd_off, Ccd_cen, T_off, T_m, Tinv_off, Tinv_m))
     _v_bin_mode = _swig_new_instance_method(_camera_radial_distortion_and_transform.CameraRadialDistortionAndTransform__v_bin_mode)

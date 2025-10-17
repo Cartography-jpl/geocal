@@ -1529,10 +1529,13 @@ class StringVector(object):
 # Register StringVector in _msp_wrap:
 _msp_wrap.StringVector_swigregister(StringVector)
 class Msp(object):
+    r"""Proxy of C++ Msp class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
+        r"""__init__(Msp self, std::string const & Fname, int Image_index=0, std::string const & Plugin_name="", std::string const & Model_name="") -> Msp"""
         _msp_wrap.Msp_swiginit(self, _msp_wrap.new_Msp(*args))
     msp_register_plugin = _swig_new_static_method(_msp_wrap.Msp_msp_register_plugin)
     msp_print_plugin_list = _swig_new_static_method(_msp_wrap.Msp_msp_print_plugin_list)

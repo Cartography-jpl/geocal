@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _paint_class.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _paint_class:
 _paint_class.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _paint_class.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,16 +145,17 @@ import geocal_swig.geocal_exception
 class PaintClass(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     r"""
 
-    This takes two images, a image with the class ID and a pan band.
 
-    It then produces a three color image that is either the given pan band
-    or a color given by the class ID if the class ID is > 0.
+    This takes two images, a image with the class ID and a pan band.  
 
-    This duplicates what was done with f2multi. This is a pretty specific
-    routine, and is likely to be replaced with something else at some
-    point.
+    It then produces a three color image that is either the given pan band or a
+    color given by the class ID if the class ID is > 0.  
 
-    C++ includes: paint_class.h 
+    This duplicates what was done with f2multi. This is a pretty specific routine,
+    and is likely to be replaced with something else at some point.  
+
+    C++ includes: paint_class.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -159,10 +163,8 @@ class PaintClass(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
 
     def __init__(self, Class_id_img, Pan_img, Color, Class_id_first_color):
         r"""
+        __init__(PaintClass self, boost::shared_ptr< GeoCal::RasterImage > const & Class_id_img, boost::shared_ptr< GeoCal::RasterImage > const & Pan_img, BlitzArray_int_2 Color, int Class_id_first_color) -> PaintClass
 
-        PaintClass::PaintClass(const boost::shared_ptr< RasterImage > &Class_id_img, const
-        boost::shared_ptr< RasterImage > &Pan_img, const blitz::Array< int, 2
-        > &Color, int Class_id_first_color=8881)
         GeoCal::PaintClass::PaintClass
         """
         _paint_class.PaintClass_swiginit(self, _paint_class.new_PaintClass(Class_id_img, Pan_img, Color, Class_id_first_color))

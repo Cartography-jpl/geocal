@@ -7574,148 +7574,155 @@ SWIGINTERN PyObject *QuickBirdOrbit_swigregister(PyObject *SWIGUNUSEDPARM(self),
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_QuickBirdEphemeris", _wrap_new_QuickBirdEphemeris, METH_O, "\n"
+		"new_QuickBirdEphemeris(std::string const & Fname) -> QuickBirdEphemeris\n"
 		"\n"
-		"GeoCal::QuickBirdEphemeris::QuickBirdEphemeris(const std::string &Fname)\n"
 		"GeoCal::QuickBirdEphemeris::QuickBirdEphemeris\n"
-		"Read the quickbird ephemeris file.\n"
+		"Read the quickbird ephemeris file.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_min_time", _wrap_QuickBirdEphemeris__v_min_time, METH_O, "\n"
+		"QuickBirdEphemeris__v_min_time(QuickBirdEphemeris self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::min_time() const\n"
 		"GeoCal::QuickBirdFile< 12 >::min_time\n"
-		"Start time of data.\n"
+		"Start time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_max_time", _wrap_QuickBirdEphemeris__v_max_time, METH_O, "\n"
+		"QuickBirdEphemeris__v_max_time(QuickBirdEphemeris self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::max_time() const\n"
 		"GeoCal::QuickBirdFile< 12 >::max_time\n"
-		"End time of data.\n"
+		"End time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_time_spacing", _wrap_QuickBirdEphemeris__v_time_spacing, METH_O, "\n"
+		"QuickBirdEphemeris__v_time_spacing(QuickBirdEphemeris self) -> double\n"
 		"\n"
-		"double GeoCal::QuickBirdFile< D >::time_spacing() const\n"
 		"GeoCal::QuickBirdFile< 12 >::time_spacing\n"
-		"Spacing in seconds between points.\n"
+		"Spacing in seconds between points.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_ephemeris", _wrap_QuickBirdEphemeris__v_ephemeris, METH_O, "\n"
+		"QuickBirdEphemeris__v_ephemeris(QuickBirdEphemeris self) -> std::vector< boost::array< double,12 >,std::allocator< boost::array< double,12 > > >\n"
 		"\n"
-		"const std::vector< boost::array< double, 12 > > & GeoCal::QuickBirdEphemeris::ephemeris() const\n"
 		"GeoCal::QuickBirdEphemeris::ephemeris\n"
-		"Ephemeris data.\n"
-		"This as 12 numbers in each entry. The first 3 are the X, Y, and Z\n"
-		"position in meters, in ECF (or ECR?) coordinate system. The next 3 are\n"
-		"the velocity in m/s. The final 6 are the upper right coordinates of\n"
-		"the position covariance matrix (so order is (1, 1), (1, 2), (1, 3),\n"
-		"(2, 2), (2,3), (3, 3)). \n"
+		"Ephemeris data.  \n"
+		"\n"
+		"This as 12 numbers in each entry. The first 3 are the X, Y, and Z position in\n"
+		"meters, in ECF (or ECR?) coordinate system. The next 3 are the velocity in m/s.\n"
+		"The final 6 are the upper right coordinates of the position covariance matrix\n"
+		"(so order is (1, 1), (1, 2), (1, 3), (2, 2), (2,3), (3, 3)).  \n"
+		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_file_name", _wrap_QuickBirdEphemeris__v_file_name, METH_O, "\n"
+		"QuickBirdEphemeris__v_file_name(QuickBirdEphemeris self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::QuickBirdFile< D >::file_name() const\n"
 		"GeoCal::QuickBirdFile< 12 >::file_name\n"
-		"File name we are reading.\n"
+		"File name we are reading.  \n"
 		"\n"
 		""},
-	 { "QuickBirdEphemeris___str__", _wrap_QuickBirdEphemeris___str__, METH_O, NULL},
-	 { "delete_QuickBirdEphemeris", _wrap_delete_QuickBirdEphemeris, METH_O, NULL},
+	 { "QuickBirdEphemeris___str__", _wrap_QuickBirdEphemeris___str__, METH_O, "QuickBirdEphemeris___str__(QuickBirdEphemeris self) -> std::string"},
+	 { "delete_QuickBirdEphemeris", _wrap_delete_QuickBirdEphemeris, METH_O, "delete_QuickBirdEphemeris(QuickBirdEphemeris self)"},
 	 { "QuickBirdEphemeris_swigregister", QuickBirdEphemeris_swigregister, METH_O, NULL},
 	 { "QuickBirdEphemeris_swiginit", QuickBirdEphemeris_swiginit, METH_VARARGS, NULL},
 	 { "new_QuickBirdAttitude", _wrap_new_QuickBirdAttitude, METH_O, "\n"
+		"new_QuickBirdAttitude(std::string const & Fname) -> QuickBirdAttitude\n"
 		"\n"
-		"GeoCal::QuickBirdAttitude::QuickBirdAttitude(const std::string &Fname)\n"
 		"GeoCal::QuickBirdAttitude::QuickBirdAttitude\n"
-		"Read the quickbird attitude file.\n"
+		"Read the quickbird attitude file.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_min_time", _wrap_QuickBirdAttitude__v_min_time, METH_O, "\n"
+		"QuickBirdAttitude__v_min_time(QuickBirdAttitude self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::min_time() const\n"
 		"GeoCal::QuickBirdFile< 14 >::min_time\n"
-		"Start time of data.\n"
+		"Start time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_max_time", _wrap_QuickBirdAttitude__v_max_time, METH_O, "\n"
+		"QuickBirdAttitude__v_max_time(QuickBirdAttitude self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::max_time() const\n"
 		"GeoCal::QuickBirdFile< 14 >::max_time\n"
-		"End time of data.\n"
+		"End time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_time_spacing", _wrap_QuickBirdAttitude__v_time_spacing, METH_O, "\n"
+		"QuickBirdAttitude__v_time_spacing(QuickBirdAttitude self) -> double\n"
 		"\n"
-		"double GeoCal::QuickBirdFile< D >::time_spacing() const\n"
 		"GeoCal::QuickBirdFile< 14 >::time_spacing\n"
-		"Spacing in seconds between points.\n"
+		"Spacing in seconds between points.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_attitude", _wrap_QuickBirdAttitude__v_attitude, METH_O, "\n"
+		"QuickBirdAttitude__v_attitude(QuickBirdAttitude self) -> std::vector< boost::array< double,14 >,std::allocator< boost::array< double,14 > > >\n"
 		"\n"
-		"const std::vector< boost::array< double, 14 > > & GeoCal::QuickBirdAttitude::attitude() const\n"
 		"GeoCal::QuickBirdAttitude::attitude\n"
-		"Attitude data.\n"
-		"The first 4 parameters are the quaternion parameters (q1, q2, q3, q4).\n"
-		"The next 10 are the upper right elements of the attitude quaternion\n"
-		"covariance matrix.\n"
+		"Attitude data.  \n"
 		"\n"
-		"Make sure to see the class notes for QuickBirdAttitude to see a\n"
-		"discussion about the difference between the boost and Quickbird\n"
-		"quaternion conventions. \n"
+		"The first 4 parameters are the quaternion parameters (q1, q2, q3, q4). The next\n"
+		"10 are the upper right elements of the attitude quaternion covariance matrix.  \n"
+		"\n"
+		"Make sure to see the class notes for QuickBirdAttitude to see a discussion about\n"
+		"the difference between the boost and Quickbird quaternion conventions.  \n"
+		"\n"
 		""},
 	 { "QuickBirdAttitude__v_file_name", _wrap_QuickBirdAttitude__v_file_name, METH_O, "\n"
+		"QuickBirdAttitude__v_file_name(QuickBirdAttitude self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::QuickBirdFile< D >::file_name() const\n"
 		"GeoCal::QuickBirdFile< 14 >::file_name\n"
-		"File name we are reading.\n"
+		"File name we are reading.  \n"
 		"\n"
 		""},
-	 { "QuickBirdAttitude___str__", _wrap_QuickBirdAttitude___str__, METH_O, NULL},
-	 { "delete_QuickBirdAttitude", _wrap_delete_QuickBirdAttitude, METH_O, NULL},
+	 { "QuickBirdAttitude___str__", _wrap_QuickBirdAttitude___str__, METH_O, "QuickBirdAttitude___str__(QuickBirdAttitude self) -> std::string"},
+	 { "delete_QuickBirdAttitude", _wrap_delete_QuickBirdAttitude, METH_O, "delete_QuickBirdAttitude(QuickBirdAttitude self)"},
 	 { "QuickBirdAttitude_swigregister", QuickBirdAttitude_swigregister, METH_O, NULL},
 	 { "QuickBirdAttitude_swiginit", QuickBirdAttitude_swiginit, METH_VARARGS, NULL},
 	 { "QuickBirdOrbit_orbit_data", _wrap_QuickBirdOrbit_orbit_data, METH_VARARGS, "\n"
+		"QuickBirdOrbit_orbit_data(QuickBirdOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"QuickBirdOrbit_orbit_data(QuickBirdOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > QuickBirdOrbit::orbit_data(Time T) const\n"
 		"GeoCal::QuickBirdOrbit::orbit_data\n"
-		"Return OrbitData for the given time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Return OrbitData for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "QuickBirdOrbit__v_ephemeris_file_name", _wrap_QuickBirdOrbit__v_ephemeris_file_name, METH_O, "\n"
+		"QuickBirdOrbit__v_ephemeris_file_name(QuickBirdOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::QuickBirdOrbit::ephemeris_file_name() const\n"
 		"GeoCal::QuickBirdOrbit::ephemeris_file_name\n"
 		""},
 	 { "QuickBirdOrbit__v_attitude_file_name", _wrap_QuickBirdOrbit__v_attitude_file_name, METH_O, "\n"
+		"QuickBirdOrbit__v_attitude_file_name(QuickBirdOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::QuickBirdOrbit::attitude_file_name() const\n"
 		"GeoCal::QuickBirdOrbit::attitude_file_name\n"
 		""},
 	 { "delete_QuickBirdOrbit", _wrap_delete_QuickBirdOrbit, METH_O, "\n"
+		"delete_QuickBirdOrbit(QuickBirdOrbit self)\n"
 		"\n"
-		"virtual GeoCal::QuickBirdOrbit::~QuickBirdOrbit()\n"
 		"GeoCal::QuickBirdOrbit::~QuickBirdOrbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "QuickBirdOrbit_swigregister", QuickBirdOrbit_swigregister, METH_O, NULL},
@@ -7725,148 +7732,155 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_QuickBirdEphemeris", _wrap_new_QuickBirdEphemeris, METH_O, "\n"
+		"new_QuickBirdEphemeris(std::string const & Fname) -> QuickBirdEphemeris\n"
 		"\n"
-		"GeoCal::QuickBirdEphemeris::QuickBirdEphemeris(const std::string &Fname)\n"
 		"GeoCal::QuickBirdEphemeris::QuickBirdEphemeris\n"
-		"Read the quickbird ephemeris file.\n"
+		"Read the quickbird ephemeris file.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_min_time", _wrap_QuickBirdEphemeris__v_min_time, METH_O, "\n"
+		"_v_min_time(QuickBirdEphemeris self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::min_time() const\n"
 		"GeoCal::QuickBirdFile< 12 >::min_time\n"
-		"Start time of data.\n"
+		"Start time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_max_time", _wrap_QuickBirdEphemeris__v_max_time, METH_O, "\n"
+		"_v_max_time(QuickBirdEphemeris self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::max_time() const\n"
 		"GeoCal::QuickBirdFile< 12 >::max_time\n"
-		"End time of data.\n"
+		"End time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_time_spacing", _wrap_QuickBirdEphemeris__v_time_spacing, METH_O, "\n"
+		"_v_time_spacing(QuickBirdEphemeris self) -> double\n"
 		"\n"
-		"double GeoCal::QuickBirdFile< D >::time_spacing() const\n"
 		"GeoCal::QuickBirdFile< 12 >::time_spacing\n"
-		"Spacing in seconds between points.\n"
+		"Spacing in seconds between points.  \n"
 		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_ephemeris", _wrap_QuickBirdEphemeris__v_ephemeris, METH_O, "\n"
+		"_v_ephemeris(QuickBirdEphemeris self) -> std::vector< boost::array< double,12 >,std::allocator< boost::array< double,12 > > >\n"
 		"\n"
-		"const std::vector< boost::array< double, 12 > > & GeoCal::QuickBirdEphemeris::ephemeris() const\n"
 		"GeoCal::QuickBirdEphemeris::ephemeris\n"
-		"Ephemeris data.\n"
-		"This as 12 numbers in each entry. The first 3 are the X, Y, and Z\n"
-		"position in meters, in ECF (or ECR?) coordinate system. The next 3 are\n"
-		"the velocity in m/s. The final 6 are the upper right coordinates of\n"
-		"the position covariance matrix (so order is (1, 1), (1, 2), (1, 3),\n"
-		"(2, 2), (2,3), (3, 3)). \n"
+		"Ephemeris data.  \n"
+		"\n"
+		"This as 12 numbers in each entry. The first 3 are the X, Y, and Z position in\n"
+		"meters, in ECF (or ECR?) coordinate system. The next 3 are the velocity in m/s.\n"
+		"The final 6 are the upper right coordinates of the position covariance matrix\n"
+		"(so order is (1, 1), (1, 2), (1, 3), (2, 2), (2,3), (3, 3)).  \n"
+		"\n"
 		""},
 	 { "QuickBirdEphemeris__v_file_name", _wrap_QuickBirdEphemeris__v_file_name, METH_O, "\n"
+		"_v_file_name(QuickBirdEphemeris self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::QuickBirdFile< D >::file_name() const\n"
 		"GeoCal::QuickBirdFile< 12 >::file_name\n"
-		"File name we are reading.\n"
+		"File name we are reading.  \n"
 		"\n"
 		""},
-	 { "QuickBirdEphemeris___str__", _wrap_QuickBirdEphemeris___str__, METH_O, NULL},
-	 { "delete_QuickBirdEphemeris", _wrap_delete_QuickBirdEphemeris, METH_O, NULL},
+	 { "QuickBirdEphemeris___str__", _wrap_QuickBirdEphemeris___str__, METH_O, "__str__(QuickBirdEphemeris self) -> std::string"},
+	 { "delete_QuickBirdEphemeris", _wrap_delete_QuickBirdEphemeris, METH_O, "delete_QuickBirdEphemeris(QuickBirdEphemeris self)"},
 	 { "QuickBirdEphemeris_swigregister", QuickBirdEphemeris_swigregister, METH_O, NULL},
 	 { "QuickBirdEphemeris_swiginit", QuickBirdEphemeris_swiginit, METH_VARARGS, NULL},
 	 { "new_QuickBirdAttitude", _wrap_new_QuickBirdAttitude, METH_O, "\n"
+		"new_QuickBirdAttitude(std::string const & Fname) -> QuickBirdAttitude\n"
 		"\n"
-		"GeoCal::QuickBirdAttitude::QuickBirdAttitude(const std::string &Fname)\n"
 		"GeoCal::QuickBirdAttitude::QuickBirdAttitude\n"
-		"Read the quickbird attitude file.\n"
+		"Read the quickbird attitude file.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_min_time", _wrap_QuickBirdAttitude__v_min_time, METH_O, "\n"
+		"_v_min_time(QuickBirdAttitude self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::min_time() const\n"
 		"GeoCal::QuickBirdFile< 14 >::min_time\n"
-		"Start time of data.\n"
+		"Start time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_max_time", _wrap_QuickBirdAttitude__v_max_time, METH_O, "\n"
+		"_v_max_time(QuickBirdAttitude self) -> Time\n"
 		"\n"
-		"Time GeoCal::QuickBirdFile< D >::max_time() const\n"
 		"GeoCal::QuickBirdFile< 14 >::max_time\n"
-		"End time of data.\n"
+		"End time of data.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_time_spacing", _wrap_QuickBirdAttitude__v_time_spacing, METH_O, "\n"
+		"_v_time_spacing(QuickBirdAttitude self) -> double\n"
 		"\n"
-		"double GeoCal::QuickBirdFile< D >::time_spacing() const\n"
 		"GeoCal::QuickBirdFile< 14 >::time_spacing\n"
-		"Spacing in seconds between points.\n"
+		"Spacing in seconds between points.  \n"
 		"\n"
 		""},
 	 { "QuickBirdAttitude__v_attitude", _wrap_QuickBirdAttitude__v_attitude, METH_O, "\n"
+		"_v_attitude(QuickBirdAttitude self) -> std::vector< boost::array< double,14 >,std::allocator< boost::array< double,14 > > >\n"
 		"\n"
-		"const std::vector< boost::array< double, 14 > > & GeoCal::QuickBirdAttitude::attitude() const\n"
 		"GeoCal::QuickBirdAttitude::attitude\n"
-		"Attitude data.\n"
-		"The first 4 parameters are the quaternion parameters (q1, q2, q3, q4).\n"
-		"The next 10 are the upper right elements of the attitude quaternion\n"
-		"covariance matrix.\n"
+		"Attitude data.  \n"
 		"\n"
-		"Make sure to see the class notes for QuickBirdAttitude to see a\n"
-		"discussion about the difference between the boost and Quickbird\n"
-		"quaternion conventions. \n"
+		"The first 4 parameters are the quaternion parameters (q1, q2, q3, q4). The next\n"
+		"10 are the upper right elements of the attitude quaternion covariance matrix.  \n"
+		"\n"
+		"Make sure to see the class notes for QuickBirdAttitude to see a discussion about\n"
+		"the difference between the boost and Quickbird quaternion conventions.  \n"
+		"\n"
 		""},
 	 { "QuickBirdAttitude__v_file_name", _wrap_QuickBirdAttitude__v_file_name, METH_O, "\n"
+		"_v_file_name(QuickBirdAttitude self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::QuickBirdFile< D >::file_name() const\n"
 		"GeoCal::QuickBirdFile< 14 >::file_name\n"
-		"File name we are reading.\n"
+		"File name we are reading.  \n"
 		"\n"
 		""},
-	 { "QuickBirdAttitude___str__", _wrap_QuickBirdAttitude___str__, METH_O, NULL},
-	 { "delete_QuickBirdAttitude", _wrap_delete_QuickBirdAttitude, METH_O, NULL},
+	 { "QuickBirdAttitude___str__", _wrap_QuickBirdAttitude___str__, METH_O, "__str__(QuickBirdAttitude self) -> std::string"},
+	 { "delete_QuickBirdAttitude", _wrap_delete_QuickBirdAttitude, METH_O, "delete_QuickBirdAttitude(QuickBirdAttitude self)"},
 	 { "QuickBirdAttitude_swigregister", QuickBirdAttitude_swigregister, METH_O, NULL},
 	 { "QuickBirdAttitude_swiginit", QuickBirdAttitude_swiginit, METH_VARARGS, NULL},
 	 { "QuickBirdOrbit_orbit_data", _wrap_QuickBirdOrbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(QuickBirdOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(QuickBirdOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > QuickBirdOrbit::orbit_data(Time T) const\n"
 		"GeoCal::QuickBirdOrbit::orbit_data\n"
-		"Return OrbitData for the given time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Return OrbitData for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "QuickBirdOrbit__v_ephemeris_file_name", _wrap_QuickBirdOrbit__v_ephemeris_file_name, METH_O, "\n"
+		"_v_ephemeris_file_name(QuickBirdOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::QuickBirdOrbit::ephemeris_file_name() const\n"
 		"GeoCal::QuickBirdOrbit::ephemeris_file_name\n"
 		""},
 	 { "QuickBirdOrbit__v_attitude_file_name", _wrap_QuickBirdOrbit__v_attitude_file_name, METH_O, "\n"
+		"_v_attitude_file_name(QuickBirdOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::QuickBirdOrbit::attitude_file_name() const\n"
 		"GeoCal::QuickBirdOrbit::attitude_file_name\n"
 		""},
 	 { "delete_QuickBirdOrbit", _wrap_delete_QuickBirdOrbit, METH_O, "\n"
+		"delete_QuickBirdOrbit(QuickBirdOrbit self)\n"
 		"\n"
-		"virtual GeoCal::QuickBirdOrbit::~QuickBirdOrbit()\n"
 		"GeoCal::QuickBirdOrbit::~QuickBirdOrbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "QuickBirdOrbit_swigregister", QuickBirdOrbit_swigregister, METH_O, NULL},

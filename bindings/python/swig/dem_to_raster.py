@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _dem_to_raster.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _dem_to_raster:
 _dem_to_raster.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _dem_to_raster.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,12 +145,13 @@ import geocal_swig.geocal_exception
 class DemToRaster(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This provides DEM height data as a raster image.
 
-    This is useful for doing things like writing out a raster image
-    covering a DEM.
+    This provides DEM height data as a raster image.  
 
-    C++ includes: dem_to_raster.h 
+    This is useful for doing things like writing out a raster image covering a DEM.  
+
+    C++ includes: dem_to_raster.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,8 +159,8 @@ class DemToRaster(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, D, Mi):
         r"""
+        __init__(DemToRaster self, boost::shared_ptr< GeoCal::Dem > const & D, MapInfo Mi) -> DemToRaster
 
-        GeoCal::DemToRaster::DemToRaster(const boost::shared_ptr< Dem > &D, const MapInfo &Mi)
         GeoCal::DemToRaster::DemToRaster
         """
         _dem_to_raster.DemToRaster_swiginit(self, _dem_to_raster.new_DemToRaster(D, Mi))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_grid.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_grid:
 _rsm_grid.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_grid.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,23 +143,25 @@ import geocal_swig.geocal_exception
 class RsmGrid(geocal_swig.rsm_base.RsmBase):
     r"""
 
-    Use a interpolation grid to map from ground to image.
 
-    Right now we only do a linear interpolation. The RSM documentation
-    suggests doing Lagrange interpolation of various orders, we can
-    implement that in the future.
+    Use a interpolation grid to map from ground to image.  
 
-    This can contain missing data, either because it is outside of the
-    image or because the initial ImageGroundConnection failed for a
-    particular point. We record these as NaNs.
+    Right now we only do a linear interpolation. The RSM documentation suggests
+    doing Lagrange interpolation of various orders, we can implement that in the
+    future.  
 
-    Right now this just carries through, we should probably add some kind
-    of a status for image_coordinate.
+    This can contain missing data, either because it is outside of the image or
+    because the initial ImageGroundConnection failed for a particular point. We
+    record these as NaNs.  
 
-    We plan on using the same grid for a full ground to image map, or for
-    doing a correction.
+    Right now this just carries through, we should probably add some kind of a
+    status for image_coordinate.  
 
-    C++ includes: rsm_grid.h 
+    We plan on using the same grid for a full ground to image map, or for doing a
+    correction.  
+
+    C++ includes: rsm_grid.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -164,13 +169,8 @@ class RsmGrid(geocal_swig.rsm_base.RsmBase):
 
     def __init__(self, *args):
         r"""
+        __init__(RsmGrid self, int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=False, int Total_number_row_digit=11, int Total_number_col_digit=11, int Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int Row_section_number=1, int Col_section_number=1, std::string const & Image_identifier="", std::string const & Rsm_support_data_edition="fake-1") -> RsmGrid
 
-        GeoCal::RsmGrid::RsmGrid(int N_x, int N_y, int N_z, bool Ignore_igc_error_in_fit=false, int
-        Total_number_row_digit=11, int Total_number_col_digit=11, int
-        Number_fractional_row_digit=2, int Number_fractional_col_digit=2, int
-        Row_section_number=1, int Col_section_number=1, const std::string
-        &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1")
         GeoCal::RsmGrid::RsmGrid
         """
         _rsm_grid.RsmGrid_swiginit(self, _rsm_grid.new_RsmGrid(*args))

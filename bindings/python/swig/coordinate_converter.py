@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _coordinate_converter.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _coordinate_converter:
 _coordinate_converter.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _coordinate_converter.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,27 +140,27 @@ import geocal_swig.generic_object
 class CoordinateConverter(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class is used to convert from and to a particular coordinate
-    system.
 
-    There are some functions that can work equal well with any map
-    coordinate system, and where we want the decision of what coordinate
-    system to be made outside of the function (e.g., the program
-    map_project, where the user selects the coordinate system to map
-    project to).
+    This class is used to convert from and to a particular coordinate system.  
 
-    The solution we use here is to make use of the Strategy pattern (see
-    "Design Patterns" by Erich Gamma et. al.). This class is the base
-    class defining the interface to a general coordinate convertor.
+    There are some functions that can work equal well with any map coordinate
+    system, and where we want the decision of what coordinate system to be made
+    outside of the function (e.g., the program map_project, where the user selects
+    the coordinate system to map project to).  
 
-    This class allows conversion to and from whatever coordinate system
-    has been selected. The meaning of the X, Y, and Z value passed in and
-    out of the functions depends on what concrete specialization of this
-    class is used. For uses where the ambiguity isn't acceptable, it is
-    not appropriate to use this class (i.e., the various Strategies of
-    coordinate conversions aren't really exchangeable then).
+    The solution we use here is to make use of the Strategy pattern (see "Design
+    Patterns" by Erich Gamma et. al.). This class is the base class defining the
+    interface to a general coordinate convertor.  
 
-    C++ includes: coordinate_converter.h 
+    This class allows conversion to and from whatever coordinate system has been
+    selected. The meaning of the X, Y, and Z value passed in and out of the
+    functions depends on what concrete specialization of this class is used. For
+    uses where the ambiguity isn't acceptable, it is not appropriate to use this
+    class (i.e., the various Strategies of coordinate conversions aren't really
+    exchangeable then).  
+
+    C++ includes: coordinate_converter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -166,6 +169,7 @@ class CoordinateConverter(geocal_swig.generic_object.GenericObject):
         raise AttributeError("No constructor defined - class is abstract")
     __repr__ = _swig_repr
     EARTH_NAIF_CODE = _coordinate_converter.CoordinateConverter_EARTH_NAIF_CODE
+    
     convert_from_coordinate = _swig_new_instance_method(_coordinate_converter.CoordinateConverter_convert_from_coordinate)
     convert_to_coordinate = _swig_new_instance_method(_coordinate_converter.CoordinateConverter_convert_to_coordinate)
     _v_naif_code = _swig_new_instance_method(_coordinate_converter.CoordinateConverter__v_naif_code)
@@ -184,9 +188,11 @@ _coordinate_converter.CoordinateConverter_swigregister(CoordinateConverter)
 class GeodeticConverter(CoordinateConverter):
     r"""
 
-    CoordinateConverter that goes to and from Geodetic coordinates.
 
-    C++ includes: coordinate_converter.h 
+    CoordinateConverter that goes to and from Geodetic coordinates.  
+
+    C++ includes: coordinate_converter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -202,6 +208,7 @@ class GeodeticConverter(CoordinateConverter):
 
 
     def __init__(self):
+        r"""__init__(GeodeticConverter self) -> GeodeticConverter"""
         _coordinate_converter.GeodeticConverter_swiginit(self, _coordinate_converter.new_GeodeticConverter())
     __swig_destroy__ = _coordinate_converter.delete_GeodeticConverter
 
@@ -210,9 +217,11 @@ _coordinate_converter.GeodeticConverter_swigregister(GeodeticConverter)
 class Geodetic360Converter(CoordinateConverter):
     r"""
 
-    CoordinateConverter that goes to and from Geodetic360 coordinates.
 
-    C++ includes: coordinate_converter.h 
+    CoordinateConverter that goes to and from Geodetic360 coordinates.  
+
+    C++ includes: coordinate_converter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -228,6 +237,7 @@ class Geodetic360Converter(CoordinateConverter):
 
 
     def __init__(self):
+        r"""__init__(Geodetic360Converter self) -> Geodetic360Converter"""
         _coordinate_converter.Geodetic360Converter_swiginit(self, _coordinate_converter.new_Geodetic360Converter())
     __swig_destroy__ = _coordinate_converter.delete_Geodetic360Converter
 
@@ -236,11 +246,13 @@ _coordinate_converter.Geodetic360Converter_swigregister(Geodetic360Converter)
 class GeodeticRadianConverter(CoordinateConverter):
     r"""
 
-    CoordinateConverter that goes to and from Geodetic coordinates.
 
-    This variations uses radians instead
+    CoordinateConverter that goes to and from Geodetic coordinates.  
 
-    C++ includes: coordinate_converter.h 
+    This variations uses radians instead  
+
+    C++ includes: coordinate_converter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -256,6 +268,7 @@ class GeodeticRadianConverter(CoordinateConverter):
 
 
     def __init__(self):
+        r"""__init__(GeodeticRadianConverter self) -> GeodeticRadianConverter"""
         _coordinate_converter.GeodeticRadianConverter_swiginit(self, _coordinate_converter.new_GeodeticRadianConverter())
     __swig_destroy__ = _coordinate_converter.delete_GeodeticRadianConverter
 
@@ -264,12 +277,14 @@ _coordinate_converter.GeodeticRadianConverter_swigregister(GeodeticRadianConvert
 class GeodeticRadian2piConverter(CoordinateConverter):
     r"""
 
-    CoordinateConverter that goes to and from Geodetic coordinates.
 
-    This variations uses radians instead. This version has longitude
-    between 0 and 360 degrees instead of -180 to 180
+    CoordinateConverter that goes to and from Geodetic coordinates.  
 
-    C++ includes: coordinate_converter.h 
+    This variations uses radians instead. This version has longitude between 0 and
+    360 degrees instead of -180 to 180  
+
+    C++ includes: coordinate_converter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -285,6 +300,7 @@ class GeodeticRadian2piConverter(CoordinateConverter):
 
 
     def __init__(self):
+        r"""__init__(GeodeticRadian2piConverter self) -> GeodeticRadian2piConverter"""
         _coordinate_converter.GeodeticRadian2piConverter_swiginit(self, _coordinate_converter.new_GeodeticRadian2piConverter())
     __swig_destroy__ = _coordinate_converter.delete_GeodeticRadian2piConverter
 

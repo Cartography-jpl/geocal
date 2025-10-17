@@ -7994,114 +7994,122 @@ SWIGINTERN PyObject *MspiGimbal_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObjec
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "delete_ObservableMspiGimbal", _wrap_delete_ObservableMspiGimbal, METH_O, NULL},
-	 { "ObservableMspiGimbal_add_observer_and_keep_reference", _wrap_ObservableMspiGimbal_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableMspiGimbal_add_observer", _wrap_ObservableMspiGimbal_add_observer, METH_VARARGS, NULL},
-	 { "ObservableMspiGimbal_remove_observer", _wrap_ObservableMspiGimbal_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableMspiGimbal", _wrap_delete_ObservableMspiGimbal, METH_O, "delete_ObservableMspiGimbal(ObservableMspiGimbal self)"},
+	 { "ObservableMspiGimbal_add_observer_and_keep_reference", _wrap_ObservableMspiGimbal_add_observer_and_keep_reference, METH_VARARGS, "ObservableMspiGimbal_add_observer_and_keep_reference(ObservableMspiGimbal self, boost::shared_ptr< GeoCal::Observer< GeoCal::MspiGimbal > > & Obs)"},
+	 { "ObservableMspiGimbal_add_observer", _wrap_ObservableMspiGimbal_add_observer, METH_VARARGS, "ObservableMspiGimbal_add_observer(ObservableMspiGimbal self, ObserverMspiGimbal Obs)"},
+	 { "ObservableMspiGimbal_remove_observer", _wrap_ObservableMspiGimbal_remove_observer, METH_VARARGS, "ObservableMspiGimbal_remove_observer(ObservableMspiGimbal self, ObserverMspiGimbal Obs)"},
 	 { "ObservableMspiGimbal_swigregister", ObservableMspiGimbal_swigregister, METH_O, NULL},
-	 { "new_ObserverMspiGimbal", _wrap_new_ObserverMspiGimbal, METH_NOARGS, NULL},
-	 { "delete_ObserverMspiGimbal", _wrap_delete_ObserverMspiGimbal, METH_O, NULL},
-	 { "ObserverMspiGimbal_notify_update", _wrap_ObserverMspiGimbal_notify_update, METH_VARARGS, NULL},
-	 { "ObserverMspiGimbal_notify_add", _wrap_ObserverMspiGimbal_notify_add, METH_VARARGS, NULL},
-	 { "ObserverMspiGimbal_notify_remove", _wrap_ObserverMspiGimbal_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverMspiGimbal", _wrap_new_ObserverMspiGimbal, METH_NOARGS, "new_ObserverMspiGimbal() -> ObserverMspiGimbal"},
+	 { "delete_ObserverMspiGimbal", _wrap_delete_ObserverMspiGimbal, METH_O, "delete_ObserverMspiGimbal(ObserverMspiGimbal self)"},
+	 { "ObserverMspiGimbal_notify_update", _wrap_ObserverMspiGimbal_notify_update, METH_VARARGS, "ObserverMspiGimbal_notify_update(ObserverMspiGimbal self, MspiGimbal Observed_object)"},
+	 { "ObserverMspiGimbal_notify_add", _wrap_ObserverMspiGimbal_notify_add, METH_VARARGS, "ObserverMspiGimbal_notify_add(ObserverMspiGimbal self, MspiGimbal Observed_object)"},
+	 { "ObserverMspiGimbal_notify_remove", _wrap_ObserverMspiGimbal_notify_remove, METH_VARARGS, "ObserverMspiGimbal_notify_remove(ObserverMspiGimbal self, MspiGimbal Observed_object)"},
 	 { "ObserverMspiGimbal_swigregister", ObserverMspiGimbal_swigregister, METH_O, NULL},
 	 { "ObserverMspiGimbal_swiginit", ObserverMspiGimbal_swiginit, METH_VARARGS, NULL},
 	 { "new_MspiGimbal", _wrap_new_MspiGimbal, METH_VARARGS, "\n"
+		"MspiGimbal(double Epsilon, double Psi, double Theta)\n"
+		"MspiGimbal(std::string const & File_name, std::string const & Extra_config_file=\"\")\n"
 		"\n"
-		"GeoCal::MspiGimbal::MspiGimbal(double Epsilon, double Psi, double Theta)\n"
 		"GeoCal::MspiGimbal::MspiGimbal\n"
-		"Constructor. The angles should be in degrees.\n"
+		"Constructor. The angles should be in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiGimbal_read_config_file", _wrap_MspiGimbal_read_config_file, METH_VARARGS, "\n"
+		"MspiGimbal_read_config_file(MspiGimbal self, std::string const & File_name, std::string const & Extra_config_file=\"\")\n"
 		"\n"
-		"void MspiGimbal::read_config_file(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
 		"GeoCal::MspiGimbal::read_config_file\n"
-		"Read in the given configuration file.\n"
+		"Read in the given configuration file.  \n"
 		"\n"
 		""},
 	 { "MspiGimbal__v_epsilon", _wrap_MspiGimbal__v_epsilon, METH_O, "\n"
+		"MspiGimbal__v_epsilon(MspiGimbal self) -> double\n"
 		"\n"
-		"double GeoCal::MspiGimbal::epsilon() const\n"
 		"GeoCal::MspiGimbal::epsilon\n"
-		"Gimbal epsilon in degrees.\n"
+		"Gimbal epsilon in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiGimbal__v_epsilon_with_derivative", _wrap_MspiGimbal__v_epsilon_with_derivative, METH_O, "\n"
+		"MspiGimbal__v_epsilon_with_derivative(MspiGimbal self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiGimbal::epsilon_with_derivative() const\n"
 		"GeoCal::MspiGimbal::epsilon_with_derivative\n"
 		""},
 	 { "MspiGimbal__v_psi", _wrap_MspiGimbal__v_psi, METH_O, "\n"
+		"MspiGimbal__v_psi(MspiGimbal self) -> double\n"
 		"\n"
-		"double GeoCal::MspiGimbal::psi() const\n"
 		"GeoCal::MspiGimbal::psi\n"
-		"Gimbal psi in degrees.\n"
-		"We don't actually include the gimbal angles in the camera model,\n"
-		"instead this is handled by AirMspiOrbit. However the gimbal parameters\n"
-		"are recorded in the camera configuration file, so it make sense to\n"
-		"read and report them here. \n"
+		"Gimbal psi in degrees.  \n"
+		"\n"
+		"We don't actually include the gimbal angles in the camera model, instead this is\n"
+		"handled by AirMspiOrbit. However the gimbal parameters are recorded in the\n"
+		"camera configuration file, so it make sense to read and report them here.  \n"
+		"\n"
 		""},
 	 { "MspiGimbal__v_psi_with_derivative", _wrap_MspiGimbal__v_psi_with_derivative, METH_O, "\n"
+		"MspiGimbal__v_psi_with_derivative(MspiGimbal self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiGimbal::psi_with_derivative() const\n"
 		"GeoCal::MspiGimbal::psi_with_derivative\n"
 		""},
 	 { "MspiGimbal__v_theta", _wrap_MspiGimbal__v_theta, METH_O, "\n"
+		"MspiGimbal__v_theta(MspiGimbal self) -> double\n"
 		"\n"
-		"double GeoCal::MspiGimbal::theta() const\n"
 		"GeoCal::MspiGimbal::theta\n"
-		"Gimbal theta in degrees.\n"
-		"We don't actually include the gimbal angles in the camera model,\n"
-		"instead this is handled by AirMspiOrbit. However the gimbal parameters\n"
-		"are recorded in the camera configuration file, so it make sense to\n"
-		"read and report them here. \n"
+		"Gimbal theta in degrees.  \n"
+		"\n"
+		"We don't actually include the gimbal angles in the camera model, instead this is\n"
+		"handled by AirMspiOrbit. However the gimbal parameters are recorded in the\n"
+		"camera configuration file, so it make sense to read and report them here.  \n"
+		"\n"
 		""},
 	 { "MspiGimbal__v_theta_with_derivative", _wrap_MspiGimbal__v_theta_with_derivative, METH_O, "\n"
+		"MspiGimbal__v_theta_with_derivative(MspiGimbal self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiGimbal::theta_with_derivative() const\n"
 		"GeoCal::MspiGimbal::theta_with_derivative\n"
 		""},
 	 { "MspiGimbal__v_parameter_mask", _wrap_MspiGimbal__v_parameter_mask, METH_VARARGS, "\n"
+		"MspiGimbal__v_parameter_mask(MspiGimbal self) -> BlitzArray_bool_1\n"
+		"MspiGimbal__v_parameter_mask(MspiGimbal self, BlitzArray_bool_1 V)\n"
 		"\n"
-		"void MspiGimbal::parameter_mask(const blitz::Array< bool, 1 > &Pm)\n"
 		"GeoCal::MspiGimbal::parameter_mask\n"
 		""},
 	 { "MspiGimbal_station_to_sc_with_derivative", _wrap_MspiGimbal_station_to_sc_with_derivative, METH_VARARGS, "\n"
+		"MspiGimbal_station_to_sc_with_derivative(MspiGimbal self, AutoDerivativeDouble Gimbal_pos) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
 		"\n"
-		"boost::math::quaternion< AutoDerivative< double > > MspiGimbal::station_to_sc_with_derivative(const AutoDerivative< double > &Gimbal_pos) const\n"
 		"GeoCal::MspiGimbal::station_to_sc_with_derivative\n"
-		"Return the station to spacecraft transformation.\n"
-		"The gimbal position should be in radians. This is inconsistent with\n"
-		"the other angles used by this class that are in degrees, but this\n"
-		"matches what AirMSPI navigation data is stored as. \n"
+		"Return the station to spacecraft transformation.  \n"
+		"\n"
+		"The gimbal position should be in *radians*. This is inconsistent with the other\n"
+		"angles used by this class that are in degrees, but this matches what AirMSPI\n"
+		"navigation data is stored as.  \n"
+		"\n"
 		""},
 	 { "MspiGimbal_station_to_sc", _wrap_MspiGimbal_station_to_sc, METH_VARARGS, "\n"
+		"MspiGimbal_station_to_sc(MspiGimbal self, double Gimbal_pos) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > MspiGimbal::station_to_sc(double Gimbal_pos) const\n"
 		"GeoCal::MspiGimbal::station_to_sc\n"
 		""},
-	 { "MspiGimbal___str__", _wrap_MspiGimbal___str__, METH_O, NULL},
-	 { "delete_MspiGimbal", _wrap_delete_MspiGimbal, METH_O, NULL},
+	 { "MspiGimbal___str__", _wrap_MspiGimbal___str__, METH_O, "MspiGimbal___str__(MspiGimbal self) -> std::string"},
+	 { "delete_MspiGimbal", _wrap_delete_MspiGimbal, METH_O, "delete_MspiGimbal(MspiGimbal self)"},
 	 { "MspiGimbal_swigregister", MspiGimbal_swigregister, METH_O, NULL},
 	 { "MspiGimbal_swiginit", MspiGimbal_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -8110,114 +8118,122 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "delete_ObservableMspiGimbal", _wrap_delete_ObservableMspiGimbal, METH_O, NULL},
-	 { "ObservableMspiGimbal_add_observer_and_keep_reference", _wrap_ObservableMspiGimbal_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableMspiGimbal_add_observer", _wrap_ObservableMspiGimbal_add_observer, METH_VARARGS, NULL},
-	 { "ObservableMspiGimbal_remove_observer", _wrap_ObservableMspiGimbal_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableMspiGimbal", _wrap_delete_ObservableMspiGimbal, METH_O, "delete_ObservableMspiGimbal(ObservableMspiGimbal self)"},
+	 { "ObservableMspiGimbal_add_observer_and_keep_reference", _wrap_ObservableMspiGimbal_add_observer_and_keep_reference, METH_VARARGS, "add_observer_and_keep_reference(ObservableMspiGimbal self, boost::shared_ptr< GeoCal::Observer< GeoCal::MspiGimbal > > & Obs)"},
+	 { "ObservableMspiGimbal_add_observer", _wrap_ObservableMspiGimbal_add_observer, METH_VARARGS, "add_observer(ObservableMspiGimbal self, ObserverMspiGimbal Obs)"},
+	 { "ObservableMspiGimbal_remove_observer", _wrap_ObservableMspiGimbal_remove_observer, METH_VARARGS, "remove_observer(ObservableMspiGimbal self, ObserverMspiGimbal Obs)"},
 	 { "ObservableMspiGimbal_swigregister", ObservableMspiGimbal_swigregister, METH_O, NULL},
-	 { "new_ObserverMspiGimbal", _wrap_new_ObserverMspiGimbal, METH_NOARGS, NULL},
-	 { "delete_ObserverMspiGimbal", _wrap_delete_ObserverMspiGimbal, METH_O, NULL},
-	 { "ObserverMspiGimbal_notify_update", _wrap_ObserverMspiGimbal_notify_update, METH_VARARGS, NULL},
-	 { "ObserverMspiGimbal_notify_add", _wrap_ObserverMspiGimbal_notify_add, METH_VARARGS, NULL},
-	 { "ObserverMspiGimbal_notify_remove", _wrap_ObserverMspiGimbal_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverMspiGimbal", _wrap_new_ObserverMspiGimbal, METH_NOARGS, "new_ObserverMspiGimbal() -> ObserverMspiGimbal"},
+	 { "delete_ObserverMspiGimbal", _wrap_delete_ObserverMspiGimbal, METH_O, "delete_ObserverMspiGimbal(ObserverMspiGimbal self)"},
+	 { "ObserverMspiGimbal_notify_update", _wrap_ObserverMspiGimbal_notify_update, METH_VARARGS, "notify_update(ObserverMspiGimbal self, MspiGimbal Observed_object)"},
+	 { "ObserverMspiGimbal_notify_add", _wrap_ObserverMspiGimbal_notify_add, METH_VARARGS, "notify_add(ObserverMspiGimbal self, MspiGimbal Observed_object)"},
+	 { "ObserverMspiGimbal_notify_remove", _wrap_ObserverMspiGimbal_notify_remove, METH_VARARGS, "notify_remove(ObserverMspiGimbal self, MspiGimbal Observed_object)"},
 	 { "ObserverMspiGimbal_swigregister", ObserverMspiGimbal_swigregister, METH_O, NULL},
 	 { "ObserverMspiGimbal_swiginit", ObserverMspiGimbal_swiginit, METH_VARARGS, NULL},
 	 { "new_MspiGimbal", _wrap_new_MspiGimbal, METH_VARARGS, "\n"
+		"MspiGimbal(double Epsilon, double Psi, double Theta)\n"
+		"MspiGimbal(std::string const & File_name, std::string const & Extra_config_file=\"\")\n"
 		"\n"
-		"GeoCal::MspiGimbal::MspiGimbal(double Epsilon, double Psi, double Theta)\n"
 		"GeoCal::MspiGimbal::MspiGimbal\n"
-		"Constructor. The angles should be in degrees.\n"
+		"Constructor. The angles should be in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiGimbal_read_config_file", _wrap_MspiGimbal_read_config_file, METH_VARARGS, "\n"
+		"read_config_file(MspiGimbal self, std::string const & File_name, std::string const & Extra_config_file=\"\")\n"
 		"\n"
-		"void MspiGimbal::read_config_file(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
 		"GeoCal::MspiGimbal::read_config_file\n"
-		"Read in the given configuration file.\n"
+		"Read in the given configuration file.  \n"
 		"\n"
 		""},
 	 { "MspiGimbal__v_epsilon", _wrap_MspiGimbal__v_epsilon, METH_O, "\n"
+		"_v_epsilon(MspiGimbal self) -> double\n"
 		"\n"
-		"double GeoCal::MspiGimbal::epsilon() const\n"
 		"GeoCal::MspiGimbal::epsilon\n"
-		"Gimbal epsilon in degrees.\n"
+		"Gimbal epsilon in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiGimbal__v_epsilon_with_derivative", _wrap_MspiGimbal__v_epsilon_with_derivative, METH_O, "\n"
+		"_v_epsilon_with_derivative(MspiGimbal self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiGimbal::epsilon_with_derivative() const\n"
 		"GeoCal::MspiGimbal::epsilon_with_derivative\n"
 		""},
 	 { "MspiGimbal__v_psi", _wrap_MspiGimbal__v_psi, METH_O, "\n"
+		"_v_psi(MspiGimbal self) -> double\n"
 		"\n"
-		"double GeoCal::MspiGimbal::psi() const\n"
 		"GeoCal::MspiGimbal::psi\n"
-		"Gimbal psi in degrees.\n"
-		"We don't actually include the gimbal angles in the camera model,\n"
-		"instead this is handled by AirMspiOrbit. However the gimbal parameters\n"
-		"are recorded in the camera configuration file, so it make sense to\n"
-		"read and report them here. \n"
+		"Gimbal psi in degrees.  \n"
+		"\n"
+		"We don't actually include the gimbal angles in the camera model, instead this is\n"
+		"handled by AirMspiOrbit. However the gimbal parameters are recorded in the\n"
+		"camera configuration file, so it make sense to read and report them here.  \n"
+		"\n"
 		""},
 	 { "MspiGimbal__v_psi_with_derivative", _wrap_MspiGimbal__v_psi_with_derivative, METH_O, "\n"
+		"_v_psi_with_derivative(MspiGimbal self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiGimbal::psi_with_derivative() const\n"
 		"GeoCal::MspiGimbal::psi_with_derivative\n"
 		""},
 	 { "MspiGimbal__v_theta", _wrap_MspiGimbal__v_theta, METH_O, "\n"
+		"_v_theta(MspiGimbal self) -> double\n"
 		"\n"
-		"double GeoCal::MspiGimbal::theta() const\n"
 		"GeoCal::MspiGimbal::theta\n"
-		"Gimbal theta in degrees.\n"
-		"We don't actually include the gimbal angles in the camera model,\n"
-		"instead this is handled by AirMspiOrbit. However the gimbal parameters\n"
-		"are recorded in the camera configuration file, so it make sense to\n"
-		"read and report them here. \n"
+		"Gimbal theta in degrees.  \n"
+		"\n"
+		"We don't actually include the gimbal angles in the camera model, instead this is\n"
+		"handled by AirMspiOrbit. However the gimbal parameters are recorded in the\n"
+		"camera configuration file, so it make sense to read and report them here.  \n"
+		"\n"
 		""},
 	 { "MspiGimbal__v_theta_with_derivative", _wrap_MspiGimbal__v_theta_with_derivative, METH_O, "\n"
+		"_v_theta_with_derivative(MspiGimbal self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiGimbal::theta_with_derivative() const\n"
 		"GeoCal::MspiGimbal::theta_with_derivative\n"
 		""},
 	 { "MspiGimbal__v_parameter_mask", _wrap_MspiGimbal__v_parameter_mask, METH_VARARGS, "\n"
+		"_v_parameter_mask(MspiGimbal self) -> BlitzArray_bool_1\n"
+		"_v_parameter_mask(MspiGimbal self, BlitzArray_bool_1 V)\n"
 		"\n"
-		"void MspiGimbal::parameter_mask(const blitz::Array< bool, 1 > &Pm)\n"
 		"GeoCal::MspiGimbal::parameter_mask\n"
 		""},
 	 { "MspiGimbal_station_to_sc_with_derivative", _wrap_MspiGimbal_station_to_sc_with_derivative, METH_VARARGS, "\n"
+		"station_to_sc_with_derivative(MspiGimbal self, AutoDerivativeDouble Gimbal_pos) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
 		"\n"
-		"boost::math::quaternion< AutoDerivative< double > > MspiGimbal::station_to_sc_with_derivative(const AutoDerivative< double > &Gimbal_pos) const\n"
 		"GeoCal::MspiGimbal::station_to_sc_with_derivative\n"
-		"Return the station to spacecraft transformation.\n"
-		"The gimbal position should be in radians. This is inconsistent with\n"
-		"the other angles used by this class that are in degrees, but this\n"
-		"matches what AirMSPI navigation data is stored as. \n"
+		"Return the station to spacecraft transformation.  \n"
+		"\n"
+		"The gimbal position should be in *radians*. This is inconsistent with the other\n"
+		"angles used by this class that are in degrees, but this matches what AirMSPI\n"
+		"navigation data is stored as.  \n"
+		"\n"
 		""},
 	 { "MspiGimbal_station_to_sc", _wrap_MspiGimbal_station_to_sc, METH_VARARGS, "\n"
+		"station_to_sc(MspiGimbal self, double Gimbal_pos) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > MspiGimbal::station_to_sc(double Gimbal_pos) const\n"
 		"GeoCal::MspiGimbal::station_to_sc\n"
 		""},
-	 { "MspiGimbal___str__", _wrap_MspiGimbal___str__, METH_O, NULL},
-	 { "delete_MspiGimbal", _wrap_delete_MspiGimbal, METH_O, NULL},
+	 { "MspiGimbal___str__", _wrap_MspiGimbal___str__, METH_O, "__str__(MspiGimbal self) -> std::string"},
+	 { "delete_MspiGimbal", _wrap_delete_MspiGimbal, METH_O, "delete_MspiGimbal(MspiGimbal self)"},
 	 { "MspiGimbal_swigregister", MspiGimbal_swigregister, METH_O, NULL},
 	 { "MspiGimbal_swiginit", MspiGimbal_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

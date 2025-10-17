@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_multi_section.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_multi_section:
 _rsm_multi_section.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_multi_section.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,12 +143,14 @@ import geocal_swig.geocal_exception
 class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
     r"""
 
-    This is the base for some of the Rsm support classes.
 
-    This allows us to use a RsmRationalPolynomial, RsmMultiSection, as
-    RsmGrid together.
+    This is the base for some of the Rsm support classes.  
 
-    C++ includes: rsm_multi_section.h 
+    This allows us to use a RsmRationalPolynomial, RsmMultiSection, as RsmGrid
+    together.  
+
+    C++ includes: rsm_multi_section.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -153,17 +158,15 @@ class RsmMultiSection(geocal_swig.rsm_base.RsmBase):
 
     def __init__(self, Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border=5):
         r"""
+        __init__(RsmMultiSection self, int Nline, int Nsamp, int Nrow_section, int Ncol_section, RsmBase Rsm_prototype, int Border=5) -> RsmMultiSection
 
-        RsmMultiSection::RsmMultiSection(int Nline, int Nsamp, int Nrow_section, int Ncol_section, const
-        RsmBase &Rsm_prototype, int Border=5, const std::string
-        &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1")
         GeoCal::RsmMultiSection::RsmMultiSection
-        Constructor.
-        The RsmRationalPolynomial tends to extrapolate badly. Because the low
-        order polynomial is only approximately correct, we add a little bit of
-        a border to each underlying RsmRationalPolynomial so we can avoid
-        extrapolating. 
+        Constructor.  
+
+        The RsmRationalPolynomial tends to extrapolate badly. Because the low order
+        polynomial is only approximately correct, we add a little bit of a border to
+        each underlying RsmRationalPolynomial so we can avoid extrapolating.  
+
         """
         _rsm_multi_section.RsmMultiSection_swiginit(self, _rsm_multi_section.new_RsmMultiSection(Nline, Nsamp, Nrow_section, Ncol_section, Rsm_prototype, Border))
     _v_number_row_section = _swig_new_instance_method(_rsm_multi_section.RsmMultiSection__v_number_row_section)

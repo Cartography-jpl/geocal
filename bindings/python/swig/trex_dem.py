@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _trex_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _trex_dem:
 _trex_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _trex_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -145,12 +148,14 @@ import geocal_swig.geocal_exception
 class TrexDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     r"""
 
-    This is used the read the TREx data.
 
-    This gets used by TrexDem. Although you can use this class directly,
-    generally uou'll use this through TrexDem class.
+    This is used the read the TREx data.  
 
-    C++ includes: trex_dem.h 
+    This gets used by TrexDem. Although you can use this class directly, generally
+    uou'll use this through TrexDem class.  
+
+    C++ includes: trex_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -158,27 +163,24 @@ class TrexDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4, Favor_memory_mapped=True):
         r"""
+        __init__(TrexDemData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4, bool Favor_memory_mapped=True) -> TrexDemData
 
-        TrexDemData::TrexDemData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4, bool
-        Favor_memory_mapped=true)
         GeoCal::TrexDemData::TrexDemData
-        Constructor.
-        You can provide the directory to look for TREx DEM data, or if you
-        leave this blank we use the value of environment variable TREX_DATA.
+        Constructor.  
 
-        The TREX doesn't cover the whole globe. If you ask for a point outside
-        of the area this can either be treated as an error, or alternatively
-        you can return a value of 0 instead. This is controlled by
-        No_coverage_is_error.
+        You can provide the directory to look for TREx DEM data, or if you leave this
+        blank we use the value of environment variable TREX_DATA.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The TREX doesn't cover the whole globe. If you ask for a point outside of the
+        area this can either be treated as an error, or alternatively you can return a
+        value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _trex_dem.TrexDemData_swiginit(self, _trex_dem.new_TrexDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped))
 
@@ -196,12 +198,14 @@ _trex_dem.TrexDemData_swigregister(TrexDemData)
 class GdalTrexDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
-    This is used the read the TREx data.
 
-    This gets used by TrexDem. Although you can use this class directly,
-    generally uou'll use this through TrexDem class.
+    This is used the read the TREx data.  
 
-    C++ includes: trex_dem.h 
+    This gets used by TrexDem. Although you can use this class directly, generally
+    uou'll use this through TrexDem class.  
+
+    C++ includes: trex_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -209,26 +213,24 @@ class GdalTrexDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
         r"""
+        __init__(GdalTrexDemData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4) -> GdalTrexDemData
 
-        GdalTrexDemData::GdalTrexDemData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4)
         GeoCal::GdalTrexDemData::GdalTrexDemData
-        Constructor.
-        You can provide the directory to look for TREx DEM data, or if you
-        leave this blank we use the value of environment variable TREX_DATA.
+        Constructor.  
 
-        The TREX doesn't cover the whole globe. If you ask for a point outside
-        of the area this can either be treated as an error, or alternatively
-        you can return a value of 0 instead. This is controlled by
-        No_coverage_is_error.
+        You can provide the directory to look for TREx DEM data, or if you leave this
+        blank we use the value of environment variable TREX_DATA.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The TREX doesn't cover the whole globe. If you ask for a point outside of the
+        area this can either be treated as an error, or alternatively you can return a
+        value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _trex_dem.GdalTrexDemData_swiginit(self, _trex_dem.new_GdalTrexDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
@@ -246,51 +248,56 @@ _trex_dem.GdalTrexDemData_swigregister(GdalTrexDemData)
 class TrexLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     r"""
 
-    This is used the read the TREx LWM data.
 
-    The values are:
+    This is used the read the TREx LWM data.  
 
-    0=Ocean 1=Coastline Land/Ocean transition 2=Land 3=Permanent In-Land
-    Water 4=Transitional In-land Water (mostly Permanent except in drought
-    years) 5=Seasonal In-land Water 6=Ephemeral In-land Water
+    The values are:  
 
-    C++ includes: trex_dem.h 
+    0=Ocean 1=Coastline Land/Ocean transition 2=Land 3=Permanent In-Land Water
+    4=Transitional In-land Water (mostly Permanent except in drought years)
+    5=Seasonal In-land Water 6=Ephemeral In-land Water  
+
+    C++ includes: trex_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     OCEAN = _trex_dem.TrexLwmData_OCEAN
+    
     COSTLINE = _trex_dem.TrexLwmData_COSTLINE
+    
     LAND = _trex_dem.TrexLwmData_LAND
+    
     PERMANENT_INLAND_WATER = _trex_dem.TrexLwmData_PERMANENT_INLAND_WATER
+    
     TRANSITIONAL_INLAND_WATER = _trex_dem.TrexLwmData_TRANSITIONAL_INLAND_WATER
+    
     SEASONAL_INLAND_WATER = _trex_dem.TrexLwmData_SEASONAL_INLAND_WATER
+    
     EPHEMERAL_INLAND_WATER = _trex_dem.TrexLwmData_EPHEMERAL_INLAND_WATER
+    
 
     def __init__(self, *args):
         r"""
+        __init__(TrexLwmData self, std::string const & Dir="", bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4, bool Favor_memory_mapped=True) -> TrexLwmData
 
-        TrexLwmData::TrexLwmData(const std::string &Dir="", bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4, bool
-        Favor_memory_mapped=true)
         GeoCal::TrexLwmData::TrexLwmData
-        Constructor.
-        You can provide the directory to look for TREx DEM data, or if you
-        leave this blank we use the value of environment variable
-        TREX_LWM_DATA.
+        Constructor.  
 
-        The TREx doesn't cover the whole globe. If you ask for a point outside
-        of the area this can either be treated as an error, or alternatively
-        you can return a value of 0 instead. This is controlled by
-        No_coverage_is_error.
+        You can provide the directory to look for TREx DEM data, or if you leave this
+        blank we use the value of environment variable TREX_LWM_DATA.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The TREx doesn't cover the whole globe. If you ask for a point outside of the
+        area this can either be treated as an error, or alternatively you can return a
+        value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _trex_dem.TrexLwmData_swiginit(self, _trex_dem.new_TrexLwmData(*args))
 
@@ -308,9 +315,11 @@ _trex_dem.TrexLwmData_swigregister(TrexLwmData)
 class TrexDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This class provides access to the TREx.
 
-    C++ includes: trex_dem.h 
+    This class provides access to the TREx.  
+
+    C++ includes: trex_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -318,15 +327,14 @@ class TrexDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, *args):
         r"""
+        __init__(TrexDem self, std::string const & Dirbase="", bool Outside_dem_is_error=True, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new DatumGeoid96())) -> TrexDem
 
-        TrexDem::TrexDem(const std::string &Dirbase="", bool Outside_dem_is_error=true,
-        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        DatumGeoid96()))
         GeoCal::TrexDem::TrexDem
-        Constructor.
-        You can provide the directory where there data can be found. If you
-        leave this as a blank string, we use the environment variable
-        TREX_DATA. 
+        Constructor.  
+
+        You can provide the directory where there data can be found. If you leave this
+        as a blank string, we use the environment variable TREX_DATA.  
+
         """
         _trex_dem.TrexDem_swiginit(self, _trex_dem.new_TrexDem(*args))
     elevation = _swig_new_instance_method(_trex_dem.TrexDem_elevation)
@@ -351,9 +359,11 @@ _trex_dem.TrexDem_swigregister(TrexDem)
 class GdalTrexDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This class provides access to the TREx.
 
-    C++ includes: trex_dem.h 
+    This class provides access to the TREx.  
+
+    C++ includes: trex_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -361,15 +371,14 @@ class GdalTrexDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, *args):
         r"""
+        __init__(GdalTrexDem self, std::string const & Dirbase="", bool Outside_dem_is_error=True, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new DatumGeoid96())) -> GdalTrexDem
 
-        GdalTrexDem::GdalTrexDem(const std::string &Dirbase="", bool Outside_dem_is_error=true,
-        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        DatumGeoid96()))
         GeoCal::GdalTrexDem::GdalTrexDem
-        Constructor.
-        You can provide the directory where there data can be found. If you
-        leave this as a blank string, we use the environment variable
-        TREX_DATA. 
+        Constructor.  
+
+        You can provide the directory where there data can be found. If you leave this
+        as a blank string, we use the environment variable TREX_DATA.  
+
         """
         _trex_dem.GdalTrexDem_swiginit(self, _trex_dem.new_GdalTrexDem(*args))
     elevation = _swig_new_instance_method(_trex_dem.GdalTrexDem_elevation)

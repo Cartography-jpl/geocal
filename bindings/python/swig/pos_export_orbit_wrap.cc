@@ -6841,54 +6841,61 @@ SWIGINTERN PyObject *PosExportOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_PosExportOrbit", _wrap_new_PosExportOrbit, METH_VARARGS, "\n"
+		"new_PosExportOrbit(std::string const & Fname, Time Epoch) -> PosExportOrbit\n"
 		"\n"
-		"PosExportOrbit::PosExportOrbit(const std::string &Fname, const Time &Epoch)\n"
 		"GeoCal::PosExportOrbit::PosExportOrbit\n"
-		"Read the given text file.\n"
-		"Note that the time in the Applanix file is in GPS seconds of the week,\n"
-		"but the actual week isn't in the file. This means we need to pass in\n"
-		"the Epoch that the times are relative to. \n"
+		"Read the given text file.  \n"
+		"\n"
+		"Note that the time in the Applanix file is in GPS seconds of the week, but the\n"
+		"actual week isn't in the file. This means we need to pass in the Epoch that the\n"
+		"times are relative to.  \n"
+		"\n"
 		""},
 	 { "PosExportOrbit_aircraft_orbit_data", _wrap_PosExportOrbit_aircraft_orbit_data, METH_VARARGS, "\n"
+		"PosExportOrbit_aircraft_orbit_data(PosExportOrbit self, Time T) -> AircraftOrbitData\n"
 		"\n"
-		"const AircraftOrbitData & PosExportOrbit::aircraft_orbit_data(const Time &T) const\n"
 		"GeoCal::PosExportOrbit::aircraft_orbit_data\n"
-		"Return the AircraftOrbitData closest to a given Time.\n"
-		"This doesn't interpolate, it just return the data point in the file\n"
-		"closest to the given time. \n"
+		"Return the AircraftOrbitData closest to a given Time.  \n"
+		"\n"
+		"This doesn't interpolate, it just return the data point in the file closest to\n"
+		"the given time.  \n"
+		"\n"
 		""},
 	 { "PosExportOrbit__v_file_name", _wrap_PosExportOrbit__v_file_name, METH_O, "\n"
+		"PosExportOrbit__v_file_name(PosExportOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::PosExportOrbit::file_name() const\n"
 		"GeoCal::PosExportOrbit::file_name\n"
 		""},
 	 { "PosExportOrbit__v_file_epoch", _wrap_PosExportOrbit__v_file_epoch, METH_O, "\n"
+		"PosExportOrbit__v_file_epoch(PosExportOrbit self) -> Time\n"
 		"\n"
-		"const Time & GeoCal::PosExportOrbit::file_epoch() const\n"
 		"GeoCal::PosExportOrbit::file_epoch\n"
 		""},
 	 { "delete_PosExportOrbit", _wrap_delete_PosExportOrbit, METH_O, "\n"
+		"delete_PosExportOrbit(PosExportOrbit self)\n"
 		"\n"
-		"virtual GeoCal::PosExportOrbit::~PosExportOrbit()\n"
 		"GeoCal::PosExportOrbit::~PosExportOrbit\n"
 		""},
 	 { "PosExportOrbit_swigregister", PosExportOrbit_swigregister, METH_O, NULL},
@@ -6899,54 +6906,61 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_PosExportOrbit", _wrap_new_PosExportOrbit, METH_VARARGS, "\n"
+		"new_PosExportOrbit(std::string const & Fname, Time Epoch) -> PosExportOrbit\n"
 		"\n"
-		"PosExportOrbit::PosExportOrbit(const std::string &Fname, const Time &Epoch)\n"
 		"GeoCal::PosExportOrbit::PosExportOrbit\n"
-		"Read the given text file.\n"
-		"Note that the time in the Applanix file is in GPS seconds of the week,\n"
-		"but the actual week isn't in the file. This means we need to pass in\n"
-		"the Epoch that the times are relative to. \n"
+		"Read the given text file.  \n"
+		"\n"
+		"Note that the time in the Applanix file is in GPS seconds of the week, but the\n"
+		"actual week isn't in the file. This means we need to pass in the Epoch that the\n"
+		"times are relative to.  \n"
+		"\n"
 		""},
 	 { "PosExportOrbit_aircraft_orbit_data", _wrap_PosExportOrbit_aircraft_orbit_data, METH_VARARGS, "\n"
+		"aircraft_orbit_data(PosExportOrbit self, Time T) -> AircraftOrbitData\n"
 		"\n"
-		"const AircraftOrbitData & PosExportOrbit::aircraft_orbit_data(const Time &T) const\n"
 		"GeoCal::PosExportOrbit::aircraft_orbit_data\n"
-		"Return the AircraftOrbitData closest to a given Time.\n"
-		"This doesn't interpolate, it just return the data point in the file\n"
-		"closest to the given time. \n"
+		"Return the AircraftOrbitData closest to a given Time.  \n"
+		"\n"
+		"This doesn't interpolate, it just return the data point in the file closest to\n"
+		"the given time.  \n"
+		"\n"
 		""},
 	 { "PosExportOrbit__v_file_name", _wrap_PosExportOrbit__v_file_name, METH_O, "\n"
+		"_v_file_name(PosExportOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::PosExportOrbit::file_name() const\n"
 		"GeoCal::PosExportOrbit::file_name\n"
 		""},
 	 { "PosExportOrbit__v_file_epoch", _wrap_PosExportOrbit__v_file_epoch, METH_O, "\n"
+		"_v_file_epoch(PosExportOrbit self) -> Time\n"
 		"\n"
-		"const Time & GeoCal::PosExportOrbit::file_epoch() const\n"
 		"GeoCal::PosExportOrbit::file_epoch\n"
 		""},
 	 { "delete_PosExportOrbit", _wrap_delete_PosExportOrbit, METH_O, "\n"
+		"delete_PosExportOrbit(PosExportOrbit self)\n"
 		"\n"
-		"virtual GeoCal::PosExportOrbit::~PosExportOrbit()\n"
 		"GeoCal::PosExportOrbit::~PosExportOrbit\n"
 		""},
 	 { "PosExportOrbit_swigregister", PosExportOrbit_swigregister, METH_O, NULL},

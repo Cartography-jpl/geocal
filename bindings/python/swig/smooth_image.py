@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _smooth_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _smooth_image:
 _smooth_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _smooth_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,15 +145,17 @@ import geocal_swig.geocal_exception
 class SmoothImage(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This creates a smoothed version of a RasterImage.
 
-    We do this by averaging a given region of the image, average (2 * nhs
-    + 1) x (2 * nhs + 1) pixels centered on the resulting pixel.
+    This creates a smoothed version of a RasterImage.  
 
-    Rather than doing something complicated at the edges, we simply trim
-    the underlying image by a border of nhs.
+    We do this by averaging a given region of the image, average (2 * nhs + 1) x (2
+    * nhs + 1) pixels centered on the resulting pixel.  
 
-    C++ includes: smooth_image.h 
+    Rather than doing something complicated at the edges, we simply trim the
+    underlying image by a border of nhs.  
+
+    C++ includes: smooth_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -158,14 +163,14 @@ class SmoothImage(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Data, Nhs=3, Number_tile=4):
         r"""
+        __init__(SmoothImage self, boost::shared_ptr< GeoCal::RasterImage > const & Data, int Nhs=3, int Number_tile=4) -> SmoothImage
 
-        SmoothImage::SmoothImage(const boost::shared_ptr< RasterImage > &Data, int Nhs=3, int
-        Number_tile=4)
         GeoCal::SmoothImage::SmoothImage
-        Constructor.
-        We give the size of the area to average over by supplying the number
-        half size (Nhs), and then average over a region (2 * Nhs + 1) x (2 *
-        Nhs + 1) 
+        Constructor.  
+
+        We give the size of the area to average over by supplying the number half size
+        (Nhs), and then average over a region (2 * Nhs + 1) x (2 * Nhs + 1)  
+
         """
         _smooth_image.SmoothImage_swiginit(self, _smooth_image.new_SmoothImage(Data, Nhs, Number_tile))
     _v_raw_data = _swig_new_instance_method(_smooth_image.SmoothImage__v_raw_data)

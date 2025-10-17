@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _generic_object.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _generic_object:
 _generic_object.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _generic_object.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,13 +140,14 @@ geocal_version = _generic_object.geocal_version
 class GenericObject(object):
     r"""
 
-    For use with SWIG, it is useful to have a base class that everything
-    can be cast to.
 
-    This class doesn't provide any functionality, other than allowing
-    casts.
+    For use with SWIG, it is useful to have a base class that everything can be cast
+    to.  
 
-    C++ includes: generic_object.h 
+    This class doesn't provide any functionality, other than allowing casts.  
+
+    C++ includes: generic_object.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,6 +155,7 @@ class GenericObject(object):
     __swig_destroy__ = _generic_object.delete_GenericObject
 
     def __init__(self):
+        r"""__init__(GenericObject self) -> GenericObject"""
         _generic_object.GenericObject_swiginit(self, _generic_object.new_GenericObject())
 
 # Register GenericObject in _generic_object:

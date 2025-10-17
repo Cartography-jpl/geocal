@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_rational_polynomial.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_rational_polynomial:
 _rsm_rational_polynomial.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_rational_polynomial.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,9 +143,11 @@ import geocal_swig.geocal_exception
 class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
     r"""
 
-    This is a RsmRationalPolynomial.
 
-    C++ includes: rsm_rational_polynomial.h 
+    This is a RsmRationalPolynomial.  
+
+    C++ includes: rsm_rational_polynomial.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,36 +155,30 @@ class RsmRationalPolynomial(geocal_swig.rsm_base.RsmBase):
 
     def __init__(self, *args):
         r"""
+        __init__(RsmRationalPolynomial self, int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y, int Dp_z, int N_max_order=-1, int D_max_order=-1, int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=20, int Nsecond_pass_fit=20, bool Ignore_igc_error_in_fit=False, int Row_section_number=1, int Col_section_number=1, std::string const & Image_identifier="", std::string const & Rsm_support_data_edition="fake-1") -> RsmRationalPolynomial
 
-        RsmRationalPolynomial::RsmRationalPolynomial(int Np_x, int Np_y, int Np_z, int Dp_x, int Dp_y, int Dp_z, int
-        N_max_order=-1, int D_max_order=-1, int Nline_fit=20, int
-        Nsample_fit=20, int Nheight_fit=20, int Nsecond_pass_fit=20, bool
-        Ignore_igc_error_in_fit=false, int Row_section_number=1, int
-        Col_section_number=1, const std::string &Image_identifier="", const
-        std::string &Rsm_support_data_edition="fake-1")
         GeoCal::RsmRationalPolynomial::RsmRationalPolynomial
-        Constructor.
-        You indicated the order of the polynomial in each dimension for both
-        the numerator and denominator. This particular constructor uses the
-        same dimensions for both the line and the sample, there is no actual
-        requirement in a Rsm that this be the case (although it is pretty
-        common).
+        Constructor.  
 
-        You can limit the over all order of cross terms by supplying a
-        max_order for the numerator, denominator, or both. This holds all
-        cross terms with a total order > max to 0. The default is to not
-        restrict the cross terms.
+        You indicated the order of the polynomial in each dimension for both the
+        numerator and denominator. This particular constructor uses the same dimensions
+        for both the line and the sample, there is no actual requirement in a Rsm that
+        this be the case (although it is pretty common).  
 
-        You can give the number of points to generate in the fit function by
-        giving the grid dimensions Nline_fit x Nsample_fit x Nheight_fit. For
-        Geodetic like coordinate systems this usually gives pretty good
-        coverage, but for something like LocalRectangularCoordinate this kind
-        of a grid doesn't cover the full space. You can give the value for
-        second pass through where we make a X, Y, Z grid of points. This is
-        often slower, but can be necessary. If you set Nsecond_pass_fit to 0,
-        then we skip this step in fit. In fit we always ignore
-        ImageGroundConnectionFailed exceptions, but you can optionally ignore
-        other errors in the Igc by setting Ignore_igc_error_in_fit to true. 
+        You can limit the over all order of cross terms by supplying a max_order for the
+        numerator, denominator, or both. This holds all cross terms with a total order >
+        max to 0. The default is to not restrict the cross terms.  
+
+        You can give the number of points to generate in the fit function by giving the
+        grid dimensions Nline_fit x Nsample_fit x Nheight_fit. For Geodetic like
+        coordinate systems this usually gives pretty good coverage, but for something
+        like LocalRectangularCoordinate this kind of a grid doesn't cover the full
+        space. You can give the value for second pass through where we make a X, Y, Z
+        grid of points. This is often slower, but can be necessary. If you set
+        Nsecond_pass_fit to 0, then we skip this step in fit. In fit we always ignore
+        ImageGroundConnectionFailed exceptions, but you can optionally ignore other
+        errors in the Igc by setting Ignore_igc_error_in_fit to true.  
+
         """
         _rsm_rational_polynomial.RsmRationalPolynomial_swiginit(self, _rsm_rational_polynomial.new_RsmRationalPolynomial(*args))
     image_coordinate = _swig_new_instance_method(_rsm_rational_polynomial.RsmRationalPolynomial_image_coordinate)

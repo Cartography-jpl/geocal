@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _map_info.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _map_info:
 _map_info.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _map_info.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,33 +140,33 @@ import geocal_swig.generic_object
 class MapInfo(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This contains information describing a map.
 
-    This class is used to treat map projection information the same,
-    regardless of the specific map projection used. However, the pixels of
-    the map are required to be equally spaced in the X and Y coordinates
-    of the underlying map projection.
+    This contains information describing a map.  
 
-    Note that the various coordinates (e.g., lrc_x()) are for the bounding
-    box, not for the center of the lrc or ulc pixel.
+    This class is used to treat map projection information the same, regardless of
+    the specific map projection used. However, the pixels of the map are required to
+    be equally spaced in the X and Y coordinates of the underlying map projection.  
 
-    The parameters used in MapInfo are the affine parameters, see for
-    example GeoTiff. Note though that by convention we use the middle of
-    the ulc pixel is at (0,0), and the upper left corner of the pixel is
-    at (-0.5, -0.5). The parameters on the other hand have the center of
-    the ulc pixel at (0.5, 0.5) and the upper left corner of the pixel at
-    (0, 0). This class handles this difference, but we mention this in
-    this comment so you can understand where the various "0.5" terms
-    come in.
+    Note that the various coordinates (e.g., lrc_x()) are for the bounding box, not
+    for the center of the lrc or ulc pixel.  
 
-    We have a field indicating if the pixels are points or area. Note that
-    we follow the GDAL convention - the value of the field doesn't change
-    the geotiff parameters or any of the other fields. (-0.5, -0.5) is the
-    ulc of the area, regardless of if we are point or area. But the value
-    of this tells how to interpret the pixels in the RasterImage that this
-    MapInfo is attached to - either as points or averages over area.
+    The parameters used in MapInfo are the affine parameters, see for example
+    GeoTiff. Note though that by convention we use the middle of the ulc pixel is at
+    (0,0), and the upper left corner of the pixel is at (-0.5, -0.5). The parameters
+    on the other hand have the center of the ulc pixel at (0.5, 0.5) and the upper
+    left corner of the pixel at (0, 0). This class handles this difference, but we
+    mention this in this comment so you can understand where the various "0.5"
+    terms come in.  
 
-    C++ includes: map_info.h 
+    We have a field indicating if the pixels are points or area. Note that we follow
+    the GDAL convention - the value of the field doesn't change the geotiff
+    parameters or any of the other fields. (-0.5, -0.5) is the ulc of the area,
+    regardless of if we are point or area. But the value of this tells how to
+    interpret the pixels in the RasterImage that this MapInfo is attached to -
+    either as points or averages over area.  
+
+    C++ includes: map_info.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -171,8 +174,10 @@ class MapInfo(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(MapInfo self) -> MapInfo
+        __init__(MapInfo self, boost::shared_ptr< GeoCal::CoordinateConverter > const & Conv, double Ulc_x, double Ulc_y, double Lrc_x, double Lrc_y, int Number_x_pixel, int Number_y_pixel, bool Is_point=False) -> MapInfo
+        __init__(MapInfo self, boost::shared_ptr< GeoCal::CoordinateConverter > const & Conv, BlitzArray_double_1 Param, int Number_x_pixel, int Number_y_pixel, bool Is_point=False) -> MapInfo
 
-        GeoCal::MapInfo::MapInfo(const MapInfo &Mi)
         GeoCal::MapInfo::MapInfo
         """
         _map_info.MapInfo_swiginit(self, _map_info.new_MapInfo(*args))

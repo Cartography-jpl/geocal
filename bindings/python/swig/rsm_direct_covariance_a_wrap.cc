@@ -8479,93 +8479,104 @@ SWIGINTERN PyObject *RsmDirectCovarianceA_swiginit(PyObject *SWIGUNUSEDPARM(self
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmDirectCovarianceA", _wrap_new_RsmDirectCovarianceA, METH_VARARGS, "\n"
+		"RsmDirectCovarianceA(std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\", std::string const & Triangulation_id=\"\")\n"
+		"RsmDirectCovarianceA(ImageGroundConnection Igc, RsmId Rsm_id, std::string const & Triangulation_id=\"\", bool Activate_image_correction=False, bool Activate_ground_rotation=False, bool Activate_ground_correction=False)\n"
 		"\n"
-		"GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
 		"GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA\n"
 		""},
 	 { "RsmDirectCovarianceA_tre_string", _wrap_RsmDirectCovarianceA_tre_string, METH_O, "\n"
+		"RsmDirectCovarianceA_tre_string(RsmDirectCovarianceA self) -> std::string\n"
 		"\n"
-		"std::string RsmDirectCovarianceA::tre_string() const\n"
 		"GeoCal::RsmDirectCovarianceA::tre_string\n"
 		""},
 	 { "RsmDirectCovarianceA_read_tre_string", _wrap_RsmDirectCovarianceA_read_tre_string, METH_O, "\n"
+		"RsmDirectCovarianceA_read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmDirectCovarianceA >\n"
 		"\n"
-		"boost::shared_ptr< RsmDirectCovarianceA > RsmDirectCovarianceA::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmDirectCovarianceA::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmRationalPolynomial. However the fields that aren't contained are ones used\n"
+		"for fitting the RSM, so in practice this doesn't matter. We just set the various\n"
+		"fields to the default values found in the constructor.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA_activate_image_correction", _wrap_RsmDirectCovarianceA_activate_image_correction, METH_O, "\n"
+		"RsmDirectCovarianceA_activate_image_correction(RsmDirectCovarianceA self)\n"
 		"\n"
-		"void RsmDirectCovarianceA::activate_image_correction()\n"
 		"GeoCal::RsmDirectCovarianceA::activate_image_correction\n"
-		"Any set of parameters can be activated, in any desired order.\n"
-		"But we tend to activate them in groups. This function turns on all of\n"
-		"image correction parameters. \n"
+		"Any set of parameters can be activated, in any desired order.  \n"
+		"\n"
+		"But we tend to activate them in groups. This function turns on all of image\n"
+		"correction parameters.  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA_activate_ground_rotation", _wrap_RsmDirectCovarianceA_activate_ground_rotation, METH_O, "\n"
+		"RsmDirectCovarianceA_activate_ground_rotation(RsmDirectCovarianceA self)\n"
 		"\n"
-		"void RsmDirectCovarianceA::activate_ground_rotation()\n"
 		"GeoCal::RsmDirectCovarianceA::activate_ground_rotation\n"
-		"Any set of parameters can be activated, in any desired order.\n"
-		"But we tend to activate them in groups. This function turns on all of\n"
-		"ground rotation parameters. \n"
+		"Any set of parameters can be activated, in any desired order.  \n"
+		"\n"
+		"But we tend to activate them in groups. This function turns on all of ground\n"
+		"rotation parameters.  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA_activate_ground_correction", _wrap_RsmDirectCovarianceA_activate_ground_correction, METH_O, "\n"
+		"RsmDirectCovarianceA_activate_ground_correction(RsmDirectCovarianceA self)\n"
 		"\n"
-		"void RsmDirectCovarianceA::activate_ground_correction()\n"
 		"GeoCal::RsmDirectCovarianceA::activate_ground_correction\n"
-		"Any set of parameters can be activated, in any desired order.\n"
-		"But we tend to activate them in groups. This function turns on all of\n"
-		"ground correction parameters. \n"
+		"Any set of parameters can be activated, in any desired order.  \n"
+		"\n"
+		"But we tend to activate them in groups. This function turns on all of ground\n"
+		"correction parameters.  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA__v_covariance", _wrap_RsmDirectCovarianceA__v_covariance, METH_VARARGS, "\n"
+		"RsmDirectCovarianceA__v_covariance(RsmDirectCovarianceA self) -> BlitzArray_double_2\n"
+		"RsmDirectCovarianceA__v_covariance(RsmDirectCovarianceA self, BlitzArray_double_2 V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovarianceA::covariance(const blitz::Array< double, 2 > &V)\n"
 		"GeoCal::RsmDirectCovarianceA::covariance\n"
 		""},
 	 { "RsmDirectCovarianceA__v_parameter_name", _wrap_RsmDirectCovarianceA__v_parameter_name, METH_O, "\n"
+		"RsmDirectCovarianceA__v_parameter_name(RsmDirectCovarianceA self) -> vector_string\n"
 		"\n"
-		"std::vector< std::string > RsmDirectCovarianceA::parameter_name() const\n"
 		"GeoCal::RsmDirectCovarianceA::parameter_name\n"
 		""},
 	 { "RsmDirectCovarianceA__v_coordinate_converter", _wrap_RsmDirectCovarianceA__v_coordinate_converter, METH_VARARGS, "\n"
+		"RsmDirectCovarianceA__v_coordinate_converter(RsmDirectCovarianceA self) -> boost::shared_ptr< GeoCal::LocalRcConverter >\n"
+		"RsmDirectCovarianceA__v_coordinate_converter(RsmDirectCovarianceA self, boost::shared_ptr< GeoCal::LocalRcConverter > const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovarianceA::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)\n"
 		"GeoCal::RsmDirectCovarianceA::coordinate_converter\n"
 		""},
 	 { "delete_RsmDirectCovarianceA", _wrap_delete_RsmDirectCovarianceA, METH_O, "\n"
+		"delete_RsmDirectCovarianceA(RsmDirectCovarianceA self)\n"
 		"\n"
-		"virtual GeoCal::RsmDirectCovarianceA::~RsmDirectCovarianceA()\n"
 		"GeoCal::RsmDirectCovarianceA::~RsmDirectCovarianceA\n"
 		""},
 	 { "RsmDirectCovarianceA_swigregister", RsmDirectCovarianceA_swigregister, METH_O, NULL},
@@ -8576,93 +8587,104 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmDirectCovarianceA", _wrap_new_RsmDirectCovarianceA, METH_VARARGS, "\n"
+		"RsmDirectCovarianceA(std::string const & Image_identifier=\"\", std::string const & Rsm_support_data_edition=\"fake-1\", std::string const & Triangulation_id=\"\")\n"
+		"RsmDirectCovarianceA(ImageGroundConnection Igc, RsmId Rsm_id, std::string const & Triangulation_id=\"\", bool Activate_image_correction=False, bool Activate_ground_rotation=False, bool Activate_ground_correction=False)\n"
 		"\n"
-		"GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA(const std::string &Image_identifier=\"\", const std::string\n"
-		"&Rsm_support_data_edition=\"fake-1\", const std::string\n"
-		"&Triangulation_id=\"\")\n"
 		"GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA\n"
 		""},
 	 { "RsmDirectCovarianceA_tre_string", _wrap_RsmDirectCovarianceA_tre_string, METH_O, "\n"
+		"tre_string(RsmDirectCovarianceA self) -> std::string\n"
 		"\n"
-		"std::string RsmDirectCovarianceA::tre_string() const\n"
 		"GeoCal::RsmDirectCovarianceA::tre_string\n"
 		""},
 	 { "RsmDirectCovarianceA_read_tre_string", _wrap_RsmDirectCovarianceA_read_tre_string, METH_O, "\n"
+		"read_tre_string(std::string const & Tre_in) -> boost::shared_ptr< GeoCal::RsmDirectCovarianceA >\n"
 		"\n"
-		"boost::shared_ptr< RsmDirectCovarianceA > RsmDirectCovarianceA::read_tre_string(const std::string &Tre_in)\n"
 		"GeoCal::RsmDirectCovarianceA::read_tre_string\n"
-		"Read a TRE string.\n"
-		"Note that the TRE does not contain all the fields we have in a\n"
-		"RsmRationalPolynomial. However the fields that aren't contained are\n"
-		"ones used for fitting the RSM, so in practice this doesn't matter. We\n"
-		"just set the various fields to the default values found in the\n"
-		"constructor.\n"
+		"Read a TRE string.  \n"
 		"\n"
-		"This should have all the TRE except for the front CETAG and CEL. It is\n"
-		"convenient to treat these fields as special. (We can revisit this in\n"
-		"the future if we need to). \n"
+		"Note that the TRE does not contain all the fields we have in a\n"
+		"RsmRationalPolynomial. However the fields that aren't contained are ones used\n"
+		"for fitting the RSM, so in practice this doesn't matter. We just set the various\n"
+		"fields to the default values found in the constructor.  \n"
+		"\n"
+		"This should have all the TRE *except* for the front CETAG and CEL. It is\n"
+		"convenient to treat these fields as special. (We can revisit this in the future\n"
+		"if we need to).  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA_activate_image_correction", _wrap_RsmDirectCovarianceA_activate_image_correction, METH_O, "\n"
+		"activate_image_correction(RsmDirectCovarianceA self)\n"
 		"\n"
-		"void RsmDirectCovarianceA::activate_image_correction()\n"
 		"GeoCal::RsmDirectCovarianceA::activate_image_correction\n"
-		"Any set of parameters can be activated, in any desired order.\n"
-		"But we tend to activate them in groups. This function turns on all of\n"
-		"image correction parameters. \n"
+		"Any set of parameters can be activated, in any desired order.  \n"
+		"\n"
+		"But we tend to activate them in groups. This function turns on all of image\n"
+		"correction parameters.  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA_activate_ground_rotation", _wrap_RsmDirectCovarianceA_activate_ground_rotation, METH_O, "\n"
+		"activate_ground_rotation(RsmDirectCovarianceA self)\n"
 		"\n"
-		"void RsmDirectCovarianceA::activate_ground_rotation()\n"
 		"GeoCal::RsmDirectCovarianceA::activate_ground_rotation\n"
-		"Any set of parameters can be activated, in any desired order.\n"
-		"But we tend to activate them in groups. This function turns on all of\n"
-		"ground rotation parameters. \n"
+		"Any set of parameters can be activated, in any desired order.  \n"
+		"\n"
+		"But we tend to activate them in groups. This function turns on all of ground\n"
+		"rotation parameters.  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA_activate_ground_correction", _wrap_RsmDirectCovarianceA_activate_ground_correction, METH_O, "\n"
+		"activate_ground_correction(RsmDirectCovarianceA self)\n"
 		"\n"
-		"void RsmDirectCovarianceA::activate_ground_correction()\n"
 		"GeoCal::RsmDirectCovarianceA::activate_ground_correction\n"
-		"Any set of parameters can be activated, in any desired order.\n"
-		"But we tend to activate them in groups. This function turns on all of\n"
-		"ground correction parameters. \n"
+		"Any set of parameters can be activated, in any desired order.  \n"
+		"\n"
+		"But we tend to activate them in groups. This function turns on all of ground\n"
+		"correction parameters.  \n"
+		"\n"
 		""},
 	 { "RsmDirectCovarianceA__v_covariance", _wrap_RsmDirectCovarianceA__v_covariance, METH_VARARGS, "\n"
+		"_v_covariance(RsmDirectCovarianceA self) -> BlitzArray_double_2\n"
+		"_v_covariance(RsmDirectCovarianceA self, BlitzArray_double_2 V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovarianceA::covariance(const blitz::Array< double, 2 > &V)\n"
 		"GeoCal::RsmDirectCovarianceA::covariance\n"
 		""},
 	 { "RsmDirectCovarianceA__v_parameter_name", _wrap_RsmDirectCovarianceA__v_parameter_name, METH_O, "\n"
+		"_v_parameter_name(RsmDirectCovarianceA self) -> vector_string\n"
 		"\n"
-		"std::vector< std::string > RsmDirectCovarianceA::parameter_name() const\n"
 		"GeoCal::RsmDirectCovarianceA::parameter_name\n"
 		""},
 	 { "RsmDirectCovarianceA__v_coordinate_converter", _wrap_RsmDirectCovarianceA__v_coordinate_converter, METH_VARARGS, "\n"
+		"_v_coordinate_converter(RsmDirectCovarianceA self) -> boost::shared_ptr< GeoCal::LocalRcConverter >\n"
+		"_v_coordinate_converter(RsmDirectCovarianceA self, boost::shared_ptr< GeoCal::LocalRcConverter > const & V)\n"
 		"\n"
-		"void GeoCal::RsmDirectCovarianceA::coordinate_converter(const boost::shared_ptr< LocalRcConverter > &V)\n"
 		"GeoCal::RsmDirectCovarianceA::coordinate_converter\n"
 		""},
 	 { "delete_RsmDirectCovarianceA", _wrap_delete_RsmDirectCovarianceA, METH_O, "\n"
+		"delete_RsmDirectCovarianceA(RsmDirectCovarianceA self)\n"
 		"\n"
-		"virtual GeoCal::RsmDirectCovarianceA::~RsmDirectCovarianceA()\n"
 		"GeoCal::RsmDirectCovarianceA::~RsmDirectCovarianceA\n"
 		""},
 	 { "RsmDirectCovarianceA_swigregister", RsmDirectCovarianceA_swigregister, METH_O, NULL},

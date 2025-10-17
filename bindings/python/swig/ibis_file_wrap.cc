@@ -10384,416 +10384,448 @@ SWIGINTERN PyObject *IbisFile_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "IbisColumn_byte_ibis_file", _wrap_IbisColumn_byte_ibis_file, METH_O, "\n"
+		"IbisColumn_byte_ibis_file(IbisColumn_byte self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_byte__v_column_index", _wrap_IbisColumn_byte__v_column_index, METH_O, "\n"
+		"IbisColumn_byte__v_column_index(IbisColumn_byte self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_byte__v_size_byte", _wrap_IbisColumn_byte__v_size_byte, METH_O, "\n"
+		"IbisColumn_byte__v_size_byte(IbisColumn_byte self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_byte___str__", _wrap_IbisColumn_byte___str__, METH_O, NULL},
-	 { "IbisColumn_byte_data_get", _wrap_IbisColumn_byte_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_byte___str__", _wrap_IbisColumn_byte___str__, METH_O, "IbisColumn_byte___str__(IbisColumn_byte self) -> std::string"},
+	 { "IbisColumn_byte_data_get", _wrap_IbisColumn_byte_data_get, METH_VARARGS, "\n"
+		"IbisColumn_byte_data_get(IbisColumn_byte self, int i) -> unsigned char\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_byte_data_set", _wrap_IbisColumn_byte_data_set, METH_VARARGS, "\n"
+		"IbisColumn_byte_data_set(IbisColumn_byte self, int i, unsigned char const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_byte__v_data_size", _wrap_IbisColumn_byte__v_data_size, METH_O, "\n"
+		"IbisColumn_byte__v_data_size(IbisColumn_byte self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_byte_update_set", _wrap_IbisColumn_byte_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_byte_update_get", _wrap_IbisColumn_byte_update_get, METH_O, NULL},
+	 { "IbisColumn_byte_update_set", _wrap_IbisColumn_byte_update_set, METH_VARARGS, "IbisColumn_byte_update_set(IbisColumn_byte self, bool update)"},
+	 { "IbisColumn_byte_update_get", _wrap_IbisColumn_byte_update_get, METH_O, "IbisColumn_byte_update_get(IbisColumn_byte self) -> bool"},
 	 { "delete_IbisColumn_byte", _wrap_delete_IbisColumn_byte, METH_O, "\n"
+		"delete_IbisColumn_byte(IbisColumn_byte self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_byte_swigregister", IbisColumn_byte_swigregister, METH_O, NULL},
 	 { "IbisColumn_half_ibis_file", _wrap_IbisColumn_half_ibis_file, METH_O, "\n"
+		"IbisColumn_half_ibis_file(IbisColumn_half self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_half__v_column_index", _wrap_IbisColumn_half__v_column_index, METH_O, "\n"
+		"IbisColumn_half__v_column_index(IbisColumn_half self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_half__v_size_byte", _wrap_IbisColumn_half__v_size_byte, METH_O, "\n"
+		"IbisColumn_half__v_size_byte(IbisColumn_half self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_half___str__", _wrap_IbisColumn_half___str__, METH_O, NULL},
-	 { "IbisColumn_half_data_get", _wrap_IbisColumn_half_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_half___str__", _wrap_IbisColumn_half___str__, METH_O, "IbisColumn_half___str__(IbisColumn_half self) -> std::string"},
+	 { "IbisColumn_half_data_get", _wrap_IbisColumn_half_data_get, METH_VARARGS, "\n"
+		"IbisColumn_half_data_get(IbisColumn_half self, int i) -> short\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_half_data_set", _wrap_IbisColumn_half_data_set, METH_VARARGS, "\n"
+		"IbisColumn_half_data_set(IbisColumn_half self, int i, short const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_half__v_data_size", _wrap_IbisColumn_half__v_data_size, METH_O, "\n"
+		"IbisColumn_half__v_data_size(IbisColumn_half self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_half_update_set", _wrap_IbisColumn_half_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_half_update_get", _wrap_IbisColumn_half_update_get, METH_O, NULL},
+	 { "IbisColumn_half_update_set", _wrap_IbisColumn_half_update_set, METH_VARARGS, "IbisColumn_half_update_set(IbisColumn_half self, bool update)"},
+	 { "IbisColumn_half_update_get", _wrap_IbisColumn_half_update_get, METH_O, "IbisColumn_half_update_get(IbisColumn_half self) -> bool"},
 	 { "delete_IbisColumn_half", _wrap_delete_IbisColumn_half, METH_O, "\n"
+		"delete_IbisColumn_half(IbisColumn_half self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_half_swigregister", IbisColumn_half_swigregister, METH_O, NULL},
 	 { "IbisColumn_full_ibis_file", _wrap_IbisColumn_full_ibis_file, METH_O, "\n"
+		"IbisColumn_full_ibis_file(IbisColumn_full self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_full__v_column_index", _wrap_IbisColumn_full__v_column_index, METH_O, "\n"
+		"IbisColumn_full__v_column_index(IbisColumn_full self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_full__v_size_byte", _wrap_IbisColumn_full__v_size_byte, METH_O, "\n"
+		"IbisColumn_full__v_size_byte(IbisColumn_full self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_full___str__", _wrap_IbisColumn_full___str__, METH_O, NULL},
-	 { "IbisColumn_full_data_get", _wrap_IbisColumn_full_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_full___str__", _wrap_IbisColumn_full___str__, METH_O, "IbisColumn_full___str__(IbisColumn_full self) -> std::string"},
+	 { "IbisColumn_full_data_get", _wrap_IbisColumn_full_data_get, METH_VARARGS, "\n"
+		"IbisColumn_full_data_get(IbisColumn_full self, int i) -> int\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_full_data_set", _wrap_IbisColumn_full_data_set, METH_VARARGS, "\n"
+		"IbisColumn_full_data_set(IbisColumn_full self, int i, int const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_full__v_data_size", _wrap_IbisColumn_full__v_data_size, METH_O, "\n"
+		"IbisColumn_full__v_data_size(IbisColumn_full self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_full_update_set", _wrap_IbisColumn_full_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_full_update_get", _wrap_IbisColumn_full_update_get, METH_O, NULL},
+	 { "IbisColumn_full_update_set", _wrap_IbisColumn_full_update_set, METH_VARARGS, "IbisColumn_full_update_set(IbisColumn_full self, bool update)"},
+	 { "IbisColumn_full_update_get", _wrap_IbisColumn_full_update_get, METH_O, "IbisColumn_full_update_get(IbisColumn_full self) -> bool"},
 	 { "delete_IbisColumn_full", _wrap_delete_IbisColumn_full, METH_O, "\n"
+		"delete_IbisColumn_full(IbisColumn_full self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_full_swigregister", IbisColumn_full_swigregister, METH_O, NULL},
 	 { "IbisColumn_float_ibis_file", _wrap_IbisColumn_float_ibis_file, METH_O, "\n"
+		"IbisColumn_float_ibis_file(IbisColumn_float self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_float__v_column_index", _wrap_IbisColumn_float__v_column_index, METH_O, "\n"
+		"IbisColumn_float__v_column_index(IbisColumn_float self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_float__v_size_byte", _wrap_IbisColumn_float__v_size_byte, METH_O, "\n"
+		"IbisColumn_float__v_size_byte(IbisColumn_float self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_float___str__", _wrap_IbisColumn_float___str__, METH_O, NULL},
-	 { "IbisColumn_float_data_get", _wrap_IbisColumn_float_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_float___str__", _wrap_IbisColumn_float___str__, METH_O, "IbisColumn_float___str__(IbisColumn_float self) -> std::string"},
+	 { "IbisColumn_float_data_get", _wrap_IbisColumn_float_data_get, METH_VARARGS, "\n"
+		"IbisColumn_float_data_get(IbisColumn_float self, int i) -> float\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_float_data_set", _wrap_IbisColumn_float_data_set, METH_VARARGS, "\n"
+		"IbisColumn_float_data_set(IbisColumn_float self, int i, float const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_float__v_data_size", _wrap_IbisColumn_float__v_data_size, METH_O, "\n"
+		"IbisColumn_float__v_data_size(IbisColumn_float self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_float_update_set", _wrap_IbisColumn_float_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_float_update_get", _wrap_IbisColumn_float_update_get, METH_O, NULL},
+	 { "IbisColumn_float_update_set", _wrap_IbisColumn_float_update_set, METH_VARARGS, "IbisColumn_float_update_set(IbisColumn_float self, bool update)"},
+	 { "IbisColumn_float_update_get", _wrap_IbisColumn_float_update_get, METH_O, "IbisColumn_float_update_get(IbisColumn_float self) -> bool"},
 	 { "delete_IbisColumn_float", _wrap_delete_IbisColumn_float, METH_O, "\n"
+		"delete_IbisColumn_float(IbisColumn_float self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_float_swigregister", IbisColumn_float_swigregister, METH_O, NULL},
 	 { "IbisColumn_double_ibis_file", _wrap_IbisColumn_double_ibis_file, METH_O, "\n"
+		"IbisColumn_double_ibis_file(IbisColumn_double self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_double__v_column_index", _wrap_IbisColumn_double__v_column_index, METH_O, "\n"
+		"IbisColumn_double__v_column_index(IbisColumn_double self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_double__v_size_byte", _wrap_IbisColumn_double__v_size_byte, METH_O, "\n"
+		"IbisColumn_double__v_size_byte(IbisColumn_double self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_double___str__", _wrap_IbisColumn_double___str__, METH_O, NULL},
-	 { "IbisColumn_double_data_get", _wrap_IbisColumn_double_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_double___str__", _wrap_IbisColumn_double___str__, METH_O, "IbisColumn_double___str__(IbisColumn_double self) -> std::string"},
+	 { "IbisColumn_double_data_get", _wrap_IbisColumn_double_data_get, METH_VARARGS, "\n"
+		"IbisColumn_double_data_get(IbisColumn_double self, int i) -> double\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_double_data_set", _wrap_IbisColumn_double_data_set, METH_VARARGS, "\n"
+		"IbisColumn_double_data_set(IbisColumn_double self, int i, double const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_double__v_data_size", _wrap_IbisColumn_double__v_data_size, METH_O, "\n"
+		"IbisColumn_double__v_data_size(IbisColumn_double self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_double_update_set", _wrap_IbisColumn_double_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_double_update_get", _wrap_IbisColumn_double_update_get, METH_O, NULL},
+	 { "IbisColumn_double_update_set", _wrap_IbisColumn_double_update_set, METH_VARARGS, "IbisColumn_double_update_set(IbisColumn_double self, bool update)"},
+	 { "IbisColumn_double_update_get", _wrap_IbisColumn_double_update_get, METH_O, "IbisColumn_double_update_get(IbisColumn_double self) -> bool"},
 	 { "delete_IbisColumn_double", _wrap_delete_IbisColumn_double, METH_O, "\n"
+		"delete_IbisColumn_double(IbisColumn_double self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_double_swigregister", IbisColumn_double_swigregister, METH_O, NULL},
 	 { "IbisColumn_string_ibis_file", _wrap_IbisColumn_string_ibis_file, METH_O, "\n"
+		"IbisColumn_string_ibis_file(IbisColumn_string self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_string__v_column_index", _wrap_IbisColumn_string__v_column_index, METH_O, "\n"
+		"IbisColumn_string__v_column_index(IbisColumn_string self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_string__v_size_byte", _wrap_IbisColumn_string__v_size_byte, METH_O, "\n"
+		"IbisColumn_string__v_size_byte(IbisColumn_string self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_string___str__", _wrap_IbisColumn_string___str__, METH_O, NULL},
-	 { "IbisColumn_string_data_get", _wrap_IbisColumn_string_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_string___str__", _wrap_IbisColumn_string___str__, METH_O, "IbisColumn_string___str__(IbisColumn_string self) -> std::string"},
+	 { "IbisColumn_string_data_get", _wrap_IbisColumn_string_data_get, METH_VARARGS, "\n"
+		"IbisColumn_string_data_get(IbisColumn_string self, int i) -> std::string\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_string_data_set", _wrap_IbisColumn_string_data_set, METH_VARARGS, "\n"
+		"IbisColumn_string_data_set(IbisColumn_string self, int i, std::string const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_string__v_data_size", _wrap_IbisColumn_string__v_data_size, METH_O, "\n"
+		"IbisColumn_string__v_data_size(IbisColumn_string self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_string_update_set", _wrap_IbisColumn_string_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_string_update_get", _wrap_IbisColumn_string_update_get, METH_O, NULL},
+	 { "IbisColumn_string_update_set", _wrap_IbisColumn_string_update_set, METH_VARARGS, "IbisColumn_string_update_set(IbisColumn_string self, bool update)"},
+	 { "IbisColumn_string_update_get", _wrap_IbisColumn_string_update_get, METH_O, "IbisColumn_string_update_get(IbisColumn_string self) -> bool"},
 	 { "delete_IbisColumn_string", _wrap_delete_IbisColumn_string, METH_O, "\n"
+		"delete_IbisColumn_string(IbisColumn_string self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_string_swigregister", IbisColumn_string_swigregister, METH_O, NULL},
 	 { "new_IbisFile", _wrap_new_IbisFile, METH_VARARGS, "\n"
+		"IbisFile(std::string const & Fname, int Number_row, vector_string Format, std::string const & Organization=\"COLUMN\")\n"
+		"IbisFile(std::string const & Fname, GeoCal::IbisFile::access_type Access=READ)\n"
 		"\n"
-		"IbisFile::IbisFile(const std::string &Fname, int Number_row, const std::vector<\n"
-		"std::string > &Format, const std::string &Organization=\"COLUMN\")\n"
 		"GeoCal::IbisFile::IbisFile\n"
-		"Create a new IBIS file.\n"
-		"We pass in the number of rows and the format for each column. The\n"
-		"format is given as a list of strings, with each string being one of\n"
-		"the format types taken by the IBIS library - \"BYTE\", \"HALF\",\n"
-		"\"FULL\", \"REAL\", \"DOUB\", \"Ann\" (e.g., \"A10\" for 10 character\n"
-		"ASCII). The organization of the file can be given as \"COLUMN\" or\n"
-		"\"ROW\". \n"
+		"Create a new IBIS file.  \n"
+		"\n"
+		"We pass in the number of rows and the format for each column. The format is\n"
+		"given as a list of strings, with each string being one of the format types taken\n"
+		"by the IBIS library - \"BYTE\", \"HALF\", \"FULL\", \"REAL\", \"DOUB\", \"Ann\"\n"
+		"(e.g., \"A10\" for 10 character ASCII). The organization of the file can be\n"
+		"given as \"COLUMN\" or \"ROW\".  \n"
+		"\n"
 		""},
 	 { "IbisFile__v_access", _wrap_IbisFile__v_access, METH_O, "\n"
+		"IbisFile__v_access(IbisFile self) -> GeoCal::IbisFile::access_type\n"
 		"\n"
-		"access_type GeoCal::IbisFile::access() const\n"
 		"GeoCal::IbisFile::access\n"
-		"Access type of file.\n"
+		"Access type of file.  \n"
 		"\n"
 		""},
 	 { "IbisFile_close", _wrap_IbisFile_close, METH_O, "\n"
+		"IbisFile_close(IbisFile self)\n"
 		"\n"
-		"void IbisFile::close()\n"
 		"GeoCal::IbisFile::close\n"
-		"Close a file.\n"
-		"You don't normally need to call this directly, it is done by the\n"
-		"destructor. But it is useful to have for use by python. \n"
+		"Close a file.  \n"
+		"\n"
+		"You don't normally need to call this directly, it is done by the destructor. But\n"
+		"it is useful to have for use by python.  \n"
+		"\n"
 		""},
 	 { "IbisFile_column_data_type", _wrap_IbisFile_column_data_type, METH_VARARGS, "\n"
+		"IbisFile_column_data_type(IbisFile self, int I) -> GeoCal::IbisFile::data_type\n"
 		"\n"
-		"data_type GeoCal::IbisFile::column_data_type(int I) const\n"
 		"GeoCal::IbisFile::column_data_type\n"
-		"Data type for given column.\n"
-		"Note that this is 0-based rather than 1-based. \n"
+		"Data type for given column.  \n"
+		"\n"
+		"Note that this is 0-based rather than 1-based.  \n"
+		"\n"
 		""},
 	 { "IbisFile__v_file_name", _wrap_IbisFile__v_file_name, METH_O, "\n"
+		"IbisFile__v_file_name(IbisFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::IbisFile::file_name() const\n"
 		"GeoCal::IbisFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_ibis_fh", _wrap_IbisFile__v_ibis_fh, METH_O, "\n"
+		"IbisFile__v_ibis_fh(IbisFile self) -> int\n"
 		"\n"
-		"int IbisFile::ibis_fh() const\n"
 		"GeoCal::IbisFile::ibis_fh\n"
-		"IBIS file handle number used in IBIS calls.\n"
+		"IBIS file handle number used in IBIS calls.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_number_row", _wrap_IbisFile__v_number_row, METH_O, "\n"
+		"IbisFile__v_number_row(IbisFile self) -> int\n"
 		"\n"
-		"int GeoCal::IbisFile::number_row() const\n"
 		"GeoCal::IbisFile::number_row\n"
-		"Number of rows in the file.\n"
+		"Number of rows in the file.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_number_col", _wrap_IbisFile__v_number_col, METH_O, "\n"
+		"IbisFile__v_number_col(IbisFile self) -> int\n"
 		"\n"
-		"int GeoCal::IbisFile::number_col() const\n"
 		"GeoCal::IbisFile::number_col\n"
-		"Number of columns in the file.\n"
+		"Number of columns in the file.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_unit", _wrap_IbisFile__v_unit, METH_O, "\n"
+		"IbisFile__v_unit(IbisFile self) -> int\n"
 		"\n"
-		"int GeoCal::IbisFile::unit() const\n"
 		"GeoCal::IbisFile::unit\n"
-		"Unit number for VicarFile.\n"
+		"Unit number for VicarFile.  \n"
 		"\n"
 		""},
 	 { "IbisFile_set_column_type", _wrap_IbisFile_set_column_type, METH_VARARGS, "\n"
+		"IbisFile_set_column_type(IbisFile self, int I, GeoCal::IbisFile::data_type Dt)\n"
 		"\n"
-		"void IbisFile::set_column_type(int i, data_type dt)\n"
 		"GeoCal::IbisFile::set_column_type\n"
-		"IBIS has support for casting a column type to and from a different\n"
-		"type for reading and writing.\n"
-		"This changes whatever the native type is to the given type. Note that\n"
-		"this is fixed. Also anything done with the previous type column is\n"
-		"lost, so you should call this before changing values in an IBIS\n"
-		"column. \n"
+		"IBIS has support for casting a column type to and from a different type for\n"
+		"reading and writing.  \n"
+		"\n"
+		"This changes whatever the native type is to the given type. Note that this is\n"
+		"fixed. Also anything done with the previous type column is lost, so you should\n"
+		"call this before changing values in an IBIS column.  \n"
+		"\n"
 		""},
 	 { "IbisFile_mark_updated", _wrap_IbisFile_mark_updated, METH_VARARGS, "\n"
+		"IbisFile_mark_updated(IbisFile self)\n"
+		"IbisFile_mark_updated(IbisFile self, int I)\n"
 		"\n"
-		"void GeoCal::IbisFile::mark_updated(int I)\n"
 		"GeoCal::IbisFile::mark_updated\n"
-		"Mark whole file as updated.\n"
-		"No need to do this if you open the file as \"WRITE\", but for\n"
-		"\"UPDATE\" we only update columns explicitly marked as updated (so we\n"
-		"don't write out unchanged column). This routine marks the specific\n"
-		"columns as updated and needing to be written to disk. \n"
+		"Mark whole file as updated.  \n"
+		"\n"
+		"No need to do this if you open the file as \"WRITE\", but for \"UPDATE\" we only\n"
+		"update columns explicitly marked as updated (so we don't write out unchanged\n"
+		"column). This routine marks the specific columns as updated and needing to be\n"
+		"written to disk.  \n"
+		"\n"
 		""},
 	 { "IbisFile_flush", _wrap_IbisFile_flush, METH_O, "\n"
+		"IbisFile_flush(IbisFile self)\n"
 		"\n"
-		"void IbisFile::flush()\n"
 		"GeoCal::IbisFile::flush\n"
-		"Flush data to disk, including any changes.\n"
-		"This is automatically called by the destructor. \n"
-		""},
-	 { "IbisFile___str__", _wrap_IbisFile___str__, METH_O, NULL},
-	 { "IbisFile_column_byte", _wrap_IbisFile_column_byte, METH_VARARGS, NULL},
-	 { "IbisFile_column_half", _wrap_IbisFile_column_half, METH_VARARGS, NULL},
-	 { "IbisFile_column_full", _wrap_IbisFile_column_full, METH_VARARGS, NULL},
-	 { "IbisFile_column_float", _wrap_IbisFile_column_float, METH_VARARGS, NULL},
-	 { "IbisFile_column_double", _wrap_IbisFile_column_double, METH_VARARGS, NULL},
-	 { "IbisFile_column_string", _wrap_IbisFile_column_string, METH_VARARGS, NULL},
-	 { "delete_IbisFile", _wrap_delete_IbisFile, METH_O, "\n"
+		"Flush data to disk, including any changes.  \n"
 		"\n"
-		"IbisFile::~IbisFile()\n"
+		"This is automatically called by the destructor.  \n"
+		"\n"
+		""},
+	 { "IbisFile___str__", _wrap_IbisFile___str__, METH_O, "IbisFile___str__(IbisFile self) -> std::string"},
+	 { "IbisFile_column_byte", _wrap_IbisFile_column_byte, METH_VARARGS, "IbisFile_column_byte(IbisFile self, int I) -> IbisColumn_byte"},
+	 { "IbisFile_column_half", _wrap_IbisFile_column_half, METH_VARARGS, "IbisFile_column_half(IbisFile self, int I) -> IbisColumn_half"},
+	 { "IbisFile_column_full", _wrap_IbisFile_column_full, METH_VARARGS, "IbisFile_column_full(IbisFile self, int I) -> IbisColumn_full"},
+	 { "IbisFile_column_float", _wrap_IbisFile_column_float, METH_VARARGS, "IbisFile_column_float(IbisFile self, int I) -> IbisColumn_float"},
+	 { "IbisFile_column_double", _wrap_IbisFile_column_double, METH_VARARGS, "IbisFile_column_double(IbisFile self, int I) -> IbisColumn_double"},
+	 { "IbisFile_column_string", _wrap_IbisFile_column_string, METH_VARARGS, "IbisFile_column_string(IbisFile self, int I) -> IbisColumn_string"},
+	 { "delete_IbisFile", _wrap_delete_IbisFile, METH_O, "\n"
+		"delete_IbisFile(IbisFile self)\n"
+		"\n"
 		"GeoCal::IbisFile::~IbisFile\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IbisFile_swigregister", IbisFile_swigregister, METH_O, NULL},
@@ -10804,416 +10836,448 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "IbisColumn_byte_ibis_file", _wrap_IbisColumn_byte_ibis_file, METH_O, "\n"
+		"ibis_file(IbisColumn_byte self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_byte__v_column_index", _wrap_IbisColumn_byte__v_column_index, METH_O, "\n"
+		"_v_column_index(IbisColumn_byte self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_byte__v_size_byte", _wrap_IbisColumn_byte__v_size_byte, METH_O, "\n"
+		"_v_size_byte(IbisColumn_byte self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_byte___str__", _wrap_IbisColumn_byte___str__, METH_O, NULL},
-	 { "IbisColumn_byte_data_get", _wrap_IbisColumn_byte_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_byte___str__", _wrap_IbisColumn_byte___str__, METH_O, "__str__(IbisColumn_byte self) -> std::string"},
+	 { "IbisColumn_byte_data_get", _wrap_IbisColumn_byte_data_get, METH_VARARGS, "\n"
+		"data_get(IbisColumn_byte self, int i) -> unsigned char\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_byte_data_set", _wrap_IbisColumn_byte_data_set, METH_VARARGS, "\n"
+		"data_set(IbisColumn_byte self, int i, unsigned char const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_byte__v_data_size", _wrap_IbisColumn_byte__v_data_size, METH_O, "\n"
+		"_v_data_size(IbisColumn_byte self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_byte_update_set", _wrap_IbisColumn_byte_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_byte_update_get", _wrap_IbisColumn_byte_update_get, METH_O, NULL},
+	 { "IbisColumn_byte_update_set", _wrap_IbisColumn_byte_update_set, METH_VARARGS, "IbisColumn_byte_update_set(IbisColumn_byte self, bool update)"},
+	 { "IbisColumn_byte_update_get", _wrap_IbisColumn_byte_update_get, METH_O, "IbisColumn_byte_update_get(IbisColumn_byte self) -> bool"},
 	 { "delete_IbisColumn_byte", _wrap_delete_IbisColumn_byte, METH_O, "\n"
+		"delete_IbisColumn_byte(IbisColumn_byte self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_byte_swigregister", IbisColumn_byte_swigregister, METH_O, NULL},
 	 { "IbisColumn_half_ibis_file", _wrap_IbisColumn_half_ibis_file, METH_O, "\n"
+		"ibis_file(IbisColumn_half self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_half__v_column_index", _wrap_IbisColumn_half__v_column_index, METH_O, "\n"
+		"_v_column_index(IbisColumn_half self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_half__v_size_byte", _wrap_IbisColumn_half__v_size_byte, METH_O, "\n"
+		"_v_size_byte(IbisColumn_half self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_half___str__", _wrap_IbisColumn_half___str__, METH_O, NULL},
-	 { "IbisColumn_half_data_get", _wrap_IbisColumn_half_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_half___str__", _wrap_IbisColumn_half___str__, METH_O, "__str__(IbisColumn_half self) -> std::string"},
+	 { "IbisColumn_half_data_get", _wrap_IbisColumn_half_data_get, METH_VARARGS, "\n"
+		"data_get(IbisColumn_half self, int i) -> short\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_half_data_set", _wrap_IbisColumn_half_data_set, METH_VARARGS, "\n"
+		"data_set(IbisColumn_half self, int i, short const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_half__v_data_size", _wrap_IbisColumn_half__v_data_size, METH_O, "\n"
+		"_v_data_size(IbisColumn_half self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_half_update_set", _wrap_IbisColumn_half_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_half_update_get", _wrap_IbisColumn_half_update_get, METH_O, NULL},
+	 { "IbisColumn_half_update_set", _wrap_IbisColumn_half_update_set, METH_VARARGS, "IbisColumn_half_update_set(IbisColumn_half self, bool update)"},
+	 { "IbisColumn_half_update_get", _wrap_IbisColumn_half_update_get, METH_O, "IbisColumn_half_update_get(IbisColumn_half self) -> bool"},
 	 { "delete_IbisColumn_half", _wrap_delete_IbisColumn_half, METH_O, "\n"
+		"delete_IbisColumn_half(IbisColumn_half self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_half_swigregister", IbisColumn_half_swigregister, METH_O, NULL},
 	 { "IbisColumn_full_ibis_file", _wrap_IbisColumn_full_ibis_file, METH_O, "\n"
+		"ibis_file(IbisColumn_full self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_full__v_column_index", _wrap_IbisColumn_full__v_column_index, METH_O, "\n"
+		"_v_column_index(IbisColumn_full self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_full__v_size_byte", _wrap_IbisColumn_full__v_size_byte, METH_O, "\n"
+		"_v_size_byte(IbisColumn_full self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_full___str__", _wrap_IbisColumn_full___str__, METH_O, NULL},
-	 { "IbisColumn_full_data_get", _wrap_IbisColumn_full_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_full___str__", _wrap_IbisColumn_full___str__, METH_O, "__str__(IbisColumn_full self) -> std::string"},
+	 { "IbisColumn_full_data_get", _wrap_IbisColumn_full_data_get, METH_VARARGS, "\n"
+		"data_get(IbisColumn_full self, int i) -> int\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_full_data_set", _wrap_IbisColumn_full_data_set, METH_VARARGS, "\n"
+		"data_set(IbisColumn_full self, int i, int const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_full__v_data_size", _wrap_IbisColumn_full__v_data_size, METH_O, "\n"
+		"_v_data_size(IbisColumn_full self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_full_update_set", _wrap_IbisColumn_full_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_full_update_get", _wrap_IbisColumn_full_update_get, METH_O, NULL},
+	 { "IbisColumn_full_update_set", _wrap_IbisColumn_full_update_set, METH_VARARGS, "IbisColumn_full_update_set(IbisColumn_full self, bool update)"},
+	 { "IbisColumn_full_update_get", _wrap_IbisColumn_full_update_get, METH_O, "IbisColumn_full_update_get(IbisColumn_full self) -> bool"},
 	 { "delete_IbisColumn_full", _wrap_delete_IbisColumn_full, METH_O, "\n"
+		"delete_IbisColumn_full(IbisColumn_full self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_full_swigregister", IbisColumn_full_swigregister, METH_O, NULL},
 	 { "IbisColumn_float_ibis_file", _wrap_IbisColumn_float_ibis_file, METH_O, "\n"
+		"ibis_file(IbisColumn_float self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_float__v_column_index", _wrap_IbisColumn_float__v_column_index, METH_O, "\n"
+		"_v_column_index(IbisColumn_float self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_float__v_size_byte", _wrap_IbisColumn_float__v_size_byte, METH_O, "\n"
+		"_v_size_byte(IbisColumn_float self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_float___str__", _wrap_IbisColumn_float___str__, METH_O, NULL},
-	 { "IbisColumn_float_data_get", _wrap_IbisColumn_float_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_float___str__", _wrap_IbisColumn_float___str__, METH_O, "__str__(IbisColumn_float self) -> std::string"},
+	 { "IbisColumn_float_data_get", _wrap_IbisColumn_float_data_get, METH_VARARGS, "\n"
+		"data_get(IbisColumn_float self, int i) -> float\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_float_data_set", _wrap_IbisColumn_float_data_set, METH_VARARGS, "\n"
+		"data_set(IbisColumn_float self, int i, float const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_float__v_data_size", _wrap_IbisColumn_float__v_data_size, METH_O, "\n"
+		"_v_data_size(IbisColumn_float self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_float_update_set", _wrap_IbisColumn_float_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_float_update_get", _wrap_IbisColumn_float_update_get, METH_O, NULL},
+	 { "IbisColumn_float_update_set", _wrap_IbisColumn_float_update_set, METH_VARARGS, "IbisColumn_float_update_set(IbisColumn_float self, bool update)"},
+	 { "IbisColumn_float_update_get", _wrap_IbisColumn_float_update_get, METH_O, "IbisColumn_float_update_get(IbisColumn_float self) -> bool"},
 	 { "delete_IbisColumn_float", _wrap_delete_IbisColumn_float, METH_O, "\n"
+		"delete_IbisColumn_float(IbisColumn_float self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_float_swigregister", IbisColumn_float_swigregister, METH_O, NULL},
 	 { "IbisColumn_double_ibis_file", _wrap_IbisColumn_double_ibis_file, METH_O, "\n"
+		"ibis_file(IbisColumn_double self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_double__v_column_index", _wrap_IbisColumn_double__v_column_index, METH_O, "\n"
+		"_v_column_index(IbisColumn_double self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_double__v_size_byte", _wrap_IbisColumn_double__v_size_byte, METH_O, "\n"
+		"_v_size_byte(IbisColumn_double self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_double___str__", _wrap_IbisColumn_double___str__, METH_O, NULL},
-	 { "IbisColumn_double_data_get", _wrap_IbisColumn_double_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_double___str__", _wrap_IbisColumn_double___str__, METH_O, "__str__(IbisColumn_double self) -> std::string"},
+	 { "IbisColumn_double_data_get", _wrap_IbisColumn_double_data_get, METH_VARARGS, "\n"
+		"data_get(IbisColumn_double self, int i) -> double\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_double_data_set", _wrap_IbisColumn_double_data_set, METH_VARARGS, "\n"
+		"data_set(IbisColumn_double self, int i, double const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_double__v_data_size", _wrap_IbisColumn_double__v_data_size, METH_O, "\n"
+		"_v_data_size(IbisColumn_double self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_double_update_set", _wrap_IbisColumn_double_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_double_update_get", _wrap_IbisColumn_double_update_get, METH_O, NULL},
+	 { "IbisColumn_double_update_set", _wrap_IbisColumn_double_update_set, METH_VARARGS, "IbisColumn_double_update_set(IbisColumn_double self, bool update)"},
+	 { "IbisColumn_double_update_get", _wrap_IbisColumn_double_update_get, METH_O, "IbisColumn_double_update_get(IbisColumn_double self) -> bool"},
 	 { "delete_IbisColumn_double", _wrap_delete_IbisColumn_double, METH_O, "\n"
+		"delete_IbisColumn_double(IbisColumn_double self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_double_swigregister", IbisColumn_double_swigregister, METH_O, NULL},
 	 { "IbisColumn_string_ibis_file", _wrap_IbisColumn_string_ibis_file, METH_O, "\n"
+		"ibis_file(IbisColumn_string self) -> IbisFile\n"
 		"\n"
-		"const IbisFile & GeoCal::IbisColumnBase::ibis_file() const\n"
 		"GeoCal::IbisColumnBase::ibis_file\n"
-		" IbisFile that this column is for.\n"
+		"IbisFile that this column is for.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_string__v_column_index", _wrap_IbisColumn_string__v_column_index, METH_O, "\n"
+		"_v_column_index(IbisColumn_string self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::column_index() const\n"
 		"GeoCal::IbisColumnBase::column_index\n"
-		"Column index.\n"
-		"This is 0-based rather than the 1-based used by some VICAR routines.\n"
+		"Column index.  \n"
+		"\n"
+		"This is 0-based rather than the 1-based used by some VICAR routines.  \n"
 		"\n"
 		""},
 	 { "IbisColumn_string__v_size_byte", _wrap_IbisColumn_string__v_size_byte, METH_O, "\n"
+		"_v_size_byte(IbisColumn_string self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumnBase::size_byte() const\n"
 		"GeoCal::IbisColumnBase::size_byte\n"
-		"Size in bytes of column element.\n"
-		"This is mostly only interesting for the VICAR_ASCII types, since the\n"
-		"other types are just the size of the underlying type. \n"
-		""},
-	 { "IbisColumn_string___str__", _wrap_IbisColumn_string___str__, METH_O, NULL},
-	 { "IbisColumn_string_data_get", _wrap_IbisColumn_string_data_get, METH_VARARGS, "\n"
+		"Size in bytes of column element.  \n"
 		"\n"
-		"T GeoCal::IbisColumn< T >::data_get(int i) const\n"
+		"This is mostly only interesting for the VICAR_ASCII types, since the other types\n"
+		"are just the size of the underlying type.  \n"
+		"\n"
+		""},
+	 { "IbisColumn_string___str__", _wrap_IbisColumn_string___str__, METH_O, "__str__(IbisColumn_string self) -> std::string"},
+	 { "IbisColumn_string_data_get", _wrap_IbisColumn_string_data_get, METH_VARARGS, "\n"
+		"data_get(IbisColumn_string self, int i) -> std::string\n"
+		"\n"
 		"GeoCal::IbisColumn::data_get\n"
 		""},
 	 { "IbisColumn_string_data_set", _wrap_IbisColumn_string_data_set, METH_VARARGS, "\n"
+		"data_set(IbisColumn_string self, int i, std::string const & V)\n"
 		"\n"
-		"void GeoCal::IbisColumn< T >::data_set(int i, const T &V)\n"
 		"GeoCal::IbisColumn::data_set\n"
 		""},
 	 { "IbisColumn_string__v_data_size", _wrap_IbisColumn_string__v_data_size, METH_O, "\n"
+		"_v_data_size(IbisColumn_string self) -> int\n"
 		"\n"
-		"int GeoCal::IbisColumn< T >::data_size() const\n"
 		"GeoCal::IbisColumn::data_size\n"
 		""},
-	 { "IbisColumn_string_update_set", _wrap_IbisColumn_string_update_set, METH_VARARGS, NULL},
-	 { "IbisColumn_string_update_get", _wrap_IbisColumn_string_update_get, METH_O, NULL},
+	 { "IbisColumn_string_update_set", _wrap_IbisColumn_string_update_set, METH_VARARGS, "IbisColumn_string_update_set(IbisColumn_string self, bool update)"},
+	 { "IbisColumn_string_update_get", _wrap_IbisColumn_string_update_get, METH_O, "IbisColumn_string_update_get(IbisColumn_string self) -> bool"},
 	 { "delete_IbisColumn_string", _wrap_delete_IbisColumn_string, METH_O, "\n"
+		"delete_IbisColumn_string(IbisColumn_string self)\n"
 		"\n"
-		"virtual GeoCal::IbisColumn< T >::~IbisColumn()\n"
 		"GeoCal::IbisColumn::~IbisColumn\n"
 		""},
 	 { "IbisColumn_string_swigregister", IbisColumn_string_swigregister, METH_O, NULL},
 	 { "new_IbisFile", _wrap_new_IbisFile, METH_VARARGS, "\n"
+		"IbisFile(std::string const & Fname, int Number_row, vector_string Format, std::string const & Organization=\"COLUMN\")\n"
+		"IbisFile(std::string const & Fname, GeoCal::IbisFile::access_type Access=READ)\n"
 		"\n"
-		"IbisFile::IbisFile(const std::string &Fname, int Number_row, const std::vector<\n"
-		"std::string > &Format, const std::string &Organization=\"COLUMN\")\n"
 		"GeoCal::IbisFile::IbisFile\n"
-		"Create a new IBIS file.\n"
-		"We pass in the number of rows and the format for each column. The\n"
-		"format is given as a list of strings, with each string being one of\n"
-		"the format types taken by the IBIS library - \"BYTE\", \"HALF\",\n"
-		"\"FULL\", \"REAL\", \"DOUB\", \"Ann\" (e.g., \"A10\" for 10 character\n"
-		"ASCII). The organization of the file can be given as \"COLUMN\" or\n"
-		"\"ROW\". \n"
+		"Create a new IBIS file.  \n"
+		"\n"
+		"We pass in the number of rows and the format for each column. The format is\n"
+		"given as a list of strings, with each string being one of the format types taken\n"
+		"by the IBIS library - \"BYTE\", \"HALF\", \"FULL\", \"REAL\", \"DOUB\", \"Ann\"\n"
+		"(e.g., \"A10\" for 10 character ASCII). The organization of the file can be\n"
+		"given as \"COLUMN\" or \"ROW\".  \n"
+		"\n"
 		""},
 	 { "IbisFile__v_access", _wrap_IbisFile__v_access, METH_O, "\n"
+		"_v_access(IbisFile self) -> GeoCal::IbisFile::access_type\n"
 		"\n"
-		"access_type GeoCal::IbisFile::access() const\n"
 		"GeoCal::IbisFile::access\n"
-		"Access type of file.\n"
+		"Access type of file.  \n"
 		"\n"
 		""},
 	 { "IbisFile_close", _wrap_IbisFile_close, METH_O, "\n"
+		"close(IbisFile self)\n"
 		"\n"
-		"void IbisFile::close()\n"
 		"GeoCal::IbisFile::close\n"
-		"Close a file.\n"
-		"You don't normally need to call this directly, it is done by the\n"
-		"destructor. But it is useful to have for use by python. \n"
+		"Close a file.  \n"
+		"\n"
+		"You don't normally need to call this directly, it is done by the destructor. But\n"
+		"it is useful to have for use by python.  \n"
+		"\n"
 		""},
 	 { "IbisFile_column_data_type", _wrap_IbisFile_column_data_type, METH_VARARGS, "\n"
+		"column_data_type(IbisFile self, int I) -> GeoCal::IbisFile::data_type\n"
 		"\n"
-		"data_type GeoCal::IbisFile::column_data_type(int I) const\n"
 		"GeoCal::IbisFile::column_data_type\n"
-		"Data type for given column.\n"
-		"Note that this is 0-based rather than 1-based. \n"
+		"Data type for given column.  \n"
+		"\n"
+		"Note that this is 0-based rather than 1-based.  \n"
+		"\n"
 		""},
 	 { "IbisFile__v_file_name", _wrap_IbisFile__v_file_name, METH_O, "\n"
+		"_v_file_name(IbisFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::IbisFile::file_name() const\n"
 		"GeoCal::IbisFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_ibis_fh", _wrap_IbisFile__v_ibis_fh, METH_O, "\n"
+		"_v_ibis_fh(IbisFile self) -> int\n"
 		"\n"
-		"int IbisFile::ibis_fh() const\n"
 		"GeoCal::IbisFile::ibis_fh\n"
-		"IBIS file handle number used in IBIS calls.\n"
+		"IBIS file handle number used in IBIS calls.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_number_row", _wrap_IbisFile__v_number_row, METH_O, "\n"
+		"_v_number_row(IbisFile self) -> int\n"
 		"\n"
-		"int GeoCal::IbisFile::number_row() const\n"
 		"GeoCal::IbisFile::number_row\n"
-		"Number of rows in the file.\n"
+		"Number of rows in the file.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_number_col", _wrap_IbisFile__v_number_col, METH_O, "\n"
+		"_v_number_col(IbisFile self) -> int\n"
 		"\n"
-		"int GeoCal::IbisFile::number_col() const\n"
 		"GeoCal::IbisFile::number_col\n"
-		"Number of columns in the file.\n"
+		"Number of columns in the file.  \n"
 		"\n"
 		""},
 	 { "IbisFile__v_unit", _wrap_IbisFile__v_unit, METH_O, "\n"
+		"_v_unit(IbisFile self) -> int\n"
 		"\n"
-		"int GeoCal::IbisFile::unit() const\n"
 		"GeoCal::IbisFile::unit\n"
-		"Unit number for VicarFile.\n"
+		"Unit number for VicarFile.  \n"
 		"\n"
 		""},
 	 { "IbisFile_set_column_type", _wrap_IbisFile_set_column_type, METH_VARARGS, "\n"
+		"set_column_type(IbisFile self, int I, GeoCal::IbisFile::data_type Dt)\n"
 		"\n"
-		"void IbisFile::set_column_type(int i, data_type dt)\n"
 		"GeoCal::IbisFile::set_column_type\n"
-		"IBIS has support for casting a column type to and from a different\n"
-		"type for reading and writing.\n"
-		"This changes whatever the native type is to the given type. Note that\n"
-		"this is fixed. Also anything done with the previous type column is\n"
-		"lost, so you should call this before changing values in an IBIS\n"
-		"column. \n"
+		"IBIS has support for casting a column type to and from a different type for\n"
+		"reading and writing.  \n"
+		"\n"
+		"This changes whatever the native type is to the given type. Note that this is\n"
+		"fixed. Also anything done with the previous type column is lost, so you should\n"
+		"call this before changing values in an IBIS column.  \n"
+		"\n"
 		""},
 	 { "IbisFile_mark_updated", _wrap_IbisFile_mark_updated, METH_VARARGS, "\n"
+		"mark_updated(IbisFile self)\n"
+		"mark_updated(IbisFile self, int I)\n"
 		"\n"
-		"void GeoCal::IbisFile::mark_updated(int I)\n"
 		"GeoCal::IbisFile::mark_updated\n"
-		"Mark whole file as updated.\n"
-		"No need to do this if you open the file as \"WRITE\", but for\n"
-		"\"UPDATE\" we only update columns explicitly marked as updated (so we\n"
-		"don't write out unchanged column). This routine marks the specific\n"
-		"columns as updated and needing to be written to disk. \n"
+		"Mark whole file as updated.  \n"
+		"\n"
+		"No need to do this if you open the file as \"WRITE\", but for \"UPDATE\" we only\n"
+		"update columns explicitly marked as updated (so we don't write out unchanged\n"
+		"column). This routine marks the specific columns as updated and needing to be\n"
+		"written to disk.  \n"
+		"\n"
 		""},
 	 { "IbisFile_flush", _wrap_IbisFile_flush, METH_O, "\n"
+		"flush(IbisFile self)\n"
 		"\n"
-		"void IbisFile::flush()\n"
 		"GeoCal::IbisFile::flush\n"
-		"Flush data to disk, including any changes.\n"
-		"This is automatically called by the destructor. \n"
-		""},
-	 { "IbisFile___str__", _wrap_IbisFile___str__, METH_O, NULL},
-	 { "IbisFile_column_byte", _wrap_IbisFile_column_byte, METH_VARARGS, NULL},
-	 { "IbisFile_column_half", _wrap_IbisFile_column_half, METH_VARARGS, NULL},
-	 { "IbisFile_column_full", _wrap_IbisFile_column_full, METH_VARARGS, NULL},
-	 { "IbisFile_column_float", _wrap_IbisFile_column_float, METH_VARARGS, NULL},
-	 { "IbisFile_column_double", _wrap_IbisFile_column_double, METH_VARARGS, NULL},
-	 { "IbisFile_column_string", _wrap_IbisFile_column_string, METH_VARARGS, NULL},
-	 { "delete_IbisFile", _wrap_delete_IbisFile, METH_O, "\n"
+		"Flush data to disk, including any changes.  \n"
 		"\n"
-		"IbisFile::~IbisFile()\n"
+		"This is automatically called by the destructor.  \n"
+		"\n"
+		""},
+	 { "IbisFile___str__", _wrap_IbisFile___str__, METH_O, "__str__(IbisFile self) -> std::string"},
+	 { "IbisFile_column_byte", _wrap_IbisFile_column_byte, METH_VARARGS, "column_byte(IbisFile self, int I) -> IbisColumn_byte"},
+	 { "IbisFile_column_half", _wrap_IbisFile_column_half, METH_VARARGS, "column_half(IbisFile self, int I) -> IbisColumn_half"},
+	 { "IbisFile_column_full", _wrap_IbisFile_column_full, METH_VARARGS, "column_full(IbisFile self, int I) -> IbisColumn_full"},
+	 { "IbisFile_column_float", _wrap_IbisFile_column_float, METH_VARARGS, "column_float(IbisFile self, int I) -> IbisColumn_float"},
+	 { "IbisFile_column_double", _wrap_IbisFile_column_double, METH_VARARGS, "column_double(IbisFile self, int I) -> IbisColumn_double"},
+	 { "IbisFile_column_string", _wrap_IbisFile_column_string, METH_VARARGS, "column_string(IbisFile self, int I) -> IbisColumn_string"},
+	 { "delete_IbisFile", _wrap_delete_IbisFile, METH_O, "\n"
+		"delete_IbisFile(IbisFile self)\n"
+		"\n"
 		"GeoCal::IbisFile::~IbisFile\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "IbisFile_swigregister", IbisFile_swigregister, METH_O, NULL},

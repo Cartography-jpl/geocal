@@ -7306,93 +7306,101 @@ SWIGINTERN PyObject *Dem_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "Dem_distance_to_surface", _wrap_Dem_distance_to_surface, METH_VARARGS, "\n"
+		"Dem_distance_to_surface(Dem self, GroundCoordinate Gp) -> double\n"
 		"\n"
-		"virtual double GeoCal::Dem::distance_to_surface(const GroundCoordinate &Gp) const =0\n"
 		"GeoCal::Dem::distance_to_surface\n"
-		"Return distance to surface directly above/below the given point.\n"
-		"Distance is in meters. Positive means Gp is above the surface,\n"
-		"negative means below. \n"
+		"Return distance to surface directly above/below the given point.  \n"
+		"\n"
+		"Distance is in meters. Positive means Gp is above the surface, negative means\n"
+		"below.  \n"
+		"\n"
 		""},
 	 { "Dem_height_reference_surface", _wrap_Dem_height_reference_surface, METH_VARARGS, "\n"
+		"Dem_height_reference_surface(Dem self, GroundCoordinate Gp) -> double\n"
 		"\n"
-		"virtual double GeoCal::Dem::height_reference_surface(const GroundCoordinate &Gp) const =0\n"
 		"GeoCal::Dem::height_reference_surface\n"
-		"Return height of surface above/below the reference surface (e.g.,\n"
-		"WGS-84 for the earth).\n"
-		"Positive means above, negative below. This is in meters. \n"
+		"Return height of surface above/below the reference surface (e.g., WGS-84 for the\n"
+		"earth).  \n"
+		"\n"
+		"Positive means above, negative below. This is in meters.  \n"
+		"\n"
 		""},
 	 { "Dem_intersect", _wrap_Dem_intersect, METH_VARARGS, "\n"
+		"Dem_intersect(Dem self, CartesianFixed Cf, CartesianFixedLookVector Lv, double Resolution, double Max_height=9000) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > Dem::intersect(const CartesianFixed &Cf, const CartesianFixedLookVector &Lv, double\n"
-		"Resolution, double Max_height=9000) const\n"
 		"GeoCal::Dem::intersect\n"
-		"Determine the intersection along a look vector from a starting\n"
-		"position with the Dem (e.g., what point on the ground does a satellite see).\n"
-		"This is brute force, so it won't mistakenly pick a plain behind a\n"
-		"mountain.\n"
+		"Determine the intersection along a look vector from a starting position with the\n"
+		"Dem (e.g., what point on the ground does a satellite see).  \n"
 		"\n"
-		"Resolution is the desired resolution in meters. Max_height is the\n"
-		"maximum height we will encounter in the Dem - the default of 9 km is\n"
-		"higher than the highest point in the world. \n"
+		"This is brute force, so it won't mistakenly pick a plain behind a mountain.  \n"
+		"\n"
+		"Resolution is the desired resolution in meters. Max_height is the maximum height\n"
+		"we will encounter in the Dem - the default of 9 km is higher than the highest\n"
+		"point in the world.  \n"
+		"\n"
 		""},
 	 { "Dem_intersect_start_length", _wrap_Dem_intersect_start_length, METH_VARARGS, "\n"
+		"Dem_intersect_start_length(Dem self, CartesianFixed Cf, CartesianFixedLookVector Lv, double Resolution, double Start_length) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > Dem::intersect_start_length(const CartesianFixed &Cf, const CartesianFixedLookVector &Lv, double\n"
-		"Resolution, double Start_length) const\n"
 		"GeoCal::Dem::intersect_start_length\n"
-		"Determine the intersection along a look vector from a starting\n"
-		"position with the Dem (e.g., what point on the ground does a satellite see).\n"
-		"Resolution is the desired resolution in meters.\n"
+		"Determine the intersection along a look vector from a starting position with the\n"
+		"Dem (e.g., what point on the ground does a satellite see).  \n"
 		"\n"
-		"The starting length along the look vector is given. This might come\n"
-		"from ray casting code, or it might come from the intersect function of\n"
-		"this class. \n"
+		"Resolution is the desired resolution in meters.  \n"
+		"\n"
+		"The starting length along the look vector is given. This might come from ray\n"
+		"casting code, or it might come from the intersect function of this class.  \n"
+		"\n"
 		""},
 	 { "Dem_height_range", _wrap_Dem_height_range, METH_VARARGS, "\n"
+		"Dem_height_range(Dem self, GroundCoordinate Ulc, GroundCoordinate Lrc, double H_pad=10.0)\n"
 		"\n"
-		"virtual void GeoCal::Dem::height_range(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc, double\n"
-		"&Min_h, double &Max_h, double H_pad=10.0) const =0\n"
 		"GeoCal::Dem::height_range\n"
-		"Height range, in meters relative to the reference surface.\n"
-		"This is for the area covered by the ULC to LRC. Note that this might\n"
-		"be a bit approximate, you might find a height out of this range. But\n"
-		"this should give a reasonable range to use for things like generating\n"
-		"an RSM etc. An optional \"pad\" can be given to extend the range a bit\n"
-		"to make sure we cover the DEM height range. \n"
+		"Height range, in meters relative to the reference surface.  \n"
+		"\n"
+		"This is for the area covered by the ULC to LRC. Note that this might be a bit\n"
+		"approximate, you might find a height out of this range. But this should give a\n"
+		"reasonable range to use for things like generating an RSM etc. An optional\n"
+		"\"pad\" can be given to extend the range a bit to make sure we cover the DEM\n"
+		"height range.  \n"
+		"\n"
 		""},
 	 { "Dem_surface_point", _wrap_Dem_surface_point, METH_VARARGS, "\n"
+		"Dem_surface_point(Dem self, GroundCoordinate Gp) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const =0\n"
 		"GeoCal::Dem::surface_point\n"
-		"Return a GroundCoordinate on the surface directly above or below the\n"
-		"given point.\n"
+		"Return a GroundCoordinate on the surface directly above or below the given\n"
+		"point.  \n"
 		"\n"
 		""},
-	 { "Dem___str__", _wrap_Dem___str__, METH_O, NULL},
+	 { "Dem___str__", _wrap_Dem___str__, METH_O, "Dem___str__(Dem self) -> std::string"},
 	 { "delete_Dem", _wrap_delete_Dem, METH_O, "\n"
+		"delete_Dem(Dem self)\n"
 		"\n"
-		"virtual GeoCal::Dem::~Dem()\n"
 		"GeoCal::Dem::~Dem\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Dem_swigregister", Dem_swigregister, METH_O, NULL},
@@ -7402,93 +7410,101 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "Dem_distance_to_surface", _wrap_Dem_distance_to_surface, METH_VARARGS, "\n"
+		"distance_to_surface(Dem self, GroundCoordinate Gp) -> double\n"
 		"\n"
-		"virtual double GeoCal::Dem::distance_to_surface(const GroundCoordinate &Gp) const =0\n"
 		"GeoCal::Dem::distance_to_surface\n"
-		"Return distance to surface directly above/below the given point.\n"
-		"Distance is in meters. Positive means Gp is above the surface,\n"
-		"negative means below. \n"
+		"Return distance to surface directly above/below the given point.  \n"
+		"\n"
+		"Distance is in meters. Positive means Gp is above the surface, negative means\n"
+		"below.  \n"
+		"\n"
 		""},
 	 { "Dem_height_reference_surface", _wrap_Dem_height_reference_surface, METH_VARARGS, "\n"
+		"height_reference_surface(Dem self, GroundCoordinate Gp) -> double\n"
 		"\n"
-		"virtual double GeoCal::Dem::height_reference_surface(const GroundCoordinate &Gp) const =0\n"
 		"GeoCal::Dem::height_reference_surface\n"
-		"Return height of surface above/below the reference surface (e.g.,\n"
-		"WGS-84 for the earth).\n"
-		"Positive means above, negative below. This is in meters. \n"
+		"Return height of surface above/below the reference surface (e.g., WGS-84 for the\n"
+		"earth).  \n"
+		"\n"
+		"Positive means above, negative below. This is in meters.  \n"
+		"\n"
 		""},
 	 { "Dem_intersect", _wrap_Dem_intersect, METH_VARARGS, "\n"
+		"intersect(Dem self, CartesianFixed Cf, CartesianFixedLookVector Lv, double Resolution, double Max_height=9000) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > Dem::intersect(const CartesianFixed &Cf, const CartesianFixedLookVector &Lv, double\n"
-		"Resolution, double Max_height=9000) const\n"
 		"GeoCal::Dem::intersect\n"
-		"Determine the intersection along a look vector from a starting\n"
-		"position with the Dem (e.g., what point on the ground does a satellite see).\n"
-		"This is brute force, so it won't mistakenly pick a plain behind a\n"
-		"mountain.\n"
+		"Determine the intersection along a look vector from a starting position with the\n"
+		"Dem (e.g., what point on the ground does a satellite see).  \n"
 		"\n"
-		"Resolution is the desired resolution in meters. Max_height is the\n"
-		"maximum height we will encounter in the Dem - the default of 9 km is\n"
-		"higher than the highest point in the world. \n"
+		"This is brute force, so it won't mistakenly pick a plain behind a mountain.  \n"
+		"\n"
+		"Resolution is the desired resolution in meters. Max_height is the maximum height\n"
+		"we will encounter in the Dem - the default of 9 km is higher than the highest\n"
+		"point in the world.  \n"
+		"\n"
 		""},
 	 { "Dem_intersect_start_length", _wrap_Dem_intersect_start_length, METH_VARARGS, "\n"
+		"intersect_start_length(Dem self, CartesianFixed Cf, CartesianFixedLookVector Lv, double Resolution, double Start_length) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > Dem::intersect_start_length(const CartesianFixed &Cf, const CartesianFixedLookVector &Lv, double\n"
-		"Resolution, double Start_length) const\n"
 		"GeoCal::Dem::intersect_start_length\n"
-		"Determine the intersection along a look vector from a starting\n"
-		"position with the Dem (e.g., what point on the ground does a satellite see).\n"
-		"Resolution is the desired resolution in meters.\n"
+		"Determine the intersection along a look vector from a starting position with the\n"
+		"Dem (e.g., what point on the ground does a satellite see).  \n"
 		"\n"
-		"The starting length along the look vector is given. This might come\n"
-		"from ray casting code, or it might come from the intersect function of\n"
-		"this class. \n"
+		"Resolution is the desired resolution in meters.  \n"
+		"\n"
+		"The starting length along the look vector is given. This might come from ray\n"
+		"casting code, or it might come from the intersect function of this class.  \n"
+		"\n"
 		""},
 	 { "Dem_height_range", _wrap_Dem_height_range, METH_VARARGS, "\n"
+		"height_range(Dem self, GroundCoordinate Ulc, GroundCoordinate Lrc, double H_pad=10.0)\n"
 		"\n"
-		"virtual void GeoCal::Dem::height_range(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc, double\n"
-		"&Min_h, double &Max_h, double H_pad=10.0) const =0\n"
 		"GeoCal::Dem::height_range\n"
-		"Height range, in meters relative to the reference surface.\n"
-		"This is for the area covered by the ULC to LRC. Note that this might\n"
-		"be a bit approximate, you might find a height out of this range. But\n"
-		"this should give a reasonable range to use for things like generating\n"
-		"an RSM etc. An optional \"pad\" can be given to extend the range a bit\n"
-		"to make sure we cover the DEM height range. \n"
+		"Height range, in meters relative to the reference surface.  \n"
+		"\n"
+		"This is for the area covered by the ULC to LRC. Note that this might be a bit\n"
+		"approximate, you might find a height out of this range. But this should give a\n"
+		"reasonable range to use for things like generating an RSM etc. An optional\n"
+		"\"pad\" can be given to extend the range a bit to make sure we cover the DEM\n"
+		"height range.  \n"
+		"\n"
 		""},
 	 { "Dem_surface_point", _wrap_Dem_surface_point, METH_VARARGS, "\n"
+		"surface_point(Dem self, GroundCoordinate Gp) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::Dem::surface_point(const GroundCoordinate &Gp) const =0\n"
 		"GeoCal::Dem::surface_point\n"
-		"Return a GroundCoordinate on the surface directly above or below the\n"
-		"given point.\n"
+		"Return a GroundCoordinate on the surface directly above or below the given\n"
+		"point.  \n"
 		"\n"
 		""},
-	 { "Dem___str__", _wrap_Dem___str__, METH_O, NULL},
+	 { "Dem___str__", _wrap_Dem___str__, METH_O, "__str__(Dem self) -> std::string"},
 	 { "delete_Dem", _wrap_delete_Dem, METH_O, "\n"
+		"delete_Dem(Dem self)\n"
 		"\n"
-		"virtual GeoCal::Dem::~Dem()\n"
 		"GeoCal::Dem::~Dem\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Dem_swigregister", Dem_swigregister, METH_O, NULL},

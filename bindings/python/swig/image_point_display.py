@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _image_point_display.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _image_point_display:
 _image_point_display.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _image_point_display.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,12 +146,14 @@ import geocal_swig.geocal_exception
 class ImagePointDisplay(geocal_swig.gdal_raster_image.GdalRasterImage):
     r"""
 
-    This class is used to generate a display of image points.
 
-    This is useful for example to show the difference between initial and
-    final location during image matching
+    This class is used to generate a display of image points.  
 
-    C++ includes: image_point_display.h 
+    This is useful for example to show the difference between initial and final
+    location during image matching  
+
+    C++ includes: image_point_display.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -156,13 +161,12 @@ class ImagePointDisplay(geocal_swig.gdal_raster_image.GdalRasterImage):
 
     def __init__(self, *args):
         r"""
+        __init__(ImagePointDisplay self, boost::shared_ptr< GDALDataset > const & Data_set, int Band_id=1, int Number_tile=4) -> ImagePointDisplay
+        __init__(ImagePointDisplay self, std::string const & Fname, std::string const & Driver_name, MapInfo M, int Dt, std::string const & Options="", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> ImagePointDisplay
+        __init__(ImagePointDisplay self, std::string const & Fname, std::string const & Driver_name, int Number_line, int Number_sample, int Dt, std::string const & Options="", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> ImagePointDisplay
 
-        GeoCal::ImagePointDisplay::ImagePointDisplay(const std::string &Fname, const std::string &Driver_name, int
-        Number_line, int Number_sample, int Dt, const std::string
-        &Options="", int Number_tile=4, int Tile_number_line=-1, int
-        Tile_number_sample=-1)
         GeoCal::ImagePointDisplay::ImagePointDisplay
-        Constructor to write a new file.
+        Constructor to write a new file.  
 
         """
         _image_point_display.ImagePointDisplay_swiginit(self, _image_point_display.new_ImagePointDisplay(*args))

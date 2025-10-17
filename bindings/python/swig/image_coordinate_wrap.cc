@@ -13077,138 +13077,196 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ImageCoordinate", _wrap_new_ImageCoordinate, METH_VARARGS, "\n"
+		"ImageCoordinate(double Line, double Sample)\n"
+		"ImageCoordinate(VicarImageCoordinate Vic)\n"
+		"new_ImageCoordinate() -> ImageCoordinate\n"
 		"\n"
-		"GeoCal::ImageCoordinate::ImageCoordinate(double Line, double Sample)\n"
 		"GeoCal::ImageCoordinate::ImageCoordinate\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "ImageCoordinate_line_set", _wrap_ImageCoordinate_line_set, METH_VARARGS, NULL},
-	 { "ImageCoordinate_line_get", _wrap_ImageCoordinate_line_get, METH_O, NULL},
-	 { "ImageCoordinate_sample_set", _wrap_ImageCoordinate_sample_set, METH_VARARGS, NULL},
-	 { "ImageCoordinate_sample_get", _wrap_ImageCoordinate_sample_get, METH_O, NULL},
-	 { "ImageCoordinate___str__", _wrap_ImageCoordinate___str__, METH_O, NULL},
+	 { "ImageCoordinate_line_set", _wrap_ImageCoordinate_line_set, METH_VARARGS, "ImageCoordinate_line_set(ImageCoordinate self, double line)"},
+	 { "ImageCoordinate_line_get", _wrap_ImageCoordinate_line_get, METH_O, "ImageCoordinate_line_get(ImageCoordinate self) -> double"},
+	 { "ImageCoordinate_sample_set", _wrap_ImageCoordinate_sample_set, METH_VARARGS, "ImageCoordinate_sample_set(ImageCoordinate self, double sample)"},
+	 { "ImageCoordinate_sample_get", _wrap_ImageCoordinate_sample_get, METH_O, "ImageCoordinate_sample_get(ImageCoordinate self) -> double"},
+	 { "ImageCoordinate___str__", _wrap_ImageCoordinate___str__, METH_O, "ImageCoordinate___str__(ImageCoordinate self) -> std::string"},
 	 { "delete_ImageCoordinate", _wrap_delete_ImageCoordinate, METH_O, "\n"
+		"delete_ImageCoordinate(ImageCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::ImageCoordinate::~ImageCoordinate()\n"
 		"GeoCal::ImageCoordinate::~ImageCoordinate\n"
 		""},
 	 { "ImageCoordinate_swigregister", ImageCoordinate_swigregister, METH_O, NULL},
 	 { "ImageCoordinate_swiginit", ImageCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_VicarImageCoordinate", _wrap_new_VicarImageCoordinate, METH_VARARGS, "\n"
+		"VicarImageCoordinate(double Line, double Sample)\n"
+		"VicarImageCoordinate(ImageCoordinate Vic)\n"
+		"new_VicarImageCoordinate() -> VicarImageCoordinate\n"
 		"\n"
-		"GeoCal::VicarImageCoordinate::VicarImageCoordinate(double Line, double Sample)\n"
 		"GeoCal::VicarImageCoordinate::VicarImageCoordinate\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "VicarImageCoordinate_line_set", _wrap_VicarImageCoordinate_line_set, METH_VARARGS, NULL},
-	 { "VicarImageCoordinate_line_get", _wrap_VicarImageCoordinate_line_get, METH_O, NULL},
-	 { "VicarImageCoordinate_sample_set", _wrap_VicarImageCoordinate_sample_set, METH_VARARGS, NULL},
-	 { "VicarImageCoordinate_sample_get", _wrap_VicarImageCoordinate_sample_get, METH_O, NULL},
-	 { "VicarImageCoordinate___str__", _wrap_VicarImageCoordinate___str__, METH_O, NULL},
+	 { "VicarImageCoordinate_line_set", _wrap_VicarImageCoordinate_line_set, METH_VARARGS, "VicarImageCoordinate_line_set(VicarImageCoordinate self, double line)"},
+	 { "VicarImageCoordinate_line_get", _wrap_VicarImageCoordinate_line_get, METH_O, "VicarImageCoordinate_line_get(VicarImageCoordinate self) -> double"},
+	 { "VicarImageCoordinate_sample_set", _wrap_VicarImageCoordinate_sample_set, METH_VARARGS, "VicarImageCoordinate_sample_set(VicarImageCoordinate self, double sample)"},
+	 { "VicarImageCoordinate_sample_get", _wrap_VicarImageCoordinate_sample_get, METH_O, "VicarImageCoordinate_sample_get(VicarImageCoordinate self) -> double"},
+	 { "VicarImageCoordinate___str__", _wrap_VicarImageCoordinate___str__, METH_O, "VicarImageCoordinate___str__(VicarImageCoordinate self) -> std::string"},
 	 { "delete_VicarImageCoordinate", _wrap_delete_VicarImageCoordinate, METH_O, "\n"
+		"delete_VicarImageCoordinate(VicarImageCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::VicarImageCoordinate::~VicarImageCoordinate()\n"
 		"GeoCal::VicarImageCoordinate::~VicarImageCoordinate\n"
 		""},
 	 { "VicarImageCoordinate_swigregister", VicarImageCoordinate_swigregister, METH_O, NULL},
 	 { "VicarImageCoordinate_swiginit", VicarImageCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_ImageCoordinateWithDerivative", _wrap_new_ImageCoordinateWithDerivative, METH_VARARGS, "\n"
+		"ImageCoordinateWithDerivative(AutoDerivativeDouble Line, AutoDerivativeDouble Sample)\n"
+		"new_ImageCoordinateWithDerivative() -> ImageCoordinateWithDerivative\n"
 		"\n"
-		"GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative(const AutoDerivative< double > &Line, const AutoDerivative< double >\n"
-		"&Sample)\n"
 		"GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "ImageCoordinateWithDerivative_line_set", _wrap_ImageCoordinateWithDerivative_line_set, METH_VARARGS, NULL},
-	 { "ImageCoordinateWithDerivative_line_get", _wrap_ImageCoordinateWithDerivative_line_get, METH_O, NULL},
-	 { "ImageCoordinateWithDerivative_sample_set", _wrap_ImageCoordinateWithDerivative_sample_set, METH_VARARGS, NULL},
-	 { "ImageCoordinateWithDerivative_sample_get", _wrap_ImageCoordinateWithDerivative_sample_get, METH_O, NULL},
+	 { "ImageCoordinateWithDerivative_line_set", _wrap_ImageCoordinateWithDerivative_line_set, METH_VARARGS, "ImageCoordinateWithDerivative_line_set(ImageCoordinateWithDerivative self, AutoDerivativeDouble line)"},
+	 { "ImageCoordinateWithDerivative_line_get", _wrap_ImageCoordinateWithDerivative_line_get, METH_O, "ImageCoordinateWithDerivative_line_get(ImageCoordinateWithDerivative self) -> AutoDerivativeDouble"},
+	 { "ImageCoordinateWithDerivative_sample_set", _wrap_ImageCoordinateWithDerivative_sample_set, METH_VARARGS, "ImageCoordinateWithDerivative_sample_set(ImageCoordinateWithDerivative self, AutoDerivativeDouble sample)"},
+	 { "ImageCoordinateWithDerivative_sample_get", _wrap_ImageCoordinateWithDerivative_sample_get, METH_O, "ImageCoordinateWithDerivative_sample_get(ImageCoordinateWithDerivative self) -> AutoDerivativeDouble"},
 	 { "ImageCoordinateWithDerivative_value", _wrap_ImageCoordinateWithDerivative_value, METH_O, "\n"
+		"ImageCoordinateWithDerivative_value(ImageCoordinateWithDerivative self) -> ImageCoordinate\n"
 		"\n"
-		"ImageCoordinate GeoCal::ImageCoordinateWithDerivative::value() const\n"
 		"GeoCal::ImageCoordinateWithDerivative::value\n"
-		"Strip off derivative information and return ImageCoordinate.\n"
+		"Strip off derivative information and return ImageCoordinate.  \n"
 		"\n"
 		""},
-	 { "ImageCoordinateWithDerivative___str__", _wrap_ImageCoordinateWithDerivative___str__, METH_O, NULL},
+	 { "ImageCoordinateWithDerivative___str__", _wrap_ImageCoordinateWithDerivative___str__, METH_O, "ImageCoordinateWithDerivative___str__(ImageCoordinateWithDerivative self) -> std::string"},
 	 { "delete_ImageCoordinateWithDerivative", _wrap_delete_ImageCoordinateWithDerivative, METH_O, "\n"
+		"delete_ImageCoordinateWithDerivative(ImageCoordinateWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::ImageCoordinateWithDerivative::~ImageCoordinateWithDerivative()\n"
 		"GeoCal::ImageCoordinateWithDerivative::~ImageCoordinateWithDerivative\n"
 		""},
 	 { "ImageCoordinateWithDerivative_swigregister", ImageCoordinateWithDerivative_swigregister, METH_O, NULL},
 	 { "ImageCoordinateWithDerivative_swiginit", ImageCoordinateWithDerivative_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_iterator", _wrap_Vector_ImageCoordinate_iterator, METH_O, NULL},
-	 { "Vector_ImageCoordinate___nonzero__", _wrap_Vector_ImageCoordinate___nonzero__, METH_O, NULL},
-	 { "Vector_ImageCoordinate___bool__", _wrap_Vector_ImageCoordinate___bool__, METH_O, NULL},
-	 { "Vector_ImageCoordinate___len__", _wrap_Vector_ImageCoordinate___len__, METH_O, NULL},
-	 { "Vector_ImageCoordinate___getslice__", _wrap_Vector_ImageCoordinate___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___setslice__", _wrap_Vector_ImageCoordinate___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___delslice__", _wrap_Vector_ImageCoordinate___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___delitem__", _wrap_Vector_ImageCoordinate___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___getitem__", _wrap_Vector_ImageCoordinate___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___setitem__", _wrap_Vector_ImageCoordinate___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_pop", _wrap_Vector_ImageCoordinate_pop, METH_O, NULL},
-	 { "Vector_ImageCoordinate_append", _wrap_Vector_ImageCoordinate_append, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_empty", _wrap_Vector_ImageCoordinate_empty, METH_O, NULL},
-	 { "Vector_ImageCoordinate_size", _wrap_Vector_ImageCoordinate_size, METH_O, NULL},
-	 { "Vector_ImageCoordinate_swap", _wrap_Vector_ImageCoordinate_swap, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_begin", _wrap_Vector_ImageCoordinate_begin, METH_O, NULL},
-	 { "Vector_ImageCoordinate_end", _wrap_Vector_ImageCoordinate_end, METH_O, NULL},
-	 { "Vector_ImageCoordinate_rbegin", _wrap_Vector_ImageCoordinate_rbegin, METH_O, NULL},
-	 { "Vector_ImageCoordinate_rend", _wrap_Vector_ImageCoordinate_rend, METH_O, NULL},
-	 { "Vector_ImageCoordinate_clear", _wrap_Vector_ImageCoordinate_clear, METH_O, NULL},
-	 { "Vector_ImageCoordinate_get_allocator", _wrap_Vector_ImageCoordinate_get_allocator, METH_O, NULL},
-	 { "Vector_ImageCoordinate_pop_back", _wrap_Vector_ImageCoordinate_pop_back, METH_O, NULL},
-	 { "Vector_ImageCoordinate_erase", _wrap_Vector_ImageCoordinate_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ImageCoordinate", _wrap_new_Vector_ImageCoordinate, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_push_back", _wrap_Vector_ImageCoordinate_push_back, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_front", _wrap_Vector_ImageCoordinate_front, METH_O, NULL},
-	 { "Vector_ImageCoordinate_back", _wrap_Vector_ImageCoordinate_back, METH_O, NULL},
-	 { "Vector_ImageCoordinate_assign", _wrap_Vector_ImageCoordinate_assign, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_resize", _wrap_Vector_ImageCoordinate_resize, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_insert", _wrap_Vector_ImageCoordinate_insert, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_reserve", _wrap_Vector_ImageCoordinate_reserve, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_capacity", _wrap_Vector_ImageCoordinate_capacity, METH_O, NULL},
-	 { "delete_Vector_ImageCoordinate", _wrap_delete_Vector_ImageCoordinate, METH_O, NULL},
+	 { "Vector_ImageCoordinate_iterator", _wrap_Vector_ImageCoordinate_iterator, METH_O, "Vector_ImageCoordinate_iterator(Vector_ImageCoordinate self) -> SwigPyIterator"},
+	 { "Vector_ImageCoordinate___nonzero__", _wrap_Vector_ImageCoordinate___nonzero__, METH_O, "Vector_ImageCoordinate___nonzero__(Vector_ImageCoordinate self) -> bool"},
+	 { "Vector_ImageCoordinate___bool__", _wrap_Vector_ImageCoordinate___bool__, METH_O, "Vector_ImageCoordinate___bool__(Vector_ImageCoordinate self) -> bool"},
+	 { "Vector_ImageCoordinate___len__", _wrap_Vector_ImageCoordinate___len__, METH_O, "Vector_ImageCoordinate___len__(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::size_type"},
+	 { "Vector_ImageCoordinate___getslice__", _wrap_Vector_ImageCoordinate___getslice__, METH_VARARGS, "Vector_ImageCoordinate___getslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j) -> Vector_ImageCoordinate"},
+	 { "Vector_ImageCoordinate___setslice__", _wrap_Vector_ImageCoordinate___setslice__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate___setslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j)\n"
+		"Vector_ImageCoordinate___setslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j, Vector_ImageCoordinate v)\n"
+		""},
+	 { "Vector_ImageCoordinate___delslice__", _wrap_Vector_ImageCoordinate___delslice__, METH_VARARGS, "Vector_ImageCoordinate___delslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j)"},
+	 { "Vector_ImageCoordinate___delitem__", _wrap_Vector_ImageCoordinate___delitem__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate___delitem__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i)\n"
+		"Vector_ImageCoordinate___delitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ImageCoordinate___getitem__", _wrap_Vector_ImageCoordinate___getitem__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate___getitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice) -> Vector_ImageCoordinate\n"
+		"Vector_ImageCoordinate___getitem__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i) -> ImageCoordinate\n"
+		""},
+	 { "Vector_ImageCoordinate___setitem__", _wrap_Vector_ImageCoordinate___setitem__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate___setitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice, Vector_ImageCoordinate v)\n"
+		"Vector_ImageCoordinate___setitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_ImageCoordinate___setitem__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, ImageCoordinate x)\n"
+		""},
+	 { "Vector_ImageCoordinate_pop", _wrap_Vector_ImageCoordinate_pop, METH_O, "Vector_ImageCoordinate_pop(Vector_ImageCoordinate self) -> ImageCoordinate"},
+	 { "Vector_ImageCoordinate_append", _wrap_Vector_ImageCoordinate_append, METH_VARARGS, "Vector_ImageCoordinate_append(Vector_ImageCoordinate self, ImageCoordinate x)"},
+	 { "Vector_ImageCoordinate_empty", _wrap_Vector_ImageCoordinate_empty, METH_O, "Vector_ImageCoordinate_empty(Vector_ImageCoordinate self) -> bool"},
+	 { "Vector_ImageCoordinate_size", _wrap_Vector_ImageCoordinate_size, METH_O, "Vector_ImageCoordinate_size(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::size_type"},
+	 { "Vector_ImageCoordinate_swap", _wrap_Vector_ImageCoordinate_swap, METH_VARARGS, "Vector_ImageCoordinate_swap(Vector_ImageCoordinate self, Vector_ImageCoordinate v)"},
+	 { "Vector_ImageCoordinate_begin", _wrap_Vector_ImageCoordinate_begin, METH_O, "Vector_ImageCoordinate_begin(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::iterator"},
+	 { "Vector_ImageCoordinate_end", _wrap_Vector_ImageCoordinate_end, METH_O, "Vector_ImageCoordinate_end(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::iterator"},
+	 { "Vector_ImageCoordinate_rbegin", _wrap_Vector_ImageCoordinate_rbegin, METH_O, "Vector_ImageCoordinate_rbegin(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::reverse_iterator"},
+	 { "Vector_ImageCoordinate_rend", _wrap_Vector_ImageCoordinate_rend, METH_O, "Vector_ImageCoordinate_rend(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::reverse_iterator"},
+	 { "Vector_ImageCoordinate_clear", _wrap_Vector_ImageCoordinate_clear, METH_O, "Vector_ImageCoordinate_clear(Vector_ImageCoordinate self)"},
+	 { "Vector_ImageCoordinate_get_allocator", _wrap_Vector_ImageCoordinate_get_allocator, METH_O, "Vector_ImageCoordinate_get_allocator(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::allocator_type"},
+	 { "Vector_ImageCoordinate_pop_back", _wrap_Vector_ImageCoordinate_pop_back, METH_O, "Vector_ImageCoordinate_pop_back(Vector_ImageCoordinate self)"},
+	 { "Vector_ImageCoordinate_erase", _wrap_Vector_ImageCoordinate_erase, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate_erase(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator pos) -> std::vector< GeoCal::ImageCoordinate >::iterator\n"
+		"Vector_ImageCoordinate_erase(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator first, std::vector< GeoCal::ImageCoordinate >::iterator last) -> std::vector< GeoCal::ImageCoordinate >::iterator\n"
+		""},
+	 { "new_Vector_ImageCoordinate", _wrap_new_Vector_ImageCoordinate, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate()\n"
+		"Vector_ImageCoordinate(Vector_ImageCoordinate other)\n"
+		"Vector_ImageCoordinate(std::vector< GeoCal::ImageCoordinate >::size_type size)\n"
+		"new_Vector_ImageCoordinate(std::vector< GeoCal::ImageCoordinate >::size_type size, ImageCoordinate value) -> Vector_ImageCoordinate\n"
+		""},
+	 { "Vector_ImageCoordinate_push_back", _wrap_Vector_ImageCoordinate_push_back, METH_VARARGS, "Vector_ImageCoordinate_push_back(Vector_ImageCoordinate self, ImageCoordinate x)"},
+	 { "Vector_ImageCoordinate_front", _wrap_Vector_ImageCoordinate_front, METH_O, "Vector_ImageCoordinate_front(Vector_ImageCoordinate self) -> ImageCoordinate"},
+	 { "Vector_ImageCoordinate_back", _wrap_Vector_ImageCoordinate_back, METH_O, "Vector_ImageCoordinate_back(Vector_ImageCoordinate self) -> ImageCoordinate"},
+	 { "Vector_ImageCoordinate_assign", _wrap_Vector_ImageCoordinate_assign, METH_VARARGS, "Vector_ImageCoordinate_assign(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type n, ImageCoordinate x)"},
+	 { "Vector_ImageCoordinate_resize", _wrap_Vector_ImageCoordinate_resize, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate_resize(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type new_size)\n"
+		"Vector_ImageCoordinate_resize(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type new_size, ImageCoordinate x)\n"
+		""},
+	 { "Vector_ImageCoordinate_insert", _wrap_Vector_ImageCoordinate_insert, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate_insert(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator pos, ImageCoordinate x) -> std::vector< GeoCal::ImageCoordinate >::iterator\n"
+		"Vector_ImageCoordinate_insert(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator pos, std::vector< GeoCal::ImageCoordinate >::size_type n, ImageCoordinate x)\n"
+		""},
+	 { "Vector_ImageCoordinate_reserve", _wrap_Vector_ImageCoordinate_reserve, METH_VARARGS, "Vector_ImageCoordinate_reserve(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type n)"},
+	 { "Vector_ImageCoordinate_capacity", _wrap_Vector_ImageCoordinate_capacity, METH_O, "Vector_ImageCoordinate_capacity(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::size_type"},
+	 { "delete_Vector_ImageCoordinate", _wrap_delete_Vector_ImageCoordinate, METH_O, "delete_Vector_ImageCoordinate(Vector_ImageCoordinate self)"},
 	 { "Vector_ImageCoordinate_swigregister", Vector_ImageCoordinate_swigregister, METH_O, NULL},
 	 { "Vector_ImageCoordinate_swiginit", Vector_ImageCoordinate_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_iterator", _wrap_Vector_ImageCoordinatePtr_iterator, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___nonzero__", _wrap_Vector_ImageCoordinatePtr___nonzero__, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___bool__", _wrap_Vector_ImageCoordinatePtr___bool__, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___len__", _wrap_Vector_ImageCoordinatePtr___len__, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___getslice__", _wrap_Vector_ImageCoordinatePtr___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___setslice__", _wrap_Vector_ImageCoordinatePtr___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___delslice__", _wrap_Vector_ImageCoordinatePtr___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___delitem__", _wrap_Vector_ImageCoordinatePtr___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___getitem__", _wrap_Vector_ImageCoordinatePtr___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___setitem__", _wrap_Vector_ImageCoordinatePtr___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_pop", _wrap_Vector_ImageCoordinatePtr_pop, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_append", _wrap_Vector_ImageCoordinatePtr_append, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_empty", _wrap_Vector_ImageCoordinatePtr_empty, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_size", _wrap_Vector_ImageCoordinatePtr_size, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_swap", _wrap_Vector_ImageCoordinatePtr_swap, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_begin", _wrap_Vector_ImageCoordinatePtr_begin, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_end", _wrap_Vector_ImageCoordinatePtr_end, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_rbegin", _wrap_Vector_ImageCoordinatePtr_rbegin, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_rend", _wrap_Vector_ImageCoordinatePtr_rend, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_clear", _wrap_Vector_ImageCoordinatePtr_clear, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_get_allocator", _wrap_Vector_ImageCoordinatePtr_get_allocator, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_pop_back", _wrap_Vector_ImageCoordinatePtr_pop_back, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_erase", _wrap_Vector_ImageCoordinatePtr_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ImageCoordinatePtr", _wrap_new_Vector_ImageCoordinatePtr, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_push_back", _wrap_Vector_ImageCoordinatePtr_push_back, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_front", _wrap_Vector_ImageCoordinatePtr_front, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_back", _wrap_Vector_ImageCoordinatePtr_back, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_assign", _wrap_Vector_ImageCoordinatePtr_assign, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_resize", _wrap_Vector_ImageCoordinatePtr_resize, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_insert", _wrap_Vector_ImageCoordinatePtr_insert, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_reserve", _wrap_Vector_ImageCoordinatePtr_reserve, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_capacity", _wrap_Vector_ImageCoordinatePtr_capacity, METH_O, NULL},
-	 { "delete_Vector_ImageCoordinatePtr", _wrap_delete_Vector_ImageCoordinatePtr, METH_O, NULL},
+	 { "Vector_ImageCoordinatePtr_iterator", _wrap_Vector_ImageCoordinatePtr_iterator, METH_O, "Vector_ImageCoordinatePtr_iterator(Vector_ImageCoordinatePtr self) -> SwigPyIterator"},
+	 { "Vector_ImageCoordinatePtr___nonzero__", _wrap_Vector_ImageCoordinatePtr___nonzero__, METH_O, "Vector_ImageCoordinatePtr___nonzero__(Vector_ImageCoordinatePtr self) -> bool"},
+	 { "Vector_ImageCoordinatePtr___bool__", _wrap_Vector_ImageCoordinatePtr___bool__, METH_O, "Vector_ImageCoordinatePtr___bool__(Vector_ImageCoordinatePtr self) -> bool"},
+	 { "Vector_ImageCoordinatePtr___len__", _wrap_Vector_ImageCoordinatePtr___len__, METH_O, "Vector_ImageCoordinatePtr___len__(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type"},
+	 { "Vector_ImageCoordinatePtr___getslice__", _wrap_Vector_ImageCoordinatePtr___getslice__, METH_VARARGS, "Vector_ImageCoordinatePtr___getslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j) -> Vector_ImageCoordinatePtr"},
+	 { "Vector_ImageCoordinatePtr___setslice__", _wrap_Vector_ImageCoordinatePtr___setslice__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr___setslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j)\n"
+		"Vector_ImageCoordinatePtr___setslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j, Vector_ImageCoordinatePtr v)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr___delslice__", _wrap_Vector_ImageCoordinatePtr___delslice__, METH_VARARGS, "Vector_ImageCoordinatePtr___delslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j)"},
+	 { "Vector_ImageCoordinatePtr___delitem__", _wrap_Vector_ImageCoordinatePtr___delitem__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr___delitem__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i)\n"
+		"Vector_ImageCoordinatePtr___delitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr___getitem__", _wrap_Vector_ImageCoordinatePtr___getitem__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr___getitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice) -> Vector_ImageCoordinatePtr\n"
+		"Vector_ImageCoordinatePtr___getitem__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &\n"
+		""},
+	 { "Vector_ImageCoordinatePtr___setitem__", _wrap_Vector_ImageCoordinatePtr___setitem__, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr___setitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice, Vector_ImageCoordinatePtr v)\n"
+		"Vector_ImageCoordinatePtr___setitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_ImageCoordinatePtr___setitem__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_pop", _wrap_Vector_ImageCoordinatePtr_pop, METH_O, "Vector_ImageCoordinatePtr_pop(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type"},
+	 { "Vector_ImageCoordinatePtr_append", _wrap_Vector_ImageCoordinatePtr_append, METH_VARARGS, "Vector_ImageCoordinatePtr_append(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)"},
+	 { "Vector_ImageCoordinatePtr_empty", _wrap_Vector_ImageCoordinatePtr_empty, METH_O, "Vector_ImageCoordinatePtr_empty(Vector_ImageCoordinatePtr self) -> bool"},
+	 { "Vector_ImageCoordinatePtr_size", _wrap_Vector_ImageCoordinatePtr_size, METH_O, "Vector_ImageCoordinatePtr_size(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type"},
+	 { "Vector_ImageCoordinatePtr_swap", _wrap_Vector_ImageCoordinatePtr_swap, METH_VARARGS, "Vector_ImageCoordinatePtr_swap(Vector_ImageCoordinatePtr self, Vector_ImageCoordinatePtr v)"},
+	 { "Vector_ImageCoordinatePtr_begin", _wrap_Vector_ImageCoordinatePtr_begin, METH_O, "Vector_ImageCoordinatePtr_begin(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator"},
+	 { "Vector_ImageCoordinatePtr_end", _wrap_Vector_ImageCoordinatePtr_end, METH_O, "Vector_ImageCoordinatePtr_end(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator"},
+	 { "Vector_ImageCoordinatePtr_rbegin", _wrap_Vector_ImageCoordinatePtr_rbegin, METH_O, "Vector_ImageCoordinatePtr_rbegin(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::reverse_iterator"},
+	 { "Vector_ImageCoordinatePtr_rend", _wrap_Vector_ImageCoordinatePtr_rend, METH_O, "Vector_ImageCoordinatePtr_rend(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::reverse_iterator"},
+	 { "Vector_ImageCoordinatePtr_clear", _wrap_Vector_ImageCoordinatePtr_clear, METH_O, "Vector_ImageCoordinatePtr_clear(Vector_ImageCoordinatePtr self)"},
+	 { "Vector_ImageCoordinatePtr_get_allocator", _wrap_Vector_ImageCoordinatePtr_get_allocator, METH_O, "Vector_ImageCoordinatePtr_get_allocator(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::allocator_type"},
+	 { "Vector_ImageCoordinatePtr_pop_back", _wrap_Vector_ImageCoordinatePtr_pop_back, METH_O, "Vector_ImageCoordinatePtr_pop_back(Vector_ImageCoordinatePtr self)"},
+	 { "Vector_ImageCoordinatePtr_erase", _wrap_Vector_ImageCoordinatePtr_erase, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr_erase(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator\n"
+		"Vector_ImageCoordinatePtr_erase(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator first, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator\n"
+		""},
+	 { "new_Vector_ImageCoordinatePtr", _wrap_new_Vector_ImageCoordinatePtr, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr()\n"
+		"Vector_ImageCoordinatePtr(Vector_ImageCoordinatePtr other)\n"
+		"Vector_ImageCoordinatePtr(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type size)\n"
+		"new_Vector_ImageCoordinatePtr(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & value) -> Vector_ImageCoordinatePtr\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_push_back", _wrap_Vector_ImageCoordinatePtr_push_back, METH_VARARGS, "Vector_ImageCoordinatePtr_push_back(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)"},
+	 { "Vector_ImageCoordinatePtr_front", _wrap_Vector_ImageCoordinatePtr_front, METH_O, "Vector_ImageCoordinatePtr_front(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &"},
+	 { "Vector_ImageCoordinatePtr_back", _wrap_Vector_ImageCoordinatePtr_back, METH_O, "Vector_ImageCoordinatePtr_back(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &"},
+	 { "Vector_ImageCoordinatePtr_assign", _wrap_Vector_ImageCoordinatePtr_assign, METH_VARARGS, "Vector_ImageCoordinatePtr_assign(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)"},
+	 { "Vector_ImageCoordinatePtr_resize", _wrap_Vector_ImageCoordinatePtr_resize, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr_resize(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type new_size)\n"
+		"Vector_ImageCoordinatePtr_resize(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_insert", _wrap_Vector_ImageCoordinatePtr_insert, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr_insert(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator\n"
+		"Vector_ImageCoordinatePtr_insert(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_reserve", _wrap_Vector_ImageCoordinatePtr_reserve, METH_VARARGS, "Vector_ImageCoordinatePtr_reserve(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type n)"},
+	 { "Vector_ImageCoordinatePtr_capacity", _wrap_Vector_ImageCoordinatePtr_capacity, METH_O, "Vector_ImageCoordinatePtr_capacity(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type"},
+	 { "delete_Vector_ImageCoordinatePtr", _wrap_delete_Vector_ImageCoordinatePtr, METH_O, "delete_Vector_ImageCoordinatePtr(Vector_ImageCoordinatePtr self)"},
 	 { "Vector_ImageCoordinatePtr_swigregister", Vector_ImageCoordinatePtr_swigregister, METH_O, NULL},
 	 { "Vector_ImageCoordinatePtr_swiginit", Vector_ImageCoordinatePtr_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -13236,138 +13294,196 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ImageCoordinate", _wrap_new_ImageCoordinate, METH_VARARGS, "\n"
+		"ImageCoordinate(double Line, double Sample)\n"
+		"ImageCoordinate(VicarImageCoordinate Vic)\n"
+		"new_ImageCoordinate() -> ImageCoordinate\n"
 		"\n"
-		"GeoCal::ImageCoordinate::ImageCoordinate(double Line, double Sample)\n"
 		"GeoCal::ImageCoordinate::ImageCoordinate\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "ImageCoordinate_line_set", _wrap_ImageCoordinate_line_set, METH_VARARGS, NULL},
-	 { "ImageCoordinate_line_get", _wrap_ImageCoordinate_line_get, METH_O, NULL},
-	 { "ImageCoordinate_sample_set", _wrap_ImageCoordinate_sample_set, METH_VARARGS, NULL},
-	 { "ImageCoordinate_sample_get", _wrap_ImageCoordinate_sample_get, METH_O, NULL},
-	 { "ImageCoordinate___str__", _wrap_ImageCoordinate___str__, METH_O, NULL},
+	 { "ImageCoordinate_line_set", _wrap_ImageCoordinate_line_set, METH_VARARGS, "ImageCoordinate_line_set(ImageCoordinate self, double line)"},
+	 { "ImageCoordinate_line_get", _wrap_ImageCoordinate_line_get, METH_O, "ImageCoordinate_line_get(ImageCoordinate self) -> double"},
+	 { "ImageCoordinate_sample_set", _wrap_ImageCoordinate_sample_set, METH_VARARGS, "ImageCoordinate_sample_set(ImageCoordinate self, double sample)"},
+	 { "ImageCoordinate_sample_get", _wrap_ImageCoordinate_sample_get, METH_O, "ImageCoordinate_sample_get(ImageCoordinate self) -> double"},
+	 { "ImageCoordinate___str__", _wrap_ImageCoordinate___str__, METH_O, "__str__(ImageCoordinate self) -> std::string"},
 	 { "delete_ImageCoordinate", _wrap_delete_ImageCoordinate, METH_O, "\n"
+		"delete_ImageCoordinate(ImageCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::ImageCoordinate::~ImageCoordinate()\n"
 		"GeoCal::ImageCoordinate::~ImageCoordinate\n"
 		""},
 	 { "ImageCoordinate_swigregister", ImageCoordinate_swigregister, METH_O, NULL},
 	 { "ImageCoordinate_swiginit", ImageCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_VicarImageCoordinate", _wrap_new_VicarImageCoordinate, METH_VARARGS, "\n"
+		"VicarImageCoordinate(double Line, double Sample)\n"
+		"VicarImageCoordinate(ImageCoordinate Vic)\n"
+		"new_VicarImageCoordinate() -> VicarImageCoordinate\n"
 		"\n"
-		"GeoCal::VicarImageCoordinate::VicarImageCoordinate(double Line, double Sample)\n"
 		"GeoCal::VicarImageCoordinate::VicarImageCoordinate\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "VicarImageCoordinate_line_set", _wrap_VicarImageCoordinate_line_set, METH_VARARGS, NULL},
-	 { "VicarImageCoordinate_line_get", _wrap_VicarImageCoordinate_line_get, METH_O, NULL},
-	 { "VicarImageCoordinate_sample_set", _wrap_VicarImageCoordinate_sample_set, METH_VARARGS, NULL},
-	 { "VicarImageCoordinate_sample_get", _wrap_VicarImageCoordinate_sample_get, METH_O, NULL},
-	 { "VicarImageCoordinate___str__", _wrap_VicarImageCoordinate___str__, METH_O, NULL},
+	 { "VicarImageCoordinate_line_set", _wrap_VicarImageCoordinate_line_set, METH_VARARGS, "VicarImageCoordinate_line_set(VicarImageCoordinate self, double line)"},
+	 { "VicarImageCoordinate_line_get", _wrap_VicarImageCoordinate_line_get, METH_O, "VicarImageCoordinate_line_get(VicarImageCoordinate self) -> double"},
+	 { "VicarImageCoordinate_sample_set", _wrap_VicarImageCoordinate_sample_set, METH_VARARGS, "VicarImageCoordinate_sample_set(VicarImageCoordinate self, double sample)"},
+	 { "VicarImageCoordinate_sample_get", _wrap_VicarImageCoordinate_sample_get, METH_O, "VicarImageCoordinate_sample_get(VicarImageCoordinate self) -> double"},
+	 { "VicarImageCoordinate___str__", _wrap_VicarImageCoordinate___str__, METH_O, "__str__(VicarImageCoordinate self) -> std::string"},
 	 { "delete_VicarImageCoordinate", _wrap_delete_VicarImageCoordinate, METH_O, "\n"
+		"delete_VicarImageCoordinate(VicarImageCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::VicarImageCoordinate::~VicarImageCoordinate()\n"
 		"GeoCal::VicarImageCoordinate::~VicarImageCoordinate\n"
 		""},
 	 { "VicarImageCoordinate_swigregister", VicarImageCoordinate_swigregister, METH_O, NULL},
 	 { "VicarImageCoordinate_swiginit", VicarImageCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_ImageCoordinateWithDerivative", _wrap_new_ImageCoordinateWithDerivative, METH_VARARGS, "\n"
+		"ImageCoordinateWithDerivative(AutoDerivativeDouble Line, AutoDerivativeDouble Sample)\n"
+		"new_ImageCoordinateWithDerivative() -> ImageCoordinateWithDerivative\n"
 		"\n"
-		"GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative(const AutoDerivative< double > &Line, const AutoDerivative< double >\n"
-		"&Sample)\n"
 		"GeoCal::ImageCoordinateWithDerivative::ImageCoordinateWithDerivative\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "ImageCoordinateWithDerivative_line_set", _wrap_ImageCoordinateWithDerivative_line_set, METH_VARARGS, NULL},
-	 { "ImageCoordinateWithDerivative_line_get", _wrap_ImageCoordinateWithDerivative_line_get, METH_O, NULL},
-	 { "ImageCoordinateWithDerivative_sample_set", _wrap_ImageCoordinateWithDerivative_sample_set, METH_VARARGS, NULL},
-	 { "ImageCoordinateWithDerivative_sample_get", _wrap_ImageCoordinateWithDerivative_sample_get, METH_O, NULL},
+	 { "ImageCoordinateWithDerivative_line_set", _wrap_ImageCoordinateWithDerivative_line_set, METH_VARARGS, "ImageCoordinateWithDerivative_line_set(ImageCoordinateWithDerivative self, AutoDerivativeDouble line)"},
+	 { "ImageCoordinateWithDerivative_line_get", _wrap_ImageCoordinateWithDerivative_line_get, METH_O, "ImageCoordinateWithDerivative_line_get(ImageCoordinateWithDerivative self) -> AutoDerivativeDouble"},
+	 { "ImageCoordinateWithDerivative_sample_set", _wrap_ImageCoordinateWithDerivative_sample_set, METH_VARARGS, "ImageCoordinateWithDerivative_sample_set(ImageCoordinateWithDerivative self, AutoDerivativeDouble sample)"},
+	 { "ImageCoordinateWithDerivative_sample_get", _wrap_ImageCoordinateWithDerivative_sample_get, METH_O, "ImageCoordinateWithDerivative_sample_get(ImageCoordinateWithDerivative self) -> AutoDerivativeDouble"},
 	 { "ImageCoordinateWithDerivative_value", _wrap_ImageCoordinateWithDerivative_value, METH_O, "\n"
+		"value(ImageCoordinateWithDerivative self) -> ImageCoordinate\n"
 		"\n"
-		"ImageCoordinate GeoCal::ImageCoordinateWithDerivative::value() const\n"
 		"GeoCal::ImageCoordinateWithDerivative::value\n"
-		"Strip off derivative information and return ImageCoordinate.\n"
+		"Strip off derivative information and return ImageCoordinate.  \n"
 		"\n"
 		""},
-	 { "ImageCoordinateWithDerivative___str__", _wrap_ImageCoordinateWithDerivative___str__, METH_O, NULL},
+	 { "ImageCoordinateWithDerivative___str__", _wrap_ImageCoordinateWithDerivative___str__, METH_O, "__str__(ImageCoordinateWithDerivative self) -> std::string"},
 	 { "delete_ImageCoordinateWithDerivative", _wrap_delete_ImageCoordinateWithDerivative, METH_O, "\n"
+		"delete_ImageCoordinateWithDerivative(ImageCoordinateWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::ImageCoordinateWithDerivative::~ImageCoordinateWithDerivative()\n"
 		"GeoCal::ImageCoordinateWithDerivative::~ImageCoordinateWithDerivative\n"
 		""},
 	 { "ImageCoordinateWithDerivative_swigregister", ImageCoordinateWithDerivative_swigregister, METH_O, NULL},
 	 { "ImageCoordinateWithDerivative_swiginit", ImageCoordinateWithDerivative_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_iterator", _wrap_Vector_ImageCoordinate_iterator, METH_O, NULL},
-	 { "Vector_ImageCoordinate___nonzero__", _wrap_Vector_ImageCoordinate___nonzero__, METH_O, NULL},
-	 { "Vector_ImageCoordinate___bool__", _wrap_Vector_ImageCoordinate___bool__, METH_O, NULL},
-	 { "Vector_ImageCoordinate___len__", _wrap_Vector_ImageCoordinate___len__, METH_O, NULL},
-	 { "Vector_ImageCoordinate___getslice__", _wrap_Vector_ImageCoordinate___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___setslice__", _wrap_Vector_ImageCoordinate___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___delslice__", _wrap_Vector_ImageCoordinate___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___delitem__", _wrap_Vector_ImageCoordinate___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___getitem__", _wrap_Vector_ImageCoordinate___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate___setitem__", _wrap_Vector_ImageCoordinate___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_pop", _wrap_Vector_ImageCoordinate_pop, METH_O, NULL},
-	 { "Vector_ImageCoordinate_append", _wrap_Vector_ImageCoordinate_append, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_empty", _wrap_Vector_ImageCoordinate_empty, METH_O, NULL},
-	 { "Vector_ImageCoordinate_size", _wrap_Vector_ImageCoordinate_size, METH_O, NULL},
-	 { "Vector_ImageCoordinate_swap", _wrap_Vector_ImageCoordinate_swap, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_begin", _wrap_Vector_ImageCoordinate_begin, METH_O, NULL},
-	 { "Vector_ImageCoordinate_end", _wrap_Vector_ImageCoordinate_end, METH_O, NULL},
-	 { "Vector_ImageCoordinate_rbegin", _wrap_Vector_ImageCoordinate_rbegin, METH_O, NULL},
-	 { "Vector_ImageCoordinate_rend", _wrap_Vector_ImageCoordinate_rend, METH_O, NULL},
-	 { "Vector_ImageCoordinate_clear", _wrap_Vector_ImageCoordinate_clear, METH_O, NULL},
-	 { "Vector_ImageCoordinate_get_allocator", _wrap_Vector_ImageCoordinate_get_allocator, METH_O, NULL},
-	 { "Vector_ImageCoordinate_pop_back", _wrap_Vector_ImageCoordinate_pop_back, METH_O, NULL},
-	 { "Vector_ImageCoordinate_erase", _wrap_Vector_ImageCoordinate_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ImageCoordinate", _wrap_new_Vector_ImageCoordinate, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_push_back", _wrap_Vector_ImageCoordinate_push_back, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_front", _wrap_Vector_ImageCoordinate_front, METH_O, NULL},
-	 { "Vector_ImageCoordinate_back", _wrap_Vector_ImageCoordinate_back, METH_O, NULL},
-	 { "Vector_ImageCoordinate_assign", _wrap_Vector_ImageCoordinate_assign, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_resize", _wrap_Vector_ImageCoordinate_resize, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_insert", _wrap_Vector_ImageCoordinate_insert, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_reserve", _wrap_Vector_ImageCoordinate_reserve, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinate_capacity", _wrap_Vector_ImageCoordinate_capacity, METH_O, NULL},
-	 { "delete_Vector_ImageCoordinate", _wrap_delete_Vector_ImageCoordinate, METH_O, NULL},
+	 { "Vector_ImageCoordinate_iterator", _wrap_Vector_ImageCoordinate_iterator, METH_O, "iterator(Vector_ImageCoordinate self) -> SwigPyIterator"},
+	 { "Vector_ImageCoordinate___nonzero__", _wrap_Vector_ImageCoordinate___nonzero__, METH_O, "__nonzero__(Vector_ImageCoordinate self) -> bool"},
+	 { "Vector_ImageCoordinate___bool__", _wrap_Vector_ImageCoordinate___bool__, METH_O, "__bool__(Vector_ImageCoordinate self) -> bool"},
+	 { "Vector_ImageCoordinate___len__", _wrap_Vector_ImageCoordinate___len__, METH_O, "__len__(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::size_type"},
+	 { "Vector_ImageCoordinate___getslice__", _wrap_Vector_ImageCoordinate___getslice__, METH_VARARGS, "__getslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j) -> Vector_ImageCoordinate"},
+	 { "Vector_ImageCoordinate___setslice__", _wrap_Vector_ImageCoordinate___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j)\n"
+		"__setslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j, Vector_ImageCoordinate v)\n"
+		""},
+	 { "Vector_ImageCoordinate___delslice__", _wrap_Vector_ImageCoordinate___delslice__, METH_VARARGS, "__delslice__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, std::vector< GeoCal::ImageCoordinate >::difference_type j)"},
+	 { "Vector_ImageCoordinate___delitem__", _wrap_Vector_ImageCoordinate___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i)\n"
+		"__delitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ImageCoordinate___getitem__", _wrap_Vector_ImageCoordinate___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice) -> Vector_ImageCoordinate\n"
+		"__getitem__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i) -> ImageCoordinate\n"
+		""},
+	 { "Vector_ImageCoordinate___setitem__", _wrap_Vector_ImageCoordinate___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice, Vector_ImageCoordinate v)\n"
+		"__setitem__(Vector_ImageCoordinate self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::difference_type i, ImageCoordinate x)\n"
+		""},
+	 { "Vector_ImageCoordinate_pop", _wrap_Vector_ImageCoordinate_pop, METH_O, "pop(Vector_ImageCoordinate self) -> ImageCoordinate"},
+	 { "Vector_ImageCoordinate_append", _wrap_Vector_ImageCoordinate_append, METH_VARARGS, "append(Vector_ImageCoordinate self, ImageCoordinate x)"},
+	 { "Vector_ImageCoordinate_empty", _wrap_Vector_ImageCoordinate_empty, METH_O, "empty(Vector_ImageCoordinate self) -> bool"},
+	 { "Vector_ImageCoordinate_size", _wrap_Vector_ImageCoordinate_size, METH_O, "size(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::size_type"},
+	 { "Vector_ImageCoordinate_swap", _wrap_Vector_ImageCoordinate_swap, METH_VARARGS, "swap(Vector_ImageCoordinate self, Vector_ImageCoordinate v)"},
+	 { "Vector_ImageCoordinate_begin", _wrap_Vector_ImageCoordinate_begin, METH_O, "begin(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::iterator"},
+	 { "Vector_ImageCoordinate_end", _wrap_Vector_ImageCoordinate_end, METH_O, "end(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::iterator"},
+	 { "Vector_ImageCoordinate_rbegin", _wrap_Vector_ImageCoordinate_rbegin, METH_O, "rbegin(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::reverse_iterator"},
+	 { "Vector_ImageCoordinate_rend", _wrap_Vector_ImageCoordinate_rend, METH_O, "rend(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::reverse_iterator"},
+	 { "Vector_ImageCoordinate_clear", _wrap_Vector_ImageCoordinate_clear, METH_O, "clear(Vector_ImageCoordinate self)"},
+	 { "Vector_ImageCoordinate_get_allocator", _wrap_Vector_ImageCoordinate_get_allocator, METH_O, "get_allocator(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::allocator_type"},
+	 { "Vector_ImageCoordinate_pop_back", _wrap_Vector_ImageCoordinate_pop_back, METH_O, "pop_back(Vector_ImageCoordinate self)"},
+	 { "Vector_ImageCoordinate_erase", _wrap_Vector_ImageCoordinate_erase, METH_VARARGS, "\n"
+		"erase(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator pos) -> std::vector< GeoCal::ImageCoordinate >::iterator\n"
+		"erase(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator first, std::vector< GeoCal::ImageCoordinate >::iterator last) -> std::vector< GeoCal::ImageCoordinate >::iterator\n"
+		""},
+	 { "new_Vector_ImageCoordinate", _wrap_new_Vector_ImageCoordinate, METH_VARARGS, "\n"
+		"Vector_ImageCoordinate()\n"
+		"Vector_ImageCoordinate(Vector_ImageCoordinate other)\n"
+		"Vector_ImageCoordinate(std::vector< GeoCal::ImageCoordinate >::size_type size)\n"
+		"new_Vector_ImageCoordinate(std::vector< GeoCal::ImageCoordinate >::size_type size, ImageCoordinate value) -> Vector_ImageCoordinate\n"
+		""},
+	 { "Vector_ImageCoordinate_push_back", _wrap_Vector_ImageCoordinate_push_back, METH_VARARGS, "push_back(Vector_ImageCoordinate self, ImageCoordinate x)"},
+	 { "Vector_ImageCoordinate_front", _wrap_Vector_ImageCoordinate_front, METH_O, "front(Vector_ImageCoordinate self) -> ImageCoordinate"},
+	 { "Vector_ImageCoordinate_back", _wrap_Vector_ImageCoordinate_back, METH_O, "back(Vector_ImageCoordinate self) -> ImageCoordinate"},
+	 { "Vector_ImageCoordinate_assign", _wrap_Vector_ImageCoordinate_assign, METH_VARARGS, "assign(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type n, ImageCoordinate x)"},
+	 { "Vector_ImageCoordinate_resize", _wrap_Vector_ImageCoordinate_resize, METH_VARARGS, "\n"
+		"resize(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type new_size)\n"
+		"resize(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type new_size, ImageCoordinate x)\n"
+		""},
+	 { "Vector_ImageCoordinate_insert", _wrap_Vector_ImageCoordinate_insert, METH_VARARGS, "\n"
+		"insert(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator pos, ImageCoordinate x) -> std::vector< GeoCal::ImageCoordinate >::iterator\n"
+		"insert(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::iterator pos, std::vector< GeoCal::ImageCoordinate >::size_type n, ImageCoordinate x)\n"
+		""},
+	 { "Vector_ImageCoordinate_reserve", _wrap_Vector_ImageCoordinate_reserve, METH_VARARGS, "reserve(Vector_ImageCoordinate self, std::vector< GeoCal::ImageCoordinate >::size_type n)"},
+	 { "Vector_ImageCoordinate_capacity", _wrap_Vector_ImageCoordinate_capacity, METH_O, "capacity(Vector_ImageCoordinate self) -> std::vector< GeoCal::ImageCoordinate >::size_type"},
+	 { "delete_Vector_ImageCoordinate", _wrap_delete_Vector_ImageCoordinate, METH_O, "delete_Vector_ImageCoordinate(Vector_ImageCoordinate self)"},
 	 { "Vector_ImageCoordinate_swigregister", Vector_ImageCoordinate_swigregister, METH_O, NULL},
 	 { "Vector_ImageCoordinate_swiginit", Vector_ImageCoordinate_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_iterator", _wrap_Vector_ImageCoordinatePtr_iterator, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___nonzero__", _wrap_Vector_ImageCoordinatePtr___nonzero__, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___bool__", _wrap_Vector_ImageCoordinatePtr___bool__, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___len__", _wrap_Vector_ImageCoordinatePtr___len__, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr___getslice__", _wrap_Vector_ImageCoordinatePtr___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___setslice__", _wrap_Vector_ImageCoordinatePtr___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___delslice__", _wrap_Vector_ImageCoordinatePtr___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___delitem__", _wrap_Vector_ImageCoordinatePtr___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___getitem__", _wrap_Vector_ImageCoordinatePtr___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr___setitem__", _wrap_Vector_ImageCoordinatePtr___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_pop", _wrap_Vector_ImageCoordinatePtr_pop, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_append", _wrap_Vector_ImageCoordinatePtr_append, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_empty", _wrap_Vector_ImageCoordinatePtr_empty, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_size", _wrap_Vector_ImageCoordinatePtr_size, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_swap", _wrap_Vector_ImageCoordinatePtr_swap, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_begin", _wrap_Vector_ImageCoordinatePtr_begin, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_end", _wrap_Vector_ImageCoordinatePtr_end, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_rbegin", _wrap_Vector_ImageCoordinatePtr_rbegin, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_rend", _wrap_Vector_ImageCoordinatePtr_rend, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_clear", _wrap_Vector_ImageCoordinatePtr_clear, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_get_allocator", _wrap_Vector_ImageCoordinatePtr_get_allocator, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_pop_back", _wrap_Vector_ImageCoordinatePtr_pop_back, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_erase", _wrap_Vector_ImageCoordinatePtr_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ImageCoordinatePtr", _wrap_new_Vector_ImageCoordinatePtr, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_push_back", _wrap_Vector_ImageCoordinatePtr_push_back, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_front", _wrap_Vector_ImageCoordinatePtr_front, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_back", _wrap_Vector_ImageCoordinatePtr_back, METH_O, NULL},
-	 { "Vector_ImageCoordinatePtr_assign", _wrap_Vector_ImageCoordinatePtr_assign, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_resize", _wrap_Vector_ImageCoordinatePtr_resize, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_insert", _wrap_Vector_ImageCoordinatePtr_insert, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_reserve", _wrap_Vector_ImageCoordinatePtr_reserve, METH_VARARGS, NULL},
-	 { "Vector_ImageCoordinatePtr_capacity", _wrap_Vector_ImageCoordinatePtr_capacity, METH_O, NULL},
-	 { "delete_Vector_ImageCoordinatePtr", _wrap_delete_Vector_ImageCoordinatePtr, METH_O, NULL},
+	 { "Vector_ImageCoordinatePtr_iterator", _wrap_Vector_ImageCoordinatePtr_iterator, METH_O, "iterator(Vector_ImageCoordinatePtr self) -> SwigPyIterator"},
+	 { "Vector_ImageCoordinatePtr___nonzero__", _wrap_Vector_ImageCoordinatePtr___nonzero__, METH_O, "__nonzero__(Vector_ImageCoordinatePtr self) -> bool"},
+	 { "Vector_ImageCoordinatePtr___bool__", _wrap_Vector_ImageCoordinatePtr___bool__, METH_O, "__bool__(Vector_ImageCoordinatePtr self) -> bool"},
+	 { "Vector_ImageCoordinatePtr___len__", _wrap_Vector_ImageCoordinatePtr___len__, METH_O, "__len__(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type"},
+	 { "Vector_ImageCoordinatePtr___getslice__", _wrap_Vector_ImageCoordinatePtr___getslice__, METH_VARARGS, "__getslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j) -> Vector_ImageCoordinatePtr"},
+	 { "Vector_ImageCoordinatePtr___setslice__", _wrap_Vector_ImageCoordinatePtr___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j)\n"
+		"__setslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j, Vector_ImageCoordinatePtr v)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr___delslice__", _wrap_Vector_ImageCoordinatePtr___delslice__, METH_VARARGS, "__delslice__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type j)"},
+	 { "Vector_ImageCoordinatePtr___delitem__", _wrap_Vector_ImageCoordinatePtr___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i)\n"
+		"__delitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr___getitem__", _wrap_Vector_ImageCoordinatePtr___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice) -> Vector_ImageCoordinatePtr\n"
+		"__getitem__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &\n"
+		""},
+	 { "Vector_ImageCoordinatePtr___setitem__", _wrap_Vector_ImageCoordinatePtr___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice, Vector_ImageCoordinatePtr v)\n"
+		"__setitem__(Vector_ImageCoordinatePtr self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_pop", _wrap_Vector_ImageCoordinatePtr_pop, METH_O, "pop(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type"},
+	 { "Vector_ImageCoordinatePtr_append", _wrap_Vector_ImageCoordinatePtr_append, METH_VARARGS, "append(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)"},
+	 { "Vector_ImageCoordinatePtr_empty", _wrap_Vector_ImageCoordinatePtr_empty, METH_O, "empty(Vector_ImageCoordinatePtr self) -> bool"},
+	 { "Vector_ImageCoordinatePtr_size", _wrap_Vector_ImageCoordinatePtr_size, METH_O, "size(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type"},
+	 { "Vector_ImageCoordinatePtr_swap", _wrap_Vector_ImageCoordinatePtr_swap, METH_VARARGS, "swap(Vector_ImageCoordinatePtr self, Vector_ImageCoordinatePtr v)"},
+	 { "Vector_ImageCoordinatePtr_begin", _wrap_Vector_ImageCoordinatePtr_begin, METH_O, "begin(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator"},
+	 { "Vector_ImageCoordinatePtr_end", _wrap_Vector_ImageCoordinatePtr_end, METH_O, "end(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator"},
+	 { "Vector_ImageCoordinatePtr_rbegin", _wrap_Vector_ImageCoordinatePtr_rbegin, METH_O, "rbegin(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::reverse_iterator"},
+	 { "Vector_ImageCoordinatePtr_rend", _wrap_Vector_ImageCoordinatePtr_rend, METH_O, "rend(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::reverse_iterator"},
+	 { "Vector_ImageCoordinatePtr_clear", _wrap_Vector_ImageCoordinatePtr_clear, METH_O, "clear(Vector_ImageCoordinatePtr self)"},
+	 { "Vector_ImageCoordinatePtr_get_allocator", _wrap_Vector_ImageCoordinatePtr_get_allocator, METH_O, "get_allocator(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::allocator_type"},
+	 { "Vector_ImageCoordinatePtr_pop_back", _wrap_Vector_ImageCoordinatePtr_pop_back, METH_O, "pop_back(Vector_ImageCoordinatePtr self)"},
+	 { "Vector_ImageCoordinatePtr_erase", _wrap_Vector_ImageCoordinatePtr_erase, METH_VARARGS, "\n"
+		"erase(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator\n"
+		"erase(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator first, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator\n"
+		""},
+	 { "new_Vector_ImageCoordinatePtr", _wrap_new_Vector_ImageCoordinatePtr, METH_VARARGS, "\n"
+		"Vector_ImageCoordinatePtr()\n"
+		"Vector_ImageCoordinatePtr(Vector_ImageCoordinatePtr other)\n"
+		"Vector_ImageCoordinatePtr(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type size)\n"
+		"new_Vector_ImageCoordinatePtr(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & value) -> Vector_ImageCoordinatePtr\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_push_back", _wrap_Vector_ImageCoordinatePtr_push_back, METH_VARARGS, "push_back(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)"},
+	 { "Vector_ImageCoordinatePtr_front", _wrap_Vector_ImageCoordinatePtr_front, METH_O, "front(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &"},
+	 { "Vector_ImageCoordinatePtr_back", _wrap_Vector_ImageCoordinatePtr_back, METH_O, "back(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &"},
+	 { "Vector_ImageCoordinatePtr_assign", _wrap_Vector_ImageCoordinatePtr_assign, METH_VARARGS, "assign(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)"},
+	 { "Vector_ImageCoordinatePtr_resize", _wrap_Vector_ImageCoordinatePtr_resize, METH_VARARGS, "\n"
+		"resize(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type new_size)\n"
+		"resize(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_insert", _wrap_Vector_ImageCoordinatePtr_insert, METH_VARARGS, "\n"
+		"insert(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator\n"
+		"insert(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageCoordinatePtr_reserve", _wrap_Vector_ImageCoordinatePtr_reserve, METH_VARARGS, "reserve(Vector_ImageCoordinatePtr self, std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type n)"},
+	 { "Vector_ImageCoordinatePtr_capacity", _wrap_Vector_ImageCoordinatePtr_capacity, METH_O, "capacity(Vector_ImageCoordinatePtr self) -> std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::size_type"},
+	 { "delete_Vector_ImageCoordinatePtr", _wrap_delete_Vector_ImageCoordinatePtr, METH_O, "delete_Vector_ImageCoordinatePtr(Vector_ImageCoordinatePtr self)"},
 	 { "Vector_ImageCoordinatePtr_swigregister", Vector_ImageCoordinatePtr_swigregister, METH_O, NULL},
 	 { "Vector_ImageCoordinatePtr_swiginit", Vector_ImageCoordinatePtr_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

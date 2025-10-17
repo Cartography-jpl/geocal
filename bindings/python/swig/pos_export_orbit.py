@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _pos_export_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _pos_export_orbit:
 _pos_export_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _pos_export_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,18 +145,18 @@ import geocal_swig.look_vector
 class PosExportOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
     r"""
 
-    This read a POS export file to supply an Orbit.
 
-    This is a text file that is written by the Applanix POS Export
-    Utility.
+    This read a POS export file to supply an Orbit.  
 
-    Note that the time in the POS export file is in GPS second of the
-    week. This starts at midnight UTC time between Saturday and Sunday.
-    Presumably if we happen to be flying at this time, the time will
-    reset. We don't have any handling in place for this, we'll need to add
-    handling if this ever becomes an issue.
+    This is a text file that is written by the Applanix POS Export Utility.  
 
-    C++ includes: pos_export_orbit.h 
+    Note that the time in the POS export file is in GPS second of the week. This
+    starts at midnight UTC time between Saturday and Sunday. Presumably if we happen
+    to be flying at this time, the time will reset. We don't have any handling in
+    place for this, we'll need to add handling if this ever becomes an issue.  
+
+    C++ includes: pos_export_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,13 +164,15 @@ class PosExportOrbit(geocal_swig.orbit_quaternion_list.OrbitQuaternionList):
 
     def __init__(self, Fname, Epoch):
         r"""
+        __init__(PosExportOrbit self, std::string const & Fname, Time Epoch) -> PosExportOrbit
 
-        PosExportOrbit::PosExportOrbit(const std::string &Fname, const Time &Epoch)
         GeoCal::PosExportOrbit::PosExportOrbit
-        Read the given text file.
-        Note that the time in the Applanix file is in GPS seconds of the week,
-        but the actual week isn't in the file. This means we need to pass in
-        the Epoch that the times are relative to. 
+        Read the given text file.  
+
+        Note that the time in the Applanix file is in GPS seconds of the week, but the
+        actual week isn't in the file. This means we need to pass in the Epoch that the
+        times are relative to.  
+
         """
         _pos_export_orbit.PosExportOrbit_swiginit(self, _pos_export_orbit.new_PosExportOrbit(Fname, Epoch))
     aircraft_orbit_data = _swig_new_instance_method(_pos_export_orbit.PosExportOrbit_aircraft_orbit_data)

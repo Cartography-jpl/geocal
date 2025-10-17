@@ -7937,63 +7937,69 @@ SWIGINTERN PyObject *VicarArgument_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarArgument", _wrap_new_VicarArgument, METH_VARARGS, "\n"
+		"VicarArgument(int ARGC, bool copy_primary_input_label=False)\n"
 		"\n"
-		"VicarArgument::VicarArgument(int Argc, char **Argv, bool copy_primary_input_label=false)\n"
 		"GeoCal::VicarArgument::VicarArgument\n"
-		"Set up to parse VICAR arguments.\n"
-		"VICAR arguments are accessed by keywords. This isn't a bad interface,\n"
-		"but because we also want to support straight unix command line style\n"
-		"arguments, we have the VicarArgument interface in terms of index\n"
-		"number (first argument, second argument, etc.). Keyword_list gives the\n"
-		"list of keywords in order that we want.\n"
+		"Set up to parse VICAR arguments.  \n"
 		"\n"
-		"VICAR has the convention that when creating a new file it\n"
-		"automatically copies over all of the labels from the \"primary input\"\n"
-		"- usually the first input file. The idea is that with old VICAR files\n"
-		"most of the time the output image would have same size, map\n"
-		"projection, etc. However, this doesn't fit well with the geocal usage\n"
-		"at all. Much of the time the output file doesn't have any relationship\n"
-		"to the input file. Also the label reading and writing happens in the\n"
-		"background anyways, so there isn't a lot gained by the defaults. This\n"
-		"can often cause problems, such as copying map projection data from an\n"
-		"input file to an output file that isn't map projected.\n"
+		"VICAR arguments are accessed by keywords. This isn't a bad interface, but\n"
+		"because we also want to support straight unix command line style arguments, we\n"
+		"have the VicarArgument interface in terms of index number (first argument,\n"
+		"second argument, etc.). Keyword_list gives the list of keywords in order that we\n"
+		"want.  \n"
 		"\n"
-		"By default, we turn this copying off. You can get the old VICAR\n"
-		"behavior by setting Copy_primary_input_label to true. \n"
+		"VICAR has the convention that when creating a new file it automatically copies\n"
+		"over all of the labels from the \"primary\n"
+		"input\" - usually the first input file. The idea is that with old VICAR files\n"
+		"most of the time the output image would have same size, map projection, etc.\n"
+		"However, this doesn't fit well with the geocal usage at all. Much of the time\n"
+		"the output file doesn't have any relationship to the input file. Also the label\n"
+		"reading and writing happens in the background anyways, so there isn't a lot\n"
+		"gained by the defaults. This can often cause problems, such as copying map\n"
+		"projection data from an input file to an output file that isn't map projected.  \n"
+		"\n"
+		"By default, we turn this copying off. You can get the old VICAR behavior by\n"
+		"setting Copy_primary_input_label to true.  \n"
+		"\n"
 		""},
 	 { "VicarArgument_write_out", _wrap_VicarArgument_write_out, METH_VARARGS, "\n"
+		"VicarArgument_write_out(VicarArgument self, std::string const & Keyword, int Val)\n"
+		"VicarArgument_write_out(VicarArgument self, std::string const & Keyword, double Val)\n"
+		"VicarArgument_write_out(VicarArgument self, std::string const & Keyword, std::string const & Val, int Max_lin=250)\n"
 		"\n"
-		"void VicarArgument::write_out(const std::string &Keyword, int Val)\n"
 		"GeoCal::VicarArgument::write_out\n"
-		"Write a value to a TCL variable.\n"
+		"Write a value to a TCL variable.  \n"
 		"\n"
 		""},
-	 { "VicarArgument_type_string", _wrap_VicarArgument_type_string, METH_VARARGS, NULL},
-	 { "VicarArgument_type_count", _wrap_VicarArgument_type_count, METH_VARARGS, NULL},
-	 { "VicarArgument_arg_str", _wrap_VicarArgument_arg_str, METH_VARARGS, NULL},
-	 { "VicarArgument_arg_int", _wrap_VicarArgument_arg_int, METH_VARARGS, NULL},
-	 { "VicarArgument_arg_real", _wrap_VicarArgument_arg_real, METH_VARARGS, NULL},
-	 { "VicarArgument___str__", _wrap_VicarArgument___str__, METH_O, NULL},
-	 { "delete_VicarArgument", _wrap_delete_VicarArgument, METH_O, NULL},
+	 { "VicarArgument_type_string", _wrap_VicarArgument_type_string, METH_VARARGS, "VicarArgument_type_string(VicarArgument self, std::string const & Keyword) -> std::string"},
+	 { "VicarArgument_type_count", _wrap_VicarArgument_type_count, METH_VARARGS, "VicarArgument_type_count(VicarArgument self, std::string const & Keyword) -> int"},
+	 { "VicarArgument_arg_str", _wrap_VicarArgument_arg_str, METH_VARARGS, "VicarArgument_arg_str(VicarArgument self, std::string const & Keyword) -> vector_string"},
+	 { "VicarArgument_arg_int", _wrap_VicarArgument_arg_int, METH_VARARGS, "VicarArgument_arg_int(VicarArgument self, std::string const & Keyword) -> vector_int"},
+	 { "VicarArgument_arg_real", _wrap_VicarArgument_arg_real, METH_VARARGS, "VicarArgument_arg_real(VicarArgument self, std::string const & Keyword) -> vector_double"},
+	 { "VicarArgument___str__", _wrap_VicarArgument___str__, METH_O, "VicarArgument___str__(VicarArgument self) -> std::string"},
+	 { "delete_VicarArgument", _wrap_delete_VicarArgument, METH_O, "delete_VicarArgument(VicarArgument self)"},
 	 { "VicarArgument_swigregister", VicarArgument_swigregister, METH_O, NULL},
 	 { "VicarArgument_swiginit", VicarArgument_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -8002,63 +8008,69 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarArgument", _wrap_new_VicarArgument, METH_VARARGS, "\n"
+		"VicarArgument(int ARGC, bool copy_primary_input_label=False)\n"
 		"\n"
-		"VicarArgument::VicarArgument(int Argc, char **Argv, bool copy_primary_input_label=false)\n"
 		"GeoCal::VicarArgument::VicarArgument\n"
-		"Set up to parse VICAR arguments.\n"
-		"VICAR arguments are accessed by keywords. This isn't a bad interface,\n"
-		"but because we also want to support straight unix command line style\n"
-		"arguments, we have the VicarArgument interface in terms of index\n"
-		"number (first argument, second argument, etc.). Keyword_list gives the\n"
-		"list of keywords in order that we want.\n"
+		"Set up to parse VICAR arguments.  \n"
 		"\n"
-		"VICAR has the convention that when creating a new file it\n"
-		"automatically copies over all of the labels from the \"primary input\"\n"
-		"- usually the first input file. The idea is that with old VICAR files\n"
-		"most of the time the output image would have same size, map\n"
-		"projection, etc. However, this doesn't fit well with the geocal usage\n"
-		"at all. Much of the time the output file doesn't have any relationship\n"
-		"to the input file. Also the label reading and writing happens in the\n"
-		"background anyways, so there isn't a lot gained by the defaults. This\n"
-		"can often cause problems, such as copying map projection data from an\n"
-		"input file to an output file that isn't map projected.\n"
+		"VICAR arguments are accessed by keywords. This isn't a bad interface, but\n"
+		"because we also want to support straight unix command line style arguments, we\n"
+		"have the VicarArgument interface in terms of index number (first argument,\n"
+		"second argument, etc.). Keyword_list gives the list of keywords in order that we\n"
+		"want.  \n"
 		"\n"
-		"By default, we turn this copying off. You can get the old VICAR\n"
-		"behavior by setting Copy_primary_input_label to true. \n"
+		"VICAR has the convention that when creating a new file it automatically copies\n"
+		"over all of the labels from the \"primary\n"
+		"input\" - usually the first input file. The idea is that with old VICAR files\n"
+		"most of the time the output image would have same size, map projection, etc.\n"
+		"However, this doesn't fit well with the geocal usage at all. Much of the time\n"
+		"the output file doesn't have any relationship to the input file. Also the label\n"
+		"reading and writing happens in the background anyways, so there isn't a lot\n"
+		"gained by the defaults. This can often cause problems, such as copying map\n"
+		"projection data from an input file to an output file that isn't map projected.  \n"
+		"\n"
+		"By default, we turn this copying off. You can get the old VICAR behavior by\n"
+		"setting Copy_primary_input_label to true.  \n"
+		"\n"
 		""},
 	 { "VicarArgument_write_out", _wrap_VicarArgument_write_out, METH_VARARGS, "\n"
+		"write_out(VicarArgument self, std::string const & Keyword, int Val)\n"
+		"write_out(VicarArgument self, std::string const & Keyword, double Val)\n"
+		"write_out(VicarArgument self, std::string const & Keyword, std::string const & Val, int Max_lin=250)\n"
 		"\n"
-		"void VicarArgument::write_out(const std::string &Keyword, int Val)\n"
 		"GeoCal::VicarArgument::write_out\n"
-		"Write a value to a TCL variable.\n"
+		"Write a value to a TCL variable.  \n"
 		"\n"
 		""},
-	 { "VicarArgument_type_string", _wrap_VicarArgument_type_string, METH_VARARGS, NULL},
-	 { "VicarArgument_type_count", _wrap_VicarArgument_type_count, METH_VARARGS, NULL},
-	 { "VicarArgument_arg_str", _wrap_VicarArgument_arg_str, METH_VARARGS, NULL},
-	 { "VicarArgument_arg_int", _wrap_VicarArgument_arg_int, METH_VARARGS, NULL},
-	 { "VicarArgument_arg_real", _wrap_VicarArgument_arg_real, METH_VARARGS, NULL},
-	 { "VicarArgument___str__", _wrap_VicarArgument___str__, METH_O, NULL},
-	 { "delete_VicarArgument", _wrap_delete_VicarArgument, METH_O, NULL},
+	 { "VicarArgument_type_string", _wrap_VicarArgument_type_string, METH_VARARGS, "type_string(VicarArgument self, std::string const & Keyword) -> std::string"},
+	 { "VicarArgument_type_count", _wrap_VicarArgument_type_count, METH_VARARGS, "type_count(VicarArgument self, std::string const & Keyword) -> int"},
+	 { "VicarArgument_arg_str", _wrap_VicarArgument_arg_str, METH_VARARGS, "arg_str(VicarArgument self, std::string const & Keyword) -> vector_string"},
+	 { "VicarArgument_arg_int", _wrap_VicarArgument_arg_int, METH_VARARGS, "arg_int(VicarArgument self, std::string const & Keyword) -> vector_int"},
+	 { "VicarArgument_arg_real", _wrap_VicarArgument_arg_real, METH_VARARGS, "arg_real(VicarArgument self, std::string const & Keyword) -> vector_double"},
+	 { "VicarArgument___str__", _wrap_VicarArgument___str__, METH_O, "__str__(VicarArgument self) -> std::string"},
+	 { "delete_VicarArgument", _wrap_delete_VicarArgument, METH_O, "delete_VicarArgument(VicarArgument self)"},
 	 { "VicarArgument_swigregister", VicarArgument_swigregister, METH_O, NULL},
 	 { "VicarArgument_swiginit", VicarArgument_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

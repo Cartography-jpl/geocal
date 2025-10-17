@@ -7464,83 +7464,82 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "array_local_median", _wrap_array_local_median, METH_VARARGS, "\n"
+		"array_local_median(BlitzArray_double_2 In, int Window_nrow, int Window_ncol, GeoCal::array_local_edge_handle Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeoCal::array_local_median(const blitz::Array< double, 2 > &In, int Window_nrow, int\n"
-		"Window_ncol, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1)\n"
 		"GeoCal::array_local_median\n"
-		"This calculates the local median of a 2d array, using a filter of the\n"
-		"given number of rows and cols.\n"
-		"The number of rows and columns should be an odd number. At the edges\n"
-		"of the array, we just go as far as we can - so the window is a smaller\n"
-		"size at the edges.\n"
+		"This calculates the local median of a 2d array, using a filter of the given\n"
+		"number of rows and cols.  \n"
 		"\n"
-		"Edge handling describes how to handle data at the edges of the array.\n"
-		"For ARRAY_LOCAL_MEDIAN_TRUNCATE (the default), then at the edges of\n"
-		"the array we just go as far as we can - so the window is a smaller\n"
-		"size at the edges. For ARRAY_LOCAL_MEDIAN_ZEROPAD, we instead zero\n"
-		"fill the edges (this matches the behavior of the matlab routine\n"
-		"medfilt_1d.\n"
+		"The number of rows and columns should be an odd number. At the edges of the\n"
+		"array, we just go as far as we can - so the window is a smaller size at the\n"
+		"edges.  \n"
 		"\n"
-		"For ARRAY_LOCAL_MEDIAN_REPEAT we repeat the first/last median value\n"
-		"for the truncated windows. So for example with a window size of 7 the\n"
-		"first 3 lines ((7-1)/2 = 3) are set to the same value as the fourth\n"
-		"line.\n"
+		"Edge handling describes how to handle data at the edges of the array. For\n"
+		"ARRAY_LOCAL_MEDIAN_TRUNCATE (the default), then at the edges of the array we\n"
+		"just go as far as we can - so the window is a smaller size at the edges. For\n"
+		"ARRAY_LOCAL_MEDIAN_ZEROPAD, we instead zero fill the edges (this matches the\n"
+		"behavior of the matlab routine medfilt_1d.  \n"
 		"\n"
-		"This is the sort of thing that we would normally do in python, but it\n"
-		"turns out there is no efficient code in python that I could find to do\n"
-		"this. So we have the function in C++ where it runs much faster. \n"
+		"For ARRAY_LOCAL_MEDIAN_REPEAT we repeat the first/last median value for the\n"
+		"truncated windows. So for example with a window size of 7 the first 3 lines\n"
+		"((7-1)/2 = 3) are set to the same value as the fourth line.  \n"
+		"\n"
+		"This is the sort of thing that we would normally do in python, but it turns out\n"
+		"there is no efficient code in python that I could find to do this. So we have\n"
+		"the function in C++ where it runs much faster.  \n"
+		"\n"
 		""},
 	 { "linear_gradient_bad_pixel_detection", _wrap_linear_gradient_bad_pixel_detection, METH_VARARGS, "\n"
+		"linear_gradient_bad_pixel_detection(BlitzArray_double_2 Img, int Window_size=7, double Percentile=90.0, double Thresh_fact=2.0, double Nfail_thresh_percentage=75.0, GeoCal::array_local_edge_handle Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1) -> BlitzArray_bool_2\n"
 		"\n"
-		"blitz::Array< bool, 2 > GeoCal::linear_gradient_bad_pixel_detection(const blitz::Array< double, 2 > &Img, int Window_size=7, double\n"
-		"Percentile=90.0, double Thresh_fact=2.0, double\n"
-		"Nfail_thresh_percentage=75.0, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1)\n"
 		"GeoCal::linear_gradient_bad_pixel_detection\n"
-		"This determines bad pixels.\n"
-		"This is the exact same algorithm as found in\n"
-		"LinearGradientBadPixelDetection._bad_pixel_detection_python, but\n"
-		"rewritten in C++ for speed. See the python code to see what this\n"
-		"algorithm is doing.\n"
+		"This determines bad pixels.  \n"
 		"\n"
-		"The jobs can be divided up into number of tasks, submitted to the\n"
-		"ThreadPool. Note that the number of tasks selected is just how we\n"
-		"divide up the work, the actual number of threads used is controlled by\n"
-		"ThreadPool (e.g., you could that 10 threads working through 100\n"
-		"tasks). \n"
+		"This is the exact same algorithm as found in\n"
+		"LinearGradientBadPixelDetection._bad_pixel_detection_python, but rewritten in\n"
+		"C++ for speed. See the python code to see what this algorithm is doing.  \n"
+		"\n"
+		"The jobs can be divided up into number of tasks, submitted to the ThreadPool.\n"
+		"Note that the number of tasks selected is just how we divide up the work, the\n"
+		"actual number of threads used is controlled by ThreadPool (e.g., you could that\n"
+		"10 threads working through 100 tasks).  \n"
+		"\n"
 		""},
 	 { "ray_cast_ground_coordinate", _wrap_ray_cast_ground_coordinate, METH_VARARGS, "\n"
+		"ray_cast_ground_coordinate(boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, CoordinateConverter Cconv) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeoCal::ray_cast_ground_coordinate(const boost::shared_ptr< ImageGroundConnection > &Igc, const\n"
-		"CoordinateConverter &Cconv)\n"
 		"GeoCal::ray_cast_ground_coordinate\n"
-		"This use a IgcRayCaster to determine the ground location of every\n"
-		"point in a Igc, and the convert it to the coordinate given by a Cconv.\n"
-		"We return an array that has 5 columns, the image line, image sample,\n"
-		"coordinate x, coordinate y and coordinate z.\n"
+		"This use a IgcRayCaster to determine the ground location of every point in a\n"
+		"Igc, and the convert it to the coordinate given by a Cconv.  \n"
 		"\n"
-		"This is little more than a loop, but we have this because this is\n"
-		"useful in python but slow to generate there. \n"
+		"We return an array that has 5 columns, the image line, image sample, coordinate\n"
+		"x, coordinate y and coordinate z.  \n"
+		"\n"
+		"This is little more than a loop, but we have this because this is useful in\n"
+		"python but slow to generate there.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -7548,83 +7547,82 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "array_local_median", _wrap_array_local_median, METH_VARARGS, "\n"
+		"array_local_median(BlitzArray_double_2 In, int Window_nrow, int Window_ncol, GeoCal::array_local_edge_handle Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeoCal::array_local_median(const blitz::Array< double, 2 > &In, int Window_nrow, int\n"
-		"Window_ncol, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1)\n"
 		"GeoCal::array_local_median\n"
-		"This calculates the local median of a 2d array, using a filter of the\n"
-		"given number of rows and cols.\n"
-		"The number of rows and columns should be an odd number. At the edges\n"
-		"of the array, we just go as far as we can - so the window is a smaller\n"
-		"size at the edges.\n"
+		"This calculates the local median of a 2d array, using a filter of the given\n"
+		"number of rows and cols.  \n"
 		"\n"
-		"Edge handling describes how to handle data at the edges of the array.\n"
-		"For ARRAY_LOCAL_MEDIAN_TRUNCATE (the default), then at the edges of\n"
-		"the array we just go as far as we can - so the window is a smaller\n"
-		"size at the edges. For ARRAY_LOCAL_MEDIAN_ZEROPAD, we instead zero\n"
-		"fill the edges (this matches the behavior of the matlab routine\n"
-		"medfilt_1d.\n"
+		"The number of rows and columns should be an odd number. At the edges of the\n"
+		"array, we just go as far as we can - so the window is a smaller size at the\n"
+		"edges.  \n"
 		"\n"
-		"For ARRAY_LOCAL_MEDIAN_REPEAT we repeat the first/last median value\n"
-		"for the truncated windows. So for example with a window size of 7 the\n"
-		"first 3 lines ((7-1)/2 = 3) are set to the same value as the fourth\n"
-		"line.\n"
+		"Edge handling describes how to handle data at the edges of the array. For\n"
+		"ARRAY_LOCAL_MEDIAN_TRUNCATE (the default), then at the edges of the array we\n"
+		"just go as far as we can - so the window is a smaller size at the edges. For\n"
+		"ARRAY_LOCAL_MEDIAN_ZEROPAD, we instead zero fill the edges (this matches the\n"
+		"behavior of the matlab routine medfilt_1d.  \n"
 		"\n"
-		"This is the sort of thing that we would normally do in python, but it\n"
-		"turns out there is no efficient code in python that I could find to do\n"
-		"this. So we have the function in C++ where it runs much faster. \n"
+		"For ARRAY_LOCAL_MEDIAN_REPEAT we repeat the first/last median value for the\n"
+		"truncated windows. So for example with a window size of 7 the first 3 lines\n"
+		"((7-1)/2 = 3) are set to the same value as the fourth line.  \n"
+		"\n"
+		"This is the sort of thing that we would normally do in python, but it turns out\n"
+		"there is no efficient code in python that I could find to do this. So we have\n"
+		"the function in C++ where it runs much faster.  \n"
+		"\n"
 		""},
 	 { "linear_gradient_bad_pixel_detection", _wrap_linear_gradient_bad_pixel_detection, METH_VARARGS, "\n"
+		"linear_gradient_bad_pixel_detection(BlitzArray_double_2 Img, int Window_size=7, double Percentile=90.0, double Thresh_fact=2.0, double Nfail_thresh_percentage=75.0, GeoCal::array_local_edge_handle Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1) -> BlitzArray_bool_2\n"
 		"\n"
-		"blitz::Array< bool, 2 > GeoCal::linear_gradient_bad_pixel_detection(const blitz::Array< double, 2 > &Img, int Window_size=7, double\n"
-		"Percentile=90.0, double Thresh_fact=2.0, double\n"
-		"Nfail_thresh_percentage=75.0, array_local_edge_handle\n"
-		"Edge_handle=ARRAY_LOCAL_MEDIAN_TRUNCATE, int Number_task=1)\n"
 		"GeoCal::linear_gradient_bad_pixel_detection\n"
-		"This determines bad pixels.\n"
-		"This is the exact same algorithm as found in\n"
-		"LinearGradientBadPixelDetection._bad_pixel_detection_python, but\n"
-		"rewritten in C++ for speed. See the python code to see what this\n"
-		"algorithm is doing.\n"
+		"This determines bad pixels.  \n"
 		"\n"
-		"The jobs can be divided up into number of tasks, submitted to the\n"
-		"ThreadPool. Note that the number of tasks selected is just how we\n"
-		"divide up the work, the actual number of threads used is controlled by\n"
-		"ThreadPool (e.g., you could that 10 threads working through 100\n"
-		"tasks). \n"
+		"This is the exact same algorithm as found in\n"
+		"LinearGradientBadPixelDetection._bad_pixel_detection_python, but rewritten in\n"
+		"C++ for speed. See the python code to see what this algorithm is doing.  \n"
+		"\n"
+		"The jobs can be divided up into number of tasks, submitted to the ThreadPool.\n"
+		"Note that the number of tasks selected is just how we divide up the work, the\n"
+		"actual number of threads used is controlled by ThreadPool (e.g., you could that\n"
+		"10 threads working through 100 tasks).  \n"
+		"\n"
 		""},
 	 { "ray_cast_ground_coordinate", _wrap_ray_cast_ground_coordinate, METH_VARARGS, "\n"
+		"ray_cast_ground_coordinate(boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, CoordinateConverter Cconv) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeoCal::ray_cast_ground_coordinate(const boost::shared_ptr< ImageGroundConnection > &Igc, const\n"
-		"CoordinateConverter &Cconv)\n"
 		"GeoCal::ray_cast_ground_coordinate\n"
-		"This use a IgcRayCaster to determine the ground location of every\n"
-		"point in a Igc, and the convert it to the coordinate given by a Cconv.\n"
-		"We return an array that has 5 columns, the image line, image sample,\n"
-		"coordinate x, coordinate y and coordinate z.\n"
+		"This use a IgcRayCaster to determine the ground location of every point in a\n"
+		"Igc, and the convert it to the coordinate given by a Cconv.  \n"
 		"\n"
-		"This is little more than a loop, but we have this because this is\n"
-		"useful in python but slow to generate there. \n"
+		"We return an array that has 5 columns, the image line, image sample, coordinate\n"
+		"x, coordinate y and coordinate z.  \n"
+		"\n"
+		"This is little more than a loop, but we have this because this is useful in\n"
+		"python but slow to generate there.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

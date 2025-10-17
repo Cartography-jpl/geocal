@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _surface_image_to_image_match.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _surface_image_to_image_match:
 _surface_image_to_image_match.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _surface_image_to_image_match.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,30 +143,30 @@ import geocal_swig.geocal_exception
 class SurfaceImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatch):
     r"""
 
-    This is an ImageToImageMatch that takes two image ground connections
-    along with a MapInfo to project to.
 
-    The data is matched at the surface, although the results are reported
-    in image coordinates.
+    This is an ImageToImageMatch that takes two image ground connections along with
+    a MapInfo to project to.  
 
-    The MapInfo is used to get the resolution and map projection, the
-    actual coverage isn't important (e.g., the ulc and lrc). We make sure
-    that the coverage works over the full image.
+    The data is matched at the surface, although the results are reported in image
+    coordinates.  
 
-    Depending on your application, we can do the map projection only where
-    we need an image patch for matching, or you can supply the full
-    surface image.
+    The MapInfo is used to get the resolution and map projection, the actual
+    coverage isn't important (e.g., the ulc and lrc). We make sure that the coverage
+    works over the full image.  
 
-    If you are collecting tiepoints over a large image, you usually want
-    to do the map projection on the fly as needed, since we typically only
-    map project a small part of the image.
+    Depending on your application, we can do the map projection only where we need
+    an image patch for matching, or you can supply the full surface image.  
 
-    In some cases, you may be doing lots of points or simply already have
-    the data map projected. In those cases, you can pass the RasterImage
-    in. These should be map projected, with a MapInfo (e.g., geotiff label
-    or whatever in the data).
+    If you are collecting tiepoints over a large image, you usually want to do the
+    map projection on the fly as needed, since we typically only map project a small
+    part of the image.  
 
-    C++ includes: surface_image_to_image_match.h 
+    In some cases, you may be doing lots of points or simply already have the data
+    map projected. In those cases, you can pass the RasterImage in. These should be
+    map projected, with a MapInfo (e.g., geotiff label or whatever in the data).  
+
+    C++ includes: surface_image_to_image_match.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -171,14 +174,11 @@ class SurfaceImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatc
 
     def __init__(self, *args):
         r"""
+        __init__(SurfaceImageToImageMatch self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc1, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc2, MapInfo Map_info, boost::shared_ptr< GeoCal::ImageMatcher > const & Matcher, int Grid_spacing=1) -> SurfaceImageToImageMatch
+        __init__(SurfaceImageToImageMatch self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc1, boost::shared_ptr< GeoCal::RasterImage > const & Surface_image1, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc2, boost::shared_ptr< GeoCal::RasterImage > const & Surface_image2, boost::shared_ptr< GeoCal::ImageMatcher > const & Matcher) -> SurfaceImageToImageMatch
 
-        SurfaceImageToImageMatch::SurfaceImageToImageMatch(const boost::shared_ptr< ImageGroundConnection > &Igc1, const
-        boost::shared_ptr< RasterImage > &Surface_image1, const
-        boost::shared_ptr< ImageGroundConnection > &Igc2, const
-        boost::shared_ptr< RasterImage > &Surface_image2, const
-        boost::shared_ptr< ImageMatcher > &Matcher)
         GeoCal::SurfaceImageToImageMatch::SurfaceImageToImageMatch
-        Constructor, where we supply the already map projected data.
+        Constructor, where we supply the already map projected data.  
 
         """
         _surface_image_to_image_match.SurfaceImageToImageMatch_swiginit(self, _surface_image_to_image_match.new_SurfaceImageToImageMatch(*args))

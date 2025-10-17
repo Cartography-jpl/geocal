@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ground_mspi_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ground_mspi_orbit:
 _ground_mspi_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ground_mspi_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,12 +144,13 @@ import geocal_swig.with_parameter
 class GroundMspiOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This models the MSPI ground orbit.
 
-    We don't actually move, of course, but the zenith angle does change
-    over time.
+    This models the MSPI ground orbit.  
 
-    C++ includes: ground_mspi_orbit.h 
+    We don't actually move, of course, but the zenith angle does change over time.  
+
+    C++ includes: ground_mspi_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,13 +158,13 @@ class GroundMspiOrbit(geocal_swig.orbit.Orbit):
 
     def __init__(self, Start_time, Pos, Azimuth, Start_elevation_angle, Rotation_rate):
         r"""
+        __init__(GroundMspiOrbit self, Time Start_time, boost::shared_ptr< GeoCal::GroundCoordinate > & Pos, double Azimuth, double Start_elevation_angle, double Rotation_rate) -> GroundMspiOrbit
 
-        GeoCal::GroundMspiOrbit::GroundMspiOrbit(const Time &Start_time, boost::shared_ptr< GroundCoordinate > &Pos,
-        double Azimuth, double Start_elevation_angle, double Rotation_rate)
         GeoCal::GroundMspiOrbit::GroundMspiOrbit
-        Constructor.
-        The angles should be in degrees, and the rate is in degrees per
-        second. 
+        Constructor.  
+
+        The angles should be in degrees, and the rate is in degrees per second.  
+
         """
         _ground_mspi_orbit.GroundMspiOrbit_swiginit(self, _ground_mspi_orbit.new_GroundMspiOrbit(Start_time, Pos, Azimuth, Start_elevation_angle, Rotation_rate))
     _v_start_time = _swig_new_instance_method(_ground_mspi_orbit.GroundMspiOrbit__v_start_time)

@@ -90,6 +90,7 @@ _geometric_model.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _geometric_model.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _geometric_model.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -136,6 +137,8 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.generic_object
 import geocal_swig.observer
 class ObservableGeometricTiePoints(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observable< GeoCal::GeometricTiePoints > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -149,10 +152,13 @@ class ObservableGeometricTiePoints(geocal_swig.generic_object.GenericObject):
 # Register ObservableGeometricTiePoints in _geometric_model:
 _geometric_model.ObservableGeometricTiePoints_swigregister(ObservableGeometricTiePoints)
 class ObserverGeometricTiePoints(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::Observer< GeoCal::GeometricTiePoints > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self):
+        r"""__init__(ObserverGeometricTiePoints self) -> ObserverGeometricTiePoints"""
         _geometric_model.ObserverGeometricTiePoints_swiginit(self, _geometric_model.new_ObserverGeometricTiePoints())
     __swig_destroy__ = _geometric_model.delete_ObserverGeometricTiePoints
     notify_update = _swig_new_instance_method(_geometric_model.ObserverGeometricTiePoints_notify_update)
@@ -164,11 +170,12 @@ _geometric_model.ObserverGeometricTiePoints_swigregister(ObserverGeometricTiePoi
 class GeometricModel(ObserverGeometricTiePoints):
     r"""
 
-    This supplies a geometric model that can be used to deform an image,
-    e.g., resample an image to match to geometry of another reference
-    image.
 
-    C++ includes: geometric_model.h 
+    This supplies a geometric model that can be used to deform an image, e.g.,
+    resample an image to match to geometry of another reference image.  
+
+    C++ includes: geometric_model.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -194,13 +201,15 @@ _geometric_model.GeometricModel_swigregister(GeometricModel)
 class GeometricTiePoints(ObservableGeometricTiePoints):
     r"""
 
-    Often GeometricModels are created by fitting a set of points tieing
-    the image together.
 
-    This is just complicated enough to need a class to maintain it. This
-    is little more than a structure.
+    Often GeometricModels are created by fitting a set of points tieing the image
+    together.  
 
-    C++ includes: geometric_model.h 
+    This is just complicated enough to need a class to maintain it. This is little
+    more than a structure.  
+
+    C++ includes: geometric_model.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -208,8 +217,8 @@ class GeometricTiePoints(ObservableGeometricTiePoints):
 
     def __init__(self):
         r"""
+        __init__(GeometricTiePoints self) -> GeometricTiePoints
 
-        GeoCal::GeometricTiePoints::GeometricTiePoints()
         GeoCal::GeometricTiePoints::GeometricTiePoints
         """
         _geometric_model.GeometricTiePoints_swiginit(self, _geometric_model.new_GeometricTiePoints())

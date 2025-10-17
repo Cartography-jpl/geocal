@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _srtm_90m_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _srtm_90m_dem:
 _srtm_90m_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _srtm_90m_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -145,42 +148,44 @@ import geocal_swig.geocal_exception
 class Srtm90mData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
-    This is used to read the DEM data.
 
-    This then get used by Srtm90mDem. Although you can use this class
-    directly, generally you'll use this through Srtm90mDem class.
+    This is used to read the DEM data.  
 
-    If we don't have data for a particular location, we return FILL_VALUE.
+    This then get used by Srtm90mDem. Although you can use this class directly,
+    generally you'll use this through Srtm90mDem class.  
 
-    C++ includes: srtm_90m_dem.h 
+    If we don't have data for a particular location, we return FILL_VALUE.  
+
+    C++ includes: srtm_90m_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     FILL_VALUE = _srtm_90m_dem.Srtm90mData_FILL_VALUE
+    
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
         r"""
+        __init__(Srtm90mData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4) -> Srtm90mData
 
-        Srtm90mData::Srtm90mData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4)
         GeoCal::Srtm90mData::Srtm90mData
-        Constructor.
-        You can provide the directory to look for DEM data, or if you leave
-        this blank we use the value of environment variable USGSDATA.
+        Constructor.  
 
-        We don't have DEM files that completely cover the area. If you ask for
-        a point outside of the area this can either be treated as an error, or
-        alternatively you can return a value of FILL_VALUE instead. This is
-        controlled by No_coverage_is_error.
+        You can provide the directory to look for DEM data, or if you leave this blank
+        we use the value of environment variable USGSDATA.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        We don't have DEM files that completely cover the area. If you ask for a point
+        outside of the area this can either be treated as an error, or alternatively you
+        can return a value of FILL_VALUE instead. This is controlled by
+        No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _srtm_90m_dem.Srtm90mData_swiginit(self, _srtm_90m_dem.new_Srtm90mData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
@@ -198,9 +203,11 @@ _srtm_90m_dem.Srtm90mData_swigregister(Srtm90mData)
 class Srtm90mDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This class provides access to the SRTM 90m Dem.
 
-    C++ includes: srtm_90m_dem.h 
+    This class provides access to the SRTM 90m Dem.  
+
+    C++ includes: srtm_90m_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -208,18 +215,19 @@ class Srtm90mDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, *args):
         r"""
+        __init__(Srtm90mDem self, std::string const & Dir, bool Outside_dem_is_error=True) -> Srtm90mDem
+        __init__(Srtm90mDem self, std::string const & Dir, bool Outside_dem_is_error, boost::shared_ptr< GeoCal::Datum > const & D) -> Srtm90mDem
 
-        Srtm90mDem::Srtm90mDem(const std::string &Dir, bool Outside_dem_is_error=true, const
-        boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >())
         GeoCal::Srtm90mDem::Srtm90mDem
-        Constructor.
-        You can provide the directory to look for DEM data, or if you leave
-        this blank we use the value of environment variable USGSDATA.
+        Constructor.  
 
-        We don't have DEM files that completely cover the area. If you ask for
-        a point outside of the area this can either be treated as an error, or
-        alternatively you can return a value of 0 instead. This is controlled
-        by Outside_dem_is_error. 
+        You can provide the directory to look for DEM data, or if you leave this blank
+        we use the value of environment variable USGSDATA.  
+
+        We don't have DEM files that completely cover the area. If you ask for a point
+        outside of the area this can either be treated as an error, or alternatively you
+        can return a value of 0 instead. This is controlled by Outside_dem_is_error.  
+
         """
         _srtm_90m_dem.Srtm90mDem_swiginit(self, _srtm_90m_dem.new_Srtm90mDem(*args))
     _v_directory_base = _swig_new_instance_method(_srtm_90m_dem.Srtm90mDem__v_directory_base)

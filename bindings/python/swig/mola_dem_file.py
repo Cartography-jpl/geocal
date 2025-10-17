@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _mola_dem_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _mola_dem_file:
 _mola_dem_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _mola_dem_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,15 +144,17 @@ import geocal_swig.generic_object
 class MolaDemFile(geocal_swig.gdal_dem.GdalDem):
     r"""
 
-    This handles a Mola DEM tile.
 
-    These are bit complicated, because the "t" or topographic files are
-    relative to a Mars Areoid that we don't currently have access to a the
-    "r" files are a radius. We may come back to this and just put the
-    MarsAreoid in as Datum, but for now just use the "r" files and
-    present this data as a elevation relative to our reference ellipsoid.
+    This handles a Mola DEM tile.  
 
-    C++ includes: mola_dem_file.h 
+    These are bit complicated, because the "t" or topographic files are relative
+    to a Mars Areoid that we don't currently have access to a the "r" files are a
+    radius. We may come back to this and just put the MarsAreoid in as Datum, but
+    for now just use the "r" files and present this data as a elevation relative
+    to our reference ellipsoid.  
+
+    C++ includes: mola_dem_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,9 +162,8 @@ class MolaDemFile(geocal_swig.gdal_dem.GdalDem):
 
     def __init__(self, Fname, Outside_dem_is_error=False, Number_tile=4, Tile_number_line=-1, Tile_number_sample=-1):
         r"""
+        __init__(MolaDemFile self, std::string const & Fname, bool Outside_dem_is_error=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> MolaDemFile
 
-        GeoCal::MolaDemFile::MolaDemFile(const std::string &Fname, bool Outside_dem_is_error=false, int
-        Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1)
         GeoCal::MolaDemFile::MolaDemFile
         """
         _mola_dem_file.MolaDemFile_swiginit(self, _mola_dem_file.new_MolaDemFile(Fname, Outside_dem_is_error, Number_tile, Tile_number_line, Tile_number_sample))

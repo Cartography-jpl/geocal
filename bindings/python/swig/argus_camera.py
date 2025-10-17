@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _argus_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _argus_camera:
 _argus_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _argus_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,12 +144,14 @@ import geocal_swig.with_parameter
 class ArgusCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    A model of the ARGUS camera.
 
-    Right now, this doesn't account for any lens distortion, we model this
-    as a pinhole camera. We may need to revisit this.
+    A model of the ARGUS camera.  
 
-    C++ includes: argus_camera.h 
+    Right now, this doesn't account for any lens distortion, we model this as a
+    pinhole camera. We may need to revisit this.  
+
+    C++ includes: argus_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,13 +159,14 @@ class ArgusCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self, Yaw=0, Pitch=0, Roll=0, Focal_length=400):
         r"""
+        __init__(ArgusCamera self, double Yaw=0, double Pitch=0, double Roll=0, double Focal_length=400) -> ArgusCamera
 
-        ArgusCamera::ArgusCamera(double Yaw=0, double Pitch=0, double Roll=0, double Focal_length=400)
         GeoCal::ArgusCamera::ArgusCamera
-        Create a ARGUS camera.
-        We read one of the image jpeg files to get camera metadata used to
-        describe the camera. Yaw, Pitch and Roll are in degrees, Focal_length
-        is in mm. 
+        Create a ARGUS camera.  
+
+        We read one of the image jpeg files to get camera metadata used to describe the
+        camera. Yaw, Pitch and Roll are in degrees, Focal_length is in mm.  
+
         """
         _argus_camera.ArgusCamera_swiginit(self, _argus_camera.new_ArgusCamera(Yaw, Pitch, Roll, Focal_length))
     _v_roll = _swig_new_instance_method(_argus_camera.ArgusCamera__v_roll)

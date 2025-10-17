@@ -90,6 +90,7 @@ _image_mask.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _image_mask.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _image_mask.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,20 +138,21 @@ import geocal_swig.generic_object
 class ImageMask(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides a ImageMask, which can be used to prevent doing some
-    kind of processing.
 
-    An example is a using a Cloud mask to restrict image matching to cloud
-    free areas.
+    This provides a ImageMask, which can be used to prevent doing some kind of
+    processing.  
 
-    The mask can look at specific ImageCoordinate points indicating if the
-    that point is masked or not. You can also look at a Image area to see
-    if any of the area is masked (e.g., avoid image matching on this area
-    because it is masked).
+    An example is a using a Cloud mask to restrict image matching to cloud free
+    areas.  
 
-    This mask works in ImageCoordinates, cf. GroundMask.
+    The mask can look at specific ImageCoordinate points indicating if the that
+    point is masked or not. You can also look at a Image area to see if any of the
+    area is masked (e.g., avoid image matching on this area because it is masked).  
 
-    C++ includes: image_mask.h 
+    This mask works in ImageCoordinates, cf. GroundMask.  
+
+    C++ includes: image_mask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -177,11 +179,13 @@ _image_mask.ImageMask_swigregister(ImageMask)
 class OffsetImageMask(ImageMask):
     r"""
 
-    This gives an ImageMask that is an offset of a given one.
 
-    This would be used for example when an image is subsetted.
+    This gives an ImageMask that is an offset of a given one.  
 
-    C++ includes: image_mask.h 
+    This would be used for example when an image is subsetted.  
+
+    C++ includes: image_mask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -222,19 +226,21 @@ _image_mask.OffsetImageMask_swigregister(OffsetImageMask)
 class CombinedImageMask(ImageMask):
     r"""
 
-    This is combines a set of masks into a single one.
 
-    The combination just check each mask in turn, and if any of them
-    indicates a point or a area is masked, then we return true.
+    This is combines a set of masks into a single one.  
+
+    The combination just check each mask in turn, and if any of them indicates a
+    point or a area is masked, then we return true.  
 
     Note that this class handles the degenerate case of no masked. This is
-    particular useful in handling situations where you might or might not
-    have mask, e.g. a general routine that can take a mask but where you
-    don't happen to have any masks in a particular case.
+    particular useful in handling situations where you might or might not have mask,
+    e.g. a general routine that can take a mask but where you don't happen to have
+    any masks in a particular case.  
 
-    When there are no masks, we return true.
+    When there are no masks, we return true.  
 
-    C++ includes: image_mask.h 
+    C++ includes: image_mask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -242,15 +248,16 @@ class CombinedImageMask(ImageMask):
 
     def __init__(self, *args):
         r"""
+        __init__(CombinedImageMask self) -> CombinedImageMask
+        __init__(CombinedImageMask self, Vector_ImageMask Ml) -> CombinedImageMask
 
-        GeoCal::CombinedImageMask::CombinedImageMask(It First, It Last)
         GeoCal::CombinedImageMask::CombinedImageMask
-        Create a CombinedImageMask using the given set of masks, where we get this from a general
-        InputIterator.
+        Create a CombinedImageMask using the given set of masks, where we get this from
+        a general InputIterator.  
 
         """
         _image_mask.CombinedImageMask_swiginit(self, _image_mask.new_CombinedImageMask(*args))
-    mask_list = property(_image_mask.CombinedImageMask_mask_list_get, _image_mask.CombinedImageMask_mask_list_set)
+    mask_list = property(_image_mask.CombinedImageMask_mask_list_get, _image_mask.CombinedImageMask_mask_list_set, doc=r"""mask_list : std::vector<(boost::shared_ptr<(GeoCal::ImageMask)>,std::allocator<(boost::shared_ptr<(GeoCal::ImageMask)>)>)>""")
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set
@@ -264,6 +271,8 @@ class CombinedImageMask(ImageMask):
 # Register CombinedImageMask in _image_mask:
 _image_mask.CombinedImageMask_swigregister(CombinedImageMask)
 class Vector_ImageMask(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::ImageMask > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_image_mask.Vector_ImageMask_iterator)
@@ -293,6 +302,12 @@ class Vector_ImageMask(object):
     erase = _swig_new_instance_method(_image_mask.Vector_ImageMask_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_ImageMask self) -> Vector_ImageMask
+        __init__(Vector_ImageMask self, Vector_ImageMask other) -> Vector_ImageMask
+        __init__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type size) -> Vector_ImageMask
+        __init__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & value) -> Vector_ImageMask
+        """
         _image_mask.Vector_ImageMask_swiginit(self, _image_mask.new_Vector_ImageMask(*args))
     push_back = _swig_new_instance_method(_image_mask.Vector_ImageMask_push_back)
     front = _swig_new_instance_method(_image_mask.Vector_ImageMask_front)

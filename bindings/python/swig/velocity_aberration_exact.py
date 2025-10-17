@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _velocity_aberration_exact.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _velocity_aberration_exact:
 _velocity_aberration_exact.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _velocity_aberration_exact.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,12 +141,14 @@ import geocal_swig.generic_object
 class VelocityAberrationExact(geocal_swig.velocity_aberration.VelocityAberration):
     r"""
 
-    This does an exact velocity aberration correction, rather than the
-    first order correction we do in QuaternionOrbitData.
 
-    This matches what the MSP library does.
+    This does an exact velocity aberration correction, rather than the first order
+    correction we do in QuaternionOrbitData.  
 
-    C++ includes: velocity_aberration_exact.h 
+    This matches what the MSP library does.  
+
+    C++ includes: velocity_aberration_exact.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,8 +156,8 @@ class VelocityAberrationExact(geocal_swig.velocity_aberration.VelocityAberration
 
     def __init__(self):
         r"""
+        __init__(VelocityAberrationExact self) -> VelocityAberrationExact
 
-        GeoCal::VelocityAberrationExact::VelocityAberrationExact()
         GeoCal::VelocityAberrationExact::VelocityAberrationExact
         """
         _velocity_aberration_exact.VelocityAberrationExact_swiginit(self, _velocity_aberration_exact.new_VelocityAberrationExact())

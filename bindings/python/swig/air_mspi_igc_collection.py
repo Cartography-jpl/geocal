@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _air_mspi_igc_collection.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _air_mspi_igc_collection:
 _air_mspi_igc_collection.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _air_mspi_igc_collection.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,9 +146,11 @@ import geocal_swig.quaternion_camera
 class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
     r"""
 
-    This is an IgcCollection for AirMspi.
 
-    C++ includes: air_mspi_igc_collection.h 
+    This is an IgcCollection for AirMspi.  
+
+    C++ includes: air_mspi_igc_collection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -153,15 +158,17 @@ class AirMspiIgcCollection(geocal_swig.igc_collection.IgcCollection):
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiIgcCollection self, std::string const & Master_config_file, std::string const & Orbit_file_name, std::string const & L1b1_table, std::string const & Swath_to_use="660-I", std::string const & Base_directory=".") -> AirMspiIgcCollection
+        __init__(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & D, vector_string L1b1_file_name, std::string const & Swath_to_use="660-I", int Dem_resolution=10, std::string const & Base_directory=".") -> AirMspiIgcCollection
+        __init__(AirMspiIgcCollection self, boost::shared_ptr< GeoCal::Orbit > const & Orb, boost::shared_ptr< GeoCal::MspiCamera > const & Cam, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Dem > const & D, std::string const & Master_config_file, vector_string L1b1_file_name, std::string const & Swath_to_use="660-I", int Dem_resolution=10, std::string const & Base_directory=".") -> AirMspiIgcCollection
 
-        AirMspiIgcCollection::AirMspiIgcCollection(const std::string &Master_config_file, const std::string
-        &Orbit_file_name, const std::string &L1b1_table, const std::string
-        &Swath_to_use="660-I", const std::string &Base_directory=".")
         GeoCal::AirMspiIgcCollection::AirMspiIgcCollection
-        This creates a AirMspiIgcCollection by reading the given master config file.
-        Various files found in the input files can have relative paths. You
-        can specify the base directory these paths are relative to, the
-        default is the current directory. 
+        This creates a AirMspiIgcCollection by reading the given master config file.  
+
+        Various files found in the input files can have relative paths. You can specify
+        the base directory these paths are relative to, the default is the current
+        directory.  
+
         """
         _air_mspi_igc_collection.AirMspiIgcCollection_swiginit(self, _air_mspi_igc_collection.new_AirMspiIgcCollection(*args))
 

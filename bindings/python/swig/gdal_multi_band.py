@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _gdal_multi_band.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _gdal_multi_band:
 _gdal_multi_band.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _gdal_multi_band.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,9 +146,11 @@ import geocal_swig.raster_image_variable
 class GdalMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMultiBandVariable):
     r"""
 
-    This is a set of Gdal RasterImages, one for each band.
 
-    C++ includes: gdal_multi_band.h 
+    This is a set of Gdal RasterImages, one for each band.  
+
+    C++ includes: gdal_multi_band.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -153,11 +158,14 @@ class GdalMultiBand(geocal_swig.raster_image_multi_band_variable.RasterImageMult
 
     def __init__(self, *args):
         r"""
+        __init__(GdalMultiBand self, std::string const & Fname, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalMultiBand
+        __init__(GdalMultiBand self, std::string const & Fname, int Number_tile, std::string const & Allowed_drivers, std::string const & Open_options="", std::string const & Sibling_files="", int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalMultiBand
+        __init__(GdalMultiBand self, std::string const & Fname, std::string const & Driver_name, GdalRasterImage Source, std::string const & Options="", bool Log_progress=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalMultiBand
+        __init__(GdalMultiBand self, std::string const & Fname, std::string const & Driver_name, GdalMultiBand Source, std::string const & Options="", bool Log_progress=False, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalMultiBand
+        __init__(GdalMultiBand self, std::string const & Fname, std::string const & Driver_name, int Number_line, int Number_sample, int Number_band, int Dt, std::string const & Options="", int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalMultiBand
 
-        GdalMultiBand::GdalMultiBand(const std::string &Fname, int Number_tile=4, int Tile_number_line=-1,
-        int Tile_number_sample=-1)
         GeoCal::GdalMultiBand::GdalMultiBand
-        Constructor.
+        Constructor.  
 
         """
         _gdal_multi_band.GdalMultiBand_swiginit(self, _gdal_multi_band.new_GdalMultiBand(*args))

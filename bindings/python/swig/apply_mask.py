@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _apply_mask.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _apply_mask:
 _apply_mask.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _apply_mask.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,13 +145,14 @@ import geocal_swig.geocal_exception
 class ApplyMask(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This applies a mask to a RasterImage.
 
-    The data either passes through the mask, or it set to a value of 0
-    (the normal gore value we use) if a second RasterImage indicates that
-    this is masked.
+    This applies a mask to a RasterImage.  
 
-    C++ includes: apply_mask.h 
+    The data either passes through the mask, or it set to a value of 0 (the normal
+    gore value we use) if a second RasterImage indicates that this is masked.  
+
+    C++ includes: apply_mask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -156,19 +160,20 @@ class ApplyMask(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Data, M, Good_value=0):
         r"""
+        __init__(ApplyMask self, boost::shared_ptr< GeoCal::RasterImage > const & Data, boost::shared_ptr< GeoCal::RasterImage > const & M, int Good_value=0) -> ApplyMask
 
-        GeoCal::ApplyMask::ApplyMask(const boost::shared_ptr< RasterImage > &Data, const
-        boost::shared_ptr< RasterImage > &M, int Good_value=0)
         GeoCal::ApplyMask::ApplyMask
-        Constructor.
-        Parameters:
-        -----------
+        Constructor.  
 
-        Data:  Underlying data
+        Parameters
+        ----------
+        * `Data` :  
+            Underlying data  
+        * `M` :  
+            Mask image  
+        * `Good_value` :  
+            Pixels with this value in the the image M allow  
 
-        M:  Mask image
-
-        Good_value:  Pixels with this value in the the image M allow 
         """
         _apply_mask.ApplyMask_swiginit(self, _apply_mask.new_ApplyMask(Data, M, Good_value))
     _v_raw_data = _swig_new_instance_method(_apply_mask.ApplyMask__v_raw_data)

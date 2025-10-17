@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _map_reprojected_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _map_reprojected_image:
 _map_reprojected_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _map_reprojected_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,32 +144,30 @@ import geocal_swig.geocal_exception
 class MapReprojectedImage(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    This is a RasterImage that has been resampled to a different map
-    projection and/or a different resolution.
 
-    To do this we do two steps:
+    This is a RasterImage that has been resampled to a different map projection
+    and/or a different resolution.  
 
-    We calculate roughly what the difference in resolution is between the
-    original and final MapInfo. We do this by looking at the center pixel
-    of the original data and the pixel +1 in line and sample. We then use
-    RasterAveraged to average the original data to roughly the resolution
-    of the final MapInfo. If the final MapInfo is near the same resolution
-    as the original, or if it has a higher resolution, then we don't do
-    any averaging.
+    To do this we do two steps:  
 
-    We then interpolate the possibly averaged data to the final
-    projection.
+    1.  We calculate roughly what the difference in resolution is between the
+        original and final MapInfo. We do this by looking at the center pixel of the
+        original data and the pixel +1 in line and sample. We then use
+        RasterAveraged to average the original data to roughly the resolution of the
+        final MapInfo. If the final MapInfo is near the same resolution as the
+        original, or if it has a higher resolution, then we don't do any averaging.  
+    2.  We then interpolate the possibly averaged data to the final projection.  
 
-    It is ok if the final MapInfo contains areas outside of the original
-    data. For any pixel outside of the original data, we just return a
-    value of 0.
+    It is ok if the final MapInfo contains areas outside of the original data. For
+    any pixel outside of the original data, we just return a value of 0.  
 
-    This class calculates the reprojected data on the fly. Sometimes this
-    is what you want, but if you are going to be using the resulting data
-    a few times, you may want to use a MemoryRasterImage to generate a
-    copy once and keep it in memory.
+    This class calculates the reprojected data on the fly. Sometimes this is what
+    you want, but if you are going to be using the resulting data a few times, you
+    may want to use a MemoryRasterImage to generate a copy once and keep it in
+    memory.  
 
-    C++ includes: map_reprojected_image.h 
+    C++ includes: map_reprojected_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -174,14 +175,15 @@ class MapReprojectedImage(geocal_swig.raster_image_variable.RasterImageVariable)
 
     def __init__(self, Img_in, Mi, Line_avg=-1, Sample_avg=-1):
         r"""
+        __init__(MapReprojectedImage self, boost::shared_ptr< GeoCal::RasterImage > const Img_in, MapInfo Mi, int Line_avg=-1, int Sample_avg=-1) -> MapReprojectedImage
 
-        MapReprojectedImage::MapReprojectedImage(const boost::shared_ptr< RasterImage > Img_in, const MapInfo &Mi, int
-        Line_avg=-1, int Sample_avg=-1)
         GeoCal::MapReprojectedImage::MapReprojectedImage
-        Constructor.
-        We resample Img_in to the projection and resolution given by MapInfo.
-        You can optionally supply the averaging to use, useful if our simple
-        algorithm doesn't work well. 
+        Constructor.  
+
+        We resample Img_in to the projection and resolution given by MapInfo. You can
+        optionally supply the averaging to use, useful if our simple algorithm doesn't
+        work well.  
+
         """
         _map_reprojected_image.MapReprojectedImage_swiginit(self, _map_reprojected_image.new_MapReprojectedImage(Img_in, Mi, Line_avg, Sample_avg))
     _v_raw_image = _swig_new_instance_method(_map_reprojected_image.MapReprojectedImage__v_raw_image)

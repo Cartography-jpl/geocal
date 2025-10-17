@@ -7698,105 +7698,107 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "delete_ObservableGeometricTiePoints", _wrap_delete_ObservableGeometricTiePoints, METH_O, NULL},
-	 { "ObservableGeometricTiePoints_add_observer_and_keep_reference", _wrap_ObservableGeometricTiePoints_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableGeometricTiePoints_add_observer", _wrap_ObservableGeometricTiePoints_add_observer, METH_VARARGS, NULL},
-	 { "ObservableGeometricTiePoints_remove_observer", _wrap_ObservableGeometricTiePoints_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableGeometricTiePoints", _wrap_delete_ObservableGeometricTiePoints, METH_O, "delete_ObservableGeometricTiePoints(ObservableGeometricTiePoints self)"},
+	 { "ObservableGeometricTiePoints_add_observer_and_keep_reference", _wrap_ObservableGeometricTiePoints_add_observer_and_keep_reference, METH_VARARGS, "ObservableGeometricTiePoints_add_observer_and_keep_reference(ObservableGeometricTiePoints self, boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > & Obs)"},
+	 { "ObservableGeometricTiePoints_add_observer", _wrap_ObservableGeometricTiePoints_add_observer, METH_VARARGS, "ObservableGeometricTiePoints_add_observer(ObservableGeometricTiePoints self, ObserverGeometricTiePoints Obs)"},
+	 { "ObservableGeometricTiePoints_remove_observer", _wrap_ObservableGeometricTiePoints_remove_observer, METH_VARARGS, "ObservableGeometricTiePoints_remove_observer(ObservableGeometricTiePoints self, ObserverGeometricTiePoints Obs)"},
 	 { "ObservableGeometricTiePoints_swigregister", ObservableGeometricTiePoints_swigregister, METH_O, NULL},
-	 { "new_ObserverGeometricTiePoints", _wrap_new_ObserverGeometricTiePoints, METH_NOARGS, NULL},
-	 { "delete_ObserverGeometricTiePoints", _wrap_delete_ObserverGeometricTiePoints, METH_O, NULL},
-	 { "ObserverGeometricTiePoints_notify_update", _wrap_ObserverGeometricTiePoints_notify_update, METH_VARARGS, NULL},
-	 { "ObserverGeometricTiePoints_notify_add", _wrap_ObserverGeometricTiePoints_notify_add, METH_VARARGS, NULL},
-	 { "ObserverGeometricTiePoints_notify_remove", _wrap_ObserverGeometricTiePoints_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverGeometricTiePoints", _wrap_new_ObserverGeometricTiePoints, METH_NOARGS, "new_ObserverGeometricTiePoints() -> ObserverGeometricTiePoints"},
+	 { "delete_ObserverGeometricTiePoints", _wrap_delete_ObserverGeometricTiePoints, METH_O, "delete_ObserverGeometricTiePoints(ObserverGeometricTiePoints self)"},
+	 { "ObserverGeometricTiePoints_notify_update", _wrap_ObserverGeometricTiePoints_notify_update, METH_VARARGS, "ObserverGeometricTiePoints_notify_update(ObserverGeometricTiePoints self, GeometricTiePoints Observed_object)"},
+	 { "ObserverGeometricTiePoints_notify_add", _wrap_ObserverGeometricTiePoints_notify_add, METH_VARARGS, "ObserverGeometricTiePoints_notify_add(ObserverGeometricTiePoints self, GeometricTiePoints Observed_object)"},
+	 { "ObserverGeometricTiePoints_notify_remove", _wrap_ObserverGeometricTiePoints_notify_remove, METH_VARARGS, "ObserverGeometricTiePoints_notify_remove(ObserverGeometricTiePoints self, GeometricTiePoints Observed_object)"},
 	 { "ObserverGeometricTiePoints_swigregister", ObserverGeometricTiePoints_swigregister, METH_O, NULL},
 	 { "ObserverGeometricTiePoints_swiginit", ObserverGeometricTiePoints_swiginit, METH_VARARGS, NULL},
 	 { "GeometricModel_original_image_coordinate", _wrap_GeometricModel_original_image_coordinate, METH_VARARGS, "\n"
+		"GeometricModel_original_image_coordinate(GeometricModel self, ImageCoordinate Resampled_ic) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
 		"GeoCal::GeometricModel::original_image_coordinate\n"
-		"Map image coordinates to an underlying set of image coordinates.\n"
-		"This takes the image coordinates of the resampled image (magnified,\n"
-		"rotated, whatever) and returns the corresponding coordinate in the\n"
-		"original image. \n"
+		"Map image coordinates to an underlying set of image coordinates.  \n"
+		"\n"
+		"This takes the image coordinates of the resampled image (magnified, rotated,\n"
+		"whatever) and returns the corresponding coordinate in the original image.  \n"
+		"\n"
 		""},
 	 { "GeometricModel_resampled_image_coordinate", _wrap_GeometricModel_resampled_image_coordinate, METH_VARARGS, "\n"
+		"GeometricModel_resampled_image_coordinate(GeometricModel self, ImageCoordinate Resampled_ic) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0\n"
 		"GeoCal::GeometricModel::resampled_image_coordinate\n"
-		"This is the inversion of original_image_coordinate, taking the\n"
-		"original image coordinates and returning the resampled image\n"
-		"coordinates.\n"
+		"This is the inversion of original_image_coordinate, taking the original image\n"
+		"coordinates and returning the resampled image coordinates.  \n"
 		"\n"
 		""},
-	 { "GeometricModel___str__", _wrap_GeometricModel___str__, METH_O, NULL},
+	 { "GeometricModel___str__", _wrap_GeometricModel___str__, METH_O, "GeometricModel___str__(GeometricModel self) -> std::string"},
 	 { "delete_GeometricModel", _wrap_delete_GeometricModel, METH_O, "\n"
+		"delete_GeometricModel(GeometricModel self)\n"
 		"\n"
-		"virtual GeoCal::GeometricModel::~GeometricModel()\n"
 		"GeoCal::GeometricModel::~GeometricModel\n"
 		""},
 	 { "GeometricModel_swigregister", GeometricModel_swigregister, METH_O, NULL},
 	 { "new_GeometricTiePoints", _wrap_new_GeometricTiePoints, METH_NOARGS, "\n"
+		"new_GeometricTiePoints() -> GeometricTiePoints\n"
 		"\n"
-		"GeoCal::GeometricTiePoints::GeometricTiePoints()\n"
 		"GeoCal::GeometricTiePoints::GeometricTiePoints\n"
 		""},
 	 { "GeometricTiePoints_add_point", _wrap_GeometricTiePoints_add_point, METH_VARARGS, "\n"
+		"GeometricTiePoints_add_point(GeometricTiePoints self, ImageCoordinate Resampled_ic, ImageCoordinate Original_ic)\n"
 		"\n"
-		"void GeometricTiePoints::add_point(const ImageCoordinate &X_ic, const ImageCoordinate &Y_ic)\n"
 		"GeoCal::GeometricTiePoints::add_point\n"
-		"Add a point.\n"
+		"Add a point.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints_start_replacing", _wrap_GeometricTiePoints_start_replacing, METH_O, "\n"
+		"GeometricTiePoints_start_replacing(GeometricTiePoints self)\n"
 		"\n"
-		"void GeoCal::GeometricTiePoints::start_replacing()\n"
 		"GeoCal::GeometricTiePoints::start_replacing\n"
-		"To get started we may have a first set of approximate points added to\n"
-		"the GeometricTiePoints, which it can be useful to replace them.\n"
-		"For example, picmtch5 starts with 3 points, but then replaces these 3\n"
-		"points with the first 3 image matches.\n"
+		"To get started we may have a first set of approximate points added to the\n"
+		"GeometricTiePoints, which it can be useful to replace them.  \n"
 		"\n"
-		"To support this, you can call \"start_replacing\". Each subsequent\n"
-		"call to add_point then replaces one of the existing points rather than\n"
-		"adding a new set to the end. \n"
+		"For example, picmtch5 starts with 3 points, but then replaces these 3 points\n"
+		"with the first 3 image matches.  \n"
+		"\n"
+		"To support this, you can call \"start_replacing\". Each subsequent call to\n"
+		"add_point then replaces one of the existing points rather than adding a new set\n"
+		"to the end.  \n"
+		"\n"
 		""},
 	 { "GeometricTiePoints_remove_point", _wrap_GeometricTiePoints_remove_point, METH_VARARGS, "\n"
+		"GeometricTiePoints_remove_point(GeometricTiePoints self, int Index)\n"
 		"\n"
-		"void GeometricTiePoints::remove_point(int Index)\n"
 		"GeoCal::GeometricTiePoints::remove_point\n"
-		"Remove the point at the given index.\n"
+		"Remove the point at the given index.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints_notify_update", _wrap_GeometricTiePoints_notify_update, METH_O, "\n"
+		"GeometricTiePoints_notify_update(GeometricTiePoints self)\n"
 		"\n"
-		"virtual void GeoCal::GeometricTiePoints::notify_update()\n"
 		"GeoCal::GeometricTiePoints::notify_update\n"
 		""},
 	 { "GeometricTiePoints__v_x", _wrap_GeometricTiePoints__v_x, METH_O, "\n"
+		"GeometricTiePoints__v_x(GeometricTiePoints self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeometricTiePoints::x() const\n"
 		"GeoCal::GeometricTiePoints::x\n"
-		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
+		"Return the resampled_ic as 2 columns, first is line second is sample;.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints__v_y", _wrap_GeometricTiePoints__v_y, METH_O, "\n"
+		"GeometricTiePoints__v_y(GeometricTiePoints self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeometricTiePoints::y() const\n"
 		"GeoCal::GeometricTiePoints::y\n"
-		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
+		"Return the resampled_ic as 2 columns, first is line second is sample;.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints__v_number_point", _wrap_GeometricTiePoints__v_number_point, METH_O, "\n"
+		"GeometricTiePoints__v_number_point(GeometricTiePoints self) -> int\n"
 		"\n"
-		"int GeoCal::GeometricTiePoints::number_point() const\n"
 		"GeoCal::GeometricTiePoints::number_point\n"
-		"Number of points.\n"
+		"Number of points.  \n"
 		"\n"
 		""},
-	 { "GeometricTiePoints___str__", _wrap_GeometricTiePoints___str__, METH_O, NULL},
+	 { "GeometricTiePoints___str__", _wrap_GeometricTiePoints___str__, METH_O, "GeometricTiePoints___str__(GeometricTiePoints self) -> std::string"},
 	 { "delete_GeometricTiePoints", _wrap_delete_GeometricTiePoints, METH_O, "\n"
+		"delete_GeometricTiePoints(GeometricTiePoints self)\n"
 		"\n"
-		"virtual GeoCal::GeometricTiePoints::~GeometricTiePoints()\n"
 		"GeoCal::GeometricTiePoints::~GeometricTiePoints\n"
 		""},
 	 { "GeometricTiePoints_swigregister", GeometricTiePoints_swigregister, METH_O, NULL},
@@ -7825,105 +7827,107 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "delete_ObservableGeometricTiePoints", _wrap_delete_ObservableGeometricTiePoints, METH_O, NULL},
-	 { "ObservableGeometricTiePoints_add_observer_and_keep_reference", _wrap_ObservableGeometricTiePoints_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableGeometricTiePoints_add_observer", _wrap_ObservableGeometricTiePoints_add_observer, METH_VARARGS, NULL},
-	 { "ObservableGeometricTiePoints_remove_observer", _wrap_ObservableGeometricTiePoints_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableGeometricTiePoints", _wrap_delete_ObservableGeometricTiePoints, METH_O, "delete_ObservableGeometricTiePoints(ObservableGeometricTiePoints self)"},
+	 { "ObservableGeometricTiePoints_add_observer_and_keep_reference", _wrap_ObservableGeometricTiePoints_add_observer_and_keep_reference, METH_VARARGS, "add_observer_and_keep_reference(ObservableGeometricTiePoints self, boost::shared_ptr< GeoCal::Observer< GeoCal::GeometricTiePoints > > & Obs)"},
+	 { "ObservableGeometricTiePoints_add_observer", _wrap_ObservableGeometricTiePoints_add_observer, METH_VARARGS, "add_observer(ObservableGeometricTiePoints self, ObserverGeometricTiePoints Obs)"},
+	 { "ObservableGeometricTiePoints_remove_observer", _wrap_ObservableGeometricTiePoints_remove_observer, METH_VARARGS, "remove_observer(ObservableGeometricTiePoints self, ObserverGeometricTiePoints Obs)"},
 	 { "ObservableGeometricTiePoints_swigregister", ObservableGeometricTiePoints_swigregister, METH_O, NULL},
-	 { "new_ObserverGeometricTiePoints", _wrap_new_ObserverGeometricTiePoints, METH_NOARGS, NULL},
-	 { "delete_ObserverGeometricTiePoints", _wrap_delete_ObserverGeometricTiePoints, METH_O, NULL},
-	 { "ObserverGeometricTiePoints_notify_update", _wrap_ObserverGeometricTiePoints_notify_update, METH_VARARGS, NULL},
-	 { "ObserverGeometricTiePoints_notify_add", _wrap_ObserverGeometricTiePoints_notify_add, METH_VARARGS, NULL},
-	 { "ObserverGeometricTiePoints_notify_remove", _wrap_ObserverGeometricTiePoints_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverGeometricTiePoints", _wrap_new_ObserverGeometricTiePoints, METH_NOARGS, "new_ObserverGeometricTiePoints() -> ObserverGeometricTiePoints"},
+	 { "delete_ObserverGeometricTiePoints", _wrap_delete_ObserverGeometricTiePoints, METH_O, "delete_ObserverGeometricTiePoints(ObserverGeometricTiePoints self)"},
+	 { "ObserverGeometricTiePoints_notify_update", _wrap_ObserverGeometricTiePoints_notify_update, METH_VARARGS, "notify_update(ObserverGeometricTiePoints self, GeometricTiePoints Observed_object)"},
+	 { "ObserverGeometricTiePoints_notify_add", _wrap_ObserverGeometricTiePoints_notify_add, METH_VARARGS, "notify_add(ObserverGeometricTiePoints self, GeometricTiePoints Observed_object)"},
+	 { "ObserverGeometricTiePoints_notify_remove", _wrap_ObserverGeometricTiePoints_notify_remove, METH_VARARGS, "notify_remove(ObserverGeometricTiePoints self, GeometricTiePoints Observed_object)"},
 	 { "ObserverGeometricTiePoints_swigregister", ObserverGeometricTiePoints_swigregister, METH_O, NULL},
 	 { "ObserverGeometricTiePoints_swiginit", ObserverGeometricTiePoints_swiginit, METH_VARARGS, NULL},
 	 { "GeometricModel_original_image_coordinate", _wrap_GeometricModel_original_image_coordinate, METH_VARARGS, "\n"
+		"original_image_coordinate(GeometricModel self, ImageCoordinate Resampled_ic) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::original_image_coordinate(const ImageCoordinate &Resampled_ic) const =0\n"
 		"GeoCal::GeometricModel::original_image_coordinate\n"
-		"Map image coordinates to an underlying set of image coordinates.\n"
-		"This takes the image coordinates of the resampled image (magnified,\n"
-		"rotated, whatever) and returns the corresponding coordinate in the\n"
-		"original image. \n"
+		"Map image coordinates to an underlying set of image coordinates.  \n"
+		"\n"
+		"This takes the image coordinates of the resampled image (magnified, rotated,\n"
+		"whatever) and returns the corresponding coordinate in the original image.  \n"
+		"\n"
 		""},
 	 { "GeometricModel_resampled_image_coordinate", _wrap_GeometricModel_resampled_image_coordinate, METH_VARARGS, "\n"
+		"resampled_image_coordinate(GeometricModel self, ImageCoordinate Resampled_ic) -> ImageCoordinate\n"
 		"\n"
-		"virtual ImageCoordinate GeoCal::GeometricModel::resampled_image_coordinate(const ImageCoordinate &Original_ic) const =0\n"
 		"GeoCal::GeometricModel::resampled_image_coordinate\n"
-		"This is the inversion of original_image_coordinate, taking the\n"
-		"original image coordinates and returning the resampled image\n"
-		"coordinates.\n"
+		"This is the inversion of original_image_coordinate, taking the original image\n"
+		"coordinates and returning the resampled image coordinates.  \n"
 		"\n"
 		""},
-	 { "GeometricModel___str__", _wrap_GeometricModel___str__, METH_O, NULL},
+	 { "GeometricModel___str__", _wrap_GeometricModel___str__, METH_O, "__str__(GeometricModel self) -> std::string"},
 	 { "delete_GeometricModel", _wrap_delete_GeometricModel, METH_O, "\n"
+		"delete_GeometricModel(GeometricModel self)\n"
 		"\n"
-		"virtual GeoCal::GeometricModel::~GeometricModel()\n"
 		"GeoCal::GeometricModel::~GeometricModel\n"
 		""},
 	 { "GeometricModel_swigregister", GeometricModel_swigregister, METH_O, NULL},
 	 { "new_GeometricTiePoints", _wrap_new_GeometricTiePoints, METH_NOARGS, "\n"
+		"new_GeometricTiePoints() -> GeometricTiePoints\n"
 		"\n"
-		"GeoCal::GeometricTiePoints::GeometricTiePoints()\n"
 		"GeoCal::GeometricTiePoints::GeometricTiePoints\n"
 		""},
 	 { "GeometricTiePoints_add_point", _wrap_GeometricTiePoints_add_point, METH_VARARGS, "\n"
+		"add_point(GeometricTiePoints self, ImageCoordinate Resampled_ic, ImageCoordinate Original_ic)\n"
 		"\n"
-		"void GeometricTiePoints::add_point(const ImageCoordinate &X_ic, const ImageCoordinate &Y_ic)\n"
 		"GeoCal::GeometricTiePoints::add_point\n"
-		"Add a point.\n"
+		"Add a point.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints_start_replacing", _wrap_GeometricTiePoints_start_replacing, METH_O, "\n"
+		"start_replacing(GeometricTiePoints self)\n"
 		"\n"
-		"void GeoCal::GeometricTiePoints::start_replacing()\n"
 		"GeoCal::GeometricTiePoints::start_replacing\n"
-		"To get started we may have a first set of approximate points added to\n"
-		"the GeometricTiePoints, which it can be useful to replace them.\n"
-		"For example, picmtch5 starts with 3 points, but then replaces these 3\n"
-		"points with the first 3 image matches.\n"
+		"To get started we may have a first set of approximate points added to the\n"
+		"GeometricTiePoints, which it can be useful to replace them.  \n"
 		"\n"
-		"To support this, you can call \"start_replacing\". Each subsequent\n"
-		"call to add_point then replaces one of the existing points rather than\n"
-		"adding a new set to the end. \n"
+		"For example, picmtch5 starts with 3 points, but then replaces these 3 points\n"
+		"with the first 3 image matches.  \n"
+		"\n"
+		"To support this, you can call \"start_replacing\". Each subsequent call to\n"
+		"add_point then replaces one of the existing points rather than adding a new set\n"
+		"to the end.  \n"
+		"\n"
 		""},
 	 { "GeometricTiePoints_remove_point", _wrap_GeometricTiePoints_remove_point, METH_VARARGS, "\n"
+		"remove_point(GeometricTiePoints self, int Index)\n"
 		"\n"
-		"void GeometricTiePoints::remove_point(int Index)\n"
 		"GeoCal::GeometricTiePoints::remove_point\n"
-		"Remove the point at the given index.\n"
+		"Remove the point at the given index.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints_notify_update", _wrap_GeometricTiePoints_notify_update, METH_O, "\n"
+		"notify_update(GeometricTiePoints self)\n"
 		"\n"
-		"virtual void GeoCal::GeometricTiePoints::notify_update()\n"
 		"GeoCal::GeometricTiePoints::notify_update\n"
 		""},
 	 { "GeometricTiePoints__v_x", _wrap_GeometricTiePoints__v_x, METH_O, "\n"
+		"_v_x(GeometricTiePoints self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeometricTiePoints::x() const\n"
 		"GeoCal::GeometricTiePoints::x\n"
-		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
+		"Return the resampled_ic as 2 columns, first is line second is sample;.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints__v_y", _wrap_GeometricTiePoints__v_y, METH_O, "\n"
+		"_v_y(GeometricTiePoints self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > GeometricTiePoints::y() const\n"
 		"GeoCal::GeometricTiePoints::y\n"
-		"Return the resampled_ic as 2 columns, first is line second is sample;.\n"
+		"Return the resampled_ic as 2 columns, first is line second is sample;.  \n"
 		"\n"
 		""},
 	 { "GeometricTiePoints__v_number_point", _wrap_GeometricTiePoints__v_number_point, METH_O, "\n"
+		"_v_number_point(GeometricTiePoints self) -> int\n"
 		"\n"
-		"int GeoCal::GeometricTiePoints::number_point() const\n"
 		"GeoCal::GeometricTiePoints::number_point\n"
-		"Number of points.\n"
+		"Number of points.  \n"
 		"\n"
 		""},
-	 { "GeometricTiePoints___str__", _wrap_GeometricTiePoints___str__, METH_O, NULL},
+	 { "GeometricTiePoints___str__", _wrap_GeometricTiePoints___str__, METH_O, "__str__(GeometricTiePoints self) -> std::string"},
 	 { "delete_GeometricTiePoints", _wrap_delete_GeometricTiePoints, METH_O, "\n"
+		"delete_GeometricTiePoints(GeometricTiePoints self)\n"
 		"\n"
-		"virtual GeoCal::GeometricTiePoints::~GeometricTiePoints()\n"
 		"GeoCal::GeometricTiePoints::~GeometricTiePoints\n"
 		""},
 	 { "GeometricTiePoints_swigregister", GeometricTiePoints_swigregister, METH_O, NULL},

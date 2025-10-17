@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_gdal.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_gdal:
 _geocal_gdal.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_gdal.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,11 +142,13 @@ import geocal_swig.geocal_exception
 class GdalBase(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Base class of Gdal<T>.
 
-    This contains the portion that doesn't depend on T.
+    Base class of Gdal<T>.  
 
-    C++ includes: geocal_gdal.h 
+    This contains the portion that doesn't depend on T.  
+
+    C++ includes: geocal_gdal.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -198,6 +203,7 @@ class GdalBase(geocal_swig.generic_object.GenericObject):
     driver_option_list = _swig_new_static_method(_geocal_gdal.GdalBase_driver_option_list)
 
     def __init__(self):
+        r"""__init__(GdalBase self) -> GdalBase"""
         _geocal_gdal.GdalBase_swiginit(self, _geocal_gdal.new_GdalBase())
     __swig_destroy__ = _geocal_gdal.delete_GdalBase
 

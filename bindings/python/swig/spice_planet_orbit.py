@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spice_planet_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spice_planet_orbit:
 _spice_planet_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spice_planet_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,41 +144,40 @@ import geocal_swig.look_vector
 class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This is an orbit that uses a SPICE kernel as the underlying
-    implementation.
 
-    This class is used with planet satellites. Compare this class with
-    SpiceOrbit. These could perhaps be merged at some point, but for right
-    now just keep these separate. Don't have enough experience with these
-    classes yet to know what the interface should be like, or if these
-    really could be merged.
+    This is an orbit that uses a SPICE kernel as the underlying implementation.  
 
-    Note that this combined both the space craft coordinate system and
-    conversion to frame coordinates. We could split this out into a
-    separate camera model, but there doesn't seem to be much of a reason
-    to do this. We could revisit this if there is ever a need to. In
-    practice, this means that something like a QuaternionCamera would have
-    the identify Frame_to_sc quaternion.
+    This class is used with planet satellites. Compare this class with SpiceOrbit.
+    These could perhaps be merged at some point, but for right now just keep these
+    separate. Don't have enough experience with these classes yet to know what the
+    interface should be like, or if these really could be merged.  
 
-    This class can be a bit on the slow side, you may want to consider
-    wrapping it with OrbitListCache to cache the orbit data calculation.
+    Note that this combined both the space craft coordinate system and conversion to
+    frame coordinates. We could split this out into a separate camera model, but
+    there doesn't seem to be much of a reason to do this. We could revisit this if
+    there is ever a need to. In practice, this means that something like a
+    QuaternionCamera would have the identify Frame_to_sc quaternion.  
 
-    The Abcorr should be any of the strings spkezp (https://naif.jpl.nasa.
-    gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts (e.g.,
-    "LT").
+    This class can be a bit on the slow side, you may want to consider wrapping it
+    with OrbitListCache to cache the orbit data calculation.  
 
-    Note that if you include the stellar correction (e.g., "LT+S") you
-    should not also include the velocity aberration correction in e.g.,
-    QuaternionOrbitData. Stellar correction gives the "apparent"
-    position, which already accounts for the aberration angle correction
+    The Abcorr should be any of the strings spkezp
+    (https://naif.jpl.nasa.gov/pub/naif/toolkit_docs/C/cspice/spkezp_c.html) accepts
+    (e.g., "LT").  
 
-    Also, it is important to note that the light time calculated is to the
-    center of the Body, not the surface. If you are trying to find a
-    intercept with something near the surface this can be considerably
-    different (see sincpt_c vs spkezp_c in the SPICE documentation). So
-    generally you don't want anything other than the default "NONE".
+    Note that if you include the stellar correction (e.g., "LT+S") you should
+    *not* also include the velocity aberration correction in e.g.,
+    QuaternionOrbitData. Stellar correction gives the "apparent" position, which
+    already accounts for the aberration angle correction  
 
-    C++ includes: spice_planet_orbit.h 
+    Also, it is important to note that the light time calculated is to the center of
+    the Body, not the surface. If you are trying to find a intercept with something
+    near the surface this can be considerably different (see sincpt_c vs spkezp_c in
+    the SPICE documentation). So generally you don't want anything other than the
+    default "NONE".  
+
+    C++ includes: spice_planet_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -183,20 +185,21 @@ class SpicePlanetOrbit(geocal_swig.orbit.Orbit):
 
     def __init__(self, *args):
         r"""
+        __init__(SpicePlanetOrbit self, std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, int Naif_id, std::string const & Abcorr="NONE") -> SpicePlanetOrbit
+        __init__(SpicePlanetOrbit self, std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, vector_string Kernel_list, int Naif_id, std::string const & Abcorr="NONE") -> SpicePlanetOrbit
+        __init__(SpicePlanetOrbit self, std::string const & Target_name, std::string const & Spacecraft_reference_frame_name, SpiceKernelList Kernel_list, int Naif_id, std::string const & Abcorr="NONE") -> SpicePlanetOrbit
 
-        SpicePlanetOrbit::SpicePlanetOrbit(const std::string &Target_name, const std::string
-        &Spacecraft_reference_frame_name, int Naif_id, const std::string
-        &Abcorr="NONE")
         GeoCal::SpicePlanetOrbit::SpicePlanetOrbit
-        Create an orbit that has position information for the Target_name
-        (e.g., "GLL", "MRO"), and pointing information in the
-        Spacecraft_reference_frame_name (e.g., "GLL_SCAN_PLANE",
-        "MRO_CTX").
-        Note that the Target_name is of a body (e.g., something we have a spk
-        kernel for), while the Spacecraft_reference_frame_name is for a frame
-        (e.g., something we have a fk kernel for). In addition to the frame
-        definition, you'll generally need a C kernel file (ck kernel) giving
-        the orientation of the frame with the target. 
+        Create an orbit that has position information for the Target_name (e.g.,
+        "GLL", "MRO"), and pointing information in the
+        Spacecraft_reference_frame_name (e.g., "GLL_SCAN_PLANE", "MRO_CTX").  
+
+        Note that the Target_name is of a body (e.g., something we have a spk kernel
+        for), while the Spacecraft_reference_frame_name is for a frame (e.g., something
+        we have a fk kernel for). In addition to the frame definition, you'll generally
+        need a C kernel file (ck kernel) giving the orientation of the frame with the
+        target.  
+
         """
         _spice_planet_orbit.SpicePlanetOrbit_swiginit(self, _spice_planet_orbit.new_SpicePlanetOrbit(*args))
     orbit_data = _swig_new_instance_method(_spice_planet_orbit.SpicePlanetOrbit_orbit_data)

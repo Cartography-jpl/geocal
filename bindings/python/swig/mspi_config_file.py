@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _mspi_config_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _mspi_config_file:
 _mspi_config_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _mspi_config_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,22 +140,23 @@ import geocal_swig.generic_object
 class MspiConfigFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    MSPI uses ASCII configuration files.
 
-    The files can contain comments, which start with a "#" and go to the
-    end of the line.
+    MSPI uses ASCII configuration files.  
 
-    Everything else should be in a form like: value_1 value_2 ... :
-    keyword_name
+    The files can contain comments, which start with a "#" and go to the end of
+    the line.  
 
-    It is perfectly ok for there to be multiple lines before the variable
-    name, so something like:
+    Everything else should be in a form like: value_1 value_2 ... : keyword_name  
 
-    value_1 value_2 value_3 value_4 : keyword_name
+    It is perfectly ok for there to be multiple lines before the variable name, so
+    something like:  
 
-    Anything at the end of the file is ignored.
+    value_1 value_2 value_3 value_4 : keyword_name  
 
-    C++ includes: mspi_config_file.h 
+    Anything at the end of the file is ignored.  
+
+    C++ includes: mspi_config_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -160,11 +164,12 @@ class MspiConfigFile(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Fname):
         r"""
+        __init__(MspiConfigFile self, std::string const & Fname) -> MspiConfigFile
 
-        MspiConfigFile::MspiConfigFile(const std::string &Fname)
         GeoCal::MspiConfigFile::MspiConfigFile
-        Read the given configuration file.
-        See the class comments for the details of the format of this string.
+        Read the given configuration file.  
+
+        See the class comments for the details of the format of this string.  
 
         """
         _mspi_config_file.MspiConfigFile_swiginit(self, _mspi_config_file.new_MspiConfigFile(Fname))
@@ -195,14 +200,15 @@ _mspi_config_file.MspiConfigFile_swigregister(MspiConfigFile)
 class MspiConfigTable(geocal_swig.generic_object.GenericObject):
     r"""
 
-    Small adapter that lets you refer to a table by column name.
 
-    The convention is that the table "FOO" has a config entry of
-    FOO.columns giving the column names, and FOO.table giving the actual
-    values. We look of a value by doing "value<Type>(index,
-    column_name)".
+    Small adapter that lets you refer to a table by column name.  
 
-    C++ includes: mspi_config_file.h 
+    The convention is that the table "FOO" has a config entry of FOO.columns
+    giving the column names, and FOO.table giving the actual values. We look of a
+    value by doing "value<Type>(index, column_name)".  
+
+    C++ includes: mspi_config_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -210,10 +216,10 @@ class MspiConfigTable(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Config, Table_name):
         r"""
+        __init__(MspiConfigTable self, MspiConfigFile Config, std::string const & Table_name) -> MspiConfigTable
 
-        MspiConfigTable::MspiConfigTable(const MspiConfigFile &Config, const std::string &Table_name)
         GeoCal::MspiConfigTable::MspiConfigTable
-        Create a MspiConfigTable for the given table name in the given file.
+        Create a MspiConfigTable for the given table name in the given file.  
 
         """
         _mspi_config_file.MspiConfigTable_swiginit(self, _mspi_config_file.new_MspiConfigTable(Config, Table_name))

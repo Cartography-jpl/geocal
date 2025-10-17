@@ -11329,204 +11329,226 @@ SWIGINTERN PyObject *VicarFile_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarFile", _wrap_new_VicarFile, METH_VARARGS, "\n"
+		"VicarFile(std::string const & Fname, GeoCal::VicarFile::access_type Access=READ)\n"
+		"VicarFile(std::string const & Fname, int Number_line, int Number_sample, std::string const & Type=\"BYTE\")\n"
+		"VicarFile(std::string const & Fname, int Number_line, int Number_sample, int Number_band, std::string const & Type=\"BYTE\", std::string const & Org=\"BSQ\")\n"
+		"VicarFile(int Instance, GeoCal::VicarFile::access_type Access=READ, std::string const & Name=\"INP\")\n"
+		"VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1, std::string const & Type=\"BYTE\", std::string const & Name=\"OUT\", std::string const & Org=\"BSQ\", GeoCal::VicarFile::compression C=NONE)\n"
 		"\n"
-		"VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1,\n"
-		"const std::string &Type=\"BYTE\", const std::string &Name=\"OUT\",\n"
-		"const std::string &Org=\"BSQ\", compression C=NONE)\n"
 		"GeoCal::VicarFile::VicarFile\n"
-		"Create a new VICAR file with the given size.\n"
-		"Use the VICAR Name and Instance input (so for example, \"INP\" and 2\n"
-		"is the second INP file passed to a VICAR program. \n"
+		"Create a new VICAR file with the given size.  \n"
+		"\n"
+		"Use the VICAR Name and Instance input (so for example, \"INP\" and 2 is the\n"
+		"second INP file passed to a VICAR program.  \n"
+		"\n"
 		""},
 	 { "delete_VicarFile", _wrap_delete_VicarFile, METH_O, "\n"
+		"delete_VicarFile(VicarFile self)\n"
 		"\n"
-		"VicarFile::~VicarFile()\n"
 		"GeoCal::VicarFile::~VicarFile\n"
-		"Destructor, closes file.\n"
+		"Destructor, closes file.  \n"
 		"\n"
 		""},
 	 { "VicarFile_vicar_available", _wrap_VicarFile_vicar_available, METH_NOARGS, "\n"
+		"VicarFile_vicar_available() -> bool\n"
 		"\n"
-		"bool VicarFile::vicar_available()\n"
 		"GeoCal::VicarFile::vicar_available\n"
-		"Return true if vicar functionality is available, otherwise return\n"
-		"false.\n"
-		"We have vicar functionality of the library was configured to use the\n"
-		"VICAR library. \n"
+		"Return true if vicar functionality is available, otherwise return false.  \n"
+		"\n"
+		"We have vicar functionality of the library was configured to use the VICAR\n"
+		"library.  \n"
+		"\n"
 		""},
 	 { "VicarFile__v_access", _wrap_VicarFile__v_access, METH_O, "\n"
+		"VicarFile__v_access(VicarFile self) -> GeoCal::VicarFile::access_type\n"
 		"\n"
-		"access_type GeoCal::VicarFile::access() const\n"
 		"GeoCal::VicarFile::access\n"
-		"Access type of file.\n"
+		"Access type of file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_force_area_pixel", _wrap_VicarFile__v_force_area_pixel, METH_O, "\n"
+		"VicarFile__v_force_area_pixel(VicarFile self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarFile::force_area_pixel() const\n"
 		"GeoCal::VicarFile::force_area_pixel\n"
-		"If true, then force the file to be treated as \"pixel is area\".\n"
-		"This is really just meant as a work around for the SRTM data, which\n"
-		"incorrectly labels the data as \"point\" rather than \"area\". Since\n"
-		"this is a 15 meter difference, it matters for many applications. Most\n"
-		"users should just ignore this value. \n"
+		"If true, then force the file to be treated as \"pixel is area\".  \n"
+		"\n"
+		"This is really just meant as a work around for the SRTM data, which incorrectly\n"
+		"labels the data as \"point\" rather than \"area\". Since this is a 15 meter\n"
+		"difference, it matters for many applications. Most users should just ignore this\n"
+		"value.  \n"
+		"\n"
 		""},
 	 { "VicarFile__v_file_name", _wrap_VicarFile__v_file_name, METH_O, "\n"
+		"VicarFile__v_file_name(VicarFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::VicarFile::file_name() const\n"
 		"GeoCal::VicarFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "VicarFile_is_vicar_file", _wrap_VicarFile_is_vicar_file, METH_O, "\n"
+		"VicarFile_is_vicar_file(std::string const & Fname) -> bool\n"
 		"\n"
-		"bool VicarFile::is_vicar_file(const std::string &Fname)\n"
 		"GeoCal::VicarFile::is_vicar_file\n"
-		"Determine if a given file is a VICAR file or not.\n"
-		"This looks for the first few characters of the file being \"LBLSIZE=\"\n"
+		"Determine if a given file is a VICAR file or not.  \n"
+		"\n"
+		"This looks for the first few characters of the file being \"LBLSIZE=\"  \n"
 		"\n"
 		""},
 	 { "VicarFile_file_name_to_unit", _wrap_VicarFile_file_name_to_unit, METH_O, "\n"
+		"VicarFile_file_name_to_unit(std::string const & Fname) -> int\n"
 		"\n"
-		"int VicarFile::file_name_to_unit(const std::string &Fname)\n"
 		"GeoCal::VicarFile::file_name_to_unit\n"
-		"Return a VICAR unit number that is tied to the given file name.\n"
+		"Return a VICAR unit number that is tied to the given file name.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_number_band", _wrap_VicarFile__v_number_band, METH_O, "\n"
+		"VicarFile__v_number_band(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::number_band() const\n"
 		"GeoCal::VicarFile::number_band\n"
-		"Number of bands in file.\n"
+		"Number of bands in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_number_line", _wrap_VicarFile__v_number_line, METH_O, "\n"
+		"VicarFile__v_number_line(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::number_line() const\n"
 		"GeoCal::VicarFile::number_line\n"
-		"Number of lines in file.\n"
+		"Number of lines in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_number_sample", _wrap_VicarFile__v_number_sample, METH_O, "\n"
+		"VicarFile__v_number_sample(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::number_sample() const\n"
 		"GeoCal::VicarFile::number_sample\n"
-		"Number of samples in file.\n"
+		"Number of samples in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_type", _wrap_VicarFile__v_type, METH_O, "\n"
+		"VicarFile__v_type(VicarFile self) -> GeoCal::VicarFile::data_type\n"
 		"\n"
-		"data_type GeoCal::VicarFile::type() const\n"
 		"GeoCal::VicarFile::type\n"
-		"Type of data in file.\n"
+		"Type of data in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_unit", _wrap_VicarFile__v_unit, METH_O, "\n"
+		"VicarFile__v_unit(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::unit() const\n"
 		"GeoCal::VicarFile::unit\n"
-		"Unit number for VicarFile.\n"
+		"Unit number for VicarFile.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_map_info", _wrap_VicarFile__v_map_info, METH_VARARGS, "\n"
+		"VicarFile__v_map_info(VicarFile self) -> MapInfo\n"
+		"VicarFile__v_map_info(VicarFile self, MapInfo V)\n"
 		"\n"
-		"void VicarFile::map_info(const MapInfo &M)\n"
 		"GeoCal::VicarFile::map_info\n"
-		"Set metadata for MapInfo.\n"
+		"Set metadata for MapInfo.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_rpc", _wrap_VicarFile__v_rpc, METH_VARARGS, "\n"
+		"VicarFile__v_rpc(VicarFile self) -> Rpc\n"
+		"VicarFile__v_rpc(VicarFile self, Rpc V)\n"
 		"\n"
-		"void VicarFile::rpc(const Rpc &R)\n"
 		"GeoCal::VicarFile::rpc\n"
-		"Set metadata for Rpc.\n"
+		"Set metadata for Rpc.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_rsm", _wrap_VicarFile__v_rsm, METH_VARARGS, "\n"
+		"VicarFile__v_rsm(VicarFile self) -> boost::shared_ptr< GeoCal::Rsm >\n"
+		"VicarFile__v_rsm(VicarFile self, boost::shared_ptr< GeoCal::Rsm > const & V)\n"
 		"\n"
-		"void VicarFile::rsm(const boost::shared_ptr< Rsm > &R, rsm_file_type\n"
-		"File_type=RSM_NITF_FILE)\n"
 		"GeoCal::VicarFile::rsm\n"
-		"Set metadata for Rsm.\n"
+		"Set metadata for Rsm.  \n"
+		"\n"
 		"Note we store this as a separate detached file in either NITF or boost\n"
-		"serialization XML format. The VICAR file then has a pointer to the\n"
-		"file. The pointer just has a file name, it is assumed the file is in\n"
-		"the same directory as the VICAR file. \n"
+		"serialization XML format. The VICAR file then has a pointer to the file. The\n"
+		"pointer just has a file name, it is assumed the file is in the same directory as\n"
+		"the VICAR file.  \n"
+		"\n"
 		""},
 	 { "VicarFile__v_igc_glas_gfm", _wrap_VicarFile__v_igc_glas_gfm, METH_VARARGS, "\n"
+		"VicarFile__v_igc_glas_gfm(VicarFile self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
+		"VicarFile__v_igc_glas_gfm(VicarFile self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & V)\n"
 		"\n"
-		"void VicarFile::igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,\n"
-		"glas_gfm_file_type File_type=GLAS_GFM_NITF_FILE)\n"
 		"GeoCal::VicarFile::igc_glas_gfm\n"
-		"Set metadata for GLAS/GFM.\n"
+		"Set metadata for GLAS/GFM.  \n"
+		"\n"
 		"Note we store this as a separate detached file in either NITF or boost\n"
-		"serialization XML format. The VICAR file then has a pointer to the\n"
-		"file. The pointer just has a file name, it is assumed the file is in\n"
-		"the same directory as the VICAR file. \n"
+		"serialization XML format. The VICAR file then has a pointer to the file. The\n"
+		"pointer just has a file name, it is assumed the file is in the same directory as\n"
+		"the VICAR file.  \n"
+		"\n"
 		""},
 	 { "VicarFile_close", _wrap_VicarFile_close, METH_O, "\n"
+		"VicarFile_close(VicarFile self)\n"
 		"\n"
-		"void VicarFile::close()\n"
 		"GeoCal::VicarFile::close\n"
-		"Close file.\n"
+		"Close file.  \n"
 		"\n"
 		""},
 	 { "VicarFile_flush", _wrap_VicarFile_flush, METH_O, "\n"
+		"VicarFile_flush(VicarFile self)\n"
 		"\n"
-		"void GeoCal::VicarFile::flush() const\n"
 		"GeoCal::VicarFile::flush\n"
-		"Flush data to disk.\n"
+		"Flush data to disk.  \n"
 		"\n"
 		""},
-	 { "VicarFile___str__", _wrap_VicarFile___str__, METH_O, NULL},
+	 { "VicarFile___str__", _wrap_VicarFile___str__, METH_O, "VicarFile___str__(VicarFile self) -> std::string"},
 	 { "VicarFile_label_delete", _wrap_VicarFile_label_delete, METH_VARARGS, "\n"
+		"VicarFile_label_delete(VicarFile self, std::string const & F, std::string const & Property=\"\")\n"
 		"\n"
-		"void VicarFile::label_delete(const std::string &F, const std::string &Property=\"\")\n"
 		"GeoCal::VicarFile::label_delete\n"
-		"Delete a label from a file.\n"
+		"Delete a label from a file.  \n"
 		"\n"
 		""},
 	 { "VicarFile_label_set", _wrap_VicarFile_label_set, METH_VARARGS, "\n"
+		"VicarFile_label_set(VicarFile self, std::string const & F, int Val, std::string const & Property=\"\")\n"
+		"VicarFile_label_set(VicarFile self, std::string const & F, float Val, std::string const & Property=\"\")\n"
+		"VicarFile_label_set(VicarFile self, std::string const & F, double Val, std::string const & Property=\"\")\n"
+		"VicarFile_label_set(VicarFile self, std::string const & F, std::string const & Val, std::string const & Property=\"\")\n"
 		"\n"
-		"void VicarFile::label_set(const std::string &F, int Val, const std::string &Property=\"\")\n"
 		"GeoCal::VicarFile::label_set\n"
-		"Set the value of a label.\n"
-		"If the label is already in the file, is is deleted and replaced with\n"
-		"this new value. Otherwise, it is simply added. Optionally the label\n"
-		"can be part of a Property. \n"
+		"Set the value of a label.  \n"
+		"\n"
+		"If the label is already in the file, is is deleted and replaced with this new\n"
+		"value. Otherwise, it is simply added. Optionally the label can be part of a\n"
+		"Property.  \n"
+		"\n"
 		""},
-	 { "VicarFile_ltype", _wrap_VicarFile_ltype, METH_VARARGS, NULL},
-	 { "VicarFile_label_int", _wrap_VicarFile_label_int, METH_VARARGS, NULL},
-	 { "VicarFile_label_float", _wrap_VicarFile_label_float, METH_VARARGS, NULL},
-	 { "VicarFile_label_double", _wrap_VicarFile_label_double, METH_VARARGS, NULL},
+	 { "VicarFile_ltype", _wrap_VicarFile_ltype, METH_VARARGS, "VicarFile_ltype(VicarFile self, std::string const & N) -> int"},
+	 { "VicarFile_label_int", _wrap_VicarFile_label_int, METH_VARARGS, "VicarFile_label_int(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< int,std::allocator< int > >"},
+	 { "VicarFile_label_float", _wrap_VicarFile_label_float, METH_VARARGS, "VicarFile_label_float(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< float,std::allocator< float > >"},
+	 { "VicarFile_label_double", _wrap_VicarFile_label_double, METH_VARARGS, "VicarFile_label_double(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< double,std::allocator< double > >"},
 	 { "VicarFile_label_string", _wrap_VicarFile_label_string, METH_VARARGS, "\n"
+		"VicarFile_label_string(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< std::string,std::allocator< std::string > >\n"
 		"\n"
-		"std::string GeoCal::VicarFile::label_string(const std::string &F, const std::string &Property=\"\") const\n"
 		"GeoCal::VicarFile::label_string\n"
-		"Non template form of label, useful in some contexts.\n"
+		"Non template form of label, useful in some contexts.  \n"
 		"\n"
 		""},
-	 { "VicarFile_label_list", _wrap_VicarFile_label_list, METH_O, NULL},
-	 { "VicarFile_property_list", _wrap_VicarFile_property_list, METH_O, NULL},
+	 { "VicarFile_label_list", _wrap_VicarFile_label_list, METH_O, "VicarFile_label_list(VicarFile self) -> std::vector< std::string,std::allocator< std::string > >"},
+	 { "VicarFile_property_list", _wrap_VicarFile_property_list, METH_O, "VicarFile_property_list(VicarFile self) -> std::vector< std::string,std::allocator< std::string > >"},
 	 { "VicarFile_swigregister", VicarFile_swigregister, METH_O, NULL},
 	 { "VicarFile_swiginit", VicarFile_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -11535,204 +11557,226 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarFile", _wrap_new_VicarFile, METH_VARARGS, "\n"
+		"VicarFile(std::string const & Fname, GeoCal::VicarFile::access_type Access=READ)\n"
+		"VicarFile(std::string const & Fname, int Number_line, int Number_sample, std::string const & Type=\"BYTE\")\n"
+		"VicarFile(std::string const & Fname, int Number_line, int Number_sample, int Number_band, std::string const & Type=\"BYTE\", std::string const & Org=\"BSQ\")\n"
+		"VicarFile(int Instance, GeoCal::VicarFile::access_type Access=READ, std::string const & Name=\"INP\")\n"
+		"VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1, std::string const & Type=\"BYTE\", std::string const & Name=\"OUT\", std::string const & Org=\"BSQ\", GeoCal::VicarFile::compression C=NONE)\n"
 		"\n"
-		"VicarFile::VicarFile(int Instance, int Number_line, int Number_sample, int Number_band=1,\n"
-		"const std::string &Type=\"BYTE\", const std::string &Name=\"OUT\",\n"
-		"const std::string &Org=\"BSQ\", compression C=NONE)\n"
 		"GeoCal::VicarFile::VicarFile\n"
-		"Create a new VICAR file with the given size.\n"
-		"Use the VICAR Name and Instance input (so for example, \"INP\" and 2\n"
-		"is the second INP file passed to a VICAR program. \n"
+		"Create a new VICAR file with the given size.  \n"
+		"\n"
+		"Use the VICAR Name and Instance input (so for example, \"INP\" and 2 is the\n"
+		"second INP file passed to a VICAR program.  \n"
+		"\n"
 		""},
 	 { "delete_VicarFile", _wrap_delete_VicarFile, METH_O, "\n"
+		"delete_VicarFile(VicarFile self)\n"
 		"\n"
-		"VicarFile::~VicarFile()\n"
 		"GeoCal::VicarFile::~VicarFile\n"
-		"Destructor, closes file.\n"
+		"Destructor, closes file.  \n"
 		"\n"
 		""},
 	 { "VicarFile_vicar_available", _wrap_VicarFile_vicar_available, METH_NOARGS, "\n"
+		"vicar_available() -> bool\n"
 		"\n"
-		"bool VicarFile::vicar_available()\n"
 		"GeoCal::VicarFile::vicar_available\n"
-		"Return true if vicar functionality is available, otherwise return\n"
-		"false.\n"
-		"We have vicar functionality of the library was configured to use the\n"
-		"VICAR library. \n"
+		"Return true if vicar functionality is available, otherwise return false.  \n"
+		"\n"
+		"We have vicar functionality of the library was configured to use the VICAR\n"
+		"library.  \n"
+		"\n"
 		""},
 	 { "VicarFile__v_access", _wrap_VicarFile__v_access, METH_O, "\n"
+		"_v_access(VicarFile self) -> GeoCal::VicarFile::access_type\n"
 		"\n"
-		"access_type GeoCal::VicarFile::access() const\n"
 		"GeoCal::VicarFile::access\n"
-		"Access type of file.\n"
+		"Access type of file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_force_area_pixel", _wrap_VicarFile__v_force_area_pixel, METH_O, "\n"
+		"_v_force_area_pixel(VicarFile self) -> bool\n"
 		"\n"
-		"bool GeoCal::VicarFile::force_area_pixel() const\n"
 		"GeoCal::VicarFile::force_area_pixel\n"
-		"If true, then force the file to be treated as \"pixel is area\".\n"
-		"This is really just meant as a work around for the SRTM data, which\n"
-		"incorrectly labels the data as \"point\" rather than \"area\". Since\n"
-		"this is a 15 meter difference, it matters for many applications. Most\n"
-		"users should just ignore this value. \n"
+		"If true, then force the file to be treated as \"pixel is area\".  \n"
+		"\n"
+		"This is really just meant as a work around for the SRTM data, which incorrectly\n"
+		"labels the data as \"point\" rather than \"area\". Since this is a 15 meter\n"
+		"difference, it matters for many applications. Most users should just ignore this\n"
+		"value.  \n"
+		"\n"
 		""},
 	 { "VicarFile__v_file_name", _wrap_VicarFile__v_file_name, METH_O, "\n"
+		"_v_file_name(VicarFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::VicarFile::file_name() const\n"
 		"GeoCal::VicarFile::file_name\n"
-		"File name.\n"
+		"File name.  \n"
 		"\n"
 		""},
 	 { "VicarFile_is_vicar_file", _wrap_VicarFile_is_vicar_file, METH_O, "\n"
+		"is_vicar_file(std::string const & Fname) -> bool\n"
 		"\n"
-		"bool VicarFile::is_vicar_file(const std::string &Fname)\n"
 		"GeoCal::VicarFile::is_vicar_file\n"
-		"Determine if a given file is a VICAR file or not.\n"
-		"This looks for the first few characters of the file being \"LBLSIZE=\"\n"
+		"Determine if a given file is a VICAR file or not.  \n"
+		"\n"
+		"This looks for the first few characters of the file being \"LBLSIZE=\"  \n"
 		"\n"
 		""},
 	 { "VicarFile_file_name_to_unit", _wrap_VicarFile_file_name_to_unit, METH_O, "\n"
+		"file_name_to_unit(std::string const & Fname) -> int\n"
 		"\n"
-		"int VicarFile::file_name_to_unit(const std::string &Fname)\n"
 		"GeoCal::VicarFile::file_name_to_unit\n"
-		"Return a VICAR unit number that is tied to the given file name.\n"
+		"Return a VICAR unit number that is tied to the given file name.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_number_band", _wrap_VicarFile__v_number_band, METH_O, "\n"
+		"_v_number_band(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::number_band() const\n"
 		"GeoCal::VicarFile::number_band\n"
-		"Number of bands in file.\n"
+		"Number of bands in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_number_line", _wrap_VicarFile__v_number_line, METH_O, "\n"
+		"_v_number_line(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::number_line() const\n"
 		"GeoCal::VicarFile::number_line\n"
-		"Number of lines in file.\n"
+		"Number of lines in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_number_sample", _wrap_VicarFile__v_number_sample, METH_O, "\n"
+		"_v_number_sample(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::number_sample() const\n"
 		"GeoCal::VicarFile::number_sample\n"
-		"Number of samples in file.\n"
+		"Number of samples in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_type", _wrap_VicarFile__v_type, METH_O, "\n"
+		"_v_type(VicarFile self) -> GeoCal::VicarFile::data_type\n"
 		"\n"
-		"data_type GeoCal::VicarFile::type() const\n"
 		"GeoCal::VicarFile::type\n"
-		"Type of data in file.\n"
+		"Type of data in file.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_unit", _wrap_VicarFile__v_unit, METH_O, "\n"
+		"_v_unit(VicarFile self) -> int\n"
 		"\n"
-		"int GeoCal::VicarFile::unit() const\n"
 		"GeoCal::VicarFile::unit\n"
-		"Unit number for VicarFile.\n"
+		"Unit number for VicarFile.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_map_info", _wrap_VicarFile__v_map_info, METH_VARARGS, "\n"
+		"_v_map_info(VicarFile self) -> MapInfo\n"
+		"_v_map_info(VicarFile self, MapInfo V)\n"
 		"\n"
-		"void VicarFile::map_info(const MapInfo &M)\n"
 		"GeoCal::VicarFile::map_info\n"
-		"Set metadata for MapInfo.\n"
+		"Set metadata for MapInfo.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_rpc", _wrap_VicarFile__v_rpc, METH_VARARGS, "\n"
+		"_v_rpc(VicarFile self) -> Rpc\n"
+		"_v_rpc(VicarFile self, Rpc V)\n"
 		"\n"
-		"void VicarFile::rpc(const Rpc &R)\n"
 		"GeoCal::VicarFile::rpc\n"
-		"Set metadata for Rpc.\n"
+		"Set metadata for Rpc.  \n"
 		"\n"
 		""},
 	 { "VicarFile__v_rsm", _wrap_VicarFile__v_rsm, METH_VARARGS, "\n"
+		"_v_rsm(VicarFile self) -> boost::shared_ptr< GeoCal::Rsm >\n"
+		"_v_rsm(VicarFile self, boost::shared_ptr< GeoCal::Rsm > const & V)\n"
 		"\n"
-		"void VicarFile::rsm(const boost::shared_ptr< Rsm > &R, rsm_file_type\n"
-		"File_type=RSM_NITF_FILE)\n"
 		"GeoCal::VicarFile::rsm\n"
-		"Set metadata for Rsm.\n"
+		"Set metadata for Rsm.  \n"
+		"\n"
 		"Note we store this as a separate detached file in either NITF or boost\n"
-		"serialization XML format. The VICAR file then has a pointer to the\n"
-		"file. The pointer just has a file name, it is assumed the file is in\n"
-		"the same directory as the VICAR file. \n"
+		"serialization XML format. The VICAR file then has a pointer to the file. The\n"
+		"pointer just has a file name, it is assumed the file is in the same directory as\n"
+		"the VICAR file.  \n"
+		"\n"
 		""},
 	 { "VicarFile__v_igc_glas_gfm", _wrap_VicarFile__v_igc_glas_gfm, METH_VARARGS, "\n"
+		"_v_igc_glas_gfm(VicarFile self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
+		"_v_igc_glas_gfm(VicarFile self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & V)\n"
 		"\n"
-		"void VicarFile::igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,\n"
-		"glas_gfm_file_type File_type=GLAS_GFM_NITF_FILE)\n"
 		"GeoCal::VicarFile::igc_glas_gfm\n"
-		"Set metadata for GLAS/GFM.\n"
+		"Set metadata for GLAS/GFM.  \n"
+		"\n"
 		"Note we store this as a separate detached file in either NITF or boost\n"
-		"serialization XML format. The VICAR file then has a pointer to the\n"
-		"file. The pointer just has a file name, it is assumed the file is in\n"
-		"the same directory as the VICAR file. \n"
+		"serialization XML format. The VICAR file then has a pointer to the file. The\n"
+		"pointer just has a file name, it is assumed the file is in the same directory as\n"
+		"the VICAR file.  \n"
+		"\n"
 		""},
 	 { "VicarFile_close", _wrap_VicarFile_close, METH_O, "\n"
+		"close(VicarFile self)\n"
 		"\n"
-		"void VicarFile::close()\n"
 		"GeoCal::VicarFile::close\n"
-		"Close file.\n"
+		"Close file.  \n"
 		"\n"
 		""},
 	 { "VicarFile_flush", _wrap_VicarFile_flush, METH_O, "\n"
+		"flush(VicarFile self)\n"
 		"\n"
-		"void GeoCal::VicarFile::flush() const\n"
 		"GeoCal::VicarFile::flush\n"
-		"Flush data to disk.\n"
+		"Flush data to disk.  \n"
 		"\n"
 		""},
-	 { "VicarFile___str__", _wrap_VicarFile___str__, METH_O, NULL},
+	 { "VicarFile___str__", _wrap_VicarFile___str__, METH_O, "__str__(VicarFile self) -> std::string"},
 	 { "VicarFile_label_delete", _wrap_VicarFile_label_delete, METH_VARARGS, "\n"
+		"label_delete(VicarFile self, std::string const & F, std::string const & Property=\"\")\n"
 		"\n"
-		"void VicarFile::label_delete(const std::string &F, const std::string &Property=\"\")\n"
 		"GeoCal::VicarFile::label_delete\n"
-		"Delete a label from a file.\n"
+		"Delete a label from a file.  \n"
 		"\n"
 		""},
 	 { "VicarFile_label_set", _wrap_VicarFile_label_set, METH_VARARGS, "\n"
+		"label_set(VicarFile self, std::string const & F, int Val, std::string const & Property=\"\")\n"
+		"label_set(VicarFile self, std::string const & F, float Val, std::string const & Property=\"\")\n"
+		"label_set(VicarFile self, std::string const & F, double Val, std::string const & Property=\"\")\n"
+		"label_set(VicarFile self, std::string const & F, std::string const & Val, std::string const & Property=\"\")\n"
 		"\n"
-		"void VicarFile::label_set(const std::string &F, int Val, const std::string &Property=\"\")\n"
 		"GeoCal::VicarFile::label_set\n"
-		"Set the value of a label.\n"
-		"If the label is already in the file, is is deleted and replaced with\n"
-		"this new value. Otherwise, it is simply added. Optionally the label\n"
-		"can be part of a Property. \n"
+		"Set the value of a label.  \n"
+		"\n"
+		"If the label is already in the file, is is deleted and replaced with this new\n"
+		"value. Otherwise, it is simply added. Optionally the label can be part of a\n"
+		"Property.  \n"
+		"\n"
 		""},
-	 { "VicarFile_ltype", _wrap_VicarFile_ltype, METH_VARARGS, NULL},
-	 { "VicarFile_label_int", _wrap_VicarFile_label_int, METH_VARARGS, NULL},
-	 { "VicarFile_label_float", _wrap_VicarFile_label_float, METH_VARARGS, NULL},
-	 { "VicarFile_label_double", _wrap_VicarFile_label_double, METH_VARARGS, NULL},
+	 { "VicarFile_ltype", _wrap_VicarFile_ltype, METH_VARARGS, "ltype(VicarFile self, std::string const & N) -> int"},
+	 { "VicarFile_label_int", _wrap_VicarFile_label_int, METH_VARARGS, "label_int(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< int,std::allocator< int > >"},
+	 { "VicarFile_label_float", _wrap_VicarFile_label_float, METH_VARARGS, "label_float(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< float,std::allocator< float > >"},
+	 { "VicarFile_label_double", _wrap_VicarFile_label_double, METH_VARARGS, "label_double(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< double,std::allocator< double > >"},
 	 { "VicarFile_label_string", _wrap_VicarFile_label_string, METH_VARARGS, "\n"
+		"label_string(VicarFile self, std::string const & N, std::string const & Prop=\"\") -> std::vector< std::string,std::allocator< std::string > >\n"
 		"\n"
-		"std::string GeoCal::VicarFile::label_string(const std::string &F, const std::string &Property=\"\") const\n"
 		"GeoCal::VicarFile::label_string\n"
-		"Non template form of label, useful in some contexts.\n"
+		"Non template form of label, useful in some contexts.  \n"
 		"\n"
 		""},
-	 { "VicarFile_label_list", _wrap_VicarFile_label_list, METH_O, NULL},
-	 { "VicarFile_property_list", _wrap_VicarFile_property_list, METH_O, NULL},
+	 { "VicarFile_label_list", _wrap_VicarFile_label_list, METH_O, "label_list(VicarFile self) -> std::vector< std::string,std::allocator< std::string > >"},
+	 { "VicarFile_property_list", _wrap_VicarFile_property_list, METH_O, "property_list(VicarFile self) -> std::vector< std::string,std::allocator< std::string > >"},
 	 { "VicarFile_swigregister", VicarFile_swigregister, METH_O, NULL},
 	 { "VicarFile_swiginit", VicarFile_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

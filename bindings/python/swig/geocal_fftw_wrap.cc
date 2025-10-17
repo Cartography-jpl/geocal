@@ -7013,78 +7013,83 @@ SWIGINTERN PyObject *Fftw2dBackward_swiginit(PyObject *SWIGUNUSEDPARM(self), PyO
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Fftw2dForward", _wrap_new_Fftw2dForward, METH_VARARGS, "\n"
+		"new_Fftw2dForward(int Nrow, int Ncol) -> Fftw2dForward\n"
 		"\n"
-		"Fftw2dForward::Fftw2dForward(int Nrow, int Ncol)\n"
 		"GeoCal::Fftw2dForward::Fftw2dForward\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "Fftw2dForward_data_in_set", _wrap_Fftw2dForward_data_in_set, METH_VARARGS, NULL},
-	 { "Fftw2dForward_data_in_get", _wrap_Fftw2dForward_data_in_get, METH_O, NULL},
-	 { "Fftw2dForward_data_out_set", _wrap_Fftw2dForward_data_out_set, METH_VARARGS, NULL},
-	 { "Fftw2dForward_data_out_get", _wrap_Fftw2dForward_data_out_get, METH_O, NULL},
+	 { "Fftw2dForward_data_in_set", _wrap_Fftw2dForward_data_in_set, METH_VARARGS, "Fftw2dForward_data_in_set(Fftw2dForward self, BlitzArray_double_2 data_in)"},
+	 { "Fftw2dForward_data_in_get", _wrap_Fftw2dForward_data_in_get, METH_O, "Fftw2dForward_data_in_get(Fftw2dForward self) -> BlitzArray_double_2"},
+	 { "Fftw2dForward_data_out_set", _wrap_Fftw2dForward_data_out_set, METH_VARARGS, "Fftw2dForward_data_out_set(Fftw2dForward self, blitz::Array< std::complex< double >,2 > * data_out)"},
+	 { "Fftw2dForward_data_out_get", _wrap_Fftw2dForward_data_out_get, METH_O, "Fftw2dForward_data_out_get(Fftw2dForward self) -> blitz::Array< std::complex< double >,2 > *"},
 	 { "Fftw2dForward_run_fft", _wrap_Fftw2dForward_run_fft, METH_O, "\n"
+		"Fftw2dForward_run_fft(Fftw2dForward self)\n"
 		"\n"
-		"void Fftw2dForward::run_fft()\n"
 		"GeoCal::Fftw2dForward::run_fft\n"
-		"Run the FFT on the data in data_in, with the results going to\n"
-		"data_out.\n"
-		"Note that data_in may possibly be destroyed. \n"
-		""},
-	 { "Fftw2dForward___str__", _wrap_Fftw2dForward___str__, METH_O, NULL},
-	 { "delete_Fftw2dForward", _wrap_delete_Fftw2dForward, METH_O, "\n"
+		"Run the FFT on the data in data_in, with the results going to data_out.  \n"
 		"\n"
-		"Fftw2dForward::~Fftw2dForward()\n"
+		"Note that data_in may possibly be destroyed.  \n"
+		"\n"
+		""},
+	 { "Fftw2dForward___str__", _wrap_Fftw2dForward___str__, METH_O, "Fftw2dForward___str__(Fftw2dForward self) -> std::string"},
+	 { "delete_Fftw2dForward", _wrap_delete_Fftw2dForward, METH_O, "\n"
+		"delete_Fftw2dForward(Fftw2dForward self)\n"
+		"\n"
 		"GeoCal::Fftw2dForward::~Fftw2dForward\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Fftw2dForward_swigregister", Fftw2dForward_swigregister, METH_O, NULL},
 	 { "Fftw2dForward_swiginit", Fftw2dForward_swiginit, METH_VARARGS, NULL},
 	 { "new_Fftw2dBackward", _wrap_new_Fftw2dBackward, METH_VARARGS, "\n"
+		"new_Fftw2dBackward(int Nrow, int Ncol) -> Fftw2dBackward\n"
 		"\n"
-		"Fftw2dBackward::Fftw2dBackward(int Nrow, int Ncol)\n"
 		"GeoCal::Fftw2dBackward::Fftw2dBackward\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "Fftw2dBackward_data_in_set", _wrap_Fftw2dBackward_data_in_set, METH_VARARGS, NULL},
-	 { "Fftw2dBackward_data_in_get", _wrap_Fftw2dBackward_data_in_get, METH_O, NULL},
-	 { "Fftw2dBackward_data_out_set", _wrap_Fftw2dBackward_data_out_set, METH_VARARGS, NULL},
-	 { "Fftw2dBackward_data_out_get", _wrap_Fftw2dBackward_data_out_get, METH_O, NULL},
+	 { "Fftw2dBackward_data_in_set", _wrap_Fftw2dBackward_data_in_set, METH_VARARGS, "Fftw2dBackward_data_in_set(Fftw2dBackward self, blitz::Array< std::complex< double >,2 > * data_in)"},
+	 { "Fftw2dBackward_data_in_get", _wrap_Fftw2dBackward_data_in_get, METH_O, "Fftw2dBackward_data_in_get(Fftw2dBackward self) -> blitz::Array< std::complex< double >,2 > *"},
+	 { "Fftw2dBackward_data_out_set", _wrap_Fftw2dBackward_data_out_set, METH_VARARGS, "Fftw2dBackward_data_out_set(Fftw2dBackward self, BlitzArray_double_2 data_out)"},
+	 { "Fftw2dBackward_data_out_get", _wrap_Fftw2dBackward_data_out_get, METH_O, "Fftw2dBackward_data_out_get(Fftw2dBackward self) -> BlitzArray_double_2"},
 	 { "Fftw2dBackward_run_fft", _wrap_Fftw2dBackward_run_fft, METH_O, "\n"
+		"Fftw2dBackward_run_fft(Fftw2dBackward self)\n"
 		"\n"
-		"void Fftw2dBackward::run_fft()\n"
 		"GeoCal::Fftw2dBackward::run_fft\n"
-		"Run the FFT on the data in data_in, with the results going to\n"
-		"data_out.\n"
-		"Note that data_in may possibly be destroyed. \n"
-		""},
-	 { "Fftw2dBackward___str__", _wrap_Fftw2dBackward___str__, METH_O, NULL},
-	 { "delete_Fftw2dBackward", _wrap_delete_Fftw2dBackward, METH_O, "\n"
+		"Run the FFT on the data in data_in, with the results going to data_out.  \n"
 		"\n"
-		"Fftw2dBackward::~Fftw2dBackward()\n"
+		"Note that data_in may possibly be destroyed.  \n"
+		"\n"
+		""},
+	 { "Fftw2dBackward___str__", _wrap_Fftw2dBackward___str__, METH_O, "Fftw2dBackward___str__(Fftw2dBackward self) -> std::string"},
+	 { "delete_Fftw2dBackward", _wrap_delete_Fftw2dBackward, METH_O, "\n"
+		"delete_Fftw2dBackward(Fftw2dBackward self)\n"
+		"\n"
 		"GeoCal::Fftw2dBackward::~Fftw2dBackward\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Fftw2dBackward_swigregister", Fftw2dBackward_swigregister, METH_O, NULL},
@@ -7095,78 +7100,83 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_Fftw2dForward", _wrap_new_Fftw2dForward, METH_VARARGS, "\n"
+		"new_Fftw2dForward(int Nrow, int Ncol) -> Fftw2dForward\n"
 		"\n"
-		"Fftw2dForward::Fftw2dForward(int Nrow, int Ncol)\n"
 		"GeoCal::Fftw2dForward::Fftw2dForward\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "Fftw2dForward_data_in_set", _wrap_Fftw2dForward_data_in_set, METH_VARARGS, NULL},
-	 { "Fftw2dForward_data_in_get", _wrap_Fftw2dForward_data_in_get, METH_O, NULL},
-	 { "Fftw2dForward_data_out_set", _wrap_Fftw2dForward_data_out_set, METH_VARARGS, NULL},
-	 { "Fftw2dForward_data_out_get", _wrap_Fftw2dForward_data_out_get, METH_O, NULL},
+	 { "Fftw2dForward_data_in_set", _wrap_Fftw2dForward_data_in_set, METH_VARARGS, "Fftw2dForward_data_in_set(Fftw2dForward self, BlitzArray_double_2 data_in)"},
+	 { "Fftw2dForward_data_in_get", _wrap_Fftw2dForward_data_in_get, METH_O, "Fftw2dForward_data_in_get(Fftw2dForward self) -> BlitzArray_double_2"},
+	 { "Fftw2dForward_data_out_set", _wrap_Fftw2dForward_data_out_set, METH_VARARGS, "Fftw2dForward_data_out_set(Fftw2dForward self, blitz::Array< std::complex< double >,2 > * data_out)"},
+	 { "Fftw2dForward_data_out_get", _wrap_Fftw2dForward_data_out_get, METH_O, "Fftw2dForward_data_out_get(Fftw2dForward self) -> blitz::Array< std::complex< double >,2 > *"},
 	 { "Fftw2dForward_run_fft", _wrap_Fftw2dForward_run_fft, METH_O, "\n"
+		"run_fft(Fftw2dForward self)\n"
 		"\n"
-		"void Fftw2dForward::run_fft()\n"
 		"GeoCal::Fftw2dForward::run_fft\n"
-		"Run the FFT on the data in data_in, with the results going to\n"
-		"data_out.\n"
-		"Note that data_in may possibly be destroyed. \n"
-		""},
-	 { "Fftw2dForward___str__", _wrap_Fftw2dForward___str__, METH_O, NULL},
-	 { "delete_Fftw2dForward", _wrap_delete_Fftw2dForward, METH_O, "\n"
+		"Run the FFT on the data in data_in, with the results going to data_out.  \n"
 		"\n"
-		"Fftw2dForward::~Fftw2dForward()\n"
+		"Note that data_in may possibly be destroyed.  \n"
+		"\n"
+		""},
+	 { "Fftw2dForward___str__", _wrap_Fftw2dForward___str__, METH_O, "__str__(Fftw2dForward self) -> std::string"},
+	 { "delete_Fftw2dForward", _wrap_delete_Fftw2dForward, METH_O, "\n"
+		"delete_Fftw2dForward(Fftw2dForward self)\n"
+		"\n"
 		"GeoCal::Fftw2dForward::~Fftw2dForward\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Fftw2dForward_swigregister", Fftw2dForward_swigregister, METH_O, NULL},
 	 { "Fftw2dForward_swiginit", Fftw2dForward_swiginit, METH_VARARGS, NULL},
 	 { "new_Fftw2dBackward", _wrap_new_Fftw2dBackward, METH_VARARGS, "\n"
+		"new_Fftw2dBackward(int Nrow, int Ncol) -> Fftw2dBackward\n"
 		"\n"
-		"Fftw2dBackward::Fftw2dBackward(int Nrow, int Ncol)\n"
 		"GeoCal::Fftw2dBackward::Fftw2dBackward\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "Fftw2dBackward_data_in_set", _wrap_Fftw2dBackward_data_in_set, METH_VARARGS, NULL},
-	 { "Fftw2dBackward_data_in_get", _wrap_Fftw2dBackward_data_in_get, METH_O, NULL},
-	 { "Fftw2dBackward_data_out_set", _wrap_Fftw2dBackward_data_out_set, METH_VARARGS, NULL},
-	 { "Fftw2dBackward_data_out_get", _wrap_Fftw2dBackward_data_out_get, METH_O, NULL},
+	 { "Fftw2dBackward_data_in_set", _wrap_Fftw2dBackward_data_in_set, METH_VARARGS, "Fftw2dBackward_data_in_set(Fftw2dBackward self, blitz::Array< std::complex< double >,2 > * data_in)"},
+	 { "Fftw2dBackward_data_in_get", _wrap_Fftw2dBackward_data_in_get, METH_O, "Fftw2dBackward_data_in_get(Fftw2dBackward self) -> blitz::Array< std::complex< double >,2 > *"},
+	 { "Fftw2dBackward_data_out_set", _wrap_Fftw2dBackward_data_out_set, METH_VARARGS, "Fftw2dBackward_data_out_set(Fftw2dBackward self, BlitzArray_double_2 data_out)"},
+	 { "Fftw2dBackward_data_out_get", _wrap_Fftw2dBackward_data_out_get, METH_O, "Fftw2dBackward_data_out_get(Fftw2dBackward self) -> BlitzArray_double_2"},
 	 { "Fftw2dBackward_run_fft", _wrap_Fftw2dBackward_run_fft, METH_O, "\n"
+		"run_fft(Fftw2dBackward self)\n"
 		"\n"
-		"void Fftw2dBackward::run_fft()\n"
 		"GeoCal::Fftw2dBackward::run_fft\n"
-		"Run the FFT on the data in data_in, with the results going to\n"
-		"data_out.\n"
-		"Note that data_in may possibly be destroyed. \n"
-		""},
-	 { "Fftw2dBackward___str__", _wrap_Fftw2dBackward___str__, METH_O, NULL},
-	 { "delete_Fftw2dBackward", _wrap_delete_Fftw2dBackward, METH_O, "\n"
+		"Run the FFT on the data in data_in, with the results going to data_out.  \n"
 		"\n"
-		"Fftw2dBackward::~Fftw2dBackward()\n"
+		"Note that data_in may possibly be destroyed.  \n"
+		"\n"
+		""},
+	 { "Fftw2dBackward___str__", _wrap_Fftw2dBackward___str__, METH_O, "__str__(Fftw2dBackward self) -> std::string"},
+	 { "delete_Fftw2dBackward", _wrap_delete_Fftw2dBackward, METH_O, "\n"
+		"delete_Fftw2dBackward(Fftw2dBackward self)\n"
+		"\n"
 		"GeoCal::Fftw2dBackward::~Fftw2dBackward\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "Fftw2dBackward_swigregister", Fftw2dBackward_swigregister, METH_O, NULL},

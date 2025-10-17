@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_image_multi_band_variable.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_image_multi_band_variable:
 _raster_image_multi_band_variable.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_image_multi_band_variable.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,12 +143,14 @@ import geocal_swig.geocal_exception
 class RasterImageMultiBandVariable(geocal_swig.raster_image_multi_band.RasterImageMultiBand):
     r"""
 
-    A common implementation of RasterImageMultiBand is to just store a
-    vector of RasterImage.
 
-    This class gives the common behavior.
+    A common implementation of RasterImageMultiBand is to just store a vector of
+    RasterImage.  
 
-    C++ includes: raster_image_multi_band_variable.h 
+    This class gives the common behavior.  
+
+    C++ includes: raster_image_multi_band_variable.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -153,8 +158,9 @@ class RasterImageMultiBandVariable(geocal_swig.raster_image_multi_band.RasterIma
 
     def __init__(self, *args):
         r"""
+        __init__(RasterImageMultiBandVariable self) -> RasterImageMultiBandVariable
+        __init__(RasterImageMultiBandVariable self, Vector_RasterImage Raster_image) -> RasterImageMultiBandVariable
 
-        GeoCal::RasterImageMultiBandVariable::RasterImageMultiBandVariable(const std::vector< boost::shared_ptr< RasterImage > > &Raster_image)
         GeoCal::RasterImageMultiBandVariable::RasterImageMultiBandVariable
         """
         _raster_image_multi_band_variable.RasterImageMultiBandVariable_swiginit(self, _raster_image_multi_band_variable.new_RasterImageMultiBandVariable(*args))

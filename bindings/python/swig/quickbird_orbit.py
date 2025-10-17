@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _quickbird_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _quickbird_orbit:
 _quickbird_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _quickbird_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,12 +144,13 @@ import geocal_swig.look_vector
 class QuickBirdEphemeris(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a low level class that reads a Quickbird ephemeris file.
 
-    You probably don't want to use this directly, but rather use the
-    QuickBirdOrbit
+    This is a low level class that reads a Quickbird ephemeris file.  
 
-    C++ includes: quickbird_orbit.h 
+    You probably don't want to use this directly, but rather use the QuickBirdOrbit  
+
+    C++ includes: quickbird_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,10 +158,10 @@ class QuickBirdEphemeris(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Fname):
         r"""
+        __init__(QuickBirdEphemeris self, std::string const & Fname) -> QuickBirdEphemeris
 
-        GeoCal::QuickBirdEphemeris::QuickBirdEphemeris(const std::string &Fname)
         GeoCal::QuickBirdEphemeris::QuickBirdEphemeris
-        Read the quickbird ephemeris file.
+        Read the quickbird ephemeris file.  
 
         """
         _quickbird_orbit.QuickBirdEphemeris_swiginit(self, _quickbird_orbit.new_QuickBirdEphemeris(Fname))
@@ -207,24 +211,25 @@ _quickbird_orbit.QuickBirdEphemeris_swigregister(QuickBirdEphemeris)
 class QuickBirdAttitude(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a low level class that reads a Quickbird attitude file.
 
-    You probably don't want to use this directly, but rather use the
-    QuickBirdOrbit.
+    This is a low level class that reads a Quickbird attitude file.  
 
-    Note a possible source of confusion. There are a few different
-    conventions about the ordering of the quaternion coefficients. The
-    boost library places the real part at the front, so we have a + b i c
-    j + d k and the quaternion is 4-tuple (a, b, c, d). The convention
-    used by quickbird data is q1 i + q2 j + q3 k + q4 with the 4-tuple is
-    (q1, q2, q3, q4). That means when we bring this over to the boost
-    library, we need to reorder this to the 4-tuple (q4, q1, q2, q3).
+    You probably don't want to use this directly, but rather use the QuickBirdOrbit.  
 
-    The code in QuickBirdOrbit accounts for these different conventions,
-    but if you are using this class directly you need to be aware of this
-    difference.
+    Note a possible source of confusion. There are a few different conventions about
+    the ordering of the quaternion coefficients. The boost library places the real
+    part at the front, so we have a + b i  
 
-    C++ includes: quickbird_orbit.h 
+    *   c j + d k and the quaternion is 4-tuple (a, b, c, d). The convention used by
+        quickbird data is q1 i + q2 j + q3 k + q4 with the 4-tuple is (q1, q2, q3,
+        q4). That means when we bring this over to the boost library, we need to
+        reorder this to the 4-tuple (q4, q1, q2, q3).  
+
+    The code in QuickBirdOrbit accounts for these different conventions, but if you
+    are using this class directly you need to be aware of this difference.  
+
+    C++ includes: quickbird_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -232,10 +237,10 @@ class QuickBirdAttitude(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Fname):
         r"""
+        __init__(QuickBirdAttitude self, std::string const & Fname) -> QuickBirdAttitude
 
-        GeoCal::QuickBirdAttitude::QuickBirdAttitude(const std::string &Fname)
         GeoCal::QuickBirdAttitude::QuickBirdAttitude
-        Read the quickbird attitude file.
+        Read the quickbird attitude file.  
 
         """
         _quickbird_orbit.QuickBirdAttitude_swiginit(self, _quickbird_orbit.new_QuickBirdAttitude(Fname))
@@ -285,24 +290,25 @@ _quickbird_orbit.QuickBirdAttitude_swigregister(QuickBirdAttitude)
 class QuickBirdOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This is a Quickbird Orbit.
 
-    This can be used for a rigorous model of Quickbird.
+    This is a Quickbird Orbit.  
 
-    Note an important limitation of the rigorous model vs. RPC. We don't
-    currently account for atmospheric refraction, while the RPC does.
-    Depending on the zenith angle, this can be somewhat important. From
-    the approximate atmospheric model described in "Theoretical Basis of
-    the SDP Toolkit Geolocation package for the ECS", Table 6-5 the
-    linear displacement for a zenith angle of 10 is 0.549 meters, 20
-    degress is 1.223 meters, and 30 degrees is 2.221. The typical
-    Quickbird scene has something like 10 to 20 degree zenith angles, so
-    this is a correction of 1 or 2 pixels.
+    This can be used for a rigorous model of Quickbird.  
 
-    We will need to add atmospheric refraction in the future, but this
-    hasn't been done yet.
+    Note an important limitation of the rigorous model vs. RPC. We don't currently
+    account for atmospheric refraction, while the RPC does. Depending on the zenith
+    angle, this can be somewhat important. From the approximate atmospheric model
+    described in "Theoretical Basis of
+    the SDP Toolkit Geolocation package for the ECS", Table 6-5 the linear
+    displacement for a zenith angle of 10 is 0.549 meters, 20 degress is 1.223
+    meters, and 30 degrees is 2.221. The typical Quickbird scene has something like
+    10 to 20 degree zenith angles, so this is a correction of 1 or 2 pixels.  
 
-    C++ includes: quickbird_orbit.h 
+    We will need to add atmospheric refraction in the future, but this hasn't been
+    done yet.  
+
+    C++ includes: quickbird_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

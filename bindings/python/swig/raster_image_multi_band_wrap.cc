@@ -7579,88 +7579,98 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RasterImageMultiBand__v_number_band", _wrap_RasterImageMultiBand__v_number_band, METH_O, "\n"
+		"RasterImageMultiBand__v_number_band(RasterImageMultiBand self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImageMultiBand::number_band() const =0\n"
 		"GeoCal::RasterImageMultiBand::number_band\n"
-		"Return number of bands.\n"
+		"Return number of bands.  \n"
 		"\n"
 		""},
 	 { "RasterImageMultiBand_raster_image", _wrap_RasterImageMultiBand_raster_image, METH_VARARGS, "\n"
+		"RasterImageMultiBand_raster_image(RasterImageMultiBand self, int band) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"virtual boost::shared_ptr< RasterImage > GeoCal::RasterImageMultiBand::raster_image_ptr(int band) const =0\n"
 		"GeoCal::RasterImageMultiBand::raster_image_ptr\n"
 		""},
 	 { "RasterImageMultiBand_read", _wrap_RasterImageMultiBand_read, METH_VARARGS, "\n"
+		"RasterImageMultiBand_read(RasterImageMultiBand self, int Lstart, int Sstart, int Nline, int Nsamp) -> BlitzArray_int_3\n"
 		"\n"
-		"Array< int, 3 > RasterImageMultiBand::read(int Lstart, int Sstart, int Nline, int Nsamp) const\n"
 		"GeoCal::RasterImageMultiBand::read\n"
-		"Read the data from the same location in each image, and put into an\n"
-		"array.\n"
-		"This will be number_band x number_line x number_sample. \n"
+		"Read the data from the same location in each image, and put into an array.  \n"
+		"\n"
+		"This will be number_band x number_line x number_sample.  \n"
+		"\n"
 		""},
 	 { "RasterImageMultiBand_read_double", _wrap_RasterImageMultiBand_read_double, METH_VARARGS, "\n"
+		"RasterImageMultiBand_read_double(RasterImageMultiBand self, int Lstart, int Sstart, int Nline, int Nsamp) -> BlitzArray_double_3\n"
 		"\n"
-		"Array< double, 3 > RasterImageMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const\n"
 		"GeoCal::RasterImageMultiBand::read_double\n"
-		"Read the data from the same location in each image, and put into an\n"
-		"array.\n"
-		"This will be number_band x number_line x number_sample. \n"
+		"Read the data from the same location in each image, and put into an array.  \n"
+		"\n"
+		"This will be number_band x number_line x number_sample.  \n"
+		"\n"
 		""},
 	 { "RasterImageMultiBand_write", _wrap_RasterImageMultiBand_write, METH_VARARGS, "\n"
+		"RasterImageMultiBand_write(RasterImageMultiBand self, int Lstart, int Sstart, BlitzArray_int_3 Data)\n"
 		"\n"
-		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)\n"
 		"GeoCal::RasterImageMultiBand::write\n"
-		"Write the data to the same location in each image.\n"
-		"Data should be number_band() x nline x nsamp. \n"
-		""},
-	 { "RasterImageMultiBand___str__", _wrap_RasterImageMultiBand___str__, METH_O, NULL},
-	 { "RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, "\n"
+		"Write the data to the same location in each image.  \n"
 		"\n"
-		"RasterImageMultiBandVariable RasterImageMultiBand::overview(int Min_number_sample) const\n"
+		"Data should be number_band() x nline x nsamp.  \n"
+		"\n"
+		""},
+	 { "RasterImageMultiBand___str__", _wrap_RasterImageMultiBand___str__, METH_O, "RasterImageMultiBand___str__(RasterImageMultiBand self) -> std::string"},
+	 { "RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, "\n"
+		"RasterImageMultiBand_overview(RasterImageMultiBand self, int Min_number_sample) -> RasterImageMultiBandVariable\n"
+		"\n"
 		"GeoCal::RasterImageMultiBand::overview\n"
-		"Create a RasterImageMultiBandVariable by finding the overview (if any)\n"
-		"for each of the raster bands.\n"
-		"The bands will all be the same size, so if the overviews don't match\n"
-		"in size we don't use them. If we can't find overviews, then the\n"
-		"RasterImageMultiBandVariable will just point to the same data as this\n"
-		"object does. \n"
+		"Create a RasterImageMultiBandVariable by finding the overview (if any) for each\n"
+		"of the raster bands.  \n"
+		"\n"
+		"The bands will all be the same size, so if the overviews don't match in size we\n"
+		"don't use them. If we can't find overviews, then the\n"
+		"RasterImageMultiBandVariable will just point to the same data as this object\n"
+		"does.  \n"
+		"\n"
 		""},
 	 { "delete_RasterImageMultiBand", _wrap_delete_RasterImageMultiBand, METH_O, "\n"
+		"delete_RasterImageMultiBand(RasterImageMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageMultiBand::~RasterImageMultiBand()\n"
 		"GeoCal::RasterImageMultiBand::~RasterImageMultiBand\n"
 		""},
 	 { "RasterImageMultiBand_swigregister", RasterImageMultiBand_swigregister, METH_O, NULL},
 	 { "copy_raster", _wrap_copy_raster, METH_VARARGS, "\n"
+		"copy_raster(RasterImage Img_in, RasterImage Img_out, bool Diagnostic=False, int Tile_nline=-1, int Tile_nsamp=-1)\n"
+		"copy_raster(RasterImageMultiBand Img_in, RasterImageMultiBand Img_out, bool Log_progress=False)\n"
 		"\n"
-		"void GeoCal::copy(const RasterImageMultiBand &Img_in, RasterImageMultiBand &Img_out,\n"
-		"bool Log_progress=false)\n"
 		"GeoCal::copy\n"
-		"This copies one multiband image to another.\n"
-		"The images should be the same size. We also assume that all the bands\n"
-		"are the same size.\n"
+		"This copies one multiband image to another.  \n"
 		"\n"
-		"Setting Diagnostic to true causes messages to be printed as we do the\n"
-		"copying. \n"
+		"The images should be the same size. We also assume that all the bands are the\n"
+		"same size.  \n"
+		"\n"
+		"Setting Diagnostic to true causes messages to be printed as we do the copying.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -7668,88 +7678,98 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RasterImageMultiBand__v_number_band", _wrap_RasterImageMultiBand__v_number_band, METH_O, "\n"
+		"_v_number_band(RasterImageMultiBand self) -> int\n"
 		"\n"
-		"virtual int GeoCal::RasterImageMultiBand::number_band() const =0\n"
 		"GeoCal::RasterImageMultiBand::number_band\n"
-		"Return number of bands.\n"
+		"Return number of bands.  \n"
 		"\n"
 		""},
 	 { "RasterImageMultiBand_raster_image", _wrap_RasterImageMultiBand_raster_image, METH_VARARGS, "\n"
+		"raster_image(RasterImageMultiBand self, int band) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"virtual boost::shared_ptr< RasterImage > GeoCal::RasterImageMultiBand::raster_image_ptr(int band) const =0\n"
 		"GeoCal::RasterImageMultiBand::raster_image_ptr\n"
 		""},
 	 { "RasterImageMultiBand_read", _wrap_RasterImageMultiBand_read, METH_VARARGS, "\n"
+		"read(RasterImageMultiBand self, int Lstart, int Sstart, int Nline, int Nsamp) -> BlitzArray_int_3\n"
 		"\n"
-		"Array< int, 3 > RasterImageMultiBand::read(int Lstart, int Sstart, int Nline, int Nsamp) const\n"
 		"GeoCal::RasterImageMultiBand::read\n"
-		"Read the data from the same location in each image, and put into an\n"
-		"array.\n"
-		"This will be number_band x number_line x number_sample. \n"
+		"Read the data from the same location in each image, and put into an array.  \n"
+		"\n"
+		"This will be number_band x number_line x number_sample.  \n"
+		"\n"
 		""},
 	 { "RasterImageMultiBand_read_double", _wrap_RasterImageMultiBand_read_double, METH_VARARGS, "\n"
+		"read_double(RasterImageMultiBand self, int Lstart, int Sstart, int Nline, int Nsamp) -> BlitzArray_double_3\n"
 		"\n"
-		"Array< double, 3 > RasterImageMultiBand::read_double(int Lstart, int Sstart, int Nline, int Nsamp) const\n"
 		"GeoCal::RasterImageMultiBand::read_double\n"
-		"Read the data from the same location in each image, and put into an\n"
-		"array.\n"
-		"This will be number_band x number_line x number_sample. \n"
+		"Read the data from the same location in each image, and put into an array.  \n"
+		"\n"
+		"This will be number_band x number_line x number_sample.  \n"
+		"\n"
 		""},
 	 { "RasterImageMultiBand_write", _wrap_RasterImageMultiBand_write, METH_VARARGS, "\n"
+		"write(RasterImageMultiBand self, int Lstart, int Sstart, BlitzArray_int_3 Data)\n"
 		"\n"
-		"void RasterImageMultiBand::write(int Lstart, int Sstart, const blitz::Array< int, 3 > &Data)\n"
 		"GeoCal::RasterImageMultiBand::write\n"
-		"Write the data to the same location in each image.\n"
-		"Data should be number_band() x nline x nsamp. \n"
-		""},
-	 { "RasterImageMultiBand___str__", _wrap_RasterImageMultiBand___str__, METH_O, NULL},
-	 { "RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, "\n"
+		"Write the data to the same location in each image.  \n"
 		"\n"
-		"RasterImageMultiBandVariable RasterImageMultiBand::overview(int Min_number_sample) const\n"
+		"Data should be number_band() x nline x nsamp.  \n"
+		"\n"
+		""},
+	 { "RasterImageMultiBand___str__", _wrap_RasterImageMultiBand___str__, METH_O, "__str__(RasterImageMultiBand self) -> std::string"},
+	 { "RasterImageMultiBand_overview", _wrap_RasterImageMultiBand_overview, METH_VARARGS, "\n"
+		"overview(RasterImageMultiBand self, int Min_number_sample) -> RasterImageMultiBandVariable\n"
+		"\n"
 		"GeoCal::RasterImageMultiBand::overview\n"
-		"Create a RasterImageMultiBandVariable by finding the overview (if any)\n"
-		"for each of the raster bands.\n"
-		"The bands will all be the same size, so if the overviews don't match\n"
-		"in size we don't use them. If we can't find overviews, then the\n"
-		"RasterImageMultiBandVariable will just point to the same data as this\n"
-		"object does. \n"
+		"Create a RasterImageMultiBandVariable by finding the overview (if any) for each\n"
+		"of the raster bands.  \n"
+		"\n"
+		"The bands will all be the same size, so if the overviews don't match in size we\n"
+		"don't use them. If we can't find overviews, then the\n"
+		"RasterImageMultiBandVariable will just point to the same data as this object\n"
+		"does.  \n"
+		"\n"
 		""},
 	 { "delete_RasterImageMultiBand", _wrap_delete_RasterImageMultiBand, METH_O, "\n"
+		"delete_RasterImageMultiBand(RasterImageMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageMultiBand::~RasterImageMultiBand()\n"
 		"GeoCal::RasterImageMultiBand::~RasterImageMultiBand\n"
 		""},
 	 { "RasterImageMultiBand_swigregister", RasterImageMultiBand_swigregister, METH_O, NULL},
 	 { "copy_raster", _wrap_copy_raster, METH_VARARGS, "\n"
+		"copy_raster(RasterImage Img_in, RasterImage Img_out, bool Diagnostic=False, int Tile_nline=-1, int Tile_nsamp=-1)\n"
+		"copy_raster(RasterImageMultiBand Img_in, RasterImageMultiBand Img_out, bool Log_progress=False)\n"
 		"\n"
-		"void GeoCal::copy(const RasterImageMultiBand &Img_in, RasterImageMultiBand &Img_out,\n"
-		"bool Log_progress=false)\n"
 		"GeoCal::copy\n"
-		"This copies one multiband image to another.\n"
-		"The images should be the same size. We also assume that all the bands\n"
-		"are the same size.\n"
+		"This copies one multiband image to another.  \n"
 		"\n"
-		"Setting Diagnostic to true causes messages to be printed as we do the\n"
-		"copying. \n"
+		"The images should be the same size. We also assume that all the bands are the\n"
+		"same size.  \n"
+		"\n"
+		"Setting Diagnostic to true causes messages to be printed as we do the copying.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

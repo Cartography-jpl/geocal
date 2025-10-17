@@ -90,6 +90,7 @@ _ray_caster_resampler.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _ray_caster_resampler.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _ray_caster_resampler.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -139,34 +140,32 @@ import geocal_swig.geocal_exception
 class RayCasterResampler(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is used to project data to the surface using a RayCaster.
 
-    This is similar to IgcMapProjected, except rather than going from the
-    ground to the image we go from the image to the ground. Depending on
-    the type of ImageGroundConnection we are using, one or the other
-    direction can be much faster.
+    This is used to project data to the surface using a RayCaster.  
 
-    This class is really designed to be wrapped in python. Although it
-    could be used from C++, it would probably be a bit awkward. We can
-    always rework this if needed, but I expect the primary use of this
-    will be programs like igc_project.
+    This is similar to IgcMapProjected, except rather than going from the ground to
+    the image we go from the image to the ground. Depending on the type of
+    ImageGroundConnection we are using, one or the other direction can be much
+    faster.  
 
-    There are two steps involved:
+    This class is really designed to be wrapped in python. Although it could be used
+    from C++, it would probably be a bit awkward. We can always rework this if
+    needed, but I expect the primary use of this will be programs like igc_project.  
 
-    The initial ray casting, determining where each pixel goes in the
-    final map.
+    There are two steps involved:  
 
-    Resampling the data to create the final radiance data.
+    1.  The initial ray casting, determining where each pixel goes in the final map.  
+    2.  Resampling the data to create the final radiance data.  
 
-    Step 1 can be done in parallel to speed things up. We currently have
-    step 2 needing to be done serially, I'm not sure that it could be done
-    in parallel.
+    Step 1 can be done in parallel to speed things up. We currently have step 2
+    needing to be done serially, I'm not sure that it could be done in parallel.  
 
-    For step 1, The subsetting should be done on Ray_caster (so like
-    IgcRayCaster where we specify the start and number of lines).
-    ray_cast_step() steps through all the positions in the ray caster.
+    For step 1, The subsetting should be done on Ray_caster (so like IgcRayCaster
+    where we specify the start and number of lines). ray_cast_step() steps through
+    all the positions in the ray caster.  
 
-    C++ includes: ray_caster_resampler.h 
+    C++ includes: ray_caster_resampler.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -174,11 +173,10 @@ class RayCasterResampler(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Ray_caster, Map_info):
         r"""
+        __init__(RayCasterResampler self, boost::shared_ptr< GeoCal::RayCaster > const & Ray_caster, boost::shared_ptr< GeoCal::MapInfo > const & Map_info) -> RayCasterResampler
 
-        RayCasterResampler::RayCasterResampler(const boost::shared_ptr< RayCaster > &Ray_caster, const
-        boost::shared_ptr< MapInfo > &Map_info)
         GeoCal::RayCasterResampler::RayCasterResampler
-        Constructor.
+        Constructor.  
 
         """
         _ray_caster_resampler.RayCasterResampler_swiginit(self, _ray_caster_resampler.new_RayCasterResampler(Ray_caster, Map_info))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_fftw.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_fftw:
 _geocal_fftw.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_fftw.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,12 +140,14 @@ import geocal_swig.generic_object
 class Fftw2dForward(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a light wrapper around the FFTW library.
 
-    This maintains the lifetime of plans. This is for a 2D real transform,
-    going forward to a complex results.
+    This is a light wrapper around the FFTW library.  
 
-    C++ includes: geocal_fftw.h 
+    This maintains the lifetime of plans. This is for a 2D real transform, going
+    forward to a complex results.  
+
+    C++ includes: geocal_fftw.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,15 +155,15 @@ class Fftw2dForward(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Nrow, Ncol):
         r"""
+        __init__(Fftw2dForward self, int Nrow, int Ncol) -> Fftw2dForward
 
-        Fftw2dForward::Fftw2dForward(int Nrow, int Ncol)
         GeoCal::Fftw2dForward::Fftw2dForward
-        Constructor.
+        Constructor.  
 
         """
         _geocal_fftw.Fftw2dForward_swiginit(self, _geocal_fftw.new_Fftw2dForward(Nrow, Ncol))
-    data_in = property(_geocal_fftw.Fftw2dForward_data_in_get, _geocal_fftw.Fftw2dForward_data_in_set)
-    data_out = property(_geocal_fftw.Fftw2dForward_data_out_get, _geocal_fftw.Fftw2dForward_data_out_set)
+    data_in = property(_geocal_fftw.Fftw2dForward_data_in_get, _geocal_fftw.Fftw2dForward_data_in_set, doc=r"""data_in : blitz::Array<(double,2)>""")
+    data_out = property(_geocal_fftw.Fftw2dForward_data_out_get, _geocal_fftw.Fftw2dForward_data_out_set, doc=r"""data_out : blitz::Array<(std::complex<(double)>,2)>""")
     run_fft = _swig_new_instance_method(_geocal_fftw.Fftw2dForward_run_fft)
     __str__ = _swig_new_instance_method(_geocal_fftw.Fftw2dForward___str__)
     __swig_destroy__ = _geocal_fftw.delete_Fftw2dForward
@@ -168,16 +173,18 @@ _geocal_fftw.Fftw2dForward_swigregister(Fftw2dForward)
 class Fftw2dBackward(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a light wrapper around the FFTW library.
 
-    This maintains the lifetime of plans. This is for a 2D real transform,
-    going backward from a complex value to real results.
+    This is a light wrapper around the FFTW library.  
 
-    Note that the FFTW library calculates an unnormalized transform. This
-    means that a forward calculation followed by a backward calculation
-    will return a results Nrow * Ncol * original data.
+    This maintains the lifetime of plans. This is for a 2D real transform, going
+    backward from a complex value to real results.  
 
-    C++ includes: geocal_fftw.h 
+    Note that the FFTW library calculates an unnormalized transform. This means that
+    a forward calculation followed by a backward calculation will return a results
+    Nrow * Ncol * original data.  
+
+    C++ includes: geocal_fftw.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -185,15 +192,15 @@ class Fftw2dBackward(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Nrow, Ncol):
         r"""
+        __init__(Fftw2dBackward self, int Nrow, int Ncol) -> Fftw2dBackward
 
-        Fftw2dBackward::Fftw2dBackward(int Nrow, int Ncol)
         GeoCal::Fftw2dBackward::Fftw2dBackward
-        Constructor.
+        Constructor.  
 
         """
         _geocal_fftw.Fftw2dBackward_swiginit(self, _geocal_fftw.new_Fftw2dBackward(Nrow, Ncol))
-    data_in = property(_geocal_fftw.Fftw2dBackward_data_in_get, _geocal_fftw.Fftw2dBackward_data_in_set)
-    data_out = property(_geocal_fftw.Fftw2dBackward_data_out_get, _geocal_fftw.Fftw2dBackward_data_out_set)
+    data_in = property(_geocal_fftw.Fftw2dBackward_data_in_get, _geocal_fftw.Fftw2dBackward_data_in_set, doc=r"""data_in : blitz::Array<(std::complex<(double)>,2)>""")
+    data_out = property(_geocal_fftw.Fftw2dBackward_data_out_get, _geocal_fftw.Fftw2dBackward_data_out_set, doc=r"""data_out : blitz::Array<(double,2)>""")
     run_fft = _swig_new_instance_method(_geocal_fftw.Fftw2dBackward_run_fft)
     __str__ = _swig_new_instance_method(_geocal_fftw.Fftw2dBackward___str__)
     __swig_destroy__ = _geocal_fftw.delete_Fftw2dBackward

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_multifile.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_multifile:
 _raster_multifile.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_multifile.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,27 +144,30 @@ import geocal_swig.geocal_exception
 class RasterMultifile(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    There are certain larger data sets that are made up of a number of
-    separate files all in the same map projection that cover a large area.
 
-    For example, the SRTM data available through AFIDS. This class
-    captures the common functionality needed to deal with those files. The
-    data is stitched together by either reading one file or the other,
-    there is no smoothing done by this class between neighboring files.
+    There are certain larger data sets that are made up of a number of separate
+    files all in the same map projection that cover a large area.  
 
-    Note that if you are creating a derived class, LocationToFile may be a
-    useful class to use.
+    For example, the SRTM data available through AFIDS. This class captures the
+    common functionality needed to deal with those files. The data is stitched
+    together by either reading one file or the other, there is no smoothing done by
+    this class between neighboring files.  
 
-    In general, the area covered by this RasterMultifile will not be fully
-    covered by the separate files (e.g., there are tiles missing in the
-    SRTM). Depending on the application, trying to read data where we
-    don't have a file will either be an error, or acceptable and we want
-    to return a fill value instead. To handle this, derived classes return
-    a RasterMultifileTile with data = Then, depending on the value of
-    No_coverage_is_error we either let the exception be thrown or we catch
-    it and substitute a fill value for the attempted read.
+    Note that if you are creating a derived class, LocationToFile may be a useful
+    class to use.  
 
-    C++ includes: raster_multifile.h 
+    In general, the area covered by this RasterMultifile will not be fully covered
+    by the separate files (e.g., there are tiles missing in the SRTM). Depending on
+    the application, trying to read data where we don't have a file will either be
+    an error, or acceptable and we want to return a fill value instead. To handle
+    this, derived classes return a RasterMultifileTile with data =  
+
+    1.  Then, depending on the value of No_coverage_is_error we either let the
+        exception be thrown or we catch it and substitute a fill value for the
+        attempted read.  
+
+    C++ includes: raster_multifile.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

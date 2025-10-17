@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _look_vector.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _look_vector:
 _look_vector.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _look_vector.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -135,6 +138,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 class Vector_Time(object):
+    r"""Proxy of C++ std::vector< GeoCal::Time > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_look_vector.Vector_Time_iterator)
@@ -164,6 +169,12 @@ class Vector_Time(object):
     erase = _swig_new_instance_method(_look_vector.Vector_Time_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Time self) -> Vector_Time
+        __init__(Vector_Time self, Vector_Time other) -> Vector_Time
+        __init__(Vector_Time self, std::vector< GeoCal::Time >::size_type size) -> Vector_Time
+        __init__(Vector_Time self, std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time
+        """
         _look_vector.Vector_Time_swiginit(self, _look_vector.new_Vector_Time(*args))
     push_back = _swig_new_instance_method(_look_vector.Vector_Time_push_back)
     front = _swig_new_instance_method(_look_vector.Vector_Time_front)
@@ -186,6 +197,8 @@ class Vector_Time(object):
 # Register Vector_Time in _look_vector:
 _look_vector.Vector_Time_swigregister(Vector_Time)
 class Vector_Time2(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::Time > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_look_vector.Vector_Time2_iterator)
@@ -215,6 +228,12 @@ class Vector_Time2(object):
     erase = _swig_new_instance_method(_look_vector.Vector_Time2_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Time2 self) -> Vector_Time2
+        __init__(Vector_Time2 self, Vector_Time2 other) -> Vector_Time2
+        __init__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size) -> Vector_Time2
+        __init__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2
+        """
         _look_vector.Vector_Time2_swiginit(self, _look_vector.new_Vector_Time2(*args))
     push_back = _swig_new_instance_method(_look_vector.Vector_Time2_push_back)
     front = _swig_new_instance_method(_look_vector.Vector_Time2_front)
@@ -231,11 +250,13 @@ _look_vector.Vector_Time2_swigregister(Vector_Time2)
 class LookVectorDouble(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a look vector in an unspecified coordinate system.
 
-    Derived classes specify the coordinate system.
+    This is a look vector in an unspecified coordinate system.  
 
-    C++ includes: look_vector.h 
+    Derived classes specify the coordinate system.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -283,11 +304,13 @@ _look_vector.LookVectorDouble_swigregister(LookVectorDouble)
 class LookVectorAutoDerivativeDouble(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a look vector in an unspecified coordinate system.
 
-    Derived classes specify the coordinate system.
+    This is a look vector in an unspecified coordinate system.  
 
-    C++ includes: look_vector.h 
+    Derived classes specify the coordinate system.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -335,20 +358,21 @@ _look_vector.LookVectorAutoDerivativeDouble_swigregister(LookVectorAutoDerivativ
 class ScLookVector(LookVectorDouble):
     r"""
 
-    This is a look vector in an spacecraft coordinates.
 
-    Note that there are different conventions used for the ScLookVector,
-    you generally need to know what the convention used by the OrbitData
-    is.
+    This is a look vector in an spacecraft coordinates.  
 
-    The original MISR convention used +z in the down direction, +x in the
-    generally velocity (along track) direction, and +y finished the right
-    hand coordinate system.
+    Note that there are different conventions used for the ScLookVector, you
+    generally need to know what the convention used by the OrbitData is.  
 
-    Another convention used (by for example sc2rpc) is +x goes in the
-    sample direction, +y goes in the line direction, and +z points down.
+    The original MISR convention used +z in the down direction, +x in the generally
+    velocity (along track) direction, and +y finished the right hand coordinate
+    system.  
 
-    C++ includes: look_vector.h 
+    Another convention used (by for example sc2rpc) is +x goes in the sample
+    direction, +y goes in the line direction, and +z points down.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -356,10 +380,12 @@ class ScLookVector(LookVectorDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(ScLookVector self) -> ScLookVector
+        __init__(ScLookVector self, double x, double y, double z) -> ScLookVector
+        __init__(ScLookVector self, Array_double_3 Lv) -> ScLookVector
 
-        GeoCal::ScLookVector::ScLookVector(double x, double y, double z)
         GeoCal::ScLookVector::ScLookVector
-        Constructor.
+        Constructor.  
 
         """
         _look_vector.ScLookVector_swiginit(self, _look_vector.new_ScLookVector(*args))
@@ -381,10 +407,11 @@ _look_vector.ScLookVector_swigregister(ScLookVector)
 class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
     r"""
 
-    This is a look vector in an spacecraft coordinates, including
-    derivatives.
 
-    C++ includes: look_vector.h 
+    This is a look vector in an spacecraft coordinates, including derivatives.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -392,8 +419,11 @@ class ScLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(ScLookVectorWithDerivative self) -> ScLookVectorWithDerivative
+        __init__(ScLookVectorWithDerivative self, AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z) -> ScLookVectorWithDerivative
+        __init__(ScLookVectorWithDerivative self, BoostArrayAutoDerivativeDouble_3 Lv) -> ScLookVectorWithDerivative
+        __init__(ScLookVectorWithDerivative self, ScLookVector Slv) -> ScLookVectorWithDerivative
 
-        GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative(const ScLookVector &Slv)
         GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative
         """
         _look_vector.ScLookVectorWithDerivative_swiginit(self, _look_vector.new_ScLookVectorWithDerivative(*args))
@@ -413,9 +443,11 @@ _look_vector.ScLookVectorWithDerivative_swigregister(ScLookVectorWithDerivative)
 class CartesianInertialLookVector(LookVectorDouble):
     r"""
 
-    This is a look vector in CartesianInertial coordinates.
 
-    C++ includes: look_vector.h 
+    This is a look vector in CartesianInertial coordinates.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -423,10 +455,13 @@ class CartesianInertialLookVector(LookVectorDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(CartesianInertialLookVector self) -> CartesianInertialLookVector
+        __init__(CartesianInertialLookVector self, Array_double_3 Lv) -> CartesianInertialLookVector
+        __init__(CartesianInertialLookVector self, double x, double y, double z) -> CartesianInertialLookVector
+        __init__(CartesianInertialLookVector self, Quaternion_double V) -> CartesianInertialLookVector
 
-        GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)
         GeoCal::CartesianInertialLookVector::CartesianInertialLookVector
-        Constructor.
+        Constructor.  
 
         """
         _look_vector.CartesianInertialLookVector_swiginit(self, _look_vector.new_CartesianInertialLookVector(*args))
@@ -446,9 +481,11 @@ _look_vector.CartesianInertialLookVector_swigregister(CartesianInertialLookVecto
 class CartesianInertialLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
     r"""
 
-    This is a look vector in CartesianInertial coordinates.
 
-    C++ includes: look_vector.h 
+    This is a look vector in CartesianInertial coordinates.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -456,11 +493,13 @@ class CartesianInertialLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(CartesianInertialLookVectorWithDerivative self) -> CartesianInertialLookVectorWithDerivative
+        __init__(CartesianInertialLookVectorWithDerivative self, BoostArrayAutoDerivativeDouble_3 Lv) -> CartesianInertialLookVectorWithDerivative
+        __init__(CartesianInertialLookVectorWithDerivative self, AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z) -> CartesianInertialLookVectorWithDerivative
+        __init__(CartesianInertialLookVectorWithDerivative self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V) -> CartesianInertialLookVectorWithDerivative
 
-        GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
-        GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLo
-        okVectorWithDerivative
-        Constructor using quaternion.
+        GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative
+        Constructor using quaternion.  
 
         """
         _look_vector.CartesianInertialLookVectorWithDerivative_swiginit(self, _look_vector.new_CartesianInertialLookVectorWithDerivative(*args))
@@ -480,9 +519,11 @@ _look_vector.CartesianInertialLookVectorWithDerivative_swigregister(CartesianIne
 class DcsLookVector(LookVectorDouble):
     r"""
 
-    This is a look vector in Detector Coordinate System coordinates.
 
-    C++ includes: look_vector.h 
+    This is a look vector in Detector Coordinate System coordinates.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -490,10 +531,12 @@ class DcsLookVector(LookVectorDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(DcsLookVector self) -> DcsLookVector
+        __init__(DcsLookVector self, double x, double y, double z) -> DcsLookVector
+        __init__(DcsLookVector self, Array_double_3 Lv) -> DcsLookVector
 
-        GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)
         GeoCal::DcsLookVector::DcsLookVector
-        Constructor.
+        Constructor.  
 
         """
         _look_vector.DcsLookVector_swiginit(self, _look_vector.new_DcsLookVector(*args))
@@ -513,10 +556,12 @@ _look_vector.DcsLookVector_swigregister(DcsLookVector)
 class DcsLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
     r"""
 
-    This is a look vector in Detector Coordinate System coordinates,
-    including derivatives.
 
-    C++ includes: look_vector.h 
+    This is a look vector in Detector Coordinate System coordinates, including
+    derivatives.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -524,10 +569,12 @@ class DcsLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(DcsLookVectorWithDerivative self) -> DcsLookVectorWithDerivative
+        __init__(DcsLookVectorWithDerivative self, AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z) -> DcsLookVectorWithDerivative
+        __init__(DcsLookVectorWithDerivative self, BoostArrayAutoDerivativeDouble_3 Lv) -> DcsLookVectorWithDerivative
 
-        GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
         GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative
-        Constructor using quaternion.
+        Constructor using quaternion.  
 
         """
         _look_vector.DcsLookVectorWithDerivative_swiginit(self, _look_vector.new_DcsLookVectorWithDerivative(*args))
@@ -547,9 +594,11 @@ _look_vector.DcsLookVectorWithDerivative_swigregister(DcsLookVectorWithDerivativ
 class CartesianFixedLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
     r"""
 
-    This is a look vector in CartesianFixed coordinates.
 
-    C++ includes: look_vector.h 
+    This is a look vector in CartesianFixed coordinates.  
+
+    C++ includes: look_vector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -557,11 +606,13 @@ class CartesianFixedLookVectorWithDerivative(LookVectorAutoDerivativeDouble):
 
     def __init__(self, *args):
         r"""
+        __init__(CartesianFixedLookVectorWithDerivative self) -> CartesianFixedLookVectorWithDerivative
+        __init__(CartesianFixedLookVectorWithDerivative self, BoostArrayAutoDerivativeDouble_3 Lv) -> CartesianFixedLookVectorWithDerivative
+        __init__(CartesianFixedLookVectorWithDerivative self, AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z) -> CartesianFixedLookVectorWithDerivative
+        __init__(CartesianFixedLookVectorWithDerivative self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V) -> CartesianFixedLookVectorWithDerivative
 
-        GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)
-        GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVect
-        orWithDerivative
-        Constructor using quaternion.
+        GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative
+        Constructor using quaternion.  
 
         """
         _look_vector.CartesianFixedLookVectorWithDerivative_swiginit(self, _look_vector.new_CartesianFixedLookVectorWithDerivative(*args))

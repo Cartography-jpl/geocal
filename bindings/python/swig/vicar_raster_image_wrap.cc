@@ -12182,133 +12182,142 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarRasterImage", _wrap_new_VicarRasterImage, METH_VARARGS, "\n"
+		"VicarRasterImage(std::string const & Fname, int Band_id=1, GeoCal::VicarRasterImage::access_type Access=READ, int Number_line_per_tile=100, int Number_tile=4, bool Force_area_pixel=False)\n"
+		"VicarRasterImage(boost::shared_ptr< GeoCal::VicarFile > const & Vicar_file, int Band_id=1, int Number_line_per_tile=100, int Number_tile=4)\n"
+		"VicarRasterImage(std::string const & Fname, std::string const & Type, int Number_line, int Number_sample, int Number_band=1, std::string const & Org=\"BSQ\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
+		"VicarRasterImage(std::string const & Fname, MapInfo M, std::string const & Type=\"BYTE\", int Number_band=1, std::string const & Org=\"BSQ\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
+		"VicarRasterImage(int Instance, int Band_id=1, GeoCal::VicarRasterImage::access_type Access=READ, std::string const & Name=\"INP\", int Number_line_per_tile=100, int Number_tile=4)\n"
+		"VicarRasterImage(int Instance, std::string const & Type, int Number_line, int Number_sample, int Number_band=1, std::string const & Org=\"BSQ\", std::string const & Name=\"OUT\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
+		"VicarRasterImage(int Instance, MapInfo M, std::string const & Type=\"BYTE\", int Number_band=1, std::string const & Org=\"BSQ\", std::string const & Name=\"OUT\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
 		"\n"
-		"GeoCal::VicarRasterImage::VicarRasterImage(int Instance, int Band_id=1, access_type Access=VicarFile::READ,\n"
-		"const std::string &Name=\"INP\", int Number_line_per_tile=100, int\n"
-		"Number_tile=4)\n"
 		"GeoCal::VicarRasterImage::VicarRasterImage\n"
-		"Open a file, using the VICAR Name and Instance input (so for example,\n"
-		"\"INP\" and 2 is the second INP file passed to a VICAR program.\n"
+		"Open a file, using the VICAR Name and Instance input (so for example, \"INP\"\n"
+		"and 2 is the second INP file passed to a VICAR program.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_vicar_file", _wrap_VicarRasterImage__v_vicar_file, METH_O, "\n"
+		"VicarRasterImage__v_vicar_file(VicarRasterImage self) -> boost::shared_ptr< GeoCal::VicarFile >\n"
 		"\n"
-		"boost::shared_ptr< VicarFile > GeoCal::VicarRasterImage::vicar_file_ptr() const\n"
 		"GeoCal::VicarRasterImage::vicar_file_ptr\n"
 		""},
 	 { "VicarRasterImage_flush", _wrap_VicarRasterImage_flush, METH_O, "\n"
+		"VicarRasterImage_flush(VicarRasterImage self)\n"
 		"\n"
-		"virtual void GeoCal::VicarRasterImage::flush() const\n"
 		"GeoCal::VicarRasterImage::flush\n"
-		"Flush data to disk.\n"
+		"Flush data to disk.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_close", _wrap_VicarRasterImage_close, METH_O, "\n"
+		"VicarRasterImage_close(VicarRasterImage self)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::close()\n"
 		"GeoCal::VicarRasterImage::close\n"
-		"Close a file.\n"
-		"You don't normally need to call this directly, it is done by the\n"
-		"destructor. But it is useful to have for use by Ruby. \n"
+		"Close a file.  \n"
+		"\n"
+		"You don't normally need to call this directly, it is done by the destructor. But\n"
+		"it is useful to have for use by Ruby.  \n"
+		"\n"
 		""},
 	 { "VicarRasterImage_set_rpc", _wrap_VicarRasterImage_set_rpc, METH_VARARGS, "\n"
+		"VicarRasterImage_set_rpc(VicarRasterImage self, Rpc R)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_rpc(const Rpc &R)\n"
 		"GeoCal::VicarRasterImage::set_rpc\n"
-		"Set the RPC.\n"
+		"Set the RPC.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_set_rsm", _wrap_VicarRasterImage_set_rsm, METH_VARARGS, "\n"
+		"VicarRasterImage_set_rsm(VicarRasterImage self, boost::shared_ptr< GeoCal::Rsm > const & R, GeoCal::VicarFile::rsm_file_type File_type=RSM_NITF_FILE)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_rsm(const boost::shared_ptr< Rsm > &R, VicarFile::rsm_file_type\n"
-		"File_type=VicarFile::RSM_NITF_FILE)\n"
 		"GeoCal::VicarRasterImage::set_rsm\n"
-		"Set the RSM.\n"
+		"Set the RSM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_set_igc_glas_gfm", _wrap_VicarRasterImage_set_igc_glas_gfm, METH_VARARGS, "\n"
+		"VicarRasterImage_set_igc_glas_gfm(VicarRasterImage self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, GeoCal::VicarFile::glas_gfm_file_type File_type=GLAS_GFM_NITF_FILE)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,\n"
-		"VicarFile::glas_gfm_file_type File_type=VicarFile::GLAS_GFM_NITF_FILE)\n"
 		"GeoCal::VicarRasterImage::set_igc_glas_gfm\n"
-		"Set the GLAS/GFM.\n"
+		"Set the GLAS/GFM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_set_map_info", _wrap_VicarRasterImage_set_map_info, METH_VARARGS, "\n"
+		"VicarRasterImage_set_map_info(VicarRasterImage self, MapInfo Mi)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_map_info(const MapInfo &Mi)\n"
 		"GeoCal::VicarRasterImage::set_map_info\n"
-		"Set the Map Info.\n"
+		"Set the Map Info.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_has_igc_glas_gfm", _wrap_VicarRasterImage__v_has_igc_glas_gfm, METH_O, "\n"
+		"VicarRasterImage__v_has_igc_glas_gfm(VicarRasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::VicarRasterImage::has_igc_glas_gfm() const\n"
 		"GeoCal::VicarRasterImage::has_igc_glas_gfm\n"
-		"Indicate if we have GLAS/GFM.\n"
+		"Indicate if we have GLAS/GFM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_igc_glas_gfm", _wrap_VicarRasterImage__v_igc_glas_gfm, METH_O, "\n"
+		"VicarRasterImage__v_igc_glas_gfm(VicarRasterImage self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"virtual boost::shared_ptr< ImageGroundConnection > GeoCal::VicarRasterImage::igc_glas_gfm() const\n"
 		"GeoCal::VicarRasterImage::igc_glas_gfm\n"
-		"Indicate if we have GLAS/GFM.\n"
+		"Indicate if we have GLAS/GFM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_number_band", _wrap_VicarRasterImage__v_number_band, METH_O, "\n"
+		"VicarRasterImage__v_number_band(VicarRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::VicarRasterImage::number_band() const\n"
 		"GeoCal::VicarRasterImage::number_band\n"
-		"Number of bands in file.\n"
+		"Number of bands in file.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_band_id", _wrap_VicarRasterImage__v_band_id, METH_O, "\n"
+		"VicarRasterImage__v_band_id(VicarRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::VicarRasterImage::band_id() const\n"
 		"GeoCal::VicarRasterImage::band_id\n"
-		"Band id we are reading.\n"
-		"Note that following the GDAL convention, this is 1 based. \n"
-		""},
-	 { "VicarRasterImage__v_rpc", _wrap_VicarRasterImage__v_rpc, METH_O, NULL},
-	 { "VicarRasterImage__v_map_info", _wrap_VicarRasterImage__v_map_info, METH_O, NULL},
-	 { "delete_VicarRasterImage", _wrap_delete_VicarRasterImage, METH_O, "\n"
+		"Band id we are reading.  \n"
 		"\n"
-		"virtual GeoCal::VicarRasterImage::~VicarRasterImage()\n"
+		"Note that following the GDAL convention, this is 1 based.  \n"
+		"\n"
+		""},
+	 { "VicarRasterImage__v_rpc", _wrap_VicarRasterImage__v_rpc, METH_O, "VicarRasterImage__v_rpc(VicarRasterImage self) -> Rpc"},
+	 { "VicarRasterImage__v_map_info", _wrap_VicarRasterImage__v_map_info, METH_O, "VicarRasterImage__v_map_info(VicarRasterImage self) -> MapInfo"},
+	 { "delete_VicarRasterImage", _wrap_delete_VicarRasterImage, METH_O, "\n"
+		"delete_VicarRasterImage(VicarRasterImage self)\n"
+		"\n"
 		"GeoCal::VicarRasterImage::~VicarRasterImage\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_swigregister", VicarRasterImage_swigregister, METH_O, NULL},
 	 { "VicarRasterImage_swiginit", VicarRasterImage_swiginit, METH_VARARGS, NULL},
 	 { "vicar_open", _wrap_vicar_open, METH_VARARGS, "\n"
+		"vicar_open(std::string const & Fname, int Band_id=1, GeoCal::VicarFile::access_type Access=READ, bool Favor_memory_mapped=True, int Number_line_per_tile=100, int Number_tile=4, bool Force_area_pixel=False) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"boost::shared_ptr< RasterImage > GeoCal::vicar_open(const std::string &Fname, int Band_id=1, VicarFile::access_type\n"
-		"Access=VicarFile::READ, bool Favor_memory_mapped=true, int\n"
-		"Number_line_per_tile=100, int Number_tile=4, bool\n"
-		"Force_area_pixel=false)\n"
 		"GeoCal::vicar_open\n"
-		"Often you want to open a memory mapped VicarLiteRasterImage if you can\n"
-		"because it is faster, but fall back to using a VicarRasterImage if you can't (e.g., the data is compressed).\n"
-		"This utility routine works out the logic for this. \n"
+		"Often you want to open a memory mapped VicarLiteRasterImage if you can because\n"
+		"it is faster, but fall back to using a VicarRasterImage if you can't (e.g., the\n"
+		"data is compressed).  \n"
+		"\n"
+		"This utility routine works out the logic for this.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -12316,133 +12325,142 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarRasterImage", _wrap_new_VicarRasterImage, METH_VARARGS, "\n"
+		"VicarRasterImage(std::string const & Fname, int Band_id=1, GeoCal::VicarRasterImage::access_type Access=READ, int Number_line_per_tile=100, int Number_tile=4, bool Force_area_pixel=False)\n"
+		"VicarRasterImage(boost::shared_ptr< GeoCal::VicarFile > const & Vicar_file, int Band_id=1, int Number_line_per_tile=100, int Number_tile=4)\n"
+		"VicarRasterImage(std::string const & Fname, std::string const & Type, int Number_line, int Number_sample, int Number_band=1, std::string const & Org=\"BSQ\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
+		"VicarRasterImage(std::string const & Fname, MapInfo M, std::string const & Type=\"BYTE\", int Number_band=1, std::string const & Org=\"BSQ\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
+		"VicarRasterImage(int Instance, int Band_id=1, GeoCal::VicarRasterImage::access_type Access=READ, std::string const & Name=\"INP\", int Number_line_per_tile=100, int Number_tile=4)\n"
+		"VicarRasterImage(int Instance, std::string const & Type, int Number_line, int Number_sample, int Number_band=1, std::string const & Org=\"BSQ\", std::string const & Name=\"OUT\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
+		"VicarRasterImage(int Instance, MapInfo M, std::string const & Type=\"BYTE\", int Number_band=1, std::string const & Org=\"BSQ\", std::string const & Name=\"OUT\", int Number_line_per_tile=100, GeoCal::VicarRasterImage::compression C=NONE)\n"
 		"\n"
-		"GeoCal::VicarRasterImage::VicarRasterImage(int Instance, int Band_id=1, access_type Access=VicarFile::READ,\n"
-		"const std::string &Name=\"INP\", int Number_line_per_tile=100, int\n"
-		"Number_tile=4)\n"
 		"GeoCal::VicarRasterImage::VicarRasterImage\n"
-		"Open a file, using the VICAR Name and Instance input (so for example,\n"
-		"\"INP\" and 2 is the second INP file passed to a VICAR program.\n"
+		"Open a file, using the VICAR Name and Instance input (so for example, \"INP\"\n"
+		"and 2 is the second INP file passed to a VICAR program.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_vicar_file", _wrap_VicarRasterImage__v_vicar_file, METH_O, "\n"
+		"_v_vicar_file(VicarRasterImage self) -> boost::shared_ptr< GeoCal::VicarFile >\n"
 		"\n"
-		"boost::shared_ptr< VicarFile > GeoCal::VicarRasterImage::vicar_file_ptr() const\n"
 		"GeoCal::VicarRasterImage::vicar_file_ptr\n"
 		""},
 	 { "VicarRasterImage_flush", _wrap_VicarRasterImage_flush, METH_O, "\n"
+		"flush(VicarRasterImage self)\n"
 		"\n"
-		"virtual void GeoCal::VicarRasterImage::flush() const\n"
 		"GeoCal::VicarRasterImage::flush\n"
-		"Flush data to disk.\n"
+		"Flush data to disk.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_close", _wrap_VicarRasterImage_close, METH_O, "\n"
+		"close(VicarRasterImage self)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::close()\n"
 		"GeoCal::VicarRasterImage::close\n"
-		"Close a file.\n"
-		"You don't normally need to call this directly, it is done by the\n"
-		"destructor. But it is useful to have for use by Ruby. \n"
+		"Close a file.  \n"
+		"\n"
+		"You don't normally need to call this directly, it is done by the destructor. But\n"
+		"it is useful to have for use by Ruby.  \n"
+		"\n"
 		""},
 	 { "VicarRasterImage_set_rpc", _wrap_VicarRasterImage_set_rpc, METH_VARARGS, "\n"
+		"set_rpc(VicarRasterImage self, Rpc R)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_rpc(const Rpc &R)\n"
 		"GeoCal::VicarRasterImage::set_rpc\n"
-		"Set the RPC.\n"
+		"Set the RPC.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_set_rsm", _wrap_VicarRasterImage_set_rsm, METH_VARARGS, "\n"
+		"set_rsm(VicarRasterImage self, boost::shared_ptr< GeoCal::Rsm > const & R, GeoCal::VicarFile::rsm_file_type File_type=RSM_NITF_FILE)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_rsm(const boost::shared_ptr< Rsm > &R, VicarFile::rsm_file_type\n"
-		"File_type=VicarFile::RSM_NITF_FILE)\n"
 		"GeoCal::VicarRasterImage::set_rsm\n"
-		"Set the RSM.\n"
+		"Set the RSM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_set_igc_glas_gfm", _wrap_VicarRasterImage_set_igc_glas_gfm, METH_VARARGS, "\n"
+		"set_igc_glas_gfm(VicarRasterImage self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, GeoCal::VicarFile::glas_gfm_file_type File_type=GLAS_GFM_NITF_FILE)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_igc_glas_gfm(const boost::shared_ptr< ImageGroundConnection > &Igc,\n"
-		"VicarFile::glas_gfm_file_type File_type=VicarFile::GLAS_GFM_NITF_FILE)\n"
 		"GeoCal::VicarRasterImage::set_igc_glas_gfm\n"
-		"Set the GLAS/GFM.\n"
+		"Set the GLAS/GFM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_set_map_info", _wrap_VicarRasterImage_set_map_info, METH_VARARGS, "\n"
+		"set_map_info(VicarRasterImage self, MapInfo Mi)\n"
 		"\n"
-		"void GeoCal::VicarRasterImage::set_map_info(const MapInfo &Mi)\n"
 		"GeoCal::VicarRasterImage::set_map_info\n"
-		"Set the Map Info.\n"
+		"Set the Map Info.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_has_igc_glas_gfm", _wrap_VicarRasterImage__v_has_igc_glas_gfm, METH_O, "\n"
+		"_v_has_igc_glas_gfm(VicarRasterImage self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::VicarRasterImage::has_igc_glas_gfm() const\n"
 		"GeoCal::VicarRasterImage::has_igc_glas_gfm\n"
-		"Indicate if we have GLAS/GFM.\n"
+		"Indicate if we have GLAS/GFM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_igc_glas_gfm", _wrap_VicarRasterImage__v_igc_glas_gfm, METH_O, "\n"
+		"_v_igc_glas_gfm(VicarRasterImage self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"virtual boost::shared_ptr< ImageGroundConnection > GeoCal::VicarRasterImage::igc_glas_gfm() const\n"
 		"GeoCal::VicarRasterImage::igc_glas_gfm\n"
-		"Indicate if we have GLAS/GFM.\n"
+		"Indicate if we have GLAS/GFM.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_number_band", _wrap_VicarRasterImage__v_number_band, METH_O, "\n"
+		"_v_number_band(VicarRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::VicarRasterImage::number_band() const\n"
 		"GeoCal::VicarRasterImage::number_band\n"
-		"Number of bands in file.\n"
+		"Number of bands in file.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage__v_band_id", _wrap_VicarRasterImage__v_band_id, METH_O, "\n"
+		"_v_band_id(VicarRasterImage self) -> int\n"
 		"\n"
-		"int GeoCal::VicarRasterImage::band_id() const\n"
 		"GeoCal::VicarRasterImage::band_id\n"
-		"Band id we are reading.\n"
-		"Note that following the GDAL convention, this is 1 based. \n"
-		""},
-	 { "VicarRasterImage__v_rpc", _wrap_VicarRasterImage__v_rpc, METH_O, NULL},
-	 { "VicarRasterImage__v_map_info", _wrap_VicarRasterImage__v_map_info, METH_O, NULL},
-	 { "delete_VicarRasterImage", _wrap_delete_VicarRasterImage, METH_O, "\n"
+		"Band id we are reading.  \n"
 		"\n"
-		"virtual GeoCal::VicarRasterImage::~VicarRasterImage()\n"
+		"Note that following the GDAL convention, this is 1 based.  \n"
+		"\n"
+		""},
+	 { "VicarRasterImage__v_rpc", _wrap_VicarRasterImage__v_rpc, METH_O, "_v_rpc(VicarRasterImage self) -> Rpc"},
+	 { "VicarRasterImage__v_map_info", _wrap_VicarRasterImage__v_map_info, METH_O, "_v_map_info(VicarRasterImage self) -> MapInfo"},
+	 { "delete_VicarRasterImage", _wrap_delete_VicarRasterImage, METH_O, "\n"
+		"delete_VicarRasterImage(VicarRasterImage self)\n"
+		"\n"
 		"GeoCal::VicarRasterImage::~VicarRasterImage\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "VicarRasterImage_swigregister", VicarRasterImage_swigregister, METH_O, NULL},
 	 { "VicarRasterImage_swiginit", VicarRasterImage_swiginit, METH_VARARGS, NULL},
 	 { "vicar_open", _wrap_vicar_open, METH_VARARGS, "\n"
+		"vicar_open(std::string const & Fname, int Band_id=1, GeoCal::VicarFile::access_type Access=READ, bool Favor_memory_mapped=True, int Number_line_per_tile=100, int Number_tile=4, bool Force_area_pixel=False) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"boost::shared_ptr< RasterImage > GeoCal::vicar_open(const std::string &Fname, int Band_id=1, VicarFile::access_type\n"
-		"Access=VicarFile::READ, bool Favor_memory_mapped=true, int\n"
-		"Number_line_per_tile=100, int Number_tile=4, bool\n"
-		"Force_area_pixel=false)\n"
 		"GeoCal::vicar_open\n"
-		"Often you want to open a memory mapped VicarLiteRasterImage if you can\n"
-		"because it is faster, but fall back to using a VicarRasterImage if you can't (e.g., the data is compressed).\n"
-		"This utility routine works out the logic for this. \n"
+		"Often you want to open a memory mapped VicarLiteRasterImage if you can because\n"
+		"it is faster, but fall back to using a VicarRasterImage if you can't (e.g., the\n"
+		"data is compressed).  \n"
+		"\n"
+		"This utility routine works out the logic for this.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _galileo_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _galileo_camera:
 _galileo_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _galileo_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,15 +144,16 @@ import geocal_swig.with_parameter
 class GalileoCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    This is the galileo camera, including the nonlinearity correction.
 
-    Right now we just have hardcoded everything, but this comes from the
-    spice kernel available in
-    unit_test_data/galileo_kernel/ik/gll36001.ti. It wouldn't be that hard
-    to update this to read the parameters from the spice kernel, but there
-    isn't any particular reason right now to do so.
+    This is the galileo camera, including the nonlinearity correction.  
 
-    C++ includes: galileo_camera.h 
+    Right now we just have hardcoded everything, but this comes from the spice
+    kernel available in unit_test_data/galileo_kernel/ik/gll36001.ti. It wouldn't be
+    that hard to update this to read the parameters from the spice kernel, but there
+    isn't any particular reason right now to do so.  
+
+    C++ includes: galileo_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,10 +161,10 @@ class GalileoCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self):
         r"""
+        __init__(GalileoCamera self) -> GalileoCamera
 
-        GalileoCamera::GalileoCamera()
         GeoCal::GalileoCamera::GalileoCamera
-        Constructor. Right now we have everything hardcoded for the camera.
+        Constructor. Right now we have everything hardcoded for the camera.  
 
         """
         _galileo_camera.GalileoCamera_swiginit(self, _galileo_camera.new_GalileoCamera())

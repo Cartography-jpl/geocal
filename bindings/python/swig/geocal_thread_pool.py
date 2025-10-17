@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_thread_pool.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_thread_pool:
 _geocal_thread_pool.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_thread_pool.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,18 +140,19 @@ import geocal_swig.generic_object
 class ThreadPool(geocal_swig.generic_object.GenericObject):
     r"""
 
-    The newer C++ 17 has versions of std library functions that
-    automatically handle threading.
 
-    However there isn't support of this until a much newer version of gcc
-    then we want to depend on (9 or so), and also depends on third party
-    library (Intel TBB).
+    The newer C++ 17 has versions of std library functions that automatically handle
+    threading.  
 
-    For now, we use the boost threadpool class and handle the threading
-    ourselves. We can possibly remove this class at some point as the
-    compiler move on.
+    However there isn't support of this until a much newer version of gcc then we
+    want to depend on (9 or so), and also depends on third party library (Intel
+    TBB).  
 
-    C++ includes: geocal_thread_pool.h 
+    For now, we use the boost threadpool class and handle the threading ourselves.
+    We can possibly remove this class at some point as the compiler move on.  
+
+    C++ includes: geocal_thread_pool.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,6 +161,7 @@ class ThreadPool(geocal_swig.generic_object.GenericObject):
         raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
     default_number_thread = _geocal_thread_pool.ThreadPool_default_number_thread
+    
     thread_pool = _swig_new_static_method(_geocal_thread_pool.ThreadPool_thread_pool)
     _v_number_thread = _swig_new_instance_method(_geocal_thread_pool.ThreadPool__v_number_thread)
 

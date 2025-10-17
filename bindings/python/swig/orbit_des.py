@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _orbit_des.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _orbit_des:
 _orbit_des.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _orbit_des.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,58 +144,76 @@ import geocal_swig.look_vector
 class PosCsephb(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles position reading, writing, and interpolation.
 
-    This uses the NITF DES CSEPHB (See the SNIP documentation).
+    This handles position reading, writing, and interpolation.  
 
-    Note that this class doesn't read and write the full DES, only the
-    data portion. It works with the python code found in
-    geocal_des_extension.py.
+    This uses the NITF DES CSEPHB (See the SNIP documentation).  
 
-    The CSEPHB DES doens't contain velocity. We calculate the velocity
-    from the positions.
+    Note that this class doesn't read and write the full DES, only the data portion.
+    It works with the python code found in geocal_des_extension.py.  
 
-    Note that the the CSEPHB data is like a NITF TRE. But because it is a
-    DES, it is potentially much larger. For efficiency, we read and write
-    the data as istream and ostream rather than return strings as we
-    typically do for TREs. On the python side, this can be mapped from a
-    io object like FileHandle or BytesIO.
+    The CSEPHB DES doens't contain velocity. We calculate the velocity from the
+    positions.  
 
-    C++ includes: orbit_des.h 
+    Note that the the CSEPHB data is like a NITF TRE. But because it is a DES, it is
+    potentially much larger. For efficiency, we read and write the data as istream
+    and ostream rather than return strings as we typically do for TREs. On the
+    python side, this can be mapped from a io object like FileHandle or BytesIO.  
+
+    C++ includes: orbit_des.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     EPHEMERIS_QUALITY_SUSPECT = _orbit_des.PosCsephb_EPHEMERIS_QUALITY_SUSPECT
+    
     EPHEMERIS_QUALITY_GOOD = _orbit_des.PosCsephb_EPHEMERIS_QUALITY_GOOD
+    
     NEAREST_NEIGHBOR = _orbit_des.PosCsephb_NEAREST_NEIGHBOR
+    
     LINEAR = _orbit_des.PosCsephb_LINEAR
+    
     LAGRANGE = _orbit_des.PosCsephb_LAGRANGE
+    
     NO_LAGRANGE = _orbit_des.PosCsephb_NO_LAGRANGE
+    
     LAGRANGE_1 = _orbit_des.PosCsephb_LAGRANGE_1
+    
     LAGRANGE_3 = _orbit_des.PosCsephb_LAGRANGE_3
+    
     LAGRANGE_5 = _orbit_des.PosCsephb_LAGRANGE_5
+    
     LAGRANGE_7 = _orbit_des.PosCsephb_LAGRANGE_7
+    
     SAME_AS_ORBIT = _orbit_des.PosCsephb_SAME_AS_ORBIT
+    
     CARTESIAN_FIXED = _orbit_des.PosCsephb_CARTESIAN_FIXED
+    
     CARTESIAN_INERTIAL = _orbit_des.PosCsephb_CARTESIAN_INERTIAL
+    
     PREDICTED = _orbit_des.PosCsephb_PREDICTED
+    
     ACTUAL = _orbit_des.PosCsephb_ACTUAL
+    
     REFINED = _orbit_des.PosCsephb_REFINED
+    
 
     def __init__(self, *args):
         r"""
+        __init__(PosCsephb self, BlitzArray_double_2 Pos, Time Tmin, double Tstep, bool Is_cf, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL) -> PosCsephb
+        __init__(PosCsephb self, Orbit Orb, double Tstep, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL, GeoCal::PosCsephb::PositionType P_type=SAME_AS_ORBIT) -> PosCsephb
+        __init__(PosCsephb self, Orbit Orb, Time Min_time, Time Max_time, double Tstep, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL, GeoCal::PosCsephb::PositionType P_type=SAME_AS_ORBIT) -> PosCsephb
 
-        PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,
-        LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality
-        E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,
-        PositionType P_type=SAME_AS_ORBIT)
         GeoCal::PosCsephb::PosCsephb
-        Constructor.
-        We sample the position of the given Orbit at fixed spaces times. This
-        version goes from the min_time() of the Orbit, up to max_time() (or
-        more accurately, the largest time min_time() i * Tstep that is <=
-        max_time()). 
+        Constructor.  
+
+        We sample the position of the given Orbit at fixed spaces times. This version
+        goes from the min_time() of the Orbit, up to max_time() (or more accurately, the
+        largest time min_time()  
+
+        *   i * Tstep that is <= max_time()).  
+
         """
         _orbit_des.PosCsephb_swiginit(self, _orbit_des.new_PosCsephb(*args))
     pos_vel = _swig_new_instance_method(_orbit_des.PosCsephb_pos_vel)
@@ -348,60 +369,78 @@ _orbit_des.PosCsephb_swigregister(PosCsephb)
 class AttCsattb(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This handles attitude reading, writing, and interpolation.
 
-    This uses the NITF DES CSEATTB (See the SNIP documentation).
+    This handles attitude reading, writing, and interpolation.  
 
-    Note that this class doesn't read and write the full DES, only the
-    data portion. It works with the python code found in
-    geocal_des_extension.py.
+    This uses the NITF DES CSEATTB (See the SNIP documentation).  
 
-    Note that the the CSATTB data is like a NITF TRE. But because it is a
-    DES, it is potentially much larger. For efficiency, we read and write
-    the data as istream and ostream rather than return strings as we
-    typically do for TREs. On the python side, this can be mapped from a
-    io object like FileHandle or BytesIO.
+    Note that this class doesn't read and write the full DES, only the data portion.
+    It works with the python code found in geocal_des_extension.py.  
 
-    Note that NITF has different convention for quaternions than we use
-    internally with OrbitData. We use the functions nitf_to_quaternion and
-    quaternion_to_nitf to map back and forth, look at the documentation of
-    those functions to see what the mapping does.
+    Note that the the CSATTB data is like a NITF TRE. But because it is a DES, it is
+    potentially much larger. For efficiency, we read and write the data as istream
+    and ostream rather than return strings as we typically do for TREs. On the
+    python side, this can be mapped from a io object like FileHandle or BytesIO.  
 
-    C++ includes: orbit_des.h 
+    Note that NITF has different convention for quaternions than we use internally
+    with OrbitData. We use the functions nitf_to_quaternion and quaternion_to_nitf
+    to map back and forth, look at the documentation of those functions to see what
+    the mapping does.  
+
+    C++ includes: orbit_des.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     ATTITUDE_QUALITY_SUSPECT = _orbit_des.AttCsattb_ATTITUDE_QUALITY_SUSPECT
+    
     ATTITUDE_QUALITY_GOOD = _orbit_des.AttCsattb_ATTITUDE_QUALITY_GOOD
+    
     NEAREST_NEIGHBOR = _orbit_des.AttCsattb_NEAREST_NEIGHBOR
+    
     LINEAR = _orbit_des.AttCsattb_LINEAR
+    
     LAGRANGE = _orbit_des.AttCsattb_LAGRANGE
+    
     NO_LAGRANGE = _orbit_des.AttCsattb_NO_LAGRANGE
+    
     LAGRANGE_1 = _orbit_des.AttCsattb_LAGRANGE_1
+    
     LAGRANGE_3 = _orbit_des.AttCsattb_LAGRANGE_3
+    
     LAGRANGE_5 = _orbit_des.AttCsattb_LAGRANGE_5
+    
     LAGRANGE_7 = _orbit_des.AttCsattb_LAGRANGE_7
+    
     SAME_AS_ORBIT = _orbit_des.AttCsattb_SAME_AS_ORBIT
+    
     CARTESIAN_FIXED = _orbit_des.AttCsattb_CARTESIAN_FIXED
+    
     CARTESIAN_INERTIAL = _orbit_des.AttCsattb_CARTESIAN_INERTIAL
+    
     PREDICTED = _orbit_des.AttCsattb_PREDICTED
+    
     ACTUAL = _orbit_des.AttCsattb_ACTUAL
+    
     REFINED = _orbit_des.AttCsattb_REFINED
+    
 
     def __init__(self, *args):
         r"""
+        __init__(AttCsattb self, BlitzArray_double_2 Att, Time Tmin, double Tstep, bool Is_cf, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality A_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource A_source=ACTUAL) -> AttCsattb
+        __init__(AttCsattb self, Orbit Orb, double Tstep, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality E_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource E_source=ACTUAL, GeoCal::AttCsattb::AttitudeType A_type=SAME_AS_ORBIT) -> AttCsattb
+        __init__(AttCsattb self, Orbit Orb, Time Min_time, Time Max_time, double Tstep, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality E_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource E_source=ACTUAL, GeoCal::AttCsattb::AttitudeType A_type=SAME_AS_ORBIT) -> AttCsattb
 
-        AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,
-        LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality
-        A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,
-        AttitudeType A_type=SAME_AS_ORBIT)
         GeoCal::AttCsattb::AttCsattb
-        Constructor.
-        We sample the attitude of the given Orbit at fixed spaces times. This
-        version goes from the min_time() of the Orbit, up to max_time() (or
-        more accurately, the largest time min_time() i * Tstep that is <=
-        max_time()). 
+        Constructor.  
+
+        We sample the attitude of the given Orbit at fixed spaces times. This version
+        goes from the min_time() of the Orbit, up to max_time() (or more accurately, the
+        largest time min_time()  
+
+        *   i * Tstep that is <= max_time()).  
+
         """
         _orbit_des.AttCsattb_swiginit(self, _orbit_des.new_AttCsattb(*args))
     _v_id = _swig_new_instance_method(_orbit_des.AttCsattb__v_id)
@@ -562,20 +601,20 @@ _orbit_des.AttCsattb_swigregister(AttCsattb)
 class OrbitDes(geocal_swig.orbit.Orbit):
     r"""
 
-    This combines a PosCsephb and AttCsattb into an Orbit.
 
-    Note that we calculate things for every time point. If you are using
-    this a bit you may want to create a OrbitQuaternionList from this
-    Orbit to speed things up.
+    This combines a PosCsephb and AttCsattb into an Orbit.  
+
+    Note that we calculate things for every time point. If you are using this a bit
+    you may want to create a OrbitQuaternionList from this Orbit to speed things up.  
 
     Note that this orbit uses a different convention for the ScLookVector
-    coordinates than we use in for example KeplerOrbit based on the
-    EOS/MISR convention. We have +y in the line/along track direction and
-    +x in the sample/cross track direction. The other convention we use in
-    other orbits (e.g., MISR) has +x in the line direction and +y in the
-    sample direction.
+    coordinates than we use in for example KeplerOrbit based on the EOS/MISR
+    convention. We have +y in the line/along track direction and +x in the
+    sample/cross track direction. The other convention we use in other orbits (e.g.,
+    MISR) has +x in the line direction and +y in the sample direction.  
 
-    C++ includes: orbit_des.h 
+    C++ includes: orbit_des.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -583,11 +622,10 @@ class OrbitDes(geocal_swig.orbit.Orbit):
 
     def __init__(self, *args):
         r"""
+        __init__(OrbitDes self, boost::shared_ptr< GeoCal::PosCsephb > const & Pos, boost::shared_ptr< GeoCal::AttCsattb > const & Att, int Naif_code=Ecr::EARTH_NAIF_CODE) -> OrbitDes
 
-        OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<
-        AttCsattb > &Att, int Naif_code=Ecr::EARTH_NAIF_CODE)
         GeoCal::OrbitDes::OrbitDes
-        Constructor.
+        Constructor.  
 
         """
         _orbit_des.OrbitDes_swiginit(self, _orbit_des.new_OrbitDes(*args))

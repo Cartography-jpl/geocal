@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_subsample.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_subsample:
 _raster_subsample.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_subsample.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,15 +144,15 @@ import geocal_swig.geocal_exception
 class RasterSubSample(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    This subsamples a higher resolution RasterImage into a lower
-    resolution one.
 
-    Typically the pixel subsampling factor doesn't exactly divide the
-    number of lines and samples of the full resolution data. We just trim
-    the data to the largest low resolution pixel that completely fits in
-    the higher resolution data.
+    This subsamples a higher resolution RasterImage into a lower resolution one.  
 
-    C++ includes: raster_subsample.h 
+    Typically the pixel subsampling factor doesn't exactly divide the number of
+    lines and samples of the full resolution data. We just trim the data to the
+    largest low resolution pixel that completely fits in the higher resolution data.  
+
+    C++ includes: raster_subsample.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,11 +160,10 @@ class RasterSubSample(geocal_swig.raster_image_variable.RasterImageVariable):
 
     def __init__(self, Data, Number_line_per_pixel, Number_sample_per_pixel):
         r"""
+        __init__(RasterSubSample self, boost::shared_ptr< GeoCal::RasterImage > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel) -> RasterSubSample
 
-        RasterSubSample::RasterSubSample(const boost::shared_ptr< RasterImage > &Data, int
-        Number_line_per_pixel, int Number_sample_per_pixel)
         GeoCal::RasterSubSample::RasterSubSample
-        Constructor.
+        Constructor.  
 
         """
         _raster_subsample.RasterSubSample_swiginit(self, _raster_subsample.new_RasterSubSample(Data, Number_line_per_pixel, Number_sample_per_pixel))

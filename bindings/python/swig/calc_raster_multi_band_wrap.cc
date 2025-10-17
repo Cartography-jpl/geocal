@@ -9454,31 +9454,43 @@ SWIGINTERN PyObject *CalcRasterMultiBand_swiginit(PyObject *SWIGUNUSEDPARM(self)
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "CalcRasterMultiBand_raster_image", _wrap_CalcRasterMultiBand_raster_image, METH_VARARGS, NULL},
-	 { "CalcRasterMultiBand__v_data", _wrap_CalcRasterMultiBand__v_data, METH_O, NULL},
-	 { "CalcRasterMultiBand_desc", _wrap_CalcRasterMultiBand_desc, METH_O, NULL},
-	 { "CalcRasterMultiBand_calc", _wrap_CalcRasterMultiBand_calc, METH_VARARGS, NULL},
-	 { "new_CalcRasterMultiBand", _wrap_new_CalcRasterMultiBand, METH_VARARGS, NULL},
-	 { "CalcRasterMultiBand_initialize", _wrap_CalcRasterMultiBand_initialize, METH_VARARGS, NULL},
-	 { "delete_CalcRasterMultiBand", _wrap_delete_CalcRasterMultiBand, METH_O, NULL},
+	 { "CalcRasterMultiBand_raster_image", _wrap_CalcRasterMultiBand_raster_image, METH_VARARGS, "CalcRasterMultiBand_raster_image(CalcRasterMultiBand self, int band) -> boost::shared_ptr< GeoCal::RasterImage >"},
+	 { "CalcRasterMultiBand__v_data", _wrap_CalcRasterMultiBand__v_data, METH_O, "CalcRasterMultiBand__v_data(CalcRasterMultiBand self) -> BlitzArray_double_3"},
+	 { "CalcRasterMultiBand_desc", _wrap_CalcRasterMultiBand_desc, METH_O, "CalcRasterMultiBand_desc(CalcRasterMultiBand self) -> std::string"},
+	 { "CalcRasterMultiBand_calc", _wrap_CalcRasterMultiBand_calc, METH_VARARGS, "CalcRasterMultiBand_calc(CalcRasterMultiBand self, int Lstart, int Sstart)"},
+	 { "new_CalcRasterMultiBand", _wrap_new_CalcRasterMultiBand, METH_VARARGS, "\n"
+		"CalcRasterMultiBand()\n"
+		"CalcRasterMultiBand(RasterImage Img, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"CalcRasterMultiBand(int Nline, int Nsamp, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"CalcRasterMultiBand(MapInfo Mi, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		""},
+	 { "CalcRasterMultiBand_initialize", _wrap_CalcRasterMultiBand_initialize, METH_VARARGS, "\n"
+		"CalcRasterMultiBand_initialize(CalcRasterMultiBand self, RasterImage Img, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"CalcRasterMultiBand_initialize(CalcRasterMultiBand self, int Nline, int Nsamp, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"CalcRasterMultiBand_initialize(CalcRasterMultiBand self, MapInfo arg2, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		""},
+	 { "delete_CalcRasterMultiBand", _wrap_delete_CalcRasterMultiBand, METH_O, "delete_CalcRasterMultiBand(CalcRasterMultiBand self)"},
 	 { "disown_CalcRasterMultiBand", _wrap_disown_CalcRasterMultiBand, METH_O, NULL},
 	 { "CalcRasterMultiBand_swigregister", CalcRasterMultiBand_swigregister, METH_O, NULL},
 	 { "CalcRasterMultiBand_swiginit", CalcRasterMultiBand_swiginit, METH_VARARGS, NULL},
@@ -9488,31 +9500,43 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "CalcRasterMultiBand_raster_image", _wrap_CalcRasterMultiBand_raster_image, METH_VARARGS, NULL},
-	 { "CalcRasterMultiBand__v_data", _wrap_CalcRasterMultiBand__v_data, METH_O, NULL},
-	 { "CalcRasterMultiBand_desc", _wrap_CalcRasterMultiBand_desc, METH_O, NULL},
-	 { "CalcRasterMultiBand_calc", _wrap_CalcRasterMultiBand_calc, METH_VARARGS, NULL},
-	 { "new_CalcRasterMultiBand", _wrap_new_CalcRasterMultiBand, METH_VARARGS, NULL},
-	 { "CalcRasterMultiBand_initialize", _wrap_CalcRasterMultiBand_initialize, METH_VARARGS, NULL},
-	 { "delete_CalcRasterMultiBand", _wrap_delete_CalcRasterMultiBand, METH_O, NULL},
+	 { "CalcRasterMultiBand_raster_image", _wrap_CalcRasterMultiBand_raster_image, METH_VARARGS, "raster_image(CalcRasterMultiBand self, int band) -> boost::shared_ptr< GeoCal::RasterImage >"},
+	 { "CalcRasterMultiBand__v_data", _wrap_CalcRasterMultiBand__v_data, METH_O, "_v_data(CalcRasterMultiBand self) -> BlitzArray_double_3"},
+	 { "CalcRasterMultiBand_desc", _wrap_CalcRasterMultiBand_desc, METH_O, "desc(CalcRasterMultiBand self) -> std::string"},
+	 { "CalcRasterMultiBand_calc", _wrap_CalcRasterMultiBand_calc, METH_VARARGS, "calc(CalcRasterMultiBand self, int Lstart, int Sstart)"},
+	 { "new_CalcRasterMultiBand", _wrap_new_CalcRasterMultiBand, METH_VARARGS, "\n"
+		"CalcRasterMultiBand()\n"
+		"CalcRasterMultiBand(RasterImage Img, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"CalcRasterMultiBand(int Nline, int Nsamp, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"CalcRasterMultiBand(MapInfo Mi, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		""},
+	 { "CalcRasterMultiBand_initialize", _wrap_CalcRasterMultiBand_initialize, METH_VARARGS, "\n"
+		"initialize(CalcRasterMultiBand self, RasterImage Img, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"initialize(CalcRasterMultiBand self, int Nline, int Nsamp, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		"initialize(CalcRasterMultiBand self, MapInfo arg2, int Nband, int Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)\n"
+		""},
+	 { "delete_CalcRasterMultiBand", _wrap_delete_CalcRasterMultiBand, METH_O, "delete_CalcRasterMultiBand(CalcRasterMultiBand self)"},
 	 { "disown_CalcRasterMultiBand", _wrap_disown_CalcRasterMultiBand, METH_O, NULL},
 	 { "CalcRasterMultiBand_swigregister", CalcRasterMultiBand_swigregister, METH_O, NULL},
 	 { "CalcRasterMultiBand_swiginit", CalcRasterMultiBand_swiginit, METH_VARARGS, NULL},

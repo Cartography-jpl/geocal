@@ -14951,272 +14951,350 @@ SWIGINTERN PyObject *CartesianFixedLookVectorWithDerivative_swiginit(PyObject *S
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, NULL},
-	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, NULL},
-	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, NULL},
-	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, NULL},
-	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, NULL},
-	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, NULL},
-	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, NULL},
-	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, NULL},
-	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, NULL},
-	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, NULL},
-	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, NULL},
-	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, NULL},
-	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, NULL},
-	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, NULL},
-	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, NULL},
-	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, NULL},
-	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, NULL},
-	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, NULL},
-	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, NULL},
-	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, NULL},
-	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, NULL},
-	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, NULL},
-	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, NULL},
-	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, NULL},
+	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, "Vector_Time_iterator(Vector_Time self) -> SwigPyIterator"},
+	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, "Vector_Time___nonzero__(Vector_Time self) -> bool"},
+	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, "Vector_Time___bool__(Vector_Time self) -> bool"},
+	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, "Vector_Time___len__(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, "Vector_Time___getslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j) -> Vector_Time"},
+	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, "\n"
+		"Vector_Time___setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)\n"
+		"Vector_Time___setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j, Vector_Time v)\n"
+		""},
+	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, "Vector_Time___delslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)"},
+	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, "\n"
+		"Vector_Time___delitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i)\n"
+		"Vector_Time___delitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, "\n"
+		"Vector_Time___getitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time\n"
+		"Vector_Time___getitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i) -> Time\n"
+		""},
+	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, "\n"
+		"Vector_Time___setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice, Vector_Time v)\n"
+		"Vector_Time___setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_Time___setitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, Time x)\n"
+		""},
+	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, "Vector_Time_pop(Vector_Time self) -> Time"},
+	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, "Vector_Time_append(Vector_Time self, Time x)"},
+	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, "Vector_Time_empty(Vector_Time self) -> bool"},
+	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, "Vector_Time_size(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, "Vector_Time_swap(Vector_Time self, Vector_Time v)"},
+	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, "Vector_Time_begin(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, "Vector_Time_end(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, "Vector_Time_rbegin(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, "Vector_Time_rend(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, "Vector_Time_clear(Vector_Time self)"},
+	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, "Vector_Time_get_allocator(Vector_Time self) -> std::vector< GeoCal::Time >::allocator_type"},
+	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, "Vector_Time_pop_back(Vector_Time self)"},
+	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, "\n"
+		"Vector_Time_erase(Vector_Time self, std::vector< GeoCal::Time >::iterator pos) -> std::vector< GeoCal::Time >::iterator\n"
+		"Vector_Time_erase(Vector_Time self, std::vector< GeoCal::Time >::iterator first, std::vector< GeoCal::Time >::iterator last) -> std::vector< GeoCal::Time >::iterator\n"
+		""},
+	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, "\n"
+		"Vector_Time()\n"
+		"Vector_Time(Vector_Time other)\n"
+		"Vector_Time(std::vector< GeoCal::Time >::size_type size)\n"
+		"new_Vector_Time(std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time\n"
+		""},
+	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, "Vector_Time_push_back(Vector_Time self, Time x)"},
+	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, "Vector_Time_front(Vector_Time self) -> Time"},
+	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, "Vector_Time_back(Vector_Time self) -> Time"},
+	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, "Vector_Time_assign(Vector_Time self, std::vector< GeoCal::Time >::size_type n, Time x)"},
+	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, "\n"
+		"Vector_Time_resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size)\n"
+		"Vector_Time_resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size, Time x)\n"
+		""},
+	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, "\n"
+		"Vector_Time_insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, Time x) -> std::vector< GeoCal::Time >::iterator\n"
+		"Vector_Time_insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, std::vector< GeoCal::Time >::size_type n, Time x)\n"
+		""},
+	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, "Vector_Time_reserve(Vector_Time self, std::vector< GeoCal::Time >::size_type n)"},
+	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, "Vector_Time_capacity(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, "delete_Vector_Time(Vector_Time self)"},
 	 { "Vector_Time_swigregister", Vector_Time_swigregister, METH_O, NULL},
 	 { "Vector_Time_swiginit", Vector_Time_swiginit, METH_VARARGS, NULL},
-	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, NULL},
-	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, NULL},
-	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, NULL},
-	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, NULL},
-	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, NULL},
-	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, NULL},
-	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, NULL},
-	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, NULL},
-	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, NULL},
-	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, NULL},
-	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, NULL},
-	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, NULL},
-	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, NULL},
-	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, NULL},
-	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, NULL},
-	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, NULL},
-	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, NULL},
-	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, NULL},
-	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, NULL},
-	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, NULL},
-	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, NULL},
-	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, NULL},
-	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, NULL},
-	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, NULL},
+	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, "Vector_Time2_iterator(Vector_Time2 self) -> SwigPyIterator"},
+	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, "Vector_Time2___nonzero__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, "Vector_Time2___bool__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, "Vector_Time2___len__(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, "Vector_Time2___getslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j) -> Vector_Time2"},
+	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, "\n"
+		"Vector_Time2___setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)\n"
+		"Vector_Time2___setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j, Vector_Time2 v)\n"
+		""},
+	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, "Vector_Time2___delslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)"},
+	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, "\n"
+		"Vector_Time2___delitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i)\n"
+		"Vector_Time2___delitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, "\n"
+		"Vector_Time2___getitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time2\n"
+		"Vector_Time2___getitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &\n"
+		""},
+	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, "\n"
+		"Vector_Time2___setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice, Vector_Time2 v)\n"
+		"Vector_Time2___setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_Time2___setitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, "Vector_Time2_pop(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type"},
+	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, "Vector_Time2_append(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, "Vector_Time2_empty(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, "Vector_Time2_size(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, "Vector_Time2_swap(Vector_Time2 self, Vector_Time2 v)"},
+	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, "Vector_Time2_begin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, "Vector_Time2_end(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, "Vector_Time2_rbegin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, "Vector_Time2_rend(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, "Vector_Time2_clear(Vector_Time2 self)"},
+	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, "Vector_Time2_get_allocator(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type"},
+	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, "Vector_Time2_pop_back(Vector_Time2 self)"},
+	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, "\n"
+		"Vector_Time2_erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"Vector_Time2_erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator first, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		""},
+	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, "\n"
+		"Vector_Time2()\n"
+		"Vector_Time2(Vector_Time2 other)\n"
+		"Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size)\n"
+		"new_Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2\n"
+		""},
+	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, "Vector_Time2_push_back(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, "Vector_Time2_front(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, "Vector_Time2_back(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, "Vector_Time2_assign(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, "\n"
+		"Vector_Time2_resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size)\n"
+		"Vector_Time2_resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, "\n"
+		"Vector_Time2_insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"Vector_Time2_insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, "Vector_Time2_reserve(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n)"},
+	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, "Vector_Time2_capacity(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, "delete_Vector_Time2(Vector_Time2 self)"},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
-	 { "LookVectorDouble__v_look_vector", _wrap_LookVectorDouble__v_look_vector, METH_VARARGS, NULL},
+	 { "LookVectorDouble__v_look_vector", _wrap_LookVectorDouble__v_look_vector, METH_VARARGS, "\n"
+		"LookVectorDouble__v_look_vector(LookVectorDouble self) -> BlitzArray_double_1\n"
+		"LookVectorDouble__v_look_vector(LookVectorDouble self, BlitzArray_double_1 V)\n"
+		""},
 	 { "LookVectorDouble__v_direction", _wrap_LookVectorDouble__v_direction, METH_O, "\n"
+		"LookVectorDouble__v_direction(LookVectorDouble self) -> Array_double_3\n"
 		"\n"
-		"boost::array< T, 3 > GeoCal::LookVector< T >::direction() const\n"
 		"GeoCal::LookVector::direction\n"
-		"This is the direction, as a unit vector.\n"
+		"This is the direction, as a unit vector.  \n"
 		"\n"
 		""},
 	 { "LookVectorDouble__v_look_quaternion", _wrap_LookVectorDouble__v_look_quaternion, METH_VARARGS, "\n"
+		"LookVectorDouble__v_look_quaternion(LookVectorDouble self) -> Quaternion_double\n"
+		"LookVectorDouble__v_look_quaternion(LookVectorDouble self, Quaternion_double V)\n"
 		"\n"
-		"void GeoCal::LookVector< T >::look_quaternion(const boost::math::quaternion< T > &V)\n"
 		"GeoCal::LookVector::look_quaternion\n"
-		"Set look vector using a quaternion.\n"
+		"Set look vector using a quaternion.  \n"
 		"\n"
 		""},
 	 { "LookVectorDouble__v_length", _wrap_LookVectorDouble__v_length, METH_O, "\n"
+		"LookVectorDouble__v_length(LookVectorDouble self) -> double\n"
 		"\n"
-		"T GeoCal::LookVector< T >::length() const\n"
 		"GeoCal::LookVector::length\n"
-		"Length of look vector, in meters.\n"
+		"Length of look vector, in meters.  \n"
 		"\n"
 		""},
-	 { "LookVectorDouble___str__", _wrap_LookVectorDouble___str__, METH_O, NULL},
+	 { "LookVectorDouble___str__", _wrap_LookVectorDouble___str__, METH_O, "LookVectorDouble___str__(LookVectorDouble self) -> std::string"},
 	 { "delete_LookVectorDouble", _wrap_delete_LookVectorDouble, METH_O, "\n"
+		"delete_LookVectorDouble(LookVectorDouble self)\n"
 		"\n"
-		"virtual GeoCal::LookVector< T >::~LookVector()\n"
 		"GeoCal::LookVector::~LookVector\n"
 		""},
 	 { "LookVectorDouble_swigregister", LookVectorDouble_swigregister, METH_O, NULL},
-	 { "LookVectorAutoDerivativeDouble__v_look_vector", _wrap_LookVectorAutoDerivativeDouble__v_look_vector, METH_VARARGS, NULL},
+	 { "LookVectorAutoDerivativeDouble__v_look_vector", _wrap_LookVectorAutoDerivativeDouble__v_look_vector, METH_VARARGS, "\n"
+		"LookVectorAutoDerivativeDouble__v_look_vector(LookVectorAutoDerivativeDouble self) -> ArrayAutoDerivativeDouble_1\n"
+		"LookVectorAutoDerivativeDouble__v_look_vector(LookVectorAutoDerivativeDouble self, ArrayAutoDerivativeDouble_1 V)\n"
+		""},
 	 { "LookVectorAutoDerivativeDouble__v_direction", _wrap_LookVectorAutoDerivativeDouble__v_direction, METH_O, "\n"
+		"LookVectorAutoDerivativeDouble__v_direction(LookVectorAutoDerivativeDouble self) -> BoostArrayAutoDerivativeDouble_3\n"
 		"\n"
-		"boost::array< T, 3 > GeoCal::LookVector< T >::direction() const\n"
 		"GeoCal::LookVector::direction\n"
-		"This is the direction, as a unit vector.\n"
+		"This is the direction, as a unit vector.  \n"
 		"\n"
 		""},
 	 { "LookVectorAutoDerivativeDouble__v_look_quaternion", _wrap_LookVectorAutoDerivativeDouble__v_look_quaternion, METH_VARARGS, "\n"
+		"LookVectorAutoDerivativeDouble__v_look_quaternion(LookVectorAutoDerivativeDouble self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"LookVectorAutoDerivativeDouble__v_look_quaternion(LookVectorAutoDerivativeDouble self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void GeoCal::LookVector< T >::look_quaternion(const boost::math::quaternion< T > &V)\n"
 		"GeoCal::LookVector::look_quaternion\n"
-		"Set look vector using a quaternion.\n"
+		"Set look vector using a quaternion.  \n"
 		"\n"
 		""},
 	 { "LookVectorAutoDerivativeDouble__v_length", _wrap_LookVectorAutoDerivativeDouble__v_length, METH_O, "\n"
+		"LookVectorAutoDerivativeDouble__v_length(LookVectorAutoDerivativeDouble self) -> AutoDerivativeDouble\n"
 		"\n"
-		"T GeoCal::LookVector< T >::length() const\n"
 		"GeoCal::LookVector::length\n"
-		"Length of look vector, in meters.\n"
+		"Length of look vector, in meters.  \n"
 		"\n"
 		""},
-	 { "LookVectorAutoDerivativeDouble___str__", _wrap_LookVectorAutoDerivativeDouble___str__, METH_O, NULL},
+	 { "LookVectorAutoDerivativeDouble___str__", _wrap_LookVectorAutoDerivativeDouble___str__, METH_O, "LookVectorAutoDerivativeDouble___str__(LookVectorAutoDerivativeDouble self) -> std::string"},
 	 { "delete_LookVectorAutoDerivativeDouble", _wrap_delete_LookVectorAutoDerivativeDouble, METH_O, "\n"
+		"delete_LookVectorAutoDerivativeDouble(LookVectorAutoDerivativeDouble self)\n"
 		"\n"
-		"virtual GeoCal::LookVector< T >::~LookVector()\n"
 		"GeoCal::LookVector::~LookVector\n"
 		""},
 	 { "LookVectorAutoDerivativeDouble_swigregister", LookVectorAutoDerivativeDouble_swigregister, METH_O, NULL},
 	 { "new_ScLookVector", _wrap_new_ScLookVector, METH_VARARGS, "\n"
+		"ScLookVector()\n"
+		"ScLookVector(double x, double y, double z)\n"
+		"new_ScLookVector(Array_double_3 Lv) -> ScLookVector\n"
 		"\n"
-		"GeoCal::ScLookVector::ScLookVector(double x, double y, double z)\n"
 		"GeoCal::ScLookVector::ScLookVector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "ScLookVector___str__", _wrap_ScLookVector___str__, METH_O, NULL},
+	 { "ScLookVector___str__", _wrap_ScLookVector___str__, METH_O, "ScLookVector___str__(ScLookVector self) -> std::string"},
 	 { "ScLookVector_field_angle", _wrap_ScLookVector_field_angle, METH_O, "\n"
+		"ScLookVector_field_angle(ScLookVector self)\n"
 		"\n"
-		"void ScLookVector::field_angle(double &Fa_x_deg, double &Fa_y_deg) const\n"
 		"GeoCal::ScLookVector::field_angle\n"
-		"Sometimes we compare against something that uses field angles, so\n"
-		"return the x and y field angle in degrees for the given look\n"
-		"direction.\n"
+		"Sometimes we compare against something that uses field angles, so return the x\n"
+		"and y field angle in degrees for the given look direction.  \n"
 		"\n"
 		""},
 	 { "ScLookVector_create_from_field_angle", _wrap_ScLookVector_create_from_field_angle, METH_VARARGS, "\n"
+		"ScLookVector_create_from_field_angle(double Fa_x_deg, double Fa_y_deg) -> ScLookVector\n"
 		"\n"
-		"ScLookVector ScLookVector::create_from_field_angle(double Fa_x_deg, double Fa_y_deg)\n"
 		"GeoCal::ScLookVector::create_from_field_angle\n"
-		"Create a ScLookVector from the field angle values in degrees.\n"
+		"Create a ScLookVector from the field angle values in degrees.  \n"
 		"\n"
 		""},
 	 { "delete_ScLookVector", _wrap_delete_ScLookVector, METH_O, "\n"
+		"delete_ScLookVector(ScLookVector self)\n"
 		"\n"
-		"virtual GeoCal::ScLookVector::~ScLookVector()\n"
 		"GeoCal::ScLookVector::~ScLookVector\n"
 		""},
 	 { "ScLookVector_swigregister", ScLookVector_swigregister, METH_O, NULL},
 	 { "ScLookVector_swiginit", ScLookVector_swiginit, METH_VARARGS, NULL},
 	 { "new_ScLookVectorWithDerivative", _wrap_new_ScLookVectorWithDerivative, METH_VARARGS, "\n"
+		"ScLookVectorWithDerivative()\n"
+		"ScLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"ScLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv)\n"
+		"new_ScLookVectorWithDerivative(ScLookVector Slv) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative(const ScLookVector &Slv)\n"
 		"GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative\n"
 		""},
-	 { "ScLookVectorWithDerivative___str__", _wrap_ScLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "ScLookVectorWithDerivative___str__", _wrap_ScLookVectorWithDerivative___str__, METH_O, "ScLookVectorWithDerivative___str__(ScLookVectorWithDerivative self) -> std::string"},
 	 { "delete_ScLookVectorWithDerivative", _wrap_delete_ScLookVectorWithDerivative, METH_O, "\n"
+		"delete_ScLookVectorWithDerivative(ScLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::ScLookVectorWithDerivative::~ScLookVectorWithDerivative()\n"
 		"GeoCal::ScLookVectorWithDerivative::~ScLookVectorWithDerivative\n"
 		""},
 	 { "ScLookVectorWithDerivative_swigregister", ScLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "ScLookVectorWithDerivative_swiginit", ScLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { "new_CartesianInertialLookVector", _wrap_new_CartesianInertialLookVector, METH_VARARGS, "\n"
+		"CartesianInertialLookVector()\n"
+		"CartesianInertialLookVector(Array_double_3 Lv)\n"
+		"CartesianInertialLookVector(double x, double y, double z)\n"
+		"new_CartesianInertialLookVector(Quaternion_double V) -> CartesianInertialLookVector\n"
 		"\n"
-		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)\n"
 		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "CartesianInertialLookVector___str__", _wrap_CartesianInertialLookVector___str__, METH_O, NULL},
+	 { "CartesianInertialLookVector___str__", _wrap_CartesianInertialLookVector___str__, METH_O, "CartesianInertialLookVector___str__(CartesianInertialLookVector self) -> std::string"},
 	 { "delete_CartesianInertialLookVector", _wrap_delete_CartesianInertialLookVector, METH_O, "\n"
+		"delete_CartesianInertialLookVector(CartesianInertialLookVector self)\n"
 		"\n"
-		"virtual GeoCal::CartesianInertialLookVector::~CartesianInertialLookVector()\n"
 		"GeoCal::CartesianInertialLookVector::~CartesianInertialLookVector\n"
 		""},
 	 { "CartesianInertialLookVector_swigregister", CartesianInertialLookVector_swigregister, METH_O, NULL},
 	 { "CartesianInertialLookVector_swiginit", CartesianInertialLookVector_swiginit, METH_VARARGS, NULL},
 	 { "new_CartesianInertialLookVectorWithDerivative", _wrap_new_CartesianInertialLookVectorWithDerivative, METH_VARARGS, "\n"
+		"CartesianInertialLookVectorWithDerivative()\n"
+		"CartesianInertialLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv)\n"
+		"CartesianInertialLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_CartesianInertialLookVectorWithDerivative(boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)\n"
-		"GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLo\n"
-		"okVectorWithDerivative\n"
-		"Constructor using quaternion.\n"
+		"GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative\n"
+		"Constructor using quaternion.  \n"
 		"\n"
 		""},
-	 { "CartesianInertialLookVectorWithDerivative___str__", _wrap_CartesianInertialLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "CartesianInertialLookVectorWithDerivative___str__", _wrap_CartesianInertialLookVectorWithDerivative___str__, METH_O, "CartesianInertialLookVectorWithDerivative___str__(CartesianInertialLookVectorWithDerivative self) -> std::string"},
 	 { "delete_CartesianInertialLookVectorWithDerivative", _wrap_delete_CartesianInertialLookVectorWithDerivative, METH_O, "\n"
+		"delete_CartesianInertialLookVectorWithDerivative(CartesianInertialLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::CartesianInertialLookVectorWithDerivative::~CartesianInertialLookVectorWithDerivative()\n"
-		"GeoCal::CartesianInertialLookVectorWithDerivative::~CartesianInertialL\n"
-		"ookVectorWithDerivative\n"
+		"GeoCal::CartesianInertialLookVectorWithDerivative::~CartesianInertialLookVectorWithDerivative\n"
 		""},
 	 { "CartesianInertialLookVectorWithDerivative_swigregister", CartesianInertialLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "CartesianInertialLookVectorWithDerivative_swiginit", CartesianInertialLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { "new_DcsLookVector", _wrap_new_DcsLookVector, METH_VARARGS, "\n"
+		"DcsLookVector()\n"
+		"DcsLookVector(double x, double y, double z)\n"
+		"new_DcsLookVector(Array_double_3 Lv) -> DcsLookVector\n"
 		"\n"
-		"GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)\n"
 		"GeoCal::DcsLookVector::DcsLookVector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "DcsLookVector___str__", _wrap_DcsLookVector___str__, METH_O, NULL},
+	 { "DcsLookVector___str__", _wrap_DcsLookVector___str__, METH_O, "DcsLookVector___str__(DcsLookVector self) -> std::string"},
 	 { "delete_DcsLookVector", _wrap_delete_DcsLookVector, METH_O, "\n"
+		"delete_DcsLookVector(DcsLookVector self)\n"
 		"\n"
-		"virtual GeoCal::DcsLookVector::~DcsLookVector()\n"
 		"GeoCal::DcsLookVector::~DcsLookVector\n"
 		""},
 	 { "DcsLookVector_swigregister", DcsLookVector_swigregister, METH_O, NULL},
 	 { "DcsLookVector_swiginit", DcsLookVector_swiginit, METH_VARARGS, NULL},
 	 { "new_DcsLookVectorWithDerivative", _wrap_new_DcsLookVectorWithDerivative, METH_VARARGS, "\n"
+		"DcsLookVectorWithDerivative()\n"
+		"DcsLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_DcsLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv) -> DcsLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)\n"
 		"GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative\n"
-		"Constructor using quaternion.\n"
+		"Constructor using quaternion.  \n"
 		"\n"
 		""},
-	 { "DcsLookVectorWithDerivative___str__", _wrap_DcsLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "DcsLookVectorWithDerivative___str__", _wrap_DcsLookVectorWithDerivative___str__, METH_O, "DcsLookVectorWithDerivative___str__(DcsLookVectorWithDerivative self) -> std::string"},
 	 { "delete_DcsLookVectorWithDerivative", _wrap_delete_DcsLookVectorWithDerivative, METH_O, "\n"
+		"delete_DcsLookVectorWithDerivative(DcsLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::DcsLookVectorWithDerivative::~DcsLookVectorWithDerivative()\n"
 		"GeoCal::DcsLookVectorWithDerivative::~DcsLookVectorWithDerivative\n"
 		""},
 	 { "DcsLookVectorWithDerivative_swigregister", DcsLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "DcsLookVectorWithDerivative_swiginit", DcsLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { "new_CartesianFixedLookVectorWithDerivative", _wrap_new_CartesianFixedLookVectorWithDerivative, METH_VARARGS, "\n"
+		"CartesianFixedLookVectorWithDerivative()\n"
+		"CartesianFixedLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv)\n"
+		"CartesianFixedLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_CartesianFixedLookVectorWithDerivative(boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V) -> CartesianFixedLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)\n"
-		"GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVect\n"
-		"orWithDerivative\n"
-		"Constructor using quaternion.\n"
+		"GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative\n"
+		"Constructor using quaternion.  \n"
 		"\n"
 		""},
-	 { "CartesianFixedLookVectorWithDerivative___str__", _wrap_CartesianFixedLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "CartesianFixedLookVectorWithDerivative___str__", _wrap_CartesianFixedLookVectorWithDerivative___str__, METH_O, "CartesianFixedLookVectorWithDerivative___str__(CartesianFixedLookVectorWithDerivative self) -> std::string"},
 	 { "delete_CartesianFixedLookVectorWithDerivative", _wrap_delete_CartesianFixedLookVectorWithDerivative, METH_O, "\n"
+		"delete_CartesianFixedLookVectorWithDerivative(CartesianFixedLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::CartesianFixedLookVectorWithDerivative::~CartesianFixedLookVectorWithDerivative()\n"
-		"GeoCal::CartesianFixedLookVectorWithDerivative::~CartesianFixedLookVec\n"
-		"torWithDerivative\n"
+		"GeoCal::CartesianFixedLookVectorWithDerivative::~CartesianFixedLookVectorWithDerivative\n"
 		""},
 	 { "CartesianFixedLookVectorWithDerivative_swigregister", CartesianFixedLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "CartesianFixedLookVectorWithDerivative_swiginit", CartesianFixedLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
@@ -15226,272 +15304,350 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, NULL},
-	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, NULL},
-	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, NULL},
-	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, NULL},
-	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, NULL},
-	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, NULL},
-	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, NULL},
-	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, NULL},
-	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, NULL},
-	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, NULL},
-	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, NULL},
-	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, NULL},
-	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, NULL},
-	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, NULL},
-	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, NULL},
-	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, NULL},
-	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, NULL},
-	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, NULL},
-	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, NULL},
-	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, NULL},
-	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, NULL},
-	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, NULL},
-	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, NULL},
-	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, NULL},
+	 { "Vector_Time_iterator", _wrap_Vector_Time_iterator, METH_O, "iterator(Vector_Time self) -> SwigPyIterator"},
+	 { "Vector_Time___nonzero__", _wrap_Vector_Time___nonzero__, METH_O, "__nonzero__(Vector_Time self) -> bool"},
+	 { "Vector_Time___bool__", _wrap_Vector_Time___bool__, METH_O, "__bool__(Vector_Time self) -> bool"},
+	 { "Vector_Time___len__", _wrap_Vector_Time___len__, METH_O, "__len__(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time___getslice__", _wrap_Vector_Time___getslice__, METH_VARARGS, "__getslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j) -> Vector_Time"},
+	 { "Vector_Time___setslice__", _wrap_Vector_Time___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)\n"
+		"__setslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j, Vector_Time v)\n"
+		""},
+	 { "Vector_Time___delslice__", _wrap_Vector_Time___delslice__, METH_VARARGS, "__delslice__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, std::vector< GeoCal::Time >::difference_type j)"},
+	 { "Vector_Time___delitem__", _wrap_Vector_Time___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i)\n"
+		"__delitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time___getitem__", _wrap_Vector_Time___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time\n"
+		"__getitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i) -> Time\n"
+		""},
+	 { "Vector_Time___setitem__", _wrap_Vector_Time___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice, Vector_Time v)\n"
+		"__setitem__(Vector_Time self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_Time self, std::vector< GeoCal::Time >::difference_type i, Time x)\n"
+		""},
+	 { "Vector_Time_pop", _wrap_Vector_Time_pop, METH_O, "pop(Vector_Time self) -> Time"},
+	 { "Vector_Time_append", _wrap_Vector_Time_append, METH_VARARGS, "append(Vector_Time self, Time x)"},
+	 { "Vector_Time_empty", _wrap_Vector_Time_empty, METH_O, "empty(Vector_Time self) -> bool"},
+	 { "Vector_Time_size", _wrap_Vector_Time_size, METH_O, "size(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "Vector_Time_swap", _wrap_Vector_Time_swap, METH_VARARGS, "swap(Vector_Time self, Vector_Time v)"},
+	 { "Vector_Time_begin", _wrap_Vector_Time_begin, METH_O, "begin(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_end", _wrap_Vector_Time_end, METH_O, "end(Vector_Time self) -> std::vector< GeoCal::Time >::iterator"},
+	 { "Vector_Time_rbegin", _wrap_Vector_Time_rbegin, METH_O, "rbegin(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_rend", _wrap_Vector_Time_rend, METH_O, "rend(Vector_Time self) -> std::vector< GeoCal::Time >::reverse_iterator"},
+	 { "Vector_Time_clear", _wrap_Vector_Time_clear, METH_O, "clear(Vector_Time self)"},
+	 { "Vector_Time_get_allocator", _wrap_Vector_Time_get_allocator, METH_O, "get_allocator(Vector_Time self) -> std::vector< GeoCal::Time >::allocator_type"},
+	 { "Vector_Time_pop_back", _wrap_Vector_Time_pop_back, METH_O, "pop_back(Vector_Time self)"},
+	 { "Vector_Time_erase", _wrap_Vector_Time_erase, METH_VARARGS, "\n"
+		"erase(Vector_Time self, std::vector< GeoCal::Time >::iterator pos) -> std::vector< GeoCal::Time >::iterator\n"
+		"erase(Vector_Time self, std::vector< GeoCal::Time >::iterator first, std::vector< GeoCal::Time >::iterator last) -> std::vector< GeoCal::Time >::iterator\n"
+		""},
+	 { "new_Vector_Time", _wrap_new_Vector_Time, METH_VARARGS, "\n"
+		"Vector_Time()\n"
+		"Vector_Time(Vector_Time other)\n"
+		"Vector_Time(std::vector< GeoCal::Time >::size_type size)\n"
+		"new_Vector_Time(std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time\n"
+		""},
+	 { "Vector_Time_push_back", _wrap_Vector_Time_push_back, METH_VARARGS, "push_back(Vector_Time self, Time x)"},
+	 { "Vector_Time_front", _wrap_Vector_Time_front, METH_O, "front(Vector_Time self) -> Time"},
+	 { "Vector_Time_back", _wrap_Vector_Time_back, METH_O, "back(Vector_Time self) -> Time"},
+	 { "Vector_Time_assign", _wrap_Vector_Time_assign, METH_VARARGS, "assign(Vector_Time self, std::vector< GeoCal::Time >::size_type n, Time x)"},
+	 { "Vector_Time_resize", _wrap_Vector_Time_resize, METH_VARARGS, "\n"
+		"resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size)\n"
+		"resize(Vector_Time self, std::vector< GeoCal::Time >::size_type new_size, Time x)\n"
+		""},
+	 { "Vector_Time_insert", _wrap_Vector_Time_insert, METH_VARARGS, "\n"
+		"insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, Time x) -> std::vector< GeoCal::Time >::iterator\n"
+		"insert(Vector_Time self, std::vector< GeoCal::Time >::iterator pos, std::vector< GeoCal::Time >::size_type n, Time x)\n"
+		""},
+	 { "Vector_Time_reserve", _wrap_Vector_Time_reserve, METH_VARARGS, "reserve(Vector_Time self, std::vector< GeoCal::Time >::size_type n)"},
+	 { "Vector_Time_capacity", _wrap_Vector_Time_capacity, METH_O, "capacity(Vector_Time self) -> std::vector< GeoCal::Time >::size_type"},
+	 { "delete_Vector_Time", _wrap_delete_Vector_Time, METH_O, "delete_Vector_Time(Vector_Time self)"},
 	 { "Vector_Time_swigregister", Vector_Time_swigregister, METH_O, NULL},
 	 { "Vector_Time_swiginit", Vector_Time_swiginit, METH_VARARGS, NULL},
-	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, NULL},
-	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, NULL},
-	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, NULL},
-	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, NULL},
-	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, NULL},
-	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, NULL},
-	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, NULL},
-	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, NULL},
-	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, NULL},
-	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, NULL},
-	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, NULL},
-	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, NULL},
-	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, NULL},
-	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, NULL},
-	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, NULL},
-	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, NULL},
-	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, NULL},
-	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, NULL},
-	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, NULL},
-	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, NULL},
-	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, NULL},
-	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, NULL},
-	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, NULL},
-	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, NULL},
-	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, NULL},
-	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, NULL},
+	 { "Vector_Time2_iterator", _wrap_Vector_Time2_iterator, METH_O, "iterator(Vector_Time2 self) -> SwigPyIterator"},
+	 { "Vector_Time2___nonzero__", _wrap_Vector_Time2___nonzero__, METH_O, "__nonzero__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___bool__", _wrap_Vector_Time2___bool__, METH_O, "__bool__(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2___len__", _wrap_Vector_Time2___len__, METH_O, "__len__(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2___getslice__", _wrap_Vector_Time2___getslice__, METH_VARARGS, "__getslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j) -> Vector_Time2"},
+	 { "Vector_Time2___setslice__", _wrap_Vector_Time2___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)\n"
+		"__setslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j, Vector_Time2 v)\n"
+		""},
+	 { "Vector_Time2___delslice__", _wrap_Vector_Time2___delslice__, METH_VARARGS, "__delslice__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type j)"},
+	 { "Vector_Time2___delitem__", _wrap_Vector_Time2___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i)\n"
+		"__delitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Time2___getitem__", _wrap_Vector_Time2___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice) -> Vector_Time2\n"
+		"__getitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &\n"
+		""},
+	 { "Vector_Time2___setitem__", _wrap_Vector_Time2___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice, Vector_Time2 v)\n"
+		"__setitem__(Vector_Time2 self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_pop", _wrap_Vector_Time2_pop, METH_O, "pop(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type"},
+	 { "Vector_Time2_append", _wrap_Vector_Time2_append, METH_VARARGS, "append(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_empty", _wrap_Vector_Time2_empty, METH_O, "empty(Vector_Time2 self) -> bool"},
+	 { "Vector_Time2_size", _wrap_Vector_Time2_size, METH_O, "size(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "Vector_Time2_swap", _wrap_Vector_Time2_swap, METH_VARARGS, "swap(Vector_Time2 self, Vector_Time2 v)"},
+	 { "Vector_Time2_begin", _wrap_Vector_Time2_begin, METH_O, "begin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_end", _wrap_Vector_Time2_end, METH_O, "end(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator"},
+	 { "Vector_Time2_rbegin", _wrap_Vector_Time2_rbegin, METH_O, "rbegin(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_rend", _wrap_Vector_Time2_rend, METH_O, "rend(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::reverse_iterator"},
+	 { "Vector_Time2_clear", _wrap_Vector_Time2_clear, METH_O, "clear(Vector_Time2 self)"},
+	 { "Vector_Time2_get_allocator", _wrap_Vector_Time2_get_allocator, METH_O, "get_allocator(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::allocator_type"},
+	 { "Vector_Time2_pop_back", _wrap_Vector_Time2_pop_back, METH_O, "pop_back(Vector_Time2 self)"},
+	 { "Vector_Time2_erase", _wrap_Vector_Time2_erase, METH_VARARGS, "\n"
+		"erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"erase(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator first, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		""},
+	 { "new_Vector_Time2", _wrap_new_Vector_Time2, METH_VARARGS, "\n"
+		"Vector_Time2()\n"
+		"Vector_Time2(Vector_Time2 other)\n"
+		"Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size)\n"
+		"new_Vector_Time2(std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2\n"
+		""},
+	 { "Vector_Time2_push_back", _wrap_Vector_Time2_push_back, METH_VARARGS, "push_back(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_front", _wrap_Vector_Time2_front, METH_O, "front(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_back", _wrap_Vector_Time2_back, METH_O, "back(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const &"},
+	 { "Vector_Time2_assign", _wrap_Vector_Time2_assign, METH_VARARGS, "assign(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)"},
+	 { "Vector_Time2_resize", _wrap_Vector_Time2_resize, METH_VARARGS, "\n"
+		"resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size)\n"
+		"resize(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_insert", _wrap_Vector_Time2_insert, METH_VARARGS, "\n"
+		"insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::Time > >::iterator\n"
+		"insert(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & x)\n"
+		""},
+	 { "Vector_Time2_reserve", _wrap_Vector_Time2_reserve, METH_VARARGS, "reserve(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type n)"},
+	 { "Vector_Time2_capacity", _wrap_Vector_Time2_capacity, METH_O, "capacity(Vector_Time2 self) -> std::vector< boost::shared_ptr< GeoCal::Time > >::size_type"},
+	 { "delete_Vector_Time2", _wrap_delete_Vector_Time2, METH_O, "delete_Vector_Time2(Vector_Time2 self)"},
 	 { "Vector_Time2_swigregister", Vector_Time2_swigregister, METH_O, NULL},
 	 { "Vector_Time2_swiginit", Vector_Time2_swiginit, METH_VARARGS, NULL},
-	 { "LookVectorDouble__v_look_vector", _wrap_LookVectorDouble__v_look_vector, METH_VARARGS, NULL},
+	 { "LookVectorDouble__v_look_vector", _wrap_LookVectorDouble__v_look_vector, METH_VARARGS, "\n"
+		"_v_look_vector(LookVectorDouble self) -> BlitzArray_double_1\n"
+		"_v_look_vector(LookVectorDouble self, BlitzArray_double_1 V)\n"
+		""},
 	 { "LookVectorDouble__v_direction", _wrap_LookVectorDouble__v_direction, METH_O, "\n"
+		"_v_direction(LookVectorDouble self) -> Array_double_3\n"
 		"\n"
-		"boost::array< T, 3 > GeoCal::LookVector< T >::direction() const\n"
 		"GeoCal::LookVector::direction\n"
-		"This is the direction, as a unit vector.\n"
+		"This is the direction, as a unit vector.  \n"
 		"\n"
 		""},
 	 { "LookVectorDouble__v_look_quaternion", _wrap_LookVectorDouble__v_look_quaternion, METH_VARARGS, "\n"
+		"_v_look_quaternion(LookVectorDouble self) -> Quaternion_double\n"
+		"_v_look_quaternion(LookVectorDouble self, Quaternion_double V)\n"
 		"\n"
-		"void GeoCal::LookVector< T >::look_quaternion(const boost::math::quaternion< T > &V)\n"
 		"GeoCal::LookVector::look_quaternion\n"
-		"Set look vector using a quaternion.\n"
+		"Set look vector using a quaternion.  \n"
 		"\n"
 		""},
 	 { "LookVectorDouble__v_length", _wrap_LookVectorDouble__v_length, METH_O, "\n"
+		"_v_length(LookVectorDouble self) -> double\n"
 		"\n"
-		"T GeoCal::LookVector< T >::length() const\n"
 		"GeoCal::LookVector::length\n"
-		"Length of look vector, in meters.\n"
+		"Length of look vector, in meters.  \n"
 		"\n"
 		""},
-	 { "LookVectorDouble___str__", _wrap_LookVectorDouble___str__, METH_O, NULL},
+	 { "LookVectorDouble___str__", _wrap_LookVectorDouble___str__, METH_O, "__str__(LookVectorDouble self) -> std::string"},
 	 { "delete_LookVectorDouble", _wrap_delete_LookVectorDouble, METH_O, "\n"
+		"delete_LookVectorDouble(LookVectorDouble self)\n"
 		"\n"
-		"virtual GeoCal::LookVector< T >::~LookVector()\n"
 		"GeoCal::LookVector::~LookVector\n"
 		""},
 	 { "LookVectorDouble_swigregister", LookVectorDouble_swigregister, METH_O, NULL},
-	 { "LookVectorAutoDerivativeDouble__v_look_vector", _wrap_LookVectorAutoDerivativeDouble__v_look_vector, METH_VARARGS, NULL},
+	 { "LookVectorAutoDerivativeDouble__v_look_vector", _wrap_LookVectorAutoDerivativeDouble__v_look_vector, METH_VARARGS, "\n"
+		"_v_look_vector(LookVectorAutoDerivativeDouble self) -> ArrayAutoDerivativeDouble_1\n"
+		"_v_look_vector(LookVectorAutoDerivativeDouble self, ArrayAutoDerivativeDouble_1 V)\n"
+		""},
 	 { "LookVectorAutoDerivativeDouble__v_direction", _wrap_LookVectorAutoDerivativeDouble__v_direction, METH_O, "\n"
+		"_v_direction(LookVectorAutoDerivativeDouble self) -> BoostArrayAutoDerivativeDouble_3\n"
 		"\n"
-		"boost::array< T, 3 > GeoCal::LookVector< T >::direction() const\n"
 		"GeoCal::LookVector::direction\n"
-		"This is the direction, as a unit vector.\n"
+		"This is the direction, as a unit vector.  \n"
 		"\n"
 		""},
 	 { "LookVectorAutoDerivativeDouble__v_look_quaternion", _wrap_LookVectorAutoDerivativeDouble__v_look_quaternion, METH_VARARGS, "\n"
+		"_v_look_quaternion(LookVectorAutoDerivativeDouble self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"_v_look_quaternion(LookVectorAutoDerivativeDouble self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void GeoCal::LookVector< T >::look_quaternion(const boost::math::quaternion< T > &V)\n"
 		"GeoCal::LookVector::look_quaternion\n"
-		"Set look vector using a quaternion.\n"
+		"Set look vector using a quaternion.  \n"
 		"\n"
 		""},
 	 { "LookVectorAutoDerivativeDouble__v_length", _wrap_LookVectorAutoDerivativeDouble__v_length, METH_O, "\n"
+		"_v_length(LookVectorAutoDerivativeDouble self) -> AutoDerivativeDouble\n"
 		"\n"
-		"T GeoCal::LookVector< T >::length() const\n"
 		"GeoCal::LookVector::length\n"
-		"Length of look vector, in meters.\n"
+		"Length of look vector, in meters.  \n"
 		"\n"
 		""},
-	 { "LookVectorAutoDerivativeDouble___str__", _wrap_LookVectorAutoDerivativeDouble___str__, METH_O, NULL},
+	 { "LookVectorAutoDerivativeDouble___str__", _wrap_LookVectorAutoDerivativeDouble___str__, METH_O, "__str__(LookVectorAutoDerivativeDouble self) -> std::string"},
 	 { "delete_LookVectorAutoDerivativeDouble", _wrap_delete_LookVectorAutoDerivativeDouble, METH_O, "\n"
+		"delete_LookVectorAutoDerivativeDouble(LookVectorAutoDerivativeDouble self)\n"
 		"\n"
-		"virtual GeoCal::LookVector< T >::~LookVector()\n"
 		"GeoCal::LookVector::~LookVector\n"
 		""},
 	 { "LookVectorAutoDerivativeDouble_swigregister", LookVectorAutoDerivativeDouble_swigregister, METH_O, NULL},
 	 { "new_ScLookVector", _wrap_new_ScLookVector, METH_VARARGS, "\n"
+		"ScLookVector()\n"
+		"ScLookVector(double x, double y, double z)\n"
+		"new_ScLookVector(Array_double_3 Lv) -> ScLookVector\n"
 		"\n"
-		"GeoCal::ScLookVector::ScLookVector(double x, double y, double z)\n"
 		"GeoCal::ScLookVector::ScLookVector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "ScLookVector___str__", _wrap_ScLookVector___str__, METH_O, NULL},
+	 { "ScLookVector___str__", _wrap_ScLookVector___str__, METH_O, "__str__(ScLookVector self) -> std::string"},
 	 { "ScLookVector_field_angle", _wrap_ScLookVector_field_angle, METH_O, "\n"
+		"field_angle(ScLookVector self)\n"
 		"\n"
-		"void ScLookVector::field_angle(double &Fa_x_deg, double &Fa_y_deg) const\n"
 		"GeoCal::ScLookVector::field_angle\n"
-		"Sometimes we compare against something that uses field angles, so\n"
-		"return the x and y field angle in degrees for the given look\n"
-		"direction.\n"
+		"Sometimes we compare against something that uses field angles, so return the x\n"
+		"and y field angle in degrees for the given look direction.  \n"
 		"\n"
 		""},
 	 { "ScLookVector_create_from_field_angle", _wrap_ScLookVector_create_from_field_angle, METH_VARARGS, "\n"
+		"create_from_field_angle(double Fa_x_deg, double Fa_y_deg) -> ScLookVector\n"
 		"\n"
-		"ScLookVector ScLookVector::create_from_field_angle(double Fa_x_deg, double Fa_y_deg)\n"
 		"GeoCal::ScLookVector::create_from_field_angle\n"
-		"Create a ScLookVector from the field angle values in degrees.\n"
+		"Create a ScLookVector from the field angle values in degrees.  \n"
 		"\n"
 		""},
 	 { "delete_ScLookVector", _wrap_delete_ScLookVector, METH_O, "\n"
+		"delete_ScLookVector(ScLookVector self)\n"
 		"\n"
-		"virtual GeoCal::ScLookVector::~ScLookVector()\n"
 		"GeoCal::ScLookVector::~ScLookVector\n"
 		""},
 	 { "ScLookVector_swigregister", ScLookVector_swigregister, METH_O, NULL},
 	 { "ScLookVector_swiginit", ScLookVector_swiginit, METH_VARARGS, NULL},
 	 { "new_ScLookVectorWithDerivative", _wrap_new_ScLookVectorWithDerivative, METH_VARARGS, "\n"
+		"ScLookVectorWithDerivative()\n"
+		"ScLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"ScLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv)\n"
+		"new_ScLookVectorWithDerivative(ScLookVector Slv) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative(const ScLookVector &Slv)\n"
 		"GeoCal::ScLookVectorWithDerivative::ScLookVectorWithDerivative\n"
 		""},
-	 { "ScLookVectorWithDerivative___str__", _wrap_ScLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "ScLookVectorWithDerivative___str__", _wrap_ScLookVectorWithDerivative___str__, METH_O, "__str__(ScLookVectorWithDerivative self) -> std::string"},
 	 { "delete_ScLookVectorWithDerivative", _wrap_delete_ScLookVectorWithDerivative, METH_O, "\n"
+		"delete_ScLookVectorWithDerivative(ScLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::ScLookVectorWithDerivative::~ScLookVectorWithDerivative()\n"
 		"GeoCal::ScLookVectorWithDerivative::~ScLookVectorWithDerivative\n"
 		""},
 	 { "ScLookVectorWithDerivative_swigregister", ScLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "ScLookVectorWithDerivative_swiginit", ScLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { "new_CartesianInertialLookVector", _wrap_new_CartesianInertialLookVector, METH_VARARGS, "\n"
+		"CartesianInertialLookVector()\n"
+		"CartesianInertialLookVector(Array_double_3 Lv)\n"
+		"CartesianInertialLookVector(double x, double y, double z)\n"
+		"new_CartesianInertialLookVector(Quaternion_double V) -> CartesianInertialLookVector\n"
 		"\n"
-		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector(double x, double y, double z)\n"
 		"GeoCal::CartesianInertialLookVector::CartesianInertialLookVector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "CartesianInertialLookVector___str__", _wrap_CartesianInertialLookVector___str__, METH_O, NULL},
+	 { "CartesianInertialLookVector___str__", _wrap_CartesianInertialLookVector___str__, METH_O, "__str__(CartesianInertialLookVector self) -> std::string"},
 	 { "delete_CartesianInertialLookVector", _wrap_delete_CartesianInertialLookVector, METH_O, "\n"
+		"delete_CartesianInertialLookVector(CartesianInertialLookVector self)\n"
 		"\n"
-		"virtual GeoCal::CartesianInertialLookVector::~CartesianInertialLookVector()\n"
 		"GeoCal::CartesianInertialLookVector::~CartesianInertialLookVector\n"
 		""},
 	 { "CartesianInertialLookVector_swigregister", CartesianInertialLookVector_swigregister, METH_O, NULL},
 	 { "CartesianInertialLookVector_swiginit", CartesianInertialLookVector_swiginit, METH_VARARGS, NULL},
 	 { "new_CartesianInertialLookVectorWithDerivative", _wrap_new_CartesianInertialLookVectorWithDerivative, METH_VARARGS, "\n"
+		"CartesianInertialLookVectorWithDerivative()\n"
+		"CartesianInertialLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv)\n"
+		"CartesianInertialLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_CartesianInertialLookVectorWithDerivative(boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)\n"
-		"GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLo\n"
-		"okVectorWithDerivative\n"
-		"Constructor using quaternion.\n"
+		"GeoCal::CartesianInertialLookVectorWithDerivative::CartesianInertialLookVectorWithDerivative\n"
+		"Constructor using quaternion.  \n"
 		"\n"
 		""},
-	 { "CartesianInertialLookVectorWithDerivative___str__", _wrap_CartesianInertialLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "CartesianInertialLookVectorWithDerivative___str__", _wrap_CartesianInertialLookVectorWithDerivative___str__, METH_O, "__str__(CartesianInertialLookVectorWithDerivative self) -> std::string"},
 	 { "delete_CartesianInertialLookVectorWithDerivative", _wrap_delete_CartesianInertialLookVectorWithDerivative, METH_O, "\n"
+		"delete_CartesianInertialLookVectorWithDerivative(CartesianInertialLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::CartesianInertialLookVectorWithDerivative::~CartesianInertialLookVectorWithDerivative()\n"
-		"GeoCal::CartesianInertialLookVectorWithDerivative::~CartesianInertialL\n"
-		"ookVectorWithDerivative\n"
+		"GeoCal::CartesianInertialLookVectorWithDerivative::~CartesianInertialLookVectorWithDerivative\n"
 		""},
 	 { "CartesianInertialLookVectorWithDerivative_swigregister", CartesianInertialLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "CartesianInertialLookVectorWithDerivative_swiginit", CartesianInertialLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { "new_DcsLookVector", _wrap_new_DcsLookVector, METH_VARARGS, "\n"
+		"DcsLookVector()\n"
+		"DcsLookVector(double x, double y, double z)\n"
+		"new_DcsLookVector(Array_double_3 Lv) -> DcsLookVector\n"
 		"\n"
-		"GeoCal::DcsLookVector::DcsLookVector(double x, double y, double z)\n"
 		"GeoCal::DcsLookVector::DcsLookVector\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "DcsLookVector___str__", _wrap_DcsLookVector___str__, METH_O, NULL},
+	 { "DcsLookVector___str__", _wrap_DcsLookVector___str__, METH_O, "__str__(DcsLookVector self) -> std::string"},
 	 { "delete_DcsLookVector", _wrap_delete_DcsLookVector, METH_O, "\n"
+		"delete_DcsLookVector(DcsLookVector self)\n"
 		"\n"
-		"virtual GeoCal::DcsLookVector::~DcsLookVector()\n"
 		"GeoCal::DcsLookVector::~DcsLookVector\n"
 		""},
 	 { "DcsLookVector_swigregister", DcsLookVector_swigregister, METH_O, NULL},
 	 { "DcsLookVector_swiginit", DcsLookVector_swiginit, METH_VARARGS, NULL},
 	 { "new_DcsLookVectorWithDerivative", _wrap_new_DcsLookVectorWithDerivative, METH_VARARGS, "\n"
+		"DcsLookVectorWithDerivative()\n"
+		"DcsLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_DcsLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv) -> DcsLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)\n"
 		"GeoCal::DcsLookVectorWithDerivative::DcsLookVectorWithDerivative\n"
-		"Constructor using quaternion.\n"
+		"Constructor using quaternion.  \n"
 		"\n"
 		""},
-	 { "DcsLookVectorWithDerivative___str__", _wrap_DcsLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "DcsLookVectorWithDerivative___str__", _wrap_DcsLookVectorWithDerivative___str__, METH_O, "__str__(DcsLookVectorWithDerivative self) -> std::string"},
 	 { "delete_DcsLookVectorWithDerivative", _wrap_delete_DcsLookVectorWithDerivative, METH_O, "\n"
+		"delete_DcsLookVectorWithDerivative(DcsLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::DcsLookVectorWithDerivative::~DcsLookVectorWithDerivative()\n"
 		"GeoCal::DcsLookVectorWithDerivative::~DcsLookVectorWithDerivative\n"
 		""},
 	 { "DcsLookVectorWithDerivative_swigregister", DcsLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "DcsLookVectorWithDerivative_swiginit", DcsLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},
 	 { "new_CartesianFixedLookVectorWithDerivative", _wrap_new_CartesianFixedLookVectorWithDerivative, METH_VARARGS, "\n"
+		"CartesianFixedLookVectorWithDerivative()\n"
+		"CartesianFixedLookVectorWithDerivative(BoostArrayAutoDerivativeDouble_3 Lv)\n"
+		"CartesianFixedLookVectorWithDerivative(AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z)\n"
+		"new_CartesianFixedLookVectorWithDerivative(boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V) -> CartesianFixedLookVectorWithDerivative\n"
 		"\n"
-		"GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative(const boost::math::quaternion< AutoDerivative< double > > &V)\n"
-		"GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVect\n"
-		"orWithDerivative\n"
-		"Constructor using quaternion.\n"
+		"GeoCal::CartesianFixedLookVectorWithDerivative::CartesianFixedLookVectorWithDerivative\n"
+		"Constructor using quaternion.  \n"
 		"\n"
 		""},
-	 { "CartesianFixedLookVectorWithDerivative___str__", _wrap_CartesianFixedLookVectorWithDerivative___str__, METH_O, NULL},
+	 { "CartesianFixedLookVectorWithDerivative___str__", _wrap_CartesianFixedLookVectorWithDerivative___str__, METH_O, "__str__(CartesianFixedLookVectorWithDerivative self) -> std::string"},
 	 { "delete_CartesianFixedLookVectorWithDerivative", _wrap_delete_CartesianFixedLookVectorWithDerivative, METH_O, "\n"
+		"delete_CartesianFixedLookVectorWithDerivative(CartesianFixedLookVectorWithDerivative self)\n"
 		"\n"
-		"virtual GeoCal::CartesianFixedLookVectorWithDerivative::~CartesianFixedLookVectorWithDerivative()\n"
-		"GeoCal::CartesianFixedLookVectorWithDerivative::~CartesianFixedLookVec\n"
-		"torWithDerivative\n"
+		"GeoCal::CartesianFixedLookVectorWithDerivative::~CartesianFixedLookVectorWithDerivative\n"
 		""},
 	 { "CartesianFixedLookVectorWithDerivative_swigregister", CartesianFixedLookVectorWithDerivative_swigregister, METH_O, NULL},
 	 { "CartesianFixedLookVectorWithDerivative_swiginit", CartesianFixedLookVectorWithDerivative_swiginit, METH_VARARGS, NULL},

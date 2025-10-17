@@ -10772,84 +10772,115 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_InterestPoint", _wrap_new_InterestPoint, METH_VARARGS, "\n"
+		"InterestPoint()\n"
+		"new_InterestPoint(ImageCoordinate Ic, double Weight) -> InterestPoint\n"
 		"\n"
-		"GeoCal::InterestPoint::InterestPoint(const ImageCoordinate &Ic, double Weight)\n"
 		"GeoCal::InterestPoint::InterestPoint\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "InterestPoint_image_coordinate_set", _wrap_InterestPoint_image_coordinate_set, METH_VARARGS, NULL},
-	 { "InterestPoint_image_coordinate_get", _wrap_InterestPoint_image_coordinate_get, METH_O, NULL},
-	 { "InterestPoint_weight_set", _wrap_InterestPoint_weight_set, METH_VARARGS, NULL},
-	 { "InterestPoint_weight_get", _wrap_InterestPoint_weight_get, METH_O, NULL},
-	 { "InterestPoint___str__", _wrap_InterestPoint___str__, METH_O, NULL},
-	 { "InterestPoint_compare", _wrap_InterestPoint_compare, METH_VARARGS, NULL},
-	 { "delete_InterestPoint", _wrap_delete_InterestPoint, METH_O, NULL},
+	 { "InterestPoint_image_coordinate_set", _wrap_InterestPoint_image_coordinate_set, METH_VARARGS, "InterestPoint_image_coordinate_set(InterestPoint self, ImageCoordinate image_coordinate)"},
+	 { "InterestPoint_image_coordinate_get", _wrap_InterestPoint_image_coordinate_get, METH_O, "InterestPoint_image_coordinate_get(InterestPoint self) -> ImageCoordinate"},
+	 { "InterestPoint_weight_set", _wrap_InterestPoint_weight_set, METH_VARARGS, "InterestPoint_weight_set(InterestPoint self, double weight)"},
+	 { "InterestPoint_weight_get", _wrap_InterestPoint_weight_get, METH_O, "InterestPoint_weight_get(InterestPoint self) -> double"},
+	 { "InterestPoint___str__", _wrap_InterestPoint___str__, METH_O, "InterestPoint___str__(InterestPoint self) -> std::string"},
+	 { "InterestPoint_compare", _wrap_InterestPoint_compare, METH_VARARGS, "InterestPoint_compare(InterestPoint self, InterestPoint I2) -> int"},
+	 { "delete_InterestPoint", _wrap_delete_InterestPoint, METH_O, "delete_InterestPoint(InterestPoint self)"},
 	 { "InterestPoint_swigregister", InterestPoint_swigregister, METH_O, NULL},
 	 { "InterestPoint_swiginit", InterestPoint_swiginit, METH_VARARGS, NULL},
 	 { "FeatureDetector_interest_point_detect", _wrap_FeatureDetector_interest_point_detect, METH_VARARGS, "\n"
+		"FeatureDetector_interest_point_detect(FeatureDetector self, RasterImage Img) -> Vector_InterestPoint\n"
 		"\n"
-		"virtual std::vector< InterestPoint > GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const =0\n"
 		"GeoCal::FeatureDetector::interest_point_detect\n"
-		"Go through a RasterImage, and return a list of InterstPoints for it.\n"
-		"The list isn't in any particular order, but note that InterstPoints\n"
-		"have a natural order by the weight, and you can sort the points if\n"
-		"desired using std::sort, or just pick at the \"best\" point by\n"
-		"std::max_element. \n"
+		"Go through a RasterImage, and return a list of InterstPoints for it.  \n"
+		"\n"
+		"The list isn't in any particular order, but note that InterstPoints have a\n"
+		"natural order by the weight, and you can sort the points if desired using\n"
+		"std::sort, or just pick at the \"best\" point by std::max_element.  \n"
+		"\n"
 		""},
 	 { "FeatureDetector__interest_point_grid_raw", _wrap_FeatureDetector__interest_point_grid_raw, METH_VARARGS, "\n"
+		"FeatureDetector__interest_point_grid_raw(FeatureDetector self, RasterImage Img, GroundMask M, int i, int j, int Number_grid_line, int Number_grid_sample, int Border=0) -> boost::shared_ptr< GeoCal::ImageCoordinate >\n"
+		"FeatureDetector__interest_point_grid_raw(FeatureDetector self, RasterImage Img, int i, int j, int Number_grid_line, int Number_grid_sample, int Border=0) -> boost::shared_ptr< GeoCal::ImageCoordinate >\n"
 		"\n"
-		"boost::shared_ptr< ImageCoordinate > FeatureDetector::interest_point_grid_ptr(const RasterImage &Img, int i, int j, int Number_grid_line, int\n"
-		"Number_grid_sample, int Border=0) const\n"
 		"GeoCal::FeatureDetector::interest_point_grid_ptr\n"
-		"Python much prefers getting shared_ptr back, so we have this variation\n"
-		"that wraps that.\n"
-		"We also return only a single point. This is a somewhat awkward\n"
-		"interface, but it gets wrapped into a interest_point_grid function in\n"
-		"python, possibly doing processing in parallel. \n"
-		""},
-	 { "FeatureDetector___str__", _wrap_FeatureDetector___str__, METH_O, NULL},
-	 { "delete_FeatureDetector", _wrap_delete_FeatureDetector, METH_O, "\n"
+		"Python much prefers getting shared_ptr back, so we have this variation that\n"
+		"wraps that.  \n"
 		"\n"
-		"virtual GeoCal::FeatureDetector::~FeatureDetector()\n"
+		"We also return only a single point. This is a somewhat awkward interface, but it\n"
+		"gets wrapped into a interest_point_grid function in python, possibly doing\n"
+		"processing in parallel.  \n"
+		"\n"
+		""},
+	 { "FeatureDetector___str__", _wrap_FeatureDetector___str__, METH_O, "FeatureDetector___str__(FeatureDetector self) -> std::string"},
+	 { "delete_FeatureDetector", _wrap_delete_FeatureDetector, METH_O, "\n"
+		"delete_FeatureDetector(FeatureDetector self)\n"
+		"\n"
 		"GeoCal::FeatureDetector::~FeatureDetector\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "FeatureDetector_swigregister", FeatureDetector_swigregister, METH_O, NULL},
-	 { "Vector_InterestPoint_iterator", _wrap_Vector_InterestPoint_iterator, METH_O, NULL},
-	 { "Vector_InterestPoint___nonzero__", _wrap_Vector_InterestPoint___nonzero__, METH_O, NULL},
-	 { "Vector_InterestPoint___bool__", _wrap_Vector_InterestPoint___bool__, METH_O, NULL},
-	 { "Vector_InterestPoint___len__", _wrap_Vector_InterestPoint___len__, METH_O, NULL},
-	 { "Vector_InterestPoint___getslice__", _wrap_Vector_InterestPoint___getslice__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___setslice__", _wrap_Vector_InterestPoint___setslice__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___delslice__", _wrap_Vector_InterestPoint___delslice__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___delitem__", _wrap_Vector_InterestPoint___delitem__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___getitem__", _wrap_Vector_InterestPoint___getitem__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___setitem__", _wrap_Vector_InterestPoint___setitem__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_pop", _wrap_Vector_InterestPoint_pop, METH_O, NULL},
-	 { "Vector_InterestPoint_append", _wrap_Vector_InterestPoint_append, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_empty", _wrap_Vector_InterestPoint_empty, METH_O, NULL},
-	 { "Vector_InterestPoint_size", _wrap_Vector_InterestPoint_size, METH_O, NULL},
-	 { "Vector_InterestPoint_swap", _wrap_Vector_InterestPoint_swap, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_begin", _wrap_Vector_InterestPoint_begin, METH_O, NULL},
-	 { "Vector_InterestPoint_end", _wrap_Vector_InterestPoint_end, METH_O, NULL},
-	 { "Vector_InterestPoint_rbegin", _wrap_Vector_InterestPoint_rbegin, METH_O, NULL},
-	 { "Vector_InterestPoint_rend", _wrap_Vector_InterestPoint_rend, METH_O, NULL},
-	 { "Vector_InterestPoint_clear", _wrap_Vector_InterestPoint_clear, METH_O, NULL},
-	 { "Vector_InterestPoint_get_allocator", _wrap_Vector_InterestPoint_get_allocator, METH_O, NULL},
-	 { "Vector_InterestPoint_pop_back", _wrap_Vector_InterestPoint_pop_back, METH_O, NULL},
-	 { "Vector_InterestPoint_erase", _wrap_Vector_InterestPoint_erase, METH_VARARGS, NULL},
-	 { "new_Vector_InterestPoint", _wrap_new_Vector_InterestPoint, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_push_back", _wrap_Vector_InterestPoint_push_back, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_front", _wrap_Vector_InterestPoint_front, METH_O, NULL},
-	 { "Vector_InterestPoint_back", _wrap_Vector_InterestPoint_back, METH_O, NULL},
-	 { "Vector_InterestPoint_assign", _wrap_Vector_InterestPoint_assign, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_resize", _wrap_Vector_InterestPoint_resize, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_insert", _wrap_Vector_InterestPoint_insert, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_reserve", _wrap_Vector_InterestPoint_reserve, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_capacity", _wrap_Vector_InterestPoint_capacity, METH_O, NULL},
-	 { "delete_Vector_InterestPoint", _wrap_delete_Vector_InterestPoint, METH_O, NULL},
+	 { "Vector_InterestPoint_iterator", _wrap_Vector_InterestPoint_iterator, METH_O, "Vector_InterestPoint_iterator(Vector_InterestPoint self) -> SwigPyIterator"},
+	 { "Vector_InterestPoint___nonzero__", _wrap_Vector_InterestPoint___nonzero__, METH_O, "Vector_InterestPoint___nonzero__(Vector_InterestPoint self) -> bool"},
+	 { "Vector_InterestPoint___bool__", _wrap_Vector_InterestPoint___bool__, METH_O, "Vector_InterestPoint___bool__(Vector_InterestPoint self) -> bool"},
+	 { "Vector_InterestPoint___len__", _wrap_Vector_InterestPoint___len__, METH_O, "Vector_InterestPoint___len__(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::size_type"},
+	 { "Vector_InterestPoint___getslice__", _wrap_Vector_InterestPoint___getslice__, METH_VARARGS, "Vector_InterestPoint___getslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j) -> Vector_InterestPoint"},
+	 { "Vector_InterestPoint___setslice__", _wrap_Vector_InterestPoint___setslice__, METH_VARARGS, "\n"
+		"Vector_InterestPoint___setslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j)\n"
+		"Vector_InterestPoint___setslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j, Vector_InterestPoint v)\n"
+		""},
+	 { "Vector_InterestPoint___delslice__", _wrap_Vector_InterestPoint___delslice__, METH_VARARGS, "Vector_InterestPoint___delslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j)"},
+	 { "Vector_InterestPoint___delitem__", _wrap_Vector_InterestPoint___delitem__, METH_VARARGS, "\n"
+		"Vector_InterestPoint___delitem__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i)\n"
+		"Vector_InterestPoint___delitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_InterestPoint___getitem__", _wrap_Vector_InterestPoint___getitem__, METH_VARARGS, "\n"
+		"Vector_InterestPoint___getitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice) -> Vector_InterestPoint\n"
+		"Vector_InterestPoint___getitem__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i) -> InterestPoint\n"
+		""},
+	 { "Vector_InterestPoint___setitem__", _wrap_Vector_InterestPoint___setitem__, METH_VARARGS, "\n"
+		"Vector_InterestPoint___setitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice, Vector_InterestPoint v)\n"
+		"Vector_InterestPoint___setitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_InterestPoint___setitem__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, InterestPoint x)\n"
+		""},
+	 { "Vector_InterestPoint_pop", _wrap_Vector_InterestPoint_pop, METH_O, "Vector_InterestPoint_pop(Vector_InterestPoint self) -> InterestPoint"},
+	 { "Vector_InterestPoint_append", _wrap_Vector_InterestPoint_append, METH_VARARGS, "Vector_InterestPoint_append(Vector_InterestPoint self, InterestPoint x)"},
+	 { "Vector_InterestPoint_empty", _wrap_Vector_InterestPoint_empty, METH_O, "Vector_InterestPoint_empty(Vector_InterestPoint self) -> bool"},
+	 { "Vector_InterestPoint_size", _wrap_Vector_InterestPoint_size, METH_O, "Vector_InterestPoint_size(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::size_type"},
+	 { "Vector_InterestPoint_swap", _wrap_Vector_InterestPoint_swap, METH_VARARGS, "Vector_InterestPoint_swap(Vector_InterestPoint self, Vector_InterestPoint v)"},
+	 { "Vector_InterestPoint_begin", _wrap_Vector_InterestPoint_begin, METH_O, "Vector_InterestPoint_begin(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::iterator"},
+	 { "Vector_InterestPoint_end", _wrap_Vector_InterestPoint_end, METH_O, "Vector_InterestPoint_end(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::iterator"},
+	 { "Vector_InterestPoint_rbegin", _wrap_Vector_InterestPoint_rbegin, METH_O, "Vector_InterestPoint_rbegin(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::reverse_iterator"},
+	 { "Vector_InterestPoint_rend", _wrap_Vector_InterestPoint_rend, METH_O, "Vector_InterestPoint_rend(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::reverse_iterator"},
+	 { "Vector_InterestPoint_clear", _wrap_Vector_InterestPoint_clear, METH_O, "Vector_InterestPoint_clear(Vector_InterestPoint self)"},
+	 { "Vector_InterestPoint_get_allocator", _wrap_Vector_InterestPoint_get_allocator, METH_O, "Vector_InterestPoint_get_allocator(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::allocator_type"},
+	 { "Vector_InterestPoint_pop_back", _wrap_Vector_InterestPoint_pop_back, METH_O, "Vector_InterestPoint_pop_back(Vector_InterestPoint self)"},
+	 { "Vector_InterestPoint_erase", _wrap_Vector_InterestPoint_erase, METH_VARARGS, "\n"
+		"Vector_InterestPoint_erase(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator pos) -> std::vector< GeoCal::InterestPoint >::iterator\n"
+		"Vector_InterestPoint_erase(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator first, std::vector< GeoCal::InterestPoint >::iterator last) -> std::vector< GeoCal::InterestPoint >::iterator\n"
+		""},
+	 { "new_Vector_InterestPoint", _wrap_new_Vector_InterestPoint, METH_VARARGS, "\n"
+		"Vector_InterestPoint()\n"
+		"Vector_InterestPoint(Vector_InterestPoint other)\n"
+		"Vector_InterestPoint(std::vector< GeoCal::InterestPoint >::size_type size)\n"
+		"new_Vector_InterestPoint(std::vector< GeoCal::InterestPoint >::size_type size, InterestPoint value) -> Vector_InterestPoint\n"
+		""},
+	 { "Vector_InterestPoint_push_back", _wrap_Vector_InterestPoint_push_back, METH_VARARGS, "Vector_InterestPoint_push_back(Vector_InterestPoint self, InterestPoint x)"},
+	 { "Vector_InterestPoint_front", _wrap_Vector_InterestPoint_front, METH_O, "Vector_InterestPoint_front(Vector_InterestPoint self) -> InterestPoint"},
+	 { "Vector_InterestPoint_back", _wrap_Vector_InterestPoint_back, METH_O, "Vector_InterestPoint_back(Vector_InterestPoint self) -> InterestPoint"},
+	 { "Vector_InterestPoint_assign", _wrap_Vector_InterestPoint_assign, METH_VARARGS, "Vector_InterestPoint_assign(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type n, InterestPoint x)"},
+	 { "Vector_InterestPoint_resize", _wrap_Vector_InterestPoint_resize, METH_VARARGS, "\n"
+		"Vector_InterestPoint_resize(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type new_size)\n"
+		"Vector_InterestPoint_resize(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type new_size, InterestPoint x)\n"
+		""},
+	 { "Vector_InterestPoint_insert", _wrap_Vector_InterestPoint_insert, METH_VARARGS, "\n"
+		"Vector_InterestPoint_insert(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator pos, InterestPoint x) -> std::vector< GeoCal::InterestPoint >::iterator\n"
+		"Vector_InterestPoint_insert(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator pos, std::vector< GeoCal::InterestPoint >::size_type n, InterestPoint x)\n"
+		""},
+	 { "Vector_InterestPoint_reserve", _wrap_Vector_InterestPoint_reserve, METH_VARARGS, "Vector_InterestPoint_reserve(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type n)"},
+	 { "Vector_InterestPoint_capacity", _wrap_Vector_InterestPoint_capacity, METH_O, "Vector_InterestPoint_capacity(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::size_type"},
+	 { "delete_Vector_InterestPoint", _wrap_delete_Vector_InterestPoint, METH_O, "delete_Vector_InterestPoint(Vector_InterestPoint self)"},
 	 { "Vector_InterestPoint_swigregister", Vector_InterestPoint_swigregister, METH_O, NULL},
 	 { "Vector_InterestPoint_swiginit", Vector_InterestPoint_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -10877,84 +10908,115 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_InterestPoint", _wrap_new_InterestPoint, METH_VARARGS, "\n"
+		"InterestPoint()\n"
+		"new_InterestPoint(ImageCoordinate Ic, double Weight) -> InterestPoint\n"
 		"\n"
-		"GeoCal::InterestPoint::InterestPoint(const ImageCoordinate &Ic, double Weight)\n"
 		"GeoCal::InterestPoint::InterestPoint\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "InterestPoint_image_coordinate_set", _wrap_InterestPoint_image_coordinate_set, METH_VARARGS, NULL},
-	 { "InterestPoint_image_coordinate_get", _wrap_InterestPoint_image_coordinate_get, METH_O, NULL},
-	 { "InterestPoint_weight_set", _wrap_InterestPoint_weight_set, METH_VARARGS, NULL},
-	 { "InterestPoint_weight_get", _wrap_InterestPoint_weight_get, METH_O, NULL},
-	 { "InterestPoint___str__", _wrap_InterestPoint___str__, METH_O, NULL},
-	 { "InterestPoint_compare", _wrap_InterestPoint_compare, METH_VARARGS, NULL},
-	 { "delete_InterestPoint", _wrap_delete_InterestPoint, METH_O, NULL},
+	 { "InterestPoint_image_coordinate_set", _wrap_InterestPoint_image_coordinate_set, METH_VARARGS, "InterestPoint_image_coordinate_set(InterestPoint self, ImageCoordinate image_coordinate)"},
+	 { "InterestPoint_image_coordinate_get", _wrap_InterestPoint_image_coordinate_get, METH_O, "InterestPoint_image_coordinate_get(InterestPoint self) -> ImageCoordinate"},
+	 { "InterestPoint_weight_set", _wrap_InterestPoint_weight_set, METH_VARARGS, "InterestPoint_weight_set(InterestPoint self, double weight)"},
+	 { "InterestPoint_weight_get", _wrap_InterestPoint_weight_get, METH_O, "InterestPoint_weight_get(InterestPoint self) -> double"},
+	 { "InterestPoint___str__", _wrap_InterestPoint___str__, METH_O, "__str__(InterestPoint self) -> std::string"},
+	 { "InterestPoint_compare", _wrap_InterestPoint_compare, METH_VARARGS, "compare(InterestPoint self, InterestPoint I2) -> int"},
+	 { "delete_InterestPoint", _wrap_delete_InterestPoint, METH_O, "delete_InterestPoint(InterestPoint self)"},
 	 { "InterestPoint_swigregister", InterestPoint_swigregister, METH_O, NULL},
 	 { "InterestPoint_swiginit", InterestPoint_swiginit, METH_VARARGS, NULL},
 	 { "FeatureDetector_interest_point_detect", _wrap_FeatureDetector_interest_point_detect, METH_VARARGS, "\n"
+		"interest_point_detect(FeatureDetector self, RasterImage Img) -> Vector_InterestPoint\n"
 		"\n"
-		"virtual std::vector< InterestPoint > GeoCal::FeatureDetector::interest_point_detect(const RasterImage &Img) const =0\n"
 		"GeoCal::FeatureDetector::interest_point_detect\n"
-		"Go through a RasterImage, and return a list of InterstPoints for it.\n"
-		"The list isn't in any particular order, but note that InterstPoints\n"
-		"have a natural order by the weight, and you can sort the points if\n"
-		"desired using std::sort, or just pick at the \"best\" point by\n"
-		"std::max_element. \n"
+		"Go through a RasterImage, and return a list of InterstPoints for it.  \n"
+		"\n"
+		"The list isn't in any particular order, but note that InterstPoints have a\n"
+		"natural order by the weight, and you can sort the points if desired using\n"
+		"std::sort, or just pick at the \"best\" point by std::max_element.  \n"
+		"\n"
 		""},
 	 { "FeatureDetector__interest_point_grid_raw", _wrap_FeatureDetector__interest_point_grid_raw, METH_VARARGS, "\n"
+		"_interest_point_grid_raw(FeatureDetector self, RasterImage Img, GroundMask M, int i, int j, int Number_grid_line, int Number_grid_sample, int Border=0) -> boost::shared_ptr< GeoCal::ImageCoordinate >\n"
+		"_interest_point_grid_raw(FeatureDetector self, RasterImage Img, int i, int j, int Number_grid_line, int Number_grid_sample, int Border=0) -> boost::shared_ptr< GeoCal::ImageCoordinate >\n"
 		"\n"
-		"boost::shared_ptr< ImageCoordinate > FeatureDetector::interest_point_grid_ptr(const RasterImage &Img, int i, int j, int Number_grid_line, int\n"
-		"Number_grid_sample, int Border=0) const\n"
 		"GeoCal::FeatureDetector::interest_point_grid_ptr\n"
-		"Python much prefers getting shared_ptr back, so we have this variation\n"
-		"that wraps that.\n"
-		"We also return only a single point. This is a somewhat awkward\n"
-		"interface, but it gets wrapped into a interest_point_grid function in\n"
-		"python, possibly doing processing in parallel. \n"
-		""},
-	 { "FeatureDetector___str__", _wrap_FeatureDetector___str__, METH_O, NULL},
-	 { "delete_FeatureDetector", _wrap_delete_FeatureDetector, METH_O, "\n"
+		"Python much prefers getting shared_ptr back, so we have this variation that\n"
+		"wraps that.  \n"
 		"\n"
-		"virtual GeoCal::FeatureDetector::~FeatureDetector()\n"
+		"We also return only a single point. This is a somewhat awkward interface, but it\n"
+		"gets wrapped into a interest_point_grid function in python, possibly doing\n"
+		"processing in parallel.  \n"
+		"\n"
+		""},
+	 { "FeatureDetector___str__", _wrap_FeatureDetector___str__, METH_O, "__str__(FeatureDetector self) -> std::string"},
+	 { "delete_FeatureDetector", _wrap_delete_FeatureDetector, METH_O, "\n"
+		"delete_FeatureDetector(FeatureDetector self)\n"
+		"\n"
 		"GeoCal::FeatureDetector::~FeatureDetector\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "FeatureDetector_swigregister", FeatureDetector_swigregister, METH_O, NULL},
-	 { "Vector_InterestPoint_iterator", _wrap_Vector_InterestPoint_iterator, METH_O, NULL},
-	 { "Vector_InterestPoint___nonzero__", _wrap_Vector_InterestPoint___nonzero__, METH_O, NULL},
-	 { "Vector_InterestPoint___bool__", _wrap_Vector_InterestPoint___bool__, METH_O, NULL},
-	 { "Vector_InterestPoint___len__", _wrap_Vector_InterestPoint___len__, METH_O, NULL},
-	 { "Vector_InterestPoint___getslice__", _wrap_Vector_InterestPoint___getslice__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___setslice__", _wrap_Vector_InterestPoint___setslice__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___delslice__", _wrap_Vector_InterestPoint___delslice__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___delitem__", _wrap_Vector_InterestPoint___delitem__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___getitem__", _wrap_Vector_InterestPoint___getitem__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint___setitem__", _wrap_Vector_InterestPoint___setitem__, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_pop", _wrap_Vector_InterestPoint_pop, METH_O, NULL},
-	 { "Vector_InterestPoint_append", _wrap_Vector_InterestPoint_append, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_empty", _wrap_Vector_InterestPoint_empty, METH_O, NULL},
-	 { "Vector_InterestPoint_size", _wrap_Vector_InterestPoint_size, METH_O, NULL},
-	 { "Vector_InterestPoint_swap", _wrap_Vector_InterestPoint_swap, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_begin", _wrap_Vector_InterestPoint_begin, METH_O, NULL},
-	 { "Vector_InterestPoint_end", _wrap_Vector_InterestPoint_end, METH_O, NULL},
-	 { "Vector_InterestPoint_rbegin", _wrap_Vector_InterestPoint_rbegin, METH_O, NULL},
-	 { "Vector_InterestPoint_rend", _wrap_Vector_InterestPoint_rend, METH_O, NULL},
-	 { "Vector_InterestPoint_clear", _wrap_Vector_InterestPoint_clear, METH_O, NULL},
-	 { "Vector_InterestPoint_get_allocator", _wrap_Vector_InterestPoint_get_allocator, METH_O, NULL},
-	 { "Vector_InterestPoint_pop_back", _wrap_Vector_InterestPoint_pop_back, METH_O, NULL},
-	 { "Vector_InterestPoint_erase", _wrap_Vector_InterestPoint_erase, METH_VARARGS, NULL},
-	 { "new_Vector_InterestPoint", _wrap_new_Vector_InterestPoint, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_push_back", _wrap_Vector_InterestPoint_push_back, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_front", _wrap_Vector_InterestPoint_front, METH_O, NULL},
-	 { "Vector_InterestPoint_back", _wrap_Vector_InterestPoint_back, METH_O, NULL},
-	 { "Vector_InterestPoint_assign", _wrap_Vector_InterestPoint_assign, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_resize", _wrap_Vector_InterestPoint_resize, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_insert", _wrap_Vector_InterestPoint_insert, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_reserve", _wrap_Vector_InterestPoint_reserve, METH_VARARGS, NULL},
-	 { "Vector_InterestPoint_capacity", _wrap_Vector_InterestPoint_capacity, METH_O, NULL},
-	 { "delete_Vector_InterestPoint", _wrap_delete_Vector_InterestPoint, METH_O, NULL},
+	 { "Vector_InterestPoint_iterator", _wrap_Vector_InterestPoint_iterator, METH_O, "iterator(Vector_InterestPoint self) -> SwigPyIterator"},
+	 { "Vector_InterestPoint___nonzero__", _wrap_Vector_InterestPoint___nonzero__, METH_O, "__nonzero__(Vector_InterestPoint self) -> bool"},
+	 { "Vector_InterestPoint___bool__", _wrap_Vector_InterestPoint___bool__, METH_O, "__bool__(Vector_InterestPoint self) -> bool"},
+	 { "Vector_InterestPoint___len__", _wrap_Vector_InterestPoint___len__, METH_O, "__len__(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::size_type"},
+	 { "Vector_InterestPoint___getslice__", _wrap_Vector_InterestPoint___getslice__, METH_VARARGS, "__getslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j) -> Vector_InterestPoint"},
+	 { "Vector_InterestPoint___setslice__", _wrap_Vector_InterestPoint___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j)\n"
+		"__setslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j, Vector_InterestPoint v)\n"
+		""},
+	 { "Vector_InterestPoint___delslice__", _wrap_Vector_InterestPoint___delslice__, METH_VARARGS, "__delslice__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, std::vector< GeoCal::InterestPoint >::difference_type j)"},
+	 { "Vector_InterestPoint___delitem__", _wrap_Vector_InterestPoint___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i)\n"
+		"__delitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_InterestPoint___getitem__", _wrap_Vector_InterestPoint___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice) -> Vector_InterestPoint\n"
+		"__getitem__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i) -> InterestPoint\n"
+		""},
+	 { "Vector_InterestPoint___setitem__", _wrap_Vector_InterestPoint___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice, Vector_InterestPoint v)\n"
+		"__setitem__(Vector_InterestPoint self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::difference_type i, InterestPoint x)\n"
+		""},
+	 { "Vector_InterestPoint_pop", _wrap_Vector_InterestPoint_pop, METH_O, "pop(Vector_InterestPoint self) -> InterestPoint"},
+	 { "Vector_InterestPoint_append", _wrap_Vector_InterestPoint_append, METH_VARARGS, "append(Vector_InterestPoint self, InterestPoint x)"},
+	 { "Vector_InterestPoint_empty", _wrap_Vector_InterestPoint_empty, METH_O, "empty(Vector_InterestPoint self) -> bool"},
+	 { "Vector_InterestPoint_size", _wrap_Vector_InterestPoint_size, METH_O, "size(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::size_type"},
+	 { "Vector_InterestPoint_swap", _wrap_Vector_InterestPoint_swap, METH_VARARGS, "swap(Vector_InterestPoint self, Vector_InterestPoint v)"},
+	 { "Vector_InterestPoint_begin", _wrap_Vector_InterestPoint_begin, METH_O, "begin(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::iterator"},
+	 { "Vector_InterestPoint_end", _wrap_Vector_InterestPoint_end, METH_O, "end(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::iterator"},
+	 { "Vector_InterestPoint_rbegin", _wrap_Vector_InterestPoint_rbegin, METH_O, "rbegin(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::reverse_iterator"},
+	 { "Vector_InterestPoint_rend", _wrap_Vector_InterestPoint_rend, METH_O, "rend(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::reverse_iterator"},
+	 { "Vector_InterestPoint_clear", _wrap_Vector_InterestPoint_clear, METH_O, "clear(Vector_InterestPoint self)"},
+	 { "Vector_InterestPoint_get_allocator", _wrap_Vector_InterestPoint_get_allocator, METH_O, "get_allocator(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::allocator_type"},
+	 { "Vector_InterestPoint_pop_back", _wrap_Vector_InterestPoint_pop_back, METH_O, "pop_back(Vector_InterestPoint self)"},
+	 { "Vector_InterestPoint_erase", _wrap_Vector_InterestPoint_erase, METH_VARARGS, "\n"
+		"erase(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator pos) -> std::vector< GeoCal::InterestPoint >::iterator\n"
+		"erase(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator first, std::vector< GeoCal::InterestPoint >::iterator last) -> std::vector< GeoCal::InterestPoint >::iterator\n"
+		""},
+	 { "new_Vector_InterestPoint", _wrap_new_Vector_InterestPoint, METH_VARARGS, "\n"
+		"Vector_InterestPoint()\n"
+		"Vector_InterestPoint(Vector_InterestPoint other)\n"
+		"Vector_InterestPoint(std::vector< GeoCal::InterestPoint >::size_type size)\n"
+		"new_Vector_InterestPoint(std::vector< GeoCal::InterestPoint >::size_type size, InterestPoint value) -> Vector_InterestPoint\n"
+		""},
+	 { "Vector_InterestPoint_push_back", _wrap_Vector_InterestPoint_push_back, METH_VARARGS, "push_back(Vector_InterestPoint self, InterestPoint x)"},
+	 { "Vector_InterestPoint_front", _wrap_Vector_InterestPoint_front, METH_O, "front(Vector_InterestPoint self) -> InterestPoint"},
+	 { "Vector_InterestPoint_back", _wrap_Vector_InterestPoint_back, METH_O, "back(Vector_InterestPoint self) -> InterestPoint"},
+	 { "Vector_InterestPoint_assign", _wrap_Vector_InterestPoint_assign, METH_VARARGS, "assign(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type n, InterestPoint x)"},
+	 { "Vector_InterestPoint_resize", _wrap_Vector_InterestPoint_resize, METH_VARARGS, "\n"
+		"resize(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type new_size)\n"
+		"resize(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type new_size, InterestPoint x)\n"
+		""},
+	 { "Vector_InterestPoint_insert", _wrap_Vector_InterestPoint_insert, METH_VARARGS, "\n"
+		"insert(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator pos, InterestPoint x) -> std::vector< GeoCal::InterestPoint >::iterator\n"
+		"insert(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::iterator pos, std::vector< GeoCal::InterestPoint >::size_type n, InterestPoint x)\n"
+		""},
+	 { "Vector_InterestPoint_reserve", _wrap_Vector_InterestPoint_reserve, METH_VARARGS, "reserve(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type n)"},
+	 { "Vector_InterestPoint_capacity", _wrap_Vector_InterestPoint_capacity, METH_O, "capacity(Vector_InterestPoint self) -> std::vector< GeoCal::InterestPoint >::size_type"},
+	 { "delete_Vector_InterestPoint", _wrap_delete_Vector_InterestPoint, METH_O, "delete_Vector_InterestPoint(Vector_InterestPoint self)"},
 	 { "Vector_InterestPoint_swigregister", Vector_InterestPoint_swigregister, METH_O, NULL},
 	 { "Vector_InterestPoint_swiginit", Vector_InterestPoint_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

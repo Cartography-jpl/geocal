@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_image_variable.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_image_variable:
 _raster_image_variable.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_image_variable.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,13 +143,15 @@ import geocal_swig.geocal_exception
 class RasterImageVariable(geocal_swig.raster_image.RasterImage):
     r"""
 
-    Much of the time the constructor for a RasterImage determine the size,
-    map_info, and tile size.
 
-    This helper class holds these values in protected member function
-    variables and fills in the corresponding functions.
+    Much of the time the constructor for a RasterImage determine the size, map_info,
+    and tile size.  
 
-    C++ includes: raster_image_variable.h 
+    This helper class holds these values in protected member function variables and
+    fills in the corresponding functions.  
+
+    C++ includes: raster_image_variable.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

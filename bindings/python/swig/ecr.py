@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ecr.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ecr:
 _ecr.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ecr.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,23 +141,31 @@ import geocal_swig.ground_coordinate
 class Ecr(geocal_swig.ground_coordinate.CartesianFixed):
     r"""
 
-    This is a ground coordinate, represented in ECR coordinates.
 
-    C++ includes: ecr.h 
+    This is a ground coordinate, represented in ECR coordinates.  
+
+    C++ includes: ecr.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     EARTH_NAIF_CODE = _ecr.Ecr_EARTH_NAIF_CODE
+    
     MOON_NAIF_CODE = _ecr.Ecr_MOON_NAIF_CODE
+    
     SUN_NAIF_CODE = _ecr.Ecr_SUN_NAIF_CODE
+    
 
     def __init__(self, *args):
         r"""
+        __init__(Ecr self, GroundCoordinate Gc) -> Ecr
+        __init__(Ecr self, double X, double Y, double Z) -> Ecr
+        __init__(Ecr self, Array_double_3 Pos) -> Ecr
+        __init__(Ecr self) -> Ecr
 
-        GeoCal::Ecr::Ecr(double X, double Y, double Z)
         GeoCal::Ecr::Ecr
-        Make an Ecr with the given position, in meters.
+        Make an Ecr with the given position, in meters.  
 
         """
         _ecr.Ecr_swiginit(self, _ecr.new_Ecr(*args))

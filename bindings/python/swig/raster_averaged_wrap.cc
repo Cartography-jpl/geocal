@@ -8027,212 +8027,209 @@ SWIGINTERN PyObject *AveragedImageGroundConnection_swiginit(PyObject *SWIGUNUSED
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RasterAveraged", _wrap_new_RasterAveraged, METH_VARARGS, "\n"
+		"RasterAveraged(boost::shared_ptr< GeoCal::RasterImage > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel, bool Ignore_zero=False)\n"
 		"\n"
-		"RasterAveraged::RasterAveraged(const boost::shared_ptr< RasterImage > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel, bool\n"
-		"Ignore_zero=false)\n"
 		"GeoCal::RasterAveraged::RasterAveraged\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_high_resolution_image", _wrap_RasterAveraged__v_high_resolution_image, METH_O, "\n"
+		"RasterAveraged__v_high_resolution_image(RasterAveraged self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::RasterAveraged::high_resolution_image_ptr() const\n"
 		"GeoCal::RasterAveraged::high_resolution_image_ptr\n"
-		"Pointer to high resolution image that this object is based on.\n"
+		"Pointer to high resolution image that this object is based on.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_number_line_per_pixel", _wrap_RasterAveraged__v_number_line_per_pixel, METH_O, "\n"
+		"RasterAveraged__v_number_line_per_pixel(RasterAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveraged::number_line_per_pixel() const\n"
 		"GeoCal::RasterAveraged::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_number_sample_per_pixel", _wrap_RasterAveraged__v_number_sample_per_pixel, METH_O, "\n"
+		"RasterAveraged__v_number_sample_per_pixel(RasterAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveraged::number_sample_per_pixel() const\n"
 		"GeoCal::RasterAveraged::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_ignore_zero", _wrap_RasterAveraged__v_ignore_zero, METH_O, "\n"
+		"RasterAveraged__v_ignore_zero(RasterAveraged self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterAveraged::ignore_zero() const\n"
 		"GeoCal::RasterAveraged::ignore_zero\n"
-		"If true, we ignore zeros when calculating the average.\n"
+		"If true, we ignore zeros when calculating the average.  \n"
 		"\n"
 		""},
 	 { "delete_RasterAveraged", _wrap_delete_RasterAveraged, METH_O, "\n"
+		"delete_RasterAveraged(RasterAveraged self)\n"
 		"\n"
-		"virtual GeoCal::RasterAveraged::~RasterAveraged()\n"
 		"GeoCal::RasterAveraged::~RasterAveraged\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged_swigregister", RasterAveraged_swigregister, METH_O, NULL},
 	 { "RasterAveraged_swiginit", RasterAveraged_swiginit, METH_VARARGS, NULL},
 	 { "new_RasterAveragedMultiBand", _wrap_new_RasterAveragedMultiBand, METH_VARARGS, "\n"
+		"RasterAveragedMultiBand(boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel, bool Ignore_zero=False)\n"
 		"\n"
-		"RasterAveragedMultiBand::RasterAveragedMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel, bool\n"
-		"Ignore_zero=false)\n"
 		"GeoCal::RasterAveragedMultiBand::RasterAveragedMultiBand\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_high_resolution_image", _wrap_RasterAveragedMultiBand__v_high_resolution_image, METH_O, "\n"
+		"RasterAveragedMultiBand__v_high_resolution_image(RasterAveragedMultiBand self) -> boost::shared_ptr< GeoCal::RasterImageMultiBand >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImageMultiBand > & GeoCal::RasterAveragedMultiBand::high_resolution_image_ptr() const\n"
 		"GeoCal::RasterAveragedMultiBand::high_resolution_image_ptr\n"
-		"Pointer to high resolution image that this object is based on.\n"
+		"Pointer to high resolution image that this object is based on.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_number_line_per_pixel", _wrap_RasterAveragedMultiBand__v_number_line_per_pixel, METH_O, "\n"
+		"RasterAveragedMultiBand__v_number_line_per_pixel(RasterAveragedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveragedMultiBand::number_line_per_pixel() const\n"
 		"GeoCal::RasterAveragedMultiBand::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_number_sample_per_pixel", _wrap_RasterAveragedMultiBand__v_number_sample_per_pixel, METH_O, "\n"
+		"RasterAveragedMultiBand__v_number_sample_per_pixel(RasterAveragedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveragedMultiBand::number_sample_per_pixel() const\n"
 		"GeoCal::RasterAveragedMultiBand::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_ignore_zero", _wrap_RasterAveragedMultiBand__v_ignore_zero, METH_O, "\n"
+		"RasterAveragedMultiBand__v_ignore_zero(RasterAveragedMultiBand self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterAveragedMultiBand::ignore_zero() const\n"
 		"GeoCal::RasterAveragedMultiBand::ignore_zero\n"
-		"If true, we ignore zeros when calculating the average.\n"
+		"If true, we ignore zeros when calculating the average.  \n"
 		"\n"
 		""},
 	 { "delete_RasterAveragedMultiBand", _wrap_delete_RasterAveragedMultiBand, METH_O, "\n"
+		"delete_RasterAveragedMultiBand(RasterAveragedMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::RasterAveragedMultiBand::~RasterAveragedMultiBand()\n"
 		"GeoCal::RasterAveragedMultiBand::~RasterAveragedMultiBand\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand_swigregister", RasterAveragedMultiBand_swigregister, METH_O, NULL},
 	 { "RasterAveragedMultiBand_swiginit", RasterAveragedMultiBand_swiginit, METH_VARARGS, NULL},
 	 { "new_ImageMaskAveraged", _wrap_new_ImageMaskAveraged, METH_VARARGS, "\n"
+		"new_ImageMaskAveraged(boost::shared_ptr< GeoCal::ImageMask > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel) -> ImageMaskAveraged\n"
 		"\n"
-		"GeoCal::ImageMaskAveraged::ImageMaskAveraged(const boost::shared_ptr< ImageMask > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel)\n"
 		"GeoCal::ImageMaskAveraged::ImageMaskAveraged\n"
 		""},
 	 { "ImageMaskAveraged__v_high_resolution_image_mask", _wrap_ImageMaskAveraged__v_high_resolution_image_mask, METH_O, "\n"
+		"ImageMaskAveraged__v_high_resolution_image_mask(ImageMaskAveraged self) -> boost::shared_ptr< GeoCal::ImageMask >\n"
 		"\n"
-		"const boost::shared_ptr< ImageMask > & GeoCal::ImageMaskAveraged::high_resolution_image_mask_ptr() const\n"
 		"GeoCal::ImageMaskAveraged::high_resolution_image_mask_ptr\n"
-		"Pointer to high resolution image mask that this object is based on.\n"
+		"Pointer to high resolution image mask that this object is based on.  \n"
 		"\n"
 		""},
 	 { "ImageMaskAveraged__v_number_line_per_pixel", _wrap_ImageMaskAveraged__v_number_line_per_pixel, METH_O, "\n"
+		"ImageMaskAveraged__v_number_line_per_pixel(ImageMaskAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::ImageMaskAveraged::number_line_per_pixel() const\n"
 		"GeoCal::ImageMaskAveraged::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution ImageMatch.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"ImageMatch.  \n"
 		"\n"
 		""},
 	 { "ImageMaskAveraged__v_number_sample_per_pixel", _wrap_ImageMaskAveraged__v_number_sample_per_pixel, METH_O, "\n"
+		"ImageMaskAveraged__v_number_sample_per_pixel(ImageMaskAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::ImageMaskAveraged::number_sample_per_pixel() const\n"
 		"GeoCal::ImageMaskAveraged::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution ImageMask.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"ImageMask.  \n"
 		"\n"
 		""},
 	 { "delete_ImageMaskAveraged", _wrap_delete_ImageMaskAveraged, METH_O, "\n"
+		"delete_ImageMaskAveraged(ImageMaskAveraged self)\n"
 		"\n"
-		"virtual GeoCal::ImageMaskAveraged::~ImageMaskAveraged()\n"
 		"GeoCal::ImageMaskAveraged::~ImageMaskAveraged\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMaskAveraged_swigregister", ImageMaskAveraged_swigregister, METH_O, NULL},
 	 { "ImageMaskAveraged_swiginit", ImageMaskAveraged_swiginit, METH_VARARGS, NULL},
 	 { "new_AveragedImageGroundConnection", _wrap_new_AveragedImageGroundConnection, METH_VARARGS, "\n"
+		"AveragedImageGroundConnection(boost::shared_ptr< GeoCal::ImageGroundConnection > const Igc, int Number_line_per_pixel, int Number_sample_per_pixel, bool In_memory=False, bool Ignore_zero=False)\n"
 		"\n"
-		"AveragedImageGroundConnection::AveragedImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > Igc, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel, bool\n"
-		"In_memory=false, bool Ignore_zero=false)\n"
 		"GeoCal::AveragedImageGroundConnection::AveragedImageGroundConnection\n"
-		"Constructor for average.\n"
-		"You can specify your choice of doing the average calculation on the\n"
-		"fly, or once and kept in memory.\n"
+		"Constructor for average.  \n"
 		"\n"
-		"Note that we set the title to the empty string, you can optionally set\n"
-		"this to whatever after creating this object. \n"
+		"You can specify your choice of doing the average calculation on the fly, or once\n"
+		"and kept in memory.  \n"
+		"\n"
+		"Note that we set the title to the empty string, you can optionally set this to\n"
+		"whatever after creating this object.  \n"
+		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_original_image_ground_connection", _wrap_AveragedImageGroundConnection__v_original_image_ground_connection, METH_O, "\n"
+		"AveragedImageGroundConnection__v_original_image_ground_connection(AveragedImageGroundConnection self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > GeoCal::AveragedImageGroundConnection::original_image_ground_connection() const\n"
-		"GeoCal::AveragedImageGroundConnection::original_image_ground_connectio\n"
-		"n\n"
-		"Underlying ImageGroundConnection.\n"
+		"GeoCal::AveragedImageGroundConnection::original_image_ground_connection\n"
+		"Underlying ImageGroundConnection.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_number_line_per_pixel", _wrap_AveragedImageGroundConnection__v_number_line_per_pixel, METH_O, "\n"
+		"AveragedImageGroundConnection__v_number_line_per_pixel(AveragedImageGroundConnection self) -> int\n"
 		"\n"
-		"int GeoCal::AveragedImageGroundConnection::number_line_per_pixel() const\n"
 		"GeoCal::AveragedImageGroundConnection::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_number_sample_per_pixel", _wrap_AveragedImageGroundConnection__v_number_sample_per_pixel, METH_O, "\n"
+		"AveragedImageGroundConnection__v_number_sample_per_pixel(AveragedImageGroundConnection self) -> int\n"
 		"\n"
-		"int GeoCal::AveragedImageGroundConnection::number_sample_per_pixel() const\n"
 		"GeoCal::AveragedImageGroundConnection::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_ignore_zero", _wrap_AveragedImageGroundConnection__v_ignore_zero, METH_O, "\n"
+		"AveragedImageGroundConnection__v_ignore_zero(AveragedImageGroundConnection self) -> bool\n"
 		"\n"
-		"bool GeoCal::AveragedImageGroundConnection::ignore_zero() const\n"
 		"GeoCal::AveragedImageGroundConnection::ignore_zero\n"
-		"If true, we ignore zeros when calculating the average.\n"
+		"If true, we ignore zeros when calculating the average.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_in_memory", _wrap_AveragedImageGroundConnection__v_in_memory, METH_O, "\n"
+		"AveragedImageGroundConnection__v_in_memory(AveragedImageGroundConnection self) -> bool\n"
 		"\n"
-		"bool GeoCal::AveragedImageGroundConnection::in_memory() const\n"
 		"GeoCal::AveragedImageGroundConnection::in_memory\n"
-		"If true, calculation done once and is in memory.\n"
+		"If true, calculation done once and is in memory.  \n"
 		"\n"
 		""},
 	 { "delete_AveragedImageGroundConnection", _wrap_delete_AveragedImageGroundConnection, METH_O, "\n"
+		"delete_AveragedImageGroundConnection(AveragedImageGroundConnection self)\n"
 		"\n"
-		"virtual GeoCal::AveragedImageGroundConnection::~AveragedImageGroundConnection()\n"
 		"GeoCal::AveragedImageGroundConnection::~AveragedImageGroundConnection\n"
 		""},
 	 { "AveragedImageGroundConnection_swigregister", AveragedImageGroundConnection_swigregister, METH_O, NULL},
@@ -8243,212 +8240,209 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RasterAveraged", _wrap_new_RasterAveraged, METH_VARARGS, "\n"
+		"RasterAveraged(boost::shared_ptr< GeoCal::RasterImage > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel, bool Ignore_zero=False)\n"
 		"\n"
-		"RasterAveraged::RasterAveraged(const boost::shared_ptr< RasterImage > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel, bool\n"
-		"Ignore_zero=false)\n"
 		"GeoCal::RasterAveraged::RasterAveraged\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_high_resolution_image", _wrap_RasterAveraged__v_high_resolution_image, METH_O, "\n"
+		"_v_high_resolution_image(RasterAveraged self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::RasterAveraged::high_resolution_image_ptr() const\n"
 		"GeoCal::RasterAveraged::high_resolution_image_ptr\n"
-		"Pointer to high resolution image that this object is based on.\n"
+		"Pointer to high resolution image that this object is based on.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_number_line_per_pixel", _wrap_RasterAveraged__v_number_line_per_pixel, METH_O, "\n"
+		"_v_number_line_per_pixel(RasterAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveraged::number_line_per_pixel() const\n"
 		"GeoCal::RasterAveraged::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_number_sample_per_pixel", _wrap_RasterAveraged__v_number_sample_per_pixel, METH_O, "\n"
+		"_v_number_sample_per_pixel(RasterAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveraged::number_sample_per_pixel() const\n"
 		"GeoCal::RasterAveraged::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged__v_ignore_zero", _wrap_RasterAveraged__v_ignore_zero, METH_O, "\n"
+		"_v_ignore_zero(RasterAveraged self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterAveraged::ignore_zero() const\n"
 		"GeoCal::RasterAveraged::ignore_zero\n"
-		"If true, we ignore zeros when calculating the average.\n"
+		"If true, we ignore zeros when calculating the average.  \n"
 		"\n"
 		""},
 	 { "delete_RasterAveraged", _wrap_delete_RasterAveraged, METH_O, "\n"
+		"delete_RasterAveraged(RasterAveraged self)\n"
 		"\n"
-		"virtual GeoCal::RasterAveraged::~RasterAveraged()\n"
 		"GeoCal::RasterAveraged::~RasterAveraged\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveraged_swigregister", RasterAveraged_swigregister, METH_O, NULL},
 	 { "RasterAveraged_swiginit", RasterAveraged_swiginit, METH_VARARGS, NULL},
 	 { "new_RasterAveragedMultiBand", _wrap_new_RasterAveragedMultiBand, METH_VARARGS, "\n"
+		"RasterAveragedMultiBand(boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel, bool Ignore_zero=False)\n"
 		"\n"
-		"RasterAveragedMultiBand::RasterAveragedMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel, bool\n"
-		"Ignore_zero=false)\n"
 		"GeoCal::RasterAveragedMultiBand::RasterAveragedMultiBand\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_high_resolution_image", _wrap_RasterAveragedMultiBand__v_high_resolution_image, METH_O, "\n"
+		"_v_high_resolution_image(RasterAveragedMultiBand self) -> boost::shared_ptr< GeoCal::RasterImageMultiBand >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImageMultiBand > & GeoCal::RasterAveragedMultiBand::high_resolution_image_ptr() const\n"
 		"GeoCal::RasterAveragedMultiBand::high_resolution_image_ptr\n"
-		"Pointer to high resolution image that this object is based on.\n"
+		"Pointer to high resolution image that this object is based on.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_number_line_per_pixel", _wrap_RasterAveragedMultiBand__v_number_line_per_pixel, METH_O, "\n"
+		"_v_number_line_per_pixel(RasterAveragedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveragedMultiBand::number_line_per_pixel() const\n"
 		"GeoCal::RasterAveragedMultiBand::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_number_sample_per_pixel", _wrap_RasterAveragedMultiBand__v_number_sample_per_pixel, METH_O, "\n"
+		"_v_number_sample_per_pixel(RasterAveragedMultiBand self) -> int\n"
 		"\n"
-		"int GeoCal::RasterAveragedMultiBand::number_sample_per_pixel() const\n"
 		"GeoCal::RasterAveragedMultiBand::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand__v_ignore_zero", _wrap_RasterAveragedMultiBand__v_ignore_zero, METH_O, "\n"
+		"_v_ignore_zero(RasterAveragedMultiBand self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterAveragedMultiBand::ignore_zero() const\n"
 		"GeoCal::RasterAveragedMultiBand::ignore_zero\n"
-		"If true, we ignore zeros when calculating the average.\n"
+		"If true, we ignore zeros when calculating the average.  \n"
 		"\n"
 		""},
 	 { "delete_RasterAveragedMultiBand", _wrap_delete_RasterAveragedMultiBand, METH_O, "\n"
+		"delete_RasterAveragedMultiBand(RasterAveragedMultiBand self)\n"
 		"\n"
-		"virtual GeoCal::RasterAveragedMultiBand::~RasterAveragedMultiBand()\n"
 		"GeoCal::RasterAveragedMultiBand::~RasterAveragedMultiBand\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "RasterAveragedMultiBand_swigregister", RasterAveragedMultiBand_swigregister, METH_O, NULL},
 	 { "RasterAveragedMultiBand_swiginit", RasterAveragedMultiBand_swiginit, METH_VARARGS, NULL},
 	 { "new_ImageMaskAveraged", _wrap_new_ImageMaskAveraged, METH_VARARGS, "\n"
+		"new_ImageMaskAveraged(boost::shared_ptr< GeoCal::ImageMask > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel) -> ImageMaskAveraged\n"
 		"\n"
-		"GeoCal::ImageMaskAveraged::ImageMaskAveraged(const boost::shared_ptr< ImageMask > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel)\n"
 		"GeoCal::ImageMaskAveraged::ImageMaskAveraged\n"
 		""},
 	 { "ImageMaskAveraged__v_high_resolution_image_mask", _wrap_ImageMaskAveraged__v_high_resolution_image_mask, METH_O, "\n"
+		"_v_high_resolution_image_mask(ImageMaskAveraged self) -> boost::shared_ptr< GeoCal::ImageMask >\n"
 		"\n"
-		"const boost::shared_ptr< ImageMask > & GeoCal::ImageMaskAveraged::high_resolution_image_mask_ptr() const\n"
 		"GeoCal::ImageMaskAveraged::high_resolution_image_mask_ptr\n"
-		"Pointer to high resolution image mask that this object is based on.\n"
+		"Pointer to high resolution image mask that this object is based on.  \n"
 		"\n"
 		""},
 	 { "ImageMaskAveraged__v_number_line_per_pixel", _wrap_ImageMaskAveraged__v_number_line_per_pixel, METH_O, "\n"
+		"_v_number_line_per_pixel(ImageMaskAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::ImageMaskAveraged::number_line_per_pixel() const\n"
 		"GeoCal::ImageMaskAveraged::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution ImageMatch.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"ImageMatch.  \n"
 		"\n"
 		""},
 	 { "ImageMaskAveraged__v_number_sample_per_pixel", _wrap_ImageMaskAveraged__v_number_sample_per_pixel, METH_O, "\n"
+		"_v_number_sample_per_pixel(ImageMaskAveraged self) -> int\n"
 		"\n"
-		"int GeoCal::ImageMaskAveraged::number_sample_per_pixel() const\n"
 		"GeoCal::ImageMaskAveraged::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution ImageMask.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"ImageMask.  \n"
 		"\n"
 		""},
 	 { "delete_ImageMaskAveraged", _wrap_delete_ImageMaskAveraged, METH_O, "\n"
+		"delete_ImageMaskAveraged(ImageMaskAveraged self)\n"
 		"\n"
-		"virtual GeoCal::ImageMaskAveraged::~ImageMaskAveraged()\n"
 		"GeoCal::ImageMaskAveraged::~ImageMaskAveraged\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMaskAveraged_swigregister", ImageMaskAveraged_swigregister, METH_O, NULL},
 	 { "ImageMaskAveraged_swiginit", ImageMaskAveraged_swiginit, METH_VARARGS, NULL},
 	 { "new_AveragedImageGroundConnection", _wrap_new_AveragedImageGroundConnection, METH_VARARGS, "\n"
+		"AveragedImageGroundConnection(boost::shared_ptr< GeoCal::ImageGroundConnection > const Igc, int Number_line_per_pixel, int Number_sample_per_pixel, bool In_memory=False, bool Ignore_zero=False)\n"
 		"\n"
-		"AveragedImageGroundConnection::AveragedImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > Igc, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel, bool\n"
-		"In_memory=false, bool Ignore_zero=false)\n"
 		"GeoCal::AveragedImageGroundConnection::AveragedImageGroundConnection\n"
-		"Constructor for average.\n"
-		"You can specify your choice of doing the average calculation on the\n"
-		"fly, or once and kept in memory.\n"
+		"Constructor for average.  \n"
 		"\n"
-		"Note that we set the title to the empty string, you can optionally set\n"
-		"this to whatever after creating this object. \n"
+		"You can specify your choice of doing the average calculation on the fly, or once\n"
+		"and kept in memory.  \n"
+		"\n"
+		"Note that we set the title to the empty string, you can optionally set this to\n"
+		"whatever after creating this object.  \n"
+		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_original_image_ground_connection", _wrap_AveragedImageGroundConnection__v_original_image_ground_connection, METH_O, "\n"
+		"_v_original_image_ground_connection(AveragedImageGroundConnection self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"boost::shared_ptr< ImageGroundConnection > GeoCal::AveragedImageGroundConnection::original_image_ground_connection() const\n"
-		"GeoCal::AveragedImageGroundConnection::original_image_ground_connectio\n"
-		"n\n"
-		"Underlying ImageGroundConnection.\n"
+		"GeoCal::AveragedImageGroundConnection::original_image_ground_connection\n"
+		"Underlying ImageGroundConnection.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_number_line_per_pixel", _wrap_AveragedImageGroundConnection__v_number_line_per_pixel, METH_O, "\n"
+		"_v_number_line_per_pixel(AveragedImageGroundConnection self) -> int\n"
 		"\n"
-		"int GeoCal::AveragedImageGroundConnection::number_line_per_pixel() const\n"
 		"GeoCal::AveragedImageGroundConnection::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_number_sample_per_pixel", _wrap_AveragedImageGroundConnection__v_number_sample_per_pixel, METH_O, "\n"
+		"_v_number_sample_per_pixel(AveragedImageGroundConnection self) -> int\n"
 		"\n"
-		"int GeoCal::AveragedImageGroundConnection::number_sample_per_pixel() const\n"
 		"GeoCal::AveragedImageGroundConnection::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_ignore_zero", _wrap_AveragedImageGroundConnection__v_ignore_zero, METH_O, "\n"
+		"_v_ignore_zero(AveragedImageGroundConnection self) -> bool\n"
 		"\n"
-		"bool GeoCal::AveragedImageGroundConnection::ignore_zero() const\n"
 		"GeoCal::AveragedImageGroundConnection::ignore_zero\n"
-		"If true, we ignore zeros when calculating the average.\n"
+		"If true, we ignore zeros when calculating the average.  \n"
 		"\n"
 		""},
 	 { "AveragedImageGroundConnection__v_in_memory", _wrap_AveragedImageGroundConnection__v_in_memory, METH_O, "\n"
+		"_v_in_memory(AveragedImageGroundConnection self) -> bool\n"
 		"\n"
-		"bool GeoCal::AveragedImageGroundConnection::in_memory() const\n"
 		"GeoCal::AveragedImageGroundConnection::in_memory\n"
-		"If true, calculation done once and is in memory.\n"
+		"If true, calculation done once and is in memory.  \n"
 		"\n"
 		""},
 	 { "delete_AveragedImageGroundConnection", _wrap_delete_AveragedImageGroundConnection, METH_O, "\n"
+		"delete_AveragedImageGroundConnection(AveragedImageGroundConnection self)\n"
 		"\n"
-		"virtual GeoCal::AveragedImageGroundConnection::~AveragedImageGroundConnection()\n"
 		"GeoCal::AveragedImageGroundConnection::~AveragedImageGroundConnection\n"
 		""},
 	 { "AveragedImageGroundConnection_swigregister", AveragedImageGroundConnection_swigregister, METH_O, NULL},

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _image_mask_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _image_mask_image:
 _image_mask_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _image_mask_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,26 +143,31 @@ import geocal_swig.geocal_exception
 class ImageMaskImage(geocal_swig.image_mask.ImageMask):
     r"""
 
-    This provides a ImageMask where the underlying data is a RasterImage.
 
-    C++ includes: image_mask_image.h 
+    This provides a ImageMask where the underlying data is a RasterImage.  
+
+    C++ includes: image_mask_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     OUTSIDE_MASKED = _image_mask_image.ImageMaskImage_OUTSIDE_MASKED
+    
     OUTSIDE_NOT_MASKED = _image_mask_image.ImageMaskImage_OUTSIDE_NOT_MASKED
+    
     OUTSIDE_ERROR = _image_mask_image.ImageMaskImage_OUTSIDE_ERROR
+    
 
     def __init__(self, *args):
         r"""
+        __init__(ImageMaskImage self, boost::shared_ptr< GeoCal::RasterImage > Img, int Mask_value=0, GeoCal::ImageMaskImage::OutsideHandling Handling=OUTSIDE_MASKED) -> ImageMaskImage
 
-        GeoCal::ImageMaskImage::ImageMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0,
-        OutsideHandling Handling=OUTSIDE_MASKED)
         GeoCal::ImageMaskImage::ImageMaskImage
-        Constructor.
-        Values outside of the Image may or may not want to be marked as
-        masked. 
+        Constructor.  
+
+        Values outside of the Image may or may not want to be marked as masked.  
+
         """
         _image_mask_image.ImageMaskImage_swiginit(self, _image_mask_image.new_ImageMaskImage(*args))
     unmasked_bounding_box = _swig_new_instance_method(_image_mask_image.ImageMaskImage_unmasked_bounding_box)

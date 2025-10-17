@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _planet_coordinate.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _planet_coordinate:
 _planet_coordinate.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _planet_coordinate.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,20 +146,26 @@ import geocal_swig.with_parameter
 class PlanetConstant(object):
     r"""
 
-    Constants for a planet.
 
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
+    Constants for a planet.  
 
-    C++ includes: planet_coordinate.h 
+    Note that "Planet" also includes "Moon of planet", basically anything with a
+    NAIF_CODE  
+
+    C++ includes: planet_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     MARS_NAIF_CODE = _planet_coordinate.PlanetConstant_MARS_NAIF_CODE
+    
     EUROPA_NAIF_CODE = _planet_coordinate.PlanetConstant_EUROPA_NAIF_CODE
+    
     CERES_NAIF_CODE = _planet_coordinate.PlanetConstant_CERES_NAIF_CODE
+    
     MOON_NAIF_CODE = _planet_coordinate.PlanetConstant_MOON_NAIF_CODE
+    
     a = _swig_new_static_method(_planet_coordinate.PlanetConstant_a)
     b = _swig_new_static_method(_planet_coordinate.PlanetConstant_b)
     esq = _swig_new_static_method(_planet_coordinate.PlanetConstant_esq)
@@ -165,6 +174,7 @@ class PlanetConstant(object):
     name = _swig_new_static_method(_planet_coordinate.PlanetConstant_name)
 
     def __init__(self):
+        r"""__init__(PlanetConstant self) -> PlanetConstant"""
         _planet_coordinate.PlanetConstant_swiginit(self, _planet_coordinate.new_PlanetConstant())
     __swig_destroy__ = _planet_coordinate.delete_PlanetConstant
 
@@ -173,12 +183,14 @@ _planet_coordinate.PlanetConstant_swigregister(PlanetConstant)
 class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
     r"""
 
-    This is a ground coordinate, expressed in fixed Planet coordinates.
 
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
+    This is a ground coordinate, expressed in fixed Planet coordinates.  
 
-    C++ includes: planet_coordinate.h 
+    Note that "Planet" also includes "Moon of planet", basically anything with a
+    NAIF_CODE  
+
+    C++ includes: planet_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -186,10 +198,13 @@ class PlanetFixed(geocal_swig.ground_coordinate.CartesianFixed):
 
     def __init__(self, *args):
         r"""
+        __init__(PlanetFixed self, GroundCoordinate Gc) -> PlanetFixed
+        __init__(PlanetFixed self, double X, double Y, double Z, int NAIF_CODE) -> PlanetFixed
+        __init__(PlanetFixed self, Array_double_3 Pos, int NAIF_CODE) -> PlanetFixed
+        __init__(PlanetFixed self, int NAIF_CODE=-1) -> PlanetFixed
 
-        GeoCal::PlanetFixed::PlanetFixed(int Naif_code=-1)
         GeoCal::PlanetFixed::PlanetFixed
-        Default constructor.
+        Default constructor.  
 
         """
         _planet_coordinate.PlanetFixed_swiginit(self, _planet_coordinate.new_PlanetFixed(*args))
@@ -217,17 +232,19 @@ _planet_coordinate.PlanetFixed_swigregister(PlanetFixed)
 class Planetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     r"""
 
-    This is Planet coordinates as Planetocentric latitude, longitude, and
-    height above the reference ellipsoid.
 
-    This is the planet equivalent of Geocentric ( not Geodetic). Height is
-    relative to the ellipsoid, but latitude is relative to center of
-    planet rather than normal of ellipsoid.
+    This is Planet coordinates as Planetocentric latitude, longitude, and height
+    above the reference ellipsoid.  
 
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
+    This is the planet equivalent of Geocentric (*not* Geodetic). Height is relative
+    to the ellipsoid, but latitude is relative to center of planet rather than
+    normal of ellipsoid.  
 
-    C++ includes: planet_coordinate.h 
+    Note that "Planet" also includes "Moon of planet", basically anything with a
+    NAIF_CODE  
+
+    C++ includes: planet_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -235,10 +252,12 @@ class Planetocentric(geocal_swig.ground_coordinate.GroundCoordinate):
 
     def __init__(self, *args):
         r"""
+        __init__(Planetocentric self, GroundCoordinate Gc) -> Planetocentric
+        __init__(Planetocentric self, double Latitude, double Longitude, double Height_ellipsoid, int Naif_code) -> Planetocentric
+        __init__(Planetocentric self, int Naif_code=-1) -> Planetocentric
 
-        GeoCal::Planetocentric::Planetocentric(int Naif_code=-1)
         GeoCal::Planetocentric::Planetocentric
-        Default constructor.
+        Default constructor.  
 
         """
         _planet_coordinate.Planetocentric_swiginit(self, _planet_coordinate.new_Planetocentric(*args))
@@ -278,12 +297,14 @@ _planet_coordinate.Planetocentric_swigregister(Planetocentric)
 class PlanetInertial(geocal_swig.ground_coordinate.CartesianInertial):
     r"""
 
-    This is a Planet Intertial coordinate.
 
-    Note that "Planet" also includes "Moon of planet", basically
-    anything with a NAIF_CODE
+    This is a Planet Intertial coordinate.  
 
-    C++ includes: planet_coordinate.h 
+    Note that "Planet" also includes "Moon of planet", basically anything with a
+    NAIF_CODE  
+
+    C++ includes: planet_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -291,10 +312,12 @@ class PlanetInertial(geocal_swig.ground_coordinate.CartesianInertial):
 
     def __init__(self, *args):
         r"""
+        __init__(PlanetInertial self, int Naif_code=-1) -> PlanetInertial
+        __init__(PlanetInertial self, double X, double Y, double Z, int Naif_code) -> PlanetInertial
+        __init__(PlanetInertial self, Array_double_3 Pos, int Naif_code) -> PlanetInertial
 
-        GeoCal::PlanetInertial::PlanetInertial(int Naif_code=-1)
         GeoCal::PlanetInertial::PlanetInertial
-        Default constructor, doesn't initialize position.
+        Default constructor, doesn't initialize position.  
 
         """
         _planet_coordinate.PlanetInertial_swiginit(self, _planet_coordinate.new_PlanetInertial(*args))
@@ -314,9 +337,11 @@ _planet_coordinate.PlanetInertial_swigregister(PlanetInertial)
 class PlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConverter):
     r"""
 
-    CoordinateConverter that goes to and from Planetocentric coordinates.
 
-    C++ includes: planet_coordinate.h 
+    CoordinateConverter that goes to and from Planetocentric coordinates.  
+
+    C++ includes: planet_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -324,10 +349,10 @@ class PlanetocentricConverter(geocal_swig.coordinate_converter.CoordinateConvert
 
     def __init__(self, Naif_code=-1):
         r"""
+        __init__(PlanetocentricConverter self, int Naif_code=-1) -> PlanetocentricConverter
 
-        GeoCal::PlanetocentricConverter::PlanetocentricConverter(int Naif_code=-1)
         GeoCal::PlanetocentricConverter::PlanetocentricConverter
-        Constructor.
+        Constructor.  
 
         """
         _planet_coordinate.PlanetocentricConverter_swiginit(self, _planet_coordinate.new_PlanetocentricConverter(Naif_code))
@@ -348,6 +373,7 @@ _planet_coordinate.PlanetocentricConverter_swigregister(PlanetocentricConverter)
 class PlanetSimpleDem(geocal_swig.dem.Dem):
     r"""
 
+
     C++ includes: planet_coordinate.h
 
     """
@@ -357,10 +383,11 @@ class PlanetSimpleDem(geocal_swig.dem.Dem):
 
     def __init__(self, *args):
         r"""
+        __init__(PlanetSimpleDem self, double H, int Naif_code) -> PlanetSimpleDem
+        __init__(PlanetSimpleDem self, int Naif_code=-1) -> PlanetSimpleDem
 
-        GeoCal::PlanetSimpleDem::PlanetSimpleDem(int Naif_code=-1)
         GeoCal::PlanetSimpleDem::PlanetSimpleDem
-        Default constructor.
+        Default constructor.  
 
         """
         _planet_coordinate.PlanetSimpleDem_swiginit(self, _planet_coordinate.new_PlanetSimpleDem(*args))

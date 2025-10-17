@@ -7899,74 +7899,74 @@ SWIGINTERN PyObject *IgcSimulated_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcSimulated", _wrap_new_IgcSimulated, METH_VARARGS, "\n"
+		"IgcSimulated(boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::RasterImage > const & Map_projected_image, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcSimulated::IgcSimulated(const boost::shared_ptr< ImageGroundConnection > &Igc, const\n"
-		"boost::shared_ptr< RasterImage > &Map_projected_image, int\n"
-		"Avg_fact=-1, bool Read_into_memory=true, int Number_tile_line=-1, int\n"
-		"Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"GeoCal::IgcSimulated::IgcSimulated\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "IgcSimulated__v_number_line", _wrap_IgcSimulated__v_number_line, METH_O, NULL},
-	 { "IgcSimulated__v_number_sample", _wrap_IgcSimulated__v_number_sample, METH_O, NULL},
-	 { "IgcSimulated__v_number_tile_line", _wrap_IgcSimulated__v_number_tile_line, METH_O, NULL},
-	 { "IgcSimulated__v_number_tile_sample", _wrap_IgcSimulated__v_number_tile_sample, METH_O, NULL},
-	 { "IgcSimulated__v_has_map_info", _wrap_IgcSimulated__v_has_map_info, METH_O, NULL},
-	 { "IgcSimulated__v_map_info", _wrap_IgcSimulated__v_map_info, METH_O, NULL},
-	 { "IgcSimulated__v_grid_center_line_resolution", _wrap_IgcSimulated__v_grid_center_line_resolution, METH_O, NULL},
-	 { "IgcSimulated__v_grid_center_sample_resolution", _wrap_IgcSimulated__v_grid_center_sample_resolution, METH_O, NULL},
-	 { "IgcSimulated__v_has_rpc", _wrap_IgcSimulated__v_has_rpc, METH_O, NULL},
-	 { "IgcSimulated__v_rpc", _wrap_IgcSimulated__v_rpc, METH_O, NULL},
-	 { "IgcSimulated__v_has_rsm", _wrap_IgcSimulated__v_has_rsm, METH_O, NULL},
-	 { "IgcSimulated__v_rsm", _wrap_IgcSimulated__v_rsm, METH_O, NULL},
+	 { "IgcSimulated__v_number_line", _wrap_IgcSimulated__v_number_line, METH_O, "IgcSimulated__v_number_line(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_number_sample", _wrap_IgcSimulated__v_number_sample, METH_O, "IgcSimulated__v_number_sample(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_number_tile_line", _wrap_IgcSimulated__v_number_tile_line, METH_O, "IgcSimulated__v_number_tile_line(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_number_tile_sample", _wrap_IgcSimulated__v_number_tile_sample, METH_O, "IgcSimulated__v_number_tile_sample(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_has_map_info", _wrap_IgcSimulated__v_has_map_info, METH_O, "IgcSimulated__v_has_map_info(IgcSimulated self) -> bool"},
+	 { "IgcSimulated__v_map_info", _wrap_IgcSimulated__v_map_info, METH_O, "IgcSimulated__v_map_info(IgcSimulated self) -> MapInfo"},
+	 { "IgcSimulated__v_grid_center_line_resolution", _wrap_IgcSimulated__v_grid_center_line_resolution, METH_O, "IgcSimulated__v_grid_center_line_resolution(IgcSimulated self) -> double"},
+	 { "IgcSimulated__v_grid_center_sample_resolution", _wrap_IgcSimulated__v_grid_center_sample_resolution, METH_O, "IgcSimulated__v_grid_center_sample_resolution(IgcSimulated self) -> double"},
+	 { "IgcSimulated__v_has_rpc", _wrap_IgcSimulated__v_has_rpc, METH_O, "IgcSimulated__v_has_rpc(IgcSimulated self) -> bool"},
+	 { "IgcSimulated__v_rpc", _wrap_IgcSimulated__v_rpc, METH_O, "IgcSimulated__v_rpc(IgcSimulated self) -> boost::shared_ptr< GeoCal::Rpc >"},
+	 { "IgcSimulated__v_has_rsm", _wrap_IgcSimulated__v_has_rsm, METH_O, "IgcSimulated__v_has_rsm(IgcSimulated self) -> bool"},
+	 { "IgcSimulated__v_rsm", _wrap_IgcSimulated__v_rsm, METH_O, "IgcSimulated__v_rsm(IgcSimulated self) -> boost::shared_ptr< GeoCal::Rsm >"},
 	 { "IgcSimulated__v_igc", _wrap_IgcSimulated__v_igc, METH_O, "\n"
+		"IgcSimulated__v_igc(IgcSimulated self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcSimulated::igc() const\n"
 		"GeoCal::IgcSimulated::igc\n"
 		""},
 	 { "IgcSimulated__v_avg_factor", _wrap_IgcSimulated__v_avg_factor, METH_O, "\n"
+		"IgcSimulated__v_avg_factor(IgcSimulated self) -> int\n"
 		"\n"
-		"int GeoCal::IgcSimulated::avg_factor() const\n"
 		"GeoCal::IgcSimulated::avg_factor\n"
 		""},
 	 { "IgcSimulated__v_fill_value", _wrap_IgcSimulated__v_fill_value, METH_O, "\n"
+		"IgcSimulated__v_fill_value(IgcSimulated self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulated::fill_value() const\n"
 		"GeoCal::IgcSimulated::fill_value\n"
 		""},
 	 { "IgcSimulated__v_read_into_memory", _wrap_IgcSimulated__v_read_into_memory, METH_O, "\n"
+		"IgcSimulated__v_read_into_memory(IgcSimulated self) -> bool\n"
 		"\n"
-		"bool GeoCal::IgcSimulated::read_into_memory() const\n"
 		"GeoCal::IgcSimulated::read_into_memory\n"
 		""},
 	 { "IgcSimulated__v_map_projected_image", _wrap_IgcSimulated__v_map_projected_image, METH_O, "\n"
+		"IgcSimulated__v_map_projected_image(IgcSimulated self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::IgcSimulated::map_projected_image() const\n"
 		"GeoCal::IgcSimulated::map_projected_image\n"
 		""},
 	 { "delete_IgcSimulated", _wrap_delete_IgcSimulated, METH_O, "\n"
+		"delete_IgcSimulated(IgcSimulated self)\n"
 		"\n"
-		"virtual GeoCal::IgcSimulated::~IgcSimulated()\n"
 		"GeoCal::IgcSimulated::~IgcSimulated\n"
 		""},
 	 { "IgcSimulated_swigregister", IgcSimulated_swigregister, METH_O, NULL},
@@ -7977,74 +7977,74 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_IgcSimulated", _wrap_new_IgcSimulated, METH_VARARGS, "\n"
+		"IgcSimulated(boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc, boost::shared_ptr< GeoCal::RasterImage > const & Map_projected_image, int Avg_fact=-1, bool Read_into_memory=True, int Number_tile_line=-1, int Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"\n"
-		"IgcSimulated::IgcSimulated(const boost::shared_ptr< ImageGroundConnection > &Igc, const\n"
-		"boost::shared_ptr< RasterImage > &Map_projected_image, int\n"
-		"Avg_fact=-1, bool Read_into_memory=true, int Number_tile_line=-1, int\n"
-		"Number_tile_sample=-1, double Fill_value=0.0)\n"
 		"GeoCal::IgcSimulated::IgcSimulated\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
-	 { "IgcSimulated__v_number_line", _wrap_IgcSimulated__v_number_line, METH_O, NULL},
-	 { "IgcSimulated__v_number_sample", _wrap_IgcSimulated__v_number_sample, METH_O, NULL},
-	 { "IgcSimulated__v_number_tile_line", _wrap_IgcSimulated__v_number_tile_line, METH_O, NULL},
-	 { "IgcSimulated__v_number_tile_sample", _wrap_IgcSimulated__v_number_tile_sample, METH_O, NULL},
-	 { "IgcSimulated__v_has_map_info", _wrap_IgcSimulated__v_has_map_info, METH_O, NULL},
-	 { "IgcSimulated__v_map_info", _wrap_IgcSimulated__v_map_info, METH_O, NULL},
-	 { "IgcSimulated__v_grid_center_line_resolution", _wrap_IgcSimulated__v_grid_center_line_resolution, METH_O, NULL},
-	 { "IgcSimulated__v_grid_center_sample_resolution", _wrap_IgcSimulated__v_grid_center_sample_resolution, METH_O, NULL},
-	 { "IgcSimulated__v_has_rpc", _wrap_IgcSimulated__v_has_rpc, METH_O, NULL},
-	 { "IgcSimulated__v_rpc", _wrap_IgcSimulated__v_rpc, METH_O, NULL},
-	 { "IgcSimulated__v_has_rsm", _wrap_IgcSimulated__v_has_rsm, METH_O, NULL},
-	 { "IgcSimulated__v_rsm", _wrap_IgcSimulated__v_rsm, METH_O, NULL},
+	 { "IgcSimulated__v_number_line", _wrap_IgcSimulated__v_number_line, METH_O, "_v_number_line(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_number_sample", _wrap_IgcSimulated__v_number_sample, METH_O, "_v_number_sample(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_number_tile_line", _wrap_IgcSimulated__v_number_tile_line, METH_O, "_v_number_tile_line(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_number_tile_sample", _wrap_IgcSimulated__v_number_tile_sample, METH_O, "_v_number_tile_sample(IgcSimulated self) -> int"},
+	 { "IgcSimulated__v_has_map_info", _wrap_IgcSimulated__v_has_map_info, METH_O, "_v_has_map_info(IgcSimulated self) -> bool"},
+	 { "IgcSimulated__v_map_info", _wrap_IgcSimulated__v_map_info, METH_O, "_v_map_info(IgcSimulated self) -> MapInfo"},
+	 { "IgcSimulated__v_grid_center_line_resolution", _wrap_IgcSimulated__v_grid_center_line_resolution, METH_O, "_v_grid_center_line_resolution(IgcSimulated self) -> double"},
+	 { "IgcSimulated__v_grid_center_sample_resolution", _wrap_IgcSimulated__v_grid_center_sample_resolution, METH_O, "_v_grid_center_sample_resolution(IgcSimulated self) -> double"},
+	 { "IgcSimulated__v_has_rpc", _wrap_IgcSimulated__v_has_rpc, METH_O, "_v_has_rpc(IgcSimulated self) -> bool"},
+	 { "IgcSimulated__v_rpc", _wrap_IgcSimulated__v_rpc, METH_O, "_v_rpc(IgcSimulated self) -> boost::shared_ptr< GeoCal::Rpc >"},
+	 { "IgcSimulated__v_has_rsm", _wrap_IgcSimulated__v_has_rsm, METH_O, "_v_has_rsm(IgcSimulated self) -> bool"},
+	 { "IgcSimulated__v_rsm", _wrap_IgcSimulated__v_rsm, METH_O, "_v_rsm(IgcSimulated self) -> boost::shared_ptr< GeoCal::Rsm >"},
 	 { "IgcSimulated__v_igc", _wrap_IgcSimulated__v_igc, METH_O, "\n"
+		"_v_igc(IgcSimulated self) -> boost::shared_ptr< GeoCal::ImageGroundConnection >\n"
 		"\n"
-		"const boost::shared_ptr< ImageGroundConnection > & GeoCal::IgcSimulated::igc() const\n"
 		"GeoCal::IgcSimulated::igc\n"
 		""},
 	 { "IgcSimulated__v_avg_factor", _wrap_IgcSimulated__v_avg_factor, METH_O, "\n"
+		"_v_avg_factor(IgcSimulated self) -> int\n"
 		"\n"
-		"int GeoCal::IgcSimulated::avg_factor() const\n"
 		"GeoCal::IgcSimulated::avg_factor\n"
 		""},
 	 { "IgcSimulated__v_fill_value", _wrap_IgcSimulated__v_fill_value, METH_O, "\n"
+		"_v_fill_value(IgcSimulated self) -> double\n"
 		"\n"
-		"double GeoCal::IgcSimulated::fill_value() const\n"
 		"GeoCal::IgcSimulated::fill_value\n"
 		""},
 	 { "IgcSimulated__v_read_into_memory", _wrap_IgcSimulated__v_read_into_memory, METH_O, "\n"
+		"_v_read_into_memory(IgcSimulated self) -> bool\n"
 		"\n"
-		"bool GeoCal::IgcSimulated::read_into_memory() const\n"
 		"GeoCal::IgcSimulated::read_into_memory\n"
 		""},
 	 { "IgcSimulated__v_map_projected_image", _wrap_IgcSimulated__v_map_projected_image, METH_O, "\n"
+		"_v_map_projected_image(IgcSimulated self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::IgcSimulated::map_projected_image() const\n"
 		"GeoCal::IgcSimulated::map_projected_image\n"
 		""},
 	 { "delete_IgcSimulated", _wrap_delete_IgcSimulated, METH_O, "\n"
+		"delete_IgcSimulated(IgcSimulated self)\n"
 		"\n"
-		"virtual GeoCal::IgcSimulated::~IgcSimulated()\n"
 		"GeoCal::IgcSimulated::~IgcSimulated\n"
 		""},
 	 { "IgcSimulated_swigregister", IgcSimulated_swigregister, METH_O, NULL},

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _copernicus_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _copernicus_dem:
 _copernicus_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _copernicus_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -145,12 +148,14 @@ import geocal_swig.geocal_exception
 class CopernicusDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
-    This is used the read the Copernicus data.
 
-    This gets used by CopernicusDem. Although you can use this class
-    directly, generally uou'll use this through CopernicusDem class.
+    This is used the read the Copernicus data.  
 
-    C++ includes: copernicus_dem.h 
+    This gets used by CopernicusDem. Although you can use this class directly,
+    generally uou'll use this through CopernicusDem class.  
+
+    C++ includes: copernicus_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -158,27 +163,24 @@ class CopernicusDemData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
         r"""
+        __init__(CopernicusDemData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4) -> CopernicusDemData
 
-        CopernicusDemData::CopernicusDemData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4)
         GeoCal::CopernicusDemData::CopernicusDemData
-        Constructor.
-        You can provide the directory to look for Copernicus DEM data, or if
-        you leave this blank we use the value of environment variable
-        AFIDS_COPERNICUS_DEM.
+        Constructor.  
 
-        The Copernicus doesn't cover the whole globe. If you ask for a point
-        outside of the area this can either be treated as an error, or
-        alternatively you can return a value of 0 instead. This is controlled
-        by No_coverage_is_error.
+        You can provide the directory to look for Copernicus DEM data, or if you leave
+        this blank we use the value of environment variable AFIDS_COPERNICUS_DEM.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The Copernicus doesn't cover the whole globe. If you ask for a point outside of
+        the area this can either be treated as an error, or alternatively you can return
+        a value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _copernicus_dem.CopernicusDemData_swiginit(self, _copernicus_dem.new_CopernicusDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
@@ -196,72 +198,78 @@ _copernicus_dem.CopernicusDemData_swigregister(CopernicusDemData)
 class CopernicusLwmData(geocal_swig.cart_lab_multifile.GdalCartLabMultifile):
     r"""
 
-    This is used the read the Copernicus LWM data.
 
-    0=land; 1=Ocean; 2=Minimum Lake Drought (from "GSW Transitions" or
-    original COPLWM); 3=Additional to achieve Full COPLWM Lake extension;
-    4=Minimum River Drought (from "GSW Transitions" or original COPLWM);
-    5=Additional to achieve Full COPLWM River extension; 6=Additional
-    "GSW Transitions" Permanent lake/water extension 7=Additional "GSW
-    Transitions" Mostly Permanent lake/Water extension 8=Additional "GSW
-    Transitions" Seasonal Flood extensions 9=Additional "GSW
-    Transitions" Ephemeral/Rare Flood extensions
+    This is used the read the Copernicus LWM data.  
+
+    0=land; 1=Ocean; 2=Minimum Lake Drought (from "GSW Transitions" or original
+    COPLWM); 3=Additional to achieve Full COPLWM Lake extension; 4=Minimum River
+    Drought (from "GSW Transitions" or original COPLWM); 5=Additional to achieve
+    Full COPLWM River extension; 6=Additional "GSW Transitions" Permanent
+    lake/water extension 7=Additional "GSW Transitions" Mostly Permanent
+    lake/Water extension 8=Additional "GSW Transitions" Seasonal Flood extensions
+    9=Additional "GSW Transitions" Ephemeral/Rare Flood extensions  
 
     Histogram Stretch to exactly match the original COPLWM (0-3;
-    land/ocean/lake/river):
+    land/ocean/lake/river):  
 
     stretch LWM-to-Original
-    table=(0,0.,1,1.,2,2.,3,2.,4,3.,5,3.,6,0.,7,0.,8,0.,9,0.)
+    table=(0,0.,1,1.,2,2.,3,2.,4,3.,5,3.,6,0.,7,0.,8,0.,9,0.)  
 
-    Histogram Stretch for maximum lake/wet years (0-3;
-    land/ocean/lake/river):
+    Histogram Stretch for maximum lake/wet years (0-3; land/ocean/lake/river):  
 
-    stretch LWM-to-MaxWet
-    table=(0,0.,1,1.,2,2.,3,2.,4,3.,5,3.,6,2.,7,2.,8,2.,9,2.)
+    stretch LWM-to-MaxWet table=(0,0.,1,1.,2,2.,3,2.,4,3.,5,3.,6,2.,7,2.,8,2.,9,2.)  
 
-    Histogram Stretch for maximum drought (0-3; land/ocean/lake/river):
+    Histogram Stretch for maximum drought (0-3; land/ocean/lake/river):  
 
-    stretch LWM-to-MaxDry
-    table=(0,0.,1,1.,2,2.,3,0.,4,3.,5,0.,6,0.,7,0.,8,0.,9,0.)
+    stretch LWM-to-MaxDry table=(0,0.,1,1.,2,2.,3,0.,4,3.,5,0.,6,0.,7,0.,8,0.,9,0.)  
 
-    C++ includes: copernicus_dem.h 
+    C++ includes: copernicus_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     LAND = _copernicus_dem.CopernicusLwmData_LAND
+    
     OCEAN = _copernicus_dem.CopernicusLwmData_OCEAN
+    
     MIN_LAKE_DROUGHT = _copernicus_dem.CopernicusLwmData_MIN_LAKE_DROUGHT
+    
     ADD_LAKE_DROUGHT = _copernicus_dem.CopernicusLwmData_ADD_LAKE_DROUGHT
+    
     MIN_RIVER_DROUGHT = _copernicus_dem.CopernicusLwmData_MIN_RIVER_DROUGHT
+    
     ADD_RIVER_DROUGHT = _copernicus_dem.CopernicusLwmData_ADD_RIVER_DROUGHT
+    
     PERM_LAKE = _copernicus_dem.CopernicusLwmData_PERM_LAKE
+    
     MOSTLY_PERM_LAKE = _copernicus_dem.CopernicusLwmData_MOSTLY_PERM_LAKE
+    
     SEASONAL_FLOOD = _copernicus_dem.CopernicusLwmData_SEASONAL_FLOOD
+    
     EPHEMERAL_FLOOD = _copernicus_dem.CopernicusLwmData_EPHEMERAL_FLOOD
+    
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4):
         r"""
+        __init__(CopernicusLwmData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4) -> CopernicusLwmData
 
-        CopernicusLwmData::CopernicusLwmData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4)
         GeoCal::CopernicusLwmData::CopernicusLwmData
-        Constructor.
-        You provide the directory to look for Copernicus LWM data. If left
-        blank we look for the environment variable AFIDS_COPERNICUS_LWM
+        Constructor.  
 
-        The Copernicus doesn't cover the whole globe. If you ask for a point
-        outside of the area this can either be treated as an error, or
-        alternatively you can return a value of 0 instead. This is controlled
-        by No_coverage_is_error.
+        You provide the directory to look for Copernicus LWM data. If left blank we look
+        for the environment variable AFIDS_COPERNICUS_LWM  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The Copernicus doesn't cover the whole globe. If you ask for a point outside of
+        the area this can either be treated as an error, or alternatively you can return
+        a value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _copernicus_dem.CopernicusLwmData_swiginit(self, _copernicus_dem.new_CopernicusLwmData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file))
 
@@ -279,9 +287,11 @@ _copernicus_dem.CopernicusLwmData_swigregister(CopernicusLwmData)
 class CopernicusDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This class provides access to the Copernicus.
 
-    C++ includes: copernicus_dem.h 
+    This class provides access to the Copernicus.  
+
+    C++ includes: copernicus_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -289,15 +299,15 @@ class CopernicusDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, *args):
         r"""
+        __init__(CopernicusDem self, std::string const & Dirbase="", bool Outside_dem_is_error=True, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new DatumGeoid96())) -> CopernicusDem
 
-        CopernicusDem::CopernicusDem(const std::string &Dirbase="", bool Outside_dem_is_error=true,
-        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        DatumGeoid96()))
         GeoCal::CopernicusDem::CopernicusDem
-        Constructor.
-        You can provide the directory where there data can be found. If you
-        leave this as a blank string, we use ${ELEV_ROOT} as the directory and
-        ${ELEV_ROOT}/L2_dem_db.int as the file. 
+        Constructor.  
+
+        You can provide the directory where there data can be found. If you leave this
+        as a blank string, we use ${ELEV_ROOT} as the directory and
+        ${ELEV_ROOT}/L2_dem_db.int as the file.  
+
         """
         _copernicus_dem.CopernicusDem_swiginit(self, _copernicus_dem.new_CopernicusDem(*args))
     elevation = _swig_new_instance_method(_copernicus_dem.CopernicusDem_elevation)

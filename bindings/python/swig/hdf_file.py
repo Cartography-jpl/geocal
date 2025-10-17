@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _hdf_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _hdf_file:
 _hdf_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _hdf_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,32 +140,36 @@ import geocal_swig.generic_object
 class HdfFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class reads a HDF5 file.
 
-    Note that this is just a thin layer on top of the HDF 5 libraries to
-    make the file operations we need to do in GeoCal easier. There are
-    many other things that can be done with a HDF 5 than what this class
-    exposes.
+    This class reads a HDF5 file.  
 
-    Right now, we don't support writing. This is just because I don't
-    happen to need this. We can add this if we ever want to write files.
+    Note that this is just a thin layer on top of the HDF 5 libraries to make the
+    file operations we need to do in GeoCal easier. There are many other things that
+    can be done with a HDF 5 than what this class exposes.  
 
-    C++ includes: hdf_file.h 
+    Right now, we don't support writing. This is just because I don't happen to need
+    this. We can add this if we ever want to write files.  
+
+    C++ includes: hdf_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     __str__ = _swig_new_instance_method(_hdf_file.HdfFile___str__)
     READ = _hdf_file.HdfFile_READ
+    
     CREATE = _hdf_file.HdfFile_CREATE
+    
     READ_WRITE = _hdf_file.HdfFile_READ_WRITE
+    
 
     def __init__(self, *args):
         r"""
+        __init__(HdfFile self, std::string const & Fname, GeoCal::HdfFile::Mode M=READ) -> HdfFile
 
-        HdfFile::HdfFile(const std::string &Fname, Mode M=READ)
         GeoCal::HdfFile::HdfFile
-        Open the given file with the given mode.
+        Open the given file with the given mode.  
 
         """
         _hdf_file.HdfFile_swiginit(self, _hdf_file.new_HdfFile(*args))

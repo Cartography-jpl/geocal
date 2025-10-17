@@ -9963,80 +9963,112 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "GroundMask_mask", _wrap_GroundMask_mask, METH_VARARGS, "\n"
+		"GroundMask_mask(GroundMask self, GroundCoordinate Gc) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const =0\n"
 		"GeoCal::GroundMask::mask\n"
-		"Indicate if a particular point is masked.\n"
-		"If true, the point is masked and should not be used in processing\n"
-		"(e.g., don't do image matching) \n"
+		"Indicate if a particular point is masked.  \n"
+		"\n"
+		"If true, the point is masked and should not be used in processing (e.g., don't\n"
+		"do image matching)  \n"
+		"\n"
 		""},
 	 { "GroundMask_region_masked", _wrap_GroundMask_region_masked, METH_VARARGS, "\n"
+		"GroundMask_region_masked(GroundMask self, GroundCoordinate Ulc, GroundCoordinate Lrc) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0\n"
 		"GeoCal::GroundMask::region_masked\n"
-		"Indicated if a region is all masked or not.\n"
-		"See the discussion in the comments of GroundMask for detailed\n"
-		"discussion of the check. \n"
-		""},
-	 { "GroundMask___str__", _wrap_GroundMask___str__, METH_O, NULL},
-	 { "delete_GroundMask", _wrap_delete_GroundMask, METH_O, "\n"
+		"Indicated if a region is all masked or not.  \n"
 		"\n"
-		"virtual GeoCal::GroundMask::~GroundMask()\n"
+		"See the discussion in the comments of GroundMask for detailed discussion of the\n"
+		"check.  \n"
+		"\n"
+		""},
+	 { "GroundMask___str__", _wrap_GroundMask___str__, METH_O, "GroundMask___str__(GroundMask self) -> std::string"},
+	 { "delete_GroundMask", _wrap_delete_GroundMask, METH_O, "\n"
+		"delete_GroundMask(GroundMask self)\n"
+		"\n"
 		"GeoCal::GroundMask::~GroundMask\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GroundMask_swigregister", GroundMask_swigregister, METH_O, NULL},
 	 { "new_CombinedGroundMask", _wrap_new_CombinedGroundMask, METH_VARARGS, "\n"
+		"CombinedGroundMask()\n"
+		"new_CombinedGroundMask(Vector_GroundMask Ml) -> CombinedGroundMask\n"
 		"\n"
-		"GeoCal::CombinedGroundMask::CombinedGroundMask(It First, It Last)\n"
 		"GeoCal::CombinedGroundMask::CombinedGroundMask\n"
-		"Create a CombinedGroundMask using the given set of masks, where we get this from a general\n"
-		"InputIterator.\n"
+		"Create a CombinedGroundMask using the given set of masks, where we get this from\n"
+		"a general InputIterator.  \n"
 		"\n"
 		""},
-	 { "CombinedGroundMask_mask_list_set", _wrap_CombinedGroundMask_mask_list_set, METH_VARARGS, NULL},
-	 { "CombinedGroundMask_mask_list_get", _wrap_CombinedGroundMask_mask_list_get, METH_O, NULL},
+	 { "CombinedGroundMask_mask_list_set", _wrap_CombinedGroundMask_mask_list_set, METH_VARARGS, "CombinedGroundMask_mask_list_set(CombinedGroundMask self, Vector_GroundMask mask_list)"},
+	 { "CombinedGroundMask_mask_list_get", _wrap_CombinedGroundMask_mask_list_get, METH_O, "CombinedGroundMask_mask_list_get(CombinedGroundMask self) -> Vector_GroundMask"},
 	 { "delete_CombinedGroundMask", _wrap_delete_CombinedGroundMask, METH_O, "\n"
+		"delete_CombinedGroundMask(CombinedGroundMask self)\n"
 		"\n"
-		"virtual GeoCal::CombinedGroundMask::~CombinedGroundMask()\n"
 		"GeoCal::CombinedGroundMask::~CombinedGroundMask\n"
 		""},
 	 { "CombinedGroundMask_swigregister", CombinedGroundMask_swigregister, METH_O, NULL},
 	 { "CombinedGroundMask_swiginit", CombinedGroundMask_swiginit, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_iterator", _wrap_Vector_GroundMask_iterator, METH_O, NULL},
-	 { "Vector_GroundMask___nonzero__", _wrap_Vector_GroundMask___nonzero__, METH_O, NULL},
-	 { "Vector_GroundMask___bool__", _wrap_Vector_GroundMask___bool__, METH_O, NULL},
-	 { "Vector_GroundMask___len__", _wrap_Vector_GroundMask___len__, METH_O, NULL},
-	 { "Vector_GroundMask___getslice__", _wrap_Vector_GroundMask___getslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___setslice__", _wrap_Vector_GroundMask___setslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___delslice__", _wrap_Vector_GroundMask___delslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___delitem__", _wrap_Vector_GroundMask___delitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___getitem__", _wrap_Vector_GroundMask___getitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___setitem__", _wrap_Vector_GroundMask___setitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_pop", _wrap_Vector_GroundMask_pop, METH_O, NULL},
-	 { "Vector_GroundMask_append", _wrap_Vector_GroundMask_append, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_empty", _wrap_Vector_GroundMask_empty, METH_O, NULL},
-	 { "Vector_GroundMask_size", _wrap_Vector_GroundMask_size, METH_O, NULL},
-	 { "Vector_GroundMask_swap", _wrap_Vector_GroundMask_swap, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_begin", _wrap_Vector_GroundMask_begin, METH_O, NULL},
-	 { "Vector_GroundMask_end", _wrap_Vector_GroundMask_end, METH_O, NULL},
-	 { "Vector_GroundMask_rbegin", _wrap_Vector_GroundMask_rbegin, METH_O, NULL},
-	 { "Vector_GroundMask_rend", _wrap_Vector_GroundMask_rend, METH_O, NULL},
-	 { "Vector_GroundMask_clear", _wrap_Vector_GroundMask_clear, METH_O, NULL},
-	 { "Vector_GroundMask_get_allocator", _wrap_Vector_GroundMask_get_allocator, METH_O, NULL},
-	 { "Vector_GroundMask_pop_back", _wrap_Vector_GroundMask_pop_back, METH_O, NULL},
-	 { "Vector_GroundMask_erase", _wrap_Vector_GroundMask_erase, METH_VARARGS, NULL},
-	 { "new_Vector_GroundMask", _wrap_new_Vector_GroundMask, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_push_back", _wrap_Vector_GroundMask_push_back, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_front", _wrap_Vector_GroundMask_front, METH_O, NULL},
-	 { "Vector_GroundMask_back", _wrap_Vector_GroundMask_back, METH_O, NULL},
-	 { "Vector_GroundMask_assign", _wrap_Vector_GroundMask_assign, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_resize", _wrap_Vector_GroundMask_resize, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_insert", _wrap_Vector_GroundMask_insert, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_reserve", _wrap_Vector_GroundMask_reserve, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_capacity", _wrap_Vector_GroundMask_capacity, METH_O, NULL},
-	 { "delete_Vector_GroundMask", _wrap_delete_Vector_GroundMask, METH_O, NULL},
+	 { "Vector_GroundMask_iterator", _wrap_Vector_GroundMask_iterator, METH_O, "Vector_GroundMask_iterator(Vector_GroundMask self) -> SwigPyIterator"},
+	 { "Vector_GroundMask___nonzero__", _wrap_Vector_GroundMask___nonzero__, METH_O, "Vector_GroundMask___nonzero__(Vector_GroundMask self) -> bool"},
+	 { "Vector_GroundMask___bool__", _wrap_Vector_GroundMask___bool__, METH_O, "Vector_GroundMask___bool__(Vector_GroundMask self) -> bool"},
+	 { "Vector_GroundMask___len__", _wrap_Vector_GroundMask___len__, METH_O, "Vector_GroundMask___len__(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type"},
+	 { "Vector_GroundMask___getslice__", _wrap_Vector_GroundMask___getslice__, METH_VARARGS, "Vector_GroundMask___getslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j) -> Vector_GroundMask"},
+	 { "Vector_GroundMask___setslice__", _wrap_Vector_GroundMask___setslice__, METH_VARARGS, "\n"
+		"Vector_GroundMask___setslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j)\n"
+		"Vector_GroundMask___setslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j, Vector_GroundMask v)\n"
+		""},
+	 { "Vector_GroundMask___delslice__", _wrap_Vector_GroundMask___delslice__, METH_VARARGS, "Vector_GroundMask___delslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j)"},
+	 { "Vector_GroundMask___delitem__", _wrap_Vector_GroundMask___delitem__, METH_VARARGS, "\n"
+		"Vector_GroundMask___delitem__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i)\n"
+		"Vector_GroundMask___delitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_GroundMask___getitem__", _wrap_Vector_GroundMask___getitem__, METH_VARARGS, "\n"
+		"Vector_GroundMask___getitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice) -> Vector_GroundMask\n"
+		"Vector_GroundMask___getitem__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &\n"
+		""},
+	 { "Vector_GroundMask___setitem__", _wrap_Vector_GroundMask___setitem__, METH_VARARGS, "\n"
+		"Vector_GroundMask___setitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice, Vector_GroundMask v)\n"
+		"Vector_GroundMask___setitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_GroundMask___setitem__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundMask_pop", _wrap_Vector_GroundMask_pop, METH_O, "Vector_GroundMask_pop(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type"},
+	 { "Vector_GroundMask_append", _wrap_Vector_GroundMask_append, METH_VARARGS, "Vector_GroundMask_append(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)"},
+	 { "Vector_GroundMask_empty", _wrap_Vector_GroundMask_empty, METH_O, "Vector_GroundMask_empty(Vector_GroundMask self) -> bool"},
+	 { "Vector_GroundMask_size", _wrap_Vector_GroundMask_size, METH_O, "Vector_GroundMask_size(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type"},
+	 { "Vector_GroundMask_swap", _wrap_Vector_GroundMask_swap, METH_VARARGS, "Vector_GroundMask_swap(Vector_GroundMask self, Vector_GroundMask v)"},
+	 { "Vector_GroundMask_begin", _wrap_Vector_GroundMask_begin, METH_O, "Vector_GroundMask_begin(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator"},
+	 { "Vector_GroundMask_end", _wrap_Vector_GroundMask_end, METH_O, "Vector_GroundMask_end(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator"},
+	 { "Vector_GroundMask_rbegin", _wrap_Vector_GroundMask_rbegin, METH_O, "Vector_GroundMask_rbegin(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator"},
+	 { "Vector_GroundMask_rend", _wrap_Vector_GroundMask_rend, METH_O, "Vector_GroundMask_rend(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator"},
+	 { "Vector_GroundMask_clear", _wrap_Vector_GroundMask_clear, METH_O, "Vector_GroundMask_clear(Vector_GroundMask self)"},
+	 { "Vector_GroundMask_get_allocator", _wrap_Vector_GroundMask_get_allocator, METH_O, "Vector_GroundMask_get_allocator(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::allocator_type"},
+	 { "Vector_GroundMask_pop_back", _wrap_Vector_GroundMask_pop_back, METH_O, "Vector_GroundMask_pop_back(Vector_GroundMask self)"},
+	 { "Vector_GroundMask_erase", _wrap_Vector_GroundMask_erase, METH_VARARGS, "\n"
+		"Vector_GroundMask_erase(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator\n"
+		"Vector_GroundMask_erase(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator first, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator\n"
+		""},
+	 { "new_Vector_GroundMask", _wrap_new_Vector_GroundMask, METH_VARARGS, "\n"
+		"Vector_GroundMask()\n"
+		"Vector_GroundMask(Vector_GroundMask other)\n"
+		"Vector_GroundMask(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type size)\n"
+		"new_Vector_GroundMask(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type size, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & value) -> Vector_GroundMask\n"
+		""},
+	 { "Vector_GroundMask_push_back", _wrap_Vector_GroundMask_push_back, METH_VARARGS, "Vector_GroundMask_push_back(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)"},
+	 { "Vector_GroundMask_front", _wrap_Vector_GroundMask_front, METH_O, "Vector_GroundMask_front(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &"},
+	 { "Vector_GroundMask_back", _wrap_Vector_GroundMask_back, METH_O, "Vector_GroundMask_back(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &"},
+	 { "Vector_GroundMask_assign", _wrap_Vector_GroundMask_assign, METH_VARARGS, "Vector_GroundMask_assign(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)"},
+	 { "Vector_GroundMask_resize", _wrap_Vector_GroundMask_resize, METH_VARARGS, "\n"
+		"Vector_GroundMask_resize(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type new_size)\n"
+		"Vector_GroundMask_resize(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundMask_insert", _wrap_Vector_GroundMask_insert, METH_VARARGS, "\n"
+		"Vector_GroundMask_insert(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator\n"
+		"Vector_GroundMask_insert(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundMask_reserve", _wrap_Vector_GroundMask_reserve, METH_VARARGS, "Vector_GroundMask_reserve(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type n)"},
+	 { "Vector_GroundMask_capacity", _wrap_Vector_GroundMask_capacity, METH_O, "Vector_GroundMask_capacity(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type"},
+	 { "delete_Vector_GroundMask", _wrap_delete_Vector_GroundMask, METH_O, "delete_Vector_GroundMask(Vector_GroundMask self)"},
 	 { "Vector_GroundMask_swigregister", Vector_GroundMask_swigregister, METH_O, NULL},
 	 { "Vector_GroundMask_swiginit", Vector_GroundMask_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -10064,80 +10096,112 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "GroundMask_mask", _wrap_GroundMask_mask, METH_VARARGS, "\n"
+		"mask(GroundMask self, GroundCoordinate Gc) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::GroundMask::mask(const GroundCoordinate &Gc) const =0\n"
 		"GeoCal::GroundMask::mask\n"
-		"Indicate if a particular point is masked.\n"
-		"If true, the point is masked and should not be used in processing\n"
-		"(e.g., don't do image matching) \n"
+		"Indicate if a particular point is masked.  \n"
+		"\n"
+		"If true, the point is masked and should not be used in processing (e.g., don't\n"
+		"do image matching)  \n"
+		"\n"
 		""},
 	 { "GroundMask_region_masked", _wrap_GroundMask_region_masked, METH_VARARGS, "\n"
+		"region_masked(GroundMask self, GroundCoordinate Ulc, GroundCoordinate Lrc) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::GroundMask::region_masked(const GroundCoordinate &Ulc, const GroundCoordinate &Lrc) const =0\n"
 		"GeoCal::GroundMask::region_masked\n"
-		"Indicated if a region is all masked or not.\n"
-		"See the discussion in the comments of GroundMask for detailed\n"
-		"discussion of the check. \n"
-		""},
-	 { "GroundMask___str__", _wrap_GroundMask___str__, METH_O, NULL},
-	 { "delete_GroundMask", _wrap_delete_GroundMask, METH_O, "\n"
+		"Indicated if a region is all masked or not.  \n"
 		"\n"
-		"virtual GeoCal::GroundMask::~GroundMask()\n"
+		"See the discussion in the comments of GroundMask for detailed discussion of the\n"
+		"check.  \n"
+		"\n"
+		""},
+	 { "GroundMask___str__", _wrap_GroundMask___str__, METH_O, "__str__(GroundMask self) -> std::string"},
+	 { "delete_GroundMask", _wrap_delete_GroundMask, METH_O, "\n"
+		"delete_GroundMask(GroundMask self)\n"
+		"\n"
 		"GeoCal::GroundMask::~GroundMask\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "GroundMask_swigregister", GroundMask_swigregister, METH_O, NULL},
 	 { "new_CombinedGroundMask", _wrap_new_CombinedGroundMask, METH_VARARGS, "\n"
+		"CombinedGroundMask()\n"
+		"new_CombinedGroundMask(Vector_GroundMask Ml) -> CombinedGroundMask\n"
 		"\n"
-		"GeoCal::CombinedGroundMask::CombinedGroundMask(It First, It Last)\n"
 		"GeoCal::CombinedGroundMask::CombinedGroundMask\n"
-		"Create a CombinedGroundMask using the given set of masks, where we get this from a general\n"
-		"InputIterator.\n"
+		"Create a CombinedGroundMask using the given set of masks, where we get this from\n"
+		"a general InputIterator.  \n"
 		"\n"
 		""},
-	 { "CombinedGroundMask_mask_list_set", _wrap_CombinedGroundMask_mask_list_set, METH_VARARGS, NULL},
-	 { "CombinedGroundMask_mask_list_get", _wrap_CombinedGroundMask_mask_list_get, METH_O, NULL},
+	 { "CombinedGroundMask_mask_list_set", _wrap_CombinedGroundMask_mask_list_set, METH_VARARGS, "CombinedGroundMask_mask_list_set(CombinedGroundMask self, Vector_GroundMask mask_list)"},
+	 { "CombinedGroundMask_mask_list_get", _wrap_CombinedGroundMask_mask_list_get, METH_O, "CombinedGroundMask_mask_list_get(CombinedGroundMask self) -> Vector_GroundMask"},
 	 { "delete_CombinedGroundMask", _wrap_delete_CombinedGroundMask, METH_O, "\n"
+		"delete_CombinedGroundMask(CombinedGroundMask self)\n"
 		"\n"
-		"virtual GeoCal::CombinedGroundMask::~CombinedGroundMask()\n"
 		"GeoCal::CombinedGroundMask::~CombinedGroundMask\n"
 		""},
 	 { "CombinedGroundMask_swigregister", CombinedGroundMask_swigregister, METH_O, NULL},
 	 { "CombinedGroundMask_swiginit", CombinedGroundMask_swiginit, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_iterator", _wrap_Vector_GroundMask_iterator, METH_O, NULL},
-	 { "Vector_GroundMask___nonzero__", _wrap_Vector_GroundMask___nonzero__, METH_O, NULL},
-	 { "Vector_GroundMask___bool__", _wrap_Vector_GroundMask___bool__, METH_O, NULL},
-	 { "Vector_GroundMask___len__", _wrap_Vector_GroundMask___len__, METH_O, NULL},
-	 { "Vector_GroundMask___getslice__", _wrap_Vector_GroundMask___getslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___setslice__", _wrap_Vector_GroundMask___setslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___delslice__", _wrap_Vector_GroundMask___delslice__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___delitem__", _wrap_Vector_GroundMask___delitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___getitem__", _wrap_Vector_GroundMask___getitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask___setitem__", _wrap_Vector_GroundMask___setitem__, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_pop", _wrap_Vector_GroundMask_pop, METH_O, NULL},
-	 { "Vector_GroundMask_append", _wrap_Vector_GroundMask_append, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_empty", _wrap_Vector_GroundMask_empty, METH_O, NULL},
-	 { "Vector_GroundMask_size", _wrap_Vector_GroundMask_size, METH_O, NULL},
-	 { "Vector_GroundMask_swap", _wrap_Vector_GroundMask_swap, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_begin", _wrap_Vector_GroundMask_begin, METH_O, NULL},
-	 { "Vector_GroundMask_end", _wrap_Vector_GroundMask_end, METH_O, NULL},
-	 { "Vector_GroundMask_rbegin", _wrap_Vector_GroundMask_rbegin, METH_O, NULL},
-	 { "Vector_GroundMask_rend", _wrap_Vector_GroundMask_rend, METH_O, NULL},
-	 { "Vector_GroundMask_clear", _wrap_Vector_GroundMask_clear, METH_O, NULL},
-	 { "Vector_GroundMask_get_allocator", _wrap_Vector_GroundMask_get_allocator, METH_O, NULL},
-	 { "Vector_GroundMask_pop_back", _wrap_Vector_GroundMask_pop_back, METH_O, NULL},
-	 { "Vector_GroundMask_erase", _wrap_Vector_GroundMask_erase, METH_VARARGS, NULL},
-	 { "new_Vector_GroundMask", _wrap_new_Vector_GroundMask, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_push_back", _wrap_Vector_GroundMask_push_back, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_front", _wrap_Vector_GroundMask_front, METH_O, NULL},
-	 { "Vector_GroundMask_back", _wrap_Vector_GroundMask_back, METH_O, NULL},
-	 { "Vector_GroundMask_assign", _wrap_Vector_GroundMask_assign, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_resize", _wrap_Vector_GroundMask_resize, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_insert", _wrap_Vector_GroundMask_insert, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_reserve", _wrap_Vector_GroundMask_reserve, METH_VARARGS, NULL},
-	 { "Vector_GroundMask_capacity", _wrap_Vector_GroundMask_capacity, METH_O, NULL},
-	 { "delete_Vector_GroundMask", _wrap_delete_Vector_GroundMask, METH_O, NULL},
+	 { "Vector_GroundMask_iterator", _wrap_Vector_GroundMask_iterator, METH_O, "iterator(Vector_GroundMask self) -> SwigPyIterator"},
+	 { "Vector_GroundMask___nonzero__", _wrap_Vector_GroundMask___nonzero__, METH_O, "__nonzero__(Vector_GroundMask self) -> bool"},
+	 { "Vector_GroundMask___bool__", _wrap_Vector_GroundMask___bool__, METH_O, "__bool__(Vector_GroundMask self) -> bool"},
+	 { "Vector_GroundMask___len__", _wrap_Vector_GroundMask___len__, METH_O, "__len__(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type"},
+	 { "Vector_GroundMask___getslice__", _wrap_Vector_GroundMask___getslice__, METH_VARARGS, "__getslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j) -> Vector_GroundMask"},
+	 { "Vector_GroundMask___setslice__", _wrap_Vector_GroundMask___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j)\n"
+		"__setslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j, Vector_GroundMask v)\n"
+		""},
+	 { "Vector_GroundMask___delslice__", _wrap_Vector_GroundMask___delslice__, METH_VARARGS, "__delslice__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type j)"},
+	 { "Vector_GroundMask___delitem__", _wrap_Vector_GroundMask___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i)\n"
+		"__delitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_GroundMask___getitem__", _wrap_Vector_GroundMask___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice) -> Vector_GroundMask\n"
+		"__getitem__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &\n"
+		""},
+	 { "Vector_GroundMask___setitem__", _wrap_Vector_GroundMask___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice, Vector_GroundMask v)\n"
+		"__setitem__(Vector_GroundMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundMask_pop", _wrap_Vector_GroundMask_pop, METH_O, "pop(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type"},
+	 { "Vector_GroundMask_append", _wrap_Vector_GroundMask_append, METH_VARARGS, "append(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)"},
+	 { "Vector_GroundMask_empty", _wrap_Vector_GroundMask_empty, METH_O, "empty(Vector_GroundMask self) -> bool"},
+	 { "Vector_GroundMask_size", _wrap_Vector_GroundMask_size, METH_O, "size(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type"},
+	 { "Vector_GroundMask_swap", _wrap_Vector_GroundMask_swap, METH_VARARGS, "swap(Vector_GroundMask self, Vector_GroundMask v)"},
+	 { "Vector_GroundMask_begin", _wrap_Vector_GroundMask_begin, METH_O, "begin(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator"},
+	 { "Vector_GroundMask_end", _wrap_Vector_GroundMask_end, METH_O, "end(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator"},
+	 { "Vector_GroundMask_rbegin", _wrap_Vector_GroundMask_rbegin, METH_O, "rbegin(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator"},
+	 { "Vector_GroundMask_rend", _wrap_Vector_GroundMask_rend, METH_O, "rend(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::reverse_iterator"},
+	 { "Vector_GroundMask_clear", _wrap_Vector_GroundMask_clear, METH_O, "clear(Vector_GroundMask self)"},
+	 { "Vector_GroundMask_get_allocator", _wrap_Vector_GroundMask_get_allocator, METH_O, "get_allocator(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::allocator_type"},
+	 { "Vector_GroundMask_pop_back", _wrap_Vector_GroundMask_pop_back, METH_O, "pop_back(Vector_GroundMask self)"},
+	 { "Vector_GroundMask_erase", _wrap_Vector_GroundMask_erase, METH_VARARGS, "\n"
+		"erase(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator\n"
+		"erase(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator first, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator\n"
+		""},
+	 { "new_Vector_GroundMask", _wrap_new_Vector_GroundMask, METH_VARARGS, "\n"
+		"Vector_GroundMask()\n"
+		"Vector_GroundMask(Vector_GroundMask other)\n"
+		"Vector_GroundMask(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type size)\n"
+		"new_Vector_GroundMask(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type size, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & value) -> Vector_GroundMask\n"
+		""},
+	 { "Vector_GroundMask_push_back", _wrap_Vector_GroundMask_push_back, METH_VARARGS, "push_back(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)"},
+	 { "Vector_GroundMask_front", _wrap_Vector_GroundMask_front, METH_O, "front(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &"},
+	 { "Vector_GroundMask_back", _wrap_Vector_GroundMask_back, METH_O, "back(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &"},
+	 { "Vector_GroundMask_assign", _wrap_Vector_GroundMask_assign, METH_VARARGS, "assign(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)"},
+	 { "Vector_GroundMask_resize", _wrap_Vector_GroundMask_resize, METH_VARARGS, "\n"
+		"resize(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type new_size)\n"
+		"resize(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundMask_insert", _wrap_Vector_GroundMask_insert, METH_VARARGS, "\n"
+		"insert(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator\n"
+		"insert(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_GroundMask_reserve", _wrap_Vector_GroundMask_reserve, METH_VARARGS, "reserve(Vector_GroundMask self, std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type n)"},
+	 { "Vector_GroundMask_capacity", _wrap_Vector_GroundMask_capacity, METH_O, "capacity(Vector_GroundMask self) -> std::vector< boost::shared_ptr< GeoCal::GroundMask > >::size_type"},
+	 { "delete_Vector_GroundMask", _wrap_delete_Vector_GroundMask, METH_O, "delete_Vector_GroundMask(Vector_GroundMask self)"},
 	 { "Vector_GroundMask_swigregister", Vector_GroundMask_swigregister, METH_O, NULL},
 	 { "Vector_GroundMask_swiginit", Vector_GroundMask_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

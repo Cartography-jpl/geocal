@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geometric_model_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geometric_model_image:
 _geometric_model_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geometric_model_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,36 +146,36 @@ import geocal_swig.observer
 class GeometricModelImage(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This is a simple adapter that applies a geometric model to an
-    underlying image.
 
-    This purpose of this kind of a class is to resample an image in such a
-    way that it matches a first image (so for sample image 2 is image 1
-    rotated a bit and scaled - we apply the opposite to have image 2 match
-    image 1).
+    This is a simple adapter that applies a geometric model to an underlying image.  
 
-    C++ includes: geometric_model_image.h 
+    This purpose of this kind of a class is to resample an image in such a way that
+    it matches a first image (so for sample image 2 is image 1 rotated a bit and
+    scaled - we apply the opposite to have image 2 match image 1).  
+
+    C++ includes: geometric_model_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     BILINEAR = _geometric_model_image.GeometricModelImage_BILINEAR
+    
     NEAREST_NEIGHBOR = _geometric_model_image.GeometricModelImage_NEAREST_NEIGHBOR
+    
 
     def __init__(self, *args):
         r"""
+        __init__(GeometricModelImage self, boost::shared_ptr< GeoCal::RasterImage > const & Data, boost::shared_ptr< GeoCal::GeometricModel > const & Geom_model, int Number_line, int Number_sample, double Fill_value=0.0, GeoCal::GeometricModelImage::interpolation_type Interpolation_type=BILINEAR) -> GeometricModelImage
 
-        GeoCal::GeometricModelImage::GeometricModelImage(const boost::shared_ptr< RasterImage > &Data, const
-        boost::shared_ptr< GeometricModel > &Geom_model, int Number_line, int
-        Number_sample, double Fill_value=0.0, interpolation_type
-        Interpolation_type=BILINEAR)
         GeoCal::GeometricModelImage::GeometricModelImage
-        Constructor.
-        This takes underlying data, and a geometric model to use to resample
-        it.
+        Constructor.  
 
-        Because we fill in data outside of the original image with O's this
-        image can be any size. So the size desired needs to be passed in. 
+        This takes underlying data, and a geometric model to use to resample it.  
+
+        Because we fill in data outside of the original image with O's this image can be
+        any size. So the size desired needs to be passed in.  
+
         """
         _geometric_model_image.GeometricModelImage_swiginit(self, _geometric_model_image.new_GeometricModelImage(*args))
     _v_itype = _swig_new_instance_method(_geometric_model_image.GeometricModelImage__v_itype)

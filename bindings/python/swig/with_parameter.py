@@ -90,6 +90,7 @@ _with_parameter.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _with_parameter.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _with_parameter.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -137,13 +138,15 @@ import geocal_swig.generic_object
 class WithParameter(geocal_swig.generic_object.GenericObject):
     r"""
 
-    It is common for a class to have some set of parameters that control
-    behavior, which we may then fit with something like the SBA.
 
-    It can also be useful for only a subset of those parameter to be
-    active. This mixin class supplies this functionality.
+    It is common for a class to have some set of parameters that control behavior,
+    which we may then fit with something like the SBA.  
 
-    C++ includes: with_parameter.h 
+    It can also be useful for only a subset of those parameter to be active. This
+    mixin class supplies this functionality.  
+
+    C++ includes: with_parameter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -217,6 +220,7 @@ class WithParameter(geocal_swig.generic_object.GenericObject):
     add_identity_gradient = _swig_new_instance_method(_with_parameter.WithParameter_add_identity_gradient)
 
     def __init__(self):
+        r"""__init__(WithParameter self) -> WithParameter"""
         if self.__class__ == WithParameter:
             _self = None
         else:
@@ -233,13 +237,15 @@ _with_parameter.WithParameter_swigregister(WithParameter)
 class WithParameterNested(WithParameter):
     r"""
 
-    It is common for a class WithParameter to be made up of subobjects an
-    just string them together (e.g., a OrbitDataImageGroundConnection
-    where the orbit and camera each have parameters).
 
-    This handles this simple case.
+    It is common for a class WithParameter to be made up of subobjects an just
+    string them together (e.g., a OrbitDataImageGroundConnection where the orbit and
+    camera each have parameters).  
 
-    C++ includes: with_parameter.h 
+    This handles this simple case.  
+
+    C++ includes: with_parameter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -247,8 +253,8 @@ class WithParameterNested(WithParameter):
 
     def __init__(self):
         r"""
+        __init__(WithParameterNested self) -> WithParameterNested
 
-        GeoCal::WithParameterNested::WithParameterNested()
         GeoCal::WithParameterNested::WithParameterNested
         """
         _with_parameter.WithParameterNested_swiginit(self, _with_parameter.new_WithParameterNested())
@@ -261,14 +267,15 @@ _with_parameter.WithParameterNested_swigregister(WithParameterNested)
 class WithParameterShare(WithParameter):
     r"""
 
-    Another issues that arises (in particular when having IgcCollection
-    across multiple orbits, e.g.
 
-    camera calibration for EcostressIgcCollection) is to have multiple
-    objects that should all have the same parameter set. This handles that
-    case.
+    Another issues that arises (in particular when having IgcCollection across
+    multiple orbits, e.g.  
 
-    C++ includes: with_parameter.h 
+    camera calibration for EcostressIgcCollection) is to have multiple objects that
+    should all have the same parameter set. This handles that case.  
+
+    C++ includes: with_parameter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -276,8 +283,8 @@ class WithParameterShare(WithParameter):
 
     def __init__(self):
         r"""
+        __init__(WithParameterShare self) -> WithParameterShare
 
-        GeoCal::WithParameterShare::WithParameterShare()
         GeoCal::WithParameterShare::WithParameterShare
         """
         _with_parameter.WithParameterShare_swiginit(self, _with_parameter.new_WithParameterShare())

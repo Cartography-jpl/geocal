@@ -12144,189 +12144,224 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_TiePoint", _wrap_new_TiePoint, METH_VARARGS, "\n"
+		"TiePoint(int Number_image)\n"
+		"TiePoint()\n"
+		"new_TiePoint(TiePoint Tp) -> TiePoint\n"
 		"\n"
-		"GeoCal::TiePoint::TiePoint(int Number_image)\n"
 		"GeoCal::TiePoint::TiePoint\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "TiePoint__v_id", _wrap_TiePoint__v_id, METH_VARARGS, "\n"
+		"TiePoint__v_id(TiePoint self) -> int\n"
+		"TiePoint__v_id(TiePoint self, int const & V)\n"
 		"\n"
-		"void GeoCal::TiePoint::id(int V)\n"
 		"GeoCal::TiePoint::id\n"
 		""},
 	 { "TiePoint__v_is_gcp", _wrap_TiePoint__v_is_gcp, METH_VARARGS, "\n"
+		"TiePoint__v_is_gcp(TiePoint self) -> bool\n"
+		"TiePoint__v_is_gcp(TiePoint self, bool const & V)\n"
 		"\n"
-		"void GeoCal::TiePoint::is_gcp(bool V)\n"
 		"GeoCal::TiePoint::is_gcp\n"
 		""},
 	 { "TiePoint__v_ground_location", _wrap_TiePoint__v_ground_location, METH_VARARGS, "\n"
+		"TiePoint__v_ground_location(TiePoint self) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"TiePoint__v_ground_location(TiePoint self, boost::shared_ptr< GeoCal::GroundCoordinate > const & V)\n"
 		"\n"
-		"void GeoCal::TiePoint::ground_location(const boost::shared_ptr< GroundCoordinate > &Gc)\n"
 		"GeoCal::TiePoint::ground_location\n"
 		""},
 	 { "TiePoint__v_number_image", _wrap_TiePoint__v_number_image, METH_O, "\n"
+		"TiePoint__v_number_image(TiePoint self) -> int\n"
 		"\n"
-		"int GeoCal::TiePoint::number_image() const\n"
 		"GeoCal::TiePoint::number_image\n"
-		"Number of images covered by the tie point.\n"
+		"Number of images covered by the tie point.  \n"
 		"\n"
 		""},
 	 { "TiePoint__v_number_image_location", _wrap_TiePoint__v_number_image_location, METH_O, "\n"
+		"TiePoint__v_number_image_location(TiePoint self) -> int\n"
 		"\n"
-		"int GeoCal::TiePoint::number_image_location() const\n"
 		"GeoCal::TiePoint::number_image_location\n"
 		""},
 	 { "TiePoint_image_coordinate", _wrap_TiePoint_image_coordinate, METH_VARARGS, "\n"
+		"TiePoint_image_coordinate(TiePoint self, int Image_index) -> boost::shared_ptr< GeoCal::ImageCoordinate >\n"
+		"TiePoint_image_coordinate(TiePoint self, int Image_index, boost::shared_ptr< GeoCal::ImageCoordinate > const & Ic, double Line_sigma=0.1, double Sample_sigma=0.1)\n"
 		"\n"
-		"void GeoCal::TiePoint::image_coordinate(int Image_index, const boost::shared_ptr< ImageCoordinate > &Ic,\n"
-		"double Line_sigma=0.1, double Sample_sigma=0.1)\n"
 		"GeoCal::TiePoint::image_coordinate\n"
 		""},
 	 { "TiePoint_line_sigma", _wrap_TiePoint_line_sigma, METH_VARARGS, "\n"
+		"TiePoint_line_sigma(TiePoint self, int Image_index) -> double\n"
 		"\n"
-		"double GeoCal::TiePoint::line_sigma(int Image_index) const\n"
 		"GeoCal::TiePoint::line_sigma\n"
-		"Line sigma.\n"
+		"Line sigma.  \n"
 		"\n"
 		""},
 	 { "TiePoint_sample_sigma", _wrap_TiePoint_sample_sigma, METH_VARARGS, "\n"
+		"TiePoint_sample_sigma(TiePoint self, int Image_index) -> double\n"
 		"\n"
-		"double GeoCal::TiePoint::sample_sigma(int Image_index) const\n"
 		"GeoCal::TiePoint::sample_sigma\n"
-		"Sample sigma.\n"
+		"Sample sigma.  \n"
 		"\n"
 		""},
-	 { "TiePoint___str__", _wrap_TiePoint___str__, METH_O, NULL},
+	 { "TiePoint___str__", _wrap_TiePoint___str__, METH_O, "TiePoint___str__(TiePoint self) -> std::string"},
 	 { "TiePoint__v_ic", _wrap_TiePoint__v_ic, METH_O, "\n"
+		"TiePoint__v_ic(TiePoint self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic() const\n"
 		"GeoCal::TiePoint::ic\n"
-		"This repackages the image_coordinate, in a better way for doing such\n"
-		"things as plotting.\n"
-		"We return a 2D array with the first row being the image line and the\n"
-		"second the image sample. The columns are the image indexes. For image\n"
-		"locations that are missing, we return a NaN.\n"
+		"This repackages the image_coordinate, in a better way for doing such things as\n"
+		"plotting.  \n"
 		"\n"
-		"This is really intended for use by python, I'm not sure this would be\n"
-		"of much use in C++. \n"
+		"We return a 2D array with the first row being the image line and the second the\n"
+		"image sample. The columns are the image indexes. For image locations that are\n"
+		"missing, we return a NaN.  \n"
+		"\n"
+		"This is really intended for use by python, I'm not sure this would be of much\n"
+		"use in C++.  \n"
+		"\n"
 		""},
 	 { "TiePoint__v_ic_sigma", _wrap_TiePoint__v_ic_sigma, METH_O, "\n"
+		"TiePoint__v_ic_sigma(TiePoint self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic_sigma() const\n"
 		"GeoCal::TiePoint::ic_sigma\n"
-		"Like ic, but return line and sample sigma.\n"
+		"Like ic, but return line and sample sigma.  \n"
 		"\n"
 		""},
 	 { "TiePoint_ic_pred", _wrap_TiePoint_ic_pred, METH_VARARGS, "\n"
+		"TiePoint_ic_pred(TiePoint self, IgcCollection Igccol) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic_pred(const IgcCollection &Igccol) const\n"
 		"GeoCal::TiePoint::ic_pred\n"
-		"Like ic, but uses the supplied igccol to predict the image location\n"
-		"given our current ground position.\n"
+		"Like ic, but uses the supplied igccol to predict the image location given our\n"
+		"current ground position.  \n"
 		"\n"
 		""},
 	 { "TiePoint_ic_diff", _wrap_TiePoint_ic_diff, METH_VARARGS, "\n"
+		"TiePoint_ic_diff(TiePoint self, IgcCollection Igccol) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic_diff(const IgcCollection &Igccol) const\n"
 		"GeoCal::TiePoint::ic_diff\n"
-		"Difference between observed and predicted image coordinates.\n"
+		"Difference between observed and predicted image coordinates.  \n"
 		"\n"
 		""},
 	 { "delete_TiePoint", _wrap_delete_TiePoint, METH_O, "\n"
+		"delete_TiePoint(TiePoint self)\n"
 		"\n"
-		"virtual GeoCal::TiePoint::~TiePoint()\n"
 		"GeoCal::TiePoint::~TiePoint\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "TiePoint_swigregister", TiePoint_swigregister, METH_O, NULL},
 	 { "TiePoint_swiginit", TiePoint_swiginit, METH_VARARGS, NULL},
-	 { "TiePointVector_iterator", _wrap_TiePointVector_iterator, METH_O, NULL},
-	 { "TiePointVector___nonzero__", _wrap_TiePointVector___nonzero__, METH_O, NULL},
-	 { "TiePointVector___bool__", _wrap_TiePointVector___bool__, METH_O, NULL},
-	 { "TiePointVector___len__", _wrap_TiePointVector___len__, METH_O, NULL},
-	 { "TiePointVector___getslice__", _wrap_TiePointVector___getslice__, METH_VARARGS, NULL},
-	 { "TiePointVector___setslice__", _wrap_TiePointVector___setslice__, METH_VARARGS, NULL},
-	 { "TiePointVector___delslice__", _wrap_TiePointVector___delslice__, METH_VARARGS, NULL},
-	 { "TiePointVector___delitem__", _wrap_TiePointVector___delitem__, METH_VARARGS, NULL},
-	 { "TiePointVector___getitem__", _wrap_TiePointVector___getitem__, METH_VARARGS, NULL},
-	 { "TiePointVector___setitem__", _wrap_TiePointVector___setitem__, METH_VARARGS, NULL},
-	 { "TiePointVector_pop", _wrap_TiePointVector_pop, METH_O, NULL},
-	 { "TiePointVector_append", _wrap_TiePointVector_append, METH_VARARGS, NULL},
-	 { "TiePointVector_empty", _wrap_TiePointVector_empty, METH_O, NULL},
-	 { "TiePointVector_size", _wrap_TiePointVector_size, METH_O, NULL},
-	 { "TiePointVector_swap", _wrap_TiePointVector_swap, METH_VARARGS, NULL},
-	 { "TiePointVector_begin", _wrap_TiePointVector_begin, METH_O, NULL},
-	 { "TiePointVector_end", _wrap_TiePointVector_end, METH_O, NULL},
-	 { "TiePointVector_rbegin", _wrap_TiePointVector_rbegin, METH_O, NULL},
-	 { "TiePointVector_rend", _wrap_TiePointVector_rend, METH_O, NULL},
-	 { "TiePointVector_clear", _wrap_TiePointVector_clear, METH_O, NULL},
-	 { "TiePointVector_get_allocator", _wrap_TiePointVector_get_allocator, METH_O, NULL},
-	 { "TiePointVector_pop_back", _wrap_TiePointVector_pop_back, METH_O, NULL},
-	 { "TiePointVector_erase", _wrap_TiePointVector_erase, METH_VARARGS, NULL},
-	 { "new_TiePointVector", _wrap_new_TiePointVector, METH_VARARGS, NULL},
-	 { "TiePointVector_push_back", _wrap_TiePointVector_push_back, METH_VARARGS, NULL},
-	 { "TiePointVector_front", _wrap_TiePointVector_front, METH_O, NULL},
-	 { "TiePointVector_back", _wrap_TiePointVector_back, METH_O, NULL},
-	 { "TiePointVector_assign", _wrap_TiePointVector_assign, METH_VARARGS, NULL},
-	 { "TiePointVector_resize", _wrap_TiePointVector_resize, METH_VARARGS, NULL},
-	 { "TiePointVector_insert", _wrap_TiePointVector_insert, METH_VARARGS, NULL},
-	 { "TiePointVector_reserve", _wrap_TiePointVector_reserve, METH_VARARGS, NULL},
-	 { "TiePointVector_capacity", _wrap_TiePointVector_capacity, METH_O, NULL},
-	 { "delete_TiePointVector", _wrap_delete_TiePointVector, METH_O, NULL},
+	 { "TiePointVector_iterator", _wrap_TiePointVector_iterator, METH_O, "TiePointVector_iterator(TiePointVector self) -> SwigPyIterator"},
+	 { "TiePointVector___nonzero__", _wrap_TiePointVector___nonzero__, METH_O, "TiePointVector___nonzero__(TiePointVector self) -> bool"},
+	 { "TiePointVector___bool__", _wrap_TiePointVector___bool__, METH_O, "TiePointVector___bool__(TiePointVector self) -> bool"},
+	 { "TiePointVector___len__", _wrap_TiePointVector___len__, METH_O, "TiePointVector___len__(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type"},
+	 { "TiePointVector___getslice__", _wrap_TiePointVector___getslice__, METH_VARARGS, "TiePointVector___getslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j) -> TiePointVector"},
+	 { "TiePointVector___setslice__", _wrap_TiePointVector___setslice__, METH_VARARGS, "\n"
+		"TiePointVector___setslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j)\n"
+		"TiePointVector___setslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j, TiePointVector v)\n"
+		""},
+	 { "TiePointVector___delslice__", _wrap_TiePointVector___delslice__, METH_VARARGS, "TiePointVector___delslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j)"},
+	 { "TiePointVector___delitem__", _wrap_TiePointVector___delitem__, METH_VARARGS, "\n"
+		"TiePointVector___delitem__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i)\n"
+		"TiePointVector___delitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "TiePointVector___getitem__", _wrap_TiePointVector___getitem__, METH_VARARGS, "\n"
+		"TiePointVector___getitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice) -> TiePointVector\n"
+		"TiePointVector___getitem__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &\n"
+		""},
+	 { "TiePointVector___setitem__", _wrap_TiePointVector___setitem__, METH_VARARGS, "\n"
+		"TiePointVector___setitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice, TiePointVector v)\n"
+		"TiePointVector___setitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice)\n"
+		"TiePointVector___setitem__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)\n"
+		""},
+	 { "TiePointVector_pop", _wrap_TiePointVector_pop, METH_O, "TiePointVector_pop(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type"},
+	 { "TiePointVector_append", _wrap_TiePointVector_append, METH_VARARGS, "TiePointVector_append(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)"},
+	 { "TiePointVector_empty", _wrap_TiePointVector_empty, METH_O, "TiePointVector_empty(TiePointVector self) -> bool"},
+	 { "TiePointVector_size", _wrap_TiePointVector_size, METH_O, "TiePointVector_size(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type"},
+	 { "TiePointVector_swap", _wrap_TiePointVector_swap, METH_VARARGS, "TiePointVector_swap(TiePointVector self, TiePointVector v)"},
+	 { "TiePointVector_begin", _wrap_TiePointVector_begin, METH_O, "TiePointVector_begin(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator"},
+	 { "TiePointVector_end", _wrap_TiePointVector_end, METH_O, "TiePointVector_end(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator"},
+	 { "TiePointVector_rbegin", _wrap_TiePointVector_rbegin, METH_O, "TiePointVector_rbegin(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::reverse_iterator"},
+	 { "TiePointVector_rend", _wrap_TiePointVector_rend, METH_O, "TiePointVector_rend(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::reverse_iterator"},
+	 { "TiePointVector_clear", _wrap_TiePointVector_clear, METH_O, "TiePointVector_clear(TiePointVector self)"},
+	 { "TiePointVector_get_allocator", _wrap_TiePointVector_get_allocator, METH_O, "TiePointVector_get_allocator(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::allocator_type"},
+	 { "TiePointVector_pop_back", _wrap_TiePointVector_pop_back, METH_O, "TiePointVector_pop_back(TiePointVector self)"},
+	 { "TiePointVector_erase", _wrap_TiePointVector_erase, METH_VARARGS, "\n"
+		"TiePointVector_erase(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator\n"
+		"TiePointVector_erase(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator first, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator\n"
+		""},
+	 { "new_TiePointVector", _wrap_new_TiePointVector, METH_VARARGS, "\n"
+		"TiePointVector()\n"
+		"TiePointVector(TiePointVector other)\n"
+		"TiePointVector(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type size)\n"
+		"new_TiePointVector(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type size, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & value) -> TiePointVector\n"
+		""},
+	 { "TiePointVector_push_back", _wrap_TiePointVector_push_back, METH_VARARGS, "TiePointVector_push_back(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)"},
+	 { "TiePointVector_front", _wrap_TiePointVector_front, METH_O, "TiePointVector_front(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &"},
+	 { "TiePointVector_back", _wrap_TiePointVector_back, METH_O, "TiePointVector_back(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &"},
+	 { "TiePointVector_assign", _wrap_TiePointVector_assign, METH_VARARGS, "TiePointVector_assign(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)"},
+	 { "TiePointVector_resize", _wrap_TiePointVector_resize, METH_VARARGS, "\n"
+		"TiePointVector_resize(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type new_size)\n"
+		"TiePointVector_resize(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)\n"
+		""},
+	 { "TiePointVector_insert", _wrap_TiePointVector_insert, METH_VARARGS, "\n"
+		"TiePointVector_insert(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator\n"
+		"TiePointVector_insert(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)\n"
+		""},
+	 { "TiePointVector_reserve", _wrap_TiePointVector_reserve, METH_VARARGS, "TiePointVector_reserve(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n)"},
+	 { "TiePointVector_capacity", _wrap_TiePointVector_capacity, METH_O, "TiePointVector_capacity(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type"},
+	 { "delete_TiePointVector", _wrap_delete_TiePointVector, METH_O, "delete_TiePointVector(TiePointVector self)"},
 	 { "TiePointVector_swigregister", TiePointVector_swigregister, METH_O, NULL},
 	 { "TiePointVector_swiginit", TiePointVector_swiginit, METH_VARARGS, NULL},
 	 { "new_TiePointCollection", _wrap_new_TiePointCollection, METH_VARARGS, "\n"
+		"TiePointCollection()\n"
+		"new_TiePointCollection(TiePointVector Tpv) -> TiePointCollection\n"
 		"\n"
-		"GeoCal::TiePointCollection::TiePointCollection(const TiePointVector &Tlist)\n"
 		"GeoCal::TiePointCollection::TiePointCollection\n"
-		"Constructor with an initial list of TiePoints.\n"
+		"Constructor with an initial list of TiePoints.  \n"
 		"\n"
 		""},
 	 { "TiePointCollection_add_ibis_file", _wrap_TiePointCollection_add_ibis_file, METH_VARARGS, "\n"
+		"TiePointCollection_add_ibis_file(TiePointCollection self, std::string const & Ibis_fname, boost::shared_ptr< GeoCal::RasterImage > const & New_image, boost::shared_ptr< GeoCal::Dem > const & D)\n"
 		"\n"
-		"void TiePointCollection::add_ibis_file(const std::string &Ibis_fname, const boost::shared_ptr< RasterImage >\n"
-		"&New_image, const boost::shared_ptr< Dem > &D)\n"
 		"GeoCal::TiePointCollection::add_ibis_file\n"
-		"Add tiepoints from a IBIS file like one passed to geomv.\n"
-		"This is a bit of a specific function, but it can be useful to treat\n"
-		"the grid geomv uses (usually created with tieconv) as a set of\n"
-		"tiepoints.\n"
+		"Add tiepoints from a IBIS file like one passed to geomv.  \n"
 		"\n"
-		"We assume that the 4 columns in (newline,newsamp,oldline,oldsamp)\n"
-		"order. We take in the New_image to translate newline,newsamp to a\n"
-		"ground location, and oldline,oldsamp are the image coordinates. So\n"
-		"this gives a tiepoint in the old image that can we used to map it to\n"
-		"the new image. \n"
+		"This is a bit of a specific function, but it can be useful to treat the grid\n"
+		"geomv uses (usually created with tieconv) as a set of tiepoints.  \n"
+		"\n"
+		"We assume that the 4 columns in (newline,newsamp,oldline,oldsamp) order. We take\n"
+		"in the New_image to translate newline,newsamp to a ground location, and\n"
+		"oldline,oldsamp are the image coordinates. So this gives a tiepoint in the old\n"
+		"image that can we used to map it to the new image.  \n"
+		"\n"
 		""},
 	 { "TiePointCollection_data_array", _wrap_TiePointCollection_data_array, METH_VARARGS, "\n"
+		"TiePointCollection_data_array(TiePointCollection self, boost::shared_ptr< GeoCal::RasterImage > const & Ref_image) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePointCollection::data_array(const boost::shared_ptr< RasterImage > &Ref_image) const\n"
 		"GeoCal::TiePointCollection::data_array\n"
-		"Write out data as a blitz::Array that can be ingested by pandas\n"
-		"dataframe.\n"
-		"Can do this all in python, but the C++ is much faster.\n"
+		"Write out data as a blitz::Array that can be ingested by pandas dataframe.  \n"
 		"\n"
-		"This returns \"ID\", \"Is_GCP\", \"Longitude (deg)\", \"Latitude\n"
-		"(deg)\", \"Height (m)\". If Ref_image is not null, then returns\n"
-		"\"Reference Line\", \"Reference Sample\". Then we return \"Line Image\n"
-		"%d\" \"Sample Image %d\" \"Line Sigma Image %d\" \"Sample Sigma Image\n"
-		"%d\" for each image in the tiepoints. \n"
+		"Can do this all in python, but the C++ is much faster.  \n"
+		"\n"
+		"This returns \"ID\", \"Is_GCP\", \"Longitude (deg)\", \"Latitude (deg)\",\n"
+		"\"Height (m)\". If Ref_image is not null, then returns \"Reference Line\",\n"
+		"\"Reference Sample\". Then we return \"Line Image %d\" \"Sample Image %d\"\n"
+		"\"Line Sigma Image %d\" \"Sample Sigma Image %d\" for each image in the\n"
+		"tiepoints.  \n"
+		"\n"
 		""},
 	 { "TiePointCollection__v_number_gcp", _wrap_TiePointCollection__v_number_gcp, METH_O, "\n"
+		"TiePointCollection__v_number_gcp(TiePointCollection self) -> int\n"
 		"\n"
-		"int TiePointCollection::number_gcp() const\n"
 		"GeoCal::TiePointCollection::number_gcp\n"
-		"Number of gcps.\n"
+		"Number of gcps.  \n"
 		"\n"
 		""},
-	 { "TiePointCollection___str__", _wrap_TiePointCollection___str__, METH_O, NULL},
+	 { "TiePointCollection___str__", _wrap_TiePointCollection___str__, METH_O, "TiePointCollection___str__(TiePointCollection self) -> std::string"},
 	 { "delete_TiePointCollection", _wrap_delete_TiePointCollection, METH_O, "\n"
+		"delete_TiePointCollection(TiePointCollection self)\n"
 		"\n"
-		"virtual GeoCal::TiePointCollection::~TiePointCollection()\n"
 		"GeoCal::TiePointCollection::~TiePointCollection\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "TiePointCollection_swigregister", TiePointCollection_swigregister, METH_O, NULL},
@@ -12356,189 +12391,224 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_TiePoint", _wrap_new_TiePoint, METH_VARARGS, "\n"
+		"TiePoint(int Number_image)\n"
+		"TiePoint()\n"
+		"new_TiePoint(TiePoint Tp) -> TiePoint\n"
 		"\n"
-		"GeoCal::TiePoint::TiePoint(int Number_image)\n"
 		"GeoCal::TiePoint::TiePoint\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "TiePoint__v_id", _wrap_TiePoint__v_id, METH_VARARGS, "\n"
+		"_v_id(TiePoint self) -> int\n"
+		"_v_id(TiePoint self, int const & V)\n"
 		"\n"
-		"void GeoCal::TiePoint::id(int V)\n"
 		"GeoCal::TiePoint::id\n"
 		""},
 	 { "TiePoint__v_is_gcp", _wrap_TiePoint__v_is_gcp, METH_VARARGS, "\n"
+		"_v_is_gcp(TiePoint self) -> bool\n"
+		"_v_is_gcp(TiePoint self, bool const & V)\n"
 		"\n"
-		"void GeoCal::TiePoint::is_gcp(bool V)\n"
 		"GeoCal::TiePoint::is_gcp\n"
 		""},
 	 { "TiePoint__v_ground_location", _wrap_TiePoint__v_ground_location, METH_VARARGS, "\n"
+		"_v_ground_location(TiePoint self) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
+		"_v_ground_location(TiePoint self, boost::shared_ptr< GeoCal::GroundCoordinate > const & V)\n"
 		"\n"
-		"void GeoCal::TiePoint::ground_location(const boost::shared_ptr< GroundCoordinate > &Gc)\n"
 		"GeoCal::TiePoint::ground_location\n"
 		""},
 	 { "TiePoint__v_number_image", _wrap_TiePoint__v_number_image, METH_O, "\n"
+		"_v_number_image(TiePoint self) -> int\n"
 		"\n"
-		"int GeoCal::TiePoint::number_image() const\n"
 		"GeoCal::TiePoint::number_image\n"
-		"Number of images covered by the tie point.\n"
+		"Number of images covered by the tie point.  \n"
 		"\n"
 		""},
 	 { "TiePoint__v_number_image_location", _wrap_TiePoint__v_number_image_location, METH_O, "\n"
+		"_v_number_image_location(TiePoint self) -> int\n"
 		"\n"
-		"int GeoCal::TiePoint::number_image_location() const\n"
 		"GeoCal::TiePoint::number_image_location\n"
 		""},
 	 { "TiePoint_image_coordinate", _wrap_TiePoint_image_coordinate, METH_VARARGS, "\n"
+		"image_coordinate(TiePoint self, int Image_index) -> boost::shared_ptr< GeoCal::ImageCoordinate >\n"
+		"image_coordinate(TiePoint self, int Image_index, boost::shared_ptr< GeoCal::ImageCoordinate > const & Ic, double Line_sigma=0.1, double Sample_sigma=0.1)\n"
 		"\n"
-		"void GeoCal::TiePoint::image_coordinate(int Image_index, const boost::shared_ptr< ImageCoordinate > &Ic,\n"
-		"double Line_sigma=0.1, double Sample_sigma=0.1)\n"
 		"GeoCal::TiePoint::image_coordinate\n"
 		""},
 	 { "TiePoint_line_sigma", _wrap_TiePoint_line_sigma, METH_VARARGS, "\n"
+		"line_sigma(TiePoint self, int Image_index) -> double\n"
 		"\n"
-		"double GeoCal::TiePoint::line_sigma(int Image_index) const\n"
 		"GeoCal::TiePoint::line_sigma\n"
-		"Line sigma.\n"
+		"Line sigma.  \n"
 		"\n"
 		""},
 	 { "TiePoint_sample_sigma", _wrap_TiePoint_sample_sigma, METH_VARARGS, "\n"
+		"sample_sigma(TiePoint self, int Image_index) -> double\n"
 		"\n"
-		"double GeoCal::TiePoint::sample_sigma(int Image_index) const\n"
 		"GeoCal::TiePoint::sample_sigma\n"
-		"Sample sigma.\n"
+		"Sample sigma.  \n"
 		"\n"
 		""},
-	 { "TiePoint___str__", _wrap_TiePoint___str__, METH_O, NULL},
+	 { "TiePoint___str__", _wrap_TiePoint___str__, METH_O, "__str__(TiePoint self) -> std::string"},
 	 { "TiePoint__v_ic", _wrap_TiePoint__v_ic, METH_O, "\n"
+		"_v_ic(TiePoint self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic() const\n"
 		"GeoCal::TiePoint::ic\n"
-		"This repackages the image_coordinate, in a better way for doing such\n"
-		"things as plotting.\n"
-		"We return a 2D array with the first row being the image line and the\n"
-		"second the image sample. The columns are the image indexes. For image\n"
-		"locations that are missing, we return a NaN.\n"
+		"This repackages the image_coordinate, in a better way for doing such things as\n"
+		"plotting.  \n"
 		"\n"
-		"This is really intended for use by python, I'm not sure this would be\n"
-		"of much use in C++. \n"
+		"We return a 2D array with the first row being the image line and the second the\n"
+		"image sample. The columns are the image indexes. For image locations that are\n"
+		"missing, we return a NaN.  \n"
+		"\n"
+		"This is really intended for use by python, I'm not sure this would be of much\n"
+		"use in C++.  \n"
+		"\n"
 		""},
 	 { "TiePoint__v_ic_sigma", _wrap_TiePoint__v_ic_sigma, METH_O, "\n"
+		"_v_ic_sigma(TiePoint self) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic_sigma() const\n"
 		"GeoCal::TiePoint::ic_sigma\n"
-		"Like ic, but return line and sample sigma.\n"
+		"Like ic, but return line and sample sigma.  \n"
 		"\n"
 		""},
 	 { "TiePoint_ic_pred", _wrap_TiePoint_ic_pred, METH_VARARGS, "\n"
+		"ic_pred(TiePoint self, IgcCollection Igccol) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic_pred(const IgcCollection &Igccol) const\n"
 		"GeoCal::TiePoint::ic_pred\n"
-		"Like ic, but uses the supplied igccol to predict the image location\n"
-		"given our current ground position.\n"
+		"Like ic, but uses the supplied igccol to predict the image location given our\n"
+		"current ground position.  \n"
 		"\n"
 		""},
 	 { "TiePoint_ic_diff", _wrap_TiePoint_ic_diff, METH_VARARGS, "\n"
+		"ic_diff(TiePoint self, IgcCollection Igccol) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePoint::ic_diff(const IgcCollection &Igccol) const\n"
 		"GeoCal::TiePoint::ic_diff\n"
-		"Difference between observed and predicted image coordinates.\n"
+		"Difference between observed and predicted image coordinates.  \n"
 		"\n"
 		""},
 	 { "delete_TiePoint", _wrap_delete_TiePoint, METH_O, "\n"
+		"delete_TiePoint(TiePoint self)\n"
 		"\n"
-		"virtual GeoCal::TiePoint::~TiePoint()\n"
 		"GeoCal::TiePoint::~TiePoint\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "TiePoint_swigregister", TiePoint_swigregister, METH_O, NULL},
 	 { "TiePoint_swiginit", TiePoint_swiginit, METH_VARARGS, NULL},
-	 { "TiePointVector_iterator", _wrap_TiePointVector_iterator, METH_O, NULL},
-	 { "TiePointVector___nonzero__", _wrap_TiePointVector___nonzero__, METH_O, NULL},
-	 { "TiePointVector___bool__", _wrap_TiePointVector___bool__, METH_O, NULL},
-	 { "TiePointVector___len__", _wrap_TiePointVector___len__, METH_O, NULL},
-	 { "TiePointVector___getslice__", _wrap_TiePointVector___getslice__, METH_VARARGS, NULL},
-	 { "TiePointVector___setslice__", _wrap_TiePointVector___setslice__, METH_VARARGS, NULL},
-	 { "TiePointVector___delslice__", _wrap_TiePointVector___delslice__, METH_VARARGS, NULL},
-	 { "TiePointVector___delitem__", _wrap_TiePointVector___delitem__, METH_VARARGS, NULL},
-	 { "TiePointVector___getitem__", _wrap_TiePointVector___getitem__, METH_VARARGS, NULL},
-	 { "TiePointVector___setitem__", _wrap_TiePointVector___setitem__, METH_VARARGS, NULL},
-	 { "TiePointVector_pop", _wrap_TiePointVector_pop, METH_O, NULL},
-	 { "TiePointVector_append", _wrap_TiePointVector_append, METH_VARARGS, NULL},
-	 { "TiePointVector_empty", _wrap_TiePointVector_empty, METH_O, NULL},
-	 { "TiePointVector_size", _wrap_TiePointVector_size, METH_O, NULL},
-	 { "TiePointVector_swap", _wrap_TiePointVector_swap, METH_VARARGS, NULL},
-	 { "TiePointVector_begin", _wrap_TiePointVector_begin, METH_O, NULL},
-	 { "TiePointVector_end", _wrap_TiePointVector_end, METH_O, NULL},
-	 { "TiePointVector_rbegin", _wrap_TiePointVector_rbegin, METH_O, NULL},
-	 { "TiePointVector_rend", _wrap_TiePointVector_rend, METH_O, NULL},
-	 { "TiePointVector_clear", _wrap_TiePointVector_clear, METH_O, NULL},
-	 { "TiePointVector_get_allocator", _wrap_TiePointVector_get_allocator, METH_O, NULL},
-	 { "TiePointVector_pop_back", _wrap_TiePointVector_pop_back, METH_O, NULL},
-	 { "TiePointVector_erase", _wrap_TiePointVector_erase, METH_VARARGS, NULL},
-	 { "new_TiePointVector", _wrap_new_TiePointVector, METH_VARARGS, NULL},
-	 { "TiePointVector_push_back", _wrap_TiePointVector_push_back, METH_VARARGS, NULL},
-	 { "TiePointVector_front", _wrap_TiePointVector_front, METH_O, NULL},
-	 { "TiePointVector_back", _wrap_TiePointVector_back, METH_O, NULL},
-	 { "TiePointVector_assign", _wrap_TiePointVector_assign, METH_VARARGS, NULL},
-	 { "TiePointVector_resize", _wrap_TiePointVector_resize, METH_VARARGS, NULL},
-	 { "TiePointVector_insert", _wrap_TiePointVector_insert, METH_VARARGS, NULL},
-	 { "TiePointVector_reserve", _wrap_TiePointVector_reserve, METH_VARARGS, NULL},
-	 { "TiePointVector_capacity", _wrap_TiePointVector_capacity, METH_O, NULL},
-	 { "delete_TiePointVector", _wrap_delete_TiePointVector, METH_O, NULL},
+	 { "TiePointVector_iterator", _wrap_TiePointVector_iterator, METH_O, "iterator(TiePointVector self) -> SwigPyIterator"},
+	 { "TiePointVector___nonzero__", _wrap_TiePointVector___nonzero__, METH_O, "__nonzero__(TiePointVector self) -> bool"},
+	 { "TiePointVector___bool__", _wrap_TiePointVector___bool__, METH_O, "__bool__(TiePointVector self) -> bool"},
+	 { "TiePointVector___len__", _wrap_TiePointVector___len__, METH_O, "__len__(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type"},
+	 { "TiePointVector___getslice__", _wrap_TiePointVector___getslice__, METH_VARARGS, "__getslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j) -> TiePointVector"},
+	 { "TiePointVector___setslice__", _wrap_TiePointVector___setslice__, METH_VARARGS, "\n"
+		"__setslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j)\n"
+		"__setslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j, TiePointVector v)\n"
+		""},
+	 { "TiePointVector___delslice__", _wrap_TiePointVector___delslice__, METH_VARARGS, "__delslice__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type j)"},
+	 { "TiePointVector___delitem__", _wrap_TiePointVector___delitem__, METH_VARARGS, "\n"
+		"__delitem__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i)\n"
+		"__delitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "TiePointVector___getitem__", _wrap_TiePointVector___getitem__, METH_VARARGS, "\n"
+		"__getitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice) -> TiePointVector\n"
+		"__getitem__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &\n"
+		""},
+	 { "TiePointVector___setitem__", _wrap_TiePointVector___setitem__, METH_VARARGS, "\n"
+		"__setitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice, TiePointVector v)\n"
+		"__setitem__(TiePointVector self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)\n"
+		""},
+	 { "TiePointVector_pop", _wrap_TiePointVector_pop, METH_O, "pop(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type"},
+	 { "TiePointVector_append", _wrap_TiePointVector_append, METH_VARARGS, "append(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)"},
+	 { "TiePointVector_empty", _wrap_TiePointVector_empty, METH_O, "empty(TiePointVector self) -> bool"},
+	 { "TiePointVector_size", _wrap_TiePointVector_size, METH_O, "size(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type"},
+	 { "TiePointVector_swap", _wrap_TiePointVector_swap, METH_VARARGS, "swap(TiePointVector self, TiePointVector v)"},
+	 { "TiePointVector_begin", _wrap_TiePointVector_begin, METH_O, "begin(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator"},
+	 { "TiePointVector_end", _wrap_TiePointVector_end, METH_O, "end(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator"},
+	 { "TiePointVector_rbegin", _wrap_TiePointVector_rbegin, METH_O, "rbegin(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::reverse_iterator"},
+	 { "TiePointVector_rend", _wrap_TiePointVector_rend, METH_O, "rend(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::reverse_iterator"},
+	 { "TiePointVector_clear", _wrap_TiePointVector_clear, METH_O, "clear(TiePointVector self)"},
+	 { "TiePointVector_get_allocator", _wrap_TiePointVector_get_allocator, METH_O, "get_allocator(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::allocator_type"},
+	 { "TiePointVector_pop_back", _wrap_TiePointVector_pop_back, METH_O, "pop_back(TiePointVector self)"},
+	 { "TiePointVector_erase", _wrap_TiePointVector_erase, METH_VARARGS, "\n"
+		"erase(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator\n"
+		"erase(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator first, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator\n"
+		""},
+	 { "new_TiePointVector", _wrap_new_TiePointVector, METH_VARARGS, "\n"
+		"TiePointVector()\n"
+		"TiePointVector(TiePointVector other)\n"
+		"TiePointVector(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type size)\n"
+		"new_TiePointVector(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type size, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & value) -> TiePointVector\n"
+		""},
+	 { "TiePointVector_push_back", _wrap_TiePointVector_push_back, METH_VARARGS, "push_back(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)"},
+	 { "TiePointVector_front", _wrap_TiePointVector_front, METH_O, "front(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &"},
+	 { "TiePointVector_back", _wrap_TiePointVector_back, METH_O, "back(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &"},
+	 { "TiePointVector_assign", _wrap_TiePointVector_assign, METH_VARARGS, "assign(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)"},
+	 { "TiePointVector_resize", _wrap_TiePointVector_resize, METH_VARARGS, "\n"
+		"resize(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type new_size)\n"
+		"resize(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)\n"
+		""},
+	 { "TiePointVector_insert", _wrap_TiePointVector_insert, METH_VARARGS, "\n"
+		"insert(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator\n"
+		"insert(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const & x)\n"
+		""},
+	 { "TiePointVector_reserve", _wrap_TiePointVector_reserve, METH_VARARGS, "reserve(TiePointVector self, std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type n)"},
+	 { "TiePointVector_capacity", _wrap_TiePointVector_capacity, METH_O, "capacity(TiePointVector self) -> std::vector< boost::shared_ptr< GeoCal::TiePoint > >::size_type"},
+	 { "delete_TiePointVector", _wrap_delete_TiePointVector, METH_O, "delete_TiePointVector(TiePointVector self)"},
 	 { "TiePointVector_swigregister", TiePointVector_swigregister, METH_O, NULL},
 	 { "TiePointVector_swiginit", TiePointVector_swiginit, METH_VARARGS, NULL},
 	 { "new_TiePointCollection", _wrap_new_TiePointCollection, METH_VARARGS, "\n"
+		"TiePointCollection()\n"
+		"new_TiePointCollection(TiePointVector Tpv) -> TiePointCollection\n"
 		"\n"
-		"GeoCal::TiePointCollection::TiePointCollection(const TiePointVector &Tlist)\n"
 		"GeoCal::TiePointCollection::TiePointCollection\n"
-		"Constructor with an initial list of TiePoints.\n"
+		"Constructor with an initial list of TiePoints.  \n"
 		"\n"
 		""},
 	 { "TiePointCollection_add_ibis_file", _wrap_TiePointCollection_add_ibis_file, METH_VARARGS, "\n"
+		"add_ibis_file(TiePointCollection self, std::string const & Ibis_fname, boost::shared_ptr< GeoCal::RasterImage > const & New_image, boost::shared_ptr< GeoCal::Dem > const & D)\n"
 		"\n"
-		"void TiePointCollection::add_ibis_file(const std::string &Ibis_fname, const boost::shared_ptr< RasterImage >\n"
-		"&New_image, const boost::shared_ptr< Dem > &D)\n"
 		"GeoCal::TiePointCollection::add_ibis_file\n"
-		"Add tiepoints from a IBIS file like one passed to geomv.\n"
-		"This is a bit of a specific function, but it can be useful to treat\n"
-		"the grid geomv uses (usually created with tieconv) as a set of\n"
-		"tiepoints.\n"
+		"Add tiepoints from a IBIS file like one passed to geomv.  \n"
 		"\n"
-		"We assume that the 4 columns in (newline,newsamp,oldline,oldsamp)\n"
-		"order. We take in the New_image to translate newline,newsamp to a\n"
-		"ground location, and oldline,oldsamp are the image coordinates. So\n"
-		"this gives a tiepoint in the old image that can we used to map it to\n"
-		"the new image. \n"
+		"This is a bit of a specific function, but it can be useful to treat the grid\n"
+		"geomv uses (usually created with tieconv) as a set of tiepoints.  \n"
+		"\n"
+		"We assume that the 4 columns in (newline,newsamp,oldline,oldsamp) order. We take\n"
+		"in the New_image to translate newline,newsamp to a ground location, and\n"
+		"oldline,oldsamp are the image coordinates. So this gives a tiepoint in the old\n"
+		"image that can we used to map it to the new image.  \n"
+		"\n"
 		""},
 	 { "TiePointCollection_data_array", _wrap_TiePointCollection_data_array, METH_VARARGS, "\n"
+		"data_array(TiePointCollection self, boost::shared_ptr< GeoCal::RasterImage > const & Ref_image) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< double, 2 > TiePointCollection::data_array(const boost::shared_ptr< RasterImage > &Ref_image) const\n"
 		"GeoCal::TiePointCollection::data_array\n"
-		"Write out data as a blitz::Array that can be ingested by pandas\n"
-		"dataframe.\n"
-		"Can do this all in python, but the C++ is much faster.\n"
+		"Write out data as a blitz::Array that can be ingested by pandas dataframe.  \n"
 		"\n"
-		"This returns \"ID\", \"Is_GCP\", \"Longitude (deg)\", \"Latitude\n"
-		"(deg)\", \"Height (m)\". If Ref_image is not null, then returns\n"
-		"\"Reference Line\", \"Reference Sample\". Then we return \"Line Image\n"
-		"%d\" \"Sample Image %d\" \"Line Sigma Image %d\" \"Sample Sigma Image\n"
-		"%d\" for each image in the tiepoints. \n"
+		"Can do this all in python, but the C++ is much faster.  \n"
+		"\n"
+		"This returns \"ID\", \"Is_GCP\", \"Longitude (deg)\", \"Latitude (deg)\",\n"
+		"\"Height (m)\". If Ref_image is not null, then returns \"Reference Line\",\n"
+		"\"Reference Sample\". Then we return \"Line Image %d\" \"Sample Image %d\"\n"
+		"\"Line Sigma Image %d\" \"Sample Sigma Image %d\" for each image in the\n"
+		"tiepoints.  \n"
+		"\n"
 		""},
 	 { "TiePointCollection__v_number_gcp", _wrap_TiePointCollection__v_number_gcp, METH_O, "\n"
+		"_v_number_gcp(TiePointCollection self) -> int\n"
 		"\n"
-		"int TiePointCollection::number_gcp() const\n"
 		"GeoCal::TiePointCollection::number_gcp\n"
-		"Number of gcps.\n"
+		"Number of gcps.  \n"
 		"\n"
 		""},
-	 { "TiePointCollection___str__", _wrap_TiePointCollection___str__, METH_O, NULL},
+	 { "TiePointCollection___str__", _wrap_TiePointCollection___str__, METH_O, "__str__(TiePointCollection self) -> std::string"},
 	 { "delete_TiePointCollection", _wrap_delete_TiePointCollection, METH_O, "\n"
+		"delete_TiePointCollection(TiePointCollection self)\n"
 		"\n"
-		"virtual GeoCal::TiePointCollection::~TiePointCollection()\n"
 		"GeoCal::TiePointCollection::~TiePointCollection\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "TiePointCollection_swigregister", TiePointCollection_swigregister, METH_O, NULL},

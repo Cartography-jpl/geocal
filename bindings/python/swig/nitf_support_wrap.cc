@@ -6536,55 +6536,61 @@ fail:
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "nitf_to_quaternion", _wrap_nitf_to_quaternion, METH_O, "\n"
+		"nitf_to_quaternion(BlitzArray_double_1 Data) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< T > GeoCal::nitf_to_quaternion(const blitz::Array< T, 1 > &Data)\n"
 		"GeoCal::nitf_to_quaternion\n"
-		"Map 4 values read from a NITF file (e.g., SENSORB, CSATTB) to a\n"
-		"quaternion.\n"
-		"There are a few different conventions about the ordering of the\n"
-		"quaternion coefficients. The boost library places the real part at the\n"
-		"front, so we have a + b i + c j + d k and the quaternion is 4-tuple\n"
-		"(a, b, c, d). The convention used by NITF data is q1 i + q2 j + q3 k +\n"
-		"q4 with the 4-tuple is (q1, q2, q3, q4). That means when we bring this\n"
-		"over to the boost library, we need to reorder this to the 4-tuple (q4,\n"
-		"q1, q2, q3).\n"
+		"Map 4 values read from a NITF file (e.g., SENSORB, CSATTB) to a quaternion.  \n"
 		"\n"
-		"Something we do not change but you should be aware of is that the\n"
-		"sensor coordinate system has the line/along track direction as +y and\n"
-		"the sample/cross track as -x. We have support for this in e.g.,\n"
-		"QuaternionCamera and SensrbCamera but a lot of our default code based\n"
-		"on the original EOS/MISR orbit has +x in the line direction and +y in\n"
-		"the sample direction. Also, there are \"sensor\" and \"camera\"\n"
-		"coordinates which change by the quaternion m_sen_to_cam = (0.5, 0.5,\n"
-		"0.5, -0.5), see SensrbCamera code for samples of this. So you may need\n"
-		"to multiply m_sen_to_cam or conj(m_sen_to_cam) to get the quaternions\n"
-		"you are expecting. \n"
+		"There are a few different conventions about the ordering of the quaternion\n"
+		"coefficients. The boost library places the real part at the front, so we have a\n"
+		"+ b i + c j + d k and the quaternion is 4-tuple (a, b, c, d). The convention\n"
+		"used by NITF data is q1 i + q2 j + q3 k + q4 with the 4-tuple is (q1, q2, q3,\n"
+		"q4). That means when we bring this over to the boost library, we need to reorder\n"
+		"this to the 4-tuple (q4, q1, q2, q3).  \n"
+		"\n"
+		"Something we do *not* change but you should be aware of is that the sensor\n"
+		"coordinate system has the line/along track direction as +y and the sample/cross\n"
+		"track as -x. We have support for this in e.g., QuaternionCamera and SensrbCamera\n"
+		"but a lot of our default code based on the original EOS/MISR orbit has +x in the\n"
+		"line direction and +y in the sample direction. Also, there are \"sensor\" and\n"
+		"\"camera\" coordinates which change by the quaternion m_sen_to_cam = (0.5, 0.5,\n"
+		"0.5, -0.5), see SensrbCamera code for samples of this. So you may need to\n"
+		"multiply m_sen_to_cam or conj(m_sen_to_cam) to get the quaternions you are\n"
+		"expecting.  \n"
+		"\n"
 		""},
 	 { "quaternion_to_nitf", _wrap_quaternion_to_nitf, METH_VARARGS, "\n"
+		"quaternion_to_nitf(Quaternion_double Q) -> BlitzArray_double_1\n"
+		"quaternion_to_nitf(BlitzArray_double_1 Q) -> BlitzArray_double_1\n"
+		"quaternion_to_nitf(BlitzArray_double_2 Q) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< T, 1 > GeoCal::quaternion_to_nitf(const boost::math::quaternion< T > &Q)\n"
 		"GeoCal::quaternion_to_nitf\n"
-		"Reverse nitf_to_quaternion.\n"
-		"See nitf_to_quaternion for documentation on what this does. \n"
+		"Reverse nitf_to_quaternion.  \n"
+		"\n"
+		"See nitf_to_quaternion for documentation on what this does.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };
@@ -6592,55 +6598,61 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "nitf_to_quaternion", _wrap_nitf_to_quaternion, METH_O, "\n"
+		"nitf_to_quaternion(BlitzArray_double_1 Data) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< T > GeoCal::nitf_to_quaternion(const blitz::Array< T, 1 > &Data)\n"
 		"GeoCal::nitf_to_quaternion\n"
-		"Map 4 values read from a NITF file (e.g., SENSORB, CSATTB) to a\n"
-		"quaternion.\n"
-		"There are a few different conventions about the ordering of the\n"
-		"quaternion coefficients. The boost library places the real part at the\n"
-		"front, so we have a + b i + c j + d k and the quaternion is 4-tuple\n"
-		"(a, b, c, d). The convention used by NITF data is q1 i + q2 j + q3 k +\n"
-		"q4 with the 4-tuple is (q1, q2, q3, q4). That means when we bring this\n"
-		"over to the boost library, we need to reorder this to the 4-tuple (q4,\n"
-		"q1, q2, q3).\n"
+		"Map 4 values read from a NITF file (e.g., SENSORB, CSATTB) to a quaternion.  \n"
 		"\n"
-		"Something we do not change but you should be aware of is that the\n"
-		"sensor coordinate system has the line/along track direction as +y and\n"
-		"the sample/cross track as -x. We have support for this in e.g.,\n"
-		"QuaternionCamera and SensrbCamera but a lot of our default code based\n"
-		"on the original EOS/MISR orbit has +x in the line direction and +y in\n"
-		"the sample direction. Also, there are \"sensor\" and \"camera\"\n"
-		"coordinates which change by the quaternion m_sen_to_cam = (0.5, 0.5,\n"
-		"0.5, -0.5), see SensrbCamera code for samples of this. So you may need\n"
-		"to multiply m_sen_to_cam or conj(m_sen_to_cam) to get the quaternions\n"
-		"you are expecting. \n"
+		"There are a few different conventions about the ordering of the quaternion\n"
+		"coefficients. The boost library places the real part at the front, so we have a\n"
+		"+ b i + c j + d k and the quaternion is 4-tuple (a, b, c, d). The convention\n"
+		"used by NITF data is q1 i + q2 j + q3 k + q4 with the 4-tuple is (q1, q2, q3,\n"
+		"q4). That means when we bring this over to the boost library, we need to reorder\n"
+		"this to the 4-tuple (q4, q1, q2, q3).  \n"
+		"\n"
+		"Something we do *not* change but you should be aware of is that the sensor\n"
+		"coordinate system has the line/along track direction as +y and the sample/cross\n"
+		"track as -x. We have support for this in e.g., QuaternionCamera and SensrbCamera\n"
+		"but a lot of our default code based on the original EOS/MISR orbit has +x in the\n"
+		"line direction and +y in the sample direction. Also, there are \"sensor\" and\n"
+		"\"camera\" coordinates which change by the quaternion m_sen_to_cam = (0.5, 0.5,\n"
+		"0.5, -0.5), see SensrbCamera code for samples of this. So you may need to\n"
+		"multiply m_sen_to_cam or conj(m_sen_to_cam) to get the quaternions you are\n"
+		"expecting.  \n"
+		"\n"
 		""},
 	 { "quaternion_to_nitf", _wrap_quaternion_to_nitf, METH_VARARGS, "\n"
+		"quaternion_to_nitf(Quaternion_double Q) -> BlitzArray_double_1\n"
+		"quaternion_to_nitf(BlitzArray_double_1 Q) -> BlitzArray_double_1\n"
+		"quaternion_to_nitf(BlitzArray_double_2 Q) -> BlitzArray_double_2\n"
 		"\n"
-		"blitz::Array< T, 1 > GeoCal::quaternion_to_nitf(const boost::math::quaternion< T > &Q)\n"
 		"GeoCal::quaternion_to_nitf\n"
-		"Reverse nitf_to_quaternion.\n"
-		"See nitf_to_quaternion for documentation on what this does. \n"
+		"Reverse nitf_to_quaternion.  \n"
+		"\n"
+		"See nitf_to_quaternion for documentation on what this does.  \n"
+		"\n"
 		""},
 	 { NULL, NULL, 0, NULL }
 };

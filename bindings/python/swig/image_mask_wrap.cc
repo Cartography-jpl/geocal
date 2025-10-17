@@ -10173,116 +10173,149 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "ImageMask_mask", _wrap_ImageMask_mask, METH_VARARGS, "\n"
+		"ImageMask_mask(ImageMask self, int Line, int Sample) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const =0\n"
 		"GeoCal::ImageMask::mask\n"
-		"Indicate if a particular point is masked.\n"
-		"If true, the point is masked and should not be used in processing\n"
-		"(e.g., don't do image matching) \n"
+		"Indicate if a particular point is masked.  \n"
+		"\n"
+		"If true, the point is masked and should not be used in processing (e.g., don't\n"
+		"do image matching)  \n"
+		"\n"
 		""},
 	 { "ImageMask_mask_ic", _wrap_ImageMask_mask_ic, METH_VARARGS, "\n"
+		"ImageMask_mask_ic(ImageMask self, ImageCoordinate Ic) -> bool\n"
 		"\n"
-		"bool ImageMask::mask_ic(const ImageCoordinate &Ic) const\n"
 		"GeoCal::ImageMask::mask_ic\n"
-		"Indicate if an ImageCoordinate is masked or not.\n"
-		"We search for the 4 neighbors around an ImageCoordinate are masked. \n"
+		"Indicate if an ImageCoordinate is masked or not.  \n"
+		"\n"
+		"We search for the 4 neighbors around an ImageCoordinate are masked.  \n"
+		"\n"
 		""},
 	 { "ImageMask_area_any_masked", _wrap_ImageMask_area_any_masked, METH_VARARGS, "\n"
+		"ImageMask_area_any_masked(ImageMask self, int Line, int Sample, int Number_line, int Number_sample) -> bool\n"
 		"\n"
-		"bool ImageMask::area_any_masked(int Line, int Sample, int Number_line, int Number_sample) const\n"
 		"GeoCal::ImageMask::area_any_masked\n"
-		"Indicated if a area has any masking or not.\n"
-		"See the discussion in the comments of Mask for detailed discussion of\n"
-		"the check. \n"
-		""},
-	 { "ImageMask___str__", _wrap_ImageMask___str__, METH_O, NULL},
-	 { "delete_ImageMask", _wrap_delete_ImageMask, METH_O, "\n"
+		"Indicated if a area has any masking or not.  \n"
 		"\n"
-		"virtual GeoCal::ImageMask::~ImageMask()\n"
+		"See the discussion in the comments of Mask for detailed discussion of the check.  \n"
+		"\n"
+		""},
+	 { "ImageMask___str__", _wrap_ImageMask___str__, METH_O, "ImageMask___str__(ImageMask self) -> std::string"},
+	 { "delete_ImageMask", _wrap_delete_ImageMask, METH_O, "\n"
+		"delete_ImageMask(ImageMask self)\n"
+		"\n"
 		"GeoCal::ImageMask::~ImageMask\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMask_swigregister", ImageMask_swigregister, METH_O, NULL},
 	 { "OffsetImageMask__v_original_image_mask", _wrap_OffsetImageMask__v_original_image_mask, METH_O, "\n"
+		"OffsetImageMask__v_original_image_mask(OffsetImageMask self) -> boost::shared_ptr< GeoCal::ImageMask >\n"
 		"\n"
-		"const boost::shared_ptr< ImageMask > & GeoCal::OffsetImageMask::original_image_mask() const\n"
 		"GeoCal::OffsetImageMask::original_image_mask\n"
-		"Original ImageMask.\n"
+		"Original ImageMask.  \n"
 		"\n"
 		""},
 	 { "OffsetImageMask__v_line_offset", _wrap_OffsetImageMask__v_line_offset, METH_O, "\n"
+		"OffsetImageMask__v_line_offset(OffsetImageMask self) -> double\n"
 		"\n"
-		"double GeoCal::OffsetImageMask::line_offset() const\n"
 		"GeoCal::OffsetImageMask::line_offset\n"
-		"Return line offset.\n"
+		"Return line offset.  \n"
 		"\n"
 		""},
 	 { "OffsetImageMask__v_sample_offset", _wrap_OffsetImageMask__v_sample_offset, METH_O, "\n"
+		"OffsetImageMask__v_sample_offset(OffsetImageMask self) -> double\n"
 		"\n"
-		"double GeoCal::OffsetImageMask::sample_offset() const\n"
 		"GeoCal::OffsetImageMask::sample_offset\n"
-		"Return line offset.\n"
+		"Return line offset.  \n"
 		"\n"
 		""},
 	 { "delete_OffsetImageMask", _wrap_delete_OffsetImageMask, METH_O, "\n"
+		"delete_OffsetImageMask(OffsetImageMask self)\n"
 		"\n"
-		"virtual GeoCal::OffsetImageMask::~OffsetImageMask()\n"
 		"GeoCal::OffsetImageMask::~OffsetImageMask\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OffsetImageMask_swigregister", OffsetImageMask_swigregister, METH_O, NULL},
 	 { "new_CombinedImageMask", _wrap_new_CombinedImageMask, METH_VARARGS, "\n"
+		"CombinedImageMask()\n"
+		"new_CombinedImageMask(Vector_ImageMask Ml) -> CombinedImageMask\n"
 		"\n"
-		"GeoCal::CombinedImageMask::CombinedImageMask(It First, It Last)\n"
 		"GeoCal::CombinedImageMask::CombinedImageMask\n"
-		"Create a CombinedImageMask using the given set of masks, where we get this from a general\n"
-		"InputIterator.\n"
+		"Create a CombinedImageMask using the given set of masks, where we get this from\n"
+		"a general InputIterator.  \n"
 		"\n"
 		""},
-	 { "CombinedImageMask_mask_list_set", _wrap_CombinedImageMask_mask_list_set, METH_VARARGS, NULL},
-	 { "CombinedImageMask_mask_list_get", _wrap_CombinedImageMask_mask_list_get, METH_O, NULL},
+	 { "CombinedImageMask_mask_list_set", _wrap_CombinedImageMask_mask_list_set, METH_VARARGS, "CombinedImageMask_mask_list_set(CombinedImageMask self, Vector_ImageMask mask_list)"},
+	 { "CombinedImageMask_mask_list_get", _wrap_CombinedImageMask_mask_list_get, METH_O, "CombinedImageMask_mask_list_get(CombinedImageMask self) -> Vector_ImageMask"},
 	 { "delete_CombinedImageMask", _wrap_delete_CombinedImageMask, METH_O, "\n"
+		"delete_CombinedImageMask(CombinedImageMask self)\n"
 		"\n"
-		"virtual GeoCal::CombinedImageMask::~CombinedImageMask()\n"
 		"GeoCal::CombinedImageMask::~CombinedImageMask\n"
 		""},
 	 { "CombinedImageMask_swigregister", CombinedImageMask_swigregister, METH_O, NULL},
 	 { "CombinedImageMask_swiginit", CombinedImageMask_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_iterator", _wrap_Vector_ImageMask_iterator, METH_O, NULL},
-	 { "Vector_ImageMask___nonzero__", _wrap_Vector_ImageMask___nonzero__, METH_O, NULL},
-	 { "Vector_ImageMask___bool__", _wrap_Vector_ImageMask___bool__, METH_O, NULL},
-	 { "Vector_ImageMask___len__", _wrap_Vector_ImageMask___len__, METH_O, NULL},
-	 { "Vector_ImageMask___getslice__", _wrap_Vector_ImageMask___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___setslice__", _wrap_Vector_ImageMask___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___delslice__", _wrap_Vector_ImageMask___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___delitem__", _wrap_Vector_ImageMask___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___getitem__", _wrap_Vector_ImageMask___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___setitem__", _wrap_Vector_ImageMask___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_pop", _wrap_Vector_ImageMask_pop, METH_O, NULL},
-	 { "Vector_ImageMask_append", _wrap_Vector_ImageMask_append, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_empty", _wrap_Vector_ImageMask_empty, METH_O, NULL},
-	 { "Vector_ImageMask_size", _wrap_Vector_ImageMask_size, METH_O, NULL},
-	 { "Vector_ImageMask_swap", _wrap_Vector_ImageMask_swap, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_begin", _wrap_Vector_ImageMask_begin, METH_O, NULL},
-	 { "Vector_ImageMask_end", _wrap_Vector_ImageMask_end, METH_O, NULL},
-	 { "Vector_ImageMask_rbegin", _wrap_Vector_ImageMask_rbegin, METH_O, NULL},
-	 { "Vector_ImageMask_rend", _wrap_Vector_ImageMask_rend, METH_O, NULL},
-	 { "Vector_ImageMask_clear", _wrap_Vector_ImageMask_clear, METH_O, NULL},
-	 { "Vector_ImageMask_get_allocator", _wrap_Vector_ImageMask_get_allocator, METH_O, NULL},
-	 { "Vector_ImageMask_pop_back", _wrap_Vector_ImageMask_pop_back, METH_O, NULL},
-	 { "Vector_ImageMask_erase", _wrap_Vector_ImageMask_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ImageMask", _wrap_new_Vector_ImageMask, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_push_back", _wrap_Vector_ImageMask_push_back, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_front", _wrap_Vector_ImageMask_front, METH_O, NULL},
-	 { "Vector_ImageMask_back", _wrap_Vector_ImageMask_back, METH_O, NULL},
-	 { "Vector_ImageMask_assign", _wrap_Vector_ImageMask_assign, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_resize", _wrap_Vector_ImageMask_resize, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_insert", _wrap_Vector_ImageMask_insert, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_reserve", _wrap_Vector_ImageMask_reserve, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_capacity", _wrap_Vector_ImageMask_capacity, METH_O, NULL},
-	 { "delete_Vector_ImageMask", _wrap_delete_Vector_ImageMask, METH_O, NULL},
+	 { "Vector_ImageMask_iterator", _wrap_Vector_ImageMask_iterator, METH_O, "Vector_ImageMask_iterator(Vector_ImageMask self) -> SwigPyIterator"},
+	 { "Vector_ImageMask___nonzero__", _wrap_Vector_ImageMask___nonzero__, METH_O, "Vector_ImageMask___nonzero__(Vector_ImageMask self) -> bool"},
+	 { "Vector_ImageMask___bool__", _wrap_Vector_ImageMask___bool__, METH_O, "Vector_ImageMask___bool__(Vector_ImageMask self) -> bool"},
+	 { "Vector_ImageMask___len__", _wrap_Vector_ImageMask___len__, METH_O, "Vector_ImageMask___len__(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type"},
+	 { "Vector_ImageMask___getslice__", _wrap_Vector_ImageMask___getslice__, METH_VARARGS, "Vector_ImageMask___getslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j) -> Vector_ImageMask"},
+	 { "Vector_ImageMask___setslice__", _wrap_Vector_ImageMask___setslice__, METH_VARARGS, "\n"
+		"Vector_ImageMask___setslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j)\n"
+		"Vector_ImageMask___setslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j, Vector_ImageMask v)\n"
+		""},
+	 { "Vector_ImageMask___delslice__", _wrap_Vector_ImageMask___delslice__, METH_VARARGS, "Vector_ImageMask___delslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j)"},
+	 { "Vector_ImageMask___delitem__", _wrap_Vector_ImageMask___delitem__, METH_VARARGS, "\n"
+		"Vector_ImageMask___delitem__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i)\n"
+		"Vector_ImageMask___delitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ImageMask___getitem__", _wrap_Vector_ImageMask___getitem__, METH_VARARGS, "\n"
+		"Vector_ImageMask___getitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice) -> Vector_ImageMask\n"
+		"Vector_ImageMask___getitem__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const &\n"
+		""},
+	 { "Vector_ImageMask___setitem__", _wrap_Vector_ImageMask___setitem__, METH_VARARGS, "\n"
+		"Vector_ImageMask___setitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice, Vector_ImageMask v)\n"
+		"Vector_ImageMask___setitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_ImageMask___setitem__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageMask_pop", _wrap_Vector_ImageMask_pop, METH_O, "Vector_ImageMask_pop(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type"},
+	 { "Vector_ImageMask_append", _wrap_Vector_ImageMask_append, METH_VARARGS, "Vector_ImageMask_append(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)"},
+	 { "Vector_ImageMask_empty", _wrap_Vector_ImageMask_empty, METH_O, "Vector_ImageMask_empty(Vector_ImageMask self) -> bool"},
+	 { "Vector_ImageMask_size", _wrap_Vector_ImageMask_size, METH_O, "Vector_ImageMask_size(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type"},
+	 { "Vector_ImageMask_swap", _wrap_Vector_ImageMask_swap, METH_VARARGS, "Vector_ImageMask_swap(Vector_ImageMask self, Vector_ImageMask v)"},
+	 { "Vector_ImageMask_begin", _wrap_Vector_ImageMask_begin, METH_O, "Vector_ImageMask_begin(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator"},
+	 { "Vector_ImageMask_end", _wrap_Vector_ImageMask_end, METH_O, "Vector_ImageMask_end(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator"},
+	 { "Vector_ImageMask_rbegin", _wrap_Vector_ImageMask_rbegin, METH_O, "Vector_ImageMask_rbegin(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::reverse_iterator"},
+	 { "Vector_ImageMask_rend", _wrap_Vector_ImageMask_rend, METH_O, "Vector_ImageMask_rend(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::reverse_iterator"},
+	 { "Vector_ImageMask_clear", _wrap_Vector_ImageMask_clear, METH_O, "Vector_ImageMask_clear(Vector_ImageMask self)"},
+	 { "Vector_ImageMask_get_allocator", _wrap_Vector_ImageMask_get_allocator, METH_O, "Vector_ImageMask_get_allocator(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::allocator_type"},
+	 { "Vector_ImageMask_pop_back", _wrap_Vector_ImageMask_pop_back, METH_O, "Vector_ImageMask_pop_back(Vector_ImageMask self)"},
+	 { "Vector_ImageMask_erase", _wrap_Vector_ImageMask_erase, METH_VARARGS, "\n"
+		"Vector_ImageMask_erase(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator\n"
+		"Vector_ImageMask_erase(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator first, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator\n"
+		""},
+	 { "new_Vector_ImageMask", _wrap_new_Vector_ImageMask, METH_VARARGS, "\n"
+		"Vector_ImageMask()\n"
+		"Vector_ImageMask(Vector_ImageMask other)\n"
+		"Vector_ImageMask(std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type size)\n"
+		"new_Vector_ImageMask(std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & value) -> Vector_ImageMask\n"
+		""},
+	 { "Vector_ImageMask_push_back", _wrap_Vector_ImageMask_push_back, METH_VARARGS, "Vector_ImageMask_push_back(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)"},
+	 { "Vector_ImageMask_front", _wrap_Vector_ImageMask_front, METH_O, "Vector_ImageMask_front(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const &"},
+	 { "Vector_ImageMask_back", _wrap_Vector_ImageMask_back, METH_O, "Vector_ImageMask_back(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const &"},
+	 { "Vector_ImageMask_assign", _wrap_Vector_ImageMask_assign, METH_VARARGS, "Vector_ImageMask_assign(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)"},
+	 { "Vector_ImageMask_resize", _wrap_Vector_ImageMask_resize, METH_VARARGS, "\n"
+		"Vector_ImageMask_resize(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type new_size)\n"
+		"Vector_ImageMask_resize(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageMask_insert", _wrap_Vector_ImageMask_insert, METH_VARARGS, "\n"
+		"Vector_ImageMask_insert(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator\n"
+		"Vector_ImageMask_insert(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageMask_reserve", _wrap_Vector_ImageMask_reserve, METH_VARARGS, "Vector_ImageMask_reserve(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type n)"},
+	 { "Vector_ImageMask_capacity", _wrap_Vector_ImageMask_capacity, METH_O, "Vector_ImageMask_capacity(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type"},
+	 { "delete_Vector_ImageMask", _wrap_delete_Vector_ImageMask, METH_O, "delete_Vector_ImageMask(Vector_ImageMask self)"},
 	 { "Vector_ImageMask_swigregister", Vector_ImageMask_swigregister, METH_O, NULL},
 	 { "Vector_ImageMask_swiginit", Vector_ImageMask_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -10310,116 +10343,149 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "ImageMask_mask", _wrap_ImageMask_mask, METH_VARARGS, "\n"
+		"mask(ImageMask self, int Line, int Sample) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::ImageMask::mask(int Line, int Sample) const =0\n"
 		"GeoCal::ImageMask::mask\n"
-		"Indicate if a particular point is masked.\n"
-		"If true, the point is masked and should not be used in processing\n"
-		"(e.g., don't do image matching) \n"
+		"Indicate if a particular point is masked.  \n"
+		"\n"
+		"If true, the point is masked and should not be used in processing (e.g., don't\n"
+		"do image matching)  \n"
+		"\n"
 		""},
 	 { "ImageMask_mask_ic", _wrap_ImageMask_mask_ic, METH_VARARGS, "\n"
+		"mask_ic(ImageMask self, ImageCoordinate Ic) -> bool\n"
 		"\n"
-		"bool ImageMask::mask_ic(const ImageCoordinate &Ic) const\n"
 		"GeoCal::ImageMask::mask_ic\n"
-		"Indicate if an ImageCoordinate is masked or not.\n"
-		"We search for the 4 neighbors around an ImageCoordinate are masked. \n"
+		"Indicate if an ImageCoordinate is masked or not.  \n"
+		"\n"
+		"We search for the 4 neighbors around an ImageCoordinate are masked.  \n"
+		"\n"
 		""},
 	 { "ImageMask_area_any_masked", _wrap_ImageMask_area_any_masked, METH_VARARGS, "\n"
+		"area_any_masked(ImageMask self, int Line, int Sample, int Number_line, int Number_sample) -> bool\n"
 		"\n"
-		"bool ImageMask::area_any_masked(int Line, int Sample, int Number_line, int Number_sample) const\n"
 		"GeoCal::ImageMask::area_any_masked\n"
-		"Indicated if a area has any masking or not.\n"
-		"See the discussion in the comments of Mask for detailed discussion of\n"
-		"the check. \n"
-		""},
-	 { "ImageMask___str__", _wrap_ImageMask___str__, METH_O, NULL},
-	 { "delete_ImageMask", _wrap_delete_ImageMask, METH_O, "\n"
+		"Indicated if a area has any masking or not.  \n"
 		"\n"
-		"virtual GeoCal::ImageMask::~ImageMask()\n"
+		"See the discussion in the comments of Mask for detailed discussion of the check.  \n"
+		"\n"
+		""},
+	 { "ImageMask___str__", _wrap_ImageMask___str__, METH_O, "__str__(ImageMask self) -> std::string"},
+	 { "delete_ImageMask", _wrap_delete_ImageMask, METH_O, "\n"
+		"delete_ImageMask(ImageMask self)\n"
+		"\n"
 		"GeoCal::ImageMask::~ImageMask\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMask_swigregister", ImageMask_swigregister, METH_O, NULL},
 	 { "OffsetImageMask__v_original_image_mask", _wrap_OffsetImageMask__v_original_image_mask, METH_O, "\n"
+		"_v_original_image_mask(OffsetImageMask self) -> boost::shared_ptr< GeoCal::ImageMask >\n"
 		"\n"
-		"const boost::shared_ptr< ImageMask > & GeoCal::OffsetImageMask::original_image_mask() const\n"
 		"GeoCal::OffsetImageMask::original_image_mask\n"
-		"Original ImageMask.\n"
+		"Original ImageMask.  \n"
 		"\n"
 		""},
 	 { "OffsetImageMask__v_line_offset", _wrap_OffsetImageMask__v_line_offset, METH_O, "\n"
+		"_v_line_offset(OffsetImageMask self) -> double\n"
 		"\n"
-		"double GeoCal::OffsetImageMask::line_offset() const\n"
 		"GeoCal::OffsetImageMask::line_offset\n"
-		"Return line offset.\n"
+		"Return line offset.  \n"
 		"\n"
 		""},
 	 { "OffsetImageMask__v_sample_offset", _wrap_OffsetImageMask__v_sample_offset, METH_O, "\n"
+		"_v_sample_offset(OffsetImageMask self) -> double\n"
 		"\n"
-		"double GeoCal::OffsetImageMask::sample_offset() const\n"
 		"GeoCal::OffsetImageMask::sample_offset\n"
-		"Return line offset.\n"
+		"Return line offset.  \n"
 		"\n"
 		""},
 	 { "delete_OffsetImageMask", _wrap_delete_OffsetImageMask, METH_O, "\n"
+		"delete_OffsetImageMask(OffsetImageMask self)\n"
 		"\n"
-		"virtual GeoCal::OffsetImageMask::~OffsetImageMask()\n"
 		"GeoCal::OffsetImageMask::~OffsetImageMask\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OffsetImageMask_swigregister", OffsetImageMask_swigregister, METH_O, NULL},
 	 { "new_CombinedImageMask", _wrap_new_CombinedImageMask, METH_VARARGS, "\n"
+		"CombinedImageMask()\n"
+		"new_CombinedImageMask(Vector_ImageMask Ml) -> CombinedImageMask\n"
 		"\n"
-		"GeoCal::CombinedImageMask::CombinedImageMask(It First, It Last)\n"
 		"GeoCal::CombinedImageMask::CombinedImageMask\n"
-		"Create a CombinedImageMask using the given set of masks, where we get this from a general\n"
-		"InputIterator.\n"
+		"Create a CombinedImageMask using the given set of masks, where we get this from\n"
+		"a general InputIterator.  \n"
 		"\n"
 		""},
-	 { "CombinedImageMask_mask_list_set", _wrap_CombinedImageMask_mask_list_set, METH_VARARGS, NULL},
-	 { "CombinedImageMask_mask_list_get", _wrap_CombinedImageMask_mask_list_get, METH_O, NULL},
+	 { "CombinedImageMask_mask_list_set", _wrap_CombinedImageMask_mask_list_set, METH_VARARGS, "CombinedImageMask_mask_list_set(CombinedImageMask self, Vector_ImageMask mask_list)"},
+	 { "CombinedImageMask_mask_list_get", _wrap_CombinedImageMask_mask_list_get, METH_O, "CombinedImageMask_mask_list_get(CombinedImageMask self) -> Vector_ImageMask"},
 	 { "delete_CombinedImageMask", _wrap_delete_CombinedImageMask, METH_O, "\n"
+		"delete_CombinedImageMask(CombinedImageMask self)\n"
 		"\n"
-		"virtual GeoCal::CombinedImageMask::~CombinedImageMask()\n"
 		"GeoCal::CombinedImageMask::~CombinedImageMask\n"
 		""},
 	 { "CombinedImageMask_swigregister", CombinedImageMask_swigregister, METH_O, NULL},
 	 { "CombinedImageMask_swiginit", CombinedImageMask_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_iterator", _wrap_Vector_ImageMask_iterator, METH_O, NULL},
-	 { "Vector_ImageMask___nonzero__", _wrap_Vector_ImageMask___nonzero__, METH_O, NULL},
-	 { "Vector_ImageMask___bool__", _wrap_Vector_ImageMask___bool__, METH_O, NULL},
-	 { "Vector_ImageMask___len__", _wrap_Vector_ImageMask___len__, METH_O, NULL},
-	 { "Vector_ImageMask___getslice__", _wrap_Vector_ImageMask___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___setslice__", _wrap_Vector_ImageMask___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___delslice__", _wrap_Vector_ImageMask___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___delitem__", _wrap_Vector_ImageMask___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___getitem__", _wrap_Vector_ImageMask___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask___setitem__", _wrap_Vector_ImageMask___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_pop", _wrap_Vector_ImageMask_pop, METH_O, NULL},
-	 { "Vector_ImageMask_append", _wrap_Vector_ImageMask_append, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_empty", _wrap_Vector_ImageMask_empty, METH_O, NULL},
-	 { "Vector_ImageMask_size", _wrap_Vector_ImageMask_size, METH_O, NULL},
-	 { "Vector_ImageMask_swap", _wrap_Vector_ImageMask_swap, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_begin", _wrap_Vector_ImageMask_begin, METH_O, NULL},
-	 { "Vector_ImageMask_end", _wrap_Vector_ImageMask_end, METH_O, NULL},
-	 { "Vector_ImageMask_rbegin", _wrap_Vector_ImageMask_rbegin, METH_O, NULL},
-	 { "Vector_ImageMask_rend", _wrap_Vector_ImageMask_rend, METH_O, NULL},
-	 { "Vector_ImageMask_clear", _wrap_Vector_ImageMask_clear, METH_O, NULL},
-	 { "Vector_ImageMask_get_allocator", _wrap_Vector_ImageMask_get_allocator, METH_O, NULL},
-	 { "Vector_ImageMask_pop_back", _wrap_Vector_ImageMask_pop_back, METH_O, NULL},
-	 { "Vector_ImageMask_erase", _wrap_Vector_ImageMask_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ImageMask", _wrap_new_Vector_ImageMask, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_push_back", _wrap_Vector_ImageMask_push_back, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_front", _wrap_Vector_ImageMask_front, METH_O, NULL},
-	 { "Vector_ImageMask_back", _wrap_Vector_ImageMask_back, METH_O, NULL},
-	 { "Vector_ImageMask_assign", _wrap_Vector_ImageMask_assign, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_resize", _wrap_Vector_ImageMask_resize, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_insert", _wrap_Vector_ImageMask_insert, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_reserve", _wrap_Vector_ImageMask_reserve, METH_VARARGS, NULL},
-	 { "Vector_ImageMask_capacity", _wrap_Vector_ImageMask_capacity, METH_O, NULL},
-	 { "delete_Vector_ImageMask", _wrap_delete_Vector_ImageMask, METH_O, NULL},
+	 { "Vector_ImageMask_iterator", _wrap_Vector_ImageMask_iterator, METH_O, "iterator(Vector_ImageMask self) -> SwigPyIterator"},
+	 { "Vector_ImageMask___nonzero__", _wrap_Vector_ImageMask___nonzero__, METH_O, "__nonzero__(Vector_ImageMask self) -> bool"},
+	 { "Vector_ImageMask___bool__", _wrap_Vector_ImageMask___bool__, METH_O, "__bool__(Vector_ImageMask self) -> bool"},
+	 { "Vector_ImageMask___len__", _wrap_Vector_ImageMask___len__, METH_O, "__len__(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type"},
+	 { "Vector_ImageMask___getslice__", _wrap_Vector_ImageMask___getslice__, METH_VARARGS, "__getslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j) -> Vector_ImageMask"},
+	 { "Vector_ImageMask___setslice__", _wrap_Vector_ImageMask___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j)\n"
+		"__setslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j, Vector_ImageMask v)\n"
+		""},
+	 { "Vector_ImageMask___delslice__", _wrap_Vector_ImageMask___delslice__, METH_VARARGS, "__delslice__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type j)"},
+	 { "Vector_ImageMask___delitem__", _wrap_Vector_ImageMask___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i)\n"
+		"__delitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ImageMask___getitem__", _wrap_Vector_ImageMask___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice) -> Vector_ImageMask\n"
+		"__getitem__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const &\n"
+		""},
+	 { "Vector_ImageMask___setitem__", _wrap_Vector_ImageMask___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice, Vector_ImageMask v)\n"
+		"__setitem__(Vector_ImageMask self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageMask_pop", _wrap_Vector_ImageMask_pop, METH_O, "pop(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type"},
+	 { "Vector_ImageMask_append", _wrap_Vector_ImageMask_append, METH_VARARGS, "append(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)"},
+	 { "Vector_ImageMask_empty", _wrap_Vector_ImageMask_empty, METH_O, "empty(Vector_ImageMask self) -> bool"},
+	 { "Vector_ImageMask_size", _wrap_Vector_ImageMask_size, METH_O, "size(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type"},
+	 { "Vector_ImageMask_swap", _wrap_Vector_ImageMask_swap, METH_VARARGS, "swap(Vector_ImageMask self, Vector_ImageMask v)"},
+	 { "Vector_ImageMask_begin", _wrap_Vector_ImageMask_begin, METH_O, "begin(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator"},
+	 { "Vector_ImageMask_end", _wrap_Vector_ImageMask_end, METH_O, "end(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator"},
+	 { "Vector_ImageMask_rbegin", _wrap_Vector_ImageMask_rbegin, METH_O, "rbegin(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::reverse_iterator"},
+	 { "Vector_ImageMask_rend", _wrap_Vector_ImageMask_rend, METH_O, "rend(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::reverse_iterator"},
+	 { "Vector_ImageMask_clear", _wrap_Vector_ImageMask_clear, METH_O, "clear(Vector_ImageMask self)"},
+	 { "Vector_ImageMask_get_allocator", _wrap_Vector_ImageMask_get_allocator, METH_O, "get_allocator(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::allocator_type"},
+	 { "Vector_ImageMask_pop_back", _wrap_Vector_ImageMask_pop_back, METH_O, "pop_back(Vector_ImageMask self)"},
+	 { "Vector_ImageMask_erase", _wrap_Vector_ImageMask_erase, METH_VARARGS, "\n"
+		"erase(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator\n"
+		"erase(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator first, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator\n"
+		""},
+	 { "new_Vector_ImageMask", _wrap_new_Vector_ImageMask, METH_VARARGS, "\n"
+		"Vector_ImageMask()\n"
+		"Vector_ImageMask(Vector_ImageMask other)\n"
+		"Vector_ImageMask(std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type size)\n"
+		"new_Vector_ImageMask(std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & value) -> Vector_ImageMask\n"
+		""},
+	 { "Vector_ImageMask_push_back", _wrap_Vector_ImageMask_push_back, METH_VARARGS, "push_back(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)"},
+	 { "Vector_ImageMask_front", _wrap_Vector_ImageMask_front, METH_O, "front(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const &"},
+	 { "Vector_ImageMask_back", _wrap_Vector_ImageMask_back, METH_O, "back(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const &"},
+	 { "Vector_ImageMask_assign", _wrap_Vector_ImageMask_assign, METH_VARARGS, "assign(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)"},
+	 { "Vector_ImageMask_resize", _wrap_Vector_ImageMask_resize, METH_VARARGS, "\n"
+		"resize(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type new_size)\n"
+		"resize(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageMask_insert", _wrap_Vector_ImageMask_insert, METH_VARARGS, "\n"
+		"insert(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator\n"
+		"insert(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::value_type const & x)\n"
+		""},
+	 { "Vector_ImageMask_reserve", _wrap_Vector_ImageMask_reserve, METH_VARARGS, "reserve(Vector_ImageMask self, std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type n)"},
+	 { "Vector_ImageMask_capacity", _wrap_Vector_ImageMask_capacity, METH_O, "capacity(Vector_ImageMask self) -> std::vector< boost::shared_ptr< GeoCal::ImageMask > >::size_type"},
+	 { "delete_Vector_ImageMask", _wrap_delete_Vector_ImageMask, METH_O, "delete_Vector_ImageMask(Vector_ImageMask self)"},
 	 { "Vector_ImageMask_swigregister", Vector_ImageMask_swigregister, METH_O, NULL},
 	 { "Vector_ImageMask_swiginit", Vector_ImageMask_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

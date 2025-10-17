@@ -7004,71 +7004,67 @@ SWIGINTERN PyObject *ImageMatcher_swigregister(PyObject *SWIGUNUSEDPARM(self), P
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "ImageMatcher_match", _wrap_ImageMatcher_match, METH_VARARGS, "\n"
+		"ImageMatcher_match(ImageMatcher self, RasterImage Ref, RasterImage New, ImageCoordinate Ref_loc, ImageCoordinate New_guess)\n"
 		"\n"
-		"virtual void GeoCal::ImageMatcher::match(const RasterImage &Ref, const RasterImage &New, const ImageCoordinate\n"
-		"&Ref_loc, const ImageCoordinate &New_guess, ImageCoordinate &New_res,\n"
-		"double &Line_sigma, double &Sample_sigma, bool &Success, int\n"
-		"*Diagnostic=0) const\n"
 		"GeoCal::ImageMatcher::match\n"
-		"Match a point found in the reference image with a point in the new\n"
-		"image.\n"
-		"A initial guess in the new image is supplied. We return an improved\n"
-		"image in the new image along with the uncertainty if Success is true,\n"
-		"otherwise the match failed.\n"
+		"Match a point found in the reference image with a point in the new image.  \n"
 		"\n"
-		"The Diagnostic argument is used to indicate why a match failed. For\n"
-		"many purposes you can ignore this, because you need to know detailed\n"
-		"information about the specific ImageMatcher that a user passed to a\n"
-		"function and what the diagnostic codes mean. However, for some\n"
-		"purposes the failure reason can be useful (e.g., tuning parameters of\n"
-		"a LsmMatcher). \n"
+		"A initial guess in the new image is supplied. We return an improved image in the\n"
+		"new image along with the uncertainty if Success is true, otherwise the match\n"
+		"failed.  \n"
+		"\n"
+		"The Diagnostic argument is used to indicate why a match failed. For many\n"
+		"purposes you can ignore this, because you need to know detailed information\n"
+		"about the specific ImageMatcher that a user passed to a function and what the\n"
+		"diagnostic codes mean. However, for some purposes the failure reason can be\n"
+		"useful (e.g., tuning parameters of a LsmMatcher).  \n"
+		"\n"
 		""},
 	 { "ImageMatcher_match_mask", _wrap_ImageMatcher_match_mask, METH_VARARGS, "\n"
+		"ImageMatcher_match_mask(ImageMatcher self, RasterImage Ref, ImageMask Ref_mask, RasterImage New, ImageMask New_mask, ImageCoordinate Ref_loc, ImageCoordinate New_guess)\n"
 		"\n"
-		"virtual void GeoCal::ImageMatcher::match_mask(const RasterImage &Ref, const ImageMask &Ref_mask, const RasterImage\n"
-		"&New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const\n"
-		"ImageCoordinate &New_guess, ImageCoordinate &New_res, double\n"
-		"&Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)\n"
-		"const =0\n"
 		"GeoCal::ImageMatcher::match_mask\n"
-		"Match a point found in the reference image with a point in the new\n"
-		"image.\n"
-		"A initial guess in the new image is supplied. We return an improved\n"
-		"image in the new image along with the uncertainty if Success is true,\n"
-		"otherwise the match failed.\n"
+		"Match a point found in the reference image with a point in the new image.  \n"
 		"\n"
-		"The Diagnostic argument is used to indicate why a match failed. For\n"
-		"many purposes you can ignore this, because you need to know detailed\n"
-		"information about the specific ImageMatcher that a user passed to a\n"
-		"function and what the diagnostic codes mean. However, for some\n"
-		"purposes the failure reason can be useful (e.g., tuning parameters of\n"
-		"a LsmMatcher). \n"
+		"A initial guess in the new image is supplied. We return an improved image in the\n"
+		"new image along with the uncertainty if Success is true, otherwise the match\n"
+		"failed.  \n"
+		"\n"
+		"The Diagnostic argument is used to indicate why a match failed. For many\n"
+		"purposes you can ignore this, because you need to know detailed information\n"
+		"about the specific ImageMatcher that a user passed to a function and what the\n"
+		"diagnostic codes mean. However, for some purposes the failure reason can be\n"
+		"useful (e.g., tuning parameters of a LsmMatcher).  \n"
+		"\n"
 		""},
-	 { "ImageMatcher___str__", _wrap_ImageMatcher___str__, METH_O, NULL},
+	 { "ImageMatcher___str__", _wrap_ImageMatcher___str__, METH_O, "ImageMatcher___str__(ImageMatcher self) -> std::string"},
 	 { "delete_ImageMatcher", _wrap_delete_ImageMatcher, METH_O, "\n"
+		"delete_ImageMatcher(ImageMatcher self)\n"
 		"\n"
-		"virtual GeoCal::ImageMatcher::~ImageMatcher()\n"
 		"GeoCal::ImageMatcher::~ImageMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMatcher_swigregister", ImageMatcher_swigregister, METH_O, NULL},
@@ -7078,71 +7074,67 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "ImageMatcher_match", _wrap_ImageMatcher_match, METH_VARARGS, "\n"
+		"match(ImageMatcher self, RasterImage Ref, RasterImage New, ImageCoordinate Ref_loc, ImageCoordinate New_guess)\n"
 		"\n"
-		"virtual void GeoCal::ImageMatcher::match(const RasterImage &Ref, const RasterImage &New, const ImageCoordinate\n"
-		"&Ref_loc, const ImageCoordinate &New_guess, ImageCoordinate &New_res,\n"
-		"double &Line_sigma, double &Sample_sigma, bool &Success, int\n"
-		"*Diagnostic=0) const\n"
 		"GeoCal::ImageMatcher::match\n"
-		"Match a point found in the reference image with a point in the new\n"
-		"image.\n"
-		"A initial guess in the new image is supplied. We return an improved\n"
-		"image in the new image along with the uncertainty if Success is true,\n"
-		"otherwise the match failed.\n"
+		"Match a point found in the reference image with a point in the new image.  \n"
 		"\n"
-		"The Diagnostic argument is used to indicate why a match failed. For\n"
-		"many purposes you can ignore this, because you need to know detailed\n"
-		"information about the specific ImageMatcher that a user passed to a\n"
-		"function and what the diagnostic codes mean. However, for some\n"
-		"purposes the failure reason can be useful (e.g., tuning parameters of\n"
-		"a LsmMatcher). \n"
+		"A initial guess in the new image is supplied. We return an improved image in the\n"
+		"new image along with the uncertainty if Success is true, otherwise the match\n"
+		"failed.  \n"
+		"\n"
+		"The Diagnostic argument is used to indicate why a match failed. For many\n"
+		"purposes you can ignore this, because you need to know detailed information\n"
+		"about the specific ImageMatcher that a user passed to a function and what the\n"
+		"diagnostic codes mean. However, for some purposes the failure reason can be\n"
+		"useful (e.g., tuning parameters of a LsmMatcher).  \n"
+		"\n"
 		""},
 	 { "ImageMatcher_match_mask", _wrap_ImageMatcher_match_mask, METH_VARARGS, "\n"
+		"match_mask(ImageMatcher self, RasterImage Ref, ImageMask Ref_mask, RasterImage New, ImageMask New_mask, ImageCoordinate Ref_loc, ImageCoordinate New_guess)\n"
 		"\n"
-		"virtual void GeoCal::ImageMatcher::match_mask(const RasterImage &Ref, const ImageMask &Ref_mask, const RasterImage\n"
-		"&New, const ImageMask &New_mask, const ImageCoordinate &Ref_loc, const\n"
-		"ImageCoordinate &New_guess, ImageCoordinate &New_res, double\n"
-		"&Line_sigma, double &Sample_sigma, bool &Success, int *Diagnostic=0)\n"
-		"const =0\n"
 		"GeoCal::ImageMatcher::match_mask\n"
-		"Match a point found in the reference image with a point in the new\n"
-		"image.\n"
-		"A initial guess in the new image is supplied. We return an improved\n"
-		"image in the new image along with the uncertainty if Success is true,\n"
-		"otherwise the match failed.\n"
+		"Match a point found in the reference image with a point in the new image.  \n"
 		"\n"
-		"The Diagnostic argument is used to indicate why a match failed. For\n"
-		"many purposes you can ignore this, because you need to know detailed\n"
-		"information about the specific ImageMatcher that a user passed to a\n"
-		"function and what the diagnostic codes mean. However, for some\n"
-		"purposes the failure reason can be useful (e.g., tuning parameters of\n"
-		"a LsmMatcher). \n"
+		"A initial guess in the new image is supplied. We return an improved image in the\n"
+		"new image along with the uncertainty if Success is true, otherwise the match\n"
+		"failed.  \n"
+		"\n"
+		"The Diagnostic argument is used to indicate why a match failed. For many\n"
+		"purposes you can ignore this, because you need to know detailed information\n"
+		"about the specific ImageMatcher that a user passed to a function and what the\n"
+		"diagnostic codes mean. However, for some purposes the failure reason can be\n"
+		"useful (e.g., tuning parameters of a LsmMatcher).  \n"
+		"\n"
 		""},
-	 { "ImageMatcher___str__", _wrap_ImageMatcher___str__, METH_O, NULL},
+	 { "ImageMatcher___str__", _wrap_ImageMatcher___str__, METH_O, "__str__(ImageMatcher self) -> std::string"},
 	 { "delete_ImageMatcher", _wrap_delete_ImageMatcher, METH_O, "\n"
+		"delete_ImageMatcher(ImageMatcher self)\n"
 		"\n"
-		"virtual GeoCal::ImageMatcher::~ImageMatcher()\n"
 		"GeoCal::ImageMatcher::~ImageMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ImageMatcher_swigregister", ImageMatcher_swigregister, METH_O, NULL},

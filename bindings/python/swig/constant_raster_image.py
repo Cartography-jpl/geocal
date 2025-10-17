@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _constant_raster_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _constant_raster_image:
 _constant_raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _constant_raster_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,10 +144,12 @@ import geocal_swig.geocal_exception
 class ConstantRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    This is a simple implementation of a RasterImage, where the data is
-    just a constant fixed value.
 
-    C++ includes: constant_raster_image.h 
+    This is a simple implementation of a RasterImage, where the data is just a
+    constant fixed value.  
+
+    C++ includes: constant_raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,10 +157,11 @@ class ConstantRasterImage(geocal_swig.raster_image_variable.RasterImageVariable)
 
     def __init__(self, *args):
         r"""
+        __init__(ConstantRasterImage self, int Number_line, int Number_sample, int Value) -> ConstantRasterImage
+        __init__(ConstantRasterImage self, MapInfo Mi, int Value) -> ConstantRasterImage
 
-        GeoCal::ConstantRasterImage::ConstantRasterImage(int Number_line, int Number_sample, int Value)
         GeoCal::ConstantRasterImage::ConstantRasterImage
-        Construct a ConstantRasterImage of the given size.
+        Construct a ConstantRasterImage of the given size.  
 
         """
         _constant_raster_image.ConstantRasterImage_swiginit(self, _constant_raster_image.new_ConstantRasterImage(*args))

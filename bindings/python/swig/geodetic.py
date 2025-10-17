@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geodetic.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geodetic:
 _geodetic.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geodetic.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,9 +141,11 @@ import geocal_swig.ground_coordinate
 class Geodetic(geocal_swig.ground_coordinate.GroundCoordinate):
     r"""
 
-    This is a ground coordinate, represented in Geodetic coordinates.
 
-    C++ includes: geodetic.h 
+    This is a ground coordinate, represented in Geodetic coordinates.  
+
+    C++ includes: geodetic.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -148,12 +153,16 @@ class Geodetic(geocal_swig.ground_coordinate.GroundCoordinate):
 
     def __init__(self, *args):
         r"""
+        __init__(Geodetic self, GroundCoordinate Gc) -> Geodetic
+        __init__(Geodetic self, double Latitude, double Longitude, double Height_ellipsoid=0) -> Geodetic
+        __init__(Geodetic self) -> Geodetic
 
-        GeoCal::Geodetic::Geodetic(double Latitude, double Longitude, double Height_ellipsoid=0)
         GeoCal::Geodetic::Geodetic
-        Make an Geodetic with the given latitude, longitude, and height.
-        Latitude and longitude are in degrees, height is in meters. Longitude
-        should be between -180 and 180 and latitude -90 and 90. 
+        Make an Geodetic with the given latitude, longitude, and height.  
+
+        Latitude and longitude are in degrees, height is in meters. Longitude should be
+        between -180 and 180 and latitude -90 and 90.  
+
         """
         _geodetic.Geodetic_swiginit(self, _geodetic.new_Geodetic(*args))
 
@@ -171,12 +180,14 @@ _geodetic.Geodetic_swigregister(Geodetic)
 class Geodetic360(geocal_swig.ground_coordinate.GroundCoordinate):
     r"""
 
-    This is a ground coordinate, represented in Geodetic coordinates.
 
-    This had longitude going from 0 to 360, we have this for handling data
-    near the dateline.
+    This is a ground coordinate, represented in Geodetic coordinates.  
 
-    C++ includes: geodetic.h 
+    This had longitude going from 0 to 360, we have this for handling data near the
+    dateline.  
+
+    C++ includes: geodetic.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -184,12 +195,16 @@ class Geodetic360(geocal_swig.ground_coordinate.GroundCoordinate):
 
     def __init__(self, *args):
         r"""
+        __init__(Geodetic360 self, GroundCoordinate Gc) -> Geodetic360
+        __init__(Geodetic360 self, double Latitude, double Longitude, double Height_ellipsoid=0) -> Geodetic360
+        __init__(Geodetic360 self) -> Geodetic360
 
-        GeoCal::Geodetic360::Geodetic360(double Latitude, double Longitude, double Height_ellipsoid=0)
         GeoCal::Geodetic360::Geodetic360
-        Make an Geodetic260 with the given latitude, longitude, and height.
-        Latitude and longitude are in degrees, height is in meters. Longitude
-        should be between 0 and 360 and latitude -90 and 90. 
+        Make an Geodetic260 with the given latitude, longitude, and height.  
+
+        Latitude and longitude are in degrees, height is in meters. Longitude should be
+        between 0 and 360 and latitude -90 and 90.  
+
         """
         _geodetic.Geodetic360_swiginit(self, _geodetic.new_Geodetic360(*args))
     _v_longitude360 = _swig_new_instance_method(_geodetic.Geodetic360__v_longitude360)
@@ -213,9 +228,11 @@ _geodetic.Geodetic360_swigregister(Geodetic360)
 class Geocentric(geocal_swig.ground_coordinate.GroundCoordinate):
     r"""
 
-    This is a ground coordinate, represented in Geocentric coordinates.
 
-    C++ includes: geodetic.h 
+    This is a ground coordinate, represented in Geocentric coordinates.  
+
+    C++ includes: geodetic.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -223,12 +240,16 @@ class Geocentric(geocal_swig.ground_coordinate.GroundCoordinate):
 
     def __init__(self, *args):
         r"""
+        __init__(Geocentric self, GroundCoordinate Gc) -> Geocentric
+        __init__(Geocentric self, double Latitude, double Longitude, double Height_ellipsoid=0) -> Geocentric
+        __init__(Geocentric self) -> Geocentric
 
-        GeoCal::Geocentric::Geocentric(double Latitude, double Longitude, double Height_ellipsoid=0)
         GeoCal::Geocentric::Geocentric
-        Make an Geocentric with the given latitude, longitude, and height.
-        Latitude and longitude are in degrees, height is in meters. Longitude
-        should be between -180 and 180 and latitude -90 and 90. 
+        Make an Geocentric with the given latitude, longitude, and height.  
+
+        Latitude and longitude are in degrees, height is in meters. Longitude should be
+        between -180 and 180 and latitude -90 and 90.  
+
         """
         _geodetic.Geocentric_swiginit(self, _geodetic.new_Geocentric(*args))
 

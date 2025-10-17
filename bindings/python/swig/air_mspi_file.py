@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _air_mspi_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _air_mspi_file:
 _air_mspi_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _air_mspi_file.SHARED_PTR_DISOWN
+
 
 import os
 

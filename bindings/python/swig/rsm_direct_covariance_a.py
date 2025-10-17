@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_direct_covariance_a.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_direct_covariance_a:
 _rsm_direct_covariance_a.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_direct_covariance_a.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -144,12 +147,13 @@ import geocal_swig.geocal_exception
 class RsmDirectCovarianceA(geocal_swig.rsm_direct_covariance.RsmDirectCovariance):
     r"""
 
-    This handles the direct error covariance for and RSM.
 
-    There are two versions of this, RSMDCA and RSMDCB. This is the A
-    version.
+    This handles the direct error covariance for and RSM.  
 
-    C++ includes: rsm_direct_covariance_a.h 
+    There are two versions of this, RSMDCA and RSMDCB. This is the A version.  
+
+    C++ includes: rsm_direct_covariance_a.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,10 +161,9 @@ class RsmDirectCovarianceA(geocal_swig.rsm_direct_covariance.RsmDirectCovariance
 
     def __init__(self, *args):
         r"""
+        __init__(RsmDirectCovarianceA self, std::string const & Image_identifier="", std::string const & Rsm_support_data_edition="fake-1", std::string const & Triangulation_id="") -> RsmDirectCovarianceA
+        __init__(RsmDirectCovarianceA self, ImageGroundConnection Igc, RsmId Rsm_id, std::string const & Triangulation_id="", bool Activate_image_correction=False, bool Activate_ground_rotation=False, bool Activate_ground_correction=False) -> RsmDirectCovarianceA
 
-        GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
         GeoCal::RsmDirectCovarianceA::RsmDirectCovarianceA
         """
         _rsm_direct_covariance_a.RsmDirectCovarianceA_swiginit(self, _rsm_direct_covariance_a.new_RsmDirectCovarianceA(*args))

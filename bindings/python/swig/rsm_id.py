@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_id.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_id:
 _rsm_id.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_id.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,12 +142,14 @@ import geocal_swig.geocal_exception
 class RsmIdTiming(geocal_swig.generic_object.GenericObject):
     r"""
 
-    RSM timing information.
 
-    This is just a structure, but we put this together because we always
-    either want all or none of these fields.
+    RSM timing information.  
 
-    C++ includes: rsm_id.h 
+    This is just a structure, but we put this together because we always either want
+    all or none of these fields.  
+
+    C++ includes: rsm_id.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,11 +157,8 @@ class RsmIdTiming(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Number_row_acquired_simulatenously, Number_col_acquired_simulatenously, Time_betweeen_adjacent_row_group, Time_betweeen_adjacent_col_group):
         r"""
+        __init__(RsmIdTiming self, int Number_row_acquired_simulatenously, int Number_col_acquired_simulatenously, double Time_betweeen_adjacent_row_group, double Time_betweeen_adjacent_col_group) -> RsmIdTiming
 
-        GeoCal::RsmIdTiming::RsmIdTiming(int Number_row_acquired_simulatenously, int
-        Number_col_acquired_simulatenously, double
-        Time_betweeen_adjacent_row_group, double
-        Time_betweeen_adjacent_col_group)
         GeoCal::RsmIdTiming::RsmIdTiming
         """
         _rsm_id.RsmIdTiming_swiginit(self, _rsm_id.new_RsmIdTiming(Number_row_acquired_simulatenously, Number_col_acquired_simulatenously, Time_betweeen_adjacent_row_group, Time_betweeen_adjacent_col_group))
@@ -216,10 +218,12 @@ _rsm_id.RsmIdTiming_swigregister(RsmIdTiming)
 class RsmId(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides additional information about the Rsm, it is what is used
-    to populate.
 
-    C++ includes: rsm_id.h 
+    This provides additional information about the Rsm, it is what is used to
+    populate.  
+
+    C++ includes: rsm_id.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -227,9 +231,8 @@ class RsmId(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Base, Cconv):
         r"""
+        __init__(RsmId self, boost::shared_ptr< GeoCal::RsmBase > const & Base, boost::shared_ptr< GeoCal::CoordinateConverter > const & Cconv) -> RsmId
 
-        GeoCal::RsmId::RsmId(const boost::shared_ptr< RsmBase > &Base, const boost::shared_ptr<
-        CoordinateConverter > &Cconv)
         GeoCal::RsmId::RsmId
         """
         _rsm_id.RsmId_swiginit(self, _rsm_id.new_RsmId(Base, Cconv))

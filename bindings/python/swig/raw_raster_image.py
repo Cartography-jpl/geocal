@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raw_raster_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raw_raster_image:
 _raw_raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raw_raster_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,18 +143,19 @@ import geocal_swig.geocal_exception
 class RawRasterImage(geocal_swig.raster_image.RasterImage):
     r"""
 
-    This uses libraw to read RAW format.
 
-    This is the format used by some cameras, e.g., Cannon RAW format. You
-    can see the details about what can be read athttp://www.libraw.org.
+    This uses libraw to read RAW format.  
 
-    Note that although this reads the RAW format, the data is in the RAW
-    space, the DN values don't mean much without translating them to RGB
-    color space. You may want to instead use the program dcraw which
-    converts to PPM or Tiff format and includes translating to color plus
-    making 8 bit.
+    This is the format used by some cameras, e.g., Cannon RAW format. You can see
+    the details about what can be read at http://www.libraw.org.  
 
-    C++ includes: raw_raster_image.h 
+    Note that although this reads the RAW format, the data is in the RAW space, the
+    DN values don't mean much without translating them to RGB color space. You may
+    want to instead use the program dcraw which converts to PPM or Tiff format and
+    includes translating to color plus making 8 bit.  
+
+    C++ includes: raw_raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -159,10 +163,10 @@ class RawRasterImage(geocal_swig.raster_image.RasterImage):
 
     def __init__(self, Fname, Band=0):
         r"""
+        __init__(RawRasterImage self, std::string const & Fname, int Band=0) -> RawRasterImage
 
-        RawRasterImage::RawRasterImage(const std::string &Fname, int Band=0)
         GeoCal::RawRasterImage::RawRasterImage
-        Read in the given file with the given Band (0 based).
+        Read in the given file with the given Band (0 based).  
 
         """
         _raw_raster_image.RawRasterImage_swiginit(self, _raw_raster_image.new_RawRasterImage(Fname, Band))

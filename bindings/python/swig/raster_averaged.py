@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_averaged.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_averaged:
 _raster_averaged.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_averaged.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -144,23 +147,22 @@ import geocal_swig.calc_raster_multi_band
 class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This averages a higher resolution RasterImage into a lower resolution
-    one.
 
-    The data is a straight average of a given number of pixels in the line
-    and sample direction of the full resolution data.
+    This averages a higher resolution RasterImage into a lower resolution one.  
 
-    Typically the pixel averaging factor doesn't exactly divide the number
-    of lines and samples of the full resolution data. We just trim the
-    data to the largest low resolution pixel that completely fits in the
-    higher resolution data.
+    The data is a straight average of a given number of pixels in the line and
+    sample direction of the full resolution data.  
 
-    This class calculates the average on the fly. Sometimes this is what
-    you want, but if you are going to be using the resulting data a few
-    times, you may want to use a MemoryRasterImage to generate a copy once
-    and keep it in memory.
+    Typically the pixel averaging factor doesn't exactly divide the number of lines
+    and samples of the full resolution data. We just trim the data to the largest
+    low resolution pixel that completely fits in the higher resolution data.  
 
-    C++ includes: raster_averaged.h 
+    This class calculates the average on the fly. Sometimes this is what you want,
+    but if you are going to be using the resulting data a few times, you may want to
+    use a MemoryRasterImage to generate a copy once and keep it in memory.  
+
+    C++ includes: raster_averaged.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -168,12 +170,10 @@ class RasterAveraged(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Data, Number_line_per_pixel, Number_sample_per_pixel, Ignore_zero=False):
         r"""
+        __init__(RasterAveraged self, boost::shared_ptr< GeoCal::RasterImage > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel, bool Ignore_zero=False) -> RasterAveraged
 
-        RasterAveraged::RasterAveraged(const boost::shared_ptr< RasterImage > &Data, int
-        Number_line_per_pixel, int Number_sample_per_pixel, bool
-        Ignore_zero=false)
         GeoCal::RasterAveraged::RasterAveraged
-        Constructor.
+        Constructor.  
 
         """
         _raster_averaged.RasterAveraged_swiginit(self, _raster_averaged.new_RasterAveraged(Data, Number_line_per_pixel, Number_sample_per_pixel, Ignore_zero))
@@ -216,23 +216,23 @@ _raster_averaged.RasterAveraged_swigregister(RasterAveraged)
 class RasterAveragedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     r"""
 
-    This averages a higher resolution RasterImageMultiBand into a lower
-    resolution one.
 
-    The data is a straight average of a given number of pixels in the line
-    and sample direction of the full resolution data.
+    This averages a higher resolution RasterImageMultiBand into a lower resolution
+    one.  
 
-    Typically the pixel averaging factor doesn't exactly divide the number
-    of lines and samples of the full resolution data. We just trim the
-    data to the largest low resolution pixel that completely fits in the
-    higher resolution data.
+    The data is a straight average of a given number of pixels in the line and
+    sample direction of the full resolution data.  
 
-    This class calculates the average on the fly. Sometimes this is what
-    you want, but if you are going to be using the resulting data a few
-    times, you may want to use a MemoryRasterImage to generate a copy once
-    and keep it in memory.
+    Typically the pixel averaging factor doesn't exactly divide the number of lines
+    and samples of the full resolution data. We just trim the data to the largest
+    low resolution pixel that completely fits in the higher resolution data.  
 
-    C++ includes: raster_averaged.h 
+    This class calculates the average on the fly. Sometimes this is what you want,
+    but if you are going to be using the resulting data a few times, you may want to
+    use a MemoryRasterImage to generate a copy once and keep it in memory.  
+
+    C++ includes: raster_averaged.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -240,12 +240,10 @@ class RasterAveragedMultiBand(geocal_swig.calc_raster_multi_band.CalcRasterMulti
 
     def __init__(self, Data, Number_line_per_pixel, Number_sample_per_pixel, Ignore_zero=False):
         r"""
+        __init__(RasterAveragedMultiBand self, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel, bool Ignore_zero=False) -> RasterAveragedMultiBand
 
-        RasterAveragedMultiBand::RasterAveragedMultiBand(const boost::shared_ptr< RasterImageMultiBand > &Data, int
-        Number_line_per_pixel, int Number_sample_per_pixel, bool
-        Ignore_zero=false)
         GeoCal::RasterAveragedMultiBand::RasterAveragedMultiBand
-        Constructor.
+        Constructor.  
 
         """
         _raster_averaged.RasterAveragedMultiBand_swiginit(self, _raster_averaged.new_RasterAveragedMultiBand(Data, Number_line_per_pixel, Number_sample_per_pixel, Ignore_zero))
@@ -288,12 +286,14 @@ _raster_averaged.RasterAveragedMultiBand_swigregister(RasterAveragedMultiBand)
 class ImageMaskAveraged(geocal_swig.image_mask.ImageMask):
     r"""
 
-    Take an existing image mask, and averages it like RasterAveraged.
 
-    We mask a point if any of the points that make it up are masked. This
-    does the calculation on fly.
+    Take an existing image mask, and averages it like RasterAveraged.  
 
-    C++ includes: raster_averaged.h 
+    We mask a point if any of the points that make it up are masked. This does the
+    calculation on fly.  
+
+    C++ includes: raster_averaged.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -301,9 +301,8 @@ class ImageMaskAveraged(geocal_swig.image_mask.ImageMask):
 
     def __init__(self, Data, Number_line_per_pixel, Number_sample_per_pixel):
         r"""
+        __init__(ImageMaskAveraged self, boost::shared_ptr< GeoCal::ImageMask > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel) -> ImageMaskAveraged
 
-        GeoCal::ImageMaskAveraged::ImageMaskAveraged(const boost::shared_ptr< ImageMask > &Data, int
-        Number_line_per_pixel, int Number_sample_per_pixel)
         GeoCal::ImageMaskAveraged::ImageMaskAveraged
         """
         _raster_averaged.ImageMaskAveraged_swiginit(self, _raster_averaged.new_ImageMaskAveraged(Data, Number_line_per_pixel, Number_sample_per_pixel))
@@ -340,13 +339,15 @@ _raster_averaged.ImageMaskAveraged_swigregister(ImageMaskAveraged)
 class AveragedImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
-    This takes an existing ImageGroundConnection and it averages the
-    raster image, accounting for this in the ground/image calculation.
 
-    You can either have the image averaged on the fly, or have it done
-    once and kept in memory.
+    This takes an existing ImageGroundConnection and it averages the raster image,
+    accounting for this in the ground/image calculation.  
 
-    C++ includes: raster_averaged.h 
+    You can either have the image averaged on the fly, or have it done once and kept
+    in memory.  
+
+    C++ includes: raster_averaged.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -354,17 +355,17 @@ class AveragedImageGroundConnection(geocal_swig.image_ground_connection.ImageGro
 
     def __init__(self, Igc, Number_line_per_pixel, Number_sample_per_pixel, In_memory=False, Ignore_zero=False):
         r"""
+        __init__(AveragedImageGroundConnection self, boost::shared_ptr< GeoCal::ImageGroundConnection > const Igc, int Number_line_per_pixel, int Number_sample_per_pixel, bool In_memory=False, bool Ignore_zero=False) -> AveragedImageGroundConnection
 
-        AveragedImageGroundConnection::AveragedImageGroundConnection(const boost::shared_ptr< ImageGroundConnection > Igc, int
-        Number_line_per_pixel, int Number_sample_per_pixel, bool
-        In_memory=false, bool Ignore_zero=false)
         GeoCal::AveragedImageGroundConnection::AveragedImageGroundConnection
-        Constructor for average.
-        You can specify your choice of doing the average calculation on the
-        fly, or once and kept in memory.
+        Constructor for average.  
 
-        Note that we set the title to the empty string, you can optionally set
-        this to whatever after creating this object. 
+        You can specify your choice of doing the average calculation on the fly, or once
+        and kept in memory.  
+
+        Note that we set the title to the empty string, you can optionally set this to
+        whatever after creating this object.  
+
         """
         _raster_averaged.AveragedImageGroundConnection_swiginit(self, _raster_averaged.new_AveragedImageGroundConnection(Igc, Number_line_per_pixel, Number_sample_per_pixel, In_memory, Ignore_zero))
     _v_original_image_ground_connection = _swig_new_instance_method(_raster_averaged.AveragedImageGroundConnection__v_original_image_ground_connection)

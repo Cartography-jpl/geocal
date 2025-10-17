@@ -8442,139 +8442,147 @@ SWIGINTERN PyObject *AirMspiOrbit_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AirMspiNavData", _wrap_new_AirMspiNavData, METH_VARARGS, "\n"
+		"AirMspiNavData()\n"
+		"new_AirMspiNavData(BlitzArray_double_1 Raw_data, Datum datum, bool Old_format) -> AirMspiNavData\n"
 		"\n"
-		"AirMspiNavData::AirMspiNavData(const blitz::Array< double, 1 > &Raw_data, const Datum &datum, bool\n"
-		"Old_format)\n"
 		"GeoCal::AirMspiNavData::AirMspiNavData\n"
-		"Constructor, that takes raw data and create AirMspiNavData from this.\n"
-		"Note that I'm not sure about the datum here, the height might be\n"
-		"relative to WGS-84 already. I'll check with Mike Bull. \n"
-		""},
-	 { "AirMspiNavData_position_set", _wrap_AirMspiNavData_position_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_position_get", _wrap_AirMspiNavData_position_get, METH_O, NULL},
-	 { "AirMspiNavData_velocity_set", _wrap_AirMspiNavData_velocity_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_velocity_get", _wrap_AirMspiNavData_velocity_get, METH_O, NULL},
-	 { "AirMspiNavData_ypr_set", _wrap_AirMspiNavData_ypr_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_ypr_get", _wrap_AirMspiNavData_ypr_get, METH_O, NULL},
-	 { "AirMspiNavData_ypr_rate_set", _wrap_AirMspiNavData_ypr_rate_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_ypr_rate_get", _wrap_AirMspiNavData_ypr_rate_get, METH_O, NULL},
-	 { "AirMspiNavData_gimbal_pos_set", _wrap_AirMspiNavData_gimbal_pos_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_gimbal_pos_get", _wrap_AirMspiNavData_gimbal_pos_get, METH_O, NULL},
-	 { "AirMspiNavData_gimbal_vel_set", _wrap_AirMspiNavData_gimbal_vel_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_gimbal_vel_get", _wrap_AirMspiNavData_gimbal_vel_get, METH_O, NULL},
-	 { "AirMspiNavData_interpolate", _wrap_AirMspiNavData_interpolate, METH_VARARGS, "\n"
+		"Constructor, that takes raw data and create AirMspiNavData from this.  \n"
 		"\n"
-		"AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData &N1, const AirMspiNavData &N2, double f)\n"
+		"Note that I'm not sure about the datum here, the height might be relative to\n"
+		"WGS-84 already. I'll check with Mike Bull.  \n"
+		"\n"
+		""},
+	 { "AirMspiNavData_position_set", _wrap_AirMspiNavData_position_set, METH_VARARGS, "AirMspiNavData_position_set(AirMspiNavData self, Geodetic position)"},
+	 { "AirMspiNavData_position_get", _wrap_AirMspiNavData_position_get, METH_O, "AirMspiNavData_position_get(AirMspiNavData self) -> Geodetic"},
+	 { "AirMspiNavData_velocity_set", _wrap_AirMspiNavData_velocity_set, METH_VARARGS, "AirMspiNavData_velocity_set(AirMspiNavData self, Array_double_3 velocity)"},
+	 { "AirMspiNavData_velocity_get", _wrap_AirMspiNavData_velocity_get, METH_O, "AirMspiNavData_velocity_get(AirMspiNavData self) -> Array_double_3"},
+	 { "AirMspiNavData_ypr_set", _wrap_AirMspiNavData_ypr_set, METH_VARARGS, "AirMspiNavData_ypr_set(AirMspiNavData self, Array_double_3 ypr)"},
+	 { "AirMspiNavData_ypr_get", _wrap_AirMspiNavData_ypr_get, METH_O, "AirMspiNavData_ypr_get(AirMspiNavData self) -> Array_double_3"},
+	 { "AirMspiNavData_ypr_rate_set", _wrap_AirMspiNavData_ypr_rate_set, METH_VARARGS, "AirMspiNavData_ypr_rate_set(AirMspiNavData self, Array_double_3 ypr_rate)"},
+	 { "AirMspiNavData_ypr_rate_get", _wrap_AirMspiNavData_ypr_rate_get, METH_O, "AirMspiNavData_ypr_rate_get(AirMspiNavData self) -> Array_double_3"},
+	 { "AirMspiNavData_gimbal_pos_set", _wrap_AirMspiNavData_gimbal_pos_set, METH_VARARGS, "AirMspiNavData_gimbal_pos_set(AirMspiNavData self, double gimbal_pos)"},
+	 { "AirMspiNavData_gimbal_pos_get", _wrap_AirMspiNavData_gimbal_pos_get, METH_O, "AirMspiNavData_gimbal_pos_get(AirMspiNavData self) -> double"},
+	 { "AirMspiNavData_gimbal_vel_set", _wrap_AirMspiNavData_gimbal_vel_set, METH_VARARGS, "AirMspiNavData_gimbal_vel_set(AirMspiNavData self, double gimbal_vel)"},
+	 { "AirMspiNavData_gimbal_vel_get", _wrap_AirMspiNavData_gimbal_vel_get, METH_O, "AirMspiNavData_gimbal_vel_get(AirMspiNavData self) -> double"},
+	 { "AirMspiNavData_interpolate", _wrap_AirMspiNavData_interpolate, METH_VARARGS, "\n"
+		"AirMspiNavData_interpolate(AirMspiNavData N1, AirMspiNavData N2, double f) -> AirMspiNavData\n"
+		"\n"
 		"GeoCal::AirMspiNavData::interpolate\n"
 		""},
-	 { "AirMspiNavData___str__", _wrap_AirMspiNavData___str__, METH_O, NULL},
-	 { "delete_AirMspiNavData", _wrap_delete_AirMspiNavData, METH_O, NULL},
+	 { "AirMspiNavData___str__", _wrap_AirMspiNavData___str__, METH_O, "AirMspiNavData___str__(AirMspiNavData self) -> std::string"},
+	 { "delete_AirMspiNavData", _wrap_delete_AirMspiNavData, METH_O, "delete_AirMspiNavData(AirMspiNavData self)"},
 	 { "AirMspiNavData_swigregister", AirMspiNavData_swigregister, METH_O, NULL},
 	 { "AirMspiNavData_swiginit", AirMspiNavData_swiginit, METH_VARARGS, NULL},
 	 { "new_AirMspiOrbit", _wrap_new_AirMspiOrbit, METH_VARARGS, "\n"
+		"AirMspiOrbit(std::string const & Fname, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim)\n"
+		"AirMspiOrbit(std::string const & Fname, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Datum > const & D, GeoCal::AircraftOrbitData::VerticalDefinition Def=GEODETIC_VERTICAL)\n"
 		"\n"
-		"AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< MspiGimbal > &Gim,\n"
-		"const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"NoDatum()), AircraftOrbitData::VerticalDefinition\n"
-		"Def=AircraftOrbitData::GEODETIC_VERTICAL)\n"
 		"GeoCal::AirMspiOrbit::AirMspiOrbit\n"
-		"Read the given file.\n"
+		"Read the given file.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_data_version", _wrap_AirMspiOrbit__v_data_version, METH_O, "\n"
+		"AirMspiOrbit__v_data_version(AirMspiOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiOrbit::data_version() const\n"
 		"GeoCal::AirMspiOrbit::data_version\n"
-		"The data version.\n"
+		"The data version.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_file_name", _wrap_AirMspiOrbit__v_file_name, METH_O, "\n"
+		"AirMspiOrbit__v_file_name(AirMspiOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiOrbit::file_name() const\n"
 		"GeoCal::AirMspiOrbit::file_name\n"
-		"File name for data.\n"
+		"File name for data.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_datum", _wrap_AirMspiOrbit__v_datum, METH_O, "\n"
+		"AirMspiOrbit__v_datum(AirMspiOrbit self) -> boost::shared_ptr< GeoCal::Datum >\n"
 		"\n"
-		"const boost::shared_ptr< Datum > & GeoCal::AirMspiOrbit::datum() const\n"
 		"GeoCal::AirMspiOrbit::datum\n"
-		"Datum the raw height is relative to.\n"
+		"Datum the raw height is relative to.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_flight_description", _wrap_AirMspiOrbit__v_flight_description, METH_O, "\n"
+		"AirMspiOrbit__v_flight_description(AirMspiOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiOrbit::flight_description() const\n"
 		"GeoCal::AirMspiOrbit::flight_description\n"
-		"Flight description.\n"
+		"Flight description.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_time_spacing", _wrap_AirMspiOrbit__v_time_spacing, METH_O, "\n"
+		"AirMspiOrbit__v_time_spacing(AirMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::AirMspiOrbit::time_spacing() const\n"
 		"GeoCal::AirMspiOrbit::time_spacing\n"
-		"Spacing in time between measurements. This is in seconds.\n"
+		"Spacing in time between measurements. This is in seconds.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_vertical_def", _wrap_AirMspiOrbit__v_vertical_def, METH_O, "\n"
+		"AirMspiOrbit__v_vertical_def(AirMspiOrbit self) -> GeoCal::AircraftOrbitData::VerticalDefinition\n"
 		"\n"
-		"AircraftOrbitData::VerticalDefinition GeoCal::AirMspiOrbit::vertical_def() const\n"
 		"GeoCal::AirMspiOrbit::vertical_def\n"
-		"Definition of vertical.\n"
-		"This should almost always be GEODETIC_VERTICAL, but we have this in\n"
-		"place to be able to match old test data. \n"
+		"Definition of vertical.  \n"
+		"\n"
+		"This should almost always be GEODETIC_VERTICAL, but we have this in place to be\n"
+		"able to match old test data.  \n"
+		"\n"
 		""},
 	 { "AirMspiOrbit_gimbal_position", _wrap_AirMspiOrbit_gimbal_position, METH_VARARGS, "\n"
+		"AirMspiOrbit_gimbal_position(AirMspiOrbit self, Time T) -> double\n"
 		"\n"
-		"double GeoCal::AirMspiOrbit::gimbal_position(Time T) const\n"
 		"GeoCal::AirMspiOrbit::gimbal_position\n"
-		"Return the gimbal position at time T in degrees.\n"
+		"Return the gimbal position at time T in degrees.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit_nav_data", _wrap_AirMspiOrbit_nav_data, METH_VARARGS, "\n"
+		"AirMspiOrbit_nav_data(AirMspiOrbit self, int Index) -> AirMspiNavData\n"
+		"AirMspiOrbit_nav_data(AirMspiOrbit self, Time T) -> AirMspiNavData\n"
 		"\n"
-		"AirMspiNavData AirMspiOrbit::nav_data(Time T) const\n"
 		"GeoCal::AirMspiOrbit::nav_data\n"
-		"Nav data at the given time.\n"
-		"Note that we interpolate the nav data, in a way different than we do\n"
-		"for the actual orbit_data. This is meant for use in various reporting\n"
-		"tools Mike Bull uses, not for actually calculating the orbit data\n"
-		"with. \n"
+		"Nav data at the given time.  \n"
+		"\n"
+		"Note that we interpolate the nav data, in a way *different* than we do for the\n"
+		"actual orbit_data. This is meant for use in various reporting tools Mike Bull\n"
+		"uses, not for actually calculating the orbit data with.  \n"
+		"\n"
 		""},
 	 { "AirMspiOrbit_orbit_data_index", _wrap_AirMspiOrbit_orbit_data_index, METH_VARARGS, "\n"
+		"AirMspiOrbit_orbit_data_index(AirMspiOrbit self, int Index) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const\n"
 		"GeoCal::AirMspiOrbit::orbit_data_index\n"
 		""},
 	 { "AirMspiOrbit_orbit_data", _wrap_AirMspiOrbit_orbit_data, METH_VARARGS, "\n"
+		"AirMspiOrbit_orbit_data(AirMspiOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"AirMspiOrbit_orbit_data(AirMspiOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(Time T) const\n"
 		"GeoCal::AirMspiOrbit::orbit_data\n"
 		""},
 	 { "delete_AirMspiOrbit", _wrap_delete_AirMspiOrbit, METH_O, "\n"
+		"delete_AirMspiOrbit(AirMspiOrbit self)\n"
 		"\n"
-		"virtual GeoCal::AirMspiOrbit::~AirMspiOrbit()\n"
 		"GeoCal::AirMspiOrbit::~AirMspiOrbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit_swigregister", AirMspiOrbit_swigregister, METH_O, NULL},
@@ -8585,139 +8593,147 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AirMspiNavData", _wrap_new_AirMspiNavData, METH_VARARGS, "\n"
+		"AirMspiNavData()\n"
+		"new_AirMspiNavData(BlitzArray_double_1 Raw_data, Datum datum, bool Old_format) -> AirMspiNavData\n"
 		"\n"
-		"AirMspiNavData::AirMspiNavData(const blitz::Array< double, 1 > &Raw_data, const Datum &datum, bool\n"
-		"Old_format)\n"
 		"GeoCal::AirMspiNavData::AirMspiNavData\n"
-		"Constructor, that takes raw data and create AirMspiNavData from this.\n"
-		"Note that I'm not sure about the datum here, the height might be\n"
-		"relative to WGS-84 already. I'll check with Mike Bull. \n"
-		""},
-	 { "AirMspiNavData_position_set", _wrap_AirMspiNavData_position_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_position_get", _wrap_AirMspiNavData_position_get, METH_O, NULL},
-	 { "AirMspiNavData_velocity_set", _wrap_AirMspiNavData_velocity_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_velocity_get", _wrap_AirMspiNavData_velocity_get, METH_O, NULL},
-	 { "AirMspiNavData_ypr_set", _wrap_AirMspiNavData_ypr_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_ypr_get", _wrap_AirMspiNavData_ypr_get, METH_O, NULL},
-	 { "AirMspiNavData_ypr_rate_set", _wrap_AirMspiNavData_ypr_rate_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_ypr_rate_get", _wrap_AirMspiNavData_ypr_rate_get, METH_O, NULL},
-	 { "AirMspiNavData_gimbal_pos_set", _wrap_AirMspiNavData_gimbal_pos_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_gimbal_pos_get", _wrap_AirMspiNavData_gimbal_pos_get, METH_O, NULL},
-	 { "AirMspiNavData_gimbal_vel_set", _wrap_AirMspiNavData_gimbal_vel_set, METH_VARARGS, NULL},
-	 { "AirMspiNavData_gimbal_vel_get", _wrap_AirMspiNavData_gimbal_vel_get, METH_O, NULL},
-	 { "AirMspiNavData_interpolate", _wrap_AirMspiNavData_interpolate, METH_VARARGS, "\n"
+		"Constructor, that takes raw data and create AirMspiNavData from this.  \n"
 		"\n"
-		"AirMspiNavData AirMspiNavData::interpolate(const AirMspiNavData &N1, const AirMspiNavData &N2, double f)\n"
+		"Note that I'm not sure about the datum here, the height might be relative to\n"
+		"WGS-84 already. I'll check with Mike Bull.  \n"
+		"\n"
+		""},
+	 { "AirMspiNavData_position_set", _wrap_AirMspiNavData_position_set, METH_VARARGS, "AirMspiNavData_position_set(AirMspiNavData self, Geodetic position)"},
+	 { "AirMspiNavData_position_get", _wrap_AirMspiNavData_position_get, METH_O, "AirMspiNavData_position_get(AirMspiNavData self) -> Geodetic"},
+	 { "AirMspiNavData_velocity_set", _wrap_AirMspiNavData_velocity_set, METH_VARARGS, "AirMspiNavData_velocity_set(AirMspiNavData self, Array_double_3 velocity)"},
+	 { "AirMspiNavData_velocity_get", _wrap_AirMspiNavData_velocity_get, METH_O, "AirMspiNavData_velocity_get(AirMspiNavData self) -> Array_double_3"},
+	 { "AirMspiNavData_ypr_set", _wrap_AirMspiNavData_ypr_set, METH_VARARGS, "AirMspiNavData_ypr_set(AirMspiNavData self, Array_double_3 ypr)"},
+	 { "AirMspiNavData_ypr_get", _wrap_AirMspiNavData_ypr_get, METH_O, "AirMspiNavData_ypr_get(AirMspiNavData self) -> Array_double_3"},
+	 { "AirMspiNavData_ypr_rate_set", _wrap_AirMspiNavData_ypr_rate_set, METH_VARARGS, "AirMspiNavData_ypr_rate_set(AirMspiNavData self, Array_double_3 ypr_rate)"},
+	 { "AirMspiNavData_ypr_rate_get", _wrap_AirMspiNavData_ypr_rate_get, METH_O, "AirMspiNavData_ypr_rate_get(AirMspiNavData self) -> Array_double_3"},
+	 { "AirMspiNavData_gimbal_pos_set", _wrap_AirMspiNavData_gimbal_pos_set, METH_VARARGS, "AirMspiNavData_gimbal_pos_set(AirMspiNavData self, double gimbal_pos)"},
+	 { "AirMspiNavData_gimbal_pos_get", _wrap_AirMspiNavData_gimbal_pos_get, METH_O, "AirMspiNavData_gimbal_pos_get(AirMspiNavData self) -> double"},
+	 { "AirMspiNavData_gimbal_vel_set", _wrap_AirMspiNavData_gimbal_vel_set, METH_VARARGS, "AirMspiNavData_gimbal_vel_set(AirMspiNavData self, double gimbal_vel)"},
+	 { "AirMspiNavData_gimbal_vel_get", _wrap_AirMspiNavData_gimbal_vel_get, METH_O, "AirMspiNavData_gimbal_vel_get(AirMspiNavData self) -> double"},
+	 { "AirMspiNavData_interpolate", _wrap_AirMspiNavData_interpolate, METH_VARARGS, "\n"
+		"interpolate(AirMspiNavData N1, AirMspiNavData N2, double f) -> AirMspiNavData\n"
+		"\n"
 		"GeoCal::AirMspiNavData::interpolate\n"
 		""},
-	 { "AirMspiNavData___str__", _wrap_AirMspiNavData___str__, METH_O, NULL},
-	 { "delete_AirMspiNavData", _wrap_delete_AirMspiNavData, METH_O, NULL},
+	 { "AirMspiNavData___str__", _wrap_AirMspiNavData___str__, METH_O, "__str__(AirMspiNavData self) -> std::string"},
+	 { "delete_AirMspiNavData", _wrap_delete_AirMspiNavData, METH_O, "delete_AirMspiNavData(AirMspiNavData self)"},
 	 { "AirMspiNavData_swigregister", AirMspiNavData_swigregister, METH_O, NULL},
 	 { "AirMspiNavData_swiginit", AirMspiNavData_swiginit, METH_VARARGS, NULL},
 	 { "new_AirMspiOrbit", _wrap_new_AirMspiOrbit, METH_VARARGS, "\n"
+		"AirMspiOrbit(std::string const & Fname, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim)\n"
+		"AirMspiOrbit(std::string const & Fname, boost::shared_ptr< GeoCal::MspiGimbal > const & Gim, boost::shared_ptr< GeoCal::Datum > const & D, GeoCal::AircraftOrbitData::VerticalDefinition Def=GEODETIC_VERTICAL)\n"
 		"\n"
-		"AirMspiOrbit::AirMspiOrbit(const std::string &Fname, const boost::shared_ptr< MspiGimbal > &Gim,\n"
-		"const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new\n"
-		"NoDatum()), AircraftOrbitData::VerticalDefinition\n"
-		"Def=AircraftOrbitData::GEODETIC_VERTICAL)\n"
 		"GeoCal::AirMspiOrbit::AirMspiOrbit\n"
-		"Read the given file.\n"
+		"Read the given file.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_data_version", _wrap_AirMspiOrbit__v_data_version, METH_O, "\n"
+		"_v_data_version(AirMspiOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiOrbit::data_version() const\n"
 		"GeoCal::AirMspiOrbit::data_version\n"
-		"The data version.\n"
+		"The data version.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_file_name", _wrap_AirMspiOrbit__v_file_name, METH_O, "\n"
+		"_v_file_name(AirMspiOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiOrbit::file_name() const\n"
 		"GeoCal::AirMspiOrbit::file_name\n"
-		"File name for data.\n"
+		"File name for data.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_datum", _wrap_AirMspiOrbit__v_datum, METH_O, "\n"
+		"_v_datum(AirMspiOrbit self) -> boost::shared_ptr< GeoCal::Datum >\n"
 		"\n"
-		"const boost::shared_ptr< Datum > & GeoCal::AirMspiOrbit::datum() const\n"
 		"GeoCal::AirMspiOrbit::datum\n"
-		"Datum the raw height is relative to.\n"
+		"Datum the raw height is relative to.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_flight_description", _wrap_AirMspiOrbit__v_flight_description, METH_O, "\n"
+		"_v_flight_description(AirMspiOrbit self) -> std::string\n"
 		"\n"
-		"std::string GeoCal::AirMspiOrbit::flight_description() const\n"
 		"GeoCal::AirMspiOrbit::flight_description\n"
-		"Flight description.\n"
+		"Flight description.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_time_spacing", _wrap_AirMspiOrbit__v_time_spacing, METH_O, "\n"
+		"_v_time_spacing(AirMspiOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::AirMspiOrbit::time_spacing() const\n"
 		"GeoCal::AirMspiOrbit::time_spacing\n"
-		"Spacing in time between measurements. This is in seconds.\n"
+		"Spacing in time between measurements. This is in seconds.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit__v_vertical_def", _wrap_AirMspiOrbit__v_vertical_def, METH_O, "\n"
+		"_v_vertical_def(AirMspiOrbit self) -> GeoCal::AircraftOrbitData::VerticalDefinition\n"
 		"\n"
-		"AircraftOrbitData::VerticalDefinition GeoCal::AirMspiOrbit::vertical_def() const\n"
 		"GeoCal::AirMspiOrbit::vertical_def\n"
-		"Definition of vertical.\n"
-		"This should almost always be GEODETIC_VERTICAL, but we have this in\n"
-		"place to be able to match old test data. \n"
+		"Definition of vertical.  \n"
+		"\n"
+		"This should almost always be GEODETIC_VERTICAL, but we have this in place to be\n"
+		"able to match old test data.  \n"
+		"\n"
 		""},
 	 { "AirMspiOrbit_gimbal_position", _wrap_AirMspiOrbit_gimbal_position, METH_VARARGS, "\n"
+		"gimbal_position(AirMspiOrbit self, Time T) -> double\n"
 		"\n"
-		"double GeoCal::AirMspiOrbit::gimbal_position(Time T) const\n"
 		"GeoCal::AirMspiOrbit::gimbal_position\n"
-		"Return the gimbal position at time T in degrees.\n"
+		"Return the gimbal position at time T in degrees.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit_nav_data", _wrap_AirMspiOrbit_nav_data, METH_VARARGS, "\n"
+		"nav_data(AirMspiOrbit self, int Index) -> AirMspiNavData\n"
+		"nav_data(AirMspiOrbit self, Time T) -> AirMspiNavData\n"
 		"\n"
-		"AirMspiNavData AirMspiOrbit::nav_data(Time T) const\n"
 		"GeoCal::AirMspiOrbit::nav_data\n"
-		"Nav data at the given time.\n"
-		"Note that we interpolate the nav data, in a way different than we do\n"
-		"for the actual orbit_data. This is meant for use in various reporting\n"
-		"tools Mike Bull uses, not for actually calculating the orbit data\n"
-		"with. \n"
+		"Nav data at the given time.  \n"
+		"\n"
+		"Note that we interpolate the nav data, in a way *different* than we do for the\n"
+		"actual orbit_data. This is meant for use in various reporting tools Mike Bull\n"
+		"uses, not for actually calculating the orbit data with.  \n"
+		"\n"
 		""},
 	 { "AirMspiOrbit_orbit_data_index", _wrap_AirMspiOrbit_orbit_data_index, METH_VARARGS, "\n"
+		"orbit_data_index(AirMspiOrbit self, int Index) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > AirMspiOrbit::orbit_data_index(int Index) const\n"
 		"GeoCal::AirMspiOrbit::orbit_data_index\n"
 		""},
 	 { "AirMspiOrbit_orbit_data", _wrap_AirMspiOrbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(AirMspiOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(AirMspiOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > AirMspiOrbit::orbit_data(Time T) const\n"
 		"GeoCal::AirMspiOrbit::orbit_data\n"
 		""},
 	 { "delete_AirMspiOrbit", _wrap_delete_AirMspiOrbit, METH_O, "\n"
+		"delete_AirMspiOrbit(AirMspiOrbit self)\n"
 		"\n"
-		"virtual GeoCal::AirMspiOrbit::~AirMspiOrbit()\n"
 		"GeoCal::AirMspiOrbit::~AirMspiOrbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "AirMspiOrbit_swigregister", AirMspiOrbit_swigregister, METH_O, NULL},

@@ -7489,143 +7489,157 @@ SWIGINTERN PyObject *GeotiffFile_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObje
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GeotiffFile", _wrap_new_GeotiffFile, METH_VARARGS, "\n"
+		"new_GeotiffFile(std::string const & Fname, std::string const & Mode) -> GeotiffFile\n"
 		"\n"
-		"GeoCal::GeotiffFile::GeotiffFile(const std::string &Fname, const std::string &Mode)\n"
 		"GeoCal::GeotiffFile::GeotiffFile\n"
-		"Open given file name with the given mode.\n"
-		"Mode should be \"r\", \"w\", or \"a\". \n"
+		"Open given file name with the given mode.  \n"
+		"\n"
+		"Mode should be \"r\", \"w\", or \"a\".  \n"
+		"\n"
 		""},
 	 { "GeotiffFile__v_file_name", _wrap_GeotiffFile__v_file_name, METH_O, "\n"
+		"GeotiffFile__v_file_name(GeotiffFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::GeotiffFile::file_name() const\n"
 		"GeoCal::GeotiffFile::file_name\n"
-		"Return the file name we have open.\n"
+		"Return the file name we have open.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile__v_mode", _wrap_GeotiffFile__v_mode, METH_O, "\n"
+		"GeotiffFile__v_mode(GeotiffFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::GeotiffFile::mode() const\n"
 		"GeoCal::GeotiffFile::mode\n"
-		"Return mode the file was opened with.\n"
+		"Return mode the file was opened with.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_set_tiftag", _wrap_GeotiffFile_set_tiftag, METH_VARARGS, "\n"
+		"GeotiffFile_set_tiftag(GeotiffFile self, GeoCal::GeotiffFile::tiftag_t K, int V)\n"
+		"GeotiffFile_set_tiftag(GeotiffFile self, GeoCal::GeotiffFile::tiftag_t K, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeotiffFile::set_tiftag(tiftag_t K, int V)\n"
 		"GeoCal::GeotiffFile::set_tiftag\n"
-		"Set the tiff tag value.\n"
+		"Set the tiff tag value.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_set_key", _wrap_GeotiffFile_set_key, METH_VARARGS, "\n"
+		"GeotiffFile_set_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K, GeoCal::GeotiffFile::geocode_t V)\n"
+		"GeotiffFile_set_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K, double V)\n"
+		"GeotiffFile_set_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K, std::string const & V)\n"
 		"\n"
-		"void GeotiffFile::set_key(geokey_t K, geocode_t V)\n"
 		"GeoCal::GeotiffFile::set_key\n"
-		"Set the value of the given key.\n"
-		"Not actually written to the file until write_key is called. \n"
+		"Set the value of the given key.  \n"
+		"\n"
+		"Not actually written to the file until write_key is called.  \n"
+		"\n"
 		""},
 	 { "GeotiffFile_write_key", _wrap_GeotiffFile_write_key, METH_O, "\n"
+		"GeotiffFile_write_key(GeotiffFile self)\n"
 		"\n"
-		"void GeotiffFile::write_key()\n"
 		"GeoCal::GeotiffFile::write_key\n"
-		"Write the key value to the file.\n"
+		"Write the key value to the file.  \n"
 		"\n"
 		""},
-	 { "GeotiffFile___str__", _wrap_GeotiffFile___str__, METH_O, NULL},
+	 { "GeotiffFile___str__", _wrap_GeotiffFile___str__, METH_O, "GeotiffFile___str__(GeotiffFile self) -> std::string"},
 	 { "GeotiffFile_has_key", _wrap_GeotiffFile_has_key, METH_VARARGS, "\n"
+		"GeotiffFile_has_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K) -> bool\n"
 		"\n"
-		"bool GeotiffFile::has_key(geokey_t K) const\n"
 		"GeoCal::GeotiffFile::has_key\n"
-		"Return true if we have the key.\n"
+		"Return true if we have the key.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_has_tiftag", _wrap_GeotiffFile_has_tiftag, METH_VARARGS, "\n"
+		"GeotiffFile_has_tiftag(GeotiffFile self, GeoCal::GeotiffFile::tiftag_t K) -> bool\n"
 		"\n"
-		"bool GeotiffFile::has_tiftag(tiftag_t K) const\n"
 		"GeoCal::GeotiffFile::has_tiftag\n"
-		"Return true if we have the given tag.\n"
+		"Return true if we have the given tag.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_key_name", _wrap_GeotiffFile_key_name, METH_O, "\n"
+		"GeotiffFile_key_name(GeoCal::GeotiffFile::geokey_t K) -> std::string\n"
 		"\n"
-		"std::string GeotiffFile::key_name(geokey_t K)\n"
 		"GeoCal::GeotiffFile::key_name\n"
-		"Return a string giving the key name.\n"
+		"Return a string giving the key name.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_key_name_uppercase", _wrap_GeotiffFile_key_name_uppercase, METH_O, "\n"
+		"GeotiffFile_key_name_uppercase(GeoCal::GeotiffFile::geokey_t K) -> std::string\n"
 		"\n"
-		"std::string GeotiffFile::key_name_uppercase(geokey_t K)\n"
 		"GeoCal::GeotiffFile::key_name_uppercase\n"
-		"Return a string giving the key name, in all uppercase.\n"
-		"This is useful because this the tag used in VICAR files to carry the\n"
-		"geotiff information \n"
+		"Return a string giving the key name, in all uppercase.  \n"
+		"\n"
+		"This is useful because this the tag used in VICAR files to carry the geotiff\n"
+		"information  \n"
+		"\n"
 		""},
 	 { "GeotiffFile_value_name", _wrap_GeotiffFile_value_name, METH_VARARGS, "\n"
+		"GeotiffFile_value_name(GeoCal::GeotiffFile::geokey_t K, GeoCal::GeotiffFile::geocode_t V) -> std::string\n"
 		"\n"
-		"std::string GeotiffFile::value_name(geokey_t K, geocode_t V)\n"
 		"GeoCal::GeotiffFile::value_name\n"
-		"Return a string giving the value name for the given key.\n"
+		"Return a string giving the value name for the given key.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_key_type", _wrap_GeotiffFile_key_type, METH_O, "\n"
+		"GeotiffFile_key_type(GeoCal::GeotiffFile::geokey_t K) -> GeoCal::GeotiffFile::tagtype_t\n"
 		"\n"
-		"GeotiffFile::tagtype_t GeotiffFile::key_type(geokey_t K)\n"
 		"GeoCal::GeotiffFile::key_type\n"
-		"Return the type for the given key.\n"
+		"Return the type for the given key.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_geotiff_tag_ascii", _wrap_GeotiffFile_geotiff_tag_ascii, METH_NOARGS, "\n"
+		"GeotiffFile_geotiff_tag_ascii() -> std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > const &\n"
 		"\n"
-		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_ascii()\n"
 		"GeoCal::GeotiffFile::geotiff_tag_ascii\n"
-		"Return the list of tags that take ASCII data.\n"
+		"Return the list of tags that take ASCII data.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_geotiff_tag_double", _wrap_GeotiffFile_geotiff_tag_double, METH_NOARGS, "\n"
+		"GeotiffFile_geotiff_tag_double() -> std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > const &\n"
 		"\n"
-		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_double()\n"
 		"GeoCal::GeotiffFile::geotiff_tag_double\n"
-		"Return the list of tags that take double data.\n"
+		"Return the list of tags that take double data.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_geotiff_tag_short", _wrap_GeotiffFile_geotiff_tag_short, METH_NOARGS, "\n"
+		"GeotiffFile_geotiff_tag_short() -> std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > const &\n"
 		"\n"
-		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_short()\n"
 		"GeoCal::GeotiffFile::geotiff_tag_short\n"
-		"Return the list of tags that take short data.\n"
+		"Return the list of tags that take short data.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_write_1x1_file", _wrap_GeotiffFile_write_1x1_file, METH_O, "\n"
+		"GeotiffFile_write_1x1_file(GeotiffFile self)\n"
 		"\n"
-		"void GeotiffFile::write_1x1_file()\n"
 		"GeoCal::GeotiffFile::write_1x1_file\n"
-		"As a way to process VICAR geotiff tags, we write out a single 1x1 file\n"
-		"along with metadata.\n"
-		"The 1x1 is just to make a valid geotiff file. We may want to also add\n"
-		"writing real images, but right now we have no need for that. \n"
+		"As a way to process VICAR geotiff tags, we write out a single 1x1 file along\n"
+		"with metadata.  \n"
+		"\n"
+		"The 1x1 is just to make a valid geotiff file. We may want to also add writing\n"
+		"real images, but right now we have no need for that.  \n"
+		"\n"
 		""},
 	 { "delete_GeotiffFile", _wrap_delete_GeotiffFile, METH_O, "\n"
+		"delete_GeotiffFile(GeotiffFile self)\n"
 		"\n"
-		"GeotiffFile::~GeotiffFile()\n"
 		"GeoCal::GeotiffFile::~GeotiffFile\n"
 		""},
 	 { "GeotiffFile_swigregister", GeotiffFile_swigregister, METH_O, NULL},
@@ -7636,143 +7650,157 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_GeotiffFile", _wrap_new_GeotiffFile, METH_VARARGS, "\n"
+		"new_GeotiffFile(std::string const & Fname, std::string const & Mode) -> GeotiffFile\n"
 		"\n"
-		"GeoCal::GeotiffFile::GeotiffFile(const std::string &Fname, const std::string &Mode)\n"
 		"GeoCal::GeotiffFile::GeotiffFile\n"
-		"Open given file name with the given mode.\n"
-		"Mode should be \"r\", \"w\", or \"a\". \n"
+		"Open given file name with the given mode.  \n"
+		"\n"
+		"Mode should be \"r\", \"w\", or \"a\".  \n"
+		"\n"
 		""},
 	 { "GeotiffFile__v_file_name", _wrap_GeotiffFile__v_file_name, METH_O, "\n"
+		"_v_file_name(GeotiffFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::GeotiffFile::file_name() const\n"
 		"GeoCal::GeotiffFile::file_name\n"
-		"Return the file name we have open.\n"
+		"Return the file name we have open.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile__v_mode", _wrap_GeotiffFile__v_mode, METH_O, "\n"
+		"_v_mode(GeotiffFile self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::GeotiffFile::mode() const\n"
 		"GeoCal::GeotiffFile::mode\n"
-		"Return mode the file was opened with.\n"
+		"Return mode the file was opened with.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_set_tiftag", _wrap_GeotiffFile_set_tiftag, METH_VARARGS, "\n"
+		"set_tiftag(GeotiffFile self, GeoCal::GeotiffFile::tiftag_t K, int V)\n"
+		"set_tiftag(GeotiffFile self, GeoCal::GeotiffFile::tiftag_t K, BlitzArray_double_1 V)\n"
 		"\n"
-		"void GeotiffFile::set_tiftag(tiftag_t K, int V)\n"
 		"GeoCal::GeotiffFile::set_tiftag\n"
-		"Set the tiff tag value.\n"
+		"Set the tiff tag value.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_set_key", _wrap_GeotiffFile_set_key, METH_VARARGS, "\n"
+		"set_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K, GeoCal::GeotiffFile::geocode_t V)\n"
+		"set_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K, double V)\n"
+		"set_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K, std::string const & V)\n"
 		"\n"
-		"void GeotiffFile::set_key(geokey_t K, geocode_t V)\n"
 		"GeoCal::GeotiffFile::set_key\n"
-		"Set the value of the given key.\n"
-		"Not actually written to the file until write_key is called. \n"
+		"Set the value of the given key.  \n"
+		"\n"
+		"Not actually written to the file until write_key is called.  \n"
+		"\n"
 		""},
 	 { "GeotiffFile_write_key", _wrap_GeotiffFile_write_key, METH_O, "\n"
+		"write_key(GeotiffFile self)\n"
 		"\n"
-		"void GeotiffFile::write_key()\n"
 		"GeoCal::GeotiffFile::write_key\n"
-		"Write the key value to the file.\n"
+		"Write the key value to the file.  \n"
 		"\n"
 		""},
-	 { "GeotiffFile___str__", _wrap_GeotiffFile___str__, METH_O, NULL},
+	 { "GeotiffFile___str__", _wrap_GeotiffFile___str__, METH_O, "__str__(GeotiffFile self) -> std::string"},
 	 { "GeotiffFile_has_key", _wrap_GeotiffFile_has_key, METH_VARARGS, "\n"
+		"has_key(GeotiffFile self, GeoCal::GeotiffFile::geokey_t K) -> bool\n"
 		"\n"
-		"bool GeotiffFile::has_key(geokey_t K) const\n"
 		"GeoCal::GeotiffFile::has_key\n"
-		"Return true if we have the key.\n"
+		"Return true if we have the key.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_has_tiftag", _wrap_GeotiffFile_has_tiftag, METH_VARARGS, "\n"
+		"has_tiftag(GeotiffFile self, GeoCal::GeotiffFile::tiftag_t K) -> bool\n"
 		"\n"
-		"bool GeotiffFile::has_tiftag(tiftag_t K) const\n"
 		"GeoCal::GeotiffFile::has_tiftag\n"
-		"Return true if we have the given tag.\n"
+		"Return true if we have the given tag.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_key_name", _wrap_GeotiffFile_key_name, METH_O, "\n"
+		"key_name(GeoCal::GeotiffFile::geokey_t K) -> std::string\n"
 		"\n"
-		"std::string GeotiffFile::key_name(geokey_t K)\n"
 		"GeoCal::GeotiffFile::key_name\n"
-		"Return a string giving the key name.\n"
+		"Return a string giving the key name.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_key_name_uppercase", _wrap_GeotiffFile_key_name_uppercase, METH_O, "\n"
+		"key_name_uppercase(GeoCal::GeotiffFile::geokey_t K) -> std::string\n"
 		"\n"
-		"std::string GeotiffFile::key_name_uppercase(geokey_t K)\n"
 		"GeoCal::GeotiffFile::key_name_uppercase\n"
-		"Return a string giving the key name, in all uppercase.\n"
-		"This is useful because this the tag used in VICAR files to carry the\n"
-		"geotiff information \n"
+		"Return a string giving the key name, in all uppercase.  \n"
+		"\n"
+		"This is useful because this the tag used in VICAR files to carry the geotiff\n"
+		"information  \n"
+		"\n"
 		""},
 	 { "GeotiffFile_value_name", _wrap_GeotiffFile_value_name, METH_VARARGS, "\n"
+		"value_name(GeoCal::GeotiffFile::geokey_t K, GeoCal::GeotiffFile::geocode_t V) -> std::string\n"
 		"\n"
-		"std::string GeotiffFile::value_name(geokey_t K, geocode_t V)\n"
 		"GeoCal::GeotiffFile::value_name\n"
-		"Return a string giving the value name for the given key.\n"
+		"Return a string giving the value name for the given key.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_key_type", _wrap_GeotiffFile_key_type, METH_O, "\n"
+		"key_type(GeoCal::GeotiffFile::geokey_t K) -> GeoCal::GeotiffFile::tagtype_t\n"
 		"\n"
-		"GeotiffFile::tagtype_t GeotiffFile::key_type(geokey_t K)\n"
 		"GeoCal::GeotiffFile::key_type\n"
-		"Return the type for the given key.\n"
+		"Return the type for the given key.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_geotiff_tag_ascii", _wrap_GeotiffFile_geotiff_tag_ascii, METH_NOARGS, "\n"
+		"geotiff_tag_ascii() -> std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > const &\n"
 		"\n"
-		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_ascii()\n"
 		"GeoCal::GeotiffFile::geotiff_tag_ascii\n"
-		"Return the list of tags that take ASCII data.\n"
+		"Return the list of tags that take ASCII data.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_geotiff_tag_double", _wrap_GeotiffFile_geotiff_tag_double, METH_NOARGS, "\n"
+		"geotiff_tag_double() -> std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > const &\n"
 		"\n"
-		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_double()\n"
 		"GeoCal::GeotiffFile::geotiff_tag_double\n"
-		"Return the list of tags that take double data.\n"
+		"Return the list of tags that take double data.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_geotiff_tag_short", _wrap_GeotiffFile_geotiff_tag_short, METH_NOARGS, "\n"
+		"geotiff_tag_short() -> std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > const &\n"
 		"\n"
-		"const std::vector< GeotiffFile::geokey_t > & GeotiffFile::geotiff_tag_short()\n"
 		"GeoCal::GeotiffFile::geotiff_tag_short\n"
-		"Return the list of tags that take short data.\n"
+		"Return the list of tags that take short data.  \n"
 		"\n"
 		""},
 	 { "GeotiffFile_write_1x1_file", _wrap_GeotiffFile_write_1x1_file, METH_O, "\n"
+		"write_1x1_file(GeotiffFile self)\n"
 		"\n"
-		"void GeotiffFile::write_1x1_file()\n"
 		"GeoCal::GeotiffFile::write_1x1_file\n"
-		"As a way to process VICAR geotiff tags, we write out a single 1x1 file\n"
-		"along with metadata.\n"
-		"The 1x1 is just to make a valid geotiff file. We may want to also add\n"
-		"writing real images, but right now we have no need for that. \n"
+		"As a way to process VICAR geotiff tags, we write out a single 1x1 file along\n"
+		"with metadata.  \n"
+		"\n"
+		"The 1x1 is just to make a valid geotiff file. We may want to also add writing\n"
+		"real images, but right now we have no need for that.  \n"
+		"\n"
 		""},
 	 { "delete_GeotiffFile", _wrap_delete_GeotiffFile, METH_O, "\n"
+		"delete_GeotiffFile(GeotiffFile self)\n"
 		"\n"
-		"GeotiffFile::~GeotiffFile()\n"
 		"GeoCal::GeotiffFile::~GeotiffFile\n"
 		""},
 	 { "GeotiffFile_swigregister", GeotiffFile_swigregister, METH_O, NULL},

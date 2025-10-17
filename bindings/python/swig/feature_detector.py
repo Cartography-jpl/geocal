@@ -90,6 +90,7 @@ _feature_detector.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _feature_detector.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _feature_detector.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -139,9 +140,11 @@ import geocal_swig.geocal_exception
 class InterestPoint(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is an interest point, determined by a FeatureDetector.
 
-    C++ includes: feature_detector.h 
+    This is an interest point, determined by a FeatureDetector.  
+
+    C++ includes: feature_detector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -149,15 +152,16 @@ class InterestPoint(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, *args):
         r"""
+        __init__(InterestPoint self) -> InterestPoint
+        __init__(InterestPoint self, ImageCoordinate Ic, double Weight) -> InterestPoint
 
-        GeoCal::InterestPoint::InterestPoint(const ImageCoordinate &Ic, double Weight)
         GeoCal::InterestPoint::InterestPoint
-        Constructor.
+        Constructor.  
 
         """
         _feature_detector.InterestPoint_swiginit(self, _feature_detector.new_InterestPoint(*args))
-    image_coordinate = property(_feature_detector.InterestPoint_image_coordinate_get, _feature_detector.InterestPoint_image_coordinate_set)
-    weight = property(_feature_detector.InterestPoint_weight_get, _feature_detector.InterestPoint_weight_set)
+    image_coordinate = property(_feature_detector.InterestPoint_image_coordinate_get, _feature_detector.InterestPoint_image_coordinate_set, doc=r"""image_coordinate : GeoCal::ImageCoordinate""")
+    weight = property(_feature_detector.InterestPoint_weight_get, _feature_detector.InterestPoint_weight_set, doc=r"""weight : double""")
     __str__ = _swig_new_instance_method(_feature_detector.InterestPoint___str__)
     compare = _swig_new_instance_method(_feature_detector.InterestPoint_compare)
 
@@ -175,14 +179,15 @@ _feature_detector.InterestPoint_swigregister(InterestPoint)
 class FeatureDetector(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class detects interest points in an image.
 
-    An interest point is one that is good for image matching by some sort
-    of criteria. For example, a common feature detector is one that tries
-    to detect corners, with the idea that these are good choices for doing
-    image matching on.
+    This class detects interest points in an image.  
 
-    C++ includes: feature_detector.h 
+    An interest point is one that is good for image matching by some sort of
+    criteria. For example, a common feature detector is one that tries to detect
+    corners, with the idea that these are good choices for doing image matching on.  
+
+    C++ includes: feature_detector.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -198,6 +203,8 @@ class FeatureDetector(geocal_swig.generic_object.GenericObject):
 # Register FeatureDetector in _feature_detector:
 _feature_detector.FeatureDetector_swigregister(FeatureDetector)
 class Vector_InterestPoint(object):
+    r"""Proxy of C++ std::vector< GeoCal::InterestPoint > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_feature_detector.Vector_InterestPoint_iterator)
@@ -227,6 +234,12 @@ class Vector_InterestPoint(object):
     erase = _swig_new_instance_method(_feature_detector.Vector_InterestPoint_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_InterestPoint self) -> Vector_InterestPoint
+        __init__(Vector_InterestPoint self, Vector_InterestPoint other) -> Vector_InterestPoint
+        __init__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type size) -> Vector_InterestPoint
+        __init__(Vector_InterestPoint self, std::vector< GeoCal::InterestPoint >::size_type size, InterestPoint value) -> Vector_InterestPoint
+        """
         _feature_detector.Vector_InterestPoint_swiginit(self, _feature_detector.new_Vector_InterestPoint(*args))
     push_back = _swig_new_instance_method(_feature_detector.Vector_InterestPoint_push_back)
     front = _swig_new_instance_method(_feature_detector.Vector_InterestPoint_front)

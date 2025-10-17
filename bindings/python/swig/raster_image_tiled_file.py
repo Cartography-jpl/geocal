@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _raster_image_tiled_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _raster_image_tiled_file:
 _raster_image_tiled_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _raster_image_tiled_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,9 +144,11 @@ import geocal_swig.geocal_exception
 class RasterImageTiledFile(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    This is a RasterImage that is implemented as a TiledFile<T, 2>.
 
-    C++ includes: raster_image_tiled_file.h 
+    This is a RasterImage that is implemented as a TiledFile<T, 2>.  
+
+    C++ includes: raster_image_tiled_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,8 +156,9 @@ class RasterImageTiledFile(geocal_swig.raster_image_variable.RasterImageVariable
 
     def __init__(self, *args):
         r"""
+        __init__(RasterImageTiledFile self, boost::shared_ptr< GeoCal::TiledFileBase< 2 > > const & D) -> RasterImageTiledFile
+        __init__(RasterImageTiledFile self, boost::shared_ptr< GeoCal::TiledFileBase< 2 > > const & D, MapInfo Mi) -> RasterImageTiledFile
 
-        GeoCal::RasterImageTiledFile::RasterImageTiledFile(const boost::shared_ptr< TiledFileBase< 2 > > &D, const MapInfo &M)
         GeoCal::RasterImageTiledFile::RasterImageTiledFile
         """
         _raster_image_tiled_file.RasterImageTiledFile_swiginit(self, _raster_image_tiled_file.new_RasterImageTiledFile(*args))

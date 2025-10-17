@@ -7113,56 +7113,63 @@ SWIGINTERN PyObject *VicarOgr_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarOgr", _wrap_new_VicarOgr, METH_NOARGS, "\n"
+		"new_VicarOgr() -> VicarOgr\n"
 		"\n"
-		"VicarOgr::VicarOgr()\n"
 		"GeoCal::VicarOgr::VicarOgr\n"
-		"Constructor.\n"
-		"Normally we only have one of these objects around, although nothing is\n"
-		"hurt if you create multiple copies. \n"
+		"Constructor.  \n"
+		"\n"
+		"Normally we only have one of these objects around, although nothing is hurt if\n"
+		"you create multiple copies.  \n"
+		"\n"
 		""},
 	 { "VicarOgr_vicar_to_gtiff", _wrap_VicarOgr_vicar_to_gtiff, METH_VARARGS, "\n"
+		"VicarOgr_vicar_to_gtiff(VicarOgr self, VicarFile F, std::string const & Fname)\n"
+		"VicarOgr_vicar_to_gtiff(VicarOgr self, VicarLiteFile F, std::string const & Fname)\n"
 		"\n"
-		"void VicarOgr::vicar_to_gtiff(const VicarLiteFile &F, const std::string &Fname)\n"
 		"GeoCal::VicarOgr::vicar_to_gtiff\n"
-		"Create a 1 pixel geotiff file that contains all the geotiff labels\n"
-		"from the Vicar file.\n"
+		"Create a 1 pixel geotiff file that contains all the geotiff labels from the\n"
+		"Vicar file.  \n"
 		"\n"
 		""},
 	 { "VicarOgr_from_vicar", _wrap_VicarOgr_from_vicar, METH_VARARGS, "\n"
+		"VicarOgr_from_vicar(VicarOgr self, VicarFile F) -> MapInfo\n"
+		"VicarOgr_from_vicar(VicarOgr self, VicarLiteFile F) -> MapInfo\n"
 		"\n"
-		"MapInfo VicarOgr::from_vicar(const VicarLiteFile &F)\n"
 		"GeoCal::VicarOgr::from_vicar\n"
-		"Read the metadata from a VicarLiteFile, and use to create a MapInfo\n"
-		"based on GDAL.\n"
+		"Read the metadata from a VicarLiteFile, and use to create a MapInfo based on\n"
+		"GDAL.  \n"
 		"\n"
 		""},
 	 { "VicarOgr_to_vicar", _wrap_VicarOgr_to_vicar, METH_VARARGS, "\n"
+		"VicarOgr_to_vicar(VicarOgr self, MapInfo Mi, VicarFile F)\n"
 		"\n"
-		"void VicarOgr::to_vicar(const MapInfo &Mi, VicarFile &F)\n"
 		"GeoCal::VicarOgr::to_vicar\n"
-		"Use a MapInfo to write the GeoTIFF metadata for a Vicar File.\n"
+		"Use a MapInfo to write the GeoTIFF metadata for a Vicar File.  \n"
 		"\n"
 		""},
-	 { "delete_VicarOgr", _wrap_delete_VicarOgr, METH_O, NULL},
+	 { "delete_VicarOgr", _wrap_delete_VicarOgr, METH_O, "delete_VicarOgr(VicarOgr self)"},
 	 { "VicarOgr_swigregister", VicarOgr_swigregister, METH_O, NULL},
 	 { "VicarOgr_swiginit", VicarOgr_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -7171,56 +7178,63 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_VicarOgr", _wrap_new_VicarOgr, METH_NOARGS, "\n"
+		"new_VicarOgr() -> VicarOgr\n"
 		"\n"
-		"VicarOgr::VicarOgr()\n"
 		"GeoCal::VicarOgr::VicarOgr\n"
-		"Constructor.\n"
-		"Normally we only have one of these objects around, although nothing is\n"
-		"hurt if you create multiple copies. \n"
+		"Constructor.  \n"
+		"\n"
+		"Normally we only have one of these objects around, although nothing is hurt if\n"
+		"you create multiple copies.  \n"
+		"\n"
 		""},
 	 { "VicarOgr_vicar_to_gtiff", _wrap_VicarOgr_vicar_to_gtiff, METH_VARARGS, "\n"
+		"vicar_to_gtiff(VicarOgr self, VicarFile F, std::string const & Fname)\n"
+		"vicar_to_gtiff(VicarOgr self, VicarLiteFile F, std::string const & Fname)\n"
 		"\n"
-		"void VicarOgr::vicar_to_gtiff(const VicarLiteFile &F, const std::string &Fname)\n"
 		"GeoCal::VicarOgr::vicar_to_gtiff\n"
-		"Create a 1 pixel geotiff file that contains all the geotiff labels\n"
-		"from the Vicar file.\n"
+		"Create a 1 pixel geotiff file that contains all the geotiff labels from the\n"
+		"Vicar file.  \n"
 		"\n"
 		""},
 	 { "VicarOgr_from_vicar", _wrap_VicarOgr_from_vicar, METH_VARARGS, "\n"
+		"from_vicar(VicarOgr self, VicarFile F) -> MapInfo\n"
+		"from_vicar(VicarOgr self, VicarLiteFile F) -> MapInfo\n"
 		"\n"
-		"MapInfo VicarOgr::from_vicar(const VicarLiteFile &F)\n"
 		"GeoCal::VicarOgr::from_vicar\n"
-		"Read the metadata from a VicarLiteFile, and use to create a MapInfo\n"
-		"based on GDAL.\n"
+		"Read the metadata from a VicarLiteFile, and use to create a MapInfo based on\n"
+		"GDAL.  \n"
 		"\n"
 		""},
 	 { "VicarOgr_to_vicar", _wrap_VicarOgr_to_vicar, METH_VARARGS, "\n"
+		"to_vicar(VicarOgr self, MapInfo Mi, VicarFile F)\n"
 		"\n"
-		"void VicarOgr::to_vicar(const MapInfo &Mi, VicarFile &F)\n"
 		"GeoCal::VicarOgr::to_vicar\n"
-		"Use a MapInfo to write the GeoTIFF metadata for a Vicar File.\n"
+		"Use a MapInfo to write the GeoTIFF metadata for a Vicar File.  \n"
 		"\n"
 		""},
-	 { "delete_VicarOgr", _wrap_delete_VicarOgr, METH_O, NULL},
+	 { "delete_VicarOgr", _wrap_delete_VicarOgr, METH_O, "delete_VicarOgr(VicarOgr self)"},
 	 { "VicarOgr_swigregister", VicarOgr_swigregister, METH_O, NULL},
 	 { "VicarOgr_swiginit", VicarOgr_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

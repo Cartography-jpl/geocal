@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _piecewise_linear.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _piecewise_linear:
 _piecewise_linear.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _piecewise_linear.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -136,6 +139,8 @@ def _new_from_set(cls, version, *args):
 import geocal_swig.with_parameter
 import geocal_swig.generic_object
 class Vector_Time(object):
+    r"""Proxy of C++ std::vector< GeoCal::Time > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_piecewise_linear.Vector_Time_iterator)
@@ -165,6 +170,12 @@ class Vector_Time(object):
     erase = _swig_new_instance_method(_piecewise_linear.Vector_Time_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Time self) -> Vector_Time
+        __init__(Vector_Time self, Vector_Time other) -> Vector_Time
+        __init__(Vector_Time self, std::vector< GeoCal::Time >::size_type size) -> Vector_Time
+        __init__(Vector_Time self, std::vector< GeoCal::Time >::size_type size, Time value) -> Vector_Time
+        """
         _piecewise_linear.Vector_Time_swiginit(self, _piecewise_linear.new_Vector_Time(*args))
     push_back = _swig_new_instance_method(_piecewise_linear.Vector_Time_push_back)
     front = _swig_new_instance_method(_piecewise_linear.Vector_Time_front)
@@ -187,6 +198,8 @@ class Vector_Time(object):
 # Register Vector_Time in _piecewise_linear:
 _piecewise_linear.Vector_Time_swigregister(Vector_Time)
 class Vector_Time2(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::Time > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_piecewise_linear.Vector_Time2_iterator)
@@ -216,6 +229,12 @@ class Vector_Time2(object):
     erase = _swig_new_instance_method(_piecewise_linear.Vector_Time2_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_Time2 self) -> Vector_Time2
+        __init__(Vector_Time2 self, Vector_Time2 other) -> Vector_Time2
+        __init__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size) -> Vector_Time2
+        __init__(Vector_Time2 self, std::vector< boost::shared_ptr< GeoCal::Time > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Time > >::value_type const & value) -> Vector_Time2
+        """
         _piecewise_linear.Vector_Time2_swiginit(self, _piecewise_linear.new_Vector_Time2(*args))
     push_back = _swig_new_instance_method(_piecewise_linear.Vector_Time2_push_back)
     front = _swig_new_instance_method(_piecewise_linear.Vector_Time2_front)
@@ -232,22 +251,27 @@ _piecewise_linear.Vector_Time2_swigregister(Vector_Time2)
 class PiecewiseLinear(geocal_swig.with_parameter.WithParameter):
     r"""
 
-    This is a piecewise linear/constant function.
 
-    C++ includes: piecewise_linear.h 
+    This is a piecewise linear/constant function.  
+
+    C++ includes: piecewise_linear.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     LINEAR = _piecewise_linear.PiecewiseLinear_LINEAR
+    
     CONSTANT = _piecewise_linear.PiecewiseLinear_CONSTANT
+    
     LINEAR_TO_ZERO = _piecewise_linear.PiecewiseLinear_LINEAR_TO_ZERO
-    FunctionType = property(_piecewise_linear.PiecewiseLinear_FunctionType_get, _piecewise_linear.PiecewiseLinear_FunctionType_set)
+    
+    FunctionType = property(_piecewise_linear.PiecewiseLinear_FunctionType_get, _piecewise_linear.PiecewiseLinear_FunctionType_set, doc=r"""FunctionType : enum $unnamed1$""")
 
     def __init__(self, X, T):
         r"""
+        __init__(PiecewiseLinear self, Vector_Time X, BlitzArray_int_1 T) -> PiecewiseLinear
 
-        PiecewiseLinear::PiecewiseLinear(const std::vector< Time > &X, const blitz::Array< int, 1 > &T)
         GeoCal::PiecewiseLinear::PiecewiseLinear
         """
         _piecewise_linear.PiecewiseLinear_swiginit(self, _piecewise_linear.new_PiecewiseLinear(X, T))

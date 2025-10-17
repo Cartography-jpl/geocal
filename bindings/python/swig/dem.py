@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _dem:
 _dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,9 +140,11 @@ import geocal_swig.generic_object
 class Dem(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class gives an interface to a digital elevation model (DEM).
 
-    C++ includes: dem.h 
+    This class gives an interface to a digital elevation model (DEM).  
+
+    C++ includes: dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

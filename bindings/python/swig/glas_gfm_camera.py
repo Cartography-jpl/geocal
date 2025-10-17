@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _glas_gfm_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _glas_gfm_camera:
 _glas_gfm_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _glas_gfm_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,20 +143,21 @@ import geocal_swig.with_parameter
 class GlasGfmCamera(geocal_swig.camera.Camera):
     r"""
 
-    This is a Camera with some extra metadata the pointing described by a
-    field angle map.
 
-    This is represented by the NITF DES CSSFAB.
+    This is a Camera with some extra metadata the pointing described by a field
+    angle map.  
 
-    For some of these lower level objects we have directly read the TRE or
-    DES (see for example PosCsephb). We haven't currently done this with
-    this particular class - the data isn't large or at all slow to read so
-    it is easier to just read/write this in python and use this lower
-    level class for actually using the camera. We may revisit this, but at
-    least for now this is really tied in with the NITF code in the python
-    code in geocal_nitf_des.
+    This is represented by the NITF DES CSSFAB.  
 
-    C++ includes: glas_gfm_camera.h 
+    For some of these lower level objects we have directly read the TRE or DES (see
+    for example PosCsephb). We haven't currently done this with this particular
+    class - the data isn't large or at all slow to read so it is easier to just
+    read/write this in python and use this lower level class for actually using the
+    camera. We may revisit this, but at least for now this is really tied in with
+    the NITF code in the python code in geocal_nitf_des.  
+
+    C++ includes: glas_gfm_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,8 +165,10 @@ class GlasGfmCamera(geocal_swig.camera.Camera):
 
     def __init__(self, *args):
         r"""
+        __init__(GlasGfmCamera self, int Number_line=1, int Number_sample=256) -> GlasGfmCamera
+        __init__(GlasGfmCamera self, Camera Cam, int Band, double Delta_sample, std::string const & Band_type="N", double Band_wavelength=1.45, double Focal_length_meter=1.0, Time Focal_length_time=GeoCal::Time::time_j2000(0)) -> GlasGfmCamera
+        __init__(GlasGfmCamera self, Camera Cam, int Band, double Delta_line, double Delta_sample, std::string const & Band_type="N", double Band_wavelength=1.45, double Focal_length_meter=1.0, Time Focal_length_time=GeoCal::Time::time_j2000(0)) -> GlasGfmCamera
 
-        GlasGfmCamera::GlasGfmCamera(int Number_line=1, int Number_sample=256)
         GeoCal::GlasGfmCamera::GlasGfmCamera
         """
         _glas_gfm_camera.GlasGfmCamera_swiginit(self, _glas_gfm_camera.new_GlasGfmCamera(*args))

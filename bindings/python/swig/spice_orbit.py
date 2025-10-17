@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _spice_orbit.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _spice_orbit:
 _spice_orbit.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _spice_orbit.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,40 +144,41 @@ import geocal_swig.look_vector
 class SpiceOrbit(geocal_swig.orbit.Orbit):
     r"""
 
-    This is an orbit that uses a SPICE kernel as the underlying
-    implementation.
+
+    This is an orbit that uses a SPICE kernel as the underlying implementation.  
 
     This class is used with earth satellites. Compare this class with
-    SpicePlanetOrbit. These could perhaps be merged at some point, but for
-    right now just keep these separate. Don't have enough experience with
-    these classes yet to know what the interface should be like, or if
-    these really could be merged.
+    SpicePlanetOrbit. These could perhaps be merged at some point, but for right now
+    just keep these separate. Don't have enough experience with these classes yet to
+    know what the interface should be like, or if these really could be merged.  
 
-    C++ includes: spice_orbit.h 
+    C++ includes: spice_orbit.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     ISS_ID = _spice_orbit.SpiceOrbit_ISS_ID
+    
 
     def __init__(self, *args):
         r"""
+        __init__(SpiceOrbit self, int Satellite_id, std::string const & Kernel_name="", int Body_id=Ecr::EARTH_NAIF_CODE) -> SpiceOrbit
 
-        SpiceOrbit::SpiceOrbit(int Satellite_id, const std::string &Kernel_name="", int
-        Body_id=Ecr::EARTH_NAIF_CODE)
         GeoCal::SpiceOrbit::SpiceOrbit
-        Create a orbit based on SPICE data.
-        This takes the satellite ID, which is the number used to generate the
-        ID the SPICE toolkit uses, for example the TLE spacecraft code. Note
-        that the SPICE number is actually -100000 - satellite ID
+        Create a orbit based on SPICE data.  
 
-        You need to make sure the spice kernel describing this satellite has
-        been loaded. Often you will have a single kernel that you want used,
-        in that case you can pass this to the constructor and that kernel will
-        be loaded.
+        This takes the satellite ID, which is the number used to generate the ID the
+        SPICE toolkit uses, for example the TLE spacecraft code. Note that the SPICE
+        number is actually -100000 - satellite ID  
 
-        Note that if you pass a kernel name, we save that and make sure it is
-        loaded when we create this class from serialization. 
+        You need to make sure the spice kernel describing this satellite has been
+        loaded. Often you will have a single kernel that you want used, in that case you
+        can pass this to the constructor and that kernel will be loaded.  
+
+        Note that if you pass a kernel name, we save that and make sure it is loaded
+        when we create this class from serialization.  
+
         """
         _spice_orbit.SpiceOrbit_swiginit(self, _spice_orbit.new_SpiceOrbit(*args))
     orbit_data = _swig_new_instance_method(_spice_orbit.SpiceOrbit_orbit_data)

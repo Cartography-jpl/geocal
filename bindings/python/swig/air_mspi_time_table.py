@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _air_mspi_time_table.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _air_mspi_time_table:
 _air_mspi_time_table.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _air_mspi_time_table.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -144,9 +147,11 @@ import geocal_swig.geocal_exception
 class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
     r"""
 
-    This is a time table based on AirMSPI L1B data.
 
-    C++ includes: air_mspi_time_table.h 
+    This is a time table based on AirMSPI L1B data.  
+
+    C++ includes: air_mspi_time_table.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,11 +159,10 @@ class AirMspiTimeTable(geocal_swig.time_table.MeasuredTimeTable):
 
     def __init__(self, *args):
         r"""
+        __init__(AirMspiTimeTable self, std::string const & L1b1_file_name, std::string const & Swath_to_use="660-I", int Min_l1b1_line=0, int Max_l1b1_line=-1) -> AirMspiTimeTable
 
-        AirMspiTimeTable::AirMspiTimeTable(const std::string &L1b1_file_name, const std::string
-        &Swath_to_use="660-I", int Min_l1b1_line=0, int Max_l1b1_line=-1)
         GeoCal::AirMspiTimeTable::AirMspiTimeTable
-        Constructor.
+        Constructor.  
 
         """
         _air_mspi_time_table.AirMspiTimeTable_swiginit(self, _air_mspi_time_table.new_AirMspiTimeTable(*args))

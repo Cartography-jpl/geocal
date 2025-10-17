@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _tiled_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _tiled_file:
 _tiled_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _tiled_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,19 +140,20 @@ import geocal_swig.generic_object
 class TiledFileBase_2(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class is the base class of TiledFile<T, D>.
 
-    It turns out to be useful to factor out the part of TiledFile that
-    doesn't depend on the type T. For most purposes though, you can ignore
-    this class and use TiledFile<T, D> directly.
+    This class is the base class of TiledFile<T, D>.  
 
-    For use with some classes, it is useful to be able to change a generic
-    type T to some common type. For instance, RasterImage converts the
-    types to and from int, and Dem converts to double. We supply
-    conversion routines in this base class for a few common types, as
-    get_int, put_double, read_int etc.
+    It turns out to be useful to factor out the part of TiledFile that doesn't
+    depend on the type T. For most purposes though, you can ignore this class and
+    use TiledFile<T, D> directly.  
 
-    C++ includes: tiled_file.h 
+    For use with some classes, it is useful to be able to change a generic type T to
+    some common type. For instance, RasterImage converts the types to and from int,
+    and Dem converts to double. We supply conversion routines in this base class for
+    a few common types, as get_int, put_double, read_int etc.  
+
+    C++ includes: tiled_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

@@ -14447,253 +14447,297 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "delete_ObservableCamera", _wrap_delete_ObservableCamera, METH_O, NULL},
-	 { "ObservableCamera_add_observer_and_keep_reference", _wrap_ObservableCamera_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableCamera_add_observer", _wrap_ObservableCamera_add_observer, METH_VARARGS, NULL},
-	 { "ObservableCamera_remove_observer", _wrap_ObservableCamera_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableCamera", _wrap_delete_ObservableCamera, METH_O, "delete_ObservableCamera(ObservableCamera self)"},
+	 { "ObservableCamera_add_observer_and_keep_reference", _wrap_ObservableCamera_add_observer_and_keep_reference, METH_VARARGS, "ObservableCamera_add_observer_and_keep_reference(ObservableCamera self, boost::shared_ptr< GeoCal::Observer< GeoCal::Camera > > & Obs)"},
+	 { "ObservableCamera_add_observer", _wrap_ObservableCamera_add_observer, METH_VARARGS, "ObservableCamera_add_observer(ObservableCamera self, ObserverCamera Obs)"},
+	 { "ObservableCamera_remove_observer", _wrap_ObservableCamera_remove_observer, METH_VARARGS, "ObservableCamera_remove_observer(ObservableCamera self, ObserverCamera Obs)"},
 	 { "ObservableCamera_swigregister", ObservableCamera_swigregister, METH_O, NULL},
-	 { "new_ObserverCamera", _wrap_new_ObserverCamera, METH_NOARGS, NULL},
-	 { "delete_ObserverCamera", _wrap_delete_ObserverCamera, METH_O, NULL},
-	 { "ObserverCamera_notify_update", _wrap_ObserverCamera_notify_update, METH_VARARGS, NULL},
-	 { "ObserverCamera_notify_add", _wrap_ObserverCamera_notify_add, METH_VARARGS, NULL},
-	 { "ObserverCamera_notify_remove", _wrap_ObserverCamera_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverCamera", _wrap_new_ObserverCamera, METH_NOARGS, "new_ObserverCamera() -> ObserverCamera"},
+	 { "delete_ObserverCamera", _wrap_delete_ObserverCamera, METH_O, "delete_ObserverCamera(ObserverCamera self)"},
+	 { "ObserverCamera_notify_update", _wrap_ObserverCamera_notify_update, METH_VARARGS, "ObserverCamera_notify_update(ObserverCamera self, Camera Observed_object)"},
+	 { "ObserverCamera_notify_add", _wrap_ObserverCamera_notify_add, METH_VARARGS, "ObserverCamera_notify_add(ObserverCamera self, Camera Observed_object)"},
+	 { "ObserverCamera_notify_remove", _wrap_ObserverCamera_notify_remove, METH_VARARGS, "ObserverCamera_notify_remove(ObserverCamera self, Camera Observed_object)"},
 	 { "ObserverCamera_swigregister", ObserverCamera_swigregister, METH_O, NULL},
 	 { "ObserverCamera_swiginit", ObserverCamera_swiginit, METH_VARARGS, NULL},
 	 { "new_Camera", _wrap_new_Camera, METH_O, "\n"
+		"new_Camera(PyObject * _self) -> Camera\n"
 		"\n"
-		"GeoCal::Camera::Camera()\n"
 		"GeoCal::Camera::Camera\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
-	 { "Camera_desc", _wrap_Camera_desc, METH_O, NULL},
+	 { "Camera_desc", _wrap_Camera_desc, METH_O, "Camera_desc(Camera self) -> std::string"},
 	 { "Camera_add_observer", _wrap_Camera_add_observer, METH_VARARGS, "\n"
+		"Camera_add_observer(Camera self, ObserverCamera Obs)\n"
 		"\n"
-		"virtual void GeoCal::Camera::add_observer(Observer< Camera > &Obs)\n"
 		"GeoCal::Camera::add_observer\n"
 		""},
 	 { "Camera_remove_observer", _wrap_Camera_remove_observer, METH_VARARGS, "\n"
+		"Camera_remove_observer(Camera self, ObserverCamera Obs)\n"
 		"\n"
-		"virtual void GeoCal::Camera::remove_observer(Observer< Camera > &Obs)\n"
 		"GeoCal::Camera::remove_observer\n"
 		""},
 	 { "Camera_integration_time", _wrap_Camera_integration_time, METH_VARARGS, "\n"
+		"Camera_integration_time(Camera self, int Band) -> double\n"
 		"\n"
-		"virtual double GeoCal::Camera::integration_time(int UNUSED(Band)) const\n"
 		"GeoCal::Camera::integration_time\n"
-		"This is the integration time in seconds.\n"
-		"The integration time is how long it takes the camera to collect data.\n"
-		"It is important to model this, so that we can include movement of the\n"
-		"spacecraft while the camera is in the middle of collecting data. If\n"
-		"the integration time is very short, or if a particular derived class\n"
-		"doesn't wish to model this, then the integration time can be set to 0\n"
-		"seconds.\n"
+		"This is the integration time in seconds.  \n"
 		"\n"
-		"The default version returns 0.0. \n"
+		"The integration time is how long it takes the camera to collect data. It is\n"
+		"important to model this, so that we can include movement of the spacecraft while\n"
+		"the camera is in the middle of collecting data. If the integration time is very\n"
+		"short, or if a particular derived class doesn't wish to model this, then the\n"
+		"integration time can be set to 0 seconds.  \n"
+		"\n"
+		"The default version returns 0.0.  \n"
+		"\n"
 		""},
 	 { "Camera__v_number_band", _wrap_Camera__v_number_band, METH_O, "\n"
+		"Camera__v_number_band(Camera self) -> int\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_band() const\n"
 		"GeoCal::Camera::number_band\n"
-		"Number of bands in camera.\n"
+		"Number of bands in camera.  \n"
 		"\n"
 		""},
 	 { "Camera_number_line", _wrap_Camera_number_line, METH_VARARGS, "\n"
+		"Camera_number_line(Camera self, int Band) -> int\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_line(int Band) const =0\n"
 		"GeoCal::Camera::number_line\n"
-		"Number of lines in camera for given band.\n"
+		"Number of lines in camera for given band.  \n"
 		"\n"
 		""},
 	 { "Camera_number_sample", _wrap_Camera_number_sample, METH_VARARGS, "\n"
+		"Camera_number_sample(Camera self, int Band) -> int\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_sample(int Band) const =0\n"
 		"GeoCal::Camera::number_sample\n"
-		"Number of samples in camera for given band.\n"
+		"Number of samples in camera for given band.  \n"
 		"\n"
 		""},
 	 { "Camera_frame_coordinate", _wrap_Camera_frame_coordinate, METH_VARARGS, "\n"
+		"Camera_frame_coordinate(Camera self, ScLookVector Sl, int Band) -> FrameCoordinate\n"
 		"\n"
-		"virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0\n"
 		"GeoCal::Camera::frame_coordinate\n"
-		"This converts from ScLookVector to FrameCoordinate for a given band.\n"
-		"Note that the FrameCoordinate may be outside of the range (0,\n"
-		"number_line(band) - 1), (0, number_sample(band) - 1), this just means\n"
-		"the look vector is not with the active portion of the camera (i.e., it\n"
-		"is not seen). \n"
+		"This converts from ScLookVector to FrameCoordinate for a given band.  \n"
+		"\n"
+		"Note that the FrameCoordinate may be outside of the range (0, number_line(band)\n"
+		"- 1), (0, number_sample(band) - 1), this just means the look vector is not with\n"
+		"the active portion of the camera (i.e., it is not seen).  \n"
+		"\n"
 		""},
 	 { "Camera_frame_coordinate_with_derivative", _wrap_Camera_frame_coordinate_with_derivative, METH_VARARGS, "\n"
+		"Camera_frame_coordinate_with_derivative(Camera self, ScLookVectorWithDerivative Sl, int Band) -> FrameCoordinateWithDerivative\n"
 		"\n"
-		"virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const =0\n"
 		"GeoCal::Camera::frame_coordinate_with_derivative\n"
-		"Variation of frame_coordinate that both propagate derivative\n"
-		"information in the ScLookVector and adds in any derivatives from the\n"
-		"parameters.\n"
+		"Variation of frame_coordinate that both propagate derivative information in the\n"
+		"ScLookVector and adds in any derivatives from the parameters.  \n"
 		"\n"
 		""},
 	 { "Camera_frame_line_coordinate", _wrap_Camera_frame_line_coordinate, METH_VARARGS, "\n"
+		"Camera_frame_line_coordinate(Camera self, ScLookVector Sl, int Band) -> double\n"
 		"\n"
-		"virtual double GeoCal::Camera::frame_line_coordinate(const ScLookVector &Sl, int Band) const\n"
 		"GeoCal::Camera::frame_line_coordinate\n"
-		"This is similar to frame_coordinate, except it only calculates the\n"
-		"line coordinate.\n"
-		"For some camera models, it is more expensive to calculate the sample\n"
-		"number than the line (e.g., MISR camera needs to use the pixel-theta\n"
-		"measurements). For functions that only need the line information, it\n"
-		"is wasteful to do the full calculation.\n"
+		"This is similar to frame_coordinate, except it only calculates the line\n"
+		"coordinate.  \n"
 		"\n"
-		"The default version of this function just calls frame_coordinate and\n"
-		"returns the line portion, but a derived class can override this\n"
-		"default with a faster way of calculation the line information. \n"
+		"For some camera models, it is more expensive to calculate the sample number than\n"
+		"the line (e.g., MISR camera needs to use the pixel-theta measurements). For\n"
+		"functions that only need the line information, it is wasteful to do the full\n"
+		"calculation.  \n"
+		"\n"
+		"The default version of this function just calls frame_coordinate and returns the\n"
+		"line portion, but a derived class can override this default with a faster way of\n"
+		"calculation the line information.  \n"
+		"\n"
 		""},
 	 { "Camera_sc_look_vector", _wrap_Camera_sc_look_vector, METH_VARARGS, "\n"
+		"Camera_sc_look_vector(Camera self, FrameCoordinate F, int Band) -> ScLookVector\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Camera::sc_look_vector(const FrameCoordinate &F, int Band) const =0\n"
 		"GeoCal::Camera::sc_look_vector\n"
-		"Convert from FrameCoordinate to ScLookVector.\n"
+		"Convert from FrameCoordinate to ScLookVector.  \n"
+		"\n"
 		"It is perfectly allowable for F.line to be outside the range (0,\n"
-		"number_line(band) 1) or for F.sample to be outside the range (0,\n"
-		"number_sample(band) - 1). The conversion will just act as if the\n"
-		"camera has infinite extent. \n"
+		"number_line(band)  \n"
+		"\n"
+		"*   1) or for F.sample to be outside the range (0, number_sample(band) - 1). The\n"
+		"    conversion will just act as if the camera has infinite extent.  \n"
+		"\n"
 		""},
 	 { "Camera_sc_look_vector_with_derivative", _wrap_Camera_sc_look_vector_with_derivative, METH_VARARGS, "\n"
+		"Camera_sc_look_vector_with_derivative(Camera self, FrameCoordinateWithDerivative F, int Band) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const =0\n"
 		"GeoCal::Camera::sc_look_vector_with_derivative\n"
-		"Variation of sc_look_vector that both propagate derivative information\n"
-		"in the FrameCoordinate and adds in any derivatives from the\n"
-		"parameters.\n"
+		"Variation of sc_look_vector that both propagate derivative information in the\n"
+		"FrameCoordinate and adds in any derivatives from the parameters.  \n"
 		"\n"
 		""},
-	 { "Camera___str__", _wrap_Camera___str__, METH_O, NULL},
-	 { "Camera__v_parameter", _wrap_Camera__v_parameter, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_with_derivative", _wrap_Camera__v_parameter_with_derivative, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_name", _wrap_Camera__v_parameter_name, METH_O, NULL},
-	 { "Camera__v_parameter_subset", _wrap_Camera__v_parameter_subset, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_with_derivative_subset", _wrap_Camera__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_name_subset", _wrap_Camera__v_parameter_name_subset, METH_O, NULL},
-	 { "Camera__v_parameter_mask", _wrap_Camera__v_parameter_mask, METH_O, NULL},
-	 { "Camera_notify_update_do", _wrap_Camera_notify_update_do, METH_VARARGS, NULL},
+	 { "Camera___str__", _wrap_Camera___str__, METH_O, "Camera___str__(Camera self) -> std::string"},
+	 { "Camera__v_parameter", _wrap_Camera__v_parameter, METH_VARARGS, "\n"
+		"Camera__v_parameter(Camera self) -> BlitzArray_double_1\n"
+		"Camera__v_parameter(Camera self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_with_derivative", _wrap_Camera__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"Camera__v_parameter_with_derivative(Camera self) -> ArrayAd_double_1\n"
+		"Camera__v_parameter_with_derivative(Camera self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_name", _wrap_Camera__v_parameter_name, METH_O, "Camera__v_parameter_name(Camera self) -> vector_string"},
+	 { "Camera__v_parameter_subset", _wrap_Camera__v_parameter_subset, METH_VARARGS, "\n"
+		"Camera__v_parameter_subset(Camera self) -> BlitzArray_double_1\n"
+		"Camera__v_parameter_subset(Camera self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_with_derivative_subset", _wrap_Camera__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"Camera__v_parameter_with_derivative_subset(Camera self) -> ArrayAd_double_1\n"
+		"Camera__v_parameter_with_derivative_subset(Camera self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_name_subset", _wrap_Camera__v_parameter_name_subset, METH_O, "Camera__v_parameter_name_subset(Camera self) -> vector_string"},
+	 { "Camera__v_parameter_mask", _wrap_Camera__v_parameter_mask, METH_O, "Camera__v_parameter_mask(Camera self) -> BlitzArray_bool_1"},
+	 { "Camera_notify_update_do", _wrap_Camera_notify_update_do, METH_VARARGS, "Camera_notify_update_do(Camera self, Camera Self)"},
 	 { "delete_Camera", _wrap_delete_Camera, METH_O, "\n"
+		"delete_Camera(Camera self)\n"
 		"\n"
-		"virtual GeoCal::Camera::~Camera()\n"
 		"GeoCal::Camera::~Camera\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "disown_Camera", _wrap_disown_Camera, METH_O, NULL},
 	 { "Camera_swigregister", Camera_swigregister, METH_O, NULL},
 	 { "Camera_swiginit", Camera_swiginit, METH_VARARGS, NULL},
 	 { "new_SubCamera", _wrap_new_SubCamera, METH_VARARGS, "\n"
+		"new_SubCamera(boost::shared_ptr< GeoCal::Camera > const & Cam, int Start_line, int Start_sample, int Number_line, int Number_sample) -> SubCamera\n"
 		"\n"
-		"GeoCal::SubCamera::SubCamera(const boost::shared_ptr< Camera > &Cam, int Start_line, int\n"
-		"Start_sample, int Number_line, int Number_sample)\n"
 		"GeoCal::SubCamera::SubCamera\n"
 		""},
 	 { "SubCamera__v_full_camera", _wrap_SubCamera__v_full_camera, METH_O, "\n"
+		"SubCamera__v_full_camera(SubCamera self) -> boost::shared_ptr< GeoCal::Camera >\n"
 		"\n"
-		"const boost::shared_ptr< Camera > & GeoCal::SubCamera::full_camera() const\n"
 		"GeoCal::SubCamera::full_camera\n"
 		""},
 	 { "SubCamera__v_start_line", _wrap_SubCamera__v_start_line, METH_O, "\n"
+		"SubCamera__v_start_line(SubCamera self) -> int\n"
 		"\n"
-		"int GeoCal::SubCamera::start_line() const\n"
 		"GeoCal::SubCamera::start_line\n"
 		""},
 	 { "SubCamera__v_start_sample", _wrap_SubCamera__v_start_sample, METH_O, "\n"
+		"SubCamera__v_start_sample(SubCamera self) -> int\n"
 		"\n"
-		"int GeoCal::SubCamera::start_sample() const\n"
 		"GeoCal::SubCamera::start_sample\n"
 		""},
 	 { "delete_SubCamera", _wrap_delete_SubCamera, METH_O, "\n"
+		"delete_SubCamera(SubCamera self)\n"
 		"\n"
-		"virtual GeoCal::SubCamera::~SubCamera()\n"
 		"GeoCal::SubCamera::~SubCamera\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "SubCamera_swigregister", SubCamera_swigregister, METH_O, NULL},
 	 { "SubCamera_swiginit", SubCamera_swiginit, METH_VARARGS, NULL},
 	 { "new_SimpleCamera", _wrap_new_SimpleCamera, METH_VARARGS, "\n"
+		"SimpleCamera()\n"
+		"SimpleCamera(double Beta)\n"
+		"SimpleCamera(double Beta, double Delta, double Epsilon=0, double Focal=123.8e-3, double Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_line=1, int Number_sample=1504)\n"
 		"\n"
-		"SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7\n"
-		"*Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double\n"
-		"line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int\n"
-		"Number_sample=1504)\n"
 		"GeoCal::SimpleCamera::SimpleCamera\n"
-		"This creates SimpleCamera with the given data.\n"
-		"The default data is for the nominal MISR DF, red band. \n"
+		"This creates SimpleCamera with the given data.  \n"
+		"\n"
+		"The default data is for the nominal MISR DF, red band.  \n"
+		"\n"
 		""},
 	 { "SimpleCamera__v_beta", _wrap_SimpleCamera__v_beta, METH_O, "\n"
+		"SimpleCamera__v_beta(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::beta() const\n"
 		"GeoCal::SimpleCamera::beta\n"
 		""},
 	 { "SimpleCamera__v_delta", _wrap_SimpleCamera__v_delta, METH_O, "\n"
+		"SimpleCamera__v_delta(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::delta() const\n"
 		"GeoCal::SimpleCamera::delta\n"
 		""},
 	 { "SimpleCamera__v_epsilon", _wrap_SimpleCamera__v_epsilon, METH_O, "\n"
+		"SimpleCamera__v_epsilon(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::epsilon() const\n"
 		"GeoCal::SimpleCamera::epsilon\n"
 		""},
 	 { "SimpleCamera__v_focal_length", _wrap_SimpleCamera__v_focal_length, METH_O, "\n"
+		"SimpleCamera__v_focal_length(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::focal_length() const\n"
 		"GeoCal::SimpleCamera::focal_length\n"
 		""},
 	 { "SimpleCamera__v_line_pitch", _wrap_SimpleCamera__v_line_pitch, METH_O, "\n"
+		"SimpleCamera__v_line_pitch(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::line_pitch() const\n"
 		"GeoCal::SimpleCamera::line_pitch\n"
 		""},
 	 { "SimpleCamera__v_sample_pitch", _wrap_SimpleCamera__v_sample_pitch, METH_O, "\n"
+		"SimpleCamera__v_sample_pitch(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::sample_pitch() const\n"
 		"GeoCal::SimpleCamera::sample_pitch\n"
 		""},
 	 { "delete_SimpleCamera", _wrap_delete_SimpleCamera, METH_O, "\n"
+		"delete_SimpleCamera(SimpleCamera self)\n"
 		"\n"
-		"virtual GeoCal::SimpleCamera::~SimpleCamera()\n"
 		"GeoCal::SimpleCamera::~SimpleCamera\n"
 		""},
 	 { "SimpleCamera_swigregister", SimpleCamera_swigregister, METH_O, NULL},
 	 { "SimpleCamera_swiginit", SimpleCamera_swiginit, METH_VARARGS, NULL},
-	 { "Vector_Camera_iterator", _wrap_Vector_Camera_iterator, METH_O, NULL},
-	 { "Vector_Camera___nonzero__", _wrap_Vector_Camera___nonzero__, METH_O, NULL},
-	 { "Vector_Camera___bool__", _wrap_Vector_Camera___bool__, METH_O, NULL},
-	 { "Vector_Camera___len__", _wrap_Vector_Camera___len__, METH_O, NULL},
-	 { "Vector_Camera___getslice__", _wrap_Vector_Camera___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Camera___setslice__", _wrap_Vector_Camera___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Camera___delslice__", _wrap_Vector_Camera___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Camera___delitem__", _wrap_Vector_Camera___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Camera___getitem__", _wrap_Vector_Camera___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Camera___setitem__", _wrap_Vector_Camera___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Camera_pop", _wrap_Vector_Camera_pop, METH_O, NULL},
-	 { "Vector_Camera_append", _wrap_Vector_Camera_append, METH_VARARGS, NULL},
-	 { "Vector_Camera_empty", _wrap_Vector_Camera_empty, METH_O, NULL},
-	 { "Vector_Camera_size", _wrap_Vector_Camera_size, METH_O, NULL},
-	 { "Vector_Camera_swap", _wrap_Vector_Camera_swap, METH_VARARGS, NULL},
-	 { "Vector_Camera_begin", _wrap_Vector_Camera_begin, METH_O, NULL},
-	 { "Vector_Camera_end", _wrap_Vector_Camera_end, METH_O, NULL},
-	 { "Vector_Camera_rbegin", _wrap_Vector_Camera_rbegin, METH_O, NULL},
-	 { "Vector_Camera_rend", _wrap_Vector_Camera_rend, METH_O, NULL},
-	 { "Vector_Camera_clear", _wrap_Vector_Camera_clear, METH_O, NULL},
-	 { "Vector_Camera_get_allocator", _wrap_Vector_Camera_get_allocator, METH_O, NULL},
-	 { "Vector_Camera_pop_back", _wrap_Vector_Camera_pop_back, METH_O, NULL},
-	 { "Vector_Camera_erase", _wrap_Vector_Camera_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Camera", _wrap_new_Vector_Camera, METH_VARARGS, NULL},
-	 { "Vector_Camera_push_back", _wrap_Vector_Camera_push_back, METH_VARARGS, NULL},
-	 { "Vector_Camera_front", _wrap_Vector_Camera_front, METH_O, NULL},
-	 { "Vector_Camera_back", _wrap_Vector_Camera_back, METH_O, NULL},
-	 { "Vector_Camera_assign", _wrap_Vector_Camera_assign, METH_VARARGS, NULL},
-	 { "Vector_Camera_resize", _wrap_Vector_Camera_resize, METH_VARARGS, NULL},
-	 { "Vector_Camera_insert", _wrap_Vector_Camera_insert, METH_VARARGS, NULL},
-	 { "Vector_Camera_reserve", _wrap_Vector_Camera_reserve, METH_VARARGS, NULL},
-	 { "Vector_Camera_capacity", _wrap_Vector_Camera_capacity, METH_O, NULL},
-	 { "delete_Vector_Camera", _wrap_delete_Vector_Camera, METH_O, NULL},
+	 { "Vector_Camera_iterator", _wrap_Vector_Camera_iterator, METH_O, "Vector_Camera_iterator(Vector_Camera self) -> SwigPyIterator"},
+	 { "Vector_Camera___nonzero__", _wrap_Vector_Camera___nonzero__, METH_O, "Vector_Camera___nonzero__(Vector_Camera self) -> bool"},
+	 { "Vector_Camera___bool__", _wrap_Vector_Camera___bool__, METH_O, "Vector_Camera___bool__(Vector_Camera self) -> bool"},
+	 { "Vector_Camera___len__", _wrap_Vector_Camera___len__, METH_O, "Vector_Camera___len__(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type"},
+	 { "Vector_Camera___getslice__", _wrap_Vector_Camera___getslice__, METH_VARARGS, "Vector_Camera___getslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j) -> Vector_Camera"},
+	 { "Vector_Camera___setslice__", _wrap_Vector_Camera___setslice__, METH_VARARGS, "\n"
+		"Vector_Camera___setslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j)\n"
+		"Vector_Camera___setslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j, Vector_Camera v)\n"
+		""},
+	 { "Vector_Camera___delslice__", _wrap_Vector_Camera___delslice__, METH_VARARGS, "Vector_Camera___delslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j)"},
+	 { "Vector_Camera___delitem__", _wrap_Vector_Camera___delitem__, METH_VARARGS, "\n"
+		"Vector_Camera___delitem__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i)\n"
+		"Vector_Camera___delitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Camera___getitem__", _wrap_Vector_Camera___getitem__, METH_VARARGS, "\n"
+		"Vector_Camera___getitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice) -> Vector_Camera\n"
+		"Vector_Camera___getitem__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &\n"
+		""},
+	 { "Vector_Camera___setitem__", _wrap_Vector_Camera___setitem__, METH_VARARGS, "\n"
+		"Vector_Camera___setitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice, Vector_Camera v)\n"
+		"Vector_Camera___setitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_Camera___setitem__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)\n"
+		""},
+	 { "Vector_Camera_pop", _wrap_Vector_Camera_pop, METH_O, "Vector_Camera_pop(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type"},
+	 { "Vector_Camera_append", _wrap_Vector_Camera_append, METH_VARARGS, "Vector_Camera_append(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)"},
+	 { "Vector_Camera_empty", _wrap_Vector_Camera_empty, METH_O, "Vector_Camera_empty(Vector_Camera self) -> bool"},
+	 { "Vector_Camera_size", _wrap_Vector_Camera_size, METH_O, "Vector_Camera_size(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type"},
+	 { "Vector_Camera_swap", _wrap_Vector_Camera_swap, METH_VARARGS, "Vector_Camera_swap(Vector_Camera self, Vector_Camera v)"},
+	 { "Vector_Camera_begin", _wrap_Vector_Camera_begin, METH_O, "Vector_Camera_begin(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator"},
+	 { "Vector_Camera_end", _wrap_Vector_Camera_end, METH_O, "Vector_Camera_end(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator"},
+	 { "Vector_Camera_rbegin", _wrap_Vector_Camera_rbegin, METH_O, "Vector_Camera_rbegin(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::reverse_iterator"},
+	 { "Vector_Camera_rend", _wrap_Vector_Camera_rend, METH_O, "Vector_Camera_rend(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::reverse_iterator"},
+	 { "Vector_Camera_clear", _wrap_Vector_Camera_clear, METH_O, "Vector_Camera_clear(Vector_Camera self)"},
+	 { "Vector_Camera_get_allocator", _wrap_Vector_Camera_get_allocator, METH_O, "Vector_Camera_get_allocator(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::allocator_type"},
+	 { "Vector_Camera_pop_back", _wrap_Vector_Camera_pop_back, METH_O, "Vector_Camera_pop_back(Vector_Camera self)"},
+	 { "Vector_Camera_erase", _wrap_Vector_Camera_erase, METH_VARARGS, "\n"
+		"Vector_Camera_erase(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator\n"
+		"Vector_Camera_erase(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator first, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator\n"
+		""},
+	 { "new_Vector_Camera", _wrap_new_Vector_Camera, METH_VARARGS, "\n"
+		"Vector_Camera()\n"
+		"Vector_Camera(Vector_Camera other)\n"
+		"Vector_Camera(std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type size)\n"
+		"new_Vector_Camera(std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & value) -> Vector_Camera\n"
+		""},
+	 { "Vector_Camera_push_back", _wrap_Vector_Camera_push_back, METH_VARARGS, "Vector_Camera_push_back(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)"},
+	 { "Vector_Camera_front", _wrap_Vector_Camera_front, METH_O, "Vector_Camera_front(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &"},
+	 { "Vector_Camera_back", _wrap_Vector_Camera_back, METH_O, "Vector_Camera_back(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &"},
+	 { "Vector_Camera_assign", _wrap_Vector_Camera_assign, METH_VARARGS, "Vector_Camera_assign(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)"},
+	 { "Vector_Camera_resize", _wrap_Vector_Camera_resize, METH_VARARGS, "\n"
+		"Vector_Camera_resize(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type new_size)\n"
+		"Vector_Camera_resize(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)\n"
+		""},
+	 { "Vector_Camera_insert", _wrap_Vector_Camera_insert, METH_VARARGS, "\n"
+		"Vector_Camera_insert(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator\n"
+		"Vector_Camera_insert(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)\n"
+		""},
+	 { "Vector_Camera_reserve", _wrap_Vector_Camera_reserve, METH_VARARGS, "Vector_Camera_reserve(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n)"},
+	 { "Vector_Camera_capacity", _wrap_Vector_Camera_capacity, METH_O, "Vector_Camera_capacity(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type"},
+	 { "delete_Vector_Camera", _wrap_delete_Vector_Camera, METH_O, "delete_Vector_Camera(Vector_Camera self)"},
 	 { "Vector_Camera_swigregister", Vector_Camera_swigregister, METH_O, NULL},
 	 { "Vector_Camera_swiginit", Vector_Camera_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -14720,253 +14764,297 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "delete_ObservableCamera", _wrap_delete_ObservableCamera, METH_O, NULL},
-	 { "ObservableCamera_add_observer_and_keep_reference", _wrap_ObservableCamera_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableCamera_add_observer", _wrap_ObservableCamera_add_observer, METH_VARARGS, NULL},
-	 { "ObservableCamera_remove_observer", _wrap_ObservableCamera_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableCamera", _wrap_delete_ObservableCamera, METH_O, "delete_ObservableCamera(ObservableCamera self)"},
+	 { "ObservableCamera_add_observer_and_keep_reference", _wrap_ObservableCamera_add_observer_and_keep_reference, METH_VARARGS, "add_observer_and_keep_reference(ObservableCamera self, boost::shared_ptr< GeoCal::Observer< GeoCal::Camera > > & Obs)"},
+	 { "ObservableCamera_add_observer", _wrap_ObservableCamera_add_observer, METH_VARARGS, "add_observer(ObservableCamera self, ObserverCamera Obs)"},
+	 { "ObservableCamera_remove_observer", _wrap_ObservableCamera_remove_observer, METH_VARARGS, "remove_observer(ObservableCamera self, ObserverCamera Obs)"},
 	 { "ObservableCamera_swigregister", ObservableCamera_swigregister, METH_O, NULL},
-	 { "new_ObserverCamera", _wrap_new_ObserverCamera, METH_NOARGS, NULL},
-	 { "delete_ObserverCamera", _wrap_delete_ObserverCamera, METH_O, NULL},
-	 { "ObserverCamera_notify_update", _wrap_ObserverCamera_notify_update, METH_VARARGS, NULL},
-	 { "ObserverCamera_notify_add", _wrap_ObserverCamera_notify_add, METH_VARARGS, NULL},
-	 { "ObserverCamera_notify_remove", _wrap_ObserverCamera_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverCamera", _wrap_new_ObserverCamera, METH_NOARGS, "new_ObserverCamera() -> ObserverCamera"},
+	 { "delete_ObserverCamera", _wrap_delete_ObserverCamera, METH_O, "delete_ObserverCamera(ObserverCamera self)"},
+	 { "ObserverCamera_notify_update", _wrap_ObserverCamera_notify_update, METH_VARARGS, "notify_update(ObserverCamera self, Camera Observed_object)"},
+	 { "ObserverCamera_notify_add", _wrap_ObserverCamera_notify_add, METH_VARARGS, "notify_add(ObserverCamera self, Camera Observed_object)"},
+	 { "ObserverCamera_notify_remove", _wrap_ObserverCamera_notify_remove, METH_VARARGS, "notify_remove(ObserverCamera self, Camera Observed_object)"},
 	 { "ObserverCamera_swigregister", ObserverCamera_swigregister, METH_O, NULL},
 	 { "ObserverCamera_swiginit", ObserverCamera_swiginit, METH_VARARGS, NULL},
 	 { "new_Camera", _wrap_new_Camera, METH_O, "\n"
+		"new_Camera(PyObject * _self) -> Camera\n"
 		"\n"
-		"GeoCal::Camera::Camera()\n"
 		"GeoCal::Camera::Camera\n"
-		"Default constructor.\n"
+		"Default constructor.  \n"
 		"\n"
 		""},
-	 { "Camera_desc", _wrap_Camera_desc, METH_O, NULL},
+	 { "Camera_desc", _wrap_Camera_desc, METH_O, "desc(Camera self) -> std::string"},
 	 { "Camera_add_observer", _wrap_Camera_add_observer, METH_VARARGS, "\n"
+		"add_observer(Camera self, ObserverCamera Obs)\n"
 		"\n"
-		"virtual void GeoCal::Camera::add_observer(Observer< Camera > &Obs)\n"
 		"GeoCal::Camera::add_observer\n"
 		""},
 	 { "Camera_remove_observer", _wrap_Camera_remove_observer, METH_VARARGS, "\n"
+		"remove_observer(Camera self, ObserverCamera Obs)\n"
 		"\n"
-		"virtual void GeoCal::Camera::remove_observer(Observer< Camera > &Obs)\n"
 		"GeoCal::Camera::remove_observer\n"
 		""},
 	 { "Camera_integration_time", _wrap_Camera_integration_time, METH_VARARGS, "\n"
+		"integration_time(Camera self, int Band) -> double\n"
 		"\n"
-		"virtual double GeoCal::Camera::integration_time(int UNUSED(Band)) const\n"
 		"GeoCal::Camera::integration_time\n"
-		"This is the integration time in seconds.\n"
-		"The integration time is how long it takes the camera to collect data.\n"
-		"It is important to model this, so that we can include movement of the\n"
-		"spacecraft while the camera is in the middle of collecting data. If\n"
-		"the integration time is very short, or if a particular derived class\n"
-		"doesn't wish to model this, then the integration time can be set to 0\n"
-		"seconds.\n"
+		"This is the integration time in seconds.  \n"
 		"\n"
-		"The default version returns 0.0. \n"
+		"The integration time is how long it takes the camera to collect data. It is\n"
+		"important to model this, so that we can include movement of the spacecraft while\n"
+		"the camera is in the middle of collecting data. If the integration time is very\n"
+		"short, or if a particular derived class doesn't wish to model this, then the\n"
+		"integration time can be set to 0 seconds.  \n"
+		"\n"
+		"The default version returns 0.0.  \n"
+		"\n"
 		""},
 	 { "Camera__v_number_band", _wrap_Camera__v_number_band, METH_O, "\n"
+		"_v_number_band(Camera self) -> int\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_band() const\n"
 		"GeoCal::Camera::number_band\n"
-		"Number of bands in camera.\n"
+		"Number of bands in camera.  \n"
 		"\n"
 		""},
 	 { "Camera_number_line", _wrap_Camera_number_line, METH_VARARGS, "\n"
+		"number_line(Camera self, int Band) -> int\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_line(int Band) const =0\n"
 		"GeoCal::Camera::number_line\n"
-		"Number of lines in camera for given band.\n"
+		"Number of lines in camera for given band.  \n"
 		"\n"
 		""},
 	 { "Camera_number_sample", _wrap_Camera_number_sample, METH_VARARGS, "\n"
+		"number_sample(Camera self, int Band) -> int\n"
 		"\n"
-		"virtual int GeoCal::Camera::number_sample(int Band) const =0\n"
 		"GeoCal::Camera::number_sample\n"
-		"Number of samples in camera for given band.\n"
+		"Number of samples in camera for given band.  \n"
 		"\n"
 		""},
 	 { "Camera_frame_coordinate", _wrap_Camera_frame_coordinate, METH_VARARGS, "\n"
+		"frame_coordinate(Camera self, ScLookVector Sl, int Band) -> FrameCoordinate\n"
 		"\n"
-		"virtual FrameCoordinate GeoCal::Camera::frame_coordinate(const ScLookVector &Sl, int Band) const =0\n"
 		"GeoCal::Camera::frame_coordinate\n"
-		"This converts from ScLookVector to FrameCoordinate for a given band.\n"
-		"Note that the FrameCoordinate may be outside of the range (0,\n"
-		"number_line(band) - 1), (0, number_sample(band) - 1), this just means\n"
-		"the look vector is not with the active portion of the camera (i.e., it\n"
-		"is not seen). \n"
+		"This converts from ScLookVector to FrameCoordinate for a given band.  \n"
+		"\n"
+		"Note that the FrameCoordinate may be outside of the range (0, number_line(band)\n"
+		"- 1), (0, number_sample(band) - 1), this just means the look vector is not with\n"
+		"the active portion of the camera (i.e., it is not seen).  \n"
+		"\n"
 		""},
 	 { "Camera_frame_coordinate_with_derivative", _wrap_Camera_frame_coordinate_with_derivative, METH_VARARGS, "\n"
+		"frame_coordinate_with_derivative(Camera self, ScLookVectorWithDerivative Sl, int Band) -> FrameCoordinateWithDerivative\n"
 		"\n"
-		"virtual FrameCoordinateWithDerivative GeoCal::Camera::frame_coordinate_with_derivative(const ScLookVectorWithDerivative &Sl, int Band) const =0\n"
 		"GeoCal::Camera::frame_coordinate_with_derivative\n"
-		"Variation of frame_coordinate that both propagate derivative\n"
-		"information in the ScLookVector and adds in any derivatives from the\n"
-		"parameters.\n"
+		"Variation of frame_coordinate that both propagate derivative information in the\n"
+		"ScLookVector and adds in any derivatives from the parameters.  \n"
 		"\n"
 		""},
 	 { "Camera_frame_line_coordinate", _wrap_Camera_frame_line_coordinate, METH_VARARGS, "\n"
+		"frame_line_coordinate(Camera self, ScLookVector Sl, int Band) -> double\n"
 		"\n"
-		"virtual double GeoCal::Camera::frame_line_coordinate(const ScLookVector &Sl, int Band) const\n"
 		"GeoCal::Camera::frame_line_coordinate\n"
-		"This is similar to frame_coordinate, except it only calculates the\n"
-		"line coordinate.\n"
-		"For some camera models, it is more expensive to calculate the sample\n"
-		"number than the line (e.g., MISR camera needs to use the pixel-theta\n"
-		"measurements). For functions that only need the line information, it\n"
-		"is wasteful to do the full calculation.\n"
+		"This is similar to frame_coordinate, except it only calculates the line\n"
+		"coordinate.  \n"
 		"\n"
-		"The default version of this function just calls frame_coordinate and\n"
-		"returns the line portion, but a derived class can override this\n"
-		"default with a faster way of calculation the line information. \n"
+		"For some camera models, it is more expensive to calculate the sample number than\n"
+		"the line (e.g., MISR camera needs to use the pixel-theta measurements). For\n"
+		"functions that only need the line information, it is wasteful to do the full\n"
+		"calculation.  \n"
+		"\n"
+		"The default version of this function just calls frame_coordinate and returns the\n"
+		"line portion, but a derived class can override this default with a faster way of\n"
+		"calculation the line information.  \n"
+		"\n"
 		""},
 	 { "Camera_sc_look_vector", _wrap_Camera_sc_look_vector, METH_VARARGS, "\n"
+		"sc_look_vector(Camera self, FrameCoordinate F, int Band) -> ScLookVector\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Camera::sc_look_vector(const FrameCoordinate &F, int Band) const =0\n"
 		"GeoCal::Camera::sc_look_vector\n"
-		"Convert from FrameCoordinate to ScLookVector.\n"
+		"Convert from FrameCoordinate to ScLookVector.  \n"
+		"\n"
 		"It is perfectly allowable for F.line to be outside the range (0,\n"
-		"number_line(band) 1) or for F.sample to be outside the range (0,\n"
-		"number_sample(band) - 1). The conversion will just act as if the\n"
-		"camera has infinite extent. \n"
+		"number_line(band)  \n"
+		"\n"
+		"*   1) or for F.sample to be outside the range (0, number_sample(band) - 1). The\n"
+		"    conversion will just act as if the camera has infinite extent.  \n"
+		"\n"
 		""},
 	 { "Camera_sc_look_vector_with_derivative", _wrap_Camera_sc_look_vector_with_derivative, METH_VARARGS, "\n"
+		"sc_look_vector_with_derivative(Camera self, FrameCoordinateWithDerivative F, int Band) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::Camera::sc_look_vector_with_derivative(const FrameCoordinateWithDerivative &F, int Band) const =0\n"
 		"GeoCal::Camera::sc_look_vector_with_derivative\n"
-		"Variation of sc_look_vector that both propagate derivative information\n"
-		"in the FrameCoordinate and adds in any derivatives from the\n"
-		"parameters.\n"
+		"Variation of sc_look_vector that both propagate derivative information in the\n"
+		"FrameCoordinate and adds in any derivatives from the parameters.  \n"
 		"\n"
 		""},
-	 { "Camera___str__", _wrap_Camera___str__, METH_O, NULL},
-	 { "Camera__v_parameter", _wrap_Camera__v_parameter, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_with_derivative", _wrap_Camera__v_parameter_with_derivative, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_name", _wrap_Camera__v_parameter_name, METH_O, NULL},
-	 { "Camera__v_parameter_subset", _wrap_Camera__v_parameter_subset, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_with_derivative_subset", _wrap_Camera__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "Camera__v_parameter_name_subset", _wrap_Camera__v_parameter_name_subset, METH_O, NULL},
-	 { "Camera__v_parameter_mask", _wrap_Camera__v_parameter_mask, METH_O, NULL},
-	 { "Camera_notify_update_do", _wrap_Camera_notify_update_do, METH_VARARGS, NULL},
+	 { "Camera___str__", _wrap_Camera___str__, METH_O, "__str__(Camera self) -> std::string"},
+	 { "Camera__v_parameter", _wrap_Camera__v_parameter, METH_VARARGS, "\n"
+		"_v_parameter(Camera self) -> BlitzArray_double_1\n"
+		"_v_parameter(Camera self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_with_derivative", _wrap_Camera__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative(Camera self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative(Camera self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_name", _wrap_Camera__v_parameter_name, METH_O, "_v_parameter_name(Camera self) -> vector_string"},
+	 { "Camera__v_parameter_subset", _wrap_Camera__v_parameter_subset, METH_VARARGS, "\n"
+		"_v_parameter_subset(Camera self) -> BlitzArray_double_1\n"
+		"_v_parameter_subset(Camera self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_with_derivative_subset", _wrap_Camera__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative_subset(Camera self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative_subset(Camera self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Camera__v_parameter_name_subset", _wrap_Camera__v_parameter_name_subset, METH_O, "_v_parameter_name_subset(Camera self) -> vector_string"},
+	 { "Camera__v_parameter_mask", _wrap_Camera__v_parameter_mask, METH_O, "_v_parameter_mask(Camera self) -> BlitzArray_bool_1"},
+	 { "Camera_notify_update_do", _wrap_Camera_notify_update_do, METH_VARARGS, "notify_update_do(Camera self, Camera Self)"},
 	 { "delete_Camera", _wrap_delete_Camera, METH_O, "\n"
+		"delete_Camera(Camera self)\n"
 		"\n"
-		"virtual GeoCal::Camera::~Camera()\n"
 		"GeoCal::Camera::~Camera\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "disown_Camera", _wrap_disown_Camera, METH_O, NULL},
 	 { "Camera_swigregister", Camera_swigregister, METH_O, NULL},
 	 { "Camera_swiginit", Camera_swiginit, METH_VARARGS, NULL},
 	 { "new_SubCamera", _wrap_new_SubCamera, METH_VARARGS, "\n"
+		"new_SubCamera(boost::shared_ptr< GeoCal::Camera > const & Cam, int Start_line, int Start_sample, int Number_line, int Number_sample) -> SubCamera\n"
 		"\n"
-		"GeoCal::SubCamera::SubCamera(const boost::shared_ptr< Camera > &Cam, int Start_line, int\n"
-		"Start_sample, int Number_line, int Number_sample)\n"
 		"GeoCal::SubCamera::SubCamera\n"
 		""},
 	 { "SubCamera__v_full_camera", _wrap_SubCamera__v_full_camera, METH_O, "\n"
+		"_v_full_camera(SubCamera self) -> boost::shared_ptr< GeoCal::Camera >\n"
 		"\n"
-		"const boost::shared_ptr< Camera > & GeoCal::SubCamera::full_camera() const\n"
 		"GeoCal::SubCamera::full_camera\n"
 		""},
 	 { "SubCamera__v_start_line", _wrap_SubCamera__v_start_line, METH_O, "\n"
+		"_v_start_line(SubCamera self) -> int\n"
 		"\n"
-		"int GeoCal::SubCamera::start_line() const\n"
 		"GeoCal::SubCamera::start_line\n"
 		""},
 	 { "SubCamera__v_start_sample", _wrap_SubCamera__v_start_sample, METH_O, "\n"
+		"_v_start_sample(SubCamera self) -> int\n"
 		"\n"
-		"int GeoCal::SubCamera::start_sample() const\n"
 		"GeoCal::SubCamera::start_sample\n"
 		""},
 	 { "delete_SubCamera", _wrap_delete_SubCamera, METH_O, "\n"
+		"delete_SubCamera(SubCamera self)\n"
 		"\n"
-		"virtual GeoCal::SubCamera::~SubCamera()\n"
 		"GeoCal::SubCamera::~SubCamera\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "SubCamera_swigregister", SubCamera_swigregister, METH_O, NULL},
 	 { "SubCamera_swiginit", SubCamera_swiginit, METH_VARARGS, NULL},
 	 { "new_SimpleCamera", _wrap_new_SimpleCamera, METH_VARARGS, "\n"
+		"SimpleCamera()\n"
+		"SimpleCamera(double Beta)\n"
+		"SimpleCamera(double Beta, double Delta, double Epsilon=0, double Focal=123.8e-3, double Pitch_line=18e-6, double Pitch_sample=21e-6, int Number_line=1, int Number_sample=1504)\n"
 		"\n"
-		"SimpleCamera::SimpleCamera(double Beta=58 *Constant::deg_to_rad, double Delta=-2.7\n"
-		"*Constant::deg_to_rad, double Epsilon=0, double Focal=123.8e-3, double\n"
-		"line_pitch=18e-6, double sample_pitch=21e-6, int Number_line=1, int\n"
-		"Number_sample=1504)\n"
 		"GeoCal::SimpleCamera::SimpleCamera\n"
-		"This creates SimpleCamera with the given data.\n"
-		"The default data is for the nominal MISR DF, red band. \n"
+		"This creates SimpleCamera with the given data.  \n"
+		"\n"
+		"The default data is for the nominal MISR DF, red band.  \n"
+		"\n"
 		""},
 	 { "SimpleCamera__v_beta", _wrap_SimpleCamera__v_beta, METH_O, "\n"
+		"_v_beta(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::beta() const\n"
 		"GeoCal::SimpleCamera::beta\n"
 		""},
 	 { "SimpleCamera__v_delta", _wrap_SimpleCamera__v_delta, METH_O, "\n"
+		"_v_delta(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::delta() const\n"
 		"GeoCal::SimpleCamera::delta\n"
 		""},
 	 { "SimpleCamera__v_epsilon", _wrap_SimpleCamera__v_epsilon, METH_O, "\n"
+		"_v_epsilon(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::epsilon() const\n"
 		"GeoCal::SimpleCamera::epsilon\n"
 		""},
 	 { "SimpleCamera__v_focal_length", _wrap_SimpleCamera__v_focal_length, METH_O, "\n"
+		"_v_focal_length(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::focal_length() const\n"
 		"GeoCal::SimpleCamera::focal_length\n"
 		""},
 	 { "SimpleCamera__v_line_pitch", _wrap_SimpleCamera__v_line_pitch, METH_O, "\n"
+		"_v_line_pitch(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::line_pitch() const\n"
 		"GeoCal::SimpleCamera::line_pitch\n"
 		""},
 	 { "SimpleCamera__v_sample_pitch", _wrap_SimpleCamera__v_sample_pitch, METH_O, "\n"
+		"_v_sample_pitch(SimpleCamera self) -> double\n"
 		"\n"
-		"double GeoCal::SimpleCamera::sample_pitch() const\n"
 		"GeoCal::SimpleCamera::sample_pitch\n"
 		""},
 	 { "delete_SimpleCamera", _wrap_delete_SimpleCamera, METH_O, "\n"
+		"delete_SimpleCamera(SimpleCamera self)\n"
 		"\n"
-		"virtual GeoCal::SimpleCamera::~SimpleCamera()\n"
 		"GeoCal::SimpleCamera::~SimpleCamera\n"
 		""},
 	 { "SimpleCamera_swigregister", SimpleCamera_swigregister, METH_O, NULL},
 	 { "SimpleCamera_swiginit", SimpleCamera_swiginit, METH_VARARGS, NULL},
-	 { "Vector_Camera_iterator", _wrap_Vector_Camera_iterator, METH_O, NULL},
-	 { "Vector_Camera___nonzero__", _wrap_Vector_Camera___nonzero__, METH_O, NULL},
-	 { "Vector_Camera___bool__", _wrap_Vector_Camera___bool__, METH_O, NULL},
-	 { "Vector_Camera___len__", _wrap_Vector_Camera___len__, METH_O, NULL},
-	 { "Vector_Camera___getslice__", _wrap_Vector_Camera___getslice__, METH_VARARGS, NULL},
-	 { "Vector_Camera___setslice__", _wrap_Vector_Camera___setslice__, METH_VARARGS, NULL},
-	 { "Vector_Camera___delslice__", _wrap_Vector_Camera___delslice__, METH_VARARGS, NULL},
-	 { "Vector_Camera___delitem__", _wrap_Vector_Camera___delitem__, METH_VARARGS, NULL},
-	 { "Vector_Camera___getitem__", _wrap_Vector_Camera___getitem__, METH_VARARGS, NULL},
-	 { "Vector_Camera___setitem__", _wrap_Vector_Camera___setitem__, METH_VARARGS, NULL},
-	 { "Vector_Camera_pop", _wrap_Vector_Camera_pop, METH_O, NULL},
-	 { "Vector_Camera_append", _wrap_Vector_Camera_append, METH_VARARGS, NULL},
-	 { "Vector_Camera_empty", _wrap_Vector_Camera_empty, METH_O, NULL},
-	 { "Vector_Camera_size", _wrap_Vector_Camera_size, METH_O, NULL},
-	 { "Vector_Camera_swap", _wrap_Vector_Camera_swap, METH_VARARGS, NULL},
-	 { "Vector_Camera_begin", _wrap_Vector_Camera_begin, METH_O, NULL},
-	 { "Vector_Camera_end", _wrap_Vector_Camera_end, METH_O, NULL},
-	 { "Vector_Camera_rbegin", _wrap_Vector_Camera_rbegin, METH_O, NULL},
-	 { "Vector_Camera_rend", _wrap_Vector_Camera_rend, METH_O, NULL},
-	 { "Vector_Camera_clear", _wrap_Vector_Camera_clear, METH_O, NULL},
-	 { "Vector_Camera_get_allocator", _wrap_Vector_Camera_get_allocator, METH_O, NULL},
-	 { "Vector_Camera_pop_back", _wrap_Vector_Camera_pop_back, METH_O, NULL},
-	 { "Vector_Camera_erase", _wrap_Vector_Camera_erase, METH_VARARGS, NULL},
-	 { "new_Vector_Camera", _wrap_new_Vector_Camera, METH_VARARGS, NULL},
-	 { "Vector_Camera_push_back", _wrap_Vector_Camera_push_back, METH_VARARGS, NULL},
-	 { "Vector_Camera_front", _wrap_Vector_Camera_front, METH_O, NULL},
-	 { "Vector_Camera_back", _wrap_Vector_Camera_back, METH_O, NULL},
-	 { "Vector_Camera_assign", _wrap_Vector_Camera_assign, METH_VARARGS, NULL},
-	 { "Vector_Camera_resize", _wrap_Vector_Camera_resize, METH_VARARGS, NULL},
-	 { "Vector_Camera_insert", _wrap_Vector_Camera_insert, METH_VARARGS, NULL},
-	 { "Vector_Camera_reserve", _wrap_Vector_Camera_reserve, METH_VARARGS, NULL},
-	 { "Vector_Camera_capacity", _wrap_Vector_Camera_capacity, METH_O, NULL},
-	 { "delete_Vector_Camera", _wrap_delete_Vector_Camera, METH_O, NULL},
+	 { "Vector_Camera_iterator", _wrap_Vector_Camera_iterator, METH_O, "iterator(Vector_Camera self) -> SwigPyIterator"},
+	 { "Vector_Camera___nonzero__", _wrap_Vector_Camera___nonzero__, METH_O, "__nonzero__(Vector_Camera self) -> bool"},
+	 { "Vector_Camera___bool__", _wrap_Vector_Camera___bool__, METH_O, "__bool__(Vector_Camera self) -> bool"},
+	 { "Vector_Camera___len__", _wrap_Vector_Camera___len__, METH_O, "__len__(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type"},
+	 { "Vector_Camera___getslice__", _wrap_Vector_Camera___getslice__, METH_VARARGS, "__getslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j) -> Vector_Camera"},
+	 { "Vector_Camera___setslice__", _wrap_Vector_Camera___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j)\n"
+		"__setslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j, Vector_Camera v)\n"
+		""},
+	 { "Vector_Camera___delslice__", _wrap_Vector_Camera___delslice__, METH_VARARGS, "__delslice__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type j)"},
+	 { "Vector_Camera___delitem__", _wrap_Vector_Camera___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i)\n"
+		"__delitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_Camera___getitem__", _wrap_Vector_Camera___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice) -> Vector_Camera\n"
+		"__getitem__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &\n"
+		""},
+	 { "Vector_Camera___setitem__", _wrap_Vector_Camera___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice, Vector_Camera v)\n"
+		"__setitem__(Vector_Camera self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)\n"
+		""},
+	 { "Vector_Camera_pop", _wrap_Vector_Camera_pop, METH_O, "pop(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type"},
+	 { "Vector_Camera_append", _wrap_Vector_Camera_append, METH_VARARGS, "append(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)"},
+	 { "Vector_Camera_empty", _wrap_Vector_Camera_empty, METH_O, "empty(Vector_Camera self) -> bool"},
+	 { "Vector_Camera_size", _wrap_Vector_Camera_size, METH_O, "size(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type"},
+	 { "Vector_Camera_swap", _wrap_Vector_Camera_swap, METH_VARARGS, "swap(Vector_Camera self, Vector_Camera v)"},
+	 { "Vector_Camera_begin", _wrap_Vector_Camera_begin, METH_O, "begin(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator"},
+	 { "Vector_Camera_end", _wrap_Vector_Camera_end, METH_O, "end(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator"},
+	 { "Vector_Camera_rbegin", _wrap_Vector_Camera_rbegin, METH_O, "rbegin(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::reverse_iterator"},
+	 { "Vector_Camera_rend", _wrap_Vector_Camera_rend, METH_O, "rend(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::reverse_iterator"},
+	 { "Vector_Camera_clear", _wrap_Vector_Camera_clear, METH_O, "clear(Vector_Camera self)"},
+	 { "Vector_Camera_get_allocator", _wrap_Vector_Camera_get_allocator, METH_O, "get_allocator(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::allocator_type"},
+	 { "Vector_Camera_pop_back", _wrap_Vector_Camera_pop_back, METH_O, "pop_back(Vector_Camera self)"},
+	 { "Vector_Camera_erase", _wrap_Vector_Camera_erase, METH_VARARGS, "\n"
+		"erase(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator\n"
+		"erase(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator first, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator\n"
+		""},
+	 { "new_Vector_Camera", _wrap_new_Vector_Camera, METH_VARARGS, "\n"
+		"Vector_Camera()\n"
+		"Vector_Camera(Vector_Camera other)\n"
+		"Vector_Camera(std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type size)\n"
+		"new_Vector_Camera(std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type size, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & value) -> Vector_Camera\n"
+		""},
+	 { "Vector_Camera_push_back", _wrap_Vector_Camera_push_back, METH_VARARGS, "push_back(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)"},
+	 { "Vector_Camera_front", _wrap_Vector_Camera_front, METH_O, "front(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &"},
+	 { "Vector_Camera_back", _wrap_Vector_Camera_back, METH_O, "back(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &"},
+	 { "Vector_Camera_assign", _wrap_Vector_Camera_assign, METH_VARARGS, "assign(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)"},
+	 { "Vector_Camera_resize", _wrap_Vector_Camera_resize, METH_VARARGS, "\n"
+		"resize(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type new_size)\n"
+		"resize(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)\n"
+		""},
+	 { "Vector_Camera_insert", _wrap_Vector_Camera_insert, METH_VARARGS, "\n"
+		"insert(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator\n"
+		"insert(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n, std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const & x)\n"
+		""},
+	 { "Vector_Camera_reserve", _wrap_Vector_Camera_reserve, METH_VARARGS, "reserve(Vector_Camera self, std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type n)"},
+	 { "Vector_Camera_capacity", _wrap_Vector_Camera_capacity, METH_O, "capacity(Vector_Camera self) -> std::vector< boost::shared_ptr< GeoCal::Camera > >::size_type"},
+	 { "delete_Vector_Camera", _wrap_delete_Vector_Camera, METH_O, "delete_Vector_Camera(Vector_Camera self)"},
 	 { "Vector_Camera_swigregister", Vector_Camera_swigregister, METH_O, NULL},
 	 { "Vector_Camera_swiginit", Vector_Camera_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _functor.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _functor:
 _functor.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _functor.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -135,6 +138,8 @@ def _new_from_set(cls, version, *args):
 
 import geocal_swig.generic_object
 class DFunctor(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::DFunctor class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -146,6 +151,8 @@ class DFunctor(geocal_swig.generic_object.GenericObject):
 # Register DFunctor in _functor:
 _functor.DFunctor_swigregister(DFunctor)
 class VFunctor(geocal_swig.generic_object.GenericObject):
+    r"""Proxy of C++ GeoCal::VFunctor class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):

@@ -7525,89 +7525,96 @@ SWIGINTERN PyObject *AircraftOrbitData_swiginit(PyObject *SWIGUNUSEDPARM(self), 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AircraftOrbitData", _wrap_new_AircraftOrbitData, METH_VARARGS, "\n"
+		"AircraftOrbitData(Time Tm, GroundCoordinate Position, Array_double_3 Vel_fixed, double Roll, double Pitch, double Heading, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL)\n"
+		"AircraftOrbitData(Time Tm, GroundCoordinate Position, Time Tm2, GroundCoordinate Position2, double Roll, double Pitch, double Heading, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL)\n"
+		"AircraftOrbitData(QuaternionOrbitData Od, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL)\n"
 		"\n"
-		"AircraftOrbitData::AircraftOrbitData(const Time &Tm, const GroundCoordinate &Position, const Time &Tm2,\n"
-		"const GroundCoordinate &Position2, double Roll, double Pitch, double\n"
-		"Heading, VerticalDefinition V=GEODETIC_VERTICAL)\n"
 		"GeoCal::AircraftOrbitData::AircraftOrbitData\n"
-		"Often with Aircraft data we don't have a direct measure of velocity.\n"
-		"This calculates a simple velocity by taking a second position and a\n"
-		"different time and assuming a constant velocity between the values. \n"
+		"Often with Aircraft data we don't have a direct measure of velocity.  \n"
+		"\n"
+		"This calculates a simple velocity by taking a second position and a different\n"
+		"time and assuming a constant velocity between the values.  \n"
+		"\n"
 		""},
 	 { "AircraftOrbitData__v_local_north_to_ecr", _wrap_AircraftOrbitData__v_local_north_to_ecr, METH_O, "\n"
+		"AircraftOrbitData__v_local_north_to_ecr(AircraftOrbitData self) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > AircraftOrbitData::local_north_to_ecr() const\n"
 		"GeoCal::AircraftOrbitData::local_north_to_ecr\n"
-		"The local north to ECR quaternion.\n"
+		"The local north to ECR quaternion.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_body_to_local_north", _wrap_AircraftOrbitData__v_body_to_local_north, METH_O, "\n"
+		"AircraftOrbitData__v_body_to_local_north(AircraftOrbitData self) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > AircraftOrbitData::body_to_local_north() const\n"
 		"GeoCal::AircraftOrbitData::body_to_local_north\n"
-		"The body to local north quaternion.\n"
+		"The body to local north quaternion.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_position_geodetic", _wrap_AircraftOrbitData__v_position_geodetic, METH_O, "\n"
+		"AircraftOrbitData__v_position_geodetic(AircraftOrbitData self) -> Geodetic\n"
 		"\n"
-		"const Geodetic & GeoCal::AircraftOrbitData::position_geodetic() const\n"
 		"GeoCal::AircraftOrbitData::position_geodetic\n"
-		"Position of aircraft.\n"
+		"Position of aircraft.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_roll", _wrap_AircraftOrbitData__v_roll, METH_O, "\n"
+		"AircraftOrbitData__v_roll(AircraftOrbitData self) -> double\n"
 		"\n"
-		"double GeoCal::AircraftOrbitData::roll() const\n"
 		"GeoCal::AircraftOrbitData::roll\n"
-		"Roll, in degrees.\n"
+		"Roll, in degrees.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_pitch", _wrap_AircraftOrbitData__v_pitch, METH_O, "\n"
+		"AircraftOrbitData__v_pitch(AircraftOrbitData self) -> double\n"
 		"\n"
-		"double GeoCal::AircraftOrbitData::pitch() const\n"
 		"GeoCal::AircraftOrbitData::pitch\n"
-		"Pitch, in degrees.\n"
+		"Pitch, in degrees.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_heading", _wrap_AircraftOrbitData__v_heading, METH_O, "\n"
+		"AircraftOrbitData__v_heading(AircraftOrbitData self) -> double\n"
 		"\n"
-		"double GeoCal::AircraftOrbitData::heading() const\n"
 		"GeoCal::AircraftOrbitData::heading\n"
-		"Heading, in degrees.\n"
+		"Heading, in degrees.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_vertical_definition", _wrap_AircraftOrbitData__v_vertical_definition, METH_O, "\n"
+		"AircraftOrbitData__v_vertical_definition(AircraftOrbitData self) -> GeoCal::AircraftOrbitData::VerticalDefinition\n"
 		"\n"
-		"VerticalDefinition GeoCal::AircraftOrbitData::vertical_definition() const\n"
 		"GeoCal::AircraftOrbitData::vertical_definition\n"
-		"Vertical direction yaw, pitch, and heading are defined relative to.\n"
-		"I'm pretty sure this should be GEODETIC_VERTICAL in most cases, but we\n"
-		"allow this to be different. \n"
+		"Vertical direction yaw, pitch, and heading are defined relative to.  \n"
+		"\n"
+		"I'm pretty sure this should be GEODETIC_VERTICAL in most cases, but we allow\n"
+		"this to be different.  \n"
+		"\n"
 		""},
 	 { "delete_AircraftOrbitData", _wrap_delete_AircraftOrbitData, METH_O, "\n"
+		"delete_AircraftOrbitData(AircraftOrbitData self)\n"
 		"\n"
-		"virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()\n"
 		"GeoCal::AircraftOrbitData::~AircraftOrbitData\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData_swigregister", AircraftOrbitData_swigregister, METH_O, NULL},
@@ -7618,89 +7625,96 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_AircraftOrbitData", _wrap_new_AircraftOrbitData, METH_VARARGS, "\n"
+		"AircraftOrbitData(Time Tm, GroundCoordinate Position, Array_double_3 Vel_fixed, double Roll, double Pitch, double Heading, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL)\n"
+		"AircraftOrbitData(Time Tm, GroundCoordinate Position, Time Tm2, GroundCoordinate Position2, double Roll, double Pitch, double Heading, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL)\n"
+		"AircraftOrbitData(QuaternionOrbitData Od, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL)\n"
 		"\n"
-		"AircraftOrbitData::AircraftOrbitData(const Time &Tm, const GroundCoordinate &Position, const Time &Tm2,\n"
-		"const GroundCoordinate &Position2, double Roll, double Pitch, double\n"
-		"Heading, VerticalDefinition V=GEODETIC_VERTICAL)\n"
 		"GeoCal::AircraftOrbitData::AircraftOrbitData\n"
-		"Often with Aircraft data we don't have a direct measure of velocity.\n"
-		"This calculates a simple velocity by taking a second position and a\n"
-		"different time and assuming a constant velocity between the values. \n"
+		"Often with Aircraft data we don't have a direct measure of velocity.  \n"
+		"\n"
+		"This calculates a simple velocity by taking a second position and a different\n"
+		"time and assuming a constant velocity between the values.  \n"
+		"\n"
 		""},
 	 { "AircraftOrbitData__v_local_north_to_ecr", _wrap_AircraftOrbitData__v_local_north_to_ecr, METH_O, "\n"
+		"_v_local_north_to_ecr(AircraftOrbitData self) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > AircraftOrbitData::local_north_to_ecr() const\n"
 		"GeoCal::AircraftOrbitData::local_north_to_ecr\n"
-		"The local north to ECR quaternion.\n"
+		"The local north to ECR quaternion.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_body_to_local_north", _wrap_AircraftOrbitData__v_body_to_local_north, METH_O, "\n"
+		"_v_body_to_local_north(AircraftOrbitData self) -> Quaternion_double\n"
 		"\n"
-		"boost::math::quaternion< double > AircraftOrbitData::body_to_local_north() const\n"
 		"GeoCal::AircraftOrbitData::body_to_local_north\n"
-		"The body to local north quaternion.\n"
+		"The body to local north quaternion.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_position_geodetic", _wrap_AircraftOrbitData__v_position_geodetic, METH_O, "\n"
+		"_v_position_geodetic(AircraftOrbitData self) -> Geodetic\n"
 		"\n"
-		"const Geodetic & GeoCal::AircraftOrbitData::position_geodetic() const\n"
 		"GeoCal::AircraftOrbitData::position_geodetic\n"
-		"Position of aircraft.\n"
+		"Position of aircraft.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_roll", _wrap_AircraftOrbitData__v_roll, METH_O, "\n"
+		"_v_roll(AircraftOrbitData self) -> double\n"
 		"\n"
-		"double GeoCal::AircraftOrbitData::roll() const\n"
 		"GeoCal::AircraftOrbitData::roll\n"
-		"Roll, in degrees.\n"
+		"Roll, in degrees.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_pitch", _wrap_AircraftOrbitData__v_pitch, METH_O, "\n"
+		"_v_pitch(AircraftOrbitData self) -> double\n"
 		"\n"
-		"double GeoCal::AircraftOrbitData::pitch() const\n"
 		"GeoCal::AircraftOrbitData::pitch\n"
-		"Pitch, in degrees.\n"
+		"Pitch, in degrees.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_heading", _wrap_AircraftOrbitData__v_heading, METH_O, "\n"
+		"_v_heading(AircraftOrbitData self) -> double\n"
 		"\n"
-		"double GeoCal::AircraftOrbitData::heading() const\n"
 		"GeoCal::AircraftOrbitData::heading\n"
-		"Heading, in degrees.\n"
+		"Heading, in degrees.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData__v_vertical_definition", _wrap_AircraftOrbitData__v_vertical_definition, METH_O, "\n"
+		"_v_vertical_definition(AircraftOrbitData self) -> GeoCal::AircraftOrbitData::VerticalDefinition\n"
 		"\n"
-		"VerticalDefinition GeoCal::AircraftOrbitData::vertical_definition() const\n"
 		"GeoCal::AircraftOrbitData::vertical_definition\n"
-		"Vertical direction yaw, pitch, and heading are defined relative to.\n"
-		"I'm pretty sure this should be GEODETIC_VERTICAL in most cases, but we\n"
-		"allow this to be different. \n"
+		"Vertical direction yaw, pitch, and heading are defined relative to.  \n"
+		"\n"
+		"I'm pretty sure this should be GEODETIC_VERTICAL in most cases, but we allow\n"
+		"this to be different.  \n"
+		"\n"
 		""},
 	 { "delete_AircraftOrbitData", _wrap_delete_AircraftOrbitData, METH_O, "\n"
+		"delete_AircraftOrbitData(AircraftOrbitData self)\n"
 		"\n"
-		"virtual GeoCal::AircraftOrbitData::~AircraftOrbitData()\n"
 		"GeoCal::AircraftOrbitData::~AircraftOrbitData\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "AircraftOrbitData_swigregister", AircraftOrbitData_swigregister, METH_O, NULL},

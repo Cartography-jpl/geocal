@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _sub_raster_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _sub_raster_image:
 _sub_raster_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _sub_raster_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,10 +144,12 @@ import geocal_swig.geocal_exception
 class SubRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
     r"""
 
-    This allows you to take a subset of a larger RasterImage and treat it
-    like a RasterImage in its own right.
 
-    C++ includes: sub_raster_image.h 
+    This allows you to take a subset of a larger RasterImage and treat it like a
+    RasterImage in its own right.  
+
+    C++ includes: sub_raster_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,11 +157,12 @@ class SubRasterImage(geocal_swig.raster_image_variable.RasterImageVariable):
 
     def __init__(self, *args):
         r"""
+        __init__(SubRasterImage self, boost::shared_ptr< GeoCal::RasterImage > const & Raster_image, int Start_line, int Start_sample, int Number_line, int Number_sample) -> SubRasterImage
+        __init__(SubRasterImage self, boost::shared_ptr< GeoCal::RasterImage > const & Raster_image, Vector_GroundCoordinate Pt, int boundary=0) -> SubRasterImage
+        __init__(SubRasterImage self, boost::shared_ptr< GeoCal::RasterImage > const & Raster_image, MapInfo Mi, int boundary=0) -> SubRasterImage
 
-        SubRasterImage::SubRasterImage(const boost::shared_ptr< RasterImage > &Raster_image, int Start_line,
-        int Start_sample, int Number_line, int Number_sample)
         GeoCal::SubRasterImage::SubRasterImage
-        Constructor.
+        Constructor.  
 
         """
         _sub_raster_image.SubRasterImage_swiginit(self, _sub_raster_image.new_SubRasterImage(*args))

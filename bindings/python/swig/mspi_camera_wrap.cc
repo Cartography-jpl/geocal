@@ -8025,172 +8025,183 @@ SWIGINTERN PyObject *MspiCamera_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObjec
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_MspiCamera", _wrap_new_MspiCamera, METH_VARARGS, "\n"
+		"MspiCamera(std::string const & Fname, std::string const & Extra_config_file=\"\")\n"
+		"new_MspiCamera(std::string const & Fname, BlitzArray_double_1 Param) -> MspiCamera\n"
 		"\n"
-		"GeoCal::MspiCamera::MspiCamera(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
 		"GeoCal::MspiCamera::MspiCamera\n"
-		"Constructor, which creates a MspiCamera from the given configuration file.\n"
+		"Constructor, which creates a MspiCamera from the given configuration file.  \n"
 		"\n"
 		""},
 	 { "MspiCamera_read_config_file", _wrap_MspiCamera_read_config_file, METH_VARARGS, "\n"
+		"MspiCamera_read_config_file(MspiCamera self, std::string const & File_name)\n"
 		"\n"
-		"void MspiCamera::read_config_file(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
 		"GeoCal::MspiCamera::read_config_file\n"
-		"Read in the given configuration file.\n"
-		"Get mapping from band to row number \n"
+		"Read in the given configuration file.  \n"
+		"\n"
+		"Get mapping from band to row number  \n"
+		"\n"
 		""},
 	 { "MspiCamera__v_file_name", _wrap_MspiCamera__v_file_name, METH_VARARGS, "\n"
+		"MspiCamera__v_file_name(MspiCamera self) -> std::string\n"
+		"MspiCamera__v_file_name(MspiCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::MspiCamera::file_name(const std::string &Fname)\n"
 		"GeoCal::MspiCamera::file_name\n"
 		""},
 	 { "MspiCamera__v_granule_id", _wrap_MspiCamera__v_granule_id, METH_VARARGS, "\n"
+		"MspiCamera__v_granule_id(MspiCamera self) -> std::string\n"
+		"MspiCamera__v_granule_id(MspiCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::MspiCamera::granule_id(const std::string &Gid)\n"
 		"GeoCal::MspiCamera::granule_id\n"
 		""},
 	 { "MspiCamera__v_epsilon", _wrap_MspiCamera__v_epsilon, METH_O, "\n"
+		"MspiCamera__v_epsilon(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::epsilon() const\n"
 		"GeoCal::MspiCamera::epsilon\n"
-		"Epsilon angle, in degrees.\n"
+		"Epsilon angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_psi", _wrap_MspiCamera__v_psi, METH_O, "\n"
+		"MspiCamera__v_psi(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::psi() const\n"
 		"GeoCal::MspiCamera::psi\n"
-		"Psi angle, in degrees.\n"
+		"Psi angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_theta", _wrap_MspiCamera__v_theta, METH_O, "\n"
+		"MspiCamera__v_theta(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::theta() const\n"
 		"GeoCal::MspiCamera::theta\n"
-		"Theta angle, in degrees.\n"
+		"Theta angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_yaw", _wrap_MspiCamera__v_yaw, METH_O, "\n"
+		"MspiCamera__v_yaw(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::yaw() const\n"
 		"GeoCal::MspiCamera::yaw\n"
-		"Yaw angle, in degrees.\n"
+		"Yaw angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_pitch", _wrap_MspiCamera__v_pitch, METH_O, "\n"
+		"MspiCamera__v_pitch(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::pitch() const\n"
 		"GeoCal::MspiCamera::pitch\n"
-		"Pitch angle, in degrees.\n"
+		"Pitch angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_roll", _wrap_MspiCamera__v_roll, METH_O, "\n"
+		"MspiCamera__v_roll(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::roll() const\n"
 		"GeoCal::MspiCamera::roll\n"
-		"Roll angle, in degrees.\n"
+		"Roll angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_yaw_with_derivative", _wrap_MspiCamera__v_yaw_with_derivative, METH_O, "\n"
+		"MspiCamera__v_yaw_with_derivative(MspiCamera self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiCamera::yaw_with_derivative() const\n"
 		"GeoCal::MspiCamera::yaw_with_derivative\n"
 		""},
 	 { "MspiCamera__v_pitch_with_derivative", _wrap_MspiCamera__v_pitch_with_derivative, METH_O, "\n"
+		"MspiCamera__v_pitch_with_derivative(MspiCamera self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiCamera::pitch_with_derivative() const\n"
 		"GeoCal::MspiCamera::pitch_with_derivative\n"
 		""},
 	 { "MspiCamera__v_roll_with_derivative", _wrap_MspiCamera__v_roll_with_derivative, METH_O, "\n"
+		"MspiCamera__v_roll_with_derivative(MspiCamera self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiCamera::roll_with_derivative() const\n"
 		"GeoCal::MspiCamera::roll_with_derivative\n"
 		""},
 	 { "MspiCamera__v_boresight_angle", _wrap_MspiCamera__v_boresight_angle, METH_O, "\n"
+		"MspiCamera__v_boresight_angle(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::boresight_angle() const\n"
 		"GeoCal::MspiCamera::boresight_angle\n"
-		"Boresight angle, in degrees.\n"
+		"Boresight angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_inversion", _wrap_MspiCamera__v_inversion, METH_O, "\n"
+		"MspiCamera__v_inversion(MspiCamera self) -> bool\n"
 		"\n"
-		"bool GeoCal::MspiCamera::inversion() const\n"
 		"GeoCal::MspiCamera::inversion\n"
-		"Indicate if the camera has \"inversion\" indicated in the\n"
-		"configuration.\n"
+		"Indicate if the camera has \"inversion\" indicated in the configuration.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_parameter_mask", _wrap_MspiCamera__v_parameter_mask, METH_VARARGS, "\n"
+		"MspiCamera__v_parameter_mask(MspiCamera self) -> BlitzArray_bool_1\n"
+		"MspiCamera__v_parameter_mask(MspiCamera self, BlitzArray_bool_1 V)\n"
 		"\n"
-		"void MspiCamera::parameter_mask(const blitz::Array< bool, 1 > &Pm)\n"
 		"GeoCal::MspiCamera::parameter_mask\n"
 		""},
 	 { "MspiCamera__v_paraxial_transform", _wrap_MspiCamera__v_paraxial_transform, METH_O, "\n"
+		"MspiCamera__v_paraxial_transform(MspiCamera self) -> boost::shared_ptr< GeoCal::MspiParaxialTransform >\n"
 		"\n"
-		"boost::shared_ptr< MspiParaxialTransform > GeoCal::MspiCamera::paraxial_transform() const\n"
 		"GeoCal::MspiCamera::paraxial_transform\n"
-		"Paraxial transform.\n"
+		"Paraxial transform.  \n"
 		"\n"
 		""},
 	 { "MspiCamera_angular_separation", _wrap_MspiCamera_angular_separation, METH_VARARGS, "\n"
+		"MspiCamera_angular_separation(MspiCamera self, int Reference_band, int Target_band) -> double\n"
 		"\n"
-		"double MspiCamera::angular_separation(int Reference_band, int Target_band) const\n"
 		"GeoCal::MspiCamera::angular_separation\n"
-		"Return angular separation (in radians) between the given reference and\n"
-		"target bands in the real focal plane.\n"
-		"(MSPI L1B2 ATB equation 14 modified to use Forigin in place of b0) \n"
+		"Return angular separation (in radians) between the given reference and target\n"
+		"bands in the real focal plane.  \n"
+		"\n"
+		"(MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of b0)  \n"
+		"\n"
 		""},
 	 { "MspiCamera_paraxial_offset", _wrap_MspiCamera_paraxial_offset, METH_VARARGS, "\n"
+		"MspiCamera_paraxial_offset(MspiCamera self, int Band, FrameCoordinate F)\n"
 		"\n"
-		"void MspiCamera::paraxial_offset(int Band, const FrameCoordinate &F, double &Line_offset, double\n"
-		"&Sample_offset) const\n"
 		"GeoCal::MspiCamera::paraxial_offset\n"
-		"Return paraxial displacement (in pixel units) for the given frame\n"
-		"coordinate and band.\n"
-		"The paraxial transform equations are defined such that the frame line\n"
-		"coordinate is always assumed to be zero (i.e. centered in the line for\n"
-		"the given band). Therefore values other than zero for frame line will\n"
-		"not produce a different result. \n"
+		"Return paraxial displacement (in pixel units) for the given frame coordinate and\n"
+		"band.  \n"
+		"\n"
+		"The paraxial transform equations are defined such that the frame line coordinate\n"
+		"is always assumed to be zero (i.e. centered in the line for the given band).\n"
+		"Therefore values other than zero for frame line will not produce a different\n"
+		"result.  \n"
+		"\n"
 		""},
 	 { "MspiCamera_row_number", _wrap_MspiCamera_row_number, METH_VARARGS, "\n"
+		"MspiCamera_row_number(MspiCamera self, int Band) -> int\n"
 		"\n"
-		"int GeoCal::MspiCamera::row_number(int Band) const\n"
 		"GeoCal::MspiCamera::row_number\n"
-		"Return the camera row number for the given band.\n"
-		"This ends up being used in other places (e.g., the \"Row Table\" in\n"
-		"L1B1 files), so we make this available. \n"
+		"Return the camera row number for the given band.  \n"
+		"\n"
+		"This ends up being used in other places (e.g., the \"Row Table\" in L1B1 files),\n"
+		"so we make this available.  \n"
+		"\n"
 		""},
 	 { "MspiCamera_band_number", _wrap_MspiCamera_band_number, METH_VARARGS, "\n"
+		"MspiCamera_band_number(MspiCamera self, int Row_number) -> int\n"
 		"\n"
-		"int MspiCamera::band_number(int Row_number) const\n"
 		"GeoCal::MspiCamera::band_number\n"
-		"Return the band number for the given row.\n"
+		"Return the band number for the given row.  \n"
 		"\n"
 		""},
 	 { "delete_MspiCamera", _wrap_delete_MspiCamera, METH_O, "\n"
+		"delete_MspiCamera(MspiCamera self)\n"
 		"\n"
-		"virtual GeoCal::MspiCamera::~MspiCamera()\n"
 		"GeoCal::MspiCamera::~MspiCamera\n"
 		""},
 	 { "MspiCamera_swigregister", MspiCamera_swigregister, METH_O, NULL},
@@ -8201,172 +8212,183 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_MspiCamera", _wrap_new_MspiCamera, METH_VARARGS, "\n"
+		"MspiCamera(std::string const & Fname, std::string const & Extra_config_file=\"\")\n"
+		"new_MspiCamera(std::string const & Fname, BlitzArray_double_1 Param) -> MspiCamera\n"
 		"\n"
-		"GeoCal::MspiCamera::MspiCamera(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
 		"GeoCal::MspiCamera::MspiCamera\n"
-		"Constructor, which creates a MspiCamera from the given configuration file.\n"
+		"Constructor, which creates a MspiCamera from the given configuration file.  \n"
 		"\n"
 		""},
 	 { "MspiCamera_read_config_file", _wrap_MspiCamera_read_config_file, METH_VARARGS, "\n"
+		"read_config_file(MspiCamera self, std::string const & File_name)\n"
 		"\n"
-		"void MspiCamera::read_config_file(const std::string &File_name, const std::string\n"
-		"&Extra_config_file=\"\")\n"
 		"GeoCal::MspiCamera::read_config_file\n"
-		"Read in the given configuration file.\n"
-		"Get mapping from band to row number \n"
+		"Read in the given configuration file.  \n"
+		"\n"
+		"Get mapping from band to row number  \n"
+		"\n"
 		""},
 	 { "MspiCamera__v_file_name", _wrap_MspiCamera__v_file_name, METH_VARARGS, "\n"
+		"_v_file_name(MspiCamera self) -> std::string\n"
+		"_v_file_name(MspiCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::MspiCamera::file_name(const std::string &Fname)\n"
 		"GeoCal::MspiCamera::file_name\n"
 		""},
 	 { "MspiCamera__v_granule_id", _wrap_MspiCamera__v_granule_id, METH_VARARGS, "\n"
+		"_v_granule_id(MspiCamera self) -> std::string\n"
+		"_v_granule_id(MspiCamera self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::MspiCamera::granule_id(const std::string &Gid)\n"
 		"GeoCal::MspiCamera::granule_id\n"
 		""},
 	 { "MspiCamera__v_epsilon", _wrap_MspiCamera__v_epsilon, METH_O, "\n"
+		"_v_epsilon(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::epsilon() const\n"
 		"GeoCal::MspiCamera::epsilon\n"
-		"Epsilon angle, in degrees.\n"
+		"Epsilon angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_psi", _wrap_MspiCamera__v_psi, METH_O, "\n"
+		"_v_psi(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::psi() const\n"
 		"GeoCal::MspiCamera::psi\n"
-		"Psi angle, in degrees.\n"
+		"Psi angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_theta", _wrap_MspiCamera__v_theta, METH_O, "\n"
+		"_v_theta(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::theta() const\n"
 		"GeoCal::MspiCamera::theta\n"
-		"Theta angle, in degrees.\n"
+		"Theta angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_yaw", _wrap_MspiCamera__v_yaw, METH_O, "\n"
+		"_v_yaw(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::yaw() const\n"
 		"GeoCal::MspiCamera::yaw\n"
-		"Yaw angle, in degrees.\n"
+		"Yaw angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_pitch", _wrap_MspiCamera__v_pitch, METH_O, "\n"
+		"_v_pitch(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::pitch() const\n"
 		"GeoCal::MspiCamera::pitch\n"
-		"Pitch angle, in degrees.\n"
+		"Pitch angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_roll", _wrap_MspiCamera__v_roll, METH_O, "\n"
+		"_v_roll(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::roll() const\n"
 		"GeoCal::MspiCamera::roll\n"
-		"Roll angle, in degrees.\n"
+		"Roll angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_yaw_with_derivative", _wrap_MspiCamera__v_yaw_with_derivative, METH_O, "\n"
+		"_v_yaw_with_derivative(MspiCamera self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiCamera::yaw_with_derivative() const\n"
 		"GeoCal::MspiCamera::yaw_with_derivative\n"
 		""},
 	 { "MspiCamera__v_pitch_with_derivative", _wrap_MspiCamera__v_pitch_with_derivative, METH_O, "\n"
+		"_v_pitch_with_derivative(MspiCamera self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiCamera::pitch_with_derivative() const\n"
 		"GeoCal::MspiCamera::pitch_with_derivative\n"
 		""},
 	 { "MspiCamera__v_roll_with_derivative", _wrap_MspiCamera__v_roll_with_derivative, METH_O, "\n"
+		"_v_roll_with_derivative(MspiCamera self) -> AutoDerivativeDouble\n"
 		"\n"
-		"AutoDerivative< double > GeoCal::MspiCamera::roll_with_derivative() const\n"
 		"GeoCal::MspiCamera::roll_with_derivative\n"
 		""},
 	 { "MspiCamera__v_boresight_angle", _wrap_MspiCamera__v_boresight_angle, METH_O, "\n"
+		"_v_boresight_angle(MspiCamera self) -> double\n"
 		"\n"
-		"double GeoCal::MspiCamera::boresight_angle() const\n"
 		"GeoCal::MspiCamera::boresight_angle\n"
-		"Boresight angle, in degrees.\n"
+		"Boresight angle, in degrees.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_inversion", _wrap_MspiCamera__v_inversion, METH_O, "\n"
+		"_v_inversion(MspiCamera self) -> bool\n"
 		"\n"
-		"bool GeoCal::MspiCamera::inversion() const\n"
 		"GeoCal::MspiCamera::inversion\n"
-		"Indicate if the camera has \"inversion\" indicated in the\n"
-		"configuration.\n"
+		"Indicate if the camera has \"inversion\" indicated in the configuration.  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_parameter_mask", _wrap_MspiCamera__v_parameter_mask, METH_VARARGS, "\n"
+		"_v_parameter_mask(MspiCamera self) -> BlitzArray_bool_1\n"
+		"_v_parameter_mask(MspiCamera self, BlitzArray_bool_1 V)\n"
 		"\n"
-		"void MspiCamera::parameter_mask(const blitz::Array< bool, 1 > &Pm)\n"
 		"GeoCal::MspiCamera::parameter_mask\n"
 		""},
 	 { "MspiCamera__v_paraxial_transform", _wrap_MspiCamera__v_paraxial_transform, METH_O, "\n"
+		"_v_paraxial_transform(MspiCamera self) -> boost::shared_ptr< GeoCal::MspiParaxialTransform >\n"
 		"\n"
-		"boost::shared_ptr< MspiParaxialTransform > GeoCal::MspiCamera::paraxial_transform() const\n"
 		"GeoCal::MspiCamera::paraxial_transform\n"
-		"Paraxial transform.\n"
+		"Paraxial transform.  \n"
 		"\n"
 		""},
 	 { "MspiCamera_angular_separation", _wrap_MspiCamera_angular_separation, METH_VARARGS, "\n"
+		"angular_separation(MspiCamera self, int Reference_band, int Target_band) -> double\n"
 		"\n"
-		"double MspiCamera::angular_separation(int Reference_band, int Target_band) const\n"
 		"GeoCal::MspiCamera::angular_separation\n"
-		"Return angular separation (in radians) between the given reference and\n"
-		"target bands in the real focal plane.\n"
-		"(MSPI L1B2 ATB equation 14 modified to use Forigin in place of b0) \n"
+		"Return angular separation (in radians) between the given reference and target\n"
+		"bands in the real focal plane.  \n"
+		"\n"
+		"(MSPI L1B2 ATB equation 14 -- *modified* to use Forigin in place of b0)  \n"
+		"\n"
 		""},
 	 { "MspiCamera_paraxial_offset", _wrap_MspiCamera_paraxial_offset, METH_VARARGS, "\n"
+		"paraxial_offset(MspiCamera self, int Band, FrameCoordinate F)\n"
 		"\n"
-		"void MspiCamera::paraxial_offset(int Band, const FrameCoordinate &F, double &Line_offset, double\n"
-		"&Sample_offset) const\n"
 		"GeoCal::MspiCamera::paraxial_offset\n"
-		"Return paraxial displacement (in pixel units) for the given frame\n"
-		"coordinate and band.\n"
-		"The paraxial transform equations are defined such that the frame line\n"
-		"coordinate is always assumed to be zero (i.e. centered in the line for\n"
-		"the given band). Therefore values other than zero for frame line will\n"
-		"not produce a different result. \n"
+		"Return paraxial displacement (in pixel units) for the given frame coordinate and\n"
+		"band.  \n"
+		"\n"
+		"The paraxial transform equations are defined such that the frame line coordinate\n"
+		"is always assumed to be zero (i.e. centered in the line for the given band).\n"
+		"Therefore values other than zero for frame line will not produce a different\n"
+		"result.  \n"
+		"\n"
 		""},
 	 { "MspiCamera_row_number", _wrap_MspiCamera_row_number, METH_VARARGS, "\n"
+		"row_number(MspiCamera self, int Band) -> int\n"
 		"\n"
-		"int GeoCal::MspiCamera::row_number(int Band) const\n"
 		"GeoCal::MspiCamera::row_number\n"
-		"Return the camera row number for the given band.\n"
-		"This ends up being used in other places (e.g., the \"Row Table\" in\n"
-		"L1B1 files), so we make this available. \n"
+		"Return the camera row number for the given band.  \n"
+		"\n"
+		"This ends up being used in other places (e.g., the \"Row Table\" in L1B1 files),\n"
+		"so we make this available.  \n"
+		"\n"
 		""},
 	 { "MspiCamera_band_number", _wrap_MspiCamera_band_number, METH_VARARGS, "\n"
+		"band_number(MspiCamera self, int Row_number) -> int\n"
 		"\n"
-		"int MspiCamera::band_number(int Row_number) const\n"
 		"GeoCal::MspiCamera::band_number\n"
-		"Return the band number for the given row.\n"
+		"Return the band number for the given row.  \n"
 		"\n"
 		""},
 	 { "delete_MspiCamera", _wrap_delete_MspiCamera, METH_O, "\n"
+		"delete_MspiCamera(MspiCamera self)\n"
 		"\n"
-		"virtual GeoCal::MspiCamera::~MspiCamera()\n"
 		"GeoCal::MspiCamera::~MspiCamera\n"
 		""},
 	 { "MspiCamera_swigregister", MspiCamera_swigregister, METH_O, NULL},

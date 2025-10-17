@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ipi_image_ground_connection.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ipi_image_ground_connection:
 _ipi_image_ground_connection.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ipi_image_ground_connection.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,9 +144,11 @@ import geocal_swig.observer
 class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundConnection):
     r"""
 
-    This is a ImageGroundConnection where the connection is made by a Ipi.
 
-    C++ includes: ipi_image_ground_connection.h 
+    This is a ImageGroundConnection where the connection is made by a Ipi.  
+
+    C++ includes: ipi_image_ground_connection.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,10 +156,8 @@ class IpiImageGroundConnection(geocal_swig.image_ground_connection.ImageGroundCo
 
     def __init__(self, *args):
         r"""
+        __init__(IpiImageGroundConnection self, boost::shared_ptr< GeoCal::Ipi > const & I, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title="Image", double Resolution=30, double Max_height=9000) -> IpiImageGroundConnection
 
-        GeoCal::IpiImageGroundConnection::IpiImageGroundConnection(const boost::shared_ptr< Ipi > &I, const boost::shared_ptr< Dem > &D,
-        const boost::shared_ptr< RasterImage > &Img, const std::string
-        &Title="Image", double Resolution=30, double Max_height=9000)
         GeoCal::IpiImageGroundConnection::IpiImageGroundConnection
         """
         _ipi_image_ground_connection.IpiImageGroundConnection_swiginit(self, _ipi_image_ground_connection.new_IpiImageGroundConnection(*args))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _aircraft_orbit_data.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _aircraft_orbit_data:
 _aircraft_orbit_data.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _aircraft_orbit_data.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,37 +144,42 @@ import geocal_swig.look_vector
 class AircraftOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     r"""
 
-    This is a single navigation file record for aircraft data.
 
-    This was originally written for data as reported by Applanix ephemeris
-    and attitude, but it is likely to be useful for other INU untis.
+    This is a single navigation file record for aircraft data.  
 
-    Note that we frequently don't have access to a direct measurement of
-    the velocity. Rather than trying to do some clever estimate of the
-    velocity, we just set it to 0. The velocity is only used for the
-    aberration of light calculation, which isn't important for aircraft
-    speeds. We can revisit this choice if needed, it wouldn't be too hard
-    to use a couple of position measurements at nearby times to estimate
-    the velocity.
+    This was originally written for data as reported by Applanix ephemeris and
+    attitude, but it is likely to be useful for other INU untis.  
 
-    C++ includes: aircraft_orbit_data.h 
+    Note that we frequently don't have access to a direct measurement of the
+    velocity. Rather than trying to do some clever estimate of the velocity, we just
+    set it to 0. The velocity is only used for the aberration of light calculation,
+    which isn't important for aircraft speeds. We can revisit this choice if needed,
+    it wouldn't be too hard to use a couple of position measurements at nearby times
+    to estimate the velocity.  
+
+    C++ includes: aircraft_orbit_data.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     GEODETIC_VERTICAL = _aircraft_orbit_data.AircraftOrbitData_GEODETIC_VERTICAL
+    
     GEOCENTRIC_VERTICAL = _aircraft_orbit_data.AircraftOrbitData_GEOCENTRIC_VERTICAL
+    
 
     def __init__(self, *args):
         r"""
+        __init__(AircraftOrbitData self, Time Tm, GroundCoordinate Position, Array_double_3 Vel_fixed, double Roll, double Pitch, double Heading, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL) -> AircraftOrbitData
+        __init__(AircraftOrbitData self, Time Tm, GroundCoordinate Position, Time Tm2, GroundCoordinate Position2, double Roll, double Pitch, double Heading, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL) -> AircraftOrbitData
+        __init__(AircraftOrbitData self, QuaternionOrbitData Od, GeoCal::AircraftOrbitData::VerticalDefinition V=GEODETIC_VERTICAL) -> AircraftOrbitData
 
-        AircraftOrbitData::AircraftOrbitData(const Time &Tm, const GroundCoordinate &Position, const Time &Tm2,
-        const GroundCoordinate &Position2, double Roll, double Pitch, double
-        Heading, VerticalDefinition V=GEODETIC_VERTICAL)
         GeoCal::AircraftOrbitData::AircraftOrbitData
-        Often with Aircraft data we don't have a direct measure of velocity.
-        This calculates a simple velocity by taking a second position and a
-        different time and assuming a constant velocity between the values. 
+        Often with Aircraft data we don't have a direct measure of velocity.  
+
+        This calculates a simple velocity by taking a second position and a different
+        time and assuming a constant velocity between the values.  
+
         """
         _aircraft_orbit_data.AircraftOrbitData_swiginit(self, _aircraft_orbit_data.new_AircraftOrbitData(*args))
     _v_local_north_to_ecr = _swig_new_instance_method(_aircraft_orbit_data.AircraftOrbitData__v_local_north_to_ecr)

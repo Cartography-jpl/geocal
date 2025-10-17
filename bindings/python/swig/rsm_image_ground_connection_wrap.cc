@@ -8640,51 +8640,57 @@ SWIGINTERN PyObject *RsmImageGroundConnection_swiginit(PyObject *SWIGUNUSEDPARM(
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmImageGroundConnection", _wrap_new_RsmImageGroundConnection, METH_VARARGS, "\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title=\"Image\")\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title=\"Image\")\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title=\"Image\")\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask)\n"
+		"new_RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> RsmImageGroundConnection\n"
 		"\n"
-		"GeoCal::RsmImageGroundConnection::RsmImageGroundConnection(const boost::shared_ptr< Rsm > &R, const boost::shared_ptr< Dem > &D,\n"
-		"const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const\n"
-		"std::string &Title=\"Image\", const boost::shared_ptr< ImageMask >\n"
-		"&Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<\n"
-		"GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >())\n"
 		"GeoCal::RsmImageGroundConnection::RsmImageGroundConnection\n"
 		""},
 	 { "RsmImageGroundConnection_cf_look_vector", _wrap_RsmImageGroundConnection_cf_look_vector, METH_VARARGS, "\n"
+		"RsmImageGroundConnection_cf_look_vector(RsmImageGroundConnection self, ImageCoordinate Ic)\n"
 		"\n"
-		"void RsmImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
-		"boost::shared_ptr< CartesianFixed > &P) const\n"
 		"GeoCal::RsmImageGroundConnection::cf_look_vector\n"
 		""},
 	 { "RsmImageGroundConnection__v_rsm", _wrap_RsmImageGroundConnection__v_rsm, METH_O, "\n"
+		"RsmImageGroundConnection__v_rsm(RsmImageGroundConnection self) -> boost::shared_ptr< GeoCal::Rsm >\n"
 		"\n"
-		"const boost::shared_ptr< Rsm > & GeoCal::RsmImageGroundConnection::rsm() const\n"
 		"GeoCal::RsmImageGroundConnection::rsm\n"
-		"RSM that we are using.\n"
+		"RSM that we are using.  \n"
 		"\n"
 		""},
 	 { "delete_RsmImageGroundConnection", _wrap_delete_RsmImageGroundConnection, METH_O, "\n"
+		"delete_RsmImageGroundConnection(RsmImageGroundConnection self)\n"
 		"\n"
-		"virtual GeoCal::RsmImageGroundConnection::~RsmImageGroundConnection()\n"
 		"GeoCal::RsmImageGroundConnection::~RsmImageGroundConnection\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "RsmImageGroundConnection_swigregister", RsmImageGroundConnection_swigregister, METH_O, NULL},
@@ -8695,51 +8701,57 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RsmImageGroundConnection", _wrap_new_RsmImageGroundConnection, METH_VARARGS, "\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title=\"Image\")\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title=\"Image\")\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask)\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title=\"Image\")\n"
+		"RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask)\n"
+		"new_RsmImageGroundConnection(boost::shared_ptr< GeoCal::Rsm > const & R, boost::shared_ptr< GeoCal::Dem > const & D, boost::shared_ptr< GeoCal::RasterImage > const & Img, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Img_mb, std::string const & Title, boost::shared_ptr< GeoCal::ImageMask > const & Img_mask, boost::shared_ptr< GeoCal::GroundMask > const & Ground_mask) -> RsmImageGroundConnection\n"
 		"\n"
-		"GeoCal::RsmImageGroundConnection::RsmImageGroundConnection(const boost::shared_ptr< Rsm > &R, const boost::shared_ptr< Dem > &D,\n"
-		"const boost::shared_ptr< RasterImageMultiBand > &Img_mb, const\n"
-		"std::string &Title=\"Image\", const boost::shared_ptr< ImageMask >\n"
-		"&Img_mask=boost::shared_ptr< ImageMask >(), const boost::shared_ptr<\n"
-		"GroundMask > &Ground_mask=boost::shared_ptr< GroundMask >())\n"
 		"GeoCal::RsmImageGroundConnection::RsmImageGroundConnection\n"
 		""},
 	 { "RsmImageGroundConnection_cf_look_vector", _wrap_RsmImageGroundConnection_cf_look_vector, METH_VARARGS, "\n"
+		"cf_look_vector(RsmImageGroundConnection self, ImageCoordinate Ic)\n"
 		"\n"
-		"void RsmImageGroundConnection::cf_look_vector(const ImageCoordinate &Ic, CartesianFixedLookVector &Lv,\n"
-		"boost::shared_ptr< CartesianFixed > &P) const\n"
 		"GeoCal::RsmImageGroundConnection::cf_look_vector\n"
 		""},
 	 { "RsmImageGroundConnection__v_rsm", _wrap_RsmImageGroundConnection__v_rsm, METH_O, "\n"
+		"_v_rsm(RsmImageGroundConnection self) -> boost::shared_ptr< GeoCal::Rsm >\n"
 		"\n"
-		"const boost::shared_ptr< Rsm > & GeoCal::RsmImageGroundConnection::rsm() const\n"
 		"GeoCal::RsmImageGroundConnection::rsm\n"
-		"RSM that we are using.\n"
+		"RSM that we are using.  \n"
 		"\n"
 		""},
 	 { "delete_RsmImageGroundConnection", _wrap_delete_RsmImageGroundConnection, METH_O, "\n"
+		"delete_RsmImageGroundConnection(RsmImageGroundConnection self)\n"
 		"\n"
-		"virtual GeoCal::RsmImageGroundConnection::~RsmImageGroundConnection()\n"
 		"GeoCal::RsmImageGroundConnection::~RsmImageGroundConnection\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "RsmImageGroundConnection_swigregister", RsmImageGroundConnection_swigregister, METH_O, NULL},

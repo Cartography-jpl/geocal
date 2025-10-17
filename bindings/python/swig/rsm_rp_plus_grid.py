@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_rp_plus_grid.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_rp_plus_grid:
 _rsm_rp_plus_grid.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_rp_plus_grid.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,9 +143,11 @@ import geocal_swig.geocal_exception
 class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
     r"""
 
-    This uses a RsmRationalPolynomial plus a RsmGrid for correcting it.
 
-    C++ includes: rsm_rp_plus_grid.h 
+    This uses a RsmRationalPolynomial plus a RsmGrid for correcting it.  
+
+    C++ includes: rsm_rp_plus_grid.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -150,9 +155,8 @@ class RsmRpPlusGrid(geocal_swig.rsm_base.RsmBase):
 
     def __init__(self, Rp, Rgrid):
         r"""
+        __init__(RsmRpPlusGrid self, boost::shared_ptr< GeoCal::RsmBase > const & Rp, boost::shared_ptr< GeoCal::RsmGrid > const & Rgrid) -> RsmRpPlusGrid
 
-        GeoCal::RsmRpPlusGrid::RsmRpPlusGrid(const boost::shared_ptr< RsmBase > &Rp, const boost::shared_ptr<
-        RsmGrid > &Rgrid)
         GeoCal::RsmRpPlusGrid::RsmRpPlusGrid
         """
         _rsm_rp_plus_grid.RsmRpPlusGrid_swiginit(self, _rsm_rp_plus_grid.new_RsmRpPlusGrid(Rp, Rgrid))

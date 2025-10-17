@@ -90,6 +90,7 @@ _ground_coordinate.SwigPyIterator_swigregister(SwigPyIterator)
 SWIG_MODULE_ALREADY_DONE = _ground_coordinate.SWIG_MODULE_ALREADY_DONE
 SHARED_PTR_DISOWN = _ground_coordinate.SHARED_PTR_DISOWN
 
+
 import os
 
 def _new_from_init(cls, version, *args):
@@ -138,26 +139,26 @@ import geocal_swig.look_vector
 class GroundCoordinate(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This represents a location on the ground.
 
-    It is a base class, each of the derived classes represent different
-    coordinate systems that can be used to express the ground location.
-    Any ground coordinate can be converted to CartesianFixed coordinates.
+    This represents a location on the ground.  
 
-    Because it is commonly needed, we also can convert to latitude,
-    longitude and height_reference_surface. The default is just convert
-    first to CartesianFixed, and then convert to latitude, longitude or
-    height_reference_surface, but derived classes can supply more
-    efficient versions of this if desired.
+    It is a base class, each of the derived classes represent different coordinate
+    systems that can be used to express the ground location. Any ground coordinate
+    can be converted to CartesianFixed coordinates.  
 
-    Note that for the earth, the latitude is the standard geodetic
-    latitude. However, by convention other planets use Planetocentric
-    latitude, the equivalent of geocentric latitude for the other planet.
-    This is handled transparently and consistently by the various
-    coordinate classes (e.g., PlanetConstant, OgrCoordinate), but you
-    should be aware of this difference.
+    Because it is commonly needed, we also can convert to latitude, longitude and
+    height_reference_surface. The default is just convert first to CartesianFixed,
+    and then convert to latitude, longitude or height_reference_surface, but derived
+    classes can supply more efficient versions of this if desired.  
 
-    C++ includes: ground_coordinate.h 
+    Note that for the earth, the latitude is the standard geodetic latitude.
+    However, by convention other planets use Planetocentric latitude, the equivalent
+    of geocentric latitude for the other planet. This is handled transparently and
+    consistently by the various coordinate classes (e.g., PlanetConstant,
+    OgrCoordinate), but you should be aware of this difference.  
+
+    C++ includes: ground_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -193,13 +194,13 @@ _ground_coordinate.GroundCoordinate_swigregister(GroundCoordinate)
 class CartesianInertial(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This gives the location in a Cartesian inertial coordinate system
-    (.e.g., ECI).
 
-    See CartesianFixed for a discussion on converting to and from
-    CartesianFixed.
+    This gives the location in a Cartesian inertial coordinate system (.e.g., ECI).  
 
-    C++ includes: ground_coordinate.h 
+    See CartesianFixed for a discussion on converting to and from CartesianFixed.  
+
+    C++ includes: ground_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -232,21 +233,21 @@ _ground_coordinate.CartesianInertial_swigregister(CartesianInertial)
 class CartesianFixed(GroundCoordinate):
     r"""
 
-    This gives the fixed Cartesian Coordinates for a ground coordinate.
 
-    This is an abstract base class, there are CartesianFixed for the Earth
-    (Ecr), Mars (MarsFixed), etc.
+    This gives the fixed Cartesian Coordinates for a ground coordinate.  
 
-    We want to be able to convert to and from CartesianInertial
-    coordinates. However, we want to abstract out the toolkit used to do
-    this. We use the toolkit pointed to by
-    CartesianFixed::toolkit_coordinate_interface. If either SPICE or SDP
-    is available, then that toolkit is the one used for the conversion. If
-    we have both available, then we default to SPICE. You can change the
-    choice by updating the variable
-    CartesianFixed::toolkit_coordinate_interface.
+    This is an abstract base class, there are CartesianFixed for the Earth (Ecr),
+    Mars (MarsFixed), etc.  
 
-    C++ includes: ground_coordinate.h 
+    We want to be able to convert to and from CartesianInertial coordinates.
+    However, we want to abstract out the toolkit used to do this. We use the toolkit
+    pointed to by CartesianFixed::toolkit_coordinate_interface. If either SPICE or
+    SDP is available, then that toolkit is the one used for the conversion. If we
+    have both available, then we default to SPICE. You can change the choice by
+    updating the variable CartesianFixed::toolkit_coordinate_interface.  
+
+    C++ includes: ground_coordinate.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -281,10 +282,18 @@ class CartesianFixed(GroundCoordinate):
 # Register CartesianFixed in _ground_coordinate:
 _ground_coordinate.CartesianFixed_swigregister(CartesianFixed)
 class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
+    r"""Proxy of C++ GeoCal::LnLookVector class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
+        r"""
+        __init__(LnLookVector self) -> LnLookVector
+        __init__(LnLookVector self, CartesianFixedLookVector Lv, GroundCoordinate Ref_pt) -> LnLookVector
+        __init__(LnLookVector self, double x, double y, double z) -> LnLookVector
+        __init__(LnLookVector self, Array_double_3 Lv) -> LnLookVector
+        """
         _ground_coordinate.LnLookVector_swiginit(self, _ground_coordinate.new_LnLookVector(*args))
     to_cf = _swig_new_instance_method(_ground_coordinate.LnLookVector_to_cf)
     __str__ = _swig_new_instance_method(_ground_coordinate.LnLookVector___str__)
@@ -317,10 +326,18 @@ class LnLookVector(geocal_swig.look_vector.LookVectorDouble):
 # Register LnLookVector in _ground_coordinate:
 _ground_coordinate.LnLookVector_swigregister(LnLookVector)
 class LnLookVectorWithDerivative(geocal_swig.look_vector.LookVectorAutoDerivativeDouble):
+    r"""Proxy of C++ GeoCal::LnLookVectorWithDerivative class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
+        r"""
+        __init__(LnLookVectorWithDerivative self) -> LnLookVectorWithDerivative
+        __init__(LnLookVectorWithDerivative self, CartesianFixedLookVectorWithDerivative Lv, GroundCoordinate Ref_pt) -> LnLookVectorWithDerivative
+        __init__(LnLookVectorWithDerivative self, AutoDerivativeDouble x, AutoDerivativeDouble y, AutoDerivativeDouble z) -> LnLookVectorWithDerivative
+        __init__(LnLookVectorWithDerivative self, BoostArrayAutoDerivativeDouble_3 Lv) -> LnLookVectorWithDerivative
+        """
         _ground_coordinate.LnLookVectorWithDerivative_swiginit(self, _ground_coordinate.new_LnLookVectorWithDerivative(*args))
     to_cf = _swig_new_instance_method(_ground_coordinate.LnLookVectorWithDerivative_to_cf)
     __str__ = _swig_new_instance_method(_ground_coordinate.LnLookVectorWithDerivative___str__)
@@ -349,10 +366,18 @@ class LnLookVectorWithDerivative(geocal_swig.look_vector.LookVectorAutoDerivativ
 # Register LnLookVectorWithDerivative in _ground_coordinate:
 _ground_coordinate.LnLookVectorWithDerivative_swigregister(LnLookVectorWithDerivative)
 class CartesianFixedLookVector(geocal_swig.look_vector.LookVectorDouble):
+    r"""Proxy of C++ GeoCal::CartesianFixedLookVector class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
+        r"""
+        __init__(CartesianFixedLookVector self) -> CartesianFixedLookVector
+        __init__(CartesianFixedLookVector self, Array_double_3 Lv) -> CartesianFixedLookVector
+        __init__(CartesianFixedLookVector self, double x, double y, double z) -> CartesianFixedLookVector
+        __init__(CartesianFixedLookVector self, GroundCoordinate From, GroundCoordinate To) -> CartesianFixedLookVector
+        """
         _ground_coordinate.CartesianFixedLookVector_swiginit(self, _ground_coordinate.new_CartesianFixedLookVector(*args))
     __str__ = _swig_new_instance_method(_ground_coordinate.CartesianFixedLookVector___str__)
     solar_look_vector = _swig_new_static_method(_ground_coordinate.CartesianFixedLookVector_solar_look_vector)
@@ -372,6 +397,8 @@ _ground_coordinate.CartesianFixedLookVector_swigregister(CartesianFixedLookVecto
 distance = _ground_coordinate.distance
 convert_position_and_velocity = _ground_coordinate.convert_position_and_velocity
 class Vector_GroundCoordinate(object):
+    r"""Proxy of C++ std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     iterator = _swig_new_instance_method(_ground_coordinate.Vector_GroundCoordinate_iterator)
@@ -401,6 +428,12 @@ class Vector_GroundCoordinate(object):
     erase = _swig_new_instance_method(_ground_coordinate.Vector_GroundCoordinate_erase)
 
     def __init__(self, *args):
+        r"""
+        __init__(Vector_GroundCoordinate self) -> Vector_GroundCoordinate
+        __init__(Vector_GroundCoordinate self, Vector_GroundCoordinate other) -> Vector_GroundCoordinate
+        __init__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type size) -> Vector_GroundCoordinate
+        __init__(Vector_GroundCoordinate self, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::size_type size, std::vector< boost::shared_ptr< GeoCal::GroundCoordinate > >::value_type const & value) -> Vector_GroundCoordinate
+        """
         _ground_coordinate.Vector_GroundCoordinate_swiginit(self, _ground_coordinate.new_Vector_GroundCoordinate(*args))
     push_back = _swig_new_instance_method(_ground_coordinate.Vector_GroundCoordinate_push_back)
     front = _swig_new_instance_method(_ground_coordinate.Vector_GroundCoordinate_front)

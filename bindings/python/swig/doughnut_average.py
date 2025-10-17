@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _doughnut_average.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _doughnut_average:
 _doughnut_average.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _doughnut_average.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -144,28 +147,30 @@ import geocal_swig.raster_image_variable
 class DoughnutAverage(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
     r"""
 
-    This class does a "doughnut average" of an underlying RasterImage.
 
-    This produces the average value of all the pixels in a given window
-    size, excluding a smaller doughnut. We exclude all points that a value
-    of 0 in the average (e.g., the normal gore used in VICAR images), as
-    well as all points that are beyond the edge of the image. We also
-    preserve gore, so if a point has a value of 0 in any of the bands then
-    we set the doughnut average to 0 for that point.
+    This class does a "doughnut average" of an underlying RasterImage.  
 
-    Depending on the application, you may or may not want to include
-    points that have gore within the doughnut window. You can specify this
-    in the constructor. If "Allow_gore" is true, then any point other
-    than the center can be gore and we just exclude it from the average.
-    If "Allow_gore" is false, we set a value to 0 if any value in the
-    window is 0. In all cases, we set a value to 0 if the center is 0.
+    This produces the average value of all the pixels in a given window size,
+    excluding a smaller doughnut. We exclude all points that a value of 0 in the
+    average (e.g., the normal gore used in VICAR images), as well as all points that
+    are beyond the edge of the image. We also preserve gore, so if a point has a
+    value of 0 in any of the bands then we set the doughnut average to 0 for that
+    point.  
 
-    This is one of the building block used to do the "cvdnorm", you can
-    consult that program for details. But basically this is used to
-    examine small features (smaller than the doughnut whole) that are
-    significantly different than the nearby background.
+    Depending on the application, you may or may not want to include points that
+    have gore within the doughnut window. You can specify this in the constructor.
+    If "Allow_gore" is true, then any point other than the center can be gore and
+    we just exclude it from the average. If "Allow_gore" is false, we set a value
+    to 0 if any value in the window is 0. In all cases, we set a value to 0 if the
+    center is 0.  
 
-    C++ includes: doughnut_average.h 
+    This is one of the building block used to do the "cvdnorm", you can consult
+    that program for details. But basically this is used to examine small features
+    (smaller than the doughnut whole) that are significantly different than the
+    nearby background.  
+
+    C++ includes: doughnut_average.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -173,32 +178,32 @@ class DoughnutAverage(geocal_swig.calc_raster_multi_band.CalcRasterMultiBand):
 
     def __init__(self, Rimg, Window_size=11, Doughnut_size=5, Allow_gore=True, Tile_number_line=-1, Tile_number_sample=-1):
         r"""
+        __init__(DoughnutAverage self, boost::shared_ptr< GeoCal::RasterImageMultiBand > const & Rimg, int Window_size=11, int Doughnut_size=5, bool Allow_gore=True, int Tile_number_line=-1, int Tile_number_sample=-1) -> DoughnutAverage
 
-        DoughnutAverage::DoughnutAverage(const boost::shared_ptr< RasterImageMultiBand > &Rimg, int
-        Window_size=11, int Doughnut_size=5, bool Allow_gore=true, int
-        Number_tile_line=-1, int Number_tile_sample=-1, int Number_tile=4)
         GeoCal::DoughnutAverage::DoughnutAverage
-        Constructor.
-        Parameters:
-        -----------
+        Constructor.  
 
-        Rimg:  The underlying image we are producing the average for.
+        Parameters
+        ----------
+        * `Rimg` :  
+            The underlying image we are producing the average for.  
+        * `Window_size` :  
+            The window size we are averaging. Should be odd number.  
+        * `Doughnut_size` :  
+            The doughnut we are excluding in the average. Should be odd, and <
+            Window_size.  
+        * `Allow_gore` :  
+            If "Allow_gore" is true, then any point other than the center can be gore
+            and we just exclude it from the average. If "Allow_gore" is false, we set
+            a value to 0 if any value in the window is 0. In all cases, we set a value
+            to 0 if the center  
+        * `Number_tile_line` :  
+            Number of lines in each tile  
+        * `Number_tile_sample` :  
+            Number of samples in each tile  
+        * `Number_tile` :  
+            Number of tiles to use  
 
-        Window_size:  The window size we are averaging. Should be odd number.
-
-        Doughnut_size:  The doughnut we are excluding in the average. Should
-        be odd, and < Window_size.
-
-        Allow_gore:  If "Allow_gore" is true, then any point other than the
-        center can be gore and we just exclude it from the average. If
-        "Allow_gore" is false, we set a value to 0 if any value in the
-        window is 0. In all cases, we set a value to 0 if the center
-
-        Number_tile_line:  Number of lines in each tile
-
-        Number_tile_sample:  Number of samples in each tile
-
-        Number_tile:  Number of tiles to use 
         """
         _doughnut_average.DoughnutAverage_swiginit(self, _doughnut_average.new_DoughnutAverage(Rimg, Window_size, Doughnut_size, Allow_gore, Tile_number_line, Tile_number_sample))
     cvdnorm = _swig_new_instance_method(_doughnut_average.DoughnutAverage_cvdnorm)
@@ -242,6 +247,7 @@ _doughnut_average.DoughnutAverage_swigregister(DoughnutAverage)
 class RasterImageWrapCvdNorm(geocal_swig.calc_raster.CalcRaster):
     r"""
 
+
     C++ includes: doughnut_average.h
 
     """
@@ -251,8 +257,8 @@ class RasterImageWrapCvdNorm(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Davg, Band):
         r"""
+        __init__(RasterImageWrapCvdNorm self, boost::shared_ptr< GeoCal::DoughnutAverage > const & Davg, int Band) -> RasterImageWrapCvdNorm
 
-        GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm(const boost::shared_ptr< DoughnutAverage > &Davg, int Band)
         GeoCal::RasterImageWrapCvdNorm::RasterImageWrapCvdNorm
         """
         _doughnut_average.RasterImageWrapCvdNorm_swiginit(self, _doughnut_average.new_RasterImageWrapCvdNorm(Davg, Band))
@@ -283,6 +289,7 @@ _doughnut_average.RasterImageWrapCvdNorm_swigregister(RasterImageWrapCvdNorm)
 class RasterImageWrapPandif(geocal_swig.calc_raster.CalcRaster):
     r"""
 
+
     C++ includes: doughnut_average.h
 
     """
@@ -292,8 +299,8 @@ class RasterImageWrapPandif(geocal_swig.calc_raster.CalcRaster):
 
     def __init__(self, Davg):
         r"""
+        __init__(RasterImageWrapPandif self, boost::shared_ptr< GeoCal::DoughnutAverage > const & Davg) -> RasterImageWrapPandif
 
-        GeoCal::RasterImageWrapPandif::RasterImageWrapPandif(const boost::shared_ptr< DoughnutAverage > &Davg)
         GeoCal::RasterImageWrapPandif::RasterImageWrapPandif
         """
         _doughnut_average.RasterImageWrapPandif_swiginit(self, _doughnut_average.new_RasterImageWrapPandif(Davg))

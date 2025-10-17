@@ -8395,144 +8395,149 @@ SWIGINTERN PyObject *LocalZDem_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_LocalRcParameter", _wrap_new_LocalRcParameter, METH_VARARGS, "\n"
+		"LocalRcParameter()\n"
+		"LocalRcParameter(ImageGroundConnection Igc, double Height=0, double Line=-1, double Sample=-1, GeoCal::LocalRcParameter::CoordinateCreation C=FOLLOW_SAMPLE_LOCAL)\n"
 		"\n"
-		"LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0, double Line=-1,\n"
-		"double Sample=-1, CoordinateCreation C=FOLLOW_SAMPLE_LOCAL)\n"
 		"GeoCal::LocalRcParameter::LocalRcParameter\n"
-		"Constructor.\n"
-		"This sets up coordinates so the origin is at the given height on the\n"
-		"surface for the center pixel of the Igc.\n"
+		"Constructor.  \n"
 		"\n"
-		"You can optionally override the line/sample used for the origin. Most\n"
-		"of the time you don't want to do this, but this can be useful when\n"
-		"generating testing data.\n"
+		"This sets up coordinates so the origin is at the given height on the surface for\n"
+		"the center pixel of the Igc.  \n"
 		"\n"
-		"There are a couple of reasonable ways to create this. The default is\n"
-		"to set Z in the look direction, X mostly in the image sample/scan\n"
-		"direction, and Y completing the right hand coordinate system. An\n"
-		"alternative is to have Y set to be in the image coordinate line/push\n"
-		"direction, and X completing the RHCS. Often these are similar, but we\n"
-		"may have difference if the image scan line isn't perpendicular to the\n"
-		"push direction. There is also a variation where we look local (+- 1\n"
-		"pixel) or over the whole image (+- number_line/number_sample). \n"
+		"You can optionally override the line/sample used for the origin. Most of the\n"
+		"time you don't want to do this, but this can be useful when generating testing\n"
+		"data.  \n"
+		"\n"
+		"There are a couple of reasonable ways to create this. The default is to set Z in\n"
+		"the look direction, X mostly in the image sample/scan direction, and Y\n"
+		"completing the right hand coordinate system. An alternative is to have Y set to\n"
+		"be in the image coordinate line/push direction, and X completing the RHCS. Often\n"
+		"these are similar, but we may have difference if the image scan line isn't\n"
+		"perpendicular to the push direction. There is also a variation where we look\n"
+		"local (+- 1 pixel) or over the whole image (+- number_line/number_sample).  \n"
+		"\n"
 		""},
 	 { "LocalRcParameter_check_rc_assumption", _wrap_LocalRcParameter_check_rc_assumption, METH_VARARGS, "\n"
+		"LocalRcParameter_check_rc_assumption(ImageGroundConnection Igc, double Height=0)\n"
 		"\n"
-		"void LocalRcParameter::check_rc_assumption(const ImageGroundConnection &Igc, double Height=0)\n"
 		"GeoCal::LocalRcParameter::check_rc_assumption\n"
-		"The assumption with the LocalRcParameter is that we create a coordinate system with z along the look\n"
-		"direction, x mostly in the sample direction, and y mostly in the line\n"
-		"direction.\n"
-		"This function actually checks this by calculating the dot product\n"
-		"between a unit vector in the look direction, sample direction, and\n"
-		"line direction. These dot products should be close to zero, the\n"
-		"farther away from 0 the less true our assumption is.\n"
+		"The assumption with the LocalRcParameter is that we create a coordinate system\n"
+		"with z along the look direction, x mostly in the sample direction, and y mostly\n"
+		"in the line direction.  \n"
 		"\n"
-		"Note that you can still completely defined LocalRcParameter (as long\n"
-		"as none of the directions are exactly parallel), the problem is just\n"
-		"that the LocalRcParameter isn't very useful when this assumption\n"
-		"doesn't hold \n"
+		"This function actually checks this by calculating the dot product between a unit\n"
+		"vector in the look direction, sample direction, and line direction. These dot\n"
+		"products should be close to zero, the farther away from 0 the less true our\n"
+		"assumption is.  \n"
+		"\n"
+		"Note that you can still completely defined LocalRcParameter (as long as none of\n"
+		"the directions are exactly parallel), the problem is just that the\n"
+		"LocalRcParameter isn't very useful when this assumption doesn't hold  \n"
+		"\n"
 		""},
-	 { "LocalRcParameter___str__", _wrap_LocalRcParameter___str__, METH_O, NULL},
-	 { "LocalRcParameter_cf_to_rc_set", _wrap_LocalRcParameter_cf_to_rc_set, METH_VARARGS, NULL},
-	 { "LocalRcParameter_cf_to_rc_get", _wrap_LocalRcParameter_cf_to_rc_get, METH_O, NULL},
-	 { "LocalRcParameter_cf_offset_set", _wrap_LocalRcParameter_cf_offset_set, METH_VARARGS, NULL},
-	 { "LocalRcParameter_cf_offset_get", _wrap_LocalRcParameter_cf_offset_get, METH_O, NULL},
+	 { "LocalRcParameter___str__", _wrap_LocalRcParameter___str__, METH_O, "LocalRcParameter___str__(LocalRcParameter self) -> std::string"},
+	 { "LocalRcParameter_cf_to_rc_set", _wrap_LocalRcParameter_cf_to_rc_set, METH_VARARGS, "LocalRcParameter_cf_to_rc_set(LocalRcParameter self, double [3][3] cf_to_rc)"},
+	 { "LocalRcParameter_cf_to_rc_get", _wrap_LocalRcParameter_cf_to_rc_get, METH_O, "LocalRcParameter_cf_to_rc_get(LocalRcParameter self) -> double [3][3]"},
+	 { "LocalRcParameter_cf_offset_set", _wrap_LocalRcParameter_cf_offset_set, METH_VARARGS, "LocalRcParameter_cf_offset_set(LocalRcParameter self, Array_double_3 cf_offset)"},
+	 { "LocalRcParameter_cf_offset_get", _wrap_LocalRcParameter_cf_offset_get, METH_O, "LocalRcParameter_cf_offset_get(LocalRcParameter self) -> Array_double_3"},
 	 { "delete_LocalRcParameter", _wrap_delete_LocalRcParameter, METH_O, "\n"
+		"delete_LocalRcParameter(LocalRcParameter self)\n"
 		"\n"
-		"virtual GeoCal::LocalRcParameter::~LocalRcParameter()\n"
 		"GeoCal::LocalRcParameter::~LocalRcParameter\n"
 		""},
 	 { "LocalRcParameter_swigregister", LocalRcParameter_swigregister, METH_O, NULL},
 	 { "LocalRcParameter_swiginit", LocalRcParameter_swiginit, METH_VARARGS, NULL},
 	 { "new_LocalRectangularCoordinate", _wrap_new_LocalRectangularCoordinate, METH_VARARGS, "\n"
+		"LocalRectangularCoordinate()\n"
+		"LocalRectangularCoordinate(boost::shared_ptr< GeoCal::LocalRcParameter > const & P, GroundCoordinate Gc)\n"
+		"new_LocalRectangularCoordinate(boost::shared_ptr< GeoCal::LocalRcParameter > const & P, double X, double Y, double Z) -> LocalRectangularCoordinate\n"
 		"\n"
-		"GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, double X, double Y,\n"
-		"double Z)\n"
 		"GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate\n"
 		""},
-	 { "LocalRectangularCoordinate_parameter_set", _wrap_LocalRectangularCoordinate_parameter_set, METH_VARARGS, NULL},
-	 { "LocalRectangularCoordinate_parameter_get", _wrap_LocalRectangularCoordinate_parameter_get, METH_O, NULL},
-	 { "LocalRectangularCoordinate_position_set", _wrap_LocalRectangularCoordinate_position_set, METH_VARARGS, NULL},
-	 { "LocalRectangularCoordinate_position_get", _wrap_LocalRectangularCoordinate_position_get, METH_O, NULL},
+	 { "LocalRectangularCoordinate_parameter_set", _wrap_LocalRectangularCoordinate_parameter_set, METH_VARARGS, "LocalRectangularCoordinate_parameter_set(LocalRectangularCoordinate self, boost::shared_ptr< GeoCal::LocalRcParameter > const & parameter)"},
+	 { "LocalRectangularCoordinate_parameter_get", _wrap_LocalRectangularCoordinate_parameter_get, METH_O, "LocalRectangularCoordinate_parameter_get(LocalRectangularCoordinate self) -> boost::shared_ptr< GeoCal::LocalRcParameter > const &"},
+	 { "LocalRectangularCoordinate_position_set", _wrap_LocalRectangularCoordinate_position_set, METH_VARARGS, "LocalRectangularCoordinate_position_set(LocalRectangularCoordinate self, Array_double_3 position)"},
+	 { "LocalRectangularCoordinate_position_get", _wrap_LocalRectangularCoordinate_position_get, METH_O, "LocalRectangularCoordinate_position_get(LocalRectangularCoordinate self) -> Array_double_3"},
 	 { "delete_LocalRectangularCoordinate", _wrap_delete_LocalRectangularCoordinate, METH_O, "\n"
+		"delete_LocalRectangularCoordinate(LocalRectangularCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::LocalRectangularCoordinate::~LocalRectangularCoordinate()\n"
 		"GeoCal::LocalRectangularCoordinate::~LocalRectangularCoordinate\n"
 		""},
 	 { "LocalRectangularCoordinate_swigregister", LocalRectangularCoordinate_swigregister, METH_O, NULL},
 	 { "LocalRectangularCoordinate_swiginit", LocalRectangularCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_LocalRcConverter", _wrap_new_LocalRcConverter, METH_O, "\n"
+		"new_LocalRcConverter(boost::shared_ptr< GeoCal::LocalRcParameter > const & P) -> LocalRcConverter\n"
 		"\n"
-		"GeoCal::LocalRcConverter::LocalRcConverter(const boost::shared_ptr< LocalRcParameter > &P)\n"
 		"GeoCal::LocalRcConverter::LocalRcConverter\n"
 		""},
 	 { "LocalRcConverter_convert_from_coordinate", _wrap_LocalRcConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"LocalRcConverter_convert_from_coordinate(LocalRcConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::LocalRcConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::LocalRcConverter::convert_from_coordinate\n"
 		""},
 	 { "LocalRcConverter_convert_to_cf", _wrap_LocalRcConverter_convert_to_cf, METH_VARARGS, "\n"
+		"LocalRcConverter_convert_to_cf(LocalRcConverter self, AutoDerivativeDouble X, AutoDerivativeDouble Y, AutoDerivativeDouble Z) -> ArrayAd_double_1\n"
 		"\n"
-		"ArrayAd< double, 1 > LocalRcConverter::convert_to_cf(const AutoDerivative< double > &X, const AutoDerivative< double > &Y,\n"
-		"const AutoDerivative< double > &Z) const\n"
 		"GeoCal::LocalRcConverter::convert_to_cf\n"
 		""},
 	 { "LocalRcConverter__v_parameter", _wrap_LocalRcConverter__v_parameter, METH_O, "\n"
+		"LocalRcConverter__v_parameter(LocalRcConverter self) -> boost::shared_ptr< GeoCal::LocalRcParameter >\n"
 		"\n"
-		"const boost::shared_ptr< LocalRcParameter > & GeoCal::LocalRcConverter::parameter() const\n"
 		"GeoCal::LocalRcConverter::parameter\n"
 		""},
 	 { "delete_LocalRcConverter", _wrap_delete_LocalRcConverter, METH_O, "\n"
+		"delete_LocalRcConverter(LocalRcConverter self)\n"
 		"\n"
-		"virtual GeoCal::LocalRcConverter::~LocalRcConverter()\n"
 		"GeoCal::LocalRcConverter::~LocalRcConverter\n"
 		""},
 	 { "LocalRcConverter_swigregister", LocalRcConverter_swigregister, METH_O, NULL},
 	 { "LocalRcConverter_swiginit", LocalRcConverter_swiginit, METH_VARARGS, NULL},
 	 { "new_LocalZDem", _wrap_new_LocalZDem, METH_VARARGS, "\n"
+		"new_LocalZDem(boost::shared_ptr< GeoCal::LocalRcConverter > const & Cconv, int Z) -> LocalZDem\n"
 		"\n"
-		"GeoCal::LocalZDem::LocalZDem(const boost::shared_ptr< LocalRcConverter > &Cconv, int Z)\n"
 		"GeoCal::LocalZDem::LocalZDem\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "LocalZDem__v_z", _wrap_LocalZDem__v_z, METH_O, "\n"
+		"LocalZDem__v_z(LocalZDem self) -> double\n"
 		"\n"
-		"double GeoCal::LocalZDem::z() const\n"
 		"GeoCal::LocalZDem::z\n"
-		"Return z value used by this object.\n"
+		"Return z value used by this object.  \n"
 		"\n"
 		""},
 	 { "LocalZDem__v_coordinate_converter", _wrap_LocalZDem__v_coordinate_converter, METH_O, "\n"
+		"LocalZDem__v_coordinate_converter(LocalZDem self) -> boost::shared_ptr< GeoCal::LocalRcConverter >\n"
 		"\n"
-		"const boost::shared_ptr< LocalRcConverter > & GeoCal::LocalZDem::coordinate_converter() const\n"
 		"GeoCal::LocalZDem::coordinate_converter\n"
-		"Return LocalRcConverter.\n"
+		"Return LocalRcConverter.  \n"
 		"\n"
 		""},
 	 { "delete_LocalZDem", _wrap_delete_LocalZDem, METH_O, "\n"
+		"delete_LocalZDem(LocalZDem self)\n"
 		"\n"
-		"virtual GeoCal::LocalZDem::~LocalZDem()\n"
 		"GeoCal::LocalZDem::~LocalZDem\n"
 		""},
 	 { "LocalZDem_swigregister", LocalZDem_swigregister, METH_O, NULL},
@@ -8543,144 +8548,149 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_LocalRcParameter", _wrap_new_LocalRcParameter, METH_VARARGS, "\n"
+		"LocalRcParameter()\n"
+		"LocalRcParameter(ImageGroundConnection Igc, double Height=0, double Line=-1, double Sample=-1, GeoCal::LocalRcParameter::CoordinateCreation C=FOLLOW_SAMPLE_LOCAL)\n"
 		"\n"
-		"LocalRcParameter::LocalRcParameter(const ImageGroundConnection &Igc, double Height=0, double Line=-1,\n"
-		"double Sample=-1, CoordinateCreation C=FOLLOW_SAMPLE_LOCAL)\n"
 		"GeoCal::LocalRcParameter::LocalRcParameter\n"
-		"Constructor.\n"
-		"This sets up coordinates so the origin is at the given height on the\n"
-		"surface for the center pixel of the Igc.\n"
+		"Constructor.  \n"
 		"\n"
-		"You can optionally override the line/sample used for the origin. Most\n"
-		"of the time you don't want to do this, but this can be useful when\n"
-		"generating testing data.\n"
+		"This sets up coordinates so the origin is at the given height on the surface for\n"
+		"the center pixel of the Igc.  \n"
 		"\n"
-		"There are a couple of reasonable ways to create this. The default is\n"
-		"to set Z in the look direction, X mostly in the image sample/scan\n"
-		"direction, and Y completing the right hand coordinate system. An\n"
-		"alternative is to have Y set to be in the image coordinate line/push\n"
-		"direction, and X completing the RHCS. Often these are similar, but we\n"
-		"may have difference if the image scan line isn't perpendicular to the\n"
-		"push direction. There is also a variation where we look local (+- 1\n"
-		"pixel) or over the whole image (+- number_line/number_sample). \n"
+		"You can optionally override the line/sample used for the origin. Most of the\n"
+		"time you don't want to do this, but this can be useful when generating testing\n"
+		"data.  \n"
+		"\n"
+		"There are a couple of reasonable ways to create this. The default is to set Z in\n"
+		"the look direction, X mostly in the image sample/scan direction, and Y\n"
+		"completing the right hand coordinate system. An alternative is to have Y set to\n"
+		"be in the image coordinate line/push direction, and X completing the RHCS. Often\n"
+		"these are similar, but we may have difference if the image scan line isn't\n"
+		"perpendicular to the push direction. There is also a variation where we look\n"
+		"local (+- 1 pixel) or over the whole image (+- number_line/number_sample).  \n"
+		"\n"
 		""},
 	 { "LocalRcParameter_check_rc_assumption", _wrap_LocalRcParameter_check_rc_assumption, METH_VARARGS, "\n"
+		"check_rc_assumption(ImageGroundConnection Igc, double Height=0)\n"
 		"\n"
-		"void LocalRcParameter::check_rc_assumption(const ImageGroundConnection &Igc, double Height=0)\n"
 		"GeoCal::LocalRcParameter::check_rc_assumption\n"
-		"The assumption with the LocalRcParameter is that we create a coordinate system with z along the look\n"
-		"direction, x mostly in the sample direction, and y mostly in the line\n"
-		"direction.\n"
-		"This function actually checks this by calculating the dot product\n"
-		"between a unit vector in the look direction, sample direction, and\n"
-		"line direction. These dot products should be close to zero, the\n"
-		"farther away from 0 the less true our assumption is.\n"
+		"The assumption with the LocalRcParameter is that we create a coordinate system\n"
+		"with z along the look direction, x mostly in the sample direction, and y mostly\n"
+		"in the line direction.  \n"
 		"\n"
-		"Note that you can still completely defined LocalRcParameter (as long\n"
-		"as none of the directions are exactly parallel), the problem is just\n"
-		"that the LocalRcParameter isn't very useful when this assumption\n"
-		"doesn't hold \n"
+		"This function actually checks this by calculating the dot product between a unit\n"
+		"vector in the look direction, sample direction, and line direction. These dot\n"
+		"products should be close to zero, the farther away from 0 the less true our\n"
+		"assumption is.  \n"
+		"\n"
+		"Note that you can still completely defined LocalRcParameter (as long as none of\n"
+		"the directions are exactly parallel), the problem is just that the\n"
+		"LocalRcParameter isn't very useful when this assumption doesn't hold  \n"
+		"\n"
 		""},
-	 { "LocalRcParameter___str__", _wrap_LocalRcParameter___str__, METH_O, NULL},
-	 { "LocalRcParameter_cf_to_rc_set", _wrap_LocalRcParameter_cf_to_rc_set, METH_VARARGS, NULL},
-	 { "LocalRcParameter_cf_to_rc_get", _wrap_LocalRcParameter_cf_to_rc_get, METH_O, NULL},
-	 { "LocalRcParameter_cf_offset_set", _wrap_LocalRcParameter_cf_offset_set, METH_VARARGS, NULL},
-	 { "LocalRcParameter_cf_offset_get", _wrap_LocalRcParameter_cf_offset_get, METH_O, NULL},
+	 { "LocalRcParameter___str__", _wrap_LocalRcParameter___str__, METH_O, "__str__(LocalRcParameter self) -> std::string"},
+	 { "LocalRcParameter_cf_to_rc_set", _wrap_LocalRcParameter_cf_to_rc_set, METH_VARARGS, "LocalRcParameter_cf_to_rc_set(LocalRcParameter self, double [3][3] cf_to_rc)"},
+	 { "LocalRcParameter_cf_to_rc_get", _wrap_LocalRcParameter_cf_to_rc_get, METH_O, "LocalRcParameter_cf_to_rc_get(LocalRcParameter self) -> double [3][3]"},
+	 { "LocalRcParameter_cf_offset_set", _wrap_LocalRcParameter_cf_offset_set, METH_VARARGS, "LocalRcParameter_cf_offset_set(LocalRcParameter self, Array_double_3 cf_offset)"},
+	 { "LocalRcParameter_cf_offset_get", _wrap_LocalRcParameter_cf_offset_get, METH_O, "LocalRcParameter_cf_offset_get(LocalRcParameter self) -> Array_double_3"},
 	 { "delete_LocalRcParameter", _wrap_delete_LocalRcParameter, METH_O, "\n"
+		"delete_LocalRcParameter(LocalRcParameter self)\n"
 		"\n"
-		"virtual GeoCal::LocalRcParameter::~LocalRcParameter()\n"
 		"GeoCal::LocalRcParameter::~LocalRcParameter\n"
 		""},
 	 { "LocalRcParameter_swigregister", LocalRcParameter_swigregister, METH_O, NULL},
 	 { "LocalRcParameter_swiginit", LocalRcParameter_swiginit, METH_VARARGS, NULL},
 	 { "new_LocalRectangularCoordinate", _wrap_new_LocalRectangularCoordinate, METH_VARARGS, "\n"
+		"LocalRectangularCoordinate()\n"
+		"LocalRectangularCoordinate(boost::shared_ptr< GeoCal::LocalRcParameter > const & P, GroundCoordinate Gc)\n"
+		"new_LocalRectangularCoordinate(boost::shared_ptr< GeoCal::LocalRcParameter > const & P, double X, double Y, double Z) -> LocalRectangularCoordinate\n"
 		"\n"
-		"GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate(const boost::shared_ptr< LocalRcParameter > &P, double X, double Y,\n"
-		"double Z)\n"
 		"GeoCal::LocalRectangularCoordinate::LocalRectangularCoordinate\n"
 		""},
-	 { "LocalRectangularCoordinate_parameter_set", _wrap_LocalRectangularCoordinate_parameter_set, METH_VARARGS, NULL},
-	 { "LocalRectangularCoordinate_parameter_get", _wrap_LocalRectangularCoordinate_parameter_get, METH_O, NULL},
-	 { "LocalRectangularCoordinate_position_set", _wrap_LocalRectangularCoordinate_position_set, METH_VARARGS, NULL},
-	 { "LocalRectangularCoordinate_position_get", _wrap_LocalRectangularCoordinate_position_get, METH_O, NULL},
+	 { "LocalRectangularCoordinate_parameter_set", _wrap_LocalRectangularCoordinate_parameter_set, METH_VARARGS, "LocalRectangularCoordinate_parameter_set(LocalRectangularCoordinate self, boost::shared_ptr< GeoCal::LocalRcParameter > const & parameter)"},
+	 { "LocalRectangularCoordinate_parameter_get", _wrap_LocalRectangularCoordinate_parameter_get, METH_O, "LocalRectangularCoordinate_parameter_get(LocalRectangularCoordinate self) -> boost::shared_ptr< GeoCal::LocalRcParameter > const &"},
+	 { "LocalRectangularCoordinate_position_set", _wrap_LocalRectangularCoordinate_position_set, METH_VARARGS, "LocalRectangularCoordinate_position_set(LocalRectangularCoordinate self, Array_double_3 position)"},
+	 { "LocalRectangularCoordinate_position_get", _wrap_LocalRectangularCoordinate_position_get, METH_O, "LocalRectangularCoordinate_position_get(LocalRectangularCoordinate self) -> Array_double_3"},
 	 { "delete_LocalRectangularCoordinate", _wrap_delete_LocalRectangularCoordinate, METH_O, "\n"
+		"delete_LocalRectangularCoordinate(LocalRectangularCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::LocalRectangularCoordinate::~LocalRectangularCoordinate()\n"
 		"GeoCal::LocalRectangularCoordinate::~LocalRectangularCoordinate\n"
 		""},
 	 { "LocalRectangularCoordinate_swigregister", LocalRectangularCoordinate_swigregister, METH_O, NULL},
 	 { "LocalRectangularCoordinate_swiginit", LocalRectangularCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_LocalRcConverter", _wrap_new_LocalRcConverter, METH_O, "\n"
+		"new_LocalRcConverter(boost::shared_ptr< GeoCal::LocalRcParameter > const & P) -> LocalRcConverter\n"
 		"\n"
-		"GeoCal::LocalRcConverter::LocalRcConverter(const boost::shared_ptr< LocalRcParameter > &P)\n"
 		"GeoCal::LocalRcConverter::LocalRcConverter\n"
 		""},
 	 { "LocalRcConverter_convert_from_coordinate", _wrap_LocalRcConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(LocalRcConverter self, double X, double Y, double Z=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::LocalRcConverter::convert_from_coordinate(double X, double Y, double Z=0) const\n"
 		"GeoCal::LocalRcConverter::convert_from_coordinate\n"
 		""},
 	 { "LocalRcConverter_convert_to_cf", _wrap_LocalRcConverter_convert_to_cf, METH_VARARGS, "\n"
+		"convert_to_cf(LocalRcConverter self, AutoDerivativeDouble X, AutoDerivativeDouble Y, AutoDerivativeDouble Z) -> ArrayAd_double_1\n"
 		"\n"
-		"ArrayAd< double, 1 > LocalRcConverter::convert_to_cf(const AutoDerivative< double > &X, const AutoDerivative< double > &Y,\n"
-		"const AutoDerivative< double > &Z) const\n"
 		"GeoCal::LocalRcConverter::convert_to_cf\n"
 		""},
 	 { "LocalRcConverter__v_parameter", _wrap_LocalRcConverter__v_parameter, METH_O, "\n"
+		"_v_parameter(LocalRcConverter self) -> boost::shared_ptr< GeoCal::LocalRcParameter >\n"
 		"\n"
-		"const boost::shared_ptr< LocalRcParameter > & GeoCal::LocalRcConverter::parameter() const\n"
 		"GeoCal::LocalRcConverter::parameter\n"
 		""},
 	 { "delete_LocalRcConverter", _wrap_delete_LocalRcConverter, METH_O, "\n"
+		"delete_LocalRcConverter(LocalRcConverter self)\n"
 		"\n"
-		"virtual GeoCal::LocalRcConverter::~LocalRcConverter()\n"
 		"GeoCal::LocalRcConverter::~LocalRcConverter\n"
 		""},
 	 { "LocalRcConverter_swigregister", LocalRcConverter_swigregister, METH_O, NULL},
 	 { "LocalRcConverter_swiginit", LocalRcConverter_swiginit, METH_VARARGS, NULL},
 	 { "new_LocalZDem", _wrap_new_LocalZDem, METH_VARARGS, "\n"
+		"new_LocalZDem(boost::shared_ptr< GeoCal::LocalRcConverter > const & Cconv, int Z) -> LocalZDem\n"
 		"\n"
-		"GeoCal::LocalZDem::LocalZDem(const boost::shared_ptr< LocalRcConverter > &Cconv, int Z)\n"
 		"GeoCal::LocalZDem::LocalZDem\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "LocalZDem__v_z", _wrap_LocalZDem__v_z, METH_O, "\n"
+		"_v_z(LocalZDem self) -> double\n"
 		"\n"
-		"double GeoCal::LocalZDem::z() const\n"
 		"GeoCal::LocalZDem::z\n"
-		"Return z value used by this object.\n"
+		"Return z value used by this object.  \n"
 		"\n"
 		""},
 	 { "LocalZDem__v_coordinate_converter", _wrap_LocalZDem__v_coordinate_converter, METH_O, "\n"
+		"_v_coordinate_converter(LocalZDem self) -> boost::shared_ptr< GeoCal::LocalRcConverter >\n"
 		"\n"
-		"const boost::shared_ptr< LocalRcConverter > & GeoCal::LocalZDem::coordinate_converter() const\n"
 		"GeoCal::LocalZDem::coordinate_converter\n"
-		"Return LocalRcConverter.\n"
+		"Return LocalRcConverter.  \n"
 		"\n"
 		""},
 	 { "delete_LocalZDem", _wrap_delete_LocalZDem, METH_O, "\n"
+		"delete_LocalZDem(LocalZDem self)\n"
 		"\n"
-		"virtual GeoCal::LocalZDem::~LocalZDem()\n"
 		"GeoCal::LocalZDem::~LocalZDem\n"
 		""},
 	 { "LocalZDem_swigregister", LocalZDem_swigregister, METH_O, NULL},

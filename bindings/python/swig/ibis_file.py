@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ibis_file.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ibis_file:
 _ibis_file.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ibis_file.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,13 +143,15 @@ import geocal_swig.generic_object
 class IbisColumn_byte(object):
     r"""
 
-    This class handles reading and writing a single column of a IBIS file.
 
-    If you update a column and want the results to be written out, then
-    you need to mark the "updated" flag as true, otherwise whatever
-    changes are made won't be written to disk.
+    This class handles reading and writing a single column of a IBIS file.  
 
-    C++ includes: ibis_file.h 
+    If you update a column and want the results to be written out, then you need to
+    mark the "updated" flag as true, otherwise whatever changes are made won't be
+    written to disk.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -176,7 +181,7 @@ class IbisColumn_byte(object):
     def data_size(self):
         return self._v_data_size()
 
-    update = property(_ibis_file.IbisColumn_byte_update_get, _ibis_file.IbisColumn_byte_update_set)
+    update = property(_ibis_file.IbisColumn_byte_update_get, _ibis_file.IbisColumn_byte_update_set, doc=r"""update : bool""")
 
     def __getitem__(self, i):
       if isinstance(i, slice):
@@ -199,13 +204,15 @@ _ibis_file.IbisColumn_byte_swigregister(IbisColumn_byte)
 class IbisColumn_half(object):
     r"""
 
-    This class handles reading and writing a single column of a IBIS file.
 
-    If you update a column and want the results to be written out, then
-    you need to mark the "updated" flag as true, otherwise whatever
-    changes are made won't be written to disk.
+    This class handles reading and writing a single column of a IBIS file.  
 
-    C++ includes: ibis_file.h 
+    If you update a column and want the results to be written out, then you need to
+    mark the "updated" flag as true, otherwise whatever changes are made won't be
+    written to disk.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -235,7 +242,7 @@ class IbisColumn_half(object):
     def data_size(self):
         return self._v_data_size()
 
-    update = property(_ibis_file.IbisColumn_half_update_get, _ibis_file.IbisColumn_half_update_set)
+    update = property(_ibis_file.IbisColumn_half_update_get, _ibis_file.IbisColumn_half_update_set, doc=r"""update : bool""")
 
     def __getitem__(self, i):
       if isinstance(i, slice):
@@ -258,13 +265,15 @@ _ibis_file.IbisColumn_half_swigregister(IbisColumn_half)
 class IbisColumn_full(object):
     r"""
 
-    This class handles reading and writing a single column of a IBIS file.
 
-    If you update a column and want the results to be written out, then
-    you need to mark the "updated" flag as true, otherwise whatever
-    changes are made won't be written to disk.
+    This class handles reading and writing a single column of a IBIS file.  
 
-    C++ includes: ibis_file.h 
+    If you update a column and want the results to be written out, then you need to
+    mark the "updated" flag as true, otherwise whatever changes are made won't be
+    written to disk.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -294,7 +303,7 @@ class IbisColumn_full(object):
     def data_size(self):
         return self._v_data_size()
 
-    update = property(_ibis_file.IbisColumn_full_update_get, _ibis_file.IbisColumn_full_update_set)
+    update = property(_ibis_file.IbisColumn_full_update_get, _ibis_file.IbisColumn_full_update_set, doc=r"""update : bool""")
 
     def __getitem__(self, i):
       if isinstance(i, slice):
@@ -317,13 +326,15 @@ _ibis_file.IbisColumn_full_swigregister(IbisColumn_full)
 class IbisColumn_float(object):
     r"""
 
-    This class handles reading and writing a single column of a IBIS file.
 
-    If you update a column and want the results to be written out, then
-    you need to mark the "updated" flag as true, otherwise whatever
-    changes are made won't be written to disk.
+    This class handles reading and writing a single column of a IBIS file.  
 
-    C++ includes: ibis_file.h 
+    If you update a column and want the results to be written out, then you need to
+    mark the "updated" flag as true, otherwise whatever changes are made won't be
+    written to disk.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -353,7 +364,7 @@ class IbisColumn_float(object):
     def data_size(self):
         return self._v_data_size()
 
-    update = property(_ibis_file.IbisColumn_float_update_get, _ibis_file.IbisColumn_float_update_set)
+    update = property(_ibis_file.IbisColumn_float_update_get, _ibis_file.IbisColumn_float_update_set, doc=r"""update : bool""")
 
     def __getitem__(self, i):
       if isinstance(i, slice):
@@ -376,13 +387,15 @@ _ibis_file.IbisColumn_float_swigregister(IbisColumn_float)
 class IbisColumn_double(object):
     r"""
 
-    This class handles reading and writing a single column of a IBIS file.
 
-    If you update a column and want the results to be written out, then
-    you need to mark the "updated" flag as true, otherwise whatever
-    changes are made won't be written to disk.
+    This class handles reading and writing a single column of a IBIS file.  
 
-    C++ includes: ibis_file.h 
+    If you update a column and want the results to be written out, then you need to
+    mark the "updated" flag as true, otherwise whatever changes are made won't be
+    written to disk.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -412,7 +425,7 @@ class IbisColumn_double(object):
     def data_size(self):
         return self._v_data_size()
 
-    update = property(_ibis_file.IbisColumn_double_update_get, _ibis_file.IbisColumn_double_update_set)
+    update = property(_ibis_file.IbisColumn_double_update_get, _ibis_file.IbisColumn_double_update_set, doc=r"""update : bool""")
 
     def __getitem__(self, i):
       if isinstance(i, slice):
@@ -435,13 +448,15 @@ _ibis_file.IbisColumn_double_swigregister(IbisColumn_double)
 class IbisColumn_string(object):
     r"""
 
-    This class handles reading and writing a single column of a IBIS file.
 
-    If you update a column and want the results to be written out, then
-    you need to mark the "updated" flag as true, otherwise whatever
-    changes are made won't be written to disk.
+    This class handles reading and writing a single column of a IBIS file.  
 
-    C++ includes: ibis_file.h 
+    If you update a column and want the results to be written out, then you need to
+    mark the "updated" flag as true, otherwise whatever changes are made won't be
+    written to disk.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -471,7 +486,7 @@ class IbisColumn_string(object):
     def data_size(self):
         return self._v_data_size()
 
-    update = property(_ibis_file.IbisColumn_string_update_get, _ibis_file.IbisColumn_string_update_set)
+    update = property(_ibis_file.IbisColumn_string_update_get, _ibis_file.IbisColumn_string_update_set, doc=r"""update : bool""")
 
     def __getitem__(self, i):
       if isinstance(i, slice):
@@ -494,54 +509,64 @@ _ibis_file.IbisColumn_string_swigregister(IbisColumn_string)
 class IbisFile(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This provides read and write for a IBIS file.
 
-    IBIS is VICAR format used for tabulating raster format data -
-    basically it is a table. This is used to interact with existing VICAR
-    routines.
+    This provides read and write for a IBIS file.  
 
-    The ASCII column type is a bit of a special case. For IBIS files, the
-    ASCII column type is a fixed number of characters. We access this a
-    std::string type. If you attempt to write a string that is too large
-    for a column, then we silently truncate the string. Alternatively, we
-    could have triggered an error in that case, but after thinking about
-    it truncating seemed like the better choice. We can revisit this
-    decision if it becomes clear that triggering an error would be better.
+    IBIS is VICAR format used for tabulating raster format data - basically it is a
+    table. This is used to interact with existing VICAR routines.  
 
-    As an implementation detail, the class VicarFile and IbisFile need to
-    coordinate in translating file names to unit numbers since the same
-    underlying Vicar routine zvunit is used by both. We arbitrarily have
-    VicarFile handle this, and IbisFile accesses VicarFile when it needs
-    to do this.
+    The ASCII column type is a bit of a special case. For IBIS files, the ASCII
+    column type is a fixed number of characters. We access this a std::string type.
+    If you attempt to write a string that is too large for a column, then we
+    silently truncate the string. Alternatively, we could have triggered an error in
+    that case, but after thinking about it truncating seemed like the better choice.
+    We can revisit this decision if it becomes clear that triggering an error would
+    be better.  
 
-    C++ includes: ibis_file.h 
+    As an implementation detail, the class VicarFile and IbisFile need to coordinate
+    in translating file names to unit numbers since the same underlying Vicar
+    routine zvunit is used by both. We arbitrarily have VicarFile handle this, and
+    IbisFile accesses VicarFile when it needs to do this.  
+
+    C++ includes: ibis_file.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     READ = _ibis_file.IbisFile_READ
+    
     WRITE = _ibis_file.IbisFile_WRITE
+    
     UPDATE = _ibis_file.IbisFile_UPDATE
+    
     VICAR_BYTE = _ibis_file.IbisFile_VICAR_BYTE
+    
     VICAR_HALF = _ibis_file.IbisFile_VICAR_HALF
+    
     VICAR_FULL = _ibis_file.IbisFile_VICAR_FULL
+    
     VICAR_FLOAT = _ibis_file.IbisFile_VICAR_FLOAT
+    
     VICAR_DOUBLE = _ibis_file.IbisFile_VICAR_DOUBLE
+    
     VICAR_ASCII = _ibis_file.IbisFile_VICAR_ASCII
+    
 
     def __init__(self, *args):
         r"""
+        __init__(IbisFile self, std::string const & Fname, int Number_row, vector_string Format, std::string const & Organization="COLUMN") -> IbisFile
+        __init__(IbisFile self, std::string const & Fname, GeoCal::IbisFile::access_type Access=READ) -> IbisFile
 
-        IbisFile::IbisFile(const std::string &Fname, int Number_row, const std::vector<
-        std::string > &Format, const std::string &Organization="COLUMN")
         GeoCal::IbisFile::IbisFile
-        Create a new IBIS file.
-        We pass in the number of rows and the format for each column. The
-        format is given as a list of strings, with each string being one of
-        the format types taken by the IBIS library - "BYTE", "HALF",
-        "FULL", "REAL", "DOUB", "Ann" (e.g., "A10" for 10 character
-        ASCII). The organization of the file can be given as "COLUMN" or
-        "ROW". 
+        Create a new IBIS file.  
+
+        We pass in the number of rows and the format for each column. The format is
+        given as a list of strings, with each string being one of the format types taken
+        by the IBIS library - "BYTE", "HALF", "FULL", "REAL", "DOUB", "Ann"
+        (e.g., "A10" for 10 character ASCII). The organization of the file can be
+        given as "COLUMN" or "ROW".  
+
         """
         _ibis_file.IbisFile_swiginit(self, _ibis_file.new_IbisFile(*args))
     _v_access = _swig_new_instance_method(_ibis_file.IbisFile__v_access)

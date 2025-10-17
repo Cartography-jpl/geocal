@@ -14298,287 +14298,315 @@ SWIGINTERN PyObject *OrbitDes_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObject 
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_PosCsephb", _wrap_new_PosCsephb, METH_VARARGS, "\n"
+		"PosCsephb(BlitzArray_double_2 Pos, Time Tmin, double Tstep, bool Is_cf, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL)\n"
+		"PosCsephb(Orbit Orb, double Tstep, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL, GeoCal::PosCsephb::PositionType P_type=SAME_AS_ORBIT)\n"
+		"PosCsephb(Orbit Orb, Time Min_time, Time Max_time, double Tstep, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL, GeoCal::PosCsephb::PositionType P_type=SAME_AS_ORBIT)\n"
 		"\n"
-		"PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
-		"LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
-		"E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,\n"
-		"PositionType P_type=SAME_AS_ORBIT)\n"
 		"GeoCal::PosCsephb::PosCsephb\n"
-		"Constructor.\n"
-		"We sample the position of the given Orbit at fixed spaces times. This\n"
-		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
-		"more accurately, the largest time min_time() i * Tstep that is <=\n"
-		"max_time()). \n"
+		"Constructor.  \n"
+		"\n"
+		"We sample the position of the given Orbit at fixed spaces times. This version\n"
+		"goes from the min_time() of the Orbit, up to max_time() (or more accurately, the\n"
+		"largest time min_time()  \n"
+		"\n"
+		"*   i * Tstep that is <= max_time()).  \n"
+		"\n"
 		""},
 	 { "PosCsephb_pos_vel", _wrap_PosCsephb_pos_vel, METH_VARARGS, "\n"
+		"PosCsephb_pos_vel(PosCsephb self, Time T) -> BlitzArray_double_1\n"
+		"PosCsephb_pos_vel(PosCsephb self, TimeWithDerivative T) -> ArrayAutoDerivativeDouble_1\n"
 		"\n"
-		"blitz::Array< AutoDerivative< double >, 1 > PosCsephb::pos_vel(const TimeWithDerivative &T) const\n"
 		"GeoCal::PosCsephb::pos_vel\n"
-		"Return position and velocity for the given time.\n"
+		"Return position and velocity for the given time.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_is_cf", _wrap_PosCsephb__v_is_cf, METH_O, "\n"
+		"PosCsephb__v_is_cf(PosCsephb self) -> bool\n"
 		"\n"
-		"bool GeoCal::PosCsephb::is_cf() const\n"
 		"GeoCal::PosCsephb::is_cf\n"
-		"True if data is CartesianFixed.\n"
-		"If false, then data is CartesianInertial. \n"
+		"True if data is CartesianFixed.  \n"
+		"\n"
+		"If false, then data is CartesianInertial.  \n"
+		"\n"
 		""},
 	 { "PosCsephb__v_min_time", _wrap_PosCsephb__v_min_time, METH_O, "\n"
+		"PosCsephb__v_min_time(PosCsephb self) -> Time\n"
 		"\n"
-		"const Time & GeoCal::PosCsephb::min_time() const\n"
 		"GeoCal::PosCsephb::min_time\n"
-		"Minimum time we have data for.\n"
+		"Minimum time we have data for.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_max_time", _wrap_PosCsephb__v_max_time, METH_O, "\n"
+		"PosCsephb__v_max_time(PosCsephb self) -> Time\n"
 		"\n"
-		"Time GeoCal::PosCsephb::max_time() const\n"
 		"GeoCal::PosCsephb::max_time\n"
-		"Maximum time we have data for.\n"
+		"Maximum time we have data for.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_time_step", _wrap_PosCsephb__v_time_step, METH_O, "\n"
+		"PosCsephb__v_time_step(PosCsephb self) -> double\n"
 		"\n"
-		"double GeoCal::PosCsephb::time_step() const\n"
 		"GeoCal::PosCsephb::time_step\n"
-		"Time step between position data, in seconds.\n"
+		"Time step between position data, in seconds.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_interpolation_type", _wrap_PosCsephb__v_interpolation_type, METH_VARARGS, "\n"
+		"PosCsephb__v_interpolation_type(PosCsephb self) -> GeoCal::PosCsephb::InterpolationType\n"
+		"PosCsephb__v_interpolation_type(PosCsephb self, GeoCal::PosCsephb::InterpolationType const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::interpolation_type(InterpolationType Itype)\n"
 		"GeoCal::PosCsephb::interpolation_type\n"
 		""},
 	 { "PosCsephb__v_ephemeris_data_quality", _wrap_PosCsephb__v_ephemeris_data_quality, METH_VARARGS, "\n"
+		"PosCsephb__v_ephemeris_data_quality(PosCsephb self) -> GeoCal::PosCsephb::EphemerisDataQuality\n"
+		"PosCsephb__v_ephemeris_data_quality(PosCsephb self, GeoCal::PosCsephb::EphemerisDataQuality const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::ephemeris_data_quality(EphemerisDataQuality E_quality)\n"
 		"GeoCal::PosCsephb::ephemeris_data_quality\n"
 		""},
 	 { "PosCsephb__v_ephemeris_source", _wrap_PosCsephb__v_ephemeris_source, METH_VARARGS, "\n"
+		"PosCsephb__v_ephemeris_source(PosCsephb self) -> GeoCal::PosCsephb::EphemerisSource\n"
+		"PosCsephb__v_ephemeris_source(PosCsephb self, GeoCal::PosCsephb::EphemerisSource const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::ephemeris_source(EphemerisSource E_source)\n"
 		"GeoCal::PosCsephb::ephemeris_source\n"
 		""},
 	 { "PosCsephb__v_lagrange_order", _wrap_PosCsephb__v_lagrange_order, METH_VARARGS, "\n"
+		"PosCsephb__v_lagrange_order(PosCsephb self) -> GeoCal::PosCsephb::LagrangeOrder\n"
+		"PosCsephb__v_lagrange_order(PosCsephb self, GeoCal::PosCsephb::LagrangeOrder const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::lagrange_order(LagrangeOrder Lagrange_order)\n"
 		"GeoCal::PosCsephb::lagrange_order\n"
 		""},
 	 { "PosCsephb__v_id", _wrap_PosCsephb__v_id, METH_VARARGS, "\n"
+		"PosCsephb__v_id(PosCsephb self) -> std::string\n"
+		"PosCsephb__v_id(PosCsephb self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::id(const std::string &V)\n"
 		"GeoCal::PosCsephb::id\n"
 		""},
 	 { "PosCsephb__v_position_data", _wrap_PosCsephb__v_position_data, METH_O, "\n"
+		"PosCsephb__v_position_data(PosCsephb self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::PosCsephb::position_data() const\n"
 		"GeoCal::PosCsephb::position_data\n"
-		"Raw data.\n"
+		"Raw data.  \n"
 		"\n"
 		""},
 	 { "PosCsephb_min_time_split", _wrap_PosCsephb_min_time_split, METH_O, "\n"
+		"PosCsephb_min_time_split(PosCsephb self)\n"
 		"\n"
-		"void PosCsephb::min_time_split(std::string &d_mtime, std::string &t_mtime) const\n"
 		"GeoCal::PosCsephb::min_time_split\n"
-		"Return min_time split into the component pieces the DES requires.\n"
+		"Return min_time split into the component pieces the DES requires.  \n"
 		"\n"
 		""},
 	 { "PosCsephb_des_write", _wrap_PosCsephb_des_write, METH_VARARGS, "\n"
+		"PosCsephb_des_write(PosCsephb self, ostream Os)\n"
 		"\n"
-		"void PosCsephb::des_write(std::ostream &Os) const\n"
 		"GeoCal::PosCsephb::des_write\n"
-		"Write out the DES data to the given stream.\n"
+		"Write out the DES data to the given stream.  \n"
 		"\n"
 		""},
 	 { "PosCsephb_des_read", _wrap_PosCsephb_des_read, METH_O, "\n"
+		"PosCsephb_des_read(istream In) -> boost::shared_ptr< GeoCal::PosCsephb >\n"
 		"\n"
-		"boost::shared_ptr< PosCsephb > PosCsephb::des_read(std::istream &In)\n"
 		"GeoCal::PosCsephb::des_read\n"
-		"Read the DES data the given stream.\n"
+		"Read the DES data the given stream.  \n"
 		"\n"
 		""},
-	 { "PosCsephb___str__", _wrap_PosCsephb___str__, METH_O, NULL},
+	 { "PosCsephb___str__", _wrap_PosCsephb___str__, METH_O, "PosCsephb___str__(PosCsephb self) -> std::string"},
 	 { "delete_PosCsephb", _wrap_delete_PosCsephb, METH_O, "\n"
+		"delete_PosCsephb(PosCsephb self)\n"
 		"\n"
-		"virtual GeoCal::PosCsephb::~PosCsephb()\n"
 		"GeoCal::PosCsephb::~PosCsephb\n"
 		""},
 	 { "PosCsephb_swigregister", PosCsephb_swigregister, METH_O, NULL},
 	 { "PosCsephb_swiginit", PosCsephb_swiginit, METH_VARARGS, NULL},
 	 { "new_AttCsattb", _wrap_new_AttCsattb, METH_VARARGS, "\n"
+		"AttCsattb(BlitzArray_double_2 Att, Time Tmin, double Tstep, bool Is_cf, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality A_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource A_source=ACTUAL)\n"
+		"AttCsattb(Orbit Orb, double Tstep, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality E_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource E_source=ACTUAL, GeoCal::AttCsattb::AttitudeType A_type=SAME_AS_ORBIT)\n"
+		"AttCsattb(Orbit Orb, Time Min_time, Time Max_time, double Tstep, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality E_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource E_source=ACTUAL, GeoCal::AttCsattb::AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"\n"
-		"AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
-		"LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
-		"A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,\n"
-		"AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"GeoCal::AttCsattb::AttCsattb\n"
-		"Constructor.\n"
-		"We sample the attitude of the given Orbit at fixed spaces times. This\n"
-		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
-		"more accurately, the largest time min_time() i * Tstep that is <=\n"
-		"max_time()). \n"
+		"Constructor.  \n"
+		"\n"
+		"We sample the attitude of the given Orbit at fixed spaces times. This version\n"
+		"goes from the min_time() of the Orbit, up to max_time() (or more accurately, the\n"
+		"largest time min_time()  \n"
+		"\n"
+		"*   i * Tstep that is <= max_time()).  \n"
+		"\n"
 		""},
 	 { "AttCsattb__v_id", _wrap_AttCsattb__v_id, METH_VARARGS, "\n"
+		"AttCsattb__v_id(AttCsattb self) -> std::string\n"
+		"AttCsattb__v_id(AttCsattb self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::id(const std::string &V)\n"
 		"GeoCal::AttCsattb::id\n"
 		""},
 	 { "AttCsattb__v_is_cf", _wrap_AttCsattb__v_is_cf, METH_O, "\n"
+		"AttCsattb__v_is_cf(AttCsattb self) -> bool\n"
 		"\n"
-		"bool GeoCal::AttCsattb::is_cf() const\n"
 		"GeoCal::AttCsattb::is_cf\n"
-		"True if data is CartesianFixed.\n"
-		"If false, then data is CartesianInertial. \n"
+		"True if data is CartesianFixed.  \n"
+		"\n"
+		"If false, then data is CartesianInertial.  \n"
+		"\n"
 		""},
 	 { "AttCsattb__v_min_time", _wrap_AttCsattb__v_min_time, METH_O, "\n"
+		"AttCsattb__v_min_time(AttCsattb self) -> Time\n"
 		"\n"
-		"const Time & GeoCal::AttCsattb::min_time() const\n"
 		"GeoCal::AttCsattb::min_time\n"
-		"Minimum time we have data for.\n"
+		"Minimum time we have data for.  \n"
 		"\n"
 		""},
 	 { "AttCsattb__v_max_time", _wrap_AttCsattb__v_max_time, METH_O, "\n"
+		"AttCsattb__v_max_time(AttCsattb self) -> Time\n"
 		"\n"
-		"Time GeoCal::AttCsattb::max_time() const\n"
 		"GeoCal::AttCsattb::max_time\n"
-		"Maximum time we have data for.\n"
+		"Maximum time we have data for.  \n"
 		"\n"
 		""},
 	 { "AttCsattb__v_time_step", _wrap_AttCsattb__v_time_step, METH_O, "\n"
+		"AttCsattb__v_time_step(AttCsattb self) -> double\n"
 		"\n"
-		"double GeoCal::AttCsattb::time_step() const\n"
 		"GeoCal::AttCsattb::time_step\n"
-		"Time step between attitude data, in seconds.\n"
+		"Time step between attitude data, in seconds.  \n"
 		"\n"
 		""},
 	 { "AttCsattb__v_interpolation_type", _wrap_AttCsattb__v_interpolation_type, METH_VARARGS, "\n"
+		"AttCsattb__v_interpolation_type(AttCsattb self) -> GeoCal::AttCsattb::InterpolationType\n"
+		"AttCsattb__v_interpolation_type(AttCsattb self, GeoCal::AttCsattb::InterpolationType const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::interpolation_type(InterpolationType Itype)\n"
 		"GeoCal::AttCsattb::interpolation_type\n"
 		""},
 	 { "AttCsattb__v_attitude_data_quality", _wrap_AttCsattb__v_attitude_data_quality, METH_VARARGS, "\n"
+		"AttCsattb__v_attitude_data_quality(AttCsattb self) -> GeoCal::AttCsattb::AttitudeDataQuality\n"
+		"AttCsattb__v_attitude_data_quality(AttCsattb self, GeoCal::AttCsattb::AttitudeDataQuality const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::attitude_data_quality(AttitudeDataQuality A_quality)\n"
 		"GeoCal::AttCsattb::attitude_data_quality\n"
 		""},
 	 { "AttCsattb__v_attitude_source", _wrap_AttCsattb__v_attitude_source, METH_VARARGS, "\n"
+		"AttCsattb__v_attitude_source(AttCsattb self) -> GeoCal::AttCsattb::AttitudeSource\n"
+		"AttCsattb__v_attitude_source(AttCsattb self, GeoCal::AttCsattb::AttitudeSource const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::attitude_source(AttitudeSource A_source)\n"
 		"GeoCal::AttCsattb::attitude_source\n"
 		""},
 	 { "AttCsattb__v_lagrange_order", _wrap_AttCsattb__v_lagrange_order, METH_VARARGS, "\n"
+		"AttCsattb__v_lagrange_order(AttCsattb self) -> GeoCal::AttCsattb::LagrangeOrder\n"
+		"AttCsattb__v_lagrange_order(AttCsattb self, GeoCal::AttCsattb::LagrangeOrder const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::lagrange_order(LagrangeOrder Lagrange_order)\n"
 		"GeoCal::AttCsattb::lagrange_order\n"
 		""},
 	 { "AttCsattb__v_attitude_data", _wrap_AttCsattb__v_attitude_data, METH_O, "\n"
+		"AttCsattb__v_attitude_data(AttCsattb self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::AttCsattb::attitude_data() const\n"
 		"GeoCal::AttCsattb::attitude_data\n"
-		"Raw data.\n"
+		"Raw data.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_att_q", _wrap_AttCsattb_att_q, METH_VARARGS, "\n"
+		"AttCsattb_att_q(AttCsattb self, Time T) -> Quaternion_double\n"
+		"AttCsattb_att_q(AttCsattb self, TimeWithDerivative T) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
 		"\n"
-		"boost::math::quaternion< AutoDerivative< double > > AttCsattb::att_q(const TimeWithDerivative &T) const\n"
 		"GeoCal::AttCsattb::att_q\n"
-		"Return attitude quaternion for the given time.\n"
+		"Return attitude quaternion for the given time.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_min_time_split", _wrap_AttCsattb_min_time_split, METH_O, "\n"
+		"AttCsattb_min_time_split(AttCsattb self)\n"
 		"\n"
-		"void AttCsattb::min_time_split(std::string &d_mtime, std::string &t_mtime) const\n"
 		"GeoCal::AttCsattb::min_time_split\n"
-		"Return min_time split into the component pieces the DES requires.\n"
+		"Return min_time split into the component pieces the DES requires.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_des_write", _wrap_AttCsattb_des_write, METH_VARARGS, "\n"
+		"AttCsattb_des_write(AttCsattb self, ostream Os)\n"
 		"\n"
-		"void AttCsattb::des_write(std::ostream &Os) const\n"
 		"GeoCal::AttCsattb::des_write\n"
-		"Write out the DES data to the given stream.\n"
+		"Write out the DES data to the given stream.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_des_read", _wrap_AttCsattb_des_read, METH_O, "\n"
+		"AttCsattb_des_read(istream In) -> boost::shared_ptr< GeoCal::AttCsattb >\n"
 		"\n"
-		"boost::shared_ptr< AttCsattb > AttCsattb::des_read(std::istream &In)\n"
 		"GeoCal::AttCsattb::des_read\n"
-		"Read the DES data the given stream.\n"
+		"Read the DES data the given stream.  \n"
 		"\n"
 		""},
-	 { "AttCsattb___str__", _wrap_AttCsattb___str__, METH_O, NULL},
+	 { "AttCsattb___str__", _wrap_AttCsattb___str__, METH_O, "AttCsattb___str__(AttCsattb self) -> std::string"},
 	 { "delete_AttCsattb", _wrap_delete_AttCsattb, METH_O, "\n"
+		"delete_AttCsattb(AttCsattb self)\n"
 		"\n"
-		"virtual GeoCal::AttCsattb::~AttCsattb()\n"
 		"GeoCal::AttCsattb::~AttCsattb\n"
 		""},
 	 { "AttCsattb_swigregister", AttCsattb_swigregister, METH_O, NULL},
 	 { "AttCsattb_swiginit", AttCsattb_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitDes", _wrap_new_OrbitDes, METH_VARARGS, "\n"
+		"OrbitDes(boost::shared_ptr< GeoCal::PosCsephb > const & Pos, boost::shared_ptr< GeoCal::AttCsattb > const & Att, int Naif_code=Ecr::EARTH_NAIF_CODE)\n"
 		"\n"
-		"OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<\n"
-		"AttCsattb > &Att, int Naif_code=Ecr::EARTH_NAIF_CODE)\n"
 		"GeoCal::OrbitDes::OrbitDes\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "OrbitDes_orbit_data", _wrap_OrbitDes_orbit_data, METH_VARARGS, "\n"
+		"OrbitDes_orbit_data(OrbitDes self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"OrbitDes_orbit_data(OrbitDes self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(Time T) const\n"
 		"GeoCal::OrbitDes::orbit_data\n"
 		""},
 	 { "OrbitDes_convert_to_ci", _wrap_OrbitDes_convert_to_ci, METH_O, "\n"
+		"OrbitDes_convert_to_ci(OrbitDes self)\n"
 		"\n"
-		"void GeoCal::OrbitDes::convert_to_ci()\n"
 		"GeoCal::OrbitDes::convert_to_ci\n"
-		"Convert PosCsephb and AttCsattb to use CartesianInertial.\n"
-		"If they already do this, then this doesn't do anything. \n"
+		"Convert PosCsephb and AttCsattb to use CartesianInertial.  \n"
+		"\n"
+		"If they already do this, then this doesn't do anything.  \n"
+		"\n"
 		""},
 	 { "OrbitDes_convert_to_cf", _wrap_OrbitDes_convert_to_cf, METH_O, "\n"
+		"OrbitDes_convert_to_cf(OrbitDes self)\n"
 		"\n"
-		"void GeoCal::OrbitDes::convert_to_cf()\n"
 		"GeoCal::OrbitDes::convert_to_cf\n"
-		"Convert PosCsephb and AttCsattb to use CartesianFixed.\n"
-		"If they already do this, then this doesn't do anything. \n"
+		"Convert PosCsephb and AttCsattb to use CartesianFixed.  \n"
+		"\n"
+		"If they already do this, then this doesn't do anything.  \n"
+		"\n"
 		""},
 	 { "OrbitDes__v_pos_csephb", _wrap_OrbitDes__v_pos_csephb, METH_O, "\n"
+		"OrbitDes__v_pos_csephb(OrbitDes self) -> boost::shared_ptr< GeoCal::PosCsephb >\n"
 		"\n"
-		"const boost::shared_ptr< PosCsephb > & GeoCal::OrbitDes::pos_csephb() const\n"
 		"GeoCal::OrbitDes::pos_csephb\n"
 		""},
 	 { "OrbitDes__v_att_csattb", _wrap_OrbitDes__v_att_csattb, METH_O, "\n"
+		"OrbitDes__v_att_csattb(OrbitDes self) -> boost::shared_ptr< GeoCal::AttCsattb >\n"
 		"\n"
-		"const boost::shared_ptr< AttCsattb > & GeoCal::OrbitDes::att_csattb() const\n"
 		"GeoCal::OrbitDes::att_csattb\n"
 		""},
 	 { "OrbitDes__v_naif_code", _wrap_OrbitDes__v_naif_code, METH_VARARGS, "\n"
+		"OrbitDes__v_naif_code(OrbitDes self) -> int\n"
+		"OrbitDes__v_naif_code(OrbitDes self, int const & V)\n"
 		"\n"
-		"void GeoCal::OrbitDes::naif_code(int V)\n"
 		"GeoCal::OrbitDes::naif_code\n"
 		""},
 	 { "delete_OrbitDes", _wrap_delete_OrbitDes, METH_O, "\n"
+		"delete_OrbitDes(OrbitDes self)\n"
 		"\n"
-		"virtual GeoCal::OrbitDes::~OrbitDes()\n"
 		"GeoCal::OrbitDes::~OrbitDes\n"
 		""},
 	 { "OrbitDes_swigregister", OrbitDes_swigregister, METH_O, NULL},
@@ -14589,287 +14617,315 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_PosCsephb", _wrap_new_PosCsephb, METH_VARARGS, "\n"
+		"PosCsephb(BlitzArray_double_2 Pos, Time Tmin, double Tstep, bool Is_cf, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL)\n"
+		"PosCsephb(Orbit Orb, double Tstep, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL, GeoCal::PosCsephb::PositionType P_type=SAME_AS_ORBIT)\n"
+		"PosCsephb(Orbit Orb, Time Min_time, Time Max_time, double Tstep, GeoCal::PosCsephb::InterpolationType Itype=LINEAR, GeoCal::PosCsephb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::PosCsephb::EphemerisDataQuality E_quality=EPHEMERIS_QUALITY_GOOD, GeoCal::PosCsephb::EphemerisSource E_source=ACTUAL, GeoCal::PosCsephb::PositionType P_type=SAME_AS_ORBIT)\n"
 		"\n"
-		"PosCsephb::PosCsephb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
-		"LagrangeOrder Lagrange_order=NO_LAGRANGE, EphemerisDataQuality\n"
-		"E_quality=EPHEMERIS_QUALITY_GOOD, EphemerisSource E_source=ACTUAL,\n"
-		"PositionType P_type=SAME_AS_ORBIT)\n"
 		"GeoCal::PosCsephb::PosCsephb\n"
-		"Constructor.\n"
-		"We sample the position of the given Orbit at fixed spaces times. This\n"
-		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
-		"more accurately, the largest time min_time() i * Tstep that is <=\n"
-		"max_time()). \n"
+		"Constructor.  \n"
+		"\n"
+		"We sample the position of the given Orbit at fixed spaces times. This version\n"
+		"goes from the min_time() of the Orbit, up to max_time() (or more accurately, the\n"
+		"largest time min_time()  \n"
+		"\n"
+		"*   i * Tstep that is <= max_time()).  \n"
+		"\n"
 		""},
 	 { "PosCsephb_pos_vel", _wrap_PosCsephb_pos_vel, METH_VARARGS, "\n"
+		"pos_vel(PosCsephb self, Time T) -> BlitzArray_double_1\n"
+		"pos_vel(PosCsephb self, TimeWithDerivative T) -> ArrayAutoDerivativeDouble_1\n"
 		"\n"
-		"blitz::Array< AutoDerivative< double >, 1 > PosCsephb::pos_vel(const TimeWithDerivative &T) const\n"
 		"GeoCal::PosCsephb::pos_vel\n"
-		"Return position and velocity for the given time.\n"
+		"Return position and velocity for the given time.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_is_cf", _wrap_PosCsephb__v_is_cf, METH_O, "\n"
+		"_v_is_cf(PosCsephb self) -> bool\n"
 		"\n"
-		"bool GeoCal::PosCsephb::is_cf() const\n"
 		"GeoCal::PosCsephb::is_cf\n"
-		"True if data is CartesianFixed.\n"
-		"If false, then data is CartesianInertial. \n"
+		"True if data is CartesianFixed.  \n"
+		"\n"
+		"If false, then data is CartesianInertial.  \n"
+		"\n"
 		""},
 	 { "PosCsephb__v_min_time", _wrap_PosCsephb__v_min_time, METH_O, "\n"
+		"_v_min_time(PosCsephb self) -> Time\n"
 		"\n"
-		"const Time & GeoCal::PosCsephb::min_time() const\n"
 		"GeoCal::PosCsephb::min_time\n"
-		"Minimum time we have data for.\n"
+		"Minimum time we have data for.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_max_time", _wrap_PosCsephb__v_max_time, METH_O, "\n"
+		"_v_max_time(PosCsephb self) -> Time\n"
 		"\n"
-		"Time GeoCal::PosCsephb::max_time() const\n"
 		"GeoCal::PosCsephb::max_time\n"
-		"Maximum time we have data for.\n"
+		"Maximum time we have data for.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_time_step", _wrap_PosCsephb__v_time_step, METH_O, "\n"
+		"_v_time_step(PosCsephb self) -> double\n"
 		"\n"
-		"double GeoCal::PosCsephb::time_step() const\n"
 		"GeoCal::PosCsephb::time_step\n"
-		"Time step between position data, in seconds.\n"
+		"Time step between position data, in seconds.  \n"
 		"\n"
 		""},
 	 { "PosCsephb__v_interpolation_type", _wrap_PosCsephb__v_interpolation_type, METH_VARARGS, "\n"
+		"_v_interpolation_type(PosCsephb self) -> GeoCal::PosCsephb::InterpolationType\n"
+		"_v_interpolation_type(PosCsephb self, GeoCal::PosCsephb::InterpolationType const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::interpolation_type(InterpolationType Itype)\n"
 		"GeoCal::PosCsephb::interpolation_type\n"
 		""},
 	 { "PosCsephb__v_ephemeris_data_quality", _wrap_PosCsephb__v_ephemeris_data_quality, METH_VARARGS, "\n"
+		"_v_ephemeris_data_quality(PosCsephb self) -> GeoCal::PosCsephb::EphemerisDataQuality\n"
+		"_v_ephemeris_data_quality(PosCsephb self, GeoCal::PosCsephb::EphemerisDataQuality const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::ephemeris_data_quality(EphemerisDataQuality E_quality)\n"
 		"GeoCal::PosCsephb::ephemeris_data_quality\n"
 		""},
 	 { "PosCsephb__v_ephemeris_source", _wrap_PosCsephb__v_ephemeris_source, METH_VARARGS, "\n"
+		"_v_ephemeris_source(PosCsephb self) -> GeoCal::PosCsephb::EphemerisSource\n"
+		"_v_ephemeris_source(PosCsephb self, GeoCal::PosCsephb::EphemerisSource const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::ephemeris_source(EphemerisSource E_source)\n"
 		"GeoCal::PosCsephb::ephemeris_source\n"
 		""},
 	 { "PosCsephb__v_lagrange_order", _wrap_PosCsephb__v_lagrange_order, METH_VARARGS, "\n"
+		"_v_lagrange_order(PosCsephb self) -> GeoCal::PosCsephb::LagrangeOrder\n"
+		"_v_lagrange_order(PosCsephb self, GeoCal::PosCsephb::LagrangeOrder const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::lagrange_order(LagrangeOrder Lagrange_order)\n"
 		"GeoCal::PosCsephb::lagrange_order\n"
 		""},
 	 { "PosCsephb__v_id", _wrap_PosCsephb__v_id, METH_VARARGS, "\n"
+		"_v_id(PosCsephb self) -> std::string\n"
+		"_v_id(PosCsephb self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::PosCsephb::id(const std::string &V)\n"
 		"GeoCal::PosCsephb::id\n"
 		""},
 	 { "PosCsephb__v_position_data", _wrap_PosCsephb__v_position_data, METH_O, "\n"
+		"_v_position_data(PosCsephb self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::PosCsephb::position_data() const\n"
 		"GeoCal::PosCsephb::position_data\n"
-		"Raw data.\n"
+		"Raw data.  \n"
 		"\n"
 		""},
 	 { "PosCsephb_min_time_split", _wrap_PosCsephb_min_time_split, METH_O, "\n"
+		"min_time_split(PosCsephb self)\n"
 		"\n"
-		"void PosCsephb::min_time_split(std::string &d_mtime, std::string &t_mtime) const\n"
 		"GeoCal::PosCsephb::min_time_split\n"
-		"Return min_time split into the component pieces the DES requires.\n"
+		"Return min_time split into the component pieces the DES requires.  \n"
 		"\n"
 		""},
 	 { "PosCsephb_des_write", _wrap_PosCsephb_des_write, METH_VARARGS, "\n"
+		"des_write(PosCsephb self, ostream Os)\n"
 		"\n"
-		"void PosCsephb::des_write(std::ostream &Os) const\n"
 		"GeoCal::PosCsephb::des_write\n"
-		"Write out the DES data to the given stream.\n"
+		"Write out the DES data to the given stream.  \n"
 		"\n"
 		""},
 	 { "PosCsephb_des_read", _wrap_PosCsephb_des_read, METH_O, "\n"
+		"des_read(istream In) -> boost::shared_ptr< GeoCal::PosCsephb >\n"
 		"\n"
-		"boost::shared_ptr< PosCsephb > PosCsephb::des_read(std::istream &In)\n"
 		"GeoCal::PosCsephb::des_read\n"
-		"Read the DES data the given stream.\n"
+		"Read the DES data the given stream.  \n"
 		"\n"
 		""},
-	 { "PosCsephb___str__", _wrap_PosCsephb___str__, METH_O, NULL},
+	 { "PosCsephb___str__", _wrap_PosCsephb___str__, METH_O, "__str__(PosCsephb self) -> std::string"},
 	 { "delete_PosCsephb", _wrap_delete_PosCsephb, METH_O, "\n"
+		"delete_PosCsephb(PosCsephb self)\n"
 		"\n"
-		"virtual GeoCal::PosCsephb::~PosCsephb()\n"
 		"GeoCal::PosCsephb::~PosCsephb\n"
 		""},
 	 { "PosCsephb_swigregister", PosCsephb_swigregister, METH_O, NULL},
 	 { "PosCsephb_swiginit", PosCsephb_swiginit, METH_VARARGS, NULL},
 	 { "new_AttCsattb", _wrap_new_AttCsattb, METH_VARARGS, "\n"
+		"AttCsattb(BlitzArray_double_2 Att, Time Tmin, double Tstep, bool Is_cf, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality A_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource A_source=ACTUAL)\n"
+		"AttCsattb(Orbit Orb, double Tstep, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality E_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource E_source=ACTUAL, GeoCal::AttCsattb::AttitudeType A_type=SAME_AS_ORBIT)\n"
+		"AttCsattb(Orbit Orb, Time Min_time, Time Max_time, double Tstep, GeoCal::AttCsattb::InterpolationType Itype=LINEAR, GeoCal::AttCsattb::LagrangeOrder Lagrange_order=NO_LAGRANGE, GeoCal::AttCsattb::AttitudeDataQuality E_quality=ATTITUDE_QUALITY_GOOD, GeoCal::AttCsattb::AttitudeSource E_source=ACTUAL, GeoCal::AttCsattb::AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"\n"
-		"AttCsattb::AttCsattb(const Orbit &Orb, double Tstep, InterpolationType Itype=LINEAR,\n"
-		"LagrangeOrder Lagrange_order=NO_LAGRANGE, AttitudeDataQuality\n"
-		"A_quality=ATTITUDE_QUALITY_GOOD, AttitudeSource A_source=ACTUAL,\n"
-		"AttitudeType A_type=SAME_AS_ORBIT)\n"
 		"GeoCal::AttCsattb::AttCsattb\n"
-		"Constructor.\n"
-		"We sample the attitude of the given Orbit at fixed spaces times. This\n"
-		"version goes from the min_time() of the Orbit, up to max_time() (or\n"
-		"more accurately, the largest time min_time() i * Tstep that is <=\n"
-		"max_time()). \n"
+		"Constructor.  \n"
+		"\n"
+		"We sample the attitude of the given Orbit at fixed spaces times. This version\n"
+		"goes from the min_time() of the Orbit, up to max_time() (or more accurately, the\n"
+		"largest time min_time()  \n"
+		"\n"
+		"*   i * Tstep that is <= max_time()).  \n"
+		"\n"
 		""},
 	 { "AttCsattb__v_id", _wrap_AttCsattb__v_id, METH_VARARGS, "\n"
+		"_v_id(AttCsattb self) -> std::string\n"
+		"_v_id(AttCsattb self, std::string const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::id(const std::string &V)\n"
 		"GeoCal::AttCsattb::id\n"
 		""},
 	 { "AttCsattb__v_is_cf", _wrap_AttCsattb__v_is_cf, METH_O, "\n"
+		"_v_is_cf(AttCsattb self) -> bool\n"
 		"\n"
-		"bool GeoCal::AttCsattb::is_cf() const\n"
 		"GeoCal::AttCsattb::is_cf\n"
-		"True if data is CartesianFixed.\n"
-		"If false, then data is CartesianInertial. \n"
+		"True if data is CartesianFixed.  \n"
+		"\n"
+		"If false, then data is CartesianInertial.  \n"
+		"\n"
 		""},
 	 { "AttCsattb__v_min_time", _wrap_AttCsattb__v_min_time, METH_O, "\n"
+		"_v_min_time(AttCsattb self) -> Time\n"
 		"\n"
-		"const Time & GeoCal::AttCsattb::min_time() const\n"
 		"GeoCal::AttCsattb::min_time\n"
-		"Minimum time we have data for.\n"
+		"Minimum time we have data for.  \n"
 		"\n"
 		""},
 	 { "AttCsattb__v_max_time", _wrap_AttCsattb__v_max_time, METH_O, "\n"
+		"_v_max_time(AttCsattb self) -> Time\n"
 		"\n"
-		"Time GeoCal::AttCsattb::max_time() const\n"
 		"GeoCal::AttCsattb::max_time\n"
-		"Maximum time we have data for.\n"
+		"Maximum time we have data for.  \n"
 		"\n"
 		""},
 	 { "AttCsattb__v_time_step", _wrap_AttCsattb__v_time_step, METH_O, "\n"
+		"_v_time_step(AttCsattb self) -> double\n"
 		"\n"
-		"double GeoCal::AttCsattb::time_step() const\n"
 		"GeoCal::AttCsattb::time_step\n"
-		"Time step between attitude data, in seconds.\n"
+		"Time step between attitude data, in seconds.  \n"
 		"\n"
 		""},
 	 { "AttCsattb__v_interpolation_type", _wrap_AttCsattb__v_interpolation_type, METH_VARARGS, "\n"
+		"_v_interpolation_type(AttCsattb self) -> GeoCal::AttCsattb::InterpolationType\n"
+		"_v_interpolation_type(AttCsattb self, GeoCal::AttCsattb::InterpolationType const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::interpolation_type(InterpolationType Itype)\n"
 		"GeoCal::AttCsattb::interpolation_type\n"
 		""},
 	 { "AttCsattb__v_attitude_data_quality", _wrap_AttCsattb__v_attitude_data_quality, METH_VARARGS, "\n"
+		"_v_attitude_data_quality(AttCsattb self) -> GeoCal::AttCsattb::AttitudeDataQuality\n"
+		"_v_attitude_data_quality(AttCsattb self, GeoCal::AttCsattb::AttitudeDataQuality const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::attitude_data_quality(AttitudeDataQuality A_quality)\n"
 		"GeoCal::AttCsattb::attitude_data_quality\n"
 		""},
 	 { "AttCsattb__v_attitude_source", _wrap_AttCsattb__v_attitude_source, METH_VARARGS, "\n"
+		"_v_attitude_source(AttCsattb self) -> GeoCal::AttCsattb::AttitudeSource\n"
+		"_v_attitude_source(AttCsattb self, GeoCal::AttCsattb::AttitudeSource const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::attitude_source(AttitudeSource A_source)\n"
 		"GeoCal::AttCsattb::attitude_source\n"
 		""},
 	 { "AttCsattb__v_lagrange_order", _wrap_AttCsattb__v_lagrange_order, METH_VARARGS, "\n"
+		"_v_lagrange_order(AttCsattb self) -> GeoCal::AttCsattb::LagrangeOrder\n"
+		"_v_lagrange_order(AttCsattb self, GeoCal::AttCsattb::LagrangeOrder const & V)\n"
 		"\n"
-		"void GeoCal::AttCsattb::lagrange_order(LagrangeOrder Lagrange_order)\n"
 		"GeoCal::AttCsattb::lagrange_order\n"
 		""},
 	 { "AttCsattb__v_attitude_data", _wrap_AttCsattb__v_attitude_data, METH_O, "\n"
+		"_v_attitude_data(AttCsattb self) -> BlitzArray_double_2\n"
 		"\n"
-		"const blitz::Array< double, 2 > & GeoCal::AttCsattb::attitude_data() const\n"
 		"GeoCal::AttCsattb::attitude_data\n"
-		"Raw data.\n"
+		"Raw data.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_att_q", _wrap_AttCsattb_att_q, METH_VARARGS, "\n"
+		"att_q(AttCsattb self, Time T) -> Quaternion_double\n"
+		"att_q(AttCsattb self, TimeWithDerivative T) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
 		"\n"
-		"boost::math::quaternion< AutoDerivative< double > > AttCsattb::att_q(const TimeWithDerivative &T) const\n"
 		"GeoCal::AttCsattb::att_q\n"
-		"Return attitude quaternion for the given time.\n"
+		"Return attitude quaternion for the given time.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_min_time_split", _wrap_AttCsattb_min_time_split, METH_O, "\n"
+		"min_time_split(AttCsattb self)\n"
 		"\n"
-		"void AttCsattb::min_time_split(std::string &d_mtime, std::string &t_mtime) const\n"
 		"GeoCal::AttCsattb::min_time_split\n"
-		"Return min_time split into the component pieces the DES requires.\n"
+		"Return min_time split into the component pieces the DES requires.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_des_write", _wrap_AttCsattb_des_write, METH_VARARGS, "\n"
+		"des_write(AttCsattb self, ostream Os)\n"
 		"\n"
-		"void AttCsattb::des_write(std::ostream &Os) const\n"
 		"GeoCal::AttCsattb::des_write\n"
-		"Write out the DES data to the given stream.\n"
+		"Write out the DES data to the given stream.  \n"
 		"\n"
 		""},
 	 { "AttCsattb_des_read", _wrap_AttCsattb_des_read, METH_O, "\n"
+		"des_read(istream In) -> boost::shared_ptr< GeoCal::AttCsattb >\n"
 		"\n"
-		"boost::shared_ptr< AttCsattb > AttCsattb::des_read(std::istream &In)\n"
 		"GeoCal::AttCsattb::des_read\n"
-		"Read the DES data the given stream.\n"
+		"Read the DES data the given stream.  \n"
 		"\n"
 		""},
-	 { "AttCsattb___str__", _wrap_AttCsattb___str__, METH_O, NULL},
+	 { "AttCsattb___str__", _wrap_AttCsattb___str__, METH_O, "__str__(AttCsattb self) -> std::string"},
 	 { "delete_AttCsattb", _wrap_delete_AttCsattb, METH_O, "\n"
+		"delete_AttCsattb(AttCsattb self)\n"
 		"\n"
-		"virtual GeoCal::AttCsattb::~AttCsattb()\n"
 		"GeoCal::AttCsattb::~AttCsattb\n"
 		""},
 	 { "AttCsattb_swigregister", AttCsattb_swigregister, METH_O, NULL},
 	 { "AttCsattb_swiginit", AttCsattb_swiginit, METH_VARARGS, NULL},
 	 { "new_OrbitDes", _wrap_new_OrbitDes, METH_VARARGS, "\n"
+		"OrbitDes(boost::shared_ptr< GeoCal::PosCsephb > const & Pos, boost::shared_ptr< GeoCal::AttCsattb > const & Att, int Naif_code=Ecr::EARTH_NAIF_CODE)\n"
 		"\n"
-		"OrbitDes::OrbitDes(const boost::shared_ptr< PosCsephb > &Pos, const boost::shared_ptr<\n"
-		"AttCsattb > &Att, int Naif_code=Ecr::EARTH_NAIF_CODE)\n"
 		"GeoCal::OrbitDes::OrbitDes\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "OrbitDes_orbit_data", _wrap_OrbitDes_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(OrbitDes self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(OrbitDes self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > OrbitDes::orbit_data(Time T) const\n"
 		"GeoCal::OrbitDes::orbit_data\n"
 		""},
 	 { "OrbitDes_convert_to_ci", _wrap_OrbitDes_convert_to_ci, METH_O, "\n"
+		"convert_to_ci(OrbitDes self)\n"
 		"\n"
-		"void GeoCal::OrbitDes::convert_to_ci()\n"
 		"GeoCal::OrbitDes::convert_to_ci\n"
-		"Convert PosCsephb and AttCsattb to use CartesianInertial.\n"
-		"If they already do this, then this doesn't do anything. \n"
+		"Convert PosCsephb and AttCsattb to use CartesianInertial.  \n"
+		"\n"
+		"If they already do this, then this doesn't do anything.  \n"
+		"\n"
 		""},
 	 { "OrbitDes_convert_to_cf", _wrap_OrbitDes_convert_to_cf, METH_O, "\n"
+		"convert_to_cf(OrbitDes self)\n"
 		"\n"
-		"void GeoCal::OrbitDes::convert_to_cf()\n"
 		"GeoCal::OrbitDes::convert_to_cf\n"
-		"Convert PosCsephb and AttCsattb to use CartesianFixed.\n"
-		"If they already do this, then this doesn't do anything. \n"
+		"Convert PosCsephb and AttCsattb to use CartesianFixed.  \n"
+		"\n"
+		"If they already do this, then this doesn't do anything.  \n"
+		"\n"
 		""},
 	 { "OrbitDes__v_pos_csephb", _wrap_OrbitDes__v_pos_csephb, METH_O, "\n"
+		"_v_pos_csephb(OrbitDes self) -> boost::shared_ptr< GeoCal::PosCsephb >\n"
 		"\n"
-		"const boost::shared_ptr< PosCsephb > & GeoCal::OrbitDes::pos_csephb() const\n"
 		"GeoCal::OrbitDes::pos_csephb\n"
 		""},
 	 { "OrbitDes__v_att_csattb", _wrap_OrbitDes__v_att_csattb, METH_O, "\n"
+		"_v_att_csattb(OrbitDes self) -> boost::shared_ptr< GeoCal::AttCsattb >\n"
 		"\n"
-		"const boost::shared_ptr< AttCsattb > & GeoCal::OrbitDes::att_csattb() const\n"
 		"GeoCal::OrbitDes::att_csattb\n"
 		""},
 	 { "OrbitDes__v_naif_code", _wrap_OrbitDes__v_naif_code, METH_VARARGS, "\n"
+		"_v_naif_code(OrbitDes self) -> int\n"
+		"_v_naif_code(OrbitDes self, int const & V)\n"
 		"\n"
-		"void GeoCal::OrbitDes::naif_code(int V)\n"
 		"GeoCal::OrbitDes::naif_code\n"
 		""},
 	 { "delete_OrbitDes", _wrap_delete_OrbitDes, METH_O, "\n"
+		"delete_OrbitDes(OrbitDes self)\n"
 		"\n"
-		"virtual GeoCal::OrbitDes::~OrbitDes()\n"
 		"GeoCal::OrbitDes::~OrbitDes\n"
 		""},
 	 { "OrbitDes_swigregister", OrbitDes_swigregister, METH_O, NULL},

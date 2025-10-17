@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _cart_lab_multifile.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _cart_lab_multifile:
 _cart_lab_multifile.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _cart_lab_multifile.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,40 +145,38 @@ import geocal_swig.geocal_exception
 class CartLabMultifile(geocal_swig.raster_multifile.RasterMultifile):
     r"""
 
-    There are 2 kinds of multi-file databases that the cartlab produces.
 
-    The first uses an IBIS file to describe the file structure, this is
-    used by for example SrtmDem. This is handled by the class
-    VicarMultiFile.
+    There are 2 kinds of multi-file databases that the cartlab produces.  
 
-    The other uses a naming convention, with fixed size tiles in each
-    file. Examples are the Landsat 7 data, or the USGS DEM. This class
-    provides support for the common behavior of these types of databases.
-    For right now we assume that the data needs to be read by GDAL (so the
-    data is not VICAR format, but something like geotiff). We could relax
-    that if needed.
+    The first uses an IBIS file to describe the file structure, this is used by for
+    example SrtmDem. This is handled by the class VicarMultiFile.  
+
+    The other uses a naming convention, with fixed size tiles in each file. Examples
+    are the Landsat 7 data, or the USGS DEM. This class provides support for the
+    common behavior of these types of databases. For right now we assume that the
+    data needs to be read by GDAL (so the data is not VICAR format, but something
+    like geotiff). We could relax that if needed.  
 
     The file names are always of the form "n66e130_<extension>" or
-    "s9w62_<extension>". The coordinates in the name give something
-    close to the upper left corner of the tile covered by the at file. In
-    general this won't be the exact upper left corner, there may be some
-    offset or border added to the files (this varies from dataset to
-    dataset). Derived classes should fill in a "reference map info",
-    which is just the coordinates for a particular file (e.g., use
-    gdalinfo to find the information). We then determine the map info for
-    every other file by finding the offset relative to this reference map
-    info. We do this by the naming convention rather than just reading
-    each file and getting the map info metadata because it is much
-    quicker. See for example UsgsDem for an example of filling in this
-    information.
+    "s9w62_<extension>". The coordinates in the name give something close to the
+    upper left corner of the tile covered by the at file. In general this won't be
+    the *exact* upper left corner, there may be some offset or border added to the
+    files (this varies from dataset to dataset). Derived classes should fill in a
+    "reference map
+    info", which is just the coordinates for a particular file (e.g., use gdalinfo
+    to find the information). We then determine the map info for every other file by
+    finding the offset relative to this reference map info. We do this by the naming
+    convention rather than just reading each file and getting the map info metadata
+    because it is much quicker. See for example UsgsDem for an example of filling in
+    this information.  
 
-    Note that some databases have 0 padding in the file name (e.g, USGS
-    DEM has files like "n47w087_10m.tif"). While others don't (e.g.,
-    SRTM has file names like "n47w87_L2.hlf"). Either naming convention
-    works with this file, we actually build up the files by reading the
-    directory.
+    Note that some databases have 0 padding in the file name (e.g, USGS DEM has
+    files like "n47w087_10m.tif"). While others don't (e.g., SRTM has file names
+    like "n47w87_L2.hlf"). Either naming convention works with this file, we
+    actually build up the files by reading the directory.  
 
-    C++ includes: cart_lab_multifile.h 
+    C++ includes: cart_lab_multifile.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -206,10 +207,12 @@ _cart_lab_multifile.CartLabMultifile_swigregister(CartLabMultifile)
 class GdalCartLabMultifile(CartLabMultifile):
     r"""
 
-    This is a CartLabMultifile where we use GDAL to read each of the
-    tiles, e.g., the tiles are geotiff files.
 
-    C++ includes: cart_lab_multifile.h 
+    This is a CartLabMultifile where we use GDAL to read each of the tiles, e.g.,
+    the tiles are geotiff files.  
+
+    C++ includes: cart_lab_multifile.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -232,20 +235,20 @@ _cart_lab_multifile.GdalCartLabMultifile_swigregister(GdalCartLabMultifile)
 class VicarCartLabMultifile(CartLabMultifile):
     r"""
 
-    This is a CartLabMultifile where we use Vicar to read each of the
-    tiles.
 
-    If desired we can favor doing memory mapping when possible rather than
-    using the VICAR RTL (i.e., we use VicarLiteRasterImage).
+    This is a CartLabMultifile where we use Vicar to read each of the tiles.  
 
-    The force_area_pixel_ forces the files to be treated as "pixel as
-    area" rather than "pixel as point". This is really just meant as a
-    work around for the SRTM data, which incorrectly labels the data as
-    "point" rather than "area". Since this is a 15 meter difference,
-    it matters for many applications. Most users should just ignore this
-    value.
+    If desired we can favor doing memory mapping when possible rather than using the
+    VICAR RTL (i.e., we use VicarLiteRasterImage).  
 
-    C++ includes: cart_lab_multifile.h 
+    The force_area_pixel_ forces the files to be treated as "pixel as area" rather
+    than "pixel as point". This is really just meant as a work around for the SRTM
+    data, which incorrectly labels the data as "point" rather than "area". Since
+    this is a 15 meter difference, it matters for many applications. Most users
+    should just ignore this value.  
+
+    C++ includes: cart_lab_multifile.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -268,12 +271,14 @@ _cart_lab_multifile.VicarCartLabMultifile_swigregister(VicarCartLabMultifile)
 class VicarCartLabMultifileSetup(CartLabMultifile):
     r"""
 
-    For some one off sort of files sets, it can be useful to just fill in
-    the loc_to_file stuff directly (e.g.
 
-    with python). This supports that, it allows everything to be set up.
+    For some one off sort of files sets, it can be useful to just fill in the
+    loc_to_file stuff directly (e.g.  
 
-    C++ includes: cart_lab_multifile.h 
+    with python). This supports that, it allows everything to be set up.  
+
+    C++ includes: cart_lab_multifile.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -281,12 +286,8 @@ class VicarCartLabMultifileSetup(CartLabMultifile):
 
     def __init__(self, Minfo, Number_line_per_tile=100, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_tile=4, Favor_memory_mapped=True, No_coverage_is_error=True, No_coverage_fill_value=-1, Force_area_pixel=False):
         r"""
+        __init__(VicarCartLabMultifileSetup self, boost::shared_ptr< GeoCal::MapInfo > const Minfo, int Number_line_per_tile=100, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_tile=4, bool Favor_memory_mapped=True, bool No_coverage_is_error=True, int No_coverage_fill_value=-1, bool Force_area_pixel=False) -> VicarCartLabMultifileSetup
 
-        GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup(const boost::shared_ptr< MapInfo > Minfo, int
-        Number_line_per_tile=100, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_tile=4, bool
-        Favor_memory_mapped=true, bool No_coverage_is_error=true, int
-        No_coverage_fill_value=-1, bool Force_area_pixel=false)
         GeoCal::VicarCartLabMultifileSetup::VicarCartLabMultifileSetup
         """
         _cart_lab_multifile.VicarCartLabMultifileSetup_swiginit(self, _cart_lab_multifile.new_VicarCartLabMultifileSetup(Minfo, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_tile, Favor_memory_mapped, No_coverage_is_error, No_coverage_fill_value, Force_area_pixel))

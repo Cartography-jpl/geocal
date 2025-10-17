@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_multiple_pass.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_multiple_pass:
 _igc_multiple_pass.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_multiple_pass.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,30 +143,33 @@ import geocal_swig.geocal_exception
 class IgcMultiplePass(geocal_swig.igc_collection.IgcCollection, geocal_swig.with_parameter.WithParameterNested):
     r"""
 
-    This is a IgcCollection that stitches a collection of IgcCollection
-    together.
 
-    The use case is multiple passes , e.g., AirMSPI having multiple
-    collections in a day. Typically you will have a shared set of
-    parameters that you are jointly fitting for, e.g., fitting for the
-    camera parameters over multiple passes of AirMSPI. This class is a
-    WithParameterNested, but it doesn't automatically add anything into
-    the parameter list. The normal case is you would create the
-    IgcMultiplePass, and then add in the objects you want. For
-    example:boost::shared_ptr<IgcCollection> igc_pass1(new
-    AirMspiIgcCollection (orb1, cam, gim, Dem, l1b1_file_name1));
-    boost::shared_ptr<IgcCollection> igc_pass2(new AirMspiIgcCollection
-    (orb2, cam, gim, Dem, l1b1_file_name2)); IgcMultiplePass igc;
-    igc.add_igc(igc_pass1); igc.add_igc(igc_pass2); igc.add_object(cam);
-    igc.add_object(gim);
+    This is a IgcCollection that stitches a collection of IgcCollection together.  
 
-    The images are stacked together. So if the first IgcCollection Igc1
-    has 5 image, the second Igc2 6, the third Igc3 2 then in the
-    IgcMultiplePass image 0 is 0th image in Igc1, image 5 is the 0th image
-    in Igc2, image 12 is image 1 of Igc3. The total number of images is
-    13.
+    The use case is multiple passes , e.g., AirMSPI having multiple collections in a
+    day. Typically you will have a shared set of parameters that you are jointly
+    fitting for, e.g., fitting for the camera parameters over multiple passes of
+    AirMSPI. This class is a WithParameterNested, but it doesn't automatically add
+    anything into the parameter list. The normal case is you would create the
+    IgcMultiplePass, and then add in the objects you want. For example:  
 
-    C++ includes: igc_multiple_pass.h 
+        boost::shared_ptr<IgcCollection> igc_pass1(new AirMspiIgcCollection
+         (orb1, cam, gim, Dem, l1b1_file_name1));
+        boost::shared_ptr<IgcCollection> igc_pass2(new AirMspiIgcCollection
+         (orb2, cam, gim, Dem, l1b1_file_name2));
+        IgcMultiplePass igc;
+        igc.add_igc(igc_pass1);
+        igc.add_igc(igc_pass2);
+        igc.add_object(cam);
+        igc.add_object(gim);  
+
+    The images are stacked together. So if the first IgcCollection Igc1 has 5 image,
+    the second Igc2 6, the third Igc3 2 then in the IgcMultiplePass image 0 is 0th
+    image in Igc1, image 5 is the 0th image in Igc2, image 12 is image 1 of Igc3.
+    The total number of images is 13.  
+
+    C++ includes: igc_multiple_pass.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -171,10 +177,11 @@ class IgcMultiplePass(geocal_swig.igc_collection.IgcCollection, geocal_swig.with
 
     def __init__(self, *args):
         r"""
+        __init__(IgcMultiplePass self) -> IgcMultiplePass
+        __init__(IgcMultiplePass self, std::vector< boost::shared_ptr< GeoCal::IgcCollection >,std::allocator< boost::shared_ptr< GeoCal::IgcCollection > > > const & Igc_list) -> IgcMultiplePass
 
-        GeoCal::IgcMultiplePass::IgcMultiplePass(const std::vector< boost::shared_ptr< IgcCollection > > &Igc_list)
         GeoCal::IgcMultiplePass::IgcMultiplePass
-        Constructor that takes a list of IgcCollection to initialize with.
+        Constructor that takes a list of IgcCollection to initialize with.  
 
         """
         _igc_multiple_pass.IgcMultiplePass_swiginit(self, _igc_multiple_pass.new_IgcMultiplePass(*args))

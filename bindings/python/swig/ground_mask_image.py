@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ground_mask_image.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ground_mask_image:
 _ground_mask_image.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ground_mask_image.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,20 +143,21 @@ import geocal_swig.geocal_exception
 class GroundMaskImage(geocal_swig.ground_mask.GroundMask):
     r"""
 
-    This provides a GroundMask where the underlying data is a RasterImage.
 
-    We use the underlying map projection of the RasterImage we defining a
-    region.
+    This provides a GroundMask where the underlying data is a RasterImage.  
 
-    For any point, we look at the four neighboring pixels. If any of the
-    pixels are the mask_value, we say the point is masked, otherwise it is
-    not masked. If we are outside of the RasterImage, then we say it is
-    not masked or masked based on the flag passed in the constructor.
+    We use the underlying map projection of the RasterImage we defining a region.  
+
+    For any point, we look at the four neighboring pixels. If any of the pixels are
+    the mask_value, we say the point is masked, otherwise it is not masked. If we
+    are outside of the RasterImage, then we say it is not masked or masked based on
+    the flag passed in the constructor.  
 
     An example of this kind of Mask is the Land/Water mask used by Vicar
-    ("world_30as_lwm.img")
+    ("world_30as_lwm.img")  
 
-    C++ includes: ground_mask_image.h 
+    C++ includes: ground_mask_image.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -161,11 +165,10 @@ class GroundMaskImage(geocal_swig.ground_mask.GroundMask):
 
     def __init__(self, Img, Mask_value=0, Outside_is_masked=False):
         r"""
+        __init__(GroundMaskImage self, boost::shared_ptr< GeoCal::RasterImage > Img, int Mask_value=0, bool Outside_is_masked=False) -> GroundMaskImage
 
-        GeoCal::GroundMaskImage::GroundMaskImage(boost::shared_ptr< RasterImage > Img, int Mask_value=0, bool
-        Outside_is_masked=false)
         GeoCal::GroundMaskImage::GroundMaskImage
-        Constructor.
+        Constructor.  
 
         """
         _ground_mask_image.GroundMaskImage_swiginit(self, _ground_mask_image.new_GroundMaskImage(Img, Mask_value, Outside_is_masked))

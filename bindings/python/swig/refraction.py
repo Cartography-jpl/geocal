@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _refraction.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _refraction:
 _refraction.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _refraction.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,6 +140,7 @@ import geocal_swig.generic_object
 import geocal_swig.look_vector
 class Refraction(geocal_swig.generic_object.GenericObject):
     r"""
+
 
     C++ includes: refraction.h
 

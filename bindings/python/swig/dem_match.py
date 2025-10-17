@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _dem_match.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _dem_match:
 _dem_match.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _dem_match.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,17 +142,18 @@ import geocal_swig.geocal_exception
 class DemMatch(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This class does matching between two images, and then finds the
-    intersection of these two images.
 
-    This defines a Dem surface.
+    This class does matching between two images, and then finds the intersection of
+    these two images.  
 
-    I'm not really sure how this class should be arranged. Currently, this
-    is used by the python class DemGenerate, and this is just the part
-    that we want to have in C++. This may evolve over time, and change
-    exactly what we do here.
+    This defines a Dem surface.  
 
-    C++ includes: dem_match.h 
+    I'm not really sure how this class should be arranged. Currently, this is used
+    by the python class DemGenerate, and this is just the part that we want to have
+    in C++. This may evolve over time, and change exactly what we do here.  
+
+    C++ includes: dem_match.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,12 +161,10 @@ class DemMatch(geocal_swig.generic_object.GenericObject):
 
     def __init__(self, Match, Ray_intersect, Max_dist_good_point):
         r"""
+        __init__(DemMatch self, boost::shared_ptr< GeoCal::ImageToImageMatch > const & Match, boost::shared_ptr< GeoCal::RayIntersect > const & Ray_intersect, double Max_dist_good_point) -> DemMatch
 
-        GeoCal::DemMatch::DemMatch(const boost::shared_ptr< ImageToImageMatch > &Match, const
-        boost::shared_ptr< RayIntersect > &Ray_intersect, double
-        Max_dist_good_point)
         GeoCal::DemMatch::DemMatch
-        Constructor.
+        Constructor.  
 
         """
         _dem_match.DemMatch_swiginit(self, _dem_match.new_DemMatch(Match, Ray_intersect, Max_dist_good_point))

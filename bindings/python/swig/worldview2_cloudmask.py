@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _worldview2_cloudmask.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _worldview2_cloudmask:
 _worldview2_cloudmask.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _worldview2_cloudmask.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -142,40 +145,42 @@ import geocal_swig.geocal_exception
 class WorldView2CloudMask(geocal_swig.calc_raster.CalcRaster):
     r"""
 
-    This create a cloud mask using WorldView2 mulispectral data.
 
-    This cloud mask has two parts:
+    This create a cloud mask using WorldView2 mulispectral data.  
 
-    A simple threshold on the coastal blue band to detect clouds.
+    This cloud mask has two parts:  
 
-    A ratio comparision of (band 8 - band 1) / band 1 < threshold to
-    detect cloud shadows.
+    1.  A simple threshold on the coastal blue band to detect clouds.  
+    2.  A ratio comparision of (band 8 - band 1) / band 1 < threshold to detect
+        cloud shadows.  
 
-    To help with false positives, we have a minimum cloud size. This is
-    used to average the data, and only if the lower resolution data shows
-    a cloud or a shadow do we mark a pixel as cloudy or in shadow.
+    To help with false positives, we have a minimum cloud size. This is used to
+    average the data, and only if the lower resolution data shows a cloud or a
+    shadow do we mark a pixel as cloudy or in shadow.  
 
-    We use reflectance data. It can be convenient to scale the reflectance
-    data (e.g., go from 0 to 32767 to give half word VICAR data). This
-    class doesn't care, as long as the Cloud_threshold is scaled the same
-    way.
+    We use reflectance data. It can be convenient to scale the reflectance data
+    (e.g., go from 0 to 32767 to give half word VICAR data). This class doesn't
+    care, as long as the Cloud_threshold is scaled the same way.  
 
-    C++ includes: worldview2_cloudmask.h 
+    C++ includes: worldview2_cloudmask.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
     CLEAR = _worldview2_cloudmask.WorldView2CloudMask_CLEAR
+    
     SHADOW = _worldview2_cloudmask.WorldView2CloudMask_SHADOW
+    
     CLOUDY = _worldview2_cloudmask.WorldView2CloudMask_CLOUDY
+    
 
     def __init__(self, Mul_spec_data, Min_cloud_size, Cloud_threshold, Shadow_threshold):
         r"""
+        __init__(WorldView2CloudMask self, RasterImageMultiBand Mul_spec_data, int Min_cloud_size, double Cloud_threshold, double Shadow_threshold) -> WorldView2CloudMask
 
-        WorldView2CloudMask::WorldView2CloudMask(const RasterImageMultiBand &Mul_spec_data, int Min_cloud_size, double
-        Cloud_threshold, double Shadow_threshold)
         GeoCal::WorldView2CloudMask::WorldView2CloudMask
-        Constructor.
+        Constructor.  
 
         """
         _worldview2_cloudmask.WorldView2CloudMask_swiginit(self, _worldview2_cloudmask.new_WorldView2CloudMask(Mul_spec_data, Min_cloud_size, Cloud_threshold, Shadow_threshold))

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _srtm_dem.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _srtm_dem:
 _srtm_dem.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _srtm_dem.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -145,12 +148,14 @@ import geocal_swig.geocal_exception
 class SrtmDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     r"""
 
-    This is used the read the SRTM data.
 
-    This gets used by SrtmDem. Although you can use this class directly,
-    generally uou'll use this through SrtmDem class.
+    This is used the read the SRTM data.  
 
-    C++ includes: srtm_dem.h 
+    This gets used by SrtmDem. Although you can use this class directly, generally
+    uou'll use this through SrtmDem class.  
+
+    C++ includes: srtm_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -158,27 +163,24 @@ class SrtmDemData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4, Favor_memory_mapped=True, Force_area_pixel=True):
         r"""
+        __init__(SrtmDemData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4, bool Favor_memory_mapped=True, bool Force_area_pixel=True) -> SrtmDemData
 
-        SrtmDemData::SrtmDemData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4, bool
-        Favor_memory_mapped=true, bool Force_area_pixel=true)
         GeoCal::SrtmDemData::SrtmDemData
-        Constructor.
-        You can provide the directory to look for SRTM DEM data, or if you
-        leave this blank we use the value of environment variable ELEV_ROOT.
+        Constructor.  
 
-        The SRTM doesn't cover the whole globe. If you ask for a point outside
-        of the area this can either be treated as an error, or alternatively
-        you can return a value of 0 instead. This is controlled by
-        No_coverage_is_error.
+        You can provide the directory to look for SRTM DEM data, or if you leave this
+        blank we use the value of environment variable ELEV_ROOT.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The SRTM doesn't cover the whole globe. If you ask for a point outside of the
+        area this can either be treated as an error, or alternatively you can return a
+        value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _srtm_dem.SrtmDemData_swiginit(self, _srtm_dem.new_SrtmDemData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped, Force_area_pixel))
 
@@ -196,9 +198,11 @@ _srtm_dem.SrtmDemData_swigregister(SrtmDemData)
 class SrtmLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
     r"""
 
-    This is used the read the SRTM LWM data.
 
-    C++ includes: srtm_dem.h 
+    This is used the read the SRTM LWM data.  
+
+    C++ includes: srtm_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -206,26 +210,23 @@ class SrtmLwmData(geocal_swig.cart_lab_multifile.VicarCartLabMultifile):
 
     def __init__(self, Dir, No_coverage_is_error=True, Number_line_per_tile=-1, Number_sample_per_tile=-1, Number_tile_each_file=4, Number_file=4, Favor_memory_mapped=True, Force_area_pixel=True):
         r"""
+        __init__(SrtmLwmData self, std::string const & Dir, bool No_coverage_is_error=True, int Number_line_per_tile=-1, int Number_sample_per_tile=-1, int Number_tile_each_file=4, int Number_file=4, bool Favor_memory_mapped=True, bool Force_area_pixel=True) -> SrtmLwmData
 
-        SrtmLwmData::SrtmLwmData(const std::string &Dir, bool No_coverage_is_error=true, int
-        Number_line_per_tile=-1, int Number_sample_per_tile=-1, int
-        Number_tile_each_file=4, int Number_file=4, bool
-        Favor_memory_mapped=true, bool Force_area_pixel=true)
         GeoCal::SrtmLwmData::SrtmLwmData
-        Constructor.
-        You provide the directory to look for SRTM LWM data.
+        Constructor.  
 
-        The SRTM doesn't cover the whole globe. If you ask for a point outside
-        of the area this can either be treated as an error, or alternatively
-        you can return a value of 0 instead. This is controlled by
-        No_coverage_is_error.
+        You provide the directory to look for SRTM LWM data.  
 
-        There are two kinds of tiling going on. At the top level, we have a
-        number of files open at one time, given by Number_file. For each file,
-        we read it with tiles with the given Number_line_per_tile x
-        Number_sample_per_tile, having up to Number_tile_each_file tiles. If
-        the Number_line_per_tile or Number_sample_per_tile is -1 we read the
-        entire file. 
+        The SRTM doesn't cover the whole globe. If you ask for a point outside of the
+        area this can either be treated as an error, or alternatively you can return a
+        value of 0 instead. This is controlled by No_coverage_is_error.  
+
+        There are two kinds of tiling going on. At the top level, we have a number of
+        files open at one time, given by Number_file. For each file, we read it with
+        tiles with the given Number_line_per_tile x Number_sample_per_tile, having up to
+        Number_tile_each_file tiles. If the Number_line_per_tile or
+        Number_sample_per_tile is -1 we read the entire file.  
+
         """
         _srtm_dem.SrtmLwmData_swiginit(self, _srtm_dem.new_SrtmLwmData(Dir, No_coverage_is_error, Number_line_per_tile, Number_sample_per_tile, Number_tile_each_file, Number_file, Favor_memory_mapped, Force_area_pixel))
 
@@ -243,27 +244,28 @@ _srtm_dem.SrtmLwmData_swigregister(SrtmLwmData)
 class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
     r"""
 
-    This class provides access to the SRTM.
 
-    Note comment from Tom about this data:
+    This class provides access to the SRTM.  
 
-    The srtm_filled data were prepared back in 2003. The goal was to
-    create a quick and dirty global data set, which means the data came
-    from a variety of sources, scales, datums, and accuracy. At that time,
-    a half pixel error was well below the threshold of concern (15-30 was
-    high resolution back then). So, point and area data were often mixed
-    in the void filling process, and some regional areas (not covered by
-    srtm) were carved into quadrangles and retained their individual pixel
-    types. I know its a mess, but the bottom line is that the data are not
-    accurate to half a pixel, which makes the 'point vs. area' discuss not
-    really relevant.
+    Note comment from Tom about this data:  
 
-    The SRTM VICAR files incorrectly label the data as "pixel is point",
-    when really this is "pixel is area". This matters, because it is a
-    1/2 pixel shift. The code overrides what the VICAR files says, and
-    treats it as "area" rather than "pixel".
+    The srtm_filled data were prepared back in 2003. The goal was to create a quick
+    and dirty global data set, which means the data came from a variety of sources,
+    scales, datums, and accuracy. At that time, a half pixel error was well below
+    the threshold of concern (15-30 was high resolution back then). So, point and
+    area data were often mixed in the void filling process, and some regional areas
+    (not covered by srtm) were carved into quadrangles and retained their individual
+    pixel types. I know its a mess, but the bottom line is that the data are not
+    accurate to half a pixel, which makes the 'point vs. area' discuss not really
+    relevant.  
 
-    C++ includes: srtm_dem.h 
+    The SRTM VICAR files incorrectly label the data as "pixel is point", when
+    really this is "pixel is area". This matters, because it is a 1/2 pixel shift.
+    The code overrides what the VICAR files says, and treats it as "area" rather
+    than "pixel".  
+
+    C++ includes: srtm_dem.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -271,15 +273,15 @@ class SrtmDem(geocal_swig.dem_map_info.DemMapInfo):
 
     def __init__(self, *args):
         r"""
+        __init__(SrtmDem self, std::string const & Dirbase="", bool Outside_dem_is_error=True, boost::shared_ptr< GeoCal::Datum > const & D=boost::shared_ptr< GeoCal::Datum >(new DatumGeoid96())) -> SrtmDem
 
-        SrtmDem::SrtmDem(const std::string &Dirbase="", bool Outside_dem_is_error=true,
-        const boost::shared_ptr< Datum > &D=boost::shared_ptr< Datum >(new
-        DatumGeoid96()))
         GeoCal::SrtmDem::SrtmDem
-        Constructor.
-        You can provide the directory where there data can be found. If you
-        leave this as a blank string, we use ${ELEV_ROOT} as the directory and
-        ${ELEV_ROOT}/L2_dem_db.int as the file. 
+        Constructor.  
+
+        You can provide the directory where there data can be found. If you leave this
+        as a blank string, we use ${ELEV_ROOT} as the directory and
+        ${ELEV_ROOT}/L2_dem_db.int as the file.  
+
         """
         _srtm_dem.SrtmDem_swiginit(self, _srtm_dem.new_SrtmDem(*args))
     elevation = _swig_new_instance_method(_srtm_dem.SrtmDem_elevation)

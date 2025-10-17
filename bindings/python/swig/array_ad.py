@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _array_ad.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _array_ad:
 _array_ad.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _array_ad.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -164,13 +167,22 @@ def np_to_array_ad(a):
     return res
 
 class ArrayAd_double_1(object):
+    r"""Proxy of C++ GeoCal::ArrayAd< double,1 > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
         r"""
+        __init__(ArrayAd_double_1 self, ArrayAutoDerivativeDouble_1 V) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, int n1, int nvar) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, int n1, int n2, int nvar) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, int n1, int n2, int n3, int nvar) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, int n1, int n2, int n3, int n4, int nvar) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, int n1, int n2, int n3, int n4, int n5, int nvar) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, BlitzArray_double_1 arg2, BlitzArray_double_2 arg3, bool Is_const=False) -> ArrayAd_double_1
+        __init__(ArrayAd_double_1 self, BlitzArray_double_1 FORCE_COPY) -> ArrayAd_double_1
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
         GeoCal::ArrayAd::ArrayAd
         """
         _array_ad.ArrayAd_double_1_swiginit(self, _array_ad.new_ArrayAd_double_1(*args))
@@ -292,13 +304,22 @@ class ArrayAd_double_1(object):
 # Register ArrayAd_double_1 in _array_ad:
 _array_ad.ArrayAd_double_1_swigregister(ArrayAd_double_1)
 class ArrayAd_double_2(object):
+    r"""Proxy of C++ GeoCal::ArrayAd< double,2 > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
         r"""
+        __init__(ArrayAd_double_2 self, blitz::Array< GeoCal::AutoDerivative< double >,2 > const & V) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, int n1, int nvar) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, int n1, int n2, int nvar) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, int n1, int n2, int n3, int nvar) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, int n1, int n2, int n3, int n4, int nvar) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, int n1, int n2, int n3, int n4, int n5, int nvar) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, BlitzArray_double_2 arg2, BlitzArray_double_3 arg3, bool Is_const=False) -> ArrayAd_double_2
+        __init__(ArrayAd_double_2 self, BlitzArray_double_2 FORCE_COPY) -> ArrayAd_double_2
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
         GeoCal::ArrayAd::ArrayAd
         """
         _array_ad.ArrayAd_double_2_swiginit(self, _array_ad.new_ArrayAd_double_2(*args))
@@ -420,13 +441,22 @@ class ArrayAd_double_2(object):
 # Register ArrayAd_double_2 in _array_ad:
 _array_ad.ArrayAd_double_2_swigregister(ArrayAd_double_2)
 class ArrayAd_double_3(object):
+    r"""Proxy of C++ GeoCal::ArrayAd< double,3 > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
         r"""
+        __init__(ArrayAd_double_3 self, blitz::Array< GeoCal::AutoDerivative< double >,3 > const & V) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, int n1, int nvar) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, int n1, int n2, int nvar) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, int n1, int n2, int n3, int nvar) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, int n1, int n2, int n3, int n4, int nvar) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, int n1, int n2, int n3, int n4, int n5, int nvar) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, BlitzArray_double_3 arg2, BlitzArray_double_4 arg3, bool Is_const=False) -> ArrayAd_double_3
+        __init__(ArrayAd_double_3 self, BlitzArray_double_3 FORCE_COPY) -> ArrayAd_double_3
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
         GeoCal::ArrayAd::ArrayAd
         """
         _array_ad.ArrayAd_double_3_swiginit(self, _array_ad.new_ArrayAd_double_3(*args))
@@ -548,13 +578,22 @@ class ArrayAd_double_3(object):
 # Register ArrayAd_double_3 in _array_ad:
 _array_ad.ArrayAd_double_3_swigregister(ArrayAd_double_3)
 class ArrayAd_double_4(object):
+    r"""Proxy of C++ GeoCal::ArrayAd< double,4 > class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
     def __init__(self, *args):
         r"""
+        __init__(ArrayAd_double_4 self, blitz::Array< GeoCal::AutoDerivative< double >,4 > const & V) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, int n1, int nvar) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, int n1, int n2, int nvar) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, int n1, int n2, int n3, int nvar) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, int n1, int n2, int n3, int n4, int nvar) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, int n1, int n2, int n3, int n4, int n5, int nvar) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, BlitzArray_double_4 arg2, BlitzArray_double_5 arg3, bool Is_const=False) -> ArrayAd_double_4
+        __init__(ArrayAd_double_4 self, BlitzArray_double_4 FORCE_COPY) -> ArrayAd_double_4
 
-        GeoCal::ArrayAd< T, D >::ArrayAd(int n1, int nvar)
         GeoCal::ArrayAd::ArrayAd
         """
         _array_ad.ArrayAd_double_4_swiginit(self, _array_ad.new_ArrayAd_double_4(*args))

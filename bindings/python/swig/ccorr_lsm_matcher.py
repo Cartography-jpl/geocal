@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _ccorr_lsm_matcher.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _ccorr_lsm_matcher:
 _ccorr_lsm_matcher.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _ccorr_lsm_matcher.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,13 +143,15 @@ import geocal_swig.geocal_exception
 class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
     r"""
 
-    This class performs image matching.
 
-    It first does a cross correlation match using CcorrMatcher to get to
-    within a pixel, and then follows up with a least squares match using
-    LsmMatcher to get subpixel accuracy.
+    This class performs image matching.  
 
-    C++ includes: ccorr_lsm_matcher.h 
+    It first does a cross correlation match using CcorrMatcher to get to within a
+    pixel, and then follows up with a least squares match using LsmMatcher to get
+    subpixel accuracy.  
+
+    C++ includes: ccorr_lsm_matcher.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -154,19 +159,21 @@ class CcorrLsmMatcher(geocal_swig.image_matcher.ImageMatcher):
 
     def __init__(self, *args):
         r"""
+        __init__(CcorrLsmMatcher self, bool Accept_ccorr_only=False) -> CcorrLsmMatcher
+        __init__(CcorrLsmMatcher self, boost::shared_ptr< GeoCal::ImageMatcher > const Ccorr, boost::shared_ptr< GeoCal::ImageMatcher > const LsmMatcher, bool Accept_ccorr_only=False) -> CcorrLsmMatcher
 
-        GeoCal::CcorrLsmMatcher::CcorrLsmMatcher(const boost::shared_ptr< ImageMatcher > &Ccorr, const
-        boost::shared_ptr< ImageMatcher > &Lsm, bool Accept_ccorr_only=false)
         GeoCal::CcorrLsmMatcher::CcorrLsmMatcher
-        Constructor.
-        This takes the CcorrMatcher and LsmMatcher, which allows you to use
-        something other than the default values for the construction of these.
+        Constructor.  
 
-        There are two possibilities when a LSM fails. We can either have the
-        whole match fail, or alternatively we can fall back on doing the Cccor
-        only. The choice depends on how you are using the matches - are more
-        matches of ok quality important, or do you only want the best possible
-        matches as the cost of some coverage? 
+        This takes the CcorrMatcher and LsmMatcher, which allows you to use something
+        other than the default values for the construction of these.  
+
+        There are two possibilities when a LSM fails. We can either have the whole match
+        fail, or alternatively we can fall back on doing the Cccor only. The choice
+        depends on how you are using the matches - are more matches of ok quality
+        important, or do you only want the best possible matches as the cost of some
+        coverage?  
+
         """
         _ccorr_lsm_matcher.CcorrLsmMatcher_swiginit(self, _ccorr_lsm_matcher.new_CcorrLsmMatcher(*args))
     _v_ccorr_matcher = _swig_new_instance_method(_ccorr_lsm_matcher.CcorrLsmMatcher__v_ccorr_matcher)

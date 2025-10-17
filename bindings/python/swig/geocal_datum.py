@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _geocal_datum.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _geocal_datum:
 _geocal_datum.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _geocal_datum.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,10 +140,12 @@ import geocal_swig.generic_object
 class Datum(geocal_swig.generic_object.GenericObject):
     r"""
 
-    This is a Datum, which returns the distance from mean sea level to a
-    reference ellipsoid.
 
-    C++ includes: geocal_datum.h 
+    This is a Datum, which returns the distance from mean sea level to a reference
+    ellipsoid.  
+
+    C++ includes: geocal_datum.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -157,13 +162,14 @@ _geocal_datum.Datum_swigregister(Datum)
 class SimpleDatum(Datum):
     r"""
 
-    This is a Datum which returns a constant undulation everywhere.
 
-    This is useful for testing, and also in the case you are using a Dem
-    with height already relative to the reference surface, so no Datum
-    correction is needed.
+    This is a Datum which returns a constant undulation everywhere.  
 
-    C++ includes: geocal_datum.h 
+    This is useful for testing, and also in the case you are using a Dem with height
+    already relative to the reference surface, so no Datum correction is needed.  
+
+    C++ includes: geocal_datum.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -171,10 +177,10 @@ class SimpleDatum(Datum):
 
     def __init__(self, U=0.0):
         r"""
+        __init__(SimpleDatum self, double U=0.0) -> SimpleDatum
 
-        GeoCal::SimpleDatum::SimpleDatum(double U=0.0)
         GeoCal::SimpleDatum::SimpleDatum
-        Constructor.
+        Constructor.  
 
         """
         _geocal_datum.SimpleDatum_swiginit(self, _geocal_datum.new_SimpleDatum(U))

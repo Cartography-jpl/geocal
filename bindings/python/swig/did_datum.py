@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _did_datum.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _did_datum:
 _did_datum.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _did_datum.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,9 +141,11 @@ import geocal_swig.generic_object
 class DidDatum(geocal_swig.geocal_datum.Datum):
     r"""
 
-    This is a Datum used for the the DID.
 
-    C++ includes: did_datum.h 
+    This is a Datum used for the the DID.  
+
+    C++ includes: did_datum.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -148,12 +153,14 @@ class DidDatum(geocal_swig.geocal_datum.Datum):
 
     def __init__(self, Fname):
         r"""
+        __init__(DidDatum self, std::string const & Fname) -> DidDatum
 
-        DidDatum::DidDatum(const std::string &Fname)
         GeoCal::DidDatum::DidDatum
-        This creates a DidDatum.
+        This creates a DidDatum.  
+
         This takes the name of the mean sea level data, i.e.,
-        /data/bank/anc/DID/MeanSeaLevel/current/geoid_2160h_4320w.half 
+        /data/bank/anc/DID/MeanSeaLevel/current/geoid_2160h_4320w.half  
+
         """
         _did_datum.DidDatum_swiginit(self, _did_datum.new_DidDatum(Fname))
     _v_file_name = _swig_new_instance_method(_did_datum.DidDatum__v_file_name)

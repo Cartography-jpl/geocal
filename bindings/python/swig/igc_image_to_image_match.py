@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _igc_image_to_image_match.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _igc_image_to_image_match:
 _igc_image_to_image_match.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _igc_image_to_image_match.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -140,10 +143,12 @@ import geocal_swig.geocal_exception
 class IgcImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatch):
     r"""
 
-    ImageToImageMatch where the images and prediction comes from
-    ImageGroundConnection objects.
 
-    C++ includes: igc_image_to_image_match.h 
+    ImageToImageMatch where the images and prediction comes from
+    ImageGroundConnection objects.  
+
+    C++ includes: igc_image_to_image_match.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -151,10 +156,8 @@ class IgcImageToImageMatch(geocal_swig.image_to_image_match.ImageToImageMatch):
 
     def __init__(self, Igc1, Igc2, Match):
         r"""
+        __init__(IgcImageToImageMatch self, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc1, boost::shared_ptr< GeoCal::ImageGroundConnection > const & Igc2, boost::shared_ptr< GeoCal::ImageMatcher > const & Match) -> IgcImageToImageMatch
 
-        GeoCal::IgcImageToImageMatch::IgcImageToImageMatch(const boost::shared_ptr< ImageGroundConnection > &Igc1, const
-        boost::shared_ptr< ImageGroundConnection > &Igc2, const
-        boost::shared_ptr< ImageMatcher > &Matcher)
         GeoCal::IgcImageToImageMatch::IgcImageToImageMatch
         """
         _igc_image_to_image_match.IgcImageToImageMatch_swiginit(self, _igc_image_to_image_match.new_IgcImageToImageMatch(Igc1, Igc2, Match))

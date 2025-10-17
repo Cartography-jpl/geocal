@@ -6569,58 +6569,63 @@ SWIGINTERN PyObject *RasterImageVariable_swigregister(PyObject *SWIGUNUSEDPARM(s
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RasterImageVariable_change_to_geodetic360", _wrap_RasterImageVariable_change_to_geodetic360, METH_O, "\n"
+		"RasterImageVariable_change_to_geodetic360(RasterImageVariable self)\n"
 		"\n"
-		"virtual void GeoCal::RasterImageVariable::change_to_geodetic360()\n"
 		"GeoCal::RasterImageVariable::change_to_geodetic360\n"
-		"We need special handling for maps that are crossing the dateline.\n"
-		"For most projections this isn't an issue - we just pick one that\n"
-		"doesn't do anything in particular crossing the dateline. But for the\n"
-		"special case of a Geodetic map projection, we flip signs so the point\n"
-		"with longitude -180 is right next to 179.999. To handle this, we can\n"
-		"change the map projection to work with a Geodetic360. This is really\n"
-		"the same map projection, we just label the longitude differently.\n"
+		"We need special handling for maps that are crossing the dateline.  \n"
+		"\n"
+		"For most projections this isn't an issue - we just pick one that doesn't do\n"
+		"anything in particular crossing the dateline. But for the special case of a\n"
+		"Geodetic map projection, we flip signs so the point with longitude -180 is right\n"
+		"next to 179.999. To handle this, we can change the map projection to work with a\n"
+		"Geodetic360. This is really the same map projection, we just label the longitude\n"
+		"differently.  \n"
 		"\n"
 		"Note this is a noop if the coordinate converter is already a\n"
-		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any\n"
-		"other projection will cause an exception to be thrown. \n"
+		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any other\n"
+		"projection will cause an exception to be thrown.  \n"
+		"\n"
 		""},
 	 { "RasterImageVariable_change_to_geodetic", _wrap_RasterImageVariable_change_to_geodetic, METH_O, "\n"
+		"RasterImageVariable_change_to_geodetic(RasterImageVariable self)\n"
 		"\n"
-		"virtual void GeoCal::RasterImageVariable::change_to_geodetic()\n"
 		"GeoCal::RasterImageVariable::change_to_geodetic\n"
-		"Change back to -180 to 180.\n"
+		"Change back to -180 to 180.  \n"
 		"\n"
 		""},
 	 { "RasterImageVariable__v_is_geodetic_360", _wrap_RasterImageVariable__v_is_geodetic_360, METH_O, "\n"
+		"RasterImageVariable__v_is_geodetic_360(RasterImageVariable self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterImageVariable::is_geodetic_360() const\n"
 		"GeoCal::RasterImageVariable::is_geodetic_360\n"
-		"Simple test to see if we are Geodetic360, sometimes class need special\n"
-		"handling for this.\n"
+		"Simple test to see if we are Geodetic360, sometimes class need special handling\n"
+		"for this.  \n"
 		"\n"
 		""},
 	 { "delete_RasterImageVariable", _wrap_delete_RasterImageVariable, METH_O, "\n"
+		"delete_RasterImageVariable(RasterImageVariable self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageVariable::~RasterImageVariable()\n"
 		"GeoCal::RasterImageVariable::~RasterImageVariable\n"
 		""},
 	 { "RasterImageVariable_swigregister", RasterImageVariable_swigregister, METH_O, NULL},
@@ -6630,58 +6635,63 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "RasterImageVariable_change_to_geodetic360", _wrap_RasterImageVariable_change_to_geodetic360, METH_O, "\n"
+		"change_to_geodetic360(RasterImageVariable self)\n"
 		"\n"
-		"virtual void GeoCal::RasterImageVariable::change_to_geodetic360()\n"
 		"GeoCal::RasterImageVariable::change_to_geodetic360\n"
-		"We need special handling for maps that are crossing the dateline.\n"
-		"For most projections this isn't an issue - we just pick one that\n"
-		"doesn't do anything in particular crossing the dateline. But for the\n"
-		"special case of a Geodetic map projection, we flip signs so the point\n"
-		"with longitude -180 is right next to 179.999. To handle this, we can\n"
-		"change the map projection to work with a Geodetic360. This is really\n"
-		"the same map projection, we just label the longitude differently.\n"
+		"We need special handling for maps that are crossing the dateline.  \n"
+		"\n"
+		"For most projections this isn't an issue - we just pick one that doesn't do\n"
+		"anything in particular crossing the dateline. But for the special case of a\n"
+		"Geodetic map projection, we flip signs so the point with longitude -180 is right\n"
+		"next to 179.999. To handle this, we can change the map projection to work with a\n"
+		"Geodetic360. This is really the same map projection, we just label the longitude\n"
+		"differently.  \n"
 		"\n"
 		"Note this is a noop if the coordinate converter is already a\n"
-		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any\n"
-		"other projection will cause an exception to be thrown. \n"
+		"Geodetic360Converter, and changes if it is a GeodeticConverter. Any other\n"
+		"projection will cause an exception to be thrown.  \n"
+		"\n"
 		""},
 	 { "RasterImageVariable_change_to_geodetic", _wrap_RasterImageVariable_change_to_geodetic, METH_O, "\n"
+		"change_to_geodetic(RasterImageVariable self)\n"
 		"\n"
-		"virtual void GeoCal::RasterImageVariable::change_to_geodetic()\n"
 		"GeoCal::RasterImageVariable::change_to_geodetic\n"
-		"Change back to -180 to 180.\n"
+		"Change back to -180 to 180.  \n"
 		"\n"
 		""},
 	 { "RasterImageVariable__v_is_geodetic_360", _wrap_RasterImageVariable__v_is_geodetic_360, METH_O, "\n"
+		"_v_is_geodetic_360(RasterImageVariable self) -> bool\n"
 		"\n"
-		"bool GeoCal::RasterImageVariable::is_geodetic_360() const\n"
 		"GeoCal::RasterImageVariable::is_geodetic_360\n"
-		"Simple test to see if we are Geodetic360, sometimes class need special\n"
-		"handling for this.\n"
+		"Simple test to see if we are Geodetic360, sometimes class need special handling\n"
+		"for this.  \n"
 		"\n"
 		""},
 	 { "delete_RasterImageVariable", _wrap_delete_RasterImageVariable, METH_O, "\n"
+		"delete_RasterImageVariable(RasterImageVariable self)\n"
 		"\n"
-		"virtual GeoCal::RasterImageVariable::~RasterImageVariable()\n"
 		"GeoCal::RasterImageVariable::~RasterImageVariable\n"
 		""},
 	 { "RasterImageVariable_swigregister", RasterImageVariable_swigregister, METH_O, NULL},

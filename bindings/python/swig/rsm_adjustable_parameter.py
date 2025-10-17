@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_adjustable_parameter.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_adjustable_parameter:
 _rsm_adjustable_parameter.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_adjustable_parameter.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -138,13 +141,15 @@ import geocal_swig.with_parameter
 class RsmAdjustableParameter(geocal_swig.with_parameter.WithParameter):
     r"""
 
-    This is used to handle the RSM adjustable parameters.
 
-    There are currently two version of this, RSMAPA and RSMAPB. We handle
-    the specific versions by subclasses, this base class just gives the
-    overall interface.
+    This is used to handle the RSM adjustable parameters.  
 
-    C++ includes: rsm_adjustable_parameter.h 
+    There are currently two version of this, RSMAPA and RSMAPB. We handle the
+    specific versions by subclasses, this base class just gives the overall
+    interface.  
+
+    C++ includes: rsm_adjustable_parameter.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")

@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _rsm_adjustable_parameter_b.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _rsm_adjustable_parameter_b:
 _rsm_adjustable_parameter_b.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _rsm_adjustable_parameter_b.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,13 +144,14 @@ import geocal_swig.geocal_exception
 class RsmBParameterDesc(geocal_swig.with_parameter.WithParameter):
     r"""
 
-    It turns out the block of data that described the parameter B
-    structure (e.g.
 
-    which parameters are used) is used in several places (RSMAPB, RSMECB,
-    RSMDCA). We pull this piece out so it can get reused.
+    It turns out the block of data that described the parameter B structure (e.g.  
 
-    C++ includes: rsm_adjustable_parameter_b.h 
+    which parameters are used) is used in several places (RSMAPB, RSMECB, RSMDCA).
+    We pull this piece out so it can get reused.  
+
+    C++ includes: rsm_adjustable_parameter_b.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,11 +159,14 @@ class RsmBParameterDesc(geocal_swig.with_parameter.WithParameter):
 
     def __init__(self, *args):
         r"""
+        __init__(RsmBParameterDesc self) -> RsmBParameterDesc
+        __init__(RsmBParameterDesc self, ImageGroundConnection Igc, double H_min, double H_max) -> RsmBParameterDesc
 
-        RsmBParameterDesc::RsmBParameterDesc(const ImageGroundConnection &Igc, double H_min, double H_max)
         GeoCal::RsmBParameterDesc::RsmBParameterDesc
-        Create a RsmBParameterDesc.
-        We create a LocalRcConverter that matches the given Igc. 
+        Create a RsmBParameterDesc.  
+
+        We create a LocalRcConverter that matches the given Igc.  
+
         """
         _rsm_adjustable_parameter_b.RsmBParameterDesc_swiginit(self, _rsm_adjustable_parameter_b.new_RsmBParameterDesc(*args))
     _v_number_parameter = _swig_new_instance_method(_rsm_adjustable_parameter_b.RsmBParameterDesc__v_number_parameter)
@@ -232,11 +239,13 @@ _rsm_adjustable_parameter_b.RsmBParameterDesc_swigregister(RsmBParameterDesc)
 class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustableParameter, RsmBParameterDesc):
     r"""
 
-    This is used to handle the RSM adjustable parameters.
 
-    This supports RSMAPB.
+    This is used to handle the RSM adjustable parameters.  
 
-    C++ includes: rsm_adjustable_parameter_b.h 
+    This supports RSMAPB.  
+
+    C++ includes: rsm_adjustable_parameter_b.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -244,10 +253,9 @@ class RsmAdjustableParameterB(geocal_swig.rsm_adjustable_parameter.RsmAdjustable
 
     def __init__(self, *args):
         r"""
+        __init__(RsmAdjustableParameterB self, std::string const & Image_identifier="", std::string const & Rsm_support_data_edition="fake-1", std::string const & Triangulation_id="") -> RsmAdjustableParameterB
+        __init__(RsmAdjustableParameterB self, ImageGroundConnection Igc, double H_min, double H_max, RsmId Rsm_id, std::string const & Triangulation_id="") -> RsmAdjustableParameterB
 
-        GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB(const std::string &Image_identifier="", const std::string
-        &Rsm_support_data_edition="fake-1", const std::string
-        &Triangulation_id="")
         GeoCal::RsmAdjustableParameterB::RsmAdjustableParameterB
         """
         _rsm_adjustable_parameter_b.RsmAdjustableParameterB_swiginit(self, _rsm_adjustable_parameter_b.new_RsmAdjustableParameterB(*args))

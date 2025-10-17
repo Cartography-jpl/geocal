@@ -27828,503 +27828,565 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "OrbitData_resolution_meter", _wrap_OrbitData_resolution_meter, METH_VARARGS, "\n"
+		"OrbitData_resolution_meter(OrbitData self, Camera C, int Band=0) -> double\n"
+		"OrbitData_resolution_meter(OrbitData self, Camera C, FrameCoordinate Fc, int Band) -> double\n"
 		"\n"
-		"double OrbitData::resolution_meter(const Camera &C, int Band=0) const\n"
 		"GeoCal::OrbitData::resolution_meter\n"
-		"Calculate the approximate resolution on the ground of a given Camera\n"
-		"for this OrbitData.\n"
-		"This finds the intersection with the reference surface for the center\n"
-		"pixel of the camera, + 1 in the line and sample direction. We find the\n"
-		"difference in meters between these points, and select the maximum\n"
-		"value. \n"
+		"Calculate the approximate resolution on the ground of a given Camera for this\n"
+		"OrbitData.  \n"
+		"\n"
+		"This finds the intersection with the reference surface for the center pixel of\n"
+		"the camera, + 1 in the line and sample direction. We find the difference in\n"
+		"meters between these points, and select the maximum value.  \n"
+		"\n"
 		""},
 	 { "OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, "\n"
+		"OrbitData_ci_look_vector(OrbitData self, ScLookVector Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVector\n"
+		"OrbitData_ci_look_vector(OrbitData self, ScLookVectorWithDerivative Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
-		"Include_velocity_aberration=true) const =0\n"
 		"GeoCal::OrbitData::ci_look_vector\n"
-		"Convert from ScLookVector to CartesianInertialLookVector.\n"
+		"Convert from ScLookVector to CartesianInertialLookVector.  \n"
 		"\n"
 		""},
 	 { "OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, "\n"
+		"OrbitData_cf_look_vector(OrbitData self, ScLookVector Sl, bool Include_velocity_aberration=True) -> CartesianFixedLookVector\n"
+		"OrbitData_cf_look_vector(OrbitData self, ScLookVectorWithDerivative Sl, bool Include_velocity_aberration=True) -> CartesianFixedLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
-		"Include_velocity_aberration=true) const =0\n"
 		"GeoCal::OrbitData::cf_look_vector\n"
-		"Convert from ScLookVector to CartesianFixedLookVector.\n"
+		"Convert from ScLookVector to CartesianFixedLookVector.  \n"
 		"\n"
 		""},
 	 { "OrbitData_sc_look_vector_with_derivative", _wrap_OrbitData_sc_look_vector_with_derivative, METH_VARARGS, "\n"
+		"OrbitData_sc_look_vector_with_derivative(OrbitData self, CartesianFixed Gc, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector_with_derivative(const CartesianFixed &Gc, const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<\n"
-		"VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())\n"
-		"const =0\n"
 		"GeoCal::OrbitData::sc_look_vector_with_derivative\n"
 		""},
 	 { "OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, "\n"
+		"OrbitData_sc_look_vector(OrbitData self, CartesianFixed Gc, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> ScLookVector\n"
+		"OrbitData_sc_look_vector(OrbitData self, CartesianInertialLookVector Ci, bool Include_velocity_aberration=True) -> ScLookVector\n"
+		"OrbitData_sc_look_vector(OrbitData self, CartesianInertialLookVectorWithDerivative Ci, bool Include_velocity_aberration=True) -> ScLookVectorWithDerivative\n"
+		"OrbitData_sc_look_vector(OrbitData self, CartesianFixedLookVector Cf, bool Include_velocity_aberration=True) -> ScLookVector\n"
+		"OrbitData_sc_look_vector(OrbitData self, CartesianFixedLookVectorWithDerivative Cf, bool Include_velocity_aberration=True) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci, bool\n"
-		"Include_velocity_aberration=true) const =0\n"
 		"GeoCal::OrbitData::sc_look_vector\n"
-		"Convert from CartesianInertialLookVector to ScLookVector.\n"
+		"Convert from CartesianInertialLookVector to ScLookVector.  \n"
 		"\n"
 		""},
 	 { "OrbitData_frame_coordinate", _wrap_OrbitData_frame_coordinate, METH_VARARGS, "\n"
+		"OrbitData_frame_coordinate(OrbitData self, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinate\n"
 		"\n"
-		"FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate &Gc, const Camera &C, int Band=0, const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::OrbitData::frame_coordinate\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen.\n"
+		"Give the frame coordinates that a particular point on the ground is seen.  \n"
 		"\n"
 		""},
 	 { "OrbitData_frame_coordinate_with_derivative", _wrap_OrbitData_frame_coordinate_with_derivative, METH_VARARGS, "\n"
+		"OrbitData_frame_coordinate_with_derivative(OrbitData self, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinateWithDerivative\n"
 		"\n"
-		"FrameCoordinateWithDerivative OrbitData::frame_coordinate_with_derivative(const GroundCoordinate &Gc, const Camera &C, int Band=0, const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::OrbitData::frame_coordinate_with_derivative\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen, including derivatives wrt.\n"
-		"the parameters of the Camera and this OrbitData. \n"
+		"Give the frame coordinates that a particular point on the ground is seen,\n"
+		"including derivatives wrt.  \n"
+		"\n"
+		"the parameters of the Camera and this OrbitData.  \n"
+		"\n"
 		""},
 	 { "OrbitData_reference_surface_intersect_approximate", _wrap_OrbitData_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"OrbitData_reference_surface_intersect_approximate(OrbitData self, Camera C, FrameCoordinate Fc, int Band=0, double Height_reference_surface=0.0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > OrbitData::reference_surface_intersect_approximate(const Camera &C, const FrameCoordinate &Fc, int Band=0, double\n"
-		"Height_reference_surface=0.0, const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<\n"
-		"VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())\n"
-		"const\n"
 		"GeoCal::OrbitData::reference_surface_intersect_approximate\n"
-		"Return location on the reference surface that a particular frame\n"
-		"coordinate is seen.\n"
+		"Return location on the reference surface that a particular frame coordinate is\n"
+		"seen.  \n"
+		"\n"
 		"This is approximate, in the same way\n"
-		"CartesianFixed::reference_intersect_approximate is approximate. \n"
+		"CartesianFixed::reference_intersect_approximate is approximate.  \n"
+		"\n"
 		""},
 	 { "OrbitData__v_position_ci", _wrap_OrbitData__v_position_ci, METH_O, "\n"
+		"OrbitData__v_position_ci(OrbitData self) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::OrbitData::position_ci() const =0\n"
 		"GeoCal::OrbitData::position_ci\n"
-		"Return position as a pointer.\n"
+		"Return position as a pointer.  \n"
 		"\n"
 		""},
 	 { "OrbitData__v_position_cf", _wrap_OrbitData__v_position_cf, METH_O, "\n"
+		"OrbitData__v_position_cf(OrbitData self) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::OrbitData::position_cf() const =0\n"
 		"GeoCal::OrbitData::position_cf\n"
-		"Return position as a pointer.\n"
+		"Return position as a pointer.  \n"
 		"\n"
 		""},
 	 { "OrbitData_footprint", _wrap_OrbitData_footprint, METH_VARARGS, "\n"
+		"OrbitData_footprint(OrbitData self, Camera C, Dem D, double Resolution=30, int Band=0, double Max_height=9000) -> Vector_GroundCoordinate\n"
 		"\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > OrbitData::footprint(const Camera &C, const Dem &D, double Resolution=30, int Band=0,\n"
-		"double Max_height=9000) const\n"
 		"GeoCal::OrbitData::footprint\n"
-		"Return the footprint on the ground for the given camera and dem.\n"
-		"This just calls surface_intersect for the four corner points. \n"
+		"Return the footprint on the ground for the given camera and dem.  \n"
+		"\n"
+		"This just calls surface_intersect for the four corner points.  \n"
+		"\n"
 		""},
 	 { "OrbitData_surface_intersect", _wrap_OrbitData_surface_intersect, METH_VARARGS, "\n"
+		"OrbitData_surface_intersect(OrbitData self, Camera C, FrameCoordinate Fc, Dem D, double Resolution=30, int Band=0, double Max_height=9000, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > OrbitData::surface_intersect(const Camera &C, const FrameCoordinate &Fc, const Dem &D, double\n"
-		"Resolution=30, int Band=0, double Max_height=9000, const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::OrbitData::surface_intersect\n"
-		"Calculate the intersection with the surface.\n"
-		"Resolution is the dem postings in meters, you usually don't want this\n"
-		"much more accurate than the intrinsic accuracy of the Dem (e.g., the\n"
-		"Did is 30 meter, so resolution shouldn't be better than 30). \n"
-		""},
-	 { "OrbitData__velocity_ci", _wrap_OrbitData__velocity_ci, METH_O, NULL},
-	 { "OrbitData__velocity_ci_with_derivative", _wrap_OrbitData__velocity_ci_with_derivative, METH_O, NULL},
-	 { "OrbitData__position_ci_with_derivative", _wrap_OrbitData__position_ci_with_derivative, METH_O, NULL},
-	 { "OrbitData__position_cf_with_derivative", _wrap_OrbitData__position_cf_with_derivative, METH_O, NULL},
-	 { "OrbitData__velocity_cf", _wrap_OrbitData__velocity_cf, METH_O, NULL},
-	 { "OrbitData__velocity_cf_with_derivative", _wrap_OrbitData__velocity_cf_with_derivative, METH_O, NULL},
-	 { "OrbitData__v_time", _wrap_OrbitData__v_time, METH_O, "\n"
+		"Calculate the intersection with the surface.  \n"
 		"\n"
-		"virtual Time GeoCal::OrbitData::time() const =0\n"
+		"Resolution is the dem postings in meters, you usually don't want this much more\n"
+		"accurate than the intrinsic accuracy of the Dem (e.g., the Did is 30 meter, so\n"
+		"resolution shouldn't be better than 30).  \n"
+		"\n"
+		""},
+	 { "OrbitData__velocity_ci", _wrap_OrbitData__velocity_ci, METH_O, "OrbitData__velocity_ci(OrbitData self) -> BlitzArray_double_1"},
+	 { "OrbitData__velocity_ci_with_derivative", _wrap_OrbitData__velocity_ci_with_derivative, METH_O, "OrbitData__velocity_ci_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__position_ci_with_derivative", _wrap_OrbitData__position_ci_with_derivative, METH_O, "OrbitData__position_ci_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__position_cf_with_derivative", _wrap_OrbitData__position_cf_with_derivative, METH_O, "OrbitData__position_cf_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__velocity_cf", _wrap_OrbitData__velocity_cf, METH_O, "OrbitData__velocity_cf(OrbitData self) -> BlitzArray_double_1"},
+	 { "OrbitData__velocity_cf_with_derivative", _wrap_OrbitData__velocity_cf_with_derivative, METH_O, "OrbitData__velocity_cf_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__v_time", _wrap_OrbitData__v_time, METH_O, "\n"
+		"OrbitData__v_time(OrbitData self) -> Time\n"
+		"\n"
 		"GeoCal::OrbitData::time\n"
-		"Return Time of OrbitData.\n"
+		"Return Time of OrbitData.  \n"
 		"\n"
 		""},
 	 { "OrbitData__v_time_with_derivative", _wrap_OrbitData__v_time_with_derivative, METH_O, "\n"
+		"OrbitData__v_time_with_derivative(OrbitData self) -> TimeWithDerivative\n"
 		"\n"
-		"virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const =0\n"
 		"GeoCal::OrbitData::time_with_derivative\n"
-		"Return TimeWithDerivative of OrbitData.\n"
+		"Return TimeWithDerivative of OrbitData.  \n"
 		"\n"
 		""},
-	 { "OrbitData___str__", _wrap_OrbitData___str__, METH_O, NULL},
+	 { "OrbitData___str__", _wrap_OrbitData___str__, METH_O, "OrbitData___str__(OrbitData self) -> std::string"},
 	 { "OrbitData__v_prefer_cf", _wrap_OrbitData__v_prefer_cf, METH_O, "\n"
+		"OrbitData__v_prefer_cf(OrbitData self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::OrbitData::prefer_cf() const =0\n"
 		"GeoCal::OrbitData::prefer_cf\n"
-		"Do we prefer using CartesianFixed for the position or not?\n"
+		"Do we prefer using CartesianFixed for the position or not?  \n"
+		"\n"
 		"Note that that class can always return either CartesianFixed or\n"
 		"CartesianInertial, but one or the other might be preferred because the\n"
-		"underlying data is already in that format. \n"
+		"underlying data is already in that format.  \n"
+		"\n"
 		""},
 	 { "delete_OrbitData", _wrap_delete_OrbitData, METH_O, "\n"
+		"delete_OrbitData(OrbitData self)\n"
 		"\n"
-		"virtual GeoCal::OrbitData::~OrbitData()\n"
 		"GeoCal::OrbitData::~OrbitData\n"
 		""},
 	 { "OrbitData_swigregister", OrbitData_swigregister, METH_O, NULL},
 	 { "new_QuaternionOrbitData", _wrap_new_QuaternionOrbitData, METH_VARARGS, "\n"
+		"QuaternionOrbitData(QuaternionOrbitData Start, BoostArrayAutoDerivativeDouble_3 Pos_off, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Sc_to_sc_corr)\n"
+		"QuaternionOrbitData(QuaternionOrbitData Start, Array_double_3 Pos_off, Quaternion_double Sc_to_sc_corr)\n"
+		"QuaternionOrbitData(Time Tm, boost::shared_ptr< GeoCal::CartesianFixed > const & pos_cf, Array_double_3 vel_fixed, Quaternion_double sc_to_cf_q)\n"
+		"QuaternionOrbitData(TimeWithDerivative Tm, boost::shared_ptr< GeoCal::CartesianFixed > const & pos_cf, BoostArrayAutoDerivativeDouble_3 pos_cf_with_der, BoostArrayAutoDerivativeDouble_3 vel_fixed, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & sc_to_cf_q)\n"
+		"QuaternionOrbitData(Time Tm, boost::shared_ptr< GeoCal::CartesianInertial > const & pos_ci, Array_double_3 vel_inertial, Quaternion_double sc_to_ci_q)\n"
+		"new_QuaternionOrbitData(TimeWithDerivative Tm, boost::shared_ptr< GeoCal::CartesianInertial > const & pos_ci, BoostArrayAutoDerivativeDouble_3 pos_ci_with_der, BoostArrayAutoDerivativeDouble_3 vel_inertial, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & sc_to_ci_q) -> QuaternionOrbitData\n"
 		"\n"
-		"QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const\n"
-		"boost::array< double, 3 > &vel_inertial, const\n"
-		"boost::math::quaternion< double > &sc_to_ci_q)\n"
 		"GeoCal::QuaternionOrbitData::QuaternionOrbitData\n"
-		"Construct QuaternionOrbitData.\n"
+		"Construct QuaternionOrbitData.  \n"
+		"\n"
 		"This takes data in a CartesianInertial coordinate system (e.g., Eci\n"
-		"coordinates). \n"
+		"coordinates).  \n"
+		"\n"
 		""},
 	 { "QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, "\n"
+		"QuaternionOrbitData_ci_look_vector(QuaternionOrbitData self, ScLookVector Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVector\n"
+		"QuaternionOrbitData_ci_look_vector(QuaternionOrbitData self, ScLookVectorWithDerivative Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
-		"Include_velocity_aberration=true) const\n"
 		"GeoCal::QuaternionOrbitData::ci_look_vector\n"
-		"Convert to CartesianInertialLookVector.\n"
+		"Convert to CartesianInertialLookVector.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData_interpolate", _wrap_QuaternionOrbitData_interpolate, METH_VARARGS, "\n"
+		"QuaternionOrbitData_interpolate(QuaternionOrbitData t1, QuaternionOrbitData t2, TimeWithDerivative tm, bool Extrapolation_ok=False) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
+		"QuaternionOrbitData_interpolate(QuaternionOrbitData t1, QuaternionOrbitData t2, Time tm, bool Extrapolation_ok=False) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const\n"
-		"TimeWithDerivative &tm, bool Extrapolation_ok=false)\n"
 		"GeoCal::QuaternionOrbitData::interpolate\n"
-		"Interpolate between two QuaternionOrbitData for the given time.\n"
+		"Interpolate between two QuaternionOrbitData for the given time.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, "\n"
+		"QuaternionOrbitData__v_sc_to_ci(QuaternionOrbitData self) -> Quaternion_double\n"
+		"QuaternionOrbitData__v_sc_to_ci(QuaternionOrbitData self, Quaternion_double V)\n"
 		"\n"
-		"void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion< double > &sc_to_ci_q)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_ci\n"
-		"Set sc_to_ci.\n"
+		"Set sc_to_ci.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_ci_with_derivative", _wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative, METH_VARARGS, "\n"
+		"QuaternionOrbitData__v_sc_to_ci_with_derivative(QuaternionOrbitData self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"QuaternionOrbitData__v_sc_to_ci_with_derivative(QuaternionOrbitData self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void QuaternionOrbitData::sc_to_ci_with_derivative(const boost::math::quaternion< AutoDerivative< double > >\n"
-		"&sc_to_ci_q)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative\n"
-		"Set sc_to_ci_with_derivative.\n"
+		"Set sc_to_ci_with_derivative.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_cf", _wrap_QuaternionOrbitData__v_sc_to_cf, METH_VARARGS, "\n"
+		"QuaternionOrbitData__v_sc_to_cf(QuaternionOrbitData self) -> Quaternion_double\n"
+		"QuaternionOrbitData__v_sc_to_cf(QuaternionOrbitData self, Quaternion_double V)\n"
 		"\n"
-		"void GeoCal::QuaternionOrbitData::sc_to_cf(const boost::math::quaternion< double > &Sc_to_cf)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_cf\n"
-		"Set the quaternion used to go from spacecraft to cartesian fixed.\n"
+		"Set the quaternion used to go from spacecraft to cartesian fixed.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_cf_with_derivative", _wrap_QuaternionOrbitData__v_sc_to_cf_with_derivative, METH_VARARGS, "\n"
+		"QuaternionOrbitData__v_sc_to_cf_with_derivative(QuaternionOrbitData self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"QuaternionOrbitData__v_sc_to_cf_with_derivative(QuaternionOrbitData self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void GeoCal::QuaternionOrbitData::sc_to_cf_with_derivative(const boost::math::quaternion< AutoDerivative< double > > &Sc_to_cf)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_cf_with_derivative\n"
 		""},
 	 { "QuaternionOrbitData__v_from_cf", _wrap_QuaternionOrbitData__v_from_cf, METH_O, "\n"
+		"QuaternionOrbitData__v_from_cf(QuaternionOrbitData self) -> bool\n"
 		"\n"
-		"bool GeoCal::QuaternionOrbitData::from_cf() const\n"
 		"GeoCal::QuaternionOrbitData::from_cf\n"
-		"Was this created form the cartesian fixed version of the constructor?\n"
-		"This is intended for use by python when we pickle this object so we\n"
-		"know which constructor to call. It probably isn't of interest to\n"
-		"anything else. \n"
+		"Was this created form the cartesian fixed version of the constructor?  \n"
+		"\n"
+		"This is intended for use by python when we pickle this object so we know which\n"
+		"constructor to call. It probably isn't of interest to anything else.  \n"
+		"\n"
 		""},
 	 { "delete_QuaternionOrbitData", _wrap_delete_QuaternionOrbitData, METH_O, "\n"
+		"delete_QuaternionOrbitData(QuaternionOrbitData self)\n"
 		"\n"
-		"virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()\n"
 		"GeoCal::QuaternionOrbitData::~QuaternionOrbitData\n"
 		""},
 	 { "QuaternionOrbitData_swigregister", QuaternionOrbitData_swigregister, METH_O, NULL},
 	 { "QuaternionOrbitData_swiginit", QuaternionOrbitData_swiginit, METH_VARARGS, NULL},
-	 { "delete_ObservableOrbit", _wrap_delete_ObservableOrbit, METH_O, NULL},
-	 { "ObservableOrbit_add_observer_and_keep_reference", _wrap_ObservableOrbit_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableOrbit_add_observer", _wrap_ObservableOrbit_add_observer, METH_VARARGS, NULL},
-	 { "ObservableOrbit_remove_observer", _wrap_ObservableOrbit_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableOrbit", _wrap_delete_ObservableOrbit, METH_O, "delete_ObservableOrbit(ObservableOrbit self)"},
+	 { "ObservableOrbit_add_observer_and_keep_reference", _wrap_ObservableOrbit_add_observer_and_keep_reference, METH_VARARGS, "ObservableOrbit_add_observer_and_keep_reference(ObservableOrbit self, boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > & Obs)"},
+	 { "ObservableOrbit_add_observer", _wrap_ObservableOrbit_add_observer, METH_VARARGS, "ObservableOrbit_add_observer(ObservableOrbit self, ObserverOrbit Obs)"},
+	 { "ObservableOrbit_remove_observer", _wrap_ObservableOrbit_remove_observer, METH_VARARGS, "ObservableOrbit_remove_observer(ObservableOrbit self, ObserverOrbit Obs)"},
 	 { "ObservableOrbit_swigregister", ObservableOrbit_swigregister, METH_O, NULL},
-	 { "new_ObserverOrbit", _wrap_new_ObserverOrbit, METH_NOARGS, NULL},
-	 { "delete_ObserverOrbit", _wrap_delete_ObserverOrbit, METH_O, NULL},
-	 { "ObserverOrbit_notify_update", _wrap_ObserverOrbit_notify_update, METH_VARARGS, NULL},
-	 { "ObserverOrbit_notify_add", _wrap_ObserverOrbit_notify_add, METH_VARARGS, NULL},
-	 { "ObserverOrbit_notify_remove", _wrap_ObserverOrbit_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverOrbit", _wrap_new_ObserverOrbit, METH_NOARGS, "new_ObserverOrbit() -> ObserverOrbit"},
+	 { "delete_ObserverOrbit", _wrap_delete_ObserverOrbit, METH_O, "delete_ObserverOrbit(ObserverOrbit self)"},
+	 { "ObserverOrbit_notify_update", _wrap_ObserverOrbit_notify_update, METH_VARARGS, "ObserverOrbit_notify_update(ObserverOrbit self, Orbit Observed_object)"},
+	 { "ObserverOrbit_notify_add", _wrap_ObserverOrbit_notify_add, METH_VARARGS, "ObserverOrbit_notify_add(ObserverOrbit self, Orbit Observed_object)"},
+	 { "ObserverOrbit_notify_remove", _wrap_ObserverOrbit_notify_remove, METH_VARARGS, "ObserverOrbit_notify_remove(ObserverOrbit self, Orbit Observed_object)"},
 	 { "ObserverOrbit_swigregister", ObserverOrbit_swigregister, METH_O, NULL},
 	 { "ObserverOrbit_swiginit", ObserverOrbit_swiginit, METH_VARARGS, NULL},
 	 { "new_Orbit", _wrap_new_Orbit, METH_VARARGS, "\n"
+		"Orbit(Time Min_time=min_valid_time, Time Max_time=max_valid_time)\n"
 		"\n"
-		"GeoCal::Orbit::Orbit(Time Min_time=Time::min_valid_time, Time\n"
-		"Max_time=Time::max_valid_time)\n"
 		"GeoCal::Orbit::Orbit\n"
-		"Constructor.\n"
-		"The Orbit is valid for the given range of minimum to maximum time. \n"
+		"Constructor.  \n"
+		"\n"
+		"The Orbit is valid for the given range of minimum to maximum time.  \n"
+		"\n"
 		""},
 	 { "delete_Orbit", _wrap_delete_Orbit, METH_O, "\n"
+		"delete_Orbit(Orbit self)\n"
 		"\n"
-		"virtual GeoCal::Orbit::~Orbit()\n"
 		"GeoCal::Orbit::~Orbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
-	 { "Orbit_desc", _wrap_Orbit_desc, METH_O, NULL},
+	 { "Orbit_desc", _wrap_Orbit_desc, METH_O, "Orbit_desc(Orbit self) -> std::string"},
 	 { "Orbit_add_observer", _wrap_Orbit_add_observer, METH_VARARGS, "\n"
+		"Orbit_add_observer(Orbit self, ObserverOrbit Obs)\n"
 		"\n"
-		"virtual void GeoCal::Orbit::add_observer(Observer< Orbit > &Obs)\n"
 		"GeoCal::Orbit::add_observer\n"
 		""},
 	 { "Orbit_remove_observer", _wrap_Orbit_remove_observer, METH_VARARGS, "\n"
+		"Orbit_remove_observer(Orbit self, ObserverOrbit Obs)\n"
 		"\n"
-		"virtual void GeoCal::Orbit::remove_observer(Observer< Orbit > &Obs)\n"
 		"GeoCal::Orbit::remove_observer\n"
 		""},
 	 { "Orbit_ci_look_vector", _wrap_Orbit_ci_look_vector, METH_VARARGS, "\n"
+		"Orbit_ci_look_vector(Orbit self, Time T, ScLookVector Sl) -> CartesianInertialLookVector\n"
+		"Orbit_ci_look_vector(Orbit self, TimeWithDerivative T, ScLookVectorWithDerivative Sl) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const\n"
 		"GeoCal::Orbit::ci_look_vector\n"
-		"Convert from ScLookVector to CartesianInertialLookVector for the given\n"
-		"time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Convert from ScLookVector to CartesianInertialLookVector for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_cf_look_vector", _wrap_Orbit_cf_look_vector, METH_VARARGS, "\n"
+		"Orbit_cf_look_vector(Orbit self, Time T, ScLookVector Sl) -> CartesianFixedLookVector\n"
+		"Orbit_cf_look_vector(Orbit self, TimeWithDerivative T, ScLookVectorWithDerivative Sl) -> CartesianFixedLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const\n"
 		"GeoCal::Orbit::cf_look_vector\n"
-		"Convert from ScLookVector to CartesianFixedLookVector for the given\n"
-		"time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Convert from ScLookVector to CartesianFixedLookVector for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_frame_coordinate", _wrap_Orbit_frame_coordinate, METH_VARARGS, "\n"
+		"Orbit_frame_coordinate(Orbit self, Time T, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinate\n"
 		"\n"
-		"FrameCoordinate GeoCal::Orbit::frame_coordinate(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0,\n"
-		"const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<\n"
-		"Refraction >(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::Orbit::frame_coordinate\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen.\n"
+		"Give the frame coordinates that a particular point on the ground is seen.  \n"
 		"\n"
 		""},
 	 { "Orbit_frame_coordinate_with_derivative", _wrap_Orbit_frame_coordinate_with_derivative, METH_VARARGS, "\n"
+		"Orbit_frame_coordinate_with_derivative(Orbit self, TimeWithDerivative T, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinateWithDerivative\n"
 		"\n"
-		"FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(const TimeWithDerivative &T, const GroundCoordinate &Gc, const Camera\n"
-		"&C, int Band=0, const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<\n"
-		"VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())\n"
-		"const\n"
 		"GeoCal::Orbit::frame_coordinate_with_derivative\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen.\n"
+		"Give the frame coordinates that a particular point on the ground is seen.  \n"
 		"\n"
 		""},
 	 { "Orbit_reference_surface_intersect_approximate", _wrap_Orbit_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"Orbit_reference_surface_intersect_approximate(Orbit self, Time T, Camera C, FrameCoordinate Fc, int Band=0, double Height_reference_surface=0.0) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > GeoCal::Orbit::reference_surface_intersect_approximate(Time T, const Camera &C, const FrameCoordinate &Fc, int Band=0,\n"
-		"double Height_reference_surface=0.0) const\n"
 		"GeoCal::Orbit::reference_surface_intersect_approximate\n"
-		"Return location on the reference surface that a particular frame\n"
-		"coordinate is seen.\n"
+		"Return location on the reference surface that a particular frame coordinate is\n"
+		"seen.  \n"
+		"\n"
 		"This is approximate, in the same way\n"
-		"CartesianFixed::reference_intersect_approximate is approximate. \n"
+		"CartesianFixed::reference_intersect_approximate is approximate.  \n"
+		"\n"
 		""},
 	 { "Orbit_sc_look_vector", _wrap_Orbit_sc_look_vector, METH_VARARGS, "\n"
+		"Orbit_sc_look_vector(Orbit self, Time T, CartesianInertialLookVector Ci) -> ScLookVector\n"
+		"Orbit_sc_look_vector(Orbit self, TimeWithDerivative T, CartesianInertialLookVectorWithDerivative Ci) -> ScLookVectorWithDerivative\n"
+		"Orbit_sc_look_vector(Orbit self, Time T, CartesianFixedLookVector Cf) -> ScLookVector\n"
+		"Orbit_sc_look_vector(Orbit self, TimeWithDerivative T, CartesianFixedLookVectorWithDerivative Cf) -> ScLookVectorWithDerivative\n"
+		"Orbit_sc_look_vector(Orbit self, Time T, CartesianFixed Pt, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> ScLookVector\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianInertialLookVector &Ci) const\n"
 		"GeoCal::Orbit::sc_look_vector\n"
-		"Convert from CartesianInertialLookVector to ScLookVector for the given\n"
-		"time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Convert from CartesianInertialLookVector to ScLookVector for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_position_ci", _wrap_Orbit_position_ci, METH_VARARGS, "\n"
+		"Orbit_position_ci(Orbit self, Time T) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::Orbit::position_ci(Time T) const\n"
 		"GeoCal::Orbit::position_ci\n"
-		"Return position at given time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Return position at given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_position_cf", _wrap_Orbit_position_cf, METH_VARARGS, "\n"
+		"Orbit_position_cf(Orbit self, Time T) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::Orbit::position_cf(Time T) const\n"
 		"GeoCal::Orbit::position_cf\n"
-		"Return position at given time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Return position at given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit__v_min_time", _wrap_Orbit__v_min_time, METH_O, "\n"
+		"Orbit__v_min_time(Orbit self) -> Time\n"
 		"\n"
-		"Time GeoCal::Orbit::min_time() const\n"
 		"GeoCal::Orbit::min_time\n"
-		"Minimum time that we can return OrbitData for.\n"
+		"Minimum time that we can return OrbitData for.  \n"
 		"\n"
 		""},
 	 { "Orbit__v_max_time", _wrap_Orbit__v_max_time, METH_O, "\n"
+		"Orbit__v_max_time(Orbit self) -> Time\n"
 		"\n"
-		"Time GeoCal::Orbit::max_time() const\n"
 		"GeoCal::Orbit::max_time\n"
-		"Maximum time that we can return OrbitData for.\n"
+		"Maximum time that we can return OrbitData for.  \n"
 		"\n"
 		""},
 	 { "Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, "\n"
+		"Orbit_orbit_data(Orbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"Orbit_orbit_data(Orbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"virtual boost::shared_ptr< OrbitData > GeoCal::Orbit::orbit_data(Time T) const =0\n"
 		"GeoCal::Orbit::orbit_data\n"
-		"Return OrbitData for the given time.\n"
-		"We should have min_time() <= T < max_time(). Note for orbit models\n"
-		"that you do not need to include the derivative information for this\n"
-		"version of orbit_data (which can be a great speed up). Users that want\n"
-		"that information should call the TimeWithDerivative version. \n"
-		""},
-	 { "Orbit___str__", _wrap_Orbit___str__, METH_O, NULL},
-	 { "Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_with_derivative", _wrap_Orbit__v_parameter_with_derivative, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_name", _wrap_Orbit__v_parameter_name, METH_O, NULL},
-	 { "Orbit__v_parameter_subset", _wrap_Orbit__v_parameter_subset, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_with_derivative_subset", _wrap_Orbit__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_name_subset", _wrap_Orbit__v_parameter_name_subset, METH_O, NULL},
-	 { "Orbit__v_parameter_mask", _wrap_Orbit__v_parameter_mask, METH_O, NULL},
-	 { "Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, "\n"
+		"Return OrbitData for the given time.  \n"
 		"\n"
-		"boost::math::quaternion< double > Orbit::interpolate(const boost::math::quaternion< double > &Q1, const\n"
-		"boost::math::quaternion< double > &Q2, double toffset, double tspace)\n"
-		"GeoCal::Orbit::interpolate\n"
-		"This is a utility function for use by derived classes.\n"
-		"A common way of getting orbit data is to have discrete measurements of\n"
-		"the quaternion describing the rotation of the spacecraft. For a time t\n"
-		"between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the\n"
-		"quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This\n"
-		"function then returns Qres. We calculate this by determining the axis\n"
-		"and angle rotation that takes use from Q1 to Q2, and then do a linear\n"
-		"interpolation of that angle for the given time. \n"
+		"We should have min_time() <= T < max_time(). Note for orbit models that you do\n"
+		"*not* need to include the derivative information for this version of orbit_data\n"
+		"(which can be a great speed up). Users that want that information should call\n"
+		"the TimeWithDerivative version.  \n"
+		"\n"
 		""},
-	 { "Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, NULL},
+	 { "Orbit___str__", _wrap_Orbit___str__, METH_O, "Orbit___str__(Orbit self) -> std::string"},
+	 { "Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, "\n"
+		"Orbit__v_parameter(Orbit self) -> BlitzArray_double_1\n"
+		"Orbit__v_parameter(Orbit self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_with_derivative", _wrap_Orbit__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"Orbit__v_parameter_with_derivative(Orbit self) -> ArrayAd_double_1\n"
+		"Orbit__v_parameter_with_derivative(Orbit self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_name", _wrap_Orbit__v_parameter_name, METH_O, "Orbit__v_parameter_name(Orbit self) -> vector_string"},
+	 { "Orbit__v_parameter_subset", _wrap_Orbit__v_parameter_subset, METH_VARARGS, "\n"
+		"Orbit__v_parameter_subset(Orbit self) -> BlitzArray_double_1\n"
+		"Orbit__v_parameter_subset(Orbit self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_with_derivative_subset", _wrap_Orbit__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"Orbit__v_parameter_with_derivative_subset(Orbit self) -> ArrayAd_double_1\n"
+		"Orbit__v_parameter_with_derivative_subset(Orbit self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_name_subset", _wrap_Orbit__v_parameter_name_subset, METH_O, "Orbit__v_parameter_name_subset(Orbit self) -> vector_string"},
+	 { "Orbit__v_parameter_mask", _wrap_Orbit__v_parameter_mask, METH_O, "Orbit__v_parameter_mask(Orbit self) -> BlitzArray_bool_1"},
+	 { "Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, "\n"
+		"Orbit_interpolate(BlitzArray_double_1 P1, BlitzArray_double_1 V1, BlitzArray_double_1 P2, BlitzArray_double_1 V2, double toffset, double tspace)\n"
+		"Orbit_interpolate(ArrayAutoDerivativeDouble_1 P1, ArrayAutoDerivativeDouble_1 V1, ArrayAutoDerivativeDouble_1 P2, ArrayAutoDerivativeDouble_1 V2, AutoDerivativeDouble toffset, double tspace, ArrayAutoDerivativeDouble_1 OUTPUT1, ArrayAutoDerivativeDouble_1 OUTPUT2)\n"
+		"Orbit_interpolate(Quaternion_double Q1, Quaternion_double Q2, double toffset, double tspace) -> Quaternion_double\n"
+		"Orbit_interpolate(boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Q1, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Q2, AutoDerivativeDouble toffset, double tspace) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"\n"
+		"GeoCal::Orbit::interpolate\n"
+		"This is a utility function for use by derived classes.  \n"
+		"\n"
+		"A common way of getting orbit data is to have discrete measurements of the\n"
+		"quaternion describing the rotation of the spacecraft. For a time t between t1\n"
+		"and t2, we have Q1 as the quaternion at time t1, Q2 the quaternion at time t2,\n"
+		"tspace = t2 - t1, toffset = t - t1. This function then returns Qres. We\n"
+		"calculate this by determining the axis and angle rotation that takes use from Q1\n"
+		"to Q2, and then do a linear interpolation of that angle for the given time.  \n"
+		"\n"
+		""},
+	 { "Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, "Orbit_notify_update_do(Orbit self, Orbit Self)"},
 	 { "disown_Orbit", _wrap_disown_Orbit, METH_O, NULL},
 	 { "Orbit_swigregister", Orbit_swigregister, METH_O, NULL},
 	 { "Orbit_swiginit", Orbit_swiginit, METH_VARARGS, NULL},
 	 { "new_KeplerOrbit", _wrap_new_KeplerOrbit, METH_VARARGS, "\n"
+		"KeplerOrbit(Time Min_time=min_valid_time, Time Max_time=max_valid_time, Time Epoch=GeoCal::Time::time_pgs(173357492.32), double Semimajor_axis=7086930, double Eccentricity=0.001281620, double Inclination=98.199990, double Ra_ascending_node=255.355971130, double Ap_at_epoch=69.086962170, double Mean_anomaly_at_epoch=290.912925280)\n"
 		"\n"
-		"KeplerOrbit::KeplerOrbit(Time Min_time=Time::min_valid_time, Time\n"
-		"Max_time=Time::max_valid_time, Time\n"
-		"Epoch=Time::time_pgs(173357492.32), double Semimajor_axis=7086930,\n"
-		"double Eccentricity=0.001281620, double Inclination=98.199990, double\n"
-		"Ra_ascending_node=255.355971130, double Ap_at_epoch=69.086962170,\n"
-		"double Mean_anomaly_at_epoch=290.912925280)\n"
 		"GeoCal::KeplerOrbit::KeplerOrbit\n"
-		"Create a Kepler orbit with the given elements, valid over the given\n"
-		"time range.\n"
-		"Distances are in meters and angles are in degrees. The Epoch gives the\n"
-		"Time that the rest of the data is valid for. The default values are a\n"
-		"nominal orbit for MISR. \n"
+		"Create a Kepler orbit with the given elements, valid over the given time range.  \n"
+		"\n"
+		"Distances are in meters and angles are in degrees. The Epoch gives the Time that\n"
+		"the rest of the data is valid for. The default values are a nominal orbit for\n"
+		"MISR.  \n"
+		"\n"
 		""},
 	 { "KeplerOrbit_orbit_data", _wrap_KeplerOrbit_orbit_data, METH_VARARGS, "\n"
+		"KeplerOrbit_orbit_data(KeplerOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"KeplerOrbit_orbit_data(KeplerOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(Time T) const\n"
 		"GeoCal::KeplerOrbit::orbit_data\n"
-		"Return OrbitData for the given time.\n"
-		"We should have min_time() <= T < max_time(). Note for orbit models\n"
-		"that you do not need to include the derivative information for this\n"
-		"version of orbit_data (which can be a great speed up). Users that want\n"
-		"that information should call the TimeWithDerivative version. \n"
+		"Return OrbitData for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time(). Note for orbit models that you do\n"
+		"*not* need to include the derivative information for this version of orbit_data\n"
+		"(which can be a great speed up). Users that want that information should call\n"
+		"the TimeWithDerivative version.  \n"
+		"\n"
 		""},
 	 { "KeplerOrbit__v_epoch", _wrap_KeplerOrbit__v_epoch, METH_VARARGS, "\n"
+		"KeplerOrbit__v_epoch(KeplerOrbit self) -> Time\n"
+		"KeplerOrbit__v_epoch(KeplerOrbit self, Time V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::epoch(const Time &Epoch)\n"
 		"GeoCal::KeplerOrbit::epoch\n"
-		"Set epoch that rest of data is for.\n"
+		"Set epoch that rest of data is for.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_semimajor_axis", _wrap_KeplerOrbit__v_semimajor_axis, METH_VARARGS, "\n"
+		"KeplerOrbit__v_semimajor_axis(KeplerOrbit self) -> double\n"
+		"KeplerOrbit__v_semimajor_axis(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::semimajor_axis(double Semimajor_axis)\n"
 		"GeoCal::KeplerOrbit::semimajor_axis\n"
-		"Set semimajor axis in meters.\n"
+		"Set semimajor axis in meters.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_argument_of_perigee", _wrap_KeplerOrbit__v_argument_of_perigee, METH_VARARGS, "\n"
+		"KeplerOrbit__v_argument_of_perigee(KeplerOrbit self) -> double\n"
+		"KeplerOrbit__v_argument_of_perigee(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::argument_of_perigee(double Ap_at_epoch)\n"
 		"GeoCal::KeplerOrbit::argument_of_perigee\n"
-		"Set Argument of perigee at epoch, in degrees.\n"
+		"Set Argument of perigee at epoch, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_eccentricity", _wrap_KeplerOrbit__v_eccentricity, METH_VARARGS, "\n"
+		"KeplerOrbit__v_eccentricity(KeplerOrbit self) -> double\n"
+		"KeplerOrbit__v_eccentricity(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::eccentricity(double Eccentricity)\n"
 		"GeoCal::KeplerOrbit::eccentricity\n"
-		"Set eccentricity of orbit.\n"
+		"Set eccentricity of orbit.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_mean_anomoly", _wrap_KeplerOrbit__v_mean_anomoly, METH_VARARGS, "\n"
+		"KeplerOrbit__v_mean_anomoly(KeplerOrbit self) -> double\n"
+		"KeplerOrbit__v_mean_anomoly(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::mean_anomoly(double Mean_anomaly_at_epoch)\n"
 		"GeoCal::KeplerOrbit::mean_anomoly\n"
-		"Set mean anomoly at epoch, in degrees.\n"
+		"Set mean anomoly at epoch, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_inclination", _wrap_KeplerOrbit__v_inclination, METH_VARARGS, "\n"
+		"KeplerOrbit__v_inclination(KeplerOrbit self) -> double\n"
+		"KeplerOrbit__v_inclination(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::inclination(double Inclination)\n"
 		"GeoCal::KeplerOrbit::inclination\n"
-		"Set inclination of orbit, in degrees.\n"
+		"Set inclination of orbit, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_right_ascension", _wrap_KeplerOrbit__v_right_ascension, METH_VARARGS, "\n"
+		"KeplerOrbit__v_right_ascension(KeplerOrbit self) -> double\n"
+		"KeplerOrbit__v_right_ascension(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::right_ascension(double Ra_ascending_node)\n"
 		"GeoCal::KeplerOrbit::right_ascension\n"
-		"Set right ascension of ascending node, in degrees.\n"
+		"Set right ascension of ascending node, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_period", _wrap_KeplerOrbit__v_period, METH_O, "\n"
+		"KeplerOrbit__v_period(KeplerOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::KeplerOrbit::period() const\n"
 		"GeoCal::KeplerOrbit::period\n"
-		"Period in seconds.\n"
+		"Period in seconds.  \n"
 		"\n"
 		""},
 	 { "delete_KeplerOrbit", _wrap_delete_KeplerOrbit, METH_O, "\n"
+		"delete_KeplerOrbit(KeplerOrbit self)\n"
 		"\n"
-		"virtual GeoCal::KeplerOrbit::~KeplerOrbit()\n"
 		"GeoCal::KeplerOrbit::~KeplerOrbit\n"
 		""},
 	 { "KeplerOrbit_swigregister", KeplerOrbit_swigregister, METH_O, NULL},
 	 { "KeplerOrbit_swiginit", KeplerOrbit_swiginit, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_iterator", _wrap_Vector_QuaternionOrbitData_iterator, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___nonzero__", _wrap_Vector_QuaternionOrbitData___nonzero__, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___bool__", _wrap_Vector_QuaternionOrbitData___bool__, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___len__", _wrap_Vector_QuaternionOrbitData___len__, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___getslice__", _wrap_Vector_QuaternionOrbitData___getslice__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___setslice__", _wrap_Vector_QuaternionOrbitData___setslice__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___delslice__", _wrap_Vector_QuaternionOrbitData___delslice__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___delitem__", _wrap_Vector_QuaternionOrbitData___delitem__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___getitem__", _wrap_Vector_QuaternionOrbitData___getitem__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___setitem__", _wrap_Vector_QuaternionOrbitData___setitem__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_pop", _wrap_Vector_QuaternionOrbitData_pop, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_append", _wrap_Vector_QuaternionOrbitData_append, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_empty", _wrap_Vector_QuaternionOrbitData_empty, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_size", _wrap_Vector_QuaternionOrbitData_size, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_swap", _wrap_Vector_QuaternionOrbitData_swap, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_begin", _wrap_Vector_QuaternionOrbitData_begin, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_end", _wrap_Vector_QuaternionOrbitData_end, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_rbegin", _wrap_Vector_QuaternionOrbitData_rbegin, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_rend", _wrap_Vector_QuaternionOrbitData_rend, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_clear", _wrap_Vector_QuaternionOrbitData_clear, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_get_allocator", _wrap_Vector_QuaternionOrbitData_get_allocator, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_pop_back", _wrap_Vector_QuaternionOrbitData_pop_back, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_erase", _wrap_Vector_QuaternionOrbitData_erase, METH_VARARGS, NULL},
-	 { "new_Vector_QuaternionOrbitData", _wrap_new_Vector_QuaternionOrbitData, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_push_back", _wrap_Vector_QuaternionOrbitData_push_back, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_front", _wrap_Vector_QuaternionOrbitData_front, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_back", _wrap_Vector_QuaternionOrbitData_back, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_assign", _wrap_Vector_QuaternionOrbitData_assign, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_resize", _wrap_Vector_QuaternionOrbitData_resize, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_insert", _wrap_Vector_QuaternionOrbitData_insert, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_reserve", _wrap_Vector_QuaternionOrbitData_reserve, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_capacity", _wrap_Vector_QuaternionOrbitData_capacity, METH_O, NULL},
-	 { "delete_Vector_QuaternionOrbitData", _wrap_delete_Vector_QuaternionOrbitData, METH_O, NULL},
+	 { "Vector_QuaternionOrbitData_iterator", _wrap_Vector_QuaternionOrbitData_iterator, METH_O, "Vector_QuaternionOrbitData_iterator(Vector_QuaternionOrbitData self) -> SwigPyIterator"},
+	 { "Vector_QuaternionOrbitData___nonzero__", _wrap_Vector_QuaternionOrbitData___nonzero__, METH_O, "Vector_QuaternionOrbitData___nonzero__(Vector_QuaternionOrbitData self) -> bool"},
+	 { "Vector_QuaternionOrbitData___bool__", _wrap_Vector_QuaternionOrbitData___bool__, METH_O, "Vector_QuaternionOrbitData___bool__(Vector_QuaternionOrbitData self) -> bool"},
+	 { "Vector_QuaternionOrbitData___len__", _wrap_Vector_QuaternionOrbitData___len__, METH_O, "Vector_QuaternionOrbitData___len__(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type"},
+	 { "Vector_QuaternionOrbitData___getslice__", _wrap_Vector_QuaternionOrbitData___getslice__, METH_VARARGS, "Vector_QuaternionOrbitData___getslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j) -> Vector_QuaternionOrbitData"},
+	 { "Vector_QuaternionOrbitData___setslice__", _wrap_Vector_QuaternionOrbitData___setslice__, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData___setslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j)\n"
+		"Vector_QuaternionOrbitData___setslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j, Vector_QuaternionOrbitData v)\n"
+		""},
+	 { "Vector_QuaternionOrbitData___delslice__", _wrap_Vector_QuaternionOrbitData___delslice__, METH_VARARGS, "Vector_QuaternionOrbitData___delslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j)"},
+	 { "Vector_QuaternionOrbitData___delitem__", _wrap_Vector_QuaternionOrbitData___delitem__, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData___delitem__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i)\n"
+		"Vector_QuaternionOrbitData___delitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_QuaternionOrbitData___getitem__", _wrap_Vector_QuaternionOrbitData___getitem__, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData___getitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice) -> Vector_QuaternionOrbitData\n"
+		"Vector_QuaternionOrbitData___getitem__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &\n"
+		""},
+	 { "Vector_QuaternionOrbitData___setitem__", _wrap_Vector_QuaternionOrbitData___setitem__, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData___setitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice, Vector_QuaternionOrbitData v)\n"
+		"Vector_QuaternionOrbitData___setitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_QuaternionOrbitData___setitem__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_QuaternionOrbitData_pop", _wrap_Vector_QuaternionOrbitData_pop, METH_O, "Vector_QuaternionOrbitData_pop(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type"},
+	 { "Vector_QuaternionOrbitData_append", _wrap_Vector_QuaternionOrbitData_append, METH_VARARGS, "Vector_QuaternionOrbitData_append(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)"},
+	 { "Vector_QuaternionOrbitData_empty", _wrap_Vector_QuaternionOrbitData_empty, METH_O, "Vector_QuaternionOrbitData_empty(Vector_QuaternionOrbitData self) -> bool"},
+	 { "Vector_QuaternionOrbitData_size", _wrap_Vector_QuaternionOrbitData_size, METH_O, "Vector_QuaternionOrbitData_size(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type"},
+	 { "Vector_QuaternionOrbitData_swap", _wrap_Vector_QuaternionOrbitData_swap, METH_VARARGS, "Vector_QuaternionOrbitData_swap(Vector_QuaternionOrbitData self, Vector_QuaternionOrbitData v)"},
+	 { "Vector_QuaternionOrbitData_begin", _wrap_Vector_QuaternionOrbitData_begin, METH_O, "Vector_QuaternionOrbitData_begin(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator"},
+	 { "Vector_QuaternionOrbitData_end", _wrap_Vector_QuaternionOrbitData_end, METH_O, "Vector_QuaternionOrbitData_end(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator"},
+	 { "Vector_QuaternionOrbitData_rbegin", _wrap_Vector_QuaternionOrbitData_rbegin, METH_O, "Vector_QuaternionOrbitData_rbegin(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::reverse_iterator"},
+	 { "Vector_QuaternionOrbitData_rend", _wrap_Vector_QuaternionOrbitData_rend, METH_O, "Vector_QuaternionOrbitData_rend(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::reverse_iterator"},
+	 { "Vector_QuaternionOrbitData_clear", _wrap_Vector_QuaternionOrbitData_clear, METH_O, "Vector_QuaternionOrbitData_clear(Vector_QuaternionOrbitData self)"},
+	 { "Vector_QuaternionOrbitData_get_allocator", _wrap_Vector_QuaternionOrbitData_get_allocator, METH_O, "Vector_QuaternionOrbitData_get_allocator(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::allocator_type"},
+	 { "Vector_QuaternionOrbitData_pop_back", _wrap_Vector_QuaternionOrbitData_pop_back, METH_O, "Vector_QuaternionOrbitData_pop_back(Vector_QuaternionOrbitData self)"},
+	 { "Vector_QuaternionOrbitData_erase", _wrap_Vector_QuaternionOrbitData_erase, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData_erase(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator\n"
+		"Vector_QuaternionOrbitData_erase(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator first, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator\n"
+		""},
+	 { "new_Vector_QuaternionOrbitData", _wrap_new_Vector_QuaternionOrbitData, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData()\n"
+		"Vector_QuaternionOrbitData(Vector_QuaternionOrbitData other)\n"
+		"Vector_QuaternionOrbitData(std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type size)\n"
+		"new_Vector_QuaternionOrbitData(std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type size, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & value) -> Vector_QuaternionOrbitData\n"
+		""},
+	 { "Vector_QuaternionOrbitData_push_back", _wrap_Vector_QuaternionOrbitData_push_back, METH_VARARGS, "Vector_QuaternionOrbitData_push_back(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)"},
+	 { "Vector_QuaternionOrbitData_front", _wrap_Vector_QuaternionOrbitData_front, METH_O, "Vector_QuaternionOrbitData_front(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &"},
+	 { "Vector_QuaternionOrbitData_back", _wrap_Vector_QuaternionOrbitData_back, METH_O, "Vector_QuaternionOrbitData_back(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &"},
+	 { "Vector_QuaternionOrbitData_assign", _wrap_Vector_QuaternionOrbitData_assign, METH_VARARGS, "Vector_QuaternionOrbitData_assign(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)"},
+	 { "Vector_QuaternionOrbitData_resize", _wrap_Vector_QuaternionOrbitData_resize, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData_resize(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type new_size)\n"
+		"Vector_QuaternionOrbitData_resize(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_QuaternionOrbitData_insert", _wrap_Vector_QuaternionOrbitData_insert, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData_insert(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator\n"
+		"Vector_QuaternionOrbitData_insert(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_QuaternionOrbitData_reserve", _wrap_Vector_QuaternionOrbitData_reserve, METH_VARARGS, "Vector_QuaternionOrbitData_reserve(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n)"},
+	 { "Vector_QuaternionOrbitData_capacity", _wrap_Vector_QuaternionOrbitData_capacity, METH_O, "Vector_QuaternionOrbitData_capacity(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type"},
+	 { "delete_Vector_QuaternionOrbitData", _wrap_delete_Vector_QuaternionOrbitData, METH_O, "delete_Vector_QuaternionOrbitData(Vector_QuaternionOrbitData self)"},
 	 { "Vector_QuaternionOrbitData_swigregister", Vector_QuaternionOrbitData_swigregister, METH_O, NULL},
 	 { "Vector_QuaternionOrbitData_swiginit", Vector_QuaternionOrbitData_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -28352,503 +28414,565 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "OrbitData_resolution_meter", _wrap_OrbitData_resolution_meter, METH_VARARGS, "\n"
+		"resolution_meter(OrbitData self, Camera C, int Band=0) -> double\n"
+		"resolution_meter(OrbitData self, Camera C, FrameCoordinate Fc, int Band) -> double\n"
 		"\n"
-		"double OrbitData::resolution_meter(const Camera &C, int Band=0) const\n"
 		"GeoCal::OrbitData::resolution_meter\n"
-		"Calculate the approximate resolution on the ground of a given Camera\n"
-		"for this OrbitData.\n"
-		"This finds the intersection with the reference surface for the center\n"
-		"pixel of the camera, + 1 in the line and sample direction. We find the\n"
-		"difference in meters between these points, and select the maximum\n"
-		"value. \n"
+		"Calculate the approximate resolution on the ground of a given Camera for this\n"
+		"OrbitData.  \n"
+		"\n"
+		"This finds the intersection with the reference surface for the center pixel of\n"
+		"the camera, + 1 in the line and sample direction. We find the difference in\n"
+		"meters between these points, and select the maximum value.  \n"
+		"\n"
 		""},
 	 { "OrbitData_ci_look_vector", _wrap_OrbitData_ci_look_vector, METH_VARARGS, "\n"
+		"ci_look_vector(OrbitData self, ScLookVector Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVector\n"
+		"ci_look_vector(OrbitData self, ScLookVectorWithDerivative Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianInertialLookVectorWithDerivative GeoCal::OrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
-		"Include_velocity_aberration=true) const =0\n"
 		"GeoCal::OrbitData::ci_look_vector\n"
-		"Convert from ScLookVector to CartesianInertialLookVector.\n"
+		"Convert from ScLookVector to CartesianInertialLookVector.  \n"
 		"\n"
 		""},
 	 { "OrbitData_cf_look_vector", _wrap_OrbitData_cf_look_vector, METH_VARARGS, "\n"
+		"cf_look_vector(OrbitData self, ScLookVector Sl, bool Include_velocity_aberration=True) -> CartesianFixedLookVector\n"
+		"cf_look_vector(OrbitData self, ScLookVectorWithDerivative Sl, bool Include_velocity_aberration=True) -> CartesianFixedLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianFixedLookVectorWithDerivative GeoCal::OrbitData::cf_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
-		"Include_velocity_aberration=true) const =0\n"
 		"GeoCal::OrbitData::cf_look_vector\n"
-		"Convert from ScLookVector to CartesianFixedLookVector.\n"
+		"Convert from ScLookVector to CartesianFixedLookVector.  \n"
 		"\n"
 		""},
 	 { "OrbitData_sc_look_vector_with_derivative", _wrap_OrbitData_sc_look_vector_with_derivative, METH_VARARGS, "\n"
+		"sc_look_vector_with_derivative(OrbitData self, CartesianFixed Gc, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector_with_derivative(const CartesianFixed &Gc, const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<\n"
-		"VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())\n"
-		"const =0\n"
 		"GeoCal::OrbitData::sc_look_vector_with_derivative\n"
 		""},
 	 { "OrbitData_sc_look_vector", _wrap_OrbitData_sc_look_vector, METH_VARARGS, "\n"
+		"sc_look_vector(OrbitData self, CartesianFixed Gc, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> ScLookVector\n"
+		"sc_look_vector(OrbitData self, CartesianInertialLookVector Ci, bool Include_velocity_aberration=True) -> ScLookVector\n"
+		"sc_look_vector(OrbitData self, CartesianInertialLookVectorWithDerivative Ci, bool Include_velocity_aberration=True) -> ScLookVectorWithDerivative\n"
+		"sc_look_vector(OrbitData self, CartesianFixedLookVector Cf, bool Include_velocity_aberration=True) -> ScLookVector\n"
+		"sc_look_vector(OrbitData self, CartesianFixedLookVectorWithDerivative Cf, bool Include_velocity_aberration=True) -> ScLookVectorWithDerivative\n"
 		"\n"
-		"virtual ScLookVectorWithDerivative GeoCal::OrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative &Ci, bool\n"
-		"Include_velocity_aberration=true) const =0\n"
 		"GeoCal::OrbitData::sc_look_vector\n"
-		"Convert from CartesianInertialLookVector to ScLookVector.\n"
+		"Convert from CartesianInertialLookVector to ScLookVector.  \n"
 		"\n"
 		""},
 	 { "OrbitData_frame_coordinate", _wrap_OrbitData_frame_coordinate, METH_VARARGS, "\n"
+		"frame_coordinate(OrbitData self, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinate\n"
 		"\n"
-		"FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate &Gc, const Camera &C, int Band=0, const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::OrbitData::frame_coordinate\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen.\n"
+		"Give the frame coordinates that a particular point on the ground is seen.  \n"
 		"\n"
 		""},
 	 { "OrbitData_frame_coordinate_with_derivative", _wrap_OrbitData_frame_coordinate_with_derivative, METH_VARARGS, "\n"
+		"frame_coordinate_with_derivative(OrbitData self, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinateWithDerivative\n"
 		"\n"
-		"FrameCoordinateWithDerivative OrbitData::frame_coordinate_with_derivative(const GroundCoordinate &Gc, const Camera &C, int Band=0, const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::OrbitData::frame_coordinate_with_derivative\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen, including derivatives wrt.\n"
-		"the parameters of the Camera and this OrbitData. \n"
+		"Give the frame coordinates that a particular point on the ground is seen,\n"
+		"including derivatives wrt.  \n"
+		"\n"
+		"the parameters of the Camera and this OrbitData.  \n"
+		"\n"
 		""},
 	 { "OrbitData_reference_surface_intersect_approximate", _wrap_OrbitData_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"reference_surface_intersect_approximate(OrbitData self, Camera C, FrameCoordinate Fc, int Band=0, double Height_reference_surface=0.0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > OrbitData::reference_surface_intersect_approximate(const Camera &C, const FrameCoordinate &Fc, int Band=0, double\n"
-		"Height_reference_surface=0.0, const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<\n"
-		"VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())\n"
-		"const\n"
 		"GeoCal::OrbitData::reference_surface_intersect_approximate\n"
-		"Return location on the reference surface that a particular frame\n"
-		"coordinate is seen.\n"
+		"Return location on the reference surface that a particular frame coordinate is\n"
+		"seen.  \n"
+		"\n"
 		"This is approximate, in the same way\n"
-		"CartesianFixed::reference_intersect_approximate is approximate. \n"
+		"CartesianFixed::reference_intersect_approximate is approximate.  \n"
+		"\n"
 		""},
 	 { "OrbitData__v_position_ci", _wrap_OrbitData__v_position_ci, METH_O, "\n"
+		"_v_position_ci(OrbitData self) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::OrbitData::position_ci() const =0\n"
 		"GeoCal::OrbitData::position_ci\n"
-		"Return position as a pointer.\n"
+		"Return position as a pointer.  \n"
 		"\n"
 		""},
 	 { "OrbitData__v_position_cf", _wrap_OrbitData__v_position_cf, METH_O, "\n"
+		"_v_position_cf(OrbitData self) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::OrbitData::position_cf() const =0\n"
 		"GeoCal::OrbitData::position_cf\n"
-		"Return position as a pointer.\n"
+		"Return position as a pointer.  \n"
 		"\n"
 		""},
 	 { "OrbitData_footprint", _wrap_OrbitData_footprint, METH_VARARGS, "\n"
+		"footprint(OrbitData self, Camera C, Dem D, double Resolution=30, int Band=0, double Max_height=9000) -> Vector_GroundCoordinate\n"
 		"\n"
-		"std::vector< boost::shared_ptr< GroundCoordinate > > OrbitData::footprint(const Camera &C, const Dem &D, double Resolution=30, int Band=0,\n"
-		"double Max_height=9000) const\n"
 		"GeoCal::OrbitData::footprint\n"
-		"Return the footprint on the ground for the given camera and dem.\n"
-		"This just calls surface_intersect for the four corner points. \n"
+		"Return the footprint on the ground for the given camera and dem.  \n"
+		"\n"
+		"This just calls surface_intersect for the four corner points.  \n"
+		"\n"
 		""},
 	 { "OrbitData_surface_intersect", _wrap_OrbitData_surface_intersect, METH_VARARGS, "\n"
+		"surface_intersect(OrbitData self, Camera C, FrameCoordinate Fc, Dem D, double Resolution=30, int Band=0, double Max_height=9000, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > OrbitData::surface_intersect(const Camera &C, const FrameCoordinate &Fc, const Dem &D, double\n"
-		"Resolution=30, int Band=0, double Max_height=9000, const\n"
-		"boost::shared_ptr< Refraction > &Ref=boost::shared_ptr< Refraction\n"
-		">(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::OrbitData::surface_intersect\n"
-		"Calculate the intersection with the surface.\n"
-		"Resolution is the dem postings in meters, you usually don't want this\n"
-		"much more accurate than the intrinsic accuracy of the Dem (e.g., the\n"
-		"Did is 30 meter, so resolution shouldn't be better than 30). \n"
-		""},
-	 { "OrbitData__velocity_ci", _wrap_OrbitData__velocity_ci, METH_O, NULL},
-	 { "OrbitData__velocity_ci_with_derivative", _wrap_OrbitData__velocity_ci_with_derivative, METH_O, NULL},
-	 { "OrbitData__position_ci_with_derivative", _wrap_OrbitData__position_ci_with_derivative, METH_O, NULL},
-	 { "OrbitData__position_cf_with_derivative", _wrap_OrbitData__position_cf_with_derivative, METH_O, NULL},
-	 { "OrbitData__velocity_cf", _wrap_OrbitData__velocity_cf, METH_O, NULL},
-	 { "OrbitData__velocity_cf_with_derivative", _wrap_OrbitData__velocity_cf_with_derivative, METH_O, NULL},
-	 { "OrbitData__v_time", _wrap_OrbitData__v_time, METH_O, "\n"
+		"Calculate the intersection with the surface.  \n"
 		"\n"
-		"virtual Time GeoCal::OrbitData::time() const =0\n"
+		"Resolution is the dem postings in meters, you usually don't want this much more\n"
+		"accurate than the intrinsic accuracy of the Dem (e.g., the Did is 30 meter, so\n"
+		"resolution shouldn't be better than 30).  \n"
+		"\n"
+		""},
+	 { "OrbitData__velocity_ci", _wrap_OrbitData__velocity_ci, METH_O, "_velocity_ci(OrbitData self) -> BlitzArray_double_1"},
+	 { "OrbitData__velocity_ci_with_derivative", _wrap_OrbitData__velocity_ci_with_derivative, METH_O, "_velocity_ci_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__position_ci_with_derivative", _wrap_OrbitData__position_ci_with_derivative, METH_O, "_position_ci_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__position_cf_with_derivative", _wrap_OrbitData__position_cf_with_derivative, METH_O, "_position_cf_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__velocity_cf", _wrap_OrbitData__velocity_cf, METH_O, "_velocity_cf(OrbitData self) -> BlitzArray_double_1"},
+	 { "OrbitData__velocity_cf_with_derivative", _wrap_OrbitData__velocity_cf_with_derivative, METH_O, "_velocity_cf_with_derivative(OrbitData self) -> ArrayAd_double_1"},
+	 { "OrbitData__v_time", _wrap_OrbitData__v_time, METH_O, "\n"
+		"_v_time(OrbitData self) -> Time\n"
+		"\n"
 		"GeoCal::OrbitData::time\n"
-		"Return Time of OrbitData.\n"
+		"Return Time of OrbitData.  \n"
 		"\n"
 		""},
 	 { "OrbitData__v_time_with_derivative", _wrap_OrbitData__v_time_with_derivative, METH_O, "\n"
+		"_v_time_with_derivative(OrbitData self) -> TimeWithDerivative\n"
 		"\n"
-		"virtual TimeWithDerivative GeoCal::OrbitData::time_with_derivative() const =0\n"
 		"GeoCal::OrbitData::time_with_derivative\n"
-		"Return TimeWithDerivative of OrbitData.\n"
+		"Return TimeWithDerivative of OrbitData.  \n"
 		"\n"
 		""},
-	 { "OrbitData___str__", _wrap_OrbitData___str__, METH_O, NULL},
+	 { "OrbitData___str__", _wrap_OrbitData___str__, METH_O, "__str__(OrbitData self) -> std::string"},
 	 { "OrbitData__v_prefer_cf", _wrap_OrbitData__v_prefer_cf, METH_O, "\n"
+		"_v_prefer_cf(OrbitData self) -> bool\n"
 		"\n"
-		"virtual bool GeoCal::OrbitData::prefer_cf() const =0\n"
 		"GeoCal::OrbitData::prefer_cf\n"
-		"Do we prefer using CartesianFixed for the position or not?\n"
+		"Do we prefer using CartesianFixed for the position or not?  \n"
+		"\n"
 		"Note that that class can always return either CartesianFixed or\n"
 		"CartesianInertial, but one or the other might be preferred because the\n"
-		"underlying data is already in that format. \n"
+		"underlying data is already in that format.  \n"
+		"\n"
 		""},
 	 { "delete_OrbitData", _wrap_delete_OrbitData, METH_O, "\n"
+		"delete_OrbitData(OrbitData self)\n"
 		"\n"
-		"virtual GeoCal::OrbitData::~OrbitData()\n"
 		"GeoCal::OrbitData::~OrbitData\n"
 		""},
 	 { "OrbitData_swigregister", OrbitData_swigregister, METH_O, NULL},
 	 { "new_QuaternionOrbitData", _wrap_new_QuaternionOrbitData, METH_VARARGS, "\n"
+		"QuaternionOrbitData(QuaternionOrbitData Start, BoostArrayAutoDerivativeDouble_3 Pos_off, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Sc_to_sc_corr)\n"
+		"QuaternionOrbitData(QuaternionOrbitData Start, Array_double_3 Pos_off, Quaternion_double Sc_to_sc_corr)\n"
+		"QuaternionOrbitData(Time Tm, boost::shared_ptr< GeoCal::CartesianFixed > const & pos_cf, Array_double_3 vel_fixed, Quaternion_double sc_to_cf_q)\n"
+		"QuaternionOrbitData(TimeWithDerivative Tm, boost::shared_ptr< GeoCal::CartesianFixed > const & pos_cf, BoostArrayAutoDerivativeDouble_3 pos_cf_with_der, BoostArrayAutoDerivativeDouble_3 vel_fixed, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & sc_to_cf_q)\n"
+		"QuaternionOrbitData(Time Tm, boost::shared_ptr< GeoCal::CartesianInertial > const & pos_ci, Array_double_3 vel_inertial, Quaternion_double sc_to_ci_q)\n"
+		"new_QuaternionOrbitData(TimeWithDerivative Tm, boost::shared_ptr< GeoCal::CartesianInertial > const & pos_ci, BoostArrayAutoDerivativeDouble_3 pos_ci_with_der, BoostArrayAutoDerivativeDouble_3 vel_inertial, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & sc_to_ci_q) -> QuaternionOrbitData\n"
 		"\n"
-		"QuaternionOrbitData::QuaternionOrbitData(Time Tm, const boost::shared_ptr< CartesianInertial > &pos_ci, const\n"
-		"boost::array< double, 3 > &vel_inertial, const\n"
-		"boost::math::quaternion< double > &sc_to_ci_q)\n"
 		"GeoCal::QuaternionOrbitData::QuaternionOrbitData\n"
-		"Construct QuaternionOrbitData.\n"
+		"Construct QuaternionOrbitData.  \n"
+		"\n"
 		"This takes data in a CartesianInertial coordinate system (e.g., Eci\n"
-		"coordinates). \n"
+		"coordinates).  \n"
+		"\n"
 		""},
 	 { "QuaternionOrbitData_ci_look_vector", _wrap_QuaternionOrbitData_ci_look_vector, METH_VARARGS, "\n"
+		"ci_look_vector(QuaternionOrbitData self, ScLookVector Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVector\n"
+		"ci_look_vector(QuaternionOrbitData self, ScLookVectorWithDerivative Sl, bool Include_velocity_aberration=True) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"CartesianInertialLookVectorWithDerivative QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative &Sl, bool\n"
-		"Include_velocity_aberration=true) const\n"
 		"GeoCal::QuaternionOrbitData::ci_look_vector\n"
-		"Convert to CartesianInertialLookVector.\n"
+		"Convert to CartesianInertialLookVector.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData_interpolate", _wrap_QuaternionOrbitData_interpolate, METH_VARARGS, "\n"
+		"interpolate(QuaternionOrbitData t1, QuaternionOrbitData t2, TimeWithDerivative tm, bool Extrapolation_ok=False) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
+		"interpolate(QuaternionOrbitData t1, QuaternionOrbitData t2, Time tm, bool Extrapolation_ok=False) -> boost::shared_ptr< GeoCal::QuaternionOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< QuaternionOrbitData > QuaternionOrbitData::interpolate(const QuaternionOrbitData &t1, const QuaternionOrbitData &t2, const\n"
-		"TimeWithDerivative &tm, bool Extrapolation_ok=false)\n"
 		"GeoCal::QuaternionOrbitData::interpolate\n"
-		"Interpolate between two QuaternionOrbitData for the given time.\n"
+		"Interpolate between two QuaternionOrbitData for the given time.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_ci", _wrap_QuaternionOrbitData__v_sc_to_ci, METH_VARARGS, "\n"
+		"_v_sc_to_ci(QuaternionOrbitData self) -> Quaternion_double\n"
+		"_v_sc_to_ci(QuaternionOrbitData self, Quaternion_double V)\n"
 		"\n"
-		"void QuaternionOrbitData::sc_to_ci(const boost::math::quaternion< double > &sc_to_ci_q)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_ci\n"
-		"Set sc_to_ci.\n"
+		"Set sc_to_ci.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_ci_with_derivative", _wrap_QuaternionOrbitData__v_sc_to_ci_with_derivative, METH_VARARGS, "\n"
+		"_v_sc_to_ci_with_derivative(QuaternionOrbitData self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"_v_sc_to_ci_with_derivative(QuaternionOrbitData self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void QuaternionOrbitData::sc_to_ci_with_derivative(const boost::math::quaternion< AutoDerivative< double > >\n"
-		"&sc_to_ci_q)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_ci_with_derivative\n"
-		"Set sc_to_ci_with_derivative.\n"
+		"Set sc_to_ci_with_derivative.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_cf", _wrap_QuaternionOrbitData__v_sc_to_cf, METH_VARARGS, "\n"
+		"_v_sc_to_cf(QuaternionOrbitData self) -> Quaternion_double\n"
+		"_v_sc_to_cf(QuaternionOrbitData self, Quaternion_double V)\n"
 		"\n"
-		"void GeoCal::QuaternionOrbitData::sc_to_cf(const boost::math::quaternion< double > &Sc_to_cf)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_cf\n"
-		"Set the quaternion used to go from spacecraft to cartesian fixed.\n"
+		"Set the quaternion used to go from spacecraft to cartesian fixed.  \n"
 		"\n"
 		""},
 	 { "QuaternionOrbitData__v_sc_to_cf_with_derivative", _wrap_QuaternionOrbitData__v_sc_to_cf_with_derivative, METH_VARARGS, "\n"
+		"_v_sc_to_cf_with_derivative(QuaternionOrbitData self) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"_v_sc_to_cf_with_derivative(QuaternionOrbitData self, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & V)\n"
 		"\n"
-		"void GeoCal::QuaternionOrbitData::sc_to_cf_with_derivative(const boost::math::quaternion< AutoDerivative< double > > &Sc_to_cf)\n"
 		"GeoCal::QuaternionOrbitData::sc_to_cf_with_derivative\n"
 		""},
 	 { "QuaternionOrbitData__v_from_cf", _wrap_QuaternionOrbitData__v_from_cf, METH_O, "\n"
+		"_v_from_cf(QuaternionOrbitData self) -> bool\n"
 		"\n"
-		"bool GeoCal::QuaternionOrbitData::from_cf() const\n"
 		"GeoCal::QuaternionOrbitData::from_cf\n"
-		"Was this created form the cartesian fixed version of the constructor?\n"
-		"This is intended for use by python when we pickle this object so we\n"
-		"know which constructor to call. It probably isn't of interest to\n"
-		"anything else. \n"
+		"Was this created form the cartesian fixed version of the constructor?  \n"
+		"\n"
+		"This is intended for use by python when we pickle this object so we know which\n"
+		"constructor to call. It probably isn't of interest to anything else.  \n"
+		"\n"
 		""},
 	 { "delete_QuaternionOrbitData", _wrap_delete_QuaternionOrbitData, METH_O, "\n"
+		"delete_QuaternionOrbitData(QuaternionOrbitData self)\n"
 		"\n"
-		"virtual GeoCal::QuaternionOrbitData::~QuaternionOrbitData()\n"
 		"GeoCal::QuaternionOrbitData::~QuaternionOrbitData\n"
 		""},
 	 { "QuaternionOrbitData_swigregister", QuaternionOrbitData_swigregister, METH_O, NULL},
 	 { "QuaternionOrbitData_swiginit", QuaternionOrbitData_swiginit, METH_VARARGS, NULL},
-	 { "delete_ObservableOrbit", _wrap_delete_ObservableOrbit, METH_O, NULL},
-	 { "ObservableOrbit_add_observer_and_keep_reference", _wrap_ObservableOrbit_add_observer_and_keep_reference, METH_VARARGS, NULL},
-	 { "ObservableOrbit_add_observer", _wrap_ObservableOrbit_add_observer, METH_VARARGS, NULL},
-	 { "ObservableOrbit_remove_observer", _wrap_ObservableOrbit_remove_observer, METH_VARARGS, NULL},
+	 { "delete_ObservableOrbit", _wrap_delete_ObservableOrbit, METH_O, "delete_ObservableOrbit(ObservableOrbit self)"},
+	 { "ObservableOrbit_add_observer_and_keep_reference", _wrap_ObservableOrbit_add_observer_and_keep_reference, METH_VARARGS, "add_observer_and_keep_reference(ObservableOrbit self, boost::shared_ptr< GeoCal::Observer< GeoCal::Orbit > > & Obs)"},
+	 { "ObservableOrbit_add_observer", _wrap_ObservableOrbit_add_observer, METH_VARARGS, "add_observer(ObservableOrbit self, ObserverOrbit Obs)"},
+	 { "ObservableOrbit_remove_observer", _wrap_ObservableOrbit_remove_observer, METH_VARARGS, "remove_observer(ObservableOrbit self, ObserverOrbit Obs)"},
 	 { "ObservableOrbit_swigregister", ObservableOrbit_swigregister, METH_O, NULL},
-	 { "new_ObserverOrbit", _wrap_new_ObserverOrbit, METH_NOARGS, NULL},
-	 { "delete_ObserverOrbit", _wrap_delete_ObserverOrbit, METH_O, NULL},
-	 { "ObserverOrbit_notify_update", _wrap_ObserverOrbit_notify_update, METH_VARARGS, NULL},
-	 { "ObserverOrbit_notify_add", _wrap_ObserverOrbit_notify_add, METH_VARARGS, NULL},
-	 { "ObserverOrbit_notify_remove", _wrap_ObserverOrbit_notify_remove, METH_VARARGS, NULL},
+	 { "new_ObserverOrbit", _wrap_new_ObserverOrbit, METH_NOARGS, "new_ObserverOrbit() -> ObserverOrbit"},
+	 { "delete_ObserverOrbit", _wrap_delete_ObserverOrbit, METH_O, "delete_ObserverOrbit(ObserverOrbit self)"},
+	 { "ObserverOrbit_notify_update", _wrap_ObserverOrbit_notify_update, METH_VARARGS, "notify_update(ObserverOrbit self, Orbit Observed_object)"},
+	 { "ObserverOrbit_notify_add", _wrap_ObserverOrbit_notify_add, METH_VARARGS, "notify_add(ObserverOrbit self, Orbit Observed_object)"},
+	 { "ObserverOrbit_notify_remove", _wrap_ObserverOrbit_notify_remove, METH_VARARGS, "notify_remove(ObserverOrbit self, Orbit Observed_object)"},
 	 { "ObserverOrbit_swigregister", ObserverOrbit_swigregister, METH_O, NULL},
 	 { "ObserverOrbit_swiginit", ObserverOrbit_swiginit, METH_VARARGS, NULL},
 	 { "new_Orbit", _wrap_new_Orbit, METH_VARARGS, "\n"
+		"Orbit(Time Min_time=min_valid_time, Time Max_time=max_valid_time)\n"
 		"\n"
-		"GeoCal::Orbit::Orbit(Time Min_time=Time::min_valid_time, Time\n"
-		"Max_time=Time::max_valid_time)\n"
 		"GeoCal::Orbit::Orbit\n"
-		"Constructor.\n"
-		"The Orbit is valid for the given range of minimum to maximum time. \n"
+		"Constructor.  \n"
+		"\n"
+		"The Orbit is valid for the given range of minimum to maximum time.  \n"
+		"\n"
 		""},
 	 { "delete_Orbit", _wrap_delete_Orbit, METH_O, "\n"
+		"delete_Orbit(Orbit self)\n"
 		"\n"
-		"virtual GeoCal::Orbit::~Orbit()\n"
 		"GeoCal::Orbit::~Orbit\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
-	 { "Orbit_desc", _wrap_Orbit_desc, METH_O, NULL},
+	 { "Orbit_desc", _wrap_Orbit_desc, METH_O, "desc(Orbit self) -> std::string"},
 	 { "Orbit_add_observer", _wrap_Orbit_add_observer, METH_VARARGS, "\n"
+		"add_observer(Orbit self, ObserverOrbit Obs)\n"
 		"\n"
-		"virtual void GeoCal::Orbit::add_observer(Observer< Orbit > &Obs)\n"
 		"GeoCal::Orbit::add_observer\n"
 		""},
 	 { "Orbit_remove_observer", _wrap_Orbit_remove_observer, METH_VARARGS, "\n"
+		"remove_observer(Orbit self, ObserverOrbit Obs)\n"
 		"\n"
-		"virtual void GeoCal::Orbit::remove_observer(Observer< Orbit > &Obs)\n"
 		"GeoCal::Orbit::remove_observer\n"
 		""},
 	 { "Orbit_ci_look_vector", _wrap_Orbit_ci_look_vector, METH_VARARGS, "\n"
+		"ci_look_vector(Orbit self, Time T, ScLookVector Sl) -> CartesianInertialLookVector\n"
+		"ci_look_vector(Orbit self, TimeWithDerivative T, ScLookVectorWithDerivative Sl) -> CartesianInertialLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianInertialLookVector GeoCal::Orbit::ci_look_vector(Time T, const ScLookVector &Sl) const\n"
 		"GeoCal::Orbit::ci_look_vector\n"
-		"Convert from ScLookVector to CartesianInertialLookVector for the given\n"
-		"time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Convert from ScLookVector to CartesianInertialLookVector for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_cf_look_vector", _wrap_Orbit_cf_look_vector, METH_VARARGS, "\n"
+		"cf_look_vector(Orbit self, Time T, ScLookVector Sl) -> CartesianFixedLookVector\n"
+		"cf_look_vector(Orbit self, TimeWithDerivative T, ScLookVectorWithDerivative Sl) -> CartesianFixedLookVectorWithDerivative\n"
 		"\n"
-		"virtual CartesianFixedLookVector GeoCal::Orbit::cf_look_vector(Time T, const ScLookVector &Sl) const\n"
 		"GeoCal::Orbit::cf_look_vector\n"
-		"Convert from ScLookVector to CartesianFixedLookVector for the given\n"
-		"time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Convert from ScLookVector to CartesianFixedLookVector for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_frame_coordinate", _wrap_Orbit_frame_coordinate, METH_VARARGS, "\n"
+		"frame_coordinate(Orbit self, Time T, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinate\n"
 		"\n"
-		"FrameCoordinate GeoCal::Orbit::frame_coordinate(Time T, const GroundCoordinate &Gc, const Camera &C, int Band=0,\n"
-		"const boost::shared_ptr< Refraction > &Ref=boost::shared_ptr<\n"
-		"Refraction >(), const boost::shared_ptr< VelocityAberration >\n"
-		"&Vabb=boost::shared_ptr< VelocityAberration >()) const\n"
 		"GeoCal::Orbit::frame_coordinate\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen.\n"
+		"Give the frame coordinates that a particular point on the ground is seen.  \n"
 		"\n"
 		""},
 	 { "Orbit_frame_coordinate_with_derivative", _wrap_Orbit_frame_coordinate_with_derivative, METH_VARARGS, "\n"
+		"frame_coordinate_with_derivative(Orbit self, TimeWithDerivative T, GroundCoordinate Gc, Camera C, int Band=0, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> FrameCoordinateWithDerivative\n"
 		"\n"
-		"FrameCoordinateWithDerivative GeoCal::Orbit::frame_coordinate_with_derivative(const TimeWithDerivative &T, const GroundCoordinate &Gc, const Camera\n"
-		"&C, int Band=0, const boost::shared_ptr< Refraction >\n"
-		"&Ref=boost::shared_ptr< Refraction >(), const boost::shared_ptr<\n"
-		"VelocityAberration > &Vabb=boost::shared_ptr< VelocityAberration >())\n"
-		"const\n"
 		"GeoCal::Orbit::frame_coordinate_with_derivative\n"
-		"Give the frame coordinates that a particular point on the ground is\n"
-		"seen.\n"
+		"Give the frame coordinates that a particular point on the ground is seen.  \n"
 		"\n"
 		""},
 	 { "Orbit_reference_surface_intersect_approximate", _wrap_Orbit_reference_surface_intersect_approximate, METH_VARARGS, "\n"
+		"reference_surface_intersect_approximate(Orbit self, Time T, Camera C, FrameCoordinate Fc, int Band=0, double Height_reference_surface=0.0) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"boost::shared_ptr< CartesianFixed > GeoCal::Orbit::reference_surface_intersect_approximate(Time T, const Camera &C, const FrameCoordinate &Fc, int Band=0,\n"
-		"double Height_reference_surface=0.0) const\n"
 		"GeoCal::Orbit::reference_surface_intersect_approximate\n"
-		"Return location on the reference surface that a particular frame\n"
-		"coordinate is seen.\n"
+		"Return location on the reference surface that a particular frame coordinate is\n"
+		"seen.  \n"
+		"\n"
 		"This is approximate, in the same way\n"
-		"CartesianFixed::reference_intersect_approximate is approximate. \n"
+		"CartesianFixed::reference_intersect_approximate is approximate.  \n"
+		"\n"
 		""},
 	 { "Orbit_sc_look_vector", _wrap_Orbit_sc_look_vector, METH_VARARGS, "\n"
+		"sc_look_vector(Orbit self, Time T, CartesianInertialLookVector Ci) -> ScLookVector\n"
+		"sc_look_vector(Orbit self, TimeWithDerivative T, CartesianInertialLookVectorWithDerivative Ci) -> ScLookVectorWithDerivative\n"
+		"sc_look_vector(Orbit self, Time T, CartesianFixedLookVector Cf) -> ScLookVector\n"
+		"sc_look_vector(Orbit self, TimeWithDerivative T, CartesianFixedLookVectorWithDerivative Cf) -> ScLookVectorWithDerivative\n"
+		"sc_look_vector(Orbit self, Time T, CartesianFixed Pt, boost::shared_ptr< GeoCal::Refraction > const & Ref=boost::shared_ptr< GeoCal::Refraction >(), boost::shared_ptr< GeoCal::VelocityAberration > const & Vabb=boost::shared_ptr< GeoCal::VelocityAberration >()) -> ScLookVector\n"
 		"\n"
-		"virtual ScLookVector GeoCal::Orbit::sc_look_vector(Time T, const CartesianInertialLookVector &Ci) const\n"
 		"GeoCal::Orbit::sc_look_vector\n"
-		"Convert from CartesianInertialLookVector to ScLookVector for the given\n"
-		"time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Convert from CartesianInertialLookVector to ScLookVector for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_position_ci", _wrap_Orbit_position_ci, METH_VARARGS, "\n"
+		"position_ci(Orbit self, Time T) -> boost::shared_ptr< GeoCal::CartesianInertial >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianInertial > GeoCal::Orbit::position_ci(Time T) const\n"
 		"GeoCal::Orbit::position_ci\n"
-		"Return position at given time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Return position at given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit_position_cf", _wrap_Orbit_position_cf, METH_VARARGS, "\n"
+		"position_cf(Orbit self, Time T) -> boost::shared_ptr< GeoCal::CartesianFixed >\n"
 		"\n"
-		"virtual boost::shared_ptr< CartesianFixed > GeoCal::Orbit::position_cf(Time T) const\n"
 		"GeoCal::Orbit::position_cf\n"
-		"Return position at given time.\n"
-		"We should have min_time() <= T < max_time(). \n"
+		"Return position at given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time().  \n"
+		"\n"
 		""},
 	 { "Orbit__v_min_time", _wrap_Orbit__v_min_time, METH_O, "\n"
+		"_v_min_time(Orbit self) -> Time\n"
 		"\n"
-		"Time GeoCal::Orbit::min_time() const\n"
 		"GeoCal::Orbit::min_time\n"
-		"Minimum time that we can return OrbitData for.\n"
+		"Minimum time that we can return OrbitData for.  \n"
 		"\n"
 		""},
 	 { "Orbit__v_max_time", _wrap_Orbit__v_max_time, METH_O, "\n"
+		"_v_max_time(Orbit self) -> Time\n"
 		"\n"
-		"Time GeoCal::Orbit::max_time() const\n"
 		"GeoCal::Orbit::max_time\n"
-		"Maximum time that we can return OrbitData for.\n"
+		"Maximum time that we can return OrbitData for.  \n"
 		"\n"
 		""},
 	 { "Orbit_orbit_data", _wrap_Orbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(Orbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(Orbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"virtual boost::shared_ptr< OrbitData > GeoCal::Orbit::orbit_data(Time T) const =0\n"
 		"GeoCal::Orbit::orbit_data\n"
-		"Return OrbitData for the given time.\n"
-		"We should have min_time() <= T < max_time(). Note for orbit models\n"
-		"that you do not need to include the derivative information for this\n"
-		"version of orbit_data (which can be a great speed up). Users that want\n"
-		"that information should call the TimeWithDerivative version. \n"
-		""},
-	 { "Orbit___str__", _wrap_Orbit___str__, METH_O, NULL},
-	 { "Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_with_derivative", _wrap_Orbit__v_parameter_with_derivative, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_name", _wrap_Orbit__v_parameter_name, METH_O, NULL},
-	 { "Orbit__v_parameter_subset", _wrap_Orbit__v_parameter_subset, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_with_derivative_subset", _wrap_Orbit__v_parameter_with_derivative_subset, METH_VARARGS, NULL},
-	 { "Orbit__v_parameter_name_subset", _wrap_Orbit__v_parameter_name_subset, METH_O, NULL},
-	 { "Orbit__v_parameter_mask", _wrap_Orbit__v_parameter_mask, METH_O, NULL},
-	 { "Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, "\n"
+		"Return OrbitData for the given time.  \n"
 		"\n"
-		"boost::math::quaternion< double > Orbit::interpolate(const boost::math::quaternion< double > &Q1, const\n"
-		"boost::math::quaternion< double > &Q2, double toffset, double tspace)\n"
-		"GeoCal::Orbit::interpolate\n"
-		"This is a utility function for use by derived classes.\n"
-		"A common way of getting orbit data is to have discrete measurements of\n"
-		"the quaternion describing the rotation of the spacecraft. For a time t\n"
-		"between t1 and t2, we have Q1 as the quaternion at time t1, Q2 the\n"
-		"quaternion at time t2, tspace = t2 - t1, toffset = t - t1. This\n"
-		"function then returns Qres. We calculate this by determining the axis\n"
-		"and angle rotation that takes use from Q1 to Q2, and then do a linear\n"
-		"interpolation of that angle for the given time. \n"
+		"We should have min_time() <= T < max_time(). Note for orbit models that you do\n"
+		"*not* need to include the derivative information for this version of orbit_data\n"
+		"(which can be a great speed up). Users that want that information should call\n"
+		"the TimeWithDerivative version.  \n"
+		"\n"
 		""},
-	 { "Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, NULL},
+	 { "Orbit___str__", _wrap_Orbit___str__, METH_O, "__str__(Orbit self) -> std::string"},
+	 { "Orbit__v_parameter", _wrap_Orbit__v_parameter, METH_VARARGS, "\n"
+		"_v_parameter(Orbit self) -> BlitzArray_double_1\n"
+		"_v_parameter(Orbit self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_with_derivative", _wrap_Orbit__v_parameter_with_derivative, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative(Orbit self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative(Orbit self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_name", _wrap_Orbit__v_parameter_name, METH_O, "_v_parameter_name(Orbit self) -> vector_string"},
+	 { "Orbit__v_parameter_subset", _wrap_Orbit__v_parameter_subset, METH_VARARGS, "\n"
+		"_v_parameter_subset(Orbit self) -> BlitzArray_double_1\n"
+		"_v_parameter_subset(Orbit self, BlitzArray_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_with_derivative_subset", _wrap_Orbit__v_parameter_with_derivative_subset, METH_VARARGS, "\n"
+		"_v_parameter_with_derivative_subset(Orbit self) -> ArrayAd_double_1\n"
+		"_v_parameter_with_derivative_subset(Orbit self, ArrayAd_double_1 V)\n"
+		""},
+	 { "Orbit__v_parameter_name_subset", _wrap_Orbit__v_parameter_name_subset, METH_O, "_v_parameter_name_subset(Orbit self) -> vector_string"},
+	 { "Orbit__v_parameter_mask", _wrap_Orbit__v_parameter_mask, METH_O, "_v_parameter_mask(Orbit self) -> BlitzArray_bool_1"},
+	 { "Orbit_interpolate", _wrap_Orbit_interpolate, METH_VARARGS, "\n"
+		"interpolate(BlitzArray_double_1 P1, BlitzArray_double_1 V1, BlitzArray_double_1 P2, BlitzArray_double_1 V2, double toffset, double tspace)\n"
+		"interpolate(ArrayAutoDerivativeDouble_1 P1, ArrayAutoDerivativeDouble_1 V1, ArrayAutoDerivativeDouble_1 P2, ArrayAutoDerivativeDouble_1 V2, AutoDerivativeDouble toffset, double tspace, ArrayAutoDerivativeDouble_1 OUTPUT1, ArrayAutoDerivativeDouble_1 OUTPUT2)\n"
+		"interpolate(Quaternion_double Q1, Quaternion_double Q2, double toffset, double tspace) -> Quaternion_double\n"
+		"interpolate(boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Q1, boost::math::quaternion< GeoCal::AutoDerivative< double > > const & Q2, AutoDerivativeDouble toffset, double tspace) -> boost::math::quaternion< GeoCal::AutoDerivative< double > >\n"
+		"\n"
+		"GeoCal::Orbit::interpolate\n"
+		"This is a utility function for use by derived classes.  \n"
+		"\n"
+		"A common way of getting orbit data is to have discrete measurements of the\n"
+		"quaternion describing the rotation of the spacecraft. For a time t between t1\n"
+		"and t2, we have Q1 as the quaternion at time t1, Q2 the quaternion at time t2,\n"
+		"tspace = t2 - t1, toffset = t - t1. This function then returns Qres. We\n"
+		"calculate this by determining the axis and angle rotation that takes use from Q1\n"
+		"to Q2, and then do a linear interpolation of that angle for the given time.  \n"
+		"\n"
+		""},
+	 { "Orbit_notify_update_do", _wrap_Orbit_notify_update_do, METH_VARARGS, "notify_update_do(Orbit self, Orbit Self)"},
 	 { "disown_Orbit", _wrap_disown_Orbit, METH_O, NULL},
 	 { "Orbit_swigregister", Orbit_swigregister, METH_O, NULL},
 	 { "Orbit_swiginit", Orbit_swiginit, METH_VARARGS, NULL},
 	 { "new_KeplerOrbit", _wrap_new_KeplerOrbit, METH_VARARGS, "\n"
+		"KeplerOrbit(Time Min_time=min_valid_time, Time Max_time=max_valid_time, Time Epoch=GeoCal::Time::time_pgs(173357492.32), double Semimajor_axis=7086930, double Eccentricity=0.001281620, double Inclination=98.199990, double Ra_ascending_node=255.355971130, double Ap_at_epoch=69.086962170, double Mean_anomaly_at_epoch=290.912925280)\n"
 		"\n"
-		"KeplerOrbit::KeplerOrbit(Time Min_time=Time::min_valid_time, Time\n"
-		"Max_time=Time::max_valid_time, Time\n"
-		"Epoch=Time::time_pgs(173357492.32), double Semimajor_axis=7086930,\n"
-		"double Eccentricity=0.001281620, double Inclination=98.199990, double\n"
-		"Ra_ascending_node=255.355971130, double Ap_at_epoch=69.086962170,\n"
-		"double Mean_anomaly_at_epoch=290.912925280)\n"
 		"GeoCal::KeplerOrbit::KeplerOrbit\n"
-		"Create a Kepler orbit with the given elements, valid over the given\n"
-		"time range.\n"
-		"Distances are in meters and angles are in degrees. The Epoch gives the\n"
-		"Time that the rest of the data is valid for. The default values are a\n"
-		"nominal orbit for MISR. \n"
+		"Create a Kepler orbit with the given elements, valid over the given time range.  \n"
+		"\n"
+		"Distances are in meters and angles are in degrees. The Epoch gives the Time that\n"
+		"the rest of the data is valid for. The default values are a nominal orbit for\n"
+		"MISR.  \n"
+		"\n"
 		""},
 	 { "KeplerOrbit_orbit_data", _wrap_KeplerOrbit_orbit_data, METH_VARARGS, "\n"
+		"orbit_data(KeplerOrbit self, Time T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
+		"orbit_data(KeplerOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
-		"boost::shared_ptr< OrbitData > KeplerOrbit::orbit_data(Time T) const\n"
 		"GeoCal::KeplerOrbit::orbit_data\n"
-		"Return OrbitData for the given time.\n"
-		"We should have min_time() <= T < max_time(). Note for orbit models\n"
-		"that you do not need to include the derivative information for this\n"
-		"version of orbit_data (which can be a great speed up). Users that want\n"
-		"that information should call the TimeWithDerivative version. \n"
+		"Return OrbitData for the given time.  \n"
+		"\n"
+		"We should have min_time() <= T < max_time(). Note for orbit models that you do\n"
+		"*not* need to include the derivative information for this version of orbit_data\n"
+		"(which can be a great speed up). Users that want that information should call\n"
+		"the TimeWithDerivative version.  \n"
+		"\n"
 		""},
 	 { "KeplerOrbit__v_epoch", _wrap_KeplerOrbit__v_epoch, METH_VARARGS, "\n"
+		"_v_epoch(KeplerOrbit self) -> Time\n"
+		"_v_epoch(KeplerOrbit self, Time V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::epoch(const Time &Epoch)\n"
 		"GeoCal::KeplerOrbit::epoch\n"
-		"Set epoch that rest of data is for.\n"
+		"Set epoch that rest of data is for.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_semimajor_axis", _wrap_KeplerOrbit__v_semimajor_axis, METH_VARARGS, "\n"
+		"_v_semimajor_axis(KeplerOrbit self) -> double\n"
+		"_v_semimajor_axis(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::semimajor_axis(double Semimajor_axis)\n"
 		"GeoCal::KeplerOrbit::semimajor_axis\n"
-		"Set semimajor axis in meters.\n"
+		"Set semimajor axis in meters.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_argument_of_perigee", _wrap_KeplerOrbit__v_argument_of_perigee, METH_VARARGS, "\n"
+		"_v_argument_of_perigee(KeplerOrbit self) -> double\n"
+		"_v_argument_of_perigee(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::argument_of_perigee(double Ap_at_epoch)\n"
 		"GeoCal::KeplerOrbit::argument_of_perigee\n"
-		"Set Argument of perigee at epoch, in degrees.\n"
+		"Set Argument of perigee at epoch, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_eccentricity", _wrap_KeplerOrbit__v_eccentricity, METH_VARARGS, "\n"
+		"_v_eccentricity(KeplerOrbit self) -> double\n"
+		"_v_eccentricity(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::eccentricity(double Eccentricity)\n"
 		"GeoCal::KeplerOrbit::eccentricity\n"
-		"Set eccentricity of orbit.\n"
+		"Set eccentricity of orbit.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_mean_anomoly", _wrap_KeplerOrbit__v_mean_anomoly, METH_VARARGS, "\n"
+		"_v_mean_anomoly(KeplerOrbit self) -> double\n"
+		"_v_mean_anomoly(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::mean_anomoly(double Mean_anomaly_at_epoch)\n"
 		"GeoCal::KeplerOrbit::mean_anomoly\n"
-		"Set mean anomoly at epoch, in degrees.\n"
+		"Set mean anomoly at epoch, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_inclination", _wrap_KeplerOrbit__v_inclination, METH_VARARGS, "\n"
+		"_v_inclination(KeplerOrbit self) -> double\n"
+		"_v_inclination(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::inclination(double Inclination)\n"
 		"GeoCal::KeplerOrbit::inclination\n"
-		"Set inclination of orbit, in degrees.\n"
+		"Set inclination of orbit, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_right_ascension", _wrap_KeplerOrbit__v_right_ascension, METH_VARARGS, "\n"
+		"_v_right_ascension(KeplerOrbit self) -> double\n"
+		"_v_right_ascension(KeplerOrbit self, double const & V)\n"
 		"\n"
-		"void GeoCal::KeplerOrbit::right_ascension(double Ra_ascending_node)\n"
 		"GeoCal::KeplerOrbit::right_ascension\n"
-		"Set right ascension of ascending node, in degrees.\n"
+		"Set right ascension of ascending node, in degrees.  \n"
 		"\n"
 		""},
 	 { "KeplerOrbit__v_period", _wrap_KeplerOrbit__v_period, METH_O, "\n"
+		"_v_period(KeplerOrbit self) -> double\n"
 		"\n"
-		"double GeoCal::KeplerOrbit::period() const\n"
 		"GeoCal::KeplerOrbit::period\n"
-		"Period in seconds.\n"
+		"Period in seconds.  \n"
 		"\n"
 		""},
 	 { "delete_KeplerOrbit", _wrap_delete_KeplerOrbit, METH_O, "\n"
+		"delete_KeplerOrbit(KeplerOrbit self)\n"
 		"\n"
-		"virtual GeoCal::KeplerOrbit::~KeplerOrbit()\n"
 		"GeoCal::KeplerOrbit::~KeplerOrbit\n"
 		""},
 	 { "KeplerOrbit_swigregister", KeplerOrbit_swigregister, METH_O, NULL},
 	 { "KeplerOrbit_swiginit", KeplerOrbit_swiginit, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_iterator", _wrap_Vector_QuaternionOrbitData_iterator, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___nonzero__", _wrap_Vector_QuaternionOrbitData___nonzero__, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___bool__", _wrap_Vector_QuaternionOrbitData___bool__, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___len__", _wrap_Vector_QuaternionOrbitData___len__, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData___getslice__", _wrap_Vector_QuaternionOrbitData___getslice__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___setslice__", _wrap_Vector_QuaternionOrbitData___setslice__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___delslice__", _wrap_Vector_QuaternionOrbitData___delslice__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___delitem__", _wrap_Vector_QuaternionOrbitData___delitem__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___getitem__", _wrap_Vector_QuaternionOrbitData___getitem__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData___setitem__", _wrap_Vector_QuaternionOrbitData___setitem__, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_pop", _wrap_Vector_QuaternionOrbitData_pop, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_append", _wrap_Vector_QuaternionOrbitData_append, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_empty", _wrap_Vector_QuaternionOrbitData_empty, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_size", _wrap_Vector_QuaternionOrbitData_size, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_swap", _wrap_Vector_QuaternionOrbitData_swap, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_begin", _wrap_Vector_QuaternionOrbitData_begin, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_end", _wrap_Vector_QuaternionOrbitData_end, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_rbegin", _wrap_Vector_QuaternionOrbitData_rbegin, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_rend", _wrap_Vector_QuaternionOrbitData_rend, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_clear", _wrap_Vector_QuaternionOrbitData_clear, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_get_allocator", _wrap_Vector_QuaternionOrbitData_get_allocator, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_pop_back", _wrap_Vector_QuaternionOrbitData_pop_back, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_erase", _wrap_Vector_QuaternionOrbitData_erase, METH_VARARGS, NULL},
-	 { "new_Vector_QuaternionOrbitData", _wrap_new_Vector_QuaternionOrbitData, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_push_back", _wrap_Vector_QuaternionOrbitData_push_back, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_front", _wrap_Vector_QuaternionOrbitData_front, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_back", _wrap_Vector_QuaternionOrbitData_back, METH_O, NULL},
-	 { "Vector_QuaternionOrbitData_assign", _wrap_Vector_QuaternionOrbitData_assign, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_resize", _wrap_Vector_QuaternionOrbitData_resize, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_insert", _wrap_Vector_QuaternionOrbitData_insert, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_reserve", _wrap_Vector_QuaternionOrbitData_reserve, METH_VARARGS, NULL},
-	 { "Vector_QuaternionOrbitData_capacity", _wrap_Vector_QuaternionOrbitData_capacity, METH_O, NULL},
-	 { "delete_Vector_QuaternionOrbitData", _wrap_delete_Vector_QuaternionOrbitData, METH_O, NULL},
+	 { "Vector_QuaternionOrbitData_iterator", _wrap_Vector_QuaternionOrbitData_iterator, METH_O, "iterator(Vector_QuaternionOrbitData self) -> SwigPyIterator"},
+	 { "Vector_QuaternionOrbitData___nonzero__", _wrap_Vector_QuaternionOrbitData___nonzero__, METH_O, "__nonzero__(Vector_QuaternionOrbitData self) -> bool"},
+	 { "Vector_QuaternionOrbitData___bool__", _wrap_Vector_QuaternionOrbitData___bool__, METH_O, "__bool__(Vector_QuaternionOrbitData self) -> bool"},
+	 { "Vector_QuaternionOrbitData___len__", _wrap_Vector_QuaternionOrbitData___len__, METH_O, "__len__(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type"},
+	 { "Vector_QuaternionOrbitData___getslice__", _wrap_Vector_QuaternionOrbitData___getslice__, METH_VARARGS, "__getslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j) -> Vector_QuaternionOrbitData"},
+	 { "Vector_QuaternionOrbitData___setslice__", _wrap_Vector_QuaternionOrbitData___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j)\n"
+		"__setslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j, Vector_QuaternionOrbitData v)\n"
+		""},
+	 { "Vector_QuaternionOrbitData___delslice__", _wrap_Vector_QuaternionOrbitData___delslice__, METH_VARARGS, "__delslice__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type j)"},
+	 { "Vector_QuaternionOrbitData___delitem__", _wrap_Vector_QuaternionOrbitData___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i)\n"
+		"__delitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_QuaternionOrbitData___getitem__", _wrap_Vector_QuaternionOrbitData___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice) -> Vector_QuaternionOrbitData\n"
+		"__getitem__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &\n"
+		""},
+	 { "Vector_QuaternionOrbitData___setitem__", _wrap_Vector_QuaternionOrbitData___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice, Vector_QuaternionOrbitData v)\n"
+		"__setitem__(Vector_QuaternionOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_QuaternionOrbitData_pop", _wrap_Vector_QuaternionOrbitData_pop, METH_O, "pop(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type"},
+	 { "Vector_QuaternionOrbitData_append", _wrap_Vector_QuaternionOrbitData_append, METH_VARARGS, "append(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)"},
+	 { "Vector_QuaternionOrbitData_empty", _wrap_Vector_QuaternionOrbitData_empty, METH_O, "empty(Vector_QuaternionOrbitData self) -> bool"},
+	 { "Vector_QuaternionOrbitData_size", _wrap_Vector_QuaternionOrbitData_size, METH_O, "size(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type"},
+	 { "Vector_QuaternionOrbitData_swap", _wrap_Vector_QuaternionOrbitData_swap, METH_VARARGS, "swap(Vector_QuaternionOrbitData self, Vector_QuaternionOrbitData v)"},
+	 { "Vector_QuaternionOrbitData_begin", _wrap_Vector_QuaternionOrbitData_begin, METH_O, "begin(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator"},
+	 { "Vector_QuaternionOrbitData_end", _wrap_Vector_QuaternionOrbitData_end, METH_O, "end(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator"},
+	 { "Vector_QuaternionOrbitData_rbegin", _wrap_Vector_QuaternionOrbitData_rbegin, METH_O, "rbegin(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::reverse_iterator"},
+	 { "Vector_QuaternionOrbitData_rend", _wrap_Vector_QuaternionOrbitData_rend, METH_O, "rend(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::reverse_iterator"},
+	 { "Vector_QuaternionOrbitData_clear", _wrap_Vector_QuaternionOrbitData_clear, METH_O, "clear(Vector_QuaternionOrbitData self)"},
+	 { "Vector_QuaternionOrbitData_get_allocator", _wrap_Vector_QuaternionOrbitData_get_allocator, METH_O, "get_allocator(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::allocator_type"},
+	 { "Vector_QuaternionOrbitData_pop_back", _wrap_Vector_QuaternionOrbitData_pop_back, METH_O, "pop_back(Vector_QuaternionOrbitData self)"},
+	 { "Vector_QuaternionOrbitData_erase", _wrap_Vector_QuaternionOrbitData_erase, METH_VARARGS, "\n"
+		"erase(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator\n"
+		"erase(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator first, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator\n"
+		""},
+	 { "new_Vector_QuaternionOrbitData", _wrap_new_Vector_QuaternionOrbitData, METH_VARARGS, "\n"
+		"Vector_QuaternionOrbitData()\n"
+		"Vector_QuaternionOrbitData(Vector_QuaternionOrbitData other)\n"
+		"Vector_QuaternionOrbitData(std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type size)\n"
+		"new_Vector_QuaternionOrbitData(std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type size, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & value) -> Vector_QuaternionOrbitData\n"
+		""},
+	 { "Vector_QuaternionOrbitData_push_back", _wrap_Vector_QuaternionOrbitData_push_back, METH_VARARGS, "push_back(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)"},
+	 { "Vector_QuaternionOrbitData_front", _wrap_Vector_QuaternionOrbitData_front, METH_O, "front(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &"},
+	 { "Vector_QuaternionOrbitData_back", _wrap_Vector_QuaternionOrbitData_back, METH_O, "back(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const &"},
+	 { "Vector_QuaternionOrbitData_assign", _wrap_Vector_QuaternionOrbitData_assign, METH_VARARGS, "assign(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)"},
+	 { "Vector_QuaternionOrbitData_resize", _wrap_Vector_QuaternionOrbitData_resize, METH_VARARGS, "\n"
+		"resize(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type new_size)\n"
+		"resize(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_QuaternionOrbitData_insert", _wrap_Vector_QuaternionOrbitData_insert, METH_VARARGS, "\n"
+		"insert(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator\n"
+		"insert(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_QuaternionOrbitData_reserve", _wrap_Vector_QuaternionOrbitData_reserve, METH_VARARGS, "reserve(Vector_QuaternionOrbitData self, std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type n)"},
+	 { "Vector_QuaternionOrbitData_capacity", _wrap_Vector_QuaternionOrbitData_capacity, METH_O, "capacity(Vector_QuaternionOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::QuaternionOrbitData > >::size_type"},
+	 { "delete_Vector_QuaternionOrbitData", _wrap_delete_Vector_QuaternionOrbitData, METH_O, "delete_Vector_QuaternionOrbitData(Vector_QuaternionOrbitData self)"},
 	 { "Vector_QuaternionOrbitData_swigregister", Vector_QuaternionOrbitData_swigregister, METH_O, NULL},
 	 { "Vector_QuaternionOrbitData_swiginit", Vector_QuaternionOrbitData_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

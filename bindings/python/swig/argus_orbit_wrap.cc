@@ -11727,169 +11727,192 @@ static PyMethodDef SwigMethods[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ArgusOrbitData", _wrap_new_ArgusOrbitData, METH_VARARGS, "\n"
+		"new_ArgusOrbitData(Time Tm, std::string const & File_name, int Camera_number, Geodetic Position, Array_double_3 Vel_fixed, double Roll, double Pitch, double Heading) -> ArgusOrbitData\n"
 		"\n"
-		"GeoCal::ArgusOrbitData::ArgusOrbitData(const Time &Tm, const std::string &File_name, int Camera_number,\n"
-		"const Geodetic &Position, const boost::array< double, 3 > &Vel_fixed,\n"
-		"double Roll, double Pitch, double Heading)\n"
 		"GeoCal::ArgusOrbitData::ArgusOrbitData\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbitData_save_ortho", _wrap_ArgusOrbitData_save_ortho, METH_VARARGS, "\n"
+		"ArgusOrbitData_save_ortho(ArgusOrbitData self, MapInfo Mi, Camera Cam, Dem D, std::string const & Fname, std::string const & Type, int Border=10, int Grid_spacing=1)\n"
 		"\n"
-		"void ArgusOrbitData::save_ortho(const MapInfo &Mi, const Camera &Cam, const Dem &D, const std::string\n"
-		"&Fname, const std::string &Type, int Border=10, int Grid_spacing=1)\n"
-		"const\n"
 		"GeoCal::ArgusOrbitData::save_ortho\n"
-		"Save an three color orthorectified image to the given file.\n"
-		"The type should be \"img\", \"tif\", \"tifjpeg\" or \"vicar\" (\"tif\"\n"
-		"uses LZW lossless compression, \"tifjpeg\" uses jpeg lossy\n"
-		"compression).\n"
+		"Save an three color orthorectified image to the given file.  \n"
 		"\n"
-		"The MapInfo governs the map projection and pixel size used. We however\n"
-		"only write out the subset of MapInfo that is needed to cover the\n"
-		"footprint of this orthorectified image.\n"
+		"The type should be \"img\", \"tif\", \"tifjpeg\" or \"vicar\" (\"tif\" uses LZW\n"
+		"lossless compression, \"tifjpeg\" uses jpeg lossy compression).  \n"
 		"\n"
-		"To speed up the processing, you can give a Grid_spacing > 1. We\n"
-		"calculate the position in the input image exactly at the Grid_spacing\n"
-		"locations, and do a bilinear interpolation in between. If the\n"
-		"Grid_spacing is 1, then no interpolation is done.\n"
+		"The MapInfo governs the map projection and pixel size used. We however only\n"
+		"write out the subset of MapInfo that is needed to cover the footprint of this\n"
+		"orthorectified image.  \n"
 		"\n"
-		"This is a somewhat specific function, but I had similar functionality\n"
-		"in Ruby code working with ARGUS data. Ruby is a nice language, but\n"
-		"just sucks at garbage collection. So we move this functionality into\n"
-		"this routine where we can control the lifetimes of all of the data\n"
-		"involved. \n"
+		"To speed up the processing, you can give a Grid_spacing > 1. We calculate the\n"
+		"position in the input image exactly at the Grid_spacing locations, and do a\n"
+		"bilinear interpolation in between. If the Grid_spacing is 1, then no\n"
+		"interpolation is done.  \n"
+		"\n"
+		"This is a somewhat specific function, but I had similar functionality in Ruby\n"
+		"code working with ARGUS data. Ruby is a nice language, but just sucks at garbage\n"
+		"collection. So we move this functionality into this routine where we can control\n"
+		"the lifetimes of all of the data involved.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData_add_ortho_to_image", _wrap_ArgusOrbitData_add_ortho_to_image, METH_VARARGS, "\n"
+		"ArgusOrbitData_add_ortho_to_image(ArgusOrbitData self, boost::shared_ptr< GeoCal::RasterImage > const & M1, boost::shared_ptr< GeoCal::RasterImage > const & M2, boost::shared_ptr< GeoCal::RasterImage > const & M3, Camera Cam, Dem D, int Border=10)\n"
 		"\n"
-		"void ArgusOrbitData::add_ortho_to_image(const boost::shared_ptr< RasterImage > &M1, const boost::shared_ptr<\n"
-		"RasterImage > &M2, const boost::shared_ptr< RasterImage > &M3, const\n"
-		"Camera &Cam, const Dem &D, int Border=10) const\n"
 		"GeoCal::ArgusOrbitData::add_ortho_to_image\n"
-		"Add three color orthorectified image to an existing set of three\n"
-		"images.\n"
-		"We currently don't try to do any feathering, instead we simply add\n"
-		"imagery if it is currently fill (value of 0), or crop the data if it\n"
-		"already has data. \n"
+		"Add three color orthorectified image to an existing set of three images.  \n"
+		"\n"
+		"We currently don't try to do any feathering, instead we simply add imagery if it\n"
+		"is currently fill (value of 0), or crop the data if it already has data.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData_mosaic", _wrap_ArgusOrbitData_mosaic, METH_VARARGS, "\n"
+		"ArgusOrbitData_mosaic(Vector_ArgusOrbitData Od, Vector_Camera Cam, Dem D, MapInfo Mi, std::string const & Fname, std::string const & Type, int Border=10)\n"
 		"\n"
-		"void ArgusOrbitData::mosaic(const std::vector< boost::shared_ptr< ArgusOrbitData > > &Od, const\n"
-		"std::vector< boost::shared_ptr< Camera > > &Cam, const Dem &D, const\n"
-		"MapInfo &Mi, const std::string &Fname, const std::string &Type, int\n"
-		"Border=10)\n"
 		"GeoCal::ArgusOrbitData::mosaic\n"
-		"Generate a mosaic that fits the given MapInfo, sampling each of the\n"
-		"orbit data.\n"
-		"We save this to the given file, with the given Type. \n"
+		"Generate a mosaic that fits the given MapInfo, sampling each of the orbit data.  \n"
+		"\n"
+		"We save this to the given file, with the given Type.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData_image", _wrap_ArgusOrbitData_image, METH_VARARGS, "\n"
+		"ArgusOrbitData_image(ArgusOrbitData self, int band=1) -> boost::shared_ptr< GeoCal::GdalRasterImage >\n"
 		"\n"
-		"boost::shared_ptr< GdalRasterImage > ArgusOrbitData::image(int band=1) const\n"
 		"GeoCal::ArgusOrbitData::image\n"
-		"Access image for the given band.\n"
-		"The band is 1 based, because that is what Gdal uses. \n"
+		"Access image for the given band.  \n"
+		"\n"
+		"The band is 1 based, because that is what Gdal uses.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData__v_file_name", _wrap_ArgusOrbitData__v_file_name, METH_O, "\n"
+		"ArgusOrbitData__v_file_name(ArgusOrbitData self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::ArgusOrbitData::file_name() const\n"
 		"GeoCal::ArgusOrbitData::file_name\n"
-		"File with JPEG data.\n"
+		"File with JPEG data.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbitData__v_camera_number", _wrap_ArgusOrbitData__v_camera_number, METH_O, "\n"
+		"ArgusOrbitData__v_camera_number(ArgusOrbitData self) -> int\n"
 		"\n"
-		"int GeoCal::ArgusOrbitData::camera_number() const\n"
 		"GeoCal::ArgusOrbitData::camera_number\n"
-		"Camera number. This is 1 - 13.\n"
+		"Camera number. This is 1 - 13.  \n"
 		"\n"
 		""},
 	 { "delete_ArgusOrbitData", _wrap_delete_ArgusOrbitData, METH_O, "\n"
+		"delete_ArgusOrbitData(ArgusOrbitData self)\n"
 		"\n"
-		"virtual GeoCal::ArgusOrbitData::~ArgusOrbitData()\n"
 		"GeoCal::ArgusOrbitData::~ArgusOrbitData\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbitData_swigregister", ArgusOrbitData_swigregister, METH_O, NULL},
 	 { "ArgusOrbitData_swiginit", ArgusOrbitData_swiginit, METH_VARARGS, NULL},
 	 { "new_ArgusOrbit", _wrap_new_ArgusOrbit, METH_O, "\n"
+		"new_ArgusOrbit(std::string const & Fname) -> ArgusOrbit\n"
 		"\n"
-		"ArgusOrbit::ArgusOrbit(const std::string &Fname)\n"
 		"GeoCal::ArgusOrbit::ArgusOrbit\n"
-		"Open the given file and use it to provide Orbit information.\n"
-		"This file should be a CSV file containing one record per line, with\n"
-		"the fields \"File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading\". The\n"
-		"first line is assumed to be a header, and is discarded. The second\n"
-		"line is the epoch that the times are measured relative to. \n"
+		"Open the given file and use it to provide Orbit information.  \n"
+		"\n"
+		"This file should be a CSV file containing one record per line, with the fields\n"
+		"\"File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading\". The first line is assumed\n"
+		"to be a header, and is discarded. The second line is the epoch that the times\n"
+		"are measured relative to.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbit_focal_length", _wrap_ArgusOrbit_focal_length, METH_VARARGS, "\n"
+		"ArgusOrbit_focal_length(ArgusOrbit self, int camera_num) -> double\n"
 		"\n"
-		"double ArgusOrbit::focal_length(int camera_num) const\n"
 		"GeoCal::ArgusOrbit::focal_length\n"
-		"This finds the first row with orbit and image data for the given\n"
-		"camera.\n"
-		"We then read the metadata from the image do determine the reported\n"
-		"focal length. If we don't have any orbit or image data for the camera,\n"
-		"we return -1. \n"
+		"This finds the first row with orbit and image data for the given camera.  \n"
+		"\n"
+		"We then read the metadata from the image do determine the reported focal length.\n"
+		"If we don't have any orbit or image data for the camera, we return -1.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbit__v_number_row", _wrap_ArgusOrbit__v_number_row, METH_O, "\n"
+		"ArgusOrbit__v_number_row(ArgusOrbit self) -> int\n"
 		"\n"
-		"int GeoCal::ArgusOrbit::number_row() const\n"
 		"GeoCal::ArgusOrbit::number_row\n"
-		"Number of rows of data we have.\n"
+		"Number of rows of data we have.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbit_nav", _wrap_ArgusOrbit_nav, METH_VARARGS, "\n"
+		"ArgusOrbit_nav(ArgusOrbit self, int row, int camera_num) -> boost::shared_ptr< GeoCal::ArgusOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< ArgusOrbitData > ArgusOrbit::nav(int row, int camera_num) const\n"
 		"GeoCal::ArgusOrbit::nav\n"
-		"Return the ArgusOrbitData for the given row and camera, or if we don't have any data there\n"
-		"return a null pointer.\n"
+		"Return the ArgusOrbitData for the given row and camera, or if we don't have any\n"
+		"data there return a null pointer.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbit__v_file_name", _wrap_ArgusOrbit__v_file_name, METH_O, "\n"
+		"ArgusOrbit__v_file_name(ArgusOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::ArgusOrbit::file_name() const\n"
 		"GeoCal::ArgusOrbit::file_name\n"
 		""},
-	 { "delete_ArgusOrbit", _wrap_delete_ArgusOrbit, METH_O, NULL},
+	 { "delete_ArgusOrbit", _wrap_delete_ArgusOrbit, METH_O, "delete_ArgusOrbit(ArgusOrbit self)"},
 	 { "ArgusOrbit_swigregister", ArgusOrbit_swigregister, METH_O, NULL},
 	 { "ArgusOrbit_swiginit", ArgusOrbit_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_iterator", _wrap_Vector_ArgusOrbitData_iterator, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___nonzero__", _wrap_Vector_ArgusOrbitData___nonzero__, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___bool__", _wrap_Vector_ArgusOrbitData___bool__, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___len__", _wrap_Vector_ArgusOrbitData___len__, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___getslice__", _wrap_Vector_ArgusOrbitData___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___setslice__", _wrap_Vector_ArgusOrbitData___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___delslice__", _wrap_Vector_ArgusOrbitData___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___delitem__", _wrap_Vector_ArgusOrbitData___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___getitem__", _wrap_Vector_ArgusOrbitData___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___setitem__", _wrap_Vector_ArgusOrbitData___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_pop", _wrap_Vector_ArgusOrbitData_pop, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_append", _wrap_Vector_ArgusOrbitData_append, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_empty", _wrap_Vector_ArgusOrbitData_empty, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_size", _wrap_Vector_ArgusOrbitData_size, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_swap", _wrap_Vector_ArgusOrbitData_swap, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_begin", _wrap_Vector_ArgusOrbitData_begin, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_end", _wrap_Vector_ArgusOrbitData_end, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_rbegin", _wrap_Vector_ArgusOrbitData_rbegin, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_rend", _wrap_Vector_ArgusOrbitData_rend, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_clear", _wrap_Vector_ArgusOrbitData_clear, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_get_allocator", _wrap_Vector_ArgusOrbitData_get_allocator, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_pop_back", _wrap_Vector_ArgusOrbitData_pop_back, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_erase", _wrap_Vector_ArgusOrbitData_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ArgusOrbitData", _wrap_new_Vector_ArgusOrbitData, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_push_back", _wrap_Vector_ArgusOrbitData_push_back, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_front", _wrap_Vector_ArgusOrbitData_front, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_back", _wrap_Vector_ArgusOrbitData_back, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_assign", _wrap_Vector_ArgusOrbitData_assign, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_resize", _wrap_Vector_ArgusOrbitData_resize, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_insert", _wrap_Vector_ArgusOrbitData_insert, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_reserve", _wrap_Vector_ArgusOrbitData_reserve, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_capacity", _wrap_Vector_ArgusOrbitData_capacity, METH_O, NULL},
-	 { "delete_Vector_ArgusOrbitData", _wrap_delete_Vector_ArgusOrbitData, METH_O, NULL},
+	 { "Vector_ArgusOrbitData_iterator", _wrap_Vector_ArgusOrbitData_iterator, METH_O, "Vector_ArgusOrbitData_iterator(Vector_ArgusOrbitData self) -> SwigPyIterator"},
+	 { "Vector_ArgusOrbitData___nonzero__", _wrap_Vector_ArgusOrbitData___nonzero__, METH_O, "Vector_ArgusOrbitData___nonzero__(Vector_ArgusOrbitData self) -> bool"},
+	 { "Vector_ArgusOrbitData___bool__", _wrap_Vector_ArgusOrbitData___bool__, METH_O, "Vector_ArgusOrbitData___bool__(Vector_ArgusOrbitData self) -> bool"},
+	 { "Vector_ArgusOrbitData___len__", _wrap_Vector_ArgusOrbitData___len__, METH_O, "Vector_ArgusOrbitData___len__(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type"},
+	 { "Vector_ArgusOrbitData___getslice__", _wrap_Vector_ArgusOrbitData___getslice__, METH_VARARGS, "Vector_ArgusOrbitData___getslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j) -> Vector_ArgusOrbitData"},
+	 { "Vector_ArgusOrbitData___setslice__", _wrap_Vector_ArgusOrbitData___setslice__, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData___setslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j)\n"
+		"Vector_ArgusOrbitData___setslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j, Vector_ArgusOrbitData v)\n"
+		""},
+	 { "Vector_ArgusOrbitData___delslice__", _wrap_Vector_ArgusOrbitData___delslice__, METH_VARARGS, "Vector_ArgusOrbitData___delslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j)"},
+	 { "Vector_ArgusOrbitData___delitem__", _wrap_Vector_ArgusOrbitData___delitem__, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData___delitem__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i)\n"
+		"Vector_ArgusOrbitData___delitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ArgusOrbitData___getitem__", _wrap_Vector_ArgusOrbitData___getitem__, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData___getitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice) -> Vector_ArgusOrbitData\n"
+		"Vector_ArgusOrbitData___getitem__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &\n"
+		""},
+	 { "Vector_ArgusOrbitData___setitem__", _wrap_Vector_ArgusOrbitData___setitem__, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData___setitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice, Vector_ArgusOrbitData v)\n"
+		"Vector_ArgusOrbitData___setitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		"Vector_ArgusOrbitData___setitem__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_ArgusOrbitData_pop", _wrap_Vector_ArgusOrbitData_pop, METH_O, "Vector_ArgusOrbitData_pop(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type"},
+	 { "Vector_ArgusOrbitData_append", _wrap_Vector_ArgusOrbitData_append, METH_VARARGS, "Vector_ArgusOrbitData_append(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)"},
+	 { "Vector_ArgusOrbitData_empty", _wrap_Vector_ArgusOrbitData_empty, METH_O, "Vector_ArgusOrbitData_empty(Vector_ArgusOrbitData self) -> bool"},
+	 { "Vector_ArgusOrbitData_size", _wrap_Vector_ArgusOrbitData_size, METH_O, "Vector_ArgusOrbitData_size(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type"},
+	 { "Vector_ArgusOrbitData_swap", _wrap_Vector_ArgusOrbitData_swap, METH_VARARGS, "Vector_ArgusOrbitData_swap(Vector_ArgusOrbitData self, Vector_ArgusOrbitData v)"},
+	 { "Vector_ArgusOrbitData_begin", _wrap_Vector_ArgusOrbitData_begin, METH_O, "Vector_ArgusOrbitData_begin(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator"},
+	 { "Vector_ArgusOrbitData_end", _wrap_Vector_ArgusOrbitData_end, METH_O, "Vector_ArgusOrbitData_end(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator"},
+	 { "Vector_ArgusOrbitData_rbegin", _wrap_Vector_ArgusOrbitData_rbegin, METH_O, "Vector_ArgusOrbitData_rbegin(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::reverse_iterator"},
+	 { "Vector_ArgusOrbitData_rend", _wrap_Vector_ArgusOrbitData_rend, METH_O, "Vector_ArgusOrbitData_rend(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::reverse_iterator"},
+	 { "Vector_ArgusOrbitData_clear", _wrap_Vector_ArgusOrbitData_clear, METH_O, "Vector_ArgusOrbitData_clear(Vector_ArgusOrbitData self)"},
+	 { "Vector_ArgusOrbitData_get_allocator", _wrap_Vector_ArgusOrbitData_get_allocator, METH_O, "Vector_ArgusOrbitData_get_allocator(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::allocator_type"},
+	 { "Vector_ArgusOrbitData_pop_back", _wrap_Vector_ArgusOrbitData_pop_back, METH_O, "Vector_ArgusOrbitData_pop_back(Vector_ArgusOrbitData self)"},
+	 { "Vector_ArgusOrbitData_erase", _wrap_Vector_ArgusOrbitData_erase, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData_erase(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator\n"
+		"Vector_ArgusOrbitData_erase(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator first, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator\n"
+		""},
+	 { "new_Vector_ArgusOrbitData", _wrap_new_Vector_ArgusOrbitData, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData()\n"
+		"Vector_ArgusOrbitData(Vector_ArgusOrbitData other)\n"
+		"Vector_ArgusOrbitData(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type size)\n"
+		"new_Vector_ArgusOrbitData(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & value) -> Vector_ArgusOrbitData\n"
+		""},
+	 { "Vector_ArgusOrbitData_push_back", _wrap_Vector_ArgusOrbitData_push_back, METH_VARARGS, "Vector_ArgusOrbitData_push_back(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)"},
+	 { "Vector_ArgusOrbitData_front", _wrap_Vector_ArgusOrbitData_front, METH_O, "Vector_ArgusOrbitData_front(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &"},
+	 { "Vector_ArgusOrbitData_back", _wrap_Vector_ArgusOrbitData_back, METH_O, "Vector_ArgusOrbitData_back(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &"},
+	 { "Vector_ArgusOrbitData_assign", _wrap_Vector_ArgusOrbitData_assign, METH_VARARGS, "Vector_ArgusOrbitData_assign(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)"},
+	 { "Vector_ArgusOrbitData_resize", _wrap_Vector_ArgusOrbitData_resize, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData_resize(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type new_size)\n"
+		"Vector_ArgusOrbitData_resize(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_ArgusOrbitData_insert", _wrap_Vector_ArgusOrbitData_insert, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData_insert(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator\n"
+		"Vector_ArgusOrbitData_insert(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_ArgusOrbitData_reserve", _wrap_Vector_ArgusOrbitData_reserve, METH_VARARGS, "Vector_ArgusOrbitData_reserve(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type n)"},
+	 { "Vector_ArgusOrbitData_capacity", _wrap_Vector_ArgusOrbitData_capacity, METH_O, "Vector_ArgusOrbitData_capacity(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type"},
+	 { "delete_Vector_ArgusOrbitData", _wrap_delete_Vector_ArgusOrbitData, METH_O, "delete_Vector_ArgusOrbitData(Vector_ArgusOrbitData self)"},
 	 { "Vector_ArgusOrbitData_swigregister", Vector_ArgusOrbitData_swigregister, METH_O, NULL},
 	 { "Vector_ArgusOrbitData_swiginit", Vector_ArgusOrbitData_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }
@@ -11917,169 +11940,192 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_ArgusOrbitData", _wrap_new_ArgusOrbitData, METH_VARARGS, "\n"
+		"new_ArgusOrbitData(Time Tm, std::string const & File_name, int Camera_number, Geodetic Position, Array_double_3 Vel_fixed, double Roll, double Pitch, double Heading) -> ArgusOrbitData\n"
 		"\n"
-		"GeoCal::ArgusOrbitData::ArgusOrbitData(const Time &Tm, const std::string &File_name, int Camera_number,\n"
-		"const Geodetic &Position, const boost::array< double, 3 > &Vel_fixed,\n"
-		"double Roll, double Pitch, double Heading)\n"
 		"GeoCal::ArgusOrbitData::ArgusOrbitData\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbitData_save_ortho", _wrap_ArgusOrbitData_save_ortho, METH_VARARGS, "\n"
+		"save_ortho(ArgusOrbitData self, MapInfo Mi, Camera Cam, Dem D, std::string const & Fname, std::string const & Type, int Border=10, int Grid_spacing=1)\n"
 		"\n"
-		"void ArgusOrbitData::save_ortho(const MapInfo &Mi, const Camera &Cam, const Dem &D, const std::string\n"
-		"&Fname, const std::string &Type, int Border=10, int Grid_spacing=1)\n"
-		"const\n"
 		"GeoCal::ArgusOrbitData::save_ortho\n"
-		"Save an three color orthorectified image to the given file.\n"
-		"The type should be \"img\", \"tif\", \"tifjpeg\" or \"vicar\" (\"tif\"\n"
-		"uses LZW lossless compression, \"tifjpeg\" uses jpeg lossy\n"
-		"compression).\n"
+		"Save an three color orthorectified image to the given file.  \n"
 		"\n"
-		"The MapInfo governs the map projection and pixel size used. We however\n"
-		"only write out the subset of MapInfo that is needed to cover the\n"
-		"footprint of this orthorectified image.\n"
+		"The type should be \"img\", \"tif\", \"tifjpeg\" or \"vicar\" (\"tif\" uses LZW\n"
+		"lossless compression, \"tifjpeg\" uses jpeg lossy compression).  \n"
 		"\n"
-		"To speed up the processing, you can give a Grid_spacing > 1. We\n"
-		"calculate the position in the input image exactly at the Grid_spacing\n"
-		"locations, and do a bilinear interpolation in between. If the\n"
-		"Grid_spacing is 1, then no interpolation is done.\n"
+		"The MapInfo governs the map projection and pixel size used. We however only\n"
+		"write out the subset of MapInfo that is needed to cover the footprint of this\n"
+		"orthorectified image.  \n"
 		"\n"
-		"This is a somewhat specific function, but I had similar functionality\n"
-		"in Ruby code working with ARGUS data. Ruby is a nice language, but\n"
-		"just sucks at garbage collection. So we move this functionality into\n"
-		"this routine where we can control the lifetimes of all of the data\n"
-		"involved. \n"
+		"To speed up the processing, you can give a Grid_spacing > 1. We calculate the\n"
+		"position in the input image exactly at the Grid_spacing locations, and do a\n"
+		"bilinear interpolation in between. If the Grid_spacing is 1, then no\n"
+		"interpolation is done.  \n"
+		"\n"
+		"This is a somewhat specific function, but I had similar functionality in Ruby\n"
+		"code working with ARGUS data. Ruby is a nice language, but just sucks at garbage\n"
+		"collection. So we move this functionality into this routine where we can control\n"
+		"the lifetimes of all of the data involved.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData_add_ortho_to_image", _wrap_ArgusOrbitData_add_ortho_to_image, METH_VARARGS, "\n"
+		"add_ortho_to_image(ArgusOrbitData self, boost::shared_ptr< GeoCal::RasterImage > const & M1, boost::shared_ptr< GeoCal::RasterImage > const & M2, boost::shared_ptr< GeoCal::RasterImage > const & M3, Camera Cam, Dem D, int Border=10)\n"
 		"\n"
-		"void ArgusOrbitData::add_ortho_to_image(const boost::shared_ptr< RasterImage > &M1, const boost::shared_ptr<\n"
-		"RasterImage > &M2, const boost::shared_ptr< RasterImage > &M3, const\n"
-		"Camera &Cam, const Dem &D, int Border=10) const\n"
 		"GeoCal::ArgusOrbitData::add_ortho_to_image\n"
-		"Add three color orthorectified image to an existing set of three\n"
-		"images.\n"
-		"We currently don't try to do any feathering, instead we simply add\n"
-		"imagery if it is currently fill (value of 0), or crop the data if it\n"
-		"already has data. \n"
+		"Add three color orthorectified image to an existing set of three images.  \n"
+		"\n"
+		"We currently don't try to do any feathering, instead we simply add imagery if it\n"
+		"is currently fill (value of 0), or crop the data if it already has data.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData_mosaic", _wrap_ArgusOrbitData_mosaic, METH_VARARGS, "\n"
+		"mosaic(Vector_ArgusOrbitData Od, Vector_Camera Cam, Dem D, MapInfo Mi, std::string const & Fname, std::string const & Type, int Border=10)\n"
 		"\n"
-		"void ArgusOrbitData::mosaic(const std::vector< boost::shared_ptr< ArgusOrbitData > > &Od, const\n"
-		"std::vector< boost::shared_ptr< Camera > > &Cam, const Dem &D, const\n"
-		"MapInfo &Mi, const std::string &Fname, const std::string &Type, int\n"
-		"Border=10)\n"
 		"GeoCal::ArgusOrbitData::mosaic\n"
-		"Generate a mosaic that fits the given MapInfo, sampling each of the\n"
-		"orbit data.\n"
-		"We save this to the given file, with the given Type. \n"
+		"Generate a mosaic that fits the given MapInfo, sampling each of the orbit data.  \n"
+		"\n"
+		"We save this to the given file, with the given Type.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData_image", _wrap_ArgusOrbitData_image, METH_VARARGS, "\n"
+		"image(ArgusOrbitData self, int band=1) -> boost::shared_ptr< GeoCal::GdalRasterImage >\n"
 		"\n"
-		"boost::shared_ptr< GdalRasterImage > ArgusOrbitData::image(int band=1) const\n"
 		"GeoCal::ArgusOrbitData::image\n"
-		"Access image for the given band.\n"
-		"The band is 1 based, because that is what Gdal uses. \n"
+		"Access image for the given band.  \n"
+		"\n"
+		"The band is 1 based, because that is what Gdal uses.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbitData__v_file_name", _wrap_ArgusOrbitData__v_file_name, METH_O, "\n"
+		"_v_file_name(ArgusOrbitData self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::ArgusOrbitData::file_name() const\n"
 		"GeoCal::ArgusOrbitData::file_name\n"
-		"File with JPEG data.\n"
+		"File with JPEG data.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbitData__v_camera_number", _wrap_ArgusOrbitData__v_camera_number, METH_O, "\n"
+		"_v_camera_number(ArgusOrbitData self) -> int\n"
 		"\n"
-		"int GeoCal::ArgusOrbitData::camera_number() const\n"
 		"GeoCal::ArgusOrbitData::camera_number\n"
-		"Camera number. This is 1 - 13.\n"
+		"Camera number. This is 1 - 13.  \n"
 		"\n"
 		""},
 	 { "delete_ArgusOrbitData", _wrap_delete_ArgusOrbitData, METH_O, "\n"
+		"delete_ArgusOrbitData(ArgusOrbitData self)\n"
 		"\n"
-		"virtual GeoCal::ArgusOrbitData::~ArgusOrbitData()\n"
 		"GeoCal::ArgusOrbitData::~ArgusOrbitData\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbitData_swigregister", ArgusOrbitData_swigregister, METH_O, NULL},
 	 { "ArgusOrbitData_swiginit", ArgusOrbitData_swiginit, METH_VARARGS, NULL},
 	 { "new_ArgusOrbit", _wrap_new_ArgusOrbit, METH_O, "\n"
+		"new_ArgusOrbit(std::string const & Fname) -> ArgusOrbit\n"
 		"\n"
-		"ArgusOrbit::ArgusOrbit(const std::string &Fname)\n"
 		"GeoCal::ArgusOrbit::ArgusOrbit\n"
-		"Open the given file and use it to provide Orbit information.\n"
-		"This file should be a CSV file containing one record per line, with\n"
-		"the fields \"File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading\". The\n"
-		"first line is assumed to be a header, and is discarded. The second\n"
-		"line is the epoch that the times are measured relative to. \n"
+		"Open the given file and use it to provide Orbit information.  \n"
+		"\n"
+		"This file should be a CSV file containing one record per line, with the fields\n"
+		"\"File,Camera,Time,Lat,Lon,Alt,Roll,Pitch,Heading\". The first line is assumed\n"
+		"to be a header, and is discarded. The second line is the epoch that the times\n"
+		"are measured relative to.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbit_focal_length", _wrap_ArgusOrbit_focal_length, METH_VARARGS, "\n"
+		"focal_length(ArgusOrbit self, int camera_num) -> double\n"
 		"\n"
-		"double ArgusOrbit::focal_length(int camera_num) const\n"
 		"GeoCal::ArgusOrbit::focal_length\n"
-		"This finds the first row with orbit and image data for the given\n"
-		"camera.\n"
-		"We then read the metadata from the image do determine the reported\n"
-		"focal length. If we don't have any orbit or image data for the camera,\n"
-		"we return -1. \n"
+		"This finds the first row with orbit and image data for the given camera.  \n"
+		"\n"
+		"We then read the metadata from the image do determine the reported focal length.\n"
+		"If we don't have any orbit or image data for the camera, we return -1.  \n"
+		"\n"
 		""},
 	 { "ArgusOrbit__v_number_row", _wrap_ArgusOrbit__v_number_row, METH_O, "\n"
+		"_v_number_row(ArgusOrbit self) -> int\n"
 		"\n"
-		"int GeoCal::ArgusOrbit::number_row() const\n"
 		"GeoCal::ArgusOrbit::number_row\n"
-		"Number of rows of data we have.\n"
+		"Number of rows of data we have.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbit_nav", _wrap_ArgusOrbit_nav, METH_VARARGS, "\n"
+		"nav(ArgusOrbit self, int row, int camera_num) -> boost::shared_ptr< GeoCal::ArgusOrbitData >\n"
 		"\n"
-		"boost::shared_ptr< ArgusOrbitData > ArgusOrbit::nav(int row, int camera_num) const\n"
 		"GeoCal::ArgusOrbit::nav\n"
-		"Return the ArgusOrbitData for the given row and camera, or if we don't have any data there\n"
-		"return a null pointer.\n"
+		"Return the ArgusOrbitData for the given row and camera, or if we don't have any\n"
+		"data there return a null pointer.  \n"
 		"\n"
 		""},
 	 { "ArgusOrbit__v_file_name", _wrap_ArgusOrbit__v_file_name, METH_O, "\n"
+		"_v_file_name(ArgusOrbit self) -> std::string\n"
 		"\n"
-		"const std::string & GeoCal::ArgusOrbit::file_name() const\n"
 		"GeoCal::ArgusOrbit::file_name\n"
 		""},
-	 { "delete_ArgusOrbit", _wrap_delete_ArgusOrbit, METH_O, NULL},
+	 { "delete_ArgusOrbit", _wrap_delete_ArgusOrbit, METH_O, "delete_ArgusOrbit(ArgusOrbit self)"},
 	 { "ArgusOrbit_swigregister", ArgusOrbit_swigregister, METH_O, NULL},
 	 { "ArgusOrbit_swiginit", ArgusOrbit_swiginit, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_iterator", _wrap_Vector_ArgusOrbitData_iterator, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___nonzero__", _wrap_Vector_ArgusOrbitData___nonzero__, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___bool__", _wrap_Vector_ArgusOrbitData___bool__, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___len__", _wrap_Vector_ArgusOrbitData___len__, METH_O, NULL},
-	 { "Vector_ArgusOrbitData___getslice__", _wrap_Vector_ArgusOrbitData___getslice__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___setslice__", _wrap_Vector_ArgusOrbitData___setslice__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___delslice__", _wrap_Vector_ArgusOrbitData___delslice__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___delitem__", _wrap_Vector_ArgusOrbitData___delitem__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___getitem__", _wrap_Vector_ArgusOrbitData___getitem__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData___setitem__", _wrap_Vector_ArgusOrbitData___setitem__, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_pop", _wrap_Vector_ArgusOrbitData_pop, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_append", _wrap_Vector_ArgusOrbitData_append, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_empty", _wrap_Vector_ArgusOrbitData_empty, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_size", _wrap_Vector_ArgusOrbitData_size, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_swap", _wrap_Vector_ArgusOrbitData_swap, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_begin", _wrap_Vector_ArgusOrbitData_begin, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_end", _wrap_Vector_ArgusOrbitData_end, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_rbegin", _wrap_Vector_ArgusOrbitData_rbegin, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_rend", _wrap_Vector_ArgusOrbitData_rend, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_clear", _wrap_Vector_ArgusOrbitData_clear, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_get_allocator", _wrap_Vector_ArgusOrbitData_get_allocator, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_pop_back", _wrap_Vector_ArgusOrbitData_pop_back, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_erase", _wrap_Vector_ArgusOrbitData_erase, METH_VARARGS, NULL},
-	 { "new_Vector_ArgusOrbitData", _wrap_new_Vector_ArgusOrbitData, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_push_back", _wrap_Vector_ArgusOrbitData_push_back, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_front", _wrap_Vector_ArgusOrbitData_front, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_back", _wrap_Vector_ArgusOrbitData_back, METH_O, NULL},
-	 { "Vector_ArgusOrbitData_assign", _wrap_Vector_ArgusOrbitData_assign, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_resize", _wrap_Vector_ArgusOrbitData_resize, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_insert", _wrap_Vector_ArgusOrbitData_insert, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_reserve", _wrap_Vector_ArgusOrbitData_reserve, METH_VARARGS, NULL},
-	 { "Vector_ArgusOrbitData_capacity", _wrap_Vector_ArgusOrbitData_capacity, METH_O, NULL},
-	 { "delete_Vector_ArgusOrbitData", _wrap_delete_Vector_ArgusOrbitData, METH_O, NULL},
+	 { "Vector_ArgusOrbitData_iterator", _wrap_Vector_ArgusOrbitData_iterator, METH_O, "iterator(Vector_ArgusOrbitData self) -> SwigPyIterator"},
+	 { "Vector_ArgusOrbitData___nonzero__", _wrap_Vector_ArgusOrbitData___nonzero__, METH_O, "__nonzero__(Vector_ArgusOrbitData self) -> bool"},
+	 { "Vector_ArgusOrbitData___bool__", _wrap_Vector_ArgusOrbitData___bool__, METH_O, "__bool__(Vector_ArgusOrbitData self) -> bool"},
+	 { "Vector_ArgusOrbitData___len__", _wrap_Vector_ArgusOrbitData___len__, METH_O, "__len__(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type"},
+	 { "Vector_ArgusOrbitData___getslice__", _wrap_Vector_ArgusOrbitData___getslice__, METH_VARARGS, "__getslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j) -> Vector_ArgusOrbitData"},
+	 { "Vector_ArgusOrbitData___setslice__", _wrap_Vector_ArgusOrbitData___setslice__, METH_VARARGS, "\n"
+		"__setslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j)\n"
+		"__setslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j, Vector_ArgusOrbitData v)\n"
+		""},
+	 { "Vector_ArgusOrbitData___delslice__", _wrap_Vector_ArgusOrbitData___delslice__, METH_VARARGS, "__delslice__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type j)"},
+	 { "Vector_ArgusOrbitData___delitem__", _wrap_Vector_ArgusOrbitData___delitem__, METH_VARARGS, "\n"
+		"__delitem__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i)\n"
+		"__delitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		""},
+	 { "Vector_ArgusOrbitData___getitem__", _wrap_Vector_ArgusOrbitData___getitem__, METH_VARARGS, "\n"
+		"__getitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice) -> Vector_ArgusOrbitData\n"
+		"__getitem__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &\n"
+		""},
+	 { "Vector_ArgusOrbitData___setitem__", _wrap_Vector_ArgusOrbitData___setitem__, METH_VARARGS, "\n"
+		"__setitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice, Vector_ArgusOrbitData v)\n"
+		"__setitem__(Vector_ArgusOrbitData self, SWIGPY_SLICEOBJECT * slice)\n"
+		"__setitem__(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::difference_type i, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_ArgusOrbitData_pop", _wrap_Vector_ArgusOrbitData_pop, METH_O, "pop(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type"},
+	 { "Vector_ArgusOrbitData_append", _wrap_Vector_ArgusOrbitData_append, METH_VARARGS, "append(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)"},
+	 { "Vector_ArgusOrbitData_empty", _wrap_Vector_ArgusOrbitData_empty, METH_O, "empty(Vector_ArgusOrbitData self) -> bool"},
+	 { "Vector_ArgusOrbitData_size", _wrap_Vector_ArgusOrbitData_size, METH_O, "size(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type"},
+	 { "Vector_ArgusOrbitData_swap", _wrap_Vector_ArgusOrbitData_swap, METH_VARARGS, "swap(Vector_ArgusOrbitData self, Vector_ArgusOrbitData v)"},
+	 { "Vector_ArgusOrbitData_begin", _wrap_Vector_ArgusOrbitData_begin, METH_O, "begin(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator"},
+	 { "Vector_ArgusOrbitData_end", _wrap_Vector_ArgusOrbitData_end, METH_O, "end(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator"},
+	 { "Vector_ArgusOrbitData_rbegin", _wrap_Vector_ArgusOrbitData_rbegin, METH_O, "rbegin(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::reverse_iterator"},
+	 { "Vector_ArgusOrbitData_rend", _wrap_Vector_ArgusOrbitData_rend, METH_O, "rend(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::reverse_iterator"},
+	 { "Vector_ArgusOrbitData_clear", _wrap_Vector_ArgusOrbitData_clear, METH_O, "clear(Vector_ArgusOrbitData self)"},
+	 { "Vector_ArgusOrbitData_get_allocator", _wrap_Vector_ArgusOrbitData_get_allocator, METH_O, "get_allocator(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::allocator_type"},
+	 { "Vector_ArgusOrbitData_pop_back", _wrap_Vector_ArgusOrbitData_pop_back, METH_O, "pop_back(Vector_ArgusOrbitData self)"},
+	 { "Vector_ArgusOrbitData_erase", _wrap_Vector_ArgusOrbitData_erase, METH_VARARGS, "\n"
+		"erase(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator pos) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator\n"
+		"erase(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator first, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator last) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator\n"
+		""},
+	 { "new_Vector_ArgusOrbitData", _wrap_new_Vector_ArgusOrbitData, METH_VARARGS, "\n"
+		"Vector_ArgusOrbitData()\n"
+		"Vector_ArgusOrbitData(Vector_ArgusOrbitData other)\n"
+		"Vector_ArgusOrbitData(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type size)\n"
+		"new_Vector_ArgusOrbitData(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type size, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & value) -> Vector_ArgusOrbitData\n"
+		""},
+	 { "Vector_ArgusOrbitData_push_back", _wrap_Vector_ArgusOrbitData_push_back, METH_VARARGS, "push_back(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)"},
+	 { "Vector_ArgusOrbitData_front", _wrap_Vector_ArgusOrbitData_front, METH_O, "front(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &"},
+	 { "Vector_ArgusOrbitData_back", _wrap_Vector_ArgusOrbitData_back, METH_O, "back(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &"},
+	 { "Vector_ArgusOrbitData_assign", _wrap_Vector_ArgusOrbitData_assign, METH_VARARGS, "assign(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)"},
+	 { "Vector_ArgusOrbitData_resize", _wrap_Vector_ArgusOrbitData_resize, METH_VARARGS, "\n"
+		"resize(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type new_size)\n"
+		"resize(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type new_size, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_ArgusOrbitData_insert", _wrap_Vector_ArgusOrbitData_insert, METH_VARARGS, "\n"
+		"insert(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator\n"
+		"insert(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::iterator pos, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type n, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const & x)\n"
+		""},
+	 { "Vector_ArgusOrbitData_reserve", _wrap_Vector_ArgusOrbitData_reserve, METH_VARARGS, "reserve(Vector_ArgusOrbitData self, std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type n)"},
+	 { "Vector_ArgusOrbitData_capacity", _wrap_Vector_ArgusOrbitData_capacity, METH_O, "capacity(Vector_ArgusOrbitData self) -> std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::size_type"},
+	 { "delete_Vector_ArgusOrbitData", _wrap_delete_Vector_ArgusOrbitData, METH_O, "delete_Vector_ArgusOrbitData(Vector_ArgusOrbitData self)"},
 	 { "Vector_ArgusOrbitData_swigregister", Vector_ArgusOrbitData_swigregister, METH_O, NULL},
 	 { "Vector_ArgusOrbitData_swiginit", Vector_ArgusOrbitData_swiginit, METH_VARARGS, NULL},
 	 { NULL, NULL, 0, NULL }

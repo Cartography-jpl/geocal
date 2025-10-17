@@ -9026,248 +9026,275 @@ SWIGINTERN PyObject *OgrCoordinateConverter_swiginit(PyObject *SWIGUNUSEDPARM(se
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OgrWrapper", _wrap_new_OgrWrapper, METH_VARARGS, "\n"
+		"OgrWrapper(std::string const & Wkt, bool Use_traditional_gis_order=True)\n"
+		"new_OgrWrapper(boost::shared_ptr< OGRSpatialReference > const & Ogr) -> OgrWrapper\n"
 		"\n"
-		"OgrWrapper::OgrWrapper(const std::string &Wkt, bool Use_traditional_gis_order=true)\n"
 		"GeoCal::OgrWrapper::OgrWrapper\n"
-		"Constructor that creates a OGRSpatialReference from a WKT (Well Known\n"
-		"Text) string.\n"
-		"See class description for information about use_traditional_gis_order\n"
+		"Constructor that creates a OGRSpatialReference from a WKT (Well Known Text)\n"
+		"string.  \n"
+		"\n"
+		"See class description for information about use_traditional_gis_order  \n"
 		"\n"
 		""},
 	 { "OgrWrapper_add_spatial_reference", _wrap_OgrWrapper_add_spatial_reference, METH_VARARGS, "\n"
+		"OgrWrapper_add_spatial_reference(std::string const & Name, int Naif_code, boost::shared_ptr< OGRSpatialReference > & Geodetic_or_planetocentric, boost::shared_ptr< OGRSpatialReference > & Cf)\n"
+		"OgrWrapper_add_spatial_reference(std::string const & Name, int Naif_code, std::string const & Wkt_planet_centric)\n"
 		"\n"
-		"void OgrWrapper::add_spatial_reference(const std::string &Name, int Naif_code, const std::string\n"
-		"&Wkt_planet_centric)\n"
 		"GeoCal::OgrWrapper::add_spatial_reference\n"
-		"For handling coordinate conversions, we need to have a sample of the\n"
-		"Geodetic or Planetocentric spatial reference, and for the earth the\n"
-		"ECR coordinates.\n"
-		"We need to be able to map a string in the name (e.g., mars) to the\n"
-		"NAIF code and spatial references. We have a fixed set defined in\n"
-		"geocal, but you may need to add new ones if you are working on a\n"
-		"planet we didn't already add this for. \n"
+		"For handling coordinate conversions, we need to have a sample of the Geodetic or\n"
+		"Planetocentric spatial reference, and for the earth the ECR coordinates.  \n"
+		"\n"
+		"We need to be able to map a string in the name (e.g., mars) to the NAIF code and\n"
+		"spatial references. We have a fixed set defined in geocal, but you may need to\n"
+		"add new ones if you are working on a planet we didn't already add this for.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper_from_epsg", _wrap_OgrWrapper_from_epsg, METH_VARARGS, "\n"
+		"OgrWrapper_from_epsg(int Epsg_id, bool Use_traditional_gis_order=True) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id, bool Use_traditional_gis_order=true)\n"
 		"GeoCal::OgrWrapper::from_epsg\n"
-		"Create a OgrWrapper for a coordinate system given by the EPSG ID.\n"
-		"You can look the EPSG code up for various coordinate systems\n"
-		"athttp://www.epsg-registry.org \n"
+		"Create a OgrWrapper for a coordinate system given by the EPSG ID.  \n"
+		"\n"
+		"You can look the EPSG code up for various coordinate systems at http://www.epsg-\n"
+		"registry.org  \n"
+		"\n"
 		""},
 	 { "OgrWrapper_from_proj4", _wrap_OgrWrapper_from_proj4, METH_VARARGS, "\n"
+		"OgrWrapper_from_proj4(std::string const & Proj4_string, bool Use_traditional_gis_order=True) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string, bool Use_traditional_gis_order=true)\n"
 		"GeoCal::OgrWrapper::from_proj4\n"
-		"Create a OgrWrapper for a coordinate system from a Proj 4 string.\n"
+		"Create a OgrWrapper for a coordinate system from a Proj 4 string.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_ogr", _wrap_OgrWrapper__v_ogr, METH_O, "\n"
+		"OgrWrapper__v_ogr(OgrWrapper self) -> boost::shared_ptr< OGRSpatialReference >\n"
 		"\n"
-		"const boost::shared_ptr< OGRSpatialReference > & GeoCal::OgrWrapper::ogr_ptr() const\n"
 		"GeoCal::OgrWrapper::ogr_ptr\n"
 		""},
 	 { "OgrWrapper__v_transform", _wrap_OgrWrapper__v_transform, METH_O, "\n"
+		"OgrWrapper__v_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::transform() const\n"
 		"GeoCal::OgrWrapper::transform\n"
 		"Return transformation that takes us from our coordinate system to\n"
-		"Geodetic/Planetocentric.\n"
+		"Geodetic/Planetocentric.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_inverse_transform", _wrap_OgrWrapper__v_inverse_transform, METH_O, "\n"
+		"OgrWrapper__v_inverse_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::inverse_transform() const\n"
 		"GeoCal::OgrWrapper::inverse_transform\n"
-		"Return inverse of transform().\n"
-		"This goes from Geodetic/Planetocentric to our coordinate system. \n"
+		"Return inverse of transform().  \n"
+		"\n"
+		"This goes from Geodetic/Planetocentric to our coordinate system.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_cf_transform", _wrap_OgrWrapper__v_cf_transform, METH_O, "\n"
+		"OgrWrapper__v_cf_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::cf_transform() const\n"
 		"GeoCal::OgrWrapper::cf_transform\n"
 		"Return transformation that takes us from our coordinate system to\n"
-		"CartesianFixed.\n"
-		"Is null for other planets. \n"
+		"CartesianFixed.  \n"
+		"\n"
+		"Is null for other planets.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_cf_inverse_transform", _wrap_OgrWrapper__v_cf_inverse_transform, METH_O, "\n"
+		"OgrWrapper__v_cf_inverse_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::cf_inverse_transform() const\n"
 		"GeoCal::OgrWrapper::cf_inverse_transform\n"
-		"Return inverse of cf_transform().\n"
-		"This goes from CartesianFixed to our coordinate system. Is null for\n"
-		"other planets \n"
+		"Return inverse of cf_transform().  \n"
+		"\n"
+		"This goes from CartesianFixed to our coordinate system. Is null for other\n"
+		"planets  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_projected_cs_type_geo_key", _wrap_OgrWrapper__v_projected_cs_type_geo_key, METH_O, "\n"
+		"OgrWrapper__v_projected_cs_type_geo_key(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::projected_cs_type_geo_key() const\n"
 		"GeoCal::OgrWrapper::projected_cs_type_geo_key\n"
-		"When converting to the GEOTIFF header format used by VICAR, this is\n"
-		"the value that the PROJECTEDCSTYPEGEOKEY should have.\n"
-		"This is just the EPSG id written as text. \n"
+		"When converting to the GEOTIFF header format used by VICAR, this is the value\n"
+		"that the PROJECTEDCSTYPEGEOKEY should have.  \n"
+		"\n"
+		"This is just the EPSG id written as text.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_pcs_citation_geo_key", _wrap_OgrWrapper__v_pcs_citation_geo_key, METH_O, "\n"
+		"OgrWrapper__v_pcs_citation_geo_key(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::pcs_citation_geo_key() const\n"
 		"GeoCal::OgrWrapper::pcs_citation_geo_key\n"
-		"When converting to the GEOTIFF header format used by VICAR, this is\n"
-		"the value that the PCSCitationGeoKey should have.\n"
-		"This is a short text description of the projection. \n"
+		"When converting to the GEOTIFF header format used by VICAR, this is the value\n"
+		"that the PCSCitationGeoKey should have.  \n"
+		"\n"
+		"This is a short text description of the projection.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_use_traditional_gis_order", _wrap_OgrWrapper__v_use_traditional_gis_order, METH_O, "\n"
+		"OgrWrapper__v_use_traditional_gis_order(OgrWrapper self) -> bool\n"
 		"\n"
-		"bool OgrWrapper::use_traditional_gis_order() const\n"
 		"GeoCal::OgrWrapper::use_traditional_gis_order\n"
-		"If true, then we have OAMS_TRADITIONAL_GIS_ORDER.\n"
-		"If false, we have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as\n"
-		"an error, because we don't support that with serialization. \n"
+		"If true, then we have OAMS_TRADITIONAL_GIS_ORDER.  \n"
+		"\n"
+		"If false, we have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as an error,\n"
+		"because we don't support that with serialization.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_geogcs_name", _wrap_OgrWrapper__v_geogcs_name, METH_O, "\n"
+		"OgrWrapper__v_geogcs_name(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::geogcs_name() const\n"
 		"GeoCal::OgrWrapper::geogcs_name\n"
-		"The name of the GEOGCS.\n"
+		"The name of the GEOGCS.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_wkt", _wrap_OgrWrapper__v_wkt, METH_O, "\n"
+		"OgrWrapper__v_wkt(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::wkt() const\n"
 		"GeoCal::OgrWrapper::wkt\n"
-		"Write out a the WKT (Well Known Text) for ogr_.\n"
+		"Write out a the WKT (Well Known Text) for ogr_.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_pretty_wkt", _wrap_OgrWrapper__v_pretty_wkt, METH_O, "\n"
+		"OgrWrapper__v_pretty_wkt(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::pretty_wkt() const\n"
 		"GeoCal::OgrWrapper::pretty_wkt\n"
-		"Write out a prettified version of the WKT for ogr_.\n"
+		"Write out a prettified version of the WKT for ogr_.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_naif_code", _wrap_OgrWrapper__v_naif_code, METH_O, "\n"
+		"OgrWrapper__v_naif_code(OgrWrapper self) -> int\n"
 		"\n"
-		"int GeoCal::OgrWrapper::naif_code() const\n"
 		"GeoCal::OgrWrapper::naif_code\n"
-		"Return the NAIF code for the planet this coordinate is for.\n"
+		"Return the NAIF code for the planet this coordinate is for.  \n"
 		"\n"
 		""},
-	 { "OgrWrapper___str__", _wrap_OgrWrapper___str__, METH_O, NULL},
+	 { "OgrWrapper___str__", _wrap_OgrWrapper___str__, METH_O, "OgrWrapper___str__(OgrWrapper self) -> std::string"},
 	 { "delete_OgrWrapper", _wrap_delete_OgrWrapper, METH_O, "\n"
+		"delete_OgrWrapper(OgrWrapper self)\n"
 		"\n"
-		"OgrWrapper::~OgrWrapper()\n"
 		"GeoCal::OgrWrapper::~OgrWrapper\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper_swigregister", OgrWrapper_swigregister, METH_O, NULL},
 	 { "OgrWrapper_swiginit", OgrWrapper_swiginit, METH_VARARGS, NULL},
 	 { "new_OgrCoordinate", _wrap_new_OgrCoordinate, METH_VARARGS, "\n"
+		"OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, double x, double y, double z)\n"
+		"OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, Geodetic G)\n"
+		"OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, GroundCoordinate G)\n"
+		"new_OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, Planetocentric G) -> OgrCoordinate\n"
 		"\n"
-		"GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,\n"
-		"double z)\n"
 		"GeoCal::OgrCoordinate::OgrCoordinate\n"
-		"Constructor. X, Y, and Z are in whatever coordinates Ogr are in.\n"
+		"Constructor. X, Y, and Z are in whatever coordinates Ogr are in.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate_to_proj4", _wrap_OgrCoordinate_to_proj4, METH_O, "\n"
+		"OgrCoordinate_to_proj4(OgrCoordinate self) -> std::string\n"
 		"\n"
-		"std::string OgrCoordinate::to_proj4() const\n"
 		"GeoCal::OgrCoordinate::to_proj4\n"
-		"This returns the proj4 string for the projection of the given\n"
-		"coordinate.\n"
+		"This returns the proj4 string for the projection of the given coordinate.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate__v_ogr", _wrap_OgrCoordinate__v_ogr, METH_O, "\n"
+		"OgrCoordinate__v_ogr(OgrCoordinate self) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"const boost::shared_ptr< OgrWrapper > & GeoCal::OgrCoordinate::ogr_ptr() const\n"
 		"GeoCal::OgrCoordinate::ogr_ptr\n"
-		"Underlying OgrWrapper.\n"
+		"Underlying OgrWrapper.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate__v_utm_zone", _wrap_OgrCoordinate__v_utm_zone, METH_O, "\n"
+		"OgrCoordinate__v_utm_zone(OgrCoordinate self) -> int\n"
 		"\n"
-		"int OgrCoordinate::utm_zone() const\n"
 		"GeoCal::OgrCoordinate::utm_zone\n"
-		"Return the UTM zone number for the coordinate (positive for North,\n"
-		"negative for South).\n"
-		"If this isn't actually in UTM, then this just returns 0. \n"
-		""},
-	 { "OgrCoordinate_x_set", _wrap_OgrCoordinate_x_set, METH_VARARGS, NULL},
-	 { "OgrCoordinate_x_get", _wrap_OgrCoordinate_x_get, METH_O, NULL},
-	 { "OgrCoordinate_y_set", _wrap_OgrCoordinate_y_set, METH_VARARGS, NULL},
-	 { "OgrCoordinate_y_get", _wrap_OgrCoordinate_y_get, METH_O, NULL},
-	 { "OgrCoordinate_z_set", _wrap_OgrCoordinate_z_set, METH_VARARGS, NULL},
-	 { "OgrCoordinate_z_get", _wrap_OgrCoordinate_z_get, METH_O, NULL},
-	 { "OgrCoordinate_to_utm", _wrap_OgrCoordinate_to_utm, METH_VARARGS, "\n"
+		"Return the UTM zone number for the coordinate (positive for North, negative for\n"
+		"South).  \n"
 		"\n"
-		"OgrCoordinate OgrCoordinate::to_utm(const Geodetic &Gc, int zone=-999)\n"
+		"If this isn't actually in UTM, then this just returns 0.  \n"
+		"\n"
+		""},
+	 { "OgrCoordinate_x_set", _wrap_OgrCoordinate_x_set, METH_VARARGS, "OgrCoordinate_x_set(OgrCoordinate self, double x)"},
+	 { "OgrCoordinate_x_get", _wrap_OgrCoordinate_x_get, METH_O, "OgrCoordinate_x_get(OgrCoordinate self) -> double"},
+	 { "OgrCoordinate_y_set", _wrap_OgrCoordinate_y_set, METH_VARARGS, "OgrCoordinate_y_set(OgrCoordinate self, double y)"},
+	 { "OgrCoordinate_y_get", _wrap_OgrCoordinate_y_get, METH_O, "OgrCoordinate_y_get(OgrCoordinate self) -> double"},
+	 { "OgrCoordinate_z_set", _wrap_OgrCoordinate_z_set, METH_VARARGS, "OgrCoordinate_z_set(OgrCoordinate self, double z)"},
+	 { "OgrCoordinate_z_get", _wrap_OgrCoordinate_z_get, METH_O, "OgrCoordinate_z_get(OgrCoordinate self) -> double"},
+	 { "OgrCoordinate_to_utm", _wrap_OgrCoordinate_to_utm, METH_VARARGS, "\n"
+		"OgrCoordinate_to_utm(Geodetic Gc, int zone=-999) -> OgrCoordinate\n"
+		"\n"
 		"GeoCal::OgrCoordinate::to_utm\n"
-		"Convert a GroundCoordinate to UTM.\n"
-		"If desired, you can pass in the zone number (use negative number for\n"
-		"southern zones), or if left blank we determine the appropriate zone to\n"
-		"use. \n"
+		"Convert a GroundCoordinate to UTM.  \n"
+		"\n"
+		"If desired, you can pass in the zone number (use negative number for southern\n"
+		"zones), or if left blank we determine the appropriate zone to use.  \n"
+		"\n"
 		""},
 	 { "delete_OgrCoordinate", _wrap_delete_OgrCoordinate, METH_O, "\n"
+		"delete_OgrCoordinate(OgrCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::OgrCoordinate::~OgrCoordinate()\n"
 		"GeoCal::OgrCoordinate::~OgrCoordinate\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate_swigregister", OgrCoordinate_swigregister, METH_O, NULL},
 	 { "OgrCoordinate_swiginit", OgrCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_OgrCoordinateConverter", _wrap_new_OgrCoordinateConverter, METH_O, "\n"
+		"new_OgrCoordinateConverter(boost::shared_ptr< GeoCal::OgrWrapper > Ogr) -> OgrCoordinateConverter\n"
 		"\n"
-		"GeoCal::OgrCoordinateConverter::OgrCoordinateConverter(const boost::shared_ptr< OgrWrapper > Ogr)\n"
 		"GeoCal::OgrCoordinateConverter::OgrCoordinateConverter\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinateConverter__v_ogr", _wrap_OgrCoordinateConverter__v_ogr, METH_O, "\n"
+		"OgrCoordinateConverter__v_ogr(OgrCoordinateConverter self) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"const boost::shared_ptr< OgrWrapper > & GeoCal::OgrCoordinateConverter::ogr_ptr() const\n"
 		"GeoCal::OgrCoordinateConverter::ogr_ptr\n"
-		"Underlying OgrWrapper.\n"
+		"Underlying OgrWrapper.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinateConverter_convert_from_coordinate", _wrap_OgrCoordinateConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"OgrCoordinateConverter_convert_from_coordinate(OgrCoordinateConverter self, double X, double Y, double Height=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::OgrCoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const\n"
 		"GeoCal::OgrCoordinateConverter::convert_from_coordinate\n"
-		"Create a OgrCoordinate.\n"
-		"X, Y, and Height are in whatever X, Y, and Z are for the underlying\n"
-		"OgrWrapper projection. \n"
+		"Create a OgrCoordinate.  \n"
+		"\n"
+		"X, Y, and Height are in whatever X, Y, and Z are for the underlying OgrWrapper\n"
+		"projection.  \n"
+		"\n"
 		""},
 	 { "OgrCoordinateConverter_utm_converter", _wrap_OgrCoordinateConverter_utm_converter, METH_O, "\n"
+		"OgrCoordinateConverter_utm_converter(int Zone) -> boost::shared_ptr< GeoCal::OgrCoordinateConverter >\n"
 		"\n"
-		"boost::shared_ptr< OgrCoordinateConverter > OgrCoordinateConverter::utm_converter(int Zone)\n"
 		"GeoCal::OgrCoordinateConverter::utm_converter\n"
-		"Create a converter for UTM.\n"
-		"The zone number should be positive for north, negative for south. \n"
+		"Create a converter for UTM.  \n"
+		"\n"
+		"The zone number should be positive for north, negative for south.  \n"
+		"\n"
 		""},
 	 { "delete_OgrCoordinateConverter", _wrap_delete_OgrCoordinateConverter, METH_O, "\n"
+		"delete_OgrCoordinateConverter(OgrCoordinateConverter self)\n"
 		"\n"
-		"virtual GeoCal::OgrCoordinateConverter::~OgrCoordinateConverter()\n"
 		"GeoCal::OgrCoordinateConverter::~OgrCoordinateConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinateConverter_swigregister", OgrCoordinateConverter_swigregister, METH_O, NULL},
@@ -9278,248 +9305,275 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_OgrWrapper", _wrap_new_OgrWrapper, METH_VARARGS, "\n"
+		"OgrWrapper(std::string const & Wkt, bool Use_traditional_gis_order=True)\n"
+		"new_OgrWrapper(boost::shared_ptr< OGRSpatialReference > const & Ogr) -> OgrWrapper\n"
 		"\n"
-		"OgrWrapper::OgrWrapper(const std::string &Wkt, bool Use_traditional_gis_order=true)\n"
 		"GeoCal::OgrWrapper::OgrWrapper\n"
-		"Constructor that creates a OGRSpatialReference from a WKT (Well Known\n"
-		"Text) string.\n"
-		"See class description for information about use_traditional_gis_order\n"
+		"Constructor that creates a OGRSpatialReference from a WKT (Well Known Text)\n"
+		"string.  \n"
+		"\n"
+		"See class description for information about use_traditional_gis_order  \n"
 		"\n"
 		""},
 	 { "OgrWrapper_add_spatial_reference", _wrap_OgrWrapper_add_spatial_reference, METH_VARARGS, "\n"
+		"add_spatial_reference(std::string const & Name, int Naif_code, boost::shared_ptr< OGRSpatialReference > & Geodetic_or_planetocentric, boost::shared_ptr< OGRSpatialReference > & Cf)\n"
+		"add_spatial_reference(std::string const & Name, int Naif_code, std::string const & Wkt_planet_centric)\n"
 		"\n"
-		"void OgrWrapper::add_spatial_reference(const std::string &Name, int Naif_code, const std::string\n"
-		"&Wkt_planet_centric)\n"
 		"GeoCal::OgrWrapper::add_spatial_reference\n"
-		"For handling coordinate conversions, we need to have a sample of the\n"
-		"Geodetic or Planetocentric spatial reference, and for the earth the\n"
-		"ECR coordinates.\n"
-		"We need to be able to map a string in the name (e.g., mars) to the\n"
-		"NAIF code and spatial references. We have a fixed set defined in\n"
-		"geocal, but you may need to add new ones if you are working on a\n"
-		"planet we didn't already add this for. \n"
+		"For handling coordinate conversions, we need to have a sample of the Geodetic or\n"
+		"Planetocentric spatial reference, and for the earth the ECR coordinates.  \n"
+		"\n"
+		"We need to be able to map a string in the name (e.g., mars) to the NAIF code and\n"
+		"spatial references. We have a fixed set defined in geocal, but you may need to\n"
+		"add new ones if you are working on a planet we didn't already add this for.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper_from_epsg", _wrap_OgrWrapper_from_epsg, METH_VARARGS, "\n"
+		"from_epsg(int Epsg_id, bool Use_traditional_gis_order=True) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_epsg(int Epsg_id, bool Use_traditional_gis_order=true)\n"
 		"GeoCal::OgrWrapper::from_epsg\n"
-		"Create a OgrWrapper for a coordinate system given by the EPSG ID.\n"
-		"You can look the EPSG code up for various coordinate systems\n"
-		"athttp://www.epsg-registry.org \n"
+		"Create a OgrWrapper for a coordinate system given by the EPSG ID.  \n"
+		"\n"
+		"You can look the EPSG code up for various coordinate systems at http://www.epsg-\n"
+		"registry.org  \n"
+		"\n"
 		""},
 	 { "OgrWrapper_from_proj4", _wrap_OgrWrapper_from_proj4, METH_VARARGS, "\n"
+		"from_proj4(std::string const & Proj4_string, bool Use_traditional_gis_order=True) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"boost::shared_ptr< OgrWrapper > OgrWrapper::from_proj4(const std::string &Proj4_string, bool Use_traditional_gis_order=true)\n"
 		"GeoCal::OgrWrapper::from_proj4\n"
-		"Create a OgrWrapper for a coordinate system from a Proj 4 string.\n"
+		"Create a OgrWrapper for a coordinate system from a Proj 4 string.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_ogr", _wrap_OgrWrapper__v_ogr, METH_O, "\n"
+		"_v_ogr(OgrWrapper self) -> boost::shared_ptr< OGRSpatialReference >\n"
 		"\n"
-		"const boost::shared_ptr< OGRSpatialReference > & GeoCal::OgrWrapper::ogr_ptr() const\n"
 		"GeoCal::OgrWrapper::ogr_ptr\n"
 		""},
 	 { "OgrWrapper__v_transform", _wrap_OgrWrapper__v_transform, METH_O, "\n"
+		"_v_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::transform() const\n"
 		"GeoCal::OgrWrapper::transform\n"
 		"Return transformation that takes us from our coordinate system to\n"
-		"Geodetic/Planetocentric.\n"
+		"Geodetic/Planetocentric.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_inverse_transform", _wrap_OgrWrapper__v_inverse_transform, METH_O, "\n"
+		"_v_inverse_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::inverse_transform() const\n"
 		"GeoCal::OgrWrapper::inverse_transform\n"
-		"Return inverse of transform().\n"
-		"This goes from Geodetic/Planetocentric to our coordinate system. \n"
+		"Return inverse of transform().  \n"
+		"\n"
+		"This goes from Geodetic/Planetocentric to our coordinate system.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_cf_transform", _wrap_OgrWrapper__v_cf_transform, METH_O, "\n"
+		"_v_cf_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::cf_transform() const\n"
 		"GeoCal::OgrWrapper::cf_transform\n"
 		"Return transformation that takes us from our coordinate system to\n"
-		"CartesianFixed.\n"
-		"Is null for other planets. \n"
+		"CartesianFixed.  \n"
+		"\n"
+		"Is null for other planets.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_cf_inverse_transform", _wrap_OgrWrapper__v_cf_inverse_transform, METH_O, "\n"
+		"_v_cf_inverse_transform(OgrWrapper self) -> OGRCoordinateTransformation const *\n"
 		"\n"
-		"const OGRCoordinateTransformation * GeoCal::OgrWrapper::cf_inverse_transform() const\n"
 		"GeoCal::OgrWrapper::cf_inverse_transform\n"
-		"Return inverse of cf_transform().\n"
-		"This goes from CartesianFixed to our coordinate system. Is null for\n"
-		"other planets \n"
+		"Return inverse of cf_transform().  \n"
+		"\n"
+		"This goes from CartesianFixed to our coordinate system. Is null for other\n"
+		"planets  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_projected_cs_type_geo_key", _wrap_OgrWrapper__v_projected_cs_type_geo_key, METH_O, "\n"
+		"_v_projected_cs_type_geo_key(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::projected_cs_type_geo_key() const\n"
 		"GeoCal::OgrWrapper::projected_cs_type_geo_key\n"
-		"When converting to the GEOTIFF header format used by VICAR, this is\n"
-		"the value that the PROJECTEDCSTYPEGEOKEY should have.\n"
-		"This is just the EPSG id written as text. \n"
+		"When converting to the GEOTIFF header format used by VICAR, this is the value\n"
+		"that the PROJECTEDCSTYPEGEOKEY should have.  \n"
+		"\n"
+		"This is just the EPSG id written as text.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_pcs_citation_geo_key", _wrap_OgrWrapper__v_pcs_citation_geo_key, METH_O, "\n"
+		"_v_pcs_citation_geo_key(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::pcs_citation_geo_key() const\n"
 		"GeoCal::OgrWrapper::pcs_citation_geo_key\n"
-		"When converting to the GEOTIFF header format used by VICAR, this is\n"
-		"the value that the PCSCitationGeoKey should have.\n"
-		"This is a short text description of the projection. \n"
+		"When converting to the GEOTIFF header format used by VICAR, this is the value\n"
+		"that the PCSCitationGeoKey should have.  \n"
+		"\n"
+		"This is a short text description of the projection.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_use_traditional_gis_order", _wrap_OgrWrapper__v_use_traditional_gis_order, METH_O, "\n"
+		"_v_use_traditional_gis_order(OgrWrapper self) -> bool\n"
 		"\n"
-		"bool OgrWrapper::use_traditional_gis_order() const\n"
 		"GeoCal::OgrWrapper::use_traditional_gis_order\n"
-		"If true, then we have OAMS_TRADITIONAL_GIS_ORDER.\n"
-		"If false, we have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as\n"
-		"an error, because we don't support that with serialization. \n"
+		"If true, then we have OAMS_TRADITIONAL_GIS_ORDER.  \n"
+		"\n"
+		"If false, we have OAMS_AUTHORITY_COMPLIANT. OAMS_CUSTOM is treated as an error,\n"
+		"because we don't support that with serialization.  \n"
+		"\n"
 		""},
 	 { "OgrWrapper__v_geogcs_name", _wrap_OgrWrapper__v_geogcs_name, METH_O, "\n"
+		"_v_geogcs_name(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::geogcs_name() const\n"
 		"GeoCal::OgrWrapper::geogcs_name\n"
-		"The name of the GEOGCS.\n"
+		"The name of the GEOGCS.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_wkt", _wrap_OgrWrapper__v_wkt, METH_O, "\n"
+		"_v_wkt(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::wkt() const\n"
 		"GeoCal::OgrWrapper::wkt\n"
-		"Write out a the WKT (Well Known Text) for ogr_.\n"
+		"Write out a the WKT (Well Known Text) for ogr_.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_pretty_wkt", _wrap_OgrWrapper__v_pretty_wkt, METH_O, "\n"
+		"_v_pretty_wkt(OgrWrapper self) -> std::string\n"
 		"\n"
-		"std::string OgrWrapper::pretty_wkt() const\n"
 		"GeoCal::OgrWrapper::pretty_wkt\n"
-		"Write out a prettified version of the WKT for ogr_.\n"
+		"Write out a prettified version of the WKT for ogr_.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper__v_naif_code", _wrap_OgrWrapper__v_naif_code, METH_O, "\n"
+		"_v_naif_code(OgrWrapper self) -> int\n"
 		"\n"
-		"int GeoCal::OgrWrapper::naif_code() const\n"
 		"GeoCal::OgrWrapper::naif_code\n"
-		"Return the NAIF code for the planet this coordinate is for.\n"
+		"Return the NAIF code for the planet this coordinate is for.  \n"
 		"\n"
 		""},
-	 { "OgrWrapper___str__", _wrap_OgrWrapper___str__, METH_O, NULL},
+	 { "OgrWrapper___str__", _wrap_OgrWrapper___str__, METH_O, "__str__(OgrWrapper self) -> std::string"},
 	 { "delete_OgrWrapper", _wrap_delete_OgrWrapper, METH_O, "\n"
+		"delete_OgrWrapper(OgrWrapper self)\n"
 		"\n"
-		"OgrWrapper::~OgrWrapper()\n"
 		"GeoCal::OgrWrapper::~OgrWrapper\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OgrWrapper_swigregister", OgrWrapper_swigregister, METH_O, NULL},
 	 { "OgrWrapper_swiginit", OgrWrapper_swiginit, METH_VARARGS, NULL},
 	 { "new_OgrCoordinate", _wrap_new_OgrCoordinate, METH_VARARGS, "\n"
+		"OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, double x, double y, double z)\n"
+		"OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, Geodetic G)\n"
+		"OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, GroundCoordinate G)\n"
+		"new_OgrCoordinate(boost::shared_ptr< GeoCal::OgrWrapper > const & Ogr, Planetocentric G) -> OgrCoordinate\n"
 		"\n"
-		"GeoCal::OgrCoordinate::OgrCoordinate(const boost::shared_ptr< OgrWrapper > &Ogr, double x, double y,\n"
-		"double z)\n"
 		"GeoCal::OgrCoordinate::OgrCoordinate\n"
-		"Constructor. X, Y, and Z are in whatever coordinates Ogr are in.\n"
+		"Constructor. X, Y, and Z are in whatever coordinates Ogr are in.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate_to_proj4", _wrap_OgrCoordinate_to_proj4, METH_O, "\n"
+		"to_proj4(OgrCoordinate self) -> std::string\n"
 		"\n"
-		"std::string OgrCoordinate::to_proj4() const\n"
 		"GeoCal::OgrCoordinate::to_proj4\n"
-		"This returns the proj4 string for the projection of the given\n"
-		"coordinate.\n"
+		"This returns the proj4 string for the projection of the given coordinate.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate__v_ogr", _wrap_OgrCoordinate__v_ogr, METH_O, "\n"
+		"_v_ogr(OgrCoordinate self) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"const boost::shared_ptr< OgrWrapper > & GeoCal::OgrCoordinate::ogr_ptr() const\n"
 		"GeoCal::OgrCoordinate::ogr_ptr\n"
-		"Underlying OgrWrapper.\n"
+		"Underlying OgrWrapper.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate__v_utm_zone", _wrap_OgrCoordinate__v_utm_zone, METH_O, "\n"
+		"_v_utm_zone(OgrCoordinate self) -> int\n"
 		"\n"
-		"int OgrCoordinate::utm_zone() const\n"
 		"GeoCal::OgrCoordinate::utm_zone\n"
-		"Return the UTM zone number for the coordinate (positive for North,\n"
-		"negative for South).\n"
-		"If this isn't actually in UTM, then this just returns 0. \n"
-		""},
-	 { "OgrCoordinate_x_set", _wrap_OgrCoordinate_x_set, METH_VARARGS, NULL},
-	 { "OgrCoordinate_x_get", _wrap_OgrCoordinate_x_get, METH_O, NULL},
-	 { "OgrCoordinate_y_set", _wrap_OgrCoordinate_y_set, METH_VARARGS, NULL},
-	 { "OgrCoordinate_y_get", _wrap_OgrCoordinate_y_get, METH_O, NULL},
-	 { "OgrCoordinate_z_set", _wrap_OgrCoordinate_z_set, METH_VARARGS, NULL},
-	 { "OgrCoordinate_z_get", _wrap_OgrCoordinate_z_get, METH_O, NULL},
-	 { "OgrCoordinate_to_utm", _wrap_OgrCoordinate_to_utm, METH_VARARGS, "\n"
+		"Return the UTM zone number for the coordinate (positive for North, negative for\n"
+		"South).  \n"
 		"\n"
-		"OgrCoordinate OgrCoordinate::to_utm(const Geodetic &Gc, int zone=-999)\n"
+		"If this isn't actually in UTM, then this just returns 0.  \n"
+		"\n"
+		""},
+	 { "OgrCoordinate_x_set", _wrap_OgrCoordinate_x_set, METH_VARARGS, "OgrCoordinate_x_set(OgrCoordinate self, double x)"},
+	 { "OgrCoordinate_x_get", _wrap_OgrCoordinate_x_get, METH_O, "OgrCoordinate_x_get(OgrCoordinate self) -> double"},
+	 { "OgrCoordinate_y_set", _wrap_OgrCoordinate_y_set, METH_VARARGS, "OgrCoordinate_y_set(OgrCoordinate self, double y)"},
+	 { "OgrCoordinate_y_get", _wrap_OgrCoordinate_y_get, METH_O, "OgrCoordinate_y_get(OgrCoordinate self) -> double"},
+	 { "OgrCoordinate_z_set", _wrap_OgrCoordinate_z_set, METH_VARARGS, "OgrCoordinate_z_set(OgrCoordinate self, double z)"},
+	 { "OgrCoordinate_z_get", _wrap_OgrCoordinate_z_get, METH_O, "OgrCoordinate_z_get(OgrCoordinate self) -> double"},
+	 { "OgrCoordinate_to_utm", _wrap_OgrCoordinate_to_utm, METH_VARARGS, "\n"
+		"to_utm(Geodetic Gc, int zone=-999) -> OgrCoordinate\n"
+		"\n"
 		"GeoCal::OgrCoordinate::to_utm\n"
-		"Convert a GroundCoordinate to UTM.\n"
-		"If desired, you can pass in the zone number (use negative number for\n"
-		"southern zones), or if left blank we determine the appropriate zone to\n"
-		"use. \n"
+		"Convert a GroundCoordinate to UTM.  \n"
+		"\n"
+		"If desired, you can pass in the zone number (use negative number for southern\n"
+		"zones), or if left blank we determine the appropriate zone to use.  \n"
+		"\n"
 		""},
 	 { "delete_OgrCoordinate", _wrap_delete_OgrCoordinate, METH_O, "\n"
+		"delete_OgrCoordinate(OgrCoordinate self)\n"
 		"\n"
-		"virtual GeoCal::OgrCoordinate::~OgrCoordinate()\n"
 		"GeoCal::OgrCoordinate::~OgrCoordinate\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinate_swigregister", OgrCoordinate_swigregister, METH_O, NULL},
 	 { "OgrCoordinate_swiginit", OgrCoordinate_swiginit, METH_VARARGS, NULL},
 	 { "new_OgrCoordinateConverter", _wrap_new_OgrCoordinateConverter, METH_O, "\n"
+		"new_OgrCoordinateConverter(boost::shared_ptr< GeoCal::OgrWrapper > Ogr) -> OgrCoordinateConverter\n"
 		"\n"
-		"GeoCal::OgrCoordinateConverter::OgrCoordinateConverter(const boost::shared_ptr< OgrWrapper > Ogr)\n"
 		"GeoCal::OgrCoordinateConverter::OgrCoordinateConverter\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinateConverter__v_ogr", _wrap_OgrCoordinateConverter__v_ogr, METH_O, "\n"
+		"_v_ogr(OgrCoordinateConverter self) -> boost::shared_ptr< GeoCal::OgrWrapper >\n"
 		"\n"
-		"const boost::shared_ptr< OgrWrapper > & GeoCal::OgrCoordinateConverter::ogr_ptr() const\n"
 		"GeoCal::OgrCoordinateConverter::ogr_ptr\n"
-		"Underlying OgrWrapper.\n"
+		"Underlying OgrWrapper.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinateConverter_convert_from_coordinate", _wrap_OgrCoordinateConverter_convert_from_coordinate, METH_VARARGS, "\n"
+		"convert_from_coordinate(OgrCoordinateConverter self, double X, double Y, double Height=0) -> boost::shared_ptr< GeoCal::GroundCoordinate >\n"
 		"\n"
-		"virtual boost::shared_ptr< GroundCoordinate > GeoCal::OgrCoordinateConverter::convert_from_coordinate(double X, double Y, double Height=0) const\n"
 		"GeoCal::OgrCoordinateConverter::convert_from_coordinate\n"
-		"Create a OgrCoordinate.\n"
-		"X, Y, and Height are in whatever X, Y, and Z are for the underlying\n"
-		"OgrWrapper projection. \n"
+		"Create a OgrCoordinate.  \n"
+		"\n"
+		"X, Y, and Height are in whatever X, Y, and Z are for the underlying OgrWrapper\n"
+		"projection.  \n"
+		"\n"
 		""},
 	 { "OgrCoordinateConverter_utm_converter", _wrap_OgrCoordinateConverter_utm_converter, METH_O, "\n"
+		"utm_converter(int Zone) -> boost::shared_ptr< GeoCal::OgrCoordinateConverter >\n"
 		"\n"
-		"boost::shared_ptr< OgrCoordinateConverter > OgrCoordinateConverter::utm_converter(int Zone)\n"
 		"GeoCal::OgrCoordinateConverter::utm_converter\n"
-		"Create a converter for UTM.\n"
-		"The zone number should be positive for north, negative for south. \n"
+		"Create a converter for UTM.  \n"
+		"\n"
+		"The zone number should be positive for north, negative for south.  \n"
+		"\n"
 		""},
 	 { "delete_OgrCoordinateConverter", _wrap_delete_OgrCoordinateConverter, METH_O, "\n"
+		"delete_OgrCoordinateConverter(OgrCoordinateConverter self)\n"
 		"\n"
-		"virtual GeoCal::OgrCoordinateConverter::~OgrCoordinateConverter()\n"
 		"GeoCal::OgrCoordinateConverter::~OgrCoordinateConverter\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "OgrCoordinateConverter_swigregister", OgrCoordinateConverter_swigregister, METH_O, NULL},

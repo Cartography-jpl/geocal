@@ -7142,77 +7142,79 @@ SWIGINTERN PyObject *CcorrMatcher_swiginit(PyObject *SWIGUNUSEDPARM(self), PyObj
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_CcorrMatcher", _wrap_new_CcorrMatcher, METH_VARARGS, "\n"
+		"CcorrMatcher(int Target_nline=37, int Target_nsamp=37, int Template_nline=9, int Template_nsamp=9, double Min_ccorr=0.3, double Min_variance=0)\n"
 		"\n"
-		"CcorrMatcher::CcorrMatcher(int Target_nline=37, int Target_nsamp=37, int Template_nline=9, int\n"
-		"Template_nsamp=9, double Min_ccorr=0.3, double Min_variance=0)\n"
 		"GeoCal::CcorrMatcher::CcorrMatcher\n"
 		""},
 	 { "CcorrMatcher__v_min_correlation", _wrap_CcorrMatcher__v_min_correlation, METH_O, "\n"
+		"CcorrMatcher__v_min_correlation(CcorrMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::CcorrMatcher::min_correlation() const\n"
 		"GeoCal::CcorrMatcher::min_correlation\n"
-		"Minimum correlation threshold.\n"
+		"Minimum correlation threshold.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_min_variance", _wrap_CcorrMatcher__v_min_variance, METH_O, "\n"
+		"CcorrMatcher__v_min_variance(CcorrMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::CcorrMatcher::min_variance() const\n"
 		"GeoCal::CcorrMatcher::min_variance\n"
-		"Minimum variance threshold.\n"
+		"Minimum variance threshold.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_target_number_line", _wrap_CcorrMatcher__v_target_number_line, METH_O, "\n"
+		"CcorrMatcher__v_target_number_line(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::target_number_line() const\n"
 		"GeoCal::CcorrMatcher::target_number_line\n"
-		"Number of lines in target window.\n"
+		"Number of lines in target window.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_target_number_sample", _wrap_CcorrMatcher__v_target_number_sample, METH_O, "\n"
+		"CcorrMatcher__v_target_number_sample(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::target_number_sample() const\n"
 		"GeoCal::CcorrMatcher::target_number_sample\n"
-		"Number of samples in target window.\n"
+		"Number of samples in target window.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_template_number_line", _wrap_CcorrMatcher__v_template_number_line, METH_O, "\n"
+		"CcorrMatcher__v_template_number_line(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::template_number_line() const\n"
 		"GeoCal::CcorrMatcher::template_number_line\n"
-		"Number of lines in template window.\n"
+		"Number of lines in template window.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_template_number_sample", _wrap_CcorrMatcher__v_template_number_sample, METH_O, "\n"
+		"CcorrMatcher__v_template_number_sample(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::template_number_sample() const\n"
 		"GeoCal::CcorrMatcher::template_number_sample\n"
-		"Number of samples in template window.\n"
+		"Number of samples in template window.  \n"
 		"\n"
 		""},
 	 { "delete_CcorrMatcher", _wrap_delete_CcorrMatcher, METH_O, "\n"
+		"delete_CcorrMatcher(CcorrMatcher self)\n"
 		"\n"
-		"virtual GeoCal::CcorrMatcher::~CcorrMatcher()\n"
 		"GeoCal::CcorrMatcher::~CcorrMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher_swigregister", CcorrMatcher_swigregister, METH_O, NULL},
@@ -7223,77 +7225,79 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_CcorrMatcher", _wrap_new_CcorrMatcher, METH_VARARGS, "\n"
+		"CcorrMatcher(int Target_nline=37, int Target_nsamp=37, int Template_nline=9, int Template_nsamp=9, double Min_ccorr=0.3, double Min_variance=0)\n"
 		"\n"
-		"CcorrMatcher::CcorrMatcher(int Target_nline=37, int Target_nsamp=37, int Template_nline=9, int\n"
-		"Template_nsamp=9, double Min_ccorr=0.3, double Min_variance=0)\n"
 		"GeoCal::CcorrMatcher::CcorrMatcher\n"
 		""},
 	 { "CcorrMatcher__v_min_correlation", _wrap_CcorrMatcher__v_min_correlation, METH_O, "\n"
+		"_v_min_correlation(CcorrMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::CcorrMatcher::min_correlation() const\n"
 		"GeoCal::CcorrMatcher::min_correlation\n"
-		"Minimum correlation threshold.\n"
+		"Minimum correlation threshold.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_min_variance", _wrap_CcorrMatcher__v_min_variance, METH_O, "\n"
+		"_v_min_variance(CcorrMatcher self) -> double\n"
 		"\n"
-		"double GeoCal::CcorrMatcher::min_variance() const\n"
 		"GeoCal::CcorrMatcher::min_variance\n"
-		"Minimum variance threshold.\n"
+		"Minimum variance threshold.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_target_number_line", _wrap_CcorrMatcher__v_target_number_line, METH_O, "\n"
+		"_v_target_number_line(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::target_number_line() const\n"
 		"GeoCal::CcorrMatcher::target_number_line\n"
-		"Number of lines in target window.\n"
+		"Number of lines in target window.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_target_number_sample", _wrap_CcorrMatcher__v_target_number_sample, METH_O, "\n"
+		"_v_target_number_sample(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::target_number_sample() const\n"
 		"GeoCal::CcorrMatcher::target_number_sample\n"
-		"Number of samples in target window.\n"
+		"Number of samples in target window.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_template_number_line", _wrap_CcorrMatcher__v_template_number_line, METH_O, "\n"
+		"_v_template_number_line(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::template_number_line() const\n"
 		"GeoCal::CcorrMatcher::template_number_line\n"
-		"Number of lines in template window.\n"
+		"Number of lines in template window.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher__v_template_number_sample", _wrap_CcorrMatcher__v_template_number_sample, METH_O, "\n"
+		"_v_template_number_sample(CcorrMatcher self) -> int\n"
 		"\n"
-		"int GeoCal::CcorrMatcher::template_number_sample() const\n"
 		"GeoCal::CcorrMatcher::template_number_sample\n"
-		"Number of samples in template window.\n"
+		"Number of samples in template window.  \n"
 		"\n"
 		""},
 	 { "delete_CcorrMatcher", _wrap_delete_CcorrMatcher, METH_O, "\n"
+		"delete_CcorrMatcher(CcorrMatcher self)\n"
 		"\n"
-		"virtual GeoCal::CcorrMatcher::~CcorrMatcher()\n"
 		"GeoCal::CcorrMatcher::~CcorrMatcher\n"
-		"Destructor.\n"
+		"Destructor.  \n"
 		"\n"
 		""},
 	 { "CcorrMatcher_swigregister", CcorrMatcher_swigregister, METH_O, NULL},

@@ -7009,103 +7009,108 @@ SWIGINTERN PyObject *RefractionSdp_swiginit(PyObject *SWIGUNUSEDPARM(self), PyOb
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RefractionSdp", _wrap_new_RefractionSdp, METH_VARARGS, "\n"
+		"RefractionSdp(double Altitude, double Latitude, double Index_refraction_surface=-1)\n"
 		"\n"
-		"RefractionSdp::RefractionSdp(double Altitude, double Latitude, double Index_refraction_surface=-1)\n"
 		"GeoCal::RefractionSdp::RefractionSdp\n"
-		"This sets up for a Refraction calculation.\n"
-		"A representative altitude (in meters) and latitude (in degrees) is\n"
-		"given. This doesn't depend very strongly on altitude and latitude, so\n"
-		"unless you using widely varying points just using the center of you\n"
-		"scene should be pretty much sufficient.\n"
+		"This sets up for a Refraction calculation.  \n"
 		"\n"
-		"The index of refraction at the surface can be supplied if desired,\n"
-		"otherwise we calculate an approximate value. \n"
+		"A representative altitude (in meters) and latitude (in degrees) is given. This\n"
+		"doesn't depend very strongly on altitude and latitude, so unless you using\n"
+		"widely varying points just using the center of you scene should be pretty much\n"
+		"sufficient.  \n"
+		"\n"
+		"The index of refraction at the surface can be supplied if desired, otherwise we\n"
+		"calculate an approximate value.  \n"
+		"\n"
 		""},
 	 { "RefractionSdp__v_altitude", _wrap_RefractionSdp__v_altitude, METH_O, "\n"
+		"RefractionSdp__v_altitude(RefractionSdp self) -> double\n"
 		"\n"
-		"double GeoCal::RefractionSdp::altitude() const\n"
 		"GeoCal::RefractionSdp::altitude\n"
-		"Altitude of reference point, in meters.\n"
+		"Altitude of reference point, in meters.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp__v_latitude", _wrap_RefractionSdp__v_latitude, METH_O, "\n"
+		"RefractionSdp__v_latitude(RefractionSdp self) -> double\n"
 		"\n"
-		"double GeoCal::RefractionSdp::latitude() const\n"
 		"GeoCal::RefractionSdp::latitude\n"
-		"Latitude of reference point, in degrees.\n"
+		"Latitude of reference point, in degrees.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp__v_index_refraction_surface", _wrap_RefractionSdp__v_index_refraction_surface, METH_VARARGS, "\n"
+		"RefractionSdp__v_index_refraction_surface(RefractionSdp self) -> double\n"
+		"RefractionSdp__v_index_refraction_surface(RefractionSdp self, double const & V)\n"
 		"\n"
-		"void GeoCal::RefractionSdp::index_refraction_surface(double Index_refraction_surface)\n"
 		"GeoCal::RefractionSdp::index_refraction_surface\n"
-		"Set the index of refraction.\n"
+		"Set the index of refraction.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp_surface_zenith", _wrap_RefractionSdp_surface_zenith, METH_VARARGS, "\n"
+		"RefractionSdp_surface_zenith(RefractionSdp self, double Space_zenith) -> double\n"
 		"\n"
-		"double GeoCal::RefractionSdp::surface_zenith(double Space_zenith) const\n"
 		"GeoCal::RefractionSdp::surface_zenith\n"
-		"Surface zenith angle in radians, given the space zenith angles.\n"
+		"Surface zenith angle in radians, given the space zenith angles.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp_displacement", _wrap_RefractionSdp_displacement, METH_VARARGS, "\n"
+		"RefractionSdp_displacement(RefractionSdp self, double Space_zenith) -> double\n"
 		"\n"
-		"double RefractionSdp::displacement(double Space_zenith) const\n"
 		"GeoCal::RefractionSdp::displacement\n"
-		"Displacement in meters for given space zenith angle in radians.\n"
+		"Displacement in meters for given space zenith angle in radians.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp_refraction_apply", _wrap_RefractionSdp_refraction_apply, METH_VARARGS, "\n"
+		"RefractionSdp_refraction_apply(RefractionSdp self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_no_refraction) -> CartesianFixedLookVector\n"
 		"\n"
-		"CartesianFixedLookVector RefractionSdp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_no_refraction) const\n"
 		"GeoCal::RefractionSdp::refraction_apply\n"
-		"Apply refraction.\n"
-		"We take the position of the spacecraft and the ground coordinates\n"
-		"before apply refraction. This return the ground coordinates accounting\n"
-		"for refraction. \n"
+		"Apply refraction.  \n"
+		"\n"
+		"We take the position of the spacecraft and the ground coordinates before apply\n"
+		"refraction. This return the ground coordinates accounting for refraction.  \n"
+		"\n"
 		""},
 	 { "RefractionSdp_refraction_reverse", _wrap_RefractionSdp_refraction_reverse, METH_VARARGS, "\n"
+		"RefractionSdp_refraction_reverse(RefractionSdp self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_with_refraction) -> CartesianFixedLookVector\n"
 		"\n"
-		"CartesianFixedLookVector RefractionSdp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_with_refraction) const\n"
 		"GeoCal::RefractionSdp::refraction_reverse\n"
-		"Reverse the refraction calculation.\n"
-		"This returns a ground coordinate so that when we feed it to\n"
-		"refraction_apply we get back the original ground coordinate. This is\n"
-		"useful when trying to go the other way, from the ground to the\n"
-		"spacecraft, so we remove the effects of refraction and then continue\n"
-		"with a normal orbit/camera model.\n"
+		"Reverse the refraction calculation.  \n"
 		"\n"
-		"Note for speed we don't calculate the exact reverse of\n"
-		"refraction_apply, but a close approximation. For a MISR DF camera, the\n"
-		"difference is only 2 cm. For most applications, the difference\n"
-		"shouldn't matter. But if we have an application where this does, we'll\n"
-		"want to replace this with a more exact calculation. \n"
+		"This returns a ground coordinate so that when we feed it to refraction_apply we\n"
+		"get back the original ground coordinate. This is useful when trying to go the\n"
+		"other way, from the ground to the spacecraft, so we remove the effects of\n"
+		"refraction and then continue with a normal orbit/camera model.  \n"
+		"\n"
+		"Note for speed we don't calculate the exact reverse of refraction_apply, but a\n"
+		"close approximation. For a MISR DF camera, the difference is only 2 cm. For most\n"
+		"applications, the difference shouldn't matter. But if we have an application\n"
+		"where this does, we'll want to replace this with a more exact calculation.  \n"
+		"\n"
 		""},
 	 { "delete_RefractionSdp", _wrap_delete_RefractionSdp, METH_O, "\n"
+		"delete_RefractionSdp(RefractionSdp self)\n"
 		"\n"
-		"virtual GeoCal::RefractionSdp::~RefractionSdp()\n"
 		"GeoCal::RefractionSdp::~RefractionSdp\n"
 		""},
 	 { "RefractionSdp_swigregister", RefractionSdp_swigregister, METH_O, NULL},
@@ -7116,103 +7121,108 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RefractionSdp", _wrap_new_RefractionSdp, METH_VARARGS, "\n"
+		"RefractionSdp(double Altitude, double Latitude, double Index_refraction_surface=-1)\n"
 		"\n"
-		"RefractionSdp::RefractionSdp(double Altitude, double Latitude, double Index_refraction_surface=-1)\n"
 		"GeoCal::RefractionSdp::RefractionSdp\n"
-		"This sets up for a Refraction calculation.\n"
-		"A representative altitude (in meters) and latitude (in degrees) is\n"
-		"given. This doesn't depend very strongly on altitude and latitude, so\n"
-		"unless you using widely varying points just using the center of you\n"
-		"scene should be pretty much sufficient.\n"
+		"This sets up for a Refraction calculation.  \n"
 		"\n"
-		"The index of refraction at the surface can be supplied if desired,\n"
-		"otherwise we calculate an approximate value. \n"
+		"A representative altitude (in meters) and latitude (in degrees) is given. This\n"
+		"doesn't depend very strongly on altitude and latitude, so unless you using\n"
+		"widely varying points just using the center of you scene should be pretty much\n"
+		"sufficient.  \n"
+		"\n"
+		"The index of refraction at the surface can be supplied if desired, otherwise we\n"
+		"calculate an approximate value.  \n"
+		"\n"
 		""},
 	 { "RefractionSdp__v_altitude", _wrap_RefractionSdp__v_altitude, METH_O, "\n"
+		"_v_altitude(RefractionSdp self) -> double\n"
 		"\n"
-		"double GeoCal::RefractionSdp::altitude() const\n"
 		"GeoCal::RefractionSdp::altitude\n"
-		"Altitude of reference point, in meters.\n"
+		"Altitude of reference point, in meters.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp__v_latitude", _wrap_RefractionSdp__v_latitude, METH_O, "\n"
+		"_v_latitude(RefractionSdp self) -> double\n"
 		"\n"
-		"double GeoCal::RefractionSdp::latitude() const\n"
 		"GeoCal::RefractionSdp::latitude\n"
-		"Latitude of reference point, in degrees.\n"
+		"Latitude of reference point, in degrees.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp__v_index_refraction_surface", _wrap_RefractionSdp__v_index_refraction_surface, METH_VARARGS, "\n"
+		"_v_index_refraction_surface(RefractionSdp self) -> double\n"
+		"_v_index_refraction_surface(RefractionSdp self, double const & V)\n"
 		"\n"
-		"void GeoCal::RefractionSdp::index_refraction_surface(double Index_refraction_surface)\n"
 		"GeoCal::RefractionSdp::index_refraction_surface\n"
-		"Set the index of refraction.\n"
+		"Set the index of refraction.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp_surface_zenith", _wrap_RefractionSdp_surface_zenith, METH_VARARGS, "\n"
+		"surface_zenith(RefractionSdp self, double Space_zenith) -> double\n"
 		"\n"
-		"double GeoCal::RefractionSdp::surface_zenith(double Space_zenith) const\n"
 		"GeoCal::RefractionSdp::surface_zenith\n"
-		"Surface zenith angle in radians, given the space zenith angles.\n"
+		"Surface zenith angle in radians, given the space zenith angles.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp_displacement", _wrap_RefractionSdp_displacement, METH_VARARGS, "\n"
+		"displacement(RefractionSdp self, double Space_zenith) -> double\n"
 		"\n"
-		"double RefractionSdp::displacement(double Space_zenith) const\n"
 		"GeoCal::RefractionSdp::displacement\n"
-		"Displacement in meters for given space zenith angle in radians.\n"
+		"Displacement in meters for given space zenith angle in radians.  \n"
 		"\n"
 		""},
 	 { "RefractionSdp_refraction_apply", _wrap_RefractionSdp_refraction_apply, METH_VARARGS, "\n"
+		"refraction_apply(RefractionSdp self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_no_refraction) -> CartesianFixedLookVector\n"
 		"\n"
-		"CartesianFixedLookVector RefractionSdp::refraction_apply(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_no_refraction) const\n"
 		"GeoCal::RefractionSdp::refraction_apply\n"
-		"Apply refraction.\n"
-		"We take the position of the spacecraft and the ground coordinates\n"
-		"before apply refraction. This return the ground coordinates accounting\n"
-		"for refraction. \n"
+		"Apply refraction.  \n"
+		"\n"
+		"We take the position of the spacecraft and the ground coordinates before apply\n"
+		"refraction. This return the ground coordinates accounting for refraction.  \n"
+		"\n"
 		""},
 	 { "RefractionSdp_refraction_reverse", _wrap_RefractionSdp_refraction_reverse, METH_VARARGS, "\n"
+		"refraction_reverse(RefractionSdp self, GroundCoordinate Spacecraft_pos, GroundCoordinate Gc_with_refraction) -> CartesianFixedLookVector\n"
 		"\n"
-		"CartesianFixedLookVector RefractionSdp::refraction_reverse(const GroundCoordinate &Spacecraft_pos, const GroundCoordinate\n"
-		"&Gc_with_refraction) const\n"
 		"GeoCal::RefractionSdp::refraction_reverse\n"
-		"Reverse the refraction calculation.\n"
-		"This returns a ground coordinate so that when we feed it to\n"
-		"refraction_apply we get back the original ground coordinate. This is\n"
-		"useful when trying to go the other way, from the ground to the\n"
-		"spacecraft, so we remove the effects of refraction and then continue\n"
-		"with a normal orbit/camera model.\n"
+		"Reverse the refraction calculation.  \n"
 		"\n"
-		"Note for speed we don't calculate the exact reverse of\n"
-		"refraction_apply, but a close approximation. For a MISR DF camera, the\n"
-		"difference is only 2 cm. For most applications, the difference\n"
-		"shouldn't matter. But if we have an application where this does, we'll\n"
-		"want to replace this with a more exact calculation. \n"
+		"This returns a ground coordinate so that when we feed it to refraction_apply we\n"
+		"get back the original ground coordinate. This is useful when trying to go the\n"
+		"other way, from the ground to the spacecraft, so we remove the effects of\n"
+		"refraction and then continue with a normal orbit/camera model.  \n"
+		"\n"
+		"Note for speed we don't calculate the exact reverse of refraction_apply, but a\n"
+		"close approximation. For a MISR DF camera, the difference is only 2 cm. For most\n"
+		"applications, the difference shouldn't matter. But if we have an application\n"
+		"where this does, we'll want to replace this with a more exact calculation.  \n"
+		"\n"
 		""},
 	 { "delete_RefractionSdp", _wrap_delete_RefractionSdp, METH_O, "\n"
+		"delete_RefractionSdp(RefractionSdp self)\n"
 		"\n"
-		"virtual GeoCal::RefractionSdp::~RefractionSdp()\n"
 		"GeoCal::RefractionSdp::~RefractionSdp\n"
 		""},
 	 { "RefractionSdp_swigregister", RefractionSdp_swigregister, METH_O, NULL},

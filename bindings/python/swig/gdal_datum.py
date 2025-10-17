@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _gdal_datum.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _gdal_datum:
 _gdal_datum.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _gdal_datum.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -143,12 +146,14 @@ import geocal_swig.geocal_exception
 class GdalDatum(geocal_swig.geocal_datum.Datum):
     r"""
 
-    This uses a GdalRasterImage to provide a datum.
 
-    This file should have the offset from the datum to reference ellipsoid
-    (e.g., WGS-84).
+    This uses a GdalRasterImage to provide a datum.  
 
-    C++ includes: gdal_datum.h 
+    This file should have the offset from the datum to reference ellipsoid (e.g.,
+    WGS-84).  
+
+    C++ includes: gdal_datum.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -156,11 +161,11 @@ class GdalDatum(geocal_swig.geocal_datum.Datum):
 
     def __init__(self, *args):
         r"""
+        __init__(GdalDatum self, std::string const & Fname, int Band_id=1, int Number_tile=4, int Tile_number_line=-1, int Tile_number_sample=-1) -> GdalDatum
+        __init__(GdalDatum self, boost::shared_ptr< GeoCal::GdalRasterImage > const & Map_file) -> GdalDatum
 
-        GeoCal::GdalDatum::GdalDatum(const std::string &Fname, int Band_id=1, int Number_tile=4, int
-        Tile_number_line=-1, int Tile_number_sample=-1)
         GeoCal::GdalDatum::GdalDatum
-        Constructor.
+        Constructor.  
 
         """
         _gdal_datum.GdalDatum_swiginit(self, _gdal_datum.new_GdalDatum(*args))

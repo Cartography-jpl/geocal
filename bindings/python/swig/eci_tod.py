@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _eci_tod.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _eci_tod:
 _eci_tod.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _eci_tod.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -139,12 +142,14 @@ import geocal_swig.look_vector
 class EciTod(geocal_swig.ground_coordinate.CartesianInertial):
     r"""
 
-    This is a ECI true of date coordinate.
 
-    This is a dynamic frame that uses the true equator and equinox of a
-    particular data.
+    This is a ECI true of date coordinate.  
 
-    C++ includes: eci_tod.h 
+    This is a dynamic frame that uses the true equator and equinox of a particular
+    data.  
+
+    C++ includes: eci_tod.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -152,10 +157,14 @@ class EciTod(geocal_swig.ground_coordinate.CartesianInertial):
 
     def __init__(self, *args):
         r"""
+        __init__(EciTod self, Eci Eci_coor, Time T) -> EciTod
+        __init__(EciTod self, double X, double Y, double Z) -> EciTod
+        __init__(EciTod self, Array_double_3 Pos) -> EciTod
+        __init__(EciTod self, Ecr P, Time T) -> EciTod
+        __init__(EciTod self, GroundCoordinate Gc, Time T) -> EciTod
 
-        GeoCal::EciTod::EciTod(double X, double Y, double Z)
         GeoCal::EciTod::EciTod
-        Make an EciTod with the given position, in meters.
+        Make an EciTod with the given position, in meters.  
 
         """
         _eci_tod.EciTod_swiginit(self, _eci_tod.new_EciTod(*args))

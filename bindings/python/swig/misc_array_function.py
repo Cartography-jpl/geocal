@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _misc_array_function.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _misc_array_function:
 _misc_array_function.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _misc_array_function.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -137,8 +140,11 @@ import geocal_swig.generic_object
 import geocal_swig.with_parameter
 import geocal_swig.geocal_exception
 ARRAY_LOCAL_MEDIAN_TRUNCATE = _misc_array_function.ARRAY_LOCAL_MEDIAN_TRUNCATE
+
 ARRAY_LOCAL_MEDIAN_ZEROPAD = _misc_array_function.ARRAY_LOCAL_MEDIAN_ZEROPAD
+
 ARRAY_LOCAL_MEDIAN_REPEAT = _misc_array_function.ARRAY_LOCAL_MEDIAN_REPEAT
+
 array_local_median = _misc_array_function.array_local_median
 linear_gradient_bad_pixel_detection = _misc_array_function.linear_gradient_bad_pixel_detection
 ray_cast_ground_coordinate = _misc_array_function.ray_cast_ground_coordinate

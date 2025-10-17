@@ -61,6 +61,8 @@ import weakref
 
 SWIG_MODULE_ALREADY_DONE = _mspi_camera.SWIG_MODULE_ALREADY_DONE
 class SwigPyIterator(object):
+    r"""Proxy of C++ swig::SwigPyIterator class."""
+
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
 
     def __init__(self, *args, **kwargs):
@@ -89,6 +91,7 @@ class SwigPyIterator(object):
 # Register SwigPyIterator in _mspi_camera:
 _mspi_camera.SwigPyIterator_swigregister(SwigPyIterator)
 SHARED_PTR_DISOWN = _mspi_camera.SHARED_PTR_DISOWN
+
 
 import os
 
@@ -141,13 +144,15 @@ import geocal_swig.with_parameter
 class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
     r"""
 
-    This is the MSPI camera model.
+
+    This is the MSPI camera model.  
 
     References: [1] Veljko Jovanovic, "Algorithm Theoretical Basis and
     processing software design consideration for GroundMSPI L1B2
-    process", Rev A.1, April 4, 2012.
+    process", Rev A.1, April 4, 2012.  
 
-    C++ includes: mspi_camera.h 
+    C++ includes: mspi_camera.h
+
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
@@ -155,11 +160,11 @@ class MspiCamera(geocal_swig.quaternion_camera.QuaternionCamera):
 
     def __init__(self, *args):
         r"""
+        __init__(MspiCamera self, std::string const & Fname, std::string const & Extra_config_file="") -> MspiCamera
+        __init__(MspiCamera self, std::string const & Fname, BlitzArray_double_1 Param) -> MspiCamera
 
-        GeoCal::MspiCamera::MspiCamera(const std::string &File_name, const std::string
-        &Extra_config_file="")
         GeoCal::MspiCamera::MspiCamera
-        Constructor, which creates a MspiCamera from the given configuration file.
+        Constructor, which creates a MspiCamera from the given configuration file.  
 
         """
         _mspi_camera.MspiCamera_swiginit(self, _mspi_camera.new_MspiCamera(*args))

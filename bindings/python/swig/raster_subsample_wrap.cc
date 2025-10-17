@@ -6677,58 +6677,60 @@ SWIGINTERN PyObject *RasterSubSample_swiginit(PyObject *SWIGUNUSEDPARM(self), Py
 static PyMethodDef SwigMethods[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "SwigPyIterator_value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "SwigPyIterator_incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "SwigPyIterator_decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "SwigPyIterator_distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "SwigPyIterator_equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "SwigPyIterator_copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "SwigPyIterator_next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "SwigPyIterator___next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "SwigPyIterator_previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "SwigPyIterator_advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "SwigPyIterator___eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "SwigPyIterator___ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "SwigPyIterator___iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "SwigPyIterator___isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "SwigPyIterator___add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RasterSubSample", _wrap_new_RasterSubSample, METH_VARARGS, "\n"
+		"new_RasterSubSample(boost::shared_ptr< GeoCal::RasterImage > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel) -> RasterSubSample\n"
 		"\n"
-		"RasterSubSample::RasterSubSample(const boost::shared_ptr< RasterImage > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel)\n"
 		"GeoCal::RasterSubSample::RasterSubSample\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "RasterSubSample__v_high_resolution_image", _wrap_RasterSubSample__v_high_resolution_image, METH_O, "\n"
+		"RasterSubSample__v_high_resolution_image(RasterSubSample self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::RasterSubSample::high_resolution_image_ptr() const\n"
 		"GeoCal::RasterSubSample::high_resolution_image_ptr\n"
-		"Pointer to high resolution image that this object is based on.\n"
+		"Pointer to high resolution image that this object is based on.  \n"
 		"\n"
 		""},
 	 { "RasterSubSample__v_number_line_per_pixel", _wrap_RasterSubSample__v_number_line_per_pixel, METH_O, "\n"
+		"RasterSubSample__v_number_line_per_pixel(RasterSubSample self) -> int\n"
 		"\n"
-		"int GeoCal::RasterSubSample::number_line_per_pixel() const\n"
 		"GeoCal::RasterSubSample::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterSubSample__v_number_sample_per_pixel", _wrap_RasterSubSample__v_number_sample_per_pixel, METH_O, "\n"
+		"RasterSubSample__v_number_sample_per_pixel(RasterSubSample self) -> int\n"
 		"\n"
-		"int GeoCal::RasterSubSample::number_sample_per_pixel() const\n"
 		"GeoCal::RasterSubSample::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "delete_RasterSubSample", _wrap_delete_RasterSubSample, METH_O, "\n"
+		"delete_RasterSubSample(RasterSubSample self)\n"
 		"\n"
-		"virtual GeoCal::RasterSubSample::~RasterSubSample()\n"
 		"GeoCal::RasterSubSample::~RasterSubSample\n"
 		""},
 	 { "RasterSubSample_swigregister", RasterSubSample_swigregister, METH_O, NULL},
@@ -6739,58 +6741,60 @@ static PyMethodDef SwigMethods[] = {
 static PyMethodDef SwigMethods_proxydocs[] = {
 	 { "SWIG_PyInstanceMethod_New", SWIG_PyInstanceMethod_New, METH_O, NULL},
 	 { "SWIG_PyStaticMethod_New", SWIG_PyStaticMethod_New, METH_O, NULL},
-	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, NULL},
-	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, NULL},
-	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, NULL},
-	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, NULL},
-	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, NULL},
-	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, NULL},
-	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, NULL},
-	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, NULL},
-	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, NULL},
-	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, NULL},
-	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, NULL},
-	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, NULL},
+	 { "delete_SwigPyIterator", _wrap_delete_SwigPyIterator, METH_O, "delete_SwigPyIterator(SwigPyIterator self)"},
+	 { "SwigPyIterator_value", _wrap_SwigPyIterator_value, METH_O, "value(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_incr", _wrap_SwigPyIterator_incr, METH_VARARGS, "incr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_decr", _wrap_SwigPyIterator_decr, METH_VARARGS, "decr(SwigPyIterator self, size_t n=1) -> SwigPyIterator"},
+	 { "SwigPyIterator_distance", _wrap_SwigPyIterator_distance, METH_VARARGS, "distance(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t"},
+	 { "SwigPyIterator_equal", _wrap_SwigPyIterator_equal, METH_VARARGS, "equal(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator_copy", _wrap_SwigPyIterator_copy, METH_O, "copy(SwigPyIterator self) -> SwigPyIterator"},
+	 { "SwigPyIterator_next", _wrap_SwigPyIterator_next, METH_O, "next(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator___next__", _wrap_SwigPyIterator___next__, METH_O, "__next__(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_previous", _wrap_SwigPyIterator_previous, METH_O, "previous(SwigPyIterator self) -> PyObject *"},
+	 { "SwigPyIterator_advance", _wrap_SwigPyIterator_advance, METH_VARARGS, "advance(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___eq__", _wrap_SwigPyIterator___eq__, METH_VARARGS, "__eq__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___ne__", _wrap_SwigPyIterator___ne__, METH_VARARGS, "__ne__(SwigPyIterator self, SwigPyIterator x) -> bool"},
+	 { "SwigPyIterator___iadd__", _wrap_SwigPyIterator___iadd__, METH_VARARGS, "__iadd__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___isub__", _wrap_SwigPyIterator___isub__, METH_VARARGS, "__isub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___add__", _wrap_SwigPyIterator___add__, METH_VARARGS, "__add__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator"},
+	 { "SwigPyIterator___sub__", _wrap_SwigPyIterator___sub__, METH_VARARGS, "\n"
+		"__sub__(SwigPyIterator self, ptrdiff_t n) -> SwigPyIterator\n"
+		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
+		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
 	 { "new_RasterSubSample", _wrap_new_RasterSubSample, METH_VARARGS, "\n"
+		"new_RasterSubSample(boost::shared_ptr< GeoCal::RasterImage > const & Data, int Number_line_per_pixel, int Number_sample_per_pixel) -> RasterSubSample\n"
 		"\n"
-		"RasterSubSample::RasterSubSample(const boost::shared_ptr< RasterImage > &Data, int\n"
-		"Number_line_per_pixel, int Number_sample_per_pixel)\n"
 		"GeoCal::RasterSubSample::RasterSubSample\n"
-		"Constructor.\n"
+		"Constructor.  \n"
 		"\n"
 		""},
 	 { "RasterSubSample__v_high_resolution_image", _wrap_RasterSubSample__v_high_resolution_image, METH_O, "\n"
+		"_v_high_resolution_image(RasterSubSample self) -> boost::shared_ptr< GeoCal::RasterImage >\n"
 		"\n"
-		"const boost::shared_ptr< RasterImage > & GeoCal::RasterSubSample::high_resolution_image_ptr() const\n"
 		"GeoCal::RasterSubSample::high_resolution_image_ptr\n"
-		"Pointer to high resolution image that this object is based on.\n"
+		"Pointer to high resolution image that this object is based on.  \n"
 		"\n"
 		""},
 	 { "RasterSubSample__v_number_line_per_pixel", _wrap_RasterSubSample__v_number_line_per_pixel, METH_O, "\n"
+		"_v_number_line_per_pixel(RasterSubSample self) -> int\n"
 		"\n"
-		"int GeoCal::RasterSubSample::number_line_per_pixel() const\n"
 		"GeoCal::RasterSubSample::number_line_per_pixel\n"
-		"Number of lines of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of lines of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "RasterSubSample__v_number_sample_per_pixel", _wrap_RasterSubSample__v_number_sample_per_pixel, METH_O, "\n"
+		"_v_number_sample_per_pixel(RasterSubSample self) -> int\n"
 		"\n"
-		"int GeoCal::RasterSubSample::number_sample_per_pixel() const\n"
 		"GeoCal::RasterSubSample::number_sample_per_pixel\n"
-		"Number of samples of high resolution data per pixel of this lower\n"
-		"resolution RasterImage.\n"
+		"Number of samples of high resolution data per pixel of this lower resolution\n"
+		"RasterImage.  \n"
 		"\n"
 		""},
 	 { "delete_RasterSubSample", _wrap_delete_RasterSubSample, METH_O, "\n"
+		"delete_RasterSubSample(RasterSubSample self)\n"
 		"\n"
-		"virtual GeoCal::RasterSubSample::~RasterSubSample()\n"
 		"GeoCal::RasterSubSample::~RasterSubSample\n"
 		""},
 	 { "RasterSubSample_swigregister", RasterSubSample_swigregister, METH_O, NULL},

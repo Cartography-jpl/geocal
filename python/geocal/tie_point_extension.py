@@ -1,8 +1,6 @@
 from builtins import str
 from builtins import range
 import math
-from .raster_image_extension import *
-from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 from .misc import makedirs_p
 from geocal_swig import (
@@ -61,11 +59,11 @@ def _tp_read_old_mspi_format(self, filename):
         # We don't currently do anything with the covariance
         for i in range(tp.number_image):
             ln = f.readline()
-            l, s, c11, c12, c21, c22, available, trash = ln.split(" ", 7)
+            iline, isamp, c11, c12, c21, c22, available, trash = ln.split(" ", 7)
             if int(available) == 1:
                 tp.image_coordinate(
                     i,
-                    ImageCoordinate(float(l), float(s)),
+                    ImageCoordinate(float(iline), float(isamp)),
                     math.sqrt(float(c11)),
                     math.sqrt(float(c22)),
                 )

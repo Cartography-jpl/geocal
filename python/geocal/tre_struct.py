@@ -1,6 +1,6 @@
 from builtins import range
 from builtins import object
-from geocal_swig import *
+from geocal_swig import Rpc, GdalRasterImage
 
 try:
     from pynitf import TreUSE00A, TreRPC00B, TreRPC00A

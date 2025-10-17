@@ -1,21 +1,29 @@
-from .local_target import *
-from .misc import makedirs_p
-from test_support import *
+from geocal import (
+    makedirs_p,
+    OutTempDirLocalTarget,
+    OutTempLocalTarget,
+    OutLocalTarget,
+    InLocalTarget,
+)
+import os
+from fixtures.require_check import require_rsync
+import pytest
+
 
 @require_rsync
 @pytest.fixture(scope="function")
 def input_local_data(isolated_dir):
-    '''Generate some input test data so we can check that it works.'''
+    """Generate some input test data so we can check that it works."""
     fname = os.path.abspath("./test_input/temp.txt")
     makedirs_p(os.path.dirname(fname))
     with open(fname, "w") as fh:
         print("hi there", file=fh)
     yield fname
-    
+
+
 @require_rsync
-@require_python3
 def test_input_local_target(input_local_data):
-    '''Test a local input file target'''
+    """Test a local input file target"""
     ldir = os.path.abspath("./local_directory")
     assert os.path.exists(input_local_data)
     assert not os.path.exists(ldir + input_local_data)
@@ -35,10 +43,10 @@ def test_input_local_target(input_local_data):
     assert os.path.exists(input_local_data)
     assert not os.path.exists(ldir + input_local_data)
 
+
 @require_rsync
-@require_python3
 def test_input_local_target_error(input_local_data):
-    '''Test a local input file target when an error occurs'''
+    """Test a local input file target when an error occurs"""
     ldir = os.path.abspath("./local_directory")
     assert os.path.exists(input_local_data)
     assert not os.path.exists(ldir + input_local_data)
@@ -55,10 +63,10 @@ def test_input_local_target_error(input_local_data):
     assert os.path.exists(input_local_data)
     assert os.path.exists(ldir + input_local_data)
 
+
 @require_rsync
-@require_python3
 def test_output_local_target(isolated_dir):
-    '''Test local output file target'''
+    """Test local output file target"""
     fname = os.path.abspath("./test_output/temp.txt")
     assert not os.path.exists("./test_output")
     ft = OutLocalTarget(fname, "./local_directory")
@@ -75,11 +83,11 @@ def test_output_local_target(isolated_dir):
     ft.remove()
     assert not os.path.exists("./local_directory" + fname)
     assert not os.path.exists(fname)
-    
+
+
 @require_rsync
-@require_python3
 def test_output_local_target_error(isolated_dir):
-    '''Test a local output file target when an error occurs'''
+    """Test a local output file target when an error occurs"""
     fname = os.path.abspath("./test_output/temp.txt")
     assert not os.path.exists("./test_output")
     ft = OutLocalTarget(fname, "./local_directory")
@@ -94,10 +102,10 @@ def test_output_local_target_error(isolated_dir):
     assert os.path.exists(fname + ".error")
     assert not ft.exists()
 
+
 @require_rsync
-@require_python3
 def test_output_temp_local_target(isolated_dir):
-    '''Test local output file target'''
+    """Test local output file target"""
     fname = os.path.abspath("./test_output/temp.txt")
     assert not os.path.exists("./test_output")
     ft = OutTempLocalTarget(fname, "./local_directory")
@@ -120,11 +128,11 @@ def test_output_temp_local_target(isolated_dir):
     assert os.path.exists("./local_directory" + fname + ".generating")
     ft.remove()
     assert not os.path.exists("./local_directory" + fname + ".generating")
-    
+
+
 @require_rsync
-@require_python3
 def test_output_temp_dir_local_target(isolated_dir):
-    '''Test local output file target'''
+    """Test local output file target"""
     fname = os.path.abspath("./test_output/dir")
     bname = "./local_directory/" + os.path.dirname(os.path.dirname(fname))
     assert not os.path.exists(bname + "/test_output/dir/test.txt")
@@ -150,10 +158,10 @@ def test_output_temp_dir_local_target(isolated_dir):
     assert not os.path.exists(bname + "/test_output_error/dir/test.txt")
     assert not ft.exists()
 
+
 @require_rsync
-@require_python3
 def test_output_temp_dir_local_target_error(isolated_dir):
-    '''Test local output file target'''
+    """Test local output file target"""
     fname = os.path.abspath("./test_output/dir")
     bname = "./local_directory/" + os.path.dirname(os.path.dirname(fname))
     assert not os.path.exists(bname + "/test_output/dir/test.txt")
@@ -179,15 +187,16 @@ def test_output_temp_dir_local_target_error(isolated_dir):
     assert not os.path.exists(bname + "/test_output_error/dir/test.txt")
     assert not ft.exists()
 
+
 # This was copied over from MSPI. We can't actually do this test here since
 # we don't have all the support stuff. I'll leave this here, but we really
 # need some other test here.
-#from .l1b2_igc_task import L1b2IgcTask
-#from geocal import read_shelve
-#def test_xml_local_target(task_with_l1b1_test,
+# from .l1b2_igc_task import L1b2IgcTask
+# from geocal import read_shelve
+# def test_xml_local_target(task_with_l1b1_test,
 #                          test_version_info, test_target_info, cache_result):
-    # We have a number of sequences and view here. Just pick the
-    # first one to run.
+# We have a number of sequences and view here. Just pick the
+# first one to run.
 #    views = test_target_info.views(test_target_info.sequence_numbers()[0])
 #    tsk = L1b2IgcTask(views, test_version_info, cache_result=cache_result)
 #    tsk.run_pipeline(skip_cleanup_on_error=True)
@@ -196,5 +205,3 @@ def test_output_temp_dir_local_target_error(isolated_dir):
 #    igc = read_shelve(ft.filename())
 #    ft.prepare()
 #    igc = read_shelve(ft.local_filename())
-    
-    

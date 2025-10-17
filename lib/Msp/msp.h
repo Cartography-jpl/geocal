@@ -160,18 +160,14 @@ public:
   std::string sensor_mode() const { return model->getSensorMode(); }
   std::string reference_date_time() const { return model->getReferenceDateAndTime(); }
   blitz::Array<double, 1> sensor_velocity(double Line, double Sample);
-  // std::string generate_rsm_tre(const std::string& Report = "",
-  // 			       const std::string& Rsm_config = "") const;
-  // blitz::Array<double, 2> covariance() const;
-  // blitz::Array<double, 2> joint_covariance(const IgcMspImp& igc2) const;
-  // void ce90_le90(const ImageCoordinate& Ic, double H,
-  // 		 double& Ce90, double& Le90) const;
-  // void ground_coordinate_with_cov(const ImageCoordinate& Ic,
-  // 				  const blitz::Array<double, 2>& Ic_cov,
-  // 				  double H,
-  // 				  double H_var,
-  // 				  boost::shared_ptr<GroundCoordinate>& Gp,
-  // 				  blitz::Array<double, 2>& Gp_cov) const;
+  std::string generate_rsm_tre(const std::string& Report = "",
+   			       const std::string& Rsm_config = "") const;
+  blitz::Array<double, 1> ce90_le90(double Line, double Sample, double H) const;
+  blitz::Array<double, 2> ground_coordinate_with_cov
+  (double Line, double Sample, const blitz::Array<double, 2>& Ic_cov,
+   double H, double H_var) const;
+  blitz::Array<double, 2> covariance() const;
+  blitz::Array<double, 2> joint_covariance(const Msp& igc2) const;
   std::string pixel_time_base(double Line, double Sample) const;
   double pixel_time_offset(double Line, double Sample) const;
   blitz::Array<double, 1> image_coordinate(const blitz::Array<double, 1>& Gc_ecr) const;

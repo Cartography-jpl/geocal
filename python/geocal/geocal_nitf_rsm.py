@@ -298,16 +298,6 @@ if have_pynitf and not suppress_rsm:
         isegh.after_read_hook(fseg, None)
         return fseg.rsm
 
-    if have_msp:
-
-        def _generate_rsm(self, report="", rsm_config=""):
-            t = self.generate_rsm_tre(report, rsm_config)
-            t = re.split(r"^RSM_TRE_DATA$", t, flags=re.MULTILINE)[1]
-            return tre_str_to_rsm(t)
-
-        IgcMsp.generate_rsm = _generate_rsm
-
-
 if have_pynitf and not suppress_rsm:
     __all__ = [
         "tre_str_to_rsm",

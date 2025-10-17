@@ -1560,6 +1560,11 @@ class Msp(object):
     image_size = _swig_new_instance_method(_msp_wrap.Msp_image_size)
     pixel_time_base = _swig_new_instance_method(_msp_wrap.Msp_pixel_time_base)
     pixel_time_offset = _swig_new_instance_method(_msp_wrap.Msp_pixel_time_offset)
+    covariance = _swig_new_instance_method(_msp_wrap.Msp_covariance)
+    joint_covariance = _swig_new_instance_method(_msp_wrap.Msp_joint_covariance)
+    ground_coordinate_with_cov = _swig_new_instance_method(_msp_wrap.Msp_ground_coordinate_with_cov)
+    ce90_le90 = _swig_new_instance_method(_msp_wrap.Msp_ce90_le90)
+    generate_rsm_tre = _swig_new_instance_method(_msp_wrap.Msp_generate_rsm_tre)
     __swig_destroy__ = _msp_wrap.delete_Msp
 
 # Register Msp in _msp_wrap:

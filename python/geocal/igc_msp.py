@@ -16,6 +16,7 @@ import os
 import typing
 from typing import Any
 import numpy as np
+import re
 
 have_msp = False
 try:
@@ -67,20 +68,34 @@ class IgcMsp(ImageGroundConnection):
         """Return sensor velocity. I think this is m/s, but I'm not sure"""
         return self._msp.sensor_velocity(ic.line, ic.sample)
 
-    # blitz::Array<double, 2> covariance() const;
-    # blitz::Array<double, 2> joint_covariance(const IgcMsp& igc2) const;
-    # std::string generate_rsm_tre(const std::string& Report = "",
-    # const std::string& Rsm_config = "") const;
-    # void ground_coordinate_with_cov(const ImageCoordinate& Ic,
-    # const blitz::Array<double, 2>& Ic_cov,
-    # double H,
-    # double H_var,
-    # boost::shared_ptr<GroundCoordinate>& Gp,
-    # blitz::Array<double, 2>& Gp_cov) const;
-    # void ce90_le90(const ImageCoordinate& Ic, double H,
-    # double& Ce90, double& Le90) const;
-    # virtual bool has_time() const { return true; }
-    # virtual Time pixel_time(const ImageCoordinate& Ic) const;
+    def covariance(self) -> np.ndarray:
+        return self._msp.covariance()
+
+    def joint_covariance(self, igc2: IgcMsp) -> np.ndarray:
+        return self._msp.joint_covariance(igc2._msp)
+
+    def ground_coordinate_with_cov(self, ic : ImageCoordinate,
+                                   ic_cov : np.ndarray,
+                                   h : float, h_var: float) -> tuple[GroundCoordinate, np.ndarray]:
+        res = self._msp.ground_coordinate_with_cov(ic.line, ic.sample, ic_cov, h, h_var)
+        return Ecr(*res[3,:]), res[:3,:]
+    
+    def ce90_le90(self, ic: ImageCoordinate, h : float) -> tuple[float, float]:
+        '''Return CE90 and LE90'''
+        res = self._msp.ce90_le90(ic.line, ic.sample, h)
+        return float(res[0]), float(res[1])
+
+    def generate_rsm_tre(self, report : str | os.PathLike[str] | None = None,
+                         rsm_config : str | os.PathLike[str] | None = None):
+        return self._msp.generate_rsm_tre(str(report) if report is not None else "",
+                                          str(rsm_config) if rsm_config is not None else "")
+
+    def generate_rsm(self, report : str | os.PathLike[str] | None = None,
+                         rsm_config : str | os.PathLike[str] | None = None):
+        from .geocal_nitf_rsm import tre_str_to_rsm
+        t = self.generate_rsm_tre(report, rsm_config)
+        t = re.split(r"^RSM_TRE_DATA$", t, flags=re.MULTILINE)[1]
+        return tre_str_to_rsm(t)
 
     def _v_has_time(self) -> bool:
         return True

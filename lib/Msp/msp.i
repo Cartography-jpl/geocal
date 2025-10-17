@@ -58,6 +58,15 @@ public:
   blitz::Array<int, 1> image_size() const;
   std::string pixel_time_base(double Line, double Sample) const;
   double pixel_time_offset(double Line, double Sample) const;
+  blitz::Array<double, 2> covariance() const;
+  blitz::Array<double, 2> joint_covariance(const Msp& igc2) const;
+  blitz::Array<double, 2> ground_coordinate_with_cov(double Line, double Sample,
+						     const blitz::Array<double, 2>& Ic_cov,
+						     double H,
+						     double H_var) const;
+  blitz::Array<double, 1> ce90_le90(double Line, double Sample, double H) const;
+  std::string generate_rsm_tre(const std::string& Report = "",
+   			       const std::string& Rsm_config = "") const;
 };
 
 %pythoncode {

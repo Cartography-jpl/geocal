@@ -358,3 +358,160 @@ double Msp::pixel_time_offset(double Line, double Sample) const
   }
 }
 
+blitz::Array<double, 2> Msp::covariance() const
+{
+  try {
+    MSP::CsmSensorModelList slist;
+    slist.push_back(model.get());
+    MSP::Matrix m;
+    cs->getFullCovarianceMatrix(slist,m);
+    blitz::Array<double, 2> res(m.getRows(), m.getColumns());
+    for(int i = 0; i < res.rows(); ++i)
+      for(int j = 0; j < res.cols(); ++j)
+	res(i,j) = m.getElement(i,j);
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+blitz::Array<double, 2> Msp::joint_covariance(const Msp& igc2) const
+{
+  try {
+    MSP::CsmSensorModelList slist;
+    slist.push_back(model.get());
+    slist.push_back(igc2.model.get());
+    MSP::Matrix m;
+    // I'm not 100% sure, but I think full covariance matrix already
+    // includes the cross term. If not, we may need to add this. Note
+    // that slist can take a joint covariance, which might be used to
+    // handled this
+    //cs->getCrossCovarianceMatrix(slist,model.get(), igc2.model.get(), m);
+    cs->getFullCovarianceMatrix(slist,m);
+    blitz::Array<double, 2> res(m.getRows(), m.getColumns());
+    for(int i = 0; i < res.rows(); ++i)
+      for(int j = 0; j < res.cols(); ++j)
+	res(i,j) = m.getElement(i,j);
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+blitz::Array<double, 2> Msp::ground_coordinate_with_cov
+(double Line, double Sample, const blitz::Array<double, 2>& Ic_cov,
+ double H, double H_var) const
+{
+  try {
+    csm::EcefCoordCovar gp =
+      model->imageToGround(csm::ImageCoordCovar(Line, Sample, Ic_cov(0,0),
+						Ic_cov(0,1), Ic_cov(1,1)),
+			   H, H_var);
+    blitz::Array<double, 2> res(4,3);
+    res(3, 0) = gp.x;
+    res(3, 1) = gp.y;
+    res(3, 2) = gp.z;
+    res(0,0) = gp.covar2d(0,0);
+    res(0,1) = gp.covar2d(0,1);
+    res(0,2) = gp.covar2d(0,2);
+    res(1,0) = gp.covar2d(0,1);
+    res(1,1) = gp.covar2d(1,1);
+    res(1,2) = gp.covar2d(1,2);
+    res(2,0) = gp.covar2d(0,2);
+    res(2,1) = gp.covar2d(1,2);
+    res(2,2) = gp.covar2d(2,2);
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+  
+}
+
+blitz::Array<double, 1> Msp::ce90_le90(double Line, double Sample, double H) const
+{
+  try {
+    blitz::Array<double, 2> ic_cov(2,2);
+    ic_cov = 0;
+    blitz::Array<double, 2> gcwithcov = ground_coordinate_with_cov(Line, Sample, ic_cov, H, 0);
+    MSP::GroundPoint gp(gcwithcov(3,0), gcwithcov(3,1),gcwithcov(3,2));
+    MSP::Matrix cov(3,3);
+    for(int i = 0; i < 3; ++i)
+      for(int j = 0; j < 3; ++j)
+	cov.setElement(i,j,gcwithcov(i,j));
+    gp.setCovariance(cov);
+    blitz::Array<double, 1> res(2);
+    cs->getCELE90(gp, res(0), res(1));
+    return res;
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}
+
+std::string Msp::generate_rsm_tre
+(const std::string& Report, const std::string& Rsm_config) const
+{
+  try {
+    std::string cfname(Rsm_config);
+    if(cfname == "") {
+      char *t = getenv("MSP_DATA_DIR");
+      if(!t)
+	throw Exception("Need to either pass in the RSM configuration file, or set the environment variable MSP_DATA_DIR");
+      cfname = std::string(t) + "/rsm/database_settings.strat";
+    }
+    MSP::RGS::RGSConfig config;
+    config.read_config_file(cfname);
+    MSP::RGS::RsmGeneratorService generator(&config);
+    std::vector<csm::RasterGM *> mlist;
+    mlist.push_back(model.get());
+    int n_orig_params = 0;
+    double *orig_covariance = NULL;
+    std::vector<std::string> image_ids;
+    std::vector<std::vector<int> > orig_param_numbers_by_image;
+    std::vector<csm::Isd *> isd;
+    IWS_WarningTracker warning;
+    warning = generator.generateRsmWithJointCov(mlist, n_orig_params,
+				orig_covariance, image_ids, orig_param_numbers_by_image,
+				isd, Report);
+    warning.printAllWarnings();
+    // Not sure if we should change this or not
+    const char* sensor_model_type = "IWS_UNKNOWN_SENSOR_MODEL";
+    boost::shared_ptr<csm::RasterGM>
+      rsm_sm((csm::RasterGM *) sms->createModelFromISD(*isd[0],
+						       sensor_model_type));
+    if(!rsm_sm)
+      throw Exception("Trouble creating rsm_sm");
+    return rsm_sm->getModelState();
+  } catch(const csm::Error& error) {
+    // Translate MSP error to Geocal error, just so we don't need
+    // additional logic to handle this
+    Exception e;
+    e << "MSP error:\n"
+      << "Message: " << error.getMessage() << "\n"
+      << "Function: " << error.getFunction() << "\n";
+    throw e;
+  }
+}

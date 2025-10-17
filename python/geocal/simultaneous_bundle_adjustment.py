@@ -2,7 +2,6 @@ from builtins import str
 from builtins import range
 from builtins import object
 import numpy as np
-from geocal_swig import *
 import scipy
 
 
@@ -221,7 +220,7 @@ class SimultaneousBundleAdjustment(object):
         """The portion of sba equation that gives the GCP constraint"""
         return slice(
             self.len_surface_constraint,
-            self.len_surface_constraint + len_gcp_constraint,
+            self.len_surface_constraint + self.len_gcp_constraint,
         )
 
     @property

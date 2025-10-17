@@ -1,5 +1,5 @@
 from builtins import range
-from geocal_swig import *
+from geocal_swig import Rpc
 from xml.etree.cElementTree import parse
 
 
@@ -11,7 +11,6 @@ def pleides_rpc(fname):
     """
     rpc = Rpc()
     doc = parse(fname)
-    root = doc.getroot()
 
     # The data is stored in a few different places in the XML file. We go
     # through and grab each piece.

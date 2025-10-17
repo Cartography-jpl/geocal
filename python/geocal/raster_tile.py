@@ -1,4 +1,4 @@
-from geocal_swig import *
+from geocal_swig import RasterImageMultiBand, RasterImageTileIterator
 
 
 def tile_iterator(data):

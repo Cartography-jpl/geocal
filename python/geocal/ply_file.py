@@ -1,7 +1,6 @@
 from builtins import range
 from builtins import object
 import numpy as np
-from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
 import struct
 

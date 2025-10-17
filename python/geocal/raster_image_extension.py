@@ -1,8 +1,7 @@
 import geocal_swig
 import numpy as np
-from .safe_matplotlib_import import *
 import matplotlib.pyplot as plt
-from .shape_file import *
+from .shape_file import have_shape_file, ShapeLayer
 
 # Add some useful functions to RasterImage
 

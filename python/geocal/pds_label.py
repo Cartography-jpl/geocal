@@ -1,7 +1,8 @@
 import re
 import bisect
-from geocal_swig import *
+from geocal_swig import Time
 import subprocess
+import os
 
 
 def pds_label_text(fname):

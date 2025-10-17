@@ -1,12 +1,24 @@
 from builtins import map
 from builtins import range
 from builtins import object
-from geocal_swig import *
-from .igc_collection_extension import *
-from .tie_point_extension import *
-from .ray_intersect import *
-from .feature_detector_extension import *
-from .misc import *
+from geocal_swig import (
+    TiePointCollection,
+    MemoryRasterImage,
+    RasterImage,
+    TiePoint,
+    ImageCoordinate,
+    SubRasterImage,
+    ScaleImage,
+    ForstnerFeatureDetector,
+    SurfaceImageToImageMatch,
+    MapInfoImageGroundConnection,
+    IgcImageToImageMatch,
+    ScaleImageGroundConnection,
+    PyramidImageMatcher,
+    CcorrLsmMatcher,
+)
+from .misc import cib01_mapinfo
+from .ray_intersect import RayIntersect3
 import math
 import itertools
 import multiprocessing
@@ -774,7 +786,7 @@ def outlier_reject_ransac(
     log.info("Completed using RANSAC to reject outliers")
     if diagnostic:
         ransac_diag_code = 3
-        diagnostic.tp_diagnostic[3] += len1 - len3
+        diagnostic.tp_diagnostic[ransac_diag_code] += len1 - len3
     return res2
 
 

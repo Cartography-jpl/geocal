@@ -1,5 +1,5 @@
 from builtins import range
-from .instrument_reflectance import *
+from .instrument_reflectance import InstrumentReflectance, PanInstrumentReflectance
 import xml.etree.ElementTree as ET
 import math
 
@@ -18,10 +18,10 @@ class SpotReflectance(InstrumentReflectance, PanInstrumentReflectance):
         for i in range(5):
             self.gain.append(-999.0)
             self.bias.append(-999.0)
-        if multimetafname != None:
+        if multimetafname is not None:
             self.readMetaData(multimetafname)
             self.calculateSolarDistance()
-        if panmetafname != None:
+        if panmetafname is not None:
             self.readPanMetaData(panmetafname)
             self.calculatePanSolarDistance()
 

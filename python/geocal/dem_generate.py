@@ -2,16 +2,23 @@ from builtins import str
 from builtins import range
 from builtins import object
 import geocal_swig
-from geocal_swig import *
+from geocal_swig import (
+    ImageCoordinate,
+    SurfaceImageToImageMatch,
+    IgcImageToImageMatch,
+    DemMatch,
+    PlanetocentricConverter,
+    GeodeticConverter,
+    CoordinateConverter,
+    CcorrLsmMatcher,
+    CalcRasterMultiBand,
+)
 import math
 import scipy.interpolate
-from .image_to_image_connection import *
-from .ray_intersect import *
+from .ray_intersect import RayIntersect
 import multiprocessing
 import numpy as np
-from .igc_collection_extension import *
-from .ply_file import *
-from .safe_matplotlib_import import *
+from .ply_file import PlyFile
 import matplotlib.pyplot as plt
 import logging
 import re

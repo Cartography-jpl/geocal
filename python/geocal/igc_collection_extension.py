@@ -1,6 +1,11 @@
 from builtins import range
-from abc import *
-from geocal_swig import *
+from geocal_swig import (
+    IgcCollectionRollingShutter,
+    OrbitOffsetCorrection,
+    determine_quat_rot,
+    CartesianFixedLookVector,
+    FrameCoordinate,
+)
 import numpy as np
 
 

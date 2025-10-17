@@ -543,11 +543,12 @@ def test_rsm_indirect_cov_msp(isolated_dir, rsm_lc, igc_rpc):
     print(igc_msp.covariance)
     print(igc_msp.joint_covariance(igc_msp2))
     gp, gp_cov = igc_msp.ground_coordinate_with_cov(
-        ImageCoordinate(10, 10),
-        np.array([[0.5*0.5,0],[0, 0.5 * 0.5]]), 100, 0.1)
+        ImageCoordinate(10, 10), np.array([[0.5 * 0.5, 0], [0, 0.5 * 0.5]]), 100, 0.1
+    )
     print(gp)
     print(gp_cov)
-    print(igc_msp.ce90_le90(ImageCoordinate(10,10), 100))
+    print(igc_msp.ce90_le90(ImageCoordinate(10, 10), 100))
+
 
 @require_pynitf
 @require_vicar

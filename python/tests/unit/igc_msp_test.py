@@ -54,4 +54,4 @@ def test_igc_msp(unit_test_data):
 
     assert igc.has_time
     texpect = Time.parse_time("2002-12-16T15:16:29.000000Z")
-    assert abs(igc.pixel_time(ImageCoordinate(10,10)) - texpect) < 1e-6
+    assert abs(igc.pixel_time(ImageCoordinate(10, 10)) - texpect) < 1e-6

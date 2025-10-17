@@ -4,6 +4,7 @@ import os
 import pytest
 from pathlib import Path
 
+
 @require_isis
 def test_find_isis_kernel(isolated_dir):
     original_cache = os.environ.get("SPICECACHE")

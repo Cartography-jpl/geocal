@@ -10,7 +10,6 @@ from geocal_swig import (
     RsmDirectCovarianceA,
     RsmIndirectCovarianceB,
 )
-from .igc_msp import have_msp, IgcMsp
 import re
 
 try:
@@ -297,6 +296,7 @@ if have_pynitf and not suppress_rsm:
         isegh = RsmImageSegmentHook()
         isegh.after_read_hook(fseg, None)
         return fseg.rsm
+
 
 if have_pynitf and not suppress_rsm:
     __all__ = [

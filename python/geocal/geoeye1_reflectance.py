@@ -1,5 +1,5 @@
 from builtins import range
-from .instrument_reflectance import *
+from .instrument_reflectance import InstrumentReflectance
 import math
 
 

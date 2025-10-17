@@ -13,7 +13,7 @@ class GaussianStretch(VicarInterface):
 
     def pre_run(self):
         t = VicarRasterImage("in.img", "HALF", self.data.shape[0], self.data.shape[1])
-        t = None
+        t = None  # noqa - F841
         d = mmap_file("in.img", mode="r+")
         d[:] = np.where(
             self.data > 0, self.data * 32768.0 / max(self.data.max(), 1e-8), 0

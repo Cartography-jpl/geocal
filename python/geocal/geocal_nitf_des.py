@@ -5,7 +5,6 @@ try:
         DesCSEPHB,
         DesCSATTB,
         DesCSSFAB,
-        TreCSEPHA,
         NitfImageSegment,
         NitfFile,
         NitfDesSegment,

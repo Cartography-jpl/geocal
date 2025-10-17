@@ -84,12 +84,12 @@ def nitf_sample_wv2(nitf_sample_files):
         return fname
     pytest.skip(f"Required file {fname} not found, so skipping test")
 
+
 @pytest.fixture(scope="function")
 def mars_test_data():
-    if(not SpiceHelper.have_spice()):
+    if not SpiceHelper.have_spice():
         pytest.skip("require spice")
     res = Path("/bigdata/smyth/MiplMarsTest")
     if not res.exists:
         pytest.skip("Required mars test data not found")
     return res
-    

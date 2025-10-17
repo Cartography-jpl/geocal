@@ -13,8 +13,8 @@ from builtins import range
 import warnings
 
 warnings.simplefilter(action="ignore", category=FutureWarning)
-from ipywidgets import interact
-import matplotlib.pyplot as plt
+from ipywidgets import interact  # noqa: E402
+import matplotlib.pyplot as plt  # noqa: E402
 
 try:
     # Use prettier plots, if available

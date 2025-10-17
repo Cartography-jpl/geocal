@@ -355,7 +355,7 @@ class LroPdsToIsis:
         # have a pointer to is.
         try:
             os.remove(isis_fname)
-        except:
+        except FileNotFoundError:
             pass
         if False:
             os.symlink(f"{t}.vis.even.cal.cub", isis_fname)

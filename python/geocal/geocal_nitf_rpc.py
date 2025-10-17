@@ -1,5 +1,4 @@
 from geocal_swig import Rpc
-from .tre_struct import *
 
 try:
     from pynitf import NitfSegmentHook, NitfSegmentHookSet, TreRPC00B, TreRPC00A

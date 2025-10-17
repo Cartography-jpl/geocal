@@ -1,6 +1,18 @@
 from builtins import range
-from geocal_swig import *
-from math import *
+from geocal_swig import (
+    ImageCoordinate,
+    SimpleDem,
+    Ecr,
+    CartesianFixedLookVector,
+    SubRasterImage,
+    GdalRasterImage,
+    GroundMaskImage,
+    ImageMaskImage,
+    ScaleImage,
+    ImageGroundConnection,
+    HdfFile,
+)
+import math
 import numpy as np
 import scipy.optimize
 
@@ -92,10 +104,10 @@ class AirMspiIgc(ImageGroundConnection):
         """Determine matrix that takes us to local coordinates for the given
         image location. This maps ECR direction to local coordinates."""
         gc = self.image.ground_coordinate(ic)
-        slat = sin(radians(gc.latitude))
-        clat = cos(radians(gc.latitude))
-        slon = sin(radians(gc.longitude))
-        clon = cos(radians(gc.longitude))
+        slat = math.sin(math.radians(gc.latitude))
+        clat = math.cos(math.radians(gc.latitude))
+        slon = math.sin(math.radians(gc.longitude))
+        clon = math.cos(math.radians(gc.longitude))
         return np.array(
             [
                 [-clon * slat, -slon * slat, clat],
@@ -116,20 +128,13 @@ class AirMspiIgc(ImageGroundConnection):
             return -999
         return self.vzen.interpolate(ic)
 
-    def view_zenith(self, ic):
-        """Return view zenith as degrees. This interpolates the underlying
-        data. Returns -999 if the data is masked"""
-        if self.image_mask.mask_ic(ic):
-            return -999
-        return self.vzen.interpolate(ic)
-
     def view_azimuth(self, ic):
         """Return view azimuth as degrees. This interpolates the underlying
         data. Returns -999 if the data is masked"""
         if self.image_mask.mask_ic(ic):
             return -999
-        ln = int(floor(ic.line))
-        smp = int(floor(ic.sample))
+        ln = int(math.floor(ic.line))
+        smp = int(math.floor(ic.sample))
         dln = ic.line - ln
         dsmp = ic.sample - smp
         pt = self.vaz.read_double(ln, smp, 2, 2).flatten()
@@ -161,9 +166,9 @@ class AirMspiIgc(ImageGroundConnection):
         az = self.view_azimuth(ic)
         zen = self.view_zenith(ic)
         lc = [
-            -cos(radians(az)) * sin(radians(180 - zen)),
-            -sin(radians(az)) * sin(radians(180 - zen)),
-            -cos(radians(180 - zen)),
+            -math.cos(math.radians(az)) * math.sin(math.radians(180 - zen)),
+            -math.sin(math.radians(az)) * math.sin(math.radians(180 - zen)),
+            -math.cos(math.radians(180 - zen)),
         ]
         return CartesianFixedLookVector(self.__from_lc(ic).dot(lc))
 
@@ -198,6 +203,7 @@ class AirMspiIgc(ImageGroundConnection):
         return """AirMspiIgc:
   File name:        %s
   Group name:       %s
+  Data scale:       %f
   Data field:       %s
   Title:            %s
   Ellipsoid Height: %f""" % (

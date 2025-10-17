@@ -30,7 +30,6 @@ import numpy as np
 
 try:
     import pynitf
-    from .geocal_nitf_des import DesCSEPHB, DesCSATTB
 
     have_pynitf = True
 except ImportError:

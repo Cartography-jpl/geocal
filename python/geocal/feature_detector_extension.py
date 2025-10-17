@@ -1,9 +1,8 @@
 from builtins import map
 from builtins import range
 from builtins import object
-from geocal_swig import *
+from geocal_swig import FeatureDetector
 from itertools import chain
-import time
 
 
 class InterestPointGridRawWrap(object):
@@ -69,7 +68,6 @@ def interest_point_grid(
     """
     res = []
     index_list = list(range(number_grid_line))
-    tstart = time.time()
     func = InterestPointGridRawWrap(
         self, img, mask, number_grid_line, number_grid_sample, border
     )

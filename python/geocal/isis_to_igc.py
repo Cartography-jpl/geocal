@@ -148,10 +148,8 @@ class CtxIsisToIgc:
         t.extend(klist_in.kernel_list)
         klist = SpiceKernelList(t)
         sline = 0
-        nline = isis_img.number_line
         if subset is not None:
             sline = subset[0]
-            nline = subset[2]
             img = SubRasterImage(isis_img, subset[0], subset[1], subset[2], subset[3])
         else:
             img = isis_img
@@ -287,10 +285,8 @@ class HrscIsisToIgc:
         if idata["InstrumentId"] != "HRSC":
             return (False, None)
         sline = 0
-        nline = isis_img.number_line
         if subset is not None:
             sline = subset[0]
-            nline = subset[2]
             img = SubRasterImage(isis_img, subset[0], subset[1], subset[2], subset[3])
         else:
             img = isis_img
@@ -805,10 +801,7 @@ class HiriseIsisToIgc:
         if idata["InstrumentId"] != "HIRISE":
             return (False, None)
         sline = 0
-        nline = isis_img.number_line
         if subset is not None:
-            sline = subset[0]
-            nline = subset[2]
             img = SubRasterImage(isis_img, subset[0], subset[1], subset[2], subset[3])
         else:
             img = isis_img

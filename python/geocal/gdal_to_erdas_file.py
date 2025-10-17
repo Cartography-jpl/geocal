@@ -1,5 +1,5 @@
 from builtins import str
-from geocal_swig import *
+from geocal_swig import GdalRasterImage
 import subprocess
 
 
@@ -17,8 +17,8 @@ def gdal_to_erdas_file(infname, outfname):
             "STATISTICS=YES",
             "-co",
             "COMPRESSED=YES",
-            infname,
-            outfname,
+            str(infname),
+            str(outfname),
         ]
     )
     # Older versions of gdal required the levels. As of GDAL 2.3 this
@@ -26,7 +26,7 @@ def gdal_to_erdas_file(infname, outfname):
     # we have the newer version of GDAL, but leave the old code in if
     # we need to go back to an older version of GDAL
     if True:
-        cmd = ["gdaladdo", outfname]
+        cmd = ["gdaladdo", str(outfname)]
     else:
         # The default blocksize of ERDAS is 64x64. Since we just
         # created the file, we know this is the blocksize.
@@ -34,7 +34,7 @@ def gdal_to_erdas_file(infname, outfname):
         cmd = ["gdaladdo", outfname, "2"]
         i = 2
         # We want to make image pyramids down to a single block
-        infile = GdalRasterImage(infname)
+        infile = GdalRasterImage(str(infname))
         while (
             infile.number_line // i > blocksize
             and infile.number_sample // i > blocksize

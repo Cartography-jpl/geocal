@@ -1,5 +1,5 @@
 from builtins import object
-from .docopt import *
+from .docopt import docopt
 from geocal_swig import VicarArgument
 import sys
 import re
@@ -82,7 +82,7 @@ class DocOptSimpleVicar(object):
         if self.long_name_to_vicar and name in self.long_name_to_vicar:
             name = self.long_name_to_vicar[name]
         try:
-            t = self.va[name]
+            _ = self.va[name]
             return True
         except RuntimeError as e:
             if e.args[0] == "Call to zvpstat failed":

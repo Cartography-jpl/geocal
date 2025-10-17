@@ -1,6 +1,6 @@
 # This contains extensions to give a more python like interface to
 # IbisFile.
-from geocal_swig import *
+from geocal_swig import IbisFile, VicarFile
 
 # We might not have IbisFile defined
 have_ibis_file = VicarFile.vicar_available()

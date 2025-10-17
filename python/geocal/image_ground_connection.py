@@ -1,16 +1,16 @@
 from builtins import range
 import geocal_swig
-from math import *
+import math
 import numpy as np
 import os.path
 import re
-from .shape_file import *
+from .shape_file import have_shape_file, ShapeLayer
 
 
 def _new_from_init(cls, version, *args):
     """Handle older versions"""
     if cls.pickle_format_version() < version:
-        raise RuntimeException(
+        raise RuntimeError(
             "Class is expecting a pickled object with version number %d, but we found %d"
             % (cls.pickle_format_version(), version)
         )
@@ -95,7 +95,7 @@ class VicarImageGroundConnection(geocal_swig.RpcImageGroundConnection):
         if m:
             base = m.group(1)
             baseend = m.group(4)
-            img = RasterImageMultiBandVariable()
+            img = geocal_swig.RasterImageMultiBandVariable()
             for i in range(int(m.group(2)), int(m.group(3)) + 1):
                 img.add_raster_image(
                     geocal_swig.VicarLiteRasterImage("%s%d%s" % (base, i, baseend))
@@ -176,10 +176,10 @@ def _view_angle(self, image_coordinate=None, delta_h=100):
     gc2 = self.ground_coordinate_dem(image_coordinate, d)
     e1 = gc1.convert_to_cf()
     e2 = gc2.convert_to_cf()
-    slat = sin(radians(gc1.latitude))
-    clat = cos(radians(gc1.latitude))
-    slon = sin(radians(gc1.longitude))
-    clon = cos(radians(gc1.longitude))
+    slat = math.sin(math.radians(gc1.latitude))
+    clat = math.cos(math.radians(gc1.latitude))
+    slon = math.sin(math.radians(gc1.longitude))
+    clon = math.cos(math.radians(gc1.longitude))
     # Matrix used to change to local coordinates, with local up as z
     # and local north as x
     to_lc = np.array(
@@ -196,12 +196,12 @@ def _view_angle(self, image_coordinate=None, delta_h=100):
             e2.position[2] - e1.position[2],
         ]
     )
-    lv = lv / sqrt(np.dot(lv, lv))
+    lv = lv / math.sqrt(np.dot(lv, lv))
     lc_dir = to_lc.dot(lv)
-    az = degrees(atan2(lc_dir[1], lc_dir[0]))
+    az = math.degrees(math.atan2(lc_dir[1], lc_dir[0]))
     if az < 0:
         az += 360
-    zen = 180 - degrees(acos(lc_dir[2] / sqrt(np.dot(lc_dir, lc_dir))))
+    zen = 180 - math.degrees(math.acos(lc_dir[2] / math.sqrt(np.dot(lc_dir, lc_dir))))
     return zen, az
 
 
@@ -260,9 +260,7 @@ def _gsd_values(self, image_coordinate=None, height=None):
                 ic = geocal_swig.ImageCoordinate(
                     image_coordinate.line + i, image_coordinate.sample + j
                 )
-                hlist.append(
-                    self.ground_coordinate(image_coordinate).height_reference_surface
-                )
+                hlist.append(self.ground_coordinate(ic).height_reference_surface)
         height = np.median(hlist)
     gc = self.ground_coordinate_approx_height(image_coordinate, height)
     gc2 = self.ground_coordinate_approx_height(
@@ -275,7 +273,7 @@ def _gsd_values(self, image_coordinate=None, height=None):
     )
     gsd_row = geocal_swig.distance(gc, gc2)
     gsd_col = geocal_swig.distance(gc, gc3)
-    gsd_mean = sqrt(gsd_row * gsd_col)
+    gsd_mean = math.sqrt(gsd_row * gsd_col)
     return gsd_row, gsd_col, gsd_mean
 
 

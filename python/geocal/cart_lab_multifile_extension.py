@@ -1,19 +1,23 @@
-import geocal_swig
+from __future__ import annotations
+import geocal_swig # type: ignore
 import subprocess
 import os
 import tempfile
+import typing
 
+if typing.TYPE_CHECKING:
+    from geocal_swig import GdalRasterImage, CartLabMultifile
 
 # Useful extensions to CartLabMultifile
 def _create_image_chip(
-    self,
-    out_fname,
-    gdal_img_to_match,
-    out_format="VICAR",
-    border=30,
-    resampling_method="bilinear",
-    error_threshold=0.125,
-):
+    self : CartLabMultifile,
+    out_fname : str | os.PathLike[str],
+    gdal_img_to_match : GdalRasterImage,
+    out_format : str="VICAR",
+    border : int =30,
+    resampling_method : str="bilinear",
+    error_threshold : float=0.125,
+) -> None:
     """CartLabMultifile already has a create_subset_file which is good for
     creating a file we can match against. However this assumes that we are
     generating a image in the same projection (lat/lon). We have case such
@@ -37,7 +41,7 @@ def _create_image_chip(
     We use a temporary file in the directory that the output goes.
     """
     img_to_match_fname = gdal_img_to_match.file_names[0]
-    workdir = os.path.dirname(os.path.abspath(out_fname))
+    workdir = os.path.dirname(os.path.abspath(str(out_fname)))
     with tempfile.TemporaryDirectory(dir=workdir) as tdir:
         gc1 = gdal_img_to_match.ground_coordinate(geocal_swig.ImageCoordinate(0, 0))
         gc2 = gdal_img_to_match.ground_coordinate(
@@ -80,7 +84,7 @@ def _create_image_chip(
             check=True,
         )
         subprocess.run(
-            f"gdalwarp -q -t_srs {tdir}/ichip.wkt -tr {res_x} {res_y} {tdir}/ichip_landsat.tif -overwrite -of {out_format} -r {resampling_method} {out_fname}",
+            f"gdalwarp -q -t_srs {tdir}/ichip.wkt -tr {res_x} {res_y} {tdir}/ichip_landsat.tif -overwrite -of {out_format} -r {resampling_method} {str(out_fname)}",
             shell=True,
             check=True,
         )

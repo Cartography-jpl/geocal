@@ -1,3 +1,5 @@
+# type: ignore
+
 # This is the package docopt. We temporarily include this as part of AFIDS.
 # If we end up deciding to use this, we'll build this like we do other
 # thirdparty packages.

@@ -1,5 +1,6 @@
+from __future__ import annotations
 from builtins import range
-from geocal_swig import (
+from geocal_swig import ( # type: ignore
     ImageCoordinate,
     SimpleDem,
     Ecr,
@@ -15,6 +16,11 @@ from geocal_swig import (
 import math
 import numpy as np
 import scipy.optimize
+import typing
+from typing import Any
+
+if typing.TYPE_CHECKING:
+    from geocal_swig import RasterImage, GroundCoordinate, Dem
 
 try:
     # Depending on the options used when building, this class might
@@ -35,16 +41,16 @@ class AirMspiIgc(ImageGroundConnection):
 
     def __init__(
         self,
-        fname,
-        title="Image",
-        ellipsoid_height=0,
-        group_name="555nm_band",
-        data_field="I",
-        data_scale=32767.0,
-    ):
+        fname : str,
+        title : str="Image",
+        ellipsoid_height : float =0,
+        group_name: str="555nm_band",
+        data_field: str ="I",
+        data_scale: float=32767.0,
+    ) -> None:
         if not have_hdf:
             raise RuntimeError("Must have HDF installed to use this class")
-        ImageGroundConnection.__init__(self)
+        super().__init__()
         # Save initial state, so we can pickle this.
         self.fname = fname
         self.group_name = group_name
@@ -75,12 +81,12 @@ class AirMspiIgc(ImageGroundConnection):
         self.dem = SimpleDem(ellipsoid_height)
         self.title = title
 
-    def __gdal_data(self, name):
+    def __gdal_data(self, name : str) -> RasterImage:
         """Short cut for reading data with GDAL, and subsetting"""
         t = GdalRasterImage(self.gdal_base + name)
         return SubRasterImage(t, *self.bounding_box)
 
-    def __getstate__(self):
+    def __getstate__(self) -> dict[str, Any]:
         return {
             "fname": self.fname,
             "title": self.title,
@@ -90,17 +96,17 @@ class AirMspiIgc(ImageGroundConnection):
             "group_name": self.group_name,
         }
 
-    def __setstate__(self, dict):
-        self.__init__(
-            dict["fname"],
-            dict["title"],
-            dict["ellipsoid_height"],
-            dict["group_name"],
-            dict["data_field"],
-            dict["data_scale"],
+    def __setstate__(self, d : dict[str, Any]) -> None:
+        self.__init__( # type: ignore
+            d["fname"],
+            d["title"],
+            d["ellipsoid_height"],
+            d["group_name"],
+            d["data_field"],
+            d["data_scale"],
         )
 
-    def __to_lc(self, ic):
+    def __to_lc(self, ic : ImageCoordinate) -> np.ndarray:
         """Determine matrix that takes us to local coordinates for the given
         image location. This maps ECR direction to local coordinates."""
         gc = self.image.ground_coordinate(ic)
@@ -116,19 +122,19 @@ class AirMspiIgc(ImageGroundConnection):
             ]
         )
 
-    def __from_lc(self, ic):
+    def __from_lc(self, ic : ImageCoordinate) -> np.ndarray:
         """Determine matrix that takes us from local coordinates for the
         given location. This maps local coordinate to ECR direction."""
         return np.transpose(self.__to_lc(ic))
 
-    def view_zenith(self, ic):
+    def view_zenith(self, ic : ImageCoordinate) -> float:
         """Return view zenith as degrees. This interpolates the underlying
         data. Returns -999 if the data is masked"""
         if self.image_mask.mask_ic(ic):
             return -999
         return self.vzen.interpolate(ic)
 
-    def view_azimuth(self, ic):
+    def view_azimuth(self, ic : ImageCoordinate) -> float:
         """Return view azimuth as degrees. This interpolates the underlying
         data. Returns -999 if the data is masked"""
         if self.image_mask.mask_ic(ic):
@@ -159,7 +165,7 @@ class AirMspiIgc(ImageGroundConnection):
             res -= 360
         return res
 
-    def cf_look_vector_lv(self, ic):
+    def cf_look_vector_lv(self, ic : ImageCoordinate) -> CartesianFixedLookVector:
         """Return look vector."""
         if self.image_mask.mask_ic(ic):
             raise RuntimeError("Masked data at (%f, %f)" % (ic.line, ic.sample))
@@ -172,19 +178,19 @@ class AirMspiIgc(ImageGroundConnection):
         ]
         return CartesianFixedLookVector(self.__from_lc(ic).dot(lc))
 
-    def cf_look_vector_pos(self, ic):
+    def cf_look_vector_pos(self, ic : ImageCoordinate) -> GroundCoordinate:
         """Return point along the look vector."""
         return Ecr(self.image.ground_coordinate(ic, self.dem))
 
-    def ground_coordinate_dem(self, ic, d):
+    def ground_coordinate_dem(self, ic : ImageCoordinate, d : Dem) -> GroundCoordinate:
         """Determine what ground coordinate is seen the given DEM for the
         given ImageCoordinate"""
         lv, p = self.cf_look_vector(ic)
         resolution = 1.0
         return d.intersect(p, lv, resolution)
 
-    def image_coordinate(self, gc):
-        def func(x, self, gc):
+    def image_coordinate(self, gc : GroundCoordinate) -> ImageCoordinate:
+        def func(x : np.ndarray, self : AirMspiIgc, gc : GroundCoordinate) -> list[float]:
             ic = ImageCoordinate(x[0], x[1])
             gc2 = self.ground_coordinate_dem(ic, SimpleDem(gc.height_reference_surface))
             return [gc.latitude - gc2.latitude, gc.longitude - gc2.longitude]
@@ -199,12 +205,12 @@ class AirMspiIgc(ImageGroundConnection):
             raise RuntimeError("Couldn't find solution")
         return ImageCoordinate(xsol["x"][0], xsol["x"][1])
 
-    def __str__(self):
+    def __str__(self) -> str:
         return """AirMspiIgc:
   File name:        %s
   Group name:       %s
-  Data scale:       %f
   Data field:       %s
+  Data scale:       %f
   Title:            %s
   Ellipsoid Height: %f""" % (
             self.fname,

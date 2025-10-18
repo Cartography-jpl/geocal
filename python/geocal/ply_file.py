@@ -1,9 +1,13 @@
-from builtins import range
+from __future__ import annotations
 from builtins import object
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
+import matplotlib.colors as mcolors
 import struct
-
+from typing import Self
+import os
+from types import TracebackType
 
 class PlyFile(object):
     """This is a simple class for writing basic Stanford PLY files. Note
@@ -20,31 +24,31 @@ class PlyFile(object):
     """
 
     def __init__(
-        self, filename, vertex=[], cm=plt.cm.hot, vmin=0.0, vmax=1.0, binary_format=True
-    ):
+        self, filename : str | os.PathLike[str], vertex : list[list[float]] | None=None, cmap : mcolors.Colormap=cm.hot, vmin : float=0.0, vmax : float=1.0, binary_format : bool=True
+    ) -> None:
         self.filename = filename
-        self.vertex = vertex
+        self.vertex = vertex if vertex is not None else []
         self.is_closed = False
         self.binary_format = binary_format
-        self.color_map = cm
+        self.color_map = cmap
         self.vmin = vmin
         self.vmax = vmax
 
-    def close(self):
+    def close(self) -> None:
         """Write out the file."""
         if self.is_closed:
             return
-        self.vertex = np.array(self.vertex)
-        if len(self.vertex.shape) != 2 or (
-            self.vertex.shape[1] != 3 and self.vertex.shape[1] != 4
+        v = np.array(self.vertex)
+        if len(v.shape) != 2 or (
+            v.shape[1] != 3 and v.shape[1] != 4
         ):
             raise RuntimeError("Vertex needs to be n x 3 array or n x 4 array")
 
-        if self.vertex.shape[1] == 4:
+        if v.shape[1] == 4:
             # Need to apply color map
             have_color = True
             cdata = self.color_map(
-                (self.vertex[:, 3] - self.vmin) / (self.vmax - self.vmin)
+                (v[:, 3] - self.vmin) / (self.vmax - self.vmin)
             )
             cdata = (np.round(cdata * 255)).astype(np.uint8)
         else:
@@ -62,7 +66,7 @@ class PlyFile(object):
             h += """element vertex %d
 property float x
 property float y
-property float z\n""" % self.vertex.shape[0]
+property float z\n""" % v.shape[0]
             if have_color:
                 h += """property uchar red
 property uchar green
@@ -75,16 +79,16 @@ property uchar alpha\n"""
             else:
                 print(h, file=fh)
             if self.binary_format:
-                for i in range(self.vertex.shape[0]):
-                    fh.write(struct.pack("<3f", *self.vertex[i, 0:3]))
+                for i in range(v.shape[0]):
+                    fh.write(struct.pack("<3f", *v[i, 0:3]))
                     if have_color:
                         fh.write(struct.pack("<4B", *cdata[i, :]))
             else:
-                for i in range(self.vertex.shape[0]):
+                for i in range(v.shape[0]):
                     print(
-                        self.vertex[i, 0],
-                        self.vertex[i, 1],
-                        self.vertex[i, 2],
+                        v[i, 0],
+                        v[i, 1],
+                        v[i, 2],
                         end=" ",
                         file=fh,
                     )
@@ -100,13 +104,14 @@ property uchar alpha\n"""
                     print("", file=fh)
         self.is_closed = True
 
-    def __enter__(self):
+    def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, typ, value, tb):
+    def __exit__(self, typ : type[BaseException] | None, value : BaseException | None,
+                 tb : TracebackType | None) -> None:
         self.close()
 
-    def __del__(self):
+    def __del__(self) -> None:
         self.close()
 
 

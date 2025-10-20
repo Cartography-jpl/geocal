@@ -3,7 +3,15 @@
 # separate functions for each type of camera. Perhaps we can consolidate these
 # somehow at some point.
 
-from geocal_swig import *
+from geocal_swig import (
+    SpiceHelper,
+    QuaternionCamera,
+    Quaternion_double,
+    CameraRadialDistortionAndTransform,
+    SubCamera,
+    CameraRadialDistortion,
+    FrameCoordinate,
+)
 from .sqlite_shelf import read_shelve
 import numpy as np
 import os
@@ -162,7 +170,7 @@ def lro_nac_camera(typ="left", spatial_summing=1):
     focal_length = SpiceHelper.kernel_data_double(f"{bname}_FOCAL_LENGTH")
     pitch = SpiceHelper.kernel_data_double(f"{bname}_PIXEL_PITCH")
     nsamp = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_SAMPLES")
-    nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
+    # nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
     ccd_cen = [
         SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_SAMPLE"),
         SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_LINE"),
@@ -233,7 +241,7 @@ def lro_wac_camera(band=3, mode="COLOR"):
     focal_length = SpiceHelper.kernel_data_double(f"{bname}_FOCAL_LENGTH")
     pitch = SpiceHelper.kernel_data_double(f"{bname}_PIXEL_PITCH")
     nsamp = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_SAMPLES")
-    nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
+    # nline = SpiceHelper.kernel_data_int(f"{bname}_PIXEL_LINES")
     ccd_cen = [
         SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_SAMPLE"),
         SpiceHelper.kernel_data_double(f"{bname}_BORESIGHT_LINE"),

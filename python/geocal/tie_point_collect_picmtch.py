@@ -1,5 +1,6 @@
 from .vicar_interface import VicarInterface
 from .mmap_file import mmap_file
+from .misc import makedirs_p
 from geocal_swig import (
     IbisFile,
     ImageCoordinate,
@@ -11,7 +12,6 @@ from geocal_swig import (
     VicarLiteRasterImage,
 )
 import tempfile
-import time
 import os
 
 
@@ -346,7 +346,6 @@ class TiePointCollectPicmtch(object):
     def tie_point_grid(self, num_x, num_y, diagnostic=None):
         """Return a grid of tie points. Note that we may be missing results
         for particular grid points if matching isn\'t successful."""
-        tstart = time.time()
         img1_fname = self.surface_image_fname[self.image_index1]
         if self.image_index2 >= 0:
             img2_fname = self.surface_image_fname[self.image_index2]

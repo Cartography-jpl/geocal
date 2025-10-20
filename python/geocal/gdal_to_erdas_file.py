@@ -1,4 +1,3 @@
-from builtins import str
 from geocal_swig import GdalRasterImage
 import subprocess
 

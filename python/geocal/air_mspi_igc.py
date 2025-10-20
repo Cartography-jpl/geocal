@@ -1,5 +1,4 @@
 from __future__ import annotations
-from builtins import range
 from geocal_swig import (  # type: ignore
     ImageCoordinate,
     SimpleDem,
@@ -97,7 +96,7 @@ class AirMspiIgc(ImageGroundConnection):
         }
 
     def __setstate__(self, d: dict[str, Any]) -> None:
-        self.__init__(  # type: ignore
+        self.__init__(  # type: ignore[misc]
             d["fname"],
             d["title"],
             d["ellipsoid_height"],

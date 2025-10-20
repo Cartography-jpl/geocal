@@ -1,5 +1,4 @@
 from __future__ import annotations
-from builtins import object
 from .docopt import docopt  # type: ignore
 from geocal_swig import VicarArgument  # type: ignore
 import sys

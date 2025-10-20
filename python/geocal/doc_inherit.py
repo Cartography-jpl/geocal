@@ -16,8 +16,7 @@ class Bar(Foo):
 Now, Bar.foo.__doc__ == Bar().foo.__doc__ == Foo.foo.__doc__ == "Frobber"
 """
 
-from builtins import object
-
+from __future__ import annotations
 from functools import wraps
 from typing import Any
 

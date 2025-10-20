@@ -1,5 +1,3 @@
-from builtins import map
-from builtins import range
 # This contains support for doing parallel processing.
 
 from .sqlite_shelf import write_shelve

@@ -1,12 +1,17 @@
-from builtins import str
-from builtins import range
-from builtins import object
+from __future__ import annotations
 import numpy as np
 import math
 from .lm_optimize import lm_optimize
-from geocal_swig import RayIntersect
-from scipy.sparse import block_diag
+from geocal_swig import (  # type: ignore
+    RayIntersect,
+    IgcCollection,
+    TiePoint,
+    CartesianFixed,
+    ImageCoordinate,
+)
+import scipy.sparse as sp
 import logging
+from typing import Sequence
 
 
 class RayIntersect2(object):
@@ -14,7 +19,12 @@ class RayIntersect2(object):
     on the surface. Note that in general the points don\'t actually
     intersect, this finds the values that are closest to the rays."""
 
-    def __init__(self, igccol, delta_height=10, max_ground_covariance=20 * 20):
+    def __init__(
+        self,
+        igccol: IgcCollection,
+        delta_height: float = 10,
+        max_ground_covariance: float = 20 * 20,
+    ) -> None:
         self.igccol = igccol
         self.delta_height = delta_height
         self.max_ground_covariance = max_ground_covariance
@@ -22,9 +32,9 @@ class RayIntersect2(object):
             raise RuntimeError("Need to have at least 2 images in IgcCollection")
         # Sample CartesianFixed point, which we can use the create function
         # with to create other instances of this type.
-        self.sample_cf_pt = None
+        self.sample_cf_pt: None | CartesianFixed = None
 
-    def ray_intersect(self, tie_point):
+    def ray_intersect(self, tie_point: TiePoint) -> TiePoint:
         """This takes a tie point and fills in the ground location by
         finding an approximate intersection of all the image locations
         in the tie point.
@@ -67,20 +77,27 @@ class RayIntersect2(object):
             var = (var - (mean * mean) * cnt) / (cnt - 1)
         else:
             var = np.array([0.0, 0, 0])
-        var = [max(v, max_dist * max_dist) for v in var]
-        for v in var:
+        for v in [max(v, max_dist * max_dist) for v in var]:
             if v > self.max_ground_covariance:
                 logging.getLogger("geocal-python.ray_intersect").debug(
                     "Point with %d matches rejected by ray intersect, sqrt variance %f"
                     % (cnt, math.sqrt(v))
                 )
                 return None
+        if self.sample_cf_pt is None:
+            raise RuntimeError("Should set self.sample_cf_pt")
         tie_point.ground_location = self.sample_cf_pt.create(
             [mean[0], mean[1], mean[2]]
         )
         return tie_point
 
-    def two_ray_intersect(self, ic1, ic2, index_1=0, index_2=1):
+    def two_ray_intersect(
+        self,
+        ic1: ImageCoordinate,
+        ic2: ImageCoordinate,
+        index_1: int = 0,
+        index_2: int = 1,
+    ) -> np.ndarray:
         """Find the intersection of the ground for two rays given by
         two image coordinates. Can optionally supply the index into
         igccol, the default is that this is the first two entries.
@@ -100,11 +117,16 @@ class RayIntersect3(object):
     on the surface. Note that in general the points don\'t actually
     intersect, this finds the values that minimizes the residual."""
 
-    def __init__(self, igccol, delta_height=10, max_ground_covariance=20 * 20):
+    def __init__(
+        self,
+        igccol: IgcCollection,
+        delta_height: float = 10,
+        max_ground_covariance: float = 20 * 20,
+    ) -> None:
         self.ri = RayIntersect2(igccol, delta_height, max_ground_covariance)
         self.igccol = igccol
 
-    def coll_eq(self, x):
+    def coll_eq(self, x: Sequence[float]) -> np.ndarray:
         res = np.empty(2 * self.tp.number_image_location)
         j = 0
         pt = self.create_cf(x[0], x[1], x[2])
@@ -123,7 +145,7 @@ class RayIntersect3(object):
                 j += 2
         return res
 
-    def coll_jac(self, x):
+    def coll_jac(self, x: Sequence[float]) -> sp.csr_array | sp.csr_matrix:
         res = np.empty((2 * self.tp.number_image_location, 3))
         j = 0
         pt = self.create_cf(x[0], x[1], x[2])
@@ -139,12 +161,14 @@ class RayIntersect3(object):
                     res[j, :] = 0
                     res[j + 1, :] = 0
                 j += 2
-        return block_diag((res,), format="csr")
+        return sp.block_diag((res,), format="csr")
 
-    def create_cf(self, x, y, z):
+    def create_cf(self, x: float, y: float, z: float) -> CartesianFixed:
+        if self.ri.sample_cf_pt is None:
+            raise RuntimeError("Should set self.sample_cf_pt")
         return self.ri.sample_cf_pt.create([x, y, z])
 
-    def ray_intersect(self, tp):
+    def ray_intersect(self, tp: TiePoint) -> TiePoint:
         # Start with what RayIntersect2 gives as the ground location
         tp = self.ri.ray_intersect(tp)
         if tp is None:

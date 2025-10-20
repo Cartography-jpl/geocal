@@ -1,5 +1,4 @@
 from __future__ import annotations
-from builtins import object
 import numpy as np
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
@@ -26,14 +25,14 @@ class PlyFile(object):
     def __init__(
         self,
         filename: str | os.PathLike[str],
-        vertex: list[list[float]] | None = None,
-        cmap: mcolors.Colormap = cm.hot,
+        vertex: np.ndarray | None = None,
+        cmap: mcolors.Colormap = cm.hot,  # type: ignore[attr-defined]
         vmin: float = 0.0,
         vmax: float = 1.0,
         binary_format: bool = True,
     ) -> None:
         self.filename = filename
-        self.vertex = vertex if vertex is not None else []
+        self.vertex = vertex if vertex is not None else np.array([])
         self.is_closed = False
         self.binary_format = binary_format
         self.color_map = cmap

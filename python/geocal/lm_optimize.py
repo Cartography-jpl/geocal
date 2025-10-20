@@ -1,21 +1,32 @@
-from builtins import range
+from __future__ import annotations
 import numpy as np
 import scipy.sparse as sp
 import time
 import logging
+from typing import Sequence, Callable
 
 
 def lm_optimize(
-    eq_func,
-    x0,
-    jac_func,
-    min_chisqr=0.1,
-    stopping_criteria=0.001,
-    max_iteration=50,
-    boost=2,
-    drop=3,
-    lambda_initial=0.1,
-):
+    eq_func: Callable[
+        [
+            Sequence[float],
+        ],
+        np.ndarray,
+    ],
+    x0: Sequence[float],
+    jac_func: Callable[
+        [
+            Sequence[float],
+        ],
+        sp.coo_array | sp.csr_array | sp.csr_matrix,
+    ],
+    min_chisqr: float = 0.1,
+    stopping_criteria: float = 0.001,
+    max_iteration: int = 50,
+    boost: float = 2,
+    drop: float = 3,
+    lambda_initial: float = 0.1,
+) -> np.ndarray:
     """This is a simple implementation of Levenberg Marquardt for minimizing
     the residuals of a set of equations. scipy already has an optimizer
     called scipy.optimize.leastsq. You should generally use this scipy

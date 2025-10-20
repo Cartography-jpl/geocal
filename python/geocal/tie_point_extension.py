@@ -1,5 +1,3 @@
-from builtins import str
-from builtins import range
 import math
 import matplotlib.pyplot as plt
 from .misc import makedirs_p

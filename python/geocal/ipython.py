@@ -1,5 +1,3 @@
-from builtins import str
-from builtins import range
 # This contains ipython magic extensions. To load you can execute
 # %load_ext geocal.ipython.
 # You may well want

@@ -1,6 +1,3 @@
-from builtins import map
-from builtins import range
-from builtins import object
 from geocal_swig import (
     TiePointCollection,
     MemoryRasterImage,

@@ -1,8 +1,6 @@
-from builtins import str
-from builtins import range
-from builtins import object
-import geocal_swig
-from geocal_swig import (
+from __future__ import annotations
+import geocal_swig  # type: ignore
+from geocal_swig import (  # type: ignore
     ImageCoordinate,
     SurfaceImageToImageMatch,
     IgcImageToImageMatch,
@@ -12,19 +10,28 @@ from geocal_swig import (
     CoordinateConverter,
     CcorrLsmMatcher,
     CalcRasterMultiBand,
+    ImageGroundConnection,
+    ImageMatcher,
+    MapInfo,
+    RasterImage,
+    GroundCoordinate,
 )
 import math
 import scipy.interpolate
 from .ray_intersect import RayIntersect
 import multiprocessing
+from multiprocessing.pool import Pool
 import numpy as np
 from .ply_file import PlyFile
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 import logging
 import re
+import os
+from typing import Any
 
 
-def _new_from_init(cls, version, *args):
+def _new_from_init(cls, version, *args):  # type: ignore
     if cls.pickle_format_version() < version:
         raise RuntimeError(
             "Class is expecting a pickled object with version number %d, but we found %d"
@@ -44,15 +51,15 @@ class DemGenerateMB(geocal_swig.CalcRasterMultiBand):
 
     def __init__(
         self,
-        igc1,
-        igc2,
-        mi,
-        interpolate_method="linear",
-        image_matcher=CcorrLsmMatcher(),
-        surface_image1=None,
-        surface_image2=None,
-        max_dist_good_point=0.5,
-        buffer_size=5,
+        igc1: ImageGroundConnection,
+        igc2: ImageGroundConnection,
+        mi: MapInfo,
+        interpolate_method: str = "linear",
+        image_matcher: ImageMatcher = CcorrLsmMatcher(),
+        surface_image1: RasterImage | None = None,
+        surface_image2: RasterImage | None = None,
+        max_dist_good_point: float = 0.5,
+        buffer_size: int = 5,
     ):
         self.dem_generate = DemGenerate(
             igc1,
@@ -69,10 +76,10 @@ class DemGenerateMB(geocal_swig.CalcRasterMultiBand):
         CalcRasterMultiBand.__init__(self, mi, 2)
 
     @classmethod
-    def pickle_format_version(cls):
+    def pickle_format_version(cls) -> int:
         return 1
 
-    def __reduce__(self):
+    def __reduce__(self) -> tuple[Any, tuple[Any, ...]]:
         return _new_from_init, (
             self.__class__,
             self.__class__.pickle_format_version(),
@@ -87,7 +94,7 @@ class DemGenerateMB(geocal_swig.CalcRasterMultiBand):
             self.buffer_size,
         )
 
-    def calc(self, lstart, sstart):
+    def calc(self, lstart: int, sstart: int) -> None:
         self.dem_generate.aoi = self.map_info.subset(
             sstart, lstart, self.data.shape[2], self.data.shape[1]
         )
@@ -102,10 +109,10 @@ class SurfacePointWrap(object):
     directly use pool.map on demg.surface_point because python can't
     pickle a instance function"""
 
-    def __init__(self, demg):
+    def __init__(self, demg: DemGenerate) -> None:
         self.demg = demg
 
-    def __call__(self, it):
+    def __call__(self, it: list[Any]) -> np.ndarray:
         return self.demg.surface_point(*it)
 
 
@@ -128,14 +135,14 @@ class DemGenerate(object):
 
     def __init__(
         self,
-        image_ground_connnection1,
-        image_ground_connnection2,
-        aoi,
-        image_matcher=CcorrLsmMatcher(),
-        surface_image1=None,
-        surface_image2=None,
-        max_dist_good_point=0.5,
-        all_image=False,
+        image_ground_connnection1: ImageGroundConnection,
+        image_ground_connnection2: ImageGroundConnection,
+        aoi: MapInfo,
+        image_matcher: ImageMatcher = CcorrLsmMatcher(),
+        surface_image1: RasterImage | None = None,
+        surface_image2: RasterImage | None = None,
+        max_dist_good_point: float = 0.5,
+        all_image: bool = False,
     ):
         self.igc1 = image_ground_connnection1
         self.igc2 = image_ground_connnection2
@@ -169,10 +176,10 @@ class DemGenerate(object):
         self.stride = int(
             round(self.aoi.resolution_meter / self.igc1.resolution_meter())
         )
-        self.h = None
-        self.r = None
+        self.h: None | np.ndarray = None
+        self.r: None | np.ndarray = None
 
-    def __getstate__(self):
+    def __getstate__(self) -> dict[str, Any]:
         return {
             "igc1": self.igc1,
             "igc2": self.igc2,
@@ -186,21 +193,21 @@ class DemGenerate(object):
             "r": self.r,
         }
 
-    def __setstate__(self, dict):
-        self.__init__(
-            dict["igc1"],
-            dict["igc2"],
-            dict["aoi"],
-            image_matcher=dict["im"],
-            surface_image1=dict["simg1"],
-            surface_image2=dict["simg2"],
-            max_dist_good_point=dict["maxd"],
-            all_image=dict["all_image"],
+    def __setstate__(self, d: dict[str, Any]) -> None:
+        self.__init__(  # type: ignore[misc]
+            d["igc1"],
+            d["igc2"],
+            d["aoi"],
+            image_matcher=d["im"],
+            surface_image1=d["simg1"],
+            surface_image2=d["simg2"],
+            max_dist_good_point=d["maxd"],
+            all_image=d["all_image"],
         )
-        self.h = dict["h"]
-        self.r = dict["r"]
+        self.h = d["h"]
+        self.r = d["r"]
 
-    def surface_point(self, *arg):
+    def surface_point(self, *arg: Any) -> np.ndarray:
         """Calculate surface points"""
         if len(arg) == 5:
             lstart, sstart, lend, send, include_image = arg
@@ -229,11 +236,13 @@ class DemGenerate(object):
         log.info("  Move past target:             %d" % (self.dem_match.diagnostic[8]))
         log.info("  Solve failed:                 %d" % (self.dem_match.diagnostic[9]))
         log.info("  Ray Intersect failed:         %d" % (self.dem_match.diagnostic[10]))
-        log.info("  ImageGroundConection failed:  %d" % (self.dem_match.diagnostic[11]))
+        log.info("  ImageGroundConnection failed: %d" % (self.dem_match.diagnostic[11]))
         log.info("  Unknown:                      %d" % (self.dem_match.diagnostic[12]))
         return r
 
-    def find_intersection(self, ic1, ic2):
+    def find_intersection(
+        self, ic1: ImageCoordinate, ic2: ImageCoordinate
+    ) -> GroundCoordinate:
         """Find the ground intersection of two conjugate image coordinates.
         Note that in general the points don't actually intersect, this finds
         the value that is closest to both points."""
@@ -245,13 +254,15 @@ class DemGenerate(object):
             raise ValueError("Failure of epipolar constraint")
         return gres
 
-    def write_ply(self, filename, scale_z=1.0):
+    def write_ply(self, filename: str | os.PathLike[str], scale_z: float = 1.0) -> None:
         """Write out a PLY file. We write this is pixel coordinates so
         things are on the same scale. We could have a variation that
         writes out cartesian coordinates if useful, but for now we just
         use pixel coordinates of aoi (translating height to pixels by
         using aoi.resolution_meter). You can form an exaggerated height
         by passing a scale to use."""
+        if self.r is None:
+            raise RuntimeError("self.r should not be None")
         with PlyFile(filename) as fh:
             fh.vertex = np.zeros(self.r.shape)
             fh.vertex[:, 2] = self.r[:, 2] / self.aoi.resolution_meter * scale_z
@@ -262,7 +273,12 @@ class DemGenerate(object):
                     )
                 )
 
-    def height_all(self, pool=None, include_image=False, buffer_size=5):
+    def height_all(
+        self,
+        pool: None | Pool = None,
+        include_image: bool = False,
+        buffer_size: int = 5,
+    ) -> np.ndarray:
         """Find list of surface points by exploring the entire AOI.
 
         Because this can take a while to run, you can optionally supply
@@ -330,12 +346,12 @@ class DemGenerate(object):
 
     def height_grid(
         self,
-        fill_value=-9999.0,
-        pool=None,
-        include_image=False,
-        interpolate_method="nearest",
-        buffer_size=5,
-    ):
+        fill_value: float = -9999.0,
+        pool: None | Pool = None,
+        include_image: bool = False,
+        interpolate_method: str = "nearest",
+        buffer_size: int = 5,
+    ) -> np.ndarray | tuple[np.ndarray, np.ndarray, np.ndarray]:
         """Determine surface points from conjugate points, and resample to
         the AOI grid. Returns the height.
 
@@ -388,7 +404,7 @@ class DemGenerate(object):
                 g[j, i, 1] = self.aoi.ground_coordinate(i, j).longitude
         if len(self.r) > 2:
             try:
-                self.h_fill = scipy.interpolate.griddata(
+                self.h_fill = scipy.interpolate.griddata(  # type: ignore[call-overload]
                     self.r[:, 0:2],
                     self.r[:, 2],
                     g,
@@ -414,7 +430,7 @@ class DemGenerate(object):
         else:
             return self.h
 
-    def dem_orig(self):
+    def dem_orig(self) -> np.ndarray:
         dv_orig = np.zeros((self.aoi.number_y_pixel, self.aoi.number_x_pixel))
         for i in range(self.aoi.number_x_pixel):
             for j in range(self.aoi.number_y_pixel):
@@ -423,7 +439,7 @@ class DemGenerate(object):
                 )
         return dv_orig
 
-    def plot_res(self, aoi_img=None):
+    def plot_res(self, aoi_img: MapInfo = None) -> None:
         """This is a utility that can be run after doing height_grid.
         It shows a plot summarizing the changes to the DEM and where
         we have found matches.
@@ -440,6 +456,8 @@ class DemGenerate(object):
         plt.title("Original DEM")
         plt.subplot(222)
         # plt.imshow(self.h, vmin=1300, vmax=1320)
+        if self.h is None:
+            raise RuntimeError("self.h should not be None")
         plt.imshow(self.h)
         plt.colorbar()
         plt.title("High Res DEM")
@@ -450,11 +468,13 @@ class DemGenerate(object):
         if aoi_img is not None:
             plt.subplot(224)
             data = aoi_img.read(0, 0, aoi_img.number_line, aoi_img.number_sample)
-            plt.imshow(data, cmap=plt.cm.gray)
+            plt.imshow(data, cmap=cm.gray)  # type: ignore[attr-defined]
             plt.title("Image 1")
             plt.figure(2)
             x = []
             y = []
+            if self.r is None:
+                raise RuntimeError("self.r should not be None")
             for i in range(self.r.shape[0]):
                 ic = aoi_img.coordinate(
                     self.coordinate_converter.convert_from_coordinate(
@@ -471,10 +491,12 @@ class DemGenerate(object):
                     x.append(ic.sample)
             plt.subplot(111)
             plt.plot(x, y, ".")
-            plt.imshow(data, cmap=plt.cm.gray)
+            plt.imshow(data, cmap=cm.gray)  # type: ignore[attr-defined]
         plt.show()
 
-    def match(self, img1_line, img1_sample):
+    def match(
+        self, img1_line: ImageCoordinate, img1_sample: ImageCoordinate
+    ) -> list[None | ImageCoordinate]:
         """Do image matching between image 1 and image 2, returning either
         None if this fails or a pair [ic1, ic2] which is the image coordinates
         in image 1 and the match in image 2"""
@@ -482,7 +504,7 @@ class DemGenerate(object):
         ic2, lsigma, ssigma, success, diagnostic = self.itoim.match(ic1)
         return [ic1, ic2] if (success) else [None, None]
 
-    def range_image1(self):
+    def range_image1(self) -> list[int]:
         """This determines the line and sample range in image 1 to covers
         the area of interest (aoi). This is just approximate, we map the
         four corners of the aoi into image 1 and determine the bounding

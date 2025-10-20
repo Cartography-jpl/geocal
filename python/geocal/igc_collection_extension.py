@@ -1,4 +1,3 @@
-from builtins import range
 from geocal_swig import (
     IgcCollectionRollingShutter,
     OrbitOffsetCorrection,

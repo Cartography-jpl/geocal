@@ -1,5 +1,3 @@
-from builtins import range
-
 try:
     # Depending of the build options, this might be missing. Just skip
     # ShapeFile if we don't have this.

@@ -1,4 +1,3 @@
-from builtins import range
 import geocal_swig
 import math
 import numpy as np

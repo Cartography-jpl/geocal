@@ -1,5 +1,5 @@
 from builtins import range
-from .instrument_reflectance import *
+from .instrument_reflectance import InstrumentReflectance
 import math
 
 
@@ -26,10 +26,10 @@ class QuickBirdReflectance(InstrumentReflectance):
         for i in range(5):
             self.absCalFactors.append(-999.0)
             self.effectiveBandwidths.append(-999.0)
-        if multimetafname != None:
+        if multimetafname is not None:
             self.readMetaData(multimetafname)
             self.calculateSolarDistance()
-        if panmetafname != None:
+        if panmetafname is not None:
             self.readMetaData(panmetafname)
             self.calculatePanSolarDistance()
 
@@ -169,7 +169,7 @@ class QuickBirdReflectance(InstrumentReflectance):
         """Scale factor to convert DN pto TOA reflectance. As a convention,
         we treat band 4 as the pan band."""
         if band < 4:
-            return super(QuickBird, self).dn2TOAReflectance_factor(tile, band)
+            return super(InstrumentReflectance, self).dn2TOAReflectance_factor(band)
 
         if self.pan_solarDist == -999.0 or self.pan_solarZenithAngleInRadians == -999.0:
             raise ValueError("Pan solar distance and/or solar angle not set.")

@@ -93,10 +93,10 @@ def parallel_process_image(
             process_list.append(job)
     if shelve_name is None:
         if number_process == 1:
-            res = list(map(do_parallel_process, process_list))
+            _ = list(map(do_parallel_process, process_list))
         else:
             pool = Pool(number_process)
-            res = pool.map(do_parallel_process, process_list)
+            _ = pool.map(do_parallel_process, process_list)
     return job_index
 
 

@@ -1,4 +1,15 @@
-from geocal_swig import *
+from geocal_swig import (
+    QuaternionOrbitData,
+    rad_to_deg,
+    determine_quat_rot,
+    speed_of_light,
+    ScLookVector,
+    quat_normalize,
+    deg_to_rad,
+    quat_rot_z,
+    KeplerOrbit,
+    Time,
+)
 import math
 import numpy as np
 
@@ -30,7 +41,7 @@ def _kepler_orbit_from_tle(self, tle):
     ap = float(tle_arr[14])
     ma = float(tle_arr[15])
     n = float(tle_arr[16][0:11])
-    orb_num = int(tle_arr[16][11:-1])
+    # orb_num = int(tle_arr[16][11:-1])
     a = pow(mu / pow(n * 2 * math.pi / (24 * 3600), 2), 1.0 / 3)
     return KeplerOrbit(
         Time.min_valid_time, Time.max_valid_time, epoch, a, ecc, inc, ra, ap, ma

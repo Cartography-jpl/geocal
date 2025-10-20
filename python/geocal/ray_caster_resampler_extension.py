@@ -1,9 +1,10 @@
-from geocal_swig import *
-from .mmap_file import *
+from geocal_swig import RayCasterResampler, IgcRayCaster
+from .mmap_file import mmap_file
 import numpy as np
 from tempfile import NamedTemporaryFile
 from functools import partial
 import logging
+import os
 
 
 def _ray_caster_project_subset(

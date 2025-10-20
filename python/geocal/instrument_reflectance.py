@@ -1,13 +1,15 @@
-from builtins import object
+from __future__ import annotations
 import math
+import os
+import numpy as np
 
 
 #################################################################################
-class InstrumentReflectance(object):
+class InstrumentReflectance:
     """This is the base class for doing a DN to TOA Reflectance conversion.
     We derive from this class and supply instrument specific information."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         """Initialization of class"""
         self.year = -999.0
         self.month = -999.0
@@ -19,24 +21,25 @@ class InstrumentReflectance(object):
         self.solarZenithAngle = -999.0
         self.solarZenithAngleInRadians = -999.0
         self.solarDist = -999.0
+        self.esun: list[float] = []
 
-    def pan_band(self):
+    def pan_band(self) -> None | int:
         """If we have a panchromatic band, this returns the band number. Otherwise, it returns None"""
         return None
 
-    def checkInstrumentPreconditions(self, band):
+    def checkInstrumentPreconditions(self, band: int) -> None:
         """Ensure that everything is ready to do a dn2TOARadiance conversion"""
         raise NotImplementedError("Subclasses should implement this method.")
 
-    def readMetaData(self, filename):
+    def readMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read metadata needed to set up the instrument"""
         raise NotImplementedError("Subclasses should implement this method.")
 
-    def dn2TOARadiance_factor(self, band):
+    def dn2TOARadiance_factor(self, band: int) -> float:
         """Scale factor to convert DN to TOA radiance factor"""
         raise NotImplementedError("Subclasses should implement this method.")
 
-    def dn2TOAReflectance_factor(self, band):
+    def dn2TOAReflectance_factor(self, band: int) -> float:
         """Scale factor to convert DN to TOA reflectance factor"""
         if self.solarDist == -999.0 or self.solarZenithAngleInRadians == -999.0:
             raise ValueError("Solar Distance and/or solar angle not set.")
@@ -45,15 +48,15 @@ class InstrumentReflectance(object):
             self.dn2TOARadiance_factor(band) * math.pow(self.solarDist, 2.0) * math.pi
         ) / (self.esun[band] * math.cos(self.solarZenithAngleInRadians))
 
-    def dn2TOARadiance(self, tile, band):
+    def dn2TOARadiance(self, tile: np.ndarray, band: int) -> np.ndarray:
         """Convert from DN passed in as tile to TOA radiance"""
         return tile * self.dn2TOARadiance_factor(band)
 
-    def dn2TOAReflectance(self, tile, band):
+    def dn2TOAReflectance(self, tile: np.ndarray, band: int) -> np.ndarray:
         """Convert DN passe in as tile to TOA reflectance"""
         return tile * self.dn2TOAReflectance_factor(band)
 
-    def calculateSolarDistance(self):
+    def calculateSolarDistance(self) -> None:
         """Calculate the solar distance."""
         if (
             self.year == -999
@@ -91,8 +94,8 @@ class InstrumentReflectance(object):
 
 
 #################################################################################
-class PanInstrumentReflectance(object):
-    def __init__(self):
+class PanInstrumentReflectance:
+    def __init__(self) -> None:
         self.pan_year = -999.0
         self.pan_month = -999.0
         self.pan_day = -999.0
@@ -104,11 +107,11 @@ class PanInstrumentReflectance(object):
         self.pan_solarZenithAngleInRadians = -999.0
         self.pan_solarDist = -999.0
 
-    def readPanMetaData(self, filename):
+    def readPanMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read pan metadata needed to set up the instrument"""
         raise NotImplementedError("Subclasses should implement this method.")
 
-    def calculatePanSolarDistance(self):
+    def calculatePanSolarDistance(self) -> None:
         """Calculate the solar distance."""
         if (
             self.pan_year == -999

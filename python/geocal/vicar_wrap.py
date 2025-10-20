@@ -1,4 +1,10 @@
-from geocal_swig import Geodetic, IbisFile, Quaternion_double, QuaternionOrbitData
+from geocal_swig import (
+    Geodetic,
+    IbisFile,
+    Quaternion_double,
+    QuaternionOrbitData,
+    ImageCoordinate,
+)
 from .vicar_interface import VicarInterface
 import numpy as np
 import math
@@ -173,7 +179,7 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
         self.urange = [image_coordinate.sample, 1, image_coordinate.sample + 2]
         self.vrange = [image_coordinate.line, 1, image_coordinate.line + 2]
         self.hrange = [height, 1, height + 1]
-        self.leapfile = os.path.basename(leapsecond_file)
+        self.leapfile = os.path.basename(str(leapsecond_file))
         self.acs_time = orbit_data.time.acs
         self.delta_ut1 = delta_ut1
         self.tod_t_sv = [
@@ -211,7 +217,7 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
         self.kappa = [0.0, 0.0, 0.0, 0.0, 0.0]
         self.fu = fu
         self.fv = fv
-        self.input = [leapsecond_file]
+        self.input = [str(leapsecond_file)]
         self.build_command(
             [
                 "urange",
@@ -245,11 +251,11 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
 
 
 def sc2rpc(
-    orbit_data,
+    orbit_data: QuaternionOrbitData,
     delta_ut1,
-    leapsecond_file,
-    image_coordinate,
-    height,
+    leapsecond_file: str | os.PathLike[str],
+    image_coordinate: ImageCoordinate,
+    height: float,
     sc_to_cam_q,
     fu,
     fv,

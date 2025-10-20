@@ -1,14 +1,19 @@
-from builtins import range
-from geocal_swig import GdalRasterImage
+from __future__ import annotations
+from geocal_swig import GdalRasterImage  # type: ignore
 from .instrument_reflectance import InstrumentReflectance
 import math
 import re
+import os
 
 
 class WorldView2Reflectance(InstrumentReflectance):
     """This class does DN to TOA Reflectance conversion for WorldView 2"""
 
-    def __init__(self, multimetafname, panmetafname):
+    def __init__(
+        self,
+        multimetafname: str | os.PathLike[str],
+        panmetafname: str | os.PathLike[str],
+    ) -> None:
         """Initialization of class. The files can be IMD files, or
         alternatively a NITF file if the IMD isn't available. If it is
         NITF, then we have to assume the absolute calibration factors.
@@ -47,22 +52,22 @@ class WorldView2Reflectance(InstrumentReflectance):
             self.absCalFactors.append(-999.0)
             self.effectiveBandwidths.append(-999.0)
         if multimetafname is not None:
-            if re.search(".IMD", multimetafname):
+            if re.search(".IMD", str(multimetafname)):
                 self.readMetaData(multimetafname)
             else:
                 self.readNTFMetaData(multimetafname, ispan=False)
             self.calculateSolarDistance()
         if panmetafname is not None:
-            if re.search(".IMD", panmetafname):
+            if re.search(".IMD", str(panmetafname)):
                 self.readMetaData(panmetafname)
             else:
                 self.readNTFMetaData(panmetafname, ispan=True)
             self.calculatePanSolarDistance()
 
-    def pan_band(self):
+    def pan_band(self) -> int:
         return 8
 
-    def checkInstrumentPreconditions(self, band):
+    def checkInstrumentPreconditions(self, band: int) -> None:
         """Ensure that everything is ready to do a dn2TOARadiance conversion"""
         if band >= 9 or band < 0:
             raise ValueError("Band should be [0, 8].")
@@ -71,12 +76,12 @@ class WorldView2Reflectance(InstrumentReflectance):
                 "Absolute calibration factor and/or effective band width not set."
             )
 
-    def dn2TOARadiance_factor(self, band):
+    def dn2TOARadiance_factor(self, band: int) -> float:
         """Scale factor to convert DN to TOA radiance factor"""
         self.checkInstrumentPreconditions(band)
         return self.absCalFactors[band] / self.effectiveBandwidths[band]
 
-    def readMetaData(self, filename):
+    def readMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read metadata needed to set up the instrument"""
         metafile = open(filename, "r")
         isPanMetafile = False
@@ -162,8 +167,8 @@ class WorldView2Reflectance(InstrumentReflectance):
                     )
                 continue
 
-    def readNTFMetaData(self, fname, ispan=False):
-        f = GdalRasterImage(fname)
+    def readNTFMetaData(self, fname: str | os.PathLike, ispan: bool = False) -> None:
+        f = GdalRasterImage(str(fname))
         if ispan:
             # This value isn't really a constant
             self.absCalFactors[8] = 5.678345e-02
@@ -212,7 +217,7 @@ class WorldView2Reflectance(InstrumentReflectance):
             self.solarZenithAngle = 90.0 - self.solarElevation
             self.solarZenithAngleInRadians = self.solarZenithAngle * (math.pi / 180.0)
 
-    def calculatePanSolarDistance(self):
+    def calculatePanSolarDistance(self) -> None:
         """Calculate the solar distance. Like calculateSolarDistance, but
         for the pan band."""
         if (
@@ -251,7 +256,7 @@ class WorldView2Reflectance(InstrumentReflectance):
                 "Solar Distance for pan band should be between 0.983 and 1.017"
             )
 
-    def dn2TOAReflectance_factor(self, band):
+    def dn2TOAReflectance_factor(self, band: int) -> float:
         """Scale factor to convert DN to TOA reflectance. As a convention,
         we treat band 8 as the pan band."""
         if band < 8:
@@ -266,7 +271,7 @@ class WorldView2Reflectance(InstrumentReflectance):
             * math.pi
         ) / (self.esun[band] * math.cos(self.pan_solarZenithAngleInRadians))
 
-    def printMetadata(self):
+    def printMetadata(self) -> None:
         print("Metadata:")
         print("=========")
         print(

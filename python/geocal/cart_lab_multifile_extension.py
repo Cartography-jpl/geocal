@@ -1,5 +1,5 @@
 from __future__ import annotations
-import geocal_swig # type: ignore
+import geocal_swig  # type: ignore
 import subprocess
 import os
 import tempfile
@@ -8,15 +8,16 @@ import typing
 if typing.TYPE_CHECKING:
     from geocal_swig import GdalRasterImage, CartLabMultifile
 
+
 # Useful extensions to CartLabMultifile
 def _create_image_chip(
-    self : CartLabMultifile,
-    out_fname : str | os.PathLike[str],
-    gdal_img_to_match : GdalRasterImage,
-    out_format : str="VICAR",
-    border : int =30,
-    resampling_method : str="bilinear",
-    error_threshold : float=0.125,
+    self: CartLabMultifile,
+    out_fname: str | os.PathLike[str],
+    gdal_img_to_match: GdalRasterImage,
+    out_format: str = "VICAR",
+    border: int = 30,
+    resampling_method: str = "bilinear",
+    error_threshold: float = 0.125,
 ) -> None:
     """CartLabMultifile already has a create_subset_file which is good for
     creating a file we can match against. However this assumes that we are

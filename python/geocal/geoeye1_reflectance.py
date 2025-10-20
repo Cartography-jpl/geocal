@@ -1,12 +1,13 @@
-from builtins import range
+from __future__ import annotations
 from .instrument_reflectance import InstrumentReflectance
 import math
+import os
 
 
 class Geoeye1Reflectance(InstrumentReflectance):
     """This class does DN to TOA Reflectance conversion for Geoeye1"""
 
-    def __init__(self, metafname):
+    def __init__(self, metafname: str | os.PathLike[str]) -> None:
         """Initialization of class"""
         super(InstrumentReflectance, self).__init__()
         self.esun = [196, 185.3, 150.5, 103.9, 161.7]
@@ -20,22 +21,22 @@ class Geoeye1Reflectance(InstrumentReflectance):
         self.readMetaData(metafname)
         self.calculateSolarDistance()
 
-    def pan_band(self):
+    def pan_band(self) -> int:
         return 4
 
-    def checkInstrumentPreconditions(self, band):
+    def checkInstrumentPreconditions(self, band: int) -> None:
         """Ensure that everything is ready to do a dn2TOARadiance conversion"""
         if band >= 5 or band < 0:
             raise ValueError("Band should be [0, 4].")
 
-    def dn2TOARadiance_factor(self, band):
+    def dn2TOARadiance_factor(self, band: int) -> float:
         """Scale factor to convert DN to TOA radiance factor"""
         self.checkInstrumentPreconditions(band)
         if self.offset[band] != 0.0:
-            raise "Don't currently support nonzero offsets"
+            raise RuntimeError("Don't currently support nonzero offsets")
         return self.gain[band]
 
-    def readMetaData(self, filename):
+    def readMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read metadata needed to set up the instrument"""
         metafile = open(filename)
         index = -1
@@ -87,7 +88,7 @@ class Geoeye1Reflectance(InstrumentReflectance):
                 )
                 continue
 
-    def printMetadata(self):
+    def printMetadata(self) -> None:
         print("Metadata:")
         print("=========")
         print(

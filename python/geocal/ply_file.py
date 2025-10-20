@@ -1,13 +1,13 @@
 from __future__ import annotations
 from builtins import object
 import numpy as np
-import matplotlib.pyplot as plt
 import matplotlib.cm as cm
 import matplotlib.colors as mcolors
 import struct
 from typing import Self
 import os
 from types import TracebackType
+
 
 class PlyFile(object):
     """This is a simple class for writing basic Stanford PLY files. Note
@@ -24,7 +24,13 @@ class PlyFile(object):
     """
 
     def __init__(
-        self, filename : str | os.PathLike[str], vertex : list[list[float]] | None=None, cmap : mcolors.Colormap=cm.hot, vmin : float=0.0, vmax : float=1.0, binary_format : bool=True
+        self,
+        filename: str | os.PathLike[str],
+        vertex: list[list[float]] | None = None,
+        cmap: mcolors.Colormap = cm.hot,
+        vmin: float = 0.0,
+        vmax: float = 1.0,
+        binary_format: bool = True,
     ) -> None:
         self.filename = filename
         self.vertex = vertex if vertex is not None else []
@@ -39,17 +45,13 @@ class PlyFile(object):
         if self.is_closed:
             return
         v = np.array(self.vertex)
-        if len(v.shape) != 2 or (
-            v.shape[1] != 3 and v.shape[1] != 4
-        ):
+        if len(v.shape) != 2 or (v.shape[1] != 3 and v.shape[1] != 4):
             raise RuntimeError("Vertex needs to be n x 3 array or n x 4 array")
 
         if v.shape[1] == 4:
             # Need to apply color map
             have_color = True
-            cdata = self.color_map(
-                (v[:, 3] - self.vmin) / (self.vmax - self.vmin)
-            )
+            cdata = self.color_map((v[:, 3] - self.vmin) / (self.vmax - self.vmin))
             cdata = (np.round(cdata * 255)).astype(np.uint8)
         else:
             have_color = False
@@ -107,8 +109,12 @@ property uchar alpha\n"""
     def __enter__(self) -> Self:
         return self
 
-    def __exit__(self, typ : type[BaseException] | None, value : BaseException | None,
-                 tb : TracebackType | None) -> None:
+    def __exit__(
+        self,
+        typ: type[BaseException] | None,
+        value: BaseException | None,
+        tb: TracebackType | None,
+    ) -> None:
         self.close()
 
     def __del__(self) -> None:

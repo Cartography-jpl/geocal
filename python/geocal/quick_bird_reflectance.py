@@ -1,12 +1,17 @@
-from builtins import range
+from __future__ import annotations
 from .instrument_reflectance import InstrumentReflectance
 import math
+import os
 
 
 class QuickBirdReflectance(InstrumentReflectance):
     """This class does DN to TOA Reflectance conversion for Quickbird"""
 
-    def __init__(self, multimetafname, panmetafname):
+    def __init__(
+        self,
+        multimetafname: str | os.PathLike[str],
+        panmetafname: str | os.PathLike[str],
+    ) -> None:
         """Initialization of class"""
         super(InstrumentReflectance, self).__init__()
         self.pan_year = -999.0
@@ -33,10 +38,10 @@ class QuickBirdReflectance(InstrumentReflectance):
             self.readMetaData(panmetafname)
             self.calculatePanSolarDistance()
 
-    def pan_band(self):
+    def pan_band(self) -> int:
         return 4
 
-    def checkInstrumentPreconditions(self, band):
+    def checkInstrumentPreconditions(self, band: int) -> None:
         """Ensure that everything is ready to do a dn2TOARadiance conversion"""
         if band >= 5 or band < 0:
             raise ValueError("Band should be [0, 4].")
@@ -45,12 +50,12 @@ class QuickBirdReflectance(InstrumentReflectance):
                 "Absolute calibration factor and/or effective band width not set."
             )
 
-    def dn2TOARadiance_factor(self, band):
+    def dn2TOARadiance_factor(self, band: int) -> float:
         """Scale factor to convert DN to TOA radiance factor"""
         self.checkInstrumentPreconditions(band)
         return self.absCalFactors[band] / self.effectiveBandwidths[band]
 
-    def readMetaData(self, filename):
+    def readMetaData(self, filename: str | os.PathLike[str]) -> None:
         """Read metadata needed to set up the instrument"""
         metafile = open(filename, "r")
         isPanMetafile = False
@@ -126,7 +131,7 @@ class QuickBirdReflectance(InstrumentReflectance):
                     )
                 continue
 
-    def calculatePanSolarDistance(self):
+    def calculatePanSolarDistance(self) -> None:
         """Calculate the solar distance. Like calculateSolarDistance, but
         for the pan band."""
         if (
@@ -165,12 +170,11 @@ class QuickBirdReflectance(InstrumentReflectance):
                 "Solar Distance for pan band should be between 0.983 and 1.017"
             )
 
-    def dn2TOAReflectance_factor(self, band):
+    def dn2TOAReflectance_factor(self, band: int) -> float:
         """Scale factor to convert DN pto TOA reflectance. As a convention,
         we treat band 4 as the pan band."""
         if band < 4:
-            return super(InstrumentReflectance, self).dn2TOAReflectance_factor(band)
-
+            return super().dn2TOAReflectance_factor(band)
         if self.pan_solarDist == -999.0 or self.pan_solarZenithAngleInRadians == -999.0:
             raise ValueError("Pan solar distance and/or solar angle not set.")
 
@@ -180,7 +184,7 @@ class QuickBirdReflectance(InstrumentReflectance):
             * math.pi
         ) / (self.esun[band] * math.cos(self.pan_solarZenithAngleInRadians))
 
-    def printMetadata(self):
+    def printMetadata(self) -> None:
         print("Metadata:")
         print("=========")
         print(

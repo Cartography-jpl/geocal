@@ -30,7 +30,7 @@ if _typing.TYPE_CHECKING:
     # Note we guard this with the standard "if typing.TYPE_CHECKING", so this code doesn't
     # appear in real python usage of this module.
     from .docopt_simple import docopt_simple
-    
+
 del _i
 del _re
 del _os

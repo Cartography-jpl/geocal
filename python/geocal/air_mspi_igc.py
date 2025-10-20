@@ -1,6 +1,6 @@
 from __future__ import annotations
 from builtins import range
-from geocal_swig import ( # type: ignore
+from geocal_swig import (  # type: ignore
     ImageCoordinate,
     SimpleDem,
     Ecr,
@@ -41,12 +41,12 @@ class AirMspiIgc(ImageGroundConnection):
 
     def __init__(
         self,
-        fname : str,
-        title : str="Image",
-        ellipsoid_height : float =0,
-        group_name: str="555nm_band",
-        data_field: str ="I",
-        data_scale: float=32767.0,
+        fname: str,
+        title: str = "Image",
+        ellipsoid_height: float = 0,
+        group_name: str = "555nm_band",
+        data_field: str = "I",
+        data_scale: float = 32767.0,
     ) -> None:
         if not have_hdf:
             raise RuntimeError("Must have HDF installed to use this class")
@@ -81,7 +81,7 @@ class AirMspiIgc(ImageGroundConnection):
         self.dem = SimpleDem(ellipsoid_height)
         self.title = title
 
-    def __gdal_data(self, name : str) -> RasterImage:
+    def __gdal_data(self, name: str) -> RasterImage:
         """Short cut for reading data with GDAL, and subsetting"""
         t = GdalRasterImage(self.gdal_base + name)
         return SubRasterImage(t, *self.bounding_box)
@@ -96,8 +96,8 @@ class AirMspiIgc(ImageGroundConnection):
             "group_name": self.group_name,
         }
 
-    def __setstate__(self, d : dict[str, Any]) -> None:
-        self.__init__( # type: ignore
+    def __setstate__(self, d: dict[str, Any]) -> None:
+        self.__init__(  # type: ignore
             d["fname"],
             d["title"],
             d["ellipsoid_height"],
@@ -106,7 +106,7 @@ class AirMspiIgc(ImageGroundConnection):
             d["data_scale"],
         )
 
-    def __to_lc(self, ic : ImageCoordinate) -> np.ndarray:
+    def __to_lc(self, ic: ImageCoordinate) -> np.ndarray:
         """Determine matrix that takes us to local coordinates for the given
         image location. This maps ECR direction to local coordinates."""
         gc = self.image.ground_coordinate(ic)
@@ -122,19 +122,19 @@ class AirMspiIgc(ImageGroundConnection):
             ]
         )
 
-    def __from_lc(self, ic : ImageCoordinate) -> np.ndarray:
+    def __from_lc(self, ic: ImageCoordinate) -> np.ndarray:
         """Determine matrix that takes us from local coordinates for the
         given location. This maps local coordinate to ECR direction."""
         return np.transpose(self.__to_lc(ic))
 
-    def view_zenith(self, ic : ImageCoordinate) -> float:
+    def view_zenith(self, ic: ImageCoordinate) -> float:
         """Return view zenith as degrees. This interpolates the underlying
         data. Returns -999 if the data is masked"""
         if self.image_mask.mask_ic(ic):
             return -999
         return self.vzen.interpolate(ic)
 
-    def view_azimuth(self, ic : ImageCoordinate) -> float:
+    def view_azimuth(self, ic: ImageCoordinate) -> float:
         """Return view azimuth as degrees. This interpolates the underlying
         data. Returns -999 if the data is masked"""
         if self.image_mask.mask_ic(ic):
@@ -165,7 +165,7 @@ class AirMspiIgc(ImageGroundConnection):
             res -= 360
         return res
 
-    def cf_look_vector_lv(self, ic : ImageCoordinate) -> CartesianFixedLookVector:
+    def cf_look_vector_lv(self, ic: ImageCoordinate) -> CartesianFixedLookVector:
         """Return look vector."""
         if self.image_mask.mask_ic(ic):
             raise RuntimeError("Masked data at (%f, %f)" % (ic.line, ic.sample))
@@ -178,19 +178,19 @@ class AirMspiIgc(ImageGroundConnection):
         ]
         return CartesianFixedLookVector(self.__from_lc(ic).dot(lc))
 
-    def cf_look_vector_pos(self, ic : ImageCoordinate) -> GroundCoordinate:
+    def cf_look_vector_pos(self, ic: ImageCoordinate) -> GroundCoordinate:
         """Return point along the look vector."""
         return Ecr(self.image.ground_coordinate(ic, self.dem))
 
-    def ground_coordinate_dem(self, ic : ImageCoordinate, d : Dem) -> GroundCoordinate:
+    def ground_coordinate_dem(self, ic: ImageCoordinate, d: Dem) -> GroundCoordinate:
         """Determine what ground coordinate is seen the given DEM for the
         given ImageCoordinate"""
         lv, p = self.cf_look_vector(ic)
         resolution = 1.0
         return d.intersect(p, lv, resolution)
 
-    def image_coordinate(self, gc : GroundCoordinate) -> ImageCoordinate:
-        def func(x : np.ndarray, self : AirMspiIgc, gc : GroundCoordinate) -> list[float]:
+    def image_coordinate(self, gc: GroundCoordinate) -> ImageCoordinate:
+        def func(x: np.ndarray, self: AirMspiIgc, gc: GroundCoordinate) -> list[float]:
             ic = ImageCoordinate(x[0], x[1])
             gc2 = self.ground_coordinate_dem(ic, SimpleDem(gc.height_reference_surface))
             return [gc.latitude - gc2.latitude, gc.longitude - gc2.longitude]

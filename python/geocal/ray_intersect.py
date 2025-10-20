@@ -50,7 +50,7 @@ class RayIntersect2(object):
             )
             if self.sample_cf_pt is None:
                 self.sample_cf_pt = t
-            if type(t) is type(self.sample_cf_pt):
+            if type(t) is not type(self.sample_cf_pt):
                 raise RuntimeError(
                     "Got unexpected type from self.two_ray_intersect. Original sample point is %s and point returned is %s"
                     % (self.sample_cf_pt, t)

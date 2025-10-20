@@ -1,10 +1,10 @@
 from builtins import str
 from builtins import range
 from builtins import object
-from geocal_swig import *
 import numpy as np
 import math
-from .lm_optimize import *
+from .lm_optimize import lm_optimize
+from geocal_swig import RayIntersect
 from scipy.sparse import block_diag
 import logging
 
@@ -50,7 +50,7 @@ class RayIntersect2(object):
             )
             if self.sample_cf_pt is None:
                 self.sample_cf_pt = t
-            if type(t) != type(self.sample_cf_pt):
+            if type(t) is not type(self.sample_cf_pt):
                 raise RuntimeError(
                     "Got unexpected type from self.two_ray_intersect. Original sample point is %s and point returned is %s"
                     % (self.sample_cf_pt, t)
@@ -129,7 +129,6 @@ class RayIntersect3(object):
         pt = self.create_cf(x[0], x[1], x[2])
         for i in range(self.tp.number_image):
             if self.tp.image_coordinate(i):
-                ic = self.tp.image_coordinate(i)
                 try:
                     jac = self.igccol.image_coordinate_jac_cf(i, pt)
                     res[j, :] = -jac[0, :] / self.tp.line_sigma(i)

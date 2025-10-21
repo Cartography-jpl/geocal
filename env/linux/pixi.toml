@@ -6,9 +6,13 @@ platforms = ["linux-64"]
 version = "0.1.0"
 
 [tasks]
-configure = "/ssdata/smyth/geocal-repo/env//../configure --prefix=$CONDA_PREFIX --enable-maintainer-mode --with-msp=/home/smyth/Local/MSP/install"
+configure = "/ssdata/smyth/geocal-repo/configure --prefix=$CONDA_PREFIX --enable-maintainer-mode --with-msp=/home/smyth/Local/MSP/install"
 
 [dependencies]
 afids = "*"
 afids-development-tools = "*"
 conda = "*"
+pandas-stubs = "*"
+# Swig 4.4.0 just came out, and doesn't seem to work. We'll fix this
+# at some point, but for now restrict ourselves to the older version of swig
+swig = "<4.4.0"

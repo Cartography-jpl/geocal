@@ -15,12 +15,12 @@ PIXI_LOCKED=yes
 mkfile_dir := $(dir $(abspath $(lastword $(MAKEFILE_LIST))))
 # Location of environment we create
 # ---------------------------------------------------------------------------
-ENV_DIR=$(mkfile_dir)../../geocal-build/build-pixi
+ENV_DIR=$(abspath $(mkfile_dir)../../geocal-build/build-pixi)
 
 # Location of afids conda packages (you can check this out from
 # git@github.jpl.nasa.gov:Cartography/afids-conda-package.git
 # ---------------------------------------------------------------------------
-CONDA_PACKAGE_DIR=$(mkfile_dir)../../afids-conda-package/afids-conda-channel
+CONDA_PACKAGE_DIR=$(abspath $(mkfile_dir)../../afids-conda-package/afids-conda-channel)
 
 # Do we have the MSP (Mensuration Service Program) software and want to
 # wrap it?
@@ -106,7 +106,7 @@ $(ENV_DIR): $(PIXI_FILE_DEPEND)
 	pixi config set --local run-post-link-scripts insecure --manifest-path $(ENV_DIR)
 	$(PIXI_INSTALL_COMMAND)
 	- pixi task rm configure --manifest-path $(ENV_DIR)
-	pixi task add configure "$(mkfile_dir)/../configure --prefix=\$$CONDA_PREFIX --enable-maintainer-mode $(EXTRA_CONFIG)" --manifest-path $(ENV_DIR)
+	pixi task add configure "$(abspath $(mkfile_dir)/../configure) --prefix=\$$CONDA_PREFIX --enable-maintainer-mode $(EXTRA_CONFIG)" --manifest-path $(ENV_DIR)
 
 # Recreate the environment, deleting if already there
 # ------------------------------------------------------------

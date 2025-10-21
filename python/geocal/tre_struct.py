@@ -10,10 +10,10 @@ import re
 import sys
 
 # This bit of code may go away. It was an older way of handling TREs before
-# we wrote geocal.nitf. It attaches the TRE to existing GdalRasterImage class.
+# we wrote pynitf. It attaches the TRE to existing GdalRasterImage class.
 # For now keep this, it isn't clear what will break by removing this. This
 # code gets used in gdal_to_nitf and nitf_to_vicar, perhaps we will rewrite
-# to use the full geocal.nitf library in the future. But for now, leave this
+# to use the full pynitf library in the future. But for now, leave this
 # in place. For new code, you most likely don't want to use this.
 
 

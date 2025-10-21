@@ -62,7 +62,7 @@ class Task(object):
         run.
 
         Note that by default we use the first listed output to match
-        tasks that appear twice in a dependency try (e.g., task D
+        tasks that appear twice in a dependency tree (e.g., task D
         depends on both B and C, which each depend on A. A naive
         dependency tree would try to run A twice. So the first output
         file should be unique. And in addition, it should return the

@@ -1,10 +1,11 @@
-from .target import *
-from test_support import *
+from geocal import InFileTarget, OutFileTarget
+from fixtures.require_check import require_rsync
+import os
+
 
 @require_rsync
-@require_python3
 def test_input_file_target(isolated_dir):
-    '''Test a input file target'''
+    """Test a input file target"""
     ft = InFileTarget("test.txt")
     assert not ft.exists()
     with open(ft.local_filename(), "w") as fh:
@@ -17,10 +18,10 @@ def test_input_file_target(isolated_dir):
     ft.remove()
     assert os.path.exists("test.txt")
 
+
 @require_rsync
-@require_python3
 def test_input_file_target_error(isolated_dir):
-    '''Test a input file target when an error occurs'''
+    """Test a input file target when an error occurs"""
     ft = InFileTarget("test.txt")
     assert not ft.exists()
     with open(ft.local_filename(), "w") as fh:
@@ -31,10 +32,10 @@ def test_input_file_target_error(isolated_dir):
     assert os.path.exists("test.txt")
     assert ft.exists()
 
+
 @require_rsync
-@require_python3
 def test_output_file_target(isolated_dir):
-    '''Test a output file target'''
+    """Test a output file target"""
     ft = OutFileTarget("test.txt")
     assert not ft.exists()
     with open(ft.local_filename(), "w") as fh:
@@ -53,11 +54,11 @@ def test_output_file_target(isolated_dir):
     assert os.path.exists("test.txt.generating")
     ft.remove()
     assert not os.path.exists("test.txt.generating")
-    
+
+
 @require_rsync
-@require_python3
 def test_output_file_target_error(isolated_dir):
-    '''Test a output file target when an error occurs'''
+    """Test a output file target when an error occurs"""
     ft = OutFileTarget("test.txt")
     assert not ft.exists()
     with open(ft.local_filename(), "w") as fh:
@@ -69,4 +70,3 @@ def test_output_file_target_error(isolated_dir):
     assert not os.path.exists("test.txt.generating")
     assert os.path.exists("test.txt.error")
     assert not ft.exists()
-    

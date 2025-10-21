@@ -93,3 +93,29 @@ def mars_test_data():
     if not res.exists:
         pytest.skip("Required mars test data not found")
     return res
+
+
+# Data is way too big to check into source, so we put it here. This means
+# we have tests that can only be run on pistol. We may fold this into
+# the afids data area at some point.
+@pytest.fixture(scope="function")
+def geocal_test_data():
+    res = Path("/data/geocal_test_data")
+    if not res.exists():
+        pytest.skip("Don't have geocal_test_data")
+    return res
+
+
+@pytest.fixture(scope="function")
+def geocal_test_igc(geocal_test_data):
+    return geocal_test_data / "igccol_rolling_shutter.xml"
+
+
+@pytest.fixture(scope="function")
+def geocal_test_igc_sim_error(geocal_test_data):
+    return geocal_test_data / "igccol_rolling_shutter_simulated_error.xml"
+
+
+@pytest.fixture(scope="function")
+def geocal_test_tpcol(geocal_test_data):
+    return geocal_test_data / "tpcol.xml"

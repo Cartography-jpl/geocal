@@ -1,9 +1,12 @@
+from __future__ import annotations
 import os
 import errno
 import sys
 import re
-import geocal_swig
+import geocal_swig  # type: ignore
 import subprocess
+from pathlib import Path
+from typing import IO
 
 try:
     # This has a deprecation warning for python 3.7 and GDAL 2.4.2. We can't do
@@ -12,7 +15,7 @@ try:
 
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=DeprecationWarning)
-        import osgeo.gdal as gdal
+        import osgeo.gdal as gdal  # type: ignore
     have_osgeo = True
 except ImportError:
     have_osgeo = False
@@ -20,7 +23,7 @@ except ImportError:
 # This contains miscellenous routines that don't really belong anywhere else.
 
 
-def makedirs_p(dir):
+def makedirs_p(dir: str | os.PathLike[str]) -> None:
     """This is a version of makedirs that acts like mkdir -p, not complaining
     if directory already exists"""
 
@@ -33,7 +36,7 @@ def makedirs_p(dir):
             raise
 
 
-def cib01_data():
+def cib01_data() -> geocal_swig.VicarMultiFile:
     """This return a raster image that can be used to read the CIB
     1 meter data."""
     return geocal_swig.VicarMultiFile(
@@ -41,7 +44,7 @@ def cib01_data():
     )
 
 
-def _write_cib01_mapinfo():
+def _write_cib01_mapinfo() -> None:
     """Write out cib01 map info for when we don't have CIB 1 data available"""
     geocal_swig.serialize_write("cib01_mapinfo.xml", cib01_data().map_info)
 
@@ -49,7 +52,7 @@ def _write_cib01_mapinfo():
 # _write_cib01_mapinfo()
 
 
-def cib01_mapinfo(desired_resolution=None):
+def cib01_mapinfo(desired_resolution: None | float = None) -> geocal_swig.MapInfo:
     """This gets the CIB 1 meter MapInfo. This is useful when we don't
     have the CIB 1 data available, but need a reasonable 1 meter
     MapInfo. You can optionally supply a desired resolution, to scale the
@@ -63,7 +66,9 @@ def cib01_mapinfo(desired_resolution=None):
     return res
 
 
-def planet_mapinfo(naif_code, desired_resolution=1):
+def planet_mapinfo(
+    naif_code: int, desired_resolution: float = 1
+) -> geocal_swig.MapInfo:
     """Like cib01_mapinfo, but for other planets. We have this as
     Planetocentric, sized to the desired resolution in meters"""
     cconv = geocal_swig.PlanetocentricConverter(naif_code)
@@ -75,7 +80,7 @@ def planet_mapinfo(naif_code, desired_resolution=1):
     return mi
 
 
-def pid_exists(pid):
+def pid_exists(pid: int) -> bool:
     """Check whether pid exists in the current process table.
     UNIX only.
     """
@@ -104,7 +109,7 @@ def pid_exists(pid):
         return True
 
 
-def comment_remover(text):
+def comment_remover(text: str) -> str:
     """This removes C and C++ style comments (/* */ and //, C can be multiline)
     This is from https://gist.github.com/ChunMinChang/88bfa5842396c1fbbc5b.
     Fairly complicated regex, believe this originally came from
@@ -113,8 +118,8 @@ def comment_remover(text):
     "#" (pretty much the same as // C++ style)
     """
 
-    def replacer(match):
-        s = match.group(0)
+    def replacer(mtch: re.Match) -> str:
+        s = mtch.group(0)
         if s.startswith("/") or s.startswith("#"):
             return " "  # note: a space and not an empty string
         else:
@@ -127,7 +132,9 @@ def comment_remover(text):
     return re.sub(pattern, replacer, text)
 
 
-def run_tee(exec_cmd, out_fh=None, quiet=False):
+def run_tee(
+    exec_cmd: list[str], out_fh: IO | None = None, quiet: bool = False
+) -> bytes:
     """This is like subprocess.run, but allowing a unix like 'tee' where
     we write the output to a log file and/or stdout.
 
@@ -139,6 +146,7 @@ def run_tee(exec_cmd, out_fh=None, quiet=False):
         exec_cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT
     )
     stdout = b""
+    assert process.stdout is not None
     while True:
         output = process.stdout.readline()
         if output == b"" and process.poll() is not None:
@@ -151,12 +159,18 @@ def run_tee(exec_cmd, out_fh=None, quiet=False):
             if out_fh:
                 print(output.strip().decode("utf-8"), file=out_fh)
                 out_fh.flush()
-    if process.poll() != 0:
-        raise subprocess.CalledProcessError(process.poll(), exec_cmd, output=stdout)
+    t = process.poll()
+    if t is not None and t != 0:
+        raise subprocess.CalledProcessError(t, exec_cmd, output=stdout)
     return stdout
 
 
-def mars_fix_projection(fin, fout, band, hirise_correction=False):
+def mars_fix_projection(
+    fin: str | os.PathLike[str],
+    fout: str | os.PathLike[str],
+    band: int,
+    hirise_correction: bool = False,
+) -> None:
     """There are potential issues with some of the map projections with
     Mars, errors or missing pieces. This create a VRT file that fixes any
     of these problems.
@@ -173,7 +187,15 @@ def mars_fix_projection(fin, fout, band, hirise_correction=False):
         raise RuntimeError(
             "mars_fix_projection requires that the GDAL python library osgeo.gdal be installed"
         )
-    cmd = ["gdal_translate", "-of", "VRT", "-b", str(band), fin, fout]
+    cmd = [
+        "gdal_translate",
+        "-of",
+        "VRT",
+        "-b",
+        str(band),
+        str(Path(fin)),
+        str(Path(fout)),
+    ]
     subprocess.run(cmd, check=True)
     f = gdal.Open(fout, gdal.GA_Update)
     p = str(f.GetProjectionRef())

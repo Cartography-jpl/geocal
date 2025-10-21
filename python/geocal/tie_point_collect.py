@@ -792,4 +792,5 @@ __all__ = [
     "TiePointCollect",
     "TiePointCollectFM",
     "outlier_reject_ransac",
+    "have_cv2",
 ]

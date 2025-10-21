@@ -1,13 +1,16 @@
-from .task import *
-from .local_target import *
-from test_support import *
-import shutil
+from geocal import Task, OutLocalTarget, TaskRunner, InLocalTarget
 from multiprocessing import Pool
+from fixtures.require_check import require_rsync
+import os
+import pytest
+
 
 class TaskA(Task):
     def __init__(self, fname, local_dir):
         super().__init__(local_dir)
-        self.output_list = [ OutLocalTarget(fname, local_dir), ]
+        self.output_list = [
+            OutLocalTarget(fname, local_dir),
+        ]
 
     def run(self):
         for target in self.output_list:
@@ -17,10 +20,13 @@ class TaskA(Task):
     def output(self):
         return self.output_list
 
+
 class TaskAFailed(Task):
     def __init__(self, fname, local_dir):
         super().__init__(local_dir)
-        self.output_list = [ OutLocalTarget(fname, local_dir), ]
+        self.output_list = [
+            OutLocalTarget(fname, local_dir),
+        ]
 
     def run(self):
         for target in self.output_list:
@@ -30,13 +36,17 @@ class TaskAFailed(Task):
 
     def output(self):
         return self.output_list
-    
+
+
 class TaskB(Task):
-    '''Task that requires a TaskA to run first'''
+    """Task that requires a TaskA to run first"""
+
     def __init__(self, fname_in, fname, local_dir):
         super().__init__(local_dir)
-        self.output_list = [ OutLocalTarget(fname, local_dir), ]
-        self.require_list = [ TaskA(fname_in, local_dir) ]
+        self.output_list = [
+            OutLocalTarget(fname, local_dir),
+        ]
+        self.require_list = [TaskA(fname_in, local_dir)]
         self.fname_in = fname_in
 
     def requires(self):
@@ -53,19 +63,22 @@ class TaskB(Task):
     def output(self):
         return self.output_list
 
+
 class TaskC(Task):
-    '''Task that requires 2 TaskB and 3rd task A to run first. This is 
-    complicated enough that we should be able to fully test everything.'''
+    """Task that requires 2 TaskB and 3rd task A to run first. This is
+    complicated enough that we should be able to fully test everything."""
+
     def __init__(self):
         super().__init__("./local_dir")
         self.require_list = []
         self.output_list = [OutLocalTarget("./output/c.out", self.local_dir)]
         self.require_list.append(TaskA("./output/a1.out", self.local_dir))
-        self.require_list.append(TaskB("./output/a2.out", "./output/b1.out",
-                                       self.local_dir))
-        self.require_list.append(TaskB("./output/a1.out", "./output/b2.out",
-                                       self.local_dir))
-        
+        self.require_list.append(
+            TaskB("./output/a2.out", "./output/b1.out", self.local_dir)
+        )
+        self.require_list.append(
+            TaskB("./output/a1.out", "./output/b2.out", self.local_dir)
+        )
 
     def requires(self):
         return self.require_list
@@ -87,19 +100,18 @@ class TaskC(Task):
     def output(self):
         return self.output_list
 
+
 class TaskDFailed(Task):
-    '''Task that has lots of inputs, 1 of which will fail.'''
+    """Task that has lots of inputs, 1 of which will fail."""
+
     def __init__(self):
         super().__init__("./local_dir")
         self.require_list = []
         self.output_list = [OutLocalTarget("./output/c.out", self.local_dir)]
         for i in range(20):
-            self.require_list.append(TaskA("./output/a%d.out" % i,
-                                           self.local_dir))
-        self.require_list.append(TaskAFailed("./output/a_failed.out",
-                                             self.local_dir))
-        self.require_list.append(TaskAFailed("./output/a_failed2.out",
-                                             self.local_dir))
+            self.require_list.append(TaskA("./output/a%d.out" % i, self.local_dir))
+        self.require_list.append(TaskAFailed("./output/a_failed.out", self.local_dir))
+        self.require_list.append(TaskAFailed("./output/a_failed2.out", self.local_dir))
 
     def requires(self):
         return self.require_list
@@ -110,31 +122,30 @@ class TaskDFailed(Task):
 
     def output(self):
         return self.output_list
-        
-        
+
+
 @require_rsync
-@require_python3
 def test_1task_pipeline(isolated_dir):
-    '''Test a pipeline with a single task in it.'''
+    """Test a pipeline with a single task in it."""
     task = TaskA("./output/a_out.txt", "./local_dir")
     task.run_pipeline(skip_cleanup_on_error=True)
     assert task.output_exists()
     assert not os.path.exists("./local_dir")
 
+
 @require_rsync
-@require_python3
 def test_2task_pipeline(isolated_dir):
-    '''Test a pipeline with a task that depends on another task in it.'''
+    """Test a pipeline with a task that depends on another task in it."""
     task = TaskB("./output/a_out.txt", "./output/b_out.txt", "./local_dir")
     task.run_pipeline(skip_cleanup_on_error=True)
     assert task.output_exists()
     assert not os.path.exists("./local_dir")
-    
+
+
 @require_rsync
-@require_python3
 def test_complicated_pipeline(isolated_dir):
-    '''Test a more complicated task with a longer dependency chain, including
-    duplicate tasks.'''
+    """Test a more complicated task with a longer dependency chain, including
+    duplicate tasks."""
     task = TaskC()
     # Look in more detail at TaskRunner. Normally don't use this directly,
     # but we'll do that for testing purposes.
@@ -145,42 +156,39 @@ def test_complicated_pipeline(isolated_dir):
     assert task.output_exists()
     assert not os.path.exists("./local_dir")
 
+
 @require_rsync
-@require_python3
 def test_pool(isolated_dir):
-    '''Test a more complicated task with a longer dependency chain, including
-    duplicate tasks, using a pool to do the processing.'''
+    """Test a more complicated task with a longer dependency chain, including
+    duplicate tasks, using a pool to do the processing."""
     task = TaskC()
     pool = Pool(2)
-    task.run_pipeline(pool = pool,skip_cleanup_on_error=True)
+    task.run_pipeline(pool=pool, skip_cleanup_on_error=True)
     assert task.output_exists()
     assert not os.path.exists("./local_dir")
 
 
 @require_rsync
-@require_python3
 def test_pool_failed(isolated_dir):
-    '''Test where we have lots of tasks, one of which fails. Make sure
-    we catch that failure.'''
+    """Test where we have lots of tasks, one of which fails. Make sure
+    we catch that failure."""
     task = TaskDFailed()
     pool = Pool(3)
-    with pytest.raises(RuntimeError) as e_info:
-        task.run_pipeline(pool = pool)
+    with pytest.raises(RuntimeError):
+        task.run_pipeline(pool=pool)
     assert not os.path.exists("./local_dir")
     assert os.path.exists("./output/a_failed.out.error")
 
+
 @require_rsync
-@require_python3
 def test_pool_failed2(isolated_dir):
-    '''Test where we have lots of tasks, one of which fails. Make sure
+    """Test where we have lots of tasks, one of which fails. Make sure
     we catch that failure. This variation uses skip_cleanup_on_error to
-    *not* cleanup the test data'''
+    *not* cleanup the test data"""
     task = TaskDFailed()
     pool = Pool(3)
     pool = None
-    with pytest.raises(RuntimeError) as e_info:
-        task.run_pipeline(pool = pool, skip_cleanup_on_error = True)
+    with pytest.raises(RuntimeError):
+        task.run_pipeline(pool=pool, skip_cleanup_on_error=True)
     assert os.path.exists("./local_dir")
     assert os.path.exists("./output/a_failed.out.error")
-    
-    

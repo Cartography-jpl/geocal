@@ -1,7 +1,8 @@
+from __future__ import annotations
 import math
 import matplotlib.pyplot as plt
 from .misc import makedirs_p
-from geocal_swig import (
+from geocal_swig import (  # type: ignore
     IgcMapProjected,
     CartesianFixedLookVector,
     LnLookVector,
@@ -11,10 +12,16 @@ from geocal_swig import (
     TiePointCollection,
     distance,
     SimpleDem,
+    RasterImage,
+    IgcCollection,
+    MapInfo,
+    ImageGroundConnection,
 )
 import numpy as np
 import re
 import os
+from pathlib import Path
+from typing import Any
 
 # Optional support for pandas
 try:
@@ -37,8 +44,9 @@ except ImportError:
 # old and new formats.
 
 
-@classmethod
-def _tp_read_old_mspi_format(self, filename):
+def _tp_read_old_mspi_format(
+    cls: type[TiePoint], filename: str | os.PathLike[str]
+) -> TiePoint:
     """This reads the old MSPI tie-point format. This can be used to
     ingest old test cases, but is probably not of much use other than
     that. This is a simple ASCII format file, see the test example for
@@ -46,11 +54,13 @@ def _tp_read_old_mspi_format(self, filename):
     with open(filename, "r") as f:
         ln = f.readline()
         m = re.search(r"ground_loc(\d+)", ln)
+        if m is None:
+            raise RuntimeError(f"Trouble reading {filename}")
         id = int(m.group(1))
         x, y, z, c11, c12, c13, c21, c22, c23, c31, c32, c33, is_gcp, numcam, trash = (
             ln.split(" ", 14)
         )
-        tp = TiePoint(int(numcam))
+        tp = cls(int(numcam))
         tp.id = id
         tp.ground_location = Ecr(float(x), float(y), float(z))
         tp.is_gcp = int(is_gcp) == 1
@@ -68,10 +78,12 @@ def _tp_read_old_mspi_format(self, filename):
     return tp
 
 
-TiePoint.read_old_mspi_format = _tp_read_old_mspi_format
+TiePoint.read_old_mspi_format = classmethod(_tp_read_old_mspi_format)
 
 
-def _tp__write_old_mspi_format(self, dirname, gcp_sigma=5):
+def _tp__write_old_mspi_format(
+    self: TiePoint, dirname: str | os.PathLike[str], gcp_sigma: float = 5
+) -> None:
     """This writes the old MSPI tie-point format. This can be used to
     compare with the old SBA code. The file name is fixed by the
     tiepoint id, but you specify the dirname to put the file."""
@@ -121,14 +133,14 @@ TiePoint.write_old_mspi_format = _tp__write_old_mspi_format
 
 
 def _tp_display(
-    self,
-    igc_coll,
-    sz=500,
-    ref_image=None,
-    number_row=None,
-    map_info=None,
-    surface_image=None,
-):
+    self: TiePoint,
+    igc_coll: ImageGroundConnection,
+    sz: int = 500,
+    ref_image: RasterImage | None = None,
+    number_row: int | None = None,
+    map_info: MapInfo | None = None,
+    surface_image: RasterImage | None = None,
+) -> None:
     """This executes plt.imshow for the images that make up this
     tiepoint.  Since we don't store the images in a tiepoint, you
     need to also pass in the IgcCollection that this tiepoint
@@ -158,7 +170,7 @@ def _tp_display(
             plt.subplot(number_row, number_col, i + 1)
             plt.title(igc_coll.title(i))
             d = np.zeros((sz, sz))
-            plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=[0, sz, 0, sz])
+            plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=(0, sz, 0, sz))  # type: ignore[attr-defined]
         else:
             plt.subplot(number_row, number_col, i + 1)
             plt.title(igc_coll.title(i))
@@ -185,15 +197,16 @@ def _tp_display(
             ref_image.display(ic, sz)
         else:
             d = np.zeros((sz, sz))
-            plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=[0, sz, 0, sz])
+            plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=(0, sz, 0, sz))  # type: ignore[attr-defined]
     plt.tight_layout()
 
 
 TiePoint.display = _tp_display
 
 
-@classmethod
-def _tpcol_create_multiple_pass(cls, *args):
+def _tpcol_create_multiple_pass(
+    cls: type[TiePointCollection], *args: TiePointCollection
+) -> TiePointCollection:
     """This is used to complement IgcMultiplePass. It takes a list of
     TiePointCollections. It assumes the first goes with the first
     IgcCollection, the second with the second IgcCollection and so on.
@@ -228,10 +241,10 @@ def _tpcol_create_multiple_pass(cls, *args):
     return res
 
 
-TiePointCollection.create_multiple_pass = _tpcol_create_multiple_pass
+TiePointCollection.create_multiple_pass = classmethod(_tpcol_create_multiple_pass)
 
 
-def _tpcol_tp_info(self):
+def _tpcol_tp_info(self: TiePointCollection) -> tuple[pd.DataFrame, list[str]]:
     """Return a pandas DataFrame with all the tiepoint information"""
     ind = [tp.id for tp in self]
     is_gcp = [tp.is_gcp for tp in self]
@@ -255,13 +268,15 @@ def _tpcol_tp_info(self):
 TiePointCollection.tp_info = _tpcol_tp_info
 
 
-def _tpcol_tp_res(self, igccol):
+def _tpcol_tp_res(
+    self: TiePointCollection, igccol: IgcCollection
+) -> tuple[pd.DataFrame, list[str]]:
     """Return a pandas DataFrame with all the tiepoint residual information"""
     ind = [tp.id for tp in self]
     is_gcp = [tp.is_gcp for tp in self]
     nimgloc = [tp.number_image_location for tp in self]
     cols = ["Is GCP", "Number Image Location", "Max Residual"]
-    d = {"Is GCP": is_gcp, "Number Image Location": nimgloc}
+    d: dict[str, Any] = {"Is GCP": is_gcp, "Number Image Location": nimgloc}
     max_res = np.zeros(len(self))
     for i in range(self[0].number_image):
         igc = igccol.image_ground_connection(i)
@@ -289,7 +304,9 @@ def _tpcol_tp_res(self, igccol):
 TiePointCollection.tp_res = _tpcol_tp_res
 
 
-def _tpcol_gcp_diff(self, tpcol_other):
+def _tpcol_gcp_diff(
+    self: TiePointCollection, tpcol_other: TiePointCollection
+) -> pd.DataFrame:
     """This returns a pandas DataFrame that shows how much a GCP
     has been moved (e.g., by SBA). We represent this is local north
     coordinates"""
@@ -333,7 +350,9 @@ def _tpcol_gcp_diff(self, tpcol_other):
 TiePointCollection.gcp_diff = _tpcol_gcp_diff
 
 
-def _tpcol_data_frame(self, igccol, image_index):
+def _tpcol_data_frame(
+    self: TiePointCollection, igccol: IgcCollection, image_index: int
+) -> pd.DataFrame:
     """Return a pandas DataFrame for the given image_index.
 
     Note that in addition to the normal pandas plotting (e.g.,
@@ -400,8 +419,9 @@ def _tpcol_data_frame(self, igccol, image_index):
 TiePointCollection.data_frame = _tpcol_data_frame
 
 
-@classmethod
-def _tpcol_read_old_mspi_format(self, directory):
+def _tpcol_read_old_mspi_format(
+    cls: type[TiePointCollection], directory: str | os.PathLike[str]
+) -> TiePointCollection:
     """This reads the old MSPI tie-point format. This can be used to
     ingest old test cases, but is probably not of much use other than
     that. This is a simple ASCII format file, see the test example for
@@ -409,17 +429,20 @@ def _tpcol_read_old_mspi_format(self, directory):
 
     This reads all the files in the given directory."""
     m = re.compile(r"tie_point_\d+\.dat$")
-    lst = [directory + "/" + f for f in os.listdir(directory) if m.match(f)]
-    tpcol = TiePointCollection()
+    dpath = Path(directory)
+    lst = [dpath / f for f in os.listdir(dpath) if m.match(f)]
+    tpcol = cls()
     for f in lst:
         tpcol.append(TiePoint.read_old_mspi_format(f))
     return tpcol
 
 
-TiePointCollection.read_old_mspi_format = _tpcol_read_old_mspi_format
+TiePointCollection.read_old_mspi_format = classmethod(_tpcol_read_old_mspi_format)
 
 
-def _tpcol_write_old_mspi_format(self, dirname, gcp_sigma=5):
+def _tpcol_write_old_mspi_format(
+    self: TiePointCollection, dirname: str | os.PathLike[str], gcp_sigma: float = 5
+) -> None:
     """This writes the old MSPI tie-point format. This can be used to
     compare with the old SBA code. The file name is fixed by the
     tiepoint id, but you specify the dirname to put the file. We write
@@ -432,7 +455,7 @@ def _tpcol_write_old_mspi_format(self, dirname, gcp_sigma=5):
 TiePointCollection.write_old_mspi_format = _tpcol_write_old_mspi_format
 
 
-def _tpcol_extend(self, tparr):
+def _tpcol_extend(self: TiePointCollection, tparr: list[TiePoint]) -> None:
     """Implement extend for TiePointCollection."""
     for tp in tparr:
         self.append(tp)
@@ -441,7 +464,9 @@ def _tpcol_extend(self, tparr):
 TiePointCollection.extend = _tpcol_extend
 
 
-def _tpcol_data_frame2(self, ref_image=None):
+def _tpcol_data_frame2(
+    self: TiePointCollection, ref_image: RasterImage | None = None
+) -> pd.DataFrame:
     """Write the tie-point collection in a pandas table format. This is
     the sort of thing that can be written to a file and read by gnuplot or
     other programs. Missing data is written as NaN.

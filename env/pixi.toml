@@ -11,3 +11,7 @@ version = "0.1.0"
 afids = "*"
 afids-development-tools = "*"
 conda = "*"
+pandas-stubs = "*"
+# Swig 4.4.0 just came out, and doesn't seem to work. We'll fix this
+# at some point, but for now restrict ourselves to the older version of swig
+swig = "<4.4.0"

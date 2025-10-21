@@ -1,4 +1,4 @@
-import geocal_swig
+import geocal_swig  # type: ignore
 
 # The version number of the system
 __version__ = geocal_swig.geocal_version()

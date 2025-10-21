@@ -1,14 +1,18 @@
-from geocal_swig import (
+from __future__ import annotations
+from geocal_swig import (  # type: ignore
     Geodetic,
     IbisFile,
     Quaternion_double,
     QuaternionOrbitData,
     ImageCoordinate,
+    Time,
+    GroundCoordinate,
 )
 from .vicar_interface import VicarInterface
 import numpy as np
 import math
 import os
+from pathlib import Path
 
 # This wraps various VICAR routines to allow them to be called through
 # python
@@ -19,15 +23,15 @@ class __scinterp(VicarInterface):
 
     def __init__(
         self,
-        time,
-        pos_previous,
-        t_pos_previous,
-        att_previous,
-        t_att_previous,
-        pos_subsequent,
-        t_pos_subsequent,
-        att_subsequent,
-        t_att_subsequent,
+        time: Time,
+        pos_previous: GroundCoordinate,
+        t_pos_previous: Time,
+        att_previous: Quaternion_double,
+        t_att_previous: Time,
+        pos_subsequent: GroundCoordinate,
+        t_pos_subsequent: Time,
+        att_subsequent: Quaternion_double,
+        t_att_subsequent: Time,
     ):
         VicarInterface.__init__(self)
         self.cmd = "scinterp"
@@ -98,11 +102,12 @@ write "&o3"
         self.force_cleanup = True
         self.vicar_run()
 
-    def post_run(self):
+    def post_run(self) -> None:
         """Grab the results from the run file before we finish with the
         scratch directory."""
         res = []
         do_append = False
+        assert self.run_out is not None
         for line in self.run_out.splitlines():
             if do_append:
                 res.append(float(line))
@@ -114,16 +119,16 @@ write "&o3"
 
 
 def scinterp(
-    time,
-    pos_previous,
-    t_pos_previous,
-    att_previous,
-    t_att_previous,
-    pos_subsequent,
-    t_pos_subsequent,
-    att_subsequent,
-    t_att_subsequent,
-):
+    time: Time,
+    pos_previous: GroundCoordinate,
+    t_pos_previous: Time,
+    att_previous: Quaternion_double,
+    t_att_previous: Time,
+    pos_subsequent: GroundCoordinate,
+    t_pos_subsequent: Time,
+    att_subsequent: Quaternion_double,
+    t_att_subsequent: Time,
+) -> QuaternionOrbitData:
     """This calls the VICAR program scinterp. Note that we already have
     this functionality in GeoCal (see for example OrbitQuaternionList or
     HdfOrbit). But for comparison with older VICAR programs it is useful
@@ -157,14 +162,14 @@ class __sc2rpc(VicarInterface):
 
     def __init__(
         self,
-        orbit_data,
-        delta_ut1,
-        leapsecond_file,
-        image_coordinate,
-        height,
-        sc_to_cam_q,
-        fu,
-        fv,
+        orbit_data: QuaternionOrbitData,
+        delta_ut1: float,
+        leapsecond_file: str | os.PathLike[str],
+        image_coordinate: ImageCoordinate,
+        height: float,
+        sc_to_cam_q: Quaternion_double,
+        fu: float,
+        fv: float,
     ):
         VicarInterface.__init__(self)
         # Note, the number of rows here needs to exactly match what urange, vrange
@@ -217,7 +222,9 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
         self.kappa = [0.0, 0.0, 0.0, 0.0, 0.0]
         self.fu = fu
         self.fv = fv
-        self.input = [str(leapsecond_file)]
+        self.input = [
+            Path(leapsecond_file),
+        ]
         self.build_command(
             [
                 "urange",
@@ -243,7 +250,7 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
         self.force_cleanup = False
         self.vicar_run()
 
-    def post_run(self):
+    def post_run(self) -> None:
         """Grab the results from the ibis file before we finish with the
         scratch directory."""
         f = IbisFile("xxxb")
@@ -252,14 +259,14 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
 
 def sc2rpc(
     orbit_data: QuaternionOrbitData,
-    delta_ut1,
+    delta_ut1: float,
     leapsecond_file: str | os.PathLike[str],
     image_coordinate: ImageCoordinate,
     height: float,
-    sc_to_cam_q,
-    fu,
-    fv,
-):
+    sc_to_cam_q: Quaternion_double,
+    fu: float,
+    fv: float,
+) -> GroundCoordinate:
     """Run sc2rpc. Note that despite the name, this actually does *not*
     create a RPC. Rather it finds the ground location for a particular
     image location.

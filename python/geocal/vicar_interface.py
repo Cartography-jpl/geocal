@@ -1,10 +1,13 @@
+from __future__ import annotations
 import os
 import shutil
 import tempfile
 import subprocess
 import time
-import geocal_swig
+import geocal_swig  # type: ignore
 from .misc import makedirs_p, run_tee
+import numpy as np
+from pathlib import Path
 
 
 class VicarInterface(object):
@@ -12,34 +15,34 @@ class VicarInterface(object):
     from Python. This include several helper routines for building up
     and running a command."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.print_output = False
-        self.log_file = False
+        self.log_file: Path | None = None
         self.debug = False
         self.keep_run_dir = False
-        self.input = []
-        self.output = []
+        self.input: list[Path] = []
+        self.output: list[Path] = []
         self.cmd = ""
         self.before_body = ""
         self.title = "vicar command"
         self.timing = True
         self.force_cleanup = False
-        self.run_dir_name = None
+        self.run_dir_name: Path | None = None
 
-    def pre_run(self):
+    def pre_run(self) -> None:
         """This gets called after the temporary directory has been created
         and everything set up, but before we actually run. This can be
         overridden by derived classes to put any special set up in place
         (e.g., copy other files)"""
         pass
 
-    def post_run(self):
+    def post_run(self) -> None:
         """This after the run, but before we have destroyed the
         temporary directory. This can be overridden by derived classes
         to put any special set up in place (e.g., copy other files)"""
         pass
 
-    def build_command(self, arg_list, extra_text=[]):
+    def build_command(self, arg_list: list[str], extra_text: list[str] = []) -> None:
         """This builds up a VICAR command by adding the given argument list
         to what is already in self.cmd. The arg_list is looked up in the
         attributes of this class. If a particular attribute is not found,
@@ -55,7 +58,7 @@ class VicarInterface(object):
         if len(res) > 0:
             self.cmd += " " + " +\n".join(res) + "\n"
 
-    def argstring(self, arg):
+    def argstring(self, arg: str) -> str:
         """This build up a single argument, handling quotes and processing
         arrays"""
         if getattr(self.__dict__[arg], "__iter__", False):
@@ -91,7 +94,7 @@ class VicarInterface(object):
             res += '"'
         return res
 
-    def vicar_run(self):
+    def vicar_run(self) -> None:
         """This runs a set of vicar commands in a vicarb. To handle the files
         that VICAR tends to vomit, and to allow parrallel execution with other
         vicar commands, we run in a temporary directory that is removed when
@@ -153,18 +156,18 @@ class VicarInterface(object):
                 d = self.run_dir_name
                 makedirs_p(d)
             else:
-                d = tempfile.mkdtemp(dir="./")
+                d = Path(tempfile.mkdtemp(dir="./"))
             for i in self.input:
                 try:
-                    os.symlink(os.path.abspath(i), d + "/" + os.path.basename(i))
+                    os.symlink(i.absolute(), d / i.name)
                 except FileExistsError:
                     # Ok if file already exists, we sometimes create input
                     # data in run_dir_name before calling VicarInterface,
                     # cf. TiePointCollectPicmtch
                     pass
-            outabs = [os.path.abspath(x) for x in self.output]
-            if self.log_file:
-                self.log_file = os.path.abspath(self.log_file)
+            outabs = [x.absolute() for x in self.output]
+            if self.log_file is not None:
+                self.log_file = self.log_file.absolute()
             curdir = os.getcwd()
             os.chdir(d)
             # Don't think I need these anymore, so comment these out.
@@ -204,8 +207,8 @@ end-proc
                 if self.run_out:
                     print(self.run_out)
                 raise
-            for f in outabs:
-                shutil.move(os.path.basename(f), f)
+            for fname in outabs:
+                shutil.move(fname.name, fname)
             self.post_run()
             successfully_done = True
         finally:
@@ -214,24 +217,25 @@ end-proc
             if self.force_cleanup or (
                 successfully_done and d and not self.keep_run_dir and not self.debug
             ):
-                shutil.rmtree(d)
+                if d is not None:
+                    shutil.rmtree(d)
         if self.timing:
             print("Done with " + self.title + ". Time: ", time.time() - time_start)
 
 
 class __VicarToNarray(VicarInterface):
-    def __init__(self, cmd, output_name):
+    def __init__(self, cmd: str, output_name: str) -> None:
         VicarInterface.__init__(self)
         self.cmd = cmd
         self.timing = False
         self.output_name = output_name
 
-    def post_run(self):
+    def post_run(self) -> None:
         t = geocal_swig.VicarRasterImage(self.output_name)
         self.res = t.read(0, 0, t.number_line, t.number_sample)
 
 
-def vicar_to_numpy(cmd, output_name="out"):
+def vicar_to_numpy(cmd: str, output_name: str = "out") -> np.ndarray:
     """A common thing to do (particularly when testing), is to run
     a set of VICAR commands that result in an output file, and then
     reading the output into a numpy array. This helper function wraps this

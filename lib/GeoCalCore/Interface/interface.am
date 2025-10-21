@@ -101,6 +101,7 @@ libgeocal_la_SOURCES+= @srcinterface@/velocity_aberration.cc
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/image_coordinate_wrap.cc
 geocalswiginc_HEADERS += @srcinterface@/image_coordinate.i
+SWIG_PYI += @srcinterface@/image_coordinate.pyi
 SWIG_SRC += @swigsrc@/tie_point_wrap.cc
 geocalswiginc_HEADERS += @srcinterface@/tie_point.i
 SWIG_SRC += @swigsrc@/with_parameter_wrap.cc

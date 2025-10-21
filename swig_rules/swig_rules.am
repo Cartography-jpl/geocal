@@ -17,6 +17,7 @@
 # CONDITIONAL_SWIG_SRC list of swig source files, with conditionals included
 #       so for example $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5). If you
 #       don't have any conditional code, this can just be set to FULL_SWIG_SRC
+# SWIG_PYI list of .pyi files to include for typing
 # SWIG_CPPFLAGS the flags we should use when compiling swig code,
 #       so a list of -I options.
 # PYTHON_CPPFLAGS flags needed to compile against python
@@ -87,6 +88,8 @@ EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(ADDITONAL_SWIG_SRC))
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(COMPILE_SWIG_SRC))
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(ADDITONAL_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
+pkgpythonswig_DATA = $(SWIG_PYI)
+pkgpythonswig_DATA+= @swigrules@/py.typed
 
 _swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
 _swig_wrap_la_CPPFLAGS+= $(SWIG_CPPFLAGS)
@@ -100,6 +103,7 @@ _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
 EXTRA_DIST+= $(FULL_SWIG_SRC)
 EXTRA_DIST+= $(ADDITONAL_SWIG_SRC)
+EXTRA_DIST+= $(SWIG_PYI)
 EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
 
 # Only generate these files in maintainer mode, otherwise consider them

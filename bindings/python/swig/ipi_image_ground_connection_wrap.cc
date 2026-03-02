@@ -4692,14 +4692,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4720,7 +4720,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4735,7 +4735,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6695,6 +6695,9 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_0(PyObject *self, 
       result = (GeoCal::IpiImageGroundConnection *)new GeoCal::IpiImageGroundConnection((boost::shared_ptr< GeoCal::Ipi > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6824,6 +6827,9 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_1(PyObject *self, 
       result = (GeoCal::IpiImageGroundConnection *)new GeoCal::IpiImageGroundConnection((boost::shared_ptr< GeoCal::Ipi > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6945,6 +6951,9 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_2(PyObject *self, 
       result = (GeoCal::IpiImageGroundConnection *)new GeoCal::IpiImageGroundConnection((boost::shared_ptr< GeoCal::Ipi > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7052,6 +7061,9 @@ SWIGINTERN PyObject *_wrap_new_IpiImageGroundConnection__SWIG_3(PyObject *self, 
     try {
       result = (GeoCal::IpiImageGroundConnection *)new GeoCal::IpiImageGroundConnection((boost::shared_ptr< GeoCal::Ipi > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7177,6 +7189,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection_cf_look_vector(PyObject *sel
       ((GeoCal::IpiImageGroundConnection const *)arg1)->cf_look_vector((GeoCal::ImageCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7229,6 +7244,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_ipi(PyObject *self, PyObj
       result = ((GeoCal::IpiImageGroundConnection const *)arg1)->ipi();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7275,6 +7293,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_resolution(PyObject *self
       result = (double)((GeoCal::IpiImageGroundConnection const *)arg1)->resolution();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7319,6 +7340,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_maximum_height(PyObject *
       result = (double)((GeoCal::IpiImageGroundConnection const *)arg1)->maximum_height();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7360,6 +7384,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_refraction__SWIG_0(PyObje
     try {
       result = ((GeoCal::IpiImageGroundConnection const *)arg1)->refraction();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7431,6 +7458,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_refraction__SWIG_1(PyObje
       (arg1)->refraction((boost::shared_ptr< GeoCal::Refraction > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7500,6 +7530,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_velocity_aberration__SWIG
     try {
       result = ((GeoCal::IpiImageGroundConnection const *)arg1)->velocity_aberration();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7571,6 +7604,9 @@ SWIGINTERN PyObject *_wrap_IpiImageGroundConnection__v_velocity_aberration__SWIG
       (arg1)->velocity_aberration((boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7641,6 +7677,9 @@ SWIGINTERN PyObject *_wrap_delete_IpiImageGroundConnection(PyObject *self, PyObj
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

@@ -4650,14 +4650,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4678,7 +4678,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4693,7 +4693,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6554,6 +6554,9 @@ SWIGINTERN PyObject *_wrap_new_DemMatch(PyObject *self, PyObject *args) {
       result = (GeoCal::DemMatch *)new GeoCal::DemMatch((boost::shared_ptr< GeoCal::ImageToImageMatch > const &)*arg1,(boost::shared_ptr< GeoCal::RayIntersect > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6654,6 +6657,9 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_0(PyObject *self, Py_ssi
     try {
       result = ((GeoCal::DemMatch const *)arg1)->surface_point(arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6766,6 +6772,9 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_1(PyObject *self, Py_ssi
       result = ((GeoCal::DemMatch const *)arg1)->surface_point(arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6869,6 +6878,9 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_2(PyObject *self, Py_ssi
       result = ((GeoCal::DemMatch const *)arg1)->surface_point(arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6963,6 +6975,9 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_3(PyObject *self, Py_ssi
     try {
       result = ((GeoCal::DemMatch const *)arg1)->surface_point(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7064,6 +7079,9 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_4(PyObject *self, Py_ssi
       result = ((GeoCal::DemMatch const *)arg1)->surface_point((GeoCal::MapInfo const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7155,6 +7173,9 @@ SWIGINTERN PyObject *_wrap_DemMatch_surface_point__SWIG_5(PyObject *self, Py_ssi
     try {
       result = ((GeoCal::DemMatch const *)arg1)->surface_point((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7273,6 +7294,9 @@ SWIGINTERN PyObject *_wrap_DemMatch___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::DemMatch const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7316,6 +7340,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_match(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::DemMatch const *)arg1)->match();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7363,6 +7390,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_ray_intersect(PyObject *self, PyObject *a
       result = ((GeoCal::DemMatch const *)arg1)->ray_intersect();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7409,6 +7439,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_max_distance(PyObject *self, PyObject *ar
       result = (double)((GeoCal::DemMatch const *)arg1)->max_distance();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7452,6 +7485,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_number_point(PyObject *self, PyObject *ar
     try {
       result = (int)((GeoCal::DemMatch const *)arg1)->number_point();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7497,6 +7533,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_number_match(PyObject *self, PyObject *ar
       result = (int)((GeoCal::DemMatch const *)arg1)->number_match();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7541,6 +7580,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_number_success(PyObject *self, PyObject *
       result = (int)((GeoCal::DemMatch const *)arg1)->number_success();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7584,6 +7626,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_diagnostic(PyObject *self, PyObject *args
     try {
       result = ((GeoCal::DemMatch const *)arg1)->diagnostic();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7650,6 +7695,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_all_distance_stat(PyObject *self, PyObjec
       result = ((GeoCal::DemMatch const *)arg1)->all_distance_stat();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7696,6 +7744,9 @@ SWIGINTERN PyObject *_wrap_DemMatch__v_good_distance_stat(PyObject *self, PyObje
       result = ((GeoCal::DemMatch const *)arg1)->good_distance_stat();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7740,6 +7791,9 @@ SWIGINTERN PyObject *_wrap_delete_DemMatch(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

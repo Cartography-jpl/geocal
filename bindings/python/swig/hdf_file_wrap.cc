@@ -4516,14 +4516,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4544,7 +4544,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4559,7 +4559,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6484,6 +6484,9 @@ SWIGINTERN PyObject *_wrap_HdfFile___str__(PyObject *self, PyObject *args) {
       result = (arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6527,6 +6530,9 @@ SWIGINTERN PyObject *_wrap_new_HdfFile__SWIG_0(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::HdfFile *)new GeoCal::HdfFile((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6566,6 +6572,9 @@ SWIGINTERN PyObject *_wrap_new_HdfFile__SWIG_1(PyObject *self, Py_ssize_t nobjs,
     try {
       result = (GeoCal::HdfFile *)new GeoCal::HdfFile((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6643,6 +6652,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_close(PyObject *self, PyObject *args) {
       (arg1)->close();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6687,6 +6699,9 @@ SWIGINTERN PyObject *_wrap_HdfFile__v_file_name(PyObject *self, PyObject *args) 
       result = ((GeoCal::HdfFile const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6723,6 +6738,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_is_hdf(PyObject *self, PyObject *args) {
     try {
       result = (bool)GeoCal::HdfFile::is_hdf((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6781,6 +6799,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_1d(PyObject *self, PyObject *args
     try {
       result = GeoCal_HdfFile_read_double_1d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6861,6 +6882,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_2d(PyObject *self, PyObject *args
       result = GeoCal_HdfFile_read_double_2d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6939,6 +6963,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_3d(PyObject *self, PyObject *args
     try {
       result = GeoCal_HdfFile_read_double_3d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7019,6 +7046,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_double_4d(PyObject *self, PyObject *args
       result = GeoCal_HdfFile_read_double_4d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7097,6 +7127,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_1d(PyObject *self, PyObject *args) {
     try {
       result = GeoCal_HdfFile_read_int_1d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7177,6 +7210,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_2d(PyObject *self, PyObject *args) {
       result = GeoCal_HdfFile_read_int_2d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7255,6 +7291,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_3d(PyObject *self, PyObject *args) {
     try {
       result = GeoCal_HdfFile_read_int_3d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7335,6 +7374,9 @@ SWIGINTERN PyObject *_wrap_HdfFile_read_int_4d(PyObject *self, PyObject *args) {
       result = GeoCal_HdfFile_read_int_4d(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7400,6 +7442,9 @@ SWIGINTERN PyObject *_wrap_delete_HdfFile(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

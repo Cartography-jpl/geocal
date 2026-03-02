@@ -4579,14 +4579,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4607,7 +4607,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4622,7 +4622,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6547,6 +6547,9 @@ SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_0(PyObject *self, Py_ssize_t nob
       result = (GeoCal::MspiCamera *)new GeoCal::MspiCamera((std::string const &)*arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6588,6 +6591,9 @@ SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_1(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::MspiCamera *)new GeoCal::MspiCamera((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6648,6 +6654,9 @@ SWIGINTERN PyObject *_wrap_new_MspiCamera__SWIG_2(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::MspiCamera *)new GeoCal::MspiCamera((std::string const &)*arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6749,6 +6758,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera_read_config_file(PyObject *self, PyObject 
       (arg1)->read_config_file((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6792,6 +6804,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_file_name__SWIG_0(PyObject *self, Py_ss
     try {
       result = ((GeoCal::MspiCamera const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6846,6 +6861,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_file_name__SWIG_1(PyObject *self, Py_ss
     try {
       (arg1)->file_name((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6919,6 +6937,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_granule_id__SWIG_0(PyObject *self, Py_s
       result = ((GeoCal::MspiCamera const *)arg1)->granule_id();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6972,6 +6993,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_granule_id__SWIG_1(PyObject *self, Py_s
     try {
       (arg1)->granule_id((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7047,6 +7071,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_epsilon(PyObject *self, PyObject *args)
       result = (double)((GeoCal::MspiCamera const *)arg1)->epsilon();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7090,6 +7117,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_psi(PyObject *self, PyObject *args) {
     try {
       result = (double)((GeoCal::MspiCamera const *)arg1)->psi();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7135,6 +7165,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_theta(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MspiCamera const *)arg1)->theta();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7178,6 +7211,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_yaw(PyObject *self, PyObject *args) {
     try {
       result = (double)((GeoCal::MspiCamera const *)arg1)->yaw();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7223,6 +7259,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_pitch(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MspiCamera const *)arg1)->pitch();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7267,6 +7306,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_roll(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MspiCamera const *)arg1)->roll();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7310,6 +7352,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_yaw_with_derivative(PyObject *self, PyO
     try {
       result = ((GeoCal::MspiCamera const *)arg1)->yaw_with_derivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7359,6 +7404,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_pitch_with_derivative(PyObject *self, P
       result = ((GeoCal::MspiCamera const *)arg1)->pitch_with_derivative();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7406,6 +7454,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_roll_with_derivative(PyObject *self, Py
     try {
       result = ((GeoCal::MspiCamera const *)arg1)->roll_with_derivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7455,6 +7506,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_boresight_angle(PyObject *self, PyObjec
       result = (double)((GeoCal::MspiCamera const *)arg1)->boresight_angle();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7499,6 +7553,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_inversion(PyObject *self, PyObject *arg
       result = (bool)((GeoCal::MspiCamera const *)arg1)->inversion();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7540,6 +7597,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_parameter_mask__SWIG_0(PyObject *self, 
     try {
       result = ((GeoCal::MspiCamera const *)arg1)->parameter_mask();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7623,6 +7683,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_parameter_mask__SWIG_1(PyObject *self, 
       (arg1)->parameter_mask((blitz::Array< bool,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7695,6 +7758,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera__v_paraxial_transform(PyObject *self, PyOb
       result = ((GeoCal::MspiCamera const *)arg1)->paraxial_transform();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7755,6 +7821,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera_angular_separation(PyObject *self, PyObjec
     try {
       result = (double)((GeoCal::MspiCamera const *)arg1)->angular_separation(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7843,6 +7912,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera_paraxial_offset(PyObject *self, PyObject *
       ((GeoCal::MspiCamera const *)arg1)->paraxial_offset(arg2,(GeoCal::FrameCoordinate const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7906,6 +7978,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera_row_number(PyObject *self, PyObject *args)
       result = (int)((GeoCal::MspiCamera const *)arg1)->row_number(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7957,6 +8032,9 @@ SWIGINTERN PyObject *_wrap_MspiCamera_band_number(PyObject *self, PyObject *args
       result = (int)((GeoCal::MspiCamera const *)arg1)->band_number(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7999,6 +8077,9 @@ SWIGINTERN PyObject *_wrap_delete_MspiCamera(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

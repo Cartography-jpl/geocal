@@ -4519,14 +4519,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4547,7 +4547,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4562,7 +4562,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6434,6 +6434,9 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_0(PyObject *
       result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6523,6 +6526,9 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_1(PyObject *
       result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6604,6 +6610,9 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_2(PyObject *
       result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6677,6 +6686,9 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_3(PyObject *
       result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6741,6 +6753,9 @@ SWIGINTERN PyObject *_wrap_new_IterativeMorphologicalDilation__SWIG_4(PyObject *
     try {
       result = (GeoCal::IterativeMorphologicalDilation *)new GeoCal::IterativeMorphologicalDilation((blitz::Array< double,2 > const &)*arg1,(blitz::Array< bool,2 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6835,6 +6850,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation___str__(PyObject *self
       result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6878,6 +6896,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_filled_image(PyObje
     try {
       result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->filled_image();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6944,6 +6965,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_filled_mask(PyObjec
       result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->filled_mask();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7008,6 +7032,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_kernel(PyObject *se
     try {
       result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->kernel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7074,6 +7101,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_frontier_fill_order
       result = (GeoCal::IterativeMorphologicalDilation::FrontierFillOrder)((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_fill_order();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7117,6 +7147,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_iteration_count(PyO
     try {
       result = (int)((GeoCal::IterativeMorphologicalDilation const *)arg1)->iteration_count();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7162,6 +7195,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_window_size(PyObjec
       result = (int)((GeoCal::IterativeMorphologicalDilation const *)arg1)->window_size();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7205,6 +7241,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_sigma(PyObject *sel
     try {
       result = (double)((GeoCal::IterativeMorphologicalDilation const *)arg1)->sigma();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7250,6 +7289,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation__v_prediction_type(PyO
       result = (GeoCal::IterativeMorphologicalDilation::PredictionType)((GeoCal::IterativeMorphologicalDilation const *)arg1)->prediction_type();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7280,6 +7322,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_set_random_seed(PyObje
     try {
       GeoCal::IterativeMorphologicalDilation::set_random_seed(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7323,6 +7368,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_fill_missing_data(PyOb
     try {
       (arg1)->fill_missing_data();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7383,6 +7431,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_predicted_value(PyObje
       result = (double)((GeoCal::IterativeMorphologicalDilation const *)arg1)->predicted_value(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7434,6 +7485,9 @@ SWIGINTERN PyObject *_wrap_IterativeMorphologicalDilation_frontier_pixel_find(Py
       result = ((GeoCal::IterativeMorphologicalDilation const *)arg1)->frontier_pixel_find(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7476,6 +7530,9 @@ SWIGINTERN PyObject *_wrap_delete_IterativeMorphologicalDilation(PyObject *self,
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

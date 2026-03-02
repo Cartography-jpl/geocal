@@ -4664,14 +4664,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4692,7 +4692,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4707,7 +4707,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7256,6 +7256,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_0(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7,arg8,arg9,arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7374,6 +7377,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_1(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7484,6 +7490,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_2(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7586,6 +7595,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_3(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7674,6 +7686,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_4(PyObject *self, Py_ssize_
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7812,6 +7827,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_5(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5,(std::string const &)*arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7943,6 +7961,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_6(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5,(std::string const &)*arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8066,6 +8087,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_7(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5,(std::string const &)*arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8181,6 +8205,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_8(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8283,6 +8310,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_9(PyObject *self, Py_ssize_
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::MapInfo const &)*arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8323,6 +8353,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_10(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< GByte > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8358,6 +8391,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_11(PyObject *self, Py_ssize
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< GUInt16 > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8395,6 +8431,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_12(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< GInt16 > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8430,6 +8469,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_13(PyObject *self, Py_ssize
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< GUInt32 > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8467,6 +8509,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_14(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< GInt32 > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8503,6 +8548,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_15(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< float > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8538,6 +8586,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_16(PyObject *self, Py_ssize
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((boost::shared_ptr< GeoCal::Gdal< double > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8617,6 +8668,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_17(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8689,6 +8743,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_18(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8753,6 +8810,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_19(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8809,6 +8869,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_20(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8857,6 +8920,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_21(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8896,6 +8962,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_22(PyObject *self, Py_ssize
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9016,6 +9085,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_23(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9133,6 +9205,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_24(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9242,6 +9317,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_25(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9343,6 +9421,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_26(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9436,6 +9517,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_27(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9516,6 +9600,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_28(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9580,6 +9667,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_29(PyObject *self, Py_ssize
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9718,6 +9808,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_30(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9849,6 +9942,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_31(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9972,6 +10068,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_32(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10087,6 +10186,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_33(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10194,6 +10296,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_34(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10293,6 +10398,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_35(PyObject *self, Py_ssize
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10378,6 +10486,9 @@ SWIGINTERN PyObject *_wrap_new_GdalRasterImage__SWIG_36(PyObject *self, Py_ssize
     try {
       result = (GeoCal::GdalRasterImage *)new GeoCal::GdalRasterImage((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11229,6 +11340,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_read_all_bands(PyObject *self, PyObje
       result = GeoCal::GdalRasterImage::read_all_bands((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11275,6 +11389,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gdal_data_base(PyObject *self, PyO
       result = ((GeoCal::GdalRasterImage const *)arg1)->gdal_data_base_ptr();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11320,6 +11437,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_flush(PyObject *self, PyObject *args)
       ((GeoCal::GdalRasterImage const *)arg1)->flush();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11362,6 +11482,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_close(PyObject *self, PyObject *args)
     try {
       (arg1)->close();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11406,6 +11529,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_is_closed(PyObject *self, PyObject
     try {
       result = (bool)((GeoCal::GdalRasterImage const *)arg1)->is_closed();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11478,6 +11604,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_map_info(PyObject *self, PyObject
       (arg1)->set_map_info((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11549,6 +11678,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_rpc(PyObject *self, PyObject *arg
       (arg1)->set_rpc((GeoCal::Rpc const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11604,6 +11736,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata_list__SWIG_0(PyObject *self,
       result = ((GeoCal::GdalRasterImage const *)arg1)->metadata_list((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11647,6 +11782,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata_list__SWIG_1(PyObject *self,
     try {
       result = ((GeoCal::GdalRasterImage const *)arg1)->metadata_list();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11744,6 +11882,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_has_metadata__SWIG_0(PyObject *self, 
       result = (bool)(arg1)->has_metadata((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11802,6 +11943,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_has_metadata__SWIG_1(PyObject *self, 
     try {
       result = (bool)(arg1)->has_metadata((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11913,6 +12057,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_metadata__SWIG_0(PyObject *self, 
       (arg1)->set_metadata((std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11985,6 +12132,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_metadata__SWIG_1(PyObject *self, 
     try {
       (arg1)->set_metadata((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12062,6 +12212,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_file_names(PyObject *self, PyObjec
       result = ((GeoCal::GdalRasterImage const *)arg1)->file_names();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12112,6 +12265,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_0(PyO
       result = ((GeoCal::GdalRasterImage const *)arg1)->map_info_from_nitf_corner(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12155,6 +12311,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_map_info_from_nitf_corner__SWIG_1(PyO
     try {
       result = ((GeoCal::GdalRasterImage const *)arg1)->map_info_from_nitf_corner();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12236,6 +12395,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_fill_value(PyObject *self, PyObje
       (arg1)->set_fill_value(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12286,6 +12448,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_scale(PyObject *self, PyObject *a
       (arg1)->set_scale(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12335,6 +12500,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_set_offset(PyObject *self, PyObject *
     try {
       (arg1)->set_offset(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12416,6 +12584,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_write_gdal__SWIG_0(PyObject *self, Py
       ((GeoCal::GdalRasterImage const *)arg1)->write_gdal((std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12488,6 +12659,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_write_gdal__SWIG_1(PyObject *self, Py
     try {
       ((GeoCal::GdalRasterImage const *)arg1)->write_gdal((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12565,6 +12739,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_band_id(PyObject *self, PyObject *
       result = (int)((GeoCal::GdalRasterImage const *)arg1)->band_id();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12608,6 +12785,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_offset(PyObject *self, PyObject *a
     try {
       result = (double)((GeoCal::GdalRasterImage const *)arg1)->offset();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12653,6 +12833,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_scale(PyObject *self, PyObject *ar
       result = (double)((GeoCal::GdalRasterImage const *)arg1)->scale();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12696,6 +12879,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_unit_type(PyObject *self, PyObject
     try {
       result = ((GeoCal::GdalRasterImage const *)arg1)->unit_type();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12741,6 +12927,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_raster_data_type(PyObject *self, P
       result = (int)((GeoCal::GdalRasterImage const *)arg1)->raster_data_type();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12785,6 +12974,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_update(PyObject *self, PyObject *a
       result = (bool)((GeoCal::GdalRasterImage const *)arg1)->update();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12828,6 +13020,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_rpc(PyObject *self, PyObject *args
     try {
       result = ((GeoCal::GdalRasterImage const *)arg1)->rpc();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12877,6 +13072,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_map_info(PyObject *self, PyObject 
       result = ((GeoCal::GdalRasterImage const *)arg1)->map_info();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12925,6 +13123,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_has_gcps(PyObject *self, PyObject 
       result = (bool)((GeoCal::GdalRasterImage const *)arg1)->has_gcps();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12968,6 +13169,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage__v_gcps(PyObject *self, PyObject *arg
     try {
       result = ((GeoCal::GdalRasterImage const *)arg1)->gcps();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13045,6 +13249,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata__SWIG_0(PyObject *self, Py_s
       result = GeoCal_GdalRasterImage_metadata__SWIG_0((GeoCal::GdalRasterImage const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13114,6 +13321,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_metadata__SWIG_1(PyObject *self, Py_s
     try {
       result = GeoCal_GdalRasterImage_metadata__SWIG_1((GeoCal::GdalRasterImage const *)arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13223,6 +13433,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_file__SWIG_0(PyObject *self, 
       GeoCal_GdalRasterImage_save_to_file__SWIG_0((char const *)arg1,(GeoCal::RasterImage const &)*arg2,(char const *)arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13294,6 +13507,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_file__SWIG_1(PyObject *self, 
     try {
       GeoCal_GdalRasterImage_save_to_file__SWIG_0((char const *)arg1,(GeoCal::RasterImage const &)*arg2,(char const *)arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13406,6 +13622,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_0(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13479,6 +13698,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_1(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13543,6 +13765,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_2(PyObject *self,
     try {
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13683,6 +13908,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_3(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,(GeoCal::RasterImage const &)*arg3,(GeoCal::RasterImage const &)*arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13814,6 +14042,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_4(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,(GeoCal::RasterImage const &)*arg3,(GeoCal::RasterImage const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13936,6 +14167,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_5(PyObject *self,
     try {
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,(GeoCal::RasterImage const &)*arg3,(GeoCal::RasterImage const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14105,6 +14339,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_6(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,(GeoCal::RasterImage const &)*arg3,(GeoCal::RasterImage const &)*arg4,(GeoCal::RasterImage const &)*arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14265,6 +14502,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_7(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,(GeoCal::RasterImage const &)*arg3,(GeoCal::RasterImage const &)*arg4,(GeoCal::RasterImage const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14417,6 +14657,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_8(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImage const &)*arg2,(GeoCal::RasterImage const &)*arg3,(GeoCal::RasterImage const &)*arg4,(GeoCal::RasterImage const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14482,6 +14725,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_9(PyObject *self,
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14541,6 +14787,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_10(PyObject *self
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14591,6 +14840,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_11(PyObject *self
     try {
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(std::vector< boost::shared_ptr< GeoCal::RasterImage >,std::allocator< boost::shared_ptr< GeoCal::RasterImage > > > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14675,6 +14927,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_12(PyObject *self
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImageMultiBand const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14748,6 +15003,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_13(PyObject *self
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImageMultiBand const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14812,6 +15070,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save_to_erdas__SWIG_14(PyObject *self
     try {
       GeoCal::GdalRasterImage::save_to_erdas((std::string const &)*arg1,(GeoCal::RasterImageMultiBand const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -15108,6 +15369,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_0(PyObject *self, Py_ssize
       GeoCal::GdalRasterImage::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImage const &)*arg3,arg4,(std::string const &)*arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15219,6 +15483,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_1(PyObject *self, Py_ssize
       GeoCal::GdalRasterImage::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImage const &)*arg3,arg4,(std::string const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15322,6 +15589,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_2(PyObject *self, Py_ssize
       GeoCal::GdalRasterImage::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImage const &)*arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15412,6 +15682,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_3(PyObject *self, Py_ssize
       GeoCal::GdalRasterImage::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImage const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15491,6 +15764,9 @@ SWIGINTERN PyObject *_wrap_GdalRasterImage_save__SWIG_4(PyObject *self, Py_ssize
     try {
       GeoCal::GdalRasterImage::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImage const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -15584,6 +15860,9 @@ SWIGINTERN PyObject *_wrap_delete_GdalRasterImage(PyObject *self, PyObject *args
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

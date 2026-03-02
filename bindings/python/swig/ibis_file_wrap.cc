@@ -4522,14 +4522,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4550,7 +4550,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4565,7 +4565,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7095,6 +7095,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte_ibis_file(PyObject *self, PyObject *a
       result = (GeoCal::IbisFile *) &((GeoCal::IbisColumn< unsigned char > const *)arg1)->ibis_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7130,6 +7133,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte__v_column_index(PyObject *self, PyObj
       result = (int)((GeoCal::IbisColumn< unsigned char > const *)arg1)->column_index();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7162,6 +7168,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte__v_size_byte(PyObject *self, PyObject
       result = (int)((GeoCal::IbisColumn< unsigned char > const *)arg1)->size_byte();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7193,6 +7202,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte___str__(PyObject *self, PyObject *arg
     try {
       result = ((GeoCal::IbisColumn< unsigned char > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7232,6 +7244,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte_data_get(PyObject *self, PyObject *ar
     try {
       result = (unsigned char)((GeoCal::IbisColumn< unsigned char > const *)arg1)->data_get(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7281,6 +7296,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte_data_set(PyObject *self, PyObject *ar
       (arg1)->data_set(arg2,(unsigned char const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7312,6 +7330,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_byte__v_data_size(PyObject *self, PyObject
     try {
       result = (int)((GeoCal::IbisColumn< unsigned char > const *)arg1)->data_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7398,6 +7419,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisColumn_byte(PyObject *self, PyObject *args
       delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7437,6 +7461,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half_ibis_file(PyObject *self, PyObject *a
       result = (GeoCal::IbisFile *) &((GeoCal::IbisColumn< short > const *)arg1)->ibis_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7472,6 +7499,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half__v_column_index(PyObject *self, PyObj
       result = (int)((GeoCal::IbisColumn< short > const *)arg1)->column_index();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7504,6 +7534,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half__v_size_byte(PyObject *self, PyObject
       result = (int)((GeoCal::IbisColumn< short > const *)arg1)->size_byte();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7535,6 +7568,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half___str__(PyObject *self, PyObject *arg
     try {
       result = ((GeoCal::IbisColumn< short > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7574,6 +7610,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half_data_get(PyObject *self, PyObject *ar
     try {
       result = (short)((GeoCal::IbisColumn< short > const *)arg1)->data_get(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7623,6 +7662,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half_data_set(PyObject *self, PyObject *ar
       (arg1)->data_set(arg2,(short const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7654,6 +7696,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_half__v_data_size(PyObject *self, PyObject
     try {
       result = (int)((GeoCal::IbisColumn< short > const *)arg1)->data_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7740,6 +7785,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisColumn_half(PyObject *self, PyObject *args
       delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7779,6 +7827,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full_ibis_file(PyObject *self, PyObject *a
       result = (GeoCal::IbisFile *) &((GeoCal::IbisColumn< int > const *)arg1)->ibis_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7814,6 +7865,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full__v_column_index(PyObject *self, PyObj
       result = (int)((GeoCal::IbisColumn< int > const *)arg1)->column_index();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7846,6 +7900,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full__v_size_byte(PyObject *self, PyObject
       result = (int)((GeoCal::IbisColumn< int > const *)arg1)->size_byte();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7877,6 +7934,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full___str__(PyObject *self, PyObject *arg
     try {
       result = ((GeoCal::IbisColumn< int > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7916,6 +7976,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full_data_get(PyObject *self, PyObject *ar
     try {
       result = (int)((GeoCal::IbisColumn< int > const *)arg1)->data_get(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7965,6 +8028,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full_data_set(PyObject *self, PyObject *ar
       (arg1)->data_set(arg2,(int const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7996,6 +8062,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_full__v_data_size(PyObject *self, PyObject
     try {
       result = (int)((GeoCal::IbisColumn< int > const *)arg1)->data_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8082,6 +8151,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisColumn_full(PyObject *self, PyObject *args
       delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8121,6 +8193,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float_ibis_file(PyObject *self, PyObject *
       result = (GeoCal::IbisFile *) &((GeoCal::IbisColumn< float > const *)arg1)->ibis_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8156,6 +8231,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float__v_column_index(PyObject *self, PyOb
       result = (int)((GeoCal::IbisColumn< float > const *)arg1)->column_index();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8188,6 +8266,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float__v_size_byte(PyObject *self, PyObjec
       result = (int)((GeoCal::IbisColumn< float > const *)arg1)->size_byte();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8219,6 +8300,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float___str__(PyObject *self, PyObject *ar
     try {
       result = ((GeoCal::IbisColumn< float > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8258,6 +8342,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float_data_get(PyObject *self, PyObject *a
     try {
       result = (float)((GeoCal::IbisColumn< float > const *)arg1)->data_get(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8307,6 +8394,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float_data_set(PyObject *self, PyObject *a
       (arg1)->data_set(arg2,(float const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8338,6 +8428,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_float__v_data_size(PyObject *self, PyObjec
     try {
       result = (int)((GeoCal::IbisColumn< float > const *)arg1)->data_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8424,6 +8517,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisColumn_float(PyObject *self, PyObject *arg
       delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8463,6 +8559,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double_ibis_file(PyObject *self, PyObject 
       result = (GeoCal::IbisFile *) &((GeoCal::IbisColumn< double > const *)arg1)->ibis_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8498,6 +8597,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double__v_column_index(PyObject *self, PyO
       result = (int)((GeoCal::IbisColumn< double > const *)arg1)->column_index();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8530,6 +8632,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double__v_size_byte(PyObject *self, PyObje
       result = (int)((GeoCal::IbisColumn< double > const *)arg1)->size_byte();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8561,6 +8666,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double___str__(PyObject *self, PyObject *a
     try {
       result = ((GeoCal::IbisColumn< double > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8600,6 +8708,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double_data_get(PyObject *self, PyObject *
     try {
       result = (double)((GeoCal::IbisColumn< double > const *)arg1)->data_get(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8649,6 +8760,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double_data_set(PyObject *self, PyObject *
       (arg1)->data_set(arg2,(double const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8680,6 +8794,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_double__v_data_size(PyObject *self, PyObje
     try {
       result = (int)((GeoCal::IbisColumn< double > const *)arg1)->data_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8766,6 +8883,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisColumn_double(PyObject *self, PyObject *ar
       delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8805,6 +8925,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string_ibis_file(PyObject *self, PyObject 
       result = (GeoCal::IbisFile *) &((GeoCal::IbisColumn< std::string > const *)arg1)->ibis_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8840,6 +8963,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string__v_column_index(PyObject *self, PyO
       result = (int)((GeoCal::IbisColumn< std::string > const *)arg1)->column_index();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8872,6 +8998,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string__v_size_byte(PyObject *self, PyObje
       result = (int)((GeoCal::IbisColumn< std::string > const *)arg1)->size_byte();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8903,6 +9032,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string___str__(PyObject *self, PyObject *a
     try {
       result = ((GeoCal::IbisColumn< std::string > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8942,6 +9074,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string_data_get(PyObject *self, PyObject *
     try {
       result = ((GeoCal::IbisColumn< std::string > const *)arg1)->data_get(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8994,6 +9129,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string_data_set(PyObject *self, PyObject *
       (arg1)->data_set(arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9027,6 +9165,9 @@ SWIGINTERN PyObject *_wrap_IbisColumn_string__v_data_size(PyObject *self, PyObje
     try {
       result = (int)((GeoCal::IbisColumn< std::string > const *)arg1)->data_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9113,6 +9254,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisColumn_string(PyObject *self, PyObject *ar
       delete arg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9189,6 +9333,9 @@ SWIGINTERN PyObject *_wrap_new_IbisFile__SWIG_0(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::IbisFile *)new GeoCal::IbisFile((std::string const &)*arg1,arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9254,6 +9401,9 @@ SWIGINTERN PyObject *_wrap_new_IbisFile__SWIG_1(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::IbisFile *)new GeoCal::IbisFile((std::string const &)*arg1,arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9304,6 +9454,9 @@ SWIGINTERN PyObject *_wrap_new_IbisFile__SWIG_2(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::IbisFile *)new GeoCal::IbisFile((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9343,6 +9496,9 @@ SWIGINTERN PyObject *_wrap_new_IbisFile__SWIG_3(PyObject *self, Py_ssize_t nobjs
     try {
       result = (GeoCal::IbisFile *)new GeoCal::IbisFile((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9433,6 +9589,9 @@ SWIGINTERN PyObject *_wrap_IbisFile__v_access(PyObject *self, PyObject *args) {
       result = (GeoCal::IbisFile::access_type)((GeoCal::IbisFile const *)arg1)->access();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9475,6 +9634,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_close(PyObject *self, PyObject *args) {
     try {
       (arg1)->close();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9527,6 +9689,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_data_type(PyObject *self, PyObject *a
       result = (GeoCal::IbisFile::data_type)((GeoCal::IbisFile const *)arg1)->column_data_type(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9570,6 +9735,9 @@ SWIGINTERN PyObject *_wrap_IbisFile__v_file_name(PyObject *self, PyObject *args)
     try {
       result = ((GeoCal::IbisFile const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9615,6 +9783,9 @@ SWIGINTERN PyObject *_wrap_IbisFile__v_ibis_fh(PyObject *self, PyObject *args) {
       result = (int)((GeoCal::IbisFile const *)arg1)->ibis_fh();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9658,6 +9829,9 @@ SWIGINTERN PyObject *_wrap_IbisFile__v_number_row(PyObject *self, PyObject *args
     try {
       result = (int)((GeoCal::IbisFile const *)arg1)->number_row();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9703,6 +9877,9 @@ SWIGINTERN PyObject *_wrap_IbisFile__v_number_col(PyObject *self, PyObject *args
       result = (int)((GeoCal::IbisFile const *)arg1)->number_col();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9746,6 +9923,9 @@ SWIGINTERN PyObject *_wrap_IbisFile__v_unit(PyObject *self, PyObject *args) {
     try {
       result = (int)((GeoCal::IbisFile const *)arg1)->unit();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9805,6 +9985,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_set_column_type(PyObject *self, PyObject *ar
       (arg1)->set_column_type(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9845,6 +10028,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_mark_updated__SWIG_0(PyObject *self, Py_ssiz
     try {
       (arg1)->mark_updated();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9894,6 +10080,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_mark_updated__SWIG_1(PyObject *self, Py_ssiz
     try {
       (arg1)->mark_updated(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9966,6 +10155,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_flush(PyObject *self, PyObject *args) {
       (arg1)->flush();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10009,6 +10201,9 @@ SWIGINTERN PyObject *_wrap_IbisFile___str__(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::IbisFile const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10061,6 +10256,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_byte(PyObject *self, PyObject *args) 
       result = (GeoCal::IbisColumn< unsigned char > *) &GeoCal_IbisFile_column_byte(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10111,6 +10309,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_half(PyObject *self, PyObject *args) 
     try {
       result = (GeoCal::IbisColumn< short > *) &GeoCal_IbisFile_column_half(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10163,6 +10364,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_full(PyObject *self, PyObject *args) 
       result = (GeoCal::IbisColumn< int > *) &GeoCal_IbisFile_column_full(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10213,6 +10417,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_float(PyObject *self, PyObject *args)
     try {
       result = (GeoCal::IbisColumn< float > *) &GeoCal_IbisFile_column_float(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10265,6 +10472,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_double(PyObject *self, PyObject *args
       result = (GeoCal::IbisColumn< double > *) &GeoCal_IbisFile_column_double(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10316,6 +10526,9 @@ SWIGINTERN PyObject *_wrap_IbisFile_column_string(PyObject *self, PyObject *args
       result = (GeoCal::IbisColumn< std::string > *) &GeoCal_IbisFile_column_string(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10358,6 +10571,9 @@ SWIGINTERN PyObject *_wrap_delete_IbisFile(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

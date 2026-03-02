@@ -4658,14 +4658,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4686,7 +4686,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4701,7 +4701,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6463,6 +6463,9 @@ SWIGINTERN PyObject *_wrap_new_ScaleImage(PyObject *self, PyObject *args) {
       result = (GeoCal::ScaleImage *)new GeoCal::ScaleImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6510,6 +6513,9 @@ SWIGINTERN PyObject *_wrap_ScaleImage__v_raw_data(PyObject *self, PyObject *args
       result = ((GeoCal::ScaleImage const *)arg1)->raw_data();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6556,6 +6562,9 @@ SWIGINTERN PyObject *_wrap_ScaleImage__v_scale_factor(PyObject *self, PyObject *
       result = (double)((GeoCal::ScaleImage const *)arg1)->scale_factor();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6598,6 +6607,9 @@ SWIGINTERN PyObject *_wrap_delete_ScaleImage(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6668,6 +6680,9 @@ SWIGINTERN PyObject *_wrap_new_ScaleImageMultiBand(PyObject *self, PyObject *arg
       result = (GeoCal::ScaleImageMultiBand *)new GeoCal::ScaleImageMultiBand((boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6715,6 +6730,9 @@ SWIGINTERN PyObject *_wrap_ScaleImageMultiBand__v_raw_data(PyObject *self, PyObj
       result = ((GeoCal::ScaleImageMultiBand const *)arg1)->raw_data();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6761,6 +6779,9 @@ SWIGINTERN PyObject *_wrap_ScaleImageMultiBand__v_scale_factor(PyObject *self, P
       result = (double)((GeoCal::ScaleImageMultiBand const *)arg1)->scale_factor();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6803,6 +6824,9 @@ SWIGINTERN PyObject *_wrap_delete_ScaleImageMultiBand(PyObject *self, PyObject *
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6873,6 +6897,9 @@ SWIGINTERN PyObject *_wrap_new_ScaleImageGroundConnection(PyObject *self, PyObje
       result = (GeoCal::ScaleImageGroundConnection *)new GeoCal::ScaleImageGroundConnection((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6918,6 +6945,9 @@ SWIGINTERN PyObject *_wrap_delete_ScaleImageGroundConnection(PyObject *self, PyO
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

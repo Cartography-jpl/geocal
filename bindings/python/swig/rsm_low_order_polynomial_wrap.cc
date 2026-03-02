@@ -4644,14 +4644,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4672,7 +4672,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4687,7 +4687,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6986,6 +6986,9 @@ SWIGINTERN PyObject *_wrap_new_RsmLowOrderPolynomial__SWIG_0(PyObject *self, Py_
       result = (GeoCal::RsmLowOrderPolynomial *)new GeoCal::RsmLowOrderPolynomial(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7035,6 +7038,9 @@ SWIGINTERN PyObject *_wrap_new_RsmLowOrderPolynomial__SWIG_1(PyObject *self, Py_
       result = (GeoCal::RsmLowOrderPolynomial *)new GeoCal::RsmLowOrderPolynomial(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7076,6 +7082,9 @@ SWIGINTERN PyObject *_wrap_new_RsmLowOrderPolynomial__SWIG_2(PyObject *self, Py_
       result = (GeoCal::RsmLowOrderPolynomial *)new GeoCal::RsmLowOrderPolynomial(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7109,6 +7118,9 @@ SWIGINTERN PyObject *_wrap_new_RsmLowOrderPolynomial__SWIG_3(PyObject *self, Py_
       result = (GeoCal::RsmLowOrderPolynomial *)new GeoCal::RsmLowOrderPolynomial(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7133,6 +7145,9 @@ SWIGINTERN PyObject *_wrap_new_RsmLowOrderPolynomial__SWIG_4(PyObject *self, Py_
     try {
       result = (GeoCal::RsmLowOrderPolynomial *)new GeoCal::RsmLowOrderPolynomial();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7227,6 +7242,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial___str__(PyObject *self, PyObjec
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7292,6 +7310,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial_image_coordinate__SWIG_0(PyObje
     try {
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->image_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7398,6 +7419,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial_image_coordinate__SWIG_1(PyObje
     try {
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->image_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7522,6 +7546,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial_image_coordinate__SWIG_2(PyObje
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->image_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7644,6 +7671,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial_image_coordinate__SWIG_3(PyObje
     try {
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->image_coordinate((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7879,6 +7909,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial_fit_data(PyObject *self, PyObje
       (arg1)->fit_data((std::vector< double,std::allocator< double > > const &)*arg2,(std::vector< double,std::allocator< double > > const &)*arg3,(std::vector< double,std::allocator< double > > const &)*arg4,(std::vector< double,std::allocator< double > > const &)*arg5,(std::vector< double,std::allocator< double > > const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8037,6 +8070,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial_fit(PyObject *self, PyObject *a
       (arg1)->fit((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,arg4,arg5,arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8078,6 +8114,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_line__SWIG_0(PyObject *s
     try {
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->min_line();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8129,6 +8168,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_line__SWIG_1(PyObject *s
     try {
       (arg1)->min_line((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8200,6 +8242,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_line__SWIG_0(PyObject *s
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->max_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8250,6 +8295,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_line__SWIG_1(PyObject *s
     try {
       (arg1)->max_line((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8321,6 +8369,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_sample__SWIG_0(PyObject 
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->min_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8371,6 +8422,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_min_sample__SWIG_1(PyObject 
     try {
       (arg1)->min_sample((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8442,6 +8496,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_sample__SWIG_0(PyObject 
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->max_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8492,6 +8549,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_max_sample__SWIG_1(PyObject 
     try {
       (arg1)->max_sample((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8563,6 +8623,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_line_fit__SWIG_0(PyOb
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->number_line_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8613,6 +8676,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_line_fit__SWIG_1(PyOb
     try {
       (arg1)->number_line_fit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8684,6 +8750,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_sample_fit__SWIG_0(Py
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->number_sample_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8734,6 +8803,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_sample_fit__SWIG_1(Py
     try {
       (arg1)->number_sample_fit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8805,6 +8877,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_height_fit__SWIG_0(Py
       result = (int)((GeoCal::RsmLowOrderPolynomial const *)arg1)->number_height_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8855,6 +8930,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_number_height_fit__SWIG_1(Py
     try {
       (arg1)->number_height_fit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8926,6 +9004,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit__SWI
       result = (bool)((GeoCal::RsmLowOrderPolynomial const *)arg1)->ignore_igc_error_in_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8976,6 +9057,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_ignore_igc_error_in_fit__SWI
     try {
       (arg1)->ignore_igc_error_in_fit((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9049,6 +9133,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_parameter_line(PyObject *sel
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->parameter_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9114,6 +9201,9 @@ SWIGINTERN PyObject *_wrap_RsmLowOrderPolynomial__v_parameter_sample(PyObject *s
       result = ((GeoCal::RsmLowOrderPolynomial const *)arg1)->parameter_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9177,6 +9267,9 @@ SWIGINTERN PyObject *_wrap_delete_RsmLowOrderPolynomial(PyObject *self, PyObject
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

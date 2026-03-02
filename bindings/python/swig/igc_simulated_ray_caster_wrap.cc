@@ -4651,14 +4651,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4679,7 +4679,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4694,7 +4694,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6537,6 +6537,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_0(PyObject *self, Py_
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6656,6 +6659,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_1(PyObject *self, Py_
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6767,6 +6773,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_2(PyObject *self, Py_
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6870,6 +6879,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_3(PyObject *self, Py_
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6965,6 +6977,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_4(PyObject *self, Py_
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7052,6 +7067,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_5(PyObject *self, Py_
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7130,6 +7148,9 @@ SWIGINTERN PyObject *_wrap_new_IgcSimulatedRayCaster__SWIG_6(PyObject *self, Py_
     try {
       result = (GeoCal::IgcSimulatedRayCaster *)new GeoCal::IgcSimulatedRayCaster((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7236,6 +7257,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_number_line(PyObject *self, 
       result = (int)(arg1)->number_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7279,6 +7303,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_number_sample(PyObject *self
     try {
       result = (int)(arg1)->number_sample();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7324,6 +7351,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_number_tile_line(PyObject *s
       result = (int)(arg1)->number_tile_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7367,6 +7397,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_number_tile_sample(PyObject 
     try {
       result = (int)(arg1)->number_tile_sample();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7412,6 +7445,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_has_map_info(PyObject *self,
       result = (bool)(arg1)->has_map_info();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7455,6 +7491,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_map_info(PyObject *self, PyO
     try {
       result = (arg1)->map_info();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7504,6 +7543,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_grid_center_line_resolution(
       result = (double)(arg1)->grid_center_line_resolution();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7547,6 +7589,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_grid_center_sample_resolutio
     try {
       result = (double)(arg1)->grid_center_sample_resolution();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7592,6 +7637,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_has_rpc(PyObject *self, PyOb
       result = (bool)(arg1)->has_rpc();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7635,6 +7683,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_rpc(PyObject *self, PyObject
     try {
       result = (arg1)->rpc_ptr();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7680,6 +7731,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_has_rsm(PyObject *self, PyOb
       result = (bool)(arg1)->has_rsm();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7723,6 +7777,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_rsm(PyObject *self, PyObject
     try {
       result = (arg1)->rsm();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7770,6 +7827,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_igc(PyObject *self, PyObject
       result = ((GeoCal::IgcSimulatedRayCaster const *)arg1)->igc();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7816,6 +7876,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_number_integration_step(PyOb
       result = (int)((GeoCal::IgcSimulatedRayCaster const *)arg1)->number_integration_step();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7859,6 +7922,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_fill_value(PyObject *self, P
     try {
       result = (double)((GeoCal::IgcSimulatedRayCaster const *)arg1)->fill_value();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7904,6 +7970,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_max_height(PyObject *self, P
       result = (double)((GeoCal::IgcSimulatedRayCaster const *)arg1)->max_height();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7947,6 +8016,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_raycast_resolution(PyObject 
     try {
       result = (double)((GeoCal::IgcSimulatedRayCaster const *)arg1)->raycast_resolution();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7992,6 +8064,9 @@ SWIGINTERN PyObject *_wrap_IgcSimulatedRayCaster__v_map_projected_image(PyObject
       result = ((GeoCal::IgcSimulatedRayCaster const *)arg1)->map_projected_image();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8036,6 +8111,9 @@ SWIGINTERN PyObject *_wrap_delete_IgcSimulatedRayCaster(PyObject *self, PyObject
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

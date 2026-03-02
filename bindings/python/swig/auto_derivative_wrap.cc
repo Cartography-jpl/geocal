@@ -4526,14 +4526,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4554,7 +4554,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4569,7 +4569,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7279,6 +7279,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_0(PyObject *self, Py_s
       result = (GeoCal::AutoDerivative< double > *)new GeoCal::AutoDerivative< double >();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7332,6 +7335,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_1(PyObject *self, Py_s
       result = (GeoCal::AutoDerivative< double > *)new GeoCal::AutoDerivative< double >((double const &)*arg1,(blitz::Array< double,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7383,6 +7389,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_2(PyObject *self, Py_s
       result = (GeoCal::AutoDerivative< double > *)new GeoCal::AutoDerivative< double >((double const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7417,6 +7426,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_3(PyObject *self, Py_s
     try {
       result = (GeoCal::AutoDerivative< double > *)new GeoCal::AutoDerivative< double >((double const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7472,6 +7484,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_4(PyObject *self, Py_s
       result = (GeoCal::AutoDerivative< double > *)new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7525,6 +7540,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeDouble__SWIG_5(PyObject *self, Py_s
     try {
       result = (GeoCal::AutoDerivative< double > *)new GeoCal::AutoDerivative< double >((GeoCal::AutoDerivativeRef< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7637,6 +7655,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__v_number_variable(PyObject *sel
       result = (int)((GeoCal::AutoDerivative< double > const *)arg1)->number_variable();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7680,6 +7701,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__v_is_constant(PyObject *self, P
     try {
       result = (bool)((GeoCal::AutoDerivative< double > const *)arg1)->is_constant();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7752,6 +7776,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___lt____SWIG_0(PyObject *self, P
       result = (bool)((GeoCal::AutoDerivative< double > const *)arg1)->operator <((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7808,6 +7835,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___lt____SWIG_1(PyObject *self, P
     try {
       result = (bool)((GeoCal::AutoDerivative< double > const *)arg1)->operator <((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7916,6 +7946,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___eq____SWIG_0(PyObject *self, P
       result = (bool)((GeoCal::AutoDerivative< double > const *)arg1)->operator ==((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7972,6 +8005,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___eq____SWIG_1(PyObject *self, P
     try {
       result = (bool)((GeoCal::AutoDerivative< double > const *)arg1)->operator ==((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8080,6 +8116,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_0(PyObject *self,
       result = (arg1)->operator +=((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8135,6 +8174,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___iadd____SWIG_1(PyObject *self,
     try {
       result = (arg1)->operator +=((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8245,6 +8287,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_0(PyObject *self,
       result = (arg1)->operator -=((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8300,6 +8345,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___isub____SWIG_1(PyObject *self,
     try {
       result = (arg1)->operator -=((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8410,6 +8458,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_0(PyObject *self,
       result = (arg1)->operator *=((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8465,6 +8516,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___imul____SWIG_1(PyObject *self,
     try {
       result = (arg1)->operator *=((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8575,6 +8629,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_0(PyObject *s
       result = (arg1)->operator /=((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8630,6 +8687,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___itruediv____SWIG_1(PyObject *s
     try {
       result = (arg1)->operator /=((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8713,6 +8773,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___str__(PyObject *self, PyObject
       result = ((GeoCal::AutoDerivative< double > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8756,6 +8819,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__value(PyObject *self, PyObject 
     try {
       result = (double)GeoCal_AutoDerivative_Sl_double_Sg___value((GeoCal::AutoDerivative< double > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8807,6 +8873,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__value_set(PyObject *self, PyObj
       GeoCal_AutoDerivative_Sl_double_Sg___value_set(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8850,6 +8919,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient(PyObject *self, PyObje
     try {
       result = GeoCal_AutoDerivative_Sl_double_Sg___gradient((GeoCal::AutoDerivative< double > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8925,6 +8997,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble__gradient_set(PyObject *self, Py
       GeoCal_AutoDerivative_Sl_double_Sg___gradient_set(arg1,*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8996,6 +9071,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_0(PyObject *self, 
       result = GeoCal_AutoDerivative_Sl_double_Sg____add____SWIG_0(arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9056,6 +9134,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___add____SWIG_1(PyObject *self, 
     try {
       result = GeoCal_AutoDerivative_Sl_double_Sg____add____SWIG_1(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9150,6 +9231,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___radd__(PyObject *self, PyObjec
       result = GeoCal_AutoDerivative_Sl_double_Sg____radd__(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9230,6 +9314,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_0(PyObject *self, 
       result = GeoCal_AutoDerivative_Sl_double_Sg____sub____SWIG_0(arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9290,6 +9377,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___sub____SWIG_1(PyObject *self, 
     try {
       result = GeoCal_AutoDerivative_Sl_double_Sg____sub____SWIG_1(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9384,6 +9474,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rsub__(PyObject *self, PyObjec
       result = GeoCal_AutoDerivative_Sl_double_Sg____rsub__(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9464,6 +9557,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_0(PyObject *self, 
       result = GeoCal_AutoDerivative_Sl_double_Sg____mul____SWIG_0(arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9524,6 +9620,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___mul____SWIG_1(PyObject *self, 
     try {
       result = GeoCal_AutoDerivative_Sl_double_Sg____mul____SWIG_1(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9618,6 +9717,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rmul__(PyObject *self, PyObjec
       result = GeoCal_AutoDerivative_Sl_double_Sg____rmul__(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9698,6 +9800,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_0(PyObject *self, 
       result = GeoCal_AutoDerivative_Sl_double_Sg____div____SWIG_0(arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9758,6 +9863,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___div____SWIG_1(PyObject *self, 
     try {
       result = GeoCal_AutoDerivative_Sl_double_Sg____div____SWIG_1(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9852,6 +9960,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rdiv__(PyObject *self, PyObjec
       result = GeoCal_AutoDerivative_Sl_double_Sg____rdiv__(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9914,6 +10025,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___pow__(PyObject *self, PyObject
       result = GeoCal_AutoDerivative_Sl_double_Sg____pow__(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9971,6 +10085,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeDouble___rpow__(PyObject *self, PyObjec
       result = GeoCal_AutoDerivative_Sl_double_Sg____rpow__(arg1,(double const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10017,6 +10134,9 @@ SWIGINTERN PyObject *_wrap_delete_AutoDerivativeDouble(PyObject *self, PyObject 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10074,6 +10194,9 @@ SWIGINTERN PyObject *_wrap_new_AutoDerivativeRefDouble(PyObject *self, PyObject 
       result = (GeoCal::AutoDerivativeRef< double > *)new GeoCal::AutoDerivativeRef< double >(*arg1,*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10121,6 +10244,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_value(PyObject *self, PyOb
       result = (double)((GeoCal::AutoDerivativeRef< double > const *)arg1)->value();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10164,6 +10290,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble__v_gradient(PyObject *self, P
     try {
       result = ((GeoCal::AutoDerivativeRef< double > const *)arg1)->gradient();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10230,6 +10359,9 @@ SWIGINTERN PyObject *_wrap_AutoDerivativeRefDouble___str__(PyObject *self, PyObj
       result = ((GeoCal::AutoDerivativeRef< double > const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10273,6 +10405,9 @@ SWIGINTERN PyObject *_wrap_delete_AutoDerivativeRefDouble(PyObject *self, PyObje
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10313,6 +10448,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_0(PyObject *sel
     try {
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10368,6 +10506,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_1(PyObject *sel
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1,arg2,SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10405,6 +10546,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_2(PyObject *sel
     try {
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10468,6 +10612,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_3(PyObject *sel
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1,arg2,arg3,SWIG_STD_MOVE(arg4));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10513,6 +10660,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_4(PyObject *sel
     try {
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10584,6 +10734,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_5(PyObject *sel
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1,arg2,arg3,arg4,SWIG_STD_MOVE(arg5));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10637,6 +10790,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayAutoDerivativeDouble_1__SWIG_6(PyObject *sel
     try {
       result = (blitz::Array< GeoCal::AutoDerivative< double >,1 > *)new blitz::Array< GeoCal::AutoDerivative< double >,1 >(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10740,6 +10896,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_data(PyObject *self, PyOb
       result = (GeoCal::AutoDerivative< double > *)(arg1)->data();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10774,6 +10933,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_size(PyObject *self, PyOb
     try {
       result = (int)((blitz::Array< GeoCal::AutoDerivative< double >,1 > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10812,6 +10974,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_0(PyObject *se
     try {
       result = blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_0(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10862,6 +11027,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_1(PyObject *se
     try {
       result = blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_1(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10920,6 +11088,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_2(PyObject *se
     try {
       result = blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_2(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10986,6 +11157,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_read__SWIG_3(PyObject *se
     try {
       result = blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__read__SWIG_3(arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11084,6 +11258,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_0(PyObject *s
       blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_0(arg1,arg2,SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11144,6 +11321,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_1(PyObject *s
     try {
       blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_1(arg1,arg2,arg3,SWIG_STD_MOVE(arg4));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11213,6 +11393,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_2(PyObject *s
     try {
       blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_2(arg1,arg2,arg3,arg4,SWIG_STD_MOVE(arg5));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11291,6 +11474,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_write__SWIG_3(PyObject *s
       blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__write__SWIG_3(arg1,arg2,arg3,arg4,arg5,SWIG_STD_MOVE(arg6));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11363,6 +11549,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_datav(PyObject *self, PyO
       result = (void *)blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__datav(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11394,6 +11583,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_shape0(PyObject *self, Py
     try {
       result = (int)blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape0(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11427,6 +11619,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_shape1(PyObject *self, Py
       result = (int)blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape1(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11458,6 +11653,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_shape2(PyObject *self, Py
     try {
       result = (int)blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape2(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11491,6 +11689,9 @@ SWIGINTERN PyObject *_wrap_ArrayAutoDerivativeDouble_1_shape3(PyObject *self, Py
       result = (int)blitz_Array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_1_Sg__shape3(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11521,6 +11722,9 @@ SWIGINTERN PyObject *_wrap_delete_ArrayAutoDerivativeDouble_1(PyObject *self, Py
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11565,6 +11769,9 @@ SWIGINTERN PyObject *_wrap_BoostArrayAutoDerivativeDouble_3__size(PyObject *self
       result = (int)(arg1)->size();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11603,6 +11810,9 @@ SWIGINTERN PyObject *_wrap_BoostArrayAutoDerivativeDouble_3___getitem__(PyObject
     try {
       result = boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg____getitem__(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11675,6 +11885,9 @@ SWIGINTERN PyObject *_wrap_BoostArrayAutoDerivativeDouble_3___setitem__(PyObject
       boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg____setitem__(arg1,arg2,(GeoCal::AutoDerivative< double > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11707,6 +11920,9 @@ SWIGINTERN PyObject *_wrap_BoostArrayAutoDerivativeDouble_3___str__(PyObject *se
       result = boost_array_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sc_3_Sg__print_to_string((boost::array< GeoCal::AutoDerivative< double >,3 > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11728,6 +11944,9 @@ SWIGINTERN PyObject *_wrap_new_BoostArrayAutoDerivativeDouble_3(PyObject *self, 
     try {
       result = (boost::array< GeoCal::AutoDerivative< double >,3 > *)new boost::array< GeoCal::AutoDerivative< double >,3 >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11759,6 +11978,9 @@ SWIGINTERN PyObject *_wrap_delete_BoostArrayAutoDerivativeDouble_3(PyObject *sel
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11824,6 +12046,9 @@ SWIGINTERN PyObject *_wrap_sqrt(PyObject *self, PyObject *args) {
       result = std::sqrt((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11880,6 +12105,9 @@ SWIGINTERN PyObject *_wrap_log(PyObject *self, PyObject *args) {
     try {
       result = std::log((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11938,6 +12166,9 @@ SWIGINTERN PyObject *_wrap_log10(PyObject *self, PyObject *args) {
       result = std::log10((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11994,6 +12225,9 @@ SWIGINTERN PyObject *_wrap_exp(PyObject *self, PyObject *args) {
     try {
       result = std::exp((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12052,6 +12286,9 @@ SWIGINTERN PyObject *_wrap_sin(PyObject *self, PyObject *args) {
       result = std::sin((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12108,6 +12345,9 @@ SWIGINTERN PyObject *_wrap_asin(PyObject *self, PyObject *args) {
     try {
       result = std::asin((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12166,6 +12406,9 @@ SWIGINTERN PyObject *_wrap_cos(PyObject *self, PyObject *args) {
       result = std::cos((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12222,6 +12465,9 @@ SWIGINTERN PyObject *_wrap_acos(PyObject *self, PyObject *args) {
     try {
       result = std::acos((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12280,6 +12526,9 @@ SWIGINTERN PyObject *_wrap_tan(PyObject *self, PyObject *args) {
       result = std::tan((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12337,6 +12586,9 @@ SWIGINTERN PyObject *_wrap_atan(PyObject *self, PyObject *args) {
       result = std::atan((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12375,6 +12627,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_iterator(PyObject *self, PyObj
       result = (swig::SwigPyIterator *)std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12406,6 +12661,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___nonzero__(PyObject *self, Py
     try {
       result = (bool)std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____nonzero__((std::vector< GeoCal::AutoDerivative< double > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12439,6 +12697,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___bool__(PyObject *self, PyObj
       result = (bool)std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____bool__((std::vector< GeoCal::AutoDerivative< double > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12470,6 +12731,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___len__(PyObject *self, PyObje
     try {
       result = std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____len__((std::vector< GeoCal::AutoDerivative< double > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12524,6 +12788,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___getslice__(PyObject *self, P
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12574,6 +12841,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___setslice____SWIG_0(PyObject 
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12638,6 +12908,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___setslice____SWIG_1(PyObject 
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12721,6 +12994,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___delslice__(PyObject *self, P
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12764,6 +13040,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___delitem____SWIG_0(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12806,6 +13085,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___getitem____SWIG_0(PyObject *
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12862,6 +13144,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___setitem____SWIG_0(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12906,6 +13191,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___setitem____SWIG_1(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12947,6 +13235,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___delitem____SWIG_1(PyObject *
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13024,6 +13315,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___getitem____SWIG_1(PyObject *
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13134,6 +13428,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative___setitem____SWIG_2(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13216,6 +13513,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_pop(PyObject *self, PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13279,6 +13579,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_append(PyObject *self, PyObjec
       std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__append(arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13300,6 +13603,9 @@ SWIGINTERN PyObject *_wrap_new_vector_auto_derivative__SWIG_0(PyObject *self, Py
     try {
       result = (std::vector< GeoCal::AutoDerivative< double > > *)new std::vector< GeoCal::AutoDerivative< double > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13336,6 +13642,9 @@ SWIGINTERN PyObject *_wrap_new_vector_auto_derivative__SWIG_1(PyObject *self, Py
       result = (std::vector< GeoCal::AutoDerivative< double > > *)new std::vector< GeoCal::AutoDerivative< double > >((std::vector< GeoCal::AutoDerivative< double > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13370,6 +13679,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_empty(PyObject *self, PyObject
       result = (bool)((std::vector< GeoCal::AutoDerivative< double > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13401,6 +13713,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_size(PyObject *self, PyObject 
     try {
       result = ((std::vector< GeoCal::AutoDerivative< double > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13443,6 +13758,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_swap(PyObject *self, PyObject 
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13474,6 +13792,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_begin(PyObject *self, PyObject
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13508,6 +13829,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_end(PyObject *self, PyObject *
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13540,6 +13864,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_rbegin(PyObject *self, PyObjec
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13574,6 +13901,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_rend(PyObject *self, PyObject 
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13605,6 +13935,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_clear(PyObject *self, PyObject
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13638,6 +13971,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_get_allocator(PyObject *self, 
       result = ((std::vector< GeoCal::AutoDerivative< double > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13667,6 +14003,9 @@ SWIGINTERN PyObject *_wrap_new_vector_auto_derivative__SWIG_2(PyObject *self, Py
     try {
       result = (std::vector< GeoCal::AutoDerivative< double > > *)new std::vector< GeoCal::AutoDerivative< double > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13698,6 +14037,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_pop_back(PyObject *self, PyObj
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13735,6 +14077,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_resize__SWIG_0(PyObject *self,
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13779,6 +14124,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_erase__SWIG_0(PyObject *self, 
     try {
       result = std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13838,6 +14186,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_erase__SWIG_1(PyObject *self, 
     try {
       result = std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13926,6 +14277,9 @@ SWIGINTERN PyObject *_wrap_new_vector_auto_derivative__SWIG_3(PyObject *self, Py
     try {
       result = (std::vector< GeoCal::AutoDerivative< double > > *)new std::vector< GeoCal::AutoDerivative< double > >(SWIG_STD_MOVE(arg1),(std::vector< GeoCal::AutoDerivative< double > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14034,6 +14388,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_push_back(PyObject *self, PyOb
       (arg1)->push_back((std::vector< GeoCal::AutoDerivative< double > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14065,6 +14422,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_front(PyObject *self, PyObject
     try {
       result = (std::vector< GeoCal::AutoDerivative< double > >::value_type *) &((std::vector< GeoCal::AutoDerivative< double > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14101,6 +14461,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_back(PyObject *self, PyObject 
     try {
       result = (std::vector< GeoCal::AutoDerivative< double > >::value_type *) &((std::vector< GeoCal::AutoDerivative< double > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14173,6 +14536,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_assign(PyObject *self, PyObjec
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< GeoCal::AutoDerivative< double > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14238,6 +14604,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_resize__SWIG_1(PyObject *self,
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< GeoCal::AutoDerivative< double > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14340,6 +14709,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_insert__SWIG_0(PyObject *self,
       result = std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(GeoCal::AutoDerivative< double > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14421,6 +14793,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_insert__SWIG_1(PyObject *self,
       std_vector_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(GeoCal::AutoDerivative< double > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14487,6 +14862,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_reserve(PyObject *self, PyObje
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14519,6 +14897,9 @@ SWIGINTERN PyObject *_wrap_vector_auto_derivative_capacity(PyObject *self, PyObj
       result = ((std::vector< GeoCal::AutoDerivative< double > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14549,6 +14930,9 @@ SWIGINTERN PyObject *_wrap_delete_vector_auto_derivative(PyObject *self, PyObjec
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

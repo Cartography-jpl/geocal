@@ -4614,14 +4614,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4642,7 +4642,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4657,7 +4657,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6947,6 +6947,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_0(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7047,6 +7050,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_1(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7139,6 +7145,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_2(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7223,6 +7232,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_3(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7299,6 +7311,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_4(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7367,6 +7382,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_5(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7427,6 +7445,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_6(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7479,6 +7500,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_7(PyObject *self, Py_
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1),arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7522,6 +7546,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitOffsetCorrection__SWIG_8(PyObject *self, Py_
     try {
       result = (GeoCal::OrbitOffsetCorrection *)new GeoCal::OrbitOffsetCorrection(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7668,6 +7695,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_att_parm_to_match(PyObject *sel
       result = ((GeoCal::OrbitOffsetCorrection const *)arg1)->att_parm_to_match((GeoCal::Time const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7731,6 +7761,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_outside_is_error__SWIG_0(PyO
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->outside_is_error();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7781,6 +7814,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_outside_is_error__SWIG_1(PyO
     try {
       (arg1)->outside_is_error((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7852,6 +7888,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_x__SWIG_0(PyObj
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_x();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7902,6 +7941,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_x__SWIG_1(PyObj
     try {
       (arg1)->fit_position_x((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7973,6 +8015,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_y__SWIG_0(PyObj
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_y();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8023,6 +8068,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_y__SWIG_1(PyObj
     try {
       (arg1)->fit_position_y((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8094,6 +8142,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_z__SWIG_0(PyObj
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_z();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8144,6 +8195,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_z__SWIG_1(PyObj
     try {
       (arg1)->fit_position_z((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8215,6 +8269,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_e__SWIG_0(PyObj
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_e();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8265,6 +8322,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_e__SWIG_1(PyObj
     try {
       (arg1)->fit_position_e((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8336,6 +8396,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_n__SWIG_0(PyObj
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_n();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8386,6 +8449,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_n__SWIG_1(PyObj
     try {
       (arg1)->fit_position_n((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8457,6 +8523,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_u__SWIG_0(PyObj
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_position_u();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8507,6 +8576,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_position_u__SWIG_1(PyObj
     try {
       (arg1)->fit_position_u((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8578,6 +8650,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_use_local_north_coordinate__
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->use_local_north_coordinate();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8628,6 +8703,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_use_local_north_coordinate__
     try {
       (arg1)->use_local_north_coordinate((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8699,6 +8777,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_yaw__SWIG_0(PyObject *se
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_yaw();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8749,6 +8830,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_yaw__SWIG_1(PyObject *se
     try {
       (arg1)->fit_yaw((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8820,6 +8904,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_pitch__SWIG_0(PyObject *
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_pitch();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8870,6 +8957,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_pitch__SWIG_1(PyObject *
     try {
       (arg1)->fit_pitch((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8941,6 +9031,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_roll__SWIG_0(PyObject *s
       result = (bool)((GeoCal::OrbitOffsetCorrection const *)arg1)->fit_roll();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8991,6 +9084,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection__v_fit_roll__SWIG_1(PyObject *s
     try {
       (arg1)->fit_roll((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9081,6 +9177,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_update_quaterion(PyObject *self
       (arg1)->update_quaterion(arg2,(boost::math::quaternion< double > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9139,6 +9238,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_attitude_time_point(PyOb
       (arg1)->insert_attitude_time_point(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9196,6 +9298,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_insert_position_time_point(PyOb
     try {
       (arg1)->insert_position_time_point(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9257,6 +9362,9 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
     try {
       (arg1)->orbit_correction_parameter(*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9358,6 +9466,9 @@ SWIGINTERN PyObject *_wrap_delete_OrbitOffsetCorrection(PyObject *self, PyObject
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

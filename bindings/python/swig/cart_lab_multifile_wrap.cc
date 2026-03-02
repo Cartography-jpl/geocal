@@ -4654,14 +4654,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4682,7 +4682,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4697,7 +4697,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7189,6 +7189,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_0(PyObject 
       ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4,(boost::shared_ptr< GeoCal::MapInfo > const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7340,6 +7343,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_1(PyObject 
       ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4,(boost::shared_ptr< GeoCal::MapInfo > const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7483,6 +7489,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_2(PyObject 
       ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4,(boost::shared_ptr< GeoCal::MapInfo > const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7613,6 +7622,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_3(PyObject 
       ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4,(boost::shared_ptr< GeoCal::MapInfo > const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7728,6 +7740,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_4(PyObject 
       ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4,(boost::shared_ptr< GeoCal::MapInfo > const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7813,6 +7828,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_create_subset_file__SWIG_5(PyObject 
     try {
       ((GeoCal::CartLabMultifile const *)arg1)->create_subset_file((std::string const &)*arg2,(std::string const &)*arg3,(std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7930,6 +7948,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile_set_tile_size(PyObject *self, PyObje
       (arg1)->set_tile_size(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7974,6 +7995,9 @@ SWIGINTERN PyObject *_wrap_CartLabMultifile__v_directory_base(PyObject *self, Py
       result = ((GeoCal::CartLabMultifile const *)arg1)->directory_base();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8016,6 +8040,9 @@ SWIGINTERN PyObject *_wrap_delete_CartLabMultifile(PyObject *self, PyObject *arg
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8067,6 +8094,9 @@ SWIGINTERN PyObject *_wrap_delete_GdalCartLabMultifile(PyObject *self, PyObject 
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8116,6 +8146,9 @@ SWIGINTERN PyObject *_wrap_delete_VicarCartLabMultifile(PyObject *self, PyObject
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8229,6 +8262,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_0(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8329,6 +8365,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_1(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8421,6 +8460,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_2(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8505,6 +8547,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_3(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8581,6 +8626,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_4(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8649,6 +8697,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_5(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8709,6 +8760,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_6(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8761,6 +8815,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_7(PyObject *self
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1),arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8804,6 +8861,9 @@ SWIGINTERN PyObject *_wrap_new_VicarCartLabMultifileSetup__SWIG_8(PyObject *self
     try {
       result = (GeoCal::VicarCartLabMultifileSetup *)new GeoCal::VicarCartLabMultifileSetup(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8965,6 +9025,9 @@ SWIGINTERN PyObject *_wrap_VicarCartLabMultifileSetup_file_add(PyObject *self, P
       (arg1)->file_add(arg2,arg3,arg4,arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9009,6 +9072,9 @@ SWIGINTERN PyObject *_wrap_delete_VicarCartLabMultifileSetup(PyObject *self, PyO
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

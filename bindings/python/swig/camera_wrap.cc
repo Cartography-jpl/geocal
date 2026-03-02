@@ -4575,14 +4575,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4603,7 +4603,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4618,7 +4618,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6717,7 +6717,7 @@ void SwigDirector_Camera::add_observer(GeoCal::Observer< GeoCal::Camera > &Obs) 
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6748,7 +6748,7 @@ void SwigDirector_Camera::remove_observer(GeoCal::Observer< GeoCal::Camera > &Ob
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6776,7 +6776,7 @@ blitz::Array< double,1 > SwigDirector_Camera::parameter() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6828,7 +6828,7 @@ void SwigDirector_Camera::parameter(blitz::Array< double,1 > const &V) {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6857,7 +6857,7 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Camera::parameter_with_derivative() con
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6900,7 +6900,7 @@ void SwigDirector_Camera::parameter_with_derivative(GeoCal::ArrayAd< double,1 > 
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6926,7 +6926,7 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_Camera::pa
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6962,7 +6962,7 @@ blitz::Array< double,1 > SwigDirector_Camera::parameter_subset() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7014,7 +7014,7 @@ void SwigDirector_Camera::parameter_subset(blitz::Array< double,1 > const &V) {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7043,7 +7043,7 @@ GeoCal::ArrayAd< double,1 > SwigDirector_Camera::parameter_with_derivative_subse
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7086,7 +7086,7 @@ void SwigDirector_Camera::parameter_with_derivative_subset(GeoCal::ArrayAd< doub
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7112,7 +7112,7 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_Camera::pa
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7148,7 +7148,7 @@ blitz::Array< bool,1 > SwigDirector_Camera::parameter_mask() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7185,7 +7185,7 @@ std::string SwigDirector_Camera::desc() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7221,7 +7221,7 @@ double SwigDirector_Camera::integration_time(int Band) const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7255,7 +7255,7 @@ int SwigDirector_Camera::number_band() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7290,7 +7290,7 @@ int SwigDirector_Camera::number_line(int Band) const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7325,7 +7325,7 @@ int SwigDirector_Camera::number_sample(int Band) const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7368,7 +7368,7 @@ GeoCal::FrameCoordinate SwigDirector_Camera::frame_coordinate(GeoCal::ScLookVect
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7416,7 +7416,7 @@ GeoCal::FrameCoordinateWithDerivative SwigDirector_Camera::frame_coordinate_with
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7462,7 +7462,7 @@ double SwigDirector_Camera::frame_line_coordinate(GeoCal::ScLookVector const &Sl
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7505,7 +7505,7 @@ GeoCal::ScLookVector SwigDirector_Camera::sc_look_vector(GeoCal::FrameCoordinate
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7553,7 +7553,7 @@ GeoCal::ScLookVectorWithDerivative SwigDirector_Camera::sc_look_vector_with_deri
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7591,7 +7591,7 @@ std::string SwigDirector_Camera::print_to_string() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8442,6 +8442,9 @@ SWIGINTERN PyObject *_wrap_delete_ObservableCamera(PyObject *self, PyObject *arg
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8510,6 +8513,9 @@ SWIGINTERN PyObject *_wrap_ObservableCamera_add_observer_and_keep_reference(PyOb
     try {
       (arg1)->add_observer_and_keep_reference(*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8582,6 +8588,9 @@ SWIGINTERN PyObject *_wrap_ObservableCamera_add_observer(PyObject *self, PyObjec
       (arg1)->add_observer(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8653,6 +8662,9 @@ SWIGINTERN PyObject *_wrap_ObservableCamera_remove_observer(PyObject *self, PyOb
       (arg1)->remove_observer(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8681,6 +8693,9 @@ SWIGINTERN PyObject *_wrap_new_ObserverCamera(PyObject *self, PyObject *args) {
     try {
       result = (GeoCal::Observer< GeoCal::Camera > *)new GeoCal::Observer< GeoCal::Camera >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8727,6 +8742,9 @@ SWIGINTERN PyObject *_wrap_delete_ObserverCamera(PyObject *self, PyObject *args)
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8799,6 +8817,9 @@ SWIGINTERN PyObject *_wrap_ObserverCamera_notify_update(PyObject *self, PyObject
       (arg1)->notify_update((GeoCal::Camera const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8869,6 +8890,9 @@ SWIGINTERN PyObject *_wrap_ObserverCamera_notify_add(PyObject *self, PyObject *a
     try {
       (arg1)->notify_add(*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8941,6 +8965,9 @@ SWIGINTERN PyObject *_wrap_ObserverCamera_notify_remove(PyObject *self, PyObject
       (arg1)->notify_remove(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8984,6 +9011,9 @@ SWIGINTERN PyObject *_wrap_new_Camera(PyObject *self, PyObject *args) {
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9040,6 +9070,9 @@ SWIGINTERN PyObject *_wrap_Camera_desc(PyObject *self, PyObject *args) {
           result = ((GeoCal::Camera const *)arg1)->desc();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9124,6 +9157,9 @@ SWIGINTERN PyObject *_wrap_Camera_add_observer(PyObject *self, PyObject *args) {
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9207,6 +9243,9 @@ SWIGINTERN PyObject *_wrap_Camera_remove_observer(PyObject *self, PyObject *args
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9270,6 +9309,9 @@ SWIGINTERN PyObject *_wrap_Camera_integration_time(PyObject *self, PyObject *arg
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9325,6 +9367,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_number_band(PyObject *self, PyObject *args)
           result = (int)((GeoCal::Camera const *)arg1)->number_band();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9389,6 +9434,9 @@ SWIGINTERN PyObject *_wrap_Camera_number_line(PyObject *self, PyObject *args) {
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9451,6 +9499,9 @@ SWIGINTERN PyObject *_wrap_Camera_number_sample(PyObject *self, PyObject *args) 
           result = (int)((GeoCal::Camera const *)arg1)->number_sample(arg2);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9543,6 +9594,9 @@ SWIGINTERN PyObject *_wrap_Camera_frame_coordinate(PyObject *self, PyObject *arg
           result = ((GeoCal::Camera const *)arg1)->frame_coordinate((GeoCal::ScLookVector const &)*arg2,arg3);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9640,6 +9694,9 @@ SWIGINTERN PyObject *_wrap_Camera_frame_coordinate_with_derivative(PyObject *sel
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9736,6 +9793,9 @@ SWIGINTERN PyObject *_wrap_Camera_frame_line_coordinate(PyObject *self, PyObject
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9827,6 +9887,9 @@ SWIGINTERN PyObject *_wrap_Camera_sc_look_vector(PyObject *self, PyObject *args)
           result = ((GeoCal::Camera const *)arg1)->sc_look_vector((GeoCal::FrameCoordinate const &)*arg2,arg3);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9924,6 +9987,9 @@ SWIGINTERN PyObject *_wrap_Camera_sc_look_vector_with_derivative(PyObject *self,
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -9984,6 +10050,9 @@ SWIGINTERN PyObject *_wrap_Camera___str__(PyObject *self, PyObject *args) {
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10037,6 +10106,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter__SWIG_0(PyObject *self, Py_ssize_
           result = ((GeoCal::Camera const *)arg1)->parameter();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10132,6 +10204,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter__SWIG_1(PyObject *self, Py_ssize_
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10213,6 +10288,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_with_derivative__SWIG_0(PyObject 
           result = ((GeoCal::Camera const *)arg1)->parameter_with_derivative();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10300,6 +10378,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_with_derivative__SWIG_1(PyObject 
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10384,6 +10465,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_name(PyObject *self, PyObject *ar
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10437,6 +10521,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_subset__SWIG_0(PyObject *self, Py
           result = ((GeoCal::Camera const *)arg1)->parameter_subset();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10532,6 +10619,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_subset__SWIG_1(PyObject *self, Py
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10613,6 +10703,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_with_derivative_subset__SWIG_0(Py
           result = ((GeoCal::Camera const *)arg1)->parameter_with_derivative_subset();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10700,6 +10793,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_with_derivative_subset__SWIG_1(Py
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10784,6 +10880,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_name_subset(PyObject *self, PyObj
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10839,6 +10938,9 @@ SWIGINTERN PyObject *_wrap_Camera__v_parameter_mask(PyObject *self, PyObject *ar
           result = ((GeoCal::Camera const *)arg1)->parameter_mask();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10937,6 +11039,9 @@ SWIGINTERN PyObject *_wrap_Camera_notify_update_do(PyObject *self, PyObject *arg
       (darg)->notify_update_do((GeoCal::Camera const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10979,6 +11084,9 @@ SWIGINTERN PyObject *_wrap_delete_Camera(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11112,6 +11220,9 @@ SWIGINTERN PyObject *_wrap_new_SubCamera(PyObject *self, PyObject *args) {
       result = (GeoCal::SubCamera *)new GeoCal::SubCamera((boost::shared_ptr< GeoCal::Camera > const &)*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11159,6 +11270,9 @@ SWIGINTERN PyObject *_wrap_SubCamera__v_full_camera(PyObject *self, PyObject *ar
       result = ((GeoCal::SubCamera const *)arg1)->full_camera();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11205,6 +11319,9 @@ SWIGINTERN PyObject *_wrap_SubCamera__v_start_line(PyObject *self, PyObject *arg
       result = (int)((GeoCal::SubCamera const *)arg1)->start_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11249,6 +11366,9 @@ SWIGINTERN PyObject *_wrap_SubCamera__v_start_sample(PyObject *self, PyObject *a
       result = (int)((GeoCal::SubCamera const *)arg1)->start_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11292,6 +11412,9 @@ SWIGINTERN PyObject *_wrap_delete_SubCamera(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11325,6 +11448,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_0(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11357,6 +11483,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_1(PyObject *self, Py_ssize_t n
     try {
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11447,6 +11576,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_2(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11528,6 +11660,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_3(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11601,6 +11736,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_4(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11666,6 +11804,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_5(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11723,6 +11864,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_6(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11772,6 +11916,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_7(PyObject *self, Py_ssize_t n
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11812,6 +11959,9 @@ SWIGINTERN PyObject *_wrap_new_SimpleCamera__SWIG_8(PyObject *self, Py_ssize_t n
     try {
       result = (GeoCal::SimpleCamera *)new GeoCal::SimpleCamera(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11930,6 +12080,9 @@ SWIGINTERN PyObject *_wrap_SimpleCamera__v_beta(PyObject *self, PyObject *args) 
       result = (double)((GeoCal::SimpleCamera const *)arg1)->beta();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11973,6 +12126,9 @@ SWIGINTERN PyObject *_wrap_SimpleCamera__v_delta(PyObject *self, PyObject *args)
     try {
       result = (double)((GeoCal::SimpleCamera const *)arg1)->delta();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12018,6 +12174,9 @@ SWIGINTERN PyObject *_wrap_SimpleCamera__v_epsilon(PyObject *self, PyObject *arg
       result = (double)((GeoCal::SimpleCamera const *)arg1)->epsilon();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12061,6 +12220,9 @@ SWIGINTERN PyObject *_wrap_SimpleCamera__v_focal_length(PyObject *self, PyObject
     try {
       result = (double)((GeoCal::SimpleCamera const *)arg1)->focal_length();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12106,6 +12268,9 @@ SWIGINTERN PyObject *_wrap_SimpleCamera__v_line_pitch(PyObject *self, PyObject *
       result = (double)((GeoCal::SimpleCamera const *)arg1)->line_pitch();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12150,6 +12315,9 @@ SWIGINTERN PyObject *_wrap_SimpleCamera__v_sample_pitch(PyObject *self, PyObject
       result = (double)((GeoCal::SimpleCamera const *)arg1)->sample_pitch();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12192,6 +12360,9 @@ SWIGINTERN PyObject *_wrap_delete_SimpleCamera(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12238,6 +12409,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_iterator(PyObject *self, PyObject *args
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12269,6 +12443,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___nonzero__(PyObject *self, PyObject *a
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12302,6 +12479,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___bool__(PyObject *self, PyObject *args
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12333,6 +12513,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___len__(PyObject *self, PyObject *args)
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12387,6 +12570,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___getslice__(PyObject *self, PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12439,6 +12625,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___setslice____SWIG_0(PyObject *self, Py
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12503,6 +12692,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___setslice____SWIG_1(PyObject *self, Py
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12586,6 +12778,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___delslice__(PyObject *self, PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12629,6 +12824,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___delitem____SWIG_0(PyObject *self, Py_
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12671,6 +12869,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___getitem____SWIG_0(PyObject *self, Py_
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12729,6 +12930,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___setitem____SWIG_0(PyObject *self, Py_
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12773,6 +12977,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___setitem____SWIG_1(PyObject *self, Py_
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12814,6 +13021,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___delitem____SWIG_1(PyObject *self, Py_
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12891,6 +13101,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___getitem____SWIG_1(PyObject *self, Py_
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12998,6 +13211,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera___setitem____SWIG_2(PyObject *self, Py_
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13080,6 +13296,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_pop(PyObject *self, PyObject *args) {
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13139,6 +13358,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_append(PyObject *self, PyObject *args) 
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13160,6 +13382,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Camera__SWIG_0(PyObject *self, Py_ssize_t 
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::Camera > > *)new std::vector< boost::shared_ptr< GeoCal::Camera > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13198,6 +13423,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Camera__SWIG_1(PyObject *self, Py_ssize_t 
       result = (std::vector< boost::shared_ptr< GeoCal::Camera > > *)new std::vector< boost::shared_ptr< GeoCal::Camera > >((std::vector< boost::shared_ptr< GeoCal::Camera > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13234,6 +13462,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_empty(PyObject *self, PyObject *args) {
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13265,6 +13496,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_size(PyObject *self, PyObject *args) {
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13307,6 +13541,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_swap(PyObject *self, PyObject *args) {
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13338,6 +13575,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_begin(PyObject *self, PyObject *args) {
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13372,6 +13612,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_end(PyObject *self, PyObject *args) {
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13404,6 +13647,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_rbegin(PyObject *self, PyObject *args) 
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13438,6 +13684,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_rend(PyObject *self, PyObject *args) {
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13469,6 +13718,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_clear(PyObject *self, PyObject *args) {
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13502,6 +13754,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_get_allocator(PyObject *self, PyObject 
       result = ((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13531,6 +13786,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Camera__SWIG_2(PyObject *self, Py_ssize_t 
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::Camera > > *)new std::vector< boost::shared_ptr< GeoCal::Camera > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13564,6 +13822,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_pop_back(PyObject *self, PyObject *args
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13601,6 +13862,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_resize__SWIG_0(PyObject *self, Py_ssize
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13645,6 +13909,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_erase__SWIG_0(PyObject *self, Py_ssize_
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13704,6 +13971,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_erase__SWIG_1(PyObject *self, Py_ssize_
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13790,6 +14060,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_Camera__SWIG_3(PyObject *self, Py_ssize_t 
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::Camera > > *)new std::vector< boost::shared_ptr< GeoCal::Camera > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13898,6 +14171,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_push_back(PyObject *self, PyObject *arg
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13929,6 +14205,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_front(PyObject *self, PyObject *args) {
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13964,6 +14243,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_back(PyObject *self, PyObject *args) {
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14033,6 +14315,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_assign(PyObject *self, PyObject *args) 
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14096,6 +14381,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_resize__SWIG_1(PyObject *self, Py_ssize
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::Camera > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14196,6 +14484,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_insert__SWIG_0(PyObject *self, Py_ssize
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::Camera > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14275,6 +14566,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_insert__SWIG_1(PyObject *self, Py_ssize
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_Camera_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::Camera > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14341,6 +14635,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_reserve(PyObject *self, PyObject *args)
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14373,6 +14670,9 @@ SWIGINTERN PyObject *_wrap_Vector_Camera_capacity(PyObject *self, PyObject *args
       result = ((std::vector< boost::shared_ptr< GeoCal::Camera > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -14403,6 +14703,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_Camera(PyObject *self, PyObject *args) 
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

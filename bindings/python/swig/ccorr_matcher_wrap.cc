@@ -4646,14 +4646,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4674,7 +4674,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4689,7 +4689,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6479,6 +6479,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_0(PyObject *self, Py_ssize_t n
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher(arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6544,6 +6547,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_1(PyObject *self, Py_ssize_t n
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher(arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6601,6 +6607,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_2(PyObject *self, Py_ssize_t n
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6650,6 +6659,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_3(PyObject *self, Py_ssize_t n
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6691,6 +6703,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_4(PyObject *self, Py_ssize_t n
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6724,6 +6739,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_5(PyObject *self, Py_ssize_t n
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6748,6 +6766,9 @@ SWIGINTERN PyObject *_wrap_new_CcorrMatcher__SWIG_6(PyObject *self, Py_ssize_t n
     try {
       result = (GeoCal::CcorrMatcher *)new GeoCal::CcorrMatcher();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6854,6 +6875,9 @@ SWIGINTERN PyObject *_wrap_CcorrMatcher__v_min_correlation(PyObject *self, PyObj
       result = (double)((GeoCal::CcorrMatcher const *)arg1)->min_correlation();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6897,6 +6921,9 @@ SWIGINTERN PyObject *_wrap_CcorrMatcher__v_min_variance(PyObject *self, PyObject
     try {
       result = (double)((GeoCal::CcorrMatcher const *)arg1)->min_variance();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6942,6 +6969,9 @@ SWIGINTERN PyObject *_wrap_CcorrMatcher__v_target_number_line(PyObject *self, Py
       result = (int)((GeoCal::CcorrMatcher const *)arg1)->target_number_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6985,6 +7015,9 @@ SWIGINTERN PyObject *_wrap_CcorrMatcher__v_target_number_sample(PyObject *self, 
     try {
       result = (int)((GeoCal::CcorrMatcher const *)arg1)->target_number_sample();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7030,6 +7063,9 @@ SWIGINTERN PyObject *_wrap_CcorrMatcher__v_template_number_line(PyObject *self, 
       result = (int)((GeoCal::CcorrMatcher const *)arg1)->template_number_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7074,6 +7110,9 @@ SWIGINTERN PyObject *_wrap_CcorrMatcher__v_template_number_sample(PyObject *self
       result = (int)((GeoCal::CcorrMatcher const *)arg1)->template_number_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7116,6 +7155,9 @@ SWIGINTERN PyObject *_wrap_delete_CcorrMatcher(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

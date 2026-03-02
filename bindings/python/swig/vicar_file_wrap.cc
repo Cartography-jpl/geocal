@@ -4646,14 +4646,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4674,7 +4674,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4689,7 +4689,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7261,6 +7261,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_0(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7300,6 +7303,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_1(PyObject *self, Py_ssize_t nobj
     try {
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7370,6 +7376,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_2(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7427,6 +7436,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_3(PyObject *self, Py_ssize_t nobj
     try {
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7518,6 +7530,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_4(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7599,6 +7614,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_5(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7665,6 +7683,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_6(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile((std::string const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7721,6 +7742,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_7(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7764,6 +7788,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_8(PyObject *self, Py_ssize_t nobj
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7796,6 +7823,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_9(PyObject *self, Py_ssize_t nobj
     try {
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7901,6 +7931,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_10(PyObject *self, Py_ssize_t nob
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8003,6 +8036,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_11(PyObject *self, Py_ssize_t nob
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8092,6 +8128,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_12(PyObject *self, Py_ssize_t nob
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,arg3,arg4,(std::string const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8166,6 +8205,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_13(PyObject *self, Py_ssize_t nob
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8225,6 +8267,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_14(PyObject *self, Py_ssize_t nob
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8273,6 +8318,9 @@ SWIGINTERN PyObject *_wrap_new_VicarFile__SWIG_15(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::VicarFile *)new GeoCal::VicarFile(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8521,6 +8569,9 @@ SWIGINTERN PyObject *_wrap_delete_VicarFile(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8542,6 +8593,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_vicar_available(PyObject *self, PyObject *a
     try {
       result = (bool)GeoCal::VicarFile::vicar_available();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8587,6 +8641,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_access(PyObject *self, PyObject *args) {
       result = (GeoCal::VicarFile::access_type)((GeoCal::VicarFile const *)arg1)->access();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8630,6 +8687,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_force_area_pixel(PyObject *self, PyObjec
     try {
       result = (bool)((GeoCal::VicarFile const *)arg1)->force_area_pixel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8675,6 +8735,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_file_name(PyObject *self, PyObject *args
       result = ((GeoCal::VicarFile const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8711,6 +8774,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_is_vicar_file(PyObject *self, PyObject *arg
     try {
       result = (bool)GeoCal::VicarFile::is_vicar_file((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8750,6 +8816,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_file_name_to_unit(PyObject *self, PyObject 
     try {
       result = (int)GeoCal::VicarFile::file_name_to_unit((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8797,6 +8866,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_number_band(PyObject *self, PyObject *ar
       result = (int)((GeoCal::VicarFile const *)arg1)->number_band();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8840,6 +8912,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_number_line(PyObject *self, PyObject *ar
     try {
       result = (int)((GeoCal::VicarFile const *)arg1)->number_line();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8885,6 +8960,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_number_sample(PyObject *self, PyObject *
       result = (int)((GeoCal::VicarFile const *)arg1)->number_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8928,6 +9006,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_type(PyObject *self, PyObject *args) {
     try {
       result = (GeoCal::VicarFile::data_type)((GeoCal::VicarFile const *)arg1)->type();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8973,6 +9054,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_unit(PyObject *self, PyObject *args) {
       result = (int)((GeoCal::VicarFile const *)arg1)->unit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9014,6 +9098,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_map_info__SWIG_0(PyObject *self, Py_ssiz
     try {
       result = ((GeoCal::VicarFile const *)arg1)->map_info();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9089,6 +9176,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_map_info__SWIG_1(PyObject *self, Py_ssiz
       (arg1)->map_info((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9158,6 +9248,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_rpc__SWIG_0(PyObject *self, Py_ssize_t n
     try {
       result = ((GeoCal::VicarFile const *)arg1)->rpc();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9233,6 +9326,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_rpc__SWIG_1(PyObject *self, Py_ssize_t n
       (arg1)->rpc((GeoCal::Rpc const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9302,6 +9398,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_rsm__SWIG_0(PyObject *self, Py_ssize_t n
     try {
       result = ((GeoCal::VicarFile const *)arg1)->rsm();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9373,6 +9472,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_rsm__SWIG_1(PyObject *self, Py_ssize_t n
       (arg1)->rsm((boost::shared_ptr< GeoCal::Rsm > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9443,6 +9545,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_igc_glas_gfm__SWIG_0(PyObject *self, Py_
       result = ((GeoCal::VicarFile const *)arg1)->igc_glas_gfm();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9512,6 +9617,9 @@ SWIGINTERN PyObject *_wrap_VicarFile__v_igc_glas_gfm__SWIG_1(PyObject *self, Py_
     try {
       (arg1)->igc_glas_gfm((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9584,6 +9692,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_close(PyObject *self, PyObject *args) {
       (arg1)->close();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9626,6 +9737,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_flush(PyObject *self, PyObject *args) {
     try {
       ((GeoCal::VicarFile const *)arg1)->flush();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9670,6 +9784,9 @@ SWIGINTERN PyObject *_wrap_VicarFile___str__(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::VicarFile const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9738,6 +9855,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_delete__SWIG_0(PyObject *self, Py_ssi
       (arg1)->label_delete((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9795,6 +9915,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_delete__SWIG_1(PyObject *self, Py_ssi
     try {
       (arg1)->label_delete((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9901,6 +10024,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_0(PyObject *self, Py_ssize_
       (arg1)->label_set((std::string const &)*arg2,arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9966,6 +10092,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_1(PyObject *self, Py_ssize_
     try {
       (arg1)->label_set((std::string const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10044,6 +10173,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_2(PyObject *self, Py_ssize_
       (arg1)->label_set((std::string const &)*arg2,arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10109,6 +10241,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_3(PyObject *self, Py_ssize_
     try {
       (arg1)->label_set((std::string const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10187,6 +10322,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_4(PyObject *self, Py_ssize_
       (arg1)->label_set((std::string const &)*arg2,arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10252,6 +10390,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_5(PyObject *self, Py_ssize_
     try {
       (arg1)->label_set((std::string const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10335,6 +10476,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_6(PyObject *self, Py_ssize_
       (arg1)->label_set((std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10407,6 +10551,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_set__SWIG_7(PyObject *self, Py_ssize_
     try {
       (arg1)->label_set((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10586,6 +10733,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_ltype(PyObject *self, PyObject *args) {
       result = (int)GeoCal_VicarFile_ltype(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10656,6 +10806,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_int__SWIG_0(PyObject *self, Py_ssize_
       result = GeoCal_VicarFile_label_int__SWIG_0(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10714,6 +10867,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_int__SWIG_1(PyObject *self, Py_ssize_
     try {
       result = GeoCal_VicarFile_label_int__SWIG_0(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10813,6 +10969,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_float__SWIG_0(PyObject *self, Py_ssiz
       result = GeoCal_VicarFile_label_float__SWIG_0(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10871,6 +11030,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_float__SWIG_1(PyObject *self, Py_ssiz
     try {
       result = GeoCal_VicarFile_label_float__SWIG_0(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10970,6 +11132,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_double__SWIG_0(PyObject *self, Py_ssi
       result = GeoCal_VicarFile_label_double__SWIG_0(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11028,6 +11193,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_double__SWIG_1(PyObject *self, Py_ssi
     try {
       result = GeoCal_VicarFile_label_double__SWIG_0(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11127,6 +11295,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_string__SWIG_0(PyObject *self, Py_ssi
       result = GeoCal_VicarFile_label_string__SWIG_0(arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11185,6 +11356,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_string__SWIG_1(PyObject *self, Py_ssi
     try {
       result = GeoCal_VicarFile_label_string__SWIG_0(arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11260,6 +11434,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_label_list(PyObject *self, PyObject *args) 
       result = GeoCal_VicarFile_label_list(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11303,6 +11480,9 @@ SWIGINTERN PyObject *_wrap_VicarFile_property_list(PyObject *self, PyObject *arg
     try {
       result = GeoCal_VicarFile_property_list((GeoCal::VicarFile const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

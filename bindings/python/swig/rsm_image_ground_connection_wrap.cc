@@ -4644,14 +4644,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4672,7 +4672,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4687,7 +4687,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6628,6 +6628,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_0(PyObject *self, 
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6735,6 +6738,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_1(PyObject *self, 
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6881,6 +6887,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_2(PyObject *self, 
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7057,6 +7066,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_3(PyObject *self, 
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(std::string const &)*arg4,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg5,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7178,6 +7190,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_4(PyObject *self, 
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7285,6 +7300,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_5(PyObject *self, 
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7431,6 +7449,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_6(PyObject *self, 
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg3,(std::string const &)*arg4,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7607,6 +7628,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_7(PyObject *self, 
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg3,(std::string const &)*arg4,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg5,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7755,6 +7779,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_8(PyObject *self, 
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7889,6 +7916,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_9(PyObject *self, 
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8062,6 +8092,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_10(PyObject *self,
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8264,6 +8297,9 @@ SWIGINTERN PyObject *_wrap_new_RsmImageGroundConnection__SWIG_11(PyObject *self,
     try {
       result = (GeoCal::RsmImageGroundConnection *)new GeoCal::RsmImageGroundConnection((boost::shared_ptr< GeoCal::Rsm > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg7);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8518,6 +8554,9 @@ SWIGINTERN PyObject *_wrap_RsmImageGroundConnection_cf_look_vector(PyObject *sel
       ((GeoCal::RsmImageGroundConnection const *)arg1)->cf_look_vector((GeoCal::ImageCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8570,6 +8609,9 @@ SWIGINTERN PyObject *_wrap_RsmImageGroundConnection__v_rsm(PyObject *self, PyObj
       result = ((GeoCal::RsmImageGroundConnection const *)arg1)->rsm();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8614,6 +8656,9 @@ SWIGINTERN PyObject *_wrap_delete_RsmImageGroundConnection(PyObject *self, PyObj
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

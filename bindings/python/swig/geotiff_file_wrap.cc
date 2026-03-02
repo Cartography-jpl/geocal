@@ -4522,14 +4522,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4550,7 +4550,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4565,7 +4565,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6503,6 +6503,9 @@ SWIGINTERN PyObject *_wrap_new_GeotiffFile(PyObject *self, PyObject *args) {
       result = (GeoCal::GeotiffFile *)new GeoCal::GeotiffFile((std::string const &)*arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6554,6 +6557,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile__v_file_name(PyObject *self, PyObject *ar
       result = ((GeoCal::GeotiffFile const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6597,6 +6603,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile__v_mode(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::GeotiffFile const *)arg1)->mode();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6654,6 +6663,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_tiftag__SWIG_0(PyObject *self, Py_ssi
     try {
       (arg1)->set_tiftag(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6723,6 +6735,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_tiftag__SWIG_1(PyObject *self, Py_ssi
     try {
       (arg1)->set_tiftag(arg2,(blitz::Array< double,1 > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6817,6 +6832,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_key__SWIG_0(PyObject *self, Py_ssize_
       (arg1)->set_key(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6873,6 +6891,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_key__SWIG_1(PyObject *self, Py_ssize_
     try {
       (arg1)->set_key(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6935,6 +6956,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_set_key__SWIG_2(PyObject *self, Py_ssize_
     try {
       (arg1)->set_key(arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7031,6 +7055,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_write_key(PyObject *self, PyObject *args)
       (arg1)->write_key();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7074,6 +7101,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile___str__(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::GeotiffFile const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7126,6 +7156,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_has_key(PyObject *self, PyObject *args) {
       result = (bool)((GeoCal::GeotiffFile const *)arg1)->has_key(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7177,6 +7210,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_has_tiftag(PyObject *self, PyObject *args
       result = (bool)((GeoCal::GeotiffFile const *)arg1)->has_tiftag(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7209,6 +7245,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_key_name(PyObject *self, PyObject *args) 
       result = GeoCal::GeotiffFile::key_name(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7240,6 +7279,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_key_name_uppercase(PyObject *self, PyObje
     try {
       result = GeoCal::GeotiffFile::key_name_uppercase(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7280,6 +7322,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_value_name(PyObject *self, PyObject *args
       result = GeoCal::GeotiffFile::value_name(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7312,6 +7357,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_key_type(PyObject *self, PyObject *args) 
       result = (GeoCal::GeotiffFile::tagtype_t)GeoCal::GeotiffFile::key_type(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7333,6 +7381,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_geotiff_tag_ascii(PyObject *self, PyObjec
     try {
       result = (std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *) &GeoCal::GeotiffFile::geotiff_tag_ascii();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7356,6 +7407,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_geotiff_tag_double(PyObject *self, PyObje
       result = (std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *) &GeoCal::GeotiffFile::geotiff_tag_double();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7377,6 +7431,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_geotiff_tag_short(PyObject *self, PyObjec
     try {
       result = (std::vector< GeoCal::GeotiffFile::geokey_t,std::allocator< GeoCal::GeotiffFile::geokey_t > > *) &GeoCal::GeotiffFile::geotiff_tag_short();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7421,6 +7478,9 @@ SWIGINTERN PyObject *_wrap_GeotiffFile_write_1x1_file(PyObject *self, PyObject *
       (arg1)->write_1x1_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7463,6 +7523,9 @@ SWIGINTERN PyObject *_wrap_delete_GeotiffFile(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

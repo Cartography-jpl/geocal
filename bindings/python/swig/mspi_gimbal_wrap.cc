@@ -4542,14 +4542,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4570,7 +4570,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4585,7 +4585,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6488,6 +6488,9 @@ SWIGINTERN PyObject *_wrap_delete_ObservableMspiGimbal(PyObject *self, PyObject 
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6556,6 +6559,9 @@ SWIGINTERN PyObject *_wrap_ObservableMspiGimbal_add_observer_and_keep_reference(
     try {
       (arg1)->add_observer_and_keep_reference(*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6628,6 +6634,9 @@ SWIGINTERN PyObject *_wrap_ObservableMspiGimbal_add_observer(PyObject *self, PyO
       (arg1)->add_observer(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6699,6 +6708,9 @@ SWIGINTERN PyObject *_wrap_ObservableMspiGimbal_remove_observer(PyObject *self, 
       (arg1)->remove_observer(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6727,6 +6739,9 @@ SWIGINTERN PyObject *_wrap_new_ObserverMspiGimbal(PyObject *self, PyObject *args
     try {
       result = (GeoCal::Observer< GeoCal::MspiGimbal > *)new GeoCal::Observer< GeoCal::MspiGimbal >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6773,6 +6788,9 @@ SWIGINTERN PyObject *_wrap_delete_ObserverMspiGimbal(PyObject *self, PyObject *a
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6845,6 +6863,9 @@ SWIGINTERN PyObject *_wrap_ObserverMspiGimbal_notify_update(PyObject *self, PyOb
       (arg1)->notify_update((GeoCal::MspiGimbal const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6915,6 +6936,9 @@ SWIGINTERN PyObject *_wrap_ObserverMspiGimbal_notify_add(PyObject *self, PyObjec
     try {
       (arg1)->notify_add(*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6987,6 +7011,9 @@ SWIGINTERN PyObject *_wrap_ObserverMspiGimbal_notify_remove(PyObject *self, PyOb
       (arg1)->notify_remove(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7044,6 +7071,9 @@ SWIGINTERN PyObject *_wrap_new_MspiGimbal__SWIG_0(PyObject *self, Py_ssize_t nob
       result = (GeoCal::MspiGimbal *)new GeoCal::MspiGimbal(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7095,6 +7125,9 @@ SWIGINTERN PyObject *_wrap_new_MspiGimbal__SWIG_1(PyObject *self, Py_ssize_t nob
       result = (GeoCal::MspiGimbal *)new GeoCal::MspiGimbal((std::string const &)*arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7136,6 +7169,9 @@ SWIGINTERN PyObject *_wrap_new_MspiGimbal__SWIG_2(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::MspiGimbal *)new GeoCal::MspiGimbal((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7243,6 +7279,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal_read_config_file__SWIG_0(PyObject *self, P
       (arg1)->read_config_file((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7300,6 +7339,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal_read_config_file__SWIG_1(PyObject *self, P
     try {
       (arg1)->read_config_file((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7375,6 +7417,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_epsilon(PyObject *self, PyObject *args)
       result = (double)((GeoCal::MspiGimbal const *)arg1)->epsilon();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7418,6 +7463,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_epsilon_with_derivative(PyObject *self,
     try {
       result = ((GeoCal::MspiGimbal const *)arg1)->epsilon_with_derivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7467,6 +7515,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_psi(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MspiGimbal const *)arg1)->psi();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7510,6 +7561,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_psi_with_derivative(PyObject *self, PyO
     try {
       result = ((GeoCal::MspiGimbal const *)arg1)->psi_with_derivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7559,6 +7613,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_theta(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MspiGimbal const *)arg1)->theta();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7602,6 +7659,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_theta_with_derivative(PyObject *self, P
     try {
       result = ((GeoCal::MspiGimbal const *)arg1)->theta_with_derivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7648,6 +7708,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_parameter_mask__SWIG_0(PyObject *self, 
     try {
       result = ((GeoCal::MspiGimbal const *)arg1)->parameter_mask();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7730,6 +7793,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal__v_parameter_mask__SWIG_1(PyObject *self, 
     try {
       (arg1)->parameter_mask((blitz::Array< bool,1 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7831,6 +7897,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal_station_to_sc_with_derivative(PyObject *se
       result = ((GeoCal::MspiGimbal const *)arg1)->station_to_sc_with_derivative((GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7882,6 +7951,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal_station_to_sc(PyObject *self, PyObject *ar
       result = ((GeoCal::MspiGimbal const *)arg1)->station_to_sc(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7926,6 +7998,9 @@ SWIGINTERN PyObject *_wrap_MspiGimbal___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::MspiGimbal const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7968,6 +8043,9 @@ SWIGINTERN PyObject *_wrap_delete_MspiGimbal(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

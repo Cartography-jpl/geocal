@@ -4658,14 +4658,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4686,7 +4686,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4701,7 +4701,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6529,6 +6529,9 @@ SWIGINTERN PyObject *_wrap_new_GeometricModelImage__SWIG_0(PyObject *self, Py_ss
       result = (GeoCal::GeometricModelImage *)new GeoCal::GeometricModelImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(boost::shared_ptr< GeoCal::GeometricModel > const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6632,6 +6635,9 @@ SWIGINTERN PyObject *_wrap_new_GeometricModelImage__SWIG_1(PyObject *self, Py_ss
       result = (GeoCal::GeometricModelImage *)new GeoCal::GeometricModelImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(boost::shared_ptr< GeoCal::GeometricModel > const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6727,6 +6733,9 @@ SWIGINTERN PyObject *_wrap_new_GeometricModelImage__SWIG_2(PyObject *self, Py_ss
       result = (GeoCal::GeometricModelImage *)new GeoCal::GeometricModelImage((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,(boost::shared_ptr< GeoCal::GeometricModel > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6808,6 +6817,9 @@ SWIGINTERN PyObject *_wrap_GeometricModelImage__v_itype(PyObject *self, PyObject
       result = (GeoCal::GeometricModelImage::interpolation_type)((GeoCal::GeometricModelImage const *)arg1)->itype();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6851,6 +6863,9 @@ SWIGINTERN PyObject *_wrap_GeometricModelImage__v_raw_data(PyObject *self, PyObj
     try {
       result = ((GeoCal::GeometricModelImage const *)arg1)->raw_data();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6898,6 +6913,9 @@ SWIGINTERN PyObject *_wrap_GeometricModelImage__v_geometric_model(PyObject *self
       result = ((GeoCal::GeometricModelImage const *)arg1)->geometric_model();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6944,6 +6962,9 @@ SWIGINTERN PyObject *_wrap_GeometricModelImage__v_fill_value(PyObject *self, PyO
       result = (double)((GeoCal::GeometricModelImage const *)arg1)->fill_value();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6986,6 +7007,9 @@ SWIGINTERN PyObject *_wrap_delete_GeometricModelImage(PyObject *self, PyObject *
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

@@ -4579,14 +4579,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4607,7 +4607,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4622,7 +4622,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6569,6 +6569,9 @@ SWIGINTERN PyObject *_wrap_new_CameraRadialDistortionAndTransform(PyObject *self
       result = (GeoCal::CameraRadialDistortionAndTransform *)new GeoCal::CameraRadialDistortionAndTransform(SWIG_STD_MOVE(arg1),(blitz::Array< double,1 > const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8,(blitz::Array< double,1 > const &)*arg9,(blitz::Array< double,1 > const &)*arg10,(blitz::Array< double,1 > const &)*arg11,(blitz::Array< double,2 > const &)*arg12,(blitz::Array< double,1 > const &)*arg13,(blitz::Array< double,2 > const &)*arg14);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6613,6 +6616,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_bin_mode__SWIG_
     try {
       result = (int)((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->bin_mode();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6664,6 +6670,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_bin_mode__SWIG_
     try {
       (arg1)->bin_mode((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6734,6 +6743,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_ccd_off__SWIG_0
     try {
       result = (blitz::Array< double,1 > *) &((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->ccd_off();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6813,6 +6825,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_ccd_off__SWIG_1
       (arg1)->ccd_off((blitz::Array< double,1 > const &&)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6882,6 +6897,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_ccd_cen__SWIG_0
     try {
       result = (blitz::Array< double,1 > *) &((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->ccd_cen();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6961,6 +6979,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_ccd_cen__SWIG_1
       (arg1)->ccd_cen((blitz::Array< double,1 > const &&)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7030,6 +7051,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_t_off__SWIG_0(P
     try {
       result = (blitz::Array< double,1 > *) &((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->t_off();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7109,6 +7133,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_t_off__SWIG_1(P
       (arg1)->t_off((blitz::Array< double,1 > const &&)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7178,6 +7205,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_tinv_off__SWIG_
     try {
       result = (blitz::Array< double,1 > *) &((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->tinv_off();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7257,6 +7287,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_tinv_off__SWIG_
       (arg1)->tinv_off((blitz::Array< double,1 > const &&)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7326,6 +7359,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_t_m__SWIG_0(PyO
     try {
       result = (blitz::Array< double,2 > *) &((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->t_m();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7405,6 +7441,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_t_m__SWIG_1(PyO
       (arg1)->t_m((blitz::Array< double,2 > const &&)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7474,6 +7513,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_tinv_m__SWIG_0(
     try {
       result = (blitz::Array< double,2 > *) &((GeoCal::CameraRadialDistortionAndTransform const *)arg1)->tinv_m();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7553,6 +7595,9 @@ SWIGINTERN PyObject *_wrap_CameraRadialDistortionAndTransform__v_tinv_m__SWIG_1(
       (arg1)->tinv_m((blitz::Array< double,2 > const &&)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7623,6 +7668,9 @@ SWIGINTERN PyObject *_wrap_delete_CameraRadialDistortionAndTransform(PyObject *s
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

@@ -4560,14 +4560,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4588,7 +4588,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4603,7 +4603,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6959,6 +6959,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_have_spice(PyObject *self, PyObject *args
       result = (bool)GeoCal::SpiceHelper::have_spice();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6996,6 +6999,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_name_to_body(PyObject *self, PyObject *ar
       result = (int)GeoCal::SpiceHelper::name_to_body((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7029,6 +7035,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_body_name(PyObject *self, PyObject *args)
     try {
       result = GeoCal::SpiceHelper::body_name(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7066,6 +7075,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_kernel_data_int(PyObject *self, PyObject 
     try {
       result = (int)GeoCal::SpiceHelper::kernel_data_int((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7106,6 +7118,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_kernel_data_double(PyObject *self, PyObje
       result = (double)GeoCal::SpiceHelper::kernel_data_double((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7144,6 +7159,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_kernel_data_array_double(PyObject *self, 
     try {
       result = GeoCal::SpiceHelper::kernel_data_array_double((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7244,6 +7262,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_latsrf(PyObject *self, PyObject *args) {
       result = GeoCal::SpiceHelper::latsrf(arg1,(GeoCal::Time const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7278,6 +7299,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_fixed_frame_name(PyObject *self, PyObject
       result = GeoCal::SpiceHelper::fixed_frame_name(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7299,6 +7323,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_spice_available(PyObject *self, PyObject 
     try {
       result = (bool)GeoCal::SpiceHelper::spice_available();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7342,6 +7369,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_0(PyObject *self, Py_ss
       GeoCal::SpiceHelper::spice_setup((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7378,6 +7408,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_1(PyObject *self, Py_ss
       GeoCal::SpiceHelper::spice_setup((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7400,6 +7433,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_spice_setup__SWIG_2(PyObject *self, Py_ss
     try {
       GeoCal::SpiceHelper::spice_setup();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7471,6 +7507,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_add_kernel(PyObject *self, PyObject *args
       GeoCal::SpiceHelper::add_kernel((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7509,6 +7548,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_kernel_loaded(PyObject *self, PyObject *a
     try {
       result = (bool)GeoCal::SpiceHelper::kernel_loaded((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7589,6 +7631,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_conversion_quaternion(PyObject *self, PyO
     try {
       result = GeoCal::SpiceHelper::conversion_quaternion((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7700,6 +7745,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector__SWIG_0(PyObject *self, Py_s
       GeoCal::SpiceHelper::state_vector(arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,*arg4,*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7796,6 +7844,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_state_vector__SWIG_1(PyObject *self, Py_s
     try {
       GeoCal::SpiceHelper::state_vector(arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7925,6 +7976,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_boresight_and_footprint__SWIG_0(PyObject 
       result = GeoCal::SpiceHelper::boresight_and_footprint((GeoCal::Time const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8015,6 +8069,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_boresight_and_footprint__SWIG_1(PyObject 
     try {
       result = GeoCal::SpiceHelper::boresight_and_footprint((GeoCal::Time const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8196,6 +8253,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_surface_intersect__SWIG_0(PyObject *self,
       GeoCal::SpiceHelper::surface_intersect((GeoCal::Time const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(GeoCal::ScLookVector const &)*arg5,*arg6,*arg7,(std::string const &)*arg8,(std::string const &)*arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8349,6 +8409,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_surface_intersect__SWIG_1(PyObject *self,
       GeoCal::SpiceHelper::surface_intersect((GeoCal::Time const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(GeoCal::ScLookVector const &)*arg5,*arg6,*arg7,(std::string const &)*arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8487,6 +8550,9 @@ SWIGINTERN PyObject *_wrap_SpiceHelper_surface_intersect__SWIG_2(PyObject *self,
       GeoCal::SpiceHelper::surface_intersect((GeoCal::Time const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(GeoCal::ScLookVector const &)*arg5,*arg6,*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8557,6 +8623,9 @@ SWIGINTERN PyObject *_wrap_new_SpiceHelper(PyObject *self, PyObject *args) {
       result = (GeoCal::SpiceHelper *)new GeoCal::SpiceHelper();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8587,6 +8656,9 @@ SWIGINTERN PyObject *_wrap_delete_SpiceHelper(PyObject *self, PyObject *args) {
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

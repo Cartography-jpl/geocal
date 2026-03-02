@@ -4563,14 +4563,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4591,7 +4591,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4606,7 +4606,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6418,6 +6418,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter_convert_from_coordinate__SWIG_0(P
       result = ((GeoCal::CoordinateConverter const *)arg1)->convert_from_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6477,6 +6480,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter_convert_from_coordinate__SWIG_1(P
     try {
       result = ((GeoCal::CoordinateConverter const *)arg1)->convert_from_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6591,6 +6597,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter_convert_to_coordinate(PyObject *s
       ((GeoCal::CoordinateConverter const *)arg1)->convert_to_coordinate((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6652,6 +6661,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter__v_naif_code(PyObject *self, PyOb
     try {
       result = (int)((GeoCal::CoordinateConverter const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6724,6 +6736,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter_create(PyObject *self, PyObject *
     try {
       result = ((GeoCal::CoordinateConverter const *)arg1)->create((GeoCal::GroundCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6799,6 +6814,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter_is_same(PyObject *self, PyObject 
       result = (bool)((GeoCal::CoordinateConverter const *)arg1)->is_same((GeoCal::CoordinateConverter const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6843,6 +6861,9 @@ SWIGINTERN PyObject *_wrap_CoordinateConverter___str__(PyObject *self, PyObject 
       result = ((GeoCal::CoordinateConverter const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6885,6 +6906,9 @@ SWIGINTERN PyObject *_wrap_delete_CoordinateConverter(PyObject *self, PyObject *
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6959,6 +6983,9 @@ SWIGINTERN PyObject *_wrap_GeodeticConverter_convert_from_coordinate__SWIG_0(PyO
       result = ((GeoCal::GeodeticConverter const *)arg1)->convert_from_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7019,6 +7046,9 @@ SWIGINTERN PyObject *_wrap_GeodeticConverter_convert_from_coordinate__SWIG_1(PyO
       result = ((GeoCal::GeodeticConverter const *)arg1)->convert_from_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7071,6 +7101,9 @@ SWIGINTERN PyObject *_wrap_new_GeodeticConverter(PyObject *self, PyObject *args)
       result = (GeoCal::GeodeticConverter *)new GeoCal::GeodeticConverter();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7116,6 +7149,9 @@ SWIGINTERN PyObject *_wrap_delete_GeodeticConverter(PyObject *self, PyObject *ar
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7194,6 +7230,9 @@ SWIGINTERN PyObject *_wrap_Geodetic360Converter_convert_from_coordinate__SWIG_0(
       result = ((GeoCal::Geodetic360Converter const *)arg1)->convert_from_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7254,6 +7293,9 @@ SWIGINTERN PyObject *_wrap_Geodetic360Converter_convert_from_coordinate__SWIG_1(
       result = ((GeoCal::Geodetic360Converter const *)arg1)->convert_from_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7306,6 +7348,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic360Converter(PyObject *self, PyObject *ar
       result = (GeoCal::Geodetic360Converter *)new GeoCal::Geodetic360Converter();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7351,6 +7396,9 @@ SWIGINTERN PyObject *_wrap_delete_Geodetic360Converter(PyObject *self, PyObject 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7429,6 +7477,9 @@ SWIGINTERN PyObject *_wrap_GeodeticRadianConverter_convert_from_coordinate__SWIG
       result = ((GeoCal::GeodeticRadianConverter const *)arg1)->convert_from_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7489,6 +7540,9 @@ SWIGINTERN PyObject *_wrap_GeodeticRadianConverter_convert_from_coordinate__SWIG
       result = ((GeoCal::GeodeticRadianConverter const *)arg1)->convert_from_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7541,6 +7595,9 @@ SWIGINTERN PyObject *_wrap_new_GeodeticRadianConverter(PyObject *self, PyObject 
       result = (GeoCal::GeodeticRadianConverter *)new GeoCal::GeodeticRadianConverter();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7586,6 +7643,9 @@ SWIGINTERN PyObject *_wrap_delete_GeodeticRadianConverter(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7664,6 +7724,9 @@ SWIGINTERN PyObject *_wrap_GeodeticRadian2piConverter_convert_from_coordinate__S
       result = ((GeoCal::GeodeticRadian2piConverter const *)arg1)->convert_from_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7724,6 +7787,9 @@ SWIGINTERN PyObject *_wrap_GeodeticRadian2piConverter_convert_from_coordinate__S
       result = ((GeoCal::GeodeticRadian2piConverter const *)arg1)->convert_from_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7776,6 +7842,9 @@ SWIGINTERN PyObject *_wrap_new_GeodeticRadian2piConverter(PyObject *self, PyObje
       result = (GeoCal::GeodeticRadian2piConverter *)new GeoCal::GeodeticRadian2piConverter();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7821,6 +7890,9 @@ SWIGINTERN PyObject *_wrap_delete_GeodeticRadian2piConverter(PyObject *self, PyO
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

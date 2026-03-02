@@ -4646,14 +4646,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4674,7 +4674,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4689,7 +4689,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -5873,7 +5873,7 @@ boost::shared_ptr< GeoCal::RasterImage > SwigDirector_CalcRasterMultiBand::raste
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -5921,7 +5921,7 @@ std::string SwigDirector_CalcRasterMultiBand::desc() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -5959,7 +5959,7 @@ void SwigDirector_CalcRasterMultiBand::calc(int Lstart,int Sstart) const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6819,6 +6819,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_raster_image(PyObject *self, PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -6869,6 +6872,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand__v_data(PyObject *self, PyObject 
     try {
       result = (blitz::Array< double,3 > *) &(darg)->data_ptr();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6943,6 +6949,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_desc(PyObject *self, PyObject *ar
           result = ((SwigDirector_CalcRasterMultiBand const *)darg)->desc();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7020,6 +7029,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_calc(PyObject *self, PyObject *ar
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -7053,6 +7065,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_0(PyObject *self, Py_ss
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7149,6 +7164,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_1(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7236,6 +7254,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_2(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7315,6 +7336,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_3(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7385,6 +7409,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_4(PyObject *self, Py_ss
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7468,6 +7495,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_5(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7542,6 +7572,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_6(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7608,6 +7641,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_7(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7665,6 +7701,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_8(PyObject *self, Py_ss
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7761,6 +7800,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_9(PyObject *self, Py_ss
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7848,6 +7890,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_10(PyObject *self, Py_s
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7927,6 +7972,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_11(PyObject *self, Py_s
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7997,6 +8045,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRasterMultiBand__SWIG_12(PyObject *self, Py_s
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8255,6 +8306,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_0(PyObject *self
       (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8351,6 +8405,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_1(PyObject *self
       (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8439,6 +8496,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_2(PyObject *self
       (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8518,6 +8578,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_3(PyObject *self
     try {
       (darg)->initialize((GeoCal::RasterImage const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8610,6 +8673,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_4(PyObject *self
       (darg)->initialize(arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8693,6 +8759,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_5(PyObject *self
       (darg)->initialize(arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8768,6 +8837,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_6(PyObject *self
       (darg)->initialize(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8834,6 +8906,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_7(PyObject *self
     try {
       (darg)->initialize(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8939,6 +9014,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_8(PyObject *self
       (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9035,6 +9113,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_9(PyObject *self
       (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9123,6 +9204,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_10(PyObject *sel
       (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9202,6 +9286,9 @@ SWIGINTERN PyObject *_wrap_CalcRasterMultiBand_initialize__SWIG_11(PyObject *sel
     try {
       (darg)->initialize((GeoCal::MapInfo const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9389,6 +9476,9 @@ SWIGINTERN PyObject *_wrap_delete_CalcRasterMultiBand(PyObject *self, PyObject *
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

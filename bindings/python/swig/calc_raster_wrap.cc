@@ -4648,14 +4648,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4676,7 +4676,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4691,7 +4691,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -5877,7 +5877,7 @@ void SwigDirector_CalcRaster::change_to_geodetic360() {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -5902,7 +5902,7 @@ void SwigDirector_CalcRaster::change_to_geodetic() {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -5930,7 +5930,7 @@ std::string SwigDirector_CalcRaster::desc() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -5968,7 +5968,7 @@ void SwigDirector_CalcRaster::calc(int Lstart,int Sstart) const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6814,6 +6814,9 @@ SWIGINTERN PyObject *_wrap_CalcRaster__v_data(PyObject *self, PyObject *args) {
       result = (blitz::Array< double,2 > *) &(darg)->data_ptr();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6887,6 +6890,9 @@ SWIGINTERN PyObject *_wrap_CalcRaster_desc(PyObject *self, PyObject *args) {
           result = ((SwigDirector_CalcRaster const *)darg)->desc();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6964,6 +6970,9 @@ SWIGINTERN PyObject *_wrap_CalcRaster_calc(PyObject *self, PyObject *args) {
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -7006,6 +7015,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_0(PyObject *self, Py_ssize_t nob
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7039,6 +7051,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_1(PyObject *self, Py_ssize_t nob
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7098,6 +7113,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_2(PyObject *self, Py_ssize_t nob
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7147,6 +7165,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_3(PyObject *self, Py_ssize_t nob
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7222,6 +7243,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_4(PyObject *self, Py_ssize_t nob
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7287,6 +7311,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_5(PyObject *self, Py_ssize_t nob
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7359,6 +7386,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_6(PyObject *self, Py_ssize_t nob
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7421,6 +7451,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_7(PyObject *self, Py_ssize_t nob
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7493,6 +7526,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_8(PyObject *self, Py_ssize_t nob
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7555,6 +7591,9 @@ SWIGINTERN PyObject *_wrap_new_CalcRaster__SWIG_9(PyObject *self, Py_ssize_t nob
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7705,6 +7744,9 @@ SWIGINTERN PyObject *_wrap_delete_CalcRaster(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

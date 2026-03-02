@@ -4522,14 +4522,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4550,7 +4550,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4565,7 +4565,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6333,6 +6333,9 @@ SWIGINTERN PyObject *_wrap_new_FrameCoordinate__SWIG_0(PyObject *self, Py_ssize_
       result = (GeoCal::FrameCoordinate *)new GeoCal::FrameCoordinate();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6373,6 +6376,9 @@ SWIGINTERN PyObject *_wrap_new_FrameCoordinate__SWIG_1(PyObject *self, Py_ssize_
     try {
       result = (GeoCal::FrameCoordinate *)new GeoCal::FrameCoordinate(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6605,6 +6611,9 @@ SWIGINTERN PyObject *_wrap_FrameCoordinate___str__(PyObject *self, PyObject *arg
       result = ((GeoCal::FrameCoordinate const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6648,6 +6657,9 @@ SWIGINTERN PyObject *_wrap_delete_FrameCoordinate(PyObject *self, PyObject *args
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6680,6 +6692,9 @@ SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_0(PyObject *s
     try {
       result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6738,6 +6753,9 @@ SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_1(PyObject *s
       result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative(SWIG_STD_MOVE(arg1),SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6791,6 +6809,9 @@ SWIGINTERN PyObject *_wrap_new_FrameCoordinateWithDerivative__SWIG_2(PyObject *s
     try {
       result = (GeoCal::FrameCoordinateWithDerivative *)new GeoCal::FrameCoordinateWithDerivative((GeoCal::FrameCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7077,6 +7098,9 @@ SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative___str__(PyObject *self,
       result = ((GeoCal::FrameCoordinateWithDerivative const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7120,6 +7144,9 @@ SWIGINTERN PyObject *_wrap_FrameCoordinateWithDerivative__v_value(PyObject *self
     try {
       result = ((GeoCal::FrameCoordinateWithDerivative const *)arg1)->value();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7167,6 +7194,9 @@ SWIGINTERN PyObject *_wrap_delete_FrameCoordinateWithDerivative(PyObject *self, 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

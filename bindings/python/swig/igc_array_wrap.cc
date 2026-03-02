@@ -4648,14 +4648,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4676,7 +4676,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4691,7 +4691,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6919,6 +6919,9 @@ SWIGINTERN PyObject *_wrap_new_IgcArray__SWIG_0(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::IgcArray *)new GeoCal::IgcArray((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6958,6 +6961,9 @@ SWIGINTERN PyObject *_wrap_new_IgcArray__SWIG_1(PyObject *self, Py_ssize_t nobjs
     try {
       result = (GeoCal::IgcArray *)new GeoCal::IgcArray((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection >,std::allocator< boost::shared_ptr< GeoCal::ImageGroundConnection > > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7043,6 +7049,9 @@ SWIGINTERN PyObject *_wrap_IgcArray_image_ground_connection(PyObject *self, PyOb
       result = ((GeoCal::IgcArray const *)arg1)->image_ground_connection(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7114,6 +7123,9 @@ SWIGINTERN PyObject *_wrap_IgcArray_add_igc(PyObject *self, PyObject *args) {
       (arg1)->add_igc((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7155,6 +7167,9 @@ SWIGINTERN PyObject *_wrap_IgcArray__v_assume_igc_independent__SWIG_0(PyObject *
     try {
       result = (bool)((GeoCal::IgcArray const *)arg1)->assume_igc_independent();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7206,6 +7221,9 @@ SWIGINTERN PyObject *_wrap_IgcArray__v_assume_igc_independent__SWIG_1(PyObject *
     try {
       (arg1)->assume_igc_independent((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7277,6 +7295,9 @@ SWIGINTERN PyObject *_wrap_delete_IgcArray(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

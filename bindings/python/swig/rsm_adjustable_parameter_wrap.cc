@@ -4581,14 +4581,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4609,7 +4609,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4624,7 +4624,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6605,6 +6605,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_adjustment(PyObject *self, PyO
       ((GeoCal::RsmAdjustableParameter const *)arg1)->adjustment((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6763,6 +6766,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_adjustment_with_derivative(PyO
       ((GeoCal::RsmAdjustableParameter const *)arg1)->adjustment_with_derivative((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6806,6 +6812,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_base_tre_string(PyObject *self
     try {
       result = ((GeoCal::RsmAdjustableParameter const *)arg1)->base_tre_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6861,6 +6870,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter_base_read_tre_string(PyObject 
       (arg1)->base_read_tre_string(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6902,6 +6914,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_image_identifier__SWIG_0(Py
     try {
       result = ((GeoCal::RsmAdjustableParameter const *)arg1)->image_identifier();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6956,6 +6971,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_image_identifier__SWIG_1(Py
     try {
       (arg1)->image_identifier((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7029,6 +7047,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_rsm_support_data_edition__S
       result = ((GeoCal::RsmAdjustableParameter const *)arg1)->rsm_support_data_edition();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7082,6 +7103,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_rsm_support_data_edition__S
     try {
       (arg1)->rsm_support_data_edition((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7155,6 +7179,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_triangulation_id__SWIG_0(Py
       result = ((GeoCal::RsmAdjustableParameter const *)arg1)->triangulation_id();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7208,6 +7235,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_triangulation_id__SWIG_1(Py
     try {
       (arg1)->triangulation_id((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7281,6 +7311,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_naif_code__SWIG_0(PyObject 
       result = (int)((GeoCal::RsmAdjustableParameter const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7331,6 +7364,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_naif_code__SWIG_1(PyObject 
     try {
       (arg1)->naif_code((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7404,6 +7440,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter__v_has_ground_coordinate_param
       result = (bool)((GeoCal::RsmAdjustableParameter const *)arg1)->has_ground_coordinate_parameter();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7448,6 +7487,9 @@ SWIGINTERN PyObject *_wrap_RsmAdjustableParameter___str__(PyObject *self, PyObje
       result = ((GeoCal::RsmAdjustableParameter const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7490,6 +7532,9 @@ SWIGINTERN PyObject *_wrap_delete_RsmAdjustableParameter(PyObject *self, PyObjec
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

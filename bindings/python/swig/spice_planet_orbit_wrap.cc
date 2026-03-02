@@ -4613,14 +4613,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4641,7 +4641,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4656,7 +4656,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7086,6 +7086,9 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_0(PyObject *self, Py_ssize
       result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7150,6 +7153,9 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_1(PyObject *self, Py_ssize
     try {
       result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7240,6 +7246,9 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_2(PyObject *self, Py_ssize
       result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7319,6 +7328,9 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_3(PyObject *self, Py_ssize
     try {
       result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,(std::vector< std::string,std::allocator< std::string > > const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7427,6 +7439,9 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_4(PyObject *self, Py_ssize
       result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::SpiceKernelList const &)*arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7520,6 +7535,9 @@ SWIGINTERN PyObject *_wrap_new_SpicePlanetOrbit__SWIG_5(PyObject *self, Py_ssize
     try {
       result = (GeoCal::SpicePlanetOrbit *)new GeoCal::SpicePlanetOrbit((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::SpiceKernelList const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7672,6 +7690,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_orbit_data__SWIG_0(PyObject *self, P
       result = ((GeoCal::SpicePlanetOrbit const *)arg1)->orbit_data(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7744,6 +7765,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_orbit_data__SWIG_1(PyObject *self, P
     try {
       result = ((GeoCal::SpicePlanetOrbit const *)arg1)->orbit_data((GeoCal::TimeWithDerivative const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7852,6 +7876,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_set_min_time(PyObject *self, PyObjec
       (arg1)->set_min_time((GeoCal::Time const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7922,6 +7949,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_set_max_time(PyObject *self, PyObjec
     try {
       (arg1)->set_max_time((GeoCal::Time const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8056,6 +8086,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect__SWIG_0(PyObject *
     try {
       ((GeoCal::SpicePlanetOrbit const *)arg1)->surface_intersect((GeoCal::Time const &)*arg2,(GeoCal::ScLookVector const &)*arg3,*arg4,*arg5,(std::string const &)*arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8192,6 +8225,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect__SWIG_1(PyObject *
       ((GeoCal::SpicePlanetOrbit const *)arg1)->surface_intersect((GeoCal::Time const &)*arg2,(GeoCal::ScLookVector const &)*arg3,*arg4,*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8312,6 +8348,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit_surface_intersect__SWIG_2(PyObject *
       ((GeoCal::SpicePlanetOrbit const *)arg1)->surface_intersect((GeoCal::Time const &)*arg2,(GeoCal::ScLookVector const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8400,6 +8439,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_kernel_list(PyObject *self, PyObj
       result = ((GeoCal::SpicePlanetOrbit const *)arg1)->kernel_list();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8448,6 +8490,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_naif_id(PyObject *self, PyObject 
       result = (int)((GeoCal::SpicePlanetOrbit const *)arg1)->naif_id();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8491,6 +8536,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_target_name(PyObject *self, PyObj
     try {
       result = ((GeoCal::SpicePlanetOrbit const *)arg1)->target_name();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8536,6 +8584,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_spacecraft_reference_frame_name(P
       result = ((GeoCal::SpicePlanetOrbit const *)arg1)->spacecraft_reference_frame_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8577,6 +8628,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_aberration_correction__SWIG_0(PyO
     try {
       result = ((GeoCal::SpicePlanetOrbit const *)arg1)->aberration_correction();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8631,6 +8685,9 @@ SWIGINTERN PyObject *_wrap_SpicePlanetOrbit__v_aberration_correction__SWIG_1(PyO
     try {
       (arg1)->aberration_correction((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8704,6 +8761,9 @@ SWIGINTERN PyObject *_wrap_delete_SpicePlanetOrbit(PyObject *self, PyObject *arg
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

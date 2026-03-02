@@ -4667,14 +4667,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4695,7 +4695,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4710,7 +4710,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6648,6 +6648,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiTimeTable__SWIG_0(PyObject *self, Py_ssize
       result = (GeoCal::AirMspiTimeTable *)new GeoCal::AirMspiTimeTable((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6711,6 +6714,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiTimeTable__SWIG_1(PyObject *self, Py_ssize
       result = (GeoCal::AirMspiTimeTable *)new GeoCal::AirMspiTimeTable((std::string const &)*arg1,(std::string const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6766,6 +6772,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiTimeTable__SWIG_2(PyObject *self, Py_ssize
       result = (GeoCal::AirMspiTimeTable *)new GeoCal::AirMspiTimeTable((std::string const &)*arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6807,6 +6816,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiTimeTable__SWIG_3(PyObject *self, Py_ssize
     try {
       result = (GeoCal::AirMspiTimeTable *)new GeoCal::AirMspiTimeTable((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6897,6 +6909,9 @@ SWIGINTERN PyObject *_wrap_AirMspiTimeTable__v_l1b1_file_name(PyObject *self, Py
       result = ((GeoCal::AirMspiTimeTable const *)arg1)->l1b1_file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6940,6 +6955,9 @@ SWIGINTERN PyObject *_wrap_AirMspiTimeTable__v_l1b1_granule_id(PyObject *self, P
     try {
       result = ((GeoCal::AirMspiTimeTable const *)arg1)->l1b1_granule_id();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6985,6 +7003,9 @@ SWIGINTERN PyObject *_wrap_AirMspiTimeTable__v_l1b1_file(PyObject *self, PyObjec
       result = ((GeoCal::AirMspiTimeTable const *)arg1)->l1b1_file();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7029,6 +7050,9 @@ SWIGINTERN PyObject *_wrap_delete_AirMspiTimeTable(PyObject *self, PyObject *arg
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

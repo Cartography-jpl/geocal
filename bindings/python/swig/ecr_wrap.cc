@@ -4555,14 +4555,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4583,7 +4583,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4598,7 +4598,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6370,6 +6370,9 @@ SWIGINTERN PyObject *_wrap_new_Ecr__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ecr *)new GeoCal::Ecr((GeoCal::GroundCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6419,6 +6422,9 @@ SWIGINTERN PyObject *_wrap_new_Ecr__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ecr *)new GeoCal::Ecr(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6454,6 +6460,9 @@ SWIGINTERN PyObject *_wrap_new_Ecr__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ecr *)new GeoCal::Ecr((boost::array< double,3 > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6478,6 +6487,9 @@ SWIGINTERN PyObject *_wrap_new_Ecr__SWIG_3(PyObject *self, Py_ssize_t nobjs, PyO
     try {
       result = (GeoCal::Ecr *)new GeoCal::Ecr();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6572,6 +6584,9 @@ SWIGINTERN PyObject *_wrap_Ecr_convert_to_geodetic(PyObject *self, PyObject *arg
       result = GeoCal_Ecr_convert_to_geodetic((GeoCal::Ecr const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6651,6 +6666,9 @@ SWIGINTERN PyObject *_wrap_Ecr_reference_surface_intersect_approximate__SWIG_0(P
       result = ((GeoCal::Ecr const *)arg1)->reference_surface_intersect_approximate((GeoCal::CartesianFixedLookVector const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6723,6 +6741,9 @@ SWIGINTERN PyObject *_wrap_Ecr_reference_surface_intersect_approximate__SWIG_1(P
     try {
       result = ((GeoCal::Ecr const *)arg1)->reference_surface_intersect_approximate((GeoCal::CartesianFixedLookVector const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6807,6 +6828,9 @@ SWIGINTERN PyObject *_wrap_Ecr_sub_solar_point(PyObject *self, PyObject *args) {
       result = GeoCal::Ecr::sub_solar_point((GeoCal::Time const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6863,6 +6887,9 @@ SWIGINTERN PyObject *_wrap_Ecr_solar_distance(PyObject *self, PyObject *args) {
     try {
       result = (double)GeoCal::Ecr::solar_distance((GeoCal::Time const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6923,6 +6950,9 @@ SWIGINTERN PyObject *_wrap_Ecr_sub_body_point(PyObject *self, PyObject *args) {
     try {
       result = GeoCal::Ecr::sub_body_point(arg1,(GeoCal::Time const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6988,6 +7018,9 @@ SWIGINTERN PyObject *_wrap_Ecr_body_distance(PyObject *self, PyObject *args) {
       result = (double)GeoCal::Ecr::body_distance(arg1,(GeoCal::Time const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7030,6 +7063,9 @@ SWIGINTERN PyObject *_wrap_delete_Ecr(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

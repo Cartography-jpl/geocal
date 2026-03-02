@@ -4660,14 +4660,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4688,7 +4688,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4703,7 +4703,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6507,6 +6507,9 @@ SWIGINTERN PyObject *_wrap_new_RasterAveraged__SWIG_0(PyObject *self, Py_ssize_t
       result = (GeoCal::RasterAveraged *)new GeoCal::RasterAveraged((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6574,6 +6577,9 @@ SWIGINTERN PyObject *_wrap_new_RasterAveraged__SWIG_1(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::RasterAveraged *)new GeoCal::RasterAveraged((boost::shared_ptr< GeoCal::RasterImage > const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6650,6 +6656,9 @@ SWIGINTERN PyObject *_wrap_RasterAveraged__v_high_resolution_image(PyObject *sel
       result = ((GeoCal::RasterAveraged const *)arg1)->high_resolution_image_ptr();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6696,6 +6705,9 @@ SWIGINTERN PyObject *_wrap_RasterAveraged__v_number_line_per_pixel(PyObject *sel
       result = (int)((GeoCal::RasterAveraged const *)arg1)->number_line_per_pixel();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6739,6 +6751,9 @@ SWIGINTERN PyObject *_wrap_RasterAveraged__v_number_sample_per_pixel(PyObject *s
     try {
       result = (int)((GeoCal::RasterAveraged const *)arg1)->number_sample_per_pixel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6784,6 +6799,9 @@ SWIGINTERN PyObject *_wrap_RasterAveraged__v_ignore_zero(PyObject *self, PyObjec
       result = (bool)((GeoCal::RasterAveraged const *)arg1)->ignore_zero();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6826,6 +6844,9 @@ SWIGINTERN PyObject *_wrap_delete_RasterAveraged(PyObject *self, PyObject *args)
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6911,6 +6932,9 @@ SWIGINTERN PyObject *_wrap_new_RasterAveragedMultiBand__SWIG_0(PyObject *self, P
       result = (GeoCal::RasterAveragedMultiBand *)new GeoCal::RasterAveragedMultiBand((boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6978,6 +7002,9 @@ SWIGINTERN PyObject *_wrap_new_RasterAveragedMultiBand__SWIG_1(PyObject *self, P
     try {
       result = (GeoCal::RasterAveragedMultiBand *)new GeoCal::RasterAveragedMultiBand((boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7054,6 +7081,9 @@ SWIGINTERN PyObject *_wrap_RasterAveragedMultiBand__v_high_resolution_image(PyOb
       result = ((GeoCal::RasterAveragedMultiBand const *)arg1)->high_resolution_image_ptr();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7100,6 +7130,9 @@ SWIGINTERN PyObject *_wrap_RasterAveragedMultiBand__v_number_line_per_pixel(PyOb
       result = (int)((GeoCal::RasterAveragedMultiBand const *)arg1)->number_line_per_pixel();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7143,6 +7176,9 @@ SWIGINTERN PyObject *_wrap_RasterAveragedMultiBand__v_number_sample_per_pixel(Py
     try {
       result = (int)((GeoCal::RasterAveragedMultiBand const *)arg1)->number_sample_per_pixel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7188,6 +7224,9 @@ SWIGINTERN PyObject *_wrap_RasterAveragedMultiBand__v_ignore_zero(PyObject *self
       result = (bool)((GeoCal::RasterAveragedMultiBand const *)arg1)->ignore_zero();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7230,6 +7269,9 @@ SWIGINTERN PyObject *_wrap_delete_RasterAveragedMultiBand(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7308,6 +7350,9 @@ SWIGINTERN PyObject *_wrap_new_ImageMaskAveraged(PyObject *self, PyObject *args)
       result = (GeoCal::ImageMaskAveraged *)new GeoCal::ImageMaskAveraged((boost::shared_ptr< GeoCal::ImageMask > const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7355,6 +7400,9 @@ SWIGINTERN PyObject *_wrap_ImageMaskAveraged__v_high_resolution_image_mask(PyObj
       result = ((GeoCal::ImageMaskAveraged const *)arg1)->high_resolution_image_mask_ptr();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7401,6 +7449,9 @@ SWIGINTERN PyObject *_wrap_ImageMaskAveraged__v_number_line_per_pixel(PyObject *
       result = (int)((GeoCal::ImageMaskAveraged const *)arg1)->number_line_per_pixel();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7445,6 +7496,9 @@ SWIGINTERN PyObject *_wrap_ImageMaskAveraged__v_number_sample_per_pixel(PyObject
       result = (int)((GeoCal::ImageMaskAveraged const *)arg1)->number_sample_per_pixel();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7487,6 +7541,9 @@ SWIGINTERN PyObject *_wrap_delete_ImageMaskAveraged(PyObject *self, PyObject *ar
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7572,6 +7629,9 @@ SWIGINTERN PyObject *_wrap_new_AveragedImageGroundConnection__SWIG_0(PyObject *s
       result = (GeoCal::AveragedImageGroundConnection *)new GeoCal::AveragedImageGroundConnection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7640,6 +7700,9 @@ SWIGINTERN PyObject *_wrap_new_AveragedImageGroundConnection__SWIG_1(PyObject *s
       result = (GeoCal::AveragedImageGroundConnection *)new GeoCal::AveragedImageGroundConnection(SWIG_STD_MOVE(arg1),arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7699,6 +7762,9 @@ SWIGINTERN PyObject *_wrap_new_AveragedImageGroundConnection__SWIG_2(PyObject *s
     try {
       result = (GeoCal::AveragedImageGroundConnection *)new GeoCal::AveragedImageGroundConnection(SWIG_STD_MOVE(arg1),arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7781,6 +7847,9 @@ SWIGINTERN PyObject *_wrap_AveragedImageGroundConnection__v_original_image_groun
       result = ((GeoCal::AveragedImageGroundConnection const *)arg1)->original_image_ground_connection();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7827,6 +7896,9 @@ SWIGINTERN PyObject *_wrap_AveragedImageGroundConnection__v_number_line_per_pixe
       result = (int)((GeoCal::AveragedImageGroundConnection const *)arg1)->number_line_per_pixel();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7870,6 +7942,9 @@ SWIGINTERN PyObject *_wrap_AveragedImageGroundConnection__v_number_sample_per_pi
     try {
       result = (int)((GeoCal::AveragedImageGroundConnection const *)arg1)->number_sample_per_pixel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7915,6 +7990,9 @@ SWIGINTERN PyObject *_wrap_AveragedImageGroundConnection__v_ignore_zero(PyObject
       result = (bool)((GeoCal::AveragedImageGroundConnection const *)arg1)->ignore_zero();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7959,6 +8037,9 @@ SWIGINTERN PyObject *_wrap_AveragedImageGroundConnection__v_in_memory(PyObject *
       result = (bool)((GeoCal::AveragedImageGroundConnection const *)arg1)->in_memory();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8001,6 +8082,9 @@ SWIGINTERN PyObject *_wrap_delete_AveragedImageGroundConnection(PyObject *self, 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

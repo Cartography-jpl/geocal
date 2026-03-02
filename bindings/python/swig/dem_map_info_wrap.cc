@@ -4573,14 +4573,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4601,7 +4601,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4616,7 +4616,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6365,6 +6365,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_change_to_geodetic360(PyObject *self, PyOb
       (arg1)->change_to_geodetic360();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6407,6 +6410,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_change_to_geodetic(PyObject *self, PyObjec
     try {
       (arg1)->change_to_geodetic();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6452,6 +6458,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo__v_is_geodetic_360(PyObject *self, PyObjec
       result = (bool)((GeoCal::DemMapInfo const *)arg1)->is_geodetic_360();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6495,6 +6504,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo__v_datum(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::DemMapInfo const *)arg1)->datum_ptr();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6541,6 +6553,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo__v_map_info(PyObject *self, PyObject *args
     try {
       result = ((GeoCal::DemMapInfo const *)arg1)->map_info();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6618,6 +6633,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_height_datum(PyObject *self, PyObject *arg
       result = (double)((GeoCal::DemMapInfo const *)arg1)->height_datum((GeoCal::GroundCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6683,6 +6701,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_gradient(PyObject *self, PyObject *args) {
     try {
       ((GeoCal::DemMapInfo const *)arg1)->gradient(arg2,arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6755,6 +6776,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_slope_riserun(PyObject *self, PyObject *ar
       result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_riserun(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6813,6 +6837,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_slope_percentage(PyObject *self, PyObject 
     try {
       result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_percentage(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6873,6 +6900,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_slope_radian(PyObject *self, PyObject *arg
       result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_radian(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6932,6 +6962,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_slope_degree(PyObject *self, PyObject *arg
       result = (double)((GeoCal::DemMapInfo const *)arg1)->slope_degree(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6990,6 +7023,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_aspect(PyObject *self, PyObject *args) {
     try {
       result = (double)((GeoCal::DemMapInfo const *)arg1)->aspect(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7069,6 +7105,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_slope_and_aspect(PyObject *self, PyObject 
     try {
       ((GeoCal::DemMapInfo const *)arg1)->slope_and_aspect((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7161,6 +7200,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo_slope_and_aspect_nearest_neighbor(PyObject
       ((GeoCal::DemMapInfo const *)arg1)->slope_and_aspect_nearest_neighbor((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7217,6 +7259,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo__v_outside_dem_is_error(PyObject *self, Py
       result = (bool)((GeoCal::DemMapInfo const *)arg1)->outside_dem_is_error();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7261,6 +7306,9 @@ SWIGINTERN PyObject *_wrap_DemMapInfo__v_naif_code(PyObject *self, PyObject *arg
       result = (int)((GeoCal::DemMapInfo const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7303,6 +7351,9 @@ SWIGINTERN PyObject *_wrap_delete_DemMapInfo(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

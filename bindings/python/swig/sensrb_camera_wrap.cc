@@ -4578,14 +4578,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4606,7 +4606,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4621,7 +4621,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6714,6 +6714,9 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_0(PyObject *self, Py_ssize_t n
       result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera((boost::math::quaternion< double > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,(GeoCal::FrameCoordinate const &)*arg15,(std::string const &)*arg16,(std::string const &)*arg17,arg18,arg19,arg20);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6929,6 +6932,9 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_1(PyObject *self, Py_ssize_t n
       result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera((boost::math::quaternion< double > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,(GeoCal::FrameCoordinate const &)*arg15,(std::string const &)*arg16,(std::string const &)*arg17,arg18,arg19);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7136,6 +7142,9 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_2(PyObject *self, Py_ssize_t n
       result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera((boost::math::quaternion< double > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,(GeoCal::FrameCoordinate const &)*arg15,(std::string const &)*arg16,(std::string const &)*arg17,arg18);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7335,6 +7344,9 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_3(PyObject *self, Py_ssize_t n
       result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera((boost::math::quaternion< double > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,(GeoCal::FrameCoordinate const &)*arg15,(std::string const &)*arg16,(std::string const &)*arg17);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7521,6 +7533,9 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_4(PyObject *self, Py_ssize_t n
       result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera((boost::math::quaternion< double > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,(GeoCal::FrameCoordinate const &)*arg15,(std::string const &)*arg16);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7692,6 +7707,9 @@ SWIGINTERN PyObject *_wrap_new_SensrbCamera__SWIG_5(PyObject *self, Py_ssize_t n
       result = (GeoCal::SensrbCamera *)new GeoCal::SensrbCamera((boost::math::quaternion< double > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,arg11,arg12,arg13,arg14,(GeoCal::FrameCoordinate const &)*arg15);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7791,6 +7809,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_p_distort(PyObject *self, PyObject *a
       result = (blitz::Array< double,1 > *) &((GeoCal::SensrbCamera const *)arg1)->p_distort();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7853,6 +7874,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_k1__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->k1();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7903,6 +7927,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_k1__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->k1((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7974,6 +8001,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_k2__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->k2();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8024,6 +8054,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_k2__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->k2((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8095,6 +8128,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_k3__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->k3();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8145,6 +8181,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_k3__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->k3((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8216,6 +8255,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_p1__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->p1();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8266,6 +8308,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_p1__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->p1((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8337,6 +8382,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_p2__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->p2();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8387,6 +8435,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_p2__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->p2((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8458,6 +8509,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_b1__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->b1();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8508,6 +8562,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_b1__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->b1((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8579,6 +8636,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_b2__SWIG_0(PyObject *self, Py_ssize_t
       result = (double)((GeoCal::SensrbCamera const *)arg1)->b2();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8629,6 +8689,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_b2__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->b2((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8700,6 +8763,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_radial_distort_limit__SWIG_0(PyObject
       result = (double)((GeoCal::SensrbCamera const *)arg1)->radial_distort_limit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8750,6 +8816,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_radial_distort_limit__SWIG_1(PyObject
     try {
       (arg1)->radial_distort_limit((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8821,6 +8890,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_calibration_date__SWIG_0(PyObject *se
       result = ((GeoCal::SensrbCamera const *)arg1)->calibration_date();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8874,6 +8946,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_calibration_date__SWIG_1(PyObject *se
     try {
       (arg1)->calibration_date((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8947,6 +9022,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_detection_type__SWIG_0(PyObject *self
       result = ((GeoCal::SensrbCamera const *)arg1)->detection_type();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9000,6 +9078,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera__v_detection_type__SWIG_1(PyObject *self
     try {
       (arg1)->detection_type((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9077,6 +9158,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera_quaternion_to_sensor_angle(PyObject *sel
       GeoCal::SensrbCamera::quaternion_to_sensor_angle((boost::math::quaternion< double > const &)*arg1,*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9142,6 +9226,9 @@ SWIGINTERN PyObject *_wrap_SensrbCamera_sensor_angle_to_quaternion(PyObject *sel
       result = GeoCal::SensrbCamera::sensor_angle_to_quaternion(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9184,6 +9271,9 @@ SWIGINTERN PyObject *_wrap_delete_SensrbCamera(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

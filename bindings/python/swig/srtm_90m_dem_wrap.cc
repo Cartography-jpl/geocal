@@ -4664,14 +4664,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4692,7 +4692,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4707,7 +4707,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6670,6 +6670,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mData__SWIG_0(PyObject *self, Py_ssize_t no
       result = (GeoCal::Srtm90mData *)new GeoCal::Srtm90mData((std::string const &)*arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6742,6 +6745,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mData__SWIG_1(PyObject *self, Py_ssize_t no
       result = (GeoCal::Srtm90mData *)new GeoCal::Srtm90mData((std::string const &)*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6806,6 +6812,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mData__SWIG_2(PyObject *self, Py_ssize_t no
       result = (GeoCal::Srtm90mData *)new GeoCal::Srtm90mData((std::string const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6862,6 +6871,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mData__SWIG_3(PyObject *self, Py_ssize_t no
       result = (GeoCal::Srtm90mData *)new GeoCal::Srtm90mData((std::string const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6910,6 +6922,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mData__SWIG_4(PyObject *self, Py_ssize_t no
       result = (GeoCal::Srtm90mData *)new GeoCal::Srtm90mData((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6949,6 +6964,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mData__SWIG_5(PyObject *self, Py_ssize_t no
     try {
       result = (GeoCal::Srtm90mData *)new GeoCal::Srtm90mData((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7050,6 +7068,9 @@ SWIGINTERN PyObject *_wrap_delete_Srtm90mData(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7104,6 +7125,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mDem__SWIG_0(PyObject *self, Py_ssize_t nob
       result = (GeoCal::Srtm90mDem *)new GeoCal::Srtm90mDem((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7143,6 +7167,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mDem__SWIG_1(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::Srtm90mDem *)new GeoCal::Srtm90mDem((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7218,6 +7245,9 @@ SWIGINTERN PyObject *_wrap_new_Srtm90mDem__SWIG_2(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::Srtm90mDem *)new GeoCal::Srtm90mDem((std::string const &)*arg1,arg2,(boost::shared_ptr< GeoCal::Datum > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7302,6 +7332,9 @@ SWIGINTERN PyObject *_wrap_Srtm90mDem__v_directory_base(PyObject *self, PyObject
       result = ((GeoCal::Srtm90mDem const *)arg1)->directory_base();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7346,6 +7379,9 @@ SWIGINTERN PyObject *_wrap_Srtm90mDem__v_number_file_read(PyObject *self, PyObje
       result = (int)((GeoCal::Srtm90mDem const *)arg1)->number_file_read();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7389,6 +7425,9 @@ SWIGINTERN PyObject *_wrap_Srtm90mDem_reset_number_file_read(PyObject *self, PyO
       (arg1)->reset_number_file_read();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7431,6 +7470,9 @@ SWIGINTERN PyObject *_wrap_delete_Srtm90mDem(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

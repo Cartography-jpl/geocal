@@ -4529,14 +4529,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4557,7 +4557,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4572,7 +4572,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7349,6 +7349,9 @@ SWIGINTERN PyObject *_wrap_new_ImageCoordinate__SWIG_0(PyObject *self, Py_ssize_
       result = (GeoCal::ImageCoordinate *)new GeoCal::ImageCoordinate(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7403,6 +7406,9 @@ SWIGINTERN PyObject *_wrap_new_ImageCoordinate__SWIG_1(PyObject *self, Py_ssize_
       result = (GeoCal::ImageCoordinate *)new GeoCal::ImageCoordinate((GeoCal::VicarImageCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7427,6 +7433,9 @@ SWIGINTERN PyObject *_wrap_new_ImageCoordinate__SWIG_2(PyObject *self, Py_ssize_
     try {
       result = (GeoCal::ImageCoordinate *)new GeoCal::ImageCoordinate();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7665,6 +7674,9 @@ SWIGINTERN PyObject *_wrap_ImageCoordinate___str__(PyObject *self, PyObject *arg
       result = ((GeoCal::ImageCoordinate const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7707,6 +7719,9 @@ SWIGINTERN PyObject *_wrap_delete_ImageCoordinate(PyObject *self, PyObject *args
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7756,6 +7771,9 @@ SWIGINTERN PyObject *_wrap_new_VicarImageCoordinate__SWIG_0(PyObject *self, Py_s
     try {
       result = (GeoCal::VicarImageCoordinate *)new GeoCal::VicarImageCoordinate(arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7811,6 +7829,9 @@ SWIGINTERN PyObject *_wrap_new_VicarImageCoordinate__SWIG_1(PyObject *self, Py_s
       result = (GeoCal::VicarImageCoordinate *)new GeoCal::VicarImageCoordinate((GeoCal::ImageCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7835,6 +7856,9 @@ SWIGINTERN PyObject *_wrap_new_VicarImageCoordinate__SWIG_2(PyObject *self, Py_s
     try {
       result = (GeoCal::VicarImageCoordinate *)new GeoCal::VicarImageCoordinate();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8073,6 +8097,9 @@ SWIGINTERN PyObject *_wrap_VicarImageCoordinate___str__(PyObject *self, PyObject
       result = ((GeoCal::VicarImageCoordinate const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8115,6 +8142,9 @@ SWIGINTERN PyObject *_wrap_delete_VicarImageCoordinate(PyObject *self, PyObject 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8207,6 +8237,9 @@ SWIGINTERN PyObject *_wrap_new_ImageCoordinateWithDerivative__SWIG_0(PyObject *s
       result = (GeoCal::ImageCoordinateWithDerivative *)new GeoCal::ImageCoordinateWithDerivative((GeoCal::AutoDerivative< double > const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8231,6 +8264,9 @@ SWIGINTERN PyObject *_wrap_new_ImageCoordinateWithDerivative__SWIG_1(PyObject *s
     try {
       result = (GeoCal::ImageCoordinateWithDerivative *)new GeoCal::ImageCoordinateWithDerivative();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8511,6 +8547,9 @@ SWIGINTERN PyObject *_wrap_ImageCoordinateWithDerivative_value(PyObject *self, P
       result = ((GeoCal::ImageCoordinateWithDerivative const *)arg1)->value();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8559,6 +8598,9 @@ SWIGINTERN PyObject *_wrap_ImageCoordinateWithDerivative___str__(PyObject *self,
       result = ((GeoCal::ImageCoordinateWithDerivative const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8601,6 +8643,9 @@ SWIGINTERN PyObject *_wrap_delete_ImageCoordinateWithDerivative(PyObject *self, 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8647,6 +8692,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_iterator(PyObject *self, PyObj
       result = (swig::SwigPyIterator *)std_vector_Sl_GeoCal_ImageCoordinate_Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8678,6 +8726,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___nonzero__(PyObject *self, Py
     try {
       result = (bool)std_vector_Sl_GeoCal_ImageCoordinate_Sg____nonzero__((std::vector< GeoCal::ImageCoordinate > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8711,6 +8762,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___bool__(PyObject *self, PyObj
       result = (bool)std_vector_Sl_GeoCal_ImageCoordinate_Sg____bool__((std::vector< GeoCal::ImageCoordinate > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8742,6 +8796,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___len__(PyObject *self, PyObje
     try {
       result = std_vector_Sl_GeoCal_ImageCoordinate_Sg____len__((std::vector< GeoCal::ImageCoordinate > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8796,6 +8853,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___getslice__(PyObject *self, P
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8846,6 +8906,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___setslice____SWIG_0(PyObject 
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8910,6 +8973,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___setslice____SWIG_1(PyObject 
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8993,6 +9059,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___delslice__(PyObject *self, P
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9036,6 +9105,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___delitem____SWIG_0(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9078,6 +9150,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___getitem____SWIG_0(PyObject *
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9134,6 +9209,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___setitem____SWIG_0(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9178,6 +9256,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___setitem____SWIG_1(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9219,6 +9300,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___delitem____SWIG_1(PyObject *
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9296,6 +9380,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___getitem____SWIG_1(PyObject *
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9406,6 +9493,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate___setitem____SWIG_2(PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9488,6 +9578,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_pop(PyObject *self, PyObject *
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9551,6 +9644,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_append(PyObject *self, PyObjec
       std_vector_Sl_GeoCal_ImageCoordinate_Sg__append(arg1,(GeoCal::ImageCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9572,6 +9668,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinate__SWIG_0(PyObject *self, Py
     try {
       result = (std::vector< GeoCal::ImageCoordinate > *)new std::vector< GeoCal::ImageCoordinate >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9608,6 +9707,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinate__SWIG_1(PyObject *self, Py
       result = (std::vector< GeoCal::ImageCoordinate > *)new std::vector< GeoCal::ImageCoordinate >((std::vector< GeoCal::ImageCoordinate > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9642,6 +9744,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_empty(PyObject *self, PyObject
       result = (bool)((std::vector< GeoCal::ImageCoordinate > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9673,6 +9778,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_size(PyObject *self, PyObject 
     try {
       result = ((std::vector< GeoCal::ImageCoordinate > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9715,6 +9823,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_swap(PyObject *self, PyObject 
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9746,6 +9857,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_begin(PyObject *self, PyObject
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9780,6 +9894,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_end(PyObject *self, PyObject *
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9812,6 +9929,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_rbegin(PyObject *self, PyObjec
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9846,6 +9966,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_rend(PyObject *self, PyObject 
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9877,6 +10000,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_clear(PyObject *self, PyObject
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9910,6 +10036,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_get_allocator(PyObject *self, 
       result = ((std::vector< GeoCal::ImageCoordinate > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9939,6 +10068,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinate__SWIG_2(PyObject *self, Py
     try {
       result = (std::vector< GeoCal::ImageCoordinate > *)new std::vector< GeoCal::ImageCoordinate >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9970,6 +10102,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_pop_back(PyObject *self, PyObj
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10007,6 +10142,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_resize__SWIG_0(PyObject *self,
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10051,6 +10189,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_erase__SWIG_0(PyObject *self, 
     try {
       result = std_vector_Sl_GeoCal_ImageCoordinate_Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10110,6 +10251,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_erase__SWIG_1(PyObject *self, 
     try {
       result = std_vector_Sl_GeoCal_ImageCoordinate_Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10198,6 +10342,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinate__SWIG_3(PyObject *self, Py
     try {
       result = (std::vector< GeoCal::ImageCoordinate > *)new std::vector< GeoCal::ImageCoordinate >(SWIG_STD_MOVE(arg1),(std::vector< GeoCal::ImageCoordinate >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10306,6 +10453,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_push_back(PyObject *self, PyOb
       (arg1)->push_back((std::vector< GeoCal::ImageCoordinate >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10337,6 +10487,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_front(PyObject *self, PyObject
     try {
       result = (std::vector< GeoCal::ImageCoordinate >::value_type *) &((std::vector< GeoCal::ImageCoordinate > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10373,6 +10526,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_back(PyObject *self, PyObject 
     try {
       result = (std::vector< GeoCal::ImageCoordinate >::value_type *) &((std::vector< GeoCal::ImageCoordinate > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10445,6 +10601,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_assign(PyObject *self, PyObjec
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< GeoCal::ImageCoordinate >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10510,6 +10669,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_resize__SWIG_1(PyObject *self,
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< GeoCal::ImageCoordinate >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10612,6 +10774,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_insert__SWIG_0(PyObject *self,
       result = std_vector_Sl_GeoCal_ImageCoordinate_Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(GeoCal::ImageCoordinate const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10693,6 +10858,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_insert__SWIG_1(PyObject *self,
       std_vector_Sl_GeoCal_ImageCoordinate_Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(GeoCal::ImageCoordinate const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10759,6 +10927,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_reserve(PyObject *self, PyObje
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10791,6 +10962,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinate_capacity(PyObject *self, PyObj
       result = ((std::vector< GeoCal::ImageCoordinate > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10821,6 +10995,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_ImageCoordinate(PyObject *self, PyObjec
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10867,6 +11044,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_iterator(PyObject *self, Py
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10898,6 +11078,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___nonzero__(PyObject *self,
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10931,6 +11114,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___bool__(PyObject *self, Py
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10962,6 +11148,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___len__(PyObject *self, PyO
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11016,6 +11205,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___getslice__(PyObject *self
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11068,6 +11260,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___setslice____SWIG_0(PyObje
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11132,6 +11327,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___setslice____SWIG_1(PyObje
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11215,6 +11413,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___delslice__(PyObject *self
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11258,6 +11459,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___delitem____SWIG_0(PyObjec
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11300,6 +11504,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___getitem____SWIG_0(PyObjec
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11358,6 +11565,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___setitem____SWIG_0(PyObjec
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11402,6 +11612,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___setitem____SWIG_1(PyObjec
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11443,6 +11656,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___delitem____SWIG_1(PyObjec
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11520,6 +11736,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___getitem____SWIG_1(PyObjec
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11627,6 +11846,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr___setitem____SWIG_2(PyObjec
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11709,6 +11931,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_pop(PyObject *self, PyObjec
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11768,6 +11993,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_append(PyObject *self, PyOb
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::ImageCoordinate > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11789,6 +12017,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinatePtr__SWIG_0(PyObject *self,
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > *)new std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11827,6 +12058,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinatePtr__SWIG_1(PyObject *self,
       result = (std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > *)new std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11863,6 +12097,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_empty(PyObject *self, PyObj
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11894,6 +12131,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_size(PyObject *self, PyObje
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11936,6 +12176,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_swap(PyObject *self, PyObje
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11967,6 +12210,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_begin(PyObject *self, PyObj
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12001,6 +12247,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_end(PyObject *self, PyObjec
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12033,6 +12282,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_rbegin(PyObject *self, PyOb
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12067,6 +12319,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_rend(PyObject *self, PyObje
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12098,6 +12353,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_clear(PyObject *self, PyObj
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12131,6 +12389,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_get_allocator(PyObject *sel
       result = ((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12160,6 +12421,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinatePtr__SWIG_2(PyObject *self,
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > *)new std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12193,6 +12457,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_pop_back(PyObject *self, Py
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12230,6 +12497,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_resize__SWIG_0(PyObject *se
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12274,6 +12544,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_erase__SWIG_0(PyObject *sel
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12333,6 +12606,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_erase__SWIG_1(PyObject *sel
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12419,6 +12695,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageCoordinatePtr__SWIG_3(PyObject *self,
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > *)new std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12527,6 +12806,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_push_back(PyObject *self, P
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12558,6 +12840,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_front(PyObject *self, PyObj
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12593,6 +12878,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_back(PyObject *self, PyObje
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12662,6 +12950,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_assign(PyObject *self, PyOb
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12725,6 +13016,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_resize__SWIG_1(PyObject *se
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12825,6 +13119,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_insert__SWIG_0(PyObject *se
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::ImageCoordinate > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12904,6 +13201,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_insert__SWIG_1(PyObject *se
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageCoordinate_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::ImageCoordinate > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12970,6 +13270,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_reserve(PyObject *self, PyO
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13002,6 +13305,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageCoordinatePtr_capacity(PyObject *self, Py
       result = ((std::vector< boost::shared_ptr< GeoCal::ImageCoordinate > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13032,6 +13338,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_ImageCoordinatePtr(PyObject *self, PyOb
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

@@ -4638,14 +4638,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4666,7 +4666,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4681,7 +4681,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6589,6 +6589,9 @@ SWIGINTERN PyObject *_wrap_PlanetConstant_a(PyObject *self, PyObject *args) {
       result = (double)GeoCal::PlanetConstant::a(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6620,6 +6623,9 @@ SWIGINTERN PyObject *_wrap_PlanetConstant_b(PyObject *self, PyObject *args) {
     try {
       result = (double)GeoCal::PlanetConstant::b(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6653,6 +6659,9 @@ SWIGINTERN PyObject *_wrap_PlanetConstant_esq(PyObject *self, PyObject *args) {
       result = (double)GeoCal::PlanetConstant::esq(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6684,6 +6693,9 @@ SWIGINTERN PyObject *_wrap_PlanetConstant_flattening(PyObject *self, PyObject *a
     try {
       result = (double)GeoCal::PlanetConstant::flattening(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6717,6 +6729,9 @@ SWIGINTERN PyObject *_wrap_PlanetConstant_inverse_flattening(PyObject *self, PyO
       result = (double)GeoCal::PlanetConstant::inverse_flattening(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6749,6 +6764,9 @@ SWIGINTERN PyObject *_wrap_PlanetConstant_name(PyObject *self, PyObject *args) {
       result = GeoCal::PlanetConstant::name(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6770,6 +6788,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetConstant(PyObject *self, PyObject *args) {
     try {
       result = (GeoCal::PlanetConstant *)new GeoCal::PlanetConstant();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6816,6 +6837,9 @@ SWIGINTERN PyObject *_wrap_delete_PlanetConstant(PyObject *self, PyObject *args)
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6879,6 +6903,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetFixed__SWIG_0(PyObject *self, Py_ssize_t no
       result = (GeoCal::PlanetFixed *)new GeoCal::PlanetFixed((GeoCal::GroundCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6936,6 +6963,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetFixed__SWIG_1(PyObject *self, Py_ssize_t no
       result = (GeoCal::PlanetFixed *)new GeoCal::PlanetFixed(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6979,6 +7009,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetFixed__SWIG_2(PyObject *self, Py_ssize_t no
       result = (GeoCal::PlanetFixed *)new GeoCal::PlanetFixed((boost::array< double,3 > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7012,6 +7045,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetFixed__SWIG_3(PyObject *self, Py_ssize_t no
       result = (GeoCal::PlanetFixed *)new GeoCal::PlanetFixed(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7036,6 +7072,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetFixed__SWIG_4(PyObject *self, Py_ssize_t no
     try {
       result = (GeoCal::PlanetFixed *)new GeoCal::PlanetFixed();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7171,6 +7210,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_reference_surface_intersect_approximate__
       result = ((GeoCal::PlanetFixed const *)arg1)->reference_surface_intersect_approximate((GeoCal::CartesianFixedLookVector const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7243,6 +7285,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_reference_surface_intersect_approximate__
     try {
       result = ((GeoCal::PlanetFixed const *)arg1)->reference_surface_intersect_approximate((GeoCal::CartesianFixedLookVector const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7346,6 +7391,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_target_position(PyObject *self, PyObject 
     try {
       result = GeoCal::PlanetFixed::target_position((std::string const &)*arg1,(GeoCal::Time const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7451,6 +7499,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data__SWIG_0(PyObject *self, Py_ssi
       result = GeoCal::PlanetFixed::orbit_data((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7544,6 +7595,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed_orbit_data__SWIG_1(PyObject *self, Py_ssi
       result = GeoCal::PlanetFixed::orbit_data((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::Time const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7622,6 +7676,9 @@ SWIGINTERN PyObject *_wrap_PlanetFixed__v_planet_radius(PyObject *self, PyObject
       result = (double)((GeoCal::PlanetFixed const *)arg1)->planet_radius();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7664,6 +7721,9 @@ SWIGINTERN PyObject *_wrap_delete_PlanetFixed(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7727,6 +7787,9 @@ SWIGINTERN PyObject *_wrap_new_Planetocentric__SWIG_0(PyObject *self, Py_ssize_t
       result = (GeoCal::Planetocentric *)new GeoCal::Planetocentric((GeoCal::GroundCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7784,6 +7847,9 @@ SWIGINTERN PyObject *_wrap_new_Planetocentric__SWIG_1(PyObject *self, Py_ssize_t
       result = (GeoCal::Planetocentric *)new GeoCal::Planetocentric(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7817,6 +7883,9 @@ SWIGINTERN PyObject *_wrap_new_Planetocentric__SWIG_2(PyObject *self, Py_ssize_t
       result = (GeoCal::Planetocentric *)new GeoCal::Planetocentric(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7841,6 +7910,9 @@ SWIGINTERN PyObject *_wrap_new_Planetocentric__SWIG_3(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::Planetocentric *)new GeoCal::Planetocentric();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7935,6 +8007,9 @@ SWIGINTERN PyObject *_wrap_Planetocentric__v_planet_radius(PyObject *self, PyObj
       result = (double)((GeoCal::Planetocentric const *)arg1)->planet_radius();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7978,6 +8053,9 @@ SWIGINTERN PyObject *_wrap_delete_Planetocentric(PyObject *self, PyObject *args)
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8019,6 +8097,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetInertial__SWIG_0(PyObject *self, Py_ssize_t
       result = (GeoCal::PlanetInertial *)new GeoCal::PlanetInertial(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8043,6 +8124,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetInertial__SWIG_1(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::PlanetInertial *)new GeoCal::PlanetInertial();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8101,6 +8185,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetInertial__SWIG_2(PyObject *self, Py_ssize_t
       result = (GeoCal::PlanetInertial *)new GeoCal::PlanetInertial(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8143,6 +8230,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetInertial__SWIG_3(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::PlanetInertial *)new GeoCal::PlanetInertial((boost::array< double,3 > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8266,6 +8356,9 @@ SWIGINTERN PyObject *_wrap_PlanetInertial_reference_surface_intersect_approximat
       result = ((GeoCal::PlanetInertial const *)arg1)->reference_surface_intersect_approximate((GeoCal::CartesianInertialLookVector const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8338,6 +8431,9 @@ SWIGINTERN PyObject *_wrap_PlanetInertial_reference_surface_intersect_approximat
     try {
       result = ((GeoCal::PlanetInertial const *)arg1)->reference_surface_intersect_approximate((GeoCal::CartesianInertialLookVector const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8412,6 +8508,9 @@ SWIGINTERN PyObject *_wrap_delete_PlanetInertial(PyObject *self, PyObject *args)
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8453,6 +8552,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetocentricConverter__SWIG_0(PyObject *self, P
       result = (GeoCal::PlanetocentricConverter *)new GeoCal::PlanetocentricConverter(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8477,6 +8579,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetocentricConverter__SWIG_1(PyObject *self, P
     try {
       result = (GeoCal::PlanetocentricConverter *)new GeoCal::PlanetocentricConverter();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8575,6 +8680,9 @@ SWIGINTERN PyObject *_wrap_PlanetocentricConverter_convert_from_coordinate__SWIG
       result = ((GeoCal::PlanetocentricConverter const *)arg1)->convert_from_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8634,6 +8742,9 @@ SWIGINTERN PyObject *_wrap_PlanetocentricConverter_convert_from_coordinate__SWIG
     try {
       result = ((GeoCal::PlanetocentricConverter const *)arg1)->convert_from_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8709,6 +8820,9 @@ SWIGINTERN PyObject *_wrap_PlanetocentricConverter__v_naif_code(PyObject *self, 
       result = (int)((GeoCal::PlanetocentricConverter const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8751,6 +8865,9 @@ SWIGINTERN PyObject *_wrap_delete_PlanetocentricConverter(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8801,6 +8918,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetSimpleDem__SWIG_0(PyObject *self, Py_ssize_
       result = (GeoCal::PlanetSimpleDem *)new GeoCal::PlanetSimpleDem(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8834,6 +8954,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetSimpleDem__SWIG_1(PyObject *self, Py_ssize_
       result = (GeoCal::PlanetSimpleDem *)new GeoCal::PlanetSimpleDem(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8858,6 +8981,9 @@ SWIGINTERN PyObject *_wrap_new_PlanetSimpleDem__SWIG_2(PyObject *self, Py_ssize_
     try {
       result = (GeoCal::PlanetSimpleDem *)new GeoCal::PlanetSimpleDem();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8938,6 +9064,9 @@ SWIGINTERN PyObject *_wrap_PlanetSimpleDem__v_h__SWIG_0(PyObject *self, Py_ssize
       result = (double)((GeoCal::PlanetSimpleDem const *)arg1)->h();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8988,6 +9117,9 @@ SWIGINTERN PyObject *_wrap_PlanetSimpleDem__v_h__SWIG_1(PyObject *self, Py_ssize
     try {
       (arg1)->h((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9059,6 +9191,9 @@ SWIGINTERN PyObject *_wrap_PlanetSimpleDem__v_naif_code__SWIG_0(PyObject *self, 
       result = (int)((GeoCal::PlanetSimpleDem const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9109,6 +9244,9 @@ SWIGINTERN PyObject *_wrap_PlanetSimpleDem__v_naif_code__SWIG_1(PyObject *self, 
     try {
       (arg1)->naif_code((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9180,6 +9318,9 @@ SWIGINTERN PyObject *_wrap_delete_PlanetSimpleDem(PyObject *self, PyObject *args
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

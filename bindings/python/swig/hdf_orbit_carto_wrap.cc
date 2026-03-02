@@ -4654,14 +4654,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4682,7 +4682,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4697,7 +4697,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6708,6 +6708,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTodBurl_TimeAcs__SWIG_0(PyObject *s
       result = (GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6841,6 +6844,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTodBurl_TimeAcs__SWIG_1(PyObject *s
       result = (GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6966,6 +6972,9 @@ SWIGINTERN PyObject *_wrap_new_OrbitArray_EciTodBurl_TimeAcs__SWIG_2(PyObject *s
       result = (GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::OrbitArray< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((blitz::Array< double,1 > const &)*arg1,(blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,(blitz::Array< double,2 > const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7045,6 +7054,9 @@ SWIGINTERN PyObject *_wrap_delete_OrbitArray_EciTodBurl_TimeAcs(PyObject *self, 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7178,6 +7190,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_0(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7308,6 +7323,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_1(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7425,6 +7443,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_2(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7527,6 +7548,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_3(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7614,6 +7638,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_4(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7686,6 +7713,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_5(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7743,6 +7773,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_6(PyObject *sel
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7784,6 +7817,9 @@ SWIGINTERN PyObject *_wrap_new_HdfOrbit_EciTodBurl_TimeAcs__SWIG_7(PyObject *sel
     try {
       result = (GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > *)new GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator >((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7898,6 +7934,9 @@ SWIGINTERN PyObject *_wrap_HdfOrbit_EciTodBurl_TimeAcs__v_file_name(PyObject *se
       result = ((GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7942,6 +7981,9 @@ SWIGINTERN PyObject *_wrap_HdfOrbit_EciTodBurl_TimeAcs__v_base_group(PyObject *s
       result = ((GeoCal::HdfOrbit< GeoCal::EciTodBurl,GeoCal::TimeAcsCreator > const *)arg1)->base_group();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7984,6 +8026,9 @@ SWIGINTERN PyObject *_wrap_delete_HdfOrbit_EciTodBurl_TimeAcs(PyObject *self, Py
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

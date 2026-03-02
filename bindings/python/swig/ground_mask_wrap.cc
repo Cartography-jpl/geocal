@@ -4559,14 +4559,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4587,7 +4587,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4602,7 +4602,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7301,6 +7301,9 @@ SWIGINTERN PyObject *_wrap_GroundMask_mask(PyObject *self, PyObject *args) {
       result = (bool)((GeoCal::GroundMask const *)arg1)->mask((GeoCal::GroundCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7402,6 +7405,9 @@ SWIGINTERN PyObject *_wrap_GroundMask_region_masked(PyObject *self, PyObject *ar
       result = (bool)((GeoCal::GroundMask const *)arg1)->region_masked((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7446,6 +7452,9 @@ SWIGINTERN PyObject *_wrap_GroundMask___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::GroundMask const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7489,6 +7498,9 @@ SWIGINTERN PyObject *_wrap_delete_GroundMask(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7517,6 +7529,9 @@ SWIGINTERN PyObject *_wrap_new_CombinedGroundMask__SWIG_0(PyObject *self, Py_ssi
     try {
       result = (GeoCal::CombinedGroundMask *)new GeoCal::CombinedGroundMask();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7553,6 +7568,9 @@ SWIGINTERN PyObject *_wrap_new_CombinedGroundMask__SWIG_1(PyObject *self, Py_ssi
     try {
       result = (GeoCal::CombinedGroundMask *)new GeoCal::CombinedGroundMask((std::vector< boost::shared_ptr< GeoCal::GroundMask >,std::allocator< boost::shared_ptr< GeoCal::GroundMask > > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7708,6 +7726,9 @@ SWIGINTERN PyObject *_wrap_delete_CombinedGroundMask(PyObject *self, PyObject *a
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7753,6 +7774,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_iterator(PyObject *self, PyObject *
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7784,6 +7808,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___nonzero__(PyObject *self, PyObjec
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7817,6 +7844,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___bool__(PyObject *self, PyObject *
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7848,6 +7878,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___len__(PyObject *self, PyObject *a
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7902,6 +7935,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___getslice__(PyObject *self, PyObje
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7954,6 +7990,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___setslice____SWIG_0(PyObject *self
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8018,6 +8057,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___setslice____SWIG_1(PyObject *self
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8101,6 +8143,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___delslice__(PyObject *self, PyObje
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8144,6 +8189,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___delitem____SWIG_0(PyObject *self,
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8186,6 +8234,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___getitem____SWIG_0(PyObject *self,
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8244,6 +8295,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_0(PyObject *self,
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8288,6 +8342,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_1(PyObject *self,
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8329,6 +8386,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___delitem____SWIG_1(PyObject *self,
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8406,6 +8466,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___getitem____SWIG_1(PyObject *self,
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8513,6 +8576,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask___setitem____SWIG_2(PyObject *self,
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8595,6 +8661,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_pop(PyObject *self, PyObject *args)
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8654,6 +8723,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_append(PyObject *self, PyObject *ar
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8675,6 +8747,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_0(PyObject *self, Py_ssiz
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8713,6 +8788,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_1(PyObject *self, Py_ssiz
       result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8749,6 +8827,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_empty(PyObject *self, PyObject *arg
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8780,6 +8861,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_size(PyObject *self, PyObject *args
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8822,6 +8906,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_swap(PyObject *self, PyObject *args
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8853,6 +8940,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_begin(PyObject *self, PyObject *arg
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8887,6 +8977,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_end(PyObject *self, PyObject *args)
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8919,6 +9012,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_rbegin(PyObject *self, PyObject *ar
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8953,6 +9049,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_rend(PyObject *self, PyObject *args
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8984,6 +9083,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_clear(PyObject *self, PyObject *arg
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9017,6 +9119,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_get_allocator(PyObject *self, PyObj
       result = ((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9046,6 +9151,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_2(PyObject *self, Py_ssiz
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9079,6 +9187,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_pop_back(PyObject *self, PyObject *
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9116,6 +9227,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_resize__SWIG_0(PyObject *self, Py_s
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9160,6 +9274,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_erase__SWIG_0(PyObject *self, Py_ss
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9219,6 +9336,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_erase__SWIG_1(PyObject *self, Py_ss
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9305,6 +9425,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_GroundMask__SWIG_3(PyObject *self, Py_ssiz
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > > *)new std::vector< boost::shared_ptr< GeoCal::GroundMask > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9413,6 +9536,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_push_back(PyObject *self, PyObject 
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9444,6 +9570,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_front(PyObject *self, PyObject *arg
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9479,6 +9608,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_back(PyObject *self, PyObject *args
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9548,6 +9680,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_assign(PyObject *self, PyObject *ar
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9611,6 +9746,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_resize__SWIG_1(PyObject *self, Py_s
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::GroundMask > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9711,6 +9849,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert__SWIG_0(PyObject *self, Py_s
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::GroundMask > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9790,6 +9931,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_insert__SWIG_1(PyObject *self, Py_s
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_GroundMask_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::GroundMask > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9856,6 +10000,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_reserve(PyObject *self, PyObject *a
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9888,6 +10035,9 @@ SWIGINTERN PyObject *_wrap_Vector_GroundMask_capacity(PyObject *self, PyObject *
       result = ((std::vector< boost::shared_ptr< GeoCal::GroundMask > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9918,6 +10068,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_GroundMask(PyObject *self, PyObject *ar
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

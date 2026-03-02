@@ -4722,14 +4722,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4750,7 +4750,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4765,7 +4765,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7216,6 +7216,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_0(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7303,6 +7306,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_1(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7374,6 +7380,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_2(PyObject *self, Py_s
     try {
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((std::string const &)*arg1,(std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7561,6 +7570,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_3(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6,arg7,(std::string const &)*arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7734,6 +7746,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_4(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7897,6 +7912,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_5(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8046,6 +8064,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_6(PyObject *self, Py_s
     try {
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::vector< std::string,std::allocator< std::string > > const &)*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8242,6 +8263,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_7(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::string const &)*arg5,(std::vector< std::string,std::allocator< std::string > > const &)*arg6,(std::string const &)*arg7,arg8,(std::string const &)*arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8430,6 +8454,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_8(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::string const &)*arg5,(std::vector< std::string,std::allocator< std::string > > const &)*arg6,(std::string const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8608,6 +8635,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_9(PyObject *self, Py_s
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::string const &)*arg5,(std::vector< std::string,std::allocator< std::string > > const &)*arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8772,6 +8802,9 @@ SWIGINTERN PyObject *_wrap_new_AirMspiIgcCollection__SWIG_10(PyObject *self, Py_
     try {
       result = (GeoCal::AirMspiIgcCollection *)new GeoCal::AirMspiIgcCollection((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2,(boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4,(std::string const &)*arg5,(std::vector< std::string,std::allocator< std::string > > const &)*arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8989,6 +9022,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_image_ground_connection(PyObject
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->image_ground_connection(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9054,6 +9090,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_have_config(PyObject *self, PyOb
     try {
       result = (bool)((GeoCal::AirMspiIgcCollection const *)arg1)->have_config(arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9121,6 +9160,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_config_value_double(PyObject *se
       result = (double)GeoCal_AirMspiIgcCollection_config_value_double((GeoCal::AirMspiIgcCollection const *)arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9187,6 +9229,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_config_value_int(PyObject *self,
       result = (int)GeoCal_AirMspiIgcCollection_config_value_int((GeoCal::AirMspiIgcCollection const *)arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9252,6 +9297,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_config_value_string(PyObject *se
     try {
       result = GeoCal_AirMspiIgcCollection_config_value_string((GeoCal::AirMspiIgcCollection const *)arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9331,6 +9379,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_config_value(PyObject *self,
       (arg1)->set_config_value(arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9386,6 +9437,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_orbit(PyObject *self, PyObject *
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->orbit(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9438,6 +9492,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_l1b1_file_name(PyObject *self, P
     try {
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->l1b1_file_name(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9508,6 +9565,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_orbit(PyObject *self, PyObje
       (arg1)->set_orbit((boost::shared_ptr< GeoCal::Orbit > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9558,6 +9618,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_camera(PyObject *self, PyObject 
     try {
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->camera(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9630,6 +9693,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_camera(PyObject *self, PyObj
       (arg1)->set_camera((boost::shared_ptr< GeoCal::MspiCamera > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9680,6 +9746,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_gimbal(PyObject *self, PyObject 
     try {
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->gimbal(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9752,6 +9821,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_set_gimbal(PyObject *self, PyObj
       (arg1)->set_gimbal((boost::shared_ptr< GeoCal::MspiGimbal > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9802,6 +9874,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_time_table(PyObject *self, PyObj
     try {
       result = ((GeoCal::AirMspiIgcCollection const *)arg1)->time_table(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9856,6 +9931,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_number_band(PyObject *self, PyOb
       result = (int)(arg1)->number_band(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9905,6 +9983,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_band__SWIG_0(PyObject *self, Py_
     try {
       result = (int)(arg1)->band(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9962,6 +10043,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_band__SWIG_1(PyObject *self, Py_
     try {
       (arg1)->band(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10042,6 +10126,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_min_l1b1_line(PyObject *self, Py
       result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->min_l1b1_line(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10093,6 +10180,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_max_l1b1_line(PyObject *self, Py
       result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->max_l1b1_line(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10143,6 +10233,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_view_number_to_image_index(PyObj
     try {
       result = (int)((GeoCal::AirMspiIgcCollection const *)arg1)->view_number_to_image_index(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10212,6 +10305,9 @@ SWIGINTERN PyObject *_wrap_AirMspiIgcCollection_replace_view_config(PyObject *se
       (arg1)->replace_view_config((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10258,6 +10354,9 @@ SWIGINTERN PyObject *_wrap_delete_AirMspiIgcCollection(PyObject *self, PyObject 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

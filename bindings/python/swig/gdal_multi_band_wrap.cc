@@ -4660,14 +4660,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4688,7 +4688,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4703,7 +4703,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6620,6 +6620,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_0(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6676,6 +6679,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_1(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6724,6 +6730,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_2(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6763,6 +6772,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_3(PyObject *self, Py_ssize_t 
     try {
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6867,6 +6879,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_4(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6968,6 +6983,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_5(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7061,6 +7079,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_6(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7141,6 +7162,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_7(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,(std::string const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7205,6 +7229,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_8(PyObject *self, Py_ssize_t 
     try {
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7335,6 +7362,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_9(PyObject *self, Py_ssize_t 
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7458,6 +7488,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_10(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7573,6 +7606,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_11(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7680,6 +7716,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_12(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7779,6 +7818,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_13(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7864,6 +7906,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_14(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalRasterImage const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7994,6 +8039,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_15(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalMultiBand const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8117,6 +8165,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_16(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalMultiBand const &)*arg3,(std::string const &)*arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8232,6 +8283,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_17(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalMultiBand const &)*arg3,(std::string const &)*arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8339,6 +8393,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_18(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalMultiBand const &)*arg3,(std::string const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8438,6 +8495,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_19(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalMultiBand const &)*arg3,(std::string const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8523,6 +8583,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_20(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::GdalMultiBand const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8648,6 +8711,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_21(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7,arg8,arg9,arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8766,6 +8832,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_22(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8876,6 +8945,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_23(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8978,6 +9050,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_24(PyObject *self, Py_ssize_t
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6,(std::string const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9066,6 +9141,9 @@ SWIGINTERN PyObject *_wrap_new_GdalMultiBand__SWIG_25(PyObject *self, Py_ssize_t
     try {
       result = (GeoCal::GdalMultiBand *)new GeoCal::GdalMultiBand((std::string const &)*arg1,(std::string const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9621,6 +9699,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_set_rpc(PyObject *self, PyObject *args)
       (arg1)->set_rpc((GeoCal::Rpc const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9691,6 +9772,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_set_map_info(PyObject *self, PyObject *
     try {
       (arg1)->set_map_info((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9797,6 +9881,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_save__SWIG_0(PyObject *self, Py_ssize_t
       GeoCal::GdalMultiBand::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImageMultiBand const &)*arg3,arg4,arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9895,6 +9982,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_save__SWIG_1(PyObject *self, Py_ssize_t
       GeoCal::GdalMultiBand::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImageMultiBand const &)*arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9983,6 +10073,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_save__SWIG_2(PyObject *self, Py_ssize_t
       GeoCal::GdalMultiBand::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImageMultiBand const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10062,6 +10155,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_save__SWIG_3(PyObject *self, Py_ssize_t
     try {
       GeoCal::GdalMultiBand::save((std::string const &)*arg1,(std::string const &)*arg2,(GeoCal::RasterImageMultiBand const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10158,6 +10254,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_gdal_raster_image(PyObject *self, PyObj
       result = ((GeoCal::GdalMultiBand const *)arg1)->gdal_raster_image(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10204,6 +10303,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_data_set(PyObject *self, PyObject *args
       result = (boost::shared_ptr< GDALDataset > *) &((GeoCal::GdalMultiBand const *)arg1)->data_set();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10246,6 +10348,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_flush(PyObject *self, PyObject *args) {
     try {
       ((GeoCal::GdalMultiBand const *)arg1)->flush();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10290,6 +10395,9 @@ SWIGINTERN PyObject *_wrap_GdalMultiBand_close(PyObject *self, PyObject *args) {
       ((GeoCal::GdalMultiBand const *)arg1)->close();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10332,6 +10440,9 @@ SWIGINTERN PyObject *_wrap_delete_GdalMultiBand(PyObject *self, PyObject *args) 
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

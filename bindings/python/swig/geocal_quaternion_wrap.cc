@@ -4526,14 +4526,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4554,7 +4554,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4569,7 +4569,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6525,6 +6525,9 @@ SWIGINTERN PyObject *_wrap_new_Quaternion_AutoDerivative_double(PyObject *self, 
       result = (boost::math::quaternion< GeoCal::AutoDerivative< double > > *)new boost::math::quaternion< GeoCal::AutoDerivative< double > >(SWIG_STD_MOVE(arg1),SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),SWIG_STD_MOVE(arg4));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6556,6 +6559,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_1(PyO
     try {
       result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_1();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6593,6 +6599,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_2(PyO
       result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_2();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6629,6 +6638,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_3(PyO
       result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_3();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6664,6 +6676,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double__v_R_component_4(PyO
     try {
       result = ((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1)->R_component_4();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6715,6 +6730,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___add____SWIG_0(PyOb
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6760,6 +6778,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___add____SWIG_1(PyOb
     try {
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____add____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6843,6 +6864,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___sub____SWIG_0(PyOb
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____sub____SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6888,6 +6912,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___sub____SWIG_1(PyOb
     try {
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____sub____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6971,6 +6998,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___mul____SWIG_0(PyOb
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____mul____SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7016,6 +7046,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___mul____SWIG_1(PyOb
     try {
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____mul____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7099,6 +7132,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___div____SWIG_0(PyOb
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____div____SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7144,6 +7180,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___div____SWIG_1(PyOb
     try {
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg____div____SWIG_1(arg1,(boost::math::quaternion< GeoCal::AutoDerivative< double > > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7213,6 +7252,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double_conj(PyObject *self,
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__conj(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7244,6 +7286,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double_to_matrix(PyObject *
     try {
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__to_matrix((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7280,6 +7325,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double_from_matrix(PyObject
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__from_matrix((blitz::Array< GeoCal::AutoDerivative< double >,2 > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7312,6 +7360,9 @@ SWIGINTERN PyObject *_wrap_Quaternion_AutoDerivative_double___str__(PyObject *se
       result = boost_math_quaternion_Sl_GeoCal_AutoDerivative_Sl_double_Sg__Sg__print_to_string((boost::math::quaternion< GeoCal::AutoDerivative< double > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7342,6 +7393,9 @@ SWIGINTERN PyObject *_wrap_delete_Quaternion_AutoDerivative_double(PyObject *sel
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7384,6 +7438,9 @@ SWIGINTERN PyObject *_wrap_quat_rot_x__SWIG_0(PyObject *self, Py_ssize_t nobjs, 
       result = GeoCal::quat_rot_x(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7414,6 +7471,9 @@ SWIGINTERN PyObject *_wrap_quat_rot_y__SWIG_0(PyObject *self, Py_ssize_t nobjs, 
       result = GeoCal::quat_rot_y(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7443,6 +7503,9 @@ SWIGINTERN PyObject *_wrap_quat_rot_z__SWIG_0(PyObject *self, Py_ssize_t nobjs, 
     try {
       result = GeoCal::quat_rot_z(arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7486,6 +7549,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_0(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7539,6 +7605,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_1(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7600,6 +7669,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_2(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7669,6 +7741,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_3(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7746,6 +7821,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_4(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7831,6 +7909,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_5(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7925,6 +8006,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_6(PyObject *self, Py_ssize_t nobjs, Py
       result = GeoCal::quat_rot((std::string const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7961,6 +8045,9 @@ SWIGINTERN PyObject *_wrap_quaternion_to_matrix(PyObject *self, PyObject *args) 
     try {
       result = GeoCal::quaternion_to_matrix((boost::math::quaternion< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8027,6 +8114,9 @@ SWIGINTERN PyObject *_wrap_matrix_to_quaternion(PyObject *self, PyObject *args) 
       result = GeoCal::matrix_to_quaternion((blitz::Array< double,2 > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8061,6 +8151,9 @@ SWIGINTERN PyObject *_wrap_quaternion_to_array(PyObject *self, PyObject *args) {
     try {
       result = GeoCal::quaternion_to_array((boost::math::quaternion< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8127,6 +8220,9 @@ SWIGINTERN PyObject *_wrap_array_to_quaternion(PyObject *self, PyObject *args) {
       result = GeoCal::array_to_quaternion((blitz::Array< double,1 > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8172,6 +8268,9 @@ SWIGINTERN PyObject *_wrap_quat_to_ypr(PyObject *self, PyObject *args) {
     try {
       GeoCal::quat_to_ypr((boost::math::quaternion< double > const &)*arg1,*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8237,6 +8336,9 @@ SWIGINTERN PyObject *_wrap_quat_to_euler(PyObject *self, PyObject *args) {
       GeoCal::quat_to_euler((boost::math::quaternion< double > const &)*arg1,*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8298,6 +8400,9 @@ SWIGINTERN PyObject *_wrap_determine_quat_rot(PyObject *self, PyObject *args) {
       result = GeoCal::determine_quat_rot((boost::array< double,3 > const &)*arg1,(boost::array< double,3 > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8331,6 +8436,9 @@ SWIGINTERN PyObject *_wrap_quat_normalize(PyObject *self, PyObject *args) {
     try {
       GeoCal::normalize(*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8382,6 +8490,9 @@ SWIGINTERN PyObject *_wrap_quat_rot_x__SWIG_1(PyObject *self, Py_ssize_t nobjs, 
     try {
       result = GeoCal::quat_rot_x((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8468,6 +8579,9 @@ SWIGINTERN PyObject *_wrap_quat_rot_y__SWIG_1(PyObject *self, Py_ssize_t nobjs, 
       result = GeoCal::quat_rot_y((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8552,6 +8666,9 @@ SWIGINTERN PyObject *_wrap_quat_rot_z__SWIG_1(PyObject *self, Py_ssize_t nobjs, 
     try {
       result = GeoCal::quat_rot_z((GeoCal::AutoDerivative< double > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8651,6 +8768,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_7(PyObject *self, Py_ssize_t nobjs, Py
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8745,6 +8865,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_8(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8869,6 +8992,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_9(PyObject *self, Py_ssize_t nobjs, Py
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9022,6 +9148,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_10(PyObject *self, Py_ssize_t nobjs, P
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9204,6 +9333,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_11(PyObject *self, Py_ssize_t nobjs, P
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5,(GeoCal::AutoDerivative< double > const &)*arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9415,6 +9547,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_12(PyObject *self, Py_ssize_t nobjs, P
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5,(GeoCal::AutoDerivative< double > const &)*arg6,(GeoCal::AutoDerivative< double > const &)*arg7);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9655,6 +9790,9 @@ SWIGINTERN PyObject *_wrap_quat_rot__SWIG_13(PyObject *self, Py_ssize_t nobjs, P
     try {
       result = GeoCal::quat_rot((std::string const &)*arg1,(GeoCal::AutoDerivative< double > const &)*arg2,(GeoCal::AutoDerivative< double > const &)*arg3,(GeoCal::AutoDerivative< double > const &)*arg4,(GeoCal::AutoDerivative< double > const &)*arg5,(GeoCal::AutoDerivative< double > const &)*arg6,(GeoCal::AutoDerivative< double > const &)*arg7,(GeoCal::AutoDerivative< double > const &)*arg8);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9950,6 +10088,9 @@ SWIGINTERN PyObject *_wrap_quaternion_delta_angle(PyObject *self, PyObject *args
       result = (double)GeoCal::quaternion_delta_angle((boost::math::quaternion< double > const &)*arg1,(boost::math::quaternion< double > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10012,6 +10153,9 @@ SWIGINTERN PyObject *_wrap_interpolate_quaternion_rotation(PyObject *self, PyObj
     try {
       result = GeoCal::interpolate_quaternion_rotation((boost::math::quaternion< double > const &)*arg1,(boost::math::quaternion< double > const &)*arg2,(double const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

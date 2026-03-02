@@ -4646,14 +4646,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4674,7 +4674,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4689,7 +4689,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6819,7 +6819,7 @@ blitz::Array< double,1 > SwigDirector_ImageGroundConnection::parameter() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6871,7 +6871,7 @@ void SwigDirector_ImageGroundConnection::parameter(blitz::Array< double,1 > cons
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6900,7 +6900,7 @@ GeoCal::ArrayAd< double,1 > SwigDirector_ImageGroundConnection::parameter_with_d
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6943,7 +6943,7 @@ void SwigDirector_ImageGroundConnection::parameter_with_derivative(GeoCal::Array
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6969,7 +6969,7 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_ImageGroun
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7005,7 +7005,7 @@ blitz::Array< double,1 > SwigDirector_ImageGroundConnection::parameter_subset() 
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7057,7 +7057,7 @@ void SwigDirector_ImageGroundConnection::parameter_subset(blitz::Array< double,1
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7086,7 +7086,7 @@ GeoCal::ArrayAd< double,1 > SwigDirector_ImageGroundConnection::parameter_with_d
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7129,7 +7129,7 @@ void SwigDirector_ImageGroundConnection::parameter_with_derivative_subset(GeoCal
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7155,7 +7155,7 @@ std::vector< std::string,std::allocator< std::string > > SwigDirector_ImageGroun
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7191,7 +7191,7 @@ blitz::Array< bool,1 > SwigDirector_ImageGroundConnection::parameter_mask() cons
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7230,7 +7230,7 @@ std::string SwigDirector_ImageGroundConnection::desc() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7272,7 +7272,7 @@ boost::shared_ptr< GeoCal::CartesianFixedLookVector > SwigDirector_ImageGroundCo
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7326,7 +7326,7 @@ boost::shared_ptr< GeoCal::CartesianFixed > SwigDirector_ImageGroundConnection::
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7385,7 +7385,7 @@ blitz::Array< double,1 > SwigDirector_ImageGroundConnection::collinearity_residu
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7435,7 +7435,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::collinearity_residu
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7480,7 +7480,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_ImageGroundConnection
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7540,7 +7540,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_ImageGroundConnection
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7596,7 +7596,7 @@ boost::shared_ptr< GeoCal::GroundCoordinate > SwigDirector_ImageGroundConnection
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7650,7 +7650,7 @@ GeoCal::ImageCoordinate SwigDirector_ImageGroundConnection::image_coordinate(Geo
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7694,7 +7694,7 @@ void SwigDirector_ImageGroundConnection::image_coordinate_with_status(GeoCal::Gr
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7726,7 +7726,7 @@ void SwigDirector_ImageGroundConnection::image_coordinate_extended(GeoCal::Groun
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7759,7 +7759,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7805,7 +7805,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7849,7 +7849,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7910,7 +7910,7 @@ blitz::Array< double,2 > SwigDirector_ImageGroundConnection::image_coordinate_ja
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7948,7 +7948,7 @@ int SwigDirector_ImageGroundConnection::number_line() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -7982,7 +7982,7 @@ int SwigDirector_ImageGroundConnection::number_sample() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8016,7 +8016,7 @@ int SwigDirector_ImageGroundConnection::number_band() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8050,7 +8050,7 @@ bool SwigDirector_ImageGroundConnection::has_time() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8091,7 +8091,7 @@ GeoCal::Time SwigDirector_ImageGroundConnection::pixel_time(GeoCal::ImageCoordin
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8135,7 +8135,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter(GeoCal::ImageCoordin
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8169,7 +8169,7 @@ double SwigDirector_ImageGroundConnection::resolution_meter() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8206,7 +8206,7 @@ double SwigDirector_ImageGroundConnection::footprint_resolution_line(int Line,in
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8243,7 +8243,7 @@ double SwigDirector_ImageGroundConnection::footprint_resolution_sample(int Line,
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -8291,7 +8291,7 @@ blitz::Array< double,7 > SwigDirector_ImageGroundConnection::cf_look_vector_arr(
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -9139,6 +9139,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnectionFailed(PyObject *self, PyObj
       result = (GeoCal::ImageGroundConnectionFailed *)new GeoCal::ImageGroundConnectionFailed((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9186,6 +9189,9 @@ SWIGINTERN PyObject *_wrap_delete_ImageGroundConnectionFailed(PyObject *self, Py
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9322,6 +9328,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnection__SWIG_0(PyObject *self, Py_
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9479,6 +9488,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnection__SWIG_1(PyObject *self, Py_
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9664,6 +9676,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnection__SWIG_2(PyObject *self, Py_
       
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9727,6 +9742,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_desc(PyObject *self, PyObject *
           result = ((SwigDirector_ImageGroundConnection const *)darg)->desc();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9867,6 +9885,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize__SWIG_0(PyObject *se
     try {
       (darg)->initialize((boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10033,6 +10054,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize__SWIG_1(PyObject *se
     try {
       (darg)->initialize((boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10227,6 +10251,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_initialize__SWIG_2(PyObject *se
       (darg)->initialize((boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10293,6 +10320,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnection__SWIG_3(PyObject *self, Py_
       }
       
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10380,6 +10410,9 @@ SWIGINTERN PyObject *_wrap_delete_ImageGroundConnection(PyObject *self, PyObject
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10460,6 +10493,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_lv(PyObject *sel
           result = ((GeoCal::ImageGroundConnection const *)arg1)->cf_look_vector_lv((GeoCal::ImageCoordinate const &)*arg2);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10546,6 +10582,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_pos(PyObject *se
           result = ((GeoCal::ImageGroundConnection const *)arg1)->cf_look_vector_pos((GeoCal::ImageCoordinate const &)*arg2);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10662,6 +10701,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_collinearity_residual(PyObject 
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10671,7 +10713,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_collinearity_residual(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -10796,6 +10838,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_collinearity_residual_jacobian(
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -10805,7 +10850,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_collinearity_residual_jacobian(
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10940,6 +10985,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *self, PyO
       ((GeoCal::ImageGroundConnection const *)arg1)->compare_igc((GeoCal::ImageGroundConnection const &)*arg2,arg3,arg4,arg5,*arg6,*arg7,*arg8,*arg9,*arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10947,7 +10995,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *self, PyO
   resultobj = SWIG_Py_Void();
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10970,7 +11018,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *self, PyO
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10993,7 +11041,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *self, PyO
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11016,7 +11064,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *self, PyO
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11039,7 +11087,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_compare_igc(PyObject *self, PyO
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11135,6 +11183,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_ground_coordinate(PyObject *sel
           result = ((GeoCal::ImageGroundConnection const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11251,6 +11302,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_ground_coordinate_dem(PyObject 
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -11345,6 +11399,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_ground_coordinate_approx_height
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -11430,6 +11487,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate(PyObject *self
           result = ((GeoCal::ImageGroundConnection const *)arg1)->image_coordinate((GeoCal::GroundCoordinate const &)*arg2);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11526,6 +11586,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_with_status(Py
           ((GeoCal::ImageGroundConnection const *)arg1)->image_coordinate_with_status((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11629,6 +11692,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_extended(PyObj
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -11723,6 +11789,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_cf(PyObjec
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -11732,7 +11801,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_cf(PyObjec
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11836,6 +11905,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_cf_fd(PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -11845,7 +11917,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_cf_fd(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -11941,6 +12013,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_parm(PyObj
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -11950,7 +12025,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_parm(PyObj
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -12066,6 +12141,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_parm_fd(Py
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -12075,7 +12153,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_image_coordinate_jac_parm_fd(Py
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -12169,6 +12247,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cover__SWIG_0(PyObject *self, P
       result = ((GeoCal::ImageGroundConnection const *)arg1)->cover((GeoCal::MapInfo const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12243,6 +12324,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cover__SWIG_1(PyObject *self, P
     try {
       result = ((GeoCal::ImageGroundConnection const *)arg1)->cover((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12320,6 +12404,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_naif_code(PyObject *self, Py
       result = (int)((GeoCal::ImageGroundConnection const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12364,6 +12451,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_cartesian_fixed(PyObject *se
       result = ((GeoCal::ImageGroundConnection const *)arg1)->cartesian_fixed();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12407,6 +12497,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image__SWIG_0(PyObject *self
     try {
       result = ((GeoCal::ImageGroundConnection const *)arg1)->image();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12478,6 +12571,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image__SWIG_1(PyObject *self
       (arg1)->image((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12547,6 +12643,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image_multi_band__SWIG_0(PyO
     try {
       result = ((GeoCal::ImageGroundConnection const *)arg1)->image_multi_band();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12618,6 +12717,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image_multi_band__SWIG_1(PyO
       (arg1)->image_multi_band((boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12687,6 +12789,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image_mask__SWIG_0(PyObject 
     try {
       result = ((GeoCal::ImageGroundConnection const *)arg1)->image_mask();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12758,6 +12863,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_image_mask__SWIG_1(PyObject 
       (arg1)->image_mask((boost::shared_ptr< GeoCal::ImageMask > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12828,6 +12936,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_ground_mask__SWIG_0(PyObject
       result = ((GeoCal::ImageGroundConnection const *)arg1)->ground_mask();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12897,6 +13008,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_ground_mask__SWIG_1(PyObject
     try {
       (arg1)->ground_mask((boost::shared_ptr< GeoCal::GroundMask > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12979,6 +13093,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_number_line(PyObject *self, 
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13034,6 +13151,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_number_sample(PyObject *self
           result = (int)((GeoCal::ImageGroundConnection const *)arg1)->number_sample();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13091,6 +13211,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_number_band(PyObject *self, 
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13135,6 +13258,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_title__SWIG_0(PyObject *self
     try {
       result = ((GeoCal::ImageGroundConnection const *)arg1)->title();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13189,6 +13315,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_title__SWIG_1(PyObject *self
     try {
       (arg1)->title((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13272,6 +13401,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_has_time(PyObject *self, PyO
           result = (bool)((GeoCal::ImageGroundConnection const *)arg1)->has_time();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13357,6 +13489,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_pixel_time(PyObject *self, PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13407,6 +13542,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection___str__(PyObject *self, PyObjec
     try {
       result = ((GeoCal::ImageGroundConnection const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13488,6 +13626,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_resolution_meter__SWIG_0(PyObje
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13541,6 +13682,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_resolution_meter__SWIG_1(PyObje
           result = (double)((GeoCal::ImageGroundConnection const *)arg1)->resolution_meter();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13624,6 +13768,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter__SWIG_0(PyObject *
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13633,7 +13780,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter__SWIG_0(PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -13718,6 +13865,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter__SWIG_1(PyObject *
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13799,6 +13949,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_with_derivative__S
           result = ((GeoCal::ImageGroundConnection const *)arg1)->parameter_with_derivative();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13886,6 +14039,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_with_derivative__S
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -13970,6 +14126,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_name(PyObject *sel
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14024,6 +14183,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_subset__SWIG_0(PyO
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14033,7 +14195,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_subset__SWIG_0(PyO
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -14118,6 +14280,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_subset__SWIG_1(PyO
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14199,6 +14364,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_with_derivative_su
           result = ((GeoCal::ImageGroundConnection const *)arg1)->parameter_with_derivative_subset();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14286,6 +14454,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_with_derivative_su
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14370,6 +14541,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_name_subset(PyObje
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14426,6 +14600,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_mask(PyObject *sel
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14435,7 +14612,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_parameter_mask(PyObject *sel
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -14518,6 +14695,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_footprint_resolution_line(PyObj
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14588,6 +14768,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_footprint_resolution_sample(PyO
           result = (double)((GeoCal::ImageGroundConnection const *)arg1)->footprint_resolution_sample(arg2,arg3);
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -14699,6 +14882,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_0(PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14708,7 +14894,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_0(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[7], stride[7];
     for(int i = 0; i < 7; ++i) {
@@ -14822,6 +15008,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_1(PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14831,7 +15020,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_1(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[7], stride[7];
     for(int i = 0; i < 7; ++i) {
@@ -14937,6 +15126,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_2(PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -14946,7 +15138,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_2(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[7], stride[7];
     for(int i = 0; i < 7; ++i) {
@@ -15044,6 +15236,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_3(PyOb
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -15053,7 +15248,7 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection_cf_look_vector_arr__SWIG_3(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/env//.././swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[7], stride[7];
     for(int i = 0; i < 7; ++i) {
@@ -15152,6 +15347,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection__v_dem(PyObject *self, PyObject
       result = ((GeoCal::ImageGroundConnection const *)arg1)->dem_ptr();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15222,6 +15420,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnection___dem(PyObject *self, PyObject 
     try {
       (arg1)->dem((boost::shared_ptr< GeoCal::Dem > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -15338,6 +15539,9 @@ SWIGINTERN PyObject *_wrap_new_OffsetImageGroundConnection__SWIG_0(PyObject *sel
       result = (GeoCal::OffsetImageGroundConnection *)new GeoCal::OffsetImageGroundConnection((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15422,6 +15626,9 @@ SWIGINTERN PyObject *_wrap_new_OffsetImageGroundConnection__SWIG_1(PyObject *sel
       result = (GeoCal::OffsetImageGroundConnection *)new GeoCal::OffsetImageGroundConnection((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15497,6 +15704,9 @@ SWIGINTERN PyObject *_wrap_OffsetImageGroundConnection__v_original_image_ground_
       result = ((GeoCal::OffsetImageGroundConnection const *)arg1)->original_image_ground_connection();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15543,6 +15753,9 @@ SWIGINTERN PyObject *_wrap_OffsetImageGroundConnection__v_line_offset(PyObject *
       result = (double)((GeoCal::OffsetImageGroundConnection const *)arg1)->line_offset();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15587,6 +15800,9 @@ SWIGINTERN PyObject *_wrap_OffsetImageGroundConnection__v_sample_offset(PyObject
       result = (double)((GeoCal::OffsetImageGroundConnection const *)arg1)->sample_offset();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15629,6 +15845,9 @@ SWIGINTERN PyObject *_wrap_delete_OffsetImageGroundConnection(PyObject *self, Py
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -15689,6 +15908,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnectionCopy__SWIG_0(PyObject *self,
     try {
       result = (GeoCal::ImageGroundConnectionCopy *)new GeoCal::ImageGroundConnectionCopy((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -15890,6 +16112,9 @@ SWIGINTERN PyObject *_wrap_new_ImageGroundConnectionCopy__SWIG_1(PyObject *self,
       result = (GeoCal::ImageGroundConnectionCopy *)new GeoCal::ImageGroundConnectionCopy((boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg1,(boost::shared_ptr< GeoCal::Dem > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImageMultiBand > const &)*arg4,(std::string const &)*arg5,(boost::shared_ptr< GeoCal::ImageMask > const &)*arg6,(boost::shared_ptr< GeoCal::GroundMask > const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -15967,6 +16192,9 @@ SWIGINTERN PyObject *_wrap_ImageGroundConnectionCopy__v_igc_original(PyObject *s
       result = ((GeoCal::ImageGroundConnectionCopy const *)arg1)->igc_original();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16011,6 +16239,9 @@ SWIGINTERN PyObject *_wrap_delete_ImageGroundConnectionCopy(PyObject *self, PyOb
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16057,6 +16288,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_iterator(PyObject *self,
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16088,6 +16322,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___nonzero__(PyObject *se
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16121,6 +16358,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___bool__(PyObject *self,
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16152,6 +16392,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___len__(PyObject *self, 
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16206,6 +16449,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___getslice__(PyObject *s
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16258,6 +16504,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___setslice____SWIG_0(PyO
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16322,6 +16571,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___setslice____SWIG_1(PyO
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16405,6 +16657,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___delslice__(PyObject *s
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16448,6 +16703,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___delitem____SWIG_0(PyOb
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16490,6 +16748,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___getitem____SWIG_0(PyOb
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16548,6 +16809,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___setitem____SWIG_0(PyOb
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16592,6 +16856,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___setitem____SWIG_1(PyOb
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16633,6 +16900,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___delitem____SWIG_1(PyOb
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16710,6 +16980,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___getitem____SWIG_1(PyOb
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -16817,6 +17090,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection___setitem____SWIG_2(PyOb
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16899,6 +17175,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_pop(PyObject *self, PyOb
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16958,6 +17237,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_append(PyObject *self, P
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -16979,6 +17261,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageGroundConnection__SWIG_0(PyObject *se
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > *)new std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17017,6 +17302,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageGroundConnection__SWIG_1(PyObject *se
       result = (std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > *)new std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17053,6 +17341,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_empty(PyObject *self, Py
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17084,6 +17375,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_size(PyObject *self, PyO
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17126,6 +17420,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_swap(PyObject *self, PyO
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17157,6 +17454,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_begin(PyObject *self, Py
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17191,6 +17491,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_end(PyObject *self, PyOb
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17223,6 +17526,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_rbegin(PyObject *self, P
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17257,6 +17563,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_rend(PyObject *self, PyO
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17288,6 +17597,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_clear(PyObject *self, Py
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17321,6 +17633,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_get_allocator(PyObject *
       result = ((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17350,6 +17665,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageGroundConnection__SWIG_2(PyObject *se
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > *)new std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17383,6 +17701,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_pop_back(PyObject *self,
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17420,6 +17741,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_resize__SWIG_0(PyObject 
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17464,6 +17788,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_erase__SWIG_0(PyObject *
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17523,6 +17850,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_erase__SWIG_1(PyObject *
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17609,6 +17939,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ImageGroundConnection__SWIG_3(PyObject *se
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > *)new std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17717,6 +18050,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_push_back(PyObject *self
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17748,6 +18084,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_front(PyObject *self, Py
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17783,6 +18122,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_back(PyObject *self, PyO
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -17852,6 +18194,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_assign(PyObject *self, P
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -17915,6 +18260,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_resize__SWIG_1(PyObject 
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -18015,6 +18363,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_insert__SWIG_0(PyObject 
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -18094,6 +18445,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_insert__SWIG_1(PyObject 
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ImageGroundConnection_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -18160,6 +18514,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_reserve(PyObject *self, 
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -18192,6 +18549,9 @@ SWIGINTERN PyObject *_wrap_Vector_ImageGroundConnection_capacity(PyObject *self,
       result = ((std::vector< boost::shared_ptr< GeoCal::ImageGroundConnection > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -18222,6 +18582,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_ImageGroundConnection(PyObject *self, P
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

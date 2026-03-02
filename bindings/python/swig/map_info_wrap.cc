@@ -4567,14 +4567,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4595,7 +4595,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4610,7 +4610,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6863,6 +6863,9 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_0(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::MapInfo *)new GeoCal::MapInfo();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6971,6 +6974,9 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_1(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::MapInfo *)new GeoCal::MapInfo((boost::shared_ptr< GeoCal::CoordinateConverter > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7071,6 +7077,9 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_2(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::MapInfo *)new GeoCal::MapInfo((boost::shared_ptr< GeoCal::CoordinateConverter > const &)*arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7167,6 +7176,9 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_3(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::MapInfo *)new GeoCal::MapInfo((boost::shared_ptr< GeoCal::CoordinateConverter > const &)*arg1,(blitz::Array< double,1 > const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7254,6 +7266,9 @@ SWIGINTERN PyObject *_wrap_new_MapInfo__SWIG_4(PyObject *self, Py_ssize_t nobjs,
     try {
       result = (GeoCal::MapInfo *)new GeoCal::MapInfo((boost::shared_ptr< GeoCal::CoordinateConverter > const &)*arg1,(blitz::Array< double,1 > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7347,6 +7362,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_change_to_geodetic360(PyObject *self, PyObjec
       (arg1)->change_to_geodetic360();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7389,6 +7407,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_change_to_geodetic(PyObject *self, PyObject *
     try {
       (arg1)->change_to_geodetic();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7434,6 +7455,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_is_geodetic_360(PyObject *self, PyObject *
       result = (bool)((GeoCal::MapInfo const *)arg1)->is_geodetic_360();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7477,6 +7501,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_coordinate_converter(PyObject *self, PyObj
     try {
       result = ((GeoCal::MapInfo const *)arg1)->coordinate_converter_ptr();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7523,6 +7550,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_is_point(PyObject *self, PyObject *args) {
     try {
       result = (bool)((GeoCal::MapInfo const *)arg1)->is_point();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7603,6 +7633,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate(PyObject *self, PyObject *args) {
       ((GeoCal::MapInfo const *)arg1)->coordinate((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7678,6 +7711,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_cover__SWIG_0(PyObject *self, Py_ssize_t nobj
       result = ((GeoCal::MapInfo const *)arg1)->cover((std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7738,6 +7774,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_cover__SWIG_1(PyObject *self, Py_ssize_t nobj
     try {
       result = ((GeoCal::MapInfo const *)arg1)->cover((std::vector< boost::shared_ptr< GeoCal::GroundCoordinate >,std::allocator< boost::shared_ptr< GeoCal::GroundCoordinate > > > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7860,6 +7899,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_ground_coordinate__SWIG_0(PyObject *self, Py_
       result = ((GeoCal::MapInfo const *)arg1)->ground_coordinate(arg2,arg3,(GeoCal::Dem const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7919,6 +7961,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_ground_coordinate__SWIG_1(PyObject *self, Py_
     try {
       result = ((GeoCal::MapInfo const *)arg1)->ground_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8022,6 +8067,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_intersection(PyObject *self, PyObject *args) 
       result = ((GeoCal::MapInfo const *)arg1)->intersection((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8098,6 +8146,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_map_union(PyObject *self, PyObject *args) {
       result = ((GeoCal::MapInfo const *)arg1)->map_union((GeoCal::MapInfo const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8166,6 +8217,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate__SWIG_0(PyObject *self, P
     try {
       ((GeoCal::MapInfo const *)arg1)->index_to_coordinate(arg2,arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8269,6 +8323,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate__SWIG_1(PyObject *self, P
     try {
       ((GeoCal::MapInfo const *)arg1)->index_to_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8406,6 +8463,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_index_to_coordinate__SWIG_2(PyObject *self, P
     try {
       ((GeoCal::MapInfo const *)arg1)->index_to_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8582,6 +8642,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index__SWIG_0(PyObject *self, P
       ((GeoCal::MapInfo const *)arg1)->coordinate_to_index(arg2,arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8697,6 +8760,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index__SWIG_1(PyObject *self, P
       ((GeoCal::MapInfo const *)arg1)->coordinate_to_index((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8799,6 +8865,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_coordinate_to_index__SWIG_2(PyObject *self, P
     try {
       ((GeoCal::MapInfo const *)arg1)->coordinate_to_index((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8905,6 +8974,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_lrc_x(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MapInfo const *)arg1)->lrc_x();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8948,6 +9020,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_lrc_y(PyObject *self, PyObject *args) {
     try {
       result = (double)((GeoCal::MapInfo const *)arg1)->lrc_y();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8993,6 +9068,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_number_x_pixel(PyObject *self, PyObject *a
       result = (int)((GeoCal::MapInfo const *)arg1)->number_x_pixel();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9036,6 +9114,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_number_y_pixel(PyObject *self, PyObject *a
     try {
       result = (int)((GeoCal::MapInfo const *)arg1)->number_y_pixel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9081,6 +9162,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_resolution_meter(PyObject *self, PyObject 
       result = (double)((GeoCal::MapInfo const *)arg1)->resolution_meter();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9125,6 +9209,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_resolution_x(PyObject *self, PyObject *arg
       result = (double)((GeoCal::MapInfo const *)arg1)->resolution_x();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9168,6 +9255,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_resolution_y(PyObject *self, PyObject *arg
     try {
       result = (double)((GeoCal::MapInfo const *)arg1)->resolution_y();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9242,6 +9332,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_subset__SWIG_0(PyObject *self, Py_ssize_t nob
     try {
       result = ((GeoCal::MapInfo const *)arg1)->subset(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9320,6 +9413,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_subset__SWIG_1(PyObject *self, Py_ssize_t nob
     try {
       result = ((GeoCal::MapInfo const *)arg1)->subset(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9429,6 +9525,9 @@ SWIGINTERN PyObject *_wrap_MapInfo_scale(PyObject *self, PyObject *args) {
       result = ((GeoCal::MapInfo const *)arg1)->scale(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9477,6 +9576,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_ulc_x(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MapInfo const *)arg1)->ulc_x();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9521,6 +9623,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_ulc_y(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::MapInfo const *)arg1)->ulc_y();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9564,6 +9669,9 @@ SWIGINTERN PyObject *_wrap_MapInfo__v_transform(PyObject *self, PyObject *args) 
     try {
       result = ((GeoCal::MapInfo const *)arg1)->transform();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9630,6 +9738,9 @@ SWIGINTERN PyObject *_wrap_MapInfo___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::MapInfo const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9672,6 +9783,9 @@ SWIGINTERN PyObject *_wrap_delete_MapInfo(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

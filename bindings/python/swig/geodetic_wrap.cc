@@ -4558,14 +4558,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4586,7 +4586,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4601,7 +4601,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6355,6 +6355,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic__SWIG_0(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::Geodetic *)new GeoCal::Geodetic((GeoCal::GroundCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6404,6 +6407,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic__SWIG_1(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::Geodetic *)new GeoCal::Geodetic(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6445,6 +6451,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic__SWIG_2(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::Geodetic *)new GeoCal::Geodetic(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6469,6 +6478,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic__SWIG_3(PyObject *self, Py_ssize_t nobjs
     try {
       result = (GeoCal::Geodetic *)new GeoCal::Geodetic();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6556,6 +6568,9 @@ SWIGINTERN PyObject *_wrap_delete_Geodetic(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6618,6 +6633,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic360__SWIG_0(PyObject *self, Py_ssize_t no
       result = (GeoCal::Geodetic360 *)new GeoCal::Geodetic360((GeoCal::GroundCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6667,6 +6685,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic360__SWIG_1(PyObject *self, Py_ssize_t no
       result = (GeoCal::Geodetic360 *)new GeoCal::Geodetic360(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6708,6 +6729,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic360__SWIG_2(PyObject *self, Py_ssize_t no
       result = (GeoCal::Geodetic360 *)new GeoCal::Geodetic360(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6732,6 +6756,9 @@ SWIGINTERN PyObject *_wrap_new_Geodetic360__SWIG_3(PyObject *self, Py_ssize_t no
     try {
       result = (GeoCal::Geodetic360 *)new GeoCal::Geodetic360();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6820,6 +6847,9 @@ SWIGINTERN PyObject *_wrap_Geodetic360__v_longitude360(PyObject *self, PyObject 
       result = (double)((GeoCal::Geodetic360 const *)arg1)->longitude360();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6862,6 +6892,9 @@ SWIGINTERN PyObject *_wrap_delete_Geodetic360(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6925,6 +6958,9 @@ SWIGINTERN PyObject *_wrap_new_Geocentric__SWIG_0(PyObject *self, Py_ssize_t nob
       result = (GeoCal::Geocentric *)new GeoCal::Geocentric((GeoCal::GroundCoordinate const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6974,6 +7010,9 @@ SWIGINTERN PyObject *_wrap_new_Geocentric__SWIG_1(PyObject *self, Py_ssize_t nob
       result = (GeoCal::Geocentric *)new GeoCal::Geocentric(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7015,6 +7054,9 @@ SWIGINTERN PyObject *_wrap_new_Geocentric__SWIG_2(PyObject *self, Py_ssize_t nob
       result = (GeoCal::Geocentric *)new GeoCal::Geocentric(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7039,6 +7081,9 @@ SWIGINTERN PyObject *_wrap_new_Geocentric__SWIG_3(PyObject *self, Py_ssize_t nob
     try {
       result = (GeoCal::Geocentric *)new GeoCal::Geocentric();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7125,6 +7170,9 @@ SWIGINTERN PyObject *_wrap_delete_Geocentric(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

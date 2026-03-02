@@ -4644,14 +4644,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4672,7 +4672,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4687,7 +4687,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6707,6 +6707,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_0(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,(std::string const &)*arg11,(std::string const &)*arg12);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6829,6 +6832,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_1(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10,(std::string const &)*arg11);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6936,6 +6942,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_2(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9,arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7033,6 +7042,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_3(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7122,6 +7134,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_4(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7203,6 +7218,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_5(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7276,6 +7294,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_6(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7341,6 +7362,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_7(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7398,6 +7422,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_8(PyObject *self, Py_ssize_t nobjs,
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7446,6 +7473,9 @@ SWIGINTERN PyObject *_wrap_new_RsmGrid__SWIG_9(PyObject *self, Py_ssize_t nobjs,
     try {
       result = (GeoCal::RsmGrid *)new GeoCal::RsmGrid(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7655,6 +7685,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_fit_corr(PyObject *self, PyObject *args) {
       (arg1)->fit_corr((GeoCal::ImageGroundConnection const &)*arg2,(GeoCal::CoordinateConverter const &)*arg3,(GeoCal::RsmBase const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7696,6 +7729,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_error_in_fit__SWIG_0(PyObject *
     try {
       result = (bool)((GeoCal::RsmGrid const *)arg1)->ignore_igc_error_in_fit();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7747,6 +7783,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_ignore_igc_error_in_fit__SWIG_1(PyObject *
     try {
       (arg1)->ignore_igc_error_in_fit((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7820,6 +7859,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_line_grid(PyObject *self, PyObject *args) 
       result = ((GeoCal::RsmGrid const *)arg1)->line_grid();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7884,6 +7926,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_sample_grid(PyObject *self, PyObject *args
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->sample_grid();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7980,6 +8025,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_0(PyObject *self, Py_s
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8049,6 +8097,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_1(PyObject *self, Py_s
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8163,6 +8214,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_2(PyObject *self, Py_s
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8286,6 +8340,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_3(PyObject *self, Py_s
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3,(blitz::Array< double,1 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8418,6 +8475,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_4(PyObject *self, Py_s
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8540,6 +8600,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_5(PyObject *self, Py_s
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,2 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3,(blitz::Array< double,2 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8672,6 +8735,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_6(PyObject *self, Py_s
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8794,6 +8860,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate__SWIG_7(PyObject *self, Py_s
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate((blitz::Array< double,3 > const &)*arg2,(blitz::Array< double,3 > const &)*arg3,(blitz::Array< double,3 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9092,6 +9161,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate_jacobian__SWIG_0(PyObject *s
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate_jacobian(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9178,6 +9250,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_image_coordinate_jacobian__SWIG_1(PyObject *s
     try {
       result = ((GeoCal::RsmGrid const *)arg1)->image_coordinate_jacobian(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9279,6 +9354,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_number_x(PyObject *self, PyObject *args) {
       result = (int)((GeoCal::RsmGrid const *)arg1)->number_x(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9329,6 +9407,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_number_y(PyObject *self, PyObject *args) {
     try {
       result = (int)((GeoCal::RsmGrid const *)arg1)->number_y(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9381,6 +9462,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_x_offset(PyObject *self, PyObject *args) {
       result = (int)((GeoCal::RsmGrid const *)arg1)->x_offset(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9432,6 +9516,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_y_offset(PyObject *self, PyObject *args) {
       result = (int)((GeoCal::RsmGrid const *)arg1)->y_offset(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9475,6 +9562,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_number_z(PyObject *self, PyObject *args) {
     try {
       result = (int)((GeoCal::RsmGrid const *)arg1)->number_z();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9520,6 +9610,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_x_start(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::RsmGrid const *)arg1)->x_start();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9563,6 +9656,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_x_delta(PyObject *self, PyObject *args) {
     try {
       result = (double)((GeoCal::RsmGrid const *)arg1)->x_delta();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9608,6 +9704,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_y_start(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::RsmGrid const *)arg1)->y_start();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9651,6 +9750,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_y_delta(PyObject *self, PyObject *args) {
     try {
       result = (double)((GeoCal::RsmGrid const *)arg1)->y_delta();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9696,6 +9798,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_z_start(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::RsmGrid const *)arg1)->z_start();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9740,6 +9845,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_z_delta(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::RsmGrid const *)arg1)->z_delta();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9781,6 +9889,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_row_digit__SWIG_0(PyObject *s
     try {
       result = (int)((GeoCal::RsmGrid const *)arg1)->total_number_row_digit();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9832,6 +9943,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_row_digit__SWIG_1(PyObject *s
     try {
       (arg1)->total_number_row_digit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9903,6 +10017,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_col_digit__SWIG_0(PyObject *s
       result = (int)((GeoCal::RsmGrid const *)arg1)->total_number_col_digit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9953,6 +10070,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_total_number_col_digit__SWIG_1(PyObject *s
     try {
       (arg1)->total_number_col_digit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10024,6 +10144,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_row_digit__SWIG_0(PyObje
       result = (int)((GeoCal::RsmGrid const *)arg1)->number_fractional_row_digit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10074,6 +10197,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_row_digit__SWIG_1(PyObje
     try {
       (arg1)->number_fractional_row_digit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10145,6 +10271,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit__SWIG_0(PyObje
       result = (int)((GeoCal::RsmGrid const *)arg1)->number_fractional_col_digit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10195,6 +10324,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid__v_number_fractional_col_digit__SWIG_1(PyObje
     try {
       (arg1)->number_fractional_col_digit((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10267,6 +10399,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_x_direction(PyObject *self, PyObj
       (arg1)->extrapolate_x_direction();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10310,6 +10445,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_y_direction(PyObject *self, PyObj
       (arg1)->extrapolate_y_direction();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10352,6 +10490,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_extrapolate_z_direction(PyObject *self, PyObj
     try {
       (arg1)->extrapolate_z_direction();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10397,6 +10538,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_tre_size(PyObject *self, PyObject *args) {
       result = (int)((GeoCal::RsmGrid const *)arg1)->tre_size();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10441,6 +10585,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_tre_string(PyObject *self, PyObject *args) {
       result = ((GeoCal::RsmGrid const *)arg1)->tre_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10477,6 +10624,9 @@ SWIGINTERN PyObject *_wrap_RsmGrid_read_tre_string(PyObject *self, PyObject *arg
     try {
       result = GeoCal::RsmGrid::read_tre_string((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10524,6 +10674,9 @@ SWIGINTERN PyObject *_wrap_delete_RsmGrid(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

@@ -4722,14 +4722,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4750,7 +4750,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4765,7 +4765,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7682,6 +7682,9 @@ SWIGINTERN PyObject *_wrap_new_ArgusOrbitData(PyObject *self, PyObject *args) {
       result = (GeoCal::ArgusOrbitData *)new GeoCal::ArgusOrbitData((GeoCal::Time const &)*arg1,(std::string const &)*arg2,arg3,(GeoCal::Geodetic const &)*arg4,(boost::array< double,3 > const &)*arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7857,6 +7860,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_save_ortho__SWIG_0(PyObject *self, Py_
       ((GeoCal::ArgusOrbitData const *)arg1)->save_ortho((GeoCal::MapInfo const &)*arg2,(GeoCal::Camera const &)*arg3,(GeoCal::Dem const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8023,6 +8029,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_save_ortho__SWIG_1(PyObject *self, Py_
       ((GeoCal::ArgusOrbitData const *)arg1)->save_ortho((GeoCal::MapInfo const &)*arg2,(GeoCal::Camera const &)*arg3,(GeoCal::Dem const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8180,6 +8189,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_save_ortho__SWIG_2(PyObject *self, Py_
     try {
       ((GeoCal::ArgusOrbitData const *)arg1)->save_ortho((GeoCal::MapInfo const &)*arg2,(GeoCal::Camera const &)*arg3,(GeoCal::Dem const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8407,6 +8419,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_0(PyObject *s
       ((GeoCal::ArgusOrbitData const *)arg1)->add_ortho_to_image((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg4,(GeoCal::Camera const &)*arg5,(GeoCal::Dem const &)*arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8587,6 +8602,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_add_ortho_to_image__SWIG_1(PyObject *s
       ((GeoCal::ArgusOrbitData const *)arg1)->add_ortho_to_image((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg4,(GeoCal::Camera const &)*arg5,(GeoCal::Dem const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8752,6 +8770,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_mosaic__SWIG_0(PyObject *self, Py_ssiz
       GeoCal::ArgusOrbitData::mosaic((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData >,std::allocator< boost::shared_ptr< GeoCal::ArgusOrbitData > > > const &)*arg1,(std::vector< boost::shared_ptr< GeoCal::Camera >,std::allocator< boost::shared_ptr< GeoCal::Camera > > > const &)*arg2,(GeoCal::Dem const &)*arg3,(GeoCal::MapInfo const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8887,6 +8908,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_mosaic__SWIG_1(PyObject *self, Py_ssiz
       GeoCal::ArgusOrbitData::mosaic((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData >,std::allocator< boost::shared_ptr< GeoCal::ArgusOrbitData > > > const &)*arg1,(std::vector< boost::shared_ptr< GeoCal::Camera >,std::allocator< boost::shared_ptr< GeoCal::Camera > > > const &)*arg2,(GeoCal::Dem const &)*arg3,(GeoCal::MapInfo const &)*arg4,(std::string const &)*arg5,(std::string const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8971,6 +8995,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_image__SWIG_0(PyObject *self, Py_ssize
       result = ((GeoCal::ArgusOrbitData const *)arg1)->image(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9014,6 +9041,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData_image__SWIG_1(PyObject *self, Py_ssize
     try {
       result = ((GeoCal::ArgusOrbitData const *)arg1)->image();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9089,6 +9119,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData__v_file_name(PyObject *self, PyObject 
       result = ((GeoCal::ArgusOrbitData const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9133,6 +9166,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbitData__v_camera_number(PyObject *self, PyObj
       result = (int)((GeoCal::ArgusOrbitData const *)arg1)->camera_number();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9175,6 +9211,9 @@ SWIGINTERN PyObject *_wrap_delete_ArgusOrbitData(PyObject *self, PyObject *args)
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9223,6 +9262,9 @@ SWIGINTERN PyObject *_wrap_new_ArgusOrbit(PyObject *self, PyObject *args) {
     try {
       result = (GeoCal::ArgusOrbit *)new GeoCal::ArgusOrbit((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9280,6 +9322,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbit_focal_length(PyObject *self, PyObject *arg
       result = (double)((GeoCal::ArgusOrbit const *)arg1)->focal_length(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9323,6 +9368,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbit__v_number_row(PyObject *self, PyObject *ar
     try {
       result = (int)((GeoCal::ArgusOrbit const *)arg1)->number_row();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9383,6 +9431,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbit_nav(PyObject *self, PyObject *args) {
       result = ((GeoCal::ArgusOrbit const *)arg1)->nav(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9429,6 +9480,9 @@ SWIGINTERN PyObject *_wrap_ArgusOrbit__v_file_name(PyObject *self, PyObject *arg
       result = ((GeoCal::ArgusOrbit const *)arg1)->file_name();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9471,6 +9525,9 @@ SWIGINTERN PyObject *_wrap_delete_ArgusOrbit(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9517,6 +9574,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_iterator(PyObject *self, PyObje
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9548,6 +9608,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___nonzero__(PyObject *self, PyO
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9581,6 +9644,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___bool__(PyObject *self, PyObje
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9612,6 +9678,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___len__(PyObject *self, PyObjec
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9666,6 +9735,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___getslice__(PyObject *self, Py
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9718,6 +9790,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___setslice____SWIG_0(PyObject *
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9782,6 +9857,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___setslice____SWIG_1(PyObject *
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9865,6 +9943,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___delslice__(PyObject *self, Py
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9908,6 +9989,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___delitem____SWIG_0(PyObject *s
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9950,6 +10034,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___getitem____SWIG_0(PyObject *s
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10008,6 +10095,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___setitem____SWIG_0(PyObject *s
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10052,6 +10142,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___setitem____SWIG_1(PyObject *s
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10093,6 +10186,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___delitem____SWIG_1(PyObject *s
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10170,6 +10266,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___getitem____SWIG_1(PyObject *s
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10277,6 +10376,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData___setitem____SWIG_2(PyObject *s
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10359,6 +10461,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_pop(PyObject *self, PyObject *a
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10418,6 +10523,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_append(PyObject *self, PyObject
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::ArgusOrbitData > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10439,6 +10547,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ArgusOrbitData__SWIG_0(PyObject *self, Py_
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > *)new std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10477,6 +10588,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ArgusOrbitData__SWIG_1(PyObject *self, Py_
       result = (std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > *)new std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10513,6 +10627,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_empty(PyObject *self, PyObject 
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10544,6 +10661,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_size(PyObject *self, PyObject *
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10586,6 +10706,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_swap(PyObject *self, PyObject *
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10617,6 +10740,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_begin(PyObject *self, PyObject 
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10651,6 +10777,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_end(PyObject *self, PyObject *a
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10683,6 +10812,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_rbegin(PyObject *self, PyObject
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10717,6 +10849,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_rend(PyObject *self, PyObject *
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10748,6 +10883,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_clear(PyObject *self, PyObject 
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10781,6 +10919,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_get_allocator(PyObject *self, P
       result = ((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10810,6 +10951,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ArgusOrbitData__SWIG_2(PyObject *self, Py_
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > *)new std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10843,6 +10987,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_pop_back(PyObject *self, PyObje
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10880,6 +11027,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_resize__SWIG_0(PyObject *self, 
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10924,6 +11074,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_erase__SWIG_0(PyObject *self, P
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10983,6 +11136,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_erase__SWIG_1(PyObject *self, P
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11069,6 +11225,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_ArgusOrbitData__SWIG_3(PyObject *self, Py_
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > *)new std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11177,6 +11336,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_push_back(PyObject *self, PyObj
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11208,6 +11370,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_front(PyObject *self, PyObject 
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11243,6 +11408,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_back(PyObject *self, PyObject *
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11312,6 +11480,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_assign(PyObject *self, PyObject
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11375,6 +11546,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_resize__SWIG_1(PyObject *self, 
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11475,6 +11649,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_insert__SWIG_0(PyObject *self, 
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::ArgusOrbitData > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11554,6 +11731,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_insert__SWIG_1(PyObject *self, 
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_ArgusOrbitData_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::ArgusOrbitData > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11620,6 +11800,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_reserve(PyObject *self, PyObjec
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11652,6 +11835,9 @@ SWIGINTERN PyObject *_wrap_Vector_ArgusOrbitData_capacity(PyObject *self, PyObje
       result = ((std::vector< boost::shared_ptr< GeoCal::ArgusOrbitData > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11682,6 +11868,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_ArgusOrbitData(PyObject *self, PyObject
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

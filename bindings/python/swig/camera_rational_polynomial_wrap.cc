@@ -4577,14 +4577,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4605,7 +4605,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4620,7 +4620,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6456,6 +6456,9 @@ SWIGINTERN PyObject *_wrap_new_CameraRationalPolyomial(PyObject *self, PyObject 
       result = (GeoCal::CameraRationalPolyomial *)new GeoCal::CameraRationalPolyomial(arg1,arg2,arg3,arg4,arg5,SWIG_STD_MOVE(arg6),(blitz::Array< double,2 > const &)*arg7,(blitz::Array< double,2 > const &)*arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6502,6 +6505,9 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial__v_kappa(PyObject *self, PyOb
     try {
       result = (blitz::Array< double,2 > *) &((GeoCal::CameraRationalPolyomial const *)arg1)->kappa();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6566,6 +6572,9 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial__v_kappa_inverse(PyObject *se
     try {
       result = (blitz::Array< double,2 > *) &((GeoCal::CameraRationalPolyomial const *)arg1)->kappa_inverse();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6670,6 +6679,9 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_apply_rational(PyObject *self
       result = ((GeoCal::CameraRationalPolyomial const *)arg1)->apply_rational((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,2 > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6762,6 +6774,9 @@ SWIGINTERN PyObject *_wrap_CameraRationalPolyomial_construct_chi_matrix(PyObject
       result = ((GeoCal::CameraRationalPolyomial const *)arg1)->construct_chi_matrix((blitz::Array< double,1 > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6825,6 +6840,9 @@ SWIGINTERN PyObject *_wrap_delete_CameraRationalPolyomial(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

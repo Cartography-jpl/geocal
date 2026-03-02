@@ -4516,14 +4516,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4544,7 +4544,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4559,7 +4559,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -5655,7 +5655,7 @@ std::string SwigDirector_RsmIndirectCovariance::desc() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -5689,7 +5689,7 @@ std::string SwigDirector_RsmIndirectCovariance::print_to_string() const {
     PyObject *error = PyErr_Occurred();
     {
       if (error != NULL) {
-        throw std::runtime_error("Python error occured:\n" + parse_python_exception());
+        throw PythonException();
       }
     }
   }
@@ -6541,6 +6541,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_base_tre_string(PyObject *self,
       result = ((GeoCal::RsmIndirectCovariance const *)arg1)->base_tre_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6593,6 +6596,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_desc(PyObject *self, PyObject *
           result = ((GeoCal::RsmIndirectCovariance const *)arg1)->desc();
         }
       } catch (Swig::DirectorException &e) {
+        SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
         SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6651,6 +6657,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance_base_read_tre_string(PyObject *
       (arg1)->base_read_tre_string(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6692,6 +6701,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_image_identifier__SWIG_0(PyO
     try {
       result = ((GeoCal::RsmIndirectCovariance const *)arg1)->image_identifier();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6746,6 +6758,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_image_identifier__SWIG_1(PyO
     try {
       (arg1)->image_identifier((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6819,6 +6834,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_rsm_support_data_edition__SW
       result = ((GeoCal::RsmIndirectCovariance const *)arg1)->rsm_support_data_edition();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6872,6 +6890,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_rsm_support_data_edition__SW
     try {
       (arg1)->rsm_support_data_edition((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6945,6 +6966,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_triangulation_id__SWIG_0(PyO
       result = ((GeoCal::RsmIndirectCovariance const *)arg1)->triangulation_id();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6998,6 +7022,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_triangulation_id__SWIG_1(PyO
     try {
       (arg1)->triangulation_id((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7071,6 +7098,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_naif_code__SWIG_0(PyObject *
       result = (int)((GeoCal::RsmIndirectCovariance const *)arg1)->naif_code();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7121,6 +7151,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance__v_naif_code__SWIG_1(PyObject *
     try {
       (arg1)->naif_code((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7203,6 +7236,9 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovariance___str__(PyObject *self, PyObjec
         }
       } catch (Swig::DirectorException &e) {
         SWIG_fail; 
+      } catch (const PythonException& e) {
+        e.restore_python_exception();
+        SWIG_fail; 
       } catch (const std::exception& e) {
         SWIG_exception(SWIG_RuntimeError, e.what());
       }
@@ -7248,6 +7284,9 @@ SWIGINTERN PyObject *_wrap_delete_RsmIndirectCovariance(PyObject *self, PyObject
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

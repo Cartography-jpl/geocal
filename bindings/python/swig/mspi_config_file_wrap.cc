@@ -4519,14 +4519,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4547,7 +4547,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4562,7 +4562,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7031,6 +7031,9 @@ SWIGINTERN PyObject *_wrap_new_MspiConfigFile(PyObject *self, PyObject *args) {
       result = (GeoCal::MspiConfigFile *)new GeoCal::MspiConfigFile((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7090,6 +7093,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_add_file(PyObject *self, PyObject *arg
     try {
       (arg1)->add_file((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7161,6 +7167,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_add(PyObject *self, PyObject *args) {
       (arg1)->add((std::string const &)*arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7221,6 +7230,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_have_key(PyObject *self, PyObject *arg
       result = (bool)((GeoCal::MspiConfigFile const *)arg1)->have_key((std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7278,6 +7290,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_double(PyObject *self, PyObject 
     try {
       result = (double)GeoCal_MspiConfigFile_value_double((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7337,6 +7352,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_double(PyObject *self, Py
       result = GeoCal_MspiConfigFile_value_vector_double((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7394,6 +7412,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_int(PyObject *self, PyObject *ar
     try {
       result = (int)GeoCal_MspiConfigFile_value_int((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7453,6 +7474,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_int(PyObject *self, PyObj
       result = GeoCal_MspiConfigFile_value_vector_int((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7510,6 +7534,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_string(PyObject *self, PyObject 
     try {
       result = GeoCal_MspiConfigFile_value_string((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7569,6 +7596,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_string(PyObject *self, Py
       result = GeoCal_MspiConfigFile_value_vector_string((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7626,6 +7656,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_bool(PyObject *self, PyObject *a
     try {
       result = (bool)GeoCal_MspiConfigFile_value_bool((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7685,6 +7718,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile_value_vector_bool(PyObject *self, PyOb
       result = GeoCal_MspiConfigFile_value_vector_bool((GeoCal::MspiConfigFile const *)arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7731,6 +7767,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigFile___str__(PyObject *self, PyObject *args
       result = ((GeoCal::MspiConfigFile const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7773,6 +7812,9 @@ SWIGINTERN PyObject *_wrap_delete_MspiConfigFile(PyObject *self, PyObject *args)
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7850,6 +7892,9 @@ SWIGINTERN PyObject *_wrap_new_MspiConfigTable(PyObject *self, PyObject *args) {
       result = (GeoCal::MspiConfigTable *)new GeoCal::MspiConfigTable((GeoCal::MspiConfigFile const &)*arg1,(std::string const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7898,6 +7943,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable__v_number_row(PyObject *self, PyObjec
     try {
       result = (int)((GeoCal::MspiConfigTable const *)arg1)->number_row();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7962,6 +8010,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable_value_double(PyObject *self, PyObject
     try {
       result = (double)GeoCal_MspiConfigTable_value_double((GeoCal::MspiConfigTable const *)arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8029,6 +8080,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable_value_int(PyObject *self, PyObject *a
       result = (int)GeoCal_MspiConfigTable_value_int((GeoCal::MspiConfigTable const *)arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8095,6 +8149,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable_value_string(PyObject *self, PyObject
       result = GeoCal_MspiConfigTable_value_string((GeoCal::MspiConfigTable const *)arg1,arg2,(std::string const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8141,6 +8198,9 @@ SWIGINTERN PyObject *_wrap_MspiConfigTable___str__(PyObject *self, PyObject *arg
       result = ((GeoCal::MspiConfigTable const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8183,6 +8243,9 @@ SWIGINTERN PyObject *_wrap_delete_MspiConfigTable(PyObject *self, PyObject *args
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

@@ -4656,14 +4656,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4684,7 +4684,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4699,7 +4699,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6558,6 +6558,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_0(PyObject *self, Py_ssize_
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6679,6 +6682,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_1(PyObject *self, Py_ssize_
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6792,6 +6798,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_2(PyObject *self, Py_ssize_
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6897,6 +6906,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_3(PyObject *self, Py_ssize_
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6994,6 +7006,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_4(PyObject *self, Py_ssize_
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7083,6 +7098,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_5(PyObject *self, Py_ssize_
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7163,6 +7181,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjected__SWIG_6(PyObject *self, Py_ssize_
     try {
       result = (GeoCal::IgcMapProjected *)new GeoCal::IgcMapProjected((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7269,6 +7290,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjected__v_igc_original(PyObject *self, PyObj
       result = ((GeoCal::IgcMapProjected const *)arg1)->igc_original();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7315,6 +7339,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjected__v_avg_factor(PyObject *self, PyObjec
       result = (int)((GeoCal::IgcMapProjected const *)arg1)->avg_factor();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7358,6 +7385,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjected__v_grid_spacing(PyObject *self, PyObj
     try {
       result = (int)((GeoCal::IgcMapProjected const *)arg1)->grid_spacing();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7403,6 +7433,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjected__v_fill_value(PyObject *self, PyObjec
       result = (double)((GeoCal::IgcMapProjected const *)arg1)->fill_value();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7447,6 +7480,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjected__v_read_into_memory(PyObject *self, P
       result = (bool)((GeoCal::IgcMapProjected const *)arg1)->read_into_memory();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7489,6 +7525,9 @@ SWIGINTERN PyObject *_wrap_delete_IgcMapProjected(PyObject *self, PyObject *args
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7627,6 +7666,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_0(PyObject *self, 
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7748,6 +7790,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_1(PyObject *self, 
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7861,6 +7906,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_2(PyObject *self, 
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7966,6 +8014,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_3(PyObject *self, 
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8063,6 +8114,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_4(PyObject *self, 
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8152,6 +8206,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_5(PyObject *self, 
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8232,6 +8289,9 @@ SWIGINTERN PyObject *_wrap_new_IgcMapProjectedMultiBand__SWIG_6(PyObject *self, 
     try {
       result = (GeoCal::IgcMapProjectedMultiBand *)new GeoCal::IgcMapProjectedMultiBand((GeoCal::MapInfo const &)*arg1,(boost::shared_ptr< GeoCal::ImageGroundConnection > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8338,6 +8398,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_igc_original(PyObject *se
       result = ((GeoCal::IgcMapProjectedMultiBand const *)arg1)->igc_original();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8384,6 +8447,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_avg_factor(PyObject *self
       result = (int)((GeoCal::IgcMapProjectedMultiBand const *)arg1)->avg_factor();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8427,6 +8493,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_grid_spacing(PyObject *se
     try {
       result = (int)((GeoCal::IgcMapProjectedMultiBand const *)arg1)->grid_spacing();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8472,6 +8541,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_fill_value(PyObject *self
       result = (double)((GeoCal::IgcMapProjectedMultiBand const *)arg1)->fill_value();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8516,6 +8588,9 @@ SWIGINTERN PyObject *_wrap_IgcMapProjectedMultiBand__v_read_into_memory(PyObject
       result = (bool)((GeoCal::IgcMapProjectedMultiBand const *)arg1)->read_into_memory();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8558,6 +8633,9 @@ SWIGINTERN PyObject *_wrap_delete_IgcMapProjectedMultiBand(PyObject *self, PyObj
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

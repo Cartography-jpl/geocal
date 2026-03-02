@@ -4626,14 +4626,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4654,7 +4654,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4669,7 +4669,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7129,6 +7129,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,(boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg8,arg9,arg10,arg11,arg12);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7353,6 +7356,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,(boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg8,arg9,arg10,arg11);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7569,6 +7575,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,(boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg8,arg9,arg10);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7777,6 +7786,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_3(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,(boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg8,arg9);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7977,6 +7989,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_4(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7,(boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8150,6 +8165,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_5(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6,(boost::shared_ptr< GeoCal::Refraction > const &)*arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8296,6 +8314,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_6(PyObject *self, Py_ssize_t nobjs, PyO
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5),(boost::shared_ptr< GeoCal::TimeTable > const &)*arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8414,6 +8435,9 @@ SWIGINTERN PyObject *_wrap_new_Ipi__SWIG_7(PyObject *self, Py_ssize_t nobjs, PyO
     try {
       result = (GeoCal::Ipi *)new GeoCal::Ipi((boost::shared_ptr< GeoCal::Orbit > const &)*arg1,(boost::shared_ptr< GeoCal::Camera > const &)*arg2,arg3,SWIG_STD_MOVE(arg4),SWIG_STD_MOVE(arg5));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8562,6 +8586,9 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate(PyObject *self, PyObject *args) 
       ((GeoCal::Ipi const *)arg1)->image_coordinate((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8674,6 +8701,9 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_with_derivative__SWIG_0(PyObject
     try {
       ((GeoCal::Ipi const *)arg1)->image_coordinate_with_derivative((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8794,6 +8824,9 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_with_derivative__SWIG_1(PyObject
     try {
       ((GeoCal::Ipi const *)arg1)->image_coordinate_with_derivative((GeoCal::GroundCoordinate const &)*arg2,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8943,6 +8976,9 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_with_derivative_extended__SWIG_0
       ((GeoCal::Ipi const *)arg1)->image_coordinate_with_derivative_extended((GeoCal::GroundCoordinate const &)*arg2,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9051,6 +9087,9 @@ SWIGINTERN PyObject *_wrap_Ipi_image_coordinate_with_derivative_extended__SWIG_1
     try {
       ((GeoCal::Ipi const *)arg1)->image_coordinate_with_derivative_extended((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9171,6 +9210,9 @@ SWIGINTERN PyObject *_wrap_Ipi_time(PyObject *self, PyObject *args) {
       ((GeoCal::Ipi const *)arg1)->time((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9268,6 +9310,9 @@ SWIGINTERN PyObject *_wrap_Ipi_time_with_derivative__SWIG_0(PyObject *self, Py_s
     try {
       ((GeoCal::Ipi const *)arg1)->time_with_derivative((GeoCal::GroundCoordinate const &)*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9377,6 +9422,9 @@ SWIGINTERN PyObject *_wrap_Ipi_time_with_derivative__SWIG_1(PyObject *self, Py_s
     try {
       ((GeoCal::Ipi const *)arg1)->time_with_derivative((GeoCal::GroundCoordinate const &)*arg2,(boost::array< GeoCal::AutoDerivative< double >,3 > const &)*arg3,*arg4,*arg5,*arg6);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9492,6 +9540,9 @@ SWIGINTERN PyObject *_wrap_Ipi_footprint(PyObject *self, PyObject *args) {
       result = ((GeoCal::Ipi const *)arg1)->footprint((GeoCal::Dem const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9535,6 +9586,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_resolution_meter(PyObject *self, PyObject *arg
     try {
       result = (double)((GeoCal::Ipi const *)arg1)->resolution_meter();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9580,6 +9634,9 @@ SWIGINTERN PyObject *_wrap_Ipi___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::Ipi const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9621,6 +9678,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_time_acquisition_adjustment__SWIG_0(PyObject *
     try {
       result = (bool)((GeoCal::Ipi const *)arg1)->time_acquisition_adjustment();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9672,6 +9732,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_time_acquisition_adjustment__SWIG_1(PyObject *
     try {
       (arg1)->time_acquisition_adjustment((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9743,6 +9806,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_orbit__SWIG_0(PyObject *self, Py_ssize_t nobjs
       result = ((GeoCal::Ipi const *)arg1)->orbit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9812,6 +9878,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_orbit__SWIG_1(PyObject *self, Py_ssize_t nobjs
     try {
       (arg1)->orbit((boost::shared_ptr< GeoCal::Orbit > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9883,6 +9952,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_camera__SWIG_0(PyObject *self, Py_ssize_t nobj
       result = ((GeoCal::Ipi const *)arg1)->camera();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9952,6 +10024,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_camera__SWIG_1(PyObject *self, Py_ssize_t nobj
     try {
       (arg1)->camera((boost::shared_ptr< GeoCal::Camera > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10023,6 +10098,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_time_table__SWIG_0(PyObject *self, Py_ssize_t 
       result = ((GeoCal::Ipi const *)arg1)->time_table();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10092,6 +10170,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_time_table__SWIG_1(PyObject *self, Py_ssize_t 
     try {
       (arg1)->time_table((boost::shared_ptr< GeoCal::TimeTable > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10163,6 +10244,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_refraction__SWIG_0(PyObject *self, Py_ssize_t 
       result = ((GeoCal::Ipi const *)arg1)->refraction();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10232,6 +10316,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_refraction__SWIG_1(PyObject *self, Py_ssize_t 
     try {
       (arg1)->refraction((boost::shared_ptr< GeoCal::Refraction > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10303,6 +10390,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_velocity_aberration__SWIG_0(PyObject *self, Py
       result = ((GeoCal::Ipi const *)arg1)->velocity_aberration();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10372,6 +10462,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_velocity_aberration__SWIG_1(PyObject *self, Py
     try {
       (arg1)->velocity_aberration((boost::shared_ptr< GeoCal::VelocityAberration > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10443,6 +10536,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_band__SWIG_0(PyObject *self, Py_ssize_t nobjs,
       result = (int)((GeoCal::Ipi const *)arg1)->band();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10493,6 +10589,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_band__SWIG_1(PyObject *self, Py_ssize_t nobjs,
     try {
       (arg1)->band((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10566,6 +10665,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_min_time(PyObject *self, PyObject *args) {
       result = ((GeoCal::Ipi const *)arg1)->min_time();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10613,6 +10715,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_max_time(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::Ipi const *)arg1)->max_time();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10662,6 +10767,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_local_time_window_size(PyObject *self, PyObjec
       result = (double)((GeoCal::Ipi const *)arg1)->local_time_window_size();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10705,6 +10813,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_root_min_separation(PyObject *self, PyObject *
     try {
       result = (double)((GeoCal::Ipi const *)arg1)->root_min_separation();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10750,6 +10861,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_time_tolerance(PyObject *self, PyObject *args)
       result = (double)((GeoCal::Ipi const *)arg1)->time_tolerance();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10794,6 +10908,9 @@ SWIGINTERN PyObject *_wrap_Ipi__v_max_frame_extend(PyObject *self, PyObject *arg
       result = (double)((GeoCal::Ipi const *)arg1)->max_frame_extend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10836,6 +10953,9 @@ SWIGINTERN PyObject *_wrap_delete_Ipi(PyObject *self, PyObject *args) {
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

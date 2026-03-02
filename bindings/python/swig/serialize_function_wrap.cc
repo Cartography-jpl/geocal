@@ -4514,14 +4514,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4542,7 +4542,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4557,7 +4557,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6423,6 +6423,9 @@ SWIGINTERN PyObject *_wrap_have_serialize_supported(PyObject *self, PyObject *ar
       result = (bool)GeoCal::have_serialize_supported();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6485,6 +6488,9 @@ SWIGINTERN PyObject *_wrap_serialize_write(PyObject *self, PyObject *args) {
       GeoCal::serialize_write((std::string const &)*arg1,(boost::shared_ptr< GeoCal::GenericObject > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6538,6 +6544,9 @@ SWIGINTERN PyObject *_wrap_serialize_write_string(PyObject *self, PyObject *args
       result = GeoCal::serialize_write_string((boost::shared_ptr< GeoCal::GenericObject > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6574,6 +6583,9 @@ SWIGINTERN PyObject *_wrap_serialize_read_generic(PyObject *self, PyObject *args
     try {
       result = GeoCal::serialize_read_generic((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6615,6 +6627,9 @@ SWIGINTERN PyObject *_wrap_serialize_read_generic_string(PyObject *self, PyObjec
     try {
       result = GeoCal::serialize_read_generic_string((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6681,6 +6696,9 @@ SWIGINTERN PyObject *_wrap_serialize_write_binary__SWIG_0(PyObject *self, Py_ssi
       GeoCal::serialize_write_binary((std::string const &)*arg1,(boost::shared_ptr< GeoCal::GenericObject > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6719,6 +6737,9 @@ SWIGINTERN PyObject *_wrap_serialize_read_binary_generic(PyObject *self, PyObjec
     try {
       result = GeoCal::serialize_read_binary_generic((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6772,6 +6793,9 @@ SWIGINTERN PyObject *_wrap_serialize_write_binary__SWIG_1(PyObject *self, Py_ssi
     try {
       result = GeoCal::serialize_write_binary((boost::shared_ptr< GeoCal::GenericObject > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6839,6 +6863,9 @@ SWIGINTERN PyObject *_wrap_serialize_read_binary(PyObject *self, PyObject *args)
     try {
       result = GeoCal::serialize_read_binary((std::string const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

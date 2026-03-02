@@ -4534,14 +4534,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4562,7 +4562,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4577,7 +4577,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6377,6 +6377,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_0(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6453,6 +6456,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_1(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6521,6 +6527,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_2(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6581,6 +6590,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_3(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel((boost::shared_ptr< GeoCal::GeometricTiePoints > const &)*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6630,6 +6642,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_4(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6671,6 +6686,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_5(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6704,6 +6722,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_6(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6728,6 +6749,9 @@ SWIGINTERN PyObject *_wrap_new_QuadraticGeometricModel__SWIG_7(PyObject *self, P
     try {
       result = (GeoCal::QuadraticGeometricModel *)new GeoCal::QuadraticGeometricModel();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6873,6 +6897,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_tie_points(PyObject *self,
       result = ((GeoCal::QuadraticGeometricModel const *)arg1)->tie_points();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6946,6 +6973,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel_fit_transformation(PyObject *
       (arg1)->fit_transformation((GeoCal::GeometricTiePoints const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6989,6 +7019,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_transformation(PyObject *s
     try {
       result = ((GeoCal::QuadraticGeometricModel const *)arg1)->transformation();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7055,6 +7088,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_inverse_transformation(PyO
       result = ((GeoCal::QuadraticGeometricModel const *)arg1)->inverse_transformation();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7118,6 +7154,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_line__SWIG_0(PyObj
       result = (double)((GeoCal::QuadraticGeometricModel const *)arg1)->magnify_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7168,6 +7207,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_line__SWIG_1(PyObj
     try {
       (arg1)->magnify_line((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7239,6 +7281,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample__SWIG_0(PyO
       result = (double)((GeoCal::QuadraticGeometricModel const *)arg1)->magnify_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7289,6 +7334,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_magnify_sample__SWIG_1(PyO
     try {
       (arg1)->magnify_sample((double const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7362,6 +7410,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_fit_type(PyObject *self, P
       result = (GeoCal::QuadraticGeometricModel::FitType)((GeoCal::QuadraticGeometricModel const *)arg1)->fit_type();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7405,6 +7456,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_min_number_tie_point_to_fi
     try {
       result = (int)((GeoCal::QuadraticGeometricModel const *)arg1)->min_number_tie_point_to_fit();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7450,6 +7504,9 @@ SWIGINTERN PyObject *_wrap_QuadraticGeometricModel__v_enough_tie_point_to_fit(Py
       result = (bool)((GeoCal::QuadraticGeometricModel const *)arg1)->enough_tie_point_to_fit();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7492,6 +7549,9 @@ SWIGINTERN PyObject *_wrap_delete_QuadraticGeometricModel(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

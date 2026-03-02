@@ -4648,14 +4648,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4676,7 +4676,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4691,7 +4691,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6497,6 +6497,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_0(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2,arg3,arg4,arg5,arg6,arg7,arg8);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6578,6 +6581,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_1(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2,arg3,arg4,arg5,arg6,arg7);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6651,6 +6657,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_2(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6716,6 +6725,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_3(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6773,6 +6785,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_4(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6822,6 +6837,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_5(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6863,6 +6881,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_6(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6896,6 +6917,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_7(PyObject *self, P
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6920,6 +6944,9 @@ SWIGINTERN PyObject *_wrap_new_ForstnerFeatureDetector__SWIG_8(PyObject *self, P
     try {
       result = (GeoCal::ForstnerFeatureDetector *)new GeoCal::ForstnerFeatureDetector();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7038,6 +7065,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_basic_ip_large_number(PyOb
       result = (int)((GeoCal::ForstnerFeatureDetector const *)arg1)->basic_ip_large_number();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7081,6 +7111,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_maximum_weight_threshold(P
     try {
       result = (int)((GeoCal::ForstnerFeatureDetector const *)arg1)->maximum_weight_threshold();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7126,6 +7159,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_forstner_max_window_large_
       result = (int)((GeoCal::ForstnerFeatureDetector const *)arg1)->forstner_max_window_large_size();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7169,6 +7205,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_forstner_max_window_small_
     try {
       result = (int)((GeoCal::ForstnerFeatureDetector const *)arg1)->forstner_max_window_small_size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7214,6 +7253,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_forstner_window_size(PyObj
       result = (int)((GeoCal::ForstnerFeatureDetector const *)arg1)->forstner_window_size();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7257,6 +7299,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_roundness_threshold(PyObje
     try {
       result = (double)((GeoCal::ForstnerFeatureDetector const *)arg1)->roundness_threshold();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7302,6 +7347,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_weight_threshold(PyObject 
       result = (double)((GeoCal::ForstnerFeatureDetector const *)arg1)->weight_threshold();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7346,6 +7394,9 @@ SWIGINTERN PyObject *_wrap_ForstnerFeatureDetector__v_basic_robert_threshold(PyO
       result = (double)((GeoCal::ForstnerFeatureDetector const *)arg1)->basic_robert_threshold();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7388,6 +7439,9 @@ SWIGINTERN PyObject *_wrap_delete_ForstnerFeatureDetector(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

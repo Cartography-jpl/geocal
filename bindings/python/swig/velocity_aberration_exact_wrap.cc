@@ -4560,14 +4560,14 @@ SWIG_AsVal_ptrdiff_t (PyObject * obj, ptrdiff_t *val)
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4588,7 +4588,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4603,7 +4603,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6339,6 +6339,9 @@ SWIGINTERN PyObject *_wrap_new_VelocityAberrationExact(PyObject *self, PyObject 
       result = (GeoCal::VelocityAberrationExact *)new GeoCal::VelocityAberrationExact();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6460,6 +6463,9 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_0(PyObj
       result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_calc((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6573,6 +6579,9 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_aberration_calc__SWIG_1(PyObj
     try {
       result = ((GeoCal::VelocityAberrationExact const *)arg1)->aberration_calc((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6717,6 +6726,9 @@ SWIGINTERN PyObject *_wrap_VelocityAberrationExact_velocity_aberration_apply(PyO
       result = ((GeoCal::VelocityAberrationExact const *)arg1)->velocity_aberration_apply((GeoCal::GroundCoordinate const &)*arg2,(GeoCal::GroundCoordinate const &)*arg3,(boost::array< double,3 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6763,6 +6775,9 @@ SWIGINTERN PyObject *_wrap_delete_VelocityAberrationExact(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

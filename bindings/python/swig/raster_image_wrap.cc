@@ -4646,14 +4646,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4674,7 +4674,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4689,7 +4689,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7405,6 +7405,9 @@ SWIGINTERN PyObject *_wrap_new_RasterImageTileIterator(PyObject *self, PyObject 
       result = (GeoCal::RasterImageTileIterator *)new GeoCal::RasterImageTileIterator((GeoCal::RasterImage const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7452,6 +7455,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_istart(PyObject *self, PyO
       result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->istart();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7495,6 +7501,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_jstart(PyObject *self, PyO
     try {
       result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->jstart();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7540,6 +7549,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_iend(PyObject *self, PyObj
       result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->iend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7583,6 +7595,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_jend(PyObject *self, PyObj
     try {
       result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->jend();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7628,6 +7643,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_number_line(PyObject *self
       result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->number_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7671,6 +7689,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_number_sample(PyObject *se
     try {
       result = (int)((GeoCal::RasterImageTileIterator const *)arg1)->number_sample();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7716,6 +7737,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator__v_end(PyObject *self, PyObje
       result = (bool)((GeoCal::RasterImageTileIterator const *)arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7759,6 +7783,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator_next(PyObject *self, PyObject
     try {
       result = (GeoCal::RasterImageTileIterator *) &(arg1)->operator ++();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7807,6 +7834,9 @@ SWIGINTERN PyObject *_wrap_RasterImageTileIterator___str__(PyObject *self, PyObj
       result = ((GeoCal::RasterImageTileIterator const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7849,6 +7879,9 @@ SWIGINTERN PyObject *_wrap_delete_RasterImageTileIterator(PyObject *self, PyObje
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7919,6 +7952,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_interpolate__SWIG_0(PyObject *self, Py_ss
       result = (double)((GeoCal::RasterImage const *)arg1)->interpolate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7969,6 +8005,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_overview(PyObject *self, PyObject *args) 
     try {
       result = ((GeoCal::RasterImage const *)arg1)->overview(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8043,6 +8082,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_interpolate__SWIG_1(PyObject *self, Py_ss
       result = (double)((GeoCal::RasterImage const *)arg1)->interpolate((GeoCal::ImageCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8115,6 +8157,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_copy_needs_double(PyObject *self, PyOb
       result = (bool)((GeoCal::RasterImage const *)arg1)->copy_needs_double();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8158,6 +8203,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_number_line(PyObject *self, PyObject *
     try {
       result = (int)((GeoCal::RasterImage const *)arg1)->number_line();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8203,6 +8251,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_number_sample(PyObject *self, PyObject
       result = (int)((GeoCal::RasterImage const *)arg1)->number_sample();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8247,6 +8298,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_number_tile_line(PyObject *self, PyObj
       result = (int)((GeoCal::RasterImage const *)arg1)->number_tile_line();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8290,6 +8344,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_number_tile_sample(PyObject *self, PyO
     try {
       result = (int)((GeoCal::RasterImage const *)arg1)->number_tile_sample();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8349,6 +8406,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_0(PyObject *self, Py_ssize_t n
       result = (int)((GeoCal::RasterImage const *)arg1)->read(arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8407,6 +8467,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_unchecked_read_double(PyObject *self, PyO
     try {
       result = (double)((GeoCal::RasterImage const *)arg1)->unchecked_read_double(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8481,6 +8544,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_1(PyObject *self, Py_ssize_t n
     try {
       result = ((GeoCal::RasterImage const *)arg1)->read(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8585,6 +8651,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad__SWIG_0(PyObject *self, Py_
       result = ((GeoCal::RasterImage const *)arg1)->read_with_pad(arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8679,6 +8748,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_with_pad__SWIG_1(PyObject *self, Py_
     try {
       result = ((GeoCal::RasterImage const *)arg1)->read_with_pad(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8804,6 +8876,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_double(PyObject *self, PyObject *arg
       result = ((GeoCal::RasterImage const *)arg1)->read_double(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8907,6 +8982,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad__SWIG_0(PyObject *se
       result = ((GeoCal::RasterImage const *)arg1)->read_double_with_pad(arg2,arg3,arg4,arg5,arg6);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9001,6 +9079,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read_double_with_pad__SWIG_1(PyObject *se
     try {
       result = ((GeoCal::RasterImage const *)arg1)->read_double_with_pad(arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9122,6 +9203,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_read__SWIG_2(PyObject *self, Py_ssize_t n
       result = ((GeoCal::RasterImage const *)arg1)->read((GeoCal::RasterImageTileIterator const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9242,6 +9326,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_write__SWIG_0(PyObject *self, Py_ssize_t 
       (arg1)->write(arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9319,6 +9406,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_write__SWIG_1(PyObject *self, Py_ssize_t 
       (arg1)->write(arg2,arg3,(blitz::Array< int,2 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9395,6 +9485,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_write__SWIG_2(PyObject *self, Py_ssize_t 
     try {
       (arg1)->write(arg2,arg3,(blitz::Array< double,2 > const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9490,6 +9583,9 @@ SWIGINTERN PyObject *_wrap_RasterImage___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::RasterImage const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9534,6 +9630,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_has_map_info(PyObject *self, PyObject 
       result = (bool)((GeoCal::RasterImage const *)arg1)->has_map_info();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9577,6 +9676,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_map_info(PyObject *self, PyObject *arg
     try {
       result = ((GeoCal::RasterImage const *)arg1)->map_info();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9652,6 +9754,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_0(PyObject *self,
     try {
       result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9755,6 +9860,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_1(PyObject *self,
       result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate((GeoCal::ImageCoordinate const &)*arg2,(GeoCal::Dem const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9814,6 +9922,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_2(PyObject *self,
     try {
       result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate(arg2,arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9903,6 +10014,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_ground_coordinate__SWIG_3(PyObject *self,
     try {
       result = ((GeoCal::RasterImage const *)arg1)->ground_coordinate(arg2,arg3,(GeoCal::Dem const &)*arg4);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10028,6 +10142,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_0(PyObject *self, Py_ssi
       result = ((GeoCal::RasterImage const *)arg1)->coordinate((GeoCal::GroundCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10113,6 +10230,9 @@ SWIGINTERN PyObject *_wrap_RasterImage_coordinate__SWIG_1(PyObject *self, Py_ssi
     try {
       result = ((GeoCal::RasterImage const *)arg1)->coordinate((blitz::Array< double,1 > const &)*arg2,(blitz::Array< double,1 > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10207,6 +10327,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_grid_center_line_resolution(PyObject *
       result = (double)((GeoCal::RasterImage const *)arg1)->grid_center_line_resolution();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10250,6 +10373,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_grid_center_sample_resolution(PyObject
     try {
       result = (double)((GeoCal::RasterImage const *)arg1)->grid_center_sample_resolution();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10295,6 +10421,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_has_rpc(PyObject *self, PyObject *args
       result = (bool)((GeoCal::RasterImage const *)arg1)->has_rpc();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10338,6 +10467,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_rpc(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::RasterImage const *)arg1)->rpc_ptr();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10383,6 +10515,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_has_rsm(PyObject *self, PyObject *args
       result = (bool)((GeoCal::RasterImage const *)arg1)->has_rsm();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10426,6 +10561,9 @@ SWIGINTERN PyObject *_wrap_RasterImage__v_rsm(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::RasterImage const *)arg1)->rsm();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10472,6 +10610,9 @@ SWIGINTERN PyObject *_wrap_delete_RasterImage(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10500,6 +10641,9 @@ SWIGINTERN PyObject *_wrap_new_ArrayRasterImage(PyObject *self, PyObject *args) 
     try {
       result = (GeoCal::ArrayRasterImage *)new GeoCal::ArrayRasterImage();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10573,6 +10717,9 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage_append(PyObject *self, PyObject *arg
       (arg1)->push_back((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10616,6 +10763,9 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage_size(PyObject *self, PyObject *args)
     try {
       result = (int)((GeoCal::ArrayRasterImage const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10667,6 +10817,9 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage_get(PyObject *self, PyObject *args) 
     try {
       result = GeoCal_ArrayRasterImage_get((GeoCal::ArrayRasterImage const *)arg1,arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10747,6 +10900,9 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage_set(PyObject *self, PyObject *args) 
       GeoCal_ArrayRasterImage_set(arg1,arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10791,6 +10947,9 @@ SWIGINTERN PyObject *_wrap_ArrayRasterImage___str__(PyObject *self, PyObject *ar
       result = ((GeoCal::ArrayRasterImage const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10833,6 +10992,9 @@ SWIGINTERN PyObject *_wrap_delete_ArrayRasterImage(PyObject *self, PyObject *arg
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10940,6 +11102,9 @@ SWIGINTERN PyObject *_wrap_copy_no_fill__SWIG_0(PyObject *self, Py_ssize_t nobjs
       GeoCal::copy_no_fill((GeoCal::RasterImage const &)*arg1,*arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11027,6 +11192,9 @@ SWIGINTERN PyObject *_wrap_copy_no_fill__SWIG_1(PyObject *self, Py_ssize_t nobjs
       GeoCal::copy_no_fill((GeoCal::RasterImage const &)*arg1,*arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11105,6 +11273,9 @@ SWIGINTERN PyObject *_wrap_copy_no_fill__SWIG_2(PyObject *self, Py_ssize_t nobjs
     try {
       GeoCal::copy_no_fill((GeoCal::RasterImage const &)*arg1,*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11222,6 +11393,9 @@ SWIGINTERN PyObject *_wrap_fill_image__SWIG_0(PyObject *self, Py_ssize_t nobjs, 
       GeoCal::fill_image(*arg1,arg2,arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11296,6 +11470,9 @@ SWIGINTERN PyObject *_wrap_fill_image__SWIG_1(PyObject *self, Py_ssize_t nobjs, 
       GeoCal::fill_image(*arg1,arg2,arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11362,6 +11539,9 @@ SWIGINTERN PyObject *_wrap_fill_image__SWIG_2(PyObject *self, Py_ssize_t nobjs, 
       GeoCal::fill_image(*arg1,arg2,arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11420,6 +11600,9 @@ SWIGINTERN PyObject *_wrap_fill_image__SWIG_3(PyObject *self, Py_ssize_t nobjs, 
       GeoCal::fill_image(*arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11469,6 +11652,9 @@ SWIGINTERN PyObject *_wrap_fill_image__SWIG_4(PyObject *self, Py_ssize_t nobjs, 
     try {
       GeoCal::fill_image(*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11550,6 +11736,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_iterator(PyObject *self, PyObject 
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11581,6 +11770,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___nonzero__(PyObject *self, PyObje
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11614,6 +11806,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___bool__(PyObject *self, PyObject 
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11645,6 +11840,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___len__(PyObject *self, PyObject *
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11699,6 +11897,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___getslice__(PyObject *self, PyObj
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11751,6 +11952,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___setslice____SWIG_0(PyObject *sel
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11815,6 +12019,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___setslice____SWIG_1(PyObject *sel
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11898,6 +12105,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___delslice__(PyObject *self, PyObj
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11941,6 +12151,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___delitem____SWIG_0(PyObject *self
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11983,6 +12196,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___getitem____SWIG_0(PyObject *self
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12041,6 +12257,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem____SWIG_0(PyObject *self
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12085,6 +12304,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem____SWIG_1(PyObject *self
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12126,6 +12348,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___delitem____SWIG_1(PyObject *self
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12203,6 +12428,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___getitem____SWIG_1(PyObject *self
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12310,6 +12538,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage___setitem____SWIG_2(PyObject *self
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12392,6 +12623,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_pop(PyObject *self, PyObject *args
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12451,6 +12685,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_append(PyObject *self, PyObject *a
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12472,6 +12709,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_0(PyObject *self, Py_ssi
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12510,6 +12750,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_1(PyObject *self, Py_ssi
       result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12546,6 +12789,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_empty(PyObject *self, PyObject *ar
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12577,6 +12823,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_size(PyObject *self, PyObject *arg
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12619,6 +12868,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_swap(PyObject *self, PyObject *arg
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12650,6 +12902,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_begin(PyObject *self, PyObject *ar
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12684,6 +12939,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_end(PyObject *self, PyObject *args
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12716,6 +12974,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_rbegin(PyObject *self, PyObject *a
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12750,6 +13011,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_rend(PyObject *self, PyObject *arg
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12781,6 +13045,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_clear(PyObject *self, PyObject *ar
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12814,6 +13081,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_get_allocator(PyObject *self, PyOb
       result = ((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12843,6 +13113,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_2(PyObject *self, Py_ssi
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12876,6 +13149,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_pop_back(PyObject *self, PyObject 
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12913,6 +13189,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_resize__SWIG_0(PyObject *self, Py_
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -12957,6 +13236,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_erase__SWIG_0(PyObject *self, Py_s
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13016,6 +13298,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_erase__SWIG_1(PyObject *self, Py_s
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13102,6 +13387,9 @@ SWIGINTERN PyObject *_wrap_new_Vector_RasterImage__SWIG_3(PyObject *self, Py_ssi
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > > *)new std::vector< boost::shared_ptr< GeoCal::RasterImage > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13210,6 +13498,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_push_back(PyObject *self, PyObject
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13241,6 +13532,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_front(PyObject *self, PyObject *ar
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13276,6 +13570,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_back(PyObject *self, PyObject *arg
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13345,6 +13642,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_assign(PyObject *self, PyObject *a
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13408,6 +13708,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_resize__SWIG_1(PyObject *self, Py_
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::RasterImage > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -13508,6 +13811,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_insert__SWIG_0(PyObject *self, Py_
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13587,6 +13893,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_insert__SWIG_1(PyObject *self, Py_
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_RasterImage_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::RasterImage > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13653,6 +13962,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_reserve(PyObject *self, PyObject *
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13685,6 +13997,9 @@ SWIGINTERN PyObject *_wrap_Vector_RasterImage_capacity(PyObject *self, PyObject 
       result = ((std::vector< boost::shared_ptr< GeoCal::RasterImage > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -13715,6 +14030,9 @@ SWIGINTERN PyObject *_wrap_delete_Vector_RasterImage(PyObject *self, PyObject *a
     try {
       delete arg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

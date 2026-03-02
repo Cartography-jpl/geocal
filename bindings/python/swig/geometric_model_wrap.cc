@@ -4532,14 +4532,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4560,7 +4560,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4575,7 +4575,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -6377,6 +6377,9 @@ SWIGINTERN PyObject *_wrap_delete_ObservableGeometricTiePoints(PyObject *self, P
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6445,6 +6448,9 @@ SWIGINTERN PyObject *_wrap_ObservableGeometricTiePoints_add_observer_and_keep_re
     try {
       (arg1)->add_observer_and_keep_reference(*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6517,6 +6523,9 @@ SWIGINTERN PyObject *_wrap_ObservableGeometricTiePoints_add_observer(PyObject *s
       (arg1)->add_observer(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6588,6 +6597,9 @@ SWIGINTERN PyObject *_wrap_ObservableGeometricTiePoints_remove_observer(PyObject
       (arg1)->remove_observer(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6616,6 +6628,9 @@ SWIGINTERN PyObject *_wrap_new_ObserverGeometricTiePoints(PyObject *self, PyObje
     try {
       result = (GeoCal::Observer< GeoCal::GeometricTiePoints > *)new GeoCal::Observer< GeoCal::GeometricTiePoints >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6662,6 +6677,9 @@ SWIGINTERN PyObject *_wrap_delete_ObserverGeometricTiePoints(PyObject *self, PyO
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6734,6 +6752,9 @@ SWIGINTERN PyObject *_wrap_ObserverGeometricTiePoints_notify_update(PyObject *se
       (arg1)->notify_update((GeoCal::GeometricTiePoints const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6805,6 +6826,9 @@ SWIGINTERN PyObject *_wrap_ObserverGeometricTiePoints_notify_add(PyObject *self,
       (arg1)->notify_add(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -6875,6 +6899,9 @@ SWIGINTERN PyObject *_wrap_ObserverGeometricTiePoints_notify_remove(PyObject *se
     try {
       (arg1)->notify_remove(*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -6959,6 +6986,9 @@ SWIGINTERN PyObject *_wrap_GeometricModel_original_image_coordinate(PyObject *se
       result = ((GeoCal::GeometricModel const *)arg1)->original_image_coordinate((GeoCal::ImageCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7035,6 +7065,9 @@ SWIGINTERN PyObject *_wrap_GeometricModel_resampled_image_coordinate(PyObject *s
       result = ((GeoCal::GeometricModel const *)arg1)->resampled_image_coordinate((GeoCal::ImageCoordinate const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7083,6 +7116,9 @@ SWIGINTERN PyObject *_wrap_GeometricModel___str__(PyObject *self, PyObject *args
       result = ((GeoCal::GeometricModel const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7126,6 +7162,9 @@ SWIGINTERN PyObject *_wrap_delete_GeometricModel(PyObject *self, PyObject *args)
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7154,6 +7193,9 @@ SWIGINTERN PyObject *_wrap_new_GeometricTiePoints(PyObject *self, PyObject *args
     try {
       result = (GeoCal::GeometricTiePoints *)new GeoCal::GeometricTiePoints();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7258,6 +7300,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints_add_point(PyObject *self, PyObject
       (arg1)->add_point((GeoCal::ImageCoordinate const &)*arg2,(GeoCal::ImageCoordinate const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7300,6 +7345,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints_start_replacing(PyObject *self, Py
     try {
       (arg1)->start_replacing();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7351,6 +7399,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints_remove_point(PyObject *self, PyObj
       (arg1)->remove_point(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7393,6 +7444,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints_notify_update(PyObject *self, PyOb
     try {
       (arg1)->notify_update();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7437,6 +7491,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_x(PyObject *self, PyObject *arg
     try {
       result = ((GeoCal::GeometricTiePoints const *)arg1)->x();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7503,6 +7560,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_y(PyObject *self, PyObject *arg
       result = ((GeoCal::GeometricTiePoints const *)arg1)->y();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7568,6 +7628,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints__v_number_point(PyObject *self, Py
       result = (int)((GeoCal::GeometricTiePoints const *)arg1)->number_point();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7612,6 +7675,9 @@ SWIGINTERN PyObject *_wrap_GeometricTiePoints___str__(PyObject *self, PyObject *
       result = ((GeoCal::GeometricTiePoints const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7654,6 +7720,9 @@ SWIGINTERN PyObject *_wrap_delete_GeometricTiePoints(PyObject *self, PyObject *a
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

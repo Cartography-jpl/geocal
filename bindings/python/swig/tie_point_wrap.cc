@@ -4654,14 +4654,14 @@ SWIGINTERNINLINE PyObject*
 #include <boost/make_shared.hpp>
 
 
-  // This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-  std::string parse_python_exception();
+  // This is defined in swig_wrap.tmpl, so it gets put into
+  // swig_wrap.cc
+  #include "python_exception.h"
 
 
 #include "serialize_function.h"
+#include "python_exception.h"  
 #include <stdexcept>
-// This is defined in swig_wrap.tmpl, so it gets put into swig_wrap.cc
-std::string parse_python_exception();
 
 
 //--------------------------------------------------------------
@@ -4682,7 +4682,7 @@ inline std::string cpickle_dumps(PyObject* obj)
 					     PyString_FromString("dumps"),
 					     obj, NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   char *buf;
   Py_ssize_t len;
@@ -4697,7 +4697,7 @@ inline PyObject* cpickle_loads(const std::string& S)
 					     PyBytes_FromStringAndSize(S.c_str(), S.size()), 
 					     NULL);
   if(PyErr_Occurred()) {
-    throw std::runtime_error("Python error occurred:\n" + parse_python_exception());
+    throw PythonException();
   }
   return res;
 }
@@ -7501,6 +7501,9 @@ SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_0(PyObject *self, Py_ssize_t nobjs
       result = (GeoCal::TiePoint *)new GeoCal::TiePoint(arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7525,6 +7528,9 @@ SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_1(PyObject *self, Py_ssize_t nobjs
     try {
       result = (GeoCal::TiePoint *)new GeoCal::TiePoint();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7579,6 +7585,9 @@ SWIGINTERN PyObject *_wrap_new_TiePoint__SWIG_2(PyObject *self, Py_ssize_t nobjs
     try {
       result = (GeoCal::TiePoint *)new GeoCal::TiePoint((GeoCal::TiePoint const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7665,6 +7674,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_id__SWIG_0(PyObject *self, Py_ssize_t nob
       result = (int)((GeoCal::TiePoint const *)arg1)->id();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7715,6 +7727,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_id__SWIG_1(PyObject *self, Py_ssize_t nob
     try {
       (arg1)->id((int const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7786,6 +7801,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_is_gcp__SWIG_0(PyObject *self, Py_ssize_t
       result = (bool)((GeoCal::TiePoint const *)arg1)->is_gcp();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7836,6 +7854,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_is_gcp__SWIG_1(PyObject *self, Py_ssize_t
     try {
       (arg1)->is_gcp((bool const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -7907,6 +7928,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ground_location__SWIG_0(PyObject *self, P
       result = ((GeoCal::TiePoint const *)arg1)->ground_location();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -7976,6 +8000,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ground_location__SWIG_1(PyObject *self, P
     try {
       (arg1)->ground_location((boost::shared_ptr< GeoCal::GroundCoordinate > const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8049,6 +8076,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_number_image(PyObject *self, PyObject *ar
       result = (int)((GeoCal::TiePoint const *)arg1)->number_image();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8092,6 +8122,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_number_image_location(PyObject *self, PyO
     try {
       result = (int)((GeoCal::TiePoint const *)arg1)->number_image_location();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8142,6 +8175,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_0(PyObject *self, Py_
     try {
       result = ((GeoCal::TiePoint const *)arg1)->image_coordinate(arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8237,6 +8273,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_1(PyObject *self, Py_
       (arg1)->image_coordinate(arg2,(boost::shared_ptr< GeoCal::ImageCoordinate > const &)*arg3,arg4,arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8321,6 +8360,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_2(PyObject *self, Py_
       (arg1)->image_coordinate(arg2,(boost::shared_ptr< GeoCal::ImageCoordinate > const &)*arg3,arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8396,6 +8438,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_image_coordinate__SWIG_3(PyObject *self, Py_
     try {
       (arg1)->image_coordinate(arg2,(boost::shared_ptr< GeoCal::ImageCoordinate > const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8488,6 +8533,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_line_sigma(PyObject *self, PyObject *args) {
       result = (double)((GeoCal::TiePoint const *)arg1)->line_sigma(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8539,6 +8587,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_sample_sigma(PyObject *self, PyObject *args)
       result = (double)((GeoCal::TiePoint const *)arg1)->sample_sigma(arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8583,6 +8634,9 @@ SWIGINTERN PyObject *_wrap_TiePoint___str__(PyObject *self, PyObject *args) {
       result = ((GeoCal::TiePoint const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8626,6 +8680,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic(PyObject *self, PyObject *args) {
     try {
       result = ((GeoCal::TiePoint const *)arg1)->ic();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8691,6 +8748,9 @@ SWIGINTERN PyObject *_wrap_TiePoint__v_ic_sigma(PyObject *self, PyObject *args) 
     try {
       result = ((GeoCal::TiePoint const *)arg1)->ic_sigma();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -8785,6 +8845,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_pred(PyObject *self, PyObject *args) {
       result = ((GeoCal::TiePoint const *)arg1)->ic_pred((GeoCal::IgcCollection const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8878,6 +8941,9 @@ SWIGINTERN PyObject *_wrap_TiePoint_ic_diff(PyObject *self, PyObject *args) {
       result = ((GeoCal::TiePoint const *)arg1)->ic_diff((GeoCal::IgcCollection const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8942,6 +9008,9 @@ SWIGINTERN PyObject *_wrap_delete_TiePoint(PyObject *self, PyObject *args) {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -8999,6 +9068,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_iterator(PyObject *self, PyObject *arg
       result = (swig::SwigPyIterator *)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__iterator(arg1,arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9042,6 +9114,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___nonzero__(PyObject *self, PyObject *
     try {
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg____nonzero__((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9087,6 +9162,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___bool__(PyObject *self, PyObject *arg
       result = (bool)std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg____bool__((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9130,6 +9208,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___len__(PyObject *self, PyObject *args
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg____len__((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9196,6 +9277,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___getslice__(PyObject *self, PyObject 
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9261,6 +9345,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setslice____SWIG_0(PyObject *self, P
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9337,6 +9424,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setslice____SWIG_1(PyObject *self, P
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9432,6 +9522,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___delslice__(PyObject *self, PyObject 
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9487,6 +9580,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___delitem____SWIG_0(PyObject *self, Py
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9541,6 +9637,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___getitem____SWIG_0(PyObject *self, Py
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9612,6 +9711,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_0(PyObject *self, Py
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9668,6 +9770,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_1(PyObject *self, Py
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -9721,6 +9826,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___delitem____SWIG_1(PyObject *self, Py
         SWIG_exception_fail(SWIG_ValueError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9810,6 +9918,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___getitem____SWIG_1(PyObject *self, Py
         SWIG_exception_fail(SWIG_IndexError, (&_e)->what());
       }
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -9935,6 +10046,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector___setitem____SWIG_2(PyObject *self, Py
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10029,6 +10143,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_pop(PyObject *self, PyObject *args) {
       }
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10100,6 +10217,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_append(PyObject *self, PyObject *args)
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__append(arg1,(boost::shared_ptr< GeoCal::TiePoint > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10121,6 +10241,9 @@ SWIGINTERN PyObject *_wrap_new_TiePointVector__SWIG_0(PyObject *self, Py_ssize_t
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::TiePoint > > *)new std::vector< boost::shared_ptr< GeoCal::TiePoint > >();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10159,6 +10282,9 @@ SWIGINTERN PyObject *_wrap_new_TiePointVector__SWIG_1(PyObject *self, Py_ssize_t
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::TiePoint > > *)new std::vector< boost::shared_ptr< GeoCal::TiePoint > >((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10209,6 +10335,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_empty(PyObject *self, PyObject *args) 
       result = (bool)((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1)->empty();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10252,6 +10381,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_size(PyObject *self, PyObject *args) {
     try {
       result = ((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1)->size();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10324,6 +10456,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_swap(PyObject *self, PyObject *args) {
       (arg1)->swap(*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10367,6 +10502,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_begin(PyObject *self, PyObject *args) 
     try {
       result = (arg1)->begin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10413,6 +10551,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_end(PyObject *self, PyObject *args) {
       result = (arg1)->end();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10457,6 +10598,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_rbegin(PyObject *self, PyObject *args)
     try {
       result = (arg1)->rbegin();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10503,6 +10647,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_rend(PyObject *self, PyObject *args) {
       result = (arg1)->rend();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10546,6 +10693,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_clear(PyObject *self, PyObject *args) 
     try {
       (arg1)->clear();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10591,6 +10741,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_get_allocator(PyObject *self, PyObject
       result = ((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1)->get_allocator();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -10620,6 +10773,9 @@ SWIGINTERN PyObject *_wrap_new_TiePointVector__SWIG_2(PyObject *self, Py_ssize_t
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::TiePoint > > *)new std::vector< boost::shared_ptr< GeoCal::TiePoint > >(SWIG_STD_MOVE(arg1));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10666,6 +10822,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_pop_back(PyObject *self, PyObject *arg
     try {
       (arg1)->pop_back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10715,6 +10874,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_resize__SWIG_0(PyObject *self, Py_ssiz
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10771,6 +10933,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_erase__SWIG_0(PyObject *self, Py_ssize
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__erase__SWIG_0(arg1,SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10842,6 +11007,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_erase__SWIG_1(PyObject *self, Py_ssize
     try {
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__erase__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -10928,6 +11096,9 @@ SWIGINTERN PyObject *_wrap_new_TiePointVector__SWIG_3(PyObject *self, Py_ssize_t
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::TiePoint > > *)new std::vector< boost::shared_ptr< GeoCal::TiePoint > >(SWIG_STD_MOVE(arg1),(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11049,6 +11220,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_push_back(PyObject *self, PyObject *ar
       (arg1)->push_back((std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11092,6 +11266,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_front(PyObject *self, PyObject *args) 
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1)->front();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11139,6 +11316,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_back(PyObject *self, PyObject *args) {
     try {
       result = (std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type *) &((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1)->back();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11220,6 +11400,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_assign(PyObject *self, PyObject *args)
       (arg1)->assign(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11295,6 +11478,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_resize__SWIG_1(PyObject *self, Py_ssiz
     try {
       (arg1)->resize(SWIG_STD_MOVE(arg2),(std::vector< boost::shared_ptr< GeoCal::TiePoint > >::value_type const &)*arg3);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11407,6 +11593,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_insert__SWIG_0(PyObject *self, Py_ssiz
       result = std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__insert__SWIG_0(arg1,SWIG_STD_MOVE(arg2),(boost::shared_ptr< GeoCal::TiePoint > const &)*arg3);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11498,6 +11687,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_insert__SWIG_1(PyObject *self, Py_ssiz
       std_vector_Sl_boost_shared_ptr_Sl_GeoCal_TiePoint_Sg__Sg__insert__SWIG_1(arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3),(boost::shared_ptr< GeoCal::TiePoint > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11576,6 +11768,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_reserve(PyObject *self, PyObject *args
       (arg1)->reserve(SWIG_STD_MOVE(arg2));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11620,6 +11815,9 @@ SWIGINTERN PyObject *_wrap_TiePointVector_capacity(PyObject *self, PyObject *arg
       result = ((std::vector< boost::shared_ptr< GeoCal::TiePoint > > const *)arg1)->capacity();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11663,6 +11861,9 @@ SWIGINTERN PyObject *_wrap_delete_TiePointVector(PyObject *self, PyObject *args)
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11695,6 +11896,9 @@ SWIGINTERN PyObject *_wrap_new_TiePointCollection__SWIG_0(PyObject *self, Py_ssi
     try {
       result = (GeoCal::TiePointCollection *)new GeoCal::TiePointCollection();
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11733,6 +11937,9 @@ SWIGINTERN PyObject *_wrap_new_TiePointCollection__SWIG_1(PyObject *self, Py_ssi
     try {
       result = (GeoCal::TiePointCollection *)new GeoCal::TiePointCollection((std::vector< boost::shared_ptr< GeoCal::TiePoint >,std::allocator< boost::shared_ptr< GeoCal::TiePoint > > > const &)*arg1);
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
@@ -11876,6 +12083,9 @@ SWIGINTERN PyObject *_wrap_TiePointCollection_add_ibis_file(PyObject *self, PyOb
       (arg1)->add_ibis_file((std::string const &)*arg2,(boost::shared_ptr< GeoCal::RasterImage > const &)*arg3,(boost::shared_ptr< GeoCal::Dem > const &)*arg4);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -11948,6 +12158,9 @@ SWIGINTERN PyObject *_wrap_TiePointCollection_data_array(PyObject *self, PyObjec
       result = ((GeoCal::TiePointCollection const *)arg1)->data_array((boost::shared_ptr< GeoCal::RasterImage > const &)*arg2);
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12013,6 +12226,9 @@ SWIGINTERN PyObject *_wrap_TiePointCollection__v_number_gcp(PyObject *self, PyOb
       result = (int)((GeoCal::TiePointCollection const *)arg1)->number_gcp();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12057,6 +12273,9 @@ SWIGINTERN PyObject *_wrap_TiePointCollection___str__(PyObject *self, PyObject *
       result = ((GeoCal::TiePointCollection const *)arg1)->print_to_string();
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());
     }
@@ -12099,6 +12318,9 @@ SWIGINTERN PyObject *_wrap_delete_TiePointCollection(PyObject *self, PyObject *a
     try {
       (void)arg1; delete smartarg1;
     } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
       SWIG_fail; 
     } catch (const std::exception& e) {
       SWIG_exception(SWIG_RuntimeError, e.what());

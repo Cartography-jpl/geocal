@@ -155,10 +155,76 @@ class OrbitCorrection(geocal_swig.orbit.Orbit):
     """
 
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
-
-    def __init__(self, *args, **kwargs):
-        raise AttributeError("No constructor defined")
     __repr__ = _swig_repr
+    desc = _swig_new_instance_method(_orbit_correction.OrbitCorrection_desc)
+    add_observer = _swig_new_instance_method(_orbit_correction.OrbitCorrection_add_observer)
+    remove_observer = _swig_new_instance_method(_orbit_correction.OrbitCorrection_remove_observer)
+    ci_look_vector = _swig_new_instance_method(_orbit_correction.OrbitCorrection_ci_look_vector)
+    cf_look_vector = _swig_new_instance_method(_orbit_correction.OrbitCorrection_cf_look_vector)
+    frame_coordinate = _swig_new_instance_method(_orbit_correction.OrbitCorrection_frame_coordinate)
+    frame_coordinate_with_derivative = _swig_new_instance_method(_orbit_correction.OrbitCorrection_frame_coordinate_with_derivative)
+    reference_surface_intersect_approximate = _swig_new_instance_method(_orbit_correction.OrbitCorrection_reference_surface_intersect_approximate)
+    sc_look_vector = _swig_new_instance_method(_orbit_correction.OrbitCorrection_sc_look_vector)
+    position_ci = _swig_new_instance_method(_orbit_correction.OrbitCorrection_position_ci)
+    position_cf = _swig_new_instance_method(_orbit_correction.OrbitCorrection_position_cf)
+    _v_parameter = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter)
+
+    @property
+    def parameter(self):
+        return self._v_parameter()
+
+    @parameter.setter
+    def parameter(self, value):
+      self._v_parameter(value)
+
+    _v_parameter_with_derivative = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter_with_derivative)
+
+    @property
+    def parameter_with_derivative(self):
+        return self._v_parameter_with_derivative()
+
+    @parameter_with_derivative.setter
+    def parameter_with_derivative(self, value):
+      self._v_parameter_with_derivative(value)
+
+    _v_parameter_name = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter_name)
+
+    @property
+    def parameter_name(self):
+        return self._v_parameter_name()
+
+    _v_parameter_subset = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter_subset)
+
+    @property
+    def parameter_subset(self):
+        return self._v_parameter_subset()
+
+    @parameter_subset.setter
+    def parameter_subset(self, value):
+      self._v_parameter_subset(value)
+
+    _v_parameter_with_derivative_subset = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter_with_derivative_subset)
+
+    @property
+    def parameter_with_derivative_subset(self):
+        return self._v_parameter_with_derivative_subset()
+
+    @parameter_with_derivative_subset.setter
+    def parameter_with_derivative_subset(self, value):
+      self._v_parameter_with_derivative_subset(value)
+
+    _v_parameter_name_subset = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter_name_subset)
+
+    @property
+    def parameter_name_subset(self):
+        return self._v_parameter_name_subset()
+
+    _v_parameter_mask = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_parameter_mask)
+
+    @property
+    def parameter_mask(self):
+        return self._v_parameter_mask()
+
     _v_orbit_uncorrected = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_orbit_uncorrected)
 
     @property
@@ -174,7 +240,34 @@ class OrbitCorrection(geocal_swig.orbit.Orbit):
         return super().__reduce__()
       return _new_from_serialization, (geocal_swig.serialize_function.serialize_write_binary(self),)
 
+
+    def __init__(self, *args):
+        r"""
+        __init__(OrbitCorrection self, boost::shared_ptr< GeoCal::Orbit > const Orb_uncorr) -> OrbitCorrection
+        __init__(OrbitCorrection self) -> OrbitCorrection
+
+        GeoCal::OrbitCorrection::OrbitCorrection
+        """
+        if self.__class__ == OrbitCorrection:
+            _self = None
+        else:
+            _self = self
+        _orbit_correction.OrbitCorrection_swiginit(self, _orbit_correction.new_OrbitCorrection(_self, *args))
+    pcorr_with_derivative = _swig_new_instance_method(_orbit_correction.OrbitCorrection_pcorr_with_derivative)
+    pcorr = _swig_new_instance_method(_orbit_correction.OrbitCorrection_pcorr)
+    acorr_with_derivative = _swig_new_instance_method(_orbit_correction.OrbitCorrection_acorr_with_derivative)
+    acorr = _swig_new_instance_method(_orbit_correction.OrbitCorrection_acorr)
+    _v_pos_corr_is_cf = _swig_new_instance_method(_orbit_correction.OrbitCorrection__v_pos_corr_is_cf)
+
+    @property
+    def pos_corr_is_cf(self):
+        return self._v_pos_corr_is_cf()
+
     __swig_destroy__ = _orbit_correction.delete_OrbitCorrection
+    def __disown__(self):
+        self.this.disown()
+        _orbit_correction.disown_OrbitCorrection(self)
+        return weakref.proxy(self)
 
 # Register OrbitCorrection in _orbit_correction:
 _orbit_correction.OrbitCorrection_swigregister(OrbitCorrection)

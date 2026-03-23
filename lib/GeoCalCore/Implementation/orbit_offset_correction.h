@@ -149,11 +149,6 @@ public:
   virtual std::vector<std::string> parameter_name() const;
   virtual blitz::Array<bool, 1> parameter_mask() const;
   virtual void print(std::ostream& Os) const;
-protected:
-  virtual void notify_update()
-  {
-    notify_update_do(*this);
-  }
   virtual boost::array<AutoDerivative<double>, 3 > 
   pcorr_with_derivative(const TimeWithDerivative& Tm, 
 			const CartesianFixed& Pos_uncorr) const;
@@ -164,6 +159,11 @@ protected:
   acorr_with_derivative(const TimeWithDerivative& T) const;
   virtual boost::math::quaternion<double> 
   acorr(const Time& T) const;
+protected:
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 private:
   typedef std::map<Time, boost::math::quaternion<AutoDerivative<double> > > att_map_type;
   typedef std::pair<Time, boost::math::quaternion<AutoDerivative<double> > > att_map_pair_type;

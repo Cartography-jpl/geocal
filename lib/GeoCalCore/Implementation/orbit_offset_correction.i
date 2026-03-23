@@ -42,6 +42,17 @@ public:
    std::vector<boost::shared_ptr<Time> >& OUTPUT,
    blitz::Array<double, 2>& OUTPUT);
   %pickle_serialization();
+  virtual boost::array<AutoDerivative<double>, 3 > 
+  pcorr_with_derivative(const TimeWithDerivative& Tm, 
+			const CartesianFixed& Pos_uncorr) const;
+  virtual boost::array<double, 3 > 
+  pcorr(const Time& Tm,
+	const CartesianFixed& Pos_uncorr) const;
+  virtual boost::math::quaternion<AutoDerivative<double> > 
+  acorr_with_derivative(const TimeWithDerivative& T) const;
+  virtual boost::math::quaternion<double> 
+  acorr(const Time& T) const;
+  
 };
 }
 // List of things "import *" will include

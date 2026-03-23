@@ -28,7 +28,6 @@ public:
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   virtual boost::array<AutoDerivative<double>, 3> 
   position_cf_with_derivative(const TimeWithDerivative& T) const;
-protected:
   OrbitCorrection(const boost::shared_ptr<Orbit> Orb_uncorr)
     : Orbit(Orb_uncorr->min_time(), Orb_uncorr->max_time()),
       orb_uncorr(Orb_uncorr),

@@ -13,6 +13,7 @@ from geocal_swig import (
 )
 import tempfile
 import os
+from pathlib import Path
 
 
 class _tpcol(VicarInterface):
@@ -41,16 +42,16 @@ class _tpcol(VicarInterface):
     ):
         VicarInterface.__init__(self)
         self.title = "tpcol"
-        self.log_file = log_file
+        self.log_file = Path(log_file)
         self.run_dir_name = run_dir_name
-        self.input = [img1_fname, img2_fname]
+        self.input = [Path(img1_fname), Path(img2_fname)]
         self.print_output = not quiet
         # If there two image are significantly different in resolution, we get
         # better results by having the lower resolution image be the first
         # on in the match list. Controlled by ref_lowres flag.
         ref_lowres = "n"
-        img1_res = VicarLiteRasterImage(img1_fname).map_info.resolution_meter
-        img2_res = VicarLiteRasterImage(img2_fname).map_info.resolution_meter
+        img1_res = VicarLiteRasterImage(str(img1_fname)).map_info.resolution_meter
+        img2_res = VicarLiteRasterImage(str(img2_fname)).map_info.resolution_meter
         if 1.1 * img1_res < img2_res:
             ref_lowres = "y"
         self.before_body = """
@@ -92,8 +93,8 @@ local ref_resf string
 """
         self.cmd = "let toler = %f\n" % toler
         self.cmd += 'let ref_lowres = "%s"\n' % ref_lowres
-        self.cmd += 'let inp = "%s"\n' % os.path.basename(img1_fname)
-        self.cmd += 'let ref = "%s"\n' % os.path.basename(img2_fname)
+        self.cmd += 'let inp = "%s"\n' % os.path.basename(str(img1_fname))
+        self.cmd += 'let ref = "%s"\n' % os.path.basename(str(img2_fname))
         # Not currently used. This is a parameter that appears in
         # gtpwarp, so we'll carry it. But for now this is just an empty
         # value.
@@ -294,7 +295,7 @@ class TiePointCollectPicmtch(object):
         self.seed = seed
         self.autofit = autofit
         self.thr_res = thr_res
-        self.log_file = log_file
+        self.log_file = Path(log_file)
         self.run_dir_name = run_dir_name
         if (self.image_index2 >= 0 and self.ref_image_fname is not None) or (
             self.image_index2 < 0 and self.ref_image_fname is None
@@ -370,8 +371,8 @@ class TiePointCollectPicmtch(object):
             quiet=self.quiet,
         )
         tpcol = TiePointCollection()
-        img1 = VicarLiteRasterImage(img1_fname)
-        img2 = VicarLiteRasterImage(img2_fname)
+        img1 = VicarLiteRasterImage(str(img1_fname))
+        img2 = VicarLiteRasterImage(str(img2_fname))
         dem1 = self.igc_collection.dem(self.image_index1)
         if self.image_index2 >= 0:
             dem2 = self.igc_collection.dem(self.image_index2)

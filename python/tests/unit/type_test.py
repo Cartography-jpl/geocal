@@ -2,11 +2,13 @@
 # have
 
 from geocal_swig import ImageCoordinate, VicarImageCoordinate
+import pytest
 
 def test_temp() -> None:
     ic = ImageCoordinate(10, 20)
     # Should get a typing error here, wrong argument to constructor
-    ic2 = ImageCoordinate("Foo", 20)
+    with pytest.raises(TypeError):
+        ic2 = ImageCoordinate("Foo", 20)
     f = "hi"
     # And here, assigning a float to a str variable
     f = ic.line

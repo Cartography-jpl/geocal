@@ -4,6 +4,7 @@
 from geocal_swig import ImageCoordinate, VicarImageCoordinate
 import pytest
 
+
 def test_temp() -> None:
     ic = ImageCoordinate(10, 20)
     # Should get a typing error here, wrong argument to constructor
@@ -14,4 +15,4 @@ def test_temp() -> None:
     f = ic.line
     # This should work, testing handling overloading correctly
     ic3 = ImageCoordinate()
-    ic4 = ImageCoordinate(VicarImageCoordinate(10,20))
+    ic4 = ImageCoordinate(VicarImageCoordinate(10, 20))

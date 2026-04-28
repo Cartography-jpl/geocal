@@ -53,6 +53,37 @@ typedef struct
     PGSt_double   orbitDescendLongitude; /* Orbit down-crossing terrestrial
 					    longitude, radians */
 } PGSt_ephemMetadata;
+
+typedef struct
+{
+    char          spacecraftID[24];     /* Spacecraft Name */
+    char          asciiTimeRange[48];   /* start/stop times to nearest hour */
+    char          source[32];           /* Source of the data */
+    char          version[8];           /* Version number (default = 1) */
+    PGSt_double   startTime;            /* Ephemeris dataset start time,
+					   secTAI93 */
+    PGSt_double   endTime;              /* Ephemeris dataset end time,
+					   secTAI93 */
+    PGSt_real     interval;             /* Standard interval between records */
+    PGSt_uinteger nURs;                 /*  */
+    PGSt_uinteger nRecords;             /* Number of ephemeris records */
+    PGSt_uinteger eulerAngleOrder[3];   /* Order of rotations as a permutation
+					   of 1=x, 2=y, 3=z */
+    PGSt_real     qaParameters[16];     /* Ephemeris data quality processing
+					   parameters */
+    PGSt_real     qaStatistics[4];      /* Quality assurance statistics */
+    char          spare[280];           /* Pad to 512 bytes */
+} PGSt_attitHeader;
+
+typedef struct
+{
+    PGSt_double   secTAI93;
+    PGSt_double   eulerAngle[3];
+    PGSt_double   angularVelocity[3];
+    PGSt_uinteger qualityFlag;
+    char          spare[4];
+} PGSt_attitRecord;
+
 """
 
 
@@ -83,7 +114,7 @@ class DprepEphemerisFile:
             data = fh.read(hstruct.size)
             hs = hstruct.unpack(data)
             (
-                self.spacraft_id,
+                self.spacecraft_id,
                 self.time_range,
                 self.source,
                 self.version,
@@ -140,7 +171,52 @@ class DprepAttitudeFile:
     into a DprepOrbit, this is the low level file reading."""
 
     def __init__(self, filename: str | os.PathLike[str]) -> None:
-        pass
+        # Various structures used for reading. We generate these directly from
+        # the header file data listed above from the old SDP toolkit code.
+        # For some historical reason, the data is actually in big-endian for double etc.
+        header_struct_fmt = ">24s48s32s8sddfII3I16f4f280s"
+        hstruct = struct.Struct(header_struct_fmt)
+        # Sanity check that we have the right structure format
+        assert hstruct.size == 512
+        ur_struct_fmt = "256s"
+        urstruct = struct.Struct(ur_struct_fmt)
+        assert urstruct.size == 256
+        rec_struct_fmt = ">d3d3dI4s"
+        recstruct = struct.Struct(rec_struct_fmt)
+        # Use the structures to read and unpack the data
+        with open(filename, "rb") as fh:
+            # Read and unpack the header
+            data = fh.read(hstruct.size)
+            hs = hstruct.unpack(data)
+            (
+                self.spacecraft_id,
+                self.time_range,
+                self.source,
+                self.version,
+                start_time_f,
+                end_time_f,
+                self.interval,
+                n_urs,
+                n_record,
+            ) = hs[:9]
+            self.start_time = Time.time_pgs(start_time_f)
+            self.end_time = Time.time_pgs(end_time_f)
+            self.euler_angle_order = np.empty((3,), dtype=np.uint32)
+            self.euler_angle_order[:] = hs[9:9+3]
+            self.qa_parm = np.empty((16,), dtype=np.float32)
+            self.qa_parm[:] = hs[12 : 12 + 16]
+            self.qa_stat = np.empty((4,), dtype=np.float32)
+            self.qa_stat[:] = hs[28 : 28 + 4]
+            # Read the URs. We don't do anything with this, so just need to read the data
+            _ = fh.read(urstruct.size * n_urs)
+            data = fh.read(recstruct.size * n_record)
+            self.tm = np.empty((n_record,), dtype=np.float64)
+            self.euler_angle = np.empty((n_record,3), dtype=np.float64)
+            self.angular_velocity = np.empty((n_record,3), dtype=np.float64)
+            for i, d in enumerate(recstruct.iter_unpack(data)):
+                self.tm[i] = d[0]
+                self.euler_angle[i,:] = d[1 : 1 + 3]
+                self.angular_velocity[i,:] = d[4 : 4 + 3]
 
 
 __all__ = ["DprepEphemerisFile", "DprepAttitudeFile"]

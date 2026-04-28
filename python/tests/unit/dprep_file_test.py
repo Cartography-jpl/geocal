@@ -13,4 +13,7 @@ def test_dprep_ephemeris(unit_test_data):
     assert str(feph.start_time) == "2017-09-01T00:00:00.851976Z"
     assert str(feph.end_time) == "2017-09-01T01:59:59.571976Z"
     assert list(feph.onum) == [94173, 94174]
+    assert fatt.euler_angle.shape == (14059,3)
+    assert str(fatt.start_time) == "2017-09-01T00:00:00.878761Z"
+    assert str(fatt.end_time) == "2017-09-01T01:59:59.598240Z"
 

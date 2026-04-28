@@ -143,6 +143,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_orbit_correction)(void);
   INIT_TYPE INIT_FUNC(_orbit_offset_correction)(void);
   INIT_TYPE INIT_FUNC(_orbit_piecewise_correction)(void);
+  INIT_TYPE INIT_FUNC(_spice_kepler_orbit)(void);
   INIT_TYPE INIT_FUNC(_orbit_time_shift)(void);
   INIT_TYPE INIT_FUNC(_orbit_array)(void);
   INIT_TYPE INIT_FUNC(_orbit_quaternion_list_offset)(void);
@@ -372,6 +373,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_orbit_correction", INIT_FUNC(_orbit_correction));
   INIT_MODULE(module, "_orbit_offset_correction", INIT_FUNC(_orbit_offset_correction));
   INIT_MODULE(module, "_orbit_piecewise_correction", INIT_FUNC(_orbit_piecewise_correction));
+  INIT_MODULE(module, "_spice_kepler_orbit", INIT_FUNC(_spice_kepler_orbit));
   INIT_MODULE(module, "_orbit_time_shift", INIT_FUNC(_orbit_time_shift));
   INIT_MODULE(module, "_orbit_array", INIT_FUNC(_orbit_array));
   INIT_MODULE(module, "_orbit_quaternion_list_offset", INIT_FUNC(_orbit_quaternion_list_offset));

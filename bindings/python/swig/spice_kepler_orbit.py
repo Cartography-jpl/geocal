@@ -155,16 +155,25 @@ class SpiceKeplerOrbit(geocal_swig.orbit.Orbit):
     thisown = property(lambda x: x.this.own(), lambda x, v: x.this.own(v), doc="The membership flag")
     __repr__ = _swig_repr
 
-    def __init__(self):
+    def __init__(self, *args):
         r"""
-        __init__(SpiceKeplerOrbit self) -> SpiceKeplerOrbit
+        __init__(SpiceKeplerOrbit self, BlitzArray_double_1 elements, Time min_time=min_valid_time, Time max_time=max_valid_time) -> SpiceKeplerOrbit
 
         GeoCal::SpiceKeplerOrbit::SpiceKeplerOrbit
         Create an kepler orbit.  
 
         """
-        _spice_kepler_orbit.SpiceKeplerOrbit_swiginit(self, _spice_kepler_orbit.new_SpiceKeplerOrbit())
+        _spice_kepler_orbit.SpiceKeplerOrbit_swiginit(self, _spice_kepler_orbit.new_SpiceKeplerOrbit(*args))
     orbit_data = _swig_new_instance_method(_spice_kepler_orbit.SpiceKeplerOrbit_orbit_data)
+    mu = _swig_new_static_method(_spice_kepler_orbit.SpiceKeplerOrbit_mu)
+    spice_conics = _swig_new_static_method(_spice_kepler_orbit.SpiceKeplerOrbit_spice_conics)
+    spice_oscelt = _swig_new_static_method(_spice_kepler_orbit.SpiceKeplerOrbit_spice_oscelt)
+    _v_elements = _swig_new_instance_method(_spice_kepler_orbit.SpiceKeplerOrbit__v_elements)
+
+    @property
+    def elements(self):
+        return self._v_elements()
+
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set

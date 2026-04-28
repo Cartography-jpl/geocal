@@ -2,7 +2,14 @@ from __future__ import annotations
 import os
 import struct
 import numpy as np
-from geocal_swig import Time, OrbitArray_Eci_TimePgs, matrix_to_quaternion, quaternion_to_array, quat_rot, quaternion_to_matrix
+from geocal_swig import (
+    Time,
+    OrbitArray_Eci_TimePgs,
+    matrix_to_quaternion,
+    quaternion_to_array,
+    quat_rot,
+    quaternion_to_matrix,
+)
 
 # For reference, here are the C structures associated with this data. This comes
 # from the old SDP toolkit header files.
@@ -165,6 +172,7 @@ class DprepEphemerisFile:
                 self.oasc_time[i] = Time.time_pgs(oasc_time_v)
                 self.odesc_time[i] = Time.time_pgs(odesc_time_v)
 
+
 class DprepAttitudeFile:
     """DPREP is an old binary format used by the SDP toolkit, for such instruments
     as MISR. This reads the attitude file. A separate class puts this together
@@ -202,7 +210,7 @@ class DprepAttitudeFile:
             self.start_time = Time.time_pgs(start_time_f)
             self.end_time = Time.time_pgs(end_time_f)
             self.euler_angle_order = np.empty((3,), dtype=np.uint32)
-            self.euler_angle_order[:] = hs[9:9+3]
+            self.euler_angle_order[:] = hs[9 : 9 + 3]
             self.qa_parm = np.empty((16,), dtype=np.float32)
             self.qa_parm[:] = hs[12 : 12 + 16]
             self.qa_stat = np.empty((4,), dtype=np.float32)
@@ -212,32 +220,38 @@ class DprepAttitudeFile:
             data = fh.read(recstruct.size * n_record)
             self.tm = np.empty((n_record,), dtype=np.float64)
             # Note euler angle is in radians. This is in yaw, pitch, roll order
-            self.euler_angle = np.empty((n_record,3), dtype=np.float64)
-            self.angular_velocity = np.empty((n_record,3), dtype=np.float64)
+            self.euler_angle = np.empty((n_record, 3), dtype=np.float64)
+            self.angular_velocity = np.empty((n_record, 3), dtype=np.float64)
             for i, d in enumerate(recstruct.iter_unpack(data)):
                 self.tm[i] = d[0]
-                self.euler_angle[i,:] = d[1 : 1 + 3]
-                self.angular_velocity[i,:] = d[4 : 4 + 3]
+                self.euler_angle[i, :] = d[1 : 1 + 3]
+                self.angular_velocity[i, :] = d[4 : 4 + 3]
+
 
 class DprepOrbit(OrbitArray_Eci_TimePgs):
     # Note the old MISR code would figure out the DPREP files to load, We could put
     # this in if needed, but that depending an a particular directory struture
     # (/data/bank/asdc/DPREP). I think just passing the input files to use is probably
     # cleaner here.
-    def __init__(self, eph_file_list : list[str | os.PathLike[str]],
-                 att_file_list : list[str | os.PathLike[str]]) -> None:
+    def __init__(
+        self,
+        eph_file_list: list[str | os.PathLike[str]],
+        att_file_list: list[str | os.PathLike[str]],
+    ) -> None:
         self.dprep_ephermeris_file = [DprepEphemerisFile(f) for f in eph_file_list]
         self.dprep_attitude_file = [DprepAttitudeFile(f) for f in att_file_list]
         eph_time = np.concatenate([f.tm for f in self.dprep_ephermeris_file])
         att_time = np.concatenate([f.tm for f in self.dprep_attitude_file])
-        att_euler_angle = np.concatenate([f.euler_angle for f in self.dprep_attitude_file], axis=0)
+        att_euler_angle = np.concatenate(
+            [f.euler_angle for f in self.dprep_attitude_file], axis=0
+        )
         eph_pos = np.concatenate([f.pos for f in self.dprep_ephermeris_file], axis=0)
         eph_vel = np.concatenate([f.vel for f in self.dprep_ephermeris_file], axis=0)
         # Just fill in attitude with dummy data. We want to populate everything so we
         # can interpolate the ephemeris position to the attitude times, needed to
         # generate the orbitial_to_eci coordinates
         att_quat = np.zeros((att_time.shape[0], 4))
-        att_quat[:,0] = 1
+        att_quat[:, 0] = 1
         orb_t = OrbitArray_Eci_TimePgs(eph_time, eph_pos, eph_vel, att_time, att_quat)
         aorder = self.dprep_attitude_file[0].euler_angle_order
         aorder_s = f"{aorder[0]}{aorder[1]}{aorder[2]}"
@@ -255,7 +269,7 @@ class DprepOrbit(OrbitArray_Eci_TimePgs):
                 p = orb_t.position_ci(tm).position
                 v = orb_t.orbit_data(tm).velocity_ci
                 z = -p / np.linalg.norm(p)
-                x = v - z * np.dot(v,z)
+                x = v - z * np.dot(v, z)
                 x = x / np.linalg.norm(x)
                 y = np.cross(z, x)
                 orb_to_eci_m = np.vstack((x, y, z)).transpose()
@@ -267,13 +281,25 @@ class DprepOrbit(OrbitArray_Eci_TimePgs):
                 # assumption that this is ypr but rather first, second, and third angle.
                 # Most of the time these are near nadir anyways, but we will for now
                 # do what I think the SDP toolkit does. We can revisit this if needed.
-                sc_to_orb_q = quat_rot(aorder_s, att_euler_angle[i,0],
-                                       att_euler_angle[i,1], att_euler_angle[i,2])
+                sc_to_orb_q = quat_rot(
+                    aorder_s,
+                    att_euler_angle[i, 0],
+                    att_euler_angle[i, 1],
+                    att_euler_angle[i, 2],
+                )
                 # We don't happen to have the quaternion multiplication wrapped in swig.
                 # So just do this with matrix and then convert to quaternion. Not as efficient,
                 # but this stuff is all quick anyways
-                att_quat2.append(quaternion_to_array(matrix_to_quaternion(orb_to_eci_m @ quaternion_to_matrix(sc_to_orb_q))))
-        super().__init__(eph_time, eph_pos, eph_vel, np.array(att_time2), np.array(att_quat2))
+                att_quat2.append(
+                    quaternion_to_array(
+                        matrix_to_quaternion(
+                            orb_to_eci_m @ quaternion_to_matrix(sc_to_orb_q)
+                        )
+                    )
+                )
+        super().__init__(
+            eph_time, eph_pos, eph_vel, np.array(att_time2), np.array(att_quat2)
+        )
 
-        
+
 __all__ = ["DprepEphemerisFile", "DprepAttitudeFile", "DprepOrbit"]

@@ -5553,6 +5553,134 @@ struct SWIG_null_deleter {
 #define SWIG_NO_NULL_DELETER_SWIG_BUILTIN_INIT
 
 
+SWIGINTERN swig_type_info*
+SWIG_pchar_descriptor(void)
+{
+  static swig_type_info* info = 0;
+  if (!info) {
+    info = SWIG_TypeQuery("_p_char");
+  }
+  return info;
+}
+
+
+/* Return string from Python obj. NOTE: obj must remain in scope in order
+   to use the returned cptr (but only when alloc is set to SWIG_OLDOBJ) */
+SWIGINTERN int
+SWIG_AsCharPtrAndSize(PyObject *obj, char **cptr, size_t *psize, int *alloc)
+{
+#if PY_VERSION_HEX>=0x03000000
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+  if (PyBytes_Check(obj))
+#else
+  if (PyUnicode_Check(obj))
+#endif
+#else  
+  if (PyString_Check(obj))
+#endif
+  {
+    char *cstr; Py_ssize_t len;
+    PyObject *bytes = NULL;
+    int ret = SWIG_OK;
+    if (alloc)
+      *alloc = SWIG_OLDOBJ;
+#if PY_VERSION_HEX>=0x03000000 && defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+    if (PyBytes_AsStringAndSize(obj, &cstr, &len) == -1)
+      return SWIG_TypeError;
+#else
+    cstr = (char *)SWIG_PyUnicode_AsUTF8AndSize(obj, &len, &bytes);
+    if (!cstr)
+      return SWIG_TypeError;
+    /* The returned string is only duplicated if the char * returned is not owned and memory managed by obj */
+    if (bytes && cptr) {
+      if (alloc) {
+        cstr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
+        *alloc = SWIG_NEWOBJ;
+      } else {
+        /* alloc must be set in order to clean up allocated memory */
+        return SWIG_RuntimeError;
+      }
+    }
+#endif
+    if (cptr) *cptr = cstr;
+    if (psize) *psize = len + 1;
+    SWIG_Py_XDECREF(bytes);
+    return ret;
+  } else {
+#if defined(SWIG_PYTHON_2_UNICODE)
+#if defined(SWIG_PYTHON_STRICT_BYTE_CHAR)
+#error "Cannot use both SWIG_PYTHON_2_UNICODE and SWIG_PYTHON_STRICT_BYTE_CHAR at once"
+#endif
+#if PY_VERSION_HEX<0x03000000
+    if (PyUnicode_Check(obj)) {
+      char *cstr; Py_ssize_t len;
+      if (!alloc && cptr) {
+        return SWIG_RuntimeError;
+      }
+      obj = PyUnicode_AsUTF8String(obj);
+      if (!obj)
+        return SWIG_TypeError;
+      if (PyString_AsStringAndSize(obj, &cstr, &len) != -1) {
+        if (cptr) {
+          if (alloc) *alloc = SWIG_NEWOBJ;
+          *cptr = reinterpret_cast< char* >(memcpy(new char[len + 1], cstr, sizeof(char)*(len + 1)));
+        }
+        if (psize) *psize = len + 1;
+
+        SWIG_Py_XDECREF(obj);
+        return SWIG_OK;
+      } else {
+        SWIG_Py_XDECREF(obj);
+      }
+    }
+#endif
+#endif
+
+    swig_type_info* pchar_descriptor = SWIG_pchar_descriptor();
+    if (pchar_descriptor) {
+      void* vptr = 0;
+      if (SWIG_ConvertPtr(obj, &vptr, pchar_descriptor, 0) == SWIG_OK) {
+	if (cptr) *cptr = (char *) vptr;
+	if (psize) *psize = vptr ? (strlen((char *)vptr) + 1) : 0;
+	if (alloc) *alloc = SWIG_OLDOBJ;
+	return SWIG_OK;
+      }
+    }
+  }
+  return SWIG_TypeError;
+}
+
+
+SWIGINTERN int
+SWIG_AsPtr_std_string (PyObject * obj, std::string **val) 
+{
+  char* buf = 0 ; size_t size = 0; int alloc = SWIG_OLDOBJ;
+  if (SWIG_IsOK((SWIG_AsCharPtrAndSize(obj, &buf, &size, &alloc)))) {
+    if (buf) {
+      if (val) *val = new std::string(buf, size - 1);
+      if (alloc == SWIG_NEWOBJ) delete[] buf;
+      return SWIG_NEWOBJ;
+    } else {
+      if (val) *val = 0;
+      return SWIG_OLDOBJ;
+    }
+  } else {
+    PyErr_Clear();
+    static swig_type_info *descriptor = SWIG_TypeQuery("std::string" " *");
+    if (descriptor) {
+      std::string *vptr;
+      int res = SWIG_ConvertPtr(obj, (void**)&vptr, descriptor, 0);
+      if (SWIG_IsOK(res) && val) *val = vptr;
+      return res;
+    }
+  }
+  return SWIG_ERROR;
+}
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
+
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -6364,15 +6492,67 @@ SWIGINTERN PyObject *SwigPyIterator_swigregister(PyObject *SWIGUNUSEDPARM(self),
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_SpiceKeplerOrbit(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_new_SpiceKeplerOrbit__SWIG_0(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
   PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  GeoCal::Time arg2 ;
+  GeoCal::Time arg3 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  void *argp3 ;
+  int res3 = 0 ;
   GeoCal::SpiceKeplerOrbit *result = 0 ;
   
   (void)self;
-  if (!SWIG_Python_UnpackTuple(args, "new_SpiceKeplerOrbit", 0, 0, 0)) SWIG_fail;
+  if ((nobjs < 3) || (nobjs > 3)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_SpiceKeplerOrbit', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_SpiceKeplerOrbit', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SpiceKeplerOrbit" "', argument " "2"" of type '" "GeoCal::Time""'");
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_SpiceKeplerOrbit" "', argument " "2"" of type '" "GeoCal::Time""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+    }
+  }
+  {
+    int newmem = 0;
+    res3 = SWIG_ConvertPtrAndOwn(swig_obj[2], &argp3, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res3)) {
+      SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_SpiceKeplerOrbit" "', argument " "3"" of type '" "GeoCal::Time""'");
+    }
+    if (!argp3) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_SpiceKeplerOrbit" "', argument " "3"" of type '" "GeoCal::Time""'");
+    } else {
+      arg3 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp3)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp3);
+    }
+  }
   {
     try {
-      result = (GeoCal::SpiceKeplerOrbit *)new GeoCal::SpiceKeplerOrbit();
+      result = (GeoCal::SpiceKeplerOrbit *)new GeoCal::SpiceKeplerOrbit((blitz::Array< double,1 > const &)*arg1,SWIG_STD_MOVE(arg2),SWIG_STD_MOVE(arg3));
     } catch (Swig::DirectorException &e) {
       SWIG_fail; 
     } catch (const PythonException& e) {
@@ -6389,6 +6569,152 @@ SWIGINTERN PyObject *_wrap_new_SpiceKeplerOrbit(PyObject *self, PyObject *args) 
   return resultobj;
 fail:
   return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpiceKeplerOrbit__SWIG_1(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  GeoCal::Time arg2 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  GeoCal::SpiceKeplerOrbit *result = 0 ;
+  
+  (void)self;
+  if ((nobjs < 2) || (nobjs > 2)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_SpiceKeplerOrbit', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_SpiceKeplerOrbit', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "new_SpiceKeplerOrbit" "', argument " "2"" of type '" "GeoCal::Time""'");
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "new_SpiceKeplerOrbit" "', argument " "2"" of type '" "GeoCal::Time""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = (GeoCal::SpiceKeplerOrbit *)new GeoCal::SpiceKeplerOrbit((blitz::Array< double,1 > const &)*arg1,SWIG_STD_MOVE(arg2));
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SpiceKeplerOrbit > *smartresult = result ? new boost::shared_ptr<  GeoCal::SpiceKeplerOrbit >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKeplerOrbit_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpiceKeplerOrbit__SWIG_2(PyObject *self, Py_ssize_t nobjs, PyObject **swig_obj) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  GeoCal::SpiceKeplerOrbit *result = 0 ;
+  
+  (void)self;
+  if ((nobjs < 1) || (nobjs > 1)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_SpiceKeplerOrbit', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'new_SpiceKeplerOrbit', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    try {
+      result = (GeoCal::SpiceKeplerOrbit *)new GeoCal::SpiceKeplerOrbit((blitz::Array< double,1 > const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    boost::shared_ptr<  GeoCal::SpiceKeplerOrbit > *smartresult = result ? new boost::shared_ptr<  GeoCal::SpiceKeplerOrbit >(result SWIG_NO_NULL_DELETER_SWIG_POINTER_NEW) : 0;
+    resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(smartresult), SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKeplerOrbit_t, SWIG_POINTER_NEW | SWIG_POINTER_OWN);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_SpiceKeplerOrbit(PyObject *self, PyObject *args) {
+  Py_ssize_t argc;
+  PyObject *argv[4] = {
+    0
+  };
+  
+  if (!(argc = SWIG_Python_UnpackTuple(args, "new_SpiceKeplerOrbit", 0, 3, argv))) SWIG_fail;
+  --argc;
+  if (argc == 1) {
+    PyObject *retobj = _wrap_new_SpiceKeplerOrbit__SWIG_2(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 2) {
+    PyObject *retobj = _wrap_new_SpiceKeplerOrbit__SWIG_1(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  if (argc == 3) {
+    PyObject *retobj = _wrap_new_SpiceKeplerOrbit__SWIG_0(self, argc, argv);
+    if (!SWIG_Python_TypeErrorOccurred(retobj)) return retobj;
+    SWIG_fail;
+  }
+  
+fail:
+  SWIG_Python_RaiseOrModifyTypeError("Wrong number or type of arguments for overloaded function 'new_SpiceKeplerOrbit'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    GeoCal::SpiceKeplerOrbit::SpiceKeplerOrbit(blitz::Array< double,1 > const &,GeoCal::Time,GeoCal::Time)\n"
+    "    GeoCal::SpiceKeplerOrbit::SpiceKeplerOrbit(blitz::Array< double,1 > const &,GeoCal::Time)\n"
+    "    GeoCal::SpiceKeplerOrbit::SpiceKeplerOrbit(blitz::Array< double,1 > const &)\n");
+  return 0;
 }
 
 
@@ -6565,6 +6891,276 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_SpiceKeplerOrbit_mu(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  std::string *arg1 = 0 ;
+  int res1 = SWIG_OLDOBJ ;
+  PyObject *swig_obj[1] ;
+  double result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    std::string *ptr = (std::string *)0;
+    res1 = SWIG_AsPtr_std_string(swig_obj[0], &ptr);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKeplerOrbit_mu" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    if (!ptr) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "SpiceKeplerOrbit_mu" "', argument " "1"" of type '" "std::string const &""'"); 
+    }
+    arg1 = ptr;
+  }
+  {
+    try {
+      result = (double)GeoCal::SpiceKeplerOrbit::mu((std::string const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return resultobj;
+fail:
+  if (SWIG_IsNewObj(res1)) delete arg1;
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceKeplerOrbit_spice_conics(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  blitz::Array< double,1 > *arg1 = 0 ;
+  GeoCal::Time arg2 ;
+  blitz::Array< double,1 > a1 ;
+  PythonObject numpy1 ;
+  void *argp2 ;
+  int res2 = 0 ;
+  PyObject *swig_obj[2] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  (void)self;
+  if (!SWIG_Python_UnpackTuple(args, "SpiceKeplerOrbit_spice_conics", 2, 2, swig_obj)) SWIG_fail;
+  {
+    int res = SWIG_ConvertPtr(swig_obj[0], (void**)(&arg1), SWIGTYPE_p_blitz__ArrayT_double_1_t, 
+      0 );
+    if(!SWIG_IsOK(res)) {
+      numpy1.obj = to_numpy<double >(swig_obj[0]);
+      if(!numpy1.obj) {
+        SWIG_Error(SWIG_TypeError, "in method 'SpiceKeplerOrbit_spice_conics', expecting type  Array<double,1>");
+        return NULL;
+      }
+      if(PyArray_NDIM((PyArrayObject*)numpy1.obj) !=1) {
+        SWIG_Error(SWIG_TypeError, "in method 'SpiceKeplerOrbit_spice_conics', expecting type  Array<double,1>");
+        return NULL;
+      }
+      a1.reference(to_blitz_array<double, 1>(numpy1));
+      arg1 = &a1;
+    }
+  }
+  {
+    int newmem = 0;
+    res2 = SWIG_ConvertPtrAndOwn(swig_obj[1], &argp2, SWIGTYPE_p_boost__shared_ptrT_GeoCal__Time_t,  0 , &newmem);
+    if (!SWIG_IsOK(res2)) {
+      SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "SpiceKeplerOrbit_spice_conics" "', argument " "2"" of type '" "GeoCal::Time""'");
+    }
+    if (!argp2) {
+      SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "SpiceKeplerOrbit_spice_conics" "', argument " "2"" of type '" "GeoCal::Time""'");
+    } else {
+      arg2 = *(reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2)->get());
+      if (newmem & SWIG_CAST_NEW_MEMORY) delete reinterpret_cast< boost::shared_ptr<  GeoCal::Time > * >(argp2);
+    }
+  }
+  {
+    try {
+      result = GeoCal::SpiceKeplerOrbit::spice_conics((blitz::Array< double,1 > const &)*arg1,SWIG_STD_MOVE(arg2));
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceKeplerOrbit_spice_oscelt(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitData *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitData const > tempshared1 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    // Added mms
+    // First check to see if all ready pointer type
+    GeoCal::OrbitData *ptr;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], (void**)(&ptr), SWIGTYPE_p_GeoCal__OrbitData,  0 , &newmem);
+    if (SWIG_IsOK(res1)) {
+      arg1 = ptr;
+    } else {
+      res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitData_t,  0 , &newmem);
+      if (!SWIG_IsOK(res1)) {
+        SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKeplerOrbit_spice_oscelt" "', argument " "1"" of type '" "GeoCal::OrbitData const &""'");
+      }
+      if (!argp1) {
+        SWIG_exception_fail(SWIG_NullReferenceError, "invalid null reference " "in method '" "SpiceKeplerOrbit_spice_oscelt" "', argument " "1"" of type '" "GeoCal::OrbitData const &""'"); 
+      }
+      if (newmem & SWIG_CAST_NEW_MEMORY) {
+        tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+        delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1);
+        arg1 = const_cast< GeoCal::OrbitData * >(tempshared1.get());
+      } else {
+        arg1 = const_cast< GeoCal::OrbitData * >(reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitData > * >(argp1)->get());
+      }
+    }
+  }
+  {
+    try {
+      result = GeoCal::SpiceKeplerOrbit::spice_oscelt((GeoCal::OrbitData const &)*arg1);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_SpiceKeplerOrbit__v_elements(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::SpiceKeplerOrbit *arg1 = (GeoCal::SpiceKeplerOrbit *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::SpiceKeplerOrbit const > tempshared1 ;
+  boost::shared_ptr< GeoCal::SpiceKeplerOrbit const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  SwigValueWrapper< blitz::Array< double,1 > > result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__SpiceKeplerOrbit_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "SpiceKeplerOrbit__v_elements" "', argument " "1"" of type '" "GeoCal::SpiceKeplerOrbit const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKeplerOrbit > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpiceKeplerOrbit * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::SpiceKeplerOrbit > * >(argp1);
+      arg1 = const_cast< GeoCal::SpiceKeplerOrbit * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::SpiceKeplerOrbit const *)arg1)->elements();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail; 
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail; 
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    }
+  }
+  {
+    // Treat as pointer for the purposes of the macro
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[1], stride[1];
+    for(int i = 0; i < 1; ++i) {
+      dims[i] = (&result)->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = (&result)->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    resultobj = PyArray_New(&PyArray_Type, 1, dims, type_to_npy<double >(), 
+      stride, (&result)->data(), 0, 0, 0);
+    blitz::Array<double, 1>* t = new blitz::Array<double, 1>(*(&result));
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) resultobj, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_1_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_SpiceKeplerOrbit(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::SpiceKeplerOrbit *arg1 = (GeoCal::SpiceKeplerOrbit *) 0 ;
@@ -6646,8 +7242,8 @@ static PyMethodDef SwigMethods[] = {
 		"SwigPyIterator___sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
 		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "new_SpiceKeplerOrbit", _wrap_new_SpiceKeplerOrbit, METH_NOARGS, "\n"
-		"new_SpiceKeplerOrbit() -> SpiceKeplerOrbit\n"
+	 { "new_SpiceKeplerOrbit", _wrap_new_SpiceKeplerOrbit, METH_VARARGS, "\n"
+		"SpiceKeplerOrbit(BlitzArray_double_1 elements, Time min_time=min_valid_time, Time max_time=max_valid_time)\n"
 		"\n"
 		"GeoCal::SpiceKeplerOrbit::SpiceKeplerOrbit\n"
 		"Create an kepler orbit.  \n"
@@ -6658,6 +7254,26 @@ static PyMethodDef SwigMethods[] = {
 		"SpiceKeplerOrbit_orbit_data(SpiceKeplerOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
 		"GeoCal::SpiceKeplerOrbit::orbit_data\n"
+		""},
+	 { "SpiceKeplerOrbit_mu", _wrap_SpiceKeplerOrbit_mu, METH_O, "\n"
+		"SpiceKeplerOrbit_mu(std::string const & Body_name) -> double\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::mu\n"
+		""},
+	 { "SpiceKeplerOrbit_spice_conics", _wrap_SpiceKeplerOrbit_spice_conics, METH_VARARGS, "\n"
+		"SpiceKeplerOrbit_spice_conics(BlitzArray_double_1 elements, Time T) -> BlitzArray_double_1\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::spice_conics\n"
+		""},
+	 { "SpiceKeplerOrbit_spice_oscelt", _wrap_SpiceKeplerOrbit_spice_oscelt, METH_O, "\n"
+		"SpiceKeplerOrbit_spice_oscelt(OrbitData Od) -> BlitzArray_double_1\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::spice_oscelt\n"
+		""},
+	 { "SpiceKeplerOrbit__v_elements", _wrap_SpiceKeplerOrbit__v_elements, METH_O, "\n"
+		"SpiceKeplerOrbit__v_elements(SpiceKeplerOrbit self) -> BlitzArray_double_1\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::elements\n"
 		""},
 	 { "delete_SpiceKeplerOrbit", _wrap_delete_SpiceKeplerOrbit, METH_O, "\n"
 		"delete_SpiceKeplerOrbit(SpiceKeplerOrbit self)\n"
@@ -6693,8 +7309,8 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"__sub__(SwigPyIterator self, SwigPyIterator x) -> ptrdiff_t\n"
 		""},
 	 { "SwigPyIterator_swigregister", SwigPyIterator_swigregister, METH_O, NULL},
-	 { "new_SpiceKeplerOrbit", _wrap_new_SpiceKeplerOrbit, METH_NOARGS, "\n"
-		"new_SpiceKeplerOrbit() -> SpiceKeplerOrbit\n"
+	 { "new_SpiceKeplerOrbit", _wrap_new_SpiceKeplerOrbit, METH_VARARGS, "\n"
+		"SpiceKeplerOrbit(BlitzArray_double_1 elements, Time min_time=min_valid_time, Time max_time=max_valid_time)\n"
 		"\n"
 		"GeoCal::SpiceKeplerOrbit::SpiceKeplerOrbit\n"
 		"Create an kepler orbit.  \n"
@@ -6705,6 +7321,26 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"orbit_data(SpiceKeplerOrbit self, TimeWithDerivative T) -> boost::shared_ptr< GeoCal::OrbitData >\n"
 		"\n"
 		"GeoCal::SpiceKeplerOrbit::orbit_data\n"
+		""},
+	 { "SpiceKeplerOrbit_mu", _wrap_SpiceKeplerOrbit_mu, METH_O, "\n"
+		"mu(std::string const & Body_name) -> double\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::mu\n"
+		""},
+	 { "SpiceKeplerOrbit_spice_conics", _wrap_SpiceKeplerOrbit_spice_conics, METH_VARARGS, "\n"
+		"spice_conics(BlitzArray_double_1 elements, Time T) -> BlitzArray_double_1\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::spice_conics\n"
+		""},
+	 { "SpiceKeplerOrbit_spice_oscelt", _wrap_SpiceKeplerOrbit_spice_oscelt, METH_O, "\n"
+		"spice_oscelt(OrbitData Od) -> BlitzArray_double_1\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::spice_oscelt\n"
+		""},
+	 { "SpiceKeplerOrbit__v_elements", _wrap_SpiceKeplerOrbit__v_elements, METH_O, "\n"
+		"_v_elements(SpiceKeplerOrbit self) -> BlitzArray_double_1\n"
+		"\n"
+		"GeoCal::SpiceKeplerOrbit::elements\n"
 		""},
 	 { "delete_SpiceKeplerOrbit", _wrap_delete_SpiceKeplerOrbit, METH_O, "\n"
 		"delete_SpiceKeplerOrbit(SpiceKeplerOrbit self)\n"

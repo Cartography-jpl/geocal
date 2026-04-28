@@ -11,9 +11,14 @@
 namespace GeoCal {
 class SpiceKeplerOrbit : public Orbit {
 public:
-  SpiceKeplerOrbit();
+  SpiceKeplerOrbit(const blitz::Array<double, 1>& elements, Time min_time = Time::min_valid_time,
+		   Time max_time = Time::max_valid_time);
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) const;
+  static double mu(const std::string& Body_name);
+  static blitz::Array<double, 1> spice_conics(const blitz::Array<double, 1>& elements, Time T);
+  static blitz::Array<double, 1> spice_oscelt(const OrbitData& Od);
+  %python_attribute(elements, blitz::Array<double, 1>);
   %pickle_serialization();
 };
 }

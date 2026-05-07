@@ -43,7 +43,7 @@ class _tpcol(VicarInterface):
         VicarInterface.__init__(self)
         self.title = "tpcol"
         self.log_file = Path(log_file)
-        self.run_dir_name = run_dir_name
+        self.run_dir_name = Path(run_dir_name)
         self.input = [Path(img1_fname), Path(img2_fname)]
         self.print_output = not quiet
         # If there two image are significantly different in resolution, we get

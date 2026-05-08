@@ -2526,6 +2526,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h @swigrules@/lib/swig_type_mapper_base.h \
+	@swigrules@/lib/python_exception.h \
 	@swigrules@/lib/python_lib_init.h \
 	@swigrules@/lib/python_ref_ptr_cleanup.h \
 	@swigrules@/lib/swig_type_mapper.h \
@@ -3962,6 +3963,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcmspi@/air_mspi_time_table.h @srcmspi@/air_mspi_l1b1.h \
 	@srcmspi@/air_mspi_igc.h @srcmspi@/air_mspi_igc_collection.h \
 	@srcoco3@/jia_sample.h @swigrules@/lib/swig_type_mapper_base.h \
+	@swigrules@/lib/python_exception.h \
 	@swigrules@/lib/python_lib_init.h \
 	@swigrules@/lib/python_ref_ptr_cleanup.h \
 	@swigrules@/lib/swig_type_mapper.h \

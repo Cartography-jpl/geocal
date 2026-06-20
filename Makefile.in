@@ -488,6 +488,7 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/spice_helper_wrap.cc \
 	@swigsrc@/raw_raster_image_wrap.cc \
 	@swigsrc@/aircraft_orbit_data_wrap.cc \
+	@swigsrc@/ypr_orbit_data_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_wrap.cc \
 	@swigsrc@/orbit_des_wrap.cc @swigsrc@/nitf_support_wrap.cc \
 	@swigsrc@/pan_sharpen_wrap.cc @swigsrc@/scale_image_wrap.cc \
@@ -689,6 +690,7 @@ am__objects_3 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-spice_helper_wrap.lo \
 	@swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo \
+	@swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_des_wrap.lo \
 	@swigsrc@/_swig_wrap_la-nitf_support_wrap.lo \
@@ -896,6 +898,7 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_thread_pool.cc \
 	@srcimplementation@/pyramid_image_matcher.cc \
 	@srcimplementation@/raw_raster_image.cc \
 	@srcimplementation@/aircraft_orbit_data.cc \
+	@srcimplementation@/ypr_orbit_data.cc \
 	@srcimplementation@/orbit_quaternion_list.cc \
 	@srcimplementation@/orbit_des.cc \
 	@srcimplementation@/memory_multi_band.cc \
@@ -1107,6 +1110,7 @@ am_libgeocal_la_OBJECTS =  \
 	@srcimplementation@/libgeocal_la-pyramid_image_matcher.lo \
 	@srcimplementation@/libgeocal_la-raw_raster_image.lo \
 	@srcimplementation@/libgeocal_la-aircraft_orbit_data.lo \
+	@srcimplementation@/libgeocal_la-ypr_orbit_data.lo \
 	@srcimplementation@/libgeocal_la-orbit_quaternion_list.lo \
 	@srcimplementation@/libgeocal_la-orbit_des.lo \
 	@srcimplementation@/libgeocal_la-memory_multi_band.lo \
@@ -1317,6 +1321,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/location_to_file_test.cc \
 	@srcimplementation@/raw_raster_image_test.cc \
 	@srcimplementation@/aircraft_orbit_data_test.cc \
+	@srcimplementation@/ypr_orbit_data_test.cc \
 	@srcimplementation@/orbit_quaternion_list_test.cc \
 	@srcimplementation@/orbit_des_test.cc \
 	@srcimplementation@/combine_orbit_test.cc \
@@ -1493,6 +1498,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-location_to_file_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-raw_raster_image_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-aircraft_orbit_data_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-ypr_orbit_data_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_quaternion_list_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_des_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-combine_orbit_test.$(OBJEXT) \
@@ -1776,6 +1782,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Po \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo \
@@ -1882,6 +1889,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo \
+	@srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Plo \
 	@srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po \
 	@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po \
 	@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po \
@@ -2262,7 +2270,8 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-vicar_raster_image_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo \
-	@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo \
+	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Plo
 am__mv = mv -f
 CXXCOMPILE = $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) \
 	$(AM_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS)
@@ -2430,6 +2439,7 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/location_to_file.h \
 	@srcimplementation@/raw_raster_image.h \
 	@srcimplementation@/aircraft_orbit_data.h \
+	@srcimplementation@/ypr_orbit_data.h \
 	@srcimplementation@/orbit_quaternion_list.h \
 	@srcimplementation@/nitf_support.h \
 	@srcimplementation@/orbit_des.h \
@@ -3448,6 +3458,7 @@ libgeocal_la_SOURCES = @srcsupport@/geocal_thread_pool.cc \
 	@srcimplementation@/pyramid_image_matcher.cc \
 	@srcimplementation@/raw_raster_image.cc \
 	@srcimplementation@/aircraft_orbit_data.cc \
+	@srcimplementation@/ypr_orbit_data.cc \
 	@srcimplementation@/orbit_quaternion_list.cc \
 	@srcimplementation@/orbit_des.cc \
 	@srcimplementation@/memory_multi_band.cc \
@@ -3639,6 +3650,7 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/spice_helper_wrap.cc \
 	@swigsrc@/raw_raster_image_wrap.cc \
 	@swigsrc@/aircraft_orbit_data_wrap.cc \
+	@swigsrc@/ypr_orbit_data_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_wrap.cc \
 	@swigsrc@/orbit_des_wrap.cc @swigsrc@/nitf_support_wrap.cc \
 	@swigsrc@/pan_sharpen_wrap.cc @swigsrc@/scale_image_wrap.cc \
@@ -3879,6 +3891,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/location_to_file.h \
 	@srcimplementation@/raw_raster_image.h \
 	@srcimplementation@/aircraft_orbit_data.h \
+	@srcimplementation@/ypr_orbit_data.h \
 	@srcimplementation@/orbit_quaternion_list.h \
 	@srcimplementation@/nitf_support.h \
 	@srcimplementation@/orbit_des.h \
@@ -4076,6 +4089,7 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/spice_helper.i \
 	@srcimplementation@/raw_raster_image.i \
 	@srcimplementation@/aircraft_orbit_data.i \
+	@srcimplementation@/ypr_orbit_data.i \
 	@srcimplementation@/orbit_quaternion_list.i \
 	@srcimplementation@/orbit_des.i \
 	@srcimplementation@/nitf_support.i \
@@ -4231,6 +4245,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/location_to_file_test.cc \
 	@srcimplementation@/raw_raster_image_test.cc \
 	@srcimplementation@/aircraft_orbit_data_test.cc \
+	@srcimplementation@/ypr_orbit_data_test.cc \
 	@srcimplementation@/orbit_quaternion_list_test.cc \
 	@srcimplementation@/orbit_des_test.cc \
 	@srcimplementation@/combine_orbit_test.cc \
@@ -4988,6 +5003,8 @@ _msp_wrap.la: $(_msp_wrap_la_OBJECTS) $(_msp_wrap_la_DEPENDENCIES) $(EXTRA__msp_
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
+@swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo:  \
+	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-orbit_des_wrap.lo: @swigsrc@/$(am__dirstamp) \
@@ -5515,6 +5532,9 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-aircraft_orbit_data.lo:  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/libgeocal_la-ypr_orbit_data.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-orbit_quaternion_list.lo:  \
@@ -6161,6 +6181,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-aircraft_orbit_data_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-ypr_orbit_data_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-orbit_quaternion_list_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -6736,6 +6759,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo@am__quote@ # am--include-marker
@@ -6842,6 +6866,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po@am__quote@ # am--include-marker
@@ -7223,6 +7248,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Plo@am__quote@ # am--include-marker
 
 $(am__depfiles_remade):
 	@$(MKDIR_P) $(@D)
@@ -7981,6 +8007,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/aircraft_orbit_data_wrap.cc' object='@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo `test -f '@swigsrc@/aircraft_orbit_data_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/aircraft_orbit_data_wrap.cc
+
+@swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo: @swigsrc@/ypr_orbit_data_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo `test -f '@swigsrc@/ypr_orbit_data_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ypr_orbit_data_wrap.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/ypr_orbit_data_wrap.cc' object='@swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo `test -f '@swigsrc@/ypr_orbit_data_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/ypr_orbit_data_wrap.cc
 
 @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo: @swigsrc@/orbit_quaternion_list_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-orbit_quaternion_list_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo `test -f '@swigsrc@/orbit_quaternion_list_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/orbit_quaternion_list_wrap.cc
@@ -9465,6 +9498,13 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/aircraft_orbit_data.cc' object='@srcimplementation@/libgeocal_la-aircraft_orbit_data.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-aircraft_orbit_data.lo `test -f '@srcimplementation@/aircraft_orbit_data.cc' || echo '$(srcdir)/'`@srcimplementation@/aircraft_orbit_data.cc
+
+@srcimplementation@/libgeocal_la-ypr_orbit_data.lo: @srcimplementation@/ypr_orbit_data.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-ypr_orbit_data.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Tpo -c -o @srcimplementation@/libgeocal_la-ypr_orbit_data.lo `test -f '@srcimplementation@/ypr_orbit_data.cc' || echo '$(srcdir)/'`@srcimplementation@/ypr_orbit_data.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Plo
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ypr_orbit_data.cc' object='@srcimplementation@/libgeocal_la-ypr_orbit_data.lo' libtool=yes @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-ypr_orbit_data.lo `test -f '@srcimplementation@/ypr_orbit_data.cc' || echo '$(srcdir)/'`@srcimplementation@/ypr_orbit_data.cc
 
 @srcimplementation@/libgeocal_la-orbit_quaternion_list.lo: @srcimplementation@/orbit_quaternion_list.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-orbit_quaternion_list.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-orbit_quaternion_list.Tpo -c -o @srcimplementation@/libgeocal_la-orbit_quaternion_list.lo `test -f '@srcimplementation@/orbit_quaternion_list.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list.cc
@@ -11488,6 +11528,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/aircraft_orbit_data_test.cc' object='@srcimplementation@/geocal_test_all-aircraft_orbit_data_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-aircraft_orbit_data_test.obj `if test -f '@srcimplementation@/aircraft_orbit_data_test.cc'; then $(CYGPATH_W) '@srcimplementation@/aircraft_orbit_data_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/aircraft_orbit_data_test.cc'; fi`
+
+@srcimplementation@/geocal_test_all-ypr_orbit_data_test.o: @srcimplementation@/ypr_orbit_data_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-ypr_orbit_data_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Tpo -c -o @srcimplementation@/geocal_test_all-ypr_orbit_data_test.o `test -f '@srcimplementation@/ypr_orbit_data_test.cc' || echo '$(srcdir)/'`@srcimplementation@/ypr_orbit_data_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ypr_orbit_data_test.cc' object='@srcimplementation@/geocal_test_all-ypr_orbit_data_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-ypr_orbit_data_test.o `test -f '@srcimplementation@/ypr_orbit_data_test.cc' || echo '$(srcdir)/'`@srcimplementation@/ypr_orbit_data_test.cc
+
+@srcimplementation@/geocal_test_all-ypr_orbit_data_test.obj: @srcimplementation@/ypr_orbit_data_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-ypr_orbit_data_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Tpo -c -o @srcimplementation@/geocal_test_all-ypr_orbit_data_test.obj `if test -f '@srcimplementation@/ypr_orbit_data_test.cc'; then $(CYGPATH_W) '@srcimplementation@/ypr_orbit_data_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/ypr_orbit_data_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/ypr_orbit_data_test.cc' object='@srcimplementation@/geocal_test_all-ypr_orbit_data_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-ypr_orbit_data_test.obj `if test -f '@srcimplementation@/ypr_orbit_data_test.cc'; then $(CYGPATH_W) '@srcimplementation@/ypr_orbit_data_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/ypr_orbit_data_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-orbit_quaternion_list_test.o: @srcimplementation@/orbit_quaternion_list_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-orbit_quaternion_list_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-orbit_quaternion_list_test.Tpo -c -o @srcimplementation@/geocal_test_all-orbit_quaternion_list_test.o `test -f '@srcimplementation@/orbit_quaternion_list_test.cc' || echo '$(srcdir)/'`@srcimplementation@/orbit_quaternion_list_test.cc
@@ -13987,6 +14041,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo
@@ -14093,6 +14148,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po
@@ -14474,6 +14530,7 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Plo
 	-rm -f Makefile
 distclean-am: clean-am distclean-compile distclean-generic \
 	distclean-hdr distclean-libtool distclean-tags
@@ -14674,6 +14731,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-surface_image_to_image_match_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-tle_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-velocity_aberration_exact_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ypr_orbit_data_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-calc_raster_multi_band.Plo
@@ -14780,6 +14838,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-surface_image_to_image_match.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-tle_orbit.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-velocity_aberration_exact.Plo
+	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ypr_orbit_data.Plo
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-camera_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_lsm_matcher_test.Po
 	-rm -f @srcinterface@/$(DEPDIR)/geocal_test_all-ccorr_matcher_test.Po
@@ -15161,6 +15220,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-wgs84_constant_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-with_parameter_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-worldview2_cloudmask_wrap.Plo
+	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ypr_orbit_data_wrap.Plo
 	-rm -f Makefile
 maintainer-clean-am: distclean-am maintainer-clean-generic
 

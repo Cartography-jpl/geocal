@@ -108,6 +108,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_spice_helper)(void);
   INIT_TYPE INIT_FUNC(_raw_raster_image)(void);
   INIT_TYPE INIT_FUNC(_aircraft_orbit_data)(void);
+  INIT_TYPE INIT_FUNC(_ypr_orbit_data)(void);
   INIT_TYPE INIT_FUNC(_orbit_quaternion_list)(void);
   INIT_TYPE INIT_FUNC(_orbit_des)(void);
   INIT_TYPE INIT_FUNC(_nitf_support)(void);
@@ -339,6 +340,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_spice_helper", INIT_FUNC(_spice_helper));
   INIT_MODULE(module, "_raw_raster_image", INIT_FUNC(_raw_raster_image));
   INIT_MODULE(module, "_aircraft_orbit_data", INIT_FUNC(_aircraft_orbit_data));
+  INIT_MODULE(module, "_ypr_orbit_data", INIT_FUNC(_ypr_orbit_data));
   INIT_MODULE(module, "_orbit_quaternion_list", INIT_FUNC(_orbit_quaternion_list));
   INIT_MODULE(module, "_orbit_des", INIT_FUNC(_orbit_des));
   INIT_MODULE(module, "_nitf_support", INIT_FUNC(_nitf_support));

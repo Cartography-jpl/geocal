@@ -1319,6 +1319,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/aircraft_orbit_data_test.cc \
 	@srcimplementation@/orbit_quaternion_list_test.cc \
 	@srcimplementation@/orbit_des_test.cc \
+	@srcimplementation@/combine_orbit_test.cc \
 	@srcimplementation@/pan_sharpen_test.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
@@ -1494,6 +1495,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-aircraft_orbit_data_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_quaternion_list_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_des_test.$(OBJEXT) \
+	@srcimplementation@/geocal_test_all-combine_orbit_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-pan_sharpen_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-rpc_image_ground_connection_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ipi_image_ground_connection_test.$(OBJEXT) \
@@ -1689,6 +1691,7 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po \
+	@srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-context_sqrt_decode_image_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_match_test.Po \
@@ -4230,6 +4233,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/aircraft_orbit_data_test.cc \
 	@srcimplementation@/orbit_quaternion_list_test.cc \
 	@srcimplementation@/orbit_des_test.cc \
+	@srcimplementation@/combine_orbit_test.cc \
 	@srcimplementation@/pan_sharpen_test.cc \
 	@srcimplementation@/rpc_image_ground_connection_test.cc \
 	@srcimplementation@/ipi_image_ground_connection_test.cc \
@@ -6163,6 +6167,9 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 @srcimplementation@/geocal_test_all-orbit_des_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
+@srcimplementation@/geocal_test_all-combine_orbit_test.$(OBJEXT):  \
+	@srcimplementation@/$(am__dirstamp) \
+	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-pan_sharpen_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -6644,6 +6651,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-context_sqrt_decode_image_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-dem_match_test.Po@am__quote@ # am--include-marker
@@ -11509,6 +11517,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-orbit_des_test.obj `if test -f '@srcimplementation@/orbit_des_test.cc'; then $(CYGPATH_W) '@srcimplementation@/orbit_des_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/orbit_des_test.cc'; fi`
 
+@srcimplementation@/geocal_test_all-combine_orbit_test.o: @srcimplementation@/combine_orbit_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-combine_orbit_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Tpo -c -o @srcimplementation@/geocal_test_all-combine_orbit_test.o `test -f '@srcimplementation@/combine_orbit_test.cc' || echo '$(srcdir)/'`@srcimplementation@/combine_orbit_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/combine_orbit_test.cc' object='@srcimplementation@/geocal_test_all-combine_orbit_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-combine_orbit_test.o `test -f '@srcimplementation@/combine_orbit_test.cc' || echo '$(srcdir)/'`@srcimplementation@/combine_orbit_test.cc
+
+@srcimplementation@/geocal_test_all-combine_orbit_test.obj: @srcimplementation@/combine_orbit_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-combine_orbit_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Tpo -c -o @srcimplementation@/geocal_test_all-combine_orbit_test.obj `if test -f '@srcimplementation@/combine_orbit_test.cc'; then $(CYGPATH_W) '@srcimplementation@/combine_orbit_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/combine_orbit_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/combine_orbit_test.cc' object='@srcimplementation@/geocal_test_all-combine_orbit_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-combine_orbit_test.obj `if test -f '@srcimplementation@/combine_orbit_test.cc'; then $(CYGPATH_W) '@srcimplementation@/combine_orbit_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/combine_orbit_test.cc'; fi`
+
 @srcimplementation@/geocal_test_all-pan_sharpen_test.o: @srcimplementation@/pan_sharpen_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-pan_sharpen_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Tpo -c -o @srcimplementation@/geocal_test_all-pan_sharpen_test.o `test -f '@srcimplementation@/pan_sharpen_test.cc' || echo '$(srcdir)/'`@srcimplementation@/pan_sharpen_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-pan_sharpen_test.Po
@@ -13880,6 +13902,7 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-context_sqrt_decode_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_match_test.Po
@@ -14566,6 +14589,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_radial_distortion_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-camera_rational_polynomial_test.Po
+	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-combine_orbit_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-context_sqrt_decode_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_map_info_offset_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-dem_match_test.Po

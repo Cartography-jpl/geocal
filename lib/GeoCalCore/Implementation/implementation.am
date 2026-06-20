@@ -494,6 +494,7 @@ geocal_test_all_SOURCES+= @srcimplementation@/raw_raster_image_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/aircraft_orbit_data_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_quaternion_list_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/orbit_des_test.cc
+geocal_test_all_SOURCES+= @srcimplementation@/combine_orbit_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/pan_sharpen_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/rpc_image_ground_connection_test.cc
 geocal_test_all_SOURCES+= @srcimplementation@/ipi_image_ground_connection_test.cc

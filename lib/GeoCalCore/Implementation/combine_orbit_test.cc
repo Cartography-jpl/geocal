@@ -187,42 +187,26 @@ BOOST_AUTO_TEST_CASE(cache_effectiveness)
 
 BOOST_AUTO_TEST_CASE(overlap_constraints)
 {
-  // Test case: orbit with 2 overlaps at its max_time (should fail)
+  // Test case: Create a situation where an orbit already has 1 overlap at its max_time,
+  // then try to add another that also overlaps at that same end (should fail)
+
+  // Setup:
+  // 1. Add orb1 [100, 200)
+  // 2. Add orb2 [180, 280) - overlaps orb1 at [180, 200), which is at orb1's max_time
+  // 3. Try to add orb3 [150, 250) - would also overlap orb1 at [150, 200), at orb1's max_time
+  //    This should fail because orb1 already has 1 max_time overlap (with orb2)
+
   boost::shared_ptr<CombineOrbit> corb(new CombineOrbit());
   corb->add_orbit(orb_overlap1);  // [100, 200)
-  corb->add_orbit(orb_overlap2);  // [150, 250)
 
-  // Try to add orbit that would create 2 overlaps at orb_overlap2's max_time
-  // orb_bad1 is [160, 280), which overlaps orb_overlap2 at [160, 250)
-  // But orb_overlap2 already has an overlap at its min_time with orb_overlap1
-  // So adding orb_bad1 would give orb_overlap2 two overlaps at different ends (which is allowed)
-  // But orb_bad1 would overlap orb_overlap2's max_time region, and we need to check
-  // if that violates the constraint
+  boost::shared_ptr<KeplerOrbit> orb_first_overlap(new KeplerOrbit(Time::time_pgs(180.0), Time::time_pgs(280.0)));
+  corb->add_orbit(orb_first_overlap);  // [180, 280) - overlaps orb_overlap1 at max_time
 
-  // Actually, let me reconsider the constraint:
-  // Each orbit can have at most 1 overlap at min_time and 1 at max_time
-  // orb_overlap2 [150, 250):
-  //   - has overlap with orb_overlap1 at min_time [150, 200)
-  //   - can still have overlap at max_time
-  // If we add orb_bad1 [160, 280):
-  //   - It overlaps orb_overlap2 at [160, 250) - this is at orb_overlap2's max_time
-  //   - So this should be OK as the first max_time overlap
-
-  // Let me create a case that actually violates the constraint
-  // Need orbit that creates a second overlap at the same end
-
-  // Better test: Create a situation where an orbit already has an overlap at its max_time,
-  // then try to add another that also overlaps there
-  boost::shared_ptr<CombineOrbit> corb2(new CombineOrbit());
-  corb2->add_orbit(orb_overlap1);  // [100, 200)
-  corb2->add_orbit(orb_overlap3);  // [200, 300) - overlaps orb_overlap1 at its max_time
-
-  // Now try to add another orbit that overlaps orb_overlap1's max_time
-  // This requires an orbit like [190, 290) which would overlap [190, 200) with orb_overlap1
-  boost::shared_ptr<KeplerOrbit> orb_bad2(new KeplerOrbit(Time::time_pgs(190.0), Time::time_pgs(290.0)));
+  // Now try to add another orbit that would create a second overlap at orb_overlap1's max_time
+  boost::shared_ptr<KeplerOrbit> orb_bad(new KeplerOrbit(Time::time_pgs(150.0), Time::time_pgs(250.0)));
 
   try {
-    corb2->add_orbit(orb_bad2);
+    corb->add_orbit(orb_bad);  // [150, 250) - would be second max_time overlap for orb_overlap1
     BOOST_FAIL("Should have thrown exception for constraint violation");
   } catch(const Exception& e) {
     BOOST_CHECK(true);

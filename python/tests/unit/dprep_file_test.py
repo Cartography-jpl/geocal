@@ -78,4 +78,3 @@ def test_dprep_orbit(unit_test_data):
                 korb.position_cf(orb.min_time + i), sorb.position_cf(orb.min_time + i)
             )
         )
-    breakpoint()

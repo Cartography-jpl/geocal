@@ -148,6 +148,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_orbit_array)(void);
   INIT_TYPE INIT_FUNC(_orbit_quaternion_list_offset)(void);
   INIT_TYPE INIT_FUNC(_tle_orbit)(void);
+  INIT_TYPE INIT_FUNC(_combine_orbit)(void);
   INIT_TYPE INIT_FUNC(_spice_orbit)(void);
   INIT_TYPE INIT_FUNC(_spice_planet_orbit)(void);
   INIT_TYPE INIT_FUNC(_spice_kernel_list)(void);
@@ -378,6 +379,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_orbit_array", INIT_FUNC(_orbit_array));
   INIT_MODULE(module, "_orbit_quaternion_list_offset", INIT_FUNC(_orbit_quaternion_list_offset));
   INIT_MODULE(module, "_tle_orbit", INIT_FUNC(_tle_orbit));
+  INIT_MODULE(module, "_combine_orbit", INIT_FUNC(_combine_orbit));
   INIT_MODULE(module, "_spice_orbit", INIT_FUNC(_spice_orbit));
   INIT_MODULE(module, "_spice_planet_orbit", INIT_FUNC(_spice_planet_orbit));
   INIT_MODULE(module, "_spice_kernel_list", INIT_FUNC(_spice_kernel_list));

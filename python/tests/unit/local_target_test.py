@@ -10,7 +10,6 @@ from fixtures.require_check import require_rsync
 import pytest
 
 
-@require_rsync
 @pytest.fixture(scope="function")
 def input_local_data(isolated_dir):
     """Generate some input test data so we can check that it works."""

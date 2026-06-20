@@ -2,6 +2,29 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## Git Workflow
+
+**IMPORTANT: Claude should NEVER commit or push git changes directly.**
+
+When making changes to the repository, Claude should:
+1. Make the requested code changes
+2. Stage files with `git add` 
+3. **Stop before committing** - The user will manually review and commit
+
+The user retains full control over commit messages and timing.
+
+## Documentation Practices
+
+### Planning and Analysis Documents
+
+Store planning documents, analysis notes, and technical discussions in the `claude_documents/` directory. This keeps detailed design work separate from code and provides a reference for future sessions.
+
+Examples:
+- `claude_documents/parallel_test_execution_plan.md` - Detailed analysis of approaches to parallelize unit test execution
+- Future planning documents, architecture analysis, investigation notes
+
+When completing substantial planning or analysis work, save it to a markdown file in `claude_documents/` for future reference.
+
 ## Project Overview
 
 GeoCal is a C++ library with Python wrappers for map projection, geometric calibration, and simultaneous bundle adjustment (NPO 20999). The core is a C++ library with Python bindings generated via SWIG. Most user-facing programs are written in Python.
@@ -166,3 +189,97 @@ To create a new project that extends GeoCal (e.g., adding instrument-specific ca
 5. Test Python: `make -j 20 installcheck`
 
 For rapid iteration, configure with `--enable-debug --without-documentation` to skip optimization and doc generation.
+
+## Unit Testing Details
+
+### Boost Test Framework
+
+GeoCal uses Boost.Test (version 1.84.0) for C++ unit tests. Tests are organized into suites using fixtures:
+
+```cpp
+#include "unit_test_support.h"
+#include "my_class.h"
+
+using namespace GeoCal;
+using namespace blitz;
+
+class MyClassFixture : public GlobalFixture {
+public:
+  MyClassFixture() {
+    // Setup test data
+    test_orbit.reset(new KeplerOrbit(t0, t1));
+  }
+  
+  Time t0, t1;
+  boost::shared_ptr<KeplerOrbit> test_orbit;
+};
+
+BOOST_FIXTURE_TEST_SUITE(my_class, MyClassFixture)
+
+BOOST_AUTO_TEST_CASE(basic_functionality)
+{
+  boost::shared_ptr<MyClass> obj(new MyClass(test_orbit));
+  BOOST_CHECK(obj);
+  BOOST_CHECK_CLOSE(obj->value(), 42.0, 1e-6);
+}
+
+BOOST_AUTO_TEST_CASE(edge_cases)
+{
+  // Test edge cases
+  try {
+    MyClass obj(nullptr);
+    BOOST_FAIL("Should have thrown exception");
+  } catch(const Exception& e) {
+    BOOST_CHECK(true);
+  }
+}
+
+BOOST_AUTO_TEST_SUITE_END()
+```
+
+### Test Patterns
+
+1. **Fixtures** - Inherit from `GlobalFixture` to set up test data
+2. **KeplerOrbit** - Simple analytical orbit commonly used for testing
+3. **BOOST_CHECK macros**:
+   - `BOOST_CHECK(condition)` - Assert true
+   - `BOOST_CHECK_CLOSE(a, b, tolerance_pct)` - Check floating point equality
+   - `BOOST_CHECK_MATRIX_CLOSE_TOL(m1, m2, tol)` - Check matrix equality
+   - `BOOST_FAIL(msg)` - Explicit failure
+4. **Exception testing** - Use try/catch blocks to verify exceptions are thrown
+5. **Serialization testing** - Test Boost serialization with `serialize_write_string()` and `serialize_read_string()`
+
+### Current Test Organization
+
+All tests are currently built into a single executable (`geocal_test_all`) that runs all test cases. For approaches to parallelize test execution, see `claude_documents/parallel_test_execution_plan.md`.
+
+### Debugging Common Test Issues
+
+1. **Interval semantics**: Remember that time intervals [a, b) exclude the endpoint b
+2. **Floating point comparisons**: Use `BOOST_CHECK_CLOSE` with appropriate tolerance
+3. **Exception testing**: Verify the test actually creates the condition that should throw
+
+## Recent Changes and Migrations
+
+### CombineOrbit Migration (2026-06-20)
+
+The `CombineOrbit` class was moved from the `ecostress-level1` repository to `geocal-repo`:
+
+**Changes made:**
+- Moved `combine_orbit.{h,cc,i}` from ecostress-level1/lib to geocal-repo/lib/GeoCalCore/Implementation/
+- Changed namespace from `Ecostress::` to `GeoCal::`
+- Updated serialization macros: `ECOSTRESS_IMPLEMENT` → `GEOCAL_IMPLEMENT`
+- Updated SWIG directives: `%ecostress_shared_ptr` → `%geocal_shared_ptr`
+- Updated includes: `ecostress_serialize_support.h` → `geocal_serialize_support.h`
+- Added comprehensive unit test: `combine_orbit_test.cc` with 9 test cases
+- Updated build files: `implementation.am` to include new sources and tests
+
+**Python code changes:**
+- Code using CombineOrbit should import from `geocal` instead of `ecostress`:
+  ```python
+  from geocal import CombineOrbit
+  ```
+
+**Serialization compatibility:**
+- Old serialized `Ecostress::CombineOrbit` objects are NOT compatible with new `GeoCal::CombineOrbit`
+- This is acceptable for development work where re-serialization is feasible

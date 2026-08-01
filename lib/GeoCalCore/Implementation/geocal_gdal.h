@@ -354,7 +354,7 @@ public:
   {
     fnames_.push_back(Fname);
     GdalRegister::gdal_register();
-    data_set_.reset((GDALDataset *) GDALOpen(Fname.c_str(), (Update ? GA_Update : GA_ReadOnly) ));
+    data_set_.reset((GDALDataset *) GDALOpenEx(Fname.c_str(), (Update ? GDAL_OF_RASTER | GDAL_OF_UPDATE : GDAL_OF_RASTER | GDAL_OF_READONLY), NULL, NULL, NULL));
     if(!data_set_.get())
       throw Exception("Trouble opening file " + Fname);
     initialize(Band_id, Number_tile, Tile_number_line, Tile_number_sample);

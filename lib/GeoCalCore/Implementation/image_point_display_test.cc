@@ -18,7 +18,7 @@ BOOST_AUTO_TEST_CASE(basic_test)
 	     ulc_x + x_pixel_res * number_x_pixel, 
 	     ulc_y + y_pixel_res * number_y_pixel, 
 	     number_x_pixel, number_y_pixel);
-  GDALDriver* driver = (GDALDriver*) GDALGetDriverByName("hfa");
+  GDALDriver* driver = GetGDALDriverManager()->GetDriverByName("hfa");
   if(driver) {			// Skip test if we are on a system
 				// with ERDAS support in GDAL
     boost::shared_ptr<GDALDataset> gd(

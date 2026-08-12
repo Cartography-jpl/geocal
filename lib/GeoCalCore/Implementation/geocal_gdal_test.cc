@@ -30,7 +30,7 @@ BOOST_AUTO_TEST_CASE(geocal_gdal_test)
   BOOST_CHECK_CLOSE(m.lrc_y(), 35.8907685, 1e-6);
   BOOST_CHECK(m.number_x_pixel() == g.size()[1]);
   BOOST_CHECK(m.number_y_pixel() == g.size()[0]);
-  GDALDriver* driver = (GDALDriver*) GDALGetDriverByName("hfa");
+  GDALDriver* driver = GetGDALDriverManager()->GetDriverByName("hfa");
   BOOST_REQUIRE(driver != 0);
   boost::shared_ptr<GDALDataset> gd( 
     driver->Create("test_out/cib_sample.img",

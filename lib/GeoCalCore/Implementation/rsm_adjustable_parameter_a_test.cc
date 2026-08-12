@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(image_correction_jac_test)
 {
   boost::shared_ptr<Rsm> r = boost::make_shared<Rsm>(rp_from_rpc, cconv);
   RsmImageGroundConnection rigc(r, boost::make_shared<SimpleDem>(),
-		boost::make_shared<MemoryRasterImage>(100, 300, 0));
+		boost::make_shared<MemoryRasterImage>(2000, 2000, 0));
   boost::shared_ptr<RsmAdjustableParameterA> adj = boost::make_shared<RsmAdjustableParameterA>(*igc, *r->rsm_id(), "Triangulation_1", true, false, false);
   r->rsm_adjustable_parameter(adj);
   ImageCoordinate ic_expect = rpc.image_coordinate(gp);
@@ -123,8 +123,8 @@ BOOST_AUTO_TEST_CASE(serialize)
   boost::shared_ptr<RsmAdjustableParameterA> radj =
     serialize_read_string<RsmAdjustableParameterA>(d);
   BOOST_CHECK_EQUAL(adj->image_identifier(), radj->image_identifier());
-  BOOST_CHECK_EQUAL(adj->rsm_suport_data_edition(),
-		    radj->rsm_suport_data_edition());
+  BOOST_CHECK_EQUAL(adj->rsm_support_data_edition(),
+		    radj->rsm_support_data_edition());
   BOOST_CHECK_EQUAL(adj->triangulation_id(),
 		    radj->triangulation_id());
   BOOST_CHECK_MATRIX_CLOSE(adj->parameter(),

@@ -78,7 +78,7 @@ RsmAdjustableParameterA::RsmAdjustableParameterA
  bool Activate_ground_correction
  )
   : RsmAdjustableParameter(Rsm_id.image_identifier(),
-			   Rsm_id.rsm_suport_data_edition(),
+			   Rsm_id.rsm_support_data_edition(),
 			   Triangulation_id),
     parm_index(36),
     full_parameter_(36, 0)
@@ -149,7 +149,7 @@ void RsmAdjustableParameterA::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "RsmAdjustableParameterA:\n"
      << "  Image Identifier: " << image_identifier() << "\n"
-     << "  RSM Edition:      " << rsm_suport_data_edition() << "\n"
+     << "  RSM Edition:      " << rsm_support_data_edition() << "\n"
      << "  Triangulation ID: " << triangulation_id() << "\n"
      << "  Local Coordinate System:\n";
   opad << *cconv << "\n";

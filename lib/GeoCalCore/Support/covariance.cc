@@ -5,7 +5,7 @@ using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 
 template<class Archive> 
-void Covariance::serialize(Archive& ar, const unsigned int version)
+void Covariance::serialize(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Covariance)
   ar & GEOCAL_NVP(sum1) & GEOCAL_NVP(sum2) & GEOCAL_NVP(sum_product)

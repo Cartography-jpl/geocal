@@ -1,7 +1,7 @@
 #ifndef RSM_RP_PLUS_GRID_H
 #define RSM_RP_PLUS_GRID_H
-#include "rsm_rational_polynomial.h"
 #include "rsm_grid.h"
+#include "rsm_rational_polynomial.h"
 
 namespace GeoCal {
   class ImageGroundConnection;
@@ -48,6 +48,10 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample)
+  { throw Exception("Not implemented"); }
 
 //-----------------------------------------------------------------------
 /// RsmRationalPolynomial we are using
@@ -70,13 +74,18 @@ public:
     rp->image_identifier(V);
     rgrid->image_identifier(V);
   }
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  virtual void rsm_suport_data_edition(const std::string& V)
+  virtual const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  virtual void rsm_support_data_edition(const std::string& V)
   {
-    rsm_suport_data_edition_ = V;
-    rp->rsm_suport_data_edition(V);
-    rgrid->rsm_suport_data_edition(V);
+    rsm_support_data_edition_ = V;
+    rp->rsm_support_data_edition(V);
+    rgrid->rsm_support_data_edition(V);
+  }
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  {
+    return rp->check_zero_crossing(Grid_spacing) ||
+      rgrid->check_zero_crossing(Grid_spacing);
   }
   virtual int min_line() const {return rp->min_line();}
   virtual int max_line() const {return rp->max_line();}

@@ -5,13 +5,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundMask::serialize(Archive & ar, const unsigned int version)
+void GroundMask::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundMask);
 }
 
 template<class Archive>
-void CombinedGroundMask::serialize(Archive & ar, const unsigned int version)
+void CombinedGroundMask::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundMask);
   GEOCAL_BASE(CombinedGroundMask, GroundMask);

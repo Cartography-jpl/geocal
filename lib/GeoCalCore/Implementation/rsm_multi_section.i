@@ -29,8 +29,22 @@ public:
   %python_attribute(number_col_section, int);
   %python_attribute(number_line_per_section, double);
   %python_attribute(number_sample_per_section, double);
+  void fit_start(const ImageGroundConnection& Igc,
+		 const CoordinateConverter& Cconv,
+		 double Min_height, double Max_height);
+  void fit_start(const blitz::Array<double, 2>& Data);
+  const boost::shared_ptr<RsmBase>&
+  fit_section(int i, int j, const ImageGroundConnection& Igc,
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height);
+  const boost::shared_ptr<RsmBase>&
+  fit_section(int i, int j, const blitz::Array<double, 2>& Data);
   boost::shared_ptr<RsmBase> section(int i, int j) const;
   void section(int i, int j, const boost::shared_ptr<RsmBase>& V);
+  const boost::shared_ptr<RsmBase>&
+  section_ls(double Line, double Sample) const;
+  const boost::shared_ptr<RsmBase>&
+  section_xyz(double X, double Y, double Z) const;
   std::string tre_string() const;
   static boost::shared_ptr<RsmMultiSection>
   read_tre_string(const std::string& Tre_in);

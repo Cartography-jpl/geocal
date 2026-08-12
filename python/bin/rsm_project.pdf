@@ -1,18 +1,18 @@
 PROCESS       HELP=*
-parm img type=(string,99) count=1 default=""
-parm out type=(string,99) count=1 default="out.img"
-parm ilist type=(string,99) count=(0:99) default=""
-parm dem type=(string,99) count=1 default=""
+parm img type=string count=1 default=""
+parm out type=string count=1 default="out.img"
+parm ilist type=string count=(0:99) default=""
+parm dem type=string count=1 default=""
 parm avgfactor type=int count=1 default=-1
-parm bbox type=(string,99) count=1 default=""
-parm cimage type=(string,99) count=1 default=""
+parm bbox type=string count=1 default=""
+parm cimage type=string count=1 default=""
 parm gspace type=int count=1 default=1
-parm mapinfo type=(string,99) count=1 default=""
+parm mapinfo type=string count=1 default=""
 parm res type=real count=1 default=1.0
 parm nproc type=int count=1 default=1
 parm pline type=int count=1 default=1000
 parm psamp type=int count=1 default=1000
-parm vtype type=(string,99) count=1 valid=(BYTE,HALF,FULL,REAL,DOUB) default=HALF
+parm vtype type=string count=1 valid=(BYTE,HALF,FULL,REAL,DOUB) default=HALF
 parm mosaic type=(string,4) count=(0:1) valid=(n,y) default=n
 parm verbose type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC

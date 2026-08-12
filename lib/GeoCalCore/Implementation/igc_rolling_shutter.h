@@ -110,6 +110,10 @@ public:
 ///
 /// You can optionally include a approximate refraction
 /// correction, the default is not to.
+///
+/// NOTE: refraction doesn't seem to actually be used. I think this
+/// was something we started to add, but didn't actually complete. We
+/// can come back to this. Usually the effect of refraction is pretty small.  
 //-----------------------------------------------------------------------
 
   IgcRollingShutter(const boost::shared_ptr<Orbit>& Orb,

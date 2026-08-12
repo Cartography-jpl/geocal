@@ -13,10 +13,10 @@ void RsmBase::serialize(Archive & ar, const unsigned int version)
 {
   GEOCAL_GENERIC_BASE(RsmBase);
   // Older version didn't have image_identifier_ or
-  // rsm_suport_data_edition_
+  // rsm_support_data_edition_
   if(version > 0) {
     ar & GEOCAL_NVP_(image_identifier)
-      & GEOCAL_NVP_(rsm_suport_data_edition);
+      & GEOCAL_NVP_(rsm_support_data_edition);
   }
   boost::serialization::split_member(ar, *this, version);
 }
@@ -30,10 +30,10 @@ template<class Archive>
 void RsmBase::load(Archive & ar, const unsigned int version)
 {
   // Older version didn't have image_identifier_ or
-  // rsm_suport_data_edition_
+  // rsm_support_data_edition_
   if(version == 0) {
     image_identifier_ = "";
-    rsm_suport_data_edition_ = "fake-1";
+    rsm_support_data_edition_ = "fake-1";
   }
 }
 
@@ -49,16 +49,16 @@ static boost::format f("%|1$-80s|%|2$-40s|");
 
 std::string RsmBase::base_tre_string() const
 {
-  return str_check_size(f % image_identifier_ % rsm_suport_data_edition_,
+  return str_check_size(f % image_identifier_ % rsm_support_data_edition_,
 			120);
 }
 
 void RsmBase::base_read_tre_string(std::istream& In)
 {
   image_identifier_ = read_size<std::string>(In, 80);
-  rsm_suport_data_edition_ = read_size<std::string>(In, 40);
+  rsm_support_data_edition_ = read_size<std::string>(In, 40);
   boost::trim(image_identifier_);
-  boost::trim(rsm_suport_data_edition_);
+  boost::trim(rsm_support_data_edition_);
 }
 
 blitz::Array<double, 4> RsmBase::generate_data

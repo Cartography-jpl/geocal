@@ -2,6 +2,7 @@
 #include "gdal_raster_image.h"
 #include "constant_raster_image.h"
 #include "geocal_serialize_support.h"
+#include "geocal_temp_file.h"
 #include <cstdlib>
 #include <cstdio>
 #include <cmath>
@@ -14,6 +15,7 @@
 
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
+
 template<class Archive>
 void CartLabMultifile::save(Archive & ar, const unsigned int version) const
 {
@@ -63,7 +65,29 @@ template<class Archive>
 void GdalCartLabMultifile::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartLabMultifile);
+  if(version > 1)
+    ar & GEOCAL_NVP(file_spacing_number_line) & GEOCAL_NVP(file_spacing_number_sample);
+  boost::serialization::split_member(ar, *this, version);
 }
+
+template<class Archive>
+void GdalCartLabMultifile::save(Archive& Ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void GdalCartLabMultifile::load(Archive& Ar, const unsigned int version)
+{
+  // Default value, which is what we have most of the time, is 1 pixel
+  // overlap.  Fall back to this if we are using an older version
+  // without these values saved.
+  if(version < 1) {
+    file_spacing_number_line = mi_ref.number_y_pixel() - 1;
+    file_spacing_number_sample = mi_ref.number_x_pixel() - 1;
+  }
+}
+
 
 template<class Archive>
 void VicarCartLabMultifile::serialize(Archive & ar, const unsigned int version)
@@ -71,11 +95,39 @@ void VicarCartLabMultifile::serialize(Archive & ar, const unsigned int version)
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CartLabMultifile)
     & GEOCAL_NVP(favor_memory_mapped)
     & GEOCAL_NVP(force_area_pixel);
+  if(version > 1)
+    ar & GEOCAL_NVP(file_spacing_number_line) & GEOCAL_NVP(file_spacing_number_sample);
+  boost::serialization::split_member(ar, *this, version);
+}
+
+template<class Archive>
+void VicarCartLabMultifile::save(Archive& Ar, const unsigned int version) const
+{
+  // Nothing more to do
+}
+
+template<class Archive>
+void VicarCartLabMultifile::load(Archive& Ar, const unsigned int version)
+{
+  // Default value, which is what we have most of the time, is 1 pixel
+  // overlap.  Fall back to this if we are using an older version
+  // without these values saved.
+  if(version < 1) {
+    file_spacing_number_line = mi_ref.number_y_pixel() - 1;
+    file_spacing_number_sample = mi_ref.number_x_pixel() - 1;
+  }
+}
+
+template<class Archive>
+void VicarCartLabMultifileSetup::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(VicarCartLabMultifile);
 }
 
 GEOCAL_SPLIT_IMPLEMENT(CartLabMultifile);
 GEOCAL_IMPLEMENT(GdalCartLabMultifile);
 GEOCAL_IMPLEMENT(VicarCartLabMultifile);
+GEOCAL_IMPLEMENT(VicarCartLabMultifileSetup);
 #endif
 
 CartLabMultifile::CartLabMultifile
@@ -103,9 +155,37 @@ CartLabMultifile::CartLabMultifile
 }
 
 
+void CartLabMultifile::change_to_geodetic360()
+{
+  mi_ref.change_to_geodetic360();
+  init_loc_to_file_360();
+}
+
+void CartLabMultifile::change_to_geodetic()
+{
+  mi_ref.change_to_geodetic();
+  init_loc_to_file();
+}
+
+//-----------------------------------------------------------------------
+/// Derived classes should call init_loc_to_file() in their
+/// constructor, after filling in information listed below.
+/// Note that RasterMultifile also has a init function which may need
+/// to be called.
+///
+/// We look at mi_ref to determine if we are using Geodetic or Geodetic360
+//-----------------------------------------------------------------------
 
 void CartLabMultifile::init_loc_to_file()
 {
+  if(mi_ref.is_geodetic_360()) {
+    init_loc_to_file_360();
+    return;
+  }
+  // If we flipped to and from 360, lon_ref might be > 180. handle
+  // that
+  if(lon_ref >= 180)
+    lon_ref -= 360;
   boost::regex fname_regex("([ns])(\\d+)([ew])(\\d+)" + file_name_end);
   boost::smatch m;
   std::vector<std::string> flist;
@@ -115,15 +195,7 @@ void CartLabMultifile::init_loc_to_file()
   BOOST_FOREACH(boost::filesystem::directory_entry d, 
    		std::make_pair(boost::filesystem::directory_iterator(dirbase),
 			       boost::filesystem::directory_iterator())) {
-    // Slightly different syntax depending on version of BOOST
-    // filesystem. We need to support both, at least for a while
-    // (version 2 is old and deprecated, but we need to support some
-    // old systems)
-#if defined(BOOST_FILESYSTEM_VERSION) && BOOST_FILESYSTEM_VERSION == 3
     std::string fname = d.path().filename().string();
-#else
-    std::string fname = d.path().filename();
-#endif
     // Ignore files that have names we don't recognize (e.g., a README
     // file or something like that with the data files). This also
     // breaks the files we do recognize into the pieces we need to
@@ -177,62 +249,146 @@ void CartLabMultifile::init_loc_to_file()
 		    flist[i]);
 }
 
+//-----------------------------------------------------------------------
+/// Variation of init_loc_to_file that has longitude going from 0 to
+/// 360, useful for working near the dateline.
+//-----------------------------------------------------------------------
+
+void CartLabMultifile::init_loc_to_file_360()
+{
+  if(lon_ref < 0)
+    lon_ref += 360;
+  boost::regex fname_regex("([ns])(\\d+)([ew])(\\d+)" + file_name_end);
+  boost::smatch m;
+  std::vector<std::string> flist;
+  std::vector<int> loffset;
+  std::vector<int> soffset;
+  int lmin = 0, lmax = 0, smin = 0, smax = 0;
+  BOOST_FOREACH(boost::filesystem::directory_entry d, 
+   		std::make_pair(boost::filesystem::directory_iterator(dirbase),
+			       boost::filesystem::directory_iterator())) {
+    std::string fname = d.path().filename().string();
+    // Ignore files that have names we don't recognize (e.g., a README
+    // file or something like that with the data files). This also
+    // breaks the files we do recognize into the pieces we need to
+    // determine the upper left corner
+
+    double x0, y0, x1, y1;
+    mi_ref.coordinate(Geodetic360(lat_ref, lon_ref), x0, y0);
+    mi_ref.coordinate(Geodetic360(lat_ref + 1, lon_ref + 1), x1, y1);
+    int num_per_deg_lat = (int) round(y1 - y0);
+    int num_per_deg_lon = (int) round(x1 - x0);
+    if(boost::regex_match(fname, m, fname_regex)) {
+      flist.push_back(d.path().string());
+      // Note that this is *not* the ULC of the file. There is a
+      // border around the file (of 6 pixels). However this border is
+      // the same for all the files, so we can determine the relative
+      // position of the files by comparing the lat/lon between files.
+      int lat = boost::lexical_cast<int>(m[2]) * (m[1] == "n" ? 1 : -1);
+      int lon = boost::lexical_cast<int>(m[4]) * (m[3] == "e" ? 1 : -1);
+      if(lon < 0)
+	lon += 360;
+      // Calculate the line/sample relative to our initial mapinfo.
+      int loff = (lat - lat_ref) * num_per_deg_lat;
+      int soff = (lon - lon_ref) * num_per_deg_lon;
+      loffset.push_back(loff);
+      soffset.push_back(soff);
+      lmin = std::min(loff, lmin);
+      smin = std::min(soff, smin);
+      lmax = std::max(loff, lmax);
+      smax = std::max(soff, smax);
+    }
+  }
+  if(flist.size() == 0) {
+    Exception e;
+    e << "No data files found at " << dirbase;
+    throw e;
+  }
+  first_file = flist[0];
+  // Calculate the map_info that fill cover all the data.
+  map_info_.reset(new MapInfo(mi_ref.subset(smin, lmin, 
+		    smax - smin + mi_ref.number_x_pixel(),
+		    lmax - lmin + mi_ref.number_y_pixel())));
+  number_line_ = map_info().number_y_pixel();
+  number_sample_ = map_info().number_x_pixel();
+  number_tile_line_ = number_line_;
+  number_tile_sample_ = number_sample_;
+
+  // Now go back through and populate loc_to_file.
+  for(std::vector<std::string>::size_type i = 0; i < flist.size(); ++i)
+    loc_to_file.add(loffset[i] - lmin,
+		    soffset[i] - smin, 
+		    loffset[i] - lmin + mi_ref.number_y_pixel(),
+		    soffset[i] - smin + mi_ref.number_x_pixel(),
+		    flist[i]);
+}
+
 RasterMultifileTile GdalCartLabMultifile::get_file(int Line, int Sample) const
 {
-  std::string fname = loc_to_file.find(Line, Sample);
-  if(fname =="")
+  auto fname_list = loc_to_file.find_region(Line, Sample, 1, 1);
+  for(auto & fname: fname_list) {
+    boost::shared_ptr<GdalRasterImage> f =
+      boost::make_shared<GdalRasterImage>(fname, 1, number_tile_each_file,
+					  false, number_line_per_tile,
+					  number_sample_per_tile);
+    ImageCoordinate ic = 
+      coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+    int ln = (int) round(ic.line);
+    int smp = (int) round(ic.sample);
+    RasterMultifileTile res(f, ln, smp);
+    if(res.in_tile(Line, Sample))
+      return res;
+  }
+  if(!no_coverage_is_error_) {
+    // Note that this ConstantRasterImage *doesn't* have the 1 pixel overlap we often
+    // have with multifile. We don't know that the edge of the next tile doesn't
+    // have data.
+    boost::shared_ptr<RasterImage> cf
+      (new ConstantRasterImage(file_spacing_number_line, file_spacing_number_sample,
+			       no_coverage_fill_value_));
+    int ln = (Line / cf->number_line()) * cf->number_line();
+    int smp = (Sample / cf->number_sample()) * cf->number_sample();
+    return RasterMultifileTile(cf, ln, smp);
+  } else {
     return RasterMultifileTile();
-  boost::shared_ptr<GdalRasterImage> f
-    (new GdalRasterImage(fname, 1, number_tile_each_file, false, 
-			 number_line_per_tile, number_sample_per_tile));
-  ImageCoordinate ic = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
-  int ln = (int) round(ic.line);
-  int smp = (int) round(ic.sample);
-  return RasterMultifileTile(f, ln, smp);
+  }
 }
 
 RasterMultifileTile VicarCartLabMultifile::get_file(int Line, int Sample) const
 {
-  std::string fname = loc_to_file.find(Line, Sample);
-  if(fname =="") {
-    if(!no_coverage_is_error_) {
-      boost::shared_ptr<RasterImage> cf
-	(new ConstantRasterImage(mi_ref.number_y_pixel(), mi_ref.number_x_pixel(),
-				 no_coverage_fill_value_));
-      int ln = (Line / cf->number_line()) * cf->number_line();
-      int smp = (Sample / cf->number_sample()) * cf->number_sample();
-      return RasterMultifileTile(cf, ln, smp);
-    } else {
-      return RasterMultifileTile();
-    }
+  auto fname_list = loc_to_file.find_region(Line, Sample, 1, 1);
+  for(auto & fname: fname_list) {
+    //-----------------------------------------------------------------------
+    // If we are using memory mapped io by preference, try that first.
+    // We allow this to fail, the file might be too large to do memory
+    // mapped io (particular on the mac, which is limited to 2G).
+    //-----------------------------------------------------------------------
+    boost::shared_ptr<RasterImage> f = 
+      vicar_open(fname, 1, VicarFile::READ, favor_memory_mapped,
+		 number_line_per_tile, number_tile_each_file, force_area_pixel);
+    ImageCoordinate ic = 
+      coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
+    int ln = (int) round(ic.line);
+    int smp = (int) round(ic.sample);
+    RasterMultifileTile res(f, ln, smp);
+    if(res.in_tile(Line, Sample))
+      return res;
+  }
+  if(!no_coverage_is_error_) {
+    // Note that this ConstantRasterImage *doesn't* have the 1 pixel overlap we often
+    // have with multifile. We don't know that the edge of the next tile doesn't
+    // have data.
+    boost::shared_ptr<RasterImage> cf
+      (new ConstantRasterImage(file_spacing_number_line, file_spacing_number_sample,
+			       no_coverage_fill_value_));
+    int ln = (Line / cf->number_line()) * cf->number_line();
+    int smp = (Sample / cf->number_sample()) * cf->number_sample();
+    return RasterMultifileTile(cf, ln, smp);
+  } else {
+    return RasterMultifileTile();
   }
 
-  //-----------------------------------------------------------------------
-  // If we are using memory mapped io by preference, try that first.
-  // We allow this to fail, the file might be too large to do memory
-  // mapped io (particular on the mac, which is limited to 2G).
-  //-----------------------------------------------------------------------
-
-  boost::shared_ptr<RasterImage> f = 
-    vicar_open(fname, 1, VicarFile::READ, favor_memory_mapped,
-	       number_line_per_tile, number_tile_each_file, force_area_pixel);
-  ImageCoordinate ic = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(0,0))));
-  ImageCoordinate ic2 = 
-    coordinate(*(f->ground_coordinate(ImageCoordinate(f->number_line() - 1,
-					      f->number_sample() - 1))));
-  int ln = (int) round(ic.line);
-  int smp = (int) round(ic.sample);
-  return RasterMultifileTile(f, ln, smp);
 }
-
-class TempFile {
-public:
-  TempFile() {temp_fname = tmpnam(0);}
-  ~TempFile() {unlink(temp_fname);}
-  char* temp_fname;
-};
 
 //-----------------------------------------------------------------------
 /// Create a stand alone file that contains a subset of the full file.
@@ -283,6 +439,10 @@ void CartLabMultifile::create_subset_file
     msub = Desired_map_info;
   else
     msub = boost::make_shared<MapInfo>(map_info().cover(Pt, Boundary));
+  // Check that map projection uses the same coordinates, we don't
+  // handle with this function doing something like converting to UTM.
+  if(!map_info().coordinate_converter().is_same(msub->coordinate_converter()))
+    throw Exception("Desired_map_info needs to be in the same coordinate system as CartLabMultifile.");
   ImageCoordinate ic = coordinate(*msub->ground_coordinate(0,0));
   ImageCoordinate icend = coordinate(*msub->ground_coordinate(msub->number_x_pixel(), msub->number_y_pixel()));
   int lstart = (int) floor(ic.line);
@@ -310,46 +470,89 @@ void CartLabMultifile::create_subset_file
 			    std::min(g3.latitude(), g4.latitude())));
   double lat_max = std::max(g1.latitude(), std::max(g2.latitude(),
 			    std::max(g3.latitude(), g4.latitude())));
-  double lon_min = std::min(g1.longitude(), std::min(g2.longitude(),
-			    std::min(g3.longitude(), g4.longitude())));
-  double lon_max = std::max(g1.longitude(), std::max(g2.longitude(),
-			    std::max(g3.longitude(), g4.longitude())));
+  double lon1 = g1.longitude();
+  double lon2 = g2.longitude();
+  double lon3 = g3.longitude();
+  double lon4 = g4.longitude();
+  if(is_geodetic_360()) {
+    if(lon1 < 0)
+      lon1 += 360;
+    if(lon2 < 0)
+      lon2 += 360;
+    if(lon3 < 0)
+      lon3 += 360;
+    if(lon4 < 0)
+      lon4 += 360;
+  }
+  double lon_min = std::min(lon1, std::min(lon2,
+			    std::min(lon3, lon4)));
+  double lon_max = std::max(lon1, std::max(lon2,
+			    std::max(lon3, lon4)));
   double tres_lon = fabs((msub->ulc_x()-msub->lrc_x()) /
 			 msub->number_x_pixel());
   double tres_lat = fabs((msub->ulc_y()-msub->lrc_y()) /
 			 msub->number_y_pixel());
+  // We ran into a case where gdalbuildvrt created a vrt file with one
+  // of the files having a zero size (it was once that just touched
+  // the edge of the desired map info). To work around this, do the
+  // vrt in two steps - one just joins the files together and the
+  // other subsets it.
+  
   std::ostringstream command;
-  command << "gdalbuildvrt -q"
-	  << " -te " << std::setprecision(12)
-	  << lon_min << " " << lat_min << " " << lon_max << " "
-	  << lat_max << " -tr " << tres_lon << " " << tres_lat << " -r average";
-  TempFile f;
-  command << " " << f.temp_fname;
+  std::ostringstream command2;
+  command << "gdalbuildvrt -q";
+  command2 << "gdalbuildvrt -q"
+	   << " -te " << std::setprecision(12)
+	   << lon_min << " " << lat_min << " " << lon_max << " "
+	   << lat_max << " -tr " << tres_lon << " " << tres_lat << " -r average";
+  GeoCalTempFile f;
+  command << " " << f.temp_fname();
+  GeoCalTempFile f2;
+  command2 << " " << f2.temp_fname();
   BOOST_FOREACH(std::string f, flist)
     command << " " << f;
   // Make sure we have at least one file in the list, even if this
-  // doesn't actually over the area at all. This will force
+  // doesn't actually cover the area at all. This will force
   // gdalbuildvrt to make an empty file
   if(flist.size() == 0)
     command << " " << first_file;
+  command2 << " " << f.temp_fname();
   if(Verbose)
-    std::cout << "GDAL command: " << command.str() << "\n";
-  // Can ignore system status, we just fail in the next step when we
-  // try to use the file.
-  system(command.str().c_str());
+    std::cout << "GDAL command: " << command.str() << "\n"
+	      << "GDAL command: " << command2.str() << "\n";
+  int status = system(command.str().c_str());
+  if(status != 0) {
+    Exception e;
+    e << "CartLabMultifile::create_subset_file failed system command.\n"
+      << "  Command: " << command.str() << "\n";
+    throw e;
+  }
+  status = system(command2.str().c_str());
+  if(status != 0) {
+    Exception e;
+    e << "CartLabMultifile::create_subset_file failed system command.\n"
+      << "  Command: " << command2.str() << "\n";
+    throw e;
+  }
   if(Translate_arg != "") {
-    std::string t2 = std::string(f.temp_fname) + "_2";
-    std::ostringstream command2;
-    command2 << "gdal_translate " << Translate_arg << " "
-	     << f.temp_fname << " " << t2;
+    std::string t2 = std::string(f2.temp_fname()) + "_2";
+    std::ostringstream command3;
+    command3 << "gdal_translate " << Translate_arg << " "
+	     << f2.temp_fname() << " " << t2;
     if(Verbose)
-      std::cout << "GDAL command: " << command2.str() << "\n";
-    system(command2.str().c_str());
+      std::cout << "GDAL command: " << command3.str() << "\n";
+    status = system(command3.str().c_str());
+    if(status != 0) {
+      Exception e;
+      e << "CartLabMultifile::create_subset_file failed system command.\n"
+	<< "  Command: " << command3.str() << "\n";
+      throw e;
+    }
     GdalRasterImage d(t2);
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
     unlink(t2.c_str());
   } else {
-    GdalRasterImage d(f.temp_fname);
+    GdalRasterImage d(f2.temp_fname());
     gdal_create_copy(Oname, Driver, *d.data_set(), Options);
   }
 }

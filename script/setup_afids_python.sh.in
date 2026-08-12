@@ -24,3 +24,20 @@ if [ "@have_msp@" = "yes" ]; then
 	export LD_LIBRARY_PATH=@MSP_PREFIX@/lib
     fi
 fi
+if [ -n "$NITF_PLUGIN" ]; then
+  export NITF_PLUGIN=geocal:${NITF_PLUGIN}
+else
+  export NITF_PLUGIN=geocal
+fi
+if [ -n "@isisroot@" ] ; then
+  export ISISROOT="@isisroot@"
+fi
+if [ -n "@isisdata@" ] ; then
+  export ISISDATA="@isisdata@"
+fi
+if [ -n "@copernicusdem@" ] ; then
+  export AFIDS_COPERNICUS_DEM="@copernicusdem@"
+fi
+if [ -n "@copernicuslwm@" ] ; then
+  export AFIDS_COPERNICUS_LWM="@copernicuslwm@"
+fi

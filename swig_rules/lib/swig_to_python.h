@@ -1,6 +1,9 @@
 #ifndef SWIG_TO_PYTHON_H
 #define SWIG_TO_PYTHON_H
 #include "swig_type_mapper_base.h"
+#include <vector>
+
+//#define PTR_DEBUG 1
 
 namespace SWIG_MAPPER_NAMESPACE {
 /****************************************************************//**
@@ -35,8 +38,11 @@ swig_to_python(const boost::shared_ptr<T>& V)
 //-----------------------------------------------------------------------
 
   Swig::Director* d = dynamic_cast<Swig::Director*>(V.get());
-  if(d)
-    return d->swig_get_self();
+  if(d) {
+    PyObject* p = d->swig_get_self();
+    Py_INCREF(p);
+    return p;
+  }
 
 //-----------------------------------------------------------------------
 // See if underlying type is registered in swig_type_map. If so, return the
@@ -54,6 +60,13 @@ swig_to_python(const boost::shared_ptr<T>& V)
   return (PyObject*) SwigTypeMapperBase::map_to_python(V, typeid(T));
 }
 
+// The lifetime of the python director object is a little different for things
+// like handling serialization, because we *create* the python
+// director object at the C++ level. So we don't want the extra
+// Py_INCREF. I think the only place this gets used is
+// serialize_function.i, but you might have other examples of this
+  
+  
 inline PyObject* 
 swig_to_python_or_none(const boost::shared_ptr<GenericObject>& V)
 {
@@ -72,8 +85,15 @@ swig_to_python_or_none(const boost::shared_ptr<GenericObject>& V)
 //-----------------------------------------------------------------------
 
   Swig::Director* d = dynamic_cast<Swig::Director*>(V.get());
-  if(d) 
-    return d->swig_get_self();
+  if(d) {
+    PyObject* p = d->swig_get_self();
+#ifdef PTR_DEBUG    
+    std::cerr << "In swig_to_python_or_none\n";
+    std::cerr << "p refcnt: " << p->ob_refcnt << " address " << p->ob_type << "\n";
+#endif    
+    Py_INCREF(p);
+    return p;
+  }
 
 //-----------------------------------------------------------------------
 // See if underlying type is registered in swig_type_map. If so, return the
@@ -95,5 +115,43 @@ swig_to_python_or_none(const boost::shared_ptr<GenericObject>& V)
 template<typename T> inline PyObject* 
 swig_to_python(const boost::shared_ptr<T>* V)
 { return swig_to_python(*V); }
+
+inline PyObject* 
+swig_to_python_or_none(const boost::shared_ptr<GenericObject>* V)
+{ return swig_to_python_or_none(*V); }
+
+//-----------------------------------------------------------------------
+/// Function to map from a vector shared point to a python object.
+//-----------------------------------------------------------------------
+
+template<typename T> inline PyObject* 
+swig_to_python(const std::vector<boost::shared_ptr<T> >& V)
+{
+  PyObject* res = PyList_New(V.size());
+  for(int i = 0; i < (int) V.size(); ++i)
+    PyList_SetItem(res, i, swig_to_python(V[i]));
+  return res;
 }
+
+template<typename T> inline PyObject* 
+swig_to_python(const std::vector<boost::shared_ptr<T> >* V)
+{
+  return swig_to_python(*V);
+}
+  
+template<typename T> inline PyObject* 
+swig_to_python(const std::vector<std::vector<boost::shared_ptr<T> > >& V)
+{
+  PyObject* res = PyList_New(V.size());
+  for(int i = 0; i < V.size(); ++i)
+    PyList_SetItem(res, i, swig_to_python(V[i]));
+  return res;
+}
+
+template<typename T> inline PyObject* 
+swig_to_python(const std::vector<std::vector<boost::shared_ptr<T> > >* V)
+{
+  return swig_to_python(*V);
+}
+} // End namespace
 #endif

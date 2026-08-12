@@ -1,0 +1,34 @@
+#! /usr/bin/env python
+#
+# This is a utility program that handles a SpiceKernelList, using the ISIS
+# server to supply missing kernels to a SPICECACHE directory.
+# This is really meant for use by geocal library, this is likely
+# not useful for other applications
+
+import geocal
+import sys
+
+version = "July 10, 2020"
+usage='''Usage:
+  boost_spice_kernel_list [options]
+  boost_spice_kernel_list -h | --help
+  boost_spice_kernel_list -v | --version
+
+This is a utility program that handles a SpiceKernelList, using the
+ISIS server to supply missing kernels to a SPICECACHE directory.  This
+is really meant for use by geocal library, this is likely not useful
+for other applications
+
+Options:
+  -h --help         
+       Print this message
+
+  -v --version      
+       Print program version
+'''
+
+args = geocal.docopt_simple(usage, version=version)
+# "buffer" here is used to read stdin as bytes rather than a str
+klist = geocal.serialize_read_binary(sys.stdin.buffer.read())
+klist2 = geocal.find_isis_kernel(klist)
+sys.stdout.buffer.write(geocal.serialize_write_binary(klist2))

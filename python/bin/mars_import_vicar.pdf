@@ -1,6 +1,6 @@
 PROCESS       HELP=*
-parm img type=(string,99) count=1
-parm outimg type=(string,99) count=1
+parm img type=string count=1
+parm outimg type=string count=1
 parm band type=int count=1 default=1
 parm hirisecorr type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC

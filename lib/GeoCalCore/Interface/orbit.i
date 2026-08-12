@@ -1,3 +1,4 @@
+
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
 %include <std_vector.i>
@@ -9,6 +10,8 @@
 %base_import(generic_object)
 %base_import(observer)
 %base_import(with_parameter)
+%import "velocity_aberration.i"
+%import "refraction.i"
 %import "camera.i"
 %import "ground_coordinate.i"
 %import "look_vector.i"
@@ -33,32 +36,62 @@ public:
   double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
 				     int Band) const;
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const = 0;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
   virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const = 0;
+  cf_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianFixedLookVectorWithDerivative
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
+  cf_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
+  virtual ScLookVector
+  sc_look_vector(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
+  sc_look_vector_with_derivative(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+  sc_look_vector(const CartesianInertialLookVector& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci,
+		 bool Include_velocity_aberration = true) const;
+  virtual ScLookVector 
+  sc_look_vector(const CartesianFixedLookVector& Cf,
+		 bool Include_velocity_aberration = true) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
+		 bool Include_velocity_aberration = true) const;
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0, 
-                  double Height_reference_surface = 0.0) const;
+		  double Height_reference_surface = 0.0,
+   	          const boost::shared_ptr<Refraction>&
+		  Ref = boost::shared_ptr<Refraction>(),
+		  const boost::shared_ptr<VelocityAberration>&
+		  Vabb = boost::shared_ptr<VelocityAberration>()) const;
   %python_attribute(position_ci, virtual boost::shared_ptr<CartesianInertial>)
   %python_attribute(position_cf, virtual boost::shared_ptr<CartesianFixed>)
   std::vector<boost::shared_ptr<GroundCoordinate> >
@@ -70,7 +103,11 @@ public:
 		    const FrameCoordinate& Fc,
 		    const Dem& D,
 		    double Resolution = 30,
-		    int Band = 0, double Max_height = 9000) const;
+		    int Band = 0, double Max_height = 9000,
+   	            const boost::shared_ptr<Refraction>&
+		    Ref = boost::shared_ptr<Refraction>(),
+		    const boost::shared_ptr<VelocityAberration>&
+		    Vabb = boost::shared_ptr<VelocityAberration>()) const;
   %extend {
     blitz::Array<double, 1> _velocity_ci() const {
       blitz::Array<double, 1> res(3);
@@ -120,9 +157,34 @@ def position_ci_with_derivative(self):
 def position_cf_with_derivative(self):
     return self._position_cf_with_derivative()
   }
+  %extend {
+    blitz::Array<double, 1> _velocity_cf() const {
+      blitz::Array<double, 1> res(3);
+      boost::array<double, 3> v = $self->velocity_cf();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return res;
+    }
+    GeoCal::ArrayAd<double, 1> _velocity_cf_with_derivative() const {
+      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
+      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_cf_with_derivative();
+      for(int i = 0; i < 3; ++i)
+	res(i) = v[i];
+      return GeoCal::ArrayAd<double, 1>(res);
+    }
+  }
+  %pythoncode {
+@property
+def velocity_cf(self):
+    return self._velocity_cf()
+
+@property
+def velocity_cf_with_derivative(self):
+    return self._velocity_cf_with_derivative()
+  }
   %python_attribute(time, virtual Time)
   %python_attribute(time_with_derivative, virtual TimeWithDerivative)
-  std::string print_to_string() const;
+  virtual std::string print_to_string() const;
   %python_attribute(prefer_cf, bool)
 };
 
@@ -159,21 +221,11 @@ public:
 		      const boost::math::quaternion<AutoDerivative<double> >& 
 		      sc_to_ci_q);
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) const;
-  virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const;
-  virtual CartesianFixedLookVectorWithDerivative 
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) const;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const;
-  virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
-  virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const;
-  virtual ScLookVectorWithDerivative 
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   static boost::shared_ptr<QuaternionOrbitData>
   interpolate(const QuaternionOrbitData& t1, 
 	      const QuaternionOrbitData& t2, 
@@ -188,31 +240,6 @@ public:
   %python_attribute_with_set(sc_to_cf, boost::math::quaternion<double>)
   %python_attribute_with_set(sc_to_cf_with_derivative, boost::math::quaternion<AutoDerivative<double> >)
   %python_attribute(from_cf, bool)
-  %extend {
-    blitz::Array<double, 1> _velocity_cf() const {
-      blitz::Array<double, 1> res(3);
-      boost::array<double, 3> v = $self->velocity_cf();
-      for(int i = 0; i < 3; ++i)
-	res(i) = v[i];
-      return res;
-    }
-    GeoCal::ArrayAd<double, 1> _velocity_cf_with_derivative() const {
-      blitz::Array<GeoCal::AutoDerivative<double>, 1> res(3);
-      boost::array<GeoCal::AutoDerivative<double>, 3> v = $self->velocity_cf_with_derivative();
-      for(int i = 0; i < 3; ++i)
-	res(i) = v[i];
-      return GeoCal::ArrayAd<double, 1>(res);
-    }
-  }
-  %pythoncode {
-@property
-def velocity_cf(self):
-    return self._velocity_cf()
-
-@property
-def velocity_cf_with_derivative(self):
-    return self._velocity_cf_with_derivative()
-  }
   %pickle_serialization();
 };
 
@@ -240,6 +267,7 @@ public:
   Orbit(Time Min_time = Time::min_valid_time, 
 	Time Max_time = Time::max_valid_time);
   virtual ~Orbit();
+  virtual std::string desc() const;
   virtual void add_observer(Observer<Orbit>& Obs);
   virtual void remove_observer(Observer<Orbit>& Obs);
     
@@ -254,11 +282,20 @@ public:
   cf_look_vector(const TimeWithDerivative& T, 
 		 const ScLookVectorWithDerivative& Sl) const;
   FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const TimeWithDerivative& T, 
-				   const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+           const GroundCoordinate& Gc, 
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
+				   
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(Time T, const Camera& C, 
 			  const FrameCoordinate& Fc, int Band = 0,
@@ -274,7 +311,11 @@ public:
   (const TimeWithDerivative& T, 
    const CartesianFixedLookVectorWithDerivative& Cf) const;
   virtual ScLookVector sc_look_vector(Time T, 
-				      const CartesianFixed& Pt) const;
+           const CartesianFixed& Pt,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   virtual boost::shared_ptr<CartesianInertial> position_ci(Time T) const;
   virtual boost::shared_ptr<CartesianFixed> position_cf(Time T) const;
   %python_attribute(min_time, Time)
@@ -282,7 +323,7 @@ public:
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const = 0;
   virtual boost::shared_ptr<OrbitData> orbit_data(const TimeWithDerivative& T) 
     const = 0;
-  virtual std::string print_to_string();
+  virtual std::string print_to_string() const;
   %python_attribute_with_set_virtual(parameter, blitz::Array<double, 1>);
   %python_attribute_with_set_virtual(parameter_with_derivative, 
 			     ArrayAd<double, 1>);
@@ -352,89 +393,10 @@ public:
               const boost::math::quaternion<AutoDerivative<double> >& Q1, 
               const boost::math::quaternion<AutoDerivative<double> >& Q2,
 	      const AutoDerivative<double>& toffset, double tspace);
+  %pickle_serialization();
 protected:
   void notify_update_do(const Orbit& Self);
 };
-
-%{
-#include "geocal_serialize_support.h"
-#include "orbit_wrap.h"
-
-#ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
-
-namespace boost {
-  namespace serialization {
-    template<class Archive>
-    void serialize(Archive& ar, SwigDirector_Orbit& Orb, const unsigned int version) {
-      std::cerr << "In serialize\n";
-      ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(Orbit),
-					  boost::serialization::base_object<GeoCal::Orbit>(Orb));
-      std::cerr << "Orb min time: " << Orb.min_time() << "\n";
-    }
-    template<class Archive> 
-    void save_construct_data(Archive & ar, const SwigDirector_Orbit* d, 
-			     const unsigned int version)
-    {
-      PyObject* obj = PyObject_CallMethodObjArgs(d->swig_get_self(),
-			PyString_FromString("__boost_serialize_save__"),
-			NULL);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      std::string python_object = PyString_AsString(obj);
-      ar & GEOCAL_NVP(python_object);
-    }
-    template<class Archive>
-    void load_construct_data(Archive & ar, SwigDirector_Orbit* d,
-			     const unsigned int version)
-    {
-      std::string python_object;
-      ar & GEOCAL_NVP(python_object);
-      PyObject* lis = cpickle_loads(python_object);
-      PyObject* func = PyTuple_GetItem(lis, 0);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      PyObject* arg = PyTuple_GetItem(lis, 1);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      PyObject* obj = PyObject_Call(func, arg, NULL);
-      if(PyErr_Occurred()) {
-	GeoCal::Exception e;
-	e << "Python error occurred:\n"
-	  << parse_python_exception();
-	throw e;
-      }
-      ::new(d)SwigDirector_Orbit(obj);
-    }
-  }
-}
-BOOST_CLASS_EXPORT_KEY(SwigDirector_Orbit);
-BOOST_CLASS_EXPORT_IMPLEMENT(SwigDirector_Orbit);
- template void boost::serialization::serialize(boost::archive::polymorphic_oarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
- template void boost::serialization::serialize(boost::archive::polymorphic_iarchive& ar, SwigDirector_Orbit& Orb, const unsigned int version);
-template
-
-void boost::serialization::save_construct_data
-(polymorphic_oarchive & ar, const SwigDirector_Orbit* d, 
- const unsigned int version);
-
-template
-void boost::serialization::load_construct_data
-(polymorphic_iarchive & ar, SwigDirector_Orbit* d, const unsigned int version);
-
-#endif  
-%}
 
 class KeplerOrbit : public Orbit {
 public:
@@ -467,6 +429,10 @@ public:
 %extend std::vector<boost::shared_ptr<GeoCal::QuaternionOrbitData> > {
   %pickle_serialization();
 };
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+%geocal_director_serialization(orbit, Orbit)
 
 // List of things "import *" will include
 %python_export("OrbitData", "QuaternionOrbitData", "Orbit", "KeplerOrbit", "ObservableOrbit", "ObserverOrbit", "Vector_QuaternionOrbitData")

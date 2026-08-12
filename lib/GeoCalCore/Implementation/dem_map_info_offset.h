@@ -18,6 +18,19 @@ public:
 		   double Height_offset)
   { initialize(Dem_underlying, Height_offset); }
 
+
+  virtual void change_to_geodetic360()
+  {
+    dem_->change_to_geodetic360();
+    map_info_ = dem_->map_info();
+  }
+  
+  virtual void change_to_geodetic()
+  {
+    dem_->change_to_geodetic();
+    map_info_ = dem_->map_info();
+  }
+  
 //-----------------------------------------------------------------------
 /// Underlying DEM.
 //-----------------------------------------------------------------------

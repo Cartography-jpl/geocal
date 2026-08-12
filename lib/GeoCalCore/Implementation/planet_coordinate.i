@@ -12,7 +12,7 @@
 %import "orbit.i"
 %import "simple_dem.i"
 
-%geocal_shared_ptr(GeoCal::PlanetConstant);
+%shared_ptr(GeoCal::PlanetConstant);
 %geocal_shared_ptr(GeoCal::PlanetFixed);
 %geocal_shared_ptr(GeoCal::PlanetInertial);
 %geocal_shared_ptr(GeoCal::Planetocentric);
@@ -22,7 +22,8 @@
 namespace GeoCal {
 class PlanetConstant {
 public:
-  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502};
+  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502, CERES_NAIF_CODE=2000001,
+	MOON_NAIF_CODE=301};
   static double a(int Naif_code);
   static double b(int Naif_code);
   static double esq(int Naif_code);
@@ -54,7 +55,8 @@ public:
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T,
-   int Naif_code);
+   int Naif_code,
+   const std::string& Abcorr = "NONE");
   virtual int naif_code() const;
   %python_attribute(planet_radius, double);
   %pickle_serialization();

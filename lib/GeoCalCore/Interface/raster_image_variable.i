@@ -13,6 +13,10 @@
 
 namespace GeoCal {
 class RasterImageVariable : public RasterImage {
+public:
+  virtual void change_to_geodetic360();
+  virtual void change_to_geodetic();
+  %python_attribute(is_geodetic_360, bool);
 protected:
   RasterImageVariable();
   RasterImageVariable(int Nline, int Nsamp);

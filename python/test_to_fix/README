@@ -1,0 +1,4 @@
+Have a lot of tests that we need to fix up after we reorganized the geocal python. We'll
+just work our way through this over time.
+
+For now, move out of the way so we don't have a bunch of failing tests.

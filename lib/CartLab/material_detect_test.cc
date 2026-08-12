@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "unit_test_support.h"
 #include "material_detect.h"
 #include "vicar_lite_file.h"
@@ -13,6 +13,9 @@ BOOST_AUTO_TEST_CASE(shiva)
 #ifndef HAVE_VICAR_GDALPLUGIN
   // We can perhaps set this up to work without the VICAR gdalplugin
   // at some point, but for now just punt if we don't have this.
+  return;
+#endif
+#ifndef HAVE_VICAR_RTL
   return;
 #endif
   boost::shared_ptr<GdalMultiBand> mul

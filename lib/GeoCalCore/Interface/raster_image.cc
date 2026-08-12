@@ -1,6 +1,5 @@
 #include "raster_image.h"
 #include <iostream>
-#include <boost/progress.hpp>
 #include <boost/make_shared.hpp>
 #include "geocal_serialize_support.h"
 
@@ -9,13 +8,14 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void RasterImage::serialize(Archive & ar, const unsigned int version)
+void RasterImage::serialize
+(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(RasterImage);
 }
 
 template<class Archive>
-void ArrayRasterImage::serialize(Archive & ar, const unsigned int version)
+void ArrayRasterImage::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ArrayRasterImage);
   ar & GEOCAL_NVP_(img);
@@ -271,9 +271,6 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
     tns = Tile_nsamp;
   int ntile = int(ceil(double(Img_out.number_line()) / tnl) *
 		  ceil(double(Img_out.number_sample()) / tns));
-  boost::shared_ptr<boost::progress_display> dp;
-  if(Diagnostic)
-    dp = boost::make_shared<boost::progress_display>(ntile);
   std::vector<int> buf;
   if(!Img_in.copy_needs_double())
     buf.resize(tnl * tns);
@@ -281,8 +278,6 @@ void GeoCal::copy(const RasterImage& Img_in, RasterImage& Img_out, bool Diagnost
       istart += tnl)
     for(int jstart = 0; jstart < Img_out.number_sample();
 	jstart += tns) {
-      if(dp)
-	++(*dp);
       int nl = std::min(tnl, Img_out.number_line() - istart);
       int ns = std::min(tns, Img_out.number_sample() - jstart);
       if(Img_in.copy_needs_double())
@@ -336,6 +331,35 @@ void GeoCal::copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out,
 	    if(v != Fill_value)
 	      Img_out.write(i, j, v);
 	  }
+	}
+    }
+}
+
+//-----------------------------------------------------------------------
+/// \ingroup Miscellaneous
+/// This fills an image with a given value (often 0).
+//-----------------------------------------------------------------------
+
+void GeoCal::fill_image
+(RasterImage& Img, int Fill_value,
+ bool Diagnostic, int Tile_nline, int Tile_nsamp)
+{
+  int tnl = Img.number_tile_line();
+  int tns = Img.number_tile_sample();
+  if(Tile_nline > 0)
+    tnl = Tile_nline;
+  if(Tile_nsamp > 0)
+    tns = Tile_nsamp;
+  int ntile = int(ceil(double(Img.number_line()) / tnl) *
+		  ceil(double(Img.number_sample()) / tns));
+  for(int istart = 0; istart < Img.number_line();
+      istart += tnl)
+    for(int jstart = 0; jstart < Img.number_sample();
+	jstart += tns) {
+      for(int i = istart; i < Img.number_line() && i < istart + tnl; ++i)
+	for(int j = jstart; j < Img.number_sample() && j < jstart + tns; 
+	    ++j) {
+	  Img.write(i, j, Fill_value);
 	}
     }
 }

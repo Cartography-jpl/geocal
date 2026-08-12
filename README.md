@@ -1,6 +1,6 @@
 # GeoCal
 This provides software for map projection, geometric calibration, 
-simultaneous bundle adjustment, etc.
+simultaneous bundle adjustment, etc. (NPO 20999).
 
 The software is made up of a core C++ library, python wrappers that allows 
 the library to be used through python, and a number of support executables. 
@@ -40,14 +40,20 @@ example, explicit directions for building on a bare Centos 7 can be found
 in [Centos 7 Build](README_centos7_build.md)
 
 We can also get the dependencies through [Conda](https://conda.io/docs/).
-If you have a conda environment set up, (e.g., source activate <env_dir>).
+If you have a conda environment set up, (e.g., conda activate <env_dir>).
 Then you can do:
+
+    conda install --yes afids-development-tools
+
+This is a super set, to get just the tools needed by geocal without extra
+useful tools (e.g., afids-xvd):
 
     conda install --yes --file requirements.txt
     conda install --yes --file extra_anaconda_requirements.txt
 	
-In addition, there are conda packages available for things not available
-in anaconda (e.g., spice) at [afids-conda-package](https://github.jpl.nasa.gov/Cartography/afids-conda-package).
+For either of these, there are packages not available in the standard conda
+channels (e.g., spice). We have these available at [afids-conda-package](https://github.jpl.nasa.gov/Cartography/afids-conda-package), look there for directions
+on setting of the afids-conda-package channel.
 
 A note on the build. We have unit tests run with the standard GNU target
 "make check". There is also a standard GNU target "installcheck" that can
@@ -64,6 +70,24 @@ be:
 Replace -j 20 with whatever is reasonable on your system. Also note that
 the install step can't be done in parallel, again this is pretty standard
 GNU build.
+
+## Extending geocal
+
+In addition to just using geocal, you may want to extend it. If you are just
+using this as a python library, nothing special needs to be done. If on the
+other hand you are extending the C++ (e.g., add a instrument specific camera
+model) and want to access it through python,
+there is some cookie cutter set up to use. We have a number of examples of
+projects, such as:
+
+* [ECOSTRESS](https://github.jpl.nasa.gov/ecostress/ecostress-level1)
+* [OCO-3](https://github.jpl.nasa.gov/OCO/oco3-level1)
+
+Because this has been done a few times, we've created a skeleton that can be used
+to get started. This skeleton has some placeholder code that can be removed
+when you have other examples (e.g., example C++ code).
+
+* [use-geocal-skeleton](https://github.jpl.nasa.gov/Cartography/use-geocal-skeleton)
 
 ## Dependencies
 

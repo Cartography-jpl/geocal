@@ -79,6 +79,18 @@ public:
 	  boost::shared_ptr<Datum>(new DatumGeoid96()));
   virtual ~SrtmDem() {}
 
+  virtual void change_to_geodetic360()
+  {
+    f->change_to_geodetic360();
+    map_info_ = f->map_info();
+  }
+  
+  virtual void change_to_geodetic()
+  {
+    f->change_to_geodetic();
+    map_info_ = f->map_info();
+  }
+  
 //-----------------------------------------------------------------------
 /// Directory base that we read SRTM data from.
 //-----------------------------------------------------------------------

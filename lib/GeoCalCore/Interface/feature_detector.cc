@@ -8,7 +8,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void InterestPoint::serialize(Archive & ar, const unsigned int version)
+void InterestPoint::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(InterestPoint);
   ar & GEOCAL_NVP(image_coordinate)
@@ -16,7 +16,7 @@ void InterestPoint::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void FeatureDetector::serialize(Archive & ar, const unsigned int version)
+void FeatureDetector::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(FeatureDetector);
 }

@@ -23,6 +23,9 @@ public:
 	  const blitz::Array<double, 1>& Param,
 	  int Number_x_pixel, 
 	  int Number_y_pixel, bool Is_point=false);
+  void change_to_geodetic360();
+  void change_to_geodetic();
+  %python_attribute(is_geodetic_360, bool);
   %python_attribute2(coordinate_converter, coordinate_converter_ptr,
 		     boost::shared_ptr<CoordinateConverter>)
   %python_attribute(is_point, bool);
@@ -61,6 +64,8 @@ public:
   %python_attribute(number_x_pixel, int)
   %python_attribute(number_y_pixel, int)
   %python_attribute(resolution_meter, double)
+  %python_attribute(resolution_x, double)
+  %python_attribute(resolution_y, double)
   MapInfo subset(int x_index, int y_index, int nx_pixel, int ny_pixel) const;
   MapInfo subset(double x_index, double y_index, int nx_pixel, 
 		 int ny_pixel) const;

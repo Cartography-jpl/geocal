@@ -1,11 +1,11 @@
 PROCESS       HELP=*
-parm refimg type=(string,99) count=1
-parm refbase type=(string,99) count=1
-parm refresname type=(string,99) count=1
-parm img type=(string,99) count=1
-parm imgbase type=(string,99) count=1
-parm imgresname type=(string,99) count=1
-parm tp type=(string,99) count=1 default=""
+parm refimg type=string count=1
+parm refbase type=string count=1
+parm refresname type=string count=1
+parm img type=string count=1
+parm imgbase type=string count=1
+parm imgresname type=string count=1
+parm tp type=string count=1 default=""
 parm autofit type=int default=14 valid=(0:500)
 parm bandref type=int count=1 default=1
 parm bandimg type=int count=1 default=1
@@ -24,8 +24,8 @@ parm scl type=real count=1 default=1.0
 parm seed type=int default=562
 parm thr_res type=real count=1 default=10.0
 parm toler type=real count=1 default=1.5 valid=(0.0:20.0)
-parm usemap type=(string,99) count=1 default="" 
-parm useproj type=(string,99) count=1 default="" 
+parm usemap type=string count=1 default="" 
+parm useproj type=string count=1 default="" 
 parm userefproj type=(string,4) count=(0:1) valid=(n,y) default=n
 END-PROC
 .TITLE

@@ -1,8 +1,6 @@
 #ifndef AIRMSPI_FILE_H
 #define AIRMSPI_FILE_H
 #include <string>
-// This won't be needed once version 3 becomes the default for boost filesystem
-#define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem.hpp>
 
 namespace GeoCal {

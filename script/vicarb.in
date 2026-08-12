@@ -4,6 +4,14 @@
 # common for example if we are testing out new version of geocal software
 # that hasn't yet been integrated into afids. This vicarb file does that.
 
+# Clean up environment variables that may be around from nested
+# taetm calls (see NOTE_vicarb.txt for a description of this)
+unsetenv PARENT
+unsetenv DOWN_PIPE0
+unsetenv DOWN_PIPE1
+unsetenv UP_PIPE0
+unsetenv UP_PIPE1
+
 set scriptdir=`dirname $0`
 setenv AFIDSPYTHONTOP  @prefix@
 source @AFIDS_PREFIX@/setup_afids_env.csh

@@ -1,9 +1,12 @@
 #ifndef ORBIT_DES_H
 #define ORBIT_DES_H
 #include "orbit.h"
+#include "ecr.h"
 #include <boost/utility.hpp>
 
 namespace GeoCal {
+class OrbitDes;			// Forward declaration
+  
 /****************************************************************//**
   This handles position reading, writing, and interpolation. This
   uses the NITF DES CSEPHB (See the SNIP documentation).
@@ -133,7 +136,10 @@ public:
 
   std::string id() const { return id_;}
   void id(const std::string& V) { id_ = V;}
+
 private:
+  friend OrbitDes;
+  void convert_cf_and_ci(const OrbitDes& orb);  
   std::string id_;
   Time min_time_;
   double tstep_;
@@ -279,7 +285,10 @@ public:
 
   std::string id() const { return id_;}
   void id(const std::string& V) { id_ = V;}
+
 private:
+  friend OrbitDes;
+  void convert_cf_and_ci(const OrbitDes& orb);
   std::string id_;
   Time min_time_;
   double tstep_;
@@ -312,7 +321,8 @@ private:
 class OrbitDes: public Orbit {
 public:
   OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
-	   const boost::shared_ptr<AttCsattb>& Att);
+	   const boost::shared_ptr<AttCsattb>& Att,
+	   int Naif_code = Ecr::EARTH_NAIF_CODE);
   virtual ~OrbitDes() {}
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> 
@@ -320,9 +330,41 @@ public:
   virtual void print(std::ostream& Os) const;
   const boost::shared_ptr<PosCsephb>& pos_csephb() const {return pos_;}
   const boost::shared_ptr<AttCsattb>& att_csattb() const {return att_;}
+  int naif_code() const { return naif_code_; }
+  void naif_code(int V) { naif_code_ = V; }
+
+//-----------------------------------------------------------------------
+/// Convert PosCsephb and AttCsattb to use CartesianFixed. If they
+/// already do this, then this doesn't do anything.
+//-----------------------------------------------------------------------
+
+  void convert_to_cf()
+  {
+    if(!pos_->is_cf()) {
+      att_->convert_cf_and_ci(*this);
+      pos_->convert_cf_and_ci(*this);
+      att_->is_cf_ = true;
+    }
+  }
+
+//-----------------------------------------------------------------------
+/// Convert PosCsephb and AttCsattb to use CartesianInertial. If they
+/// already do this, then this doesn't do anything.
+//-----------------------------------------------------------------------
+
+  void convert_to_ci()
+  {
+    if(pos_->is_cf()) {
+      att_->convert_cf_and_ci(*this);
+      pos_->convert_cf_and_ci(*this);
+      att_->is_cf_ = false;
+    }
+  }
+  
 private:
   boost::shared_ptr<PosCsephb> pos_;
   boost::shared_ptr<AttCsattb> att_;
+  int naif_code_;
   OrbitDes() {}
   friend class boost::serialization::access;
   template<class Archive>

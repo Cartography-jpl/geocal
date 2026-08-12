@@ -21,7 +21,7 @@ void IterativeMorphologicalDilation::serialize(Archive & ar, const unsigned int 
 GEOCAL_IMPLEMENT(IterativeMorphologicalDilation);
 #endif
 
-boost::random::mt19937 IterativeMorphologicalDilation::rand_gen;
+IterativeMorphologicalDilation::RandType IterativeMorphologicalDilation::rand_gen;
 
 //-----------------------------------------------------------------------
 /// Constructor.
@@ -42,6 +42,7 @@ IterativeMorphologicalDilation::IterativeMorphologicalDilation
  FrontierFillOrder Frontier_fill_order)
 : filled_image_(Image.copy()),
   filled_mask_(Mask.copy()),
+  need_to_fill(true),
   kernel_(Window_size, Window_size),
   frontier_fill_order_(Frontier_fill_order),
   prediction_type_(Prediction_type),
@@ -54,7 +55,7 @@ IterativeMorphologicalDilation::IterativeMorphologicalDilation
   if(kernel_.rows() % 2 != 1 || kernel_.cols() % 2 != 1)
     throw Exception("The Window_size needs to be an odd size");
   if(sigma_ < 0)
-    sigma_ = window_size() / 6.4;
+    sigma_ = double(window_size()) / 6.4;
   if(prediction_type_ == FLAT_WEIGHTED_AVERAGE ||
      prediction_type_ == NEIGBORHOOD_MEDIAN)
     kernel_ = 1.0;
@@ -62,7 +63,7 @@ IterativeMorphologicalDilation::IterativeMorphologicalDilation
     int whs = (window_size() - 1) / 2;
     for(int i = -whs; i <= whs; ++i)
       for(int j = -whs; j <= whs; ++j)
-	kernel_(i+whs,j+whs) = exp(-(i*i + j*j) / (2*sigma_*sigma_));
+	kernel_(i+whs,j+whs) = exp(-(i*i + j*j) / (2.0*sigma_*sigma_));
   } else
     throw Exception("Unrecognized prediction_type_");
 }
@@ -72,23 +73,37 @@ IterativeMorphologicalDilation::IterativeMorphologicalDilation
 /// original mask - so this returns nonzero for all the new "frontier"
 /// pixels. Because it is useful, fill the nonzero values with a count
 /// of neighbors in the original mask (this can be useful to fill in
-/// points with the most neighbors first in an iteration). So this
-/// returns all masked pixels that have at least one immediate neighbor.
+/// points with the most neighbors first in an iteration). Return a
+/// list of these frontier pixels
 //-----------------------------------------------------------------------
 
-blitz::Array<unsigned short int, 2>
-IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const
+std::vector<IterativeMorphologicalDilation::FrontierPixel>
+IterativeMorphologicalDilation::frontier_pixel_find(int num) const
 {
-  Array<unsigned short int, 2> res(filled_mask_.shape());
-  for(int i = 0; i < res.rows(); ++i)
-    for(int j = 0; j < res.cols(); ++j)
-      if(filled_mask_(i,j)) {
-	Range r1(std::max(i-1,0), std::min(i+1,res.rows()-1));
-	Range r2(std::max(j-1,0), std::min(j+1,res.cols()-1));
-	res(i, j) = blitz::count(!filled_mask_(r1,r2));
-      } else
-	res(i,j) = 0;
-  return res;
+  // Since we typically have many fewer points to fill in relative to
+  // the entire image, it can be a speed up to just loop through these
+  // points rather than the whole image. This is the same information
+  // as filled_mask_, just in a quicker format.
+  if(need_to_fill) {
+    to_fill.clear();
+    for(int i = 0; i < filled_mask_.rows(); ++i)
+      for(int j = 0; j < filled_mask_.cols(); ++j)
+	if(filled_mask_(i,j))
+	  to_fill.push_back(std::pair<int, int>(i,j));
+    need_to_fill = false;
+  }
+  
+  std::vector<IterativeMorphologicalDilation::FrontierPixel> fp;
+  for(auto it = to_fill.begin(); it != to_fill.end(); ++it) {
+    int i = it->first;
+    int j = it->second;
+    Range r1(std::max(i-num,0), std::min(i+num,filled_mask_.rows()-1));
+    Range r2(std::max(j-num,0), std::min(j+num,filled_mask_.cols()-1));
+    int cnt = blitz::count(!filled_mask_(r1,r2));
+    if(cnt > 0)
+      fp.push_back(IterativeMorphologicalDilation::FrontierPixel(i, j, cnt, it));
+  }
+  return fp;
 }
 
 //-----------------------------------------------------------------------
@@ -99,17 +114,17 @@ IterativeMorphologicalDilation::frontier_pixel_neighbor_count() const
 
 bool IterativeMorphologicalDilation::fill_iteration()
 {
-  blitz::Array<unsigned short int, 2>  mcount = frontier_pixel_neighbor_count();
+  auto  fp = frontier_pixel_find(1);
   bool any_change = false;
   switch(frontier_fill_order_) {
   case C_ORDER:
-    any_change = fill_iteration_c_order(mcount);
+    any_change = fill_iteration_c_order(fp);
     break;
   case MOST_NEIGHBORS_FIRST:
-    any_change = fill_iteration_most_neighbors_first(mcount);
+    any_change = fill_iteration_most_neighbors_first(fp);
     break;
   case RANDOM_ORDER:
-    any_change = fill_iteration_random(mcount);
+    any_change = fill_iteration_random(fp);
     break;
   default:
     throw Exception("Unrecognized frontier_fill_order");
@@ -126,6 +141,7 @@ bool IterativeMorphologicalDilation::fill_iteration()
 
 void IterativeMorphologicalDilation::fill_missing_data()
 {
+  need_to_fill = true;
   while(fill_iteration())
     ;
 }
@@ -135,36 +151,32 @@ void IterativeMorphologicalDilation::fill_missing_data()
 //-----------------------------------------------------------------------
   
 bool IterativeMorphologicalDilation::fill_iteration_c_order
-(const blitz::Array<unsigned short int, 2>& mcount)
+(std::vector<FrontierPixel>& Fp)
 {
   bool any_change = false;
-  for(int i = 0; i < mcount.rows(); ++i)
-    for(int j = 0; j < mcount.cols(); ++j)
-      if(mcount(i,j) > 0) {
-	filled_image_(i,j) = predicted_value(i,j);
-	filled_mask_(i,j) = false;
-	any_change = true;
-      }
+  for(auto& p : Fp) {
+    filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
+    to_fill.erase(p.it);
+    filled_mask_(p.i,p.j) = false;
+    any_change = true;
+  }
   return any_change;
 }
 
-struct FrontierPixel {
-  FrontierPixel(int I, int J, int Count) : i(I), j(J), count(Count) {}
-  int i, j, count;
-};
 
 struct neighbor_count_compare {
-  bool operator() (const FrontierPixel& P1, const FrontierPixel& P2) {
+  bool operator() (const IterativeMorphologicalDilation::FrontierPixel& P1,
+		   const IterativeMorphologicalDilation::FrontierPixel& P2) {
     // Sort by neighbor count, and then in C order (if count is the same)
-    if(P1.count < P2.count)
-      return true;
     if(P1.count > P2.count)
-      return false;
-    if(P1.i < P2.i)
       return true;
-    if(P1.i > P2.i)
+    if(P1.count < P2.count)
       return false;
     if(P1.j < P2.j)
+      return true;
+    if(P1.j > P2.j)
+      return false;
+    if(P1.i < P2.i)
       return true;
     return false;
   }
@@ -175,17 +187,13 @@ struct neighbor_count_compare {
 //-----------------------------------------------------------------------
   
 bool IterativeMorphologicalDilation::fill_iteration_most_neighbors_first
-(const blitz::Array<unsigned short int, 2>& mcount)
+(std::vector<FrontierPixel>& Fp)
 {
   bool any_change = false;
-  std::vector<FrontierPixel> fp;
-  for(int i = 0; i < mcount.rows(); ++i)
-    for(int j = 0; j < mcount.cols(); ++j)
-      if(mcount(i,j) > 0)
-	fp.push_back(FrontierPixel(i, j, mcount(i,j)));
-  std::sort(fp.begin(), fp.end(), neighbor_count_compare());
-  BOOST_FOREACH(const FrontierPixel& p, fp) {
+  std::sort(Fp.begin(), Fp.end(), neighbor_count_compare());
+  for(auto& p : Fp) {
     filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
+    to_fill.erase(p.it);
     filled_mask_(p.i,p.j) = false;
     any_change = true;
   }
@@ -197,21 +205,13 @@ bool IterativeMorphologicalDilation::fill_iteration_most_neighbors_first
 //-----------------------------------------------------------------------
   
 bool IterativeMorphologicalDilation::fill_iteration_random
-(const blitz::Array<unsigned short int, 2>& mcount)
+(std::vector<FrontierPixel>& Fp)
 {
   bool any_change = false;
-  std::vector<FrontierPixel> fp;
-  for(int i = 0; i < mcount.rows(); ++i)
-    for(int j = 0; j < mcount.cols(); ++j)
-      if(mcount(i,j) > 0)
-	fp.push_back(FrontierPixel(i, j, mcount(i,j)));
-#ifdef HAVE_CXX11
-  std::shuffle(fp.begin(), fp.end(), rand_gen);
-#else
-  throw Exception("Random order requires C++ 11 features, which this compilation doesn't support.");
-#endif  
-  BOOST_FOREACH(const FrontierPixel& p, fp) {
+  std::shuffle(Fp.begin(), Fp.end(), rand_gen);
+  for(auto& p : Fp) {
     filled_image_(p.i,p.j) = predicted_value(p.i,p.j);
+    to_fill.erase(p.it);
     filled_mask_(p.i,p.j) = false;
     any_change = true;
   }
@@ -233,9 +233,9 @@ double IterativeMorphologicalDilation::predicted_value(int i, int j) const
   double ksum = 0;
   int count = 0;
   for(int ii = -krhs; ii <= krhs; ++ii)
-    if(i + ii > 0 && i + ii < filled_mask_.rows())
+    if(i + ii >= 0 && i + ii < filled_mask_.rows())
       for(int jj = -kchs; jj <= kchs; ++jj)
-	if(j + jj > 0 && j + jj < filled_mask_.cols() &&
+	if(j + jj >= 0 && j + jj < filled_mask_.cols() &&
 	   !filled_mask_(i+ii,j+jj)) {
 	  ++count;
 	  if(prediction_type_ == NEIGBORHOOD_MEDIAN) {

@@ -4,6 +4,8 @@
 #include "geocal_serialize_support.h"
 #include "auto_derivative.h"
 #include "tre_support.h"
+#include "local_rectangular_coordinate.h"
+#include "simple_dem.h"
 
 using namespace GeoCal;
 using namespace blitz;
@@ -42,21 +44,26 @@ void RsmGrid::load(Archive & ar, const unsigned int version)
 		  std::numeric_limits<double>::quiet_NaN(),
 		  sample_no_nan);
   // Older version didn't have number of digits
-  if(version == 0) {
-    total_number_row_digit_ = 11;
-    total_number_col_digit_ = 11;
-    number_fractional_row_digit_ = 11;
-    number_fractional_col_digit_ = 11;
-    row_section_number_ = 1;
-    col_section_number_ = 1;
-  } else {
+  if(version >= 1) {
     ar & GEOCAL_NVP_(total_number_row_digit)
       & GEOCAL_NVP_(total_number_col_digit)
       & GEOCAL_NVP_(number_fractional_row_digit)
       & GEOCAL_NVP_(number_fractional_col_digit)
       & GEOCAL_NVP_(row_section_number)
       & GEOCAL_NVP_(col_section_number);
-  }    
+  } else {
+    total_number_row_digit_ = 11;
+    total_number_col_digit_ = 11;
+    number_fractional_row_digit_ = 11;
+    number_fractional_col_digit_ = 11;
+    row_section_number_ = 1;
+    col_section_number_ = 1;
+  }  
+  if(version >= 2) {
+    ar & GEOCAL_NVP_(have_z_range);
+  } else {
+    have_z_range_ = false;
+  }
 }
 
 template<class Archive>
@@ -85,14 +92,18 @@ void RsmGrid::save(Archive & ar, const unsigned int version) const
     & GEOCAL_NVP_(min_sample)
     & GEOCAL_NVP_(max_sample)
     & GEOCAL_NVP_(ignore_igc_error_in_fit);
+    
   // Older version didn't have number of digits
-  if(version > 0) {
+  if(version >= 1) {
     ar & GEOCAL_NVP_(total_number_row_digit)
       & GEOCAL_NVP_(total_number_col_digit)
       & GEOCAL_NVP_(number_fractional_row_digit)
       & GEOCAL_NVP_(number_fractional_col_digit)
       & GEOCAL_NVP_(row_section_number)
       & GEOCAL_NVP_(col_section_number);
+  }
+  if(version >= 2) {
+    ar & GEOCAL_NVP_(have_z_range);
   }
 }
 
@@ -107,6 +118,68 @@ inline double interp_nan(double x1, double x2, double delta)
   if(std::isnan(x2))
     return x1;
   return x1 + (x2 - x1) * delta;
+}
+
+inline AutoDerivative<double> interp_nan(double x1, double x2,
+			 const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1))
+    return x2;
+  if(std::isnan(x2))
+    return x1;
+  return x1 + (x2 - x1) * delta;
+}
+
+inline AutoDerivative<double> interp_nan
+(const AutoDerivative<double>& x1, const AutoDerivative<double>& x2,
+ const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1.value()))
+    return x2;
+  if(std::isnan(x2.value()))
+    return x1;
+  return x1 + (x2 - x1) * delta;
+}
+
+inline double lagrange_cubic_interp_nan(double x1, double x2,
+					double x3, double delta)
+{
+  // For nans, fall back onto the linear interpolation)
+  if(std::isnan(x1))
+    return interp_nan(x2, x3, delta);
+  if(std::isnan(x3))
+    return interp_nan(x1, x2, 1+delta);
+  if(std::isnan(x2))
+    return std::numeric_limits<double>::quiet_NaN();
+  return x1 * (-0.5 * delta + 0.5 * delta * delta) + x2 * (1 - delta * delta) +
+    x3 * (0.5 * delta + 0.5 * delta * delta);
+}
+
+inline AutoDerivative<double> lagrange_cubic_interp_nan
+(AutoDerivative<double>& x1, AutoDerivative<double>& x2,
+ AutoDerivative<double>& x3, const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1.value()))
+    return interp_nan(x2, x3, delta);
+  if(std::isnan(x3.value()))
+    return interp_nan(x1, x2, 1+delta);
+  if(std::isnan(x2.value()))
+    return std::numeric_limits<double>::quiet_NaN();
+  return x1 * (-0.5 * delta + 0.5 * delta * delta) + x2 * (1 - delta * delta) +
+    x3 * (0.5 * delta + 0.5 * delta * delta);
+}
+
+inline AutoDerivative<double> lagrange_cubic_interp_nan
+(double x1, double x2, double x3, const AutoDerivative<double>& delta)
+{
+  if(std::isnan(x1))
+    return interp_nan(x2, x3, delta);
+  if(std::isnan(x3))
+    return interp_nan(x1, x2, 1+delta);
+  if(std::isnan(x2))
+    return std::numeric_limits<double>::quiet_NaN();
+  return x1 * (-0.5 * delta + 0.5 * delta * delta) + x2 * (1 - delta * delta) +
+    x3 * (0.5 * delta + 0.5 * delta * delta);
 }
 
 //-----------------------------------------------------------------------
@@ -151,46 +224,69 @@ ImageCoordinate RsmGrid::image_coordinate
       k_delta = 1;
     }
   }
-  if(i < 0 || i + 1 >= line_.rows() ||
-     j < 0 || j + 1 >= line_.cols() ||
-     k < 0 || k + 1 >= line_.depth())
+  if(i < 0 || i >= line_.rows() ||
+     j < 0 || j >= line_.cols() ||
+     k < 0 || k >= line_.depth())
     return ImageCoordinate(std::numeric_limits<double>::quiet_NaN(),
 			   std::numeric_limits<double>::quiet_NaN());
-  // Bilinear interpolation. Should add 3x3 lagrange interpolation at
-  // some point according to the RSM documentation
-  double xinter_line[2][2],
-    xinter_sample[2][2];
-  for(int i1 = 0; i1 < 2; ++i1)
-    for(int i2 = 0; i2 < 2; ++i2) {
+  // Lagrange cubit interpolation. 
+  double xinter_line[3][3],
+    xinter_sample[3][3];
+  for(int i1 = 0; i1 < 3; ++i1)
+    for(int i2 = 0; i2 < 3; ++i2) {
       xinter_line[i1][i2] =
-	interp_nan(line_(i,j+i1,k+i2), line_(i+1,j+i1,k+i2), i_delta);
+	lagrange_cubic_interp_nan(line_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  line_value_or_nan(i,j-1+i1,k-1+i2),
+				  line_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
       xinter_sample[i1][i2] =
-	interp_nan(sample_(i,j+i1,k+i2), sample_(i+1,j+i1,k+i2), i_delta);
+	lagrange_cubic_interp_nan(sample_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
     }
-  double yinter_line[2], yinter_sample[2];
-  for(int i1 = 0; i1 < 2; ++i1) {
+  double yinter_line[3], yinter_sample[3];
+  for(int i1 = 0; i1 < 3; ++i1) {
     yinter_line[i1] =
-      interp_nan(xinter_line[0][i1], xinter_line[1][i1], j_delta);
+      lagrange_cubic_interp_nan(xinter_line[0][i1],
+				xinter_line[1][i1],
+				xinter_line[2][i1],
+				j_delta);
     yinter_sample[i1] = 
-      interp_nan(xinter_sample[0][i1], xinter_sample[1][i1], j_delta);
+      lagrange_cubic_interp_nan(xinter_sample[0][i1],
+				xinter_sample[1][i1],
+				xinter_sample[2][i1],
+				j_delta);
   }
-  double ln = interp_nan(yinter_line[0], yinter_line[1], k_delta);
-  double smp = interp_nan(yinter_sample[0], yinter_sample[1], k_delta);
+  double ln = lagrange_cubic_interp_nan(yinter_line[0], yinter_line[1],
+					yinter_line[2], k_delta);
+  double smp = lagrange_cubic_interp_nan(yinter_sample[0], yinter_sample[1],
+					yinter_sample[2], k_delta);
 
   // Bunch of diagnostic messages. Leave stubbed out for now, we may
   // want this when we go to the lagrange interpolation to debug
   // problems.
   if(false) {
+    std::cerr << "Row section number: " << row_section_number() << "\n"
+	      << "Col section number: " << col_section_number() << "\n";
+    std::cerr << "X: " << X << "\n"
+	      << "Y: " << Y << "\n"
+	      << "Z: " << Z << "\n";
+    std::cerr << "i: " << i << "\n"
+	      << "j: " << j << "\n"
+	      << "k: " << k << "\n";
+    std::cerr << "line shape:   " << line_.shape() << "\n"
+	      << "sample shape: " << sample_.shape() << "\n";
     for(int i1 = 0; i1 < 2; ++i1)
       for(int i2 = 0; i2 < 2; ++i2) 
 	for(int i3 = 0; i3 < 2; ++i3)
 	  std::cerr << "line(" << i1 << ", " << i2 << ", " << i3 << "): "
-		    << line_(i,j+i1,k+i2) << "\n";
+		    << line_(i+i1,j+i2,k+i3) << "\n";
     for(int i1 = 0; i1 < 2; ++i1)
       for(int i2 = 0; i2 < 2; ++i2) 
 	for(int i3 = 0; i3 < 2; ++i3)
 	  std::cerr << "sample(" << i1 << ", " << i2 << ", " << i3 << "): "
-		    << sample_(i,j+i1,k+i2) << "\n";
+		    << sample_(i+i1,j+i2,k+i3) << "\n";
     for(int i1 = 0; i1 < 2; ++i1)
       for(int i2 = 0; i2 < 2; ++i2) 
 	std::cerr << "xinter_line(" << i1 << ", " << i2 << "): "
@@ -314,10 +410,19 @@ void RsmGrid::fit
       for(double k = 0; k < 2; ++k) {
 	double ln = (i == 0 ? Min_line : Max_line);
 	double smp = (j == 0 ? Min_sample : Max_sample);
-	double h = (k == 0 ? Min_height : Max_height);
+	boost::shared_ptr<Dem> dem;
+	if(have_z_range_) {
+	  double z = (k == 0 ? z_start_ : z_start_ + number_z() * z_delta_);
+	  auto lc_cconv = boost::make_shared<LocalRcConverter>
+	    (dynamic_cast<const LocalRcConverter&>(Cconv).parameter());
+	  dem = boost::make_shared<LocalZDem>(lc_cconv, z);
+	} else {
+	  double h = (k == 0 ? Min_height : Max_height);
+	  dem = boost::make_shared<SimpleDem>(h);
+	}
 	try {
 	  boost::shared_ptr<GroundCoordinate> gc =
-	    Igc.ground_coordinate_approx_height(ImageCoordinate(ln, smp), h);
+	    Igc.ground_coordinate_dem(ImageCoordinate(ln, smp), *dem);
 	  double xv, yv, zv;
 	  Cconv.convert_to_coordinate(*gc, xv, yv, zv);
 	  if(first) {
@@ -340,12 +445,25 @@ void RsmGrid::fit
 	    throw;
 	}
       }
-  x_start_ = min_x;
-  y_start_ = min_y;
-  z_start_ = min_z;
+  // The interpolation works better if we go a little past the edges
+  // in x and y.
+  const int pad = 2;
   x_delta_ = (max_x - min_x) / (number_x(0) - 1);
   y_delta_ = (max_y - min_y) / (number_y(0) - 1);
   z_delta_ = (max_z - min_z) / (number_z() - 1);
+  min_x -= pad * x_delta_;
+  max_x += pad * x_delta_;
+  min_y -= pad * y_delta_;
+  max_y += pad * y_delta_;
+  
+  x_start_ = min_x;
+  y_start_ = min_y;
+  x_delta_ = (max_x - min_x) / (number_x(0) - 1);
+  y_delta_ = (max_y - min_y) / (number_y(0) - 1);
+  if(!have_z_range_) {
+    z_start_ = min_z;
+    z_delta_ = (max_z - min_z) / (number_z() - 1);
+  }
   for(int i = 0; i < line_.rows(); ++i)
     for(int j = 0; j < line_.cols(); ++j)
       for(int k = 0; k < line_.depth(); ++k) {
@@ -357,7 +475,7 @@ void RsmGrid::fit
 	ImageCoordinate ic;
 	bool success;
 	try {
-	  Igc.image_coordinate_with_status(*gc, ic, success);
+	  Igc.image_coordinate_extended(*gc, ic, success);
 	  if(success) {
 	    line_(i,j,k) = ic.line;
 	    sample_(i,j,k) = ic.sample;
@@ -408,7 +526,7 @@ void RsmGrid::fit_corr
 	ImageCoordinate ic;
 	bool success;
 	try {
-	  Igc.image_coordinate_with_status(*gc, ic, success);
+	  Igc.image_coordinate_extended(*gc, ic, success);
 	  ImageCoordinate ic_calc;
 	  ic_calc = Rb.image_coordinate(x,y,z);
 	  if(success) {
@@ -479,37 +597,119 @@ blitz::Array<double, 2> RsmGrid::image_coordinate_jacobian
       k_delta = 1;
     }
   }
-  if(i < 0 || i + 1 >= line_.rows() ||
-     j < 0 || j + 1 >= line_.cols() ||
-     k < 0 || k + 1 >= line_.depth()) {
+  if(i < 0 || i >= line_.rows() ||
+     j < 0 || j >= line_.cols() ||
+     k < 0 || k >= line_.depth()) {
     res = 0;
     return res;
   }
-  // Bilinear interpolation. Should add 3x3 lagrange interpolation at
-  // some point according to the RSM documentation
-  AutoDerivative<double> xinter_line[2][2],
-    xinter_sample[2][2];
-  for(int i1 = 0; i1 < 2; ++i1)
-    for(int i2 = 0; i2 < 2; ++i2) {
-      xinter_line[i1][i2] = line_(i,j+i1,k+i2) +
-	(line_(i+1,j+i1,k+i2)-line_(i,j+i1,k+i2)) * i_delta;
-      xinter_sample[i1][i2] = sample_(i,j+i1,k+i2) +
-	(sample_(i+1,j+i1,k+i2)-sample_(i,j+i1,k+i2)) * i_delta;
+  // Lagrange cubit interpolation. 
+  AutoDerivative<double> xinter_line[3][3],
+    xinter_sample[3][3];
+  for(int i1 = 0; i1 < 3; ++i1)
+    for(int i2 = 0; i2 < 3; ++i2) {
+      xinter_line[i1][i2] =
+	lagrange_cubic_interp_nan(line_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  line_value_or_nan(i,j-1+i1,k-1+i2),
+				  line_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
+      xinter_sample[i1][i2] =
+	lagrange_cubic_interp_nan(sample_value_or_nan(i-1,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i,j-1+i1,k-1+i2),
+				  sample_value_or_nan(i+1,j-1+i1,k-1+i2),
+				  i_delta);
     }
-  AutoDerivative<double> yinter_line[2], yinter_sample[2];
-  for(int i1 = 0; i1 < 2; ++i1) {
-    yinter_line[i1] = xinter_line[0][i1] +
-      (xinter_line[1][i1]-xinter_line[0][i1])*j_delta;
-    yinter_sample[i1] = xinter_sample[0][i1] +
-      (xinter_sample[1][i1]-xinter_sample[0][i1])*j_delta;
+  AutoDerivative<double> yinter_line[3], yinter_sample[3];
+  for(int i1 = 0; i1 < 3; ++i1) {
+    yinter_line[i1] =
+      lagrange_cubic_interp_nan(xinter_line[0][i1],
+				xinter_line[1][i1],
+				xinter_line[2][i1],
+				j_delta);
+    yinter_sample[i1] = 
+      lagrange_cubic_interp_nan(xinter_sample[0][i1],
+				xinter_sample[1][i1],
+				xinter_sample[2][i1],
+				j_delta);
   }
-  AutoDerivative<double> ln =
-    yinter_line[0] + (yinter_line[1]-yinter_line[0])*k_delta;
-  AutoDerivative<double> smp = yinter_sample[0] +
-    (yinter_sample[1]-yinter_sample[0])*k_delta;
-  res(0,ra) = ln.gradient();
-  res(1,ra) = smp.gradient();
+  AutoDerivative<double> ln = lagrange_cubic_interp_nan(yinter_line[0],
+							yinter_line[1],
+							yinter_line[2],
+							k_delta);
+  AutoDerivative<double> smp = lagrange_cubic_interp_nan(yinter_sample[0],
+							 yinter_sample[1],
+							 yinter_sample[2],
+							 k_delta);
+  if(ln.is_constant())
+    res(0, ra) = 0;
+  else
+    res(0,ra) = ln.gradient();
+  
+  if(smp.is_constant())
+    res(1,ra) = 0;
+  else
+    res(1,ra) = smp.gradient();
   return res;
+}
+
+//-----------------------------------------------------------------------
+/// Extrapolate data in the x/sample direction
+//-----------------------------------------------------------------------
+
+void RsmGrid::extrapolate_x_direction()
+{
+  blitz::Range ra = blitz::Range::all();
+  for(int k = 0; k < line_.depth(); ++k)
+    for(int j = 0; j < line_.cols(); ++j) {
+      blitz::Array<double, 1> line_col(line_(ra, j, k));
+      blitz::Array<double, 1> sample_col(sample_(ra, j, k));
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
+      line_col.reverseSelf(0);
+      sample_col.reverseSelf(0);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
+    }
+}
+
+//-----------------------------------------------------------------------
+/// Extrapolate data in the y/line direction
+//-----------------------------------------------------------------------
+
+void RsmGrid::extrapolate_y_direction()
+{
+  blitz::Range ra = blitz::Range::all();
+  for(int k = 0; k < line_.depth(); ++k)
+    for(int i = 0; i < line_.rows(); ++i) {
+      blitz::Array<double, 1> line_col(line_(i, ra, k));
+      blitz::Array<double, 1> sample_col(sample_(i, ra, k));
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
+      line_col.reverseSelf(0);
+      sample_col.reverseSelf(0);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
+    }
+}
+
+//-----------------------------------------------------------------------
+/// Extrapolate data in the z/height direction
+//-----------------------------------------------------------------------
+
+void RsmGrid::extrapolate_z_direction()
+{
+  blitz::Range ra = blitz::Range::all();
+  for(int j = 0; j < line_.cols(); ++j)
+    for(int i = 0; i < line_.rows(); ++i) {
+      blitz::Array<double, 1> line_col(line_(i, j, ra));
+      blitz::Array<double, 1> sample_col(sample_(i, j, ra));
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
+      line_col.reverseSelf(0);
+      sample_col.reverseSelf(0);
+      extrapolate_line_helper(line_col);
+      extrapolate_sample_helper(sample_col);
+    }
 }
 
 //-----------------------------------------------------------------------
@@ -548,19 +748,31 @@ static boost::format szformat("%|1$03d|%|2$03d|");
 
 std::string RsmGrid::tre_string() const
 {
+  // Before starting, check that all the data will fit
+  if(tre_size() > 99999) {
+    Exception e;
+    e << "Maximimum size of TRE is 99999\n"
+      << "  TRE size: " << tre_size() << "\n";
+    throw e;
+  }
   std::string res = base_tre_string();
   // Don't fill in the row and column fit error
   std::string row_fit_error="";
   std::string col_fit_error="";
-  std::string int_ord = "";
+  // Linear interpolation
+  // Note: Looks like the value needs to be set to one regardless of what
+  // the interpolation type is.
+  std::string int_ord = "1";
+  // std::string int_ord = "2";
   res += str_check_size(secformat % row_section_number_ % col_section_number_
 			% row_fit_error % col_fit_error % int_ord,
 			3 + 3 + 21 + 21 + 1);
   // This is the value that the line/sample are recorded relative
   // to. The TRE *only* has positive values, so this number needs to
-  // be < the minimum value in the array so we don't need positive numbers.
-  int refrow = int(floor(min(where(blitz_isnan(line_), 0, line_))));
-  int refcol = int(floor(min(where(blitz_isnan(sample_), 0, sample_))));
+  // be < the minimum value in the array so we don't need negative
+  // numbers.
+  int refrow = min_value_handle_nan(line_);
+  int refcol = min_value_handle_nan(sample_);
   res += str_check_size(gplaneformat % number_z() % z_delta_ % x_delta_
 			% y_delta_ % z_start_ % x_start_ % y_start_
 			% refrow % refcol % total_number_row_digit_
@@ -588,6 +800,14 @@ std::string RsmGrid::tre_string() const
   double lnscale = pow(10, number_fractional_row_digit_);
   double smpscale = pow(10, number_fractional_row_digit_);
   for(int i = 0; i < number_z(); ++i) {
+    // Give a better error message for too large size
+    if(number_x(i) > 999 || number_y(i) > 999) {
+      Exception e;
+      e << "The NITF TRE supports a maximum number_x and number_y of 999\n"
+	<< "  number_x(" << i << "): " << number_x(i) << "\n"
+	<< "  number_y(" << i << "): " << number_y(i) << "\n";
+      throw e;
+    }
     res += str_check_size(szformat % number_x(i) % number_y(i), 2 * 3);
     for(int i1 = 0; i1 < number_x(i); ++i1)
       for(int i2 = 0; i2 < number_y(i); ++i2) {
@@ -666,6 +886,12 @@ RsmGrid::read_tre_string(const std::string& Tre_in)
   res->total_number_col_digit_ = read_size<int>(in, 2);
   res->number_fractional_row_digit_ = read_size<int>(in, 1);
   res->number_fractional_col_digit_ = read_size<int>(in, 1);
+  // Values are set by tre, so just put in dummy values here
+  res->min_line_ = 0;
+  res->max_line_ = 0;
+  res->min_sample_ = 0;
+  res->max_sample_ = 0;
+  res->ignore_igc_error_in_fit_ = true;
   for(int i = 1; i < num_z; ++i) {
     int xoff = read_size<int>(in, 4);
     int yoff = read_size<int>(in, 4);

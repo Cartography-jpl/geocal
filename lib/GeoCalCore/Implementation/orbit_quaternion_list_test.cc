@@ -225,6 +225,21 @@ BOOST_AUTO_TEST_CASE(derivative_sc_look2)
   BOOST_CHECK_MATRIX_CLOSE_TOL(jac_fd, jac_calc, 0.1);
 }
 
+BOOST_AUTO_TEST_CASE(serialization)
+{
+  if(!have_serialize_supported())
+    return;
+  std::string d = serialize_write_string(orb);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<OrbitQuaternionList> orbr = 
+    serialize_read_string<OrbitQuaternionList>(d);
+  BOOST_CHECK_CLOSE(orbr->min_time().pgs(), 100.0, 1e-6);
+  BOOST_CHECK_CLOSE(orbr->max_time().pgs(), 102.0, 1e-6);
+  BOOST_CHECK(distance(*orbr->orbit_data(Time::time_pgs(100.0))->position_cf(),
+		       od1->position_geodetic()) < 10);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 
 BOOST_FIXTURE_TEST_SUITE(orbit_list_cache, GlobalFixture)
@@ -232,8 +247,10 @@ BOOST_FIXTURE_TEST_SUITE(orbit_list_cache, GlobalFixture)
 BOOST_AUTO_TEST_CASE(basic)
 {
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
-  boost::shared_ptr<Orbit> orb_underlying(new KeplerOrbit(t, t + 100.0));
-  boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(t, t + 100.0));
+  boost::shared_ptr<TimeTable>
+    tt = boost::make_shared<ConstantSpacingTimeTable>(t, t + 100.0);
+  boost::shared_ptr<Orbit> orb_underlying =
+    boost::make_shared<KeplerOrbit>(tt->min_time(), tt->max_time());
   OrbitListCache orb(orb_underlying, tt);
   BOOST_CHECK_CLOSE(orb.min_time().pgs(),
 		    orb_underlying->min_time().pgs(), 1e-6);
@@ -249,8 +266,10 @@ BOOST_AUTO_TEST_CASE(serialization)
   if(!have_serialize_supported())
     return;
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
-  boost::shared_ptr<Orbit> orb_underlying(new KeplerOrbit(t, t + 100.0));
-  boost::shared_ptr<TimeTable> tt(new ConstantSpacingTimeTable(t, t + 100.0));
+  boost::shared_ptr<TimeTable>
+    tt = boost::make_shared<ConstantSpacingTimeTable>(t, t + 100.0);
+  boost::shared_ptr<Orbit> orb_underlying =
+    boost::make_shared<KeplerOrbit>(tt->min_time(), tt->max_time());
   boost::shared_ptr<Orbit> orb(new OrbitListCache(orb_underlying, tt));
   std::string d = serialize_write_string(orb);
   if(false)

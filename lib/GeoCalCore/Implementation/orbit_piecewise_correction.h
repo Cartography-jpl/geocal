@@ -47,11 +47,7 @@ public:
 //-----------------------------------------------------------------------
   
   const boost::shared_ptr<PiecewiseLinear>& u_corr() const { return u_corr_; }
-protected:
-  virtual void notify_update()
-  {
-    notify_update_do(*this);
-  }
+  
   virtual boost::array<AutoDerivative<double>, 3 > 
   pcorr_with_derivative(const TimeWithDerivative& Tm, 
 			const CartesianFixed& Pos_uncorr) const;
@@ -65,6 +61,11 @@ protected:
   acorr(const Time& T) const
   { return boost::math::quaternion<double>(1,0,0,0); }
   OrbitPiecewiseCorrection() {}
+protected:
+  virtual void notify_update()
+  {
+    notify_update_do(*this);
+  }
 private:
   boost::shared_ptr<PiecewiseLinear> e_corr_, n_corr_, u_corr_;
   friend class boost::serialization::access;

@@ -50,11 +50,52 @@ public:
   const boost::shared_ptr<Datum> datum_ptr() const {return datum_;}
 
 //-----------------------------------------------------------------------
+/// We need special handling for maps that are crossing the
+/// dateline. For most projections this isn't an issue - we just pick
+/// one that doesn't do anything in particular crossing the dateline. 
+/// But for the special case of a Geodetic map projection, we flip
+/// signs so the point with longitude -180 is right next to 179.999.
+/// To handle this, we can change the map projection to work with a
+/// Geodetic360. This is really the same map projection, we just label
+/// the longitude differently.
+///
+/// Note this is a noop if the coordinate converter is already a
+/// Geodetic360Converter, and changes if it is a
+/// GeodeticConverter. Any other projection will cause an exception to
+/// be thrown.
+//-----------------------------------------------------------------------
+
+  virtual void change_to_geodetic360()
+  {
+    map_info_.change_to_geodetic360();
+  }
+
+//-----------------------------------------------------------------------
+/// Change back to -180 to 180
+//-----------------------------------------------------------------------
+
+  virtual void change_to_geodetic()
+  {
+    map_info_.change_to_geodetic();
+  }
+
+//-----------------------------------------------------------------------
+/// Simple test to see if we are Geodetic360, sometimes class need
+/// special handling for this
+//-----------------------------------------------------------------------
+
+  bool is_geodetic_360() const { return map_info_.is_geodetic_360(); }
+  
+//-----------------------------------------------------------------------
 /// MapInfo of underlying data.
 //-----------------------------------------------------------------------
 
   const MapInfo& map_info() const {return map_info_;}
 
+  virtual void height_range(const GroundCoordinate& Ulc,
+			      const GroundCoordinate& Lrc,
+			      double& Min_h, double& Max_h,
+			      double H_pad = 10.0) const;
   virtual double distance_to_surface(const GroundCoordinate& Gp) const;
   double height_datum(const GroundCoordinate& Gp) const;
   double height_datum(const Geodetic& Gp) const;
@@ -75,6 +116,34 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   surface_point(const GroundCoordinate& Gp) const;
   int naif_code() const {return naif_code_;}
+
+
+  double slope_riserun(int Y_index, int X_index) const;
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as a percentage.
+//-----------------------------------------------------------------------
+  double slope_percentage(int Y_index, int X_index) const
+  { return slope_riserun(Y_index, X_index) * 100.0; }
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as radians.
+//-----------------------------------------------------------------------
+  double slope_radian(int Y_index, int X_index) const
+  { return atan(slope_riserun(Y_index, X_index)); }
+
+//-----------------------------------------------------------------------
+/// Slope for the given point, as degrees.
+//-----------------------------------------------------------------------
+  double slope_degree(int Y_index, int X_index) const
+  { return slope_radian(Y_index, X_index) * Constant::rad_to_deg; }
+  double aspect(int Y_index, int X_index) const;
+  
+  void gradient(int Y_index, int X_index, double& dz_dx, double& dz_dy) const;
+  void slope_and_aspect(const GroundCoordinate& Gc,
+			double& Slope_deg, double& Aspect_deg) const;
+  void slope_and_aspect_nearest_neighbor(const GroundCoordinate& Gc,
+	 double& Slope_deg, double& Aspect_deg) const;
 protected:
 
 //-----------------------------------------------------------------------
@@ -106,8 +175,7 @@ protected:
   virtual double elevation(int Y_index, int X_index) const = 0;
 
   void initialize(const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-		  bool Outside_dem_is_error = false,
-		  int Naif_code = Geodetic::EARTH_NAIF_CODE);
+		  bool Outside_dem_is_error = false);
   friend class DemMapInfoOffset; // Allows this class access to the
 				 // protected member elevation.
   boost::shared_ptr<Datum> datum_; ///< Datum height is relative to.

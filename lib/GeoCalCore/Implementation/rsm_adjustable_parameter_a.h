@@ -53,7 +53,6 @@ public:
   void activate_image_correction();
   void activate_ground_rotation();
   void activate_ground_correction();
-
   virtual ArrayAd<double, 1> parameter_with_derivative() const;
   virtual void parameter_with_derivative(const ArrayAd<double, 1>& Parm);
   virtual std::vector<std::string> parameter_name() const;

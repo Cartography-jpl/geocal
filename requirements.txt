@@ -26,6 +26,11 @@ pytest-xdist
 pytest-cov
 ipython
 jupyter
+jupyterlab
+# Note we can live without this library, sometimes it is a bit involved to
+# install in conda. This is only used in the sba, and we take advantage of
+# this if available. But this only matters for large systems. Everything works
+# without having scikit-umfpack, just possibly slower.
 scikit-umfpack
 seaborn
 pandas
@@ -39,7 +44,4 @@ tabulate
 # ghp-import
 #
 # Not a strict requirement, but can't use the NITF code without this
-# pynitf
-# If we install our own pynitf, these packages are needed
-pytest-runner
-docopt
+pynitf

@@ -37,13 +37,14 @@ public:
   virtual std::string print_to_string() const;
   %python_attribute_with_set(coordinate_converter, boost::shared_ptr<CoordinateConverter>);
   %python_attribute_with_set(image_identifier, std::string);
-  %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(rsm_support_data_edition, std::string);
   %python_attribute_with_set(image_sequence_identifier, std::string);
   %python_attribute_with_set(sensor_identifier, std::string);
   %python_attribute_with_set(sensor_type, std::string);
   %python_attribute_with_set(image_acquistion_time, boost::shared_ptr<Time>);
   %python_attribute_with_set(timing, boost::shared_ptr<RsmIdTiming>);
   %python_attribute_with_set(ground_domain_vertex, std::vector<boost::shared_ptr<GroundCoordinate> >);
+  bool in_ground_domain(const GroundCoordinate& Gc) const;
   %python_attribute_with_set(ground_reference_point, boost::shared_ptr<GroundCoordinate>);
   %python_attribute_with_set(full_number_line, boost::optional<int>);
   %python_attribute_with_set(full_number_sample, boost::optional<int>);
@@ -59,4 +60,4 @@ public:
 };
 }
 // List of things "import *" will include
-%python_export("RsmId")
+%python_export("RsmId", "RsmIdTiming")

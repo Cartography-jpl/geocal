@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "vicar_file.h"
 #ifdef HAVE_GDAL
 #include "vicar_ogr.h"
@@ -465,6 +465,17 @@ bool VicarFile::has_rsm() const
 }
 
 //-----------------------------------------------------------------------
+/// Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE label
+/// in it, indicating it has GLAS/GFM information.
+//-----------------------------------------------------------------------
+
+bool VicarFile::has_igc_glas_gfm() const
+{
+  return (has_label("GEOTIFF GLAS_GFM_NITF_FILE") ||
+	  has_label("GEOTIFF GLAS_GFM_XML_FILE"));
+}
+
+//-----------------------------------------------------------------------
 /// Read metadata for MapInfo.
 //-----------------------------------------------------------------------
 
@@ -767,10 +778,8 @@ void VicarFile::rpc(const Rpc& V)
   else 
     throw Exception("Unrecognized rpc type");
   int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
-  if(V.coordinate_converter) {
-    std::cerr << "Setting naif_code\n";
+  if(V.coordinate_converter)
     naif_code = V.coordinate_converter->naif_code();
-  }
   if(naif_code != CoordinateConverter::EARTH_NAIF_CODE)
     label_set("NAIF_CODE", naif_code, "GEOTIFF");
   label_set("RPC_FIELD1", "1", "GEOTIFF");
@@ -836,9 +845,39 @@ boost::shared_ptr<Rsm> VicarFile::rsm() const
     fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
   boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
   if(has_label("GEOTIFF RSM_NITF_FILE"))
-    return rsm_read_nitf((dir / fname).string());
+    return rsm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
   return serialize_read<Rsm>((dir / fname).string());
+}
+
+//-----------------------------------------------------------------------
+/// Read metadata for GLAS/GFM. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<ImageGroundConnection> VicarFile::igc_glas_gfm() const
+{
+  std::string fname;
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    fname = label<std::string>("GLAS_GFM_NITF_FILE", "GEOTIFF");
+  else
+    fname = label<std::string>("GLAS_GFM_XML_FILE", "GEOTIFF");
+  boost::filesystem::path p(file_name());
+  boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    return glas_gfm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
+  return serialize_read<ImageGroundConnection>((dir / fname).string());
 }
 
 //-----------------------------------------------------------------------
@@ -884,10 +923,65 @@ void VicarFile::rsm(const boost::shared_ptr<Rsm>& V, rsm_file_type File_type)
   std::string fname = p.stem().string() + ext;
   if(File_type == RSM_NITF_FILE) {
     label_set("RSM_NITF_FILE", fname, "GEOTIFF");
+    if(V->naif_code() != CoordinateConverter::EARTH_NAIF_CODE)
+      label_set("NAIF_CODE", V->naif_code(), "GEOTIFF");
     rsm_write_nitf((dir / fname).string(), V);
   } else {
     label_set("RSM_XML_FILE", fname, "GEOTIFF");
     serialize_write((dir / fname).string(), V);
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Set metadata for GLAS/GFM. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+void VicarFile::igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc,
+			     glas_gfm_file_type File_type)
+{
+  std::string ext = ".xml";
+  if(File_type == GLAS_GFM_NITF_FILE) {
+    ext = ".ntf";
+#ifdef HAVE_VICAR_RTL
+    int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		       const_cast<char*>("GEOTIFF"), 
+		       const_cast<char*>("PROPERTY"), "GLAS_GFM_XML_FILE", NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status, "Call to zldel failed");
+#else
+    throw VicarNotAvailableException();
+#endif
+  } else {
+    ext = ".xml";
+#ifdef HAVE_VICAR_RTL
+    int status = zldel(unit(), const_cast<char*>("PROPERTY"),
+		       const_cast<char*>("GEOTIFF"), 
+		       const_cast<char*>("PROPERTY"), "GLAS_GFM_NITF_FILE", NULL);
+    if(status != 1 && status != CANNOT_FIND_KEY && status != NO_SUCH_PROPERTY)
+      throw VicarException(status, "Call to zldel failed");
+#else
+    throw VicarNotAvailableException();
+#endif
+  }
+  boost::filesystem::path p(file_name());
+  // Don't think VICAR file will every end with ".xml", but handle this
+  // since it is at least possible.
+  if(p.extension().string() == ext)
+    ext = ext + "2";
+  boost::filesystem::path dir = p.parent_path();
+  std::string fname = p.stem().string() + ext;
+  if(File_type == GLAS_GFM_NITF_FILE) {
+    label_set("GLAS_GFM_NITF_FILE", fname, "GEOTIFF");
+    if(Igc->naif_code() != CoordinateConverter::EARTH_NAIF_CODE)
+      label_set("NAIF_CODE", Igc->naif_code(), "GEOTIFF");
+    glas_gfm_write_nitf((dir / fname).string(), Igc);
+  } else {
+    label_set("GLAS_GFM_XML_FILE", fname, "GEOTIFF");
+    serialize_write((dir / fname).string(), Igc);
   }
 }
 

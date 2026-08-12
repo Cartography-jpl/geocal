@@ -3,6 +3,12 @@
 #include "geocal_exception.h"
 #include "printable.h"
 #include "auto_derivative_before_blitz.h"
+#if defined(__clang__)
+// For some reason, the configuration of blitz on the mac (1.0.2 from
+// conda-forge) doesn't have BZ_HAVE_IEEE_MATH defined. However, this
+// is actually true of clang. So set this, so we get blitz_isnan available.
+#define BZ_HAVE_IEEE_MATH 1
+#endif
 #include <blitz/array.h>
 #include <cmath>
 #include <boost/operators.hpp>

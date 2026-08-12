@@ -8,6 +8,8 @@
 
 %shared_ptr(GeoCal::GenericObject)
 namespace GeoCal {
+std::string geocal_version();
+  
 class GenericObject {
 public:
   virtual ~GenericObject();
@@ -27,4 +29,4 @@ public:
 }
 
 // List of things "import *" will include
-%python_export("GenericObject")
+%python_export("GenericObject", "geocal_version")

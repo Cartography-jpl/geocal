@@ -9,15 +9,16 @@ import subprocess
 import os
 import logging
 
-version = "September 26, 2019"
+version = "September 14, 2020"
 usage='''Usage:
   rsm_tiepoint [options] <image> <dem_file> <reference_image> <output>
   rsm_tiepoint -h | --help
   rsm_tiepoint -v | --version
 
-rsm_tiepoint takes a VICAR file with a RSM and projects it to the surface, and
-then collects tiepoints. By default the projected image is the base image
-name with "_proj" added. But you can specify any name you would like.
+rsm_tiepoint takes a VICAR file with a RSM or GLAS/GFM and projects it to 
+the surface, and then collects tiepoints. By default the projected image 
+is the base image name with "_proj" added. But you can specify any name 
+you would like.
 
 The image and reference_image should be VICAR files. The dem_file should be
 the output of shelve_dem (e.g., a ".xml" file).
@@ -83,11 +84,18 @@ Options:
        points will be redone.
        [default: 36]   
 
+  --search=d
+       Search window to use in matching. [default: -1]
+
   --seed=d
        Number that controls the positions of the first FFT match
        points. Use a different number if the first image matching
        points result in poor registration accuracy.
        [default: 562]
+
+  --skip-projection
+       Assume the _proj file is already present. Useful for running 
+       rsm_tiepoint repeatedly with different fitting parameters.
    
   --thr-res=f
        Prevent offset correlations further than this value from the
@@ -116,6 +124,7 @@ long_name_to_vicar = { "image" : "img",
 		       "proj_file_name" : "pname",
                        "process_number_line" : "pline",
                        "process_number_sample" : "psamp",
+                       "skip_projection" : "skproj",
                        "verbose" : "verbose"
                        }
 
@@ -141,23 +150,30 @@ proj_fname = os.path.splitext(os.path.basename(args.image))[0] + "_proj.img"
 if(args.proj_file_name):
     proj_fname = args.proj_file_name
 cmd.append(proj_fname)
-subprocess.run(cmd, check=True)
-
+if(not args.skip_projection):
+    subprocess.run(cmd, check=True)
 
 dem = geocal.read_shelve(args.dem_file)
 if(geocal.VicarLiteFile.is_vicar_file(args.image)):
     img = geocal.VicarLiteRasterImage(args.image)
-    rsm = img.rsm
 else:
     img = geocal.GdalRasterImage(args.image)
-    rsm = geocal.read_shelve(os.path.splitext(args.image)[0] + ".rsm.xml")
-igc = geocal.RsmImageGroundConnection(rsm, dem, img, "RSM Image")
+
+if(img.has_igc_glas_gfm):
+    igc = img.igc_glas_gfm
+    igc.image = img
+elif(img.has_rsm):
+    igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+else:
+    raise RuntimeError("Image %s doesn't have GLAS or RSM" % args.image)
+    
 igccol = geocal.IgcArray([igc,])
 tpcollect = geocal.TiePointCollectPicmtch(igccol, [proj_fname,],
                             ref_image_fname=args.reference_image,
                             fftsize=args.fftsize, magnify=args.magnify,
                             magmin=args.magmin, toler=args.toler,
                             redo=args.redo,
+                            search = None if args.search < 0 else args.search,
                             ffthalf=2, seed=args.seed, autofit=args.autofit,
                             thr_res=args.thr_res, quiet = not args.verbose)
 tpcol = tpcollect.tie_point_grid(eval(str(args.fftgrid))[0],

@@ -42,6 +42,9 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample) = 0;
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample);
   static blitz::Array<double, 4> generate_data
   (const ImageGroundConnection& Igc,
    const CoordinateConverter& Cconv,
@@ -49,6 +52,8 @@ public:
    double Min_y, double Max_y,
    double Min_z, double Max_z,
    int Numx, int Numy, int Numz);
+  void set_z_range(double Z_min, double Z_max);
+  bool check_zero_crossing(double Grid_spacing = 0.01) const;
   %python_attribute(min_line, int);
   %python_attribute(max_line, int);
   %python_attribute(min_sample, int);
@@ -60,7 +65,7 @@ public:
   %python_attribute(min_z, double);
   %python_attribute(max_z, double);
   %python_attribute_with_set(image_identifier, std::string);
-  %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(rsm_support_data_edition, std::string);
   %python_attribute_with_set(row_section_number, int)
   %python_attribute_with_set(col_section_number, int)
   %pickle_serialization()

@@ -87,12 +87,23 @@ BOOST_AUTO_TEST_CASE(solar_angle)
 		    0.1);
   BOOST_CHECK_CLOSE(ln.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg, 
 		    0.1);
+  CartesianFixedLookVector lv2(Ecr::sub_body_point(Ecr::SUN_NAIF_CODE, t).position);
+  LnLookVector ln2(lv2, p);
+  // The results are from an old unit test in MSPI code. We don't
+  // expect this to exactly match because the MSPI code used the SDP
+  // toolkit. But should be close.
+  BOOST_CHECK_CLOSE(ln2.view_zenith(), 9.06966388e-01 * Constant::rad_to_deg, 
+		    0.1);
+  BOOST_CHECK_CLOSE(ln2.view_azimuth(), 4.87556601e+00 * Constant::rad_to_deg, 
+		    0.1);
 }
 
 BOOST_AUTO_TEST_CASE(solar_distance)
 {
   Time t = Time::parse_time("2010-10-07T19:11:24.500000Z");
   BOOST_CHECK_CLOSE(Ecr::solar_distance(t), 0.99938745098726067, 1e-4);
+  BOOST_CHECK_CLOSE(Ecr::body_distance(Ecr::SUN_NAIF_CODE, t),
+		    0.99938745098726067, 1e-4);
 }
 
 BOOST_AUTO_TEST_CASE(geodetic)

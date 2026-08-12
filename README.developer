@@ -5,9 +5,9 @@ pluses, but one minus is you can't directly debug the program. However,
 libtool has a special mode that is designed for debugging. To use, do
 for example:
 
-./configure --enable-maintainer-mode --enable-debug
-make check
-./libtool --mode=execute gdb --annotate=3 lib/test_all
+    ./configure --enable-maintainer-mode --enable-debug
+    make check
+    ./libtool --mode=execute gdb --annotate=3 lib/test_all
 
 Note that we use --enable-debug when compiling. By default the build is
 optimized, which isn't good for using in a debugger. With --enable-debug we
@@ -20,14 +20,55 @@ then note that you can run a single test by specifying it on the command line
 using --run_test. This can also take wildcards, if you want to run a set of 
 tests:
 
-lib/test_all --run_test=image_coordinate
-  (runs a suite)
-lib/test_all --run_test=image_coordinate/basic_test
-  (runs a single test)
+    lib/test_all --run_test=image_coordinate
+    (runs a suite)
+    lib/test_all --run_test=image_coordinate/basic_test
+    (runs a single test)
 
 Consult the boost test documentation for other options that can be set
 (see
 http://beta.boost.org/doc/libs/1_37_0/libs/test/doc/html/utf/user-guide/runtime-config/reference.html)
+
+Virtual environment
+===================
+If you are working with pynitf, it is not uncommon to want to use a newer version
+of pynitf with geocal.
+
+If you are using something like a conda environment, often the cleanest thing
+is to just uninstall pynitf and then install a development version from the
+source you are working with (e.g, pip install -e <path to pynitf source>).
+
+However if you are using something like an afids_support directory, it is
+hard to get python to look at the new version of pynitf. What I've found
+works best to create a virtual environment. This can be done by:
+
+    python -m venv <geocal install dir> --system-site-packages
+    soure activate <geocal install dir>/bin/activate
+    pip install pytest --force-reinstall
+    pip install -e <path to pynitf-repo>
+
+Note the "pytest" is a bit of a "gotcha". Without this, the system pytest gets
+used which points to the original (i.e., not venv) python. This means that 
+without this pytests will mysteriously fail. If you reinstall pytest, then it
+gets installed in the virtual environment and points there.
+
+If you have a setup_geocal.sh script, you can add the activate call to get things
+pointed to the write place.
+
+A useful thing to support this is to add a "python_ldd" function to bash, which
+tells you where python is loading a module from. You can add the following
+to your .bashrc:
+
+    # Simple function to find where python is loading a module from
+    python_ldd()
+    {
+       python -c "import $1 as m; import os; print(os.path.dirname(m.__file__))"
+    }
+
+And then using it:
+
+    pistol% python_ldd geocal
+    /data/smyth/Temp/miniconda3/envs/test-env/lib/python3.8/site-packages/geocal
 
 Developement options
 ====================

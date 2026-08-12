@@ -4,7 +4,6 @@
 #include "gdal_multi_band.h"
 #include "sub_raster_image.h"
 #include "simple_dem.h"
-#include <boost/progress.hpp>
 
 using namespace GeoCal;
 using namespace blitz;
@@ -97,11 +96,9 @@ BOOST_AUTO_TEST_CASE(timing)
   int count = 0;
   for(RasterImageTileIterator i(ps.raster_image(0)); !i.end(); ++i)
     ++count;
-  boost::progress_display disp(count);
   for(RasterImageTileIterator i(ps.raster_image(0)); !i.end(); ++i) {
     Array<double, 3> d(ps.read_double(i.istart(), i.jstart(), 
 				      i.number_line(), i.number_sample()));
-    disp += 1;
   }
 }
 

@@ -39,6 +39,7 @@ public:
   void activate_image_correction();
   void activate_ground_rotation();
   void activate_ground_correction();
+  %python_attribute(parameter_name, std::vector<std::string>);
   %python_attribute_with_set(coordinate_converter, boost::shared_ptr<LocalRcConverter>);
   %pickle_serialization()
 };

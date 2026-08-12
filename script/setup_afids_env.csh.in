@@ -7,4 +7,4 @@ unset PYTHONPATH
 setenv AFIDSPYTHONTOP @prefix@
 source @AFIDS_PREFIX@/setup_afids_env.csh
 setenv TAE_PATH @prefix@/afids/vdev:${TAE_PATH}
-setenv PATH @prefix@/bin:@prefix@/afids/vdev:${PATH}
+setenv PATH @prefix@/bin:${PATH}

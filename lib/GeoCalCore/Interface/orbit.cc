@@ -4,6 +4,7 @@
 #include "geocal_gsl_root.h"
 #include "constant.h"
 #include "geocal_serialize_support.h"
+#include "simple_dem.h"
 #include <blitz/array.h>
 #include <cmath>
 
@@ -12,13 +13,13 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void OrbitData::serialize(Archive & ar, const unsigned int version)
+void OrbitData::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(OrbitData);
 }
 
 template<class Archive>
-void Orbit::serialize(Archive & ar, const unsigned int version)
+void Orbit::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Orbit);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -27,7 +28,7 @@ void Orbit::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void KeplerOrbit::serialize(Archive & ar, const unsigned int version)
+void KeplerOrbit::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
     & GEOCAL_NVP_(epoch) & GEOCAL_NVP_(a) & GEOCAL_NVP_(ap)
@@ -36,7 +37,7 @@ void KeplerOrbit::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void QuaternionOrbitData::serialize(Archive & ar, const unsigned int version)
+void QuaternionOrbitData::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(OrbitData);
   GEOCAL_BASE(QuaternionOrbitData, OrbitData);
@@ -89,14 +90,29 @@ OrbitData::footprint(const Camera& C, const Dem& D,
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<CartesianFixed>
-OrbitData::surface_intersect(const Camera& C, 
-		  const FrameCoordinate& Fc,
-		  const Dem& D,
-	          double Resolution,
-		  int Band, double Max_height) const
+OrbitData::surface_intersect
+(const Camera& C, 
+ const FrameCoordinate& Fc,
+ const Dem& D,
+ double Resolution,
+ int Band, double Max_height,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  return D.intersect(*position_cf(), cf_look_vector(C.sc_look_vector(Fc, Band)),
-		     Resolution, Max_height);
+  bool include_aberration = (Vabb ? false : true);
+  auto gc_uncorr = D.intersect(*position_cf(),
+		cf_look_vector(C.sc_look_vector(Fc, Band), include_aberration),
+		Resolution, Max_height);
+  if(Vabb) {
+    CartesianFixedLookVector lv_vabb = Vabb->
+      velocity_aberration_apply(*position_cf(), *gc_uncorr, velocity_cf());
+    gc_uncorr = D.intersect(*position_cf(), lv_vabb, Resolution, Max_height);
+  }
+  if(!Ref)
+    return gc_uncorr;
+  CartesianFixedLookVector lv = 
+    Ref->refraction_apply(*position_cf(), *gc_uncorr);
+  return D.intersect(*position_cf(), lv, Resolution, Max_height);
 }
 
 
@@ -143,15 +159,13 @@ double OrbitData::resolution_meter(const Camera& C, const FrameCoordinate& Fc,
 /// is seen.
 //-----------------------------------------------------------------------
 
-FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate& Gc, 
-				 const Camera& C, int Band) const
+FrameCoordinate OrbitData::frame_coordinate
+(const GroundCoordinate& Gc, 
+ const Camera& C, int Band,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  boost::shared_ptr<CartesianFixed> p1 = position_cf();
-  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
-  CartesianFixedLookVector lv;
-  for(int i = 0; i < 3; ++i)
-    lv.look_vector[i] = p2->position[i] - p1->position[i];
-  ScLookVector sl = sc_look_vector(lv);
+  ScLookVector sl = sc_look_vector(*Gc.convert_to_cf(), Ref, Vabb);
   return C.frame_coordinate(sl, Band);
 }
 
@@ -163,14 +177,12 @@ FrameCoordinate OrbitData::frame_coordinate(const GroundCoordinate& Gc,
 
 FrameCoordinateWithDerivative 
 OrbitData::frame_coordinate_with_derivative
-(const GroundCoordinate& Gc, const Camera& C, int Band) const
+(const GroundCoordinate& Gc, const Camera& C, int Band,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
-  boost::array<AutoDerivative<double>, 3> p1 = position_cf_with_derivative();
-  boost::shared_ptr<CartesianFixed> p2 = Gc.convert_to_cf();
-  CartesianFixedLookVectorWithDerivative lv;
-  for(int i = 0; i < 3; ++i)
-    lv.look_vector[i] = p2->position[i] - p1[i];
-  ScLookVectorWithDerivative sl = sc_look_vector(lv);
+  ScLookVectorWithDerivative sl = sc_look_vector_with_derivative
+    (*Gc.convert_to_cf(), Ref, Vabb);
   return C.frame_coordinate_with_derivative(sl, Band);
 }
 
@@ -181,13 +193,28 @@ OrbitData::frame_coordinate_with_derivative
 //-----------------------------------------------------------------------
 
 boost::shared_ptr<CartesianFixed> 
-OrbitData::reference_surface_intersect_approximate(const Camera& C, 
-   const FrameCoordinate& Fc, int Band, double Height_reference_surface) const
+OrbitData::reference_surface_intersect_approximate
+(const Camera& C, 
+ const FrameCoordinate& Fc, int Band, double Height_reference_surface,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
 {
+  bool include_aberration = (Vabb ? false : true);
   ScLookVector sl = C.sc_look_vector(Fc, Band);
-  CartesianFixedLookVector lv = cf_look_vector(sl);
-  return position_cf()->reference_surface_intersect_approximate(lv, 
+  CartesianFixedLookVector lv = cf_look_vector(sl, include_aberration);
+  auto gc_uncorr = position_cf()->reference_surface_intersect_approximate(lv, 
          Height_reference_surface);
+  if(Vabb) {
+    CartesianFixedLookVector lv_vabb = Vabb->
+      velocity_aberration_apply(*position_cf(), *gc_uncorr, velocity_cf());
+    gc_uncorr = position_cf()->reference_surface_intersect_approximate(lv_vabb,
+       Height_reference_surface);
+  }
+  if(!Ref)
+    return gc_uncorr;
+  lv = Ref->refraction_apply(*position_cf(), *gc_uncorr);
+  return position_cf()->reference_surface_intersect_approximate(lv,
+       Height_reference_surface);
 }
 
 //-----------------------------------------------------------------------
@@ -866,16 +893,19 @@ void QuaternionOrbitData::initialize
 //-----------------------------------------------------------------------
 
 CartesianInertialLookVector 
-QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
+QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl,
+				    bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  CartesianInertialLookVector res;
-  double k = Sl.length() / Constant::speed_of_light;
   fill_in_ci_to_cf();
   boost::math::quaternion<double> ci = 
-    conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf() - k * vel_ci;
-  res.look_quaternion(ci);
-  return res;
+    conj(ci_to_cf()) * sc_to_cf_ * Sl.look_quaternion() * conj(sc_to_cf_) * ci_to_cf();
+  if(Include_velocity_aberration) {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    double k = Sl.length() / Constant::speed_of_light;
+    ci -= k * vel_ci;
+  }
+  return CartesianInertialLookVector(ci);
 }
 
 //-----------------------------------------------------------------------
@@ -883,19 +913,21 @@ QuaternionOrbitData::ci_look_vector(const ScLookVector& Sl) const
 //-----------------------------------------------------------------------
 
 CartesianInertialLookVectorWithDerivative 
-QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
+QuaternionOrbitData::ci_look_vector
+(const ScLookVectorWithDerivative& Sl, bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  CartesianInertialLookVectorWithDerivative res;
-  AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
   fill_in_ci_to_cf();
   boost::math::quaternion<AutoDerivative<double> > ci = 
     conj(ci_to_cf_with_derivative()) * 
     sc_to_cf_with_der * Sl.look_quaternion() * conj(sc_to_cf_with_der)
-    * ci_to_cf_with_derivative()
-    - k * vel_ci_with_der;
-  res.look_quaternion(ci);
-  return res;
+    * ci_to_cf_with_derivative();
+  if(Include_velocity_aberration) {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+    ci -= k * vel_ci_with_der;
+  }
+  return CartesianInertialLookVectorWithDerivative(ci);
 }
 
 //-----------------------------------------------------------------------
@@ -903,19 +935,18 @@ QuaternionOrbitData::ci_look_vector(const ScLookVectorWithDerivative& Sl) const
 //-----------------------------------------------------------------------
 
 CartesianFixedLookVector
-QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
+QuaternionOrbitData::cf_look_vector
+(const ScLookVector& Sl, bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  CartesianFixedLookVector res;
-  // Note that we ignore the motion of the earth here in the
-  // aberration correctoin. I think we
-  // really should be using vel_ci_with_der, but the difference is
-  // really pretty small
-  double k = Sl.length() / Constant::speed_of_light;
   boost::math::quaternion<double> cf = sc_to_cf_ * Sl.look_quaternion() * 
-    conj(sc_to_cf_) - k * vel_cf;
-  res.look_quaternion(cf);
-  return res;
+    conj(sc_to_cf_);
+  if(Include_velocity_aberration) {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    double k = Sl.length() / Constant::speed_of_light;
+    cf -= k * vel_cf;
+  }
+  return CartesianFixedLookVector(cf);
 }
 
 //-----------------------------------------------------------------------
@@ -923,20 +954,70 @@ QuaternionOrbitData::cf_look_vector(const ScLookVector& Sl) const
 //-----------------------------------------------------------------------
 
 CartesianFixedLookVectorWithDerivative
-QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
+QuaternionOrbitData::cf_look_vector
+(const ScLookVectorWithDerivative& Sl, bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  CartesianFixedLookVectorWithDerivative res;
-  // Note that we ignore the motion of the earth here in the
-  // aberration correctoin. I think we
-  // really should be using vel_ci_with_der, but the difference is
-  // really pretty small
-  AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
   boost::math::quaternion<AutoDerivative<double> > cf = 
     sc_to_cf_with_der * Sl.look_quaternion() * 
-    conj(sc_to_cf_with_der) - k * vel_cf_with_der;
-  res.look_quaternion(cf);
-  return res;
+    conj(sc_to_cf_with_der);
+  if(Include_velocity_aberration) {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    AutoDerivative<double> k = Sl.length() / Constant::speed_of_light;
+    cf -= k * vel_cf_with_der;
+  }
+  return CartesianFixedLookVectorWithDerivative(cf);
+}
+
+//-----------------------------------------------------------------------
+/// Find the ScLookVector that sees a given point.
+//-----------------------------------------------------------------------
+
+ScLookVector
+QuaternionOrbitData::sc_look_vector
+(const CartesianFixed& Gc,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
+{
+  // TODO add VelocityAberration
+  CartesianFixedLookVector lv;
+  if(Ref) {
+    lv = Ref->refraction_reverse(*position_cf(), Gc);
+  } else {
+    boost::array<double, 3> p1 = Gc.position;
+    boost::array<double, 3> p2 = position_cf()->position;
+    lv.look_vector[0] = p1[0] - p2[0];
+    lv.look_vector[1] = p1[1] - p2[1];
+    lv.look_vector[2] = p1[2] - p2[2];
+  }
+  return sc_look_vector(lv);
+}
+
+//-----------------------------------------------------------------------
+/// Find the ScLookVector that sees a given point.
+//-----------------------------------------------------------------------
+
+ScLookVectorWithDerivative
+QuaternionOrbitData::sc_look_vector_with_derivative
+(const CartesianFixed& Gc,
+ const boost::shared_ptr<Refraction>& Ref,
+ const boost::shared_ptr<VelocityAberration>& Vabb) const
+{
+  // TODO add refraction and VelocityAberration
+  boost::array<double, 3> p1 = Gc.position;
+  boost::array<AutoDerivative<double>, 3> p2 = position_cf_with_derivative();
+  if(Ref) {
+    auto gc_uncorr =
+      SimpleDem().intersect(*position_cf(),
+			    Ref->refraction_reverse(*position_cf(), Gc),
+			    1);
+    p1 = gc_uncorr->position;
+  }
+  CartesianFixedLookVectorWithDerivative lv;
+  lv.look_vector[0] = p1[0] - p2[0];
+  lv.look_vector[1] = p1[1] - p2[1];
+  lv.look_vector[2] = p1[2] - p2[2];
+  return sc_look_vector(lv);
 }
 
 //-----------------------------------------------------------------------
@@ -944,17 +1025,23 @@ QuaternionOrbitData::cf_look_vector(const ScLookVectorWithDerivative& Sl) const
 //-----------------------------------------------------------------------
 
 ScLookVector 
-QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVector& Ci) 
-const
+QuaternionOrbitData::sc_look_vector
+(const CartesianInertialLookVector& Ci, bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  ScLookVector res;
-  double k = Ci.length() / Constant::speed_of_light;
-  boost::math::quaternion<double> sc =
-    conj(sc_to_cf_) * (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf()) + 
-		      k * vel_cf) * sc_to_cf_;
-  res.look_quaternion(sc);
-  return res;
+  boost::math::quaternion<double> sc;
+  if(!Include_velocity_aberration) {
+    sc = conj(sc_to_cf_) *
+      (ci_to_cf() * Ci.look_quaternion() * conj(ci_to_cf())) * sc_to_cf_;
+  } else {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    fill_in_ci_to_cf();
+    double k = Ci.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_) *
+      (ci_to_cf() * (Ci.look_quaternion() + k * vel_ci) * conj(ci_to_cf())) *
+      sc_to_cf_;
+  }
+  return ScLookVector(sc);
 }
 
 //-----------------------------------------------------------------------
@@ -962,35 +1049,42 @@ const
 //-----------------------------------------------------------------------
 
 ScLookVectorWithDerivative 
-QuaternionOrbitData::sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) 
+QuaternionOrbitData::sc_look_vector
+(const CartesianInertialLookVectorWithDerivative& Ci, bool Include_velocity_aberration) 
 const
 {
-  // Do abberation of light correction.
-  ScLookVectorWithDerivative res;
-  AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
-  boost::math::quaternion<AutoDerivative<double> > sc =
-    conj(sc_to_cf_with_der) * 
-    (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative()) + 
-     k * vel_cf_with_der) * sc_to_cf_with_der;
-  res.look_quaternion(sc);
-  return res;
+  boost::math::quaternion<AutoDerivative<double> > sc;
+  if(!Include_velocity_aberration) {
+    sc = conj(sc_to_cf_with_der) * 
+      (ci_to_cf_with_derivative() * Ci.look_quaternion() * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
+  } else {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    fill_in_ci_to_cf();
+    AutoDerivative<double> k = Ci.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_with_der) * 
+      (ci_to_cf_with_derivative() * (Ci.look_quaternion() + k * vel_ci_with_der) * conj(ci_to_cf_with_derivative())) * sc_to_cf_with_der;
+  }
+  return ScLookVectorWithDerivative(sc);
 }
 
 //-----------------------------------------------------------------------
 /// Convert to ScLookVector.
 //-----------------------------------------------------------------------
 
-ScLookVector 
-QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVector& Cf) 
-const
+ScLookVector QuaternionOrbitData::sc_look_vector
+(const CartesianFixedLookVector& Cf, bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  ScLookVector res;
-  double k = Cf.length() / Constant::speed_of_light;
-  boost::math::quaternion<double> sc =
-    conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
-  res.look_quaternion(sc);
-  return res;
+  boost::math::quaternion<double> sc;
+  if(!Include_velocity_aberration) {
+    sc = conj(sc_to_cf_) * (Cf.look_quaternion()) * sc_to_cf_;
+  } else {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    double k = Cf.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_) * (Cf.look_quaternion() + k * vel_cf) * sc_to_cf_;
+  }
+  return ScLookVector(sc);
 }
 
 //-----------------------------------------------------------------------
@@ -998,17 +1092,21 @@ const
 //-----------------------------------------------------------------------
 
 ScLookVectorWithDerivative 
-QuaternionOrbitData::sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) 
-const
+QuaternionOrbitData::sc_look_vector
+(const CartesianFixedLookVectorWithDerivative& Cf,
+ bool Include_velocity_aberration) const
 {
-  // Do abberation of light correction.
-  ScLookVectorWithDerivative res;
-  AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
-  boost::math::quaternion<AutoDerivative<double> > sc =
-    conj(sc_to_cf_with_der) * (Cf.look_quaternion() + k * vel_cf_with_der) * 
-    sc_to_cf_with_der;
-  res.look_quaternion(sc);
-  return res;
+  boost::math::quaternion<AutoDerivative<double> > sc;
+  if(!Include_velocity_aberration) {
+    sc = conj(sc_to_cf_with_der) * (Cf.look_quaternion()) * sc_to_cf_with_der;
+  } else {
+    // Do aberration of light correction. See comment in front of
+    // QuaternionOrbitData for discussion of the approximation used here.
+    AutoDerivative<double> k = Cf.length() / Constant::speed_of_light;
+    sc = conj(sc_to_cf_with_der) *
+      (Cf.look_quaternion() + k * vel_cf_with_der) * sc_to_cf_with_der;
+  }
+  return ScLookVectorWithDerivative(sc);
 }
 
 //-----------------------------------------------------------------------

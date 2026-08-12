@@ -9,6 +9,7 @@
 %base_import(generic_object)
 %base_import(ground_coordinate)
 %base_import(coordinate_converter)
+%base_import(dem)
 %import "image_ground_connection.i"
 %import "array_ad.i"
 %import "auto_derivative.i"
@@ -16,13 +17,17 @@
 %geocal_shared_ptr(GeoCal::LocalRcParameter);
 %geocal_shared_ptr(GeoCal::LocalRectangularCoordinate);
 %geocal_shared_ptr(GeoCal::LocalRcConverter);
+%geocal_shared_ptr(GeoCal::LocalZDem);
 
 namespace GeoCal {
 class LocalRcParameter : public GenericObject {
 public:
+  enum CoordinateCreation {FOLLOW_SAMPLE_LOCAL, FOLLOW_LINE_LOCAL,
+    FOLLOW_SAMPLE_FULL, FOLLOW_LINE_FULL};
   LocalRcParameter();
   LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0,
-		   double Line = -1, double Sample = -1);
+		   double Line = -1, double Sample = -1,
+		   CoordinateCreation C = FOLLOW_SAMPLE_LOCAL);
   static void check_rc_assumption
   (const ImageGroundConnection& Igc, double Height = 0);
   std::string print_to_string() const;
@@ -59,9 +64,23 @@ public:
   %python_attribute(parameter, boost::shared_ptr<LocalRcParameter>);
   %pickle_serialization();
 };
+
+class LocalZDem : public Dem {
+public:
+  LocalZDem(const boost::shared_ptr<LocalRcConverter>& Cconv,
+	    int Z);
+  virtual double distance_to_surface(const GroundCoordinate& Gp) const;
+  virtual double height_reference_surface(const GroundCoordinate& Gp) 
+    const;
+  virtual boost::shared_ptr<GroundCoordinate> 
+  surface_point(const GroundCoordinate& Gp) const;
+  %python_attribute(z, double);
+  %python_attribute(coordinate_converter, boost::shared_ptr<LocalRcConverter>);
+  %pickle_serialization();
+};
   
 }
 
 // List of things "import *" will include
-%python_export("LocalRcParameter", "LocalRectangularCoordinate", "LocalRcConverter")
+%python_export("LocalRcParameter", "LocalRectangularCoordinate", "LocalRcConverter", "LocalZDem")
 

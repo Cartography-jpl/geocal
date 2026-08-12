@@ -7,7 +7,7 @@ using namespace blitz;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void CcorrMatcher::serialize(Archive & ar, const unsigned int version)
+void CcorrMatcher::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageMatcher);
   GEOCAL_BASE(CcorrMatcher, ImageMatcher);

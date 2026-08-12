@@ -838,7 +838,7 @@ private:
 				return;
 			}
 
-		assert(NULL && "should not get here");
+		assert(false && "should not get here");
 	}
 
 

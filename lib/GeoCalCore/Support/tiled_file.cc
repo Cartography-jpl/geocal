@@ -5,7 +5,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<std::size_t D> template<class Archive>
-void TiledFileBase<D>::save(Archive& ar, const unsigned int version) const
+void TiledFileBase<D>::save(Archive& ar, const unsigned int UNUSED(version)) const
 {
   GEOCAL_GENERIC_BASE(TiledFileBase<D>);
   ar & GEOCAL_NVP_(size)
@@ -14,7 +14,7 @@ void TiledFileBase<D>::save(Archive& ar, const unsigned int version) const
 }
 
 template<std::size_t D> template<class Archive>
-void TiledFileBase<D>::load(Archive& ar, const unsigned int version)
+void TiledFileBase<D>::load(Archive& ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(TiledFileBase<D>);
   ar & GEOCAL_NVP_(size)
@@ -24,7 +24,7 @@ void TiledFileBase<D>::load(Archive& ar, const unsigned int version)
 }
 
 template<class T, std::size_t D> template<class Archive>
-void TiledFile<T, D>::save(Archive& ar, const unsigned int version) const
+void TiledFile<T, D>::save(Archive& ar, const unsigned int UNUSED(version)) const
 {
   // Note this other form seems to be required. Not sure exactly why,
   // but some template thing or other.
@@ -33,7 +33,7 @@ void TiledFile<T, D>::save(Archive& ar, const unsigned int version) const
 }
 
 template<class T, std::size_t D> template<class Archive>
-void TiledFile<T, D>::load(Archive& ar, const unsigned int version)
+void TiledFile<T, D>::load(Archive& ar, const unsigned int UNUSED(version))
 {
   // Note this other form seems to be required. Not sure exactly why,
   // but some template thing or other.

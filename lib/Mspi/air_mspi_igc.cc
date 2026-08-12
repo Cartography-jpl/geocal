@@ -151,7 +151,7 @@ AirMspiIgc::AirMspiIgc
 
 void AirMspiIgc::band(int B) 
 { 
-  ipi_ptr()->band(B);
+  ipi()->band(B);
   int rind = 
     time_table()->l1b1_file()->row_number_to_row_index(camera()->row_number(B));
   time_table()->l1b1_file()->row_index_to_use(rind);

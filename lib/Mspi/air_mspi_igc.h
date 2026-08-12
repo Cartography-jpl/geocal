@@ -41,7 +41,7 @@ public:
 /// Return band number.
 //-----------------------------------------------------------------------
 
-  int band() const {return ipi().band();}
+  int band() const {return ipi()->band();}
   void band(int B);
 
 //-----------------------------------------------------------------------
@@ -49,7 +49,7 @@ public:
 //-----------------------------------------------------------------------
 
   boost::shared_ptr<MspiCamera> camera() const
-  { return boost::dynamic_pointer_cast<MspiCamera>(ipi().camera_ptr()); }
+  { return boost::dynamic_pointer_cast<MspiCamera>(ipi()->camera()); }
 
 //-----------------------------------------------------------------------
 /// Gimbal we are using.
@@ -64,7 +64,7 @@ public:
 
   boost::shared_ptr<Orbit> orbit() const
   {
-    return ipi().orbit_ptr();
+    return ipi()->orbit();
   }
 
 //-----------------------------------------------------------------------
@@ -73,7 +73,7 @@ public:
 
   boost::shared_ptr<AirMspiTimeTable> time_table() const
   {
-    return boost::dynamic_pointer_cast<AirMspiTimeTable>(ipi().time_table_ptr());
+    return boost::dynamic_pointer_cast<AirMspiTimeTable>(ipi()->time_table());
   }
 
 //-----------------------------------------------------------------------

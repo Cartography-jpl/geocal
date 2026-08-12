@@ -31,11 +31,11 @@ public:
 
   virtual ~ConstantRasterImage() {}
 
-  virtual int unchecked_read(int Line, int Sample) const
+  virtual int unchecked_read(int UNUSED(Line), int UNUSED(Sample)) const
   {
     return data_;
   }
-  virtual double unchecked_read_double(int Line, int Sample) const
+  virtual double unchecked_read_double(int UNUSED(Line), int UNUSED(Sample)) const
   {
     return (double) data_;
   }
@@ -48,11 +48,11 @@ public:
       for(int j = Sstart; j < Sstart + Number_sample; ++j, ++Res)
 	*Res = data_;
   }
-  virtual void unchecked_write(int Line, int Sample, int Val)
+  virtual void unchecked_write(int UNUSED(Line), int UNUSED(Sample), int UNUSED(Val))
   {
     throw Exception("Not implemented");
   }
-  virtual void unchecked_write(int Line, int Sample, double Val)
+  virtual void unchecked_write(int UNUSED(Line), int UNUSED(Sample), double UNUSED(Val))
   {
     throw Exception("Not implemented");
   }

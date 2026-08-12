@@ -2,6 +2,7 @@
 #include "geocal_serialize_support.h"
 #include "ostream_pad.h"
 #include <boost/foreach.hpp>
+#include <boost/make_shared.hpp>
 
 using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
@@ -26,7 +27,21 @@ void OrbitListCache::serialize(Archive & ar, const unsigned int version)
   boost::serialization::split_member(ar, *this, version);
 }
 
+// Note, derived classes likely do *not* want to call this
+// serialization method. However, it is useful to have this defined
+// since quick and dirty python code may want to use a
+// OrbitQuaternionList to generate an orbit from some other data
+// source (e.g., CSV file), and then be able to save it.
+
+template<class Archive>
+void OrbitQuaternionList::serialize(Archive & ar, const unsigned int version)
+{
+  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
+    & GEOCAL_NVP(orbit_data_map);
+}
+
 GEOCAL_IMPLEMENT(OrbitListCache);
+GEOCAL_IMPLEMENT(OrbitQuaternionList);
 #endif
 
 //-----------------------------------------------------------------------
@@ -42,12 +57,15 @@ void OrbitQuaternionList::interpolate_or_extrapolate_data
 {
   range_check_inclusive(T, min_time(), max_time());
   time_map::iterator i = orbit_data_map.lower_bound(T);
-  check_lazy_evaluation(i);
-  // Special handling if we are looking at the very first point
-  if(i == orbit_data_map.begin() && i->first - T == 0.0) {
+  // Special handling if we are looking past the last point. We
+  // use the final two points to extrapolate.
+  if(i == orbit_data_map.end())
+    --i;
+  // Special handling if we are looking at the very first point. We
+  // use the first two points to extrapolate
+  if(i == orbit_data_map.begin())
     ++i;
-    check_lazy_evaluation(i);
-  }
+  check_lazy_evaluation(i);
   Q2 = i->second;
   --i;
   check_lazy_evaluation(i);
@@ -93,38 +111,11 @@ boost::shared_ptr<CartesianFixed> OrbitQuaternionList::position_cf(Time T) const
 ScLookVector OrbitQuaternionList::sc_look_vector
 (Time T, const CartesianFixed& Pt) const
 {
-  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2;
+  boost::shared_ptr<GeoCal::QuaternionOrbitData> q1, q2, q;
   interpolate_or_extrapolate_data(T, q1, q2);
-
-  double tspace = q2->time() - q1->time();
-  double toffset = T - q1->time();
-  boost::math::quaternion<double> sc_to_cf_ = 
-    interpolate_quaternion_rotation(q1->sc_to_cf(), 
-			   q2->sc_to_cf(), toffset, tspace);
-  boost::array<double, 3> pos1, pos2, vel_cf, pos_cf;
-  pos1[0] = q1->position_cf()->position[0];
-  pos1[1] = q1->position_cf()->position[1];
-  pos1[2] = q1->position_cf()->position[2];
-  pos2[0] = q2->position_cf()->position[0];
-  pos2[1] = q2->position_cf()->position[1];
-  pos2[2] = q2->position_cf()->position[2];
-  Orbit::interpolate(pos1, q1->velocity_cf(), pos2, q1->velocity_cf(), toffset,
-		     tspace, pos_cf, vel_cf);
-
-  boost::array<double, 3> p1 = Pt.position;
-  CartesianFixedLookVector lv;
-  lv.look_vector[0] = p1[0] - pos_cf[0];
-  lv.look_vector[1] = p1[1] - pos_cf[1];
-  lv.look_vector[2] = p1[2] - pos_cf[2];
-
-  // Do abberation of light correction.
-  ScLookVector res;
-  double k = lv.length() / Constant::speed_of_light;
-  boost::math::quaternion<double> vel_cf_q(0, vel_cf[0], vel_cf[1], vel_cf[2]);
-  boost::math::quaternion<double> sc =
-    conj(sc_to_cf_) * (lv.look_quaternion() + k * vel_cf_q) * sc_to_cf_;
-  res.look_quaternion(sc);
-  return res;
+  q = QuaternionOrbitData::interpolate(*q1, *q2, T, true);
+  CartesianFixedLookVector lv(*q->position_cf(), Pt);
+  return q->sc_look_vector(lv);
 }
 
 // See base class for description.
@@ -150,22 +141,36 @@ OrbitQuaternionList::quaternion_orbit_data() const
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Return the Times of QuaternionOrbitData.
+//-----------------------------------------------------------------------
+
+std::vector<boost::shared_ptr<Time> >
+OrbitQuaternionList::quaternion_orbit_data_time() const
+{
+  std::vector<boost::shared_ptr<Time> >  res;
+  res.reserve(orbit_data_map.size());
+  BOOST_FOREACH(time_map::value_type i, orbit_data_map)
+    res.push_back(boost::make_shared<Time>(i.first));
+  return res;
+}
+
 // See base class for description.
 void OrbitListCache::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "OrbitListCache:\n"
      << "  Underlying orbit:\n";
-  opad << orbit_underlying_ << "\n";
+  opad << *orbit_underlying_ << "\n";
   opad.strict_sync();
   Os << "  Time table:\n";
-  opad << tt << "\n";
+  opad << *tt << "\n";
   opad.strict_sync();
   Os << "  Sample: " << sample_ << "\n";
 }
 
 
-void OrbitListCache::notify_update(const Orbit& Orb)
+void OrbitListCache::notify_update()
 {
   boost::shared_ptr<QuaternionOrbitData> null;
   // Throw away all cached values if underlying orbit changes.
@@ -186,7 +191,7 @@ boost::shared_ptr<QuaternionOrbitData> OrbitListCache::orbit_data_create
 void OrbitListCache::init()
 {
   boost::shared_ptr<QuaternionOrbitData> null;
-  for(int i = tt->min_line(); i <= tt->max_line(); ++i) {
+  for(int i = tt->min_line() - 1; i <= tt->max_line() + 1; ++i) {
     Time t;
     FrameCoordinate fc;
     tt->time(ImageCoordinate(i, sample_), t, fc);

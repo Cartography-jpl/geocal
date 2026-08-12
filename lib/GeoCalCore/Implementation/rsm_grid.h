@@ -1,6 +1,7 @@
 #ifndef RSM_GRID_H
 #define RSM_GRID_H
 #include "rsm_base.h"
+#include <limits>
 
 namespace GeoCal {
   class ImageGroundConnection;
@@ -38,6 +39,7 @@ public:
 	  const std::string& Image_identifier="",
 	  const std::string& Rsm_support_data_edition="fake-1")
     : RsmBase(Image_identifier, Rsm_support_data_edition),
+      have_z_range_(false),
       line_(N_x, N_y, N_z),
       sample_(N_x, N_y, N_z),
       ignore_igc_error_in_fit_(Ignore_igc_error_in_fit),
@@ -53,7 +55,13 @@ public:
   virtual boost::shared_ptr<RsmBase> clone() const
   { return boost::shared_ptr<RsmBase>
       (new RsmGrid(line_.rows(), line_.cols(), line_.depth(),
-		   ignore_igc_error_in_fit_));
+		   ignore_igc_error_in_fit_, total_number_row_digit_,
+		   total_number_col_digit_, number_fractional_row_digit_,
+		   number_fractional_col_digit_));
+  }
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  { 
+    return false;
   }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z,
 					   bool Extrapolate_ok) const;
@@ -109,10 +117,18 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample)
+  { throw Exception("Not implemented"); }
   void fit_corr(const ImageGroundConnection& IGc,
 		const CoordinateConverter& Cconv,
 		const RsmBase& Rb);
 
+  void extrapolate_x_direction();
+  void extrapolate_y_direction();
+  void extrapolate_z_direction();
+  
 //-----------------------------------------------------------------------
 /// Number of X values in grid. This can potentially depend on the z
 /// axis value.
@@ -246,9 +262,41 @@ public:
   std::string tre_string() const;
   static boost::shared_ptr<RsmGrid>
   read_tre_string(const std::string& Tre_in);
+
+//-----------------------------------------------------------------------
+/// Calculate the TRE size that we will try to write, so we can check
+/// if it is too big. This is the size that will go into the CEL
+/// field (so the total TRE size - 11).  
+//-----------------------------------------------------------------------
+  int tre_size() const
+  { int res =  80 + 40 + 3 + 3 + 21 + 21 + 1 + 3 + 21 + 21 + 21 + 21
+      + 21 + 21 + 9 + 9 + 2 + 2 + 1 + 1 +
+      (number_z() - 1) * (4 + 4) +
+      (number_z()) * ( 3 + 3 );
+    for(int i = 0; i < number_z(); ++i)
+      res += number_x(i) * number_y(i) *
+	(total_number_row_digit_ + total_number_col_digit_);
+    return res;
+  }
+
+//-----------------------------------------------------------------------
+/// Based on examples, the MSP library seems to prefer that all
+/// sections have the same z start and delta. This isn't actually
+/// required from the RSM standard, but seems to be one of the those
+/// "unstated" requirements. This gives access  for RsmMultiSection to
+/// pass the z values to use, rather than computing this in fit.
+//-----------------------------------------------------------------------
+
+  virtual void set_z_range(double Z_min, double Z_max)
+  {
+    z_start_ = Z_min;
+    z_delta_ = (Z_max - Z_min) / (number_z() - 1);
+    have_z_range_ = true;
+  }
 protected:
-  RsmGrid() {}
+  RsmGrid() : have_z_range_(false) {}
 private:
+  bool have_z_range_;
   // Note, by convention we *don't* include the x_offset, y_offset in
   // line_ and sample_. So we always have things relative to the
   // initial plane. The x_offset and y_offset is only used when we
@@ -257,6 +305,66 @@ private:
   // code. We can revisit this if needed, this is really just an
   // internal convention we use and we could change this if desired.
   blitz::Array<double, 3> line_, sample_;
+  int min_value_handle_nan(const blitz::Array<double, 3>& D) const
+  {
+    double r = blitz::min(blitz::where(blitz::blitz_isnan(D),
+				       std::numeric_limits<double>::max(), D));
+    if(r == std::numeric_limits<double>::max())
+      r = 0; //Handling for all nan data
+    return int(floor(r));
+  } 
+  double line_value_or_nan(int i, int j, int k) const
+  { if(i < 0 || j < 0 || k < 0 || i >= line_.rows() || j >= line_.cols() ||
+       k >= line_.depth())
+      return std::numeric_limits<double>::quiet_NaN();
+    return line_(i,j,k);
+  }
+  double sample_value_or_nan(int i, int j, int k) const
+  { if(i < 0 || j < 0 || k < 0 || i >= sample_.rows() || j >= sample_.cols() ||
+       k >= sample_.depth())
+      return std::numeric_limits<double>::quiet_NaN();
+    return sample_(i,j,k);
+  }
+  void extrapolate_line_helper(blitz::Array<double, 1>& d)
+  {
+    const int max_diff = 1000;
+    for(int i = 2; i < d.rows(); ++i)
+      if(std::isnan(d(i)) && !std::isnan(d(i-2)) && ! std::isnan(d(i-1))) {
+	// For some cases we can get extreme behavior when
+	// extrapolating. Since anything outside of the line/sample
+	// range is invalid anyways, we switch to a single pixel
+	// spacing when we get too far out of the range.
+	if(d(i-1) < min_line_ - max_diff ||
+	   d(i-1) > max_line_ + max_diff) {
+	  if((d(i-1) - d(i - 2)) < 0)
+	    d(i) = d(i-1) - 1;
+	  else
+	    d(i) = d(i-1) + 1;
+	} else {
+	  d(i) = d(i-1) + (d(i-1) - d(i - 2));
+	}
+      }
+  }
+  void extrapolate_sample_helper(blitz::Array<double, 1>& d)
+  {
+    const int max_diff = 1000;
+    for(int i = 2; i < d.rows(); ++i)
+      if(std::isnan(d(i)) && !std::isnan(d(i-2)) && ! std::isnan(d(i-1))) {
+	// For some cases we can get extreme behavior when
+	// extrapolating. Since anything outside of the line/sample
+	// range is invalid anyways, we switch to a single pixel
+	// spacing when we get too far out of the range.
+	if(d(i-1) < min_sample_ - max_diff ||
+	   d(i-1) > max_sample_ + max_diff) {
+	  if((d(i-1) - d(i - 2)) < 0)
+	    d(i) = d(i-1) - 1;
+	  else
+	    d(i) = d(i-1) + 1;
+	} else {
+	  d(i) = d(i-1) + (d(i-1) - d(i - 2));
+	}
+      }
+  }
   double x_start_, y_start_, z_start_, x_delta_, y_delta_, z_delta_;
   int min_line_,max_line_,min_sample_,max_sample_;
   bool ignore_igc_error_in_fit_;
@@ -273,5 +381,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(RsmGrid);
-GEOCAL_CLASS_VERSION(RsmGrid, 1);
+GEOCAL_CLASS_VERSION(RsmGrid, 2);
 #endif

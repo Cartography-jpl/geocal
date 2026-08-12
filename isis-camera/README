@@ -1,0 +1,11 @@
+This is a short little program to interact directly with the ISIS library
+for a camera model. We've saved this just in case we ever need to do this
+again.
+
+We can already access the camera model through campt program, which is
+wrapped up in the python IsisIgc. However it can be useful to directly
+do the camera model calculations step by step if we are figuring out how to
+duplicate a ISIS camera. We can't easily link to the ISIS library, it has
+a number of dependencies that conflict with the geocal dependencies. But we
+have a stand alone program here that allows us to simply tweak the program
+to look through the ISIS camera model.

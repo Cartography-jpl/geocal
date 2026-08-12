@@ -5,6 +5,7 @@
 #include "memory_raster_image.h"
 #include "constant_raster_image.h"
 #include "ecr.h"
+#include "refraction_sdp.h"
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(orbit_data_image_ground_connection, GlobalFixture)
@@ -120,7 +121,7 @@ BOOST_AUTO_TEST_CASE(include_refraction)
   boost::shared_ptr<Dem> dem(new SimpleDem(100));
   boost::shared_ptr<RasterImage> img(new MemoryRasterImage(cam->number_line(0),
 						   cam->number_sample(0)));
-  boost::shared_ptr<Refraction> ref(new Refraction(0,0));
+  boost::shared_ptr<Refraction> ref(new RefractionSdp(0,0));
   OrbitDataImageGroundConnection igc(od, cam, dem, img, "Image", ref);
   ImageCoordinate ic(1.0, 1504 / 2);
   Geodetic g(*igc.ground_coordinate(ic));

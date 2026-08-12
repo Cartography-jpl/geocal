@@ -1,14 +1,7 @@
 #ifndef GEOCAL_GENERIC_OBJECT_H
 #define GEOCAL_GENERIC_OBJECT_H
-// These get defined in geocal_config.h. Undef them to stop warnings
-// if we change these.
-#undef PACKAGE
-#undef PACKAGE_NAME
-#undef PACKAGE_STRING
-#undef PACKAGE_TARNAME
-#undef PACKAGE_VERSION
-#undef VERSION
-#include "geocal_config.h"
+#include "geocal_external_config.h"
+#include <string>
 
 namespace boost {
   namespace serialization {
@@ -34,8 +27,24 @@ namespace boost {
 #define GEOCAL_CLASS_VERSION(NAME, N) /* Noop */
 #endif
 
+// Mark a function or variable as unused. This isn't usually all that
+// important, but it can be useful to silence these warnings so we get
+// messages about variables that are unused that we don't expect.
+#ifdef __GNUC__
+#  define UNUSED(x) UNUSED_ ## x __attribute__((__unused__))
+#else
+#  define UNUSED(x) UNUSED_ ## x
+#endif
+
+#ifdef __GNUC__
+#  define UNUSED_FUNCTION(x) __attribute__((__unused__)) UNUSED_ ## x
+#else
+#  define UNUSED_FUNCTION(x) UNUSED_ ## x
+#endif
 
 namespace GeoCal {
+std::string geocal_version();
+  
 /****************************************************************//**
   For use with SWIG, it is useful to have a base class that 
   everything can be cast to. This class doesn't provide any

@@ -2,6 +2,7 @@
 #include "ostream_pad.h"
 #include "ecr.h"
 #include "eci.h"
+#include "planet_coordinate.h"
 #include "geocal_serialize_support.h"
 #include "tre_support.h"
 #include "nitf_support.h"
@@ -40,7 +41,8 @@ template<class Archive>
 void OrbitDes::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP_(pos) & GEOCAL_NVP_(att);
+    & GEOCAL_NVP_(pos) & GEOCAL_NVP_(att)
+    & GEOCAL_NVP_(naif_code);
 }
 
 GEOCAL_IMPLEMENT(PosCsephb);
@@ -172,6 +174,23 @@ void PosCsephb::print(std::ostream& Os) const
 }
 
 //-----------------------------------------------------------------------
+/// Check if we need a sign flip.
+//-----------------------------------------------------------------------
+
+inline bool need_sign_flip(const blitz::Array<double, 1>& a1,
+			   const blitz::Array<double, 1>& a2)
+{
+  boost::math::quaternion<double> q1 = nitf_to_quaternion(a1);
+  boost::math::quaternion<double> q2 = nitf_to_quaternion(a2);
+  // See interpolate_quaternion_rotation for the logic here.
+  boost::math::quaternion<double> delta_quat = q2 * conj(q1);
+  double t = delta_quat.R_component_1();
+  if(t < 0)
+    return true;
+  return false;
+}
+
+//-----------------------------------------------------------------------
 /// Return attitude quaternion for the given time.
 //-----------------------------------------------------------------------
 
@@ -187,7 +206,12 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     res = att(i, ra);
   if(itype_ == LINEAR) {
     double f = (T - min_time_) / tstep_ - i;
-    res = f * att(i+1, ra) + (1 - f) * att(i, ra);
+    blitz::Array<double, 1> a1 = att(i+1, ra).copy();
+    blitz::Array<double, 1> a0 = att(i, ra).copy();
+    // Handle sign change in attitude
+    if(need_sign_flip(a0,a1))
+      a1 *= -1;
+    res = f * a1 + (1 - f) * a0;
   }
   if(itype_ == LAGRANGE) {
     int d = (lagrange_order_ - 1) / 2;
@@ -197,9 +221,16 @@ boost::math::quaternion<double> AttCsattb::att_q(const Time& T) const
     std::vector<blitz::Array<double, 1> > a;
     for(int j = istart; j < iend; ++j) {
       tm.push_back(min_time_ + j * tstep_);
-      a.push_back(att(j,ra));
+      blitz::Array<double, 1> av = att(j,ra).copy();
+      //  Handle sign flips
+      if(a.size() > 0 && need_sign_flip(a[0], av))
+	av *= -1;
+      a.push_back(av);
     }
     res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(), a.end());
+    //  Translate back to whatever sign the closest point has
+    if(need_sign_flip(a[0], att(i,ra)))
+      res *= -1;
   }
   boost::math::quaternion<double> resq = nitf_to_quaternion(res);
   normalize(resq);
@@ -332,6 +363,11 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
     res = att(i, ra);
   if(itype_ == LINEAR) {
     AutoDerivative<double> f = (T - min_time_) / tstep_ - i;
+    blitz::Array<double, 1> a1 = att(i+1, ra).copy();
+    blitz::Array<double, 1> a0 = att(i, ra).copy();
+    // Handle sign change in attitude
+    if(need_sign_flip(a0,a1))
+      a1 *= -1;
     res = f * att(i+1, ra) + (1 - f) * att(i, ra);
   }
   if(itype_ == LAGRANGE) {
@@ -342,10 +378,17 @@ boost::math::quaternion<AutoDerivative<double> > AttCsattb::att_q
     std::vector<blitz::Array<double, 1> > a;
     for(int j = istart; j < iend; ++j) {
       tm.push_back(min_time_ + j * tstep_);
-      a.push_back(att(j,ra));
+      blitz::Array<double, 1> av = att(j,ra).copy();
+      //  Handle sign flips
+      if(a.size() > 0 && need_sign_flip(a[0], av))
+	av *= -1;
+      a.push_back(av);
     }
     res = Orbit::lagrangian_interpolation(tm.begin(), tm.end(), T, a.begin(),
 					  a.end());
+    //  Translate back to whatever sign the closest point has
+    if(need_sign_flip(a[0], att(i,ra)))
+      res *= -1;
   }
   boost::math::quaternion<AutoDerivative<double> > resq =
     nitf_to_quaternion(res);
@@ -650,10 +693,11 @@ boost::shared_ptr<AttCsattb> AttCsattb::des_read(std::istream& In)
 //-----------------------------------------------------------------------
 
 OrbitDes::OrbitDes(const boost::shared_ptr<PosCsephb>& Pos,
-		   const boost::shared_ptr<AttCsattb>& Att)
+		   const boost::shared_ptr<AttCsattb>& Att,
+		   int Naif_code)
   : Orbit(std::max(Pos->min_time(), Att->min_time()),
 	  std::min(Pos->max_time(), Att->max_time())),
-    pos_(Pos), att_(Att)
+    pos_(Pos), att_(Att), naif_code_(Naif_code)
 {
 }
 
@@ -669,14 +713,23 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data(Time T) const
      !(!pos_->is_cf() && !att_->is_cf()))
     throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
   boost::shared_ptr<QuaternionOrbitData> od;
-  if(pos_->is_cf())
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2)), vel,
-						   att_q);
-  else
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2)), vel,
-						 att_q);
+  if(pos_->is_cf()) {
+    boost::shared_ptr<CartesianFixed> cf;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      cf = boost::make_shared<Ecr>(posvel(0), posvel(1), posvel(2));
+    else
+      cf = boost::make_shared<PlanetFixed>(posvel(0), posvel(1), posvel(2),
+					   naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, cf, vel, att_q);
+  } else {
+    boost::shared_ptr<CartesianInertial> ci;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      ci = boost::make_shared<Eci>(posvel(0), posvel(1), posvel(2));
+    else
+      ci = boost::make_shared<PlanetInertial>(posvel(0), posvel(1), posvel(2),
+					      naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, ci, vel, att_q);
+  }
   return od;
 }
 
@@ -697,16 +750,26 @@ boost::shared_ptr<OrbitData> OrbitDes::orbit_data
      !(!pos_->is_cf() && !att_->is_cf()))
     throw Exception("pos_ and att_ need to either both be for cartesian fixed or both for cartesian inertial");
   boost::shared_ptr<QuaternionOrbitData> od;
-  if(pos_->is_cf())
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Ecr>(posvel(0).value(), posvel(1).value(),
-				   posvel(2).value()),
-	   pos, vel, att_q);
-  else
-    od = boost::make_shared<QuaternionOrbitData>(T,
-	   boost::make_shared<Eci>(posvel(0).value(), posvel(1).value(),
-				   posvel(2).value()),
-	   pos, vel, att_q);
+  if(pos_->is_cf()) {
+    boost::shared_ptr<CartesianFixed> cf;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      cf = boost::make_shared<Ecr>(posvel(0).value(), posvel(1).value(),
+				   posvel(2).value());
+    else
+      cf = boost::make_shared<PlanetFixed>(posvel(0).value(), posvel(1).value(),
+					   posvel(2).value(), naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, cf, pos, vel, att_q);
+  } else {
+    boost::shared_ptr<CartesianInertial> ci;
+    if(naif_code_ == Ecr::EARTH_NAIF_CODE)
+      ci = boost::make_shared<Eci>(posvel(0).value(), posvel(1).value(),
+				   posvel(2).value());
+    else
+      ci = boost::make_shared<PlanetInertial>(posvel(0).value(),
+					      posvel(1).value(),
+					      posvel(2).value(), naif_code_);
+    od = boost::make_shared<QuaternionOrbitData>(T, ci, pos, vel, att_q);
+  }
   return od;
 }
 
@@ -714,6 +777,7 @@ void OrbitDes::print(std::ostream& Os) const
 {
   OstreamPad opad(Os, "    ");
   Os << "OrbitDes:\n"
+     << "  naif_code: " << naif_code() << "\n"
      << "  pos_csephb:\n";
   opad << *pos_csephb() << "\n";
   opad.strict_sync();
@@ -721,3 +785,73 @@ void OrbitDes::print(std::ostream& Os) const
   opad << *att_csattb() << "\n";
   opad.strict_sync();
 }
+
+//-----------------------------------------------------------------------
+/// Switch from CartesianInertial to CartesianFixed or vice versa.
+//-----------------------------------------------------------------------
+
+void AttCsattb::convert_cf_and_ci(const OrbitDes& orb)
+{
+  blitz::Range ra = blitz::Range::all();
+  blitz::Array<double, 2> att_new(att.shape());
+  for(int i = 0; i < att.rows(); ++i) {
+    Time t = min_time_ + tstep_ * i;
+    boost::shared_ptr<QuaternionOrbitData> od =
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t));
+    boost::math::quaternion<double> attq = nitf_to_quaternion(att(i, ra));
+    normalize(attq);
+    if(is_cf_) {
+      QuaternionOrbitData od2(od->time(), od->position_cf(),
+			      od->velocity_cf(), attq);
+      att_new(i, ra) = quaternion_to_nitf(od2.sc_to_ci());
+    } else {
+      QuaternionOrbitData od2(od->time(), od->position_ci(),
+			      od->velocity_ci(), attq);
+      att_new(i, ra) = quaternion_to_nitf(od2.sc_to_cf());
+    }
+  }
+  att.reference(att_new);
+  // We lie briefly. OrbitDes which is a friend of this class sets
+  // this once PosCsephb is also converted
+  // if(is_cf_)
+  //   is_cf_ = false;
+  // else
+  //   is_cf_ = true;
+}
+
+//-----------------------------------------------------------------------
+/// Switch from CartesianInertial to CartesianFixed or vice versa.
+//-----------------------------------------------------------------------
+
+void PosCsephb::convert_cf_and_ci(const OrbitDes& orb)
+{
+  blitz::Array<double, 2> pos_new(pos.shape());
+  for(int i = 0; i < pos.rows(); ++i) {
+    Time t = min_time_ + tstep_ * i;
+    boost::shared_ptr<QuaternionOrbitData> od =
+      boost::dynamic_pointer_cast<QuaternionOrbitData>(orb.orbit_data(t));
+    boost::array<double, 3> p;
+    p[0] = pos(i,0);
+    p[1] = pos(i,1);
+    p[2] = pos(i,2);
+    if(is_cf_) {
+      QuaternionOrbitData od2(od->time(), od->position_cf()->create(p),
+			      od->velocity_cf(), od->sc_to_cf());
+      pos_new(i, 0) = od2.position_ci()->position[0];
+      pos_new(i, 1) = od2.position_ci()->position[1];
+      pos_new(i, 2) = od2.position_ci()->position[2];
+    } else {
+      QuaternionOrbitData od2(od->time(), od->position_ci()->create(p),
+			      od->velocity_ci(), od->sc_to_ci());
+      pos_new(i, 0) = od2.position_cf()->position[0];
+      pos_new(i, 1) = od2.position_cf()->position[1];
+      pos_new(i, 2) = od2.position_cf()->position[2];
+    }
+  }
+  pos.reference(pos_new);
+  if(is_cf_)
+    is_cf_ = false;
+  else
+    is_cf_ = true;
+}
+

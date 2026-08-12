@@ -3,6 +3,8 @@
 #include "image_ground_connection.h"
 #include "orbit.h"
 #include "refraction.h"
+#include "velocity_aberration.h"
+#include "simple_dem.h"
 #include "ostream_pad.h"
 
 namespace GeoCal {
@@ -26,11 +28,14 @@ public:
 				 const std::string Title = "",
 				 const boost::shared_ptr<Refraction>&
 				 Ref = boost::shared_ptr<Refraction>(),
+				 const boost::shared_ptr<VelocityAberration>&
+				 Vabb = boost::shared_ptr<VelocityAberration>(),
 				 double Resolution=30, int Band=0, 
 				 double Max_height=9000)
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
 			    Title), od(Od), cam(Cam),
       refraction_(Ref),
+      velocity_aberration_(Vabb),
       res(Resolution), b(Band), max_h(Max_height) {}
 
 //-----------------------------------------------------------------------
@@ -50,6 +55,8 @@ public:
   				 const std::string Title = "",
   				 const boost::shared_ptr<Refraction>&
   				 Ref = boost::shared_ptr<Refraction>(),
+				 const boost::shared_ptr<VelocityAberration>&
+				 Vabb = boost::shared_ptr<VelocityAberration>(),
   				 double Resolution=30, int Band=0, 
   				 double Max_height=9000)
     : ImageGroundConnection(D, Img, boost::shared_ptr<RasterImageMultiBand>(),
@@ -57,6 +64,7 @@ public:
       orb(Orb),
       cam(Cam),      
       refraction_(Ref),
+      velocity_aberration_(Vabb),
       res(Resolution), b(Band), max_h(Max_height) 
   {
     od = orb->orbit_data(TimeWithDerivative(Tm));
@@ -90,48 +98,22 @@ public:
   }
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const
-  { 
-    boost::shared_ptr<GroundCoordinate> gc_uncorr = 
-      od->surface_intersect(*cam, FrameCoordinate(Ic.line, Ic.sample),
-			    D, res, b, max_h);
-    if(!refraction_)
-      return gc_uncorr;
-    boost::shared_ptr<GroundCoordinate> gc_corr =
-      refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    boost::shared_ptr<CartesianFixed> gc_corr_cf = gc_corr->convert_to_cf();
-    CartesianFixedLookVector lv
-      (gc_corr_cf->position[0] - od->position_cf()->position[0],
-       gc_corr_cf->position[1] - od->position_cf()->position[1],
-       gc_corr_cf->position[2] - od->position_cf()->position[2]);
-    return D.intersect(*od->position_cf(), lv, res, max_h);
+  {
+    return od->surface_intersect(*cam, FrameCoordinate(Ic.line, Ic.sample),
+		 D, res, b, max_h, refraction_, velocity_aberration_);
   }
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const
   { 
-    boost::shared_ptr<GroundCoordinate> gc_uncorr = 
-      od->reference_surface_intersect_approximate
-      (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H);
-    if(!refraction_)
-      return gc_uncorr;
-    boost::shared_ptr<GroundCoordinate> gc_corr =
-      refraction_->refraction_apply(*od->position_cf(), *gc_uncorr);
-    boost::shared_ptr<CartesianFixed> gc_corr_cf = gc_corr->convert_to_cf();
-    CartesianFixedLookVector lv
-      (gc_corr_cf->position[0] - od->position_cf()->position[0],
-       gc_corr_cf->position[1] - od->position_cf()->position[1],
-       gc_corr_cf->position[2] - od->position_cf()->position[2]);
-    return od->position_cf()->reference_surface_intersect_approximate(lv, H);
+    return od->reference_surface_intersect_approximate
+      (*cam, FrameCoordinate(Ic.line, Ic.sample), b, H, refraction_,
+       velocity_aberration_);
   }
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const 
-  { 
-    FrameCoordinate fc;
-    if(refraction_) {
-      boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	refraction_->refraction_reverse(*od->position_cf(), Gc);
-      fc = od->frame_coordinate(*gc_uncorr, *cam, b);
-    } else
-      fc = od->frame_coordinate(Gc, *cam, b);
+  {
+    FrameCoordinate fc = od->frame_coordinate(Gc, *cam, b, refraction_,
+					      velocity_aberration_);
     return ImageCoordinate(fc.line, fc.sample);
   }
 
@@ -143,13 +125,9 @@ public:
   virtual blitz::Array<double, 2> 
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const
   { 
-    FrameCoordinateWithDerivative fc;
-    if(refraction_) {
-      boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	refraction_->refraction_reverse(*od->position_cf(), Gc);
-      fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
-    } else
-      fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
+    FrameCoordinateWithDerivative fc =
+      od->frame_coordinate_with_derivative(Gc, *cam, b, refraction_,
+					   velocity_aberration_);
     blitz::Array<double, 2> res(2, fc.line.gradient().rows());
     res(0, blitz::Range::all()) = fc.line.gradient();
     res(1, blitz::Range::all()) = fc.sample.gradient();
@@ -166,13 +144,9 @@ public:
   virtual ImageCoordinateWithDerivative 
   image_coordinate_with_derivative(const GroundCoordinate& Gc) const 
   { 
-    FrameCoordinateWithDerivative fc;
-    if(refraction_) {
-      boost::shared_ptr<GroundCoordinate> gc_uncorr =
-	refraction_->refraction_reverse(*od->position_cf(), Gc);
-      fc = od->frame_coordinate_with_derivative(*gc_uncorr, *cam, b);
-    } else
-      fc = od->frame_coordinate_with_derivative(Gc, *cam, b);
+    FrameCoordinateWithDerivative fc =
+      od->frame_coordinate_with_derivative(Gc, *cam, b, refraction_,
+					   velocity_aberration_);
     return ImageCoordinateWithDerivative(fc.line, fc.sample);
   }
   virtual void print(std::ostream& Os) const \
@@ -203,6 +177,11 @@ public:
       opad << "No refraction model included\n";
     else
       opad << *refraction();
+    Os << "  VelocityAberration\n";
+    if(!velocity_aberration())
+      opad << "No velocity_aberration model included, using first order approximation\n";
+    else
+      opad << *velocity_aberration();
     opad.strict_sync();
   }
 
@@ -296,6 +275,20 @@ public:
   void refraction(const boost::shared_ptr<Refraction>& Ref) 
   {refraction_ = Ref;}
 
+//-----------------------------------------------------------------------
+/// VelocityAberration object we are using. May be null if we are using
+/// the default first order approximation.
+//-----------------------------------------------------------------------
+  boost::shared_ptr<VelocityAberration> velocity_aberration() const
+  {return velocity_aberration_;}
+
+//-----------------------------------------------------------------------
+/// Set the VelocityAberration object we are using. May be null if we are using
+/// the default first order approximation.
+//-----------------------------------------------------------------------
+  void velocity_aberration(const boost::shared_ptr<VelocityAberration>& Vabb) 
+  {velocity_aberration_ = Vabb;}
+
   virtual int number_line() const { return cam->number_line(band()); }
   virtual int number_sample() const { return cam->number_sample(band()); }
 protected:
@@ -305,6 +298,7 @@ private:
   boost::shared_ptr<OrbitData> od;
   boost::shared_ptr<Camera> cam;
   boost::shared_ptr<Refraction> refraction_;
+  boost::shared_ptr<VelocityAberration> velocity_aberration_;
   double res;
   int b;
   double max_h;
@@ -315,4 +309,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(OrbitDataImageGroundConnection);
+GEOCAL_CLASS_VERSION(OrbitDataImageGroundConnection, 1)
 #endif

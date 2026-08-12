@@ -108,6 +108,11 @@ public:
 /// location you get from cf_look_vector_arr. This is intended, not a
 /// bug, and simple reflects that we are talking about 2 different
 /// things here.
+///
+/// For an ImageGroundConnection that include Refraction, these look
+/// vectors are *before* the Refraction correction has been
+/// applied. This is because in general we need to know the ground
+/// location before we can calculate refraction.
 //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 7> 
@@ -120,6 +125,11 @@ public:
 /// Return look vector for given coordinate, along with a position
 /// that lies along the direction of the look vector (so position of
 /// satellite, or a position on the surface.
+///
+/// For an ImageGroundConnection that include Refraction, these look
+/// vectors are *before* the Refraction correction has been
+/// applied. This is because in general we need to know the ground
+/// location before we can calculate refraction.
 //-----------------------------------------------------------------------
   
   virtual void cf_look_vector(const ImageCoordinate& Ic, 
@@ -132,7 +142,7 @@ public:
 
 //-----------------------------------------------------------------------
 /// SWIG/python doesn't like returning 2 items through a director, so
-/// we implement cf_look_vector in 2 parts. In general, C++ to
+/// we implement cf_look_vector in 2 parts. In general, C++ should
 /// override cf_look_vector rather than these 2 functions (although it
 /// could do these 2 if useful for some reason.
 //-----------------------------------------------------------------------
@@ -160,6 +170,15 @@ public:
   virtual blitz::Array<double, 2> 
   collinearity_residual_jacobian(const GroundCoordinate& Gc,
 			const ImageCoordinate& Ic_actual) const;
+  void compare_igc(const ImageGroundConnection& Igc_true,
+		   int Number_line_spacing,
+		   int Number_sample_spacing, double Height,
+		   blitz::Array<double, 2>& True_line,
+		   blitz::Array<double, 2>& True_sample,
+		   blitz::Array<double, 2>& Calc_line,
+		   blitz::Array<double, 2>& Calc_sample,
+		   blitz::Array<double, 2>& Distance_true_vs_calc)
+    const;
   
     
 //-----------------------------------------------------------------------
@@ -184,6 +203,20 @@ public:
   ground_coordinate_approx_height(const ImageCoordinate& Ic, 
 				  double H) const;
 
+//-----------------------------------------------------------------------
+/// Naif code for ImageGroundConnection (e.g., what planet is this for)
+//-----------------------------------------------------------------------
+  virtual int naif_code() const
+  { return ground_coordinate_approx_height(ImageCoordinate(0,0),0)->naif_code(); }
+
+//-----------------------------------------------------------------------
+/// CartesianFixed for ImageGroundConnection (e.g., depends on what
+/// planet this is this for).
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<CartesianFixed> cartesian_fixed() const
+  { return ground_coordinate_approx_height(ImageCoordinate(0,0),0)->convert_to_cf(); }
+  
 //-----------------------------------------------------------------------
 /// Underlying image (if present)
 //-----------------------------------------------------------------------
@@ -232,7 +265,7 @@ public:
 /// if has_time is false.
 //-----------------------------------------------------------------------
 
-  virtual Time pixel_time(const ImageCoordinate& Ic) const
+  virtual Time pixel_time(const ImageCoordinate& UNUSED(Ic)) const
   { throw Exception("pixel_time is not implemented"); }
 
 //-----------------------------------------------------------------------
@@ -288,6 +321,25 @@ public:
       Success = false;
     }
   }
+
+//-----------------------------------------------------------------------
+/// Variation of image_coordinate, but we try to handle points out of
+/// the time and sample range of the data (so this returns line and
+/// samples outside of the range of the TimeTable and Camera). In some
+/// cases this is more useful than having image_coordinate fail. Note
+/// that we still might have Success false, if for example the point
+/// is outside the range of the Orbit. 
+///
+/// The default implementation just calls image_coordinate_with_status
+/// (so no actual extension), but derived classes can supply a
+/// function if it makes sense (e.g., IpiImageGroundConnection).
+//-----------------------------------------------------------------------
+
+  virtual void image_coordinate_extended(const GroundCoordinate& Gc,
+					 ImageCoordinate& Res,
+					 bool& Success) const 
+  { image_coordinate_with_status(Gc, Res, Success); }
+  
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
 
@@ -299,7 +351,7 @@ public:
 //-----------------------------------------------------------------------
 
   virtual blitz::Array<double, 2> 
-  image_coordinate_jac_parm(const GroundCoordinate& Gc) const
+  image_coordinate_jac_parm(const GroundCoordinate& UNUSED(Gc)) const
   { // Default is no parameters
     return blitz::Array<double, 2>(2, 0);
   }

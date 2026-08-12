@@ -127,7 +127,8 @@ public:
 /// the calling routine needs to be ready to handle.
 //-----------------------------------------------------------------------
 
-  virtual boost::shared_ptr<RasterImage> overview(int Min_number_sample) const
+  virtual boost::shared_ptr<RasterImage> overview
+  (int UNUSED(Min_number_sample)) const
   { return boost::shared_ptr<RasterImage>(); }
 
 //-----------------------------------------------------------------------
@@ -440,7 +441,9 @@ private:
 void copy(const RasterImage& Img_in, RasterImage& Img_out, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 void copy_no_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
 void copy_only_to_fill(const RasterImage& Img_in, RasterImage& Img_out, int Fill_value = 0, bool diagnostic = false);
+void fill_image(RasterImage& Img, int Fill_value = 0, bool diagnostic = false, int Tile_nline = -1, int Tile_nsamp = -1);
 
+  
 /// Loop through all data, going by tiles.
 
 #define RASTER_FOREACH(IMG, IND1, IND2) \
@@ -479,7 +482,6 @@ public:
 private:
   const RasterImage& ri;
   int istart_, jstart_, iend_, jend_, ntl, nts;
-  bool end_;
 };
 
 }

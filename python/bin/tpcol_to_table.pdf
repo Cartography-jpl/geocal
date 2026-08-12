@@ -1,7 +1,7 @@
 PROCESS       HELP=*
-parm tpcol type=(string,99) count=1
-parm out type=(string,99) count=1
-parm refimg type=(string,99) count=1, default=""
+parm tpcol type=string count=1
+parm out type=string count=1
+parm refimg type=string count=1, default=""
 parm useorigimg type=(string,4) count=(0:1) valid=(n,y) default="n"
 END-PROC
 .TITLE

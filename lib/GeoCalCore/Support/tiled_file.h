@@ -150,7 +150,7 @@ public:
 /// supported, derived classes can override this.
 //-----------------------------------------------------------------------
 
-  virtual void map_info(const MapInfo& M)
+  virtual void map_info(const MapInfo& UNUSED(M))
   { throw Exception("Not implemented"); }
 
 //-----------------------------------------------------------------------

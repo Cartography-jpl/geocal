@@ -37,13 +37,13 @@ public:
 /// Band that we are using.
 //-----------------------------------------------------------------------
 
-  int band() const {return ipi().band(); }
+  int band() const {return ipi()->band(); }
 
 //-----------------------------------------------------------------------
 /// Set band that we are using.
 //-----------------------------------------------------------------------
 
-  void band(int B) { ipi_ptr()->band(B); }
+  void band(int B) { ipi()->band(B); }
 
 
 private:

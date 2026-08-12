@@ -6,14 +6,14 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ImageCoordinate::serialize(Archive & ar, const unsigned int version)
+void ImageCoordinate::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageCoordinate);
   ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
 }
 
 template<class Archive>
-void VicarImageCoordinate::serialize(Archive & ar, const unsigned int version)
+void VicarImageCoordinate::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(VicarImageCoordinate);
   ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
@@ -21,10 +21,10 @@ void VicarImageCoordinate::serialize(Archive & ar, const unsigned int version)
 
 template<class Archive>
 void ImageCoordinateWithDerivative::serialize(Archive & ar, 
-					      const unsigned int version)
+					      const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(ImageCoordinateWithDerivative);
-  //  ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
+  ar & GEOCAL_NVP(line) & GEOCAL_NVP(sample);
 }
 
 GEOCAL_IMPLEMENT(ImageCoordinate);

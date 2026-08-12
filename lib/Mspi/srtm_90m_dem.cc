@@ -73,7 +73,7 @@ Srtm90mData::Srtm90mData
 		       No_coverage_is_error,
 		       FILL_VALUE)
 {
-  file_name_end = "_L2.tif";
+  file_name_end = "_L1.tif";
 
   lat_ref = 47,
   lon_ref = -87;
@@ -84,6 +84,8 @@ Srtm90mData::Srtm90mData
     		   num_per_deg);
 
   mi_ref = mi_ref.subset(-0.5,-0.5,1201,1201);
+  file_spacing_number_line = 1200;
+  file_spacing_number_sample = 1200;
   init_loc_to_file();
 }
 

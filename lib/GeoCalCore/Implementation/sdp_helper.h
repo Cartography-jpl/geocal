@@ -60,6 +60,11 @@ public:
   virtual void 
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
   virtual double solar_distance(int Body_id, const Time& T);
+  virtual void 
+  sub_body_point(int Body_id, int Body2_id, const Time& T, CartesianFixed& P)
+  { throw Exception("Not implemented"); }
+  virtual double body_distance(int Body_id, int Body2_id, const Time& T)
+  { throw Exception("Not implemented"); }
 };
 
 }

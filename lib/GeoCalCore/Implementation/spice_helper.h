@@ -8,8 +8,6 @@
 #include <boost/array.hpp>
 #include <boost/math/quaternion.hpp>
 #include <sys/types.h>
-// This won't be needed once version 3 becomes the default for boost filesystem
-#define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem.hpp>
 
 namespace GeoCal {
@@ -108,14 +106,30 @@ public:
 				   const Time& T,
 				   boost::array<double, 3>& pout,
 				   boost::array<double, 3>& pout2);
+  static void sub_body_point_calc(const std::string& Body,
+				  const std::string& Body2,
+				  const std::string& Ref_frame,
+				  const Time& T,
+				  boost::array<double, 3>& pout,
+				  boost::array<double, 3>& pout2);
   static void state_vector(int Body_id, const std::string& Target_name,
 			   const Time& T, boost::array<double, 3>& Pos,
-			   boost::array<double, 3>& Vel);
+			   boost::array<double, 3>& Vel,
+			   const std::string& Abcorr = "NONE");
   static std::vector<boost::shared_ptr<GroundCoordinate> >
   boresight_and_footprint(const Time& T, int Body_id,
 			  const std::string& Satellite_name,
 			  const std::string& Camera_name,
 			  const std::string& Corr_type = "CN+S");
+  static void 
+  surface_intersect(const Time& T, int Body_id,
+		    const std::string& Satellite_name,
+		    const std::string& Camera_name,
+		    const ScLookVector& Slv,
+		    boost::shared_ptr<GroundCoordinate>& Gc,
+		    double &Light_time,
+		    const std::string& Corr_type = "CN+S",
+		    const std::string& Method = "Ellipsoid");
 private:
   static std::string max_version_find(const std::string& D, 
 				      const boost::regex& F_reg);
@@ -152,6 +166,9 @@ public:
   virtual void
   sub_solar_point(int Body_id, const Time& T, CartesianFixed& P);
   virtual double solar_distance(int Body_id, const Time& T);
+  virtual void
+  sub_body_point(int Body_id, int Body2_id, const Time& T, CartesianFixed& P);
+  virtual double body_distance(int Body_id, int Body2_id, const Time& T);
 };
 
 /****************************************************************//**
@@ -165,7 +182,7 @@ public:
 class SpicePlanetConstant {
 public:
   SpicePlanetConstant(int Naif_code=-1) 
-  : naif_code(Naif_code), filled_in(false) {}
+    : naif_code(Naif_code), filled_in(false), a(0.0), b(0.0), esq(0.0) {}
 
 //-----------------------------------------------------------------------
 /// Planet equatorial radius, in meters

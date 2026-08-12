@@ -1,5 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+#ifndef SWIG_MODULE_ALREADY_DONE
+#if SWIG_VERSION < 0x040000  
+%module(directors="1", allprotected="1") foo
+#else
+%module(moduleimport="from ._swig_wrap import $module", directors="1", allprotected="1") foo
+#endif
+#endif
+
 %{
 #define SWIG_MAPPER_NAMESPACE GeoCal
 %}
@@ -37,7 +45,7 @@ namespace boost {
 	     return GeoCal::quaternion_to_matrix(*$self);
 	   }
 	 static quaternion<T > 
-	   from_matrix(const blitz::Array<T, 2>& Mat) const
+	   from_matrix(const blitz::Array<T, 2>& Mat)
 	 {
 	   return GeoCal::matrix_to_quaternion(Mat);
 	 }

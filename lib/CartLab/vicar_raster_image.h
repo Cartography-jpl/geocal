@@ -139,7 +139,7 @@ public:
 		   compression C = VicarFile::NONE)
     : vicar_file_(new VicarFile(Instance, M.number_y_pixel(), 
 				M.number_x_pixel(), Number_band,
-				Type, Name, "BSQ", C))
+				Type, Name, Org, C))
   {
     vicar_file_->map_info(M);
 
@@ -217,6 +217,32 @@ public:
     vicar_file_->rsm(R, File_type); rsm_ = R;
   }
   
+//-----------------------------------------------------------------------
+/// Set the GLAS/GFM.
+//-----------------------------------------------------------------------
+
+  void set_igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc,
+	       VicarFile::glas_gfm_file_type File_type = VicarFile::GLAS_GFM_NITF_FILE) { 
+    vicar_file_->igc_glas_gfm(Igc, File_type);
+  }
+
+//-----------------------------------------------------------------------
+/// Indicate if we have GLAS/GFM.
+//-----------------------------------------------------------------------
+
+  virtual bool has_igc_glas_gfm() const {return vicar_file_->has_igc_glas_gfm();}
+
+//-----------------------------------------------------------------------
+/// Indicate if we have GLAS/GFM.
+//-----------------------------------------------------------------------
+
+  virtual boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const
+  {
+    if(!has_igc_glas_gfm())
+      throw Exception("Do not have GLAS/GFM for this RasterImage");
+    return vicar_file_->igc_glas_gfm();
+  }
+
 //-----------------------------------------------------------------------
 /// Set the Map Info.
 //-----------------------------------------------------------------------

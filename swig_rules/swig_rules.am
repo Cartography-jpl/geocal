@@ -17,6 +17,7 @@
 # CONDITIONAL_SWIG_SRC list of swig source files, with conditionals included
 #       so for example $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5). If you
 #       don't have any conditional code, this can just be set to FULL_SWIG_SRC
+# SWIG_PYI list of .pyi files to include for typing
 # SWIG_CPPFLAGS the flags we should use when compiling swig code,
 #       so a list of -I options.
 # PYTHON_CPPFLAGS flags needed to compile against python
@@ -27,6 +28,7 @@
 # DOXYGEN the program doxygen
 
 swiginc_HEADERS = 
+swiginc_HEADERS += @swigrules@/include/director_serialization.i
 swiginc_HEADERS += @swigrules@/include/my_shared_ptr.i
 swiginc_HEADERS += @swigrules@/include/shared_ptr_type_mapper.i
 swiginc_HEADERS += @swigrules@/include/swig_array.i
@@ -55,8 +57,12 @@ EXTRA_DIST+= @swigrules@/swig_wrap.tmpl
 EXTRA_DIST+= @swigrules@/lib/generic_object.cc.sample
 EXTRA_DIST+= @swigrules@/lib/generic_object.h.sample
 EXTRA_DIST+= @swigrules@/lib/generic_object.i.sample
+EXTRA_DIST+= @swigrules@/lib/generic_object_map.cc.sample
+EXTRA_DIST+= @swigrules@/lib/generic_object_map.h.sample
+EXTRA_DIST+= @swigrules@/lib/generic_object_map.i.sample
 EXTRA_DIST+= @swigrules@/lib/common.i.sample
 EXTRA_DIST+= @swigrules@/lib/printable.h.sample
+EXTRA_DIST+= @swigrules@/lib/DirectorNotes.md
 EXTRA_DIST+= @swigrules@/lib/serialize_support.h.sample
 EXTRA_DIST+= @swigrules@/lib/blitz_array_serialize_support.h.sample
 EXTRA_DIST+= @swigrules@/lib/blitz_array_serialize_support.cc.sample
@@ -75,12 +81,15 @@ vpath %.i $(srcdir)/@swigrules@/lib
 SWIG_FLAG += -O
 
 pkgpythonswig_PYTHON = @swigrules@/__init__.py
+pkgpythonswig_PYTHON += @swigrules@/all.py
 
 EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(FULL_SWIG_SRC))
 EXTRA_DIST+= $(patsubst %_wrap.cc, %.py, $(ADDITONAL_SWIG_SRC))
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(COMPILE_SWIG_SRC))
 pkgpythonswig_PYTHON += $(patsubst %_wrap.cc, %.py, $(ADDITONAL_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
+pkgpythonswig_DATA = $(SWIG_PYI)
+pkgpythonswig_DATA+= @swigrules@/py.typed
 
 _swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) 
 _swig_wrap_la_CPPFLAGS+= $(SWIG_CPPFLAGS)
@@ -94,6 +103,7 @@ _swig_wrap_la_SOURCES+= @swigsrc@/swig_wrap.cc
 
 EXTRA_DIST+= $(FULL_SWIG_SRC)
 EXTRA_DIST+= $(ADDITONAL_SWIG_SRC)
+EXTRA_DIST+= $(SWIG_PYI)
 EXTRA_DIST+= $(srcdir)/$(swigsrc)/*_wrap.h
 
 # Only generate these files in maintainer mode, otherwise consider them

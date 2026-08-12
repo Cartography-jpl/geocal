@@ -34,7 +34,7 @@ namespace GeoCal {
 class MapReprojectedImage : public RasterImageVariable {
 public:
   MapReprojectedImage(const boost::shared_ptr<RasterImage> Img_in,
-		      const MapInfo& Mi);
+		      const MapInfo& Mi, int Line_avg = -1, int Sample_avg = -1);
 
 //-----------------------------------------------------------------------
 /// Destructor.

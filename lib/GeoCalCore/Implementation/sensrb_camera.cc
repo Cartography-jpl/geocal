@@ -120,6 +120,11 @@ void SensrbCamera::dcs_to_focal_plane
   Yfp = focal_length_with_derivative() * 
     (Dcs.R_component_3() / Dcs.R_component_4());
 
+  // Suppress warning about variables not being used. We aren't, but I
+  // want to leave them in place for now and just not get a warning.
+  (void) max_r2_filled_in;
+  (void) max_rp2;
+  (void) max_r2;
   // fill_in_max();
   // AutoDerivative<double> x, y;
   // QuaternionCamera::dcs_to_focal_plane(Band, Dcs, x, y);

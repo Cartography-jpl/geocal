@@ -80,6 +80,9 @@ public:
   virtual boost::shared_ptr<GroundCoordinate> 
   ground_coordinate_approx_height(const ImageCoordinate& Ic,
 				  double H) const;
+  virtual void image_coordinate_extended(const GroundCoordinate& Gc,
+					 ImageCoordinate& Res,
+					 bool& Success) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,

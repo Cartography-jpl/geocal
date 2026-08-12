@@ -1,22 +1,22 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT(geocal, 1.26)
+AC_INIT([geocal],[1.28])
 AC_CONFIG_AUX_DIR([config])
-AC_CONFIG_MACRO_DIR([config/m4])
-AC_CONFIG_MACRO_DIR([config/m4_local])
+AC_CONFIG_MACRO_DIRS([config/m4 config/m4_local])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
 AC_CONFIG_FILES([script/setup_geocal.csh script/setup_geocal.sh])
+AC_CONFIG_FILES([script/conda_wrapper.sh])
 AC_CONFIG_FILES([script/setup_afids_env.csh script/setup_afids_env.sh script/vicarb])
 AC_CONFIG_FILES([lib/GeoCalCore/Support/global_fixture_default.cc])
 AC_CONFIG_FILES([geocal.pc])
-AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_internal_config.h])
+AC_CONFIG_HEADERS([lib/GeoCalCore/Support/geocal_config.h lib/GeoCalCore/Support/geocal_external_config.h])
 # We have the top directory for GeoCal as a variable. This allows the
 # full AFIDS system to include this in a subdirectory. For this standalone
 # build, this is just "." relative to srcdir.
 geocal_topdir=.
 
 AFIDS_COMMON
-MP_WITH_CURSES
+AX_WITH_CURSES
 
 AC_ARG_VAR([THIRDPARTY], [
 It is common that either 1) you want to build a local copy of all
@@ -65,6 +65,7 @@ AC_FFTW(optional, cannot_build, default_search)
 # VicarLite files, but we won't do that yet.
 AC_GDAL(required, cannot_build, default_search)
 AC_VICAR_GDALPLUGIN(optional, cannot_build, default_search)
+AC_GEOTIFF(required, cannot_build, default_search)
 
 #=================================================================
 # Have a little bit of code that depends on having both GDAL
@@ -111,7 +112,7 @@ AC_ARG_WITH([swig],
            [SWIG=/fake_so_fail],
            [])
 
-AC_PROG_SWIG(3.0.7)
+AC_PROG_SWIG()
 SWIG_ENABLE_CXX
 SWIG_PYTHON
 
@@ -135,10 +136,22 @@ AC_IS_MAC
 # Use sincos if it is available. This is on most Linux systems, but not on
 # the mac.
 #=================================================================
-AC_CHECK_LIBM
+LT_LIB_M
 LIBS="$LIBS $LIBM"
 AC_CHECK_FUNCS(sincos)
 
+#=================================================================
+# Build does a few extra things to support a conda install -
+# add a conda_wrapper.sh script, modify shebangs so vicar procs are
+# callable without activating conda.
+
+AC_ARG_WITH([conda-install-support],
+	     [AS_HELP_STRING([--with-conda-install-support],
+	     [extra build support for doing a conda install])],
+	     [with_conda_install_support=yes],
+	     [with_conda_install_support=no])
+AM_CONDITIONAL([WITH_CONDA_INSTALL_SUPPORT], [ test "$with_conda_install_support" = "yes" ])
+	     
 #=================================================================
 # Turn off use of boost serialization of desired. Don't have a use
 # case for this yet, but it is easier to put in and not use than
@@ -185,38 +198,33 @@ fi
 AM_CONDITIONAL([BUILD_AFIDS], [false])
 
 #=================================================================
+# Location of ISIS. 
+# This option here is used to add a specification to the setup files to
+# set these to particular values.
+AC_ARG_WITH([isis-root],
+AS_HELP_STRING([--with-isis-root@<:@=DIR@:>@], [give directory where ISIS executables can be found]), [ ac_isis_root="$withval" ], [ ac_isis_root="/opt/isis"] )
+AC_SUBST([isisroot], ["$ac_isis_root"])
+
+AC_ARG_WITH([isis-data],
+AS_HELP_STRING([--with-isis-data@<:@=DIR@:>@], [give directory where ISIS data can be found]), [ ac_isis_data="$withval" ], [ ac_isis_data="/opt/afids/data/isisdata"] )
+AC_SUBST([isisdata], ["$ac_isis_data"])
+
+#=================================================================
+# Location of Copernicus data
+
+AC_ARG_WITH([copernicus-dem],
+AS_HELP_STRING([--with-copernicus-dem@<:@=DIR@:>@], [give directory where Copernicus DEM can be found]), [ ac_copernicus_dem="$withval" ], [ ac_copernicus_dem="/bigdata/tllogan30/copernicusDEM/copdem_v1_L2_tif" ] )
+AC_SUBST([copernicusdem], ["$ac_copernicus_dem"])
+
+AC_ARG_WITH([copernicus-lwm],
+AS_HELP_STRING([--with-copernicus-lwm@<:@=DIR@:>@], [give directory where Copernicus LWM can be found]), [ ac_copernicus_lwm="$withval" ], [ ac_copernicus_lwm="/bigdata/tllogan30/copernicusDEM/coplwm_v1_L2_tif" ] )
+AC_SUBST([copernicuslwm], ["$ac_copernicus_lwm"])
+
+#=================================================================
 # Put in setup_afids_env.csh/setup_afids_env.sh and vicarb that
 # uses the newer version of things in geocal
 
-AM_CONDITIONAL([GEOCAL_OVERRIDE_AFIDS], [test x$have_afids = xyes])
-
-#=================================================================
-# We normally include pynitf installation (at least for the time being,
-# see python/README_pynitf.md for discussion of this). But for testing
-# it is useful to have the option to disable this. That way in the long
-# term when pynitf is just handled like any other dependency, we know the
-# code will still work.
-
-AC_MSG_CHECKING([whether to disable installing pynitf])
-AC_ARG_ENABLE(pynitf,
-AS_HELP_STRING([--disable-pynitf],[Do not install pynitf]),
-[if test "$enableval" = no; then
-  AC_MSG_RESULT([yes])
-  install_pynitf="no"
-fi],
-[
-  # Regardless, only install if we have python 3.
-  ac_python3=`LD_LIBRARY_PATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:$LD_LIBRARY_PATH $PYTHON -c "import sys; print(sys.version_info > (3,))"`
-  if test "$ac_python3" != "True"; then
-     install_pynitf="no"
-     AC_MSG_RESULT([yes])
-  else
-     AC_MSG_RESULT([no])
-     install_pynitf="yes"
-  fi
-]
-)
-AM_CONDITIONAL([INSTALL_PYNITF], [test "$install_pynitf" = "yes"])
+AM_CONDITIONAL([GEOCAL_OVERRIDE_AFIDS], [test x$have_afids = xyes -a $AFIDS_PREFIX != $prefix])
 
 AC_CONFIG_FILES([Makefile])
 AC_OUTPUT
@@ -237,6 +245,7 @@ LOC_MSG([  CXX compiler:                  ${CXX} ${CXXFLAGS}])
 LOC_MSG()
 LOC_MSG([  Generate SWIG wrappers:        ${generate_swig}])
 LOC_MSG([  Install documentation:         ${with_documentation}])
+LOC_MSG([  Conda install support:         ${with_conda_install_support}])
 LOC_MSG([  Include boost serialization:   ${with_boost_serialization}])
 LOC_MSG([  Have AFIDS Data:               ${have_afids_data}])
 LOC_MSG([  Have AFIDS:                    ${have_afids}])
@@ -249,4 +258,3 @@ LOC_MSG([  Have MSP:                      ${have_msp}])
 LOC_MSG([  Have SPICE:                    ${have_spice}])
 LOC_MSG([  Have VICAR GDAL Plugin:        ${have_vicar_gdalplugin}])
 LOC_MSG([  Have VICAR Run Time Library:   ${have_vicar_rtl}])
-LOC_MSG([  Install pynitf:                ${install_pynitf}])

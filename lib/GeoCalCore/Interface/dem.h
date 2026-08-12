@@ -32,6 +32,20 @@ public:
   virtual double distance_to_surface(const GroundCoordinate& Gp) const = 0;
 
 //-----------------------------------------------------------------------
+/// Height range, in meters relative to the reference surface. This is
+/// for the area covered by the ULC to LRC. Note that this might be a
+/// bit approximate, you might find a height out of this range. But
+/// this should give a reasonable range to use for things like
+/// generating an RSM etc. An optional "pad" can be given to extend
+/// the range a bit to make sure we cover the DEM height range.
+//-----------------------------------------------------------------------
+
+  virtual void height_range(const GroundCoordinate& Ulc,
+			    const GroundCoordinate& Lrc,
+			    double& Min_h, double& Max_h,
+			    double H_pad = 10.0) const = 0;
+  
+//-----------------------------------------------------------------------
 /// Return height of surface above/below the reference surface (e.g.,
 /// WGS-84 for the earth). Positive means above, negative below. This is 
 /// in meters.

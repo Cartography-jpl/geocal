@@ -27,6 +27,15 @@ public:
 			const std::string& Rsm_support_data_edition="fake-1");
   virtual ~RsmRationalPolynomial() {}
   virtual void print(std::ostream& Os) const;
+  
+//-----------------------------------------------------------------------
+/// Check for zero crossing in the denominator, i.e., do we have poles
+/// in our fit.
+//-----------------------------------------------------------------------
+  
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  { return line_den_.check_zero_crossing(Grid_spacing) ||
+      sample_den_.check_zero_crossing(Grid_spacing); }
   virtual boost::shared_ptr<RsmBase> clone() const
   { return boost::shared_ptr<RsmBase>(new RsmRationalPolynomial(*this)); }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z) const;
@@ -44,6 +53,9 @@ public:
 			    double Max_sample, double Min_x, double Max_x,
 			    double Min_y, double Max_y, double Min_z,
 			    double Max_z);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample);
   void fit_data(const std::vector<double>& Line,
 		const std::vector<double>& Sample,
 		const std::vector<double>& X,

@@ -55,6 +55,10 @@ public:
    const std::string& Options = "",   
    int boundary = 0,
    bool Verbose = false) const;
+  void set_tile_size(int Number_tile_line, int Number_tile_sample)
+  { number_tile_line_ = Number_tile_line; number_tile_sample_ = Number_tile_sample; }
+  virtual void change_to_geodetic360();
+  virtual void change_to_geodetic();
 protected:
   CartLabMultifile() {}
   CartLabMultifile(int Number_tile,
@@ -87,7 +91,8 @@ protected:
   // Note that RasterMultifile also has a init function which may need
   // to be called.
   void init_loc_to_file();
-
+  void init_loc_to_file_360();
+  
   // This is stuff that the derived class should fill in before
   // calling init_loc_to_file.
   std::string dirbase;		///< Location of data we are reading
@@ -126,12 +131,17 @@ class GdalCartLabMultifile: public CartLabMultifile {
 public:
   virtual ~GdalCartLabMultifile() {}
 protected:
-  GdalCartLabMultifile() {}
+  GdalCartLabMultifile()
+    : file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
+  {}
   GdalCartLabMultifile(int Number_tile,
 		       bool No_coverage_is_error = true, 
 		       int No_coverage_fill_value = -1) 
     : CartLabMultifile(Number_tile, No_coverage_is_error, 
-		       No_coverage_fill_value)
+		       No_coverage_fill_value),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
   {
   }
   GdalCartLabMultifile(const std::string& Dir,
@@ -146,14 +156,37 @@ protected:
 		       Number_sample_per_tile,
 		       Number_tile_each_file, Number_tile,
 		       No_coverage_is_error,
-		       No_coverage_fill_value)
+		       No_coverage_fill_value),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
   {
   }
   virtual RasterMultifileTile get_file(int Line, int Sample) const;
+  // In general, the files that make up a RasterMultifile aren't
+  // assumed to have the same size. The only assumption is that they
+  // are rectangular, and we have a way to identify the file uniquely
+  // for a line sample (so if we have overlap, we have a simple rule
+  // for picking a file).
+  //
+  // However, an optimization can be do for the missing files - we
+  // just create a ConstantRasterImage with the fill data. For this to
+  // work, we *do* assume that the files are all the same size and
+  // form a simple rectangular grid. This is the case for many of the
+  // datasets, which for example are 1x1 degree.
+  //
+  // These files have a overlap, usually 1 pixel. So the size of the
+  // file isn't exactly the size of mi_ref. This is the size between
+  // files, usually just mi_ref - 1 pixel. This is the size of the
+  // ConstantRasterImage we create.
+  int file_spacing_number_line, file_spacing_number_sample;
 private:
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -173,12 +206,17 @@ class VicarCartLabMultifile : public CartLabMultifile {
 public:
   virtual ~VicarCartLabMultifile() {}
 protected:
-  VicarCartLabMultifile() {}
+  VicarCartLabMultifile()
+    : file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
+  {}
   VicarCartLabMultifile(int Number_tile,
 		       bool No_coverage_is_error = true, 
 		       int No_coverage_fill_value = -1) 
     : CartLabMultifile(Number_tile, No_coverage_is_error, 
-		       No_coverage_fill_value)
+		       No_coverage_fill_value),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)
   {
   }
   VicarCartLabMultifile(const std::string& Dir,
@@ -197,18 +235,64 @@ protected:
 		       No_coverage_is_error,
 		       No_coverage_fill_value),
       favor_memory_mapped(Favor_memory_mapped),
-      force_area_pixel(Force_area_pixel)
+      force_area_pixel(Force_area_pixel),
+      file_spacing_number_line(-1),
+      file_spacing_number_sample(-1)      
   {
   }
   virtual RasterMultifileTile get_file(int Line, int Sample) const;
-
   bool favor_memory_mapped;	///< Whether we use memory mapping or
 				///not when reading an uncompressed
 				///file. 
   bool force_area_pixel;	///< If true force map to have pixel
 				///as area rather than point, meant as
 				///a work around for the SRTM data.
+  // See comment above in GdalCartLabMultifile.
+  int file_spacing_number_line, file_spacing_number_sample;
 private:
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+  template<class Archive>
+  void save(Archive& Ar, const unsigned int version) const;
+  template<class Archive>
+  void load(Archive& Ar, const unsigned int version);
+};
+
+/****************************************************************//**
+  For some one off sort of files sets, it can be useful to just fill
+  in the loc_to_file stuff directly (e.g. with python). This supports
+  that, it allows everything to be set up.
+*******************************************************************/
+
+class VicarCartLabMultifileSetup : public VicarCartLabMultifile
+{
+public:
+  VicarCartLabMultifileSetup(const boost::shared_ptr<MapInfo> Minfo,
+			     int Number_line_per_tile = 100,
+			     int Number_sample_per_tile = -1, 
+			     int Number_tile_each_file = 4,
+			     int Number_tile = 4,
+			     bool Favor_memory_mapped = true,
+			     bool No_coverage_is_error = true, 
+			     int No_coverage_fill_value = -1,
+			     bool Force_area_pixel = false)
+    : VicarCartLabMultifile("fake_dir", "", Number_line_per_tile, Number_sample_per_tile,
+			    Number_tile_each_file, Number_tile, Favor_memory_mapped,
+			    No_coverage_is_error, No_coverage_fill_value, Force_area_pixel)
+  {
+    map_info_ = Minfo;
+    number_line_ = map_info().number_y_pixel();
+    number_sample_ = map_info().number_x_pixel();
+  }
+  void file_add(int x1, int y1, int x2, int y2, const std::string& fname)
+  { loc_to_file.add(x1, y1, x2, y2, fname);
+    if(first_file == "")
+      first_file = fname;
+  }
+  virtual ~VicarCartLabMultifileSetup() {};
+private:
+  VicarCartLabMultifileSetup() {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -217,6 +301,9 @@ private:
 
 GEOCAL_EXPORT_KEY(CartLabMultifile);
 GEOCAL_EXPORT_KEY(GdalCartLabMultifile);
+GEOCAL_CLASS_VERSION(GdalCartLabMultifile, 1);
 GEOCAL_EXPORT_KEY(VicarCartLabMultifile);
+GEOCAL_CLASS_VERSION(VicarCartLabMultifile, 1);
+GEOCAL_EXPORT_KEY(VicarCartLabMultifileSetup);
 #endif
 

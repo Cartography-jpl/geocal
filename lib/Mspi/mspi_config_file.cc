@@ -3,8 +3,6 @@
 #include <sstream>
 #include <set>
 #include <boost/foreach.hpp>
-// This won't be needed once version 3 becomes the default for boost filesystem
-#define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem.hpp>
 #include "geocal_serialize_support.h"
 

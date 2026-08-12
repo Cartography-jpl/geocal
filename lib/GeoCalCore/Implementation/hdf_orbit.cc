@@ -7,43 +7,34 @@ template<class PositionType, class TimeCreatorType> template<class Archive>
 void HdfOrbit<PositionType, TimeCreatorType>::save(Archive & ar, 
 			   const unsigned int version) const
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(fname)
+  ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(OrbitArray),
+      boost::serialization::base_object<OrbitArray<PositionType, TimeCreatorType> >(*this));
+  ar & GEOCAL_NVP(fname)
     & GEOCAL_NVP(bgroup)
     & GEOCAL_NVP(eph_time)
     & GEOCAL_NVP(eph_pos)
     & GEOCAL_NVP(eph_vel)
     & GEOCAL_NVP(att_time)
-    & GEOCAL_NVP(att_quat)
-    & GEOCAL_NVP(att_from_sc_to_ref_frame);
+    & GEOCAL_NVP(att_quat);
 }
 
 template<class PositionType, class TimeCreatorType> template<class Archive>
 void HdfOrbit<PositionType, TimeCreatorType>::load(Archive & ar, const unsigned int version)
 {
-  ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(Orbit)
-    & GEOCAL_NVP(fname)
-    & GEOCAL_NVP(bgroup);
-  // Older version didn't have the field names saved, it used the default
-  // values
-  if(version == 0) {
-    eph_time = "Ephemeris/Time";
-    eph_pos = "Ephemeris/Position";
-    eph_vel = "Ephemeris/Velocity";
-    att_time = "Attitude/Time";
-    att_quat = "Attitude/Quaternion";
-  } else {
-    ar & GEOCAL_NVP(eph_time)
-      & GEOCAL_NVP(eph_pos)
-      & GEOCAL_NVP(eph_vel)
-      & GEOCAL_NVP(att_time)
-      & GEOCAL_NVP(att_quat);
-  }
-  // Previous to version 2, we always had att_from_sc_to_ref_frame true
-  if(version < 2)
-    att_from_sc_to_ref_frame = true;
-  else
-    ar & GEOCAL_NVP(att_from_sc_to_ref_frame);
+  // We introduced OrbitArray in version 3. Older versions can easily
+  // be read, so just generate an error message
+  if(version < 3)
+    throw Exception("We can't read the older HdfOrbit version (< 3). Regenerate your serialized data.");
+  
+  ar & boost::serialization::make_nvp(BOOST_PP_STRINGIZE(OrbitArray),
+      boost::serialization::base_object<OrbitArray<PositionType, TimeCreatorType> >(*this));
+  ar & GEOCAL_NVP(fname)
+    & GEOCAL_NVP(bgroup)
+    & GEOCAL_NVP(eph_time)
+    & GEOCAL_NVP(eph_pos)
+    & GEOCAL_NVP(eph_vel)
+    & GEOCAL_NVP(att_time)
+    & GEOCAL_NVP(att_quat);
   init();
 }
 

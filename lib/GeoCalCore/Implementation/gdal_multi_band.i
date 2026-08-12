@@ -17,6 +17,10 @@ class GdalMultiBand : public RasterImageMultiBandVariable {
 public:
   GdalMultiBand(const std::string& Fname, int Number_tile = 4,
 		int Tile_number_line = -1, int Tile_number_sample = -1);
+  GdalMultiBand(const std::string& Fname, int Number_tile,
+		const std::string& Allowed_drivers,
+		const std::string& Open_options="", const std::string& Sibling_files="",
+		int Tile_number_line = -1, int Tile_number_sample = -1);
   GdalMultiBand(const std::string& Fname,
 		  const std::string& Driver_name,
 		  const GdalRasterImage& Source,

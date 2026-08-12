@@ -8,7 +8,7 @@ using namespace blitz;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void SubRasterImageMultiBand::serialize(Archive & ar, 
-					const unsigned int version)
+					const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageMultiBandVariable)
     & GEOCAL_NVP(rmb)

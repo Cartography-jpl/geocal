@@ -4,6 +4,7 @@
 #include "simple_dem.h"
 #include "memory_raster_image.h"
 #include "constant_raster_image.h"
+#include "nitf_support.h"
 #include <sstream>
 
 using namespace GeoCal;
@@ -61,6 +62,41 @@ BOOST_AUTO_TEST_CASE(att_csattb)
 	      << *att2 << "\n";
 }
 
+BOOST_AUTO_TEST_CASE(att_csattb_sign_change)
+{
+  blitz::Range ra = blitz::Range::all();
+  boost::math::quaternion<double> q1(0.0007963267107332633, 0.0, 0.0,
+			       0.9999996829318346);
+  boost::math::quaternion<double> q2(0.009203543268808336, 0.0, 0.0,
+			       -0.9999576464987401);
+  blitz::Array<double, 2> att(10,4);
+  att(0,ra) = quaternion_to_nitf(q1);
+  att(1,ra) = quaternion_to_nitf(q1);
+  att(2,ra) = quaternion_to_nitf(q1);
+  att(3,ra) = quaternion_to_nitf(q1);
+  att(4,ra) = quaternion_to_nitf(q1);
+  att(5,ra) = quaternion_to_nitf(q2);
+  att(6,ra) = quaternion_to_nitf(q2);
+  att(7,ra) = quaternion_to_nitf(q2);
+  att(8,ra) = quaternion_to_nitf(q2);
+  att(9,ra) = quaternion_to_nitf(q2);
+  Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
+  AttCsattb a2(att, t, 1.0, true, AttCsattb::LINEAR);
+  AttCsattb a3(att, t, 1.0, true, AttCsattb::LAGRANGE,
+	       AttCsattb::LAGRANGE_3);
+  AttCsattb a5(att, t, 1.0, true, AttCsattb::LAGRANGE,
+	       AttCsattb::LAGRANGE_5);
+  for(Time it = t + 3.0; it < t + 7.0; it += 0.25) {
+    BOOST_CHECK(quaternion_delta_angle(a2.att_q(it-0.25), a2.att_q(it)) < 0.02);
+    BOOST_CHECK(quaternion_delta_angle(a3.att_q(it-0.25), a3.att_q(it)) < 0.02);
+    BOOST_CHECK(quaternion_delta_angle(a5.att_q(it-0.25), a5.att_q(it)) < 0.02);
+    if(false)
+      std::cerr << "it: " << it << "\n"
+		<< "  " << a2.att_q(it) << "\n"
+		<< "  " << a3.att_q(it) << "\n"
+		<< "  " << a5.att_q(it) << "\n";
+  }
+}
 BOOST_AUTO_TEST_CASE(orbit_des)
 {
   Time t = Time::parse_time("1998-06-30T10:51:28.32Z");
@@ -74,6 +110,56 @@ BOOST_AUTO_TEST_CASE(orbit_des)
   boost::shared_ptr<RasterImage> img(new ConstantRasterImage(cam->number_line(0),
 				     cam->number_sample(0), 10));
   ImageCoordinate ic(1.0, 1504 / 2);
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
+  }
+  // Check that initially CartesianInertial
+  BOOST_CHECK(!orb.pos_csephb()->is_cf());
+  BOOST_CHECK(!orb.att_csattb()->is_cf());
+  // Should be a noop
+  orb.convert_to_ci();
+  BOOST_CHECK(!orb.pos_csephb()->is_cf());
+  BOOST_CHECK(!orb.att_csattb()->is_cf());
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
+  }
+
+  // Convert to cf
+  orb.convert_to_cf();
+  BOOST_CHECK(orb.pos_csephb()->is_cf());
+  BOOST_CHECK(orb.att_csattb()->is_cf());
+  for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
+    BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
+    OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);
+    OrbitDataImageGroundConnection kigc(korb.orbit_data(ti), cam, dem, img);
+    if(false)
+      std::cerr << ti << ": "
+		<< GeoCal::distance(*igc.ground_coordinate(ic),
+				    *kigc.ground_coordinate(ic)) << "\n";
+    BOOST_CHECK(GeoCal::distance(*igc.ground_coordinate(ic),
+     				 *kigc.ground_coordinate(ic)) < 1e-2);
+  }
+
+  // Convert back
+  orb.convert_to_ci();
+  BOOST_CHECK(!orb.pos_csephb()->is_cf());
+  BOOST_CHECK(!orb.att_csattb()->is_cf());
   for(Time ti = orb.min_time(); ti < orb.max_time(); ti += 0.5) {
     BOOST_CHECK(GeoCal::distance(*orb.position_cf(ti), *korb.position_cf(ti)) < 1e-2);
     OrbitDataImageGroundConnection igc(orb.orbit_data(ti), cam, dem, img);

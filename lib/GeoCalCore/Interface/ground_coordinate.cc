@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "ground_coordinate.h"
 #include "geocal_matrix.h"
 #include "geocal_autoderivative_quaternion.h"
@@ -15,13 +15,13 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void GroundCoordinate::serialize(Archive & ar, const unsigned int version)
+void GroundCoordinate::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
 }
 
 template<class Archive>
-void CartesianFixed::serialize(Archive & ar, const unsigned int version)
+void CartesianFixed::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(GroundCoordinate);
   GEOCAL_BASE(CartesianFixed, GroundCoordinate);
@@ -29,7 +29,7 @@ void CartesianFixed::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void CartesianInertial::serialize(Archive & ar, const unsigned int version)
+void CartesianInertial::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(CartesianInertial);
   ar & GEOCAL_NVP(position);
@@ -48,24 +48,25 @@ inline double sqr(double x) { return x * x; }
 class DummyToolkitCoordinateInterface : public ToolkitCoordinateInterface {
 public:
   virtual ~DummyToolkitCoordinateInterface() {}
-  virtual void to_inertial(int Body_id, const Time& T,
-    const CartesianFixed& From, CartesianInertial& To)
+  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T), 
+   const CartesianFixed& UNUSED(From), CartesianInertial& UNUSED(To))
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
   }
-  virtual void to_inertial(int Body_id, const Time& T, 
-			   double Cf_to_ci[3][3])
+  virtual void to_inertial(int UNUSED(Body_id), const Time& UNUSED(T), 
+			   const CartesianFixed& UNUSED(From), const boost::array<double, 3>& UNUSED(Vel_c),
+			   CartesianInertial& UNUSED(To), boost::array<double, 3>& UNUSED(Vel_ci))
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianFixed to CartesianInertial.");
   }
-  virtual void to_fixed(int Body_id, const Time& T,
-    const CartesianInertial& From, CartesianFixed& To) 
+  virtual void to_fixed(int UNUSED(Body_id), const Time& UNUSED(T),
+     const CartesianInertial& UNUSED(From), CartesianFixed& UNUSED(To)) 
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianInertial to CartesianFixed.");
   }
 
-  virtual void to_fixed(int Body_id, const Time& T,
-			double Ci_to_cf[3][3])
+  virtual void to_fixed(int UNUSED(Body_id), const Time& UNUSED(T),
+			double UNUSED(Ci_to_cf[3][3]))
   {
     throw Exception("Need to have either SPICE or SDP toolkit available to convert from CartesianInertial to CartesianFixed.");
   }
@@ -94,6 +95,13 @@ ToolkitCoordinateInterface* CartesianFixed::toolkit_coordinate_interface =
 
 double GeoCal::distance(const GroundCoordinate& G1, const GroundCoordinate& G2)
 {
+  if(G1.naif_code() != G2.naif_code()) {
+    Exception e;
+    e << "NAIF codes in distance function don't match\n"
+      << "  G1 NAIF code: " << G1.naif_code() << "\n"
+      << "  G2 NAIF code: " << G2.naif_code() << "\n";
+    throw e;
+  }
   boost::array<double, 3> t1 = G1.convert_to_cf()->position;
   boost::array<double, 3> t2 = G2.convert_to_cf()->position;
   return sqrt(sqr(t1[0] - t2[0]) + sqr(t1[1] - t2[1]) + sqr(t1[2] - t2[2]));

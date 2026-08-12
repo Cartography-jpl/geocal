@@ -11,7 +11,7 @@ template<class Archive>
 void CameraRadialDistortionAndTransform::serialize(Archive & ar, const unsigned int version)
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(CameraRadialDistortion);
-  ar & GEOCAL_NVP_(ccd_off) & GEOCAL_NVP_(ccd_cen)
+  ar & GEOCAL_NVP_(bin_mode) & GEOCAL_NVP_(ccd_off) & GEOCAL_NVP_(ccd_cen)
     & GEOCAL_NVP_(t_off) & GEOCAL_NVP_(tinv_off)
     & GEOCAL_NVP_(t_m) & GEOCAL_NVP_(tinv_m);
 }

@@ -24,5 +24,22 @@ if("@have_msp@" == "yes") then
        setenv LD_LIBRARY_PATH @MSP_PREFIX@/lib
     endif
 endif
+if ($?NITF_PLUGIN) then
+  setenv NITF_PLUGIN geocal:${NITF_PLUGIN}
+else
+  setenv NITF_PLUGIN geocal
+endif
+if("@isisroot@" != "") then
+    setenv ISISROOT "@isisroot@"
+endif
+if("@isisdata@" != "") then
+    setenv ISISDATA "@isisdata@"
+endif
+if("@copernicusdem@" != "") then
+    setenv AFIDS_COPERNICUS_DEM "@copernicusdem@"
+endif
+if("@copernicuslwm@" != "") then
+    setenv AFIDS_COPERNICUS_LWM "@copernicuslwm@"
+endif
 
 

@@ -61,7 +61,7 @@ double Fill_value
 // See base class for description
 void IgcSimulatedRayCaster::calc(int Lstart, int Sstart) const
 {
-  IgcRayCaster rcast(igc_, Lstart, data.rows(), number_integration_step_,
+  IgcRayCaster rcast(igc_, 1, Lstart, data.rows(), number_integration_step_,
 		     raycast_resolution_, max_height_, Sstart, data.cols());
   while(!rcast.last_position()) {
     blitz::Array<double, 2> r = rcast.next_radiance(*img_, fill_value_);

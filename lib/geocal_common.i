@@ -9,13 +9,34 @@
 // The module actually gets overridden by SWIG command line options
 // when we build. But we still need to supply this to get the
 // directors=1 and allprotected=1 set.
+//
+// See https://github.com/swig/swig/issues/2260 for discussion of
+// moduleimport, this is needed because we place everything in one
+// library _swig_wrap.so. Swig 4 seems to prefer splitting this into
+// separate libraries (so for example "exception.py" would import
+// _exception.so). It is possible we can change to that in the future,
+// although it seems like it is useful to have it all one library like
+// things like cython do. But for now we can just work around this.
+// The effect of this is just to change the "import" line in the swig
+// generated python code.
 
-%module(directors="1", allprotected="1") geocal
+#if SWIG_VERSION < 0x040000  
+%module(directors="1", allprotected="1") foo
+#else
+%module(moduleimport="from ._swig_wrap import $module", directors="1", allprotected="1") foo
+#endif
+#define SWIG_MODULE_ALREADY_DONE 1
 #define SWIG_MODULE geocal_swig
 
 %{
 #include <boost/shared_ptr.hpp>
 #include <boost/rational.hpp>
+#if defined(__clang__)
+// For some reason, the configuration of blitz on the mac (1.0.2 from
+// conda-forge) doesn't have BZ_HAVE_IEEE_MATH defined. However, this
+// is actually true of clang. So set this, so we get blitz_isnan available.
+#define BZ_HAVE_IEEE_MATH 1
+#endif
 %}
 
 // Short cut for ingesting a base class
@@ -25,6 +46,9 @@
 
 // Map std::string to and from the native string type
 %naturalvar std::string;
+
+// Add type information to python documentation
+%feature("autodoc", 1);
 
 %include <std_vector.i>
 
@@ -45,3 +69,7 @@
 %import "swig_iostream.i"
 %include "swig_vector_shared_ptr.i"
 %import "swig_rational.i"
+%include "director_serialization.i"
+%define %geocal_director_serialization(BNAME, TYPE...)
+%director_serialization(GeoCal, geocal_serialize_support.h, BNAME, TYPE)
+%enddef

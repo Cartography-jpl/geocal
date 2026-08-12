@@ -1,5 +1,13 @@
 // -*- mode: c++; -*-
 // (Not really c++, but closest emacs mode)
+#ifndef SWIG_MODULE_ALREADY_DONE
+#if SWIG_VERSION < 0x040000  
+%module(directors="1", allprotected="1") foo
+#else
+%module(moduleimport="from ._swig_wrap import $module", directors="1", allprotected="1") foo
+#endif
+#endif
+
 %{
 #define DO_IMPORT_ARRAY
 %}
@@ -100,8 +108,9 @@ PyObject* numpy_dot_uint8()
 PyObject* numpy_dot_bool()
 {
   static PyObject* res = 0;
+  // np.bool got replaced with np.bool_ in later versions of numpy.
   if(!res)
-    res = PyObject_GetAttrString(numpy_module(), "bool");
+    res = PyObject_GetAttrString(numpy_module(), "bool_");
   return res;
 }
 
@@ -408,9 +417,57 @@ public:
   $1 = (t.obj && PyArray_NDIM((PyArrayObject*)t.obj) ==DIM ? 1 : 0);
 }
 
+//--------------------------------------------------------------
+// Convert a list of numpy arrays into a vector of blitz arrays
+//--------------------------------------------------------------
+
+%typecheck(PRECEDENCE) std::vector<blitz::Array<TYPE, DIM> >, const std::vector<blitz::Array<TYPE, DIM> > {
+  // Here we are just checking that the item is an iterable, we are not checking that
+  // each element can be converted to a blitz array. Leave that as a failure during the typemap conversion
+  PyObject *iterator = PyObject_GetIter($input);
+  $1 = iterator != NULL;
+}
+
+%typecheck(PRECEDENCE) std::vector<blitz::Array<TYPE, DIM> >&, const std::vector<blitz::Array<TYPE, DIM> >& {
+  // Here we are just checking that the item is an iterable, we are not checking that
+  // each element can be converted to a blitz array. Leave that as a failure during the typemap conversion
+  PyObject *iterator = PyObject_GetIter($input);
+  $1 = iterator != NULL;
+}
+
+%typemap(in) std::vector<blitz::Array<TYPE, DIM> > (std::vector<blitz::Array<TYPE, DIM> > arr_vec), const std::vector<blitz::Array<TYPE, DIM> > (std::vector<blitz::Array<TYPE, DIM> > arr_vec)
+{ 
+  try {
+    iter_to_vector_of_arrays<TYPE, DIM>($input, arr_vec);
+  } catch (ArrayConversionException& exc) {
+    SWIG_exception_fail(SWIG_TypeError, exc.what());
+  }
+
+  $1 = arr_vec;
+}
+
+%typemap(in) std::vector<blitz::Array<TYPE, DIM> >& (std::vector<blitz::Array<TYPE, DIM> > arr_vec), const std::vector<blitz::Array<TYPE, DIM> >& (std::vector<blitz::Array<TYPE, DIM> > arr_vec)
+{ 
+  try {
+    iter_to_vector_of_arrays<TYPE, DIM>($input, arr_vec);
+  } catch (ArrayConversionException& exc) {
+    SWIG_exception_fail(SWIG_TypeError, exc.what());
+  }
+
+  $1 = &arr_vec;
+}
+
+//--------------------------------------------------------------
+// Create a name usable by Python for each evaluated blitz array type
+//--------------------------------------------------------------
+
 %template(BlitzArray_ ## NMTYPE ## _ ## DIM) blitz::Array<TYPE, DIM>;
 
 %enddef
+
+//--------------------------------------------------------------
+// Evaluate the array template for multiple dimension sizes
+//--------------------------------------------------------------
 
 %define %array_all_template(NMTYPE, TYPE, PRECEDENCE)
 
@@ -425,6 +482,10 @@ public:
 
 %enddef
 
+//--------------------------------------------------------------
+// Evaluate array templates for various types, for multiple dimension sizes
+//--------------------------------------------------------------
+
 %array_all_template(double, double, 115);
 %array_all_template(bool, bool, 116);
 %array_all_template(int, int, 117);
@@ -436,13 +497,13 @@ public:
 %array_all_template(uchar, unsigned char, 123);
 #endif  // end SWIGPYTHON
 
+//--------------------------------------------------------------
 // List of things "import *" will include
+//--------------------------------------------------------------
+
 %pythoncode %{
 __all__ = []  
 for t in ("double", "bool", "int", "uint", "float", "short", "ushort", "char", "uchar"):
     for d in range(1,8+1):
         __all__.append("BlitzArray_%s_%d" % (t, d))
 %}
-
-
-

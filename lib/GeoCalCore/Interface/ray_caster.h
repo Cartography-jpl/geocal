@@ -1,7 +1,9 @@
 #ifndef RAY_CASTER_H
 #define RAY_CASTER_H
 #include "printable.h"
+#include "ecr.h"
 #include <blitz/array.h>
+#include <boost/make_shared.hpp>
 
 namespace GeoCal {
   class RasterImage;		// Forward declaration.
@@ -27,14 +29,23 @@ public:
 //-----------------------------------------------------------------------
 /// Default constructor.
 //-----------------------------------------------------------------------
-  RayCaster() {}
+  RayCaster(const boost::shared_ptr<CartesianFixed>& Cf =
+	    boost::make_shared<Ecr>())  : cf(Cf) {}
 
 //-----------------------------------------------------------------------
 /// Destructor.
 //-----------------------------------------------------------------------
 
   virtual ~RayCaster() {}
+  
+//-----------------------------------------------------------------------
+/// The CartesianFixed object that we are using for the
+/// RayCaster, for example Ecr for the earth.
+//-----------------------------------------------------------------------
 
+  const boost::shared_ptr<CartesianFixed>& cartesian_fixed() const
+  { return cf; }
+  
 //-----------------------------------------------------------------------
 /// The smallest position covered by this class.
 //-----------------------------------------------------------------------
@@ -61,6 +72,7 @@ public:
   virtual int current_position() const = 0;
 
 //-----------------------------------------------------------------------
+
 /// Return the ground locations seen at the next position. This is
 /// This is nline x nsamp x nsub_line x nsub_sample x
 /// nintegration_step x 3 in size, where we give the ground location
@@ -81,6 +93,14 @@ public:
 //-----------------------------------------------------------------------
 
   virtual void print(std::ostream& Os) const = 0;
+
+//-----------------------------------------------------------------------
+/// Shape that will be returned by next_position.
+//-----------------------------------------------------------------------
+
+  virtual int shape(int I) const = 0;
+protected:
+  boost::shared_ptr<CartesianFixed> cf;
 private:
   blitz::Array<double, 2> rad;
   friend class boost::serialization::access;

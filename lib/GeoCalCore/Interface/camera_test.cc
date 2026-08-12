@@ -47,6 +47,28 @@ BOOST_AUTO_TEST_CASE(basic_test)
   BOOST_CHECK_MATRIX_CLOSE(f2d.sample.gradient(), f1d.sample.gradient());
 }
 
+BOOST_AUTO_TEST_CASE(sub_camera_test)
+{
+  SubCamera c(boost::make_shared<SimpleCamera>(), 0, 100, 1, 1000);
+  FrameCoordinate f1(1, 2);
+  ScLookVector sl = c.sc_look_vector(f1, 0);
+  FrameCoordinate f2 = c.frame_coordinate(sl, 0);
+  BOOST_CHECK_EQUAL(c.number_band(), 1);
+  BOOST_CHECK_EQUAL(c.number_line(0), 1);
+  BOOST_CHECK_EQUAL(c.number_sample(0), 1000);
+  BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
+  BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
+  BOOST_CHECK_CLOSE(c.frame_line_coordinate(sl, 0), f1.line, 1e-4);
+  FrameCoordinate f3(1,2+100);
+  ScLookVector sl2 = c.full_camera()->sc_look_vector(f3, 0);
+  f2 = c.frame_coordinate(sl2, 0);
+  BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
+  BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
+  FrameCoordinate f4 = c.full_camera()->frame_coordinate(sl,0);
+  BOOST_CHECK_CLOSE(f3.line, f4.line, 1e-4);
+  BOOST_CHECK_CLOSE(f3.sample, f4.sample, 1e-4);
+}
+
 BOOST_AUTO_TEST_CASE(serialization)
 {
   if(!have_serialize_supported())
@@ -61,6 +83,25 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_EQUAL(camr->number_band(), 1);
   BOOST_CHECK_EQUAL(camr->number_line(0), 1);
   BOOST_CHECK_EQUAL(camr->number_sample(0), 1504);
+  FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
+  BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
+  BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);
+}
+
+BOOST_AUTO_TEST_CASE(serialization2)
+{
+  if(!have_serialize_supported())
+    return;
+  boost::shared_ptr<Camera> cam = boost::make_shared<SubCamera>(boost::make_shared<SimpleCamera>(), 0,100,1,1000);
+  std::string d = serialize_write_string(cam);
+  if(false)
+    std::cerr << d;
+  boost::shared_ptr<Camera> camr = serialize_read_string<Camera>(d);
+  FrameCoordinate f1(1, 2);
+  ScLookVector sl = cam->sc_look_vector(f1, 0);
+  BOOST_CHECK_EQUAL(camr->number_band(), 1);
+  BOOST_CHECK_EQUAL(camr->number_line(0), 1);
+  BOOST_CHECK_EQUAL(camr->number_sample(0), 1000);
   FrameCoordinate f2 = camr->frame_coordinate(sl, 0);
   BOOST_CHECK_CLOSE(f2.line, f1.line, 1e-4);
   BOOST_CHECK_CLOSE(f2.sample, f1.sample, 1e-4);

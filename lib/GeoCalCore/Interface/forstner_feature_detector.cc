@@ -7,7 +7,7 @@ using namespace GeoCal;
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
 void ForstnerFeatureDetector::serialize(Archive & ar, 
-					const unsigned int version)
+					const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(FeatureDetector);
   GEOCAL_BASE(ForstnerFeatureDetector, FeatureDetector);

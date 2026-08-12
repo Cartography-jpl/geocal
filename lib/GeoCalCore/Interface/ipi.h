@@ -6,6 +6,8 @@
 #include "orbit.h"
 #include "camera.h"
 #include "time_table.h"
+#include "refraction.h"
+#include "velocity_aberration.h"
 #include <iostream>
 
 namespace GeoCal {
@@ -74,6 +76,10 @@ public:
       int Band,
       Time Tmin, Time Tmax, 
       const boost::shared_ptr<TimeTable>& Tt = boost::shared_ptr<TimeTable>(),
+      const boost::shared_ptr<Refraction>&
+      Ref = boost::shared_ptr<Refraction>(),
+      const boost::shared_ptr<VelocityAberration>&
+      Vabb = boost::shared_ptr<VelocityAberration>(),
       double Local_time_window_size = 5.0,
       double Root_min_separation = 30.0, 
       double Time_tolerance = 1e-6, double Max_frame_extend=1000);
@@ -113,33 +119,64 @@ public:
   void print(std::ostream& Os) const;
   std::vector<boost::shared_ptr<GroundCoordinate> > footprint(const Dem& D) 
     const;
+
+//-----------------------------------------------------------------------
+/// Indicates if we adjust the times to match when we actually have
+/// acquisition (see time_acquisition in TimeTable). This is important
+/// for handling Pushframe cameras correctly.
+//-----------------------------------------------------------------------
+  bool time_acquisition_adjustment() const
+  { return time_acquisition_adjustment_; }
+  void time_acquisition_adjustment(bool V)
+  { time_acquisition_adjustment_ = V; }
   
 //-----------------------------------------------------------------------
 /// Orbit that we are using.
 //-----------------------------------------------------------------------
   
-  const Orbit& orbit() const {return *orb;}
-
-  boost::shared_ptr<Orbit> orbit_ptr() const {return orb;}
-  void orbit_ptr(const boost::shared_ptr<Orbit>& Orb) {orb = Orb;}
+  const boost::shared_ptr<Orbit>& orbit() const {return orb;}
+  void orbit(const boost::shared_ptr<Orbit>& Orb) {orb = Orb;}
 
 //-----------------------------------------------------------------------
 /// Camera that we are using.
 //-----------------------------------------------------------------------
   
-  const Camera& camera() const {return *cam;}
-
-  boost::shared_ptr<Camera> camera_ptr() const {return cam;}
-  void camera_ptr(const boost::shared_ptr<Camera>& Cam) {cam = Cam;}
+  const boost::shared_ptr<Camera>& camera() const {return cam;}
+  void camera(const boost::shared_ptr<Camera>& Cam) {cam = Cam;}
 
 //-----------------------------------------------------------------------
 /// TimeTable that we are using.
 //-----------------------------------------------------------------------
   
-  const TimeTable& time_table() const {return *tt;}
+  const boost::shared_ptr<TimeTable>& time_table() const {return tt;}
+  void time_table(const boost::shared_ptr<TimeTable>& Tt) {tt = Tt;}
 
-  boost::shared_ptr<TimeTable> time_table_ptr() const {return tt;}
+//-----------------------------------------------------------------------
+/// Synonym of orbit, for backwards compatibility. This is deprecated,
+/// you should use the new orbit() name.
+//-----------------------------------------------------------------------
 
+  const boost::shared_ptr<Orbit>& orbit_ptr() const {return orb;}
+  const boost::shared_ptr<TimeTable>& time_table_ptr() const {return tt;}
+  const boost::shared_ptr<Camera>& camera_ptr() const {return cam;}
+  
+//-----------------------------------------------------------------------
+/// Refraction that we are using.
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<Refraction>& refraction() const {return ref;}
+  void refraction(const boost::shared_ptr<Refraction>& Ref) {ref = Ref;}
+
+//-----------------------------------------------------------------------
+/// VelocityAberration object we are using. May be null if we are using
+/// the default first order approximation.
+//-----------------------------------------------------------------------
+  
+  const boost::shared_ptr<VelocityAberration>& velocity_aberration() const
+  {return velocity_aberration_;}
+  void velocity_aberration(const boost::shared_ptr<VelocityAberration>& V)
+  {velocity_aberration_ = V;}
+  
 //-----------------------------------------------------------------------
 /// Band that we are using.
 //-----------------------------------------------------------------------
@@ -194,6 +231,8 @@ private:
   boost::shared_ptr<Camera> cam;
   int band_;			 ///< Camera band to use.
   boost::shared_ptr<TimeTable> tt;
+  boost::shared_ptr<Refraction> ref;
+  boost::shared_ptr<VelocityAberration> velocity_aberration_;
   Time min_time_;		 ///< Minimum time we search around
   Time max_time_;		 ///< Maximum time we search around
   mutable Time last_time;	 ///< Time from last point we did IPI
@@ -206,6 +245,7 @@ private:
   double time_tolerance_;	 ///< How accurate we find the time.
   double max_frame_extend_;	 // Maximum FrameCoordinate outside of
 				 // the camera that we consider 'ok'.
+  bool time_acquisition_adjustment_;
 
 //-----------------------------------------------------------------------
 /// Initial guess at minimum time, based on last_time.
@@ -230,7 +270,7 @@ private:
 		    last_time + local_time_window_size_ / 2);
   }
 
-  Ipi() : max_frame_extend_(1e19) {}
+  Ipi() : max_frame_extend_(1e19), time_acquisition_adjustment_(false) {}
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
@@ -239,6 +279,6 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(Ipi);
-GEOCAL_CLASS_VERSION(Ipi, 1);
+GEOCAL_CLASS_VERSION(Ipi, 4);
 #endif
 

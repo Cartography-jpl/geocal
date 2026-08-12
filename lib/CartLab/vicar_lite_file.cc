@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "vicar_lite_file.h"
 #include <boost/tokenizer.hpp>
 #include <boost/foreach.hpp>
@@ -23,7 +23,7 @@ static VicarOgr vlogr;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void VicarLiteFile::save(Archive & ar, const unsigned int version) const
+void VicarLiteFile::save(Archive & ar, const unsigned int UNUSED(version)) const
 {
   GEOCAL_GENERIC_BASE(VicarLiteFile);
   ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
@@ -31,7 +31,7 @@ void VicarLiteFile::save(Archive & ar, const unsigned int version) const
 }
 
 template<class Archive>
-void VicarLiteFile::load(Archive & ar, const unsigned int version)
+void VicarLiteFile::load(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(VicarLiteFile);
   ar & GEOCAL_NVP_(fname) & GEOCAL_NVP_(access)
@@ -40,7 +40,7 @@ void VicarLiteFile::load(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void VicarLiteRasterImage::save(Archive & ar, const unsigned int version) const
+void VicarLiteRasterImage::save(Archive & ar, const unsigned int UNUSED(version)) const
 {
   GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
   GEOCAL_GENERIC_BASE(RasterImage);
@@ -51,7 +51,7 @@ void VicarLiteRasterImage::save(Archive & ar, const unsigned int version) const
 }
 
 template<class Archive>
-void VicarLiteRasterImage::load(Archive & ar, const unsigned int version)
+void VicarLiteRasterImage::load(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_BASE(VicarLiteRasterImage, RasterImage);
   GEOCAL_GENERIC_BASE(RasterImage);
@@ -63,7 +63,7 @@ void VicarLiteRasterImage::load(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void VicarLiteDem::serialize(Archive & ar, const unsigned int version)
+void VicarLiteDem::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(DemMapInfo)
     & GEOCAL_NVP_(band)
@@ -251,7 +251,7 @@ void VicarLiteFile::initialize(const std::string& Fname, access_type Access,
 //-----------------------------------------------------------------------
 
 VicarLiteFile::VicarLiteFile(const std::string& Fname, int Number_line, 
-		     int Number_sample, const std::string& Type)
+	     int Number_sample, const std::string& UNUSED(Type))
 : access_(VicarLiteFile::WRITE),
   fname_(Fname), force_area_pixel_(false),
   number_line_(Number_line), 
@@ -465,7 +465,7 @@ MapInfo VicarLiteFile::map_info() const
 /// Set metadata for MapInfo.
 //-----------------------------------------------------------------------
 
-void VicarLiteFile::map_info(const MapInfo& M)
+void VicarLiteFile::map_info(const MapInfo& UNUSED(M))
 {
   throw Exception("Not implemented yet");
 }
@@ -510,6 +510,17 @@ bool VicarLiteFile::has_rsm() const
 {
   return (has_label("GEOTIFF RSM_NITF_FILE") ||
 	  has_label("GEOTIFF RSM_XML_FILE"));
+}
+
+//-----------------------------------------------------------------------
+/// Return true if the file has a GLAS_GFM_NITF_FILE or GLAS_GFM_XML_FILE label
+/// in it, indicating it has GLAS/GFM information.
+//-----------------------------------------------------------------------
+
+bool VicarLiteFile::has_igc_glas_gfm() const
+{
+  return (has_label("GEOTIFF GLAS_GFM_NITF_FILE") ||
+	  has_label("GEOTIFF GLAS_GFM_XML_FILE"));
 }
 
 //-----------------------------------------------------------------------
@@ -573,7 +584,37 @@ boost::shared_ptr<Rsm> VicarLiteFile::rsm() const
     fname = label<std::string>("RSM_XML_FILE", "GEOTIFF");
   boost::filesystem::path p(file_name());
   boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
   if(has_label("GEOTIFF RSM_NITF_FILE"))
-    return rsm_read_nitf((dir / fname).string());
+    return rsm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
   return serialize_read<Rsm>((dir / fname).string());
+}
+
+//-----------------------------------------------------------------------
+/// Read metadata for GLAS/GFM. Note we store this as a separate detached
+/// file in either NITF or boost serialization XML format. The VICAR
+/// file then has a pointer to the file. The pointer just has a file
+/// name, it is assumed the file is in the same directory as the VICAR
+/// file.
+//-----------------------------------------------------------------------
+
+boost::shared_ptr<ImageGroundConnection> VicarLiteFile::igc_glas_gfm() const
+{
+  std::string fname;
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    fname = label<std::string>("GLAS_GFM_NITF_FILE", "GEOTIFF");
+  else
+    fname = label<std::string>("GLAS_GFM_XML_FILE", "GEOTIFF");
+  boost::filesystem::path p(file_name());
+  boost::filesystem::path dir = p.parent_path();
+  int naif_code = CoordinateConverter::EARTH_NAIF_CODE;
+  if(has_label("GEOTIFF NAIF_CODE"))
+    naif_code = label<int>("NAIF_CODE", "GEOTIFF");
+  if(has_label("GEOTIFF GLAS_GFM_NITF_FILE"))
+    return glas_gfm_read_nitf((dir / fname).string(), naif_code);
+  // Boost already stores naif code, so we don't need to set it
+  return serialize_read<ImageGroundConnection>((dir / fname).string());
 }

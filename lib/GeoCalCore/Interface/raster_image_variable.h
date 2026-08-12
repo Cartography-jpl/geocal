@@ -49,6 +49,42 @@ public:
     return rsm_;
   }
 
+//-----------------------------------------------------------------------
+/// We need special handling for maps that are crossing the
+/// dateline. For most projections this isn't an issue - we just pick
+/// one that doesn't do anything in particular crossing the dateline. 
+/// But for the special case of a Geodetic map projection, we flip
+/// signs so the point with longitude -180 is right next to 179.999.
+/// To handle this, we can change the map projection to work with a
+/// Geodetic360. This is really the same map projection, we just label
+/// the longitude differently.
+///
+/// Note this is a noop if the coordinate converter is already a
+/// Geodetic360Converter, and changes if it is a
+/// GeodeticConverter. Any other projection will cause an exception to
+/// be thrown.
+//-----------------------------------------------------------------------
+
+  virtual void change_to_geodetic360()
+  {
+    map_info_->change_to_geodetic360();
+  }
+
+//-----------------------------------------------------------------------
+/// Change back to -180 to 180
+//-----------------------------------------------------------------------
+
+  virtual void change_to_geodetic()
+  {
+    map_info_->change_to_geodetic();
+  }
+
+//-----------------------------------------------------------------------
+/// Simple test to see if we are Geodetic360, sometimes class need
+/// special handling for this
+//-----------------------------------------------------------------------
+
+  bool is_geodetic_360() const { return map_info_->is_geodetic_360(); }
 protected:
 //-----------------------------------------------------------------------
 /// Default constructor, derived classes should fill in protected

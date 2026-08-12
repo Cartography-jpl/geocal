@@ -72,8 +72,9 @@ public:
 // 			  const GDALDataset& Source_dataset,
 // 			  bool Log_progress = false);
 
+  std::string gdal_driver_name(const std::string& Fname);
 }
 
 
 // List of things "import *" will include
-%python_export("GdalBase")
+%python_export("GdalBase", "gdal_driver_name")

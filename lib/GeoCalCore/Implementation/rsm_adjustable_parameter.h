@@ -12,14 +12,14 @@ namespace GeoCal {
   overall interface.
 *******************************************************************/
 
-class RsmAdjustableParameter : public WithParameter,
+class RsmAdjustableParameter : public virtual WithParameter,
 			       public Printable<RsmAdjustableParameter> {
 public:
   RsmAdjustableParameter(const std::string& Image_identifier="",
 			 const std::string& Rsm_support_data_edition="fake-1",
 			 const std::string& Triangulation_id="")
     : image_identifier_(Image_identifier),
-      rsm_suport_data_edition_(Rsm_support_data_edition),
+      rsm_support_data_edition_(Rsm_support_data_edition),
       triangulation_id_(Triangulation_id)
   {
   }
@@ -35,10 +35,10 @@ public:
 /// RSM Support Data Edition.
 //-----------------------------------------------------------------------
 
-  const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  void rsm_suport_data_edition(const std::string& V)
-  { rsm_suport_data_edition_ = V; }
+  const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  void rsm_support_data_edition(const std::string& V)
+  { rsm_support_data_edition_ = V; }
 
 //-----------------------------------------------------------------------
 /// Triangulation ID
@@ -94,9 +94,9 @@ public:
   std::string base_tre_string() const;
   void base_read_tre_string(std::istream& In);
   virtual void print(std::ostream& Os) const
-  { Os << "RsmAdjustableParameter"; }
+  { Os << "RsmAdjustableParameter\n"; }
 private:
-  std::string image_identifier_, rsm_suport_data_edition_,
+  std::string image_identifier_, rsm_support_data_edition_,
     triangulation_id_;
   friend class boost::serialization::access;
   template<class Archive>

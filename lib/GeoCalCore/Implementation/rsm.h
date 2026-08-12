@@ -36,6 +36,7 @@ public:
   virtual ~Rsm() {}
 
   boost::shared_ptr<GroundCoordinate> ground_coordinate(const ImageCoordinate& Ic, const Dem& D) const;
+  boost::shared_ptr<GroundCoordinate> ground_intersection(const ImageCoordinate& Ic, const Dem& D, double Z_accuracy=1e-2) const;
   boost::shared_ptr<GroundCoordinate> polish_intersection(const ImageCoordinate& Ic, const Dem& D, const GroundCoordinate& Surfp, double Z_accuracy=1e-2) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_z(const ImageCoordinate& Ic, double Z) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_approx_height(const ImageCoordinate& Ic, double H) const;
@@ -49,7 +50,17 @@ public:
   image_coordinate_jac_parm(const GroundCoordinate& Gc) const;
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
-  void fill_in_ground_domain_vertex(double Min_height, double Max_height);
+  void fit_data(const blitz::Array<double, 2>& Data,
+		int Nline, int Nsamp) const;
+  void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
+				    double Min_height, double Max_height);
+  void fill_in_ground_domain_vertex();
+  blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,
+					 double Min_height, double Max_height,
+					 int Nline_fit = 20,
+					 int Nsample_fit = 20,
+					 int Nheight_fit = 20,
+					 bool Ignore_igc_error_in_fit = false);
   void print(std::ostream& Os) const;
 
   const boost::shared_ptr<RsmId>& rsm_id() const {return rid;}
@@ -71,18 +82,41 @@ public:
     if(rparm)
       add_object(rparm);
   }
+  blitz::Array<double, 2> generate_data(const ImageGroundConnection& Igc,
+	double Min_height, double Max_height,
+        int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=5,
+	int Nsecond_pass_fit=20, 					
+        int Min_line=0, int Max_line=-1, int Min_sample=0,
+	int Max_sample=-1, bool Ignore_igc_error = true) const;
   const boost::shared_ptr<RsmBase>& rsm_base() const {return rp;}
   void rsm_base(const boost::shared_ptr<RsmBase>& V) { rp = V;}
   const boost::shared_ptr<CoordinateConverter>& coordinate_converter() const
   { return rid->coordinate_converter(); }
   void coordinate_converter(const boost::shared_ptr<CoordinateConverter>& V) 
   { rid->coordinate_converter(V); }
+
+//-----------------------------------------------------------------------
+/// Check for zero crossing in the denominator, i.e., do we have poles
+/// in our fit.
+//-----------------------------------------------------------------------
+
+  bool check_zero_crossing(double Grid_spacing = 0.01) const
+  {
+    return rp->check_zero_crossing(Grid_spacing);
+  }
+
+  blitz::Array<double, 2> compare_data(const blitz::Array<double, 2>& Data)
+    const;
+  blitz::Array<double, 1> compare_data_dist(const blitz::Array<double, 2>& Data)
+    const;
+  
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& True_line,
 		   blitz::Array<double, 2>& True_sample,
 		   blitz::Array<double, 2>& Calc_line,
-		   blitz::Array<double, 2>& Calc_sample)
+		   blitz::Array<double, 2>& Calc_sample,
+		   blitz::Array<double, 2>& Distance_true_vs_calc)
     const;
   virtual const std::string& image_identifier() const
   { return rid->image_identifier();}
@@ -99,20 +133,20 @@ public:
     if(rparm)
       rparm->image_identifier(V);
   }
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rid->rsm_suport_data_edition();}
-  virtual void rsm_suport_data_edition(const std::string& V)
+  virtual const std::string& rsm_support_data_edition() const
+  { return rid->rsm_support_data_edition();}
+  virtual void rsm_support_data_edition(const std::string& V)
   {
     if(rp)
-      rp->rsm_suport_data_edition(V);
+      rp->rsm_support_data_edition(V);
     if(rid)
-      rid->rsm_suport_data_edition(V);
+      rid->rsm_support_data_edition(V);
     if(rdcov)
-      rdcov->rsm_suport_data_edition(V);
+      rdcov->rsm_support_data_edition(V);
     if(ricov)
-      ricov->rsm_suport_data_edition(V);
+      ricov->rsm_support_data_edition(V);
     if(rparm)
-      rparm->rsm_suport_data_edition(V);
+      rparm->rsm_support_data_edition(V);
   }
 
 //-----------------------------------------------------------------------

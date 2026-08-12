@@ -21,6 +21,28 @@ GdalMultiBand::GdalMultiBand(const std::string& Fname, int Number_tile,
 }
 
 //-----------------------------------------------------------------------
+/// Variation that takes extra arguments and uses GDALOpenEx instead
+/// of GDALOpen
+//-----------------------------------------------------------------------
+
+GdalMultiBand::GdalMultiBand(const std::string& Fname, int Number_tile,
+			     const std::string& Allowed_drivers,
+			     const std::string& Open_options,
+			     const std::string& Sibling_files,
+			     int Tile_number_line, int Tile_number_sample)
+{
+  boost::shared_ptr<GdalRasterImage> g(new GdalRasterImage(Fname, 1, Allowed_drivers,
+							   Open_options, Sibling_files));
+  raster_image_.push_back(g);
+  gd = g->data_set();
+  // b is 1 based.
+  for(int b = 2; b <= gd->GetRasterCount(); ++b)
+    raster_image_.push_back(boost::shared_ptr<GdalRasterImage>
+			    (new GdalRasterImage(gd, b, Number_tile, Tile_number_line,
+						 Tile_number_sample)));
+}
+
+//-----------------------------------------------------------------------
 /// Create a new file. All the arguments here are the same as for
 /// GdalRasterImage. 
 //-----------------------------------------------------------------------

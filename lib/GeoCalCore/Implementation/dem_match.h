@@ -48,7 +48,7 @@ public:
 /// Print to stream.
 //-----------------------------------------------------------------------
 
-  virtual void print(std::ostream& Os) const { Os << "DemMatch"; }
+  virtual void print(std::ostream& Os) const { Os << "DemMatch\n"; }
 
   boost::shared_ptr<ImageToImageMatch> match() const {return match_;}
   boost::shared_ptr<RayIntersect> ray_intersect() const {return ri;}

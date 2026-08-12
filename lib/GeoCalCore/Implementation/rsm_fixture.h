@@ -29,7 +29,8 @@ public:
       (rpc, boost::make_shared<SimpleDem>(), image);
     cconv = boost::make_shared<GeodeticConverter>();
     rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
-    rsm->fill_in_ground_domain_vertex(rpc.height_offset - rpc.height_scale,
+    rsm->fill_in_ground_domain_vertex(*igc,
+				      rpc.height_offset - rpc.height_scale,
 				      rpc.height_offset + rpc.height_scale);
   }
   boost::shared_ptr<CoordinateConverter> cconv;
@@ -51,7 +52,8 @@ public:
     double smax = rpc.sample_offset * 2;
     rp_from_rpc->fit(*igc, *cconv, hmin, hmax, lmin, lmax, smin, smax);
     rsm = boost::make_shared<Rsm>(rp_from_rpc, cconv);
-    rsm->fill_in_ground_domain_vertex(rpc.height_offset - rpc.height_scale,
+    rsm->fill_in_ground_domain_vertex(*igc,
+				      rpc.height_offset - rpc.height_scale,
 				      rpc.height_offset + rpc.height_scale);
   }
 };
@@ -76,7 +78,7 @@ class RsmGridFixture : public RsmFixture {
 public:
   RsmGridFixture()
   {
-    rg_from_rpc = boost::make_shared<RsmGrid>(60,60,20);
+    rg_from_rpc = boost::make_shared<RsmGrid>(40,40,4, false, 7,7);
     double hmin = rpc.height_offset - rpc.height_scale;
     double hmax = rpc.height_offset + rpc.height_scale;
     double lmin = 0;

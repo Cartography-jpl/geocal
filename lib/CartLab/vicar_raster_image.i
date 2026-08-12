@@ -62,11 +62,16 @@ public:
   void set_rpc(const Rpc& R);
   void set_rsm(const boost::shared_ptr<Rsm>& R,
 	       VicarFile::rsm_file_type File_type = VicarFile::RSM_NITF_FILE);
+  void set_igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc,
+			VicarFile::glas_gfm_file_type File_type =
+			VicarFile::GLAS_GFM_NITF_FILE);
   void set_map_info(const MapInfo& Mi);
-  %python_attribute(number_band, int)
-  %python_attribute(band_id, int)
-  %python_attribute(rpc, Rpc)
-  %python_attribute(map_info, MapInfo)
+  %python_attribute(has_igc_glas_gfm, bool);
+  %python_attribute(igc_glas_gfm, boost::shared_ptr<ImageGroundConnection>);
+  %python_attribute(number_band, int);
+  %python_attribute(band_id, int);
+  %python_attribute(rpc, Rpc);
+  %python_attribute(map_info, MapInfo);
   %pickle_serialization();
   %pythoncode {
 @rpc.setter

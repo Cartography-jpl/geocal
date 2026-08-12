@@ -7,5 +7,5 @@ unset PYTHONPATH
 export AFIDSPYTHONTOP=@prefix@
 source @AFIDS_PREFIX@/setup_afids_env.sh
 export TAE_PATH=@prefix@/afids/vdev:${TAE_PATH}
-export PATH=@prefix@/bin:@prefix@/afids/vdev:${PATH}
+export PATH=@prefix@/bin:${PATH}
 

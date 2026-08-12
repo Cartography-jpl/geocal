@@ -9,9 +9,9 @@ import pynitf
 import sys
 import numpy as np
 
-version = "Dec 6, 2018"
+version = "July 10, 2020"
 usage='''Usage:
-  boost_nitf_rsm [options] from_nitf <nitf_file>
+  boost_nitf_rsm [options] from_nitf <nitf_file> <naif_code>
   boost_nitf_rsm [options] to_nitf <nitf_file>
   boost_nitf_rsm -h | --help
   boost_nitf_rsm -v | --version
@@ -30,7 +30,8 @@ Options:
 
 args = geocal.docopt_simple(usage, version=version)
 if(args.to_nitf):
-    rsm = geocal.serialize_read_generic_string(sys.stdin.read())
+    # "buffer" here is used to read stdin as bytes rather than a str
+    rsm = geocal.serialize_read_binary(sys.stdin.buffer.read())
     f = pynitf.NitfFile()
     img = pynitf.NitfImageWriteNumpy(1, 1, np.uint8)
     img[0,0,0] = 0
@@ -40,4 +41,5 @@ if(args.to_nitf):
 elif(args.from_nitf):
     f = pynitf.NitfFile(args.nitf_file)
     rsm = f.image_segment[0].rsm
-    sys.stdout.write(geocal.serialize_write_string(rsm))
+    rsm.naif_code = args.naif_code
+    sys.stdout.buffer.write(geocal.serialize_write_binary(rsm))

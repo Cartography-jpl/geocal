@@ -85,7 +85,7 @@ private:
 					      Tile_number_sample));
     gdal = t;
     DemTiledFile::initialize(t, D, t->map_info(), Outside_dem_is_error,
-			     t->linear_unit_scale());
+			     t->linear_unit_scale(), t->no_data_value());
   }
   friend class boost::serialization::access;
   template<class Archive>

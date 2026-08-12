@@ -6,10 +6,17 @@
 
 # Source files for library
 geocalinc_HEADERS+= @srcsupport@/geocal_config.h
+geocalinc_HEADERS+= @srcsupport@/boost_pcall.h
+geocalinc_HEADERS+= @srcsupport@/geocal_external_config.h
 geocalinc_HEADERS+= @srcsupport@/geocal_serialize_support.h
+geocalinc_HEADERS+= @srcsupport@/geocal_thread_pool.h
+libgeocal_la_SOURCES+= @srcsupport@/geocal_thread_pool.cc
 geocalinc_HEADERS+= @srcsupport@/constant.h
 geocalinc_HEADERS+= @srcsupport@/generic_object.h
 libgeocal_la_SOURCES+= @srcsupport@/generic_object.cc
+geocalinc_HEADERS+= @srcsupport@/generic_object_map.h
+libgeocal_la_SOURCES+= @srcsupport@/generic_object_map.cc
+geocalinc_HEADERS+= @srcsupport@/geocal_temp_file.h
 geocalinc_HEADERS+= @srcsupport@/auto_derivative_before_blitz.h
 geocalinc_HEADERS+= @srcsupport@/auto_derivative.h
 libgeocal_la_SOURCES+= @srcsupport@/auto_derivative.cc
@@ -56,6 +63,8 @@ libgeocal_la_SOURCES+= @srcsupport@/blitz_array_serialize_support.cc
 geocalinc_HEADERS+=@srcsupport@/blitz_array_serialize_support.h
 geocalinc_HEADERS+= @srcsupport@/geocal_fftw.h
 libgeocal_la_SOURCES+= @srcsupport@/geocal_fftw.cc
+geocalinc_HEADERS+= @srcsupport@/static_sort.h
+geocalinc_HEADERS+= @srcsupport@/geocal_static_sort.h
 if HAVE_HDF5
 geocalinc_HEADERS+= @srcsupport@/hdf_file.h
 libgeocal_la_SOURCES+= @srcsupport@/hdf_file.cc
@@ -65,9 +74,15 @@ geocalinc_HEADERS+= @srcsupport@/tre_support.h
 # Files that contain SWIG wrapper information.
 SWIG_SRC += @swigsrc@/constant_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/constant.i
+SWIG_SRC += @swigsrc@/geocal_thread_pool_wrap.cc
+geocalswiginc_HEADERS += @srcsupport@/geocal_thread_pool.i
 SWIG_SRC += @swigsrc@/generic_object_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/generic_object.i
+SWIG_SRC += @swigsrc@/generic_object_map_wrap.cc
+geocalswiginc_HEADERS += @srcsupport@/generic_object_map.i
 SWIG_SRC += @swigsrc@/auto_derivative_wrap.cc
+geocalswiginc_HEADERS += @srcsupport@/geocal_temp_file.i
+SWIG_SRC += @swigsrc@/geocal_temp_file_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/auto_derivative.i
 SWIG_SRC += @swigsrc@/array_ad_wrap.cc
 geocalswiginc_HEADERS += @srcsupport@/array_ad.i
@@ -108,6 +123,8 @@ EXTRA_DIST += @srcsupport@/global_fixture.h
 geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
 geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_thread_pool_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_temp_file_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/auto_derivative_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/array_ad_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/observer_test.cc 
@@ -126,6 +143,7 @@ geocal_test_all_SOURCES+= @srcsupport@/covariance_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/statistic_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/blitz_array_serialize_support_test.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_fftw_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/geocal_static_sort_test.cc 
 if HAVE_HDF5
 geocal_test_all_SOURCES+= @srcsupport@/hdf_file_test.cc 
 endif

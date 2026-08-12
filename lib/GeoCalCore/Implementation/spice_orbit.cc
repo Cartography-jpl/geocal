@@ -1,6 +1,6 @@
 #include "spice_orbit.h"
 #include "geocal_serialize_support.h"
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "spice_helper.h"
 #include <boost/lexical_cast.hpp>
 

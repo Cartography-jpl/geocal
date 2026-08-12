@@ -79,8 +79,15 @@ namespace GeoCal {
 					   const AutoDerivative<double>& A1, const AutoDerivative<double>& A2, const AutoDerivative<double>& A3, 
 					   const AutoDerivative<double>& A4, const AutoDerivative<double>& A5, const AutoDerivative<double>& A6,
 					   const AutoDerivative<double>& A7);
+
+double quaternion_delta_angle(const boost::math::quaternion<double>& Q1, 
+			      const boost::math::quaternion<double>& Q2);
+boost::math::quaternion<double> interpolate_quaternion_rotation
+(const boost::math::quaternion<double>& Q1, 
+ const boost::math::quaternion<double>& Q2,
+ const double& toffset, double tspace);
 }
 
 
 // List of things "import *" will include
-%python_export("Quaternion_AutoDerivative_double","quat_rot_x","quat_rot_y","quat_rot_z","quat_rot","quaternion_to_matrix","matrix_to_quaternion","quaternion_to_array","array_to_quaternion","quat_to_ypr", "quat_to_euler", "determine_quat_rot","quat_normalize")
+%python_export("Quaternion_AutoDerivative_double","quat_rot_x","quat_rot_y","quat_rot_z","quat_rot","quaternion_to_matrix","matrix_to_quaternion","quaternion_to_array","array_to_quaternion","quat_to_ypr", "quat_to_euler", "determine_quat_rot","quat_normalize", "quaternion_delta_angle", "interpolate_quaternion_rotation")

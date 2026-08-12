@@ -1,21 +1,23 @@
 #! /usr/bin/env python
 #
-# This takes a VICAR file with a RSM and projects it to the surface.
+# This takes a VICAR file with a RSM or GLAS/GFM and projects it to the surface.
 
 import geocal
 import numpy as np
 import subprocess
 import os
 import logging
+from multiprocessing import Pool
 
-version = "October 2, 2017"
+version = "July 10, 2020"
 usage='''Usage:
   rsm_project [options] <image> <dem_file> <output>
   rsm_project [options] --mosaic <dem_file> <output> <image_list>...
   rsm_project -h | --help
   rsm_project -v | --version
 
-rsm_project takes a VICAR file with a RSM and projects it to the surface.
+rsm_project takes a VICAR file with a RSM or GLAS/GFM and projects it 
+to the surface.
 
 The dem_file should be the output of shelve_dem (e.g., a ".xml" file)
 
@@ -115,12 +117,34 @@ long_name_to_vicar = { "image" : "img",
 args = geocal.docopt_simple(usage, version=version,
                      long_name_to_vicar=long_name_to_vicar)
 
+# Move this elsewhere? For now we'll just keep this here but
+# we should perhaps have this in library
 def mars_default_mi(desired_resolution = 1):
     owrap = geocal.OgrWrapper(
 '''PROJCS["SimpleCylindrical Mars",
      GEOGCS["GCS_Mars",
          DATUM["D_Mars",
              SPHEROID["Mars",3396190,0]],
+         PRIMEM["Reference_Meridian",0],
+         UNIT["degree",0.0174532925199433]],
+     PROJECTION["Equirectangular"],
+     PARAMETER["latitude_of_origin",0],
+     PARAMETER["central_meridian",0],
+     PARAMETER["standard_parallel_1",0],
+     PARAMETER["false_easting",0],
+     PARAMETER["false_northing",0],
+     UNIT["metre",1,
+         AUTHORITY["EPSG","9001"]]]''')
+    cconv = geocal.OgrCoordinateConverter(owrap)
+    mi = geocal.MapInfo(cconv, 0, 10000, 10000, 0, 10000, 10000)
+    return mi.scale(desired_resolution, desired_resolution)
+
+def moon_default_mi(desired_resolution = 1):
+    owrap = geocal.OgrWrapper(
+'''PROJCS["SimpleCylindrical Moon",
+     GEOGCS["GCS_Moon",
+         DATUM["D_Moon",
+             SPHEROID["Moon",1737400.0,0]],
          PRIMEM["Reference_Meridian",0],
          UNIT["degree",0.0174532925199433]],
      PROJECTION["Equirectangular"],
@@ -163,11 +187,13 @@ def create_igc_map(igc, args):
         mi = mp.map_info
         mp = None
     else:
-        naif_code = igc.rsm.coordinate_converter.naif_code
+        naif_code = igc.naif_code
         if(naif_code == geocal.Ecr.EARTH_NAIF_CODE):
             mibase = geocal.cib01_mapinfo(desired_resolution = resolution)
         elif(naif_code == geocal.PlanetConstant.MARS_NAIF_CODE):
             mibase = mars_default_mi(desired_resolution = resolution)
+        elif(naif_code == geocal.PlanetConstant.MOON_NAIF_CODE):
+            mibase = moon_default_mi(desired_resolution = resolution)
         else:
             raise RuntimeError("Don't currently support NAIF code %d" %
                                naif_code)
@@ -203,6 +229,9 @@ def create_igc_map_mosaic(igclist, args):
     return igc_map
         
 dem = geocal.read_shelve(args.dem_file)
+# We can perhaps have for complicated logic for this, but for
+# now just do raycasting if we have a GLAS/GFM.
+do_raycast = False
 if(args.mosaic):
     igclist = []
     for imgfname in args.image_list:
@@ -210,14 +239,33 @@ if(args.mosaic):
             img = geocal.VicarLiteRasterImage(imgfname)
         else:
             img = geocal.GdalRasterImage(imgfname)
-        igclist.append(geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image"))
+        if(img.has_igc_glas_gfm):
+            raise RuntimeError("We don't currently support mosaic with GLAS/GFM. This can be added, we just haven't done so yet")
+            igc = img.igc_glas_gfm
+            igc.image = img
+            igc.dem = dem
+            do_raycast = True
+            igclist.append(igc)
+        elif(img.has_rsm):
+            igclist.append(geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image"))
+        else:
+            raise RuntimeError("Image %s doesn't have GLAS or RSM" % imgfname)
     igc_map = create_igc_map_mosaic(igclist, args)
 else:
     if(geocal.VicarLiteFile.is_vicar_file(args.image)):
         img = geocal.VicarLiteRasterImage(args.image)
     else:
         img = geocal.GdalRasterImage(args.image)
-    igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+    if(img.has_igc_glas_gfm):
+        igc = img.igc_glas_gfm
+        igc.image = img
+        igc.dem = dem
+        do_raycast = True
+    elif(img.has_rsm):
+        igc = geocal.RsmImageGroundConnection(img.rsm, dem, img, "RSM Image")
+    else:
+        raise RuntimeError("Image %s doesn't have GLAS or RSM" % args.image)
+        
     igc_map = create_igc_map(igc, args)
 
 if(args.verbose):
@@ -235,7 +283,22 @@ elif(args.vicar_type == "FULL"):
     dtype = np.int32
 else:
     raise RuntimeError("Unknown vicar type %s" % args.vicar_type)
-geocal.write_shelve("igc_map.xml", igc_map)
-out = geocal.mmap_file(args.output, igc_map.map_info, dtype=dtype)
-geocal.parallel_process_image(igc_map, out, args.process_number_line,
-                       args.process_number_sample, args.number_process)
+if(do_raycast):
+    mi = igc_map.map_info
+    igc_map = None
+    if(args.number_process > 1):
+        pool = Pool(args.number_process)
+    else:
+        pool = None
+    geocal.ray_caster_project(args.output, igc, mi, pool=pool,
+                              dtype=dtype,
+                              nline_process = args.process_number_line)
+    if(pool):
+        pool.close()
+else:
+    # I don't think we actually need this, so comment out for now
+    #geocal.write_shelve("igc_map.xml", igc_map)
+    out = geocal.mmap_file(args.output, igc_map.map_info, dtype=dtype)
+    geocal.parallel_process_image(igc_map, out, args.process_number_line,
+                                  args.process_number_sample,
+                                  args.number_process)

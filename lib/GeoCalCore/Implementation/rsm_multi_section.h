@@ -26,7 +26,7 @@ public:
   }
   virtual ImageCoordinate image_coordinate(double X, double Y, double Z)
     const
-  { return section_xyz(X,Y,Z).image_coordinate(X,Y,Z);}
+  { return section_xyz(X,Y,Z)->image_coordinate(X,Y,Z);}
   virtual blitz::Array<double, 2> image_coordinate
   (const blitz::Array<double, 1>& X, const blitz::Array<double, 1>& Y,
    const blitz::Array<double, 1>& Z) const;
@@ -39,7 +39,7 @@ public:
 
   virtual blitz::Array<double, 2> image_coordinate_jacobian
   (double X, double Y, double Z) const 
-  { return section_xyz(X,Y,Z).image_coordinate_jacobian(X,Y,Z);}
+  { return section_xyz(X,Y,Z)->image_coordinate_jacobian(X,Y,Z);}
   
 //-----------------------------------------------------------------------
 /// Initial guess to use when inverting the ground to image
@@ -48,15 +48,15 @@ public:
   
   virtual void initial_guess(double Line, double Sample, double Z,
 			     double& X_guess, double& Y_guess) const
-  { section_ls(Line,Sample).initial_guess(Line, Sample, Z, X_guess,
-					  Y_guess);} 
+  { section_ls(Line,Sample)->initial_guess(Line, Sample, Z, X_guess,
+					   Y_guess);} 
 
 //-----------------------------------------------------------------------
 /// Initial guess at Z, if we need to find that also.
 //-----------------------------------------------------------------------
 
   virtual double initial_guess_z(double Line, double Sample) const
-  { return section_ls(Line,Sample).initial_guess_z(Line, Sample); }
+  { return section_ls(Line,Sample)->initial_guess_z(Line, Sample); }
   
 //-----------------------------------------------------------------------
 /// Fit that approximates the calculation done by a ImageGroundConnection.
@@ -87,6 +87,19 @@ public:
 		   double Min_height, double Max_height,
 		   int Min_line, int Max_line, int Min_sample,
 		   int Max_sample);
+  virtual void fit_data(const blitz::Array<double, 2>& Data,
+			int Min_line, int Max_line, int Min_sample,
+			int Max_sample);
+  void fit_start(const ImageGroundConnection& Igc,
+		 const CoordinateConverter& Cconv,
+		 double Min_height, double Max_height);
+  void fit_start(const blitz::Array<double, 2>& Data);
+  const boost::shared_ptr<RsmBase>&
+  fit_section(int i, int j, const ImageGroundConnection& Igc,
+		   const CoordinateConverter& Cconv,
+		   double Min_height, double Max_height);
+  const boost::shared_ptr<RsmBase>&
+  fit_section(int i, int j, const blitz::Array<double, 2>& Data);
   virtual int min_line() const {return lp.min_line();}
   virtual int max_line() const {return lp.max_line();}
   virtual int min_sample() const {return lp.min_sample();}
@@ -128,15 +141,27 @@ public:
       for(int j = 0; j < sec.cols(); ++j)
 	sec(i, j)->image_identifier(V);
   }
-  virtual const std::string& rsm_suport_data_edition() const
-  { return rsm_suport_data_edition_;}
-  virtual void rsm_suport_data_edition(const std::string& V)
+  virtual const std::string& rsm_support_data_edition() const
+  { return rsm_support_data_edition_;}
+  virtual void rsm_support_data_edition(const std::string& V)
   {
-    rsm_suport_data_edition_ = V;
+    rsm_support_data_edition_ = V;
     for(int i = 0; i < sec.rows(); ++i)
       for(int j = 0; j < sec.cols(); ++j)
-	sec(i, j)->rsm_suport_data_edition(V);
+	sec(i, j)->rsm_support_data_edition(V);
   }
+  virtual bool check_zero_crossing(double Grid_spacing = 0.01) const
+  { 
+    for(int i = 0; i < sec.rows(); ++i)
+      for(int j = 0; j < sec.cols(); ++j)
+	if(sec(i, j)->check_zero_crossing(Grid_spacing))
+	  return true;
+    return false;
+  }
+  const boost::shared_ptr<RsmBase>&
+  section_ls(double Line, double Sample) const;
+  const boost::shared_ptr<RsmBase>&
+  section_xyz(double X, double Y, double Z) const;
 protected:
   RsmMultiSection() {}
 private:
@@ -144,8 +169,6 @@ private:
   double nline_sec, nsamp_sec;
   blitz::Array<boost::shared_ptr<RsmBase>, 2> sec;
   RsmLowOrderPolynomial lp;
-  const RsmBase& section_ls(double Line, double Sample) const;
-  const RsmBase& section_xyz(double X, double Y, double Z) const;
   friend class boost::serialization::access;
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);

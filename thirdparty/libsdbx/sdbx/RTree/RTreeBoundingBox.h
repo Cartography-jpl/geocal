@@ -273,8 +273,7 @@ struct RTreeBoundingBox {
 
 // for_each(items.begin(), items.end(), StretchBoundedItem::KeyType(bound));
 template <typename BoundedItem>
-struct StretchBoundingBox : 
-	public std::unary_function< const BoundedItem&, void >
+struct StretchBoundingBox 
 {
 	typename BoundedItem::KeyType * m_bound;
 	explicit StretchBoundingBox(typename BoundedItem::KeyType * bound) : m_bound(bound) {}
@@ -295,8 +294,7 @@ struct StretchBoundingBox :
  ********************************************************************/
 
 template <typename BoundedItem>
-struct SortBoundedItemsByFirstEdge : 
-	public std::binary_function< const BoundedItem&, const BoundedItem&, bool >
+struct SortBoundedItemsByFirstEdge
 {
 	const std::size_t m_axis;
 	explicit SortBoundedItemsByFirstEdge (const std::size_t axis) : m_axis(axis) {}
@@ -308,8 +306,7 @@ struct SortBoundedItemsByFirstEdge :
 };
 
 template <typename BoundedItem>
-struct SortBoundedItemsBySecondEdge : 
-	public std::binary_function< const BoundedItem&, const BoundedItem&, bool >
+struct SortBoundedItemsBySecondEdge
 {
 	const std::size_t m_axis;
 	explicit SortBoundedItemsBySecondEdge (const std::size_t axis) : m_axis(axis) {}
@@ -322,8 +319,7 @@ struct SortBoundedItemsBySecondEdge :
 
 
 template <typename BoundedItem>
-struct SortBoundedItemsByDistanceFromCenter : 
-	public std::binary_function< const BoundedItem&, const BoundedItem&, bool >
+struct SortBoundedItemsByDistanceFromCenter
 {
 	const typename BoundedItem::KeyType m_center;
 	explicit SortBoundedItemsByDistanceFromCenter(const typename BoundedItem::KeyType&center) : m_center(center) {}
@@ -335,8 +331,7 @@ struct SortBoundedItemsByDistanceFromCenter :
 };
 
 template <typename BoundedItem>
-struct SortBoundedItemsByAreaEnlargement : 
-	public std::binary_function< const BoundedItem&, const BoundedItem&, bool >
+struct SortBoundedItemsByAreaEnlargement
 {
 	const double area;
 	explicit SortBoundedItemsByAreaEnlargement(const typename BoundedItem::KeyType &center) : area(center.area()) {}
@@ -348,8 +343,7 @@ struct SortBoundedItemsByAreaEnlargement :
 };
 
 template <typename BoundedItem>
-struct SortBoundedItemsByOverlapEnlargement : 
-	public std::binary_function< const BoundedItem&, const BoundedItem&, bool >
+struct SortBoundedItemsByOverlapEnlargement
 {
 	const typename BoundedItem::KeyType m_center;
 	explicit SortBoundedItemsByOverlapEnlargement(const typename BoundedItem::KeyType &center) : m_center(center) {}

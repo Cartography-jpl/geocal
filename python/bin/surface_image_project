@@ -104,6 +104,7 @@ func = ProjectWrap(args.basefname, igccol, mi, args.scale, args.grid_spacing)
 if(args.number_process > 1):
     pool = Pool(args.number_process)
     res = pool.map(func, range(igccol.number_image))
+    pool.close()
 else:
     res = list(map(func, range(igccol.number_image)))
 

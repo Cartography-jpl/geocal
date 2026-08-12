@@ -181,9 +181,9 @@ void RsmLowOrderPolynomial::fit
     for(int j = 0; j < nsample_fit_; ++j)
       for(int k = 0; k < nheight_fit_; ++k) {
 	try {
-	  double ln = Min_line + (Max_line - Min_line - 1.0) /
+	  double ln = Min_line + (Max_line - Min_line) /
 	    (nline_fit_ - 1.0) * i;
-	  double smp = Min_sample + (Max_sample - Min_sample - 1.0) /
+	  double smp = Min_sample + (Max_sample - Min_sample) /
 	    (nsample_fit_ - 1.0) * j;
 	  double h = Min_height + (Max_height - Min_height) /
 	    (nheight_fit_ - 1.0) * k;
@@ -241,7 +241,7 @@ std::string RsmLowOrderPolynomial::tre_string() const
 /// these values to, we set min_line, max_line, min_sample, max_sample
 /// all to 0 (the RsmMultiSection will fill this in with other TRE
 /// information), and nline_fit, nsample_fit, nheight_fit,
-/// nsecond_pass_fit, ignore_igc_error_in_fit to the default values of
+/// ignore_igc_error_in_fit to the default values of
 /// the constructor 
 //-----------------------------------------------------------------------
 

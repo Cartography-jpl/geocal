@@ -36,23 +36,18 @@ BOOST_AUTO_TEST_CASE(basic)
   // Check frontier_pixel_neighbor_count. Should only be nonzero in our data
   // hole, and should have a count of 5 neighbors at the corners, 3 at
   // the edges, and zero elsewhere.
-  blitz::Array<unsigned short int, 2> ncount = m.frontier_pixel_neighbor_count();
-  for(int i = 0; i < mask.rows(); ++i)
-    for(int j = 0; j < mask.cols(); ++j)
-      if(!mask(i,j))
-	BOOST_CHECK_EQUAL(ncount(i,j), 0);
-  blitz::Array<unsigned short int, 2> hole_count = ncount(blitz::Range(10,15),blitz::Range(20,30));
-  for(int i = 0; i < hole_count.rows(); ++i)
-    for(int j = 0; j < hole_count.cols(); ++j) {
-      if(i == 0 || i == hole_count.rows() - 1) {
-	if(j == 0 || j == hole_count.cols() - 1)
-	  BOOST_CHECK_EQUAL(hole_count(i,j), 5);
+  auto fp = m.frontier_pixel_find(1);
+  for(auto p : fp) {
+    if(p.i == 10 || p.i == 15) {
+	if(p.j == 20 || p.j == 30)
+	  BOOST_CHECK_EQUAL(p.count, 5);
 	else
-	  BOOST_CHECK_EQUAL(hole_count(i,j), 3);
-      } else if(j == 0 || j == hole_count.cols() - 1)
-	BOOST_CHECK_EQUAL(hole_count(i,j), 3);
-      else 
-	BOOST_CHECK_EQUAL(hole_count(i,j), 0);
+	  BOOST_CHECK_EQUAL(p.count, 3);
+      } else if(p.j == 20 || p.j == 30)
+	BOOST_CHECK_EQUAL(p.count, 3);
+      else
+	// Shouldn't happen
+	BOOST_CHECK(false);
     }
   BOOST_CHECK_CLOSE(m.predicted_value(10,20), 2.9337889, 1e-2);
   BOOST_CHECK(m.fill_iteration());
@@ -78,7 +73,7 @@ BOOST_AUTO_TEST_CASE(most_neighbors_first)
   m.fill_missing_data();
   int nmask = count(m.filled_mask() == true);
   BOOST_CHECK_EQUAL(nmask, 0);
-  BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.9785935, 1e-2);
+  BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.933788931224139, 1e-2);
   BOOST_CHECK_EQUAL(m.iteration_count(), 3);
 }
 
@@ -126,7 +121,6 @@ BOOST_AUTO_TEST_CASE(median)
 
 BOOST_AUTO_TEST_CASE(random)
 {
-#ifdef HAVE_CXX11  
   IterativeMorphologicalDilation m(data, mask, 3, -1,
 	   IterativeMorphologicalDilation::GAUSSIAN_WEIGHTED_AVERAGE,
 	   IterativeMorphologicalDilation::RANDOM_ORDER);
@@ -139,10 +133,6 @@ BOOST_AUTO_TEST_CASE(random)
   // worth tracking down, we just want to make sure the results is "reasonable"
   BOOST_CHECK_CLOSE(m.filled_image()(10,20), 2.988751, 5.0);
   BOOST_CHECK_EQUAL(m.iteration_count(), 3);
-#else
-  // Skip if we don't have C++ 11 support.
-  return;
-#endif
 }
 
 BOOST_AUTO_TEST_CASE(serialization)

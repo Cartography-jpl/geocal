@@ -7,6 +7,8 @@
 #include "camera.h"
 #include "dem.h"
 #include "geocal_autoderivative_quaternion.h"
+#include "velocity_aberration.h"
+#include "refraction.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
 #include <vector>
@@ -41,36 +43,46 @@ public:
 //-----------------------------------------------------------------------
 
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const = 0;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianInertialLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const = 0;
+  cf_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from ScLookVector to CartesianFixedLookVector.
 //-----------------------------------------------------------------------
 
   virtual CartesianFixedLookVectorWithDerivative
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const = 0;
+  cf_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const = 0;
 
   FrameCoordinate frame_coordinate(const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const;
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const;
   std::vector<boost::shared_ptr<GroundCoordinate> >
   footprint(const Camera& C, const Dem& D, 
 	    double Resolution = 30,
@@ -80,11 +92,19 @@ public:
 		    const FrameCoordinate& Fc,
 		    const Dem& D,
 		    double Resolution = 30,
-		    int Band = 0, double Max_height = 9000) const;
+		    int Band = 0, double Max_height = 9000,
+		    const boost::shared_ptr<Refraction>&
+		    Ref = boost::shared_ptr<Refraction>(),
+		    const boost::shared_ptr<VelocityAberration>&
+		    Vabb = boost::shared_ptr<VelocityAberration>()) const;
   boost::shared_ptr<CartesianFixed> 
   reference_surface_intersect_approximate(const Camera& C, 
 		  const FrameCoordinate& Fc, int Band = 0,
-		  double Height_reference_surface = 0.0) const;
+		  double Height_reference_surface = 0.0,
+   	          const boost::shared_ptr<Refraction>&
+		  Ref = boost::shared_ptr<Refraction>(),
+		  const boost::shared_ptr<VelocityAberration>&
+		  Vabb = boost::shared_ptr<VelocityAberration>()) const;
 
   double resolution_meter(const Camera& C, int Band = 0) const;
   double resolution_meter(const Camera& C, const FrameCoordinate& Fc, 
@@ -98,27 +118,48 @@ public:
 //-----------------------------------------------------------------------
 
   virtual bool prefer_cf() const = 0;
+
+//-----------------------------------------------------------------------
+/// Find the ScLookVector that sees a given point.
+//-----------------------------------------------------------------------
+
+  virtual ScLookVector
+  sc_look_vector(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const = 0;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector_with_derivative(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const = 0;
   
+		 
 //-----------------------------------------------------------------------
 /// Convert from CartesianInertialLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const = 0;
+  sc_look_vector(const CartesianInertialLookVector& Ci,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from CartesianInertialLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const = 0;
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Convert from CartesianFixedLookVector to ScLookVector.
 //-----------------------------------------------------------------------
 
   virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const = 0;
+  sc_look_vector(const CartesianFixedLookVector& Cf,
+		 bool Include_velocity_aberration = true) const = 0;
 
 
 //-----------------------------------------------------------------------
@@ -126,7 +167,8 @@ public:
 //-----------------------------------------------------------------------
 
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const = 0;
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
+		 bool Include_velocity_aberration = true) const = 0;
 
 //-----------------------------------------------------------------------
 /// Return position as a pointer.
@@ -172,6 +214,21 @@ public:
   velocity_ci_with_derivative() const = 0;
 
 //-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianFixed coordinate system as position (e.g., ECR).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<double, 3> velocity_cf() const = 0;
+
+//-----------------------------------------------------------------------
+/// Return velocity. This is in meters per second, in same
+/// CartesianFixed coordinate system as position (e.g., ECI).
+//-----------------------------------------------------------------------
+
+  virtual boost::array<AutoDerivative<double>, 3> 
+  velocity_cf_with_derivative() const = 0;
+  
+//-----------------------------------------------------------------------
 /// Return Time of OrbitData.
 //-----------------------------------------------------------------------
   
@@ -205,8 +262,27 @@ private:
   linear displacement for a zenith angle of 10 is 0.549 meters, 20
   degrees is 1.223 meters, and 30 degrees is 2.221.
 
-  We may want to add a atmospheric refraction correction in the
-  future, but this hasn't been done yet.
+  The refraction calculation can be handled by an instance of the 
+  Refraction class (e.g., RefractionMsp). This is handled outside of
+  the class - so we return look vectors before correcting for
+  refraction.
+
+  The velocity aberration includes a couple of approximations to
+  enable it to run faster:
+
+  1. We only include the first order terms in v/c.
+  2. We ignore the rotation of the planet for the
+     CartesianFixedLookVector, using the velocity_cf() as an
+     approximation to the relative velocity of the target.
+
+  This approximation is pretty good, it introduces small ~1m errors
+  for a typical orbit on the Earth.
+
+  For high precision work (e.g, 0.5 m pixels of WV-2) this might not
+  be sufficient. For those cases, you can request that the Orbit *not*
+  perform its approximate velocity aberration correction and then
+  handle this correction separately (similar to how Refraction is
+  handled).
 
   We need to have one of the toolkit available if we want to convert
   for the CartesianFixed coordinates used by this class to 
@@ -256,23 +332,41 @@ public:
   virtual ~QuaternionOrbitData() {}
 
   virtual CartesianInertialLookVector 
-  ci_look_vector(const ScLookVector& Sl) const;
+  ci_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianInertialLookVectorWithDerivative 
-  ci_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const;
+  ci_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianFixedLookVector 
-  cf_look_vector(const ScLookVector& Sl) const;
+  cf_look_vector(const ScLookVector& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual CartesianFixedLookVectorWithDerivative
-  cf_look_vector(const ScLookVectorWithDerivative& Sl) 
-    const;
+  cf_look_vector(const ScLookVectorWithDerivative& Sl,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianInertialLookVector& Ci) const;
+  sc_look_vector(const CartesianInertialLookVector& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci) const;
+  sc_look_vector(const CartesianInertialLookVectorWithDerivative& Ci,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVector 
-  sc_look_vector(const CartesianFixedLookVector& Cf) const;
+  sc_look_vector(const CartesianFixedLookVector& Cf,
+		 bool Include_velocity_aberration = true) const;
   virtual ScLookVectorWithDerivative
-  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf) const;
+  sc_look_vector(const CartesianFixedLookVectorWithDerivative& Cf,
+		 bool Include_velocity_aberration = true) const;
+  virtual ScLookVector
+  sc_look_vector(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const;
+  virtual ScLookVectorWithDerivative
+  sc_look_vector_with_derivative(const CartesianFixed& Gc,
+		 const boost::shared_ptr<Refraction>&
+		 Ref = boost::shared_ptr<Refraction>(),
+		 const boost::shared_ptr<VelocityAberration>&
+		 Vabb = boost::shared_ptr<VelocityAberration>()) const;
 
 //-----------------------------------------------------------------------
 /// Return position as a ptr.
@@ -323,7 +417,7 @@ public:
   virtual boost::array<double, 3> velocity_ci() const;
   virtual boost::array<AutoDerivative<double>, 3> 
   velocity_ci_with_derivative() const;
-  boost::array<double, 3> velocity_cf() const;
+  virtual boost::array<double, 3> velocity_cf() const;
   virtual boost::array<AutoDerivative<double>, 3> 
   velocity_cf_with_derivative() const;
 
@@ -486,6 +580,9 @@ private:
    The default methods just use the OrbitData methods, but derived
    classes can supply more optimized versions of these methods.
 
+   See QuaternionOrbitData for a discussion of Refraction and velocity 
+   aberration corrections.
+
    An orbit has a min_time() and a max_time() that orbit data is
    available for. Requesting data outside of this range will cause an
    exception to be thrown. For Time T, we must have 
@@ -522,8 +619,12 @@ public:
 //-----------------------------------------------------------------------
 
   FrameCoordinate frame_coordinate(Time T, const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const
-  { return orbit_data(T)->frame_coordinate(Gc, C, Band);}
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const
+  { return orbit_data(T)->frame_coordinate(Gc, C, Band, Ref, Vabb);}
 
 //-----------------------------------------------------------------------
 /// Give the frame coordinates that a particular point on the ground
@@ -532,9 +633,14 @@ public:
 
   FrameCoordinateWithDerivative 
   frame_coordinate_with_derivative(const TimeWithDerivative& T, 
-				   const GroundCoordinate& Gc, 
-				   const Camera& C, int Band = 0) const
-  { return orbit_data(T)->frame_coordinate_with_derivative(Gc, C, Band);}
+	   const GroundCoordinate& Gc, 
+	   const Camera& C, int Band = 0,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const
+  { return orbit_data(T)->frame_coordinate_with_derivative(Gc, C, Band,
+							   Ref, Vabb);}
 
 //-----------------------------------------------------------------------
 /// Return location on the reference surface that a particular frame 
@@ -609,17 +715,12 @@ public:
 //-----------------------------------------------------------------------
   
   virtual ScLookVector sc_look_vector(Time T, 
-			      const CartesianFixed& Pt) const
-  {
-    boost::shared_ptr<OrbitData> od = orbit_data(T);
-    boost::array<double, 3> p1 = Pt.position;
-    boost::array<double, 3> p2 = od->position_cf()->position;
-    CartesianFixedLookVector lv;
-    lv.look_vector[0] = p1[0] - p2[0];
-    lv.look_vector[1] = p1[1] - p2[1];
-    lv.look_vector[2] = p1[2] - p2[2];
-    return od->sc_look_vector(lv);
-  }
+           const CartesianFixed& Pt,
+	   const boost::shared_ptr<Refraction>&
+	   Ref = boost::shared_ptr<Refraction>(),
+           const boost::shared_ptr<VelocityAberration>&
+	   Vabb = boost::shared_ptr<VelocityAberration>()) const
+  { return orbit_data(T)->sc_look_vector(Pt, Ref, Vabb); }
   
 //-----------------------------------------------------------------------
 /// Return position at given time. We should have min_time() <= T <

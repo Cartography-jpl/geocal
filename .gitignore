@@ -29,6 +29,7 @@ lib/GeoCalCore/Support/stamp-h2
 libgeocal.la
 libtool
 pynitf/
+python/geocal.egg-info
 script/setup_afids_env.csh
 script/setup_afids_env.sh
 script/setup_afids_python.csh

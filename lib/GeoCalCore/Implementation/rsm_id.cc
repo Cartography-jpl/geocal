@@ -5,6 +5,7 @@
 #include "ostream_pad.h"
 #include "ecr.h"
 #include "planet_coordinate.h"
+#include "geocal_matrix.h"
 #include "local_rectangular_coordinate.h"
 #include <boost/algorithm/string.hpp>
 #include <boost/make_shared.hpp>
@@ -30,7 +31,7 @@ void RsmId::serialize(Archive & ar, const unsigned int version)
   GEOCAL_GENERIC_BASE(RsmId);
   ar & GEOCAL_NVP(cconv)
     & GEOCAL_NVP_(image_identifier)
-    & GEOCAL_NVP_(rsm_suport_data_edition)
+    & GEOCAL_NVP_(rsm_support_data_edition)
     & GEOCAL_NVP_(image_sequence_identifier)
     & GEOCAL_NVP_(sensor_identifier)
     & GEOCAL_NVP_(sensor_type)
@@ -71,7 +72,7 @@ static boost::format timingf_missing("%|1$-58s|");
 std::string RsmId::tre_string() const
 {
   std::string res = "";
-  res += str_check_size(f % image_identifier_ % rsm_suport_data_edition_ %
+  res += str_check_size(f % image_identifier_ % rsm_support_data_edition_ %
 			image_sequence_identifier_ % sensor_identifier_ %
 			sensor_type_, 240);
   if(image_acquistion_time_) {
@@ -168,12 +169,12 @@ RsmId::read_tre_string(const std::string& Tre_in)
   std::stringstream in(Tre_in);
   boost::shared_ptr<RsmId> res(new RsmId);
   res->image_identifier_ = read_size<std::string>(in, 80);
-  res->rsm_suport_data_edition_ = read_size<std::string>(in, 40);
+  res->rsm_support_data_edition_ = read_size<std::string>(in, 40);
   res->image_sequence_identifier_ = read_size<std::string>(in, 40);
   res->sensor_identifier_ = read_size<std::string>(in, 40);
   res->sensor_type_ = read_size<std::string>(in, 40);
   boost::trim(res->image_identifier_);
-  boost::trim(res->rsm_suport_data_edition_);
+  boost::trim(res->rsm_support_data_edition_);
   boost::trim(res->image_sequence_identifier_);
   boost::trim(res->sensor_identifier_);
   boost::trim(res->sensor_type_);
@@ -243,8 +244,10 @@ RsmId::read_tre_string(const std::string& Tre_in)
 
   // This is the illumination and sensor position. We don't currently
   // have this in place, we'll need to add this in.
-  for(int i = 0; i < 21; ++i)
+  for(int i = 0; i < 21; ++i) {
     boost::optional<double> x = read_size<boost::optional<double> >(in, 21, true);
+    (void) x;			// Suppress unused variable warning
+  }
   check_end_of_stream(in);
   return res;
 }
@@ -275,11 +278,16 @@ void RsmId::print(std::ostream& Os) const
   OstreamPad opad(Os, "    ");
   Os << "RsmId:\n"
      << "  Image Identifier:          " << image_identifier_ << "\n"
-     << "  RSM Edition:               " << rsm_suport_data_edition_ << "\n"
+     << "  RSM Edition:               " << rsm_support_data_edition_ << "\n"
      << "  Image Sequence Identifier: " << image_sequence_identifier_ << "\n"
      << "  Sensor Identifier:         " << sensor_identifier_ << "\n"
      << "  Sensor type:               " << sensor_type_ << "\n"
-     << "  Timing:                    ";
+     << "  Image acquisition time:     ";
+  if(image_acquistion_time_)
+    Os << *image_acquistion_time_ << "\n";
+  else
+    Os << "Not used\n";
+  Os << "  Timing:                    ";
   if(timing_) {
     Os << "\n";
     opad << *timing_ << "\n";
@@ -329,4 +337,91 @@ void RsmId::naif_code(int Naif_code)
     return;
   }
   throw Exception("Unsupported coordinate converter in naif_code");
+}
+
+inline bool ground_domain_test(const boost::array<double, 3>& x,
+			       const boost::array<double, 3>& t1,
+			       const boost::array<double, 3>& t2,
+			       const boost::array<double, 3>& t3)
+{
+  // This is (x-t1)^T((t2-t1) x (t3-t1)) >=0
+  boost::array<double, 3> t4, t5, t6, t7;
+  for(int i = 0; i < 3; ++i) {
+    t4[i] = x[i]-t1[i];
+    t5[i] = t2[i] - t1[i];
+    t6[i] = t3[i] - t1[i];
+  }
+  cross(t5, t6, t7);
+  return dot(t4,t7) >= 0;
+}
+			       
+//-----------------------------------------------------------------------
+/// Check that point is in the ground domain. You don't normally need
+/// to check this, but this is the equations found in section 5.6
+/// of "RSM TRE Specification for NITF 2.1"
+//-----------------------------------------------------------------------
+
+bool RsmId::in_ground_domain(const GroundCoordinate& Gc) const
+{
+  boost::array<double, 3> x;
+  coordinate_converter()->convert_to_coordinate(Gc, x[0], x[1], x[2]);
+  std::vector<boost::array<double, 3> > v;
+  for(int i = 0; i < 8; ++i) {
+    boost::array<double, 3> t;
+    coordinate_converter()->convert_to_coordinate(*ground_domain_vertex_[i],
+						  t[0], t[1], t[2]);
+    v.push_back(t);
+  }
+  boost::array<double, 3> v1 = v[0];
+  boost::array<double, 3> v2 = v[1];
+  boost::array<double, 3> v3 = v[2];
+  boost::array<double, 3> v4 = v[3];
+  boost::array<double, 3> v5 = v[4];
+  boost::array<double, 3> v6 = v[5];
+  // Not actually used below, comment out so we don't get a warning
+  // boost::array<double, 3> v7 = v[6]; 
+  boost::array<double, 3> v8 = v[7];
+  // Equation 1
+  if(!ground_domain_test(x,v2,v4,v1)) {
+    if(false)
+      std::cerr << "Equation 1\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+    return false;
+  }
+  // Equation 2
+  if(!ground_domain_test(x,v6,v5,v8)) {
+    if(false)
+      std::cerr << "Equation 2\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+    return false;
+  }
+  // Equation 3
+  if(!ground_domain_test(x,v1,v3,v5)) {
+    if(false)
+      std::cerr << "Equation 3\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+    return false;
+  }
+  // Equation 4
+  if(!ground_domain_test(x,v2,v6,v4)) {
+    if(false)
+      std::cerr << "Equation 4\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+    return false;
+  }
+  // Equation 5
+  if(!ground_domain_test(x,v2,v1,v6)) {
+    if(false)
+      std::cerr << "Equation 5\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+    return false;
+  }
+  // Equation 6
+  if(!ground_domain_test(x,v4,v8,v3)) {
+    if(false)
+      std::cerr << "Equation 6\n"
+		<< "point: (" <<  x[0] << ", " << x[1] << ", " << x[2] << ")\n";
+    return false;
+  }
+  return true;
 }

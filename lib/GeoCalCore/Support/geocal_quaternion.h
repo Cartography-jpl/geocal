@@ -1,7 +1,7 @@
 #ifndef GEOCAL_QUATERNION_H
 #define GEOCAL_QUATERNION_H
 #include "geocal_exception.h"
-#include "geocal_config.h"
+#include "geocal_external_config.h"
 #include "geocal_matrix.h"
 #include <boost/math/quaternion.hpp>
 #include <blitz/array.h>
@@ -355,6 +355,25 @@ matrix_to_quaternion(const T m[3][3])
 					   -(m[1][2] + m[2][1]) / s,
 					   -s / 4.0);
   }
+}
+
+//-----------------------------------------------------------------------
+/// Give the angle between two quaternions. This can be used for a variety
+/// of purposes, such as determining an outlier quaternion.
+//-----------------------------------------------------------------------
+
+inline double quaternion_delta_angle(const boost::math::quaternion<double>& Q1, 
+			     const boost::math::quaternion<double>& Q2)
+{
+  boost::math::quaternion<double> delta_quat = Q2 * conj(Q1);
+  double t = delta_quat.R_component_1();
+  t = (t > 1 ? 1 : (t < -1 ? -1 : t)); // Handle t being slightly
+                                       // out of range due to round
+                                       // off.
+  if(t < 0)
+    t = -t;
+  double delta_ang = 2.0 * std::acos(t);
+  return delta_ang;
 }
 
 //-----------------------------------------------------------------------

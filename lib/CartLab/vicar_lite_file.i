@@ -40,6 +40,8 @@ public:
   %python_attribute(data_offset, int)
   %python_attribute(file_name, std::string)
   static bool is_vicar_file(const std::string& Fname);
+  %python_attribute(has_igc_glas_gfm, bool)
+  %python_attribute(igc_glas_gfm, boost::shared_ptr<ImageGroundConnection>);
   %python_attribute(number_line, int)
   %python_attribute(number_sample, int)
   %python_attribute(number_band, int)
@@ -83,6 +85,8 @@ public:
   %python_attribute(is_compressed, bool)
   %python_attribute(band_id, int)
   %python_attribute(force_map_info, bool)
+  %python_attribute(has_igc_glas_gfm, bool)
+  %python_attribute(igc_glas_gfm, boost::shared_ptr<ImageGroundConnection>);
   %pickle_serialization();
 };
 
@@ -92,8 +96,7 @@ public:
 	       bool Outside_dem_is_error = false,
 	       const boost::shared_ptr<Datum>& D = 
 	       boost::shared_ptr<Datum>(new NoDatum()),
-	       int Band = 0,
-	       int Naif_code=Geodetic::EARTH_NAIF_CODE);
+	       int Band = 0);
   %python_attribute2(file, file_ptr, boost::shared_ptr<VicarLiteFile>)
   virtual double elevation(int Y_index, int X_index) const;
   %python_attribute(band, int)

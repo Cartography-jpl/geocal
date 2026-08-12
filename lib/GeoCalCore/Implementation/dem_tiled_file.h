@@ -23,12 +23,15 @@ public:
 ///   we just return 0.
 /// \param Scale Value to multiple underlying data by to get meters
 ///   (e.g., DEM might be in US survey foot).
+/// \param Nodata value. Treated like outside dem (so an error or
+///   translated to 0.
 //-----------------------------------------------------------------------
 
   DemTiledFile(const boost::shared_ptr<TiledFileBase<2> >& F,
 	       const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-	       bool Outside_dem_is_error = false, double Scale = 1.0)
-  { initialize(F, D, M, Outside_dem_is_error, Scale); }
+	       bool Outside_dem_is_error = false, double Scale = 1.0,
+	       double No_data_value = -1e99)
+  { initialize(F, D, M, Outside_dem_is_error, Scale, No_data_value); }
 
 //-----------------------------------------------------------------------
 /// Destructor.
@@ -36,17 +39,7 @@ public:
 
   virtual ~DemTiledFile() {}
 
-//-----------------------------------------------------------------------
-/// Return height in meters relative to datum(). Note that the call is
-/// in line, sample order, which means Y and then X.
-//-----------------------------------------------------------------------
-
-  virtual double elevation(int Y_index, int X_index) const
-  {
-    boost::array<index, 2> i = {{Y_index, X_index}};
-    return scale_ * data_->get_double(i);
-  }
-
+  virtual double elevation(int Y_index, int X_index) const;
   unsigned int number_tile() const {return data_->number_tile();}
   int number_line_per_tile() const {return (int) data_->tile_size()[0];}
   int number_sample_per_tile() const {return (int) data_->tile_size()[1];}
@@ -71,19 +64,24 @@ protected:
 ///   we just return 0.
 /// \param Scale Value to multiple underlying data by to get meters
 ///   (e.g., DEM might be in US survey foot).
+/// \param Nodata value. Treated like outside dem (so an error or
+///   translated to 0.
 //-----------------------------------------------------------------------
 
   void initialize(const boost::shared_ptr<TiledFileBase<2> >& F,
 		  const boost::shared_ptr<Datum>& D, const MapInfo& M, 
-		  bool Outside_dem_is_error = false, double Scale = 1.0)
+		  bool Outside_dem_is_error = false, double Scale = 1.0,
+		  double No_data_value = -1e99)
   { 
     data_ = F;
     scale_ = Scale;
+    no_data_value_ = No_data_value;
     DemMapInfo::initialize(D, M, Outside_dem_is_error);
   }
   boost::shared_ptr<TiledFileBase<2> > data_; ///< Underlying data.
   double scale_;			      ///< Scale to apply to
 					      ///data to get meters.
+  double no_data_value_;		      ///< No data value.
 private:
   friend class boost::serialization::access;
   template<class Archive>

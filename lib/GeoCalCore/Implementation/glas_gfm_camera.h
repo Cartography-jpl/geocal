@@ -1,6 +1,7 @@
 #ifndef GLAS_GFM_CAMERA_H
 #define GLAS_GFM_CAMERA_H
 #include "camera.h"
+#include "quaternion_camera.h"
 #include "geocal_exception.h"
 #include "geocal_quaternion.h"
 #include "geocal_autoderivative_quaternion.h"
@@ -28,9 +29,61 @@ public:
   // Not clear what if any arguments we want to constructor. So for
   // now, just leave most everything off.
   GlasGfmCamera(int Number_line = 1, int Number_sample = 256);
+  GlasGfmCamera(const Camera& Cam, int Band, double Delta_sample,
+		const std::string& Band_type = "N",
+		double Band_wavelength = 1.45,
+		double Focal_length_meter = 1.0,
+		const Time& Focal_length_time = Time::time_j2000(0));
+  GlasGfmCamera(const Camera& Cam, int Band, double Delta_line,
+		double Delta_sample,
+		const std::string& Band_type = "N",
+		double Band_wavelength = 1.45,
+		double Focal_length_meter = 1.0,
+		const Time& Focal_length_time = Time::time_j2000(0));
   virtual ~GlasGfmCamera() {}
-  void print(std::ostream& Os) const
-  { Os << "GlasGfmCamera"; }
+  void print(std::ostream& Os) const;
+  virtual blitz::Array<double, 1> parameter() const;
+  virtual void parameter(const blitz::Array<double, 1>& Parm);
+  virtual ArrayAd<double, 1> parameter_with_derivative() const;
+  virtual void parameter_with_derivative
+  (const ArrayAd<double, 1>& Parm);
+  virtual std::vector<std::string> parameter_name() const;
+
+//-----------------------------------------------------------------------
+/// Return the parameter subset mask, where "true" means include the
+/// parameter and "false" means don't.
+//-----------------------------------------------------------------------
+
+  virtual blitz::Array<bool, 1> parameter_mask() const 
+  { return parameter_mask_; }
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler epsilon.
+//-----------------------------------------------------------------------
+
+  bool fit_epsilon() const { return parameter_mask_(0); }
+  void fit_epsilon(bool V) {parameter_mask_(0) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler beta.
+//-----------------------------------------------------------------------
+
+  bool fit_beta() const { return parameter_mask_(1); }
+  void fit_beta(bool V) {parameter_mask_(1) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera euler delta.
+//-----------------------------------------------------------------------
+
+  bool fit_delta() const { return parameter_mask_(2); }
+  void fit_delta(bool V) {parameter_mask_(2) = V;}
+
+//-----------------------------------------------------------------------
+/// Indicate if we fit for camera focal length.
+//-----------------------------------------------------------------------
+
+  bool fit_focal_length() const { return parameter_mask_(3); }
+  void fit_focal_length(bool V) {parameter_mask_(3) = V;}
 
 //-----------------------------------------------------------------------
 /// Number of bands in camera.
@@ -121,6 +174,8 @@ public:
     notify_update();
   }
 
+  void frame_coordinate_to_xy(const FrameCoordinate& F, int Band,
+			      double& xfp, double& yfp) const;
   virtual FrameCoordinate frame_coordinate(const ScLookVector& Sl, 
 					   int Band) const;
   virtual FrameCoordinateWithDerivative 
@@ -194,12 +249,9 @@ public:
 /// nonzero values here.
 //-----------------------------------------------------------------------
 
-  blitz::Array<double, 1> ppoff() const
-  {
-    blitz::Array<double, 1> res(3);
-    res = 0;
-    return res;
-  }
+  const blitz::Array<double, 1>& ppoff() const
+  { return ppoff_; }
+  void ppoff(const blitz::Array<double, 1>& V);
 
   blitz::Array<double, 1> angoff() const;
   void angoff(const blitz::Array<double, 1>& V);
@@ -210,15 +262,17 @@ public:
 
   double sample_number_first() const {return sample_number_first_; }
   void sample_number_first(double V)
-  { sample_number_first_ = V; notify_update();}
+  {
+    if(V != 0)
+      throw Exception("Right now we only support sample_number_first 0. We can extend this if needed");
+    sample_number_first_ = V; notify_update();}
 
 //-----------------------------------------------------------------------
 /// Delta Sample Pair. This is applicable for sensor type "S" only.
 //-----------------------------------------------------------------------
 
   double delta_sample_pair() const {return delta_sample_pair_; }
-  void delta_sample_pair(double V)
-  {delta_sample_pair_ = V; notify_update();}
+  void delta_sample_pair(double V);
 
 //-----------------------------------------------------------------------
 /// Field Alignment. This is n x 4. The columns are start_x, start_y,
@@ -227,8 +281,20 @@ public:
 
   const blitz::Array<double, 2>& field_alignment() const
   {return field_alignment_;}
+
+//-----------------------------------------------------------------------
+/// Set Field Alignment. This is n x 4. The columns are start_x, start_y,
+/// end_x, end_y. This is applicable for sensor type "S" only.
+///
+/// Note this does *not* change delta_sample_pair. If you alter the
+/// size of field_alignment you almost certainly want to also set
+/// delta_sample_pair, which is a separate step.  
+//-----------------------------------------------------------------------
+  
   void field_alignment(const blitz::Array<double, 2>& V)
   { field_alignment_.reference(V.copy()); notify_update();}
+  void field_alignment_fit(const Camera& Cam, double Delta_sample,
+			   int Band = 0);
 
 //-----------------------------------------------------------------------
 /// Field angle type. 0 for direct alignment grid, 1 for calibration
@@ -320,7 +386,10 @@ public:
   }
 
   void field_alignment_block(const Camera& Cam, double Delta_line,
-			     double Delta_sample);
+			     double Delta_sample, int Band = 0);
+
+  void compare_camera(const Camera& Cam, double& max_line_diff,
+		      double& max_sample_diff, int Band = 0) const;
     
 //-----------------------------------------------------------------------
 /// The UUID for the DES that contains this object, if any. This is an
@@ -357,6 +426,9 @@ private:
   blitz::Array<double, 1> first_line_block_, first_sample_block_,
 	  delta_line_block_, delta_sample_block_;
   std::vector<blitz::Array<double, 5> > field_alignment_block_;
+  blitz::Array<double, 1> ppoff_;
+  blitz::Array<bool, 1> parameter_mask_;
+				// Mask of parameters we are fitting for.
   virtual void notify_update()
   {
     notify_update_do(*this);
@@ -372,4 +444,5 @@ private:
 }
 
 GEOCAL_EXPORT_KEY(GlasGfmCamera);
+GEOCAL_CLASS_VERSION(GlasGfmCamera, 3)
 #endif

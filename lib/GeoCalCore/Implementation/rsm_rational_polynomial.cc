@@ -314,26 +314,43 @@ void RsmRationalPolynomial::fit_data
 			  ln_num_jac.cols());
   Array<double, 2> smp_jac(smp_den_jac.rows(), smp_den_jac.cols() +
 			   smp_num_jac.cols());
-  ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
-  ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
-    -ln_lhs(i1) * ln_den_jac;
-  smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
-  smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
-    -smp_lhs(i1) * smp_den_jac;
+  if(ln_num_jac.cols() > 0)
+    ln_jac(ra, Range(0, ln_num_jac.cols() - 1)) = ln_num_jac;
+  if(ln_den_jac.cols() > 0)
+    ln_jac(ra, Range(ln_num_jac.cols(), toEnd)) =
+      -ln_lhs(i1) * ln_den_jac;
+  if(smp_num_jac.cols() > 0)
+    smp_jac(ra, Range(0, smp_num_jac.cols() - 1)) = smp_num_jac;
+  if(smp_den_jac.cols() > 0)
+    smp_jac(ra, Range(smp_num_jac.cols(), toEnd)) =
+      -smp_lhs(i1) * smp_den_jac;
   GslMatrix cov;
   GslVector ln_c;
   GslVector smp_c;
   double chisq;
   gsl_fit(ln_jac, ln_lhs, ln_c, cov, chisq);
   gsl_fit(smp_jac, smp_lhs, smp_c, cov, chisq);
-  line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
-						       ln_num_jac.cols()-1)));
-  line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
-						       toEnd)));
-  sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
+  blitz::Array<double, 1> empty_coeff;
+  if(ln_num_jac.cols() > 0)
+    line_num_.fitted_coefficent(ln_c.blitz_array()(Range(0,
+							 ln_num_jac.cols()-1)));
+  else
+    line_num_.fitted_coefficent(empty_coeff);
+  if(ln_den_jac.cols() > 0)
+    line_den_.fitted_coefficent(ln_c.blitz_array()(Range(ln_num_jac.cols(),
+							 toEnd)));
+  else
+    line_den_.fitted_coefficent(empty_coeff);
+  if(smp_num_jac.cols() > 0)
+    sample_num_.fitted_coefficent(smp_c.blitz_array()(Range(0,
 					       smp_num_jac.cols()-1)));
-  sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
-					       toEnd)));
+  else
+    sample_num_.fitted_coefficent(empty_coeff);
+  if(smp_den_jac.cols() > 0)
+    sample_den_.fitted_coefficent(smp_c.blitz_array()(Range(smp_num_jac.cols(),
+							    toEnd)));
+  else
+    sample_den_.fitted_coefficent(empty_coeff);
 }
 
 //-----------------------------------------------------------------------
@@ -358,9 +375,9 @@ void RsmRationalPolynomial::fit
     for(int j = 0; j < nsample_fit_; ++j)
       for(int k = 0; k < nheight_fit_; ++k) {
 	try {
-	  double ln = Min_line + (Max_line - Min_line - 1.0) /
+	  double ln = Min_line + (Max_line - Min_line) /
 	    (nline_fit_ - 1.0) * i;
-	  double smp = Min_sample + (Max_sample - Min_sample - 1.0) /
+	  double smp = Min_sample + (Max_sample - Min_sample) /
 	    (nsample_fit_ - 1.0) * j;
 	  double h = Min_height + (Max_height - Min_height) /
 	    (nheight_fit_ - 1.0) * k;
@@ -420,6 +437,43 @@ void RsmRationalPolynomial::fit
 	  }
 	}
   }
+  if(false) {
+    std::cerr << "# Line Sample X Y Z\n";
+    std::cerr << std::setprecision(20) << "\n";
+    for(int i = 0; i  < (int) line.size(); ++i)
+      std::cerr << line[i] << " " << sample[i] << " " << x[i] << " "
+		<< y[i] << " " << z[i] << "\n";
+  }
+  fit_data(line, sample, x, y, z);
+}
+
+void RsmRationalPolynomial::fit_data
+(const blitz::Array<double, 2>& Data,
+ int Min_line, int Max_line, int Min_sample,
+ int Max_sample)
+{
+  std::vector<double> line, sample, x, y, z;
+  for(int i = 0; i < Data.rows(); ++i) {
+    double ln = Data(i,0);
+    double smp = Data(i,1);
+    if(ln >= Min_line && ln <= Max_line &&
+       smp >= Min_sample && smp <= Max_sample) {
+      line.push_back(ln);
+      sample.push_back(smp);
+      x.push_back(Data(i,2));
+      y.push_back(Data(i,3));
+      z.push_back(Data(i,4));
+    }
+  }
+  if(line.size() == 0)
+    throw Exception("Did not get any points for RsmRationalPolynomial fit");
+  fit_offset_and_scale(Min_line, Max_line, Min_sample, Max_sample,
+		       *std::min_element(x.begin(), x.end()),
+		       *std::max_element(x.begin(), x.end()),
+		       *std::min_element(y.begin(), y.end()),
+		       *std::max_element(y.begin(), y.end()),
+		       *std::min_element(z.begin(), z.end()),
+		       *std::max_element(z.begin(), z.end()));
   fit_data(line, sample, x, y, z);
 }
 

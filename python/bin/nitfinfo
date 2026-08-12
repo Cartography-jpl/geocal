@@ -58,6 +58,11 @@ if(not args.full):
     print(t2.decode('utf-8'),end='')
     print(t3.decode('utf-8'))
 else:
+    # Load plugins for nitf
+    if "NITF_PLUGIN" in os.environ:
+        for m in os.environ["NITF_PLUGIN"].split(":"):
+            exec("import %s" % m)
+
     if(args.debug):
         pynitf.nitf_field.DEBUG = True
         pynitf.nitf_des.DEBUG = True

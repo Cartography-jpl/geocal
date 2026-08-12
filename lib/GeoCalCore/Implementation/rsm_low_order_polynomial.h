@@ -65,7 +65,7 @@ public:
   blitz::Array<double, 1> parameter_sample() const
   { return blitz::Array<double, 1>(const_cast<double*>(psamp), blitz::shape(10), blitz::neverDeleteData); }
   void print(std::ostream& Os) const
-  { Os << "RsmLowOrderPolynomial"; }
+  { Os << "RsmLowOrderPolynomial\n"; }
   int min_line() const {return min_line_;}
   void min_line(int V) { min_line_ = V;}
   int max_line() const {return max_line_;}
@@ -127,7 +127,7 @@ public:
 private:
   double pline[10], psamp[10];
   int min_line_, max_line_, min_sample_, max_sample_;
-  int nline_fit_, nsample_fit_, nheight_fit_, nsecond_pass_fit_;
+  int nline_fit_, nsample_fit_, nheight_fit_;
   bool ignore_igc_error_in_fit_;
   friend class boost::serialization::access;
   template<class Archive>

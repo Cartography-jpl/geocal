@@ -1,5 +1,5 @@
 #ifndef IGC_SIMULATED_RAY_CASTER_H
-#define IGC_SIMILATED_RAY_CASTER_H
+#define IGC_SIMULATED_RAY_CASTER_H
 #include "image_ground_connection.h"
 #include "calc_raster.h"
 namespace GeoCal {

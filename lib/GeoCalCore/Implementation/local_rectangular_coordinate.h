@@ -4,6 +4,7 @@
 #include "coordinate_converter.h"
 #include "geocal_matrix.h"
 #include "array_ad.h"
+#include "dem.h"
 #include <boost/make_shared.hpp>
 
 namespace GeoCal {
@@ -14,14 +15,17 @@ class ImageGroundConnection;
 
 class LocalRcParameter : public Printable<LocalRcParameter> {
 public:
+  enum CoordinateCreation {FOLLOW_SAMPLE_LOCAL, FOLLOW_LINE_LOCAL,
+    FOLLOW_SAMPLE_FULL, FOLLOW_LINE_FULL};
   LocalRcParameter() {}
   LocalRcParameter(const ImageGroundConnection& Igc, double Height = 0,
-		   double Line = -1, double Sample = -1);
+		   double Line = -1, double Sample = -1,
+		   CoordinateCreation C = FOLLOW_SAMPLE_LOCAL);
   static void check_rc_assumption
   (const ImageGroundConnection& Igc, double Height = 0);
   virtual ~LocalRcParameter() {}
   virtual void print(std::ostream& Os) const
-  { Os << "LocalRcParameter"; }
+  { Os << "LocalRcParameter\n"; }
   blitz::Array<double, 2> cf_to_rc_arr() const
   { blitz::Array<double, 2> res(3,3);
     for(int i = 0; i < 3; ++i)
@@ -74,7 +78,7 @@ public:
   virtual void print(std::ostream& Os) const
   { Os << "LocalRectangularCoordinate (" << position[0] << ", "
        << position[1] << ", "
-       << position[2] << ")"; }
+       << position[2] << ")\n"; }
 
 //-----------------------------------------------------------------------
 /// Parameters used to describe the LocalRectangularCoordinate system.
@@ -127,7 +131,7 @@ public:
   }
   virtual bool is_same(const CoordinateConverter& Conv) const;
   virtual void print(std::ostream& Os) const
-  { Os << "LocalRcConverter"; }
+  { Os << "LocalRcConverter\n"; }
   virtual int naif_code() const { return p->cf_prototype->naif_code(); }
   const boost::shared_ptr<LocalRcParameter>& parameter() const { return p; }
 private:
@@ -137,9 +141,100 @@ private:
   template<class Archive>
   void serialize(Archive & ar, const unsigned int version);
 };
+
+/****************************************************************//**
+  This is a Dem that is at a constant Z in a LocalRcConverter 
+  coordinate system.
+*******************************************************************/
   
+class LocalZDem: public Dem {
+public:
+//-----------------------------------------------------------------------
+/// Constructor
+//-----------------------------------------------------------------------
+  LocalZDem(const boost::shared_ptr<LocalRcConverter>& Cconv,
+	    int Z)
+    : z_(Z), cconv(Cconv)
+  {
+  }
+
+  virtual ~LocalZDem() { }
+
+//-----------------------------------------------------------------------
+/// Return height of surface above/below the reference surface (e.g.,
+/// WGS-84 for the earth). Positive means above, negative below. This is 
+/// in meters.
+//-----------------------------------------------------------------------
+
+  virtual double height_reference_surface(const GroundCoordinate& Gp)
+    const
+  {
+    return surface_point(Gp)->height_reference_surface();
+  }
+
+//-----------------------------------------------------------------------
+/// Return distance to surface directly above/below the given point.
+/// Distance is in meters. Positive means Gp is above the surface, 
+/// negative means below.
+//-----------------------------------------------------------------------
+
+  virtual double distance_to_surface(const GroundCoordinate& Gp) 
+    const
+  {
+    double px,py,pz;
+    cconv->convert_to_coordinate(Gp, px, py, pz);
+    return pz - z_;
+  }
+  virtual boost::shared_ptr<GroundCoordinate> 
+    surface_point(const GroundCoordinate& Gp) const
+  {
+    double px,py,pz;
+    cconv->convert_to_coordinate(Gp, px, py, pz);
+    return cconv->convert_from_coordinate(px, py, z_);
+  }
+  
+  virtual void height_range(const GroundCoordinate& Ulc,
+			      const GroundCoordinate& Lrc,
+			      double& Min_h, double& Max_h,
+			      double H_pad = 10.0) const
+  {
+    // Not real easy for us to implement. We could probably come up
+    // with something if this becomes an issue, but we don't use this
+    // DEM a lot. For now, just treat this as an error. We can revisit
+    // this if this becomes an issue
+    throw Exception("Not implemented");
+  }
+  
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+  virtual void print(std::ostream& Os) const 
+  { Os << "Local RC Z Dem, Z " << z_ << "m \n"; }
+
+//-----------------------------------------------------------------------
+/// Return z value used by this object.
+//-----------------------------------------------------------------------
+
+  double z() const {return z_;}
+
+//-----------------------------------------------------------------------
+/// Return LocalRcConverter
+//-----------------------------------------------------------------------
+
+  const boost::shared_ptr<LocalRcConverter>& coordinate_converter() const
+  { return cconv; }
+private:
+  double z_;
+  boost::shared_ptr<LocalRcConverter>  cconv;
+  LocalZDem() {}
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
+};
 }
 GEOCAL_EXPORT_KEY(LocalRcParameter);
 GEOCAL_EXPORT_KEY(LocalRectangularCoordinate);
 GEOCAL_EXPORT_KEY(LocalRcConverter);
+GEOCAL_EXPORT_KEY(LocalZDem);
 #endif

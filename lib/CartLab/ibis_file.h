@@ -1,6 +1,7 @@
 #ifndef IBIS_FILE_H
 #define IBIS_FILE_H
 #include "vicar_file.h"
+#include <boost/type_index.hpp>
 
 namespace GeoCal {
   class IbisFile;
@@ -72,6 +73,9 @@ public:
   virtual void flush();
   std::vector<T> data;
   virtual void print(std::ostream& Os) const;
+  T data_get(int i) const { return data[i]; }
+  void data_set(int i, const T& V) { data[i] = V; }
+  int data_size() const { return (int) data.size(); }
 private:
   // Only IbisFile can call this.
   IbisColumn(IbisFile& F, int Index, int Size_byte);
@@ -148,8 +152,15 @@ public:
     range_check(Index, 0, number_col());
     const IbisColumn<T>* res = 
       dynamic_cast<const IbisColumn<T>*>(col[Index].get());
-    if(!res)
-      throw Exception("Type T doesn't match type of the column");
+    if(!res) {
+      Exception e;
+      e << "We were trying to get a IbisColumn of type "
+	<< boost::typeindex::type_id<T>().pretty_name()
+	<< " but the column index " << Index << " "
+	<< "has type code data_type of "
+	<< column_data_type(Index);
+      throw e;
+    }
     return *res;
   }
 
@@ -161,8 +172,15 @@ public:
   {
     range_check(Index, 0, number_col());
     IbisColumn<T>* res = dynamic_cast<IbisColumn<T>*>(col[Index].get());
-    if(!res)
-      throw Exception("Type T doesn't match type of the column");
+    if(!res) {
+      Exception e;
+      e << "We were trying to get a IbisColumn of type "
+	<< boost::typeindex::type_id<T>().pretty_name()
+	<< " but the column index " << Index << " "
+	<< "has type code data_type of "
+	<< column_data_type(Index);
+      throw e;
+    }
     return *res;
   }
 
@@ -228,6 +246,8 @@ public:
 
   int number_col() const {return ncol;}
 
+  void set_column_type(int i, data_type dt);
+  
 //-----------------------------------------------------------------------
 /// Unit number for VicarFile
 //-----------------------------------------------------------------------
@@ -239,6 +259,7 @@ public:
 			     int srow, int nrows);
   static int IBISColumnWritew(int ibis_id, char *buffer, int column, 
 			      int srow, int nrows);
+  static int IBISColumnSetw(int ibis_id, char *name, void *value, int column);
 protected:
   IbisFile() {}
 private:

@@ -11,6 +11,8 @@
 %}
 %import "hdf_orbit.i"
 %import "eci_tod_burl.i"
+%geocal_shared_ptr(GeoCal::OrbitArray<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>);
+%template(OrbitArray_EciTodBurl_TimeAcs) GeoCal::OrbitArray<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>;
 %geocal_shared_ptr(GeoCal::HdfOrbit<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>);
 %template(HdfOrbit_EciTodBurl_TimeAcs) GeoCal::HdfOrbit<GeoCal::EciTodBurl, GeoCal::TimeAcsCreator>;
 // List of things "import *" will include

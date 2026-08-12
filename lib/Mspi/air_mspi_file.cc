@@ -1,6 +1,4 @@
 #include "air_mspi_file.h"
-// This won't be needed once version 3 becomes the default for boost filesystem
-#define BOOST_FILESYSTEM_VERSION 3
 #include <boost/filesystem.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>

@@ -13,7 +13,7 @@ namespace GeoCal {
 class MapReprojectedImage : public RasterImageVariable {
 public:
   MapReprojectedImage(const boost::shared_ptr<RasterImage> Img_in,
-		      const MapInfo& Mi);
+		      const MapInfo& Mi, int Line_avg = -1, int Sample_avg = -1);
   %python_attribute2(raw_image, raw_image_ptr, boost::shared_ptr<RasterImage>)
   %pickle_init(1, self.raw_image, self.map_info)
 };

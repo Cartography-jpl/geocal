@@ -1,6 +1,7 @@
 #ifndef VICAR_FILE_H
 #define VICAR_FILE_H
 #include "geocal_exception.h"
+#include "image_ground_connection.h"
 #include "map_info.h"
 #include "geocal_rpc.h"
 #include "rsm.h"
@@ -94,6 +95,12 @@ public:
 //-----------------------------------------------------------------------
 
   enum rsm_file_type {RSM_XML_FILE, RSM_NITF_FILE};
+
+//-----------------------------------------------------------------------
+/// Type of GLAS/GFM file we generate if we are writing it.
+//-----------------------------------------------------------------------
+
+  enum glas_gfm_file_type {GLAS_GFM_XML_FILE, GLAS_GFM_NITF_FILE};
   
   VicarFile(const std::string& Fname, access_type Access = READ,
 	    bool Force_area_pixel = false);
@@ -252,6 +259,7 @@ public:
   bool has_map_info() const;
   bool has_rpc() const;
   bool has_rsm() const;
+  bool has_igc_glas_gfm() const;
   MapInfo map_info() const;
   void map_info(const MapInfo& M);
   Rpc rpc() const;
@@ -259,6 +267,9 @@ public:
   boost::shared_ptr<Rsm> rsm() const;
   void rsm(const boost::shared_ptr<Rsm>& R,
 	   rsm_file_type File_type = RSM_NITF_FILE);
+  boost::shared_ptr<ImageGroundConnection> igc_glas_gfm() const;
+  void igc_glas_gfm(const boost::shared_ptr<ImageGroundConnection>& Igc,
+		    glas_gfm_file_type File_type = GLAS_GFM_NITF_FILE);
 
   static int file_name_to_unit(const std::string& Fname);
 

@@ -20,6 +20,10 @@ void GlasGfmCamera::load(Archive& Ar, const unsigned int version)
 {
   frame_to_sc_nd_ = value(frame_to_sc_);
   init_model();
+  if(version < 2) {
+    parameter_mask_.resize(4);
+    parameter_mask_ = true;
+  }
 }
 
 template<class Archive>
@@ -44,9 +48,13 @@ void GlasGfmCamera::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(delta_line_block)
     & GEOCAL_NVP_(delta_sample_block)
     & GEOCAL_NVP_(field_alignment_block);
+  if(version > 1)
+    ar & GEOCAL_NVP_(ppoff)
+      & GEOCAL_NVP_(parameter_mask);
+  if(version > 2)
+    ar & GEOCAL_NVP_(focal_length_time);
   boost::serialization::split_member(ar, *this, version);
 }
-
 
 GEOCAL_IMPLEMENT(GlasGfmCamera);
 #endif
@@ -93,13 +101,19 @@ public:
     if(i >= fa.rows())
       i = fa.rows() - 1;
     int ibase = i * dsamp;
-    X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
-    // GLAS doesn't actually support line numbers being anything other
-    // than 0. But it is very useful to be able to have a "extended"
-    // camera, so we just give it a pitch of the average of all the
-    // sample data as a "reasonable" thing.
-    Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
-      (F.line - 0) * x_space;
+    if(line_is_y) {
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
+      // GLAS doesn't actually support line numbers being anything other
+      // than 0. But it is very useful to be able to have a "extended"
+      // camera, so we just give it a pitch of the average of all the
+      // sample data as a "reasonable" thing.
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
+	(F.line - 0) * p_space;
+    } else {
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0) -
+	(F.line - 0) * p_space;
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i, 1);
+    }
   }
   virtual void fc_to_xy(const FrameCoordinateWithDerivative& F,
 			AutoDerivative<double>& X,
@@ -112,42 +126,75 @@ public:
     if(i >= fa.rows())
       i = fa.rows() - 1;
     int ibase = i * dsamp;
-    X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
-    // GLAS doesn't actually support line numbers being anything other
-    // than 0. But it is very useful to be able to have a "extended"
-    // camera, so we just give it a pitch of the average of all the
-    // sample data as a "reasonable" thing.
-    Y = (F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
-      (F.line - 0) * x_space;
+    if(line_is_y) {
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0);
+      // GLAS doesn't actually support line numbers being anything other
+      // than 0. But it is very useful to be able to have a "extended"
+      // camera, so we just give it a pitch of the average of all the
+      // sample data as a "reasonable" thing.
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1) -
+	(F.line - 0) * p_space;
+    } else {
+      X = (F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp + fa(i,0) -
+	(F.line - 0) * p_space;
+      Y = (F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp + fa(i, 1);
+    }
   }
   virtual void xy_to_fc(double X, double Y, FrameCoordinate& F) const
   {
     fill_cache();
-    int i = index_from_x(X);
-    int ibase = i * dsamp;
-    F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
-    F.line = -(Y - ((F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1))) / x_space;
+    if(line_is_y) {
+      int i = index_from_x(X);
+      int ibase = i * dsamp;
+      F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
+      F.line = ((F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp  + fa(i,1)  - Y )/ p_space;
+    } else {
+      int i = index_from_y(Y);
+      int ibase = i * dsamp;
+      F.sample = (Y - fa(i,1)) / ((fa(i, 3) - fa(i,1)) / dsamp) + ibase;
+      F.line = ((F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp  + fa(i,0)  - X)/ p_space;
+    }
   }
   virtual void xy_to_fc(const AutoDerivative<double>& X,
 			const AutoDerivative<double>& Y,
 			FrameCoordinateWithDerivative& F) const
   {
     fill_cache();
-    int i = index_from_x(X.value());
-    int ibase = i * dsamp;
-    F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
-    F.line = -(Y - ((F.sample - ibase)  * (fa(i, 3) - fa(i,1)) / dsamp + fa(i,1))) / x_space;
+    if(line_is_y) {
+      int i = index_from_x(X.value());
+      int ibase = i * dsamp;
+      F.sample = (X - fa(i,0)) / ((fa(i, 2) - fa(i,0)) / dsamp) + ibase;
+      F.line = ((F.sample - ibase) * (fa(i, 3) - fa(i,1)) / dsamp  + fa(i,1)  - Y )/ p_space;
+    } else {
+      int i = index_from_y(Y.value());
+      int ibase = i * dsamp;
+      F.sample = (Y - fa(i,1)) / ((fa(i, 3) - fa(i,1)) / dsamp) + ibase;
+      F.line = ((F.sample - ibase) * (fa(i, 2) - fa(i,0)) / dsamp  + fa(i,0)  - X)/ p_space;
+    }
   }
   int index_from_x(double X) const
   {
-    if(x_space > 0) {
+    if(p_space > 0) {
       for(int i = 0; i < fa.rows(); ++i)
-	if(X < fa(i,3))
+	if(X < fa(i,2))
 	  return i;
       return fa.rows() - 1;
     }
     for(int i = 0; i < fa.rows(); ++i)
-      if(X > fa(i,3))
+      if(X > fa(i,2))
+	return i;
+    return fa.rows() - 1;
+  }
+  int index_from_y(double Y) const
+  {
+    if(p_space > 0) {
+      for(int i = 0; i < fa.rows(); ++i)
+	if(Y < fa(i,3))
+	  return i;
+      return fa.rows() - 1;
+    }
+    for(int i = 0; i < fa.rows(); ++i)
+      if(Y > fa(i,3))
 	return i;
     return fa.rows() - 1;
   }
@@ -162,10 +209,44 @@ public:
     y_0 = fa(0,1);
     x_end = fa(fa.rows() - 1, 2);
     y_end = fa(fa.rows() - 1, 3);
-    x_space = (x_end - x_0)/nsamp;
+    // We assume sample direction is mostly in x or y direction. .
+    double x_space = (x_end - x_0)/nsamp;
+    double y_space = (y_end - y_0)/nsamp;
+    if(fabs(x_space) > fabs(y_space)) {
+      p_space = x_space;
+      line_is_y = true;
+    } else {
+      p_space = y_space;
+      line_is_y = false;
+    }
+    // Sanity check on data, we assume sample direction isn't zero
+    // size. Note it is not uncommon and ok for the line direction to
+    // be zero size, and that is ok. But we divide by spacing in
+    // sample space for xy_to_fc, so make sure we don't have zeros there.
+    for(int i = 0; i < fa.rows(); ++i)
+      if(line_is_y) {
+	if(fa(i,0) == fa(i,2)) {
+	  Exception e;
+	  e << "field_alignment has zero size in sample direction:\n"
+	    << "  Index: " << i << "\n"
+	    << "  Values: " << fa(i,0) << ", " << fa(i,1) << ", "
+	    << fa(i,2) << ", " << fa(i,3) << "\n";
+	  throw e;
+	}
+      } else {
+	if(fa(i,1) == fa(i,3)) {
+	  Exception e;
+	  e << "field_alignment has zero size in sample direction:\n"
+	    << "  Index: " << i << "\n"
+	    << "  Values: " << fa(i,0) << ", " << fa(i,1) << ", "
+	    << fa(i,2) << ", " << fa(i,3) << "\n";
+	  throw e;
+	}
+      }	
     cache_stale = false;
   }
-  mutable double x_0, x_end, x_space, y_0, y_end;
+  mutable double x_0, x_end, p_space, y_0, y_end;
+  mutable bool line_is_y;
   mutable int nsamp;
   mutable int dsamp;
   mutable blitz::Array<double, 2> fa;
@@ -324,10 +405,122 @@ void GlasGfmCamera::init_model()
     throw Exception("Don't support GFM with calibration parameters yet");
 }
 
+//-----------------------------------------------------------------------
+/// It is common to create a GlasGfmCamera by fitting it to another
+/// camera. This does that in one step, taking a QuaternionCamera and
+/// fitting for the given Band. This version is for Pushbroom "S" type
+/// sensor.
+///
+/// Note the focal length doesn't really affect anything, it gets
+/// scaled out when we fit the Camera. If you don't otherwise have a
+/// value here then you can just set this to 1.0 or something like
+/// that. Focal length is in meters, unlike the focal length in
+/// QuaternionCamera that is in mm.
+///
+/// Note for QuaternionCamera, the generated glas model has any
+/// rotation embedded in the generated model. If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaternion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
+//-----------------------------------------------------------------------
+
+GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
+			     double Delta_sample,
+			     const std::string& Band_type,
+			     double Band_wavelength,
+			     double Focal_length_meter,
+			     const Time& Focal_length_time)
+: focal_length_(Focal_length_meter),
+  nline_(Cam.number_line(Band)),
+  nsamp_(Cam.number_sample(Band)),
+  band_type_(Band_type),
+  band_wavelength_(Band_wavelength),
+  focal_length_time_(Focal_length_time),
+  sample_number_first_(0),
+  delta_sample_pair_(Delta_sample),
+  field_angle_type_(0),
+  field_angle_interpolation_type_(1),
+  field_alignment_block_(9),
+  ppoff_(3)
+{
+  // Leave these as empty
+  // band_index_, irepband_, isubcat_.
+  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
+  frame_to_sc_nd_ = value(frame_to_sc_);
+  init_model();
+  field_alignment_fit(Cam, delta_sample_pair_, Band);
+  ppoff_ = 0,0,0;
+  parameter_mask_.resize(4);
+  parameter_mask_ = true;
+}
+
+//-----------------------------------------------------------------------
+/// It is common to create a GlasGfmCamera by fitting it to another
+/// camera. This does that in one step, taking a QuaternionCamera and
+/// fitting for the given Band. This version is for Frame "F" type
+/// sensor.
+///
+/// Note the focal length doesn't really affect anything, it gets
+/// scaled out when we fit the Camera. If you don't otherwise have a
+/// value here then you can just set this to 1.0 or something like
+/// that. Focal length is in meters, unlike the focal length in
+/// QuaternionCamera that is in mm.
+///
+/// Note for QuaternionCamera, the generated glas model has any
+/// rotation embedded in the generated model. If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaternion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
+//-----------------------------------------------------------------------
+
+GlasGfmCamera::GlasGfmCamera(const Camera& Cam, int Band,
+			     double Delta_line,
+			     double Delta_sample,
+			     const std::string& Band_type,
+			     double Band_wavelength,
+			     double Focal_length_meter,
+			     const Time& Focal_length_time)
+: focal_length_(Focal_length_meter), 
+  nline_(Cam.number_line(Band)),
+  nsamp_(Cam.number_sample(Band)),
+  band_type_(Band_type),
+  band_wavelength_(Band_wavelength),
+  focal_length_time_(Focal_length_time),
+  sample_number_first_(0),
+  delta_sample_pair_(Delta_sample),
+  field_angle_type_(0),
+  field_angle_interpolation_type_(1),
+  field_alignment_block_(9),
+  ppoff_(3)
+{
+  // Leave these as empty
+  // band_index_, irepband_, isubcat_.
+  frame_to_sc_ = boost::math::quaternion<double>(1,0,0,0);
+  frame_to_sc_nd_ = value(frame_to_sc_);
+  init_model();
+  field_alignment_block(Cam, Delta_line, Delta_sample, Band);
+  ppoff_ = 0,0,0;
+  parameter_mask_.resize(4);
+  parameter_mask_ = true;
+}
+
 GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
 : nline_(Number_line),
   nsamp_(Number_sample),
-  field_alignment_block_(9)
+  field_alignment_block_(9),
+  ppoff_(3)
 {
   // These default values come from the RIP sample NITF file for Hyperion.
   focal_length_ = 1.41009182;
@@ -347,7 +540,10 @@ GlasGfmCamera::GlasGfmCamera(int Number_line, int Number_sample)
   // Not used for sensor "S", but set a value so this isn't undefined
   field_angle_type_ = 0;
   field_angle_interpolation_type_ = 1;
+  ppoff_ = 0,0,0;
   init_model();
+  parameter_mask_.resize(4);
+  parameter_mask_ = true;
 }
 
 FrameCoordinate GlasGfmCamera::frame_coordinate(const ScLookVector& Sl, 
@@ -382,6 +578,17 @@ FrameCoordinateWithDerivative GlasGfmCamera::frame_coordinate_with_derivative
   return res;
 }
 
+//-----------------------------------------------------------------------
+/// Return the focal plane x and y for the given FrameCoordinate.
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::frame_coordinate_to_xy(const FrameCoordinate& F, int Band,
+					   double& xfp, double& yfp) const
+{
+  range_check(Band, 0, number_band());
+  model_->fc_to_xy(F, xfp, yfp);
+}
+
 ScLookVector GlasGfmCamera::sc_look_vector
 (const FrameCoordinate& F, int Band) const
 {
@@ -406,7 +613,9 @@ ScLookVectorWithDerivative GlasGfmCamera::sc_look_vector_with_derivative
 
 //-----------------------------------------------------------------------
 /// Angular sensor frame offset. This is in radians, and is the order
-/// "xyz".
+/// "xyz". This is the same as delta, beta, epsilon for euler angles
+/// (so a reverse order than we often use, e.g. QuaternionCamera in
+/// epsilon, beta, delta order).
 //-----------------------------------------------------------------------
 
 blitz::Array<double, 1> GlasGfmCamera::angoff() const
@@ -424,21 +633,50 @@ void GlasGfmCamera::angoff(const blitz::Array<double, 1>& V)
   notify_update();
 }
 
+void GlasGfmCamera::ppoff(const blitz::Array<double, 1>& V)
+{
+  if(V.rows() != 3)
+    throw Exception("ppoff must be size 3");
+  ppoff_ = V;
+  notify_update();
+}
+
 //-----------------------------------------------------------------------
 /// Populate the field_alignment, first_line_block,
 /// first_sample_block, delta_line and delta_sample to match the given
 /// camera. This creates only one block - we currently don't support
-/// multiple blocks
+/// multiple blocks.
+///
+/// Only applicable for sensor type "F" and field_angle_type 0.
+///
+/// You may want to call compare_camera to check how accurate the
+/// approximation is.
+///
+/// Note that you should be careful not to double count any
+/// frame_t quaternion. If you pass that in with the Cam, then
+/// this is already accounted for in the field angle map (which has
+/// the effect of the quaternion embedded in it). If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaternion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
 //-----------------------------------------------------------------------
 
 void GlasGfmCamera::field_alignment_block
-(const Camera& Cam, double Delta_line, double Delta_sample)
+(const Camera& Cam, double Delta_line, double Delta_sample, int Band)
 {
-  if(field_angle_type_ != 0) {
-    field_angle_type_ = 0;
-    init_model();
-  }
-  field_angle_interpolation_type_ = 0;
+  if(sensor_type() != "F")
+    throw Exception("field_alignment_block only applies to sensor type 'F'");
+  field_angle_type_ = 0;
+  nline_ = Cam.number_line(Band);
+  nsamp_ = Cam.number_sample(Band);
+  field_angle_interpolation_type_ = 1;
+  init_model();
   first_line_block_.resize(1);
   first_sample_block_.resize(1);
   delta_line_block_.resize(1);
@@ -457,10 +695,10 @@ void GlasGfmCamera::field_alignment_block
       FrameCoordinate fc2(fc1.line, fc1.sample + Delta_sample);
       FrameCoordinate fc3(fc1.line + Delta_line, fc1.sample + Delta_sample);
       FrameCoordinate fc4(fc1.line + Delta_line, fc1.sample);
-      ScLookVector slv1 = Cam.sc_look_vector(fc1, 0);
-      ScLookVector slv2 = Cam.sc_look_vector(fc2, 0);
-      ScLookVector slv3 = Cam.sc_look_vector(fc3, 0);
-      ScLookVector slv4 = Cam.sc_look_vector(fc4, 0);
+      ScLookVector slv1 = Cam.sc_look_vector(fc1, Band);
+      ScLookVector slv2 = Cam.sc_look_vector(fc2, Band);
+      ScLookVector slv3 = Cam.sc_look_vector(fc3, Band);
+      ScLookVector slv4 = Cam.sc_look_vector(fc4, Band);
       fa(i,j,0,0,0) = slv1.look_vector[0] /
 	(slv1.look_vector[2] / focal_length());
       fa(i,j,0,0,1) = slv1.look_vector[1] /
@@ -481,3 +719,172 @@ void GlasGfmCamera::field_alignment_block
   notify_update();
 }
 
+//-----------------------------------------------------------------------
+/// Return the maximum difference in frame coordinate line and sample
+/// between this camera and another camera. You may want to call this
+/// after doing field_alignment_block or field_alignment_fit.
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::compare_camera(const Camera& Cam, double& max_line_diff,
+				   double& max_sample_diff, int Band) const
+{
+  if(Cam.number_line(Band) != number_line(0) ||
+     Cam.number_sample(Band) != number_sample(0))
+    throw Exception("Cam doesn't match the size of the GlasGfmCamera");
+  max_line_diff = 0;
+  max_sample_diff = 0;
+  for(int i = 0; i < number_line(0); ++i)
+    for(int j = 0; j < number_sample(0); ++j) {
+      FrameCoordinate fc(i,j);
+      ScLookVector slv = Cam.sc_look_vector(fc, Band);
+      ScLookVector slv2 = sc_look_vector(fc, 0);
+      FrameCoordinate fc1 = frame_coordinate(slv, 0);
+      FrameCoordinate fc2 = Cam.frame_coordinate(slv2, Band);
+      max_line_diff = std::max(std::max(max_line_diff,
+					fabs(fc1.line - fc.line)),
+			       fabs(fc2.line - fc.line));
+      max_sample_diff = std::max(std::max(max_sample_diff,
+					  fabs(fc1.sample - fc.sample)),
+				 fabs(fc2.sample - fc.sample));
+    }
+}
+
+//-----------------------------------------------------------------------
+/// Populate the field_alignment, sample_number_first_, delta_sample_pair_
+/// to match the given camera.
+///
+/// Only applicable for sensor type "S".
+///
+/// You may want to call compare_camera to check how accurate the
+/// approximation is.
+///
+/// Note that you should be careful not to double count any
+/// frame_t quaternion. If you pass that in with the Cam, then
+/// this is already accounted for in the field angle map (which has
+/// the effect of the quaternion embedded in it). If you want to
+/// assign the frame_to_sc to the GlasGfmCamera, then you should make
+/// sure to pass a Camera with a identity frame_to_sc. So a reasonable
+/// process (in python) would be something like:
+///
+/// q_original = cam.frame_to_sc
+/// cam.frame_to_sc = Quaternion_double(1,0,0,0)
+/// gcam = GlasGfmCamera(cam, 0, ...)
+/// gcam.frame_to_sc = q_original
+/// cam.frame_to_sc = q_original
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::field_alignment_fit
+(const Camera& Cam, double Delta_sample, int Band)
+{
+  if(sensor_type() != "S")
+    throw Exception("field_alignment only applies to sensor type 'S'");
+  if(Cam.number_line(Band) != 1)
+    throw Exception("field_alignment only applies to camera with number_line 1");
+  nsamp_ = Cam.number_sample(Band);
+  init_model();
+  // Right now only support sample number first of 0. We can extend
+  // this if needed.
+  sample_number_first_ = 0;
+  delta_sample_pair_ = Delta_sample;
+  int npair = (int) floor(nsamp_ / delta_sample_pair_  + 0.5);
+  // Right now, we need to have delta_sample_pair_ exactly divide the
+  // number of samples. It isn't clear if the GLAS standard allows
+  // anything else, so at least for now we require this.
+  if(nsamp_ % int(delta_sample_pair_) != 0) {
+    Exception e;
+    e << "We require delta_sample_pair to exactly divide the number of samples\n"
+      << "  Delta_sample_pair: " << delta_sample_pair_ << "\n"
+      << "  Number sample:     " << nsamp_ << "\n";
+    throw e;
+  }
+  field_alignment_.resize(npair, 4);
+  blitz::Array<double, 2>& fa = field_alignment_;
+  for(int i = 0; i < fa.rows(); ++i) {
+    FrameCoordinate fc1(0, i * Delta_sample);
+    FrameCoordinate fc2(fc1.line, fc1.sample + Delta_sample);
+    ScLookVector slv1 = Cam.sc_look_vector(fc1, Band);
+    ScLookVector slv2 = Cam.sc_look_vector(fc2, Band);
+    fa(i,0) = slv1.look_vector[0] / (slv1.look_vector[2] / focal_length());
+    fa(i,1) = slv1.look_vector[1] / (slv1.look_vector[2] / focal_length());
+    fa(i,2) = slv2.look_vector[0] / (slv2.look_vector[2] / focal_length());
+    fa(i,3) = slv2.look_vector[1] / (slv2.look_vector[2] / focal_length());
+  }
+  notify_update();
+}
+
+//-----------------------------------------------------------------------
+/// Set delta Sample Pair. This is applicable for sensor type "S" only.
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::delta_sample_pair(double V)
+{
+  if(!(V > 0))
+    throw Exception("delta_sample_pair must be > 0");
+  delta_sample_pair_ = V;
+  notify_update();
+}
+
+void GlasGfmCamera::print(std::ostream& Os) const
+{
+  Os << "GlasGfmCamera\n"
+     << "  Id:                " << id() << "\n"
+     << "  Band type:         " << band_type() << "\n"
+     << "  Band wavelength:   " << band_wavelength() << " micrometer\n"
+     << "  Number line:       " << number_line(0) << "\n"
+     << "  Number sample:     " << number_sample(0) << "\n"
+     << "  Focal length:      " << focal_length() << " m\n"
+     << "  Focal length time: " << focal_length_time() << "\n"
+     << "  Ppoff:             ("
+     << ppoff()(0) << ", " << ppoff()(1) << ", " << ppoff()(2) << ")\n"
+     << "  Angoff:            ("
+     << angoff()(0) << ", " << angoff()(1) << ", " << angoff()(2) << ")\n";
+}
+
+//-----------------------------------------------------------------------
+/// Set parameter. Right now this is Euler epsilon, beta, delta, focal
+/// length. 
+//-----------------------------------------------------------------------
+
+void GlasGfmCamera::parameter(const blitz::Array<double, 1>& Parm)
+{
+  if(Parm.rows() != 4)
+    throw Exception("Wrong sized parameter passed.");
+  focal_length_ = Parm(3);
+  frame_to_sc(quat_rot("zyx", Parm(0), Parm(1), Parm(2)));
+  notify_update();
+}
+
+void GlasGfmCamera::parameter_with_derivative(const ArrayAd<double, 1>& Parm)
+{
+  if(Parm.rows() != 4)
+    throw Exception("Wrong sized parameter passed.");
+  focal_length_ = Parm(3);
+  frame_to_sc_with_derivative(quat_rot("zyx", Parm(0), Parm(1), Parm(2)));
+  notify_update();
+}
+
+blitz::Array<double, 1> GlasGfmCamera::parameter() const
+{
+  blitz::Array<double, 1> res(4);
+  quat_to_euler(frame_to_sc_nd_, res(0), res(1), res(2));
+  res(3) = focal_length();
+  return res;
+}
+
+ArrayAd<double, 1> GlasGfmCamera::parameter_with_derivative() const
+{
+  blitz::Array<AutoDerivative<double>, 1> res(4);
+  quat_to_euler(frame_to_sc_, res(0), res(1), res(2));
+  res(3) = focal_length_with_derivative();
+  return ArrayAd<double, 1>(res);
+}
+
+std::vector<std::string> GlasGfmCamera::parameter_name() const
+{
+  std::vector<std::string> res;
+  res.push_back("Camera Euler Epsilon");
+  res.push_back("Camera Euler Beta");
+  res.push_back("Camera Euler Delta");
+  res.push_back("Camera focal length");
+  return res;
+}

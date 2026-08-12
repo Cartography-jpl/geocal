@@ -18,7 +18,8 @@ namespace GeoCal {
 *******************************************************************/
 class PlanetConstant {
 public:
-  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502, CERES_NAIF_CODE=2000001};
+  enum {MARS_NAIF_CODE=499, EUROPA_NAIF_CODE=502, CERES_NAIF_CODE=2000001,
+	MOON_NAIF_CODE=301};
   static double a(int Naif_code) {return h(Naif_code).planet_a();}
   static double b(int Naif_code) {return h(Naif_code).planet_b(); }
   static double esq(int Naif_code) {return h(Naif_code).planet_esq(); }
@@ -168,7 +169,7 @@ public:
   static boost::shared_ptr<QuaternionOrbitData> orbit_data
   (const std::string& Target_name, 
    const std::string& Spacecraft_reference_frame_name, const Time& T,
-   int Naif_code);
+   int Naif_code, const std::string& Abcorr = "NONE");
 private:
 //-----------------------------------------------------------------------
 /// Radius of planet in meters at given Planetocentric Latitude (in
@@ -448,7 +449,7 @@ public:
 
   virtual void print(std::ostream& Os) const
   { Os << PlanetConstant::name(naif_code_)
-       << "Planetocentric Converter"; }
+       << "Planetocentric Converter\n"; }
 private:
   int naif_code_;
   friend class boost::serialization::access;
@@ -476,6 +477,23 @@ public:
 
   virtual ~PlanetSimpleDem() {}
 
+  virtual void height_range(const GroundCoordinate& Ulc,
+			      const GroundCoordinate& Lrc,
+			      double& Min_h, double& Max_h,
+			      double H_pad = 10.0) const
+  {
+    if(Ulc.naif_code() != naif_code_ ||
+       Lrc.naif_code() != naif_code_) {
+      Exception e;
+      e << "Ulc or Lrc has the wrong naif_code(). Got " << Ulc.naif_code()
+	<< ", " << Lrc.naif_code() << " "
+	<< " but expected " << naif_code_;
+      throw e;
+    }
+    Min_h = h_ - H_pad;
+    Max_h = h_ + H_pad;
+  }
+  
 //-----------------------------------------------------------------------
 /// Return height of surface above/below the reference surface (e.g.,
 /// WGS-84 for the earth). Positive means above, negative below. This is 

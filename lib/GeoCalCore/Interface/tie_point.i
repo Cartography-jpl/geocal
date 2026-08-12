@@ -12,7 +12,7 @@
 %import "igc_collection.i"
 %geocal_shared_ptr(GeoCal::TiePoint);
 %geocal_shared_ptr(GeoCal::TiePointCollection);
-%geocal_shared_ptr(std::vector<boost::shared_ptr<GeoCal::TiePoint> >);
+%shared_ptr(std::vector<boost::shared_ptr<GeoCal::TiePoint> >);
 namespace GeoCal {
 class TiePoint : public GenericObject {
 public:

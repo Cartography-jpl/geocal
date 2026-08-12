@@ -1,4 +1,5 @@
 #include "camera.h"
+#include "ostream_pad.h"
 #include "geocal_quaternion.h"
 #include "geocal_exception.h"
 #include "geocal_serialize_support.h"
@@ -8,7 +9,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void Camera::serialize(Archive & ar, const unsigned int version)
+void Camera::serialize(Archive & UNUSED(ar), const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Camera);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -16,7 +17,21 @@ void Camera::serialize(Archive & ar, const unsigned int version)
 }
 
 template<class Archive>
-void SimpleCamera::serialize(Archive & ar, const unsigned int version)
+void SubCamera::serialize(Archive & ar, const unsigned int UNUSED(version))
+{
+  GEOCAL_GENERIC_BASE(Camera);
+  GEOCAL_GENERIC_BASE(WithParameter);
+  GEOCAL_BASE(Camera, WithParameter);
+  GEOCAL_BASE(SubCamera, Camera);
+  ar & GEOCAL_NVP_(cam)
+    & GEOCAL_NVP_(start_line)
+    & GEOCAL_NVP_(start_sample)
+    & GEOCAL_NVP_(number_line)
+    & GEOCAL_NVP_(number_sample);
+}
+
+template<class Archive>
+void SimpleCamera::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   GEOCAL_GENERIC_BASE(Camera);
   GEOCAL_GENERIC_BASE(WithParameter);
@@ -35,6 +50,7 @@ void SimpleCamera::serialize(Archive & ar, const unsigned int version)
 
 
 GEOCAL_IMPLEMENT(Camera);
+GEOCAL_IMPLEMENT(SubCamera);
 GEOCAL_IMPLEMENT(SimpleCamera);
 #endif
 
@@ -143,4 +159,21 @@ void SimpleCamera::print(std::ostream& Os) const
      << " Sample Pitch:  " << sample_pitch_ / 1e-6 << " micrometer\n"
      << " Number Line:   " << nline << "\n"
      << " Number Sample: " << nsample << "\n";
+}
+
+//-----------------------------------------------------------------------
+/// Print to stream.
+//-----------------------------------------------------------------------
+
+void SubCamera::print(std::ostream& Os) const
+{
+  OstreamPad opad(Os, "    ");
+  Os << "SubCamera\n"
+     << "  Start line: " << start_line_ << "\n"
+     << "  Start sample: " << start_sample_ << "\n"
+     << "  Number line: " << number_line_ << "\n"
+     << "  Number sample: " << number_sample_ << "\n"
+     << "  Underlying Camera: \n";
+  opad << *full_camera();
+  opad.strict_sync();
 }

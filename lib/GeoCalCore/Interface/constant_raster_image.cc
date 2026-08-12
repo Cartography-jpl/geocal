@@ -5,7 +5,7 @@ using namespace GeoCal;
 
 #ifdef GEOCAL_HAVE_BOOST_SERIALIZATION
 template<class Archive>
-void ConstantRasterImage::serialize(Archive & ar, const unsigned int version)
+void ConstantRasterImage::serialize(Archive & ar, const unsigned int UNUSED(version))
 {
   ar & BOOST_SERIALIZATION_BASE_OBJECT_NVP(RasterImageVariable);
   ar & GEOCAL_NVP_(data);

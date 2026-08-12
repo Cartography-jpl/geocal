@@ -10,6 +10,8 @@
 %import "ipi.i"
 %import "dem.i"
 %import "raster_image.i"
+%import "refraction.i"
+%import "velocity_aberration.i"
 %geocal_shared_ptr(GeoCal::IpiImageGroundConnection);
 namespace GeoCal {
 class IpiImageGroundConnection: public ImageGroundConnection {
@@ -27,9 +29,11 @@ public:
   ground_coordinate_dem(const ImageCoordinate& Ic, const Dem& D) const;
   virtual ImageCoordinate image_coordinate(const GroundCoordinate& Gc) 
     const;
-  %python_attribute2(ipi, ipi_ptr, boost::shared_ptr<Ipi>)
+  %python_attribute(ipi, boost::shared_ptr<Ipi>)
   %python_attribute(resolution, double)
   %python_attribute(maximum_height, double)
+  %python_attribute_with_set(refraction, boost::shared_ptr<Refraction>)
+  %python_attribute_with_set(velocity_aberration, boost::shared_ptr<VelocityAberration>)
   %pickle_serialization()
 protected:
   IpiImageGroundConnection();

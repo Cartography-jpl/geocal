@@ -1,4 +1,4 @@
-#include "geocal_internal_config.h"
+#include "geocal_config.h"
 #include "vicar_argument.h"
 #include "geocal_exception.h"
 #ifdef HAVE_VICAR_RTL

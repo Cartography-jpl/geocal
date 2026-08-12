@@ -22,6 +22,7 @@ GEOCAL_IMPLEMENT(SpiceDem);
 boost::shared_ptr<GroundCoordinate> 
 SpiceDem::surface_point(const GroundCoordinate& Gp) const
 {
+  kernel_list_.load_kernel();
   if(Gp.naif_code() != naif_code_) {
     Exception e;
     e << "Gp has the wrong naif_code(). Got " << Gp.naif_code()

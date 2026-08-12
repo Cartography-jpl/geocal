@@ -28,6 +28,8 @@ public:
   std::string print_to_string() const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate
     (const ImageCoordinate& Ic, const Dem& D) const;
+  boost::shared_ptr<GroundCoordinate> Rsm::ground_intersection
+  (const ImageCoordinate& Ic, const Dem& D, double Z_accuracy=1e-2) const;
   boost::shared_ptr<GroundCoordinate> polish_intersection(const ImageCoordinate& Ic, const Dem& D, const GroundCoordinate& Surfp, double Z_accuracy=1e-2) const;
   boost::shared_ptr<GroundCoordinate> ground_coordinate_z
     (const ImageCoordinate& Ic, double Z) const;
@@ -44,14 +46,36 @@ public:
 
   void fit(const ImageGroundConnection& Igc, double Min_height,
 	   double Max_height);
-  void fill_in_ground_domain_vertex(double Min_height, double Max_height);
+  void fit_data(const blitz::Array<double, 2>& Data, int Nline,
+		int Nsamp) const;
+  void fill_in_ground_domain_vertex(const ImageGroundConnection& Igc,
+				    double Min_height, double Max_height);
+  void fill_in_ground_domain_vertex();
+  blitz::Array<double, 2> compare_data(const blitz::Array<double, 2>& Data)
+    const;
+  blitz::Array<double, 1> compare_data_dist(const blitz::Array<double, 2>& Data)
+    const;
   void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
 		   int Number_sample_spacing, double Height,
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
 		   blitz::Array<double, 2>& OUTPUT)
     const;
+  blitz::Array<double, 2> mapping_matrix(const ImageGroundConnection& Igc,
+					 double Min_height, double Max_height,
+					 int Nline_fit = 20,
+					 int Nsample_fit = 20,
+					 int Nheight_fit = 20,
+					 bool Ignore_igc_error_in_fit = false);
+  bool check_zero_crossing(double Grid_spacing = 0.01) const;
+  blitz::Array<double, 2> generate_data(const ImageGroundConnection& Igc,
+	double Min_height, double Max_height,
+        int Nline_fit=20, int Nsample_fit=20, int Nheight_fit=5,
+	int Nsecond_pass_fit=20, 					
+        int Min_line=0, int Max_line=-1, int Min_sample=0,
+	int Max_sample=-1, bool Ignore_igc_error = true) const;
   %python_attribute(rsm_id, boost::shared_ptr<RsmId>);
   %python_attribute_with_set(rsm_direct_covariance,
 		    boost::shared_ptr<RsmDirectCovariance>);
@@ -63,7 +87,7 @@ public:
   %python_attribute_with_set(coordinate_converter,
 		    boost::shared_ptr<CoordinateConverter>);
   %python_attribute_with_set(image_identifier, std::string);
-  %python_attribute_with_set(rsm_suport_data_edition, std::string);
+  %python_attribute_with_set(rsm_support_data_edition, std::string);
   %python_attribute_with_set(naif_code, int);
   %pickle_serialization()
 };

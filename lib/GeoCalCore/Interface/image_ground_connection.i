@@ -47,7 +47,6 @@ public:
 // Make parameter a python property
 #ifdef SWIGPYTHON
 %rename("__dem") ImageGroundConnection::dem;
-%rename("__ground_coordinate") ImageGroundConnection::ground_coordinate;
 #endif
 class ImageGroundConnection: public WithParameter {
 protected:
@@ -66,6 +65,7 @@ protected:
 			const std::string& Title,
 			const boost::shared_ptr<ImageMask>& Img_mask,
 			const boost::shared_ptr<GroundMask>& Ground_mask);
+  virtual std::string desc() const;
   void initialize(const boost::shared_ptr<Dem>& d, 
 			const boost::shared_ptr<RasterImage>& Img, 
 			const boost::shared_ptr<RasterImageMultiBand>& Img_mb, 
@@ -100,6 +100,14 @@ public:
   virtual blitz::Array<double, 2> 
   collinearity_residual_jacobian(const GroundCoordinate& Gc,
 			const ImageCoordinate& Ic_actual) const;
+  void compare_igc(const ImageGroundConnection& Igc, int Number_line_spacing,
+		   int Number_sample_spacing, double Height,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT,
+		   blitz::Array<double, 2>& OUTPUT)
+    const;
   virtual boost::shared_ptr<GroundCoordinate> 
     ground_coordinate(const ImageCoordinate& Ic) const;
   virtual boost::shared_ptr<GroundCoordinate> 
@@ -112,6 +120,9 @@ public:
   virtual void image_coordinate_with_status(const GroundCoordinate& Gc,
  					    ImageCoordinate& OUTPUT2,
  					    bool& OUTPUT) const;
+  virtual void image_coordinate_extended(const GroundCoordinate& Gc,
+					 ImageCoordinate& OUTPUT2,
+					 bool& OUTPUT) const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf(const CartesianFixed& Gc) 
     const;
   virtual blitz::Array<double, 2> image_coordinate_jac_cf_fd(const CartesianFixed& Gc, double Step_size) const;
@@ -121,6 +132,9 @@ public:
   image_coordinate_jac_parm_fd(const GroundCoordinate& Gc,
 			       const blitz::Array<double, 1>& Eps) const;
   MapInfo cover(const MapInfo& Mi, int boundary = 0) const;
+  %pickle_serialization();
+  %python_attribute(naif_code, int);
+  %python_attribute(cartesian_fixed, boost::shared_ptr<CartesianFixed>);
   %python_attribute_with_set(image, boost::shared_ptr<RasterImage>)
   %python_attribute_with_set(image_multi_band, 
 			     boost::shared_ptr<RasterImageMultiBand>)
@@ -130,7 +144,7 @@ public:
   %python_attribute(number_sample, virtual int)
   %python_attribute(number_band, virtual int)
   %python_attribute_with_set(title, std::string)
-  %python_attribute(has_time, bool)
+  %python_attribute(has_time, virtual bool)
   virtual Time pixel_time(const ImageCoordinate& Ic) const;
   std::string print_to_string() const;
   virtual double resolution_meter(const ImageCoordinate& Ic) const;
@@ -171,14 +185,7 @@ def cf_look_vector(self, ic):
 def footprint_resolution(self, line, sample):
   return (self.footprint_resolution_line(line, sample), 
 	  self.footprint_resolution_sample(line, sample))
-
-def ground_coordinate(self, ic, dem = None):
-  '''Return ground coordinate for the given image coordinate. You can specify
-   a dem to use, or we use the dem associated with the class.'''
-  if(dem):
-    return self.ground_coordinate_dem(ic, dem)
-  else:
-    return self.__ground_coordinate(ic)
+  
 }
 
 };
@@ -226,5 +233,10 @@ public:
 }
 
 %template(Vector_ImageGroundConnection) std::vector<boost::shared_ptr<GeoCal::ImageGroundConnection> >;
+
+// Extra code for handling boost serialization/python pickle of
+// director classes
+%geocal_director_serialization(image_ground_connection, ImageGroundConnection)
+
 // List of things "import *" will include
 %python_export("ImageGroundConnection", "Vector_ImageGroundConnection", "ImageGroundConnectionFailed", "OffsetImageGroundConnection", "ImageGroundConnectionCopy")

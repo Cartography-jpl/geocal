@@ -84,6 +84,7 @@ class IgcRayCaster : public RayCaster, boost::noncopyable {
 // copy constructor if this becomes an issue.
 public:
   IgcRayCaster(const boost::shared_ptr<ImageGroundConnection>& Igc,
+	       int Number_line_framelet = 1,
 	       int Start_line = 0,
 	       int Number_line = -1,
 	       int Number_integration_step = 2, double Resolution = 100,
@@ -94,28 +95,96 @@ public:
   virtual ~IgcRayCaster() {}
   virtual int start_position() const { return start_position_;}
   virtual int number_position() const { return npos_;}
-  virtual bool last_position() const { return ind == npos_ - 1; }
+  virtual bool last_position() const { return ind == npos_ - number_line_framelet_; }
   virtual int current_position() const 
   { if(is_forward)
       return start_position_ + ind;
     else
-      return start_position_ + npos_ - 1 - ind;
+      return start_position_ + npos_ - number_line_framelet_ - ind;
   }
   virtual blitz::Array<double, 6> next_position();
   virtual void print(std::ostream& Os) const
   {
-    Os << "IgcRayCaster";
+    Os << "IgcRayCaster\n";
   }
   int start_sample() const {return start_sample_;}
+  int number_line_framelet() const { return number_line_framelet_;}
   int number_sample() const {return number_sample_;}
+  virtual int shape(int I) const
+  { range_check(I, 0, 6); return result_cache.extent(I); }
+  
+//-----------------------------------------------------------------------
+/// Number of subpixels in the line direction we calculate.
+//-----------------------------------------------------------------------
+  int number_sub_line() const
+  { return nsub_line; }
+
+//-----------------------------------------------------------------------
+/// Set the number of subpixels in the line direction we calculate.
+//-----------------------------------------------------------------------
+  void number_sub_line(int v)
+  {
+    nsub_line = v;
+    result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
+			nintegration_step,(include_path_distance_ ? 4 : 3));
+  }
+    
+//-----------------------------------------------------------------------
+/// Number of subpixels in the sample direction we calculate.
+//-----------------------------------------------------------------------
+  int number_sub_sample() const
+  { return nsub_sample; }
+
+//-----------------------------------------------------------------------
+/// Set the number of subpixels in the sample direction we calculate.
+//-----------------------------------------------------------------------
+  void number_sub_sample(int v)
+  {
+    nsub_sample = v;
+    result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
+			nintegration_step,(include_path_distance_ ? 4 : 3));
+  }
+    
+//-----------------------------------------------------------------------
+/// Number of integration steps we use.
+//-----------------------------------------------------------------------
+  int number_integration_step() const
+  { return nintegration_step; }
+
+//-----------------------------------------------------------------------
+/// Set the number of integration steps we use.
+//-----------------------------------------------------------------------
+  void number_integration_step(int v)
+  {
+    nintegration_step = v;
+    result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
+			nintegration_step,(include_path_distance_ ? 4 : 3));
+  }
+
+//-----------------------------------------------------------------------
+/// True if we include the path distance in the calcuation
+//-----------------------------------------------------------------------
+  bool include_path_distance() const
+  { return include_path_distance_; }
+
+//-----------------------------------------------------------------------
+/// Set the value of the include_path_distance flag.
+//-----------------------------------------------------------------------
+  void include_path_distance(bool v)
+  {
+    include_path_distance_ = v;
+    result_cache.resize(1, number_sample(), nsub_line, nsub_sample,
+			nintegration_step,(include_path_distance_ ? 4 : 3));
+  }
+  
 protected:
   IgcRayCaster() {}
 private:
   boost::shared_ptr<ImageGroundConnection> igc;
   int start_position_, npos_, ind, nintegration_step, nsub_line, nsub_sample,
-	  start_sample_, number_sample_;
+    start_sample_, number_sample_, number_line_framelet_;
   bool is_forward;
-  bool include_path_distance;
+  bool include_path_distance_;
   double resolution, max_height;
   // Results from the last call to next_position. We save this both to 
   // prevent allocating/freeing at every position, and for use in

@@ -25,11 +25,15 @@ Options:
 
   --ck-glob=f
        Pattern to use for finding ck kernels.
-       [default: ck/mro_sc_*[0-9].lbl]
+       [default: ck/mro_sc_psp_*[0-9].bc]
+
+  --kernel=f
+       Kernel used to supply extra information needed by spice brief and ckbrief
+       programs [default: mro_create_json.ker]
 
   --spk-glob=f
        Pattern to use for finding spk kernels.
-       [default: spk/mro_*_ssd_mro110c.lbl]
+       [default: spk/mro_psp*_ssd_mro95a.bsp]
 
   -v --version      
        Print program version
@@ -38,8 +42,10 @@ Options:
 args = geocal.docopt_simple(usage, version=version)
 
 d = {}
-d["ck_kernel"] = geocal.SpiceKernelByTime(glob.glob(args.ck_glob))
-d["spk_kernel"] = geocal.SpiceKernelByTime(glob.glob(args.spk_glob))
+d["ck_kernel"] = geocal.SpiceKernelByTime(glob.glob(args.ck_glob),
+                                          kernel_file=args.kernel)
+d["spk_kernel"] = geocal.SpiceKernelByTime(glob.glob(args.spk_glob),
+                                          kernel_file=args.kernel)
 
 geocal.write_shelve(args.output_name, d)
 

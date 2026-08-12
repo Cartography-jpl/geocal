@@ -78,6 +78,26 @@ public:
 
   virtual ~OrbitQuaternionList() {}
 
+//-----------------------------------------------------------------------
+/// It can be useful in some cases to modify the min_time and
+/// max_time. For example, we don't usually allow extrapolation
+/// outside of the range of orbit data, but in some case this might be
+/// desirable (e.g., orbit data doesn't fully cover our image data,
+/// but will if we extrapolate a short ways).
+//-----------------------------------------------------------------------
+
+  void set_min_time(const Time& T) { min_tm = T;}
+  
+//-----------------------------------------------------------------------
+/// It can be useful in some cases to modify the min_time and
+/// max_time. For example, we don't usually allow extrapolation
+/// outside of the range of orbit data, but in some case this might be
+/// desirable (e.g., orbit data doesn't fully cover our image data,
+/// but will if we extrapolate a short ways).
+//-----------------------------------------------------------------------
+
+  void set_max_time(const Time& T) { max_tm = T;}
+
   virtual boost::shared_ptr<OrbitData> orbit_data(Time T) const;
   virtual boost::shared_ptr<OrbitData> 
   orbit_data(const TimeWithDerivative& T) const;
@@ -85,6 +105,28 @@ public:
 
   std::vector<boost::shared_ptr<QuaternionOrbitData> > 
   quaternion_orbit_data() const;
+  std::vector<boost::shared_ptr<Time> >
+  quaternion_orbit_data_time() const;
+
+//-----------------------------------------------------------------------
+/// Python will sometime crash with quaternion_orbit_data if it is
+/// larger, probably just a SWIG sort of bug. But for use with python,
+/// supply a function that returns the data directly for an
+/// index. This is redundant for C++, just call quaternion_orbit_data
+/// and index the results. But this is useful for python.
+//-----------------------------------------------------------------------
+  
+  boost::shared_ptr<QuaternionOrbitData>
+  quaternion_orbit_data_i(int I) const
+  {
+    range_check(I, 0, (int) orbit_data_map.size());
+    auto i = std::next(orbit_data_map.begin(), I);
+    check_lazy_evaluation(i);
+    return i->second;
+  }
+  int quaternion_orbit_data_size() const
+  { return (int) orbit_data_map.size(); }
+  
   // Specialization of sc_look_vector, which turns out to be a bottle
   // neck in the Ipi code
   using Orbit::sc_look_vector; // Only override one of these functions
@@ -149,6 +191,9 @@ protected:
       orbit_data_map[(*i)->time()] = *i;
     initialize();
   }
+  friend class boost::serialization::access;
+  template<class Archive>
+  void serialize(Archive & ar, const unsigned int version);
 };
 
 /****************************************************************//**
@@ -174,7 +219,8 @@ public:
   { init(); }
 
   virtual ~OrbitListCache() {};
-  virtual void notify_update(const Orbit& Orb);
+  virtual void notify_update(const Orbit& Orb) { notify_update(); }
+  virtual void notify_update();
   virtual void print(std::ostream& Os) const;
 
 //-----------------------------------------------------------------------
@@ -214,5 +260,6 @@ private:
 };
 }
 
+GEOCAL_EXPORT_KEY(OrbitQuaternionList);
 GEOCAL_EXPORT_KEY(OrbitListCache);
 #endif

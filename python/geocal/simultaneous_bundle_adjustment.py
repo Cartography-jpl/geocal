@@ -413,8 +413,8 @@ class SimultaneousBundleAdjustment(object):
                         rs = slice(ind, ind + 2)
                         res[rs] = cres * weight
                     except RuntimeError as e:
-                        if str(e) != "ImageGroundConnectionFailed":
-                            raise e
+                        #if str(e) != "ImageGroundConnectionFailed":
+                        #    raise e
                         res[ind] = 0
                         res[ind + 1] = 0
                     ind += 2

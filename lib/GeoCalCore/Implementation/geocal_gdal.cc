@@ -70,13 +70,7 @@ std::string GdalBase::linear_unit_name() const
 {
   if(!has_map_info())
     throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
-  const OGRSpatialReference* srs = data_set_->GetSpatialRef();
-  OGRSpatialReference ogr;
-  if(srs) {
-    ogr = *srs;
-  } else {
-    ogr = OGRSpatialReference(data_set_->GetProjectionRef());
-  }
+  OGRSpatialReference ogr(data_set_->GetProjectionRef());
   const char* nm;
   ogr.GetLinearUnits(&nm);
   return nm;
@@ -91,13 +85,7 @@ double GdalBase::linear_unit_scale() const
 {   
   if(!has_map_info())
     throw Exception("Attempt to read map_info() data from a GDAL file without map_info()");
-  const OGRSpatialReference* srs = data_set_->GetSpatialRef();
-  OGRSpatialReference ogr;
-  if(srs) {
-    ogr = *srs;
-  } else {
-    ogr = OGRSpatialReference(data_set_->GetProjectionRef());
-  }
+  OGRSpatialReference ogr(data_set_->GetProjectionRef());
   return ogr.GetLinearUnits(); 
 }
 
@@ -116,13 +104,8 @@ MapInfo GdalBase::map_info() const
   // the GeodeticConverter. Otherwise, we use a more generic 
   // OgrCoordinateConverter.
   boost::shared_ptr<CoordinateConverter> coor_conv;
-  boost::shared_ptr<OGRSpatialReference> ogr;
-  const OGRSpatialReference* srs = data_set_->GetSpatialRef();
-  if(srs) {
-    ogr.reset(new OGRSpatialReference(*srs));
-  } else {
-    ogr.reset(new OGRSpatialReference(data_set_->GetProjectionRef()));
-  }
+  boost::shared_ptr<OGRSpatialReference> 
+    ogr(new OGRSpatialReference(data_set_->GetProjectionRef()));
 #if(GDAL_VERSION_MAJOR >= 3)
   ogr->SetAxisMappingStrategy(OAMS_TRADITIONAL_GIS_ORDER);
 #endif  
@@ -241,15 +224,10 @@ void GeoCal::gdal_map_info(GDALDataset& D, const MapInfo& M)
     throw Exception("Unrecognized coordinate converter in MapInfo");
   char* d;
   ogr.exportToWkt(&d);
-  int status = CE_None;
-#if(GDAL_VERSION_MAJOR >= 3)
-  status = D.SetSpatialRef(&ogr);
-#else
-  status = D.SetProjection(d);
-#endif
+  int status = D.SetProjection(d);
   CPLFree(d);
   if(status ==CE_Failure)
-    throw Exception("SetSpatialRef/SetProjection failed");
+    throw Exception("SetProjection failed");
   status = D.SetGeoTransform(M.transform().data());
   if(status ==CE_Failure)
     throw Exception("SetGeoTransform failed");
@@ -364,7 +342,7 @@ boost::shared_ptr<GDALDataset> GeoCal::gdal_openex(const std::string& Fname,
 GDALDataType GeoCal::gdal_band_type(const std::string& Fname, int Band_id)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpenEx(Fname.c_str(), GDAL_OF_RASTER | GDAL_OF_READONLY, NULL, NULL, NULL));
+  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get band type failed";
@@ -382,7 +360,7 @@ GDALDataType GeoCal::gdal_band_type(const std::string& Fname, int Band_id)
 std::string GeoCal::gdal_driver_name(const std::string& Fname)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpenEx(Fname.c_str(), GDAL_OF_RASTER | GDAL_OF_READONLY, NULL, NULL, NULL));
+  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get driver type failed";
@@ -400,18 +378,14 @@ std::string GeoCal::gdal_driver_name(const std::string& Fname)
 bool GeoCal::gdal_has_map_info(const std::string& Fname)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpenEx(Fname.c_str(), GDAL_OF_RASTER | GDAL_OF_READONLY, NULL, NULL, NULL));
+  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get map info failed";
     throw e;
   }
-  const OGRSpatialReference* srs = data_set->GetSpatialRef();
-  const char* proj_ref = NULL;
-  if(!srs) {
-    proj_ref = data_set->GetProjectionRef();
-  }
-  if(!srs && (!proj_ref || std::string(proj_ref) == ""))
+  if(!data_set->GetProjectionRef() ||
+     std::string(data_set->GetProjectionRef()) =="")
     return false;
   double param[6];
   if(data_set->GetGeoTransform(param) ==CE_Failure)
@@ -420,12 +394,8 @@ bool GeoCal::gdal_has_map_info(const std::string& Fname)
   // full map (for example, a projection of "unknown" type). In that
   // case, say we don't have map info.
        //  try {
-    boost::shared_ptr<OGRSpatialReference> ogr;
-    if(srs) {
-      ogr.reset(new OGRSpatialReference(*srs));
-    } else {
-      ogr.reset(new OGRSpatialReference(proj_ref));
-    }
+    boost::shared_ptr<OGRSpatialReference> 
+      ogr(new OGRSpatialReference(data_set->GetProjectionRef()));
     boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
     return true;
   // } catch(...) {
@@ -440,12 +410,8 @@ bool GeoCal::gdal_has_map_info(const std::string& Fname)
 
 bool GdalBase::has_map_info() const
 {
-  const OGRSpatialReference* srs = data_set_->GetSpatialRef();
-  const char* proj_ref = NULL;
-  if(!srs) {
-    proj_ref = data_set_->GetProjectionRef();
-  }
-  if(!srs && (!proj_ref || std::string(proj_ref) == ""))
+  if(!data_set_->GetProjectionRef() ||
+     std::string(data_set_->GetProjectionRef()) =="")
     return false;
   double param[6];
   if(data_set_->GetGeoTransform(param) ==CE_Failure)
@@ -454,12 +420,8 @@ bool GdalBase::has_map_info() const
   // full map (for example, a projection of "unknown" type). In that
   // case, say we don't have map info.
   try {
-    boost::shared_ptr<OGRSpatialReference> ogr;
-    if(srs) {
-      ogr.reset(new OGRSpatialReference(*srs));
-    } else {
-      ogr.reset(new OGRSpatialReference(proj_ref));
-    }
+    boost::shared_ptr<OGRSpatialReference> 
+      ogr(new OGRSpatialReference(data_set_->GetProjectionRef()));
     boost::shared_ptr<OgrWrapper> ogr_wrap(new OgrWrapper(ogr));
     return true;
   } catch(...) {
@@ -485,7 +447,7 @@ GeoCal::gdal_create_dataset(const std::string& Fname,
 			    GDALDataType Dt, const std::string& Options)
 {
   GdalRegister::gdal_register();
-  GDALDriver* driver = GetGDALDriverManager()->GetDriverByName(Driver_name.c_str());
+  GDALDriver* driver = (GDALDriver*) GDALGetDriverByName(Driver_name.c_str());
   if(!driver)
     throw Exception("Can't find GDAL driver " + Driver_name);
   std::vector<std::string> opt_str;
@@ -545,7 +507,7 @@ GeoCal::gdal_create_copy(const std::string& Fname,
 			 bool Log_progress)
 {
   GdalRegister::gdal_register();
-  GDALDriver* driver = GetGDALDriverManager()->GetDriverByName(Driver_name.c_str());
+  GDALDriver* driver = (GDALDriver*) GDALGetDriverByName(Driver_name.c_str());
   if(!driver)
     throw Exception("Can't find GDAL driver " + Driver_name);
   std::vector<std::string> opt_str;
@@ -630,7 +592,7 @@ GeoCal::gdal_create_erdas(const std::string& Fname,
 Rpc GeoCal::gdal_rpc(const std::string& Fname)
 {
   GdalRegister::gdal_register();
-  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpenEx(Fname.c_str(), GDAL_OF_RASTER | GDAL_OF_READONLY, NULL, NULL, NULL));
+  boost::scoped_ptr<GDALDataset> data_set((GDALDataset *) GDALOpen(Fname.c_str(), GA_ReadOnly ));
   if(!data_set.get()) {
     Exception e;
     e << "Opening GDAL file " << Fname << " to get RPC failed";

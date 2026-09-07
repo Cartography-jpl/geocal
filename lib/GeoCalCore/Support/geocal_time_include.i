@@ -1,5 +1,3 @@
-// -*- mode: c++; -*-
-// (Not really c++, but closest emacs mode)
 // This goes with geocal_time.i. This should be %include rather than
 // %import
 %include <std_vector.i>

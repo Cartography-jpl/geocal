@@ -1,6 +1,3 @@
-// -*- mode: c++; -*-
-// (Not really c++, but closest emacs mode)
-
 %{
   // Need this before blitz gets included.
 #include "auto_derivative.h"

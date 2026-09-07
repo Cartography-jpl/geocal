@@ -1,6 +1,3 @@
-// -*- mode: c++; -*-
-// (Not really c++, but closest emacs mode)
-
 %include "geocal_common.i"
 // We only include this if we have the carto library which includes
 // the eci_tod_burl class.

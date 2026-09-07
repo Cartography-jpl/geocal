@@ -7,6 +7,6 @@
 # configure.in)
 
 aclocal -I config/m4 -I config/m4_local \
-&& glibtoolize \
+&& libtoolize \
 && automake --gnu --add-missing \
 && autoconf

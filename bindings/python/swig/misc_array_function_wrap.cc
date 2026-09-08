@@ -6663,7 +6663,7 @@ SWIGINTERN PyObject *_wrap_array_local_median__SWIG_0(PyObject *self, Py_ssize_t
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -6760,7 +6760,7 @@ SWIGINTERN PyObject *_wrap_array_local_median__SWIG_1(PyObject *self, Py_ssize_t
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -6849,7 +6849,7 @@ SWIGINTERN PyObject *_wrap_array_local_median__SWIG_2(PyObject *self, Py_ssize_t
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7004,7 +7004,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_0(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7117,7 +7117,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_1(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7222,7 +7222,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_2(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7319,7 +7319,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_3(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7408,7 +7408,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_4(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7489,7 +7489,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_5(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7562,7 +7562,7 @@ SWIGINTERN PyObject *_wrap_linear_gradient_bad_pixel_detection__SWIG_6(PyObject 
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -7730,7 +7730,7 @@ SWIGINTERN PyObject *_wrap_ray_cast_ground_coordinate(PyObject *self, PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {

@@ -8047,7 +8047,7 @@ SWIGINTERN PyObject *_wrap_RsmBSubgroup__v_covariance(PyObject *self, PyObject *
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8122,7 +8122,7 @@ SWIGINTERN PyObject *_wrap_RsmBSubgroup__v_time_correlation(PyObject *self, PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8674,7 +8674,7 @@ SWIGINTERN PyObject *_wrap_RsmBUnmodeledCovariance__v_covariance(PyObject *self,
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8749,7 +8749,7 @@ SWIGINTERN PyObject *_wrap_RsmBUnmodeledCovariance__v_row_time_correlation(PyObj
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -8824,7 +8824,7 @@ SWIGINTERN PyObject *_wrap_RsmBUnmodeledCovariance__v_col_time_correlation(PyObj
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10087,7 +10087,7 @@ SWIGINTERN PyObject *_wrap_RsmIndirectCovarianceB__v_mapping_matrix__SWIG_0(PyOb
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,197,%blitz_to_numpy@*/
+    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {

@@ -110,6 +110,9 @@ public:
   std::string geoccs_name() const;
   bool use_traditional_gis_order() const;
 
+  blitz::Array<double, 2> lat_lon_coordinate_convert(const blitz::Array<double, 1>& Lat,
+						     const blitz::Array<double, 1>& Lon) const;
+
 //-----------------------------------------------------------------------
 /// Return the NAIF code for the planet this coordinate is for.
 //-----------------------------------------------------------------------

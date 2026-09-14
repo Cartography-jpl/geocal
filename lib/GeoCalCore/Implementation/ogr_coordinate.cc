@@ -217,6 +217,28 @@ void OgrWrapper::add_spatial_reference
 }
 
 //-----------------------------------------------------------------------
+/// Bulk converter of latitude and longitude to x and y. This is primarily
+/// for use with python, in C++ you can just directly use the
+/// inverse_transform().
+//-----------------------------------------------------------------------
+
+blitz::Array<double, 2> OgrWrapper::lat_lon_coordinate_convert
+(const blitz::Array<double, 1>& latitude,
+ const blitz::Array<double, 1>& longitude) const
+{
+  blitz::Range ra = blitz::Range::all();
+  if(latitude.rows() != longitude.rows())
+    throw Exception("latitude and longitude need to be the same size");
+  blitz::Array<double, 1> x = longitude.copy();
+  blitz::Array<double, 1> y = latitude.copy();
+  const_cast<OGRCoordinateTransformation*>(inverse_transform())->Transform(latitude.rows(), &x(0), &y(0));
+  blitz::Array<double, 2> res(x.rows(), 2);
+  res(ra,0) = x;
+  res(ra,1) = y;
+  return res;
+}
+
+//-----------------------------------------------------------------------
 /// Initialize, given a OGRSpatialReference
 //-----------------------------------------------------------------------
 

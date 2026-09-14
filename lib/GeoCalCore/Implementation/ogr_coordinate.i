@@ -30,6 +30,8 @@ public:
   static boost::shared_ptr<OgrWrapper> 
   from_proj4(const std::string& Proj4_string,
 	     bool Use_traditional_gis_order = true);
+  blitz::Array<double, 2> lat_lon_coordinate_convert(const blitz::Array<double, 1>& Lat,
+						     const blitz::Array<double, 1>& Lon) const;
   %python_attribute2(ogr, ogr_ptr, boost::shared_ptr<OGRSpatialReference>)
   %python_attribute(transform, const OGRCoordinateTransformation*)
   %python_attribute(inverse_transform, const OGRCoordinateTransformation*)

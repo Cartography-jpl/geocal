@@ -60,6 +60,7 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_geocal_datum)(void);
   INIT_TYPE INIT_FUNC(_simple_dem)(void);
   INIT_TYPE INIT_FUNC(_memory_raster_image)(void);
+  INIT_TYPE INIT_FUNC(_memory_raster_image_float)(void);
   INIT_TYPE INIT_FUNC(_constant_raster_image)(void);
   INIT_TYPE INIT_FUNC(_dem_map_info)(void);
   INIT_TYPE INIT_FUNC(_feature_detector)(void);
@@ -293,6 +294,7 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_geocal_datum", INIT_FUNC(_geocal_datum));
   INIT_MODULE(module, "_simple_dem", INIT_FUNC(_simple_dem));
   INIT_MODULE(module, "_memory_raster_image", INIT_FUNC(_memory_raster_image));
+  INIT_MODULE(module, "_memory_raster_image_float", INIT_FUNC(_memory_raster_image_float));
   INIT_MODULE(module, "_constant_raster_image", INIT_FUNC(_constant_raster_image));
   INIT_MODULE(module, "_dem_map_info", INIT_FUNC(_dem_map_info));
   INIT_MODULE(module, "_feature_detector", INIT_FUNC(_feature_detector));

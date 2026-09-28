@@ -37,7 +37,10 @@ public:
   (std::vector<boost::shared_ptr<Time> >& OUTPUT,
    blitz::Array<double, 2>& OUTPUT,
    std::vector<boost::shared_ptr<Time> >& OUTPUT,
-   blitz::Array<double, 2>& OUTPUT);
+   blitz::Array<double, 2>& OUTPUT) const;
+  void orbit_correction_yprt
+  (std::vector<boost::shared_ptr<Time> >& OUTPUT,
+   blitz::Array<double, 2>& OUTPUT) const;
   %pickle_serialization();
   virtual boost::array<AutoDerivative<double>, 3 > 
   pcorr_with_derivative(const TimeWithDerivative& Tm, 

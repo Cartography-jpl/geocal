@@ -21,7 +21,7 @@ GEOCAL_IMPLEMENT(YprOrbitData);
 #endif
 
 //-----------------------------------------------------------------------
-/// Calculate orbital frame to ECI transformation from position and velocity
+/// Calculate orbital frame to CartesianInertial transformation from position and velocity
 /// This follows the DprepOrbit convention (dprep_file.py lines 268-275):
 ///   z = -position / ||position||  (nadir, toward Earth center)
 ///   x = velocity orthogonalized to z (along-track)
@@ -79,16 +79,16 @@ YprOrbitData::YprOrbitData(const QuaternionOrbitData& Od,
                                      Od.position_ci()->position[2]}};
   boost::array<double, 3> vel_ci = Od.velocity_ci();
 
-  // Calculate orbital-to-eci transformation
-  boost::math::quaternion<double> orbital_to_eci = calc_orbital_to_ci(pos_ci, vel_ci);
+  // Calculate orbital-to-ci transformation
+  boost::math::quaternion<double> orbital_to_ci = calc_orbital_to_ci(pos_ci, vel_ci);
 
-  // Get spacecraft-to-eci quaternion
-  boost::math::quaternion<double> sc_to_eci = Od.sc_to_ci();
+  // Get spacecraft-to-ci quaternion
+  boost::math::quaternion<double> sc_to_ci = Od.sc_to_ci();
 
   // Extract spacecraft-to-orbital quaternion
-  // sc_to_eci = orbital_to_eci * sc_to_orbital
-  // => sc_to_orbital = conj(orbital_to_eci) * sc_to_eci
-  boost::math::quaternion<double> sc_to_orbital = conj(orbital_to_eci) * sc_to_eci;
+  // sc_to_ci = orbital_to_ci * sc_to_orbital
+  // => sc_to_orbital = conj(orbital_to_ci) * sc_to_ci
+  boost::math::quaternion<double> sc_to_orbital = conj(orbital_to_ci) * sc_to_ci;
 
   // Convert quaternion to Euler angles
   double e1, e2, e3;
@@ -110,13 +110,13 @@ YprOrbitData::YprOrbitData(const QuaternionOrbitData& Od,
   }
 
   // Initialize parent with same state as Od
-  // Use the original sc_to_eci quaternion to preserve exact transformation
+  // Use the original sc_to_ci quaternion to preserve exact transformation
   if(Od.prefer_cf()) {
     QuaternionOrbitData::initialize(Od.time(), Od.position_cf(),
                                     Od.velocity_cf(), Od.sc_to_cf());
   } else {
     QuaternionOrbitData::initialize(Od.time(), Od.position_ci(),
-                                    Od.velocity_ci(), sc_to_eci);
+                                    Od.velocity_ci(), sc_to_ci);
   }
 }
 
@@ -171,8 +171,8 @@ void YprOrbitData::initialize_from_ypr(
                                          pos_ci->position[1],
                                          pos_ci->position[2]}};
 
-  // Calculate orbital-to-eci transformation
-  boost::math::quaternion<double> orbital_to_eci = calc_orbital_to_ci(pos_ci_arr, vel_ci);
+  // Calculate orbital-to-ci transformation
+  boost::math::quaternion<double> orbital_to_ci = calc_orbital_to_ci(pos_ci_arr, vel_ci);
 
   // Map yaw/pitch/roll to euler angles based on order
   double e1, e2, e3;
@@ -199,8 +199,8 @@ void YprOrbitData::initialize_from_ypr(
   boost::math::quaternion<double> sc_to_orbital = quat_rot(Euler_order, e1, e2, e3);
 
   // Combine to get sc_to_ci quaternion
-  // sc_to_eci = orbital_to_eci * sc_to_orbital
-  boost::math::quaternion<double> sc_to_ci = orbital_to_eci * sc_to_orbital;
+  // sc_to_ci = orbital_to_ci * sc_to_orbital
+  boost::math::quaternion<double> sc_to_ci = orbital_to_ci * sc_to_orbital;
 
   // Convert back to CF frame for the final quaternion
   boost::shared_ptr<CartesianFixed> pos_cf_result;
@@ -236,8 +236,8 @@ void YprOrbitData::initialize_from_ypr(
                                          pos_ci->position[1],
                                          pos_ci->position[2]}};
 
-  // Calculate orbital-to-eci transformation
-  boost::math::quaternion<double> orbital_to_eci = calc_orbital_to_ci(pos_ci_arr, vel_inertial);
+  // Calculate orbital-to-ci transformation
+  boost::math::quaternion<double> orbital_to_ci = calc_orbital_to_ci(pos_ci_arr, vel_inertial);
 
   // Map yaw/pitch/roll to euler angles based on order
   double e1, e2, e3;
@@ -264,18 +264,18 @@ void YprOrbitData::initialize_from_ypr(
   boost::math::quaternion<double> sc_to_orbital = quat_rot(Euler_order, e1, e2, e3);
 
   // Combine to get sc_to_ci quaternion
-  // sc_to_eci = orbital_to_eci * sc_to_orbital
-  boost::math::quaternion<double> sc_to_ci = orbital_to_eci * sc_to_orbital;
+  // sc_to_ci = orbital_to_ci * sc_to_orbital
+  boost::math::quaternion<double> sc_to_ci = orbital_to_ci * sc_to_orbital;
 
   // Initialize parent QuaternionOrbitData
   QuaternionOrbitData::initialize(Tm, pos_ci, vel_inertial, sc_to_ci);
 }
 
 //-----------------------------------------------------------------------
-/// Calculate the orbital-to-eci transformation for current state
+/// Calculate the orbital-to-ci transformation for current state
 //-----------------------------------------------------------------------
 
-boost::math::quaternion<double> YprOrbitData::orbital_to_eci() const
+boost::math::quaternion<double> YprOrbitData::orbital_to_ci() const
 {
   boost::array<double, 3> pos_ci = {{position_ci()->position[0],
                                      position_ci()->position[1],

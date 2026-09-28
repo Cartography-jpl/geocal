@@ -161,6 +161,14 @@ class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     in general the time points used in the attitude correction do not match the time
     points used in the position correction.  
 
+    An important note, this has caught me a few times. In general, the yaw, pitch,
+    roll is *not* in the orbital coordinate system. So this isn't the yaw, pitch,
+    roll that we often reason with (e.g, pitch indicating time error, or whatever).
+    We have a separate orbit_correction_ypr which presents the information about the
+    corrections and yaw, pitch, roll deltas in the orbital coordinate system. In
+    general this *isn't* the same as the parameters used for attitude, but it is a
+    good way to present the data to help with intuition about what is going on.  
+
     The position offset is in meters. Right now, the attitude correction is in
     arcseconds. We may change that.  
 
@@ -303,6 +311,7 @@ class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
     insert_attitude_time_point = _swig_new_instance_method(_orbit_offset_correction.OrbitOffsetCorrection_insert_attitude_time_point)
     insert_position_time_point = _swig_new_instance_method(_orbit_offset_correction.OrbitOffsetCorrection_insert_position_time_point)
     orbit_correction_parameter = _swig_new_instance_method(_orbit_offset_correction.OrbitOffsetCorrection_orbit_correction_parameter)
+    orbit_correction_yprt = _swig_new_instance_method(_orbit_offset_correction.OrbitOffsetCorrection_orbit_correction_yprt)
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set

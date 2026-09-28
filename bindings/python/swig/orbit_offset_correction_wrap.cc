@@ -7961,7 +7961,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_att_parm_to_match(PyObject *sel
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9754,8 +9754,8 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   blitz::Array< double,2 > *arg5 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
-  boost::shared_ptr< GeoCal::OrbitOffsetCorrection > tempshared1 ;
-  boost::shared_ptr< GeoCal::OrbitOffsetCorrection > *smartarg1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > *smartarg1 = 0 ;
   std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > temp2 ;
   int res2 = SWIG_TMPOBJ ;
   blitz::Array< double,2 > temp3 ;
@@ -9779,20 +9779,20 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection_orbit_correction_parameter" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection_orbit_correction_parameter" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
-      tempshared1 = *reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
-      delete reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
       arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >(tempshared1.get());
     } else {
-      smartarg1 = reinterpret_cast< boost::shared_ptr<  GeoCal::OrbitOffsetCorrection > * >(argp1);
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
       arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >((smartarg1 ? smartarg1->get() : 0));
     }
   }
   {
     try {
-      (arg1)->orbit_correction_parameter(*arg2,*arg3,*arg4,*arg5);
+      ((GeoCal::OrbitOffsetCorrection const *)arg1)->orbit_correction_parameter(*arg2,*arg3,*arg4,*arg5);
     } catch (Swig::DirectorException &e) {
       SWIG_fail;
     } catch (const PythonException& e) {
@@ -9818,7 +9818,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9847,7 +9847,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   }
   {
     PyObject *res;
-    /*@SWIG:/ssdata/smyth/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9861,6 +9861,97 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
     res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
       stride, arg5->data(), 0, 0, 0);
     blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg5);
+    // Stash pointer to original blitz array as detailed above
+    PyArray_SetBaseObject((PyArrayObject*) res, 
+      SWIG_NewPointerObj(SWIG_as_voidptr(t), 
+        SWIGTYPE_p_blitz__ArrayT_double_2_t, 					   SWIG_POINTER_NEW | SWIG_POINTER_OWN ));
+    /*@SWIG@*/;
+    resultobj = SWIG_Python_AppendOutput(resultobj, res, 1);
+  }
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_yprt(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::OrbitOffsetCorrection *arg1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > *arg2 = 0 ;
+  blitz::Array< double,2 > *arg3 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > tempshared1 ;
+  boost::shared_ptr< GeoCal::OrbitOffsetCorrection const > *smartarg1 = 0 ;
+  std::vector< boost::shared_ptr< GeoCal::Time >,std::allocator< boost::shared_ptr< GeoCal::Time > > > temp2 ;
+  int res2 = SWIG_TMPOBJ ;
+  blitz::Array< double,2 > temp3 ;
+  PyObject *swig_obj[1] ;
+  
+  arg2 = &temp2;
+  {
+    arg3 = &temp3;
+  }
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__OrbitOffsetCorrection_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "OrbitOffsetCorrection_orbit_correction_yprt" "', argument " "1"" of type '" "GeoCal::OrbitOffsetCorrection const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::OrbitOffsetCorrection > * >(argp1);
+      arg1 = const_cast< GeoCal::OrbitOffsetCorrection * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      ((GeoCal::OrbitOffsetCorrection const *)arg1)->orbit_correction_yprt(*arg2,*arg3);
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = SWIG_Py_Void();
+  if (SWIG_IsTmpObj(res2)) {
+    resultobj = SWIG_Python_AppendOutput(resultobj, swig::from((*arg2)), 1);
+  } else {
+    int new_flags = SWIG_IsNewObj(res2) ? (SWIG_POINTER_OWN |  0 ) :  0 ;
+    resultobj = SWIG_Python_AppendOutput(resultobj, SWIG_NewPointerObj((void*)(arg2), SWIGTYPE_p_std__vectorT_boost__shared_ptrT_GeoCal__Time_t_t, new_flags), 1);
+  }
+  {
+    PyObject *res;
+    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    // Copy out dimensions and stride from blitz array
+    npy_intp dims[2], stride[2];
+    for(int i = 0; i < 2; ++i) {
+      dims[i] = arg3->extent(i);
+      // Note numpy stride is in terms of bytes, while blitz in in terms
+      // of type T.
+      stride[i] = arg3->stride(i) * sizeof(double);
+    }
+    
+    // Create new numpy object using Numpy C API
+    res = PyArray_New(&PyArray_Type, 2, dims, type_to_npy<double >(), 
+      stride, arg3->data(), 0, 0, 0);
+    blitz::Array<double, 2>* t = new blitz::Array<double, 2>(*arg3);
     // Stash pointer to original blitz array as detailed above
     PyArray_SetBaseObject((PyArrayObject*) res, 
       SWIG_NewPointerObj(SWIG_as_voidptr(t), 
@@ -10083,6 +10174,27 @@ static PyMethodDef SwigMethods[] = {
 		"columns are yaw, pitch, and roll. The position correction is returned in meters,\n"
 		"one row per time point. The columns are X, Y, Z offset.  \n"
 		"\n"
+		"Note that in general the yaw, pitch and roll are *not* in the orbital coordinate\n"
+		"system, and should be read more as parameter 0, 1, and 2 without directly\n"
+		"attaching meaning. Use orbit_correction_ypr to get yaw, pitch, roll in orbital\n"
+		"coordinate system.  \n"
+		"\n"
+		""},
+	 { "OrbitOffsetCorrection_orbit_correction_yprt", _wrap_OrbitOffsetCorrection_orbit_correction_yprt, METH_O, "\n"
+		"OrbitOffsetCorrection_orbit_correction_yprt(OrbitOffsetCorrection self)\n"
+		"\n"
+		"GeoCal::OrbitOffsetCorrection::orbit_correction_yprt\n"
+		"Return the time points and yaw, pitch, roll corrections.  \n"
+		"\n"
+		"This is primarily of use for python wrappers.  \n"
+		"\n"
+		"We return the attitude correction in delta arcseconds, one row per time point.\n"
+		"The columns are delta yaw, delta pitch, delta roll, total delta angle. The data\n"
+		"is in arcseconds. This is not in general the same as the attitude parameters.\n"
+		"Because this is primarily intended for intuition we also give the total angle\n"
+		"for a single rotation to the correction (i.e., what quaternion_delta_angle\n"
+		"returns).  \n"
+		"\n"
 		""},
 	 { "delete_OrbitOffsetCorrection", _wrap_delete_OrbitOffsetCorrection, METH_O, "\n"
 		"delete_OrbitOffsetCorrection(OrbitOffsetCorrection self)\n"
@@ -10238,6 +10350,27 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"We return the attitude correction in arcseconds, one row per time point. The\n"
 		"columns are yaw, pitch, and roll. The position correction is returned in meters,\n"
 		"one row per time point. The columns are X, Y, Z offset.  \n"
+		"\n"
+		"Note that in general the yaw, pitch and roll are *not* in the orbital coordinate\n"
+		"system, and should be read more as parameter 0, 1, and 2 without directly\n"
+		"attaching meaning. Use orbit_correction_ypr to get yaw, pitch, roll in orbital\n"
+		"coordinate system.  \n"
+		"\n"
+		""},
+	 { "OrbitOffsetCorrection_orbit_correction_yprt", _wrap_OrbitOffsetCorrection_orbit_correction_yprt, METH_O, "\n"
+		"orbit_correction_yprt(OrbitOffsetCorrection self)\n"
+		"\n"
+		"GeoCal::OrbitOffsetCorrection::orbit_correction_yprt\n"
+		"Return the time points and yaw, pitch, roll corrections.  \n"
+		"\n"
+		"This is primarily of use for python wrappers.  \n"
+		"\n"
+		"We return the attitude correction in delta arcseconds, one row per time point.\n"
+		"The columns are delta yaw, delta pitch, delta roll, total delta angle. The data\n"
+		"is in arcseconds. This is not in general the same as the attitude parameters.\n"
+		"Because this is primarily intended for intuition we also give the total angle\n"
+		"for a single rotation to the correction (i.e., what quaternion_delta_angle\n"
+		"returns).  \n"
 		"\n"
 		""},
 	 { "delete_OrbitOffsetCorrection", _wrap_delete_OrbitOffsetCorrection, METH_O, "\n"

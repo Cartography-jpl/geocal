@@ -21,6 +21,15 @@ namespace GeoCal {
   in the attitude correction do not match the time points used in the
   position correction.
 
+  An important note, this has caught me a few times. In general, the
+  yaw, pitch, roll is *not* in the orbital coordinate system. So this isn't
+  the yaw, pitch, roll that we often reason with (e.g, pitch indicating time
+  error, or whatever). We have a separate orbit_correction_ypr which
+  presents the information about the corrections and yaw, pitch, roll deltas
+  in the orbital coordinate system. In general this *isn't* the same as the
+  parameters used for attitude, but it is a good way to present the data to
+  help with intuition about what is going on.
+
   The position offset is in meters. Right now, the attitude correction
   is in arcseconds. We may change that.
 
@@ -109,7 +118,10 @@ public:
 				  blitz::Array<double, 2>& Attitude_corr,
 				  std::vector<boost::shared_ptr<Time> >&
 				  Position_time_point,
-				  blitz::Array<double, 2>& Position_corr);
+				  blitz::Array<double, 2>& Position_corr) const;
+  void orbit_correction_yprt(std::vector<boost::shared_ptr<Time> >&
+			    Attitude_time_point,
+			    blitz::Array<double, 2>& Delta_yprt_corr) const;
   
 //-----------------------------------------------------------------------
 /// Directly update the quaternion at time_point i. This is

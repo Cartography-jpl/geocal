@@ -31,7 +31,7 @@ public:
   %python_attribute(pitch, double)
   %python_attribute(roll, double)
   %python_attribute(euler_order, std::string)
-  %python_attribute(orbital_to_eci, boost::math::quaternion<double>)
+  %python_attribute(orbital_to_ci, boost::math::quaternion<double>)
   %pickle_serialization();
 };
 }

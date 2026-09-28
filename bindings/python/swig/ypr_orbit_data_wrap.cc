@@ -7845,7 +7845,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_YprOrbitData__v_orbital_to_eci(PyObject *self, PyObject *args) {
+SWIGINTERN PyObject *_wrap_YprOrbitData__v_orbital_to_ci(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::YprOrbitData *arg1 = 0 ;
   void *argp1 = 0 ;
@@ -7862,7 +7862,7 @@ SWIGINTERN PyObject *_wrap_YprOrbitData__v_orbital_to_eci(PyObject *self, PyObje
     int newmem = 0;
     res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__YprOrbitData_t, 0 |  0 , &newmem);
     if (!SWIG_IsOK(res1)) {
-      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "YprOrbitData__v_orbital_to_eci" "', argument " "1"" of type '" "GeoCal::YprOrbitData const *""'");
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "YprOrbitData__v_orbital_to_ci" "', argument " "1"" of type '" "GeoCal::YprOrbitData const *""'");
     }
     if (newmem & SWIG_CAST_NEW_MEMORY) {
       tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::YprOrbitData > * >(argp1);
@@ -7875,7 +7875,7 @@ SWIGINTERN PyObject *_wrap_YprOrbitData__v_orbital_to_eci(PyObject *self, PyObje
   }
   {
     try {
-      result = ((GeoCal::YprOrbitData const *)arg1)->orbital_to_eci();
+      result = ((GeoCal::YprOrbitData const *)arg1)->orbital_to_ci();
     } catch (Swig::DirectorException &e) {
       SWIG_fail;
     } catch (const PythonException& e) {
@@ -8067,14 +8067,14 @@ static PyMethodDef SwigMethods[] = {
 		"Euler angle order string (e.g., \"ZYX\", \"XYZ\")  \n"
 		"\n"
 		""},
-	 { "YprOrbitData__v_orbital_to_eci", _wrap_YprOrbitData__v_orbital_to_eci, METH_O, "\n"
-		"YprOrbitData__v_orbital_to_eci(YprOrbitData self) -> Quaternion_double\n"
+	 { "YprOrbitData__v_orbital_to_ci", _wrap_YprOrbitData__v_orbital_to_ci, METH_O, "\n"
+		"YprOrbitData__v_orbital_to_ci(YprOrbitData self) -> Quaternion_double\n"
 		"\n"
-		"GeoCal::YprOrbitData::orbital_to_eci\n"
-		"Calculate the orbital-to-eci transformation quaternion for current\n"
+		"GeoCal::YprOrbitData::orbital_to_ci\n"
+		"Calculate the orbital-to-ci transformation quaternion for current\n"
 		"position/velocity.  \n"
 		"\n"
-		"Calculate the orbital-to-eci transformation for current state.  \n"
+		"Calculate the orbital-to-ci transformation for current state.  \n"
 		"\n"
 		""},
 	 { "delete_YprOrbitData", _wrap_delete_YprOrbitData, METH_O, "\n"
@@ -8193,14 +8193,14 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"Euler angle order string (e.g., \"ZYX\", \"XYZ\")  \n"
 		"\n"
 		""},
-	 { "YprOrbitData__v_orbital_to_eci", _wrap_YprOrbitData__v_orbital_to_eci, METH_O, "\n"
-		"_v_orbital_to_eci(YprOrbitData self) -> Quaternion_double\n"
+	 { "YprOrbitData__v_orbital_to_ci", _wrap_YprOrbitData__v_orbital_to_ci, METH_O, "\n"
+		"_v_orbital_to_ci(YprOrbitData self) -> Quaternion_double\n"
 		"\n"
-		"GeoCal::YprOrbitData::orbital_to_eci\n"
-		"Calculate the orbital-to-eci transformation quaternion for current\n"
+		"GeoCal::YprOrbitData::orbital_to_ci\n"
+		"Calculate the orbital-to-ci transformation quaternion for current\n"
 		"position/velocity.  \n"
 		"\n"
-		"Calculate the orbital-to-eci transformation for current state.  \n"
+		"Calculate the orbital-to-ci transformation for current state.  \n"
 		"\n"
 		""},
 	 { "delete_YprOrbitData", _wrap_delete_YprOrbitData, METH_O, "\n"

@@ -3,7 +3,7 @@
 #include "ostream_pad.h"
 #include "constant.h"
 #include "ecr.h"
-#include <boost/foreach.hpp>
+#include "ypr_orbit_data.h"
 #include <boost/make_shared.hpp>
 using namespace GeoCal;
 
@@ -265,7 +265,7 @@ bool Fit_roll)
 std::vector<Time> OrbitOffsetCorrection::attitude_time_point() const
 {
   std::vector<Time> res;
-  BOOST_FOREACH(att_map_pair_type e, att_corr)
+  for(att_map_pair_type e : att_corr)
     res.push_back(e.first);
   return res;
 }
@@ -291,7 +291,7 @@ blitz::Array<double, 1> OrbitOffsetCorrection::att_parm_to_match(const Time& Tm)
 std::vector<Time> OrbitOffsetCorrection::position_time_point() const
 {
   std::vector<Time> res;
-  BOOST_FOREACH(pos_map_pair_type e, pos_corr)
+  for(pos_map_pair_type e : pos_corr)
     res.push_back(e.first);
   return res;
 }
@@ -301,13 +301,13 @@ ArrayAd<double, 1> OrbitOffsetCorrection::parameter_with_derivative() const
 {
   blitz::Array<AutoDerivative<double>, 1> res(3 * pos_corr.size() + 3 * att_corr.size());
   int i = 0;
-  BOOST_FOREACH(pos_map_pair_type e, pos_corr) {
+  for(pos_map_pair_type e : pos_corr) {
     res(i + 0) = e.second[0];
     res(i + 1) = e.second[1];
     res(i + 2) = e.second[2];
     i += 3;
   }
-  BOOST_FOREACH(att_map_pair_type e, att_corr) {
+  for(att_map_pair_type e : att_corr) {
     quat_to_ypr(e.second, res(i + 0), res(i + 1), res(i + 2));
     res(i + 0) /=  Constant::arcsecond_to_rad;
     res(i + 1) /=  Constant::arcsecond_to_rad;
@@ -340,7 +340,7 @@ void OrbitOffsetCorrection::parameter_with_derivative
 std::vector<std::string> OrbitOffsetCorrection::parameter_name() const
 {
   std::vector<std::string> res;
-  BOOST_FOREACH(pos_map_pair_type e, pos_corr) {
+  for(pos_map_pair_type e : pos_corr) {
     res.push_back("Position X Offset time " + e.first.to_string() + 
 		  "(meter)");
     res.push_back("Position Y Offset time " + e.first.to_string() + 
@@ -348,7 +348,7 @@ std::vector<std::string> OrbitOffsetCorrection::parameter_name() const
     res.push_back("Position Z Offset time " + e.first.to_string() + 
 		  "(meter)");
   }
-  BOOST_FOREACH(att_map_pair_type e, att_corr) {
+  for(att_map_pair_type e : att_corr) {
     res.push_back("Yaw correction time " + e.first.to_string() + 
 		  " (arcseconds)");
     res.push_back("Pitch correction time " + e.first.to_string() +
@@ -412,6 +412,11 @@ void OrbitOffsetCorrection::print(std::ostream& Os) const
 /// point. The columns are yaw, pitch, and roll. The position
 /// correction is returned in meters, one row  per time point. The
 /// columns are X, Y, Z offset.
+///
+/// Note that in general the yaw, pitch and roll are *not* in the orbital
+/// coordinate system, and should be read more as parameter 0, 1, and 2
+/// without directly attaching meaning. Use orbit_correction_ypr to get
+/// yaw, pitch, roll in orbital coordinate system.
 //-----------------------------------------------------------------------
 
 void OrbitOffsetCorrection::orbit_correction_parameter
@@ -419,18 +424,18 @@ void OrbitOffsetCorrection::orbit_correction_parameter
  blitz::Array<double, 2>& Attitude_corr,
  std::vector<boost::shared_ptr<Time> >&
  Position_time_point,
- blitz::Array<double, 2>& Position_corr)
+ blitz::Array<double, 2>& Position_corr) const
 {
   Attitude_time_point.clear();
   Position_time_point.clear();
-  BOOST_FOREACH(att_map_pair_type e, att_corr)
+  for(att_map_pair_type e : att_corr)
     Attitude_time_point.push_back(boost::make_shared<Time>(e.first));
-  BOOST_FOREACH(pos_map_pair_type e, pos_corr)
+  for(pos_map_pair_type e : pos_corr)
     Position_time_point.push_back(boost::make_shared<Time>(e.first));
   Attitude_corr.resize((int) Attitude_time_point.size(), 3);
   Position_corr.resize((int) Position_time_point.size(), 3);
   int i = 0;
-  BOOST_FOREACH(att_map_pair_type e, att_corr) {
+  for(att_map_pair_type e : att_corr) {
     AutoDerivative<double> y,p,r;
     quat_to_ypr(e.second, y,p,r);
     Attitude_corr(i, 0) = y.value() / Constant::arcsecond_to_rad;
@@ -439,10 +444,49 @@ void OrbitOffsetCorrection::orbit_correction_parameter
     ++i;
   }
   i = 0;
-  BOOST_FOREACH(pos_map_pair_type e, pos_corr) {
+  for(pos_map_pair_type e : pos_corr) {
     Position_corr(i, 0) = e.second[0].value();
     Position_corr(i, 1) = e.second[1].value();
     Position_corr(i, 2) = e.second[2].value();
     ++i;
+  }
+}
+
+//-----------------------------------------------------------------------
+/// Return the time points and yaw, pitch, roll corrections. This is
+/// primarily of use for python wrappers.
+///
+/// We return the attitude correction in delta arcseconds, one row per time
+/// point. The columns are delta yaw, delta pitch, delta roll, total delta angle.
+/// The data is in arcseconds. This is not in general the same as the attitude
+/// parameters. Because this is primarily intended for intuition we also give the
+/// total angle for a single rotation to the correction (i.e., what quaternion_delta_angle
+/// returns).
+//-----------------------------------------------------------------------
+
+void OrbitOffsetCorrection::orbit_correction_yprt
+(std::vector<boost::shared_ptr<Time> >& Attitude_time_point,
+ blitz::Array<double, 2>& Delta_yprt_corr
+) const
+{
+  Attitude_time_point.clear();
+  for(att_map_pair_type e : att_corr)
+    Attitude_time_point.push_back(boost::make_shared<Time>(e.first));
+  Delta_yprt_corr.resize((int) Attitude_time_point.size(), 4);
+  int i = 0;
+  for(att_map_pair_type e : att_corr) {
+    auto oduncorrv = boost::dynamic_pointer_cast<QuaternionOrbitData>
+      (orbit_uncorrected()->orbit_data(e.first));
+    auto odcorrv = boost::dynamic_pointer_cast<QuaternionOrbitData>(orbit_data(e.first));
+    if(!oduncorrv || ! odcorrv)
+      throw Exception("orbit_correction_yprt only works with QuaternionOrbitData");
+    YprOrbitData ouncorr(*oduncorrv);
+    YprOrbitData ocorr(*odcorrv);
+    double deg_to_arcsecond = 60.0 * 60;
+    Delta_yprt_corr(i, 0) = (ocorr.yaw() - ouncorr.yaw()) * deg_to_arcsecond;
+    Delta_yprt_corr(i, 1) = (ocorr.pitch() - ouncorr.pitch()) * deg_to_arcsecond;
+    Delta_yprt_corr(i, 2) = (ocorr.roll() - ouncorr.roll()) * deg_to_arcsecond;
+    Delta_yprt_corr(i, 3) = quaternion_delta_angle(ocorr.sc_to_ci(), ouncorr.sc_to_ci()) *
+      Constant::rad_to_arcsecond;
   }
 }

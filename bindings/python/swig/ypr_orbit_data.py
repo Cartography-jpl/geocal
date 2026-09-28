@@ -244,11 +244,11 @@ class YprOrbitData(geocal_swig.orbit.QuaternionOrbitData):
     def euler_order(self):
         return self._v_euler_order()
 
-    _v_orbital_to_eci = _swig_new_instance_method(_ypr_orbit_data.YprOrbitData__v_orbital_to_eci)
+    _v_orbital_to_ci = _swig_new_instance_method(_ypr_orbit_data.YprOrbitData__v_orbital_to_ci)
 
     @property
-    def orbital_to_eci(self):
-        return self._v_orbital_to_eci()
+    def orbital_to_ci(self):
+        return self._v_orbital_to_ci()
 
 
     def __reduce__(self):

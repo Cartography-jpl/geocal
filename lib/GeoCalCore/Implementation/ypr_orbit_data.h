@@ -122,9 +122,9 @@ public:
   const std::string& euler_order() const { return euler_order_; }
 
   //-----------------------------------------------------------------------
-  /// Calculate the orbital-to-eci transformation quaternion for current position/velocity
+  /// Calculate the orbital-to-ci transformation quaternion for current position/velocity
   //-----------------------------------------------------------------------
-  boost::math::quaternion<double> orbital_to_eci() const;
+  boost::math::quaternion<double> orbital_to_ci() const;
 
 protected:
   YprOrbitData() {}

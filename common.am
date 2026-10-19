@@ -93,7 +93,10 @@ CODE_COVERAGE_LCOV_SHOPTS+= --directory=$(abs_srcdir)
 CODE_COVERAGE_LCOV_SHOPTS+= --no-external
 CODE_COVERAGE_IGNORE_PATTERN = 
 CODE_COVERAGE_OUTPUT_DIRECTORY = $(PACKAGE_NAME)-coverage
-@CODE_COVERAGE_RULES@
+include $(top_srcdir)/aminclude_static.am
+clean-local: code-coverage-clean
+distclean-local: code-coverage-dist-clean
+EXTRA_DIST+= aminclude_static.am
 
 # ========================================================================
 # An error we run into every once in a while is somebody trying to build

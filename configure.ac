@@ -194,8 +194,6 @@ couldn't find this. Or you can turn off the use of swig using
 --without-swig.])
 fi
 
-AM_CONDITIONAL([BUILD_AFIDS], [false])
-
 #=================================================================
 # Location of ISIS. 
 # This option here is used to add a specification to the setup files to

@@ -8,11 +8,7 @@ setup_spice = export SPICEDATA="$(abs_top_srcdir)/@geocalunittestdata@/spice" &&
 else
 setup_spice = :
 endif
-if BUILD_AFIDS
-setup_geocal = source $(DESTDIR)$(prefix)/setup_afids_env.sh
-else
 setup_geocal = $(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
-endif
 
 # TODO Have a editable version of this
 

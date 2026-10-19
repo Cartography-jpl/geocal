@@ -1,6 +1,7 @@
 dnl Process this file with autoconf to produce a configure script.
 
-AC_INIT([geocal],[1.28])
+AC_PREREQ([2.71])
+AC_INIT([geocal],[2.0])
 AC_CONFIG_AUX_DIR([config])
 AC_CONFIG_MACRO_DIRS([config/m4 config/m4_local])
 AC_CONFIG_FILES([script/setup_afids_python.csh script/setup_afids_python.sh])
@@ -89,13 +90,6 @@ AC_CARTO(optional)
 AFIDS_PYTHON(required)
 
 #=================================================================
-# We have not needed to read RAW format images for a while, and
-# the library we used is out of date. Turn this off for now. We
-# can revisit this if it becomes an issue
-
-AM_CONDITIONAL([BUILD_LIBRAW], [false])
-
-#=================================================================
 # Location of all the source code directories
 GEOCAL_SOURCE_DIRECTORY
 
@@ -110,13 +104,20 @@ AC_ARG_WITH([swig],
            [SWIG=/fake_so_fail],
            [])
 
-AC_PROG_SWIG()
-SWIG_ENABLE_CXX
-SWIG_PYTHON
+have_swig=no
+AX_PKG_SWIG([], [have_swig=yes], [AC_MSG_WARN([cannot find 'swig' program. You should look at http://www.swig.org])])
+AM_CONDITIONAL([HAVE_SWIG], [test "$have_swig" = "yes"])
+AX_SWIG_ENABLE_CXX
+AX_SWIG_PYTHON
+# swig_rules.am uses the older name for this variable
+AC_SUBST([SWIG_PYTHON_OPT], [$AX_SWIG_PYTHON_OPT])
 
 #=================================================================
 # We have a small amount of code that gets different flags depending on
 # if we are using g77 or gfortran, so pass this to the Makefile.
+# NOTE: geocal itself doesn't use these (or AM_FFLAGS in common.am), but
+# the shared autotools files are used by other repositories that do have
+# Fortran code. Keep them.
 #=================================================================
 
 AM_CONDITIONAL([HAVE_G77], [test `expr "${F77}" : '.*g77'` != "0"])

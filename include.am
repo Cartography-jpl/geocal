@@ -9,9 +9,7 @@
 # vice versa.
 
 include geocal.am
-include thirdparty/thirdparty.am
 include thirdparty/libsdbx/sdbx.am
-include thirdparty/libraw/libraw.am
 include swig_rules/swig_rules.am
 include lib/lib.am
 include bin/bin.am

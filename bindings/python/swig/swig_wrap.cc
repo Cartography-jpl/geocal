@@ -107,7 +107,6 @@ extern "C" {
   INIT_TYPE INIT_FUNC(_geometric_model_image)(void);
   INIT_TYPE INIT_FUNC(_memory_multi_band)(void);
   INIT_TYPE INIT_FUNC(_spice_helper)(void);
-  INIT_TYPE INIT_FUNC(_raw_raster_image)(void);
   INIT_TYPE INIT_FUNC(_aircraft_orbit_data)(void);
   INIT_TYPE INIT_FUNC(_ypr_orbit_data)(void);
   INIT_TYPE INIT_FUNC(_orbit_quaternion_list)(void);
@@ -341,7 +340,6 @@ static void module_init(PyObject* module)
   INIT_MODULE(module, "_geometric_model_image", INIT_FUNC(_geometric_model_image));
   INIT_MODULE(module, "_memory_multi_band", INIT_FUNC(_memory_multi_band));
   INIT_MODULE(module, "_spice_helper", INIT_FUNC(_spice_helper));
-  INIT_MODULE(module, "_raw_raster_image", INIT_FUNC(_raw_raster_image));
   INIT_MODULE(module, "_aircraft_orbit_data", INIT_FUNC(_aircraft_orbit_data));
   INIT_MODULE(module, "_ypr_orbit_data", INIT_FUNC(_ypr_orbit_data));
   INIT_MODULE(module, "_orbit_quaternion_list", INIT_FUNC(_orbit_quaternion_list));

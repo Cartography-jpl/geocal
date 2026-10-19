@@ -229,17 +229,6 @@ Libsdx ever becomes an issue we can consider switching to boost.
 
 The library is LGPL
 
-LibRaw (Included)
------------------
-This is the LibRaw version 0.8.2 available from http://www.libraw.org. This
-is used to read the Raw digital camera format (see 
-http://en.wikipedia.org/wiki/Raw_image_format). We include the source for this 
-library because it is small, and this is a somewhat obscure library that isn't
-likely to be available as a system library. There are a handful of image file
-formats that depend on this (e.g., RawRasterImage).
-
-The library is LGPL
-
 Autotools
 =================
 The system is built using the standard GNU autotools chain. If you are familiar

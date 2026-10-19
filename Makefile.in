@@ -189,43 +189,40 @@ afidspythonvdev_PROGRAMS = $(am__EXEEXT_1)
 @HAVE_HDFEOS5_TRUE@am__append_6 = $(HDFEOS5_CFLAGS)
 @HAVE_HDF5_TRUE@am__append_7 = $(HDF5_LIBS)
 @HAVE_HDF5_TRUE@am__append_8 = $(HDF5_CFLAGS)
-@BUILD_LIBRAW_TRUE@am__append_9 = libraw.la
 check_PROGRAMS = geocal_test_all$(EXEEXT)
-@BUILD_LIBRAW_TRUE@am__append_10 = libraw.la
 
 #=================================================================
 # Generate doxygen documentation
-@WITH_DOCUMENTATION_TRUE@am__append_11 = config/doxygen.cfg \
+@WITH_DOCUMENTATION_TRUE@am__append_9 = config/doxygen.cfg \
 @WITH_DOCUMENTATION_TRUE@	config/doc_footer.html \
 @WITH_DOCUMENTATION_TRUE@	README.developer INSTALL
-@WITH_DOCUMENTATION_TRUE@am__append_12 = install_doxygen_doc \
+@WITH_DOCUMENTATION_TRUE@am__append_10 = install_doxygen_doc \
 @WITH_DOCUMENTATION_TRUE@	install_python_doc
-@WITH_DOCUMENTATION_TRUE@am__append_13 = clean_doxygen_doc
-@WITH_DOCUMENTATION_TRUE@am__append_14 = clean_doxygen_generate
-@BUILD_LIBRAW_TRUE@am__append_15 = libraw.la
-@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_16 = $(addprefix \
+@WITH_DOCUMENTATION_TRUE@am__append_11 = clean_doxygen_doc
+@WITH_DOCUMENTATION_TRUE@am__append_12 = clean_doxygen_generate
+@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_13 = $(addprefix \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(COMPILE_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(addprefix $(srcdir)/, \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(ADDITONAL_SWIG_SRC)) \
 @HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@	$(srcdir)/$(swigsrc)/swig_wrap.cc
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_17 = picmtch5
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_18 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
-@HAVE_HDF5_TRUE@am__append_19 = @srcsupport@/hdf_file.h
-@HAVE_HDF5_TRUE@am__append_20 = @srcsupport@/hdf_file.cc
-@HAVE_HDF5_TRUE@am__append_21 = @srcsupport@/hdf_file_test.cc 
-@HAVE_HDF5_TRUE@am__append_22 = @srcimplementation@/hdf_orbit.h
-@HAVE_HDF5_TRUE@am__append_23 = @srcimplementation@/hdf_orbit.cc
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_14 = picmtch5
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@am__append_15 = $(srcdir)/$(srcgeocalbin)/picmtch5.pdf
+@HAVE_HDF5_TRUE@am__append_16 = @srcsupport@/hdf_file.h
+@HAVE_HDF5_TRUE@am__append_17 = @srcsupport@/hdf_file.cc
+@HAVE_HDF5_TRUE@am__append_18 = @srcsupport@/hdf_file_test.cc 
+@HAVE_HDF5_TRUE@am__append_19 = @srcimplementation@/hdf_orbit.h
+@HAVE_HDF5_TRUE@am__append_20 = @srcimplementation@/hdf_orbit.cc
 
 # File only included if we have GDAL library
-@HAVE_GDAL_TRUE@am__append_24 = @srcimplementation@/gdal_datum.h \
+@HAVE_GDAL_TRUE@am__append_21 = @srcimplementation@/gdal_datum.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_multi_band.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/image_point_display.h \
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.h
-@HAVE_GDAL_TRUE@am__append_25 = @srcimplementation@/gdal_datum.cc \
+@HAVE_GDAL_TRUE@am__append_22 = @srcimplementation@/gdal_datum.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_raster_image.cc \
@@ -234,7 +231,7 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/ogr_coordinate.cc
 #  geocalinc_HEADERS+= @srcimplementation@/gdal_multi_file.h
 #  libgeocal_la_SOURCES+= @srcimplementation@/gdal_multi_file.cc
-@HAVE_GDAL_TRUE@am__append_26 =  \
+@HAVE_GDAL_TRUE@am__append_23 =  \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_datum_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/geocal_gdal_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/gdal_dem_test.cc \
@@ -245,26 +242,26 @@ check_PROGRAMS = geocal_test_all$(EXEEXT)
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_test.cc \
 @HAVE_GDAL_TRUE@	@srcimplementation@/igc_simulated_ray_caster_test.cc
 #  geocal_test_all_SOURCES+= @srcimplementation@/gdal_multi_file_test.cc
-@HAVE_HDF5_TRUE@am__append_27 = @srcimplementation@/hdf_orbit_test.cc \
+@HAVE_HDF5_TRUE@am__append_24 = @srcimplementation@/hdf_orbit_test.cc \
 @HAVE_HDF5_TRUE@	@srcimplementation@/orbit_quaternion_list_offset_test.cc
-@HAVE_GDAL_TRUE@am__append_28 = @srccartlab@/vicar_ogr.h
-@HAVE_GDAL_TRUE@am__append_29 = @srccartlab@/vicar_ogr.cc
-@HAVE_GDAL_TRUE@am__append_30 = @srccartlab@/vicar_ogr_test.cc
-@HAVE_HDF5_TRUE@am__append_31 = $(SWIG_SRC_HDF5)
-@HAVE_GDAL_TRUE@am__append_32 = $(SWIG_SRC_GDAL)
-@HAVE_BOOST_SERIALIZATION_TRUE@am__append_33 = -DSWIG_HAVE_BOOST_SERIALIZATION
-@HAVE_BOOST_SERIALIZATION_TRUE@am__append_34 = -DSWIG_HAVE_BOOST_SERIALIZATION
-@HAVE_BOOST_SERIALIZATION_TRUE@am__append_35 = -DSWIG_HAVE_BOOST_SERIALIZATION
-@HAVE_MSP_TRUE@am__append_36 = $(PYTHON_CPPFLAGS) \
+@HAVE_GDAL_TRUE@am__append_25 = @srccartlab@/vicar_ogr.h
+@HAVE_GDAL_TRUE@am__append_26 = @srccartlab@/vicar_ogr.cc
+@HAVE_GDAL_TRUE@am__append_27 = @srccartlab@/vicar_ogr_test.cc
+@HAVE_HDF5_TRUE@am__append_28 = $(SWIG_SRC_HDF5)
+@HAVE_GDAL_TRUE@am__append_29 = $(SWIG_SRC_GDAL)
+@HAVE_BOOST_SERIALIZATION_TRUE@am__append_30 = -DSWIG_HAVE_BOOST_SERIALIZATION
+@HAVE_BOOST_SERIALIZATION_TRUE@am__append_31 = -DSWIG_HAVE_BOOST_SERIALIZATION
+@HAVE_BOOST_SERIALIZATION_TRUE@am__append_32 = -DSWIG_HAVE_BOOST_SERIALIZATION
+@HAVE_MSP_TRUE@am__append_33 = $(PYTHON_CPPFLAGS) \
 @HAVE_MSP_TRUE@	$(PYTHON_NUMPY_CPPFLAGS) $(MSP_CFLAGS) \
 @HAVE_MSP_TRUE@	-I$(abs_srcdir)/@swigmspsrc@
-@HAVE_MSP_TRUE@am__append_37 = $(MSP_SWIG_SRC)
-@HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_38 = $(srcdir)/$(swigmspsrc)/msp_wrap.cc
-@BUILD_AFIDS_FALSE@am__append_39 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_40 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
-@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_41 = @srcpythonscript@/vicarb
-@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_42 = @srcpythonscript@/conda_wrapper.sh
-@HAVE_VICAR_RTL_TRUE@am__append_43 = $(srcdir)/$(srcpythonbin)/pan_sharpen
+@HAVE_MSP_TRUE@am__append_34 = $(MSP_SWIG_SRC)
+@HAVE_MSP_TRUE@@HAVE_SWIG_TRUE@@MAINTAINER_MODE_TRUE@am__append_35 = $(srcdir)/$(swigmspsrc)/msp_wrap.cc
+@BUILD_AFIDS_FALSE@am__append_36 = @srcpythonscript@/setup_geocal.csh @srcpythonscript@/setup_geocal.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_37 = @srcpythonscript@/setup_afids_env.csh @srcpythonscript@/setup_afids_env.sh
+@GEOCAL_OVERRIDE_AFIDS_TRUE@am__append_38 = @srcpythonscript@/vicarb
+@WITH_CONDA_INSTALL_SUPPORT_TRUE@am__append_39 = @srcpythonscript@/conda_wrapper.sh
+@HAVE_VICAR_RTL_TRUE@am__append_40 = $(srcdir)/$(srcpythonbin)/pan_sharpen
 subdir = .
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps =  \
@@ -288,8 +285,6 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
 	$(top_srcdir)/config/m4/ac_msp.m4 \
 	$(top_srcdir)/config/m4/ac_mspi_shared.m4 \
-	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
-	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
 	$(top_srcdir)/config/m4/ac_python_pytest.m4 \
 	$(top_srcdir)/config/m4/ac_python_sphinx.m4 \
@@ -310,9 +305,13 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
 	$(top_srcdir)/config/m4/ax_cxx_compile_stdcxx.m4 \
+	$(top_srcdir)/config/m4/ax_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ax_prog_perl_modules.m4 \
 	$(top_srcdir)/config/m4/ax_pthread.m4 \
+	$(top_srcdir)/config/m4/ax_python_devel.m4 \
 	$(top_srcdir)/config/m4/ax_require_defined.m4 \
+	$(top_srcdir)/config/m4/ax_swig_enable_cxx.m4 \
+	$(top_srcdir)/config/m4/ax_swig_python.m4 \
 	$(top_srcdir)/config/m4/ax_with_curses.m4 \
 	$(top_srcdir)/config/m4/libtool.m4 \
 	$(top_srcdir)/config/m4/loc_msg.m4 \
@@ -320,8 +319,6 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ltsugar.m4 \
 	$(top_srcdir)/config/m4/ltversion.m4 \
 	$(top_srcdir)/config/m4/lt~obsolete.m4 \
-	$(top_srcdir)/config/m4/swig_enable_cxx.m4 \
-	$(top_srcdir)/config/m4/swig_python.m4 \
 	$(top_srcdir)/configure.ac
 am__configure_deps = $(am__aclocal_m4_deps) $(CONFIGURE_DEPENDENCIES) \
 	$(ACLOCAL_M4)
@@ -330,8 +327,7 @@ DIST_COMMON = $(srcdir)/Makefile.am $(top_srcdir)/configure \
 	$(dist_bin_SCRIPTS) $(am__pkgpythonmspswig_PYTHON_DIST) \
 	$(pkgpythonswig_PYTHON) $(am__dist_afidspythonvdev_DATA_DIST) \
 	$(dist_sdbxdoc_DATA) $(am__geocalinc_HEADERS_DIST) \
-	$(geocalswiginc_HEADERS) $(include_HEADERS) \
-	$(am__libraw_HEADERS_DIST) $(sdbx_HEADERS) \
+	$(geocalswiginc_HEADERS) $(include_HEADERS) $(sdbx_HEADERS) \
 	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
 	$(sdbxsupport_HEADERS) $(swiginc_HEADERS) $(am__DIST_COMMON)
 am__CONFIG_DISTCLEAN_FILES = config.status config.cache config.log \
@@ -360,10 +356,9 @@ am__installdirs = "$(DESTDIR)$(afidspythonvdevdir)" \
 	"$(DESTDIR)$(installafidspythondir)" \
 	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgpythonswigdir)" \
 	"$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" \
-	"$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" \
-	"$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" \
-	"$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" \
-	"$(DESTDIR)$(swigincdir)"
+	"$(DESTDIR)$(includedir)" "$(DESTDIR)$(sdbxdir)" \
+	"$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" \
+	"$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"
 PROGRAMS = $(afidspythonvdev_PROGRAMS) $(bin_PROGRAMS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -491,7 +486,6 @@ am___swig_wrap_la_SOURCES_DIST = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/geometric_model_image_wrap.cc \
 	@swigsrc@/memory_multi_band_wrap.cc \
 	@swigsrc@/spice_helper_wrap.cc \
-	@swigsrc@/raw_raster_image_wrap.cc \
 	@swigsrc@/aircraft_orbit_data_wrap.cc \
 	@swigsrc@/ypr_orbit_data_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_wrap.cc \
@@ -695,7 +689,6 @@ am__objects_3 = @swigsrc@/_swig_wrap_la-swig_quaternion_wrap.lo \
 	@swigsrc@/_swig_wrap_la-geometric_model_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-memory_multi_band_wrap.lo \
 	@swigsrc@/_swig_wrap_la-spice_helper_wrap.lo \
-	@swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo \
 	@swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo \
 	@swigsrc@/_swig_wrap_la-ypr_orbit_data_wrap.lo \
 	@swigsrc@/_swig_wrap_la-orbit_quaternion_list_wrap.lo \
@@ -832,7 +825,7 @@ _swig_wrap_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
 	$(LDFLAGS) -o $@
 am__DEPENDENCIES_1 =
 libgeocal_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__append_9) $(am__DEPENDENCIES_1) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_thread_pool.cc \
 	@srcsupport@/generic_object.cc \
@@ -905,7 +898,6 @@ am__libgeocal_la_SOURCES_DIST = @srcsupport@/geocal_thread_pool.cc \
 	@srcimplementation@/igc_image_to_image_match.cc \
 	@srcimplementation@/surface_image_to_image_match.cc \
 	@srcimplementation@/pyramid_image_matcher.cc \
-	@srcimplementation@/raw_raster_image.cc \
 	@srcimplementation@/aircraft_orbit_data.cc \
 	@srcimplementation@/ypr_orbit_data.cc \
 	@srcimplementation@/orbit_quaternion_list.cc \
@@ -1119,7 +1111,6 @@ am_libgeocal_la_OBJECTS =  \
 	@srcimplementation@/libgeocal_la-igc_image_to_image_match.lo \
 	@srcimplementation@/libgeocal_la-surface_image_to_image_match.lo \
 	@srcimplementation@/libgeocal_la-pyramid_image_matcher.lo \
-	@srcimplementation@/libgeocal_la-raw_raster_image.lo \
 	@srcimplementation@/libgeocal_la-aircraft_orbit_data.lo \
 	@srcimplementation@/libgeocal_la-ypr_orbit_data.lo \
 	@srcimplementation@/libgeocal_la-orbit_quaternion_list.lo \
@@ -1246,19 +1237,6 @@ libgeocal_la_OBJECTS = $(am_libgeocal_la_OBJECTS)
 libgeocal_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) \
 	$(LIBTOOLFLAGS) --mode=link $(CXXLD) $(libgeocal_la_CXXFLAGS) \
 	$(CXXFLAGS) $(libgeocal_la_LDFLAGS) $(LDFLAGS) -o $@
-libraw_la_LIBADD =
-am__libraw_la_SOURCES_DIST = @srcraw@/dcraw_common.cpp \
-	@srcraw@/dcraw_fileio.cpp @srcraw@/foveon.cpp \
-	@srcraw@/libraw_c_api.cpp @srcraw@/libraw_cxx.cpp \
-	@srcraw@/libraw_defines.h @srcraw@/var_defines.h
-@BUILD_LIBRAW_TRUE@am_libraw_la_OBJECTS =  \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_la-dcraw_common.lo \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_la-dcraw_fileio.lo \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_la-foveon.lo \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_la-libraw_c_api.lo \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_la-libraw_cxx.lo
-libraw_la_OBJECTS = $(am_libraw_la_OBJECTS)
-@BUILD_LIBRAW_TRUE@am_libraw_la_rpath =
 am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
@@ -1331,7 +1309,6 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcimplementation@/memory_dem_test.cc \
 	@srcimplementation@/map_reprojected_image_test.cc \
 	@srcimplementation@/location_to_file_test.cc \
-	@srcimplementation@/raw_raster_image_test.cc \
 	@srcimplementation@/aircraft_orbit_data_test.cc \
 	@srcimplementation@/ypr_orbit_data_test.cc \
 	@srcimplementation@/orbit_quaternion_list_test.cc \
@@ -1508,7 +1485,6 @@ am_geocal_test_all_OBJECTS =  \
 	@srcimplementation@/geocal_test_all-memory_dem_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-map_reprojected_image_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-location_to_file_test.$(OBJEXT) \
-	@srcimplementation@/geocal_test_all-raw_raster_image_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-aircraft_orbit_data_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-ypr_orbit_data_test.$(OBJEXT) \
 	@srcimplementation@/geocal_test_all-orbit_quaternion_list_test.$(OBJEXT) \
@@ -1612,7 +1588,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcoco3@/geocal_test_all-jia_sample_test.$(OBJEXT)
 geocal_test_all_OBJECTS = $(am_geocal_test_all_OBJECTS)
 geocal_test_all_DEPENDENCIES = libgeocal.la $(am__DEPENDENCIES_1) \
-	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) $(am__append_10) \
+	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
 	$(am__DEPENDENCIES_1)
 geocal_test_all_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CXX \
@@ -1764,7 +1740,6 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po \
-	@srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po \
 	@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po \
@@ -1863,7 +1838,6 @@ am__depfiles_remade =  \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo \
-	@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo \
 	@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_msp.Plo \
@@ -2007,11 +1981,6 @@ am__depfiles_remade =  \
 	@srcmspi@/$(DEPDIR)/libgeocal_la-usgs_dem.Plo \
 	@srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po \
 	@srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Plo \
-	@srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo \
-	@srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo \
-	@srcraw@/$(DEPDIR)/libraw_la-foveon.Plo \
-	@srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Plo \
-	@srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Plo \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po \
@@ -2217,7 +2186,6 @@ am__depfiles_remade =  \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo \
-	@swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo \
 	@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo \
@@ -2307,30 +2275,12 @@ AM_V_CXXLD = $(am__v_CXXLD_@AM_V@)
 am__v_CXXLD_ = $(am__v_CXXLD_@AM_DEFAULT_V@)
 am__v_CXXLD_0 = @echo "  CXXLD   " $@;
 am__v_CXXLD_1 = 
-COMPILE = $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) \
-	$(CPPFLAGS) $(AM_CFLAGS) $(CFLAGS)
-LTCOMPILE = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) \
-	$(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) \
-	$(AM_CFLAGS) $(CFLAGS)
-AM_V_CC = $(am__v_CC_@AM_V@)
-am__v_CC_ = $(am__v_CC_@AM_DEFAULT_V@)
-am__v_CC_0 = @echo "  CC      " $@;
-am__v_CC_1 = 
-CCLD = $(CC)
-LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(AM_CFLAGS) $(CFLAGS) \
-	$(AM_LDFLAGS) $(LDFLAGS) -o $@
-AM_V_CCLD = $(am__v_CCLD_@AM_V@)
-am__v_CCLD_ = $(am__v_CCLD_@AM_DEFAULT_V@)
-am__v_CCLD_0 = @echo "  CCLD    " $@;
-am__v_CCLD_1 = 
 SOURCES = $(_msp_wrap_la_SOURCES) $(_swig_wrap_la_SOURCES) \
-	$(libgeocal_la_SOURCES) $(libraw_la_SOURCES) \
-	$(geocal_test_all_SOURCES) $(picmtch5_SOURCES)
+	$(libgeocal_la_SOURCES) $(geocal_test_all_SOURCES) \
+	$(picmtch5_SOURCES)
 DIST_SOURCES = $(am___msp_wrap_la_SOURCES_DIST) \
 	$(am___swig_wrap_la_SOURCES_DIST) \
-	$(am__libgeocal_la_SOURCES_DIST) $(am__libraw_la_SOURCES_DIST) \
+	$(am__libgeocal_la_SOURCES_DIST) \
 	$(am__geocal_test_all_SOURCES_DIST) \
 	$(am__picmtch5_SOURCES_DIST)
 am__can_run_installinfo = \
@@ -2454,7 +2404,6 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcimplementation@/surface_image_to_image_match.h \
 	@srcimplementation@/pyramid_image_matcher.h \
 	@srcimplementation@/location_to_file.h \
-	@srcimplementation@/raw_raster_image.h \
 	@srcimplementation@/aircraft_orbit_data.h \
 	@srcimplementation@/ypr_orbit_data.h \
 	@srcimplementation@/orbit_quaternion_list.h \
@@ -2572,14 +2521,9 @@ am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@swigrules@/lib/serialize_function.h \
 	@swigrules@/lib/serialize_shared_ptr.h \
 	@swigrules@/lib/weak_ptr_serialize_support.h
-am__libraw_HEADERS_DIST = @srcraw@/libraw.h @srcraw@/libraw_alloc.h \
-	@srcraw@/libraw_const.h @srcraw@/libraw_datastream.h \
-	@srcraw@/libraw_internal.h @srcraw@/libraw_internal_funcs.h \
-	@srcraw@/libraw_types.h @srcraw@/libraw_version.h
 HEADERS = $(geocalinc_HEADERS) $(geocalswiginc_HEADERS) \
-	$(include_HEADERS) $(libraw_HEADERS) $(sdbx_HEADERS) \
-	$(sdbxbtree_HEADERS) $(sdbxrtree_HEADERS) \
-	$(sdbxsupport_HEADERS) $(swiginc_HEADERS)
+	$(include_HEADERS) $(sdbx_HEADERS) $(sdbxbtree_HEADERS) \
+	$(sdbxrtree_HEADERS) $(sdbxsupport_HEADERS) $(swiginc_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
 # and print each of them once, without duplicates.  Input order is
@@ -2795,9 +2739,7 @@ am__DIST_COMMON = $(srcdir)/Makefile.in $(srcdir)/bin/bin.am \
 	$(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am \
 	$(srcdir)/python/python.am $(srcdir)/script/script.am \
 	$(srcdir)/swig_rules/swig_rules.am \
-	$(srcdir)/thirdparty/libraw/libraw.am \
 	$(srcdir)/thirdparty/libsdbx/sdbx.am \
-	$(srcdir)/thirdparty/thirdparty.am \
 	$(srcdir)/unit_test_data/unit_test_data.am \
 	$(top_srcdir)/config/compile $(top_srcdir)/config/config.guess \
 	$(top_srcdir)/config/config.sub $(top_srcdir)/config/depcomp \
@@ -2850,6 +2792,8 @@ AUTOCONF = @AUTOCONF@
 AUTOHEADER = @AUTOHEADER@
 AUTOMAKE = @AUTOMAKE@
 AWK = @AWK@
+AX_SWIG_PYTHON_CPPFLAGS = @AX_SWIG_PYTHON_CPPFLAGS@
+AX_SWIG_PYTHON_OPT = @AX_SWIG_PYTHON_OPT@
 BLITZ_CFLAGS = @BLITZ_CFLAGS@
 BLITZ_LIBS = @BLITZ_LIBS@
 
@@ -2981,11 +2925,14 @@ PTHREAD_CXX = @PTHREAD_CXX@
 PTHREAD_LIBS = @PTHREAD_LIBS@
 PYTEST = @PYTEST@
 PYTHON = @PYTHON@
-PYTHON_CONFIG = @PYTHON_CONFIG@
 PYTHON_CPPFLAGS = @PYTHON_CPPFLAGS@
-PYTHON_LDFLAGS = @PYTHON_LDFLAGS@
+PYTHON_EXTRA_LDFLAGS = @PYTHON_EXTRA_LDFLAGS@
+PYTHON_EXTRA_LIBS = @PYTHON_EXTRA_LIBS@
 PYTHON_LDPATH = @PYTHON_LDPATH@
+PYTHON_LIBS = @PYTHON_LIBS@
 PYTHON_NUMPY_CPPFLAGS = @PYTHON_NUMPY_CPPFLAGS@
+PYTHON_PLATFORM_SITE_PKG = @PYTHON_PLATFORM_SITE_PKG@
+PYTHON_SITE_PKG = @PYTHON_SITE_PKG@
 PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SED = @SED@
@@ -2997,7 +2944,6 @@ SPICE_LIBS = @SPICE_LIBS@
 STRIP = @STRIP@
 SWIG = @SWIG@
 SWIG_LIB = @SWIG_LIB@
-SWIG_PYTHON_CPPFLAGS = @SWIG_PYTHON_CPPFLAGS@
 SWIG_PYTHON_OPT = @SWIG_PYTHON_OPT@
 THIRDPARTY = @THIRDPARTY@
 VERSION = @VERSION@
@@ -3094,7 +3040,6 @@ srcpython = @srcpython@
 srcpythonbin = @srcpythonbin@
 srcpythonlib = @srcpythonlib@
 srcpythonscript = @srcpythonscript@
-srcraw = @srcraw@
 srcsdbx = @srcsdbx@
 srcserialize = @srcserialize@
 srcsupport = @srcsupport@
@@ -3124,8 +3069,8 @@ noop =
 #=================================================================
 # libgeocal: The main library
 lib_LTLIBRARIES = libgeocal.la
-noinst_LTLIBRARIES = $(am__append_15)
-bin_SCRIPTS = $(am__append_41) $(am__append_42)
+noinst_LTLIBRARIES = 
+bin_SCRIPTS = $(am__append_38) $(am__append_39)
 dist_bin_SCRIPTS = $(srcdir)/$(srcpythonbin)/gen_geneplot_cmd.py \
 	$(srcdir)/$(srcpythonbin)/shelve_dir \
 	$(srcdir)/$(srcpythonbin)/shelve_show \
@@ -3175,16 +3120,15 @@ AM_LDFLAGS =
 #=================================================================
 # This is needed by unit tests that work with VICAR files. VICAR
 # wants to find a PDF file.
-BUILT_SOURCES = dummy.pdf test_out/vicar_copy.img $(am__append_16) \
-	$(am__append_38)
+BUILT_SOURCES = dummy.pdf test_out/vicar_copy.img $(am__append_13) \
+	$(am__append_35)
 include_HEADERS = 
 # Test files
 
 # Test files
 EXTRA_DIST = @libgeocal@/test_all.sh @libgeocal@/dummy.pdf \
-	$(am__append_11) @srcsdbx@/README \
-	@srcsdbx@/StorageConcepts.txt @swigrules@/doxy2swig.py \
-	@swigrules@/create_python_init.py \
+	$(am__append_9) @srcsdbx@/README @srcsdbx@/StorageConcepts.txt \
+	@swigrules@/doxy2swig.py @swigrules@/create_python_init.py \
 	@swigrules@/doxygen_single.cfg @swigrules@/README.md \
 	@swigrules@/swig_wrap.tmpl \
 	@swigrules@/lib/generic_object.cc.sample \
@@ -3367,9 +3311,9 @@ AM_CPPFLAGS = -I$(srcdir)/@srcsdbx@ -I$(srcdir)/@swigrules@/include \
 # hooks for installing. We collect this in one place so automake doesn't
 # complain
 INSTALL_EXEC_HOOK = python-install
-INSTALL_DATA_HOOK = $(am__append_12)
-UNINSTALL_HOOK = $(am__append_13) clean_install_python_doc
-CLEAN_HOOK = clean_unit_test $(am__append_14)
+INSTALL_DATA_HOOK = $(am__append_10)
+UNINSTALL_HOOK = $(am__append_11) clean_install_python_doc
+CLEAN_HOOK = clean_unit_test $(am__append_12)
 INSTALLCHECK_HOOK = python-check
 DIST_HOOK = 
 TESTS = @libgeocal@/test_all.sh
@@ -3381,8 +3325,11 @@ check_DATA =
 # want to see this in our report
 CODE_COVERAGE_LCOV_SHOPTS = $(CODE_COVERAGE_LCOV_SHOPTS_DEFAULT) \
 	--directory=$(srcdir) --directory=$(abs_srcdir) --no-external
-CODE_COVERAGE_IGNORE_PATTERN = "*/thirdparty/libraw/*" \
-	"*/thirdparty/libsdbx/*" "*/lib/GeoCalCore/Support/boost/*"
+
+#=================================================================
+# Unit test
+CODE_COVERAGE_IGNORE_PATTERN = "*/thirdparty/libsdbx/*" \
+	"*/lib/GeoCalCore/Support/boost/*"
 CODE_COVERAGE_OUTPUT_DIRECTORY = $(PACKAGE_NAME)-coverage
 
 # Build these up as we go
@@ -3401,7 +3348,7 @@ libgeocal_la_SOURCES = @srcsupport@/geocal_thread_pool.cc \
 	@srcsupport@/geocal_gsl_root.cc @srcsupport@/geocal_time.cc \
 	@srcsupport@/covariance.cc @srcsupport@/statistic.cc \
 	@srcsupport@/blitz_array_serialize_support.cc \
-	@srcsupport@/geocal_fftw.cc $(am__append_20) \
+	@srcsupport@/geocal_fftw.cc $(am__append_17) \
 	@srcinterface@/raster_image.cc \
 	@srcinterface@/with_parameter.cc \
 	@srcinterface@/raster_image_variable.cc \
@@ -3459,7 +3406,6 @@ libgeocal_la_SOURCES = @srcsupport@/geocal_thread_pool.cc \
 	@srcimplementation@/igc_image_to_image_match.cc \
 	@srcimplementation@/surface_image_to_image_match.cc \
 	@srcimplementation@/pyramid_image_matcher.cc \
-	@srcimplementation@/raw_raster_image.cc \
 	@srcimplementation@/aircraft_orbit_data.cc \
 	@srcimplementation@/ypr_orbit_data.cc \
 	@srcimplementation@/orbit_quaternion_list.cc \
@@ -3495,7 +3441,7 @@ libgeocal_la_SOURCES = @srcsupport@/geocal_thread_pool.cc \
 	@srcimplementation@/piecewise_linear.cc \
 	@srcimplementation@/phase_correlation_matcher.cc \
 	@srcimplementation@/quadratic_geometric_model.cc \
-	@srcimplementation@/geometric_model_image.cc $(am__append_23) \
+	@srcimplementation@/geometric_model_image.cc $(am__append_20) \
 	@srcimplementation@/orbit_array.cc \
 	@srcimplementation@/orbit_quaternion_list_offset.cc \
 	@srcimplementation@/orbit_correction.cc \
@@ -3532,7 +3478,7 @@ libgeocal_la_SOURCES = @srcsupport@/geocal_thread_pool.cc \
 	@srcimplementation@/rsm_image_ground_connection.cc \
 	@srcimplementation@/mola_dem_file.cc \
 	@srcimplementation@/context_sqrt_decode_image.cc \
-	@srcimplementation@/quick_mosaic.cc $(am__append_25) \
+	@srcimplementation@/quick_mosaic.cc $(am__append_22) \
 	@srcimplementation@/spice_helper.cc \
 	@srcimplementation@/sdp_helper.cc @srccartlab@/argus_camera.cc \
 	@srccartlab@/argus_orbit.cc @srccartlab@/quickbird_camera.cc \
@@ -3551,7 +3497,7 @@ libgeocal_la_SOURCES = @srcsupport@/geocal_thread_pool.cc \
 	@srccartlab@/vicar_file.cc @srccartlab@/vicar_raster_image.cc \
 	@srccartlab@/datum_geoid96.cc @srccartlab@/srtm_dem.cc \
 	@srccartlab@/copernicus_dem.cc @srccartlab@/trex_dem.cc \
-	$(am__append_29) @srcmspi@/ifstream_cs.cc \
+	$(am__append_26) @srcmspi@/ifstream_cs.cc \
 	@srcmspi@/air_mspi_file.cc @srcmspi@/mspi_config_file.cc \
 	@srcmspi@/mspi_paraxial_transform.cc @srcmspi@/mspi_camera.cc \
 	@srcmspi@/mspi_gimbal.cc @srcmspi@/air_mspi_orbit.cc \
@@ -3653,7 +3599,6 @@ SWIG_SRC = @swigsrc@/swig_quaternion_wrap.cc \
 	@swigsrc@/geometric_model_image_wrap.cc \
 	@swigsrc@/memory_multi_band_wrap.cc \
 	@swigsrc@/spice_helper_wrap.cc \
-	@swigsrc@/raw_raster_image_wrap.cc \
 	@swigsrc@/aircraft_orbit_data_wrap.cc \
 	@swigsrc@/ypr_orbit_data_wrap.cc \
 	@swigsrc@/orbit_quaternion_list_wrap.cc \
@@ -3785,8 +3730,8 @@ dist_afidspythonvdev_SCRIPTS =  \
 	$(srcdir)/$(srcpythonbin)/rpcorrsmfwd \
 	$(srcdir)/$(srcpythonbin)/rsm_improve \
 	$(srcdir)/$(srcpythonbin)/rsm_tiepoint \
-	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_43)
-dist_afidspythonvdev_DATA = $(am__append_18) \
+	$(srcdir)/$(srcpythonbin)/rsm_project $(am__append_40)
+dist_afidspythonvdev_DATA = $(am__append_15) \
 	$(srcdir)/$(srcpythonbin)/sample_vicar_python.pdf \
 	$(srcdir)/$(srcpythonbin)/gtproj2.pdf \
 	$(srcdir)/$(srcpythonbin)/mars_nest.pdf \
@@ -3834,7 +3779,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcsupport@/covariance.h @srcsupport@/statistic.h \
 	@srcsupport@/blitz_array_serialize_support.h \
 	@srcsupport@/geocal_fftw.h @srcsupport@/static_sort.h \
-	@srcsupport@/geocal_static_sort.h $(am__append_19) \
+	@srcsupport@/geocal_static_sort.h $(am__append_16) \
 	@srcsupport@/tre_support.h @srcinterface@/raster_image.h \
 	@srcinterface@/with_parameter.h \
 	@srcinterface@/raster_image_variable.h \
@@ -3896,7 +3841,6 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/surface_image_to_image_match.h \
 	@srcimplementation@/pyramid_image_matcher.h \
 	@srcimplementation@/location_to_file.h \
-	@srcimplementation@/raw_raster_image.h \
 	@srcimplementation@/aircraft_orbit_data.h \
 	@srcimplementation@/ypr_orbit_data.h \
 	@srcimplementation@/orbit_quaternion_list.h \
@@ -3934,7 +3878,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/piecewise_linear.h \
 	@srcimplementation@/phase_correlation_matcher.h \
 	@srcimplementation@/quadratic_geometric_model.h \
-	@srcimplementation@/geometric_model_image.h $(am__append_22) \
+	@srcimplementation@/geometric_model_image.h $(am__append_19) \
 	@srcimplementation@/orbit_array.h \
 	@srcimplementation@/orbit_quaternion_list_offset.h \
 	@srcimplementation@/orbit_correction.h \
@@ -3970,7 +3914,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srcimplementation@/rsm_image_ground_connection.h \
 	@srcimplementation@/mola_dem_file.h \
 	@srcimplementation@/context_sqrt_decode_image.h \
-	@srcimplementation@/quick_mosaic.h $(am__append_24) \
+	@srcimplementation@/quick_mosaic.h $(am__append_21) \
 	@srcimplementation@/spice_helper.h \
 	@srcimplementation@/sdp_helper.h @srccartlab@/argus_camera.h \
 	@srccartlab@/argus_orbit.h @srccartlab@/quickbird_camera.h \
@@ -3988,7 +3932,7 @@ geocalinc_HEADERS = @srcsupport@/geocal_config.h \
 	@srccartlab@/vicar_tiled_file.h \
 	@srccartlab@/vicar_raster_image.h @srccartlab@/datum_geoid96.h \
 	@srccartlab@/srtm_dem.h @srccartlab@/copernicus_dem.h \
-	@srccartlab@/trex_dem.h $(am__append_28) \
+	@srccartlab@/trex_dem.h $(am__append_25) \
 	@srcmspi@/filtering_fstream.h @srcmspi@/ifstream_cs.h \
 	@srcmspi@/air_mspi_file.h @srcmspi@/mspi_config_file.h \
 	@srcmspi@/mspi_paraxial_transform.h @srcmspi@/mspi_camera.h \
@@ -4096,7 +4040,6 @@ geocalswiginc_HEADERS = @libgeocal@/geocal_common.i \
 	@srcimplementation@/gdal_multi_file.i \
 	@srcimplementation@/memory_multi_band.i \
 	@srcimplementation@/spice_helper.i \
-	@srcimplementation@/raw_raster_image.i \
 	@srcimplementation@/aircraft_orbit_data.i \
 	@srcimplementation@/ypr_orbit_data.i \
 	@srcimplementation@/orbit_quaternion_list.i \
@@ -4213,7 +4156,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/covariance_test.cc @srcsupport@/statistic_test.cc \
 	@srcsupport@/blitz_array_serialize_support_test.cc \
 	@srcsupport@/geocal_fftw_test.cc \
-	@srcsupport@/geocal_static_sort_test.cc $(am__append_21) \
+	@srcsupport@/geocal_static_sort_test.cc $(am__append_18) \
 	@srcinterface@/constant_raster_image_test.cc \
 	@srcinterface@/memory_raster_image_test.cc \
 	@srcinterface@/sub_raster_image_test.cc \
@@ -4237,7 +4180,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcinterface@/ccorr_lsm_matcher_test.cc \
 	@srcinterface@/orbit_test.cc @srcinterface@/geocal_rpc_test.cc \
 	@srcinterface@/rpc_image_test.cc @srcinterface@/ipi_test.cc \
-	$(am__append_26) $(am__append_27) \
+	$(am__append_23) $(am__append_24) \
 	@srcimplementation@/spice_helper_test.cc \
 	@srcimplementation@/sdp_helper_test.cc \
 	@srcimplementation@/did_datum_test.cc \
@@ -4253,7 +4196,6 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/memory_dem_test.cc \
 	@srcimplementation@/map_reprojected_image_test.cc \
 	@srcimplementation@/location_to_file_test.cc \
-	@srcimplementation@/raw_raster_image_test.cc \
 	@srcimplementation@/aircraft_orbit_data_test.cc \
 	@srcimplementation@/ypr_orbit_data_test.cc \
 	@srcimplementation@/orbit_quaternion_list_test.cc \
@@ -4315,7 +4257,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcimplementation@/context_sqrt_decode_image_test.cc \
 	@srcimplementation@/quick_mosaic_test.cc \
 	@srcimplementation@/sensrb_camera_test.cc \
-	@srcimplementation@/glas_gfm_camera_test.cc $(am__append_30) \
+	@srcimplementation@/glas_gfm_camera_test.cc $(am__append_27) \
 	@srccartlab@/argus_camera_test.cc \
 	@srccartlab@/argus_orbit_test.cc \
 	@srccartlab@/quickbird_camera_test.cc \
@@ -4348,35 +4290,28 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcmspi@/air_mspi_l1b1_test.cc @srcmspi@/air_mspi_igc_test.cc \
 	@srcmspi@/air_mspi_igc_collection_test.cc \
 	@srcoco3@/jia_sample_test.cc
-_msp_wrap_la_SOURCES = @srcmsp@/msp.cc $(am__append_37)
+_msp_wrap_la_SOURCES = @srcmsp@/msp.cc $(am__append_34)
 MSP_SWIG_SRC = @swigmspsrc@/msp_wrap.cc
-_msp_wrap_la_CPPFLAGS = -I$(abs_srcdir)/@srcmsp@ $(am__append_36)
+_msp_wrap_la_CPPFLAGS = -I$(abs_srcdir)/@srcmsp@ $(am__append_33)
 libgeocal_la_CXXFLAGS = $(AM_CXXFLAGS) $(CODE_COVERAGE_CXXFLAGS)
 libgeocal_la_CFLAGS = $(AM_CFLAGS) $(CODE_COVERAGE_CFLAGS)
 libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
-	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
-	$(CODE_COVERAGE_CPPFLAGS) $(OPENMP_CFLAGS) $(GEOTIFF_CFLAGS) \
-	$(am__append_2) $(am__append_4) $(am__append_6) \
-	$(am__append_8) -DSWIG_MAPPER_NAMESPACE=GeoCal \
-	$(am__append_33)
+	$(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
+	$(OPENMP_CFLAGS) $(GEOTIFF_CFLAGS) $(am__append_2) \
+	$(am__append_4) $(am__append_6) $(am__append_8) \
+	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_30)
 libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS) \
-	$(am__append_9) $(SPICE_LIBS) $(MSPI_SHARED_LIBS)
-
-#=================================================================
-# Unit test
-norm_raw = $(shell cd $(abs_srcdir)/@srcraw@; pwd)
-norm_sdbx = $(shell cd $(abs_srcdir)/@srcsdbx@; pwd)
+	$(SPICE_LIBS) $(MSPI_SHARED_LIBS)
 geocal_test_all_LDADD = libgeocal.la $(CARTO_LIBS) $(VICAR_RTL_LIBS) \
-	$(SPICE_LIBS) $(am__append_10) $(GDAL_LIBS) $(OPENSSL_LIBS) \
-	$(GEOTIFF_LIBS) $(CODE_COVERAGE_LIBS)
+	$(SPICE_LIBS) $(GDAL_LIBS) $(OPENSSL_LIBS) $(GEOTIFF_LIBS) \
+	$(CODE_COVERAGE_LIBS)
 geocal_test_all_LDFLAGS = -no-install $(OPENMP_CFLAGS)
 geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
 	$(OPENMP_CFLAGS) $(GEOTIFF_CFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
-	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
-	$(GDAL_CFLAGS) $(HDF5_CFLAGS) -DSWIG_MAPPER_NAMESPACE=GeoCal \
-	$(am__append_35)
+	$(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) \
+	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_32)
 MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
@@ -4408,23 +4343,6 @@ sdbx_HEADERS = @srcsdbx@/sdbx/BTree.h @srcsdbx@/sdbx/DiskTreeBackend.h \
 	@srcsdbx@/sdbx/lru.h @srcsdbx@/sdbx/MemoryTreeBackend.h \
 	@srcsdbx@/sdbx/RTree.h @srcsdbx@/sdbx/Serialization.h \
 	@srcsdbx@/sdbx/SerializedFile.h @srcsdbx@/sdbx/StringTable.h
-@BUILD_LIBRAW_TRUE@librawdir = $(includedir)
-@BUILD_LIBRAW_TRUE@libraw_HEADERS = @srcraw@/libraw.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_alloc.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_const.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_datastream.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_internal.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_internal_funcs.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_types.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_version.h
-@BUILD_LIBRAW_TRUE@libraw_la_SOURCES = @srcraw@/dcraw_common.cpp \
-@BUILD_LIBRAW_TRUE@	@srcraw@/dcraw_fileio.cpp \
-@BUILD_LIBRAW_TRUE@	@srcraw@/foveon.cpp \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_c_api.cpp \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_cxx.cpp \
-@BUILD_LIBRAW_TRUE@	@srcraw@/libraw_defines.h \
-@BUILD_LIBRAW_TRUE@	@srcraw@/var_defines.h
-@BUILD_LIBRAW_TRUE@libraw_la_CPPFLAGS = $(AM_CPPFLAGS) -DLIBRAW_NOTHREADS
 swiginc_HEADERS = @swigrules@/include/director_serialization.i \
 	@swigrules@/include/my_shared_ptr.i \
 	@swigrules@/include/shared_ptr_type_mapper.i \
@@ -4464,20 +4382,19 @@ _swig_wrap_la_SOURCES = $(COMPILE_SWIG_SRC) $(ADDITONAL_SWIG_SRC) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(BOOST_CPPFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(SPICE_CFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(FFTW_CPPFLAGS) \
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	-I$(srcdir)/$(srcraw) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(BLITZ_CFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(CARTO_CFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(GDAL_CFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(HDF5_CFLAGS)
 pkgpythonswigdir = $(prefix)/@pythondir@/geocal_swig
-COMPILE_SWIG_SRC = $(SWIG_SRC) $(am__append_31) $(am__append_32)
+COMPILE_SWIG_SRC = $(SWIG_SRC) $(am__append_28) $(am__append_29)
 FULL_SWIG_SRC = $(SWIG_SRC) $(SWIG_SRC_HDF5) $(SWIG_SRC_GDAL)
 CONDITIONAL_SWIG_SRC = $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5) \
 	HAVE_GDAL $(SWIG_SRC_GDAL)
 SWIG_CPPFLAGS = $(VICAR_RTL_CFLAGS) $(BOOST_CPPFLAGS) $(SPICE_CFLAGS) \
-	$(FFTW_CPPFLAGS) -I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) \
-	$(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS) \
-	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_34)
+	$(FFTW_CPPFLAGS) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
+	$(GDAL_CFLAGS) $(HDF5_CFLAGS) $(AM_CPPFLAGS) \
+	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_31)
 SWIG_TYPE_TABLE_NAME = geocal
 SWIG_MODULE_NAME = geocal
 SWIG_LIBADD = libgeocal.la
@@ -4489,7 +4406,7 @@ SWIG_LIBADD = libgeocal.la
 # Also need dlopen
 @HAVE_MSP_TRUE@_msp_wrap_la_LDFLAGS = -module -avoid-version \
 @HAVE_MSP_TRUE@	$(MSP_LIBS) -ldl
-installafidspython_DATA = $(am__append_39) $(am__append_40)
+installafidspython_DATA = $(am__append_36) $(am__append_37)
 etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@/setup_afids_python.sh
 @HAVE_AFIDS_DATA_FALSE@setup_afids_data = :
 @HAVE_AFIDS_DATA_TRUE@setup_afids_data = source $(AFIDS_DATA)/setup_afids_data.sh
@@ -4506,7 +4423,7 @@ all: $(BUILT_SOURCES)
 .SUFFIXES: .cc .cpp .lo .log .o .obj .test .test$(EXEEXT) .trs
 am--refresh: Makefile
 	@:
-$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/lib/Msp/msp.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
+$(srcdir)/Makefile.in: @MAINTAINER_MODE_TRUE@ $(srcdir)/Makefile.am $(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/lib/Msp/msp.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
 	    *$$dep*) \
@@ -4528,7 +4445,7 @@ Makefile: $(srcdir)/Makefile.in $(top_builddir)/config.status
 	    echo ' cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles)'; \
 	    cd $(top_builddir) && $(SHELL) ./config.status $@ $(am__maybe_remake_depfiles);; \
 	esac;
-$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/thirdparty.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/thirdparty/libraw/libraw.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/lib/Msp/msp.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(am__empty):
+$(srcdir)/common.am $(srcdir)/include.am $(srcdir)/geocal.am $(srcdir)/thirdparty/libsdbx/sdbx.am $(srcdir)/swig_rules/swig_rules.am $(srcdir)/lib/lib.am $(srcdir)/bin/bin.am $(srcdir)/lib/GeoCalCore/geocal_core.am $(srcdir)/lib/GeoCalCore/Support/support.am $(srcdir)/lib/GeoCalCore/Interface/interface.am $(srcdir)/lib/GeoCalCore/Implementation/implementation.am $(srcdir)/lib/CartLab/cart_lab.am $(srcdir)/lib/Mspi/mspi.am $(srcdir)/lib/Oco3/oco3.am $(srcdir)/lib/Msp/msp.am $(srcdir)/bindings/python/python.am $(srcdir)/bindings/python/msp_swig/msp_swig.am $(srcdir)/unit_test_data/unit_test_data.am $(srcdir)/script/script.am $(srcdir)/python/python.am $(srcdir)/python/bin/bin.am $(srcdir)/python/doc/doc_python.am $(am__empty):
 
 $(top_builddir)/config.status: $(top_srcdir)/configure $(CONFIG_STATUS_DEPENDENCIES)
 	$(SHELL) ./config.status --recheck
@@ -5007,8 +4924,6 @@ _msp_wrap.la: $(_msp_wrap_la_OBJECTS) $(_msp_wrap_la_DEPENDENCIES) $(EXTRA__msp_
 @swigsrc@/_swig_wrap_la-memory_multi_band_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-spice_helper_wrap.lo:  \
-	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
-@swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
 @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo:  \
 	@swigsrc@/$(am__dirstamp) @swigsrc@/$(DEPDIR)/$(am__dirstamp)
@@ -5542,9 +5457,6 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 @srcimplementation@/libgeocal_la-pyramid_image_matcher.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/libgeocal_la-raw_raster_image.lo:  \
-	@srcimplementation@/$(am__dirstamp) \
-	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/libgeocal_la-aircraft_orbit_data.lo:  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
@@ -5936,25 +5848,6 @@ _swig_wrap.la: $(_swig_wrap_la_OBJECTS) $(_swig_wrap_la_DEPENDENCIES) $(EXTRA__s
 
 libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libgeocal_la_DEPENDENCIES) 
 	$(AM_V_CXXLD)$(libgeocal_la_LINK) -rpath $(libdir) $(libgeocal_la_OBJECTS) $(libgeocal_la_LIBADD) $(LIBS)
-@srcraw@/$(am__dirstamp):
-	@$(MKDIR_P) @srcraw@
-	@: >>@srcraw@/$(am__dirstamp)
-@srcraw@/$(DEPDIR)/$(am__dirstamp):
-	@$(MKDIR_P) @srcraw@/$(DEPDIR)
-	@: >>@srcraw@/$(DEPDIR)/$(am__dirstamp)
-@srcraw@/libraw_la-dcraw_common.lo: @srcraw@/$(am__dirstamp) \
-	@srcraw@/$(DEPDIR)/$(am__dirstamp)
-@srcraw@/libraw_la-dcraw_fileio.lo: @srcraw@/$(am__dirstamp) \
-	@srcraw@/$(DEPDIR)/$(am__dirstamp)
-@srcraw@/libraw_la-foveon.lo: @srcraw@/$(am__dirstamp) \
-	@srcraw@/$(DEPDIR)/$(am__dirstamp)
-@srcraw@/libraw_la-libraw_c_api.lo: @srcraw@/$(am__dirstamp) \
-	@srcraw@/$(DEPDIR)/$(am__dirstamp)
-@srcraw@/libraw_la-libraw_cxx.lo: @srcraw@/$(am__dirstamp) \
-	@srcraw@/$(DEPDIR)/$(am__dirstamp)
-
-libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPENDENCIES) 
-	$(AM_V_CXXLD)$(CXXLINK) $(am_libraw_la_rpath) $(libraw_la_OBJECTS) $(libraw_la_LIBADD) $(LIBS)
 @libgeocal@/$(am__dirstamp):
 	@$(MKDIR_P) @libgeocal@
 	@: >>@libgeocal@/$(am__dirstamp)
@@ -6190,9 +6083,6 @@ libraw.la: $(libraw_la_OBJECTS) $(libraw_la_DEPENDENCIES) $(EXTRA_libraw_la_DEPE
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-location_to_file_test.$(OBJEXT):  \
-	@srcimplementation@/$(am__dirstamp) \
-	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
-@srcimplementation@/geocal_test_all-raw_raster_image_test.$(OBJEXT):  \
 	@srcimplementation@/$(am__dirstamp) \
 	@srcimplementation@/$(DEPDIR)/$(am__dirstamp)
 @srcimplementation@/geocal_test_all-aircraft_orbit_data_test.$(OBJEXT):  \
@@ -6621,8 +6511,6 @@ mostlyclean-compile:
 	-rm -f @srcmspi@/*.lo
 	-rm -f @srcoco3@/*.$(OBJEXT)
 	-rm -f @srcoco3@/*.lo
-	-rm -f @srcraw@/*.$(OBJEXT)
-	-rm -f @srcraw@/*.lo
 	-rm -f @srcsupport@/*.$(OBJEXT)
 	-rm -f @srcsupport@/*.lo
 	-rm -f @srcsupport@/boost/*.$(OBJEXT)
@@ -6746,7 +6634,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po@am__quote@ # am--include-marker
@@ -6845,7 +6732,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_msp.Plo@am__quote@ # am--include-marker
@@ -6989,11 +6875,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcmspi@/$(DEPDIR)/libgeocal_la-usgs_dem.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-foveon.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po@am__quote@ # am--include-marker
@@ -7199,7 +7080,6 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo@am__quote@ # am--include-marker
-@AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo@am__quote@ # am--include-marker
@@ -8021,13 +7901,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/spice_helper_wrap.cc' object='@swigsrc@/_swig_wrap_la-spice_helper_wrap.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-spice_helper_wrap.lo `test -f '@swigsrc@/spice_helper_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/spice_helper_wrap.cc
-
-@swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo: @swigsrc@/raw_raster_image_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo `test -f '@swigsrc@/raw_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raw_raster_image_wrap.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Tpo @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigsrc@/raw_raster_image_wrap.cc' object='@swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigsrc@/_swig_wrap_la-raw_raster_image_wrap.lo `test -f '@swigsrc@/raw_raster_image_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/raw_raster_image_wrap.cc
 
 @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo: @swigsrc@/aircraft_orbit_data_wrap.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(_swig_wrap_la_CPPFLAGS) $(CPPFLAGS) $(_swig_wrap_la_CXXFLAGS) $(CXXFLAGS) -MT @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo -MD -MP -MF @swigsrc@/$(DEPDIR)/_swig_wrap_la-aircraft_orbit_data_wrap.Tpo -c -o @swigsrc@/_swig_wrap_la-aircraft_orbit_data_wrap.lo `test -f '@swigsrc@/aircraft_orbit_data_wrap.cc' || echo '$(srcdir)/'`@swigsrc@/aircraft_orbit_data_wrap.cc
@@ -9527,13 +9400,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-pyramid_image_matcher.lo `test -f '@srcimplementation@/pyramid_image_matcher.cc' || echo '$(srcdir)/'`@srcimplementation@/pyramid_image_matcher.cc
 
-@srcimplementation@/libgeocal_la-raw_raster_image.lo: @srcimplementation@/raw_raster_image.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-raw_raster_image.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Tpo -c -o @srcimplementation@/libgeocal_la-raw_raster_image.lo `test -f '@srcimplementation@/raw_raster_image.cc' || echo '$(srcdir)/'`@srcimplementation@/raw_raster_image.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/raw_raster_image.cc' object='@srcimplementation@/libgeocal_la-raw_raster_image.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/libgeocal_la-raw_raster_image.lo `test -f '@srcimplementation@/raw_raster_image.cc' || echo '$(srcdir)/'`@srcimplementation@/raw_raster_image.cc
-
 @srcimplementation@/libgeocal_la-aircraft_orbit_data.lo: @srcimplementation@/aircraft_orbit_data.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/libgeocal_la-aircraft_orbit_data.lo -MD -MP -MF @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Tpo -c -o @srcimplementation@/libgeocal_la-aircraft_orbit_data.lo `test -f '@srcimplementation@/aircraft_orbit_data.cc' || echo '$(srcdir)/'`@srcimplementation@/aircraft_orbit_data.cc
 @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Tpo @srcimplementation@/$(DEPDIR)/libgeocal_la-aircraft_orbit_data.Plo
@@ -10436,41 +10302,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@swigrules@/lib/weak_ptr_serialize_support.cc' object='@swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo' libtool=yes @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libgeocal_la_CPPFLAGS) $(CPPFLAGS) $(libgeocal_la_CXXFLAGS) $(CXXFLAGS) -c -o @swigrules@/lib/libgeocal_la-weak_ptr_serialize_support.lo `test -f '@swigrules@/lib/weak_ptr_serialize_support.cc' || echo '$(srcdir)/'`@swigrules@/lib/weak_ptr_serialize_support.cc
-
-@srcraw@/libraw_la-dcraw_common.lo: @srcraw@/dcraw_common.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-dcraw_common.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo -c -o @srcraw@/libraw_la-dcraw_common.lo `test -f '@srcraw@/dcraw_common.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_common.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Tpo @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcraw@/dcraw_common.cpp' object='@srcraw@/libraw_la-dcraw_common.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcraw@/libraw_la-dcraw_common.lo `test -f '@srcraw@/dcraw_common.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_common.cpp
-
-@srcraw@/libraw_la-dcraw_fileio.lo: @srcraw@/dcraw_fileio.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-dcraw_fileio.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Tpo -c -o @srcraw@/libraw_la-dcraw_fileio.lo `test -f '@srcraw@/dcraw_fileio.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_fileio.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Tpo @srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcraw@/dcraw_fileio.cpp' object='@srcraw@/libraw_la-dcraw_fileio.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcraw@/libraw_la-dcraw_fileio.lo `test -f '@srcraw@/dcraw_fileio.cpp' || echo '$(srcdir)/'`@srcraw@/dcraw_fileio.cpp
-
-@srcraw@/libraw_la-foveon.lo: @srcraw@/foveon.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-foveon.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-foveon.Tpo -c -o @srcraw@/libraw_la-foveon.lo `test -f '@srcraw@/foveon.cpp' || echo '$(srcdir)/'`@srcraw@/foveon.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-foveon.Tpo @srcraw@/$(DEPDIR)/libraw_la-foveon.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcraw@/foveon.cpp' object='@srcraw@/libraw_la-foveon.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcraw@/libraw_la-foveon.lo `test -f '@srcraw@/foveon.cpp' || echo '$(srcdir)/'`@srcraw@/foveon.cpp
-
-@srcraw@/libraw_la-libraw_c_api.lo: @srcraw@/libraw_c_api.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-libraw_c_api.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Tpo -c -o @srcraw@/libraw_la-libraw_c_api.lo `test -f '@srcraw@/libraw_c_api.cpp' || echo '$(srcdir)/'`@srcraw@/libraw_c_api.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Tpo @srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcraw@/libraw_c_api.cpp' object='@srcraw@/libraw_la-libraw_c_api.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcraw@/libraw_la-libraw_c_api.lo `test -f '@srcraw@/libraw_c_api.cpp' || echo '$(srcdir)/'`@srcraw@/libraw_c_api.cpp
-
-@srcraw@/libraw_la-libraw_cxx.lo: @srcraw@/libraw_cxx.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcraw@/libraw_la-libraw_cxx.lo -MD -MP -MF @srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Tpo -c -o @srcraw@/libraw_la-libraw_cxx.lo `test -f '@srcraw@/libraw_cxx.cpp' || echo '$(srcdir)/'`@srcraw@/libraw_cxx.cpp
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Tpo @srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Plo
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcraw@/libraw_cxx.cpp' object='@srcraw@/libraw_la-libraw_cxx.lo' libtool=yes @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libraw_la_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcraw@/libraw_la-libraw_cxx.lo `test -f '@srcraw@/libraw_cxx.cpp' || echo '$(srcdir)/'`@srcraw@/libraw_cxx.cpp
 
 @libgeocal@/geocal_test_all-test_all.o: @libgeocal@/test_all.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @libgeocal@/geocal_test_all-test_all.o -MD -MP -MF @libgeocal@/$(DEPDIR)/geocal_test_all-test_all.Tpo -c -o @libgeocal@/geocal_test_all-test_all.o `test -f '@libgeocal@/test_all.cc' || echo '$(srcdir)/'`@libgeocal@/test_all.cc
@@ -11549,20 +11380,6 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/location_to_file_test.cc' object='@srcimplementation@/geocal_test_all-location_to_file_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-location_to_file_test.obj `if test -f '@srcimplementation@/location_to_file_test.cc'; then $(CYGPATH_W) '@srcimplementation@/location_to_file_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/location_to_file_test.cc'; fi`
-
-@srcimplementation@/geocal_test_all-raw_raster_image_test.o: @srcimplementation@/raw_raster_image_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-raw_raster_image_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Tpo -c -o @srcimplementation@/geocal_test_all-raw_raster_image_test.o `test -f '@srcimplementation@/raw_raster_image_test.cc' || echo '$(srcdir)/'`@srcimplementation@/raw_raster_image_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/raw_raster_image_test.cc' object='@srcimplementation@/geocal_test_all-raw_raster_image_test.o' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-raw_raster_image_test.o `test -f '@srcimplementation@/raw_raster_image_test.cc' || echo '$(srcdir)/'`@srcimplementation@/raw_raster_image_test.cc
-
-@srcimplementation@/geocal_test_all-raw_raster_image_test.obj: @srcimplementation@/raw_raster_image_test.cc
-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-raw_raster_image_test.obj -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Tpo -c -o @srcimplementation@/geocal_test_all-raw_raster_image_test.obj `if test -f '@srcimplementation@/raw_raster_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/raw_raster_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/raw_raster_image_test.cc'; fi`
-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Tpo @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcimplementation@/raw_raster_image_test.cc' object='@srcimplementation@/geocal_test_all-raw_raster_image_test.obj' libtool=no @AMDEPBACKSLASH@
-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcimplementation@/geocal_test_all-raw_raster_image_test.obj `if test -f '@srcimplementation@/raw_raster_image_test.cc'; then $(CYGPATH_W) '@srcimplementation@/raw_raster_image_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcimplementation@/raw_raster_image_test.cc'; fi`
 
 @srcimplementation@/geocal_test_all-aircraft_orbit_data_test.o: @srcimplementation@/aircraft_orbit_data_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcimplementation@/geocal_test_all-aircraft_orbit_data_test.o -MD -MP -MF @srcimplementation@/$(DEPDIR)/geocal_test_all-aircraft_orbit_data_test.Tpo -c -o @srcimplementation@/geocal_test_all-aircraft_orbit_data_test.o `test -f '@srcimplementation@/aircraft_orbit_data_test.cc' || echo '$(srcdir)/'`@srcimplementation@/aircraft_orbit_data_test.cc
@@ -13027,7 +12844,6 @@ clean-libtool:
 	-rm -rf @srcmsp@/.libs @srcmsp@/_libs
 	-rm -rf @srcmspi@/.libs @srcmspi@/_libs
 	-rm -rf @srcoco3@/.libs @srcoco3@/_libs
-	-rm -rf @srcraw@/.libs @srcraw@/_libs
 	-rm -rf @srcsupport@/.libs @srcsupport@/_libs
 	-rm -rf @srcsupport@/boost/.libs @srcsupport@/boost/_libs
 	-rm -rf @swigmspsrc@/.libs @swigmspsrc@/_libs
@@ -13307,27 +13123,6 @@ uninstall-includeHEADERS:
 	@list='$(include_HEADERS)'; test -n "$(includedir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(includedir)'; $(am__uninstall_files_from_dir)
-install-librawHEADERS: $(libraw_HEADERS)
-	@$(NORMAL_INSTALL)
-	@list='$(libraw_HEADERS)'; test -n "$(librawdir)" || list=; \
-	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(librawdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(librawdir)" || exit 1; \
-	fi; \
-	for p in $$list; do \
-	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
-	  echo "$$d$$p"; \
-	done | $(am__base_list) | \
-	while read files; do \
-	  echo " $(INSTALL_HEADER) $$files '$(DESTDIR)$(librawdir)'"; \
-	  $(INSTALL_HEADER) $$files "$(DESTDIR)$(librawdir)" || exit $$?; \
-	done
-
-uninstall-librawHEADERS:
-	@$(NORMAL_UNINSTALL)
-	@list='$(libraw_HEADERS)'; test -n "$(librawdir)" || list=; \
-	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(librawdir)'; $(am__uninstall_files_from_dir)
 install-sdbxHEADERS: $(sdbx_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(sdbx_HEADERS)'; test -n "$(sdbxdir)" || list=; \
@@ -13873,7 +13668,7 @@ install-pkgpythonmspswigLTLIBRARIES: install-libLTLIBRARIES
 install-pkgpythonswigLTLIBRARIES: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(librawdir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
+	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -13924,8 +13719,6 @@ distclean-generic:
 	-$(am__rm_f) @srcmspi@/$(am__dirstamp)
 	-$(am__rm_f) @srcoco3@/$(DEPDIR)/$(am__dirstamp)
 	-$(am__rm_f) @srcoco3@/$(am__dirstamp)
-	-$(am__rm_f) @srcraw@/$(DEPDIR)/$(am__dirstamp)
-	-$(am__rm_f) @srcraw@/$(am__dirstamp)
 	-$(am__rm_f) @srcsupport@/$(DEPDIR)/$(am__dirstamp)
 	-$(am__rm_f) @srcsupport@/$(am__dirstamp)
 	-$(am__rm_f) @srcsupport@/boost/$(DEPDIR)/$(am__dirstamp)
@@ -14060,7 +13853,6 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po
-	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
@@ -14159,7 +13951,6 @@ distclean: distclean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo
-	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_msp.Plo
@@ -14303,11 +14094,6 @@ distclean: distclean-am
 	-rm -f @srcmspi@/$(DEPDIR)/libgeocal_la-usgs_dem.Plo
 	-rm -f @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po
 	-rm -f @srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-foveon.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Plo
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po
@@ -14513,7 +14299,6 @@ distclean: distclean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo
-	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo
@@ -14605,8 +14390,8 @@ install-data-am: install-afidspythonvdevPROGRAMS \
 	install-dist_afidspythonvdevSCRIPTS install-dist_sdbxdocDATA \
 	install-etcafidspythonDATA install-geocalincHEADERS \
 	install-geocalswigincHEADERS install-includeHEADERS \
-	install-installafidspythonDATA install-librawHEADERS \
-	install-pkgconfigDATA install-pkgpythonmspswigLTLIBRARIES \
+	install-installafidspythonDATA install-pkgconfigDATA \
+	install-pkgpythonmspswigLTLIBRARIES \
 	install-pkgpythonmspswigPYTHON install-pkgpythonswigDATA \
 	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
 	install-sdbxHEADERS install-sdbxbtreeHEADERS \
@@ -14754,7 +14539,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-quick_mosaic_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_averaged_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raster_subsample_test.Po
-	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-raw_raster_image_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-ray_intersect_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_msp_test.Po
 	-rm -f @srcimplementation@/$(DEPDIR)/geocal_test_all-refraction_sdp_test.Po
@@ -14853,7 +14637,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_averaged.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_image_tiled_file.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raster_subsample.Plo
-	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-raw_raster_image.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_caster_resampler.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-ray_intersect.Plo
 	-rm -f @srcimplementation@/$(DEPDIR)/libgeocal_la-refraction_msp.Plo
@@ -14997,11 +14780,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcmspi@/$(DEPDIR)/libgeocal_la-usgs_dem.Plo
 	-rm -f @srcoco3@/$(DEPDIR)/geocal_test_all-jia_sample_test.Po
 	-rm -f @srcoco3@/$(DEPDIR)/libgeocal_la-jia_sample.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-dcraw_common.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-dcraw_fileio.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-foveon.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-libraw_c_api.Plo
-	-rm -f @srcraw@/$(DEPDIR)/libraw_la-libraw_cxx.Plo
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po
@@ -15207,7 +14985,6 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_multifile_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raster_subsample_wrap.Plo
-	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-raw_raster_image_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_resampler_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_caster_wrap.Plo
 	-rm -f @swigsrc@/$(DEPDIR)/_swig_wrap_la-ray_intersect_wrap.Plo
@@ -15301,8 +15078,7 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-etcafidspythonDATA uninstall-geocalincHEADERS \
 	uninstall-geocalswigincHEADERS uninstall-includeHEADERS \
 	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
-	uninstall-librawHEADERS uninstall-pkgconfigDATA \
-	uninstall-pkgpythonmspswigLTLIBRARIES \
+	uninstall-pkgconfigDATA uninstall-pkgpythonmspswigLTLIBRARIES \
 	uninstall-pkgpythonmspswigPYTHON uninstall-pkgpythonswigDATA \
 	uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
@@ -15335,8 +15111,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	install-geocalswigincHEADERS install-html install-html-am \
 	install-includeHEADERS install-info install-info-am \
 	install-installafidspythonDATA install-libLTLIBRARIES \
-	install-librawHEADERS install-man install-pdf install-pdf-am \
-	install-pkgconfigDATA install-pkgpythonmspswigLTLIBRARIES \
+	install-man install-pdf install-pdf-am install-pkgconfigDATA \
+	install-pkgpythonmspswigLTLIBRARIES \
 	install-pkgpythonmspswigPYTHON install-pkgpythonswigDATA \
 	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
 	install-ps install-ps-am install-sdbxHEADERS \
@@ -15355,8 +15131,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-etcafidspythonDATA uninstall-geocalincHEADERS \
 	uninstall-geocalswigincHEADERS uninstall-hook \
 	uninstall-includeHEADERS uninstall-installafidspythonDATA \
-	uninstall-libLTLIBRARIES uninstall-librawHEADERS \
-	uninstall-pkgconfigDATA uninstall-pkgpythonmspswigLTLIBRARIES \
+	uninstall-libLTLIBRARIES uninstall-pkgconfigDATA \
+	uninstall-pkgpythonmspswigLTLIBRARIES \
 	uninstall-pkgpythonmspswigPYTHON uninstall-pkgpythonswigDATA \
 	uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
@@ -15471,11 +15247,6 @@ clean_unit_test:
 @WITH_DOCUMENTATION_TRUE@	@echo "Note, this should usually be done from the main branch only"
 @WITH_DOCUMENTATION_TRUE@	cd $(srcdir) && ghp-import $(abs_builddir)/doc/geocal/html -m "Update doxygen documentation"
 @WITH_DOCUMENTATION_TRUE@	@echo "You now need to push the gh-pages branchs to github for these to be visible (git push origin gh-pages)"
-# We don't use this for anything, so don't bother to build
-#bin_PROGRAMS += dcraw
-#dcraw_SOURCES = @srcraw@/simple_dcraw.cpp
-#dcraw_LDADD = libraw.la
-#AM_CPPFLAGS += -I$(srcdir)/@srcraw@
 
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@swigrules@/include

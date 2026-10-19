@@ -299,6 +299,13 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ac_vicar_rtl.m4 \
 	$(top_srcdir)/config/m4/afids_common.m4 \
 	$(top_srcdir)/config/m4/afids_python.m4 \
+	$(top_srcdir)/config/m4/ax_boost_base.m4 \
+	$(top_srcdir)/config/m4/ax_boost_date_time.m4 \
+	$(top_srcdir)/config/m4/ax_boost_filesystem.m4 \
+	$(top_srcdir)/config/m4/ax_boost_iostreams.m4 \
+	$(top_srcdir)/config/m4/ax_boost_regex.m4 \
+	$(top_srcdir)/config/m4/ax_boost_serialization.m4 \
+	$(top_srcdir)/config/m4/ax_boost_system.m4 \
 	$(top_srcdir)/config/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/config/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
@@ -2852,11 +2859,14 @@ BLITZ_LIBS = @BLITZ_LIBS@
 # too new to require, so we stick with boost.
 BOOST_CPPFLAGS = @BOOST_CPPFLAGS@ -DBOOST_FILESYSTEM_VERSION=3
 BOOST_DATETIME_LIB = @BOOST_DATETIME_LIB@
+BOOST_DATE_TIME_LIB = @BOOST_DATE_TIME_LIB@
 BOOST_FILESYSTEM_LIB = @BOOST_FILESYSTEM_LIB@
 BOOST_IOSTREAMS_LIB = @BOOST_IOSTREAMS_LIB@
+BOOST_LDFLAGS = @BOOST_LDFLAGS@
 BOOST_LIBDIR = @BOOST_LIBDIR@
 BOOST_REGEX_LIB = @BOOST_REGEX_LIB@
 BOOST_SERIALIZATION_LIB = @BOOST_SERIALIZATION_LIB@
+BOOST_SYSTEM_LIB = @BOOST_SYSTEM_LIB@
 CARTO_CFLAGS = @CARTO_CFLAGS@
 CARTO_LIBS = @CARTO_LIBS@
 CC = @CC@

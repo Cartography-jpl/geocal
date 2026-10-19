@@ -488,5 +488,6 @@ void OrbitOffsetCorrection::orbit_correction_yprt
     Delta_yprt_corr(i, 2) = (ocorr.roll() - ouncorr.roll()) * deg_to_arcsecond;
     Delta_yprt_corr(i, 3) = quaternion_delta_angle(ocorr.sc_to_ci(), ouncorr.sc_to_ci()) *
       Constant::rad_to_arcsecond;
+    ++i;
   }
 }

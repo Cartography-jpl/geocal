@@ -21,7 +21,7 @@ AC_DEFUN([AC_MSP],
 [
 # Guard against running twice
 if test "x$done_msp" = "x"; then
-AC_HANDLE_WITH_ARG_DEFAULT_NO([msp], [msp], [MSP], [cannot_build], [default_search], $1)
+AC_HANDLE_WITH_ARG_DEFAULT_NO([msp], [msp], [MSP], $1)
 have_msp="no"
 if test "x$want_msp" = "xyes"; then
         AC_MSG_CHECKING([for MSP library])
@@ -58,9 +58,8 @@ if test "x$want_msp" = "xyes"; then
 fi
 AC_SUBST(have_msp)
 AM_CONDITIONAL([HAVE_MSP], [test "$have_msp" = "yes"])
-AM_CONDITIONAL([BUILD_MSP], [test "$build_msp" = "yes"])
 
-AC_CHECK_FOUND([msp], [msp],[MSP],$1,[cannot_build])
+AC_CHECK_FOUND([msp], [msp],[MSP],$1)
 
 done_msp="yes"
 fi

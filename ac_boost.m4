@@ -1,6 +1,6 @@
 # SYNOPSIS
 #
-#   AC_BOOST([required], [can_build], [default_build], [MINIMUM-VERSION])
+#   AC_BOOST([required], [MINIMUM-VERSION])
 #
 # DESCRIPTION
 #
@@ -13,30 +13,17 @@
 # a link line (e.g., it might be "-lboost_regex" on a number of linux
 # systems). We can extend this with other boost libraries if needed, but
 # right now this is all we use.
-# 
-# To allow users to build there own copy of BOOST, we also define
-# BUILD_BOOST
-#
-# A particular package might not have the library source code, so you
-# can supply the "can_build" argument as "can_build". Empty string means we
-# can't build this, and various help messages etc. are adjusted for this.
 #
 # Not finding this library might or might not indicate an error. If you
 # want an error to occur if we don't find the library, then specify
 # "required". Otherwise, leave it as empty and we'll just silently
 # return if we don't find the library.
-# 
-# If the user doesn't otherwise specify the "with" argument for this
-# library, we can either have a default behavior of searching for the
-# library on the system or of building our own copy of it. You can
-# specify "default_build" if this should build, otherwise we just look
-# for this on the system.
 
 AC_DEFUN([AC_BOOST],
 [
 # Guard against running twice
 if test "x$done_boost" = "x"; then
-AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $2, $3, $1)
+AC_HANDLE_WITH_ARG([boost], [boost], [BOOST], $1)
 
 # GCC has -isystem like -I. The advantage is is knows not to warn about
 # things in the header files we can't change. Boost has a number of things like
@@ -47,7 +34,7 @@ else
     boost_include="-I"
 fi
 if test "x$want_boost" = "xyes"; then
-        boost_lib_version_req=ifelse([$4], ,1.20.0,$4)
+        boost_lib_version_req=ifelse([$2], ,1.20.0,$2)
         boost_lib_version_req_shorten=`expr $boost_lib_version_req : '\([[0-9]]*\.[[0-9]]*\)'`
         boost_lib_version_req_major=`expr $boost_lib_version_req : '\([[0-9]]*\)'`
         boost_lib_version_req_minor=`expr $boost_lib_version_req : '[[0-9]]*\.\([[0-9]]*\)'`
@@ -73,27 +60,8 @@ if test "x$want_boost" = "xyes"; then
                   fi
             done
         fi
-	if test "$succeeded" != "yes" -a "x$build_needed_boost" == "xyes" ; then
-            build_boost="yes"
-            ac_boost_path="\${prefix}"
-            BOOST_CPPFLAGS="$boost_include$ac_boost_path/include"
-            succeeded=yes
-        fi
         if test "$succeeded" = "yes" ; then
             boost_done=no
-            if test "$build_boost" = "yes"; then
-               BOOST_LIBDIR="$ac_boost_path/lib"
-               BOOST_REGEX_LIB="-lboost_regex"
-               BOOST_FILESYSTEM_LIB="-lboost_filesystem"
-               if test -e "$ac_boost_path/lib/libboost_system.so" -o -e "$ac_boost_path/lib/libboost_system.la" -o -e "$ac_boost_path/lib/libboost_system.dylib"; then
-                  BOOST_FILESYSTEM_LIB="$BOOST_FILESYSTEM_LIB -lboost_system"
-               fi
-               BOOST_DATETIME_LIB="-lboost_date_time"
-               BOOST_IOSTREAMS_LIB="-lboost_iostreams"
-               BOOST_SERIALIZATION_LIB="-lboost_serialization"
-               AC_DEFINE(HAVE_BOOST_SERIALIZATION_BOOST_ARRAY_HPP,,[Defined if we have boost/serialization/boost_array.hpp])
-               boost_done=yes
-            fi
             for ac_boost_lib_base in "$ac_boost_path/lib" "$ac_boost_path/lib64"; do
               if test "$boost_done" = "no"; then
                 for ac_boost_lib in libboost_regex.la libboost_regex.so libboost_regex.dylib ; do
@@ -134,9 +102,6 @@ if test "x$want_boost" = "xyes"; then
 	        boost_version_check_needed=no
                 succeeded=no
             fi
-        fi
-        if test "x$build_boost" == "xyes" ; then
-	   boost_version_check_needed=no
         fi
         if test "$boost_version_check_needed" = "yes"; then
 	   CPPFLAGS_SAVED="$CPPFLAGS"
@@ -240,8 +205,7 @@ if test "x$want_boost" = "xyes"; then
         fi
 fi
 AM_CONDITIONAL([HAVE_BOOST], [test "$have_boost" = "yes"])
-AM_CONDITIONAL([BUILD_BOOST], [test "$build_boost" = "yes"])
-AC_CHECK_FOUND([boost], [boost],[BOOST],$1,$2)
+AC_CHECK_FOUND([boost], [boost],[BOOST],$1)
 done_boost="yes"
 fi
 ])

@@ -19,13 +19,25 @@ AC_DEFUN([AFIDS_PYTHON],
 if test "x$done_python" = "x"; then
 AC_HANDLE_WITH_ARG([python], [python], [Python], $1)
 if test "x$want_python" = "xyes"; then
+   # Where to look for python and python related programs (e.g., pytest,
+   # sphinx-build).
+   if test "x$THIRDPARTY" = x ; then
+      python_search_path=$PATH
+   else
+      python_search_path=$THIRDPARTY/bin:$PATH
+   fi
+   if test "x$CONDA_PREFIX" != x ; then
+      python_search_path=$CONDA_PREFIX/bin:$python_search_path
+   fi
    AC_MSG_CHECKING([for python])
    succeeded=no
    if test "$1" == "required"; then
         if test "x$PYTHON" = "x" -a "x$ac_python_path" != "x"; then
             PYTHON=$ac_python_path
 	fi
-	AC_PYTHON_DEVEL([3.4.0])
+	AC_PATH_PROG([PYTHON],[python[$PYTHON_VERSION]], [], [$python_search_path])
+	AX_PYTHON_DEVEL([>= '3.4.0'])
+	PYTHON_PREFIX=`$PYTHON -c "import sys; print(sys.prefix)"`
 	old_ld_library_path="$LD_LIBRARY_PATH"
 	PYTHON_LDPATH=$PYTHON_PREFIX/lib:$PYTHON_PREFIX/lib64:
 	export LD_LIBRARY_PATH=$PYTHON_LDPATH$LD_LIBRARY_PATH
@@ -61,7 +73,8 @@ if test "x$want_python" = "xyes"; then
         if test "x$PYTHON" = "x" -a "x$ac_python_path" != "x"; then
             PYTHON=$ac_python_path
 	fi
-        AC_PYTHON_DEVEL([>= '3.4.0'])
+	AC_PATH_PROG([PYTHON],[python[$PYTHON_VERSION]], [], [$python_search_path])
+        AX_PYTHON_DEVEL([>= '3.4.0'])
         if test "x$PYTHON" != "x"; then
            pythondir=`$PYTHON -c "import sysconfig; print(sysconfig.get_path('purelib', vars={'base': '', 'platbase': ''}).lstrip('/'))"`
            platpythondir=`$PYTHON -c "import sysconfig; print(sysconfig.get_path('platlib', vars={'base': '', 'platbase': ''}).lstrip('/'))"`

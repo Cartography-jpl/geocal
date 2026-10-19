@@ -1,9 +1,6 @@
 if(! $?AFIDSPYTHONTOP) then
     setenv AFIDSPYTHONTOP @prefix@
 endif
-if("@build_python@" == "yes") then
-    setenv PYTHONHOME ${AFIDSPYTHONTOP}
-endif
 if($?PYTHONPATH) then
   setenv PYTHONPATH ${AFIDSPYTHONTOP}/@pythondir@:${AFIDSPYTHONTOP}/@platpythondir@:${PYTHONPATH}
 else

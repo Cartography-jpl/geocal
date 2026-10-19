@@ -40,9 +40,6 @@
 /* Define to 1 if you have the <dlfcn.h> header file. */
 #undef HAVE_DLFCN_H
 
-/* Defined if we have Expat */
-#undef HAVE_EXPAT
-
 /* Defined if we have FFTW */
 #undef HAVE_FFTW
 
@@ -51,9 +48,6 @@
 
 /* Defined if we have GDAL and VICAR RTL */
 #undef HAVE_GDAL_VICAR_RTL
-
-/* Defined if we have GEOS */
-#undef HAVE_GEOS
 
 /* Defined if we have Geotiff */
 #undef HAVE_GEOTIFF
@@ -90,12 +84,6 @@
 
 /* Define to 1 if <ncurses.h> is present */
 #undef HAVE_NCURSES_H
-
-/* Defined if we have Ogdi */
-#undef HAVE_OGDI
-
-/* Defined if we have Openjpeg */
-#undef HAVE_OPENJPEG
 
 /* Define if you have POSIX threads libraries and header files. */
 #undef HAVE_PTHREAD

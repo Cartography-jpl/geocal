@@ -31,8 +31,6 @@ libgeocal_la_CPPFLAGS+= $(SPICE_CFLAGS) $(FFTW_CFLAGS) -I$(srcdir)/$(srcraw)
 libgeocal_la_CPPFLAGS+= $(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(CODE_COVERAGE_CPPFLAGS)
 libgeocal_la_CPPFLAGS+= $(OPENMP_CFLAGS) $(GEOTIFF_CFLAGS)
 
-EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND)
-EXTRA_libgeocal_la_DEPENDENCIES+= $(CARTO_BUILD_DEPEND)
 
 if HAVE_GDAL
 # Include gdal in builds
@@ -133,10 +131,6 @@ export AFIDS_COPERNICUS_DEM = @copernicusdem@
 export AFIDS_COPERNICUS_LWM = @copernicuslwm@
 export VICAR_GDALPLUGIN_HOME
 export GDAL_DRIVER_PATH=$(VICAR_GDALPLUGIN_HOME)
-
-if BUILD_VICAR_GDALPLUGIN
-EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
-endif
 
 #=================================================================
 # Normally check builds all the libraries and executables. This

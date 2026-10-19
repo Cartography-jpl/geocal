@@ -278,10 +278,8 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ac_copy_dir.m4 \
 	$(top_srcdir)/config/m4/ac_doxygen.m4 \
 	$(top_srcdir)/config/m4/ac_enable_debug.m4 \
-	$(top_srcdir)/config/m4/ac_expat.m4 \
 	$(top_srcdir)/config/m4/ac_fftw.m4 \
 	$(top_srcdir)/config/m4/ac_gdal.m4 \
-	$(top_srcdir)/config/m4/ac_geos.m4 \
 	$(top_srcdir)/config/m4/ac_geotiff.m4 \
 	$(top_srcdir)/config/m4/ac_gsl.m4 \
 	$(top_srcdir)/config/m4/ac_handle_with_arg.m4 \
@@ -290,9 +288,6 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ac_is_mac.m4 \
 	$(top_srcdir)/config/m4/ac_msp.m4 \
 	$(top_srcdir)/config/m4/ac_mspi_shared.m4 \
-	$(top_srcdir)/config/m4/ac_ogdi.m4 \
-	$(top_srcdir)/config/m4/ac_openjpeg.m4 \
-	$(top_srcdir)/config/m4/ac_perl_module.m4 \
 	$(top_srcdir)/config/m4/ac_pkg_swig.m4 \
 	$(top_srcdir)/config/m4/ac_python.m4 \
 	$(top_srcdir)/config/m4/ac_python_module_with_version.m4 \
@@ -304,9 +299,11 @@ am__aclocal_m4_deps =  \
 	$(top_srcdir)/config/m4/ac_vicar_rtl.m4 \
 	$(top_srcdir)/config/m4/afids_common.m4 \
 	$(top_srcdir)/config/m4/afids_python.m4 \
+	$(top_srcdir)/config/m4/ax_check_gnu_make.m4 \
 	$(top_srcdir)/config/m4/ax_code_coverage.m4 \
 	$(top_srcdir)/config/m4/ax_compare_version.m4 \
 	$(top_srcdir)/config/m4/ax_cxx_compile_stdcxx.m4 \
+	$(top_srcdir)/config/m4/ax_prog_perl_modules.m4 \
 	$(top_srcdir)/config/m4/ax_pthread.m4 \
 	$(top_srcdir)/config/m4/ax_require_defined.m4 \
 	$(top_srcdir)/config/m4/ax_with_curses.m4 \
@@ -2860,7 +2857,6 @@ BOOST_IOSTREAMS_LIB = @BOOST_IOSTREAMS_LIB@
 BOOST_LIBDIR = @BOOST_LIBDIR@
 BOOST_REGEX_LIB = @BOOST_REGEX_LIB@
 BOOST_SERIALIZATION_LIB = @BOOST_SERIALIZATION_LIB@
-CARTO_BUILD_DEPEND = @CARTO_BUILD_DEPEND@
 CARTO_CFLAGS = @CARTO_CFLAGS@
 CARTO_LIBS = @CARTO_LIBS@
 CC = @CC@
@@ -2895,26 +2891,18 @@ DUMPBIN = @DUMPBIN@
 ECHO_C = @ECHO_C@
 ECHO_N = @ECHO_N@
 ECHO_T = @ECHO_T@
-ECW_CFLAGS = @ECW_CFLAGS@
-ECW_LIBS = @ECW_LIBS@
 EGREP = @EGREP@
 ETAGS = @ETAGS@
 EXEEXT = @EXEEXT@
-EXPAT_CFLAGS = @EXPAT_CFLAGS@
-EXPAT_LIBS = @EXPAT_LIBS@
-EXPAT_PREFIX = @EXPAT_PREFIX@
 FFTW_CFLAGS = @FFTW_CFLAGS@
 FFTW_LIBS = @FFTW_LIBS@
 FGREP = @FGREP@
 FILECMD = @FILECMD@
 GCOV = @GCOV@
 GDAL_CFLAGS = @GDAL_CFLAGS@
-GDAL_EXTRA_ARG = @GDAL_EXTRA_ARG@
 GDAL_LIBS = @GDAL_LIBS@
 GDAL_PREFIX = @GDAL_PREFIX@
 GENHTML = @GENHTML@
-GEOS_CFLAGS = @GEOS_CFLAGS@
-GEOS_LIBS = @GEOS_LIBS@
 GEOTIFF_CFLAGS = @GEOTIFF_CFLAGS@
 GEOTIFF_LIBS = @GEOTIFF_LIBS@
 GEOTIFF_PREFIX = @GEOTIFF_PREFIX@
@@ -2963,12 +2951,6 @@ NM = @NM@
 NMEDIT = @NMEDIT@
 OBJDUMP = @OBJDUMP@
 OBJEXT = @OBJEXT@
-OGDI_CFLAGS = @OGDI_CFLAGS@
-OGDI_LIBS = @OGDI_LIBS@
-OGDI_PREFIX = @OGDI_PREFIX@
-OPENJPEG_CFLAGS = @OPENJPEG_CFLAGS@
-OPENJPEG_LIBS = @OPENJPEG_LIBS@
-OPENJPEG_PREFIX = @OPENJPEG_PREFIX@
 OTOOL = @OTOOL@
 OTOOL64 = @OTOOL64@
 PACKAGE = @PACKAGE@
@@ -2979,6 +2961,7 @@ PACKAGE_TARNAME = @PACKAGE_TARNAME@
 PACKAGE_URL = @PACKAGE_URL@
 PACKAGE_VERSION = @PACKAGE_VERSION@
 PATH_SEPARATOR = @PATH_SEPARATOR@
+PERL = @PERL@
 PKG_CONFIG = @PKG_CONFIG@
 PKG_CONFIG_LIBDIR = @PKG_CONFIG_LIBDIR@
 PKG_CONFIG_PATH = @PKG_CONFIG_PATH@
@@ -2990,12 +2973,9 @@ PYTEST = @PYTEST@
 PYTHON = @PYTHON@
 PYTHON_CONFIG = @PYTHON_CONFIG@
 PYTHON_CPPFLAGS = @PYTHON_CPPFLAGS@
-PYTHON_EXEC_PREFIX = @PYTHON_EXEC_PREFIX@
 PYTHON_LDFLAGS = @PYTHON_LDFLAGS@
 PYTHON_LDPATH = @PYTHON_LDPATH@
 PYTHON_NUMPY_CPPFLAGS = @PYTHON_NUMPY_CPPFLAGS@
-PYTHON_PLATFORM = @PYTHON_PLATFORM@
-PYTHON_PREFIX = @PYTHON_PREFIX@
 PYTHON_VERSION = @PYTHON_VERSION@
 RANLIB = @RANLIB@
 SED = @SED@
@@ -3013,7 +2993,6 @@ THIRDPARTY = @THIRDPARTY@
 VERSION = @VERSION@
 VICAR_GDALPLUGIN_HOME = @VICAR_GDALPLUGIN_HOME@
 VICAR_GDALPLUGIN_HOME_ABS = @VICAR_GDALPLUGIN_HOME_ABS@
-VICAR_RTL_BUILD_DEPEND = @VICAR_RTL_BUILD_DEPEND@
 VICAR_RTL_CFLAGS = @VICAR_RTL_CFLAGS@
 VICAR_RTL_LIBS = @VICAR_RTL_LIBS@
 VICMAIN_FOR_LOCATION = @VICMAIN_FOR_LOCATION@
@@ -3039,7 +3018,6 @@ build = @build@
 build_alias = @build_alias@
 build_cpu = @build_cpu@
 build_os = @build_os@
-build_python = @build_python@
 build_vendor = @build_vendor@
 builddir = @builddir@
 copernicusdem = @copernicusdem@
@@ -3064,6 +3042,8 @@ host_cpu = @host_cpu@
 host_os = @host_os@
 host_vendor = @host_vendor@
 htmldir = @htmldir@
+ifGNUmake = @ifGNUmake@
+ifnGNUmake = @ifnGNUmake@
 includedir = @includedir@
 infodir = @infodir@
 install_sh = @install_sh@
@@ -3080,13 +3060,11 @@ mkdir_p = @mkdir_p@
 oldincludedir = @oldincludedir@
 pdfdir = @pdfdir@
 pkgconfigdir = @pkgconfigdir@
-pkgpyexecdir = @pkgpyexecdir@
 pkgpythondir = @pkgpythondir@
 platpythondir = @platpythondir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
-pyexecdir = @pyexecdir@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
 pythonswigsrc = @pythonswigsrc@
@@ -4372,8 +4350,6 @@ libgeocal_la_CPPFLAGS = $(AM_CPPFLAGS) $(VICAR_RTL_CFLAGS) \
 	$(am__append_2) $(am__append_4) $(am__append_6) \
 	$(am__append_8) -DSWIG_MAPPER_NAMESPACE=GeoCal \
 	$(am__append_33)
-EXTRA_libgeocal_la_DEPENDENCIES = $(VICAR_RTL_BUILD_DEPEND) \
-	$(CARTO_BUILD_DEPEND)
 libgeocal_la_LIBADD = $(CARTO_LIBS) $(VICAR_RTL_LIBS) $(FLIBS) \
 	$(am__append_9) $(SPICE_LIBS) $(MSPI_SHARED_LIBS)
 
@@ -4391,7 +4367,6 @@ geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
 	-I$(srcdir)/$(srcraw) $(BLITZ_CFLAGS) $(CARTO_CFLAGS) \
 	$(GDAL_CFLAGS) $(HDF5_CFLAGS) -DSWIG_MAPPER_NAMESPACE=GeoCal \
 	$(am__append_35)
-@BUILD_VICAR_GDALPLUGIN_TRUE@EXTRA_geocal_test_all_DEPENDENCIES = install_vicar_gdalplugin_early
 MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
@@ -4472,7 +4447,7 @@ _swig_wrap_la_LIBADD = $(SWIG_LIBADD)
 _swig_wrap_la_SOURCES = $(COMPILE_SWIG_SRC) $(ADDITONAL_SWIG_SRC) \
 	@swigsrc@/swig_wrap.cc
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_SOURCES = @srcgeocalbin@/picmtch5.cc
-@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf $(CARTO_BUILD_DEPEND)
+@HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@EXTRA_picmtch5_DEPENDENCIES = picmtch5.pdf
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_LDADD = libgeocal.la
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@picmtch5_CPPFLAGS = $(AM_CPPFLAGS) \
 @HAVE_CARTO_TRUE@@HAVE_FFTW_TRUE@@HAVE_VICAR_RTL_TRUE@	$(VICAR_RTL_CFLAGS) \

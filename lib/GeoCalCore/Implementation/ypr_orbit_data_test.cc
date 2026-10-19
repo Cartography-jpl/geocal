@@ -15,7 +15,7 @@ public:
     boost::array<double, 3> pos = {{7000e3, 0, 0}};
     pos_cf.reset(new Ecr(pos[0], pos[1], pos[2]));
 
-    // Convert to ECI for alternate constructor
+    // Convert to CI for alternate constructor
     pos_ci = pos_cf->convert_to_ci(t);
 
     // Typical orbital velocity
@@ -106,13 +106,13 @@ BOOST_AUTO_TEST_CASE(conversion_from_quaternion_cf)
 {
   // Create a YprOrbitData first to get the orbital frame
   YprOrbitData ypr_temp(t, pos_ci, vel_ci, yaw, pitch, roll);
-  boost::math::quaternion<double> orbital_to_eci = ypr_temp.orbital_to_eci();
+  boost::math::quaternion<double> orbital_to_ci = ypr_temp.orbital_to_ci();
 
-  // Combine with sc_to_orbital to get sc_to_eci
-  boost::math::quaternion<double> sc_to_eci = orbital_to_eci * quat_sc_to_orb;
+  // Combine with sc_to_orbital to get sc_to_ci
+  boost::math::quaternion<double> sc_to_ci = orbital_to_ci * quat_sc_to_orb;
 
   // Create QuaternionOrbitData with this attitude
-  QuaternionOrbitData qod(t, pos_ci, vel_ci, sc_to_eci);
+  QuaternionOrbitData qod(t, pos_ci, vel_ci, sc_to_ci);
 
   // Convert to YprOrbitData
   YprOrbitData ypr(qod);
@@ -188,10 +188,10 @@ BOOST_AUTO_TEST_CASE(zero_angles)
   BOOST_CHECK_CLOSE(ypr.pitch(), 0.0, 1e-6);
   BOOST_CHECK_CLOSE(ypr.roll(), 0.0, 1e-6);
 
-  // Check that orbital_to_eci quaternion is calculated
-  boost::math::quaternion<double> orb_to_eci = ypr.orbital_to_eci();
+  // Check that orbital_to_ci quaternion is calculated
+  boost::math::quaternion<double> orb_to_ci = ypr.orbital_to_ci();
   // Just verify it's not NaN
-  BOOST_CHECK(orb_to_eci.R_component_1() == orb_to_eci.R_component_1());
+  BOOST_CHECK(orb_to_ci.R_component_1() == orb_to_ci.R_component_1());
 }
 
 BOOST_AUTO_TEST_CASE(large_angles)

@@ -19,32 +19,30 @@ AFIDS_COMMON
 AX_WITH_CURSES
 
 AC_ARG_VAR([THIRDPARTY], [
-It is common that either 1) you want to build a local copy of all
-thirdparty software or 2) you have a central location not already
-searched for that you want to be searched. You can specify
-THIRDPARTY=build or THIRDPARTY=<directory>. This gets added to all
-the third party library checks.
+If you have a central location not already searched for third party
+software, you can specify THIRDPARTY=<directory>. This gets added to
+all the third party library checks.
 ])
 
 #=================================================================
 # Need to find VICAR RTL library
-AC_VICAR_RTL(optional, cannot_build, default_search)
+AC_VICAR_RTL(optional)
 
 #=================================================================
 # Need to have AFIDS data
-AC_AFIDS_DATA(optional, cannot_build, default_search)
+AC_AFIDS_DATA(optional)
 
 #=================================================================
 # MSPI-Shared library. We can only use MSPI-Shared if we also have
 # HDFEOS5 which is depends on.
-AC_HDFEOS5(optional, cannot_build, default_search)
+AC_HDFEOS5(optional)
 
-AC_MSPI_SHARED(optional, cannot_build, default_search)
+AC_MSPI_SHARED(optional)
 
 #=================================================================
 # Mensuration Service Program (MSP) from BAE. Used only for
 # test validation.
-AC_MSP(optional, cannot_build, default_search)
+AC_MSP(optional)
 
 #=================================================================
 # Various thirdparty libraries.
@@ -52,20 +50,20 @@ AC_MSP(optional, cannot_build, default_search)
 # There is a a series of bugs in older version of the boost serialization
 # library. So we require at least 1.46. This is the version we currently
 # distribute with afids.
-AC_BOOST(required, can_build, default_search, 1.46.0)
-AC_BLITZ(required, cannot_build, default_search)
-AC_GSL(required, cannot_build, default_search)
+AC_BOOST(required, 1.46.0)
+AC_BLITZ(required)
+AC_GSL(required)
 # We'll make this optional at some point, but for now this is still required
-AC_SPICE(required, cannot_build, default_search)
-AC_HDF5(optional, cannot_build, default_search)
-AC_DOXYGEN(optional, cannot_build, default_search)
-AC_FFTW(optional, cannot_build, default_search)
+AC_SPICE(required)
+AC_HDF5(optional)
+AC_DOXYGEN(optional)
+AC_FFTW(optional)
 # We might make this optional at some point, but right now a lot of
 # unit tests depend on this. We could switch to having most tests use
 # VicarLite files, but we won't do that yet.
-AC_GDAL(required, cannot_build, default_search)
-AC_VICAR_GDALPLUGIN(optional, cannot_build, default_search)
-AC_GEOTIFF(required, cannot_build, default_search)
+AC_GDAL(required)
+AC_VICAR_GDALPLUGIN(optional)
+AC_GEOTIFF(required)
 
 #=================================================================
 # Have a little bit of code that depends on having both GDAL
@@ -78,17 +76,17 @@ fi
 #=================================================================
 # We have some unit tests that make use of vicarb if it is available.
 # It is fine if it isn't, we just skip these tests.
-AC_AFIDS(optional, cannot_build, default_search)
+AC_AFIDS(optional)
 
 #=================================================================
 # Need to find carto library. (Need to have this after VICAR_RTL 
 # and GSL, because it uses variables from those functions)
-AC_CARTO(optional, cannot_build, default_search)
+AC_CARTO(optional)
 
 #=================================================================
 # Build or find python
 
-AFIDS_PYTHON(required, can_build, default_search)
+AFIDS_PYTHON(required)
 
 #=================================================================
 # We have not needed to read RAW format images for a while, and

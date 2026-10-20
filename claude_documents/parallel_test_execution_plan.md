@@ -2,7 +2,16 @@
 
 **Date:** 2026-06-20  
 **Author:** Claude Code (Sonnet 4.5)  
-**Status:** Planning - Not Yet Implemented
+**Status:** Explored 2026-10-19 and rejected (see Outcome below)
+
+> **Outcome (2026-10-19): explored, not adopted.** We prototyped a variant of
+> Approach 1 that listed the top-level Boost suites at run time
+> (`--list_content`) and ran each in its own process with `xargs -P`, as the
+> `TESTS` entry. It worked and was stable (repeated runs, no failures), taking
+> `make check` from ~41s to ~22s. It was backed out because a 2x gain is not
+> worth the extra script and build complexity. The gain is modest because many
+> tests already use OpenMP, so the serial run already uses the cores (5m45s
+> user in 41s real); process parallelism mostly competes with that.
 
 ## Executive Summary
 

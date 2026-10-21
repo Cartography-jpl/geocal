@@ -172,10 +172,11 @@ To create a new project that extends GeoCal (e.g., adding instrument-specific ca
 
 1. **Install is not parallel**: `make install` must run single-threaded
 2. **Python tests need install**: Don't run `pytest` before `make install`
-3. **SPICE data**: Set `SPICEDATA` environment variable for SPICE operations (not needed for unit tests)
-4. **Libtool and debugging**: Use `./libtool --mode=execute gdb` to debug executables
-5. **Autotools regeneration**: Run `./bootstrap` if you modify `configure.ac` or `.am` files
-6. **SWIG not needed for builds**: Only needed to regenerate wrappers during development
+3. **`rsm_nitf_test` needs install too**: This is a C++ unit test, but it calls the installed `boost_nitf_rsm` python script through `boost_pcall` (see `lib/GeoCalCore/Support/boost_pcall.h`). The test silently returns (and passes) if `boost_nitf_rsm` isn't on the PATH, so it only really runs when the build's `bin` directory is installed and on the PATH. To exercise it (and `boost_pcall` generally), run `make install` before running `geocal_test_all`. This is nonstandard for C++ tests, but required for this one.
+4. **SPICE data**: Set `SPICEDATA` environment variable for SPICE operations (not needed for unit tests)
+5. **Libtool and debugging**: Use `./libtool --mode=execute gdb` to debug executables
+6. **Autotools regeneration**: Run `./bootstrap` if you modify `configure.ac` or `.am` files
+7. **SWIG not needed for builds**: Only needed to regenerate wrappers during development
 
 ## Development Workflow
 

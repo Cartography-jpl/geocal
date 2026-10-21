@@ -63,6 +63,21 @@ if test "$have_boost" = "yes"; then
     # Our link lines expect these names. We also need boost system with
     # filesystem
     BOOST_FILESYSTEM_LIB="$BOOST_FILESYSTEM_LIB $BOOST_SYSTEM_LIB"
+
+    # Boost 1.88 and later has process v2 as a compiled library, older
+    # versions are header only. If we have the library we need to link to
+    # it (we use process v2 in boost_pcall.h). The library has the same name
+    # with the -mt variant that AX_BOOST_* handles. We tack this on to
+    # BOOST_FILESYSTEM_LIB, so it ends up on the link line and in geocal.pc
+    # without needing a separate variable.
+    LDFLAGS_SAVED="$LDFLAGS"
+    LDFLAGS="$LDFLAGS $BOOST_LDFLAGS"
+    for boost_process_lib in boost_process boost_process-mt; do
+        AC_CHECK_LIB([$boost_process_lib], [main],
+                     [BOOST_FILESYSTEM_LIB="$BOOST_FILESYSTEM_LIB -l$boost_process_lib"; break],
+                     [], [])
+    done
+    LDFLAGS="$LDFLAGS_SAVED"
     BOOST_DATETIME_LIB="$BOOST_DATE_TIME_LIB"
 
     # The library directory, used in the pkg-config file and for -R

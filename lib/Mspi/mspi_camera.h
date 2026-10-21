@@ -158,7 +158,15 @@ public:
   {
     notify_update_do(*this);
   }
-protected:
+
+  virtual FrameCoordinate focal_plane_to_fc(int Band, double Xfp, double Yfp) const;
+  virtual FrameCoordinateWithDerivative focal_plane_to_fc(int Band,
+                                                          const AutoDerivative<double>& Xfp,
+                                                          const AutoDerivative<double>& Yfp) const;
+  virtual void fc_to_focal_plane(const FrameCoordinate& Fc, int Band,
+                                 double& Xfp, double& Yfp) const;
+  virtual void fc_to_focal_plane(const FrameCoordinateWithDerivative& Fc, int Band,
+                                 AutoDerivative<double>& Xfp, AutoDerivative<double>& Yfp) const;
   virtual void dcs_to_focal_plane(int Band,
 				  const boost::math::quaternion<double>& Dcs,
 				  double& Xfp, double& Yfp) const;
@@ -171,6 +179,15 @@ protected:
   virtual boost::math::quaternion<AutoDerivative<double> > 
   focal_plane_to_dcs(int Band, const AutoDerivative<double>& Xfp, 
 		     const AutoDerivative<double>& Yfp) const;
+  virtual double line_pitch() const {
+    throw Exception("line_pitch() not supported in MspiCamera");
+  }
+
+protected:
+  int line_dir() const
+    { return (line_direction_ == QuaternionCamera::INCREASE_IS_POSITIVE ? 1 : -1); }
+  int samp_dir() const
+    { return (sample_direction_ == QuaternionCamera::INCREASE_IS_POSITIVE ? 1 : -1); }
 private:
   std::string fname, granule_id_;
   // Camera angles, in degrees
@@ -178,6 +195,8 @@ private:
   AutoDerivative<double> yaw_, pitch_, roll_;
   // Give the row number for each band.
   std::vector<int> row_number_;
+  // Transformation to and from the paraxial coordinates
+  std::vector<AutoDerivative<double> > line_pitch_per_band_;
   // Transformation to and from the paraxial coordinates
   boost::shared_ptr<MspiParaxialTransform> paraxial_transform_;
   int inversion_;

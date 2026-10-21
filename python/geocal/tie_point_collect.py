@@ -71,7 +71,7 @@ class TiePointDiagnostic(object):
     def __init__(self, num_image):
         """Initialize all counts to 0."""
         # Have diagnostic codes from 0 to 10.
-        max_diag_code = 10
+        max_diag_code = 11
         # Add in one extra bin for unrecognized codes
         self.image_match_diagnostic = np.zeros(
             (num_image, max_diag_code + 2), dtype=int
@@ -118,6 +118,7 @@ class TiePointDiagnostic(object):
                 "Move past target",
                 "Solve failed",
                 "Exceed max iteration",
+                "IGC/Image Coor Failed",
                 "Other",
             ]
         ):

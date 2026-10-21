@@ -17,7 +17,9 @@ void MspiParaxialTransform::serialize(Archive & ar, const unsigned int version)
     & GEOCAL_NVP_(a)
     & GEOCAL_NVP_(b)
     & GEOCAL_NVP_(c)
-    & GEOCAL_NVP_(d);
+    & GEOCAL_NVP_(d)
+    & GEOCAL_NVP_(y0)
+    & GEOCAL_NVP_(paraxial_y_mode);
 }
 
 GEOCAL_IMPLEMENT(MspiParaxialTransform);
@@ -31,19 +33,30 @@ const int number_c_parameter = 12;
 //-----------------------------------------------------------------------
 
 MspiParaxialTransform::MspiParaxialTransform(const std::string& File_name)
-  :fname(File_name)
+  :fname(File_name),
+   paraxial_y_mode_(0) // default, use real Y input to paraxial Y
 {
   Range ra = Range::all();
   MspiConfigFile config(File_name);
   std::vector<int> row_numbers = 
-    config.value<std::vector<int> >("paraxial_row_numbers");
-  if((int) row_numbers.size() != config.value<int>("paraxial_number_row")) {
+    config.value<std::vector<int> >("row_numbers");
+  if((int) row_numbers.size() != config.value<int>("number_band")) {
     Exception e;
     e << "The number of values in 'paraxial_row_numbers' doesn't match\n"
-      << "the value of 'paraxial_number_row' in the file '"
+      << "the value of 'number_band' in the file '"
       << File_name;
     throw e;
   }
+
+  y0_ = config.value<std::vector<double> >("Y0");
+  if (y0_.size() != row_numbers.size()) {
+    Exception e;
+    e << "The number of values in 'Y0' doesn't match\n"
+      << "the value of 'number_band' in the file '"
+      << File_name;
+    throw e;
+  }
+
   for(int i = 0; i < (int) row_numbers.size(); ++i)
     row_to_index[row_numbers[i]] = i;
   a_.resize((int) row_numbers.size(), number_a_parameter);
@@ -72,6 +85,16 @@ MspiParaxialTransform::MspiParaxialTransform(const std::string& File_name)
     if(scratch.rows() != d_.cols())
       throw Exception("Coefficient is the wrong size");
     d_(i, ra) = scratch;
+  }
+
+  //---------------------------------------------------------------------
+  // Read optional config parameters
+  //
+  // if paraxial_y_mode == 1, then do not use real y input to paraxial y
+  //---------------------------------------------------------------------
+
+  if (config.have_key("paraxial_y_mode")) {
+    paraxial_y_mode_ = config.value<int>("paraxial_y_mode");
   }
 }
 
@@ -200,7 +223,12 @@ void MspiParaxialTransform::real_to_paraxial
   Array<double, 1> bf = b_(index, ra);
 
   double xfp = Real_x;
-  double yfp = Real_y;
+  double yfp;
+  if (paraxial_y_mode_ == 1) {
+    yfp = 0;
+  } else {
+    yfp = Real_y - y0_[index];
+  }
 
   double xfp2 = xfp * xfp;
   double xfp3 = xfp2 * xfp;
@@ -237,7 +265,12 @@ void MspiParaxialTransform::real_to_paraxial
   Array<double, 1> bf = b_(index, ra);
 
   AutoDerivative<double> xfp = Real_x;
-  AutoDerivative<double> yfp = Real_y;
+  AutoDerivative<double> yfp;
+  if (paraxial_y_mode_ == 1) {
+    yfp = 0;
+  } else {
+    yfp = Real_y - y0_[index];
+  }
 
   AutoDerivative<double> xfp2 = xfp * xfp;
   AutoDerivative<double> xfp3 = xfp2 * xfp;

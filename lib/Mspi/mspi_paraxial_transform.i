@@ -35,6 +35,7 @@ public:
   %python_attribute(b, blitz::Array<double, 2>);
   %python_attribute(c, blitz::Array<double, 2>);
   %python_attribute(d, blitz::Array<double, 2>);
+  %python_attribute(y0, std::vector<double>);
   %pickle_serialization();
 };
 }

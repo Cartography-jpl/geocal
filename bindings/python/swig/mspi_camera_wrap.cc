@@ -8515,8 +8515,6 @@ static PyMethodDef SwigMethods[] = {
 		"GeoCal::MspiCamera::read_config_file\n"
 		"Read in the given configuration file.  \n"
 		"\n"
-		"Get mapping from band to row number  \n"
-		"\n"
 		""},
 	 { "MspiCamera__v_file_name", _wrap_MspiCamera__v_file_name, METH_VARARGS, "\n"
 		"MspiCamera__v_file_name(MspiCamera self) -> std::string\n"
@@ -8701,8 +8699,6 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"\n"
 		"GeoCal::MspiCamera::read_config_file\n"
 		"Read in the given configuration file.  \n"
-		"\n"
-		"Get mapping from band to row number  \n"
 		"\n"
 		""},
 	 { "MspiCamera__v_file_name", _wrap_MspiCamera__v_file_name, METH_VARARGS, "\n"

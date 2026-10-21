@@ -3,7 +3,14 @@
 #include "rsm_fixture.h"
 #include "ecr.h"
 #include <boost/make_shared.hpp>
+// Newer boost (1.88 and later) makes process v2 the default and has no
+// separate v2 header, older boost has a separate header. The namespace
+// boost::process::v2 can be used in both.
+#if defined(__has_include) && !__has_include(<boost/process/v2.hpp>)
+#include <boost/process.hpp>
+#else
 #include <boost/process/v2.hpp>
+#endif
 using namespace GeoCal;
 
 BOOST_FIXTURE_TEST_SUITE(rsm_nitf, RsmFixtureRadian)

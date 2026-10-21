@@ -1,6 +1,13 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
+// Newer boost (1.88 and later) makes process v2 the default and has no
+// separate v2 header, older boost has a separate header. The namespace
+// boost::process::v2 can be used in both.
+#if defined(__has_include) && !__has_include(<boost/process/v2.hpp>)
+#include <boost/process.hpp>
+#else
 #include <boost/process/v2.hpp>
+#endif
 #include <boost/asio.hpp>
 #include <sstream>
 #include <vector>

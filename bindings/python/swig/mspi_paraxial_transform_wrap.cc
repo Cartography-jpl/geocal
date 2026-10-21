@@ -5915,6 +5915,473 @@ SWIG_AsVal_int (PyObject * obj, int *val)
   #define SWIG_From_double   PyFloat_FromDouble 
 
 
+namespace swig {
+  template <> struct traits< double > {
+    typedef value_category category;
+    static const char* type_name() { return"double"; }
+  };
+  template <>  struct traits_asval< double > {
+    typedef double value_type;
+    static int asval(PyObject *obj, value_type *val) {
+      return SWIG_AsVal_double (obj, val);
+    }
+  };
+  template <>  struct traits_from< double > {
+    typedef double value_type;
+    static PyObject *from(const value_type& val) {
+      return SWIG_From_double  (val);
+    }
+  };
+}
+
+
+#include <functional>
+
+namespace std {
+  template <>
+  struct less <PyObject *>
+  {
+    bool
+    operator()(PyObject * v, PyObject *w) const
+    { 
+      bool res;
+      SWIG_PYTHON_THREAD_BEGIN_BLOCK;
+      res = PyObject_RichCompareBool(v, w, Py_LT) ? true : false;
+      /* This may fall into a case of inconsistent
+               eg. ObjA > ObjX > ObjB
+               but ObjA < ObjB
+      */
+      if( PyErr_Occurred() && PyErr_ExceptionMatches(PyExc_TypeError) )
+      {
+        /* Objects can't be compared, this mostly occurred in Python 3.0 */
+        /* Compare their ptr directly for a workaround */
+        res = (v < w);
+        PyErr_Clear();
+      }
+      SWIG_PYTHON_THREAD_END_BLOCK;
+      return res;
+    }
+  };
+
+  template <>
+  struct less <swig::SwigPtr_PyObject>
+  {
+    bool
+    operator()(const swig::SwigPtr_PyObject& v, const swig::SwigPtr_PyObject& w) const
+    {
+      return std::less<PyObject *>()(v, w);
+    }
+  };
+
+  template <>
+  struct less <swig::SwigVar_PyObject>
+  {
+    bool
+    operator()(const swig::SwigVar_PyObject& v, const swig::SwigVar_PyObject& w) const
+    {
+      return std::less<PyObject *>()(v, w);
+    }
+  };
+
+}
+
+namespace swig {
+  template <> struct traits<PyObject *> {
+    typedef value_category category;
+    static const char* type_name() { return "PyObject *"; }
+  };  
+
+  template <>  struct traits_asval<PyObject * > {   
+    typedef PyObject * value_type;
+    static int asval(PyObject *obj, value_type *val) {
+      if (val) *val = obj;
+      return SWIG_OK;
+    }
+  };
+
+  template <> 
+  struct traits_check<PyObject *, value_category> {
+    static bool check(PyObject *) {
+      return true;
+    }
+  };
+
+  template <>  struct traits_from<PyObject *> {
+    typedef PyObject * value_type;
+    static PyObject *from(const value_type& val) {
+      SWIG_Py_XINCREF(val);
+      return val;
+    }
+  };
+  
+}
+
+namespace swig {
+  template <class Difference>
+  inline size_t
+  check_index(Difference i, size_t size, bool insert = false) {
+    if ( i < 0 ) {
+      if ((size_t) (-i) <= size)
+	return (size_t) (i + size);
+    } else if ( (size_t) i < size ) {
+      return (size_t) i;
+    } else if (insert && ((size_t) i == size)) {
+      return size;
+    }
+    throw std::out_of_range("index out of range");
+  }
+
+  template <class Difference>
+  void
+  slice_adjust(Difference i, Difference j, Py_ssize_t step, size_t size, Difference &ii, Difference &jj, bool insert = false) {
+    if (step == 0) {
+      throw std::invalid_argument("slice step cannot be zero");
+    } else if (step > 0) {
+      // Required range: 0 <= i < size, 0 <= j < size, i <= j
+      if (i < 0) {
+        ii = 0;
+      } else if (i < (Difference)size) {
+        ii = i;
+      } else if (insert && (i >= (Difference)size)) {
+        ii = (Difference)size;
+      }
+      if (j < 0) {
+        jj = 0;
+      } else {
+        jj = (j < (Difference)size) ? j : (Difference)size;
+      }
+      if (jj < ii)
+        jj = ii;
+    } else {
+      // Required range: -1 <= i < size-1, -1 <= j < size-1, i >= j
+      if (i < -1) {
+        ii = -1;
+      } else if (i < (Difference) size) {
+        ii = i;
+      } else if (i >= (Difference)(size-1)) {
+        ii = (Difference)(size-1);
+      }
+      if (j < -1) {
+        jj = -1;
+      } else {
+        jj = (j < (Difference)size ) ? j : (Difference)(size-1);
+      }
+      if (ii < jj)
+        ii = jj;
+    }
+  }
+
+  template <class Sequence, class Difference>
+  inline typename Sequence::iterator
+  getpos(Sequence* self, Difference i)  {
+    typename Sequence::iterator pos = self->begin();
+    std::advance(pos, check_index(i,self->size()));
+    return pos;
+  }
+
+  template <class Sequence, class Difference>
+  inline typename Sequence::const_iterator
+  cgetpos(const Sequence* self, Difference i)  {
+    typename Sequence::const_iterator pos = self->begin();
+    std::advance(pos, check_index(i,self->size()));
+    return pos;
+  }
+
+  template <class Sequence>
+  inline void
+  erase(Sequence* seq, const typename Sequence::iterator& position) {
+    seq->erase(position);
+  }
+
+  template <class Sequence>
+  struct traits_reserve {
+    static void reserve(Sequence & /*seq*/, typename Sequence::size_type /*n*/) {
+      // This should be specialized for types that support reserve
+    }
+  };
+
+  template <class Sequence, class Difference>
+  inline Sequence*
+  getslice(const Sequence* self, Difference i, Difference j, Py_ssize_t step) {
+    typename Sequence::size_type size = self->size();
+    Difference ii = 0;
+    Difference jj = 0;
+    swig::slice_adjust(i, j, step, size, ii, jj);
+
+    if (step > 0) {
+      typename Sequence::const_iterator sb = self->begin();
+      typename Sequence::const_iterator se = self->begin();
+      std::advance(sb,ii);
+      std::advance(se,jj);
+      if (step == 1) {
+        return new Sequence(sb, se);
+      } else {
+        Sequence *sequence = new Sequence();
+        swig::traits_reserve<Sequence>::reserve(*sequence, (jj - ii + step - 1) / step);
+        typename Sequence::const_iterator it = sb;
+        while (it!=se) {
+          sequence->push_back(*it);
+          for (Py_ssize_t c=0; c<step && it!=se; ++c)
+            it++;
+        }
+        return sequence;
+      } 
+    } else {
+      Sequence *sequence = new Sequence();
+      swig::traits_reserve<Sequence>::reserve(*sequence, (ii - jj - step - 1) / -step);
+      typename Sequence::const_reverse_iterator sb = self->rbegin();
+      typename Sequence::const_reverse_iterator se = self->rbegin();
+      std::advance(sb,size-ii-1);
+      std::advance(se,size-jj-1);
+      typename Sequence::const_reverse_iterator it = sb;
+      while (it!=se) {
+        sequence->push_back(*it);
+        for (Py_ssize_t c=0; c<-step && it!=se; ++c)
+          it++;
+      }
+      return sequence;
+    }
+  }
+
+  template <class Sequence, class Difference, class InputSeq>
+  inline void
+  setslice(Sequence* self, Difference i, Difference j, Py_ssize_t step, const InputSeq& is = InputSeq()) {
+    typename Sequence::size_type size = self->size();
+    Difference ii = 0;
+    Difference jj = 0;
+    swig::slice_adjust(i, j, step, size, ii, jj, true);
+    if (step > 0) {
+      if (step == 1) {
+        size_t ssize = jj - ii;
+        if (ssize <= is.size()) {
+          // expanding/staying the same size
+          swig::traits_reserve<Sequence>::reserve(*self, self->size() - ssize + is.size());
+          typename Sequence::iterator sb = self->begin();
+          typename InputSeq::const_iterator isit = is.begin();
+          std::advance(sb,ii);
+          std::advance(isit, jj - ii);
+          self->insert(std::copy(is.begin(), isit, sb), isit, is.end());
+        } else {
+          // shrinking
+          typename Sequence::iterator sb = self->begin();
+          typename Sequence::iterator se = self->begin();
+          std::advance(sb,ii);
+          std::advance(se,jj);
+          self->erase(sb,se);
+          sb = self->begin();
+          std::advance(sb,ii);
+          self->insert(sb, is.begin(), is.end());
+        }
+      } else {
+        size_t replacecount = (jj - ii + step - 1) / step;
+        if (is.size() != replacecount) {
+          char msg[1024];
+          PyOS_snprintf(msg, sizeof(msg), "attempt to assign sequence of size %lu to extended slice of size %lu", (unsigned long)is.size(), (unsigned long)replacecount);
+          throw std::invalid_argument(msg);
+        }
+        typename Sequence::const_iterator isit = is.begin();
+        typename Sequence::iterator it = self->begin();
+        std::advance(it,ii);
+        for (size_t rc=0; rc<replacecount && it != self->end(); ++rc) {
+          *it++ = *isit++;
+          for (Py_ssize_t c=0; c<(step-1) && it != self->end(); ++c)
+            it++;
+        }
+      }
+    } else {
+      size_t replacecount = (ii - jj - step - 1) / -step;
+      if (is.size() != replacecount) {
+        char msg[1024];
+        PyOS_snprintf(msg, sizeof(msg), "attempt to assign sequence of size %lu to extended slice of size %lu", (unsigned long)is.size(), (unsigned long)replacecount);
+        throw std::invalid_argument(msg);
+      }
+      typename Sequence::const_iterator isit = is.begin();
+      typename Sequence::reverse_iterator it = self->rbegin();
+      std::advance(it,size-ii-1);
+      for (size_t rc=0; rc<replacecount && it != self->rend(); ++rc) {
+        *it++ = *isit++;
+        for (Py_ssize_t c=0; c<(-step-1) && it != self->rend(); ++c)
+          it++;
+      }
+    }
+  }
+
+  template <class Sequence, class Difference>
+  inline void
+  delslice(Sequence* self, Difference i, Difference j, Py_ssize_t step) {
+    typename Sequence::size_type size = self->size();
+    Difference ii = 0;
+    Difference jj = 0;
+    swig::slice_adjust(i, j, step, size, ii, jj, true);
+    if (step > 0) {
+      typename Sequence::iterator sb = self->begin();
+      std::advance(sb,ii);
+      if (step == 1) {
+        typename Sequence::iterator se = self->begin();
+        std::advance(se,jj);
+        self->erase(sb,se);
+      } else {
+        typename Sequence::iterator it = sb;
+        size_t delcount = (jj - ii + step - 1) / step;
+        while (delcount) {
+          it = self->erase(it);
+          for (Py_ssize_t c=0; c<(step-1) && it != self->end(); ++c)
+            it++;
+          delcount--;
+        }
+      }
+    } else {
+      typename Sequence::reverse_iterator sb = self->rbegin();
+      std::advance(sb,size-ii-1);
+      typename Sequence::reverse_iterator it = sb;
+      size_t delcount = (ii - jj - step - 1) / -step;
+      while (delcount) {
+        it = typename Sequence::reverse_iterator(self->erase((++it).base()));
+        for (Py_ssize_t c=0; c<(-step-1) && it != self->rend(); ++c)
+          it++;
+        delcount--;
+      }
+    }
+  }
+}
+
+
+namespace swig {
+  template <class Seq, class T = typename Seq::value_type >
+  struct IteratorProtocol {
+    static void assign(PyObject *obj, Seq *seq) {
+      SwigVar_PyObject iter = PyObject_GetIter(obj);
+      if (iter) {
+        SwigVar_PyObject item = PyIter_Next(iter);
+        while (item) {
+          seq->insert(seq->end(), swig::as<T>(item));
+          item = PyIter_Next(iter);
+        }
+      }
+    }
+
+    static bool check(PyObject *obj) {
+      bool ret = false;
+      SwigVar_PyObject iter = PyObject_GetIter(obj);
+      if (iter) {
+        SwigVar_PyObject item = PyIter_Next(iter);
+        ret = true;
+        while (item) {
+          ret = swig::check<T>(item);
+          item = ret ? PyIter_Next(iter) : 0;
+        }
+      }
+      return ret;
+    }
+  };
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_asptr_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+
+    static bool is_iterable(PyObject *obj) {
+      SwigVar_PyObject iter = PyObject_GetIter(obj);
+      PyErr_Clear();
+      return iter != 0;
+    }
+
+    static int asptr(PyObject *obj, sequence **seq) {
+      int ret = SWIG_ERROR;
+      if (obj == Py_None || SWIG_Python_GetSwigThis(obj)) {
+	sequence *p;
+	swig_type_info *descriptor = swig::type_info<sequence>();
+	if (descriptor && SWIG_IsOK(::SWIG_ConvertPtr(obj, (void **)&p, descriptor, 0))) {
+	  if (seq) *seq = p;
+	  return SWIG_OLDOBJ;
+	}
+      } else if (is_iterable(obj)) {
+	try {
+	  if (seq) {
+	    *seq = new sequence();
+            IteratorProtocol<Seq, T>::assign(obj, *seq);
+            if (!PyErr_Occurred())
+              return SWIG_NEWOBJ;
+	  } else {
+	    return IteratorProtocol<Seq, T>::check(obj) ? SWIG_OK : SWIG_ERROR;
+	  }
+	} catch (std::exception& e) {
+          if (seq && !PyErr_Occurred())
+            PyErr_SetString(PyExc_TypeError, e.what());
+	}
+        if (seq)
+          delete *seq;
+	return SWIG_ERROR;
+      }
+      return ret;
+    }
+  };
+
+  template <class Seq, class T = typename Seq::value_type >
+  struct traits_from_stdseq {
+    typedef Seq sequence;
+    typedef T value_type;
+    typedef typename Seq::size_type size_type;
+    typedef typename sequence::const_iterator const_iterator;
+
+    static PyObject *from(const sequence& seq) {
+#ifdef SWIG_PYTHON_EXTRA_NATIVE_CONTAINERS
+      swig_type_info *desc = swig::type_info<sequence>();
+      if (desc && desc->clientdata) {
+	return SWIG_InternalNewPointerObj(new sequence(seq), desc, SWIG_POINTER_OWN);
+      }
+#endif
+      size_type size = seq.size();
+      if (size <= (size_type)PY_SSIZE_T_MAX) {
+	PyObject *obj = PyTuple_New((Py_ssize_t)size);
+	Py_ssize_t i = 0;
+	for (const_iterator it = seq.begin(); it != seq.end(); ++it, ++i) {
+	  PyTuple_SetItem(obj,i,swig::from<value_type>(*it));
+	}
+	return obj;
+      } else {
+	PyErr_SetString(PyExc_OverflowError,"sequence size not valid in python");
+	return NULL;
+      }
+    }
+  };
+}
+
+
+  namespace swig {
+    template <class T>
+    struct traits_reserve<std::vector<T> > {
+      static void reserve(std::vector<T> &seq, typename std::vector<T>::size_type n) {
+        seq.reserve(n);
+      }
+    };
+
+    template <class T>
+    struct traits_asptr<std::vector<T> >  {
+      static int asptr(PyObject *obj, std::vector<T> **vec) {
+	return traits_asptr_stdseq<std::vector<T> >::asptr(obj, vec);
+      }
+    };
+    
+    template <class T>
+    struct traits_from<std::vector<T> > {
+      static PyObject *from(const std::vector<T>& vec) {
+	return traits_from_stdseq<std::vector<T> >::from(vec);
+      }
+    };
+  }
+
+
+      namespace swig {
+	template <>  struct traits<std::vector< double, std::allocator< double > > > {
+	  typedef pointer_category category;
+	  static const char* type_name() {
+	    return "std::vector<" "double" "," "std::allocator< double >" " >";
+	  }
+	};
+      }
+    
+
 
 /* ---------------------------------------------------
  * C++ director class methods
@@ -7845,6 +8312,60 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_MspiParaxialTransform__v_y0(PyObject *self, PyObject *args) {
+  PyObject *resultobj = 0;
+  GeoCal::MspiParaxialTransform *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > tempshared1 ;
+  boost::shared_ptr< GeoCal::MspiParaxialTransform const > *smartarg1 = 0 ;
+  PyObject *swig_obj[1] ;
+  std::vector< double,std::allocator< double > > result;
+  
+  (void)self;
+  if (!args) SWIG_fail;
+  swig_obj[0] = args;
+  {
+    int newmem = 0;
+    res1 = SWIG_ConvertPtrAndOwn(swig_obj[0], &argp1, SWIGTYPE_p_boost__shared_ptrT_GeoCal__MspiParaxialTransform_t, 0 |  0 , &newmem);
+    if (!SWIG_IsOK(res1)) {
+      SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "MspiParaxialTransform__v_y0" "', argument " "1"" of type '" "GeoCal::MspiParaxialTransform const *""'");
+    }
+    if (newmem & SWIG_CAST_NEW_MEMORY) {
+      tempshared1 = *reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      delete reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >(tempshared1.get());
+    } else {
+      smartarg1 = reinterpret_cast< boost::shared_ptr< const GeoCal::MspiParaxialTransform > * >(argp1);
+      arg1 = const_cast< GeoCal::MspiParaxialTransform * >((smartarg1 ? smartarg1->get() : 0));
+    }
+  }
+  {
+    try {
+      result = ((GeoCal::MspiParaxialTransform const *)arg1)->y0();
+    } catch (Swig::DirectorException &e) {
+      SWIG_fail;
+    } catch (const PythonException& e) {
+      e.restore_python_exception();
+      SWIG_fail;
+    } catch (const std::exception& e) {
+      SWIG_exception(SWIG_RuntimeError, e.what());
+    } catch (...) {
+      // Anything not derived from std::exception (a raw type, a
+      // third-party exception hierarchy that doesn't inherit
+      // std::exception, etc.) would otherwise propagate across the
+      // extern "C" boundary into CPython -- undefined behavior, in
+      // practice a process abort rather than a clean Python exception.
+      SWIG_exception(SWIG_RuntimeError, "unknown C++ exception");
+    }
+  }
+  resultobj = swig::from(static_cast< std::vector< double,std::allocator< double > > >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *_wrap_delete_MspiParaxialTransform(PyObject *self, PyObject *args) {
   PyObject *resultobj = 0;
   GeoCal::MspiParaxialTransform *arg1 = 0 ;
@@ -7992,6 +8513,11 @@ static PyMethodDef SwigMethods[] = {
 		"\n"
 		"GeoCal::MspiParaxialTransform::d\n"
 		""},
+	 { "MspiParaxialTransform__v_y0", _wrap_MspiParaxialTransform__v_y0, METH_O, "\n"
+		"MspiParaxialTransform__v_y0(MspiParaxialTransform self) -> vector_double\n"
+		"\n"
+		"GeoCal::MspiParaxialTransform::y0\n"
+		""},
 	 { "delete_MspiParaxialTransform", _wrap_delete_MspiParaxialTransform, METH_O, "\n"
 		"delete_MspiParaxialTransform(MspiParaxialTransform self)\n"
 		"\n"
@@ -8084,6 +8610,11 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"_v_d(MspiParaxialTransform self) -> BlitzArray_double_2\n"
 		"\n"
 		"GeoCal::MspiParaxialTransform::d\n"
+		""},
+	 { "MspiParaxialTransform__v_y0", _wrap_MspiParaxialTransform__v_y0, METH_O, "\n"
+		"_v_y0(MspiParaxialTransform self) -> vector_double\n"
+		"\n"
+		"GeoCal::MspiParaxialTransform::y0\n"
 		""},
 	 { "delete_MspiParaxialTransform", _wrap_delete_MspiParaxialTransform, METH_O, "\n"
 		"delete_MspiParaxialTransform(MspiParaxialTransform self)\n"

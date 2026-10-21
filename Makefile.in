@@ -1248,6 +1248,7 @@ am__geocal_test_all_SOURCES_DIST = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
 	@srcsupport@/geocal_exception_test.cc \
+	@srcsupport@/boost_pcall_test.cc \
 	@srcsupport@/geocal_thread_pool_test.cc \
 	@srcsupport@/geocal_temp_file_test.cc \
 	@srcsupport@/auto_derivative_test.cc \
@@ -1429,6 +1430,7 @@ am_geocal_test_all_OBJECTS =  \
 	@srcsupport@/geocal_test_all-global_fixture.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-global_fixture_default.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT) \
+	@srcsupport@/geocal_test_all-boost_pcall_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_thread_pool_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-geocal_temp_file_test.$(OBJEXT) \
 	@srcsupport@/geocal_test_all-auto_derivative_test.$(OBJEXT) \
@@ -1991,6 +1993,7 @@ am__depfiles_remade =  \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po \
+	@srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-covariance_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_exception_test.Po \
 	@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_fftw_test.Po \
@@ -4163,6 +4166,7 @@ geocal_test_all_SOURCES = @libgeocal@/test_all.cc \
 	@srcsupport@/global_fixture.cc \
 	@srcsupport@/global_fixture_default.cc \
 	@srcsupport@/geocal_exception_test.cc \
+	@srcsupport@/boost_pcall_test.cc \
 	@srcsupport@/geocal_thread_pool_test.cc \
 	@srcsupport@/geocal_temp_file_test.cc \
 	@srcsupport@/auto_derivative_test.cc \
@@ -5890,6 +5894,9 @@ libgeocal.la: $(libgeocal_la_OBJECTS) $(libgeocal_la_DEPENDENCIES) $(EXTRA_libge
 @srcsupport@/geocal_test_all-geocal_exception_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
+@srcsupport@/geocal_test_all-boost_pcall_test.$(OBJEXT):  \
+	@srcsupport@/$(am__dirstamp) \
+	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
 @srcsupport@/geocal_test_all-geocal_thread_pool_test.$(OBJEXT):  \
 	@srcsupport@/$(am__dirstamp) \
 	@srcsupport@/$(DEPDIR)/$(am__dirstamp)
@@ -6902,6 +6909,7 @@ distclean-compile:
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po@am__quote@ # am--include-marker
+@AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-covariance_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_exception_test.Po@am__quote@ # am--include-marker
 @AMDEP_TRUE@@am__include@ @am__quote@@srcsupport@/$(DEPDIR)/geocal_test_all-geocal_fftw_test.Po@am__quote@ # am--include-marker
@@ -10382,6 +10390,20 @@ am--depfiles: $(am__depfiles_remade)
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/geocal_exception_test.cc' object='@srcsupport@/geocal_test_all-geocal_exception_test.obj' libtool=no @AMDEPBACKSLASH@
 @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
 @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-geocal_exception_test.obj `if test -f '@srcsupport@/geocal_exception_test.cc'; then $(CYGPATH_W) '@srcsupport@/geocal_exception_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/geocal_exception_test.cc'; fi`
+
+@srcsupport@/geocal_test_all-boost_pcall_test.o: @srcsupport@/boost_pcall_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-boost_pcall_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Tpo -c -o @srcsupport@/geocal_test_all-boost_pcall_test.o `test -f '@srcsupport@/boost_pcall_test.cc' || echo '$(srcdir)/'`@srcsupport@/boost_pcall_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/boost_pcall_test.cc' object='@srcsupport@/geocal_test_all-boost_pcall_test.o' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-boost_pcall_test.o `test -f '@srcsupport@/boost_pcall_test.cc' || echo '$(srcdir)/'`@srcsupport@/boost_pcall_test.cc
+
+@srcsupport@/geocal_test_all-boost_pcall_test.obj: @srcsupport@/boost_pcall_test.cc
+@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-boost_pcall_test.obj -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Tpo -c -o @srcsupport@/geocal_test_all-boost_pcall_test.obj `if test -f '@srcsupport@/boost_pcall_test.cc'; then $(CYGPATH_W) '@srcsupport@/boost_pcall_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/boost_pcall_test.cc'; fi`
+@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Tpo @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Po
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='@srcsupport@/boost_pcall_test.cc' object='@srcsupport@/geocal_test_all-boost_pcall_test.obj' libtool=no @AMDEPBACKSLASH@
+@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -c -o @srcsupport@/geocal_test_all-boost_pcall_test.obj `if test -f '@srcsupport@/boost_pcall_test.cc'; then $(CYGPATH_W) '@srcsupport@/boost_pcall_test.cc'; else $(CYGPATH_W) '$(srcdir)/@srcsupport@/boost_pcall_test.cc'; fi`
 
 @srcsupport@/geocal_test_all-geocal_thread_pool_test.o: @srcsupport@/geocal_thread_pool_test.cc
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(geocal_test_all_CPPFLAGS) $(CPPFLAGS) $(AM_CXXFLAGS) $(CXXFLAGS) -MT @srcsupport@/geocal_test_all-geocal_thread_pool_test.o -MD -MP -MF @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_thread_pool_test.Tpo -c -o @srcsupport@/geocal_test_all-geocal_thread_pool_test.o `test -f '@srcsupport@/geocal_thread_pool_test.cc' || echo '$(srcdir)/'`@srcsupport@/geocal_thread_pool_test.cc
@@ -14121,6 +14143,7 @@ distclean: distclean-am
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po
+	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-covariance_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_exception_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_fftw_test.Po
@@ -14807,6 +14830,7 @@ maintainer-clean: maintainer-clean-am
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-array_ad_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-auto_derivative_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-blitz_array_serialize_support_test.Po
+	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-boost_pcall_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-covariance_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_exception_test.Po
 	-rm -f @srcsupport@/$(DEPDIR)/geocal_test_all-geocal_fftw_test.Po

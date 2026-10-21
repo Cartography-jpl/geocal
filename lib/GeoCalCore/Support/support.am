@@ -123,6 +123,7 @@ EXTRA_DIST += @srcsupport@/global_fixture.h
 geocal_test_all_SOURCES += @srcsupport@/global_fixture.cc
 geocal_test_all_SOURCES += @srcsupport@/global_fixture_default.cc
 geocal_test_all_SOURCES+= @srcsupport@/geocal_exception_test.cc 
+geocal_test_all_SOURCES+= @srcsupport@/boost_pcall_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/geocal_thread_pool_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/geocal_temp_file_test.cc 
 geocal_test_all_SOURCES+= @srcsupport@/auto_derivative_test.cc 

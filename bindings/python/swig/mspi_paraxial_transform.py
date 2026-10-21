@@ -208,6 +208,12 @@ class MspiParaxialTransform(geocal_swig.generic_object.GenericObject):
     def d(self):
         return self._v_d()
 
+    _v_y0 = _swig_new_instance_method(_mspi_paraxial_transform.MspiParaxialTransform__v_y0)
+
+    @property
+    def y0(self):
+        return self._v_y0()
+
 
     def __reduce__(self):
     #Special handling for when we are doing boost serialization, we set

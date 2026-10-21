@@ -33,9 +33,9 @@ std::vector<std::string> GdalBase::metadata_list(const std::string& Domain) cons
   if(is_closed())
     throw Exception("File has already been closed");
   std::vector<std::string> res;
-  char** md = data_set()->GetMetadata(Domain.c_str());
+  auto md = data_set()->GetMetadata(Domain.c_str());
   if(md) {
-    for(char **i = md; *i != 0; ++i) {
+    for(auto i = md; *i != 0; ++i) {
       std::string t(*i);
       // Skip value that end in "=", this is metadata with no actual
       // value.

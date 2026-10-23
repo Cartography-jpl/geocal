@@ -192,7 +192,7 @@ class OrbitOffsetCorrection(geocal_swig.orbit_correction.OrbitCorrection):
         Constructor.  
 
         This has no time points for doing corrections, but you can add those using
-        insert_time_point.  
+        insert_position_time_point and insert_attitude_time_point.  
 
         """
         _orbit_offset_correction.OrbitOffsetCorrection_swiginit(self, _orbit_offset_correction.new_OrbitOffsetCorrection(Orb_uncorr, Outside_is_error, Use_local_north_coordinate, Fit_position_x, Fit_position_y, Fit_position_z, Fit_yaw, Fit_pitch, Fit_roll))

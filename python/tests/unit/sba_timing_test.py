@@ -39,6 +39,9 @@ def test_time(unit_test_data):
     cam.fit_principal_point_sample(False, 0)
     demin = SimpleDem()
     t1 = Time.time_acs(215077459.472)
+    # One position correction (3 parameters), and an attitude correction
+    # for each image. The orbit parameter has to match this in size.
+    orb.insert_position_time_point(t1)
     parameter_true = [0, 0, 0]
     # nimg = 88
     nimg = 6
@@ -46,7 +49,6 @@ def test_time(unit_test_data):
     for i in range(nimg):
         tm = t1 + i * 0.2
         igc_coll.add_image(None, tm, "Image %d" % i)
-        igc_coll.orbit.insert_position_time_point(tm)
         igc_coll.orbit.insert_attitude_time_point(tm)
         parameter_true.extend([100, 4 + 0.1 * i, 3 - 0.1 * i])
 
@@ -58,6 +60,7 @@ def test_time(unit_test_data):
     ns = igc_coll.camera.number_sample(0)
     border = 100
     parameter_start = igc_coll.parameter
+    assert len(parameter_true) == len(igc_coll.orbit.parameter)
     igc_coll.orbit.parameter = parameter_true
     tplist = []
     ntogether = 6

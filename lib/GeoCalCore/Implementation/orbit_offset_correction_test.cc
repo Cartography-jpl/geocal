@@ -223,5 +223,23 @@ BOOST_AUTO_TEST_CASE(serialization)
   BOOST_CHECK_MATRIX_CLOSE_TOL(orb->parameter(), orbr->parameter(), 1e-4);
 }
 
+BOOST_AUTO_TEST_CASE(parameter_wrong_size)
+{
+  if(!orb)
+    return;
+  orb->insert_position_time_point(t);
+  orb->insert_attitude_time_point(t);
+  orb->insert_attitude_time_point(t + 10);
+  // Should have 9 parameters. Make sure we get an error rather than reading
+  // past the end of the array.
+  blitz::Array<double, 1> parm(6);
+  parm = 1, 2, 3, 4, 5, 6;
+  BOOST_CHECK_THROW(orb->parameter(parm), Exception);
+  blitz::Array<double, 1> parm2(12);
+  parm2 = 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12;
+  BOOST_CHECK_THROW(orb->parameter(parm2), Exception);
+  BOOST_CHECK_EQUAL(orb->parameter().rows(), 9);
+}
+
 BOOST_AUTO_TEST_SUITE_END()
 

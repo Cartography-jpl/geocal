@@ -7961,7 +7961,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_att_parm_to_match(PyObject *sel
   }
   {
     // Treat as pointer for the purposes of the macro
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[1], stride[1];
     for(int i = 0; i < 1; ++i) {
@@ -9818,7 +9818,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   }
   {
     PyObject *res;
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9847,7 +9847,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_parameter(PyOb
   }
   {
     PyObject *res;
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -9938,7 +9938,7 @@ SWIGINTERN PyObject *_wrap_OrbitOffsetCorrection_orbit_correction_yprt(PyObject 
   }
   {
     PyObject *res;
-    /*@SWIG:/home/smyth/Local/geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
+    /*@SWIG:../../geocal-repo/./swig_rules/include/swig_array.i,195,%blitz_to_numpy@*/
     // Copy out dimensions and stride from blitz array
     npy_intp dims[2], stride[2];
     for(int i = 0; i < 2; ++i) {
@@ -10060,7 +10060,7 @@ static PyMethodDef SwigMethods[] = {
 		"Constructor.  \n"
 		"\n"
 		"This has no time points for doing corrections, but you can add those using\n"
-		"insert_time_point.  \n"
+		"insert_position_time_point and insert_attitude_time_point.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection_att_parm_to_match", _wrap_OrbitOffsetCorrection_att_parm_to_match, METH_VARARGS, "\n"
@@ -10237,7 +10237,7 @@ static PyMethodDef SwigMethods_proxydocs[] = {
 		"Constructor.  \n"
 		"\n"
 		"This has no time points for doing corrections, but you can add those using\n"
-		"insert_time_point.  \n"
+		"insert_position_time_point and insert_attitude_time_point.  \n"
 		"\n"
 		""},
 	 { "OrbitOffsetCorrection_att_parm_to_match", _wrap_OrbitOffsetCorrection_att_parm_to_match, METH_VARARGS, "\n"

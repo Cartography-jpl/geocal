@@ -233,7 +233,8 @@ OrbitOffsetCorrection::acorr(const Time& T) const
 
 //-----------------------------------------------------------------------
 /// Constructor. This has no time points for doing corrections, but
-/// you can add those using insert_time_point.
+/// you can add those using insert_position_time_point and
+/// insert_attitude_time_point.
 //-----------------------------------------------------------------------
 
 OrbitOffsetCorrection::OrbitOffsetCorrection(
@@ -321,6 +322,16 @@ ArrayAd<double, 1> OrbitOffsetCorrection::parameter_with_derivative() const
 void OrbitOffsetCorrection::parameter_with_derivative
 (const ArrayAd<double, 1>& Parm)
 {
+  int expected = 3 * (int) pos_corr.size() + 3 * (int) att_corr.size();
+  if(Parm.rows() != expected) {
+    Exception e;
+    e << "Parameter size (" << Parm.rows() << ") doesn't match the number "
+      << "of parameters for OrbitOffsetCorrection (" << expected << ").\n"
+      << "There are 3 parameters for each of the " << pos_corr.size()
+      << " position time points and " << att_corr.size()
+      << " attitude time points.";
+    throw e;
+  }
   int i = 0;
   pos_map_type::iterator p;
   for(p = pos_corr.begin(); p != pos_corr.end(); ++p, i += 3) {

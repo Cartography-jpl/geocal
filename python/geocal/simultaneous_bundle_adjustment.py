@@ -412,8 +412,8 @@ class SimultaneousBundleAdjustment(object):
                         cres = self.igc_coll.collinearity_residual(j, gp, ictp)
                         rs = slice(ind, ind + 2)
                         res[rs] = cres * weight
-                    except RuntimeError as e:
-                        #if str(e) != "ImageGroundConnectionFailed":
+                    except RuntimeError:
+                        # if str(e) != "ImageGroundConnectionFailed":
                         #    raise e
                         res[ind] = 0
                         res[ind + 1] = 0

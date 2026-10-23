@@ -1,25 +1,52 @@
-from builtins import str
-from builtins import range
 # This contains various tests to make sure pickling of low level GeoCal objects
 # work correctly.
 import pickle
-from test_support import *
+from geocal import (
+    Time,
+    ImageCoordinate,
+    FrameCoordinate,
+    QuaternionCamera,
+    Quaternion_double,
+    GdalRasterImage,
+    distance,
+    VicarLiteFile,
+    VicarLiteRasterImage,
+    VicarLiteDem,
+    VicarRasterImage,
+    SrtmDem,
+    SimpleDem,
+    ForstnerFeatureDetector,
+    GdalDem,
+    SimpleDatum,
+    Ipi,
+    KeplerOrbit,
+    SimpleCamera,
+    ConstantSpacingTimeTable,
+)
+from fixtures.require_check import (
+    require_serialize,
+    require_vicar,
+    require_afids_data,
+    require_srtm_data,
+)
+from numpy.testing import assert_almost_equal
 
 # Simple test to see if we have AFIDS data available. We check for the
 # presence of one of the AFIDS environment variables, and if there
 # assume we have the data
-have_afid_data = "AFIDS_VDEV_DATA" in os.environ 
+
 
 # Test picking of Time
-@require_serialize    
+@require_serialize
 def test_time_pickle():
     tm = Time.time_j2000(100.0)
     t = pickle.dumps(tm, pickle.HIGHEST_PROTOCOL)
     tm2 = pickle.loads(t)
     assert tm == tm2
 
+
 # Test pickling of ImageCoordinate
-@require_serialize    
+@require_serialize
 def test_image_coordinate_pickle():
     ic = ImageCoordinate(1, 2)
     t = pickle.dumps(ic, pickle.HIGHEST_PROTOCOL)
@@ -27,9 +54,10 @@ def test_image_coordinate_pickle():
     assert_almost_equal(ic.line, x.line)
     assert_almost_equal(ic.sample, x.sample)
 
-@require_serialize    
+
+@require_serialize
 def test_rpc_pickle(rpc):
-    '''Test pickling of RPC'''
+    """Test pickling of RPC"""
     t = pickle.dumps(rpc, pickle.HIGHEST_PROTOCOL)
     x = pickle.loads(t)
     assert str(rpc) == str(x)
@@ -51,18 +79,22 @@ def test_rpc_pickle(rpc):
         assert rpc.fit_line_numerator[i] == x.fit_line_numerator[i]
         assert rpc.fit_sample_numerator[i] == x.fit_sample_numerator[i]
 
-@require_serialize    
+
+@require_serialize
 def test_quaternion_camera_pickle():
-    '''Test pickling of QuaternionCamera'''
-    cam = QuaternionCamera(Quaternion_double(1,0,0,0),
-                           3375, 3648,
-                           1.0 / 2500000,
-                           1.0 / 2500000,
-                           1.0,
-                           FrameCoordinate(1688.0, 1824.5),
-                           QuaternionCamera.LINE_IS_Y)
+    """Test pickling of QuaternionCamera"""
+    cam = QuaternionCamera(
+        Quaternion_double(1, 0, 0, 0),
+        3375,
+        3648,
+        1.0 / 2500000,
+        1.0 / 2500000,
+        1.0,
+        FrameCoordinate(1688.0, 1824.5),
+        QuaternionCamera.LINE_IS_Y,
+    )
     t = pickle.dumps(cam, pickle.HIGHEST_PROTOCOL)
-    cam2 = pickle.loads(t)
+    _ = pickle.loads(t)
     assert_almost_equal(cam.focal_length, 1.0, 4)
     assert_almost_equal(cam.line_pitch, 1.0 / 2500000, 4)
     assert_almost_equal(cam.sample_pitch, 1.0 / 2500000, 4)
@@ -72,9 +104,10 @@ def test_quaternion_camera_pickle():
     assert cam.number_sample(0) == 3648
     assert cam.number_band == 1
 
-@require_serialize    
+
+@require_serialize
 def test_quaternion_pickle():
-    '''Make sure we can pickle quaternions'''
+    """Make sure we can pickle quaternions"""
     t = pickle.dumps(Quaternion_double(1, 2, 3, 4), pickle.HIGHEST_PROTOCOL)
     q = pickle.loads(t)
     assert_almost_equal(q.R_component_1, 1, 4)
@@ -82,19 +115,22 @@ def test_quaternion_pickle():
     assert_almost_equal(q.R_component_3, 3, 4)
     assert_almost_equal(q.R_component_4, 4, 4)
 
-def create_rpc_sample(rpc):
-    '''Small routine to create a sample RPC that can be used elsewhere. We
-    only run this when we need to update the file'''
-    out = open(unit_test_data + "rpc_example.pkl", "wb")
+
+def create_rpc_sample(rpc, unit_test_data):
+    """Small routine to create a sample RPC that can be used elsewhere. We
+    only run this when we need to update the file"""
+    out = open(str(unit_test_data / "rpc_example.pkl"), "wb")
     # Use protocol 0, since it is the most portable. This is just a small test
     # example, so size/efficiency isn't any kind of an issue.
-    t = pickle.dump(rpc, out, 0)
+    pickle.dump(rpc, out, 0)
 
-#create_rpc_sample()
 
-@require_serialize    
-def test_mapinfo_pickle():
-    r = GdalRasterImage(unit_test_data + "dem_foot.tif")
+# create_rpc_sample()
+
+
+@require_serialize
+def test_mapinfo_pickle(unit_test_data):
+    r = GdalRasterImage(str(unit_test_data / "dem_foot.tif"))
     m = r.map_info
     pickle.dumps(m.transform)
     pickle.dumps(m.number_x_pixel)
@@ -104,45 +140,48 @@ def test_mapinfo_pickle():
     m2 = pickle.loads(t)
     assert m2.number_x_pixel == m.number_x_pixel
     assert m2.number_y_pixel == m.number_y_pixel
-    assert distance(m2.ground_coordinate(0, 0), 
-                    m.ground_coordinate(0,0)) < 0.01
-    assert distance(m2.ground_coordinate(10, 10), 
-                    m.ground_coordinate(10,10)) < 0.01
+    assert distance(m2.ground_coordinate(0, 0), m.ground_coordinate(0, 0)) < 0.01
+    assert distance(m2.ground_coordinate(10, 10), m.ground_coordinate(10, 10)) < 0.01
+
 
 # Test pickle of VicarLiteFile
-@require_serialize    
-def test_vicar_lite_file():
-    f = VicarLiteFile(unit_test_data + "vicar.img")
+@require_serialize
+def test_vicar_lite_file(unit_test_data):
+    f = VicarLiteFile(str(unit_test_data / "vicar.img"))
     t = pickle.dumps(f)
     x = pickle.loads(t)
     assert f.file_name == x.file_name
 
+
 # Test pickle of VicarLiteRasterImage
-@require_serialize    
-def test_vicar_lite_raster_image():
-    f = VicarLiteRasterImage(unit_test_data + "vicar.img")
+@require_serialize
+def test_vicar_lite_raster_image(unit_test_data):
+    f = VicarLiteRasterImage(str(unit_test_data / "vicar.img"))
     t = pickle.dumps(f)
     x = pickle.loads(t)
     assert f.file.file_name == x.file.file_name
 
+
 # Test pickle of VicarLiteDem
-@require_serialize    
-def test_vicar_lite_dem():
-    f = VicarLiteDem(unit_test_data + "vicar.img")
+@require_serialize
+def test_vicar_lite_dem(unit_test_data):
+    f = VicarLiteDem(str(unit_test_data / "vicar.img"))
     t = pickle.dumps(f)
     x = pickle.loads(t)
     assert f.file.file_name == x.file.file_name
+
 
 # Test pickle of VicarRasterImage
 @require_serialize
 @require_vicar
-def test_vicar_raster_image():
-    f = VicarRasterImage(unit_test_data + "vicar.img")
+def test_vicar_raster_image(unit_test_data):
+    f = VicarRasterImage(str(unit_test_data / "vicar.img"))
     t = pickle.dumps(f)
     x = pickle.loads(t)
     assert f.vicar_file.file_name == x.vicar_file.file_name
 
-@require_serialize    
+
+@require_serialize
 @require_afids_data
 @require_srtm_data
 @require_vicar
@@ -152,9 +191,10 @@ def test_srtm():
     dem2 = pickle.loads(t)
     assert dem.directory_base == dem2.directory_base
 
-@require_serialize    
-def test_gdal_raster_image():
-    r = GdalRasterImage(unit_test_data + "rpc.ntf")
+
+@require_serialize
+def test_gdal_raster_image(unit_test_data):
+    r = GdalRasterImage(str(unit_test_data / "rpc.ntf"))
     t = pickle.dumps(r)
     r2 = pickle.loads(t)
     assert r.number_line == r2.number_line
@@ -162,14 +202,16 @@ def test_gdal_raster_image():
     assert r.number_tile_line == r2.number_tile_line
     assert r.number_tile_sample == r2.number_tile_sample
 
-@require_serialize    
+
+@require_serialize
 def test_simple_dem():
     d = SimpleDem(10.0)
     t = pickle.dumps(d)
     d2 = pickle.loads(t)
     assert_almost_equal(d.h, d2.h)
 
-@require_serialize    
+
+@require_serialize
 def test_forstner_feature_detector():
     f = ForstnerFeatureDetector()
     t = pickle.dumps(f)
@@ -182,11 +224,12 @@ def test_forstner_feature_detector():
     assert_almost_equal(f.roundness_threshold, f2.roundness_threshold)
     assert_almost_equal(f.weight_threshold, f2.weight_threshold)
     assert_almost_equal(f.basic_robert_threshold, f2.basic_robert_threshold)
-    
-@require_serialize    
-def test_gdal_dem():
+
+
+@require_serialize
+def test_gdal_dem(unit_test_data):
     # Datum is nonsense, but we want to make sure it gets restored correctly
-    d = GdalDem(unit_test_data + "dem_foot.tif", SimpleDatum(10.0))
+    d = GdalDem(str(unit_test_data / "dem_foot.tif"), SimpleDatum(10.0))
     t = pickle.dumps(d)
     d2 = pickle.loads(t)
     assert d.file_name == d2.file_name
@@ -194,8 +237,9 @@ def test_gdal_dem():
     assert_almost_equal(d.datum.u, d2.datum.u)
     assert d.outside_dem_is_error == d2.outside_dem_is_error
     assert d.number_tile == d2.number_tile
-    
-@require_serialize    
+
+
+@require_serialize
 def test_ipi():
     tmin = Time.parse_time("2003-01-01T11:00:00Z")
     tmax = tmin + 10000 * 40.8e-3
@@ -213,9 +257,10 @@ def test_ipi():
     t = pickle.dumps(ipi.root_min_separation)
     t = pickle.dumps(ipi.time_tolerance)
     t = pickle.dumps(ipi)
-    ipi2 = pickle.loads(t)
+    _ = pickle.loads(t)
 
-@require_serialize    
+
+@require_serialize
 def test_simple_camera():
     c = SimpleCamera()
     t = pickle.dumps(c)
@@ -228,7 +273,8 @@ def test_simple_camera():
     assert_almost_equal(c.sample_pitch, c2.sample_pitch)
     assert_almost_equal(c.number_sample(0), c2.number_sample(0))
 
-@require_serialize    
+
+@require_serialize
 def test_kepler_orbit():
     orb = KeplerOrbit()
     t = pickle.dumps(orb)

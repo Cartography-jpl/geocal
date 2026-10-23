@@ -7,10 +7,10 @@ from geocal import (
     Time,
     distance,
     SpiceKeplerOrbit,
-    Ecr,
-    SpiceHelper
+    SpiceHelper,
 )
 import numpy as np
+
 
 def test_dprep_ephemeris(unit_test_data):
     feph = DprepEphemerisFile(
@@ -61,10 +61,10 @@ def test_dprep_orbit(unit_test_data):
         )
     SpiceHelper.add_kernel(str(unit_test_data / "gm_de440.tpc"))
     mu = SpiceKeplerOrbit.mu("EARTH")
-    element = SpiceKeplerOrbit.spice_oscelt(korb.orbit_data(kepoch))
+    _ = SpiceKeplerOrbit.spice_oscelt(korb.orbit_data(kepoch))
     # Spice uses the perifocal distance rather than the semimajor axis, and also
     # has this in km rather than m.
-    element2 = np.array([a / 1000 * (1-e), e, inc, an, ap, ma, kepoch.j2000, mu])
+    element2 = np.array([a / 1000 * (1 - e), e, inc, an, ap, ma, kepoch.j2000, mu])
     sorb = SpiceKeplerOrbit(element2)
     for i in range(0, 1000, 100):
         print(

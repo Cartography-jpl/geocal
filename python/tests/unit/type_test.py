@@ -9,10 +9,10 @@ def test_temp() -> None:
     ic = ImageCoordinate(10, 20)
     # Should get a typing error here, wrong argument to constructor
     with pytest.raises(TypeError):
-        ic2 = ImageCoordinate("Foo", 20)
-    f = "hi"
+        ImageCoordinate("Foo", 20)
+    f = "hi"  # noqa: F841
     # And here, assigning a float to a str variable
-    f = ic.line
+    f = ic.line  # noqa: F841
     # This should work, testing handling overloading correctly
-    ic3 = ImageCoordinate()
-    ic4 = ImageCoordinate(VicarImageCoordinate(10, 20))
+    _ = ImageCoordinate()
+    _ = ImageCoordinate(VicarImageCoordinate(10, 20))

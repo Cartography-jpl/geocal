@@ -90,7 +90,7 @@ def mars_test_data():
     if not SpiceHelper.have_spice():
         pytest.skip("require spice")
     res = Path("/bigdata/smyth/MiplMarsTest")
-    if not res.exists:
+    if not res.exists():
         pytest.skip("Required mars test data not found")
     return res
 

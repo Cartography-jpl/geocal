@@ -1,7 +1,7 @@
-from geocal_swig import Orbit
-from .sqlite_shelf import read_shelve, write_shelve
-from test_support import *
+from geocal import Orbit, Time, KeplerOrbit, read_shelve, write_shelve
+from fixtures.require_check import require_serialize
 import pickle
+
 
 class PythonOrbit(Orbit):
     def __init__(self):
@@ -15,6 +15,7 @@ class PythonOrbit(Orbit):
     def desc(self):
         return "PythonOrbit"
 
+
 @require_serialize
 def test_director_serialize(isolated_dir):
     orb = PythonOrbit()
@@ -23,11 +24,10 @@ def test_director_serialize(isolated_dir):
     orb2 = read_shelve("orb.xml")
     print(orb2.min_time)
 
+
 @require_serialize
 def test_director_pickle():
     orb = PythonOrbit()
     t = pickle.dumps(orb)
     orb2 = pickle.loads(t)
     print(orb2.min_time)
-
-

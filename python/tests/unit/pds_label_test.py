@@ -1,12 +1,16 @@
-from .pds_label import *
-from test_support import *
+from geocal import pds_label_text, pds_label, SpiceKernelByTime, Time
+from fixtures.require_check import require_mars_spice
 import os
 import glob
+import pytest
 
-def test_pds_label_text():
-    fname = unit_test_data + "mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110c.lbl"
+
+def test_pds_label_text(unit_test_data):
+    fname = unit_test_data / "mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110c.lbl"
     txt = pds_label_text(fname)
-    assert txt == b'''PDS_VERSION_ID               = PDS3
+    assert (
+        txt
+        == b"""PDS_VERSION_ID               = PDS3
 RECORD_TYPE                  = FIXED_LENGTH
 RECORD_BYTES                 = 1024
 ^SPICE_KERNEL                = "mro_psp6_ssd_mro110c.bsp"
@@ -38,26 +42,30 @@ Primary Science phase of the mission, created by the Solar System Dynamics
 group, JPL. "
 END_OBJECT                   = SPICE_KERNEL
 END
-'''
-    
-def test_pds_label():
-    fname = unit_test_data + "mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110c.lbl"
-    d = pds_label(fname)
-    assert d['KERNEL_TYPE'] == 'EPHEMERIS'
+"""
+    )
 
-def test_spice_kernel_by_time():
-    bdir = unit_test_data + "mars_kernel/mro_kernel/spk/"
+
+def test_pds_label(unit_test_data):
+    fname = unit_test_data / "mars_kernel/mro_kernel/spk/mro_psp6_ssd_mro110c.lbl"
+    d = pds_label(fname)
+    assert d["KERNEL_TYPE"] == "EPHEMERIS"
+
+
+def test_spice_kernel_by_time(unit_test_data):
+    bdir = str(unit_test_data / "mars_kernel/mro_kernel/spk") + "/"
     kdata = SpiceKernelByTime(glob.glob(bdir + "mro_*_ssd_mro110c.lbl"))
     tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
     assert kdata.kernel(tstart) == bdir + "mro_psp6_ssd_mro110c.bsp"
 
+
 @require_mars_spice
 def test_spice_kernel_by_time_binary():
-    '''Test that works with actual mars spice kernel data'''
+    """Test that works with actual mars spice kernel data"""
     kfile = os.environ["MARS_KERNEL"] + "/mro_kernel/mro_create_json.ker"
     flist = [os.environ["MARS_KERNEL"] + "/mro_kernel/spk/mro_psp6_ssd_mro95a.bsp"]
-    if(not os.path.exists(flist[0]) or not os.path.exists(kfile)):
-        raise SkipTest
+    if not os.path.exists(flist[0]) or not os.path.exists(kfile):
+        pytest.skip("kernel data not found")
     kdata = SpiceKernelByTime(flist, kernel_file=kfile)
     tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
     assert kdata.kernel(tstart) == flist[0]
@@ -65,19 +73,14 @@ def test_spice_kernel_by_time_binary():
     kdata = SpiceKernelByTime(flist, kernel_file=kfile)
     tstart = Time.parse_time("2008-02-23T03:36:10.894Z")
     assert kdata.kernel(tstart) == flist[0]
-    
-    
-    
+
+
 # Depends on data we don't want to assume is available
-@skip
+@pytest.mark.skip
 def test_pds_label_isis():
-    '''ISIS is almost the same as PDS, test this on a file'''
+    """ISIS is almost the same as PDS, test this on a file"""
     fname = "/data/smyth/MarsHirise/Gale/esp_025012_1745_red2.norm.cub"
     lbl = pds_label(fname)
     print(lbl["SpacecraftClockStartCount"])
     print(lbl["StartTime"])
     print(lbl["InstrumentId"])
-    
-    
-    
-    

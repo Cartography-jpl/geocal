@@ -1,13 +1,22 @@
-from .sqlite_shelf import *
+from geocal import (
+    SQLiteShelf,
+    shelve_time_after,
+    read_shelve,
+    write_shelve,
+    ImageCoordinate,
+)
+from fixtures.require_check import require_serialize
+import os
 import time
-from test_support import *
+import pytest
+
 
 def test_sqlite_shelf(isolated_dir):
     try:
         os.remove("sqlite_shelf.db")
-    except OSError as exc:
-        pass                    # Ok if doesn't exist
-    
+    except OSError:
+        pass  # Ok if doesn't exist
+
     d = SQLiteShelf("sqlite_shelf.db")
     d["value1"] = 1
     time.sleep(0.1)
@@ -21,16 +30,15 @@ def test_sqlite_shelf(isolated_dir):
     assert d["value1"] == 1
     assert d["value2"] == [1, 2, 3, "blah"]
     assert d["value3"] == 4
-    with pytest.raises(KeyError) as e_info:
+    with pytest.raises(KeyError):
         d["value4"]
-    with pytest.raises(RuntimeError) as e_info:
+    with pytest.raises(RuntimeError):
         d["value4"] = 1
     # This should be close to 0.1 seconds. But don't depend on that for
     # a test, instead just say we are ordered
-    #print d.update_time_unix("value2") - d.update_time_unix("value1")
+    # print d.update_time_unix("value2") - d.update_time_unix("value1")
     assert d.update_time_julian("value2") > d.update_time_julian("value1")
-    assert shelve_time_after("sqlite_shelf.db:value2",
-                             "sqlite_shelf.db:value1")
+    assert shelve_time_after("sqlite_shelf.db:value2", "sqlite_shelf.db:value1")
     time.sleep(0.1)
     d.close()
     d = SQLiteShelf("sqlite_shelf.db", "r+")
@@ -39,11 +47,12 @@ def test_sqlite_shelf(isolated_dir):
     d = SQLiteShelf("sqlite_shelf.db", "r")
     assert d.update_time_julian("value1") > d.update_time_julian("value2")
 
+
 def test_read_write_shelf(isolated_dir):
     try:
         os.remove("sqlite_shelf.db")
-    except OSError as exc:
-        pass                    # Ok if doesn't exist
+    except OSError:
+        pass  # Ok if doesn't exist
 
     write_shelve("sqlite_shelf.db:value1", 1)
     write_shelve("sqlite_shelf.db:value1", 3)
@@ -51,16 +60,16 @@ def test_read_write_shelf(isolated_dir):
     assert read_shelve("sqlite_shelf.db:value1") == 3
     assert read_shelve("sqlite_shelf.db:value2") == [1, 2, 3, "blah"]
 
-@require_serialize    
+
+@require_serialize
 def test_read_write_xml(isolated_dir):
     try:
         os.remove("sqlite_shelf_test.xml")
-    except OSError as exc:
-        pass                    # Ok if doesn't exist
+    except OSError:
+        pass  # Ok if doesn't exist
 
     ic = ImageCoordinate(10, 20)
     write_shelve("sqlite_shelf_test.xml", ic)
     ic2 = read_shelve("sqlite_shelf_test.xml")
-    assert_almost_equal(ic.line, ic2.line)
-    assert_almost_equal(ic.sample, ic2.sample)
-
+    assert ic.line == pytest.approx(ic2.line)
+    assert ic.sample == pytest.approx(ic2.sample)

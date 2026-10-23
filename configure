@@ -24284,6 +24284,7 @@ fi
 # Guard against running twice
 if test "x$done_boost" = "x"; then
 have_boost="no"
+boost_missing=no
 
 # AX_BOOST_BASE doesn't look in our usual places, so if the user didn't give
 # --with-boost, point it at the first place we find boost.
@@ -24655,6 +24656,45 @@ fi
 
 
 if test "$have_boost" = "yes"; then
+    # Boost system is header only starting with 1.69, so there is no
+    # library to find (and AX_BOOST_SYSTEM fails if there isn't one).
+    boost_system_header_only=no
+    ac_ext=cpp
+ac_cpp='$CXXCPP $CPPFLAGS'
+ac_compile='$CXX -c $CXXFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CXX -o conftest$ac_exeext $CXXFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_cxx_compiler_gnu
+
+    CPPFLAGS_SAVED="$CPPFLAGS"
+    CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+    cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+/* end confdefs.h.  */
+#include <boost/version.hpp>
+int
+main (void)
+{
+
+#if BOOST_VERSION < 106900
+#error Boost system is not header only
+#endif
+
+  ;
+  return 0;
+}
+_ACEOF
+if ac_fn_cxx_try_compile "$LINENO"
+then :
+  boost_system_header_only=yes
+fi
+rm -f core conftest.err conftest.$ac_objext conftest.beam conftest.$ac_ext
+    CPPFLAGS="$CPPFLAGS_SAVED"
+    ac_ext=c
+ac_cpp='$CPP $CPPFLAGS'
+ac_compile='$CC -c $CFLAGS $CPPFLAGS conftest.$ac_ext >&5'
+ac_link='$CC -o conftest$ac_exeext $CFLAGS $CPPFLAGS $LDFLAGS conftest.$ac_ext $LIBS >&5'
+ac_compiler_gnu=$ac_cv_c_compiler_gnu
+
+    if test "$boost_system_header_only" = "no"; then
 
 
 # Check whether --with-boost-system was given.
@@ -24930,6 +24970,7 @@ fi
 	LDFLAGS="$LDFLAGS_SAVED"
 	fi
 
+    fi
 
 
 # Check whether --with-boost-filesystem was given.
@@ -26245,9 +26286,14 @@ fi
 	LDFLAGS="$LDFLAGS_SAVED"
 	fi
 
-    if test "x$BOOST_SYSTEM_LIB" = "x" -o "x$BOOST_FILESYSTEM_LIB" = "x" \
+    if test "x$BOOST_SYSTEM_LIB" = "x" -a "$boost_system_header_only" = "no"; then
+        boost_missing=yes
+    elif test "x$BOOST_FILESYSTEM_LIB" = "x" \
        -o "x$BOOST_REGEX_LIB" = "x" -o "x$BOOST_DATE_TIME_LIB" = "x" \
        -o "x$BOOST_IOSTREAMS_LIB" = "x" -o "x$BOOST_SERIALIZATION_LIB" = "x"; then
+        boost_missing=yes
+    fi
+    if test "$boost_missing" = "yes"; then
         { printf "%s\n" "$as_me:${as_lineno-$LINENO}: WARNING: We found boost, but not all the libraries we need" >&5
 printf "%s\n" "$as_me: WARNING: We found boost, but not all the libraries we need" >&2;}
         have_boost="no"

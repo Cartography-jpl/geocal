@@ -31,6 +31,7 @@ AC_DEFUN([AC_BOOST],
 # Guard against running twice
 if test "x$done_boost" = "x"; then
 have_boost="no"
+boost_missing=no
 
 # AX_BOOST_BASE doesn't look in our usual places, so if the user didn't give
 # --with-boost, point it at the first place we find boost.
@@ -45,15 +46,35 @@ fi
 
 AX_BOOST_BASE([ifelse([$2], ,1.20.0,$2)], [have_boost=yes], [have_boost=no])
 if test "$have_boost" = "yes"; then
-    AX_BOOST_SYSTEM
+    # Boost system is header only starting with 1.69, so there is no
+    # library to find (and AX_BOOST_SYSTEM fails if there isn't one).
+    boost_system_header_only=no
+    AC_LANG_PUSH([C++])
+    CPPFLAGS_SAVED="$CPPFLAGS"
+    CPPFLAGS="$CPPFLAGS $BOOST_CPPFLAGS"
+    AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[@%:@include <boost/version.hpp>]], [[
+#if BOOST_VERSION < 106900
+#error Boost system is not header only
+#endif
+]])], [boost_system_header_only=yes], [])
+    CPPFLAGS="$CPPFLAGS_SAVED"
+    AC_LANG_POP([C++])
+    if test "$boost_system_header_only" = "no"; then
+        AX_BOOST_SYSTEM
+    fi
     AX_BOOST_FILESYSTEM
     AX_BOOST_REGEX
     AX_BOOST_DATE_TIME
     AX_BOOST_IOSTREAMS
     AX_BOOST_SERIALIZATION
-    if test "x$BOOST_SYSTEM_LIB" = "x" -o "x$BOOST_FILESYSTEM_LIB" = "x" \
+    if test "x$BOOST_SYSTEM_LIB" = "x" -a "$boost_system_header_only" = "no"; then
+        boost_missing=yes
+    elif test "x$BOOST_FILESYSTEM_LIB" = "x" \
        -o "x$BOOST_REGEX_LIB" = "x" -o "x$BOOST_DATE_TIME_LIB" = "x" \
        -o "x$BOOST_IOSTREAMS_LIB" = "x" -o "x$BOOST_SERIALIZATION_LIB" = "x"; then
+        boost_missing=yes
+    fi
+    if test "$boost_missing" = "yes"; then
         AC_MSG_WARN([We found boost, but not all the libraries we need])
         have_boost="no"
     fi

@@ -1,7 +1,11 @@
 # GeoCal C++ Modernization and Third-Party Library Plan
 
 **Date:** 2026-10-22 (revised the same day after maintainer feedback)
-**Status:** Planning only. Nothing has been implemented.
+**Status:** Planning only. Nothing has been implemented in geocal.
+**Where the work starts (2026-10-23):** every step is first rehearsed in the small `swig-rules-skeleton` repository
+(`/home/smyth/Local/swig-rules-skeleton`, branch `modernize`), following
+`claude_notes/implementation_plan.md` there (its §0 has the status and next step). geocal work begins once the skeleton
+has worked out the problems.
 **Scope:** The C++ library (`lib/`), its build system, and the third-party C++
 libraries it depends on. Python-only code is covered only where the C++ work
 affects it (the SWIG bindings, pickling).
@@ -102,7 +106,8 @@ reasons are in §3, §4, §6 and §7.
 | Python / numpy | 3.13.7 / 2.3.3 | |
 | autoconf / automake / libtool | 2.72 / 1.17 / 2.5.4 | |
 | fmt, spdlog | 11.2 / 1.15 | Already in the env; GeoCal does not use them. |
-| Eigen, pybind11, nanobind, cmake, clang-tidy, clang-format, bear | **not present** | Would need to be added to the pixi env. |
+| Eigen, nanobind, `mdspan`, clang-tidy, clang-format | **not present** | Add to the pixi env when needed. The skeleton's env already has `clang-tools` 22.1.8 and `nanobind` 3.1.0 (skeleton S0.4). |
+| bear | **don't use** | `bear` (and `intercept-build`) don't run on this host (glibc 2.28 is too old for the conda build). Use the skeleton's `script/make_compile_commands.py` and `script/run_clang_tidy.sh` instead (skeleton S0.4). |
 
 **Other environments:**
 * The `env/linux` lock file is on gcc/libstdc++ **15.2**, and `env/osx` is on
@@ -115,11 +120,12 @@ reasons are in §3, §4, §6 and §7.
 **Proposed minimum compiler for 2.0:** **gcc ≥ 14**, in **C++20** mode
 (§7.4). clang/libc++ is best-effort.
 
+gcc 14 has been available in conda-forge for a long time. Development uses
+whatever the pixi locks give (currently gcc 15 / clang 21).
+
 **Newer compilers are an option.** conda-forge has **gcc 16.2.0** (built
 2026-09-16), and the maintainer can move the pixi environment to a newer gcc
-if it matters. I tested gcc 16.2 in a throwaway env (§7.3, §7.5). Both have been available in conda-forge for a long
-time; development uses whatever the pixi locks give (currently gcc 15 /
-clang 21).
+if it matters. I tested gcc 16.2 in a throwaway env (§7.3, §7.5).
 
 ### 2.3 Third-party usage (measured)
 
@@ -463,7 +469,10 @@ Effort: small (one header, one test, build-file and doc cleanup).
   107 MB of generated code in git.
 * After the `std::shared_ptr` change, pilot nanobind (which supports only
   `std::shared_ptr`) or pybind11 on a small closed group of classes,
-  covering pickling, directors, and numpy arrays.
+  covering pickling, directors, and numpy arrays. **Update (2026-10-23):**
+  the pilot is the skeleton repository's phase S6 (nanobind), on samples that
+  copy geocal's patterns (Observer, multiple and virtual inheritance,
+  directors, column-major arrays). geocal Phase 6 follows its result.
 
 Reasons not to switch now: 230 `.i` files; 961 `%python_attribute`; 245
 pickled classes; 9 directors; RTTI downcasting; Doxygen docstrings; and
@@ -497,12 +506,96 @@ the 2.0 API break. Two points connect it to the rest of this plan:
     enforces this, because nanobind headers need `Python.h`.
   * Linux extension modules don't link `libpython` at all; Python's symbols
     are resolved from the interpreter at import time.
-  * The costs are the build (nanobind officially supports CMake /
-    scikit-build-core; autotools would need nanobind's runtime compiled by
-    hand) and pinning the same nanobind version across repos so downstream
-    extension modules can share GeoCal types.
+  * The costs are the build and version pinning. nanobind officially supports
+    CMake / scikit-build-core; under autotools its runtime is compiled from
+    its single `src/nb_combined.cpp`, which was verified to work (§4 probe
+    results below). The same nanobind version must be pinned across repos so
+    downstream extension modules can share GeoCal types.
   * Packaging can get cleaner: a Python-free `libgeocal` package and a
     separate Python package, possibly one stable-ABI binary for Python ≥ 3.12.
+* **`GenericObject` and `Printable` with nanobind: keep both.** Neither is
+  needed for its original SWIG purpose, but both still have C++ roles.
+  * *Downcasting:* nanobind returns the most-derived registered type for
+    polymorphic classes on its own, so the 328 `%geocal_shared_ptr`
+    registrations go away. **Correction (probes, 2026-10-23):** this only
+    holds when the static type is in the class's *bound* base chain and is not
+    a virtual base. Returning `shared_ptr<GenericObject>` (a virtual base)
+    gives the right Python type and then segfaults on use, and declaring a
+    virtual base as a nanobind base also crashes. So a small type mapper is
+    still needed (see the next bullet).
+  * *`GenericObject`* is still the polymorphic root for Boost.Serialization:
+    `serialize_read_generic` / `serialize_write*` work on
+    `shared_ptr<GenericObject>`, and the Python shelve code (`read_shelve` in
+    `sqlite_shelf.py`, `misc.py`) uses that to read objects of unknown type.
+    It is also used by `GEOCAL_GENERIC_BASE` (186 uses), `GenericObjectMap`
+    and `weak_ptr_serialize_support`. It costs essentially nothing (empty
+    apart from a virtual destructor). Change its doc comment from "for SWIG"
+    to "serialization / heterogeneous-container root".
+  * *`Printable<T>`* mostly serves C++: 275 `print(std::ostream&)`
+    implementations, `operator<<` used on GeoCal objects in about 104 C++
+    places, and the `desc()` hook that lets Python subclasses override
+    printing (used in `igc_msp.py`). It is also how most classes get
+    `GenericObject` (virtual inheritance), so removing it would mean adding
+    `GenericObject` back wherever `GEOCAL_GENERIC_BASE` is used: churn with
+    no gain. For 2.0, add a generic `std::formatter` (§7.1 item 1) and a
+    nanobind helper that defines `__str__` from it; keep `desc()` or move that
+    override into the trampoline classes. Replacing the CRTP template with a
+    C++20 concept or deducing `this` (C++23) is possible later but low value.
+* **nanobind probe results that affect geocal (2026-10-23).** Throwaway
+  modules mimicking geocal's class patterns, nanobind 3.1.0. Full results and
+  the test plan are in the skeleton plan
+  (`/home/smyth/Local/swig-rules-skeleton/claude_notes/implementation_plan.md`
+  §2.1), which works all of this out on the small repository first.
+  * *Autotools build works:* plain `g++` with nanobind's `src/nb_combined.cpp`,
+    no CMake, no `libpython` link.
+  * *Virtual inheritance stays.* geocal has real diamonds
+    (`IgcRollingShutter : virtual ImageGroundConnection, virtual
+    WithParameterNested`, `WithParameter : virtual GenericObject`), and
+    framework has 169 virtual bases, so removing it isn't practical.
+  * *The fix is a forked nanobind caster plus a small type mapper.* The rules
+    library ships a fork of nanobind's 138-line `stl/shared_ptr.h` with two
+    changes: return the most-derived address via `dynamic_cast<void*>`, and use
+    `dynamic_pointer_cast` in its `enable_shared_from_this` path. A small
+    type-mapper registry, rooted at `GenericObject`, covers parameters typed as
+    `GenericObject` or as a secondary base. This is the same "own fork" model
+    as today's `my_shared_ptr.i`.
+  * *`weak_ptr`:* without `enable_shared_from_this`, nanobind makes a new
+    control block for every Python→C++ conversion, so `weak_ptr`s expire
+    immediately (for every class). Plan: `GenericObject :
+    std::enable_shared_from_this<GenericObject>`. That conflicts with
+    `Observer::this_obj = to_ptr(*this)` in `observer.h` (a non-owning self
+    pointer would become `weak_this`).
+    * *Rejected:* `weak_from_this()`. Observers register mostly in
+      constructors (`GlasGfmCamera`, `IpiImageGroundConnection`,
+      `OrbitDataImageGroundConnection`) and in serialization `load()`
+      (`AirMspiOrbit`), where no `shared_ptr` owns them yet, so it would break.
+    * *Fix:* keep the ownership-agnostic `this_obj` but build it, and
+      `to_ptr`/`const_pointer` in `null_deleter.h`, with the aliasing
+      `shared_ptr` constructor over a `shared_ptr<void>`, which leaves
+      `weak_this` alone.
+    * Tested: stack, member, `shared_ptr`-owned, Python-constructed and
+      Python-subclass observers all work, and `shared_from_this()` returns the
+      real owner.
+    * No ownership requirement on Observers or Observables. Details: skeleton
+      plan §2.4.
+  * *Multiple inheritance:* nanobind allows one bound base per class. The 8
+    geocal SWIG classes with two bases (`Camera`, `Orbit`, `IgcArray`,
+    `IgcMultiplePass`, RSM classes, `TiePointCollection`, `MspiGimbal`) bind
+    their primary base and get the other base's methods bound directly.
+  * *Directors, Python object identity and exception propagation* worked as
+    hoped.
+  * Run the binding tests under AddressSanitizer: a wrong pointer adjustment
+    returned the right answer by luck in one probe.
+* **framework (to follow geocal later; surveyed 2026-10-23).** None of the
+  geocal decisions need to change. Points to carry along:
+  * The shared rules library ships CMake and automake flavors.
+  * Arrays and `mdspan` must support column-major storage (framework has 831
+    `ColumnMajor` uses); `layout_left` was tested OK.
+  * The GSL replacement stays geocal-only: GSL is core in framework (563
+    uses, including the `gsl_multifit_nlinear` solvers).
+  * framework already uses Eigen.
+  * It has 52 multiple-base SWIG classes and 47 directors, and must first move
+    off `python<3.9`, `swig<4` and C++14.
 
 ---
 
@@ -522,8 +615,21 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
    minimum (`gxx_linux-64 14.*`, §7.4), run regularly so features newer than
    the minimum are caught when they are added. An occasional osx build is
    optional (macOS is best-effort).
-4. Add `clang-tools`, `bear` and `eigen` to `env/pixi.toml`; drop the SWIG
-   `<4.4.0` pin.
+4. Add `clang-tools` and `eigen` to `env/pixi.toml` (not `bear`, see §2.2; use
+   the skeleton's `script/make_compile_commands.py` and
+   `script/run_clang_tidy.sh`); drop the SWIG `<4.4.0` pin. `nanobind` and the
+   pinned `mdspan` snapshot are added in Phase 6.
+4a. **Copy the skeleton's `swig_rules/` and changed `config/m4/` files into
+   geocal** (decided). This includes, for example, the `ac_boost.m4` fix for
+   `--without-boost-serialization`. Don't use `git subtree pull` from
+   `swig-rules-repo` / `autoconf-repo`; those are left alone. Merging back
+   upstream can be looked at later; with nanobind, `swig-rules-repo` may stop
+   existing. Re-copy at the start of each geocal phase that depends on a
+   skeleton phase (Phases 1, 4, 5, 6), so geocal always uses rules the skeleton
+   has tested.
+4b. **Sanitizer build**: the skeleton's recipe (skeleton plan §0, "Sanitizer
+   builds") works without a configure option. Use it for the C++ and Python
+   tests at the end of Phases 5 and 6.
 5. **Golden serialization tests**: existing `unit_test_data` archives and
    pickles of the main classes. Real downstream archives come mainly from
    **ECOSTRESS, where they are embedded in HDF5 files**. Extracting those
@@ -531,7 +637,11 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
    be done before them.
 6. Add a **`--without-boost-serialization` build** (compile the C++ tests
    only) to the regular builds, after fixing the 12 files that break it today
-   (§3.2).
+   (§3.2). The skeleton's S0.6 fix is the pattern:
+   * guard the `.cc` files;
+   * guard the body of `swig_rules/lib/serialize_shared_ptr.h`;
+   * define `-DSWIG_HAVE_BOOST_SERIALIZATION` only when serialization is on;
+   * don't require `libboost_serialization` in `ac_boost.m4`.
 7. Optional: automake parallel tests (`parallel_test_execution_plan.md`).
 8. Add `.git-blame-ignore-revs` for the mass-edit commits.
 
@@ -550,8 +660,16 @@ unchanged, apart from the C++20 requirement; Phases 5–6 are the API break.
 4. Fix the real issues the compile check turned up (§8.2).
 5. Mechanical idiom fixes with clang-tidy (§8.3), one directory per commit,
    with wrapper regeneration in separate commits.
-6. Boost.Stacktrace and `std::source_location` replace the vendored
-   backtrace (§7.2).
+6. **`Exception` and `Printable`** (same as skeleton S1.4–S1.5, which works out
+   the details first):
+   * Boost.Stacktrace held as a member and `std::source_location` replace the
+     vendored backtrace (§3.2, §7.1 item 2);
+   * a format-string `Exception` constructor (§7.1 item 1);
+   * a generic `std::formatter` for `Printable<T>`;
+   * `static_cast` instead of the C-style casts in `Printable`.
+7. **clang-format** decision and one-time reformat, if adopted (§8.5), after
+   the clang-tidy passes and before the `std::shared_ptr` mass edit (skeleton
+   S1.6 trials the config first).
 
 ### Phase 2: Small library swaps that are not in the API
 1. **libsdbx → Boost.Geometry R-tree** (§3.6).
@@ -571,18 +689,46 @@ migration.
 **Before starting:** collect the ECOSTRESS archives embedded in HDF5 files
 for the golden tests (Phase 0 step 5).
 `boost::optional` → `std::optional`, then `boost::array` → `std::array`,
-each checked against the golden archives. Contribute the `swig_rules`
-changes back upstream.
+each checked against the golden archives. The `swig_rules` typemap changes come
+from the skeleton (S3), which proves them first.
 
 ### Phase 5: `std::shared_ptr` (GeoCal 2.0 API break)
-As described in §3.2, coordinated with `swig_rules` and downstream repos.
+As described in §3.2, using the skeleton's migration script (skeleton S4).
+Also in this phase:
+* change `to_ptr`/`const_pointer` (`null_deleter.h`) and `Observer::this_obj`
+  to the aliasing-constructor form (§4 probe results);
+* keep the repo's own `shared_ptr` save/load (`px`, version 1, `track_never`);
+* require byte-identical XML archives against the golden corpus.
+
+**Decided:** the Python bindings may be broken from Phase 5 until Phase 6
+(nanobind), as in the skeleton's S4. Phase 5 converts only C++ and
+serialization; the SWIG layer (`my_shared_ptr.i` etc.) is not ported to
+`std::shared_ptr`. During Phases 5–6:
+* build with `--without-swig`;
+* acceptance is the C++ tests, the `--without-boost-serialization` build and
+  the golden archives;
+* record the Python test results just before Phase 5, as the Phase 6 target.
 
 ### Phase 6: Binding tool (if nanobind is chosen)
-Run the nanobind pilot (§4), then decide. Include the pinned `mdspan`
-reference implementation as the array type between `nb::ndarray` and Blitz
-(§3.3.1). If the move goes ahead, the remaining SWIG limits on headers go
-away (§4, §7.2), C++23 becomes worth switching on (§7.5), and CMake becomes
-worth reconsidering (§6).
+Follows the skeleton's S6 (the pilot, §4). The design worked out there and
+carried over to geocal:
+* the forked `shared_ptr` caster and the `GenericObject`-rooted type mapper;
+* `GenericObject : std::enable_shared_from_this<GenericObject>`;
+* primary bound base only, with secondary-base methods bound directly;
+* trampolines for the 9 directors;
+* `nb::new_` + `std::make_shared` constructors for plain `GenericObject`
+  classes;
+* `__reduce__` with the Boost binary blob for pickling, with a
+  `multiprocessing.Pool` test (geocal uses it in production);
+* the pinned `mdspan` reference implementation as the array type between
+  `nb::ndarray` and Blitz (§3.3.1);
+* the `.i` → nanobind converter;
+* docstrings from doxygen;
+* `.pyi` stubs.
+
+Python API changes are accepted for 2.0 (§10). If the move goes ahead, the
+remaining SWIG limits on headers go away (§4, §7.2), C++23 becomes worth
+switching on (§7.5), and CMake becomes worth reconsidering (§6).
 
 ### Phase 7: Optional / later
 * FFTW → pocketfft (§3.5). Move it earlier when threading
@@ -594,8 +740,9 @@ worth reconsidering (§6).
 
 ## 6. Build system: autotools vs CMake
 
-Unchanged: **not a prerequisite** for anything above. clang-tidy can get its
-`compile_commands.json` from the autotools build with `bear -- make`.
+Unchanged: **not a prerequisite** for anything above. clang-tidy gets its
+`compile_commands.json` from the autotools build with the skeleton's
+`script/make_compile_commands.py` (`bear` doesn't run on this host, §2.2).
 Revisit CMake if the binding tool changes, or if the sibling AFIDS repos
 migrate together.
 
@@ -797,8 +944,10 @@ However, it would also cost almost nothing. Two reasonable choices:
 
 The goal is changes that are **mostly done by tools, easy to review, and
 don't change the public API**. They are done on `develop_2_0` in C++20 mode.
-Tooling: clang-tidy, with `compile_commands.json` from `bear -- make`, run
-per directory with `-fix`, followed by a build and the full test suite.
+Tooling: clang-tidy, with `compile_commands.json` from the skeleton's
+`script/make_compile_commands.py` and the wrapper `script/run_clang_tidy.sh`.
+The wrapper adds the conda sysroot and the Blitz config shim clang needs.
+Run per directory with `-fix`, followed by a build and the full test suite.
 
 ### 8.1 Make warnings useful first
 Today, 118,947 warnings bury the roughly 1,560 that come from GeoCal's own
@@ -851,6 +1000,54 @@ Unnamed parameters in virtual overrides are normal.
   downstream code see, causing churn for little gain.
 * No codebase-wide reformat unless the maintainers choose to do it (§5
   Phase 1 / `.clang-format`).
+
+### 8.5 clang-format: measured impact (2026-10-23, clang-format 21.1.8)
+
+Measured on `lib/` (652 files, 106k lines, generated wrappers and
+`thirdparty/` excluded):
+
+| Configuration | Files changed | Lines changed | Non-whitespace lines changed |
+|---|---|---|---|
+| Whitespace cleanup only (tabs → spaces, trailing whitespace) | — | 13,495 | 0 |
+| Stock `LLVM` | 650 | 48,603 | 17,340 |
+| Stock `GNU` | 650 | 82,768 | 33,969 |
+| **Tuned to geocal** (skeleton `claude_notes/clang_format_trial.clang-format`) | 646 | **38,102 (36%)** | **15,400 (14%)** |
+
+* *The tuned config keeps:* 2-space indent, 80 columns, `if(`/`for(`
+  without a space, `X& y`, `template<class T>`, function braces on their own
+  line, `public:` at column 0, no namespace indentation, includes not
+  reordered, and comments not reflowed (the `//---` Doxygen blocks stay as
+  they are).
+* *What it can't keep* (these three make up most of the visible change):
+  1. The "function name, newline, `(` arguments" layout: 1,046 lines in 262
+     files. clang-format always writes `name(` and breaks inside the
+     parentheses.
+  2. `{ body }` on the line after a short signature: 608 lines. It is either
+     joined onto the signature line or expanded to three lines.
+  3. The serialization chains (`ar & GEOCAL_NVP_(x)` with each
+     `& GEOCAL_NVP` on its own line): 595 continuation lines in 126 files.
+     These get packed together, and some configurations even misparse
+     `ar & X` as a reference declaration (`ar& X`). Use
+     `// clang-format off/on` around them, or accept the packing.
+* `ColumnLimit: 0` ("keep my line breaks") is worse: it joins lines (one
+  300-character serialization line). The `Macros:` option made the
+  serialization chains worse too.
+* The rest is normalization of existing inconsistencies: 8.5k lines with
+  tabs, 5.9k with trailing whitespace, default arguments written `x=1` vs
+  `x = 1`, `Archive & ar` vs `Archive& ar`.
+* **Assessment:** the result looks like geocal (same indentation, brace and
+  spacing conventions), but it is a large one-time diff. The function
+  signature layout changes visibly everywhere.
+* **Options:**
+  * (a) one-time reformat on `develop_2_0` with a `.git-blame-ignore-revs`
+    entry, then `clang-format` as a routine tool (like `ruff format`);
+  * (b) format only changed lines (`git clang-format`), so the style converges
+    slowly and the code is mixed for a long time;
+  * (c) whitespace cleanup only.
+* **Recommendation:** (a), timed with the 2.0 break: after the clang-tidy
+  passes, before the `std::shared_ptr` mass edit. Try the config on the
+  skeleton first (S1) and review a few geocal files formatted with it
+  before deciding. `.i` files are not formatted by clang-format.
 * Each check is its own commit, and so is each wrapper regeneration. Add the
   commits to `.git-blame-ignore-revs`.
 
@@ -890,9 +1087,30 @@ Unnamed parameters in virtual overrides are normal.
   broken in 12 files (§3.2). Fix, and add a regular build to keep it working.
 * `PhaseCorrelationMatcher` is not threaded today, but threading it (for
   example in tie-point collection) is desirable, so FFT thread safety matters (§3.5).
+* **Python API changes are accepted** for 2.0, as part of the backward-compatibility
+  break (decided in the skeleton discussion, 2026-10-23).
+* **No `boost::shared_ptr` support** after the conversion; no pointer-type
+  parameterization of `swig_rules`.
+* **Observers:** no ownership requirement; keep the ownership-agnostic
+  `this_obj`, built with the aliasing constructor (§4).
+* **`weak_ptr` to an object owned only by Python:** plain classes get
+  `nb::new_` + `std::make_shared` constructors; for Python subclasses,
+  document that the `weak_ptr` is only valid while C++ also owns the object.
+  geocal has no such `weak_ptr` members outside the Observer machinery.
+* **Every step is rehearsed in the skeleton first** (skeleton plan §0).
+* **Commit policy in the skeleton:** stage only, the maintainer commits
+  (geocal: never commit, per `CLAUDE.md`).
+* **Shared rules come from the skeleton:** copy `swig_rules/` and changed
+  `config/m4/` files from `swig-rules-skeleton` into geocal (§5 Phase 0 step
+  4a). The upstream `swig-rules-repo` / `autoconf-repo` are left alone; merging
+  back may be looked at later (with nanobind, `swig-rules-repo` may go away).
+* **Python bindings may be broken from Phase 5 until Phase 6** (§5 Phase 5).
 
 **Still open:**
 1. **Downstream archive inventory.** ECOSTRESS is probably the only
    producer of persisted archives, and they are embedded in HDF5 files.
    Revisit when the serialization work starts (before Phases 4–5).
 2. **When to cut `maintain_1.28`.**
+3. **clang-format** adoption (§8.5), after the skeleton trial (S1.6).
+4. **Final Python module name** after nanobind (skeleton: keep the current
+   name for now).

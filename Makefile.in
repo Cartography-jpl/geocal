@@ -31,7 +31,7 @@
 # includes the C++ file "list", because libtool has a script with the same name
 
 # aminclude_static.am generated automatically by Autoconf
-# from AX_AM_MACROS_STATIC on Mon Oct 19 16:45:07 PDT 2026
+# from AX_AM_MACROS_STATIC on Fri Oct 23 15:34:08 PDT 2026
 
 # We want to be able to generate both a stand alone Makefile for 
 # GeoCal, and an integrated one for AFIDS. Unfortunately, automake

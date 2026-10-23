@@ -4,7 +4,7 @@ import pytest
 
 
 # Doesn't currently work
-@pytest.mark.skip
+@pytest.mark.skip(reason="Doesn't currently work, SpotReflectance needs to be fixed")
 def test_print(unit_test_data):
     """Test printing of metadata"""
     sr = SpotReflectance(
@@ -15,7 +15,7 @@ def test_print(unit_test_data):
 
 
 # Doesn't currently work
-@pytest.mark.skip
+@pytest.mark.skip(reason="Doesn't currently work, SpotReflectance needs to be fixed")
 def test_refl(unit_test_data):
     """Test reflectance calculation."""
     sr = SpotReflectance(

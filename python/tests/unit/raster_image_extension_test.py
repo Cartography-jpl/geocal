@@ -54,7 +54,7 @@ def test_no_image(img):
     assert (t == np.zeros((10, 10), dtype=int)).all()
 
 
-@pytest.mark.skip
+@pytest.mark.skip(reason="Interactive display (plt.show), only for manual debugging")
 def test_display(stereo_unit_test_data):
     import matplotlib.pyplot as plt
 
@@ -63,7 +63,7 @@ def test_display(stereo_unit_test_data):
     plt.show()
 
 
-@pytest.mark.skip
+@pytest.mark.skip(reason="Interactive display (plt.show), only for manual debugging")
 def test_display2(stereo_unit_test_data):
     import matplotlib.pyplot as plt
 

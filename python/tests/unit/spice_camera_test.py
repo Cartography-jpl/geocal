@@ -13,12 +13,14 @@ from geocal import (
     IsisIgc,
 )
 from fixtures.require_check import require_spice, require_mars_spice, require_isis
+import os
 import pytest
 
 
 @require_spice
 @require_mars_spice
 def test_hrsc_camera():
+    SpiceKernelList([os.environ["MARS_KERNEL"] + "/mex_kernel/mex.ker"]).load_kernel()
     print(hrsc_camera())
 
     # Old code, here in case we want to compare
@@ -43,10 +45,13 @@ def test_hrsc_camera():
 @require_spice
 @require_mars_spice
 def test_ctx1_camera():
+    SpiceKernelList([os.environ["MARS_KERNEL"] + "/mro_kernel/mro.ker"]).load_kernel()
     print(ctx_camera())
 
 
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="One time creation of the ISIS NAC comparison files, requires LRO data in /raid28"
+)
 @require_spice
 @require_isis
 def test_create_nac(unit_test_data):

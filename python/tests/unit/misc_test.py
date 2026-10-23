@@ -42,7 +42,7 @@ def test_makedirs_p(isolated_dir):
 @require_afids_data
 @require_vicar
 # Doesn't currently work, we'll need to fix this
-@pytest.mark.skip
+@pytest.mark.skip(reason="Doesn't currently work, needs to be fixed")
 def test_cib01_data():
     if not os.path.exists(os.environ["CIB1_ROOT"] + "/cib01_db.int"):
         pytest.skip("CIB1 data not found")

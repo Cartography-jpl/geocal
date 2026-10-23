@@ -1,22 +1,17 @@
-from builtins import range
-from .igc_collection_extension import *
-from .tie_point_extension import *
-from .image_ground_connection import *
-from .igc_collection_extension import *
-from .simultaneous_bundle_adjustment import *
-from .lm_optimize import *
-from test_support import *
-from .sqlite_shelf import write_shelve, read_shelve
-import logging
-import sys
+from geocal import (
+    TiePoint,
+    TiePointCollection,
+    ImageCoordinate,
+    SimultaneousBundleAdjustment,
+    lm_optimize,
+    read_shelve,
+)
+import numpy as np
 
-console = logging.StreamHandler(stream=sys.stdout)
-console.setLevel(logging.INFO)
-logging.getLogger("geocal-python").addHandler(console)
-
-# Note the test data igccol_rolling_shutter.xml is created in 
+# Note the test data igccol_rolling_shutter.xml is created in
 # igc_collection_extension_test.py, in case you need to regenerate it
 # (e.g., change in the format)
+
 
 def create_tie_point(igccol, gp):
     tp = TiePoint(igccol.number_image)
@@ -25,17 +20,16 @@ def create_tie_point(igccol, gp):
         try:
             tp.image_coordinate(i, igccol.image_coordinate(i, gp), 0.05, 0.05)
         except RuntimeError:
-            pass # Ok if we can't get image coordinate
+            pass  # Ok if we can't get image coordinate
     return tp
 
-@skip
-@require_geocal_test_data
-def test_sba_end_to_end():
-    '''This is a more realistic sba end to end test. We use a IgcRollingShutter
+
+def test_sba_end_to_end(geocal_test_igc):
+    """This is a more realistic sba end to end test. We use a IgcRollingShutter
     because it is one of the more complicated ImageGroundConnection we have.
     We generate the input data, and then run the sba to make sure we can
-    retrieve the "truth".'''
-    igccol = read_shelve(geocal_test_igc)
+    retrieve the "truth"."""
+    igccol = read_shelve(str(geocal_test_igc))
     poriginal = igccol.parameter_subset
     ptrue = np.random.randn(poriginal.shape[0]) * 5
     igccol.parameter_subset = ptrue
@@ -48,9 +42,7 @@ def test_sba_end_to_end():
             tparr.append(tp)
     igc.parameter_subset = poriginal
     sba = SimultaneousBundleAdjustment(igccol, tparr, igc.dem)
-    parm = lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
+    lm_optimize(sba.sba_eq, sba.parameter, sba.sba_jacobian)
     print(len(igccol.parameter_subset))
     print(igccol.parameter_subset)
     print(ptrue)
-
-

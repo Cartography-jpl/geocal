@@ -8,7 +8,9 @@ from multiprocessing import Pool
 import pytest
 
 
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="Large one-time development test that needs external Mars data, see docstring"
+)
 def test_ray_caster_resampler(isolated_dir):
     """Because of the nature of these tests, we can't really do this well
     at the unit level. We really need a fairly large amount of data along

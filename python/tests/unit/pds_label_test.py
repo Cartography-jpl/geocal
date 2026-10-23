@@ -76,7 +76,9 @@ def test_spice_kernel_by_time_binary():
 
 
 # Depends on data we don't want to assume is available
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="Depends on a HiRISE ISIS cube in /data/smyth that we don't want to assume is available"
+)
 def test_pds_label_isis():
     """ISIS is almost the same as PDS, test this on a file"""
     fname = "/data/smyth/MarsHirise/Gale/esp_025012_1745_red2.norm.cub"

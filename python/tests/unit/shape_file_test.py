@@ -8,7 +8,9 @@ import shutil
 import pytest
 
 
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="Test data FRST_POIof090514.shp isn't in unit_test_data, and test needs updating"
+)
 def test_read(unit_test_data):
     """Test basic reading"""
     try:
@@ -24,7 +26,9 @@ def test_read(unit_test_data):
     assert sf["FRST_POIof090514"][3]["NAME"] == "Point_4"
 
 
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="Needs poi.shp/footprint.shp data that isn't available, and test needs updating"
+)
 def test_footprint_poi_intersect(unit_test_data):
     """Test finding footprints that match a particular POI set."""
     try:
@@ -40,7 +44,9 @@ def test_footprint_poi_intersect(unit_test_data):
     assert len(ly), 30
 
 
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="Not currently working, needs to be updated for current ShapeFile/ogr"
+)
 def test_write():
     """Test basic writing"""
     try:

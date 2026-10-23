@@ -18,7 +18,9 @@ def g(x, y):
     return x * y
 
 
-@pytest.mark.skip
+@pytest.mark.skip(
+    reason="functools.partial doesn't work reliably with multiprocessing; use a helper class instead"
+)
 def test_partial():
     # This doesn't actually work with python 2.6, although it seems
     # to work with 2.7. For now, we just avoid using partial with

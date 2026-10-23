@@ -10,3 +10,4 @@ create_delta.bundle
 .cache
 .tramp_history
 python/geocal.egg-info
+claude_documents/*.html

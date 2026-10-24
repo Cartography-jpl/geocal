@@ -51,6 +51,7 @@ make -j 20 installcheck       # Run Python tests (requires install)
 - `--enable-maintainer-mode`: Auto-regenerate configure/Makefile.in when .am files change
 - `--enable-debug`: Build with debugging symbols and extra checks (disables optimization)
 - `--without-documentation`: Skip doxygen generation during development builds
+- `--enable-python-editable-mode`: `make install` installs the python code in `python/` as an editable pip install (`pip install -e`) instead of copying it. Can also be selected for a single run with `make install PYTHON_EDITABLE_MODE=t` (use `PYTHON_EDITABLE_MODE=` to force a normal install when configure enabled it). SWIG wrappers (`.so`) are always a full install. The source tree must stay in place. See `claude_documents/python_editable_install_plan.md`.
 
 ### Running Single Tests
 

@@ -31,7 +31,7 @@
 # includes the C++ file "list", because libtool has a script with the same name
 
 # aminclude_static.am generated automatically by Autoconf
-# from AX_AM_MACROS_STATIC on Fri Oct 23 15:34:08 PDT 2026
+# from AX_AM_MACROS_STATIC on Fri Oct 23 17:03:09 PDT 2026
 
 # We want to be able to generate both a stand alone Makefile for 
 # GeoCal, and an integrated one for AFIDS. Unfortunately, automake
@@ -3030,6 +3030,7 @@ platpythondir = @platpythondir@
 prefix = @prefix@
 program_transform_name = @program_transform_name@
 psdir = @psdir@
+python_editable_mode_default = @python_editable_mode_default@
 pythondir = @pythondir@
 pythondocdir = @pythondocdir@
 pythonswigsrc = @pythonswigsrc@
@@ -4442,6 +4443,13 @@ etcafidspython_DATA = @srcpythonscript@/setup_afids_python.csh @srcpythonscript@
 @HAVE_SPICE_FALSE@setup_spice = :
 @HAVE_SPICE_TRUE@setup_spice = export SPICEDATA="$(abs_top_srcdir)/@geocalunittestdata@/spice" && export MARS_KERNEL="$(abs_top_srcdir)/@geocalunittestdata@/mars_kernel"
 setup_geocal = $(setup_afids_data) && $(setup_spice) && source $(DESTDIR)$(prefix)/setup_geocal.sh
+
+# Set to a non-empty value to install the python code in editable mode.
+# Default comes from configure (--enable-python-editable-mode), and can be
+# overridden for a single run with "make install PYTHON_EDITABLE_MODE=t"
+# (or "PYTHON_EDITABLE_MODE=" to force a normal install).
+# --force-reinstall is so switching modes really replaces the existing install.
+PYTHON_EDITABLE_MODE = @python_editable_mode_default@
 @HAVE_AFIDS_FALSE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):${PATH}:${GDAL_PREFIX}/bin
 @HAVE_AFIDS_TRUE@PYTHON_CHECK_PATH = $(afidspythonvdevdir):$(AFIDS_PREFIX)/bin:${PATH}:${GDAL_PREFIX}/bin
 all: $(BUILT_SOURCES)
@@ -15518,10 +15526,12 @@ install-python: all
 @HAVE_MSP_TRUE@install-msp-python: install-pkgpythonmspswigLTLIBRARIES install-pkgpythonmspswigPYTHON
 @HAVE_MSP_TRUE@	$(noop)
 
-# TODO Have a editable version of this
-
 python-install:
-	pip install --prefix=@prefix@ $(srcdir)/@srcpython@
+	if test -n "$(PYTHON_EDITABLE_MODE)"; then \
+	  pip install --prefix=@prefix@ --force-reinstall --no-deps -e $(abs_top_srcdir)/@srcpython@; \
+	else \
+	  pip install --prefix=@prefix@ --force-reinstall --no-deps $(srcdir)/@srcpython@; \
+	fi
 
 #python-check:
 #	$(setup_geocal) && pytest -n 10 $(srcdir)/@srcpython@/test

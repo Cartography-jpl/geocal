@@ -150,6 +150,24 @@ AC_ARG_WITH([conda-install-support],
 	     [with_conda_install_support=yes],
 	     [with_conda_install_support=no])
 AM_CONDITIONAL([WITH_CONDA_INSTALL_SUPPORT], [ test "$with_conda_install_support" = "yes" ])
+
+#=================================================================
+# Install the python code in editable mode (pip install -e) when doing
+# "make install". Can also be selected for a single run with
+# "make install PYTHON_EDITABLE_MODE=t". See
+# claude_documents/python_editable_install_plan.md
+
+AC_ARG_ENABLE([python-editable-mode],
+	      [AS_HELP_STRING([--enable-python-editable-mode],
+	      [install the python code in editable mode (pip install -e) in make install])],
+	      [enable_python_editable_mode=$enableval],
+	      [enable_python_editable_mode=no])
+if test "$enable_python_editable_mode" = "yes"; then
+   python_editable_mode_default=t
+else
+   python_editable_mode_default=
+fi
+AC_SUBST([python_editable_mode_default])
 	     
 #=================================================================
 # Turn off use of boost serialization of desired. Don't have a use

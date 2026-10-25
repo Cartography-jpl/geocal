@@ -66,10 +66,13 @@ make -j 20 installcheck       # Run Python tests (requires install)
 ```bash
 cd python
 pytest -n 10 tests                          # Run all tests (parallel)
-./test.sh tests/tie_point_collect_test.py  # Run single test
+./test.sh tests/unit/tie_point_collect_test.py  # Run single test
 ```
 
-The `test.sh` script ensures `test_support` is in PYTHONPATH.
+The `test.sh` script puts `python/` in PYTHONPATH and adds useful pytest options.
+Always pass it a test path; with no path it collects from the whole `python/` directory.
+Test fixtures and `require_*` skip markers live in `tests/fixtures/` (e.g., `require_check.py`).
+Don't pass `-p no:warnings` to pytest; that changes how pynitf handles its TRE warnings and makes a few NITF tests fail.
 
 ## Code Architecture
 
@@ -89,8 +92,7 @@ lib/
 python/
 ├── bin/                 # Python executables
 ├── geocal/              # Python-only code (not wrapped from C++)
-├── tests/               # Python unit tests
-└── test_support/        # Test utilities
+└── tests/               # Python tests (unit/, bintest/, fixtures/)
 ```
 
 The division between Support/Interface/Implementation is somewhat loose - it's mainly for organizing source files to avoid hundred-file directories.
@@ -178,6 +180,24 @@ To create a new project that extends GeoCal (e.g., adding instrument-specific ca
 5. **Libtool and debugging**: Use `./libtool --mode=execute gdb` to debug executables
 6. **Autotools regeneration**: Run `./bootstrap` if you modify `configure.ac` or `.am` files
 7. **SWIG not needed for builds**: Only needed to regenerate wrappers during development
+8. **cv2 and `LD_LIBRARY_PATH`**: Importing OpenCV (`cv2`) prepends the conda lib directory to `LD_LIBRARY_PATH`. On systems whose `/bin/sh` links against a newer libreadline than conda's, every `subprocess(..., shell=True)` then fails (`undefined symbol: rl_full_quoting_desired`), which silently makes `cmd_exists()` false and skips the vicarb/rsync tests. `python/geocal/tie_point_collect.py` restores `LD_LIBRARY_PATH` after its `import cv2`; any new `import cv2` should do the same.
+
+## Machine-Specific Notes
+
+Check `hostname` to see which machine you are on. Most work happens on JPL machines; the notes above assume those.
+
+### frenchpeas (Mike's home machine)
+
+- Gentoo Linux, AMD Ryzen 5 3600X: 12 threads, so use `-j 12` rather than `-j 20`.
+- Source: `/data2/smythdata/geocal-repo` (`/home/smyth/geocal-repo` is a symlink to it).
+- Build directory and pixi env: `/data2/smythdata/geocal-build/build-pixi`, created with `env/Makefile` (default `ENV_DIR`). The install prefix is the pixi env itself (`$CONDA_PREFIX`), configured with `--enable-maintainer-mode --enable-python-editable-mode` (see `../build_pixi.sh` in the build directory). Work inside `pixi shell` from that directory.
+- C++ tests: `./geocal_test_all` in the build directory (about 40s). Python tests: `cd python; pytest -n 10 tests`.
+- All dependencies come from the pixi env, including AFIDS/`vicarb`, the GDAL VICAR plugin and `SPICEDATA`.
+- Not installed (expected skips): MSP, ISIS, Mars SPICE kernels, `/raid` and other JPL test data.
+- The git remote is `github.com:Cartography-jpl/geocal` (public GitHub), not github.jpl.nasa.gov. `gh` is installed at the system level (`/usr/bin/gh`), not in the pixi env.
+- Every run prints `WARNING: RDRND generated: 0xffffffff ...`. This is harmless: the Ryzen 3000 RDRAND instruction is broken, and the software falls back to another random source.
+- The system `/bin/sh` links against Gentoo's newer libreadline, which is how gotcha 8 was found.
+- Known failure: `make installcheck` fails the 12 `tests/bintest/picmtch5_test.py` tests. `vicarb_env` puts the directory pytest started in (the build directory, for installcheck) at the front of `TAE_PATH`, so TAE runs the build-dir libtool wrapper `picmtch5` (a shell script). AFIDS's `vicset1.csh` has put the conda lib on `LD_LIBRARY_PATH`, so `/bin/sh` dies the same way as in gotcha 8. Running `cd python; pytest -n 10 tests` uses the installed binary, and everything passes. This is accepted as a frenchpeas-only issue (decided 2026-10-25); don't treat these 12 failures as a regression or try to fix them.
 
 ## Development Workflow
 

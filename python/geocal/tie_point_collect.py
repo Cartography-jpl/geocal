@@ -19,18 +19,32 @@ from .ray_intersect import RayIntersect3
 import math
 import itertools
 import multiprocessing
+import os
 import time
 import logging
 from tabulate import tabulate
 import numpy as np
 
 # Might not have cv2 available
+#
+# Importing cv2 prepends its library directory (e.g., the conda lib) to
+# LD_LIBRARY_PATH. This only affects subprocesses, which we don't need,
+# and it can break system programs run through a shell, e.g., the system
+# /bin/sh picking up an incompatible conda libreadline. So restore the
+# original value after the import.
+_ld_library_path = os.environ.get("LD_LIBRARY_PATH")
 try:
     import cv2
 
     have_cv2 = True
 except ImportError:
     have_cv2 = False
+finally:
+    if _ld_library_path is None:
+        os.environ.pop("LD_LIBRARY_PATH", None)
+    else:
+        os.environ["LD_LIBRARY_PATH"] = _ld_library_path
+    del _ld_library_path
 
 
 class TiePointWrap(object):

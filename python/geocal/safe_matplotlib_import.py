@@ -16,23 +16,23 @@ if "matplotlib.backends" not in _sys.modules and (
 # We still might fail, if for example we have a DISPLAY environment variable
 # set for a display that isn't there anymore. So go ahead and try to import,
 # but if this fails then switch to agg.
-try:
-    import warnings as _warnings
+import warnings as _warnings
 
-    _warnings.filterwarnings(
-        action="ignore",
-        message=".*gdk_cursor_new_for_display: assertion `GDK_IS_DISPLAY \\(display\\)' failed.*",
-    )
-    _warnings.filterwarnings(action="ignore", message=".*could not open display.*")
+try:
+    # The filters are only in effect inside the with block
+    with _warnings.catch_warnings():
+        _warnings.filterwarnings(
+            action="ignore",
+            message=".*gdk_cursor_new_for_display: assertion `GDK_IS_DISPLAY \\(display\\)' failed.*",
+        )
+        _warnings.filterwarnings(action="ignore", message=".*could not open display.*")
+        # This import is the test, so it is "unused"
+        import matplotlib.pyplot
 except RuntimeError:
     import matplotlib
 
-    matplotlib.use("agg", warn=False, force=True)
-finally:
-    # Remove our filters
-    _warnings.filters.pop(0)
-    _warnings.filters.pop(0)
-    del _warnings
+    matplotlib.use("agg", force=True)
 
+del _warnings
 del _os
 del _sys

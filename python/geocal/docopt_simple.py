@@ -5,7 +5,7 @@ import re
 import sys
 from typing import Any
 
-from geocal_swig import VicarArgument  # type: ignore
+from geocal_swig import VicarArgument
 
 from .docopt import docopt  # type: ignore
 

@@ -57,4 +57,7 @@ def _rotated_map(self, igc):
     return igc.cover(_rotated_map_gc(self, gc1, gc2))
 
 
-MapInfo.rotated_map = _rotated_map
+# Python functions are added to SWIG classes below. mypy doesn't know
+# about attributes added after a class is defined, so those lines need
+# a type: ignore.
+MapInfo.rotated_map = _rotated_map  # type: ignore[attr-defined]

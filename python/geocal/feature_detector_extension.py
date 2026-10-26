@@ -77,6 +77,9 @@ def interest_point_grid(
     return list(chain.from_iterable(res))
 
 
-FeatureDetector.interest_point_grid = interest_point_grid
+# Python functions are added to SWIG classes below. mypy doesn't know
+# about attributes added after a class is defined, so those lines need
+# a type: ignore.
+FeatureDetector.interest_point_grid = interest_point_grid  # type: ignore[attr-defined]
 
 __all__ = []

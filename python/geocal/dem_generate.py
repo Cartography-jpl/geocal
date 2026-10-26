@@ -8,11 +8,11 @@ import re
 from multiprocessing.pool import Pool
 from typing import Any
 
-import geocal_swig  # type: ignore
+import geocal_swig
 import matplotlib.pyplot as plt
 import numpy as np
 import scipy.interpolate
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
     CalcRasterMultiBand,
     CcorrLsmMatcher,
     CoordinateConverter,
@@ -23,6 +23,7 @@ from geocal_swig import (  # type: ignore
     ImageCoordinate,
     ImageGroundConnection,
     ImageMatcher,
+    ImageToImageMatch,
     MapInfo,
     PlanetocentricConverter,
     RasterImage,
@@ -34,7 +35,7 @@ from .ply_file import PlyFile
 from .ray_intersect import RayIntersect
 
 
-def _new_from_init(cls, version, *args):  # type: ignore
+def _new_from_init(cls, version, *args):
     if cls.pickle_format_version() < version:
         raise RuntimeError(
             f"Class is expecting a pickled object with version number {cls.pickle_format_version():d}, but we found {version:d}"
@@ -152,6 +153,7 @@ class DemGenerate:
         # CoordinateConverter to use, but for now we assume for earth we
         # are using GeodeticConverter and other naif codes use Planetocentric.
         gc_sample = self.igc1.ground_coordinate(ImageCoordinate(0, 0))
+        self.coordinate_converter: CoordinateConverter
         if gc_sample.naif_code() == CoordinateConverter.EARTH_NAIF_CODE:
             self.coordinate_converter = GeodeticConverter()
         else:
@@ -162,6 +164,7 @@ class DemGenerate:
         self.surface_image1 = surface_image1
         self.surface_image2 = surface_image2
         self.image_matcher = image_matcher
+        self.itoim: ImageToImageMatch
         if surface_image1 is None or surface_image2 is None:
             self.itoim = IgcImageToImageMatch(self.igc1, self.igc2, self.image_matcher)
         else:
@@ -441,7 +444,7 @@ class DemGenerate:
                 )
         return dv_orig
 
-    def plot_res(self, aoi_img: MapInfo = None) -> None:
+    def plot_res(self, aoi_img: RasterImage | None = None) -> None:
         """This is a utility that can be run after doing height_grid.
         It shows a plot summarizing the changes to the DEM and where
         we have found matches.
@@ -497,7 +500,7 @@ class DemGenerate:
         plt.show()
 
     def match(
-        self, img1_line: ImageCoordinate, img1_sample: ImageCoordinate
+        self, img1_line: float, img1_sample: float
     ) -> list[None | ImageCoordinate]:
         """Do image matching between image 1 and image 2, returning either
         None if this fails or a pair [ic1, ic2] which is the image coordinates

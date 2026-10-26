@@ -145,7 +145,11 @@ The division between Support/Interface/Implementation is somewhat loose - it's m
   - Add hints where they clarify intent
   - Don't aim for full mypy compliance
   - Duck typing is acceptable even if hints suggest otherwise
-  - Current codebase passes mypy cleanly with Python 3.11.10
+- **mypy**: run `mypy` from `python/` (settings in `python/pyproject.toml`, which checks `geocal/`). It passes cleanly (mypy 2.4.0, 2026-10-25); keep it that way. It needs the installed `geocal_swig`, so run it after `make install`.
+  - **`geocal_swig` typing**: `make` generates `geocal_swig/__init__.pyi` (rule in `swig_rules/swig_rules.am`), which star imports every SWIG module, and installs it with `py.typed`. That gives mypy every SWIG class, the class hierarchy and attribute names, but SWIG methods are untyped (arguments and returns are `Any`). For real signatures on a module, add a hand-written stub (e.g. `lib/GeoCalCore/Interface/image_coordinate.pyi`) to `SWIG_PYI` in the `.am` file. A stub replaces the whole module, so it must list everything public in the module.
+  - **`geocal` typing**: `python/geocal/__init__.pyi` lists every module, because `__init__.py` imports them with `exec`. When adding a module to `geocal/`, add it there too (`tests/unit/init_stub_test.py` checks this).
+  - **Python methods added to SWIG classes** (the `*_extension.py` pattern, e.g. `RasterImage.read_all = _read_all`) need `# type: ignore[attr-defined]` on the assignment, and on uses of the added method inside geocal, because mypy doesn't know about attributes added after a class is defined.
+  - `tests/unit/type_test.py` deliberately has two type errors; `mypy tests/unit/type_test.py` should report exactly those.
 
 ### C++
 

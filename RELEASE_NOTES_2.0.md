@@ -72,4 +72,20 @@ fixtures and `require_*` skip markers now live in `python/tests/fixtures/`.
 - Python code updated for ruff 0.17 (f-strings, sorted imports, file
   handles closed with `with`, removed Python 2 compatibility code).
   `bin/findepend.py` was updated from Python 2.
-- Development environment updated to ruff 0.17.2 and mypy 2.4.0.
+- Development environment updated to ruff 0.17.2 and mypy 2.4.0, and
+  type stubs added for scipy, tabulate and seaborn (`scipy-stubs` is
+  matched to the scipy version).
+- Type checking support:
+  - `geocal_swig` now installs a generated `__init__.pyi`, so type checkers
+    (mypy, IDEs) see every SWIG class and its attributes. SWIG method
+    signatures are still untyped (`Any`), except in modules that have a
+    hand-written stub (currently `image_coordinate`).
+  - `geocal` has an `__init__.pyi` listing its modules, so
+    `from geocal import X` is understood by type checkers.
+  - `geocal` passes mypy cleanly. Several wrong type hints were corrected;
+    e.g. `RayIntersect2.ray_intersect` and `RayIntersect3.ray_intersect`
+    are now documented as returning `TiePoint | None`.
+- `safe_matplotlib_import` works again. An earlier cleanup had removed its
+  test import of `matplotlib.pyplot`, so it never fell back to the `agg`
+  backend. The fallback also used `matplotlib.use(warn=...)`, which
+  matplotlib no longer accepts.

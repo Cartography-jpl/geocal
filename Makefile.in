@@ -63,6 +63,7 @@
 #       so for example $(SWIG_SRC) HAVE_HDF5 $(SWIG_SRC_HDF5). If you
 #       don't have any conditional code, this can just be set to FULL_SWIG_SRC
 # SWIG_PYI list of .pyi files to include for typing
+# MOSTLYCLEANFILES should already be defined (we add to it)
 # SWIG_CPPFLAGS the flags we should use when compiling swig code,
 #       so a list of -I options.
 # PYTHON_CPPFLAGS flags needed to compile against python
@@ -361,11 +362,12 @@ am__installdirs = "$(DESTDIR)$(afidspythonvdevdir)" \
 	"$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" \
 	"$(DESTDIR)$(etcafidspythondir)" \
 	"$(DESTDIR)$(installafidspythondir)" \
-	"$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgpythonswigdir)" \
-	"$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" \
-	"$(DESTDIR)$(includedir)" "$(DESTDIR)$(sdbxdir)" \
-	"$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" \
-	"$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"
+	"$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(pkgconfigdir)" \
+	"$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(geocalincdir)" \
+	"$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" \
+	"$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" \
+	"$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" \
+	"$(DESTDIR)$(swigincdir)"
 PROGRAMS = $(afidspythonvdev_PROGRAMS) $(bin_PROGRAMS)
 am__vpath_adj_setup = srcdirstrip=`echo "$(srcdir)" | sed 's|.|.|g'`;
 am__vpath_adj = case $$p in \
@@ -2323,7 +2325,8 @@ am__dist_afidspythonvdev_DATA_DIST =  \
 	$(srcdir)/$(srcpythonbin)/pan_sharpen.pdf
 DATA = $(dist_afidspythonvdev_DATA) $(dist_sdbxdoc_DATA) \
 	$(etcafidspython_DATA) $(installafidspython_DATA) \
-	$(pkgconfig_DATA) $(pkgpythonswig_DATA)
+	$(nodist_pkgpythonswig_DATA) $(pkgconfig_DATA) \
+	$(pkgpythonswig_DATA)
 am__geocalinc_HEADERS_DIST = @srcsupport@/geocal_config.h \
 	@srcsupport@/boost_pcall.h \
 	@srcsupport@/geocal_external_config.h \
@@ -4340,7 +4343,8 @@ geocal_test_all_CPPFLAGS = $(AM_CPPFLAGS) $(CODE_COVERAGE_CPPFLAGS) \
 	$(BOOST_CPPFLAGS) $(SPICE_CFLAGS) $(FFTW_CFLAGS) \
 	$(BLITZ_CFLAGS) $(CARTO_CFLAGS) $(GDAL_CFLAGS) $(HDF5_CFLAGS) \
 	-DSWIG_MAPPER_NAMESPACE=GeoCal $(am__append_32)
-MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img 
+MOSTLYCLEANFILES = dummy.pdf test_out/vicar_copy.img \
+	swig_pyi/__init__.pyi
 @WITH_DOCUMENTATION_TRUE@geocaldocdir = ${datarootdir}/doc/geocal
 @WITH_DOCUMENTATION_TRUE@geocaldocsearchdir = ${geocaldocdir}/html/search
 sdbxdocdir = ${datarootdir}/doc/libsdbx
@@ -4395,6 +4399,14 @@ pkgpythonswig_PYTHON = @swigrules@/__init__.py @swigrules@/all.py \
 	%_wrap.cc, %.py, $(ADDITONAL_SWIG_SRC))
 pkgpythonswig_LTLIBRARIES = _swig_wrap.la
 pkgpythonswig_DATA = $(SWIG_PYI) @swigrules@/py.typed
+
+# __init__.py pulls in every module with exec, which mypy can't
+# follow. Generate a __init__.pyi stub that explicitly star imports each
+# module we install, so type checkers see all the classes. This is
+# generated from the same lists used to install the .py files, so it
+# stays in sync.
+SWIG_INIT_PYI_MODULES = $(notdir $(patsubst %_wrap.cc,%,$(COMPILE_SWIG_SRC) $(ADDITONAL_SWIG_SRC)))
+nodist_pkgpythonswig_DATA = swig_pyi/__init__.pyi
 _swig_wrap_la_CPPFLAGS = $(PYTHON_CPPFLAGS) $(PYTHON_NUMPY_CPPFLAGS) \
 	$(SWIG_CPPFLAGS) -DSWIG_TYPE_TABLE=$(SWIG_TYPE_TABLE_NAME)
 _swig_wrap_la_CXXFLAGS = $(AM_CXXFLAGS)
@@ -13071,6 +13083,27 @@ uninstall-installafidspythonDATA:
 	@list='$(installafidspython_DATA)'; test -n "$(installafidspythondir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(installafidspythondir)'; $(am__uninstall_files_from_dir)
+install-nodist_pkgpythonswigDATA: $(nodist_pkgpythonswig_DATA)
+	@$(NORMAL_INSTALL)
+	@list='$(nodist_pkgpythonswig_DATA)'; test -n "$(pkgpythonswigdir)" || list=; \
+	if test -n "$$list"; then \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(pkgpythonswigdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(pkgpythonswigdir)" || exit 1; \
+	fi; \
+	for p in $$list; do \
+	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
+	  echo "$$d$$p"; \
+	done | $(am__base_list) | \
+	while read files; do \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(pkgpythonswigdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(pkgpythonswigdir)" || exit $$?; \
+	done
+
+uninstall-nodist_pkgpythonswigDATA:
+	@$(NORMAL_UNINSTALL)
+	@list='$(nodist_pkgpythonswig_DATA)'; test -n "$(pkgpythonswigdir)" || list=; \
+	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
+	dir='$(DESTDIR)$(pkgpythonswigdir)'; $(am__uninstall_files_from_dir)
 install-pkgconfigDATA: $(pkgconfig_DATA)
 	@$(NORMAL_INSTALL)
 	@list='$(pkgconfig_DATA)'; test -n "$(pkgconfigdir)" || list=; \
@@ -13721,7 +13754,7 @@ install-pkgpythonmspswigLTLIBRARIES: install-libLTLIBRARIES
 install-pkgpythonswigLTLIBRARIES: install-libLTLIBRARIES
 
 installdirs:
-	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
+	for dir in "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(libdir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(bindir)" "$(DESTDIR)$(pkgpythonmspswigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(afidspythonvdevdir)" "$(DESTDIR)$(sdbxdocdir)" "$(DESTDIR)$(etcafidspythondir)" "$(DESTDIR)$(installafidspythondir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(pkgconfigdir)" "$(DESTDIR)$(pkgpythonswigdir)" "$(DESTDIR)$(geocalincdir)" "$(DESTDIR)$(geocalswigincdir)" "$(DESTDIR)$(includedir)" "$(DESTDIR)$(sdbxdir)" "$(DESTDIR)$(sdbxbtreedir)" "$(DESTDIR)$(sdbxrtreedir)" "$(DESTDIR)$(sdbxsupportdir)" "$(DESTDIR)$(swigincdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: $(BUILT_SOURCES)
@@ -14444,7 +14477,8 @@ install-data-am: install-afidspythonvdevPROGRAMS \
 	install-dist_afidspythonvdevSCRIPTS install-dist_sdbxdocDATA \
 	install-etcafidspythonDATA install-geocalincHEADERS \
 	install-geocalswigincHEADERS install-includeHEADERS \
-	install-installafidspythonDATA install-pkgconfigDATA \
+	install-installafidspythonDATA \
+	install-nodist_pkgpythonswigDATA install-pkgconfigDATA \
 	install-pkgpythonmspswigLTLIBRARIES \
 	install-pkgpythonmspswigPYTHON install-pkgpythonswigDATA \
 	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
@@ -15133,7 +15167,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-etcafidspythonDATA uninstall-geocalincHEADERS \
 	uninstall-geocalswigincHEADERS uninstall-includeHEADERS \
 	uninstall-installafidspythonDATA uninstall-libLTLIBRARIES \
-	uninstall-pkgconfigDATA uninstall-pkgpythonmspswigLTLIBRARIES \
+	uninstall-nodist_pkgpythonswigDATA uninstall-pkgconfigDATA \
+	uninstall-pkgpythonmspswigLTLIBRARIES \
 	uninstall-pkgpythonmspswigPYTHON uninstall-pkgpythonswigDATA \
 	uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
@@ -15166,7 +15201,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	install-geocalswigincHEADERS install-html install-html-am \
 	install-includeHEADERS install-info install-info-am \
 	install-installafidspythonDATA install-libLTLIBRARIES \
-	install-man install-pdf install-pdf-am install-pkgconfigDATA \
+	install-man install-nodist_pkgpythonswigDATA install-pdf \
+	install-pdf-am install-pkgconfigDATA \
 	install-pkgpythonmspswigLTLIBRARIES \
 	install-pkgpythonmspswigPYTHON install-pkgpythonswigDATA \
 	install-pkgpythonswigLTLIBRARIES install-pkgpythonswigPYTHON \
@@ -15186,8 +15222,8 @@ uninstall-am: uninstall-afidspythonvdevPROGRAMS uninstall-binPROGRAMS \
 	uninstall-etcafidspythonDATA uninstall-geocalincHEADERS \
 	uninstall-geocalswigincHEADERS uninstall-hook \
 	uninstall-includeHEADERS uninstall-installafidspythonDATA \
-	uninstall-libLTLIBRARIES uninstall-pkgconfigDATA \
-	uninstall-pkgpythonmspswigLTLIBRARIES \
+	uninstall-libLTLIBRARIES uninstall-nodist_pkgpythonswigDATA \
+	uninstall-pkgconfigDATA uninstall-pkgpythonmspswigLTLIBRARIES \
 	uninstall-pkgpythonmspswigPYTHON uninstall-pkgpythonswigDATA \
 	uninstall-pkgpythonswigLTLIBRARIES \
 	uninstall-pkgpythonswigPYTHON uninstall-sdbxHEADERS \
@@ -15407,6 +15443,11 @@ clean_unit_test:
 # Allow searchs for .i in this directory
 vpath %.i $(srcdir)/@swigrules@/include
 vpath %.i $(srcdir)/@swigrules@/lib
+swig_pyi/__init__.pyi: Makefile
+	$(MKDIR_P) swig_pyi
+	{ echo "# Generated by make from the list of swig modules, do not edit."; \
+	  for m in $(SWIG_INIT_PYI_MODULES); do echo "from .$$m import *"; done; } > $@.tmp
+	mv $@.tmp $@
 
 # Only generate these files in maintainer mode, otherwise consider them
 # as input.

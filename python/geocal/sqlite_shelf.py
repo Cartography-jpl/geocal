@@ -19,7 +19,7 @@ from collections.abc import MutableMapping as DictMixin
 from pathlib import Path
 from typing import Any
 
-import geocal_swig  # type: ignore
+import geocal_swig
 
 # Allow jsonpickle to be used, if available.
 try:

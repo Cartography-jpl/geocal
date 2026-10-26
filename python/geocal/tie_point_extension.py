@@ -8,13 +8,12 @@ from typing import Any
 
 import matplotlib.pyplot as plt
 import numpy as np
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
     CartesianFixedLookVector,
     Ecr,
     IgcCollection,
     IgcMapProjected,
     ImageCoordinate,
-    ImageGroundConnection,
     LnLookVector,
     MapInfo,
     RasterImage,
@@ -95,7 +94,10 @@ def _tp_read_old_mspi_format(
     return tp
 
 
-TiePoint.read_old_mspi_format = classmethod(_tp_read_old_mspi_format)
+# Python functions are added to SWIG classes below. mypy doesn't know
+# about attributes added after a class is defined, so those lines need
+# a type: ignore.
+TiePoint.read_old_mspi_format = classmethod(_tp_read_old_mspi_format)  # type: ignore[attr-defined]
 
 
 def _tp__write_old_mspi_format(
@@ -124,17 +126,17 @@ def _tp__write_old_mspi_format(
                 )
 
 
-TiePoint.write_old_mspi_format = _tp__write_old_mspi_format
+TiePoint.write_old_mspi_format = _tp__write_old_mspi_format  # type: ignore[attr-defined]
 
 
 def _tp_display(
     self: TiePoint,
-    igc_coll: ImageGroundConnection,
+    igc_coll: IgcCollection,
     sz: int = 500,
     ref_image: RasterImage | None = None,
     number_row: int | None = None,
     map_info: MapInfo | None = None,
-    surface_image: RasterImage | None = None,
+    surface_image: list[RasterImage] | None = None,
 ) -> None:
     """This executes plt.imshow for the images that make up this
     tiepoint.  Since we don't store the images in a tiepoint, you
@@ -176,12 +178,12 @@ def _tp_display(
                 pt = igc_proj.coordinate(
                     igc_coll.ground_coordinate(i, self.image_coordinate(i))
                 )
-                igc_proj.display(pt, sz)
+                igc_proj.display(pt, sz)  # type: ignore[attr-defined]
             elif surface_image:
                 pt = surface_image[i].coordinate(
                     igc_coll.ground_coordinate(i, self.image_coordinate(i))
                 )
-                surface_image[i].display(pt, sz)
+                surface_image[i].display(pt, sz)  # type: ignore[attr-defined]
             else:
                 igc_coll.image(i).display(self.image_coordinate(i), sz)
     if ref_image is not None:
@@ -189,14 +191,14 @@ def _tp_display(
         plt.title("Reference Image")
         if self.is_gcp:
             ic = ref_image.coordinate(self.ground_location)
-            ref_image.display(ic, sz)
+            ref_image.display(ic, sz)  # type: ignore[attr-defined]
         else:
             d = np.zeros((sz, sz))
             plt.imshow(d, cmap=plt.cm.gray, vmin=-1, vmax=0, extent=(0, sz, 0, sz))  # type: ignore[attr-defined]
     plt.tight_layout()
 
 
-TiePoint.display = _tp_display
+TiePoint.display = _tp_display  # type: ignore[attr-defined]
 
 
 def _tpcol_create_multiple_pass(
@@ -236,7 +238,7 @@ def _tpcol_create_multiple_pass(
     return res
 
 
-TiePointCollection.create_multiple_pass = classmethod(_tpcol_create_multiple_pass)
+TiePointCollection.create_multiple_pass = classmethod(_tpcol_create_multiple_pass)  # type: ignore[attr-defined]
 
 
 def _tpcol_tp_info(self: TiePointCollection) -> tuple[pd.DataFrame, list[str]]:
@@ -260,7 +262,7 @@ def _tpcol_tp_info(self: TiePointCollection) -> tuple[pd.DataFrame, list[str]]:
     return pd.DataFrame(d, index=ind), cols
 
 
-TiePointCollection.tp_info = _tpcol_tp_info
+TiePointCollection.tp_info = _tpcol_tp_info  # type: ignore[attr-defined]
 
 
 def _tpcol_tp_res(
@@ -296,7 +298,7 @@ def _tpcol_tp_res(
     return pd.DataFrame(d, index=ind), cols
 
 
-TiePointCollection.tp_res = _tpcol_tp_res
+TiePointCollection.tp_res = _tpcol_tp_res  # type: ignore[attr-defined]
 
 
 def _tpcol_gcp_diff(
@@ -342,7 +344,7 @@ def _tpcol_gcp_diff(
     )
 
 
-TiePointCollection.gcp_diff = _tpcol_gcp_diff
+TiePointCollection.gcp_diff = _tpcol_gcp_diff  # type: ignore[attr-defined]
 
 
 def _tpcol_data_frame(
@@ -411,7 +413,7 @@ def _tpcol_data_frame(
     )
 
 
-TiePointCollection.data_frame = _tpcol_data_frame
+TiePointCollection.data_frame = _tpcol_data_frame  # type: ignore[attr-defined]
 
 
 def _tpcol_read_old_mspi_format(
@@ -428,11 +430,11 @@ def _tpcol_read_old_mspi_format(
     lst = [dpath / f for f in os.listdir(dpath) if m.match(f)]
     tpcol = cls()
     for f in lst:
-        tpcol.append(TiePoint.read_old_mspi_format(f))
+        tpcol.append(TiePoint.read_old_mspi_format(f))  # type: ignore[attr-defined]
     return tpcol
 
 
-TiePointCollection.read_old_mspi_format = classmethod(_tpcol_read_old_mspi_format)
+TiePointCollection.read_old_mspi_format = classmethod(_tpcol_read_old_mspi_format)  # type: ignore[attr-defined]
 
 
 def _tpcol_write_old_mspi_format(
@@ -447,7 +449,7 @@ def _tpcol_write_old_mspi_format(
         tp.write_old_mspi_format(dirname, gcp_sigma)
 
 
-TiePointCollection.write_old_mspi_format = _tpcol_write_old_mspi_format
+TiePointCollection.write_old_mspi_format = _tpcol_write_old_mspi_format  # type: ignore[attr-defined]
 
 
 def _tpcol_extend(self: TiePointCollection, tparr: list[TiePoint]) -> None:
@@ -456,7 +458,7 @@ def _tpcol_extend(self: TiePointCollection, tparr: list[TiePoint]) -> None:
         self.append(tp)
 
 
-TiePointCollection.extend = _tpcol_extend
+TiePointCollection.extend = _tpcol_extend  # type: ignore[attr-defined]
 
 
 def _tpcol_data_frame2(
@@ -490,6 +492,6 @@ def _tpcol_data_frame2(
     return df
 
 
-TiePointCollection.data_frame2 = _tpcol_data_frame2
+TiePointCollection.data_frame2 = _tpcol_data_frame2  # type: ignore[attr-defined]
 
 __all__ = []

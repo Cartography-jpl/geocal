@@ -36,7 +36,7 @@ def _display(self, ic, sz, cross_hair=True):
     )
 
 
-geocal_swig.RasterImage.display = _display
+geocal_swig.RasterImage.display = _display  # type: ignore[attr-defined]
 
 
 def _read_all(self):
@@ -45,7 +45,7 @@ def _read_all(self):
     return self.read(0, 0, self.number_line, self.number_sample)
 
 
-geocal_swig.RasterImage.read_all = _read_all
+geocal_swig.RasterImage.read_all = _read_all  # type: ignore[attr-defined]
 
 
 def _read_all2(self):
@@ -56,7 +56,7 @@ def _read_all2(self):
     )
 
 
-geocal_swig.RasterImageMultiBand.read_all = _read_all2
+geocal_swig.RasterImageMultiBand.read_all = _read_all2  # type: ignore[attr-defined]
 
 
 def _read_all_double(self):
@@ -65,7 +65,7 @@ def _read_all_double(self):
     return self.read_double(0, 0, self.number_line, self.number_sample)
 
 
-geocal_swig.RasterImage.read_all_double = _read_all_double
+geocal_swig.RasterImage.read_all_double = _read_all_double  # type: ignore[attr-defined]
 
 
 def _read_all_double2(self):
@@ -76,7 +76,7 @@ def _read_all_double2(self):
     )
 
 
-geocal_swig.RasterImageMultiBand.read_all_double = _read_all_double2
+geocal_swig.RasterImageMultiBand.read_all_double = _read_all_double2  # type: ignore[attr-defined]
 
 
 def _read_all_byte_scale(self):
@@ -88,8 +88,8 @@ def _read_all_byte_scale(self):
     return (d / float(d.max()) * 255).round().astype(np.uint8)
 
 
-geocal_swig.RasterImage.read_all_byte_scale = _read_all_byte_scale
-geocal_swig.RasterImageMultiBand.read_all_byte_scale = _read_all_byte_scale
+geocal_swig.RasterImage.read_all_byte_scale = _read_all_byte_scale  # type: ignore[attr-defined]
+geocal_swig.RasterImageMultiBand.read_all_byte_scale = _read_all_byte_scale  # type: ignore[attr-defined]
 
 
 def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
@@ -113,6 +113,6 @@ def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
 
 
 if have_shape_file:
-    geocal_swig.RasterImage.footprint_geometry = _footprint_geometry
+    geocal_swig.RasterImage.footprint_geometry = _footprint_geometry  # type: ignore[attr-defined]
 
 __all__ = []

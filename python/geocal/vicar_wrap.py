@@ -5,7 +5,8 @@ import os
 from pathlib import Path
 
 import numpy as np
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
+    CartesianFixed,
     Geodetic,
     GroundCoordinate,
     IbisFile,
@@ -27,11 +28,11 @@ class __scinterp(VicarInterface):
     def __init__(
         self,
         time: Time,
-        pos_previous: GroundCoordinate,
+        pos_previous: CartesianFixed,
         t_pos_previous: Time,
         att_previous: Quaternion_double,
         t_att_previous: Time,
-        pos_subsequent: GroundCoordinate,
+        pos_subsequent: CartesianFixed,
         t_pos_subsequent: Time,
         att_subsequent: Quaternion_double,
         t_att_subsequent: Time,
@@ -123,11 +124,11 @@ write "&o3"
 
 def scinterp(
     time: Time,
-    pos_previous: GroundCoordinate,
+    pos_previous: CartesianFixed,
     t_pos_previous: Time,
     att_previous: Quaternion_double,
     t_att_previous: Time,
-    pos_subsequent: GroundCoordinate,
+    pos_subsequent: CartesianFixed,
     t_pos_subsequent: Time,
     att_subsequent: Quaternion_double,
     t_att_subsequent: Time,
@@ -257,7 +258,7 @@ ibis-gen xxxb nc=5 nr=8 deffmt=DOUB
         """Grab the results from the ibis file before we finish with the
         scratch directory."""
         f = IbisFile("xxxb")
-        self.res = Geodetic(f[0, 1], f[0, 0], f[0, 2])
+        self.res = Geodetic(f[0, 1], f[0, 0], f[0, 2])  # type: ignore[index]
 
 
 def sc2rpc(

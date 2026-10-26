@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 import numpy as np
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
     IbisFile,
     TiePointCollection,
     VicarImageCoordinate,
@@ -106,7 +106,7 @@ gtwarpxd inp=&img_in out=&img_out ref=&ref_img 'coverref interp=&interp +
                 data[i, 0] = ic2.line
                 data[i, 1] = ic2.sample
                 i += 1
-        IbisFile.create("distort.ibis", data)
+        IbisFile.create("distort.ibis", data)  # type: ignore[attr-defined]
 
 
 def warp_image(

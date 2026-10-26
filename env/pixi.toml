@@ -15,3 +15,7 @@ pandas-stubs = "*"
 # Swig 4.4.0 just came out, and doesn't seem to work. We'll fix this
 # at some point, but for now restrict ourselves to the older version of swig
 swig = "<4.4.0"
+# Type stubs for mypy. scipy-stubs tracks the scipy version.
+scipy-stubs = "*"
+types-tabulate = "*"
+types-seaborn = "*"

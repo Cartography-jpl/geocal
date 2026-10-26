@@ -6,7 +6,7 @@ from typing import Any
 
 import numpy as np
 import scipy.optimize
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
     CartesianFixedLookVector,
     Ecr,
     GdalRasterImage,
@@ -76,7 +76,9 @@ class AirMspiIgc(ImageGroundConnection):
         self.ground_mask = GroundMaskImage(self.__gdal_data("I.mask"))
         self.vzen = self.__gdal_data("View_zenith")
         self.vaz = self.__gdal_data("View_azimuth")
-        self.dem = SimpleDem(ellipsoid_height)
+        # dem has a setter, but the swig generated code puts another
+        # definition between the getter and setter, so mypy misses it.
+        self.dem = SimpleDem(ellipsoid_height)  # type: ignore[misc]
         self.title = title
 
     def __gdal_data(self, name: str) -> RasterImage:

@@ -15,8 +15,7 @@ from geocal_swig import (
 )
 
 
-@classmethod
-def _kepler_orbit_from_tle(self, tle):
+def _kepler_orbit_from_tle(cls, tle):
     """This creates a Kepler orbit from a two-line element set (TLE,
     see https://en.wikipedia.org/wiki/Two-line_element_set). Note that
     the Kepler orbit completely ignores the sorts of perturbation that
@@ -49,7 +48,10 @@ def _kepler_orbit_from_tle(self, tle):
     )
 
 
-KeplerOrbit.orbit_from_tle = _kepler_orbit_from_tle
+# Python functions are added to SWIG classes below. mypy doesn't know
+# about attributes added after a class is defined, so those lines need
+# a type: ignore.
+KeplerOrbit.orbit_from_tle = classmethod(_kepler_orbit_from_tle)  # type: ignore[attr-defined]
 
 
 def _quat_from_principal_gp(self, gp, twist=0):
@@ -64,7 +66,7 @@ def _quat_from_principal_gp(self, gp, twist=0):
     quat_normalize(self.sc_to_cf)
 
 
-QuaternionOrbitData.quat_from_principal_gp = _quat_from_principal_gp
+QuaternionOrbitData.quat_from_principal_gp = _quat_from_principal_gp  # type: ignore[attr-defined]
 
 
 def _quat_from_principal_gic(self, ic, image, dem, twist=0):
@@ -78,7 +80,7 @@ def _quat_from_principal_gic(self, ic, image, dem, twist=0):
     self.quat_from_principal_gp(gp, twist=twist)
 
 
-QuaternionOrbitData.quat_from_principal_gic = _quat_from_principal_gic
+QuaternionOrbitData.quat_from_principal_gic = _quat_from_principal_gic  # type: ignore[attr-defined]
 
 
 def _principal_gp(self, dem, resolution=1, max_height=9000):
@@ -95,7 +97,7 @@ def _principal_gp(self, dem, resolution=1, max_height=9000):
     return gp, twist
 
 
-QuaternionOrbitData.principal_gp = _principal_gp
+QuaternionOrbitData.principal_gp = _principal_gp  # type: ignore[attr-defined]
 
 
 def _principal_gic(self, image, dem, resolution=1, max_height=9000):
@@ -104,6 +106,6 @@ def _principal_gic(self, image, dem, resolution=1, max_height=9000):
     return image.coordinate(gp), twist
 
 
-QuaternionOrbitData.principal_gic = _principal_gic
+QuaternionOrbitData.principal_gic = _principal_gic  # type: ignore[attr-defined]
 
 __all__ = []

@@ -62,7 +62,10 @@ def _determine_orbit_to_match(self, ic, ind):
         self._determine_orbit_parm(gp, ic, i)
 
 
-IgcCollectionRollingShutter._determine_orbit_parm = _determine_orbit_parm
-IgcCollectionRollingShutter.determine_orbit_to_match = _determine_orbit_to_match
+# Python functions are added to SWIG classes below. mypy doesn't know
+# about attributes added after a class is defined, so those lines need
+# a type: ignore.
+IgcCollectionRollingShutter._determine_orbit_parm = _determine_orbit_parm  # type: ignore[attr-defined]
+IgcCollectionRollingShutter.determine_orbit_to_match = _determine_orbit_to_match  # type: ignore[attr-defined]
 
 __all__ = []

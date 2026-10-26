@@ -6,7 +6,7 @@ import typing
 from typing import Any
 
 import numpy as np
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
     CartesianFixed,
     CartesianFixedLookVector,
     Dem,
@@ -29,7 +29,7 @@ except ImportError:
     pass
 
 if typing.TYPE_CHECKING:
-    import pynitf  # type: ignore
+    import pynitf
 
 
 class classproperty:

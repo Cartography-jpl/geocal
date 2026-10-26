@@ -6,7 +6,7 @@ from collections.abc import Sequence
 
 import numpy as np
 import scipy.sparse as sp
-from geocal_swig import (  # type: ignore
+from geocal_swig import (
     CartesianFixed,
     IgcCollection,
     ImageCoordinate,
@@ -37,7 +37,7 @@ class RayIntersect2:
         # with to create other instances of this type.
         self.sample_cf_pt: None | CartesianFixed = None
 
-    def ray_intersect(self, tie_point: TiePoint) -> TiePoint:
+    def ray_intersect(self, tie_point: TiePoint) -> TiePoint | None:
         """This takes a tie point and fills in the ground location by
         finding an approximate intersection of all the image locations
         in the tie point.
@@ -169,16 +169,16 @@ class RayIntersect3:
             raise RuntimeError("Should set self.sample_cf_pt")
         return self.ri.sample_cf_pt.create([x, y, z])
 
-    def ray_intersect(self, tp: TiePoint) -> TiePoint:
+    def ray_intersect(self, tp: TiePoint) -> TiePoint | None:
         # Start with what RayIntersect2 gives as the ground location
-        tp = self.ri.ray_intersect(tp)
-        if tp is None:
+        tp_res = self.ri.ray_intersect(tp)
+        if tp_res is None:
             return None
-        self.tp = tp
+        self.tp = tp_res
         x0 = self.tp.ground_location.position
         x = lm_optimize(self.coll_eq, x0, self.coll_jac)
-        tp.ground_location = self.create_cf(x[0], x[1], x[2])
-        return tp
+        tp_res.ground_location = self.create_cf(x[0], x[1], x[2])
+        return tp_res
 
 
 __all__ = ["RayIntersect2", "RayIntersect3"]

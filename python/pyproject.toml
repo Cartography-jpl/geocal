@@ -36,3 +36,17 @@ extend-immutable-calls = [
 # is really its job. So don't warn about this.
 
 "__init__.py" = ["F401", "F403"]
+
+[tool.mypy]
+# Run as "mypy" from this directory. Type hints are documentation, not
+# strict contracts (see CLAUDE.md), so this uses the default settings
+# rather than --strict.
+files = ["geocal"]
+# Report type: ignore comments that are no longer needed
+warn_unused_ignores = true
+
+[[tool.mypy.overrides]]
+# pynitf and the GDAL python bindings (osgeo) have no type information,
+# and ipywidgets is only used for optional notebook support.
+module = ["pynitf", "pynitf.*", "osgeo", "osgeo.*", "ipywidgets"]
+ignore_missing_imports = true

@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 from typing import IO
 
-import geocal_swig  # type: ignore
+import geocal_swig
 
 try:
     # This has a deprecation warning for python 3.7 and GDAL 2.4.2. We can't do
@@ -17,7 +17,7 @@ try:
 
     with warnings.catch_warnings():
         warnings.filterwarnings("ignore", category=DeprecationWarning)
-        from osgeo import gdal  # type: ignore
+        from osgeo import gdal
     have_osgeo = True
 except ImportError:
     have_osgeo = False
@@ -38,10 +38,12 @@ def makedirs_p(dir: str | os.PathLike[str]) -> None:
             raise
 
 
-def cib01_data() -> geocal_swig.VicarMultiFile:
+def cib01_data() -> geocal_swig.RasterImage:
     """This return a raster image that can be used to read the CIB
     1 meter data."""
-    return geocal_swig.VicarMultiFile(
+    # TODO VicarMultiFile was removed (commit 33ff59e1), so this doesn't
+    # currently work. This needs to be updated (see test_cib01_data).
+    return geocal_swig.VicarMultiFile(  # type: ignore[attr-defined]
         os.environ["CIB1_ROOT"] + "/cib01_db.int", os.environ["CIB1_ROOT"], ".img"
     )
 

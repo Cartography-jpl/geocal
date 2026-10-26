@@ -372,7 +372,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ruff-0.17.2-hf19af3b_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/s2n-1.5.26-h5ac9029_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/scikit-umfpack-0.4.2-py313hb5e277d_0.conda
-      - conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.16.2-py313h11c21cd_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.16.3-py313h4b8bb8b_2.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/sdl2-2.32.56-h54a6638_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/sdl3-3.2.24-h68140b3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/shaderc-2025.4-h3e344bc_0.conda
@@ -521,7 +521,10 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/nest-asyncio-1.6.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nlohmann_json-abi-3.12.0-h0f90c79_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/notebook-shim-0.2.4-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/numpy-typing-compat-20251206.2.3-pyhd55eecb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/numpydoc-1.9.0-pyhe01879c_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/optype-0.15.0-pyhcf101f3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/optype-numpy-0.15.0-pyh272cbef_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/overrides-7.7.0-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/packaging-25.0-pyh29332c3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pandas-stubs-2.3.2.250926-pyhd8ed1ab_0.conda
@@ -563,6 +566,7 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3986-validator-0.1.1-pyh9f0ad1d_0.tar.bz2
       - conda: https://conda.anaconda.org/conda-forge/noarch/rfc3987-syntax-1.1.0-pyhe01879c_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/roman-numerals-py-3.1.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/scipy-stubs-1.16.3.3-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.13.2-hd8ed1ab_3.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-base-0.13.2-pyhd8ed1ab_3.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/send2trash-1.8.3-pyh0d859eb_1.conda
@@ -588,6 +592,8 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/traitlets-5.14.3-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/truststore-0.10.3-pyhe01879c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/types-pytz-2025.2.0.20250809-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/types-seaborn-0.13.2.20240417-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/noarch/types-tabulate-0.10.0.20261006-pyh5ded981_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.15.0-h396c80c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_extensions-4.15.0-pyhcf101f3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/typing_utils-0.1.0-pyhd8ed1ab_1.conda
@@ -5698,9 +5704,9 @@ packages:
   license_family: BSD
   size: 145129
   timestamp: 1757048325703
-- conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.16.2-py313h11c21cd_0.conda
-  sha256: 3c26c268a4db6ff62103f6b245f650d3cd7478240335405c07e05bae85af4d36
-  md5: 85a80978a04be9c290b8fe6d9bccff1c
+- conda: https://conda.anaconda.org/conda-forge/linux-64/scipy-1.16.3-py313h4b8bb8b_2.conda
+  sha256: a5ddc728be0589e770f59e45e3c6c670c56d96a801ddf76a304cc0af7bcef5c4
+  md5: 0be9bd58abfb3e8f97260bd0176d5331
   depends:
   - __glibc >=2.17,<3.0.a0
   - libblas >=3.9.0,<4.0a0
@@ -5717,8 +5723,9 @@ packages:
   - python_abi 3.13.* *_cp313
   license: BSD-3-Clause
   license_family: BSD
-  size: 17034458
-  timestamp: 1757682259363
+  run_exports: {}
+  size: 16785487
+  timestamp: 1766108773270
 - conda: https://conda.anaconda.org/conda-forge/linux-64/sdl2-2.32.56-h54a6638_0.conda
   sha256: 987ad072939fdd51c92ea8d3544b286bb240aefda329f9b03a51d9b7e777f9de
   md5: cdd138897d94dc07d99afe7113a07bec
@@ -7474,6 +7481,19 @@ packages:
   license_family: BSD
   size: 16817
   timestamp: 1733408419340
+- conda: https://conda.anaconda.org/conda-forge/noarch/numpy-typing-compat-20251206.2.3-pyhd55eecb_0.conda
+  sha256: 3a50805c70facffa4846a7375ba00fa420a5c77728c91f3c00dbdac9db58b03c
+  md5: 04ff4635f9a22302433bc72514fadb62
+  depends:
+  - python >=3.11
+  - numpy <2.4,>=2.3
+  - typing-extensions >=4
+  - python
+  license: BSD-3-Clause
+  license_family: BSD
+  run_exports: {}
+  size: 13955
+  timestamp: 1767188726959
 - conda: https://conda.anaconda.org/conda-forge/noarch/numpydoc-1.9.0-pyhe01879c_1.conda
   sha256: 9e1f3dda737ac9aeec3c245c5d856d0268c4f64a5293c094298d74bb55e2b165
   md5: 66f9ba52d846feffa1c5d62522324b4f
@@ -7486,6 +7506,32 @@ packages:
   license_family: BSD
   size: 60220
   timestamp: 1750861325361
+- conda: https://conda.anaconda.org/conda-forge/noarch/optype-0.15.0-pyhcf101f3_0.conda
+  sha256: c0bda0a2dce1b2129b582fa6095843cdcbfab8a938d0909e68e38b32e0e4f52c
+  md5: 7dc69923c04ae8a7ea7390c87c531a2e
+  depends:
+  - python >=3.11
+  - typing-extensions >=4.10
+  - python
+  license: BSD-3-Clause
+  license_family: BSD
+  run_exports: {}
+  size: 78558
+  timestamp: 1765200505788
+- conda: https://conda.anaconda.org/conda-forge/noarch/optype-numpy-0.15.0-pyh272cbef_0.conda
+  sha256: 3dafc5f674a217f1575dc8ba693148d8bf1456db030509736694cb23e6281fa2
+  md5: da88d4aa2f103a546aea6c758d866a3e
+  depends:
+  - python >=3.11
+  - numpy >=1.25
+  - numpy-typing-compat >=20250818.1.25,<20251207.1.0
+  - optype ==0.15.0 pyhcf101f3_0
+  - python
+  license: BSD-3-Clause
+  license_family: BSD
+  run_exports: {}
+  size: 10672
+  timestamp: 1765200505790
 - conda: https://conda.anaconda.org/conda-forge/noarch/overrides-7.7.0-pyhd8ed1ab_1.conda
   sha256: 1840bd90d25d4930d60f57b4f38d4e0ae3f5b8db2819638709c36098c6ba770c
   md5: e51f1e4089cad105b6cac64bd8166587
@@ -7903,6 +7949,20 @@ packages:
   license: 0BSD OR CC0-1.0
   size: 13348
   timestamp: 1740240332327
+- conda: https://conda.anaconda.org/conda-forge/noarch/scipy-stubs-1.16.3.3-pyhcf101f3_0.conda
+  sha256: c843b9d231510ab6234a6a721333a37d5216ff5fad26dcc6376de5740a7fff45
+  md5: 07060684febc27cbc6ef6114d3a65980
+  depends:
+  - python >=3.11
+  - optype-numpy >=0.14.0,<0.16.0
+  - python
+  constrains:
+  - scipy >=1.16.3,<1.17.0
+  license: BSD-3-Clause
+  license_family: BSD
+  run_exports: {}
+  size: 341783
+  timestamp: 1765204238702
 - conda: https://conda.anaconda.org/conda-forge/noarch/seaborn-0.13.2-hd8ed1ab_3.conda
   noarch: python
   sha256: ea29a69b14dd6be5cdeeaa551bf50d78cafeaf0351e271e358f9b820fcab4cb0
@@ -8170,6 +8230,28 @@ packages:
   license: Apache-2.0 AND MIT
   size: 19582
   timestamp: 1754735331995
+- conda: https://conda.anaconda.org/conda-forge/noarch/types-seaborn-0.13.2.20240417-pyhd8ed1ab_0.conda
+  sha256: 4b00077792c06eca978143cf9fa1dc25a07cc0faf48985ea2d7b7f4c41e279c1
+  md5: 224a405980102ea461251d44b58f9925
+  depends:
+  - matplotlib-base >=3.8
+  - numpy >=1.20
+  - pandas-stubs
+  - python >=3.9
+  license: Apache-2.0 AND MIT
+  run_exports: {}
+  size: 38483
+  timestamp: 1716573644401
+- conda: https://conda.anaconda.org/conda-forge/noarch/types-tabulate-0.10.0.20261006-pyh5ded981_0.conda
+  sha256: 0f521229667891c331e89553c5768aefe0f6509aeee8eb7bea981f7c8129e872
+  md5: feeff60e165b56dbc1f50e1d2adc24ea
+  depends:
+  - python >=3.11
+  - python
+  license: Apache-2.0 AND MIT
+  run_exports: {}
+  size: 19296
+  timestamp: 1791293294574
 - conda: https://conda.anaconda.org/conda-forge/noarch/typing-extensions-4.15.0-h396c80c_0.conda
   sha256: 7c2df5721c742c2a47b2c8f960e718c930031663ac1174da67c1ed5999f7938c
   md5: edd329d7d3a4ab45dcf905899a7a6115

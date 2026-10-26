@@ -5,7 +5,7 @@ import subprocess
 import tempfile
 import typing
 
-import geocal_swig  # type: ignore
+import geocal_swig
 
 if typing.TYPE_CHECKING:
     from geocal_swig import CartLabMultifile, GdalRasterImage
@@ -93,4 +93,4 @@ def _create_image_chip(
         )
 
 
-geocal_swig.CartLabMultifile.create_image_chip = _create_image_chip
+geocal_swig.CartLabMultifile.create_image_chip = _create_image_chip  # type: ignore[attr-defined]

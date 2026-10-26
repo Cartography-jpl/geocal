@@ -4,7 +4,7 @@ import math
 import os
 import re
 
-from geocal_swig import GdalRasterImage  # type: ignore
+from geocal_swig import GdalRasterImage
 
 from .instrument_reflectance import InstrumentReflectance
 

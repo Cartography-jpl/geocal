@@ -573,11 +573,14 @@ def _create_glas_from_field_angle(cls, fa_x, fa_y, **keyword):
     return cls.create_glas_from_sc_look_vector(sclv_list, **keyword)
 
 
-GlasGfmCamera.create_glas_from_sc_look_vector = classmethod(
+# Python functions are added to SWIG classes below. mypy doesn't know
+# about attributes added after a class is defined, so those lines need
+# a type: ignore.
+GlasGfmCamera.create_glas_from_sc_look_vector = classmethod(  # type: ignore[attr-defined]
     _create_glas_from_sc_look_vector
 )
-GlasGfmCamera.create_glas_from_field_angle = classmethod(_create_glas_from_field_angle)
-GlasGfmCamera.create_gfm_from_look_vector = classmethod(_create_gfm_from_look_vector)
+GlasGfmCamera.create_glas_from_field_angle = classmethod(_create_glas_from_field_angle)  # type: ignore[attr-defined]
+GlasGfmCamera.create_gfm_from_look_vector = classmethod(_create_gfm_from_look_vector)  # type: ignore[attr-defined]
 
 __all__ = [
     "GlasGfm",

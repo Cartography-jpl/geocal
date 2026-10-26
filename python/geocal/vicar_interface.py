@@ -8,7 +8,7 @@ import tempfile
 import time
 from pathlib import Path
 
-import geocal_swig  # type: ignore
+import geocal_swig
 import numpy as np
 
 from .misc import makedirs_p, run_tee

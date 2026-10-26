@@ -26,7 +26,10 @@ def _column(self, cindex):
 
 
 if have_ibis_file:
-    IbisFile.column = _column
+    # Python functions are added to SWIG classes below. mypy doesn't know
+    # about attributes added after a class is defined, so those lines need
+    # a type: ignore.
+    IbisFile.column = _column  # type: ignore[attr-defined]
 
 
 def _getitem(self, index):
@@ -40,7 +43,7 @@ def _getitem(self, index):
 
 
 if have_ibis_file:
-    IbisFile.__getitem__ = _getitem
+    IbisFile.__getitem__ = _getitem  # type: ignore[misc]
 
 
 def _setitem(self, index, value):
@@ -59,7 +62,7 @@ def _setitem(self, index, value):
 
 
 if have_ibis_file:
-    IbisFile.__setitem__ = _setitem
+    IbisFile.__setitem__ = _setitem  # type: ignore[index]
 
 
 def _shape(self):
@@ -67,7 +70,7 @@ def _shape(self):
 
 
 if have_ibis_file:
-    IbisFile.shape = property(_shape)
+    IbisFile.shape = property(_shape)  # type: ignore[attr-defined]
 
 
 def _enter(self):
@@ -75,7 +78,7 @@ def _enter(self):
 
 
 if have_ibis_file:
-    IbisFile.__enter__ = _enter
+    IbisFile.__enter__ = _enter  # type: ignore[attr-defined]
 
 
 def _exit(self, type, value, traceback):
@@ -83,7 +86,7 @@ def _exit(self, type, value, traceback):
 
 
 if have_ibis_file:
-    IbisFile.__exit__ = _exit
+    IbisFile.__exit__ = _exit  # type: ignore[attr-defined]
 
 
 def _create(fname, data, type="DOUB"):
@@ -94,6 +97,6 @@ def _create(fname, data, type="DOUB"):
 
 
 if have_ibis_file:
-    IbisFile.create = staticmethod(_create)
+    IbisFile.create = staticmethod(_create)  # type: ignore[attr-defined]
 
 __all__ = []

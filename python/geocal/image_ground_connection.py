@@ -203,7 +203,7 @@ def _view_angle(self, image_coordinate=None, delta_h=100):
     return zen, az
 
 
-geocal_swig.ImageGroundConnection.view_angle = _view_angle
+geocal_swig.ImageGroundConnection.view_angle = _view_angle  # type: ignore[attr-defined]
 
 
 def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
@@ -228,7 +228,7 @@ def _footprint_geometry(self, cconver=geocal_swig.GeodeticConverter()):
 
 
 if have_shape_file:
-    geocal_swig.ImageGroundConnection.footprint_geometry = _footprint_geometry
+    geocal_swig.ImageGroundConnection.footprint_geometry = _footprint_geometry  # type: ignore[attr-defined]
 
 
 def _gsd_values(self, image_coordinate=None, height=None):
@@ -275,6 +275,6 @@ def _gsd_values(self, image_coordinate=None, height=None):
     return gsd_row, gsd_col, gsd_mean
 
 
-geocal_swig.ImageGroundConnection.gsd_values = _gsd_values
+geocal_swig.ImageGroundConnection.gsd_values = _gsd_values  # type: ignore[attr-defined]
 
 __all__ = ["GdalImageGroundConnection", "VicarImageGroundConnection"]
